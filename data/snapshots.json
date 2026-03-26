@@ -1,0 +1,130 @@
+{
+  "prediction": {
+    "t0": "2026-03-26",
+    "t1": "2026-05-21",
+    "window_weeks": 8,
+    "quality_leader": "LangChain",
+    "quality_leader_stars_t0": 131189,
+    "hypothesis": "LangChain (quality leader at t0 with 131k stars, 2.3x #2) will show LOWER relative ecosystem growth over 8 weeks than at least one framework with <60k stars at t0. Ecosystem growth = (commits_4w(t1)/commits_4w(t0)) * (forks(t1)/forks(t0)). This tests the Blackwell Dilemma: the most visible framework is not necessarily the healthiest.",
+    "falsification": "If LangChain shows the HIGHEST ecosystem growth ratio among all tracked frameworks at t1, the prediction fails.",
+    "mechanism": "C1: switching cost (workflow lock-in, API coupling) C2: quality signal (stars) misaligned with ecosystem health (commits, contributors) C3: stars/downloads do not reveal commit trajectory or contributor diversity"
+  },
+  "snapshots": [
+    {
+      "date": "2026-03-26",
+      "timestamp": "2026-03-26T23:37:09.792822",
+      "frameworks": {
+        "LangChain": {
+          "repo": "langchain-ai/langchain",
+          "stars": 131190,
+          "forks": 21600,
+          "issues": 505,
+          "watchers": 820,
+          "size": 528972,
+          "pushed": "2026-03-26T08:18:31Z",
+          "commits_52w": 3007,
+          "commits_4w": 216
+        },
+        "AutoGen": {
+          "repo": "microsoft/autogen",
+          "stars": 56242,
+          "forks": 8453,
+          "issues": 708,
+          "watchers": 514,
+          "size": 148366,
+          "pushed": "2026-03-26T03:15:39Z",
+          "commits_52w": 0,
+          "commits_4w": 0
+        },
+        "Mem0": {
+          "repo": "mem0ai/mem0",
+          "stars": 51131,
+          "forks": 5717,
+          "issues": 327,
+          "watchers": 223,
+          "size": 45628,
+          "pushed": "2026-03-26T14:35:26Z",
+          "commits_52w": 0,
+          "commits_4w": 0
+        },
+        "LlamaIndex": {
+          "repo": "run-llama/llama_index",
+          "stars": 48011,
+          "forks": 7093,
+          "issues": 261,
+          "watchers": 261,
+          "size": 417640,
+          "pushed": "2026-03-26T13:54:51Z",
+          "commits_52w": 1469,
+          "commits_4w": 116
+        },
+        "CrewAI": {
+          "repo": "crewAIInc/crewAI",
+          "stars": 47278,
+          "forks": 6385,
+          "issues": 455,
+          "watchers": 342,
+          "size": 220400,
+          "pushed": "2026-03-26T14:27:40Z",
+          "commits_52w": 809,
+          "commits_4w": 116
+        },
+        "LiteLLM": {
+          "repo": "BerriAI/litellm",
+          "stars": 40980,
+          "forks": 6752,
+          "issues": 2108,
+          "watchers": 176,
+          "size": 1047737,
+          "pushed": "2026-03-26T06:00:57Z",
+          "commits_52w": 14706,
+          "commits_4w": 2609
+        },
+        "DSPy": {
+          "repo": "stanfordnlp/dspy",
+          "stars": 33187,
+          "forks": 2728,
+          "issues": 473,
+          "watchers": 191,
+          "size": 177633,
+          "pushed": "2026-03-26T02:14:03Z",
+          "commits_52w": 0,
+          "commits_4w": 0
+        },
+        "SemanticKernel": {
+          "repo": "microsoft/semantic-kernel",
+          "stars": 27567,
+          "forks": 4523,
+          "issues": 490,
+          "watchers": 290,
+          "size": 97502,
+          "pushed": "2026-03-26T14:28:58Z",
+          "commits_52w": 724,
+          "commits_4w": 37
+        },
+        "Haystack": {
+          "repo": "deepset-ai/haystack",
+          "stars": 24621,
+          "forks": 2675,
+          "issues": 107,
+          "watchers": 158,
+          "size": 59681,
+          "pushed": "2026-03-26T13:28:15Z",
+          "commits_52w": 1080,
+          "commits_4w": 159
+        },
+        "PydanticAI": {
+          "repo": "pydantic/pydantic-ai",
+          "stars": 15824,
+          "forks": 1830,
+          "issues": 607,
+          "watchers": 100,
+          "size": 168773,
+          "pushed": "2026-03-26T13:23:42Z",
+          "commits_52w": 1297,
+          "commits_4w": 67
+        }
+      }
+    }
+  ]
+}
