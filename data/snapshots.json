@@ -12,22 +12,22 @@
   "snapshots": [
     {
       "date": "2026-03-26",
-      "timestamp": "2026-03-26T23:37:09.792822",
+      "timestamp": "2026-03-26T14:46:19.582902",
       "frameworks": {
         "LangChain": {
           "repo": "langchain-ai/langchain",
           "stars": 131190,
-          "forks": 21600,
-          "issues": 505,
+          "forks": 21601,
+          "issues": 503,
           "watchers": 820,
           "size": 528972,
-          "pushed": "2026-03-26T08:18:31Z",
+          "pushed": "2026-03-26T14:45:21Z",
           "commits_52w": 3007,
           "commits_4w": 216
         },
         "AutoGen": {
           "repo": "microsoft/autogen",
-          "stars": 56242,
+          "stars": 56243,
           "forks": 8453,
           "issues": 708,
           "watchers": 514,
@@ -38,25 +38,25 @@
         },
         "Mem0": {
           "repo": "mem0ai/mem0",
-          "stars": 51131,
+          "stars": 51132,
           "forks": 5717,
-          "issues": 327,
+          "issues": 321,
           "watchers": 223,
           "size": 45628,
-          "pushed": "2026-03-26T14:35:26Z",
+          "pushed": "2026-03-26T14:37:39Z",
           "commits_52w": 0,
           "commits_4w": 0
         },
         "LlamaIndex": {
           "repo": "run-llama/llama_index",
-          "stars": 48011,
+          "stars": 48012,
           "forks": 7093,
           "issues": 261,
           "watchers": 261,
           "size": 417640,
           "pushed": "2026-03-26T13:54:51Z",
-          "commits_52w": 1469,
-          "commits_4w": 116
+          "commits_52w": 0,
+          "commits_4w": 0
         },
         "CrewAI": {
           "repo": "crewAIInc/crewAI",
@@ -71,7 +71,7 @@
         },
         "LiteLLM": {
           "repo": "BerriAI/litellm",
-          "stars": 40980,
+          "stars": 40982,
           "forks": 6752,
           "issues": 2108,
           "watchers": 176,
@@ -99,30 +99,30 @@
           "watchers": 290,
           "size": 97502,
           "pushed": "2026-03-26T14:28:58Z",
-          "commits_52w": 724,
-          "commits_4w": 37
+          "commits_52w": 0,
+          "commits_4w": 0
         },
         "Haystack": {
           "repo": "deepset-ai/haystack",
-          "stars": 24621,
+          "stars": 24620,
           "forks": 2675,
           "issues": 107,
           "watchers": 158,
           "size": 59681,
           "pushed": "2026-03-26T13:28:15Z",
-          "commits_52w": 1080,
-          "commits_4w": 159
+          "commits_52w": 0,
+          "commits_4w": 0
         },
         "PydanticAI": {
           "repo": "pydantic/pydantic-ai",
           "stars": 15824,
           "forks": 1830,
-          "issues": 607,
+          "issues": 608,
           "watchers": 100,
           "size": 168773,
           "pushed": "2026-03-26T13:23:42Z",
-          "commits_52w": 1297,
-          "commits_4w": 67
+          "commits_52w": 0,
+          "commits_4w": 0
         }
       }
     }
