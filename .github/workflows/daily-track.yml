@@ -4,7 +4,8 @@ on:
   schedule:
     # Run daily at 06:00 UTC (15:00 JST)
     - cron: '0 6 * * *'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
+    # Allow manual trigger from Actions tab
 
 permissions:
   contents: write
