@@ -75,8 +75,8 @@ Partial falsification: if LangChain ranks in the top 3 by EGR.
 
 ## Tracking
 
-Data collected daily via GitHub API. Time series stored in `mrs/data/snapshots.json`.
-Run `python mrs/tracker.py` to update.
+Data collected daily via GitHub API. Time series stored in `data/snapshots.json`.
+Run `python tracker.py` to update.
 
 ---
 

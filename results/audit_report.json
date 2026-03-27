@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "T": 20,
+    "beta": 5.0,
+    "switching_cost": 0.3,
+    "w_ecosystem": 0.5,
+    "n_platforms": 5,
+    "platform_names": [
+      "FlashyTrap",
+      "SteadyGrower",
+      "RisingStar",
+      "HiddenGem",
+      "NicheStable"
+    ]
+  },
+  "summary": {
+    "terminal_platform": "FlashyTrap",
+    "terminal_value": 0.5,
+    "oracle_value": 0.7749999999999999,
+    "total_regret": 0.2749999999999999,
+    "n_switches": 0,
+    "n_trap_events": 20,
+    "mean_structural_regret": 0.2750000000000001,
+    "reversal_detected": "True"
+  },
+  "diagnostics": {
+    "c1_all_periods": true,
+    "c2_any_period": true,
+    "c3_all_periods": true,
+    "blackwell_dilemma": true
+  },
+  "top_trap_events": [
+    {
+      "event_id": "t0_FlashyTrap",
+      "period": 0,
+      "platform": "FlashyTrap",
+      "quality_signal": 0.8739,
+      "ecosystem_hidden": 0.15,
+      "structural_regret": 0.275,
+      "c1": true,
+      "c2": "True",
+      "c3": true
+    },
+    {
+      "event_id": "t1_FlashyTrap",
+      "period": 1,
+      "platform": "FlashyTrap",
+      "quality_signal": 0.839,
+      "ecosystem_hidden": 0.145,
+      "structural_regret": 0.275,
+      "c1": true,
+      "c2": "True",
+      "c3": true
+    },
+    {
+      "event_id": "t2_FlashyTrap",
+      "period": 2,
+      "platform": "FlashyTrap",
+      "quality_signal": 0.9052,
+      "ecosystem_hidden": 0.14,
+      "structural_regret": 0.275,
+      "c1": true,
+      "c2": "True",
+      "c3": true
+    },
+    {
+      "event_id": "t3_FlashyTrap",
+      "period": 3,
+      "platform": "FlashyTrap",
+      "quality_signal": 0.8796,
+      "ecosystem_hidden": 0.135,
+      "structural_regret": 0.275,
+      "c1": true,
+      "c2": "True",
+      "c3": true
+    },
+    {
+      "event_id": "t4_FlashyTrap",
+      "period": 4,
+      "platform": "FlashyTrap",
+      "quality_signal": 0.897,
+      "ecosystem_hidden": 0.13,
+      "structural_regret": 0.275,
+      "c1": true,
+      "c2": "True",
+      "c3": true
+    }
+  ]
+}

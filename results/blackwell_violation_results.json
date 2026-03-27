@@ -1,0 +1,8 @@
+{
+  "W_at_0": 0.20084054565490678,
+  "W_at_inf": 0.4,
+  "ratio": 1.9916297214572298,
+  "formula": "W(beta) = Phi(0.2 / sqrt(2*sigma^2(beta))) * 0.4",
+  "sigma_sq": "sigma^2(beta) = 1 / (2^(2*beta) - 1)",
+  "precondition": "u = u(a, omega) violated: u = u(a, omega, G), G not in omega"
+}

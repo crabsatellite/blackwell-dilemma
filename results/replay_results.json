@@ -1,0 +1,232 @@
+{
+  "platforms": [
+    {
+      "name": "FlashyTrap",
+      "archetype": "quality-first incumbent",
+      "q0": 0.85,
+      "e0": 0.15,
+      "q_drift": 0.005,
+      "e_drift": -0.005,
+      "V_T": 0.5
+    },
+    {
+      "name": "SteadyGrower",
+      "archetype": "stable mid-tier",
+      "q0": 0.5,
+      "e0": 0.65,
+      "q_drift": 0.005,
+      "e_drift": 0.015,
+      "V_T": 0.7749999999999999
+    },
+    {
+      "name": "RisingStar",
+      "archetype": "ecosystem-first challenger",
+      "q0": 0.35,
+      "e0": 0.75,
+      "q_drift": 0.01,
+      "e_drift": 0.01,
+      "V_T": 0.75
+    },
+    {
+      "name": "HiddenGem",
+      "archetype": "ecosystem-first",
+      "q0": 0.3,
+      "e0": 0.8,
+      "q_drift": 0.005,
+      "e_drift": 0.01,
+      "V_T": 0.7
+    },
+    {
+      "name": "NicheStable",
+      "archetype": "niche player",
+      "q0": 0.45,
+      "e0": 0.5,
+      "q_drift": 0.0,
+      "e_drift": 0.0,
+      "V_T": 0.475
+    }
+  ],
+  "parameters": {
+    "T": 20,
+    "switching_cost": 0.3,
+    "w_e": 0.5
+  },
+  "beta_sweep": [
+    {
+      "beta": 0.001,
+      "greedy_value": 0.6374825000000001,
+      "random_value": 0.6401600000000001,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.13751749999999985,
+      "random_regret": 0.13483999999999985,
+      "trap_rate": 0.2065,
+      "choice_distribution": {
+        "FlashyTrap": 0.2065,
+        "SteadyGrower": 0.1984,
+        "RisingStar": 0.1956,
+        "HiddenGem": 0.1956,
+        "NicheStable": 0.2039
+      }
+    },
+    {
+      "beta": 0.1,
+      "greedy_value": 0.6335649999999999,
+      "random_value": 0.64151,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.14143499999999998,
+      "random_regret": 0.1334899999999999,
+      "trap_rate": 0.2454,
+      "choice_distribution": {
+        "FlashyTrap": 0.2454,
+        "SteadyGrower": 0.1986,
+        "RisingStar": 0.192,
+        "HiddenGem": 0.178,
+        "NicheStable": 0.186
+      }
+    },
+    {
+      "beta": 0.25,
+      "greedy_value": 0.6319825,
+      "random_value": 0.6378024999999999,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.1430174999999999,
+      "random_regret": 0.13719749999999997,
+      "trap_rate": 0.2695,
+      "choice_distribution": {
+        "FlashyTrap": 0.2695,
+        "SteadyGrower": 0.1994,
+        "RisingStar": 0.1921,
+        "HiddenGem": 0.1671,
+        "NicheStable": 0.1719
+      }
+    },
+    {
+      "beta": 0.5,
+      "greedy_value": 0.62359,
+      "random_value": 0.6396475,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.15140999999999993,
+      "random_regret": 0.13535249999999988,
+      "trap_rate": 0.326,
+      "choice_distribution": {
+        "FlashyTrap": 0.326,
+        "SteadyGrower": 0.1946,
+        "RisingStar": 0.1814,
+        "HiddenGem": 0.143,
+        "NicheStable": 0.155
+      }
+    },
+    {
+      "beta": 0.75,
+      "greedy_value": 0.6135,
+      "random_value": 0.6396175,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.16149999999999987,
+      "random_regret": 0.13538249999999996,
+      "trap_rate": 0.3899,
+      "choice_distribution": {
+        "FlashyTrap": 0.3899,
+        "SteadyGrower": 0.1857,
+        "RisingStar": 0.1671,
+        "HiddenGem": 0.1204,
+        "NicheStable": 0.1369
+      }
+    },
+    {
+      "beta": 1.0,
+      "greedy_value": 0.600355,
+      "random_value": 0.6371174999999999,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.17464499999999994,
+      "random_regret": 0.13788250000000002,
+      "trap_rate": 0.4698,
+      "choice_distribution": {
+        "FlashyTrap": 0.4698,
+        "SteadyGrower": 0.1726,
+        "RisingStar": 0.1485,
+        "HiddenGem": 0.0933,
+        "NicheStable": 0.1158
+      }
+    },
+    {
+      "beta": 1.5,
+      "greedy_value": 0.5674825,
+      "random_value": 0.6378775,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.2075174999999999,
+      "random_regret": 0.13712249999999993,
+      "trap_rate": 0.6673,
+      "choice_distribution": {
+        "FlashyTrap": 0.6673,
+        "SteadyGrower": 0.1306,
+        "RisingStar": 0.0997,
+        "HiddenGem": 0.0409,
+        "NicheStable": 0.0615
+      }
+    },
+    {
+      "beta": 2.0,
+      "greedy_value": 0.5264125,
+      "random_value": 0.6406025,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.24858749999999996,
+      "random_regret": 0.13439749999999995,
+      "trap_rate": 0.8807,
+      "choice_distribution": {
+        "FlashyTrap": 0.8807,
+        "SteadyGrower": 0.0552,
+        "RisingStar": 0.038,
+        "HiddenGem": 0.0106,
+        "NicheStable": 0.0155
+      }
+    },
+    {
+      "beta": 3.0,
+      "greedy_value": 0.500055,
+      "random_value": 0.6402825,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.2749449999999999,
+      "random_regret": 0.13471749999999993,
+      "trap_rate": 0.9998,
+      "choice_distribution": {
+        "FlashyTrap": 0.9998,
+        "SteadyGrower": 0.0002,
+        "RisingStar": 0.0,
+        "HiddenGem": 0.0,
+        "NicheStable": 0.0
+      }
+    },
+    {
+      "beta": 5.0,
+      "greedy_value": 0.5,
+      "random_value": 0.6412975000000001,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.2749999999999999,
+      "random_regret": 0.13370249999999984,
+      "trap_rate": 1.0,
+      "choice_distribution": {
+        "FlashyTrap": 1.0,
+        "SteadyGrower": 0.0,
+        "RisingStar": 0.0,
+        "HiddenGem": 0.0,
+        "NicheStable": 0.0
+      }
+    },
+    {
+      "beta": 10.0,
+      "greedy_value": 0.5,
+      "random_value": 0.6378725,
+      "oracle_value": 0.7749999999999999,
+      "greedy_regret": 0.2749999999999999,
+      "random_regret": 0.13712749999999996,
+      "trap_rate": 1.0,
+      "choice_distribution": {
+        "FlashyTrap": 1.0,
+        "SteadyGrower": 0.0,
+        "RisingStar": 0.0,
+        "HiddenGem": 0.0,
+        "NicheStable": 0.0
+      }
+    }
+  ]
+}

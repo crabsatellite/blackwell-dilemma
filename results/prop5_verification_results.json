@@ -1,0 +1,2950 @@
+{
+  "20": {
+    "0.3": {
+      "1": {
+        "empirical_mean": 0.5305464950416507,
+        "analytic": 0.4975062344139651,
+        "count": 14,
+        "relative_error": 0.06641175193835566
+      },
+      "386": {
+        "empirical_mean": 0.0,
+        "analytic": 9.021374213046195e-05,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "387": {
+        "empirical_mean": 0.0,
+        "analytic": 8.355400159395326e-05,
+        "count": 9,
+        "relative_error": 1.0
+      },
+      "388": {
+        "empirical_mean": 5.0431016959159126e-05,
+        "analytic": 7.692850136868625e-05,
+        "count": 19,
+        "relative_error": 0.3444430079631439
+      },
+      "389": {
+        "empirical_mean": 0.00021994407861845774,
+        "analytic": 7.033697806765139e-05,
+        "count": 30,
+        "relative_error": 2.1270049504673274
+      },
+      "390": {
+        "empirical_mean": 0.0,
+        "analytic": 6.377917099833536e-05,
+        "count": 39,
+        "relative_error": 1.0
+      },
+      "391": {
+        "empirical_mean": 0.0001340977007427083,
+        "analytic": 5.725482212835259e-05,
+        "count": 69,
+        "relative_error": 1.3421206416830895
+      },
+      "392": {
+        "empirical_mean": 7.984457814375068e-05,
+        "analytic": 5.076367605160128e-05,
+        "count": 102,
+        "relative_error": 0.5728683254260125
+      },
+      "393": {
+        "empirical_mean": 0.0,
+        "analytic": 4.4305479954935e-05,
+        "count": 115,
+        "relative_error": 1.0
+      },
+      "394": {
+        "empirical_mean": 3.690695114336693e-05,
+        "analytic": 3.787998358534045e-05,
+        "count": 219,
+        "relative_error": 0.02568724560773256
+      },
+      "395": {
+        "empirical_mean": 0.0,
+        "analytic": 3.1486939217612534e-05,
+        "count": 287,
+        "relative_error": 1.0
+      },
+      "396": {
+        "empirical_mean": 5.002323576922898e-05,
+        "analytic": 2.512610162251801e-05,
+        "count": 304,
+        "relative_error": 0.9908872661884867
+      },
+      "397": {
+        "empirical_mean": 7.004867205249429e-06,
+        "analytic": 1.8797228035439042e-05,
+        "count": 299,
+        "relative_error": 0.6273457345922006
+      },
+      "398": {
+        "empirical_mean": 0.0,
+        "analytic": 1.2500078125488284e-05,
+        "count": 268,
+        "relative_error": 1.0
+      },
+      "399": {
+        "empirical_mean": 1.495772174172627e-05,
+        "analytic": 6.234413965087282e-06,
+        "count": 140,
+        "relative_error": 1.3992185673728934
+      },
+      "400": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0,
+        "count": 62,
+        "relative_error": 0.0
+      }
+    },
+    "0.5": {
+      "1": {
+        "empirical_mean": 0.5311847133204254,
+        "analytic": 0.4975062344139651,
+        "count": 125,
+        "relative_error": 0.06769458667413826
+      },
+      "2": {
+        "empirical_mean": 0.3300849177981282,
+        "analytic": 0.33083956774729845,
+        "count": 59,
+        "relative_error": 0.0022810147961100425
+      },
+      "3": {
+        "empirical_mean": 0.2820525183758179,
+        "analytic": 0.24750623441396508,
+        "count": 32,
+        "relative_error": 0.13957742940758674
+      },
+      "4": {
+        "empirical_mean": 0.22179163107309238,
+        "analytic": 0.1975062344139651,
+        "count": 17,
+        "relative_error": 0.12296015227664199
+      },
+      "5": {
+        "empirical_mean": 0.2350771097762009,
+        "analytic": 0.16417290108063176,
+        "count": 23,
+        "relative_error": 0.4318874079026312
+      },
+      "6": {
+        "empirical_mean": 0.09832723549878773,
+        "analytic": 0.14036337727110795,
+        "count": 25,
+        "relative_error": 0.299480837448992
+      },
+      "7": {
+        "empirical_mean": 0.1348797932174154,
+        "analytic": 0.12250623441396509,
+        "count": 16,
+        "relative_error": 0.10100350290450015
+      },
+      "8": {
+        "empirical_mean": 0.1003440537549643,
+        "analytic": 0.1086173455250762,
+        "count": 15,
+        "relative_error": 0.07616915815901486
+      },
+      "9": {
+        "empirical_mean": 0.1061678076937841,
+        "analytic": 0.09750623441396508,
+        "count": 11,
+        "relative_error": 0.08883096893113626
+      },
+      "11": {
+        "empirical_mean": 0.06542425830783177,
+        "analytic": 0.08083956774729842,
+        "count": 9,
+        "relative_error": 0.19069015172934062
+      },
+      "12": {
+        "empirical_mean": 0.07609508021569408,
+        "analytic": 0.07442931133704202,
+        "count": 10,
+        "relative_error": 0.022380549392817573
+      },
+      "14": {
+        "empirical_mean": 0.04599173620508801,
+        "analytic": 0.06417290108063176,
+        "count": 8,
+        "relative_error": 0.2833153023999887
+      },
+      "15": {
+        "empirical_mean": 0.045050208529889266,
+        "analytic": 0.06000623441396509,
+        "count": 8,
+        "relative_error": 0.24924120018761164
+      },
+      "18": {
+        "empirical_mean": 0.0703959432637035,
+        "analytic": 0.05013781336133351,
+        "count": 5,
+        "relative_error": 0.40404893122030633
+      },
+      "19": {
+        "empirical_mean": 0.06340461181407575,
+        "analytic": 0.047506234413965086,
+        "count": 6,
+        "relative_error": 0.3346587578710959
+      },
+      "20": {
+        "empirical_mean": 0.013844350718518994,
+        "analytic": 0.045125282033012706,
+        "count": 5,
+        "relative_error": 0.6932019015772409
+      },
+      "23": {
+        "empirical_mean": 0.029948393638827675,
+        "analytic": 0.039172901080631754,
+        "count": 6,
+        "relative_error": 0.2354818557557625
+      },
+      "29": {
+        "empirical_mean": 0.01768127387649987,
+        "analytic": 0.03083956774729842,
+        "count": 6,
+        "relative_error": 0.4266692055679422
+      },
+      "32": {
+        "empirical_mean": 0.03225864846737262,
+        "analytic": 0.02780926471699539,
+        "count": 6,
+        "relative_error": 0.15999645426288556
+      },
+      "37": {
+        "empirical_mean": 0.007766455438305471,
+        "analytic": 0.0238220238876493,
+        "count": 6,
+        "relative_error": 0.6739800331435296
+      },
+      "76": {
+        "empirical_mean": 0.00659599728342899,
+        "analytic": 0.010493247400978074,
+        "count": 5,
+        "relative_error": 0.37140553049247865
+      },
+      "169": {
+        "empirical_mean": 0.0020618194241728096,
+        "analytic": 0.003388587355141558,
+        "count": 6,
+        "relative_error": 0.3915401292386994
+      },
+      "176": {
+        "empirical_mean": 0.005494381147377436,
+        "analytic": 0.003155951928089381,
+        "count": 5,
+        "relative_error": 0.7409584406134299
+      },
+      "207": {
+        "empirical_mean": 0.001933113941498066,
+        "analytic": 0.002313926721657395,
+        "count": 5,
+        "relative_error": 0.16457426097165448
+      },
+      "229": {
+        "empirical_mean": 0.0006145743946264215,
+        "analytic": 0.001854060500921609,
+        "count": 5,
+        "relative_error": 0.6685251671555856
+      },
+      "230": {
+        "empirical_mean": 0.00024206434816009814,
+        "analytic": 0.0018352387429694163,
+        "count": 6,
+        "relative_error": 0.8681019845034232
+      },
+      "233": {
+        "empirical_mean": 0.0013185999511126979,
+        "analytic": 0.0017797386874693608,
+        "count": 5,
+        "relative_error": 0.25910474363647373
+      },
+      "236": {
+        "empirical_mean": 0.004235415986350085,
+        "analytic": 0.0017256436966655091,
+        "count": 7,
+        "relative_error": 1.4543977383826407
+      },
+      "237": {
+        "empirical_mean": 0.000502195903709844,
+        "analytic": 0.001707915086233995,
+        "count": 7,
+        "relative_error": 0.7059596769431895
+      },
+      "239": {
+        "empirical_mean": 0.0008103944270694052,
+        "analytic": 0.001672901080631754,
+        "count": 5,
+        "relative_error": 0.5155754058313071
+      },
+      "241": {
+        "empirical_mean": 0.0028066381743095206,
+        "analytic": 0.001638465818923765,
+        "count": 6,
+        "relative_error": 0.7129671805744937
+      },
+      "246": {
+        "empirical_mean": 0.0012078497369275893,
+        "analytic": 0.0015548174099165044,
+        "count": 7,
+        "relative_error": 0.22315653965281218
+      },
+      "251": {
+        "empirical_mean": 0.00022041268986193617,
+        "analytic": 0.0014744883822190556,
+        "count": 9,
+        "relative_error": 0.8505158178796753
+      },
+      "252": {
+        "empirical_mean": 0.00020463468599636326,
+        "analytic": 0.0014588035839255616,
+        "count": 5,
+        "relative_error": 0.8597243054162903
+      },
+      "253": {
+        "empirical_mean": 0.0012841985101410102,
+        "analytic": 0.0014432422879808353,
+        "count": 5,
+        "relative_error": 0.11019894522515336
+      },
+      "255": {
+        "empirical_mean": 0.00041259347141897607,
+        "analytic": 0.0014124844139650873,
+        "count": 5,
+        "relative_error": 0.7078952041242317
+      },
+      "257": {
+        "empirical_mean": 0.00030800667807942946,
+        "analytic": 0.0013822034062131493,
+        "count": 7,
+        "relative_error": 0.777162553141667
+      },
+      "258": {
+        "empirical_mean": 0.00023149322524091965,
+        "analytic": 0.0013672382749689482,
+        "count": 5,
+        "relative_error": 0.8306855290119953
+      },
+      "259": {
+        "empirical_mean": 0.00024805067167793515,
+        "analytic": 0.0013523882601189335,
+        "count": 8,
+        "relative_error": 0.8165832409280743
+      },
+      "260": {
+        "empirical_mean": 0.0006580694271835774,
+        "analytic": 0.0013376520384861602,
+        "count": 8,
+        "relative_error": 0.5080413977252829
+      },
+      "261": {
+        "empirical_mean": 0.0005197009975972111,
+        "analytic": 0.0013230283070948582,
+        "count": 8,
+        "relative_error": 0.6071883006506604
+      },
+      "262": {
+        "empirical_mean": 0.0022923653266755384,
+        "analytic": 0.00130851578278638,
+        "count": 6,
+        "relative_error": 0.751882061211466
+      },
+      "265": {
+        "empirical_mean": 0.00043078310282021866,
+        "analytic": 0.0012656329102056889,
+        "count": 7,
+        "relative_error": 0.6596302929968783
+      },
+      "266": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0012515527660250125,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "267": {
+        "empirical_mean": 0.0003157337095732182,
+        "analytic": 0.0012375776975471768,
+        "count": 6,
+        "relative_error": 0.7448776669141758
+      },
+      "270": {
+        "empirical_mean": 0.0014643478173256507,
+        "analytic": 0.001196271314334091,
+        "count": 10,
+        "relative_error": 0.22409339735842917
+      },
+      "271": {
+        "empirical_mean": 0.0037022779286628007,
+        "analytic": 0.0011827050022003814,
+        "count": 5,
+        "relative_error": 2.130347738256659
+      },
+      "272": {
+        "empirical_mean": 0.0037306756536315128,
+        "analytic": 0.0011692380769687503,
+        "count": 8,
+        "relative_error": 2.190689498671895
+      },
+      "273": {
+        "empirical_mean": 0.00028168731787935205,
+        "analytic": 0.0011558694504614376,
+        "count": 9,
+        "relative_error": 0.7562983278371974
+      },
+      "279": {
+        "empirical_mean": 0.0007723034941496584,
+        "analytic": 0.0010776629853936587,
+        "count": 6,
+        "relative_error": 0.28335341881716
+      },
+      "281": {
+        "empirical_mean": 0.00015665286623340273,
+        "analytic": 0.001052333704745229,
+        "count": 11,
+        "relative_error": 0.8511376519377677
+      },
+      "282": {
+        "empirical_mean": 0.002304287053064228,
+        "analytic": 0.0010398033185587269,
+        "count": 7,
+        "relative_error": 1.2160797257871845
+      },
+      "283": {
+        "empirical_mean": 0.0008115804349363986,
+        "analytic": 0.0010273611745284675,
+        "count": 8,
+        "relative_error": 0.21003396365558266
+      },
+      "284": {
+        "empirical_mean": 3.352163545529141e-05,
+        "analytic": 0.0010150063437896486,
+        "count": 5,
+        "relative_error": 0.9669739645861382
+      },
+      "285": {
+        "empirical_mean": 0.0007474947623663797,
+        "analytic": 0.0010027379104685838,
+        "count": 8,
+        "relative_error": 0.25454622333260335
+      },
+      "286": {
+        "empirical_mean": 0.0020875001276236776,
+        "analytic": 0.0009905549714563765,
+        "count": 7,
+        "relative_error": 1.1074046244546156
+      },
+      "287": {
+        "empirical_mean": 0.0011468861485871118,
+        "analytic": 0.0009784566361873096,
+        "count": 10,
+        "relative_error": 0.1721379427259146
+      },
+      "288": {
+        "empirical_mean": 0.0013382300663017175,
+        "analytic": 0.0009664420264218346,
+        "count": 11,
+        "relative_error": 0.3846977156574978
+      },
+      "289": {
+        "empirical_mean": 0.0012092673243879414,
+        "analytic": 0.0009545102760340528,
+        "count": 10,
+        "relative_error": 0.26689817255021353
+      },
+      "290": {
+        "empirical_mean": 0.001449446167847582,
+        "analytic": 0.0009426605308035753,
+        "count": 14,
+        "relative_error": 0.5376120252027472
+      },
+      "291": {
+        "empirical_mean": 0.0003761550200612418,
+        "analytic": 0.0009308919482116626,
+        "count": 10,
+        "relative_error": 0.5959197834035694
+      },
+      "292": {
+        "empirical_mean": 0.0017626668949198843,
+        "analytic": 0.0009192036972415378,
+        "count": 10,
+        "relative_error": 0.9176020507853886
+      },
+      "293": {
+        "empirical_mean": 0.0022111031876863806,
+        "analytic": 0.0009075949581827744,
+        "count": 5,
+        "relative_error": 1.436222422514936
+      },
+      "294": {
+        "empirical_mean": 0.000998662183293919,
+        "analytic": 0.0008960649224396635,
+        "count": 12,
+        "relative_error": 0.11449757521466192
+      },
+      "295": {
+        "empirical_mean": 0.00299844801062793,
+        "analytic": 0.0008846127923434657,
+        "count": 14,
+        "relative_error": 2.389559857804693
+      },
+      "296": {
+        "empirical_mean": 0.0016168283333310894,
+        "analytic": 0.0008732377809684543,
+        "count": 11,
+        "relative_error": 0.8515327309108918
+      },
+      "297": {
+        "empirical_mean": 0.0025396890334335896,
+        "analytic": 0.0008619391119516645,
+        "count": 10,
+        "relative_error": 1.9464831079344378
+      },
+      "298": {
+        "empirical_mean": 0.00036584432121768986,
+        "analytic": 0.0008507160193162579,
+        "count": 10,
+        "relative_error": 0.5699571738266687
+      },
+      "299": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0008395677472984206,
+        "count": 10,
+        "relative_error": 1.0
+      },
+      "300": {
+        "empirical_mean": 0.0006565973452875943,
+        "analytic": 0.0008284935501777119,
+        "count": 12,
+        "relative_error": 0.20748043826442086
+      },
+      "302": {
+        "empirical_mean": 0.0003965082130717842,
+        "analytic": 0.0008065644469683876,
+        "count": 14,
+        "relative_error": 0.508398597827949
+      },
+      "303": {
+        "empirical_mean": 0.00091738249817829,
+        "analytic": 0.0007957080981756136,
+        "count": 13,
+        "relative_error": 0.15291336142192022
+      },
+      "304": {
+        "empirical_mean": 0.0004896857114558489,
+        "analytic": 0.0007849229385552512,
+        "count": 23,
+        "relative_error": 0.3761353027124208
+      },
+      "305": {
+        "empirical_mean": 0.0006359333151272436,
+        "analytic": 0.0007742082701742377,
+        "count": 13,
+        "relative_error": 0.17860175404206788
+      },
+      "306": {
+        "empirical_mean": 0.0004952478079649492,
+        "analytic": 0.0007635634041931003,
+        "count": 7,
+        "relative_error": 0.3513992351580745
+      },
+      "307": {
+        "empirical_mean": 0.0006896703048718414,
+        "analytic": 0.000752987660718334,
+        "count": 14,
+        "relative_error": 0.08408817189127535
+      },
+      "308": {
+        "empirical_mean": 0.0006874426219459649,
+        "analytic": 0.0007424803686576439,
+        "count": 9,
+        "relative_error": 0.0741268712749721
+      },
+      "309": {
+        "empirical_mean": 0.00066591450500713,
+        "analytic": 0.0007320408655779905,
+        "count": 16,
+        "relative_error": 0.09033151519300736
+      },
+      "310": {
+        "empirical_mean": 0.00021192261635460952,
+        "analytic": 0.0007216684975663735,
+        "count": 16,
+        "relative_error": 0.7063435399088922
+      },
+      "311": {
+        "empirical_mean": 0.0009946536315662668,
+        "analytic": 0.0007113626190932924,
+        "count": 10,
+        "relative_error": 0.39823713654515486
+      },
+      "312": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0007011225928788253,
+        "count": 9,
+        "relative_error": 1.0
+      },
+      "313": {
+        "empirical_mean": 0.0011263257145484248,
+        "analytic": 0.0006909477897612656,
+        "count": 16,
+        "relative_error": 0.6301169657660961
+      },
+      "314": {
+        "empirical_mean": 0.0011088786529893295,
+        "analytic": 0.0006808375885682618,
+        "count": 19,
+        "relative_error": 0.6286977564226415
+      },
+      "315": {
+        "empirical_mean": 0.0005467775013496885,
+        "analytic": 0.0006707913759904038,
+        "count": 18,
+        "relative_error": 0.1848769663408574
+      },
+      "316": {
+        "empirical_mean": 5.517955456771758e-05,
+        "analytic": 0.0006608085464572008,
+        "count": 14,
+        "relative_error": 0.9164969114525647
+      },
+      "317": {
+        "empirical_mean": 0.0015624517060946442,
+        "analytic": 0.0006508885020154018,
+        "count": 17,
+        "relative_error": 1.4004905621418895
+      },
+      "318": {
+        "empirical_mean": 0.00046719393539883464,
+        "analytic": 0.0006410306522096014,
+        "count": 19,
+        "relative_error": 0.2711831582648351
+      },
+      "319": {
+        "empirical_mean": 0.0008280252731991506,
+        "analytic": 0.0006312344139650873,
+        "count": 21,
+        "relative_error": 0.31175559329524694
+      },
+      "320": {
+        "empirical_mean": 0.0006531481539328328,
+        "analytic": 0.0006214992114728754,
+        "count": 15,
+        "relative_error": 0.050923544029852226
+      },
+      "321": {
+        "empirical_mean": 0.001116165102863581,
+        "analytic": 0.0006118244760768885,
+        "count": 12,
+        "relative_error": 0.8243224102778648
+      },
+      "322": {
+        "empirical_mean": 0.0006870568406189085,
+        "analytic": 0.0006022096461632297,
+        "count": 15,
+        "relative_error": 0.14089311753183179
+      },
+      "323": {
+        "empirical_mean": 0.001307876301317839,
+        "analytic": 0.000592654167051507,
+        "count": 18,
+        "relative_error": 1.20681195548596
+      },
+      "324": {
+        "empirical_mean": 0.0005128713458706358,
+        "analytic": 0.0005831574908881642,
+        "count": 16,
+        "relative_error": 0.12052686643959722
+      },
+      "325": {
+        "empirical_mean": 0.0003632072786578643,
+        "analytic": 0.0005737190765417744,
+        "count": 21,
+        "relative_error": 0.3669248705356271
+      },
+      "326": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0005643383895002555,
+        "count": 12,
+        "relative_error": 1.0
+      },
+      "327": {
+        "empirical_mean": 0.00041853281734363483,
+        "analytic": 0.0005550149017699653,
+        "count": 17,
+        "relative_error": 0.24590706301953963
+      },
+      "328": {
+        "empirical_mean": 0.0005537589725638463,
+        "analytic": 0.0005457480917766375,
+        "count": 14,
+        "relative_error": 0.014678715157995448
+      },
+      "329": {
+        "empirical_mean": 0.0010580005806482514,
+        "analytic": 0.0005365374442681175,
+        "count": 15,
+        "relative_error": 0.9719044624955369
+      },
+      "330": {
+        "empirical_mean": 0.0004497355067323294,
+        "analytic": 0.0005273824502188637,
+        "count": 16,
+        "relative_error": 0.14723080651301682
+      },
+      "331": {
+        "empirical_mean": 0.00011144515695772948,
+        "analytic": 0.0005182826067361716,
+        "count": 13,
+        "relative_error": 0.784972222665269
+      },
+      "332": {
+        "empirical_mean": 0.00023963451971109606,
+        "analytic": 0.0005092374169680903,
+        "count": 13,
+        "relative_error": 0.5294247599914443
+      },
+      "333": {
+        "empirical_mean": 1.5488043350865566e-05,
+        "analytic": 0.0005002463900129915,
+        "count": 16,
+        "relative_error": 0.9690391701767936
+      },
+      "334": {
+        "empirical_mean": 0.0004659429347463384,
+        "analytic": 0.0004913090408307589,
+        "count": 20,
+        "relative_error": 0.051629634255312584
+      },
+      "335": {
+        "empirical_mean": 0.0010608814500823848,
+        "analytic": 0.0004824248901555635,
+        "count": 20,
+        "relative_error": 1.19906035474308
+      },
+      "336": {
+        "empirical_mean": 0.0005664619348851804,
+        "analytic": 0.00047359346441019115,
+        "count": 16,
+        "relative_error": 0.19609322647779104
+      },
+      "337": {
+        "empirical_mean": 0.0002936073515600755,
+        "analytic": 0.000464814295621892,
+        "count": 18,
+        "relative_error": 0.36833407594048384
+      },
+      "338": {
+        "empirical_mean": 0.0003870668256614751,
+        "analytic": 0.00045608692133971857,
+        "count": 17,
+        "relative_error": 0.1513310126839474
+      },
+      "339": {
+        "empirical_mean": 0.0009460245844830218,
+        "analytic": 0.0004474108845533226,
+        "count": 23,
+        "relative_error": 1.1144424893182818
+      },
+      "340": {
+        "empirical_mean": 0.0009572017757962722,
+        "analytic": 0.00043878573361318113,
+        "count": 16,
+        "relative_error": 1.1814788004026342
+      },
+      "341": {
+        "empirical_mean": 0.0005416285117133154,
+        "analytic": 0.0004302110221522218,
+        "count": 17,
+        "relative_error": 0.25898334497266956
+      },
+      "342": {
+        "empirical_mean": 0.00018758050857986867,
+        "analytic": 0.0004216863090088191,
+        "count": 17,
+        "relative_error": 0.5551657604896401
+      },
+      "343": {
+        "empirical_mean": 7.876025423745695e-06,
+        "analytic": 0.0004132111581511338,
+        "count": 12,
+        "relative_error": 0.9809394657709969
+      },
+      "344": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00040478513860276843,
+        "count": 12,
+        "relative_error": 1.0
+      },
+      "345": {
+        "empirical_mean": 0.00024216319547481252,
+        "analytic": 0.00039640782436971153,
+        "count": 14,
+        "relative_error": 0.3891059141936665
+      },
+      "346": {
+        "empirical_mean": 8.63706500418331e-05,
+        "analytic": 0.0003880787943685455,
+        "count": 17,
+        "relative_error": 0.777440428863501
+      },
+      "347": {
+        "empirical_mean": 0.00025716256846497476,
+        "analytic": 0.0003797976323558919,
+        "count": 11,
+        "relative_error": 0.3228958093556548
+      },
+      "348": {
+        "empirical_mean": 0.00021420644153306658,
+        "analytic": 0.00037156392685907006,
+        "count": 14,
+        "relative_error": 0.42350043680555505
+      },
+      "349": {
+        "empirical_mean": 0.00046980752748193577,
+        "analytic": 0.00036337727110794443,
+        "count": 17,
+        "relative_error": 0.2928918918056801
+      },
+      "350": {
+        "empirical_mean": 0.0014160111500204492,
+        "analytic": 0.00035523726296793627,
+        "count": 8,
+        "relative_error": 2.986099707530565
+      },
+      "351": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00034714350487417817,
+        "count": 9,
+        "relative_error": 1.0
+      },
+      "352": {
+        "empirical_mean": 0.0006574424231077162,
+        "analytic": 0.000339095603766787,
+        "count": 15,
+        "relative_error": 0.9388114024618034
+      },
+      "353": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0003310931710272342,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "354": {
+        "empirical_mean": 7.915921738186973e-05,
+        "analytic": 0.0003231358224157915,
+        "count": 7,
+        "relative_error": 0.7550280349913899
+      },
+      "355": {
+        "empirical_mean": 0.0002678020650196998,
+        "analytic": 0.0003152231780100311,
+        "count": 13,
+        "relative_error": 0.15043663124550524
+      },
+      "356": {
+        "empirical_mean": 0.0003250250338037957,
+        "analytic": 0.00030735486214435897,
+        "count": 7,
+        "relative_error": 0.05749110827840873
+      },
+      "357": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00029953050335056213,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "358": {
+        "empirical_mean": 0.0003332754443482744,
+        "analytic": 0.00029174973429934914,
+        "count": 12,
+        "relative_error": 0.14233332602221974
+      },
+      "359": {
+        "empirical_mean": 0.0015077037548998204,
+        "analytic": 0.00028401219174286507,
+        "count": 7,
+        "relative_error": 4.308588147739953
+      },
+      "360": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0002763175164581621,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "362": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0002610553506042057,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "365": {
+        "empirical_mean": 0.0019888310478087625,
+        "analytic": 0.00023847485112355723,
+        "count": 6,
+        "relative_error": 7.339793644648595
+      },
+      "366": {
+        "empirical_mean": 9.56281286843691e-05,
+        "analytic": 0.00023103005429206275,
+        "count": 8,
+        "relative_error": 0.5860792701737486
+      }
+    },
+    "0.6": {
+      "1": {
+        "empirical_mean": 0.47673520895225585,
+        "analytic": 0.4975062344139651,
+        "count": 256,
+        "relative_error": 0.04175028175511478
+      },
+      "2": {
+        "empirical_mean": 0.3621767328098895,
+        "analytic": 0.33083956774729845,
+        "count": 149,
+        "relative_error": 0.09472012454848498
+      },
+      "3": {
+        "empirical_mean": 0.2464143678607217,
+        "analytic": 0.24750623441396508,
+        "count": 90,
+        "relative_error": 0.004411470910333393
+      },
+      "4": {
+        "empirical_mean": 0.19410489126963057,
+        "analytic": 0.1975062344139651,
+        "count": 88,
+        "relative_error": 0.017221446980784615
+      },
+      "5": {
+        "empirical_mean": 0.14642875162825297,
+        "analytic": 0.16417290108063176,
+        "count": 65,
+        "relative_error": 0.10808208501879332
+      },
+      "6": {
+        "empirical_mean": 0.15487508506799189,
+        "analytic": 0.14036337727110795,
+        "count": 60,
+        "relative_error": 0.10338671011637868
+      },
+      "7": {
+        "empirical_mean": 0.115503354645209,
+        "analytic": 0.12250623441396509,
+        "count": 48,
+        "relative_error": 0.057163456229439025
+      },
+      "8": {
+        "empirical_mean": 0.13582367091983383,
+        "analytic": 0.1086173455250762,
+        "count": 45,
+        "relative_error": 0.25047864374918444
+      },
+      "9": {
+        "empirical_mean": 0.09560336997819383,
+        "analytic": 0.09750623441396508,
+        "count": 46,
+        "relative_error": 0.019515310453817748
+      },
+      "10": {
+        "empirical_mean": 0.10960435276855554,
+        "analytic": 0.088415325323056,
+        "count": 49,
+        "relative_error": 0.23965333349256016
+      },
+      "11": {
+        "empirical_mean": 0.07709860339212829,
+        "analytic": 0.08083956774729842,
+        "count": 26,
+        "relative_error": 0.04627640225470093
+      },
+      "12": {
+        "empirical_mean": 0.09556099477528203,
+        "analytic": 0.07442931133704202,
+        "count": 36,
+        "relative_error": 0.2839161488751164
+      },
+      "13": {
+        "empirical_mean": 0.08041239677386944,
+        "analytic": 0.06893480584253651,
+        "count": 31,
+        "relative_error": 0.16649921314858665
+      },
+      "14": {
+        "empirical_mean": 0.06586528030277133,
+        "analytic": 0.06417290108063176,
+        "count": 29,
+        "relative_error": 0.02637217881132011
+      },
+      "15": {
+        "empirical_mean": 0.07322940903400847,
+        "analytic": 0.06000623441396509,
+        "count": 33,
+        "relative_error": 0.22036334639532035
+      },
+      "16": {
+        "empirical_mean": 0.06856068285741813,
+        "analytic": 0.056329763825729795,
+        "count": 24,
+        "relative_error": 0.21713066416411303
+      },
+      "17": {
+        "empirical_mean": 0.04268572279534092,
+        "analytic": 0.05306178996952064,
+        "count": 24,
+        "relative_error": 0.19554687431652543
+      },
+      "18": {
+        "empirical_mean": 0.05124842698799873,
+        "analytic": 0.05013781336133351,
+        "count": 33,
+        "relative_error": 0.022151217857493022
+      },
+      "19": {
+        "empirical_mean": 0.0725831939361216,
+        "analytic": 0.047506234413965086,
+        "count": 11,
+        "relative_error": 0.5278667070018248
+      },
+      "20": {
+        "empirical_mean": 0.046140762921612455,
+        "analytic": 0.045125282033012706,
+        "count": 25,
+        "relative_error": 0.022503590954996006
+      },
+      "21": {
+        "empirical_mean": 0.058491854293995414,
+        "analytic": 0.04296077986851054,
+        "count": 14,
+        "relative_error": 0.3615175160465108
+      },
+      "22": {
+        "empirical_mean": 0.02510225298975106,
+        "analytic": 0.040984495283530306,
+        "count": 20,
+        "relative_error": 0.38751830866541265
+      },
+      "23": {
+        "empirical_mean": 0.03227151880607676,
+        "analytic": 0.039172901080631754,
+        "count": 23,
+        "relative_error": 0.17617746156582828
+      },
+      "24": {
+        "empirical_mean": 0.036786657116027355,
+        "analytic": 0.037506234413965084,
+        "count": 15,
+        "relative_error": 0.01918553832932376
+      },
+      "25": {
+        "empirical_mean": 0.036691853521006436,
+        "analytic": 0.03596777287550355,
+        "count": 23,
+        "relative_error": 0.020131372826701664
+      },
+      "26": {
+        "empirical_mean": 0.03962877765165616,
+        "analytic": 0.034543271451002125,
+        "count": 19,
+        "relative_error": 0.14722132522588557
+      },
+      "27": {
+        "empirical_mean": 0.032861123313550976,
+        "analytic": 0.0332205201282508,
+        "count": 16,
+        "relative_error": 0.010818518593698794
+      },
+      "28": {
+        "empirical_mean": 0.03384757372635965,
+        "analytic": 0.031988993034654745,
+        "count": 15,
+        "relative_error": 0.05810063135439883
+      },
+      "29": {
+        "empirical_mean": 0.029091685475198824,
+        "analytic": 0.03083956774729842,
+        "count": 11,
+        "relative_error": 0.05667661383654484
+      },
+      "30": {
+        "empirical_mean": 0.02257793691761773,
+        "analytic": 0.029764298930094118,
+        "count": 14,
+        "relative_error": 0.24144234101917286
+      },
+      "31": {
+        "empirical_mean": 0.033966678983638046,
+        "analytic": 0.028756234413965086,
+        "count": 17,
+        "relative_error": 0.18119356292152689
+      },
+      "32": {
+        "empirical_mean": 0.01239458089395234,
+        "analytic": 0.02780926471699539,
+        "count": 11,
+        "relative_error": 0.5543003017128497
+      },
+      "33": {
+        "empirical_mean": 0.022496056620520035,
+        "analytic": 0.02691799911984744,
+        "count": 13,
+        "relative_error": 0.16427456140553087
+      },
+      "34": {
+        "empirical_mean": 0.03265134680308761,
+        "analytic": 0.026077662985393657,
+        "count": 16,
+        "relative_error": 0.25208101743534045
+      },
+      "35": {
+        "empirical_mean": 0.02717319351565594,
+        "analytic": 0.025284012191742866,
+        "count": 14,
+        "relative_error": 0.07471841532057295
+      },
+      "36": {
+        "empirical_mean": 0.025066621003879852,
+        "analytic": 0.024533261440992115,
+        "count": 12,
+        "relative_error": 0.02174026328177295
+      },
+      "37": {
+        "empirical_mean": 0.025059304824257504,
+        "analytic": 0.0238220238876493,
+        "count": 15,
+        "relative_error": 0.05193853143811521
+      },
+      "38": {
+        "empirical_mean": 0.024666582841989457,
+        "analytic": 0.023147260054990727,
+        "count": 8,
+        "relative_error": 0.06563726261290923
+      },
+      "39": {
+        "empirical_mean": 0.014303173566856365,
+        "analytic": 0.022506234413965088,
+        "count": 10,
+        "relative_error": 0.36447949027042637
+      },
+      "40": {
+        "empirical_mean": 0.01555786897855476,
+        "analytic": 0.02189647831640411,
+        "count": 9,
+        "relative_error": 0.28948076700994774
+      },
+      "41": {
+        "empirical_mean": 0.03643680034814055,
+        "analytic": 0.021315758223488898,
+        "count": 8,
+        "relative_error": 0.7093832631292009
+      },
+      "42": {
+        "empirical_mean": 0.026325944493836823,
+        "analytic": 0.020762048367453458,
+        "count": 12,
+        "relative_error": 0.26798396901460436
+      },
+      "43": {
+        "empirical_mean": 0.025207562384163395,
+        "analytic": 0.020233507141237814,
+        "count": 12,
+        "relative_error": 0.2458325790089046
+      },
+      "45": {
+        "empirical_mean": 0.008974652952948541,
+        "analytic": 0.019245364848747695,
+        "count": 7,
+        "relative_error": 0.533671976422285
+      },
+      "46": {
+        "empirical_mean": 0.020515219009780608,
+        "analytic": 0.018782830158645937,
+        "count": 8,
+        "relative_error": 0.09223257818456257
+      },
+      "47": {
+        "empirical_mean": 0.008570494752940128,
+        "analytic": 0.018339567747298422,
+        "count": 10,
+        "relative_error": 0.5326773852561145
+      },
+      "48": {
+        "empirical_mean": 0.010034270135807166,
+        "analytic": 0.01791439767927121,
+        "count": 10,
+        "relative_error": 0.43987677869751424
+      },
+      "49": {
+        "empirical_mean": 0.023112553665879297,
+        "analytic": 0.017506234413965087,
+        "count": 5,
+        "relative_error": 0.3202470113985183
+      },
+      "50": {
+        "empirical_mean": 0.005474569234323466,
+        "analytic": 0.017114077551219988,
+        "count": 7,
+        "relative_error": 0.680113098825288
+      },
+      "51": {
+        "empirical_mean": 0.013627537884389024,
+        "analytic": 0.01673700364473432,
+        "count": 11,
+        "relative_error": 0.18578389694762198
+      },
+      "52": {
+        "empirical_mean": 0.016336585215387906,
+        "analytic": 0.016374158942266973,
+        "count": 9,
+        "relative_error": 0.0022946966016114912
+      },
+      "53": {
+        "empirical_mean": 0.03036212072988076,
+        "analytic": 0.016024752932483607,
+        "count": 6,
+        "relative_error": 0.8947013322329622
+      },
+      "54": {
+        "empirical_mean": 0.008323729152881995,
+        "analytic": 0.015688052595783267,
+        "count": 7,
+        "relative_error": 0.4694224090554554
+      },
+      "55": {
+        "empirical_mean": 0.014315438478852437,
+        "analytic": 0.015363377271107944,
+        "count": 11,
+        "relative_error": 0.06821018411272371
+      },
+      "56": {
+        "empirical_mean": 0.017979355918042728,
+        "analytic": 0.015050094063087894,
+        "count": 10,
+        "relative_error": 0.1946341227287867
+      },
+      "57": {
+        "empirical_mean": 0.013279934595978383,
+        "analytic": 0.014747613724309916,
+        "count": 13,
+        "relative_error": 0.09951977016540751
+      },
+      "59": {
+        "empirical_mean": 0.01607172683166445,
+        "analytic": 0.014172901080631755,
+        "count": 6,
+        "relative_error": 0.1339757993250635
+      },
+      "60": {
+        "empirical_mean": 0.005890742826269724,
+        "analytic": 0.013899677036915907,
+        "count": 6,
+        "relative_error": 0.5761957050782832
+      },
+      "61": {
+        "empirical_mean": 0.019668549308388572,
+        "analytic": 0.013635266672029604,
+        "count": 8,
+        "relative_error": 0.44247632125414943
+      },
+      "62": {
+        "empirical_mean": 0.004095870098317689,
+        "analytic": 0.01337925028698096,
+        "count": 10,
+        "relative_error": 0.6938640050479297
+      },
+      "63": {
+        "empirical_mean": 0.026535081057856735,
+        "analytic": 0.013131234413965086,
+        "count": 6,
+        "relative_error": 1.020760594269541
+      },
+      "64": {
+        "empirical_mean": 0.013499874612442167,
+        "analytic": 0.012890849798580472,
+        "count": 12,
+        "relative_error": 0.04724473742055081
+      },
+      "65": {
+        "empirical_mean": 0.00993765757427899,
+        "analytic": 0.012657749565480238,
+        "count": 9,
+        "relative_error": 0.21489538698248434
+      },
+      "67": {
+        "empirical_mean": 0.007461546215237887,
+        "analytic": 0.012212116766906264,
+        "count": 6,
+        "relative_error": 0.3890046780867667
+      },
+      "68": {
+        "empirical_mean": 0.009744989873876998,
+        "analytic": 0.011998988037153492,
+        "count": 10,
+        "relative_error": 0.1878490216255944
+      },
+      "69": {
+        "empirical_mean": 0.015363572303102892,
+        "analytic": 0.011791948699679373,
+        "count": 7,
+        "relative_error": 0.30288663005467725
+      },
+      "70": {
+        "empirical_mean": 0.0171697777131689,
+        "analytic": 0.011590741456218608,
+        "count": 5,
+        "relative_error": 0.4813355796110053
+      },
+      "71": {
+        "empirical_mean": 0.014801495182017201,
+        "analytic": 0.011395123302853976,
+        "count": 7,
+        "relative_error": 0.29893242825288946
+      },
+      "72": {
+        "empirical_mean": 0.01164623435983816,
+        "analytic": 0.011204864550951389,
+        "count": 5,
+        "relative_error": 0.03939090980348303
+      },
+      "74": {
+        "empirical_mean": 0.007089298666122623,
+        "analytic": 0.01083956774729842,
+        "count": 7,
+        "relative_error": 0.3459795785777979
+      },
+      "77": {
+        "empirical_mean": 0.00788677295453224,
+        "analytic": 0.010326747234477908,
+        "count": 5,
+        "relative_error": 0.23627713785802046
+      },
+      "78": {
+        "empirical_mean": 0.006880403948529221,
+        "analytic": 0.010164462262066354,
+        "count": 8,
+        "relative_error": 0.32309218420665475
+      },
+      "79": {
+        "empirical_mean": 0.016378514724584015,
+        "analytic": 0.010006234413965087,
+        "count": 6,
+        "relative_error": 0.6368310042512623
+      },
+      "84": {
+        "empirical_mean": 0.014952265444287996,
+        "analytic": 0.00927094029631803,
+        "count": 6,
+        "relative_error": 0.6128100242675832
+      },
+      "87": {
+        "empirical_mean": 0.007228709907040313,
+        "analytic": 0.00886987077760145,
+        "count": 6,
+        "relative_error": 0.18502646901073933
+      },
+      "88": {
+        "empirical_mean": 0.010368398946992652,
+        "analytic": 0.008742189470144863,
+        "count": 6,
+        "relative_error": 0.18601855775391257
+      },
+      "92": {
+        "empirical_mean": 0.011268748185639332,
+        "analytic": 0.008258922586008098,
+        "count": 6,
+        "relative_error": 0.3644332015813234
+      },
+      "93": {
+        "empirical_mean": 0.00904147078962728,
+        "analytic": 0.008144532286305513,
+        "count": 7,
+        "relative_error": 0.11012768711469267
+      },
+      "95": {
+        "empirical_mean": 0.0033254492022627645,
+        "analytic": 0.007922901080631754,
+        "count": 5,
+        "relative_error": 0.5802737951137462
+      },
+      "96": {
+        "empirical_mean": 0.004792439214184397,
+        "analytic": 0.007815512764480552,
+        "count": 5,
+        "relative_error": 0.38680424962457083
+      },
+      "101": {
+        "empirical_mean": 0.011203567746228594,
+        "analytic": 0.007310155982592538,
+        "count": 5,
+        "relative_error": 0.5326031035325818
+      },
+      "103": {
+        "empirical_mean": 0.007431349545335397,
+        "analytic": 0.007121619029349702,
+        "count": 5,
+        "relative_error": 0.043491587335580485
+      },
+      "116": {
+        "empirical_mean": 0.0069690247730031145,
+        "analytic": 0.006053242960973634,
+        "count": 6,
+        "relative_error": 0.15128780026403915
+      },
+      "118": {
+        "empirical_mean": 0.0101297968589016,
+        "analytic": 0.005909595758502902,
+        "count": 7,
+        "relative_error": 0.7141268663472536
+      },
+      "139": {
+        "empirical_mean": 0.007944457882657786,
+        "analytic": 0.00464909155682223,
+        "count": 5,
+        "relative_error": 0.708819408170146
+      },
+      "194": {
+        "empirical_mean": 0.00038372524747138926,
+        "analytic": 0.0026344395421702155,
+        "count": 5,
+        "relative_error": 0.854342739194052
+      }
+    },
+    "0.7": {
+      "1": {
+        "empirical_mean": 0.49993230353098655,
+        "analytic": 0.4975062344139651,
+        "count": 466,
+        "relative_error": 0.004876459728950441
+      },
+      "2": {
+        "empirical_mean": 0.3303960309941319,
+        "analytic": 0.33083956774729845,
+        "count": 299,
+        "relative_error": 0.0013406399850737717
+      },
+      "3": {
+        "empirical_mean": 0.23559292556372605,
+        "analytic": 0.24750623441396508,
+        "count": 176,
+        "relative_error": 0.048133368755121926
+      },
+      "4": {
+        "empirical_mean": 0.18809960215780655,
+        "analytic": 0.1975062344139651,
+        "count": 123,
+        "relative_error": 0.04762701432726734
+      },
+      "5": {
+        "empirical_mean": 0.15151768596515008,
+        "analytic": 0.16417290108063176,
+        "count": 128,
+        "relative_error": 0.07708467738695927
+      },
+      "6": {
+        "empirical_mean": 0.1616412982526554,
+        "analytic": 0.14036337727110795,
+        "count": 100,
+        "relative_error": 0.15159168577462873
+      },
+      "7": {
+        "empirical_mean": 0.1150265040626139,
+        "analytic": 0.12250623441396509,
+        "count": 82,
+        "relative_error": 0.06105591594690741
+      },
+      "8": {
+        "empirical_mean": 0.10937363176967071,
+        "analytic": 0.1086173455250762,
+        "count": 71,
+        "relative_error": 0.006962849634544957
+      },
+      "9": {
+        "empirical_mean": 0.06616867330183417,
+        "analytic": 0.09750623441396508,
+        "count": 49,
+        "relative_error": 0.32139033263336314
+      },
+      "10": {
+        "empirical_mean": 0.10140017204901466,
+        "analytic": 0.088415325323056,
+        "count": 58,
+        "relative_error": 0.1468619459184709
+      },
+      "11": {
+        "empirical_mean": 0.08086669902723673,
+        "analytic": 0.08083956774729842,
+        "count": 49,
+        "relative_error": 0.0003356188150723385
+      },
+      "12": {
+        "empirical_mean": 0.09461347223032224,
+        "analytic": 0.07442931133704202,
+        "count": 37,
+        "relative_error": 0.27118564622853036
+      },
+      "13": {
+        "empirical_mean": 0.04626206355941808,
+        "analytic": 0.06893480584253651,
+        "count": 40,
+        "relative_error": 0.3289012278486483
+      },
+      "14": {
+        "empirical_mean": 0.05667479635433618,
+        "analytic": 0.06417290108063176,
+        "count": 36,
+        "relative_error": 0.11684222779447642
+      },
+      "15": {
+        "empirical_mean": 0.07227119362139225,
+        "analytic": 0.06000623441396509,
+        "count": 33,
+        "relative_error": 0.20439474876585112
+      },
+      "16": {
+        "empirical_mean": 0.04012983824109098,
+        "analytic": 0.056329763825729795,
+        "count": 30,
+        "relative_error": 0.2875908664335489
+      },
+      "17": {
+        "empirical_mean": 0.061997594002380724,
+        "analytic": 0.05306178996952064,
+        "count": 25,
+        "relative_error": 0.16840374284382262
+      },
+      "18": {
+        "empirical_mean": 0.034976035032307604,
+        "analytic": 0.05013781336133351,
+        "count": 20,
+        "relative_error": 0.3024020656776135
+      },
+      "19": {
+        "empirical_mean": 0.04255068615105332,
+        "analytic": 0.047506234413965086,
+        "count": 19,
+        "relative_error": 0.10431364059987497
+      },
+      "20": {
+        "empirical_mean": 0.04488337490966643,
+        "analytic": 0.045125282033012706,
+        "count": 14,
+        "relative_error": 0.0053607891728921055
+      },
+      "21": {
+        "empirical_mean": 0.05161000172299406,
+        "analytic": 0.04296077986851054,
+        "count": 17,
+        "relative_error": 0.20132832506663234
+      },
+      "22": {
+        "empirical_mean": 0.041583328123247505,
+        "analytic": 0.040984495283530306,
+        "count": 13,
+        "relative_error": 0.01461120444632732
+      },
+      "23": {
+        "empirical_mean": 0.03525284643675009,
+        "analytic": 0.039172901080631754,
+        "count": 12,
+        "relative_error": 0.1000705726597271
+      },
+      "24": {
+        "empirical_mean": 0.03507929204573256,
+        "analytic": 0.037506234413965084,
+        "count": 11,
+        "relative_error": 0.06470770542960383
+      },
+      "25": {
+        "empirical_mean": 0.04372162911886916,
+        "analytic": 0.03596777287550355,
+        "count": 10,
+        "relative_error": 0.21557788051554644
+      },
+      "26": {
+        "empirical_mean": 0.044800991979650165,
+        "analytic": 0.034543271451002125,
+        "count": 9,
+        "relative_error": 0.29695278118628965
+      },
+      "27": {
+        "empirical_mean": 0.03459728748077615,
+        "analytic": 0.0332205201282508,
+        "count": 11,
+        "relative_error": 0.041443281056714826
+      },
+      "28": {
+        "empirical_mean": 0.02920666128955865,
+        "analytic": 0.031988993034654745,
+        "count": 8,
+        "relative_error": 0.08697778457989916
+      },
+      "30": {
+        "empirical_mean": 0.03784896457394312,
+        "analytic": 0.029764298930094118,
+        "count": 6,
+        "relative_error": 0.27162291518564047
+      },
+      "31": {
+        "empirical_mean": 0.02850071817960408,
+        "analytic": 0.028756234413965086,
+        "count": 10,
+        "relative_error": 0.008885594361302013
+      }
+    }
+  },
+  "40": {
+    "0.3": {
+      "1": {
+        "empirical_mean": 0.5807762500778855,
+        "analytic": 0.49937539038101186,
+        "count": 12,
+        "relative_error": 0.1630053488113754
+      },
+      "2": {
+        "empirical_mean": 0.2529118221492196,
+        "analytic": 0.3327087237143452,
+        "count": 5,
+        "relative_error": 0.23984012404086247
+      },
+      "1564": {
+        "empirical_mean": 0.0,
+        "analytic": 1.4368016794615187e-05,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1567": {
+        "empirical_mean": 1.0679157610253101e-05,
+        "analytic": 1.314548305268391e-05,
+        "count": 9,
+        "relative_error": 0.18761771115951947
+      },
+      "1568": {
+        "empirical_mean": 0.00014374931420331935,
+        "analytic": 1.2739010712313726e-05,
+        "count": 6,
+        "relative_error": 10.284181907812437
+      },
+      "1569": {
+        "empirical_mean": 0.0,
+        "analytic": 1.233305617110325e-05,
+        "count": 12,
+        "relative_error": 1.0
+      },
+      "1570": {
+        "empirical_mean": 0.0,
+        "analytic": 1.1927618440257143e-05,
+        "count": 11,
+        "relative_error": 1.0
+      },
+      "1571": {
+        "empirical_mean": 0.00011699400047003468,
+        "analytic": 1.1522696533496082e-05,
+        "count": 22,
+        "relative_error": 9.153352570723108
+      },
+      "1572": {
+        "empirical_mean": 0.0,
+        "analytic": 1.1118289467048764e-05,
+        "count": 22,
+        "relative_error": 1.0
+      },
+      "1573": {
+        "empirical_mean": 0.0,
+        "analytic": 1.071439625964395e-05,
+        "count": 41,
+        "relative_error": 1.0
+      },
+      "1574": {
+        "empirical_mean": 0.0,
+        "analytic": 1.0311015932502503e-05,
+        "count": 43,
+        "relative_error": 1.0
+      },
+      "1575": {
+        "empirical_mean": 4.095709402128238e-05,
+        "analytic": 9.908147509329511e-06,
+        "count": 74,
+        "relative_error": 3.1336782665697274
+      },
+      "1576": {
+        "empirical_mean": 7.842729164623716e-06,
+        "analytic": 9.505790016306391e-06,
+        "count": 79,
+        "relative_error": 0.1749524078303679
+      },
+      "1577": {
+        "empirical_mean": 4.67089948031105e-06,
+        "analytic": 9.103942482083045e-06,
+        "count": 72,
+        "relative_error": 0.4869366222926404
+      },
+      "1578": {
+        "empirical_mean": 2.4907265294753034e-06,
+        "analytic": 8.702603937770053e-06,
+        "count": 112,
+        "relative_error": 0.7137952563065251
+      },
+      "1579": {
+        "empirical_mean": 6.101977729204844e-06,
+        "analytic": 8.301773416930874e-06,
+        "count": 100,
+        "relative_error": 0.26497900836942906
+      },
+      "1580": {
+        "empirical_mean": 1.6657594000571075e-05,
+        "analytic": 7.901449955574098e-06,
+        "count": 133,
+        "relative_error": 1.1081692719979745
+      },
+      "1581": {
+        "empirical_mean": 2.732268804759172e-06,
+        "analytic": 7.501632592145712e-06,
+        "count": 142,
+        "relative_error": 0.6357767764286555
+      },
+      "1582": {
+        "empirical_mean": 0.0,
+        "analytic": 7.102320367521404e-06,
+        "count": 143,
+        "relative_error": 1.0
+      },
+      "1583": {
+        "empirical_mean": 6.580184423335252e-06,
+        "analytic": 6.703512324998896e-06,
+        "count": 157,
+        "relative_error": 0.01839750502191615
+      },
+      "1584": {
+        "empirical_mean": 2.550847814908175e-06,
+        "analytic": 6.305207510290296e-06,
+        "count": 143,
+        "relative_error": 0.59543792797539
+      },
+      "1585": {
+        "empirical_mean": 1.707055259954708e-05,
+        "analytic": 5.907404971514494e-06,
+        "count": 143,
+        "relative_error": 1.8896872115355698
+      },
+      "1586": {
+        "empirical_mean": 4.885621448591414e-06,
+        "analytic": 5.510103759189574e-06,
+        "count": 123,
+        "relative_error": 0.11333403832126915
+      },
+      "1587": {
+        "empirical_mean": 0.0,
+        "analytic": 5.1133029262252655e-06,
+        "count": 88,
+        "relative_error": 1.0
+      },
+      "1588": {
+        "empirical_mean": 0.0,
+        "analytic": 4.717001527915411e-06,
+        "count": 89,
+        "relative_error": 1.0
+      },
+      "1589": {
+        "empirical_mean": 8.045178927095178e-06,
+        "analytic": 4.321198621930476e-06,
+        "count": 77,
+        "relative_error": 0.8617933659112921
+      },
+      "1590": {
+        "empirical_mean": 0.0,
+        "analytic": 3.925893268310071e-06,
+        "count": 47,
+        "relative_error": 1.0
+      },
+      "1591": {
+        "empirical_mean": 0.0,
+        "analytic": 3.5310845294555225e-06,
+        "count": 29,
+        "relative_error": 1.0
+      },
+      "1592": {
+        "empirical_mean": 0.0,
+        "analytic": 3.1367714701224478e-06,
+        "count": 19,
+        "relative_error": 1.0
+      },
+      "1593": {
+        "empirical_mean": 0.0,
+        "analytic": 2.7429531574133797e-06,
+        "count": 16,
+        "relative_error": 1.0
+      },
+      "1594": {
+        "empirical_mean": 0.0,
+        "analytic": 2.349628660770404e-06,
+        "count": 5,
+        "relative_error": 1.0
+      }
+    },
+    "0.5": {
+      "1": {
+        "empirical_mean": 0.5097073448026487,
+        "analytic": 0.49937539038101186,
+        "count": 144,
+        "relative_error": 0.020689754883102613
+      },
+      "2": {
+        "empirical_mean": 0.29152332791612906,
+        "analytic": 0.3327087237143452,
+        "count": 75,
+        "relative_error": 0.12378814519326159
+      },
+      "3": {
+        "empirical_mean": 0.17459258588590018,
+        "analytic": 0.24937539038101186,
+        "count": 35,
+        "relative_error": 0.2998804508370039
+      },
+      "4": {
+        "empirical_mean": 0.19023493688494178,
+        "analytic": 0.19937539038101187,
+        "count": 28,
+        "relative_error": 0.04584544501005082
+      },
+      "5": {
+        "empirical_mean": 0.16252587623320328,
+        "analytic": 0.16604205704767852,
+        "count": 21,
+        "relative_error": 0.021176446961660943
+      },
+      "6": {
+        "empirical_mean": 0.13633624888417162,
+        "analytic": 0.1422325332381547,
+        "count": 18,
+        "relative_error": 0.04145524388650473
+      },
+      "7": {
+        "empirical_mean": 0.12570225706317753,
+        "analytic": 0.12437539038101186,
+        "count": 19,
+        "relative_error": 0.010668241346627663
+      },
+      "8": {
+        "empirical_mean": 0.08276345515694308,
+        "analytic": 0.11048650149212298,
+        "count": 21,
+        "relative_error": 0.2509179488967382
+      },
+      "9": {
+        "empirical_mean": 0.1379589923368148,
+        "analytic": 0.09937539038101187,
+        "count": 23,
+        "relative_error": 0.38826113596002826
+      },
+      "10": {
+        "empirical_mean": 0.13005894669917012,
+        "analytic": 0.09028448129010277,
+        "count": 9,
+        "relative_error": 0.44054598133275785
+      },
+      "11": {
+        "empirical_mean": 0.07670131950810424,
+        "analytic": 0.0827087237143452,
+        "count": 8,
+        "relative_error": 0.07263325966664655
+      },
+      "12": {
+        "empirical_mean": 0.08564312352227868,
+        "analytic": 0.07629846730408879,
+        "count": 11,
+        "relative_error": 0.12247501880931119
+      },
+      "13": {
+        "empirical_mean": 0.07746117448507414,
+        "analytic": 0.0708039618095833,
+        "count": 7,
+        "relative_error": 0.0940231662939204
+      },
+      "18": {
+        "empirical_mean": 0.04945532495449738,
+        "analytic": 0.05200696932838029,
+        "count": 5,
+        "relative_error": 0.04906350834964869
+      },
+      "20": {
+        "empirical_mean": 0.046537674676854976,
+        "analytic": 0.04699443800005949,
+        "count": 8,
+        "relative_error": 0.009719518790796742
+      },
+      "24": {
+        "empirical_mean": 0.029785362558015466,
+        "analytic": 0.039375390381011864,
+        "count": 6,
+        "relative_error": 0.24355384747172007
+      },
+      "25": {
+        "empirical_mean": 0.048351774281080596,
+        "analytic": 0.03783692884255033,
+        "count": 5,
+        "relative_error": 0.27789901982492765
+      },
+      "36": {
+        "empirical_mean": 0.0322078762432199,
+        "analytic": 0.026402417408038895,
+        "count": 5,
+        "relative_error": 0.21988360934758128
+      },
+      "40": {
+        "empirical_mean": 0.02310193233718742,
+        "analytic": 0.023765634283450892,
+        "count": 6,
+        "relative_error": 0.027926961188897842
+      },
+      "41": {
+        "empirical_mean": 0.027099609200711083,
+        "analytic": 0.02318491419053568,
+        "count": 5,
+        "relative_error": 0.16884664648762962
+      },
+      "981": {
+        "empirical_mean": 0.0010121675272938945,
+        "analytic": 0.00039372031991207124,
+        "count": 5,
+        "relative_error": 1.5707779764070595
+      },
+      "1013": {
+        "empirical_mean": 0.00022091019071803774,
+        "analytic": 0.00036158367489746914,
+        "count": 5,
+        "relative_error": 0.3890482174542887
+      },
+      "1042": {
+        "empirical_mean": 0.0004890536058359318,
+        "analytic": 0.00033416315186517533,
+        "count": 5,
+        "relative_error": 0.46351745578833314
+      },
+      "1055": {
+        "empirical_mean": 0.00042501534055058854,
+        "analytic": 0.00032236007798156456,
+        "count": 8,
+        "relative_error": 0.3184490561355886
+      },
+      "1087": {
+        "empirical_mean": 0.0003331976326698867,
+        "analytic": 0.00029450802807069114,
+        "count": 6,
+        "relative_error": 0.13137028845240467
+      },
+      "1109": {
+        "empirical_mean": 0.0001847550417888977,
+        "analytic": 0.0002762912819127685,
+        "count": 5,
+        "relative_error": 0.33130339651024854
+      },
+      "1113": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0002730564492344888,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1115": {
+        "empirical_mean": 0.00018037546752929233,
+        "analytic": 0.00027144772868211846,
+        "count": 5,
+        "relative_error": 0.33550570341841834
+      },
+      "1120": {
+        "empirical_mean": 0.00011922596409201791,
+        "analytic": 0.0002674510411367561,
+        "count": 5,
+        "relative_error": 0.5542138718725199
+      },
+      "1123": {
+        "empirical_mean": 9.223634546442482e-05,
+        "analytic": 0.0002650700963143587,
+        "count": 5,
+        "relative_error": 0.6520303619800344
+      },
+      "1127": {
+        "empirical_mean": 0.0005871288131773067,
+        "analytic": 0.00026191520370690306,
+        "count": 5,
+        "relative_error": 1.241675186730797
+      },
+      "1143": {
+        "empirical_mean": 3.0410888364107437e-05,
+        "analytic": 0.0002495162551377417,
+        "count": 5,
+        "relative_error": 0.8781206124333681
+      },
+      "1144": {
+        "empirical_mean": 0.00023024828762046033,
+        "analytic": 0.00024875282642671475,
+        "count": 5,
+        "relative_error": 0.07438926050436677
+      },
+      "1145": {
+        "empirical_mean": 4.4001634396551026e-05,
+        "analytic": 0.0002479907300520072,
+        "count": 6,
+        "relative_error": 0.8225674226317925
+      },
+      "1146": {
+        "empirical_mean": 0.0003168331350464765,
+        "analytic": 0.00024722996252886847,
+        "count": 8,
+        "relative_error": 0.2815321080246518
+      },
+      "1147": {
+        "empirical_mean": 0.0007510305357955272,
+        "analytic": 0.00024647052038468986,
+        "count": 5,
+        "relative_error": 2.0471414375371255
+      },
+      "1148": {
+        "empirical_mean": 7.16116497201158e-05,
+        "analytic": 0.000245712400158952,
+        "count": 5,
+        "relative_error": 0.7085550030287847
+      },
+      "1154": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0002411912468127334,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1158": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0002382031506408581,
+        "count": 7,
+        "relative_error": 1.0
+      },
+      "1166": {
+        "empirical_mean": 0.0003820079212547983,
+        "analytic": 0.00023228841014640058,
+        "count": 8,
+        "relative_error": 0.6445414603941562
+      },
+      "1173": {
+        "empirical_mean": 7.766256129493332e-05,
+        "analytic": 0.00022717913740028325,
+        "count": 6,
+        "relative_error": 0.6581439555424754
+      },
+      "1176": {
+        "empirical_mean": 0.0009041272590556426,
+        "analytic": 0.00022500805305944617,
+        "count": 6,
+        "relative_error": 3.0181995566922044
+      },
+      "1178": {
+        "empirical_mean": 0.0002715646058116312,
+        "analytic": 0.00022356680170737225,
+        "count": 9,
+        "relative_error": 0.21469110680879852
+      },
+      "1180": {
+        "empirical_mean": 0.00014091737440553588,
+        "analytic": 0.00022213043181627064,
+        "count": 5,
+        "relative_error": 0.3656097759622059
+      },
+      "1181": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00022141406967515016,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1182": {
+        "empirical_mean": 0.0002103085405204541,
+        "analytic": 0.0002206989186280975,
+        "count": 6,
+        "relative_error": 0.04707942463982951
+      },
+      "1183": {
+        "empirical_mean": 5.944450653798989e-05,
+        "analytic": 0.00021998497560646218,
+        "count": 7,
+        "relative_error": 0.7297792434500983
+      },
+      "1189": {
+        "empirical_mean": 9.354373143268812e-05,
+        "analytic": 0.0002157265154656491,
+        "count": 5,
+        "relative_error": 0.5663781467439342
+      },
+      "1193": {
+        "empirical_mean": 0.0001509702690912773,
+        "analytic": 0.00021291131903531816,
+        "count": 5,
+        "relative_error": 0.29092417549564825
+      },
+      "1195": {
+        "empirical_mean": 0.0003693030619799753,
+        "analytic": 0.00021151078234966022,
+        "count": 5,
+        "relative_error": 0.7460247552271824
+      },
+      "1197": {
+        "empirical_mean": 0.0006179191979886241,
+        "analytic": 0.0002101149219133701,
+        "count": 7,
+        "relative_error": 1.9408629923170841
+      },
+      "1198": {
+        "empirical_mean": 0.0007555270241519585,
+        "analytic": 0.00020941873797600437,
+        "count": 5,
+        "relative_error": 2.607733631928048
+      },
+      "1200": {
+        "empirical_mean": 0.000291223371296802,
+        "analytic": 0.00020802984812260864,
+        "count": 7,
+        "relative_error": 0.39991147388215553
+      },
+      "1202": {
+        "empirical_mean": 0.0001590388757083209,
+        "analytic": 0.0002066455763568385,
+        "count": 6,
+        "relative_error": 0.23037851323906236
+      },
+      "1203": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00020595516506502373,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1205": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00020457777736344304,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1209": {
+        "empirical_mean": 0.0006526419280042753,
+        "analytic": 0.0002018366620036031,
+        "count": 6,
+        "relative_error": 2.233515266877653
+      },
+      "1210": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00020115421255604594,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1211": {
+        "empirical_mean": 0.00035210436931596795,
+        "analytic": 0.00020047288926269266,
+        "count": 6,
+        "relative_error": 0.7563690063576761
+      },
+      "1214": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0001984356485015795,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "1215": {
+        "empirical_mean": 0.0004600431048118311,
+        "analytic": 0.00019775880206449915,
+        "count": 7,
+        "relative_error": 1.326283836720389
+      },
+      "1216": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00019708306794695386,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "1217": {
+        "empirical_mean": 3.8639479861141925e-05,
+        "analytic": 0.00019640844340924034,
+        "count": 7,
+        "relative_error": 0.8032697617758113
+      },
+      "1218": {
+        "empirical_mean": 4.4177966416777036e-05,
+        "analytic": 0.00019573492572064527,
+        "count": 6,
+        "relative_error": 0.7742969669100943
+      },
+      "1220": {
+        "empirical_mean": 0.0006071380455682353,
+        "analytic": 0.0001943912000126866,
+        "count": 9,
+        "relative_error": 2.1232794773045875
+      },
+      "1222": {
+        "empirical_mean": 0.00015252190311312308,
+        "analytic": 0.00019305186915577602,
+        "count": 5,
+        "relative_error": 0.20994340132469164
+      },
+      "1223": {
+        "empirical_mean": 0.0005649756227502189,
+        "analytic": 0.00019238384506415517,
+        "count": 5,
+        "relative_error": 1.9367103176559017
+      },
+      "1225": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0001910510661668431,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "1233": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00018576315248674603,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "1234": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00018510698020215099,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1239": {
+        "empirical_mean": 0.0002189620410711357,
+        "analytic": 0.0001818419939150934,
+        "count": 8,
+        "relative_error": 0.2041335246982311
+      },
+      "1240": {
+        "empirical_mean": 0.00010378097451468893,
+        "analytic": 0.00018119215377576767,
+        "count": 6,
+        "relative_error": 0.42723251337294704
+      },
+      "1241": {
+        "empirical_mean": 0.00037011503919463784,
+        "analytic": 0.00018054336007789014,
+        "count": 8,
+        "relative_error": 1.0500063753934932
+      },
+      "1242": {
+        "empirical_mean": 5.994952968885192e-05,
+        "analytic": 0.00017989561029585792,
+        "count": 6,
+        "relative_error": 0.6667537935458325
+      },
+      "1244": {
+        "empirical_mean": 0.0009747090286168492,
+        "analytic": 0.00017860323241749006,
+        "count": 5,
+        "relative_error": 4.457398589172448
+      },
+      "1246": {
+        "empirical_mean": 0.00010558414322401714,
+        "analytic": 0.00017731500009767352,
+        "count": 6,
+        "relative_error": 0.40453913562949334
+      },
+      "1249": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00017539038101186758,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1250": {
+        "empirical_mean": 0.0,
+        "analytic": 0.000174750892602595,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1252": {
+        "empirical_mean": 0.0001402106896040145,
+        "analytic": 0.0001734749779791461,
+        "count": 5,
+        "relative_error": 0.19175265944769507
+      },
+      "1258": {
+        "empirical_mean": 0.00032968403192752086,
+        "analytic": 0.00016967155654800737,
+        "count": 7,
+        "relative_error": 0.9430718892134351
+      },
+      "1261": {
+        "empirical_mean": 9.172824650274247e-05,
+        "analytic": 0.0001677834079532305,
+        "count": 5,
+        "relative_error": 0.4532936979781002
+      },
+      "1263": {
+        "empirical_mean": 0.00012173626255853608,
+        "analytic": 0.0001665296215181967,
+        "count": 5,
+        "relative_error": 0.2689813292752007
+      },
+      "1264": {
+        "empirical_mean": 0.00017442192508030564,
+        "analytic": 0.00016590421500396244,
+        "count": 11,
+        "relative_error": 0.051341131243348825
+      },
+      "1269": {
+        "empirical_mean": 0.0,
+        "analytic": 0.0001627919558150172,
+        "count": 5,
+        "relative_error": 1.0
+      },
+      "1272": {
+        "empirical_mean": 0.000363197426623163,
+        "analytic": 0.00016093633545020223,
+        "count": 6,
+        "relative_error": 1.2567770392382611
+      },
+      "1273": {
+        "empirical_mean": 0.0004301767906581544,
+        "analytic": 0.00016031973736979537,
+        "count": 6,
+        "relative_error": 1.6832428602718057
+      },
+      "1296": {
+        "empirical_mean": 0.0002301295259083323,
+        "analytic": 0.00014640040414216828,
+        "count": 7,
+        "relative_error": 0.5719186518423496
+      },
+      "1319": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00013296613858762517,
+        "count": 6,
+        "relative_error": 1.0
+      },
+      "1326": {
+        "empirical_mean": 0.0002896670591552436,
+        "analytic": 0.00012896988364939583,
+        "count": 8,
+        "relative_error": 1.2460054313354463
+      },
+      "1336": {
+        "empirical_mean": 0.0,
+        "analytic": 0.00012333353733198725,
+        "count": 6,
+        "relative_error": 1.0
+      }
+    },
+    "0.6": {
+      "1": {
+        "empirical_mean": 0.48806547429686237,
+        "analytic": 0.49937539038101186,
+        "count": 279,
+        "relative_error": 0.022648124641304994
+      },
+      "2": {
+        "empirical_mean": 0.3534897438464858,
+        "analytic": 0.3327087237143452,
+        "count": 148,
+        "relative_error": 0.06246009993408722
+      },
+      "3": {
+        "empirical_mean": 0.24906112797471675,
+        "analytic": 0.24937539038101186,
+        "count": 108,
+        "relative_error": 0.0012601981527325845
+      },
+      "4": {
+        "empirical_mean": 0.20122129694888585,
+        "analytic": 0.19937539038101187,
+        "count": 80,
+        "relative_error": 0.009258447415934333
+      },
+      "5": {
+        "empirical_mean": 0.14766493434535236,
+        "analytic": 0.16604205704767852,
+        "count": 65,
+        "relative_error": 0.11067751766679947
+      },
+      "6": {
+        "empirical_mean": 0.14618075915033105,
+        "analytic": 0.1422325332381547,
+        "count": 44,
+        "relative_error": 0.027758950939623703
+      },
+      "7": {
+        "empirical_mean": 0.12989592890969284,
+        "analytic": 0.12437539038101186,
+        "count": 45,
+        "relative_error": 0.04438610011007281
+      },
+      "8": {
+        "empirical_mean": 0.06721112786799566,
+        "analytic": 0.11048650149212298,
+        "count": 39,
+        "relative_error": 0.39168018753143885
+      },
+      "9": {
+        "empirical_mean": 0.09754015730900434,
+        "analytic": 0.09937539038101187,
+        "count": 36,
+        "relative_error": 0.018467681635977725
+      },
+      "10": {
+        "empirical_mean": 0.11877687693148169,
+        "analytic": 0.09028448129010277,
+        "count": 30,
+        "relative_error": 0.31558464128322267
+      },
+      "11": {
+        "empirical_mean": 0.08003657230338422,
+        "analytic": 0.0827087237143452,
+        "count": 34,
+        "relative_error": 0.03230797539797511
+      },
+      "12": {
+        "empirical_mean": 0.08409579592752517,
+        "analytic": 0.07629846730408879,
+        "count": 43,
+        "relative_error": 0.1021950885639681
+      },
+      "13": {
+        "empirical_mean": 0.09720667296834087,
+        "analytic": 0.0708039618095833,
+        "count": 29,
+        "relative_error": 0.37289878255349224
+      },
+      "14": {
+        "empirical_mean": 0.05827432820107162,
+        "analytic": 0.06604205704767853,
+        "count": 33,
+        "relative_error": 0.1176179118860435
+      },
+      "15": {
+        "empirical_mean": 0.06935814606606303,
+        "analytic": 0.06187539038101187,
+        "count": 31,
+        "relative_error": 0.1209326622260381
+      },
+      "16": {
+        "empirical_mean": 0.05653704715169532,
+        "analytic": 0.058198919792776575,
+        "count": 31,
+        "relative_error": 0.028555042722416945
+      },
+      "17": {
+        "empirical_mean": 0.07785265265379034,
+        "analytic": 0.05493094593656742,
+        "count": 29,
+        "relative_error": 0.41728221363040424
+      },
+      "18": {
+        "empirical_mean": 0.046908059263236414,
+        "analytic": 0.05200696932838029,
+        "count": 21,
+        "relative_error": 0.098042822548427
+      },
+      "19": {
+        "empirical_mean": 0.04403383801363239,
+        "analytic": 0.049375390381011866,
+        "count": 17,
+        "relative_error": 0.10818248374667347
+      },
+      "20": {
+        "empirical_mean": 0.05617239616014572,
+        "analytic": 0.04699443800005949,
+        "count": 21,
+        "relative_error": 0.19529881727864515
+      },
+      "21": {
+        "empirical_mean": 0.03782663482408416,
+        "analytic": 0.04482993583555732,
+        "count": 22,
+        "relative_error": 0.15621929590000483
+      },
+      "22": {
+        "empirical_mean": 0.06170912094992613,
+        "analytic": 0.042853651250577086,
+        "count": 22,
+        "relative_error": 0.43999680655204676
+      },
+      "23": {
+        "empirical_mean": 0.059905356540343326,
+        "analytic": 0.041042057047678535,
+        "count": 12,
+        "relative_error": 0.45960901693478245
+      },
+      "24": {
+        "empirical_mean": 0.0315534577726986,
+        "analytic": 0.039375390381011864,
+        "count": 19,
+        "relative_error": 0.19865028721303202
+      },
+      "25": {
+        "empirical_mean": 0.03718240935888062,
+        "analytic": 0.03783692884255033,
+        "count": 21,
+        "relative_error": 0.0172984304934827
+      },
+      "26": {
+        "empirical_mean": 0.02133768950784165,
+        "analytic": 0.036412427418048905,
+        "count": 25,
+        "relative_error": 0.4139998066356601
+      },
+      "27": {
+        "empirical_mean": 0.04675077595538992,
+        "analytic": 0.03508967609529758,
+        "count": 21,
+        "relative_error": 0.3323228127960708
+      },
+      "28": {
+        "empirical_mean": 0.038045894710005565,
+        "analytic": 0.033858149001701525,
+        "count": 21,
+        "relative_error": 0.12368501621555233
+      },
+      "29": {
+        "empirical_mean": 0.03841193083081132,
+        "analytic": 0.0327087237143452,
+        "count": 15,
+        "relative_error": 0.17436348682614103
+      },
+      "30": {
+        "empirical_mean": 0.03443949691353247,
+        "analytic": 0.0316334548971409,
+        "count": 13,
+        "relative_error": 0.08870488618823567
+      },
+      "31": {
+        "empirical_mean": 0.03271896891469005,
+        "analytic": 0.030625390381011867,
+        "count": 13,
+        "relative_error": 0.06836087663314247
+      },
+      "32": {
+        "empirical_mean": 0.041635631231448623,
+        "analytic": 0.02967842068404217,
+        "count": 12,
+        "relative_error": 0.4028924138081155
+      },
+      "33": {
+        "empirical_mean": 0.025993270536573482,
+        "analytic": 0.02878715508689422,
+        "count": 15,
+        "relative_error": 0.09705316631280089
+      },
+      "34": {
+        "empirical_mean": 0.02374850679030965,
+        "analytic": 0.027946818952440437,
+        "count": 17,
+        "relative_error": 0.1502250459802035
+      },
+      "35": {
+        "empirical_mean": 0.023604153782903047,
+        "analytic": 0.027153168158789646,
+        "count": 11,
+        "relative_error": 0.13070350962849842
+      },
+      "36": {
+        "empirical_mean": 0.02809788690641567,
+        "analytic": 0.026402417408038895,
+        "count": 10,
+        "relative_error": 0.06421644928091115
+      },
+      "37": {
+        "empirical_mean": 0.03543723960759659,
+        "analytic": 0.02569117985469608,
+        "count": 14,
+        "relative_error": 0.37935430789952745
+      },
+      "38": {
+        "empirical_mean": 0.02625931725921358,
+        "analytic": 0.025016416022037507,
+        "count": 15,
+        "relative_error": 0.049683425318845544
+      },
+      "39": {
+        "empirical_mean": 0.026613330928702064,
+        "analytic": 0.024375390381011868,
+        "count": 13,
+        "relative_error": 0.09181147512753372
+      },
+      "40": {
+        "empirical_mean": 0.015096302679089369,
+        "analytic": 0.023765634283450892,
+        "count": 15,
+        "relative_error": 0.3647843563089069
+      },
+      "41": {
+        "empirical_mean": 0.017303948888003816,
+        "analytic": 0.02318491419053568,
+        "count": 11,
+        "relative_error": 0.2536548228818778
+      },
+      "42": {
+        "empirical_mean": 0.027557935835261043,
+        "analytic": 0.02263120433450024,
+        "count": 14,
+        "relative_error": 0.21769639069760982
+      },
+      "43": {
+        "empirical_mean": 0.01721988082665616,
+        "analytic": 0.022102663108284595,
+        "count": 14,
+        "relative_error": 0.22091375404433747
+      },
+      "44": {
+        "empirical_mean": 0.018082699902288907,
+        "analytic": 0.02159761260323409,
+        "count": 12,
+        "relative_error": 0.16274542772467587
+      },
+      "45": {
+        "empirical_mean": 0.017926076410772047,
+        "analytic": 0.021114520815794475,
+        "count": 16,
+        "relative_error": 0.15100718755773743
+      },
+      "46": {
+        "empirical_mean": 0.014991412076583601,
+        "analytic": 0.020651986125692717,
+        "count": 13,
+        "relative_error": 0.2740934462505236
+      },
+      "47": {
+        "empirical_mean": 0.013233577815231767,
+        "analytic": 0.020208723714345202,
+        "count": 8,
+        "relative_error": 0.34515519127821587
+      },
+      "48": {
+        "empirical_mean": 0.020511616404920763,
+        "analytic": 0.01978355364631799,
+        "count": 5,
+        "relative_error": 0.036801414529400056
+      },
+      "49": {
+        "empirical_mean": 0.007887094565734165,
+        "analytic": 0.019375390381011867,
+        "count": 8,
+        "relative_error": 0.5929323533288072
+      },
+      "50": {
+        "empirical_mean": 0.012774780867687463,
+        "analytic": 0.01898323351826677,
+        "count": 8,
+        "relative_error": 0.32704926927254896
+      },
+      "51": {
+        "empirical_mean": 0.017102297747090194,
+        "analytic": 0.0186061596117811,
+        "count": 14,
+        "relative_error": 0.08082602192333581
+      },
+      "52": {
+        "empirical_mean": 0.011262062015650862,
+        "analytic": 0.018243314909313753,
+        "count": 7,
+        "relative_error": 0.38267458125709125
+      },
+      "53": {
+        "empirical_mean": 0.0237052908745415,
+        "analytic": 0.017893908899530388,
+        "count": 11,
+        "relative_error": 0.32476872480129965
+      },
+      "54": {
+        "empirical_mean": 0.008364690437619426,
+        "analytic": 0.017557208562830048,
+        "count": 10,
+        "relative_error": 0.5235751510449038
+      },
+      "55": {
+        "empirical_mean": 0.01210169700988741,
+        "analytic": 0.017232533238154726,
+        "count": 6,
+        "relative_error": 0.29774126400099316
+      },
+      "56": {
+        "empirical_mean": 0.019073992417708078,
+        "analytic": 0.016919250030134676,
+        "count": 11,
+        "relative_error": 0.12735448579195977
+      },
+      "57": {
+        "empirical_mean": 0.02467025479553529,
+        "analytic": 0.016616769691356694,
+        "count": 6,
+        "relative_error": 0.4846600906051951
+      },
+      "58": {
+        "empirical_mean": 0.018498035713330196,
+        "analytic": 0.016324542923384748,
+        "count": 9,
+        "relative_error": 0.13314264296073744
+      },
+      "59": {
+        "empirical_mean": 0.012894186284945236,
+        "analytic": 0.016042057047678533,
+        "count": 8,
+        "relative_error": 0.19622612944072715
+      },
+      "60": {
+        "empirical_mean": 0.007568817893104215,
+        "analytic": 0.015768833003962687,
+        "count": 7,
+        "relative_error": 0.5200140751568503
+      },
+      "61": {
+        "empirical_mean": 0.015534094849099496,
+        "analytic": 0.015504422639076384,
+        "count": 7,
+        "relative_error": 0.0019137900658311158
+      },
+      "63": {
+        "empirical_mean": 0.029809520463605157,
+        "analytic": 0.015000390381011867,
+        "count": 7,
+        "relative_error": 0.9872496452718535
+      },
+      "64": {
+        "empirical_mean": 0.01455387614356165,
+        "analytic": 0.014760005765627252,
+        "count": 5,
+        "relative_error": 0.0139654160939172
+      },
+      "65": {
+        "empirical_mean": 0.012637986624954592,
+        "analytic": 0.014526905532527019,
+        "count": 8,
+        "relative_error": 0.13002899367266973
+      },
+      "68": {
+        "empirical_mean": 0.020991028718454798,
+        "analytic": 0.013868144004200273,
+        "count": 5,
+        "relative_error": 0.5136148508479003
+      },
+      "69": {
+        "empirical_mean": 0.017868914285137316,
+        "analytic": 0.013661104666726154,
+        "count": 6,
+        "relative_error": 0.308013862792514
+      },
+      "72": {
+        "empirical_mean": 0.008290659311634382,
+        "analytic": 0.013074020517998169,
+        "count": 6,
+        "relative_error": 0.36586765331894955
+      },
+      "74": {
+        "empirical_mean": 0.01243186804409537,
+        "analytic": 0.012708723714345201,
+        "count": 6,
+        "relative_error": 0.02178469502309858
+      },
+      "75": {
+        "empirical_mean": 0.009570383977368804,
+        "analytic": 0.012533285117853973,
+        "count": 7,
+        "relative_error": 0.23640259617683504
+      },
+      "79": {
+        "empirical_mean": 0.013873128599254714,
+        "analytic": 0.011875390381011867,
+        "count": 5,
+        "relative_error": 0.16822505653684666
+      },
+      "81": {
+        "empirical_mean": 0.010127094787006907,
+        "analytic": 0.01157051233223138,
+        "count": 6,
+        "relative_error": 0.12474966568279075
+      },
+      "82": {
+        "empirical_mean": 0.009567812157268141,
+        "analytic": 0.011423583152096205,
+        "count": 5,
+        "relative_error": 0.16245086765858863
+      },
+      "84": {
+        "empirical_mean": 0.0075230575045174,
+        "analytic": 0.01114009626336481,
+        "count": 8,
+        "relative_error": 0.3246864904338719
+      },
+      "92": {
+        "empirical_mean": 0.015790834929173592,
+        "analytic": 0.010128078553054878,
+        "count": 5,
+        "relative_error": 0.5591145789850422
+      },
+      "111": {
+        "empirical_mean": 0.003575629916957079,
+        "analytic": 0.008303961809583297,
+        "count": 5,
+        "relative_error": 0.5694067483751459
+      }
+    },
+    "0.7": {
+      "1": {
+        "empirical_mean": 0.49733324518365285,
+        "analytic": 0.49937539038101186,
+        "count": 490,
+        "relative_error": 0.0040893989505588245
+      },
+      "2": {
+        "empirical_mean": 0.31059551587246675,
+        "analytic": 0.3327087237143452,
+        "count": 245,
+        "relative_error": 0.0664641659978361
+      },
+      "3": {
+        "empirical_mean": 0.23968499831721024,
+        "analytic": 0.24937539038101186,
+        "count": 202,
+        "relative_error": 0.038858654212013524
+      },
+      "4": {
+        "empirical_mean": 0.19270134574824663,
+        "analytic": 0.19937539038101187,
+        "count": 151,
+        "relative_error": 0.03347476646947732
+      },
+      "5": {
+        "empirical_mean": 0.1633746893754353,
+        "analytic": 0.16604205704767852,
+        "count": 137,
+        "relative_error": 0.016064409943302993
+      },
+      "6": {
+        "empirical_mean": 0.1376447131950476,
+        "analytic": 0.1422325332381547,
+        "count": 117,
+        "relative_error": 0.032255771156274475
+      },
+      "7": {
+        "empirical_mean": 0.12078308430438893,
+        "analytic": 0.12437539038101186,
+        "count": 93,
+        "relative_error": 0.028882772272056833
+      },
+      "8": {
+        "empirical_mean": 0.10163402782029193,
+        "analytic": 0.11048650149212298,
+        "count": 68,
+        "relative_error": 0.08012267156872713
+      },
+      "9": {
+        "empirical_mean": 0.08817688547128232,
+        "analytic": 0.09937539038101187,
+        "count": 53,
+        "relative_error": 0.11268891489928985
+      },
+      "10": {
+        "empirical_mean": 0.11472652065925264,
+        "analytic": 0.09028448129010277,
+        "count": 48,
+        "relative_error": 0.2707224876289926
+      },
+      "11": {
+        "empirical_mean": 0.08760411881557514,
+        "analytic": 0.0827087237143452,
+        "count": 50,
+        "relative_error": 0.05918837676830054
+      },
+      "12": {
+        "empirical_mean": 0.04902546862358395,
+        "analytic": 0.07629846730408879,
+        "count": 32,
+        "relative_error": 0.35745146192528165
+      },
+      "13": {
+        "empirical_mean": 0.07301663837368012,
+        "analytic": 0.0708039618095833,
+        "count": 36,
+        "relative_error": 0.031250745121402745
+      },
+      "14": {
+        "empirical_mean": 0.07881790775857024,
+        "analytic": 0.06604205704767853,
+        "count": 34,
+        "relative_error": 0.19345022372135212
+      },
+      "15": {
+        "empirical_mean": 0.05193546341157547,
+        "analytic": 0.06187539038101187,
+        "count": 25,
+        "relative_error": 0.16064427081961064
+      },
+      "16": {
+        "empirical_mean": 0.06278940610469771,
+        "analytic": 0.058198919792776575,
+        "count": 23,
+        "relative_error": 0.07887579921184196
+      },
+      "17": {
+        "empirical_mean": 0.05485581427960618,
+        "analytic": 0.05493094593656742,
+        "count": 21,
+        "relative_error": 0.0013677473722735671
+      },
+      "18": {
+        "empirical_mean": 0.07325423923175818,
+        "analytic": 0.05200696932838029,
+        "count": 25,
+        "relative_error": 0.408546588616215
+      },
+      "19": {
+        "empirical_mean": 0.05243984385425747,
+        "analytic": 0.049375390381011866,
+        "count": 17,
+        "relative_error": 0.06206438976174842
+      },
+      "20": {
+        "empirical_mean": 0.03289803387483387,
+        "analytic": 0.04699443800005949,
+        "count": 13,
+        "relative_error": 0.29995898930013315
+      },
+      "21": {
+        "empirical_mean": 0.061026730358610635,
+        "analytic": 0.04482993583555732,
+        "count": 14,
+        "relative_error": 0.3612941714319088
+      },
+      "22": {
+        "empirical_mean": 0.021881630928558753,
+        "analytic": 0.042853651250577086,
+        "count": 6,
+        "relative_error": 0.4893870116081629
+      },
+      "23": {
+        "empirical_mean": 0.04491075075644841,
+        "analytic": 0.041042057047678535,
+        "count": 9,
+        "relative_error": 0.09426169122750393
+      },
+      "25": {
+        "empirical_mean": 0.03281080364223122,
+        "analytic": 0.03783692884255033,
+        "count": 12,
+        "relative_error": 0.1328365000561798
+      },
+      "26": {
+        "empirical_mean": 0.0407040948326826,
+        "analytic": 0.036412427418048905,
+        "count": 8,
+        "relative_error": 0.11786271113873616
+      },
+      "29": {
+        "empirical_mean": 0.02815194267993415,
+        "analytic": 0.0327087237143452,
+        "count": 5,
+        "relative_error": 0.13931393576242068
+      },
+      "30": {
+        "empirical_mean": 0.030538050777942305,
+        "analytic": 0.0316334548971409,
+        "count": 8,
+        "relative_error": 0.03462802664964684
+      },
+      "32": {
+        "empirical_mean": 0.03789005791017863,
+        "analytic": 0.02967842068404217,
+        "count": 5,
+        "relative_error": 0.2766871362043799
+      }
+    }
+  }
+}

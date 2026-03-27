@@ -1,0 +1,114 @@
+[
+  {
+    "p": 0.0,
+    "prevalence": 0.0,
+    "mean_gap": 0,
+    "n_disagree": 0,
+    "n_total": 32000
+  },
+  {
+    "p": 0.05,
+    "prevalence": 0.0,
+    "mean_gap": 0,
+    "n_disagree": 0,
+    "n_total": 31998
+  },
+  {
+    "p": 0.1,
+    "prevalence": 0.0,
+    "mean_gap": 0,
+    "n_disagree": 0,
+    "n_total": 31983
+  },
+  {
+    "p": 0.15,
+    "prevalence": 0.0001251838637999562,
+    "mean_gap": 0.010757889741771387,
+    "n_disagree": 4,
+    "n_total": 31953
+  },
+  {
+    "p": 0.2,
+    "prevalence": 0.00015682830437237311,
+    "mean_gap": 0.16647943359750203,
+    "n_disagree": 5,
+    "n_total": 31882
+  },
+  {
+    "p": 0.25,
+    "prevalence": 0.00025170688732970454,
+    "mean_gap": 0.23547783743200332,
+    "n_disagree": 8,
+    "n_total": 31783
+  },
+  {
+    "p": 0.3,
+    "prevalence": 0.000600999557158221,
+    "mean_gap": 0.24116871942418433,
+    "n_disagree": 19,
+    "n_total": 31614
+  },
+  {
+    "p": 0.35,
+    "prevalence": 0.0014654348518636509,
+    "mean_gap": 0.2056254569740259,
+    "n_disagree": 46,
+    "n_total": 31390
+  },
+  {
+    "p": 0.4,
+    "prevalence": 0.0023459845100748788,
+    "mean_gap": 0.25697472596598975,
+    "n_disagree": 73,
+    "n_total": 31117
+  },
+  {
+    "p": 0.45,
+    "prevalence": 0.003535976124051126,
+    "mean_gap": 0.2708641115716165,
+    "n_disagree": 109,
+    "n_total": 30826
+  },
+  {
+    "p": 0.5,
+    "prevalence": 0.006317244102260389,
+    "mean_gap": 0.24024033502862865,
+    "n_disagree": 192,
+    "n_total": 30393
+  },
+  {
+    "p": 0.55,
+    "prevalence": 0.009089390142021722,
+    "mean_gap": 0.2656591341149651,
+    "n_disagree": 272,
+    "n_total": 29925
+  },
+  {
+    "p": 0.6,
+    "prevalence": 0.01289530242554498,
+    "mean_gap": 0.24060664715655738,
+    "n_disagree": 378,
+    "n_total": 29313
+  },
+  {
+    "p": 0.65,
+    "prevalence": 0.021805008882232052,
+    "mean_gap": 0.25643116972727514,
+    "n_disagree": 626,
+    "n_total": 28709
+  },
+  {
+    "p": 0.7,
+    "prevalence": 0.03421344893060581,
+    "mean_gap": 0.2618083834459011,
+    "n_disagree": 955,
+    "n_total": 27913
+  },
+  {
+    "p": 0.8,
+    "prevalence": 0.06634205721241632,
+    "mean_gap": 0.23793507962054644,
+    "n_disagree": 1744,
+    "n_total": 26288
+  }
+]

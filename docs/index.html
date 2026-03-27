@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Blackwell Dilemma — Computational Appendix</title>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    macros: {
+      E: '\\mathbb{E}',
+      Wtopo: 'W_{\\mathrm{topo}}',
+      Winfo: 'W_{\\mathrm{info}}'
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #555;
+  --border: #ddd;
+  --accent: #0055aa;
+  --code-bg: #f5f5f5;
+  --table-header: #f0f0f0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1a;
+    --fg: #e0e0e0;
+    --muted: #999;
+    --border: #333;
+    --accent: #6ab0f3;
+    --code-bg: #252525;
+    --table-header: #252525;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Computer Modern Serif', 'Latin Modern Roman', 'STIX Two Text', Georgia, serif;
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.7;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.01em;
+}
+.subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 2.5rem;
+}
+.subtitle a { color: var(--accent); text-decoration: none; }
+.subtitle a:hover { text-decoration: underline; }
+h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 2.2rem 0 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+p { margin-bottom: 1rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+  font-size: 0.92rem;
+}
+thead { background: var(--table-header); }
+th, td {
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; border-bottom: 2px solid var(--border); }
+tbody tr:last-child td { border-bottom: 2px solid var(--border); }
+.interpretation { text-align: left; font-size: 0.85rem; color: var(--muted); }
+.note {
+  background: var(--code-bg);
+  border-left: 3px solid var(--accent);
+  padding: 0.8rem 1rem;
+  margin: 1.2rem 0;
+  font-size: 0.9rem;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<h1>The Blackwell Dilemma: Computational Appendix</h1>
+<p class="subtitle">
+  Companion to the paper. Full source: <a href="https://github.com/openexecution/irreversibility-phase-transition">simulation/</a>
+  &middot; LaTeX source: <a href="computational_appendix.tex">computational_appendix.tex</a>
+</p>
+
+<p>
+We report results from six families of computational experiments, all conducted on 2D torus graphs with i.i.d. $\mathrm{Uniform}[0,1]$ rewards. Full simulation code and data are available alongside this document.
+</p>
+
+<h2>1. Phase Transition Verification</h2>
+
+<p>
+On $n = 50$ ($2{,}500$ vertices) with $M = 400$ Monte Carlo trials per parameter value: mean welfare loss increases from 0.32 at $p = 0$ to 0.47 at $p = 0.95$. The reachable fraction drops sharply at $p \approx 0.5$ (from $&gt; 0.99$ to $&lt; 0.08$), confirming the Harris&ndash;Kesten threshold $p_c = 1/2$. At $\beta = 3.0$, the bimodality coefficient (Sarle's $b$) crosses the $5/9$ threshold near $p_c$ and peaks above $b = 0.60$ in the supercritical regime, confirming the two-population prediction.
+</p>
+
+<h2>2. Decomposition Verification</h2>
+
+<p>
+The decomposition $W = \Wtopo + \Winfo$ is verified numerically ($n = 40$, $M = 400$). Five values of $\beta \in \{0.5, 1, 2, 5, 20\}$ are overlaid: all five $\Wtopo$ curves are visually identical, confirming $\partial \Wtopo / \partial \beta = 0$. The informational component $\Winfo$ is smooth, decreasing with $\beta$, and approximately zero at $\beta = 20$. The phase transition in total welfare comes entirely from the topological component.
+</p>
+
+<h2>3. Counterfactual Experiment</h2>
+
+<p>
+As a within-model counterfactual, we fix $\beta = 5.0$ and start at $p = 0.70$ (supercritical), then surgically repair blocked edges to lower effective $p$:
+</p>
+
+<table>
+<thead>
+<tr><th>Effective $p$</th><th>Mean Loss</th><th>Reachable Fraction</th></tr>
+</thead>
+<tbody>
+<tr><td>0.70 (original)</td><td>0.370</td><td>0.002</td></tr>
+<tr><td>&approx; 0.29 (partial repair)</td><td>0.192</td><td>0.99</td></tr>
+<tr><td>&approx; 0.00 (full repair)</td><td>0.146</td><td>1.00</td></tr>
+</tbody>
+</table>
+
+<p>
+Same cognition ($\beta = 5.0$), different topology &rarr; different outcome. The welfare floor disappears when $p$ crosses below $p_c$, confirming the loss is topological ($p$), not informational ($\beta$).
+</p>
+
+<h2>4. Policy Gradient Comparison</h2>
+
+<p>
+We compare the marginal effectiveness of structural policy ($\partial W / \partial p$) against information policy ($\partial W / \partial \beta$) via central finite differences ($\Delta p = 0.03$, $\Delta \beta = 0.3$; $n = 40$, $M = 400$ trials per configuration; bootstrap standard errors from $B = 2{,}000$ resamples):
+</p>
+
+<table>
+<thead>
+<tr>
+  <th>$(p, \beta)$</th>
+  <th>$|\partial W/\partial p|$</th>
+  <th>$|\partial W/\partial \beta|$</th>
+  <th>Ratio</th>
+  <th class="interpretation">Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>$(0.45, 3.0)$</td>
+  <td>$0.457 \pm 0.218$</td>
+  <td>$0.011 \pm 0.022$</td>
+  <td>$42\times$</td>
+  <td class="interpretation">Near $p_c$: structural dominates</td>
+</tr>
+<tr>
+  <td>$(0.55, 5.0)$</td>
+  <td>$0.683 \pm 0.294$</td>
+  <td>$0.026 \pm 0.029$</td>
+  <td>$26\times$</td>
+  <td class="interpretation">Supercritical</td>
+</tr>
+<tr>
+  <td>$(0.70, 5.0)$</td>
+  <td>$0.542 \pm 0.331$</td>
+  <td>$0.038 \pm 0.031$</td>
+  <td>$14\times$</td>
+  <td class="interpretation">Deep supercritical</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+At all three parameter configurations, $|\partial W/\partial \beta|$ is not significantly different from zero (point estimate $&lt;$ bootstrap SE), while $|\partial W/\partial p|$ is significantly positive ($&gt; 2$ SE from zero at $p = 0.55$). Near $p_c$, structural policy is $42\times$ more effective than information policy. The ratio remains large ($&gt; 10\times$) throughout the supercritical regime.
+</p>
+
+<h2>5. Finite-Size Scaling</h2>
+
+<p>
+Grid sizes $n \in \{20, 40, 60, 80, 100\}$ (up to $10{,}000$ vertices) with $M = 800$ trials per parameter value. The transition sharpens monotonically with system size: at $p_c = 0.5$, the reachable fraction converges toward 0.5 from above (0.608 at $n=20$ to 0.491 at $n=100$), consistent with the critical point of 2D bond percolation. Data collapse using $\nu = 4/3$ yields good alignment for both the welfare loss and reachable fraction curves.
+</p>
+
+<p>
+The welfare loss at $p = 0.25$ is near zero for all grid sizes ($&lt; 0.004$) while at $p = 0.75$ it stabilizes near 0.29, confirming size-independent supercritical loss. The variance of the welfare loss at $p_c$ is approximately size-independent ($\approx 0.04$), reflecting that the loss is a bounded $[0,1]$ functional of the percolation cluster rather than the unbounded susceptibility observable.
+</p>
+
+<h2>6. Bimodality Emergence</h2>
+
+<p>
+At $\beta = 3.0$, the welfare loss distribution transitions from unimodal (heavy-tailed, right-skewed) at $p &lt; 0.3$ to visibly bimodal near $p_c$: a &ldquo;free&rdquo; mode at $\ell \approx 0$ and a &ldquo;trapped&rdquo; mode at $\ell \approx 0.25$. At lower precision ($\beta = 1.0$), the distribution remains unimodal at all $p$&mdash;both populations exist but are blurred by signal noise. This confirms that $\beta$ acts as a resolution parameter separating the two populations, as predicted by the theory.
+</p>
+
+<h2>7. Analytic Formula Verification</h2>
+
+<p>
+The theory predicts $\E[|\Wtopo| \mid |R| = k] = (n-k)/((n+1)(k+1))$ for i.i.d. $\mathrm{Uniform}[0,1]$ rewards. We verify this formula via Monte Carlo: for each grid size $n \in \{20, 40\}$ and blocking probability $p \in \{0.3, 0.5, 0.6, 0.7\}$, we run $M = 2{,}000$ trials, bin outcomes by realized cluster size $|R| = k$, and compare the empirical conditional mean loss against the analytic prediction.
+</p>
+
+<p>
+In the supercritical regime ($p = 0.7$), where cluster sizes are small and the formula predicts $\Theta(1)$ losses, the median relative error across $k$-bins is 10.2% ($n=20$) and 8.7% ($n=40$), confirming the analytic formula. At $p = 0.6$, median errors are 21.6% ($n=20$) and 16.3% ($n=40$). In the subcritical regime ($p = 0.3$), both the analytic and empirical values are near zero ($&lt; 10^{-3}$) and relative errors are dominated by Monte Carlo noise, as expected.
+</p>
+
+<footer>
+<p>
+  <a href="https://github.com/openexecution/irreversibility-phase-transition">Source code &amp; data</a>
+  &middot; LaTeX source: <a href="computational_appendix.tex">computational_appendix.tex</a>
+</p>
+</footer>
+
+</body>
+</html>

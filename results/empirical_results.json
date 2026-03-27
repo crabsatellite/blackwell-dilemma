@@ -1,0 +1,409 @@
+{
+  "github_data": {
+    "TensorFlow": {
+      "repo": "tensorflow/tensorflow",
+      "stars": 194350,
+      "forks": 75248,
+      "issues": 4018,
+      "watchers": 7395,
+      "size": 1295458,
+      "created": "2015-11-07T01:19:20Z",
+      "pushed": "2026-03-26T14:15:18Z",
+      "commits_52w": 13430,
+      "commits_4w": 855
+    },
+    "PyTorch": {
+      "repo": "pytorch/pytorch",
+      "stars": 98586,
+      "forks": 27311,
+      "issues": 18116,
+      "watchers": 1781,
+      "size": 1282852,
+      "created": "2016-08-13T05:26:41Z",
+      "pushed": "2026-03-26T14:15:18Z",
+      "commits_52w": 15821,
+      "commits_4w": 1389
+    },
+    "JAX": {
+      "repo": "jax-ml/jax",
+      "stars": 35231,
+      "forks": 3489,
+      "issues": 2253,
+      "watchers": 331,
+      "size": 160856,
+      "created": "2018-10-25T21:25:02Z",
+      "pushed": "2026-03-26T13:55:35Z",
+      "commits_52w": 7854,
+      "commits_4w": 730
+    },
+    "MXNet": {
+      "repo": "apache/mxnet",
+      "stars": 20817,
+      "forks": 6719,
+      "issues": 2007,
+      "watchers": 1054,
+      "size": 101275,
+      "created": "2015-04-30T16:21:15Z",
+      "pushed": "2023-10-25T21:28:33Z",
+      "commits_52w": 0,
+      "commits_4w": 0
+    }
+  },
+  "proxies": {
+    "TensorFlow": {
+      "q": 1.0,
+      "e": 0.8191,
+      "p": 0.3897
+    },
+    "PyTorch": {
+      "q": 0.9443,
+      "e": 0.8216,
+      "p": 0.389
+    },
+    "JAX": {
+      "q": 0.8598,
+      "e": 0.3771,
+      "p": 0.2271
+    },
+    "MXNet": {
+      "q": 0.8166,
+      "e": 0.2582,
+      "p": 0.1928
+    }
+  },
+  "p_estimates": {
+    "TensorFlow": {
+      "p_hat": 0.975,
+      "size_factor": 1.0,
+      "age_factor": 0.9167,
+      "base_factor": 1.0
+    },
+    "PyTorch": {
+      "p_hat": 0.7586,
+      "size_factor": 0.9993,
+      "age_factor": 0.8333,
+      "base_factor": 0.3629
+    },
+    "JAX": {
+      "p_hat": 0.5546,
+      "size_factor": 0.8518,
+      "age_factor": 0.6667,
+      "base_factor": 0.0464
+    },
+    "MXNet": {
+      "p_hat": 0.6294,
+      "size_factor": 0.8189,
+      "age_factor": 0.9167,
+      "base_factor": 0.0893
+    }
+  },
+  "platforms": [
+    {
+      "name": "TensorFlow",
+      "archetype": "high-visibility incumbent",
+      "q0": 0.3,
+      "e0": 0.57337,
+      "q_drift": 0.0875,
+      "e_drift": -0.035835625,
+      "V_T": 0.6433425
+    },
+    {
+      "name": "PyTorch",
+      "archetype": "ecosystem-first challenger",
+      "q0": 0.09443000000000001,
+      "e0": 0.08216000000000001,
+      "q_drift": 0.10623375,
+      "e_drift": 0.09243,
+      "V_T": 0.88295
+    },
+    {
+      "name": "JAX",
+      "archetype": "rising research star",
+      "q0": 0.0,
+      "e0": 0.0,
+      "q_drift": 0.107475,
+      "e_drift": 0.0471375,
+      "V_T": 0.6184499999999999
+    },
+    {
+      "name": "MXNet",
+      "archetype": "abandoned by sponsor",
+      "q0": 0.53079,
+      "e0": 0.15491999999999997,
+      "q_drift": -0.015311249999999998,
+      "e_drift": -0.019364999999999997,
+      "V_T": 0.20415
+    }
+  ],
+  "parameters": {
+    "T": 8,
+    "switching_cost": 0.7293999999999999,
+    "w_e": 0.5,
+    "years": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ]
+  },
+  "beta_sweep": [
+    {
+      "beta": 0.001,
+      "greedy_value": 0.58701440375,
+      "random_value": 0.59040366975,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.29593559625,
+      "random_regret": 0.29254633025,
+      "trap_rate": 0.2595,
+      "choice_distribution": {
+        "TensorFlow": 0.2595,
+        "PyTorch": 0.2491,
+        "JAX": 0.2409,
+        "MXNet": 0.2505
+      }
+    },
+    {
+      "beta": 0.1,
+      "greedy_value": 0.6087248775,
+      "random_value": 0.5847112392500001,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.2742251225,
+      "random_regret": 0.2982387607499999,
+      "trap_rate": 0.279,
+      "choice_distribution": {
+        "TensorFlow": 0.279,
+        "PyTorch": 0.2598,
+        "JAX": 0.2551,
+        "MXNet": 0.2061
+      }
+    },
+    {
+      "beta": 0.25,
+      "greedy_value": 0.6236447445,
+      "random_value": 0.58341481675,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.25930525550000005,
+      "random_regret": 0.29953518325000006,
+      "trap_rate": 0.2994,
+      "choice_distribution": {
+        "TensorFlow": 0.2994,
+        "PyTorch": 0.2709,
+        "JAX": 0.2513,
+        "MXNet": 0.1784
+      }
+    },
+    {
+      "beta": 0.5,
+      "greedy_value": 0.644731885,
+      "random_value": 0.58710634725,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.238218115,
+      "random_regret": 0.29584365275,
+      "trap_rate": 0.334,
+      "choice_distribution": {
+        "TensorFlow": 0.334,
+        "PyTorch": 0.2891,
+        "JAX": 0.2357,
+        "MXNet": 0.1412
+      }
+    },
+    {
+      "beta": 0.75,
+      "greedy_value": 0.660709263,
+      "random_value": 0.5872817852500001,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.22224073700000002,
+      "random_regret": 0.29566821474999994,
+      "trap_rate": 0.3596,
+      "choice_distribution": {
+        "TensorFlow": 0.3596,
+        "PyTorch": 0.2976,
+        "JAX": 0.2332,
+        "MXNet": 0.1096
+      }
+    },
+    {
+      "beta": 1.0,
+      "greedy_value": 0.6655026477500001,
+      "random_value": 0.58539975725,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.2174473522499999,
+      "random_regret": 0.29755024274999997,
+      "trap_rate": 0.4043,
+      "choice_distribution": {
+        "TensorFlow": 0.4043,
+        "PyTorch": 0.2899,
+        "JAX": 0.21,
+        "MXNet": 0.0958
+      }
+    },
+    {
+      "beta": 1.5,
+      "greedy_value": 0.6599530530000001,
+      "random_value": 0.5886063185000001,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.22299694699999995,
+      "random_regret": 0.2943436814999999,
+      "trap_rate": 0.4916,
+      "choice_distribution": {
+        "TensorFlow": 0.4916,
+        "PyTorch": 0.2571,
+        "JAX": 0.1578,
+        "MXNet": 0.0935
+      }
+    },
+    {
+      "beta": 2.0,
+      "greedy_value": 0.5909113810000001,
+      "random_value": 0.58290348,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.29203861899999994,
+      "random_regret": 0.30004652,
+      "trap_rate": 0.4972,
+      "choice_distribution": {
+        "TensorFlow": 0.4972,
+        "PyTorch": 0.1904,
+        "JAX": 0.0945,
+        "MXNet": 0.2179
+      }
+    },
+    {
+      "beta": 3.0,
+      "greedy_value": 0.3177655335,
+      "random_value": 0.5882092790000001,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.5651844665000001,
+      "random_regret": 0.29474072099999993,
+      "trap_rate": 0.1902,
+      "choice_distribution": {
+        "TensorFlow": 0.1902,
+        "PyTorch": 0.0387,
+        "JAX": 0.0092,
+        "MXNet": 0.7619
+      }
+    },
+    {
+      "beta": 5.0,
+      "greedy_value": 0.20415,
+      "random_value": 0.5845127865,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.6788000000000001,
+      "random_regret": 0.29843721349999996,
+      "trap_rate": 0.0,
+      "choice_distribution": {
+        "TensorFlow": 0.0,
+        "PyTorch": 0.0,
+        "JAX": 0.0,
+        "MXNet": 1.0
+      }
+    },
+    {
+      "beta": 10.0,
+      "greedy_value": 0.20415,
+      "random_value": 0.586306737,
+      "oracle_value": 0.88295,
+      "greedy_regret": 0.6788000000000001,
+      "random_regret": 0.296643263,
+      "trap_rate": 0.0,
+      "choice_distribution": {
+        "TensorFlow": 0.0,
+        "PyTorch": 0.0,
+        "JAX": 0.0,
+        "MXNet": 1.0
+      }
+    }
+  ],
+  "audit": {
+    "metadata": {
+      "T": 8,
+      "beta": 5.0,
+      "switching_cost": 0.7293999999999999,
+      "w_ecosystem": 0.5,
+      "n_platforms": 4,
+      "platform_names": [
+        "TensorFlow",
+        "PyTorch",
+        "JAX",
+        "MXNet"
+      ]
+    },
+    "summary": {
+      "terminal_platform": "MXNet",
+      "terminal_value": 0.20415,
+      "oracle_value": 0.88295,
+      "total_regret": 0.6788000000000001,
+      "n_switches": 0,
+      "n_trap_events": 8,
+      "mean_structural_regret": 0.6788,
+      "reversal_detected": "True"
+    },
+    "diagnostics": {
+      "c1_all_periods": true,
+      "c2_any_period": true,
+      "c3_all_periods": true,
+      "blackwell_dilemma": true
+    },
+    "top_trap_events": [
+      {
+        "event_id": "t0_MXNet",
+        "period": 0,
+        "platform": "MXNet",
+        "quality_signal": 0.5306,
+        "ecosystem_hidden": 0.1549,
+        "structural_regret": 0.6788,
+        "c1": "True",
+        "c2": "True",
+        "c3": true
+      },
+      {
+        "event_id": "t1_MXNet",
+        "period": 1,
+        "platform": "MXNet",
+        "quality_signal": 0.4937,
+        "ecosystem_hidden": 0.1356,
+        "structural_regret": 0.6788,
+        "c1": "True",
+        "c2": "True",
+        "c3": true
+      },
+      {
+        "event_id": "t2_MXNet",
+        "period": 2,
+        "platform": "MXNet",
+        "quality_signal": 0.5179,
+        "ecosystem_hidden": 0.1162,
+        "structural_regret": 0.6788,
+        "c1": "True",
+        "c2": "True",
+        "c3": true
+      },
+      {
+        "event_id": "t3_MXNet",
+        "period": 3,
+        "platform": "MXNet",
+        "quality_signal": 0.4994,
+        "ecosystem_hidden": 0.0968,
+        "structural_regret": 0.6788,
+        "c1": "True",
+        "c2": "True",
+        "c3": true
+      },
+      {
+        "event_id": "t4_MXNet",
+        "period": 4,
+        "platform": "MXNet",
+        "quality_signal": 0.4415,
+        "ecosystem_hidden": 0.0775,
+        "structural_regret": 0.6788,
+        "c1": "True",
+        "c2": "True",
+        "c3": true
+      }
+    ]
+  }
+}

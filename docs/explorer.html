@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackwell 困境 — 交互式解读</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif;background:#f8f9fa;color:#333}
+
+header{background:#1a1a2e;color:#fff;padding:14px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:17px;font-weight:600}
+.lang-sw{margin-left:auto;display:flex;gap:2px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden}
+.lang-sw button{padding:4px 12px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:12px;cursor:pointer}
+.lang-sw button.active{background:rgba(255,255,255,.15);color:#ffd700}
+
+.progress-bar{display:flex;background:#fff;border-bottom:1px solid #e0e0e0;padding:0 16px;overflow-x:auto}
+.step-dot{padding:10px 14px;font-size:12px;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.step-dot:hover{color:#666}
+.step-dot.active{color:#1a1a2e;border-bottom-color:#ffd700;font-weight:600}
+
+.main{display:flex;justify-content:center;min-height:calc(100vh - 95px);padding:20px}
+.content{max-width:820px;width:100%}
+
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);padding:24px;margin-bottom:16px}
+.card h2{font-size:18px;margin-bottom:12px;color:#1a1a2e}
+.card p,.card li{font-size:14px;line-height:1.9;color:#555;margin-bottom:10px}
+.card ul{padding-left:1.5em;margin-bottom:10px}
+.card .hl{background:#fff8e1;border-left:4px solid #ffd700;padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;line-height:1.8}
+.card .hl-blue{background:#e8f0fe;border-left:4px solid #4285f4;padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;line-height:1.8}
+.card .try-it{background:#e8f5e9;border:1px solid #c8e6c9;border-radius:8px;padding:12px;margin:12px 0;font-size:13px;line-height:1.8}
+.card .try-it b{color:#2e7d32}
+.card .warn{background:#fce4ec;border:1px solid #f8bbd0;border-radius:8px;padding:12px;margin:12px 0;font-size:13px;line-height:1.8}
+.formula{display:inline-block;background:#f0f4ff;padding:3px 10px;border-radius:6px;font-family:'Courier New',monospace;color:#2c3e50;font-size:14px;margin:3px 0}
+
+canvas{border:1px solid #eee;border-radius:10px;background:#fafafa;display:block;margin:10px auto}
+
+.ctrl{display:flex;gap:8px;align-items:center;margin:10px 0;flex-wrap:wrap}
+.ctrl label{font-size:13px;color:#666}
+.ctrl input[type=range]{flex:1;max-width:300px}
+.ctrl .val{font-weight:700;color:#1a1a2e;min-width:50px;font-size:14px}
+
+.btn{padding:8px 18px;border:none;border-radius:8px;font-size:13px;cursor:pointer;transition:.2s}
+.btn-primary{background:#1a1a2e;color:#fff}.btn-primary:hover{background:#2a2a4e}
+.btn-choice{background:#fff;border:2px solid #ddd;border-radius:10px;padding:12px 20px;font-size:14px;cursor:pointer;transition:.2s;min-width:120px}
+.btn-choice:hover{border-color:#ffd700;background:#fff8e1}
+.btn-choice.picked{border-color:#4caf50;background:#e8f5e9}
+.btn-choice.bad{border-color:#e74c3c;background:#fce4ec}
+.choice-row{display:flex;gap:12px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+
+.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+.data-table th{background:#f5f5f5;padding:8px;text-align:center;font-weight:600;border-bottom:2px solid #eee}
+.data-table td{padding:6px 8px;text-align:center;border-bottom:1px solid #f0f0f0}
+.data-table tr.hl-row{background:#fff8e1;font-weight:600}
+.data-table tr:hover{background:#f8f8f8}
+
+.result-box{text-align:center;padding:16px;border-radius:10px;margin:12px 0;font-size:15px;font-weight:600}
+.result-good{background:#e8f5e9;color:#2e7d32}
+.result-bad{background:#fce4ec;color:#c62828}
+
+.grid-container{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.grid-stats{font-size:13px;line-height:2;min-width:180px}
+.grid-stats b{color:#1a1a2e}
+
+.nav-row{display:flex;justify-content:space-between;margin-top:16px}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .3s ease}
+
+@media(max-width:600px){
+  .card{padding:16px}
+  .grid-container{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="headerTitle">Blackwell 困境 — 交互式解读</h1>
+  <div class="lang-sw">
+    <button class="active" data-lang="zh">中文</button>
+    <button data-lang="en">EN</button>
+  </div>
+</header>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="main">
+  <div class="content" id="vizArea"></div>
+</div>
+
+<script>
+// ========== i18n ==========
+let lang = 'zh';
+const L = {
+zh: {
+  title: 'Blackwell 困境 — 交互式解读',
+  header: 'Blackwell 困境 — 交互式解读',
+  steps: [
+    '① 选择与回报','② 信息的力量','③ 走了就回不来',
+    '④ 岔路口游戏','⑤ 越准越差？','⑥ 路标不是地图',
+    '⑦ 最佳模糊度','⑧ 堵一半就变天','⑨ 身边的例子','⑩ 实验验证'
+  ],
+  s0_title: '每个人每天都在做选择',
+  s0_p1: '中午去食堂，四个窗口分别卖红烧肉、糖醋排骨、炒青菜、咖喱鸡。你选哪个？',
+  s0_p2: '每个菜都有一个「回报」——好吃程度的打分。你当然想选分高的，但你事先不一定知道每道菜几分。',
+  s0_p3: '数学上可以把这件事简化：面前有若干选项，每个选项有一个分数（回报），你想挑到最大的。这种简化就叫「模型」。',
+  s0_hl: '选择问题 = 从若干选项中挑回报最大的',
+  s0_try: '点一点下面的选项，看看你能不能挑到最大的回报。',
+
+  s1_title: '信息帮你选得更好',
+  s1_p1: '如果你完全不知道哪个好，只能闭着眼睛随便选一个。选到最好的全靠运气。',
+  s1_p2: '但如果有人提前告诉你「今天A窗口的红烧肉特别好」，你就更有把握了。这种帮你判断的线索叫<b>信息</b>（也叫信号）。',
+  s1_p3: '信号不一定完全准确。朋友说「好吃」，实际可能只是一般般。信号有个<b>精度</b>：精度高的信号靠谱，精度低的模模糊糊。下面我们用字母 β（读作 beta）表示精度，β 越大信号越准。',
+  s1_hl: '有个叫 Blackwell 的数学家，在1953年证明了一件事：<b>信号越准确，你的选择就越好。</b>',
+  s1_p4: '这不是很明显吗？谁会嫌自己知道的太多？',
+  s1_try: '拖动下面的滑块调整信号精度 β，看看你的平均得分怎么变。精度越高，得分越高。',
+  s1_lbl: '信号精度 β',
+  s1_avg: '平均得分',
+
+  s2_title: '可是，有些路走了就回不来',
+  s2_p1: 'Blackwell的结论有个前提：<b>你想选什么就能选什么</b>。所有选项摆在桌上，想选哪个选哪个。',
+  s2_p2: '但现实中很多选择是<b>单行道</b>。你走了这条路，另一条就到不了了。',
+  s2_p3: '比如：',
+  s2_examples: '<ul><li>选了文科班，就很难再转理科</li><li>签了两年的租房合同，中途退租要赔钱</li><li>一款App积累了大量数据，想换到另一款就得从头开始</li></ul>',
+  s2_p4: '这种「走了就回不来」叫<b>不可逆性</b>。',
+  s2_hl: '问题来了：当选择是单行道的时候，信号越准确还是越好吗？',
+
+  s3_title: '一个岔路口的游戏',
+  s3_p1: '接下来我们用一个简化的分数来说明问题：0分最差，1分最好。（前面用的是几十分的打分，这里换成0到1，道理一样。）',
+  s3_p1b: '你站在起点 S，面前有两条路：',
+  s3_desc_a: '<b>向左走到 A</b>：回报 0.6（看起来不错）<br>但 A 是个死胡同，到了 A 就没路了。',
+  s3_desc_b: '<b>向右走到 B</b>：回报 0.4（看起来一般）<br>但 B 后面连着一个 G，G 的回报是 1.0！',
+  s3_p2: '你只能看到 A 和 B 的回报，看不到后面有没有路。你选哪个？',
+  s3_try: '点击选择你的路线：',
+  s3_btn_a: '走 A（回报 0.6）',
+  s3_btn_b: '走 B（回报 0.4）',
+  s3_result_a: '你到了 A，拿到 0.6 分。但 A 是死胡同，游戏结束了。如果你选了 B，就能继续走到 G 拿 1.0 分。',
+  s3_result_b: '你到了 B（0.4分），发现后面还有路！继续走到 G，拿到 1.0 分。',
+  s3_moral: '看到了吗？眼前回报更高的 A 其实是陷阱。回报较低的 B 才是通往最优解的桥梁。',
+  s3_reset: '再玩一次',
+
+  s4_title: '信号越准确，得分反而越低',
+  s4_p1: '刚才你可以用大脑仔细想。但如果有个人只根据信号来做决定呢？',
+  s4_p2: '假设他只能看到关于 A 和 B 回报的信号（有噪声），看不到后面的路，然后选信号看起来更高的那个。',
+  s4_cases: '<ul><li><b>β 接近 0（信号几乎没用）</b>：分不清 A 和 B 谁高，等于随机选。一半概率选A拿0.6，一半选B再走到G拿1.0。平均得分 = <span class="formula">0.5 × 0.6 + 0.5 × 1.0 = 0.80</span></li><li><b>β 非常大（信号完全准确）</b>：清清楚楚看到A是0.6、B是0.4。A更高，一定选A。得分 = <span class="formula">0.6</span></li></ul>',
+  s4_hl: '信号从完全没用变成完全准确，平均得分从 0.80 掉到 0.60。知道得越清楚，选得越差。',
+  s4_try: '拖动滑块，观察信号精度和平均得分的关系：',
+  s4_lbl: '信号精度 β',
+  s4_score: '平均得分',
+  s4_trap: '走进陷阱A的概率',
+
+  s5_title: '信号是路标，不是地图',
+  s5_p1: '为什么会这样？因为信号只告诉你眼前每条路的回报多高，就像路标上写着「前方风景80分」。',
+  s5_p2: '但信号不告诉你这条路通不通、通到哪里。你手上没有地图。',
+  s5_p3: '用论文里的说法：',
+  s5_terms: '<ul><li><b>道路结构</b>（数学家叫它「拓扑」）= 哪些路是通的，哪些路是堵的 = 地图</li><li><b>信号</b> = 每条路的回报有多高 = 路标</li></ul>',
+  s5_p4: '信号再准确，也改变不了哪条路是通的。A是死胡同这个事实，不会因为你测量得更精确就消失。',
+  s5_hl: '你拿到的分数和满分之间的差距，就是你的「损失」。这个损失可以拆成两部分：<br><br><span class="formula">总损失 = 道路损失（路不通造成的）+ 信号损失（看不准回报造成的）</span><br><br>道路损失是<b>物理障碍</b>，信号管不了，不管你的信号多准它都在那。信号损失才是信号能改善的部分，而且随着信号变准，这部分缩得很快：β 每增大一点，信号损失就小一大截。',
+  s5_p5: '所以当精度已经很高的时候，信号能管的那部分几乎为零，剩下的全是道路损失。',
+
+  s6_title: '有时候看不清反而更好',
+  s6_p1: '前面 S-A-B-G 的例子里，信号纯粹是坏事（越准越差）。但如果路口更复杂呢？',
+  s6_p2: '在 B 后面不只有 G（好目标，回报1.0），还有一个 D（干扰项，回报只有0.1）。到了B之后你要在G和D之间再做一次选择。',
+  s6_p3: '这下情况变了：',
+  s6_tradeoff: '<ul><li>在起点 S：信号越准，越容易选A掉进陷阱（坏事）</li><li>在中途 B：信号越准，越容易分清G和D选对路（好事）</li></ul>',
+  s6_p4: '一个把你推进陷阱，一个帮你选对路。两股力量拉扯，存在一个<b>最佳精度</b>，刚好在它们之间取得平衡。',
+  s6_try: '拖动滑块看损失怎么变化。找到那个最低点：',
+  s6_lbl: '信号精度 β',
+  s6_loss: '预期损失 L(β)',
+  s6_ptrap: '掉进陷阱的概率',
+  s6_pgoal: '到B后选对G的概率',
+  s6_table_title: '论文中的数据：',
+  s6_table_note: '信号完全准确时的损失是 0.400，最佳精度（β≈1.5）时的损失只有 0.273。两者相差 0.127，相当于在 0.273 的基础上多了47%。',
+
+  s7_title: '当一半的路被堵死：临界点',
+  s7_p1: '前面的例子都是小路口。如果把道路网络放大到一整座城市呢？',
+  s7_p2: '想象一个大网格，每个路口是一个选择，每条路都有可能被堵住（我们用 p 表示堵住的概率，p=0.5 就是一半的路被堵）。你从一个路口出发，只能走没被堵住的路。',
+  s7_p3: '数学家 Harris 和 Kesten 证明了一个精确的结果：在这种二维网格上，分界线恰好是 <b>p = 0.5</b>。',
+  s7_phases: '<ul><li><b>p 小于 0.5</b>（堵的路不到一半）：大部分路口都能走到，你被困在小角落的概率很低。信号有用，Blackwell的结论基本成立。</li><li><b>p 大于 0.5</b>（堵的路超过一半）：你几乎一定被困在一个很小的区域。信号再准确也帮不了你，因为好选项你根本走不到。</li></ul>',
+  s7_p4: '这种突然的翻转，和水到了0°C突然结冰很像。物理学家管这种突然的变化叫<b>相变</b>。在 p=0.5 以下，信息有用；在 p=0.5 以上，信息失效。中间没有慢慢过渡的地带，说变就变。',
+  s7_try: '拖动滑块调整堵路概率 p，看看从起点（红色）能走到的区域（绿色）怎么变化：',
+  s7_lbl: '堵路概率 p',
+  s7_reach: '能走到的路口数',
+  s7_total: '总路口数',
+  s7_frac: '能走到的比例',
+  s7_regen: '重新生成',
+
+  s8_title: '你身边的 Blackwell 困境',
+  s8_p1: '论文提出了三个条件。同时满足这三个条件的场景，都会出现Blackwell困境：',
+  s8_c1: '<b>条件一：选了就回不了头。</b>',
+  s8_c2: '<b>条件二：眼前回报最高的选项，反而通向更差的区域。</b>',
+  s8_c3: '<b>条件三：你能观察到回报，但看不到路通不通。</b>',
+  s8_ex_title: '四个例子：',
+  s8_ex1: '<b>选专业。</b>转专业代价很大（条件一）。当前薪资最高的专业，五年后未必有前途（条件二）。薪资排行榜随手可查，但哪个行业的转型空间更大，没人能告诉你（条件三）。',
+  s8_ex2: '<b>选技术平台。</b>代码迁移成本极高（条件一）。跑分第一的平台，开发者社区可能在萎缩（条件二）。性能评测到处都有，生态系统的未来走向看不到（条件三）。',
+  s8_ex3: '<b>选投资产品。</b>资金锁定，不能随时取出来（条件一）。预期收益最高的产品可能最难卖掉（条件二）。收益率算得很精确，但市场崩盘时你能不能跑，算不出来（条件三）。',
+  s8_ex4: '<b>环保政策。</b>开发了就恢复不了（条件一）。经济回报最高的方案可能毁掉不可再生的自然资源（条件二）。经济数据齐全，但生态系统的承受极限在哪，没有人知道（条件三）。',
+  s8_hl: '论文的建议：在这类场景中，与其提高信号精度（比如金融知识教育、强制信息公开），不如降低不可逆性（比如设置合同冷静期、允许转换平台、让用户能把自己的数据搬走）。实验显示，在分界线附近，降低不可逆性的效果超过提高信号精度的 <b>40 倍</b>。',
+
+  s9_title: '六组计算实验，全部验证通过',
+  s9_p1: '论文不只是理论推导，还跑了六组大规模计算实验来验证每一个预测：',
+  s9_exp1: '<b>分界线验证</b>：用电脑在50×50网格上做了400次实验。能走到的比例在 p=0.5 附近急剧下降，和理论预测完全吻合。',
+  s9_exp2: '<b>分解验证</b>：五种不同精度下，道路损失的曲线完全重合（不随精度变化），确认了损失的拆分公式。',
+  s9_exp3: '<b>「如果路况不同呢？」</b>：固定精度β=5，把堵路概率从0.70降到0.29，平均损失从0.370降到0.192。同样的判断力，只改路况，结果大不一样。',
+  s9_exp4: '<b>政策对比</b>：在分界线附近，降低堵路概率的效果超过提高信号精度的 40 倍。',
+  s9_exp5: '<b>网格放大</b>：从20×20放大到100×100，变化越来越陡峭，符合理论预测。',
+  s9_exp6: '<b>两群人现象</b>：高精度信号下，人分成了两拨：一拨几乎没有损失，另一拨损失很大。如果不考虑道路结构，我们会以为所有人的损失差不多，但实验显示确实分成了两群。',
+  s9_link: '完整实验数据和代码见',
+  s9_appendix: '计算附录',
+  s9_period: '。',
+
+  btn_prev: '上一步',
+  btn_next: '下一步',
+},
+en: {
+  title: 'The Blackwell Dilemma — Interactive Explorer',
+  header: 'The Blackwell Dilemma — Interactive Explorer',
+  steps: [
+    '① Choices & Payoffs','② The Power of Info','③ No Going Back',
+    '④ A Fork in the Road','⑤ More Info, Less Gain?','⑥ Signposts vs. Maps',
+    '⑦ The Sweet Spot','⑧ Block Half, Change All','⑨ Real Examples','⑩ Experiments'
+  ],
+  s0_title: 'We Make Choices Every Day',
+  s0_p1: 'Lunchtime in the cafeteria. Four windows serve braised pork, sweet-and-sour ribs, stir-fry veggies, and curry chicken. Which one do you pick?',
+  s0_p2: 'Each dish has a "payoff" (a tastiness score). You want the highest score, but you may not know each dish\'s score in advance.',
+  s0_p3: 'In math, we simplify this into a model (a stripped-down version of reality): you face several options, each with a number (payoff), and you want to pick the largest one.',
+  s0_hl: 'A choice problem = pick the option with the highest payoff',
+  s0_try: 'Click the options below. Can you find the highest payoff?',
+
+  s1_title: 'Information Helps You Choose Better',
+  s1_p1: 'If you know nothing, you pick at random. Getting the best outcome is pure luck.',
+  s1_p2: 'But if a friend tells you "the braised pork is amazing today," you have an edge. These clues that help you decide are called <b>information</b> (or signals).',
+  s1_p3: 'Signals are not always accurate. Sometimes your friend says "great" but the food is just okay. So signals have a <b>precision</b>: high-precision signals are reliable; low-precision ones are vague. We use the letter β (beta) to represent precision. Bigger β means a more accurate signal.',
+  s1_hl: 'A mathematician named Blackwell proved something in 1953: <b>the more accurate your signal, the better your choice.</b>',
+  s1_p4: 'Sounds obvious, right? Who would complain about knowing too much?',
+  s1_try: 'Drag the slider to adjust signal precision β. Watch your average score rise with precision.',
+  s1_lbl: 'Signal precision β',
+  s1_avg: 'Average score',
+
+  s2_title: 'But Some Roads Are One-Way',
+  s2_p1: 'Blackwell\'s conclusion depends on an assumption: <b>you can pick any option you want</b>. All options sit on the table and you choose freely.',
+  s2_p2: 'But many real choices are <b>one-way streets</b>. Once you take this road, the other becomes unreachable.',
+  s2_p3: 'For example:',
+  s2_examples: '<ul><li>Chose liberal arts? Switching to science is hard.</li><li>Signed a two-year lease? Breaking it costs money.</li><li>Built your data in one app? Migrating to another means starting over.</li></ul>',
+  s2_p4: 'This "no going back" quality is called <b>irreversibility</b>.',
+  s2_hl: 'The question: when choices are one-way streets, is more information still better?',
+
+  s3_title: 'A Fork in the Road',
+  s3_p1: 'From here on, we use scores from 0 to 1. Zero is the worst, 1 is the best. (Different scale than before, but the idea is the same.)',
+  s3_p1b: 'You stand at starting point S. Two roads ahead:',
+  s3_desc_a: '<b>Go left to A</b>: payoff 0.6 (looks pretty good)<br>But A is a dead end. Once at A, you cannot go anywhere else.',
+  s3_desc_b: '<b>Go right to B</b>: payoff 0.4 (looks mediocre)<br>But B connects to G, which has payoff 1.0!',
+  s3_p2: 'You can only see the payoffs of A and B, not what lies beyond. Which do you pick?',
+  s3_try: 'Click to choose your path:',
+  s3_btn_a: 'Go to A (payoff 0.6)',
+  s3_btn_b: 'Go to B (payoff 0.4)',
+  s3_result_a: 'You reached A and got 0.6. But A is a dead end; game over. Had you chosen B, you could have continued to G for 1.0.',
+  s3_result_b: 'You reached B (0.4), and there is a road ahead! Continue to G and collect 1.0.',
+  s3_moral: 'See? The option with the higher visible payoff (A) is actually a trap. The lower-payoff B is the bridge to the best outcome.',
+  s3_reset: 'Play again',
+
+  s4_title: 'Better Signals, Lower Scores',
+  s4_p1: 'In that game, you had time to think. But what about a person who just follows the signal?',
+  s4_p2: 'Suppose this person can only see noisy signals about A and B\'s payoffs—not the roads beyond—and picks whichever signal looks higher.',
+  s4_cases: '<ul><li><b>β near 0 (signal is almost useless)</b>: Cannot tell A from B. Picks randomly. Half the time picks A for 0.6, half picks B then walks to G for 1.0. Average = <span class="formula">0.5 × 0.6 + 0.5 × 1.0 = 0.80</span></li><li><b>β very large (signal is perfectly accurate)</b>: Sees clearly that A=0.6, B=0.4. A is higher; always picks A. Score = <span class="formula">0.6</span></li></ul>',
+  s4_hl: 'As the signal goes from useless to perfectly accurate, average score drops from 0.80 to 0.60. The clearer the signal, the worse the outcome.',
+  s4_try: 'Drag the slider and watch:',
+  s4_lbl: 'Signal precision β',
+  s4_score: 'Average score',
+  s4_trap: 'Probability of falling into trap A',
+
+  s5_title: 'Signposts Are Not Maps',
+  s5_p1: 'Why does this happen? Because the signal only tells you how high the payoff is at each fork. It is like a signpost saying "scenic score: 80."',
+  s5_p2: 'But the signal does not tell you whether the road is open or where it leads. You have no map.',
+  s5_p3: 'In the paper\'s terminology:',
+  s5_terms: '<ul><li><b>Road structure</b> (mathematicians call it "topology") = which roads are open and which are blocked = the map</li><li><b>Signal</b> = how high each road\'s payoff is = the signpost</li></ul>',
+  s5_p4: 'No matter how precise the signal, it cannot change which roads are open. The fact that A is a dead end does not disappear because you measured more carefully.',
+  s5_hl: 'The total loss splits into two parts:<br><br><span class="formula">Total loss = Road loss (caused by blocked roads) + Signal loss (caused by noisy readings)</span><br><br>Road loss is a <b>physical barrier</b> that signals cannot touch, no matter how precise. Signal loss is the part signals can improve, and it shrinks fast: each time β goes up a bit, the signal loss drops by a big chunk.',
+  s5_p5: 'So at high precision, the part that signals can fix is nearly zero. What remains is all road loss.',
+
+  s6_title: 'Sometimes Blurry Vision Is Better',
+  s6_p1: 'In the S-A-B-G example, information was purely harmful (more was always worse). What if there are more paths?',
+  s6_p2: 'Beyond B there is not only G (the goal, payoff 1.0) but also D (a distractor, payoff just 0.1). At B you must choose between G and D.',
+  s6_p3: 'Now the situation changes:',
+  s6_tradeoff: '<ul><li>At starting point S: higher precision means you are more likely to pick A and fall into the trap (bad)</li><li>At midpoint B: higher precision means you can tell G from D and pick correctly (good)</li></ul>',
+  s6_p4: 'One force pushes you into the trap; the other helps you pick the right path. These two forces pull in opposite directions, and there exists an <b>optimal precision</b> that balances them.',
+  s6_try: 'Drag the slider and watch the loss change. Find the minimum:',
+  s6_lbl: 'Signal precision β',
+  s6_loss: 'Expected loss L(β)',
+  s6_ptrap: 'Trap probability at S',
+  s6_pgoal: 'Correct pick at B',
+  s6_table_title: 'Data from the paper:',
+  s6_table_note: 'With a perfectly accurate signal, loss is 0.400. With optimal precision (β≈1.5), loss is only 0.273. The difference is 0.127, which is 47% above the optimal 0.273.',
+
+  s7_title: 'Block Half the Roads, Everything Changes',
+  s7_p1: 'The earlier examples were small intersections. What happens on a city-sized road network?',
+  s7_p2: 'Imagine a big grid where each intersection is a choice and each road has some chance of being blocked. We write p for that chance (p=0.5 means half the roads are blocked). You start at one intersection and can only travel on open roads.',
+  s7_p3: 'Mathematicians Harris and Kesten proved a precise result: on this kind of 2D grid, the dividing line is exactly at <b>p = 0.5</b>.',
+  s7_phases: '<ul><li><b>p below 0.5</b> (fewer than half the roads blocked): most intersections are reachable. You are unlikely to be stuck in a small corner. Information is useful; Blackwell\'s conclusion mostly holds.</li><li><b>p above 0.5</b> (more than half blocked): you are almost certainly confined to a tiny area. No amount of signal precision helps, because you simply cannot reach the good options.</li></ul>',
+  s7_p4: 'This sudden flip is like water freezing at exactly 0°C. Physicists call this kind of sudden change a <b>phase transition</b>. Below p=0.5, information helps. Above p=0.5, information is useless. No gradual middle ground.',
+  s7_try: 'Drag the slider to adjust blocking probability p. Watch how the reachable area (green) from the start (red) changes:',
+  s7_lbl: 'Blocking probability p',
+  s7_reach: 'Reachable intersections',
+  s7_total: 'Total intersections',
+  s7_frac: 'Reachable fraction',
+  s7_regen: 'Regenerate',
+
+  s8_title: 'Blackwell Dilemmas Around You',
+  s8_p1: 'The paper provides a three-condition test. Any scenario satisfying all three exhibits the Blackwell Dilemma:',
+  s8_c1: '<b>Condition 1: once you choose, you cannot go back.</b>',
+  s8_c2: '<b>Condition 2: the highest visible payoff leads to a worse region.</b>',
+  s8_c3: '<b>Condition 3: you can observe payoffs but not whether roads are open.</b>',
+  s8_ex_title: 'Four examples:',
+  s8_ex1: '<b>Choosing a major.</b> Switching majors is costly (condition 1). The highest-paying major today may have no future in five years (condition 2). Salary rankings are everywhere, but no one can tell you which field has more room to change direction (condition 3).',
+  s8_ex2: '<b>Choosing a tech platform.</b> Code migration is expensive (condition 1). The top-benchmark platform may have a shrinking developer community (condition 2). Performance tests are everywhere; the future trajectory of the ecosystem is invisible (condition 3).',
+  s8_ex3: '<b>Choosing investments.</b> Capital is locked up and you cannot withdraw freely (condition 1). The highest expected return may come with the worst liquidity (condition 2). Return estimates are precise; whether you can exit during a crash is unknown (condition 3).',
+  s8_ex4: '<b>Environmental policy.</b> Development is irreversible (condition 1). The highest economic return may destroy irreplaceable natural resources (condition 2). Economic data is abundant; where the ecological tipping point lies, nobody knows (condition 3).',
+  s8_hl: 'The paper\'s recommendation: in these scenarios, rather than raising signal precision (financial literacy programs, mandatory disclosure), reduce irreversibility (cancellation windows for contracts, platform-switching rights, letting users move their data). Experiments show that near the dividing line, reducing irreversibility is over <b>40 times</b> as effective as raising signal precision.',
+
+  s9_title: 'Six Computational Experiments, All Confirmed',
+  s9_p1: 'The paper is not just theory. Six computer simulations verify every prediction:',
+  s9_exp1: '<b>Dividing-line test</b>: 400 simulations on a 50×50 grid. The reachable fraction drops sharply around p=0.5, matching the theoretical threshold.',
+  s9_exp2: '<b>Decomposition test</b>: across five precision levels, the road-loss curves are the same regardless of precision, confirming that Total loss = Road loss + Signal loss.',
+  s9_exp3: '<b>What if road conditions changed?</b> Fix β=5, lower blocking from 0.70 to 0.29, average loss drops from 0.370 to 0.192. Same signal precision, different road conditions, very different outcome.',
+  s9_exp4: '<b>Policy comparison</b>: near the dividing line, reducing blocking probability is over 40 times as effective as raising signal precision.',
+  s9_exp5: '<b>Grid scaling</b> (what happens as the grid gets bigger): from 20×20 to 100×100, the transition gets steeper, consistent with the theory.',
+  s9_exp6: '<b>Two-group phenomenon</b>: under high precision, the losses split into two clusters: one group with near-zero loss, another with large loss. Without accounting for road structure, you would expect everyone to lose about the same, but experiments confirm the split.',
+  s9_link: 'Full data and code in the',
+  s9_appendix: 'Computational Appendix',
+  s9_period: '.',
+
+  btn_prev: 'Previous',
+  btn_next: 'Next',
+}
+};
+function T(k){ return L[lang][k] || L['zh'][k] || k; }
+
+// ========== Normal CDF (Abramowitz & Stegun 7.1.26) ==========
+function normalCDF(x){
+  const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+  const sign = x<0?-1:1;
+  const ax = Math.abs(x)/Math.SQRT2;
+  const t = 1/(1+p*ax);
+  const y = 1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-ax*ax);
+  return 0.5*(1+sign*y);
+}
+
+// 4-state welfare: W(β) = expected payoff (raw, not shortfall)
+function welfare4(beta){
+  if(beta<=0.01) return 0.80;
+  const sig2 = 1/(Math.pow(2,2*beta)-1);
+  const phi = normalCDF(0.2/Math.sqrt(2*sig2));
+  return phi*0.6 + (1-phi)*1.0;
+}
+
+// 5-state expected loss: L(β) = r* - E[payoff]
+function loss5(beta){
+  if(beta<=0.01) return 0.425;
+  const sig2 = 1/(Math.pow(2,2*beta)-1);
+  const pTrap = normalCDF(0.2/Math.sqrt(2*sig2));
+  const pGoal = normalCDF(0.9/Math.sqrt(2*sig2));
+  return pTrap*0.4 + (1-pTrap)*(1-pGoal)*0.9;
+}
+
+// Step 1 demo: 2-option Blackwell (clean formula, no approximation issues)
+// Option A: value 0.4, Option B: value 0.9. Agent picks highest noisy signal.
+function simpleBlackwell(beta){
+  if(beta<=0.01) return 0.65; // (0.4+0.9)/2
+  const sig2 = 1/(Math.pow(2,2*beta)-1);
+  const pBest = normalCDF(0.5/Math.sqrt(2*sig2)); // P(pick 0.9)
+  return pBest*0.9 + (1-pBest)*0.4;
+}
+
+// ========== State ==========
+let step = 0;
+const STEPS = 10;
+
+// ========== Nav ==========
+function buildProgress(){
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = '';
+  const names = T('steps');
+  for(let i=0;i<STEPS;i++){
+    const d = document.createElement('div');
+    d.className = 'step-dot'+(i===step?' active':'');
+    d.textContent = names[i];
+    d.onclick = ()=>{ step=i; render(); };
+    bar.appendChild(d);
+  }
+}
+
+function navHTML(){
+  let h = '<div class="nav-row">';
+  if(step>0) h += `<button class="btn btn-primary" onclick="step--;render()">${T('btn_prev')}</button>`;
+  else h += '<div></div>';
+  if(step<STEPS-1) h += `<button class="btn btn-primary" onclick="step++;render()">${T('btn_next')}</button>`;
+  else h += '<div></div>';
+  return h+'</div>';
+}
+
+// ========== Drawing: 4-state graph ==========
+function drawGraph4(canvasId, highlight){
+  const c = document.getElementById(canvasId);
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W=c.width, H=c.height;
+  ctx.clearRect(0,0,W,H);
+
+  const nodes = {
+    S:{x:W*0.15,y:H*0.5,r:'0',color:'#666'},
+    A:{x:W*0.55,y:H*0.22,r:'0.6',color:'#e74c3c'},
+    B:{x:W*0.55,y:H*0.78,r:'0.4',color:'#3498db'},
+    G:{x:W*0.88,y:H*0.78,r:'1.0',color:'#2ecc71'}
+  };
+
+  ctx.lineWidth=3;
+  [{a:'S',b:'A',col:'#e74c3c'},{a:'S',b:'B',col:'#3498db'},{a:'B',b:'G',col:'#2ecc71'}].forEach(e=>{
+    ctx.strokeStyle = e.col; ctx.globalAlpha=0.4;
+    ctx.beginPath(); ctx.moveTo(nodes[e.a].x,nodes[e.a].y); ctx.lineTo(nodes[e.b].x,nodes[e.b].y); ctx.stroke();
+  });
+  ctx.globalAlpha=1;
+
+  ctx.fillStyle='#e74c3c'; ctx.globalAlpha=0.15;
+  ctx.beginPath(); ctx.arc(nodes.A.x,nodes.A.y,38,0,Math.PI*2); ctx.fill();
+  ctx.globalAlpha=1;
+
+  Object.entries(nodes).forEach(([name,n])=>{
+    const isHl = highlight && highlight.includes(name);
+    ctx.fillStyle = isHl ? n.color : '#f5f5f5';
+    ctx.strokeStyle = n.color; ctx.lineWidth = isHl?3:2;
+    ctx.beginPath(); ctx.arc(n.x,n.y,24,0,Math.PI*2);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle = isHl?'#fff':'#333';
+    ctx.font = 'bold 16px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(name,n.x,n.y-5);
+    ctx.font = '11px sans-serif'; ctx.fillStyle=isHl?'rgba(255,255,255,0.8)':'#999';
+    ctx.fillText(n.r,n.x,n.y+12);
+  });
+
+  ctx.fillStyle='#c0392b'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+  ctx.fillText(lang==='zh'?'死胡同':'dead end',nodes.A.x,nodes.A.y-36);
+}
+
+// ========== Drawing: 5-state graph ==========
+function drawGraph5(canvasId){
+  const c = document.getElementById(canvasId);
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W=c.width, H=c.height;
+  ctx.clearRect(0,0,W,H);
+
+  const nodes = {
+    S:{x:W*0.10,y:H*0.5,r:'0',color:'#666'},
+    A:{x:W*0.40,y:H*0.18,r:'0.6',color:'#e74c3c'},
+    B:{x:W*0.40,y:H*0.82,r:'0.4',color:'#3498db'},
+    D:{x:W*0.72,y:H*0.82,r:'0.1',color:'#f39c12'},
+    G:{x:W*0.72,y:H*0.42,r:'1.0',color:'#2ecc71'}
+  };
+
+  ctx.lineWidth=3;
+  [{a:'S',b:'A',col:'#e74c3c'},{a:'S',b:'B',col:'#3498db'},{a:'B',b:'D',col:'#f39c12'},{a:'B',b:'G',col:'#2ecc71'}].forEach(e=>{
+    ctx.strokeStyle=e.col; ctx.globalAlpha=0.4;
+    ctx.beginPath(); ctx.moveTo(nodes[e.a].x,nodes[e.a].y); ctx.lineTo(nodes[e.b].x,nodes[e.b].y); ctx.stroke();
+  });
+  ctx.globalAlpha=1;
+
+  ctx.fillStyle='#e74c3c'; ctx.globalAlpha=0.12;
+  ctx.beginPath(); ctx.arc(nodes.A.x,nodes.A.y,32,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#f39c12'; ctx.beginPath(); ctx.arc(nodes.D.x,nodes.D.y,32,0,Math.PI*2); ctx.fill();
+  ctx.globalAlpha=1;
+
+  Object.entries(nodes).forEach(([name,n])=>{
+    ctx.fillStyle='#f5f5f5'; ctx.strokeStyle=n.color; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(n.x,n.y,22,0,Math.PI*2);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#333'; ctx.font='bold 14px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(name,n.x,n.y-4);
+    ctx.font='10px sans-serif'; ctx.fillStyle='#999';
+    ctx.fillText(n.r,n.x,n.y+10);
+  });
+
+  ctx.fillStyle='#c0392b'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+  ctx.fillText(lang==='zh'?'陷阱':'trap',nodes.A.x,nodes.A.y-30);
+  ctx.fillStyle='#e67e22';
+  ctx.fillText(lang==='zh'?'干扰':'distractor',nodes.D.x,nodes.D.y+30);
+}
+
+// ========== Drawing: curve ==========
+function drawCurve(canvasId, fn, xMin, xMax, opts){
+  const c = document.getElementById(canvasId);
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W=c.width, H=c.height;
+  const pad={l:50,r:20,t:20,b:35};
+  const pw=W-pad.l-pad.r, ph=H-pad.t-pad.b;
+
+  ctx.clearRect(0,0,W,H);
+
+  const pts=[];
+  let yMin=Infinity, yMax=-Infinity;
+  for(let i=0;i<=200;i++){
+    const x=xMin+(xMax-xMin)*i/200;
+    const y=fn(x);
+    pts.push({x,y});
+    if(y<yMin)yMin=y; if(y>yMax)yMax=y;
+  }
+  if(opts.yMin!==undefined) yMin=opts.yMin;
+  if(opts.yMax!==undefined) yMax=opts.yMax;
+  const yRange=yMax-yMin||1;
+
+  function toCanvas(x,y){
+    return { cx: pad.l + (x-xMin)/(xMax-xMin)*pw, cy: pad.t + (1-(y-yMin)/yRange)*ph };
+  }
+
+  ctx.strokeStyle='#ccc'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b); ctx.stroke();
+
+  ctx.fillStyle='#999'; ctx.font='11px sans-serif'; ctx.textAlign='right'; ctx.textBaseline='middle';
+  for(let i=0;i<=4;i++){
+    const y=yMin+yRange*i/4;
+    const p=toCanvas(xMin,y);
+    ctx.fillText(y.toFixed(2),pad.l-6,p.cy);
+    if(i>0&&i<4){ctx.strokeStyle='#eee';ctx.beginPath();ctx.moveTo(pad.l,p.cy);ctx.lineTo(W-pad.r,p.cy);ctx.stroke();}
+  }
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  for(let i=0;i<=4;i++){
+    const x=xMin+(xMax-xMin)*i/4;
+    const p=toCanvas(x,yMin);
+    ctx.fillText(x.toFixed(1),p.cx,p.cy+4);
+  }
+  ctx.fillText(opts.xLabel||'β',W-pad.r,H-pad.b+4);
+
+  ctx.strokeStyle=opts.color||'#1a1a2e'; ctx.lineWidth=2.5;
+  ctx.beginPath();
+  pts.forEach((p,i)=>{
+    const cc=toCanvas(p.x,p.y);
+    i===0?ctx.moveTo(cc.cx,cc.cy):ctx.lineTo(cc.cx,cc.cy);
+  });
+  ctx.stroke();
+
+  if(opts.markX!==undefined){
+    const my=fn(opts.markX);
+    const mc=toCanvas(opts.markX,my);
+    ctx.fillStyle=opts.color||'#1a1a2e';
+    ctx.beginPath(); ctx.arc(mc.cx,mc.cy,5,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#333'; ctx.font='bold 12px sans-serif'; ctx.textAlign='left';
+    ctx.fillText(my.toFixed(3), mc.cx+8, mc.cy-6);
+  }
+
+  if(opts.markMin){
+    let minY=Infinity, minX=0;
+    pts.forEach(p=>{ if(p.y<minY){minY=p.y;minX=p.x;} });
+    const mc=toCanvas(minX,minY);
+    ctx.fillStyle='#e74c3c';
+    ctx.beginPath(); ctx.arc(mc.cx,mc.cy,5,0,Math.PI*2); ctx.fill();
+    ctx.font='bold 11px sans-serif'; ctx.textAlign='left';
+    ctx.fillText('min: '+minY.toFixed(3)+' @ β≈'+minX.toFixed(1), mc.cx+8, mc.cy+4);
+  }
+}
+
+// ========== Percolation grid ==========
+let gridData = null;
+function generateGrid(n, p){
+  const hEdges = [], vEdges = [];
+  for(let r=0;r<n;r++){
+    hEdges[r]=[]; vEdges[r]=[];
+    for(let c=0;c<n;c++){
+      hEdges[r][c] = c<n-1 ? Math.random()>p : false;
+      vEdges[r][c] = r<n-1 ? Math.random()>p : false;
+    }
+  }
+  const sr=Math.floor(n/2), sc=Math.floor(n/2);
+  const visited = Array.from({length:n},()=>Array(n).fill(false));
+  const queue = [[sr,sc]];
+  visited[sr][sc]=true;
+  let count=1;
+  while(queue.length){
+    const [r,c]=queue.shift();
+    if(c<n-1 && hEdges[r][c] && !visited[r][c+1]){visited[r][c+1]=true;queue.push([r,c+1]);count++;}
+    if(c>0 && hEdges[r][c-1] && !visited[r][c-1]){visited[r][c-1]=true;queue.push([r,c-1]);count++;}
+    if(r<n-1 && vEdges[r][c] && !visited[r+1][c]){visited[r+1][c]=true;queue.push([r+1,c]);count++;}
+    if(r>0 && vEdges[r-1][c] && !visited[r-1][c]){visited[r-1][c]=true;queue.push([r-1,c]);count++;}
+  }
+  return {n, hEdges, vEdges, visited, sr, sc, count, total:n*n};
+}
+
+function drawGrid(canvasId){
+  if(!gridData) return;
+  const c = document.getElementById(canvasId);
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W=c.width,H=c.height;
+  ctx.clearRect(0,0,W,H);
+  const {n,hEdges,vEdges,visited,sr,sc}=gridData;
+  const pad=12;
+  const cell = (Math.min(W,H)-2*pad)/n;
+
+  function pos(r,cc){ return {x:pad+cc*cell+cell/2, y:pad+r*cell+cell/2}; }
+
+  for(let r=0;r<n;r++) for(let cc=0;cc<n;cc++){
+    const p1=pos(r,cc);
+    if(cc<n-1){
+      const p2=pos(r,cc+1);
+      ctx.strokeStyle = hEdges[r][cc]?'#ccc':'rgba(200,0,0,0.12)';
+      ctx.lineWidth = hEdges[r][cc]?1.5:0.5;
+      ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+    }
+    if(r<n-1){
+      const p2=pos(r+1,cc);
+      ctx.strokeStyle = vEdges[r][cc]?'#ccc':'rgba(200,0,0,0.12)';
+      ctx.lineWidth = vEdges[r][cc]?1.5:0.5;
+      ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+    }
+  }
+
+  const sz = Math.max(2, Math.min(5, cell*0.3));
+  for(let r=0;r<n;r++) for(let cc=0;cc<n;cc++){
+    const pp=pos(r,cc);
+    if(r===sr&&cc===sc){
+      ctx.fillStyle='#e74c3c';
+      ctx.beginPath();ctx.arc(pp.x,pp.y,sz+2,0,Math.PI*2);ctx.fill();
+    } else if(visited[r][cc]){
+      ctx.fillStyle='#2ecc71';
+      ctx.beginPath();ctx.arc(pp.x,pp.y,sz,0,Math.PI*2);ctx.fill();
+    } else {
+      ctx.fillStyle='#ddd';
+      ctx.beginPath();ctx.arc(pp.x,pp.y,sz*0.7,0,Math.PI*2);ctx.fill();
+    }
+  }
+}
+
+// ========== Step renderers ==========
+
+function renderStep0(){
+  const items = [
+    {label:lang==='zh'?'红烧肉':'Braised Pork', val:80},
+    {label:lang==='zh'?'糖醋排骨':'Sweet & Sour Ribs', val:70},
+    {label:lang==='zh'?'炒青菜':'Stir-fry Veg', val:50},
+    {label:lang==='zh'?'咖喱鸡':'Curry Chicken', val:90},
+  ];
+  return `<div class="card fade-in">
+    <h2>${T('s0_title')}</h2>
+    <p>${T('s0_p1')}</p><p>${T('s0_p2')}</p><p>${T('s0_p3')}</p>
+    <div class="hl">${T('s0_hl')}</div>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s0_try')}</div>
+    <div class="choice-row" id="choiceRow">
+      ${items.map(it=>`<button class="btn-choice" data-val="${it.val}" onclick="pickOption(this)">${it.label}<br><span style="color:#999;font-size:12px">???</span></button>`).join('')}
+    </div>
+    <div id="choiceResult"></div>
+  </div>${navHTML()}`;
+}
+
+function renderStep1(){
+  return `<div class="card fade-in">
+    <h2>${T('s1_title')}</h2>
+    <p>${T('s1_p1')}</p><p>${T('s1_p2')}</p><p>${T('s1_p3')}</p>
+    <div class="hl">${T('s1_hl')}</div>
+    <p>${T('s1_p4')}</p>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s1_try')}</div>
+    <div class="ctrl">
+      <label>${T('s1_lbl')}${lang==='zh'?'：':':'}</label>
+      <input type="range" min="0" max="50" value="25" id="s1slider" oninput="updateS1()">
+      <span class="val" id="s1beta">2.5</span>
+    </div>
+    <div class="ctrl"><label>${T('s1_avg')}${lang==='zh'?'：':':'}</label><span class="val" id="s1score" style="color:#2e7d32"></span></div>
+    <canvas id="s1curve" width="600" height="260"></canvas>
+    <p style="font-size:12px;color:#999">${lang==='zh'?'这条曲线一直在上升：精度越高，得分越高。这就是Blackwell定理的预测。':'The curve keeps rising: higher precision, higher score. This is what Blackwell\'s theorem predicts.'}</p>
+  </div>${navHTML()}`;
+}
+
+function updateS1(){
+  const v=document.getElementById('s1slider').value;
+  const beta=v/10;
+  document.getElementById('s1beta').textContent=beta.toFixed(1);
+  document.getElementById('s1score').textContent=simpleBlackwell(beta).toFixed(3);
+  drawCurve('s1curve', simpleBlackwell, 0, 5, {yMin:0.60,yMax:0.95,color:'#2e7d32',markX:beta,xLabel:'β'});
+}
+
+function renderStep2(){
+  return `<div class="card fade-in">
+    <h2>${T('s2_title')}</h2>
+    <p>${T('s2_p1')}</p><p>${T('s2_p2')}</p><p>${T('s2_p3')}</p>
+    ${T('s2_examples')}
+    <p>${T('s2_p4')}</p>
+    <div class="hl">${T('s2_hl')}</div>
+  </div>${navHTML()}`;
+}
+
+function renderStep3(){
+  return `<div class="card fade-in">
+    <h2>${T('s3_title')}</h2>
+    <p>${T('s3_p1')}</p>
+    <p>${T('s3_p1b')}</p>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+      <div class="hl-blue" style="flex:1;min-width:200px">${T('s3_desc_a')}</div>
+      <div class="hl-blue" style="flex:1;min-width:200px">${T('s3_desc_b')}</div>
+    </div>
+    <canvas id="graph4" width="500" height="250"></canvas>
+    <p>${T('s3_p2')}</p>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s3_try')}</div>
+    <div class="choice-row" id="gameChoice3">
+      <button class="btn-choice" onclick="play3('A')" id="btn3A">${T('s3_btn_a')}</button>
+      <button class="btn-choice" onclick="play3('B')" id="btn3B">${T('s3_btn_b')}</button>
+    </div>
+    <div id="gameResult3"></div>
+  </div>${navHTML()}`;
+}
+
+function play3(choice){
+  const btnA=document.getElementById('btn3A'), btnB=document.getElementById('btn3B');
+  btnA.disabled=true; btnB.disabled=true;
+  if(choice==='A'){
+    btnA.classList.add('bad'); drawGraph4('graph4',['S','A']);
+    document.getElementById('gameResult3').innerHTML =
+      `<div class="result-box result-bad">${T('s3_result_a')}</div>
+       <div class="hl">${T('s3_moral')}</div>
+       <div style="text-align:center;margin-top:10px"><button class="btn btn-primary" onclick="step=3;render()">${T('s3_reset')}</button></div>`;
+  } else {
+    btnB.classList.add('picked'); drawGraph4('graph4',['S','B','G']);
+    document.getElementById('gameResult3').innerHTML =
+      `<div class="result-box result-good">${T('s3_result_b')}</div>
+       <div class="hl">${T('s3_moral')}</div>
+       <div style="text-align:center;margin-top:10px"><button class="btn btn-primary" onclick="step=3;render()">${T('s3_reset')}</button></div>`;
+  }
+}
+
+function renderStep4(){
+  return `<div class="card fade-in">
+    <h2>${T('s4_title')}</h2>
+    <p>${T('s4_p1')}</p><p>${T('s4_p2')}</p>
+    ${T('s4_cases')}
+    <div class="warn">${T('s4_hl')}</div>
+    <canvas id="graph4b" width="500" height="220"></canvas>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s4_try')}</div>
+    <div class="ctrl">
+      <label>${T('s4_lbl')}${lang==='zh'?'：':':'}</label>
+      <input type="range" min="0" max="60" value="15" id="s4slider" oninput="updateS4()">
+      <span class="val" id="s4beta">1.5</span>
+    </div>
+    <div class="ctrl"><label>${T('s4_score')}${lang==='zh'?'：':':'}</label><span class="val" id="s4score" style="color:#1565c0"></span></div>
+    <div class="ctrl"><label>${T('s4_trap')}${lang==='zh'?'：':':'}</label><span class="val" id="s4trap" style="color:#e74c3c"></span></div>
+    <canvas id="s4curve" width="600" height="260"></canvas>
+  </div>${navHTML()}`;
+}
+
+function updateS4(){
+  const v=document.getElementById('s4slider').value;
+  const beta=v/10;
+  document.getElementById('s4beta').textContent=beta.toFixed(1);
+  document.getElementById('s4score').textContent=welfare4(beta).toFixed(3);
+  const pTrap = beta<=0.01?0.5:normalCDF(0.2/Math.sqrt(2/(Math.pow(2,2*beta)-1)));
+  document.getElementById('s4trap').textContent=(pTrap*100).toFixed(1)+'%';
+  drawCurve('s4curve', welfare4, 0, 6, {yMin:0.55,yMax:0.85,color:'#1565c0',markX:beta,xLabel:'β'});
+}
+
+function renderStep5(){
+  return `<div class="card fade-in">
+    <h2>${T('s5_title')}</h2>
+    <p>${T('s5_p1')}</p><p>${T('s5_p2')}</p><p>${T('s5_p3')}</p>
+    ${T('s5_terms')}
+    <p>${T('s5_p4')}</p>
+    <div class="hl">${T('s5_hl')}</div>
+    <p>${T('s5_p5')}</p>
+  </div>${navHTML()}`;
+}
+
+function renderStep6(){
+  const rows = [
+    {b:'→0', pt:'0.500',pg:'0.500',l:'0.425',note:lang==='zh'?'随机选：B处也选不对':'Random: bad at B too'},
+    {b:'0.5',pt:'0.556',pg:'0.738',l:'0.327',note:''},
+    {b:'1.0',pt:'0.597',pg:'0.865',l:'0.288',note:''},
+    {b:'1.5',pt:'0.646',pg:'0.954',l:'0.273',note:lang==='zh'?'最低点':'Minimum',hl:true},
+    {b:'2.0',pt:'0.708',pg:'0.993',l:'0.285',note:''},
+    {b:'3.0',pt:'0.869',pg:'≈1.00',l:'0.348',note:''},
+    {b:'→∞', pt:'1.000',pg:'1.000',l:'0.400',note:lang==='zh'?'一定掉进陷阱':'Always trapped'},
+  ];
+  let tableH = `<table class="data-table"><thead><tr>
+    <th>β</th><th>${T('s6_ptrap')}</th><th>${T('s6_pgoal')}</th><th>L(β)</th><th>${lang==='zh'?'说明':'Note'}</th>
+  </tr></thead><tbody>`;
+  rows.forEach(r=>{
+    tableH += `<tr class="${r.hl?'hl-row':''}"><td>${r.b}</td><td>${r.pt}</td><td>${r.pg}</td><td>${r.l}</td><td style="font-size:12px;color:#999">${r.note}</td></tr>`;
+  });
+  tableH += '</tbody></table>';
+
+  return `<div class="card fade-in">
+    <h2>${T('s6_title')}</h2>
+    <p>${T('s6_p1')}</p><p>${T('s6_p2')}</p>
+    <canvas id="graph5" width="500" height="220"></canvas>
+    <p>${T('s6_p3')}</p>
+    ${T('s6_tradeoff')}
+    <p>${T('s6_p4')}</p>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s6_try')}</div>
+    <div class="ctrl">
+      <label>${T('s6_lbl')}${lang==='zh'?'：':':'}</label>
+      <input type="range" min="0" max="60" value="15" id="s6slider" oninput="updateS6()">
+      <span class="val" id="s6beta">1.5</span>
+    </div>
+    <div class="ctrl"><label>${T('s6_loss')}${lang==='zh'?'：':':'}</label><span class="val" id="s6loss" style="color:#c62828"></span></div>
+    <canvas id="s6curve" width="600" height="260"></canvas>
+    <p><b>${T('s6_table_title')}</b></p>
+    ${tableH}
+    <div class="hl">${T('s6_table_note')}</div>
+  </div>${navHTML()}`;
+}
+
+function updateS6(){
+  const v=document.getElementById('s6slider').value;
+  const beta=v/10;
+  document.getElementById('s6beta').textContent=beta.toFixed(1);
+  document.getElementById('s6loss').textContent=loss5(beta).toFixed(3);
+  drawCurve('s6curve', loss5, 0, 6, {yMin:0.25,yMax:0.45,color:'#c62828',markX:beta,markMin:true,xLabel:'β'});
+}
+
+function renderStep7(){
+  gridData = generateGrid(15, 0.35);
+  return `<div class="card fade-in">
+    <h2>${T('s7_title')}</h2>
+    <p>${T('s7_p1')}</p><p>${T('s7_p2')}</p><p>${T('s7_p3')}</p>
+    ${T('s7_phases')}
+    <p>${T('s7_p4')}</p>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s7_try')}</div>
+    <div class="ctrl">
+      <label>${T('s7_lbl')}${lang==='zh'?'：':':'}</label>
+      <input type="range" min="0" max="90" value="35" id="s7slider" oninput="updateS7()">
+      <span class="val" id="s7pval">0.35</span>
+      <button class="btn btn-primary" onclick="regenGrid()" style="margin-left:8px">${T('s7_regen')}</button>
+    </div>
+    <div class="grid-container">
+      <canvas id="gridCanvas" width="400" height="400"></canvas>
+      <div class="grid-stats" id="gridStats"></div>
+    </div>
+  </div>${navHTML()}`;
+}
+
+function updateS7(){
+  const v=document.getElementById('s7slider').value;
+  const p=v/100;
+  document.getElementById('s7pval').textContent=p.toFixed(2);
+  gridData = generateGrid(15, p);
+  drawGrid('gridCanvas');
+  updateGridStats();
+}
+
+function regenGrid(){
+  const v=document.getElementById('s7slider').value;
+  gridData = generateGrid(15, v/100);
+  drawGrid('gridCanvas');
+  updateGridStats();
+}
+
+function updateGridStats(){
+  if(!gridData) return;
+  const el=document.getElementById('gridStats');
+  const frac=(gridData.count/gridData.total*100).toFixed(1);
+  const pVal = parseFloat(document.getElementById('s7pval').textContent);
+  let verdict = '';
+  if(pVal<0.45) verdict = lang==='zh'?'<span style="color:#2e7d32">信息有用</span>':'<span style="color:#2e7d32">Information helps</span>';
+  else if(pVal>0.55) verdict = lang==='zh'?'<span style="color:#c62828">信息失效</span>':'<span style="color:#c62828">Information irrelevant</span>';
+  else verdict = lang==='zh'?'<span style="color:#f57c00">分界线附近</span>':'<span style="color:#f57c00">Near the dividing line</span>';
+  el.innerHTML = `
+    <p>${T('s7_reach')}${lang==='zh'?'：':':'}<b>${gridData.count}</b></p>
+    <p>${T('s7_total')}${lang==='zh'?'：':':'}<b>${gridData.total}</b></p>
+    <p>${T('s7_frac')}${lang==='zh'?'：':':'}<b>${frac}%</b></p>
+    <p style="font-size:15px;margin-top:8px">${verdict}</p>
+    <p style="margin-top:12px;font-size:12px;color:#999">${lang==='zh'?'红色 = 起点，绿色 = 能走到，灰色 = 走不到':'Red = start, Green = reachable, Gray = unreachable'}</p>`;
+}
+
+function renderStep8(){
+  return `<div class="card fade-in">
+    <h2>${T('s8_title')}</h2>
+    <p>${T('s8_p1')}</p>
+    <div class="hl-blue">
+      <p>${T('s8_c1')}</p>
+      <p>${T('s8_c2')}</p>
+      <p>${T('s8_c3')}</p>
+    </div>
+    <p><b>${T('s8_ex_title')}</b></p>
+    <p>${T('s8_ex1')}</p>
+    <p>${T('s8_ex2')}</p>
+    <p>${T('s8_ex3')}</p>
+    <p>${T('s8_ex4')}</p>
+    <div class="hl">${T('s8_hl')}</div>
+  </div>${navHTML()}`;
+}
+
+function renderStep9(){
+  return `<div class="card fade-in">
+    <h2>${T('s9_title')}</h2>
+    <p>${T('s9_p1')}</p>
+    <div class="hl-blue"><p>① ${T('s9_exp1')}</p></div>
+    <div class="hl-blue"><p>② ${T('s9_exp2')}</p></div>
+    <div class="hl-blue"><p>③ ${T('s9_exp3')}</p></div>
+    <div class="hl-blue"><p>④ ${T('s9_exp4')}</p></div>
+    <div class="hl-blue"><p>⑤ ${T('s9_exp5')}</p></div>
+    <div class="hl-blue"><p>⑥ ${T('s9_exp6')}</p></div>
+    <p>${T('s9_link')} <a href="index.html" style="color:#0055aa;font-weight:600">${T('s9_appendix')}</a>${T('s9_period')}</p>
+  </div>${navHTML()}`;
+}
+
+// ========== Main render ==========
+function render(){
+  buildProgress();
+  const area = document.getElementById('vizArea');
+  const renderers = [renderStep0,renderStep1,renderStep2,renderStep3,renderStep4,renderStep5,renderStep6,renderStep7,renderStep8,renderStep9];
+  area.innerHTML = renderers[step]();
+
+  if(step===1) updateS1();
+  if(step===3) drawGraph4('graph4', ['S']);
+  if(step===4){ drawGraph4('graph4b',['S']); updateS4(); }
+  if(step===6){ drawGraph5('graph5'); updateS6(); }
+  if(step===7){ drawGrid('gridCanvas'); updateGridStats(); }
+}
+
+// ========== Choice game (step 0) ==========
+function pickOption(btn){
+  const val = parseInt(btn.dataset.val);
+  const row = document.getElementById('choiceRow');
+  const buttons = row.querySelectorAll('.btn-choice');
+  buttons.forEach(b=>{
+    b.disabled = true;
+    const bval = parseInt(b.dataset.val);
+    b.querySelector('span').textContent = bval + (lang==='zh'?' 分':' pts');
+    if(bval===90) b.classList.add('picked');
+    else if(bval===val && val!==90) b.classList.add('bad');
+  });
+  const el = document.getElementById('choiceResult');
+  if(val===90) el.innerHTML = `<div class="result-box result-good">${lang==='zh'?'选到了最高分 90！如果有信号提前告诉你，就不用碰运气了。':'Got the highest score, 90! With a signal to guide you, no need to rely on luck.'}</div>`;
+  else el.innerHTML = `<div class="result-box result-bad">${lang==='zh'?'你选到了 '+val+' 分，最高是 90。没有信息的时候只能靠运气。':'You got '+val+'. The highest was 90. Without information, it is just luck.'}</div>`;
+}
+
+// ========== Language switch ==========
+document.querySelectorAll('.lang-sw button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    lang = btn.dataset.lang;
+    document.querySelectorAll('.lang-sw button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.title = T('title');
+    document.getElementById('headerTitle').innerHTML = T('header');
+    document.documentElement.lang = lang;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>

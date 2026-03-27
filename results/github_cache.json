@@ -1,0 +1,50 @@
+{
+  "TensorFlow": {
+    "repo": "tensorflow/tensorflow",
+    "stars": 194350,
+    "forks": 75248,
+    "issues": 4018,
+    "watchers": 7395,
+    "size": 1295458,
+    "created": "2015-11-07T01:19:20Z",
+    "pushed": "2026-03-26T14:15:18Z",
+    "commits_52w": 13430,
+    "commits_4w": 855
+  },
+  "PyTorch": {
+    "repo": "pytorch/pytorch",
+    "stars": 98586,
+    "forks": 27311,
+    "issues": 18116,
+    "watchers": 1781,
+    "size": 1282852,
+    "created": "2016-08-13T05:26:41Z",
+    "pushed": "2026-03-26T14:15:18Z",
+    "commits_52w": 15821,
+    "commits_4w": 1389
+  },
+  "JAX": {
+    "repo": "jax-ml/jax",
+    "stars": 35231,
+    "forks": 3489,
+    "issues": 2253,
+    "watchers": 331,
+    "size": 160856,
+    "created": "2018-10-25T21:25:02Z",
+    "pushed": "2026-03-26T13:55:35Z",
+    "commits_52w": 7854,
+    "commits_4w": 730
+  },
+  "MXNet": {
+    "repo": "apache/mxnet",
+    "stars": 20817,
+    "forks": 6719,
+    "issues": 2007,
+    "watchers": 1054,
+    "size": 101275,
+    "created": "2015-04-30T16:21:15Z",
+    "pushed": "2023-10-25T21:28:33Z",
+    "commits_52w": 0,
+    "commits_4w": 0
+  }
+}

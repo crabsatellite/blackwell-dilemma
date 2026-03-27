@@ -1,0 +1,16 @@
+{
+  "minimal": {
+    "description": "S(0)->A(0.6)[trap] | B(0.4)->G(1.0)",
+    "W_at_0": 0.20084054565490678,
+    "W_at_inf": 0.4,
+    "optimal_beta": 0.01,
+    "optimal_W": 0.20266624137821246
+  },
+  "extended": {
+    "description": "S(0)->A(0.6)[trap] | B(0.4)->D(0.1)[distractor] | G(1.0)",
+    "W_at_0": 0.4206579302877686,
+    "W_at_inf": 0.4,
+    "optimal_beta": 1.513985708254167,
+    "optimal_W": 0.27303101189255036
+  }
+}
