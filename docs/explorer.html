@@ -78,7 +78,7 @@ canvas{border:1px solid #eee;border-radius:10px;background:#fafafa;display:block
 <header>
   <h1 id="headerTitle">Blackwell 困境 — 交互式解读</h1>
   <div class="lang-sw">
-    <button class="active" data-lang="zh">中文</button>
+    <button data-lang="zh">中文</button>
     <button data-lang="en">EN</button>
   </div>
 </header>
@@ -91,7 +91,7 @@ canvas{border:1px solid #eee;border-radius:10px;background:#fafafa;display:block
 
 <script>
 // ========== i18n ==========
-let lang = 'zh';
+let lang = (navigator.language || '').startsWith('zh') ? 'zh' : 'en';
 const L = {
 zh: {
   title: 'Blackwell 困境 — 交互式解读',
@@ -942,6 +942,11 @@ document.querySelectorAll('.lang-sw button').forEach(btn=>{
   });
 });
 
+// Init: sync button highlight, title, and html lang
+document.querySelector(`.lang-sw button[data-lang="${lang}"]`).classList.add('active');
+document.title = T('title');
+document.getElementById('headerTitle').innerHTML = T('header');
+document.documentElement.lang = lang;
 render();
 </script>
 </body>
