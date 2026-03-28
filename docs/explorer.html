@@ -62,6 +62,15 @@ canvas{border:1px solid #eee;border-radius:10px;background:#fafafa;display:block
 .grid-stats{font-size:13px;line-height:2;min-width:180px}
 .grid-stats b{color:#1a1a2e}
 
+.legend{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:8px 0;font-size:13px}
+.legend span{display:flex;align-items:center;gap:4px}
+.legend-line{display:inline-block;width:24px;height:3px;border-radius:2px}
+
+.regime-box{text-align:center;padding:10px;border-radius:8px;margin:8px 0;font-size:14px;font-weight:600}
+.regime-good{background:#e8f5e9;color:#2e7d32}
+.regime-bad{background:#fce4ec;color:#c62828}
+.regime-near{background:#fff3e0;color:#e65100}
+
 .nav-row{display:flex;justify-content:space-between;margin-top:16px}
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -83,6 +92,7 @@ canvas{border:1px solid #eee;border-radius:10px;background:#fafafa;display:block
   .formula{font-size:12px;word-break:break-all}
   .progress-bar{padding:0 8px}
   .step-dot{padding:8px 10px;font-size:11px}
+  .legend{font-size:11px;gap:10px}
 }
 </style>
 </head>
@@ -111,9 +121,11 @@ zh: {
   header: 'Blackwell 困境 — 交互式解读',
   steps: [
     '① 选择与回报','② 信息的力量','③ 走了就回不来',
-    '④ 岔路口游戏','⑤ 越准越差？','⑥ 路标不是地图',
-    '⑦ 最佳模糊度','⑧ 堵一半就变天','⑨ 身边的例子','⑩ 实验验证'
+    '④ 岔路口游戏','⑤ 只看眼前的代价','⑥ 路标不是地图',
+    '⑦ 不是信息的错','⑧ 最佳模糊度','⑨ 堵一半就变天','⑩ 三个教训'
   ],
+
+  // ---- Step 0 ----
   s0_title: '每个人每天都在做选择',
   s0_p1: '中午去食堂，四个窗口分别卖红烧肉、糖醋排骨、炒青菜、咖喱鸡。你选哪个？',
   s0_p2: '每个菜都有一个「回报」——好吃程度的打分。你当然想选分高的，但你事先不一定知道每道菜几分。',
@@ -121,16 +133,18 @@ zh: {
   s0_hl: '选择问题 = 从若干选项中挑回报最大的',
   s0_try: '点一点下面的选项，看看你能不能挑到最大的回报。',
 
+  // ---- Step 1 ----
   s1_title: '信息帮你选得更好',
   s1_p1: '如果你完全不知道哪个好，只能闭着眼睛随便选一个。选到最好的全靠运气。',
   s1_p2: '但如果有人提前告诉你「今天A窗口的红烧肉特别好」，你就更有把握了。这种帮你判断的线索叫<b>信息</b>（也叫信号）。',
   s1_p3: '信号不一定完全准确。朋友说「好吃」，实际可能只是一般般。信号有个<b>精度</b>：精度高的信号靠谱，精度低的模模糊糊。下面我们用字母 β（读作 beta）表示精度，β 越大信号越准。',
   s1_hl: '有个叫 Blackwell 的数学家，在1953年证明了一件事：<b>信号越准确，你的选择就越好。</b>',
-  s1_p4: '这不是很明显吗？谁会嫌自己知道的太多？',
+  s1_p4: '这不是很明显吗？谁会嫌自己知道的太多？——但这个结论有个前提条件，后面我们会看到。',
   s1_try: '拖动下面的滑块调整信号精度 β，看看你的平均得分怎么变。精度越高，得分越高。',
   s1_lbl: '信号精度 β',
   s1_avg: '平均得分',
 
+  // ---- Step 2 ----
   s2_title: '可是，有些路走了就回不来',
   s2_p1: 'Blackwell的结论有个前提：<b>你想选什么就能选什么</b>。所有选项摆在桌上，想选哪个选哪个。',
   s2_p2: '但现实中很多选择是<b>单行道</b>。你走了这条路，另一条就到不了了。',
@@ -139,8 +153,9 @@ zh: {
   s2_p4: '这种「走了就回不来」叫<b>不可逆性</b>。',
   s2_hl: '问题来了：当选择是单行道的时候，信号越准确还是越好吗？',
 
+  // ---- Step 3 ----
   s3_title: '一个岔路口的游戏',
-  s3_p1: '接下来我们用一个简化的分数来说明问题：0分最差，1分最好。（前面用的是几十分的打分，这里换成0到1，道理一样。）',
+  s3_p1: '接下来我们用一个简化的分数来说明问题：0分最差，1分最好。',
   s3_p1b: '你站在起点 S，面前有两条路：',
   s3_desc_a: '<b>向左走到 A</b>：回报 0.6（看起来不错）<br>但 A 是个死胡同，到了 A 就没路了。',
   s3_desc_b: '<b>向右走到 B</b>：回报 0.4（看起来一般）<br>但 B 后面连着一个 G，G 的回报是 1.0！',
@@ -150,76 +165,96 @@ zh: {
   s3_btn_b: '走 B（回报 0.4）',
   s3_result_a: '你到了 A，拿到 0.6 分。但 A 是死胡同，游戏结束了。如果你选了 B，就能继续走到 G 拿 1.0 分。',
   s3_result_b: '你到了 B（0.4分），发现后面还有路！继续走到 G，拿到 1.0 分。',
-  s3_moral: '看到了吗？眼前回报更高的 A 其实是陷阱。回报较低的 B 才是通往最优解的桥梁。',
+  s3_moral: '看到了吗？眼前回报更高的 A 其实是陷阱。回报较低的 B 才是通往最高分的桥梁。',
   s3_reset: '再玩一次',
 
-  s4_title: '信号越准确，得分反而越低',
-  s4_p1: '刚才你可以用大脑仔细想。但如果有个人只根据信号来做决定呢？',
-  s4_p2: '假设他只能看到关于 A 和 B 回报的信号（有噪声），看不到后面的路，然后选信号看起来更高的那个。',
+  // ---- Step 4: REFRAMED ----
+  s4_title: '只看眼前的代价',
+  s4_p1: '刚才你可以仔细想再选。但如果有个人只看信号——哪个回报高就选哪个，完全不看后面的路——会怎样？',
+  s4_p2: '我们管这种人叫<b>「只看眼前」的人</b>。信号说哪个回报高，他就选哪个，完全不管这条路后面通不通。',
   s4_cases: '<ul><li><b>β 接近 0（信号几乎没用）</b>：分不清 A 和 B 谁高，等于随机选。一半概率选A拿0.6，一半选B再走到G拿1.0。平均得分 = <span class="formula">0.5 × 0.6 + 0.5 × 1.0 = 0.80</span></li><li><b>β 非常大（信号完全准确）</b>：清清楚楚看到A是0.6、B是0.4。A更高，一定选A。得分 = <span class="formula">0.6</span></li></ul>',
-  s4_hl: '信号从完全没用变成完全准确，平均得分从 0.80 掉到 0.60。知道得越清楚，选得越差。',
+  s4_hl: '对这个「只看眼前」的人来说，信号从完全没用变成完全准确，平均得分从 0.80 掉到 0.60。知道得越清楚，选得越差！',
+  s4_compound: '而且如果不只是一个岔路口，而是连着好几个——每个路口都可能走错——那全走对的概率会<b>缩得特别快</b>（比如每个路口走对的概率是一半，三个路口就是 ½×½×½ = ⅛）。路口越多，「只看眼前」的人越惨。',
+  s4_but: '但这真的是信息的错吗？还是这个人自己有问题？继续往下看。',
   s4_try: '拖动滑块，观察信号精度和平均得分的关系：',
   s4_lbl: '信号精度 β',
   s4_score: '平均得分',
   s4_trap: '走进陷阱A的概率',
 
-  s5_title: '信号是路标，不是地图',
-  s5_p1: '为什么会这样？因为信号只告诉你眼前每条路的回报多高，就像路标上写着「前方风景80分」。',
+  // ---- Step 5: REFRAMED ----
+  s5_title: '路标不是地图',
+  s5_p1: '为什么「只看眼前」的人会越知道越差？因为信号只告诉你眼前每条路的回报多高，就像路标上写着「前方风景80分」。',
   s5_p2: '但信号不告诉你这条路通不通、通到哪里。你手上没有地图。',
-  s5_p3: '用论文里的说法：',
-  s5_terms: '<ul><li><b>道路结构</b>（数学家叫它「拓扑」）= 哪些路是通的，哪些路是堵的 = 地图</li><li><b>信号</b> = 每条路的回报有多高 = 路标</li></ul>',
+  s5_p3: '我们给这两样东西起个名字：',
+  s5_terms: '<ul><li><b>道路结构</b> = 哪些路是通的，哪些路是堵的 = 你的地图</li><li><b>信号</b> = 每条路的回报有多高 = 路标</li></ul>',
   s5_p4: '信号再准确，也改变不了哪条路是通的。A是死胡同这个事实，不会因为你测量得更精确就消失。',
-  s5_hl: '你拿到的分数和满分之间的差距，就是你的「损失」。这个损失可以拆成两部分：<br><br><span class="formula">总损失 = 道路损失（路不通造成的）+ 信号损失（看不准回报造成的）</span><br><br>道路损失是<b>物理障碍</b>，信号管不了，不管你的信号多准它都在那。信号损失才是信号能改善的部分，而且随着信号变准，这部分缩得很快：β 每增大一点，信号损失就小一大截。',
+  s5_hl: '你拿到的分数和满分之间的差距，就是你的「损失」。论文证明，这个损失可以拆成两部分：<br><br><span class="formula">总损失 = 道路损失（路不通造成的）+ 信号损失（看不准回报造成的）</span><br><br>道路损失是<b>死的</b>——路不通就是路不通，不管你的信号多准都改变不了。信号损失才是信号能改善的部分。',
   s5_p5: '所以当精度已经很高的时候，信号能管的那部分几乎为零，剩下的全是道路损失。',
+  s5_bridge: '但问题来了：如果你不只有路标，还有<b>地图</b>呢？能看到路通不通的人，还会掉进陷阱吗？',
 
-  s6_title: '有时候看不清反而更好',
-  s6_p1: '前面 S-A-B-G 的例子里，信号纯粹是坏事（越准越差）。但如果路口更复杂呢？',
-  s6_p2: '在 B 后面不只有 G（好目标，回报1.0），还有一个 D（干扰项，回报只有0.1）。到了B之后你要在G和D之间再做一次选择。',
-  s6_p3: '这下情况变了：',
-  s6_tradeoff: '<ul><li>在起点 S：信号越准，越容易选A掉进陷阱（坏事）</li><li>在中途 B：信号越准，越容易分清G和D选对路（好事）</li></ul>',
-  s6_p4: '一个把你推进陷阱，一个帮你选对路。两股力量拉扯，存在一个<b>最佳精度</b>，刚好在它们之间取得平衡。',
-  s6_try: '拖动滑块看损失怎么变化。找到那个最低点：',
-  s6_lbl: '信号精度 β',
-  s6_loss: '预期损失 L(β)',
-  s6_ptrap: '掉进陷阱的概率',
-  s6_pgoal: '到B后选对G的概率',
-  s6_table_title: '论文中的数据：',
-  s6_table_note: '信号完全准确时的损失是 0.400，最佳精度（β≈1.5）时的损失只有 0.273。两者相差 0.127，相当于在 0.273 的基础上多了47%。',
+  // ---- Step 6: NEW — Cognitive Depth ----
+  s6_title: '不是信息的错',
+  s6_p1: '前面我们看到，「只看眼前」的人信号越准选得越差。但这真的是信息的错吗？',
+  s6_p2: '论文的答案是：<b>不是。</b>问题出在这个人身上——他只看到了每条路的回报，却看不到路通不通。',
+  s6_p3: '我们用一个字母 κ（读作 kappa，像英文字母 K 的发音）来表示「你能看多远」：',
+  s6_kappa: '<ul><li><b>κ = 0（路盲）</b>：完全看不到路况。只看每条路的回报分数。就是前面那个掉进陷阱的人。</li><li><b>κ 很大（有地图）</b>：能看到哪条路通、哪条是死胡同、后面连着什么。</li></ul>',
+  s6_p4: '论文证明了一件关键的事——存在一条<b>视力分界线</b>：',
+  s6_hl: '存在一条分界线。<br>• 视力超过分界线：信息越多越好，Blackwell说的没错<br>• 视力不到分界线：信息越多反而越差',
+  s6_p5: '换句话说：<b>Blackwell定理没有错。</b>它只是需要你有足够的「视力」——看得到路况，而不只是看到回报分数。',
+  s6_p6: '一个能看到全局路况的聪明人，信息越多<b>永远</b>越好。掉进陷阱不是因为知道太多，是因为<b>只看眼前最好的，没看到路通向哪里</b>——你追求的是「眼前最好」而不是「最终最好」。',
+  s6_p7: '而且论文还发现了一个有趣的事：即使你看不到路况（κ 很低），如果做选择时不只看分数，还跟着自己的感觉走——比如选专业时考虑自己的兴趣，而不是只看薪资排名——你就不会被信号完全牵着走，也就不容易掉进陷阱。<b>跟着感觉走，反而有保护作用。</b>',
+  s6_try: '下面的图有三条曲线。<span style="color:#e74c3c">红色虚线</span>是路盲（κ=0），<span style="color:#2ecc71">绿色虚线</span>是有地图的人。拖动 κ 滑块看<span style="color:#7c3aed">紫色实线</span>怎么变：',
+  s6_lbl_beta: '信号精度 β',
+  s6_lbl_kappa: '视力 κ',
+  s6_score: '当前得分',
+  s6_regime_good: 'κ > κ*：信息越多越好',
+  s6_regime_bad: 'κ < κ*：信息越多越差',
+  s6_regime_near: '接近门槛 κ*',
+  s6_legend_greedy: '路盲 (κ=0)',
+  s6_legend_bayesian: '有地图',
+  s6_legend_current: '当前 κ',
 
-  s7_title: '当一半的路被堵死：临界点',
-  s7_p1: '前面的例子都是小路口。如果把道路网络放大到一整座城市呢？',
-  s7_p2: '想象一个大网格，每个路口是一个选择，每条路都有可能被堵住（我们用 p 表示堵住的概率，p=0.5 就是一半的路被堵）。你从一个路口出发，只能走没被堵住的路。',
-  s7_p3: '数学家 Harris 和 Kesten 证明了一个精确的结果：在这种二维网格上，分界线恰好是 <b>p = 0.5</b>。',
-  s7_phases: '<ul><li><b>p 小于 0.5</b>（堵的路不到一半）：大部分路口都能走到，你被困在小角落的概率很低。信号有用，Blackwell的结论基本成立。</li><li><b>p 大于 0.5</b>（堵的路超过一半）：你几乎一定被困在一个很小的区域。信号再准确也帮不了你，因为好选项你根本走不到。</li></ul>',
-  s7_p4: '这种突然的翻转，和水到了0°C突然结冰很像。物理学家管这种突然的变化叫<b>相变</b>。在 p=0.5 以下，信息有用；在 p=0.5 以上，信息失效。中间没有慢慢过渡的地带，说变就变。',
-  s7_try: '拖动滑块调整堵路概率 p，看看从起点（红色）能走到的区域（绿色）怎么变化：',
-  s7_lbl: '堵路概率 p',
-  s7_reach: '能走到的路口数',
-  s7_total: '总路口数',
-  s7_frac: '能走到的比例',
-  s7_regen: '重新生成',
+  // ---- Step 7: Sweet Spot (was step 6) ----
+  s7_title: '有时候看不清反而更好',
+  s7_p1: '对「只看眼前」的人来说，信号总是坏事吗？也不一定。',
+  s7_p2: '如果 B 后面不只有 G（好目标，回报1.0），还有一个 D（坏选项，回报只有0.1）呢？到了B之后你要在G和D之间再做一次选择。',
+  s7_p3: '这下情况变了：',
+  s7_tradeoff: '<ul><li>在起点 S：信号越准，越容易选A掉进陷阱（坏事）</li><li>在中途 B：信号越准，越容易分清G和D选对路（好事）</li></ul>',
+  s7_p4: '一个把你推进陷阱，一个帮你选对路。两股力量拉扯，存在一个<b>最佳精度</b>，刚好在它们之间取得平衡。',
+  s7_try: '拖动滑块看损失怎么变化。找到那个最低点：',
+  s7_lbl: '信号精度 β',
+  s7_loss: '平均损失',
+  s7_ptrap: '掉进陷阱的概率',
+  s7_pgoal: '到B后选对G的概率',
+  s7_table_title: '论文中的数据：',
+  s7_table_note: '信号完全准确时损失是 0.400，但最佳精度（β≈1.5）时损失只有 0.273。知道得太清楚，反而不如「刚刚好」！',
 
-  s8_title: '你身边的 Blackwell 困境',
-  s8_p1: '论文提出了三个条件。同时满足这三个条件的场景，都会出现Blackwell困境：',
-  s8_c1: '<b>条件一：选了就回不了头。</b>',
-  s8_c2: '<b>条件二：眼前回报最高的选项，反而通向更差的区域。</b>',
-  s8_c3: '<b>条件三：你能观察到回报，但看不到路通不通。</b>',
-  s8_ex_title: '四个例子：',
-  s8_ex1: '<b>选专业。</b>转专业代价很大（条件一）。当前薪资最高的专业，五年后未必有前途（条件二）。薪资排行榜随手可查，但哪个行业的转型空间更大，没人能告诉你（条件三）。',
-  s8_ex2: '<b>选技术平台。</b>代码迁移成本极高（条件一）。跑分第一的平台，开发者社区可能在萎缩（条件二）。性能评测到处都有，生态系统的未来走向看不到（条件三）。',
-  s8_ex3: '<b>选投资产品。</b>资金锁定，不能随时取出来（条件一）。预期收益最高的产品可能最难卖掉（条件二）。收益率算得很精确，但市场崩盘时你能不能跑，算不出来（条件三）。',
-  s8_ex4: '<b>环保政策。</b>开发了就恢复不了（条件一）。经济回报最高的方案可能毁掉不可再生的自然资源（条件二）。经济数据齐全，但生态系统的承受极限在哪，没有人知道（条件三）。',
-  s8_hl: '论文的建议：在这类场景中，与其提高信号精度（比如金融知识教育、强制信息公开），不如降低不可逆性（比如设置合同冷静期、允许转换平台、让用户能把自己的数据搬走）。实验显示，在分界线附近，降低不可逆性的效果超过提高信号精度的 <b>40 倍</b>。',
+  // ---- Step 8: Phase Transition (was step 7) ----
+  s8_title: '堵一半的路就变天：临界点',
+  s8_p1: '前面的例子都是小路口。如果把道路网络放大到一整座城市呢？',
+  s8_p2: '想象一个大网格，每个路口是一个选择，每条路都有可能被堵住（我们用 p 表示堵住的概率，p=0.5 就是一半的路被堵）。你从一个路口出发，只能走没被堵住的路。',
+  s8_p3: '数学家已经精确地证明了：在这种棋盘格上，分界线恰好是 <b>p = 0.5</b>。',
+  s8_phases: '<ul><li><b>p 小于 0.5</b>（堵的路不到一半）：大部分路口都能走到，你被困在小角落的概率很低。信号有用，Blackwell的结论基本成立。</li><li><b>p 大于 0.5</b>（堵的路超过一半）：你几乎一定被困在一个很小的区域。信号再准确也帮不了你，因为好选项你根本走不到。</li></ul>',
+  s8_p4: '这种突然的翻转，和水到了0°C突然结冰很像——说变就变，没有中间状态。在 p=0.5 以下，信息有用；在 p=0.5 以上，信息失效。',
+  s8_p5: '不只是棋盘格有这种突变。朋友圈、互联网这些真实的网络上也会突然翻转——只是翻转的位置不同。在像微博这种「少数大V有很多粉丝」的网络里，大V把大家都连在了一起，路几乎永远是通的，所以信号精度反而才是关键。',
+  s8_try: '拖动滑块调整堵路概率 p，看看从起点（红色）能走到的区域（绿色）怎么变化：',
+  s8_lbl: '堵路概率 p',
+  s8_reach: '能走到的路口数',
+  s8_total: '总路口数',
+  s8_frac: '能走到的比例',
+  s8_regen: '重新生成',
 
-  s9_title: '六组计算实验，全部验证通过',
-  s9_p1: '论文不只是理论推导，还跑了六组大规模计算实验来验证每一个预测：',
-  s9_exp1: '<b>分界线验证</b>：用电脑在50×50网格上做了400次实验。能走到的比例在 p=0.5 附近急剧下降，和理论预测完全吻合。',
-  s9_exp2: '<b>分解验证</b>：五种不同精度下，道路损失的曲线完全重合（不随精度变化），确认了损失的拆分公式。',
-  s9_exp3: '<b>「如果路况不同呢？」</b>：固定精度β=5，把堵路概率从0.70降到0.29，平均损失从0.370降到0.192。同样的判断力，只改路况，结果大不一样。',
-  s9_exp4: '<b>政策对比</b>：在分界线附近，降低堵路概率的效果超过提高信号精度的 40 倍。',
-  s9_exp5: '<b>网格放大</b>：从20×20放大到100×100，变化越来越陡峭，符合理论预测。',
-  s9_exp6: '<b>两群人现象</b>：高精度信号下，人分成了两拨：一拨几乎没有损失，另一拨损失很大。如果不考虑道路结构，我们会以为所有人的损失差不多，但实验显示确实分成了两群。',
-  s9_link: '完整实验数据和代码见',
+  // ---- Step 9: Three Lessons (NEW) ----
+  s9_title: '三个教训',
+  s9_p1: '这篇论文的发现可以总结为三条教训：',
+  s9_lesson1: '<b>教训一：问题不在信息，在于你能不能看到全局。</b><br>Blackwell定理没有错——信息越多越好。但前提是你知道自己在什么样的「路网」上。如果你只看眼前的回报，知道太多反而让你更确定地走进陷阱。解决办法：提高人们的视力 κ——让他们看到选择的长期后果，而不只是眼前的回报。',
+  s9_lesson2: '<b>教训二：给人留退路，比给更多信息有效得多。</b><br>论文用数学证明了：在分界线附近，把路多打通一点点（减少「走了回不来」），效果远远超过让信号更准确。换成现实语言：比如签了合同后给几天反悔期、允许换平台时把数据带走——这些比要求公开更多信息有效得多。',
+  s9_lesson3: '<b>教训三：信息和教育要一起来。</b><br>论文证明了信号精度和视力（κ）是「好搭档」——两个一起提高，效果大于分别提高之和（1+1&gt;2）。只给信息不给教育，或者只给教育不给信息，都不是最好的做法。',
+  s9_examples_title: '你身边的 Blackwell 困境：',
+  s9_ex1: '<b>选专业</b>：转专业代价大（不可逆）。当前薪资最高的专业，五年后未必有前途（陷阱）。薪资排行榜到处有，但没人告诉你哪个行业的转型空间更大（看不到路况）。→ 比起更精确的薪资排行榜，「展示五年后的职业路径」更有用。',
+  s9_ex2: '<b>学哪门编程语言</b>：学了一门语言后，换另一门要花很多时间（不可逆）。排行榜第一的语言，可能用的人越来越少（陷阱）。各种排行到处有，但哪门语言五年后还吃香，没人告诉你（看不到路况）。→ 比起更精确的排行，「展示哪些语言的使用者在增长」更有用。',
+  s9_ex3: '<b>存压岁钱</b>：存了定期就不能提前取（不可逆）。利息最高的可能锁得最久，急用钱时取不出来（陷阱）。利率写得清清楚楚，但急用钱时能不能拿到没人告诉你（看不到路况）。→ 比起更精确的利率比较，「告诉你急用钱时怎么办」更有用。',
+  s9_link: '全部计算实验和代码见',
   s9_appendix: '计算附录',
   s9_period: '。',
 
@@ -231,26 +266,30 @@ en: {
   header: 'The Blackwell Dilemma — Interactive Explorer',
   steps: [
     '① Choices & Payoffs','② The Power of Info','③ No Going Back',
-    '④ A Fork in the Road','⑤ More Info, Less Gain?','⑥ Signposts vs. Maps',
-    '⑦ The Sweet Spot','⑧ Block Half, Change All','⑨ Real Examples','⑩ Experiments'
+    '④ A Fork in the Road','⑤ The Greedy Trap','⑥ Signposts vs. Maps',
+    '⑦ Not Info\'s Fault','⑧ The Sweet Spot','⑨ Block Half, Change All','⑩ Three Lessons'
   ],
+
+  // ---- Step 0 ----
   s0_title: 'We Make Choices Every Day',
   s0_p1: 'Lunchtime in the cafeteria. Four windows serve braised pork, sweet-and-sour ribs, stir-fry veggies, and curry chicken. Which one do you pick?',
   s0_p2: 'Each dish has a "payoff" (a tastiness score). You want the highest score, but you may not know each dish\'s score in advance.',
-  s0_p3: 'In math, we simplify this into a model (a stripped-down version of reality): you face several options, each with a number (payoff), and you want to pick the largest one.',
+  s0_p3: 'In math, we simplify this into a model: you face several options, each with a number (payoff), and you want to pick the largest one.',
   s0_hl: 'A choice problem = pick the option with the highest payoff',
   s0_try: 'Click the options below. Can you find the highest payoff?',
 
+  // ---- Step 1 ----
   s1_title: 'Information Helps You Choose Better',
   s1_p1: 'If you know nothing, you pick at random. Getting the best outcome is pure luck.',
   s1_p2: 'But if a friend tells you "the braised pork is amazing today," you have an edge. These clues that help you decide are called <b>information</b> (or signals).',
   s1_p3: 'Signals are not always accurate. Sometimes your friend says "great" but the food is just okay. So signals have a <b>precision</b>: high-precision signals are reliable; low-precision ones are vague. We use the letter β (beta) to represent precision. Bigger β means a more accurate signal.',
   s1_hl: 'A mathematician named Blackwell proved something in 1953: <b>the more accurate your signal, the better your choice.</b>',
-  s1_p4: 'Sounds obvious, right? Who would complain about knowing too much?',
+  s1_p4: 'Sounds obvious, right? Who would complain about knowing too much? — But this conclusion has a hidden assumption. We\'ll see what happens when it breaks.',
   s1_try: 'Drag the slider to adjust signal precision β. Watch your average score rise with precision.',
   s1_lbl: 'Signal precision β',
   s1_avg: 'Average score',
 
+  // ---- Step 2 ----
   s2_title: 'But Some Roads Are One-Way',
   s2_p1: 'Blackwell\'s conclusion depends on an assumption: <b>you can pick any option you want</b>. All options sit on the table and you choose freely.',
   s2_p2: 'But many real choices are <b>one-way streets</b>. Once you take this road, the other becomes unreachable.',
@@ -259,11 +298,12 @@ en: {
   s2_p4: 'This "no going back" quality is called <b>irreversibility</b>.',
   s2_hl: 'The question: when choices are one-way streets, is more information still better?',
 
+  // ---- Step 3 ----
   s3_title: 'A Fork in the Road',
-  s3_p1: 'From here on, we use scores from 0 to 1. Zero is the worst, 1 is the best. (Different scale than before, but the idea is the same.)',
+  s3_p1: 'From here on, we use scores from 0 to 1. Zero is the worst, 1 is the best.',
   s3_p1b: 'You stand at starting point S. Two roads ahead:',
   s3_desc_a: '<b>Go left to A</b>: payoff 0.6 (looks pretty good)<br>But A is a dead end. Once at A, you cannot go anywhere else.',
-  s3_desc_b: '<b>Go right to B</b>: payoff 0.4 (looks mediocre)<br>But B connects to G, which has payoff 1.0!',
+  s3_desc_b: '<b>Go right to B</b>: payoff 0.4 (looks so-so)<br>But B connects to G, which has payoff 1.0!',
   s3_p2: 'You can only see the payoffs of A and B, not what lies beyond. Which do you pick?',
   s3_try: 'Click to choose your path:',
   s3_btn_a: 'Go to A (payoff 0.6)',
@@ -273,73 +313,93 @@ en: {
   s3_moral: 'See? The option with the higher visible payoff (A) is actually a trap. The lower-payoff B is the bridge to the best outcome.',
   s3_reset: 'Play again',
 
-  s4_title: 'Better Signals, Lower Scores',
-  s4_p1: 'In that game, you had time to think. But what about a person who just follows the signal?',
-  s4_p2: 'Suppose this person can only see noisy signals about A and B\'s payoffs—not the roads beyond—and picks whichever signal looks higher.',
+  // ---- Step 4: REFRAMED ----
+  s4_title: 'The Cost of Short-Sightedness',
+  s4_p1: 'In that game, you had time to think. But what about a person who just follows the signal — picks whichever option looks highest, without checking what lies ahead?',
+  s4_p2: 'We call this person <b>"short-sighted"</b> — they always pick whichever option looks highest right now, ignoring whether the road continues or hits a dead end.',
   s4_cases: '<ul><li><b>β near 0 (signal is almost useless)</b>: Cannot tell A from B. Picks randomly. Half the time picks A for 0.6, half picks B then walks to G for 1.0. Average = <span class="formula">0.5 × 0.6 + 0.5 × 1.0 = 0.80</span></li><li><b>β very large (signal is perfectly accurate)</b>: Sees clearly that A=0.6, B=0.4. A is higher; always picks A. Score = <span class="formula">0.6</span></li></ul>',
-  s4_hl: 'As the signal goes from useless to perfectly accurate, average score drops from 0.80 to 0.60. The clearer the signal, the worse the outcome.',
+  s4_hl: 'For this short-sighted person, as the signal goes from useless to perfectly accurate, average score drops from 0.80 to 0.60. The clearer the signal, the worse the outcome!',
+  s4_compound: 'And if there is not just one fork, but several in a row — each one a chance to go wrong — the odds of getting through all of them <b>shrink really fast</b> (for example, if each fork is a coin flip, three forks = ½×½×½ = ⅛ chance of getting all right). The more forks, the worse the short-sighted person does.',
+  s4_but: 'But is this really information\'s fault? Or is there something wrong with the person? Keep reading.',
   s4_try: 'Drag the slider and watch:',
   s4_lbl: 'Signal precision β',
   s4_score: 'Average score',
   s4_trap: 'Probability of falling into trap A',
 
+  // ---- Step 5: REFRAMED ----
   s5_title: 'Signposts Are Not Maps',
-  s5_p1: 'Why does this happen? Because the signal only tells you how high the payoff is at each fork. It is like a signpost saying "scenic score: 80."',
+  s5_p1: 'Why does the short-sighted person do worse with better signals? Because the signal only tells you how high the payoff is at each fork. It is like a signpost saying "scenic score: 80."',
   s5_p2: 'But the signal does not tell you whether the road is open or where it leads. You have no map.',
-  s5_p3: 'In the paper\'s terminology:',
-  s5_terms: '<ul><li><b>Road structure</b> (mathematicians call it "topology") = which roads are open and which are blocked = the map</li><li><b>Signal</b> = how high each road\'s payoff is = the signpost</li></ul>',
+  s5_p3: 'Let\'s give these two things names:',
+  s5_terms: '<ul><li><b>Road structure</b> = which roads are open and which are blocked = the map</li><li><b>Signal</b> = how high each road\'s payoff is = the signpost</li></ul>',
   s5_p4: 'No matter how precise the signal, it cannot change which roads are open. The fact that A is a dead end does not disappear because you measured more carefully.',
-  s5_hl: 'The total loss splits into two parts:<br><br><span class="formula">Total loss = Road loss (caused by blocked roads) + Signal loss (caused by noisy readings)</span><br><br>Road loss is a <b>physical barrier</b> that signals cannot touch, no matter how precise. Signal loss is the part signals can improve, and it shrinks fast: each time β goes up a bit, the signal loss drops by a big chunk.',
+  s5_hl: 'The gap between your score and the best possible score is your <b>loss</b>. The paper proves this loss splits into two parts:<br><br><span class="formula">Total loss = Road loss (blocked roads) + Signal loss (inaccurate readings)</span><br><br>Road loss is <b>fixed</b> — a blocked road stays blocked no matter how precise your signal is. Signal loss is the part that shrinks as your signal gets more accurate.',
   s5_p5: 'So at high precision, the part that signals can fix is nearly zero. What remains is all road loss.',
+  s5_bridge: 'But what if you had not just signposts, but also a <b>map</b>? Would someone who can see the road structure still fall into the trap?',
 
-  s6_title: 'Sometimes Blurry Vision Is Better',
-  s6_p1: 'In the S-A-B-G example, information was purely harmful (more was always worse). What if there are more paths?',
-  s6_p2: 'Beyond B there is not only G (the goal, payoff 1.0) but also D (a distractor, payoff just 0.1). At B you must choose between G and D.',
-  s6_p3: 'Now the situation changes:',
-  s6_tradeoff: '<ul><li>At starting point S: higher precision means you are more likely to pick A and fall into the trap (bad)</li><li>At midpoint B: higher precision means you can tell G from D and pick correctly (good)</li></ul>',
-  s6_p4: 'One force pushes you into the trap; the other helps you pick the right path. These two forces pull in opposite directions, and there exists an <b>optimal precision</b> that balances them.',
-  s6_try: 'Drag the slider and watch the loss change. Find the minimum:',
-  s6_lbl: 'Signal precision β',
-  s6_loss: 'Expected loss L(β)',
-  s6_ptrap: 'Trap probability at S',
-  s6_pgoal: 'Correct pick at B',
-  s6_table_title: 'Data from the paper:',
-  s6_table_note: 'With a perfectly accurate signal, loss is 0.400. With optimal precision (β≈1.5), loss is only 0.273. The difference is 0.127, which is 47% above the optimal 0.273.',
+  // ---- Step 6: NEW — Cognitive Depth ----
+  s6_title: 'It\'s Not Information\'s Fault',
+  s6_p1: 'Earlier we saw that the short-sighted person does worse with better signals. But is information itself the problem?',
+  s6_p2: 'The paper\'s answer: <b>No.</b> The fault lies with the person — they can see each road\'s payoff, but not whether the road is open or blocked.',
+  s6_p3: 'We use a letter κ (kappa, sounds like "cap-uh") to represent "how far ahead you can see":',
+  s6_kappa: '<ul><li><b>κ = 0 (road-blind)</b>: Cannot see the road structure at all. Only sees payoff numbers. This is exactly the short-sighted person from before — they keep falling into traps because they only see scores, not roads.</li><li><b>κ large (has a map)</b>: Can see which roads are open, which are dead ends, and what lies beyond.</li></ul>',
+  s6_p4: 'The paper proves something crucial — there is a <b>vision dividing line</b>:',
+  s6_hl: 'There is a dividing line.<br>• Vision above the line: more info = better outcomes (Blackwell is right)<br>• Vision below the line: more info = worse outcomes',
+  s6_p5: 'In other words: <b>Blackwell\'s theorem is not wrong.</b> It just requires enough "vision" to see the road structure, not just the signposts.',
+  s6_p6: 'A person who can see the full road layout <b>always</b> benefits from more information. Falling into the trap is not about knowing too much — it\'s about <b>chasing the highest visible payoff without seeing where roads lead</b> — aiming for "best right now" instead of "best in the end."',
+  s6_p7: 'The paper also found something interesting: even a road-blind person (low κ) is protected if they partly follow their gut feelings instead of only chasing the highest score — because gut feelings stop you from blindly following the signal into a trap. For example, a student who considers their own passion alongside salary data is less likely to get trapped in a dead-end career. <b>Following your heart actually protects you.</b>',
+  s6_try: 'The chart shows three curves. <span style="color:#e74c3c">Red dashed</span> = road-blind (κ=0). <span style="color:#2ecc71">Green dashed</span> = map-holder. Drag the κ slider to see how the <span style="color:#7c3aed">purple curve</span> changes:',
+  s6_lbl_beta: 'Signal precision β',
+  s6_lbl_kappa: 'Vision κ',
+  s6_score: 'Current score',
+  s6_regime_good: 'κ > κ*: more info → better',
+  s6_regime_bad: 'κ < κ*: more info → worse',
+  s6_regime_near: 'Near threshold κ*',
+  s6_legend_greedy: 'Road-blind (κ=0)',
+  s6_legend_bayesian: 'Map-holder',
+  s6_legend_current: 'Current κ',
 
-  s7_title: 'Block Half the Roads, Everything Changes',
-  s7_p1: 'The earlier examples were small intersections. What happens on a city-sized road network?',
-  s7_p2: 'Imagine a big grid where each intersection is a choice and each road has some chance of being blocked. We write p for that chance (p=0.5 means half the roads are blocked). You start at one intersection and can only travel on open roads.',
-  s7_p3: 'Mathematicians Harris and Kesten proved a precise result: on this kind of 2D grid, the dividing line is exactly at <b>p = 0.5</b>.',
-  s7_phases: '<ul><li><b>p below 0.5</b> (fewer than half the roads blocked): most intersections are reachable. You are unlikely to be stuck in a small corner. Information is useful; Blackwell\'s conclusion mostly holds.</li><li><b>p above 0.5</b> (more than half blocked): you are almost certainly confined to a tiny area. No amount of signal precision helps, because you simply cannot reach the good options.</li></ul>',
-  s7_p4: 'This sudden flip is like water freezing at exactly 0°C. Physicists call this kind of sudden change a <b>phase transition</b>. Below p=0.5, information helps. Above p=0.5, information is useless. No gradual middle ground.',
-  s7_try: 'Drag the slider to adjust blocking probability p. Watch how the reachable area (green) from the start (red) changes:',
-  s7_lbl: 'Blocking probability p',
-  s7_reach: 'Reachable intersections',
-  s7_total: 'Total intersections',
-  s7_frac: 'Reachable fraction',
-  s7_regen: 'Regenerate',
+  // ---- Step 7: Sweet Spot ----
+  s7_title: 'Sometimes Blurry Vision Is Better',
+  s7_p1: 'For the short-sighted person, is information always harmful? Not necessarily.',
+  s7_p2: 'Beyond B there is not only G (the goal, payoff 1.0) but also D (a bad option, payoff just 0.1). At B you must choose between G and D.',
+  s7_p3: 'Now the situation changes:',
+  s7_tradeoff: '<ul><li>At starting point S: higher precision means you are more likely to pick A and fall into the trap (bad)</li><li>At midpoint B: higher precision means you can tell G from D and pick correctly (good)</li></ul>',
+  s7_p4: 'One force pushes you into the trap; the other helps you pick the right path. These two forces pull in opposite directions, and there is a <b>sweet spot</b> — a precision level that balances them perfectly.',
+  s7_try: 'Drag the slider and watch the loss change. Find the minimum:',
+  s7_lbl: 'Signal precision β',
+  s7_loss: 'Average loss',
+  s7_ptrap: 'Trap probability at S',
+  s7_pgoal: 'Correct pick at B',
+  s7_table_title: 'Data from the paper:',
+  s7_table_note: 'With a perfectly accurate signal, loss is 0.400. But at the sweet spot (β≈1.5), loss is only 0.273. Knowing too clearly actually makes things worse than knowing "just right"!',
 
-  s8_title: 'Blackwell Dilemmas Around You',
-  s8_p1: 'The paper provides a three-condition test. Any scenario satisfying all three exhibits the Blackwell Dilemma:',
-  s8_c1: '<b>Condition 1: once you choose, you cannot go back.</b>',
-  s8_c2: '<b>Condition 2: the highest visible payoff leads to a worse region.</b>',
-  s8_c3: '<b>Condition 3: you can observe payoffs but not whether roads are open.</b>',
-  s8_ex_title: 'Four examples:',
-  s8_ex1: '<b>Choosing a major.</b> Switching majors is costly (condition 1). The highest-paying major today may have no future in five years (condition 2). Salary rankings are everywhere, but no one can tell you which field has more room to change direction (condition 3).',
-  s8_ex2: '<b>Choosing a tech platform.</b> Code migration is expensive (condition 1). The top-benchmark platform may have a shrinking developer community (condition 2). Performance tests are everywhere; the future trajectory of the ecosystem is invisible (condition 3).',
-  s8_ex3: '<b>Choosing investments.</b> Capital is locked up and you cannot withdraw freely (condition 1). The highest expected return may come with the worst liquidity (condition 2). Return estimates are precise; whether you can exit during a crash is unknown (condition 3).',
-  s8_ex4: '<b>Environmental policy.</b> Development is irreversible (condition 1). The highest economic return may destroy irreplaceable natural resources (condition 2). Economic data is abundant; where the ecological tipping point lies, nobody knows (condition 3).',
-  s8_hl: 'The paper\'s recommendation: in these scenarios, rather than raising signal precision (financial literacy programs, mandatory disclosure), reduce irreversibility (cancellation windows for contracts, platform-switching rights, letting users move their data). Experiments show that near the dividing line, reducing irreversibility is over <b>40 times</b> as effective as raising signal precision.',
+  // ---- Step 8: Phase Transition ----
+  s8_title: 'Block Half the Roads, Everything Changes',
+  s8_p1: 'The earlier examples were small intersections. What happens on a city-sized road network?',
+  s8_p2: 'Imagine a big grid where each intersection is a choice and each road has some chance of being blocked. We write p for that chance (p=0.5 means half the roads are blocked). You start at one intersection and can only travel on open roads.',
+  s8_p3: 'Mathematicians have proved a precise result: on this kind of grid (like a chessboard), the dividing line is exactly at <b>p = 0.5</b>.',
+  s8_phases: '<ul><li><b>p below 0.5</b> (fewer than half the roads blocked): most intersections are reachable. You are unlikely to be stuck in a small corner. Information is useful; Blackwell\'s conclusion mostly holds.</li><li><b>p above 0.5</b> (more than half blocked): you are almost certainly confined to a tiny area. No amount of signal precision helps, because you simply cannot reach the good options.</li></ul>',
+  s8_p4: 'This sudden flip is like water freezing at exactly 0°C — one moment liquid, next moment solid, no in-between. Below p=0.5, information helps. Above p=0.5, information is useless.',
+  s8_p5: 'This sudden flip is not limited to chessboard grids. Friend circles, the internet — real-world networks also flip, just at different tipping points. On social media — where a few popular accounts connect everyone together — the roads are almost always open, so signal precision is what matters most.',
+  s8_try: 'Drag the slider to adjust blocking probability p. Watch how the reachable area (green) from the start (red) changes:',
+  s8_lbl: 'Blocking probability p',
+  s8_reach: 'Reachable intersections',
+  s8_total: 'Total intersections',
+  s8_frac: 'Reachable fraction',
+  s8_regen: 'Regenerate',
 
-  s9_title: 'Six Computational Experiments, All Confirmed',
-  s9_p1: 'The paper is not just theory. Six computer simulations verify every prediction:',
-  s9_exp1: '<b>Dividing-line test</b>: 400 simulations on a 50×50 grid. The reachable fraction drops sharply around p=0.5, matching the theoretical threshold.',
-  s9_exp2: '<b>Decomposition test</b>: across five precision levels, the road-loss curves are the same regardless of precision, confirming that Total loss = Road loss + Signal loss.',
-  s9_exp3: '<b>What if road conditions changed?</b> Fix β=5, lower blocking from 0.70 to 0.29, average loss drops from 0.370 to 0.192. Same signal precision, different road conditions, very different outcome.',
-  s9_exp4: '<b>Policy comparison</b>: near the dividing line, reducing blocking probability is over 40 times as effective as raising signal precision.',
-  s9_exp5: '<b>Grid scaling</b> (what happens as the grid gets bigger): from 20×20 to 100×100, the transition gets steeper, consistent with the theory.',
-  s9_exp6: '<b>Two-group phenomenon</b>: under high precision, the losses split into two clusters: one group with near-zero loss, another with large loss. Without accounting for road structure, you would expect everyone to lose about the same, but experiments confirm the split.',
-  s9_link: 'Full data and code in the',
+  // ---- Step 9: Three Lessons ----
+  s9_title: 'Three Lessons',
+  s9_p1: 'The paper\'s findings boil down to three lessons:',
+  s9_lesson1: '<b>Lesson 1: The problem is not information — it\'s whether you can see the big picture.</b><br>Blackwell\'s theorem is correct: more information is better. But only if you understand the "road network" you\'re navigating. If you only chase the highest visible payoff, more knowledge makes you more confidently walk into traps. The fix: improve people\'s vision κ — help them see long-term consequences, not just immediate payoffs.',
+  s9_lesson2: '<b>Lesson 2: Giving people a way back beats giving them more data.</b><br>The paper proves mathematically: near the tipping point (where half the roads are blocked), opening up just a few more roads (reducing "no going back") is far more effective than making signals more accurate. In real-world terms: a few days to cancel after signing a contract, the right to switch platforms and take your data with you — these beat forcing companies to publish more information by a wide margin.',
+  s9_lesson3: '<b>Lesson 3: Information and education must come together.</b><br>The paper proves that signal precision and vision (κ) are "best buddies" — improving both together does more than improving each one separately (1+1&gt;2). Providing information without education, or education without information, is never the best approach.',
+  s9_examples_title: 'Blackwell Dilemmas around you:',
+  s9_ex1: '<b>Choosing a major</b>: Switching is costly (irreversible). The highest-paying major today may have no future in five years (trap). Salary rankings are everywhere, but no one shows you which fields have room to pivot (no map). → Rather than more precise salary data, "show five-year career paths" is more useful.',
+  s9_ex2: '<b>Choosing a programming language to learn</b>: Once you invest months learning one, switching costs a lot of time (irreversible). The top-ranked language may be losing users (trap). Rankings are everywhere, but no one tells you which language will still be popular in five years (no map). → Rather than more precise rankings, "show which languages are growing" is more useful.',
+  s9_ex3: '<b>Saving your allowance</b>: Put it in a savings account that locks your money and you can\'t take it out early (irreversible). The highest interest rate may lock your money up the longest — when you need cash urgently, you\'re stuck (trap). Interest rates are published clearly, but nobody tells you what happens if you need the money back in a hurry (no map). → Rather than more precise interest rate comparisons, "tell you what happens when you need the money early" is more useful.',
+  s9_link: 'All computational experiments and code in the',
   s9_appendix: 'Computational Appendix',
   s9_period: '.',
 
@@ -359,12 +419,28 @@ function normalCDF(x){
   return 0.5*(1+sign*y);
 }
 
-// 4-state welfare: W(β) = expected payoff (raw, not shortfall)
+// ========== Welfare functions ==========
+// 4-state greedy welfare: W(β) = expected payoff for greedy agent
 function welfare4(beta){
   if(beta<=0.01) return 0.80;
   const sig2 = 1/(Math.pow(2,2*beta)-1);
   const phi = normalCDF(0.2/Math.sqrt(2*sig2));
   return phi*0.6 + (1-phi)*1.0;
+}
+
+// 4-state Bayesian welfare: agent knows topology (A=dead end, B→G=1.0)
+function bayesianWelfare4(beta){
+  if(beta<=0.01) return 0.80;
+  const sig2 = 1/(Math.pow(2,2*beta)-1);
+  const pCorrect = normalCDF(0.4/Math.sqrt(2*sig2));
+  return pCorrect*1.0 + (1-pCorrect)*0.6;
+}
+
+// Blended welfare: smooth transition between greedy and Bayesian via κ
+function blendedWelfare4(beta, kappa){
+  const kstar = 0.7;
+  const f = 1/(1+Math.exp(-6*(kappa-kstar)));
+  return f * bayesianWelfare4(beta) + (1-f) * welfare4(beta);
 }
 
 // 5-state expected loss: L(β) = r* - E[payoff]
@@ -376,12 +452,11 @@ function loss5(beta){
   return pTrap*0.4 + (1-pTrap)*(1-pGoal)*0.9;
 }
 
-// Step 1 demo: 2-option Blackwell (clean formula, no approximation issues)
-// Option A: value 0.4, Option B: value 0.9. Agent picks highest noisy signal.
+// Step 1 demo: 2-option Blackwell
 function simpleBlackwell(beta){
-  if(beta<=0.01) return 0.65; // (0.4+0.9)/2
+  if(beta<=0.01) return 0.65;
   const sig2 = 1/(Math.pow(2,2*beta)-1);
-  const pBest = normalCDF(0.5/Math.sqrt(2*sig2)); // P(pick 0.9)
+  const pBest = normalCDF(0.5/Math.sqrt(2*sig2));
   return pBest*0.9 + (1-pBest)*0.4;
 }
 
@@ -499,7 +574,7 @@ function drawGraph5(canvasId){
   ctx.fillText(lang==='zh'?'干扰':'distractor',nodes.D.x,nodes.D.y+30);
 }
 
-// ========== Drawing: curve ==========
+// ========== Drawing: single curve ==========
 function drawCurve(canvasId, fn, xMin, xMax, opts){
   const c = document.getElementById(canvasId);
   if(!c) return;
@@ -507,7 +582,6 @@ function drawCurve(canvasId, fn, xMin, xMax, opts){
   const W=c.width, H=c.height;
   const pad={l:50,r:20,t:20,b:35};
   const pw=W-pad.l-pad.r, ph=H-pad.t-pad.b;
-
   ctx.clearRect(0,0,W,H);
 
   const pts=[];
@@ -545,6 +619,7 @@ function drawCurve(canvasId, fn, xMin, xMax, opts){
   ctx.fillText(opts.xLabel||'β',W-pad.r,H-pad.b+4);
 
   ctx.strokeStyle=opts.color||'#1a1a2e'; ctx.lineWidth=2.5;
+  ctx.setLineDash([]);
   ctx.beginPath();
   pts.forEach((p,i)=>{
     const cc=toCanvas(p.x,p.y);
@@ -570,6 +645,82 @@ function drawCurve(canvasId, fn, xMin, xMax, opts){
     ctx.font='bold 11px sans-serif'; ctx.textAlign='left';
     ctx.fillText('min: '+minY.toFixed(3)+' @ β≈'+minX.toFixed(1), mc.cx+8, mc.cy+4);
   }
+}
+
+// ========== Drawing: cognitive depth chart (dual + blended curves) ==========
+function drawCognitiveChart(canvasId, kappa, betaMark){
+  const c = document.getElementById(canvasId);
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W=c.width, H=c.height;
+  const pad={l:50,r:20,t:20,b:35};
+  const pw=W-pad.l-pad.r, ph=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+
+  const xMin=0, xMax=5, yMin=0.55, yMax=1.05;
+  const yRange=yMax-yMin;
+  function toC(x,y){ return {cx:pad.l+(x-xMin)/(xMax-xMin)*pw, cy:pad.t+(1-(y-yMin)/yRange)*ph}; }
+
+  // Axes
+  ctx.strokeStyle='#ccc'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b); ctx.stroke();
+
+  ctx.fillStyle='#999'; ctx.font='11px sans-serif';
+  ctx.textAlign='right'; ctx.textBaseline='middle';
+  for(let i=0;i<=4;i++){
+    const y=yMin+yRange*i/4;
+    const p=toC(xMin,y);
+    ctx.fillText(y.toFixed(2),pad.l-6,p.cy);
+    if(i>0&&i<4){ctx.strokeStyle='#eee';ctx.beginPath();ctx.moveTo(pad.l,p.cy);ctx.lineTo(W-pad.r,p.cy);ctx.stroke();}
+  }
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  for(let i=0;i<=4;i++){
+    const x=xMin+(xMax-xMin)*i/4;
+    const p=toC(x,yMin);
+    ctx.fillText(x.toFixed(1),p.cx,p.cy+4);
+  }
+  ctx.fillText('β',W-pad.r,H-pad.b+4);
+
+  // Generate curve points
+  const N=200;
+  function genPts(fn){ const a=[]; for(let i=0;i<=N;i++){const x=xMin+(xMax-xMin)*i/N; a.push({x,y:fn(x)});} return a; }
+  const greedyPts = genPts(welfare4);
+  const bayesPts = genPts(bayesianWelfare4);
+  const blendPts = genPts(b=>blendedWelfare4(b,kappa));
+
+  // Draw greedy curve (red, dashed)
+  ctx.setLineDash([6,4]); ctx.strokeStyle='#e74c3c'; ctx.lineWidth=2;
+  ctx.beginPath();
+  greedyPts.forEach((p,i)=>{ const cc=toC(p.x,p.y); i===0?ctx.moveTo(cc.cx,cc.cy):ctx.lineTo(cc.cx,cc.cy); });
+  ctx.stroke();
+
+  // Draw Bayesian curve (green, dashed)
+  ctx.strokeStyle='#2ecc71';
+  ctx.beginPath();
+  bayesPts.forEach((p,i)=>{ const cc=toC(p.x,p.y); i===0?ctx.moveTo(cc.cx,cc.cy):ctx.lineTo(cc.cx,cc.cy); });
+  ctx.stroke();
+
+  // Draw blended curve (purple, solid)
+  ctx.setLineDash([]); ctx.strokeStyle='#7c3aed'; ctx.lineWidth=3;
+  ctx.beginPath();
+  blendPts.forEach((p,i)=>{ const cc=toC(p.x,p.y); i===0?ctx.moveTo(cc.cx,cc.cy):ctx.lineTo(cc.cx,cc.cy); });
+  ctx.stroke();
+
+  // Mark β dot on blended curve
+  if(betaMark!==undefined){
+    const my=blendedWelfare4(betaMark,kappa);
+    const mc=toC(betaMark,my);
+    ctx.fillStyle='#7c3aed';
+    ctx.beginPath(); ctx.arc(mc.cx,mc.cy,5,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#333'; ctx.font='bold 12px sans-serif'; ctx.textAlign='left';
+    ctx.fillText(my.toFixed(3), mc.cx+8, mc.cy-6);
+  }
+
+  // Curve endpoint labels
+  const gEnd=toC(xMax,welfare4(xMax)), bEnd=toC(xMax,bayesianWelfare4(xMax));
+  ctx.font='bold 10px sans-serif'; ctx.textAlign='right';
+  ctx.fillStyle='#e74c3c'; ctx.fillText('κ=0',gEnd.cx-4,gEnd.cy+12);
+  ctx.fillStyle='#2ecc71'; ctx.fillText(lang==='zh'?'有地图':'map',bEnd.cx-4,bEnd.cy-8);
 }
 
 // ========== Percolation grid ==========
@@ -656,7 +807,7 @@ function renderStep0(){
     <h2>${T('s0_title')}</h2>
     <p>${T('s0_p1')}</p><p>${T('s0_p2')}</p><p>${T('s0_p3')}</p>
     <div class="hl">${T('s0_hl')}</div>
-    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s0_try')}</div>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it: '}</b>${T('s0_try')}</div>
     <div class="choice-row" id="choiceRow">
       ${items.map(it=>`<button class="btn-choice" data-val="${it.val}" onclick="pickOption(this)">${it.label}<br><span style="color:#999;font-size:12px">???</span></button>`).join('')}
     </div>
@@ -670,13 +821,13 @@ function renderStep1(){
     <p>${T('s1_p1')}</p><p>${T('s1_p2')}</p><p>${T('s1_p3')}</p>
     <div class="hl">${T('s1_hl')}</div>
     <p>${T('s1_p4')}</p>
-    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s1_try')}</div>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it: '}</b>${T('s1_try')}</div>
     <div class="ctrl">
-      <label>${T('s1_lbl')}${lang==='zh'?'：':':'}</label>
+      <label>${T('s1_lbl')}${lang==='zh'?'：':': '}</label>
       <input type="range" min="0" max="50" value="25" id="s1slider" oninput="updateS1()">
       <span class="val" id="s1beta">2.5</span>
     </div>
-    <div class="ctrl"><label>${T('s1_avg')}${lang==='zh'?'：':':'}</label><span class="val" id="s1score" style="color:#2e7d32"></span></div>
+    <div class="ctrl"><label>${T('s1_avg')}${lang==='zh'?'：':': '}</label><span class="val" id="s1score" style="color:#2e7d32"></span></div>
     <canvas id="s1curve" width="600" height="260"></canvas>
     <p style="font-size:12px;color:#999">${lang==='zh'?'这条曲线一直在上升：精度越高，得分越高。这就是Blackwell定理的预测。':'The curve keeps rising: higher precision, higher score. This is what Blackwell\'s theorem predicts.'}</p>
   </div>${navHTML()}`;
@@ -691,13 +842,40 @@ function updateS1(){
 }
 
 function renderStep2(){
+  const tryLbl = lang==='zh'?'试一试：':'Try it: ';
+  const tryDesc = lang==='zh'
+    ?'下面有三个选项。左边可以随便换，右边选了就不能改。感受一下区别：'
+    :'Below are three options. On the left you can switch freely; on the right, once you pick, you\'re locked in. Feel the difference:';
+  const reversLbl = lang==='zh'?'可逆（随便换）':'Reversible (switch freely)';
+  const irreversLbl = lang==='zh'?'不可逆（选了就锁定）':'Irreversible (locked in)';
+  const opts = lang==='zh'?['苹果🍎','香蕉🍌','橙子🍊']:['Apple 🍎','Banana 🍌','Orange 🍊'];
+  function makeRow(id, locked){
+    return opts.map((o,i)=>`<button class="btn-choice" style="min-width:80px;padding:8px 14px;font-size:13px" onclick="pickS2(${id},${i},${locked})" id="s2_${id}_${i}">${o}</button>`).join('');
+  }
   return `<div class="card fade-in">
     <h2>${T('s2_title')}</h2>
     <p>${T('s2_p1')}</p><p>${T('s2_p2')}</p><p>${T('s2_p3')}</p>
     ${T('s2_examples')}
     <p>${T('s2_p4')}</p>
+    <div class="try-it"><b>${tryLbl}</b>${tryDesc}</div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin:10px 0">
+      <div style="flex:1;min-width:200px"><p style="font-size:13px;font-weight:600;color:#2e7d32;margin-bottom:6px">${reversLbl}</p><div class="choice-row" style="justify-content:flex-start">${makeRow(0,false)}</div></div>
+      <div style="flex:1;min-width:200px"><p style="font-size:13px;font-weight:600;color:#c62828;margin-bottom:6px">${irreversLbl}</p><div class="choice-row" style="justify-content:flex-start">${makeRow(1,true)}</div></div>
+    </div>
     <div class="hl">${T('s2_hl')}</div>
   </div>${navHTML()}`;
+}
+
+let s2locked = false;
+function pickS2(group,idx,locked){
+  if(group===1 && s2locked) return;
+  for(let i=0;i<3;i++){
+    const b=document.getElementById('s2_'+group+'_'+i);
+    if(!b) continue;
+    if(i===idx){ b.classList.add('picked'); b.classList.remove('bad'); }
+    else { b.classList.remove('picked'); if(group===1&&locked){ b.classList.add('bad'); b.style.opacity='0.4'; } }
+  }
+  if(group===1 && locked) s2locked=true;
 }
 
 function renderStep3(){
@@ -711,7 +889,7 @@ function renderStep3(){
     </div>
     <canvas id="graph4" width="500" height="250"></canvas>
     <p>${T('s3_p2')}</p>
-    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s3_try')}</div>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it: '}</b>${T('s3_try')}</div>
     <div class="choice-row" id="gameChoice3">
       <button class="btn-choice" onclick="play3('A')" id="btn3A">${T('s3_btn_a')}</button>
       <button class="btn-choice" onclick="play3('B')" id="btn3B">${T('s3_btn_b')}</button>
@@ -745,15 +923,17 @@ function renderStep4(){
     ${T('s4_cases')}
     <div class="warn">${T('s4_hl')}</div>
     <canvas id="graph4b" width="500" height="220"></canvas>
-    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s4_try')}</div>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it: '}</b>${T('s4_try')}</div>
     <div class="ctrl">
-      <label>${T('s4_lbl')}${lang==='zh'?'：':':'}</label>
+      <label>${T('s4_lbl')}${lang==='zh'?'：':': '}</label>
       <input type="range" min="0" max="60" value="15" id="s4slider" oninput="updateS4()">
       <span class="val" id="s4beta">1.5</span>
     </div>
-    <div class="ctrl"><label>${T('s4_score')}${lang==='zh'?'：':':'}</label><span class="val" id="s4score" style="color:#1565c0"></span></div>
-    <div class="ctrl"><label>${T('s4_trap')}${lang==='zh'?'：':':'}</label><span class="val" id="s4trap" style="color:#e74c3c"></span></div>
+    <div class="ctrl"><label>${T('s4_score')}${lang==='zh'?'：':': '}</label><span class="val" id="s4score" style="color:#1565c0"></span></div>
+    <div class="ctrl"><label>${T('s4_trap')}${lang==='zh'?'：':': '}</label><span class="val" id="s4trap" style="color:#e74c3c"></span></div>
     <canvas id="s4curve" width="600" height="260"></canvas>
+    <div class="hl-blue">${T('s4_compound')}</div>
+    <p style="margin-top:8px"><b>${T('s4_but')}</b></p>
   </div>${navHTML()}`;
 }
 
@@ -768,17 +948,109 @@ function updateS4(){
 }
 
 function renderStep5(){
+  const tryLbl = lang==='zh'?'试一试：':'Try it: ';
+  const tryDesc = lang==='zh'
+    ?'拖动滑块提高信号精度，看看两部分损失怎么变：'
+    :'Drag the slider to raise signal precision and watch how the two parts of loss change:';
+  const roadLbl = lang==='zh'?'道路损失（固定不变）':'Road loss (fixed)';
+  const sigLbl = lang==='zh'?'信号损失（随精度缩小）':'Signal loss (shrinks with precision)';
+  const betaLbl = lang==='zh'?'信号精度 β：':'Signal precision β: ';
   return `<div class="card fade-in">
     <h2>${T('s5_title')}</h2>
     <p>${T('s5_p1')}</p><p>${T('s5_p2')}</p><p>${T('s5_p3')}</p>
     ${T('s5_terms')}
     <p>${T('s5_p4')}</p>
     <div class="hl">${T('s5_hl')}</div>
+    <div class="try-it"><b>${tryLbl}</b>${tryDesc}</div>
+    <div class="ctrl">
+      <label>${betaLbl}</label>
+      <input type="range" min="0" max="50" value="10" id="s5slider" oninput="updateS5()">
+      <span class="val" id="s5beta">1.0</span>
+    </div>
+    <div style="margin:10px 0">
+      <div style="display:flex;height:32px;border-radius:8px;overflow:hidden;border:1px solid #ddd">
+        <div id="s5roadBar" style="background:#e74c3c;transition:width .2s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600"></div>
+        <div id="s5sigBar" style="background:#4285f4;transition:width .2s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600"></div>
+        <div style="flex:1;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:11px;color:#2e7d32;font-weight:600" id="s5okBar"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:4px;font-size:11px;color:#666">
+        <span style="color:#e74c3c">■ ${roadLbl}</span>
+        <span style="color:#4285f4">■ ${sigLbl}</span>
+      </div>
+    </div>
     <p>${T('s5_p5')}</p>
+    <div class="hl-blue" style="font-weight:600">${T('s5_bridge')}</div>
   </div>${navHTML()}`;
 }
 
+function updateS5(){
+  const v=document.getElementById('s5slider').value;
+  const beta=v/10;
+  document.getElementById('s5beta').textContent=beta.toFixed(1);
+  const roadLoss=40;
+  const sigLoss=beta<=0.01?40:Math.max(1,40*Math.pow(2,-beta));
+  const ok=100-roadLoss-sigLoss;
+  document.getElementById('s5roadBar').style.width=roadLoss+'%';
+  document.getElementById('s5roadBar').textContent=roadLoss.toFixed(0)+'%';
+  document.getElementById('s5sigBar').style.width=sigLoss.toFixed(1)+'%';
+  document.getElementById('s5sigBar').textContent=sigLoss>=3?sigLoss.toFixed(0)+'%':'';
+  document.getElementById('s5okBar').style.width=ok.toFixed(1)+'%';
+  document.getElementById('s5okBar').textContent=ok>=5?(lang==='zh'?'得分':'score'):'';
+}
+
 function renderStep6(){
+  return `<div class="card fade-in">
+    <h2>${T('s6_title')}</h2>
+    <p>${T('s6_p1')}</p>
+    <p>${T('s6_p2')}</p>
+    <p>${T('s6_p3')}</p>
+    ${T('s6_kappa')}
+    <p>${T('s6_p4')}</p>
+    <div class="warn">${T('s6_hl')}</div>
+    <p>${T('s6_p5')}</p>
+    <p>${T('s6_p6')}</p>
+    <div class="hl">${T('s6_p7')}</div>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it: '}</b>${T('s6_try')}</div>
+    <div class="legend">
+      <span><span class="legend-line" style="background:#e74c3c;border-top:2px dashed #e74c3c;height:0"></span>${T('s6_legend_greedy')}</span>
+      <span><span class="legend-line" style="background:#2ecc71;border-top:2px dashed #2ecc71;height:0"></span>${T('s6_legend_bayesian')}</span>
+      <span><span class="legend-line" style="background:#7c3aed"></span>${T('s6_legend_current')}</span>
+    </div>
+    <canvas id="s6chart" width="600" height="280"></canvas>
+    <div class="ctrl">
+      <label>${T('s6_lbl_beta')}${lang==='zh'?'：':': '}</label>
+      <input type="range" min="0" max="50" value="25" id="s6betaSlider" oninput="updateS6()">
+      <span class="val" id="s6betaVal">2.5</span>
+    </div>
+    <div class="ctrl">
+      <label>${T('s6_lbl_kappa')}${lang==='zh'?'：':': '}</label>
+      <input type="range" min="0" max="30" value="0" id="s6kappaSlider" oninput="updateS6()">
+      <span class="val" id="s6kappaVal">0.0</span>
+    </div>
+    <div class="ctrl"><label>${T('s6_score')}${lang==='zh'?'：':': '}</label><span class="val" id="s6scoreVal" style="color:#7c3aed"></span></div>
+    <div class="regime-box" id="s6regimeBox"></div>
+  </div>${navHTML()}`;
+}
+
+function updateS6(){
+  const bv=document.getElementById('s6betaSlider').value;
+  const kv=document.getElementById('s6kappaSlider').value;
+  const beta=bv/10, kappa=kv/10;
+  document.getElementById('s6betaVal').textContent=beta.toFixed(1);
+  document.getElementById('s6kappaVal').textContent=kappa.toFixed(1);
+  const score=blendedWelfare4(beta,kappa);
+  document.getElementById('s6scoreVal').textContent=score.toFixed(3);
+
+  const kstar=0.7;
+  const box=document.getElementById('s6regimeBox');
+  if(kappa>kstar+0.2){ box.className='regime-box regime-good'; box.textContent=T('s6_regime_good'); }
+  else if(kappa<kstar-0.2){ box.className='regime-box regime-bad'; box.textContent=T('s6_regime_bad'); }
+  else { box.className='regime-box regime-near'; box.textContent=T('s6_regime_near'); }
+
+  drawCognitiveChart('s6chart', kappa, beta);
+}
+
+function renderStep7(){
   const rows = [
     {b:'→0', pt:'0.500',pg:'0.500',l:'0.425',note:lang==='zh'?'随机选：B处也选不对':'Random: bad at B too'},
     {b:'0.5',pt:'0.556',pg:'0.738',l:'0.327',note:''},
@@ -789,7 +1061,7 @@ function renderStep6(){
     {b:'→∞', pt:'1.000',pg:'1.000',l:'0.400',note:lang==='zh'?'一定掉进陷阱':'Always trapped'},
   ];
   let tableH = `<table class="data-table"><thead><tr>
-    <th>β</th><th>${T('s6_ptrap')}</th><th>${T('s6_pgoal')}</th><th>L(β)</th><th>${lang==='zh'?'说明':'Note'}</th>
+    <th>β</th><th>${T('s7_ptrap')}</th><th>${T('s7_pgoal')}</th><th>${lang==='zh'?'损失':'Loss'}</th><th>${lang==='zh'?'说明':'Note'}</th>
   </tr></thead><tbody>`;
   rows.forEach(r=>{
     tableH += `<tr class="${r.hl?'hl-row':''}"><td>${r.b}</td><td>${r.pt}</td><td>${r.pg}</td><td>${r.l}</td><td style="font-size:12px;color:#999">${r.note}</td></tr>`;
@@ -797,47 +1069,48 @@ function renderStep6(){
   tableH += '</tbody></table>';
 
   return `<div class="card fade-in">
-    <h2>${T('s6_title')}</h2>
-    <p>${T('s6_p1')}</p><p>${T('s6_p2')}</p>
+    <h2>${T('s7_title')}</h2>
+    <p>${T('s7_p1')}</p><p>${T('s7_p2')}</p>
     <canvas id="graph5" width="500" height="220"></canvas>
-    <p>${T('s6_p3')}</p>
-    ${T('s6_tradeoff')}
-    <p>${T('s6_p4')}</p>
-    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s6_try')}</div>
+    <p>${T('s7_p3')}</p>
+    ${T('s7_tradeoff')}
+    <p>${T('s7_p4')}</p>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it: '}</b>${T('s7_try')}</div>
     <div class="ctrl">
-      <label>${T('s6_lbl')}${lang==='zh'?'：':':'}</label>
-      <input type="range" min="0" max="60" value="15" id="s6slider" oninput="updateS6()">
-      <span class="val" id="s6beta">1.5</span>
+      <label>${T('s7_lbl')}${lang==='zh'?'：':': '}</label>
+      <input type="range" min="0" max="60" value="15" id="s7slider" oninput="updateS7()">
+      <span class="val" id="s7beta">1.5</span>
     </div>
-    <div class="ctrl"><label>${T('s6_loss')}${lang==='zh'?'：':':'}</label><span class="val" id="s6loss" style="color:#c62828"></span></div>
-    <canvas id="s6curve" width="600" height="260"></canvas>
-    <p><b>${T('s6_table_title')}</b></p>
+    <div class="ctrl"><label>${T('s7_loss')}${lang==='zh'?'：':': '}</label><span class="val" id="s7loss" style="color:#c62828"></span></div>
+    <canvas id="s7curve" width="600" height="260"></canvas>
+    <p><b>${T('s7_table_title')}</b></p>
     ${tableH}
-    <div class="hl">${T('s6_table_note')}</div>
+    <div class="hl">${T('s7_table_note')}</div>
   </div>${navHTML()}`;
 }
 
-function updateS6(){
-  const v=document.getElementById('s6slider').value;
+function updateS7(){
+  const v=document.getElementById('s7slider').value;
   const beta=v/10;
-  document.getElementById('s6beta').textContent=beta.toFixed(1);
-  document.getElementById('s6loss').textContent=loss5(beta).toFixed(3);
-  drawCurve('s6curve', loss5, 0, 6, {yMin:0.25,yMax:0.45,color:'#c62828',markX:beta,markMin:true,xLabel:'β'});
+  document.getElementById('s7beta').textContent=beta.toFixed(1);
+  document.getElementById('s7loss').textContent=loss5(beta).toFixed(3);
+  drawCurve('s7curve', loss5, 0, 6, {yMin:0.25,yMax:0.45,color:'#c62828',markX:beta,markMin:true,xLabel:'β'});
 }
 
-function renderStep7(){
+function renderStep8(){
   gridData = generateGrid(15, 0.35);
   return `<div class="card fade-in">
-    <h2>${T('s7_title')}</h2>
-    <p>${T('s7_p1')}</p><p>${T('s7_p2')}</p><p>${T('s7_p3')}</p>
-    ${T('s7_phases')}
-    <p>${T('s7_p4')}</p>
-    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it:'}</b>${T('s7_try')}</div>
+    <h2>${T('s8_title')}</h2>
+    <p>${T('s8_p1')}</p><p>${T('s8_p2')}</p><p>${T('s8_p3')}</p>
+    ${T('s8_phases')}
+    <p>${T('s8_p4')}</p>
+    <p>${T('s8_p5')}</p>
+    <div class="try-it"><b>${lang==='zh'?'试一试：':'Try it: '}</b>${T('s8_try')}</div>
     <div class="ctrl">
-      <label>${T('s7_lbl')}${lang==='zh'?'：':':'}</label>
-      <input type="range" min="0" max="90" value="35" id="s7slider" oninput="updateS7()">
-      <span class="val" id="s7pval">0.35</span>
-      <button class="btn btn-primary" onclick="regenGrid()" style="margin-left:8px">${T('s7_regen')}</button>
+      <label>${T('s8_lbl')}${lang==='zh'?'：':': '}</label>
+      <input type="range" min="0" max="90" value="35" id="s8slider" oninput="updateS8()">
+      <span class="val" id="s8pval">0.35</span>
+      <button class="btn btn-primary" onclick="regenGrid()" style="margin-left:8px">${T('s8_regen')}</button>
     </div>
     <div class="grid-container">
       <canvas id="gridCanvas" width="400" height="400"></canvas>
@@ -846,17 +1119,17 @@ function renderStep7(){
   </div>${navHTML()}`;
 }
 
-function updateS7(){
-  const v=document.getElementById('s7slider').value;
+function updateS8(){
+  const v=document.getElementById('s8slider').value;
   const p=v/100;
-  document.getElementById('s7pval').textContent=p.toFixed(2);
+  document.getElementById('s8pval').textContent=p.toFixed(2);
   gridData = generateGrid(15, p);
   drawGrid('gridCanvas');
   updateGridStats();
 }
 
 function regenGrid(){
-  const v=document.getElementById('s7slider').value;
+  const v=document.getElementById('s8slider').value;
   gridData = generateGrid(15, v/100);
   drawGrid('gridCanvas');
   updateGridStats();
@@ -866,49 +1139,76 @@ function updateGridStats(){
   if(!gridData) return;
   const el=document.getElementById('gridStats');
   const frac=(gridData.count/gridData.total*100).toFixed(1);
-  const pVal = parseFloat(document.getElementById('s7pval').textContent);
+  const pVal = parseFloat(document.getElementById('s8pval').textContent);
   let verdict = '';
   if(pVal<0.45) verdict = lang==='zh'?'<span style="color:#2e7d32">信息有用</span>':'<span style="color:#2e7d32">Information helps</span>';
   else if(pVal>0.55) verdict = lang==='zh'?'<span style="color:#c62828">信息失效</span>':'<span style="color:#c62828">Information irrelevant</span>';
   else verdict = lang==='zh'?'<span style="color:#f57c00">分界线附近</span>':'<span style="color:#f57c00">Near the dividing line</span>';
   el.innerHTML = `
-    <p>${T('s7_reach')}${lang==='zh'?'：':':'}<b>${gridData.count}</b></p>
-    <p>${T('s7_total')}${lang==='zh'?'：':':'}<b>${gridData.total}</b></p>
-    <p>${T('s7_frac')}${lang==='zh'?'：':':'}<b>${frac}%</b></p>
+    <p>${T('s8_reach')}${lang==='zh'?'：':': '}<b>${gridData.count}</b></p>
+    <p>${T('s8_total')}${lang==='zh'?'：':': '}<b>${gridData.total}</b></p>
+    <p>${T('s8_frac')}${lang==='zh'?'：':': '}<b>${frac}%</b></p>
     <p style="font-size:15px;margin-top:8px">${verdict}</p>
     <p style="margin-top:12px;font-size:12px;color:#999">${lang==='zh'?'红色 = 起点，绿色 = 能走到，灰色 = 走不到':'Red = start, Green = reachable, Gray = unreachable'}</p>`;
 }
 
-function renderStep8(){
-  return `<div class="card fade-in">
-    <h2>${T('s8_title')}</h2>
-    <p>${T('s8_p1')}</p>
-    <div class="hl-blue">
-      <p>${T('s8_c1')}</p>
-      <p>${T('s8_c2')}</p>
-      <p>${T('s8_c3')}</p>
-    </div>
-    <p><b>${T('s8_ex_title')}</b></p>
-    <p>${T('s8_ex1')}</p>
-    <p>${T('s8_ex2')}</p>
-    <p>${T('s8_ex3')}</p>
-    <p>${T('s8_ex4')}</p>
-    <div class="hl">${T('s8_hl')}</div>
-  </div>${navHTML()}`;
-}
-
 function renderStep9(){
+  const q1 = lang==='zh'
+    ?{q:'一个人选专业时只看「哪个起薪最高」，忽略了转行难度。他的问题是：',
+      a:['信息太少','信息太多','只看眼前，没看到路通向哪里'],ans:2,
+      explain:'他的信号（薪资排名）可能很准，但他没看到路况（转行空间）。这就是「只看眼前」的代价。'}
+    :{q:'A student picks a major based only on "which has the highest starting salary," ignoring how hard it is to switch. Their problem is:',
+      a:['Too little information','Too much information','Chasing the highest visible payoff without seeing where the road leads'],ans:2,
+      explain:'Their signal (salary ranking) may be accurate, but they cannot see the road structure (career flexibility). This is the cost of short-sightedness.'};
+  const q2 = lang==='zh'
+    ?{q:'一个政策制定者想帮人做出更好的选择。以下哪个方法效果最大？',
+      a:['公开更精确的数据','给签合同的人几天反悔期','两个都不好'],ans:1,
+      explain:'论文用数学证明了：在分界线附近，给人留退路（比如反悔期）比让信息更准确有效得多。'}
+    :{q:'A policymaker wants to help people make better choices. Which approach works best?',
+      a:['Publish more precise data','Give people a few days to cancel after signing a contract','Neither is good'],ans:1,
+      explain:'The paper proves mathematically: near the tipping point, giving people a way back (like a cancellation period) is far more effective than making information more accurate.'};
+  function qHTML(q,idx){
+    const btns=q.a.map((a,i)=>`<button class="btn-choice" style="text-align:left;min-width:auto;font-size:13px" onclick="answerQuiz(${idx},${i})" id="q${idx}_${i}">${a}</button>`).join('');
+    return `<p style="font-weight:600;font-size:14px;margin-top:14px">${q.q}</p><div class="choice-row" style="flex-direction:column;align-items:stretch">${btns}</div><div id="q${idx}result"></div>`;
+  }
+  const quizTitle = lang==='zh'?'测一测你学到了什么：':'Test what you learned:';
   return `<div class="card fade-in">
     <h2>${T('s9_title')}</h2>
     <p>${T('s9_p1')}</p>
-    <div class="hl-blue"><p>① ${T('s9_exp1')}</p></div>
-    <div class="hl-blue"><p>② ${T('s9_exp2')}</p></div>
-    <div class="hl-blue"><p>③ ${T('s9_exp3')}</p></div>
-    <div class="hl-blue"><p>④ ${T('s9_exp4')}</p></div>
-    <div class="hl-blue"><p>⑤ ${T('s9_exp5')}</p></div>
-    <div class="hl-blue"><p>⑥ ${T('s9_exp6')}</p></div>
-    <p>${T('s9_link')} <a href="index.html" style="color:#0055aa;font-weight:600">${T('s9_appendix')}</a>${T('s9_period')}</p>
+    <div class="hl">${T('s9_lesson1')}</div>
+    <div class="hl-blue">${T('s9_lesson2')}</div>
+    <div class="hl">${T('s9_lesson3')}</div>
+    <p style="margin-top:16px"><b>${T('s9_examples_title')}</b></p>
+    <p>${T('s9_ex1')}</p>
+    <p>${T('s9_ex2')}</p>
+    <p>${T('s9_ex3')}</p>
+    <div class="try-it" style="margin-top:16px"><b>${quizTitle}</b>
+    ${qHTML(q1,0)}
+    ${qHTML(q2,1)}
+    </div>
+    <p style="margin-top:16px">${T('s9_link')} <a href="index.html" style="color:#0055aa;font-weight:600">${T('s9_appendix')}</a>${T('s9_period')}</p>
   </div>${navHTML()}`;
+}
+
+const quizData = {};
+function answerQuiz(qIdx,aIdx){
+  const isZh=lang==='zh';
+  const qs=isZh
+    ?[{ans:2,explain:'他的信号（薪资排名）可能很准，但他没看到路况（转行空间）。这就是「只看眼前」的代价。'},
+      {ans:1,explain:'论文用数学证明了：在分界线附近，给人留退路（比如反悔期）比让信息更准确有效得多。'}]
+    :[{ans:2,explain:'Their signal (salary ranking) may be accurate, but they cannot see the road structure (career flexibility). This is the cost of short-sightedness.'},
+      {ans:1,explain:'The paper proves mathematically: near the tipping point, giving people a way back (like a cancellation period) is far more effective than making information more accurate.'}];
+  const q=qs[qIdx]; if(!q) return;
+  for(let i=0;i<3;i++){
+    const b=document.getElementById('q'+qIdx+'_'+i);
+    if(!b) continue;
+    b.disabled=true;
+    if(i===q.ans) b.classList.add('picked');
+    else if(i===aIdx) b.classList.add('bad');
+  }
+  const el=document.getElementById('q'+qIdx+'result');
+  if(aIdx===q.ans) el.innerHTML=`<div class="result-box result-good">${isZh?'正确！':'Correct!'} ${q.explain}</div>`;
+  else el.innerHTML=`<div class="result-box result-bad">${isZh?'不对哦。':'Not quite.'} ${q.explain}</div>`;
 }
 
 // ========== Main render ==========
@@ -919,10 +1219,13 @@ function render(){
   area.innerHTML = renderers[step]();
 
   if(step===1) updateS1();
+  if(step===2) s2locked=false;
   if(step===3) drawGraph4('graph4', ['S']);
   if(step===4){ drawGraph4('graph4b',['S']); updateS4(); }
-  if(step===6){ drawGraph5('graph5'); updateS6(); }
-  if(step===7){ drawGrid('gridCanvas'); updateGridStats(); }
+  if(step===5) updateS5();
+  if(step===6) updateS6();
+  if(step===7){ drawGraph5('graph5'); updateS7(); }
+  if(step===8){ drawGrid('gridCanvas'); updateGridStats(); }
 }
 
 // ========== Choice game (step 0) ==========
@@ -955,7 +1258,7 @@ document.querySelectorAll('.lang-sw button').forEach(btn=>{
   });
 });
 
-// Init: sync button highlight, title, and html lang
+// Init
 document.querySelector(`.lang-sw button[data-lang="${lang}"]`).classList.add('active');
 document.title = T('title');
 document.getElementById('headerTitle').innerHTML = T('header');
