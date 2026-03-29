@@ -39,10 +39,8 @@ def prob_choose_higher(gap, beta):
     return float(norm.cdf(gap / np.sqrt(2 * s2)))
 
 
-# =====================================================================
 # 5-STATE CANONICAL INSTANCE
 # S(0) -> A(0.6) [trap] | B(0.4) -> D(0.1) [distractor] | G(1.0) [goal]
-# =====================================================================
 
 def W_greedy_welfare(beta):
     """Expected WELFARE (reward) for greedy agent on 5-state instance."""
@@ -83,12 +81,10 @@ def W_bayesian_welfare_4state(beta):
     return 1.0
 
 
-# =====================================================================
 # PARAMETERIZED BY BLOCKING PROBABILITY p
 # 5-state with S-B edge blocked w.p. p.
 # Greedy: forced to A if blocked. Otherwise uses signals.
 # Bayesian: forced to A if blocked. Otherwise always picks B.
-# =====================================================================
 
 def W_greedy_with_blocking(beta, p):
     """Greedy welfare on 5-state with blocking probability p on S-B."""
@@ -111,9 +107,7 @@ def W_bayesian_with_blocking(beta, p):
     return p * 0.6 + (1 - p) * 1.0
 
 
-# =====================================================================
 # FIGURE GENERATION
-# =====================================================================
 
 def plot_bayesian_immunity(filename="bayesian_immunity.png"):
     """Main figure: Bayesian vs Greedy on the 5-state canonical instance."""
@@ -129,7 +123,7 @@ def plot_bayesian_immunity(filename="bayesian_immunity.png"):
 
     fig, axes = plt.subplots(1, 3, figsize=(18, 5.5))
 
-    # --- Panel A: Welfare comparison ---
+    # Panel A: Welfare comparison
     ax = axes[0]
     ax.plot(betas, W_G, 'r-', linewidth=2.5, label=r'$W_G(\beta)$ (Greedy)')
     ax.plot(betas, W_B, 'b-', linewidth=2.5, label=r'$W_B(\beta)$ (Bayesian)')
@@ -157,7 +151,7 @@ def plot_bayesian_immunity(filename="bayesian_immunity.png"):
     ax.set_xlim(0, 10)
     ax.grid(True, alpha=0.3)
 
-    # --- Panel B: Welfare with blocking ---
+    # Panel B: Welfare with blocking
     ax = axes[1]
     p_values = [0.0, 0.2, 0.4, 0.6]
     colors_g = ['#ff4444', '#cc3333', '#992222', '#661111']
@@ -180,7 +174,7 @@ def plot_bayesian_immunity(filename="bayesian_immunity.png"):
     ax.set_xlim(0, 10)
     ax.grid(True, alpha=0.3)
 
-    # --- Panel C: Rationality Premium ---
+    # Panel C: Rationality Premium
     ax = axes[2]
     for p_val, c in zip(p_values, ['#228B22', '#1a7a1a', '#126912', '#0a580a']):
         RPp = [W_bayesian_with_blocking(b, p_val) - W_greedy_with_blocking(b, p_val)

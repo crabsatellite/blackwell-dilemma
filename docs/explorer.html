@@ -113,7 +113,7 @@ canvas{border:1px solid #eee;border-radius:10px;background:#fafafa;display:block
 </div>
 
 <script>
-// ========== i18n ==========
+// i18n
 let lang = (navigator.language || '').startsWith('zh') ? 'zh' : 'en';
 const L = {
 zh: {
@@ -409,7 +409,7 @@ en: {
 };
 function T(k){ return L[lang][k] || L['zh'][k] || k; }
 
-// ========== Normal CDF (Abramowitz & Stegun 7.1.26) ==========
+// Normal CDF (Abramowitz & Stegun 7.1.26)
 function normalCDF(x){
   const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
   const sign = x<0?-1:1;
@@ -419,7 +419,7 @@ function normalCDF(x){
   return 0.5*(1+sign*y);
 }
 
-// ========== Welfare functions ==========
+// Welfare functions
 // 4-state greedy welfare: W(β) = expected payoff for greedy agent
 function welfare4(beta){
   if(beta<=0.01) return 0.80;
@@ -460,11 +460,11 @@ function simpleBlackwell(beta){
   return pBest*0.9 + (1-pBest)*0.4;
 }
 
-// ========== State ==========
+// State
 let step = 0;
 const STEPS = 10;
 
-// ========== Nav ==========
+// Nav
 function buildProgress(){
   const bar = document.getElementById('progressBar');
   bar.innerHTML = '';
@@ -487,7 +487,7 @@ function navHTML(){
   return h+'</div>';
 }
 
-// ========== Drawing: 4-state graph ==========
+// Drawing: 4-state graph
 function drawGraph4(canvasId, highlight){
   const c = document.getElementById(canvasId);
   if(!c) return;
@@ -530,7 +530,7 @@ function drawGraph4(canvasId, highlight){
   ctx.fillText(lang==='zh'?'死胡同':'dead end',nodes.A.x,nodes.A.y-36);
 }
 
-// ========== Drawing: 5-state graph ==========
+// Drawing: 5-state graph
 function drawGraph5(canvasId){
   const c = document.getElementById(canvasId);
   if(!c) return;
@@ -574,7 +574,7 @@ function drawGraph5(canvasId){
   ctx.fillText(lang==='zh'?'干扰':'distractor',nodes.D.x,nodes.D.y+30);
 }
 
-// ========== Drawing: single curve ==========
+// Drawing: single curve
 function drawCurve(canvasId, fn, xMin, xMax, opts){
   const c = document.getElementById(canvasId);
   if(!c) return;
@@ -647,7 +647,7 @@ function drawCurve(canvasId, fn, xMin, xMax, opts){
   }
 }
 
-// ========== Drawing: cognitive depth chart (dual + blended curves) ==========
+// Drawing: cognitive depth chart (dual + blended curves)
 function drawCognitiveChart(canvasId, kappa, betaMark){
   const c = document.getElementById(canvasId);
   if(!c) return;
@@ -723,7 +723,7 @@ function drawCognitiveChart(canvasId, kappa, betaMark){
   ctx.fillStyle='#2ecc71'; ctx.fillText(lang==='zh'?'有地图':'map',bEnd.cx-4,bEnd.cy-8);
 }
 
-// ========== Percolation grid ==========
+// Percolation grid
 let gridData = null;
 function generateGrid(n, p){
   const hEdges = [], vEdges = [];
@@ -794,7 +794,7 @@ function drawGrid(canvasId){
   }
 }
 
-// ========== Step renderers ==========
+// Step renderers
 
 function renderStep0(){
   const items = [
@@ -1211,7 +1211,7 @@ function answerQuiz(qIdx,aIdx){
   else el.innerHTML=`<div class="result-box result-bad">${isZh?'不对哦。':'Not quite.'} ${q.explain}</div>`;
 }
 
-// ========== Main render ==========
+// Main render
 function render(){
   buildProgress();
   const area = document.getElementById('vizArea');
@@ -1228,7 +1228,7 @@ function render(){
   if(step===8){ drawGrid('gridCanvas'); updateGridStats(); }
 }
 
-// ========== Choice game (step 0) ==========
+// Choice game (step 0)
 function pickOption(btn){
   const val = parseInt(btn.dataset.val);
   const row = document.getElementById('choiceRow');
@@ -1245,7 +1245,7 @@ function pickOption(btn){
   else el.innerHTML = `<div class="result-box result-bad">${lang==='zh'?'你选到了 '+val+' 分，最高是 90。没有信息的时候只能靠运气。':'You got '+val+'. The highest was 90. Without information, it is just luck.'}</div>`;
 }
 
-// ========== Language switch ==========
+// Language switch
 document.querySelectorAll('.lang-sw button').forEach(btn=>{
   btn.addEventListener('click',()=>{
     lang = btn.dataset.lang;

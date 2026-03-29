@@ -35,7 +35,6 @@ def sigma_sq(beta):
     return 1.0 / (2.0 ** (2.0 * beta) - 1.0)
 
 
-# =====================================================================
 # 4-STATE BAYESIAN AGENT
 # S(0) -> A(0.6) [always open], S -> B(0.4) -> G(1.0) [S-B blocked w.p. p]
 #
@@ -54,10 +53,8 @@ def sigma_sq(beta):
 #   No reversal in 4-state for Bayesian agent.
 #
 # This motivates the GENERAL GRAPH construction below.
-# =====================================================================
 
 
-# =====================================================================
 # GENERAL CONSTRUCTION: Bayesian agent on graphs with uncertain topology
 #
 # Key insight: the Bayesian agent must commit to an initial direction
@@ -67,7 +64,6 @@ def sigma_sq(beta):
 # size, which is a function of p. Moderate signal noise about local
 # rewards induces exploration that has positive option value when
 # the higher-reward neighbor has a WORSE expected continuation value.
-# =====================================================================
 
 
 def bayesian_welfare_general(beta, graph_params):
@@ -161,7 +157,6 @@ def bayesian_welfare_general(beta, graph_params):
     return 0.0  # placeholder
 
 
-# =====================================================================
 # RIGOROUS BAYESIAN AGENT ON RANDOM-REWARD IDP
 #
 # Setup: Graph with S connected to u_1 (subtree size k_1) and u_2
@@ -218,7 +213,6 @@ def bayesian_welfare_general(beta, graph_params):
 # But when k_1 is also > 1 (both neighbors lead to subtrees),
 # AND the subtree sizes are random (percolation), the comparison
 # becomes nontrivial and signal precision matters.
-# =====================================================================
 
 
 def E_max_r_M(r, k):

@@ -44,11 +44,9 @@ def prob_choose_higher(gap, beta):
     return float(norm.cdf(gap / np.sqrt(2 * s2)))
 
 
-# =====================================================================
 # MINIMAL EXAMPLE: 4 states
 # States: S(0), A(0.6), B(0.4), G(1.0)
 # Edges: S->A, S->B, B->G. A and G absorbing.
-# =====================================================================
 
 def W_minimal(beta):
     """
@@ -63,11 +61,9 @@ def W_minimal(beta):
     return p_A * 0.4
 
 
-# =====================================================================
 # EXTENDED EXAMPLE: 5 states
 # States: S(0), A(0.6), B(0.4), D(0.1), G(1.0)
 # Edges: S->A, S->B, B->D, B->G. A, D, G absorbing.
-# =====================================================================
 
 def W_extended(beta):
     """
@@ -184,7 +180,7 @@ def plot_rationality_trap(betas, minimal_W, extended_W, mc_data=None,
     """
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
-    # --- Panel 1: Minimal (4-state) ---
+    # Panel 1: Minimal (4-state)
     ax1.plot(betas, minimal_W, 'b-', linewidth=2.5, label='E[W(b)]')
     ax1.axhline(0.4, color='red', linestyle='--', linewidth=1.5,
                 label='W(b=inf) = 0.40 (perfectly rational)')
@@ -213,7 +209,7 @@ def plot_rationality_trap(betas, minimal_W, extended_W, mc_data=None,
                  arrowprops=dict(arrowstyle='->', color='darkred'),
                  bbox=dict(boxstyle='round', facecolor='lightyellow'))
 
-    # --- Panel 2: Extended (5-state) ---
+    # Panel 2: Extended (5-state)
     ax2.plot(betas, extended_W, 'b-', linewidth=2.5, label='E[W(b)]')
 
     # Find and mark optimal beta

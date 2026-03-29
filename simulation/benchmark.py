@@ -28,9 +28,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from phase_transition_sim import OUT_DIR
 
 
-# =====================================================================
 # Core: Gaussian channel
-# =====================================================================
 
 def sigma_sq(beta):
     if beta > 15:
@@ -38,9 +36,7 @@ def sigma_sq(beta):
     return 1.0 / (2.0 ** (2.0 * beta) - 1.0)
 
 
-# =====================================================================
 # Benchmark A: 4-state kill shot with gap sweep
-# =====================================================================
 
 def P_trap_4state(beta, r_A, r_B):
     """P(agent chooses trap A) in 4-state IDP."""
@@ -97,9 +93,7 @@ def run_gap_sweep():
     return results, betas
 
 
-# =====================================================================
 # Benchmark B: 5-state interior optimum
-# =====================================================================
 
 def W_5state(beta, r_A=0.6, r_B=0.4, r_D=0.1, r_G=1.0):
     """5-state IDP: S→A(trap) | B→D(distractor) | G(goal)."""
@@ -132,9 +126,7 @@ def find_interior_optimum(W_func, low=0.01, high=10.0, n_grid=500):
     return float(betas[idx]), float(Ws[idx])
 
 
-# =====================================================================
 # Benchmark C: k-horizon (import from k_horizon_trap.py)
-# =====================================================================
 
 def P_trap_k(beta, k, r_A=0.6, r_B=0.4):
     """P(k-step lookahead agent chooses trap) via numerical integration."""
@@ -157,9 +149,7 @@ def W_k(beta, k, r_A=0.6, r_B=0.4, r_G=1.0):
     return P_trap_k(beta, k, r_A, r_B) * (r_G - r_A)
 
 
-# =====================================================================
 # Decomposition: structural vs informational loss
-# =====================================================================
 
 def decomposition_analysis(betas_test):
     """
@@ -192,9 +182,7 @@ def decomposition_analysis(betas_test):
     return results
 
 
-# =====================================================================
 # Unified JSON output
-# =====================================================================
 
 def generate_benchmark_record(benchmark, beta, k=None, delta=None,
                                r_A=0.6, r_B=0.4, r_G=1.0, **kwargs):
@@ -229,15 +217,13 @@ def generate_benchmark_record(benchmark, beta, k=None, delta=None,
     }
 
 
-# =====================================================================
 # Visualization
-# =====================================================================
 
 def plot_benchmark_suite(gap_results, gap_betas, filename="benchmark_suite.png"):
     """Four-panel benchmark figure."""
     fig, axes = plt.subplots(2, 2, figsize=(14, 11))
 
-    # --- Panel 1: Gap sweep (Benchmark A) ---
+    # Panel 1: Gap sweep (Benchmark A)
     ax = axes[0, 0]
     colors = ['#CC4444', '#DD6644', '#DDAA44', '#44AA44', '#4488CC']
     for (delta, data), color in zip(gap_results.items(), colors):
@@ -251,7 +237,7 @@ def plot_benchmark_suite(gap_results, gap_betas, filename="benchmark_suite.png")
     ax.grid(True, alpha=0.3)
     ax.set_ylim(bottom=0)
 
-    # --- Panel 2: 5-state interior optimum (Benchmark B) ---
+    # Panel 2: 5-state interior optimum (Benchmark B)
     ax = axes[0, 1]
     betas_fine = np.concatenate([
         np.linspace(0.01, 0.5, 20),
@@ -278,7 +264,7 @@ def plot_benchmark_suite(gap_results, gap_betas, filename="benchmark_suite.png")
     ax.grid(True, alpha=0.3)
     ax.set_ylim(bottom=0, top=0.55)
 
-    # --- Panel 3: k-horizon penalty ratio (Benchmark C) ---
+    # Panel 3: k-horizon penalty ratio (Benchmark C)
     ax = axes[1, 0]
     k_range = np.arange(0, 31)
     ratios = k_range + 2
@@ -292,7 +278,7 @@ def plot_benchmark_suite(gap_results, gap_betas, filename="benchmark_suite.png")
     ax.grid(True, alpha=0.3)
     ax.legend(fontsize=9)
 
-    # --- Panel 4: Decomposition bar chart ---
+    # Panel 4: Decomposition bar chart
     ax = axes[1, 1]
     beta_test = [0.5, 1.0, 2.0, 5.0]
     w_totals = [W_4state(b) for b in beta_test]
@@ -333,9 +319,7 @@ def plot_benchmark_suite(gap_results, gap_betas, filename="benchmark_suite.png")
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# =====================================================================
 # Main
-# =====================================================================
 
 if __name__ == "__main__":
     print("=" * 70)
@@ -344,14 +328,14 @@ if __name__ == "__main__":
 
     t0 = time.time()
 
-    # --- Benchmark A: Gap sweep ---
+    # Benchmark A: Gap sweep
     print("\n[A] 4-state kill shot: gap sweep (Δ variation)")
     gap_results, gap_betas = run_gap_sweep()
 
     all_monotone = all(r['monotone_increasing'] for r in gap_results.values())
     print(f"\n  All gaps monotone increasing: {'OK' if all_monotone else 'FAIL'}")
 
-    # --- Benchmark B: 5-state interior optimum ---
+    # Benchmark B: 5-state interior optimum
     print("\n[B] 5-state interior optimum")
     opt_beta, opt_W = find_interior_optimum(W_5state)
     W_inf_5 = W_5state(15.0)
@@ -361,7 +345,7 @@ if __name__ == "__main__":
     print(f"  W(0) = {W_0_5:.4f}, W(∞) = {W_inf_5:.4f}")
     print(f"  Perfect rationality is {pct_worse:.0f}% worse than optimal")
 
-    # --- Benchmark C: k-horizon summary ---
+    # Benchmark C: k-horizon summary
     print("\n[C] k-horizon penalty ratios")
     for k in [0, 1, 2, 5, 10, 20, 50]:
         w0 = W_k(0.001, k)
@@ -370,7 +354,7 @@ if __name__ == "__main__":
         print(f"  k={k:2d}: W(0)={w0:.4f}, W(∞)={winf:.4f}, ratio={ratio:.1f}x "
               f"(theory: {k+2}x)")
 
-    # --- Generate standardized records ---
+    # Generate standardized records
     print("\n[Output] Generating standardized benchmark records...")
     records = []
     for beta in [0.001, 0.5, 1.0, 2.0, 5.0, 15.0]:
@@ -379,14 +363,14 @@ if __name__ == "__main__":
         for k in [0, 2, 10]:
             records.append(generate_benchmark_record('k_horizon', beta, k=k))
 
-    # --- Visualization ---
+    # Visualization
     print("\n[Plots] Generating benchmark suite figure...")
     plot_benchmark_suite(gap_results, gap_betas)
 
     elapsed = time.time() - t0
     print(f"\nTotal time: {elapsed:.1f}s")
 
-    # --- Save ---
+    # Save
     save_data = {
         'gap_sweep': {str(k): {kk: vv for kk, vv in v.items()
                                 if kk not in ('betas', 'Ws')}

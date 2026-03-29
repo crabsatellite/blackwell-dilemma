@@ -30,9 +30,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from phase_transition_sim import OUT_DIR
 
 
-# =====================================================================
 # Layer 1: Environment Wrapper
-# =====================================================================
 
 @dataclass
 class State:
@@ -72,9 +70,7 @@ class Environment:
         return 0.0 if from_id in R_after else 1.0  # binary: reversible or not
 
 
-# =====================================================================
 # Layer 2: Signal Engine
-# =====================================================================
 
 def sigma_sq(beta):
     """Gaussian channel noise variance at capacity beta bits."""
@@ -97,9 +93,7 @@ def generate_signals(env, state_id, beta, rng):
     return signals
 
 
-# =====================================================================
 # Layer 3: Agent Policies
-# =====================================================================
 
 def greedy_policy(signals, env, state_id):
     """Choose neighbor with highest signal (standard framework)."""
@@ -124,9 +118,7 @@ def idp_aware_policy(signals, env, state_id):
     return max(nbs, key=lambda nb: env.reachable_max(nb))
 
 
-# =====================================================================
 # Layer 4: Counterfactual Engine
-# =====================================================================
 
 @dataclass
 class DecisionRecord:
@@ -191,9 +183,7 @@ def compute_counterfactual(env, state_id, chosen, signals):
     )
 
 
-# =====================================================================
 # Layer 5: Dilemma Detector
-# =====================================================================
 
 @dataclass
 class DilemmaReport:
@@ -219,9 +209,7 @@ class DilemmaReport:
         return self.reversal_detected
 
 
-# =====================================================================
 # Layer 6: Logging & Proof Layer
-# =====================================================================
 
 def format_event_log(records):
     """Format decision records as auditable event log."""
@@ -242,9 +230,7 @@ def format_event_log(records):
     return "\n".join(lines)
 
 
-# =====================================================================
 # Simulation Runner
-# =====================================================================
 
 def run_trajectory(env, beta, policy_fn, rng, max_steps=20):
     """Run one agent trajectory through the environment."""
@@ -315,9 +301,7 @@ def run_experiment(env, beta_values, M=10000, seed=42):
     return report
 
 
-# =====================================================================
 # Scenario: Platform Lock-in (isomorphic to 4-state IDP)
-# =====================================================================
 
 def platform_lockin_env():
     """
@@ -371,9 +355,7 @@ def platform_extended_env():
     )
 
 
-# =====================================================================
 # Scenario: Grid IDP (connects to percolation simulations)
-# =====================================================================
 
 def grid_idp_env(n=10, p=0.6, rng=None):
     """
@@ -416,9 +398,7 @@ def grid_idp_env(n=10, p=0.6, rng=None):
                        name=f'Grid IDP ({n}x{n}, p={p})')
 
 
-# =====================================================================
 # Visualization
-# =====================================================================
 
 def plot_bdes_results(report, env_name, filename=None):
     """Plot the BDES output: beta vs loss with dilemma detection."""
@@ -476,9 +456,7 @@ def plot_bdes_results(report, env_name, filename=None):
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# =====================================================================
 # Main
-# =====================================================================
 
 if __name__ == "__main__":
     print("=" * 70)
@@ -489,7 +467,7 @@ if __name__ == "__main__":
 
     beta_values = [0.001, 0.1, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0, 8.0, 15.0]
 
-    # --- Scenario 1: Platform Lock-in (4-state) ---
+    # Scenario 1: Platform Lock-in (4-state)
     print("\n[Scenario 1] Platform Lock-in (4-state)")
     env1 = platform_lockin_env()
     report1 = run_experiment(env1, beta_values, M=50000, seed=42)
@@ -512,7 +490,7 @@ if __name__ == "__main__":
 
     plot_bdes_results(report1, env1.name, "bdes_platform_lockin.png")
 
-    # --- Scenario 2: Extended Platform (5-state) ---
+    # Scenario 2: Extended Platform (5-state)
     print("\n[Scenario 2] Platform Lock-in Extended (5-state)")
     env2 = platform_extended_env()
     report2 = run_experiment(env2, beta_values, M=50000, seed=43)
@@ -523,7 +501,7 @@ if __name__ == "__main__":
 
     plot_bdes_results(report2, env2.name, "bdes_platform_extended.png")
 
-    # --- Compare: Greedy vs IDP-aware ---
+    # Compare: Greedy vs IDP-aware
     print("\n[Comparison] Greedy vs IDP-aware at β=5.0")
     rng_cmp = np.random.default_rng(44)
     greedy_losses = []
@@ -546,7 +524,7 @@ if __name__ == "__main__":
     elapsed = time.time() - t0
     print(f"\nTotal time: {elapsed:.1f}s")
 
-    # --- Save full results ---
+    # Save full results
     save_data = {
         'scenario_1': {
             'name': env1.name,

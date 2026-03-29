@@ -20,9 +20,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from phase_transition_sim import setup_graph, run_agent, compute_reachable_set, get_accessible_neighbors, noisy_signal, OUT_DIR
 
 
-# ═══════════════════════════════════════════════════════════════
 # EXPERIMENT A: Welfare Decomposition W = W_topo + W_info
-# ═══════════════════════════════════════════════════════════════
 
 
 def experiment_decomposition(n=40, p_values=None, beta_values=None, M=400, seed=500):
@@ -146,9 +144,7 @@ def plot_decomposition(results, filename="decomposition.png"):
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# ═══════════════════════════════════════════════════════════════
 # EXPERIMENT B: Policy Gradient Comparison
-# ═══════════════════════════════════════════════════════════════
 
 def experiment_policy_gradients(n=40, M=400, seed=600, B=2000):
     """
@@ -285,9 +281,7 @@ def plot_policy_gradients(results, filename="policy_gradients.png"):
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# ═══════════════════════════════════════════════════════════════
 # EXPERIMENT C: Minimal 2-State Counterexample
-# ═══════════════════════════════════════════════════════════════
 
 def experiment_two_state(M=100000, seed=700):
     """
@@ -408,9 +402,7 @@ def plot_two_state(results, filename="two_state_counterexample.png"):
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# ═══════════════════════════════════════════════════════════════
 # MAIN
-# ═══════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
     print("=" * 70)

@@ -302,7 +302,7 @@ def plot_cross_domain(df, metrics, filename="cfpb_cross_domain.png"):
     colors = {'HIGH': '#c0392b', 'MEDIUM': '#e67e22', 'LOW': '#27ae60'}
     levels = ['HIGH', 'MEDIUM', 'LOW']
 
-    # ---- Panel 1: Severity index distribution per level ----
+    # Panel 1: Severity index distribution per level
     ax = axes[0, 0]
     for level in levels:
         subset = df[df['irrev_level'] == level]['severity']
@@ -317,7 +317,7 @@ def plot_cross_domain(df, metrics, filename="cfpb_cross_domain.png"):
     ax.legend(fontsize=8)
     ax.grid(True, alpha=0.3, axis='y')
 
-    # ---- Panel 2: Company response breakdown (stacked bar) ----
+    # Panel 2: Company response breakdown (stacked bar)
     ax = axes[0, 1]
     response_types = [
         'Closed with monetary relief',
@@ -351,7 +351,7 @@ def plot_cross_domain(df, metrics, filename="cfpb_cross_domain.png"):
     ax.legend(fontsize=7, loc='center left', bbox_to_anchor=(1.0, 0.5))
     ax.grid(True, alpha=0.3, axis='y')
 
-    # ---- Panel 3: Key rates comparison ----
+    # Panel 3: Key rates comparison
     ax = axes[0, 2]
     metric_names = ['Monetary Relief', 'Non-Monetary Relief', 'Dispute Rate', 'Untimely']
     x_pos = np.arange(len(metric_names))
@@ -374,7 +374,7 @@ def plot_cross_domain(df, metrics, filename="cfpb_cross_domain.png"):
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3, axis='y')
 
-    # ---- Panel 4: Severity CDF (cumulative distribution) ----
+    # Panel 4: Severity CDF (cumulative distribution)
     ax = axes[1, 0]
     for level in levels:
         subset = df[df['irrev_level'] == level]['severity'].values
@@ -390,7 +390,7 @@ def plot_cross_domain(df, metrics, filename="cfpb_cross_domain.png"):
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
 
-    # ---- Panel 5: Monthly complaint volume trend ----
+    # Panel 5: Monthly complaint volume trend
     ax = axes[1, 1]
     df_dated = df.copy()
     df_dated['date'] = pd.to_datetime(df_dated['Date received'], errors='coerce')
@@ -413,7 +413,7 @@ def plot_cross_domain(df, metrics, filename="cfpb_cross_domain.png"):
     ax.grid(True, alpha=0.3)
     ax.tick_params(axis='x', rotation=30)
 
-    # ---- Panel 6: Severity statistics summary table ----
+    # Panel 6: Severity statistics summary table
     ax = axes[1, 2]
     ax.axis('off')
     table_data = []

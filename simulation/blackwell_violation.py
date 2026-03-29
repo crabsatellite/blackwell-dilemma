@@ -112,10 +112,10 @@ def plot_blackwell_violation(filename="blackwell_violation.png"):
     ax_curve = fig.add_axes([0.35, 0.15, 0.35, 0.70])
     ax_logic = fig.add_axes([0.73, 0.15, 0.25, 0.70])
 
-    # --- Panel 1: Graph structure ---
+    # Panel 1: Graph structure
     draw_graph(ax_graph)
 
-    # --- Panel 2: W(beta) curve ---
+    # Panel 2: W(beta) curve
     betas = np.concatenate([
         np.linspace(0.01, 0.5, 30),
         np.linspace(0.5, 3.0, 60),
@@ -160,7 +160,7 @@ def plot_blackwell_violation(filename="blackwell_violation.png"):
     ax_curve.set_ylim(0.15, 0.48)
     ax_curve.grid(True, alpha=0.3)
 
-    # --- Panel 3: The Blackwell Dilemma ---
+    # Panel 3: The Blackwell Dilemma
     ax_logic.axis('off')
     ax_logic.set_xlim(0, 1)
     ax_logic.set_ylim(0, 1)

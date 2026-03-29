@@ -43,9 +43,7 @@ from replay_experiment import (
 )
 
 
-# =====================================================================
 # 1. Data Collection (GitHub API)
-# =====================================================================
 
 REPOS = {
     'TensorFlow': 'tensorflow/tensorflow',
@@ -122,9 +120,7 @@ def collect_data():
     raise RuntimeError("Cannot fetch GitHub data and no cache available")
 
 
-# =====================================================================
 # 2. Proxy Computation from Real Data
-# =====================================================================
 
 def compute_proxies(github_data):
     """
@@ -161,9 +157,7 @@ def compute_proxies(github_data):
     return proxies
 
 
-# =====================================================================
 # 3. Temporal Evolution (real data + documented milestones)
-# =====================================================================
 
 # Documented relative trajectories (fraction of peak/current).
 # Sources: Papers With Code adoption curves, GitHub star trackers,
@@ -236,9 +230,7 @@ def build_platforms_from_data(proxies, trajectories, years):
     return platforms, T
 
 
-# =====================================================================
 # 4. Irreversibility Parameter Estimation (p_hat prototype)
-# =====================================================================
 
 def estimate_p_hat(github_data):
     """
@@ -283,9 +275,7 @@ def estimate_p_hat(github_data):
     return results
 
 
-# =====================================================================
 # 5. Visualization
-# =====================================================================
 
 COLORS = {
     'TensorFlow': '#FF6F00',
@@ -520,9 +510,7 @@ def plot_p_estimation(p_estimates, filename="empirical_p_estimation.png"):
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# =====================================================================
 # 6. Empirical Audit Report
-# =====================================================================
 
 def format_empirical_audit(report, github_data, proxies, p_estimates):
     """Extended audit report with data provenance."""
@@ -556,9 +544,7 @@ def format_empirical_audit(report, github_data, proxies, p_estimates):
     return "\n".join(lines)
 
 
-# =====================================================================
 # Main
-# =====================================================================
 
 if __name__ == "__main__":
     print("=" * 70)
@@ -569,18 +555,18 @@ if __name__ == "__main__":
     t0 = time.time()
     w_e = 0.5
 
-    # --- Step 1: Collect real data ---
+    # Step 1: Collect real data
     print("\n[1] Collecting GitHub data...")
     github_data, source = collect_data()
     print(f"  Data source: {source}")
 
-    # --- Step 2: Compute proxies ---
+    # Step 2: Compute proxies
     print("\n[2] Computing proxies from raw data...")
     proxies = compute_proxies(github_data)
     for name, p in proxies.items():
         print(f"    {name:12s}: q={p['q']:.4f}  e={p['e']:.4f}  p_proxy={p['p']:.4f}")
 
-    # --- Step 3: Estimate p ---
+    # Step 3: Estimate p
     print("\n[3] Estimating irreversibility parameter p...")
     p_estimates = estimate_p_hat(github_data)
     for name, pe in p_estimates.items():
@@ -592,7 +578,7 @@ if __name__ == "__main__":
     mean_p = np.mean([pe['p_hat'] for pe in p_estimates.values()])
     print(f"  Mean p_hat = {mean_p:.4f} (used as switching cost)")
 
-    # --- Step 4: Build temporal platforms ---
+    # Step 4: Build temporal platforms
     print("\n[4] Building temporal environment (2017-2025)...")
     platforms, T = build_platforms_from_data(proxies, TRAJECTORIES, YEARS)
     for p in platforms:
@@ -611,20 +597,20 @@ if __name__ == "__main__":
     if trap_name != oracle.name:
         print(f"  ** MISALIGNMENT: quality leader != oracle pick **")
 
-    # --- Step 5: Plot data provenance ---
+    # Step 5: Plot data provenance
     print("\n[5] Generating visualizations...")
     plot_data_provenance(github_data, proxies, p_estimates)
     plot_temporal_evolution(platforms, T, YEARS)
     plot_p_estimation(p_estimates)
 
-    # --- Step 6: Run BDES replay ---
+    # Step 6: Run BDES replay
     print("\n[6] Running BDES replay (M=10,000 per beta)...")
     beta_values = [0.001, 0.1, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0, 10.0]
     results = sweep_beta(platforms, T, mean_p, beta_values,
                          M=10000, w_e=w_e, seed=42)
     plot_empirical_replay(results)
 
-    # --- Step 7: Generate audit report ---
+    # Step 7: Generate audit report
     print("\n[7] Generating audit report (single trajectory, beta=5.0)...")
     rng_audit = np.random.default_rng(999)
     pmap = {p.name: p for p in platforms}
@@ -663,7 +649,7 @@ if __name__ == "__main__":
     with open(OUT_DIR / "empirical_results.json", "w") as f:
         json.dump(full_report, f, indent=2, default=str)
 
-    # --- Summary ---
+    # Summary
     elapsed = time.time() - t0
     print(f"\nTotal time: {elapsed:.1f}s")
 

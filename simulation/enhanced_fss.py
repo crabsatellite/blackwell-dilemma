@@ -253,9 +253,7 @@ def plot_prop5(prop5_results):
 if __name__ == "__main__":
     t_start = time.time()
 
-    # ================================================================
     # PART 1: Enhanced Finite-Size Scaling
-    # ================================================================
     print("=" * 70)
     print("PART 1: Enhanced Finite-Size Scaling")
     print("  Grid sizes: n in {20, 40, 60, 80, 100}")
@@ -276,9 +274,7 @@ if __name__ == "__main__":
         json.dump(fss_save, f, indent=2)
     print(f"Saved: {OUT_DIR / 'fss_enhanced_results.json'}")
 
-    # ================================================================
     # PART 2: Proposition 5 Verification
-    # ================================================================
     print("\n" + "=" * 70)
     print("PART 2: Proposition 5 Verification")
     print("  E[|W_topo| | |R|=k] = (n-k)/((n+1)(k+1))")
@@ -300,9 +296,7 @@ if __name__ == "__main__":
         json.dump(prop5_save, f, indent=2)
     print(f"Saved: {OUT_DIR / 'prop5_verification_results.json'}")
 
-    # ================================================================
     # Summary
-    # ================================================================
     total = time.time() - t_start
     print("\n" + "=" * 70)
     print(f"ALL EXPERIMENTS COMPLETE ({total:.0f}s = {total/60:.1f}min)")

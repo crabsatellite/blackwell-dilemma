@@ -41,9 +41,7 @@ from phase_transition_sim import (setup_graph, get_accessible_neighbors,
                                    compute_reachable_set, OUT_DIR)
 
 
-# =====================================================================
 # Part 1: Analytical computation for chain construction
-# =====================================================================
 
 def sigma_sq(beta):
     """Gaussian channel noise variance at capacity beta bits."""
@@ -86,9 +84,7 @@ def W_k_analytical(beta, k, r_A=0.6, r_B=0.4, r_G=1.0):
     return P_choose_trap_analytical(beta, k, r_A, r_B) * (r_G - r_A)
 
 
-# =====================================================================
 # Part 2: Monte Carlo validation for chain construction
-# =====================================================================
 
 def W_k_mc(beta, k, M=100000, r_A=0.6, r_B=0.4, r_G=1.0, seed=42):
     """Monte Carlo computation of W_k(beta)."""
@@ -111,9 +107,7 @@ def W_k_mc(beta, k, M=100000, r_A=0.6, r_B=0.4, r_G=1.0, seed=42):
     return float(loss.mean())
 
 
-# =====================================================================
 # Part 3: k-step trap prevalence on random percolation graph
-# =====================================================================
 
 def compute_k_reachable_set(adj, v, k):
     """BFS limited to depth k. Returns set of vertices reachable in ≤ k steps."""
@@ -216,9 +210,7 @@ def experiment_k_prevalence(n=15, M=40, p_values=None, k_values=None, seed=50):
     return results
 
 
-# =====================================================================
 # Visualization
-# =====================================================================
 
 def plot_k_horizon(filename="k_horizon_trap.png"):
     """
@@ -241,7 +233,7 @@ def plot_k_horizon(filename="k_horizon_trap.png"):
     k_values = [0, 1, 2, 5, 10, 20]
     colors = ['#CC4444', '#DD6644', '#DDAA44', '#44AA44', '#4488CC', '#6644CC']
 
-    # --- Panel 1: W_k(beta) curves ---
+    # Panel 1: W_k(beta) curves
     for k, color in zip(k_values, colors):
         Ws = [W_k_analytical(b, k) for b in betas]
         ax1.plot(betas, Ws, color=color, linewidth=2,
@@ -264,7 +256,7 @@ def plot_k_horizon(filename="k_horizon_trap.png"):
                  fontstyle='italic',
                  bbox=dict(boxstyle='round', facecolor='#F0E0FF', alpha=0.7))
 
-    # --- Panel 2: Penalty ratio ---
+    # Panel 2: Penalty ratio
     k_range = np.arange(0, 51)
     ratios_theory = k_range + 2
     ratios_numerical = []
@@ -292,7 +284,7 @@ def plot_k_horizon(filename="k_horizon_trap.png"):
                  color='darkred',
                  bbox=dict(boxstyle='round', facecolor='#FFE0E0'))
 
-    # --- Panel 3: placeholder for percolation results ---
+    # Panel 3: placeholder for percolation results
     ax3.text(0.5, 0.5, 'Percolation k-trap\nprevalence\n(computed below)',
              ha='center', va='center', fontsize=11,
              transform=ax3.transAxes)
@@ -359,7 +351,7 @@ def plot_combined(percolation_results, filename="k_horizon_trap.png"):
     k_values_plot = [0, 1, 2, 5, 10, 20]
     colors = ['#CC4444', '#DD6644', '#DDAA44', '#44AA44', '#4488CC', '#6644CC']
 
-    # --- Panel 1: W_k(beta) curves ---
+    # Panel 1: W_k(beta) curves
     for k, color in zip(k_values_plot, colors):
         Ws = [W_k_analytical(b, k) for b in betas]
         ax1.plot(betas, Ws, color=color, linewidth=2, label=f'k={k}')
@@ -374,7 +366,7 @@ def plot_combined(percolation_results, filename="k_horizon_trap.png"):
     ax1.set_ylim(0, 0.48)
     ax1.grid(True, alpha=0.3)
 
-    # --- Panel 2: Penalty ratio ---
+    # Panel 2: Penalty ratio
     k_range = np.arange(0, 51)
     ratios = k_range + 2
     ax2.plot(k_range, ratios, 'b-', linewidth=2.5)
@@ -391,7 +383,7 @@ def plot_combined(percolation_results, filename="k_horizon_trap.png"):
                  arrowprops=dict(arrowstyle='->', color='darkred'),
                  bbox=dict(boxstyle='round', facecolor='#FFE0E0'))
 
-    # --- Panel 3: Percolation k-trap prevalence ---
+    # Panel 3: Percolation k-trap prevalence
     perc_colors = ['#44AA44', '#4444CC', '#CC4444', '#DD8844', '#8844CC']
     for (p, k_data), color in zip(sorted(percolation_results.items()), perc_colors):
         ks = sorted(k_data.keys())
@@ -415,9 +407,7 @@ def plot_combined(percolation_results, filename="k_horizon_trap.png"):
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# =====================================================================
 # Main
-# =====================================================================
 
 if __name__ == "__main__":
     print("=" * 70)
@@ -427,7 +417,7 @@ if __name__ == "__main__":
 
     t0 = time.time()
 
-    # --- Part 1: Analytical + MC for chain construction ---
+    # Part 1: Analytical + MC for chain construction
     print("\n[Part 1] Chain construction: analytical W_k(beta)")
 
     k_values = [0, 1, 2, 5, 10, 20]
@@ -453,7 +443,7 @@ if __name__ == "__main__":
             print(f"    k={k:2d}, beta={beta:4.1f}: ana={ana:.4f}, mc={mc:.4f}, "
                   f"diff={diff:.4f} {'OK' if diff < 0.005 else 'CHECK'}")
 
-    # --- Part 2: Percolation grid k-step trap prevalence ---
+    # Part 2: Percolation grid k-step trap prevalence
     print("\n[Part 2] Percolation grid: k-step trap prevalence")
     print("  (n=15, M=40 graphs per (p,k) — this takes ~2-3 min)")
 
@@ -464,7 +454,7 @@ if __name__ == "__main__":
         seed=50,
     )
 
-    # --- Part 3: Visualization ---
+    # Part 3: Visualization
     print("\n[Part 3] Generating plots...")
     plot_combined(perc_results)
     plot_k_prevalence(perc_results)
@@ -472,7 +462,7 @@ if __name__ == "__main__":
     elapsed = time.time() - t0
     print(f"\nTotal time: {elapsed:.1f}s")
 
-    # --- Save results ---
+    # Save results
     save_data = {
         'chain_analytical': {},
         'percolation': {},
@@ -490,7 +480,7 @@ if __name__ == "__main__":
     with open(OUT_DIR / "k_horizon_results.json", "w") as f:
         json.dump(save_data, f, indent=2)
 
-    # --- Summary ---
+    # Summary
     print("\n" + "=" * 70)
     print("KEY RESULTS:")
     print("  1. Trap persists for ALL finite k (constructive proof)")

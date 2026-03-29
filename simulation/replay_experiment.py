@@ -34,9 +34,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from phase_transition_sim import OUT_DIR
 
 
-# =====================================================================
 # Platform Dynamics
-# =====================================================================
 
 @dataclass
 class Platform:
@@ -71,9 +69,7 @@ PLATFORMS = [
 ]
 
 
-# =====================================================================
 # Signal Engine
-# =====================================================================
 
 def sigma_sq(beta):
     if beta > 15:
@@ -95,9 +91,7 @@ def observe_platforms(platforms, t, beta, rng):
     return signals
 
 
-# =====================================================================
 # Agent Policies
-# =====================================================================
 
 def greedy_agent(signals, current, switching_cost):
     """Standard framework: pick highest signal, switch if worth it."""
@@ -121,9 +115,7 @@ def random_agent(platforms, current, rng):
     return current
 
 
-# =====================================================================
 # Temporal Replay Engine
-# =====================================================================
 
 @dataclass
 class ReplayEvent:
@@ -263,9 +255,7 @@ def sweep_beta(platforms, T, switching_cost, beta_values, M=10000,
     return results
 
 
-# =====================================================================
 # Experiment C: Audit Protocol
-# =====================================================================
 
 def generate_audit_report(events, platforms, T, beta, switching_cost, w_e,
                           terminal_platform, terminal_value, oracle_value):
@@ -362,9 +352,7 @@ def format_markdown_report(report):
     return "\n".join(lines)
 
 
-# =====================================================================
 # Visualization
-# =====================================================================
 
 def plot_platform_evolution(platforms, T, filename="platform_evolution.png"):
     """Show quality and ecosystem trajectories."""
@@ -463,9 +451,7 @@ def plot_replay_results(results, filename="replay_results.png"):
     print(f"Saved: {OUT_DIR / filename}")
 
 
-# =====================================================================
 # Main
-# =====================================================================
 
 if __name__ == "__main__":
     print("=" * 70)
@@ -478,7 +464,7 @@ if __name__ == "__main__":
     switching_cost = 0.30
     w_e = 0.5  # weight on ecosystem in terminal value
 
-    # --- Platform evolution ---
+    # Platform evolution
     print("\n[1] Platform profiles:")
     for p in PLATFORMS:
         tv = p.terminal_value(T, w_e)
@@ -491,7 +477,7 @@ if __name__ == "__main__":
 
     plot_platform_evolution(PLATFORMS, T)
 
-    # --- Beta sweep ---
+    # Beta sweep
     print("\n[2] Beta sweep (M=10,000 per beta):")
     beta_values = [0.001, 0.1, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0, 10.0]
     results = sweep_beta(PLATFORMS, T, switching_cost, beta_values,
@@ -499,7 +485,7 @@ if __name__ == "__main__":
 
     plot_replay_results(results)
 
-    # --- Audit report for single trajectory ---
+    # Audit report for single trajectory
     print("\n[3] Generating audit report (single trajectory, beta=5.0):")
     rng_audit = np.random.default_rng(999)
     pmap = {p.name: p for p in PLATFORMS}
@@ -523,7 +509,7 @@ if __name__ == "__main__":
     with open(OUT_DIR / "audit_report.json", "w") as f:
         json.dump(report, f, indent=2, default=str)
 
-    # --- Save all results ---
+    # Save all results
     elapsed = time.time() - t0
 
     save_data = {
@@ -542,7 +528,7 @@ if __name__ == "__main__":
 
     print(f"\nTotal time: {elapsed:.1f}s")
 
-    # --- Summary ---
+    # Summary
     print("\n" + "=" * 70)
     print("EXPERIMENT B+C RESULTS:")
     greedy_at_high = [r for r in results if r['beta'] >= 5.0][0]

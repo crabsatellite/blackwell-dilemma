@@ -80,7 +80,7 @@ def plot_complementarity(filename="complementarity.png"):
 
     fig, axes = plt.subplots(1, 3, figsize=(18, 5.5))
 
-    # --- Panel A: Welfare curves and marginal value of knowledge ---
+    # Panel A: Welfare curves and marginal value of knowledge
     ax = axes[0]
     for p in [0.0, 0.3]:
         wg = [W_greedy(b, p) for b in betas]
@@ -106,7 +106,7 @@ def plot_complementarity(filename="complementarity.png"):
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
 
-    # --- Panel B: Cross-derivative ---
+    # Panel B: Cross-derivative
     ax = axes[1]
     for p, color in [(0.0, '#228B22'), (0.3, '#1a7a1a')]:
         cd = [cross_derivative(b, p) for b in betas]
@@ -129,7 +129,7 @@ def plot_complementarity(filename="complementarity.png"):
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
 
-    # --- Panel C: Marginal value of beta, conditional on alpha ---
+    # Panel C: Marginal value of beta, conditional on alpha
     ax = axes[2]
     for alpha, color, label in [(0.0, 'red', r'$\alpha=0$ (greedy)'),
                                   (0.5, 'purple', r'$\alpha=0.5$ (partial)'),

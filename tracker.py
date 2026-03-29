@@ -30,9 +30,7 @@ DATA_DIR.mkdir(exist_ok=True)
 
 SNAPSHOTS_FILE = DATA_DIR / "snapshots.json"
 
-# =====================================================================
 # Tracked Frameworks
-# =====================================================================
 
 FRAMEWORKS = {
     'LangChain':       'langchain-ai/langchain',
@@ -47,9 +45,7 @@ FRAMEWORKS = {
     'PydanticAI':      'pydantic/pydantic-ai',
 }
 
-# =====================================================================
 # Data Collection
-# =====================================================================
 
 def _gh_api(endpoint, jq_filter=None):
     cmd = ['gh', 'api', endpoint]
@@ -138,9 +134,7 @@ def save_snapshot(snapshot):
     return series
 
 
-# =====================================================================
 # Prediction Definition
-# =====================================================================
 
 PREDICTION = {
     't0': '2026-03-26',
@@ -168,9 +162,7 @@ PREDICTION = {
 }
 
 
-# =====================================================================
 # Proxy Computation
-# =====================================================================
 
 def compute_proxies(snapshot):
     """Compute q(t) and e(t) from snapshot data."""
@@ -208,9 +200,7 @@ def compute_proxies(snapshot):
     return proxies
 
 
-# =====================================================================
 # Report Generation
-# =====================================================================
 
 def generate_report(series):
     """Generate prediction tracking report."""
@@ -291,9 +281,7 @@ def generate_report(series):
     return report_text
 
 
-# =====================================================================
 # Main
-# =====================================================================
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='MRS Daily Tracker')
