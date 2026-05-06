@@ -2,6 +2,7 @@
 
 **When Better Information Makes Agents Worse Off Under Endogenous Feasibility Constraints**
 
+[![SSRN](https://img.shields.io/badge/SSRN-6478278-014991?style=flat-square)](https://doi.org/10.2139/ssrn.6478278)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19251487.svg)](https://doi.org/10.5281/zenodo.19251487)
 
 Blackwell's theorem (1953) states that more informative signals lead to weakly better decisions. We identify a structural boundary: when actions are irreversible and signals are topology-blind, welfare decomposes into a signal-immune topological component and an exponentially vanishing informational residual. Above the percolation threshold $p_c = 1/2$, the Blackwell ordering becomes structurally irrelevant to welfare.
