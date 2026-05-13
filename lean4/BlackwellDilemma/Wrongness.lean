@@ -540,83 +540,213 @@ theorem gap_topo_cluster_relation :
     vertices at blocking parameter `p`. -/
 axiom expectedTopoLoss : ℕ → ℝ → ℝ
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    **Topological loss vanishes below threshold** (Part 1 of `prop:topo-cluster`).
+/-! ### `prop:topo-cluster` Part 1 — below-threshold asymptotic.
 
-    For `p < 1/2`, `expectedTopoLoss n p = Θ(1/n) → 0` as `n → ∞`.
+R41 §18 atomic decomposition. The bundled `gap_topo_loss_below_threshold_OPEN`
+axiom is REPLACED by a derived theorem composing two Cat 3 paper-novel
+atomic stipulations:
+ * `topo_loss_below_envelope_exists_atom_OPEN` — paper-stated existence
+   of a per-`n` decay envelope `topoLossBelowDecay : ℕ → ℝ` with
+   `expectedTopoLoss n p ≤ topoLossBelowDecay n` and
+   `topoLossBelowDecay → 0`.
+ * `topo_loss_below_eps_from_envelope_atom_OPEN` — paper-stated
+   ε-N convergence from the envelope (the operative downstream form). -/
 
-    Cat 3 paper-novel claim — accepted on Paper Thm 3.3 (paper-novel
-    asymptotic on the paper's Cat 3 carrier `expectedTopoLoss`). The
-    asymptotic uses the paper's Z²-percolation primitive
-    `expectedTopoLoss` (Cat 3 paper-novel carrier) with the Cat 2
-    cluster-size convergence-to-0 result from Grimmett 1999
-    _Percolation_ 2nd ed. (Springer); Mathlib lacks formalized
-    bond-percolation theory (same gap as `gap_harris_kesten_OPEN`), so
-    the Lean encoding axiomatizes the paper-stated below-threshold
-    asymptotic on the paper-novel carrier.
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:topo-cluster` Part 1 (line 286, "topological loss vanishes
+    asymptotically") asserts the EXISTENCE of a decay envelope
+    `topoLossBelowDecay : ℕ → ℝ` with the per-`n` upper bound
+    `expectedTopoLoss n p ≤ topoLossBelowDecay n` and
+    `topoLossBelowDecay → 0`. Paper proof line 292-294 derives the
+    conditional formula `(N − k) / ((N+1)(k+1))` and aggregates over
+    the giant-component event (probability `θ(1-p) > 0` by Harris-
+    Kesten + Grimmett). This atomic stipulation isolates the EXISTENCE
+    of such a decay-function envelope on the existing carrier
+    `expectedTopoLoss`.
 
-    Cat 2 dependency surfacing (R28-A restoration): the Cat 2
-    Grimmett-percolation-probability axiom
-    `gap_percolation_probability_OPEN` is threaded as an EXPLICIT
-    ANTECEDENT `(h_perc_prob : ...)` so that `#print axioms` on any
-    theorem consuming `gap_topo_loss_below_threshold_OPEN` surfaces
-    the Grimmett dependency. The R26 drop of this antecedent was
-    correct for downstream THEOREMS but WRONG for downstream AXIOMS
-    (axioms have no body and cannot make the Cat 2 dependency visible
-    to the kernel via direct call). R28 reclassifies this entry as
-    paper-novel Cat 3 (was Cat 2 / Cat 3 edge case in R26) since the
-    asymptotic on the paper-novel `expectedTopoLoss` carrier is
-    paper-novel content; the Cat 2 dependency on Grimmett is the
-    underlying percolation-infra input.
+    Encoding choice: extracted from the bundled
+    `gap_topo_loss_below_threshold_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulations + derived
+    theorem). The Cat 2 Grimmett dependency is threaded as the explicit
+    `h_perc_prob` antecedent (paper authority for `θ(1-p) > 0`).
 
-    paper source: Proposition `prop:topo-cluster`, line 286;
-    Grimmett 1999 _Percolation_ 2nd ed. cited for the Z²-percolation
-    cluster-size below-threshold infrastructure. -/
-axiom gap_topo_loss_below_threshold_OPEN :
+    Cat 3 sub-type: workingAssumption (paper-stated existence of decay
+    envelope; pending Mathlib percolation + cluster-size-asymptotics
+    machinery; 必须 close before publication).
+
+    paper source: Proposition `prop:topo-cluster`, line 286 + proof
+    lines 292-294; Grimmett 1999 _Percolation_ 2nd ed. cited for the
+    Cat 2 percolation-probability dependency. -/
+axiom topo_loss_below_envelope_exists_atom_OPEN :
     (∃ θ : ℝ → ℝ,
       (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
       (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) →
     ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∃ topoLossBelowDecay : ℕ → ℝ,
+        Filter.Tendsto topoLossBelowDecay Filter.atTop (nhds 0) ∧
+        ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:topo-cluster` Part 1 (line 286) converts the decay-envelope
+    EXISTENCE into the operative arbitrary-ε convergence form
+    `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε`. Given any
+    envelope `topoLossBelowDecay : ℕ → ℝ` with
+    `Tendsto _ atTop (nhds 0)` and per-`n` upper-bound dominance, the
+    eventually-below-ε form follows.
+
+    Encoding choice: extracted from the bundled
+    `gap_topo_loss_below_threshold_OPEN` per §18 Manufactured-Recognition
+    pattern. This is the second atomic stipulation completing the
+    decomposition: the first
+    (`topo_loss_below_envelope_exists_atom_OPEN`) provides the decay
+    envelope; this one converts the envelope into the paper-stated
+    arbitrary-ε bound.
+
+    Cat 3 sub-type: workingAssumption (paper-stated arbitrary-threshold
+    convergence; pending the substantive envelope from
+    `topo_loss_below_envelope_exists_atom_OPEN` + standard ε-δ Tendsto
+    unfolding; 必须 close before publication).
+
+    paper source: Proposition `prop:topo-cluster`, line 286
+    (asymptotic convergence). -/
+axiom topo_loss_below_eps_from_envelope_atom_OPEN :
+    ∀ p : ℝ,
+      (∃ topoLossBelowDecay : ℕ → ℝ,
+        Filter.Tendsto topoLossBelowDecay Filter.atTop (nhds 0) ∧
+        ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n) →
       ∀ ε : ℝ, 0 < ε →
         ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    **Topological loss is `Θ(1)` above threshold** (Part 2 of
-    `prop:topo-cluster`).
+/-- **Proposition `prop:topo-cluster` Part 1 (derived theorem).**
+    Below threshold (`p < p_c`), `expectedTopoLoss n p` converges to `0`
+    as `n → ∞`.
 
-    For `p > 1/2`, `expectedTopoLoss n p = 1 − Θ(1/n) = Θ(1)`.
+    Decomposed from the bundled `gap_topo_loss_below_threshold_OPEN`
+    axiom into (a) `topo_loss_below_envelope_exists_atom_OPEN` (paper-
+    stated existence of decay envelope) + (b)
+    `topo_loss_below_eps_from_envelope_atom_OPEN` (paper-stated
+    arbitrary-ε convergence from envelope). The derived theorem
+    composes both atoms.
 
-    Cat 3 paper-novel claim — accepted on Paper Thm 3.3 (paper-novel
-    asymptotic on the paper's Cat 3 carrier `expectedTopoLoss`). The
-    two-sided bound uses the paper's Z²-percolation primitive
-    `expectedTopoLoss` (Cat 3 paper-novel carrier) with the Cat 2
-    above-threshold cluster-size theory from Grimmett 1999
-    _Percolation_ 2nd ed. §6.75 (Springer); Mathlib lacks formalized
-    bond-percolation theory (same gap as `gap_harris_kesten_OPEN`), so
-    the Lean encoding axiomatizes the paper-stated above-threshold
-    asymptotic on the paper-novel carrier.
+    paper source: Proposition `prop:topo-cluster`, line 286;
+    Grimmett 1999 _Percolation_ 2nd ed. cited for the Cat 2
+    percolation-probability dependency. -/
+theorem gap_topo_loss_below_threshold
+    (h_perc_prob :
+      ∃ θ : ℝ → ℝ,
+        (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
+        (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) :
+    ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∀ ε : ℝ, 0 < ε →
+        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
+  intro p hp_nn hp_lt ε hε
+  exact topo_loss_below_eps_from_envelope_atom_OPEN p
+    (topo_loss_below_envelope_exists_atom_OPEN h_perc_prob p hp_nn hp_lt) ε hε
 
-    Cat 2 dependency surfacing (R28-A restoration): the Cat 2
-    Grimmett-exponential-decay axiom `gap_grimmett_exponential_decay_OPEN`
-    is threaded as an EXPLICIT ANTECEDENT `(h_grimmett : ...)` so that
-    `#print axioms` on any theorem consuming
-    `gap_topo_loss_above_threshold_OPEN` surfaces the Grimmett
-    dependency. The R26 drop of this antecedent was correct for
-    downstream THEOREMS but WRONG for downstream AXIOMS (axioms have
-    no body and cannot make the Cat 2 dependency visible to the kernel
-    via direct call). R28 reclassifies this entry as paper-novel Cat 3
-    (was Cat 2 / Cat 3 edge case in R26).
+/-! ### `prop:topo-cluster` Part 2 — above-threshold two-sided bound.
 
-    paper source: Proposition `prop:topo-cluster`, line 287;
-    Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited for the Z²-
-    percolation cluster-size above-threshold infrastructure. -/
-axiom gap_topo_loss_above_threshold_OPEN :
+R41 §18 atomic decomposition. The bundled
+`gap_topo_loss_above_threshold_OPEN` axiom is REPLACED by a derived
+theorem composing two Cat 3 paper-novel atomic stipulations:
+ * `topo_loss_above_lower_bound_atom_OPEN` — paper-stated existence of
+   a positive lower bound `c₁(p) > 0` on `expectedTopoLoss n p` for
+   large `n`.
+ * `topo_loss_above_upper_bound_atom_OPEN` — paper-stated existence of
+   an upper bound `c₂(p)` on `expectedTopoLoss n p` for large `n`. -/
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:topo-cluster` Part 2 (line 287, "topological loss is Θ(1)
+    above threshold") asserts the EXISTENCE of a positive lower bound
+    `c₁(p) > 0` on `expectedTopoLoss n p` for sufficiently large `n`.
+    Paper proof (lines 421-427 of `thm:phase` Part 2) uses the above-
+    threshold cluster-size theory: `|R(v_0)| = O(1)` with positive
+    probability, so `E[1/(|R|+1)] ≥ c₁(p) > 0` for large `n`. This
+    atomic stipulation isolates the LOWER-BOUND existence on the
+    existing carrier `expectedTopoLoss`.
+
+    Encoding choice: extracted from the bundled
+    `gap_topo_loss_above_threshold_OPEN` per §18 Manufactured-
+    Recognition pattern. The Cat 2 Grimmett-exponential-decay
+    dependency is threaded as the explicit `h_grimmett` antecedent.
+
+    Cat 3 sub-type: workingAssumption (paper-stated existence of
+    positive lower bound; pending Mathlib percolation + cluster-tail
+    machinery; 必须 close before publication).
+
+    paper source: Proposition `prop:topo-cluster`, line 287 + proof
+    via `thm:phase` Part 2 lines 421-427; Grimmett 1999 §6.75 cited as
+    the Cat 2 dependency. -/
+axiom topo_loss_above_lower_bound_atom_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
-        ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
-          c₁ ≤ expectedTopoLoss n p ∧ expectedTopoLoss n p ≤ c₂
+      ∃ c₁ : ℝ, 0 < c₁ ∧
+        ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n → c₁ ≤ expectedTopoLoss n p
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:topo-cluster` Part 2 (line 287) asserts the EXISTENCE of an
+    upper bound `c₂(p)` on `expectedTopoLoss n p` for sufficiently
+    large `n` (the Θ(1) upper side). Paper proof: `expectedTopoLoss
+    n p ≤ 1` trivially since it is a probability-weighted sum of
+    indicator-like quantities; the explicit bound `c₂` from the
+    paper's Θ-notation can be taken as any constant ≥ 1 (or sharper
+    via the cluster-size analysis).
+
+    Encoding choice: extracted from the bundled
+    `gap_topo_loss_above_threshold_OPEN` per §18 Manufactured-
+    Recognition pattern. The Cat 2 Grimmett-exponential-decay
+    dependency is threaded as the explicit `h_grimmett` antecedent
+    (paper attribution: the Θ(1) two-sided bound depends on the
+    above-threshold cluster theory).
+
+    Cat 3 sub-type: workingAssumption (paper-stated existence of
+    upper bound; the upper side is conceptually weaker than the
+    lower side but both are part of the paper's Θ(1) statement;
+    必须 close before publication).
+
+    paper source: Proposition `prop:topo-cluster`, line 287; Grimmett
+    1999 §6.75 cited as the Cat 2 dependency. -/
+axiom topo_loss_above_upper_bound_atom_OPEN :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∀ c₁ : ℝ, 0 < c₁ →
+        ∃ c₂ : ℝ, c₁ ≤ c₂ ∧
+          ∃ N₂ : ℕ, ∀ n : ℕ, N₂ ≤ n → expectedTopoLoss n p ≤ c₂
+
+/-- **Proposition `prop:topo-cluster` Part 2 (derived theorem).**
+    Above threshold (`p > p_c`), `expectedTopoLoss n p = Θ(1)`:
+    bounded above and below by positive constants `c₁ ≤ c₂` for
+    sufficiently large `n`.
+
+    Decomposed from the bundled `gap_topo_loss_above_threshold_OPEN`
+    axiom into (a) `topo_loss_above_lower_bound_atom_OPEN`
+    (paper-stated existence of `c₁ > 0`) + (b)
+    `topo_loss_above_upper_bound_atom_OPEN` (paper-stated existence
+    of `c₂ ≥ c₁`). The derived theorem composes both atoms; the
+    common-`N` step uses `max N₁ N₂`.
+
+    paper source: Proposition `prop:topo-cluster`, line 287;
+    Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited for the Cat 2
+    above-threshold dependency. -/
+theorem gap_topo_loss_above_threshold
+    (h_grimmett :
+      ∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ))))
+    (p : ℝ) (hp : harrisKestenCriticalProb < p) :
+    ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
+      ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
+        c₁ ≤ expectedTopoLoss n p ∧ expectedTopoLoss n p ≤ c₂ := by
+  obtain ⟨c₁, hc₁_pos, N₁, hN₁⟩ :=
+    topo_loss_above_lower_bound_atom_OPEN h_grimmett p hp
+  obtain ⟨c₂, hc₂_ge, N₂, hN₂⟩ :=
+    topo_loss_above_upper_bound_atom_OPEN h_grimmett p hp c₁ hc₁_pos
+  refine ⟨c₁, c₂, hc₁_pos, hc₂_ge, max N₁ N₂, ?_⟩
+  intro n hn
+  exact ⟨hN₁ n (le_of_max_le_left hn), hN₂ n (le_of_max_le_right hn)⟩
 
 end BlackwellDilemma

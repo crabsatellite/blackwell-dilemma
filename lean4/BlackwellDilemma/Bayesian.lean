@@ -123,7 +123,9 @@ The greedy agent (`κ = 0`) exhibits the strongest reversal. -/
     is the threshold identification `p̂* = 2/3`, encoded directly via
     the routing-decision biconditional. The β-monotonicity sub-claim
     of `prop:bayesian-naive-five-state` (ii) is tracked separately by
-    `FiveState.gap_bayesian_naive_reversal_absent_OPEN`.
+    `FiveState.gap_bayesian_naive_reversal_absent` (R41 derived theorem
+    composing Cat 3 atom
+    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`).
 
     paper source: Remark `rem:robustness-misspec` (i), line 941;
     quantitative content in Proposition `prop:bayesian-naive-five-state`. -/

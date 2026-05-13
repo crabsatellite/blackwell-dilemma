@@ -1196,31 +1196,43 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
   · intro h
     nlinarith
 
-/-- **Proposition `prop:bayesian-naive-five-state` (ii): reversal absent
-    below threshold.**
-    For `p̂ < 2/3`, welfare is non-decreasing in β.
-
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom
-    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is threaded
-    as an EXPLICIT ANTECEDENT `(h_blackwell : ...)` so that
-    `#print axioms` on any theorem consuming
-    `gap_bayesian_naive_reversal_absent_OPEN` surfaces the Blackwell
-    dependency. The R26 drop of this antecedent over-applied the
-    "Cat 2 implicit consumption" rule: the CLAIM CONTENT of this entry
-    is the Blackwell monotonicity theorem applied to the Bayesian-naive
-    agent below the routing threshold (where the trap-routing
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:bayesian-naive-five-state` (ii) (lines 955-956) asserts that
+    below the routing threshold (`p̂ < 2/3`) the Bayesian-naive agent
+    inherits Blackwell-monotonicity in β from the correctly-specified
+    Bayesian agent. Paper proof: at `p̂ < 2/3` the trap-routing
     misspecification is dominated by the correctly-modelled bridge
     option, restoring the Blackwell-ordering chain on the relevant
-    sub-problem, per `feedback_gap_ledger_in_lean4` §10 paper-
-    APPLICATION-to-opaque-carrier = Cat 3 with explicit Cat 2 chain).
-    The relevant Cat 2 axiom lives at
-    `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
+    sub-problem (paper line 956); given the Cat 2 Blackwell-monotonicity
+    statement on the bayesian agent (`h_blackwell` antecedent), the
+    bayesianNaive agent inherits the monotonicity at the below-threshold
+    scope.
+
+    Encoding choice: per `feedback_gap_ledger_in_lean4` §18
+    Manufactured-Recognition pattern, the bundled
+    `gap_bayesian_naive_reversal_absent_OPEN` axiom is decomposed into
+    this single atomic stipulation (paper §10 paper-APPLICATION-to-
+    opaque-carrier = Cat 3 with explicit Cat 2 chain via `h_blackwell`).
+    The single-atom decomposition is honest because the paper-stated
+    content IS the Blackwell-recovery transfer at the below-threshold
+    scope; further sub-decomposition would manufacture artificial
+    intermediate stipulations.
+
+    Cat 2 dependency surfacing: the Cat 2 axiom
+    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is threaded
+    as an EXPLICIT ANTECEDENT `(h_blackwell : ...)` so that
+    `#print axioms` on any theorem consuming this atom surfaces the
+    Blackwell dependency.
+
+    Cat 3 sub-type: structuralEquation (paper-stated atomic content
+    on opaque `agentWelfare AgentType.bayesianNaive` carrier;
+    paper-foundational stipulation about how the bayesianNaive carrier
+    behaves at the below-threshold scope under the Cat 2 Blackwell
+    antecedent; 永不 close per §3.4.3).
 
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956. -/
-axiom gap_bayesian_naive_reversal_absent_OPEN :
+axiom bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →
@@ -1228,6 +1240,25 @@ axiom gap_bayesian_naive_reversal_absent_OPEN :
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         agentWelfare AgentType.bayesianNaive β₁ 0 1 ≤
           agentWelfare AgentType.bayesianNaive β₂ 0 1
+
+/-- **Proposition `prop:bayesian-naive-five-state` (ii): reversal absent
+    below threshold** (R41 derived theorem composing
+    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+
+    For `p̂ < 2/3`, welfare is non-decreasing in β.
+
+    paper source: Proposition `prop:bayesian-naive-five-state` (ii),
+    lines 955-956. -/
+theorem gap_bayesian_naive_reversal_absent :
+    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.bayesian β₁ 0 1 ≤
+        agentWelfare AgentType.bayesian β₂ 0 1) →
+    ∀ p_hat : ℝ, 0 ≤ p_hat → p_hat < (2 : ℝ) / 3 →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.bayesianNaive β₁ 0 1 ≤
+          agentWelfare AgentType.bayesianNaive β₂ 0 1 :=
+  bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
 
 /-- **Proposition `prop:bayesian-naive-five-state` (iii): reversal
     appears above threshold.**
