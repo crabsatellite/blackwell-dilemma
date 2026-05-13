@@ -356,23 +356,28 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_log_growth
 
 -- R41 §18 decompositions (3 new derived theorems closing the final
--- workingAssumption residue from R40):
---  * `gap_topo_loss_below_threshold` (Wrongness.lean): composes Cat 3 atoms
---    `topo_loss_below_envelope_exists_atom_OPEN` + `topo_loss_below_eps_from_envelope_atom_OPEN`
---    with explicit Cat 2 Grimmett `h_perc_prob` antecedent. Mirrors R37
---    `gap_phase_transition_below` for the prop:topo-cluster Part 1 paper claim.
---  * `gap_topo_loss_above_threshold` (Wrongness.lean): composes Cat 3 atoms
---    `topo_loss_above_lower_bound_atom_OPEN` + `topo_loss_above_upper_bound_atom_OPEN`
---    with explicit Cat 2 Grimmett `h_grimmett` antecedent. Common-N step uses
---    `max N₁ N₂`. Mirrors R37 `gap_phase_transition_above` for the
---    prop:topo-cluster Part 2 paper two-sided Θ(1) bound.
+-- workingAssumption residue from R40), with R42 Pattern-1 fix:
+--  * `gap_topo_loss_below_threshold` (Wrongness.lean): composes Cat 3
+--    workingAssumption atom `topo_loss_below_envelope_exists_atom_OPEN`
+--    (paper line 286 envelope existence) + Cat 1 theorem
+--    `topo_loss_below_eps_from_envelope` (R42 Mathlib-discharge from
+--    `Filter.Tendsto`) with explicit Cat 2 Grimmett `h_perc_prob`
+--    antecedent.
+--  * `gap_topo_loss_above_threshold` (Wrongness.lean): composes Cat 3
+--    workingAssumption atoms `topo_loss_above_lower_bound_atom_OPEN` +
+--    `topo_loss_above_upper_bound_atom_OPEN` with explicit Cat 2
+--    Grimmett `h_grimmett` antecedent. Common-N step uses `max N₁ N₂`.
 --  * `gap_bayesian_naive_reversal_absent` (Canonical.lean): single-atom
 --    derived theorem composing
 --    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN` with
---    explicit Cat 2 Blackwell `h_blackwell` antecedent. Closes Part (ii)
---    of `prop:bayesian-naive-five-state` per R40 close target.
+--    explicit Cat 2 Blackwell `h_blackwell` antecedent.
+-- R42 also adds the new Cat 1 theorem itself:
+--  * `topo_loss_below_eps_from_envelope` (Wrongness.lean): Cat 1 Mathlib
+--    derivation from `Filter.Tendsto` neighborhood unfolding + transitivity
+--    through envelope upper bound. Discharges R41 Pattern-1 violation.
 #print axioms BlackwellDilemma.gap_topo_loss_below_threshold
 #print axioms BlackwellDilemma.gap_topo_loss_above_threshold
 #print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_absent
+#print axioms BlackwellDilemma.topo_loss_below_eps_from_envelope
 
 end BlackwellDilemma.AxiomAudit

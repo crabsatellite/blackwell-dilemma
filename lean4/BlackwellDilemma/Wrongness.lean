@@ -587,47 +587,46 @@ axiom topo_loss_below_envelope_exists_atom_OPEN :
         Filter.Tendsto topoLossBelowDecay Filter.atTop (nhds 0) ∧
         ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:topo-cluster` Part 1 (line 286) converts the decay-envelope
-    EXISTENCE into the operative arbitrary-ε convergence form
-    `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε`. Given any
-    envelope `topoLossBelowDecay : ℕ → ℝ` with
-    `Tendsto _ atTop (nhds 0)` and per-`n` upper-bound dominance, the
-    eventually-below-ε form follows.
+/-- **Cat 1 Mathlib derivation** of the eps-from-envelope step: given any
+    `topoLossBelowDecay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)` and
+    per-`n` upper-bound dominance `expectedTopoLoss n p ≤ topoLossBelowDecay n`,
+    the paper-stated `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε` form
+    follows by standard ε-δ Tendsto unfolding.
 
-    Encoding choice: extracted from the bundled
-    `gap_topo_loss_below_threshold_OPEN` per §18 Manufactured-Recognition
-    pattern. This is the second atomic stipulation completing the
-    decomposition: the first
-    (`topo_loss_below_envelope_exists_atom_OPEN`) provides the decay
-    envelope; this one converts the envelope into the paper-stated
-    arbitrary-ε bound.
-
-    Cat 3 sub-type: workingAssumption (paper-stated arbitrary-threshold
-    convergence; pending the substantive envelope from
-    `topo_loss_below_envelope_exists_atom_OPEN` + standard ε-δ Tendsto
-    unfolding; 必须 close before publication).
+    R42 conversion (Pattern-1 violation fix): the prior R41 encoding as
+    `axiom topo_loss_below_eps_from_envelope_atom_OPEN` (Cat 3 atom)
+    was flagged by hostile audit as a Pattern-1 violation since the
+    derivation is fully Mathlib-routine. Now encoded as a Cat 1
+    `theorem` proved kernel-pure via `Filter.Tendsto` neighborhood
+    unfolding + transitivity through the envelope upper bound.
 
     paper source: Proposition `prop:topo-cluster`, line 286
     (asymptotic convergence). -/
-axiom topo_loss_below_eps_from_envelope_atom_OPEN :
+theorem topo_loss_below_eps_from_envelope :
     ∀ p : ℝ,
       (∃ topoLossBelowDecay : ℕ → ℝ,
         Filter.Tendsto topoLossBelowDecay Filter.atTop (nhds 0) ∧
         ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n) →
       ∀ ε : ℝ, 0 < ε →
-        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε
+        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
+  intro p ⟨d, hd_tendsto, h_le⟩ ε hε
+  have h_evt : ∀ᶠ n in Filter.atTop, d n < ε := by
+    have h_mem : Set.Iio ε ∈ nhds (0 : ℝ) := Iio_mem_nhds hε
+    exact hd_tendsto h_mem
+  rw [Filter.eventually_atTop] at h_evt
+  obtain ⟨N, hN⟩ := h_evt
+  exact ⟨N, fun n hn => lt_of_le_of_lt (h_le n) (hN n hn)⟩
 
 /-- **Proposition `prop:topo-cluster` Part 1 (derived theorem).**
     Below threshold (`p < p_c`), `expectedTopoLoss n p` converges to `0`
     as `n → ∞`.
 
     Decomposed from the bundled `gap_topo_loss_below_threshold_OPEN`
-    axiom into (a) `topo_loss_below_envelope_exists_atom_OPEN` (paper-
-    stated existence of decay envelope) + (b)
-    `topo_loss_below_eps_from_envelope_atom_OPEN` (paper-stated
-    arbitrary-ε convergence from envelope). The derived theorem
-    composes both atoms.
+    axiom into (a) `topo_loss_below_envelope_exists_atom_OPEN` (Cat 3
+    paper-stated existence of decay envelope, workingAssumption pending
+    Mathlib percolation infra) + (b) `topo_loss_below_eps_from_envelope`
+    (Cat 1 Mathlib-derived theorem, R42 Pattern-1 fix from former atom).
+    The derived theorem composes both.
 
     paper source: Proposition `prop:topo-cluster`, line 286;
     Grimmett 1999 _Percolation_ 2nd ed. cited for the Cat 2
@@ -641,7 +640,7 @@ theorem gap_topo_loss_below_threshold
       ∀ ε : ℝ, 0 < ε →
         ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
   intro p hp_nn hp_lt ε hε
-  exact topo_loss_below_eps_from_envelope_atom_OPEN p
+  exact topo_loss_below_eps_from_envelope p
     (topo_loss_below_envelope_exists_atom_OPEN h_perc_prob p hp_nn hp_lt) ε hε
 
 /-! ### `prop:topo-cluster` Part 2 — above-threshold two-sided bound.

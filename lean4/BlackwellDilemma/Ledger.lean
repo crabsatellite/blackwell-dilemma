@@ -141,17 +141,76 @@
      derivedTheorem 28 → 33 (+5 bundle flips); carrier /
      hypothesisPredicate unchanged.
 
-  Final state: 149 entries; 50 CLOSED + 1 PARTIAL + 6 OPEN + 92 DEFINITIONAL.
-  workingAssumption count = 0 (zero residue from the close-target type).
-  The 1 remaining PARTIAL is entry_phi_tail (Mixed Cat 1+2 entry with
-  both sub-claims operationally CLOSED but retained as PARTIAL because
-  one closure uses def-rfl bookkeeping for a known Mathlib gap) —
-  notCat3 sub-type so NOT subject to the workingAssumption mandate.
-  The 6 OPEN entries are all Cat 2 external-paper axioms (Harris-Kesten,
-  Blackwell, Grimmett, etc.) accepted on paper-cited authority per §10.
+  R42 2026-05-14 hostile-audit corrections (verdict: CONCERNS, not FAIL):
+
+  TASK 1 — Pattern-1 violation fix on the R41
+  `topo_loss_below_eps_from_envelope_atom_OPEN` atom. The atom's own R41
+  attackHistory acknowledged it was "Cat 1 derivable from Mathlib
+  `Filter.Tendsto`, but retained as a paper-stated structural form
+  per §18." Discipline §6.1 mandates "Cat 1 must be a theorem if
+  Mathlib proof exists (no axiom encoding)." R42 converts it from
+  Cat 3 axiom to Cat 1 theorem `topo_loss_below_eps_from_envelope`
+  (Wrongness.lean): proof uses `Iio_mem_nhds` + `Filter.eventually_atTop`
+  + transitivity through envelope upper bound. The Ledger atom entry is
+  removed (Cat 1 theorems are not tracked as separate atom entries).
+
+  TASK 2 — §3.4.3 vs §3.4.4 classification fix. The audit flagged that
+  the R41 reclassification of the 4 topo_loss atoms as §3.4.3
+  structuralEquation/gapDefinitional (永不-close) was over-applied:
+  the discipline §3.4.3 examples are DEFINITIONAL EQUATIONS on
+  primitives (`V_dyn_def`, paper §3.1 `W = W_topo + W_info` decomposition,
+  Bridge_Defining_Biconditional) that "cannot be proved — they constitute
+  meaning." The topo_loss atoms instead assert EXISTENCE of decay envelopes
+  / two-sided constants — paper-derived claims that the paper itself proves
+  via Cat 2 Grimmett 1999 + topo-cluster formula, and that become
+  derivable once Mathlib gains bond-percolation infrastructure. Per §3.4.4
+  these are workingAssumption (必须 close before publication); calling them
+  永不-close "semantically blocks future promotion" (audit verbatim).
+  R42 reclassifies the 3 remaining topo_loss atoms (envelope_exists,
+  above_lower_bound, above_upper_bound) workingAssumption/gapOpen; the
+  4th (eps_from_envelope) is discharged per Task 1.
+
+  R42 honest residue: 3 workingAssumption entries remain (the topo_loss
+  existence atoms) — paper-derived existence claims explicitly pending
+  Mathlib bond-percolation infrastructure as close target. NOT a regression
+  from R41's "workingAssumption = 0" — the R41 count was achieved via
+  the §3.4.3 over-classification that R42 audit caught.
+
+  R42 net delta vs R41 baseline (149 entries):
+   * Total: 149 → 148 (-1 from removing eps_from_envelope atom entry,
+     now a Cat 1 theorem).
+   * Status: open 6 → 8 (+3 from R42 reclassifications); closed 50 →
+     50 (unchanged — bundle derived theorems still CLOSED, just composing
+     mix of workingAssumption atoms + Cat 1 theorem); definitional 92 →
+     90 (-2: -1 atom entry removed, -1 from R42 reclassification of
+     remaining 3 atoms from gapDefinitional to gapOpen ... net -3 actually
+     since 3 atoms shifted gapDefinitional → gapOpen + 1 atom entry deleted).
+   * Cat 3 sub: workingAssumption 0 → 3 (R42 honest re-count);
+     structuralEquation 77 → 73 (-3 from reclassification + -1 deleted entry).
+
+  Final R42 state: 148 entries; 50 CLOSED + 1 PARTIAL + 8 OPEN +
+  89 DEFINITIONAL. workingAssumption count = 3 (the 3 topo_loss
+  existence atoms, all with Mathlib percolation infra as documented
+  close target). The 8 OPEN entries are 5 Cat 2 external-paper axioms
+  (Harris-Kesten, Blackwell, Grimmett, etc.) + 3 Cat 3 workingAssumption
+  atoms pending Mathlib percolation. The 1 PARTIAL is entry_phi_tail
+  (Mixed Cat 1+2 entry, notCat3 sub-type — NOT subject to the
+  workingAssumption mandate). Bundle entries entry_topo_loss_below /
+  _above remain CLOSED via derived theorems (the workingAssumption
+  residue is at the atom level, not the bundle level).
+
+  AUDIT TRAIL OPEN ITEM (deferred to future round): the audit also
+  flagged that the analogous R37/R39 atoms in Phase.lean
+  (`topo_loss_decay_below_pc_OPEN`, `topo_loss_decay_arbitrary_threshold_OPEN`,
+  `wInfoTopoRatio_const_exists_OPEN`, `wInfoTopoRatio_bound_OPEN`) have
+  the SAME §3.4.3 over-classification (R39 reclassified 50 atoms, some
+  of which match this concern). R42 scope-limited to R41 corrections;
+  R37/R39 analogue audit deferred. If applied consistently, R37 atoms
+  would similarly reclassify back to workingAssumption (and one would
+  similarly discharge as Cat 1 theorem). Flagged for user direction.
 
   6-tier status × 3-input-category cross-table (post-R40 historical;
-  superseded by R41 above; live numbers printed by `#eval` block):
+  superseded by R41/R42 above; live numbers printed by `#eval` block):
 
   R40 2026-05-14 final wave (post-fd836ec R39 baseline of 143 entries:
   open=15, partial=7, closed=42, definitional=79; workingAssumption=15,
@@ -1011,10 +1070,11 @@ def entry_topo_loss_below : GapEntry where
       "R26 2026-05-13: per discipline clarification, the BLOCKED-def encoding was over-engineered for this Cat 3 paper-novel + Cat 2 percolation-infra-dependency edge case. Converted to plain Cat 3 axiom `gap_topo_loss_below_threshold_OPEN` with paper-cited docstring acknowledging the dual Cat 3 paper-novel (`expectedTopoLoss` carrier in paper's Z²-percolation regime) + Cat 2 percolation dependency (Grimmett 1999 _Percolation_ 2nd ed. cluster-size below-threshold theory). No Lean signature consumes this entry, so no broken-link hypothesis threading needs to be dropped. Status BLOCKED → OPEN: paper Thm 3.3 + Grimmett 1999 authority covers the claim per the 2026-05-13 discipline (BLOCKED is reserved for genuine no-acceptance-possible cases — this entry has a paper-stated claim plus external authority for the percolation infrastructure).",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
       "R40 2026-05-14: state verified, retained as workingAssumption gapOpen. This entry is the source-side `axiom gap_topo_loss_below_threshold_OPEN` (Wrongness.lean:575) — a paper-stated asymptotic claim (`E[|W_topo|] → 0` below threshold) on the opaque `expectedTopoLoss` carrier with the Cat 2 Grimmett 1999 percolation-probability axiom threaded as explicit `h_perc_prob` antecedent (R28-A audit-chain restoration). Unlike the 7 R23-C1 atom_*_def entries reclassified to structuralEquation under R39+R40, this entry is a paper-derived asymptotic CLAIM (not an atomic definitional commitment to how a carrier behaves). The atomic decomposition into Cat 3 paper-foundational sub-atoms was not yet applied (would require splitting the `→ 0` Tendsto convergence into the underlying Grimmett percolation-probability decay + a paper-novel `expectedTopoLoss n p ≤ θ(1−p) · 1/n` envelope-bound atom analogous to `entry_atom_topo_loss_decay_below_pc` introduced in R37 for `gap_phase_transition_below`). Status OPEN retained pending the atomic decomposition; the per-axiom Cat 2 antecedent threading already provides audit-chain visibility for the Grimmett dependency.",
-      "R41 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_topo_loss_below_threshold_OPEN` axiom is REPLACED by derived theorem `gap_topo_loss_below_threshold` (Wrongness.lean) composing two Cat 3 paper-novel atomic stipulations: (a) `topo_loss_below_envelope_exists_atom_OPEN` (paper-stated existence of decay envelope) + (b) `topo_loss_below_eps_from_envelope_atom_OPEN` (paper-stated arbitrary-ε convergence from envelope). Cat 2 Grimmett percolation-probability dependency threaded as explicit `h_perc_prob` antecedent on the derived theorem. Net: status OPEN → CLOSED; cat3SubType workingAssumption → derivedTheorem; +2 new Cat 3 paper-foundational structural-equation atomic-stipulation entries (entry_atom_topo_loss_below_envelope_exists, entry_atom_topo_loss_below_eps_from_envelope) classified gapDefinitional/structuralEquation per §3.4.3 (paper-stated atomic content on opaque `expectedTopoLoss` carrier; 永不 close)." ]
+      "R41 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_topo_loss_below_threshold_OPEN` axiom is REPLACED by derived theorem `gap_topo_loss_below_threshold` (Wrongness.lean) composing two Cat 3 paper-novel atomic stipulations: (a) `topo_loss_below_envelope_exists_atom_OPEN` (paper-stated existence of decay envelope) + (b) `topo_loss_below_eps_from_envelope_atom_OPEN` (paper-stated arbitrary-ε convergence from envelope). Cat 2 Grimmett percolation-probability dependency threaded as explicit `h_perc_prob` antecedent on the derived theorem. Net: status OPEN → CLOSED; cat3SubType workingAssumption → derivedTheorem; +2 new Cat 3 paper-foundational structural-equation atomic-stipulation entries (entry_atom_topo_loss_below_envelope_exists, entry_atom_topo_loss_below_eps_from_envelope) classified gapDefinitional/structuralEquation per §3.4.3 (paper-stated atomic content on opaque `expectedTopoLoss` carrier; 永不 close).",
+      "R42 2026-05-14: hostile-audit-driven corrections to R41. (a) Pattern-1 fix: the `topo_loss_below_eps_from_envelope_atom_OPEN` axiom (acknowledged in its own R41 attackHistory as Mathlib-derivable from `Filter.Tendsto`) is converted from Cat 3 axiom to Cat 1 theorem `topo_loss_below_eps_from_envelope` (Wrongness.lean) — proof uses `Filter.Tendsto`-via-`Iio_mem_nhds` neighborhood unfolding + `Filter.eventually_atTop` + transitivity through envelope upper bound. The corresponding Ledger atom entry is removed (Cat 1 theorems are not tracked as separate atom entries per discipline). (b) §3.4.3 classification fix: the remaining `topo_loss_below_envelope_exists_atom_OPEN` is reclassified structuralEquation/gapDefinitional → workingAssumption/gapOpen per audit finding that paper-derived existence claims requiring Mathlib percolation infra are §3.4.4 workingAssumption (NOT §3.4.3 paper-stipulative commitments to primitive behavior). Net: bundle status remains CLOSED (derived theorem still composes the atom + the new Cat 1 theorem); workingAssumption count gains 1 honest entry pending Mathlib percolation theory." ]
   scope := "Proposition prop:topo-cluster Part 1, line 286"
   obstacleOrAttribution :=
-    "CLOSED-via-Cat-3-atom-input. R41 derived theorem `gap_topo_loss_below_threshold` (Wrongness.lean) composes the two atomic stipulations `topo_loss_below_envelope_exists_atom_OPEN` (envelope existence) + `topo_loss_below_eps_from_envelope_atom_OPEN` (ε-convergence from envelope). Substantive proof of the atoms requires Mathlib bond-percolation + cluster-size-asymptotics machinery (Grimmett 1999 _Percolation_ 2nd ed.) — encoded as paper-foundational structural-equation atoms on the opaque `expectedTopoLoss` carrier per §3.4.3."
+    "CLOSED-via-Cat-3-atom-input-plus-Cat-1-theorem (R42 honest re-classification). R41 derived theorem `gap_topo_loss_below_threshold` (Wrongness.lean) composes (a) Cat 3 workingAssumption atom `topo_loss_below_envelope_exists_atom_OPEN` (envelope existence, pending Mathlib percolation infra per §3.4.4 close target) + (b) Cat 1 theorem `topo_loss_below_eps_from_envelope` (ε-convergence from envelope, R42 Mathlib-derivation from `Filter.Tendsto`)."
   conditionalOn := []
 
 def entry_topo_loss_above : GapEntry where
@@ -1030,9 +1090,10 @@ def entry_topo_loss_above : GapEntry where
       "R26 2026-05-13: per discipline clarification, the BLOCKED-def encoding was over-engineered for this Cat 3 paper-novel + Cat 2 percolation-infra-dependency edge case. Converted to plain Cat 3 axiom `gap_topo_loss_above_threshold_OPEN` with paper-cited docstring acknowledging the dual Cat 3 paper-novel (`expectedTopoLoss` carrier above threshold) + Cat 2 percolation dependency (Grimmett 1999 _Percolation_ 2nd ed. cluster-size above-threshold theory). No Lean signature consumes this entry, so no broken-link hypothesis threading needs to be dropped. Status BLOCKED → OPEN: paper Thm 3.3 + Grimmett 1999 authority covers the claim per the 2026-05-13 discipline.",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
       "R40 2026-05-14: state verified, retained as workingAssumption gapOpen. Same status as `entry_topo_loss_below`: source-side `axiom gap_topo_loss_above_threshold_OPEN` (Wrongness.lean:613) takes Cat 2 Grimmett `h_grimmett` antecedent (R28-A audit-chain restoration) for the exponential-decay percolation infrastructure. Paper-derived asymptotic two-sided-bound CLAIM, not an atomic definitional commitment. Atomic decomposition into Cat 3 paper-foundational sub-atoms (analogous to R37 `gap_phase_transition_above` split into `wInfoTopoRatio_const_exists_OPEN` + `wInfoTopoRatio_bound_OPEN` atoms) not yet applied. Status OPEN retained pending the atomic decomposition; the per-axiom Cat 2 antecedent threading already provides audit-chain visibility for the Grimmett dependency.",
-      "R41 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_topo_loss_above_threshold_OPEN` axiom is REPLACED by derived theorem `gap_topo_loss_above_threshold` (Wrongness.lean) composing two Cat 3 paper-novel atomic stipulations: (a) `topo_loss_above_lower_bound_atom_OPEN` (paper-stated existence of `c₁(p) > 0` lower bound) + (b) `topo_loss_above_upper_bound_atom_OPEN` (paper-stated existence of `c₂(p) ≥ c₁` upper bound). The derived theorem composes both atoms; the common-`N` step uses `max N₁ N₂`. Cat 2 Grimmett-exponential-decay dependency threaded as explicit `h_grimmett` antecedent on the derived theorem. Net: status OPEN → CLOSED; cat3SubType workingAssumption → derivedTheorem; +2 new Cat 3 paper-foundational structural-equation atomic-stipulation entries (entry_atom_topo_loss_above_lower_bound, entry_atom_topo_loss_above_upper_bound) classified gapDefinitional/structuralEquation per §3.4.3." ]
+      "R41 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_topo_loss_above_threshold_OPEN` axiom is REPLACED by derived theorem `gap_topo_loss_above_threshold` (Wrongness.lean) composing two Cat 3 paper-novel atomic stipulations: (a) `topo_loss_above_lower_bound_atom_OPEN` (paper-stated existence of `c₁(p) > 0` lower bound) + (b) `topo_loss_above_upper_bound_atom_OPEN` (paper-stated existence of `c₂(p) ≥ c₁` upper bound). The derived theorem composes both atoms; the common-`N` step uses `max N₁ N₂`. Cat 2 Grimmett-exponential-decay dependency threaded as explicit `h_grimmett` antecedent on the derived theorem. Net: status OPEN → CLOSED; cat3SubType workingAssumption → derivedTheorem; +2 new Cat 3 paper-foundational structural-equation atomic-stipulation entries (entry_atom_topo_loss_above_lower_bound, entry_atom_topo_loss_above_upper_bound) classified gapDefinitional/structuralEquation per §3.4.3.",
+      "R42 2026-05-14: hostile-audit-driven §3.4.3 classification fix. Both atoms (`topo_loss_above_lower_bound_atom_OPEN`, `topo_loss_above_upper_bound_atom_OPEN`) reclassified structuralEquation/gapDefinitional → workingAssumption/gapOpen per audit finding that paper-derived existence claims requiring Mathlib percolation infra are §3.4.4 workingAssumption (NOT §3.4.3 paper-stipulative commitments to primitive behavior). Bundle status remains CLOSED (derived theorem still composes both atoms); workingAssumption count gains 2 honest entries pending Mathlib percolation theory." ]
   scope := "Proposition prop:topo-cluster Part 2, line 287"
-  obstacleOrAttribution := "CLOSED-via-Cat-3-atom-input. R41 derived theorem `gap_topo_loss_above_threshold` (Wrongness.lean) composes the two atomic stipulations `topo_loss_above_lower_bound_atom_OPEN` + `topo_loss_above_upper_bound_atom_OPEN`. Substantive proof of the atoms requires Mathlib bond-percolation + cluster-tail machinery (Grimmett 1999 §6.75) — encoded as paper-foundational structural-equation atoms on the opaque `expectedTopoLoss` carrier per §3.4.3."
+  obstacleOrAttribution := "CLOSED-via-Cat-3-atom-input (R42 honest re-classification). R41 derived theorem `gap_topo_loss_above_threshold` (Wrongness.lean) composes the two Cat 3 workingAssumption atoms `topo_loss_above_lower_bound_atom_OPEN` + `topo_loss_above_upper_bound_atom_OPEN` (both pending Mathlib percolation infra per §3.4.4 close target). Substantive proof requires Mathlib bond-percolation + cluster-tail machinery (Grimmett 1999 §6.75)."
   conditionalOn := []
 
 def entry_prop_physical : GapEntry where
@@ -2546,36 +2607,21 @@ def entry_atom_bayesian_naive_below_threshold_blackwell_recovery : GapEntry wher
     Part 1 (line 286), existence of a per-`n` decay envelope for
     `expectedTopoLoss n p` below the percolation threshold.
 
-    R41 §18 atomic decomposition of bundled `gap_topo_loss_below_threshold_OPEN`. -/
+    R41 §18 atomic decomposition of bundled `gap_topo_loss_below_threshold_OPEN`.
+    R42 reclassification structuralEquation → workingAssumption per hostile
+    audit §3.4.3 vs §3.4.4 concern. -/
 def entry_atom_topo_loss_below_envelope_exists : GapEntry where
   name := "topo_loss_below_envelope_exists_atom_OPEN"
-  status := GapStatus.gapDefinitional
+  status := GapStatus.gapOpen
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  cat3SubType := Cat3SubType.workingAssumption
   paperSource := "Proposition prop:topo-cluster Part 1, line 286 + proof lines 292-294 (`E[|W_topo|] = O(1/N) → 0` via giant-component conditioning + topo-cluster formula); Grimmett 1999 (Cat 2 percolation-probability dependency)"
   attackHistory :=
-    [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_topo_loss_below_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern (analogous to R37 `topo_loss_decay_below_pc_OPEN` which decomposed `gap_phase_transition_below_OPEN`; this entry is the prop:topo-cluster Part 1 mirror). The atom isolates the EXISTENCE of a decay-function envelope `topoLossBelowDecay : ℕ → ℝ` on the existing carrier `expectedTopoLoss`. Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_topo_loss_below_threshold` derived theorem (Wrongness.lean) hosts the atom. Classified as gapDefinitional/structuralEquation per §3.4.3 (paper-foundational atomic content on opaque carrier; 永不 close)." ]
+    [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_topo_loss_below_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern (analogous to R37 `topo_loss_decay_below_pc_OPEN` which decomposed `gap_phase_transition_below_OPEN`; this entry is the prop:topo-cluster Part 1 mirror). The atom isolates the EXISTENCE of a decay-function envelope `topoLossBelowDecay : ℕ → ℝ` on the existing carrier `expectedTopoLoss`. Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_topo_loss_below_threshold` derived theorem (Wrongness.lean) hosts the atom. Initial classification as gapDefinitional/structuralEquation per §3.4.3.",
+      "R42 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen. Discipline §3.4.3 examples are DEFINITIONAL EQUATIONS on primitives (`V_dyn_def`, paper §3.1 `W = W_topo + W_info` decomposition, Bridge_Defining_Biconditional) — paper commitments to how primitives behave that CANNOT BE PROVED (constitute meaning). The envelope-existence claim is NOT a definitional equation; it is a derived asymptotic existence claim that the paper proves at lines 292-294 via giant-component conditioning + Cat 2 Grimmett percolation-probability + topo-cluster formula. Substantive content requires Mathlib bond-percolation infrastructure (currently absent). Per §3.4.4 this is a workingAssumption (higher-level claim TEMPORARILY axiomatized; must convert to theorem before paper publication). Close target = Mathlib bond-percolation theory + paper's proof reconstruction." ]
   scope := "Proposition prop:topo-cluster Part 1, existence of decay envelope `topoLossBelowDecay` for `expectedTopoLoss n p` below threshold"
   obstacleOrAttribution :=
-    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content on opaque `expectedTopoLoss` carrier; Mathlib percolation + cluster-size-asymptotics machinery acknowledged as Cat 2 underlying dependency (Grimmett 1999)."
-  conditionalOn := []
-
-/-- Cat 3 atomic stipulation: paper Proposition `prop:topo-cluster`
-    Part 1 (line 286), arbitrary-ε convergence form for
-    `expectedTopoLoss n p` from the existence of a decay envelope.
-
-    R41 §18 atomic decomposition of bundled `gap_topo_loss_below_threshold_OPEN`. -/
-def entry_atom_topo_loss_below_eps_from_envelope : GapEntry where
-  name := "topo_loss_below_eps_from_envelope_atom_OPEN"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
-  paperSource := "Proposition prop:topo-cluster Part 1, line 286 (asymptotic convergence)"
-  attackHistory :=
-    [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_topo_loss_below_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern (analogous to R37 `topo_loss_decay_arbitrary_threshold_OPEN`). Second atom completing the decomposition: converts the decay envelope (from `topo_loss_below_envelope_exists_atom_OPEN`) into the paper-stated arbitrary-ε convergence bound. Cat 1 reduction check: the unfolding step itself is Cat 1 derivable from Mathlib `Filter.Tendsto`, but this atom is retained as a paper-stated structural form per §18 (the paper-stated convergence is the operative downstream content). Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_topo_loss_below_threshold` derived theorem (Wrongness.lean) hosts the atom. Classified as gapDefinitional/structuralEquation per §3.4.3." ]
-  scope := "Proposition prop:topo-cluster Part 1, arbitrary-ε convergence form for `expectedTopoLoss n p` from decay envelope"
-  obstacleOrAttribution :=
-    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content on opaque `expectedTopoLoss` carrier."
+    "Cat 3 workingAssumption per `feedback_gap_ledger_in_lean4` §3.4.4 (higher-level claim TEMPORARILY axiomatized while derivation is being developed; 必须 close before publication). Close target = Mathlib bond-percolation theory + paper's lines 292-294 proof reconstruction (giant-component conditioning + topo-cluster formula). Substantive Cat 2 dependency on Grimmett 1999 _Percolation_ 2nd ed. percolation-probability theory."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:topo-cluster`
@@ -2583,18 +2629,20 @@ def entry_atom_topo_loss_below_eps_from_envelope : GapEntry where
     on `expectedTopoLoss n p` for sufficiently large `n` above the
     percolation threshold.
 
-    R41 §18 atomic decomposition of bundled `gap_topo_loss_above_threshold_OPEN`. -/
+    R41 §18 atomic decomposition of bundled `gap_topo_loss_above_threshold_OPEN`.
+    R42 reclassification structuralEquation → workingAssumption. -/
 def entry_atom_topo_loss_above_lower_bound : GapEntry where
   name := "topo_loss_above_lower_bound_atom_OPEN"
-  status := GapStatus.gapDefinitional
+  status := GapStatus.gapOpen
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  cat3SubType := Cat3SubType.workingAssumption
   paperSource := "Proposition prop:topo-cluster Part 2, line 287 + proof via thm:phase Part 2 lines 421-427 (cluster-size theory above threshold); Grimmett 1999 §6.75 (Cat 2 dependency)"
   attackHistory :=
-    [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_topo_loss_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the LOWER-BOUND existence on the existing carrier `expectedTopoLoss`: paper proof uses above-threshold cluster theory `|R(v_0)| = O(1)` with positive probability so `E[1/(|R|+1)] ≥ c₁ > 0` for large `n`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the atom. Classified as gapDefinitional/structuralEquation per §3.4.3." ]
+    [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_topo_loss_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the LOWER-BOUND existence on the existing carrier `expectedTopoLoss`: paper proof uses above-threshold cluster theory `|R(v_0)| = O(1)` with positive probability so `E[1/(|R|+1)] ≥ c₁ > 0` for large `n`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the atom. Initial classification as gapDefinitional/structuralEquation per §3.4.3.",
+      "R42 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per §3.4.4 (paper-derived existence claim requiring Mathlib percolation infra is workingAssumption, not paper-stipulative §3.4.3 commitment to primitive behavior)." ]
   scope := "Proposition prop:topo-cluster Part 2, existence of positive lower bound `c₁(p) > 0` on `expectedTopoLoss n p` for large `n`"
   obstacleOrAttribution :=
-    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content on opaque `expectedTopoLoss` carrier; Mathlib percolation + cluster-tail machinery acknowledged as Cat 2 underlying dependency (Grimmett 1999 §6.75)."
+    "Cat 3 workingAssumption per §3.4.4 (必须 close before publication). Close target = Mathlib bond-percolation theory + Grimmett 1999 §6.75 cluster-tail derivation."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:topo-cluster`
@@ -2603,18 +2651,20 @@ def entry_atom_topo_loss_above_lower_bound : GapEntry where
     side, conceptually weaker than the lower side but part of the
     paper's two-sided statement).
 
-    R41 §18 atomic decomposition of bundled `gap_topo_loss_above_threshold_OPEN`. -/
+    R41 §18 atomic decomposition of bundled `gap_topo_loss_above_threshold_OPEN`.
+    R42 reclassification structuralEquation → workingAssumption. -/
 def entry_atom_topo_loss_above_upper_bound : GapEntry where
   name := "topo_loss_above_upper_bound_atom_OPEN"
-  status := GapStatus.gapDefinitional
+  status := GapStatus.gapOpen
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  cat3SubType := Cat3SubType.workingAssumption
   paperSource := "Proposition prop:topo-cluster Part 2, line 287; Grimmett 1999 §6.75 (Cat 2 dependency)"
   attackHistory :=
-    [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_topo_loss_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Second atom completing the decomposition: paper-stated existence of upper bound `c₂(p) ≥ c₁` on `expectedTopoLoss n p` for large `n`. Conceptually weaker than the lower-bound side (probabilistically `expectedTopoLoss ≤ 1` trivially) but part of the paper's Θ(1) two-sided statement; explicit upper constant from Θ-notation can be derived from the cluster-size analysis. Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent (paper attribution: the Θ(1) two-sided bound depends on the above-threshold cluster theory). Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the atom. Classified as gapDefinitional/structuralEquation per §3.4.3." ]
+    [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_topo_loss_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Second atom completing the decomposition: paper-stated existence of upper bound `c₂(p) ≥ c₁` on `expectedTopoLoss n p` for large `n`. Conceptually weaker than the lower-bound side (probabilistically `expectedTopoLoss ≤ 1` trivially) but part of the paper's Θ(1) two-sided statement; explicit upper constant from Θ-notation can be derived from the cluster-size analysis. Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent (paper attribution: the Θ(1) two-sided bound depends on the above-threshold cluster theory). Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the atom. Initial classification as gapDefinitional/structuralEquation per §3.4.3.",
+      "R42 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per §3.4.4." ]
   scope := "Proposition prop:topo-cluster Part 2, existence of upper bound `c₂(p) ≥ c₁` on `expectedTopoLoss n p` for large `n`"
   obstacleOrAttribution :=
-    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content on opaque `expectedTopoLoss` carrier; Mathlib percolation acknowledged as Cat 2 underlying dependency (Grimmett 1999 §6.75)."
+    "Cat 3 workingAssumption per §3.4.4 (必须 close before publication). Close target = Mathlib bond-percolation theory + Grimmett 1999 §6.75."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:trap-prevalence`
@@ -3461,13 +3511,16 @@ def allGaps : List GapEntry := [
   entry_atom_myopic_k_lookahead_recursion,
   entry_atom_satisficing_threshold_trap,
   -- R41 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
-  -- 6 new Cat 3 atoms across prop:topo-cluster + bayesian-naive-five-state Part (ii)
-  -- + prop:error-compounding Part 5 c_star_constant positivity, classified
-  -- structuralEquation/gapDefinitional per §3.4.3).
+  -- 5 new Cat 3 atoms across prop:topo-cluster + bayesian-naive-five-state Part (ii)
+  -- + prop:error-compounding Part 5 c_star_constant positivity).
+  -- R42 honest reclassification: 3 topo_loss existence atoms are workingAssumption
+  -- (not structuralEquation per §3.4.3) since they are paper-derived existence
+  -- claims requiring Mathlib percolation infra. The 4th topo_loss atom
+  -- (eps_from_envelope) was Mathlib-derivable and is now a Cat 1 theorem
+  -- (not tracked as a separate Ledger entry).
   entry_atom_c_star_constant_pos,
   entry_atom_bayesian_naive_below_threshold_blackwell_recovery,
   entry_atom_topo_loss_below_envelope_exists,
-  entry_atom_topo_loss_below_eps_from_envelope,
   entry_atom_topo_loss_above_lower_bound,
   entry_atom_topo_loss_above_upper_bound
 ]
