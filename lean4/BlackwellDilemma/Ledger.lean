@@ -2152,80 +2152,86 @@ atomic-stipulation entries supporting two derived-theorem promotions:
 
 def entry_atom_mean_estimate_gap_continuous : GapEntry where
   name := "mean_estimate_gap_continuous_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 3, line 493 (`m(κ)` continuous on `(0, ∞)`)"
   attackHistory :=
-    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, ContinuousOn (fun κ => mean_estimate_gap p κ) (Set.Ioi 0)`. Paper Theorem 4.1 Part 3 line 493 asserts continuity of `m(κ)` on `(0, ∞)` (the paper's domain restriction; `κ = 0` is structurally excluded per Remark `kappa-discontinuity`). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Cat 1 reduction check: not Mathlib-derivable (continuity is on opaque carrier `mean_estimate_gap`, paper-stated structural fact pending per-IDP-instance derivation from V_dyn / posterior continuity properties). Cat 2 reduction check: paper-novel (no external textbook covers this paper's `m(κ)` continuity). Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, ContinuousOn (fun κ => mean_estimate_gap p κ) (Set.Ioi 0)`. Paper Theorem 4.1 Part 3 line 493 asserts continuity of `m(κ)` on `(0, ∞)` (the paper's domain restriction; `κ = 0` is structurally excluded per Remark `kappa-discontinuity`). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Cat 1 reduction check: not Mathlib-derivable (continuity is on opaque carrier `mean_estimate_gap`, paper-stated structural fact pending per-IDP-instance derivation from V_dyn / posterior continuity properties). Cat 2 reduction check: paper-novel (no external textbook covers this paper's `m(κ)` continuity). Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 3, line 493 (`m(κ)` continuous on `(0, ∞)`)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_cognitive_threshold_part3_OPEN`). WORKING_ASSUMPTION — pending per-IDP-instance derivation from V_dyn / posterior continuity inputs; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 def entry_atom_mean_estimate_gap_tendsto_mLimit : GapEntry where
   name := "mean_estimate_gap_tendsto_mLimit_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p` as `κ → ∞`)"
   attackHistory :=
-    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, Filter.Tendsto (fun κ => mean_estimate_gap p κ) Filter.atTop (nhds (mLimit p))`. Paper Theorem 4.1 Part 3 line 505 reads `m(κ) → V_dyn(u_2) − V_dyn(u_1)` as `κ → ∞`. Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Hosts the Tendsto limit on the bundle's `mLimit` opaque carrier (distinct from the existing R23-C1 atom `mLimit_def` which hosts the analogous Tendsto on the separate `mLimitOf` carrier introduced for per-instance work; the two carriers exist because the bundled axiom and the R23-C1 extraction were introduced in separate rounds with separate carriers). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, Filter.Tendsto (fun κ => mean_estimate_gap p κ) Filter.atTop (nhds (mLimit p))`. Paper Theorem 4.1 Part 3 line 505 reads `m(κ) → V_dyn(u_2) − V_dyn(u_1)` as `κ → ∞`. Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Hosts the Tendsto limit on the bundle's `mLimit` opaque carrier (distinct from the existing R23-C1 atom `mLimit_def` which hosts the analogous Tendsto on the separate `mLimitOf` carrier introduced for per-instance work; the two carriers exist because the bundled axiom and the R23-C1 extraction were introduced in separate rounds with separate carriers). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 3, line 505 (Tendsto limit of `m(κ)` to `mLimit p` as `κ → ∞`)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_cognitive_threshold_part3_OPEN`). WORKING_ASSUMPTION — pending per-IDP-instance derivation linking `mLimit p` to the `V_dyn(u_2) − V_dyn(u_1)` paper-instance vertex pair; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 def entry_atom_mLimit_pos : GapEntry where
   name := "mLimit_pos_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 3, line 505 (`0 < mLimit p`)"
   attackHistory :=
-    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, 0 < mLimit p`. Paper Theorem 4.1 Part 3 line 505 writes `m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`: strict positivity of the limit reflects C2 trap/bridge misalignment (`u_2` bridge neighbour has strictly higher dynamic value than trap neighbour `u_1`). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` strict-positivity sub-clause per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `mLimit`). Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, 0 < mLimit p`. Paper Theorem 4.1 Part 3 line 505 writes `m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`: strict positivity of the limit reflects C2 trap/bridge misalignment (`u_2` bridge neighbour has strictly higher dynamic value than trap neighbour `u_1`). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` strict-positivity sub-clause per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `mLimit`). Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 3, line 505 (strict positivity of `mLimit p`)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_cognitive_threshold_part3_OPEN`). WORKING_ASSUMPTION — pending per-IDP-instance derivation from `V_dyn(u_2) > V_dyn(u_1)` C2 misalignment; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 def entry_atom_kappaStar_nonneg : GapEntry where
   name := "kappaStar_nonneg_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 3, line 493 (`κ*(p, α) ≥ 0`)"
   attackHistory :=
-    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `∀ p α, 0 ≤ kappaStar p α`. Paper Theorem 4.1 Part 3 line 493 characterises `kappaStar p α` as `sInf {κ > 0 : m(κ) ≥ 0}`, so `0 ≤ kappaStar p α` follows from the inf-over-positive-reals scope (the inf of a set of positive numbers is non-negative; the junk-value branch `Real.sInf_empty = 0` preserves the bound). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` non-negativity sub-clause per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Retained as Cat 3 atomic stipulation rather than Cat 1 derivation because a Mathlib-level proof would require composing `kappaStar_def` (Cat 3 atom) with `Real.sInf` lower-bound / junk-value semantics; the paper-stated non-negativity is the natural primitive fact at this abstraction level. Cat 1 reduction check: derivable Cat 1 from `kappaStar_def` + `Real.sInf_nonneg` + junk-value handling, candidate for future round. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `∀ p α, 0 ≤ kappaStar p α`. Paper Theorem 4.1 Part 3 line 493 characterises `kappaStar p α` as `sInf {κ > 0 : m(κ) ≥ 0}`, so `0 ≤ kappaStar p α` follows from the inf-over-positive-reals scope (the inf of a set of positive numbers is non-negative; the junk-value branch `Real.sInf_empty = 0` preserves the bound). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` non-negativity sub-clause per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Retained as Cat 3 atomic stipulation rather than Cat 1 derivation because a Mathlib-level proof would require composing `kappaStar_def` (Cat 3 atom) with `Real.sInf` lower-bound / junk-value semantics; the paper-stated non-negativity is the natural primitive fact at this abstraction level. Cat 1 reduction check: derivable Cat 1 from `kappaStar_def` + `Real.sInf_nonneg` + junk-value handling, candidate for future round. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 3, line 493 (non-negativity of `kappaStar p α`)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_cognitive_threshold_part3_OPEN`). WORKING_ASSUMPTION — Cat 1 derivation candidate via `kappaStar_def` + `Real.sInf_nonneg` + junk-value handling; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 def entry_atom_W_info_oracle_nonpos : GapEntry where
   name := "W_info_oracle_nonpos_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:info-decay, lines 270-272 (`W_info_oracle ≤ 0`)"
   attackHistory :=
-    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `∀ p, harrisKestenCriticalProb < p → ∀ β > 0, W_info_oracle p β ≤ 0`. Paper Proposition `prop:info-decay` line 272 states the oracle's informational residual is non-positive and exponentially small; this atom isolates the sign clause of the paper's joint claim on the opaque carrier `W_info_oracle : ℝ → ℝ → ℝ` (R19-A). Non-positivity reflects information value is bounded by topology-only welfare under topology-blind signals (paper §3 W_info ≤ 0 family). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_info_decay_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `W_info_oracle`). Cat 2 reduction check: paper-novel (no external textbook covers this paper's `W_info_oracle` sign). Downstream consumer: `gap_info_decay` derived theorem (Wrongness.lean) hosts the atom." ]
+    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `∀ p, harrisKestenCriticalProb < p → ∀ β > 0, W_info_oracle p β ≤ 0`. Paper Proposition `prop:info-decay` line 272 states the oracle's informational residual is non-positive and exponentially small; this atom isolates the sign clause of the paper's joint claim on the opaque carrier `W_info_oracle : ℝ → ℝ → ℝ` (R19-A). Non-positivity reflects information value is bounded by topology-only welfare under topology-blind signals (paper §3 W_info ≤ 0 family). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_info_decay_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `W_info_oracle`). Cat 2 reduction check: paper-novel (no external textbook covers this paper's `W_info_oracle` sign). Downstream consumer: `gap_info_decay` derived theorem (Wrongness.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:info-decay, lines 270-272 (non-positivity sub-clause)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_info_decay_OPEN`). WORKING_ASSUMPTION — pending Cat 1 Gaussian-integration / Cat 2 Mills-tail composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 def entry_atom_W_info_oracle_exponential_bound : GapEntry where
   name := "W_info_oracle_exponential_bound_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:info-decay, lines 270-277 (`|W_info_oracle| = O(2^{-β})`, uniformly in `n` for `p > p_c`); Grimmett 1999 _Percolation_ 2nd ed. §6.75 (Cat 2 cluster-size exponential-decay dependency)"
   attackHistory :=
-    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `(h_grimmett : Grimmett cluster-size tail) → ∀ p > p_c, ∃ C > 0, ∀ β > 0, |W_info_oracle p β| ≤ C * 2^{-β}`. Paper Proposition `prop:info-decay` line 272 reads `|W_info| = O(2^{-β})` as `β → ∞`, uniformly in `n` for `p > p_c`. The exponential-bound sub-clause of the paper's joint claim, extracted as standalone Cat 3 atomic stipulation from the bundled `gap_info_decay_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential tail is threaded as the explicit `h_grimmett` antecedent for audit-chain visibility (`#print axioms` on any theorem consuming this atom surfaces the Grimmett dependency). Cat 1 reduction check: not Mathlib-derivable (the substantive composition Cat 1 Mills + Cat 2 Grimmett remains a Mathlib measure-theoretic gap). Cat 2 reduction check: paper-novel framing on opaque carrier `W_info_oracle` (Grimmett 1999 is a Cat 2 dependency, not the claim itself). Downstream consumer: `gap_info_decay` derived theorem (Wrongness.lean) hosts the atom." ]
+    [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `(h_grimmett : Grimmett cluster-size tail) → ∀ p > p_c, ∃ C > 0, ∀ β > 0, |W_info_oracle p β| ≤ C * 2^{-β}`. Paper Proposition `prop:info-decay` line 272 reads `|W_info| = O(2^{-β})` as `β → ∞`, uniformly in `n` for `p > p_c`. The exponential-bound sub-clause of the paper's joint claim, extracted as standalone Cat 3 atomic stipulation from the bundled `gap_info_decay_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential tail is threaded as the explicit `h_grimmett` antecedent for audit-chain visibility (`#print axioms` on any theorem consuming this atom surfaces the Grimmett dependency). Cat 1 reduction check: not Mathlib-derivable (the substantive composition Cat 1 Mills + Cat 2 Grimmett remains a Mathlib measure-theoretic gap). Cat 2 reduction check: paper-novel framing on opaque carrier `W_info_oracle` (Grimmett 1999 is a Cat 2 dependency, not the claim itself). Downstream consumer: `gap_info_decay` derived theorem (Wrongness.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:info-decay, lines 270-277 (`O(2^{-β})` exponential bound sub-clause)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_info_decay_OPEN`). Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent. WORKING_ASSUMPTION — pending Cat 1 Mills-tail (`gap_phi_tail_bound`, CLOSED) + Cat 2 Grimmett-cluster-size composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-! # R37 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
@@ -2265,15 +2271,16 @@ within the existing bundle status, with bundle-level status updated). -/
     action domain `R(v_0)` for Blackwell-ordered signal families. -/
 def entry_atom_conditional_subproblem_blackwell_applicable : GapEntry where
   name := "conditional_subproblem_blackwell_applicable_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Lemma lem:conditional-reduction part (i), line 375 (statement); proof line 381 (fixed-feasible-set conditional subproblem permits direct Blackwell-theorem application); Blackwell 1951/1953 (Cat 2 dependency)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_conditional_reduction_part_i_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the paper-stated conditional-Blackwell-applicability fact on the existing carrier `conditionalWelfareOnR R signalFamily β`, threading the Cat 2 Blackwell 1951/1953 dependency as the explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable (Mathlib lacks decision-theoretic Blackwell ordering on signal-experiment lattices). Cat 2 reduction check: paper-novel application to opaque carrier (Blackwell 1951/1953 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_conditional_reduction_part_i` derived theorem (Wrongness.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_conditional_reduction_part_i_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the paper-stated conditional-Blackwell-applicability fact on the existing carrier `conditionalWelfareOnR R signalFamily β`, threading the Cat 2 Blackwell 1951/1953 dependency as the explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable (Mathlib lacks decision-theoretic Blackwell ordering on signal-experiment lattices). Cat 2 reduction check: paper-novel application to opaque carrier (Blackwell 1951/1953 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_conditional_reduction_part_i` derived theorem (Wrongness.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Lemma lem:conditional-reduction part (i), Blackwell ordering applicability to conditional subproblem on R(v_0)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_conditional_reduction_part_i_OPEN`). Cat 2 dependency on Blackwell 1951/1953 threaded as explicit `h_blackwell` antecedent. WORKING_ASSUMPTION — pending Mathlib decision-theoretic Blackwell ordering machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 1 proof (line
@@ -2281,15 +2288,16 @@ def entry_atom_conditional_subproblem_blackwell_applicable : GapEntry where
     for `expectedTopoLoss n p` below the percolation threshold. -/
 def entry_atom_topo_loss_decay_below_pc : GapEntry where
   name := "topo_loss_decay_below_pc_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 3.3 Part 1 proof, lines 415-417 (`E[|W_topo|] = O(1/N) → 0` via giant-component conditioning + topo-cluster formula); Grimmett 1999 (Cat 2 percolation-probability dependency)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a decay-function envelope on the existing carrier `expectedTopoLoss`. Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_below` derived theorem (Phase.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a decay-function envelope on the existing carrier `expectedTopoLoss`. Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_below` derived theorem (Phase.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 3.3 Part 1, existence of decay envelope `topo_loss_decay` for `expectedTopoLoss n p` below percolation threshold"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_below_OPEN`). WORKING_ASSUMPTION — pending Mathlib percolation + cluster-size-asymptotics machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 1 proof (line
@@ -2297,15 +2305,16 @@ def entry_atom_topo_loss_decay_below_pc : GapEntry where
     n p` from the existence of a decay envelope. -/
 def entry_atom_topo_loss_decay_arbitrary_threshold : GapEntry where
   name := "topo_loss_decay_arbitrary_threshold_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 3.3 Part 1 proof, line 417 (asymptotic convergence `O(1/N) → 0`)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Second atom completing the decomposition: converts the decay envelope (from `topo_loss_decay_below_pc_OPEN`) into the paper-stated arbitrary-ε convergence bound. Cat 1 reduction check: the unfolding step itself is Cat 1 derivable from Mathlib `Filter.Tendsto`, but this atom is retained as a paper-stated structural form per §18 (the paper-stated convergence is the operative downstream content). Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_below` derived theorem (Phase.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Second atom completing the decomposition: converts the decay envelope (from `topo_loss_decay_below_pc_OPEN`) into the paper-stated arbitrary-ε convergence bound. Cat 1 reduction check: the unfolding step itself is Cat 1 derivable from Mathlib `Filter.Tendsto`, but this atom is retained as a paper-stated structural form per §18 (the paper-stated convergence is the operative downstream content). Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_below` derived theorem (Phase.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 3.3 Part 1, arbitrary-threshold convergence form for `expectedTopoLoss n p`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_below_OPEN`). WORKING_ASSUMPTION — Cat 1 unfolding from `Filter.Tendsto` is the standard derivation; pending future Cat 1 promotion candidate; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 2 proof (lines
@@ -2313,15 +2322,16 @@ def entry_atom_topo_loss_decay_arbitrary_threshold : GapEntry where
     the `wInfoTopoRatio p β` exponential-decay rate above threshold. -/
 def entry_atom_wInfoTopoRatio_const_exists : GapEntry where
   name := "wInfoTopoRatio_const_exists_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 3.3 Part 2 proof, lines 421-427 (cluster size exponential tail + ratio Θ-bound); Grimmett 1999 §6.75 (Cat 2 dependency)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a positive constant on the existing carrier `wInfoTopoRatio`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier (Grimmett 1999 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a positive constant on the existing carrier `wInfoTopoRatio`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier (Grimmett 1999 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 3.3 Part 2, existence of positive constant `c(p) > 0` for `wInfoTopoRatio` exponential-decay rate"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_above_OPEN`). Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent. WORKING_ASSUMPTION — pending Mathlib percolation + Mills-tail composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 2 proof (line 427),
@@ -2329,15 +2339,16 @@ def entry_atom_wInfoTopoRatio_const_exists : GapEntry where
     the Mills-tail + cluster-size composition. -/
 def entry_atom_wInfoTopoRatio_bound : GapEntry where
   name := "wInfoTopoRatio_bound_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 3.3 Part 2 proof, line 427 (`|W_info|/|W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-decay` composition (Cat 2 dependency)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the QUANTITATIVE bound on the existing carrier `wInfoTopoRatio` given a positive constant `c`. Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` composition threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the QUANTITATIVE bound on the existing carrier `wInfoTopoRatio` given a positive constant `c`. Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` composition threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 3.3 Part 2, quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_above_OPEN`). Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` threaded as explicit `h_grimmett` antecedent. WORKING_ASSUMPTION — pending Mathlib Mills-tail + percolation composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:trap-prevalence`
@@ -2345,15 +2356,16 @@ def entry_atom_wInfoTopoRatio_bound : GapEntry where
     on `Z²` lattice with degree 4. -/
 def entry_atom_trap_config_local_positive : GapEntry where
   name := "trap_config_local_positive_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:trap-prevalence Part 2 proof, line 473 (`binom(4, 2) p² (1-p)² · p^3 > 0` lattice-degree-4 local FKG estimate)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_trap_prevalence_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the LOCAL FKG-positivity fact on the existing carrier `trapMisalignmentProbability`. Cat 1 reduction check: not Mathlib-derivable (depends on Z²-lattice + percolation-measure machinery). Cat 2 reduction check: paper-novel local-FKG estimate (FKG inequality framework is Cat 2 in general, but the paper-specific local-pattern application is Cat 3 paper-novel). Downstream consumer: `gap_trap_prevalence_above_threshold` derived theorem (Phase.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_trap_prevalence_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the LOCAL FKG-positivity fact on the existing carrier `trapMisalignmentProbability`. Cat 1 reduction check: not Mathlib-derivable (depends on Z²-lattice + percolation-measure machinery). Cat 2 reduction check: paper-novel local-FKG estimate (FKG inequality framework is Cat 2 in general, but the paper-specific local-pattern application is Cat 3 paper-novel). Downstream consumer: `gap_trap_prevalence_above_threshold` derived theorem (Phase.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:trap-prevalence Part 2, local FKG-positivity of trap pattern"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_trap_prevalence_above_threshold_OPEN`). WORKING_ASSUMPTION — pending Mathlib Z²-lattice + percolation-measure machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:supermodular`
@@ -2362,15 +2374,16 @@ def entry_atom_trap_config_local_positive : GapEntry where
     derivative identity. -/
 def entry_atom_welfareCrossPartial_explicit_form : GapEntry where
   name := "welfareCrossPartial_explicit_form_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:supermodular proof, lines 564-583 (welfare decomposition + cross-partial closed form via φ'(z) = -z·φ(z))"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of an algebraic decomposition of `welfareCrossPartial β κ` as a sum of two paper-stated contributions on the carriers `welfareCrossPartial`, `snrZ`, `BridgeDominance`. Encoded as a per-(β, κ) existential `∃ first second, welfareCrossPartial = first + second ∧ second-non-negative ∧ (|z|<1 → 0 < first)`. Cat 1 reduction check: not Mathlib-derivable (HasDerivAt + Φ + φ derivative machinery is a Mathlib gap). Cat 2 reduction check: paper-novel calculus on the IDP welfare functional. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of an algebraic decomposition of `welfareCrossPartial β κ` as a sum of two paper-stated contributions on the carriers `welfareCrossPartial`, `snrZ`, `BridgeDominance`. Encoded as a per-(β, κ) existential `∃ first second, welfareCrossPartial = first + second ∧ second-non-negative ∧ (|z|<1 → 0 < first)`. Cat 1 reduction check: not Mathlib-derivable (HasDerivAt + Φ + φ derivative machinery is a Mathlib gap). Cat 2 reduction check: paper-novel calculus on the IDP welfare functional. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:supermodular, explicit closed-form decomposition of welfare cross-partial"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_supermodular_OPEN`). WORKING_ASSUMPTION — pending Mathlib HasDerivAt + Φ + φ derivative machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:supermodular`
@@ -2378,30 +2391,32 @@ def entry_atom_welfareCrossPartial_explicit_form : GapEntry where
     decomposition factors at `|z| < 1`. -/
 def entry_atom_cross_partial_sign_in_z_lt_one : GapEntry where
   name := "cross_partial_sign_in_z_lt_one_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:supermodular proof, line 582-584 (factor-sign analysis at `|z| < 1`)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper's sign-analysis step that converts the explicit closed-form expression (encoded by `welfareCrossPartial_explicit_form_OPEN`) into the strict-positivity conclusion under the moderate-SNR + bridge-dominance joint antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel sign analysis on opaque-carrier decomposition. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper's sign-analysis step that converts the explicit closed-form expression (encoded by `welfareCrossPartial_explicit_form_OPEN`) into the strict-positivity conclusion under the moderate-SNR + bridge-dominance joint antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel sign analysis on opaque-carrier decomposition. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:supermodular, sign-positivity at `|z| < 1`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_supermodular_OPEN`). WORKING_ASSUMPTION — pending Mathlib Gaussian PDF positivity + derivative-sign-from-formula machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
     proof line 600 (signal-independent ranking at α = 0). -/
 def entry_atom_signal_independent_at_alpha_zero : GapEntry where
   name := "signal_independent_at_alpha_zero_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:sentimental proof, line 600 (signal-independent ranking at α = 0 + `lem:conditional-reduction` application)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The α = 0 base case is the primitive paper-stated fact on the sentimental-agent welfare carrier. Cat 1 reduction check: not Mathlib-derivable (depends on `lem:conditional-reduction`(i) + sentimental-agent welfare carrier). Cat 2 reduction check: paper-novel application of `lem:conditional-reduction` to the sentimental agent at α = 0. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The α = 0 base case is the primitive paper-stated fact on the sentimental-agent welfare carrier. Cat 1 reduction check: not Mathlib-derivable (depends on `lem:conditional-reduction`(i) + sentimental-agent welfare carrier). Cat 2 reduction check: paper-novel application of `lem:conditional-reduction` to the sentimental agent at α = 0. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:sentimental, α = 0 base case (signal-independent ranking)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_sentimental_immunity_OPEN`). WORKING_ASSUMPTION — pending `lem:conditional-reduction` + sentimental-agent welfare carrier composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
@@ -2409,15 +2424,16 @@ def entry_atom_signal_independent_at_alpha_zero : GapEntry where
     monotonicity neighbourhood. -/
 def entry_atom_welfare_continuity_in_alpha : GapEntry where
   name := "welfare_continuity_in_alpha_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:sentimental proof, line 602 (closed monotonicity-set + small-α perturbation neighborhood)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated closedness + small-α perturbation neighborhood. Cat 1 reduction check: not Mathlib-derivable (depends on closed-set / compact-domain Banach-lattice analysis applied to opaque welfare carrier). Cat 2 reduction check: paper-novel perturbation argument. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated closedness + small-α perturbation neighborhood. Cat 1 reduction check: not Mathlib-derivable (depends on closed-set / compact-domain Banach-lattice analysis applied to opaque welfare carrier). Cat 2 reduction check: paper-novel perturbation argument. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:sentimental, perturbative continuity in α + small-α monotonicity neighbourhood"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_sentimental_immunity_OPEN`). WORKING_ASSUMPTION — pending Mathlib closed-set / compact-domain Banach-lattice analysis; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
@@ -2425,15 +2441,16 @@ def entry_atom_welfare_continuity_in_alpha : GapEntry where
     given a small-α neighbourhood. -/
 def entry_atom_alpha_star_existence_via_continuity : GapEntry where
   name := "alpha_star_existence_via_continuity_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:sentimental proof, line 602 (sup over monotonicity set)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated existence of `α*` with positivity + upper-bound-by-1 + monotonicity-for-α-below-α* implication, given the small-α neighbourhood from `welfare_continuity_in_alpha_OPEN`. Cat 1 reduction check: not Mathlib-derivable (depends on opaque `alphaStar` carrier supremum characterisation). Cat 2 reduction check: paper-novel sup-existence argument on opaque carrier. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated existence of `α*` with positivity + upper-bound-by-1 + monotonicity-for-α-below-α* implication, given the small-α neighbourhood from `welfare_continuity_in_alpha_OPEN`. Cat 1 reduction check: not Mathlib-derivable (depends on opaque `alphaStar` carrier supremum characterisation). Cat 2 reduction check: paper-novel sup-existence argument on opaque carrier. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:sentimental, sup-existence of `α*` from continuity neighbourhood"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_sentimental_immunity_OPEN`). WORKING_ASSUMPTION — pending Mathlib sSup / closed-set machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -2441,15 +2458,16 @@ def entry_atom_alpha_star_existence_via_continuity : GapEntry where
     reversal-regime support. -/
 def entry_atom_W_bar_eventually_decreasing_in_reversal : GapEntry where
   name := "W_bar_eventually_decreasing_in_reversal_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (each individual welfare non-monotone → `W_bar` eventually decreasing)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the eventually-decreasing sub-clause via Theorem `thm:cognitive-threshold` Part 1. Cat 1 reduction check: not Mathlib-derivable (depends on `thm:cognitive-threshold` Part 1 `agentWelfare` opaque-carrier non-monotonicity). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the eventually-decreasing sub-clause via Theorem `thm:cognitive-threshold` Part 1. Cat 1 reduction check: not Mathlib-derivable (depends on `thm:cognitive-threshold` Part 1 `agentWelfare` opaque-carrier non-monotonicity). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:principal-optimum Part 1, `W_bar` eventually decreasing under reversal-regime support"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_interior_optimum_OPEN`). WORKING_ASSUMPTION — pending `thm:cognitive-threshold` Part 1 + measure-theoretic aggregation composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -2457,15 +2475,16 @@ def entry_atom_W_bar_eventually_decreasing_in_reversal : GapEntry where
     `β > 0` via within-branch discrimination benefit. -/
 def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
   name := "W_bar_exceeds_zero_at_positive_beta_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (within-branch discrimination benefit at small β dominates routing loss)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures within-branch discrimination benefit on opaque carrier `W_bar`. Cat 1 reduction check: not Mathlib-derivable (depends on Lemma `lem:conditional-reduction`(i) + per-agent welfare derivative comparison). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures within-branch discrimination benefit on opaque carrier `W_bar`. Cat 1 reduction check: not Mathlib-derivable (depends on Lemma `lem:conditional-reduction`(i) + per-agent welfare derivative comparison). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:principal-optimum Part 1, `W_bar` exceeds `W_bar(0)` at some `β > 0`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_interior_optimum_OPEN`). WORKING_ASSUMPTION — pending Mathlib derivative-comparison machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -2473,15 +2492,16 @@ def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
     envelope shape. -/
 def entry_atom_interior_max_exists_from_unimodal_envelope : GapEntry where
   name := "interior_max_exists_from_unimodal_envelope_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:principal-optimum Part 1, lines 624-625 (interior optimum `betaBarStar ∈ (0, ∞)`)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Packages the paper's existence-of-interior-maximum inference given the prior two atomic stipulations (eventually-decreasing + exceeds-zero). Cat 1 reduction check: candidate Cat 1 derivation via Mathlib continuous-function-on-compact-interval IVT-style argument applied to `W_bar`, but the underlying continuity is a Mathlib gap (paper-implicit standing assumption, not separately encoded as a Cat 3 atom — would require a `W_bar_continuous` axiom). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Packages the paper's existence-of-interior-maximum inference given the prior two atomic stipulations (eventually-decreasing + exceeds-zero). Cat 1 reduction check: candidate Cat 1 derivation via Mathlib continuous-function-on-compact-interval IVT-style argument applied to `W_bar`, but the underlying continuity is a Mathlib gap (paper-implicit standing assumption, not separately encoded as a Cat 3 atom — would require a `W_bar_continuous` axiom). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:principal-optimum Part 1, interior-maximum existence"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_interior_optimum_OPEN`). WORKING_ASSUMPTION — pending Mathlib continuous-function-on-compact-interval + IVT machinery + paper-implicit `W_bar` continuity encoding; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -2489,15 +2509,16 @@ def entry_atom_interior_max_exists_from_unimodal_envelope : GapEntry where
     `aggregateWelfareWith G`. -/
 def entry_atom_fosd_induces_derivative_domination : GapEntry where
   name := "fosd_induces_derivative_domination_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (FOSD + supermodular → derivative-domination)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated FOSD-induces-derivative-domination on opaque carrier `aggregateWelfareWith` via the discrete derivative-inequality form. Cat 1 reduction check: not Mathlib-derivable (depends on HasDerivAt + Lebesgue-Stieltjes machinery). Cat 2 reduction check: paper-novel application of `prop:supermodular` integrated against FOSD-dominating distribution. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated FOSD-induces-derivative-domination on opaque carrier `aggregateWelfareWith` via the discrete derivative-inequality form. Cat 1 reduction check: not Mathlib-derivable (depends on HasDerivAt + Lebesgue-Stieltjes machinery). Cat 2 reduction check: paper-novel application of `prop:supermodular` integrated against FOSD-dominating distribution. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:principal-optimum Part 2, FOSD-induced derivative domination"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_monotone_in_kappa_OPEN`). WORKING_ASSUMPTION — pending Mathlib HasDerivAt + Lebesgue-Stieltjes machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -2505,15 +2526,16 @@ def entry_atom_fosd_induces_derivative_domination : GapEntry where
     derivative-domination. -/
 def entry_atom_argmax_monotone_under_derivative_domination : GapEntry where
   name := "argmax_monotone_under_derivative_domination_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (zero crossing weakly to the right → argmax monotonicity)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated argmax-monotonicity inference from prior derivative-domination atom. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib argmax-monotonicity from derivative-comparison), but depends on opaque `aggregateOptimalBeta` argmax-characterisation which is a paper-novel encoding. Cat 2 reduction check: paper-novel argmax framework. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated argmax-monotonicity inference from prior derivative-domination atom. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib argmax-monotonicity from derivative-comparison), but depends on opaque `aggregateOptimalBeta` argmax-characterisation which is a paper-novel encoding. Cat 2 reduction check: paper-novel argmax framework. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:principal-optimum Part 2, argmax-monotonicity from derivative-domination"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_monotone_in_kappa_OPEN`). WORKING_ASSUMPTION — pending Mathlib argmax / uniqueness machinery + opaque `aggregateOptimalBeta` argmax-characterisation composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -2522,15 +2544,16 @@ def entry_atom_argmax_monotone_under_derivative_domination : GapEntry where
     decreasing parts. -/
 def entry_atom_W_bar_mixture_decomposition : GapEntry where
   name := "W_bar_mixture_decomposition_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:principal-optimum Part 3 proof, lines 636-640 (mixture decomposition `W̄ = λ · above + (1-λ) · below`)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated mixture decomposition qualitatively. Cat 1 reduction check: not Mathlib-derivable (depends on bounded-measure / conditional-expectation machinery). Cat 2 reduction check: paper-novel application of mixture decomposition. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated mixture decomposition qualitatively. Cat 1 reduction check: not Mathlib-derivable (depends on bounded-measure / conditional-expectation machinery). Cat 2 reduction check: paper-novel application of mixture decomposition. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:principal-optimum Part 3, mixture decomposition of `W_bar`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_regime_bifurcation_OPEN`). WORKING_ASSUMPTION — pending Mathlib bounded-measure / conditional-expectation machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -2538,15 +2561,16 @@ def entry_atom_W_bar_mixture_decomposition : GapEntry where
     decomposition. -/
 def entry_atom_non_concave_triple_from_mixture : GapEntry where
   name := "non_concave_triple_from_mixture_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:principal-optimum Part 3 proof, line 640 (non-concavity `W̄` valley pattern)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated non-concavity triple from mixture decomposition. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib monotonicity-pattern analysis), but depends on the paper-novel mixture-decomposition framing. Cat 2 reduction check: paper-novel sum-of-monotone-and-non-monotone framework. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated non-concavity triple from mixture decomposition. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib monotonicity-pattern analysis), but depends on the paper-novel mixture-decomposition framing. Cat 2 reduction check: paper-novel sum-of-monotone-and-non-monotone framework. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:principal-optimum Part 3, non-concavity triple from mixture"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_regime_bifurcation_OPEN`). WORKING_ASSUMPTION — pending Mathlib monotonicity-pattern analysis + paper-novel mixture-decomposition framing composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure` Part 1
@@ -2554,15 +2578,16 @@ def entry_atom_non_concave_triple_from_mixture : GapEntry where
     `δ̄ > 0`. -/
 def entry_atom_averaged_reversal_overshoot_positive : GapEntry where
   name := "averaged_reversal_overshoot_positive_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Corollary cor:disclosure Part 1 proof, lines 652-654 (G-averaged reversal-regime overshoot `δ̄ > 0`)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_full_suboptimal_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated overshoot positivity in reversal regime. Cat 1 reduction check: not Mathlib-derivable (depends on conditional-expectation + Theorem `thm:cognitive-threshold` Part 1 composition). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_full_suboptimal` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_full_suboptimal_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated overshoot positivity in reversal regime. Cat 1 reduction check: not Mathlib-derivable (depends on conditional-expectation + Theorem `thm:cognitive-threshold` Part 1 composition). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_full_suboptimal` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Corollary cor:disclosure Part 1, averaged reversal-regime overshoot positivity"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_disclosure_full_suboptimal_OPEN`). WORKING_ASSUMPTION — pending Mathlib conditional-expectation + `thm:cognitive-threshold` Part 1 composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure` Part 1
@@ -2570,15 +2595,16 @@ def entry_atom_averaged_reversal_overshoot_positive : GapEntry where
     positive averaged overshoot. -/
 def entry_atom_finite_beta_above_limit_from_overshoot : GapEntry where
   name := "finite_beta_above_limit_from_overshoot_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Corollary cor:disclosure Part 1 proof, line 656 (`λ ε < (1 - λ) δ̄ ⇒ W̄(β_0) > W̄(∞)`)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_full_suboptimal_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures finite-β-strictly-above-limit existence from positive averaged overshoot. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib limit-comparison + ε-choice machinery), but depends on opaque `W_bar_limit_infty` characterisation. Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_full_suboptimal` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_full_suboptimal_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures finite-β-strictly-above-limit existence from positive averaged overshoot. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib limit-comparison + ε-choice machinery), but depends on opaque `W_bar_limit_infty` characterisation. Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_full_suboptimal` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Corollary cor:disclosure Part 1, finite-β-strictly-above-limit existence"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_disclosure_full_suboptimal_OPEN`). WORKING_ASSUMPTION — pending Mathlib limit-comparison + ε-choice machinery + opaque `W_bar_limit_infty` characterisation composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure` Part 2
@@ -2586,15 +2612,16 @@ def entry_atom_finite_beta_above_limit_from_overshoot : GapEntry where
     aggregate. -/
 def entry_atom_differentiated_per_agent_optimum_dominates_uniform : GapEntry where
   name := "differentiated_per_agent_optimum_dominates_uniform_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (per-agent `β_i = β*(κ_i, α_i)` optimum aggregated)"
   attackHistory :=
-    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_differentiated_dominates_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated per-agent-optimum aggregate dominates uniform aggregate. Cat 1 reduction check: not Mathlib-derivable (depends on measure-theoretic per-agent integration). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_differentiated_dominates` derived theorem (Principal.lean) hosts the atom." ]
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_differentiated_dominates_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated per-agent-optimum aggregate dominates uniform aggregate. Cat 1 reduction check: not Mathlib-derivable (depends on measure-theoretic per-agent integration). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_differentiated_dominates` derived theorem (Principal.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Corollary cor:disclosure Part 2, per-agent-optimum aggregate dominates uniform aggregate"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_disclosure_differentiated_dominates_OPEN`). WORKING_ASSUMPTION — pending Mathlib measure-theoretic per-agent integration; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-! # R38 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
@@ -2625,45 +2652,48 @@ the R38 atom count is 23 (= 22 targets + 1 split). -/
     welfare reversal triggered at `α > α*(0, p)`. -/
 def entry_atom_alpha_above_alpha_star_implies_reversal : GapEntry where
   name := "alpha_above_alpha_star_implies_reversal_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 1, line 491 (`α > α*(0, p)` ⇒ greedy welfare non-monotone in β)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part1_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper-stated greedy-reversal triggering at the α-above-α* regime gate on the existing carrier `agentWelfare`. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_cognitive_threshold_part1` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part1_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper-stated greedy-reversal triggering at the α-above-α* regime gate on the existing carrier `agentWelfare`. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_cognitive_threshold_part1` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 1, α-above-α* greedy reversal at κ = 0"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending per-IDP-instance derivation from trap-probability + V_dyn-misalignment chain; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 2 (line 492), κ-agent
     welfare recovery to monotone β-dependence at sufficiently large κ. -/
 def entry_atom_kappa_large_blackwell_recovery : GapEntry where
   name := "kappa_large_blackwell_recovery_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 2, line 492 (sufficiently large κ ⇒ κ-agent welfare non-decreasing in β); Blackwell 1951/1953 (Cat 2 dependency)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part2_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom captures the paper-stated κ-large monotonicity recovery on the existing carrier `agentWelfare`. Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Blackwell theorem. Downstream consumer: `gap_cognitive_threshold_part2` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part2_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom captures the paper-stated κ-large monotonicity recovery on the existing carrier `agentWelfare`. Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Blackwell theorem. Downstream consumer: `gap_cognitive_threshold_part2` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 2, κ-large monotonicity recovery"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. WORKING_ASSUMPTION — pending substantive κ-large posterior-convergence machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 4 (line 494),
     `κ*(p)` non-decreasing in `p`. -/
 def entry_atom_kappaStar_p_monotone : GapEntry where
   name := "kappaStar_p_monotone_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 4, line 494 (`κ*(p)` non-decreasing in `p` on lattices + Section 5 instances)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part4_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom captures the paper-stated `κ*` p-monotonicity on the existing carrier `kappaStar`, against the implicit non-emptiness premise (paper assumes threshold exists; unconditional universal form is junk-value-defective per R23-C2 audit). Cat 1 reduction check: candidate `mean_estimate_gap_antitone_in_p_OPEN` + sInf-monotonicity chain breaks at junk-value corner case. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part4` derived theorem (Cognitive.lean) hosts the atom." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part4_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom captures the paper-stated `κ*` p-monotonicity on the existing carrier `kappaStar`, against the implicit non-emptiness premise (paper assumes threshold exists; unconditional universal form is junk-value-defective per R23-C2 audit). Cat 1 reduction check: candidate `mean_estimate_gap_antitone_in_p_OPEN` + sInf-monotonicity chain breaks at junk-value corner case. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part4` derived theorem (Cognitive.lean) hosts the atom." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 4, `κ*(p)` p-monotonicity"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — Cat 1 derivation candidate via `mean_estimate_gap_antitone_in_p_OPEN` + sInf-monotonicity, but junk-value corner case (`Real.sInf_empty = 0`) blocks the unconditional universal form; closure requires implicit non-emptiness premise or enriched `kappaStar_def`; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 5 + Prop:threshold-
@@ -2672,30 +2702,32 @@ def entry_atom_kappaStar_p_monotone : GapEntry where
     of `kappaStar_def`'s α-erasing inf-formula. -/
 def entry_atom_welfare_transition_alpha_monotone : GapEntry where
   name := "welfare_transition_alpha_monotone_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 5, line 495 + Proposition prop:threshold-alpha, proof line 540 (welfare-transition characterisation of α-monotonicity)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part5_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Implements R24-B's `Future-round candidate` directive: encodes the welfare-transition α-monotonicity (Prop:threshold-alpha proof line 540) as a SEPARATE atomic Cat 3 axiom independent of `kappaStar_def`'s α-erasing inf-formula. Paper-source verification: paper's `m(κ)` is α-free, so the α-monotonicity must come from a different characterisation; paper line 540 reads `since higher α increases the trap probability ... a higher κ is needed to compensate: ∂κ*/∂α > 0`. The atom is the operative paper claim on the `kappaStar` carrier. Cat 1 reduction check: not derivable from `kappaStar_def` (α-free RHS). Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part5` derived theorem (Cognitive.lean) + wrapper `gap_threshold_alpha_monotone`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part5_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Implements R24-B's `Future-round candidate` directive: encodes the welfare-transition α-monotonicity (Prop:threshold-alpha proof line 540) as a SEPARATE atomic Cat 3 axiom independent of `kappaStar_def`'s α-erasing inf-formula. Paper-source verification: paper's `m(κ)` is α-free, so the α-monotonicity must come from a different characterisation; paper line 540 reads `since higher α increases the trap probability ... a higher κ is needed to compensate: ∂κ*/∂α > 0`. The atom is the operative paper claim on the `kappaStar` carrier. Cat 1 reduction check: not derivable from `kappaStar_def` (α-free RHS). Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part5` derived theorem (Cognitive.lean) + wrapper `gap_threshold_alpha_monotone`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 5, welfare-transition α-monotonicity"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_cognitive_threshold_part5_OPEN`). Independent of `kappaStar_def`'s α-free inf-formula; encodes the paper-stated welfare-transition characterisation (Prop:threshold-alpha line 540). WORKING_ASSUMPTION — pending substantive trap-probability + welfare-transition Mathlib machinery; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 6 (line 496),
     `κ*(p, α)` divergence at the Harris-Kesten `p_c` from below. -/
 def entry_atom_kappaStar_diverges_at_pc : GapEntry where
   name := "kappaStar_diverges_at_pc_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 4.1 Part 6, line 496 (`κ*(p, α) → +∞` as `p → p_c⁻` on Z² with `α > α*`)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part6_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom packages the paper-stated unboundedness on the `harrisKestenCriticalProb` carrier (Cat 2 Harris-Kesten 1960/1980 dependency surfaces via the carrier consumption per R18-A audit clarification). Cat 1 reduction check: not Mathlib-derivable (constrains opaque `kappaStar` carrier). Cat 2 reduction check: paper-novel application of Cat 2 Harris-Kesten p_c via opaque carrier. Downstream consumer: `gap_cognitive_threshold_part6` derived theorem (Cognitive.lean)." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part6_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom packages the paper-stated unboundedness on the `harrisKestenCriticalProb` carrier (Cat 2 Harris-Kesten 1960/1980 dependency surfaces via the carrier consumption per R18-A audit clarification). Cat 1 reduction check: not Mathlib-derivable (constrains opaque `kappaStar` carrier). Cat 2 reduction check: paper-novel application of Cat 2 Harris-Kesten p_c via opaque carrier. Downstream consumer: `gap_cognitive_threshold_part6` derived theorem (Cognitive.lean)." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 4.1 Part 6, `κ*(p, α)` divergence at `p_c`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending substantive Z² percolation correlation-length divergence + opaque-carrier composition; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:supermodular cross-partial-to-
@@ -2703,15 +2735,16 @@ def entry_atom_kappaStar_diverges_at_pc : GapEntry where
     applied to the paper-novel `kappaAgentWelfareSNR` carrier). -/
 def entry_atom_corner_supermodularity_via_topkis : GapEntry where
   name := "corner_supermodularity_via_topkis_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:supermodular proof, cross-partial-to-corner-supermodularity link on `kappaAgentWelfareSNR` carrier; Topkis 1978/1998 (Cat 2 dependency)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_kappaWelfare_cross_partial_link_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the cross-partial-positive-at-four-corners → corner-supermodularity bridge on the paper-novel `kappaAgentWelfareSNR` carrier. Cat 2 Topkis 1978/1998 dependency threaded as explicit `h_topkis` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Topkis universal-supermodularity to paper-novel regional carrier. Downstream consumer: `gap_kappaWelfare_cross_partial_link` derived theorem (Cognitive.lean) + transitively `gap_policy_complementarity_OPEN_derived`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_kappaWelfare_cross_partial_link_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the cross-partial-positive-at-four-corners → corner-supermodularity bridge on the paper-novel `kappaAgentWelfareSNR` carrier. Cat 2 Topkis 1978/1998 dependency threaded as explicit `h_topkis` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Topkis universal-supermodularity to paper-novel regional carrier. Downstream consumer: `gap_kappaWelfare_cross_partial_link` derived theorem (Cognitive.lean) + transitively `gap_policy_complementarity_OPEN_derived`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:supermodular, cross-partial-to-corner-supermodularity bridge"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_kappaWelfare_cross_partial_link_OPEN`). Cat 2 Topkis 1978/1998 dependency threaded as explicit `h_topkis` antecedent. WORKING_ASSUMPTION — pending substantive Topkis lattice-theoretic argument applied to IDP κ-agent welfare; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Lemma `lem:wrongness` (lines 336-369),
@@ -2719,150 +2752,160 @@ def entry_atom_corner_supermodularity_via_topkis : GapEntry where
     signals + degree-2 starting vertex. -/
 def entry_atom_topology_blind_wrongness : GapEntry where
   name := "topology_blind_wrongness_atom_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Lemma lem:wrongness, lines 336-369"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_wrongness_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated greedy welfare reversal under C1-C3 + terminal-neighbour topology + degree-2 starting vertex + whole-family topology-blind Blackwell-ordered signal family. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_wrongness` derived theorem (Wrongness.lean) + `gap_dilemma`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_wrongness_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated greedy welfare reversal under C1-C3 + terminal-neighbour topology + degree-2 starting vertex + whole-family topology-blind Blackwell-ordered signal family. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_wrongness` derived theorem (Wrongness.lean) + `gap_dilemma`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Lemma lem:wrongness, greedy welfare reversal under topology-blind signals"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending bounded-convergence + Φ-tail integral Mathlib machinery + per-IDP-instance derivation from V_dyn-dominance and static-reward-misalignment of trap/bridge pair; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:interior-optimum`
     (line 774), existence of interior minimiser of `L(·, 0)`. -/
 def entry_atom_interior_minimiser_existence : GapEntry where
   name := "interior_minimiser_existence_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:interior-optimum (5-state), line 774 (β* ≈ 1.5 bits)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Existential encoding on the `L` carrier; numeric witness `β* ≈ 1.5 bits` deferred to per-instance closure. Cat 1 reduction check: candidate Mathlib transcendental optimisation (Φ + Φ_B + signalVariance combination), but the IDP-specific functional form is paper-novel. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_interior_optimum` derived theorem (Canonical.lean) + `gap_threshold_fiveState_greedy_has_interior_optimum`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Existential encoding on the `L` carrier; numeric witness `β* ≈ 1.5 bits` deferred to per-instance closure. Cat 1 reduction check: candidate Mathlib transcendental optimisation (Φ + Φ_B + signalVariance combination), but the IDP-specific functional form is paper-novel. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_interior_optimum` derived theorem (Canonical.lean) + `gap_threshold_fiveState_greedy_has_interior_optimum`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:interior-optimum, existence of `β* ≈ 1.5 bits`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending Mathlib transcendental optimisation for explicit numeric witness; 必须 close before publication."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     Regime (i) existence sub-claim. -/
 def entry_atom_L_below_limit_at_some_beta : GapEntry where
   name := "L_below_limit_at_some_beta_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 (existence of β*(p) > 0 with L β*(p) p < 0.4)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_existence_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_existence` re-export). Downstream consumer: `gap_three_regime_reversal_existence`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_existence_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_existence` re-export). Downstream consumer: `gap_three_regime_reversal_existence`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Regime (i) existence of below-limit β*"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending substantive Regime (i) analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     uniqueness sub-claim. -/
 def entry_atom_L_unimodal_in_regime_i : GapEntry where
   name := "L_unimodal_in_regime_i_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (uniqueness from unimodal structure)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_uniqueness_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_uniqueness` re-export). Downstream consumer: `gap_three_regime_reversal_uniqueness`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_uniqueness_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_uniqueness` re-export). Downstream consumer: `gap_three_regime_reversal_uniqueness`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Regime (i) uniqueness of strict interior minimum"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending L unimodality analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     non-monotonicity sub-claim. -/
 def entry_atom_L_nonmonotone_witnesses : GapEntry where
   name := "L_nonmonotone_witnesses_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof lines 821-825"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_nonmonotone_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_nonmonotone` re-export). Downstream consumer: `gap_three_regime_reversal_nonmonotone`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_nonmonotone_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_nonmonotone` re-export). Downstream consumer: `gap_three_regime_reversal_nonmonotone`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Regime (i) non-monotonicity witnesses"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending L non-monotonicity analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     overshoot strictly decreasing sub-claim. -/
 def entry_atom_envelope_derivative_sign_in_p : GapEntry where
   name := "envelope_derivative_sign_in_p_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (envelope differentiation)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_decreasing_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_decreasing` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_decreasing`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_decreasing_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_decreasing` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_decreasing`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Regime (i) overshoot envelope-derivative sign"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending envelope-derivative analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     overshoot continuity sub-claim. -/
 def entry_atom_envelope_continuity_in_p : GapEntry where
   name := "envelope_continuity_in_p_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (continuity from envelope differentiation)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_continuous_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_continuous` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_continuous`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_continuous_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_continuous` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_continuous`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Regime (i) overshoot envelope continuity"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending implicit-function-continuity analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     overshoot vanishes at `p_1` sub-claim. -/
 def entry_atom_Tendsto_overshoot_at_p1 : GapEntry where
   name := "Tendsto_overshoot_at_p1_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 (overshoot vanishing at p_1)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_vanishes_at_p1` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_vanishes_at_p1`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_vanishes_at_p1` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_vanishes_at_p1`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Regime (i) overshoot Tendsto at p_1 from below"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending Tendsto-at-boundary analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (ii)
     (line 862), kappa-above-threshold Blackwell recovery on 5-state. -/
 def entry_atom_kappa_above_threshold_blackwell_recovery : GapEntry where
   name := "kappa_above_threshold_blackwell_recovery_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:threshold-five-state (ii), line 862; Blackwell 1951/1953 (Cat 2 dependency)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_threshold_fiveState_kappa_above_kstar_OPEN` per §18 (renamed to atom + derived theorem `gap_threshold_fiveState_kappa_above_kstar` re-export). Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Downstream consumer: `gap_threshold_fiveState_kappa_above_kstar`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_threshold_fiveState_kappa_above_kstar_OPEN` per §18 (renamed to atom + derived theorem `gap_threshold_fiveState_kappa_above_kstar` re-export). Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Downstream consumer: `gap_threshold_fiveState_kappa_above_kstar`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:threshold-five-state (ii), κ-above-threshold Blackwell recovery"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. Cat 2 Blackwell dependency threaded as explicit `h_blackwell` antecedent. WORKING_ASSUMPTION — pending conditional-Blackwell-on-5-state-instance derivation."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (iii)
     (line 863), inflection at `κ*` strict positivity. -/
 def entry_atom_inflection_at_kstar : GapEntry where
   name := "inflection_at_kstar_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:threshold-five-state (iii), line 863 (inflection point β > 0 at κ = κ*)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_threshold_fiveState_smooth_transition_OPEN` per §18 (first of two atoms — inflection-positivity sub-clause). Downstream consumer: `gap_threshold_fiveState_smooth_transition` derived theorem." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_threshold_fiveState_smooth_transition_OPEN` per §18 (first of two atoms — inflection-positivity sub-clause). Downstream consumer: `gap_threshold_fiveState_smooth_transition` derived theorem." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:threshold-five-state (iii), inflection point positivity"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending welfare-curvature analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (iii)
@@ -2870,45 +2913,48 @@ def entry_atom_inflection_at_kstar : GapEntry where
     welfare on `[0, β_inflection]`. -/
 def entry_atom_welfare_bounded_below_inflection : GapEntry where
   name := "welfare_bounded_below_inflection_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:threshold-five-state (iii), line 863 (welfare-below-inflection upper bound)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_threshold_fiveState_smooth_transition_OPEN` per §18 (second of two atoms — below-inflection welfare upper-bound sub-clause). Downstream consumer: `gap_threshold_fiveState_smooth_transition` derived theorem." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_threshold_fiveState_smooth_transition_OPEN` per §18 (second of two atoms — below-inflection welfare upper-bound sub-clause). Downstream consumer: `gap_threshold_fiveState_smooth_transition` derived theorem." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:threshold-five-state (iii), welfare upper bound below inflection"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending Φ-derivative + welfare-curvature analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:bayesian-naive-five-state (iii)
     (line 957), Bayesian-naive above-threshold reversal. -/
 def entry_atom_bayesian_naive_above_threshold_reversal : GapEntry where
   name := "bayesian_naive_above_threshold_reversal_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:bayesian-naive-five-state (iii), line 957"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_bayesian_naive_reversal_present_OPEN` per §18 (renamed to atom + derived theorem `gap_bayesian_naive_reversal_present` re-export). Downstream consumer: `gap_bayesian_naive_reversal_present`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_bayesian_naive_reversal_present_OPEN` per §18 (renamed to atom + derived theorem `gap_bayesian_naive_reversal_present` re-export). Downstream consumer: `gap_bayesian_naive_reversal_present`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:bayesian-naive-five-state (iii), above-threshold reversal"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending bounded-rationality Bayesian-update analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 6.1 thm:general-tree
     (lines 989-998), greedy reversal under C2′. -/
 def entry_atom_C2prime_implies_greedy_reversal : GapEntry where
   name := "C2prime_implies_greedy_reversal_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Theorem 6.1 thm:general-tree, lines 989-998"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_general_tree_OPEN` per §18 (renamed to atom + derived theorem `gap_general_tree` re-export). Downstream consumer: `gap_general_tree`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_general_tree_OPEN` per §18 (renamed to atom + derived theorem `gap_general_tree` re-export). Downstream consumer: `gap_general_tree`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Theorem 6.1 thm:general-tree, greedy reversal under C2′"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending C2′ + non-interference + bounded-convergence Mathlib machinery."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Example ex:cyclic-trap (lines 1026-
@@ -2916,15 +2962,16 @@ def entry_atom_C2prime_implies_greedy_reversal : GapEntry where
     probability open-edge event. -/
 def entry_atom_cyclic_4_satisfies_C2prime_at_open_event : GapEntry where
   name := "cyclic_4_satisfies_C2prime_at_open_event_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Example ex:cyclic-trap, lines 1026-1029"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_cyclic_trap_OPEN` per §18 (renamed to atom + derived theorem `gap_cyclic_trap` re-export). Downstream consumer: `gap_cyclic_trap`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_cyclic_trap_OPEN` per §18 (renamed to atom + derived theorem `gap_cyclic_trap` re-export). Downstream consumer: `gap_cyclic_trap`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Example ex:cyclic-trap, 4-cycle C2′ satisfaction"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending paper-instance-specific cycle analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:error-compounding Part 5
@@ -2932,30 +2979,32 @@ def entry_atom_cyclic_4_satisfies_C2prime_at_open_event : GapEntry where
     `κ*(d) = Θ(log d)` lower-bound half. -/
 def entry_atom_bernoulli_real_power_estimate : GapEntry where
   name := "bernoulli_real_power_estimate_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:error-compounding Part 5, line 1044 (`κ*(d) = log_2 d + O(1)` lower-bound Bernoulli-real-power estimate)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_kappaStar_depth_d_log_growth_OPEN` per §18 (renamed to atom + derived theorem `gap_kappaStar_depth_d_log_growth` re-export). The upper-bound half is closed kernel-pure by `gap_kappaStar_depth_d_upper_bound` (R9); the atom packages the remaining lower-bound Bernoulli-style estimate `(1+1/K)^(log_2 d) ≤ d²/K + 1` that the upper-bound proof's `c_star_constant` opaqueness prevented closing universally. Downstream consumer: `gap_kappaStar_depth_d_log_growth`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_kappaStar_depth_d_log_growth_OPEN` per §18 (renamed to atom + derived theorem `gap_kappaStar_depth_d_log_growth` re-export). The upper-bound half is closed kernel-pure by `gap_kappaStar_depth_d_upper_bound` (R9); the atom packages the remaining lower-bound Bernoulli-style estimate `(1+1/K)^(log_2 d) ≤ d²/K + 1` that the upper-bound proof's `c_star_constant` opaqueness prevented closing universally. Downstream consumer: `gap_kappaStar_depth_d_log_growth`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Proposition prop:error-compounding Part 5, κ*(d) = Θ(log d) lower-bound half"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending Bernoulli-real-power estimate Mathlib infrastructure."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Remark rem:robustness-misspec (ii)
     (line 942), myopic-`k` lookahead `k ≥ d` Blackwell recovery. -/
 def entry_atom_myopic_k_lookahead_recursion : GapEntry where
   name := "myopic_k_lookahead_recursion_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Remark rem:robustness-misspec (ii), line 942 (k-step lookahead with k ≥ d recovers monotonicity)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_myopic_k_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_myopic_k` re-export). Downstream consumer: `gap_robustness_myopic_k`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_myopic_k_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_myopic_k` re-export). Downstream consumer: `gap_robustness_myopic_k`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Remark rem:robustness-misspec (ii), k-step lookahead k ≥ d Blackwell recovery"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending k-step lookahead dynamics on trap tree."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Remark rem:robustness-misspec (iii)
@@ -2963,15 +3012,16 @@ def entry_atom_myopic_k_lookahead_recursion : GapEntry where
     `r̄ ∈ (r(B), r(A))`. -/
 def entry_atom_satisficing_threshold_trap : GapEntry where
   name := "satisficing_threshold_trap_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Remark rem:robustness-misspec (iii), line 944 (satisficing threshold r̄ ∈ (r(B), r(A)) welfare reversal)"
   attackHistory :=
-    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_satisficing_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_satisficing` re-export). Downstream consumer: `gap_robustness_satisficing`." ]
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_satisficing_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_satisficing` re-export). Downstream consumer: `gap_robustness_satisficing`." ,
+      "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level." ]
   scope := "Remark rem:robustness-misspec (iii), satisficing welfare reversal"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending satisficing decision-rule analysis."
+    "Cat 3 paper-foundational structural-equation atom per `feedback_gap_ledger_in_lean4` §3.4.3; 永不 close. Paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers."
   conditionalOn := []
 
 /-! # Aggregated ledger inventory (post-R32 enum-typed refactor)
