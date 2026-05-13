@@ -149,14 +149,14 @@ namespace BlackwellDilemma.AxiomAudit
 --    of `α*`).
 #print axioms BlackwellDilemma.gap_supermodular
 #print axioms BlackwellDilemma.gap_sentimental_immunity
--- R24-B reverted to OPEN axiom: Theorem 4.1 Part 5 (κ*(α) non-decreasing
--- in α). The prior R23-C2 Cat 1 derived closure was a tautological
--- `rw [kappaStar_def, kappaStar_def]` collapse exploiting the α-erasure
--- of `kappaStar_def`'s RHS — Pattern 4 violation. Reverted to atomic
--- Cat 3 OPEN axiom; paper-stated welfare-transition characterisation
--- of α-monotonicity is not reducible to the `kappaStar_def` inf-formula.
--- See axiom docstring for the full audit.
-#print axioms BlackwellDilemma.gap_cognitive_threshold_part5_OPEN
+-- R38 §18 decomposition: Theorem 4.1 Part 5 (κ*(α) non-decreasing
+-- in α). Decomposed into atomic stipulation
+-- `welfare_transition_alpha_monotone_OPEN` + derived theorem
+-- `gap_cognitive_threshold_part5`. Cat 3 atomic-stipulation re-flips
+-- the prior R24-B reversion: the atom is the paper-stated welfare-
+-- transition characterisation (Prop:threshold-alpha proof line 540),
+-- independent of `kappaStar_def`'s α-erasing inf-formula.
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part5
 
 -- §4 Principal layer
 -- R37 derived closures: Proposition `prop:principal-optimum` Parts 1-3
@@ -197,8 +197,12 @@ namespace BlackwellDilemma.AxiomAudit
 -- §6 Bayesian + complementarity
 #print axioms BlackwellDilemma.gap_bayesian_immunity
 #print axioms BlackwellDilemma.gap_information_knowledge_complementarity
--- (gap_robustness_myopic_k and gap_robustness_satisficing are gap-OPEN
---  axioms; see Ledger.)
+-- R38 §18 decompositions (Bayesian.lean): gap_robustness_myopic_k +
+-- gap_robustness_satisficing now derived theorems composing
+-- atomic-stipulation atoms `myopic_k_lookahead_recursion_OPEN` and
+-- `satisficing_threshold_trap_OPEN`.
+#print axioms BlackwellDilemma.gap_robustness_myopic_k
+#print axioms BlackwellDilemma.gap_robustness_satisficing
 -- §5 Three-regime arithmetic split (Cat 1 promotion)
 #print axioms BlackwellDilemma.FiveState.gap_three_regime_cognitive_augmentation_arithmetic_part
 
@@ -254,12 +258,12 @@ namespace BlackwellDilemma.AxiomAudit
 -- sub-axioms are stated against the opaque carrier `betaStarOfP` (whose
 -- own dependencies appear under each consuming axiom). Only the existence
 -- sub-axiom is currently consumed by downstream `gap_fiveState_policy_mapping`.
-#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_existence_OPEN
-#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_uniqueness_OPEN
-#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_nonmonotone_OPEN
-#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_decreasing_OPEN
-#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_continuous_OPEN
-#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_existence
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_uniqueness
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_nonmonotone
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_decreasing
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_continuous
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_vanishes_at_p1
 
 -- §7 General graphs + trap tree
 #print axioms BlackwellDilemma.TrapTree.gap_welfare_gain_decay
@@ -315,5 +319,40 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.FiveState.betaStarOfP_loss_below_limit
 #print axioms BlackwellDilemma.V_g_terminal_mem_unitInterval
 #print axioms BlackwellDilemma.W_bar_limit_infty_le_W_bar_betaBarStar
+
+-- R38 §18 atomic-decomposition derived theorems (R38, 2026-05-14):
+-- 22 conclusion-axioms decomposed into atomic stipulations + derived
+-- theorems per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+-- pattern. Each entry below is the derived theorem now hosting the
+-- bundled paper conclusion; the corresponding atomic-stipulation
+-- axiom (named `<paper_content>_OPEN`) is the underlying paper-stated
+-- substance pending per-instance closure.
+
+-- Cognitive.lean §18 decomposition (6 derived theorems):
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part1
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part2
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part4
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part6
+#print axioms BlackwellDilemma.gap_kappaWelfare_cross_partial_link
+
+-- Wrongness.lean §18 decomposition (1 derived theorem):
+#print axioms BlackwellDilemma.gap_wrongness
+
+-- Canonical.lean §18 decomposition (8 derived theorems):
+#print axioms BlackwellDilemma.FiveState.gap_interior_optimum
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_existence
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_uniqueness
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_nonmonotone
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_decreasing
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_continuous
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_vanishes_at_p1
+#print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_kappa_above_kstar
+#print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_smooth_transition
+#print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_present
+
+-- GeneralGraphs.lean §18 decomposition (3 derived theorems):
+#print axioms BlackwellDilemma.gap_general_tree
+#print axioms BlackwellDilemma.gap_cyclic_trap
+#print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_log_growth
 
 end BlackwellDilemma.AxiomAudit

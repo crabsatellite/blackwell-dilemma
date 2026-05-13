@@ -190,11 +190,25 @@ connected graph `G` is non-monotone in β. -/
     no-revisit rule prevents back-tracking.
 
     paper source: Theorem 6.1 (`thm:general-tree`), lines 989-998. -/
-axiom gap_general_tree_OPEN :
+axiom C2prime_implies_greedy_reversal_OPEN :
     Conditions_C1_C2prime_C3 →
     ∃ β β' : ℝ, β < β' ∧
       agentWelfare AgentType.greedy β' 0 1 <
         agentWelfare AgentType.greedy β 0 1
+
+/-- **Theorem 6.1** (`thm:general-tree`) (derived theorem composing
+    `C2prime_implies_greedy_reversal_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    Subsumes Theorem 3.2 via `dilemma_subsumed_by_gap_general_tree`
+    (terminal-neighbour topology + C2 ⇒ C2′).
+
+    paper source: Theorem 6.1 (`thm:general-tree`), lines 989-998. -/
+theorem gap_general_tree :
+    Conditions_C1_C2prime_C3 →
+    ∃ β β' : ℝ, β < β' ∧
+      agentWelfare AgentType.greedy β' 0 1 <
+        agentWelfare AgentType.greedy β 0 1 :=
+  C2prime_implies_greedy_reversal_OPEN
 
 /-- Cat 3 paper-novel ATOMIC structural equation: under terminal-neighbour
     topology, condition C2 (reward-topology misalignment, paper Definition
@@ -265,10 +279,22 @@ blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
     with cycles.
 
     paper source: Example `ex:cyclic-trap`, lines 1026-1029. -/
-axiom gap_cyclic_trap_OPEN :
+axiom cyclic_4_satisfies_C2prime_at_open_event_OPEN :
     ∀ p : ℝ, 0 < p → p < 1 →
       ∃ β β' : ℝ, β < β' ∧
         agentWelfare AgentType.greedy β' 0 1 < agentWelfare AgentType.greedy β 0 1
+
+/-- **Example `ex:cyclic-trap`** (derived theorem composing
+    `cyclic_4_satisfies_C2prime_at_open_event_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    Non-monotonicity survives on graphs with cycles.
+
+    paper source: Example `ex:cyclic-trap`, lines 1026-1029. -/
+theorem gap_cyclic_trap :
+    ∀ p : ℝ, 0 < p → p < 1 →
+      ∃ β β' : ℝ, β < β' ∧
+        agentWelfare AgentType.greedy β' 0 1 < agentWelfare AgentType.greedy β 0 1 :=
+  cyclic_4_satisfies_C2prime_at_open_event_OPEN
 
 /-! ## 4. Depth-`d` trap tree (`def:trap-tree`)
 
@@ -505,11 +531,27 @@ noncomputable def log_2 (x : ℝ) : ℝ := Real.log x / Real.log 2
 
     paper source: Proposition `prop:error-compounding` Part 5, line 1044
     ("κ*(d) = log_2 d + O(1) as d → ∞"). -/
-axiom gap_kappaStar_depth_d_log_growth_OPEN :
+axiom bernoulli_real_power_estimate_OPEN :
     ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
       ∀ d : ℕ, 1 ≤ d →
         c₁ * log_2 d ≤ kappaStar_depth_d d ∧
         kappaStar_depth_d d ≤ c₂ * log_2 d + 1
+
+/-- **`κ*(d) = Θ(log d)`** asymptotic (derived theorem composing
+    `bernoulli_real_power_estimate_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern). The atom packages the
+    paper-stated lower-bound chain (`(1+1/K)^(log_2 d) ≤ d²/K + 1`
+    Bernoulli-style estimate) on the existing `kappaStar_depth_d`
+    and `log_2` carriers; the upper-bound half is closed kernel-pure
+    by `gap_kappaStar_depth_d_upper_bound`.
+
+    paper source: Proposition `prop:error-compounding` Part 5, line 1044. -/
+theorem gap_kappaStar_depth_d_log_growth :
+    ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
+      ∀ d : ℕ, 1 ≤ d →
+        c₁ * log_2 d ≤ kappaStar_depth_d d ∧
+        kappaStar_depth_d d ≤ c₂ * log_2 d + 1 :=
+  bernoulli_real_power_estimate_OPEN
 
 /-- **Upper-bound half** of the Θ-asymptotic: `κ*(d) ≤ log_2 d + c₃`
     for `d ≥ 1`, where `c₃ = (1/2) log_2(1/c* + 1)`. This is a

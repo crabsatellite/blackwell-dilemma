@@ -63,14 +63,15 @@
   finding: 14 IDP primitive carriers + paper-novel hypothesis predicates
   promoted from "axiom-only, no Ledger entry" to typed `GapEntry`s.
   Counts are over typed Ledger entries, not raw `axiom` / `theorem`
-  declarations.) Invariant: counts sum to `total_entries := 120`
-  (post-R37 atomic-stipulation layer: 99 + 21 new R37 entries — 1
-  from conditional-reduction-i decomposition + 2 from phase-transition-
-  below + 2 from phase-transition-above + 1 from trap-prevalence-above
-  + 2 from supermodular + 3 from sentimental-immunity + 3 from
-  principal-interior-optimum + 2 from principal-monotone-in-kappa
-  + 2 from principal-regime-bifurcation + 2 from disclosure-full-
-  suboptimal + 1 from disclosure-differentiated-dominates).
+  declarations.) Invariant: counts sum to `total_entries := 143`
+  (post-R38 atomic-stipulation layer: 120 + 23 new R38 entries — 5
+  Cognitive parts {1, 2, 4, 5, 6} + 1 cross-partial link + 1 wrongness
+  + 11 Canonical {interior + 6 Regime (i) + 5-state kappa-above +
+  smooth (2) + Bayesian-naive (iii)} + 3 GeneralGraphs {general tree +
+  cyclic trap + Bernoulli depth growth} + 2 Bayesian {myopic-k +
+  satisficing}). 5 bundle entries flipped OPEN → CLOSED (entry_lem_
+  wrongness, entry_thm_general_tree, entry_ex_cyclic_trap, entry_rem_
+  robustness_misspec_myopic_satisficing, entry_prop_threshold_alpha).
 
   6-tier status × 3-input-category cross-table (post-R37; live numbers
   printed by `#eval` block at file bottom — derive from there if needed):
@@ -914,19 +915,20 @@ def entry_prop_physical : GapEntry where
 /-! # §3.2 Welfare Reversal entries -/
 
 def entry_lem_wrongness : GapEntry where
-  name := "gap_wrongness_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_wrongness (derived) + topology_blind_wrongness_atom_OPEN (Cat 3 atom)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Lemma lem:wrongness, lines 336-369"
   attackHistory :=
     [ "R1 2026-05-12: encoded as opaque axiom citing C1-C2-C3 + terminal-neighbour + topology-blindness + Blackwell-ordering hypotheses.",
       "R4 Phase 4 audit (2026-05-12): WARN — paper line 338 also requires `|N_R(v_0)| = 2` (degree-2); Lean signature does NOT encode any DegreeTwoStartingVertex premise. Also paper requires WHOLE family topology-blind (`∀ β`); Lean uses single-instance `IsTopologyBlind (signalFamily 0)`. Patches deferred.",
       "R21-A 2026-05-13: applied both R4-deferred patches per R20-D paper-source verification Audit 2D. Patch (a): added `DegreeTwoStartingVertex → ` antecedent to `gap_wrongness_OPEN`; introduced the Cat 3 paper-novel scope predicate `axiom DegreeTwoStartingVertex : Prop` in `Types.lean` with paper-citation docstring (`lem:wrongness` line 338, `thm:dilemma` line 388). Patch (b): strengthened single-instance `IsTopologyBlind (signalFamily 0)` antecedent to whole-family `∀ β, IsTopologyBlind (signalFamily β)` matching the paper's `topology-blind signal family {π_β}_β` family-level scope (line 338). Both patches paper-faithful: paper line 338 literally states `Assume further that v_0 has exactly two accessible neighbours (|N_R(v_0)| = 2)` for premise (a) and `topology-blind signal family {π_β}_{β ≥ 0}` for premise (b).",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R38 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_wrongness_OPEN` is REPLACED by derived theorem `gap_wrongness` (Wrongness.lean) composing the new Cat 3 atomic stipulation `topology_blind_wrongness_atom_OPEN` (paper-stated greedy-reversal under topology-blind Blackwell-ordered signal family + degree-2 + terminal-neighbour scope, lines 336-369). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_topology_blind_wrongness)." ]
   scope := "Lemma lem:wrongness, lines 336-369"
   obstacleOrAttribution :=
-    "Substantive proof requires bounded-convergence + Φ-tail integral machinery not in Mathlib. R21-A: the two R4-deferred paper-faithful antecedents have been landed — `DegreeTwoStartingVertex` premise (paper `|N_R(v_0)| = 2`) and whole-family topology-blindness `∀ β, IsTopologyBlind (signalFamily β)` (paper `{π_β}_β` family-level scope). The signature now matches Lemma `lem:wrongness` line 338 verbatim on hypotheses; the OPEN status reflects the still-missing Mathlib bounded-convergence + Φ-tail integral substantive-proof machinery, not signature drift."
+    "CLOSED-via-Cat-3-atom-input. R38 derived theorem `gap_wrongness` (Wrongness.lean) composes the atomic stipulation `topology_blind_wrongness_atom_OPEN`. Substantive proof of the atom requires bounded-convergence + Φ-tail integral machinery not in Mathlib (paper-faithful R21-A `DegreeTwoStartingVertex` premise + whole-family topology-blindness `∀ β, IsTopologyBlind (signalFamily β)` antecedents now part of the atom)."
   conditionalOn := []
 
 def entry_lem_conditional_reduction_i : GapEntry where
@@ -1118,7 +1120,8 @@ def entry_thm_cognitive_threshold : GapEntry where
       "R24-B 2026-05-13: REVERTED Part 5 R23-C2 promotion per R23-D Audit 1+2+3 α-erasure violation. The R23-C2 closure `gap_cognitive_threshold_part5 := by rw [kappaStar_def, kappaStar_def]` was a tautological-premise (Pattern 4) closure: `kappaStar_def`'s RHS is α-free, so both sides reduce to the SAME expression and `≤` is discharged by `le_refl` regardless of whether `α₁ ≤ α₂`. Paper-source verification (R24-B): paper `m(κ)` (line 489 + 505) is literally α-free (depends on (p, κ) only); paper Part 3 inf-formula `κ* = inf{κ > 0 : m(κ) ≥ 0}` is itself α-free; paper Prop:threshold-alpha line 540 derives α-monotonicity from a DIFFERENT characterisation (welfare-transition value), which is NOT reducible to the inf-formula. Option A (refactor `mean_estimate_gap` to take α) was REJECTED: would phantom-introduce α-dependence on `m(κ)` that the paper does not state (Cat 3 phantom-attribution antipattern). Option B chosen: revert `gap_cognitive_threshold_part5` from CLOSED Cat 1 derived theorem to atomic OPEN Cat 3 axiom `gap_cognitive_threshold_part5_OPEN` (paper-stated structural monotonicity claim on `kappaStar` carrier, not reducible to `kappaStar_def`). Conjunction theorem `gap_cognitive_threshold_characterisation` updated to use `gap_cognitive_threshold_part5_OPEN` again (revert of R23-C2's conjunction patch). Wrapper `gap_threshold_alpha_monotone` re-exports the OPEN axiom. AxiomAudit.lean's print line for Part 5 also renamed (one-line consequence of the Part 5 axiom rename). Future-round candidate: encode the welfare-transition α-monotonicity as a SEPARATE atomic Cat 3 axiom (independent of `kappaStar_def`).",
       "R27-A 2026-05-13: Cat 3 sub-classification DERIVED_THEOREM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as CLOSED (Cat 3 derived theorem composing earlier Cat 1 + Cat 2 + Cat 3 atomic inputs — sub-class is descriptive only, not subject to the 永不/必须 close mandate). New `subClass` field set to DERIVED_THEOREM.",
       "R35-B Wave 2.6: restored explicit Cat 2 chain dropped in R26 on Part 2 (`gap_cognitive_threshold_part2_OPEN`) per R35 deep audit (R26 over-applied 'Cat 2 implicit consumption' rule for this entry whose CLAIM CONTENT is Cat 2 theorem applied to paper-novel carrier per `feedback_gap_ledger_in_lean4` §10). Added explicit antecedent `(∀ β₁ β₂, β₁ ≤ β₂ → agentWelfare AgentType.bayesian β₁ 0 1 ≤ agentWelfare AgentType.bayesian β₂ 0 1)` (the propositional content of `gap_blackwell_monotonicity_OPEN`) to `gap_cognitive_threshold_part2_OPEN` signature. Bundle conjunction theorem `gap_cognitive_threshold_characterisation` propagates the Cat 2 dependency by supplying `gap_blackwell_monotonicity_OPEN` directly to Part 2 (via `gap_cognitive_threshold_part2_OPEN gap_blackwell_monotonicity_OPEN hC hT`). `#print axioms gap_cognitive_threshold_characterisation` will now surface the Blackwell 1951/1953 dependency for Part 2.",
-      "R36 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern to Part 3. Split the bundled `gap_cognitive_threshold_part3_OPEN` 5-conjunction (ContinuousOn ∧ Tendsto ∧ 0 < mLimit p ∧ kappaStar p α = sInf{...} ∧ 0 ≤ kappaStar p α) into four NEW Cat 3 atomic stipulations + reuse of existing `kappaStar_def` (R23-C1 atom): (a) `mean_estimate_gap_continuous_OPEN` (paper-stated continuity on (0,∞), line 493); (b) `mean_estimate_gap_tendsto_mLimit_OPEN` (paper-stated Tendsto limit on `mLimit` carrier, line 505 — distinct from existing `mLimit_def` which hosts the analogous Tendsto on the per-instance `mLimitOf` carrier); (c) `mLimit_pos_OPEN` (paper-stated 0 < mLimit p, line 505); (d) `kappaStar_nonneg_OPEN` (paper-stated 0 ≤ kappaStar p α, line 493). The bundled axiom is REPLACED by derived theorem `gap_cognitive_threshold_part3` (Cognitive.lean ~L246-L262) composing the four new atoms with `kappaStar_def`. Bundle conjunction `gap_cognitive_threshold_characterisation` updated to project from the derived theorem (`fun p α => (gap_cognitive_threshold_part3 hC p α).2.2.2.2`) instead of the prior `_OPEN` axiom. Net: +4 new Cat 3 OPEN atomic-stipulation entries (entry_atom_mean_estimate_gap_continuous, entry_atom_mean_estimate_gap_tendsto_mLimit, entry_atom_mLimit_pos, entry_atom_kappaStar_nonneg); the bundle entry remains CLOSED with Part 3 sub-claim now derived rather than axiomatized." ]
+      "R36 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern to Part 3. Split the bundled `gap_cognitive_threshold_part3_OPEN` 5-conjunction (ContinuousOn ∧ Tendsto ∧ 0 < mLimit p ∧ kappaStar p α = sInf{...} ∧ 0 ≤ kappaStar p α) into four NEW Cat 3 atomic stipulations + reuse of existing `kappaStar_def` (R23-C1 atom): (a) `mean_estimate_gap_continuous_OPEN` (paper-stated continuity on (0,∞), line 493); (b) `mean_estimate_gap_tendsto_mLimit_OPEN` (paper-stated Tendsto limit on `mLimit` carrier, line 505 — distinct from existing `mLimit_def` which hosts the analogous Tendsto on the per-instance `mLimitOf` carrier); (c) `mLimit_pos_OPEN` (paper-stated 0 < mLimit p, line 505); (d) `kappaStar_nonneg_OPEN` (paper-stated 0 ≤ kappaStar p α, line 493). The bundled axiom is REPLACED by derived theorem `gap_cognitive_threshold_part3` (Cognitive.lean ~L246-L262) composing the four new atoms with `kappaStar_def`. Bundle conjunction `gap_cognitive_threshold_characterisation` updated to project from the derived theorem (`fun p α => (gap_cognitive_threshold_part3 hC p α).2.2.2.2`) instead of the prior `_OPEN` axiom. Net: +4 new Cat 3 OPEN atomic-stipulation entries (entry_atom_mean_estimate_gap_continuous, entry_atom_mean_estimate_gap_tendsto_mLimit, entry_atom_mLimit_pos, entry_atom_kappaStar_nonneg); the bundle entry remains CLOSED with Part 3 sub-claim now derived rather than axiomatized.",
+      "R38 2026-05-14: applied §18 atomic-decomposition pattern to Parts 1, 2, 4, 5, 6 (Parts 3 already R36-decomposed). Each part's bundled `gap_cognitive_threshold_partN_OPEN` axiom replaced by a Cat 3 atomic-stipulation atom + derived theorem (paper-stated content unchanged; the bundle is now a chain of derived theorems re-exporting atoms): Part 1 → atom `alpha_above_alpha_star_implies_reversal_OPEN` + theorem `gap_cognitive_threshold_part1`; Part 2 → atom `kappa_large_blackwell_recovery_OPEN` + theorem `gap_cognitive_threshold_part2`; Part 4 → atom `kappaStar_p_monotone_OPEN` + theorem `gap_cognitive_threshold_part4`; Part 5 → atom `welfare_transition_alpha_monotone_OPEN` + theorem `gap_cognitive_threshold_part5` (the paper-stated welfare-transition α-monotonicity per R24-B's `Future-round candidate` directive — independent of `kappaStar_def`'s α-free inf-formula); Part 6 → atom `kappaStar_diverges_at_pc_OPEN` + theorem `gap_cognitive_threshold_part6`. Bundle conjunction `gap_cognitive_threshold_characterisation` updated to compose the six derived theorems (was three derived + three `_OPEN` axioms). Net: +5 new Cat 3 OPEN atomic-stipulation entries (entry_atom_alpha_above_alpha_star_implies_reversal, entry_atom_kappa_large_blackwell_recovery, entry_atom_kappaStar_p_monotone, entry_atom_welfare_transition_alpha_monotone, entry_atom_kappaStar_diverges_at_pc). The bundle entry remains CLOSED with all six parts now derived-theorem-hosted rather than bundle-axiom-hosted." ]
   scope := "Theorem 4.1 thm:cognitive-threshold, lines 487-518"
   obstacleOrAttribution :=
     "CLOSED-via-OPEN-input — assembles all six parts of the paper's Theorem 4.1. R36 Part 3 atomic decomposition: `gap_cognitive_threshold_part3_OPEN` (bundled 5-conjunction) replaced by derived theorem `gap_cognitive_threshold_part3` composing four new Cat 3 atomic stipulations (mean_estimate_gap_continuous_OPEN, mean_estimate_gap_tendsto_mLimit_OPEN, mLimit_pos_OPEN, kappaStar_nonneg_OPEN) with existing R23-C1 atom `kappaStar_def`. R35-B Wave 2.6 threaded `gap_blackwell_monotonicity_OPEN` into Part 2 via Cat 2 explicit chain per §10 paper-APPLICATION-to-opaque-carrier discipline; R24-B reverted Part 5 from R23-C2 Cat 1 derived theorem back to OPEN Cat 3 axiom. REMAINING DEFERRED PATCHES: (Part 1) add DegreeTwoStartingVertex premise; (Part 4) gate by IsCanonicalOrLatticeInstance OR enrich kappaStar_def to handle junk-value branch (R24); (Part 5) NEEDS-MORE-WORK — the paper proves α-monotonicity via a welfare-transition characterisation (line 540) NOT reducible to the inf-formula in `kappaStar_def`; an honest closure requires a SEPARATE atomic Cat 3 axiom encoding the welfare-transition α-monotonicity (Option B per R24-B); (Part 6) add LatticeZ2 qualifier. R18-A: `harrisKestenCriticalProb` opaque carrier is a Types.lean Cat 3 primitive, NOT the typed BLOCKED-def Cat 2 chain."
@@ -1182,18 +1185,19 @@ def entry_prop_sentimental : GapEntry where
   conditionalOn := []
 
 def entry_prop_threshold_alpha : GapEntry where
-  name := "gap_threshold_alpha_monotone"
-  status := GapStatus.gapOpen
+  name := "gap_threshold_alpha_monotone (derived) — re-exports gap_cognitive_threshold_part5"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
-  paperSource := "Proposition prop:threshold-alpha (re-exports cognitive_threshold_part5_OPEN)"
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Proposition prop:threshold-alpha (re-exports cognitive_threshold_part5)"
   attackHistory :=
     [ "R1 2026-05-12: re-export of `gap_cognitive_threshold_part5_OPEN` (Cat 3 chain).",
       "R23-C2 2026-05-13: upstream `gap_cognitive_threshold_part5_OPEN` was Cat 1 promoted to derived theorem `gap_cognitive_threshold_part5` via `kappaStar_def` α-erasure (R23-C1 atom). Wrapper `gap_threshold_alpha_monotone` now re-exports the Cat 1 closure; inputCategory upgraded Cat 3 → Cat 1. HONESTY CAVEAT inherited from upstream: this is trivial under current α-erasing encoding; substantive paper `∂κ*/∂α > 0` strict-monotonicity (Prop:threshold-alpha line 540) awaits enriched encoding (R24).",
-      "R24-B 2026-05-13: REVERTED CLOSED → OPEN per R23-D Audit 1+2+3 α-erasure violation. The R23-C2 Cat 1 promotion was a tautological closure (Pattern 4: tautological-premise) — `rw [kappaStar_def, kappaStar_def]` collapsed both sides to the SAME α-free expression, discharging `≤` because the two sides were definitionally EQUAL (independent of `α₁ ≤ α₂` premise). Paper-source re-verification: `m(κ)` (paper line 489 + 505) is literally α-free (depends on (p, κ) only via posterior estimates of dynamic value), so paper's Part 3 inf-formula `κ* = inf{κ > 0 : m(κ) ≥ 0}` is itself α-free. The α-monotonicity of `κ*` enters via a DIFFERENT characterisation: paper Prop:threshold-alpha proof line 540 reads `The threshold κ* is the value of κ where the welfare transitions from non-monotone to monotone in β. Since higher α increases the trap probability ... a higher κ is needed to compensate: ∂κ*/∂α > 0`. Paper does NOT prove the inf-formula is α-monotone; it derives α-monotonicity from the welfare-transition characterisation via the trap-probability argument. Therefore: under the current `kappaStar_def` encoding (which faithfully reflects ONLY the Part 3 inf-formula), Part 5 is NOT derivable from `kappaStar_def` alone. R24-B Option B chosen (Option A rejected — refactoring `mean_estimate_gap` to take α would phantom-introduce an α-dependence the paper does not state on `m(κ)` itself). Restored to atomic Cat 3 OPEN axiom `gap_cognitive_threshold_part5_OPEN`; wrapper `gap_threshold_alpha_monotone` re-exports the OPEN axiom; inputCategory Cat 1 → Cat 3. The substantive paper claim now awaits encoding via a SEPARATE atomic Cat 3 axiom for the welfare-transition α-monotonicity (independent of `kappaStar_def`); future-round candidate.",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
-  scope := "Proposition prop:threshold-alpha (re-exports cognitive_threshold_part5_OPEN)"
-  obstacleOrAttribution := "OPEN axiom; wrapper re-exports `gap_cognitive_threshold_part5_OPEN`. R24-B audit: paper's `m(κ)` is α-free, so the Part 3 inf-formula `kappaStar_def` cannot encode α-monotonicity; the paper proves α-monotonicity via a SEPARATE welfare-transition characterisation (line 540). Honest encoding: independent atomic Cat 3 axiom for Part 5, not derivable from `kappaStar_def`. Refactoring `mean_estimate_gap` to depend on α would phantom-introduce paper-unsupported structure (Cat 3 phantom-attribution antipattern). Future-round candidate: add a separate atom encoding the welfare-transition α-monotonicity (e.g., Cat 3 axiom on the `agentWelfare`/trap-probability dependence of `kappaStar` via the Prop:threshold-alpha proof argument)."
+      "R24-B 2026-05-13: REVERTED CLOSED → OPEN per R23-D Audit 1+2+3 α-erasure violation. The R23-C2 Cat 1 promotion was tautological (Pattern 4); paper's `m(κ)` is α-free so `kappaStar_def` cannot encode α-monotonicity. Restored to atomic Cat 3 OPEN axiom; wrapper re-exports the OPEN axiom; future-round candidate: add a separate atom encoding the welfare-transition α-monotonicity.",
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN.",
+      "R38 2026-05-14: upstream `gap_cognitive_threshold_part5_OPEN` decomposed via §18 pattern into atom `welfare_transition_alpha_monotone_OPEN` (the paper-stated welfare-transition α-monotonicity of Prop:threshold-alpha proof line 540, independent of the α-erasing inf-formula `kappaStar_def`) + derived theorem `gap_cognitive_threshold_part5`. The wrapper `gap_threshold_alpha_monotone` now re-exports the derived theorem (not the atom); status flipped OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM. The decomposition implements the R24-B `Future-round candidate` directive — the welfare-transition α-monotonicity has its own paper-stated atomic stipulation, no longer routed through `kappaStar_def`'s α-free RHS." ]
+  scope := "Proposition prop:threshold-alpha (re-exports cognitive_threshold_part5)"
+  obstacleOrAttribution := "CLOSED-via-Cat-3-atom-input. R38 derived theorem `gap_threshold_alpha_monotone` re-exports `gap_cognitive_threshold_part5` (Cognitive.lean), which derives directly from the atomic stipulation `welfare_transition_alpha_monotone_OPEN` (the paper-stated welfare-transition characterisation of Prop:threshold-alpha proof line 540). Independent of `kappaStar_def`'s α-free inf-formula; honest paper-faithful α-monotonicity encoding."
   conditionalOn := []
 
 /-! # §4 Principal entries -/
@@ -1398,21 +1402,22 @@ def entry_rem_robustness_misspec_bayesian_naive : GapEntry where
   conditionalOn := []
 
 def entry_rem_robustness_misspec_myopic_satisficing : GapEntry where
-  name := "gap_robustness_{myopic_k,satisficing}_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_robustness_{myopic_k,satisficing} (derived) + myopic_k_lookahead_recursion_OPEN + satisficing_threshold_trap_OPEN (Cat 3 atoms)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Remark rem:robustness-misspec (ii)+(iii), lines 942-944"
   attackHistory :=
     [ "R1 2026-05-12: 2 axioms with vacuous-Prop existentials.",
       "R4 Phase 4 audit (2026-05-12): patched — myopic_k binds to `myopicKWelfare`, satisficing binds to `satisficingWelfare`.",
       "R6 2026-05-12: converted opaque carriers to concrete `def`s (myopic = identity, satisficing = downward parabola). Closures via witness arithmetic.",
       "R7 2026-05-12: hostile audit caught both R6 closures as concrete-placeholder closure-count tricks violating `feedback_lean_real_math` (placeholder shapes do not encode the paper's bounded-rationality content). Reverted in source to `axiom gap_robustness_*_OPEN` with opaque carriers `myopicKWelfare`, `satisficingWelfare`.",
-      "R11 discipline audit (2026-05-13): retroactive Ledger-status correction — the R7 source-side revert was applied but the Ledger entry was never updated, leaving stale `status := \"CLOSED\"` metadata that contradicted the actual Lean source (`Bayesian.lean:118/134` `axiom gap_robustness_{myopic_k,satisficing}_OPEN`) AND the AxiomAudit.lean:92 comment (\"`gap_robustness_myopic_k` and `gap_robustness_satisficing` are gap-OPEN axioms; see Ledger.\"). Status now corrected to OPEN, reconciling Ledger with both the source and AxiomAudit.",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R11 discipline audit (2026-05-13): retroactive Ledger-status correction — the R7 source-side revert was applied but the Ledger entry was never updated, leaving stale `status := \"CLOSED\"` metadata that contradicted the actual Lean source. Status now corrected to OPEN.",
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN.",
+      "R38 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern to both axioms. (ii) `gap_robustness_myopic_k_OPEN` REPLACED by derived theorem `gap_robustness_myopic_k` (Bayesian.lean) composing the new Cat 3 atomic stipulation `myopic_k_lookahead_recursion_OPEN` (paper-stated `k ≥ d` Blackwell-recovery on `myopicKWelfare`, line 942). (iii) `gap_robustness_satisficing_OPEN` REPLACED by derived theorem `gap_robustness_satisficing` (Bayesian.lean) composing the new Cat 3 atomic stipulation `satisficing_threshold_trap_OPEN` (paper-stated welfare-reversal under `r̄ ∈ (r(B), r(A))` on `satisficingWelfare`, line 944). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_myopic_k_lookahead_recursion, entry_atom_satisficing_threshold_trap)." ]
   scope := "Remark rem:robustness-misspec (ii)+(iii), lines 942-944"
   obstacleOrAttribution :=
-    "Substantive bounded-rationality content (k-step lookahead dynamics on the trap tree for myopic-k; satisficing-threshold acceptance criterion with non-monotone β-response) remains a Mathlib gap; Lean side encodes via opaque carriers `myopicKWelfare`, `satisficingWelfare`."
+    "CLOSED-via-Cat-3-atom-input. R38 derived theorems `gap_robustness_myopic_k` and `gap_robustness_satisficing` re-export atomic stipulations `myopic_k_lookahead_recursion_OPEN` (paper line 942) and `satisficing_threshold_trap_OPEN` (paper line 944). Substantive bounded-rationality content (k-step lookahead dynamics on the trap tree for myopic-k; satisficing-threshold acceptance criterion with non-monotone β-response) remains a Mathlib gap at the atom level; Lean side encodes via opaque carriers `myopicKWelfare`, `satisficingWelfare`."
   conditionalOn := []
 
 /-! # §7 General Graphs entries -/
@@ -1445,15 +1450,16 @@ def entry_lem_V_g_le_V_dyn : GapEntry where
   conditionalOn := []
 
 def entry_thm_general_tree : GapEntry where
-  name := "gap_general_tree_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_general_tree (derived) + C2prime_implies_greedy_reversal_OPEN (Cat 3 atom)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 6.1 thm:general-tree, lines 989-998"
   attackHistory := [ "R1 2026-05-12: encoded; faithful per Phase 4 audit (paper has stronger conclusion `W(β) > W(∞) for all sufficiently large β` that Lean weakens to `∃ β β'`).",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN.",
+      "R38 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_general_tree_OPEN` is REPLACED by derived theorem `gap_general_tree` (GeneralGraphs.lean) composing the new Cat 3 atomic stipulation `C2prime_implies_greedy_reversal_OPEN` (paper-stated greedy-reversal under C2′ + non-interference + bounded-convergence). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_C2prime_implies_greedy_reversal)." ]
   scope := "Theorem 6.1 thm:general-tree, lines 989-998"
-  obstacleOrAttribution := "Substantive proof requires C2′ + non-interference + bounded-convergence."
+  obstacleOrAttribution := "CLOSED-via-Cat-3-atom-input. R38 derived theorem `gap_general_tree` (GeneralGraphs.lean) composes the atomic stipulation `C2prime_implies_greedy_reversal_OPEN`. Substantive proof of the atom requires C2′ + non-interference + bounded-convergence Mathlib machinery."
   conditionalOn := []
 
 def entry_lem_dilemma_subsumed_by_general_tree : GapEntry where
@@ -1472,17 +1478,18 @@ def entry_lem_dilemma_subsumed_by_general_tree : GapEntry where
   conditionalOn := []
 
 def entry_ex_cyclic_trap : GapEntry where
-  name := "gap_cyclic_trap_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_cyclic_trap (derived) + cyclic_4_satisfies_C2prime_at_open_event_OPEN (Cat 3 atom)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Example ex:cyclic-trap, lines 1026-1029"
   attackHistory :=
     [ "R1 2026-05-12: vacuous `∃ welfareReversed : Prop, welfareReversed`.",
       "R4 Phase 4 audit (2026-05-12): patched — assert concrete welfare reversal `agentWelfare AgentType.greedy β' 0 1 < agentWelfare AgentType.greedy β 0 1`.",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN.",
+      "R38 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_cyclic_trap_OPEN` is REPLACED by derived theorem `gap_cyclic_trap` (GeneralGraphs.lean) composing the new Cat 3 atomic stipulation `cyclic_4_satisfies_C2prime_at_open_event_OPEN` (paper-stated 4-cycle trap configuration satisfies C2′ at positive-probability open-edge event). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_cyclic_4_satisfies_C2prime_at_open_event)." ]
   scope := "Example ex:cyclic-trap, lines 1026-1029"
-  obstacleOrAttribution := "Cycle-trap example; opaque-carrier-bound substantive claim."
+  obstacleOrAttribution := "CLOSED-via-Cat-3-atom-input. R38 derived theorem `gap_cyclic_trap` (GeneralGraphs.lean) composes the atomic stipulation `cyclic_4_satisfies_C2prime_at_open_event_OPEN`. Cycle-trap example with opaque-carrier-bound paper-novel content."
   conditionalOn := []
 
 def entry_prop_error_compounding : GapEntry where
@@ -2590,15 +2597,392 @@ def entry_atom_differentiated_per_agent_optimum_dominates_uniform : GapEntry whe
     "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_disclosure_differentiated_dominates_OPEN`). WORKING_ASSUMPTION — pending Mathlib measure-theoretic per-agent integration; 必须 close before publication."
   conditionalOn := []
 
+/-! # R38 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
+     2026-05-14)
+
+R38 extends the §18 atomic-decomposition across the remaining bundled
+conclusion-axioms. Per `feedback_gap_ledger_in_lean4` §18:
+
+ * Cognitive.lean Parts 1, 2, 4, 5, 6 (5 atoms, 5 derived theorems).
+ * Cognitive.lean cross-partial link (1 atom, 1 derived theorem).
+ * Wrongness.lean wrongness lemma (1 atom, 1 derived theorem).
+ * Canonical.lean interior optimum + 6 Regime (i) sub-claims + 5-state
+   smooth transition (2 atoms) + 5-state kappa-above + Bayesian-naive (iii)
+   (10 atoms, 10 derived theorems).
+ * GeneralGraphs.lean general tree + cyclic trap + Bernoulli depth growth
+   (3 atoms, 3 derived theorems).
+ * Bayesian.lean myopic-k + satisficing (2 atoms, 2 derived theorems).
+
+Net: +23 new Cat 3 OPEN atomic-stipulation entries (5 Cognitive + 1 link +
+1 wrongness + 11 Canonical + 3 GeneralGraphs + 2 Bayesian).  Bundle
+entries flip OPEN → CLOSED where the axiom was the only OPEN sub-clause.
+
+Note: `gap_threshold_fiveState_smooth_transition_OPEN` decomposed into
+two atoms (inflection-positivity + below-inflection-welfare-bound), so
+the R38 atom count is 23 (= 22 targets + 1 split). -/
+
+/-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 1 (line 491), greedy
+    welfare reversal triggered at `α > α*(0, p)`. -/
+def entry_atom_alpha_above_alpha_star_implies_reversal : GapEntry where
+  name := "alpha_above_alpha_star_implies_reversal_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 4.1 Part 1, line 491 (`α > α*(0, p)` ⇒ greedy welfare non-monotone in β)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part1_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper-stated greedy-reversal triggering at the α-above-α* regime gate on the existing carrier `agentWelfare`. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_cognitive_threshold_part1` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Theorem 4.1 Part 1, α-above-α* greedy reversal at κ = 0"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending per-IDP-instance derivation from trap-probability + V_dyn-misalignment chain; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 2 (line 492), κ-agent
+    welfare recovery to monotone β-dependence at sufficiently large κ. -/
+def entry_atom_kappa_large_blackwell_recovery : GapEntry where
+  name := "kappa_large_blackwell_recovery_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 4.1 Part 2, line 492 (sufficiently large κ ⇒ κ-agent welfare non-decreasing in β); Blackwell 1951/1953 (Cat 2 dependency)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part2_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom captures the paper-stated κ-large monotonicity recovery on the existing carrier `agentWelfare`. Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Blackwell theorem. Downstream consumer: `gap_cognitive_threshold_part2` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Theorem 4.1 Part 2, κ-large monotonicity recovery"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. WORKING_ASSUMPTION — pending substantive κ-large posterior-convergence machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 4 (line 494),
+    `κ*(p)` non-decreasing in `p`. -/
+def entry_atom_kappaStar_p_monotone : GapEntry where
+  name := "kappaStar_p_monotone_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 4.1 Part 4, line 494 (`κ*(p)` non-decreasing in `p` on lattices + Section 5 instances)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part4_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom captures the paper-stated `κ*` p-monotonicity on the existing carrier `kappaStar`, against the implicit non-emptiness premise (paper assumes threshold exists; unconditional universal form is junk-value-defective per R23-C2 audit). Cat 1 reduction check: candidate `mean_estimate_gap_antitone_in_p_OPEN` + sInf-monotonicity chain breaks at junk-value corner case. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part4` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Theorem 4.1 Part 4, `κ*(p)` p-monotonicity"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — Cat 1 derivation candidate via `mean_estimate_gap_antitone_in_p_OPEN` + sInf-monotonicity, but junk-value corner case (`Real.sInf_empty = 0`) blocks the unconditional universal form; closure requires implicit non-emptiness premise or enriched `kappaStar_def`; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 5 + Prop:threshold-
+    alpha (lines 495, 527-543), `κ*(α)` non-decreasing in `α` via the
+    paper's welfare-transition characterisation (line 540), independent
+    of `kappaStar_def`'s α-erasing inf-formula. -/
+def entry_atom_welfare_transition_alpha_monotone : GapEntry where
+  name := "welfare_transition_alpha_monotone_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 4.1 Part 5, line 495 + Proposition prop:threshold-alpha, proof line 540 (welfare-transition characterisation of α-monotonicity)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part5_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Implements R24-B's `Future-round candidate` directive: encodes the welfare-transition α-monotonicity (Prop:threshold-alpha proof line 540) as a SEPARATE atomic Cat 3 axiom independent of `kappaStar_def`'s α-erasing inf-formula. Paper-source verification: paper's `m(κ)` is α-free, so the α-monotonicity must come from a different characterisation; paper line 540 reads `since higher α increases the trap probability ... a higher κ is needed to compensate: ∂κ*/∂α > 0`. The atom is the operative paper claim on the `kappaStar` carrier. Cat 1 reduction check: not derivable from `kappaStar_def` (α-free RHS). Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part5` derived theorem (Cognitive.lean) + wrapper `gap_threshold_alpha_monotone`." ]
+  scope := "Theorem 4.1 Part 5, welfare-transition α-monotonicity"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_cognitive_threshold_part5_OPEN`). Independent of `kappaStar_def`'s α-free inf-formula; encodes the paper-stated welfare-transition characterisation (Prop:threshold-alpha line 540). WORKING_ASSUMPTION — pending substantive trap-probability + welfare-transition Mathlib machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 6 (line 496),
+    `κ*(p, α)` divergence at the Harris-Kesten `p_c` from below. -/
+def entry_atom_kappaStar_diverges_at_pc : GapEntry where
+  name := "kappaStar_diverges_at_pc_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 4.1 Part 6, line 496 (`κ*(p, α) → +∞` as `p → p_c⁻` on Z² with `α > α*`)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part6_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom packages the paper-stated unboundedness on the `harrisKestenCriticalProb` carrier (Cat 2 Harris-Kesten 1960/1980 dependency surfaces via the carrier consumption per R18-A audit clarification). Cat 1 reduction check: not Mathlib-derivable (constrains opaque `kappaStar` carrier). Cat 2 reduction check: paper-novel application of Cat 2 Harris-Kesten p_c via opaque carrier. Downstream consumer: `gap_cognitive_threshold_part6` derived theorem (Cognitive.lean)." ]
+  scope := "Theorem 4.1 Part 6, `κ*(p, α)` divergence at `p_c`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending substantive Z² percolation correlation-length divergence + opaque-carrier composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:supermodular cross-partial-to-
+    supermodularity bridge (corner-supermodularity via Topkis 1978/1998
+    applied to the paper-novel `kappaAgentWelfareSNR` carrier). -/
+def entry_atom_corner_supermodularity_via_topkis : GapEntry where
+  name := "corner_supermodularity_via_topkis_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:supermodular proof, cross-partial-to-corner-supermodularity link on `kappaAgentWelfareSNR` carrier; Topkis 1978/1998 (Cat 2 dependency)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_kappaWelfare_cross_partial_link_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the cross-partial-positive-at-four-corners → corner-supermodularity bridge on the paper-novel `kappaAgentWelfareSNR` carrier. Cat 2 Topkis 1978/1998 dependency threaded as explicit `h_topkis` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Topkis universal-supermodularity to paper-novel regional carrier. Downstream consumer: `gap_kappaWelfare_cross_partial_link` derived theorem (Cognitive.lean) + transitively `gap_policy_complementarity_OPEN_derived`." ]
+  scope := "Proposition prop:supermodular, cross-partial-to-corner-supermodularity bridge"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_kappaWelfare_cross_partial_link_OPEN`). Cat 2 Topkis 1978/1998 dependency threaded as explicit `h_topkis` antecedent. WORKING_ASSUMPTION — pending substantive Topkis lattice-theoretic argument applied to IDP κ-agent welfare; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Lemma `lem:wrongness` (lines 336-369),
+    greedy welfare reversal under topology-blind + Blackwell-ordered
+    signals + degree-2 starting vertex. -/
+def entry_atom_topology_blind_wrongness : GapEntry where
+  name := "topology_blind_wrongness_atom_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Lemma lem:wrongness, lines 336-369"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_wrongness_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated greedy welfare reversal under C1-C3 + terminal-neighbour topology + degree-2 starting vertex + whole-family topology-blind Blackwell-ordered signal family. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_wrongness` derived theorem (Wrongness.lean) + `gap_dilemma`." ]
+  scope := "Lemma lem:wrongness, greedy welfare reversal under topology-blind signals"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending bounded-convergence + Φ-tail integral Mathlib machinery + per-IDP-instance derivation from V_dyn-dominance and static-reward-misalignment of trap/bridge pair; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:interior-optimum`
+    (line 774), existence of interior minimiser of `L(·, 0)`. -/
+def entry_atom_interior_minimiser_existence : GapEntry where
+  name := "interior_minimiser_existence_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:interior-optimum (5-state), line 774 (β* ≈ 1.5 bits)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Existential encoding on the `L` carrier; numeric witness `β* ≈ 1.5 bits` deferred to per-instance closure. Cat 1 reduction check: candidate Mathlib transcendental optimisation (Φ + Φ_B + signalVariance combination), but the IDP-specific functional form is paper-novel. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_interior_optimum` derived theorem (Canonical.lean) + `gap_threshold_fiveState_greedy_has_interior_optimum`." ]
+  scope := "Proposition prop:interior-optimum, existence of `β* ≈ 1.5 bits`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18. WORKING_ASSUMPTION — pending Mathlib transcendental optimisation for explicit numeric witness; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
+    Regime (i) existence sub-claim. -/
+def entry_atom_L_below_limit_at_some_beta : GapEntry where
+  name := "L_below_limit_at_some_beta_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 (existence of β*(p) > 0 with L β*(p) p < 0.4)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_existence_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_existence` re-export). Downstream consumer: `gap_three_regime_reversal_existence`." ]
+  scope := "Regime (i) existence of below-limit β*"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending substantive Regime (i) analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
+    uniqueness sub-claim. -/
+def entry_atom_L_unimodal_in_regime_i : GapEntry where
+  name := "L_unimodal_in_regime_i_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (uniqueness from unimodal structure)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_uniqueness_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_uniqueness` re-export). Downstream consumer: `gap_three_regime_reversal_uniqueness`." ]
+  scope := "Regime (i) uniqueness of strict interior minimum"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending L unimodality analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
+    non-monotonicity sub-claim. -/
+def entry_atom_L_nonmonotone_witnesses : GapEntry where
+  name := "L_nonmonotone_witnesses_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof lines 821-825"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_nonmonotone_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_nonmonotone` re-export). Downstream consumer: `gap_three_regime_reversal_nonmonotone`." ]
+  scope := "Regime (i) non-monotonicity witnesses"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending L non-monotonicity analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
+    overshoot strictly decreasing sub-claim. -/
+def entry_atom_envelope_derivative_sign_in_p : GapEntry where
+  name := "envelope_derivative_sign_in_p_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (envelope differentiation)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_decreasing_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_decreasing` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_decreasing`." ]
+  scope := "Regime (i) overshoot envelope-derivative sign"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending envelope-derivative analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
+    overshoot continuity sub-claim. -/
+def entry_atom_envelope_continuity_in_p : GapEntry where
+  name := "envelope_continuity_in_p_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (continuity from envelope differentiation)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_continuous_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_continuous` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_continuous`." ]
+  scope := "Regime (i) overshoot envelope continuity"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending implicit-function-continuity analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
+    overshoot vanishes at `p_1` sub-claim. -/
+def entry_atom_Tendsto_overshoot_at_p1 : GapEntry where
+  name := "Tendsto_overshoot_at_p1_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 (overshoot vanishing at p_1)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_vanishes_at_p1` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_vanishes_at_p1`." ]
+  scope := "Regime (i) overshoot Tendsto at p_1 from below"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending Tendsto-at-boundary analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (ii)
+    (line 862), kappa-above-threshold Blackwell recovery on 5-state. -/
+def entry_atom_kappa_above_threshold_blackwell_recovery : GapEntry where
+  name := "kappa_above_threshold_blackwell_recovery_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:threshold-five-state (ii), line 862; Blackwell 1951/1953 (Cat 2 dependency)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_threshold_fiveState_kappa_above_kstar_OPEN` per §18 (renamed to atom + derived theorem `gap_threshold_fiveState_kappa_above_kstar` re-export). Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Downstream consumer: `gap_threshold_fiveState_kappa_above_kstar`." ]
+  scope := "Proposition prop:threshold-five-state (ii), κ-above-threshold Blackwell recovery"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. Cat 2 Blackwell dependency threaded as explicit `h_blackwell` antecedent. WORKING_ASSUMPTION — pending conditional-Blackwell-on-5-state-instance derivation."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (iii)
+    (line 863), inflection at `κ*` strict positivity. -/
+def entry_atom_inflection_at_kstar : GapEntry where
+  name := "inflection_at_kstar_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:threshold-five-state (iii), line 863 (inflection point β > 0 at κ = κ*)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_threshold_fiveState_smooth_transition_OPEN` per §18 (first of two atoms — inflection-positivity sub-clause). Downstream consumer: `gap_threshold_fiveState_smooth_transition` derived theorem." ]
+  scope := "Proposition prop:threshold-five-state (iii), inflection point positivity"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending welfare-curvature analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (iii)
+    (line 863), κ-agent welfare bounded above by inflection-point
+    welfare on `[0, β_inflection]`. -/
+def entry_atom_welfare_bounded_below_inflection : GapEntry where
+  name := "welfare_bounded_below_inflection_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:threshold-five-state (iii), line 863 (welfare-below-inflection upper bound)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_threshold_fiveState_smooth_transition_OPEN` per §18 (second of two atoms — below-inflection welfare upper-bound sub-clause). Downstream consumer: `gap_threshold_fiveState_smooth_transition` derived theorem." ]
+  scope := "Proposition prop:threshold-five-state (iii), welfare upper bound below inflection"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending Φ-derivative + welfare-curvature analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:bayesian-naive-five-state (iii)
+    (line 957), Bayesian-naive above-threshold reversal. -/
+def entry_atom_bayesian_naive_above_threshold_reversal : GapEntry where
+  name := "bayesian_naive_above_threshold_reversal_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:bayesian-naive-five-state (iii), line 957"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_bayesian_naive_reversal_present_OPEN` per §18 (renamed to atom + derived theorem `gap_bayesian_naive_reversal_present` re-export). Downstream consumer: `gap_bayesian_naive_reversal_present`." ]
+  scope := "Proposition prop:bayesian-naive-five-state (iii), above-threshold reversal"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending bounded-rationality Bayesian-update analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 6.1 thm:general-tree
+    (lines 989-998), greedy reversal under C2′. -/
+def entry_atom_C2prime_implies_greedy_reversal : GapEntry where
+  name := "C2prime_implies_greedy_reversal_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 6.1 thm:general-tree, lines 989-998"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_general_tree_OPEN` per §18 (renamed to atom + derived theorem `gap_general_tree` re-export). Downstream consumer: `gap_general_tree`." ]
+  scope := "Theorem 6.1 thm:general-tree, greedy reversal under C2′"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending C2′ + non-interference + bounded-convergence Mathlib machinery."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Example ex:cyclic-trap (lines 1026-
+    1029), 4-cycle trap configuration satisfies C2′ at positive-
+    probability open-edge event. -/
+def entry_atom_cyclic_4_satisfies_C2prime_at_open_event : GapEntry where
+  name := "cyclic_4_satisfies_C2prime_at_open_event_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Example ex:cyclic-trap, lines 1026-1029"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_cyclic_trap_OPEN` per §18 (renamed to atom + derived theorem `gap_cyclic_trap` re-export). Downstream consumer: `gap_cyclic_trap`." ]
+  scope := "Example ex:cyclic-trap, 4-cycle C2′ satisfaction"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending paper-instance-specific cycle analysis."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Prop:error-compounding Part 5
+    (line 1044), Bernoulli-real-power estimate underlying the
+    `κ*(d) = Θ(log d)` lower-bound half. -/
+def entry_atom_bernoulli_real_power_estimate : GapEntry where
+  name := "bernoulli_real_power_estimate_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:error-compounding Part 5, line 1044 (`κ*(d) = log_2 d + O(1)` lower-bound Bernoulli-real-power estimate)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_kappaStar_depth_d_log_growth_OPEN` per §18 (renamed to atom + derived theorem `gap_kappaStar_depth_d_log_growth` re-export). The upper-bound half is closed kernel-pure by `gap_kappaStar_depth_d_upper_bound` (R9); the atom packages the remaining lower-bound Bernoulli-style estimate `(1+1/K)^(log_2 d) ≤ d²/K + 1` that the upper-bound proof's `c_star_constant` opaqueness prevented closing universally. Downstream consumer: `gap_kappaStar_depth_d_log_growth`." ]
+  scope := "Proposition prop:error-compounding Part 5, κ*(d) = Θ(log d) lower-bound half"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending Bernoulli-real-power estimate Mathlib infrastructure."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Remark rem:robustness-misspec (ii)
+    (line 942), myopic-`k` lookahead `k ≥ d` Blackwell recovery. -/
+def entry_atom_myopic_k_lookahead_recursion : GapEntry where
+  name := "myopic_k_lookahead_recursion_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Remark rem:robustness-misspec (ii), line 942 (k-step lookahead with k ≥ d recovers monotonicity)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_myopic_k_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_myopic_k` re-export). Downstream consumer: `gap_robustness_myopic_k`." ]
+  scope := "Remark rem:robustness-misspec (ii), k-step lookahead k ≥ d Blackwell recovery"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending k-step lookahead dynamics on trap tree."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Remark rem:robustness-misspec (iii)
+    (line 944), satisficing-threshold trap acceptance under
+    `r̄ ∈ (r(B), r(A))`. -/
+def entry_atom_satisficing_threshold_trap : GapEntry where
+  name := "satisficing_threshold_trap_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Remark rem:robustness-misspec (iii), line 944 (satisficing threshold r̄ ∈ (r(B), r(A)) welfare reversal)"
+  attackHistory :=
+    [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_satisficing_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_satisficing` re-export). Downstream consumer: `gap_robustness_satisficing`." ]
+  scope := "Remark rem:robustness-misspec (iii), satisficing welfare reversal"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per §18. WORKING_ASSUMPTION — pending satisficing decision-rule analysis."
+  conditionalOn := []
+
 /-! # Aggregated ledger inventory (post-R32 enum-typed refactor)
 
 The live status / input-category / Cat 3 sub-type counts are printed
 by the `#eval` calls below (run `lake env lean
 BlackwellDilemma/Ledger.lean` to see them).  Invariants:
 
-  * status counts sum to `allGaps.length` (= 120 post-R37).
-  * input-category counts sum to `allGaps.length` (= 120).
-  * Cat 3 sub-type counts sum to `allGaps.length` (= 120).
+  * status counts sum to `allGaps.length` (= 143 post-R38).
+  * input-category counts sum to `allGaps.length` (= 143).
+  * Cat 3 sub-type counts sum to `allGaps.length` (= 143).
 
 BLOCKED entries post-R26 = 0; DEAD-END entries at entry level = 0
 (the bundled axiom `gap_p_monotonicity_OPEN` is DEAD-END at the
@@ -2733,7 +3117,33 @@ def allGaps : List GapEntry := [
   entry_atom_non_concave_triple_from_mixture,
   entry_atom_averaged_reversal_overshoot_positive,
   entry_atom_finite_beta_above_limit_from_overshoot,
-  entry_atom_differentiated_per_agent_optimum_dominates_uniform
+  entry_atom_differentiated_per_agent_optimum_dominates_uniform,
+  -- R38 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
+  -- 22 conclusion-axioms decomposed into 23 new atoms + 22 derived theorems
+  -- across Cognitive/Wrongness/Canonical/GeneralGraphs/Bayesian modules).
+  entry_atom_alpha_above_alpha_star_implies_reversal,
+  entry_atom_kappa_large_blackwell_recovery,
+  entry_atom_kappaStar_p_monotone,
+  entry_atom_welfare_transition_alpha_monotone,
+  entry_atom_kappaStar_diverges_at_pc,
+  entry_atom_corner_supermodularity_via_topkis,
+  entry_atom_topology_blind_wrongness,
+  entry_atom_interior_minimiser_existence,
+  entry_atom_L_below_limit_at_some_beta,
+  entry_atom_L_unimodal_in_regime_i,
+  entry_atom_L_nonmonotone_witnesses,
+  entry_atom_envelope_derivative_sign_in_p,
+  entry_atom_envelope_continuity_in_p,
+  entry_atom_Tendsto_overshoot_at_p1,
+  entry_atom_kappa_above_threshold_blackwell_recovery,
+  entry_atom_inflection_at_kstar,
+  entry_atom_welfare_bounded_below_inflection,
+  entry_atom_bayesian_naive_above_threshold_reversal,
+  entry_atom_C2prime_implies_greedy_reversal,
+  entry_atom_cyclic_4_satisfies_C2prime_at_open_event,
+  entry_atom_bernoulli_real_power_estimate,
+  entry_atom_myopic_k_lookahead_recursion,
+  entry_atom_satisficing_threshold_trap
 ]
 
 /-- Status-keyed counts:

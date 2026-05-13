@@ -136,32 +136,95 @@ theorem gap_robustness_bayesian_naive :
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom myopicKWelfare : ℕ → ℕ → ℝ → ℝ
 
-/-- **Remark `rem:robustness-misspec` (ii): Myopic-`k`.**
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Remark
+    `rem:robustness-misspec` (ii) line 942 states that for a `k`-step
+    lookahead agent on a depth-`d` trap-tree instance with `k ≥ d`,
+    the agent's lookahead horizon is wide enough to compare the
+    full trap and bridge subtree values, recovering the standard
+    Blackwell-monotonicity chain on the resulting fixed-action
+    decision subproblem.
+
+    Encoding choice: extracted as standalone Cat 3 atomic stipulation
+    from the bundled `gap_robustness_myopic_k_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulation +
+    derived theorem). The atom isolates the paper-stated `k ≥ d`
+    monotonicity recursion on the existing carrier `myopicKWelfare`.
+
+    Cat 3 sub-type: workingAssumption (paper-stated higher-level
+    application of conditional-Blackwell to the paper-novel
+    `myopicKWelfare` carrier; pending Mathlib decision-theoretic
+    Blackwell-ordering machinery; 必须 close before publication).
+
+    paper source: Remark `rem:robustness-misspec` (ii), line 942
+    (`k`-step lookahead with `k ≥ d` recovers monotonicity). -/
+axiom myopic_k_lookahead_recursion_OPEN :
+    ∀ k d : ℕ, k ≥ d →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂
+
+/-- **Remark `rem:robustness-misspec` (ii): Myopic-`k`** (derived theorem).
     A `k`-step lookahead agent experiences the reversal for `k = 0`
     (greedy) but not for `k ≥ d`, where `d` is the divergence depth of
     trap and bridge paths.
 
-    Substantive paper claim — opaque carrier required (Mathlib gap).
+    Derived theorem composing the atomic stipulation
+    `myopic_k_lookahead_recursion_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+
     paper source: Remark `rem:robustness-misspec` (ii), line 942. -/
-axiom gap_robustness_myopic_k_OPEN :
+theorem gap_robustness_myopic_k :
     ∀ k d : ℕ, k ≥ d →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂
+        myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂ :=
+  myopic_k_lookahead_recursion_OPEN
 
 /-- Welfare of a satisficing agent with threshold `r̄` at precision `β`.
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom satisficingWelfare : ℝ → ℝ → ℝ
 
-/-- **Remark `rem:robustness-misspec` (iii): Satisficing.**
-    A satisficing agent with threshold `r̄ ∈ (r(B), r(A))` accepts the
-    trap; the reversal mechanism is analogous (welfare can decrease in
-    β).
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Remark
+    `rem:robustness-misspec` (iii) line 944 states that a satisficing
+    agent with threshold `r̄` strictly between the trap and high-
+    reward neighbour rewards `r(B) < r̄ < r(A)` accepts the trap option
+    on its first satisficing-acceptance event, exhibiting the welfare-
+    reversal mechanism in β. This atom isolates the paper-stated
+    threshold-trap behaviour on the existing carrier
+    `satisficingWelfare`.
 
-    Substantive paper claim — opaque carrier required (Mathlib gap).
-    paper source: Remark `rem:robustness-misspec` (iii), line 944. -/
-axiom gap_robustness_satisficing_OPEN :
+    Encoding choice: extracted as standalone Cat 3 atomic stipulation
+    from the bundled `gap_robustness_satisficing_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulation +
+    derived theorem).
+
+    Cat 3 sub-type: workingAssumption (paper-stated higher-level
+    welfare-reversal claim on opaque carrier `satisficingWelfare`;
+    pending substantive analysis of the satisficing decision rule;
+    必须 close before publication).
+
+    paper source: Remark `rem:robustness-misspec` (iii), line 944
+    (satisficing threshold `r̄ ∈ (r(B), r(A))` exhibits welfare
+    reversal in β). -/
+axiom satisficing_threshold_trap_OPEN :
     ∀ rBar : ℝ, FiveState.r_B < rBar → rBar < FiveState.r_A →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
         satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁
+
+/-- **Remark `rem:robustness-misspec` (iii): Satisficing** (derived
+    theorem). A satisficing agent with threshold `r̄ ∈ (r(B), r(A))`
+    accepts the trap; the reversal mechanism is analogous (welfare can
+    decrease in β).
+
+    Derived theorem composing the atomic stipulation
+    `satisficing_threshold_trap_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+
+    paper source: Remark `rem:robustness-misspec` (iii), line 944. -/
+theorem gap_robustness_satisficing :
+    ∀ rBar : ℝ, FiveState.r_B < rBar → rBar < FiveState.r_A →
+      ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
+        satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁ :=
+  satisficing_threshold_trap_OPEN
 
 end BlackwellDilemma

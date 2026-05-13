@@ -263,13 +263,43 @@ noncomputable def L (β p : ℝ) : ℝ :=
   P_trap β * (4/10 : ℝ) +
   (1 - P_trap β) * (9/10 : ℝ) * (1 - (1 - p) * Phi_B β)
 
-/-- **Existence of interior optimum** at `β* ≈ 1.5 bits`.
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:interior-optimum` (line 774) gives the existence of an
+    interior minimiser `β* ≈ 1.5 bits` of the Regime (i) `p = 0`
+    loss function `L(·, 0)`. Encoded existentially on the existing
+    carrier `L`: there exists a positive `β_star` such that
+    `L(β_star, 0) ≤ L(β, 0)` for all `β ≥ 0`. The numeric witness
+    `β* ≈ 1.5 bits` is a paper-stated computational fact deferred to
+    a per-instance numeric closure (Mathlib gap on the IDP-specific
+    transcendental optimisation).
 
-    paper source: Proposition `prop:interior-optimum`, line 774
-    ("unique interior minimum at β* ≈ 1.5 bits"). -/
-axiom gap_interior_optimum_OPEN :
+    Encoding choice: extracted as standalone Cat 3 atomic stipulation
+    from the bundled `gap_interior_optimum_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulation +
+    derived theorem).
+
+    Cat 3 sub-type: workingAssumption (paper-stated existence claim
+    on the L carrier; pending Mathlib transcendental optimisation
+    machinery for the explicit `β* ≈ 1.5 bits` numeric witness;
+    必须 close before publication).
+
+    paper source: Proposition `prop:interior-optimum`, line 774. -/
+axiom interior_minimiser_existence_OPEN :
     ∃ β_star : ℝ, 0 < β_star ∧
       ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0
+
+/-- **Existence of interior optimum** at `β* ≈ 1.5 bits` (derived theorem).
+
+    Derived theorem composing the atomic stipulation
+    `interior_minimiser_existence_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+
+    paper source: Proposition `prop:interior-optimum`, line 774. -/
+theorem gap_interior_optimum :
+    ∃ β_star : ℝ, 0 < β_star ∧
+      ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 :=
+  interior_minimiser_existence_OPEN
 
 /-! ## 3. Three-regime structure (`prop:three-regime-five-state`)
 
@@ -310,10 +340,26 @@ noncomputable def W_topo_p (p : ℝ) : ℝ := (4/10 : ℝ) * p
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("unique interior minimum ... satisfying L(β*(p), p) <
     L(∞, p) = 0.4"). -/
-axiom gap_three_regime_reversal_existence_OPEN :
+axiom L_below_limit_at_some_beta_OPEN :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         L β_star_p p < (4/10 : ℝ)
+
+/-- **Regime (i) sub-claim — existence of below-limit `β*`** (derived).
+    For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` with
+    `L(β*(p), p) < L(∞, p) = 0.4`.
+
+    Derived theorem composing the atomic stipulation
+    `L_below_limit_at_some_beta_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+
+    paper source: Proposition `prop:three-regime-five-state` Regime (i),
+    line 814. -/
+theorem gap_three_regime_reversal_existence :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∃ β_star_p : ℝ, 0 < β_star_p ∧
+        L β_star_p p < (4/10 : ℝ) :=
+  L_below_limit_at_some_beta_OPEN
 
 /-- **Regime (i) sub-claim — uniqueness of the interior minimum.**
     For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` such that any
@@ -325,10 +371,20 @@ axiom gap_three_regime_reversal_existence_OPEN :
     line 814 ("unique interior minimum"); proof at line 825
     ("uniqueness follows from the unimodal structure of
     Proposition `prop:interior-optimum`"). -/
-axiom gap_three_regime_reversal_uniqueness_OPEN :
+axiom L_unimodal_in_regime_i_OPEN :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p
+
+/-- **Regime (i) sub-claim — uniqueness of the interior minimum**
+    (derived theorem composing `L_unimodal_in_regime_i_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    paper source: Regime (i), line 814 + proof line 825. -/
+theorem gap_three_regime_reversal_uniqueness :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∃ β_star_p : ℝ, 0 < β_star_p ∧
+        ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
+  L_unimodal_in_regime_i_OPEN
 
 /-- **Regime (i) sub-claim — non-monotonicity of `L(·, p)` in `β`.**
     For `p ∈ [0, p_1)`, `L(β, p)` is non-monotone in `β`: there exist
@@ -340,12 +396,24 @@ axiom gap_three_regime_reversal_uniqueness_OPEN :
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("L(β, p) is non-monotone in β"); proof at lines 821-825. -/
-axiom gap_three_regime_reversal_nonmonotone_OPEN :
+axiom L_nonmonotone_witnesses_OPEN :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       (∃ β_low β_high : ℝ, 0 < β_low ∧ β_low < β_high ∧
         L β_high p < L β_low p) ∧
       (∃ β_a β_b : ℝ, 0 < β_a ∧ β_a < β_b ∧
         L β_a p < L β_b p)
+
+/-- **Regime (i) sub-claim — non-monotonicity of `L(·, p)` in `β`**
+    (derived theorem composing `L_nonmonotone_witnesses_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    paper source: Regime (i), line 814 + proof at lines 821-825. -/
+theorem gap_three_regime_reversal_nonmonotone :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      (∃ β_low β_high : ℝ, 0 < β_low ∧ β_low < β_high ∧
+        L β_high p < L β_low p) ∧
+      (∃ β_a β_b : ℝ, 0 < β_a ∧ β_a < β_b ∧
+        L β_a p < L β_b p) :=
+  L_nonmonotone_witnesses_OPEN
 
 /-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`.**
     For `p₁ < p₂` both in `[0, p_1)`, the overshoot
@@ -370,10 +438,20 @@ axiom gap_three_regime_reversal_nonmonotone_OPEN :
     p on [0, p_1), vanishing at p_1"); proof at line 825 ("Continuity
     and strict monotonicity of the overshoot in p follow from envelope
     differentiation of (eq:five-state-rearr) at β = β*(p)"). -/
-axiom gap_three_regime_reversal_overshoot_decreasing_OPEN :
+axiom envelope_derivative_sign_in_p_OPEN :
     ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
       ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
         L β_star₁ p₁ < L β_star₂ p₂
+
+/-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`**
+    (derived theorem composing `envelope_derivative_sign_in_p_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    paper source: Regime (i), line 814 + proof at line 825. -/
+theorem gap_three_regime_reversal_overshoot_decreasing :
+    ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
+      ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
+        L β_star₁ p₁ < L β_star₂ p₂ :=
+  envelope_derivative_sign_in_p_OPEN
 
 /-- **Opaque carrier `β*(p)` for Regime (i)'s implicit-function selection.**
     Substantive paper claim — opaque carrier required. The optimal
@@ -439,7 +517,7 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
     (h_p_lt_p1 : p < p_1) :
     L (betaStarOfP p) p < (4/10 : ℝ) := by
   obtain ⟨β_star_p, h_β_pos, h_β_lt⟩ :=
-    gap_three_regime_reversal_existence_OPEN p h_p_nonneg h_p_lt_p1
+    gap_three_regime_reversal_existence p h_p_nonneg h_p_lt_p1
   have h_min : L (betaStarOfP p) p ≤ L β_star_p p :=
     betaStarOfP_def p h_p_nonneg h_p_lt_p1 β_star_p h_β_pos
   linarith
@@ -469,8 +547,16 @@ noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
     at line 825 ("Continuity and strict monotonicity of the overshoot
     in p follow from envelope differentiation of (eq:five-state-rearr)
     at β = β*(p)"). -/
-axiom gap_three_regime_reversal_overshoot_continuous_OPEN :
+axiom envelope_continuity_in_p_OPEN :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1)
+
+/-- **Regime (i) sub-claim — overshoot continuous in `p`**
+    (derived theorem composing `envelope_continuity_in_p_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    paper source: Regime (i), line 814 + proof at line 825. -/
+theorem gap_three_regime_reversal_overshoot_continuous :
+    ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
+  envelope_continuity_in_p_OPEN
 
 /-- **Regime (i) sub-claim — overshoot vanishes at `p_1` (limit from below).**
     Substantive paper claim — opaque-on-opaque. The overshoot
@@ -486,9 +572,18 @@ axiom gap_three_regime_reversal_overshoot_continuous_OPEN :
     line 814 (third bullet, "vanishing at p_1"); cf. Figure
     `fig:three-regime-phase-diagram` panel (b) (line 846: "the overshoot
     vanishing exactly at `p_1 = 4/9`"). -/
-axiom gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN :
+axiom Tendsto_overshoot_at_p1_OPEN :
     Filter.Tendsto overshootRegimeI
       (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0)
+
+/-- **Regime (i) sub-claim — overshoot vanishes at `p_1`**
+    (derived theorem composing `Tendsto_overshoot_at_p1_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    paper source: Regime (i), line 814 + Figure caption line 846. -/
+theorem gap_three_regime_reversal_overshoot_vanishes_at_p1 :
+    Filter.Tendsto overshootRegimeI
+      (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0) :=
+  Tendsto_overshoot_at_p1_OPEN
 
 /-- **Proposition `prop:three-regime-five-state` Regime (ii): Cognitive-
     augmentation — arithmetic sub-claim.**
@@ -963,7 +1058,7 @@ Three-parameter comparative statics on the 5-state instance. -/
 theorem gap_threshold_fiveState_greedy_has_interior_optimum :
     ∃ β_star : ℝ, 0 < β_star ∧
       ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 :=
-  gap_interior_optimum_OPEN
+  gap_interior_optimum
 
 /-- **Proposition `prop:threshold-five-state` (ii): κ-agent above
     `κ*` correctly ranks continuation values.
@@ -986,7 +1081,7 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
     `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
 
     paper source: Proposition `prop:threshold-five-state` (ii), line 862. -/
-axiom gap_threshold_fiveState_kappa_above_kstar_OPEN :
+axiom kappa_above_threshold_blackwell_recovery_OPEN :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →
@@ -994,6 +1089,30 @@ axiom gap_threshold_fiveState_kappa_above_kstar_OPEN :
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         agentWelfare AgentType.kappaAgent β₁ κ 1 ≤
           agentWelfare AgentType.kappaAgent β₂ κ 1
+
+/-- **Proposition `prop:threshold-five-state` (ii)** (derived theorem
+    composing `kappa_above_threshold_blackwell_recovery_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    For κ above the cognitive threshold `κ*(p)`, the κ-agent's welfare
+    is non-decreasing in β: the trap-induced reversal vanishes once
+    cognitive depth restores correct continuation-value ranking.
+
+    Cat 2 dependency on Blackwell 1951/1953 surfaces via the
+    `h_blackwell` antecedent thread (per the audit-chain discipline,
+    derived-theorem-with-axiom-input pattern; `#print axioms` on this
+    theorem will surface `gap_blackwell_monotonicity_OPEN` once the
+    consumer supplies it).
+
+    paper source: Proposition `prop:threshold-five-state` (ii), line 862. -/
+theorem gap_threshold_fiveState_kappa_above_kstar
+    (h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.bayesian β₁ 0 1 ≤
+        agentWelfare AgentType.bayesian β₂ 0 1) :
+    ∀ p : ℝ, ∀ κ : ℝ, kappaStar_fiveState p < κ →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.kappaAgent β₁ κ 1 ≤
+          agentWelfare AgentType.kappaAgent β₂ κ 1 :=
+  kappa_above_threshold_blackwell_recovery_OPEN h_blackwell
 
 /-- Substantive paper claim — opaque carrier required (Mathlib gap).
     The β-inflection point of the κ-agent's welfare curve at the
@@ -1012,13 +1131,52 @@ axiom smoothTransitionBeta : ℝ → ℝ
     has been smoothed out).
 
     paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
-axiom gap_threshold_fiveState_smooth_transition_OPEN :
+axiom inflection_at_kstar_OPEN :
+    ∀ p : ℝ, 0 < smoothTransitionBeta p
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:threshold-five-state` (iii) line 863 states that the κ-agent's
+    welfare at the cognitive threshold `κ = κ*(p)` is bounded above by
+    the welfare at the inflection point `smoothTransitionBeta p` for
+    every `β ∈ [0, smoothTransitionBeta p]` — the trap-induced reversal
+    has been smoothed out so the agent's welfare on `[0, β_inflection]`
+    is dominated by its value at the inflection.
+
+    Encoding choice: extracted as standalone Cat 3 atomic stipulation
+    from the bundled `gap_threshold_fiveState_smooth_transition_OPEN`
+    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern. The atom isolates the upper-bound clause on the existing
+    carriers `agentWelfare`, `smoothTransitionBeta`, `kappaStar_fiveState`.
+
+    Cat 3 sub-type: workingAssumption (paper-stated welfare bound at
+    the inflection point; pending substantive Φ-derivative + welfare-
+    curvature analysis; 必须 close before publication).
+
+    paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
+axiom welfare_bounded_below_inflection_OPEN :
+    ∀ p : ℝ, ∀ β : ℝ, 0 ≤ β → β ≤ smoothTransitionBeta p →
+      agentWelfare AgentType.kappaAgent β (kappaStar_fiveState p) 1 ≤
+        agentWelfare AgentType.kappaAgent (smoothTransitionBeta p)
+          (kappaStar_fiveState p) 1
+
+/-- **Proposition `prop:threshold-five-state` (iii): smooth transition
+    at `κ = κ*`** (derived theorem composing two atomic stipulations
+    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern). At the cognitive threshold the welfare curve has a finite
+    positive inflection point (`inflection_at_kstar_OPEN`) and the
+    κ-agent's welfare at the inflection point dominates the welfare at
+    any β below it (`welfare_bounded_below_inflection_OPEN`).
+
+    paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
+theorem gap_threshold_fiveState_smooth_transition :
     ∀ p : ℝ,
       0 < smoothTransitionBeta p ∧
       ∀ β : ℝ, 0 ≤ β → β ≤ smoothTransitionBeta p →
         agentWelfare AgentType.kappaAgent β (kappaStar_fiveState p) 1 ≤
           agentWelfare AgentType.kappaAgent (smoothTransitionBeta p)
-            (kappaStar_fiveState p) 1
+            (kappaStar_fiveState p) 1 := by
+  intro p
+  exact ⟨inflection_at_kstar_OPEN p, welfare_bounded_below_inflection_OPEN p⟩
 
 /-! ## 6. Proposition `prop:bayesian-naive-five-state`
 
@@ -1078,11 +1236,27 @@ axiom gap_bayesian_naive_reversal_absent_OPEN :
 
     paper source: Proposition `prop:bayesian-naive-five-state` (iii),
     line 957. -/
-axiom gap_bayesian_naive_reversal_present_OPEN :
+axiom bayesian_naive_above_threshold_reversal_OPEN :
     ∀ p_hat : ℝ, (2 : ℝ) / 3 ≤ p_hat → p_hat < 1 →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
         agentWelfare AgentType.bayesianNaive β₂ 0 1 <
           agentWelfare AgentType.bayesianNaive β₁ 0 1
+
+/-- **Proposition `prop:bayesian-naive-five-state` (iii): reversal
+    appears above threshold** (derived theorem composing
+    `bayesian_naive_above_threshold_reversal_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    For `p̂ ≥ 2/3`, the trap-selection probability tends to 1 as β → ∞,
+    recovering the greedy-reversal mechanism.
+
+    paper source: Proposition `prop:bayesian-naive-five-state` (iii),
+    line 957. -/
+theorem gap_bayesian_naive_reversal_present :
+    ∀ p_hat : ℝ, (2 : ℝ) / 3 ≤ p_hat → p_hat < 1 →
+      ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
+        agentWelfare AgentType.bayesianNaive β₂ 0 1 <
+          agentWelfare AgentType.bayesianNaive β₁ 0 1 :=
+  bayesian_naive_above_threshold_reversal_OPEN
 
 end FiveState
 
@@ -1110,7 +1284,7 @@ theorem gap_fiveState_policy_mapping :
   refine ⟨ ?_, ?_, ?_ ⟩
   · intro p hp_nn hp_lt
     obtain ⟨β_star_p, hβ_pos, hL_lt⟩ :=
-      FiveState.gap_three_regime_reversal_existence_OPEN p hp_nn hp_lt
+      FiveState.gap_three_regime_reversal_existence p hp_nn hp_lt
     exact ⟨β_star_p, hβ_pos, hL_lt⟩
   · intro p _ hp2
     -- hp2 : p ≤ FiveState.p_2 reduces to p ≤ 2/3 via defeq

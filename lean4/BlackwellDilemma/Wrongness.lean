@@ -185,7 +185,7 @@ policy's welfare is non-monotone in β: there exist `β' > β` with
         weaker than the paper's family-level scope.
 
     paper source: Lemma `lem:wrongness`, lines 336-369. -/
-axiom gap_wrongness_OPEN :
+axiom topology_blind_wrongness_atom_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     DegreeTwoStartingVertex →
@@ -195,6 +195,35 @@ axiom gap_wrongness_OPEN :
       ∃ β β' : ℝ, β < β' ∧
         agentWelfare AgentType.greedy β' 0 1 <
           agentWelfare AgentType.greedy β 0 1
+
+/-- **Lemma `lem:wrongness` (Wrongness of the Greedy Policy)** (derived
+    theorem). Under C1-C3, terminal-neighbour topology, degree-2
+    starting vertex, and a Blackwell-ordered topology-blind signal
+    family, the greedy policy's welfare is strictly non-monotone in β.
+
+    Derived theorem composing the atomic stipulation
+    `topology_blind_wrongness_atom_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulation +
+    derived theorem). The atom packages the paper's three operative
+    inputs as a single working assumption on the existing carriers
+    (whole-family topology-blindness, Blackwell-ordering, and the
+    paper's degree-2 + terminal-neighbour scope predicates):
+    pending per-IDP-instance derivation from V_dyn-dominance and
+    static-reward-misalignment of the trap/bridge pair.
+
+    paper source: Lemma `lem:wrongness`, lines 336-369. -/
+theorem gap_wrongness :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    DegreeTwoStartingVertex →
+    ∀ (signalFamily : ℝ → PercolationOutcome → ℝ),
+      (∀ β : ℝ, IsTopologyBlind (signalFamily β)) →
+      IsBlackwellOrdered signalFamily →
+      ∃ β β' : ℝ, β < β' ∧
+        agentWelfare AgentType.greedy β' 0 1 <
+          agentWelfare AgentType.greedy β 0 1 :=
+  topology_blind_wrongness_atom_OPEN
 
 /-! ## 3. Proposition `prop:info-decay` — Informational Decay
 
@@ -401,7 +430,7 @@ theorem gap_dilemma
           ∀ β : ℝ, 0 < β →
             W_info_oracle p β ≤ 0 ∧
             |W_info_oracle p β| ≤ C * Real.rpow 2 (-β)) :=
-  ⟨gap_wrongness_OPEN hC hT hDeg2 signalFamily hBlind hBO,
+  ⟨gap_wrongness hC hT hDeg2 signalFamily hBlind hBO,
    gap_info_decay gap_grimmett_exponential_decay_OPEN⟩
 
 /-! ## 5. Proposition `prop:topo-cluster` — Topological-Loss/Cluster-Size

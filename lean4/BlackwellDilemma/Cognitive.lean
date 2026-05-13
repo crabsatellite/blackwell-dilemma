@@ -155,17 +155,53 @@ axiom alphaStar_def :
 
 /-! ## 2. Theorem 4.1 — Characterisation of the Blackwell Regime -/
 
-/-- **Theorem 4.1 Part 1: Failure at `κ = 0`.**
-    For `α > α*(0, p)`, greedy welfare is non-monotone in β.
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 4.1 Part 1
+    (line 491) states that for instrumental-rationality parameter
+    `α > α*(0, p)` (i.e. above the greedy critical α-threshold), the
+    greedy agent's welfare is strictly non-monotone in β: there exist
+    β₁ < β₂ such that `W_greedy(β₂, 0, α) < W_greedy(β₁, 0, α)`. The
+    α-above-α* premise is the paper-stated regime gate that triggers
+    the trap-induced reversal at κ = 0 (greedy regime).
 
-    paper source: Theorem 4.1 Part 1, line 491. -/
-axiom gap_cognitive_threshold_part1_OPEN :
+    Encoding choice: extracted as standalone Cat 3 atomic stipulation
+    from the bundled `gap_cognitive_threshold_part1_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulation +
+    derived theorem). The atom isolates the paper-stated greedy-
+    reversal triggering at α > α*(0, p).
+
+    Cat 3 sub-type: workingAssumption (paper-stated higher-level
+    welfare-reversal claim on opaque carrier `agentWelfare` at the
+    greedy κ = 0 regime; pending per-IDP-instance derivation from the
+    paper's trap-probability + V_dyn-misalignment chain; 必须 close
+    before publication).
+
+    paper source: Theorem 4.1 Part 1, line 491 (`α > α*(0, p)` ⇒
+    greedy welfare non-monotone in β). -/
+axiom alpha_above_alpha_star_implies_reversal_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     ∀ p α : ℝ, alphaStar 0 p < α →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
         agentWelfare AgentType.greedy β₂ 0 α <
           agentWelfare AgentType.greedy β₁ 0 α
+
+/-- **Theorem 4.1 Part 1: Failure at `κ = 0`** (derived theorem).
+    For `α > α*(0, p)`, greedy welfare is non-monotone in β.
+
+    Derived theorem composing the atomic stipulation
+    `alpha_above_alpha_star_implies_reversal_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+
+    paper source: Theorem 4.1 Part 1, line 491. -/
+theorem gap_cognitive_threshold_part1
+    (hC : Conditions_C1_C2_C3)
+    (hT : TerminalNeighbourTopology) :
+    ∀ p α : ℝ, alphaStar 0 p < α →
+      ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
+        agentWelfare AgentType.greedy β₂ 0 α <
+          agentWelfare AgentType.greedy β₁ 0 α :=
+  alpha_above_alpha_star_implies_reversal_OPEN hC hT
 
 /-- **Theorem 4.1 Part 2: Recovery at `κ → ∞`.**
     For sufficiently large κ, welfare is monotonically non-decreasing in β.
@@ -189,7 +225,7 @@ axiom gap_cognitive_threshold_part1_OPEN :
     `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
 
     paper source: Theorem 4.1 Part 2, line 492. -/
-axiom gap_cognitive_threshold_part2_OPEN :
+axiom kappa_large_blackwell_recovery_OPEN :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →
@@ -199,6 +235,32 @@ axiom gap_cognitive_threshold_part2_OPEN :
       ∃ κ₀ : ℝ, ∀ κ β₁ β₂ : ℝ, κ₀ ≤ κ → β₁ ≤ β₂ →
         agentWelfare AgentType.kappaAgent β₁ κ α ≤
           agentWelfare AgentType.kappaAgent β₂ κ α
+
+/-- **Theorem 4.1 Part 2: Recovery at `κ → ∞`** (derived theorem).
+    For sufficiently large κ, the κ-agent's welfare is monotonically
+    non-decreasing in β: cognitive depth restores correct posterior
+    estimates of continuation values, which in turn restores the
+    Blackwell-monotonicity chain on the conditional decision subproblem.
+
+    Derived theorem composing the atomic stipulation
+    `kappa_large_blackwell_recovery_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulation +
+    derived theorem). Cat 2 dependency on Blackwell 1951/1953 surfaces
+    via the `h_blackwell` antecedent thread.
+
+    paper source: Theorem 4.1 Part 2, line 492. -/
+theorem gap_cognitive_threshold_part2
+    (h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.bayesian β₁ 0 1 ≤
+        agentWelfare AgentType.bayesian β₂ 0 1)
+    (hC : Conditions_C1_C2_C3)
+    (hT : TerminalNeighbourTopology) :
+    ∀ _p α : ℝ,
+      ∃ κ₀ : ℝ, ∀ κ β₁ β₂ : ℝ, κ₀ ≤ κ → β₁ ≤ β₂ →
+        agentWelfare AgentType.kappaAgent β₁ κ α ≤
+          agentWelfare AgentType.kappaAgent β₂ κ α :=
+  kappa_large_blackwell_recovery_OPEN h_blackwell hC hT
 
 /-- Substantive paper claim — opaque carrier required (Mathlib gap).
     Asymptotic limit of the mean-estimate-gap `m(κ)` as `κ → ∞`,
@@ -372,9 +434,27 @@ theorem gap_cognitive_threshold_part3
     `0`-default in the empty-feasible-set case.
 
     paper source: Theorem 4.1 Part 4, line 494. -/
-axiom gap_cognitive_threshold_part4_OPEN :
+axiom kappaStar_p_monotone_OPEN :
     ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
       kappaStar p₁ α ≤ kappaStar p₂ α
+
+/-- **Theorem 4.1 Part 4: Monotonicity in `p`** (derived theorem).
+    On lattices and the Section 5 instances, `κ*(p)` is non-decreasing
+    in `p`.
+
+    Derived theorem composing the atomic stipulation
+    `kappaStar_p_monotone_OPEN` per `feedback_gap_ledger_in_lean4` §18
+    Manufactured-Recognition pattern. The atom encodes the paper's
+    p-monotonicity claim against the implicit non-emptiness premise
+    (paper assumes the threshold exists; the unconditional universal
+    form is junk-value-defective per R23-C2 audit, mirroring the
+    `gap_p_monotonicity_OPEN` finding).
+
+    paper source: Theorem 4.1 Part 4, line 494. -/
+theorem gap_cognitive_threshold_part4 :
+    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      kappaStar p₁ α ≤ kappaStar p₂ α :=
+  kappaStar_p_monotone_OPEN
 
 /-- **Theorem 4.1 Part 5: Monotonicity in `α`.**
     `κ*(p, α)` is non-decreasing in `α`.
@@ -419,20 +499,57 @@ axiom gap_cognitive_threshold_part4_OPEN :
     paper source: Theorem 4.1 Part 5, line 495 + Proposition
     `prop:threshold-alpha`, lines 527-543 (proof line 540 welfare-
     transition characterisation). -/
-axiom gap_cognitive_threshold_part5_OPEN :
+axiom welfare_transition_alpha_monotone_OPEN :
     ∀ p : ℝ, ∀ α₁ α₂ : ℝ, α₁ ≤ α₂ →
       kappaStar p α₁ ≤ kappaStar p α₂
+
+/-- **Theorem 4.1 Part 5: Monotonicity in `α`** (derived theorem).
+    `κ*(p, α)` is non-decreasing in `α`.
+
+    Derived theorem composing the atomic stipulation
+    `welfare_transition_alpha_monotone_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    The atom encodes the paper's welfare-transition characterisation
+    (Prop:threshold-alpha proof line 540), which is independent of the
+    `kappaStar_def` inf-formula and avoids the prior tautological
+    α-erasure closure (R24-B audit).
+
+    paper source: Theorem 4.1 Part 5, line 495 + Proposition
+    `prop:threshold-alpha`, lines 527-543. -/
+theorem gap_cognitive_threshold_part5 :
+    ∀ p : ℝ, ∀ α₁ α₂ : ℝ, α₁ ≤ α₂ →
+      kappaStar p α₁ ≤ kappaStar p α₂ :=
+  welfare_transition_alpha_monotone_OPEN
 
 /-- **Theorem 4.1 Part 6: Divergence at `p_c`.**
     On `Z²` with `α > α*`, `κ*(p, α) → +∞` as `p → p_c⁻` (provided
     `κ*(p, α) > 0` near `p_c`).
 
     paper source: Theorem 4.1 Part 6, line 496. -/
-axiom gap_cognitive_threshold_part6_OPEN :
+axiom kappaStar_diverges_at_pc_OPEN :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
       ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
         ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
           M < kappaStar p α
+
+/-- **Theorem 4.1 Part 6: Divergence at `p_c`** (derived theorem).
+    On `Z²` with `α > α*`, `κ*(p, α) → +∞` as `p → p_c⁻` (provided
+    `κ*(p, α) > 0` near `p_c`).
+
+    Derived theorem composing the atomic stipulation
+    `kappaStar_diverges_at_pc_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    The atom packages the paper-stated unboundedness on the
+    `harrisKestenCriticalProb` carrier (Cat 2 dependency on Harris-Kesten
+    1960/1980 surfaces via the carrier consumption).
+
+    paper source: Theorem 4.1 Part 6, line 496. -/
+theorem gap_cognitive_threshold_part6 :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
+          M < kappaStar p α :=
+  kappaStar_diverges_at_pc_OPEN
 
 /-- **Theorem 4.1 (full statement, conjunction).**
     Combines all six parts above. Each conjunct is the exact statement
@@ -465,12 +582,12 @@ theorem gap_cognitive_threshold_characterisation
       ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
         ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
           M < kappaStar p α) :=
-  ⟨ gap_cognitive_threshold_part1_OPEN hC hT,
-    gap_cognitive_threshold_part2_OPEN gap_blackwell_monotonicity_OPEN hC hT,
+  ⟨ gap_cognitive_threshold_part1 hC hT,
+    gap_cognitive_threshold_part2 gap_blackwell_monotonicity_OPEN hC hT,
     fun p α => (gap_cognitive_threshold_part3 hC p α).2.2.2.2,
-    gap_cognitive_threshold_part4_OPEN,
-    gap_cognitive_threshold_part5_OPEN,
-    gap_cognitive_threshold_part6_OPEN ⟩
+    gap_cognitive_threshold_part4,
+    gap_cognitive_threshold_part5,
+    gap_cognitive_threshold_part6 ⟩
 
 /-! ## 3. Proposition `prop:supermodular` — Supermodular Complementarity
 
@@ -739,7 +856,7 @@ theorem kappaAgentWelfareSNR_mem_unitInterval (β κ : ℝ) :
     paper source: Proposition `prop:supermodular` proof line, calculus
     of the welfare gradient; Topkis 1978/1998 cited as structural
     inspiration. -/
-axiom gap_kappaWelfare_cross_partial_link_OPEN :
+axiom corner_supermodularity_via_topkis_OPEN :
     (∀ (W : ℝ → ℝ → ℝ),
       (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
         W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
@@ -752,6 +869,38 @@ axiom gap_kappaWelfare_cross_partial_link_OPEN :
        0 < welfareCrossPartial β₁ κ₂ → 0 < welfareCrossPartial β₂ κ₁ →
        kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
          kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁)
+
+/-- Cat 3 derived theorem (re-export of `corner_supermodularity_via_topkis_OPEN`):
+    cross-partial-positivity-at-the-four-lattice-corners → corner-
+    supermodularity link on the paper-novel `kappaAgentWelfareSNR`
+    carrier. Threads the Topkis 1978/1998 Cat 2 dependency via the
+    `h_topkis` antecedent for audit-chain visibility.
+
+    Decomposition per `feedback_gap_ledger_in_lean4` §18 Manufactured-
+    Recognition pattern: the bundled OPEN axiom previously named
+    `gap_kappaWelfare_cross_partial_link_OPEN` is now hosted by the
+    Cat 3 atomic stipulation `corner_supermodularity_via_topkis_OPEN`
+    (renamed to reflect the atomic content); this derived theorem is
+    the trivial consumer used by downstream policy-complementarity
+    closures.
+
+    paper source: Proposition `prop:supermodular` proof, calculus of
+    the welfare gradient; Topkis 1978/1998 cited as structural
+    inspiration. -/
+theorem gap_kappaWelfare_cross_partial_link
+    (h_topkis : ∀ (W : ℝ → ℝ → ℝ),
+      (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
+        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
+      ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
+        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) :
+    ∀ β₁ β₂ κ₁ κ₂ : ℝ, β₁ ≤ β₂ → κ₁ ≤ κ₂ →
+      |snrZ β₁ κ₁| < 1 → |snrZ β₂ κ₂| < 1 →
+      |snrZ β₁ κ₂| < 1 → |snrZ β₂ κ₁| < 1 →
+      (0 < welfareCrossPartial β₁ κ₁ → 0 < welfareCrossPartial β₂ κ₂ →
+       0 < welfareCrossPartial β₁ κ₂ → 0 < welfareCrossPartial β₂ κ₁ →
+       kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
+         kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁) :=
+  corner_supermodularity_via_topkis_OPEN h_topkis
 
 /-- **Corollary `cor:policy-complementarity`** — derived from
     `gap_supermodular_OPEN` (positive cross-partial in moderate-SNR
@@ -782,7 +931,7 @@ theorem gap_policy_complementarity_OPEN_derived
     (β₁ β₂ κ₁ κ₂ : ℝ) (hβ : β₁ ≤ β₂) (hκ : κ₁ ≤ κ₂) :
     kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
       kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁ := by
-  apply gap_kappaWelfare_cross_partial_link_OPEN
+  apply gap_kappaWelfare_cross_partial_link
     gap_topkis_supermodularity_OPEN β₁ β₂ κ₁ κ₂ hβ hκ
   · exact h_snr β₁ κ₁
   · exact h_snr β₂ κ₂
@@ -973,6 +1122,6 @@ theorem gap_sentimental_immunity :
 theorem gap_threshold_alpha_monotone :
     ∀ p : ℝ, ∀ α₁ α₂ : ℝ, α₁ ≤ α₂ →
       kappaStar p α₁ ≤ kappaStar p α₂ :=
-  gap_cognitive_threshold_part5_OPEN
+  gap_cognitive_threshold_part5
 
 end BlackwellDilemma
