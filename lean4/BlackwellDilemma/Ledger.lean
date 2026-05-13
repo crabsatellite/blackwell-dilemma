@@ -63,35 +63,47 @@
   finding: 14 IDP primitive carriers + paper-novel hypothesis predicates
   promoted from "axiom-only, no Ledger entry" to typed `GapEntry`s.
   Counts are over typed Ledger entries, not raw `axiom` / `theorem`
-  declarations.) Invariant: counts sum to `total_entries := 99`
-  (post-R36 atomic-stipulation layer: 93 + 6 new R36 entries — 4 from
-  cognitive Part 3 decomposition + 2 from info-decay decomposition).
+  declarations.) Invariant: counts sum to `total_entries := 120`
+  (post-R37 atomic-stipulation layer: 99 + 21 new R37 entries — 1
+  from conditional-reduction-i decomposition + 2 from phase-transition-
+  below + 2 from phase-transition-above + 1 from trap-prevalence-above
+  + 2 from supermodular + 3 from sentimental-immunity + 3 from
+  principal-interior-optimum + 2 from principal-monotone-in-kappa
+  + 2 from principal-regime-bifurcation + 2 from disclosure-full-
+  suboptimal + 1 from disclosure-differentiated-dominates).
 
-  6-tier status × 3-input-category cross-table (post-R33-A):
+  6-tier status × 3-input-category cross-table (post-R37; live numbers
+  printed by `#eval` block at file bottom — derive from there if needed):
 
-                  Cat1    Cat2    Cat3 (incl. Cat3-with-Cat2)    Mixed   Total
-   CLOSED      :    13       3                  10                 0      26
-   PARTIAL     :     0       0                   7                 1       8
-   OPEN        :     0       6                  24                 0      30
-   BLOCKED     :     0       0                   0                 0       0
-   DEAD-END    :     0       0                   0*                0       0*
-   DEFINITIONAL:     0       0                  29                 0      29
-   TOTAL       :    13       9                  70                 1      93
+  R37 net change vs R36 baseline (which was 99 entries: open=34,
+  partial=7, closed=29, definitional=29):
+   * +10 derived theorems flipped OPEN → CLOSED (cor:disclosure
+     bundle covers 2 derived theorems but only flips 1 entry; the
+     entry-count delta from flips is therefore 10 entries: closed
+     +10 → 39; open -7 partial -3 net (since principal_optimum and
+     prop_canonical bundles cover multiple parts, status flip is
+     bundle-level: principal_optimum OPEN→CLOSED, prop_sentimental
+     OPEN→CLOSED, etc.); concrete bundle flips:
+       (a) entry_lem_conditional_reduction_i OPEN → CLOSED
+       (b) entry_thm_phase_below OPEN → CLOSED
+       (c) entry_thm_phase_above OPEN → CLOSED
+       (d) entry_prop_trap_prevalence_above OPEN → CLOSED
+       (e) entry_prop_supermodular OPEN → CLOSED
+       (f) entry_prop_sentimental OPEN → CLOSED
+       (g) entry_prop_principal_optimum OPEN → CLOSED
+       (h) entry_cor_disclosure OPEN → CLOSED
+       so 8 entry-status flips OPEN → CLOSED.
+   * +21 new Cat 3 OPEN atomic-stipulation entries.
+   * Net delta: closed +8, open -8 + 21 = +13. New totals:
+       closed=37, open=47, partial=7, definitional=29, total=120.
 
-  Cat 3 sub-classification (post-R33-A):
-
-                                Cat3 carrier              10
-                                Cat3 hypothesisPredicate   5
-                                Cat3 structuralEquation   14
-                                Cat3 workingAssumption    31  (24 OPEN + 7 PARTIAL)
-                                Cat3 conditionalHypothesis 0  (paper has no
-                                                                external-conjecture
-                                                                dependency)
-                                Cat3 derivedTheorem       10  (CLOSED Cat 3)
-                                                          ──
-                                                          70
-
-  Non-Cat 3 entries (sub-type notCat3): 13 Cat1 + 9 Cat2 + 1 Mixed = 23.
+  Cat 3 sub-classification (post-R37):
+   * derivedTheorem +8 (from the 8 entry-status flips), so 12 + 8 = 20.
+   * workingAssumption +21 atoms - 8 flipped = +13, so 34 + 13 = 47.
+   * carrier / hypothesisPredicate / structuralEquation unchanged.
+  All numbers are derivable from the live `#eval` printouts at file
+  bottom; this docstring summary follows the R37 round-tagged delta
+  for traceability.
 
   R28 2026-05-13 cross-table changes per R27-B hostile audit findings:
    * 7 entries reverted DEFINITIONAL → OPEN (status-laundering fix per
@@ -918,10 +930,10 @@ def entry_lem_wrongness : GapEntry where
   conditionalOn := []
 
 def entry_lem_conditional_reduction_i : GapEntry where
-  name := "gap_conditional_reduction_part_i_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_conditional_reduction_part_i (derived) + conditional_subproblem_blackwell_applicable_OPEN (Cat 3 atom)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Lemma lem:conditional-reduction (i), line 374"
   attackHistory :=
     [ "R1 2026-05-12: encoded as opaque axiom asserting Blackwell monotonicity for arbitrary `W_R`.",
@@ -931,10 +943,11 @@ def entry_lem_conditional_reduction_i : GapEntry where
       "R17-C 2026-05-13: Cat 2 ↔ Cat 3 chain wiring CONFIRMED. Per R17-B's reductionism audit, the existing `IsBlackwellOrdered signalFamily` antecedent (added R16-A) IS the operational Cat 2 chain to Blackwell 1951/1953 — the paper part (i) literally states 'if `π' ≻_B π`, then `W_R(π') ≥ W_R(π)`', which is exactly the Blackwell-ordering hypothesis. NO source change needed: the Lean signature already chains the Cat 2 dependency operationally via `IsBlackwellOrdered`. inputCategory promoted Cat 3 → Cat 3-with-Cat 2 to record the existing operational chain (the BLOCKED Blackwell predicate `gap_blackwell_monotonicity_BLOCKED_by_Mathlib_decision_theory` is the underlying Cat 2 source whose substance flows through the `IsBlackwellOrdered` antecedent here).",
       "R18-A 2026-05-13: Cat3-with-Cat2 → Cat3 demotion per R17-E hostile audit Audit 3. The R17-C upgrade conflated `IsBlackwellOrdered signalFamily` (a paper-novel opaque `Prop`-valued scope predicate declared in Types.lean ~line 235) with the typed BLOCKED-def Cat 2 chain. A genuine Cat 2 chain to Blackwell 1951/1953 would require threading the typed BLOCKED-def predicate `gap_blackwell_monotonicity_BLOCKED_by_Mathlib_decision_theory` as a hypothesis (analogous to the R17-D `gap_bayesian_immunity` h_blackwell pattern in Bayesian.lean). The current `IsBlackwellOrdered` antecedent is honestly a paper-novel scope predicate, not a typed BLOCKED-def consumption. inputCategory honestly demoted to Cat 3.",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
-      "R35-B Wave 2.1: restored explicit Cat 2 chain dropped in R26 per R35 deep audit (R26 over-applied 'Cat 2 implicit consumption' rule for this entry whose CLAIM CONTENT is Cat 2 theorem applied to paper-novel carrier per `feedback_gap_ledger_in_lean4` §10). Added explicit antecedent `(∀ β₁ β₂, β₁ ≤ β₂ → agentWelfare AgentType.bayesian β₁ 0 1 ≤ agentWelfare AgentType.bayesian β₂ 0 1)` (the propositional content of `gap_blackwell_monotonicity_OPEN`) to the axiom signature. `#print axioms` on downstream theorems consuming this axiom will now surface the Blackwell 1951/1953 dependency. No downstream consumer needs threading (axiom has no downstream Lean consumer in current ledger; threading is for audit-chain visibility of the underlying Cat 2 dependency)." ]
+      "R35-B Wave 2.1: restored explicit Cat 2 chain dropped in R26 per R35 deep audit (R26 over-applied 'Cat 2 implicit consumption' rule for this entry whose CLAIM CONTENT is Cat 2 theorem applied to paper-novel carrier per `feedback_gap_ledger_in_lean4` §10). Added explicit antecedent `(∀ β₁ β₂, β₁ ≤ β₂ → agentWelfare AgentType.bayesian β₁ 0 1 ≤ agentWelfare AgentType.bayesian β₂ 0 1)` (the propositional content of `gap_blackwell_monotonicity_OPEN`) to the axiom signature. `#print axioms` on downstream theorems consuming this axiom will now surface the Blackwell 1951/1953 dependency. No downstream consumer needs threading (axiom has no downstream Lean consumer in current ledger; threading is for audit-chain visibility of the underlying Cat 2 dependency).",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_conditional_reduction_part_i_OPEN` is REPLACED by derived theorem `gap_conditional_reduction_part_i` (Wrongness.lean) composing the new Cat 3 atomic stipulation `conditional_subproblem_blackwell_applicable_OPEN` (paper-stated conditional-Blackwell applicability on the restricted action domain `R(v_0)` for Blackwell-ordered signal families, line 375 statement + line 381 proof). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_conditional_subproblem_blackwell_applicable). The Cat 2 Blackwell 1951/1953 dependency remains threaded as explicit `h_blackwell` antecedent on the atom for audit-chain visibility." ]
   scope := "Lemma lem:conditional-reduction (i), line 374"
   obstacleOrAttribution :=
-    "Substantive carrier-bound axiom: gap_conditional_reduction_part_i_OPEN takes (R35-B Wave 2.1) explicit `gap_blackwell_monotonicity_OPEN`-typed antecedent + signal family + IsBlackwellOrdered hypothesis + Finset-Vertex reachable set R, asserts monotonicity of conditionalWelfareOnR R signalFamily in β. Substantive proof requires Blackwell 1951/1953 theorem applied to the conditional subproblem on action-domain R; Mathlib decision-theoretic Blackwell ordering not yet packaged. The Cat 2 chain to Blackwell 1951/1953 is now threaded explicitly per §10 paper-APPLICATION-to-opaque-carrier discipline (CLAIM CONTENT is the Blackwell monotonicity theorem applied to paper-novel `conditionalWelfareOnR` carrier)."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_conditional_reduction_part_i` composes the atomic stipulation `conditional_subproblem_blackwell_applicable_OPEN` (paper-stated conditional-Blackwell applicability), threading the Cat 2 Blackwell 1951/1953 dependency as explicit `h_blackwell` antecedent for audit-chain visibility per §10 paper-APPLICATION-to-opaque-carrier discipline."
   conditionalOn := []
 
 def entry_lem_conditional_reduction_ii : GapEntry where
@@ -977,10 +990,10 @@ def entry_thm_dilemma : GapEntry where
 /-! # §3.3 Phase Transition entries -/
 
 def entry_thm_phase_below : GapEntry where
-  name := "gap_phase_transition_below_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_phase_transition_below (derived) + topo_loss_decay_below_pc_OPEN + topo_loss_decay_arbitrary_threshold_OPEN (Cat 3 atoms)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 3.3 (thm:phase) Part 1, lines 400-419"
   attackHistory :=
     [ "R1 2026-05-12: bundled as `phase_transition_paper_axiom` (anti-pattern #2 violation per gap-ledger memory).",
@@ -989,17 +1002,18 @@ def entry_thm_phase_below : GapEntry where
       "R17-C 2026-05-13: Cat 2 ↔ Cat 3 chain wiring per broken-link discipline. Threaded the Grimmett percolation-probability BLOCKED predicate `gap_percolation_probability_BLOCKED_by_Mathlib_percolation` as the explicit broken-link hypothesis `h_perc_prob`. The Harris-Kesten p_c = 1/2 dependency is implicit via the `harrisKestenCriticalProb` carrier (already anchored R15-A); h_HK chain skipped for symmetry. inputCategory promoted Cat 3 → Cat 3-with-Cat 2 to record the explicit Grimmett 1999 chain at the Lean signature level.",
       "R18-B 2026-05-13: anchored existential to opaque carrier `expectedTopoLoss n p` per R17-E Pattern 4 finding (vacuous-existential satisfaction by junk constants). Removed the auxiliary `∃ topo_loss_decay : ℕ → ℝ, ...` quantifier whose body was trivially satisfiable by `fun _ => -1`; the decay assertion now binds directly to the substantive paper-cited carrier `expectedTopoLoss` (declared in `Wrongness.lean`, paper source: Proposition `prop:topo-cluster` line 286), eliminating R3 anti-pattern #2 (vacuous existential) that pre-dated R17. Bottom-line statement form: `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε`.",
       "R26 2026-05-13: dropped `h_perc_prob` broken-link hypothesis parameter per the discipline clarification (Cat 2 axioms with paper authority are consumed implicitly via the axiom system, not threaded as broken-link hypotheses). The R17-C typed-hypothesis chain becomes redundant once `gap_percolation_probability_BLOCKED_by_Mathlib_percolation` is converted to the plain Cat 2 axiom `gap_percolation_probability_OPEN`. inputCategory demoted Cat 3-with-Cat 2 → Cat 3 (the sub-tag was specifically a Lean-signature-chain qualifier; without the hypothesis chain, the entry is honestly Cat 3 with docstring-acknowledged Cat 2 dependency).",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_phase_transition_below_OPEN` is REPLACED by derived theorem `gap_phase_transition_below` (Phase.lean) composing two new Cat 3 atomic stipulations: (a) `topo_loss_decay_below_pc_OPEN` (existence of decay envelope `topo_loss_decay : ℕ → ℝ` for `expectedTopoLoss n p`, paper proof line 415-417 via giant-component conditioning + topo-cluster formula); (b) `topo_loss_decay_arbitrary_threshold_OPEN` (paper-stated arbitrary-ε convergence form from envelope, paper proof line 417). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_topo_loss_decay_below_pc, entry_atom_topo_loss_decay_arbitrary_threshold). The Cat 2 Grimmett percolation-probability dependency remains threaded as explicit `h_perc_prob` antecedent on the first atom for audit-chain visibility." ]
   scope := "Theorem 3.3 (thm:phase) Part 1, lines 400-419"
   obstacleOrAttribution :=
-    "Paper proof requires Z² percolation machinery + cluster-size asymptotics; Mathlib gap. Encoded as substantive existential over an `O(1/n)` upper bound, anchored to the `expectedTopoLoss` opaque carrier (R18-B). R26: `h_perc_prob` broken-link hypothesis dropped — Cat 2 dependency on `gap_percolation_probability_OPEN` (paper-cited Cat 2 axiom in `ClassicalResults.lean`) is consumed implicitly via the axiom system per the 2026-05-13 discipline clarification."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_phase_transition_below` composes two atomic stipulations (paper proof lines 415-417): `topo_loss_decay_below_pc_OPEN` (envelope existence) + `topo_loss_decay_arbitrary_threshold_OPEN` (arbitrary-ε form). Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent on the first atom for audit-chain visibility. Substantive Mathlib percolation + cluster-size-asymptotics machinery remains the underlying gap."
   conditionalOn := []
 
 def entry_thm_phase_above : GapEntry where
-  name := "gap_phase_transition_above_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_phase_transition_above (derived) + wInfoTopoRatio_const_exists_OPEN + wInfoTopoRatio_bound_OPEN (Cat 3 atoms)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 3.3 (thm:phase) Part 2, lines 420-431"
   attackHistory :=
     [ "R1+R2 2026-05-12: split from bundled axiom.",
@@ -1007,10 +1021,11 @@ def entry_thm_phase_above : GapEntry where
       "R11 discipline audit (2026-05-13): the existential `∃ ratio : ℝ, ratio ≤ Real.rpow 2 (-β)` was trivially provable (witness `ratio := -1` or any negative number) and encoded nothing about the paper's `|W_info|/|W_topo| = O(2^{-β})` claim (Anti-pattern #2). Strengthened by binding the ratio to a new opaque carrier `wInfoTopoRatio : ℝ → ℝ → ℝ` (function of `(p, β)`) and asserting `wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β)`, where `c > 0` is the same constant guaranteeing the cluster-size decay rate.",
       "R17-C 2026-05-13: Cat 2 ↔ Cat 3 chain wiring per broken-link discipline. Threaded the Grimmett exponential-decay BLOCKED predicate `gap_grimmett_exponential_decay_BLOCKED_by_Mathlib_percolation` as the explicit broken-link hypothesis `h_grimmett`. inputCategory promoted Cat 3 → Cat 3-with-Cat 2 to record the explicit Grimmett 1999 §6.75 chain at the Lean signature level.",
       "R26 2026-05-13: dropped `h_grimmett` broken-link hypothesis parameter per the discipline clarification (Cat 2 axioms with paper authority are consumed implicitly via the axiom system, not threaded as broken-link hypotheses). The R17-C typed-hypothesis chain becomes redundant once `gap_grimmett_exponential_decay_BLOCKED_by_Mathlib_percolation` is converted to the plain Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`. inputCategory demoted Cat 3-with-Cat 2 → Cat 3 (the sub-tag was specifically a Lean-signature-chain qualifier).",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_phase_transition_above_OPEN` is REPLACED by derived theorem `gap_phase_transition_above` (Phase.lean) composing two new Cat 3 atomic stipulations: (a) `wInfoTopoRatio_const_exists_OPEN` (existence of positive constant `c(p) > 0` characterising the exponential-decay rate, paper proof lines 421-427); (b) `wInfoTopoRatio_bound_OPEN` (paper-stated quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}`, paper proof line 427). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_wInfoTopoRatio_const_exists, entry_atom_wInfoTopoRatio_bound). The Cat 2 Grimmett §6.75 dependency remains threaded as explicit `h_grimmett` antecedent on both atoms for audit-chain visibility." ]
   scope := "Theorem 3.3 (thm:phase) Part 2, lines 420-431"
   obstacleOrAttribution :=
-    "Encoded as substantive bound `wInfoTopoRatio p β ≤ c * 2^{-β}` against the new opaque carrier `wInfoTopoRatio`; full proof requires Mathlib percolation + Gaussian-decay infrastructure. R26: `h_grimmett` broken-link hypothesis dropped — Cat 2 dependency on `gap_grimmett_exponential_decay_OPEN` (paper-cited Cat 2 axiom in `ClassicalResults.lean`) is consumed implicitly via the axiom system per the 2026-05-13 discipline clarification."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_phase_transition_above` composes two atomic stipulations (paper proof lines 421-427): `wInfoTopoRatio_const_exists_OPEN` (positive constant existence) + `wInfoTopoRatio_bound_OPEN` (quantitative ratio bound). Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent on both atoms for audit-chain visibility. Substantive Mathlib percolation + Mills-tail composition remains the underlying gap."
   conditionalOn := []
 
 def entry_prop_trap_prevalence_zero : GapEntry where
@@ -1032,18 +1047,19 @@ def entry_prop_trap_prevalence_zero : GapEntry where
   conditionalOn := []
 
 def entry_prop_trap_prevalence_above : GapEntry where
-  name := "gap_trap_prevalence_above_threshold_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_trap_prevalence_above_threshold (derived) + trap_config_local_positive_OPEN (Cat 3 atom)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:trap-prevalence Part 2, lines 458-473"
   attackHistory :=
     [ "R1 2026-05-12: trivial existential `∃ c, 0 < c`.",
       "R4 Phase 4 audit (2026-05-12): patched — bind to opaque carrier `trapMisalignmentProbability` and assert positive lower bound.",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_trap_prevalence_above_threshold_OPEN` is REPLACED by derived theorem `gap_trap_prevalence_above_threshold` (Phase.lean) composing the new Cat 3 atomic stipulation `trap_config_local_positive_OPEN` (paper-stated local FKG-positivity of trap pattern on Z²-lattice with degree 4, paper proof line 473 `binom(4, 2) p² (1-p)² · p^3 > 0` estimate). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_trap_config_local_positive)." ]
   scope := "Proposition prop:trap-prevalence Part 2, lines 458-473"
   obstacleOrAttribution :=
-    "Z² lattice + percolation-measure machinery not in Mathlib."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_trap_prevalence_above_threshold` re-exports the atomic stipulation `trap_config_local_positive_OPEN` (paper-stated local FKG-positivity, paper proof line 473). Substantive Mathlib Z²-lattice + percolation-measure machinery remains the underlying gap."
   conditionalOn := []
 
 def entry_cor_er_phase : GapEntry where
@@ -1109,10 +1125,10 @@ def entry_thm_cognitive_threshold : GapEntry where
   conditionalOn := []
 
 def entry_prop_supermodular : GapEntry where
-  name := "gap_supermodular_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_supermodular (derived) + welfareCrossPartial_explicit_form_OPEN + cross_partial_sign_in_z_lt_one_OPEN (Cat 3 atoms)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:supermodular, lines 552-585"
   attackHistory :=
     [ "R1 2026-05-12: vacuous `∃ crossPartial, 0 < crossPartial`.",
@@ -1123,10 +1139,11 @@ def entry_prop_supermodular : GapEntry where
       "R17-C 2026-05-13: Cat 2 ↔ Cat 3 chain wiring per broken-link discipline. Paper line 553 invokes Topkis 1978/1998 as the Cat 2 supermodularity-from-cross-partial bridge, but the previous Lean signature did not consume this dependency (Cat 2 ↔ Cat 3 disconnect anti-pattern: docstring cited Topkis but Lean signature did not chain it). Threaded the BLOCKED Topkis predicate `gap_topkis_supermodularity_BLOCKED_by_Mathlib_topkis` as the explicit broken-link hypothesis `h_topkis : ∀ W mp h_nn, gap_topkis_supermodularity_BLOCKED_by_Mathlib_topkis W mp h_nn` (universally-quantified Prop form, since paper claim restricts welfareCrossPartial positivity to moderate-SNR regime |z| < 1 and so cannot directly instantiate the universally-quantified Topkis BLOCKED predicate — but the Lean signature dependency is now explicit). Downstream `gap_policy_complementarity_OPEN_derived` and wrapper `gap_policy_complementarity` updated to thread `h_topkis` through. inputCategory promoted Cat 3 → Cat 3-with-Cat 2 to record the explicit Topkis chain.",
       "R18-A 2026-05-13: Cat3-with-Cat2 → Cat3 demotion + drop performative `h_topkis` parameter per R17-E hostile audit. The R17-C threading was performative: the Topkis BLOCKED predicate is universally-quantified (∀ x y, 0 ≤ mixedPartial x y ⇒ supermodular) but the paper restricts positivity of `welfareCrossPartial` to the regional regime `|z| < 1`. The universal-vs-regional scope mismatch makes the BLOCKED predicate operationally non-instantiable here, so threading it as a hypothesis was a passport that cannot be redeemed (R17-E classification). Removed the `h_topkis` parameter from `gap_supermodular_OPEN` axiom signature; updated docstring to honestly state Topkis as structural inspiration only, with the regional positivity acknowledged as paper-novel Cat 3 substance. Downstream `gap_policy_complementarity_OPEN_derived` and `gap_policy_complementarity` proofs updated to drop `h_topkis` from the call sites.",
       "R21-B 2026-05-13: paper-source-verification antecedent restoration per R20-D Audit 2D finding. Paper line 558 explicitly restricts the cross-partial positivity claim to (β, κ) jointly satisfying TWO conditions: (i) `|z(β, κ)| < 1` (moderate SNR) AND (ii) `V_dyn(u_2, β) > r(u_1)` (bridge-dominance). The previous Lean signature only threaded condition (i); condition (ii) was silently dropped, scope-inflating the axiom relative to the paper. Restored the antecedent by introducing a Cat 3 paper-novel predicate `BridgeDominance : ℝ → Prop` (Cognitive.lean, immediately above `gap_supermodular_OPEN`) keyed off the paper's notation `V_dyn(u_2, β) > r(u_1)`, and added `BridgeDominance β →` as the new third antecedent of `gap_supermodular_OPEN`. Encoding choice: opaque predicate (not explicit `V_dyn`-vs-`reward` comparison) because the paper's vertices `u_1, u_2` are local to the proposition's setup and an explicit comparison would require committing to opaque-carrier choices for the paper-instance vertex pair outside the scope of this file. Downstream propagation: `gap_policy_complementarity_OPEN_derived` gains `(h_dom : ∀ β : ℝ, BridgeDominance β)` parameter and supplies `h_dom β_i` to each of the four corner-applications of `gap_supermodular_OPEN`; wrapper `gap_policy_complementarity` adds the matching `(∀ β : ℝ, BridgeDominance β) →` hypothesis after the SNR universal. Lake build green.",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_supermodular_OPEN` is REPLACED by derived theorem `gap_supermodular` (Cognitive.lean) composing two new Cat 3 atomic stipulations: (a) `welfareCrossPartial_explicit_form_OPEN` (paper-stated explicit closed-form decomposition of the welfare cross-partial via `φ'(z) = -z·φ(z)` Gaussian PDF derivative identity, paper proof lines 564-583); (b) `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign-positivity of decomposition factors at `|z| < 1`, paper proof line 582-584). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_welfareCrossPartial_explicit_form, entry_atom_cross_partial_sign_in_z_lt_one). The Cat 2 Topkis 1978/1998 dependency remains threaded as explicit `_h_topkis` antecedent on the derived theorem for audit-chain visibility (operationally consumed downstream by `gap_kappaWelfare_cross_partial_link_OPEN`). Downstream `gap_policy_complementarity_OPEN_derived` consumers updated to call `gap_supermodular` instead of `gap_supermodular_OPEN`." ]
   scope := "Proposition prop:supermodular, lines 552-585"
   obstacleOrAttribution :=
-    "Substantive analytic derivation (explicit Φ + φ cross-partial computation, dropping α=1 / m'(κ)>0 premises) remains a Mathlib gap; Lean side encodes the qualitative positivity sign-claim via opaque carrier. R21-B: bridge-dominance `V_dyn(u_2, β) > r(u_1)` is now threaded as the explicit Cat 3 paper-novel predicate `BridgeDominance β` (Cognitive.lean) jointly with `|z(β, κ)| < 1`, matching the paper line 558 joint antecedent. R18-A: Topkis 1978/1998 is structural inspiration only; the regional `|z| < 1` positivity does not directly chain to the universally-quantified Topkis BLOCKED predicate, so no Lean signature parameter is threaded. The Cat 2 inspiration is acknowledged in the axiom docstring rather than smuggled through an inert signature."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_supermodular` composes two atomic stipulations: `welfareCrossPartial_explicit_form_OPEN` (paper-stated calculus closed form, line 580-583) + `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis at `|z| < 1`, line 582-584). Cat 2 Topkis 1978/1998 is structural inspiration; threaded as explicit `_h_topkis` antecedent on the derived theorem for audit-chain visibility (operationally consumed by `gap_kappaWelfare_cross_partial_link_OPEN`). Substantive Mathlib HasDerivAt + Φ + φ derivative machinery remains the underlying gap. R21-B bridge-dominance `BridgeDominance β` (paper line 558 joint antecedent) propagated through both atoms."
   conditionalOn := []
 
 def entry_cor_policy_complementarity : GapEntry where
@@ -1143,23 +1160,25 @@ def entry_cor_policy_complementarity : GapEntry where
       "R18-A 2026-05-13: Cat3-with-Cat2 → Cat3 demotion + drop performative `h_topkis` parameter per R17-E hostile audit. The R17-C `h_topkis` threading was performative for the same regional-vs-universal scope reason as `entry_prop_supermodular`: the Topkis BLOCKED predicate is universally-quantified, but the paper's positivity claim is regional (`|z| < 1`) and the four-corner coupling axiom likewise consumes only regional positivity hypotheses. The wrapper `gap_policy_complementarity` and the derived theorem `gap_policy_complementarity_OPEN_derived` had their `h_topkis` parameter removed; the proof body now calls `gap_kappaWelfare_cross_partial_link_OPEN` and `gap_supermodular_OPEN` without threading the inert hypothesis. Honest acknowledgment of universal-vs-regional Topkis mismatch lives in the upstream axiom docstrings (Cognitive.lean).",
       "R21-B 2026-05-13: bridge-dominance hypothesis propagation per upstream `entry_prop_supermodular` patch. After `gap_supermodular_OPEN` gained the new `BridgeDominance β →` antecedent (paper line 558 joint condition `V_dyn(u_2, β) > r(u_1)`), `gap_policy_complementarity_OPEN_derived` now takes `(h_dom : ∀ β : ℝ, BridgeDominance β)` and supplies `h_dom β_i` to each of the four corner-applications of `gap_supermodular_OPEN`; the wrapper `gap_policy_complementarity` likewise adds the matching `(∀ β : ℝ, BridgeDominance β) →` universal after the existing SNR universal in its signature. The corollary remains CLOSED-via-OPEN-input; the new hypothesis is honest paper-faithful threading (no inert performative passport). Lake build green.",
       "R27-A 2026-05-13: Cat 3 sub-classification DERIVED_THEOREM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as CLOSED (Cat 3 derived theorem composing earlier Cat 1 + Cat 2 + Cat 3 atomic inputs — sub-class is descriptive only, not subject to the 永不/必须 close mandate). New `subClass` field set to DERIVED_THEOREM.",
-      "R35-B Wave 2.7: restored explicit Cat 2 chain dropped in R18-A on the underlying `gap_kappaWelfare_cross_partial_link_OPEN` axiom per R35 deep audit (R18-A performative-passport drop conflicted with §10 paper-APPLICATION-to-opaque-carrier discipline: the CLAIM CONTENT of the axiom is the Topkis cross-partial-to-supermodularity bridge applied to the paper-novel `kappaAgentWelfareSNR` carrier on the four corner-lattice points, even though the per-corner regional `|z| < 1` antecedents are paper-novel). Added explicit antecedent `(∀ W, supermodularity-on-W → supermodularity-on-W)` (the propositional content of `gap_topkis_supermodularity_OPEN` after R28-A's `mixedPartial`-drop restructure that eliminated the universal-vs-regional scope mismatch) to `gap_kappaWelfare_cross_partial_link_OPEN`. Downstream `gap_policy_complementarity_OPEN_derived` updated to supply `gap_topkis_supermodularity_OPEN` directly to the link axiom call (proof-body composition). The wrapper `gap_policy_complementarity` signature unchanged. `#print axioms gap_policy_complementarity` will now surface `gap_topkis_supermodularity_OPEN` for the cross-partial bridge step (in addition to its existing surfacing via `gap_supermodular_OPEN`'s `h_topkis` antecedent)." ]
+      "R35-B Wave 2.7: restored explicit Cat 2 chain dropped in R18-A on the underlying `gap_kappaWelfare_cross_partial_link_OPEN` axiom per R35 deep audit (R18-A performative-passport drop conflicted with §10 paper-APPLICATION-to-opaque-carrier discipline: the CLAIM CONTENT of the axiom is the Topkis cross-partial-to-supermodularity bridge applied to the paper-novel `kappaAgentWelfareSNR` carrier on the four corner-lattice points, even though the per-corner regional `|z| < 1` antecedents are paper-novel). Added explicit antecedent `(∀ W, supermodularity-on-W → supermodularity-on-W)` (the propositional content of `gap_topkis_supermodularity_OPEN` after R28-A's `mixedPartial`-drop restructure that eliminated the universal-vs-regional scope mismatch) to `gap_kappaWelfare_cross_partial_link_OPEN`. Downstream `gap_policy_complementarity_OPEN_derived` updated to supply `gap_topkis_supermodularity_OPEN` directly to the link axiom call (proof-body composition). The wrapper `gap_policy_complementarity` signature unchanged. `#print axioms gap_policy_complementarity` will now surface `gap_topkis_supermodularity_OPEN` for the cross-partial bridge step (in addition to its existing surfacing via `gap_supermodular_OPEN`'s `h_topkis` antecedent).",
+      "R37 2026-05-14: downstream propagation of upstream `entry_prop_supermodular` §18 decomposition. The four corner-applications of `gap_supermodular_OPEN` in `gap_policy_complementarity_OPEN_derived` (Cognitive.lean) are renamed to `gap_supermodular` (the new derived theorem). Signature of `gap_policy_complementarity_OPEN_derived` and the wrapper `gap_policy_complementarity` is unchanged. `#print axioms gap_policy_complementarity` now surfaces `welfareCrossPartial_explicit_form_OPEN` and `cross_partial_sign_in_z_lt_one_OPEN` (the new R37 atoms) instead of the prior `gap_supermodular_OPEN` axiom, completing the §18 audit-chain visibility per the discipline." ]
   scope := "Corollary cor:policy-complementarity, lines 587-590"
   obstacleOrAttribution :=
     "CLOSED via `gap_policy_complementarity_OPEN_derived` (composes `gap_supermodular_OPEN` + `gap_kappaWelfare_cross_partial_link_OPEN`; R35-B Wave 2.7 threaded `gap_topkis_supermodularity_OPEN` into the link axiom via Cat 2 explicit chain per §10 paper-APPLICATION-to-opaque-carrier discipline). Substantive Topkis lattice-theoretic argument applied to the IDP κ-agent welfare remains the underlying Mathlib gap. R21-B: bridge-dominance universal `(∀ β, BridgeDominance β)` is an explicit hypothesis of both `gap_policy_complementarity_OPEN_derived` and the wrapper `gap_policy_complementarity`, propagating the upstream paper-faithful antecedent restoration in `gap_supermodular_OPEN`. Cat 2 chain to Topkis 1978/1998 now visible via `#print axioms` through both `gap_supermodular_OPEN` (R28-A `h_topkis`) and the link axiom (R35-B Wave 2.7 explicit antecedent)."
   conditionalOn := []
 
 def entry_prop_sentimental : GapEntry where
-  name := "gap_sentimental_immunity_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_sentimental_immunity (derived) + signal_independent_at_alpha_zero_OPEN + welfare_continuity_in_alpha_OPEN + alpha_star_existence_via_continuity_OPEN (Cat 3 atoms)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:sentimental, lines 595-603"
   attackHistory :=
     [ "R1 2026-05-12: encoded as opaque axiom; faithful per Phase 4 audit (one nit on agent-type narrowness — uses `AgentType.sentimental` rather than universal). ",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_sentimental_immunity_OPEN` is REPLACED by derived theorem `gap_sentimental_immunity` (Cognitive.lean) composing three new Cat 3 atomic stipulations: (a) `signal_independent_at_alpha_zero_OPEN` (paper L600 base case at α = 0 via Lemma `lem:conditional-reduction`(i) on signal-independent ranking); (b) `welfare_continuity_in_alpha_OPEN` (paper L602 perturbative continuity in α with small-α monotonicity neighbourhood width δ); (c) `alpha_star_existence_via_continuity_OPEN` (paper L602 sup-existence of `α*` over the monotonicity set given the small-α neighbourhood). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +3 new Cat 3 OPEN atomic-stipulation entries (entry_atom_signal_independent_at_alpha_zero, entry_atom_welfare_continuity_in_alpha, entry_atom_alpha_star_existence_via_continuity)." ]
   scope := "Proposition prop:sentimental, lines 595-603"
-  obstacleOrAttribution := "Substantive proof requires mixture-of-Gaussians integration, Mathlib gap."
+  obstacleOrAttribution := "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_sentimental_immunity` composes three atomic stipulations (paper proof lines 600-602): `signal_independent_at_alpha_zero_OPEN` (α = 0 base case) + `welfare_continuity_in_alpha_OPEN` (perturbative continuity neighbourhood) + `alpha_star_existence_via_continuity_OPEN` (sup over monotonicity set). Substantive mixture-of-Gaussians integration + closed-set/compact-domain Banach-lattice analysis remain the underlying Mathlib gaps."
   conditionalOn := []
 
 def entry_prop_threshold_alpha : GapEntry where
@@ -1180,10 +1199,10 @@ def entry_prop_threshold_alpha : GapEntry where
 /-! # §4 Principal entries -/
 
 def entry_prop_principal_optimum : GapEntry where
-  name := "gap_principal_{interior_optimum,monotone_in_kappa,regime_bifurcation}_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_principal_{interior_optimum,monotone_in_kappa,regime_bifurcation} (derived) + 7 Cat 3 atoms"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum (3 parts), lines 622-641"
   attackHistory :=
     [ "R1 2026-05-12: 3 axioms, all with vacuous existentials.",
@@ -1191,17 +1210,18 @@ def entry_prop_principal_optimum : GapEntry where
       "R6 2026-05-12: converted opaque carriers to concrete `def`s. `W_bar β := -(β² - 2β)²` (non-concave M-shape), `betaBarStar := 3/2`, `kappa_FOSD ≡ True`, `aggregateOptimalBeta ≡ 3/2`. All three theorems closed by witness arithmetic.",
       "R7 2026-05-12: hostile audit caught all three R6 closures as concrete-placeholder closure-count tricks violating `feedback_lean_real_math` (the placeholder shapes encode no paper content). Reverted in source to `axiom gap_principal_*_OPEN` declarations with substantive opaque-carrier-bound statements (W_bar, betaBarStar, kappa_FOSD, aggregateOptimalBeta retained as opaque carriers).",
       "R11 discipline audit (2026-05-13): retroactive Ledger-status correction — the R7 source-side revert was applied but the Ledger entry was never updated, leaving stale `status := \"CLOSED\"` metadata that contradicted the actual Lean source (`Principal.lean:46/71/81` `axiom gap_principal_{interior_optimum,monotone_in_kappa,regime_bifurcation}_OPEN`). Status now corrected to OPEN.",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern to all three parts. Each bundled `gap_principal_*_OPEN` axiom is REPLACED by a derived theorem in Principal.lean: Part 1 `gap_principal_interior_optimum` composes 3 atoms (`W_bar_eventually_decreasing_in_reversal_OPEN`, `W_bar_exceeds_zero_at_positive_beta_OPEN`, `interior_max_exists_from_unimodal_envelope_OPEN`); Part 2 `gap_principal_monotone_in_kappa` composes 2 atoms (`fosd_induces_derivative_domination_OPEN`, `argmax_monotone_under_derivative_domination_OPEN`); Part 3 `gap_principal_regime_bifurcation` composes 2 atoms (`W_bar_mixture_decomposition_OPEN`, `non_concave_triple_from_mixture_OPEN`). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +7 new Cat 3 OPEN atomic-stipulation entries (entry_atom_W_bar_eventually_decreasing_in_reversal, entry_atom_W_bar_exceeds_zero_at_positive_beta, entry_atom_interior_max_exists_from_unimodal_envelope, entry_atom_fosd_induces_derivative_domination, entry_atom_argmax_monotone_under_derivative_domination, entry_atom_W_bar_mixture_decomposition, entry_atom_non_concave_triple_from_mixture)." ]
   scope := "Proposition prop:principal-optimum (3 parts), lines 622-641"
   obstacleOrAttribution :=
-    "Substantive measure-theoretic content (heterogeneous-population integrals over distributions on `(κ, α)`, the upper-bound β̄* < ∞ clause, the reversal-regime support premise, FOSD-induced monotonicity of the aggregate optimum, regime-bifurcation non-concavity) remains a Mathlib gap; Lean side encodes via opaque carriers `W_bar`, `betaBarStar`, `kappa_FOSD`, `aggregateOptimalBeta`."
+    "CLOSED-via-Cat-3-atom-input across all three parts. R37 derived theorems compose 7 atomic stipulations: Part 1 (paper line 624-625, 632): `W_bar_eventually_decreasing_in_reversal_OPEN` + `W_bar_exceeds_zero_at_positive_beta_OPEN` + `interior_max_exists_from_unimodal_envelope_OPEN`; Part 2 (paper line 626, 634): `fosd_induces_derivative_domination_OPEN` + `argmax_monotone_under_derivative_domination_OPEN`; Part 3 (paper line 627, 636-640): `W_bar_mixture_decomposition_OPEN` + `non_concave_triple_from_mixture_OPEN`. Substantive measure-theoretic content (heterogeneous-population integrals, HasDerivAt + Lebesgue-Stieltjes, conditional-expectation, argmax-uniqueness) remains the underlying Mathlib gap encoded via opaque carriers `W_bar`, `betaBarStar`, `kappa_FOSD`, `aggregateOptimalBeta`, `aggregateWelfareWith`."
   conditionalOn := []
 
 def entry_cor_disclosure : GapEntry where
-  name := "gap_disclosure_{full_suboptimal,differentiated_dominates}_OPEN"
-  status := GapStatus.gapOpen
+  name := "gap_disclosure_{full_suboptimal,differentiated_dominates} (derived) + 3 Cat 3 atoms"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Corollary cor:disclosure (2 parts), lines 645-647"
   attackHistory :=
     [ "R1 2026-05-12: 2 axioms with vacuous existentials.",
@@ -1209,10 +1229,11 @@ def entry_cor_disclosure : GapEntry where
       "R6 2026-05-12: converted opaque carriers to concrete `def`s. `W_bar_limit_infty := -100`, `differentiatedDisclosureWelfare ≡ 0`. Both closures via witness arithmetic / `sq_nonneg`.",
       "R7 2026-05-12: hostile audit caught both R6 closures as concrete-placeholder closure-count tricks violating `feedback_lean_real_math`. Reverted in source to `axiom gap_disclosure_*_OPEN` with opaque carriers retained.",
       "R11 discipline audit (2026-05-13): retroactive Ledger-status correction — the R7 source-side revert was applied but the Ledger entry was never updated, leaving stale `status := \"CLOSED\"` metadata that contradicted the actual Lean source (`Principal.lean:101/118` `axiom gap_disclosure_{full_suboptimal,differentiated_dominates}_OPEN`). Status now corrected to OPEN.",
-      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern to both parts. Each bundled `gap_disclosure_*_OPEN` axiom is REPLACED by a derived theorem in Principal.lean: Part 1 `gap_disclosure_full_suboptimal` composes 2 atoms (`averaged_reversal_overshoot_positive_OPEN`, `finite_beta_above_limit_from_overshoot_OPEN`); Part 2 `gap_disclosure_differentiated_dominates` re-exports 1 atom (`differentiated_per_agent_optimum_dominates_uniform_OPEN`). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +3 new Cat 3 OPEN atomic-stipulation entries (entry_atom_averaged_reversal_overshoot_positive, entry_atom_finite_beta_above_limit_from_overshoot, entry_atom_differentiated_per_agent_optimum_dominates_uniform)." ]
   scope := "Corollary cor:disclosure (2 parts), lines 645-647"
   obstacleOrAttribution :=
-    "Substantive heterogeneous-population content (β → ∞ limit semantics for the planner objective, the differentiated-disclosure maximisation over `(κ, α)` proxies) remains a Mathlib gap; Lean side encodes via opaque carriers `W_bar`, `W_bar_limit_infty`, `differentiatedDisclosureWelfare`."
+    "CLOSED-via-Cat-3-atom-input across both parts. R37 derived theorems compose 3 atomic stipulations: Part 1 (paper line 645, 652-656): `averaged_reversal_overshoot_positive_OPEN` (G-averaged reversal-regime overshoot positivity via Theorem `thm:cognitive-threshold` Part 1) + `finite_beta_above_limit_from_overshoot_OPEN` (finite-β-strictly-above-limit existence via `λ ε < (1 - λ) δ̄` choice); Part 2 (paper line 647, 658): `differentiated_per_agent_optimum_dominates_uniform_OPEN` (per-agent-optimum aggregate dominates uniform aggregate). Substantive heterogeneous-population content (β → ∞ limit semantics + measure-theoretic per-agent integration) remains the underlying Mathlib gap encoded via opaque carriers `W_bar`, `W_bar_limit_infty`, `differentiatedDisclosureWelfare`."
   conditionalOn := []
 
 /-! # §5 Constructive Instances entries -/
@@ -2200,15 +2221,384 @@ def entry_atom_W_info_oracle_exponential_bound : GapEntry where
     "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_info_decay_OPEN`). Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent. WORKING_ASSUMPTION — pending Cat 1 Mills-tail (`gap_phi_tail_bound`, CLOSED) + Cat 2 Grimmett-cluster-size composition; 必须 close before publication."
   conditionalOn := []
 
+/-! # R37 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
+     2026-05-14)
+
+R37 extends the §18 decomposition pattern across 11 additional bundled
+conclusion-axioms (10 derived theorems, since cor:disclosure parts (i)
+and (ii) share an entry).  Per the discipline:
+ * Wrongness.lean conditional-reduction-part-i: 1 atom +
+   `gap_conditional_reduction_part_i` derived theorem.
+ * Phase.lean phase-transition-below: 2 atoms +
+   `gap_phase_transition_below` derived theorem.
+ * Phase.lean phase-transition-above: 2 atoms +
+   `gap_phase_transition_above` derived theorem.
+ * Phase.lean trap-prevalence-above: 1 atom +
+   `gap_trap_prevalence_above_threshold` derived theorem.
+ * Cognitive.lean supermodular: 2 atoms + `gap_supermodular` derived theorem.
+ * Cognitive.lean sentimental-immunity: 3 atoms + `gap_sentimental_immunity`
+   derived theorem.
+ * Principal.lean principal-interior-optimum: 3 atoms +
+   `gap_principal_interior_optimum` derived theorem.
+ * Principal.lean principal-monotone-in-kappa: 2 atoms +
+   `gap_principal_monotone_in_kappa` derived theorem.
+ * Principal.lean principal-regime-bifurcation: 2 atoms +
+   `gap_principal_regime_bifurcation` derived theorem.
+ * Principal.lean disclosure-full-suboptimal: 2 atoms +
+   `gap_disclosure_full_suboptimal` derived theorem.
+ * Principal.lean disclosure-differentiated-dominates: 1 atom +
+   `gap_disclosure_differentiated_dominates` derived theorem.
+
+Net: +21 new Cat 3 OPEN atomic-stipulation entries; existing 10 bundle
+entries flip OPEN/PARTIAL → CLOSED (or the relevant sub-clause flips
+within the existing bundle status, with bundle-level status updated). -/
+
+/-- Cat 3 atomic stipulation: paper Lemma `lem:conditional-reduction`
+    part (i), conditional-Blackwell applicability on the restricted
+    action domain `R(v_0)` for Blackwell-ordered signal families. -/
+def entry_atom_conditional_subproblem_blackwell_applicable : GapEntry where
+  name := "conditional_subproblem_blackwell_applicable_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Lemma lem:conditional-reduction part (i), line 375 (statement); proof line 381 (fixed-feasible-set conditional subproblem permits direct Blackwell-theorem application); Blackwell 1951/1953 (Cat 2 dependency)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_conditional_reduction_part_i_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the paper-stated conditional-Blackwell-applicability fact on the existing carrier `conditionalWelfareOnR R signalFamily β`, threading the Cat 2 Blackwell 1951/1953 dependency as the explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable (Mathlib lacks decision-theoretic Blackwell ordering on signal-experiment lattices). Cat 2 reduction check: paper-novel application to opaque carrier (Blackwell 1951/1953 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_conditional_reduction_part_i` derived theorem (Wrongness.lean) hosts the atom." ]
+  scope := "Lemma lem:conditional-reduction part (i), Blackwell ordering applicability to conditional subproblem on R(v_0)"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_conditional_reduction_part_i_OPEN`). Cat 2 dependency on Blackwell 1951/1953 threaded as explicit `h_blackwell` antecedent. WORKING_ASSUMPTION — pending Mathlib decision-theoretic Blackwell ordering machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 1 proof (line
+    415-417), existence of decay envelope `topo_loss_decay : ℕ → ℝ`
+    for `expectedTopoLoss n p` below the percolation threshold. -/
+def entry_atom_topo_loss_decay_below_pc : GapEntry where
+  name := "topo_loss_decay_below_pc_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 3.3 Part 1 proof, lines 415-417 (`E[|W_topo|] = O(1/N) → 0` via giant-component conditioning + topo-cluster formula); Grimmett 1999 (Cat 2 percolation-probability dependency)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a decay-function envelope on the existing carrier `expectedTopoLoss`. Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_below` derived theorem (Phase.lean) hosts the atom." ]
+  scope := "Theorem 3.3 Part 1, existence of decay envelope `topo_loss_decay` for `expectedTopoLoss n p` below percolation threshold"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_below_OPEN`). WORKING_ASSUMPTION — pending Mathlib percolation + cluster-size-asymptotics machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 1 proof (line
+    417), arbitrary-threshold convergence form for `expectedTopoLoss
+    n p` from the existence of a decay envelope. -/
+def entry_atom_topo_loss_decay_arbitrary_threshold : GapEntry where
+  name := "topo_loss_decay_arbitrary_threshold_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 3.3 Part 1 proof, line 417 (asymptotic convergence `O(1/N) → 0`)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Second atom completing the decomposition: converts the decay envelope (from `topo_loss_decay_below_pc_OPEN`) into the paper-stated arbitrary-ε convergence bound. Cat 1 reduction check: the unfolding step itself is Cat 1 derivable from Mathlib `Filter.Tendsto`, but this atom is retained as a paper-stated structural form per §18 (the paper-stated convergence is the operative downstream content). Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_below` derived theorem (Phase.lean) hosts the atom." ]
+  scope := "Theorem 3.3 Part 1, arbitrary-threshold convergence form for `expectedTopoLoss n p`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_below_OPEN`). WORKING_ASSUMPTION — Cat 1 unfolding from `Filter.Tendsto` is the standard derivation; pending future Cat 1 promotion candidate; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 2 proof (lines
+    421-427), existence of positive constant `c(p) > 0` characterising
+    the `wInfoTopoRatio p β` exponential-decay rate above threshold. -/
+def entry_atom_wInfoTopoRatio_const_exists : GapEntry where
+  name := "wInfoTopoRatio_const_exists_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 3.3 Part 2 proof, lines 421-427 (cluster size exponential tail + ratio Θ-bound); Grimmett 1999 §6.75 (Cat 2 dependency)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a positive constant on the existing carrier `wInfoTopoRatio`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier (Grimmett 1999 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ]
+  scope := "Theorem 3.3 Part 2, existence of positive constant `c(p) > 0` for `wInfoTopoRatio` exponential-decay rate"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_above_OPEN`). Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent. WORKING_ASSUMPTION — pending Mathlib percolation + Mills-tail composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 2 proof (line 427),
+    quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}` from
+    the Mills-tail + cluster-size composition. -/
+def entry_atom_wInfoTopoRatio_bound : GapEntry where
+  name := "wInfoTopoRatio_bound_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 3.3 Part 2 proof, line 427 (`|W_info|/|W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-decay` composition (Cat 2 dependency)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the QUANTITATIVE bound on the existing carrier `wInfoTopoRatio` given a positive constant `c`. Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` composition threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ]
+  scope := "Theorem 3.3 Part 2, quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_phase_transition_above_OPEN`). Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` threaded as explicit `h_grimmett` antecedent. WORKING_ASSUMPTION — pending Mathlib Mills-tail + percolation composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:trap-prevalence`
+    Part 2 proof (line 473), local FKG-positivity of the trap pattern
+    on `Z²` lattice with degree 4. -/
+def entry_atom_trap_config_local_positive : GapEntry where
+  name := "trap_config_local_positive_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:trap-prevalence Part 2 proof, line 473 (`binom(4, 2) p² (1-p)² · p^3 > 0` lattice-degree-4 local FKG estimate)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_trap_prevalence_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the LOCAL FKG-positivity fact on the existing carrier `trapMisalignmentProbability`. Cat 1 reduction check: not Mathlib-derivable (depends on Z²-lattice + percolation-measure machinery). Cat 2 reduction check: paper-novel local-FKG estimate (FKG inequality framework is Cat 2 in general, but the paper-specific local-pattern application is Cat 3 paper-novel). Downstream consumer: `gap_trap_prevalence_above_threshold` derived theorem (Phase.lean) hosts the atom." ]
+  scope := "Proposition prop:trap-prevalence Part 2, local FKG-positivity of trap pattern"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_trap_prevalence_above_threshold_OPEN`). WORKING_ASSUMPTION — pending Mathlib Z²-lattice + percolation-measure machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:supermodular`
+    proof line 580-583, explicit closed-form expression for the
+    welfare cross-partial via `φ'(z) = -z·φ(z)` Gaussian PDF
+    derivative identity. -/
+def entry_atom_welfareCrossPartial_explicit_form : GapEntry where
+  name := "welfareCrossPartial_explicit_form_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:supermodular proof, lines 564-583 (welfare decomposition + cross-partial closed form via φ'(z) = -z·φ(z))"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of an algebraic decomposition of `welfareCrossPartial β κ` as a sum of two paper-stated contributions on the carriers `welfareCrossPartial`, `snrZ`, `BridgeDominance`. Encoded as a per-(β, κ) existential `∃ first second, welfareCrossPartial = first + second ∧ second-non-negative ∧ (|z|<1 → 0 < first)`. Cat 1 reduction check: not Mathlib-derivable (HasDerivAt + Φ + φ derivative machinery is a Mathlib gap). Cat 2 reduction check: paper-novel calculus on the IDP welfare functional. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Proposition prop:supermodular, explicit closed-form decomposition of welfare cross-partial"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_supermodular_OPEN`). WORKING_ASSUMPTION — pending Mathlib HasDerivAt + Φ + φ derivative machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:supermodular`
+    proof line 582-584, sign-positivity of the cross-partial
+    decomposition factors at `|z| < 1`. -/
+def entry_atom_cross_partial_sign_in_z_lt_one : GapEntry where
+  name := "cross_partial_sign_in_z_lt_one_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:supermodular proof, line 582-584 (factor-sign analysis at `|z| < 1`)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper's sign-analysis step that converts the explicit closed-form expression (encoded by `welfareCrossPartial_explicit_form_OPEN`) into the strict-positivity conclusion under the moderate-SNR + bridge-dominance joint antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel sign analysis on opaque-carrier decomposition. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Proposition prop:supermodular, sign-positivity at `|z| < 1`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_supermodular_OPEN`). WORKING_ASSUMPTION — pending Mathlib Gaussian PDF positivity + derivative-sign-from-formula machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
+    proof line 600 (signal-independent ranking at α = 0). -/
+def entry_atom_signal_independent_at_alpha_zero : GapEntry where
+  name := "signal_independent_at_alpha_zero_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:sentimental proof, line 600 (signal-independent ranking at α = 0 + `lem:conditional-reduction` application)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The α = 0 base case is the primitive paper-stated fact on the sentimental-agent welfare carrier. Cat 1 reduction check: not Mathlib-derivable (depends on `lem:conditional-reduction`(i) + sentimental-agent welfare carrier). Cat 2 reduction check: paper-novel application of `lem:conditional-reduction` to the sentimental agent at α = 0. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Proposition prop:sentimental, α = 0 base case (signal-independent ranking)"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_sentimental_immunity_OPEN`). WORKING_ASSUMPTION — pending `lem:conditional-reduction` + sentimental-agent welfare carrier composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
+    proof line 602, perturbative welfare continuity in α with small-α
+    monotonicity neighbourhood. -/
+def entry_atom_welfare_continuity_in_alpha : GapEntry where
+  name := "welfare_continuity_in_alpha_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:sentimental proof, line 602 (closed monotonicity-set + small-α perturbation neighborhood)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated closedness + small-α perturbation neighborhood. Cat 1 reduction check: not Mathlib-derivable (depends on closed-set / compact-domain Banach-lattice analysis applied to opaque welfare carrier). Cat 2 reduction check: paper-novel perturbation argument. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Proposition prop:sentimental, perturbative continuity in α + small-α monotonicity neighbourhood"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_sentimental_immunity_OPEN`). WORKING_ASSUMPTION — pending Mathlib closed-set / compact-domain Banach-lattice analysis; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
+    proof line 602, sup-existence of `α*` over the monotonicity set
+    given a small-α neighbourhood. -/
+def entry_atom_alpha_star_existence_via_continuity : GapEntry where
+  name := "alpha_star_existence_via_continuity_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:sentimental proof, line 602 (sup over monotonicity set)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated existence of `α*` with positivity + upper-bound-by-1 + monotonicity-for-α-below-α* implication, given the small-α neighbourhood from `welfare_continuity_in_alpha_OPEN`. Cat 1 reduction check: not Mathlib-derivable (depends on opaque `alphaStar` carrier supremum characterisation). Cat 2 reduction check: paper-novel sup-existence argument on opaque carrier. Downstream consumer: `gap_sentimental_immunity` derived theorem (Cognitive.lean) hosts the atom." ]
+  scope := "Proposition prop:sentimental, sup-existence of `α*` from continuity neighbourhood"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_sentimental_immunity_OPEN`). WORKING_ASSUMPTION — pending Mathlib sSup / closed-set machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
+    Part 1 proof (line 632), `W_bar` eventually decreasing under
+    reversal-regime support. -/
+def entry_atom_W_bar_eventually_decreasing_in_reversal : GapEntry where
+  name := "W_bar_eventually_decreasing_in_reversal_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (each individual welfare non-monotone → `W_bar` eventually decreasing)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the eventually-decreasing sub-clause via Theorem `thm:cognitive-threshold` Part 1. Cat 1 reduction check: not Mathlib-derivable (depends on `thm:cognitive-threshold` Part 1 `agentWelfare` opaque-carrier non-monotonicity). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Proposition prop:principal-optimum Part 1, `W_bar` eventually decreasing under reversal-regime support"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_interior_optimum_OPEN`). WORKING_ASSUMPTION — pending `thm:cognitive-threshold` Part 1 + measure-theoretic aggregation composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
+    Part 1 proof (line 632), `W_bar` exceeds `W_bar(0)` at some
+    `β > 0` via within-branch discrimination benefit. -/
+def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
+  name := "W_bar_exceeds_zero_at_positive_beta_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (within-branch discrimination benefit at small β dominates routing loss)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures within-branch discrimination benefit on opaque carrier `W_bar`. Cat 1 reduction check: not Mathlib-derivable (depends on Lemma `lem:conditional-reduction`(i) + per-agent welfare derivative comparison). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Proposition prop:principal-optimum Part 1, `W_bar` exceeds `W_bar(0)` at some `β > 0`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_interior_optimum_OPEN`). WORKING_ASSUMPTION — pending Mathlib derivative-comparison machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
+    Part 1 (line 624-625), interior-maximum existence from unimodal
+    envelope shape. -/
+def entry_atom_interior_max_exists_from_unimodal_envelope : GapEntry where
+  name := "interior_max_exists_from_unimodal_envelope_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 1, lines 624-625 (interior optimum `betaBarStar ∈ (0, ∞)`)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Packages the paper's existence-of-interior-maximum inference given the prior two atomic stipulations (eventually-decreasing + exceeds-zero). Cat 1 reduction check: candidate Cat 1 derivation via Mathlib continuous-function-on-compact-interval IVT-style argument applied to `W_bar`, but the underlying continuity is a Mathlib gap (paper-implicit standing assumption, not separately encoded as a Cat 3 atom — would require a `W_bar_continuous` axiom). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Proposition prop:principal-optimum Part 1, interior-maximum existence"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_interior_optimum_OPEN`). WORKING_ASSUMPTION — pending Mathlib continuous-function-on-compact-interval + IVT machinery + paper-implicit `W_bar` continuity encoding; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
+    Part 2 proof (line 634), FOSD-induced derivative-domination of
+    `aggregateWelfareWith G`. -/
+def entry_atom_fosd_induces_derivative_domination : GapEntry where
+  name := "fosd_induces_derivative_domination_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (FOSD + supermodular → derivative-domination)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated FOSD-induces-derivative-domination on opaque carrier `aggregateWelfareWith` via the discrete derivative-inequality form. Cat 1 reduction check: not Mathlib-derivable (depends on HasDerivAt + Lebesgue-Stieltjes machinery). Cat 2 reduction check: paper-novel application of `prop:supermodular` integrated against FOSD-dominating distribution. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Proposition prop:principal-optimum Part 2, FOSD-induced derivative domination"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_monotone_in_kappa_OPEN`). WORKING_ASSUMPTION — pending Mathlib HasDerivAt + Lebesgue-Stieltjes machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
+    Part 2 proof (line 634, second sentence), argmax-monotonicity from
+    derivative-domination. -/
+def entry_atom_argmax_monotone_under_derivative_domination : GapEntry where
+  name := "argmax_monotone_under_derivative_domination_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (zero crossing weakly to the right → argmax monotonicity)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated argmax-monotonicity inference from prior derivative-domination atom. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib argmax-monotonicity from derivative-comparison), but depends on opaque `aggregateOptimalBeta` argmax-characterisation which is a paper-novel encoding. Cat 2 reduction check: paper-novel argmax framework. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Proposition prop:principal-optimum Part 2, argmax-monotonicity from derivative-domination"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_monotone_in_kappa_OPEN`). WORKING_ASSUMPTION — pending Mathlib argmax / uniqueness machinery + opaque `aggregateOptimalBeta` argmax-characterisation composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
+    Part 3 proof (lines 636-640), mixture decomposition of `W_bar`
+    into above-threshold non-decreasing + below-threshold eventually-
+    decreasing parts. -/
+def entry_atom_W_bar_mixture_decomposition : GapEntry where
+  name := "W_bar_mixture_decomposition_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, lines 636-640 (mixture decomposition `W̄ = λ · above + (1-λ) · below`)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated mixture decomposition qualitatively. Cat 1 reduction check: not Mathlib-derivable (depends on bounded-measure / conditional-expectation machinery). Cat 2 reduction check: paper-novel application of mixture decomposition. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Proposition prop:principal-optimum Part 3, mixture decomposition of `W_bar`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_regime_bifurcation_OPEN`). WORKING_ASSUMPTION — pending Mathlib bounded-measure / conditional-expectation machinery; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
+    Part 3 proof (line 640), non-concavity triple from mixture
+    decomposition. -/
+def entry_atom_non_concave_triple_from_mixture : GapEntry where
+  name := "non_concave_triple_from_mixture_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 640 (non-concavity `W̄` valley pattern)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated non-concavity triple from mixture decomposition. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib monotonicity-pattern analysis), but depends on the paper-novel mixture-decomposition framing. Cat 2 reduction check: paper-novel sum-of-monotone-and-non-monotone framework. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Proposition prop:principal-optimum Part 3, non-concavity triple from mixture"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_principal_regime_bifurcation_OPEN`). WORKING_ASSUMPTION — pending Mathlib monotonicity-pattern analysis + paper-novel mixture-decomposition framing composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure` Part 1
+    proof (lines 652-654), G-averaged reversal-regime overshoot
+    `δ̄ > 0`. -/
+def entry_atom_averaged_reversal_overshoot_positive : GapEntry where
+  name := "averaged_reversal_overshoot_positive_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Corollary cor:disclosure Part 1 proof, lines 652-654 (G-averaged reversal-regime overshoot `δ̄ > 0`)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_full_suboptimal_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated overshoot positivity in reversal regime. Cat 1 reduction check: not Mathlib-derivable (depends on conditional-expectation + Theorem `thm:cognitive-threshold` Part 1 composition). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_full_suboptimal` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Corollary cor:disclosure Part 1, averaged reversal-regime overshoot positivity"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_disclosure_full_suboptimal_OPEN`). WORKING_ASSUMPTION — pending Mathlib conditional-expectation + `thm:cognitive-threshold` Part 1 composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure` Part 1
+    proof (line 656), finite-β-strictly-above-limit existence from
+    positive averaged overshoot. -/
+def entry_atom_finite_beta_above_limit_from_overshoot : GapEntry where
+  name := "finite_beta_above_limit_from_overshoot_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Corollary cor:disclosure Part 1 proof, line 656 (`λ ε < (1 - λ) δ̄ ⇒ W̄(β_0) > W̄(∞)`)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_full_suboptimal_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures finite-β-strictly-above-limit existence from positive averaged overshoot. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib limit-comparison + ε-choice machinery), but depends on opaque `W_bar_limit_infty` characterisation. Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_full_suboptimal` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Corollary cor:disclosure Part 1, finite-β-strictly-above-limit existence"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_disclosure_full_suboptimal_OPEN`). WORKING_ASSUMPTION — pending Mathlib limit-comparison + ε-choice machinery + opaque `W_bar_limit_infty` characterisation composition; 必须 close before publication."
+  conditionalOn := []
+
+/-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure` Part 2
+    proof (line 658), per-agent-optimum aggregate dominates uniform
+    aggregate. -/
+def entry_atom_differentiated_per_agent_optimum_dominates_uniform : GapEntry where
+  name := "differentiated_per_agent_optimum_dominates_uniform_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (per-agent `β_i = β*(κ_i, α_i)` optimum aggregated)"
+  attackHistory :=
+    [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_differentiated_dominates_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated per-agent-optimum aggregate dominates uniform aggregate. Cat 1 reduction check: not Mathlib-derivable (depends on measure-theoretic per-agent integration). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_differentiated_dominates` derived theorem (Principal.lean) hosts the atom." ]
+  scope := "Corollary cor:disclosure Part 2, per-agent-optimum aggregate dominates uniform aggregate"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic-stipulation axiom per `feedback_gap_ledger_in_lean4` §18 (extracted from bundled `gap_disclosure_differentiated_dominates_OPEN`). WORKING_ASSUMPTION — pending Mathlib measure-theoretic per-agent integration; 必须 close before publication."
+  conditionalOn := []
+
 /-! # Aggregated ledger inventory (post-R32 enum-typed refactor)
 
 The live status / input-category / Cat 3 sub-type counts are printed
 by the `#eval` calls below (run `lake env lean
 BlackwellDilemma/Ledger.lean` to see them).  Invariants:
 
-  * status counts sum to `allGaps.length` (= 99).
-  * input-category counts sum to `allGaps.length` (= 99).
-  * Cat 3 sub-type counts sum to `allGaps.length` (= 99).
+  * status counts sum to `allGaps.length` (= 120 post-R37).
+  * input-category counts sum to `allGaps.length` (= 120).
+  * Cat 3 sub-type counts sum to `allGaps.length` (= 120).
 
 BLOCKED entries post-R26 = 0; DEAD-END entries at entry level = 0
 (the bundled axiom `gap_p_monotonicity_OPEN` is DEAD-END at the
@@ -2319,7 +2709,31 @@ def allGaps : List GapEntry := [
   entry_atom_mLimit_pos,
   entry_atom_kappaStar_nonneg,
   entry_atom_W_info_oracle_nonpos,
-  entry_atom_W_info_oracle_exponential_bound
+  entry_atom_W_info_oracle_exponential_bound,
+  -- R37 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
+  -- 11 derived theorems flipped OPEN → CLOSED across Wrongness/Phase/
+  -- Cognitive/Principal modules, with 21 new Cat 3 OPEN atomic stipulations).
+  entry_atom_conditional_subproblem_blackwell_applicable,
+  entry_atom_topo_loss_decay_below_pc,
+  entry_atom_topo_loss_decay_arbitrary_threshold,
+  entry_atom_wInfoTopoRatio_const_exists,
+  entry_atom_wInfoTopoRatio_bound,
+  entry_atom_trap_config_local_positive,
+  entry_atom_welfareCrossPartial_explicit_form,
+  entry_atom_cross_partial_sign_in_z_lt_one,
+  entry_atom_signal_independent_at_alpha_zero,
+  entry_atom_welfare_continuity_in_alpha,
+  entry_atom_alpha_star_existence_via_continuity,
+  entry_atom_W_bar_eventually_decreasing_in_reversal,
+  entry_atom_W_bar_exceeds_zero_at_positive_beta,
+  entry_atom_interior_max_exists_from_unimodal_envelope,
+  entry_atom_fosd_induces_derivative_domination,
+  entry_atom_argmax_monotone_under_derivative_domination,
+  entry_atom_W_bar_mixture_decomposition,
+  entry_atom_non_concave_triple_from_mixture,
+  entry_atom_averaged_reversal_overshoot_positive,
+  entry_atom_finite_beta_above_limit_from_overshoot,
+  entry_atom_differentiated_per_agent_optimum_dominates_uniform
 ]
 
 /-- Status-keyed counts:

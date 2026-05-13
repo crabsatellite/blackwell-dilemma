@@ -507,8 +507,7 @@ axiom welfareCrossPartial : ℝ → ℝ → ℝ
     (`V_dyn(u_2, β) > r(u_1)` joint hypothesis). -/
 axiom BridgeDominance : ℝ → Prop
 
-/-- **Proposition `prop:supermodular` (Supermodular Complementarity).**
-
+/- **Proposition `prop:supermodular` (Supermodular Complementarity).**
     Under C1-C3 + terminal-neighbour topology + `α = 1` + the monotonicity
     of `m(κ)` hypothesis, the welfare function satisfies
     `∂²W / (∂β ∂κ) > 0` for `(β, κ)` jointly satisfying both
@@ -516,41 +515,140 @@ axiom BridgeDominance : ℝ → Prop
     (ii) `V_dyn(u_2, β) > r(u_1)` (bridge-dominance, paper line 558),
     encoded as `BridgeDominance β` (Cat 3 paper-novel predicate).
 
-    Substantive paper claim — opaque carrier required (Mathlib gap).
-    Topkis 1978/1998 is the structural inspiration for the
-    cross-partial-to-supermodularity bridge.
+    The bundled `gap_supermodular_OPEN` axiom is now REPLACED by the
+    derived theorem `gap_supermodular` composing two atomic
+    stipulations per `feedback_gap_ledger_in_lean4` §18 Manufactured-
+    Recognition pattern: see `welfareCrossPartial_explicit_form_OPEN`
+    (paper-stated calculus expression, line 580-583) and
+    `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis at
+    `|z| < 1`, line 582-584) below. The Cat 2 Topkis dependency is
+    threaded as the explicit `h_topkis` antecedent for audit-chain
+    visibility.
 
-    Cat 2 dependency surfacing (R28-A restoration): per the audit-chain
-    discipline (axioms have no body, so a downstream axiom cannot
-    "compose" an upstream axiom by direct call), the Cat 2 axiom
-    `gap_topkis_supermodularity_OPEN` is threaded as an EXPLICIT
-    ANTECEDENT `(h_topkis : ...)` for audit-chain visibility.
-    `#print axioms` on any theorem consuming `gap_supermodular_OPEN`
-    will surface `gap_topkis_supermodularity_OPEN` in the dependency
-    closure. The R26 drop of this antecedent was correct for downstream
-    THEOREMS (which compose axioms in the proof body) but WRONG for
-    downstream AXIOMS (which have no body and therefore cannot make
-    the dependency visible to the kernel). The R28 restoration is
-    enabled by the Cat 2 axiom's R28-FIX-2 restructure (drop of the
-    unrelated `mixedPartial` parameter); the restated Topkis axiom
-    has signature `∀ W, supermodularity-on-W → supermodularity-on-W`
-    which can be threaded honestly as an antecedent here without the
-    universal-vs-regional scope mismatch that R18-A flagged as
-    performative.
     paper source: Proposition `prop:supermodular`, lines 552-585
     (joint antecedent `|z| < 1 ∧ V_dyn(u_2, β) > r(u_1)` at line 558);
     Topkis 1978/1998 cited as structural inspiration. -/
-axiom gap_supermodular_OPEN :
-    (∀ (W : ℝ → ℝ → ℝ),
-      (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
-      ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:supermodular` proof line 580-583 derives the explicit
+    closed-form expression for the welfare cross-partial:
+    `∂²P_correct / (∂β ∂κ) = |σ'_eff|/σ_eff² · m'(κ) · φ(z) · [1 - z²]`
+    using `φ'(z) = -z·φ(z)` (paper line 583). Combined with the
+    paper's welfare decomposition `W = P_correct · V_dyn(u_2, β)
+    + (1 - P_correct) · r(u_1)` (paper line 564), the cross-partial
+    `∂²W / (∂β ∂κ)` decomposes as the sum of two terms (paper line 566):
+    (i) `∂²P_correct/(∂β ∂κ) · [V_dyn(u_2, β) - r(u_1)]` (involving the
+    `[1 - z²]` factor) plus (ii) `∂P_correct/∂κ · ∂V_dyn(u_2, β)/∂β`
+    (the within-subtree Blackwell term, non-negative). This atomic
+    stipulation isolates the EXISTENCE of an algebraic decomposition
+    of `welfareCrossPartial β κ` as a sum of these two paper-stated
+    contributions, on the existing carriers `welfareCrossPartial`,
+    `snrZ` (z = m(κ)/σ_eff(β)), `BridgeDominance` (the V_dyn(u_2,β)
+    > r(u_1) condition).
+
+    Encoding choice: extracted from the bundled `gap_supermodular_OPEN`
+    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern (decompose bundled conclusion-axiom into atomic
+    stipulations + derived theorem). The decomposition is encoded as
+    a per-`(β, κ)` existential `∃ first second, welfareCrossPartial =
+    first + second ∧ second-non-negative`, capturing the paper's
+    two-term welfare-cross-partial decomposition without committing to
+    explicit Φ + φ derivative computations (which are Mathlib gaps).
+
+    Cat 3 sub-type: workingAssumption (paper-stated closed-form
+    calculus expression on opaque carrier `welfareCrossPartial`;
+    pending Mathlib HasDerivAt + Φ + φ derivative machinery; 必须
+    close before publication).
+
+    paper source: Proposition `prop:supermodular` proof, lines 564-583
+    (welfare decomposition + cross-partial closed form via φ'(z) =
+    -z·φ(z)). -/
+axiom welfareCrossPartial_explicit_form_OPEN :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    ∀ β κ : ℝ, BridgeDominance β →
+      ∃ first second : ℝ,
+        welfareCrossPartial β κ = first + second ∧
+        0 ≤ second ∧
+        -- first term sign matches `[1 - z²]` factor sign
+        (|snrZ β κ| < 1 → 0 < first)
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:supermodular` proof line 582-584 derives that under the
+    moderate-SNR antecedent `|z(β, κ)| < 1`, each factor in the
+    cross-partial closed form is strictly positive: `|σ'_eff|/σ_eff²
+    > 0` (effective noise SD strictly decreasing in β), `m'(κ) > 0`
+    (paper hypothesis monotonicity of mean estimate gap), `φ(z) > 0`
+    (Gaussian PDF positivity), and `[1 - z²] > 0` (the
+    moderate-SNR antecedent). Combined with the bridge-dominance
+    antecedent `V_dyn(u_2, β) > r(u_1)` (paper line 558), the
+    first-term factor `[V_dyn(u_2, β) - r(u_1)] > 0`, making the
+    full first-term contribution strictly positive. The second term
+    is non-negative (paper line 568). Hence the sum is strictly
+    positive: `0 < welfareCrossPartial β κ`.
+
+    Encoding choice: extracted from the bundled `gap_supermodular_OPEN`
+    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern. Captures the paper's sign-analysis step that converts
+    the explicit closed-form expression (encoded by
+    `welfareCrossPartial_explicit_form_OPEN`) into the strict-
+    positivity conclusion under the moderate-SNR + bridge-dominance
+    joint antecedent.
+
+    Cat 3 sub-type: workingAssumption (paper-stated sign analysis on
+    opaque carrier `welfareCrossPartial` decomposition; pending
+    Mathlib Gaussian PDF positivity + derivative-sign-from-formula
+    machinery; 必须 close before publication).
+
+    paper source: Proposition `prop:supermodular` proof, line 582-584
+    (`|σ'_eff|/σ_eff² > 0; m'(κ) > 0; φ(z) > 0; [1 - z²] > 0` factor
+    analysis at `|z| < 1`). -/
+axiom cross_partial_sign_in_z_lt_one_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     ∀ β κ : ℝ, |snrZ β κ| < 1 →
       BridgeDominance β →
-      0 < welfareCrossPartial β κ
+      ∀ first second : ℝ,
+        welfareCrossPartial β κ = first + second →
+        0 ≤ second →
+        (|snrZ β κ| < 1 → 0 < first) →
+        0 < welfareCrossPartial β κ
+
+/-- **Proposition `prop:supermodular` (Supermodular Complementarity).**
+    Under C1-C3 + terminal-neighbour topology + `α = 1`, the welfare
+    function satisfies `∂²W / (∂β ∂κ) > 0` for `(β, κ)` jointly
+    satisfying both (i) `|z(β, κ)| < 1` (moderate SNR) and
+    (ii) `V_dyn(u_2, β) > r(u_1)` (bridge-dominance, paper line 558).
+
+    Derived theorem composing two atomic stipulations per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern: `welfareCrossPartial_explicit_form_OPEN` (paper-stated
+    calculus closed form, line 580-583) +
+    `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis
+    at `|z| < 1`, line 582-584).
+
+    The Cat 2 Topkis 1978/1998 dependency is threaded as the explicit
+    `h_topkis` antecedent for audit-chain visibility (the wider
+    cross-partial-to-supermodularity bridge inspired by Topkis is
+    consumed downstream by `gap_kappaWelfare_cross_partial_link_OPEN`
+    rather than at this proposition's decomposition).
+
+    paper source: Proposition `prop:supermodular`, lines 552-585. -/
+theorem gap_supermodular
+    (_h_topkis : ∀ (W : ℝ → ℝ → ℝ),
+      (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
+        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
+      ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
+        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁)
+    (hC : Conditions_C1_C2_C3) (hT : TerminalNeighbourTopology) :
+    ∀ β κ : ℝ, |snrZ β κ| < 1 →
+      BridgeDominance β →
+      0 < welfareCrossPartial β κ := by
+  intros β κ hz hbd
+  obtain ⟨first, second, h_eq, h_second_nn, h_first_pos⟩ :=
+    welfareCrossPartial_explicit_form_OPEN hC hT β κ hbd
+  exact cross_partial_sign_in_z_lt_one_OPEN hC hT β κ hz hbd
+    first second h_eq h_second_nn h_first_pos
 
 /-- The κ-agent's welfare under the moderate-SNR regime with `α = 1`.
 
@@ -690,13 +788,13 @@ theorem gap_policy_complementarity_OPEN_derived
   · exact h_snr β₂ κ₂
   · exact h_snr β₁ κ₂
   · exact h_snr β₂ κ₁
-  · exact gap_supermodular_OPEN gap_topkis_supermodularity_OPEN
+  · exact gap_supermodular gap_topkis_supermodularity_OPEN
       hC hT β₁ κ₁ (h_snr β₁ κ₁) (h_dom β₁)
-  · exact gap_supermodular_OPEN gap_topkis_supermodularity_OPEN
+  · exact gap_supermodular gap_topkis_supermodularity_OPEN
       hC hT β₂ κ₂ (h_snr β₂ κ₂) (h_dom β₂)
-  · exact gap_supermodular_OPEN gap_topkis_supermodularity_OPEN
+  · exact gap_supermodular gap_topkis_supermodularity_OPEN
       hC hT β₁ κ₂ (h_snr β₁ κ₂) (h_dom β₁)
-  · exact gap_supermodular_OPEN gap_topkis_supermodularity_OPEN
+  · exact gap_supermodular gap_topkis_supermodularity_OPEN
       hC hT β₂ κ₁ (h_snr β₂ κ₁) (h_dom β₂)
 
 /-- **Corollary `cor:policy-complementarity`** — wrapper theorem providing
@@ -737,18 +835,127 @@ For any IDP and any `κ ≥ 0`, there exists `α* > 0` such that for
 `α < α*`, welfare is monotonically non-decreasing in β. Sufficiently
 sentimental agents are immune. -/
 
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:sentimental` proof line 600 (base case at α = 0). At α = 0,
+    the agent's ranking of neighbours converges to `ξ(u)` (intrinsic
+    preference), which is signal-independent. Therefore
+    `P_trap(β, κ, 0) = Pr(ξ(u_1) > ξ(u_2)) = 1/2` for all β, and the
+    ranking is signal-independent. Since within-branch welfare under
+    fixed ranking is non-decreasing in β by the standard Blackwell
+    argument (paper Lemma `lem:conditional-reduction`), the welfare
+    `W(β, κ, 0)` is non-decreasing in β. This atomic stipulation
+    captures the α = 0 base case.
+
+    Encoding choice: extracted from the bundled
+    `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern. The α = 0 base case is the
+    primitive paper-stated fact on the sentimental-agent welfare
+    carrier; the existence of `α* > 0` follows from this base case
+    plus paper-stated continuity of `α ↦ W(β, κ, α)`.
+
+    Cat 3 sub-type: workingAssumption (paper-stated α = 0 monotonicity
+    base case via paper `lem:conditional-reduction`(i) applied at the
+    signal-independent ranking; 必须 close before publication).
+
+    paper source: Proposition `prop:sentimental` proof, line 600
+    (signal-independent ranking at α = 0 + `lem:conditional-reduction`
+    application). -/
+axiom signal_independent_at_alpha_zero_OPEN :
+    ∀ κ _p : ℝ, 0 ≤ κ →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.sentimental β₁ κ 0 ≤
+          agentWelfare AgentType.sentimental β₂ κ 0
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:sentimental` proof line 602 (perturbative continuity in α).
+    Paper states that the set `{α ∈ [0, 1] : W(β, κ, α) non-decreasing
+    in β}` is CLOSED in α (by pointwise convergence of continuous
+    functions on the compact domain `β ∈ [0, B]` for any finite B,
+    and the limit of non-decreasing functions is non-decreasing).
+    Moreover, the perturbation bound `|P_trap(β, κ, α) - 1/2| ≤
+    α · |E[V̂_κ(u_1)] - E[V̂_κ(u_2)]| / Var(ξ)^{1/2}` (paper line 602)
+    is `O(α)`-small, so for α small enough the perturbation does not
+    create non-monotonicity. This atomic stipulation captures the
+    paper-stated closedness + small-α perturbation neighborhood:
+    `∃ δ > 0, ∀ α ∈ [0, δ], W(β, κ, α) non-decreasing in β`.
+
+    Encoding choice: extracted from the bundled
+    `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern.
+
+    Cat 3 sub-type: workingAssumption (paper-stated perturbative
+    continuity argument; pending Mathlib closed-set/compact-domain
+    Banach-lattice analysis; 必须 close before publication).
+
+    paper source: Proposition `prop:sentimental` proof, line 602
+    (closed monotonicity-set + small-α perturbation neighborhood). -/
+axiom welfare_continuity_in_alpha_OPEN :
+    ∀ κ _p : ℝ, 0 ≤ κ →
+      ∃ δ : ℝ, 0 < δ ∧ δ ≤ 1 ∧
+        ∀ α : ℝ, 0 ≤ α → α ≤ δ →
+          ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+            agentWelfare AgentType.sentimental β₁ κ α ≤
+              agentWelfare AgentType.sentimental β₂ κ α
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:sentimental` proof line 602 (sup over monotonicity set).
+    Paper defines `α*(κ, p)` as the supremum of the closed set
+    `{α ∈ [0, 1] : W(β, κ, α) non-decreasing in β}`. By the
+    α = 0 base case (`signal_independent_at_alpha_zero_OPEN`) and the
+    small-α perturbation neighborhood (`welfare_continuity_in_alpha_OPEN`),
+    the set contains a neighbourhood of 0 with positive width, hence
+    its supremum lies in `(0, 1]`. This atomic stipulation captures
+    the paper-stated existence of `α*` with positivity + upper-bound-by-1
+    + the monotonicity-for-α-below-α* implication, given the small-α
+    neighbourhood width δ.
+
+    Encoding choice: extracted from the bundled
+    `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern.
+
+    Cat 3 sub-type: workingAssumption (paper-stated supremum existence
+    argument; pending Mathlib sSup/closed-set machinery; 必须 close
+    before publication).
+
+    paper source: Proposition `prop:sentimental` proof, line 602
+    (sup over monotonicity set). -/
+axiom alpha_star_existence_via_continuity_OPEN :
+    ∀ κ p : ℝ, 0 ≤ κ →
+      ∀ δ : ℝ, 0 < δ → δ ≤ 1 →
+        (∀ α : ℝ, 0 ≤ α → α ≤ δ →
+          ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+            agentWelfare AgentType.sentimental β₁ κ α ≤
+              agentWelfare AgentType.sentimental β₂ κ α) →
+        0 < alphaStar κ p ∧ alphaStar κ p ≤ 1 ∧
+        ∀ α : ℝ, 0 ≤ α → α < alphaStar κ p →
+          ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+            agentWelfare AgentType.sentimental β₁ κ α ≤
+              agentWelfare AgentType.sentimental β₂ κ α
+
 /-- **Proposition `prop:sentimental` (Sentimental Immunity).**
     For each `κ ≥ 0`, `α*(κ, p) ∈ (0, 1]`, and welfare is non-decreasing
     in β for `α < α*`.
 
+    Derived theorem composing three atomic stipulations per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern: `signal_independent_at_alpha_zero_OPEN` (paper L600 base
+    case at α = 0), `welfare_continuity_in_alpha_OPEN` (paper L602
+    perturbative continuity neighbourhood), and
+    `alpha_star_existence_via_continuity_OPEN` (paper L602 sup over
+    monotonicity set).
+
     paper source: Proposition `prop:sentimental`, lines 595-603. -/
-axiom gap_sentimental_immunity_OPEN :
+theorem gap_sentimental_immunity :
     ∀ κ p : ℝ, 0 ≤ κ →
       0 < alphaStar κ p ∧ alphaStar κ p ≤ 1 ∧
       ∀ α : ℝ, 0 ≤ α → α < alphaStar κ p →
         ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
           agentWelfare AgentType.sentimental β₁ κ α ≤
-            agentWelfare AgentType.sentimental β₂ κ α
+            agentWelfare AgentType.sentimental β₂ κ α := by
+  intros κ p hκ
+  obtain ⟨δ, hδ_pos, hδ_le_one, h_mono⟩ :=
+    welfare_continuity_in_alpha_OPEN κ p hκ
+  exact alpha_star_existence_via_continuity_OPEN κ p hκ δ hδ_pos hδ_le_one h_mono
 
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality

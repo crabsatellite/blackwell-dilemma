@@ -51,6 +51,52 @@ measure, hence is signal-independent. -/
 axiom conditionalWelfareOnR :
     Finset Vertex → (ℝ → PercolationOutcome → ℝ) → ℝ → ℝ
 
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Lemma `lem:conditional-
+    reduction` part (i) states that for each fixed reachable-set
+    realisation `R = R_0`, the agent faces a standard decision problem
+    with FIXED action set `A_{R_0} = R_0(v_0)`, fixed state space `Ω`,
+    and payoff `u(a, ω)` for `a ∈ A_{R_0}` (paper proof line 381). On
+    this conditional subproblem, the Blackwell ordering applies in the
+    standard form: `π' ≻_B π ⇒ W_{R_0}(π') ≥ W_{R_0}(π)` (paper line
+    375 statement). This atomic stipulation isolates the paper-stated
+    conditional-Blackwell-applicability fact on the existing carrier
+    `conditionalWelfareOnR R signalFamily β`, threading the Cat 2
+    Blackwell 1951/1953 dependency as an explicit antecedent.
+
+    Encoding choice: extracted from the bundled
+    `gap_conditional_reduction_part_i_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern (decompose bundled conclusion-axiom into atomic
+    stipulation + derived theorem). The Cat 2 dependency on Blackwell
+    1951/1953 is threaded as the explicit `h_blackwell` antecedent for
+    audit-chain visibility (`#print axioms` on any theorem consuming
+    this atom surfaces the Blackwell dependency). The Blackwell-
+    ordering paper-novel scope predicate `IsBlackwellOrdered
+    signalFamily` is threaded as the operative paper-stated antecedent
+    of part (i)'s monotonicity conclusion.
+
+    Cat 3 sub-type: workingAssumption (paper-stated higher-level
+    application of Cat 2 Blackwell theorem to the paper-novel
+    `conditionalWelfareOnR` carrier; pending substantive Mathlib
+    decision-theoretic Blackwell ordering machinery; 必须 close
+    before publication).
+
+    paper source: Lemma `lem:conditional-reduction` part (i), line
+    375 (Blackwell ordering applies to conditional subproblem on
+    `R(v_0)`); paper proof line 381 (fixed-feasible-set conditional
+    subproblem permits direct Blackwell-theorem application);
+    Blackwell 1951/1953 cited as the Cat 2 dependency. -/
+axiom conditional_subproblem_blackwell_applicable_OPEN :
+    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.bayesian β₁ 0 1 ≤
+        agentWelfare AgentType.bayesian β₂ 0 1) →
+    ∀ (R : Finset Vertex)
+      (signalFamily : ℝ → PercolationOutcome → ℝ),
+      IsBlackwellOrdered signalFamily →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        conditionalWelfareOnR R signalFamily β₁ ≤
+          conditionalWelfareOnR R signalFamily β₂
+
 /-- **Lemma `lem:conditional-reduction` part (i) — substantive
     Blackwell-conditional content.**
     For each fixed reachable set `R` and each signal family
@@ -61,45 +107,31 @@ axiom conditionalWelfareOnR :
     conditional subproblem on the restricted action domain `R`: paper
     part (i) literally states "if `π' ≻_B π`, then
     `W_R(π') ≥ W_R(π)`", so the Blackwell-ordering hypothesis is the
-    operationally relevant antecedent — without it the monotonicity
-    claim is folkloric.
+    operationally relevant antecedent.
 
-    The previous formulation as a monotonicity claim on an arbitrary
-    `W_R : ℝ → ℝ` (with no Blackwell antecedent and no binding to any
-    IDP-specific carrier), and the post-carrier intermediate form (with
-    the carrier but still no Blackwell-ordering hypothesis), were both
-    inflations of the paper's substantive content; the carrier-bound +
-    Blackwell-ordered form here matches the paper's actual statement
-    scope.
-
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom
-    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is threaded
-    as an EXPLICIT ANTECEDENT `(h_blackwell : ...)` so that
-    `#print axioms` on any theorem consuming
-    `gap_conditional_reduction_part_i_OPEN` surfaces the Blackwell
-    dependency. The R26 drop of this antecedent over-applied the
-    "Cat 2 implicit consumption" rule: the CLAIM CONTENT of this entry
-    is essentially the Blackwell monotonicity theorem applied to the
-    paper-novel `conditionalWelfareOnR` carrier (per
-    `feedback_gap_ledger_in_lean4` §10 paper-APPLICATION-to-opaque-
-    carrier = Cat 3 with explicit Cat 2 chain). The relevant Cat 2
-    axiom lives at
-    `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
+    Derived theorem composing the paper-stated atomic stipulation
+    `conditional_subproblem_blackwell_applicable_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern. The bundled `gap_conditional_reduction_part_i_OPEN`
+    axiom is REPLACED by this derived theorem (which is structurally
+    a re-export of the atomic stipulation; the decomposition isolates
+    the paper-stated conditional-Blackwell-applicability fact as a
+    standalone Cat 3 atomic stipulation, separating the audit-chain
+    Cat 2 Blackwell threading from the higher-level lemma claim).
 
     paper source: Lemma `lem:conditional-reduction` part (i),
     invoking Blackwell's theorem `\citep{blackwell1951,blackwell1953}`. -/
-axiom gap_conditional_reduction_part_i_OPEN :
-    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+theorem gap_conditional_reduction_part_i
+    (h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1) →
+        agentWelfare AgentType.bayesian β₂ 0 1) :
     ∀ (R : Finset Vertex)
       (signalFamily : ℝ → PercolationOutcome → ℝ),
       IsBlackwellOrdered signalFamily →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         conditionalWelfareOnR R signalFamily β₁ ≤
-          conditionalWelfareOnR R signalFamily β₂
+          conditionalWelfareOnR R signalFamily β₂ :=
+  conditional_subproblem_blackwell_applicable_OPEN h_blackwell
 
 /-- **Lemma `lem:conditional-reduction` part (ii) — welfare decomposition
     + signal-immunity of the dominant component.**

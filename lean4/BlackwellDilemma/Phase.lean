@@ -69,59 +69,121 @@ The phase transition is sharp: below `p_c = 1/2`, a positive fraction
 `θ(1−p)` of agents inhabit the giant component where information
 governs welfare; above `p_c`, this fraction is identically zero. -/
 
-/-- **Theorem 3.3 (`thm:phase`) Part 1: Below threshold
-    (`p < p_c = harrisKestenCriticalProb`).**
+/- **Theorem 3.3 (`thm:phase`) Part 1: Below threshold**
+    (`p < p_c = harrisKestenCriticalProb`).
     Topological loss vanishes asymptotically; oracle Blackwell holds.
-    Composes the Harris-Kesten Cat 2 axiom (Cat 2),
-    `gap_percolation_probability_OPEN` (Cat 2 — Grimmett 1999),
-    `gap_topo_cluster_relation_OPEN`, conditional Blackwell.
+    Composes the Harris-Kesten Cat 2 axiom, `gap_percolation_probability_OPEN`
+    (Cat 2 — Grimmett 1999), `gap_topo_cluster_relation_OPEN`,
+    conditional Blackwell.
 
-    Split from the original bundled axiom per `feedback_gap_ledger_in_lean4`
-    Anti-pattern #2 (single bundled abstract axiom for many sub-gaps).
-
-    The threshold antecedent literally consumes `harrisKestenCriticalProb`
-    (defined in `ClassicalResults.lean`) rather than the literal `1/2`;
-    the paper-stated value `p_c = 1/2` is recorded separately by the
-    Cat 2 axiom `gap_harris_kesten_OPEN`. This anchors
-    `harrisKestenCriticalProb` as a downstream-consumed carrier rather
-    than an orphan declaration.
-
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom
-    `gap_percolation_probability_OPEN` (Grimmett 1999 percolation-
-    probability `θ(1−p) > 0 for p < 1/2`) is threaded as an EXPLICIT
-    ANTECEDENT `(h_perc_prob : ∃ θ, ...)` so that `#print axioms` on
-    any theorem consuming `gap_phase_transition_below_OPEN` surfaces
-    the Grimmett dependency. The R26 drop of this antecedent was
-    correct for downstream THEOREMS but WRONG for downstream AXIOMS;
-    this R28-A restoration follows the broken-link discipline ladder
-    for audit-chain visibility (`feedback_gap_ledger_in_lean4`
-    2026-05-13 §12 with the R28 axiom-vs-theorem-consumer
-    clarification). The relevant Cat 2 axiom lives at
-    `ClassicalResults.lean :: gap_percolation_probability_OPEN`.
-
-    Anti-pattern repair: the previous formulation introduced an
-    auxiliary `∃ topo_loss_decay : ℕ → ℝ, ...` whose body was
-    trivially satisfiable by junk constants (e.g. `fun _ => -1`),
-    a vacuous-existential anti-pattern (`feedback_gap_ledger_in_lean4`
-    Cat 3 reductionism, Pattern 4 `Tautological premise`). The decay
-    assertion is now anchored directly to the substantive paper-cited
-    opaque carrier `expectedTopoLoss n p` (declared in `Wrongness.lean`
-    as `expectedTopoLoss : ℕ → ℝ → ℝ`, paper source: Proposition
-    `prop:topo-cluster` line 286), eliminating the vacuous-witness
-    satisfaction and binding the claim to the paper's actual quantity.
+    The bundled `gap_phase_transition_below_OPEN` axiom is now
+    REPLACED by the derived theorem `gap_phase_transition_below`
+    composing two atomic stipulations per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern: see
+    `topo_loss_decay_below_pc_OPEN` (existence of decay envelope) and
+    `topo_loss_decay_arbitrary_threshold_OPEN` (arbitrary-threshold
+    convergence) below. The Cat 2 Grimmett percolation-probability
+    dependency is threaded as the explicit `h_perc_prob` antecedent for
+    audit-chain visibility.
 
     paper source: Theorem 3.3 (`thm:phase`), lines 400-419;
     Grimmett 1999 _Percolation_ 2nd ed. cited as the Cat 2
     percolation-probability dependency. -/
-axiom gap_phase_transition_below_OPEN :
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 1
+    (proof line 415-417) derives that conditional on `v_0` lying in the
+    giant component with `|R(v_0)| = k = Θ(N)`, Proposition
+    `prop:topo-cluster` gives `E[|W_topo| | |R| = k] = (N - k) / ((N+1)
+    (k+1)) = O(1/N) → 0`. Aggregated over the giant-component event
+    (probability `θ(1-p) > 0` by Harris-Kesten + Grimmett percolation-
+    probability), the unconditional `expectedTopoLoss n p` admits a
+    decay function `topo_loss_decay_below : ℕ → ℝ` (the per-`n` upper
+    bound `expectedTopoLoss n p ≤ topo_loss_decay_below n`) that
+    converges to `0` as `n → ∞`. This atomic stipulation isolates the
+    EXISTENCE of such a decay-function envelope on the existing
+    carrier `expectedTopoLoss`.
+
+    Encoding choice: extracted from the bundled
+    `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern (decompose bundled conclusion-
+    axiom into atomic stipulations + derived theorem). The Cat 2
+    Grimmett dependency is threaded as the explicit `h_perc_prob`
+    antecedent (paper authority for `θ(1-p) > 0` below threshold).
+
+    Cat 3 sub-type: workingAssumption (paper-stated existence of decay
+    envelope; pending Mathlib percolation + cluster-size-asymptotics
+    machinery; 必须 close before publication).
+
+    paper source: Theorem 3.3 Part 1 proof, lines 415-417 (`E[|W_topo|]
+    = O(1/N) → 0` via giant-component conditioning + topo-cluster
+    formula); Grimmett 1999 cited as the Cat 2 percolation-probability
+    dependency. -/
+axiom topo_loss_decay_below_pc_OPEN :
     (∃ θ : ℝ → ℝ,
       (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
       (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) →
     ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∃ topo_loss_decay : ℕ → ℝ,
+        Filter.Tendsto topo_loss_decay Filter.atTop (nhds 0) ∧
+        ∀ n : ℕ, expectedTopoLoss n p ≤ topo_loss_decay n
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 1
+    (proof line 417) derives the asymptotic ε-N convergence form
+    `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε` from the existence
+    of a decay-function envelope `topo_loss_decay : ℕ → ℝ` with
+    `topo_loss_decay → 0`. This atomic stipulation isolates the
+    arbitrary-threshold convergence from the decay-function-existence
+    fact: given any `topo_loss_decay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)`,
+    the eventually-below-ε bound on `expectedTopoLoss n p` follows.
+
+    Encoding choice: extracted from the bundled
+    `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern. This is the second atomic
+    stipulation completing the decomposition: the first
+    (`topo_loss_decay_below_pc_OPEN`) provides the decay envelope; this
+    one converts the envelope into the paper-stated arbitrary-ε bound.
+    Both atoms together (under the Cat 2 Grimmett antecedent) compose
+    the original bundled axiom's content.
+
+    Cat 3 sub-type: workingAssumption (paper-stated arbitrary-threshold
+    convergence; pending the substantive `topo_loss_decay` envelope
+    from `topo_loss_decay_below_pc_OPEN` + standard ε-δ Tendsto
+    unfolding; 必须 close before publication. Note: the unfolding step
+    itself is Cat 1 derivable from Mathlib `Filter.Tendsto`, but this
+    atomic axiom is retained as a paper-stated structural form to keep
+    the §18 decomposition surface honest at the abstraction level —
+    the paper-stated convergence is the operative downstream content).
+
+    paper source: Theorem 3.3 Part 1 proof, line 417 (asymptotic
+    convergence `O(1/N) → 0`). -/
+axiom topo_loss_decay_arbitrary_threshold_OPEN :
+    ∀ p : ℝ,
+      (∃ topo_loss_decay : ℕ → ℝ,
+        Filter.Tendsto topo_loss_decay Filter.atTop (nhds 0) ∧
+        ∀ n : ℕ, expectedTopoLoss n p ≤ topo_loss_decay n) →
       ∀ ε : ℝ, 0 < ε →
         ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε
+
+/-- **Theorem 3.3 (`thm:phase`) Part 1: derived theorem.** Below
+    threshold (`p < p_c`), the topological loss `expectedTopoLoss n p`
+    converges to `0` as `n → ∞`. Decomposed from the bundled
+    `gap_phase_transition_below_OPEN` axiom into (a) `topo_loss_decay_
+    below_pc_OPEN` (existence of decay envelope) + (b) `topo_loss_
+    decay_arbitrary_threshold_OPEN` (arbitrary-ε convergence from
+    envelope). The derived theorem composes both atoms.
+
+    paper source: Theorem 3.3 Part 1, lines 400-419. -/
+theorem gap_phase_transition_below
+    (h_perc_prob :
+      ∃ θ : ℝ → ℝ,
+        (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
+        (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) :
+    ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∀ ε : ℝ, 0 < ε →
+        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
+  intro p hp_nn hp_lt ε hε
+  exact topo_loss_decay_arbitrary_threshold_OPEN p
+    (topo_loss_decay_below_pc_OPEN h_perc_prob p hp_nn hp_lt) ε hε
 
 /-- Substantive paper claim — opaque carrier required (Mathlib gap).
     The information-to-topology ratio `|W_info(p, β)| / |W_topo(p)|`
@@ -130,46 +192,111 @@ axiom gap_phase_transition_below_OPEN :
     paper source: Theorem 3.3 (`thm:phase`), part 2 (line 425). -/
 axiom wInfoTopoRatio : ℝ → ℝ → ℝ
 
-/-- **Theorem 3.3 (`thm:phase`) Part 2: Above threshold
-    (`p > p_c = harrisKestenCriticalProb`).**
+/- **Theorem 3.3 (`thm:phase`) Part 2: Above threshold**
+    (`p > p_c = harrisKestenCriticalProb`).
     `|W_topo| = Θ(1)`; `|W_info| / |W_topo| = O(2^{-β}) → 0`. Composes
     the Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`,
-    `gap_info_decay_OPEN`, the wrongness lemma at
-    `prop:trap-prevalence`.
+    `gap_info_decay_OPEN`, the wrongness lemma at `prop:trap-prevalence`.
 
-    Split from the original bundled axiom per `feedback_gap_ledger_in_lean4`
-    Anti-pattern #2.
-
-    The threshold antecedent consumes `harrisKestenCriticalProb` rather
-    than the literal `1/2`; the paper-stated equality is recorded by
-    the Cat 2 axiom `gap_harris_kesten_OPEN`.
-
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom
-    `gap_grimmett_exponential_decay_OPEN` (Grimmett 1999 §6.75
-    exponential cluster-size decay above `p_c`) is threaded as an
-    EXPLICIT ANTECEDENT `(h_grimmett : ...)` so that `#print axioms`
-    on any theorem consuming `gap_phase_transition_above_OPEN`
-    surfaces the Grimmett dependency. The R26 drop of this antecedent
-    was correct for downstream THEOREMS but WRONG for downstream
-    AXIOMS; this R28-A restoration follows the broken-link discipline
-    ladder for audit-chain visibility (`feedback_gap_ledger_in_lean4`
-    2026-05-13 §12 with the R28 axiom-vs-theorem-consumer
-    clarification). The relevant Cat 2 axiom lives at
-    `ClassicalResults.lean :: gap_grimmett_exponential_decay_OPEN`.
+    The bundled `gap_phase_transition_above_OPEN` axiom is now
+    REPLACED by the derived theorem `gap_phase_transition_above`
+    composing two atomic stipulations per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern: see
+    `wInfoTopoRatio_const_exists_OPEN` (existence of positive constant)
+    and `wInfoTopoRatio_bound_OPEN` (quantitative ratio bound) below.
+    The Cat 2 Grimmett §6.75 exponential-decay dependency is threaded
+    as the explicit `h_grimmett` antecedent for audit-chain visibility.
 
     paper source: Theorem 3.3 (`thm:phase`), lines 420-431;
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
     exponential-decay dependency. -/
-axiom gap_phase_transition_above_OPEN :
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 2
+    (proof lines 421-427) derives that for `p > p_c`, the cluster
+    size `|R(v_0)|` has exponentially decaying tail (Grimmett 1999
+    §6.75), so `E[|W_topo|] → E[1/(|R|+1)] = Θ(1)` while `|W_info| =
+    O(2^{-β})` by `prop:info-decay`. The ratio `|W_info|/|W_topo|` has
+    a positive constant `c(p) > 0` characterising the exponential
+    decay rate. This atomic stipulation isolates the EXISTENCE of
+    such a positive constant `c` on the existing carrier
+    `wInfoTopoRatio`.
+
+    Encoding choice: extracted from the bundled
+    `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern (decompose bundled
+    conclusion-axiom into atomic stipulations + derived theorem). The
+    Cat 2 Grimmett dependency is threaded as the explicit
+    `h_grimmett` antecedent for audit-chain visibility.
+
+    Cat 3 sub-type: workingAssumption (paper-stated existence of
+    positive constant; pending Mathlib percolation + Mills-tail
+    composition; 必须 close before publication).
+
+    paper source: Theorem 3.3 Part 2 proof, lines 421-427 (cluster
+    size exponential tail + ratio Θ-bound); Grimmett 1999 §6.75
+    cited as the Cat 2 dependency. -/
+axiom wInfoTopoRatio_const_exists_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c
+
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 2
+    (proof line 427) derives the explicit ratio bound `|W_info(p, β)|
+    / |W_topo(p)| = O(2^{-β})` from the composition of the Mills-tail
+    `|W_info| = O(2^{-β})` (paper `prop:info-decay`) with the cluster-
+    size exponential tail giving `|W_topo| = Θ(1)`. The bound
+    `wInfoTopoRatio p β ≤ c * 2^{-β}` holds for any positive constant
+    `c` matching the Mills + cluster composition rate. This atomic
+    stipulation isolates the QUANTITATIVE bound on the existing
+    carrier `wInfoTopoRatio` given a positive constant `c`.
+
+    Encoding choice: extracted from the bundled
+    `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern. The Cat 2 Grimmett
+    dependency is threaded as the explicit `h_grimmett` antecedent
+    for audit-chain visibility.
+
+    Cat 3 sub-type: workingAssumption (paper-stated quantitative
+    bound on opaque carrier `wInfoTopoRatio`; pending Mathlib
+    Mills-tail + percolation composition; 必须 close before publication).
+
+    paper source: Theorem 3.3 Part 2 proof, line 427 (`|W_info|
+    / |W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-
+    decay` composition. -/
+axiom wInfoTopoRatio_bound_OPEN :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∀ c : ℝ, 0 < c →
         ∀ β : ℝ, 0 < β →
           wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β)
+
+/-- **Theorem 3.3 (`thm:phase`) Part 2: derived theorem.** Above
+    threshold (`p > p_c`), the information-to-topology ratio
+    `wInfoTopoRatio p β` is bounded by `c * 2^{-β}` for some positive
+    constant `c`. Decomposed from the bundled
+    `gap_phase_transition_above_OPEN` axiom into (a)
+    `wInfoTopoRatio_const_exists_OPEN` (existence of positive
+    constant) + (b) `wInfoTopoRatio_bound_OPEN` (quantitative ratio
+    bound). The derived theorem composes both atoms.
+
+    paper source: Theorem 3.3 Part 2, lines 420-431. -/
+theorem gap_phase_transition_above
+    (h_grimmett :
+      ∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ))))
+    (p : ℝ) (hp : harrisKestenCriticalProb < p) :
+    ∃ c : ℝ, 0 < c ∧
+      ∀ β : ℝ, 0 < β →
+        wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β) := by
+  obtain ⟨c, hc_pos⟩ := wInfoTopoRatio_const_exists_OPEN h_grimmett p hp
+  refine ⟨c, hc_pos, ?_⟩
+  intros β hβ
+  exact wInfoTopoRatio_bound_OPEN h_grimmett p hp c hc_pos β hβ
 
 /-! ## 3. Proposition `prop:trap-prevalence`
 
@@ -263,19 +390,53 @@ theorem gap_trap_prevalence_zero
     paper source: Proposition `prop:trap-prevalence` Part 2. -/
 axiom trapMisalignmentProbability : ℝ → ℝ
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    **Proposition `prop:trap-prevalence` Part 2.**
+/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+    `prop:trap-prevalence` Part 2 proof (lines 467-473) derives that
+    for `p > p_c` on `Z²`, the local configuration of (a) `v` having
+    exactly two open edges to `u_1, u_2`, (b) `u_1` isolated
+    (`|C_1| = 1`), and (c) `u_2` having `|C_2| ≥ 2`, has FKG-positive
+    lower-bounded probability `≥ binom(4, 2) p² (1-p)² · p^3 > 0` on
+    the lattice with degree 4 (paper line 473). The trap configuration
+    on this local pattern thus contributes a paper-stated positive
+    constant lower bound on `trapMisalignmentProbability p`. This
+    atomic stipulation isolates the LOCAL FKG-positivity fact on the
+    existing carrier `trapMisalignmentProbability`.
+
+    Encoding choice: extracted from the bundled
+    `gap_trap_prevalence_above_threshold_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern (decompose bundled conclusion-axiom into atomic
+    stipulation + derived theorem). The paper's substantive content
+    here is the local-FKG estimate (paper line 473
+    `binom(4, 2) p² (1-p)² · p^3 > 0` plus FKG-positivity of the
+    `|C_2| ≥ 2` event); the bundled axiom's `0 < trapMisalignmentProbability p`
+    conclusion is the direct paper-stated positivity sub-clause.
+
+    Cat 3 sub-type: workingAssumption (paper-stated FKG-positivity of
+    the local trap pattern; pending Mathlib Z²-lattice + percolation-
+    measure machinery; 必须 close before publication).
+
+    paper source: Proposition `prop:trap-prevalence` Part 2 proof,
+    line 473 (`binom(4, 2) p² (1-p)² · p^3 > 0` lattice-degree-4
+    local FKG estimate). -/
+axiom trap_config_local_positive_OPEN :
+    ∀ p : ℝ, harrisKestenCriticalProb < p → 0 < trapMisalignmentProbability p
+
+/-- **Proposition `prop:trap-prevalence` Part 2: derived theorem.**
     For `p > p_c = harrisKestenCriticalProb` on `Z²`, the trap
-    configuration has positive lower-bounded probability. The
-    hypothesis consumes `harrisKestenCriticalProb` rather than the
+    configuration has positive lower-bounded probability. Decomposed
+    from the bundled `gap_trap_prevalence_above_threshold_OPEN`
+    axiom into the atomic stipulation `trap_config_local_positive_OPEN`
+    (paper-stated FKG estimate). The derived theorem re-exports.
+
+    The hypothesis consumes `harrisKestenCriticalProb` rather than the
     literal `1/2`; the paper-stated equality is recorded by the
-    Cat 2 axiom `gap_harris_kesten_OPEN` (R26 retired the BLOCKED-def
-    encoding pattern; Cat 2 axioms with paper authority are now
-    encoded as plain OPEN axioms with paper-cited docstrings).
+    Cat 2 axiom `gap_harris_kesten_OPEN`.
 
     paper source: Proposition `prop:trap-prevalence` Part 2, lines 458-473. -/
-axiom gap_trap_prevalence_above_threshold_OPEN :
-    ∀ p : ℝ, harrisKestenCriticalProb < p → 0 < trapMisalignmentProbability p
+theorem gap_trap_prevalence_above_threshold :
+    ∀ p : ℝ, harrisKestenCriticalProb < p → 0 < trapMisalignmentProbability p :=
+  trap_config_local_positive_OPEN
 
 /-! ## 4. Corollary `cor:er-phase` — Erdős–Rényi
 

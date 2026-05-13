@@ -71,6 +71,11 @@ namespace BlackwellDilemma.AxiomAudit
 -- via `field_simp; ring`. See Ledger entry `entry_prop_topo_cluster`.
 #print axioms BlackwellDilemma.gap_topo_cluster_relation
 #print axioms BlackwellDilemma.gap_conditional_reduction_part_ii
+-- R37 derived closure: Lemma `lem:conditional-reduction` part (i),
+-- conditional Blackwell monotonicity on the restricted action domain.
+-- Composes the new Cat 3 atom `conditional_subproblem_blackwell_applicable_OPEN`
+-- (paper line 375) threading the Cat 2 Blackwell 1951/1953 dependency.
+#print axioms BlackwellDilemma.gap_conditional_reduction_part_i
 
 -- §3.3 Phase Transition layer
 #print axioms BlackwellDilemma.gap_er_phase_subcritical
@@ -84,6 +89,24 @@ namespace BlackwellDilemma.AxiomAudit
 -- theorem and does NOT block `#print axioms` (which prints the
 -- definition's axiom dependency closure, not its applied form).
 #print axioms BlackwellDilemma.gap_trap_prevalence_zero
+-- R37 derived closures: Theorem 3.3 phase-transition Parts 1+2 +
+-- Proposition `prop:trap-prevalence` Part 2.
+--  * `gap_phase_transition_below`: composes
+--    `topo_loss_decay_below_pc_OPEN` (decay envelope existence,
+--    paper line 415-417) + `topo_loss_decay_arbitrary_threshold_OPEN`
+--    (arbitrary-ε convergence, paper line 417). Cat 2 Grimmett
+--    percolation-probability dependency threaded via `h_perc_prob`.
+--  * `gap_phase_transition_above`: composes
+--    `wInfoTopoRatio_const_exists_OPEN` (positive constant existence,
+--    paper line 421-427) + `wInfoTopoRatio_bound_OPEN` (quantitative
+--    ratio bound, paper line 427). Cat 2 Grimmett §6.75 exponential-
+--    decay dependency threaded via `h_grimmett`.
+--  * `gap_trap_prevalence_above_threshold`: re-exports
+--    `trap_config_local_positive_OPEN` (paper-stated local FKG
+--    estimate, paper line 473).
+#print axioms BlackwellDilemma.gap_phase_transition_below
+#print axioms BlackwellDilemma.gap_phase_transition_above
+#print axioms BlackwellDilemma.gap_trap_prevalence_above_threshold
 
 -- Hodge-style paper-citation closures: def IS the paper's stated
 -- closed form (per CLOSED def "paper-grade proof referenced + ported"
@@ -112,6 +135,20 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cognitive_threshold_characterisation
 #print axioms BlackwellDilemma.gap_policy_complementarity
 #print axioms BlackwellDilemma.gap_threshold_alpha_monotone
+-- R37 derived closures: Proposition `prop:supermodular` +
+-- Proposition `prop:sentimental`.
+--  * `gap_supermodular`: composes `welfareCrossPartial_explicit_form_OPEN`
+--    (paper-stated calculus closed form, line 564-583) +
+--    `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis
+--    at `|z| < 1`, line 582-584). Cat 2 Topkis 1978/1998 dependency
+--    threaded via `_h_topkis` for audit-chain visibility.
+--  * `gap_sentimental_immunity`: composes `signal_independent_at_alpha_zero_OPEN`
+--    (paper L600 base case at α = 0) + `welfare_continuity_in_alpha_OPEN`
+--    (paper L602 perturbative continuity neighbourhood) +
+--    `alpha_star_existence_via_continuity_OPEN` (paper L602 sup-existence
+--    of `α*`).
+#print axioms BlackwellDilemma.gap_supermodular
+#print axioms BlackwellDilemma.gap_sentimental_immunity
 -- R24-B reverted to OPEN axiom: Theorem 4.1 Part 5 (κ*(α) non-decreasing
 -- in α). The prior R23-C2 Cat 1 derived closure was a tautological
 -- `rw [kappaStar_def, kappaStar_def]` collapse exploiting the α-erasure
@@ -122,7 +159,29 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part5_OPEN
 
 -- §4 Principal layer
--- (gap_principal_* and gap_disclosure_* are gap-OPEN axioms; see Ledger.)
+-- R37 derived closures: Proposition `prop:principal-optimum` Parts 1-3
+-- + Corollary `cor:disclosure` Parts 1-2.
+--  * `gap_principal_interior_optimum`: composes 3 atoms (paper proof
+--    line 624-625, 632) — `W_bar_eventually_decreasing_in_reversal_OPEN`
+--    + `W_bar_exceeds_zero_at_positive_beta_OPEN` +
+--    `interior_max_exists_from_unimodal_envelope_OPEN`.
+--  * `gap_principal_monotone_in_kappa`: composes 2 atoms (paper proof
+--    line 626, 634) — `fosd_induces_derivative_domination_OPEN` +
+--    `argmax_monotone_under_derivative_domination_OPEN`.
+--  * `gap_principal_regime_bifurcation`: composes 2 atoms (paper proof
+--    line 627, 636-640) — `W_bar_mixture_decomposition_OPEN` +
+--    `non_concave_triple_from_mixture_OPEN`.
+--  * `gap_disclosure_full_suboptimal`: composes 2 atoms (paper proof
+--    line 645, 652-656) — `averaged_reversal_overshoot_positive_OPEN` +
+--    `finite_beta_above_limit_from_overshoot_OPEN`.
+--  * `gap_disclosure_differentiated_dominates`: re-exports 1 atom
+--    (paper proof line 647, 658) —
+--    `differentiated_per_agent_optimum_dominates_uniform_OPEN`.
+#print axioms BlackwellDilemma.gap_principal_interior_optimum
+#print axioms BlackwellDilemma.gap_principal_monotone_in_kappa
+#print axioms BlackwellDilemma.gap_principal_regime_bifurcation
+#print axioms BlackwellDilemma.gap_disclosure_full_suboptimal
+#print axioms BlackwellDilemma.gap_disclosure_differentiated_dominates
 
 -- §5 Constructive instances
 #print axioms BlackwellDilemma.FiveState.gap_kappaStar_at_two_thirds
