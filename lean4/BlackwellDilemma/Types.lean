@@ -1,0 +1,501 @@
+/-
+  BlackwellDilemma/Types.lean
+
+  Opaque IDP primitives.
+
+  Companion to: "Information Value Under Endogenous Feasibility" (Li, 2026), §2.
+
+  Mathlib has `Mathlib.Combinatorics.SimpleGraph` (graphs),
+  `Mathlib.MeasureTheory` (probability), and
+  `Mathlib.Probability.Distributions.Gaussian` (Gaussian densities), but the
+  combination needed to state the IDP — random subgraphs under bond
+  percolation, Gaussian-noise reward signals, distance-decaying topology
+  signals, sequential agent traversal with no-revisit rule — is not yet
+  packaged. We therefore introduce the IDP primitives axiomatically,
+  following the same opaque-types-with-paper-citations pattern used in
+  `hodge-conjecture-lean4-formalization/HodgeReduction/Types.lean`.
+
+  No bare `Prop` fields; no `def := True` tricks; no free-RHS existentials.
+
+  ## Module docstring on opaque predicates
+
+  Every `axiom` carries a `paper source:` citation. Predicates fall into
+  two groups:
+   * Predicates with data-bound semantic content (e.g. `Edge.IsBlocked`,
+     `IsReachable`): constrained by further axioms tying them to the paper
+     (Definitions 2.1–2.6).
+   * Predicates pinned only by the theorem that uses them
+     (e.g. `IsTopologyBlind`, `IsBlackwellOrdered`): they are scope labels,
+     not independently-verifiable propositions within this file.
+-/
+
+import Mathlib.Data.Real.Basic
+import Mathlib.Data.Finset.Basic
+import Mathlib.MeasureTheory.Measure.MeasureSpace
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
+
+namespace BlackwellDilemma
+
+/-! ## 1. Action graph
+
+The paper quantifies over a finite undirected graph `G = (V, E)` on `n`
+vertices, the "action space" (Definition 2.1, line 108). We axiomatise
+the carrier abstractly to avoid the SimpleGraph machinery, since later
+percolation-aware constructions are easier on a custom carrier. -/
+
+/-- Opaque carrier: vertex set of the action graph.
+    paper source: Definition 2.1 ("`G = (V, E)` is an undirected graph on
+    `n` nodes"). -/
+axiom Vertex : Type
+
+/-- Decidable equality on vertices (every IDP instance is finite). -/
+axiom Vertex.decEq : DecidableEq Vertex
+attribute [instance] Vertex.decEq
+
+/-- Opaque undirected edge predicate.
+    paper source: Definition 2.1. -/
+axiom IsEdge : Vertex → Vertex → Prop
+
+/-- Edge symmetry (paper graph is undirected).
+    paper source: Definition 2.1 ("undirected graph"). -/
+axiom IsEdge.symm : ∀ {u v : Vertex}, IsEdge u v → IsEdge v u
+
+/-! ## 2. Percolation realisation
+
+For each edge, a Bernoulli-`p` blocking decision; the open-edge subgraph
+is `G_p` (paper line 119 "We write G_p for the random subgraph"). We
+expose the opaque type `PercolationOutcome` = "an outcome of the bond
+percolation experiment on G". -/
+
+/-- Sample space of bond percolation on `G`.
+    paper source: Definition 2.1 + line 119. -/
+axiom PercolationOutcome : Type
+
+/-- Predicate: in this percolation outcome, the edge `(u, v)` is OPEN
+    (i.e., not blocked).
+    paper source: Definition 2.1 ("Each edge `e ∈ E` is independently
+    blocked with probability `p`"). -/
+axiom IsOpen : PercolationOutcome → Vertex → Vertex → Prop
+
+/-- The blocking probability `p ∈ [0, 1]` (the IDP's irreversibility
+    parameter).
+    paper source: Definition 2.1, the parameter `p`. -/
+axiom blockingProb : ℝ
+
+/-- Constraint: blocking probability lies in `[0, 1]`. -/
+axiom blockingProb_mem_unitInterval : 0 ≤ blockingProb ∧ blockingProb ≤ 1
+
+/-! ## 3. Reachable set + dynamic value
+
+Definition 2.2 (`def:reachable`): `R(v_0) = { v : ∃ path from v_0 to v
+using only unblocked edges }`. Definition 2.5 (`def:forward-reachable`):
+`R(u | H_t)` = forward reachable set from `u` given visit history `H_t`. -/
+
+/-- The reachable set `R(v₀, ω) = {v : ∃ path from v₀ to v in `ω`'s open
+    edges}`.
+    paper source: Definition 2.2. -/
+axiom ReachableSet : Vertex → PercolationOutcome → Finset Vertex
+
+/-- The forward reachable set `R(u | H_t)` from `u` after history `H_t`.
+    paper source: Definition 2.5 (`def:forward-reachable`). -/
+axiom ForwardReachable :
+    Vertex → Finset Vertex → PercolationOutcome → Finset Vertex
+
+/-- Cat 3 paper-novel ATOMIC structural equation: the starting-vertex
+    case relating `ReachableSet` and `ForwardReachable`. Paper
+    Definition 2.5 (`def:forward-reachable`) explicitly states "For the
+    starting vertex, `R(v_0) = R(v_0 | ∅)` is the full reachable set
+    (Definition 2.2)". This is a paper-stated structural equation
+    between the two existing IDP primitives `ReachableSet` (Def 2.2)
+    and `ForwardReachable` (Def 2.5).
+    paper source: Definition 2.5 (`def:forward-reachable`), line 193
+    ("For the starting vertex, `R(v_0) = R(v_0 | ∅)` is the full
+    reachable set"). -/
+axiom ReachableSet_eq_ForwardReachable_empty :
+    ∀ (v : Vertex) (ω : PercolationOutcome),
+      ReachableSet v ω = ForwardReachable v ∅ ω
+
+/-- Cat 3 paper-novel ATOMIC structural equation: forward-reachable set
+    contains the starting vertex `u` (length-0 path convention applied
+    to forward-reachable construction). Paper Definition 2.5
+    (`def:forward-reachable`) defines `R(u | H_t) = {w ∈ V : ∃ path from
+    u to w in G[V \ H_t] using only unblocked edges}`; the length-0
+    path from `u` to `u` is admitted (consistent with Def 2.2's
+    convention recorded in `ReachableSet_self_member` (now derived
+    theorem below).
+
+    Scope discipline (opaque-carrier convention): paper's `H_t` denotes
+    the visit-history at step `t` BEFORE arriving at `u`, so paper's
+    `R(u | H_t)` is naturally evaluated only at histories with `u ∉ H`.
+    For the opaque-carrier axiomatic encoding here, we adopt the
+    paper-faithful length-0-path convention UNCONDITIONALLY (i.e.
+    `u ∈ ForwardReachable u H ω` for any `H`, including `H ∋ u`),
+    parallel to the derived `ReachableSet_self_member` and consistent
+    with the paper's path-counting convention. The unconditional form is
+    REQUIRED by the foundational `V_dyn_def` axiom (Phase.lean), which
+    witnesses non-emptiness of `ForwardReachable v H ω` over arbitrary
+    `H` to define `V_dyn` via `Finset.sup'`; tightening this atom with
+    a `u ∉ H` premise would cascade premise-threading into `V_dyn_def`
+    (and into `gap_V_g_le_V_dyn`, plus every Phase / GeneralGraphs /
+    Cognitive theorem that unfolds `V_dyn` over a non-empty history).
+    Paper-faithful theorems (e.g. `gap_trap_prevalence_zero`) apply this
+    atom only at `H = ∅`, where the convention coincides exactly with
+    paper line 463 scope. The slightly-stronger Lean form is acknowledged
+    here as the documented opaque-carrier abstraction.
+
+    paper source: Definition 2.5 (`def:forward-reachable`), lines
+    187-194 (length-0 path inclusion convention, parallel to Def 2.2). -/
+axiom ForwardReachable_self_member :
+    ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
+      u ∈ ForwardReachable u H ω
+
+/-- Cat 3 derived theorem (refactored from prior atomic axiom
+    `ReachableSet_self_member` per the gap-ledger discipline's
+    "atoms must serve downstream consumers" mandate): the trivial-path
+    inclusion convention `v ∈ R(v, ω)`. Paper Definition 2.2
+    (`def:reachable`) is the source convention; the convention is now
+    derived by composing the two atomic structural equations
+    `ReachableSet_eq_ForwardReachable_empty` (paper Def 2.5 line 193
+    structural equation between IDP primitives) and
+    `ForwardReachable_self_member` (paper Def 2.5 length-0 path
+    inclusion). The Cat 3 derivation chain shows that the Def 2.2
+    convention is a structural consequence of the Def 2.5 atoms,
+    not an independent atomic input.
+    paper source: Definition 2.2 (`def:reachable`), lines 121-128
+    (length-0 path inclusion convention) — derived from Definition 2.5
+    atoms. -/
+theorem ReachableSet_self_member :
+    ∀ (v : Vertex) (ω : PercolationOutcome), v ∈ ReachableSet v ω := by
+  intro v ω
+  rw [ReachableSet_eq_ForwardReachable_empty v ω]
+  exact ForwardReachable_self_member v ∅ ω
+
+/-- Reward function `r: V → [0, 1]` (paper Def 2.1, line 113).
+    paper source: Definition 2.1 ("`r: V → [0,1]` is the reward function"). -/
+axiom reward : Vertex → ℝ
+
+/-- Boundedness of the reward function (paper standing assumption: bounded
+    rewards, uniform on `[0,1]`).
+    paper source: Definition 2.1 + Proposition info-decay (line 270 onward,
+    standing-assumption: `r: V → [0,1]`). -/
+axiom reward_mem_unitInterval : ∀ v : Vertex, 0 ≤ reward v ∧ reward v ≤ 1
+
+/-- Intrinsic preference function `ξ: V → [0, 1]` (paper Def 2.1).
+
+    Encoding choice — extra `PercolationOutcome` parameter: paper Def 2.1
+    line 114 introduces `ξ` as drawn "i.i.d. from `Uniform[0, 1]`
+    independently of `r`", and paper §2.5 line 207-208 defines welfare
+    `W = E_{G_p}[E_{s, ω̂_κ}[r(v_T)]]` where the inner expectation is
+    explicitly described as ranging "over reward signals, topology
+    signals, and the intrinsic preference realization". Thus `ξ` is not
+    a fixed deterministic function but a sampled realisation drawn
+    jointly with the percolation experiment. We model `ξ : V × Ω → ℝ`
+    where `Ω = PercolationOutcome` is the underlying joint sample space
+    — `intrinsicPref v ω` denotes the realised value of `ξ(v)` under
+    the joint sample `ω`. The pointwise unit-interval support is then
+    captured by `intrinsicPref_mem_unitInterval` (a per-`(v, ω)`
+    constraint matching paper's `ξ : V → [0, 1]` range claim).
+
+    paper source: Definition 2.1, line 114 ("`ξ: V → [0,1]` is the
+    intrinsic preference function, drawn i.i.d. from `Uniform[0,1]`
+    independently of `r`") + §2.5 line 207-208 (joint inner expectation
+    "over reward signals, topology signals, and the intrinsic preference
+    realization"). -/
+axiom intrinsicPref : Vertex → PercolationOutcome → ℝ
+
+/-- Cat 3 paper-novel ATOMIC structural equation: the intrinsic
+    preference function is bounded in `[0, 1]` per the paper's stated
+    range. Companion to `reward_mem_unitInterval`; `intrinsicPref` was
+    introduced opaquely without its paper-stated unit-interval support
+    until this atomic axiom restores Definition 2.1's range claim.
+    paper source: Definition 2.1 (`def:idp`), line 114
+    ("`ξ: V → [0,1]` is the intrinsic preference function, drawn i.i.d.
+    from `Uniform[0,1]`"). The Lean signature does not encode the i.i.d.
+    Uniform measure (a probabilistic claim on the joint distribution
+    over `PercolationOutcome`); only the pointwise unit-interval support
+    is captured here. -/
+axiom intrinsicPref_mem_unitInterval :
+    ∀ (v : Vertex) (ω : PercolationOutcome),
+      0 ≤ intrinsicPref v ω ∧ intrinsicPref v ω ≤ 1
+
+/-! ### Realised utility (`def:rationality`)
+
+Definition 2.4 (`def:rationality`, line 174-178) gives the agent's
+realised utility at vertex `v` as a convex combination of the monetary
+reward `r(v)` and the intrinsic preference `ξ(v)`:
+`U(v) = α · r(v) + (1 - α) · ξ(v)`. This is a paper-stated structural
+definition on the existing primitives `reward` and `intrinsicPref`,
+recorded here as a `noncomputable def` (computable from the existing
+primitives, not requiring a fresh axiom). -/
+
+/-- Realised utility `U(v) = α · r(v) + (1 - α) · ξ(v)` per paper
+    Definition 2.4 (`def:rationality`).
+    paper source: Definition 2.4, line 174-178 ("The agent's realised
+    utility at vertex `v` is `U(v) = α · r(v) + (1-α) · ξ(v)`"). -/
+noncomputable def realisedUtility (α : ℝ) (v : Vertex) (ω : PercolationOutcome) : ℝ :=
+  α * reward v + (1 - α) * intrinsicPref v ω
+
+/-- Cat 1 derived theorem: realised utility `U(v) = α · r(v) +
+    (1 - α) · ξ(v)` lies in `[0, 1]` whenever `α ∈ [0, 1]`. Composes
+    the two unit-interval atoms `reward_mem_unitInterval` (paper Def 2.1
+    `r: V → [0, 1]`) and `intrinsicPref_mem_unitInterval` (paper Def 2.1
+    `ξ: V → [0, 1]`) with the convex-combination Cat 1 arithmetic
+    (`linarith`). This is the standard "convex combination of two
+    unit-interval values lies in `[0, 1]`" Mathlib-derivable structural
+    fact, giving both atoms an explicit downstream consumer per the
+    discipline's "every atom serves a derived theorem" mandate.
+    paper source: Definition 2.4 (`def:rationality`), line 174-178 +
+    Definition 2.1 line 113-114 (`r, ξ: V → [0, 1]`). -/
+theorem realisedUtility_mem_unitInterval
+    (α : ℝ) (h_α_nonneg : 0 ≤ α) (h_α_le_one : α ≤ 1)
+    (v : Vertex) (ω : PercolationOutcome) :
+    0 ≤ realisedUtility α v ω ∧ realisedUtility α v ω ≤ 1 := by
+  unfold realisedUtility
+  obtain ⟨h_r_nonneg, h_r_le_one⟩ := reward_mem_unitInterval v
+  obtain ⟨h_xi_nonneg, h_xi_le_one⟩ := intrinsicPref_mem_unitInterval v ω
+  have h_one_sub_alpha_nonneg : 0 ≤ 1 - α := by linarith
+  refine ⟨?_, ?_⟩
+  · have h1 : 0 ≤ α * reward v := mul_nonneg h_α_nonneg h_r_nonneg
+    have h2 : 0 ≤ (1 - α) * intrinsicPref v ω :=
+      mul_nonneg h_one_sub_alpha_nonneg h_xi_nonneg
+    linarith
+  · have h1 : α * reward v ≤ α * 1 := mul_le_mul_of_nonneg_left h_r_le_one h_α_nonneg
+    have h2 : (1 - α) * intrinsicPref v ω ≤ (1 - α) * 1 :=
+      mul_le_mul_of_nonneg_left h_xi_le_one h_one_sub_alpha_nonneg
+    linarith
+
+/-! ## 4. Signal precision and reward signals (`def:idp` + `sec:model`)
+
+Reward signals: `s_i = r(v_i) + ε_i`, with `ε_i ~ N(0, σ²(β))` and
+`σ²(β) = 1/(2^{2β} - 1)` for β > 0 (Definition 2.1, line 110, plus
+`sec:model` line 134). The signal precision `β ≥ 0` indexes a Blackwell-
+ordered family. -/
+
+/-- Signal-noise variance as a function of precision `β`:
+    `σ²(β) = 1/(2^{2β} - 1)` for β > 0; `σ²(0) = +∞` (paper convention).
+    We expose only the open-domain `β > 0` form here; the limiting cases
+    are absorbed into the abstract `SignalPrecision` interface used in
+    later proofs.
+    paper source: Definition 2.1, line 110 + §2.2 "Information Structure". -/
+noncomputable def signalVariance (β : ℝ) : ℝ :=
+  1 / ((2 : ℝ)^(2 * β) - 1)
+
+/-- Strict antitonicity of the signal variance on the positive reals:
+    higher precision `β` yields strictly smaller noise variance.
+    Proved from `2^{2β}` strictly increasing in `β` (base `2 > 1`),
+    positivity of `2^{2β} - 1` for `β > 0`, and reciprocal-reversal on
+    positives.
+    paper source: §2.2 "σ² is strictly decreasing in β, so a higher β
+    yields a Blackwell-superior signal." -/
+theorem signalVariance_strictAntitoneOn :
+    ∀ {β₁ β₂ : ℝ}, 0 < β₁ → β₁ < β₂ →
+      signalVariance β₂ < signalVariance β₁ := by
+  intro β₁ β₂ hβ₁_pos hβ₁β₂
+  have hβ₂_pos : 0 < β₂ := lt_trans hβ₁_pos hβ₁β₂
+  have h2pos : (0 : ℝ) < 2 := by norm_num
+  have h2_one_lt : (1 : ℝ) < 2 := by norm_num
+  -- Strict monotonicity of `t ↦ 2^t` on ℝ (base 2 > 1) applied to `2β₁ < 2β₂`.
+  have h2β_lt : (2 : ℝ)^(2 * β₁) < (2 : ℝ)^(2 * β₂) := by
+    have hexp : 2 * β₁ < 2 * β₂ := by linarith
+    exact Real.rpow_lt_rpow_of_exponent_lt h2_one_lt hexp
+  -- Positivity: for β > 0, 2β > 0, hence 2^{2β} > 2^0 = 1, hence 2^{2β} - 1 > 0.
+  have hpow_one_lt : ∀ {β : ℝ}, 0 < β → (1 : ℝ) < (2 : ℝ)^(2 * β) := by
+    intro β hβ
+    have h2β_pos : 0 < 2 * β := by linarith
+    exact Real.one_lt_rpow h2_one_lt h2β_pos
+  have hd₁_pos : 0 < (2 : ℝ)^(2 * β₁) - 1 := by
+    have := hpow_one_lt hβ₁_pos; linarith
+  have hd₂_pos : 0 < (2 : ℝ)^(2 * β₂) - 1 := by
+    have := hpow_one_lt hβ₂_pos; linarith
+  -- Strict ordering of the denominators.
+  have hd_lt : (2 : ℝ)^(2 * β₁) - 1 < (2 : ℝ)^(2 * β₂) - 1 := by linarith
+  -- Reciprocal reverses on positives.
+  unfold signalVariance
+  exact one_div_lt_one_div_of_lt hd₁_pos hd_lt
+
+/-! ## 5. Cognitive depth and topology signals (`def:cognitive-depth`)
+
+The topology-signal noise on an edge at graph distance `d` is
+`σ²_topo(κ, d) = d²/(2^{2κ} - 1)` for κ > 0; `σ²_topo(0, d) = +∞`.
+The κ = 0 (greedy) agent is qualitatively distinct from κ → 0⁺ (paper
+Remark `kappa-discontinuity`). -/
+
+/-- Topological-signal variance: `σ²_topo(κ, d) = d²/(2^{2κ} - 1)`.
+    paper source: Definition 2.3 (`def:cognitive-depth`). -/
+noncomputable def topoSignalVariance (κ : ℝ) (d : ℕ) : ℝ :=
+  (d : ℝ)^2 / ((2 : ℝ)^(2 * κ) - 1)
+
+/-- Cat 1 Mathlib-derivable structural fact: at distance `d = 0` (the
+    starting vertex itself, or a terminal-vertex case where the
+    relevant edge is at distance 0), the topology-signal variance is
+    identically `0` for any cognitive depth `κ`.
+    paper source: Proposition `prop:threshold-five-state` proof, line
+    870 ("the topology noise on the A branch is `σ²_topo(κ, 0) = 0`
+    (terminal vertex at distance 0)"). Provable kernel-pure from the
+    definition of `topoSignalVariance` and `(0 : ℝ)^2 = 0`. -/
+theorem topoSignalVariance_distance_zero (κ : ℝ) :
+    topoSignalVariance κ 0 = 0 := by
+  unfold topoSignalVariance
+  simp
+
+/-! ## 6. Conditions C1–C3 (`def:diagnostic`)
+
+Definition 2.7 — three structural conditions characterising IDP
+instances on which the welfare reversal applies. -/
+
+/-- Condition C1 (Irreversibility): some vertex has a strict reachable
+    subset under the percolation measure.
+    paper source: Definition 2.7. -/
+axiom C1_Irreversibility : Prop
+
+/-- Condition C2 (Reward-Topology Misalignment): the highest-immediate-
+    reward neighbour of `v₀` does not lead to the highest-value
+    continuation region.
+    paper source: Definition 2.7. -/
+axiom C2_RewardTopologyMisalignment : Prop
+
+/-- Condition C2′ (greedy-path generalisation, paper Theorem 6.1):
+    same as C2 with `V_g` (greedy-path value) in place of `V_dyn`, plus
+    a non-interference clause on competing neighbours.
+    paper source: Theorem 6.1 (`thm:general-tree`). -/
+axiom C2prime_GreedyPathMisalignment : Prop
+
+/-- Condition C3 (Information Locality): `I(s; R | r) = 0`.
+    paper source: Definition 2.7. -/
+axiom C3_InformationLocality : Prop
+
+/-- The full diagnostic conjunction (paper §2.7 invocation pattern). -/
+def Conditions_C1_C2_C3 : Prop :=
+  C1_Irreversibility ∧ C2_RewardTopologyMisalignment ∧ C3_InformationLocality
+
+/-- The general-graph diagnostic (paper §6.1 invocation pattern). -/
+def Conditions_C1_C2prime_C3 : Prop :=
+  C1_Irreversibility ∧ C2prime_GreedyPathMisalignment ∧ C3_InformationLocality
+
+/-! ## 7. Topology-blind signals (`def:topology-blind`)
+
+A signal `s` is topology-blind iff `I(s; R | r) = 0`. Equivalent to
+`s ⫫ R | r`. The Gaussian signal `s_i = r(v_i) + ε_i` satisfies this
+trivially (Definition 3.x in §3.2). -/
+
+/-- Predicate: the signal structure is topology-blind.
+    paper source: Definition (`def:topology-blind`) §3.2. -/
+axiom IsTopologyBlind : (PercolationOutcome → ℝ) → Prop
+
+/-! ## 8. Blackwell ordering (`thm:dilemma`)
+
+A signal family `{π_β}_β` is Blackwell-ordered if increasing β yields a
+Blackwell-superior signal. We expose this as an opaque predicate, since
+the formal definition (Mathlib lacks Blackwell ordering) is the subject
+of `ClassicalResults.lean`. -/
+
+/-- Predicate: a signal-precision-indexed family `{π_β}_β` is Blackwell-
+    ordered (β' > β ⇒ π_{β'} is Blackwell-superior to π_β).
+    paper source: Lemma `lem:wrongness` (line 338). -/
+axiom IsBlackwellOrdered : (ℝ → PercolationOutcome → ℝ) → Prop
+
+/-! ## 9. Agent type tags
+
+The paper distinguishes three primary agents, each indexed by `(β, κ, α)`. -/
+
+inductive AgentType
+  | greedy            -- (κ=0, α=1): paper Remark `kappa-discontinuity`
+  | bayesian          -- (κ→∞, α=1): paper Theorem 5.1
+  | kappaAgent        -- (κ>0): paper §4
+  | bayesianNaive     -- modeled p̂ ≠ p: paper Remark `robustness-misspec`(i)
+  | sentimental       -- (α<α*): paper Proposition `sentimental`
+  deriving DecidableEq, Repr
+
+/-- Welfare of a typed agent on the (axiomatised) IDP, parameterised by
+    `(β, κ, α)`. Concrete values arise from integrating the agent's
+    decision rule against the percolation+signal measure; here we expose
+    only the type so subsequent modules can state monotonicity-in-β,
+    monotonicity-in-κ, etc. without committing to the specific integral.
+    paper source: §2.5 "Agent Behaviour" (welfare function definition,
+    line 205). -/
+axiom agentWelfare : AgentType → (β κ α : ℝ) → ℝ
+
+/-- Cat 3 paper-novel ATOMIC structural equation: agent welfare
+    inherits the unit-interval bound from the underlying reward
+    function. Paper §2.5 line 204-208 defines welfare as
+    `W(β, κ, α) = E_{G_p}[E_{s, ω̂_κ}[r(v_T)]]`, the expected monetary
+    reward at the terminal position. Since `r : V → [0, 1]`
+    (Definition 2.1, line 113), the expectation is bounded in
+    `[0, 1]` for any agent type and parameter triple `(β, κ, α)`.
+    paper source: §2.5 "Agent Behaviour", lines 204-208 (welfare
+    definition) + Definition 2.1, line 113 (`r: V → [0, 1]`).
+
+    This is the agentWelfare counterpart of `reward_mem_unitInterval`
+    and `oracleReward_mem_unitInterval`; recording the bound at the
+    `agentWelfare` carrier level prevents per-AgentType re-axiomatization
+    in downstream modules. -/
+axiom agentWelfare_mem_unitInterval :
+    ∀ (a : AgentType) (β κ α : ℝ),
+      0 ≤ agentWelfare a β κ α ∧ agentWelfare a β κ α ≤ 1
+
+/-- The within-`R` oracle's expected reward (Definition 2.6).
+    paper source: Definition 2.6 (`def:oracle`). -/
+axiom oracleReward : ℝ → ℝ  -- as a function of β
+
+/-- Cat 3 paper-novel ATOMIC structural equation: the oracle's expected
+    reward inherits the unit-interval bound from the underlying reward
+    function. Per paper Definition 2.1 line 113, `r: V → [0, 1]`; the
+    within-`R` oracle of Definition 2.6 selects the argmax over `R(v_0)`
+    of `E[r(v) | s]`, so its expected reward (over the percolation
+    measure) is also bounded in `[0, 1]`.
+    paper source: Definition 2.6 (`def:oracle`), line 210-213, combined
+    with `r: V → [0, 1]` from Definition 2.1, line 113.
+
+    The atomic structural equation expresses the unit-interval support
+    of `oracleReward β` as a paper-grade boundedness fact on the
+    opaque `oracleReward` carrier. This is parallel to
+    `reward_mem_unitInterval` (which constrains `reward` directly) and
+    `intrinsicPref_mem_unitInterval` (which constrains `intrinsicPref`
+    directly); recording it here prevents downstream consumers from
+    needing to re-axiomatize the bound under different names.
+
+    Status — atomized stub awaiting consumer: this atom is foundational
+    paper-stated infrastructure (paper Def 2.6 + Def 2.1 line 113
+    structural fact), but no current downstream theorem in this
+    formalisation consumes it. The atom is retained as a paper-grade
+    structural-fact record per the discipline's "structural facts about
+    paper primitives are Cat 3 atomic inputs even when not yet
+    operationally needed downstream"; future modules instantiating the
+    Definition 2.6 oracle on a concrete IDP setup are expected to
+    consume this bound as a unit-interval input. -/
+axiom oracleReward_mem_unitInterval :
+    ∀ β : ℝ, 0 ≤ oracleReward β ∧ oracleReward β ≤ 1
+
+/-! ## 10. Terminal-neighbour topology
+
+Used by Theorem 3.2 (`thm:dilemma`) and Theorem 4.1
+(`thm:cognitive-threshold`): each neighbour of `v₀` is either terminal
+(degree 1) or leads to a depth-1 subtree. -/
+
+/-- Predicate: the IDP instance has terminal-neighbour topology at `v₀`.
+    paper source: Theorem 3.2 (`thm:dilemma`); Theorem 4.1 (`thm:cognitive-
+    threshold`). -/
+axiom TerminalNeighbourTopology : Prop
+
+/-- Predicate: the starting vertex `v₀` has exactly two accessible
+    neighbours, i.e. `|N_R(v_0)| = 2` in the paper's notation. Used by
+    Lemma `lem:wrongness` (line 338, "Assume further that `v_0` has
+    exactly two accessible neighbours (`|N_R(v_0)| = 2`)") and Theorem
+    3.2 (`thm:dilemma`, line 388, "with `v_0` of degree `2` in
+    `N_R(v_0)`"). The general-degree case is the subject of Theorem
+    `thm:general-tree` under the non-interference condition C2′.
+
+    Cat 3 (paper-novel scope predicate): a structural hypothesis on the
+    IDP instance characterising the degree-2 case under which the
+    paper's wrongness construction reduces to a clean two-branch
+    comparison. Encoded as opaque `Prop` rather than `def`-derived from
+    `ReachableSet v_0` because the paper introduces it as a standalone
+    assumption clause, not as a derived fact about the percolation
+    realisation.
+
+    paper source: Lemma `lem:wrongness` (line 338); Theorem
+    `thm:dilemma` (line 388). -/
+axiom DegreeTwoStartingVertex : Prop
+
+end BlackwellDilemma

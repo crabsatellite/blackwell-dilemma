@@ -1,0 +1,260 @@
+/-
+  BlackwellDilemma/AxiomAudit.lean
+
+  Prints the axiom dependency list for every theorem (CLOSED entry)
+  in the formalisation.
+
+  Per `feedback_gap_ledger_in_lean4`: status `CLOSED` requires `theorem
+  gap_X : <statement> := <proof>` with no `sorry`. The audit verifies
+  this by checking #print axioms for each CLOSED entry.
+
+  Expected axioms:
+   * Lean 4 / Mathlib kernel: `propext`, `Classical.choice`, `Quot.sound`.
+   * Paper-citation axioms (named `gap_<name>_OPEN`) — these stand for
+     paper claims whose Lean version is a placeholder pending Mathlib
+     port + substantive proof.
+   * Opaque types and carriers declared in `Types.lean`,
+     `ClassicalResults.lean`, etc. (`Vertex`, `IsEdge`, `Phi`, `phi`,
+     `agentWelfare`, `kappaStar`, etc.).
+
+  Any axiom outside the union of these three categories is a RED FLAG.
+
+  Note on BLOCKED/DEAD-END status (post-R26 update):
+  Per the `feedback_gap_ledger_in_lean4` 2026-05-13 discipline (6-tier
+  status: OPEN / PARTIAL / BLOCKED / DEAD-END / CLOSED / DEFINITIONAL),
+  BLOCKED is reserved for genuine no-acceptance-possible cases
+  (folkloric, conjectural-unproven, or no-source-at-all). External
+  published Cat 2 theorems with Mathlib gap are encoded as plain
+  Cat 2 OPEN axioms (`axiom gap_X_OPEN : <stmt>` with paper-cited
+  docstring), NOT as BLOCKED-defs. R26 retired the BLOCKED-def
+  encoding pattern for this domain; the 8 prior BLOCKED entries (6
+  Cat 2 + 2 Cat 3 edge cases) all converted to plain OPEN axioms.
+
+  Cat 2 dependency surfacing (R28-A clarification): for downstream
+  THEOREMS, the Cat 2 axiom is composed in the proof body and
+  surfaces in `#print axioms` automatically. For downstream AXIOMS
+  (which have no body), the Cat 2 axiom MUST be threaded as an
+  EXPLICIT ANTECEDENT for the dependency to surface in `#print
+  axioms`. The R28 broken-link discipline restoration distinguishes
+  these two cases.
+
+  Usage:  `lake env lean BlackwellDilemma/AxiomAudit.lean`
+-/
+
+import BlackwellDilemma
+
+namespace BlackwellDilemma.AxiomAudit
+
+-- §2 IDP Types (signal-variance algebra)
+#print axioms BlackwellDilemma.signalVariance_strictAntitoneOn
+-- R23-B Cat 1 closure: `σ²_topo(κ, 0) = 0` (paper proof line 870 —
+-- terminal-vertex distance-0 case). Kernel-pure via `unfold + simp`.
+-- See Ledger entry `entry_atom_topoSignalVariance_distance_zero`.
+#print axioms BlackwellDilemma.topoSignalVariance_distance_zero
+
+-- §3 Welfare Decomposition (CLOSED — kernel only)
+#print axioms BlackwellDilemma.WelfareSetup.gap_welfare_decomposition
+#print axioms BlackwellDilemma.SignalFamily.gap_W_topo_signal_immune
+#print axioms BlackwellDilemma.SignalFamily.gap_W_topo_constant
+#print axioms BlackwellDilemma.WelfareSetup.gap_physical_irreducibility
+#print axioms BlackwellDilemma.WelfareSetup.gap_W_info_nonpos
+#print axioms BlackwellDilemma.WelfareSetup.gap_oracle_W_info_zero
+#print axioms BlackwellDilemma.WelfareSetup.gap_welfare_le_W_topo
+#print axioms BlackwellDilemma.WelfareSetup.gap_oracle_welfare_eq_W_topo
+
+-- §3.2 Welfare Reversal layer
+#print axioms BlackwellDilemma.gap_dilemma
+-- R23-C1 Cat 1 derived closure: Proposition `prop:topo-cluster`
+-- closed-form `(n-k)/((n+1)(k+1))` derives Cat 1 algebraically from the
+-- Cat 3 atomic structural-equation `expectedTopoLoss_conditional_def`
+-- (paper line 292 order-statistics decomposition `n/(n+1) − k/(k+1)`)
+-- via `field_simp; ring`. See Ledger entry `entry_prop_topo_cluster`.
+#print axioms BlackwellDilemma.gap_topo_cluster_relation
+#print axioms BlackwellDilemma.gap_conditional_reduction_part_ii
+
+-- §3.3 Phase Transition layer
+#print axioms BlackwellDilemma.gap_er_phase_subcritical
+#print axioms BlackwellDilemma.gap_er_phase_supercritical
+#print axioms BlackwellDilemma.gap_power_law_heavy_tail
+-- R23-C2 derived closure: Proposition `prop:trap-prevalence` Part 1
+-- (V_dyn agrees on neighbours at p = 0). Composes the Cat 3 atom
+-- `forward_reachable_full_at_zero_OPEN` (paper line 463) with the
+-- existing `V_dyn_def` atom + `Finset.sup'_congr` (Cat 1 Mathlib).
+-- The `[Fintype Vertex]` parameter is an instance argument on the
+-- theorem and does NOT block `#print axioms` (which prints the
+-- definition's axiom dependency closure, not its applied form).
+#print axioms BlackwellDilemma.gap_trap_prevalence_zero
+
+-- Hodge-style paper-citation closures: def IS the paper's stated
+-- closed form (per CLOSED def "paper-grade proof referenced + ported"
+-- clause). Substantive derivations cited but not Lean-encoded.
+-- The 4 limit-of-process entries (W_open_limit_{infty,zero},
+-- error_compounding_part{1,2}) were reverted to honest OPEN axioms
+-- because Hodge-style def-rfl is not appropriate for limits-of-process
+-- (the def discards the limit content); they now appear as
+-- `gap_*_OPEN` Filter.Tendsto axioms in their respective files.
+#print axioms BlackwellDilemma.gap_order_statistics_max
+#print axioms BlackwellDilemma.gap_er_bond_percolation_threshold
+#print axioms BlackwellDilemma.gap_power_law_thin_tail
+
+-- §3.3 ClassicalResults consumer chain for Harris-Kesten anchor
+#print axioms BlackwellDilemma.gap_harris_kesten_squared
+
+-- Gaussian PDF/CDF derivative closures: phi + Phi are concrete defs;
+-- derivatives proved via Mathlib's HasDerivAt + FTC. Kernel-pure.
+#print axioms BlackwellDilemma.gap_phi_derivative
+#print axioms BlackwellDilemma.gap_Phi_derivative
+-- Mills' tail bound: proved via Mathlib improper-integral machinery
+-- (integral_gaussian_Ioi + monotoneOn_of_deriv_nonneg). Kernel-pure.
+#print axioms BlackwellDilemma.gap_phi_tail_bound
+
+-- §4 Cognitive layer
+#print axioms BlackwellDilemma.gap_cognitive_threshold_characterisation
+#print axioms BlackwellDilemma.gap_policy_complementarity
+#print axioms BlackwellDilemma.gap_threshold_alpha_monotone
+-- R24-B reverted to OPEN axiom: Theorem 4.1 Part 5 (κ*(α) non-decreasing
+-- in α). The prior R23-C2 Cat 1 derived closure was a tautological
+-- `rw [kappaStar_def, kappaStar_def]` collapse exploiting the α-erasure
+-- of `kappaStar_def`'s RHS — Pattern 4 violation. Reverted to atomic
+-- Cat 3 OPEN axiom; paper-stated welfare-transition characterisation
+-- of α-monotonicity is not reducible to the `kappaStar_def` inf-formula.
+-- See axiom docstring for the full audit.
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part5_OPEN
+
+-- §4 Principal layer
+-- (gap_principal_* and gap_disclosure_* are gap-OPEN axioms; see Ledger.)
+
+-- §5 Constructive instances
+#print axioms BlackwellDilemma.FiveState.gap_kappaStar_at_two_thirds
+#print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_routing_threshold
+#print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_greedy_has_interior_optimum
+#print axioms BlackwellDilemma.gap_fiveState_policy_mapping
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_sufficient_cognition_kappaStar_pos
+-- p-monotonicity bounded version (the unconditional axiom is provably
+-- false under Lean's junk-value semantics; bounded version restores
+-- paper's intended domain p ∈ [0, 1)).
+#print axioms BlackwellDilemma.FiveState.gap_p_monotonicity_bounded
+
+-- §6 Bayesian + complementarity
+#print axioms BlackwellDilemma.gap_bayesian_immunity
+#print axioms BlackwellDilemma.gap_information_knowledge_complementarity
+-- (gap_robustness_myopic_k and gap_robustness_satisficing are gap-OPEN
+--  axioms; see Ledger.)
+-- §5 Three-regime arithmetic split (Cat 1 promotion)
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_cognitive_augmentation_arithmetic_part
+
+-- §5 Three-regime β-monotonicity (Cat 1 promotions): β-monotonicity of
+-- L(β, p) on Regime (ii) [p_1, p_2] and Regime (iii) (p_2, 1) closed via
+-- `Phi_strictMono` + `Phi_le_one` + `Phi_nonneg` + `signalVariance_strictAntitoneOn`
+-- + algebraic decomposition of L₂ - L₁ into two non-positive contributions.
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_cognitive_augmentation_monotonicity
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_sufficient_cognition
+
+-- Phi monotonicity / non-negativity / upper-bound helpers (Cat 1 closures
+-- supporting the three-regime β-monotonicity theorems).
+#print axioms BlackwellDilemma.Phi_strictMono
+#print axioms BlackwellDilemma.Phi_monotone
+#print axioms BlackwellDilemma.Phi_zero
+#print axioms BlackwellDilemma.Phi_le_one
+#print axioms BlackwellDilemma.Phi_nonneg
+
+-- R30 Cat 1 limit helpers: Φ tail limits + signal-variance limit at infinity
+-- + the constant-divided-by-vanishing-positive-function → ∞ helper. Used by
+-- the R30 gap_W_open_limit_infty + gap_error_compounding_part1 promotions.
+#print axioms BlackwellDilemma.Phi_tendsto_one_atTop
+#print axioms BlackwellDilemma.Phi_tendsto_zero_atBot
+#print axioms BlackwellDilemma.signalVariance_tendsto_zero_atTop
+#print axioms BlackwellDilemma.tendsto_const_div_atTop_of_tendsto_zero_pos
+
+-- R35-B Wave 1.1 Cat 1 helpers: Phi continuity (from FTC closure) +
+-- signalVariance limit at 0+ (symmetric mirror of R30's atTop limit).
+-- Used by gap_W_open_limit_zero closure.
+#print axioms BlackwellDilemma.Phi_continuousAt
+#print axioms BlackwellDilemma.signalVariance_tendsto_atTop_of_tendsto_zero_pos
+
+-- R30 derived closures: prop:canonical β→∞ limit + prop:error-compounding
+-- Part 1 (β→∞ welfare-limit on the depth-d trap tree).
+#print axioms BlackwellDilemma.FourState.gap_W_open_limit_infty
+#print axioms BlackwellDilemma.TrapTree.gap_error_compounding_part1
+
+-- R35-B Wave 1.1 derived closure: prop:canonical β→0+ limit (symmetric
+-- mirror of R30 gap_W_open_limit_infty). Composes the new Cat 1 helpers
+-- above.
+#print axioms BlackwellDilemma.FourState.gap_W_open_limit_zero
+
+-- R35-B Wave 1.2 derived closure: rem:robustness-misspec (i) — re-export
+-- of FiveState.gap_bayesian_naive_routing_threshold (Cat 1 kernel-pure).
+#print axioms BlackwellDilemma.gap_robustness_bayesian_naive
+
+-- §5 Three-regime reversal six-way decomposition: paper line 814 has six
+-- sub-claims — existence, uniqueness, non-monotonicity, overshoot
+-- strictly decreasing in p, overshoot continuous in p on [0, p_1), and
+-- overshoot vanishing at p_1 — split per `feedback_lean_axiom_decomposition`
+-- Anti-pattern #2. Each sub-axiom is a Cat 3 paper-novel OPEN claim with
+-- explicit single-clause encoding; the continuity + vanishing-at-p_1
+-- sub-axioms are stated against the opaque carrier `betaStarOfP` (whose
+-- own dependencies appear under each consuming axiom). Only the existence
+-- sub-axiom is currently consumed by downstream `gap_fiveState_policy_mapping`.
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_existence_OPEN
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_uniqueness_OPEN
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_nonmonotone_OPEN
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_decreasing_OPEN
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_continuous_OPEN
+#print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN
+
+-- §7 General graphs + trap tree
+#print axioms BlackwellDilemma.TrapTree.gap_welfare_gain_decay
+-- R23-C1 Cat 3 derived closure: Proposition `prop:error-compounding`
+-- Part 2 (oracle dynamic value at root = `r_goal` for all `d ≥ 1`).
+-- Refactored to derive directly from the Cat 3 atomic structural
+-- equation `oracleValueAtRoot_TrapTree_def` (paper line 1041); see
+-- Ledger entry `entry_prop_error_compounding`.
+#print axioms BlackwellDilemma.TrapTree.gap_error_compounding_part2
+-- Upper-bound half of the κ*(d) = Θ(log d) asymptotic (lower-bound half
+-- remains an OPEN axiom pending tighter c_star_constant control).
+#print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_upper_bound
+-- R23-C2 derived closures from Manufactured-Recognition-pattern atomic
+-- decomposition:
+--  * `gap_V_g_le_V_dyn`: composes the Cat 3 atom
+--    `V_g_terminal_in_ForwardReachable_OPEN` (paper line 984 + Def 2.5)
+--    with `V_dyn_def` + Mathlib `Finset.le_sup'` (Cat 1).
+--  * `dilemma_subsumed_by_gap_general_tree`: composes the Cat 3 atom
+--    `terminal_neighbour_implies_C2prime_atom_OPEN` (paper line 1019
+--    structural implication on hypothesis predicates) with the trivial
+--    conjunction-rebuilding step on `Conditions_C1_C2_C3` /
+--    `Conditions_C1_C2prime_C3`.
+#print axioms BlackwellDilemma.gap_V_g_le_V_dyn
+#print axioms BlackwellDilemma.dilemma_subsumed_by_gap_general_tree
+
+-- R24-C derived closures from R23-D Pattern 7 phantom-downstream repair
+-- (Wires #1-#6: composing previously-orphan R23 atoms with Mathlib +
+-- companion atoms to give them explicit downstream consumers):
+--  * `ReachableSet_self_member`: refactored from atomic axiom to derived
+--    theorem via `ReachableSet_eq_ForwardReachable_empty` (Def 2.5
+--    line 193) + `ForwardReachable_self_member` (Def 2.5 length-0 path).
+--  * `realisedUtility_mem_unitInterval`: composes `intrinsicPref_mem_unitInterval`
+--    (Def 2.1 line 114) + `reward_mem_unitInterval` (Def 2.1 line 113)
+--    via convex-combination Cat 1 arithmetic.
+--  * `kappaAgentWelfareSNR_mem_unitInterval`: composes `kappaAgentWelfareSNR_def`
+--    (`prop:supermodular` line 565) + `agentWelfare_mem_unitInterval`
+--    (§2.5 lines 204-208 + Def 2.1 line 113).
+--  * `betaStarOfP_loss_below_limit`: composes `betaStarOfP_def`
+--    (`prop:three-regime-five-state` Regime (i) line 814 argmin) +
+--    `gap_three_regime_reversal_existence_OPEN` (existence sub-axiom)
+--    via transitivity, binding the existential witness to the canonical
+--    `betaStarOfP` carrier.
+--  * `V_g_terminal_mem_unitInterval`: composes `V_g_def_terminal`
+--    (`def:greedy-path` lines 982-985 terminal-base) + `reward_mem_unitInterval`
+--    (Def 2.1 line 113), bounding `V_g` in the terminal-vertex case.
+--  * `W_bar_limit_infty_le_W_bar_betaBarStar`: composes `W_bar_limit_infty_def`
+--    (`cor:disclosure` Part 1 line 652 Tendsto limit) + `betaBarStar_def`
+--    (`prop:principal-optimum` line 622 argmax) via Mathlib's
+--    `le_of_tendsto'` (limit-of-bounded-function lemma).
+#print axioms BlackwellDilemma.ReachableSet_self_member
+#print axioms BlackwellDilemma.realisedUtility_mem_unitInterval
+#print axioms BlackwellDilemma.kappaAgentWelfareSNR_mem_unitInterval
+#print axioms BlackwellDilemma.FiveState.betaStarOfP_loss_below_limit
+#print axioms BlackwellDilemma.V_g_terminal_mem_unitInterval
+#print axioms BlackwellDilemma.W_bar_limit_infty_le_W_bar_betaBarStar
+
+end BlackwellDilemma.AxiomAudit

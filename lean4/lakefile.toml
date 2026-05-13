@@ -1,0 +1,15 @@
+name = "BlackwellDilemma"
+version = "0.1.0"
+keywords = ["economics", "decision-theory", "information-theory", "percolation"]
+defaultTargets = ["BlackwellDilemma"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+
+[[lean_lib]]
+name = "BlackwellDilemma"
