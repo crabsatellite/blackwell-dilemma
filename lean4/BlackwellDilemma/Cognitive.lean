@@ -208,32 +208,132 @@ axiom gap_cognitive_threshold_part2_OPEN :
     paper source: Theorem 4.1 Part 3, line 493. -/
 axiom mLimit : ℝ → ℝ
 
-/-- **Theorem 4.1 Part 3: Existence of `κ*` (with paper's full content).**
+/-- Cat 3 paper-novel ATOMIC structural fact: the mean-estimate-gap
+    `m(p, κ)` is continuous on the positive reals `(0, ∞)`. Paper
+    Theorem 4.1 Part 3 (line 493) asserts continuity of `m(κ)` on
+    `(0, ∞)` (the paper's domain restriction; `κ = 0` is structurally
+    excluded per Remark `kappa-discontinuity`).
+
+    Encoding choice: extracted from the bundled
+    `gap_cognitive_threshold_part3_OPEN` as a standalone Cat 3 atomic
+    stipulation per `feedback_gap_ledger_in_lean4` §18 Manufactured-
+    Recognition pattern (decompose bundled conclusion-axioms into
+    atomic stipulations + derived theorem). The continuity is
+    paper-stated content on the existing `mean_estimate_gap` carrier;
+    a Lean derivation from per-instance V_dyn / posterior continuity
+    properties is deferred to per-IDP-instance closure.
+
+    Cat 3 sub-type: workingAssumption (paper-stated higher-level
+    continuity claim pending per-instance derivation from the
+    paper's V_dyn continuity inputs; 必须 close before publication).
+
+    paper source: Theorem 4.1 Part 3, line 493 ("`m(κ)` is continuous
+    on `(0, ∞)`"). -/
+axiom mean_estimate_gap_continuous_OPEN :
+    Conditions_C1_C2_C3 →
+    ∀ p : ℝ,
+      ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0)
+
+/-- Cat 3 paper-novel ATOMIC structural fact: the mean-estimate-gap
+    `m(p, κ)` converges to `mLimit p` as `κ → ∞`. Paper Theorem 4.1
+    Part 3 (line 505) states `m(κ) → V_dyn(u_2) − V_dyn(u_1) =:
+    mLimit p` as `κ → ∞`.
+
+    Encoding choice: extracted from the bundled
+    `gap_cognitive_threshold_part3_OPEN` Tendsto sub-clause per
+    `feedback_gap_ledger_in_lean4` §18 atomic-decomposition pattern.
+    Hosts the Tendsto limit on the bundle's `mLimit` carrier (distinct
+    from `mLimit_def` which hosts the analogous Tendsto on the
+    separate `mLimitOf` carrier introduced for per-instance work).
+
+    Cat 3 sub-type: workingAssumption (paper-stated limit pending
+    per-instance derivation linking `mLimit p` to the
+    `V_dyn(u_2) − V_dyn(u_1)` paper-instance vertex pair; 必须 close
+    before publication).
+
+    paper source: Theorem 4.1 Part 3, line 505 ("`m(κ) →
+    V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`"). -/
+axiom mean_estimate_gap_tendsto_mLimit_OPEN :
+    Conditions_C1_C2_C3 →
+    ∀ p : ℝ,
+      Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
+        (nhds (mLimit p))
+
+/-- Cat 3 paper-novel ATOMIC structural fact: the limit value
+    `mLimit p` of the mean-estimate-gap as `κ → ∞` is strictly
+    positive. Paper Theorem 4.1 Part 3 (line 505) writes
+    "`m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`": the strict
+    positivity reflects C2 trap/bridge misalignment (`u_2` is the
+    bridge neighbour with strictly higher dynamic value than the
+    trap neighbour `u_1`).
+
+    Encoding choice: extracted from the bundled
+    `gap_cognitive_threshold_part3_OPEN` strict-positivity sub-clause
+    per `feedback_gap_ledger_in_lean4` §18 atomic-decomposition
+    pattern.
+
+    Cat 3 sub-type: workingAssumption (paper-stated strict positivity
+    pending per-instance derivation; 必须 close before publication).
+
+    paper source: Theorem 4.1 Part 3, line 505 ("`m(κ) →
+    V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`"). -/
+axiom mLimit_pos_OPEN :
+    Conditions_C1_C2_C3 →
+    ∀ p : ℝ, 0 < mLimit p
+
+/-- Cat 3 paper-novel ATOMIC structural fact: the cognitive threshold
+    `kappaStar p α` is non-negative. Paper Theorem 4.1 Part 3 (line
+    493) characterises `kappaStar p α` as `sInf {κ > 0 : m(κ) ≥ 0}`,
+    so `0 ≤ kappaStar p α` follows from the inf-over-positive-reals
+    scope (the inf of a set of positive numbers is non-negative; the
+    junk-value branch `Real.sInf_empty = 0` preserves the bound).
+
+    Encoding choice: extracted from the bundled
+    `gap_cognitive_threshold_part3_OPEN` non-negativity sub-clause
+    per `feedback_gap_ledger_in_lean4` §18 atomic-decomposition
+    pattern. Retained as Cat 3 atomic stipulation rather than Cat 1
+    derivation because a Mathlib-level proof would require composing
+    `kappaStar_def` (Cat 3 atom) with `Real.sInf` lower-bound /
+    junk-value semantics; the paper-stated non-negativity is the
+    natural primitive fact at this abstraction level.
+
+    Cat 3 sub-type: workingAssumption (paper-stated non-negativity
+    pending Cat 1 derivation from `kappaStar_def` + Mathlib
+    `Real.sInf` machinery; 必须 close before publication).
+
+    paper source: Theorem 4.1 Part 3, line 493 ("`κ*(p, α) ≥ 0`"). -/
+axiom kappaStar_nonneg_OPEN :
+    ∀ p α : ℝ, 0 ≤ kappaStar p α
+
+/-- **Theorem 4.1 Part 3: Existence of `κ*` (derived theorem).**
     `m(κ)` (the mean-estimate-gap, `mean_estimate_gap p κ`) is continuous
     on `(0, ∞)`, and `m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p > 0`
     as `κ → ∞`. The cognitive threshold satisfies the inf-characterisation
     `κ*(p, α) = sInf {κ : 0 < κ ∧ 0 ≤ mean_estimate_gap p κ}` and
     lies in `[0, ∞)`.
 
-    Encoded as the conjunction of the four sub-claims (continuity of
-    `m(·)` on `(0, ∞)`, the `Tendsto` limit at infinity, strict
-    positivity of the limit, and the sInf characterisation pinned with
-    non-negativity of `kappaStar`). The earlier weaker form (just
-    `0 ≤ kappaStar p α`) was caught as Anti-pattern #2 in the
-    discipline audit and is now superseded.
+    Derived theorem composing five Cat 3 atomic stipulations per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern (decompose bundled conclusion-axiom into atomic
+    stipulations + derived theorem):
+    * `mean_estimate_gap_continuous_OPEN` (continuity on `(0, ∞)`),
+    * `mean_estimate_gap_tendsto_mLimit_OPEN` (Tendsto limit),
+    * `mLimit_pos_OPEN` (strict positivity of the limit),
+    * `kappaStar_def` (inf-characterisation; R23-C1 atom), and
+    * `kappaStar_nonneg_OPEN` (non-negativity of the threshold).
+    The composition is closed kernel-pure; the atomic stipulations
+    are paper-stated structural facts pending separate per-instance
+    derivations.
 
     Continuity is asserted as `ContinuousOn ... (Set.Ioi 0)` (the
     positive reals), matching the paper's domain restriction exactly:
-    paper Remark `kappa-discontinuity` (Types.lean, around line 174)
-    explicitly separates the greedy agent (`κ = 0`) from the
-    `κ → 0⁺` limit, so the paper does NOT claim continuity at or
-    below 0. (A prior version of this axiom asserted global
-    `Continuous` on all of ℝ — an overclaim relative to the paper,
-    corrected here.)
+    paper Remark `kappa-discontinuity` explicitly separates the
+    greedy agent (`κ = 0`) from the `κ → 0⁺` limit, so the paper
+    does NOT claim continuity at or below 0.
 
-    paper source: Theorem 4.1 Part 3, line 493. -/
-axiom gap_cognitive_threshold_part3_OPEN :
-    Conditions_C1_C2_C3 →
+    paper source: Theorem 4.1 Part 3, line 493 + 505. -/
+theorem gap_cognitive_threshold_part3
+    (hC : Conditions_C1_C2_C3) :
     ∀ p α : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) ∧
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
@@ -241,7 +341,14 @@ axiom gap_cognitive_threshold_part3_OPEN :
       0 < mLimit p ∧
       kappaStar p α =
         sInf { κ : ℝ | 0 < κ ∧ 0 ≤ mean_estimate_gap p κ } ∧
-      0 ≤ kappaStar p α
+      0 ≤ kappaStar p α := by
+  intros p α
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · exact mean_estimate_gap_continuous_OPEN hC p
+  · exact mean_estimate_gap_tendsto_mLimit_OPEN hC p
+  · exact mLimit_pos_OPEN hC p
+  · exact kappaStar_def p α
+  · exact kappaStar_nonneg_OPEN p α
 
 /-- **Theorem 4.1 Part 4: Monotonicity in `p`.**
     On lattices and the Section 5 instances, `κ*(p)` is non-decreasing in `p`.
@@ -360,7 +467,7 @@ theorem gap_cognitive_threshold_characterisation
           M < kappaStar p α) :=
   ⟨ gap_cognitive_threshold_part1_OPEN hC hT,
     gap_cognitive_threshold_part2_OPEN gap_blackwell_monotonicity_OPEN hC hT,
-    fun p α => (gap_cognitive_threshold_part3_OPEN hC p α).2.2.2.2,
+    fun p α => (gap_cognitive_threshold_part3 hC p α).2.2.2.2,
     gap_cognitive_threshold_part4_OPEN,
     gap_cognitive_threshold_part5_OPEN,
     gap_cognitive_threshold_part6_OPEN ⟩

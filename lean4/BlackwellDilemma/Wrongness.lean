@@ -179,11 +179,37 @@ in its oracle-bound clause. -/
     paper source: Proposition `prop:info-decay`. -/
 axiom W_info_oracle : ℝ → ℝ → ℝ  -- (p, β) ↦ oracle's W_info residual
 
-/-- **Proposition `prop:info-decay`** — informational residual decays
-    exponentially in β for the oracle, uniformly above the percolation
-    threshold. Encoded as substantive bound on opaque carrier
-    `W_info_oracle p β` (not free existential — hostile audit caught
-    Pattern 4 vacuous-existential satisfaction by witness 0).
+/-- Cat 3 paper-novel ATOMIC structural fact: the within-`R` oracle's
+    informational residual `W_info_oracle p β` is non-positive for
+    `p > p_c` and `β > 0`. Paper Proposition `prop:info-decay` line
+    272 states the bound is "the oracle's informational residual is
+    non-positive and exponentially small"; the non-positivity clause
+    isolates the sign part of the paper's joint claim.
+
+    Encoding choice: extracted from the bundled `gap_info_decay_OPEN`
+    sign sub-clause per `feedback_gap_ledger_in_lean4` §18 atomic-
+    decomposition pattern. Hosted on the opaque carrier
+    `W_info_oracle : ℝ → ℝ → ℝ` (R19-A); non-positivity is a paper-
+    stated structural fact reflecting that information value is
+    bounded by the topology-only welfare under topology-blind signals
+    (paper §3 W_info ≤ 0 family).
+
+    Cat 3 sub-type: workingAssumption (paper-stated sign fact pending
+    closure from the Cat 2 Mills-tail / Cat 1 Gaussian-integration
+    machinery; 必须 close before publication).
+
+    paper source: Proposition `prop:info-decay`, lines 270-272
+    ("`W_info_oracle ≤ 0`"). -/
+axiom W_info_oracle_nonpos_OPEN :
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∀ β : ℝ, 0 < β → W_info_oracle p β ≤ 0
+
+/-- Cat 3 paper-novel ATOMIC structural fact: the within-`R` oracle's
+    informational residual `|W_info_oracle p β|` is exponentially
+    small in `β`, uniformly in `n`, for `p > p_c`. Paper Proposition
+    `prop:info-decay` line 272 reads "`|W_info| = O(2^{-β})` as
+    `β → ∞`, uniformly in `n` for `p > p_c`": the exponential bound
+    sub-clause of the paper's joint claim.
 
     The paper proof composes two operative inputs:
     (a) the Gaussian Mills-tail bound
@@ -194,48 +220,85 @@ axiom W_info_oracle : ℝ → ℝ → ℝ  -- (p, β) ↦ oracle's W_info residu
         exponential tail `Pr(|R(v_0)| ≥ k) ≤ exp(-c(p)·k)` for
         `p > p_c` (Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`),
         which gives `E[|R|] = O(1)` uniformly in `n`.
-    The `|W_info| = O(2^{-β}) uniform in n` claim is the multiplicative
-    composition `|R| · 2^{-β}` of these two inputs.
+    The `|W_info| = O(2^{-β}) uniform in n` claim is the
+    multiplicative composition `|R| · 2^{-β}` of these two inputs.
 
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom `gap_grimmett_exponential_
-    decay_OPEN` is threaded as an EXPLICIT ANTECEDENT
-    `(h_grimmett : ∀ p, (1 : ℝ) / 2 < p → ...)` so that
-    `#print axioms` on any theorem consuming `gap_info_decay_OPEN`
-    surfaces the Grimmett dependency. The R26 drop of this antecedent
-    was correct for downstream THEOREMS (which compose axioms in their
-    proof body) but WRONG for downstream AXIOMS (which have no body and
-    therefore cannot make the dependency visible to the kernel). This
-    R28-A restoration follows the broken-link discipline ladder for
-    audit-chain visibility (`feedback_gap_ledger_in_lean4` 2026-05-13
-    §12 with the R28 axiom-vs-theorem-consumer clarification).
+    Encoding choice: extracted from the bundled `gap_info_decay_OPEN`
+    exponential-bound sub-clause per `feedback_gap_ledger_in_lean4`
+    §18 atomic-decomposition pattern. The Cat 2 dependency on Grimmett
+    1999 §6.75 is threaded as an explicit antecedent `(h_grimmett :
+    ...)` so that `#print axioms` on any theorem consuming this atom
+    surfaces the Grimmett dependency (audit-chain visibility per
+    §12 / R28-A axiom-vs-theorem-consumer clarification).
 
-    The threshold antecedent `harrisKestenCriticalProb < p` consumes
-    the Harris-Kesten `p_c` carrier rather than a literal `(1 : ℝ) / 2`.
-    Paper Proposition `prop:info-decay` line 272 states the bound
-    "uniformly in `n` for `p > p_c`"; using `harrisKestenCriticalProb`
-    matches the paper's `p_c` symbol literally and aligns with the
-    sibling `gap_phase_transition_above_OPEN` (Phase.lean) which already
-    consumes the same carrier. The paper-stated equality
-    `p_c = 1/2 \citep{kesten1980}` is recorded by the Cat 2 axiom
-    `gap_harris_kesten_OPEN` and the `axiom harrisKestenCriticalProb`
-    anchor in `ClassicalResults.lean`.
+    Cat 3 sub-type: workingAssumption (paper-stated exponential bound
+    on opaque carrier `W_info_oracle` pending Cat 1 Mills + Cat 2
+    Grimmett composition; 必须 close before publication).
 
     paper source: Proposition `prop:info-decay`, lines 270-277;
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
-    cluster-size exponential-decay dependency (paper proof line 276:
-    "For `p > p_c`, `E[|R|] = O(1)` (exponential cluster-size
-    tails)"). -/
-axiom gap_info_decay_OPEN :
+    cluster-size exponential-decay dependency. -/
+axiom W_info_oracle_exponential_bound_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ C : ℝ, 0 < C ∧
         ∀ β : ℝ, 0 < β →
-          W_info_oracle p β ≤ 0 ∧
           |W_info_oracle p β| ≤ C * Real.rpow 2 (-β)
+
+/-- **Proposition `prop:info-decay`** — informational residual decays
+    exponentially in β for the oracle, uniformly above the percolation
+    threshold. Encoded as substantive bound on opaque carrier
+    `W_info_oracle p β` (not free existential — hostile audit caught
+    Pattern 4 vacuous-existential satisfaction by witness 0).
+
+    Derived theorem composing two Cat 3 atomic stipulations per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern (decompose bundled conclusion-axiom into atomic
+    stipulations + derived theorem):
+    * `W_info_oracle_nonpos_OPEN` (paper-stated non-positivity),
+    * `W_info_oracle_exponential_bound_OPEN` (paper-stated `O(2^{-β})`
+      exponential bound, threading Grimmett 1999 §6.75 via the
+      `h_grimmett` antecedent).
+    The composition is closed kernel-pure; the atomic stipulations
+    are paper-stated structural facts on the opaque carrier
+    `W_info_oracle` pending Cat 1 Mills-tail + Cat 2 Grimmett-
+    cluster-size composition.
+
+    The threshold antecedent `harrisKestenCriticalProb < p` consumes
+    the Harris-Kesten `p_c` carrier rather than a literal `(1 : ℝ) / 2`.
+    Paper Proposition `prop:info-decay` line 272 states the bound
+    "uniformly in `n` for `p > p_c`"; using `harrisKestenCriticalProb`
+    matches the paper's `p_c` symbol literally.
+
+    Cat 2 dependency surfacing: the Cat 2 axiom
+    `gap_grimmett_exponential_decay_OPEN` is threaded as an EXPLICIT
+    ANTECEDENT `(h_grimmett : ...)` so that `#print axioms` on any
+    theorem consuming `gap_info_decay` surfaces the Grimmett
+    dependency.
+
+    paper source: Proposition `prop:info-decay`, lines 270-277;
+    Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
+    cluster-size exponential-decay dependency (paper proof line 276:
+    "For `p > p_c`, `E[|R|] = O(1)` (exponential cluster-size
+    tails)"). -/
+theorem gap_info_decay
+    (h_grimmett :
+      ∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) :
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ C : ℝ, 0 < C ∧
+        ∀ β : ℝ, 0 < β →
+          W_info_oracle p β ≤ 0 ∧
+          |W_info_oracle p β| ≤ C * Real.rpow 2 (-β) := by
+  intros p hp
+  obtain ⟨C, hC_pos, hC_bound⟩ :=
+    W_info_oracle_exponential_bound_OPEN h_grimmett p hp
+  refine ⟨C, hC_pos, ?_⟩
+  intros β hβ
+  exact ⟨W_info_oracle_nonpos_OPEN p hp β hβ, hC_bound β hβ⟩
 
 /-! ## 4. Theorem 3.2 — `thm:dilemma`
 
@@ -256,15 +319,17 @@ relative to `|W_topo| = Θ(1)` for `p > p_c`. -/
     * **Oracle-bound clause:** above the percolation threshold,
       the within-`R` oracle's informational residual is non-positive
       and exponentially small in `β`: `|W_info_oracle| = O(2^{-β})` —
-      direct invocation of `gap_info_decay_OPEN`.
+      direct invocation of derived theorem `gap_info_decay` (which
+      composes Cat 3 atoms `W_info_oracle_nonpos_OPEN` and
+      `W_info_oracle_exponential_bound_OPEN`).
 
     Both clauses are CLOSED-via-OPEN-input.
 
     Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential
-    decay surfaces explicitly through `gap_info_decay_OPEN`'s axiom
+    decay surfaces explicitly through `gap_info_decay`'s axiom
     chain: the Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`
     (declared in `ClassicalResults.lean`) is composed inside this
-    theorem's proof body to discharge `gap_info_decay_OPEN`'s
+    theorem's proof body to discharge `gap_info_decay`'s
     Grimmett antecedent. Because `gap_dilemma` is a THEOREM (not an
     axiom), the proof body composition is sufficient for `#print
     axioms gap_dilemma` to surface `gap_grimmett_exponential_decay_OPEN`
@@ -280,7 +345,7 @@ relative to `|W_topo| = Θ(1)` for `p > p_c`. -/
         388 reads "with topology-blind signals" (whole signal family),
         matching Lemma `lem:wrongness`'s `{π_β}_β` family-level scope.
     Clause 2's threshold antecedent `harrisKestenCriticalProb < p`
-    matches `gap_info_decay_OPEN`'s threshold antecedent and the
+    matches `gap_info_decay`'s threshold antecedent and the
     paper's `p > p_c` formulation (line 388: "for `p > p_c`").
 
     paper source: Theorem `\label{thm:dilemma}` (statement and proof
@@ -305,7 +370,7 @@ theorem gap_dilemma
             W_info_oracle p β ≤ 0 ∧
             |W_info_oracle p β| ≤ C * Real.rpow 2 (-β)) :=
   ⟨gap_wrongness_OPEN hC hT hDeg2 signalFamily hBlind hBO,
-   gap_info_decay_OPEN gap_grimmett_exponential_decay_OPEN⟩
+   gap_info_decay gap_grimmett_exponential_decay_OPEN⟩
 
 /-! ## 5. Proposition `prop:topo-cluster` — Topological-Loss/Cluster-Size
    Relation
