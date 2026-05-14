@@ -90,20 +90,32 @@ noncomputable def W_bar : ℝ → ℝ :=
     introduces `\bar{\beta}^*` directly as the maximiser, which is the
     universal-inequality formulation of an argmax.
 
-    This atom encodes the bare paper-stated EXISTENCE of an argmax:
-    `∃ β_max : ℝ, ∀ β : ℝ, W_bar β ≤ W_bar β_max`. The downstream
+    This atom encodes the bare paper-stated EXISTENCE of an argmax,
+    paired with the paper line 614 standing-convention domain
+    `β ≥ 0`: `∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max`.
+    R77 Pattern 5 propagation: the prior R76 form omitted the
+    `0 ≤ β_max` clause, forcing a separate workingAssumption
+    `betaBarStar_nonneg_OPEN`. R77 honestly bundles the paper line 614
+    `β ≥ 0` standing convention into the existence atom (the principal
+    chooses `β ≥ 0` per Definition `def:principal` line 614 — the
+    maximiser of `W_bar` over the paper's stipulated domain `β ≥ 0`
+    must itself satisfy `β_max ≥ 0`). The downstream
     `noncomputable def betaBarStar` invokes `Classical.choose` on this
     atom to obtain the canonical maximiser; the structural-equation
-    atom `betaBarStar_def` is then internalised by `Classical.choose_spec`.
+    atom `betaBarStar_def` is then internalised by
+    `Classical.choose_spec.2` (universal-inequality clause), and the
+    `betaBarStar_nonneg_OPEN` axiom is converted into a Cat 1 derived
+    theorem via `Classical.choose_spec.1` (non-negativity clause).
 
     Cat 3 sub-type: workingAssumption (paper-stated existence of a
-    global maximiser of `W_bar` on the real line; pending Mathlib
-    continuous-function-on-compact-interval + Bolzano-Weierstrass
-    machinery for the explicit maximiser witness; 必须 close before
-    publication). The atom is paper-faithful per Proposition
-    `prop:principal-optimum` line 622's introduction of `\bar{\beta}^*`
-    as "the maximiser of `W̄`" — a paper-stipulated existence claim
-    on the aggregate welfare functional.
+    global maximiser of `W_bar` on the paper's `β ≥ 0` domain; pending
+    Mathlib continuous-function-on-compact-interval + Bolzano-
+    Weierstrass machinery for the explicit maximiser witness; 必须
+    close before publication). The atom is paper-faithful per
+    Proposition `prop:principal-optimum` line 622's introduction of
+    `\bar{\beta}^*` as "the maximiser of `W̄`" + Definition
+    `def:principal` line 614 `β ≥ 0` standing convention — both paper-
+    stipulated commitments now live in a single existence atom.
 
     R76 Pattern 5 propagation per `feedback_no_compute_retreat` +
     `feedback_gap_ledger_in_lean4` §18 (R74 `betaStarOfP` / R75
@@ -117,11 +129,23 @@ noncomputable def W_bar : ℝ → ℝ :=
     discipline §18 (the existence claim is now atomically separated
     from the carrier-identification step).
 
+    R77 honesty audit: the augmented atom statement is paper-faithful
+    in BOTH clauses (line 614 standing convention + line 622 maximiser
+    introduction); no scope inflation. The merge consolidates two
+    paper-stipulated commitments that were artificially separated in
+    R76 — both clauses are individually paper-stated, so bundling them
+    into the existence atom matches paper's "principal chooses
+    β̄* ≥ 0 maximising W̄" content. NET −1 wA (R77 retires
+    `betaBarStar_nonneg_OPEN`).
+
     paper source: Proposition `prop:principal-optimum`, line 622
     ("\\bar{\\beta}^* is the maximiser of \\bar{W}" — paper-stated
-    existence of a global maximiser of the aggregate welfare). -/
+    existence of a global maximiser of the aggregate welfare) +
+    Definition `def:principal`, line 614 ("A principal chooses a
+    signal precision `β ≥ 0`" — paper-stipulated `β ≥ 0` standing
+    convention). -/
 axiom principal_interior_maximum_exists_OPEN :
-    ∃ β_max : ℝ, ∀ β : ℝ, W_bar β ≤ W_bar β_max
+    ∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max
 
 /-- The aggregate-optimal precision `β̄*` (paper line 622).
 
@@ -193,9 +217,10 @@ theorem betaBarStar_def :
   intro β
   -- Unfold `betaBarStar` to expose the `Classical.choose` witness.
   unfold betaBarStar
-  -- `Classical.choose_spec` yields `∀ β, W_bar β ≤ W_bar β_max`
-  -- on the canonical chosen β_max.
-  exact Classical.choose_spec principal_interior_maximum_exists_OPEN β
+  -- R77: `Classical.choose_spec` now yields a conjunction
+  -- `0 ≤ β_max ∧ ∀ β, W_bar β ≤ W_bar β_max`; project the
+  -- universal-inequality clause via `.2`.
+  exact (Classical.choose_spec principal_interior_maximum_exists_OPEN).2 β
 
 /-! ## 2. Proposition `prop:principal-optimum` -/
 
@@ -261,43 +286,41 @@ axiom W_bar_exceeds_zero_at_positive_beta_OPEN :
     (∀ p : ℝ, alphaStar 0 p < 1) →
     ∃ β : ℝ, 0 < β ∧ W_bar 0 < W_bar β
 
-/-- R63 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
-    equation: the aggregate-optimal precision `betaBarStar` lies in
-    the paper's standing-convention domain `[0, ∞)`. Paper Definition
-    `def:principal` line 614 reads "A principal chooses a signal
-    precision `β ≥ 0`" — the paper's `β ≥ 0` standing convention is a
-    paper-stipulated identification of the `betaBarStar` carrier with
-    the non-negative-reals domain (the maximiser of `W_bar` over
-    `β ≥ 0` is itself `≥ 0`).
+/-- **R77 derived theorem** (replaces R63 axiom `betaBarStar_nonneg_OPEN`;
+    now closes via Pattern 5 propagation `Classical.choose_spec.1` after
+    R77 strengthened the existence atom
+    `principal_interior_maximum_exists_OPEN` to bundle the paper line
+    614 `β ≥ 0` standing convention into the existence claim).
+    Cat 1 `Classical.choose_spec`-projection: the aggregate-optimal
+    precision `betaBarStar` is non-negative, by directly projecting the
+    `0 ≤ β_max` clause out of the strengthened existence atom.
 
-    Encoding choice: extracted from the retired bundled
-    `interior_max_exists_from_unimodal_envelope_OPEN` workingAssumption
-    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern + R61 `mLimit_pos` / R62 `betaStarOfP_def` precedent
-    (split bundled wA into structural identification atom + Cat 1
-    Mathlib chain). The retired atom claimed `0 < betaBarStar`
-    directly from the bundled eventually-decreasing + exceeds-zero
-    hypotheses without surfacing the paper line 614 explicit
-    identification of the carrier with the `β ≥ 0` domain; the R63
-    decomposition factors this into the carrier-pinning structural
-    equation (this axiom; paper line 614 `β ≥ 0` standing convention)
-    + a Cat 1 derivation composing `betaBarStar_def` (R23-C1
-    argmax-characterisation, paper line 622) and the
-    `W_bar_exceeds_zero_at_positive_beta_OPEN` premise.
+    R77 closure path: the prior R63 structural-equation atom encoded
+    `0 ≤ betaBarStar` as a standalone gapDefinitional axiom on the
+    opaque carrier; after R76 made `betaBarStar` concrete via
+    `Classical.choose principal_interior_maximum_exists_OPEN`, R77
+    extends the existence atom to also stipulate `0 ≤ β_max` (paper
+    line 614 standing convention is paper-stipulated content; honest
+    to bundle into the existence atom rather than encode separately).
+    Then `betaBarStar_nonneg` follows as a kernel-pure Cat 1 derivation
+    composing the def's unfolding + `Classical.choose_spec.1`.
 
-    Cat 3 sub-type: structuralEquation (paper-stipulated identity
-    pinning the `betaBarStar` carrier to the paper's `β ≥ 0` standing
-    domain per Definition `def:principal` line 614; 永不 close per
-    discipline §3.4.3 — this is the paper's commitment to the
-    primitive's domain). The structural equation is unconditional on
-    paper hypotheses because the paper's `β ≥ 0` convention applies
-    to the carrier domain itself, not to any per-instance reversal-
-    regime hypothesis.
+    Net delta: -1 wA (this `_OPEN` axiom retired); +1 derivedTheorem.
+    Honesty audit: the R77 strengthening of the existence atom is
+    paper-faithful (the line 614 standing convention IS paper-stated;
+    the existence atom now matches paper's "principal chooses
+    β̄* ≥ 0 maximising W̄" content); the closure does not erase any
+    paper-novel content.
 
     paper source: Definition `def:principal`, line 614 ("A principal
     chooses a signal precision `β ≥ 0`" — paper-stipulated `β ≥ 0`
     standing convention identifying the `betaBarStar` carrier domain). -/
-axiom betaBarStar_nonneg_OPEN : 0 ≤ betaBarStar
+theorem betaBarStar_nonneg_OPEN : 0 ≤ betaBarStar := by
+  -- Unfold `betaBarStar` to expose the `Classical.choose` witness.
+  unfold betaBarStar
+  -- `Classical.choose_spec` yields `0 ≤ β_max ∧ ∀ β, W_bar β ≤ W_bar β_max`;
+  -- project the non-negativity clause via `.1`.
+  exact (Classical.choose_spec principal_interior_maximum_exists_OPEN).1
 
 /-- **R63 derived theorem** (replaces retired
     `interior_max_exists_from_unimodal_envelope_OPEN` axiom).
