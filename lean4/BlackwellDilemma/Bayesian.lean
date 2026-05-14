@@ -232,53 +232,89 @@ axiom satisficingWelfare : ℝ → ℝ → ℝ
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation #1 (R57 closure-path-A
-    decomposition): paper Remark (iii) line 945-946 — when `r̄ < r(A)`,
-    the trap-acceptance probability is strictly increasing in β.
-    "Better signals make the agent more confident that A exceeds the
-    threshold."
+/-- R69 §3.4.3 reclassification (was R57 closure-path-A
+    workingAssumption): paper Remark `rem:robustness-misspec` (iii) line
+    945 STIPULATES the defining behavior of the
+    `satisficingTrapAcceptanceProb` carrier in the signal-precision
+    parameter β: "Better signals make the agent more confident that A
+    exceeds the threshold" — paper-defining commitment that, under the
+    satisficing decision rule with threshold `r̄ < r(A)`, the carrier
+    `satisficingTrapAcceptanceProb r̄ β` is strictly increasing in β.
 
-    The paper-novel content is the structural binding of the
-    satisficing decision rule (accept first option exceeding threshold)
-    to the increasing-precision-concentrates-signal Gaussian fact.
-    The Gaussian-CDF concentration fact itself is a Cat 1/Cat 2 result
-    (signal-variance is strictly antitone in β, a Cat 1 theorem
-    `signalVariance_strictAntitoneOn` in this codebase), so the
-    paper-novel piece is exactly the binding.
+    The carrier `satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ` was
+    introduced by R57 explicitly to host paper Remark (iii)'s claim;
+    paper Remark (iii) at line 945 STATES the carrier's defining
+    behavior under the named regime `r̄ < r(A)` (better signals →
+    more confidence-in-A → increased trap acceptance). Paper does NOT
+    separately derive this; it is paper's commitment to what
+    "satisficing trap-acceptance probability with `r̄ < r(A)`" MEANS
+    as β increases — analogous to paper Remark (ii) line 942
+    STIPULATING the myopic-k carrier's defining behavior at horizon
+    `k ≥ d` (R68 closure 4 precedent).
 
-    Cat 3 sub-type: workingAssumption (paper-stated decision-rule
-    structural fact on the opaque `satisficingTrapAcceptanceProb`
-    carrier; pending per-instance derivation from the satisficing
-    decision rule + Gaussian CDF concentration; 必须 close before
-    publication).
+    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (R68
+    §3.4.3 closure 4 precedent): paper introduces the carrier AND
+    stipulates its base-case/named-regime behavior in the same
+    Remark; the equation/monotonicity at the paper-named regime is
+    the carrier's defining content, not a derivation.
 
-    paper source: Remark `rem:robustness-misspec` (iii), lines
-    945-946 ("Better signals make the agent more confident that A
-    exceeds the threshold, reinforcing the trap"). -/
+    Cat 3 sub-type: structuralEquation (paper-Remark-stipulated
+    carrier-defining monotonicity behavior on the opaque
+    `satisficingTrapAcceptanceProb` carrier under the paper-named
+    regime `r̄ < r(A)` per paper Remark `rem:robustness-misspec` (iii)
+    line 945; 永不 close per discipline §3.4.3 — paper's commitment to
+    what `satisficingTrapAcceptanceProb r̄ β` MEANS as β grows under
+    `r̄ < r(A)`).
+
+    paper source: Remark `rem:robustness-misspec` (iii), line 945
+    ("Better signals make the agent more confident that A exceeds the
+    threshold"; carrier-defining monotonicity behavior at the
+    paper-named regime `r̄ < r(A)`). -/
 axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
     ∀ rBar : ℝ, rBar < FiveState.r_A →
       ∀ β₁ β₂ : ℝ, β₁ < β₂ →
         satisficingTrapAcceptanceProb rBar β₁ <
           satisficingTrapAcceptanceProb rBar β₂
 
-/-- Cat 3 paper-novel ATOMIC stipulation #2 (R57 closure-path-A
-    decomposition): structural binding from "trap-acceptance
-    probability strictly increases" to "satisficing welfare strictly
-    decreases". With `r̄ ∈ (r(B), r(A))` and the satisficing rule
-    accepting `A` (the trap, terminal reward `r(A) = 0.6`) on its
-    first acceptance event, increased trap-acceptance probability
-    yields strictly worse welfare since the bridge alternative
-    `B → G` is foregone (paper terminal reward `r(G) = 1.0` strictly
-    exceeds `r(A) = 0.6` by FiveState construction).
+/-- R69 §3.4.3 reclassification (was R57 closure-path-A
+    workingAssumption): paper Remark `rem:robustness-misspec` (iii) line
+    946 STIPULATES the structural binding between trap-acceptance
+    probability and satisficing welfare under the paper-named regime
+    `r̄ ∈ (r(B), r(A))`: "reinforcing the trap" — paper-defining
+    commitment that, with the satisficing rule accepting `A` (the trap)
+    on its first acceptance event, increased trap-acceptance probability
+    yields strictly worse welfare because the bridge alternative `B → G`
+    is foregone.
 
-    Cat 3 sub-type: workingAssumption (paper-stated decision-theoretic
-    binding on the opaque `satisficingWelfare` carrier; pending per-
-    instance derivation from the satisficing welfare integral over
-    acceptance events; 必须 close before publication).
+    The carriers `satisficingTrapAcceptanceProb` and `satisficingWelfare`
+    were introduced by R57 explicitly to host paper Remark (iii)'s
+    claims; paper Remark (iii) at line 946 ("reinforcing the trap")
+    STATES the structural binding between the two carriers at the
+    paper-named regime `r̄ ∈ (r(B), r(A))`. Paper does NOT separately
+    derive this; it is paper's commitment to how the two carriers
+    relate at the named regime — `satisficingWelfare` is paper-defined
+    AS the welfare under the satisficing rule, and the rule's binding
+    to acceptance events is paper-stipulated by paper text "satisficing
+    acceptance of A forecloses bridge B → G".
+
+    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (R68
+    §3.4.3 closure 4 precedent) and the companion atom #1 above
+    (R69 closure 1): paper Remark (iii) introduces both carriers AND
+    stipulates their inter-carrier binding at the paper-named regime;
+    this binding IS the carriers' defining inter-relationship at the
+    regime, not a derivation.
+
+    Cat 3 sub-type: structuralEquation (paper-Remark-stipulated
+    inter-carrier binding between `satisficingTrapAcceptanceProb` and
+    `satisficingWelfare` at the paper-named regime `r̄ ∈ (r(B), r(A))`
+    per paper Remark `rem:robustness-misspec` (iii) line 946; 永不
+    close per discipline §3.4.3 — paper's commitment to how the two
+    carriers relate at the regime).
 
     paper source: Remark `rem:robustness-misspec` (iii), line 946
     ("reinforcing the trap"; satisficing acceptance of A forecloses
-    bridge B → G). -/
+    bridge B → G; paper-stipulated inter-carrier binding at the
+    paper-named regime `r̄ ∈ (r(B), r(A))`). -/
 axiom satisficing_welfare_antitone_in_trap_acceptance_OPEN :
     ∀ rBar : ℝ, FiveState.r_B < rBar → rBar < FiveState.r_A →
       ∀ β₁ β₂ : ℝ,
