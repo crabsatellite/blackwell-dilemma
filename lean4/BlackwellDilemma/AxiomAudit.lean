@@ -419,4 +419,40 @@ namespace BlackwellDilemma.AxiomAudit
 --    R43 audit caught it; R44 fix ports R42's proof verbatim).
 #print axioms BlackwellDilemma.topo_loss_decay_arbitrary_threshold
 
+-- R59 §18 closure wave on Phase.lean — 5 retired workingAssumption atoms
+-- decomposed into 6 smaller atoms + 1 new carrier:
+--  * `topo_loss_decay_below_pc` (R59 derived theorem): composes new
+--    smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`
+--    (paper line 417 polynomial bound) + Cat 1 Mathlib
+--    `tendsto_one_div_add_atTop_nhds_zero_nat`. Replaces retired
+--    `topo_loss_decay_below_pc_OPEN`.
+--  * `gap_phase_transition_above` (R59 re-derivation): instantiates
+--    existential with new carrier `wInfoTopoRatioMillsConst p` and
+--    composes two new smaller atoms `wInfoTopoRatioMillsConst_pos_above_pc_OPEN`
+--    + `wInfoTopoRatio_le_MillsConst_decay_OPEN`. Replaces retired
+--    `wInfoTopoRatio_const_exists_OPEN` + `wInfoTopoRatio_bound_OPEN`.
+--  * `forward_reachable_full_at_zero` (R59 derived theorem): composes
+--    two new smaller atoms `all_edges_open_at_zero_blocking_OPEN`
+--    (Def 2.1 line 119 percolation semantics) +
+--    `forward_reachable_empty_full_at_all_open_OPEN` (Def 2.1
+--    connectivity + Def 2.5 forward-reachable). Replaces retired
+--    `forward_reachable_full_at_zero_OPEN`.
+--  * `gap_trap_prevalence_above_threshold` (R59 re-derivation, with
+--    paper-faithful `p < 1` antecedent): composes Hodge-style def
+--    `trapConfigLocalProb` + new smaller atom
+--    `trapConfigLocalProb_le_misalignmentProb_OPEN` (FKG binding) +
+--    Cat 1 theorem `trapConfigLocalProb_pos` (arithmetic positivity).
+--    Replaces retired `trap_config_local_positive_OPEN`.
+#print axioms BlackwellDilemma.topo_loss_decay_below_pc
+#print axioms BlackwellDilemma.expectedTopoLoss_below_pc_one_over_n_envelope_OPEN
+#print axioms BlackwellDilemma.wInfoTopoRatioMillsConst
+#print axioms BlackwellDilemma.wInfoTopoRatioMillsConst_pos_above_pc_OPEN
+#print axioms BlackwellDilemma.wInfoTopoRatio_le_MillsConst_decay_OPEN
+#print axioms BlackwellDilemma.forward_reachable_full_at_zero
+#print axioms BlackwellDilemma.all_edges_open_at_zero_blocking_OPEN
+#print axioms BlackwellDilemma.forward_reachable_empty_full_at_all_open_OPEN
+#print axioms BlackwellDilemma.trapConfigLocalProb
+#print axioms BlackwellDilemma.trapConfigLocalProb_le_misalignmentProb_OPEN
+#print axioms BlackwellDilemma.trapConfigLocalProb_pos
+
 end BlackwellDilemma.AxiomAudit

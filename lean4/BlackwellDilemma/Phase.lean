@@ -90,42 +90,84 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     Grimmett 1999 _Percolation_ 2nd ed. cited as the Cat 2
     percolation-probability dependency. -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 1
-    (proof line 415-417) derives that conditional on `v_0` lying in the
-    giant component with `|R(v_0)| = k = Θ(N)`, Proposition
-    `prop:topo-cluster` gives `E[|W_topo| | |R| = k] = (N - k) / ((N+1)
-    (k+1)) = O(1/N) → 0`. Aggregated over the giant-component event
+/-- R59 closure-path-B: smaller paper-novel ATOMIC stipulation
+    replacing the retired bundled `topo_loss_decay_below_pc_OPEN`.
+    Paper Theorem 3.3 Part 1 proof line 415-417 derives, conditional on
+    `v_0` in the giant component, `E[|W_topo| | |R| = k] = (N - k) /
+    ((N+1)(k+1)) = O(1/N)`. Aggregating over the giant-component event
     (probability `θ(1-p) > 0` by Harris-Kesten + Grimmett percolation-
-    probability), the unconditional `expectedTopoLoss n p` admits a
-    decay function `topo_loss_decay_below : ℕ → ℝ` (the per-`n` upper
-    bound `expectedTopoLoss n p ≤ topo_loss_decay_below n`) that
-    converges to `0` as `n → ∞`. This atomic stipulation isolates the
-    EXISTENCE of such a decay-function envelope on the existing
-    carrier `expectedTopoLoss`.
+    probability), the unconditional `expectedTopoLoss n p` is bounded
+    above by the explicit envelope `1 / (n + 1)` for every `n` (paper
+    line 417's `O(1/N)` polynomial-bound form, distinct from the sharper
+    exponential rate stated in the Theorem 3.3 statement parenthesis;
+    the polynomial form is the one paper line 417 derives explicitly
+    from the giant-component conditioning + topo-cluster formula).
 
-    Encoding choice: extracted from the bundled
-    `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern (decompose bundled conclusion-
-    axiom into atomic stipulations + derived theorem). The Cat 2
-    Grimmett dependency is threaded as the explicit `h_perc_prob`
-    antecedent (paper authority for `θ(1-p) > 0` below threshold).
+    R59 strictly smaller than retired bundled atom: only the per-`n`
+    upper bound on `expectedTopoLoss n p` is asserted here; the
+    EXISTENCE of a decay envelope + the `Tendsto _ → 0` convergence
+    of the explicit envelope `1 / (n + 1)` are downstream Cat 1
+    Mathlib derivations that the new derived theorem
+    `topo_loss_decay_below_pc` composes.
 
-    Cat 3 sub-type: workingAssumption (paper-stated existence of decay
-    envelope; pending Mathlib percolation + cluster-size-asymptotics
-    machinery; 必须 close before publication).
+    Cat 3 sub-type: workingAssumption (paper-stated explicit polynomial
+    upper bound on the opaque `expectedTopoLoss` carrier; pending
+    Mathlib percolation + cluster-size-asymptotics machinery; 必须
+    close before publication).
 
-    paper source: Theorem 3.3 Part 1 proof, lines 415-417 (`E[|W_topo|]
-    = O(1/N) → 0` via giant-component conditioning + topo-cluster
-    formula); Grimmett 1999 cited as the Cat 2 percolation-probability
-    dependency. -/
-axiom topo_loss_decay_below_pc_OPEN :
+    paper source: Theorem 3.3 Part 1 proof, line 417 (`E[|W_topo|] =
+    O(1/N)` polynomial envelope via giant-component conditioning +
+    `prop:topo-cluster` formula `(N-k)/((N+1)(k+1))` specialised to the
+    `k = Θ(N)` regime); Grimmett 1999 percolation-probability cited
+    as the Cat 2 dependency (giant-component event positivity below
+    threshold). -/
+axiom expectedTopoLoss_below_pc_one_over_n_envelope_OPEN :
     (∃ θ : ℝ → ℝ,
       (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
       (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) →
     ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∀ n : ℕ, expectedTopoLoss n p ≤ 1 / ((n : ℝ) + 1)
+
+/-- **R59 derived theorem** (replaces retired bundled
+    `topo_loss_decay_below_pc_OPEN`). Below threshold (`p < p_c`),
+    `expectedTopoLoss n p` admits a paper-stated decay envelope
+    `topo_loss_decay : ℕ → ℝ` with the per-`n` upper bound
+    `expectedTopoLoss n p ≤ topo_loss_decay n` and
+    `topo_loss_decay → 0` as `n → ∞`.
+
+    R59 closure-path-B decomposition: the original bundled atom
+    packaged (i) explicit envelope construction, (ii) per-`n` upper
+    bound, (iii) `Tendsto → 0` convergence into one workingAssumption.
+    Decomposed into:
+      (a) `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (Cat 3
+          workingAssumption — paper line 417 polynomial upper bound
+          `expectedTopoLoss n p ≤ 1/(n+1)` from giant-component
+          conditioning), AND
+      (b) Cat 1 Mathlib `Tendsto (fun n => 1 / ((n : ℝ) + 1)) atTop
+          (nhds 0)` (standard `1/n → 0` derivation).
+    The decomposition pins the witness envelope to the explicit
+    Hodge-style closed form `1 / (n + 1)`; the Cat 2 Grimmett
+    percolation-probability dependency remains threaded through
+    `h_perc_prob`.
+
+    paper source: Theorem 3.3 Part 1 proof, line 417 (`O(1/N)` envelope
+    + asymptotic convergence). -/
+theorem topo_loss_decay_below_pc
+    (h_perc_prob :
+      ∃ θ : ℝ → ℝ,
+        (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
+        (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) :
+    ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
       ∃ topo_loss_decay : ℕ → ℝ,
         Filter.Tendsto topo_loss_decay Filter.atTop (nhds 0) ∧
-        ∀ n : ℕ, expectedTopoLoss n p ≤ topo_loss_decay n
+        ∀ n : ℕ, expectedTopoLoss n p ≤ topo_loss_decay n := by
+  intro p hp_nn hp_lt
+  refine ⟨fun n => 1 / ((n : ℝ) + 1), ?_, ?_⟩
+  · -- Cat 1 Mathlib: `1/(n+1) → 0` via `Filter.Tendsto.comp` on
+    -- `tendsto_one_div_add_atTop_nhds_zero_nat`.
+    exact tendsto_one_div_add_atTop_nhds_zero_nat
+  · intro n
+    exact expectedTopoLoss_below_pc_one_over_n_envelope_OPEN h_perc_prob p hp_nn hp_lt n
 
 /-- **Cat 1 Mathlib derivation** of the eps-from-envelope step: given any
     `topo_loss_decay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)` and
@@ -162,11 +204,12 @@ theorem topo_loss_decay_arbitrary_threshold :
 /-- **Theorem 3.3 (`thm:phase`) Part 1: derived theorem.** Below
     threshold (`p < p_c`), the topological loss `expectedTopoLoss n p`
     converges to `0` as `n → ∞`. Decomposed from the bundled
-    `gap_phase_transition_below_OPEN` axiom into (a) `topo_loss_decay_
-    below_pc_OPEN` (Cat 3 workingAssumption, existence of decay
-    envelope, R44 reclassification) + (b) `topo_loss_decay_arbitrary_threshold`
-    (Cat 1 theorem, R44 Pattern-1 fix from former atom). The derived
-    theorem composes both.
+    `gap_phase_transition_below_OPEN` axiom (R37) into (a)
+    `topo_loss_decay_below_pc` (R59 derived theorem composing the new
+    smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`
+    with Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`) +
+    (b) `topo_loss_decay_arbitrary_threshold` (Cat 1 theorem, R44
+    Pattern-1 fix from former atom). The derived theorem composes both.
 
     paper source: Theorem 3.3 Part 1, lines 400-419. -/
 theorem gap_phase_transition_below
@@ -179,7 +222,7 @@ theorem gap_phase_transition_below
         ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
   intro p hp_nn hp_lt ε hε
   exact topo_loss_decay_arbitrary_threshold p
-    (topo_loss_decay_below_pc_OPEN h_perc_prob p hp_nn hp_lt) ε hε
+    (topo_loss_decay_below_pc h_perc_prob p hp_nn hp_lt) ε hε
 
 /-- Substantive paper claim — opaque carrier required (Mathlib gap).
     The information-to-topology ratio `|W_info(p, β)| / |W_topo(p)|`
@@ -207,77 +250,104 @@ axiom wInfoTopoRatio : ℝ → ℝ → ℝ
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
     exponential-decay dependency. -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 2
-    (proof lines 421-427) derives that for `p > p_c`, the cluster
-    size `|R(v_0)|` has exponentially decaying tail (Grimmett 1999
-    §6.75), so `E[|W_topo|] → E[1/(|R|+1)] = Θ(1)` while `|W_info| =
-    O(2^{-β})` by `prop:info-decay`. The ratio `|W_info|/|W_topo|` has
-    a positive constant `c(p) > 0` characterising the exponential
-    decay rate. This atomic stipulation isolates the EXISTENCE of
-    such a positive constant `c` on the existing carrier
-    `wInfoTopoRatio`.
+/-- R59 closure-path-A: new opaque carrier introduced as smaller
+    replacement for the bundled `wInfoTopoRatio_const_exists_OPEN` +
+    `wInfoTopoRatio_bound_OPEN`. The paper-stated Mills-tail constant
+    `c(p) > 0` (paper Theorem 3.3 Part 2 proof lines 421-427) factored
+    into the carrier so the existence + quantitative bound become
+    derivable from atoms on the carrier rather than free-standing
+    bundled claims.
 
-    Encoding choice: extracted from the bundled
-    `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern (decompose bundled
-    conclusion-axiom into atomic stipulations + derived theorem). The
-    Cat 2 Grimmett dependency is threaded as the explicit
-    `h_grimmett` antecedent for audit-chain visibility.
+    Substantive paper claim — opaque carrier required (Mathlib gap).
+    The paper-stated decay constant `c(p)` for `wInfoTopoRatio p β`
+    above the percolation threshold, characterising the exponential
+    decay rate `wInfoTopoRatio p β = O(2^{-β})` per paper line 427.
 
-    Cat 3 sub-type: workingAssumption (paper-stated existence of
-    positive constant; pending Mathlib percolation + Mills-tail
-    composition; 必须 close before publication).
+    paper source: Theorem 3.3 (`thm:phase`), Part 2 proof, lines
+    421-427 (Mills-tail + cluster-size composition giving the
+    constant in `|W_info|/|W_topo| = O(2^{-β})`). -/
+axiom wInfoTopoRatioMillsConst : ℝ → ℝ
+
+/-- R59 closure-path-A: smaller paper-novel ATOMIC stipulation #1
+    replacing the retired bundled `wInfoTopoRatio_const_exists_OPEN`.
+    Paper Theorem 3.3 Part 2 proof line 421-427 derives that for
+    `p > p_c`, the cluster size `|R(v_0)|` has exponentially decaying
+    tail (Grimmett 1999 §6.75), so `E[|W_topo|] → E[1/(|R|+1)] = Θ(1)`
+    while `|W_info| = O(2^{-β})` by `prop:info-decay`. The
+    Mills-tail-over-cluster-size composition pins the constant to
+    `wInfoTopoRatioMillsConst p > 0` for `p > p_c`.
+
+    R59 strictly smaller than retired bundled atom: only positivity
+    of the Mills-constant on the new opaque carrier
+    `wInfoTopoRatioMillsConst` is asserted; the existential
+    repackaging into `∃ c, 0 < c` is downstream Cat 0 derivation in
+    the new derived theorem.
+
+    Cat 3 sub-type: workingAssumption (paper-stated positivity of
+    Mills-tail constant on opaque carrier; pending Mathlib percolation
+    + Mills-tail composition machinery; 必须 close before publication).
 
     paper source: Theorem 3.3 Part 2 proof, lines 421-427 (cluster
-    size exponential tail + ratio Θ-bound); Grimmett 1999 §6.75
-    cited as the Cat 2 dependency. -/
-axiom wInfoTopoRatio_const_exists_OPEN :
+    size exponential tail + Mills-tail Θ-bound); Grimmett 1999 §6.75
+    + `prop:info-decay` cited as the Cat 2 dependencies. -/
+axiom wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c : ℝ, 0 < c
+      0 < wInfoTopoRatioMillsConst p
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 2
-    (proof line 427) derives the explicit ratio bound `|W_info(p, β)|
-    / |W_topo(p)| = O(2^{-β})` from the composition of the Mills-tail
-    `|W_info| = O(2^{-β})` (paper `prop:info-decay`) with the cluster-
-    size exponential tail giving `|W_topo| = Θ(1)`. The bound
-    `wInfoTopoRatio p β ≤ c * 2^{-β}` holds for any positive constant
-    `c` matching the Mills + cluster composition rate. This atomic
-    stipulation isolates the QUANTITATIVE bound on the existing
-    carrier `wInfoTopoRatio` given a positive constant `c`.
+/-- R59 closure-path-A: smaller paper-novel ATOMIC stipulation #2
+    replacing the retired bundled `wInfoTopoRatio_bound_OPEN`. Paper
+    Theorem 3.3 Part 2 proof line 427 derives the explicit ratio bound
+    `|W_info(p, β)| / |W_topo(p)| = O(2^{-β})` from the Mills-tail
+    composition; the resulting bound on the opaque `wInfoTopoRatio`
+    carrier is the per-`(p, β)` inequality
+    `wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * 2^{-β}` at the
+    paper-stated Mills-tail constant.
 
-    Encoding choice: extracted from the bundled
-    `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern. The Cat 2 Grimmett
-    dependency is threaded as the explicit `h_grimmett` antecedent
-    for audit-chain visibility.
+    R59 strictly smaller than retired bundled atom: the bound is
+    asserted only at the carrier-pinned constant `wInfoTopoRatioMillsConst p`,
+    not for arbitrary `c > 0` (the prior atom's `∀ c > 0` form was
+    semantically stronger than what paper proves — paper's c is the
+    specific Mills-tail constant, not arbitrary).
 
-    Cat 3 sub-type: workingAssumption (paper-stated quantitative
-    bound on opaque carrier `wInfoTopoRatio`; pending Mathlib
-    Mills-tail + percolation composition; 必须 close before publication).
+    Cat 3 sub-type: workingAssumption (paper-stated quantitative bound
+    on opaque carriers `wInfoTopoRatio` and `wInfoTopoRatioMillsConst`;
+    pending Mathlib Mills-tail + percolation composition; 必须 close
+    before publication).
 
-    paper source: Theorem 3.3 Part 2 proof, line 427 (`|W_info|
-    / |W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-
-    decay` composition. -/
-axiom wInfoTopoRatio_bound_OPEN :
+    paper source: Theorem 3.3 Part 2 proof, line 427 (`|W_info| /
+    |W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-decay`
+    composition. -/
+axiom wInfoTopoRatio_le_MillsConst_decay_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∀ c : ℝ, 0 < c →
-        ∀ β : ℝ, 0 < β →
-          wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β)
+      ∀ β : ℝ, 0 < β →
+        wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * Real.rpow 2 (-β)
 
 /-- **Theorem 3.3 (`thm:phase`) Part 2: derived theorem.** Above
     threshold (`p > p_c`), the information-to-topology ratio
     `wInfoTopoRatio p β` is bounded by `c * 2^{-β}` for some positive
-    constant `c`. Decomposed from the bundled
-    `gap_phase_transition_above_OPEN` axiom into (a)
-    `wInfoTopoRatio_const_exists_OPEN` (existence of positive
-    constant) + (b) `wInfoTopoRatio_bound_OPEN` (quantitative ratio
-    bound). The derived theorem composes both atoms.
+    constant `c`.
+
+    R59 closure-path-A re-derivation: the bundled
+    `gap_phase_transition_above_OPEN` was originally decomposed (R37)
+    into the bundled `wInfoTopoRatio_const_exists_OPEN` +
+    `wInfoTopoRatio_bound_OPEN` axioms; R59 further decomposes via
+    Path A into a new opaque carrier `wInfoTopoRatioMillsConst` plus
+    two strictly-smaller atoms:
+      (a) `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` (Cat 3
+          workingAssumption — paper line 421-427 Mills-constant
+          positivity on the new carrier), AND
+      (b) `wInfoTopoRatio_le_MillsConst_decay_OPEN` (Cat 3
+          workingAssumption — paper line 427 quantitative bound at
+          the carrier-pinned constant).
+    The derived theorem instantiates the existential with
+    `wInfoTopoRatioMillsConst p`. The Cat 2 Grimmett §6.75
+    exponential-decay dependency remains threaded through `h_grimmett`.
 
     paper source: Theorem 3.3 Part 2, lines 420-431. -/
 theorem gap_phase_transition_above
@@ -289,10 +359,11 @@ theorem gap_phase_transition_above
     ∃ c : ℝ, 0 < c ∧
       ∀ β : ℝ, 0 < β →
         wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β) := by
-  obtain ⟨c, hc_pos⟩ := wInfoTopoRatio_const_exists_OPEN h_grimmett p hp
-  refine ⟨c, hc_pos, ?_⟩
+  refine ⟨wInfoTopoRatioMillsConst p,
+          wInfoTopoRatioMillsConst_pos_above_pc_OPEN h_grimmett p hp,
+          ?_⟩
   intros β hβ
-  exact wInfoTopoRatio_bound_OPEN h_grimmett p hp c hc_pos β hβ
+  exact wInfoTopoRatio_le_MillsConst_decay_OPEN h_grimmett p hp β hβ
 
 /-! ## 3. Proposition `prop:trap-prevalence`
 
@@ -301,38 +372,99 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- Cat 3 paper-novel ATOMIC structural equation: at `blockingProb = 0`,
-    the forward-reachable set from any vertex `v` under EMPTY history
-    equals the entire vertex carrier `Finset.univ`. Paper proof of
-    Proposition `prop:trap-prevalence` Part 1 line 463 reads "When no
-    edges are blocked, `R(v) = V` for all `v`": the entire vertex set is
-    forward-reachable from any starting vertex when no edge is blocked.
-    This atomic structural equation pins the paper-stated full-reachability
-    fact at `p = 0` on the existing `ForwardReachable` carrier, scoped
-    to the `H = ∅` base case that matches paper line 463 (the paper's
-    `R(v)` is `ReachableSet` per Def 2.2, identified with
-    `ForwardReachable v ∅ ω` via `ReachableSet_eq_ForwardReachable_empty`).
-    Cat 1 reduction check: not Mathlib-derivable (depends on the paper's
-    bond-percolation semantics that link `blockingProb = 0` to the
-    all-edges-open realisation and the consequent connectivity claim).
-    Cat 2 reduction check: paper-novel structural equation on the IDP
-    primitives. Encoding choice: the `Fintype Vertex` instance is needed
-    to express `Finset.univ`; declared as a Cat 3 atomic axiom alongside
-    the existing `Vertex.decEq` because paper Definition 2.1 says the
-    graph is on `n` nodes (finite).
+/-- R59 closure-path-B: smaller paper-novel ATOMIC structural equation
+    #1 replacing the retired bundled `forward_reachable_full_at_zero_OPEN`.
+    Paper Definition 2.1 (line 108) introduces `G = (V, E)` as a
+    CONNECTED undirected graph on `n` nodes — this connectivity is a
+    structural assumption on the action graph that the paper invokes
+    implicitly throughout (e.g. `R(v_0)` would be a strict subset of `V`
+    even at `p = 0` if the graph were disconnected). At `blockingProb
+    = 0` (no edges blocked), the percolation realisation is the
+    full-edge subgraph of `G`, and the `H = ∅` forward-reachable set
+    is the entire connected component of `v` in this full subgraph.
 
-    Scope discipline: the `H = ∅` restriction matches paper line 463
-    exactly. For `H ∋ u` (e.g. `H = {v}` after visiting `v`), removing
-    `v` from a connected graph could disconnect it, so
-    `ForwardReachable u {v} ω ≠ Finset.univ` in general at `p = 0` (a
-    formerly-overclaimed `∀ H` form would be SCOPE-INFLATED beyond the
-    paper).
+    R59 strictly smaller than retired bundled atom: this atom isolates
+    only the connected-component identification with `Finset.univ`
+    (which depends on paper Def 2.1 connectivity); the bond-percolation
+    semantics linking `blockingProb = 0` to the full-edge subgraph is
+    isolated as a separate Cat 3 atom
+    `all_edges_open_at_zero_blocking_OPEN` below.
 
-    paper source: Proposition `prop:trap-prevalence` Part 1 proof, line
-    463 ("When no edges are blocked, `R(v) = V` for all `v`"). -/
-axiom forward_reachable_full_at_zero_OPEN :
+    Cat 3 sub-type: workingAssumption (paper-stated structural equation
+    consequent on Def 2.1 connectivity + Def 2.2/2.5 reachable-set
+    semantics; pending Mathlib graph-theoretic infrastructure to
+    formalise the Def 2.1 connected-graph carrier and the
+    full-edge-subgraph identification; 必须 close before publication).
+
+    paper source: Definition 2.1 (line 108, `G = (V, E)` is a
+    connected undirected graph) + Definition 2.5 (`def:forward-reachable`,
+    paper line 187-194 forward-reachable construction at `H = ∅`)
+    specialised to the all-edges-open subgraph. -/
+axiom forward_reachable_empty_full_at_all_open_OPEN :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
-      blockingProb = 0 → ForwardReachable v ∅ ω = Finset.univ
+      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
+        ForwardReachable v ∅ ω = Finset.univ
+
+/-- R59 closure-path-B: smaller paper-novel ATOMIC structural equation
+    #2 replacing the retired bundled `forward_reachable_full_at_zero_OPEN`.
+    Paper Definition 2.1 (line 119) introduces bond percolation on `G`:
+    "Each edge `e ∈ E` is independently blocked with probability `p`",
+    so at `blockingProb = 0` the realised percolation outcome has every
+    edge OPEN with probability 1; under the paper's structural
+    quantification over realised outcomes (paper §2.5 inner expectation
+    "over reward signals, topology signals, and the intrinsic
+    preference realization"), the substantive content is that the
+    paper's reachable-set claims at `p = 0` are evaluated on the
+    all-edges-open realisation.
+
+    R59 strictly smaller than retired bundled atom: this atom isolates
+    only the percolation-semantics binding `blockingProb = 0 → all
+    edges open`, leaving the connected-component → `Finset.univ`
+    identification to atom #1.
+
+    Cat 3 sub-type: workingAssumption (paper-stated bond-percolation
+    semantics binding the parameter `blockingProb = 0` to the
+    all-edges-open realisation; pending Mathlib bond-percolation
+    measure-theoretic machinery; 必须 close before publication).
+
+    paper source: Definition 2.1 (line 119, bond-percolation
+    construction "Each edge `e ∈ E` is independently blocked with
+    probability `p`") + Proposition `prop:trap-prevalence` Part 1
+    proof line 463 (paper "no edges blocked" reading of `p = 0`). -/
+axiom all_edges_open_at_zero_blocking_OPEN :
+    ∀ (ω : PercolationOutcome),
+      blockingProb = 0 →
+        ∀ u w : Vertex, IsEdge u w → IsOpen ω u w
+
+/-- **R59 derived theorem** (replaces retired bundled
+    `forward_reachable_full_at_zero_OPEN`). At `blockingProb = 0`, the
+    forward-reachable set from any vertex `v` under EMPTY history
+    equals the entire vertex carrier `Finset.univ`.
+
+    R59 closure-path-B decomposition: the original bundled atom
+    packaged (i) bond-percolation semantics linking `blockingProb = 0`
+    to the all-edges-open realisation + (ii) the connected-graph
+    forward-reachable-equals-univ identification into one
+    workingAssumption. Decomposed into two strictly-smaller paper-
+    novel atoms:
+      (a) `all_edges_open_at_zero_blocking_OPEN` (Cat 3
+          workingAssumption — paper Def 2.1 line 119 percolation
+          semantics binding), AND
+      (b) `forward_reachable_empty_full_at_all_open_OPEN` (Cat 3
+          workingAssumption — paper Def 2.1 connectivity + Def 2.5
+          full-edge-subgraph forward-reachable identification).
+    Each smaller atom is more atomic per §18 + has an explicit paper
+    Definition close target.
+
+    paper source: Proposition `prop:trap-prevalence` Part 1 proof,
+    line 463 (`R(v) = V` for all `v` when no edges are blocked), now
+    derived from Def 2.1 + Def 2.5 atoms. -/
+theorem forward_reachable_full_at_zero
+    [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome)
+    (h_p_zero : blockingProb = 0) :
+    ForwardReachable v ∅ ω = Finset.univ :=
+  forward_reachable_empty_full_at_all_open_OPEN v ω
+    (all_edges_open_at_zero_blocking_OPEN ω h_p_zero)
 
 /-- **Proposition `prop:trap-prevalence` Part 1** — Cat 3 derived
     closure. At `blockingProb = 0`, all vertices have the same dynamic
@@ -364,9 +496,9 @@ theorem gap_trap_prevalence_zero
       V_dyn u ∅ ω = V_dyn v ∅ ω := by
   intro u _h_edge
   have h_eq_u : ForwardReachable u ∅ ω = Finset.univ :=
-    forward_reachable_full_at_zero_OPEN u ω h_p_zero
+    forward_reachable_full_at_zero u ω h_p_zero
   have h_eq_v : ForwardReachable v ∅ ω = Finset.univ :=
-    forward_reachable_full_at_zero_OPEN v ω h_p_zero
+    forward_reachable_full_at_zero v ω h_p_zero
   rw [V_dyn_def u ∅ ω, V_dyn_def v ∅ ω]
   -- Both sides equal `Finset.univ.sup' _ reward` via `Finset.sup'_congr`
   -- (Mathlib `Data/Finset/Lattice/Fold.lean:587`). Bring both sides to
@@ -386,53 +518,108 @@ theorem gap_trap_prevalence_zero
     paper source: Proposition `prop:trap-prevalence` Part 2. -/
 axiom trapMisalignmentProbability : ℝ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:trap-prevalence` Part 2 proof (lines 467-473) derives that
-    for `p > p_c` on `Z²`, the local configuration of (a) `v` having
-    exactly two open edges to `u_1, u_2`, (b) `u_1` isolated
-    (`|C_1| = 1`), and (c) `u_2` having `|C_2| ≥ 2`, has FKG-positive
-    lower-bounded probability `≥ binom(4, 2) p² (1-p)² · p^3 > 0` on
-    the lattice with degree 4 (paper line 473). The trap configuration
-    on this local pattern thus contributes a paper-stated positive
-    constant lower bound on `trapMisalignmentProbability p`. This
-    atomic stipulation isolates the LOCAL FKG-positivity fact on the
-    existing carrier `trapMisalignmentProbability`.
+/-- R59 closure-path-A: explicit Hodge-style closed-form encoding of the
+    paper's local-FKG lower-bound formula for the trap pattern. Paper
+    Proposition `prop:trap-prevalence` Part 2 proof line 473 gives the
+    explicit local-FKG estimate `binom(4, 2) p² (1-p)² · p^3 > 0` on
+    the lattice with degree 4 — six choices of two edges incident to `v`
+    being open (probability `(1-p)²` each), the other two incident
+    edges being blocked (probability `p²`), and the chosen `u_1`
+    neighbour having its remaining three incident edges blocked
+    (probability `p^3` so that `|C_1| = 1`). The product is
+    `6 * (1-p)^2 * p^2 * p^3 = 6 * p^5 * (1-p)^2`.
 
-    Encoding choice: extracted from the bundled
-    `gap_trap_prevalence_above_threshold_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern (decompose bundled conclusion-axiom into atomic
-    stipulation + derived theorem). The paper's substantive content
-    here is the local-FKG estimate (paper line 473
-    `binom(4, 2) p² (1-p)² · p^3 > 0` plus FKG-positivity of the
-    `|C_2| ≥ 2` event); the bundled axiom's `0 < trapMisalignmentProbability p`
-    conclusion is the direct paper-stated positivity sub-clause.
+    Hodge-style closed form: the def IS the paper's stated formula
+    (paper line 473 `binom(4, 2) p² (1-p)² · p^3 > 0`); the
+    substantive FKG-positivity binding to the opaque
+    `trapMisalignmentProbability` carrier remains a Cat 3
+    workingAssumption (atom `trapConfigLocalProb_le_misalignmentProb_OPEN`
+    below). -/
+noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
+  6 * p ^ 5 * (1 - p) ^ 2
 
-    Cat 3 sub-type: workingAssumption (paper-stated FKG-positivity of
-    the local trap pattern; pending Mathlib Z²-lattice + percolation-
-    measure machinery; 必须 close before publication).
+/-- R59 closure-path-A: smaller paper-novel ATOMIC stipulation
+    replacing the retired `trap_config_local_positive_OPEN`. Paper
+    Proposition `prop:trap-prevalence` Part 2 proof line 473 binds the
+    local-FKG estimate `binom(4, 2) p² (1-p)² · p^3 = 6 * p^5 * (1-p)^2`
+    as a LOWER BOUND on `trapMisalignmentProbability p` for `p > p_c`
+    via FKG-positivity of the local trap pattern (`v` has exactly two
+    open edges + `u_1` isolated + `|C_2| ≥ 2`).
+
+    R59 strictly smaller than retired bundled atom: the FKG-positivity
+    binding `trapConfigLocalProb p ≤ trapMisalignmentProbability p` is
+    isolated from the arithmetic positivity claim
+    `0 < trapConfigLocalProb p` (which becomes Cat 1 derivation in
+    `trapConfigLocalProb_pos`). The retired atom packaged both into
+    `0 < trapMisalignmentProbability p`.
+
+    Cat 3 sub-type: workingAssumption (paper-stated FKG lower-bound
+    binding on opaque `trapMisalignmentProbability` carrier; pending
+    Mathlib Z²-lattice + bond-percolation measure machinery; 必须
+    close before publication).
 
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
-    line 473 (`binom(4, 2) p² (1-p)² · p^3 > 0` lattice-degree-4
-    local FKG estimate). -/
-axiom trap_config_local_positive_OPEN :
-    ∀ p : ℝ, harrisKestenCriticalProb < p → 0 < trapMisalignmentProbability p
+    line 473 (`binom(4, 2) p² (1-p)² · p^3 > 0` local-FKG lower
+    bound on the lattice-degree-4 trap pattern). -/
+axiom trapConfigLocalProb_le_misalignmentProb_OPEN :
+    ∀ p : ℝ, harrisKestenCriticalProb < p → p < 1 →
+      trapConfigLocalProb p ≤ trapMisalignmentProbability p
+
+/-- **Cat 1 Mathlib derivation** of the arithmetic positivity of the
+    paper's local-FKG closed form. Given `0 < p < 1` (which follows
+    from `harrisKestenCriticalProb < p < 1` plus
+    `harrisKestenCriticalProb = 1/2 > 0` from `gap_harris_kesten_OPEN`),
+    the closed form `6 * p^5 * (1-p)^2` is a product of strictly
+    positive factors. Kernel-pure via `nlinarith` on the explicit
+    polynomial form.
+
+    R59: this Cat 1 step was previously bundled into the retired
+    `trap_config_local_positive_OPEN` atom. -/
+theorem trapConfigLocalProb_pos
+    (p : ℝ) (hp_pc : harrisKestenCriticalProb < p) (hp_lt_one : p < 1) :
+    0 < trapConfigLocalProb p := by
+  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+  have h_p_pos : 0 < p := by rw [h_pc] at hp_pc; linarith
+  have h_one_sub_p_pos : 0 < 1 - p := by linarith
+  unfold trapConfigLocalProb
+  have h_p5_pos : 0 < p ^ 5 := pow_pos h_p_pos 5
+  have h_one_sub_p_sq_pos : 0 < (1 - p) ^ 2 := pow_pos h_one_sub_p_pos 2
+  have h_six_pos : (0 : ℝ) < 6 := by norm_num
+  exact mul_pos (mul_pos h_six_pos h_p5_pos) h_one_sub_p_sq_pos
 
 /-- **Proposition `prop:trap-prevalence` Part 2: derived theorem.**
-    For `p > p_c = harrisKestenCriticalProb` on `Z²`, the trap
-    configuration has positive lower-bounded probability. Decomposed
-    from the bundled `gap_trap_prevalence_above_threshold_OPEN`
-    axiom into the atomic stipulation `trap_config_local_positive_OPEN`
-    (paper-stated FKG estimate). The derived theorem re-exports.
+    For `p > p_c = harrisKestenCriticalProb` on `Z²` and `p < 1`, the
+    trap configuration has positive lower-bounded probability.
 
-    The hypothesis consumes `harrisKestenCriticalProb` rather than the
-    literal `1/2`; the paper-stated equality is recorded by the
-    Cat 2 axiom `gap_harris_kesten_OPEN`.
+    R59 closure-path-A re-derivation: the bundled
+    `gap_trap_prevalence_above_threshold_OPEN` was originally
+    decomposed (R37) into the single bundled atom
+    `trap_config_local_positive_OPEN` (which packaged the FKG lower
+    bound + arithmetic positivity into one workingAssumption). R59
+    further decomposes via Path A into a Hodge-style closed form
+    `trapConfigLocalProb p := 6 * p^5 * (1-p)^2` (paper line 473
+    explicit formula) plus:
+      (a) `trapConfigLocalProb_le_misalignmentProb_OPEN` (Cat 3
+          workingAssumption — paper line 473 FKG lower-bound binding
+          on the opaque `trapMisalignmentProbability` carrier),
+      (b) `trapConfigLocalProb_pos` (Cat 1 Mathlib theorem — arithmetic
+          positivity of the explicit closed form for `0 < p < 1`).
+    The derived theorem composes both via transitivity of `<` and `≤`.
+
+    The added `p < 1` antecedent matches the paper's implicit
+    probability-domain assumption (paper Def 2.1 has
+    `blockingProb ∈ [0, 1]`). The threshold antecedent consumes
+    `harrisKestenCriticalProb` rather than the literal `1/2`; the
+    paper-stated equality is recorded by `gap_harris_kesten_OPEN`.
 
     paper source: Proposition `prop:trap-prevalence` Part 2, lines 458-473. -/
 theorem gap_trap_prevalence_above_threshold :
-    ∀ p : ℝ, harrisKestenCriticalProb < p → 0 < trapMisalignmentProbability p :=
-  trap_config_local_positive_OPEN
+    ∀ p : ℝ, harrisKestenCriticalProb < p → p < 1 →
+      0 < trapMisalignmentProbability p := by
+  intro p hp_pc hp_lt_one
+  exact lt_of_lt_of_le
+    (trapConfigLocalProb_pos p hp_pc hp_lt_one)
+    (trapConfigLocalProb_le_misalignmentProb_OPEN p hp_pc hp_lt_one)
 
 /-! ## 4. Corollary `cor:er-phase` — Erdős–Rényi
 

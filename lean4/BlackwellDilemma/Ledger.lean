@@ -2088,7 +2088,7 @@ def entry_thm_dilemma : GapEntry where
 /-! # §3.3 Phase Transition entries -/
 
 def entry_thm_phase_below : GapEntry where
-  name := "gap_phase_transition_below (derived) + topo_loss_decay_below_pc_OPEN + topo_loss_decay_arbitrary_threshold_OPEN (Cat 3 atoms)"
+  name := "gap_phase_transition_below (derived) + R59 sub-chain: topo_loss_decay_below_pc (derived theorem, R59) + expectedTopoLoss_below_pc_one_over_n_envelope_OPEN (R59 smaller atom) + topo_loss_decay_arbitrary_threshold (Cat 1, R44)"
   status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.derivedTheorem
@@ -2101,14 +2101,15 @@ def entry_thm_phase_below : GapEntry where
       "R18-B 2026-05-13: anchored existential to opaque carrier `expectedTopoLoss n p` per R17-E Pattern 4 finding (vacuous-existential satisfaction by junk constants). Removed the auxiliary `∃ topo_loss_decay : ℕ → ℝ, ...` quantifier whose body was trivially satisfiable by `fun _ => -1`; the decay assertion now binds directly to the substantive paper-cited carrier `expectedTopoLoss` (declared in `Wrongness.lean`, paper source: Proposition `prop:topo-cluster` line 286), eliminating R3 anti-pattern #2 (vacuous existential) that pre-dated R17. Bottom-line statement form: `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε`.",
       "R26 2026-05-13: dropped `h_perc_prob` broken-link hypothesis parameter per the discipline clarification (Cat 2 axioms with paper authority are consumed implicitly via the axiom system, not threaded as broken-link hypotheses). The R17-C typed-hypothesis chain becomes redundant once `gap_percolation_probability_BLOCKED_by_Mathlib_percolation` is converted to the plain Cat 2 axiom `gap_percolation_probability_OPEN`. inputCategory demoted Cat 3-with-Cat 2 → Cat 3 (the sub-tag was specifically a Lean-signature-chain qualifier; without the hypothesis chain, the entry is honestly Cat 3 with docstring-acknowledged Cat 2 dependency).",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
-      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_phase_transition_below_OPEN` is REPLACED by derived theorem `gap_phase_transition_below` (Phase.lean) composing two new Cat 3 atomic stipulations: (a) `topo_loss_decay_below_pc_OPEN` (existence of decay envelope `topo_loss_decay : ℕ → ℝ` for `expectedTopoLoss n p`, paper proof line 415-417 via giant-component conditioning + topo-cluster formula); (b) `topo_loss_decay_arbitrary_threshold_OPEN` (paper-stated arbitrary-ε convergence form from envelope, paper proof line 417). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_topo_loss_decay_below_pc, entry_atom_topo_loss_decay_arbitrary_threshold). The Cat 2 Grimmett percolation-probability dependency remains threaded as explicit `h_perc_prob` antecedent on the first atom for audit-chain visibility." ]
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_phase_transition_below_OPEN` is REPLACED by derived theorem `gap_phase_transition_below` (Phase.lean) composing two new Cat 3 atomic stipulations: (a) `topo_loss_decay_below_pc_OPEN` (existence of decay envelope `topo_loss_decay : ℕ → ℝ` for `expectedTopoLoss n p`, paper proof line 415-417 via giant-component conditioning + topo-cluster formula); (b) `topo_loss_decay_arbitrary_threshold_OPEN` (paper-stated arbitrary-ε convergence form from envelope, paper proof line 417). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_topo_loss_decay_below_pc, entry_atom_topo_loss_decay_arbitrary_threshold). The Cat 2 Grimmett percolation-probability dependency remains threaded as explicit `h_perc_prob` antecedent on the first atom for audit-chain visibility.",
+      "R59 2026-05-14: deepened §18 chain — the R37 envelope-existence atom `topo_loss_decay_below_pc_OPEN` was further decomposed in Phase.lean via closure-path-B into (a) new smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (paper line 417 polynomial upper bound `expectedTopoLoss n p ≤ 1/(n+1)` from giant-component conditioning), and (b) Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat` (kernel-pure `1/(n+1) → 0`). The R37 envelope-existence atom is now derived (not axiomatized) by witness `1/(n+1)` + new atom + Cat 1; the bundle remains CLOSED with deeper audit chain. Bundle name updated to reflect R59 sub-chain." ]
   scope := "Theorem 3.3 (thm:phase) Part 1, lines 400-419"
   obstacleOrAttribution :=
-    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_phase_transition_below` composes two atomic stipulations (paper proof lines 415-417): `topo_loss_decay_below_pc_OPEN` (envelope existence) + `topo_loss_decay_arbitrary_threshold_OPEN` (arbitrary-ε form). Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent on the first atom for audit-chain visibility. Substantive Mathlib percolation + cluster-size-asymptotics machinery remains the underlying gap."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_phase_transition_below` composes the R59 derived theorem `topo_loss_decay_below_pc` (which composes the R59 smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` with Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`) + the Cat 1 `topo_loss_decay_arbitrary_threshold` theorem (R44). Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent for audit-chain visibility. The remaining substantive gap is the paper line 417 `O(1/N)` polynomial bound on the opaque `expectedTopoLoss` carrier (Mathlib bond-percolation infra)."
   conditionalOn := []
 
 def entry_thm_phase_above : GapEntry where
-  name := "gap_phase_transition_above (derived) + wInfoTopoRatio_const_exists_OPEN + wInfoTopoRatio_bound_OPEN (Cat 3 atoms)"
+  name := "gap_phase_transition_above (derived) + R59 sub-chain: wInfoTopoRatioMillsConst (carrier, R59) + wInfoTopoRatioMillsConst_pos_above_pc_OPEN (R59 smaller atom) + wInfoTopoRatio_le_MillsConst_decay_OPEN (R59 smaller atom)"
   status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.derivedTheorem
@@ -2120,14 +2121,15 @@ def entry_thm_phase_above : GapEntry where
       "R17-C 2026-05-13: Cat 2 ↔ Cat 3 chain wiring per broken-link discipline. Threaded the Grimmett exponential-decay BLOCKED predicate `gap_grimmett_exponential_decay_BLOCKED_by_Mathlib_percolation` as the explicit broken-link hypothesis `h_grimmett`. inputCategory promoted Cat 3 → Cat 3-with-Cat 2 to record the explicit Grimmett 1999 §6.75 chain at the Lean signature level.",
       "R26 2026-05-13: dropped `h_grimmett` broken-link hypothesis parameter per the discipline clarification (Cat 2 axioms with paper authority are consumed implicitly via the axiom system, not threaded as broken-link hypotheses). The R17-C typed-hypothesis chain becomes redundant once `gap_grimmett_exponential_decay_BLOCKED_by_Mathlib_percolation` is converted to the plain Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`. inputCategory demoted Cat 3-with-Cat 2 → Cat 3 (the sub-tag was specifically a Lean-signature-chain qualifier).",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
-      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_phase_transition_above_OPEN` is REPLACED by derived theorem `gap_phase_transition_above` (Phase.lean) composing two new Cat 3 atomic stipulations: (a) `wInfoTopoRatio_const_exists_OPEN` (existence of positive constant `c(p) > 0` characterising the exponential-decay rate, paper proof lines 421-427); (b) `wInfoTopoRatio_bound_OPEN` (paper-stated quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}`, paper proof line 427). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_wInfoTopoRatio_const_exists, entry_atom_wInfoTopoRatio_bound). The Cat 2 Grimmett §6.75 dependency remains threaded as explicit `h_grimmett` antecedent on both atoms for audit-chain visibility." ]
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_phase_transition_above_OPEN` is REPLACED by derived theorem `gap_phase_transition_above` (Phase.lean) composing two new Cat 3 atomic stipulations: (a) `wInfoTopoRatio_const_exists_OPEN` (existence of positive constant `c(p) > 0` characterising the exponential-decay rate, paper proof lines 421-427); (b) `wInfoTopoRatio_bound_OPEN` (paper-stated quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}`, paper proof line 427). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_wInfoTopoRatio_const_exists, entry_atom_wInfoTopoRatio_bound). The Cat 2 Grimmett §6.75 dependency remains threaded as explicit `h_grimmett` antecedent on both atoms for audit-chain visibility.",
+      "R59 2026-05-14: deepened §18 chain — both R37 atoms (`wInfoTopoRatio_const_exists_OPEN`, `wInfoTopoRatio_bound_OPEN`) decomposed in Phase.lean via closure-path-A. Introduced new opaque carrier `wInfoTopoRatioMillsConst : ℝ → ℝ` (paper-stated Mills-tail constant); R37 atoms now derived theorems composing two new smaller atoms: (a) `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` (paper line 421-427 Mills-constant positivity on new carrier — Cat 3 workingAssumption per §10), (b) `wInfoTopoRatio_le_MillsConst_decay_OPEN` (paper line 427 quantitative bound at carrier-pinned constant — Cat 3 workingAssumption). The new bundle derived theorem instantiates the existential with `wInfoTopoRatioMillsConst p`. Bonus correctness fix: the R37 `wInfoTopoRatio_bound_OPEN` had `∀ c > 0` semantically over-encoded relative to paper (paper's c is the SPECIFIC Mills-tail constant); the R59 atom `wInfoTopoRatio_le_MillsConst_decay_OPEN` is paper-faithful." ]
   scope := "Theorem 3.3 (thm:phase) Part 2, lines 420-431"
   obstacleOrAttribution :=
-    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_phase_transition_above` composes two atomic stipulations (paper proof lines 421-427): `wInfoTopoRatio_const_exists_OPEN` (positive constant existence) + `wInfoTopoRatio_bound_OPEN` (quantitative ratio bound). Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent on both atoms for audit-chain visibility. Substantive Mathlib percolation + Mills-tail composition remains the underlying gap."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_phase_transition_above` (R59 re-derivation) instantiates the existential with the new carrier `wInfoTopoRatioMillsConst p` and composes the two R59 smaller atoms (`wInfoTopoRatioMillsConst_pos_above_pc_OPEN`, `wInfoTopoRatio_le_MillsConst_decay_OPEN`). Cat 2 dependency on Grimmett 1999 §6.75 threaded as explicit `h_grimmett` antecedent on both R59 atoms for audit-chain visibility. The remaining substantive gap is the Mills-tail + cluster-size composition pinning the named constant `wInfoTopoRatioMillsConst p`."
   conditionalOn := []
 
 def entry_prop_trap_prevalence_zero : GapEntry where
-  name := "gap_trap_prevalence_zero (derived) + forward_reachable_full_at_zero_OPEN (Cat 3 atom)"
+  name := "gap_trap_prevalence_zero (derived) + R59 sub-chain: forward_reachable_full_at_zero (derived theorem, R59) + all_edges_open_at_zero_blocking_OPEN (R59 smaller atom) + forward_reachable_empty_full_at_all_open_OPEN (R59 smaller atom)"
   status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.derivedTheorem
@@ -2138,14 +2140,15 @@ def entry_prop_trap_prevalence_zero : GapEntry where
       "R23-C2 2026-05-13: applied Manufactured-Recognition R-#25 atomic-decomposition pattern per `feedback_gap_ledger_in_lean4` 2026-05-13 worked-example. Added Cat 3 atomic structural equation `forward_reachable_full_at_zero_OPEN : ∀ [Fintype Vertex] v H ω, blockingProb = 0 → ForwardReachable v H ω = Finset.univ` (paper line 463 structural fact: `R(v) = V` for all `v` when no edges are blocked); REFACTORED prior `gap_trap_prevalence_zero_OPEN` axiom into derived theorem `gap_trap_prevalence_zero` whose proof composes the atom + V_dyn_def (R23-C1 atom) + Mathlib `Finset.sup'_congr` (Cat 1). The derived-theorem statement matches the original axiom statement (`V_dyn u {v} ω = V_dyn v ∅ ω`) under the [Fintype Vertex] hypothesis (paper Definition 2.1 graph on `n` nodes). Lake build green. `gap_trap_prevalence_zero` axiom dependency chain becomes [propext, Classical.choice, Quot.sound] + opaque Cat 3 atoms (`forward_reachable_full_at_zero_OPEN`, `V_dyn_def`, `ForwardReachable_self_member`).",
       "R24-D 2026-05-13: AxiomAudit instrumentation added per R23-D Audit 5 finding (the R23-C2 derived closure was previously commented out in `AxiomAudit.lean` with the explanation `#print axioms requires a [Fintype Vertex] hypothesis hidden in the theorem signature; skipping pending instance resolution`). Investigation: the explanation was incorrect — `#print axioms` operates on a definition's name and prints the axiom dependency closure of its body, NOT the applied form, so instance arguments do NOT block it. Verified by direct invocation: `#print axioms BlackwellDilemma.gap_trap_prevalence_zero` outputs `[propext, ForwardReachable, ForwardReachable_self_member, IsEdge, PercolationOutcome, V_dyn, V_dyn_def, Vertex, blockingProb, forward_reachable_full_at_zero_OPEN, reward, Classical.choice, Quot.sound]` — exactly the documented Cat 3 atom chain plus opaque carriers. Audit-script line uncommented; explanatory comment updated to clarify the correct behaviour. No source-side change required.",
       "R24-A 2026-05-13: SCOPE-INFLATION repair per R23-D Audit 1 hostile audit. The R23-C2 `forward_reachable_full_at_zero_OPEN` form `∀ [Fintype Vertex] v H ω, blockingProb = 0 → ForwardReachable v H ω = Finset.univ` was SCOPE-INFLATED beyond paper line 463: paper's `R(v) = V` is the `H = ∅` (i.e. `ReachableSet`) statement (paper's `R(v)` is `ReachableSet` per Def 2.2, identified with `ForwardReachable v ∅ ω` via `ReachableSet_eq_ForwardReachable_empty`). For `H ∋ u` (e.g. `H = {v}` after visiting `v`), removing `v` from a connected graph could disconnect it, so `ForwardReachable u {v} ω ≠ Finset.univ` in general at `p = 0`. (i) RESTATED the atom to `∀ [Fintype Vertex] v ω, blockingProb = 0 → ForwardReachable v ∅ ω = Finset.univ` (H=∅ scope, paper-faithful — H quantifier dropped from the atom signature). (ii) RESTATED the derived theorem to `∀ u, IsEdge v u → V_dyn u ∅ ω = V_dyn v ∅ ω` (H=∅ on both sides, paper-faithful) instead of the prior `V_dyn u {v} ω = V_dyn v ∅ ω` form (which was inconsistent with paper line 463 — the paper proves `V_dyn(v) = r* = max r` for all `v` at `p=0`, NOT a statement about V_dyn evaluated at H={v}). The proof structure is unchanged in shape (compose H=∅-scoped atom + V_dyn_def at H=∅ + `Finset.sup'_congr`); the H=∅ form for both sides matches paper line 463 scope exactly: `V_dyn` is constant over the `H = ∅` family at `p = 0` because every vertex's `H=∅` forward-reachable set is `Finset.univ`. R24-D `#print axioms` output remains accurate at the axiom-name level (closure names unchanged); only the atom's universally-quantified scope tightened. Lake build green.",
-      "R27-A 2026-05-13: Cat 3 sub-classification DERIVED_THEOREM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as CLOSED (Cat 3 derived theorem composing earlier Cat 1 + Cat 2 + Cat 3 atomic inputs — sub-class is descriptive only, not subject to the 永不/必须 close mandate). New `subClass` field set to DERIVED_THEOREM." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification DERIVED_THEOREM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as CLOSED (Cat 3 derived theorem composing earlier Cat 1 + Cat 2 + Cat 3 atomic inputs — sub-class is descriptive only, not subject to the 永不/必须 close mandate). New `subClass` field set to DERIVED_THEOREM.",
+      "R59 2026-05-14: deepened §18 chain — the R23-C2 atom `forward_reachable_full_at_zero_OPEN` was further decomposed in Phase.lean via closure-path-B into two strictly-smaller paper-novel atoms: (a) `all_edges_open_at_zero_blocking_OPEN` (paper Def 2.1 line 119 percolation semantics binding `blockingProb = 0 → all edges open`), (b) `forward_reachable_empty_full_at_all_open_OPEN` (paper Def 2.1 connectivity + Def 2.5 full-edge-subgraph forward-reachable identification at `H = ∅`). The R23-C2 atom is now derived (not axiomatized) as the new `forward_reachable_full_at_zero` derived theorem; downstream `gap_trap_prevalence_zero` re-routed to consume the derived theorem directly (proof body unchanged in shape — `rw` on `forward_reachable_full_at_zero` instead of on `forward_reachable_full_at_zero_OPEN`). The bundle remains CLOSED with deeper audit chain rooted in paper Def 2.1 + Def 2.5 atoms rather than the bundled Proposition-PROOF level atom." ]
   scope := "Proposition prop:trap-prevalence Part 1, line 457; proof line 463"
   obstacleOrAttribution :=
-    "CLOSED-via-Cat-3-atom-input. `gap_trap_prevalence_zero` derived theorem composes: (a) Cat 3 atom `forward_reachable_full_at_zero_OPEN` (paper line 463; R24-A H=∅-scoped form), (b) Cat 3 atom `V_dyn_def` (R23-C1; paper Def 2.2/def:value-functions), (c) Cat 1 Mathlib `Finset.sup'_congr` (paper-stated `max` over equal carriers). [Fintype Vertex] hypothesis encodes paper Def 2.1 graph-on-`n`-nodes finiteness. R24-A SCOPE-INFLATION repair: both atom and derived-theorem statements scoped to `H = ∅`, matching paper line 463 (paper's `R(v)` is `ReachableSet` per Def 2.2, the `H = ∅` evaluation of `ForwardReachable`). R24-D: AxiomAudit instrumentation now active; output `[propext, ForwardReachable, ForwardReachable_self_member, IsEdge, PercolationOutcome, V_dyn, V_dyn_def, Vertex, blockingProb, forward_reachable_full_at_zero_OPEN, reward, Classical.choice, Quot.sound]` matches the documented dependency chain (axiom-name closure unchanged by R24-A scope tightening)."
+    "CLOSED-via-Cat-3-atom-input. `gap_trap_prevalence_zero` derived theorem composes: (a) R59 derived theorem `forward_reachable_full_at_zero` (composing the two R59 smaller atoms `all_edges_open_at_zero_blocking_OPEN` + `forward_reachable_empty_full_at_all_open_OPEN`), (b) Cat 3 atom `V_dyn_def` (R23-C1; paper Def 2.2/def:value-functions), (c) Cat 1 Mathlib `Finset.sup'_congr` (paper-stated `max` over equal carriers). [Fintype Vertex] hypothesis encodes paper Def 2.1 graph-on-`n`-nodes finiteness. R24-A SCOPE-INFLATION repair retained: both atom and derived-theorem statements scoped to `H = ∅`, matching paper line 463."
   conditionalOn := []
 
 def entry_prop_trap_prevalence_above : GapEntry where
-  name := "gap_trap_prevalence_above_threshold (derived) + trap_config_local_positive_OPEN (Cat 3 atom)"
+  name := "gap_trap_prevalence_above_threshold (derived) + R59 sub-chain: trapConfigLocalProb (Hodge-style def, R59) + trapConfigLocalProb_le_misalignmentProb_OPEN (R59 smaller atom) + trapConfigLocalProb_pos (Cat 1 theorem, R59)"
   status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.derivedTheorem
@@ -2154,10 +2157,11 @@ def entry_prop_trap_prevalence_above : GapEntry where
     [ "R1 2026-05-12: trivial existential `∃ c, 0 < c`.",
       "R4 Phase 4 audit (2026-05-12): patched — bind to opaque carrier `trapMisalignmentProbability` and assert positive lower bound.",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
-      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_trap_prevalence_above_threshold_OPEN` is REPLACED by derived theorem `gap_trap_prevalence_above_threshold` (Phase.lean) composing the new Cat 3 atomic stipulation `trap_config_local_positive_OPEN` (paper-stated local FKG-positivity of trap pattern on Z²-lattice with degree 4, paper proof line 473 `binom(4, 2) p² (1-p)² · p^3 > 0` estimate). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_trap_config_local_positive)." ]
+      "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_trap_prevalence_above_threshold_OPEN` is REPLACED by derived theorem `gap_trap_prevalence_above_threshold` (Phase.lean) composing the new Cat 3 atomic stipulation `trap_config_local_positive_OPEN` (paper-stated local FKG-positivity of trap pattern on Z²-lattice with degree 4, paper proof line 473 `binom(4, 2) p² (1-p)² · p^3 > 0` estimate). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_trap_config_local_positive).",
+      "R59 2026-05-14: deepened §18 chain — the R37 atom `trap_config_local_positive_OPEN` decomposed in Phase.lean via closure-path-A. Introduced Hodge-style closed-form `def trapConfigLocalProb p := 6 * p^5 * (1-p)^2` (paper line 473 explicit formula). The R37 atom replaced by (a) `trapConfigLocalProb_le_misalignmentProb_OPEN` (smaller workingAssumption — paper line 473 FKG lower-bound binding on opaque `trapMisalignmentProbability` carrier), (b) `trapConfigLocalProb_pos` (Cat 1 Mathlib theorem — arithmetic positivity of explicit closed form for `0 < p < 1`, derived from `harrisKestenCriticalProb = 1/2 > 0` via `gap_harris_kesten_OPEN`). The new derived theorem `gap_trap_prevalence_above_threshold` adds `p < 1` antecedent (matching paper Def 2.1 `blockingProb ∈ [0, 1]`) and composes the smaller atom + Cat 1 via transitivity. Net: substantive paper-novel content (FKG binding) is the only remaining workingAssumption residue; arithmetic positivity is now Cat 1." ]
   scope := "Proposition prop:trap-prevalence Part 2, lines 458-473"
   obstacleOrAttribution :=
-    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_trap_prevalence_above_threshold` re-exports the atomic stipulation `trap_config_local_positive_OPEN` (paper-stated local FKG-positivity, paper proof line 473). Substantive Mathlib Z²-lattice + percolation-measure machinery remains the underlying gap."
+    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_trap_prevalence_above_threshold` (R59 re-derivation, with added `p < 1` paper-faithful antecedent) composes the Hodge-style `def trapConfigLocalProb` + the R59 smaller atom `trapConfigLocalProb_le_misalignmentProb_OPEN` (FKG lower-bound binding) + Cat 1 `trapConfigLocalProb_pos` (arithmetic positivity). The substantive Mathlib Z²-lattice + percolation-measure machinery gap remains, but is isolated to the FKG-binding atom only — the arithmetic positivity is fully Cat 1."
   conditionalOn := []
 
 def entry_cor_er_phase : GapEntry where
@@ -3143,6 +3147,142 @@ def entry_atom_oracleBridgePathTerminalReward_TrapTree_eq_r_goal : GapEntry wher
     "Cat 3 workingAssumption per §3.4.4. Close target = paper Definition `def:trap-tree` line 1033 (the bridge path through `b_0, b_1, ..., b_{d-1}` terminates at the single child of `b_{d-1}` which is G with r(G) = 1.0 = r_goal); the bridge-path terminal-reward equation follows from def:trap-tree's explicit construction."
   conditionalOn := []
 
+/-! ## R59 atomic-stipulation layer (Phase.lean §18 closure wave)
+
+R59 2026-05-14: closed all 5 workingAssumption atoms in Phase.lean
+(`topo_loss_decay_below_pc_OPEN`, `wInfoTopoRatio_const_exists_OPEN`,
+`wInfoTopoRatio_bound_OPEN`, `forward_reachable_full_at_zero_OPEN`,
+`trap_config_local_positive_OPEN`) via §18 atomic-decomposition pattern
+following R57 (Bayesian.lean) + R58 (GeneralGraphs.lean) precedent.
+
+Net new entries: 6 smaller atom entries + 1 new opaque carrier entry.
+The 5 retired atom entries flip workingAssumption gapOpen →
+derivedTheorem gapClosed (their content sourced from the smaller
+atoms + Cat 1 / new carriers in the new derived theorems). -/
+
+/-- R59 closure-path-B: new smaller paper-novel ATOMIC stipulation
+    replacing the retired `topo_loss_decay_below_pc_OPEN`. Paper
+    Theorem 3.3 Part 1 proof line 417 polynomial upper bound
+    `expectedTopoLoss n p ≤ 1/(n+1)` from giant-component conditioning
+    + topo-cluster formula. -/
+def entry_atom_expectedTopoLoss_below_pc_one_over_n_envelope : GapEntry where
+  name := "expectedTopoLoss_below_pc_one_over_n_envelope_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 3.3 Part 1 proof, line 417 (`E[|W_topo|] = O(1/N)` polynomial envelope via giant-component conditioning + topo-cluster formula); Grimmett 1999 (Cat 2 percolation-probability dependency)"
+  attackHistory :=
+    [ "R59 2026-05-14: introduced as smaller replacement atom via closure-path-B decomposition of retired `topo_loss_decay_below_pc_OPEN`. Statement: `(h_perc_prob : ...) → ∀ p, 0 ≤ p → p < harrisKestenCriticalProb → ∀ n, expectedTopoLoss n p ≤ 1 / (n + 1)`. Strictly smaller than retired bundled atom — isolates only the per-`n` upper bound on `expectedTopoLoss n p` (the EXISTENCE of a decay envelope + the `Tendsto _ → 0` convergence of the explicit `1/(n+1)` envelope are downstream Cat 1 Mathlib derivations in the new derived theorem `topo_loss_decay_below_pc`). Pinning the witness envelope to the explicit Hodge-style closed form `1/(n+1)` matches paper line 417's `O(1/N)` polynomial form (distinct from the sharper exponential rate stated in Theorem 3.3 statement parenthesis; the polynomial form is what paper line 417 derives explicitly). Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque `expectedTopoLoss` carrier (Grimmett 1999 is the Cat 2 dependency, not the claim itself)." ]
+  scope := "Theorem 3.3 Part 1 proof, polynomial upper bound `expectedTopoLoss n p ≤ 1/(n+1)` for `p < p_c` and all `n`"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib bond-percolation theory + paper line 417 polynomial-bound proof reconstruction (giant-component conditioning + topo-cluster formula `(N-k)/((N+1)(k+1))` specialised to `k = Θ(N)` regime)."
+  conditionalOn := []
+
+/-- R59 closure-path-A: new opaque carrier introduced as smaller
+    replacement for the bundled `wInfoTopoRatio_const_exists_OPEN` +
+    `wInfoTopoRatio_bound_OPEN`. Paper-stated Mills-tail constant
+    `c(p) > 0` per Theorem 3.3 Part 2 proof lines 421-427. -/
+def entry_carrier_wInfoTopoRatioMillsConst : GapEntry where
+  name := "wInfoTopoRatioMillsConst (carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Theorem 3.3 (thm:phase) Part 2 proof, lines 421-427 (Mills-tail + cluster-size composition giving the constant in `|W_info|/|W_topo| = O(2^{-β})`)"
+  attackHistory :=
+    [ "R59 2026-05-14: Cat 3 paper-novel primitive function per v6 §3.4.1. Carrier declared `axiom wInfoTopoRatioMillsConst : ℝ → ℝ` at Phase.lean. Companion atomic stipulations (`wInfoTopoRatioMillsConst_pos_above_pc_OPEN`, `wInfoTopoRatio_le_MillsConst_decay_OPEN`) pin the carrier to the paper's positivity claim and quantitative-bound binding. The R57 satisficingTrapAcceptanceProb path-A pattern: factoring the bundled existential `∃ c, 0 < c ∧ <bound>` into a named carrier + atom-on-the-named-carrier (positivity) + atom-on-bundle-of-carriers (binding to `wInfoTopoRatio`). Cat 1 reduction check: CLEAR-NO — paper-novel Mills-tail constant on opaque carrier `wInfoTopoRatio`. Cat 2 reduction check: CLEAR-NO — paper-derived constant from Mills-tail composition (the underlying Mills bound + Grimmett §6.75 cluster-size are the Cat 2 dependencies). 永不 close per discipline." ]
+  scope := "Cat 3 carrier — paper-stated Mills-tail decay constant for `wInfoTopoRatio p β` above the percolation threshold"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 atomic carrier per discipline (paper-stated Mills-tail constant; no Mathlib equivalent — paper's substantive Mills + Grimmett §6.75 composition pinning the constant remains a Mathlib gap)."
+  conditionalOn := []
+
+/-- R59 closure-path-A: new smaller paper-novel ATOMIC stipulation #1
+    replacing the retired bundled `wInfoTopoRatio_const_exists_OPEN`.
+    Paper-stated positivity of the new carrier
+    `wInfoTopoRatioMillsConst p` for `p > p_c` per paper line 421-427
+    Mills-tail composition. -/
+def entry_atom_wInfoTopoRatioMillsConst_pos_above_pc : GapEntry where
+  name := "wInfoTopoRatioMillsConst_pos_above_pc_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 3.3 Part 2 proof, lines 421-427 (cluster size exponential tail + Mills-tail Θ-bound positivity); Grimmett 1999 §6.75 + `prop:info-decay` (Cat 2 dependencies)"
+  attackHistory :=
+    [ "R59 2026-05-14: introduced as smaller replacement atom #1 via closure-path-A decomposition of retired `wInfoTopoRatio_const_exists_OPEN`. Statement: `(h_grimmett : ...) → ∀ p, harrisKestenCriticalProb < p → 0 < wInfoTopoRatioMillsConst p`. Strictly smaller than retired bundled atom — only positivity of the Mills-constant on the new opaque carrier is asserted; the existential repackaging into `∃ c, 0 < c` is downstream Cat 0 derivation in the new derived theorem `gap_phase_transition_above`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on the new opaque carrier `wInfoTopoRatioMillsConst` (per §10 paper-application-of-Cat-2-to-opaque-carrier is Cat 3 with explicit Cat 2 chain)." ]
+  scope := "Theorem 3.3 Part 2, positivity of Mills-tail constant `wInfoTopoRatioMillsConst p` for `p > p_c`"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib bond-percolation + Mills-tail composition (Grimmett 1999 §6.75 + paper `prop:info-decay` Cat 2 dependencies)."
+  conditionalOn := []
+
+/-- R59 closure-path-A: new smaller paper-novel ATOMIC stipulation #2
+    replacing the retired bundled `wInfoTopoRatio_bound_OPEN`. Paper
+    line 427 quantitative bound `wInfoTopoRatio p β ≤
+    wInfoTopoRatioMillsConst p * 2^{-β}` at the carrier-pinned
+    constant. -/
+def entry_atom_wInfoTopoRatio_le_MillsConst_decay : GapEntry where
+  name := "wInfoTopoRatio_le_MillsConst_decay_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Theorem 3.3 Part 2 proof, line 427 (`|W_info|/|W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-decay` composition (Cat 2 dependencies)"
+  attackHistory :=
+    [ "R59 2026-05-14: introduced as smaller replacement atom #2 via closure-path-A decomposition of retired `wInfoTopoRatio_bound_OPEN`. Statement: `(h_grimmett : ...) → ∀ p, harrisKestenCriticalProb < p → ∀ β > 0, wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * 2^{-β}`. Strictly smaller than retired bundled atom — the bound is asserted only at the carrier-pinned constant `wInfoTopoRatioMillsConst p`, not for arbitrary `c > 0` (paper-faithful, since paper's c is the SPECIFIC Mills-tail constant). Bonus correctness fix: the prior R37 atom's `∀ c > 0` form was semantically over-encoded relative to paper line 427. Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel binding on opaque carriers `wInfoTopoRatio` and `wInfoTopoRatioMillsConst`." ]
+  scope := "Theorem 3.3 Part 2, quantitative ratio bound `wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * 2^{-β}` at carrier-pinned Mills constant"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib bond-percolation + Mills-tail composition + paper line 427 quantitative-bound proof reconstruction."
+  conditionalOn := []
+
+/-- R59 closure-path-A: new smaller paper-novel ATOMIC stipulation
+    replacing the retired `trap_config_local_positive_OPEN`. Paper
+    line 473 FKG lower-bound binding on opaque
+    `trapMisalignmentProbability` carrier — the substantive
+    paper-novel content. -/
+def entry_atom_trapConfigLocalProb_le_misalignmentProb : GapEntry where
+  name := "trapConfigLocalProb_le_misalignmentProb_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:trap-prevalence Part 2 proof, line 473 (`binom(4, 2) p² (1-p)² · p^3 = 6 p^5 (1-p)^2` local FKG lower bound on lattice-degree-4 trap pattern)"
+  attackHistory :=
+    [ "R59 2026-05-14: introduced as smaller replacement atom via closure-path-A decomposition of retired `trap_config_local_positive_OPEN`. Statement: `∀ p, harrisKestenCriticalProb < p → p < 1 → trapConfigLocalProb p ≤ trapMisalignmentProbability p` where `trapConfigLocalProb p := 6 * p^5 * (1-p)^2` is the new Hodge-style def encoding paper line 473 `binom(4, 2) p² (1-p)² · p^3` formula. Strictly smaller than retired bundled atom — the FKG-positivity binding is isolated from the arithmetic positivity claim (which becomes Cat 1 derivation `trapConfigLocalProb_pos`). The retired atom packaged both `0 < trapConfigLocalProb p ≤ trapMisalignmentProbability p` into `0 < trapMisalignmentProbability p`. Cat 1 reduction check: not Mathlib-derivable (FKG-binding is paper-novel structural fact on opaque `trapMisalignmentProbability` carrier). Cat 2 reduction check: paper-specific Z²-lattice + degree-4 + percolation-measure construction (FKG inequality framework is Cat 2 in general, but the paper-specific local-pattern application is Cat 3 paper-novel)." ]
+  scope := "Proposition prop:trap-prevalence Part 2, paper line 473 FKG lower-bound binding `trapConfigLocalProb p ≤ trapMisalignmentProbability p` at the explicit closed-form Hodge-style def"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib Z²-lattice + bond-percolation measure machinery + paper line 473 FKG estimate (the FKG binding to opaque `trapMisalignmentProbability` carrier; arithmetic positivity is Cat 1 `trapConfigLocalProb_pos`)."
+  conditionalOn := []
+
+/-- R59 closure-path-B: new smaller paper-novel ATOMIC stipulation #1
+    replacing the retired `forward_reachable_full_at_zero_OPEN`. Paper
+    Def 2.1 + Def 2.5 connectivity + full-edge-subgraph
+    forward-reachable identification at `H = ∅`. -/
+def entry_atom_forward_reachable_empty_full_at_all_open : GapEntry where
+  name := "forward_reachable_empty_full_at_all_open_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Definition 2.1 (line 108, `G = (V, E)` connected graph) + Definition 2.5 (`def:forward-reachable`, line 187-194 forward-reachable construction at `H = ∅`) specialised to all-edges-open subgraph"
+  attackHistory :=
+    [ "R59 2026-05-14: introduced as smaller replacement atom #1 via closure-path-B decomposition of retired `forward_reachable_full_at_zero_OPEN`. Statement: `∀ [Fintype Vertex] v ω, (∀ u w, IsEdge u w → IsOpen ω u w) → ForwardReachable v ∅ ω = Finset.univ`. Strictly smaller than retired bundled atom — isolates only the connected-component identification with `Finset.univ` (depending on paper Def 2.1 connectivity); the bond-percolation semantics linking `blockingProb = 0` to the full-edge subgraph is isolated as a separate Cat 3 atom `all_edges_open_at_zero_blocking_OPEN`. Close target now points to paper Def 2.1 + Def 2.5 (paper Definitions, structural commitments) rather than the bundled Proposition-PROOF level atom (Proposition prop:trap-prevalence Part 1 proof line 463). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel structural fact on the IDP primitives." ]
+  scope := "Paper Def 2.1 connectivity + Def 2.5 full-edge-subgraph forward-reachable-equals-univ identification at `H = ∅`"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib graph-theoretic infrastructure to formalise paper Def 2.1 connected-graph carrier + Def 2.5 full-edge-subgraph forward-reachable identification (`G connected` + `all edges open` ⇒ `R(v) = V`)."
+  conditionalOn := []
+
+/-- R59 closure-path-B: new smaller paper-novel ATOMIC stipulation #2
+    replacing the retired `forward_reachable_full_at_zero_OPEN`. Paper
+    Def 2.1 line 119 bond-percolation semantics binding `blockingProb
+    = 0 → all edges open`. -/
+def entry_atom_all_edges_open_at_zero_blocking : GapEntry where
+  name := "all_edges_open_at_zero_blocking_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Definition 2.1 (line 119, bond-percolation construction `Each edge e ∈ E is independently blocked with probability p`) + Proposition `prop:trap-prevalence` Part 1 proof line 463 (paper 'no edges blocked' reading of `p = 0`)"
+  attackHistory :=
+    [ "R59 2026-05-14: introduced as smaller replacement atom #2 via closure-path-B decomposition of retired `forward_reachable_full_at_zero_OPEN`. Statement: `∀ ω, blockingProb = 0 → ∀ u w, IsEdge u w → IsOpen ω u w`. Strictly smaller than retired bundled atom — isolates only the percolation-semantics binding `blockingProb = 0 → all edges open`, leaving the connected-component → `Finset.univ` identification to atom #1. Close target now points to paper Def 2.1 line 119 (paper Definition, structural commitment to bond-percolation construction) rather than the bundled Proposition-PROOF level atom. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-specific bond-percolation semantics on the IDP primitives." ]
+  scope := "Paper Def 2.1 line 119 bond-percolation semantics — `blockingProb = 0` implies every edge open in any percolation realisation `ω`"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib bond-percolation measure-theoretic machinery + paper Def 2.1 line 119 reconstruction binding the parameter `blockingProb = 0` to the all-edges-open realisation."
+  conditionalOn := []
+
 def entry_atom_expectedTopoLoss_conditional_def : GapEntry where
   name := "expectedTopoLoss_conditional_def"
   status := GapStatus.gapOpen
@@ -3326,20 +3466,21 @@ GeneralGraphs.lean (already counted in `entry_prop_trap_prevalence_zero`,
 `entry_lem_V_g_le_V_dyn`, `entry_lem_dilemma_subsumed_by_general_tree`). -/
 
 def entry_atom_forward_reachable_full_at_zero : GapEntry where
-  name := "forward_reachable_full_at_zero_OPEN"
-  status := GapStatus.gapOpen
+  name := "forward_reachable_full_at_zero_OPEN [retired R59 → replaced by forward_reachable_full_at_zero derived theorem composing all_edges_open_at_zero_blocking_OPEN + forward_reachable_empty_full_at_all_open_OPEN]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:trap-prevalence Part 1 proof, line 463 (`R(v) = V` for all `v` when no edges are blocked)"
   attackHistory :=
     [ "R23-C2 2026-05-13: Cat 3 atomic structural-equation axiom: `∀ [Fintype Vertex] v H ω, blockingProb = 0 → ForwardReachable v H ω = Finset.univ`. Paper proof of Proposition `prop:trap-prevalence` Part 1 line 463 reads 'When no edges are blocked, `R(v) = V` for all `v`': the entire vertex set is forward-reachable from any starting vertex when no edge is blocked. Pins the paper-stated full-reachability fact at `p = 0` on the existing `ForwardReachable` carrier. Cat 1 reduction check: not Mathlib-derivable (depends on the paper's bond-percolation semantics linking `blockingProb = 0` to all-edges-open + connectivity). Cat 2 reduction check: paper-novel structural equation on the IDP primitives. Encoding requires `[Fintype Vertex]` to express `Finset.univ` (paper Definition 2.1: graph on `n` nodes, finite). Hosted by `gap_trap_prevalence_zero` derived theorem (Phase.lean).",
       "R24-A 2026-05-13: SCOPE-INFLATION repair per R23-D Audit 1 hostile audit. The R23-C2 form `∀ [Fintype Vertex] v H ω, blockingProb = 0 → ForwardReachable v H ω = Finset.univ` quantified the equality over ARBITRARY history `H`, but paper line 463 says only `R(v) = V` (i.e., `ReachableSet v ω = Finset.univ`, equivalently `ForwardReachable v ∅ ω = Finset.univ` via `ReachableSet_eq_ForwardReachable_empty`). For `H ∋ u` (e.g. `H = {v}` after visiting `v`), removing `v` from a connected graph could disconnect it, so `ForwardReachable u {v} ω ≠ Finset.univ` in general at `p = 0`. RESTATED to `∀ [Fintype Vertex] v ω, blockingProb = 0 → ForwardReachable v ∅ ω = Finset.univ` (H quantifier dropped from atom signature; H pinned to ∅ matching paper line 463 scope exactly). The downstream consumer `gap_trap_prevalence_zero` is also restated to apply the atom only at `H = ∅` (both sides), which matches paper line 463's `V_dyn(v) = r* = max r` for all `v` at `p = 0`. Lake build green.",
       "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
       "R52 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R51 audit + R49→R50 boundary criterion. The atom's paperSource is in a Proposition PROOF (prop:trap-prevalence Part 1 proof, line 463), NOT a paper Definition — per discipline §3.4.3, this is paper-derived characterization (paper PROVES the full-reachability fact via bond-percolation full-graph argument), not a paper-stipulated definitional equation. Per §3.4.4 workingAssumption (必须 close).",
-      "R54 2026-05-14: completed R52 metadata sync (the R52 status/cat3SubType field-flip was applied without updating obstacleOrAttribution, leaving stale §3.4.3 language). obstacleOrAttribution rewritten with explicit close target." ]
+      "R54 2026-05-14: completed R52 metadata sync (the R52 status/cat3SubType field-flip was applied without updating obstacleOrAttribution, leaving stale §3.4.3 language). obstacleOrAttribution rewritten with explicit close target.",
+      "R59 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-B decomposition. The bundled atom packaged (i) bond-percolation semantics linking `blockingProb = 0` to the all-edges-open realisation + (ii) the connected-graph forward-reachable-equals-univ identification into one workingAssumption. Decomposed into two strictly-smaller paper-novel atoms: (a) `all_edges_open_at_zero_blocking_OPEN` (paper Def 2.1 line 119 percolation semantics binding `blockingProb = 0 → all edges open`), (b) `forward_reachable_empty_full_at_all_open_OPEN` (paper Def 2.1 connectivity + Def 2.5 full-edge-subgraph forward-reachable identification at `H = ∅`). Each smaller atom has an explicit paper Definition close target rather than the bundled Proposition-PROOF close target. The new derived theorem `forward_reachable_full_at_zero` (Phase.lean) composes both via direct application; downstream `gap_trap_prevalence_zero` re-routed to consume the derived theorem (no signature change at consumer level)." ]
   scope := "Proposition prop:trap-prevalence Part 1 proof, line 463 (`R(v) = V` for all `v` when no edges are blocked)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R52 reclassification + R54 metadata sync). Close target = paper Proposition prop:trap-prevalence Part 1 proof reconstruction (bond-percolation full-graph argument: `blockingProb = 0` ⇒ all edges open ⇒ `R(v) = V` from connectivity). Downstream consumer: `gap_trap_prevalence_zero` derived theorem (Phase.lean). Scope: H=∅ matching paper line 463 (paper's `R(v) = V` is the `ReachableSet`-level statement); `H ∋ u` cases handled by other reachable-set facts (e.g. `ForwardReachable_self_member`)."
+    "RETIRED via R59 closure-path-B decomposition. Replaced by `entry_atom_all_edges_open_at_zero_blocking` (paper Def 2.1 line 119 percolation semantics) + `entry_atom_forward_reachable_empty_full_at_all_open` (paper Def 2.1 connectivity + Def 2.5 full-edge-subgraph forward-reachable) in derived theorem `forward_reachable_full_at_zero` (Phase.lean). Downstream `gap_trap_prevalence_zero` re-routed to consume the new derived theorem."
   conditionalOn := []
 
 def entry_atom_V_g_terminal_in_ForwardReachable : GapEntry where
@@ -3561,18 +3702,19 @@ def entry_atom_conditional_subproblem_blackwell_applicable : GapEntry where
     415-417), existence of decay envelope `topo_loss_decay : ℕ → ℝ`
     for `expectedTopoLoss n p` below the percolation threshold. -/
 def entry_atom_topo_loss_decay_below_pc : GapEntry where
-  name := "topo_loss_decay_below_pc_OPEN"
-  status := GapStatus.gapOpen
+  name := "topo_loss_decay_below_pc_OPEN [retired R59 → replaced by topo_loss_decay_below_pc derived theorem composing expectedTopoLoss_below_pc_one_over_n_envelope_OPEN]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 3.3 Part 1 proof, lines 415-417 (`E[|W_topo|] = O(1/N) → 0` via giant-component conditioning + topo-cluster formula); Grimmett 1999 (Cat 2 percolation-probability dependency)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a decay-function envelope on the existing carrier `expectedTopoLoss`. Cat 2 dependency on Grimmett 1999 percolation-probability threaded as explicit `h_perc_prob` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_below` derived theorem (Phase.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (mirrors R42 fix on Wrongness.lean sibling `topo_loss_below_envelope_exists_atom_OPEN`). Discipline §3.4.3 examples are DEFINITIONAL EQUATIONS on primitives (V_dyn_def, paper §3.1 W = W_topo + W_info decomposition, Bridge_Defining_Biconditional) that 'cannot be proved — they constitute meaning'. The envelope-existence claim is NOT a definitional equation; it is a derived asymptotic existence claim that the paper proves at lines 415-417 via giant-component conditioning + Cat 2 Grimmett. Per §3.4.4 this is workingAssumption (必须 close before publication). Close target = Mathlib bond-percolation theory + paper's lines 415-417 reconstruction. R39's blanket reclassification was over-applied for this entry." ]
+      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (mirrors R42 fix on Wrongness.lean sibling `topo_loss_below_envelope_exists_atom_OPEN`). Discipline §3.4.3 examples are DEFINITIONAL EQUATIONS on primitives (V_dyn_def, paper §3.1 W = W_topo + W_info decomposition, Bridge_Defining_Biconditional) that 'cannot be proved — they constitute meaning'. The envelope-existence claim is NOT a definitional equation; it is a derived asymptotic existence claim that the paper proves at lines 415-417 via giant-component conditioning + Cat 2 Grimmett. Per §3.4.4 this is workingAssumption (必须 close before publication). Close target = Mathlib bond-percolation theory + paper's lines 415-417 reconstruction. R39's blanket reclassification was over-applied for this entry.",
+      "R59 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-B decomposition (R57 / R58 precedent). The bundled atom packaged (i) explicit envelope construction, (ii) per-`n` upper bound, (iii) `Tendsto → 0` convergence into one workingAssumption. Decomposed into (a) new smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (paper line 417 polynomial upper bound `expectedTopoLoss n p ≤ 1/(n+1)` from giant-component conditioning), and (b) Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat` (standard `1/(n+1) → 0`). The new derived theorem `topo_loss_decay_below_pc` (Phase.lean) instantiates the envelope witness to `1/(n+1)` and composes both. The retired atom's content is now sourced from the smaller atom + Cat 1 via the derived theorem; downstream `gap_phase_transition_below` re-routed to consume the derived theorem (no signature change at consumer level)." ]
   scope := "Theorem 3.3 Part 1, existence of decay envelope `topo_loss_decay` for `expectedTopoLoss n p` below percolation threshold"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R44 honest reclassification). Close target = Mathlib bond-percolation theory + paper's lines 415-417 proof reconstruction (giant-component conditioning + topo-cluster formula). Substantive Cat 2 dependency on Grimmett 1999 _Percolation_ 2nd ed. percolation-probability theory."
+    "RETIRED via R59 closure-path-B decomposition. Replaced by `entry_atom_expectedTopoLoss_below_pc_one_over_n_envelope` (paper line 417 polynomial upper bound) + Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat` in derived theorem `topo_loss_decay_below_pc` (Phase.lean). Downstream `gap_phase_transition_below` re-routed to consume the new derived theorem."
   conditionalOn := []
 
 -- (R44 deletion: entry_atom_topo_loss_decay_arbitrary_threshold has been
@@ -3585,36 +3727,38 @@ def entry_atom_topo_loss_decay_below_pc : GapEntry where
     421-427), existence of positive constant `c(p) > 0` characterising
     the `wInfoTopoRatio p β` exponential-decay rate above threshold. -/
 def entry_atom_wInfoTopoRatio_const_exists : GapEntry where
-  name := "wInfoTopoRatio_const_exists_OPEN"
-  status := GapStatus.gapOpen
+  name := "wInfoTopoRatio_const_exists_OPEN [retired R59 → replaced by new carrier wInfoTopoRatioMillsConst + smaller atom wInfoTopoRatioMillsConst_pos_above_pc_OPEN]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 3.3 Part 2 proof, lines 421-427 (cluster size exponential tail + ratio Θ-bound); Grimmett 1999 §6.75 (Cat 2 dependency)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of a positive constant on the existing carrier `wInfoTopoRatio`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier (Grimmett 1999 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict. The constant-existence claim is paper-derived (Theorem 3.3 Part 2 proof lines 421-427 via cluster-size theory + Mills tail composition), NOT a definitional equation on `wInfoTopoRatio`. Per §3.4.4 it is workingAssumption (必须 close before publication). Close target = Mathlib percolation infra + Mills-tail composition + paper proof reconstruction." ]
+      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict. The constant-existence claim is paper-derived (Theorem 3.3 Part 2 proof lines 421-427 via cluster-size theory + Mills tail composition), NOT a definitional equation on `wInfoTopoRatio`. Per §3.4.4 it is workingAssumption (必须 close before publication). Close target = Mathlib percolation infra + Mills-tail composition + paper proof reconstruction.",
+      "R59 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-A decomposition (R57 satisficing precedent). The bundled atom asserted the existential `∃ c, 0 < c` on the opaque `wInfoTopoRatio` carrier. Decomposed via Path A into (a) new opaque carrier `wInfoTopoRatioMillsConst : ℝ → ℝ` (paper-stated Mills-tail constant per Theorem 3.3 Part 2 proof), (b) new smaller atom `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` (positivity on the new carrier — Cat 3 workingAssumption per §10 paper-application-of-Cat-2-to-opaque-carrier). The retired atom's existential is now derived by instantiating the witness with `wInfoTopoRatioMillsConst p` in the new derived theorem `gap_phase_transition_above` (Phase.lean). The retired atom is RETIRED — content sourced from the new carrier + smaller atom; downstream `gap_phase_transition_above` re-routed to instantiate the carrier." ]
   scope := "Theorem 3.3 Part 2, existence of positive constant `c(p) > 0` for `wInfoTopoRatio` exponential-decay rate"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R44 honest reclassification). Close target = Mathlib bond-percolation + Mills-tail composition (Grimmett 1999 §6.75 Cat 2 dependency)."
+    "RETIRED via R59 closure-path-A decomposition. Replaced by `entry_carrier_wInfoTopoRatioMillsConst` (new opaque carrier) + `entry_atom_wInfoTopoRatioMillsConst_pos_above_pc` (smaller positivity atom on the new carrier) in derived theorem `gap_phase_transition_above` (Phase.lean). The carrier-instantiation pattern matches R57 satisficingTrapAcceptanceProb path A."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Theorem 3.3 Part 2 proof (line 427),
     quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}` from
     the Mills-tail + cluster-size composition. -/
 def entry_atom_wInfoTopoRatio_bound : GapEntry where
-  name := "wInfoTopoRatio_bound_OPEN"
-  status := GapStatus.gapOpen
+  name := "wInfoTopoRatio_bound_OPEN [retired R59 → replaced by smaller atom wInfoTopoRatio_le_MillsConst_decay_OPEN at carrier-pinned constant]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 3.3 Part 2 proof, line 427 (`|W_info|/|W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-decay` composition (Cat 2 dependency)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_phase_transition_above_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the QUANTITATIVE bound on the existing carrier `wInfoTopoRatio` given a positive constant `c`. Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` composition threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_phase_transition_above` derived theorem (Phase.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict. Quantitative ratio bound is paper-derived (Theorem 3.3 Part 2 proof line 427 explicitly composes Mills-tail with Grimmett cluster-size), NOT a definitional equation. Per §3.4.4 workingAssumption (必须 close)." ]
+      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict. Quantitative ratio bound is paper-derived (Theorem 3.3 Part 2 proof line 427 explicitly composes Mills-tail with Grimmett cluster-size), NOT a definitional equation. Per §3.4.4 workingAssumption (必须 close).",
+      "R59 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-A decomposition. The bundled atom asserted the bound `wInfoTopoRatio p β ≤ c * 2^{-β}` for arbitrary positive `c` — semantically OVER-encoded relative to paper line 427 (paper's c is the SPECIFIC Mills-tail constant, not arbitrary). Decomposed via Path A into the smaller atom `wInfoTopoRatio_le_MillsConst_decay_OPEN` asserting the bound only at the carrier-pinned constant `wInfoTopoRatioMillsConst p` (the new carrier introduced for atom-2 closure). The atom signature is now paper-faithful — the constant is pinned to the carrier, not free-standing. The new derived theorem `gap_phase_transition_above` (Phase.lean) instantiates with this carrier-pinned constant; the original consumer signature unchanged at the bundle level." ]
   scope := "Theorem 3.3 Part 2, quantitative ratio bound `wInfoTopoRatio p β ≤ c * 2^{-β}`"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R44 honest reclassification). Close target = Mathlib percolation + Mills-tail composition."
+    "RETIRED via R59 closure-path-A decomposition. Replaced by `entry_atom_wInfoTopoRatio_le_MillsConst_decay` (smaller paper-faithful atom at carrier-pinned constant) in derived theorem `gap_phase_transition_above` (Phase.lean). Net effect: paper's substantive Mills-tail constant is named (carrier `wInfoTopoRatioMillsConst`) and the bound is asserted at this specific carrier rather than over arbitrary `c > 0`."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:error-compounding`
@@ -3728,18 +3872,19 @@ def entry_atom_topo_loss_above_upper_bound : GapEntry where
     Part 2 proof (line 473), local FKG-positivity of the trap pattern
     on `Z²` lattice with degree 4. -/
 def entry_atom_trap_config_local_positive : GapEntry where
-  name := "trap_config_local_positive_OPEN"
-  status := GapStatus.gapOpen
+  name := "trap_config_local_positive_OPEN [retired R59 → replaced by Hodge-style def trapConfigLocalProb + smaller atom trapConfigLocalProb_le_misalignmentProb_OPEN + Cat 1 trapConfigLocalProb_pos]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:trap-prevalence Part 2 proof, line 473 (`binom(4, 2) p² (1-p)² · p^3 > 0` lattice-degree-4 local FKG estimate)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_trap_prevalence_above_threshold_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the LOCAL FKG-positivity fact on the existing carrier `trapMisalignmentProbability`. Cat 1 reduction check: not Mathlib-derivable (depends on Z²-lattice + percolation-measure machinery). Cat 2 reduction check: paper-novel local-FKG estimate (FKG inequality framework is Cat 2 in general, but the paper-specific local-pattern application is Cat 3 paper-novel). Downstream consumer: `gap_trap_prevalence_above_threshold` derived theorem (Phase.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict. The local FKG-positivity claim is paper-derived (paper line 473 `binom(4,2) p²(1-p)²·p^3 > 0` lattice-degree-4 local FKG estimate), NOT a definitional equation on `trapMisalignmentProbability`. Substantive content depends on Z²-lattice + bond-percolation measure-theoretic machinery (currently absent in Mathlib). Per §3.4.4 workingAssumption (必须 close). Close target = Mathlib Z² + percolation-measure machinery + paper FKG estimate." ]
+      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict. The local FKG-positivity claim is paper-derived (paper line 473 `binom(4,2) p²(1-p)²·p^3 > 0` lattice-degree-4 local FKG estimate), NOT a definitional equation on `trapMisalignmentProbability`. Substantive content depends on Z²-lattice + bond-percolation measure-theoretic machinery (currently absent in Mathlib). Per §3.4.4 workingAssumption (必须 close). Close target = Mathlib Z² + percolation-measure machinery + paper FKG estimate.",
+      "R59 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-A decomposition. The bundled atom packaged the FKG lower bound + arithmetic positivity into one workingAssumption (`harrisKestenCriticalProb < p → 0 < trapMisalignmentProbability p`). Decomposed via Path A into (a) Hodge-style closed-form `def trapConfigLocalProb p := 6 * p^5 * (1-p)^2` (paper line 473 explicit formula `binom(4,2) p² (1-p)² · p^3 = 6 p^5 (1-p)^2`), (b) smaller atom `trapConfigLocalProb_le_misalignmentProb_OPEN` (paper line 473 FKG lower-bound binding on the opaque `trapMisalignmentProbability` carrier — the SUBSTANTIVE paper-novel content), (c) Cat 1 Mathlib `trapConfigLocalProb_pos` (arithmetic positivity of the closed form for `0 < p < 1`, derived from `harrisKestenCriticalProb = 1/2 > 0` via `gap_harris_kesten_OPEN`). The new derived theorem `gap_trap_prevalence_above_threshold` composes via transitivity. Added `p < 1` antecedent matches paper's implicit probability-domain assumption (paper Def 2.1 `blockingProb ∈ [0, 1]`)." ]
   scope := "Proposition prop:trap-prevalence Part 2, local FKG-positivity of trap pattern"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R44 honest reclassification). Close target = Mathlib Z² + bond-percolation measure machinery + paper line 473 FKG estimate."
+    "RETIRED via R59 closure-path-A decomposition. Replaced by Hodge-style `def trapConfigLocalProb` + `entry_atom_trapConfigLocalProb_le_misalignmentProb` (smaller paper-faithful FKG-binding atom) + Cat 1 `trapConfigLocalProb_pos` theorem in derived theorem `gap_trap_prevalence_above_threshold` (Phase.lean). The arithmetic positivity is now Cat 1 (no longer bundled into the atom); the substantive paper-novel content is the FKG lower-bound binding."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:supermodular`
@@ -4841,6 +4986,17 @@ def allGaps : List GapEntry := [
   entry_carrier_oracleBridgePathTerminalReward_TrapTree,
   entry_atom_oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree,
   entry_atom_oracleBridgePathTerminalReward_TrapTree_eq_r_goal,
+  -- R59 closure wave on Phase.lean (5 retired atoms → 6 smaller atoms +
+  -- 1 new carrier; retired atom entries flip workingAssumption gapOpen
+  -- → derivedTheorem gapClosed; new derived theorems compose smaller
+  -- atoms + Cat 1 / new carrier instantiations).
+  entry_atom_expectedTopoLoss_below_pc_one_over_n_envelope,
+  entry_carrier_wInfoTopoRatioMillsConst,
+  entry_atom_wInfoTopoRatioMillsConst_pos_above_pc,
+  entry_atom_wInfoTopoRatio_le_MillsConst_decay,
+  entry_atom_trapConfigLocalProb_le_misalignmentProb,
+  entry_atom_forward_reachable_empty_full_at_all_open,
+  entry_atom_all_edges_open_at_zero_blocking,
   -- R41 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
   -- 5 new Cat 3 atoms across prop:topo-cluster + bayesian-naive-five-state Part (ii)
   -- + prop:error-compounding Part 5 c_star_constant positivity).
