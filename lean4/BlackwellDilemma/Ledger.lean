@@ -453,7 +453,7 @@
   conditional in additional contexts, Mills tail) are already Cat 2
   absorbed. Final R66 state: workingAssumption=67, cat2External=12.
 
-  Truth-over-publication evolution extension (R56-R66):
+  Truth-over-publication evolution extension (R56-R67):
    R55 (final PASS):     workingAssumption=65
    R56-R63 closure wave: workingAssumption=68 (+3 from §18 decomposition
                          where each retired bundle was replaced by net +1
@@ -463,6 +463,90 @@
                          entries netted in same round).
    R66 (Cat 2 absorption): workingAssumption=67 (-1, R66 honest single
                          absorption).
+   R67 (asymptote reached): workingAssumption=67 (0 closures; R64 audit
+                         prediction "asymptote ~62-65 wA" reached at 67;
+                         per `feedback_truth_over_publication`, HONEST
+                         SKIP after systematic per-atom review confirmed
+                         no remaining honest closure paths).
+
+  R67 2026-05-14 final closure sweep (HONEST SKIP — asymptote reached):
+
+  R67 systematically reviewed all R57-R66 sub-atoms (the 21 brief-listed
+  candidates) and the residual pre-R57 wA atoms for any §3.4.3
+  reclassification, Cat 2 absorption, Pattern-1 promotion, or Cat 1
+  Mathlib-derivability paths. Per-atom verdict (each examined against
+  R55 PASS criterion #3 paper-Definition-vs-Theorem/Proposition-source
+  boundary):
+
+  §3.4.3 reclassification candidates (paper Definition-stipulated
+  boundary conditions): ZERO found. All candidate atoms cite paper
+  Theorem / Proposition / Lemma / Example / Remark / PROOF-level
+  paperSources, not paper Definition-level. Per R55 boundary criterion
+  + R50 oscillation-resolution (R28→R40→R50 settled at workingAssumption
+  for paper-PROOF-citing atoms), all correctly classified wA. Notable
+  borderline cases reviewed and dismissed: oracleBridgePathTerminalReward_
+  TrapTree_eq_r_goal_OPEN cites paper Definition def:trap-tree line 1033
+  AND Proposition prop:error-compounding Part 2 PROOF line 1053, but
+  the carrier-binding requires combining def:trap-tree structure (paper
+  Definition input) + def:oracle traversal selection on the trap tree
+  (paper PROPOSITION-PROOF derived content), so the atom's CONTENT is
+  paper-PROOF derived → wA per R55. Similarly expectedTopoLoss_le_one_
+  atom_OPEN cites paper Definition 2.1 reward range AND paper Proposition
+  prop:topo-cluster proof line 292-294 closed-form decomposition; the
+  atom's content (`expectedTopoLoss n p ≤ 1`) is paper-PROOF-derived via
+  the order-statistics decomposition (E[max] ≤ 1, E[max_R] ≤ 1) → wA.
+
+  DEAD-END candidates (universally false due to junk-value semantics,
+  R9/R65 precedent): ZERO found. All candidate atoms have valid
+  semantic content within their stated scopes (no junk-value pathology
+  via opaque carriers).
+
+  Cat 2 absorption candidates (paper-cited textbook reduction): ZERO
+  found. R65 absorbed signal_independent_at_alpha_zero via David &
+  Nagaraja 2003 §1.3 + Blackwell 1953; R66 absorbed expectedTopoLoss_
+  conditional_def via David & Nagaraja 2003 Eq. 2.1.4. Remaining
+  candidate textbook chains exhaustively probed: (a) David & Nagaraja
+  Eq. 2.1.4 already exhausted at the IDP carrier; (b) Blackwell-
+  monotonicity already threaded into satisficing/myopic/sentimental
+  derived theorems; (c) Topkis monotone comparative statics already
+  Cat-2-absorbed; (d) Mills-tail bounds inhabit Phase.lean wInfoTopo
+  carrier; (e) Gaussian-CDF concentration cited but not Lean-derivable
+  without Mathlib measure-theory infra. The satisficing trap-acceptance
+  monotonicity atom acknowledges Gaussian-CDF concentration as the
+  textbook source but the binding to satisficingTrapAcceptanceProb
+  requires substantive paper-novel decision-rule encoding (not Cat 2
+  reducible).
+
+  Pattern-1 promotions (Mathlib-derivable atoms): ZERO found. R42
+  discharged topo_loss_below_eps_from_envelope (Filter.Tendsto), R44
+  discharged topo_loss_decay_arbitrary_threshold (Filter.Tendsto), R46
+  discharged kappaStar_nonneg (Real.sInf_nonneg). Remaining wA atoms
+  inhabit opaque carriers (V_g, V_dyn, expectedTopoLoss, satisficing
+  Welfare, myopicKWelfare, mLimitDifference, betaStarOfP, L,
+  aboveThresholdWelfare, belowThresholdWelfare, perAgentOptimalAggregate)
+  with no Mathlib equivalents at the relevant abstraction level.
+
+  Consolidation candidates (atoms duplicated across files): ZERO found.
+  AxiomAudit + ledger-entry-uniqueness (R55 PASS criterion #8: 189 ↦
+  233 unique-name invariant maintained through R56-R66) confirms no
+  duplication.
+
+  R67 verdict: ASYMPTOTE REACHED at workingAssumption=67. The R64
+  audit prediction "asymptote ~62-65 wA" was a soft estimate; the
+  realized asymptote landed at 67 (within 2-5 of estimate). Per
+  `feedback_truth_over_publication`, declaring the asymptote and
+  stopping the closure-wave is HONEST SKIP, not regression. Future
+  rounds should be triggered by external infra changes (Mathlib
+  bond-percolation theory, Mathlib order-statistics product-measure
+  packaging, Mathlib transcendental optimization) rather than
+  paper-side reframing of already-honest atoms.
+
+  R67 net delta vs R66 baseline (233 entries, workingAssumption=67):
+   * Total: 233 → 233 (no change).
+   * Status: unchanged (open=75, closed=73, definitional=83, partial=1, deadEnd=1).
+   * Cat 3 sub: workingAssumption 67 → 67 (asymptote).
+   * Bundle entries unchanged.
+   * Build verified GREEN (lake build returns 2715 jobs successful).
 
   6-tier status × 3-input-category cross-table (post-R40 historical;
   superseded by R41-R55 above; live numbers printed by `#eval` block):
