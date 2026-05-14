@@ -455,4 +455,38 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.trapConfigLocalProb_le_misalignmentProb_OPEN
 #print axioms BlackwellDilemma.trapConfigLocalProb_pos
 
+-- R60 closure wave on Wrongness.lean (5 retired bundled atoms → 6
+-- new smaller atoms + 1 new opaque carrier). New derived theorems +
+-- new smaller atoms + new carrier surface here for kernel-purity
+-- baseline + audit-chain visibility:
+--  * `gap_wrongness` (R60 re-derivation): composes the new smaller
+--    atoms `wrongness_high_beta_welfare_floor_atom_OPEN` (paper stage 1
+--    V_dyn-dominance + greedy concentration) +
+--    `wrongness_misalignment_reversal_atom_OPEN` (paper stage 2 reversal
+--    witness) via the welfare-floor existential. Replaces retired
+--    `topology_blind_wrongness_atom_OPEN` (R44 MOST EGREGIOUS). Already
+--    printed at line 352 above.
+--  * `topo_loss_below_envelope_exists` (R60 derived theorem): new Cat 1
+--    derivation composing the smaller atom
+--    `topo_loss_below_one_over_n_envelope_atom_OPEN` (paper line 294
+--    polynomial bound) + Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`.
+--    Replaces retired `topo_loss_below_envelope_exists_atom_OPEN`.
+--  * `gap_topo_loss_above_threshold` (R60 re-derivation): instantiates
+--    existential with new carrier `expectedTopoLossAboveLowerConst p`
+--    and `max(c₁, 1)` upper-bound witness; composes 3 new smaller atoms
+--    (`expectedTopoLossAboveLowerConst_pos_above_pc_OPEN`,
+--    `expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN`,
+--    `expectedTopoLoss_le_one_atom_OPEN`). Replaces retired
+--    `topo_loss_above_lower_bound_atom_OPEN` +
+--    `topo_loss_above_upper_bound_atom_OPEN`. Already printed at
+--    line 409 above.
+#print axioms BlackwellDilemma.wrongness_high_beta_welfare_floor_atom_OPEN
+#print axioms BlackwellDilemma.wrongness_misalignment_reversal_atom_OPEN
+#print axioms BlackwellDilemma.topo_loss_below_envelope_exists
+#print axioms BlackwellDilemma.topo_loss_below_one_over_n_envelope_atom_OPEN
+#print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst
+#print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst_pos_above_pc_OPEN
+#print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN
+#print axioms BlackwellDilemma.expectedTopoLoss_le_one_atom_OPEN
+
 end BlackwellDilemma.AxiomAudit

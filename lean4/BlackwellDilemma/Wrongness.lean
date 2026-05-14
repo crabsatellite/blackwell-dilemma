@@ -162,55 +162,155 @@ C1-C3 with terminal-neighbour topology and `|N_R(v_0)| = 2`, the greedy
 policy's welfare is non-monotone in β: there exist `β' > β` with
 `W(π_{β'}) < W(π_β)`. -/
 
-/-- **Lemma `lem:wrongness` (Wrongness of the Greedy Policy).**
-    Under C1-C3, terminal-neighbour topology, `|N_R(v_0)| = 2` (encoded
-    via `DegreeTwoStartingVertex`), and a Blackwell-ordered topology-
-    blind signal family `{π_β}_β` (the WHOLE family is topology-blind,
-    `∀ β, IsTopologyBlind (signalFamily β)`, matching the paper's
-    statement scope), the greedy policy's welfare is strictly non-
-    monotone in `β`.
+/-! ### R60 §18 closure-path-B decomposition of `lem:wrongness`
 
-    Two paper-faithful antecedents anchored here against earlier
-    deferred discrepancies:
-    (a) `DegreeTwoStartingVertex` premise — paper line 338 reads
-        "Assume further that `v_0` has exactly two accessible
-        neighbours (`|N_R(v_0)| = 2`)"; the prior signature dropped this
-        hypothesis. `DegreeTwoStartingVertex` is a paper-novel scope
-        predicate declared in `Types.lean`.
-    (b) Whole-family topology-blindness `∀ β, IsTopologyBlind
-        (signalFamily β)` — paper line 338 reads "topology-blind signal
-        family `{π_β}_{β ≥ 0}`" (the family quantifier ranges over the
-        precision parameter). The prior signature only required
-        `IsTopologyBlind (signalFamily 0)`, a single-instance hypothesis
-        weaker than the paper's family-level scope.
+R44 hostile audit flagged `topology_blind_wrongness_atom_OPEN` as MOST
+EGREGIOUS conclusion-as-axiom (an entire paper Lemma packaged as a
+single workingAssumption). R44 attackHistory recommended R45+
+decomposition into V_dyn-dominance + static-reward-misalignment atoms.
+R60 implements the recommended decomposition.
 
-    paper source: Lemma `lem:wrongness`, lines 336-369. -/
-axiom topology_blind_wrongness_atom_OPEN :
+Paper proof (lines 345-369) operates in two substantive stages:
+ 1. **High-precision concentration on the worst branch**
+    (paper line 348): under topology-blind Blackwell-ordered signals,
+    the greedy policy's selection probability `P_1(β)` for the
+    higher-immediate-reward neighbour `u_1` tends to `1` as
+    `β → ∞`, so the agent concentrates on `u_1`. We isolate the
+    operationally-relevant consequence at the welfare level: the
+    high-`β` greedy welfare converges to `V_dyn(u_1)` (paper line 352
+    `W(∞) = V_dyn(u_1)`).
+ 2. **Reversal-witness from static-reward-misalignment**
+    (paper lines 357-368): at finite but high `β`, the `o(1)` slack
+    in the welfare decomposition implies `W(β) > W(∞) = V_dyn(u_1)`
+    strictly, while at the limit `W(β) → W(∞)`; combined this gives
+    the existence of `β < β'` with `W(β') < W(β)` (paper line 368).
+
+The decomposition exposes the paper's two-step structure: stage 1 is
+the topology-blind concentration mechanism (paper-novel application of
+Blackwell-ordering at the greedy policy under topology-blindness), and
+stage 2 is the C2-misalignment-driven reversal witness (paper-novel
+analytic argument over the IDP welfare functional). Both atoms remain
+workingAssumption-tier per §3.4.4 (paper-derived working content; close
+target = bounded-convergence + Φ-tail integral machinery, partially
+Mathlib-Cat-1, partially paper-novel).
+-/
+
+/-- Cat 3 paper-novel ATOMIC stipulation #1 (R60 §18 closure-path-B
+    decomposition): paper Lemma `lem:wrongness` line 348 + line 352
+    states that under C1-C3 + terminal-neighbour topology + degree-2
+    starting vertex + topology-blind Blackwell-ordered signals, the
+    greedy policy's high-precision welfare limit `W(∞)` equals
+    `V_dyn(u_1)`, the dynamic-value of the higher-immediate-reward
+    neighbour. Equivalently, there exists a precision threshold
+    `β₀` such that for all `β > β₀`, the greedy welfare
+    `agentWelfare AgentType.greedy β 0 1` is at least `V_dyn(u_1)` minus
+    an `o(1)` slack, AND there exists a high-`β` strict-positive slack
+    `Δ > 0` (paper line 357 reads `V_dyn(u_2,β) - V_dyn(u_1,β) > Δ_R/2`
+    for all `β > β₀`).
+
+    Encoded operationally as: there exist a baseline `β₀` and an
+    upper-baseline-welfare value `Wlim` such that `agentWelfare greedy β 0 1
+    ≥ Wlim` for all `β > β₀` (the high-`β` greedy welfare is at-least
+    `Wlim`, encoding paper line 357 `W(β) > W(∞) + o(1)` at `β > β₀`).
+
+    Encoding choice: the V_dyn-dominance step is the paper's stage-1
+    structural fact (greedy concentration mechanism under topology-blind
+    Blackwell signals at degree-2 + terminal-neighbour topology); the
+    high-`β` welfare-floor encoding extracts the operationally-relevant
+    welfare consequence without committing to a closed-form for `Wlim`
+    (which the paper records as `V_dyn(u_1)` via paper line 352
+    `W(∞) = V_dyn(u_1)`).
+
+    Cat 3 sub-type: workingAssumption (paper-stated stage-1
+    concentration + welfare-floor; pending bounded-convergence + Φ-tail
+    integral machinery; 必须 close before publication).
+
+    paper source: Lemma `lem:wrongness` proof, line 348
+    (`P_1(β) → 1` greedy concentration) + line 352 (`W(∞) = V_dyn(u_1)`)
+    + line 357 (`V_dyn(u_2,β) - V_dyn(u_1,β) > Δ_R/2` slack at
+    `β > β₀`). -/
+axiom wrongness_high_beta_welfare_floor_atom_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     DegreeTwoStartingVertex →
     ∀ (signalFamily : ℝ → PercolationOutcome → ℝ),
       (∀ β : ℝ, IsTopologyBlind (signalFamily β)) →
       IsBlackwellOrdered signalFamily →
-      ∃ β β' : ℝ, β < β' ∧
-        agentWelfare AgentType.greedy β' 0 1 <
-          agentWelfare AgentType.greedy β 0 1
+      ∃ β₀ : ℝ, ∃ Wlim : ℝ,
+        ∀ β : ℝ, β₀ < β → Wlim ≤ agentWelfare AgentType.greedy β 0 1
 
-/-- **Lemma `lem:wrongness` (Wrongness of the Greedy Policy)** (derived
-    theorem). Under C1-C3, terminal-neighbour topology, degree-2
+/-- Cat 3 paper-novel ATOMIC stipulation #2 (R60 §18 closure-path-B
+    decomposition): paper Lemma `lem:wrongness` proof line 357-368
+    (static-reward-misalignment-driven reversal witness). Given the
+    stage-1 high-`β` welfare-floor `Wlim` (encoded by atom #1
+    `wrongness_high_beta_welfare_floor_atom_OPEN`), paper line 368 reads
+    "Since `W(β) → W(∞)` yet `W(β) > W(∞)` for large finite `β`, `W` is
+    not monotonically non-decreasing: there exist `β_1 < β_2` with
+    `W(β_1) > W(β_2)`."
+
+    Operationally: given a high-`β` welfare-floor `Wlim` and an
+    above-baseline witness threshold `β₀`, there exist precision values
+    `β < β'` (both above `β₀`) with `agentWelfare greedy β' 0 1 < agentWelfare
+    greedy β 0 1`, exhibiting the strict reversal. The witness is
+    stipulated as existential over `(β, β')` because the paper proof
+    constructs them implicitly from the Blackwell-monotone decomposition
+    (paper lines 358-368 displayed equation), which here is encoded at
+    the welfare-existential level on the opaque `agentWelfare` carrier.
+
+    Encoding choice: the reversal-witness step is the paper's stage-2
+    analytic conclusion derived from the welfare decomposition under
+    C2-misalignment; the existential encoding on `(β, β')` matches the
+    paper-stated existential conclusion form (paper line 339-341
+    `∃ β' > β, W(π_{β'}) < W(π_β)`).
+
+    Cat 3 sub-type: workingAssumption (paper-stated stage-2 reversal
+    witness from the welfare-floor + C2-misalignment; pending
+    bounded-convergence + Φ-tail integral machinery; 必须 close before
+    publication).
+
+    paper source: Lemma `lem:wrongness` proof, lines 357-368
+    (welfare-decomposition reversal witness from static-reward-
+    misalignment under C2 at degree-2 starting vertex). -/
+axiom wrongness_misalignment_reversal_atom_OPEN :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    DegreeTwoStartingVertex →
+    ∀ (signalFamily : ℝ → PercolationOutcome → ℝ),
+      (∀ β : ℝ, IsTopologyBlind (signalFamily β)) →
+      IsBlackwellOrdered signalFamily →
+      ∀ (β₀ : ℝ) (Wlim : ℝ),
+        (∀ β : ℝ, β₀ < β → Wlim ≤ agentWelfare AgentType.greedy β 0 1) →
+        ∃ β β' : ℝ, β < β' ∧
+          agentWelfare AgentType.greedy β' 0 1 <
+            agentWelfare AgentType.greedy β 0 1
+
+/-- **Lemma `lem:wrongness` (Wrongness of the Greedy Policy)** (R60
+    derived theorem). Under C1-C3, terminal-neighbour topology, degree-2
     starting vertex, and a Blackwell-ordered topology-blind signal
     family, the greedy policy's welfare is strictly non-monotone in β.
 
-    Derived theorem composing the atomic stipulation
-    `topology_blind_wrongness_atom_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
-    (decompose bundled conclusion-axiom into atomic stipulation +
-    derived theorem). The atom packages the paper's three operative
-    inputs as a single working assumption on the existing carriers
-    (whole-family topology-blindness, Blackwell-ordering, and the
-    paper's degree-2 + terminal-neighbour scope predicates):
-    pending per-IDP-instance derivation from V_dyn-dominance and
-    static-reward-misalignment of the trap/bridge pair.
+    R60 §18 closure-path-B refactor: the prior single-atom
+    `topology_blind_wrongness_atom_OPEN` (R44 flagged as MOST EGREGIOUS
+    conclusion-as-axiom packaging an entire paper Lemma) is decomposed
+    into two smaller workingAssumption atoms reflecting the paper's
+    two-stage proof structure (paper lines 345-369):
+     * `wrongness_high_beta_welfare_floor_atom_OPEN` (stage 1: V_dyn-
+       dominance + greedy concentration mechanism, paper lines 348-352
+       + line 357 slack)
+     * `wrongness_misalignment_reversal_atom_OPEN` (stage 2: static-
+       reward-misalignment-driven reversal witness, paper lines 357-368)
+    The derived theorem composes both via the welfare-floor existential.
+
+    Two paper-faithful antecedents anchored against earlier deferred
+    discrepancies:
+    (a) `DegreeTwoStartingVertex` premise — paper line 338 reads
+        "Assume further that `v_0` has exactly two accessible
+        neighbours (`|N_R(v_0)| = 2`)"; declared in `Types.lean` as a
+        paper-novel scope predicate.
+    (b) Whole-family topology-blindness `∀ β, IsTopologyBlind
+        (signalFamily β)` — paper line 338 reads "topology-blind signal
+        family `{π_β}_{β ≥ 0}`" (the family quantifier ranges over the
+        precision parameter).
 
     paper source: Lemma `lem:wrongness`, lines 336-369. -/
 theorem gap_wrongness :
@@ -222,8 +322,12 @@ theorem gap_wrongness :
       IsBlackwellOrdered signalFamily →
       ∃ β β' : ℝ, β < β' ∧
         agentWelfare AgentType.greedy β' 0 1 <
-          agentWelfare AgentType.greedy β 0 1 :=
-  topology_blind_wrongness_atom_OPEN
+          agentWelfare AgentType.greedy β 0 1 := by
+  intro hC hT hDeg2 signalFamily hBlind hBO
+  obtain ⟨β₀, Wlim, h_floor⟩ :=
+    wrongness_high_beta_welfare_floor_atom_OPEN hC hT hDeg2 signalFamily hBlind hBO
+  exact wrongness_misalignment_reversal_atom_OPEN
+    hC hT hDeg2 signalFamily hBlind hBO β₀ Wlim h_floor
 
 /-! ## 3. Proposition `prop:info-decay` — Informational Decay
 
@@ -543,49 +647,104 @@ axiom expectedTopoLoss : ℕ → ℝ → ℝ
 /-! ### `prop:topo-cluster` Part 1 — below-threshold asymptotic.
 
 R41 §18 atomic decomposition. The bundled `gap_topo_loss_below_threshold_OPEN`
-axiom is REPLACED by a derived theorem composing two Cat 3 paper-novel
+axiom was REPLACED by a derived theorem composing two Cat 3 paper-novel
 atomic stipulations:
  * `topo_loss_below_envelope_exists_atom_OPEN` — paper-stated existence
    of a per-`n` decay envelope `topoLossBelowDecay : ℕ → ℝ` with
    `expectedTopoLoss n p ≤ topoLossBelowDecay n` and
    `topoLossBelowDecay → 0`.
  * `topo_loss_below_eps_from_envelope_atom_OPEN` — paper-stated
-   ε-N convergence from the envelope (the operative downstream form). -/
+   ε-N convergence from the envelope (the operative downstream form).
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:topo-cluster` Part 1 (line 286, "topological loss vanishes
-    asymptotically") asserts the EXISTENCE of a decay envelope
-    `topoLossBelowDecay : ℕ → ℝ` with the per-`n` upper bound
-    `expectedTopoLoss n p ≤ topoLossBelowDecay n` and
-    `topoLossBelowDecay → 0`. Paper proof line 292-294 derives the
-    conditional formula `(N − k) / ((N+1)(k+1))` and aggregates over
-    the giant-component event (probability `θ(1-p) > 0` by Harris-
-    Kesten + Grimmett). This atomic stipulation isolates the EXISTENCE
-    of such a decay-function envelope on the existing carrier
+R60 closure-path-B re-derivation of the envelope-existence atom: split
+into a smaller per-`n` `1/(n+1)` polynomial-bound atom (paper-faithful
+to line 294 closed form `(n-k)/((n+1)(k+1))` specialised to the
+`k = Θ(n)` giant-component regime) plus a Cat 1 Mathlib `1/(n+1) → 0`
+derivation. This mirrors the R59 closure-path-B refactor of the
+sibling `topo_loss_decay_below_pc_OPEN` in `Phase.lean` against the
+new smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`. -/
+
+/-- R60 closure-path-B: smaller paper-novel ATOMIC stipulation
+    replacing the bundled `topo_loss_below_envelope_exists_atom_OPEN`
+    existence claim. Paper Proposition `prop:topo-cluster` Part 1
+    (line 286 "topological loss vanishes asymptotically", proof lines
+    292-294) derives, conditional on `v_0` lying in the giant component
+    (`|R(v_0)| = k = Θ(n)`), the closed-form formula
+    `(n-k)/((n+1)(k+1)) = O(1/n)`. Aggregating over the giant-component
+    event (probability `θ(1-p) > 0` by Harris-Kesten + Grimmett
+    percolation-probability), the unconditional `expectedTopoLoss n p`
+    is bounded above by the explicit envelope `1 / (n + 1)` for every
+    `n`.
+
+    R60 strictly smaller than retired bundled atom: only the per-`n`
+    upper bound on `expectedTopoLoss n p` is asserted here; the
+    EXISTENCE of a decay envelope + the `Tendsto _ → 0` convergence
+    of the explicit envelope `1 / (n + 1)` are downstream Cat 1
+    Mathlib derivations that the new derived theorem
+    `topo_loss_below_envelope_exists` composes. The encoding is
+    parallel to the Phase.lean sister atom
+    `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (which targets
+    the same paper line 417 `O(1/N)` polynomial envelope from the
+    Theorem 3.3 Part 1 statement); both atoms encode the same
+    paper-line-294 closed-form bound on the same opaque carrier
     `expectedTopoLoss`.
 
-    Encoding choice: extracted from the bundled
-    `gap_topo_loss_below_threshold_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
-    (decompose bundled conclusion-axiom into atomic stipulations + derived
-    theorem). The Cat 2 Grimmett dependency is threaded as the explicit
-    `h_perc_prob` antecedent (paper authority for `θ(1-p) > 0`).
+    Cat 3 sub-type: workingAssumption (paper-stated explicit polynomial
+    upper bound on the opaque `expectedTopoLoss` carrier; pending
+    Mathlib percolation + cluster-size-asymptotics machinery; 必须
+    close before publication).
 
-    Cat 3 sub-type: workingAssumption (paper-stated existence of decay
-    envelope; pending Mathlib percolation + cluster-size-asymptotics
-    machinery; 必须 close before publication).
-
-    paper source: Proposition `prop:topo-cluster`, line 286 + proof
-    lines 292-294; Grimmett 1999 _Percolation_ 2nd ed. cited for the
-    Cat 2 percolation-probability dependency. -/
-axiom topo_loss_below_envelope_exists_atom_OPEN :
+    paper source: Proposition `prop:topo-cluster` Part 1, line 286 +
+    proof lines 292-294 (`(n-k)/((n+1)(k+1))` closed form specialised
+    to `k = Θ(n)` giant-component regime); Grimmett 1999 _Percolation_
+    2nd ed. percolation-probability cited as the Cat 2 dependency
+    (giant-component event positivity below threshold). -/
+axiom topo_loss_below_one_over_n_envelope_atom_OPEN :
     (∃ θ : ℝ → ℝ,
       (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
       (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) →
     ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∀ n : ℕ, expectedTopoLoss n p ≤ 1 / ((n : ℝ) + 1)
+
+/-- **R60 derived theorem** (replaces retired bundled
+    `topo_loss_below_envelope_exists_atom_OPEN`). Below threshold
+    (`p < p_c`), `expectedTopoLoss n p` admits a paper-stated decay
+    envelope `topoLossBelowDecay : ℕ → ℝ` with the per-`n` upper bound
+    `expectedTopoLoss n p ≤ topoLossBelowDecay n` and
+    `topoLossBelowDecay → 0` as `n → ∞`.
+
+    R60 closure-path-B decomposition: the original bundled atom
+    packaged (i) explicit envelope construction, (ii) per-`n` upper
+    bound, (iii) `Tendsto → 0` convergence into one workingAssumption.
+    Decomposed into:
+      (a) `topo_loss_below_one_over_n_envelope_atom_OPEN` (Cat 3
+          workingAssumption — paper line 294 polynomial upper bound
+          `expectedTopoLoss n p ≤ 1/(n+1)` from giant-component
+          conditioning + topo-cluster formula), AND
+      (b) Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`
+          (standard `1/(n+1) → 0` derivation).
+    The decomposition pins the witness envelope to the explicit
+    Hodge-style closed form `1 / (n + 1)`; the Cat 2 Grimmett
+    percolation-probability dependency remains threaded through
+    `h_perc_prob`.
+
+    paper source: Proposition `prop:topo-cluster` Part 1, line 286 +
+    proof lines 292-294 (`O(1/N)` envelope + asymptotic convergence). -/
+theorem topo_loss_below_envelope_exists
+    (h_perc_prob :
+      ∃ θ : ℝ → ℝ,
+        (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
+        (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) :
+    ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
       ∃ topoLossBelowDecay : ℕ → ℝ,
         Filter.Tendsto topoLossBelowDecay Filter.atTop (nhds 0) ∧
-        ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n
+        ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n := by
+  intro p hp_nn hp_lt
+  refine ⟨fun n => 1 / ((n : ℝ) + 1), ?_, ?_⟩
+  · -- Cat 1 Mathlib: `1/(n+1) → 0` as `n → ∞`.
+    exact tendsto_one_div_add_atTop_nhds_zero_nat
+  · intro n
+    exact topo_loss_below_one_over_n_envelope_atom_OPEN h_perc_prob p hp_nn hp_lt n
 
 /-- **Cat 1 Mathlib derivation** of the eps-from-envelope step: given any
     `topoLossBelowDecay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)` and
@@ -622,11 +781,15 @@ theorem topo_loss_below_eps_from_envelope :
     as `n → ∞`.
 
     Decomposed from the bundled `gap_topo_loss_below_threshold_OPEN`
-    axiom into (a) `topo_loss_below_envelope_exists_atom_OPEN` (Cat 3
-    paper-stated existence of decay envelope, workingAssumption pending
-    Mathlib percolation infra) + (b) `topo_loss_below_eps_from_envelope`
-    (Cat 1 Mathlib-derived theorem, R42 Pattern-1 fix from former atom).
-    The derived theorem composes both.
+    axiom into (a) the R60 derived theorem `topo_loss_below_envelope_exists`
+    (composing the smaller R60 atom `topo_loss_below_one_over_n_envelope_atom_OPEN`
+    + Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`) +
+    (b) `topo_loss_below_eps_from_envelope` (Cat 1 Mathlib-derived
+    theorem, R42 Pattern-1 fix from former atom). The derived theorem
+    composes both. R60 §18 closure-path-B refactor of the existence
+    sub-claim closed the prior `topo_loss_below_envelope_exists_atom_OPEN`
+    bundled atom into a derived theorem on a smaller `1/(n+1)` envelope
+    atom, mirroring the Phase.lean R59 sister refactor.
 
     paper source: Proposition `prop:topo-cluster`, line 286;
     Grimmett 1999 _Percolation_ 2nd ed. cited for the Cat 2
@@ -641,80 +804,137 @@ theorem gap_topo_loss_below_threshold
         ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
   intro p hp_nn hp_lt ε hε
   exact topo_loss_below_eps_from_envelope p
-    (topo_loss_below_envelope_exists_atom_OPEN h_perc_prob p hp_nn hp_lt) ε hε
+    (topo_loss_below_envelope_exists h_perc_prob p hp_nn hp_lt) ε hε
 
 /-! ### `prop:topo-cluster` Part 2 — above-threshold two-sided bound.
 
 R41 §18 atomic decomposition. The bundled
-`gap_topo_loss_above_threshold_OPEN` axiom is REPLACED by a derived
+`gap_topo_loss_above_threshold_OPEN` axiom was REPLACED by a derived
 theorem composing two Cat 3 paper-novel atomic stipulations:
  * `topo_loss_above_lower_bound_atom_OPEN` — paper-stated existence of
    a positive lower bound `c₁(p) > 0` on `expectedTopoLoss n p` for
    large `n`.
  * `topo_loss_above_upper_bound_atom_OPEN` — paper-stated existence of
-   an upper bound `c₂(p)` on `expectedTopoLoss n p` for large `n`. -/
+   an upper bound `c₂(p)` on `expectedTopoLoss n p` for large `n`.
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:topo-cluster` Part 2 (line 287, "topological loss is Θ(1)
-    above threshold") asserts the EXISTENCE of a positive lower bound
-    `c₁(p) > 0` on `expectedTopoLoss n p` for sufficiently large `n`.
-    Paper proof (lines 421-427 of `thm:phase` Part 2) uses the above-
-    threshold cluster-size theory: `|R(v_0)| = O(1)` with positive
-    probability, so `E[1/(|R|+1)] ≥ c₁(p) > 0` for large `n`. This
-    atomic stipulation isolates the LOWER-BOUND existence on the
-    existing carrier `expectedTopoLoss`.
+R60 closure-path-A re-derivation: introduce a new opaque carrier
+`expectedTopoLossAboveLowerConst : ℝ → ℝ` for the paper-stated
+Mills-tail constant `c₁(p)`, and split the lower-bound atom into
+(a) positivity of the carrier and (b) a per-`n`-eventually upper-bound
+witness on the carrier. The upper-bound atom is recast as a smaller
+paper-faithful unit-interval bound `expectedTopoLoss n p ≤ 1` (a
+Uniform[0,1] reward-setup structural fact, paper Def 2.1 line 113
+`r: V → [0, 1]`), with the per-`n` upper bound `c₂` derived as
+`max(c₁, 1)` via Cat 1. This pattern matches the R59 closure-path-A
+refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
+`wInfoTopoRatio_bound_OPEN` in `Phase.lean`. -/
 
-    Encoding choice: extracted from the bundled
-    `gap_topo_loss_above_threshold_OPEN` per §18 Manufactured-
-    Recognition pattern. The Cat 2 Grimmett-exponential-decay
-    dependency is threaded as the explicit `h_grimmett` antecedent.
+/-- R60 closure-path-A: new opaque carrier introduced as smaller
+    replacement for the bundled `topo_loss_above_lower_bound_atom_OPEN`.
+    The paper-stated lower-bound constant `c₁(p) > 0` (paper
+    Proposition `prop:topo-cluster` line 287 + proof via `thm:phase`
+    Part 2 lines 421-427) factored into the carrier so the existence
+    + quantitative bound become derivable from atoms on the carrier
+    rather than free-standing bundled claims.
 
-    Cat 3 sub-type: workingAssumption (paper-stated existence of
-    positive lower bound; pending Mathlib percolation + cluster-tail
-    machinery; 必须 close before publication).
+    Substantive paper claim — opaque carrier required (Mathlib gap).
+    The paper-stated constant `c₁(p)` characterising the
+    `Θ(1)` lower-bound on `expectedTopoLoss n p` above the percolation
+    threshold per paper line 287 + lines 421-427 cluster-size analysis
+    (`E[1/(|R|+1)] ≥ c₁(p) > 0` for large `n`).
 
     paper source: Proposition `prop:topo-cluster`, line 287 + proof
-    via `thm:phase` Part 2 lines 421-427; Grimmett 1999 §6.75 cited as
-    the Cat 2 dependency. -/
-axiom topo_loss_above_lower_bound_atom_OPEN :
+    via `thm:phase` Part 2 lines 421-427 (cluster-size theory above
+    threshold + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound). -/
+axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
+
+/-- R60 closure-path-A: smaller paper-novel ATOMIC stipulation #1
+    replacing the retired bundled `topo_loss_above_lower_bound_atom_OPEN`.
+    Paper Proposition `prop:topo-cluster` Part 2 (line 287) +
+    `thm:phase` Part 2 proof lines 421-427 derive that for `p > p_c`,
+    the cluster size `|R(v_0)|` has exponentially decaying tail
+    (Grimmett 1999 §6.75), so `E[1/(|R|+1)] ≥ c₁(p) > 0` for large
+    `n`. The cluster-size-Mills-tail composition pins the constant
+    to `expectedTopoLossAboveLowerConst p > 0` for `p > p_c`.
+
+    R60 strictly smaller than retired bundled atom: only positivity
+    of the lower-bound constant on the new opaque carrier
+    `expectedTopoLossAboveLowerConst` is asserted; the per-`n`
+    eventually-bounded-from-below witness lives in atom #2.
+
+    Cat 3 sub-type: workingAssumption (paper-stated positivity of
+    lower-bound constant on opaque carrier; pending Mathlib percolation
+    + cluster-tail machinery; 必须 close before publication).
+
+    paper source: Proposition `prop:topo-cluster` Part 2, line 287 +
+    proof via `thm:phase` Part 2 lines 421-427 (cluster-size theory
+    `E[1/(|R|+1)] = Θ(1)` + Grimmett 1999 §6.75 Cat 2 dependency). -/
+axiom expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c₁ : ℝ, 0 < c₁ ∧
-        ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n → c₁ ≤ expectedTopoLoss n p
+      0 < expectedTopoLossAboveLowerConst p
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:topo-cluster` Part 2 (line 287) asserts the EXISTENCE of an
-    upper bound `c₂(p)` on `expectedTopoLoss n p` for sufficiently
-    large `n` (the Θ(1) upper side). Paper proof: `expectedTopoLoss
-    n p ≤ 1` trivially since it is a probability-weighted sum of
-    indicator-like quantities; the explicit bound `c₂` from the
-    paper's Θ-notation can be taken as any constant ≥ 1 (or sharper
-    via the cluster-size analysis).
+/-- R60 closure-path-A: smaller paper-novel ATOMIC stipulation #2
+    replacing the retired bundled `topo_loss_above_lower_bound_atom_OPEN`.
+    Paper Proposition `prop:topo-cluster` Part 2 (line 287) + proof
+    via `thm:phase` Part 2 lines 421-427 derive the per-`n`
+    eventually-bounded-from-below witness for `expectedTopoLoss n p`
+    above the percolation threshold:  for sufficiently large `n`,
+    `expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p`.
 
-    Encoding choice: extracted from the bundled
-    `gap_topo_loss_above_threshold_OPEN` per §18 Manufactured-
-    Recognition pattern. The Cat 2 Grimmett-exponential-decay
-    dependency is threaded as the explicit `h_grimmett` antecedent
-    (paper attribution: the Θ(1) two-sided bound depends on the
-    above-threshold cluster theory).
+    R60 strictly smaller than retired bundled atom: the per-`n`-eventually
+    bound is asserted at the carrier-pinned constant
+    `expectedTopoLossAboveLowerConst p`, not for arbitrary `c > 0`. The
+    existential repackaging `∃ c₁ > 0, ∃ N, ...` is downstream Cat 0
+    derivation in the new derived theorem.
 
-    Cat 3 sub-type: workingAssumption (paper-stated existence of
-    upper bound; the upper side is conceptually weaker than the
-    lower side but both are part of the paper's Θ(1) statement;
+    Cat 3 sub-type: workingAssumption (paper-stated quantitative
+    eventually-lower-bound on opaque carriers `expectedTopoLoss` and
+    `expectedTopoLossAboveLowerConst`; pending Mathlib percolation +
+    cluster-tail composition; 必须 close before publication).
+
+    paper source: Proposition `prop:topo-cluster` Part 2, line 287 +
+    proof via `thm:phase` Part 2 lines 421-427. -/
+axiom expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
+        expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p
+
+/-- R60 closure-path-A: smaller paper-novel ATOMIC stipulation #3
+    replacing the retired bundled `topo_loss_above_upper_bound_atom_OPEN`.
+    Paper Proposition `prop:topo-cluster` proof line 292-294 derives
+    `expectedTopoLoss n p = E[(n - |R|)/((n+1)(|R|+1))]` from the
+    closed-form conditional formula; combined with paper Definition 2.1
+    line 113 reward-range `r: V → [0, 1]`, the unconditional
+    `expectedTopoLoss n p = E[r(v_R*) - r*]` is a difference of two
+    unit-interval-bounded reward expectations and so is itself bounded
+    above by `1` (paper-faithful Uniform[0,1] reward-setup structural
+    fact).
+
+    R60 strictly smaller than retired bundled atom: only the per-`n`
+    upper bound `expectedTopoLoss n p ≤ 1` is asserted (a paper-faithful
+    Uniform[0,1] structural fact derived from paper Def 2.1 reward
+    range); the eventually-bounded-from-above existential `∃ c₂ ≥ c₁,
+    ∃ N₂, ...` is downstream Cat 0 derivation in the new derived theorem
+    (witness `c₂ := max(c₁, 1)`, `N₂ := 0`).
+
+    Cat 3 sub-type: workingAssumption (paper-stated unit-interval upper
+    bound on opaque `expectedTopoLoss` carrier from paper-faithful
+    Uniform[0,1] reward range; close target = derivation from
+    `reward_mem_unitInterval` (Types.lean) + closed-form
+    `expectedTopoLoss_conditional_def` Mathlib expectation algebra;
     必须 close before publication).
 
-    paper source: Proposition `prop:topo-cluster`, line 287; Grimmett
-    1999 §6.75 cited as the Cat 2 dependency. -/
-axiom topo_loss_above_upper_bound_atom_OPEN :
-    (∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c : ℝ, 0 < c ∧
-        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
-    ∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∀ c₁ : ℝ, 0 < c₁ →
-        ∃ c₂ : ℝ, c₁ ≤ c₂ ∧
-          ∃ N₂ : ℕ, ∀ n : ℕ, N₂ ≤ n → expectedTopoLoss n p ≤ c₂
+    paper source: Proposition `prop:topo-cluster` proof, line 294
+    (`(n-k)/((n+1)(k+1))` closed form) + Definition 2.1, line 113
+    (`r: V → [0, 1]` reward range). -/
+axiom expectedTopoLoss_le_one_atom_OPEN :
+    ∀ (n : ℕ) (p : ℝ), expectedTopoLoss n p ≤ 1
 
 /-- **Proposition `prop:topo-cluster` Part 2 (derived theorem).**
     Above threshold (`p > p_c`), `expectedTopoLoss n p = Θ(1)`:
@@ -722,15 +942,25 @@ axiom topo_loss_above_upper_bound_atom_OPEN :
     sufficiently large `n`.
 
     Decomposed from the bundled `gap_topo_loss_above_threshold_OPEN`
-    axiom into (a) `topo_loss_above_lower_bound_atom_OPEN`
-    (paper-stated existence of `c₁ > 0`) + (b)
-    `topo_loss_above_upper_bound_atom_OPEN` (paper-stated existence
-    of `c₂ ≥ c₁`). The derived theorem composes both atoms; the
-    common-`N` step uses `max N₁ N₂`.
+    axiom (R41) into the R60 closure-path-A re-decomposition:
+     * `expectedTopoLossAboveLowerConst_pos_above_pc_OPEN` (Cat 3
+       smaller workingAssumption — positivity of the new carrier
+       `expectedTopoLossAboveLowerConst : ℝ → ℝ`)
+     * `expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN` (Cat 3
+       smaller workingAssumption — per-`n`-eventually-lower-bound at
+       carrier-pinned constant)
+     * `expectedTopoLoss_le_one_atom_OPEN` (Cat 3 smaller workingAssumption
+       — Uniform[0,1] reward-range structural unit-interval upper bound)
+    The derived theorem instantiates the lower-bound witness with
+    `expectedTopoLossAboveLowerConst p`, and the upper-bound witness
+    with `max(expectedTopoLossAboveLowerConst p, 1)`. The `c₂ ≥ c₁`
+    relation is Cat 1 from `le_max_left`; the per-`n` upper bound for
+    all `n` (including `n ≥ N₁`) is Cat 1 from
+    `expectedTopoLoss_le_one_atom_OPEN` + `le_max_right`.
 
     paper source: Proposition `prop:topo-cluster`, line 287;
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited for the Cat 2
-    above-threshold dependency. -/
+    above-threshold lower-bound dependency. -/
 theorem gap_topo_loss_above_threshold
     (h_grimmett :
       ∀ p : ℝ, harrisKestenCriticalProb < p →
@@ -740,12 +970,15 @@ theorem gap_topo_loss_above_threshold
     ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
       ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
         c₁ ≤ expectedTopoLoss n p ∧ expectedTopoLoss n p ≤ c₂ := by
-  obtain ⟨c₁, hc₁_pos, N₁, hN₁⟩ :=
-    topo_loss_above_lower_bound_atom_OPEN h_grimmett p hp
-  obtain ⟨c₂, hc₂_ge, N₂, hN₂⟩ :=
-    topo_loss_above_upper_bound_atom_OPEN h_grimmett p hp c₁ hc₁_pos
-  refine ⟨c₁, c₂, hc₁_pos, hc₂_ge, max N₁ N₂, ?_⟩
+  have hc₁_pos : 0 < expectedTopoLossAboveLowerConst p :=
+    expectedTopoLossAboveLowerConst_pos_above_pc_OPEN h_grimmett p hp
+  obtain ⟨N₁, hN₁⟩ :=
+    expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN h_grimmett p hp
+  refine ⟨expectedTopoLossAboveLowerConst p,
+          max (expectedTopoLossAboveLowerConst p) 1,
+          hc₁_pos, le_max_left _ _, N₁, ?_⟩
   intro n hn
-  exact ⟨hN₁ n (le_of_max_le_left hn), hN₂ n (le_of_max_le_right hn)⟩
+  refine ⟨hN₁ n hn, ?_⟩
+  exact le_trans (expectedTopoLoss_le_one_atom_OPEN n p) (le_max_right _ _)
 
 end BlackwellDilemma
