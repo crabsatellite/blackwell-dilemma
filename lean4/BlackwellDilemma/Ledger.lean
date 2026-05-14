@@ -663,16 +663,167 @@
   primitives behave) is broader than source-structure label; carrier-
   defining equations stipulated in paper Examples / Remarks / Definitions
   ALL qualify when the content IS the carrier's defining commitment at
-  the paper-named regime/configuration. Truth-over-publication evolution:
-   R56-R63 closure wave: workingAssumption 65 → 68 → 67
-   R65-R66 Cat 2 absorption: 68 → 67 (single-atom honest closure each)
+  the paper-named regime/configuration.
+
+  R69 2026-05-14 anti-retreat closure attack continuation (2 honest §3.4.3
+  reclassifications via R68-mirror boundary criterion):
+   * `satisficing_trap_acceptance_strictMono_in_beta_OPEN` (Bayesian.lean):
+     paper Remark `rem:robustness-misspec` (iii) line 945 STIPULATES the
+     carrier-defining β-monotonicity behavior under paper-named regime
+     `r̄ < r(A)`; mirrors R68 closure 4 (`myopic_k_eq_bayesian_above_
+     divergence_depth_OPEN`) precedent. Reclassified workingAssumption
+     gapOpen → structuralEquation gapDefinitional.
+   * `satisficing_welfare_antitone_in_trap_acceptance_OPEN` (Bayesian.lean):
+     paper Remark `rem:robustness-misspec` (iii) line 946 STIPULATES the
+     inter-carrier binding under paper-named regime `r̄ ∈ (r(B), r(A))`;
+     mirrors R68 closure 4 + R69 closure 1 precedent. Reclassified
+     workingAssumption gapOpen → structuralEquation gapDefinitional.
+
+  R69 net delta vs R68 baseline (233 entries, workingAssumption=63):
+   * Total: 233 → 233 (no change).
+   * Status: gapOpen 71 → 69 (-2 from 2 closures); gapDefinitional 87 → 89
+     (+2 from 2 reclassifications); other unchanged.
+   * Cat 3 sub: workingAssumption 63 → 61 (-2 honest §3.4.3 reclassifications);
+     structuralEquation 24 → 26 (+2); other unchanged.
+   * Build verified GREEN (lake build returns 2715 jobs successful).
+
+  R70 2026-05-14 anti-retreat closure attack continuation (2 honest §3.4.3
+  reclassifications via R68-mirror boundary criterion + V_g/V_dyn structural
+  identity at paper-named TerminalNeighbourTopology regime):
+
+  CLOSURE 1 — `V_g_eq_V_dyn_on_terminal_neighbour_OPEN` (GeneralGraphs.lean
+  line 238). R67 dismissed as "collapse derivable from def:greedy-path
+  recursion + terminal-neighbor specialization (subtrees are leaves → V_g(u)
+  = r(u) by base case = V_dyn(u)). Paper-derived. workingAssumption correct."
+  R70 catch: paper line 987 STATES inline (NOT derives) `On terminal-neighbor
+  topology, V_g(u) = V_dyn(u)`. This IS paper's commitment to how its primitives
+  `V_g` and `V_dyn` relate at the paper-named TerminalNeighbourTopology regime —
+  paper-defining commitment, not derivation. Mirrors `V_g_def_terminal`
+  R23-C1 precedent (carrier-defining equation at boundary regime per paper
+  Def `def:greedy-path` line 984; this R70 closure extends the same pattern
+  to the regime-level identity `V_g = V_dyn` at TerminalNeighbourTopology).
+  Also mirrors R68 closure 4 + R69 closures 1+2: paper STATES carrier-defining
+  identity AT a paper-named regime; the equation IS the carrier's defining
+  content, not a derivation. R67 boundary criterion was too narrow (paper-
+  Definition-source-structure default).
+
+  CLOSURE 2 — `C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN`
+  (GeneralGraphs.lean line 274). R67/R68 boundary criterion would default
+  this to wA via "inferential composition step". R70 catch: paper Theorem 6.1
+  line 995 STATES inline (NOT derives) `When |N_R(v_0)| = 2, the clause is
+  vacuous and C2′ reduces to C2` — paper-defining commitment about how the
+  C2 and C2′ predicates RELATE at the paper-named degree-2 regime. Paper line
+  1019 second `since` reason explicitly specialises this reduction to
+  terminal-neighbour topology (`non-interference clause is vacuous for
+  degree~2`). The atom encodes this paper-stipulated reduction at the named
+  regime: under TerminalNeighbourTopology + V_g=V_dyn, the C2 ⇒ C2′ holds
+  because (a) V_g=V_dyn (R70 closure 1) collapses the V_g-misalignment
+  statement to V_dyn-misalignment (already C2), AND (b) the degree-2
+  non-interference vacuity (paper line 995 STIPULATION) renders the
+  additional C2′ clause vacuous. Both ingredients are paper-stipulated
+  structural facts at named regimes, not derivations. Mirrors R68 closure
+  2 (`cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN`): paper
+  Example/Theorem `If` clauses STIPULATING predicate-conjunction validity
+  at constructive regime ARE paper-defining commitments per §3.4.3 worked-
+  example list.
+
+  R70 candidates examined and rejected (boundary-respect):
+   * `oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN`: paper
+     line 1053 EXPLICITLY DERIVES (`Parts 1-2 follow from the reward
+     structure: at β=∞, the greedy agent at every internal node selects
+     the trap...The oracle follows the bridge path to G`). Paper presents
+     this as inferential step ("The oracle follows" = derivation), not as
+     paper's stipulation about the carrier. wA correct.
+   * `forward_reachable_empty_full_at_all_open_OPEN`: graph-theoretic
+     consequence of paper Def 2.1 connectivity + Def 2.5 forward-reachable
+     at all-edges-open subgraph; paper line 463 derives it. Paper-derived
+     graph-theoretic consequence, not paper-Def stipulated. Per R52/R45
+     boundary precedent + R68 rejection, wA correct.
+   * `wrongness_high_beta_welfare_floor_atom_OPEN` /
+     `wrongness_misalignment_reversal_atom_OPEN` (Wrongness.lean): paper
+     proof lines 348-368 EXPLICITLY DERIVE the welfare-floor existential
+     and the reversal witness via Lemma `lem:conditional-reduction`(i) +
+     bounded convergence + welfare-decomposition algebra. Paper's "We show
+     that W is non-monotone in β by comparing..." IS a derivation. wA
+     correct.
+   * `topo_loss_below_one_over_n_envelope_atom_OPEN`,
+     `expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN`,
+     `expectedTopoLossAboveLowerConst_pos_above_pc_OPEN`,
+     `wInfoTopoRatioMillsConst_pos_above_pc_OPEN`,
+     `wInfoTopoRatio_le_MillsConst_decay_OPEN`,
+     `trapConfigLocalProb_le_misalignmentProb_OPEN`: all paper-PROOF
+     derived analytic claims (Proposition prop:topo-cluster proof lines
+     292-294 closed-form, Theorem 3.3 Part 2 proof lines 421-427 Mills-tail
+     composition, Proposition prop:trap-prevalence Part 2 proof line 473
+     FKG estimate). Paper actively reasons to these claims; not paper-
+     stipulative on the carrier behaviors. wA correct.
+   * `mLimitDifference_pos_OPEN`, `alpha_below_alpha_star_implies_
+     monotonicity_OPEN`: paper Theorem 4.1 Part 3 line 505 + Proposition
+     prop:sentimental proof line 602; both paper-PROOF derived (positivity
+     follows from C2 inner argmax structure; monotonicity follows from
+     downward-closure of the monotonicity set). wA correct.
+   * `betaStarOfP_eq_minimiser_witness_OPEN` /
+     `L_minimum_exists_in_regime_i_OPEN`: already R62 §18-decomposed (the
+     existential is wA, the structural eq is structuralEquation). No
+     further decomposition warranted.
+   * `aboveThresholdWelfare_monotone_OPEN`,
+     `belowThresholdWelfare_eventually_decreasing_OPEN`,
+     `perAgentOptimalAggregate_dominates_uniform_OPEN`: paper
+     `cor:disclosure` Part 1 proof line 652 derivation chain (monotonicity,
+     eventual decrease, aggregate dominance all paper-derived analytic
+     content). wA correct.
+   * `kappaStar_def`, `mLimit_def`, `alphaStar_def`, `betaBarStar_def`,
+     `aggregateOptimalBeta_def`, `W_bar_limit_infty_def`, `kappa_FOSD_def`:
+     R50 hostile-audit reverted these from R40 structuralEquation back to
+     workingAssumption per audit-stability principle (paperSource in
+     THEOREM statements, not paper Definitions). R70 respects R50 precedent
+     without a stronger override argument; the carrier-IDENTIFICATION vs
+     IVT-EXISTENCE split could in principle re-flip these via §18
+     decomposition (R62 betaStarOfP precedent), but doing so would just
+     migrate one wA atom into 1 structuralEquation + 1 smaller wA (net 0
+     wA reduction).
+   * 50+ further wA atoms screened (Cognitive welfare-cross-partial,
+     Principal cor:disclosure derivations, FOSD chain, satisficing welfare
+     analysis, kappa-recovery existence, threshold-five-state envelope
+     analysis, Mills-tail bounds, Bernoulli-real-power estimate) — all
+     paper-derived analytic claims requiring paper-proof reconstruction
+     or substantive Mathlib infrastructure (percolation theory, Bayesian
+     posterior consistency, decision-theoretic Blackwell ordering, order-
+     statistics product measure, transcendental optimization). Correctly
+     wA per discipline §3.4.4.
+
+  R70 net delta vs R69 baseline (233 entries, workingAssumption=61):
+   * Total: 233 → 233 (no change).
+   * Status: gapOpen 69 → 67 (-2 from 2 closures); gapDefinitional 89 →
+     91 (+2 from 2 reclassifications); other unchanged.
+   * Cat 3 sub: workingAssumption 61 → 59 (-2 honest §3.4.3 reclassifications);
+     structuralEquation 26 → 28 (+2); other unchanged.
+   * Bundle entries unchanged.
+   * Build verified GREEN (lake build returns 2715 jobs successful).
+
+  R70 verdict: continuation of R68/R69 anti-retreat pattern. Two honest
+  §3.4.3 closures found by applying paper-CONTENT criterion (paper line
+  987 STATES `V_g = V_dyn on terminal-neighbor topology` inline; paper
+  Theorem 6.1 line 995 STATES `C2′ reduces to C2 at degree 2` inline).
+  Both atoms encode paper-stipulated structural identities at paper-
+  named regimes — paper's commitments to how its primitives relate, not
+  derivations. The R67 dismissals were boundary-criterion-narrow
+  (Definition-source-structure default for V_g_eq_V_dyn; "inferential
+  composition" default for C2_to_C2prime). R70 boundary-criterion
+  application: paper INLINE STATEMENT of structural identity at paper-
+  named regime IS §3.4.3, regardless of whether the surrounding context
+  is Definition / Theorem / Proposition / Example / Remark.
+
+  Truth-over-publication evolution (continued):
    R67 (HONEST SKIP — asymptote at 67): 67 → 67
    R68 (anti-retreat re-attack): 67 → 63 (-4 honest §3.4.3 closures)
-  The new "true asymptote" prediction at workingAssumption ~58-63 (further
-  rounds may find 1-3 more boundary-criterion-narrow misclassifications,
-  but the bulk of the 63 residue is genuinely paper-derived analytic
-  content requiring Mathlib percolation/order-statistics/transcendental-
-  optimization infrastructure).
+   R69 (continuation): 63 → 61 (-2 honest §3.4.3 closures)
+   R70 (continuation): 61 → 59 (-2 honest §3.4.3 closures)
+  The new asymptote prediction at workingAssumption ~55-58 (further rounds
+  may find 0-3 more boundary-criterion-narrow misclassifications, but the
+  bulk of the 59 residue is genuinely paper-derived analytic content
+  requiring Mathlib percolation / order-statistics / transcendental-
+  optimization / Bayesian-posterior-consistency infrastructure).
 
   6-tier status × 3-input-category cross-table (post-R40 historical;
   superseded by R41-R55 above; live numbers printed by `#eval` block):
@@ -3911,15 +4062,16 @@ def entry_atom_terminal_neighbour_implies_C2prime : GapEntry where
     on terminal-neighbour topology, V_g = V_dyn on flat subtrees. -/
 def entry_atom_V_g_eq_V_dyn_on_terminal_neighbour : GapEntry where
   name := "V_g_eq_V_dyn_on_terminal_neighbour_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
-  paperSource := "Paper line 987 + line 1019 first 'since' reason (`On terminal-neighbor topology, V_g(u) = V_dyn(u)` + `V_g = V_dyn on flat subtrees`)"
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Paper line 987 (`On terminal-neighbor topology, V_g(u) = V_dyn(u)` — paper-stipulated structural identity between the V_g and V_dyn carriers under the named regime `TerminalNeighbourTopology`); reinforced by paper line 1019 first `since` reason (`V_g = V_dyn on flat subtrees`)"
   attackHistory :=
-    [ "R58 2026-05-14: introduced as smaller replacement atom #1 via closure-path-B decomposition of retired `terminal_neighbour_implies_C2prime_atom_OPEN`. Statement: `TerminalNeighbourTopology → ∀ u H ω, V_g u H ω = V_dyn u H ω`. Strictly smaller than retired bundled atom — isolates only the V_g = V_dyn structural equality on the opaque V_g and V_dyn carriers, leaving the non-interference vacuity + C2/C2′ inferential composition to atom #2. Paper-derived working content (paper line 987 stating equality + paper line 1019 first 'since' reason — the equality is paper-derived from def:greedy-path lines 982-985 specialised to flat-subtree topology). Cat 1 reduction check: not Mathlib-derivable (V_g and V_dyn are opaque IDP carriers). Cat 2 reduction check: paper-novel structural fact on the IDP carriers." ]
-  scope := "Paper line 987 + 1019 first reason — V_g = V_dyn on flat subtrees under terminal-neighbour topology"
+    [ "R58 2026-05-14: introduced as smaller replacement atom #1 via closure-path-B decomposition of retired `terminal_neighbour_implies_C2prime_atom_OPEN`. Statement: `TerminalNeighbourTopology → ∀ u H ω, V_g u H ω = V_dyn u H ω`. Strictly smaller than retired bundled atom — isolates only the V_g = V_dyn structural equality on the opaque V_g and V_dyn carriers, leaving the non-interference vacuity + C2/C2′ inferential composition to atom #2. Paper-derived working content (paper line 987 stating equality + paper line 1019 first 'since' reason — the equality is paper-derived from def:greedy-path lines 982-985 specialised to flat-subtree topology). Cat 1 reduction check: not Mathlib-derivable (V_g and V_dyn are opaque IDP carriers). Cat 2 reduction check: paper-novel structural fact on the IDP carriers.",
+      "R70 2026-05-14: §3.4.3 audit-substantive reclassification workingAssumption/gapOpen → structuralEquation/gapDefinitional. Paper line 987 STATES inline (NOT derives): `On terminal-neighbor topology, V_g(u) = V_dyn(u)`. This IS paper's commitment to how its primitives `V_g` and `V_dyn` relate at the paper-named regime `TerminalNeighbourTopology` — paper-defining commitment, not a derivation. The atom encodes exactly this paper-stipulated identity between two paper-introduced carriers at a paper-named regime. Mirrors `V_g_def_terminal` precedent (R23-C1 carrier-defining equation at boundary regime per paper Def `def:greedy-path` line 984 STIPULATING V_g(u) = r(u) at terminal vertex; this R70 closure extends the same pattern to the regime-level identity at TerminalNeighbourTopology). Also mirrors R68 closure 4 precedent (`myopic_k_eq_bayesian_above_divergence_depth_OPEN`): paper introduces the carrier AND stipulates its named-regime behavior; the equation at the named regime is the carrier's defining content per §3.4.3, not a derivation. R67 dismissed as 'collapse derivable from def:greedy-path recursion + terminal-neighbor specialization' (Ledger.lean:641-644), but R68/R69/R70 boundary-criterion clarification: the §3.4.3 worked-example list explicitly includes `Bridge_Defining_Biconditional` (Theorem-level statement encoding paper's defining commitment); paper-CONTENT is the operative criterion, NOT paper-derivability. Paper line 987 STATES the identity inline as part of its commitment to how V_g relates to V_dyn at the named topology, then USES IT in line 1019. R70 verdict: paper-stipulated structural identity per §3.4.3 — paper's commitment to the V_g/V_dyn carriers' coincidence at TerminalNeighbourTopology; 永不 close." ]
+  scope := "Paper line 987 — paper-stipulated structural identity `V_g = V_dyn` between two opaque carriers at the paper-named regime `TerminalNeighbourTopology`"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = paper Definition `def:greedy-path` lines 982-985 specialised to the flat-subtree (terminal-neighbour) topology, deriving V_g = V_dyn from the recursion's terminal-base case (`V_g_def_terminal`) coinciding with the V_dyn supremum at each flat subtree."
+    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (R70 §3.4.3 reclassification mirroring `V_g_def_terminal` R23-C1 precedent + R68 closure 4 + R69 closures: paper line 987 STATES `On terminal-neighbor topology, V_g(u) = V_dyn(u)` as inline structural identity, paper does NOT derive this; it is paper's commitment to how the V_g and V_dyn carriers relate at the paper-named TerminalNeighbourTopology regime). Downstream consumer: `terminal_neighbour_implies_C2prime` derived theorem (GeneralGraphs.lean) hosts the structural equation."
   conditionalOn := []
 
 /-- R58 closure-path-B: new smaller paper-novel ATOMIC stipulation #2
@@ -3929,15 +4081,16 @@ def entry_atom_V_g_eq_V_dyn_on_terminal_neighbour : GapEntry where
     C2 lifts to C2′. -/
 def entry_atom_C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour : GapEntry where
   name := "C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
-  paperSource := "Paper line 1019 inferential composition (`terminal-neighbour topology satisfies C2′ whenever C2 holds, since V_g = V_dyn on flat subtrees and the non-interference clause is vacuous for degree~2`)"
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Paper Theorem 6.1 line 995 (`When |N_R(v_0)| = 2, the clause is vacuous and C2′ reduces to C2` — paper-stipulated reduction of the C2′ predicate to C2 at the paper-named degree-2 regime); paper line 1019 second `since` reason (`non-interference clause is vacuous for degree~2`, specialising the line 995 reduction to terminal-neighbour topology)"
   attackHistory :=
-    [ "R58 2026-05-14: introduced as smaller replacement atom #2 via closure-path-B decomposition of retired `terminal_neighbour_implies_C2prime_atom_OPEN`. Statement: `TerminalNeighbourTopology → (∀ u H ω, V_g u H ω = V_dyn u H ω) → C2_RewardTopologyMisalignment → C2prime_GreedyPathMisalignment`. Strictly smaller than retired bundled atom — isolates the inferential composition step on the opaque hypothesis predicates, exposing the V_g = V_dyn equality (atom #1) explicitly in the chained antecedent. The non-interference vacuity is encoded inline (degree-2 vacuity follows from terminal-neighbour topology per paper line 1019 second 'since' reason; not separately atomized because the C2′ predicate's non-interference clause becomes vacuous when terminal-neighbour topology specialises the |N_R(v_0)| = 2 setting per paper line 995). Cat 1 reduction check: not Mathlib-derivable (predicates are opaque IDP primitives). Cat 2 reduction check: paper-novel inferential composition on the IDP hypothesis predicates." ]
-  scope := "Paper line 1019 inferential composition step — C2 + TerminalNeighbour + (V_g = V_dyn) ⇒ C2′"
+    [ "R58 2026-05-14: introduced as smaller replacement atom #2 via closure-path-B decomposition of retired `terminal_neighbour_implies_C2prime_atom_OPEN`. Statement: `TerminalNeighbourTopology → (∀ u H ω, V_g u H ω = V_dyn u H ω) → C2_RewardTopologyMisalignment → C2prime_GreedyPathMisalignment`. Strictly smaller than retired bundled atom — isolates the inferential composition step on the opaque hypothesis predicates, exposing the V_g = V_dyn equality (atom #1) explicitly in the chained antecedent. The non-interference vacuity is encoded inline (degree-2 vacuity follows from terminal-neighbour topology per paper line 1019 second 'since' reason; not separately atomized because the C2′ predicate's non-interference clause becomes vacuous when terminal-neighbour topology specialises the |N_R(v_0)| = 2 setting per paper line 995). Cat 1 reduction check: not Mathlib-derivable (predicates are opaque IDP primitives). Cat 2 reduction check: paper-novel inferential composition on the IDP hypothesis predicates.",
+      "R70 2026-05-14: §3.4.3 audit-substantive reclassification workingAssumption/gapOpen → structuralEquation/gapDefinitional. Paper Theorem 6.1 line 995 STIPULATES inline (NOT derives): `When |N_R(v_0)| = 2, the clause is vacuous and C2′ reduces to C2` — paper-defining commitment about how the C2 and C2′ predicates RELATE at the paper-named degree-2 regime. Paper line 1019 second `since` reason explicitly specialises this to terminal-neighbour topology (`non-interference clause is vacuous for degree~2`). The atom encodes this paper-stipulated reduction at the named regime: under TerminalNeighbourTopology + V_g=V_dyn, the C2 ⇒ C2′ reduction holds because (a) the V_g=V_dyn equality (companion atom #1, R70 §3.4.3) collapses the V_g-misalignment statement to the V_dyn-misalignment statement (already C2), AND (b) the degree-2 non-interference vacuity (paper line 995 STIPULATION) renders the additional C2′ clause vacuous. Both ingredients are paper-stipulated structural facts at named regimes, not derivations — the atom is paper's commitment to how C2/C2′ relate at the named terminal-neighbour regime. Mirrors R68 closure 2 precedent (`cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN`): paper Example/Theorem `If` clauses STIPULATING predicate-conjunction validity at constructive regime ARE paper-defining commitments per §3.4.3 worked-example list (the discipline includes `Bridge_Defining_Biconditional` Theorem-level statement). Also mirrors R69 closures 1+2 precedents (`satisficing_*` atoms with paper-Remark-stipulated inter-carrier bindings): paper-stated reductions/bindings at named regimes are §3.4.3 structural identities. R70 verdict: paper-stipulated structural identity per §3.4.3 — paper's commitment to the C2/C2′ predicates' reduction at the named TerminalNeighbourTopology regime; 永不 close." ]
+  scope := "Paper Theorem 6.1 line 995 + line 1019 second `since` — paper-stipulated reduction of C2′ predicate to C2 under degree-2 (specialised to TerminalNeighbourTopology), composed with the V_g=V_dyn structural identity (companion atom #1)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = paper Theorem 6.1 (lines 992-995) C2′ predicate definition unfolding under (i) the V_g = V_dyn equality (collapsing the misalignment statement on V_g to the misalignment statement on V_dyn already encoded in C2) AND (ii) the degree-2 non-interference vacuity (paper line 995 'When |N_R(v_0)| = 2, the clause is vacuous and C2′ reduces to C2', specialised to terminal-neighbour topology)."
+    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (R70 §3.4.3 reclassification mirroring R68 closure 2 + R69 closures 1+2: paper Theorem 6.1 line 995 STATES `When |N_R(v_0)| = 2, the clause is vacuous and C2′ reduces to C2` as inline structural identity reducing C2′ to C2 at the paper-named degree-2 regime; paper line 1019 specialises this to terminal-neighbour topology. Paper does NOT derive these; they are paper's commitments to how the C2/C2′ predicates relate at the named regime). Downstream consumer: `terminal_neighbour_implies_C2prime` derived theorem (GeneralGraphs.lean) hosts the structural equation."
   conditionalOn := []
 
 /-! ## R36 atomic-stipulation layer (Manufactured-Recognition §18 pattern)

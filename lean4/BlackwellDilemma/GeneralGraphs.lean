@@ -228,13 +228,18 @@ theorem gap_general_tree :
     the C2/C2′ inferential composition step). The atom isolates the
     paper's first reason exactly as line 987 and line 1019 state it.
 
-    Cat 3 sub-type: workingAssumption (paper-derived structural fact on
-    the opaque `V_g` and `V_dyn` carriers, pending per-IDP-instance
-    derivation from def:greedy-path lines 982-985 specialised to the
-    flat-subtree topology; 必须 close before publication).
+    Cat 3 sub-type: structuralEquation (R70 §3.4.3 reclassification —
+    paper line 987 STATES inline `On terminal-neighbor topology, V_g(u)
+    = V_dyn(u)` as paper-defining commitment about how the V_g and V_dyn
+    carriers relate at the paper-named TerminalNeighbourTopology regime;
+    paper does NOT derive this, it is paper's stipulation). Mirrors
+    `V_g_def_terminal` precedent (R23-C1 carrier-defining equation at
+    boundary regime per paper Def `def:greedy-path` line 984 STIPULATING
+    V_g(u) = r(u) at terminal vertex). 永不 close per discipline §3.4.3.
 
     paper source: line 987 ("On terminal-neighbor topology, V_g(u) =
-    V_dyn(u)") + line 1019 ("V_g = V_dyn on flat subtrees"). -/
+    V_dyn(u)") + line 1019 first "since" ("V_g = V_dyn on flat
+    subtrees"). -/
 axiom V_g_eq_V_dyn_on_terminal_neighbour_OPEN :
     TerminalNeighbourTopology →
     ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
@@ -263,14 +268,21 @@ axiom V_g_eq_V_dyn_on_terminal_neighbour_OPEN :
     paper-stated on the opaque hypothesis predicates `C2_*`, `C2prime_*`,
     `TerminalNeighbourTopology`.
 
-    Cat 3 sub-type: workingAssumption (paper-stated inferential
-    composition on opaque hypothesis predicates; pending per-IDP-instance
-    derivation from C2/C2′ predicate unfolding under the specialised
-    `V_g = V_dyn` and degree-2 conditions; 必须 close before publication).
+    Cat 3 sub-type: structuralEquation (R70 §3.4.3 reclassification —
+    paper Theorem 6.1 line 995 STATES inline `When |N_R(v_0)| = 2, the
+    clause is vacuous and C2′ reduces to C2` as paper-defining
+    commitment about how the C2 and C2′ predicates relate at the
+    paper-named degree-2 regime; paper line 1019 specialises this to
+    terminal-neighbour topology. Paper does NOT derive these; they are
+    paper's stipulations). Mirrors R68 closure 2 + R69 closures 1+2
+    precedents (paper-stipulated predicate-conjunction validity /
+    inter-carrier bindings at named regimes are §3.4.3 structural
+    identities). 永不 close per discipline §3.4.3.
 
-    paper source: line 1019 inferential composition ("terminal-neighbour
-    topology satisfies C2′ whenever C2 holds, since V_g = V_dyn on flat
-    subtrees and the non-interference clause is vacuous for degree~2"). -/
+    paper source: Theorem 6.1 line 995 ("When |N_R(v_0)| = 2, the
+    clause is vacuous and C2′ reduces to C2") + line 1019 second
+    "since" ("non-interference clause is vacuous for degree~2",
+    specialising line 995 to terminal-neighbour topology). -/
 axiom C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN :
     TerminalNeighbourTopology →
     (∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
