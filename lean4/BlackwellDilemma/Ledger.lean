@@ -3031,30 +3031,32 @@ def entry_atom_V_g_def_step : GapEntry where
 
 def entry_atom_oracleValueAtRoot_TrapTree_def : GapEntry where
   name := "oracleValueAtRoot_TrapTree_def"
-  status := GapStatus.gapDefinitional
+  status := GapStatus.gapOpen
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  cat3SubType := Cat3SubType.workingAssumption
   paperSource := "Proposition prop:error-compounding Part 2, line 1041"
   attackHistory :=
     [ "Cat 3 atomic structural-equation axiom: oracle dynamic value at the root of depth-d trap tree equals `r_goal = 1.0` for all `d ≥ 1`. Paper line 1041 reads `the oracle achieves V_dyn(v_0) = r(G) = 1.0 for all d`. R23-C1 refactor: previously bundled as `gap_error_compounding_part2_OPEN` (a higher-level paper claim wrongly axiomatised); now refactored into Cat 3 atomic axiom `oracleValueAtRoot_TrapTree_def` + derived theorem `gap_error_compounding_part2` (`:= oracleValueAtRoot_TrapTree_def`). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel.",
-      "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
+      "R52 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R51 hostile audit + R49→R50 boundary criterion. The atom's paperSource is in a Proposition statement (prop:error-compounding Part 2, line 1041), NOT a paper Definition — per discipline §3.4.3 (canonical examples are paper Definitions like V_dyn_def from def:value-functions), this is paper-derived characterization (the paper PROVES the oracle achieves V_dyn = r_goal via trap-tree induction), not a paper-stipulated definitional equation. Per §3.4.4 workingAssumption (必须 close before publication). Close target = paper Proposition prop:error-compounding Part 2 proof reconstruction (oracle definition + trap-tree induction)." ]
   scope := "Proposition prop:error-compounding Part 2, line 1041"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic axiom per discipline (paper-stated structural equation on the opaque `oracleValueAtRoot_TrapTree` carrier; replaces the prior bundled `gap_error_compounding_part2_OPEN`)."
+    "Cat 3 workingAssumption per §3.4.4 (R52 reclassification per R51 audit + R49→R50 boundary criterion). Close target = paper Proposition prop:error-compounding Part 2 proof reconstruction (oracle definition + trap-tree induction on the opaque `oracleValueAtRoot_TrapTree` carrier)."
   conditionalOn := []
 
 def entry_atom_expectedTopoLoss_conditional_def : GapEntry where
   name := "expectedTopoLoss_conditional_def"
-  status := GapStatus.gapDefinitional
+  status := GapStatus.gapOpen
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  cat3SubType := Cat3SubType.workingAssumption
   paperSource := "Proposition prop:topo-cluster proof, line 292 (order-statistics decomposition `n/(n+1) − k/(k+1)`)"
   attackHistory :=
     [ "Cat 3 atomic structural-equation axiom: paper Proposition `prop:topo-cluster` proof line 292 derives the conditional expected topological loss as `E[|W_topo| | |R| = k] = n/(n+1) − k/(k+1)` (using order-statistics for `E[max k iid Uniform[0,1]]`). The closed-form simplification `(n−k)/((n+1)(k+1))` is now derived Cat 1 from this atom in `gap_topo_cluster_relation` (theorem refactored from `gap_topo_cluster_relation_OPEN`). R23-C1 refactor splits the prior bundled OPEN axiom into Cat 3 atomic structural equation + Cat 1 algebraic-simplification theorem. Cat 1 reduction check: not Mathlib-derivable (the order-statistics step is the substantive content). Cat 2 reduction check: depends on David & Nagaraja 2003 §2.1.4 order statistics (acknowledged at docstring level); the Cat 2 dependency remains a Mathlib gap requiring product-uniform-measure infrastructure.",
-      "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM." ]
+      "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
+      "R52 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R51 hostile audit + R49→R50 boundary criterion. The atom's paperSource is in a Proposition PROOF (prop:topo-cluster proof, line 292), NOT a paper Definition — per §3.4.3 reading, this is paper-derived characterization (paper PROVES the order-statistics decomposition), not a paper-stipulated definitional equation. Per §3.4.4 workingAssumption (必须 close). Close target = paper proof reconstruction via David & Nagaraja 2003 §2.1.4 order statistics + Mathlib product-uniform-measure infrastructure." ]
   scope := "Proposition prop:topo-cluster proof, line 292 (order-statistics decomposition `n/(n+1) − k/(k+1)`)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 atomic axiom per discipline. Cat 2 dependency on David & Nagaraja 2003 §2.1.4 disclosed in docstring; full closure requires Mathlib product-measure infrastructure."
+    "Cat 3 workingAssumption per §3.4.4 (R52 reclassification per R51 audit + R49→R50 boundary criterion). Close target = paper proof reconstruction via David & Nagaraja 2003 §2.1.4 order statistics + Mathlib product-uniform-measure infrastructure."
   conditionalOn := []
 
 def entry_atom_kappaStar_def : GapEntry where
@@ -3226,9 +3228,9 @@ GeneralGraphs.lean (already counted in `entry_prop_trap_prevalence_zero`,
 
 def entry_atom_forward_reachable_full_at_zero : GapEntry where
   name := "forward_reachable_full_at_zero_OPEN"
-  status := GapStatus.gapDefinitional
+  status := GapStatus.gapOpen
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  cat3SubType := Cat3SubType.workingAssumption
   paperSource := "Proposition prop:trap-prevalence Part 1 proof, line 463 (`R(v) = V` for all `v` when no edges are blocked)"
   attackHistory :=
     [ "R23-C2 2026-05-13: Cat 3 atomic structural-equation axiom: `∀ [Fintype Vertex] v H ω, blockingProb = 0 → ForwardReachable v H ω = Finset.univ`. Paper proof of Proposition `prop:trap-prevalence` Part 1 line 463 reads 'When no edges are blocked, `R(v) = V` for all `v`': the entire vertex set is forward-reachable from any starting vertex when no edge is blocked. Pins the paper-stated full-reachability fact at `p = 0` on the existing `ForwardReachable` carrier. Cat 1 reduction check: not Mathlib-derivable (depends on the paper's bond-percolation semantics linking `blockingProb = 0` to all-edges-open + connectivity). Cat 2 reduction check: paper-novel structural equation on the IDP primitives. Encoding requires `[Fintype Vertex]` to express `Finset.univ` (paper Definition 2.1: graph on `n` nodes, finite). Hosted by `gap_trap_prevalence_zero` derived theorem (Phase.lean).",
@@ -3486,9 +3488,9 @@ def entry_atom_wInfoTopoRatio_bound : GapEntry where
     a tracked Ledger entry. -/
 def entry_atom_c_star_constant_pos : GapEntry where
   name := "gap_c_star_constant_pos_OPEN"
-  status := GapStatus.gapDefinitional
+  status := GapStatus.gapOpen
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  cat3SubType := Cat3SubType.workingAssumption
   paperSource := "Proposition prop:error-compounding Part 5, line 1048 (`c*(Δ_r, Δ_V) > 0`); paper does not give explicit closed form for c*"
   attackHistory :=
     [ "R41 2026-05-14: Cat 3 atomic-stipulation entry promotion. The axiom `gap_c_star_constant_pos_OPEN : 0 < c_star_constant` (GeneralGraphs.lean:490) was implicit in the source since R23 but not separately tracked in the Ledger; this entry corrects the audit-chain visibility per R40 close-target identification. Paper line 1048 asserts `c*(Δ_r, Δ_V) > 0` for the trap-tree opaque constant but does not give an explicit closed form (the Lean encoding mirrors via `axiom c_star_constant : ℝ` carrier + this positivity atom). Cat 1 reduction check: not Mathlib-derivable (requires explicit closed-form construction not given by paper). Cat 2 reduction check: paper-novel constant on opaque carrier. Downstream consumer: `gap_kappaStar_depth_d_upper_bound` derived theorem (GeneralGraphs.lean:567) consumes the atom for the Part 5 upper-bound proof. Classified as gapDefinitional/structuralEquation per §3.4.3 (paper-foundational atomic positivity stipulation on opaque `c_star_constant` carrier; 永不 close — paper does not provide derivation, only existence + positivity at line 1048)." ]
