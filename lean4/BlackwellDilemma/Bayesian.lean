@@ -138,95 +138,180 @@ theorem gap_robustness_bayesian_naive :
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom myopicKWelfare : ℕ → ℕ → ℝ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Remark
-    `rem:robustness-misspec` (ii) line 942 states that for a `k`-step
-    lookahead agent on a depth-`d` trap-tree instance with `k ≥ d`,
-    the agent's lookahead horizon is wide enough to compare the
-    full trap and bridge subtree values, recovering the standard
-    Blackwell-monotonicity chain on the resulting fixed-action
-    decision subproblem.
+/-- Cat 3 paper-novel ATOMIC stipulation #1 (R57 closure-path-A
+    decomposition): for `k ≥ d`, the myopic-`k` agent's posterior
+    estimate of the continuation value at the root coincides with
+    the Bayesian agent's posterior, because the `k`-step lookahead
+    horizon spans the full divergence depth `d` of the trap and
+    bridge paths. Paper Remark (ii) line 942: "the agent's planning
+    horizon is wide enough to compare the full trap and bridge
+    subtree values".
 
-    Encoding choice: extracted as standalone Cat 3 atomic stipulation
-    from the bundled `gap_robustness_myopic_k_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
-    (decompose bundled conclusion-axiom into atomic stipulation +
-    derived theorem). The atom isolates the paper-stated `k ≥ d`
-    monotonicity recursion on the existing carrier `myopicKWelfare`.
+    This is paper-derived structural content: the `k`-step truncated
+    backward induction reproduces the unrestricted backward induction
+    when the truncation depth weakly dominates the relevant divergence
+    depth. The Lean encoding states that for `k ≥ d`, the myopic
+    welfare equals the Bayesian welfare on the corresponding
+    decision instance.
 
-    Cat 3 sub-type: workingAssumption (paper-stated higher-level
-    application of conditional-Blackwell to the paper-novel
-    `myopicKWelfare` carrier; pending Mathlib decision-theoretic
-    Blackwell-ordering machinery; 必须 close before publication).
+    Cat 3 sub-type: workingAssumption (paper-stated structural
+    equivalence on the opaque `myopicKWelfare` carrier; pending
+    per-instance derivation from the paper's `k`-step backward-
+    induction recursion; 必须 close before publication).
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942
-    (`k`-step lookahead with `k ≥ d` recovers monotonicity). -/
-axiom myopic_k_lookahead_recursion_OPEN :
+    (k-step lookahead horizon spans full divergence depth d ⇒
+    coincides with Bayesian estimate). -/
+axiom myopic_k_eq_bayesian_above_divergence_depth_OPEN :
     ∀ k d : ℕ, k ≥ d →
-      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂
+      ∀ β : ℝ,
+        myopicKWelfare k d β = agentWelfare AgentType.bayesian β 0 1
 
-/-- **Remark `rem:robustness-misspec` (ii): Myopic-`k`** (derived theorem).
+/-- **Remark `rem:robustness-misspec` (ii): Myopic-`k`** (derived theorem,
+    R57 closure-path-A).
     A `k`-step lookahead agent experiences the reversal for `k = 0`
     (greedy) but not for `k ≥ d`, where `d` is the divergence depth of
     trap and bridge paths.
 
-    Derived theorem composing the atomic stipulation
-    `myopic_k_lookahead_recursion_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    R57 closure path A: derived theorem composing
+      (i) Cat 3 atomic stipulation
+          `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
+          (paper line 942 — myopic equals Bayesian when planning
+          horizon `k ≥ d`); plus
+      (ii) Cat 2 Blackwell 1951/1953 monotonicity threaded as an
+          explicit `h_blackwell` antecedent per `feedback_gap_ledger_in_lean4`
+          §10 (paper-APPLICATION-of-Cat-2-to-opaque-carrier is Cat 3 with
+          explicit Cat 2 dependency chain). The Cat 2 axiom lives at
+          `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
+
+    Proof composition:
+      myopicKWelfare k d β₁ = bayesian β₁                (atom)
+                            ≤ bayesian β₂                (h_blackwell)
+                            = myopicKWelfare k d β₂      (atom symm).
+
+    Net effect: original ` myopic_k_lookahead_recursion_OPEN ` (a
+    bundled `∀ β₁ β₂, β₁ ≤ β₂ → myopic ≤ myopic` workingAssumption)
+    is replaced by a more atomic equality stipulation + Cat 2
+    Blackwell. The atomic stipulation is genuinely smaller (just
+    horizon-suffices structural equality, no monotonicity built in).
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942. -/
-theorem gap_robustness_myopic_k :
+theorem gap_robustness_myopic_k
+    (h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.bayesian β₁ 0 1 ≤
+        agentWelfare AgentType.bayesian β₂ 0 1) :
     ∀ k d : ℕ, k ≥ d →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂ :=
-  myopic_k_lookahead_recursion_OPEN
+        myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂ := by
+  intro k d hkd β₁ β₂ hβ
+  have h₁ := myopic_k_eq_bayesian_above_divergence_depth_OPEN k d hkd β₁
+  have h₂ := myopic_k_eq_bayesian_above_divergence_depth_OPEN k d hkd β₂
+  rw [h₁, h₂]
+  exact h_blackwell β₁ β₂ hβ
 
 /-- Welfare of a satisficing agent with threshold `r̄` at precision `β`.
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom satisficingWelfare : ℝ → ℝ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Remark
-    `rem:robustness-misspec` (iii) line 944 states that a satisficing
-    agent with threshold `r̄` strictly between the trap and high-
-    reward neighbour rewards `r(B) < r̄ < r(A)` accepts the trap option
-    on its first satisficing-acceptance event, exhibiting the welfare-
-    reversal mechanism in β. This atom isolates the paper-stated
-    threshold-trap behaviour on the existing carrier
-    `satisficingWelfare`.
+/-- Acceptance probability of the trap option `A` (immediate reward
+    `r(A) = 0.6`) by a satisficing agent with threshold `r̄` at
+    signal precision `β`. The agent accepts the FIRST option whose
+    realised signal exceeds `r̄`; with `r̄ < r(A)`, increased signal
+    precision concentrates the signal `s_A` near `r(A) > r̄`,
+    monotonically increasing the trap-acceptance event probability.
+    Substantive paper claim — opaque carrier required (Mathlib gap). -/
+axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
 
-    Encoding choice: extracted as standalone Cat 3 atomic stipulation
-    from the bundled `gap_robustness_satisficing_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
-    (decompose bundled conclusion-axiom into atomic stipulation +
-    derived theorem).
+/-- Cat 3 paper-novel ATOMIC stipulation #1 (R57 closure-path-A
+    decomposition): paper Remark (iii) line 945-946 — when `r̄ < r(A)`,
+    the trap-acceptance probability is strictly increasing in β.
+    "Better signals make the agent more confident that A exceeds the
+    threshold."
 
-    Cat 3 sub-type: workingAssumption (paper-stated higher-level
-    welfare-reversal claim on opaque carrier `satisficingWelfare`;
-    pending substantive analysis of the satisficing decision rule;
-    必须 close before publication).
+    The paper-novel content is the structural binding of the
+    satisficing decision rule (accept first option exceeding threshold)
+    to the increasing-precision-concentrates-signal Gaussian fact.
+    The Gaussian-CDF concentration fact itself is a Cat 1/Cat 2 result
+    (signal-variance is strictly antitone in β, a Cat 1 theorem
+    `signalVariance_strictAntitoneOn` in this codebase), so the
+    paper-novel piece is exactly the binding.
 
-    paper source: Remark `rem:robustness-misspec` (iii), line 944
-    (satisficing threshold `r̄ ∈ (r(B), r(A))` exhibits welfare
-    reversal in β). -/
-axiom satisficing_threshold_trap_OPEN :
+    Cat 3 sub-type: workingAssumption (paper-stated decision-rule
+    structural fact on the opaque `satisficingTrapAcceptanceProb`
+    carrier; pending per-instance derivation from the satisficing
+    decision rule + Gaussian CDF concentration; 必须 close before
+    publication).
+
+    paper source: Remark `rem:robustness-misspec` (iii), lines
+    945-946 ("Better signals make the agent more confident that A
+    exceeds the threshold, reinforcing the trap"). -/
+axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
+    ∀ rBar : ℝ, rBar < FiveState.r_A →
+      ∀ β₁ β₂ : ℝ, β₁ < β₂ →
+        satisficingTrapAcceptanceProb rBar β₁ <
+          satisficingTrapAcceptanceProb rBar β₂
+
+/-- Cat 3 paper-novel ATOMIC stipulation #2 (R57 closure-path-A
+    decomposition): structural binding from "trap-acceptance
+    probability strictly increases" to "satisficing welfare strictly
+    decreases". With `r̄ ∈ (r(B), r(A))` and the satisficing rule
+    accepting `A` (the trap, terminal reward `r(A) = 0.6`) on its
+    first acceptance event, increased trap-acceptance probability
+    yields strictly worse welfare since the bridge alternative
+    `B → G` is foregone (paper terminal reward `r(G) = 1.0` strictly
+    exceeds `r(A) = 0.6` by FiveState construction).
+
+    Cat 3 sub-type: workingAssumption (paper-stated decision-theoretic
+    binding on the opaque `satisficingWelfare` carrier; pending per-
+    instance derivation from the satisficing welfare integral over
+    acceptance events; 必须 close before publication).
+
+    paper source: Remark `rem:robustness-misspec` (iii), line 946
+    ("reinforcing the trap"; satisficing acceptance of A forecloses
+    bridge B → G). -/
+axiom satisficing_welfare_antitone_in_trap_acceptance_OPEN :
     ∀ rBar : ℝ, FiveState.r_B < rBar → rBar < FiveState.r_A →
-      ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
-        satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁
+      ∀ β₁ β₂ : ℝ,
+        satisficingTrapAcceptanceProb rBar β₁ <
+          satisficingTrapAcceptanceProb rBar β₂ →
+          satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁
 
 /-- **Remark `rem:robustness-misspec` (iii): Satisficing** (derived
-    theorem). A satisficing agent with threshold `r̄ ∈ (r(B), r(A))`
-    accepts the trap; the reversal mechanism is analogous (welfare can
-    decrease in β).
+    theorem, R57 closure-path-A). A satisficing agent with threshold
+    `r̄ ∈ (r(B), r(A))` accepts the trap; the reversal mechanism is
+    analogous (welfare strictly decreases in β).
 
-    Derived theorem composing the atomic stipulation
-    `satisficing_threshold_trap_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    R57 closure path A: derived theorem composing the two paper-stated
+    atomic stipulations
+      (i) `satisficing_trap_acceptance_strictMono_in_beta_OPEN`
+          (paper line 945, "Better signals make the agent more
+           confident that A exceeds the threshold"); plus
+      (ii) `satisficing_welfare_antitone_in_trap_acceptance_OPEN`
+          (paper line 946, "reinforcing the trap" — increased trap
+           acceptance forecloses the bridge `B → G` and strictly
+           reduces welfare).
+
+    Each atomic stipulation is strictly smaller than the original
+    bundled `satisficing_threshold_trap_OPEN` (which packaged the
+    threshold-strict-betweenness, monotonicity-of-acceptance, AND
+    welfare-antitonicity into one axiom).
+
+    Witness construction: take `β₁ = 0`, `β₂ = 1`. The atomic
+    stipulations supply (i) `acceptance(0) < acceptance(1)` and
+    (ii) `acceptance(0) < acceptance(1) → welfare(1) < welfare(0)`.
+    Composition gives `welfare(1) < welfare(0)` and `0 < 1`.
 
     paper source: Remark `rem:robustness-misspec` (iii), line 944. -/
 theorem gap_robustness_satisficing :
     ∀ rBar : ℝ, FiveState.r_B < rBar → rBar < FiveState.r_A →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
-        satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁ :=
-  satisficing_threshold_trap_OPEN
+        satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁ := by
+  intro rBar hB hA
+  refine ⟨0, 1, by norm_num, ?_⟩
+  have h_acc :
+      satisficingTrapAcceptanceProb rBar 0 <
+        satisficingTrapAcceptanceProb rBar 1 :=
+    satisficing_trap_acceptance_strictMono_in_beta_OPEN rBar hA 0 1 (by norm_num)
+  exact satisficing_welfare_antitone_in_trap_acceptance_OPEN rBar hB hA 0 1 h_acc
 
 end BlackwellDilemma

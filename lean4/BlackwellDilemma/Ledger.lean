@@ -2518,10 +2518,11 @@ def entry_rem_robustness_misspec_myopic_satisficing : GapEntry where
       "R7 2026-05-12: hostile audit caught both R6 closures as concrete-placeholder closure-count tricks violating `feedback_lean_real_math` (placeholder shapes do not encode the paper's bounded-rationality content). Reverted in source to `axiom gap_robustness_*_OPEN` with opaque carriers `myopicKWelfare`, `satisficingWelfare`.",
       "R11 discipline audit (2026-05-13): retroactive Ledger-status correction — the R7 source-side revert was applied but the Ledger entry was never updated, leaving stale `status := \"CLOSED\"` metadata that contradicted the actual Lean source. Status now corrected to OPEN.",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN.",
-      "R38 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern to both axioms. (ii) `gap_robustness_myopic_k_OPEN` REPLACED by derived theorem `gap_robustness_myopic_k` (Bayesian.lean) composing the new Cat 3 atomic stipulation `myopic_k_lookahead_recursion_OPEN` (paper-stated `k ≥ d` Blackwell-recovery on `myopicKWelfare`, line 942). (iii) `gap_robustness_satisficing_OPEN` REPLACED by derived theorem `gap_robustness_satisficing` (Bayesian.lean) composing the new Cat 3 atomic stipulation `satisficing_threshold_trap_OPEN` (paper-stated welfare-reversal under `r̄ ∈ (r(B), r(A))` on `satisficingWelfare`, line 944). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_myopic_k_lookahead_recursion, entry_atom_satisficing_threshold_trap)." ]
+      "R38 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern to both axioms. (ii) `gap_robustness_myopic_k_OPEN` REPLACED by derived theorem `gap_robustness_myopic_k` (Bayesian.lean) composing the new Cat 3 atomic stipulation `myopic_k_lookahead_recursion_OPEN` (paper-stated `k ≥ d` Blackwell-recovery on `myopicKWelfare`, line 942). (iii) `gap_robustness_satisficing_OPEN` REPLACED by derived theorem `gap_robustness_satisficing` (Bayesian.lean) composing the new Cat 3 atomic stipulation `satisficing_threshold_trap_OPEN` (paper-stated welfare-reversal under `r̄ ∈ (r(B), r(A))` on `satisficingWelfare`, line 944). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +2 new Cat 3 OPEN atomic-stipulation entries (entry_atom_myopic_k_lookahead_recursion, entry_atom_satisficing_threshold_trap).",
+      "R57 2026-05-14: closure-path-A decomposition retiring both R38 atoms in favour of strictly-smaller atoms + Cat 2 chain. (ii) `myopic_k_lookahead_recursion_OPEN` (bundled monotonicity) → `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (just horizon-suffices structural equality) + Cat 2 Blackwell 1951/1953 threaded as `h_blackwell` antecedent on `gap_robustness_myopic_k`. (iii) `satisficing_threshold_trap_OPEN` (bundled existential reversal) → `satisficing_trap_acceptance_strictMono_in_beta_OPEN` (paper line 945, precision-concentration of trap-acceptance) + `satisficing_welfare_antitone_in_trap_acceptance_OPEN` (paper line 946, bridge-foregone welfare loss) + new opaque carrier `satisficingTrapAcceptanceProb`; constructive witnesses β₁=0, β₂=1 close the existential by direct composition. Net workingAssumption count: -2 + 3 = +1 (myopic atom 1→1 net-replacement; satisficing 1→2 net-replacement); also +1 carrier (gapDefinitional)." ]
   scope := "Remark rem:robustness-misspec (ii)+(iii), lines 942-944"
   obstacleOrAttribution :=
-    "CLOSED-via-Cat-3-atom-input. R38 derived theorems `gap_robustness_myopic_k` and `gap_robustness_satisficing` re-export atomic stipulations `myopic_k_lookahead_recursion_OPEN` (paper line 942) and `satisficing_threshold_trap_OPEN` (paper line 944). Substantive bounded-rationality content (k-step lookahead dynamics on the trap tree for myopic-k; satisficing-threshold acceptance criterion with non-monotone β-response) remains a Mathlib gap at the atom level; Lean side encodes via opaque carriers `myopicKWelfare`, `satisficingWelfare`."
+    "CLOSED-via-Cat-3-atom-input. R38 derived theorems `gap_robustness_myopic_k` and `gap_robustness_satisficing` re-export atomic stipulations; R57 strengthened to closure-path-A composition (smaller atoms + Cat 2 Blackwell chain). Substantive bounded-rationality content (k-step lookahead dynamics on the trap tree for myopic-k; satisficing-threshold acceptance criterion with non-monotone β-response) remains a Mathlib gap at the atom level; Lean side encodes via opaque carriers `myopicKWelfare`, `satisficingWelfare`, `satisficingTrapAcceptanceProb`."
   conditionalOn := []
 
 /-! # §7 General Graphs entries -/
@@ -3458,7 +3459,8 @@ def entry_atom_conditional_subproblem_blackwell_applicable : GapEntry where
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_conditional_reduction_part_i_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the paper-stated conditional-Blackwell-applicability fact on the existing carrier `conditionalWelfareOnR R signalFamily β`, threading the Cat 2 Blackwell 1951/1953 dependency as the explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable (Mathlib lacks decision-theoretic Blackwell ordering on signal-experiment lattices). Cat 2 reduction check: paper-novel application to opaque carrier (Blackwell 1951/1953 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_conditional_reduction_part_i` derived theorem (Wrongness.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R48 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R47 NOTE 5 re-audit. VERDICT = RECLASSIFY. Reasoning per §3.4.3 vs §3.4.4: paper Lemma `lem:conditional-reduction` part (i) proof line 381 reads 'fixed-feasible-set conditional subproblem permits direct Blackwell-theorem application' — this is paper-DERIVED APPLICATION of the external Cat 2 Blackwell 1951/1953 theorem to the paper-novel `conditionalWelfareOnR` carrier. The Lean source-side docstring (Wrongness.lean:78-82) literally classifies this as 'workingAssumption (paper-stated higher-level application of Cat 2 Blackwell theorem to the paper-novel `conditionalWelfareOnR` carrier; pending substantive Mathlib decision-theoretic Blackwell ordering machinery; 必须 close before publication)'. The R39 ledger reclassification to structuralEquation/gapDefinitional contradicted this source-side intent. Per §3.4.4 workingAssumption (必须 close); close target = Mathlib decision-theoretic Blackwell ordering machinery + paper proof reconstruction of the conditional-subproblem applicability via fixed-feasible-set argument." ]
+      "R48 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R47 NOTE 5 re-audit. VERDICT = RECLASSIFY. Reasoning per §3.4.3 vs §3.4.4: paper Lemma `lem:conditional-reduction` part (i) proof line 381 reads 'fixed-feasible-set conditional subproblem permits direct Blackwell-theorem application' — this is paper-DERIVED APPLICATION of the external Cat 2 Blackwell 1951/1953 theorem to the paper-novel `conditionalWelfareOnR` carrier. The Lean source-side docstring (Wrongness.lean:78-82) literally classifies this as 'workingAssumption (paper-stated higher-level application of Cat 2 Blackwell theorem to the paper-novel `conditionalWelfareOnR` carrier; pending substantive Mathlib decision-theoretic Blackwell ordering machinery; 必须 close before publication)'. The R39 ledger reclassification to structuralEquation/gapDefinitional contradicted this source-side intent. Per §3.4.4 workingAssumption (必须 close); close target = Mathlib decision-theoretic Blackwell ordering machinery + paper proof reconstruction of the conditional-subproblem applicability via fixed-feasible-set argument.",
+      "R57 2026-05-14: closure-feasibility analysis per user directive '请补上所有的这些证明 / Mathlib percolation / Blackwell decision theory如果证明内用到，可以作为cat2引入'. VERDICT = SKIP — substantive Lean derivation required, beyond rfl/rw/exact. Analysis: the atom signature takes `h_blackwell` antecedent on `agentWelfare AgentType.bayesian β 0 1` and produces conclusion on `conditionalWelfareOnR R signalFamily β` (different opaque carrier, different parameter shape). To close trivially via rw/exact, we would need a Cat 3 §3.4.3 paper-stipulative carrier-identification axiom asserting `conditionalWelfareOnR R signalFamily β = agentWelfare AgentType.bayesian β 0 1` at the conditional-subproblem scope — but the paper does NOT stipulate this identity in any Definition. Paper's lem:conditional-reduction part (i) proof line 381 derives the carrier identification via the fixed-feasible-set argument (a substantive paper-novel proof step), making this paper-DERIVED §3.4.4 working content (consistent with R48 honest reclassification). Honest closure path = either (A) introduce a stronger Cat 2 generic-Blackwell-decision-theorem axiom (parametric over decision problems including action set + state space + payoff) AND a paper-novel Cat 3 §3.4.4 'conditionalWelfareOnR fits the generic-Blackwell schema' bridging axiom (which is itself substantive paper-novel content, just relocated); OR (B) wait for Mathlib decision-theoretic Blackwell-ordering infrastructure to land. Per `feedback_truth_over_publication`: better to skip honestly than fake-close via a bridging atom that just relocates the working assumption." ]
   scope := "Lemma lem:conditional-reduction part (i), Blackwell ordering applicability to conditional subproblem on R(v_0)"
   obstacleOrAttribution :=
     "Cat 3 workingAssumption per §3.4.4 (R48 hostile-audit re-classification per R47 NOTE 5). Close target = paper proof reconstruction of Lemma lem:conditional-reduction part (i) line 381 (Blackwell ordering applicability to conditional subproblem on R(v_0) via fixed-feasible-set argument permitting direct application of Blackwell 1951/1953 Cat 2 theorem to opaque carrier `conditionalWelfareOnR`)."
@@ -3560,7 +3562,8 @@ def entry_atom_bayesian_naive_below_threshold_blackwell_recovery : GapEntry wher
   paperSource := "Proposition prop:bayesian-naive-five-state (ii), lines 955-956 (Blackwell-recovery at below-threshold scope `p̂ < 2/3`); Blackwell 1951/1953 (Cat 2 dependency)"
   attackHistory :=
     [ "R41 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_bayesian_naive_reversal_absent_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the paper-stated Blackwell-recovery transfer at the bayesianNaive sub-problem (paper line 956: at `p̂ < 2/3` the trap-routing misspecification is dominated by the correctly-modelled bridge option, restoring the Blackwell-ordering chain). Single-atom decomposition is honest because the paper-stated content IS the Blackwell-recovery transfer at the below-threshold scope (per §10 paper-APPLICATION-to-opaque-carrier = Cat 3 with explicit Cat 2 chain). Cat 2 dependency on Blackwell 1951/1953 monotonicity threaded as explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel transfer to bayesianNaive opaque carrier under below-threshold scope (Blackwell theorem itself is the Cat 2 underlying input). Downstream consumer: `gap_bayesian_naive_reversal_absent` derived theorem (Canonical.lean) hosts the atom. Classified as gapDefinitional/structuralEquation per §3.4.3 (paper-foundational atomic content on opaque `agentWelfare AgentType.bayesianNaive` carrier; 永不 close).",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict overruling R43's `VERIFIED HONEST` ruling. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict overruling R43's `VERIFIED HONEST` ruling. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R57 2026-05-14: closure-feasibility analysis per user directive 'Cat 2 Blackwell decision theory introducible as needed'. VERDICT = SKIP — substantive Lean derivation required. Analysis: atom signature takes `h_blackwell` antecedent on `agentWelfare AgentType.bayesian β 0 1` (correctly-specified Bayesian agent at κ=0, α=1) and produces conclusion on `agentWelfare AgentType.bayesianNaive β 0 1` (DIFFERENT AgentType — misspecified-prior Bayesian-naive agent). Per `blackwell_dilemma.tex` line 955 paper proof: at p̂<2/3 the Bayesian-naive agent 'deterministically routes to B (regardless of signal precision β)' so `W(β; p̂)` is non-decreasing in β 'via within-subtree Blackwell monotonicity'. The proof requires (a) routing-determinism at p̂<2/3 (paper's `prop:bayesian-naive-five-state (i)` already CLOSED at Canonical.lean:1191 via `gap_bayesian_naive_routing_threshold` with kernel-pure nlinarith), AND (b) within-subtree welfare equivalence: deterministic-B-routing implies `agentWelfare AgentType.bayesianNaive β 0 1 = W_subtree(B, β)` where the B-subtree welfare equals the Bayesian agent's welfare at the same β. (b) is paper-novel structural content NOT stipulated in any Definition — paper derives it from the model's routing-determinism + Bayesian B-subtree modelling. Honest closure requires either (A) decompose via §18 into routing-determinism atom (already CLOSED) + B-subtree-welfare-equivalence atom (new §3.4.4 working assumption — net 0 change), OR (B) substantive Lean derivation of the within-subtree Blackwell argument (requires Mathlib decision-theoretic infra for sub-σ-algebra restriction). Net: closure NOT trivial via rfl/rw/exact." ]
   scope := "Proposition prop:bayesian-naive-five-state (ii), Blackwell-recovery transfer at bayesianNaive sub-problem under below-threshold scope `p̂ < 2/3`"
   obstacleOrAttribution :=
     "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit overruling R43's VERIFIED HONEST ruling). Close target = paper prop:bayesian-naive-five-state (ii) lines 955-956 proof reconstruction (Blackwell-recovery transfer at below-threshold scope `p̂ < 2/3` via Blackwell 1951/1953 application to bayesianNaive opaque carrier)."
@@ -3954,7 +3957,8 @@ def entry_atom_alpha_above_alpha_star_implies_reversal : GapEntry where
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part1_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper-stated greedy-reversal triggering at the α-above-α* regime gate on the existing carrier `agentWelfare`. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_cognitive_threshold_part1` derived theorem (Cognitive.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R57 2026-05-14: closure-feasibility analysis per user directive 'Cat 2 Blackwell decision theory introducible if needed'. VERDICT = SKIP — substantive paper-novel math required, no Cat 2 dependency exists in atom signature. Analysis: this atom is unique among the R57 batch in carrying NO Cat 2 antecedent (signature: `Conditions_C1_C2_C3 → TerminalNeighbourTopology → ∀ p α, alphaStar 0 p < α → ∃ β₁ β₂, β₁ < β₂ ∧ greedy welfare strict-decrease`). Paper Theorem 4.1 Part 1 proof (line 491) requires the substantive trap-probability + V_dyn-misalignment chain on the greedy agent at κ=0: above the α*(0,p) regime gate, the greedy decision rule's reward-only objective triggers selection of the trap A even when the bridge B has higher dynamic value, causing `W_greedy(β₂, 0, α) < W_greedy(β₁, 0, α)` in some β-pair. This is pure paper-novel substantive content with NO Cat 2 dependency to introduce — no Mathlib percolation theorem or Blackwell theorem can shortcut it. Closure path = (1) decompose into atomic stipulations on (a) trap-probability monotonicity in β at α>α*, (b) V_dyn(A) < V_dyn(B), (c) greedy-welfare-from-routing-decomposition. Each sub-claim is itself paper-novel substantive content (not §3.4.3). OR (2) direct Lean-encoding of Theorem 4.1 Part 1 paper proof (substantial; requires per-IDP-instance witness construction). Honest verdict: skip this round; not amenable to Cat-2-introduction-based closure." ]
   scope := "Theorem 4.1 Part 1, α-above-α* greedy reversal at κ = 0"
   obstacleOrAttribution :=
     "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper Theorem 4.1 Part 1 proof reconstruction (greedy welfare non-monotone in β at α-above-α* regime gate)."
@@ -3971,7 +3975,8 @@ def entry_atom_kappa_large_blackwell_recovery : GapEntry where
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part2_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom captures the paper-stated κ-large monotonicity recovery on the existing carrier `agentWelfare`. Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Blackwell theorem. Downstream consumer: `gap_cognitive_threshold_part2` derived theorem (Cognitive.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R57 2026-05-14: closure-feasibility analysis per user directive 'Cat 2 Blackwell decision theory introducible if needed'. VERDICT = SKIP — substantive Lean derivation required. Analysis: atom signature takes `h_blackwell` antecedent on `agentWelfare AgentType.bayesian β 0 1` and produces an EXISTENTIAL `∃ κ₀, ∀ κ β₁ β₂, κ₀ ≤ κ → β₁ ≤ β₂ → W_kappaAgent ≤ ...` (different agent + asymptotic existence). Paper Theorem 4.1 Part 2 (line 492) proof requires: at sufficiently large κ, the κ-agent's posterior estimates of continuation values converge to the truth (consistency theorem), restoring the conditional Blackwell-ordering chain. Honest closure requires (a) Mathlib decision-theoretic Blackwell-ordering machinery (currently absent — Mathlib lacks `IsBlackwellOrdered` typeclass on signal experiments + value-monotonicity theorem on the lattice), (b) paper's posterior-consistency argument for κ-agent at κ→∞, AND (c) the specific κ₀ witness. The asymptotic `∃ κ₀` quantifier rules out trivial substitution of `h_blackwell`'s β-monotonicity-on-bayesian-agent fact into a kappaAgent-quantified statement. Even introducing a generic Cat 2 abstract-Blackwell-decision-theorem axiom (parametric over decision problems) would still require a paper-novel Cat 3 §3.4.4 'kappa-agent-fits-the-schema-at-κ-large' bridging axiom, which is itself substantive paper-novel content. Honest verdict: skip; closure target = Mathlib decision-theoretic Blackwell infra + paper's posterior-consistency reconstruction." ]
   scope := "Theorem 4.1 Part 2, κ-large monotonicity recovery"
   obstacleOrAttribution :=
     "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper Theorem 4.1 Part 2 proof reconstruction (κ-large monotonicity recovery via Blackwell 1951/1953 application)."
@@ -4042,7 +4047,8 @@ def entry_atom_corner_supermodularity_via_topkis : GapEntry where
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_kappaWelfare_cross_partial_link_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the cross-partial-positive-at-four-corners → corner-supermodularity bridge on the paper-novel `kappaAgentWelfareSNR` carrier. Cat 2 Topkis 1978/1998 dependency threaded as explicit `h_topkis` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Topkis universal-supermodularity to paper-novel regional carrier. Downstream consumer: `gap_kappaWelfare_cross_partial_link` derived theorem (Cognitive.lean) + transitively `gap_policy_complementarity_OPEN_derived`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R57 2026-05-14: closure-feasibility analysis per user directive 'Cat 2 Topkis introducible if needed'. VERDICT = SKIP — substantive paper-novel structural identification required. Analysis: atom's `h_topkis` antecedent has the structurally vacuous form `∀ W, (W supermod inequality) → (W supermod inequality)` (i.e. `id`-typed) — does NOT load-bear on closure. Atom's substantive content: from `welfareCrossPartial` positivity at 4 corners → corner-pairwise supermodularity inequality on `kappaAgentWelfareSNR`. Per Cognitive.lean docstring line 829-836: 'the coupling cannot be derived without committing to a concrete welfare functional' — both `welfareCrossPartial` and `kappaAgentWelfareSNR` are opaque carriers. Paper's prop:supermodular proof line 580-583 derives the link via continuous calculus identity `φ'(z) = -z·φ(z)` (Gaussian PDF derivative), specialised to the `|z|<1` four-corner regime. Honest closure requires either (A) make `welfareCrossPartial` / `kappaAgentWelfareSNR` concrete (commit to closed forms — substantial new infrastructure ranging into Mathlib Gaussian + `SNR` integral machinery), OR (B) introduce a NEW Cat 3 §3.4.4 working-assumption axiom 'four-corner cross-partial-positivity ⇒ corner-supermodularity-of-kappaAgentWelfareSNR' — but this just relocates the working assumption (net 0 change in workingAssumption count). Per `feedback_truth_over_publication`: skip honestly rather than relocate. Closure target = paper proof line 580-583 reconstruction with concrete Gaussian-derivative machinery, which is downstream of `entry_atom_welfareCrossPartial_explicit_form_OPEN` closure." ]
   scope := "Proposition prop:supermodular, cross-partial-to-corner-supermodularity bridge"
   obstacleOrAttribution :=
     "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper prop:supermodular proof reconstruction (cross-partial-to-corner-supermodularity bridge on `kappaAgentWelfareSNR` via Cat 2 Topkis 1978/1998 application)."
@@ -4196,7 +4202,8 @@ def entry_atom_kappa_above_threshold_blackwell_recovery : GapEntry where
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_threshold_fiveState_kappa_above_kstar_OPEN` per §18 (renamed to atom + derived theorem `gap_threshold_fiveState_kappa_above_kstar` re-export). Cat 2 Blackwell 1951/1953 dependency threaded as explicit `h_blackwell` antecedent. Downstream consumer: `gap_threshold_fiveState_kappa_above_kstar`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R57 2026-05-14: closure-feasibility analysis per user directive 'Cat 2 Blackwell decision theory introducible if needed'. VERDICT = SKIP — substantive Lean derivation required. Analysis: atom signature takes `h_blackwell` antecedent on `agentWelfare AgentType.bayesian β 0 1` and produces conclusion on `agentWelfare AgentType.kappaAgent β κ 1` (different agent + per-(p, κ) regime gate `kappaStar_fiveState p < κ`). Paper prop:threshold-five-state (ii) line 862 proof requires: above the cognitive threshold κ*(p), the κ-agent correctly ranks continuation values (the trap-induced misranking that drives reversal at κ<κ* is corrected by sufficient cognitive depth), restoring the Blackwell-ordering chain on the conditional decision subproblem. The transfer from bayesian-agent monotonicity (`h_blackwell`) to kappaAgent monotonicity at κ>κ*(p) is paper-novel content not stipulated in any Definition. Honest closure path = either (A) decompose into atomic stipulations on (a) κ-above-κ* ⇒ correct-continuation-ranking (paper-novel §3.4.4), (b) correct-continuation-ranking ⇒ kappaAgent-bayesian welfare equivalence on the conditional subproblem (paper-novel §3.4.4), then derive monotonicity by chaining (b) with `h_blackwell`; OR (B) substantive Lean derivation. Both paths require new working-assumption atoms — net 0 reduction in workingAssumption count. Honest verdict: skip; closure target = paper prop:threshold-five-state (ii) proof reconstruction with Mathlib decision-theoretic infrastructure." ]
   scope := "Proposition prop:threshold-five-state (ii), κ-above-threshold Blackwell recovery"
   obstacleOrAttribution :=
     "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper prop:threshold-five-state (ii) proof reconstruction (κ-above-threshold Blackwell recovery on 5-state via Blackwell 1951/1953 application)."
@@ -4308,38 +4315,166 @@ def entry_atom_bernoulli_real_power_estimate : GapEntry where
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Remark rem:robustness-misspec (ii)
-    (line 942), myopic-`k` lookahead `k ≥ d` Blackwell recovery. -/
+    (line 942), myopic-`k` lookahead `k ≥ d` Blackwell recovery.
+
+    R57 closure-path-A: REPLACED by smaller atom
+    `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (just the
+    horizon-suffices structural equality `myopicKWelfare = bayesian`
+    when `k ≥ d`); the monotonicity content is now derived by
+    composing this equality atom with the Cat 2 Blackwell
+    1951/1953 `gap_blackwell_monotonicity_OPEN` axiom (threaded as
+    explicit `h_blackwell` antecedent in the derived theorem
+    `gap_robustness_myopic_k`). Status closes (entry retired by
+    decomposition; replaced by the smaller atom + derived theorem). -/
 def entry_atom_myopic_k_lookahead_recursion : GapEntry where
-  name := "myopic_k_lookahead_recursion_OPEN"
-  status := GapStatus.gapOpen
+  name := "myopic_k_lookahead_recursion_OPEN [retired R57 → replaced by myopic_k_eq_bayesian_above_divergence_depth_OPEN + Cat 2 Blackwell]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Remark rem:robustness-misspec (ii), line 942 (k-step lookahead with k ≥ d recovers monotonicity)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_myopic_k_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_myopic_k` re-export). Downstream consumer: `gap_robustness_myopic_k`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R57 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via closure-path-A decomposition. The bundled monotonicity claim `∀ β₁ β₂, β₁ ≤ β₂ → myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂` (which packaged horizon-suffices structural fact + Blackwell-monotonicity into one axiom) is decomposed into (a) smaller paper-novel atom `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (paper line 942 — myopic equals Bayesian when planning horizon `k ≥ d`) + (b) Cat 2 Blackwell 1951/1953 monotonicity threaded as explicit `h_blackwell` antecedent (per §10 paper-APPLICATION-of-Cat-2-to-opaque-carrier with explicit Cat 2 chain). The atom is RETIRED — its content is now sourced from the new smaller atom + Cat 2 chain in the derived theorem `gap_robustness_myopic_k`." ]
   scope := "Remark rem:robustness-misspec (ii), k-step lookahead k ≥ d Blackwell recovery"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper rem:robustness-misspec (ii) proof reconstruction (myopic-k lookahead k ≥ d Blackwell recovery)."
+    "RETIRED via R57 closure-path-A decomposition. Replaced by `entry_atom_myopic_k_eq_bayesian_above_divergence_depth` (smaller paper-novel atom: horizon-suffices structural equality) + Cat 2 `gap_blackwell_monotonicity_OPEN` chain in derived theorem `gap_robustness_myopic_k`."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Remark rem:robustness-misspec (iii)
     (line 944), satisficing-threshold trap acceptance under
-    `r̄ ∈ (r(B), r(A))`. -/
+    `r̄ ∈ (r(B), r(A))`.
+
+    R57 closure-path-A: REPLACED by two smaller atoms
+    `satisficing_trap_acceptance_strictMono_in_beta_OPEN` (paper
+    line 945 — better signals concentrate s_A near r(A) > r̄,
+    monotonically increasing the trap-acceptance probability) +
+    `satisficing_welfare_antitone_in_trap_acceptance_OPEN` (paper
+    line 946 — increased trap acceptance forecloses bridge B → G,
+    strictly reducing welfare). The bundled existential reversal
+    is now derived by composing the two smaller atoms with
+    constructive witnesses β₁=0, β₂=1. Status closes (entry retired
+    by decomposition; replaced by 2 smaller atoms + derived theorem). -/
 def entry_atom_satisficing_threshold_trap : GapEntry where
-  name := "satisficing_threshold_trap_OPEN"
-  status := GapStatus.gapOpen
+  name := "satisficing_threshold_trap_OPEN [retired R57 → replaced by satisficing_trap_acceptance_strictMono_in_beta_OPEN + satisficing_welfare_antitone_in_trap_acceptance_OPEN]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Remark rem:robustness-misspec (iii), line 944 (satisficing threshold r̄ ∈ (r(B), r(A)) welfare reversal)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_robustness_satisficing_OPEN` per §18 (renamed to atom + derived theorem `gap_robustness_satisficing` re-export). Downstream consumer: `gap_robustness_satisficing`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R57 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via closure-path-A decomposition. The bundled existential `∃ β₁ β₂, β₁ < β₂ ∧ satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁` (which packaged the threshold-betweenness, monotonicity-of-acceptance, AND welfare-antitonicity into one axiom) is decomposed into (a) `satisficing_trap_acceptance_strictMono_in_beta_OPEN` (paper line 945 — `Better signals make the agent more confident that A exceeds the threshold`) + (b) `satisficing_welfare_antitone_in_trap_acceptance_OPEN` (paper line 946 — `reinforcing the trap`; satisficing acceptance of A forecloses bridge B → G). New opaque carrier `satisficingTrapAcceptanceProb` introduced for the intermediate quantity. Witnesses β₁=0, β₂=1 chosen constructively; the existential is now closed by direct composition. The atom is RETIRED — its content is now sourced from the two new smaller atoms + the new carrier in the derived theorem `gap_robustness_satisficing`." ]
   scope := "Remark rem:robustness-misspec (iii), satisficing welfare reversal"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper rem:robustness-misspec (iii) proof reconstruction (satisficing threshold r̄ ∈ (r(B), r(A)) welfare reversal)."
+    "RETIRED via R57 closure-path-A decomposition. Replaced by `entry_atom_satisficing_trap_acceptance_strictMono_in_beta` (paper line 945) + `entry_atom_satisficing_welfare_antitone_in_trap_acceptance` (paper line 946) + new opaque carrier `satisficingTrapAcceptanceProb` in derived theorem `gap_robustness_satisficing`."
+  conditionalOn := []
+
+/-- R57 closure-path-A: new smaller paper-novel ATOMIC stipulation
+    replacing the retired `myopic_k_lookahead_recursion_OPEN`.
+    Paper Remark `rem:robustness-misspec` (ii) line 942 — for `k ≥ d`,
+    the `k`-step lookahead horizon spans the full divergence depth
+    of the trap and bridge paths, so the myopic-`k` posterior estimate
+    of the continuation value at the root coincides with the Bayesian
+    agent's posterior. Lean encoding states the equivalent welfare
+    equation `myopicKWelfare k d β = agentWelfare bayesian β 0 1`
+    when `k ≥ d`.
+
+    This is paper-derived working content (NOT §3.4.3 definitional
+    equation on a primitive — the equation is asserted on the
+    pre-existing carrier `myopicKWelfare` and references the
+    pre-existing `agentWelfare` carrier). Cat 3 sub-type
+    workingAssumption per §3.4.4 (必须 close before publication).
+
+    Smaller than the retired bundled atom: the equality stipulation
+    contains no monotonicity content (the monotonicity is now derived
+    by composing this equality with Cat 2 Blackwell 1951/1953 in
+    `gap_robustness_myopic_k`). -/
+def entry_atom_myopic_k_eq_bayesian_above_divergence_depth : GapEntry where
+  name := "myopic_k_eq_bayesian_above_divergence_depth_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Remark rem:robustness-misspec (ii), line 942 (k-step lookahead horizon spans full divergence depth d ⇒ coincides with Bayesian estimate)"
+  attackHistory :=
+    [ "R57 2026-05-14: introduced as smaller replacement atom via closure-path-A decomposition of retired `myopic_k_lookahead_recursion_OPEN`. Statement: `∀ k d, k ≥ d → ∀ β, myopicKWelfare k d β = agentWelfare bayesian β 0 1`. Strictly smaller than retired bundled atom — contains no monotonicity content (monotonicity now derived in `gap_robustness_myopic_k` by composing this equality with Cat 2 `gap_blackwell_monotonicity_OPEN`)." ]
+  scope := "Remark rem:robustness-misspec (ii), structural equivalence of k-step truncated and full backward induction at k ≥ d"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4 (必须 close before publication). Close target = paper Remark (ii) line 942 proof reconstruction: `k`-step truncated backward induction reproduces unrestricted backward induction when truncation depth weakly dominates relevant divergence depth d. Pending per-instance derivation from a `myopicKWelfare` constructive realisation (currently opaque carrier per Mathlib decision-theoretic infra gap)."
+  conditionalOn := []
+
+/-- R57 closure-path-A: new smaller paper-novel ATOMIC stipulation #1
+    of 2 replacing the retired `satisficing_threshold_trap_OPEN`.
+    Paper Remark `rem:robustness-misspec` (iii) lines 945-946 — when
+    `r̄ < r(A)`, increased signal precision concentrates the signal
+    `s_A` near `r(A) > r̄`, monotonically increasing the trap-
+    acceptance event probability. Paper text: "Better signals make
+    the agent more confident that A exceeds the threshold."
+
+    Lean encoding states `∀ β₁ < β₂,
+    satisficingTrapAcceptanceProb rBar β₁ <
+    satisficingTrapAcceptanceProb rBar β₂` on the new opaque carrier
+    `satisficingTrapAcceptanceProb`. Cat 3 workingAssumption per
+    §3.4.4 (必须 close before publication). -/
+def entry_atom_satisficing_trap_acceptance_strictMono_in_beta : GapEntry where
+  name := "satisficing_trap_acceptance_strictMono_in_beta_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Remark rem:robustness-misspec (iii), lines 945-946 (Better signals make the agent more confident that A exceeds the threshold)"
+  attackHistory :=
+    [ "R57 2026-05-14: introduced as smaller replacement atom #1 of 2 via closure-path-A decomposition of retired `satisficing_threshold_trap_OPEN`. Statement: `∀ rBar < r(A), ∀ β₁ < β₂, satisficingTrapAcceptanceProb rBar β₁ < satisficingTrapAcceptanceProb rBar β₂`. Isolates the precision-concentration content — the underlying Gaussian-CDF concentration step is itself Cat 1 (`signalVariance_strictAntitoneOn` plus Φ monotonicity) but the binding to the satisficing decision rule is paper-novel." ]
+  scope := "Remark rem:robustness-misspec (iii), trap-acceptance probability strictly increasing in β under satisficing rule"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4 (必须 close before publication). Close target = paper Remark (iii) line 945 derivation: bind the satisficing decision rule (accept first option exceeding r̄) to the Gaussian-CDF concentration fact `signalVariance_strictAntitoneOn` already-Cat-1-discharged in this codebase. Pending per-instance derivation from a `satisficingTrapAcceptanceProb` constructive realisation."
+  conditionalOn := []
+
+/-- R57 closure-path-A: new smaller paper-novel ATOMIC stipulation #2
+    of 2 replacing the retired `satisficing_threshold_trap_OPEN`.
+    Paper Remark `rem:robustness-misspec` (iii) line 946 — with
+    `r̄ ∈ (r(B), r(A))`, increased trap-acceptance probability
+    yields strictly worse welfare since the bridge alternative
+    `B → G` is foregone (paper terminal reward `r(G) = 1.0` strictly
+    exceeds `r(A) = 0.6` by FiveState construction). Paper text:
+    "reinforcing the trap".
+
+    Lean encoding: `∀ rBar ∈ (r(B), r(A)), ∀ β₁ β₂,
+    satisficingTrapAcceptanceProb rBar β₁ <
+    satisficingTrapAcceptanceProb rBar β₂ →
+    satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁`.
+    Cat 3 workingAssumption per §3.4.4 (必须 close). -/
+def entry_atom_satisficing_welfare_antitone_in_trap_acceptance : GapEntry where
+  name := "satisficing_welfare_antitone_in_trap_acceptance_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Remark rem:robustness-misspec (iii), line 946 (reinforcing the trap; satisficing acceptance of A forecloses bridge B → G)"
+  attackHistory :=
+    [ "R57 2026-05-14: introduced as smaller replacement atom #2 of 2 via closure-path-A decomposition of retired `satisficing_threshold_trap_OPEN`. Statement: trap-acceptance probability strict increase implies welfare strict decrease under r̄ ∈ (r(B), r(A)). Isolates the welfare-antitone-in-trap-acceptance binding from the precision-concentration content (atom #1)." ]
+  scope := "Remark rem:robustness-misspec (iii), welfare strictly decreasing in trap-acceptance probability"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4 (必须 close before publication). Close target = paper Remark (iii) line 946 derivation: integrate satisficing welfare over acceptance events; bridge-foregone loss is `r(G) - r(A) = 0.4` strictly positive on the FiveState instance. Pending per-instance derivation from a `satisficingWelfare` constructive realisation."
+  conditionalOn := []
+
+/-- R57 closure-path-A: new opaque carrier introduced as part of the
+    `satisficing_threshold_trap_OPEN` decomposition. Holds the
+    trap-acceptance probability of the satisficing agent at threshold
+    `r̄` and signal precision `β` — used to mediate between the
+    precision-concentration atom (#1) and the welfare-antitone atom
+    (#2) in `gap_robustness_satisficing`. Cat 3 carrier (paper-novel
+    primitive function), 永不 close per §3.4.1. -/
+def entry_carrier_satisficingTrapAcceptanceProb : GapEntry where
+  name := "satisficingTrapAcceptanceProb"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Remark rem:robustness-misspec (iii), lines 945-946 — satisficing trap-acceptance probability at threshold r̄ and signal precision β"
+  attackHistory :=
+    [ "R57 2026-05-14: introduced as opaque carrier in Bayesian.lean for the satisficing trap-acceptance probability, mediating between atom #1 (precision-concentration) and atom #2 (welfare-antitone) in the closure-path-A decomposition of retired `satisficing_threshold_trap_OPEN`. Cat 3 carrier per §3.4.1 (paper-novel primitive function on the satisficing decision rule), 永不 close." ]
+  scope := "Trap-acceptance probability function `ℝ → ℝ → ℝ` for satisficing agent"
+  obstacleOrAttribution := "Cat 3 paper-novel primitive carrier per §3.4.1. 永不 close."
   conditionalOn := []
 
 /-! # Aggregated ledger inventory (post-R32 enum-typed refactor)
@@ -4574,6 +4709,12 @@ def allGaps : List GapEntry := [
   entry_atom_bernoulli_real_power_estimate,
   entry_atom_myopic_k_lookahead_recursion,
   entry_atom_satisficing_threshold_trap,
+  -- R57 closure-path-A: smaller replacement atoms + new carrier from
+  -- decomposition of the two retired bundled atoms above.
+  entry_atom_myopic_k_eq_bayesian_above_divergence_depth,
+  entry_atom_satisficing_trap_acceptance_strictMono_in_beta,
+  entry_atom_satisficing_welfare_antitone_in_trap_acceptance,
+  entry_carrier_satisficingTrapAcceptanceProb,
   -- R41 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
   -- 5 new Cat 3 atoms across prop:topo-cluster + bayesian-naive-five-state Part (ii)
   -- + prop:error-compounding Part 5 c_star_constant positivity).

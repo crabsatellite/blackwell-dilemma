@@ -201,8 +201,21 @@ namespace BlackwellDilemma.AxiomAudit
 -- gap_robustness_satisficing now derived theorems composing
 -- atomic-stipulation atoms `myopic_k_lookahead_recursion_OPEN` and
 -- `satisficing_threshold_trap_OPEN`.
+-- R57 closure-path-A: both derived theorems re-derived via strictly-
+-- smaller atoms + Cat 2 Blackwell chain (myopic side — `h_blackwell`
+-- antecedent threaded into `gap_robustness_myopic_k`) / 2-atom
+-- decomposition through new opaque carrier `satisficingTrapAcceptanceProb`
+-- with constructive witnesses β₁=0, β₂=1 (satisficing side). The new
+-- smaller atoms below surface in `#print axioms` of the consuming
+-- derived theorems.
 #print axioms BlackwellDilemma.gap_robustness_myopic_k
 #print axioms BlackwellDilemma.gap_robustness_satisficing
+-- R57 individual atom prints (kernel-purity baseline + audit-chain
+-- visibility):
+#print axioms BlackwellDilemma.myopic_k_eq_bayesian_above_divergence_depth_OPEN
+#print axioms BlackwellDilemma.satisficing_trap_acceptance_strictMono_in_beta_OPEN
+#print axioms BlackwellDilemma.satisficing_welfare_antitone_in_trap_acceptance_OPEN
+#print axioms BlackwellDilemma.satisficingTrapAcceptanceProb
 -- §5 Three-regime arithmetic split (Cat 1 promotion)
 #print axioms BlackwellDilemma.FiveState.gap_three_regime_cognitive_augmentation_arithmetic_part
 
