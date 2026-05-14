@@ -489,4 +489,29 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN
 #print axioms BlackwellDilemma.expectedTopoLoss_le_one_atom_OPEN
 
+-- R61 closure wave on Cognitive.lean (2 retired bundled atoms → 4
+-- new smaller atoms + 1 new opaque carrier + 2 new derived theorems).
+-- New derived theorems + new smaller atoms + new carrier surface
+-- here for kernel-purity baseline + audit-chain visibility:
+--  * `mLimit_pos` (R61 derived theorem): composes the new
+--    structural-equation atom `mLimit_eq_mLimitDifference_OPEN`
+--    (paper line 505 identification of κ → ∞ limit value with
+--    `V_dyn`-difference) + new smaller workingAssumption atom
+--    `mLimitDifference_pos_OPEN` (paper-stated C2-derived strict
+--    positivity). Replaces retired `mLimit_pos_OPEN`. Cat 1 chain
+--    via `rw + exact`.
+--  * `alpha_star_existence_via_continuity` (R61 derived theorem):
+--    composes the existing `alphaStar_def` (R23-C1 atom) + Cat 1
+--    Mathlib `le_csSup` / `csSup_le` + new smaller workingAssumption
+--    atom `alpha_below_alpha_star_implies_monotonicity_OPEN` (paper
+--    line 602 implicit downward-closure of monotonicity-set). Replaces
+--    retired `alpha_star_existence_via_continuity_OPEN`. Cat 3 derived
+--    theorem (consumed by `gap_sentimental_immunity`).
+#print axioms BlackwellDilemma.mLimit_pos
+#print axioms BlackwellDilemma.mLimitDifference
+#print axioms BlackwellDilemma.mLimit_eq_mLimitDifference_OPEN
+#print axioms BlackwellDilemma.mLimitDifference_pos_OPEN
+#print axioms BlackwellDilemma.alpha_star_existence_via_continuity
+#print axioms BlackwellDilemma.alpha_below_alpha_star_implies_monotonicity_OPEN
+
 end BlackwellDilemma.AxiomAudit

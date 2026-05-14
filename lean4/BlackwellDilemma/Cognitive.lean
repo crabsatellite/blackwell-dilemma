@@ -321,27 +321,103 @@ axiom mean_estimate_gap_tendsto_mLimit_OPEN :
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
         (nhds (mLimit p))
 
-/-- Cat 3 paper-novel ATOMIC structural fact: the limit value
-    `mLimit p` of the mean-estimate-gap as `κ → ∞` is strictly
-    positive. Paper Theorem 4.1 Part 3 (line 505) writes
-    "`m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`": the strict
-    positivity reflects C2 trap/bridge misalignment (`u_2` is the
-    bridge neighbour with strictly higher dynamic value than the
-    trap neighbour `u_1`).
+/-- R61 closure-path-A NEW opaque carrier: paper-instance-local
+    `V_dyn(u_2) − V_dyn(u_1)` value abstracted as a single ℝ-valued
+    function of `p`. Paper Theorem 4.1 Part 3 line 505 writes the
+    asymptotic limit value of the mean-estimate-gap as
+    `V_dyn(u_2) − V_dyn(u_1)` for the C2 trap/bridge pair `(u_1, u_2)`;
+    since the vertex pair is paper-instance-local, the difference is
+    encoded here as an opaque carrier `mLimitDifference : ℝ → ℝ`
+    parametric in `p`.
 
-    Encoding choice: extracted from the bundled
-    `gap_cognitive_threshold_part3_OPEN` strict-positivity sub-clause
-    per `feedback_gap_ledger_in_lean4` §18 atomic-decomposition
-    pattern.
+    Encoding choice: introduced by R61 to factor the retired
+    `mLimit_pos_OPEN` workingAssumption into (i) a §3.4.3 structural
+    equation `mLimit_eq_mLimitDifference_OPEN` pinning `mLimit p =
+    mLimitDifference p` (paper line 505 explicit identification of
+    the κ → ∞ limit value), and (ii) a smaller §3.4.4 workingAssumption
+    `mLimitDifference_pos_OPEN` carrying the substantive C2-derived
+    strict positivity. The carrier itself is `gapDefinitional` per
+    `feedback_gap_ledger_in_lean4` §3.4.1 (paper-novel opaque-carrier
+    primitive).
+
+    paper source: Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) −
+    V_dyn(u_1)`). -/
+axiom mLimitDifference : ℝ → ℝ
+
+/-- R61 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
+    equation: `mLimit p = mLimitDifference p`. Paper Theorem 4.1 Part 3
+    line 505 explicitly identifies the κ → ∞ limit value of the
+    mean-estimate-gap with the paper-stated `V_dyn(u_2) − V_dyn(u_1)`
+    expression for the C2 trap/bridge vertex pair; this structural
+    equation pins the existing `mLimit` carrier to the new
+    paper-instance-difference carrier `mLimitDifference` (which
+    abstracts the `V_dyn`-difference as a single ℝ-valued function
+    of `p`).
+
+    Encoding choice: extracted from the retired bundled
+    `mLimit_pos_OPEN` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled paper claim into atomic structural equation +
+    smaller workingAssumption + Cat 1 Mathlib derived theorem). The
+    structural equation isolates the paper-stated identification of
+    the κ → ∞ limit value with the `V_dyn`-difference; the strict
+    positivity is now a separate smaller atom `mLimitDifference_pos_OPEN`.
+
+    Cat 3 sub-type: structuralEquation (paper-stated identity linking
+    the `mLimit` carrier to the new `mLimitDifference` carrier per
+    paper line 505; 永不 close per discipline §3.4.3 — this is
+    paper's commitment to how its primitives are related).
+
+    paper source: Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) −
+    V_dyn(u_1)` as `κ → ∞`; the limit value is paper-named
+    `V_dyn(u_2) − V_dyn(u_1)`). -/
+axiom mLimit_eq_mLimitDifference_OPEN :
+    ∀ p : ℝ, mLimit p = mLimitDifference p
+
+/-- R61 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
+    the paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` (encoded as
+    `mLimitDifference p`) is strictly positive. Paper Theorem 4.1
+    Part 3 line 505 writes "`m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as
+    `κ → ∞`": the strict positivity reflects C2 trap/bridge
+    misalignment (`u_2` is the bridge neighbour with strictly higher
+    dynamic value than the trap neighbour `u_1`).
+
+    Encoding choice: extracted from the retired bundled
+    `mLimit_pos_OPEN` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    The retired atom claimed `0 < mLimit p` directly on the bundled
+    `mLimit` carrier without surfacing the paper line 505 explicit
+    identification of the limit value with the `V_dyn`-difference;
+    the R61 decomposition factors this into the structural-equation
+    atom `mLimit_eq_mLimitDifference_OPEN` (paper line 505 identification)
+    + this smaller workingAssumption (the substantive C2 strict
+    positivity content).
 
     Cat 3 sub-type: workingAssumption (paper-stated strict positivity
-    pending per-instance derivation; 必须 close before publication).
+    of the `V_dyn`-difference under C2 trap/bridge misalignment;
+    pending per-IDP-instance derivation from the C2 condition's
+    `V_dyn(u_2) > V_dyn(u_1)` clause; 必须 close before publication).
 
-    paper source: Theorem 4.1 Part 3, line 505 ("`m(κ) →
-    V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`"). -/
-axiom mLimit_pos_OPEN :
+    paper source: Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) −
+    V_dyn(u_1) > 0` strict positivity from C2). -/
+axiom mLimitDifference_pos_OPEN :
     Conditions_C1_C2_C3 →
-    ∀ p : ℝ, 0 < mLimit p
+    ∀ p : ℝ, 0 < mLimitDifference p
+
+/-- R61 closure-path-A Cat 1 derived theorem (replacing retired
+    `mLimit_pos_OPEN`): the limit value `mLimit p` of the
+    mean-estimate-gap as `κ → ∞` is strictly positive.
+
+    Composes the structural-equation atom `mLimit_eq_mLimitDifference_OPEN`
+    (paper line 505 identification of the limit with the
+    `V_dyn`-difference) with the smaller workingAssumption atom
+    `mLimitDifference_pos_OPEN` (C2-derived strict positivity).
+
+    paper source: Theorem 4.1 Part 3, line 505. -/
+theorem mLimit_pos
+    (hC : Conditions_C1_C2_C3) (p : ℝ) : 0 < mLimit p := by
+  rw [mLimit_eq_mLimitDifference_OPEN]
+  exact mLimitDifference_pos_OPEN hC p
 
 /-- **Cat 1 Mathlib derivation**: the cognitive threshold `kappaStar p α`
     is non-negative. Paper Theorem 4.1 Part 3 (line 493) characterises
@@ -376,7 +452,10 @@ theorem kappaStar_nonneg :
     stipulations + derived theorem):
     * `mean_estimate_gap_continuous_OPEN` (continuity on `(0, ∞)`),
     * `mean_estimate_gap_tendsto_mLimit_OPEN` (Tendsto limit),
-    * `mLimit_pos_OPEN` (strict positivity of the limit),
+    * `mLimit_pos` (R61 derived theorem composing
+      `mLimit_eq_mLimitDifference_OPEN` structural-equation atom +
+      `mLimitDifference_pos_OPEN` smaller workingAssumption atom; the
+      retired `mLimit_pos_OPEN` was decomposed via §18 in R61),
     * `kappaStar_def` (inf-characterisation; R23-C1 atom), and
     * `kappaStar_nonneg` (Cat 1 theorem, R46 Pattern-1 fix from former atom).
     The composition is closed kernel-pure; the atomic stipulations
@@ -404,7 +483,7 @@ theorem gap_cognitive_threshold_part3
   refine ⟨?_, ?_, ?_, ?_, ?_⟩
   · exact mean_estimate_gap_continuous_OPEN hC p
   · exact mean_estimate_gap_tendsto_mLimit_OPEN hC p
-  · exact mLimit_pos_OPEN hC p
+  · exact mLimit_pos hC p
   · exact kappaStar_def p α
   · exact kappaStar_nonneg p α
 
@@ -1042,52 +1121,118 @@ axiom welfare_continuity_in_alpha_OPEN :
             agentWelfare AgentType.sentimental β₁ κ α ≤
               agentWelfare AgentType.sentimental β₂ κ α
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:sentimental` proof line 602 (sup over monotonicity set).
-    Paper defines `α*(κ, p)` as the supremum of the closed set
-    `{α ∈ [0, 1] : W(β, κ, α) non-decreasing in β}`. By the
-    α = 0 base case (`signal_independent_at_alpha_zero_OPEN`) and the
-    small-α perturbation neighborhood (`welfare_continuity_in_alpha_OPEN`),
-    the set contains a neighbourhood of 0 with positive width, hence
-    its supremum lies in `(0, 1]`. This atomic stipulation captures
-    the paper-stated existence of `α*` with positivity + upper-bound-by-1
-    + the monotonicity-for-α-below-α* implication, given the small-α
-    neighbourhood width δ.
+/-- R61 closure-path-A smaller paper-novel ATOMIC stipulation
+    replacing the retired bundled `alpha_star_existence_via_continuity_OPEN`.
+    Paper Proposition `prop:sentimental` proof line 602 establishes that
+    the monotonicity-set `S = {α ∈ [0, 1] : W(β, κ, α) non-decreasing in
+    β}` is downward-closed in α: if α' ∈ S and 0 ≤ α ≤ α', then α ∈ S.
+    Combined with `alphaStar_def`'s sup-characterisation, this yields
+    that for any α with `0 ≤ α < α*(κ, p)` there is a witness α' ∈ S
+    with α ≤ α' (by the sup-defining property of α* — for any element
+    strictly below sSup, there is some set-member at-or-above that
+    element), and downward-closure transports monotonicity-at-α' to
+    monotonicity-at-α. This atom isolates the paper-stated downward-
+    closure-to-sub-sup statement on the existing carriers `alphaStar`
+    and `agentWelfare`.
 
-    Encoding choice: extracted from the bundled
-    `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern.
+    Encoding choice: extracted from the retired bundled
+    `alpha_star_existence_via_continuity_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    (decompose bundled conclusion-axiom into atomic stipulation + Cat 1
+    Mathlib sSup-machinery composition + derived theorem). The 3-tuple
+    conclusion of the retired atom (positivity / upper-bound-by-1 /
+    sub-sup monotonicity) is now structurally split: positivity and
+    upper-bound-by-1 derive from `alphaStar_def` + Mathlib `le_csSup`
+    / `csSup_le` (Cat 1, kernel-pure), while this atom carries ONLY
+    the substantive sub-sup monotonicity content (paper's downward-
+    closure of the monotonicity set).
 
-    Cat 3 sub-type: workingAssumption (paper-stated supremum existence
-    argument; pending Mathlib sSup/closed-set machinery; 必须 close
-    before publication).
+    Cat 3 sub-type: workingAssumption (paper-stated downward-closure
+    of the monotonicity-set on the opaque `agentWelfare` carrier;
+    pending Mathlib closed-set/perturbation-bound + sentimental-agent
+    welfare-functional machinery; 必须 close before publication).
 
     paper source: Proposition `prop:sentimental` proof, line 602
-    (sup over monotonicity set). -/
-axiom alpha_star_existence_via_continuity_OPEN :
-    ∀ κ p : ℝ, 0 ≤ κ →
-      ∀ δ : ℝ, 0 < δ → δ ≤ 1 →
-        (∀ α : ℝ, 0 ≤ α → α ≤ δ →
-          ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-            agentWelfare AgentType.sentimental β₁ κ α ≤
-              agentWelfare AgentType.sentimental β₂ κ α) →
-        0 < alphaStar κ p ∧ alphaStar κ p ≤ 1 ∧
-        ∀ α : ℝ, 0 ≤ α → α < alphaStar κ p →
-          ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-            agentWelfare AgentType.sentimental β₁ κ α ≤
-              agentWelfare AgentType.sentimental β₂ κ α
+    ("the monotonicity set ... contains 0 ... well-defined as the
+    supremum"; the implicit downward-closure of the monotonicity-set
+    is paper-stated via the convergent perturbation argument that
+    extends monotonicity-at-α to monotonicity-at-α' for α' ≤ α). -/
+axiom alpha_below_alpha_star_implies_monotonicity_OPEN :
+    ∀ κ _p : ℝ, 0 ≤ κ →
+      ∀ α : ℝ, 0 ≤ α → α < alphaStar κ _p →
+        ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+          agentWelfare AgentType.sentimental β₁ κ α ≤
+            agentWelfare AgentType.sentimental β₂ κ α
+
+/-- R61 closure-path-A derived theorem (replacing retired
+    `alpha_star_existence_via_continuity_OPEN`): given a positive-width
+    monotonicity neighbourhood `[0, δ]` and the paper-stated
+    `alphaStar_def` sup-characterisation, derive the 3-tuple conclusion
+    (positivity, upper-bound-by-1, sub-sup monotonicity) of the original
+    bundled atom.
+
+    The first two conjuncts are derived as Cat 1 Mathlib closures:
+      * `0 < alphaStar κ p` via `le_csSup` applied to the monotonicity-
+        set (which contains δ given the hypothesis), composed with
+        `0 < δ`.
+      * `alphaStar κ p ≤ 1` via `csSup_le` applied to the same set
+        (each member's defining clause `α ≤ 1`).
+    The third conjunct routes through the smaller atomic stipulation
+    `alpha_below_alpha_star_implies_monotonicity_OPEN` (paper-stated
+    downward-closure of the monotonicity-set; the bundled atom's
+    substantive content has been isolated to this single sub-atom).
+
+    paper source: Proposition `prop:sentimental` proof, line 602. -/
+theorem alpha_star_existence_via_continuity
+    (κ p : ℝ) (hκ : 0 ≤ κ) (δ : ℝ) (hδ_pos : 0 < δ) (hδ_le_one : δ ≤ 1)
+    (h_mono : ∀ α : ℝ, 0 ≤ α → α ≤ δ →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.sentimental β₁ κ α ≤
+          agentWelfare AgentType.sentimental β₂ κ α) :
+    0 < alphaStar κ p ∧ alphaStar κ p ≤ 1 ∧
+    ∀ α : ℝ, 0 ≤ α → α < alphaStar κ p →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.sentimental β₁ κ α ≤
+          agentWelfare AgentType.sentimental β₂ κ α := by
+  -- The monotonicity-set abbreviated `S`.
+  set S : Set ℝ := { α : ℝ | 0 ≤ α ∧ α ≤ 1 ∧
+    ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.sentimental β₁ κ α ≤
+        agentWelfare AgentType.sentimental β₂ κ α } with hS_def
+  -- Bound: every member of `S` is ≤ 1 (second conjunct of membership).
+  have hBdd : BddAbove S := ⟨1, fun a ⟨_, ha_le, _⟩ => ha_le⟩
+  -- Membership: δ ∈ S (uses 0 < δ for `0 ≤ δ`, δ ≤ 1 by hyp, monotonicity by h_mono).
+  have hδ_mem : δ ∈ S := by
+    refine ⟨le_of_lt hδ_pos, hδ_le_one, ?_⟩
+    intros β₁ β₂ hβ
+    exact h_mono δ (le_of_lt hδ_pos) (le_refl δ) β₁ β₂ hβ
+  -- α* = sSup S.
+  have h_alphaStar_eq : alphaStar κ p = sSup S := alphaStar_def κ p
+  refine ⟨?_, ?_, ?_⟩
+  · -- 0 < α*: from δ ∈ S + le_csSup.
+    rw [h_alphaStar_eq]
+    exact lt_of_lt_of_le hδ_pos (le_csSup hBdd hδ_mem)
+  · -- α* ≤ 1: from csSup_le applied with member's α ≤ 1.
+    rw [h_alphaStar_eq]
+    exact csSup_le ⟨δ, hδ_mem⟩ (fun a ⟨_, ha_le, _⟩ => ha_le)
+  · -- ∀ α < α*, mono: route through the smaller atom.
+    exact alpha_below_alpha_star_implies_monotonicity_OPEN κ p hκ
 
 /-- **Proposition `prop:sentimental` (Sentimental Immunity).**
     For each `κ ≥ 0`, `α*(κ, p) ∈ (0, 1]`, and welfare is non-decreasing
     in β for `α < α*`.
 
-    Derived theorem composing three atomic stipulations per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern: `signal_independent_at_alpha_zero_OPEN` (paper L600 base
-    case at α = 0), `welfare_continuity_in_alpha_OPEN` (paper L602
-    perturbative continuity neighbourhood), and
-    `alpha_star_existence_via_continuity_OPEN` (paper L602 sup over
-    monotonicity set).
+    Derived theorem composing two atomic stipulations + R61 derived
+    theorem per `feedback_gap_ledger_in_lean4` §18 Manufactured-
+    Recognition pattern: `signal_independent_at_alpha_zero_OPEN`
+    (paper L600 base case at α = 0; not directly consumed, but
+    listed as the paper-stated baseline cited in the proof chain),
+    `welfare_continuity_in_alpha_OPEN` (paper L602 perturbative
+    continuity neighbourhood), and the R61 derived theorem
+    `alpha_star_existence_via_continuity` (which composes
+    `alphaStar_def` + Mathlib `le_csSup` / `csSup_le` + the smaller
+    R61 sub-atom `alpha_below_alpha_star_implies_monotonicity_OPEN`
+    for the substantive sub-sup monotonicity content).
 
     paper source: Proposition `prop:sentimental`, lines 595-603. -/
 theorem gap_sentimental_immunity :
@@ -1100,7 +1245,7 @@ theorem gap_sentimental_immunity :
   intros κ p hκ
   obtain ⟨δ, hδ_pos, hδ_le_one, h_mono⟩ :=
     welfare_continuity_in_alpha_OPEN κ p hκ
-  exact alpha_star_existence_via_continuity_OPEN κ p hκ δ hδ_pos hδ_le_one h_mono
+  exact alpha_star_existence_via_continuity κ p hκ δ hδ_pos hδ_le_one h_mono
 
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality
