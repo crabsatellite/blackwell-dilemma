@@ -725,37 +725,332 @@ private theorem L_below_limit_at_some_beta_proof
     mul_neg_of_pos_of_neg h_first_pos h_second_neg
   linarith [h_rearr, h_prod_neg]
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+/-! ### R81 substantive closure of `interior_minimiser_existence`.
+
+The interior-minimiser existence claim follows from the extreme value
+theorem applied to the *concrete* `L` carrier, using the R80 endpoint
+limits. The chain:
+  * `L(·, 0)` is continuous on `(0, ∞)` (composition of the continuous
+    `signalVariance`, `Real.sqrt`, division by a positive function,
+    and `Phi`);
+  * R80's `L_below_limit_at_some_beta_proof` supplies an interior
+    point `β* > 0` with `L(β*, 0) < 0.4`;
+  * R80's `L_tendsto_atZero` / `L_tendsto_limit_atTop` show `L` exceeds
+    `L(β*, 0)` near both ends of `(0, ∞)` (it tends to `0.425 > L(β*,0)`
+    at `0⁺` and to `0.4 > L(β*,0)` at `∞`), and the closed-form value
+    `L(0, 0) = 0.425 > L(β*, 0)` handles the `β = 0` endpoint;
+  * hence the minimum of `L(·,0)` over a compact `[ε, M]` (extreme
+    value theorem, `IsCompact.exists_isMinOn`) is a *global* minimum
+    over `[0, ∞)`, and is interior (positive).
+
+Mathlib lemmas: `IsCompact.exists_isMinOn`, `isCompact_Icc`,
+`ContinuousOn.continuousWithinAt`, `Real.continuous_sqrt`,
+`Continuous.rpow_const` / `Real.continuousAt_rpow_const`,
+`ContinuousOn.div`, `Filter.Tendsto.eventually`, `eventually_gt_nhds`,
+`Filter.eventually_gt_atTop`, `eventually_nhdsWithin_iff`,
+plus `Phi_continuousAt`, `Phi_zero`. -/
+
+/-- `signalVariance` is continuous on `(0, ∞)`: the denominator
+    `2^(2β) − 1` is continuous everywhere and strictly positive
+    (hence non-zero) for `β > 0`, so the reciprocal is continuous
+    there. -/
+private theorem signalVariance_continuousOn_Ioi :
+    ContinuousOn signalVariance (Set.Ioi (0 : ℝ)) := by
+  unfold signalVariance
+  have h_den_cont : Continuous (fun β : ℝ => (2 : ℝ) ^ (2 * β) - 1) := by
+    have h_rpow : Continuous (fun β : ℝ => (2 : ℝ) ^ (2 * β)) := by
+      have h2 : (0 : ℝ) < 2 := by norm_num
+      exact (Real.continuous_const_rpow (by norm_num)).comp
+        (continuous_const.mul continuous_id)
+    exact h_rpow.sub continuous_const
+  apply ContinuousOn.div continuousOn_const h_den_cont.continuousOn
+  intro β hβ
+  have hβ_pos : 0 < β := hβ
+  have h2β_pos : 0 < 2 * β := by linarith
+  have : (1 : ℝ) < (2 : ℝ) ^ (2 * β) :=
+    Real.one_lt_rpow (by norm_num) h2β_pos
+  linarith
+
+/-- `√(2·signalVariance β)` is continuous and strictly positive on
+    `(0, ∞)`. -/
+private theorem sqrt_two_sigma_continuousOn_Ioi :
+    ContinuousOn (fun β : ℝ => Real.sqrt (2 * signalVariance β))
+      (Set.Ioi (0 : ℝ)) :=
+  Real.continuous_sqrt.comp_continuousOn
+    (continuousOn_const.mul signalVariance_continuousOn_Ioi)
+
+/-- `P_trap` is continuous on `(0, ∞)`: `Δ_S / √(2σ²(β))` is a
+    continuous function (division by the strictly-positive continuous
+    `√(2σ²)`) and `Φ` is continuous everywhere. -/
+private theorem P_trap_continuousOn_Ioi :
+    ContinuousOn P_trap (Set.Ioi (0 : ℝ)) := by
+  unfold P_trap
+  have h_arg : ContinuousOn
+      (fun β : ℝ => Delta_S / Real.sqrt (2 * signalVariance β))
+      (Set.Ioi (0 : ℝ)) := by
+    apply ContinuousOn.div continuousOn_const sqrt_two_sigma_continuousOn_Ioi
+    intro β hβ
+    exact (sqrt_two_sigma_pos hβ).ne'
+  exact fun β hβ => (Phi_continuousAt _).comp_continuousWithinAt (h_arg β hβ)
+
+/-- `Φ_B` is continuous on `(0, ∞)`: identical chain to
+    `P_trap_continuousOn_Ioi` with `Δ_B` in place of `Δ_S`. -/
+private theorem Phi_B_continuousOn_Ioi :
+    ContinuousOn Phi_B (Set.Ioi (0 : ℝ)) := by
+  unfold Phi_B
+  have h_arg : ContinuousOn
+      (fun β : ℝ => Delta_B / Real.sqrt (2 * signalVariance β))
+      (Set.Ioi (0 : ℝ)) := by
+    apply ContinuousOn.div continuousOn_const sqrt_two_sigma_continuousOn_Ioi
+    intro β hβ
+    exact (sqrt_two_sigma_pos hβ).ne'
+  exact fun β hβ => (Phi_continuousAt _).comp_continuousWithinAt (h_arg β hβ)
+
+/-- **`L(·, p)` is continuous on `(0, ∞)`** for every fixed `p` —
+    composition of the continuous `P_trap`, `Phi_B` via the concrete
+    `L` definition (`p` enters only as a constant).
+    paper source: Proposition `prop:interior-optimum`, the loss
+    `L(β)` is continuous (line 769-779). -/
+private theorem L_continuousOn_Ioi (p : ℝ) :
+    ContinuousOn (fun β : ℝ => L β p) (Set.Ioi (0 : ℝ)) := by
+  unfold L
+  exact ((P_trap_continuousOn_Ioi.mul continuousOn_const).add
+    (((continuousOn_const.sub P_trap_continuousOn_Ioi).mul
+      continuousOn_const).mul
+      (continuousOn_const.sub
+        (continuousOn_const.mul Phi_B_continuousOn_Ioi))))
+
+/-- **Closed-form boundary value `L(0, 0) = 0.425`.** At `β = 0`,
+    `signalVariance 0 = 1/(2⁰ − 1) = 1/0 = 0` (Lean division
+    convention), `√0 = 0`, `Δ/0 = 0`, so `P_trap 0 = Φ_B 0 = Φ(0) =
+    1/2`, giving `L(0,0) = (1/2)·0.4 + (1/2)·0.9·(1 − 1·(1/2)) =
+    0.425`. paper source: line 825 (`L(0,p) = 0.425 + 0.225p`,
+    at `p = 0`). -/
+private theorem L_zero_zero : L 0 0 = (425 / 1000 : ℝ) := by
+  have h_sv : signalVariance 0 = 0 := by
+    unfold signalVariance
+    norm_num
+  have h_Pt : P_trap 0 = (1 / 2 : ℝ) := by
+    unfold P_trap
+    rw [h_sv]
+    simp [Phi_zero]
+  have h_Pb : Phi_B 0 = (1 / 2 : ℝ) := by
+    unfold Phi_B
+    rw [h_sv]
+    simp [Phi_zero]
+  unfold L
+  rw [h_Pt, h_Pb]
+  norm_num
+
+/-- **R81 substantive closure of `interior_minimiser_existence`.**
+    Existence of an interior global minimiser `β* > 0` of `L(·, 0)`:
+    `∃ β* > 0, ∀ β ≥ 0, L(β*, 0) ≤ L(β, 0)`. Proof = extreme value
+    theorem on the concrete `L` carrier.
+
+    Steps: (1) take R80's below-limit witness `β₀ > 0` with
+    `L(β₀,0) < 0.4`; (2) `L_tendsto_atZero` (`L → 0.425 > L(β₀,0)` as
+    `β → 0⁺`) gives `ε ∈ (0, β₀]` with `L β 0 > L β₀ 0` for
+    `β ∈ (0, ε]`, and `L_zero_zero` covers `β = 0`; (3)
+    `L_tendsto_limit_atTop` (`L → 0.4 > L(β₀,0)`) gives `M ≥ β₀` with
+    `L β 0 > L β₀ 0` for `β ≥ M`; (4) `L_continuousOn_Ioi` +
+    `IsCompact.exists_isMinOn` on the compact `[ε, M]` (which contains
+    `β₀`) yields a minimiser `β_min ∈ [ε, M]`, so `β_min > 0` and
+    `L β_min 0 ≤ L β₀ 0`; (5) `β_min` beats every `β ≥ 0` by case
+    split on `β < ε` / `β ∈ [ε,M]` / `β > M`.
+
+    Mathlib lemmas: `IsCompact.exists_isMinOn`, `isCompact_Icc`,
+    `L_continuousOn_Ioi`, `Filter.Tendsto.eventually`,
+    `eventually_gt_nhds`, `Filter.eventually_gt_atTop`,
+    `eventually_nhdsWithin_iff`. -/
+private theorem interior_minimiser_existence_proof :
+    ∃ β_star : ℝ, 0 < β_star ∧
+      ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 := by
+  -- (1) R80 below-limit witness `β₀ > 0`, `L β₀ 0 < 0.4`.
+  obtain ⟨β₀, hβ₀_pos, hβ₀_lt⟩ :=
+    L_below_limit_at_some_beta_proof 0 le_rfl
+      (by unfold p_1; norm_num)
+  -- (2) Near `0⁺`: `L → 0.425 + 0 = 0.425 > L β₀ 0`.
+  have h_zero_lim : (425 / 1000 : ℝ) + (225 / 1000 : ℝ) * 0 = 425 / 1000 := by
+    ring
+  have h_tendsto_zero : Filter.Tendsto (fun β : ℝ => L β 0)
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds (425 / 1000 : ℝ)) := by
+    have := L_tendsto_atZero 0
+    rwa [h_zero_lim] at this
+  have hβ₀_lt_zerolim : L β₀ 0 < (425 / 1000 : ℝ) := by linarith
+  have h_ev_zero : ∀ᶠ β in nhdsWithin (0 : ℝ) (Set.Ioi 0),
+      L β₀ 0 < L β 0 :=
+    h_tendsto_zero.eventually (eventually_gt_nhds hβ₀_lt_zerolim)
+  rw [eventually_nhdsWithin_iff, Metric.eventually_nhds_iff] at h_ev_zero
+  obtain ⟨δ, hδ_pos, hδ_prop⟩ := h_ev_zero
+  -- `ε := min (δ/2) β₀ > 0`, and on `(0, ε]` we have `L β₀ 0 < L β 0`.
+  set ε : ℝ := min (δ / 2) β₀ with hε_def
+  have hε_pos : 0 < ε := lt_min (by linarith) hβ₀_pos
+  have hε_le_β₀ : ε ≤ β₀ := min_le_right _ _
+  have h_below_ε : ∀ β : ℝ, 0 < β → β ≤ ε → L β₀ 0 < L β 0 := by
+    intro β hβ_pos hβ_le_ε
+    have hβ_lt_δ : dist β (0 : ℝ) < δ := by
+      rw [Real.dist_eq, sub_zero, abs_of_pos hβ_pos]
+      have : β ≤ δ / 2 := le_trans hβ_le_ε (min_le_left _ _)
+      linarith
+    exact hδ_prop hβ_lt_δ hβ_pos
+  -- (3) Near `+∞`: `L → 0.4 > L β₀ 0`.
+  have hβ₀_lt_4 : L β₀ 0 < (4 / 10 : ℝ) := hβ₀_lt
+  have h_ev_top : ∀ᶠ β in Filter.atTop, L β₀ 0 < L β 0 :=
+    (L_tendsto_limit_atTop 0).eventually (eventually_gt_nhds hβ₀_lt_4)
+  obtain ⟨M₀, hM₀_prop⟩ := h_ev_top.exists_forall_of_atTop
+  set M : ℝ := max M₀ β₀ with hM_def
+  have hM_ge_β₀ : β₀ ≤ M := le_max_right _ _
+  have h_above_M : ∀ β : ℝ, M ≤ β → L β₀ 0 < L β 0 := by
+    intro β hβ_ge_M
+    exact hM₀_prop β (le_trans (le_max_left _ _) hβ_ge_M)
+  have hε_le_M : ε ≤ M := le_trans hε_le_β₀ hM_ge_β₀
+  -- (4) Extreme value theorem on the compact `[ε, M]`.
+  have h_cont_Icc : ContinuousOn (fun β : ℝ => L β 0) (Set.Icc ε M) :=
+    (L_continuousOn_Ioi 0).mono (fun β hβ => lt_of_lt_of_le hε_pos hβ.1)
+  have h_nonempty : (Set.Icc ε M).Nonempty := ⟨ε, ⟨le_rfl, hε_le_M⟩⟩
+  obtain ⟨β_min, hβ_min_mem, hβ_min_le⟩ :=
+    (isCompact_Icc).exists_isMinOn h_nonempty h_cont_Icc
+  have hβ_min_pos : 0 < β_min := lt_of_lt_of_le hε_pos hβ_min_mem.1
+  -- `β₀ ∈ [ε, M]`, so `L β_min 0 ≤ L β₀ 0`.
+  have hβ₀_mem : β₀ ∈ Set.Icc ε M := ⟨hε_le_β₀, hM_ge_β₀⟩
+  have hβ_min_le_β₀ : L β_min 0 ≤ L β₀ 0 := hβ_min_le hβ₀_mem
+  -- (5) `β_min` is a global minimiser over `[0, ∞)`.
+  refine ⟨β_min, hβ_min_pos, ?_⟩
+  intro β hβ_nonneg
+  rcases lt_or_ge β ε with hβ_lt_ε | hβ_ge_ε
+  · -- `β < ε`: either `β = 0` (use `L_zero_zero`) or `0 < β ≤ ε`.
+    rcases eq_or_lt_of_le hβ_nonneg with hβ_eq | hβ_pos
+    · -- `β = 0`: `L 0 0 = 0.425 > L β₀ 0 ≥ L β_min 0`.
+      rw [← hβ_eq, L_zero_zero]
+      linarith [hβ_min_le_β₀, hβ₀_lt_zerolim]
+    · -- `0 < β ≤ ε`: boundary bound `L β₀ 0 < L β 0`.
+      have := h_below_ε β hβ_pos (le_of_lt hβ_lt_ε)
+      linarith [hβ_min_le_β₀]
+  · rcases le_or_gt β M with hβ_le_M | hβ_gt_M
+    · -- `β ∈ [ε, M]`: `β_min` minimises on the compact.
+      exact hβ_min_le ⟨hβ_ge_ε, hβ_le_M⟩
+    · -- `β > M`: boundary bound `L β₀ 0 < L β 0`.
+      have := h_above_M β (le_of_lt hβ_gt_M)
+      linarith [hβ_min_le_β₀]
+
+/-- Cat 3 paper-novel claim, **R81 SUBSTANTIVE CLOSURE**
+    (workingAssumption → derivedTheorem): paper Proposition
     `prop:interior-optimum` (line 774) gives the existence of an
-    interior minimiser `β* ≈ 1.5 bits` of the Regime (i) `p = 0`
-    loss function `L(·, 0)`. Encoded existentially on the existing
-    carrier `L`: there exists a positive `β_star` such that
-    `L(β_star, 0) ≤ L(β, 0)` for all `β ≥ 0`. The numeric witness
-    `β* ≈ 1.5 bits` is a paper-stated computational fact deferred to
-    a per-instance numeric closure (Mathlib gap on the IDP-specific
-    transcendental optimisation).
+    interior minimiser of the Regime (i) `p = 0` loss function
+    `L(·, 0)`. Encoded existentially on the existing carrier `L`:
+    there exists a positive `β_star` such that `L(β_star, 0) ≤
+    L(β, 0)` for all `β ≥ 0`.
 
-    Encoding choice: extracted as standalone Cat 3 atomic stipulation
-    from the bundled `gap_interior_optimum_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
-    (decompose bundled conclusion-axiom into atomic stipulation +
-    derived theorem).
-
-    Cat 3 sub-type: workingAssumption (paper-stated existence claim
-    on the L carrier; pending Mathlib transcendental optimisation
-    machinery for the explicit `β* ≈ 1.5 bits` numeric witness;
-    必须 close before publication).
+    Previously an opaque Cat 3 axiom (the explicit `β* ≈ 1.5 bits`
+    numeric witness was deferred to a transcendental optimisation).
+    R81 closes it by genuine real analysis: the *existence* of an
+    interior minimiser does not require the explicit numeric witness
+    — it follows from the extreme value theorem
+    (`interior_minimiser_existence_proof`), composing R80's L-analysis
+    machinery (`L_below_limit_at_some_beta_proof`, `L_tendsto_atZero`,
+    `L_tendsto_limit_atTop`) with the new continuity lemma
+    `L_continuousOn_Ioi` and the closed-form boundary value
+    `L_zero_zero` (`L(0,0) = 0.425`). No `Classical.choose`, no opaque
+    carrier — fully derived. The numeric value `β* ≈ 1.5 bits` remains
+    a separate paper-stated computational fact, not needed for the
+    existence claim.
 
     paper source: Proposition `prop:interior-optimum`, line 774. -/
-axiom interior_minimiser_existence_OPEN :
+theorem interior_minimiser_existence_OPEN :
     ∃ β_star : ℝ, 0 < β_star ∧
-      ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0
+      ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 :=
+  interior_minimiser_existence_proof
+
+/-- **R81 substantive closure of `L_minimum_exists_in_regime_i`.**
+    For every `p ∈ [0, p_1)`, the loss `L(·, p)` has an interior
+    minimiser over the positive reals: `∃ β_min > 0, ∀ β > 0,
+    L(β_min, p) ≤ L(β, p)`. Same extreme-value-theorem argument as
+    `interior_minimiser_existence_proof`, generalised to `p` and
+    restricted to `β > 0` (so no `β = 0` endpoint to handle).
+
+    Steps: (1) R80's `L_below_limit_at_some_beta_proof p` gives
+    `β₀ > 0` with `L(β₀,p) < 0.4`; (2) `L_tendsto_atZero p`
+    (`L → 0.425 + 0.225p ≥ 0.425 > 0.4 > L(β₀,p)` as `β → 0⁺`) gives
+    `ε ∈ (0, β₀]` with `L β p > L β₀ p` for `β ∈ (0, ε]`; (3)
+    `L_tendsto_limit_atTop p` (`L → 0.4 > L(β₀,p)`) gives `M ≥ β₀`
+    with `L β p > L β₀ p` for `β ≥ M`; (4) `L_continuousOn_Ioi p` +
+    `IsCompact.exists_isMinOn` on the compact `[ε, M]` ∋ `β₀` yields a
+    minimiser `β_min`; (5) `β_min` beats every `β > 0` by the
+    `β < ε` / `β ∈ [ε,M]` / `β > M` case split.
+
+    Mathlib lemmas: `IsCompact.exists_isMinOn`, `isCompact_Icc`,
+    `L_continuousOn_Ioi`, `Filter.Tendsto.eventually`,
+    `eventually_gt_nhds`, `Filter.eventually_gt_atTop`,
+    `eventually_nhdsWithin_iff`. -/
+private theorem L_minimum_exists_in_regime_i_proof
+    (p : ℝ) (hp_nonneg : 0 ≤ p) (hp_lt_p1 : p < p_1) :
+    ∃ β_min : ℝ, 0 < β_min ∧
+      ∀ β : ℝ, 0 < β → L β_min p ≤ L β p := by
+  -- (1) R80 below-limit witness `β₀ > 0`, `L β₀ p < 0.4`.
+  obtain ⟨β₀, hβ₀_pos, hβ₀_lt⟩ :=
+    L_below_limit_at_some_beta_proof p hp_nonneg hp_lt_p1
+  -- (2) Near `0⁺`: `L → 0.425 + 0.225p ≥ 0.425 > 0.4 > L β₀ p`.
+  have h_zerolim_gt : (4 / 10 : ℝ) <
+      (425 / 1000 : ℝ) + (225 / 1000 : ℝ) * p := by
+    have : 0 ≤ (225 / 1000 : ℝ) * p := by positivity
+    linarith
+  have hβ₀_lt_zerolim : L β₀ p <
+      (425 / 1000 : ℝ) + (225 / 1000 : ℝ) * p := by linarith
+  have h_ev_zero : ∀ᶠ β in nhdsWithin (0 : ℝ) (Set.Ioi 0),
+      L β₀ p < L β p :=
+    (L_tendsto_atZero p).eventually (eventually_gt_nhds hβ₀_lt_zerolim)
+  rw [eventually_nhdsWithin_iff, Metric.eventually_nhds_iff] at h_ev_zero
+  obtain ⟨δ, hδ_pos, hδ_prop⟩ := h_ev_zero
+  set ε : ℝ := min (δ / 2) β₀ with hε_def
+  have hε_pos : 0 < ε := lt_min (by linarith) hβ₀_pos
+  have hε_le_β₀ : ε ≤ β₀ := min_le_right _ _
+  have h_below_ε : ∀ β : ℝ, 0 < β → β ≤ ε → L β₀ p < L β p := by
+    intro β hβ_pos hβ_le_ε
+    have hβ_lt_δ : dist β (0 : ℝ) < δ := by
+      rw [Real.dist_eq, sub_zero, abs_of_pos hβ_pos]
+      have : β ≤ δ / 2 := le_trans hβ_le_ε (min_le_left _ _)
+      linarith
+    exact hδ_prop hβ_lt_δ hβ_pos
+  -- (3) Near `+∞`: `L → 0.4 > L β₀ p`.
+  have h_ev_top : ∀ᶠ β in Filter.atTop, L β₀ p < L β p :=
+    (L_tendsto_limit_atTop p).eventually (eventually_gt_nhds hβ₀_lt)
+  obtain ⟨M₀, hM₀_prop⟩ := h_ev_top.exists_forall_of_atTop
+  set M : ℝ := max M₀ β₀ with hM_def
+  have hM_ge_β₀ : β₀ ≤ M := le_max_right _ _
+  have h_above_M : ∀ β : ℝ, M ≤ β → L β₀ p < L β p := by
+    intro β hβ_ge_M
+    exact hM₀_prop β (le_trans (le_max_left _ _) hβ_ge_M)
+  have hε_le_M : ε ≤ M := le_trans hε_le_β₀ hM_ge_β₀
+  -- (4) Extreme value theorem on the compact `[ε, M]`.
+  have h_cont_Icc : ContinuousOn (fun β : ℝ => L β p) (Set.Icc ε M) :=
+    (L_continuousOn_Ioi p).mono (fun β hβ => lt_of_lt_of_le hε_pos hβ.1)
+  have h_nonempty : (Set.Icc ε M).Nonempty := ⟨ε, ⟨le_rfl, hε_le_M⟩⟩
+  obtain ⟨β_min, hβ_min_mem, hβ_min_le⟩ :=
+    (isCompact_Icc).exists_isMinOn h_nonempty h_cont_Icc
+  have hβ_min_pos : 0 < β_min := lt_of_lt_of_le hε_pos hβ_min_mem.1
+  have hβ₀_mem : β₀ ∈ Set.Icc ε M := ⟨hε_le_β₀, hM_ge_β₀⟩
+  have hβ_min_le_β₀ : L β_min p ≤ L β₀ p := hβ_min_le hβ₀_mem
+  -- (5) `β_min` is a global minimiser over `(0, ∞)`.
+  refine ⟨β_min, hβ_min_pos, ?_⟩
+  intro β hβ_pos
+  rcases lt_or_ge β ε with hβ_lt_ε | hβ_ge_ε
+  · -- `0 < β < ε`: boundary bound `L β₀ p < L β p`.
+    have := h_below_ε β hβ_pos (le_of_lt hβ_lt_ε)
+    linarith [hβ_min_le_β₀]
+  · rcases le_or_gt β M with hβ_le_M | hβ_gt_M
+    · -- `β ∈ [ε, M]`: `β_min` minimises on the compact.
+      exact hβ_min_le ⟨hβ_ge_ε, hβ_le_M⟩
+    · -- `β > M`: boundary bound `L β₀ p < L β p`.
+      have := h_above_M β (le_of_lt hβ_gt_M)
+      linarith [hβ_min_le_β₀]
 
 /-- **Existence of interior optimum** at `β* ≈ 1.5 bits` (derived theorem).
 
-    Derived theorem composing the atomic stipulation
-    `interior_minimiser_existence_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    Derived theorem composing `interior_minimiser_existence_OPEN`,
+    itself **R81-closed** as a derived theorem (extreme value theorem
+    on the concrete `L` carrier — see
+    `interior_minimiser_existence_proof`). No longer rests on an
+    opaque axiom.
 
     paper source: Proposition `prop:interior-optimum`, line 774. -/
 theorem gap_interior_optimum :
@@ -993,45 +1288,48 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
         L β_star₁ p₁ < L β_star₂ p₂ :=
   envelope_derivative_sign_in_p_OPEN
 
-/-- R62 closure-path-A smaller paper-novel ATOMIC stipulation:
-    on Regime (i)'s domain `p ∈ [0, p_1)`, the loss function `L(·, p)`
-    has an interior minimiser over the positive reals — i.e., there
-    exists `β_min > 0` such that for every `β > 0`, `L β_min p ≤ L β p`.
+/-- R62 closure-path-A smaller paper-novel claim, **R81 SUBSTANTIVE
+    CLOSURE** (workingAssumption → derivedTheorem): on Regime (i)'s
+    domain `p ∈ [0, p_1)`, the loss function `L(·, p)` has an interior
+    minimiser over the positive reals — i.e., there exists
+    `β_min > 0` such that for every `β > 0`, `L β_min p ≤ L β p`.
     Paper `prop:three-regime-five-state` Regime (i) (line 814 + proof
     line 825) establishes this via the IVT-style chain: at `p < p_1`,
     `0.9·(1−p)·sup_β Φ_B(β) > 0.5` so `L(β, p) < 0.4 = L(∞, p)` for
     some β, and the unimodal structure of `prop:interior-optimum`
-    (line 774) yields a unique global minimum on `(0, ∞)`.
+    (line 774) yields a global minimum on `(0, ∞)`.
 
-    Encoding choice: extracted from the retired bundled
-    `betaStarOfP_def` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern + R61 `mLimit_pos` precedent.
+    Previously an opaque Cat 3 axiom (the explicit `β*(p)` witness was
+    deferred to a transcendental optimisation). R81 closes it by
+    genuine real analysis: the *existence* of the interior minimiser
+    follows from the extreme value theorem
+    (`L_minimum_exists_in_regime_i_proof`), composing R80's L-analysis
+    machinery (`L_below_limit_at_some_beta_proof`, `L_tendsto_atZero`,
+    `L_tendsto_limit_atTop`) with the new continuity lemma
+    `L_continuousOn_Ioi`. No `Classical.choose` for the *existence*,
+    no opaque carrier — fully derived. (The `betaStarOfP` carrier
+    below still applies `Classical.choose` to *select* a specific
+    minimiser from this now-derived existence theorem — that is the
+    Pattern 5 implicit-function selection, unaffected.)
 
-    Cat 3 sub-type: workingAssumption (paper-stated existence of an
-    interior minimiser of `L(·, p)` on Regime (i)'s domain; pending
-    Mathlib continuous-function-on-compact-interval + transcendental
-    optimisation infrastructure for the explicit `β*(p)` witness;
-    必须 close before publication).
-
-    R74 elevation: this existence atom now serves a STRONGER closure
+    R74 elevation: this existence claim serves a STRONGER closure
     pattern (Pattern 5: existence-via-`Classical.choose`). The opaque
     carrier `betaStarOfP` is replaced by a `noncomputable def` that
-    invokes `Classical.choose` on this existence atom (per-`p`,
-    inside the `0 ≤ p ∧ p < p_1` domain guard); the carrier-
-    identification atom `betaStarOfP_eq_minimiser_witness_OPEN` is
-    consequently retired since `Classical.choose_spec` directly
-    yields the universal-inequality form needed by `betaStarOfP_def`
-    (no uniqueness-of-minimiser premise required at this level).
+    invokes `Classical.choose` on this claim (per-`p`, inside the
+    `0 ≤ p ∧ p < p_1` domain guard); the carrier-identification atom
+    `betaStarOfP_eq_minimiser_witness_OPEN` is consequently retired
+    since `Classical.choose_spec` directly yields the universal-
+    inequality form needed by `betaStarOfP_def`.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 + proof line 825 (existence of interior minimum from
     IVT chain `0.9(1-p)·sup_β Φ_B > 0.5` for `p < p_1` plus the
     unimodal structure of `prop:interior-optimum` line 774). -/
-axiom L_minimum_exists_in_regime_i_OPEN :
+theorem L_minimum_exists_in_regime_i_OPEN :
     ∀ (p : ℝ), 0 ≤ p → p < p_1 →
       ∃ β_min : ℝ, 0 < β_min ∧
-        ∀ (β : ℝ), 0 < β → L β_min p ≤ L β p
+        ∀ (β : ℝ), 0 < β → L β_min p ≤ L β p :=
+  L_minimum_exists_in_regime_i_proof
 
 /-- **Carrier `β*(p)` for Regime (i)'s implicit-function selection.**
 

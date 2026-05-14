@@ -1536,6 +1536,89 @@
   positivity to the discrete second-difference of `agentWelfare` cannot
   be built — SKIP verdict stands.
 
+  ---
+
+  R81 2026-05-15 substantive L-carrier closure wave (extreme value
+  theorem). Baseline carried by R80: 253 entries; wA=49, gapOpen=57,
+  gapClosed=95, derivedTheorem=77.
+
+  R81 closes TWO Cat 3 workingAssumption atoms about the CONCRETE
+  5-state welfare-loss carrier `L β p` (Canonical.lean) — both by
+  genuine real-analysis (the extreme value theorem), NOT by
+  `Classical.choose` / opaque-carrier reclassification. R80's honest
+  scope note said `interior_minimiser_existence_OPEN` "remains an
+  axiom — asserts existence of a GLOBAL strict minimiser, which needs
+  transcendental second-derivative optimisation". R81's KEY INSIGHT:
+  this conflated TWO claims. The EXISTENCE of an interior minimiser
+  does NOT require the explicit `β* ≈ 1.5 bits` numeric witness OR a
+  strict / second-derivative argument — it follows from the EXTREME
+  VALUE THEOREM applied to the concrete continuous `L`:
+   * `interior_minimiser_existence_OPEN` (prop:interior-optimum line
+     774; `∃ β* > 0, ∀ β ≥ 0, L(β*,0) ≤ L(β,0)`):
+     `theorem := interior_minimiser_existence_proof`. The proof: (1)
+     R80's `L_below_limit_at_some_beta_proof 0` gives `β₀ > 0` with
+     `L(β₀,0) < 0.4`; (2) `L_tendsto_atZero 0` (L → 0.425 > L(β₀,0))
+     gives `ε ∈ (0,β₀]` with `L > L(β₀,0)` on `(0,ε]`, and the new
+     closed-form `L_zero_zero` (`L(0,0) = 0.425`) handles the `β = 0`
+     endpoint; (3) `L_tendsto_limit_atTop 0` (L → 0.4 > L(β₀,0)) gives
+     `M ≥ β₀` with `L > L(β₀,0)` on `[M,∞)`; (4) the new continuity
+     lemma `L_continuousOn_Ioi` + `IsCompact.exists_isMinOn` on the
+     compact `[ε,M]` ∋ β₀ yields a minimiser `β_min`; (5) `β_min` is a
+     GLOBAL minimiser over `[0,∞)` (boundary values exceed it).
+   * `L_minimum_exists_in_regime_i_OPEN` (prop:three-regime Regime (i)
+     line 814; `∀ p ∈ [0,p_1), ∃ β_min > 0, ∀ β > 0, L(β_min,p) ≤
+     L(β,p)`): `theorem := L_minimum_exists_in_regime_i_proof`. Same
+     extreme-value-theorem argument, generalised to `p` and restricted
+     to `β > 0` (no `β = 0` endpoint). The R62 obstacle note
+     (`requires ... transcendental optimisation infrastructure for the
+     explicit β*(p) witness`) is resolved — existence ≠ explicit
+     witness.
+
+  New Canonical.lean private lemmas (all Mathlib-derived, no `sorry`):
+  `signalVariance_continuousOn_Ioi` (denominator `2^(2β)−1` continuous
+  and ≠ 0 on `Ioi 0`, via `Real.continuous_const_rpow` +
+  `ContinuousOn.div`), `sqrt_two_sigma_continuousOn_Ioi`,
+  `P_trap_continuousOn_Ioi`, `Phi_B_continuousOn_Ioi`,
+  `L_continuousOn_Ioi` (the concrete `L(·,p)` is continuous on
+  `Ioi 0`), `L_zero_zero` (`L(0,0) = 0.425` — at β=0, `signalVariance
+  0 = 1/0 = 0`, `√0 = 0`, `Δ/0 = 0`, `Phi 0 = 1/2`),
+  `interior_minimiser_existence_proof`,
+  `L_minimum_exists_in_regime_i_proof`. Mathlib lemmas:
+  `IsCompact.exists_isMinOn`, `isCompact_Icc`, `Real.continuous_sqrt`,
+  `Real.continuous_const_rpow`, `ContinuousOn.div`,
+  `Filter.Tendsto.eventually`, `eventually_gt_nhds`,
+  `Filter.eventually_gt_atTop`, `eventually_nhdsWithin_iff`,
+  `Phi_continuousAt`, `Phi_zero`.
+
+  R81 net delta vs R80 baseline (253 entries; wA=49, gapOpen=57,
+  gapClosed=95, derivedTheorem=77):
+   * Total: 253 → 253 (no entry add/delete; 2 reclassifications).
+   * Status: gapOpen 57 → 55 (-2); gapClosed 95 → 97 (+2).
+   * Cat 3 sub: workingAssumption 49 → 47 (-2); derivedTheorem 77 → 79
+     (+2).
+   * inputCategory: unchanged (both entries stay cat3PaperNovel — Cat 3
+     paper-novel claims now carrying a derivedTheorem sub-type with a
+     concrete-`L` extreme-value-theorem proof).
+   * `#print axioms` on both closures = [propext, Classical.choice,
+     Quot.sound] only — no `sorry`, no project `_OPEN` axiom.
+   * Build verified GREEN (full `lake build`).
+
+  R81 verdict: SUBSTANTIVE real-math closure wave (continuation of the
+  R71/R72/R76/R78/R80 substantive-math pattern). The closures are
+  HONEST: each is a genuine extreme-value-theorem proof on the concrete
+  `L` definition, composing R80's L-analysis machinery with a new
+  continuity layer (`L_continuousOn_Ioi`, built bottom-up from
+  `signalVariance` continuity on `Ioi 0`). Honest scope note:
+  `L_unimodal_in_regime_i_OPEN` STILL remains a workingAssumption — it
+  asserts UNIQUENESS (`∀ β', L β' p ≤ L β* p → β' = β*`), which needs
+  strict unimodality / `L'` sign analysis that R80's machinery does not
+  supply (no derivative of `L` is built). `welfare_bounded_below_
+  inflection_OPEN` likewise SKIPPED — it lives on the OPAQUE
+  `agentWelfare` carrier and asserts monotonicity-below-an-inflection-
+  point, also derivative-flavoured. Closing either by reclassification
+  would violate `feedback_truth_over_publication`; both are honest
+  un-closures pending derivative infrastructure.
+
   6-tier status × 3-input-category cross-table (post-R40 historical;
   superseded by R41-R55 above; live numbers printed by `#eval` block):
 
@@ -4773,15 +4856,16 @@ def entry_atom_betaStarOfP_eq_minimiser_witness : GapEntry where
     domain p ∈ [0, p_1), L(·, p) has an interior minimiser. -/
 def entry_atom_L_minimum_exists_in_regime_i : GapEntry where
   name := "L_minimum_exists_in_regime_i_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (existence of interior minimum from `0.9·(1-p)·sup_β Φ_B(β) > 0.5` IVT chain plus the unimodal structure of prop:interior-optimum line 774)"
   attackHistory :=
-    [ "R62 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `betaStarOfP_def` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification atom + smaller existence wA). The retired atom claimed `∀ β > 0, L (betaStarOfP p) p ≤ L β p` directly on the betaStarOfP carrier (bundling carrier identification + existence-of-minimum); the R62 decomposition factors this into the structural-equation atom `betaStarOfP_eq_minimiser_witness_OPEN` (paper line 814 carrier identification) + this smaller workingAssumption (the substantive existence-of-interior-minimum content on the L carrier). Paper proof at line 825 establishes the existence via `0.9·(1−p)·sup_β Φ_B(β) > 0.5` for p < p_1, plus the unimodal structure of prop:interior-optimum (line 774). Cat 1 reduction check: not Mathlib-derivable (depends on transcendental Φ_B analysis on the IDP-specific functional form). Cat 2 reduction check: paper-novel construction. Hosted by `betaStarOfP_def` (Canonical.lean) derived theorem." ]
+    [ "R62 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `betaStarOfP_def` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification atom + smaller existence wA). The retired atom claimed `∀ β > 0, L (betaStarOfP p) p ≤ L β p` directly on the betaStarOfP carrier (bundling carrier identification + existence-of-minimum); the R62 decomposition factors this into the structural-equation atom `betaStarOfP_eq_minimiser_witness_OPEN` (paper line 814 carrier identification) + this smaller workingAssumption (the substantive existence-of-interior-minimum content on the L carrier). Paper proof at line 825 establishes the existence via `0.9·(1−p)·sup_β Φ_B(β) > 0.5` for p < p_1, plus the unimodal structure of prop:interior-optimum (line 774). Cat 1 reduction check: not Mathlib-derivable (depends on transcendental Φ_B analysis on the IDP-specific functional form). Cat 2 reduction check: paper-novel construction. Hosted by `betaStarOfP_def` (Canonical.lean) derived theorem.",
+      "R81 2026-05-15: workingAssumption gapOpen → derivedTheorem gapClosed via SUBSTANTIVE real-analysis closure (`theorem L_minimum_exists_in_regime_i_OPEN := L_minimum_exists_in_regime_i_proof`). The R62 obstacle note (`requires Mathlib continuous-function-on-compact-interval + transcendental optimisation infrastructure`) is resolved: the EXISTENCE of an interior minimiser does NOT require the explicit `β*(p)` numeric witness — it follows from the extreme value theorem. Proof = `L_minimum_exists_in_regime_i_proof` (Canonical.lean): (1) R80's `L_below_limit_at_some_beta_proof p` gives `β₀ > 0` with `L(β₀,p) < 0.4`; (2) `L_tendsto_atZero p` (L → 0.425+0.225p > 0.4 > L(β₀,p) as β → 0⁺) yields `ε ∈ (0,β₀]` with `L β p > L β₀ p` on `(0,ε]`; (3) `L_tendsto_limit_atTop p` (L → 0.4 > L(β₀,p)) yields `M ≥ β₀` with `L β p > L β₀ p` on `[M,∞)`; (4) the NEW continuity lemma `L_continuousOn_Ioi p` (`ContinuousOn (L ·, p) (Ioi 0)` — composition of the continuous `signalVariance` on `Ioi 0`, `Real.sqrt`, division by a positive function, `Phi`) + `IsCompact.exists_isMinOn` on the compact `[ε,M]` ∋ β₀ yields a minimiser `β_min`; (5) `β_min` beats every `β > 0` by case split. Mathlib lemmas: `IsCompact.exists_isMinOn`, `isCompact_Icc`, `Real.continuous_sqrt`, `Real.continuous_const_rpow`, `ContinuousOn.div`, `Filter.Tendsto.eventually`, `eventually_gt_nhds`, `Filter.eventually_gt_atTop`, `eventually_nhdsWithin_iff`. New private Canonical.lean lemmas: `signalVariance_continuousOn_Ioi`, `sqrt_two_sigma_continuousOn_Ioi`, `P_trap_continuousOn_Ioi`, `Phi_B_continuousOn_Ioi`, `L_continuousOn_Ioi`, `L_minimum_exists_in_regime_i_proof`. No Classical.choose for the existence, no opaque carrier — fully derived. The `betaStarOfP` carrier still applies Classical.choose to SELECT a specific minimiser from this now-derived existence theorem (Pattern 5 implicit-function selection, unaffected)." ]
   scope := "Proposition prop:three-regime-five-state Regime (i), existence of interior minimum of L(·, p)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = paper prop:three-regime-five-state Regime (i) proof line 825 reconstruction (existence of interior minimum from `0.9·(1-p)·sup_β Φ_B(β) > 0.5` IVT chain plus the unimodal structure of prop:interior-optimum line 774); requires Mathlib continuous-function-on-compact-interval + transcendental optimisation infrastructure for the explicit β*(p) witness."
+    "R81 CLOSED: derived theorem on the concrete `L` carrier (no opaque carrier, no Classical.choose for existence). Proof = `L_minimum_exists_in_regime_i_proof` — extreme value theorem (`IsCompact.exists_isMinOn`) on a compact `[ε, M]`, composing R80's L-analysis machinery (`L_below_limit_at_some_beta_proof`, `L_tendsto_atZero`, `L_tendsto_limit_atTop`) with the new continuity lemma `L_continuousOn_Ioi`. The explicit `β*(p)` numeric witness remains a separate paper computational fact, not needed for the existence claim."
   conditionalOn := []
 
 /-! ## R23-C2 Cat 3 atomic structural-equation layer (Manufactured-Recognition pattern)
@@ -6364,17 +6448,18 @@ def entry_atom_topology_blind_wrongness : GapEntry where
     (line 774), existence of interior minimiser of `L(·, 0)`. -/
 def entry_atom_interior_minimiser_existence : GapEntry where
   name := "interior_minimiser_existence_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:interior-optimum (5-state), line 774 (β* ≈ 1.5 bits)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Existential encoding on the `L` carrier; numeric witness `β* ≈ 1.5 bits` deferred to per-instance closure. Cat 1 reduction check: candidate Mathlib transcendental optimisation (Φ + Φ_B + signalVariance combination), but the IDP-specific functional form is paper-novel. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_interior_optimum` derived theorem (Canonical.lean) + `gap_threshold_fiveState_greedy_has_interior_optimum`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (existence claim, paper-derived via per-instance closure of L combination, NOT a definitional equation on `L` carrier; §3.4.4 workingAssumption — 必须 close)." ]
-  scope := "Proposition prop:interior-optimum, existence of `β* ≈ 1.5 bits`"
+      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (existence claim, paper-derived via per-instance closure of L combination, NOT a definitional equation on `L` carrier; §3.4.4 workingAssumption — 必须 close).",
+      "R81 2026-05-15: SUBSTANTIVE CLOSURE workingAssumption/gapOpen → derivedTheorem/gapClosed. The opaque axiom is replaced by `theorem interior_minimiser_existence_OPEN := interior_minimiser_existence_proof`, a genuine real-analysis proof on the concrete `L` carrier (Canonical.lean). KEY INSIGHT: the EXISTENCE of an interior minimiser does NOT require the explicit `β* ≈ 1.5 bits` numeric witness — it follows from the extreme value theorem. The R44 obstacle note (`paper's per-IDP-instance numeric optimisation`) addressed the explicit witness, which is a SEPARATE paper computational fact not needed for existence. Proof = `interior_minimiser_existence_proof` (Canonical.lean): (1) R80's `L_below_limit_at_some_beta_proof 0` gives `β₀ > 0` with `L(β₀,0) < 0.4`; (2) `L_tendsto_atZero 0` (L → 0.425 > L(β₀,0) as β → 0⁺) yields `ε ∈ (0,β₀]` with `L β 0 > L β₀ 0` on `(0,ε]`, and the closed-form value `L_zero_zero` (`L(0,0) = 0.425`) handles the β = 0 endpoint; (3) `L_tendsto_limit_atTop 0` (L → 0.4 > L(β₀,0)) yields `M ≥ β₀` with `L β 0 > L β₀ 0` on `[M,∞)`; (4) the NEW continuity lemma `L_continuousOn_Ioi` + `IsCompact.exists_isMinOn` on the compact `[ε,M]` ∋ β₀ yields a minimiser `β_min`; (5) `β_min` is a GLOBAL minimiser over `[0,∞)` by the `β<ε` (with β=0 sub-case) / `β∈[ε,M]` / `β>M` case split. Mathlib lemmas: `IsCompact.exists_isMinOn`, `isCompact_Icc`, `Real.continuous_sqrt`, `Real.continuous_const_rpow`, `ContinuousOn.div`, `Filter.Tendsto.eventually`, `eventually_gt_nhds`, `Filter.eventually_gt_atTop`, `eventually_nhdsWithin_iff`, `Phi_continuousAt`, `Phi_zero`. New private Canonical.lean lemmas: `signalVariance_continuousOn_Ioi`, `sqrt_two_sigma_continuousOn_Ioi`, `P_trap_continuousOn_Ioi`, `Phi_B_continuousOn_Ioi`, `L_continuousOn_Ioi`, `L_zero_zero`, `interior_minimiser_existence_proof`. No Classical.choose, no opaque carrier — fully derived. The numeric value `β* ≈ 1.5 bits` remains a separate paper computational fact, not needed for the existence claim. Downstream `betaStarOfP` / `smoothTransitionBeta` Pattern 5 Classical.choose selections now select from a DERIVED existence theorem rather than an axiom." ]
+  scope := "Proposition prop:interior-optimum, existence of interior minimiser of L(·, 0) — R81 CLOSED via concrete-L extreme-value-theorem"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R44 reclassification). Close target = paper's per-IDP-instance numeric optimisation (β* ≈ 1.5 bits witness) of L combination."
+    "R81 CLOSED: derived theorem on the concrete `L` carrier (no opaque carrier, no Classical.choose). Proof = `interior_minimiser_existence_proof` — extreme value theorem (`IsCompact.exists_isMinOn`) on a compact `[ε, M]`, composing R80's L-analysis machinery (`L_below_limit_at_some_beta_proof`, `L_tendsto_atZero`, `L_tendsto_limit_atTop`) with the new continuity lemma `L_continuousOn_Ioi` and the closed-form boundary value `L_zero_zero`. The explicit `β* ≈ 1.5 bits` numeric witness remains a separate paper computational fact, not needed for the existence claim."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,

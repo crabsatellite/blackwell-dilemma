@@ -731,4 +731,45 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.Phi_gt_half_of_pos
 #print axioms BlackwellDilemma.Phi_reflect
 
+-- R81 substantive L-carrier closure wave (2 Cat 3 workingAssumption
+-- atoms about the CONCRETE 5-state welfare-loss carrier `L β p` closed
+-- by genuine real-analysis — the EXTREME VALUE THEOREM — on the
+-- concrete definition, NOT by `Classical.choose` / opaque-carrier
+-- reclassification):
+--
+-- (1) `interior_minimiser_existence_OPEN` (paper prop:interior-optimum
+--     line 774; `∃ β* > 0, ∀ β ≥ 0, L(β*,0) ≤ L(β,0)`): previously
+--     workingAssumption gapOpen axiom, now derivedTheorem gapClosed via
+--     `theorem interior_minimiser_existence_OPEN :=
+--     interior_minimiser_existence_proof`. KEY INSIGHT: existence of an
+--     interior minimiser does NOT require the explicit `β* ≈ 1.5 bits`
+--     numeric witness — it follows from the extreme value theorem. The
+--     proof composes R80's `L_below_limit_at_some_beta_proof` (interior
+--     point with `L < 0.4`), `L_tendsto_atZero` / `L_tendsto_limit_
+--     atTop` (boundary values exceed it), the new continuity lemma
+--     `L_continuousOn_Ioi`, the closed-form boundary value
+--     `L_zero_zero` (`L(0,0) = 0.425`), and `IsCompact.exists_isMinOn`
+--     on a compact `[ε, M]`.
+-- (2) `L_minimum_exists_in_regime_i_OPEN` (paper prop:three-regime-
+--     five-state Regime (i) line 814; `∀ p ∈ [0,p_1), ∃ β_min > 0,
+--     ∀ β > 0, L(β_min,p) ≤ L(β,p)`): previously workingAssumption
+--     gapOpen axiom, now derivedTheorem gapClosed via `theorem
+--     L_minimum_exists_in_regime_i_OPEN :=
+--     L_minimum_exists_in_regime_i_proof`. Same extreme-value-theorem
+--     argument, generalised to `p` and restricted to `β > 0`.
+--
+-- New Canonical.lean private continuity lemmas (Mathlib-derived):
+-- `signalVariance_continuousOn_Ioi` (denominator `2^(2β)−1` continuous
+-- and ≠ 0 on `Ioi 0`, via `Real.continuous_const_rpow` +
+-- `ContinuousOn.div`), `sqrt_two_sigma_continuousOn_Ioi`,
+-- `P_trap_continuousOn_Ioi`, `Phi_B_continuousOn_Ioi`,
+-- `L_continuousOn_Ioi`, `L_zero_zero`. Each closure is HONEST (genuine
+-- extreme-value-theorem proof on the concrete `L` definition, no
+-- R7-style content-erasure, no `sorry`). `#print axioms` on both
+-- closures = [propext, Classical.choice, Quot.sound] only
+-- (Classical.choice from the `Filter.Tendsto.eventually` /
+-- `IsCompact.exists_isMinOn` machinery; no project `_OPEN` axiom).
+#print axioms BlackwellDilemma.FiveState.interior_minimiser_existence_OPEN
+#print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
+
 end BlackwellDilemma.AxiomAudit
