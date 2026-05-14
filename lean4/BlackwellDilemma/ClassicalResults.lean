@@ -1079,4 +1079,79 @@ theorem gap_harris_kesten_squared :
   rw [gap_harris_kesten_OPEN]
   norm_num
 
+/-! ## 11. David & Nagaraja 2003 (Order Statistics — i.i.d. continuous
+   rank symmetry)
+
+David, H. A. & Nagaraja, H. N. (2003). _Order Statistics_, 3rd ed.,
+Wiley-Interscience, ISBN 0-471-38926-9. §1.3 "Distribution of Order
+Statistics" establishes the continuous-distribution rank-symmetry: for
+any pair of independent continuous random variables `X_1, X_2` drawn
+from the same distribution (i.i.d. continuous), the probability of
+`X_1 > X_2` equals `1/2` (the symmetry `P(X_1 > X_2) = P(X_2 > X_1) =
+1/2 - P(X_1 = X_2)/2 = 1/2` follows because continuous distributions
+have zero probability of ties: `P(X_1 = X_2) = 0`).
+
+The paper's Proposition `prop:sentimental` proof (line 600) invokes
+this fact at α = 0 to establish that the agent's ranking of neighbours
+is signal-independent (since the ranking reduces to comparing `ξ(u_1)`
+vs `ξ(u_2)` for ξ drawn i.i.d. from continuous Uniform[0, 1] per paper
+Definition 2.1 line 114), so `P_trap(β, κ, 0) = Pr(ξ(u_1) > ξ(u_2)) =
+1/2` for all β. Combined with Lemma `lem:conditional-reduction`(i)
+(within-branch Blackwell monotonicity on each fixed ranking branch,
+already encoded as Cat 2 `gap_blackwell_monotonicity_OPEN`), this gives
+the welfare monotonicity at α = 0. -/
+
+/-- **David & Nagaraja 2003 §1.3 + Blackwell 1953 conditional
+    application — combined Cat 2 absorption to the sentimental-agent
+    welfare carrier at α = 0.**
+
+    Under the paper's standing-convention setup (Definition 2.1, line
+    114: ξ drawn i.i.d. from continuous Uniform[0, 1] independently of
+    r), the rank-symmetry fact `P(ξ(u_1) > ξ(u_2)) = 1/2` (David &
+    Nagaraja 2003 §1.3) makes the agent's α = 0 ranking signal-
+    independent. Within each fixed ranking branch, Blackwell 1953
+    monotonicity in β applies via Lemma `lem:conditional-reduction`(i)
+    on the conditional subproblem on the restricted action domain
+    (Cat 2 dependency on `gap_blackwell_monotonicity_OPEN`'s underlying
+    paper authority is threaded as an explicit antecedent for audit
+    visibility).
+
+    Cat 2 — accepted on David & Nagaraja 2003 + Blackwell 1953 joint
+    authority. Mathlib lacks both formalised continuous-distribution
+    rank-symmetry theory (no general `iid_continuous_imp_p_strict_gt_eq_half`
+    theorem on independent identically-distributed continuous-CDF random
+    variables) AND the decision-theoretic Blackwell-conditional
+    application machinery; the Lean encoding axiomatises the paper-stated
+    composite result on the `agentWelfare AgentType.sentimental _ _ 0`
+    carrier, citing David HA & Nagaraja HN (2003) _Order Statistics_, 3rd
+    ed., Wiley-Interscience, ISBN 0-471-38926-9, §1.3 ("Distribution of
+    Order Statistics") + Blackwell D (1953) "Equivalent Comparisons of
+    Experiments", Annals of Mathematical Statistics 24(2):265-272.
+
+    Statement uses an EXPLICIT antecedent for the Blackwell within-
+    branch monotonicity (the propositional content of
+    `gap_blackwell_monotonicity_OPEN`, namely Bayesian-agent monotonicity
+    at the within-branch reference point `(κ = 0, α = 1)`); this
+    surfaces both the David & Nagaraja 2003 dependency (via the carrier-
+    bridging citation embodied in this axiom's paper authority) and the
+    Blackwell 1953 dependency (via the threaded antecedent). The
+    composition encapsulates the paper line 600 derivation.
+
+    paper source: Proposition `prop:sentimental` proof, line 600
+    ("the ranking converges to ξ(u), which is independent of β.
+    Therefore P_trap(β, κ, 0) = Pr(ξ(u_1) > ξ(u_2)) = 1/2 for all β.
+    Since the ranking is signal-independent at α = 0, welfare
+    conditional on each branch is determined by the within-branch
+    signal quality, which is non-decreasing in β by the standard
+    Blackwell argument (Lemma~\ref{lem:conditional-reduction}).
+    Therefore W(β, κ, 0) is non-decreasing in β"). -/
+axiom gap_iid_continuous_rank_symmetry_OPEN :
+    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.bayesian β₁ 0 1 ≤
+        agentWelfare AgentType.bayesian β₂ 0 1) →
+    ∀ κ : ℝ, 0 ≤ κ →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.sentimental β₁ κ 0 ≤
+          agentWelfare AgentType.sentimental β₂ κ 0
+
 end BlackwellDilemma

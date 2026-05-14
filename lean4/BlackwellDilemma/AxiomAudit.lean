@@ -142,13 +142,22 @@ namespace BlackwellDilemma.AxiomAudit
 --    `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis
 --    at `|z| < 1`, line 582-584). Cat 2 Topkis 1978/1998 dependency
 --    threaded via `_h_topkis` for audit-chain visibility.
---  * `gap_sentimental_immunity`: composes `signal_independent_at_alpha_zero_OPEN`
---    (paper L600 base case at α = 0) + `welfare_continuity_in_alpha_OPEN`
+--  * `gap_sentimental_immunity`: composes `signal_independent_at_alpha_zero`
+--    (R65 derived theorem; paper L600 base case at α = 0; Cat 2 absorbed
+--    via `gap_iid_continuous_rank_symmetry_OPEN` + `gap_blackwell_
+--    monotonicity_OPEN` per R65) + `welfare_continuity_in_alpha_OPEN`
 --    (paper L602 perturbative continuity neighbourhood) +
 --    `alpha_star_existence_via_continuity_OPEN` (paper L602 sup-existence
 --    of `α*`).
 #print axioms BlackwellDilemma.gap_supermodular
 #print axioms BlackwellDilemma.gap_sentimental_immunity
+-- R65 Cat 2 absorption: `signal_independent_at_alpha_zero` derived
+-- theorem composes `gap_iid_continuous_rank_symmetry_OPEN` (David &
+-- Nagaraja 2003 §1.3 + Blackwell 1953 conditional Cat 2,
+-- ClassicalResults.lean) + `gap_blackwell_monotonicity_OPEN` (Blackwell
+-- 1953 Cat 2 ClassicalResults.lean:71). Both Cat 2 dependencies surface
+-- via `#print axioms`.
+#print axioms BlackwellDilemma.signal_independent_at_alpha_zero
 -- R38 §18 decomposition: Theorem 4.1 Part 5 (κ*(α) non-decreasing
 -- in α). Decomposed into atomic stipulation
 -- `welfare_transition_alpha_monotone_OPEN` + derived theorem
@@ -354,10 +363,15 @@ namespace BlackwellDilemma.AxiomAudit
 -- axiom (named `<paper_content>_OPEN`) is the underlying paper-stated
 -- substance pending per-instance closure.
 
--- Cognitive.lean §18 decomposition (6 derived theorems):
+-- Cognitive.lean §18 decomposition (5 derived theorems; Part 4
+-- universal-form is encoded as DEAD-END `def : Prop`
+-- `gap_cognitive_threshold_part4_DEAD_END_by_junk_value` per R65 §15
+-- — the universal claim is mathematically false under Lean's
+-- junk-value semantics, mirroring the R9 / `gap_p_monotonicity_DEAD_
+-- END_by_junk_value` precedent at Canonical.lean:1035; not consumed
+-- by any downstream theorem so no `#print axioms` line is needed):
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part1
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part2
-#print axioms BlackwellDilemma.gap_cognitive_threshold_part4
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part6
 #print axioms BlackwellDilemma.gap_kappaWelfare_cross_partial_link
 

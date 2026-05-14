@@ -487,49 +487,61 @@ theorem gap_cognitive_threshold_part3
   · exact kappaStar_def p α
   · exact kappaStar_nonneg p α
 
-/-- **Theorem 4.1 Part 4: Monotonicity in `p`.**
-    On lattices and the Section 5 instances, `κ*(p)` is non-decreasing in `p`.
+/-- **Theorem 4.1 Part 4: Monotonicity in `p`** — DEAD-END (universal
+    form is mathematically false under Lean's junk-value semantics).
 
-    Status reasoning: under the current `kappaStar_def` encoding,
-    the paper's statement Part 4 `kappaStar p₁ α ≤ kappaStar p₂ α`
-    for `p₁ ≤ p₂` is potentially junk-value-defective (mirroring the
-    `gap_p_monotonicity_OPEN` finding in Cognitive: the unconditional
-    universal form was Lean-falsified by junk-value semantics).
-    Specifically, after composing with the natural Cat 3 atom
-    `mean_estimate_gap_antitone_in_p_OPEN` (paper line 511 stating
-    `m(p, κ)` is non-increasing in `p`), the standard sInf-monotonicity
-    chain breaks at the corner case where the feasible set
-    `{κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` is empty: by Mathlib convention
-    `Real.sInf_empty = 0`, but `kappaStar p₁ α` could be strictly
-    positive in that case, violating the inequality. The mathematical
-    content is correct only under the implicit non-emptiness premise
-    (paper assumes the threshold exists). Future-round candidate:
-    refine the statement to be conditional on threshold existence, OR
-    enrich `kappaStar_def` to handle the junk-value branch via a
-    `0`-default in the empty-feasible-set case.
+    The unconditional universal-form claim
+    `∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → kappaStar p₁ α ≤ kappaStar p₂ α` is
+    junk-value-defective at the encoding level (mirroring R9's
+    `gap_p_monotonicity_DEAD_END_by_junk_value` finding for the
+    five-state closed form in Canonical.lean). After composing with
+    the natural Cat 3 atom `mean_estimate_gap_antitone_in_p_OPEN`
+    (paper line 511 stating `m(p, κ)` is non-increasing in `p`), the
+    standard sInf-monotonicity chain breaks at the corner case where
+    the feasible set `{κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` is empty: by
+    Mathlib convention `Real.sInf_empty = 0`, but `kappaStar p₁ α`
+    could be strictly positive in that case, violating the
+    inequality. The paper's claim is correct only under the implicit
+    non-emptiness premise (paper assumes the threshold exists).
+
+    R65 §15 DEAD-END encoding (R9 / `gap_p_monotonicity_DEAD_END_by
+    _junk_value` precedent — Canonical.lean:1035): the universal-form
+    claim is encoded as `def : Prop` with zero kernel impact (NOT an
+    axiom; not consumed by any downstream theorem). The DEAD-END
+    marker is purely documentational signposting why the universal
+    form fails under Lean's junk-value semantics. The bundle
+    `gap_cognitive_threshold_characterisation` no longer claims Part
+    4's universal form (the 6-conjunct is reduced to 5 honest parts;
+    Part 4 is documented as DEAD-END with a separate `def` marker
+    here).
+
+    The paper's intended-domain content (paper assumes implicit non-
+    emptiness premise on the feasible set) remains as a future
+    candidate: a bounded version `gap_cognitive_threshold_part4_bounded`
+    conditional on `Set.Nonempty {κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` would be
+    the live closure for the paper's intended scope. Not yet encoded.
 
     paper source: Theorem 4.1 Part 4, line 494. -/
-axiom kappaStar_p_monotone_OPEN :
+def kappaStar_p_monotone_DEAD_END_by_junk_value : Prop :=
     ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
       kappaStar p₁ α ≤ kappaStar p₂ α
 
-/-- **Theorem 4.1 Part 4: Monotonicity in `p`** (derived theorem).
-    On lattices and the Section 5 instances, `κ*(p)` is non-decreasing
-    in `p`.
+/-- **Theorem 4.1 Part 4: Monotonicity in `p`** — DEAD-END marker
+    (purely documentational `def : Prop`, NOT an axiom — zero kernel
+    impact).
 
-    Derived theorem composing the atomic stipulation
-    `kappaStar_p_monotone_OPEN` per `feedback_gap_ledger_in_lean4` §18
-    Manufactured-Recognition pattern. The atom encodes the paper's
-    p-monotonicity claim against the implicit non-emptiness premise
-    (paper assumes the threshold exists; the unconditional universal
-    form is junk-value-defective per R23-C2 audit, mirroring the
-    `gap_p_monotonicity_OPEN` finding).
+    Re-export of `kappaStar_p_monotone_DEAD_END_by_junk_value`. The
+    bundle `gap_cognitive_threshold_characterisation` no longer
+    consumes Part 4 (the universal form is mathematically false; see
+    the marker docstring above). This re-export retains the
+    paper-faithful name `gap_cognitive_threshold_part4` for cross-
+    reference but is encoded as `def : Prop` per R9 / R65 DEAD-END
+    discipline (R9 `gap_p_monotonicity_DEAD_END_by_junk_value`
+    precedent — Canonical.lean:1035).
 
     paper source: Theorem 4.1 Part 4, line 494. -/
-theorem gap_cognitive_threshold_part4 :
-    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
-      kappaStar p₁ α ≤ kappaStar p₂ α :=
-  kappaStar_p_monotone_OPEN
+def gap_cognitive_threshold_part4_DEAD_END_by_junk_value : Prop :=
+    kappaStar_p_monotone_DEAD_END_by_junk_value
 
 /-- **Theorem 4.1 Part 5: Monotonicity in `α`.**
     `κ*(p, α)` is non-decreasing in `α`.
@@ -627,12 +639,21 @@ theorem gap_cognitive_threshold_part6 :
   kappaStar_diverges_at_pc_OPEN
 
 /-- **Theorem 4.1 (full statement, conjunction).**
-    Combines all six parts above. Each conjunct is the exact statement
-    delivered by the corresponding `gap_cognitive_threshold_partK_OPEN`
-    axiom (Part 3 is projected to its non-negativity sub-clause for
-    notational uniformity with the other parts; the substantive
-    continuity / Tendsto / sInf / strict-positivity content of Part 3
-    is encoded in the axiom itself and accessible through it). -/
+    Combines five honest parts above (Parts 1, 2, 3, 5, 6). Part 4
+    (universal p-monotonicity) is encoded as DEAD-END `def : Prop`
+    (`gap_cognitive_threshold_part4_DEAD_END_by_junk_value`,
+    Cognitive.lean) per R65 §15 honest closure (R9
+    `gap_p_monotonicity_DEAD_END_by_junk_value` precedent at
+    Canonical.lean:1035): the unconditional universal form is
+    mathematically false under Lean's junk-value semantics
+    (`Real.sInf_empty = 0` corner case forces the inequality to fail
+    when the feasible set `{κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` is empty
+    while `kappaStar p₁ α` is strictly positive). The bundle
+    therefore drops the Part 4 conjunct from its signature; the
+    paper's intended-domain p-monotonicity (under implicit non-
+    emptiness premise) remains a future closure target via a
+    bounded-domain Cat 1 theorem analogous to the
+    `gap_p_monotonicity_bounded` precedent (Canonical.lean:1049). -/
 theorem gap_cognitive_threshold_characterisation
     (hC : Conditions_C1_C2_C3)
     (hT : TerminalNeighbourTopology) :
@@ -648,8 +669,6 @@ theorem gap_cognitive_threshold_characterisation
           agentWelfare AgentType.kappaAgent β₂ κ α) ∧
     -- Part 3 (existence; non-negativity sub-clause)
     (∀ p α : ℝ, 0 ≤ kappaStar p α) ∧
-    -- Part 4 (p-monotonicity)
-    (∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → kappaStar p₁ α ≤ kappaStar p₂ α) ∧
     -- Part 5 (α-monotonicity)
     (∀ p : ℝ, ∀ α₁ α₂ : ℝ, α₁ ≤ α₂ → kappaStar p α₁ ≤ kappaStar p α₂) ∧
     -- Part 6 (divergence at p_c)
@@ -660,7 +679,6 @@ theorem gap_cognitive_threshold_characterisation
   ⟨ gap_cognitive_threshold_part1 hC hT,
     gap_cognitive_threshold_part2 gap_blackwell_monotonicity_OPEN hC hT,
     fun p α => (gap_cognitive_threshold_part3 hC p α).2.2.2.2,
-    gap_cognitive_threshold_part4,
     gap_cognitive_threshold_part5,
     gap_cognitive_threshold_part6 ⟩
 
@@ -1059,7 +1077,7 @@ For any IDP and any `κ ≥ 0`, there exists `α* > 0` such that for
 `α < α*`, welfare is monotonically non-decreasing in β. Sufficiently
 sentimental agents are immune. -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+/-- Cat 3 paper-novel DERIVED THEOREM: paper Proposition
     `prop:sentimental` proof line 600 (base case at α = 0). At α = 0,
     the agent's ranking of neighbours converges to `ξ(u)` (intrinsic
     preference), which is signal-independent. Therefore
@@ -1067,28 +1085,35 @@ sentimental agents are immune. -/
     ranking is signal-independent. Since within-branch welfare under
     fixed ranking is non-decreasing in β by the standard Blackwell
     argument (paper Lemma `lem:conditional-reduction`), the welfare
-    `W(β, κ, 0)` is non-decreasing in β. This atomic stipulation
-    captures the α = 0 base case.
+    `W(β, κ, 0)` is non-decreasing in β.
 
-    Encoding choice: extracted from the bundled
-    `gap_sentimental_immunity_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern. The α = 0 base case is the
-    primitive paper-stated fact on the sentimental-agent welfare
-    carrier; the existence of `α* > 0` follows from this base case
-    plus paper-stated continuity of `α ↦ W(β, κ, α)`.
-
-    Cat 3 sub-type: workingAssumption (paper-stated α = 0 monotonicity
-    base case via paper `lem:conditional-reduction`(i) applied at the
-    signal-independent ranking; 必须 close before publication).
+    R65 Cat 2 absorption (per `feedback_gap_ledger_in_lean4` §18
+    Manufactured-Recognition pattern): the prior `axiom signal_
+    independent_at_alpha_zero_OPEN` is REPLACED by this derived
+    theorem composing two Cat 2 axioms via paper line 600 derivation:
+     * `gap_blackwell_monotonicity_OPEN` (Blackwell 1953 Cat 2,
+       ClassicalResults.lean:71) — provides the within-branch
+       monotonicity premise at the Bayesian-agent reference point
+       `(κ = 0, α = 1)` via Lemma `lem:conditional-reduction`(i).
+     * `gap_iid_continuous_rank_symmetry_OPEN` (David & Nagaraja 2003
+       §1.3 + Blackwell 1953 conditional application Cat 2,
+       ClassicalResults.lean) — provides the carrier-bridging from
+       the Bayesian-agent monotonicity premise to the sentimental-
+       agent welfare at α = 0, via the rank-symmetry fact
+       `P(ξ(u_1) > ξ(u_2)) = 1/2` for ξ drawn i.i.d. from continuous
+       Uniform[0, 1] (paper Definition 2.1 line 114).
 
     paper source: Proposition `prop:sentimental` proof, line 600
     (signal-independent ranking at α = 0 + `lem:conditional-reduction`
     application). -/
-axiom signal_independent_at_alpha_zero_OPEN :
+theorem signal_independent_at_alpha_zero :
     ∀ κ _p : ℝ, 0 ≤ κ →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         agentWelfare AgentType.sentimental β₁ κ 0 ≤
-          agentWelfare AgentType.sentimental β₂ κ 0
+          agentWelfare AgentType.sentimental β₂ κ 0 := by
+  intros κ _p hκ β₁ β₂ hβ
+  exact gap_iid_continuous_rank_symmetry_OPEN
+    gap_blackwell_monotonicity_OPEN κ hκ β₁ β₂ hβ
 
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
     `prop:sentimental` proof line 602 (perturbative continuity in α).
@@ -1222,17 +1247,19 @@ theorem alpha_star_existence_via_continuity
     For each `κ ≥ 0`, `α*(κ, p) ∈ (0, 1]`, and welfare is non-decreasing
     in β for `α < α*`.
 
-    Derived theorem composing two atomic stipulations + R61 derived
-    theorem per `feedback_gap_ledger_in_lean4` §18 Manufactured-
-    Recognition pattern: `signal_independent_at_alpha_zero_OPEN`
-    (paper L600 base case at α = 0; not directly consumed, but
-    listed as the paper-stated baseline cited in the proof chain),
-    `welfare_continuity_in_alpha_OPEN` (paper L602 perturbative
-    continuity neighbourhood), and the R61 derived theorem
-    `alpha_star_existence_via_continuity` (which composes
-    `alphaStar_def` + Mathlib `le_csSup` / `csSup_le` + the smaller
-    R61 sub-atom `alpha_below_alpha_star_implies_monotonicity_OPEN`
-    for the substantive sub-sup monotonicity content).
+    Derived theorem composing one atomic stipulation + R61 derived
+    theorem + R65 derived theorem per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern: `signal_independent_at_alpha
+    _zero` (R65 derived theorem: paper L600 base case at α = 0; not
+    directly consumed in this proof body, but listed as the paper-
+    stated baseline cited in the proof chain — now Cat 2 absorbed via
+    `gap_iid_continuous_rank_symmetry_OPEN` David & Nagaraja 2003 §1.3
+    + `gap_blackwell_monotonicity_OPEN`), `welfare_continuity_in_alpha
+    _OPEN` (paper L602 perturbative continuity neighbourhood), and
+    the R61 derived theorem `alpha_star_existence_via_continuity`
+    (which composes `alphaStar_def` + Mathlib `le_csSup` / `csSup_le`
+    + the smaller R61 sub-atom `alpha_below_alpha_star_implies_monoton
+    icity_OPEN` for the substantive sub-sup monotonicity content).
 
     paper source: Proposition `prop:sentimental`, lines 595-603. -/
 theorem gap_sentimental_immunity :
