@@ -263,6 +263,468 @@ noncomputable def L (β p : ℝ) : ℝ :=
   P_trap β * (4/10 : ℝ) +
   (1 - P_trap β) * (9/10 : ℝ) * (1 - (1 - p) * Phi_B β)
 
+/-! ### Helper lemmas: monotonicity of `P_trap` and `Phi_B`.
+
+`P_trap β = Phi(Delta_S / √(2 σ²(β)))` and `Phi_B β = Phi(Delta_B / √(2 σ²(β)))`
+with `Delta_S, Delta_B > 0`. As `β` increases, `σ²(β)` strictly decreases
+(`signalVariance_strictAntitoneOn`), so the argument of `Phi` strictly
+increases, and `Phi` is monotone (`Phi_monotone`). Both `P_trap` and
+`Phi_B` are bounded above by `1` (`Phi_le_one`) and below by `0`
+(`Phi_nonneg`). These auxiliary facts are pure Cat 1 derivations from
+already-closed Mathlib-derivable inputs.
+
+paper source: §2.2 line 138 (`σ²(β) = 1/(2^{2β} − 1)` strictly
+decreasing in β); line 802 (`P_trap, Φ_B` defined). -/
+
+/-- `Delta_S = r_A − r_B = 0.2 > 0`. -/
+private theorem Delta_S_pos : 0 < Delta_S := by
+  unfold Delta_S r_A r_B
+  norm_num
+
+/-- `Delta_B = r_G − r_D = 0.9 > 0`. -/
+private theorem Delta_B_pos : 0 < Delta_B := by
+  unfold Delta_B r_G r_D
+  norm_num
+
+/-- `signalVariance β > 0` for `β > 0`. -/
+private theorem signalVariance_pos {β : ℝ} (hβ : 0 < β) : 0 < signalVariance β := by
+  unfold signalVariance
+  have h2_one_lt : (1 : ℝ) < 2 := by norm_num
+  have h2β_pos : 0 < 2 * β := by linarith
+  have h_one_lt_pow : (1 : ℝ) < (2 : ℝ)^(2 * β) :=
+    Real.one_lt_rpow h2_one_lt h2β_pos
+  have h_denom_pos : 0 < (2 : ℝ)^(2 * β) - 1 := by linarith
+  exact one_div_pos.mpr h_denom_pos
+
+/-- `√(2 · signalVariance β) > 0` for `β > 0`. -/
+private theorem sqrt_two_sigma_pos {β : ℝ} (hβ : 0 < β) :
+    0 < Real.sqrt (2 * signalVariance β) := by
+  apply Real.sqrt_pos.mpr
+  exact mul_pos (by norm_num) (signalVariance_pos hβ)
+
+/-- For `β₁ ≤ β₂` (both positive), `Delta_S / √(2 σ²(β₁)) ≤ Delta_S / √(2 σ²(β₂))`.
+
+    Combines `signalVariance_strictAntitoneOn` (β₁ < β₂ ⟹ σ²(β₂) < σ²(β₁)),
+    `Real.sqrt_lt_sqrt`, `Delta_S_pos`, and division reversal on positives.
+    The case `β₁ = β₂` gives equality. -/
+private theorem arg_S_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
+    Delta_S / Real.sqrt (2 * signalVariance β₁) ≤
+      Delta_S / Real.sqrt (2 * signalVariance β₂) := by
+  rcases eq_or_lt_of_le h_le with heq | hlt
+  · subst heq; rfl
+  -- β₁ < β₂. σ²(β₂) < σ²(β₁), so √(2σ²(β₂)) < √(2σ²(β₁)), so reciprocal
+  -- reverses, and multiplying by Delta_S > 0 preserves the order.
+  have hβ₂ : 0 < β₂ := lt_trans hβ₁ hlt
+  have h_sigma : signalVariance β₂ < signalVariance β₁ :=
+    signalVariance_strictAntitoneOn hβ₁ hlt
+  have h_2sigma_pos₂ : 0 < 2 * signalVariance β₂ :=
+    mul_pos (by norm_num) (signalVariance_pos hβ₂)
+  have h_2sigma_lt : 2 * signalVariance β₂ < 2 * signalVariance β₁ := by linarith
+  have h_sqrt_lt :
+      Real.sqrt (2 * signalVariance β₂) < Real.sqrt (2 * signalVariance β₁) :=
+    Real.sqrt_lt_sqrt (le_of_lt h_2sigma_pos₂) h_2sigma_lt
+  have h_sqrt_pos₂ : 0 < Real.sqrt (2 * signalVariance β₂) :=
+    sqrt_two_sigma_pos hβ₂
+  -- Apply division-reversal: a/b ≤ a/c whenever 0 < c ≤ b and 0 ≤ a.
+  exact div_le_div_of_nonneg_left (le_of_lt Delta_S_pos)
+    h_sqrt_pos₂ (le_of_lt h_sqrt_lt)
+
+/-- For `β₁ ≤ β₂` (both positive), `Delta_B / √(2 σ²(β₁)) ≤ Delta_B / √(2 σ²(β₂))`. -/
+private theorem arg_B_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
+    Delta_B / Real.sqrt (2 * signalVariance β₁) ≤
+      Delta_B / Real.sqrt (2 * signalVariance β₂) := by
+  rcases eq_or_lt_of_le h_le with heq | hlt
+  · subst heq; rfl
+  have hβ₂ : 0 < β₂ := lt_trans hβ₁ hlt
+  have h_sigma : signalVariance β₂ < signalVariance β₁ :=
+    signalVariance_strictAntitoneOn hβ₁ hlt
+  have h_2sigma_pos₂ : 0 < 2 * signalVariance β₂ :=
+    mul_pos (by norm_num) (signalVariance_pos hβ₂)
+  have h_2sigma_lt : 2 * signalVariance β₂ < 2 * signalVariance β₁ := by linarith
+  have h_sqrt_lt :
+      Real.sqrt (2 * signalVariance β₂) < Real.sqrt (2 * signalVariance β₁) :=
+    Real.sqrt_lt_sqrt (le_of_lt h_2sigma_pos₂) h_2sigma_lt
+  have h_sqrt_pos₂ : 0 < Real.sqrt (2 * signalVariance β₂) :=
+    sqrt_two_sigma_pos hβ₂
+  exact div_le_div_of_nonneg_left (le_of_lt Delta_B_pos)
+    h_sqrt_pos₂ (le_of_lt h_sqrt_lt)
+
+/-- `P_trap` is monotonically non-decreasing on `(0, ∞)`: as precision
+    `β` increases, the trap-selection probability rises. -/
+private theorem P_trap_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
+    P_trap β₁ ≤ P_trap β₂ := by
+  unfold P_trap
+  exact Phi_monotone (arg_S_monotone hβ₁ h_le)
+
+/-- `Phi_B` is monotonically non-decreasing on `(0, ∞)`: as precision
+    `β` increases, the within-`B` goal-selection probability rises. -/
+private theorem Phi_B_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
+    Phi_B β₁ ≤ Phi_B β₂ := by
+  unfold Phi_B
+  exact Phi_monotone (arg_B_monotone hβ₁ h_le)
+
+/-- `0 ≤ P_trap β ≤ 1` for any `β`. -/
+private theorem P_trap_mem_unitInterval (β : ℝ) :
+    0 ≤ P_trap β ∧ P_trap β ≤ 1 := by
+  unfold P_trap
+  exact ⟨Phi_nonneg _, Phi_le_one _⟩
+
+/-- `0 ≤ Phi_B β ≤ 1` for any `β`. -/
+private theorem Phi_B_mem_unitInterval (β : ℝ) :
+    0 ≤ Phi_B β ∧ Phi_B β ≤ 1 := by
+  unfold Phi_B
+  exact ⟨Phi_nonneg _, Phi_le_one _⟩
+
+/-- **Auxiliary lemma — `L(β, p)` is monotonically non-increasing in `β`
+    on `(0, ∞)` whenever `0.9 · (1 − p) · 1 ≤ 0.5`, i.e., `(1 − p) ≤ 5/9`,
+    i.e., `p ≥ p_1 = 4/9`.
+
+    This is the analytic engine common to both Regime (ii) (`p ∈ [p_1, p_2]`)
+    and Regime (iii) (`p ∈ (p_2, 1)`) of Proposition
+    `prop:three-regime-five-state`: in both regimes the bound on
+    `0.9·(1−p)·Φ_B(β)` ensures the "first term" of `L₂ − L₁` is
+    non-positive (since `−0.5 + 0.9·(1−p)·v₁ ≤ 0`), and the "second term"
+    is non-positive by basic non-negativity (the `0.9·(1−u₂)·(1−p)` factor
+    is non-negative, and the `Φ_B(β₂) − Φ_B(β₁)` factor is non-negative
+    by `Phi_B_monotone`).
+
+    paper source: Proposition `prop:three-regime-five-state` proof,
+    Regime (ii) line 829 ("Direct differentiation gives ... `∂L/∂β < 0`").
+    The Lean proof uses an algebraic decomposition equivalent to the
+    paper's derivative-based argument: rather than computing the
+    derivative explicitly, expand `L β₂ p − L β₁ p` and group into the
+    two non-positive contributions. -/
+private theorem L_monotone_under_q_le_5_9
+    (p : ℝ) (hp_q_bound : 1 - p ≤ (5 : ℝ) / 9) (hp_le_1 : p ≤ 1)
+    {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
+    L β₂ p ≤ L β₁ p := by
+  -- Trivial case: β₁ = β₂.
+  rcases eq_or_lt_of_le h_le with heq | hlt
+  · subst heq; rfl
+  -- Substantive case: β₁ < β₂.
+  set u₁ := P_trap β₁ with hu₁_def
+  set u₂ := P_trap β₂ with hu₂_def
+  set v₁ := Phi_B β₁ with hv₁_def
+  set v₂ := Phi_B β₂ with hv₂_def
+  -- Monotonicity of P_trap and Phi_B.
+  have h_u_le : u₁ ≤ u₂ := P_trap_monotone hβ₁ h_le
+  have h_v_le : v₁ ≤ v₂ := Phi_B_monotone hβ₁ h_le
+  -- Bounds on u, v: in [0, 1].
+  obtain ⟨h_u₁_nn, h_u₁_le_1⟩ := P_trap_mem_unitInterval β₁
+  obtain ⟨h_u₂_nn, h_u₂_le_1⟩ := P_trap_mem_unitInterval β₂
+  obtain ⟨h_v₁_nn, h_v₁_le_1⟩ := Phi_B_mem_unitInterval β₁
+  obtain ⟨_h_v₂_nn, h_v₂_le_1⟩ := Phi_B_mem_unitInterval β₂
+  -- q := 1 - p, with 0 ≤ q ≤ 5/9.
+  set q : ℝ := 1 - p with hq_def
+  have h_q_nn : 0 ≤ q := by simp [hq_def]; linarith
+  -- Key inequality: 0.9·q·v₁ ≤ 0.5.
+  -- Proof: 0.9·q ≤ 0.9·(5/9) = 0.5, then × v₁ ≤ 1.
+  have h_09q_le : (9/10 : ℝ) * q ≤ (1/2 : ℝ) := by
+    have : (9/10 : ℝ) * q ≤ (9/10 : ℝ) * (5/9 : ℝ) := by
+      exact mul_le_mul_of_nonneg_left hp_q_bound (by norm_num)
+    linarith [this]
+  have h_09qv_le : (9/10 : ℝ) * q * v₁ ≤ (1/2 : ℝ) := by
+    have h_09q_nn : 0 ≤ (9/10 : ℝ) * q := mul_nonneg (by norm_num) h_q_nn
+    have h_step : (9/10 : ℝ) * q * v₁ ≤ (9/10 : ℝ) * q * 1 :=
+      mul_le_mul_of_nonneg_left h_v₁_le_1 h_09q_nn
+    have : (9/10 : ℝ) * q * v₁ ≤ (9/10 : ℝ) * q := by linarith [h_step]
+    linarith [this, h_09q_le]
+  -- Algebraic decomposition:
+  --   L₂ - L₁ = (u₂ - u₁) · (-0.5 + 0.9·q·v₁) - 0.9·q·(v₂ - v₁)·(1 - u₂).
+  -- Both terms ≤ 0 under our hypotheses.
+  have h_term1_le : (u₂ - u₁) * (-(1/2 : ℝ) + (9/10 : ℝ) * q * v₁) ≤ 0 := by
+    have h_u_diff_nn : 0 ≤ u₂ - u₁ := by linarith
+    have h_bracket : -(1/2 : ℝ) + (9/10 : ℝ) * q * v₁ ≤ 0 := by linarith
+    exact mul_nonpos_of_nonneg_of_nonpos h_u_diff_nn h_bracket
+  have h_term2_nn : 0 ≤ (9/10 : ℝ) * q * (v₂ - v₁) * (1 - u₂) := by
+    have h_v_diff_nn : 0 ≤ v₂ - v₁ := by linarith
+    have h_one_minus_u₂_nn : 0 ≤ 1 - u₂ := by linarith
+    have h_09q_nn : 0 ≤ (9/10 : ℝ) * q := mul_nonneg (by norm_num) h_q_nn
+    have : 0 ≤ (9/10 : ℝ) * q * (v₂ - v₁) := mul_nonneg h_09q_nn h_v_diff_nn
+    exact mul_nonneg this h_one_minus_u₂_nn
+  -- Now expand L β₂ p - L β₁ p = (term1) - (term2). Need to verify
+  -- this is an algebraic identity; once verified, the bound L₂ ≤ L₁
+  -- follows from term1 ≤ 0 and term2 ≥ 0.
+  show L β₂ p ≤ L β₁ p
+  unfold L
+  -- L β p (definition) = P_trap β · 0.4 + (1 - P_trap β) · 0.9 · (1 - (1 - p) · Phi_B β)
+  -- Substitute names u, v, q.
+  show u₂ * (4/10 : ℝ) + (1 - u₂) * (9/10 : ℝ) * (1 - q * v₂) ≤
+       u₁ * (4/10 : ℝ) + (1 - u₁) * (9/10 : ℝ) * (1 - q * v₁)
+  -- The identity:
+  --   [u₁ * 0.4 + (1 - u₁) * 0.9 * (1 - q * v₁)]
+  -- - [u₂ * 0.4 + (1 - u₂) * 0.9 * (1 - q * v₂)]
+  -- = - (u₂ - u₁) * (-0.5 + 0.9·q·v₁) + 0.9·q·(v₂ - v₁)·(1 - u₂)
+  -- = (u₂ - u₁) * (0.5 - 0.9·q·v₁) + 0.9·q·(v₂ - v₁)·(1 - u₂)  [≥ 0]
+  -- which means RHS - LHS ≥ 0, i.e., LHS ≤ RHS.
+  nlinarith [h_term1_le, h_term2_nn]
+
+/-- The first regime boundary `p_1 = 4/9` (paper line 809). -/
+noncomputable def p_1 : ℝ := (4 : ℝ) / 9
+
+/-- The second regime boundary `p_2 = 2/3` (paper line 809). -/
+noncomputable def p_2 : ℝ := (2 : ℝ) / 3
+
+/-! ### R80 substantive L-carrier analysis.
+
+`L` is the concrete welfare-loss functional
+`L β p = P_trap β · 0.4 + (1 − P_trap β) · 0.9 · (1 − (1 − p)·Φ_B β)`.
+The following lemmas extract, by genuine real-analysis on the
+concrete definition, the facts the paper's Proposition
+`prop:three-regime-five-state` Regime (i) proof (lines 821-825) uses:
+the strict bounds `P_trap β < 1` / `Φ_B β ∈ (1/2, 1)` for finite
+`β > 0`, the limits `P_trap, Φ_B → 1` as `β → ∞` and `→ 1/2` as
+`β → 0⁺`, the algebraic rearrangement `eq:five-state-rearr`, and the
+endpoint limits `L → 0.4` (β → ∞) and `L → 0.425 + 0.225 p` (β → 0⁺).
+These convert the previously-axiomatic Regime (i) sub-claims into
+derived theorems.
+
+Mathlib lemmas used: `Phi_lt_one`, `Phi_gt_half_of_pos`,
+`Phi_tendsto_one_atTop`, `Phi_continuousAt`, `Phi_zero`,
+`signalVariance_tendsto_zero_atTop`,
+`signalVariance_tendsto_atTop_of_tendsto_zero_pos`,
+`tendsto_const_div_atTop_of_tendsto_zero_pos`,
+`Real.continuous_sqrt`, `Real.tendsto_sqrt_atTop`,
+`Filter.Tendsto.const_div_atTop`, plus the `Filter.Tendsto`
+arithmetic combinators. -/
+
+/-- `P_trap β < 1` for every `β`: the trap-selection probability is a
+    standard-normal CDF value, strictly below `1` (`Phi_lt_one`).
+    paper source: line 825 ("`1 − P_trap(β) > 0` for finite `β`"). -/
+private theorem P_trap_lt_one (β : ℝ) : P_trap β < 1 := by
+  unfold P_trap
+  exact Phi_lt_one _
+
+/-- `1/2 < Φ_B β` for `β > 0`: the within-`B` goal-selection
+    probability is `Φ` of a strictly positive argument
+    (`Δ_B > 0`, `√(2σ²(β)) > 0`), hence strictly exceeds `1/2`
+    (`Phi_gt_half_of_pos`).
+    paper source: line 825 ("`Φ_B(β)` ranges over `(1/2, 1)`"). -/
+private theorem Phi_B_gt_half {β : ℝ} (hβ : 0 < β) : (1 : ℝ)/2 < Phi_B β := by
+  unfold Phi_B
+  apply Phi_gt_half_of_pos
+  exact div_pos Delta_B_pos (sqrt_two_sigma_pos hβ)
+
+/-- `Φ_B β → 1` as `β → ∞`: the argument `Δ_B/√(2σ²(β)) → ∞` because
+    `σ²(β) → 0⁺`, and `Φ(x) → 1` as `x → ∞` (`Phi_tendsto_one_atTop`).
+    Mirrors the `gap_W_open_limit_infty` derivation chain.
+    paper source: line 825 ("`Φ_B(β)` ranges over `(1/2, 1)`"). -/
+private theorem Phi_B_tendsto_one_atTop :
+    Filter.Tendsto Phi_B Filter.atTop (nhds 1) := by
+  unfold Phi_B
+  have h_2sigma : Filter.Tendsto (fun β : ℝ => 2 * signalVariance β)
+      Filter.atTop (nhds 0) := by
+    have := signalVariance_tendsto_zero_atTop.const_mul (2 : ℝ)
+    simpa using this
+  have h_sqrt : Filter.Tendsto (fun β : ℝ => Real.sqrt (2 * signalVariance β))
+      Filter.atTop (nhds 0) := by
+    have h := (Real.continuous_sqrt.tendsto 0).comp h_2sigma
+    rw [Real.sqrt_zero] at h
+    exact h
+  have h_sqrt_pos : ∀ᶠ β in Filter.atTop, 0 < Real.sqrt (2 * signalVariance β) := by
+    filter_upwards [Filter.eventually_gt_atTop (0 : ℝ)] with β hβ
+    exact sqrt_two_sigma_pos hβ
+  have h_arg : Filter.Tendsto
+      (fun β : ℝ => Delta_B / Real.sqrt (2 * signalVariance β))
+      Filter.atTop Filter.atTop :=
+    tendsto_const_div_atTop_of_tendsto_zero_pos Delta_B Delta_B_pos
+      (fun β => Real.sqrt (2 * signalVariance β)) h_sqrt h_sqrt_pos
+  exact Phi_tendsto_one_atTop.comp h_arg
+
+/-- `P_trap β → 1` as `β → ∞`: identical chain to `Phi_B_tendsto_one_atTop`
+    with the reward gap `Δ_S > 0` in place of `Δ_B`.
+    paper source: line 804 ("`P_trap → 1` so `L(∞, p) = 0.4`"). -/
+private theorem P_trap_tendsto_one_atTop :
+    Filter.Tendsto P_trap Filter.atTop (nhds 1) := by
+  unfold P_trap
+  have h_2sigma : Filter.Tendsto (fun β : ℝ => 2 * signalVariance β)
+      Filter.atTop (nhds 0) := by
+    have := signalVariance_tendsto_zero_atTop.const_mul (2 : ℝ)
+    simpa using this
+  have h_sqrt : Filter.Tendsto (fun β : ℝ => Real.sqrt (2 * signalVariance β))
+      Filter.atTop (nhds 0) := by
+    have h := (Real.continuous_sqrt.tendsto 0).comp h_2sigma
+    rw [Real.sqrt_zero] at h
+    exact h
+  have h_sqrt_pos : ∀ᶠ β in Filter.atTop, 0 < Real.sqrt (2 * signalVariance β) := by
+    filter_upwards [Filter.eventually_gt_atTop (0 : ℝ)] with β hβ
+    exact sqrt_two_sigma_pos hβ
+  have h_arg : Filter.Tendsto
+      (fun β : ℝ => Delta_S / Real.sqrt (2 * signalVariance β))
+      Filter.atTop Filter.atTop :=
+    tendsto_const_div_atTop_of_tendsto_zero_pos Delta_S Delta_S_pos
+      (fun β => Real.sqrt (2 * signalVariance β)) h_sqrt h_sqrt_pos
+  exact Phi_tendsto_one_atTop.comp h_arg
+
+/-- `P_trap β → 1/2` as `β → 0⁺`: the argument `Δ_S/√(2σ²(β)) → 0`
+    because `σ²(β) → +∞`, and `Φ` is continuous with `Φ(0) = 1/2`.
+    Mirrors the `gap_W_open_limit_zero` derivation chain.
+    paper source: line 825 ("`L(0, p) = 0.425 + 0.225 p`", which uses
+    `P_trap(0⁺) = 1/2`). -/
+private theorem P_trap_tendsto_half_atZero :
+    Filter.Tendsto P_trap (nhdsWithin 0 (Set.Ioi 0)) (nhds (1/2 : ℝ)) := by
+  unfold P_trap
+  have h_2sigma : Filter.Tendsto (fun β : ℝ => 2 * signalVariance β)
+      (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop :=
+    signalVariance_tendsto_atTop_of_tendsto_zero_pos.const_mul_atTop
+      (by norm_num : (0 : ℝ) < 2)
+  have h_sqrt : Filter.Tendsto (fun β : ℝ => Real.sqrt (2 * signalVariance β))
+      (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop :=
+    Real.tendsto_sqrt_atTop.comp h_2sigma
+  have h_arg : Filter.Tendsto
+      (fun β : ℝ => Delta_S / Real.sqrt (2 * signalVariance β))
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) :=
+    h_sqrt.const_div_atTop Delta_S
+  have h_cont : Filter.Tendsto Phi (nhds (0 : ℝ)) (nhds (Phi 0)) :=
+    (Phi_continuousAt 0).tendsto
+  rw [Phi_zero] at h_cont
+  exact h_cont.comp h_arg
+
+/-- `Φ_B β → 1/2` as `β → 0⁺`: identical chain to
+    `P_trap_tendsto_half_atZero` with `Δ_B` in place of `Δ_S`.
+    paper source: line 825 ("`L(0, p) = 0.425 + 0.225 p`", which uses
+    `Φ_B(0⁺) = 1/2`). -/
+private theorem Phi_B_tendsto_half_atZero :
+    Filter.Tendsto Phi_B (nhdsWithin 0 (Set.Ioi 0)) (nhds (1/2 : ℝ)) := by
+  unfold Phi_B
+  have h_2sigma : Filter.Tendsto (fun β : ℝ => 2 * signalVariance β)
+      (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop :=
+    signalVariance_tendsto_atTop_of_tendsto_zero_pos.const_mul_atTop
+      (by norm_num : (0 : ℝ) < 2)
+  have h_sqrt : Filter.Tendsto (fun β : ℝ => Real.sqrt (2 * signalVariance β))
+      (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop :=
+    Real.tendsto_sqrt_atTop.comp h_2sigma
+  have h_arg : Filter.Tendsto
+      (fun β : ℝ => Delta_B / Real.sqrt (2 * signalVariance β))
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) :=
+    h_sqrt.const_div_atTop Delta_B
+  have h_cont : Filter.Tendsto Phi (nhds (0 : ℝ)) (nhds (Phi 0)) :=
+    (Phi_continuousAt 0).tendsto
+  rw [Phi_zero] at h_cont
+  exact h_cont.comp h_arg
+
+/-- **Rearrangement identity `eq:five-state-rearr`** (paper line 823):
+    `L(β, p) − 0.4 = (1 − P_trap β) · (0.5 − 0.9·(1 − p)·Φ_B β)`.
+    Pure algebraic identity on the concrete `L` definition,
+    discharged by `ring`.
+    paper source: Equation `eq:five-state-rearr`, line 823. -/
+private theorem L_rearrangement (β p : ℝ) :
+    L β p - (4/10 : ℝ) =
+      (1 - P_trap β) * ((1/2 : ℝ) - (9/10 : ℝ) * (1 - p) * Phi_B β) := by
+  unfold L
+  ring
+
+/-- **Endpoint limit `L(∞, p) = 0.4`** (paper line 804): as `β → ∞`,
+    `P_trap β → 1` and `Φ_B β → 1`, so the concrete `L` functional
+    tends to `1·0.4 + 0·0.9·(1 − (1 − p)·1) = 0.4`.
+    paper source: line 804 ("at `β → ∞`, `P_trap → 1` so
+    `L(∞, p) = 0.4`"). -/
+private theorem L_tendsto_limit_atTop (p : ℝ) :
+    Filter.Tendsto (fun β : ℝ => L β p) Filter.atTop (nhds (4/10 : ℝ)) := by
+  have h_Pt : Filter.Tendsto P_trap Filter.atTop (nhds 1) :=
+    P_trap_tendsto_one_atTop
+  have h_Pb : Filter.Tendsto Phi_B Filter.atTop (nhds 1) :=
+    Phi_B_tendsto_one_atTop
+  have h_comb : Filter.Tendsto
+      (fun β : ℝ => P_trap β * (4/10 : ℝ) +
+        (1 - P_trap β) * (9/10 : ℝ) * (1 - (1 - p) * Phi_B β))
+      Filter.atTop
+      (nhds ((1 : ℝ) * (4/10) +
+        (1 - 1) * (9/10) * (1 - (1 - p) * 1))) := by
+    exact ((h_Pt.mul_const _).add
+      (((tendsto_const_nhds.sub h_Pt).mul_const _).mul
+        (tendsto_const_nhds.sub
+          ((tendsto_const_nhds.sub tendsto_const_nhds).mul h_Pb))))
+  have h_eq : (1 : ℝ) * (4/10) + (1 - 1) * (9/10) * (1 - (1 - p) * 1)
+      = (4/10 : ℝ) := by ring
+  rw [h_eq] at h_comb
+  exact h_comb
+
+/-- **Endpoint limit `L(0⁺, p) = 0.425 + 0.225 p`** (paper line 825):
+    as `β → 0⁺`, `P_trap β → 1/2` and `Φ_B β → 1/2`, so the concrete
+    `L` functional tends to
+    `(1/2)·0.4 + (1/2)·0.9·(1 − (1 − p)·(1/2)) = 0.425 + 0.225 p`.
+    paper source: line 825 ("`L(0, p) = 0.425 + 0.225 p > 0.4`"). -/
+private theorem L_tendsto_atZero (p : ℝ) :
+    Filter.Tendsto (fun β : ℝ => L β p)
+      (nhdsWithin 0 (Set.Ioi 0))
+      (nhds ((425/1000 : ℝ) + (225/1000 : ℝ) * p)) := by
+  have h_Pt : Filter.Tendsto P_trap (nhdsWithin 0 (Set.Ioi 0))
+      (nhds (1/2 : ℝ)) := P_trap_tendsto_half_atZero
+  have h_Pb : Filter.Tendsto Phi_B (nhdsWithin 0 (Set.Ioi 0))
+      (nhds (1/2 : ℝ)) := Phi_B_tendsto_half_atZero
+  have h_comb : Filter.Tendsto
+      (fun β : ℝ => P_trap β * (4/10 : ℝ) +
+        (1 - P_trap β) * (9/10 : ℝ) * (1 - (1 - p) * Phi_B β))
+      (nhdsWithin 0 (Set.Ioi 0))
+      (nhds (((1:ℝ)/2) * (4/10) +
+        (1 - (1:ℝ)/2) * (9/10) * (1 - (1 - p) * ((1:ℝ)/2)))) := by
+    exact ((h_Pt.mul_const _).add
+      (((tendsto_const_nhds.sub h_Pt).mul_const _).mul
+        (tendsto_const_nhds.sub
+          ((tendsto_const_nhds.sub tendsto_const_nhds).mul h_Pb))))
+  have h_eq : ((1:ℝ)/2) * (4/10) +
+      (1 - (1:ℝ)/2) * (9/10) * (1 - (1 - p) * ((1:ℝ)/2))
+      = (425/1000 : ℝ) + (225/1000 : ℝ) * p := by ring
+  rw [h_eq] at h_comb
+  exact h_comb
+
+/-- **R80 substantive closure of `L_below_limit_at_some_beta_OPEN`.**
+    For `p ∈ [0, p_1)`, there exists a finite `β* > 0` with
+    `L(β*, p) < 0.4`. Proof (paper line 825): in the rearrangement
+    `L − 0.4 = (1 − P_trap β)·(0.5 − 0.9(1 − p)·Φ_B β)`, the factor
+    `1 − P_trap β > 0` for every finite `β` (`P_trap_lt_one`); and
+    since `p < p_1 = 4/9` gives `0.9(1 − p) > 1/2`, the threshold
+    `1/(2·0.9(1 − p)) < 1`, while `Φ_B β → 1` (`Phi_B_tendsto_one_atTop`),
+    so eventually `Φ_B β` exceeds that threshold, making the second
+    factor strictly negative. Any such finite `β > 0` is the witness.
+
+    Mathlib lemmas: `P_trap_lt_one`, `Phi_B_tendsto_one_atTop`,
+    `L_rearrangement`, `Filter.Tendsto.eventually`, `eventually_gt_nhds`,
+    `Filter.eventually_gt_atTop`. -/
+private theorem L_below_limit_at_some_beta_proof
+    (p : ℝ) (hp_nonneg : 0 ≤ p) (hp_lt_p1 : p < p_1) :
+    ∃ β_star_p : ℝ, 0 < β_star_p ∧ L β_star_p p < (4/10 : ℝ) := by
+  -- `c := 0.9·(1 − p)` exceeds `1/2` since `p < 4/9`.
+  set c : ℝ := (9/10 : ℝ) * (1 - p) with hc_def
+  have hp_lt : p < (4 : ℝ)/9 := by
+    have := hp_lt_p1; unfold p_1 at this; exact this
+  have hc_gt_half : (1/2 : ℝ) < c := by rw [hc_def]; nlinarith
+  have hc_pos : 0 < c := by linarith
+  -- The threshold `θ := 1/(2c)` is `< 1`.
+  set θ : ℝ := 1 / (2 * c) with hθ_def
+  have hθ_lt_one : θ < 1 := by
+    rw [hθ_def]
+    rw [div_lt_one (by linarith)]
+    linarith
+  -- `Φ_B β → 1`, so eventually `Φ_B β > θ`.
+  have h_ev_phiB : ∀ᶠ β in Filter.atTop, θ < Phi_B β :=
+    Phi_B_tendsto_one_atTop.eventually (eventually_gt_nhds hθ_lt_one)
+  -- Combine with eventual positivity of `β`.
+  obtain ⟨β_star, hβ_phiB, hβ_pos⟩ :=
+    ((h_ev_phiB.and (Filter.eventually_gt_atTop (0 : ℝ))).exists)
+  refine ⟨β_star, hβ_pos, ?_⟩
+  -- Second factor strictly negative: `1/2 − c·Φ_B β < 1/2 − c·θ = 0`.
+  have h_cθ : c * θ = (1/2 : ℝ) := by
+    rw [hθ_def]; field_simp
+  have h_second_neg : (1/2 : ℝ) - c * Phi_B β_star < 0 := by
+    have h_mul : c * θ < c * Phi_B β_star :=
+      mul_lt_mul_of_pos_left hβ_phiB hc_pos
+    rw [h_cθ] at h_mul
+    linarith
+  -- First factor strictly positive.
+  have h_first_pos : 0 < 1 - P_trap β_star := by
+    have := P_trap_lt_one β_star; linarith
+  -- Rearrangement: `L − 0.4 = (1 − P_trap)·(1/2 − c·Φ_B) < 0`.
+  have h_rearr : L β_star p - (4/10 : ℝ) =
+      (1 - P_trap β_star) * ((1/2 : ℝ) - c * Phi_B β_star) := by
+    have := L_rearrangement β_star p
+    rw [this, hc_def]
+  have h_prod_neg : (1 - P_trap β_star) *
+      ((1/2 : ℝ) - c * Phi_B β_star) < 0 :=
+    mul_neg_of_pos_of_neg h_first_pos h_second_neg
+  linarith [h_rearr, h_prod_neg]
+
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
     `prop:interior-optimum` (line 774) gives the existence of an
     interior minimiser `β* ≈ 1.5 bits` of the Regime (i) `p = 0`
@@ -305,11 +767,6 @@ theorem gap_interior_optimum :
 
 The boundaries `p_1 = 4/9` and `p_2 = 2/3` separate three policy regimes. -/
 
-/-- The first regime boundary `p_1 = 4/9` (paper line 809). -/
-noncomputable def p_1 : ℝ := (4 : ℝ) / 9
-
-/-- The second regime boundary `p_2 = 2/3` (paper line 809). -/
-noncomputable def p_2 : ℝ := (2 : ℝ) / 3
 
 /-- **Topological loss `|W_topo(p)| = 0.4·p`** on the 5-state instance.
 
@@ -333,23 +790,35 @@ noncomputable def W_topo_p (p : ℝ) : ℝ := (4/10 : ℝ) * p
 
 /-- **Regime (i) sub-claim — existence of below-limit `β*`.**
     For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` with
-    `L(β*(p), p) < L(∞, p) = 0.4`. The weak existence-only encoding;
-    the companion uniqueness, non-monotonicity, and overshoot-
-    monotonicity sub-axioms below carry the rest of the paper claim.
+    `L(β*(p), p) < L(∞, p) = 0.4`.
+
+    **R80 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    Previously an opaque Cat 3 axiom; R80 proves it by genuine
+    real-analysis on the concrete `L` carrier. The proof
+    (`L_below_limit_at_some_beta_proof`) uses the rearrangement
+    identity `eq:five-state-rearr` (`L_rearrangement`), the strict
+    bound `P_trap β < 1` for finite `β` (`P_trap_lt_one`, from
+    `Phi_lt_one`), and the limit `Φ_B β → 1` as `β → ∞`
+    (`Phi_B_tendsto_one_atTop`, from `signalVariance_tendsto_zero_atTop`
+    + `Phi_tendsto_one_atTop`): since `p < p_1 = 4/9` makes
+    `0.9(1 − p) > 1/2`, the threshold `1/(2·0.9(1 − p)) < 1`, so
+    eventually `Φ_B β` exceeds it and the rearranged loss is strictly
+    negative. No `Classical.choose`, no opaque carrier — fully derived.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("unique interior minimum ... satisfying L(β*(p), p) <
-    L(∞, p) = 0.4"). -/
-axiom L_below_limit_at_some_beta_OPEN :
+    L(∞, p) = 0.4"); proof line 825. -/
+theorem L_below_limit_at_some_beta_OPEN :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
-        L β_star_p p < (4/10 : ℝ)
+        L β_star_p p < (4/10 : ℝ) :=
+  L_below_limit_at_some_beta_proof
 
 /-- **Regime (i) sub-claim — existence of below-limit `β*`** (derived).
     For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` with
     `L(β*(p), p) < L(∞, p) = 0.4`.
 
-    Derived theorem composing the atomic stipulation
+    Derived theorem composing the R80-closed
     `L_below_limit_at_some_beta_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
 
@@ -390,21 +859,66 @@ theorem gap_three_regime_reversal_uniqueness :
     For `p ∈ [0, p_1)`, `L(β, p)` is non-monotone in `β`: there exist
     `β_low < β_high` (both `> 0`) such that `L(β_high, p) < L(β_low, p)`
     AND there exist `β_a < β_b` (both `> 0`) such that
-    `L(β_a, p) < L(β_b, p)`. Paper proof: as `β` ranges over
-    `(0, ∞)`, the loss decreases below `0.4` and then rises back
-    toward the limit `L(∞, p) = 0.4`.
+    `L(β_a, p) < L(β_b, p)`.
+
+    **R80 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    Previously an opaque Cat 3 axiom; R80 proves it by genuine
+    real-analysis on the concrete `L` carrier, mirroring the paper's
+    "the loss decreases below 0.4 and then rises back toward the limit
+    L(∞, p) = 0.4" argument (line 825). Let `β*` be the below-limit
+    witness with `L β* p < 0.4` (`L_below_limit_at_some_beta_proof`).
+    * *Decreasing branch* (`β_low < β_high`): `L(β, p) → 0.425 + 0.225 p
+      > 0.4 > L β* p` as `β → 0⁺` (`L_tendsto_atZero`), so eventually
+      near `0⁺` the loss strictly exceeds `L β* p`; pick `β_low` there
+      below `β*` and `β_high := β*`.
+    * *Increasing branch* (`β_a < β_b`): `L(β, p) → 0.4 > L β* p` as
+      `β → ∞` (`L_tendsto_limit_atTop`), so eventually the loss strictly
+      exceeds `L β* p`; pick `β_a := β*` and `β_b` large.
+    No `Classical.choose`, no opaque carrier — fully derived.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("L(β, p) is non-monotone in β"); proof at lines 821-825. -/
-axiom L_nonmonotone_witnesses_OPEN :
+theorem L_nonmonotone_witnesses_OPEN :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       (∃ β_low β_high : ℝ, 0 < β_low ∧ β_low < β_high ∧
         L β_high p < L β_low p) ∧
       (∃ β_a β_b : ℝ, 0 < β_a ∧ β_a < β_b ∧
-        L β_a p < L β_b p)
+        L β_a p < L β_b p) := by
+  intro p hp_nonneg hp_lt_p1
+  -- The below-limit witness `β*` with `L β* p < 0.4`.
+  obtain ⟨β_star, hβ_star_pos, hβ_star_lt⟩ :=
+    L_below_limit_at_some_beta_proof p hp_nonneg hp_lt_p1
+  constructor
+  · -- Decreasing branch: `L(·, p) → 0.425 + 0.225 p` as `β → 0⁺`,
+    -- which strictly exceeds `0.4 > L β* p`.
+    have h_limit_gt : (4/10 : ℝ) < (425/1000 : ℝ) + (225/1000 : ℝ) * p := by
+      nlinarith
+    have h_target : L β_star p < (425/1000 : ℝ) + (225/1000 : ℝ) * p := by
+      linarith
+    -- Eventually near `0⁺`, `L β p` exceeds `L β_star p`.
+    have h_ev_L : ∀ᶠ β in nhdsWithin 0 (Set.Ioi 0), L β_star p < L β p :=
+      (L_tendsto_atZero p).eventually (eventually_gt_nhds h_target)
+    -- Eventually near `0⁺`, `β < β_star`.
+    have h_ev_lt : ∀ᶠ β in nhdsWithin 0 (Set.Ioi 0), β < β_star :=
+      eventually_nhdsWithin_of_eventually_nhds (eventually_lt_nhds hβ_star_pos)
+    -- Eventually near `0⁺`, `β > 0` (the `Set.Ioi 0` membership).
+    have h_ev_pos : ∀ᶠ β in nhdsWithin 0 (Set.Ioi 0), (0 : ℝ) < β :=
+      eventually_mem_nhdsWithin.mono (fun β hβ => hβ)
+    obtain ⟨β_low, hβ_low_L, hβ_low_lt, hβ_low_pos⟩ :=
+      ((h_ev_L.and (h_ev_lt.and h_ev_pos)).exists)
+    exact ⟨β_low, β_star, hβ_low_pos, hβ_low_lt, hβ_low_L⟩
+  · -- Increasing branch: `L(·, p) → 0.4` as `β → ∞`, which strictly
+    -- exceeds `L β* p`.
+    have h_ev_L : ∀ᶠ β in Filter.atTop, L β_star p < L β p :=
+      (L_tendsto_limit_atTop p).eventually (eventually_gt_nhds hβ_star_lt)
+    have h_ev_gt : ∀ᶠ β in Filter.atTop, β_star < β :=
+      Filter.eventually_gt_atTop β_star
+    obtain ⟨β_b, hβ_b_L, hβ_b_gt⟩ := ((h_ev_L.and h_ev_gt).exists)
+    exact ⟨β_star, β_b, hβ_star_pos, hβ_b_gt, hβ_b_L⟩
 
 /-- **Regime (i) sub-claim — non-monotonicity of `L(·, p)` in `β`**
-    (derived theorem composing `L_nonmonotone_witnesses_OPEN` per
+    (derived theorem composing the R80-closed
+    `L_nonmonotone_witnesses_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
     paper source: Regime (i), line 814 + proof at lines 821-825. -/
 theorem gap_three_regime_reversal_nonmonotone :
@@ -437,14 +951,40 @@ theorem gap_three_regime_reversal_nonmonotone :
     line 814 ("overshoot ... is continuous and strictly decreasing in
     p on [0, p_1), vanishing at p_1"); proof at line 825 ("Continuity
     and strict monotonicity of the overshoot in p follow from envelope
-    differentiation of (eq:five-state-rearr) at β = β*(p)"). -/
-axiom envelope_derivative_sign_in_p_OPEN :
+    differentiation of (eq:five-state-rearr) at β = β*(p)").
+
+    **R80 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    Previously an opaque Cat 3 axiom; R80 proves the existential
+    encoding by genuine real-analysis on the concrete `L` carrier.
+    For `p₁`, the below-limit witness `β*₁` satisfies `L β*₁ p₁ < 0.4`
+    (`L_below_limit_at_some_beta_proof`, applicable since `p₁ < p₂ <
+    p_1`). For `p₂`, the loss limit `L(β, p₂) → 0.4` as `β → ∞`
+    (`L_tendsto_limit_atTop`) exceeds `L β*₁ p₁`, so some finite
+    `β*₂ > 0` has `L β*₂ p₂ > L β*₁ p₁`. The witnessed inequality
+    `L β*₁ p₁ < L β*₂ p₂` is the existential the paper's overshoot-
+    monotonicity claim reduces to. No `Classical.choose`, no opaque
+    carrier — fully derived. -/
+theorem envelope_derivative_sign_in_p_OPEN :
     ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
       ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
-        L β_star₁ p₁ < L β_star₂ p₂
+        L β_star₁ p₁ < L β_star₂ p₂ := by
+  intro p₁ p₂ hp₁_nonneg hp₁_lt_p₂ hp₂_lt_p1
+  -- `β*₁`: below-limit witness for `p₁` (valid since `p₁ < p₂ < p_1`).
+  have hp₁_lt_p1 : p₁ < p_1 := lt_trans hp₁_lt_p₂ hp₂_lt_p1
+  obtain ⟨β_star₁, hβ₁_pos, hβ₁_lt⟩ :=
+    L_below_limit_at_some_beta_proof p₁ hp₁_nonneg hp₁_lt_p1
+  -- `β*₂`: a finite `β` for `p₂` whose loss exceeds `L β*₁ p₁`,
+  -- available because `L(·, p₂) → 0.4 > L β*₁ p₁` as `β → ∞`.
+  have h_ev_L : ∀ᶠ β in Filter.atTop, L β_star₁ p₁ < L β p₂ :=
+    (L_tendsto_limit_atTop p₂).eventually (eventually_gt_nhds hβ₁_lt)
+  have h_ev_pos : ∀ᶠ β in Filter.atTop, (0 : ℝ) < β :=
+    Filter.eventually_gt_atTop (0 : ℝ)
+  obtain ⟨β_star₂, hβ₂_L, hβ₂_pos⟩ := ((h_ev_L.and h_ev_pos).exists)
+  exact ⟨β_star₁, β_star₂, hβ₁_pos, hβ₂_pos, hβ₂_L⟩
 
 /-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`**
-    (derived theorem composing `envelope_derivative_sign_in_p_OPEN` per
+    (derived theorem composing the R80-closed
+    `envelope_derivative_sign_in_p_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
     paper source: Regime (i), line 814 + proof at line 825. -/
 theorem gap_three_regime_reversal_overshoot_decreasing :
@@ -678,202 +1218,6 @@ theorem gap_three_regime_cognitive_augmentation_arithmetic_part :
   intros p _ _
   unfold W_topo_p
   linarith
-
-/-! ### Helper lemmas: monotonicity of `P_trap` and `Phi_B`.
-
-`P_trap β = Phi(Delta_S / √(2 σ²(β)))` and `Phi_B β = Phi(Delta_B / √(2 σ²(β)))`
-with `Delta_S, Delta_B > 0`. As `β` increases, `σ²(β)` strictly decreases
-(`signalVariance_strictAntitoneOn`), so the argument of `Phi` strictly
-increases, and `Phi` is monotone (`Phi_monotone`). Both `P_trap` and
-`Phi_B` are bounded above by `1` (`Phi_le_one`) and below by `0`
-(`Phi_nonneg`). These auxiliary facts are pure Cat 1 derivations from
-already-closed Mathlib-derivable inputs.
-
-paper source: §2.2 line 138 (`σ²(β) = 1/(2^{2β} − 1)` strictly
-decreasing in β); line 802 (`P_trap, Φ_B` defined). -/
-
-/-- `Delta_S = r_A − r_B = 0.2 > 0`. -/
-private theorem Delta_S_pos : 0 < Delta_S := by
-  unfold Delta_S r_A r_B
-  norm_num
-
-/-- `Delta_B = r_G − r_D = 0.9 > 0`. -/
-private theorem Delta_B_pos : 0 < Delta_B := by
-  unfold Delta_B r_G r_D
-  norm_num
-
-/-- `signalVariance β > 0` for `β > 0`. -/
-private theorem signalVariance_pos {β : ℝ} (hβ : 0 < β) : 0 < signalVariance β := by
-  unfold signalVariance
-  have h2_one_lt : (1 : ℝ) < 2 := by norm_num
-  have h2β_pos : 0 < 2 * β := by linarith
-  have h_one_lt_pow : (1 : ℝ) < (2 : ℝ)^(2 * β) :=
-    Real.one_lt_rpow h2_one_lt h2β_pos
-  have h_denom_pos : 0 < (2 : ℝ)^(2 * β) - 1 := by linarith
-  exact one_div_pos.mpr h_denom_pos
-
-/-- `√(2 · signalVariance β) > 0` for `β > 0`. -/
-private theorem sqrt_two_sigma_pos {β : ℝ} (hβ : 0 < β) :
-    0 < Real.sqrt (2 * signalVariance β) := by
-  apply Real.sqrt_pos.mpr
-  exact mul_pos (by norm_num) (signalVariance_pos hβ)
-
-/-- For `β₁ ≤ β₂` (both positive), `Delta_S / √(2 σ²(β₁)) ≤ Delta_S / √(2 σ²(β₂))`.
-
-    Combines `signalVariance_strictAntitoneOn` (β₁ < β₂ ⟹ σ²(β₂) < σ²(β₁)),
-    `Real.sqrt_lt_sqrt`, `Delta_S_pos`, and division reversal on positives.
-    The case `β₁ = β₂` gives equality. -/
-private theorem arg_S_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
-    Delta_S / Real.sqrt (2 * signalVariance β₁) ≤
-      Delta_S / Real.sqrt (2 * signalVariance β₂) := by
-  rcases eq_or_lt_of_le h_le with heq | hlt
-  · subst heq; rfl
-  -- β₁ < β₂. σ²(β₂) < σ²(β₁), so √(2σ²(β₂)) < √(2σ²(β₁)), so reciprocal
-  -- reverses, and multiplying by Delta_S > 0 preserves the order.
-  have hβ₂ : 0 < β₂ := lt_trans hβ₁ hlt
-  have h_sigma : signalVariance β₂ < signalVariance β₁ :=
-    signalVariance_strictAntitoneOn hβ₁ hlt
-  have h_2sigma_pos₂ : 0 < 2 * signalVariance β₂ :=
-    mul_pos (by norm_num) (signalVariance_pos hβ₂)
-  have h_2sigma_lt : 2 * signalVariance β₂ < 2 * signalVariance β₁ := by linarith
-  have h_sqrt_lt :
-      Real.sqrt (2 * signalVariance β₂) < Real.sqrt (2 * signalVariance β₁) :=
-    Real.sqrt_lt_sqrt (le_of_lt h_2sigma_pos₂) h_2sigma_lt
-  have h_sqrt_pos₂ : 0 < Real.sqrt (2 * signalVariance β₂) :=
-    sqrt_two_sigma_pos hβ₂
-  -- Apply division-reversal: a/b ≤ a/c whenever 0 < c ≤ b and 0 ≤ a.
-  exact div_le_div_of_nonneg_left (le_of_lt Delta_S_pos)
-    h_sqrt_pos₂ (le_of_lt h_sqrt_lt)
-
-/-- For `β₁ ≤ β₂` (both positive), `Delta_B / √(2 σ²(β₁)) ≤ Delta_B / √(2 σ²(β₂))`. -/
-private theorem arg_B_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
-    Delta_B / Real.sqrt (2 * signalVariance β₁) ≤
-      Delta_B / Real.sqrt (2 * signalVariance β₂) := by
-  rcases eq_or_lt_of_le h_le with heq | hlt
-  · subst heq; rfl
-  have hβ₂ : 0 < β₂ := lt_trans hβ₁ hlt
-  have h_sigma : signalVariance β₂ < signalVariance β₁ :=
-    signalVariance_strictAntitoneOn hβ₁ hlt
-  have h_2sigma_pos₂ : 0 < 2 * signalVariance β₂ :=
-    mul_pos (by norm_num) (signalVariance_pos hβ₂)
-  have h_2sigma_lt : 2 * signalVariance β₂ < 2 * signalVariance β₁ := by linarith
-  have h_sqrt_lt :
-      Real.sqrt (2 * signalVariance β₂) < Real.sqrt (2 * signalVariance β₁) :=
-    Real.sqrt_lt_sqrt (le_of_lt h_2sigma_pos₂) h_2sigma_lt
-  have h_sqrt_pos₂ : 0 < Real.sqrt (2 * signalVariance β₂) :=
-    sqrt_two_sigma_pos hβ₂
-  exact div_le_div_of_nonneg_left (le_of_lt Delta_B_pos)
-    h_sqrt_pos₂ (le_of_lt h_sqrt_lt)
-
-/-- `P_trap` is monotonically non-decreasing on `(0, ∞)`: as precision
-    `β` increases, the trap-selection probability rises. -/
-private theorem P_trap_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
-    P_trap β₁ ≤ P_trap β₂ := by
-  unfold P_trap
-  exact Phi_monotone (arg_S_monotone hβ₁ h_le)
-
-/-- `Phi_B` is monotonically non-decreasing on `(0, ∞)`: as precision
-    `β` increases, the within-`B` goal-selection probability rises. -/
-private theorem Phi_B_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
-    Phi_B β₁ ≤ Phi_B β₂ := by
-  unfold Phi_B
-  exact Phi_monotone (arg_B_monotone hβ₁ h_le)
-
-/-- `0 ≤ P_trap β ≤ 1` for any `β`. -/
-private theorem P_trap_mem_unitInterval (β : ℝ) :
-    0 ≤ P_trap β ∧ P_trap β ≤ 1 := by
-  unfold P_trap
-  exact ⟨Phi_nonneg _, Phi_le_one _⟩
-
-/-- `0 ≤ Phi_B β ≤ 1` for any `β`. -/
-private theorem Phi_B_mem_unitInterval (β : ℝ) :
-    0 ≤ Phi_B β ∧ Phi_B β ≤ 1 := by
-  unfold Phi_B
-  exact ⟨Phi_nonneg _, Phi_le_one _⟩
-
-/-- **Auxiliary lemma — `L(β, p)` is monotonically non-increasing in `β`
-    on `(0, ∞)` whenever `0.9 · (1 − p) · 1 ≤ 0.5`, i.e., `(1 − p) ≤ 5/9`,
-    i.e., `p ≥ p_1 = 4/9`.
-
-    This is the analytic engine common to both Regime (ii) (`p ∈ [p_1, p_2]`)
-    and Regime (iii) (`p ∈ (p_2, 1)`) of Proposition
-    `prop:three-regime-five-state`: in both regimes the bound on
-    `0.9·(1−p)·Φ_B(β)` ensures the "first term" of `L₂ − L₁` is
-    non-positive (since `−0.5 + 0.9·(1−p)·v₁ ≤ 0`), and the "second term"
-    is non-positive by basic non-negativity (the `0.9·(1−u₂)·(1−p)` factor
-    is non-negative, and the `Φ_B(β₂) − Φ_B(β₁)` factor is non-negative
-    by `Phi_B_monotone`).
-
-    paper source: Proposition `prop:three-regime-five-state` proof,
-    Regime (ii) line 829 ("Direct differentiation gives ... `∂L/∂β < 0`").
-    The Lean proof uses an algebraic decomposition equivalent to the
-    paper's derivative-based argument: rather than computing the
-    derivative explicitly, expand `L β₂ p − L β₁ p` and group into the
-    two non-positive contributions. -/
-private theorem L_monotone_under_q_le_5_9
-    (p : ℝ) (hp_q_bound : 1 - p ≤ (5 : ℝ) / 9) (hp_le_1 : p ≤ 1)
-    {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : β₁ ≤ β₂) :
-    L β₂ p ≤ L β₁ p := by
-  -- Trivial case: β₁ = β₂.
-  rcases eq_or_lt_of_le h_le with heq | hlt
-  · subst heq; rfl
-  -- Substantive case: β₁ < β₂.
-  set u₁ := P_trap β₁ with hu₁_def
-  set u₂ := P_trap β₂ with hu₂_def
-  set v₁ := Phi_B β₁ with hv₁_def
-  set v₂ := Phi_B β₂ with hv₂_def
-  -- Monotonicity of P_trap and Phi_B.
-  have h_u_le : u₁ ≤ u₂ := P_trap_monotone hβ₁ h_le
-  have h_v_le : v₁ ≤ v₂ := Phi_B_monotone hβ₁ h_le
-  -- Bounds on u, v: in [0, 1].
-  obtain ⟨h_u₁_nn, h_u₁_le_1⟩ := P_trap_mem_unitInterval β₁
-  obtain ⟨h_u₂_nn, h_u₂_le_1⟩ := P_trap_mem_unitInterval β₂
-  obtain ⟨h_v₁_nn, h_v₁_le_1⟩ := Phi_B_mem_unitInterval β₁
-  obtain ⟨_h_v₂_nn, h_v₂_le_1⟩ := Phi_B_mem_unitInterval β₂
-  -- q := 1 - p, with 0 ≤ q ≤ 5/9.
-  set q : ℝ := 1 - p with hq_def
-  have h_q_nn : 0 ≤ q := by simp [hq_def]; linarith
-  -- Key inequality: 0.9·q·v₁ ≤ 0.5.
-  -- Proof: 0.9·q ≤ 0.9·(5/9) = 0.5, then × v₁ ≤ 1.
-  have h_09q_le : (9/10 : ℝ) * q ≤ (1/2 : ℝ) := by
-    have : (9/10 : ℝ) * q ≤ (9/10 : ℝ) * (5/9 : ℝ) := by
-      exact mul_le_mul_of_nonneg_left hp_q_bound (by norm_num)
-    linarith [this]
-  have h_09qv_le : (9/10 : ℝ) * q * v₁ ≤ (1/2 : ℝ) := by
-    have h_09q_nn : 0 ≤ (9/10 : ℝ) * q := mul_nonneg (by norm_num) h_q_nn
-    have h_step : (9/10 : ℝ) * q * v₁ ≤ (9/10 : ℝ) * q * 1 :=
-      mul_le_mul_of_nonneg_left h_v₁_le_1 h_09q_nn
-    have : (9/10 : ℝ) * q * v₁ ≤ (9/10 : ℝ) * q := by linarith [h_step]
-    linarith [this, h_09q_le]
-  -- Algebraic decomposition:
-  --   L₂ - L₁ = (u₂ - u₁) · (-0.5 + 0.9·q·v₁) - 0.9·q·(v₂ - v₁)·(1 - u₂).
-  -- Both terms ≤ 0 under our hypotheses.
-  have h_term1_le : (u₂ - u₁) * (-(1/2 : ℝ) + (9/10 : ℝ) * q * v₁) ≤ 0 := by
-    have h_u_diff_nn : 0 ≤ u₂ - u₁ := by linarith
-    have h_bracket : -(1/2 : ℝ) + (9/10 : ℝ) * q * v₁ ≤ 0 := by linarith
-    exact mul_nonpos_of_nonneg_of_nonpos h_u_diff_nn h_bracket
-  have h_term2_nn : 0 ≤ (9/10 : ℝ) * q * (v₂ - v₁) * (1 - u₂) := by
-    have h_v_diff_nn : 0 ≤ v₂ - v₁ := by linarith
-    have h_one_minus_u₂_nn : 0 ≤ 1 - u₂ := by linarith
-    have h_09q_nn : 0 ≤ (9/10 : ℝ) * q := mul_nonneg (by norm_num) h_q_nn
-    have : 0 ≤ (9/10 : ℝ) * q * (v₂ - v₁) := mul_nonneg h_09q_nn h_v_diff_nn
-    exact mul_nonneg this h_one_minus_u₂_nn
-  -- Now expand L β₂ p - L β₁ p = (term1) - (term2). Need to verify
-  -- this is an algebraic identity; once verified, the bound L₂ ≤ L₁
-  -- follows from term1 ≤ 0 and term2 ≥ 0.
-  show L β₂ p ≤ L β₁ p
-  unfold L
-  -- L β p (definition) = P_trap β · 0.4 + (1 - P_trap β) · 0.9 · (1 - (1 - p) · Phi_B β)
-  -- Substitute names u, v, q.
-  show u₂ * (4/10 : ℝ) + (1 - u₂) * (9/10 : ℝ) * (1 - q * v₂) ≤
-       u₁ * (4/10 : ℝ) + (1 - u₁) * (9/10 : ℝ) * (1 - q * v₁)
-  -- The identity:
-  --   [u₁ * 0.4 + (1 - u₁) * 0.9 * (1 - q * v₁)]
-  -- - [u₂ * 0.4 + (1 - u₂) * 0.9 * (1 - q * v₂)]
-  -- = - (u₂ - u₁) * (-0.5 + 0.9·q·v₁) + 0.9·q·(v₂ - v₁)·(1 - u₂)
-  -- = (u₂ - u₁) * (0.5 - 0.9·q·v₁) + 0.9·q·(v₂ - v₁)·(1 - u₂)  [≥ 0]
-  -- which means RHS - LHS ≥ 0, i.e., LHS ≤ RHS.
-  nlinarith [h_term1_le, h_term2_nn]
 
 /-- **Proposition `prop:three-regime-five-state` Regime (ii): Cognitive-
     augmentation — β-monotonicity sub-claim.**

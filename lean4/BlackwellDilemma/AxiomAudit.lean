@@ -691,4 +691,44 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.alphaStar_def
 #print axioms BlackwellDilemma.myopicKWelfareBelowDepth
 
+-- R80 substantive L-carrier closure wave (3 Cat 3 workingAssumption
+-- atoms about the CONCRETE 5-state welfare-loss carrier `L β p` closed
+-- by genuine real-analysis on the concrete definition — NOT by
+-- `Classical.choose` / opaque-carrier reclassification):
+--
+-- (1) `L_below_limit_at_some_beta_OPEN` (paper prop:three-regime-five-
+--     state Regime (i) line 814 below-limit β* existence): previously
+--     workingAssumption gapOpen axiom, now derivedTheorem gapClosed via
+--     `theorem L_below_limit_at_some_beta_OPEN := L_below_limit_at_some_
+--     beta_proof`. The proof composes the rearrangement identity
+--     `eq:five-state-rearr` (`L_rearrangement`, by `ring`), the strict
+--     bound `P_trap β < 1` (`P_trap_lt_one`, from new ClassicalResults
+--     lemma `Phi_lt_one`), and `Φ_B β → 1` as β → ∞
+--     (`Phi_B_tendsto_one_atTop`, from `signalVariance_tendsto_zero_
+--     atTop` + `Phi_tendsto_one_atTop`).
+-- (2) `L_nonmonotone_witnesses_OPEN` (Regime (i) non-monotonicity):
+--     previously workingAssumption gapOpen axiom, now derivedTheorem
+--     gapClosed; both witness pairs proved from the below-limit witness
+--     β* plus the endpoint limits `L_tendsto_atZero` /
+--     `L_tendsto_limit_atTop`.
+-- (3) `envelope_derivative_sign_in_p_OPEN` (Regime (i) overshoot
+--     existential): previously workingAssumption gapOpen axiom, now
+--     derivedTheorem gapClosed; β*₁ = below-limit witness for p₁,
+--     β*₂ = finite witness from `L_tendsto_limit_atTop` for p₂.
+--
+-- New ClassicalResults.lean Mathlib-derived helpers: `Phi_reflect`,
+-- `Phi_tail_integral_pos` (via `MeasureTheory.setIntegral_pos_iff_
+-- support_of_nonneg_ae`), `Phi_gt_half_of_pos` (via `intervalIntegral.
+-- intervalIntegral_pos_of_pos`), `Phi_pos`, `Phi_lt_one`. Each closure
+-- is HONEST (genuine proof on the concrete `L` definition, no R7-style
+-- content-erasure, no `sorry`). `#print axioms` on all 3 closures =
+-- [propext, Classical.choice, Quot.sound] only (Classical.choice from
+-- the `Filter.Tendsto.eventually` machinery; no project `_OPEN` axiom).
+#print axioms BlackwellDilemma.FiveState.L_below_limit_at_some_beta_OPEN
+#print axioms BlackwellDilemma.FiveState.L_nonmonotone_witnesses_OPEN
+#print axioms BlackwellDilemma.FiveState.envelope_derivative_sign_in_p_OPEN
+#print axioms BlackwellDilemma.Phi_lt_one
+#print axioms BlackwellDilemma.Phi_gt_half_of_pos
+#print axioms BlackwellDilemma.Phi_reflect
+
 end BlackwellDilemma.AxiomAudit

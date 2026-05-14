@@ -945,6 +945,123 @@ theorem signalVariance_tendsto_zero_atTop :
 theorem Phi_continuousAt (x : ℝ) : ContinuousAt Phi x :=
   (gap_Phi_derivative x).continuousAt
 
+/-- **Reflection identity: `Phi x + Phi (-x) = 1`.**
+    Derivation: `Phi x = 1/2 + ∫_0..x phi` (definitional) and
+    `Phi (-x) = 1/2 - ∫_0..x phi` (`Phi_neg_eq`); the two running
+    integrals cancel, leaving `1`. This is the standard-normal CDF
+    symmetry `Φ(x) = 1 − Φ(−x)`.
+
+    paper source: standard normal CDF symmetry (textbook; not
+    paper-novel). Used to derive the strict bounds `0 < Phi` and
+    `Phi < 1` for the 5-state welfare-loss analysis. -/
+theorem Phi_reflect (x : ℝ) : Phi x + Phi (-x) = 1 := by
+  have h_neg : Phi (-x) = 1/2 - ∫ t in (0 : ℝ)..x, phi t := Phi_neg_eq x
+  have h_pos : Phi x = 1/2 + ∫ t in (0 : ℝ)..x, phi t := rfl
+  rw [h_neg, h_pos]
+  ring
+
+/-- **Strict tail positivity: `0 < ∫_{t > x} phi t` for every `x`.**
+    Derivation: `phi` is strictly positive everywhere
+    (`phi_pos`), so its support is all of `ℝ`; restricted to the
+    half-line `Set.Ioi x` this still has positive (indeed infinite)
+    Lebesgue measure. `setIntegral_pos_iff_support_of_nonneg_ae`
+    converts the positive-measure-support fact into strict
+    positivity of the set integral. `phi` is integrable on the
+    half-line by `phi_integrableOn_Ioi_zero`-style reasoning,
+    here reproved directly for the general base point `x`.
+
+    paper source: the standard-normal density has full support, so
+    every right tail carries strictly positive mass (textbook). -/
+theorem Phi_tail_integral_pos (x : ℝ) :
+    0 < ∫ t in Set.Ioi x, phi t := by
+  -- `phi` is integrable on `Ioi x` (Gaussian form on a half-line).
+  have hphi_eq : (fun t : ℝ => phi t) =
+      fun t => (1 / Real.sqrt (2 * Real.pi)) * Real.exp (-(1/2) * t^2) := by
+    funext t; exact phi_eq_gaussian t
+  have h_int : MeasureTheory.IntegrableOn phi (Set.Ioi x) := by
+    rw [show phi = (fun t : ℝ => (1 / Real.sqrt (2 * Real.pi))
+                                  * Real.exp (-(1/2) * t^2)) from hphi_eq]
+    apply MeasureTheory.Integrable.integrableOn
+    apply MeasureTheory.Integrable.const_mul
+    exact integrable_exp_neg_mul_sq (by norm_num : (0 : ℝ) < 1/2)
+  -- Non-negativity a.e. on the restricted measure.
+  have h_nonneg : 0 ≤ᵐ[MeasureTheory.volume.restrict (Set.Ioi x)] phi :=
+    Filter.Eventually.of_forall (fun t => phi_nonneg t)
+  rw [MeasureTheory.setIntegral_pos_iff_support_of_nonneg_ae h_nonneg h_int]
+  -- `support phi = univ` since `phi` is strictly positive everywhere,
+  -- so `support phi ∩ Ioi x = Ioi x`, which has positive volume.
+  have h_supp : Function.support phi = Set.univ := by
+    ext t
+    simp only [Function.mem_support, Set.mem_univ, iff_true]
+    exact (phi_pos t).ne'
+  rw [h_supp, Set.univ_inter]
+  exact MeasureTheory.Measure.measure_Ioi_pos MeasureTheory.volume x
+
+/-- **`1/2 < Phi x` for `x > 0`.**
+    Derivation: `Phi x = 1/2 + ∫_0..x phi` and the running integral
+    `∫_0..x phi` is strictly positive on `0 < x` because `phi` is
+    strictly positive everywhere (`intervalIntegral_pos_of_pos`,
+    using continuity of `phi` for interval-integrability).
+
+    paper source: the standard normal CDF strictly exceeds `1/2` on
+    the positive half-line (textbook). Used to pin `Phi_B(β) ∈ (1/2, 1)`
+    in the 5-state Regime (i) analysis (paper line 825). -/
+theorem Phi_gt_half_of_pos {x : ℝ} (hx : 0 < x) : (1 : ℝ)/2 < Phi x := by
+  have h_pos : 0 < ∫ t in (0 : ℝ)..x, phi t :=
+    intervalIntegral.intervalIntegral_pos_of_pos
+      (phi_continuous.intervalIntegrable 0 x) phi_pos hx
+  unfold Phi
+  linarith
+
+/-- **`0 < Phi x` for every `x`.**
+    Derivation: for `x ≥ 0`, monotonicity gives `Phi x ≥ Phi 0 = 1/2 > 0`;
+    for `x < 0`, the reflection identity `Phi x = 1 − Phi (−x)` with
+    `−x > 0` reduces the claim to `Phi (−x) < 1`, which follows from
+    `Phi x = 1/2 + ∫_0..(−x) phi` plus strict tail positivity
+    `∫_{t > −x} phi > 0` via the split `∫_0..(−x) phi = 1/2 − ∫_{t>−x} phi`
+    (`intervalIntegral.integral_Ioi_sub_Ioi`, `integral_phi_Ioi_zero`).
+
+    paper source: the standard normal CDF is strictly positive
+    everywhere (textbook). -/
+theorem Phi_pos (x : ℝ) : 0 < Phi x := by
+  rcases le_or_gt 0 x with hx | hx
+  · -- x ≥ 0: Phi x ≥ Phi 0 = 1/2 > 0.
+    have h_mono : Phi 0 ≤ Phi x := Phi_monotone hx
+    rw [Phi_zero] at h_mono
+    linarith
+  · -- x < 0: use reflection. Set y := -x > 0.
+    set y : ℝ := -x with hy_def
+    have hy_pos : 0 < y := by simp only [hy_def]; linarith
+    have h_refl : Phi x + Phi y = 1 := by
+      have := Phi_reflect y
+      rw [show -y = x from by simp [hy_def]] at this
+      linarith [this]
+    -- Phi y < 1 via the integral split: Phi y = 1/2 + ∫_0..y phi,
+    -- and ∫_0..y phi = 1/2 - ∫_{t>y} phi < 1/2.
+    have h_split : (∫ t in Set.Ioi (0 : ℝ), phi t) - (∫ t in Set.Ioi y, phi t)
+                    = ∫ t in (0 : ℝ)..y, phi t :=
+      intervalIntegral.integral_Ioi_sub_Ioi phi_integrableOn_Ioi_zero hy_pos.le
+    rw [integral_phi_Ioi_zero] at h_split
+    have h_tail_pos : 0 < ∫ t in Set.Ioi y, phi t := Phi_tail_integral_pos y
+    have h_Phi_y_lt : Phi y < 1 := by
+      unfold Phi
+      linarith
+    linarith
+
+/-- **`Phi x < 1` for every `x`.**
+    Derivation: the reflection identity `Phi x = 1 − Phi (−x)`
+    (`Phi_reflect`) together with strict positivity `0 < Phi (−x)`
+    (`Phi_pos`) gives `Phi x = 1 − Phi (−x) < 1`.
+
+    paper source: the standard normal CDF is strictly below `1`
+    everywhere (textbook). Used to establish `1 − P_trap(β) > 0` for
+    every finite `β` in the 5-state Regime (i) reversal analysis
+    (paper line 825: "`1 − P_trap(β) > 0` for finite `β`"). -/
+theorem Phi_lt_one (x : ℝ) : Phi x < 1 := by
+  have h_refl : Phi x + Phi (-x) = 1 := Phi_reflect x
+  have h_pos : 0 < Phi (-x) := Phi_pos (-x)
+  linarith
+
 /-- **Cat 1 Mathlib-derivable: `signalVariance β → +∞` as `β → 0⁺`.**
 
     `signalVariance β = 1 / (2^(2β) − 1)`. As `β → 0⁺`, the exponent
