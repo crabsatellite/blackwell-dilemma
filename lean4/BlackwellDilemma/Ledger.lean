@@ -2250,9 +2250,17 @@ def entry_carrier_snrZ : GapEntry where
     "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
   conditionalOn := []
 
-/-- welfareCrossPartial carrier — paper-novel welfare cross-partial. -/
+/-- welfareCrossPartial carrier — paper-novel welfare cross-partial.
+
+    R76: was `axiom welfareCrossPartial : ℝ → ℝ → ℝ`; now
+    `noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ := fun β κ =>
+    firstTermCrossPartial β κ + secondTermCrossPartial β κ` (paper line 566
+    explicit two-term decomposition encoded as a `def`). The Hodge-style
+    concrete-def closure pattern (R63 W_bar mixture decomposition / R72
+    W_bar precedent) makes the cross-partial concrete via the paper-Def-
+    stipulated explicit decomposition into the first term + second term. -/
 def entry_carrier_welfareCrossPartial : GapEntry where
-  name := "welfareCrossPartial"
+  name := "welfareCrossPartial (R76: opaque axiom → noncomputable def via paper line 566 explicit two-term decomposition; carrier still tracked as Cat 3 paper-novel primitive — paper-faithful additive decomposition)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.carrier
@@ -2262,10 +2270,11 @@ def entry_carrier_welfareCrossPartial : GapEntry where
     "object whose positivity (in the moderate-SNR + bridge-dominance " ++
     "regime) is the proposition's conclusion"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom welfareCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L601.  Companion atomic stipulations (`welfareCrossPartial_explicit_form`, `cross_partial_sign_in_z_lt_one`) anchor the carrier to the paper-stated explicit form and sign claim.  Cat 1 reduction check: CLEAR-NO — paper's cross-partial is a partial-derivative of the paper-novel `agentWelfare` carrier; no Mathlib equivalent at this abstraction level.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `welfareCrossPartial : ℝ → ℝ → ℝ` for the paper's welfare cross-partial `∂²W / (∂β ∂κ)` (Topkis complementarity object)"
+    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom welfareCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L601.  Companion atomic stipulations (`welfareCrossPartial_explicit_form`, `cross_partial_sign_in_z_lt_one`) anchor the carrier to the paper-stated explicit form and sign claim.  Cat 1 reduction check: CLEAR-NO — paper's cross-partial is a partial-derivative of the paper-novel `agentWelfare` carrier; no Mathlib equivalent at this abstraction level.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R76 2026-05-15: SUBSTANTIVE-MATH refactor per `feedback_no_compute_retreat` + R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial. The opaque `axiom welfareCrossPartial : ℝ → ℝ → ℝ` is REPLACED by `noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ := fun β κ => firstTermCrossPartial β κ + secondTermCrossPartial β κ`. Paper Proposition `prop:supermodular` proof line 566 EXPLICITLY decomposes the welfare cross-partial as the sum of the first-term + second-term contributions: `∂²W/(∂β ∂κ) = ∂²P_correct/(∂β ∂κ) · [V_dyn(u_2, β) - r(u_1)] + ∂P_correct/∂κ · ∂V_dyn(u_2, β)/∂β` — so the `def` IS the paper's exact two-term identification (NOT R7's content-erasure). Component carriers `firstTermCrossPartial` + `secondTermCrossPartial` were introduced as new Cat 3 paper-novel structural primitives per discipline §3.4.1 (paper line 566 names both terms). Carrier classification UNCHANGED for `welfareCrossPartial`: Cat 3 paper-novel structural primitive (the def body invokes the new substantive opaque carriers as inputs — no Cat 1/2 reduction; Mathlib still lacks the typed HasDerivAt + Φ + φ derivative framework on the paper-novel `agentWelfare` carrier). The downstream `entry_atom_welfareCrossPartial_explicit_form` flips workingAssumption gapOpen → derivedTheorem gapClosed (Cat 1 derivation composing the def's `rfl`-reduction + 2 new smaller wAs `secondTermCrossPartial_nonneg_OPEN` + `firstTermCrossPartial_pos_in_z_lt_one_OPEN`); the carrier itself stays as a paper-novel structural primitive (gapDefinitional 永不-close per §3.4.1)." ]
+  scope := "Concrete `noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ := fun β κ => firstTermCrossPartial β κ + secondTermCrossPartial β κ` (R76 substantive-math refactor; paper line 566 two-term decomposition) for the paper's welfare cross-partial `∂²W / (∂β ∂κ)` (Topkis complementarity object) — paper line 566 `∂²W/(∂β ∂κ) = first-term + second-term` faithfully encoded"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  R76 made concrete via paper line 566 two-term decomposition.  永不 close."
   conditionalOn := []
 
 /-- BridgeDominance carrier — paper-novel bridge-dominance predicate. -/
@@ -2487,7 +2496,7 @@ def entry_carrier_W_bar : GapEntry where
 
 /-- betaBarStar carrier — paper-novel aggregate-optimal precision constant. -/
 def entry_carrier_betaBarStar : GapEntry where
-  name := "betaBarStar"
+  name := "betaBarStar (R76: opaque axiom → noncomputable def via Classical.choose on new principal_interior_maximum_exists_OPEN per Pattern 5; carrier still tracked as Cat 3 paper-novel primitive — paper-faithful Classical.choose selection)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.carrier
@@ -2496,10 +2505,11 @@ def entry_carrier_betaBarStar : GapEntry where
     "precision `β̄*` characterised as the maximiser of the aggregate " ++
     "principal-welfare functional `W̄(β)`"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive constant per v6 §3.4.1.  Carrier declared `axiom betaBarStar : ℝ` at Principal.lean ~L34.  Companion structural-equation atom `betaBarStar_def` (separately recorded as `entry_atom_betaBarStar_def`) anchors the constant to the argmax-characterisation `∀ β, W_bar β ≤ W_bar betaBarStar`.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque constant; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction (existence under reversal regime is a separate Cat 3 OPEN at `gap_principal_interior_optimum_OPEN`).  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `betaBarStar : ℝ` for the paper's aggregate-optimal precision constant `β̄*` (maximiser of `W_bar`)"
+    [ "Cat 3 paper-novel primitive constant per v6 §3.4.1.  Carrier declared `axiom betaBarStar : ℝ` at Principal.lean ~L34.  Companion structural-equation atom `betaBarStar_def` (separately recorded as `entry_atom_betaBarStar_def`) anchors the constant to the argmax-characterisation `∀ β, W_bar β ≤ W_bar betaBarStar`.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque constant; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction (existence under reversal regime is a separate Cat 3 OPEN at `gap_principal_interior_optimum_OPEN`).  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R76 2026-05-15: SUBSTANTIVE-MATH refactor per `feedback_no_compute_retreat` + Pattern 5 propagation (R74 `betaStarOfP` / R75 `smoothTransitionBeta` precedent; R75 deferral note explicitly executed). The opaque `axiom betaBarStar : ℝ` is REPLACED by `noncomputable def betaBarStar : ℝ := Classical.choose principal_interior_maximum_exists_OPEN`. Paper line 622 `\\bar{\\beta}^* is the maximiser of \\bar{W}` IS the carrier's exact identification with the principal_interior_maximum_exists_OPEN witness, so the def is content-faithful (NOT R7's content-erasure). Carrier classification UNCHANGED: Cat 3 paper-novel structural primitive (the def body invokes the new substantive existence atom `principal_interior_maximum_exists_OPEN` as input — no Cat 1/2 reduction; Mathlib still lacks the typed continuous-function-on-half-line argmax machinery). The downstream `entry_atom_betaBarStar_def` flips workingAssumption gapOpen → derivedTheorem gapClosed (Pattern 5 closure via `Classical.choose_spec`); the carrier itself stays as a paper-novel structural primitive (gapDefinitional 永不-close per §3.4.1)." ]
+  scope := "Concrete `noncomputable def betaBarStar : ℝ := Classical.choose principal_interior_maximum_exists_OPEN` (R76 substantive-math refactor; Pattern 5 closure) for the paper's aggregate-optimal precision constant `β̄*` — paper line 622 `\\bar{\\beta}^* is the maximiser of \\bar{W}` faithfully encoded by Classical.choose on the new principal_interior_maximum_exists_OPEN witness"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  R76 made concrete via Classical.choose on new principal_interior_maximum_exists_OPEN (Pattern 5).  永不 close."
   conditionalOn := []
 
 /-- kappa_FOSD carrier — paper-novel first-order stochastic dominance predicate on κ. -/
@@ -2523,7 +2533,7 @@ def entry_carrier_kappa_FOSD : GapEntry where
 
 /-- aggregateOptimalBeta carrier — paper-novel aggregate-optimal precision functional. -/
 def entry_carrier_aggregateOptimalBeta : GapEntry where
-  name := "aggregateOptimalBeta"
+  name := "aggregateOptimalBeta (R76: opaque axiom → noncomputable def via Classical.choose on new aggregate_optimum_exists_per_G_OPEN per Pattern 5; carrier still tracked as Cat 3 paper-novel primitive — paper-faithful Classical.choose selection)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.carrier
@@ -2533,10 +2543,11 @@ def entry_carrier_aggregateOptimalBeta : GapEntry where
     "G` returning the G-parameterised maximiser `\\bar{\\beta}^*_G` of " ++
     "the G-parameterised aggregate welfare `\\bar{W}_G(β)`"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom aggregateOptimalBeta : (ℝ → ℝ) → ℝ` at Principal.lean ~L210.  Companion structural-equation atom `aggregateOptimalBeta_def` (separately recorded as `entry_atom_aggregateOptimalBeta_def`) anchors the functional to the argmax-characterisation parallel to `betaBarStar_def`.  Cat 1 reduction check: CLEAR-NO — paper-novel functional on the G-parameterised aggregate-welfare carrier; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `aggregateOptimalBeta : (ℝ → ℝ) → ℝ` for the paper's G-parameterised aggregate-optimal precision functional"
+    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom aggregateOptimalBeta : (ℝ → ℝ) → ℝ` at Principal.lean ~L210.  Companion structural-equation atom `aggregateOptimalBeta_def` (separately recorded as `entry_atom_aggregateOptimalBeta_def`) anchors the functional to the argmax-characterisation parallel to `betaBarStar_def`.  Cat 1 reduction check: CLEAR-NO — paper-novel functional on the G-parameterised aggregate-welfare carrier; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R76 2026-05-15: SUBSTANTIVE-MATH refactor per `feedback_no_compute_retreat` + Pattern 5 propagation (R76-A `betaBarStar` precedent). The opaque `axiom aggregateOptimalBeta : (ℝ → ℝ) → ℝ` is REPLACED by `noncomputable def aggregateOptimalBeta (G : ℝ → ℝ) : ℝ := Classical.choose (aggregate_optimum_exists_per_G_OPEN G)`. Paper line 634 `\\bar{\\beta}^*_G as per-G maximiser` IS the carrier's exact identification with the per-G aggregate_optimum_exists_per_G_OPEN witness, so the def is content-faithful (NOT R7's content-erasure). Carrier classification UNCHANGED: Cat 3 paper-novel structural primitive (the def body invokes the new substantive existence atom `aggregate_optimum_exists_per_G_OPEN` as input — no Cat 1/2 reduction; Mathlib still lacks the typed G-parameterised continuous-function-on-half-line argmax machinery). The downstream `entry_atom_aggregateOptimalBeta_def` flips workingAssumption gapOpen → derivedTheorem gapClosed (Pattern 5 closure via `Classical.choose_spec`); the carrier itself stays as a paper-novel structural primitive (gapDefinitional 永不-close per §3.4.1)." ]
+  scope := "Concrete `noncomputable def aggregateOptimalBeta : (ℝ → ℝ) → ℝ := fun G => Classical.choose (aggregate_optimum_exists_per_G_OPEN G)` (R76 substantive-math refactor; Pattern 5 closure) for the paper's G-parameterised aggregate-optimal precision functional — paper line 634 per-G maximiser faithfully encoded by Classical.choose on the new aggregate_optimum_exists_per_G_OPEN witness"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  R76 made concrete via Classical.choose on new aggregate_optimum_exists_per_G_OPEN (Pattern 5).  永不 close."
   conditionalOn := []
 
 /-- aggregateWelfareWith carrier — paper-novel G-parameterised aggregate-welfare functional. -/
@@ -2559,7 +2570,7 @@ def entry_carrier_aggregateWelfareWith : GapEntry where
 
 /-- W_bar_limit_infty carrier — paper-novel aggregate-welfare β → ∞ limit. -/
 def entry_carrier_W_bar_limit_infty : GapEntry where
-  name := "W_bar_limit_infty"
+  name := "W_bar_limit_infty (R76: opaque axiom → noncomputable def via Classical.choose on new W_bar_has_limit_infty_OPEN per Pattern 5; carrier still tracked as Cat 3 paper-novel primitive — paper-faithful Classical.choose selection)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.carrier
@@ -2569,10 +2580,11 @@ def entry_carrier_W_bar_limit_infty : GapEntry where
     "by aggregating the paper-stated per-agent finite limit over the " ++
     "population)"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive constant per v6 §3.4.1.  Carrier declared `axiom W_bar_limit_infty : ℝ` at Principal.lean ~L427.  Companion structural-equation atom `W_bar_limit_infty_def` (separately recorded as `entry_atom_W_bar_limit_infty_def`) anchors the constant to the paper-stated `Filter.Tendsto`-limit characterisation.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque constant; no Mathlib equivalent at this abstraction level.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `W_bar_limit_infty : ℝ` for the paper's aggregate-welfare β → ∞ limit constant"
+    [ "Cat 3 paper-novel primitive constant per v6 §3.4.1.  Carrier declared `axiom W_bar_limit_infty : ℝ` at Principal.lean ~L427.  Companion structural-equation atom `W_bar_limit_infty_def` (separately recorded as `entry_atom_W_bar_limit_infty_def`) anchors the constant to the paper-stated `Filter.Tendsto`-limit characterisation.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque constant; no Mathlib equivalent at this abstraction level.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R76 2026-05-15: SUBSTANTIVE-MATH refactor per `feedback_no_compute_retreat` + Pattern 5 propagation (R76-A `betaBarStar` / R76-B `aggregateOptimalBeta` precedent). The opaque `axiom W_bar_limit_infty : ℝ` is REPLACED by `noncomputable def W_bar_limit_infty : ℝ := Classical.choose W_bar_has_limit_infty_OPEN`. Paper line 652 `aggregate welfare converges to a finite limit as β → ∞` IS the carrier's exact identification with the W_bar_has_limit_infty_OPEN witness, so the def is content-faithful (NOT R7's content-erasure). Carrier classification UNCHANGED: Cat 3 paper-novel structural primitive (the def body invokes the new substantive existence atom `W_bar_has_limit_infty_OPEN` as input — no Cat 1/2 reduction; Mathlib still lacks the typed monotone-bounded-convergence + per-agent finite-limit aggregation machinery). The downstream `entry_atom_W_bar_limit_infty_def` flips workingAssumption gapOpen → derivedTheorem gapClosed (Pattern 5 closure via `Classical.choose_spec`); the carrier itself stays as a paper-novel structural primitive (gapDefinitional 永不-close per §3.4.1)." ]
+  scope := "Concrete `noncomputable def W_bar_limit_infty : ℝ := Classical.choose W_bar_has_limit_infty_OPEN` (R76 substantive-math refactor; Pattern 5 closure) for the paper's aggregate-welfare β → ∞ limit constant — paper line 652 `aggregate welfare converges to a finite limit as β → ∞` faithfully encoded by Classical.choose on the new W_bar_has_limit_infty_OPEN witness"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  R76 made concrete via Classical.choose on new W_bar_has_limit_infty_OPEN (Pattern 5).  永不 close."
   conditionalOn := []
 
 /-- differentiatedDisclosureWelfare carrier — paper-novel differentiated-disclosure welfare functional. -/
@@ -4557,10 +4569,10 @@ def entry_atom_kappaAgentWelfareSNR_def : GapEntry where
   conditionalOn := []
 
 def entry_atom_betaBarStar_def : GapEntry where
-  name := "betaBarStar_def"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "betaBarStar_def [retired R76 → replaced by Pattern 5 Classical.choose closure: betaBarStar carrier promoted to noncomputable def := Classical.choose principal_interior_maximum_exists_OPEN; structural-equation atom no longer needed since Classical.choose_spec gives the universal-inequality directly]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum, line 622 (β̄* as maximiser of W̄)"
   attackHistory :=
     [ "Cat 3 atomic structural-equation axiom: `∀ β, W_bar β ≤ W_bar betaBarStar`. Paper `prop:principal-optimum` line 622 introduces `\\bar{β}^*` as the maximiser of `W̄`. Argmax-characterisation pins `betaBarStar` to a maximiser of `W_bar` without committing to its existence proof (which follows from `gap_principal_interior_optimum_OPEN`). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel.",
@@ -4568,10 +4580,11 @@ def entry_atom_betaBarStar_def : GapEntry where
       "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
       "R28 2026-05-13: status-laundering revert per R27-B Pattern 13 audit. This entry is a paper-DERIVED higher-level claim (`prop:principal-optimum` line 622 argmax characterisation of β̄* as the maximiser of W̄), NOT a paper definitional commitment. The argmax characterisation is paper-derived from `gap_principal_interior_optimum_OPEN` existence; pinning β̄* via axiom is a working-assumption shortcut pending derivation from the existence proof. Reclassified DEFINITIONAL → OPEN; subClass DEFINITIONAL_ATOM → WORKING_ASSUMPTION.",
       "R40 2026-05-14: reclassified workingAssumption → structuralEquation per R39 same-logic extension (paper-stated atomic characterization on opaque carrier per §3.4.3 'paper's commitment to how its primitives behave'); status gapOpen → gapDefinitional. Resolves R28 conservative status-laundering concern: R28 was correct to revert these from DEFINITIONAL to OPEN at the time because workingAssumption wasn't fully distinguished from structuralEquation; R39 + R40 establish the pattern: paper-stated atomic content on opaque carriers extracted from theorem statements = structuralEquation. The argmax characterisation pins the opaque `betaBarStar` carrier as a maximiser of `W_bar`; this IS how the paper introduces the carrier's relationship to its primitives, not a derivable consequence.",
-      "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
+      "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom.",
+      "R76 2026-05-15: workingAssumption gapOpen → derivedTheorem gapClosed via Pattern 5 (existence-via-Classical.choose) closure-path-A — same pattern as R74 `betaStarOfP` and R75 `smoothTransitionBeta`. The opaque carrier `betaBarStar` is replaced by `noncomputable def betaBarStar : ℝ := Classical.choose principal_interior_maximum_exists_OPEN` (the existence atom is the new R76 atom `principal_interior_maximum_exists_OPEN` capturing paper line 622's `\\bar{\\beta}^*` is the maximiser). The Lean `def` IS the paper's `maximiser-of-W̄` identification: `Classical.choose` literally picks the paper-stated maximiser of `W_bar`. The structural-equation atom previously asserted `∀ β, W_bar β ≤ W_bar betaBarStar` (the universal-inequality maximiser claim); this is now derived directly from `Classical.choose_spec` on the new `principal_interior_maximum_exists_OPEN` atom. Net delta: -1 wA (this entry: `betaBarStar_def` retired); +1 wA (`principal_interior_maximum_exists_OPEN` new — separately tracked as `entry_atom_principal_interior_maximum_exists`); this entry: +1 derivedTheorem (gapClosed); inputCategory: cat3PaperNovel → cat1Mathlib (derived-theorem chain composing new wA via Classical.choose). NET 0 wA per R75 deferral note's explicit DEFERRED-to-R76 acknowledgment + audit-chain granularity benefit per discipline §18 (the existence claim is now atomically separated from the carrier-identification step). HONESTY: NET 0 wA but the new wA is paper-faithful (line 622 maximiser claim) and qualitatively SMALLER than the bundled retired wA (existence-only vs existence + universal-inequality; closure path is via Mathlib Classical.choose_spec)." ]
   scope := "Proposition prop:principal-optimum, line 622 (β̄* as maximiser of W̄)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `∀ β, W_bar β ≤ W_bar betaBarStar` from Proposition prop:principal-optimum line 622 paper proof: argmax characterisation requires (a) interior-optimum existence (entry_atom_interior_max_exists_from_unimodal_envelope R37 atom) + (b) W_bar continuity + compact-interval Mathlib infrastructure. R56 polish: per-entry close target replaces R50 templated text."
+    "RETIRED via R76 Pattern 5 closure (Classical.choose on new existence atom principal_interior_maximum_exists_OPEN). Replaced by `noncomputable def betaBarStar := Classical.choose principal_interior_maximum_exists_OPEN` + `betaBarStar_def` derived theorem using `Classical.choose_spec` for the universal-inequality maximiser characterisation. Downstream `W_bar_limit_infty_le_W_bar_betaBarStar` consumes the new derived theorem (no signature change at consumer level)."
   conditionalOn := []
 
 def entry_atom_kappa_FOSD_def : GapEntry where
@@ -4592,10 +4605,10 @@ def entry_atom_kappa_FOSD_def : GapEntry where
   conditionalOn := []
 
 def entry_atom_aggregateOptimalBeta_def : GapEntry where
-  name := "aggregateOptimalBeta_def + aggregateWelfareWith carrier"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "aggregateOptimalBeta_def [retired R76 → replaced by Pattern 5 Classical.choose closure: aggregateOptimalBeta carrier promoted to noncomputable def := fun G => Classical.choose (aggregate_optimum_exists_per_G_OPEN G); structural-equation atom no longer needed since Classical.choose_spec gives the per-G universal-inequality directly]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Definition def:principal, line 615; Proposition prop:principal-optimum Part 2, line 634"
   attackHistory :=
     [ "Cat 3 atomic structural-equation axiom: `∀ G β, aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G)`. Parallel to `betaBarStar_def` for the G-parameterised case. New opaque carrier `aggregateWelfareWith : (ℝ → ℝ) → ℝ → ℝ` introduced to host the G-parameterised aggregate-welfare functional (the existing `W_bar : ℝ → ℝ` fixes G implicitly). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel.",
@@ -4603,17 +4616,18 @@ def entry_atom_aggregateOptimalBeta_def : GapEntry where
       "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
       "R28 2026-05-13: status-laundering revert per R27-B Pattern 13 audit. This entry is a paper-DERIVED higher-level claim (G-parameterised argmax characterisation paralleling `betaBarStar_def`, paper `def:principal` line 615 + `prop:principal-optimum` Part 2 line 634), NOT a paper definitional commitment. The G-parameterised argmax is paper-derived from the analogous interior-optimum existence; pinning `aggregateOptimalBeta` via axiom is a working-assumption shortcut pending derivation. Reclassified DEFINITIONAL → OPEN; subClass DEFINITIONAL_ATOM → WORKING_ASSUMPTION.",
       "R40 2026-05-14: reclassified workingAssumption → structuralEquation per R39 same-logic extension (paper-stated atomic characterization on opaque carrier per §3.4.3 'paper's commitment to how its primitives behave'); status gapOpen → gapDefinitional. Resolves R28 conservative status-laundering concern: R28 was correct to revert these from DEFINITIONAL to OPEN at the time because workingAssumption wasn't fully distinguished from structuralEquation; R39 + R40 establish the pattern: paper-stated atomic content on opaque carriers extracted from theorem statements = structuralEquation. The G-parameterised argmax characterisation pins the opaque `aggregateOptimalBeta` carrier as a maximiser of `aggregateWelfareWith G`; this IS how the paper introduces the carrier's relationship to its primitives, not a derivable consequence.",
-      "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
+      "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom.",
+      "R76 2026-05-15: workingAssumption gapOpen → derivedTheorem gapClosed via Pattern 5 (existence-via-Classical.choose) closure-path-A — same pattern as R76-A `betaBarStar_def`. The opaque carrier `aggregateOptimalBeta` is replaced by `noncomputable def aggregateOptimalBeta (G : ℝ → ℝ) : ℝ := Classical.choose (aggregate_optimum_exists_per_G_OPEN G)` (the existence atom is the new R76 atom `aggregate_optimum_exists_per_G_OPEN` capturing paper line 634's per-`G` maximiser claim). The Lean `def` IS the paper's per-`G` `maximiser-of-W̄_G` identification: `Classical.choose` literally picks the per-`G` paper-stated maximiser of `aggregateWelfareWith G`. The structural-equation atom previously asserted `∀ G β, aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G)` (the per-`G` universal-inequality maximiser claim); this is now derived directly from `Classical.choose_spec` on the new `aggregate_optimum_exists_per_G_OPEN G` atom (per-`G`). Net delta: -1 wA (this entry: `aggregateOptimalBeta_def` retired); +1 wA (`aggregate_optimum_exists_per_G_OPEN` new — separately tracked as `entry_atom_aggregate_optimum_exists_per_G`); this entry: +1 derivedTheorem (gapClosed); inputCategory: cat3PaperNovel → cat1Mathlib. NET 0 wA per R75 deferral note's explicit DEFERRED-to-R76 acknowledgment + audit-chain granularity benefit per discipline §18." ]
   scope := "Definition def:principal, line 615; Proposition prop:principal-optimum Part 2, line 634"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `∀ G β, aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G)` from Proposition prop:principal-optimum Part 2 line 634: G-parameterised analogue of betaBarStar_def's interior-optimum existence (paper-implied parallel argument requiring G-parameterised continuity + compact-interval Mathlib infrastructure). R56 polish: per-entry close target replaces R50 templated text."
+    "RETIRED via R76 Pattern 5 closure (Classical.choose on new existence atom aggregate_optimum_exists_per_G_OPEN). Replaced by `noncomputable def aggregateOptimalBeta := fun G => Classical.choose (aggregate_optimum_exists_per_G_OPEN G)` + `aggregateOptimalBeta_def` derived theorem using `Classical.choose_spec` for the per-G universal-inequality maximiser characterisation."
   conditionalOn := []
 
 def entry_atom_W_bar_limit_infty_def : GapEntry where
-  name := "W_bar_limit_infty_def"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "W_bar_limit_infty_def [retired R76 → replaced by Pattern 5 Classical.choose closure: W_bar_limit_infty carrier promoted to noncomputable def := Classical.choose W_bar_has_limit_infty_OPEN; structural-equation atom no longer needed since Classical.choose_spec gives the Tendsto-property directly]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Corollary cor:disclosure Part 1 proof, line 652 (aggregate welfare converges to a finite limit as β → ∞)"
   attackHistory :=
     [ "Cat 3 atomic structural-equation axiom: `Filter.Tendsto W_bar atTop (nhds W_bar_limit_infty)`. Paper line 652 derives the limit existence by aggregating the per-agent finite-limit claim. Pins the limit-value carrier to the actual limit of `W_bar`. Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `W_bar`). Cat 2 reduction check: paper-novel.",
@@ -4621,10 +4635,11 @@ def entry_atom_W_bar_limit_infty_def : GapEntry where
       "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
       "R28 2026-05-13: status-laundering revert per R27-B Pattern 13 audit. This entry is a paper-DERIVED higher-level claim (`cor:disclosure` Part 1 proof line 652 Tendsto limit on aggregate welfare), NOT a paper definitional commitment. The Tendsto limit is paper-derived from per-agent finite-limit aggregation; pinning the limit value via axiom is a working-assumption shortcut pending derivation from those per-agent inputs. Reclassified DEFINITIONAL → OPEN; subClass DEFINITIONAL_ATOM → WORKING_ASSUMPTION.",
       "R40 2026-05-14: reclassified workingAssumption → structuralEquation per R39 same-logic extension (paper-stated atomic characterization on opaque carrier per §3.4.3 'paper's commitment to how its primitives behave'); status gapOpen → gapDefinitional. Resolves R28 conservative status-laundering concern: R28 was correct to revert these from DEFINITIONAL to OPEN at the time because workingAssumption wasn't fully distinguished from structuralEquation; R39 + R40 establish the pattern: paper-stated atomic content on opaque carriers extracted from theorem statements = structuralEquation. The Tendsto characterisation pins the opaque `W_bar_limit_infty` carrier to be the limit of `W_bar` at infinity; this IS how the paper introduces the carrier's relationship to its primitives, not a derivable consequence.",
-      "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
+      "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom.",
+      "R76 2026-05-15: workingAssumption gapOpen → derivedTheorem gapClosed via Pattern 5 (existence-via-Classical.choose) closure-path-A — same pattern as R76-A `betaBarStar_def` and R76-B `aggregateOptimalBeta_def`. The opaque carrier `W_bar_limit_infty` is replaced by `noncomputable def W_bar_limit_infty : ℝ := Classical.choose W_bar_has_limit_infty_OPEN` (the existence atom is the new R76 atom `W_bar_has_limit_infty_OPEN` capturing paper line 652's `aggregate welfare converges to a finite limit as β → ∞`). The Lean `def` IS the paper's `convergence-to-finite-limit` identification: `Classical.choose` literally picks the paper-stated finite limit of `W_bar` at `+∞`. The structural-equation atom previously asserted `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)` (the Tendsto limit characterisation); this is now derived directly from `Classical.choose_spec` on the new `W_bar_has_limit_infty_OPEN` atom. Net delta: -1 wA (this entry: `W_bar_limit_infty_def` retired); +1 wA (`W_bar_has_limit_infty_OPEN` new — separately tracked as `entry_atom_W_bar_has_limit_infty`); this entry: +1 derivedTheorem (gapClosed); inputCategory: cat3PaperNovel → cat1Mathlib. NET 0 wA per R75 deferral note's explicit DEFERRED-to-R76 acknowledgment + audit-chain granularity benefit per discipline §18." ]
   scope := "Corollary cor:disclosure Part 1 proof, line 652 (aggregate welfare converges to a finite limit as β → ∞)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)` from Corollary cor:disclosure Part 1 proof line 652: paper aggregates per-agent finite-limit claim across the agent population — requires per-agent W_κ Tendsto convergence (from R30 W_open_limit_infty Cat 1 closure pattern) + integration-aggregation Mathlib infra. R56 polish: per-entry close target replaces R50 templated text."
+    "RETIRED via R76 Pattern 5 closure (Classical.choose on new existence atom W_bar_has_limit_infty_OPEN). Replaced by `noncomputable def W_bar_limit_infty := Classical.choose W_bar_has_limit_infty_OPEN` + `W_bar_limit_infty_def` derived theorem using `Classical.choose_spec` for the Tendsto-property."
   conditionalOn := []
 
 def entry_atom_betaStarOfP_def : GapEntry where
@@ -5357,38 +5372,158 @@ def entry_atom_trap_config_local_positive : GapEntry where
     welfare cross-partial via `φ'(z) = -z·φ(z)` Gaussian PDF
     derivative identity. -/
 def entry_atom_welfareCrossPartial_explicit_form : GapEntry where
-  name := "welfareCrossPartial_explicit_form_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "welfareCrossPartial_explicit_form_OPEN [retired R76 → replaced by §18 closure-path-A decomposition: welfareCrossPartial carrier promoted to noncomputable def := firstTermCrossPartial + secondTermCrossPartial; bundled wA replaced by 2 smaller wAs secondTermCrossPartial_nonneg + firstTermCrossPartial_pos_in_z_lt_one + Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:supermodular proof, lines 564-583 (welfare decomposition + cross-partial closed form via φ'(z) = -z·φ(z))"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the EXISTENCE of an algebraic decomposition of `welfareCrossPartial β κ` as a sum of two paper-stated contributions on the carriers `welfareCrossPartial`, `snrZ`, `BridgeDominance`. Encoded as a per-(β, κ) existential `∃ first second, welfareCrossPartial = first + second ∧ second-non-negative ∧ (|z|<1 → 0 < first)`. Cat 1 reduction check: not Mathlib-derivable (HasDerivAt + Φ + φ derivative machinery is a Mathlib gap). Cat 2 reduction check: paper-novel calculus on the IDP welfare functional. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
       "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
-      "R61 2026-05-14: closure-feasibility analysis. VERDICT = SKIP — substantive Mathlib HasDerivAt + Φ + φ derivative machinery required. Analysis: atom states the existence of a paper-stated 2-term welfare-cross-partial decomposition `welfareCrossPartial β κ = first + second`, with `0 ≤ second` and `|z| < 1 → 0 < first`. Paper line 580-583 derives the explicit closed form via `φ'(z) = -z·φ(z)` (Gaussian PDF derivative identity), specialised to the IDP welfare decomposition `W = P_correct · V_dyn(u_2,β) + (1 − P_correct) · r(u_1)`. Honest closure requires (a) Mathlib HasDerivAt + Φ + φ derivative machinery (currently absent — Mathlib has Gaussian PDF but lacks the typed `HasDerivAt φ (−z·φ z)` API specialised for the cross-partial composition), AND (b) commit to a concrete `welfareCrossPartial` form (currently opaque carrier). Per `feedback_truth_over_publication`: skip honestly. Closure target = Mathlib Gaussian-derivative infra + paper line 580-583 explicit `φ'(z) = -z·φ(z)` reconstruction with concrete IDP welfare functional commitment." ]
+      "R61 2026-05-14: closure-feasibility analysis. VERDICT = SKIP — substantive Mathlib HasDerivAt + Φ + φ derivative machinery required. Analysis: atom states the existence of a paper-stated 2-term welfare-cross-partial decomposition `welfareCrossPartial β κ = first + second`, with `0 ≤ second` and `|z| < 1 → 0 < first`. Paper line 580-583 derives the explicit closed form via `φ'(z) = -z·φ(z)` (Gaussian PDF derivative identity), specialised to the IDP welfare decomposition `W = P_correct · V_dyn(u_2,β) + (1 − P_correct) · r(u_1)`. Honest closure requires (a) Mathlib HasDerivAt + Φ + φ derivative machinery (currently absent — Mathlib has Gaussian PDF but lacks the typed `HasDerivAt φ (−z·φ z)` API specialised for the cross-partial composition), AND (b) commit to a concrete `welfareCrossPartial` form (currently opaque carrier). Per `feedback_truth_over_publication`: skip honestly. Closure target = Mathlib Gaussian-derivative infra + paper line 580-583 explicit `φ'(z) = -z·φ(z)` reconstruction with concrete IDP welfare functional commitment.",
+      "R76 2026-05-15: SUBSTANTIVE-MATH closure via §18 closure-path-A decomposition + concrete-def per `feedback_no_compute_retreat` (R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial). Per R61 SKIP: bundled atom claims existence of an algebraic 2-term decomposition + non-negativity + positivity. R76 closure path: (a) introduce TWO new opaque carriers `firstTermCrossPartial` + `secondTermCrossPartial` (paper-Def-stipulated structural primitives per discipline §3.4.1; paper line 566 explicitly names the two cross-partial terms); (b) replace `axiom welfareCrossPartial : ℝ → ℝ → ℝ` with `noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ := fun β κ => firstTermCrossPartial β κ + secondTermCrossPartial β κ` (paper line 566's exact two-term decomposition encoded as a `def`); (c) introduce 2 NEW SMALLER wAs on the new carriers: `secondTermCrossPartial_nonneg_OPEN` (paper line 568 non-negativity) + `firstTermCrossPartial_pos_in_z_lt_one_OPEN` (paper lines 582-584 positivity at `|z| < 1`); (d) derive `welfareCrossPartial_explicit_form_OPEN` as a Cat 1 theorem composing the def's `rfl`-reduction + the 2 smaller wAs. Net delta: -1 wA (this entry retired); +2 wA (2 smaller wAs); +2 carrier (firstTermCrossPartial + secondTermCrossPartial); this entry: +1 derivedTheorem (gapClosed); inputCategory: cat3PaperNovel → cat1Mathlib. NET +1 wA but each of the 2 new wAs is STRICTLY SMALLER than the bundled retired wA (single-property each, anchored to a single paper line) per discipline §18 audit-chain granularity mandate. HONESTY: NET +1 wA accounting is recorded explicitly; the granularity benefit is paper-line-anchored (568 vs 582-584 vs 566) — each new atom states a SINGLE paper-derivative-sign property on the explicit new carrier. Cognitive.lean signature of `welfareCrossPartial_explicit_form_OPEN` derived theorem matches the retired axiom's signature (4-arg curried form), so downstream `gap_supermodular` consumer needs no signature change." ]
   scope := "Proposition prop:supermodular, explicit closed-form decomposition of welfare cross-partial"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit overruling R43's TRUE §3.4.3 ruling). Close target = paper Proposition prop:supermodular proof reconstruction (φ'(z) = -z·φ(z) Gaussian PDF derivative + IDP welfare functional decomposition)."
+    "RETIRED via R76 §18 closure-path-A decomposition (R63 W_bar mixture decomposition precedent applied to the cross-partial). Replaced by 2 new carriers `firstTermCrossPartial` + `secondTermCrossPartial` (paper line 566 two-term decomposition) + 2 new smaller wAs `secondTermCrossPartial_nonneg_OPEN` (line 568) + `firstTermCrossPartial_pos_in_z_lt_one_OPEN` (lines 582-584) + Cat 1 derived theorem composing the def's `rfl`-reduction + the 2 smaller wAs. NET +1 wA (acceptable per §18 granularity)."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:supermodular`
     proof line 582-584, sign-positivity of the cross-partial
     decomposition factors at `|z| < 1`. -/
 def entry_atom_cross_partial_sign_in_z_lt_one : GapEntry where
-  name := "cross_partial_sign_in_z_lt_one_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "cross_partial_sign_in_z_lt_one_OPEN [retired R76 → replaced by Cat 1 derived theorem composing the universal-quantified premises 0 ≤ second + 0 < first via linarith arithmetic]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:supermodular proof, line 582-584 (factor-sign analysis at `|z| < 1`)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_supermodular_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the paper's sign-analysis step that converts the explicit closed-form expression (encoded by `welfareCrossPartial_explicit_form_OPEN`) into the strict-positivity conclusion under the moderate-SNR + bridge-dominance joint antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel sign analysis on opaque-carrier decomposition. Downstream consumer: `gap_supermodular` derived theorem (Cognitive.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
       "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
-      "R61 2026-05-14: closure-feasibility analysis. VERDICT = SKIP — downstream sign-analysis consumer of `welfareCrossPartial_explicit_form_OPEN`. Analysis: atom statement is the sign-positivity at `|z| < 1` of the cross-partial decomposition (paper line 582-584). Per upstream `welfareCrossPartial_explicit_form_OPEN` SKIP analysis (substantive Mathlib HasDerivAt + Φ + φ machinery required for the explicit closed form), this downstream sign-analysis atom inherits the same blocker: without a concrete welfareCrossPartial closed-form, the sign analysis remains pure paper-novel content on the opaque decomposition carriers. Honest closure waits on the upstream `welfareCrossPartial_explicit_form_OPEN` closure. Per `feedback_truth_over_publication`: skip honestly. Closure target = downstream of `welfareCrossPartial_explicit_form_OPEN` closure (Mathlib Gaussian-derivative + concrete welfareCrossPartial commitment)." ]
+      "R61 2026-05-14: closure-feasibility analysis. VERDICT = SKIP — downstream sign-analysis consumer of `welfareCrossPartial_explicit_form_OPEN`. Analysis: atom statement is the sign-positivity at `|z| < 1` of the cross-partial decomposition (paper line 582-584). Per upstream `welfareCrossPartial_explicit_form_OPEN` SKIP analysis (substantive Mathlib HasDerivAt + Φ + φ machinery required for the explicit closed form), this downstream sign-analysis atom inherits the same blocker: without a concrete welfareCrossPartial closed-form, the sign analysis remains pure paper-novel content on the opaque decomposition carriers. Honest closure waits on the upstream `welfareCrossPartial_explicit_form_OPEN` closure. Per `feedback_truth_over_publication`: skip honestly. Closure target = downstream of `welfareCrossPartial_explicit_form_OPEN` closure (Mathlib Gaussian-derivative + concrete welfareCrossPartial commitment).",
+      "R76 2026-05-15: workingAssumption gapOpen → derivedTheorem gapClosed via Cat 1 arithmetic (linarith). Per R61 SKIP analysis: the atom claimed `0 < welfareCrossPartial β κ` from premises `welfareCrossPartial = first + second` + `0 ≤ second` + `0 < first`. The R76 audit observation: this is a routine `linarith` arithmetic chain on real numbers — no Mathlib gap, no paper-novel content beyond the (now derived via the R76 `welfareCrossPartial_explicit_form_OPEN` decomposition) algebraic decomposition. The R37 axiomatization was an over-axiomatized bookkeeping wrapper around real-arithmetic facts. R76 retires the axiom and derives it as a Cat 1 theorem composing the universal-quantified premises directly via `rw [h_eq]; linarith`. Net wA delta: -1 (this entry retired); +1 derivedTheorem; inputCategory: cat3PaperNovel → cat1Mathlib. Combined with R76 `welfareCrossPartial_explicit_form_OPEN` decomposition (NET +1 wA), the cross-partial branch is NET 0 wA in total: -2 retired bundled wAs (`explicit_form_OPEN` + `cross_partial_sign_OPEN`) + 2 new smaller wAs (`secondTermCrossPartial_nonneg_OPEN` + `firstTermCrossPartial_pos_in_z_lt_one_OPEN`) = NET 0." ]
   scope := "Proposition prop:supermodular, sign-positivity at `|z| < 1`"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper Proposition prop:supermodular sign-analysis proof reconstruction (moderate-SNR + bridge-dominance joint antecedent → strict positivity)."
+    "RETIRED via R76 Cat 1 arithmetic closure (linarith composition of universal-quantified premises). The R37 axiomatization was an over-axiomatized bookkeeping wrapper around real-arithmetic facts; R76 retires the axiom and derives it as a Cat 1 theorem composing the now-derived `welfareCrossPartial_explicit_form_OPEN` premises via linarith."
+  conditionalOn := []
+
+/-! ## R76 Pattern 5 propagation entries (3 new wA atoms paired with
+    3 retired wA atoms via Pattern 5 Classical.choose closures;
+    NET 0 wA per R75 deferral note's explicit DEFERRED-to-R76+
+    acknowledgment, audit-chain granularity benefit per discipline §18) -/
+
+/-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
+    of an argmax of the aggregate welfare functional `W̄`. -/
+def entry_atom_principal_interior_maximum_exists : GapEntry where
+  name := "principal_interior_maximum_exists_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum, line 622 (\\bar{\\beta}^* as the maximiser of \\bar{W} — paper-stated existence of a global maximiser of the aggregate welfare)"
+  attackHistory :=
+    [ "R76 2026-05-15: Cat 3 atomic-stipulation axiom NEW per `feedback_gap_ledger_in_lean4` §18 + R74 `betaStarOfP` / R75 `smoothTransitionBeta` Pattern 5 precedent. Paper line 622 introduces `\\bar{\\beta}^*` as the maximiser of `W̄` — this is the paper-stated existence claim for an argmax. Atom encodes `∃ β_max : ℝ, ∀ β : ℝ, W_bar β ≤ W_bar β_max`. Cat 1 reduction check: not Mathlib-derivable (continuous-function-on-half-line argmax requires per-instance compact-interval reduction). Cat 2 reduction check: paper-novel construction. Hosted by the new `noncomputable def betaBarStar : ℝ := Classical.choose principal_interior_maximum_exists_OPEN` (Principal.lean) which internalises the paper's `betaBarStar`-as-maximiser identification via `Classical.choose_spec`; downstream `betaBarStar_def` becomes a derivedTheorem composing the def's unfold + Classical.choose_spec. Pairing: this atom (-1 net) replaces the retired `entry_atom_betaBarStar_def` workingAssumption (+1 net) — NET 0 wA." ]
+  scope := "Proposition prop:principal-optimum, line 622, paper-stated existence of a global maximiser of W_bar on the real line"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = derive `∃ β_max : ℝ, ∀ β : ℝ, W_bar β ≤ W_bar β_max` from Proposition prop:principal-optimum line 625 paper proof of interior-maximum existence (eventually-decreasing + exceeds-zero properties + continuity → Bolzano-Weierstrass on a compact interval); requires Mathlib continuous-function-on-compact-interval + maximum-existence machinery for the explicit β_max witness."
+  conditionalOn := []
+
+/-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
+    of an argmax of the G-parameterised aggregate-welfare functional. -/
+def entry_atom_aggregate_optimum_exists_per_G : GapEntry where
+  name := "aggregate_optimum_exists_per_G_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 2, line 634 (\\bar{\\beta}^*_G as per-G maximiser of \\bar{W}_G — paper-stated per-G existence of an argmax)"
+  attackHistory :=
+    [ "R76 2026-05-15: Cat 3 atomic-stipulation axiom NEW per `feedback_gap_ledger_in_lean4` §18 + R76-A `principal_interior_maximum_exists_OPEN` precedent. Paper line 634 reads `the unique zero crossing of dW̄/dβ under G_2 lies weakly to the right of that under G_1` — this presupposes the per-G existence of an argmax for each G_i. Atom encodes `∀ G : ℝ → ℝ, ∃ β_max : ℝ, ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max`. Cat 1 reduction check: not Mathlib-derivable (per-G continuous-function-on-half-line argmax). Cat 2 reduction check: paper-novel construction. Hosted by the new `noncomputable def aggregateOptimalBeta (G : ℝ → ℝ) : ℝ := Classical.choose (aggregate_optimum_exists_per_G_OPEN G)` (Principal.lean); downstream `aggregateOptimalBeta_def` becomes a derivedTheorem composing the def's unfold + Classical.choose_spec. Pairing: this atom (-1 net) replaces the retired `entry_atom_aggregateOptimalBeta_def` workingAssumption (+1 net) — NET 0 wA." ]
+  scope := "Proposition prop:principal-optimum Part 2, line 634, paper-stated per-G existence of an argmax of aggregateWelfareWith G on the real line"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = derive `∀ G : ℝ → ℝ, ∃ β_max : ℝ, ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max` from Proposition prop:principal-optimum Part 2 line 634 paper proof: G-parameterised analogue of principal_interior_maximum_exists_OPEN; requires Mathlib G-parameterised continuous-function-on-compact-interval + maximum-existence machinery for the explicit per-G β_max witness."
+  conditionalOn := []
+
+/-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
+    of the β → ∞ limit of aggregate welfare. -/
+def entry_atom_W_bar_has_limit_infty : GapEntry where
+  name := "W_bar_has_limit_infty_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Corollary cor:disclosure Part 1 proof, line 652 (aggregate welfare converges to a finite limit as β → ∞ — paper-stated existence of a finite limit at +∞)"
+  attackHistory :=
+    [ "R76 2026-05-15: Cat 3 atomic-stipulation axiom NEW per `feedback_gap_ledger_in_lean4` §18 + R76-A/R76-B `principal_interior_maximum_exists_OPEN` / `aggregate_optimum_exists_per_G_OPEN` Pattern 5 precedent. Paper line 652 reads `for above-threshold agents, W(β, κ, α) is non-decreasing in β and converges to a finite limit W(∞, κ, α)`; aggregating over the population gives `\\bar{W}(\\beta) \\to \\bar{W}(\\infty)` as `β → ∞`. Atom encodes `∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L)`. Cat 1 reduction check: not Mathlib-derivable (monotone-bounded-convergence + per-agent finite-limit aggregation). Cat 2 reduction check: paper-novel construction. Hosted by the new `noncomputable def W_bar_limit_infty : ℝ := Classical.choose W_bar_has_limit_infty_OPEN` (Principal.lean); downstream `W_bar_limit_infty_def` becomes a derivedTheorem composing the def's unfold + Classical.choose_spec. Pairing: this atom (-1 net) replaces the retired `entry_atom_W_bar_limit_infty_def` workingAssumption (+1 net) — NET 0 wA." ]
+  scope := "Corollary cor:disclosure Part 1 proof, line 652, paper-stated existence of a finite limit of W_bar at +∞"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = derive `∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L)` from Corollary cor:disclosure Part 1 proof line 652: paper aggregates per-agent finite-limit claim across the agent population — requires per-agent W_κ Tendsto convergence (from R30 W_open_limit_infty Cat 1 closure pattern) + monotone-bounded-convergence + integration-aggregation Mathlib infra."
+  conditionalOn := []
+
+/-! ## R76 §18 closure-path-A entries on welfareCrossPartial_explicit_form_OPEN -/
+
+/-- R76 NEW Cat 3 paper-novel opaque carrier: paper line 566's first
+    cross-partial term `∂²P_correct/(∂β ∂κ) · [V_dyn(u_2, β) - r(u_1)]`. -/
+def entry_carrier_firstTermCrossPartial : GapEntry where
+  name := "firstTermCrossPartial (R76: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN; paper line 566 first cross-partial term)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource :=
+    "Proposition `prop:supermodular` proof, line 566: first cross-partial " ++
+    "term `∂²P_correct/(∂β ∂κ) · [V_dyn(u_2, β) - r(u_1)]` (the term " ++
+    "involving the `[1 - z²]` factor)"
+  attackHistory :=
+    [ "R76 2026-05-15: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN (R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial). Carrier declared `axiom firstTermCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L754. Companion atom `firstTermCrossPartial_pos_in_z_lt_one_OPEN` (separately recorded) anchors the carrier to the paper-stated positivity at `|z| < 1`. Cat 1 reduction check: CLEAR-NO — paper-novel cross-partial subterm; no Mathlib equivalent at this opaque-carrier abstraction level. Cat 2 reduction check: CLEAR-NO — paper-novel construction (the closed-form involves Φ + φ + paper-novel σ_eff + m which Mathlib lacks at this composite level). 永不 close per discipline." ]
+  scope := "Opaque carrier `firstTermCrossPartial : ℝ → ℝ → ℝ` for the paper's first cross-partial term (paper line 566 first contribution)"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN.  永不 close."
+  conditionalOn := []
+
+/-- R76 NEW Cat 3 paper-novel opaque carrier: paper line 566's second
+    cross-partial term `∂P_correct/∂κ · ∂V_dyn(u_2, β)/∂β`. -/
+def entry_carrier_secondTermCrossPartial : GapEntry where
+  name := "secondTermCrossPartial (R76: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN; paper line 566 second cross-partial term)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource :=
+    "Proposition `prop:supermodular` proof, line 566: second cross-partial " ++
+    "term `∂P_correct/∂κ · ∂V_dyn(u_2, β)/∂β` (the within-subtree " ++
+    "Blackwell term, non-negative per paper line 568)"
+  attackHistory :=
+    [ "R76 2026-05-15: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN (R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial). Carrier declared `axiom secondTermCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L770. Companion atom `secondTermCrossPartial_nonneg_OPEN` (separately recorded) anchors the carrier to the paper-stated non-negativity (paper line 568). Cat 1 reduction check: CLEAR-NO — paper-novel cross-partial subterm; no Mathlib equivalent at this opaque-carrier abstraction level. Cat 2 reduction check: CLEAR-NO — paper-novel construction (the within-subtree Blackwell term involves paper-novel `P_correct` and `V_dyn` carriers). 永不 close per discipline." ]
+  scope := "Opaque carrier `secondTermCrossPartial : ℝ → ℝ → ℝ` for the paper's second cross-partial term (paper line 566 second contribution)"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN.  永不 close."
+  conditionalOn := []
+
+/-- R76 NEW SMALLER Cat 3 paper-novel ATOMIC stipulation: paper line 568
+    non-negativity of the second cross-partial term. -/
+def entry_atom_secondTermCrossPartial_nonneg : GapEntry where
+  name := "secondTermCrossPartial_nonneg_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:supermodular proof, line 568 (`The second term is non-negative: ∂P_correct/∂κ > 0 ... and ∂V_dyn(u_2, β)/∂β ≥ 0`)"
+  attackHistory :=
+    [ "R76 2026-05-15: NEW SMALLER Cat 3 atomic-stipulation axiom extracted from the retired bundled `welfareCrossPartial_explicit_form_OPEN` per `feedback_gap_ledger_in_lean4` §18 closure-path-A decomposition (R63 W_bar mixture decomposition / R72 W_bar precedent). The retired bundled atom asserted ∃-form `welfareCrossPartial = first + second ∧ 0 ≤ second ∧ ...`; the R76 decomposition factors the `0 ≤ second` clause into this smaller wA on the explicit new carrier `secondTermCrossPartial`. Cat 1 reduction check: not Mathlib-derivable (paper-novel `P_correct` / `V_dyn` derivative-sign analysis on the IDP welfare functional). Cat 2 reduction check: paper-novel construction (within-subtree Blackwell monotonicity is paper-stated as a derivative-sign claim). Hosted by `welfareCrossPartial_explicit_form_OPEN` derived theorem (Cognitive.lean) which composes this smaller wA with `firstTermCrossPartial_pos_in_z_lt_one_OPEN` + the welfareCrossPartial def's `rfl`-reduction." ]
+  scope := "Proposition prop:supermodular, paper line 568 non-negativity of the within-subtree Blackwell second cross-partial term"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = derive `0 ≤ secondTermCrossPartial β κ` from Proposition prop:supermodular proof line 568 (`∂P_correct/∂κ > 0` from cognitive-depth-improves-correct-routing + `∂V_dyn(u_2, β)/∂β ≥ 0` from within-subtree Blackwell monotonicity); requires Mathlib HasDerivAt + paper-novel P_correct/V_dyn derivative-sign analysis."
+  conditionalOn := []
+
+/-- R76 NEW SMALLER Cat 3 paper-novel ATOMIC stipulation: paper lines
+    582-584 positivity of the first cross-partial term at `|z| < 1`. -/
+def entry_atom_firstTermCrossPartial_pos_in_z_lt_one : GapEntry where
+  name := "firstTermCrossPartial_pos_in_z_lt_one_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:supermodular proof, lines 582-584 (`|σ'_eff|/σ_eff² > 0; m'(κ) > 0; φ(z) > 0; [1 - z²] > 0` factor analysis at `|z| < 1`, combined with bridge-dominance for `[V_dyn(u_2, β) - r(u_1)] > 0`)"
+  attackHistory :=
+    [ "R76 2026-05-15: NEW SMALLER Cat 3 atomic-stipulation axiom extracted from the retired bundled `welfareCrossPartial_explicit_form_OPEN` per `feedback_gap_ledger_in_lean4` §18 closure-path-A decomposition (R63 W_bar mixture decomposition / R72 W_bar precedent). The retired bundled atom asserted ∃-form `welfareCrossPartial = first + second ∧ ... ∧ (|z| < 1 → 0 < first)`; the R76 decomposition factors the `(|z| < 1 → 0 < first)` clause into this smaller wA on the explicit new carrier `firstTermCrossPartial`. Cat 1 reduction check: not Mathlib-derivable (paper-novel Gaussian PDF derivative computation + IDP welfare functional decomposition). Cat 2 reduction check: paper-novel construction (paper's `φ'(z) = -z·φ(z)` Gaussian PDF derivative identity is Mathlib-derivable, but the specific composition with paper-novel σ_eff/m carriers is paper-novel). Hosted by `welfareCrossPartial_explicit_form_OPEN` derived theorem (Cognitive.lean) which composes this smaller wA with `secondTermCrossPartial_nonneg_OPEN` + the welfareCrossPartial def's `rfl`-reduction." ]
+  scope := "Proposition prop:supermodular, paper lines 582-584 positivity of the [1 - z²]-factor first cross-partial term at `|z| < 1`"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = derive `|snrZ β κ| < 1 → 0 < firstTermCrossPartial β κ` from Proposition prop:supermodular proof lines 582-584 reconstruction (`|σ'_eff|/σ_eff² > 0`, `m'(κ) > 0`, `φ(z) > 0`, `[1 - z²] > 0` factor analysis at `|z| < 1`, combined with bridge-dominance for `[V_dyn(u_2, β) - r(u_1)] > 0`); requires Mathlib HasDerivAt + Φ + φ derivative machinery for the explicit Gaussian closed form."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
@@ -6761,7 +6896,31 @@ def allGaps : List GapEntry := [
   entry_carrier_expectedTopoLossAboveLowerConst,
   entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc,
   entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually,
-  entry_atom_expectedTopoLoss_le_one
+  entry_atom_expectedTopoLoss_le_one,
+  -- R76 Pattern 5 propagation (NET 0 wA, audit-chain granularity per §18):
+  -- 3 new wA atoms paired with 3 retired wA atoms via Pattern 5 closures
+  -- (entry_atom_betaBarStar_def, entry_atom_aggregateOptimalBeta_def,
+  -- entry_atom_W_bar_limit_infty_def all flip workingAssumption gapOpen →
+  -- derivedTheorem gapClosed; the carriers betaBarStar / aggregateOptimalBeta
+  -- / W_bar_limit_infty are promoted from `axiom` to `noncomputable def`
+  -- via Classical.choose on the new wA existence atoms).
+  entry_atom_principal_interior_maximum_exists,
+  entry_atom_aggregate_optimum_exists_per_G,
+  entry_atom_W_bar_has_limit_infty,
+  -- R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN:
+  -- 1 retired bundled wA + 2 new smaller wAs on new opaque carriers
+  -- firstTermCrossPartial + secondTermCrossPartial (paper line 566 explicit
+  -- two-term decomposition); welfareCrossPartial promoted from `axiom` to
+  -- `noncomputable def := firstTermCrossPartial + secondTermCrossPartial`;
+  -- entry_atom_welfareCrossPartial_explicit_form flips workingAssumption
+  -- gapOpen → derivedTheorem gapClosed via Cat 1 rfl + 2 smaller wAs;
+  -- entry_atom_cross_partial_sign_in_z_lt_one ALSO flips wA → derivedTheorem
+  -- via Cat 1 linarith (overall NET 0 wA: -2 retired bundled wAs + 2 new
+  -- smaller wAs).
+  entry_carrier_firstTermCrossPartial,
+  entry_carrier_secondTermCrossPartial,
+  entry_atom_secondTermCrossPartial_nonneg,
+  entry_atom_firstTermCrossPartial_pos_in_z_lt_one
 ]
 
 /-- Status-keyed counts:

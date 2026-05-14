@@ -224,6 +224,31 @@ namespace BlackwellDilemma.AxiomAudit
 -- (GeneralGraphs.lean — the wA-reducing closure).
 #print axioms BlackwellDilemma.W_bar_eq_mixture_OPEN
 #print axioms BlackwellDilemma.differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN
+-- R76 Pattern 5 closures (R74 `betaStarOfP` / R75 `smoothTransitionBeta`
+-- precedent extended to the Principal layer): 3 wA atoms closed via
+-- `noncomputable def <carrier> := Classical.choose <existence_atom>`
+-- + `theorem <atom>_def := Classical.choose_spec`. The carriers
+-- betaBarStar, aggregateOptimalBeta, W_bar_limit_infty are now concrete
+-- defs invoking Classical.choose on new wA existence atoms
+-- (principal_interior_maximum_exists_OPEN, aggregate_optimum_exists_per_G_OPEN,
+-- W_bar_has_limit_infty_OPEN). NET 0 wA: 3 retired wAs (betaBarStar_def,
+-- aggregateOptimalBeta_def, W_bar_limit_infty_def) + 3 new wAs.
+#print axioms BlackwellDilemma.betaBarStar_def
+#print axioms BlackwellDilemma.aggregateOptimalBeta_def
+#print axioms BlackwellDilemma.W_bar_limit_infty_def
+-- R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN:
+-- bundled wA decomposed into 2 new opaque carriers (firstTermCrossPartial
+-- + secondTermCrossPartial per paper line 566 explicit two-term
+-- decomposition) + 2 new smaller wAs (secondTermCrossPartial_nonneg_OPEN
+-- per paper line 568 + firstTermCrossPartial_pos_in_z_lt_one_OPEN per
+-- paper lines 582-584). welfareCrossPartial promoted from `axiom` to
+-- `noncomputable def := firstTermCrossPartial + secondTermCrossPartial`.
+-- The cross_partial_sign_in_z_lt_one_OPEN atom is ALSO retired via
+-- Cat 1 linarith arithmetic on the universal-quantified premises.
+-- NET 0 wA on welfareCrossPartial branch: -2 retired bundled wAs + 2
+-- new smaller wAs.
+#print axioms BlackwellDilemma.welfareCrossPartial_explicit_form_OPEN
+#print axioms BlackwellDilemma.cross_partial_sign_in_z_lt_one_OPEN
 
 -- §5 Constructive instances
 #print axioms BlackwellDilemma.FiveState.gap_kappaStar_at_two_thirds
