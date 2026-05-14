@@ -3116,7 +3116,7 @@ def entry_atom_kappaStar_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Theorem 4.1 Part 3, line 493 (`κ* = inf{κ > 0 : m(κ) ≥ 0}`)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `kappaStar p α = sInf {κ : ℝ | 0 < κ ∧ 0 ≤ mean_estimate_gap p κ}` from Theorem 4.1 Part 3 paper proof (line 493): IVT applied to `mean_estimate_gap p ·` on `(0, ∞)` (continuity from R36 atom + Tendsto-to-positive-limit) yields the inf-existence + characterisation. R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 def entry_atom_mLimit_def : GapEntry where
@@ -3134,7 +3134,7 @@ def entry_atom_mLimit_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `Filter.Tendsto (fun κ => mean_estimate_gap p κ) Filter.atTop (nhds (mLimitOf p))` from Theorem 4.1 Part 3 paper proof (line 505): paper-stated κ→∞ asymptote of mean-estimate-gap as the V_dyn-difference between trap & bridge subtree-vertex pair `(u_1, u_2)`. R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 def entry_atom_alphaStar_def : GapEntry where
@@ -3152,7 +3152,7 @@ def entry_atom_alphaStar_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Proposition prop:sentimental proof, line 602 (sup-characterisation of α*)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `alphaStar κ p = sSup {α : 0 ≤ α ≤ 1 ∧ α-monotonicity holds in welfare}` from Proposition prop:sentimental proof line 602: paper-stated supremum over the monotonicity set (depends on welfare-continuity-in-α R37 atom + monotonicity-set non-emptiness at α=0). R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 def entry_atom_kappaAgentWelfareSNR_def : GapEntry where
@@ -3186,7 +3186,7 @@ def entry_atom_betaBarStar_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Proposition prop:principal-optimum, line 622 (β̄* as maximiser of W̄)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `∀ β, W_bar β ≤ W_bar betaBarStar` from Proposition prop:principal-optimum line 622 paper proof: argmax characterisation requires (a) interior-optimum existence (entry_atom_interior_max_exists_from_unimodal_envelope R37 atom) + (b) W_bar continuity + compact-interval Mathlib infrastructure. R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 def entry_atom_kappa_FOSD_def : GapEntry where
@@ -3202,7 +3202,7 @@ def entry_atom_kappa_FOSD_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Proposition prop:principal-optimum Part 2, line 634 (G₂ FOSD G₁ in κ)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `kappa_FOSD G₁ G₂ ↔ ∀ x, G₂ x ≤ G₁ x` from Proposition prop:principal-optimum Part 2 paper line 634: standard FOSD definition applied to κ-marginal CDF — Cat 1 derivable once Mathlib gains the proper FOSD predicate framework on probability measures + integration-by-parts machinery for the Lebesgue-Stieltjes chain. R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 def entry_atom_aggregateOptimalBeta_def : GapEntry where
@@ -3220,7 +3220,7 @@ def entry_atom_aggregateOptimalBeta_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Definition def:principal, line 615; Proposition prop:principal-optimum Part 2, line 634"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `∀ G β, aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G)` from Proposition prop:principal-optimum Part 2 line 634: G-parameterised analogue of betaBarStar_def's interior-optimum existence (paper-implied parallel argument requiring G-parameterised continuity + compact-interval Mathlib infrastructure). R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 def entry_atom_W_bar_limit_infty_def : GapEntry where
@@ -3238,7 +3238,7 @@ def entry_atom_W_bar_limit_infty_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Corollary cor:disclosure Part 1 proof, line 652 (aggregate welfare converges to a finite limit as β → ∞)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)` from Corollary cor:disclosure Part 1 proof line 652: paper aggregates per-agent finite-limit claim across the agent population — requires per-agent W_κ Tendsto convergence (from R30 W_open_limit_infty Cat 1 closure pattern) + integration-aggregation Mathlib infra. R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 def entry_atom_betaStarOfP_def : GapEntry where
@@ -3256,7 +3256,7 @@ def entry_atom_betaStarOfP_def : GapEntry where
       "R50 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R49 CONCERN-1 verdict. The R28→R40 oscillation pattern (R27-A=DEFINITIONAL_ATOM, R28=WORKING_ASSUMPTION, R40=structuralEquation re-revert) is now resolved per R49 audit cycle: the atom's paperSource is in THEOREM statements (not paper Definitions where §3.4.3 examples live), so the equation is paper-derived characterization per §3.4.4. Consistency with R45→R46 reclassification of welfareCrossPartial_explicit_form and bayesian_naive_below_threshold_blackwell_recovery_atom." ]
   scope := "Proposition prop:three-regime-five-state Regime (i), line 814 (β*(p) interior minimum)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1 hostile audit + R45→R46 corrective pattern). The atom's paperSource is in a THEOREM statement (not paper Definition), so the equation is paper-derived characterization, not §3.4.3 definitional commitment. Close target = paper proof reconstruction (e.g., for kappaStar_def: derive sInf form from Theorem 4.1 Part 3 IVT-style existence on mean_estimate_gap)."
+    "Cat 3 workingAssumption per §3.4.4 (R50 reclassification per R49 CONCERN-1). Close target = derive `∀ p ∈ [0, p_1), ∀ β > 0, L (betaStarOfP p) p ≤ L β p` from Proposition prop:three-regime-five-state Regime (i) line 814 paper proof: requires (a) Regime (i) existence atom (entry_atom_L_below_limit_at_some_beta) + (b) Regime (i) uniqueness atom (entry_atom_L_unimodal_in_regime_i) + (c) compact-interval-minimisation Mathlib infrastructure for the L envelope. R56 polish: per-entry close target replaces R50 templated text."
   conditionalOn := []
 
 /-! ## R23-C2 Cat 3 atomic structural-equation layer (Manufactured-Recognition pattern)
