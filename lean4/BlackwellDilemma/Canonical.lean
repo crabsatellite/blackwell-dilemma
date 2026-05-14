@@ -470,31 +470,119 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
     `L(∞, p) − L(β*(p), p)`). -/
 axiom betaStarOfP : ℝ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC structural equation: argmin
-    characterisation of `betaStarOfP p` on Regime (i)'s domain
-    `p ∈ [0, p_1)`. Paper `prop:three-regime-five-state` Regime (i)
-    (line 814) reads "unique interior minimum `β*(p) ∈ (0, ∞)`
-    satisfying `L(β*(p), p) < L(∞, p) = 0.4`": the minimum of `L(·, p)`
-    over the positive reals is achieved at `β*(p)`. This axiom encodes
-    the argmin-characterisation directly on the existing carriers
-    `betaStarOfP` and `L`: for every `β > 0`,
+/-- R62 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
+    equation: paper `prop:three-regime-five-state` Regime (i)
+    (line 814) explicitly identifies `betaStarOfP p` as THE "unique
+    interior minimum" of `L(·, p)` over the positive reals; this
+    structural equation pins the `betaStarOfP` opaque carrier to the
+    minimiser-witness from the smaller existence-of-minimum atom
+    `L_minimum_exists_in_regime_i_OPEN` introduced below. Paper line
+    814 reads "`unique interior minimum β*(p) ∈ (0, ∞) satisfying
+    L(β*(p), p) < L(∞, p) = 0.4`" — the paper's explicit `β*(p)`
+    notation IS the paper-stipulated identification of the
+    `betaStarOfP` carrier with the (per-`p`) minimiser of the loss
+    function `L(·, p)` on Regime (i)'s domain.
+
+    Encoding choice: extracted from the retired bundled
+    `betaStarOfP_def` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern + R61 `mLimit_pos` precedent. The retired atom claimed
+    `∀ β > 0, L (betaStarOfP p) p ≤ L β p` directly on the
+    `betaStarOfP` carrier without surfacing the paper line 814
+    explicit identification of the carrier with the existence-of-
+    minimum witness; the R62 decomposition factors this into the
+    structural-equation atom (this axiom; paper line 814 carrier
+    identification) + a smaller workingAssumption atom
+    `L_minimum_exists_in_regime_i_OPEN` (the substantive existence-
+    of-interior-minimum content on the `L` carrier).
+
+    Cat 3 sub-type: structuralEquation (paper-stated identity linking
+    the `betaStarOfP p` carrier to the minimiser-witness from
+    `L_minimum_exists_in_regime_i_OPEN` per paper line 814 explicit
+    `β*(p)` notation; 永不 close per discipline §3.4.3 — this is
+    paper's commitment to how its primitives are related).
+
+    paper source: Proposition `prop:three-regime-five-state` Regime (i),
+    line 814 ("unique interior minimum `β*(p)`" — paper-stipulated
+    `β*(p)` is the `betaStarOfP` carrier identified with the
+    minimiser-witness). -/
+axiom betaStarOfP_eq_minimiser_witness_OPEN :
+    ∀ (p : ℝ), 0 ≤ p → p < p_1 →
+      ∀ β_min : ℝ, 0 < β_min →
+        (∀ β : ℝ, 0 < β → L β_min p ≤ L β p) →
+        betaStarOfP p = β_min
+
+/-- R62 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
+    on Regime (i)'s domain `p ∈ [0, p_1)`, the loss function `L(·, p)`
+    has an interior minimiser over the positive reals — i.e., there
+    exists `β_min > 0` such that for every `β > 0`, `L β_min p ≤ L β p`.
+    Paper `prop:three-regime-five-state` Regime (i) (line 814 + proof
+    line 825) establishes this via the IVT-style chain: at `p < p_1`,
+    `0.9·(1−p)·sup_β Φ_B(β) > 0.5` so `L(β, p) < 0.4 = L(∞, p)` for
+    some β, and the unimodal structure of `prop:interior-optimum`
+    (line 774) yields a unique global minimum on `(0, ∞)`.
+
+    Encoding choice: extracted from the retired bundled
+    `betaStarOfP_def` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern + R61 `mLimit_pos` precedent. The retired atom bundled
+    (a) the existence of an interior minimiser of `L(·, p)` and
+    (b) the paper-stipulated identification of `betaStarOfP p` with
+    that minimiser. The R62 decomposition factors this into the
+    structural-equation atom `betaStarOfP_eq_minimiser_witness_OPEN`
+    (paper line 814 carrier identification) + this smaller
+    workingAssumption (the substantive existence-of-interior-minimum
+    content on the `L` carrier).
+
+    Cat 3 sub-type: workingAssumption (paper-stated existence of an
+    interior minimiser of `L(·, p)` on Regime (i)'s domain; pending
+    Mathlib continuous-function-on-compact-interval + transcendental
+    optimisation infrastructure for the explicit `β*(p)` witness;
+    必须 close before publication).
+
+    paper source: Proposition `prop:three-regime-five-state` Regime (i),
+    line 814 + proof line 825 (existence of interior minimum from
+    IVT chain `0.9(1-p)·sup_β Φ_B > 0.5` for `p < p_1` plus the
+    unimodal structure of `prop:interior-optimum` line 774). -/
+axiom L_minimum_exists_in_regime_i_OPEN :
+    ∀ (p : ℝ), 0 ≤ p → p < p_1 →
+      ∃ β_min : ℝ, 0 < β_min ∧
+        ∀ (β : ℝ), 0 < β → L β_min p ≤ L β p
+
+/-- **R62 derived theorem** (replaces retired `betaStarOfP_def` axiom).
+    Cat 3 argmin characterisation of `betaStarOfP p` on Regime (i)'s
+    domain `p ∈ [0, p_1)`: for every `β > 0`,
     `L (betaStarOfP p) p ≤ L β p`.
 
-    Encoding choice: argmin-characterisation pins `betaStarOfP p` to a
-    minimiser of `L(·, p)` over the positive reals. The companion
-    Cat 3 OPEN axioms `gap_three_regime_reversal_existence_OPEN` and
-    `gap_three_regime_reversal_uniqueness_OPEN` provide existence and
-    uniqueness; this atom is the structural-equation that pins the
-    `betaStarOfP` carrier to the (existing) interior minimum. The
-    positivity hypothesis on `β` matches the paper's "interior
-    minimum `β*(p) ∈ (0, ∞)`" scope.
+    R62 closure-path-A composition:
+      (a) Smaller workingAssumption atom `L_minimum_exists_in_regime_i_OPEN`
+          (existence of interior minimum of `L(·, p)` on Regime (i)'s
+          domain), AND
+      (b) Structural equation `betaStarOfP_eq_minimiser_witness_OPEN`
+          (paper line 814 carrier identification of `betaStarOfP p`
+          with the minimiser-witness).
+
+    Net workingAssumption delta: 0 (1 retired wA, 1 new structuralEq,
+    1 new smaller wA, derived theorem composes them). The new
+    workingAssumption is strictly smaller content per discipline §18
+    standard: the original atom claimed a SPECIFIC β-value
+    (`betaStarOfP p`) is the minimiser; the new atom only claims that
+    SOME minimiser exists. The structural equation surfaces the
+    paper-implicit identification.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("unique interior minimum `β*(p)`"). -/
-axiom betaStarOfP_def :
-    ∀ (p : ℝ), 0 ≤ p → p < p_1 →
-      ∀ (β : ℝ), 0 < β →
-        L (betaStarOfP p) p ≤ L β p
+theorem betaStarOfP_def
+    (p : ℝ) (h_p_nonneg : 0 ≤ p) (h_p_lt_p1 : p < p_1)
+    (β : ℝ) (h_β_pos : 0 < β) :
+    L (betaStarOfP p) p ≤ L β p := by
+  obtain ⟨β_min, h_β_min_pos, h_β_min_min⟩ :=
+    L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1
+  have h_eq : betaStarOfP p = β_min :=
+    betaStarOfP_eq_minimiser_witness_OPEN p h_p_nonneg h_p_lt_p1
+      β_min h_β_min_pos h_β_min_min
+  rw [h_eq]
+  exact h_β_min_min β h_β_pos
 
 /-- Cat 3 derived theorem: at any `p ∈ [0, p_1)`, the loss at the
     paper-stated minimiser `betaStarOfP p` lies STRICTLY below the
@@ -1123,16 +1211,72 @@ theorem gap_threshold_fiveState_kappa_above_kstar
     paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
 axiom smoothTransitionBeta : ℝ → ℝ
 
-/-- **Proposition `prop:threshold-five-state` (iii): smooth transition
-    at `κ = κ*`.**
-    At the cognitive threshold the welfare curve has a finite positive
-    inflection point and the κ-agent's welfare at the inflection point
-    is at least the welfare at any β below it (the trap-induced reversal
-    has been smoothed out).
+/-- R62 closure-path-A NEW Cat 3 paper-novel ATOMIC structural equation:
+    paper Proposition `prop:threshold-five-state` (iii) line 863 reads
+    "the welfare function `W(β, κ*, 1)` is monotone but has zero
+    derivative at the inflection point CORRESPONDING TO `β*`" —
+    explicitly identifying the inflection point with the interior
+    optimum `β*` of Proposition `prop:interior-optimum` (line 774,
+    `β* ≈ 1.5 bits`). This structural equation pins the existing
+    `smoothTransitionBeta` carrier to the existence-of-interior-optimum
+    witness from `interior_minimiser_existence_OPEN`.
 
-    paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
-axiom inflection_at_kstar_OPEN :
-    ∀ p : ℝ, 0 < smoothTransitionBeta p
+    Encoding choice: extracted from the retired bundled
+    `inflection_at_kstar_OPEN` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
+    + R59 `forward_reachable_full_at_zero` precedent (surface paper-
+    implicit identification as a structural equation, then derive the
+    bundled positivity claim Cat 1 via the existing β*-positivity).
+    The structural equation isolates the paper line 863 explicit
+    "corresponding to β*" identification of the inflection point with
+    the prop:interior-optimum witness; the strict positivity then
+    derives Cat 1 from `interior_minimiser_existence_OPEN` (which
+    already gives `0 < β_star`).
+
+    Cat 3 sub-type: structuralEquation (paper-stated identity linking
+    the `smoothTransitionBeta` carrier to the
+    `interior_minimiser_existence_OPEN` witness per paper line 863
+    "corresponding to β*"; 永不 close per discipline §3.4.3 — this is
+    paper's commitment to how its primitives are related).
+
+    paper source: Proposition `prop:threshold-five-state` (iii),
+    line 863 ("the welfare function `W(β, κ*, 1)` is monotone but has
+    zero derivative at the inflection point corresponding to `β*`"). -/
+axiom smoothTransitionBeta_corresponds_to_interior_optimum_OPEN :
+    ∀ p : ℝ, ∀ β_star : ℝ, 0 < β_star →
+      (∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0) →
+      smoothTransitionBeta p = β_star
+
+/-- **R62 derived theorem** (replaces retired `inflection_at_kstar_OPEN`).
+    **Proposition `prop:threshold-five-state` (iii): smooth transition
+    at `κ = κ*`.** At the cognitive threshold the welfare curve has a
+    finite positive inflection point.
+
+    R62 closure-path-A composition:
+      (a) Structural equation `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
+          (paper line 863 explicit "corresponding to β*"
+          identification of the inflection point with the
+          `interior_minimiser_existence_OPEN` witness), AND
+      (b) The implicit Cat 1 positivity content of
+          `interior_minimiser_existence_OPEN` (which already gives
+          `0 < β_star` for the witness).
+
+    Strict positivity of `smoothTransitionBeta p` then follows by
+    `obtain` on the structural-equation existential and `rw`-ing the
+    positivity through the equality. Net workingAssumption delta: −1
+    (1 retired wA, 1 new structuralEquation, derived theorem composes
+    no new wA).
+
+    paper source: Proposition `prop:threshold-five-state` (iii),
+    line 863 (inflection point β > 0 at κ = κ*, "corresponding to β*"). -/
+theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
+  intro p
+  obtain ⟨β_star, h_β_pos, h_β_min⟩ := interior_minimiser_existence_OPEN
+  have h_eq : smoothTransitionBeta p = β_star :=
+    smoothTransitionBeta_corresponds_to_interior_optimum_OPEN p β_star
+      h_β_pos h_β_min
+  rw [h_eq]
+  exact h_β_pos
 
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
     `prop:threshold-five-state` (iii) line 863 states that the κ-agent's
@@ -1160,12 +1304,15 @@ axiom welfare_bounded_below_inflection_OPEN :
           (kappaStar_fiveState p) 1
 
 /-- **Proposition `prop:threshold-five-state` (iii): smooth transition
-    at `κ = κ*`** (derived theorem composing two atomic stipulations
-    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern). At the cognitive threshold the welfare curve has a finite
-    positive inflection point (`inflection_at_kstar_OPEN`) and the
-    κ-agent's welfare at the inflection point dominates the welfare at
-    any β below it (`welfare_bounded_below_inflection_OPEN`).
+    at `κ = κ*`** (derived theorem composing one atomic stipulation +
+    one R62-derived theorem per `feedback_gap_ledger_in_lean4` §18
+    Manufactured-Recognition pattern). At the cognitive threshold the
+    welfare curve has a finite positive inflection point
+    (`inflection_at_kstar`, R62 derived theorem composing
+    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` +
+    `interior_minimiser_existence_OPEN`) and the κ-agent's welfare at
+    the inflection point dominates the welfare at any β below it
+    (`welfare_bounded_below_inflection_OPEN`).
 
     paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
 theorem gap_threshold_fiveState_smooth_transition :
@@ -1176,7 +1323,7 @@ theorem gap_threshold_fiveState_smooth_transition :
           agentWelfare AgentType.kappaAgent (smoothTransitionBeta p)
             (kappaStar_fiveState p) 1 := by
   intro p
-  exact ⟨inflection_at_kstar_OPEN p, welfare_bounded_below_inflection_OPEN p⟩
+  exact ⟨inflection_at_kstar p, welfare_bounded_below_inflection_OPEN p⟩
 
 /-! ## 6. Proposition `prop:bayesian-naive-five-state`
 

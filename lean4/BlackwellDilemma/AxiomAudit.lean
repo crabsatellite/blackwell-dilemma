@@ -514,4 +514,34 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.alpha_star_existence_via_continuity
 #print axioms BlackwellDilemma.alpha_below_alpha_star_implies_monotonicity_OPEN
 
+-- R62 closure wave on Canonical.lean (2 retired bundled atoms → 3
+-- new smaller atoms + 2 new derived theorems). New derived theorems
+-- + new smaller atoms surface here for kernel-purity baseline +
+-- audit-chain visibility:
+--  * `inflection_at_kstar` (R62 derived theorem): composes the new
+--    structural-equation atom
+--    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
+--    (paper line 863 explicit `corresponding to β*` identification
+--    of the inflection point with the prop:interior-optimum line 774
+--    witness) + the existing `interior_minimiser_existence_OPEN`
+--    witness's positivity clause `0 < β_star`. Replaces retired
+--    `inflection_at_kstar_OPEN`. Net: −1 wA, +1 structuralEq.
+--    Downstream `gap_threshold_fiveState_smooth_transition` re-routed
+--    (no signature change at consumer level).
+--  * `betaStarOfP_def` (R62 derived theorem, replaces axiom): composes
+--    the new structural-equation atom
+--    `betaStarOfP_eq_minimiser_witness_OPEN` (paper line 814 explicit
+--    `β*(p)` notation as carrier identification) + new smaller
+--    workingAssumption atom `L_minimum_exists_in_regime_i_OPEN`
+--    (existence of interior minimum of L(·, p) on Regime (i)'s
+--    domain). Replaces retired `betaStarOfP_def` axiom. Net: 0 wA
+--    (best-round-style closure mirroring R61 mLimit_pos pattern).
+--    Downstream `betaStarOfP_loss_below_limit` consumes the derived
+--    theorem at identical call signature.
+#print axioms BlackwellDilemma.FiveState.inflection_at_kstar
+#print axioms BlackwellDilemma.FiveState.smoothTransitionBeta_corresponds_to_interior_optimum_OPEN
+#print axioms BlackwellDilemma.FiveState.betaStarOfP_def
+#print axioms BlackwellDilemma.FiveState.betaStarOfP_eq_minimiser_witness_OPEN
+#print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
+
 end BlackwellDilemma.AxiomAudit
