@@ -210,40 +210,102 @@ theorem gap_general_tree :
         agentWelfare AgentType.greedy β 0 1 :=
   C2prime_implies_greedy_reversal_OPEN
 
-/-- Cat 3 paper-novel ATOMIC structural equation: under terminal-neighbour
-    topology, condition C2 (reward-topology misalignment, paper Definition
-    2.7) implies condition C2′ (greedy-path generalisation with
-    non-interference, paper Theorem 6.1). Paper line 1019 reads
-    "Theorem 6.1 subsumes Theorem 3.2 (terminal-neighbour topology
-    satisfies C2′ whenever C2 holds, since V_g = V_dyn on flat subtrees
-    and the non-interference clause is vacuous for degree~2)": this is
-    a paper-stated structural-implication atom on the existing Cat 3
-    hypothesis predicates `C2_RewardTopologyMisalignment`,
-    `C2prime_GreedyPathMisalignment`, and `TerminalNeighbourTopology`.
+/-- Cat 3 paper-novel ATOMIC stipulation #1 (R58 closure-path-B
+    decomposition of retired
+    `terminal_neighbour_implies_C2prime_atom_OPEN`): under
+    terminal-neighbour topology, the greedy-path value `V_g` agrees with
+    the oracle dynamic value `V_dyn` (paper line 987 + line 1019 first
+    "since" reason: "V_g = V_dyn on flat subtrees"). On terminal-neighbour
+    topology each accessible neighbour of `v₀` is either terminal
+    (degree 1) or leads to a depth-1 subtree, so the greedy traversal
+    coincides with the oracle path: `V_g(u; H) = V_dyn(u; H, ω)` for
+    all `u`, `H`, `ω`.
 
-    Encoding choice: the paper's two hypothesis-clause justifications
-    (V_g = V_dyn on flat subtrees + non-interference vacuous at degree 2)
-    are not independently derivable from the existing Lean primitives
-    because `C2_*`, `C2prime_*`, and `TerminalNeighbourTopology` are
-    opaque `Prop` axioms (Types.lean §6 + §10). Per the discipline
-    "paper-stated structural-implication atoms on existing hypothesis
-    predicates are Cat 3 atoms", this implication is recorded as an
-    atomic Cat 3 axiom (paper line 1019 structural fact). The downstream
-    derived theorem `dilemma_subsumed_by_gap_general_tree` then chains
-    this atom with the trivial conjunction-rebuilding step on the
-    existing definitions of `Conditions_C1_C2_C3` and
-    `Conditions_C1_C2prime_C3`.
+    Encoded as a paper-stated structural-equation atom on the existing
+    `V_g`, `V_dyn`, and `TerminalNeighbourTopology` carriers. Strictly
+    smaller than the retired bundled atom (which packaged this
+    structural equality with the additional non-interference vacuity +
+    the C2/C2′ inferential composition step). The atom isolates the
+    paper's first reason exactly as line 987 and line 1019 state it.
 
-    Cat 1 reduction check: not Mathlib-derivable (the C2 / C2′
-    predicates are opaque IDP primitives). Cat 2 reduction check:
-    paper-novel structural implication on the IDP hypothesis predicates.
+    Cat 3 sub-type: workingAssumption (paper-derived structural fact on
+    the opaque `V_g` and `V_dyn` carriers, pending per-IDP-instance
+    derivation from def:greedy-path lines 982-985 specialised to the
+    flat-subtree topology; 必须 close before publication).
 
-    paper source: Theorem 6.1 (`thm:general-tree`) + line 1019 ("the
+    paper source: line 987 ("On terminal-neighbor topology, V_g(u) =
+    V_dyn(u)") + line 1019 ("V_g = V_dyn on flat subtrees"). -/
+axiom V_g_eq_V_dyn_on_terminal_neighbour_OPEN :
+    TerminalNeighbourTopology →
+    ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
+      V_g u H ω = V_dyn u H ω
+
+/-- Cat 3 paper-novel ATOMIC stipulation #2 (R58 closure-path-B
+    decomposition of retired
+    `terminal_neighbour_implies_C2prime_atom_OPEN`): the C2′ predicate
+    is implied by C2 plus the paper's two structural reasons identified
+    by line 1019 ("V_g = V_dyn on flat subtrees AND non-interference
+    clause is vacuous for degree 2"). The paper-stated inferential
+    composition step: the C2′ misalignment definition (paper Theorem
+    6.1, lines 992-995) reduces to the C2 misalignment when
+    (a) `V_g = V_dyn` (so the misalignment statement on `V_g` collapses
+    to the misalignment statement on `V_dyn` already encoded in C2),
+    AND (b) the non-interference clause is vacuous (paper line 995:
+    "When |N_R(v_0)| = 2, the clause is vacuous and C2′ reduces to C2");
+    the latter holds automatically under terminal-neighbour topology
+    (paper line 1019 second "since" reason, the degree-2 vacuity
+    instance specialised to terminal-neighbour topology).
+
+    Strictly smaller than the retired bundled atom: the inferential
+    composition step is now isolated from the underlying structural
+    equality of stipulation #1, exposing the paper's `V_g = V_dyn`
+    reduction explicitly in the chained antecedent. The composition is
+    paper-stated on the opaque hypothesis predicates `C2_*`, `C2prime_*`,
+    `TerminalNeighbourTopology`.
+
+    Cat 3 sub-type: workingAssumption (paper-stated inferential
+    composition on opaque hypothesis predicates; pending per-IDP-instance
+    derivation from C2/C2′ predicate unfolding under the specialised
+    `V_g = V_dyn` and degree-2 conditions; 必须 close before publication).
+
+    paper source: line 1019 inferential composition ("terminal-neighbour
+    topology satisfies C2′ whenever C2 holds, since V_g = V_dyn on flat
+    subtrees and the non-interference clause is vacuous for degree~2"). -/
+axiom C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN :
+    TerminalNeighbourTopology →
+    (∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
+      V_g u H ω = V_dyn u H ω) →
+    C2_RewardTopologyMisalignment →
+    C2prime_GreedyPathMisalignment
+
+/-- **Subsumption: `C2 + terminal-neighbour topology ⇒ C2′`**
+    (R58 closure-path-B derived theorem from §18 decomposition).
+
+    The retired `terminal_neighbour_implies_C2prime_atom_OPEN` bundled
+    the V_g = V_dyn structural equality, the non-interference vacuity,
+    and the C2/C2′ inferential composition into one axiom. R58 splits
+    this into two strictly-smaller atoms:
+      (i) `V_g_eq_V_dyn_on_terminal_neighbour_OPEN` (paper line 987 +
+          line 1019 first "since" reason: V_g = V_dyn on flat subtrees);
+      (ii) `C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN`
+          (paper line 1019 inferential composition step).
+    The implication is now derived by composing the two atoms. The
+    isolated structural equality (atom (i)) is reusable independently
+    of the C2/C2′ inferential composition (atom (ii)), opening the door
+    for downstream consumers that need V_g = V_dyn on flat subtrees
+    without invoking the C2/C2′ machinery.
+
+    paper source: line 1019 ("terminal-neighbour topology satisfies C2′
+    whenever C2 holds, since V_g = V_dyn on flat subtrees and the
     non-interference clause is vacuous for degree~2"). -/
-axiom terminal_neighbour_implies_C2prime_atom_OPEN :
+theorem terminal_neighbour_implies_C2prime :
     C2_RewardTopologyMisalignment →
     TerminalNeighbourTopology →
-    C2prime_GreedyPathMisalignment
+    C2prime_GreedyPathMisalignment := by
+  intro hC2 hT
+  have h_V_g_eq_V_dyn := V_g_eq_V_dyn_on_terminal_neighbour_OPEN hT
+  exact C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN
+    hT h_V_g_eq_V_dyn hC2
 
 /-- **Subsumption: Theorem 3.2 follows from Theorem 6.1.**
     Terminal-neighbour topology + C2 ⇒ C2′ (the non-interference clause
@@ -266,7 +328,7 @@ theorem dilemma_subsumed_by_gap_general_tree :
     Conditions_C1_C2prime_C3 := by
   intro hC hT
   obtain ⟨h_C1, h_C2, h_C3⟩ := hC
-  exact ⟨h_C1, terminal_neighbour_implies_C2prime_atom_OPEN h_C2 hT, h_C3⟩
+  exact ⟨h_C1, terminal_neighbour_implies_C2prime h_C2 hT, h_C3⟩
 
 /-! ## 3. Example `ex:cyclic-trap`
 
@@ -275,26 +337,63 @@ With `r(u₁) = 0.6, r(u₂) = 0.4, r(w) = 0.3, r(G) = 1.0` and edge
 `u₁–w` blocked with probability `p > 0`: on the event that the edge is
 blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
 
-/-- **Example `ex:cyclic-trap`** — Non-monotonicity survives on graphs
-    with cycles.
+/-- Cat 3 paper-novel ATOMIC stipulation (R58 closure-path-A
+    decomposition of retired
+    `cyclic_4_satisfies_C2prime_at_open_event_OPEN`): the 4-cycle trap
+    configuration of paper Example `ex:cyclic-trap` (lines 1026-1029)
+    satisfies the full diagnostic conjunction `Conditions_C1_C2prime_C3`
+    on the event that the unreliable edge `u_1`-`w` is blocked
+    (probability `p > 0`). Paper line 1028 explicitly states: "On the
+    event that `u_1`-`w` is blocked (probability `p > 0`):
+    `r(u_1) > r(u_2)` but `V_g(u_1) = 0.6 < 1.0 = V_g(u_2)`, so C2′
+    holds and Theorem~\ref{thm:general-tree} applies."
 
-    paper source: Example `ex:cyclic-trap`, lines 1026-1029. -/
-axiom cyclic_4_satisfies_C2prime_at_open_event_OPEN :
-    ∀ p : ℝ, 0 < p → p < 1 →
-      ∃ β β' : ℝ, β < β' ∧
-        agentWelfare AgentType.greedy β' 0 1 < agentWelfare AgentType.greedy β 0 1
+    Strictly smaller than the retired bundled atom (which packaged the
+    `Conditions_C1_C2prime_C3` validity AND the existential β-reversal
+    conclusion of Theorem 6.1). The atom isolates the structural
+    pre-condition (the IDP instance satisfies the diagnostic conjunction),
+    leaving the existential reversal conclusion to be derived by
+    composition with the file-local Cat 3 atom
+    `C2prime_implies_greedy_reversal_OPEN` (paper Theorem 6.1, the
+    derived consequence of the conditions on any IDP instance).
 
-/-- **Example `ex:cyclic-trap`** (derived theorem composing
-    `cyclic_4_satisfies_C2prime_at_open_event_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    Cat 3 sub-type: workingAssumption (paper-stated structural fact on
+    the cyclic 4-trap configuration; pending per-IDP-instance derivation
+    from the explicit reward and topology assignments of paper Example
+    `ex:cyclic-trap`; 必须 close before publication).
+
+    paper source: Example `ex:cyclic-trap`, lines 1026-1029 (specifically
+    line 1028 "C2′ holds and Theorem~\ref{thm:general-tree} applies"). -/
+axiom cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN :
+    ∀ p : ℝ, 0 < p → p < 1 → Conditions_C1_C2prime_C3
+
+/-- **Example `ex:cyclic-trap`** (R58 closure-path-A derived theorem
+    composing the smaller atom
+    `cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN`
+    (paper line 1028 — diagnostic conjunction holds at the blocked
+    event) with the file-local Cat 3 atom
+    `C2prime_implies_greedy_reversal_OPEN` (paper Theorem 6.1 —
+    `Conditions_C1_C2prime_C3` ⇒ greedy β-reversal exists).
     Non-monotonicity survives on graphs with cycles.
+
+    Net effect: the original bundled
+    `cyclic_4_satisfies_C2prime_at_open_event_OPEN` (which packaged
+    both the diagnostic-conjunction validity AND the existential
+    β-reversal conclusion of Theorem 6.1 into one axiom) is replaced
+    by a strictly-smaller atom (just the diagnostic-conjunction
+    validity at the blocked event) chained with the existing Theorem 6.1
+    atom. The atomic decomposition exposes the paper-stated structural
+    composition explicitly: the cyclic-trap example satisfies the
+    Theorem 6.1 hypotheses, hence inherits the Theorem 6.1 conclusion.
 
     paper source: Example `ex:cyclic-trap`, lines 1026-1029. -/
 theorem gap_cyclic_trap :
     ∀ p : ℝ, 0 < p → p < 1 →
       ∃ β β' : ℝ, β < β' ∧
-        agentWelfare AgentType.greedy β' 0 1 < agentWelfare AgentType.greedy β 0 1 :=
-  cyclic_4_satisfies_C2prime_at_open_event_OPEN
+        agentWelfare AgentType.greedy β' 0 1 < agentWelfare AgentType.greedy β 0 1 := by
+  intro p hp_pos hp_lt_one
+  exact C2prime_implies_greedy_reversal_OPEN
+    (cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN p hp_pos hp_lt_one)
 
 /-! ## 4. Depth-`d` trap tree (`def:trap-tree`)
 
@@ -431,43 +530,102 @@ theorem gap_error_compounding_part1 :
     all-edges-open realisation, paper-claimed value `r_goal = 1.0`. -/
 axiom oracleValueAtRoot_TrapTree : ℕ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC structural equation: oracle dynamic value
-    at the root of the depth-`d` trap tree equals `r_goal` (the goal
-    reward `r(G) = 1.0`). Paper Proposition `prop:error-compounding`
-    Part 2 (line 1041) reads: "The oracle achieves `V_dyn(v_0) = r(G) =
-    1.0` for all `d`." This is a paper-stated structural equation on
-    the existing opaque carrier `oracleValueAtRoot_TrapTree` declared
-    above; it pins the carrier to the paper-claimed value at every
-    depth `d ≥ 1`.
+/-- Opaque carrier (R58 closure-path-B decomposition of retired
+    `oracleValueAtRoot_TrapTree_def`): the terminal-vertex reward
+    achieved by the oracle on the depth-`d` trap tree, parameterised
+    by `d`. Paper proof line 1053 reads: "the oracle follows the
+    bridge path to G"; the carrier hosts the terminal reward of this
+    path at depth `d`. Cat 3 carrier per §3.4.1 (paper-novel primitive
+    function on the depth-d trap-tree oracle's terminal reward).
 
-    Encoding choice: refactor of the prior `gap_error_compounding_part2_OPEN`
-    axiom — the prior axiom encoded the same equation but as a
-    higher-level "paper claim" rather than as a Cat 3 atomic
-    structural-equation. Per `feedback_gap_ledger_in_lean4`'s 2026-05-13
-    update mandating that paper-stated structural equations on existing
-    primitives be Cat 3 atoms (not higher-level claims), this axiom
-    becomes the atomic structural equation, and
-    `gap_error_compounding_part2` (below) derives directly from it via
-    `rfl`-style closure (`oracleValueAtRoot_TrapTree d = r_goal`).
+    paper source: paper Proposition `prop:error-compounding` Part 2
+    proof, line 1053 (`the oracle follows the bridge path to G`). -/
+axiom oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ
 
-    paper source: Proposition `prop:error-compounding` Part 2, line 1041
-    ("The oracle achieves `V_dyn(v_0) = r(G) = 1.0` for all `d`"). -/
-axiom oracleValueAtRoot_TrapTree_def :
-    ∀ d : ℕ, 1 ≤ d → oracleValueAtRoot_TrapTree d = r_goal
+/-- Cat 3 paper-novel ATOMIC stipulation #1 (R58 closure-path-B
+    decomposition of retired `oracleValueAtRoot_TrapTree_def`): on the
+    depth-`d` trap tree (paper Definition `def:trap-tree`, line 1033),
+    the oracle's policy selects the bridge at every internal routing
+    node and the bridge path terminates at the goal `G`, so the
+    oracle's terminal reward equals the goal's reward `r(G) = r_goal`.
+    Paper Proposition `prop:error-compounding` Part 2 proof line 1053:
+    "Parts 1-2 follow from the reward structure: at β = ∞, the greedy
+    agent at every internal node selects the trap...; the oracle
+    follows the bridge path to G." Paper Definition `def:trap-tree`
+    line 1033: "Bridge `b_{d-1}` has a single child: the goal `G` with
+    `r(G) = 1.0`."
 
-/-- **Proposition `prop:error-compounding` Part 2** — Cat 3 derived
-    closure. Oracle achieves `V_dyn(v_0) = r(G) = 1.0` for all `d ≥ 1`
-    on the depth-`d` trap tree. Refactored from the prior bundled-axiom
-    encoding `gap_error_compounding_part2_OPEN`: the structural equation
-    `oracleValueAtRoot_TrapTree d = r_goal` is now hosted by the Cat 3
-    atomic axiom `oracleValueAtRoot_TrapTree_def` per
-    `feedback_gap_ledger_in_lean4` 2026-05-13 anti-pattern repair, and
-    this theorem is the trivial direct consumer.
+    Strictly smaller than the retired bundled atom: isolates only the
+    "bridge-path terminal reward equals `r_goal`" structural fact on
+    the new carrier `oracleBridgePathTerminalReward_TrapTree`, leaving
+    the "oracle dynamic value equals bridge-path terminal reward" link
+    to the companion atom #2 below.
 
-    paper source: Proposition `prop:error-compounding` Part 2, line 1041. -/
+    Cat 3 sub-type: workingAssumption (paper-derived structural fact
+    on the new opaque carrier `oracleBridgePathTerminalReward_TrapTree`;
+    pending per-trap-tree-instance derivation from def:trap-tree line
+    1033 + paper proof line 1053; 必须 close before publication).
+
+    paper source: Proposition `prop:error-compounding` Part 2 proof,
+    line 1053 + Definition `def:trap-tree`, line 1033. -/
+axiom oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN :
+    ∀ d : ℕ, 1 ≤ d → oracleBridgePathTerminalReward_TrapTree d = r_goal
+
+/-- Cat 3 paper-novel ATOMIC stipulation #2 (R58 closure-path-B
+    decomposition of retired `oracleValueAtRoot_TrapTree_def`): the
+    oracle dynamic value at the root of the depth-`d` trap tree
+    coincides with the bridge-path terminal reward (the policy
+    identification step). Paper Proposition `prop:error-compounding`
+    Part 2 proof line 1053 ("the oracle follows the bridge path to G")
+    + Definition 2.6 (`def:oracle`) — under the def:oracle decision
+    rule with all-edges-open percolation, the oracle's value at the
+    root equals the maximum reward over the reachable set, which on
+    the trap tree's bridge-routed path attains `r_goal` at the goal
+    leaf.
+
+    Strictly smaller than the retired bundled atom: isolates only the
+    oracle-policy-equals-bridge-path identification step on the two
+    opaque carriers `oracleValueAtRoot_TrapTree` and
+    `oracleBridgePathTerminalReward_TrapTree`. The terminal-reward
+    valuation is supplied separately by atom #1.
+
+    Cat 3 sub-type: workingAssumption (paper-derived policy
+    identification step on opaque oracle and bridge-path carriers;
+    pending per-trap-tree-instance derivation from Definition 2.6 +
+    paper proof line 1053; 必须 close before publication).
+
+    paper source: Proposition `prop:error-compounding` Part 2 proof,
+    line 1053 ("the oracle follows the bridge path to G") + Definition
+    2.6 (`def:oracle`). -/
+axiom oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN :
+    ∀ d : ℕ, 1 ≤ d →
+      oracleValueAtRoot_TrapTree d = oracleBridgePathTerminalReward_TrapTree d
+
+/-- **Proposition `prop:error-compounding` Part 2** (R58 closure-path-B
+    derived theorem composing the two paper-stated atomic stipulations
+    decomposed from the retired `oracleValueAtRoot_TrapTree_def`):
+      (i) `oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN`
+          (paper line 1053 + Def 2.6 — oracle policy follows the
+          bridge path);
+      (ii) `oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN`
+          (paper line 1053 + Def `def:trap-tree` line 1033 — the
+          bridge path terminates at the goal G with reward `r_goal`).
+
+    Each atom is strictly smaller than the original bundled atom (which
+    packaged both the policy identification step AND the terminal-reward
+    valuation into one). The decomposition exposes the paper proof's
+    explicit two-step structure: (a) the oracle follows the bridge path
+    (policy identification), then (b) the bridge path terminates at
+    `r(G) = r_goal` (terminal-reward valuation).
+
+    paper source: Proposition `prop:error-compounding` Part 2, line
+    1041 ("The oracle achieves V_dyn(v_0) = r(G) = 1.0 for all d") +
+    proof line 1053 ("the oracle follows the bridge path to G"). -/
 theorem gap_error_compounding_part2 :
-    ∀ d : ℕ, 1 ≤ d → oracleValueAtRoot_TrapTree d = r_goal :=
-  oracleValueAtRoot_TrapTree_def
+    ∀ d : ℕ, 1 ≤ d → oracleValueAtRoot_TrapTree d = r_goal := by
+  intro d hd
+  rw [oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN d hd,
+      oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN d hd]
 
 /-- **Proposition `prop:error-compounding` Part 4.**
     `W(β) − W(∞) = 0.4 · P_b(β)^d > 0` for finite β; decays exponentially

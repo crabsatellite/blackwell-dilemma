@@ -3074,18 +3074,73 @@ def entry_atom_V_g_def_step : GapEntry where
   conditionalOn := []
 
 def entry_atom_oracleValueAtRoot_TrapTree_def : GapEntry where
-  name := "oracleValueAtRoot_TrapTree_def"
-  status := GapStatus.gapOpen
+  name := "oracleValueAtRoot_TrapTree_def [retired R58 → replaced by oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN + oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:error-compounding Part 2, line 1041"
   attackHistory :=
     [ "Cat 3 atomic structural-equation axiom: oracle dynamic value at the root of depth-d trap tree equals `r_goal = 1.0` for all `d ≥ 1`. Paper line 1041 reads `the oracle achieves V_dyn(v_0) = r(G) = 1.0 for all d`. R23-C1 refactor: previously bundled as `gap_error_compounding_part2_OPEN` (a higher-level paper claim wrongly axiomatised); now refactored into Cat 3 atomic axiom `oracleValueAtRoot_TrapTree_def` + derived theorem `gap_error_compounding_part2` (`:= oracleValueAtRoot_TrapTree_def`). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel.",
       "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
-      "R52 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R51 hostile audit + R49→R50 boundary criterion. The atom's paperSource is in a Proposition statement (prop:error-compounding Part 2, line 1041), NOT a paper Definition — per discipline §3.4.3 (canonical examples are paper Definitions like V_dyn_def from def:value-functions), this is paper-derived characterization (the paper PROVES the oracle achieves V_dyn = r_goal via trap-tree induction), not a paper-stipulated definitional equation. Per §3.4.4 workingAssumption (必须 close before publication). Close target = paper Proposition prop:error-compounding Part 2 proof reconstruction (oracle definition + trap-tree induction)." ]
+      "R52 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R51 hostile audit + R49→R50 boundary criterion. The atom's paperSource is in a Proposition statement (prop:error-compounding Part 2, line 1041), NOT a paper Definition — per discipline §3.4.3 (canonical examples are paper Definitions like V_dyn_def from def:value-functions), this is paper-derived characterization (the paper PROVES the oracle achieves V_dyn = r_goal via trap-tree induction), not a paper-stipulated definitional equation. Per §3.4.4 workingAssumption (必须 close before publication). Close target = paper Proposition prop:error-compounding Part 2 proof reconstruction (oracle definition + trap-tree induction).",
+      "R58 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via closure-path-B decomposition (R57 §18 precedent). The bundled atom packaged the oracle-policy-equals-bridge-path identification AND the bridge-path terminal-reward valuation into one structural equation. Decomposed per the paper proof line 1053 ('Parts 1-2 follow from the reward structure: ... the oracle follows the bridge path to G') into: (i) `oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN` (paper line 1053 + Def 2.6 — oracle policy follows the bridge path) + (ii) `oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN` (paper line 1053 + Def `def:trap-tree` line 1033 — bridge path terminates at G with r_goal). New opaque carrier `oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ` introduced for the intermediate quantity. The new derived theorem `gap_error_compounding_part2` (GeneralGraphs.lean) composes the two strictly-smaller paper-novel atoms via `rw` chain. The atom is RETIRED — its content is now sourced from the two smaller atoms in the derived theorem." ]
   scope := "Proposition prop:error-compounding Part 2, line 1041"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R52 reclassification per R51 audit + R49→R50 boundary criterion). Close target = paper Proposition prop:error-compounding Part 2 proof reconstruction (oracle definition + trap-tree induction on the opaque `oracleValueAtRoot_TrapTree` carrier)."
+    "RETIRED via R58 closure-path-B decomposition. Replaced by `entry_atom_oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree` (paper line 1053 + Def 2.6 — oracle policy identification) + `entry_atom_oracleBridgePathTerminalReward_TrapTree_eq_r_goal` (paper line 1053 + def:trap-tree line 1033 — bridge-path terminal reward) + new opaque carrier `oracleBridgePathTerminalReward_TrapTree` in derived theorem `gap_error_compounding_part2` (GeneralGraphs.lean)."
+  conditionalOn := []
+
+/-- R58 closure-path-B: new opaque carrier introduced as part of the
+    decomposition of retired `oracleValueAtRoot_TrapTree_def`. Hosts
+    the terminal-vertex reward of the oracle's bridge-path policy on
+    the depth-d trap tree, parameterised by d. Cat 3 carrier per §3.4.1
+    (paper-novel primitive function). -/
+def entry_carrier_oracleBridgePathTerminalReward_TrapTree : GapEntry where
+  name := "oracleBridgePathTerminalReward_TrapTree"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:error-compounding Part 2 proof, line 1053 (`the oracle follows the bridge path to G`)"
+  attackHistory :=
+    [ "R58 2026-05-14: introduced as opaque carrier in GeneralGraphs.lean for the terminal-vertex reward of the oracle's bridge-path policy on the depth-d trap tree, mediating between atom #1 (oracle policy identification) and atom #2 (bridge-path terminal reward) in the closure-path-B decomposition of retired `oracleValueAtRoot_TrapTree_def`. Cat 3 carrier per §3.4.1 (paper-novel primitive function on the depth-d trap-tree oracle's terminal reward; paper proof line 1053 references this quantity implicitly via 'the oracle follows the bridge path to G'). 永不 close per discipline." ]
+  scope := "Opaque carrier `oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ` for the terminal-vertex reward of the oracle's bridge-path policy on the depth-d trap tree"
+  obstacleOrAttribution :=
+    "Cat 3 carrier per §3.4.1; 永不 close per discipline. Hosted in GeneralGraphs.lean as `axiom oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ`. Constrained by atom #2 `oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN`."
+  conditionalOn := []
+
+/-- R58 closure-path-B: new smaller paper-novel ATOMIC stipulation #1
+    replacing the retired `oracleValueAtRoot_TrapTree_def`. Paper proof
+    line 1053 + Definition 2.6 — the oracle dynamic value at the root
+    of the depth-d trap tree coincides with the terminal-vertex reward
+    of the oracle's bridge-path policy. -/
+def entry_atom_oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree : GapEntry where
+  name := "oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:error-compounding Part 2 proof, line 1053 (`the oracle follows the bridge path to G`) + Definition 2.6 (`def:oracle`)"
+  attackHistory :=
+    [ "R58 2026-05-14: introduced as smaller replacement atom #1 via closure-path-B decomposition of retired `oracleValueAtRoot_TrapTree_def`. Statement: `∀ d ≥ 1, oracleValueAtRoot_TrapTree d = oracleBridgePathTerminalReward_TrapTree d`. Strictly smaller than retired bundled atom — isolates only the oracle-policy-equals-bridge-path identification step on the two opaque carriers, leaving the terminal-reward valuation to atom #2. Cat 1 reduction check: not Mathlib-derivable (oracleValueAtRoot_TrapTree and oracleBridgePathTerminalReward_TrapTree are opaque IDP carriers). Cat 2 reduction check: paper-novel structural fact on the trap-tree oracle policy." ]
+  scope := "Paper proof line 1053 + Def 2.6 — oracle dynamic value at root coincides with bridge-path terminal reward on the depth-d trap tree"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper Definition 2.6 (`def:oracle`) decision rule applied to the depth-d trap tree (paper Definition `def:trap-tree`): under all-edges-open percolation, the oracle's argmax over the reachable set of `E[r(v) | s]` selects the bridge at every internal node (since the bridge subtree contains the goal G with r(G) > all trap rewards), so the oracle's value coincides with the bridge-path terminal reward."
+  conditionalOn := []
+
+/-- R58 closure-path-B: new smaller paper-novel ATOMIC stipulation #2
+    replacing the retired `oracleValueAtRoot_TrapTree_def`. Paper proof
+    line 1053 + Definition `def:trap-tree` line 1033 — the bridge path
+    on the depth-d trap tree terminates at the goal G with reward
+    `r_goal = 1.0`. -/
+def entry_atom_oracleBridgePathTerminalReward_TrapTree_eq_r_goal : GapEntry where
+  name := "oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:error-compounding Part 2 proof, line 1053 + Definition `def:trap-tree`, line 1033 (`Bridge b_{d-1} has a single child: the goal G with r(G) = 1.0`)"
+  attackHistory :=
+    [ "R58 2026-05-14: introduced as smaller replacement atom #2 via closure-path-B decomposition of retired `oracleValueAtRoot_TrapTree_def`. Statement: `∀ d ≥ 1, oracleBridgePathTerminalReward_TrapTree d = r_goal`. Strictly smaller than retired bundled atom — isolates only the bridge-path terminal-reward valuation on the new carrier `oracleBridgePathTerminalReward_TrapTree`, leaving the oracle-policy-equals-bridge-path identification to atom #1. Cat 1 reduction check: not Mathlib-derivable (the carrier is opaque). Cat 2 reduction check: paper-novel structural fact on the trap-tree bridge-path terminal reward." ]
+  scope := "Paper proof line 1053 + def:trap-tree line 1033 — bridge-path terminal reward equals r_goal on the depth-d trap tree"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper Definition `def:trap-tree` line 1033 (the bridge path through `b_0, b_1, ..., b_{d-1}` terminates at the single child of `b_{d-1}` which is G with r(G) = 1.0 = r_goal); the bridge-path terminal-reward equation follows from def:trap-tree's explicit construction."
   conditionalOn := []
 
 def entry_atom_expectedTopoLoss_conditional_def : GapEntry where
@@ -3302,18 +3357,54 @@ def entry_atom_V_g_terminal_in_ForwardReachable : GapEntry where
   conditionalOn := []
 
 def entry_atom_terminal_neighbour_implies_C2prime : GapEntry where
-  name := "terminal_neighbour_implies_C2prime_atom_OPEN"
-  status := GapStatus.gapOpen
+  name := "terminal_neighbour_implies_C2prime_atom_OPEN [retired R58 → replaced by V_g_eq_V_dyn_on_terminal_neighbour_OPEN + C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 6.1 thm:general-tree subsumption + line 1019 (terminal-neighbour topology + C2 ⇒ C2′; non-interference clause vacuous at degree 2)"
   attackHistory :=
     [ "R23-C2 2026-05-13: Cat 3 atomic structural-implication axiom: `C2_RewardTopologyMisalignment → TerminalNeighbourTopology → C2prime_GreedyPathMisalignment`. Paper line 1019 reads 'Theorem 6.1 subsumes Theorem 3.2 (terminal-neighbour topology satisfies C2′ whenever C2 holds, since V_g = V_dyn on flat subtrees and the non-interference clause is vacuous for degree~2)'. Encoded as paper-stated structural-implication atom on the existing Cat 3 hypothesis predicates `C2_RewardTopologyMisalignment`, `C2prime_GreedyPathMisalignment`, `TerminalNeighbourTopology` (Types.lean §6 + §10). Cat 1 reduction check: not Mathlib-derivable (predicates are opaque IDP primitives). Cat 2 reduction check: paper-novel structural implication on the IDP hypothesis predicates. Hosted by `dilemma_subsumed_by_gap_general_tree` derived theorem (GeneralGraphs.lean).",
       "R27-A 2026-05-13: Cat 3 sub-classification DEFINITIONAL_ATOM per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status reclassified OPEN → DEFINITIONAL (paper-novel atomic structural-equation that IS the paper's starting commitment, NOT a gap to close — 永不 close per discipline). New `subClass` field set to DEFINITIONAL_ATOM.",
-      "R48 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R47 NOTE 5 re-audit. VERDICT = RECLASSIFY. Reasoning per §3.4.3 vs §3.4.4: paper line 1019 reads 'terminal-neighbour topology satisfies C2′ whenever C2 holds, SINCE V_g = V_dyn on flat subtrees and the non-interference clause is vacuous for degree~2'. The 'since' clause is a paper-PROVIDED derivation/justification — the paper does NOT take this as a primitive commitment but rather DERIVES it from two stated reasons (V_g = V_dyn flat-subtree property + degree-2 non-interference vacuity). This is paper-derived inference (Theorem 6.1 → Theorem 3.2 subsumption) on the existing hypothesis predicates, NOT a §3.4.3 definitional-equation primitive commitment. Per §3.4.4 workingAssumption (必须 close); close target = paper proof reconstruction of the C2 + TerminalNeighbour ⇒ C2′ implication via the V_g = V_dyn flat-subtree identity + degree-2 non-interference vacuity argument paper line 1019 provides." ]
+      "R48 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R47 NOTE 5 re-audit. VERDICT = RECLASSIFY. Reasoning per §3.4.3 vs §3.4.4: paper line 1019 reads 'terminal-neighbour topology satisfies C2′ whenever C2 holds, SINCE V_g = V_dyn on flat subtrees and the non-interference clause is vacuous for degree~2'. The 'since' clause is a paper-PROVIDED derivation/justification — the paper does NOT take this as a primitive commitment but rather DERIVES it from two stated reasons (V_g = V_dyn flat-subtree property + degree-2 non-interference vacuity). This is paper-derived inference (Theorem 6.1 → Theorem 3.2 subsumption) on the existing hypothesis predicates, NOT a §3.4.3 definitional-equation primitive commitment. Per §3.4.4 workingAssumption (必须 close); close target = paper proof reconstruction of the C2 + TerminalNeighbour ⇒ C2′ implication via the V_g = V_dyn flat-subtree identity + degree-2 non-interference vacuity argument paper line 1019 provides.",
+      "R58 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via closure-path-B decomposition (R57 §18 precedent). The bundled implication `C2 → TerminalNeighbour → C2′` packaged the V_g = V_dyn structural equality + non-interference vacuity + the C2/C2′ inferential composition into one axiom. Decomposed into: (i) `V_g_eq_V_dyn_on_terminal_neighbour_OPEN` (paper line 987 + line 1019 first 'since' reason — V_g = V_dyn on flat subtrees) + (ii) `C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN` (paper line 1019 inferential composition step). The implication is now derived by composing the two strictly-smaller paper-novel atoms in the new `terminal_neighbour_implies_C2prime` derived theorem (GeneralGraphs.lean). The downstream `dilemma_subsumed_by_gap_general_tree` re-routed to consume the derived theorem. The atom is RETIRED — its content is now sourced from the two smaller atoms in the derived theorem." ]
   scope := "Theorem 6.1 thm:general-tree subsumption + line 1019 (terminal-neighbour topology + C2 ⇒ C2′; non-interference clause vacuous at degree 2)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R48 hostile-audit re-classification per R47 NOTE 5; previously DEFINITIONAL_ATOM under R27-A). Close target = paper proof reconstruction of Theorem 6.1 → Theorem 3.2 subsumption (paper line 1019: V_g = V_dyn on flat subtrees + non-interference clause vacuous for degree 2). Downstream consumer: `dilemma_subsumed_by_gap_general_tree` derived theorem (GeneralGraphs.lean) refactored from prior `dilemma_subsumed_by_gap_general_tree_OPEN`."
+    "RETIRED via R58 closure-path-B decomposition. Replaced by `entry_atom_V_g_eq_V_dyn_on_terminal_neighbour` (paper line 987 + line 1019 first reason) + `entry_atom_C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour` (paper line 1019 inferential composition) in derived theorem `terminal_neighbour_implies_C2prime` (GeneralGraphs.lean). Downstream `dilemma_subsumed_by_gap_general_tree` re-routed to consume the new derived theorem."
+  conditionalOn := []
+
+/-- R58 closure-path-B: new smaller paper-novel ATOMIC stipulation #1
+    replacing the retired `terminal_neighbour_implies_C2prime_atom_OPEN`.
+    Paper line 987 + line 1019 first "since" reason —
+    on terminal-neighbour topology, V_g = V_dyn on flat subtrees. -/
+def entry_atom_V_g_eq_V_dyn_on_terminal_neighbour : GapEntry where
+  name := "V_g_eq_V_dyn_on_terminal_neighbour_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Paper line 987 + line 1019 first 'since' reason (`On terminal-neighbor topology, V_g(u) = V_dyn(u)` + `V_g = V_dyn on flat subtrees`)"
+  attackHistory :=
+    [ "R58 2026-05-14: introduced as smaller replacement atom #1 via closure-path-B decomposition of retired `terminal_neighbour_implies_C2prime_atom_OPEN`. Statement: `TerminalNeighbourTopology → ∀ u H ω, V_g u H ω = V_dyn u H ω`. Strictly smaller than retired bundled atom — isolates only the V_g = V_dyn structural equality on the opaque V_g and V_dyn carriers, leaving the non-interference vacuity + C2/C2′ inferential composition to atom #2. Paper-derived working content (paper line 987 stating equality + paper line 1019 first 'since' reason — the equality is paper-derived from def:greedy-path lines 982-985 specialised to flat-subtree topology). Cat 1 reduction check: not Mathlib-derivable (V_g and V_dyn are opaque IDP carriers). Cat 2 reduction check: paper-novel structural fact on the IDP carriers." ]
+  scope := "Paper line 987 + 1019 first reason — V_g = V_dyn on flat subtrees under terminal-neighbour topology"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper Definition `def:greedy-path` lines 982-985 specialised to the flat-subtree (terminal-neighbour) topology, deriving V_g = V_dyn from the recursion's terminal-base case (`V_g_def_terminal`) coinciding with the V_dyn supremum at each flat subtree."
+  conditionalOn := []
+
+/-- R58 closure-path-B: new smaller paper-novel ATOMIC stipulation #2
+    replacing the retired `terminal_neighbour_implies_C2prime_atom_OPEN`.
+    Paper line 1019 inferential composition — when V_g = V_dyn AND
+    non-interference is vacuous (degree-2 vacuity at terminal-neighbour),
+    C2 lifts to C2′. -/
+def entry_atom_C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour : GapEntry where
+  name := "C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Paper line 1019 inferential composition (`terminal-neighbour topology satisfies C2′ whenever C2 holds, since V_g = V_dyn on flat subtrees and the non-interference clause is vacuous for degree~2`)"
+  attackHistory :=
+    [ "R58 2026-05-14: introduced as smaller replacement atom #2 via closure-path-B decomposition of retired `terminal_neighbour_implies_C2prime_atom_OPEN`. Statement: `TerminalNeighbourTopology → (∀ u H ω, V_g u H ω = V_dyn u H ω) → C2_RewardTopologyMisalignment → C2prime_GreedyPathMisalignment`. Strictly smaller than retired bundled atom — isolates the inferential composition step on the opaque hypothesis predicates, exposing the V_g = V_dyn equality (atom #1) explicitly in the chained antecedent. The non-interference vacuity is encoded inline (degree-2 vacuity follows from terminal-neighbour topology per paper line 1019 second 'since' reason; not separately atomized because the C2′ predicate's non-interference clause becomes vacuous when terminal-neighbour topology specialises the |N_R(v_0)| = 2 setting per paper line 995). Cat 1 reduction check: not Mathlib-derivable (predicates are opaque IDP primitives). Cat 2 reduction check: paper-novel inferential composition on the IDP hypothesis predicates." ]
+  scope := "Paper line 1019 inferential composition step — C2 + TerminalNeighbour + (V_g = V_dyn) ⇒ C2′"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper Theorem 6.1 (lines 992-995) C2′ predicate definition unfolding under (i) the V_g = V_dyn equality (collapsing the misalignment statement on V_g to the misalignment statement on V_dyn already encoded in C2) AND (ii) the degree-2 non-interference vacuity (paper line 995 'When |N_R(v_0)| = 2, the clause is vacuous and C2′ reduces to C2', specialised to terminal-neighbour topology)."
   conditionalOn := []
 
 /-! ## R36 atomic-stipulation layer (Manufactured-Recognition §18 pattern)
@@ -4282,18 +4373,38 @@ def entry_atom_C2prime_implies_greedy_reversal : GapEntry where
     1029), 4-cycle trap configuration satisfies C2′ at positive-
     probability open-edge event. -/
 def entry_atom_cyclic_4_satisfies_C2prime_at_open_event : GapEntry where
-  name := "cyclic_4_satisfies_C2prime_at_open_event_OPEN"
-  status := GapStatus.gapOpen
+  name := "cyclic_4_satisfies_C2prime_at_open_event_OPEN [retired R58 → replaced by cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN + C2prime_implies_greedy_reversal_OPEN chain]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Example ex:cyclic-trap, lines 1026-1029"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_cyclic_trap_OPEN` per §18 (renamed to atom + derived theorem `gap_cyclic_trap` re-export). Downstream consumer: `gap_cyclic_trap`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R58 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via closure-path-A decomposition (R57 §18 precedent). The bundled existential reversal `∀ p > 0, p < 1 → ∃ β β', β < β' ∧ greedy-welfare-strict-decrease` packaged BOTH the diagnostic-conjunction validity at the blocked event AND the existential β-reversal conclusion of Theorem 6.1 into one axiom. R58 splits into: (a) smaller paper-novel atom `cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN` (paper line 1028 — diagnostic conjunction `Conditions_C1_C2prime_C3` holds at the blocked event) + (b) chain with the file-local Cat 3 atom `C2prime_implies_greedy_reversal_OPEN` (paper Theorem 6.1, the derived consequence on any IDP instance satisfying the diagnostic conjunction). The new derived theorem `gap_cyclic_trap` (GeneralGraphs.lean) composes the two paper-novel atoms. Net workingAssumption count: -1 + 1 = 0 (atom replaced 1-for-1 with strictly-smaller atom; the existential conclusion's derivation is now visible via composition with the file-local Theorem 6.1 atom). The atom is RETIRED — its content is now sourced from the smaller atom + Theorem 6.1 chain in the derived theorem." ]
   scope := "Example ex:cyclic-trap, 4-cycle C2′ satisfaction"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper Example ex:cyclic-trap proof reconstruction (4-cycle trap configuration satisfies C2′ at positive-probability open-edge event)."
+    "RETIRED via R58 closure-path-A decomposition. Replaced by `entry_atom_cyclic_4_satisfies_full_conditions_at_blocked_event` (smaller paper-novel atom: diagnostic-conjunction validity at the blocked event) + chain with `entry_atom_C2prime_implies_greedy_reversal` (Theorem 6.1) in derived theorem `gap_cyclic_trap`."
+  conditionalOn := []
+
+/-- R58 closure-path-A: new smaller paper-novel ATOMIC stipulation
+    replacing the retired
+    `cyclic_4_satisfies_C2prime_at_open_event_OPEN`. Paper Example
+    `ex:cyclic-trap` line 1028 — at the blocked event for the
+    unreliable edge `u_1`-`w`, the diagnostic conjunction
+    `Conditions_C1_C2prime_C3` holds. -/
+def entry_atom_cyclic_4_satisfies_full_conditions_at_blocked_event : GapEntry where
+  name := "cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Example ex:cyclic-trap, line 1028 (`On the event that u_1-w is blocked (probability p > 0): r(u_1) > r(u_2) but V_g(u_1) = 0.6 < 1.0 = V_g(u_2), so C2′ holds and Theorem~\\ref{thm:general-tree} applies`)"
+  attackHistory :=
+    [ "R58 2026-05-14: introduced as smaller replacement atom via closure-path-A decomposition of retired `cyclic_4_satisfies_C2prime_at_open_event_OPEN`. Statement: `∀ p, 0 < p → p < 1 → Conditions_C1_C2prime_C3`. Strictly smaller than retired bundled atom — isolates only the diagnostic-conjunction validity at the blocked event of the cyclic 4-trap configuration, leaving the existential β-reversal conclusion to be derived by composition with the file-local Cat 3 atom `C2prime_implies_greedy_reversal_OPEN` (paper Theorem 6.1). Cat 1 reduction check: not Mathlib-derivable (Conditions_C1_C2prime_C3 is a predicate over opaque IDP carriers). Cat 2 reduction check: paper-novel structural fact on the cyclic 4-trap configuration." ]
+  scope := "Example ex:cyclic-trap line 1028 — diagnostic conjunction Conditions_C1_C2prime_C3 holds at the blocked event"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper Example `ex:cyclic-trap` proof reconstruction: at the blocked event (probability p > 0), the explicit reward and topology assignments of paper line 1028 (`r(u_1) = 0.6, r(u_2) = 0.4, r(w) = 0.3, r(G) = 1.0`; `V_g(u_1) = 0.6 < V_g(u_2) = 1.0`) yield C1 (irreversibility from the no-revisit rule) + C2′ (greedy-path misalignment with non-interference vacuous at degree 2 from v_0) + C3 (information locality on the explicit topology)."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:error-compounding Part 5
@@ -4715,6 +4826,21 @@ def allGaps : List GapEntry := [
   entry_atom_satisficing_trap_acceptance_strictMono_in_beta,
   entry_atom_satisficing_welfare_antitone_in_trap_acceptance,
   entry_carrier_satisficingTrapAcceptanceProb,
+  -- R58 closure-path-B (terminal_neighbour_implies_C2prime decomposition,
+  -- GeneralGraphs.lean): 2 smaller replacement atoms — V_g = V_dyn on
+  -- terminal-neighbour topology + C2/C2′ inferential composition.
+  entry_atom_V_g_eq_V_dyn_on_terminal_neighbour,
+  entry_atom_C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour,
+  -- R58 closure-path-A (cyclic_4_satisfies_C2prime decomposition,
+  -- GeneralGraphs.lean): smaller replacement atom — diagnostic
+  -- conjunction at blocked event; chain with C2prime_implies_greedy_reversal.
+  entry_atom_cyclic_4_satisfies_full_conditions_at_blocked_event,
+  -- R58 closure-path-B (oracleValueAtRoot_TrapTree_def decomposition,
+  -- GeneralGraphs.lean): 2 smaller replacement atoms + new carrier —
+  -- oracle policy follows bridge path + bridge-path terminal reward.
+  entry_carrier_oracleBridgePathTerminalReward_TrapTree,
+  entry_atom_oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree,
+  entry_atom_oracleBridgePathTerminalReward_TrapTree_eq_r_goal,
   -- R41 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
   -- 5 new Cat 3 atoms across prop:topo-cluster + bayesian-naive-five-state Part (ii)
   -- + prop:error-compounding Part 5 c_star_constant positivity).

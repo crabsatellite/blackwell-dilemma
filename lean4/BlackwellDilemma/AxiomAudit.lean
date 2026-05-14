@@ -368,6 +368,23 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cyclic_trap
 #print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_log_growth
 
+-- R58 closure-path-A/B individual atom prints + new derived theorem
+-- (kernel-purity baseline + audit-chain visibility):
+--  * `terminal_neighbour_implies_C2prime` (R58 path-B derived theorem)
+--    composes the two smaller atoms below in place of the retired
+--    `terminal_neighbour_implies_C2prime_atom_OPEN`.
+--  * `gap_cyclic_trap` (R58 path-A) re-derived via smaller atom +
+--    file-local Theorem 6.1 atom chain.
+--  * `gap_error_compounding_part2` (R58 path-B) re-derived via 2-atom
+--    chain through new opaque carrier `oracleBridgePathTerminalReward_TrapTree`.
+#print axioms BlackwellDilemma.terminal_neighbour_implies_C2prime
+#print axioms BlackwellDilemma.V_g_eq_V_dyn_on_terminal_neighbour_OPEN
+#print axioms BlackwellDilemma.C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN
+#print axioms BlackwellDilemma.cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN
+#print axioms BlackwellDilemma.TrapTree.oracleBridgePathTerminalReward_TrapTree
+#print axioms BlackwellDilemma.TrapTree.oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN
+#print axioms BlackwellDilemma.TrapTree.oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN
+
 -- R41 §18 decompositions (3 new derived theorems closing the final
 -- workingAssumption residue from R40), with R42 Pattern-1 fix:
 --  * `gap_topo_loss_below_threshold` (Wrongness.lean): composes Cat 3
