@@ -772,4 +772,52 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.FiveState.interior_minimiser_existence_OPEN
 #print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
 
+-- R82 substantive closure wave: `L'` derivative infrastructure +
+-- `Tendsto_overshoot_at_p1_OPEN` closed by a SQUEEZE argument on the
+-- concrete `overshootRegimeI` carrier.
+--
+-- (1) `Tendsto_overshoot_at_p1_OPEN` (paper prop:three-regime-five-
+--     state Regime (i) line 814 third bullet, "overshoot vanishing at
+--     p_1"): previously workingAssumption gapOpen axiom, now
+--     derivedTheorem gapClosed via a genuine SQUEEZE on the concrete
+--     `overshootRegimeI p = 0.4 − L(β*(p), p)` carrier. Lower bound
+--     `0 < overshootRegimeI p` from `betaStarOfP_loss_below_limit`;
+--     upper bound `overshootRegimeI p ≤ (1/2)·(0.9(1−p) − 0.5)` from
+--     the rearrangement `eq:five-state-rearr` EVALUATED AT the
+--     minimiser `β*(p) > 0` (`overshootRegimeI_upper_bound`, using the
+--     strict `β > 0` bounds `P_trap β*(p) ∈ (1/2,1)`,
+--     `Φ_B β*(p) < 1`); both bounds → 0 as `p → p_1⁻` (the upper bound
+--     because `0.9·(5/9) − 0.5 = 0` at `p_1 = 4/9`); concluded by
+--     `tendsto_of_tendsto_of_tendsto_of_le_of_le'`. KEY INSIGHT: this
+--     closure does NOT consume the transcendental unimodality input
+--     `L_unimodal_in_regime_i_OPEN` — the squeeze needs only the
+--     rearrangement at `β*(p)` plus the minimiser positivity
+--     `betaStarOfP_pos` (`Classical.choose_spec` of the R81-closed
+--     `L_minimum_exists_in_regime_i_OPEN` theorem).
+--
+-- New Canonical.lean `L'` derivative infrastructure (Mathlib-derived,
+-- reusable): `phi_pos_local`, `hasDerivAt_two_rpow_two_beta` (via
+-- `Real.hasStrictDerivAt_const_rpow`), `hasDerivAt_signalVariance`
+-- (via `HasDerivAt.inv`), `signalVariance_deriv_neg`,
+-- `hasDerivAt_sqrt_two_sigma` (via `HasDerivAt.sqrt`),
+-- `sqrt_two_sigma_deriv_neg`, `hasDerivAt_P_trap` / `hasDerivAt_Phi_B`
+-- (chain rule `HasDerivAt.comp` with the closed `gap_Phi_derivative`),
+-- `P_trap_deriv_pos` / `Phi_B_deriv_pos`, `hasDerivAt_L` (product/sum
+-- combinators on the concrete `L`), `L_deriv_grouped` (the
+-- `eq:five-state-rearr`-aligned `L'` sign decomposition
+-- `L'(β,p) = P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5)
+--            − (1−P_trap β)·0.9(1−p)·Φ_B'(β)`),
+-- `L_deriv_neg_on_left_branch` (the genuine left-branch sign:
+-- `L' < 0` wherever `0.9(1−p)Φ_B β ≤ 1/2`). The right-branch sign
+-- needs the transcendental two-term comparison the paper verifies only
+-- numerically, so `L_unimodal_in_regime_i_OPEN` HONESTLY remains a
+-- workingAssumption axiom (NOT closed this round). Each R82 closure is
+-- HONEST (genuine real-analysis / `HasDerivAt` proof on the concrete
+-- carriers, no R7-style content-erasure, no `sorry`). `#print axioms`
+-- on the `Tendsto_overshoot_at_p1_OPEN` closure = [propext,
+-- Classical.choice, Quot.sound] only (Classical.choice from the
+-- `Classical.choose` in `betaStarOfP` + the squeeze machinery; no
+-- project `_OPEN` axiom).
+#print axioms BlackwellDilemma.FiveState.Tendsto_overshoot_at_p1_OPEN
+
 end BlackwellDilemma.AxiomAudit

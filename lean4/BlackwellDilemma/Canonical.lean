@@ -842,6 +842,378 @@ private theorem L_zero_zero : L 0 0 = (425 / 1000 : ℝ) := by
   rw [h_Pt, h_Pb]
   norm_num
 
+/-! ### R82 substantive `L'` derivative infrastructure.
+
+The paper's Regime (i) unimodality argument (line 825, "uniqueness
+follows from the unimodal structure of Proposition
+`prop:interior-optimum`") rests on a *derivative* analysis of the
+concrete welfare-loss `L(β, p)` in `β`. R80/R81 supplied the endpoint
+limits, continuity, and extreme-value-theorem existence; R82 builds
+the genuine `HasDerivAt` chain for `L(·, p)`, composing Mathlib's
+`HasDerivAt.const_rpow` (for `2^{2β}`), `HasDerivAt.inv` (for
+`σ²(β) = 1/(2^{2β}−1)`), `HasDerivAt.sqrt` (for `√(2σ²)`),
+`HasDerivAt.div` (for `Δ/√(2σ²)`), `HasDerivAt.comp` with the closed
+`gap_Phi_derivative` (for `P_trap = Φ ∘ arg_S` and `Φ_B = Φ ∘ arg_B`),
+and the product/sum combinators (for `L` itself). Two structural
+sign facts are extracted on `Ioi 0`:
+  * `signalVariance` has a strictly negative derivative
+    (`2^{2β} log 2 · 2 > 0`, denominator `(2^{2β}−1)² > 0`);
+  * consequently `P_trap` and `Φ_B` have strictly positive
+    derivatives (`Φ' = φ > 0`, `arg_S' = arg_B' > 0`).
+These convert the paper's "direct differentiation" phrasing into a
+Lean-checked derivative object, and feed the `L'` sign decomposition
+`L'(β,p) = P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) − (1−P_trap β)·0.9(1−p)·Φ_B'(β)`.
+
+Mathlib lemmas: `Real.hasStrictDerivAt_const_rpow`, `HasDerivAt.comp`,
+`HasDerivAt.const_rpow`, `HasDerivAt.sub_const`, `HasDerivAt.inv`,
+`HasDerivAt.sqrt`, `HasDerivAt.const_mul`, `HasDerivAt.div`,
+`HasDerivAt.const_div`, `gap_Phi_derivative`, `gap_phi_derivative`,
+`HasDerivAt.mul`, `HasDerivAt.add`, plus `Real.log_pos`. -/
+
+/-- **`P_trap β > 1/2` for `β > 0`.** Mirror of `Phi_B_gt_half` with
+    `Δ_S` in place of `Δ_B`: `P_trap β = Φ(Δ_S/√(2σ²(β)))` with the
+    argument strictly positive (`Δ_S > 0`, `√(2σ²) > 0`), so
+    `Phi_gt_half_of_pos` applies.
+    paper source: line 825 ("`P_trap(β)` ranges over `(1/2, 1)`"). -/
+private theorem P_trap_gt_half {β : ℝ} (hβ : 0 < β) : (1 : ℝ)/2 < P_trap β := by
+  unfold P_trap
+  apply Phi_gt_half_of_pos
+  exact div_pos Delta_S_pos (sqrt_two_sigma_pos hβ)
+
+/-- **`phi z > 0` for all `z`** — local re-derivation (the
+    `ClassicalResults.phi_pos` lemma is `private`). `phi z =
+    (1/√(2π))·exp(−z²/2)`, a product of a strictly positive constant
+    and a strictly positive exponential. -/
+private theorem phi_pos_local (z : ℝ) : 0 < phi z := by
+  unfold phi
+  have h2pi : (0 : ℝ) < 2 * Real.pi := mul_pos (by norm_num) Real.pi_pos
+  have hsqrt : 0 < Real.sqrt (2 * Real.pi) := Real.sqrt_pos.mpr h2pi
+  positivity
+
+/-- **Derivative of `2^{2β}`.** `HasDerivAt (fun β => 2^{2β})
+    (2^{2β} · log 2 · 2) β` — `Real.hasStrictDerivAt_const_rpow`
+    (base `2 > 0`) composed with the inner linear map `β ↦ 2β`. -/
+private theorem hasDerivAt_two_rpow_two_beta (β : ℝ) :
+    HasDerivAt (fun β : ℝ => (2 : ℝ) ^ (2 * β))
+      ((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) β := by
+  have h_inner : HasDerivAt (fun β : ℝ => 2 * β) 2 β := by
+    simpa using (hasDerivAt_id β).const_mul (2 : ℝ)
+  have h_outer : HasDerivAt (fun y : ℝ => (2 : ℝ) ^ y)
+      ((2 : ℝ) ^ (2 * β) * Real.log 2) (2 * β) :=
+    (Real.hasStrictDerivAt_const_rpow (by norm_num) (2 * β)).hasDerivAt
+  have h_comp := h_outer.comp β h_inner
+  -- `h_comp : HasDerivAt ((fun y => 2^y) ∘ (fun β => 2*β))
+  --   ((2^(2β)·log 2) * 2) β`; the function is defeq to `fun β => 2^(2β)`
+  -- and the derivative value `(2^(2β)·log 2) * 2 = 2^(2β)·log 2·2`.
+  exact h_comp
+
+/-- **Derivative of `signalVariance` on `(0, ∞)`.**
+    `signalVariance β = (2^{2β} − 1)⁻¹`, so
+    `HasDerivAt signalVariance (−(2^{2β}·log 2·2)/(2^{2β}−1)²) β`
+    via `HasDerivAt.inv` (denominator `2^{2β}−1 ≠ 0` for `β > 0`). -/
+private theorem hasDerivAt_signalVariance {β : ℝ} (hβ : 0 < β) :
+    HasDerivAt signalVariance
+      (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) / ((2 : ℝ) ^ (2 * β) - 1) ^ 2) β := by
+  have h2β_pos : 0 < 2 * β := by linarith
+  have h_one_lt : (1 : ℝ) < (2 : ℝ) ^ (2 * β) :=
+    Real.one_lt_rpow (by norm_num) h2β_pos
+  have h_den_ne : (2 : ℝ) ^ (2 * β) - 1 ≠ 0 := by
+    have : 0 < (2 : ℝ) ^ (2 * β) - 1 := by linarith
+    exact this.ne'
+  have h_den : HasDerivAt (fun β : ℝ => (2 : ℝ) ^ (2 * β) - 1)
+      ((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) β := by
+    have h := (hasDerivAt_two_rpow_two_beta β).sub (hasDerivAt_const β (1 : ℝ))
+    -- derivative value is `2^(2β)·log 2·2 - 0`; rewrite to `… · 2`.
+    rwa [sub_zero] at h
+  have h_inv := h_den.inv h_den_ne
+  have h_eq : signalVariance = fun β : ℝ => ((2 : ℝ) ^ (2 * β) - 1)⁻¹ := by
+    funext b; unfold signalVariance; rw [one_div]
+  rw [h_eq]
+  exact h_inv
+
+/-- **`signalVariance` has a strictly negative derivative on `(0, ∞)`.**
+    The numerator `2^{2β}·log 2·2 > 0` (base `> 1`, `log 2 > 0`,
+    exponent value `> 0`), the denominator `(2^{2β}−1)² > 0`, so the
+    quotient is `> 0` and its negation is `< 0`. This is the Lean-checked
+    form of the paper's "`σ²(β)` is strictly decreasing in `β`"
+    (§2.2 line 138). -/
+private theorem signalVariance_deriv_neg {β : ℝ} (hβ : 0 < β) :
+    -((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) / ((2 : ℝ) ^ (2 * β) - 1) ^ 2 < 0 := by
+  have h2β_pos : 0 < 2 * β := by linarith
+  have h_one_lt : (1 : ℝ) < (2 : ℝ) ^ (2 * β) :=
+    Real.one_lt_rpow (by norm_num) h2β_pos
+  have h_pow_pos : 0 < (2 : ℝ) ^ (2 * β) := by linarith
+  have h_log_pos : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have h_num_pos : 0 < (2 : ℝ) ^ (2 * β) * Real.log 2 * 2 := by positivity
+  have h_den_pos : 0 < ((2 : ℝ) ^ (2 * β) - 1) ^ 2 := by
+    have : 0 < (2 : ℝ) ^ (2 * β) - 1 := by linarith
+    positivity
+  exact div_neg_of_neg_of_pos (by linarith) h_den_pos
+
+/-- **Derivative of `√(2·signalVariance β)` on `(0, ∞)`.**
+    `HasDerivAt (fun β => √(2σ²(β)))
+      ((2·σ²'(β)) / (2·√(2σ²(β)))) β` via `HasDerivAt.sqrt`
+    (`2σ²(β) > 0` for `β > 0`), where `σ²'(β)` is the
+    `signalVariance` derivative. -/
+private theorem hasDerivAt_sqrt_two_sigma {β : ℝ} (hβ : 0 < β) :
+    HasDerivAt (fun β : ℝ => Real.sqrt (2 * signalVariance β))
+      ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+        ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+        / (2 * Real.sqrt (2 * signalVariance β))) β := by
+  have h_2sigma : HasDerivAt (fun β : ℝ => 2 * signalVariance β)
+      (2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+        ((2 : ℝ) ^ (2 * β) - 1) ^ 2)) β :=
+    (hasDerivAt_signalVariance hβ).const_mul 2
+  have h_ne : (fun β : ℝ => 2 * signalVariance β) β ≠ 0 := by
+    have := signalVariance_pos hβ
+    simp only
+    positivity
+  exact h_2sigma.sqrt h_ne
+
+/-- **`√(2σ²(β))` has a strictly negative derivative on `(0, ∞)`.**
+    Numerator `2·σ²'(β) < 0` (since `σ²'(β) < 0`), denominator
+    `2·√(2σ²(β)) > 0`. -/
+private theorem sqrt_two_sigma_deriv_neg {β : ℝ} (hβ : 0 < β) :
+    (2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+      ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+      / (2 * Real.sqrt (2 * signalVariance β)) < 0 := by
+  have h_num_neg : 2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+      ((2 : ℝ) ^ (2 * β) - 1) ^ 2) < 0 := by
+    have := signalVariance_deriv_neg hβ; linarith
+  have h_den_pos : 0 < 2 * Real.sqrt (2 * signalVariance β) := by
+    have := sqrt_two_sigma_pos hβ; linarith
+  exact div_neg_of_neg_of_pos h_num_neg h_den_pos
+
+/-- **Derivative of `P_trap` on `(0, ∞)`.** `P_trap β = Φ(arg_S β)`
+    with `arg_S β = Δ_S/√(2σ²(β))`; the chain rule
+    `HasDerivAt.comp` with `gap_Phi_derivative` (`Φ' = φ`) and
+    `HasDerivAt.const_div` (for `Δ_S/·`) gives
+    `P_trap'(β) = φ(arg_S β) · (−Δ_S·(√)'/(√)²)`. -/
+private theorem hasDerivAt_P_trap {β : ℝ} (hβ : 0 < β) :
+    HasDerivAt P_trap
+      (phi (Delta_S / Real.sqrt (2 * signalVariance β)) *
+        (-(Delta_S *
+          ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+            ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+            / (2 * Real.sqrt (2 * signalVariance β)))) /
+          Real.sqrt (2 * signalVariance β) ^ 2)) β := by
+  have h_sqrt := hasDerivAt_sqrt_two_sigma hβ
+  have h_sqrt_ne : Real.sqrt (2 * signalVariance β) ≠ 0 :=
+    (sqrt_two_sigma_pos hβ).ne'
+  have h_arg : HasDerivAt
+      (fun β : ℝ => Delta_S / Real.sqrt (2 * signalVariance β))
+      (-(Delta_S *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2) β := by
+    have h_div := (hasDerivAt_const β Delta_S).div h_sqrt h_sqrt_ne
+    convert h_div using 1
+    ring
+  have h_comp := (gap_Phi_derivative
+    (Delta_S / Real.sqrt (2 * signalVariance β))).comp β h_arg
+  exact h_comp
+
+/-- **Derivative of `Φ_B` on `(0, ∞)`.** Identical chain to
+    `hasDerivAt_P_trap` with `Δ_B` in place of `Δ_S`. -/
+private theorem hasDerivAt_Phi_B {β : ℝ} (hβ : 0 < β) :
+    HasDerivAt Phi_B
+      (phi (Delta_B / Real.sqrt (2 * signalVariance β)) *
+        (-(Delta_B *
+          ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+            ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+            / (2 * Real.sqrt (2 * signalVariance β)))) /
+          Real.sqrt (2 * signalVariance β) ^ 2)) β := by
+  have h_sqrt := hasDerivAt_sqrt_two_sigma hβ
+  have h_sqrt_ne : Real.sqrt (2 * signalVariance β) ≠ 0 :=
+    (sqrt_two_sigma_pos hβ).ne'
+  have h_arg : HasDerivAt
+      (fun β : ℝ => Delta_B / Real.sqrt (2 * signalVariance β))
+      (-(Delta_B *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2) β := by
+    have h_div := (hasDerivAt_const β Delta_B).div h_sqrt h_sqrt_ne
+    convert h_div using 1
+    ring
+  have h_comp := (gap_Phi_derivative
+    (Delta_B / Real.sqrt (2 * signalVariance β))).comp β h_arg
+  exact h_comp
+
+/-- **`P_trap` has a strictly positive derivative on `(0, ∞)`.**
+    `P_trap'(β) = φ(arg_S β) · arg_S'(β)` with `φ > 0` everywhere
+    (`phi_pos`) and `arg_S'(β) = −Δ_S·(√)'/(√)² > 0` (numerator
+    `−Δ_S·(√)' > 0` since `Δ_S > 0` and `(√)' < 0`; denominator
+    `(√)² > 0`). Lean-checked form of the paper's "`P_trap` is
+    strictly increasing in `β`" (line 825). -/
+private theorem P_trap_deriv_pos {β : ℝ} (hβ : 0 < β) :
+    0 < phi (Delta_S / Real.sqrt (2 * signalVariance β)) *
+      (-(Delta_S *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2) := by
+  have h_phi_pos := phi_pos_local (Delta_S / Real.sqrt (2 * signalVariance β))
+  have h_sqrt_deriv_neg := sqrt_two_sigma_deriv_neg hβ
+  have h_sqrt_pos := sqrt_two_sigma_pos hβ
+  have h_arg_pos :
+      0 < -(Delta_S *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2 := by
+    apply div_pos
+    · have h1 : Delta_S *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β))) < 0 :=
+        mul_neg_of_pos_of_neg Delta_S_pos h_sqrt_deriv_neg
+      linarith
+    · positivity
+  exact mul_pos h_phi_pos h_arg_pos
+
+/-- **`Φ_B` has a strictly positive derivative on `(0, ∞)`.**
+    Identical to `P_trap_deriv_pos` with `Δ_B` in place of `Δ_S`. -/
+private theorem Phi_B_deriv_pos {β : ℝ} (hβ : 0 < β) :
+    0 < phi (Delta_B / Real.sqrt (2 * signalVariance β)) *
+      (-(Delta_B *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2) := by
+  have h_phi_pos := phi_pos_local (Delta_B / Real.sqrt (2 * signalVariance β))
+  have h_sqrt_deriv_neg := sqrt_two_sigma_deriv_neg hβ
+  have h_sqrt_pos := sqrt_two_sigma_pos hβ
+  have h_arg_pos :
+      0 < -(Delta_B *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2 := by
+    apply div_pos
+    · have h1 : Delta_B *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β))) < 0 :=
+        mul_neg_of_pos_of_neg Delta_B_pos h_sqrt_deriv_neg
+      linarith
+    · positivity
+  exact mul_pos h_phi_pos h_arg_pos
+
+/-- **Derivative of `L(·, p)` on `(0, ∞)`.** Composes
+    `hasDerivAt_P_trap` and `hasDerivAt_Phi_B` through the concrete
+    `L` definition `L β p = P_trap β·0.4 + (1−P_trap β)·0.9·
+    (1−(1−p)·Φ_B β)` via the sum / product / `const_mul` / `const_sub`
+    combinators. The derivative value is written abstractly as
+    `L'(β,p) = P'·0.4 + ((−P')·0.9·(1−(1−p)Φ_B) + (1−P)·0.9·
+    (−(1−p)·Φ_B'))` where `P' = P_trap'(β)`, `Φ_B' = Φ_B'(β)`. -/
+private theorem hasDerivAt_L (p : ℝ) {β : ℝ} (_hβ : 0 < β)
+    {Pt' Pb' : ℝ} (hPt : HasDerivAt P_trap Pt' β)
+    (hPb : HasDerivAt Phi_B Pb' β) :
+    HasDerivAt (fun β : ℝ => L β p)
+      (Pt' * (4/10 : ℝ) +
+        ((-Pt') * (9/10 : ℝ) * (1 - (1 - p) * Phi_B β) +
+          (1 - P_trap β) * (9/10 : ℝ) * (-((1 - p) * Pb')))) β := by
+  -- term 1: `P_trap β · 0.4`.
+  have h_t1 : HasDerivAt (fun β : ℝ => P_trap β * (4/10 : ℝ))
+      (Pt' * (4/10 : ℝ)) β := hPt.mul_const _
+  -- `1 − P_trap β` has derivative `−P_trap'`.
+  have h_oneSubP : HasDerivAt (fun β : ℝ => 1 - P_trap β) (-Pt') β := by
+    have h := (hasDerivAt_const β (1 : ℝ)).sub hPt
+    simpa using h
+  -- `(1 − P_trap β) · 0.9` has derivative `(−P_trap')·0.9`.
+  have h_oneSubP09 : HasDerivAt (fun β : ℝ => (1 - P_trap β) * (9/10 : ℝ))
+      ((-Pt') * (9/10 : ℝ)) β := h_oneSubP.mul_const _
+  -- `(1 − p) · Φ_B β` has derivative `(1 − p) · Φ_B'`.
+  have h_qPb : HasDerivAt (fun β : ℝ => (1 - p) * Phi_B β)
+      ((1 - p) * Pb') β := hPb.const_mul _
+  -- `1 − (1 − p)·Φ_B β` has derivative `−((1 − p)·Φ_B')`.
+  have h_inner : HasDerivAt (fun β : ℝ => 1 - (1 - p) * Phi_B β)
+      (-((1 - p) * Pb')) β := by
+    have h := (hasDerivAt_const β (1 : ℝ)).sub h_qPb
+    simpa using h
+  -- term 2: `((1 − P_trap β)·0.9) · (1 − (1 − p)·Φ_B β)` — product rule.
+  have h_t2 : HasDerivAt
+      (fun β : ℝ => ((1 - P_trap β) * (9/10 : ℝ)) * (1 - (1 - p) * Phi_B β))
+      (((-Pt') * (9/10 : ℝ)) * (1 - (1 - p) * Phi_B β) +
+        ((1 - P_trap β) * (9/10 : ℝ)) * (-((1 - p) * Pb'))) β :=
+    h_oneSubP09.mul h_inner
+  -- `L β p` is `term1 + term2`.
+  have h_sum := h_t1.add h_t2
+  have h_eq : (fun β : ℝ => L β p) =
+      (fun β : ℝ => P_trap β * (4/10 : ℝ) +
+        ((1 - P_trap β) * (9/10 : ℝ)) * (1 - (1 - p) * Phi_B β)) := by
+    funext b; unfold L; ring
+  rw [h_eq]
+  exact h_sum
+
+/-- **`L'(β, p)` sign decomposition** — algebraic rewrite of the
+    `hasDerivAt_L` derivative value into the paper's
+    `eq:five-state-rearr`-aligned grouped form
+    `L'(β,p) = P_trap'(β)·(0.9(1−p)·Φ_B(β) − 0.5)
+                − (1−P_trap β)·0.9·(1−p)·Φ_B'(β)`.
+    This is the form the paper's "direct differentiation" argument
+    (line 825) uses: the first summand carries the sign of
+    `0.9(1−p)Φ_B(β) − 0.5` (the `eq:five-state-rearr` bracket), the
+    second is `≤ 0` for `p ≤ 1`. Pure `ring` identity. -/
+private theorem L_deriv_grouped (p : ℝ) (β : ℝ) (Pt' Pb' : ℝ) :
+    Pt' * (4/10 : ℝ) +
+      ((-Pt') * (9/10 : ℝ) * (1 - (1 - p) * Phi_B β) +
+        (1 - P_trap β) * (9/10 : ℝ) * (-((1 - p) * Pb'))) =
+    Pt' * ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+      (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Pb' := by
+  ring
+
+/-- **`L'(β, p) < 0` on the "left branch" of `(0, ∞)`** — wherever
+    `0.9(1−p)·Φ_B(β) ≤ 1/2`, the grouped derivative value of `L(·, p)`
+    is strictly negative. Via the `L'` sign decomposition
+    `L'(β,p) = P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5)
+                − (1−P_trap β)·0.9(1−p)·Φ_B'(β)`:
+    the first summand is `≤ 0` (`P_trap'(β) > 0`, bracket `≤ 0`); the
+    second summand is `≥ 0` (`1−P_trap β > 0`, `0.9(1−p) ≥ 0`,
+    `Φ_B'(β) > 0`), and strictly so in the generic `1−p > 0` case, so
+    subtracting it yields `L' < 0`. Total over `p ≤ 1` including the
+    degenerate `p = 1`, where the bracket `0.9·0·Φ_B β − 1/2 = −1/2 < 0`
+    and `Pt' > 0` make the *first* summand strictly negative while the
+    second vanishes. The `P_trap`/`Φ_B`-derivative values `Pt'`, `Pb'`
+    are supplied as strictly-positive Lean-checked inputs (from
+    `P_trap_deriv_pos` / `Phi_B_deriv_pos`).
+
+    This is the genuine *left-branch* portion of Regime (i)
+    unimodality (paper line 825, "direct differentiation ... `L`
+    decreases then increases"), Lean-checked via the R82 `L'`
+    infrastructure on the concrete `L` carrier. The *right*-branch
+    sign (where the first summand is `> 0` and must strictly dominate
+    the second) needs the transcendental two-term comparison
+    `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`,
+    which the paper itself verifies only numerically; it is therefore
+    NOT closed here, and `L_unimodal_in_regime_i_OPEN` remains a
+    workingAssumption (see Ledger). -/
+private theorem L_deriv_neg_on_left_branch (p : ℝ) (hp_le_one : p ≤ 1)
+    {β : ℝ} (_hβ : 0 < β)
+    {Pt' Pb' : ℝ} (hPt_pos : 0 < Pt') (hPb_pos : 0 < Pb')
+    (h_branch : (9/10 : ℝ) * (1 - p) * Phi_B β ≤ (1/2 : ℝ)) :
+    Pt' * ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+      (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Pb' < 0 := by
+  have h_oneSubP_pos : 0 < 1 - P_trap β := by
+    have := P_trap_lt_one β; linarith
+  rcases eq_or_lt_of_le (by linarith : (0 : ℝ) ≤ 1 - p) with h_q_zero | h_q_pos
+  · -- `1 − p = 0`: first summand `Pt'·(−1/2) < 0`, second summand `= 0`.
+    rw [← h_q_zero]
+    have h_first_neg : Pt' * ((9/10 : ℝ) * 0 * Phi_B β - (1/2 : ℝ)) < 0 := by
+      have : (9/10 : ℝ) * 0 * Phi_B β - (1/2 : ℝ) = -(1/2 : ℝ) := by ring
+      rw [this]; nlinarith
+    nlinarith
+  · -- generic `1 − p > 0`: both summand bounds active.
+    have h_bracket_le : (9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ) ≤ 0 := by
+      linarith
+    have h_first_le : Pt' * ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) ≤ 0 :=
+      mul_nonpos_of_nonneg_of_nonpos hPt_pos.le h_bracket_le
+    have h_second_pos : 0 < (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Pb' :=
+      mul_pos (mul_pos (mul_pos h_oneSubP_pos (by norm_num)) h_q_pos) hPb_pos
+    linarith
+
 /-- **R81 substantive closure of `interior_minimiser_existence`.**
     Existence of an interior global minimiser `β* > 0` of `L(·, 0)`:
     `∃ β* > 0, ∀ β ≥ 0, L(β*, 0) ≤ L(β, 0)`. Proof = extreme value
@@ -1472,23 +1844,165 @@ theorem gap_three_regime_reversal_overshoot_continuous :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
   envelope_continuity_in_p_OPEN
 
+/-! ### R82 substantive closure of `Tendsto_overshoot_at_p1`.
+
+The overshoot-vanishing claim is closed by a genuine **squeeze**
+argument on the concrete `overshootRegimeI` carrier — *without* the
+transcendental unimodality input. The chain:
+  * `overshootRegimeI p = 0.4 − L(β*(p), p) > 0` for `p ∈ [0, p_1)`
+    (lower bound, from `betaStarOfP_loss_below_limit`);
+  * the rearrangement `eq:five-state-rearr` *evaluated at the
+    minimiser* `β*(p)` (which is `> 0`, so the strict bounds
+    `P_trap(β*(p)) > 1/2` and `Φ_B(β*(p)) < 1` apply) gives
+    `overshootRegimeI p = (1 − P_trap β*(p))·(0.9(1−p)·Φ_B β*(p) − 0.5)
+        ≤ (1/2)·(0.9(1−p) − 0.5)` for `p ≤ p_1` (upper bound — both
+    factors bounded: `1 − P_trap β*(p) ∈ (0, 1/2)` and the bracket
+    `< 0.9(1−p) − 0.5`);
+  * as `p → p_1⁻ = (4/9)⁻`, the upper bound
+    `(1/2)·(0.9(1−p) − 0.5) → (1/2)·(0.9·(5/9) − 0.5) = 0`, while the
+    lower bound is `0`; the squeeze theorem
+    `tendsto_of_tendsto_of_tendsto_of_le_of_le'` concludes
+    `overshootRegimeI p → 0`.
+
+Mathlib lemmas: `tendsto_of_tendsto_of_tendsto_of_le_of_le'`,
+`Filter.eventually_iff_exists_mem` / `eventually_nhdsWithin_of_forall`,
+`tendsto_const_nhds`, the `Filter.Tendsto` arithmetic combinators,
+plus the project lemmas `betaStarOfP_loss_below_limit`,
+`L_rearrangement`, `P_trap_gt_half`, `P_trap_lt_one`, `Phi_B_gt_half`,
+`Phi_lt_one`. -/
+
+/-- **`betaStarOfP p > 0` for `p ∈ [0, p_1)`.** Unfolds `betaStarOfP`
+    at its `if_pos` branch (in-domain) to `Classical.choose` of the
+    `L_minimum_exists_in_regime_i_OPEN` existence witness, whose
+    `Classical.choose_spec` first component is exactly `0 < β_min`. -/
+private theorem betaStarOfP_pos {p : ℝ} (h_p_nonneg : 0 ≤ p)
+    (h_p_lt_p1 : p < p_1) : 0 < betaStarOfP p := by
+  have h_dom : 0 ≤ p ∧ p < p_1 := ⟨h_p_nonneg, h_p_lt_p1⟩
+  have h_unfold : betaStarOfP p =
+      Classical.choose (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1) := by
+    unfold betaStarOfP
+    rw [dif_pos h_dom]
+  rw [h_unfold]
+  exact (Classical.choose_spec
+    (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1)).1
+
+/-- **Upper bound on the Regime (i) overshoot.** For `p ∈ [0, p_1]`,
+    `overshootRegimeI p ≤ (1/2)·(0.9·(1 − p) − 0.5)`. Proof: the
+    rearrangement `eq:five-state-rearr` at the minimiser `β*(p) > 0`
+    gives `overshootRegimeI p = (1 − P_trap β*(p))·(0.9(1−p)·Φ_B β*(p)
+    − 0.5)`; the first factor lies in `(0, 1/2)` (`P_trap β*(p) ∈
+    (1/2, 1)`), the second factor is `< 0.9(1−p) − 0.5` (`Φ_B β*(p) <
+    1`, `0.9(1−p) ≥ 0` for `p ≤ 1`), and `0.9(1−p) − 0.5 ≥ 0` for
+    `p ≤ p_1 = 4/9`, so the product `≤ (1/2)·(0.9(1−p) − 0.5)`.
+    paper source: line 825 (`eq:five-state-rearr` envelope-evaluated
+    at `β = β*(p)`). -/
+private theorem overshootRegimeI_upper_bound {p : ℝ} (h_p_nonneg : 0 ≤ p)
+    (h_p_lt_p1 : p < p_1) :
+    overshootRegimeI p ≤ (1/2 : ℝ) * ((9/10 : ℝ) * (1 - p) - (1/2 : ℝ)) := by
+  have h_beta_pos : 0 < betaStarOfP p := betaStarOfP_pos h_p_nonneg h_p_lt_p1
+  -- `p ≤ p_1 = 4/9`, hence `0.9·(1−p) − 0.5 ≥ 0` and `1 − p ≥ 0`.
+  have h_p_le : p ≤ (4 : ℝ) / 9 := by
+    have := h_p_lt_p1; unfold p_1 at this; linarith
+  have h_q_nn : 0 ≤ 1 - p := by linarith
+  have h_09q_minus_half_nn : 0 ≤ (9/10 : ℝ) * (1 - p) - (1/2 : ℝ) := by nlinarith
+  -- Rearrangement at `β*(p)`: `L β*(p) p − 0.4 = (1 − P_trap)·(0.5 − 0.9(1−p)·Φ_B)`.
+  have h_rearr := L_rearrangement (betaStarOfP p) p
+  -- Strict bounds at `β*(p) > 0`.
+  have h_Pt_gt : (1 : ℝ)/2 < P_trap (betaStarOfP p) := P_trap_gt_half h_beta_pos
+  have h_Pt_lt : P_trap (betaStarOfP p) < 1 := P_trap_lt_one _
+  have h_Pb_lt : Phi_B (betaStarOfP p) < 1 := by
+    unfold Phi_B; exact Phi_lt_one _
+  have h_Pb_nn : 0 ≤ Phi_B (betaStarOfP p) := by
+    unfold Phi_B; exact Phi_nonneg _
+  -- `overshootRegimeI p = 0.4 − L β*(p) p = (1 − P_trap)·(0.9(1−p)·Φ_B − 0.5)`.
+  have h_over_eq : overshootRegimeI p =
+      (1 - P_trap (betaStarOfP p)) *
+        ((9/10 : ℝ) * (1 - p) * Phi_B (betaStarOfP p) - (1/2 : ℝ)) := by
+    unfold overshootRegimeI
+    linarith [h_rearr]
+  rw [h_over_eq]
+  -- Factor bounds: `0 < 1 − P_trap β*(p) < 1/2`; second factor
+  -- `≤ 0.9(1−p)·1 − 0.5 = 0.9(1−p) − 0.5`.
+  have h_f1_pos : 0 < 1 - P_trap (betaStarOfP p) := by linarith
+  have h_f1_lt_half : 1 - P_trap (betaStarOfP p) < (1/2 : ℝ) := by linarith
+  have h_09q_nn : 0 ≤ (9/10 : ℝ) * (1 - p) := by positivity
+  have h_f2_le : (9/10 : ℝ) * (1 - p) * Phi_B (betaStarOfP p) - (1/2 : ℝ) ≤
+      (9/10 : ℝ) * (1 - p) - (1/2 : ℝ) := by
+    have : (9/10 : ℝ) * (1 - p) * Phi_B (betaStarOfP p) ≤
+        (9/10 : ℝ) * (1 - p) * 1 :=
+      mul_le_mul_of_nonneg_left h_Pb_lt.le h_09q_nn
+    linarith
+  -- Product bound: with `0 < f1 < 1/2` and `f2 ≤ (0.9(1−p)−0.5)` where
+  -- the RHS bound `≥ 0`, we get `f1·f2 ≤ (1/2)·(0.9(1−p)−0.5)`.
+  nlinarith [h_f1_pos, h_f1_lt_half, h_f2_le, h_09q_minus_half_nn,
+    mul_nonneg h_f1_pos.le h_09q_minus_half_nn]
+
 /-- **Regime (i) sub-claim — overshoot vanishes at `p_1` (limit from below).**
-    Substantive paper claim — opaque-on-opaque. The overshoot
-    `L(∞, p) − L(β*(p), p) → 0` as `p → p_1⁻`, encoding the regime-(i)
-    reversal disappearing exactly at the transition to regime (ii).
-    Paper proof: at `p = p_1 = 4/9`, the rearranged-loss inequality
-    `0.9·(1−p)·sup_β Φ_B(β) > 0.5` becomes equality (line 825's chain
-    gives `0.9·(5/9)·1 = 0.5`), so the interior-minimum condition fails
-    in the limit, collapsing `L(β*(p), p) ↑ L(∞, p) = 0.4` and hence
-    `L(∞, p) − L(β*(p), p) ↓ 0`.
+
+    **R82 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    The overshoot `L(∞, p) − L(β*(p), p) → 0` as `p → p_1⁻`. Previously
+    an opaque Cat 3 axiom; R82 proves it by a genuine **squeeze**
+    argument on the concrete `overshootRegimeI` carrier — crucially
+    *without* the transcendental unimodality input
+    (`L_unimodal_in_regime_i_OPEN` is NOT consumed).
+
+    Proof: `0 < overshootRegimeI p` for `p ∈ [0, p_1)`
+    (`betaStarOfP_loss_below_limit`) bounds it below by `0`; the
+    rearrangement `eq:five-state-rearr` evaluated *at the minimiser*
+    `β*(p) > 0` bounds it above by `(1/2)·(0.9(1−p) − 0.5)`
+    (`overshootRegimeI_upper_bound`); both bounds tend to `0` as
+    `p → p_1⁻` (the upper bound because `0.9·(1−p) − 0.5 →
+    0.9·(5/9) − 0.5 = 0` at `p_1 = 4/9`); the squeeze theorem
+    `tendsto_of_tendsto_of_tendsto_of_le_of_le'` concludes.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 (third bullet, "vanishing at p_1"); cf. Figure
     `fig:three-regime-phase-diagram` panel (b) (line 846: "the overshoot
     vanishing exactly at `p_1 = 4/9`"). -/
-axiom Tendsto_overshoot_at_p1_OPEN :
+theorem Tendsto_overshoot_at_p1_OPEN :
     Filter.Tendsto overshootRegimeI
-      (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0)
+      (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0) := by
+  -- Squeeze between the constant `0` and `h p := (1/2)·(0.9(1−p) − 0.5)`.
+  set hUp : ℝ → ℝ := fun p => (1/2 : ℝ) * ((9/10 : ℝ) * (1 - p) - (1/2 : ℝ))
+    with hUp_def
+  -- Lower bound function `g := 0` tends to `0`.
+  have h_lower_tendsto : Filter.Tendsto (fun _ : ℝ => (0 : ℝ))
+      (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0) := tendsto_const_nhds
+  -- Upper bound function `hUp` tends to `0`: a polynomial in `p` with
+  -- `hUp p_1 = (1/2)·(0.9·(5/9) − 0.5) = 0`.
+  have h_upper_tendsto : Filter.Tendsto hUp
+      (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0) := by
+    have h_cont : Filter.Tendsto hUp (nhds p_1) (nhds (hUp p_1)) := by
+      have h_cont' : Continuous hUp := by rw [hUp_def]; fun_prop
+      exact h_cont'.continuousAt.tendsto
+    have h_at_p1 : hUp p_1 = 0 := by rw [hUp_def]; unfold p_1; norm_num
+    rw [h_at_p1] at h_cont
+    exact h_cont.mono_left nhdsWithin_le_nhds
+  -- Eventually-on-the-filter: `0 < p ∧ p < p_1`. `p < p_1` is the
+  -- `Iio p_1` membership; `0 < p` holds eventually because `p_1 = 4/9 > 0`
+  -- and `nhdsWithin p_1 (Iio p_1) ≤ nhds p_1`.
+  have h_p1_pos : (0 : ℝ) < p_1 := by unfold p_1; norm_num
+  have h_ev_pos : ∀ᶠ p in nhdsWithin p_1 (Set.Iio p_1), 0 < p :=
+    (eventually_gt_nhds h_p1_pos).filter_mono nhdsWithin_le_nhds
+  have h_ev_lt : ∀ᶠ p in nhdsWithin p_1 (Set.Iio p_1), p < p_1 :=
+    eventually_nhdsWithin_of_forall (fun _ hp => hp)
+  have h_ev_dom : ∀ᶠ p in nhdsWithin p_1 (Set.Iio p_1), 0 < p ∧ p < p_1 :=
+    h_ev_pos.and h_ev_lt
+  -- Eventual lower bound: `0 ≤ overshootRegimeI p`.
+  have h_ev_lower : ∀ᶠ p in nhdsWithin p_1 (Set.Iio p_1),
+      (fun _ : ℝ => (0 : ℝ)) p ≤ overshootRegimeI p := by
+    filter_upwards [h_ev_dom] with p hp
+    have := betaStarOfP_loss_below_limit p hp.1.le hp.2
+    unfold overshootRegimeI; linarith
+  -- Eventual upper bound: `overshootRegimeI p ≤ hUp p`.
+  have h_ev_upper : ∀ᶠ p in nhdsWithin p_1 (Set.Iio p_1),
+      overshootRegimeI p ≤ hUp p := by
+    filter_upwards [h_ev_dom] with p hp
+    rw [hUp_def]
+    exact overshootRegimeI_upper_bound hp.1.le hp.2
+  -- Squeeze.
+  exact tendsto_of_tendsto_of_tendsto_of_le_of_le'
+    h_lower_tendsto h_upper_tendsto h_ev_lower h_ev_upper
 
 /-- **Regime (i) sub-claim — overshoot vanishes at `p_1`**
     (derived theorem composing `Tendsto_overshoot_at_p1_OPEN` per

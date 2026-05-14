@@ -1619,6 +1619,89 @@
   would violate `feedback_truth_over_publication`; both are honest
   un-closures pending derivative infrastructure.
 
+  ---
+
+  R82 2026-05-15 substantive `L'` derivative infrastructure + squeeze
+  closure of `Tendsto_overshoot_at_p1`. Baseline carried by R81:
+  253 entries; wA=47, gapOpen=55, gapClosed=97, derivedTheorem=79.
+
+  R82 directly answers the R81 honest scope note ("`L_unimodal_in_
+  regime_i_OPEN` STILL remains a workingAssumption ... R80's machinery
+  does not supply [a derivative of `L`]"): R82 BUILDS the full `L'`
+  derivative chain on the concrete `L` carrier, and uses an
+  independent SQUEEZE argument to close `Tendsto_overshoot_at_p1`.
+
+  (1) `Tendsto_overshoot_at_p1_OPEN` (prop:three-regime Regime (i)
+      line 814 third bullet; `overshootRegimeI p → 0` as `p → p_1⁻`):
+      workingAssumption gapOpen → derivedTheorem gapClosed via
+      `theorem Tendsto_overshoot_at_p1_OPEN` with a genuine SQUEEZE on
+      the concrete `overshootRegimeI p = 0.4 − L(β*(p), p)` carrier.
+      Lower bound `0 < overshootRegimeI p` for p ∈ [0,p_1) from
+      `betaStarOfP_loss_below_limit`. Upper bound `overshootRegimeI p
+      ≤ (1/2)·(0.9(1−p) − 0.5)` (new lemma `overshootRegimeI_upper_
+      bound`) from the rearrangement `eq:five-state-rearr`
+      (`L_rearrangement`) EVALUATED AT the minimiser `β*(p)` — crucially
+      `β*(p) > 0` (new lemma `betaStarOfP_pos`, from `Classical.choose_
+      spec` of the R81-closed `L_minimum_exists_in_regime_i_OPEN`
+      theorem), so the strict `β > 0` bounds `P_trap β*(p) ∈ (1/2,1)`
+      (new lemma `P_trap_gt_half` + `P_trap_lt_one`) and `Φ_B β*(p) < 1`
+      (`Phi_lt_one`) apply: the rearranged overshoot `(1 − P_trap β*(p))
+      ·(0.9(1−p)·Φ_B β*(p) − 0.5)` has first factor in `(0,1/2)` and
+      second factor `< 0.9(1−p) − 0.5`, with `0.9(1−p) − 0.5 ≥ 0` for
+      `p ≤ p_1 = 4/9`. Both bounds → 0 as `p → p_1⁻` (the upper bound
+      because `0.9·(5/9) − 0.5 = 0` at p_1); concluded by
+      `tendsto_of_tendsto_of_tendsto_of_le_of_le'`. The closure does
+      NOT consume the transcendental unimodality input.
+
+  New Canonical.lean `L'` derivative infrastructure (Mathlib-derived,
+  reusable, all `HasDerivAt`-based, no `sorry`): `phi_pos_local`,
+  `hasDerivAt_two_rpow_two_beta` (via `Real.hasStrictDerivAt_const_
+  rpow`), `hasDerivAt_signalVariance` (via `HasDerivAt.inv`),
+  `signalVariance_deriv_neg`, `hasDerivAt_sqrt_two_sigma` (via
+  `HasDerivAt.sqrt`), `sqrt_two_sigma_deriv_neg`, `hasDerivAt_P_trap` /
+  `hasDerivAt_Phi_B` (chain rule `HasDerivAt.comp` with the closed
+  `gap_Phi_derivative`), `P_trap_deriv_pos` / `Phi_B_deriv_pos`,
+  `hasDerivAt_L` (product/sum combinators on the concrete `L`),
+  `L_deriv_grouped` (the `eq:five-state-rearr`-aligned `L'` sign
+  decomposition `L'(β,p) = P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5)
+  − (1−P_trap β)·0.9(1−p)·Φ_B'(β)`), `L_deriv_neg_on_left_branch`
+  (the genuine LEFT-branch sign proved: `L' < 0` wherever
+  `0.9(1−p)Φ_B β ≤ 1/2`). Plus the `Tendsto_overshoot` support
+  lemmas `betaStarOfP_pos`, `P_trap_gt_half`, `overshootRegimeI_upper_
+  bound`.
+
+  HONEST scope note: `L_unimodal_in_regime_i_OPEN` is NOT closed this
+  round and HONESTLY remains workingAssumption/gapOpen. The R82 `L'`
+  infrastructure proves the left-branch sign, but the RIGHT-branch
+  sign needs the transcendental two-term comparison `P_trap'(β)·
+  (0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`, which the
+  paper itself (prop:interior-optimum line 774) verifies only
+  NUMERICALLY — faking it would violate `feedback_truth_over_
+  publication`. `envelope_continuity_in_p_OPEN` likewise NOT closed:
+  `betaStarOfP` continuity in `p` needs the Berge maximum theorem,
+  which in turn needs the unique-minimiser (unimodality) input.
+
+  R82 net delta vs R81 baseline (253 entries; wA=47, gapOpen=55,
+  gapClosed=97, derivedTheorem=79):
+   * Total: 253 → 253 (no entry add/delete; 1 reclassification).
+   * Status: gapOpen 55 → 54 (-1); gapClosed 97 → 98 (+1).
+   * Cat 3 sub: workingAssumption 47 → 46 (-1); derivedTheorem 79 → 80
+     (+1).
+   * inputCategory: unchanged (`Tendsto_overshoot_at_p1` stays
+     cat3PaperNovel — a Cat 3 paper-novel claim now carrying a
+     derivedTheorem sub-type with a concrete-carrier squeeze proof).
+   * `#print axioms` on the closure = [propext, Classical.choice,
+     Quot.sound] only — no `sorry`, no project `_OPEN` axiom.
+   * Build verified GREEN (full `lake build`).
+
+  R82 verdict: SUBSTANTIVE real-math round (continuation of the
+  R71/R72/R76/R78/R80/R81 pattern). One atom closed by a genuine
+  squeeze on the concrete `overshootRegimeI` carrier; the full `L'`
+  derivative chain built as reusable infrastructure with the
+  left-branch sign proved. `L_unimodal` and `envelope_continuity`
+  HONESTLY remain workingAssumptions — the precise transcendental
+  blockers are documented in their entries, not papered over.
+
   6-tier status × 3-input-category cross-table (post-R40 historical;
   superseded by R41-R55 above; live numbers printed by `#eval` block):
 
@@ -6491,10 +6574,11 @@ def entry_atom_L_unimodal_in_regime_i : GapEntry where
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_uniqueness_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_uniqueness` re-export). Downstream consumer: `gap_three_regime_reversal_uniqueness`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
-  scope := "Regime (i) uniqueness of strict interior minimum"
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R82 2026-05-15: `L'` DERIVATIVE INFRASTRUCTURE BUILT (atom NOT closed — partial progress, honest blocker documented). New Canonical.lean reusable derivative chain on the concrete `L` carrier: `hasDerivAt_two_rpow_two_beta` (via `Real.hasStrictDerivAt_const_rpow`), `hasDerivAt_signalVariance` (via `HasDerivAt.inv`), `signalVariance_deriv_neg`, `hasDerivAt_sqrt_two_sigma` (via `HasDerivAt.sqrt`), `sqrt_two_sigma_deriv_neg`, `hasDerivAt_P_trap` / `hasDerivAt_Phi_B` (chain rule `HasDerivAt.comp` with the closed `gap_Phi_derivative`), `P_trap_deriv_pos` / `Phi_B_deriv_pos`, `hasDerivAt_L` (product/sum combinators), `L_deriv_grouped` (the `eq:five-state-rearr`-aligned sign decomposition `L'(β,p) = P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) − (1−P_trap β)·0.9(1−p)·Φ_B'(β)`), `L_deriv_neg_on_left_branch` (LEFT-BRANCH SIGN PROVED: `L' < 0` wherever `0.9(1−p)Φ_B β ≤ 1/2`, both summands ≤ 0 with the second strictly negative in the generic 1−p > 0 case). PRECISE BLOCKER: the RIGHT-branch sign (where the first summand `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5)` is > 0 and must STRICTLY DOMINATE the second `(1−P_trap β)·0.9(1−p)·Φ_B'(β)`) requires the transcendental two-term comparison `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`, which the paper itself (prop:interior-optimum line 774, prop:three-regime line 825) verifies only NUMERICALLY — faking it would violate `feedback_truth_over_publication`. Atom HONESTLY remains workingAssumption/gapOpen; the `L'` infrastructure is reusable for any future second-derivative or right-branch attack." ]
+  scope := "Regime (i) uniqueness of strict interior minimum — R82 L' infrastructure built, left-branch sign proved, right-branch transcendental comparison still open"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper prop:three-regime-five-state Regime (i) proof line 825 reconstruction (uniqueness of strict interior minimum from unimodal structure)."
+    "Cat 3 workingAssumption per §3.4.4. R82 built the full `L'` derivative chain on the concrete `L` carrier and PROVED the left-branch sign (`L_deriv_neg_on_left_branch`: L' < 0 where 0.9(1−p)Φ_B β ≤ 1/2). Remaining close target = the RIGHT-branch sign, which needs the transcendental comparison `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)` that the paper verifies only numerically — full strict unimodality requires the second-derivative / sign-change analysis the paper does not supply symbolically."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
@@ -6554,17 +6638,18 @@ def entry_atom_envelope_continuity_in_p : GapEntry where
     overshoot vanishes at `p_1` sub-claim. -/
 def entry_atom_Tendsto_overshoot_at_p1 : GapEntry where
   name := "Tendsto_overshoot_at_p1_OPEN"
-  status := GapStatus.gapOpen
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 (overshoot vanishing at p_1)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_vanishes_at_p1` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_vanishes_at_p1`." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (paper-derived working content per §3.4.4 — existence/sign/asymptotic claim, NOT definitional equation). R48 followup: completed metadata sync (attackHistory + obstacleOrAttribution updates) that R44 left half-applied." ]
-  scope := "Regime (i) overshoot Tendsto at p_1 from below"
+      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (paper-derived working content per §3.4.4 — existence/sign/asymptotic claim, NOT definitional equation). R48 followup: completed metadata sync (attackHistory + obstacleOrAttribution updates) that R44 left half-applied.",
+      "R82 2026-05-15: SUBSTANTIVE CLOSURE workingAssumption/gapOpen → derivedTheorem/gapClosed. The opaque axiom is replaced by `theorem Tendsto_overshoot_at_p1_OPEN` with a genuine SQUEEZE proof on the concrete `overshootRegimeI p = 0.4 − L(β*(p), p)` carrier (Canonical.lean). Lower bound `0 < overshootRegimeI p` for p ∈ [0,p_1) from `betaStarOfP_loss_below_limit`. Upper bound `overshootRegimeI p ≤ (1/2)·(0.9(1−p) − 0.5)` from the rearrangement identity `eq:five-state-rearr` (`L_rearrangement`) EVALUATED AT the minimiser `β*(p)` — crucially `β*(p) > 0` (new lemma `betaStarOfP_pos`, from `Classical.choose_spec` of the R81-closed `L_minimum_exists_in_regime_i_OPEN` theorem), so the strict bounds `P_trap β*(p) ∈ (1/2,1)` (`P_trap_gt_half` new + `P_trap_lt_one`) and `Φ_B β*(p) < 1` (`Phi_lt_one`) apply: the rearranged overshoot `(1 − P_trap β*(p))·(0.9(1−p)·Φ_B β*(p) − 0.5)` has first factor in `(0,1/2)` and second factor `< 0.9(1−p) − 0.5`, with `0.9(1−p) − 0.5 ≥ 0` for p ≤ p_1 = 4/9. Both bounds → 0 as p → p_1⁻ (the upper bound because `0.9·(5/9) − 0.5 = 0` at p_1); concluded by `tendsto_of_tendsto_of_tendsto_of_le_of_le'`. KEY: the closure does NOT consume the transcendental unimodality input `L_unimodal_in_regime_i_OPEN` — only the rearrangement at β*(p) plus minimiser positivity. `#print axioms` = [propext, Classical.choice, Quot.sound] only." ]
+  scope := "Regime (i) overshoot Tendsto at p_1 from below — R82 CLOSED via squeeze on the concrete `overshootRegimeI` carrier"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R44 reclassification + R48 metadata sync). Close target = paper proof reconstruction of Proposition prop:three-regime-five-state Regime (i) line 814 (overshoot Tendsto convergence to 0 as p → p_1 from below on the `overshootRegimeI` carrier)."
+    "R82 CLOSED: derived theorem on the concrete `overshootRegimeI` carrier. Lower bound 0 from `betaStarOfP_loss_below_limit`; upper bound `(1/2)·(0.9(1−p) − 0.5)` from `overshootRegimeI_upper_bound` (rearrangement `eq:five-state-rearr` at the minimiser β*(p) > 0); squeeze via `tendsto_of_tendsto_of_tendsto_of_le_of_le'`. Independent of `L_unimodal_in_regime_i_OPEN`."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (ii)
