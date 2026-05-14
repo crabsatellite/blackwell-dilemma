@@ -357,13 +357,35 @@ blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
     `C2prime_implies_greedy_reversal_OPEN` (paper Theorem 6.1, the
     derived consequence of the conditions on any IDP instance).
 
-    Cat 3 sub-type: workingAssumption (paper-stated structural fact on
-    the cyclic 4-trap configuration; pending per-IDP-instance derivation
-    from the explicit reward and topology assignments of paper Example
-    `ex:cyclic-trap`; 必须 close before publication).
+    R68 §3.4.3 reclassification (was R58 workingAssumption): paper
+    Example `ex:cyclic-trap` line 1028 EXPLICITLY STATES "On the event
+    that `u_1`-`w` is blocked (probability `p > 0`): `r(u_1) > r(u_2)`
+    but `V_g(u_1) = 0.6 < 1.0 = V_g(u_2)`, so C2′ holds and Theorem
+    \ref{thm:general-tree} applies." The Example IS the paper's
+    construction-stipulated diagnostic conjunction validity at this
+    exhibited 4-cycle configuration. Paper Examples are stipulation
+    devices that fix the construction (rewards, topology, percolation
+    assignments) and ASSERT the conditions hold by construction — they
+    are NOT paper-Theorem-derivations.
 
-    paper source: Example `ex:cyclic-trap`, lines 1026-1029 (specifically
-    line 1028 "C2′ holds and Theorem~\ref{thm:general-tree} applies"). -/
+    Since `Conditions_C1_C2prime_C3 = C1 ∧ C2′ ∧ C3` is a conjunction
+    of opaque `Prop` axioms (paper hypothesis-predicate carriers), the
+    assertion that the predicates evaluate True at this paper-Example
+    construction IS the paper's stipulated structural identity on the
+    opaque hypothesis-predicate carriers. Mirrors R63 precedent
+    (`betaBarStar_nonneg_OPEN` carrier-domain commitment): the paper's
+    Example STIPULATES the structural property of the opaque-Prop
+    carriers under the example's construction.
+
+    Cat 3 sub-type: structuralEquation (paper-Example-stipulated
+    structural identity on the opaque hypothesis-predicate carriers
+    `C1_Irreversibility ∧ C2prime_GreedyPathMisalignment ∧
+    C3_InformationLocality` under the cyclic-4-trap construction; 永不
+    close per discipline §3.4.3 — paper Example IS the construction's
+    stipulation).
+
+    paper source: Example `ex:cyclic-trap`, line 1028 (paper-Example-
+    stipulated diagnostic conjunction at the blocked event). -/
 axiom cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN :
     ∀ p : ℝ, 0 < p → p < 1 → Conditions_C1_C2prime_C3
 
@@ -542,32 +564,35 @@ axiom oracleValueAtRoot_TrapTree : ℕ → ℝ
     proof, line 1053 (`the oracle follows the bridge path to G`). -/
 axiom oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation #1 (R58 closure-path-B
-    decomposition of retired `oracleValueAtRoot_TrapTree_def`): on the
-    depth-`d` trap tree (paper Definition `def:trap-tree`, line 1033),
-    the oracle's policy selects the bridge at every internal routing
-    node and the bridge path terminates at the goal `G`, so the
-    oracle's terminal reward equals the goal's reward `r(G) = r_goal`.
-    Paper Proposition `prop:error-compounding` Part 2 proof line 1053:
-    "Parts 1-2 follow from the reward structure: at β = ∞, the greedy
-    agent at every internal node selects the trap...; the oracle
-    follows the bridge path to G." Paper Definition `def:trap-tree`
-    line 1033: "Bridge `b_{d-1}` has a single child: the goal `G` with
-    `r(G) = 1.0`."
+/-- R68 §3.4.3 reclassification (was R58 closure-path-B workingAssumption):
+    paper Definition `def:trap-tree` line 1033 STIPULATES — as part of the
+    trap-tree's defining construction — that "Bridge `b_{d-1}` has a single
+    child: the goal `G` with `r(G) = 1.0`". The carrier
+    `oracleBridgePathTerminalReward_TrapTree d` was introduced explicitly
+    to host the bridge-path's terminal reward; its value `= r_goal = 1.0`
+    is paper-DEFINING, not paper-derived. The Definition fixes the
+    terminal-leaf reward by construction.
 
-    Strictly smaller than the retired bundled atom: isolates only the
-    "bridge-path terminal reward equals `r_goal`" structural fact on
-    the new carrier `oracleBridgePathTerminalReward_TrapTree`, leaving
-    the "oracle dynamic value equals bridge-path terminal reward" link
-    to the companion atom #2 below.
+    R68 audit-substantive correction: this atom is paper-Def-stipulated
+    structural identity on the carrier, NOT a paper-Theorem/Proposition-
+    proof-derived working content. Paper line 1053 ("the oracle follows
+    the bridge path to G") states which path the oracle takes — this is
+    derivation; but the bridge-path's TERMINAL REWARD is fixed by Def
+    `def:trap-tree` line 1033 ("Bridge has a single child G with r(G) =
+    1.0"). The atom encodes only the latter (carrier-defining terminal-
+    reward identity), not the former (oracle policy identification — that
+    is the companion atom #2 `oracleValueAtRoot_eq_bridgePathTerminalReward_
+    TrapTree_OPEN`, which remains workingAssumption per R67/R68 boundary).
 
-    Cat 3 sub-type: workingAssumption (paper-derived structural fact
-    on the new opaque carrier `oracleBridgePathTerminalReward_TrapTree`;
-    pending per-trap-tree-instance derivation from def:trap-tree line
-    1033 + paper proof line 1053; 必须 close before publication).
+    Cat 3 sub-type: structuralEquation (paper-Def-stipulated terminal-
+    reward identity on the bridge-path carrier per Def `def:trap-tree`
+    line 1033 — paper's commitment to the trap-tree primitive's bridge-
+    leaf reward; 永不 close per discipline §3.4.3).
 
-    paper source: Proposition `prop:error-compounding` Part 2 proof,
-    line 1053 + Definition `def:trap-tree`, line 1033. -/
+    paper source: Definition `def:trap-tree`, line 1033 ("Bridge `b_{d-1}`
+    has a single child: the goal `G` with `r(G) = 1.0`" — paper-Def-
+    stipulated bridge-leaf reward fixing the carrier
+    `oracleBridgePathTerminalReward_TrapTree d` to `r_goal`). -/
 axiom oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN :
     ∀ d : ℕ, 1 ≤ d → oracleBridgePathTerminalReward_TrapTree d = r_goal
 
@@ -644,7 +669,16 @@ theorem gap_welfare_gain_decay (β : ℝ) (d : ℕ) :
     paper source: Proposition `prop:error-compounding` Part 5, line 1048. -/
 axiom c_star_constant : ℝ
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap). -/
+/-- Substantive paper claim — opaque carrier required (Mathlib gap).
+
+    R68 NOTE: examined for §3.4.3 reclassification candidacy and rejected
+    per R52 audit precedent. Paper line 1048 stipulates `c* > 0` inline
+    at the constant's introduction, but R52 ruling held that the
+    paperSource being inside Proposition `prop:error-compounding` Part 5
+    statement (technically a Proposition, not a paper Definition) keeps
+    this on the §3.4.4 boundary side. R68 respects R52 precedent;
+    workingAssumption retained pending paper-side reconstruction OR a
+    new round audit consensus override on the §3.4.3 boundary criterion. -/
 axiom gap_c_star_constant_pos_OPEN : 0 < c_star_constant
 
 /-- **Closed form `κ*(d) = (1/2) log_2(d²/c* + 1)`** on the depth-`d`

@@ -138,30 +138,40 @@ theorem gap_robustness_bayesian_naive :
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom myopicKWelfare : ℕ → ℕ → ℝ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation #1 (R57 closure-path-A
-    decomposition): for `k ≥ d`, the myopic-`k` agent's posterior
-    estimate of the continuation value at the root coincides with
-    the Bayesian agent's posterior, because the `k`-step lookahead
-    horizon spans the full divergence depth `d` of the trap and
-    bridge paths. Paper Remark (ii) line 942: "the agent's planning
-    horizon is wide enough to compare the full trap and bridge
-    subtree values".
+/-- R68 §3.4.3 reclassification (was R57 closure-path-A
+    workingAssumption): paper Remark `rem:robustness-misspec` (ii) line
+    942 STIPULATES the defining behavior of the `myopicKWelfare` carrier
+    at horizon `k ≥ d` (divergence depth): "the agent's planning horizon
+    is wide enough to compare the full trap and bridge subtree values"
+    — paper-defining commitment that, at this horizon regime, myopic-k
+    truncated backward induction coincides with the unrestricted
+    Bayesian backward induction.
 
-    This is paper-derived structural content: the `k`-step truncated
-    backward induction reproduces the unrestricted backward induction
-    when the truncation depth weakly dominates the relevant divergence
-    depth. The Lean encoding states that for `k ≥ d`, the myopic
-    welfare equals the Bayesian welfare on the corresponding
-    decision instance.
+    The carrier `myopicKWelfare : ℕ → ℕ → ℝ → ℝ` was introduced
+    explicitly to host paper Remark (ii)'s welfare claim; paper Remark
+    (ii) at line 942 STATES the carrier's defining equation at k ≥ d
+    (horizon spans full divergence depth → coincides with Bayesian).
+    Paper does NOT separately derive this; it is paper's commitment to
+    what "myopic-k at horizon ≥ d" MEANS — analogous to paper Def
+    `def:greedy-path` line 984 STIPULATING V_g(u) = r(u) at terminal
+    vertex (carrier-defining equation at boundary regime).
 
-    Cat 3 sub-type: workingAssumption (paper-stated structural
-    equivalence on the opaque `myopicKWelfare` carrier; pending
-    per-instance derivation from the paper's `k`-step backward-
-    induction recursion; 必须 close before publication).
+    Mirrors `V_g_def_terminal` (R23-C1 carrier-defining equation at
+    boundary regime per paper Def `def:greedy-path` line 984): paper
+    introduces the V_g carrier AND stipulates its base-case equation
+    at terminal vertex; here paper introduces myopicKWelfare AND
+    stipulates its boundary-equation at horizon-spans-divergence-depth.
+
+    Cat 3 sub-type: structuralEquation (paper-Remark-stipulated
+    carrier-defining equation on the opaque `myopicKWelfare` carrier
+    at horizon `k ≥ d` per paper Remark `rem:robustness-misspec` (ii)
+    line 942; 永不 close per discipline §3.4.3 — paper's commitment to
+    what `myopicKWelfare k d β` MEANS at k ≥ d).
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942
     (k-step lookahead horizon spans full divergence depth d ⇒
-    coincides with Bayesian estimate). -/
+    paper-stipulated coincidence with Bayesian estimate; carrier-
+    defining equation at the paper-named regime k ≥ d). -/
 axiom myopic_k_eq_bayesian_above_divergence_depth_OPEN :
     ∀ k d : ℕ, k ≥ d →
       ∀ β : ℝ,

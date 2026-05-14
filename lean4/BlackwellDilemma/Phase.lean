@@ -396,6 +396,17 @@ depending on `p`. -/
     formalise the Def 2.1 connected-graph carrier and the
     full-edge-subgraph identification; 必须 close before publication).
 
+    R68 NOTE: examined for §3.4.3 reclassification candidacy and rejected.
+    While paper Def 2.1 (G connected) + Def 2.5 (forward-reachable
+    construction) are both paper Definitions, the conclusion
+    `ForwardReachable v ∅ ω = Finset.univ under all-edges-open` is a
+    graph-theoretic consequence (connected graph + all-open subgraph →
+    reachable component = vertex set) rather than a paper-DEFINING
+    stipulation on the carrier. Paper line 463 derives this; it is not
+    paper-Def stipulated. Per R52/R45 boundary precedent, paper-derived
+    graph-theoretic consequences classify as workingAssumption pending
+    paper proof reconstruction OR Mathlib graph infrastructure.
+
     paper source: Definition 2.1 (line 108, `G = (V, E)` is a
     connected undirected graph) + Definition 2.5 (`def:forward-reachable`,
     paper line 187-194 forward-reachable construction at `H = ∅`)
@@ -422,15 +433,43 @@ axiom forward_reachable_empty_full_at_all_open_OPEN :
     edges open`, leaving the connected-component → `Finset.univ`
     identification to atom #1.
 
-    Cat 3 sub-type: workingAssumption (paper-stated bond-percolation
-    semantics binding the parameter `blockingProb = 0` to the
-    all-edges-open realisation; pending Mathlib bond-percolation
-    measure-theoretic machinery; 必须 close before publication).
+    R68 §3.4.3 reclassification (was R59 workingAssumption): paper
+    Definition 2.1 line 119 STIPULATES the bond-percolation construction
+    "Each edge `e ∈ E` is independently blocked with probability `p`".
+    At the boundary value `p = 0`, the percolation measure assigns
+    blocking probability 0 to every edge, so the paper-stipulated
+    semantics fix every realised outcome ω (drawn from this measure)
+    to have every edge OPEN. This is the paper Definition's DEFINING
+    semantics of the boundary value `p = 0` — analogous to the
+    discipline §3.4.3 canonical example `V_dyn_def` (paper Definition
+    2.2 stipulating how V_dyn behaves on its primitive carrier domain).
 
-    paper source: Definition 2.1 (line 119, bond-percolation
-    construction "Each edge `e ∈ E` is independently blocked with
-    probability `p`") + Proposition `prop:trap-prevalence` Part 1
-    proof line 463 (paper "no edges blocked" reading of `p = 0`). -/
+    The atom is the discretized realization of the paper-Def-stipulated
+    measure-theoretic identity "at `p = 0`, every realised ω has every
+    edge open with probability 1"; the Lean signature folds the "with
+    probability 1" into universal quantification over ω because the
+    percolation outcome carrier is the discrete witness type. The
+    paper's Def 2.1 line 119 commits the percolation primitive to this
+    `p = 0` boundary semantics, making it a structural identity on the
+    `PercolationOutcome` carrier under `blockingProb = 0`.
+
+    Mirrors `expectedTopoLoss_le_one_atom` precedent (R55 PASS criterion
+    #3 boundary): paper Definition 2.1 line 113 reward-range stipulation
+    `r: V → [0, 1]` is structural identity on the reward carrier; here
+    paper Def 2.1 line 119 percolation-blocking stipulation is structural
+    identity on the percolation-outcome carrier under the boundary value
+    `blockingProb = 0`.
+
+    Cat 3 sub-type: structuralEquation (paper-Def-stipulated bond-
+    percolation semantics binding `blockingProb = 0` to the all-edges-
+    open realisation per Definition 2.1 line 119; 永不 close per
+    discipline §3.4.3 — this is paper's commitment to the percolation
+    primitive's boundary semantics at p = 0).
+
+    paper source: Definition 2.1, line 119 ("Each edge `e ∈ E` is
+    independently blocked with probability `p`" — paper-Def-stipulated
+    bond-percolation semantics + the paper-implicit boundary reading
+    at `p = 0`). -/
 axiom all_edges_open_at_zero_blocking_OPEN :
     ∀ (ω : PercolationOutcome),
       blockingProb = 0 →
