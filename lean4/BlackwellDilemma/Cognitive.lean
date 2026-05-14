@@ -343,29 +343,25 @@ axiom mLimit_pos_OPEN :
     Conditions_C1_C2_C3 →
     ∀ p : ℝ, 0 < mLimit p
 
-/-- Cat 3 paper-novel ATOMIC structural fact: the cognitive threshold
-    `kappaStar p α` is non-negative. Paper Theorem 4.1 Part 3 (line
-    493) characterises `kappaStar p α` as `sInf {κ > 0 : m(κ) ≥ 0}`,
-    so `0 ≤ kappaStar p α` follows from the inf-over-positive-reals
-    scope (the inf of a set of positive numbers is non-negative; the
-    junk-value branch `Real.sInf_empty = 0` preserves the bound).
+/-- **Cat 1 Mathlib derivation**: the cognitive threshold `kappaStar p α`
+    is non-negative. Paper Theorem 4.1 Part 3 (line 493) characterises
+    `kappaStar p α` as `sInf {κ > 0 : m(κ) ≥ 0}`, so `0 ≤ kappaStar p α`
+    follows directly from `Real.sInf_nonneg` applied to a set of strictly
+    positive reals (junk-value branch `Real.sInf_empty = 0` preserves
+    the bound).
 
-    Encoding choice: extracted from the bundled
-    `gap_cognitive_threshold_part3_OPEN` non-negativity sub-clause
-    per `feedback_gap_ledger_in_lean4` §18 atomic-decomposition
-    pattern. Retained as Cat 3 atomic stipulation rather than Cat 1
-    derivation because a Mathlib-level proof would require composing
-    `kappaStar_def` (Cat 3 atom) with `Real.sInf` lower-bound /
-    junk-value semantics; the paper-stated non-negativity is the
-    natural primitive fact at this abstraction level.
-
-    Cat 3 sub-type: workingAssumption (paper-stated non-negativity
-    pending Cat 1 derivation from `kappaStar_def` + Mathlib
-    `Real.sInf` machinery; 必须 close before publication).
+    R46 conversion (Pattern-1 violation fix): the prior R37 encoding as
+    `axiom kappaStar_nonneg_OPEN` was flagged by R45 hostile audit as
+    a Pattern-1 violation since the derivation is Mathlib-routine via
+    `kappaStar_def` (Cat 3 atom) composed with Mathlib's `Real.sInf_nonneg`
+    lemma. Now encoded as a Cat 1 `theorem` with kernel-pure proof.
 
     paper source: Theorem 4.1 Part 3, line 493 ("`κ*(p, α) ≥ 0`"). -/
-axiom kappaStar_nonneg_OPEN :
-    ∀ p α : ℝ, 0 ≤ kappaStar p α
+theorem kappaStar_nonneg :
+    ∀ p α : ℝ, 0 ≤ kappaStar p α := by
+  intros p α
+  rw [kappaStar_def p α]
+  exact Real.sInf_nonneg (fun _ ⟨h_pos, _⟩ => le_of_lt h_pos)
 
 /-- **Theorem 4.1 Part 3: Existence of `κ*` (derived theorem).**
     `m(κ)` (the mean-estimate-gap, `mean_estimate_gap p κ`) is continuous
@@ -382,7 +378,7 @@ axiom kappaStar_nonneg_OPEN :
     * `mean_estimate_gap_tendsto_mLimit_OPEN` (Tendsto limit),
     * `mLimit_pos_OPEN` (strict positivity of the limit),
     * `kappaStar_def` (inf-characterisation; R23-C1 atom), and
-    * `kappaStar_nonneg_OPEN` (non-negativity of the threshold).
+    * `kappaStar_nonneg` (Cat 1 theorem, R46 Pattern-1 fix from former atom).
     The composition is closed kernel-pure; the atomic stipulations
     are paper-stated structural facts pending separate per-instance
     derivations.
@@ -410,7 +406,7 @@ theorem gap_cognitive_threshold_part3
   · exact mean_estimate_gap_tendsto_mLimit_OPEN hC p
   · exact mLimit_pos_OPEN hC p
   · exact kappaStar_def p α
-  · exact kappaStar_nonneg_OPEN p α
+  · exact kappaStar_nonneg p α
 
 /-- **Theorem 4.1 Part 4: Monotonicity in `p`.**
     On lattices and the Section 5 instances, `κ*(p)` is non-decreasing in `p`.
