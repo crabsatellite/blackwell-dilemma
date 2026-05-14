@@ -575,21 +575,30 @@ namespace BlackwellDilemma.AxiomAudit
 --    `inflection_at_kstar_OPEN`. Net: −1 wA, +1 structuralEq.
 --    Downstream `gap_threshold_fiveState_smooth_transition` re-routed
 --    (no signature change at consumer level).
---  * `betaStarOfP_def` (R62 derived theorem, replaces axiom): composes
---    the new structural-equation atom
+--  * `betaStarOfP_def` (R62 derived theorem, replaces axiom; R74
+--    Pattern 5 closure replaces the R62 chain): originally R62
+--    composed the structural-equation atom
 --    `betaStarOfP_eq_minimiser_witness_OPEN` (paper line 814 explicit
---    `β*(p)` notation as carrier identification) + new smaller
+--    `β*(p)` notation as carrier identification) + smaller
 --    workingAssumption atom `L_minimum_exists_in_regime_i_OPEN`
 --    (existence of interior minimum of L(·, p) on Regime (i)'s
---    domain). Replaces retired `betaStarOfP_def` axiom. Net: 0 wA
---    (best-round-style closure mirroring R61 mLimit_pos pattern).
+--    domain). R74 replaces this with Pattern 5: `noncomputable def
+--    betaStarOfP (p : ℝ) : ℝ := if h : 0 ≤ p ∧ p < p_1 then
+--    Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2)
+--    else 0`; `betaStarOfP_def` proof via `dif_pos` + `Classical.
+--    choose_spec.2`. The R62 structural-equation atom
+--    `betaStarOfP_eq_minimiser_witness_OPEN` is RETIRED (no
+--    replacement); existence atom retained. Net delta vs R62:
+--    -1 structuralEquation, +1 derivedTheorem, no wA change but
+--    structural simplification (Pattern 5 unblocks DEFERRED
+--    universal-inequality atoms class).
 --    Downstream `betaStarOfP_loss_below_limit` consumes the derived
 --    theorem at identical call signature.
 #print axioms BlackwellDilemma.FiveState.inflection_at_kstar
 #print axioms BlackwellDilemma.FiveState.smoothTransitionBeta_corresponds_to_interior_optimum_OPEN
 #print axioms BlackwellDilemma.FiveState.betaStarOfP_def
-#print axioms BlackwellDilemma.FiveState.betaStarOfP_eq_minimiser_witness_OPEN
 #print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
+#print axioms BlackwellDilemma.FiveState.betaStarOfP
 
 -- R73 substantive-math closures (concrete-def closure of paper-stated
 -- structural-equation atoms via R72 pattern continuation, applied to two

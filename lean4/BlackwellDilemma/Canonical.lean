@@ -453,66 +453,7 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
         L β_star₁ p₁ < L β_star₂ p₂ :=
   envelope_derivative_sign_in_p_OPEN
 
-/-- **Opaque carrier `β*(p)` for Regime (i)'s implicit-function selection.**
-    Substantive paper claim — opaque carrier required. The optimal
-    interior precision `β*(p)` for the Regime (i) loss function `L`,
-    as an implicit function of `p ∈ [0, p_1)`. Existence at each `p` is
-    `gap_three_regime_reversal_existence_OPEN`; uniqueness is
-    `gap_three_regime_reversal_uniqueness_OPEN`; this opaque carrier
-    names the joint implicit-function selection so the continuity-in-`p`
-    and vanishing-at-`p_1` sub-claims of paper line 814 can be hosted
-    as `ContinuousOn` / `Filter.Tendsto` predicates against a single
-    canonical `β*(p)` choice. Outside `[0, p_1)` the value is unspecified
-    (the carrier is only consumed under the appropriate domain hypothesis).
-
-    paper source: Proposition `prop:three-regime-five-state` Regime (i),
-    line 814 (the "β*(p)" of the third bullet's overshoot expression
-    `L(∞, p) − L(β*(p), p)`). -/
-axiom betaStarOfP : ℝ → ℝ
-
-/-- R62 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
-    equation: paper `prop:three-regime-five-state` Regime (i)
-    (line 814) explicitly identifies `betaStarOfP p` as THE "unique
-    interior minimum" of `L(·, p)` over the positive reals; this
-    structural equation pins the `betaStarOfP` opaque carrier to the
-    minimiser-witness from the smaller existence-of-minimum atom
-    `L_minimum_exists_in_regime_i_OPEN` introduced below. Paper line
-    814 reads "`unique interior minimum β*(p) ∈ (0, ∞) satisfying
-    L(β*(p), p) < L(∞, p) = 0.4`" — the paper's explicit `β*(p)`
-    notation IS the paper-stipulated identification of the
-    `betaStarOfP` carrier with the (per-`p`) minimiser of the loss
-    function `L(·, p)` on Regime (i)'s domain.
-
-    Encoding choice: extracted from the retired bundled
-    `betaStarOfP_def` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern + R61 `mLimit_pos` precedent. The retired atom claimed
-    `∀ β > 0, L (betaStarOfP p) p ≤ L β p` directly on the
-    `betaStarOfP` carrier without surfacing the paper line 814
-    explicit identification of the carrier with the existence-of-
-    minimum witness; the R62 decomposition factors this into the
-    structural-equation atom (this axiom; paper line 814 carrier
-    identification) + a smaller workingAssumption atom
-    `L_minimum_exists_in_regime_i_OPEN` (the substantive existence-
-    of-interior-minimum content on the `L` carrier).
-
-    Cat 3 sub-type: structuralEquation (paper-stated identity linking
-    the `betaStarOfP p` carrier to the minimiser-witness from
-    `L_minimum_exists_in_regime_i_OPEN` per paper line 814 explicit
-    `β*(p)` notation; 永不 close per discipline §3.4.3 — this is
-    paper's commitment to how its primitives are related).
-
-    paper source: Proposition `prop:three-regime-five-state` Regime (i),
-    line 814 ("unique interior minimum `β*(p)`" — paper-stipulated
-    `β*(p)` is the `betaStarOfP` carrier identified with the
-    minimiser-witness). -/
-axiom betaStarOfP_eq_minimiser_witness_OPEN :
-    ∀ (p : ℝ), 0 ≤ p → p < p_1 →
-      ∀ β_min : ℝ, 0 < β_min →
-        (∀ β : ℝ, 0 < β → L β_min p ≤ L β p) →
-        betaStarOfP p = β_min
-
-/-- R62 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
+/-- R62 closure-path-A smaller paper-novel ATOMIC stipulation:
     on Regime (i)'s domain `p ∈ [0, p_1)`, the loss function `L(·, p)`
     has an interior minimiser over the positive reals — i.e., there
     exists `β_min > 0` such that for every `β > 0`, `L β_min p ≤ L β p`.
@@ -525,20 +466,23 @@ axiom betaStarOfP_eq_minimiser_witness_OPEN :
     Encoding choice: extracted from the retired bundled
     `betaStarOfP_def` workingAssumption per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern + R61 `mLimit_pos` precedent. The retired atom bundled
-    (a) the existence of an interior minimiser of `L(·, p)` and
-    (b) the paper-stipulated identification of `betaStarOfP p` with
-    that minimiser. The R62 decomposition factors this into the
-    structural-equation atom `betaStarOfP_eq_minimiser_witness_OPEN`
-    (paper line 814 carrier identification) + this smaller
-    workingAssumption (the substantive existence-of-interior-minimum
-    content on the `L` carrier).
+    pattern + R61 `mLimit_pos` precedent.
 
     Cat 3 sub-type: workingAssumption (paper-stated existence of an
     interior minimiser of `L(·, p)` on Regime (i)'s domain; pending
     Mathlib continuous-function-on-compact-interval + transcendental
     optimisation infrastructure for the explicit `β*(p)` witness;
     必须 close before publication).
+
+    R74 elevation: this existence atom now serves a STRONGER closure
+    pattern (Pattern 5: existence-via-`Classical.choose`). The opaque
+    carrier `betaStarOfP` is replaced by a `noncomputable def` that
+    invokes `Classical.choose` on this existence atom (per-`p`,
+    inside the `0 ≤ p ∧ p < p_1` domain guard); the carrier-
+    identification atom `betaStarOfP_eq_minimiser_witness_OPEN` is
+    consequently retired since `Classical.choose_spec` directly
+    yields the universal-inequality form needed by `betaStarOfP_def`
+    (no uniqueness-of-minimiser premise required at this level).
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 + proof line 825 (existence of interior minimum from
@@ -549,26 +493,65 @@ axiom L_minimum_exists_in_regime_i_OPEN :
       ∃ β_min : ℝ, 0 < β_min ∧
         ∀ (β : ℝ), 0 < β → L β_min p ≤ L β p
 
-/-- **R62 derived theorem** (replaces retired `betaStarOfP_def` axiom).
+/-- **Carrier `β*(p)` for Regime (i)'s implicit-function selection.**
+
+    R74 substantive-math closure (concrete-def closure, Pattern 5:
+    existence-via-`Classical.choose`). Previously declared
+    `axiom betaStarOfP : ℝ → ℝ` (opaque carrier) plus the structural-
+    equation atom `betaStarOfP_eq_minimiser_witness_OPEN` (Cat 3
+    workingAssumption pinning the carrier to the minimiser-witness).
+    R74 makes the carrier CONCRETE per paper line 814's own
+    paper-implied existence claim of the interior minimiser: on the
+    Regime (i) domain `p ∈ [0, p_1)`, define `betaStarOfP p` as
+    `Classical.choose` of the minimiser-witness from the existence
+    atom `L_minimum_exists_in_regime_i_OPEN`; outside the domain
+    (paper-irrelevant), `betaStarOfP p := 0` as a junk value.
+
+    The Lean `def` IS the paper's implicit-function selection
+    (the `Classical.choose` literally picks the paper-stated
+    minimiser of `L(·, p)`), so the carrier encodes paper content
+    faithfully. This is NOT the R7-flagged closure-count trick:
+    the def body invokes the substantive existence atom
+    `L_minimum_exists_in_regime_i_OPEN` as input, with no content
+    erasure; the previously-axiomatic carrier-identification step
+    (`betaStarOfP_eq_minimiser_witness_OPEN`) is internalised by
+    `Classical.choose_spec`.
+
+    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
+    continuous-function-on-half-open-interval implicit-function
+    machinery, define the paper-faithful selection locally rather
+    than skip.
+
+    paper source: Proposition `prop:three-regime-five-state` Regime (i),
+    line 814 (the "β*(p)" of the third bullet's overshoot expression
+    `L(∞, p) − L(β*(p), p)`). -/
+noncomputable def betaStarOfP (p : ℝ) : ℝ :=
+  if h : 0 ≤ p ∧ p < p_1 then
+    Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2)
+  else 0
+
+/-- **R74 derived theorem** (replaces R62 derived theorem of same name;
+    now closes via Pattern 5 `Classical.choose_spec` instead of R62's
+    structural-equation composition).
     Cat 3 argmin characterisation of `betaStarOfP p` on Regime (i)'s
     domain `p ∈ [0, p_1)`: for every `β > 0`,
     `L (betaStarOfP p) p ≤ L β p`.
 
-    R62 closure-path-A composition:
-      (a) Smaller workingAssumption atom `L_minimum_exists_in_regime_i_OPEN`
-          (existence of interior minimum of `L(·, p)` on Regime (i)'s
-          domain), AND
-      (b) Structural equation `betaStarOfP_eq_minimiser_witness_OPEN`
-          (paper line 814 carrier identification of `betaStarOfP p`
-          with the minimiser-witness).
+    R74 Pattern 5 closure: composes the `betaStarOfP` `def` (which
+    invokes `Classical.choose` on `L_minimum_exists_in_regime_i_OPEN`
+    inside the domain guard) with `Classical.choose_spec` (which
+    yields the universal-inequality minimiser property of the chosen
+    witness directly). The previously-required carrier-identification
+    structural-equation atom `betaStarOfP_eq_minimiser_witness_OPEN`
+    is no longer needed: `Classical.choose_spec` gives the
+    minimiser-property for the canonical chosen β_min, which IS
+    `betaStarOfP p` by the `def`'s `if_pos`-branch unfolding.
 
-    Net workingAssumption delta: 0 (1 retired wA, 1 new structuralEq,
-    1 new smaller wA, derived theorem composes them). The new
-    workingAssumption is strictly smaller content per discipline §18
-    standard: the original atom claimed a SPECIFIC β-value
-    (`betaStarOfP p`) is the minimiser; the new atom only claims that
-    SOME minimiser exists. The structural equation surfaces the
-    paper-implicit identification.
+    Net workingAssumption delta: −1 vs R62 baseline (1 wA atom
+    retired: `betaStarOfP_eq_minimiser_witness_OPEN`; existence atom
+    `L_minimum_exists_in_regime_i_OPEN` retained; carrier
+    `betaStarOfP` retained as paper-Def-stipulated structural
+    primitive but now `noncomputable def` rather than opaque axiom).
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("unique interior minimum `β*(p)`"). -/
@@ -576,13 +559,18 @@ theorem betaStarOfP_def
     (p : ℝ) (h_p_nonneg : 0 ≤ p) (h_p_lt_p1 : p < p_1)
     (β : ℝ) (h_β_pos : 0 < β) :
     L (betaStarOfP p) p ≤ L β p := by
-  obtain ⟨β_min, h_β_min_pos, h_β_min_min⟩ :=
-    L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1
-  have h_eq : betaStarOfP p = β_min :=
-    betaStarOfP_eq_minimiser_witness_OPEN p h_p_nonneg h_p_lt_p1
-      β_min h_β_min_pos h_β_min_min
-  rw [h_eq]
-  exact h_β_min_min β h_β_pos
+  -- Unfold `betaStarOfP` at the `if_pos` branch (in-domain).
+  have h_dom : 0 ≤ p ∧ p < p_1 := ⟨h_p_nonneg, h_p_lt_p1⟩
+  have h_unfold : betaStarOfP p =
+      Classical.choose (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1) := by
+    unfold betaStarOfP
+    rw [dif_pos h_dom]
+  -- `Classical.choose_spec` yields `0 < β_min ∧ ∀ β > 0, L β_min p ≤ L β p`.
+  have h_spec :=
+    Classical.choose_spec (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1)
+  -- Extract the universal-inequality minimiser property.
+  rw [h_unfold]
+  exact h_spec.2 β h_β_pos
 
 /-- Cat 3 derived theorem: at any `p ∈ [0, p_1)`, the loss at the
     paper-stated minimiser `betaStarOfP p` lies STRICTLY below the

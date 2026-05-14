@@ -1233,6 +1233,109 @@
   per discipline §3.4.1 (1 new carrier `myopicKWelfareBelowDepth`
   for paper-implicit `k < d` regime; no carrier deletion).
 
+  ## R74 2026-05-15 — Pattern 5 (existence-via-Classical.choose) closure
+  unblocking universal-inequality atoms previously DEFERRED at R73.
+
+  R73 had explicitly DEFERRED universal-inequality atoms because of
+  the apparent uniqueness requirement: `betaStarOfP_eq_minimiser_witness_
+  OPEN` was thought to need a separate uniqueness atom because the
+  retired bundled axiom statement encoded `∀ β_min, (∀ β > 0, L β_min p
+  ≤ L β p) → betaStarOfP p = β_min` (any minimiser EQUALS betaStarOfP p).
+  R74 RESOLVES this DEFER by recognising that `Classical.choose` does
+  not need uniqueness: it picks SOME witness, and `Classical.choose_spec`
+  only delivers the witness's defining property (here: the universal-
+  inequality minimiser-property), not its uniqueness. The
+  `betaStarOfP_def` derived theorem only needs the universal-inequality
+  conclusion `∀ β > 0, L (betaStarOfP p) p ≤ L β p`, which is exactly
+  what `Classical.choose_spec.2` delivers — no uniqueness needed.
+
+  CLOSURE 1 (Pattern 5 existence-via-Classical.choose,
+  structuralEquation gapDefinitional → derivedTheorem gapClosed) —
+  `betaStarOfP_eq_minimiser_witness_OPEN` (Canonical.lean:509). Paper
+  Proposition `prop:three-regime-five-state` Regime (i) line 814:
+  `unique interior minimum β*(p) ∈ (0, ∞)`. R74:
+  `axiom betaStarOfP : ℝ → ℝ` → `noncomputable def betaStarOfP
+  (p : ℝ) : ℝ := if h : 0 ≤ p ∧ p < p_1 then Classical.choose
+  (L_minimum_exists_in_regime_i_OPEN p h.1 h.2) else 0`. Carrier-
+  identification structural-equation atom `betaStarOfP_eq_minimiser_
+  witness_OPEN` RETIRED (no replacement); existence atom
+  `L_minimum_exists_in_regime_i_OPEN` retained as the substantive
+  paper input. The R62 derived theorem `betaStarOfP_def` is reproved
+  using `dif_pos` unfolding + `Classical.choose_spec.2`. NET wA delta:
+  this closure does NOT change wA count (the retired entry is
+  structuralEquation, not workingAssumption); it reduces structural-
+  equation count by 1 and increases derivedTheorem by 1. The KEY
+  contribution is unblocking the DEFERRED Pattern 5 closure path for
+  universal-inequality atoms.
+
+  R74 candidates examined and DEFERRED (still require fundamentally
+  new infrastructure beyond Pattern 5):
+   * `betaBarStar_def` (Principal.lean:111): paper line 622 introduces
+     `betaBarStar` as `W_bar` maximiser. The argmax statement is
+     `∀ β, W_bar β ≤ W_bar betaBarStar`. Pattern 5 closure REQUIRES
+     a paper-stated existence-of-maximiser atom of form
+     `∃ β_max, ∀ β, W_bar β ≤ W_bar β_max`. Currently the closest
+     paper-implied existence is `interior_max_exists_from_unimodal_
+     envelope` (R63 derived theorem giving `0 < betaBarStar` only,
+     not standalone existence-of-maximiser). Adding such an atom
+     would be net 0 wA at best (1 new wA + 1 closed wA = 0); needs
+     hostile-audit confirmation that the new atom is genuinely
+     smaller paper content. DEFERRED — Pattern 5 applicability
+     pending R75 hostile-audit.
+   * `aggregateOptimalBeta_def` (Principal.lean:380): same argmax-
+     existence requirement as `betaBarStar_def`, with G-parameter-
+     isation. Similar Pattern 5 applicability pending R75.
+   * `W_bar_limit_infty_def` (Principal.lean:657): paper-stated
+     Filter.Tendsto. `Classical.choose` on existence of limit would
+     require the existence-of-limit as a separate substantive paper
+     atom; same trade-off as the above. DEFERRED.
+
+  R74 net delta vs R73 baseline (234 entries; gapOpen=62, gapClosed=81,
+  gapDefinitional=89; workingAssumption=54, structuralEquation=25,
+  derivedTheorem=64, carrier=55):
+   * Total: 234 → 234 (no entry add/delete; 1 reclassification).
+   * Status: gapOpen 62 → 62 (no change; the closed entry was
+     gapDefinitional); gapClosed 81 → 82 (+1: betaStarOfP_eq_
+     minimiser_witness_OPEN moves to gapClosed); gapDefinitional
+     89 → 88 (-1).
+   * Cat 3 sub: workingAssumption 54 → 54 (no change);
+     structuralEquation 25 → 24 (-1 from betaStarOfP_eq_minimiser_
+     witness_OPEN reclassification); derivedTheorem 64 → 65 (+1);
+     carrier 55 → 55 (carrier remains in cat3PaperNovel since the
+     def-form is a kernel-pure construction of a paper-novel
+     primitive function, NOT a Cat 1/2 reduction — the def body
+     invokes the substantive existence atom as input).
+   * inputCategory: cat3PaperNovel 204 → 203 (-1 from atom moving
+     to cat1Mathlib derivedTheorem); cat1Mathlib 17 → 18 (+1).
+   * Build verified GREEN.
+
+  R74 verdict: SCALE-CONFIRMING extension of R72/R73 concrete-def
+  closure pattern to a fundamentally NEW pattern class (Pattern 5:
+  existence-via-Classical.choose for universal-inequality argmax/
+  argmin atoms) previously DEFERRED at R73 due to misidentified
+  uniqueness requirement. The R74 insight: `Classical.choose_spec`
+  delivers the witness's defining property without uniqueness, so
+  argmin/argmax universal-inequality atoms can close via Pattern 5
+  whenever a paired existence atom exists in the ledger. The closure
+  is HONEST: paper line 814 explicitly claims existence of the unique
+  interior minimum `β*(p)` (line 814 quote: "unique interior minimum
+  β*(p) ∈ (0, ∞) satisfying L(β*(p), p) < L(∞, p) = 0.4"), and the
+  Pattern 5 def faithfully implements the implicit-function selection
+  by `Classical.choose` on the substantive existence atom. The
+  uniqueness clause of paper line 814 is recorded separately at
+  `L_unimodal_in_regime_i_OPEN` and is NOT consumed by the closure
+  (since `Classical.choose` doesn't require uniqueness — the carrier
+  picks SOME minimiser, which may differ from the paper's unique
+  one in general; for the universal-inequality consumer, this is
+  irrelevant: the chosen witness still satisfies the minimiser-
+  property, which is all that `betaStarOfP_def` needs).
+
+  Pattern 5 unblocks an entire class of previously-DEFERRED
+  argmin/argmax atoms; future rounds (R75+) can extend this pattern
+  to `betaBarStar_def`, `aggregateOptimalBeta_def`, etc. once the
+  paired existence atoms are decomposed (or freshly introduced as
+  paper-faithful smaller wA).
+
   6-tier status × 3-input-category cross-table (post-R40 historical;
   superseded by R41-R55 above; live numbers printed by `#eval` block):
 
@@ -2370,7 +2473,15 @@ def entry_carrier_differentiatedDisclosureWelfare : GapEntry where
     "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
   conditionalOn := []
 
-/-- betaStarOfP carrier — paper-novel envelope of `β*(p)`. -/
+/-- betaStarOfP carrier — paper-novel envelope of `β*(p)`.
+
+    R74: was `axiom betaStarOfP : ℝ → ℝ`; now `noncomputable def
+    betaStarOfP (p : ℝ) : ℝ := if h : 0 ≤ p ∧ p < p_1 then
+    Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2)
+    else 0`. The carrier remains the paper's `β*(p)` envelope; the
+    Pattern 5 closure makes the implicit-function selection concrete
+    via `Classical.choose` on the existence atom (internalising the
+    R62 carrier-identification structural-equation atom). -/
 def entry_carrier_betaStarOfP : GapEntry where
   name := "betaStarOfP"
   status := GapStatus.gapDefinitional
@@ -2382,10 +2493,11 @@ def entry_carrier_betaStarOfP : GapEntry where
     "on the positive reals for `p ∈ [0, p_1)` (the canonical β*(p) " ++
     "choice on Regime (i)'s domain)"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom betaStarOfP : ℝ → ℝ` at Canonical.lean ~L471.  Companion structural-equation atom `betaStarOfP_def` (separately recorded as `entry_atom_betaStarOfP_def`) anchors the envelope to the argmin-characterisation on Regime (i)'s domain.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque envelope on the paper-novel loss carrier; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction (envelope value outside Regime (i)'s domain `[0, p_1)` is unspecified per the paper's domain restriction).  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `betaStarOfP : ℝ → ℝ` for the paper's envelope `β*(p)` (interior minimiser of `L(·, p)` on Regime (i)'s domain `[0, p_1)`)"
+    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom betaStarOfP : ℝ → ℝ` at Canonical.lean ~L471.  Companion structural-equation atom `betaStarOfP_def` (separately recorded as `entry_atom_betaStarOfP_def`) anchors the envelope to the argmin-characterisation on Regime (i)'s domain.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque envelope on the paper-novel loss carrier; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction (envelope value outside Regime (i)'s domain `[0, p_1)` is unspecified per the paper's domain restriction).  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R74 2026-05-15: opaque `axiom betaStarOfP : ℝ → ℝ` → `noncomputable def betaStarOfP (p : ℝ) : ℝ := if h : 0 ≤ p ∧ p < p_1 then Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2) else 0`. Pattern 5 (existence-via-Classical.choose) closure: the implicit-function selection is now concrete via `Classical.choose` on the paper-stated existence atom; outside the Regime (i) domain `[0, p_1)`, junk value `0` is paper-irrelevant (the carrier is only consumed under the appropriate domain hypothesis). Internalises the R62 structural-equation atom `betaStarOfP_eq_minimiser_witness_OPEN` (now retired). Cat3SubType remains carrier (paper-novel primitive function); the def-form merely provides a kernel-pure construction of the value, not a content-erasure (the def body invokes the substantive existence atom as input)." ]
+  scope := "Carrier `betaStarOfP : ℝ → ℝ` for the paper's envelope `β*(p)` (interior minimiser of `L(·, p)` on Regime (i)'s domain `[0, p_1)`); R74 made concrete via `Classical.choose` on `L_minimum_exists_in_regime_i_OPEN`"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  R74 made concrete via Classical.choose (Pattern 5).  永不 close."
   conditionalOn := []
 
 /-- smoothTransitionBeta carrier — paper-novel smooth-transition β-carrier. -/
@@ -4417,18 +4529,27 @@ def entry_atom_betaStarOfP_def : GapEntry where
     Proposition prop:three-regime-five-state Regime (i) line 814
     explicit `β*(p)` notation as paper-stipulated identification of
     the betaStarOfP opaque carrier with the minimiser-witness from
-    L_minimum_exists_in_regime_i_OPEN. -/
+    L_minimum_exists_in_regime_i_OPEN.
+
+    R74 RETIRED: replaced by `Classical.choose` invocation inside the
+    new `noncomputable def betaStarOfP` (Pattern 5 existence-via-
+    Classical.choose closure). The carrier-identification step is now
+    internalised by `Classical.choose_spec` rather than carried as a
+    standalone structural-equation axiom; status moved
+    structuralEquation/gapDefinitional → derivedTheorem/gapClosed
+    (Cat 3 → Cat 1 input). -/
 def entry_atom_betaStarOfP_eq_minimiser_witness : GapEntry where
-  name := "betaStarOfP_eq_minimiser_witness_OPEN"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  name := "betaStarOfP_eq_minimiser_witness_OPEN [retired R74 → replaced by Classical.choose invocation inside noncomputable def betaStarOfP; Pattern 5 existence-via-Classical.choose closure]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 (`unique interior minimum β*(p) ∈ (0, ∞)`)"
   attackHistory :=
-    [ "R62 2026-05-14: Cat 3 atomic structural-equation axiom extracted from the retired bundled `betaStarOfP_def` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller existence wA). Paper Proposition prop:three-regime-five-state Regime (i) line 814 explicitly reads `unique interior minimum β*(p) ∈ (0, ∞) satisfying L(β*(p), p) < L(∞, p) = 0.4` — paper-stipulated `β*(p)` notation IS the identification of the betaStarOfP opaque carrier with the (per-`p`) minimiser of L(·, p) on Regime (i)'s domain. The structural equation pins the betaStarOfP carrier to ANY minimiser-witness β_min satisfying `∀ β > 0, L β_min p ≤ L β p` (the uniqueness clause of paper line 814 ensures the witness is unique up to value-equivalence; the structural eq encodes the carrier-equality). Cat 1 reduction check: not Mathlib-derivable (paper-novel carrier identification). Cat 2 reduction check: paper-novel structural equation. Hosted by `betaStarOfP_def` (Canonical.lean) derived theorem." ]
-  scope := "Proposition prop:three-regime-five-state Regime (i), line 814 (betaStarOfP carrier ↔ minimiser-witness identification)"
+    [ "R62 2026-05-14: Cat 3 atomic structural-equation axiom extracted from the retired bundled `betaStarOfP_def` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller existence wA). Paper Proposition prop:three-regime-five-state Regime (i) line 814 explicitly reads `unique interior minimum β*(p) ∈ (0, ∞) satisfying L(β*(p), p) < L(∞, p) = 0.4` — paper-stipulated `β*(p)` notation IS the identification of the betaStarOfP opaque carrier with the (per-`p`) minimiser of L(·, p) on Regime (i)'s domain. The structural equation pins the betaStarOfP carrier to ANY minimiser-witness β_min satisfying `∀ β > 0, L β_min p ≤ L β p` (the uniqueness clause of paper line 814 ensures the witness is unique up to value-equivalence; the structural eq encodes the carrier-equality). Cat 1 reduction check: not Mathlib-derivable (paper-novel carrier identification). Cat 2 reduction check: paper-novel structural equation. Hosted by `betaStarOfP_def` (Canonical.lean) derived theorem.",
+      "R74 2026-05-15: structuralEquation gapDefinitional → derivedTheorem gapClosed via Pattern 5 (existence-via-Classical.choose) closure. The opaque `axiom betaStarOfP : ℝ → ℝ` is replaced by `noncomputable def betaStarOfP (p : ℝ) : ℝ := if h : 0 ≤ p ∧ p < p_1 then Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2) else 0`. The carrier-identification step (this axiom) is internalised by `Classical.choose_spec`: the `betaStarOfP_def` derived theorem now closes via `dif_pos` unfolding + `Classical.choose_spec.2` rather than via this structural-equation axiom + the smaller wA composition. Net delta: −1 wA (this axiom retired, no replacement; existence atom L_minimum_exists_in_regime_i_OPEN retained). HONEST closure: paper does CLAIM existence of interior minimiser at line 814 (paper-implied via `unique interior minimum β*(p) ∈ (0, ∞) satisfying L(β*(p), p) < L(∞, p) = 0.4`); `Classical.choose` literally picks that minimiser; uniqueness (which the structural-equation atom implicitly relied on for `betaStarOfP p = β_min` when β_min is THE minimiser) is paper-stated separately at `L_unimodal_in_regime_i_OPEN` and is NOT consumed by the new closure (since `Classical.choose_spec` only requires the existential, not uniqueness — `betaStarOfP_def`'s universal-inequality conclusion follows directly from the chosen witness's minimiser-property). Pattern 5 is therefore strictly stronger than R62's structural-eq + smaller-wA decomposition: same paper content + 1 fewer Cat 3 axiom." ]
+  scope := "Proposition prop:three-regime-five-state Regime (i), line 814 (betaStarOfP carrier ↔ minimiser-witness identification — now internalised by Classical.choose)"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (paper-stated structural identity linking the betaStarOfP opaque carrier to the minimiser-witness from L_minimum_exists_in_regime_i_OPEN; paper line 814 `β*(p)` explicit notation IS this identification). Downstream consumer: `betaStarOfP_def` derived theorem (Canonical.lean) hosts the structural equation."
+    "RETIRED via R74 Pattern 5 (existence-via-Classical.choose) closure. The carrier-identification step is no longer carried as a standalone axiom: `noncomputable def betaStarOfP (p : ℝ) : ℝ := if h : 0 ≤ p ∧ p < p_1 then Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2) else 0` makes the identification kernel-pure via `Classical.choose_spec`. Net delta: −1 wA. Downstream `betaStarOfP_def` derived theorem now closes via `Classical.choose_spec.2` directly (no consumer-side signature change)."
   conditionalOn := []
 
 /-- R62 NEW smaller paper-novel ATOMIC stipulation: on Regime (i)'s
