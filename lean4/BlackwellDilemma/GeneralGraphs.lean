@@ -681,16 +681,30 @@ theorem gap_welfare_gain_decay (β : ℝ) (d : ℕ) :
     paper source: Proposition `prop:error-compounding` Part 5, line 1048. -/
 axiom c_star_constant : ℝ
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
+/-- Cat 3 paper-novel ATOMIC structural equation: paper line 1048
+    `where c* = c*(Δ_r, Δ_V) > 0 is a constant depending on the reward
+    gap Δ_r and the continuation gap Δ_V`. Paper INTRODUCES the
+    `c_star_constant` carrier via this `where` clause (paper does not
+    pre-define c* elsewhere; it appears here as the implicit constant
+    satisfying `σ_topo(κ*, d) = c*` per proof body line 1059) and
+    SIMULTANEOUSLY stipulates its defining positivity inline.
+    Per R68/R69/R70 boundary criterion (paper-CONTENT, not paper-source-
+    structure label): paper INLINE STATING carrier-defining property
+    via `where` clause IS §3.4.3 paper-commitment regardless of whether
+    surrounding context is Definition / Theorem / Proposition / Example /
+    Remark.
 
-    R68 NOTE: examined for §3.4.3 reclassification candidacy and rejected
-    per R52 audit precedent. Paper line 1048 stipulates `c* > 0` inline
-    at the constant's introduction, but R52 ruling held that the
-    paperSource being inside Proposition `prop:error-compounding` Part 5
-    statement (technically a Proposition, not a paper Definition) keeps
-    this on the §3.4.4 boundary side. R68 respects R52 precedent;
-    workingAssumption retained pending paper-side reconstruction OR a
-    new round audit consensus override on the §3.4.3 boundary criterion. -/
+    R71 §3.4.3 reclassification: structuralEquation/gapDefinitional
+    (永不 close; paper-Def-stipulated structural identity per discipline
+    §3.4.3). R52 had defaulted to wA via paper-source-structure label
+    (Proposition statement); R71 stronger override applies the R68/R69/R70
+    paper-CONTENT boundary criterion: the `where ... > 0 is a constant`
+    clause IS paper's introduction-with-positivity-stipulation of c*,
+    parallel to `oracleBridgePathTerminalReward_TrapTree_eq_r_goal` R68
+    closure (paper Def-stipulated terminal-leaf reward by trap-tree
+    construction).
+
+    paper source: Proposition `prop:error-compounding` Part 5, line 1048. -/
 axiom gap_c_star_constant_pos_OPEN : 0 < c_star_constant
 
 /-- **Closed form `κ*(d) = (1/2) log_2(d²/c* + 1)`** on the depth-`d`
