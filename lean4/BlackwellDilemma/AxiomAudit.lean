@@ -380,4 +380,13 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_absent
 #print axioms BlackwellDilemma.topo_loss_below_eps_from_envelope
 
+-- R44 Pattern-1 fix (Phase.lean sibling of R42 Wrongness fix):
+--  * `topo_loss_decay_arbitrary_threshold` (Phase.lean): Cat 1 theorem
+--    derivation from `Filter.Tendsto` neighborhood unfolding + transitivity
+--    through envelope upper bound. Discharges R37 Pattern-1 violation
+--    (former axiom topo_loss_decay_arbitrary_threshold_OPEN was acknowledged
+--    in R37 attackHistory as Mathlib-derivable but retained as Cat 3 axiom;
+--    R43 audit caught it; R44 fix ports R42's proof verbatim).
+#print axioms BlackwellDilemma.topo_loss_decay_arbitrary_threshold
+
 end BlackwellDilemma.AxiomAudit

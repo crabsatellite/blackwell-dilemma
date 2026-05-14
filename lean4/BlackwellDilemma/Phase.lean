@@ -127,50 +127,46 @@ axiom topo_loss_decay_below_pc_OPEN :
         Filter.Tendsto topo_loss_decay Filter.atTop (nhds 0) ∧
         ∀ n : ℕ, expectedTopoLoss n p ≤ topo_loss_decay n
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Theorem 3.3 Part 1
-    (proof line 417) derives the asymptotic ε-N convergence form
-    `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε` from the existence
-    of a decay-function envelope `topo_loss_decay : ℕ → ℝ` with
-    `topo_loss_decay → 0`. This atomic stipulation isolates the
-    arbitrary-threshold convergence from the decay-function-existence
-    fact: given any `topo_loss_decay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)`,
-    the eventually-below-ε bound on `expectedTopoLoss n p` follows.
+/-- **Cat 1 Mathlib derivation** of the eps-from-envelope step: given any
+    `topo_loss_decay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)` and
+    per-`n` upper-bound dominance `expectedTopoLoss n p ≤ topo_loss_decay n`,
+    the paper-stated `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε`
+    form follows by standard ε-δ Tendsto unfolding.
 
-    Encoding choice: extracted from the bundled
-    `gap_phase_transition_below_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern. This is the second atomic
-    stipulation completing the decomposition: the first
-    (`topo_loss_decay_below_pc_OPEN`) provides the decay envelope; this
-    one converts the envelope into the paper-stated arbitrary-ε bound.
-    Both atoms together (under the Cat 2 Grimmett antecedent) compose
-    the original bundled axiom's content.
-
-    Cat 3 sub-type: workingAssumption (paper-stated arbitrary-threshold
-    convergence; pending the substantive `topo_loss_decay` envelope
-    from `topo_loss_decay_below_pc_OPEN` + standard ε-δ Tendsto
-    unfolding; 必须 close before publication. Note: the unfolding step
-    itself is Cat 1 derivable from Mathlib `Filter.Tendsto`, but this
-    atomic axiom is retained as a paper-stated structural form to keep
-    the §18 decomposition surface honest at the abstraction level —
-    the paper-stated convergence is the operative downstream content).
+    R44 conversion (Pattern-1 violation fix): the prior R37 encoding as
+    `axiom topo_loss_decay_arbitrary_threshold_OPEN` (Cat 3 atom) was
+    flagged by R43 hostile audit as a Pattern-1 violation since the
+    derivation is fully Mathlib-routine (the same fix R42 applied to
+    the Wrongness.lean sibling `topo_loss_below_eps_from_envelope`).
+    Now encoded as a Cat 1 `theorem` proved kernel-pure via
+    `Filter.Tendsto` neighborhood unfolding + transitivity through the
+    envelope upper bound.
 
     paper source: Theorem 3.3 Part 1 proof, line 417 (asymptotic
     convergence `O(1/N) → 0`). -/
-axiom topo_loss_decay_arbitrary_threshold_OPEN :
+theorem topo_loss_decay_arbitrary_threshold :
     ∀ p : ℝ,
       (∃ topo_loss_decay : ℕ → ℝ,
         Filter.Tendsto topo_loss_decay Filter.atTop (nhds 0) ∧
         ∀ n : ℕ, expectedTopoLoss n p ≤ topo_loss_decay n) →
       ∀ ε : ℝ, 0 < ε →
-        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε
+        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
+  intro p ⟨d, hd_tendsto, h_le⟩ ε hε
+  have h_evt : ∀ᶠ n in Filter.atTop, d n < ε := by
+    have h_mem : Set.Iio ε ∈ nhds (0 : ℝ) := Iio_mem_nhds hε
+    exact hd_tendsto h_mem
+  rw [Filter.eventually_atTop] at h_evt
+  obtain ⟨N, hN⟩ := h_evt
+  exact ⟨N, fun n hn => lt_of_le_of_lt (h_le n) (hN n hn)⟩
 
 /-- **Theorem 3.3 (`thm:phase`) Part 1: derived theorem.** Below
     threshold (`p < p_c`), the topological loss `expectedTopoLoss n p`
     converges to `0` as `n → ∞`. Decomposed from the bundled
     `gap_phase_transition_below_OPEN` axiom into (a) `topo_loss_decay_
-    below_pc_OPEN` (existence of decay envelope) + (b) `topo_loss_
-    decay_arbitrary_threshold_OPEN` (arbitrary-ε convergence from
-    envelope). The derived theorem composes both atoms.
+    below_pc_OPEN` (Cat 3 workingAssumption, existence of decay
+    envelope, R44 reclassification) + (b) `topo_loss_decay_arbitrary_threshold`
+    (Cat 1 theorem, R44 Pattern-1 fix from former atom). The derived
+    theorem composes both.
 
     paper source: Theorem 3.3 Part 1, lines 400-419. -/
 theorem gap_phase_transition_below
@@ -182,7 +178,7 @@ theorem gap_phase_transition_below
       ∀ ε : ℝ, 0 < ε →
         ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
   intro p hp_nn hp_lt ε hε
-  exact topo_loss_decay_arbitrary_threshold_OPEN p
+  exact topo_loss_decay_arbitrary_threshold p
     (topo_loss_decay_below_pc_OPEN h_perc_prob p hp_nn hp_lt) ε hε
 
 /-- Substantive paper claim — opaque carrier required (Mathlib gap).
