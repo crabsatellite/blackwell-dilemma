@@ -164,24 +164,37 @@ namespace BlackwellDilemma.AxiomAudit
 --  * `gap_principal_interior_optimum`: composes 3 atoms (paper proof
 --    line 624-625, 632) — `W_bar_eventually_decreasing_in_reversal_OPEN`
 --    + `W_bar_exceeds_zero_at_positive_beta_OPEN` +
---    `interior_max_exists_from_unimodal_envelope_OPEN`.
+--    `interior_max_exists_from_unimodal_envelope` (R63 derived theorem,
+--    composes `betaBarStar_nonneg_OPEN` structural eq + `betaBarStar_def`
+--    argmax-characterisation via Cat 1 Mathlib chain).
 --  * `gap_principal_monotone_in_kappa`: composes 2 atoms (paper proof
 --    line 626, 634) — `fosd_induces_derivative_domination_OPEN` +
 --    `argmax_monotone_under_derivative_domination_OPEN`.
---  * `gap_principal_regime_bifurcation`: composes 2 atoms (paper proof
---    line 627, 636-640) — `W_bar_mixture_decomposition_OPEN` +
+--  * `gap_principal_regime_bifurcation`: composes 2 sub-claims (paper
+--    proof line 627, 636-640) — `W_bar_mixture_decomposition` (R63
+--    derived theorem composing `aboveThresholdWelfare` +
+--    `belowThresholdWelfare` carriers + `W_bar_eq_mixture_OPEN` structural
+--    eq + `aboveThresholdWelfare_monotone_OPEN` smaller wA +
+--    `belowThresholdWelfare_eventually_decreasing_OPEN` smaller wA) +
 --    `non_concave_triple_from_mixture_OPEN`.
 --  * `gap_disclosure_full_suboptimal`: composes 2 atoms (paper proof
 --    line 645, 652-656) — `averaged_reversal_overshoot_positive_OPEN` +
 --    `finite_beta_above_limit_from_overshoot_OPEN`.
---  * `gap_disclosure_differentiated_dominates`: re-exports 1 atom
---    (paper proof line 647, 658) —
---    `differentiated_per_agent_optimum_dominates_uniform_OPEN`.
+--  * `gap_disclosure_differentiated_dominates`: re-exports R63 derived
+--    theorem `differentiated_per_agent_optimum_dominates_uniform`
+--    (composes `perAgentOptimalAggregate` carrier +
+--    `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN` structural
+--    eq + `perAgentOptimalAggregate_dominates_uniform_OPEN` smaller wA).
 #print axioms BlackwellDilemma.gap_principal_interior_optimum
 #print axioms BlackwellDilemma.gap_principal_monotone_in_kappa
 #print axioms BlackwellDilemma.gap_principal_regime_bifurcation
 #print axioms BlackwellDilemma.gap_disclosure_full_suboptimal
 #print axioms BlackwellDilemma.gap_disclosure_differentiated_dominates
+-- R63 §18 closure-path-A derived theorems (replacing retired
+-- workingAssumption axioms; ledger entries re-routed to consume these).
+#print axioms BlackwellDilemma.interior_max_exists_from_unimodal_envelope
+#print axioms BlackwellDilemma.W_bar_mixture_decomposition
+#print axioms BlackwellDilemma.differentiated_per_agent_optimum_dominates_uniform
 
 -- §5 Constructive instances
 #print axioms BlackwellDilemma.FiveState.gap_kappaStar_at_two_thirds

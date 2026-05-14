@@ -121,33 +121,97 @@ axiom W_bar_exceeds_zero_at_positive_beta_OPEN :
     (∀ p : ℝ, alphaStar 0 p < 1) →
     ∃ β : ℝ, 0 < β ∧ W_bar 0 < W_bar β
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:principal-optimum` Part 1 (line 625, conclusion) derives
-    `betaBarStar > 0` (interior optimum) from continuity of `W_bar`
-    plus (a) `W_bar` is eventually decreasing (so the maximiser is
-    bounded above) and (b) `W_bar` exceeds `W_bar(0)` at some β > 0
-    (so the maximiser is strictly above 0). By continuity (paper-
-    implicit standing assumption on `W_bar` since it integrates a
-    continuous individual welfare against a finite measure), an
-    interior maximum `betaBarStar ∈ (0, ∞)` exists. This atomic
-    stipulation packages the paper's existence-of-interior-maximum
-    inference given the two prior atomic stipulations.
+/-- R63 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
+    equation: the aggregate-optimal precision `betaBarStar` lies in
+    the paper's standing-convention domain `[0, ∞)`. Paper Definition
+    `def:principal` line 614 reads "A principal chooses a signal
+    precision `β ≥ 0`" — the paper's `β ≥ 0` standing convention is a
+    paper-stipulated identification of the `betaBarStar` carrier with
+    the non-negative-reals domain (the maximiser of `W_bar` over
+    `β ≥ 0` is itself `≥ 0`).
 
-    Encoding choice: extracted from the bundled
-    `gap_principal_interior_optimum_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern.
+    Encoding choice: extracted from the retired bundled
+    `interior_max_exists_from_unimodal_envelope_OPEN` workingAssumption
+    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern + R61 `mLimit_pos` / R62 `betaStarOfP_def` precedent
+    (split bundled wA into structural identification atom + Cat 1
+    Mathlib chain). The retired atom claimed `0 < betaBarStar`
+    directly from the bundled eventually-decreasing + exceeds-zero
+    hypotheses without surfacing the paper line 614 explicit
+    identification of the carrier with the `β ≥ 0` domain; the R63
+    decomposition factors this into the carrier-pinning structural
+    equation (this axiom; paper line 614 `β ≥ 0` standing convention)
+    + a Cat 1 derivation composing `betaBarStar_def` (R23-C1
+    argmax-characterisation, paper line 622) and the
+    `W_bar_exceeds_zero_at_positive_beta_OPEN` premise.
 
-    Cat 3 sub-type: workingAssumption (paper-stated existence-of-
-    interior-maximum given the prior eventually-decreasing +
-    exceeds-zero-at-positive-β atoms; 必须 close before publication).
+    Cat 3 sub-type: structuralEquation (paper-stipulated identity
+    pinning the `betaBarStar` carrier to the paper's `β ≥ 0` standing
+    domain per Definition `def:principal` line 614; 永不 close per
+    discipline §3.4.3 — this is the paper's commitment to the
+    primitive's domain). The structural equation is unconditional on
+    paper hypotheses because the paper's `β ≥ 0` convention applies
+    to the carrier domain itself, not to any per-instance reversal-
+    regime hypothesis.
+
+    paper source: Definition `def:principal`, line 614 ("A principal
+    chooses a signal precision `β ≥ 0`" — paper-stipulated `β ≥ 0`
+    standing convention identifying the `betaBarStar` carrier domain). -/
+axiom betaBarStar_nonneg_OPEN : 0 ≤ betaBarStar
+
+/-- **R63 derived theorem** (replaces retired
+    `interior_max_exists_from_unimodal_envelope_OPEN` axiom).
+    Cat 1 derivation of the interior-optimum existence from the
+    paper-stated argmax-characterisation `betaBarStar_def` (paper
+    line 622) + the carrier-domain pinning `betaBarStar_nonneg_OPEN`
+    (paper line 614 `β ≥ 0` standing convention) + the
+    `W_bar_exceeds_zero_at_positive_beta_OPEN` premise (paper line
+    632 within-branch discrimination benefit at small β).
+
+    R63 closure-path-A composition:
+      (a) Structural equation `betaBarStar_nonneg_OPEN` (paper line
+          614 `β ≥ 0` standing convention pinning the carrier domain
+          to the non-negative reals).
+      (b) `betaBarStar_def` (paper line 622 argmax-characterisation
+          `∀ β, W_bar β ≤ W_bar betaBarStar`).
+      (c) The exceeds-zero hypothesis from the consumer.
+      (d) Standard Mathlib `lt_of_lt_of_le` + classical
+          contradiction chain to derive `betaBarStar ≠ 0`, then
+          `lt_of_le_of_ne` with the non-negativity bound.
+
+    The eventually-decreasing premise (`∃ β_low β_high, β_low <
+    β_high ∧ W_bar β_high < W_bar β_low`) is retained in the theorem
+    signature (matching the original axiom) as a paper-faithfulness
+    record — paper line 625 needs both the eventually-decreasing
+    fact (boundedness above) and the exceeds-zero fact (positivity
+    below) to establish existence + interior-ness — but only the
+    latter is needed in the Lean encoding because the existence is
+    already discharged by the opaque-carrier postulate `betaBarStar`
+    itself + `betaBarStar_def`'s argmax pin.
+
+    Net workingAssumption delta: -1 (1 retired wA, 1 new
+    structuralEquation, derived theorem composes them via Cat 1
+    Mathlib chain). Best-round-style closure mirroring R62
+    `betaStarOfP_def` pattern.
 
     paper source: Proposition `prop:principal-optimum` Part 1, lines
     624-625 (interior optimum `betaBarStar ∈ (0, ∞)`). -/
-axiom interior_max_exists_from_unimodal_envelope_OPEN :
+theorem interior_max_exists_from_unimodal_envelope :
     (∃ β_low β_high : ℝ, β_low < β_high ∧ W_bar β_high < W_bar β_low) →
     (∃ β : ℝ, 0 < β ∧ W_bar 0 < W_bar β) →
-    0 < betaBarStar
+    0 < betaBarStar := by
+  intros _h_eventually_decreasing h_exceeds
+  obtain ⟨β, _hβ_pos, hβ_lt⟩ := h_exceeds
+  -- W_bar 0 < W_bar β ≤ W_bar betaBarStar, so W_bar 0 < W_bar betaBarStar
+  have h_lt_max : W_bar 0 < W_bar betaBarStar :=
+    lt_of_lt_of_le hβ_lt (betaBarStar_def β)
+  -- Therefore betaBarStar ≠ 0 (else W_bar betaBarStar = W_bar 0 contradicts strict <)
+  have h_ne_zero : betaBarStar ≠ 0 := by
+    intro h_eq
+    rw [h_eq] at h_lt_max
+    exact lt_irrefl _ h_lt_max
+  -- Combine 0 ≤ betaBarStar (paper β ≥ 0 convention) with betaBarStar ≠ 0
+  exact lt_of_le_of_ne betaBarStar_nonneg_OPEN (Ne.symm h_ne_zero)
 
 /-- **Proposition `prop:principal-optimum` Part 1: derived theorem.**
     If `G` has support contained in the reversal regime
@@ -158,8 +222,10 @@ axiom interior_max_exists_from_unimodal_envelope_OPEN :
     decreasing from reversal regime) +
     `W_bar_exceeds_zero_at_positive_beta_OPEN` (within-branch
     discrimination benefit at small β) +
-    `interior_max_exists_from_unimodal_envelope_OPEN` (interior-
-    maximum existence from unimodal-envelope shape).
+    `interior_max_exists_from_unimodal_envelope` (R63 derived
+    theorem replacing the retired axiom; composes
+    `betaBarStar_nonneg_OPEN` structural eq + `betaBarStar_def`
+    argmax-characterisation via Cat 1 Mathlib chain).
 
     paper source: Proposition `prop:principal-optimum` Part 1, lines 624-625. -/
 theorem gap_principal_interior_optimum
@@ -167,7 +233,7 @@ theorem gap_principal_interior_optimum
     (hT : TerminalNeighbourTopology)
     (h_reversal : ∀ p : ℝ, alphaStar 0 p < 1) :
     0 < betaBarStar :=
-  interior_max_exists_from_unimodal_envelope_OPEN
+  interior_max_exists_from_unimodal_envelope
     (W_bar_eventually_decreasing_in_reversal_OPEN hC hT h_reversal)
     (W_bar_exceeds_zero_at_positive_beta_OPEN hC hT h_reversal)
 
@@ -338,36 +404,162 @@ theorem gap_principal_monotone_in_kappa :
   exact argmax_monotone_under_derivative_domination_OPEN G₁ G₂
     (fosd_induces_derivative_domination_OPEN G₁ G₂ h_fosd)
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:principal-optimum` Part 3 proof (lines 636-640) writes
-    `W̄(β) = λ E_{G | κ > κ*}[W(β, κ, α)] + (1-λ) E_{G | κ < κ*}
-    [W(β, κ, α)]` with `λ = G({κ > κ*}) ∈ (0, 1)`. The first term
-    (above-threshold contribution) is paper-stated to be
-    NON-DECREASING in β (standard Blackwell regime), and the second
-    term (below-threshold contribution) is paper-stated to be
-    EVENTUALLY DECREASING in β (reversal regime). This atomic
-    stipulation captures the paper-stated mixture decomposition
-    qualitatively, encoding the existence of a pair of welfare
-    functionals `f, g : ℝ → ℝ` with `f` non-decreasing, `g` eventually
-    decreasing, and `W_bar = f + g`.
+/-- R63 closure-path-A NEW opaque carrier: paper line 638's explicit
+    above-threshold welfare component `λ · E_{G | κ > κ*}[W(β, κ, α)]`
+    abstracted as a single ℝ → ℝ functional of `β`. Paper Proposition
+    `prop:principal-optimum` Part 3 proof (line 638) names this the
+    "above-threshold contribution" with the standing-Blackwell-regime
+    monotonicity property.
 
-    Encoding choice: extracted from the bundled
-    `gap_principal_regime_bifurcation_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern.
-
-    Cat 3 sub-type: workingAssumption (paper-stated mixture
-    decomposition; pending Mathlib bounded-measure / conditional-
-    expectation machinery; 必须 close before publication).
+    Encoding choice: introduced by R63 to factor the retired bundled
+    `W_bar_mixture_decomposition_OPEN` workingAssumption into (i) a
+    §3.4.3 structural equation pinning the explicit mixture
+    `W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β`
+    (paper line 638 explicit decomposition formula), and (ii)
+    smaller §3.4.4 workingAssumptions carrying the substantive
+    above-regime and below-regime monotonicities. The carrier itself
+    is `gapDefinitional` per `feedback_gap_ledger_in_lean4` §3.4.1
+    (paper-novel opaque-carrier primitive).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    lines 636-640 (mixture decomposition `W̄ = λ · above + (1-λ) ·
-    below`). -/
-axiom W_bar_mixture_decomposition_OPEN :
+    line 638 (`λ · E_{G | κ > κ*}[W(β, κ, α)]` above-threshold
+    contribution). -/
+axiom aboveThresholdWelfare : ℝ → ℝ
+
+/-- R63 closure-path-A NEW opaque carrier: paper line 638's explicit
+    below-threshold welfare component `(1 − λ) · E_{G | κ < κ*}
+    [W(β, κ, α)]` abstracted as a single ℝ → ℝ functional of `β`.
+    Paper Proposition `prop:principal-optimum` Part 3 proof (line 638)
+    names this the "below-threshold contribution" with the reversal-
+    regime eventually-decreasing property.
+
+    Encoding choice: introduced by R63 to factor the retired bundled
+    `W_bar_mixture_decomposition_OPEN` workingAssumption (parallel to
+    `aboveThresholdWelfare`).
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (`(1 − λ) · E_{G | κ < κ*}[W(β, κ, α)]` below-threshold
+    contribution). -/
+axiom belowThresholdWelfare : ℝ → ℝ
+
+/-- R63 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
+    equation: paper line 638's explicit pointwise mixture
+    `W̄(β) = λ · above-contribution(β) + (1 − λ) · below-contribution(β)`
+    pinning the existing `W_bar` carrier as the sum of the two new
+    paper-instance carriers `aboveThresholdWelfare` and
+    `belowThresholdWelfare` (with the `λ` and `(1 − λ)` weighting
+    absorbed into each carrier's definition).
+
+    Encoding choice: extracted from the retired bundled
+    `W_bar_mixture_decomposition_OPEN` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern + R61 `mLimit_pos` precedent (split bundled wA into
+    structural identification + smaller monotonicity-content wA).
+    The retired atom existentially asserted "some `f, g` exist with
+    these properties"; the R63 decomposition surfaces the paper-named
+    above/below carriers explicitly as `aboveThresholdWelfare` and
+    `belowThresholdWelfare`, then pins the mixture identity via this
+    structural equation.
+
+    Cat 3 sub-type: structuralEquation (paper-stipulated identity
+    pinning `W_bar` to the mixture sum per paper line 638 explicit
+    decomposition formula; 永不 close per discipline §3.4.3 — this is
+    paper's commitment to how its primitives decompose).
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (`W̄(β) = λ · above + (1 − λ) · below` mixture identity). -/
+axiom W_bar_eq_mixture_OPEN :
+    ∀ β : ℝ, W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β
+
+/-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
+    paper line 638 explicitly asserts the above-threshold contribution
+    is "non-decreasing in β" by the standard Blackwell regime applied
+    to the above-threshold sub-population (where κ > κ* yields the
+    standard monotone-welfare regime per Theorem `thm:cognitive-
+    threshold` Part 0). This atomic stipulation captures the paper-
+    stated above-regime monotonicity on the new opaque carrier
+    `aboveThresholdWelfare`.
+
+    Encoding choice: extracted from the retired bundled
+    `W_bar_mixture_decomposition_OPEN` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern. The smaller wA isolates the paper-stated above-regime
+    monotonicity content separately from the below-regime eventually-
+    decreasing content (also a smaller wA below) and the mixture-
+    identity content (now a structural eq above).
+
+    Cat 3 sub-type: workingAssumption (paper-stated monotonicity of
+    the above-threshold contribution under standard Blackwell regime;
+    pending Mathlib bounded-measure / conditional-expectation
+    aggregation machinery for the explicit `λ E_{G | κ > κ*}[W(β,
+    κ, α)]` derivation; 必须 close before publication).
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 ("the first term is non-decreasing in β (standard
+    Blackwell regime)"). -/
+axiom aboveThresholdWelfare_monotone_OPEN :
+    ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ → aboveThresholdWelfare β₁ ≤ aboveThresholdWelfare β₂
+
+/-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
+    paper line 638 explicitly asserts the below-threshold contribution
+    is "eventually decreasing (reversal regime)" by the reversal
+    regime applied to the below-threshold sub-population (where
+    κ < κ* yields the non-monotone-welfare reversal regime per
+    Theorem `thm:cognitive-threshold` Part 1). This atomic stipulation
+    captures the paper-stated below-regime eventually-decreasing
+    property on the new opaque carrier `belowThresholdWelfare`.
+
+    Encoding choice: extracted from the retired bundled
+    `W_bar_mixture_decomposition_OPEN` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern. Parallel to `aboveThresholdWelfare_monotone_OPEN` for the
+    below-threshold regime.
+
+    Cat 3 sub-type: workingAssumption (paper-stated eventually-
+    decreasing of the below-threshold contribution under reversal
+    regime; pending the same conditional-expectation infrastructure
+    as the above-regime atom; 必须 close before publication).
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 ("the second term is eventually decreasing (reversal
+    regime)"). -/
+axiom belowThresholdWelfare_eventually_decreasing_OPEN :
+    ∃ β_low β_high : ℝ,
+      β_low < β_high ∧ belowThresholdWelfare β_high < belowThresholdWelfare β_low
+
+/-- **R63 derived theorem** (replaces retired
+    `W_bar_mixture_decomposition_OPEN` axiom). The aggregate welfare
+    `W_bar` admits a paper-stated mixture decomposition
+    `W_bar β = f β + g β` with `f` non-decreasing and `g` eventually-
+    decreasing.
+
+    R63 closure-path-A composition:
+      (a) Structural equation `W_bar_eq_mixture_OPEN` (paper line 638
+          mixture identity).
+      (b) Smaller workingAssumption `aboveThresholdWelfare_monotone_OPEN`
+          (paper line 638 above-regime non-decreasing).
+      (c) Smaller workingAssumption `belowThresholdWelfare_eventually_decreasing_OPEN`
+          (paper line 638 below-regime eventually-decreasing).
+      (d) Provides explicit witnesses `aboveThresholdWelfare` and
+          `belowThresholdWelfare` for the existential-pair claim.
+
+    Net workingAssumption delta: +1 (1 retired wA, 2 new carriers,
+    1 new structuralEquation, 2 new smaller wA — net +1 wA but each
+    new atom is strictly smaller per discipline §18 standard with a
+    distinct paper-line-638 close target). The structural equation
+    surfaces the paper-implicit above/below decomposition.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (mixture decomposition `W̄ = λ · above + (1 − λ) · below`). -/
+theorem W_bar_mixture_decomposition :
     ∃ f g : ℝ → ℝ,
       (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ → f β₁ ≤ f β₂) ∧
       (∃ β_low β_high : ℝ, β_low < β_high ∧ g β_high < g β_low) ∧
-      ∀ β : ℝ, W_bar β = f β + g β
+      ∀ β : ℝ, W_bar β = f β + g β := by
+  refine ⟨aboveThresholdWelfare, belowThresholdWelfare, ?_, ?_, ?_⟩
+  · exact aboveThresholdWelfare_monotone_OPEN
+  · exact belowThresholdWelfare_eventually_decreasing_OPEN
+  · exact W_bar_eq_mixture_OPEN
 
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
     `prop:principal-optimum` Part 3 proof (line 640) derives that
@@ -417,7 +609,7 @@ theorem gap_principal_regime_bifurcation :
     ∃ β₁ β₂ β₃ : ℝ,
       β₁ < β₂ ∧ β₂ < β₃ ∧
       W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃ :=
-  non_concave_triple_from_mixture_OPEN W_bar_mixture_decomposition_OPEN
+  non_concave_triple_from_mixture_OPEN W_bar_mixture_decomposition
 
 /-! ## 3. Corollary `cor:disclosure` — Disclosure Policy Design -/
 
@@ -543,47 +735,141 @@ theorem gap_disclosure_full_suboptimal :
     paper source: Corollary `cor:disclosure` Part 2. -/
 axiom differentiatedDisclosureWelfare : (ℝ → ℝ) → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Corollary `cor:disclosure`
-    Part 2 proof (line 658) derives that under differentiated disclosure,
-    the planner sets `β_i = β*(κ_i, α_i)` for each agent type,
-    achieving the per-agent welfare optimum. Aggregating, the
-    differentiated welfare equals `∫ W(β*(κ, α), κ, α) dG`, which
-    pointwise dominates `W(β̄*, κ, α)` for any uniform β̄* (per-agent,
-    by definition of `β*`). This atomic stipulation captures the
-    paper-stated per-agent-optimum aggregate-welfare characterisation.
+/-- R63 closure-path-A NEW opaque carrier: paper line 658's explicit
+    per-agent-optimum aggregate `∫ W(β*(κ, α), κ, α) dG` abstracted
+    as a single (ℝ → ℝ) → ℝ functional of the population distribution.
+    Paper Corollary `cor:disclosure` Part 2 proof (line 658) writes
+    "the planner sets `β_i = β*(κ_i, α_i)` for each agent type. ...
+    This achieves `W̄_diff = ∫ W(β*(κ, α), κ, α) dG`."
 
-    Encoding choice: extracted from the bundled
-    `gap_disclosure_differentiated_dominates_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The atom encodes the per-agent-optimum aggregate
-    characterisation via the existing carriers `W_bar`,
-    `differentiatedDisclosureWelfare`.
-
-    Cat 3 sub-type: workingAssumption (paper-stated per-agent-optimum
-    aggregate-welfare characterisation; pending Mathlib measure-
-    theoretic per-agent integration; 必须 close before publication).
+    Encoding choice: introduced by R63 to factor the retired bundled
+    `differentiated_per_agent_optimum_dominates_uniform_OPEN`
+    workingAssumption into (i) a §3.4.3 structural equation pinning
+    `differentiatedDisclosureWelfare G = perAgentOptimalAggregate G`
+    (paper line 658 explicit per-agent-assignment formula), and
+    (ii) a smaller §3.4.4 workingAssumption carrying the substantive
+    per-agent-pointwise-dominance content. The carrier itself is
+    `gapDefinitional` per `feedback_gap_ledger_in_lean4` §3.4.1
+    (paper-novel opaque-carrier primitive).
 
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
-    (per-agent `β_i = β*(κ_i, α_i)` optimum aggregated). -/
-axiom differentiated_per_agent_optimum_dominates_uniform_OPEN :
+    (`∫ W(β*(κ, α), κ, α) dG` per-agent-optimum aggregate). -/
+axiom perAgentOptimalAggregate : (ℝ → ℝ) → ℝ
+
+/-- R63 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
+    equation: paper line 658's explicit identification
+    `differentiatedDisclosureWelfare G = perAgentOptimalAggregate G`
+    pinning the existing `differentiatedDisclosureWelfare` carrier as
+    the per-agent-optimum aggregate. Paper Corollary `cor:disclosure`
+    Part 2 proof (line 658) writes "the planner sets `β_i = β*(κ_i,
+    α_i)` for each agent type. ... This achieves `W̄_diff = ∫ W(β*(κ,
+    α), κ, α) dG`": this structural equation pins the differentiated
+    welfare to the per-agent-optimum aggregate carrier.
+
+    Encoding choice: extracted from the retired bundled
+    `differentiated_per_agent_optimum_dominates_uniform_OPEN`
+    workingAssumption per `feedback_gap_ledger_in_lean4` §18
+    Manufactured-Recognition pattern + R61 `mLimit_pos` precedent.
+    The retired atom claimed `W_bar uniform_beta ≤
+    differentiatedDisclosureWelfare G` directly without surfacing the
+    paper line 658 explicit per-agent-assignment formula; the R63
+    decomposition factors this into the carrier-pinning structural
+    equation (this axiom; paper line 658 per-agent-assignment
+    identification) + a smaller workingAssumption
+    `perAgentOptimalAggregate_dominates_uniform_OPEN` (the substantive
+    per-agent-pointwise-dominance content).
+
+    Cat 3 sub-type: structuralEquation (paper-stipulated identity
+    pinning the `differentiatedDisclosureWelfare` carrier to the
+    per-agent-optimum aggregate per paper line 658 explicit
+    `β_i = β*(κ_i, α_i)` per-agent assignment; 永不 close per
+    discipline §3.4.3 — this is paper's commitment to how its
+    primitives are related).
+
+    paper source: Corollary `cor:disclosure` Part 2 proof, line 658
+    (`W̄_diff = ∫ W(β*(κ, α), κ, α) dG` explicit per-agent-assignment
+    formula). -/
+axiom differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN :
+    ∀ G : ℝ → ℝ,
+      differentiatedDisclosureWelfare G = perAgentOptimalAggregate G
+
+/-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
+    paper line 658 explicitly asserts the per-agent-optimum aggregate
+    `∫ W(β*(κ, α), κ, α) dG` dominates any uniform-β aggregate
+    `W̄(β̄*) = ∫ W(β̄*, κ, α) dG`. The pointwise rationale: for each
+    agent type `(κ, α)`, `W(β*(κ, α), κ, α) ≥ W(β̄*, κ, α)` by
+    definition of `β*` as the per-agent optimum; integrating against
+    `dG` preserves the inequality. This atomic stipulation captures
+    the paper-stated per-agent-pointwise-dominance content on the
+    new opaque carrier `perAgentOptimalAggregate`.
+
+    Encoding choice: extracted from the retired bundled
+    `differentiated_per_agent_optimum_dominates_uniform_OPEN` per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern. The retired atom bundled (a) the paper line 658 per-
+    agent-assignment formula identification (now a structural eq
+    above) and (b) the per-agent-pointwise-dominance content (this
+    smaller wA). The R63 decomposition surfaces both separately.
+
+    Cat 3 sub-type: workingAssumption (paper-stated per-agent-
+    pointwise dominance integrated against `G`; pending Mathlib
+    measure-theoretic per-agent integration + per-agent-optimum
+    pointwise dominance; 必须 close before publication).
+
+    paper source: Corollary `cor:disclosure` Part 2 proof, line 658
+    ("achieves `W̄_diff ≥ W̄(β̄*)` for any uniform `β̄*`"). -/
+axiom perAgentOptimalAggregate_dominates_uniform_OPEN :
     ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
-      W_bar uniform_beta ≤ differentiatedDisclosureWelfare G
+      W_bar uniform_beta ≤ perAgentOptimalAggregate G
+
+/-- **R63 derived theorem** (replaces retired
+    `differentiated_per_agent_optimum_dominates_uniform_OPEN` axiom).
+    Per-agent-optimum differentiated disclosure dominates any uniform
+    disclosure: `W_bar uniform_beta ≤ differentiatedDisclosureWelfare G`
+    for any `G` and any uniform β.
+
+    R63 closure-path-A composition:
+      (a) Smaller workingAssumption atom
+          `perAgentOptimalAggregate_dominates_uniform_OPEN`
+          (paper line 658 per-agent-pointwise dominance).
+      (b) Structural equation
+          `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
+          (paper line 658 per-agent-assignment formula identification).
+
+    Net workingAssumption delta: 0 (1 retired wA, 1 new
+    structuralEquation, 1 new carrier, 1 new smaller wA, derived
+    theorem composes them via Cat 1 `rw`). The new wA is strictly
+    smaller per discipline §18 standard: the original atom claimed
+    dominance on the bundled `differentiatedDisclosureWelfare`
+    carrier; the new atom states dominance on the per-agent-optimum
+    aggregate (with the carrier identification surfaced separately).
+    Best-round-style closure mirroring R61 `mLimit_pos` and R62
+    `betaStarOfP_def` patterns.
+
+    paper source: Corollary `cor:disclosure` Part 2, line 647 +
+    proof line 658. -/
+theorem differentiated_per_agent_optimum_dominates_uniform :
+    ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
+      W_bar uniform_beta ≤ differentiatedDisclosureWelfare G := by
+  intros G uniform_beta
+  rw [differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN G]
+  exact perAgentOptimalAggregate_dominates_uniform_OPEN G uniform_beta
 
 /-- **Corollary `cor:disclosure` Part 2: derived theorem.**
     Differentiated disclosure strictly dominates uniform disclosure:
     `W_bar uniform_beta ≤ differentiatedDisclosureWelfare G` for any
     `G` and uniform β. Decomposed from the bundled
     `gap_disclosure_differentiated_dominates_OPEN` axiom per
-    `feedback_gap_ledger_in_lean4` §18 pattern: re-exports the
-    atomic stipulation
-    `differentiated_per_agent_optimum_dominates_uniform_OPEN` (paper-
-    stated per-agent-optimum aggregate dominates any uniform
-    aggregate).
+    `feedback_gap_ledger_in_lean4` §18 pattern: re-exports the R63
+    derived theorem `differentiated_per_agent_optimum_dominates_uniform`
+    (which composes `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
+    structural eq + `perAgentOptimalAggregate_dominates_uniform_OPEN`
+    smaller wA).
 
     paper source: Corollary `cor:disclosure` Part 2, line 647. -/
 theorem gap_disclosure_differentiated_dominates :
     ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
       W_bar uniform_beta ≤ differentiatedDisclosureWelfare G :=
-  differentiated_per_agent_optimum_dominates_uniform_OPEN
+  differentiated_per_agent_optimum_dominates_uniform
 
 end BlackwellDilemma

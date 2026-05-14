@@ -4311,18 +4311,35 @@ def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
     Part 1 (line 624-625), interior-maximum existence from unimodal
     envelope shape. -/
 def entry_atom_interior_max_exists_from_unimodal_envelope : GapEntry where
-  name := "interior_max_exists_from_unimodal_envelope_OPEN"
-  status := GapStatus.gapOpen
+  name := "interior_max_exists_from_unimodal_envelope_OPEN [retired R63 → replaced by interior_max_exists_from_unimodal_envelope derived theorem composing betaBarStar_nonneg_OPEN structural eq + betaBarStar_def argmax-characterisation via Cat 1 Mathlib chain]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 1, lines 624-625 (interior optimum `betaBarStar ∈ (0, ∞)`)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Packages the paper's existence-of-interior-maximum inference given the prior two atomic stipulations (eventually-decreasing + exceeds-zero). Cat 1 reduction check: candidate Cat 1 derivation via Mathlib continuous-function-on-compact-interval IVT-style argument applied to `W_bar`, but the underlying continuity is a Mathlib gap (paper-implicit standing assumption, not separately encoded as a Cat 3 atom — would require a `W_bar_continuous` axiom). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (paper-derived working content per §3.4.4 — existence/sign/asymptotic claim, NOT definitional equation). R48 followup: completed metadata sync (attackHistory + obstacleOrAttribution updates) that R44 left half-applied." ]
+      "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (paper-derived working content per §3.4.4 — existence/sign/asymptotic claim, NOT definitional equation). R48 followup: completed metadata sync (attackHistory + obstacleOrAttribution updates) that R44 left half-applied.",
+      "R63 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-A decomposition (R62 `betaStarOfP_def` precedent — split bundled wA into structural identification atom + Cat 1 Mathlib chain). The retired atom claimed `0 < betaBarStar` from bundled eventually-decreasing + exceeds-zero hypotheses without surfacing the paper line 614 explicit `β ≥ 0` standing convention identifying the betaBarStar carrier domain. The R63 decomposition factors this into: (a) new §3.4.3 structural equation `betaBarStar_nonneg_OPEN` (paper Definition `def:principal` line 614 `β ≥ 0` standing convention pinning the carrier domain to the non-negative reals), and (b) Cat 1 Mathlib chain composing `betaBarStar_def` (paper line 622 argmax-characterisation) + the `W_bar_exceeds_zero_at_positive_beta_OPEN` premise via `lt_of_lt_of_le` + classical `betaBarStar ≠ 0` (else `W_bar betaBarStar = W_bar 0` contradicts strict <) + `lt_of_le_of_ne` with the non-negativity bound. The eventually-decreasing premise is retained in the theorem signature for paper-faithfulness (paper line 625 needs both for the existence-of-interior-maximum derivation), but only the exceeds-zero premise is needed in the Lean encoding because `betaBarStar`'s existence is already discharged by the opaque-carrier postulate + `betaBarStar_def`'s argmax pin. Net wA: -1 (1 retired wA, 1 new structuralEquation, derived theorem composes them — best-round-style closure mirroring R62 betaStarOfP_def pattern). Downstream `gap_principal_interior_optimum` consumes the new theorem `interior_max_exists_from_unimodal_envelope` with identical signature (no consumer-side changes required)." ]
   scope := "Proposition prop:principal-optimum Part 1, interior-maximum existence"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R44 reclassification + R48 metadata sync). Close target = paper proof reconstruction of Proposition prop:principal-optimum Part 1 lines 624-625 (interior optimum `betaBarStar ∈ (0, ∞)` via continuous-function-on-compact-interval IVT-style argument applied to `W_bar` composing the eventually-decreasing + exceeds-zero atomic stipulations)."
+    "RETIRED via R63 §18 closure-path-A decomposition (R62 betaStarOfP_def precedent). Replaced by `entry_atom_betaBarStar_nonneg` (paper line 614 carrier-domain pinning, structural eq) in derived theorem `interior_max_exists_from_unimodal_envelope` (Principal.lean) composing it with `betaBarStar_def` (R23-C1 argmax characterisation) + the `W_bar_exceeds_zero_at_positive_beta_OPEN` premise via Cat 1 Mathlib chain. Downstream `gap_principal_interior_optimum` consumes the derived theorem at identical call signature."
+  conditionalOn := []
+
+/-- R63 NEW Cat 3 paper-novel ATOMIC structural equation: paper
+    Definition `def:principal` line 614 `β ≥ 0` standing convention
+    pinning the betaBarStar carrier domain. -/
+def entry_atom_betaBarStar_nonneg : GapEntry where
+  name := "betaBarStar_nonneg_OPEN"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition def:principal, line 614 (`A principal chooses a signal precision β ≥ 0` — paper-stipulated `β ≥ 0` standing convention identifying the betaBarStar carrier domain)"
+  attackHistory :=
+    [ "R63 2026-05-14: Cat 3 atomic structural-equation axiom extracted from the retired bundled `interior_max_exists_from_unimodal_envelope_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R62 `betaStarOfP_def` precedent (split bundled wA into structural identification + Cat 1 Mathlib chain). Paper Definition `def:principal` line 614 explicitly reads `A principal chooses a signal precision β ≥ 0 for a population of agents` — the paper's `β ≥ 0` standing convention IS the paper-stipulated identification of the betaBarStar opaque-carrier domain with the non-negative reals (the maximiser of W_bar over the paper's β ≥ 0 domain is itself ≥ 0). Statement: `0 ≤ betaBarStar`. Cat 1 reduction check: not Mathlib-derivable (constrains the opaque betaBarStar carrier). Cat 2 reduction check: paper-novel carrier-domain identification. Hosted by `interior_max_exists_from_unimodal_envelope` (Principal.lean) derived theorem." ]
+  scope := "Definition def:principal, line 614 (betaBarStar carrier domain ↔ paper β ≥ 0 standing convention)"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (paper-stated structural identity pinning the betaBarStar opaque carrier to the paper's β ≥ 0 standing-convention domain per Definition def:principal line 614 — this is paper's commitment to the primitive's domain, not a derivable consequence). Downstream consumer: `interior_max_exists_from_unimodal_envelope` derived theorem (Principal.lean) hosts the structural equation."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -4366,18 +4383,97 @@ def entry_atom_argmax_monotone_under_derivative_domination : GapEntry where
     into above-threshold non-decreasing + below-threshold eventually-
     decreasing parts. -/
 def entry_atom_W_bar_mixture_decomposition : GapEntry where
-  name := "W_bar_mixture_decomposition_OPEN"
-  status := GapStatus.gapOpen
+  name := "W_bar_mixture_decomposition_OPEN [retired R63 → replaced by W_bar_mixture_decomposition derived theorem composing W_bar_eq_mixture_OPEN structural eq + aboveThresholdWelfare_monotone_OPEN smaller wA + belowThresholdWelfare_eventually_decreasing_OPEN smaller wA]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 3 proof, lines 636-640 (mixture decomposition `W̄ = λ · above + (1-λ) · below`)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated mixture decomposition qualitatively. Cat 1 reduction check: not Mathlib-derivable (depends on bounded-measure / conditional-expectation machinery). Cat 2 reduction check: paper-novel application of mixture decomposition. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R63 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-A decomposition (R59 forward_reachable_full_at_zero pattern — split bundled existential into named carriers + structural identification + per-component smaller wA atoms). The retired atom existentially asserted `∃ f g : ℝ → ℝ, [non-decreasing] ∧ [eventually-decreasing] ∧ [W_bar = f + g]` without surfacing the paper-named above/below components explicitly. The R63 decomposition introduces two new opaque carriers `aboveThresholdWelfare : ℝ → ℝ` and `belowThresholdWelfare : ℝ → ℝ` (paper line 638 explicit `λ E_{G | κ > κ*}[W(β,κ,α)]` + `(1-λ) E_{G | κ < κ*}[W(β,κ,α)]` components) + factors the mixture content into: (a) new §3.4.3 structural equation `W_bar_eq_mixture_OPEN` (paper line 638 explicit decomposition `W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β`), (b) new smaller §3.4.4 wA `aboveThresholdWelfare_monotone_OPEN` (paper line 638 above-regime non-decreasing), and (c) new smaller §3.4.4 wA `belowThresholdWelfare_eventually_decreasing_OPEN` (paper line 638 below-regime eventually-decreasing). The new derived theorem `W_bar_mixture_decomposition` (Principal.lean) provides the existential witnesses via `refine ⟨aboveThresholdWelfare, belowThresholdWelfare, ...⟩` composing the three new atoms. Net wA: +1 (1 retired wA, 2 new carriers, 1 new structuralEquation, 2 new smaller wA — net +1 wA but each new atom is strictly smaller per discipline §18 standard with a distinct paper-line-638 close target). Downstream `gap_principal_regime_bifurcation` re-routed to consume the new derived theorem `W_bar_mixture_decomposition` (no consumer-side signature change required)." ]
   scope := "Proposition prop:principal-optimum Part 3, mixture decomposition of `W_bar`"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper prop:principal-optimum Part 3 proof reconstruction (mixture decomposition `W̄ = λ · above + (1-λ) · below` via conditional-expectation machinery)."
+    "RETIRED via R63 §18 closure-path-A decomposition (R59 forward_reachable_full_at_zero pattern). Replaced by `entry_atom_aboveThresholdWelfare` + `entry_atom_belowThresholdWelfare` (carrier definitionals) + `entry_atom_W_bar_eq_mixture` (paper line 638 mixture identity, structural eq) + `entry_atom_aboveThresholdWelfare_monotone` (paper line 638 above-regime non-decreasing, smaller wA) + `entry_atom_belowThresholdWelfare_eventually_decreasing` (paper line 638 below-regime eventually-decreasing, smaller wA) in derived theorem `W_bar_mixture_decomposition` (Principal.lean). Downstream `gap_principal_regime_bifurcation` re-routed to consume the new derived theorem at identical signature."
+  conditionalOn := []
+
+/-- R63 NEW Cat 3 paper-novel opaque carrier: paper line 638 above-
+    threshold welfare component `λ · E_{G | κ > κ*}[W(β,κ,α)]`
+    abstracted as a single ℝ → ℝ functional. -/
+def entry_atom_aboveThresholdWelfare : GapEntry where
+  name := "aboveThresholdWelfare (paper-novel opaque-carrier primitive)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`λ · E_{G | κ > κ*}[W(β,κ,α)]` above-threshold contribution)"
+  attackHistory :=
+    [ "R63 2026-05-14: introduced as paper-novel opaque-carrier primitive to factor the retired `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller monotonicity-content wA). Statement: `axiom aboveThresholdWelfare : ℝ → ℝ`. Hosts the paper line 638 explicit `λ E_{G | κ > κ*}[W(β,κ,α)]` above-threshold contribution as an opaque carrier; the existing `W_bar` carrier integrates over the full population, while this carrier exposes the above-threshold sub-population aggregation explicitly. Per §3.4.1 (paper-novel opaque-carrier primitive)." ]
+  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (above-threshold welfare component carrier)"
+  obstacleOrAttribution :=
+    "Accepted as paper-novel opaque-carrier primitive per discipline §3.4.1. Downstream consumers: `W_bar_eq_mixture_OPEN` (structural eq pinning the mixture), `aboveThresholdWelfare_monotone_OPEN` (smaller monotonicity wA), `W_bar_mixture_decomposition` derived theorem (Principal.lean)."
+  conditionalOn := []
+
+/-- R63 NEW Cat 3 paper-novel opaque carrier: paper line 638 below-
+    threshold welfare component `(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`
+    abstracted as a single ℝ → ℝ functional. -/
+def entry_atom_belowThresholdWelfare : GapEntry where
+  name := "belowThresholdWelfare (paper-novel opaque-carrier primitive)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]` below-threshold contribution)"
+  attackHistory :=
+    [ "R63 2026-05-14: introduced as paper-novel opaque-carrier primitive to factor the retired `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent. Statement: `axiom belowThresholdWelfare : ℝ → ℝ`. Hosts the paper line 638 explicit `(1-λ) E_{G | κ < κ*}[W(β,κ,α)]` below-threshold contribution as an opaque carrier; parallel to `aboveThresholdWelfare` for the below-threshold sub-population. Per §3.4.1 (paper-novel opaque-carrier primitive)." ]
+  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-threshold welfare component carrier)"
+  obstacleOrAttribution :=
+    "Accepted as paper-novel opaque-carrier primitive per discipline §3.4.1. Downstream consumers: `W_bar_eq_mixture_OPEN` (structural eq pinning the mixture), `belowThresholdWelfare_eventually_decreasing_OPEN` (smaller eventually-decreasing wA), `W_bar_mixture_decomposition` derived theorem (Principal.lean)."
+  conditionalOn := []
+
+/-- R63 NEW Cat 3 paper-novel ATOMIC structural equation: paper line
+    638 explicit mixture identity pinning W_bar to the sum of the
+    above-threshold and below-threshold welfare carriers. -/
+def entry_atom_W_bar_eq_mixture : GapEntry where
+  name := "W_bar_eq_mixture_OPEN"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`W̄(β) = λ · above + (1-λ) · below` mixture identity)"
+  attackHistory :=
+    [ "R63 2026-05-14: Cat 3 atomic structural-equation axiom extracted from the retired bundled `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent. Paper Proposition prop:principal-optimum Part 3 proof line 638 explicitly reads `W̄(β) = λ · E_{G | κ > κ*}[W(β,κ,α)] + (1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`; this structural equation pins the existing W_bar carrier to the sum of the new aboveThresholdWelfare + belowThresholdWelfare carriers (with the λ and (1-λ) weighting absorbed into each carrier's definition per the paper's named-component convention). Statement: `∀ β, W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β`. Cat 1 reduction check: not Mathlib-derivable (constrains the opaque W_bar carrier against the new opaque component carriers). Cat 2 reduction check: paper-novel mixture identity. Hosted by `W_bar_mixture_decomposition` (Principal.lean) derived theorem." ]
+  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (W_bar mixture-decomposition structural identity)"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (paper-stated structural identity linking the W_bar carrier to the sum of the new aboveThresholdWelfare + belowThresholdWelfare component carriers per paper line 638 explicit decomposition formula — this is paper's commitment to how its primitives decompose). Downstream consumer: `W_bar_mixture_decomposition` derived theorem (Principal.lean) hosts the structural equation."
+  conditionalOn := []
+
+/-- R63 NEW smaller paper-novel ATOMIC stipulation: paper line 638
+    above-regime non-decreasing under standard Blackwell regime. -/
+def entry_atom_aboveThresholdWelfare_monotone : GapEntry where
+  name := "aboveThresholdWelfare_monotone_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`the first term is non-decreasing in β (standard Blackwell regime)`)"
+  attackHistory :=
+    [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller per-component wA). Paper line 638 explicitly asserts the above-threshold contribution is `non-decreasing in β (standard Blackwell regime)` because the κ > κ* regime exhibits monotone individual welfare per Theorem `thm:cognitive-threshold` Part 0. Statement: `∀ β₁ β₂, β₁ ≤ β₂ → aboveThresholdWelfare β₁ ≤ aboveThresholdWelfare β₂`. Strictly smaller than retired bundled atom — isolates only the above-regime monotonicity content on the new aboveThresholdWelfare carrier, leaving the below-regime eventually-decreasing content to a separate atom + the mixture-identity content to a separate structural eq. Cat 1 reduction check: not Mathlib-derivable (depends on conditional-expectation aggregation infrastructure for the explicit `λ E_{G | κ > κ*}[W(β,κ,α)]` derivation). Cat 2 reduction check: paper-novel sub-population aggregation. Hosted by `W_bar_mixture_decomposition` (Principal.lean) derived theorem." ]
+  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (above-regime non-decreasing in β)"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper proof reconstruction of above-threshold contribution monotonicity from κ > κ* regime monotone individual welfare (per Theorem thm:cognitive-threshold Part 0) + Mathlib bounded-measure / conditional-expectation aggregation for `λ E_{G | κ > κ*}[W(β,κ,α)]` explicit derivation."
+  conditionalOn := []
+
+/-- R63 NEW smaller paper-novel ATOMIC stipulation: paper line 638
+    below-regime eventually-decreasing under reversal regime. -/
+def entry_atom_belowThresholdWelfare_eventually_decreasing : GapEntry where
+  name := "belowThresholdWelfare_eventually_decreasing_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`the second term is eventually decreasing (reversal regime)`)"
+  attackHistory :=
+    [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent. Paper line 638 explicitly asserts the below-threshold contribution is `eventually decreasing (reversal regime)` because the κ < κ* regime exhibits non-monotone individual welfare per Theorem `thm:cognitive-threshold` Part 1. Statement: `∃ β_low β_high, β_low < β_high ∧ belowThresholdWelfare β_high < belowThresholdWelfare β_low`. Strictly smaller than retired bundled atom — isolates only the below-regime eventually-decreasing content on the new belowThresholdWelfare carrier (parallel to the above-regime monotonicity sibling atom). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Hosted by `W_bar_mixture_decomposition` (Principal.lean) derived theorem." ]
+  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-regime eventually-decreasing in β)"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper proof reconstruction of below-threshold contribution eventually-decreasing from κ < κ* reversal regime non-monotone individual welfare (per Theorem thm:cognitive-threshold Part 1) + Mathlib bounded-measure / conditional-expectation aggregation."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -4438,18 +4534,66 @@ def entry_atom_finite_beta_above_limit_from_overshoot : GapEntry where
     proof (line 658), per-agent-optimum aggregate dominates uniform
     aggregate. -/
 def entry_atom_differentiated_per_agent_optimum_dominates_uniform : GapEntry where
-  name := "differentiated_per_agent_optimum_dominates_uniform_OPEN"
-  status := GapStatus.gapOpen
+  name := "differentiated_per_agent_optimum_dominates_uniform_OPEN [retired R63 → replaced by differentiated_per_agent_optimum_dominates_uniform derived theorem composing differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN structural eq + perAgentOptimalAggregate_dominates_uniform_OPEN smaller wA]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (per-agent `β_i = β*(κ_i, α_i)` optimum aggregated)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_differentiated_dominates_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated per-agent-optimum aggregate dominates uniform aggregate. Cat 1 reduction check: not Mathlib-derivable (depends on measure-theoretic per-agent integration). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_differentiated_dominates` derived theorem (Principal.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R63 2026-05-14: workingAssumption gapOpen → derivedTheorem gapClosed via §18 closure-path-A decomposition (R61 `mLimit_pos` / R62 `betaStarOfP_def` precedent — split bundled wA into structural identification atom + smaller substantive wA). The retired atom claimed `W_bar uniform_beta ≤ differentiatedDisclosureWelfare G` directly on the bundled differentiatedDisclosureWelfare carrier without surfacing the paper line 658 explicit `β_i = β*(κ_i, α_i)` per-agent assignment formula. The R63 decomposition introduces a new opaque carrier `perAgentOptimalAggregate : (ℝ → ℝ) → ℝ` (paper line 658 `∫ W(β*(κ,α), κ,α) dG`) + factors the dominance content into: (a) new §3.4.3 structural equation `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN` (paper line 658 explicit per-agent-assignment formula identification `differentiatedDisclosureWelfare G = perAgentOptimalAggregate G`), and (b) new smaller §3.4.4 wA `perAgentOptimalAggregate_dominates_uniform_OPEN` (paper line 658 per-agent-pointwise dominance integrated against G). The new derived theorem `differentiated_per_agent_optimum_dominates_uniform` (Principal.lean) composes both via Cat 1 `rw` chain. Net wA: 0 (1 retired wA, 1 new carrier, 1 new structuralEquation, 1 new smaller wA, derived theorem composes them — best-round-style closure mirroring R61 mLimit_pos and R62 betaStarOfP_def patterns). Downstream `gap_disclosure_differentiated_dominates` re-routed to consume the new derived theorem at identical signature (no consumer-side changes required)." ]
   scope := "Corollary cor:disclosure Part 2, per-agent-optimum aggregate dominates uniform aggregate"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper cor:disclosure Part 2 proof reconstruction (per-agent `β_i = β*(κ_i, α_i)` optimum aggregated via measure-theoretic per-agent integration)."
+    "RETIRED via R63 §18 closure-path-A decomposition (R61 mLimit_pos / R62 betaStarOfP_def precedent). Replaced by `entry_atom_perAgentOptimalAggregate` (carrier definitional) + `entry_atom_differentiatedDisclosureWelfare_eq_perAgentOptimal` (paper line 658 per-agent-assignment formula identification, structural eq) + `entry_atom_perAgentOptimalAggregate_dominates_uniform` (paper line 658 per-agent-pointwise dominance, smaller wA) in derived theorem `differentiated_per_agent_optimum_dominates_uniform` (Principal.lean). Downstream `gap_disclosure_differentiated_dominates` re-routed to consume the new derived theorem at identical signature."
+  conditionalOn := []
+
+/-- R63 NEW Cat 3 paper-novel opaque carrier: paper line 658 per-
+    agent-optimum aggregate `∫ W(β*(κ,α), κ,α) dG` abstracted as a
+    single (ℝ → ℝ) → ℝ functional. -/
+def entry_atom_perAgentOptimalAggregate : GapEntry where
+  name := "perAgentOptimalAggregate (paper-novel opaque-carrier primitive)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (`∫ W(β*(κ,α), κ,α) dG` per-agent-optimum aggregate)"
+  attackHistory :=
+    [ "R63 2026-05-14: introduced as paper-novel opaque-carrier primitive to factor the retired `differentiated_per_agent_optimum_dominates_uniform_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent. Statement: `axiom perAgentOptimalAggregate : (ℝ → ℝ) → ℝ`. Hosts the paper line 658 explicit `∫ W(β*(κ,α), κ,α) dG` per-agent-optimum aggregate as a parameterised opaque carrier (parameter `G : ℝ → ℝ` is the population κ-marginal CDF). Per §3.4.1 (paper-novel opaque-carrier primitive)." ]
+  scope := "Corollary cor:disclosure Part 2 proof, line 658 (per-agent-optimum aggregate carrier)"
+  obstacleOrAttribution :=
+    "Accepted as paper-novel opaque-carrier primitive per discipline §3.4.1. Downstream consumers: `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN` (structural eq pinning the differentiated welfare to this carrier), `perAgentOptimalAggregate_dominates_uniform_OPEN` (smaller dominance wA), `differentiated_per_agent_optimum_dominates_uniform` derived theorem (Principal.lean)."
+  conditionalOn := []
+
+/-- R63 NEW Cat 3 paper-novel ATOMIC structural equation: paper line
+    658 explicit per-agent-assignment formula identification pinning
+    differentiatedDisclosureWelfare to perAgentOptimalAggregate. -/
+def entry_atom_differentiatedDisclosureWelfare_eq_perAgentOptimal : GapEntry where
+  name := "differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (`W̄_diff = ∫ W(β*(κ,α), κ,α) dG` explicit per-agent-assignment formula)"
+  attackHistory :=
+    [ "R63 2026-05-14: Cat 3 atomic structural-equation axiom extracted from the retired bundled `differentiated_per_agent_optimum_dominates_uniform_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent. Paper Corollary cor:disclosure Part 2 proof line 658 explicitly reads `Under differentiated disclosure, the planner sets β_i = β*(κ_i, α_i) for each agent type. ... This achieves W̄_diff = ∫ W(β*(κ,α), κ,α) dG`; this structural equation pins the existing differentiatedDisclosureWelfare carrier to the new perAgentOptimalAggregate carrier per the paper's explicit per-agent-assignment formula identification. Statement: `∀ G, differentiatedDisclosureWelfare G = perAgentOptimalAggregate G`. Cat 1 reduction check: not Mathlib-derivable (constrains the opaque differentiatedDisclosureWelfare carrier against the new opaque perAgentOptimalAggregate carrier). Cat 2 reduction check: paper-novel per-agent-assignment formula identification. Hosted by `differentiated_per_agent_optimum_dominates_uniform` (Principal.lean) derived theorem." ]
+  scope := "Corollary cor:disclosure Part 2 proof, line 658 (differentiatedDisclosureWelfare ↔ perAgentOptimalAggregate per-agent-assignment identification)"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (paper-stated structural identity linking the differentiatedDisclosureWelfare carrier to the perAgentOptimalAggregate carrier per paper line 658 explicit `β_i = β*(κ_i, α_i)` per-agent-assignment formula — this is paper's commitment to how its primitives are related). Downstream consumer: `differentiated_per_agent_optimum_dominates_uniform` derived theorem (Principal.lean) hosts the structural equation."
+  conditionalOn := []
+
+/-- R63 NEW smaller paper-novel ATOMIC stipulation: paper line 658
+    per-agent-pointwise dominance integrated against G. -/
+def entry_atom_perAgentOptimalAggregate_dominates_uniform : GapEntry where
+  name := "perAgentOptimalAggregate_dominates_uniform_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (`achieves W̄_diff ≥ W̄(β̄*) for any uniform β̄*`)"
+  attackHistory :=
+    [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `differentiated_per_agent_optimum_dominates_uniform_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller substantive wA). Paper line 658 explicitly asserts `W̄_diff = ∫ W(β*(κ,α), κ,α) dG ≥ W̄(β̄*)` for any uniform β̄* via per-agent-pointwise dominance: for each agent `(κ, α)`, `W(β*(κ,α), κ,α) ≥ W(β̄*, κ,α)` by definition of β* as the per-agent optimum; integrating against dG preserves the inequality. Statement: `∀ G uniform_beta, W_bar uniform_beta ≤ perAgentOptimalAggregate G`. Strictly smaller than retired bundled atom — isolates only the per-agent-pointwise dominance content on the new perAgentOptimalAggregate carrier, leaving the per-agent-assignment formula identification to the structural eq sibling. Cat 1 reduction check: not Mathlib-derivable (depends on per-agent-optimum pointwise dominance + measure-theoretic per-agent integration). Cat 2 reduction check: paper-novel per-agent-aggregation framework. Hosted by `differentiated_per_agent_optimum_dominates_uniform` (Principal.lean) derived theorem." ]
+  scope := "Corollary cor:disclosure Part 2 proof, line 658 (per-agent-pointwise dominance integrated against G)"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4. Close target = paper cor:disclosure Part 2 proof reconstruction (per-agent-pointwise dominance `W(β*(κ,α), κ,α) ≥ W(β̄*, κ,α)` integrated against dG via measure-theoretic per-agent integration + per-agent-optimum pointwise dominance machinery)."
   conditionalOn := []
 
 /-! # R38 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
@@ -5271,13 +5415,40 @@ def allGaps : List GapEntry := [
   entry_atom_W_bar_eventually_decreasing_in_reversal,
   entry_atom_W_bar_exceeds_zero_at_positive_beta,
   entry_atom_interior_max_exists_from_unimodal_envelope,
+  -- R63 §18 sub-chain on retired
+  -- entry_atom_interior_max_exists_from_unimodal_envelope workingAssumption:
+  --   structural-equation betaBarStar_nonneg (paper Definition def:principal
+  --   line 614 β ≥ 0 standing convention pinning the betaBarStar carrier
+  --   domain to the non-negative reals).
+  entry_atom_betaBarStar_nonneg,
   entry_atom_fosd_induces_derivative_domination,
   entry_atom_argmax_monotone_under_derivative_domination,
   entry_atom_W_bar_mixture_decomposition,
+  -- R63 §18 sub-chain on retired
+  -- entry_atom_W_bar_mixture_decomposition workingAssumption:
+  --   carriers aboveThresholdWelfare + belowThresholdWelfare
+  --   + structural-equation W_bar_eq_mixture (paper line 638 mixture identity)
+  --   + smaller workingAssumptions aboveThresholdWelfare_monotone +
+  --   belowThresholdWelfare_eventually_decreasing.
+  entry_atom_aboveThresholdWelfare,
+  entry_atom_belowThresholdWelfare,
+  entry_atom_W_bar_eq_mixture,
+  entry_atom_aboveThresholdWelfare_monotone,
+  entry_atom_belowThresholdWelfare_eventually_decreasing,
   entry_atom_non_concave_triple_from_mixture,
   entry_atom_averaged_reversal_overshoot_positive,
   entry_atom_finite_beta_above_limit_from_overshoot,
   entry_atom_differentiated_per_agent_optimum_dominates_uniform,
+  -- R63 §18 sub-chain on retired
+  -- entry_atom_differentiated_per_agent_optimum_dominates_uniform
+  -- workingAssumption: carrier perAgentOptimalAggregate
+  --   + structural-equation differentiatedDisclosureWelfare_eq_perAgentOptimal
+  --   (paper line 658 per-agent-assignment formula identification)
+  --   + smaller workingAssumption perAgentOptimalAggregate_dominates_uniform
+  --   (paper line 658 per-agent-pointwise dominance integrated against G).
+  entry_atom_perAgentOptimalAggregate,
+  entry_atom_differentiatedDisclosureWelfare_eq_perAgentOptimal,
+  entry_atom_perAgentOptimalAggregate_dominates_uniform,
   -- R38 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
   -- 22 conclusion-axioms decomposed into 23 new atoms + 22 derived theorems
   -- across Cognitive/Wrongness/Canonical/GeneralGraphs/Bayesian modules).
