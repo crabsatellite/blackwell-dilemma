@@ -376,8 +376,10 @@ namespace BlackwellDilemma.AxiomAudit
 -- equation `oracleValueAtRoot_TrapTree_def` (paper line 1041); see
 -- Ledger entry `entry_prop_error_compounding`.
 #print axioms BlackwellDilemma.TrapTree.gap_error_compounding_part2
--- Upper-bound half of the κ*(d) = Θ(log d) asymptotic (lower-bound half
--- remains an OPEN axiom pending tighter c_star_constant control).
+-- Upper-bound half of the κ*(d) = Θ(log d) asymptotic. Since R83 the
+-- lower-bound half is ALSO a genuine theorem (`kappaStar_depth_d_lower_bound`
+-- via weighted AM–GM), so the full Θ-asymptotic
+-- `bernoulli_real_power_estimate_OPEN` is no longer an OPEN axiom.
 #print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_upper_bound
 -- R23-C2 derived closures from Manufactured-Recognition-pattern atomic
 -- decomposition:
@@ -461,6 +463,12 @@ namespace BlackwellDilemma.AxiomAudit
 -- GeneralGraphs.lean §18 decomposition (3 derived theorems):
 #print axioms BlackwellDilemma.gap_general_tree
 #print axioms BlackwellDilemma.gap_cyclic_trap
+-- R83: `gap_kappaStar_depth_d_log_growth` re-exports the R83-closed
+-- `bernoulli_real_power_estimate_OPEN` (now a genuine theorem composing
+-- the weighted-AM–GM lower bound + the kernel-pure upper bound). The
+-- print should surface only [propext, Classical.choice, Quot.sound] +
+-- the opaque `c_star_constant` carrier + `gap_c_star_constant_pos_OPEN`
+-- — NO `bernoulli_real_power_estimate_OPEN` axiom (it is a theorem now).
 #print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_log_growth
 
 -- R58 closure-path-A/B individual atom prints + new derived theorem

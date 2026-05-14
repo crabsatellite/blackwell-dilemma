@@ -758,58 +758,11 @@ noncomputable def kappaStar_depth_d (d : ℕ) : ℝ :=
 /-- Convenience helper: `log_2 x = Real.log x / Real.log 2`. -/
 noncomputable def log_2 (x : ℝ) : ℝ := Real.log x / Real.log 2
 
-/-- **`κ*(d) = Θ(log d)`** asymptotic.
-
-    OBSTACLE (kept as axiom): the statement as written has `+ 1` as
-    the additive constant on the upper bound. Specialising at `d = 1`
-    (where `log_2 1 = 0`) requires
-    `κ*(1) = (1/2) log_2(1/c* + 1) ≤ c₂ · 0 + 1 = 1`,
-    i.e. `1/c* + 1 ≤ 4`, i.e. `c* ≥ 1/3`. Because
-    `c_star_constant` is opaque (only `0 < c_star_constant` is given
-    by `gap_c_star_constant_pos_OPEN`), no such lower bound is
-    available, so the statement as written is unprovable for
-    `c* ∈ (0, 1/3)`. A weaker statement with a third existentially
-    quantified additive constant `+ c₃` is provable from the closed
-    form using a case split on `c_star_constant ≤ 1` and
-    `Real.log_le_log` plus the bound `d²/c* + 1 ≤ d²/c* + d²` for
-    `d ≥ 1`. The corresponding lower bound `c₁ · log_2 d ≤ κ*(d)`
-    requires `c₁` to depend on `c_star_constant` (specifically,
-    `c₁ ≲ 1/c*` for `c*` large, since at `d = 2` we have
-    `κ*(2) = (1/2) log_2(4/c* + 1) → 0` as `c* → ∞`); the universal
-    quantifier `∃ c₁ c₂ : ℝ` admits this dependence in principle but
-    the closed-form witness requires non-trivial real-power
-    estimates (a Bernoulli-style bound `(1+1/K)^(log_2 d) ≤ d²/K + 1`)
-    not directly available in Mathlib's `Real.log` API at the
-    abstraction level used here.
-
-    paper source: Proposition `prop:error-compounding` Part 5, line 1044
-    ("κ*(d) = log_2 d + O(1) as d → ∞"). -/
-axiom bernoulli_real_power_estimate_OPEN :
-    ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
-      ∀ d : ℕ, 1 ≤ d →
-        c₁ * log_2 d ≤ kappaStar_depth_d d ∧
-        kappaStar_depth_d d ≤ c₂ * log_2 d + 1
-
-/-- **`κ*(d) = Θ(log d)`** asymptotic (derived theorem composing
-    `bernoulli_real_power_estimate_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern). The atom packages the
-    paper-stated lower-bound chain (`(1+1/K)^(log_2 d) ≤ d²/K + 1`
-    Bernoulli-style estimate) on the existing `kappaStar_depth_d`
-    and `log_2` carriers; the upper-bound half is closed kernel-pure
-    by `gap_kappaStar_depth_d_upper_bound`.
-
-    paper source: Proposition `prop:error-compounding` Part 5, line 1044. -/
-theorem gap_kappaStar_depth_d_log_growth :
-    ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
-      ∀ d : ℕ, 1 ≤ d →
-        c₁ * log_2 d ≤ kappaStar_depth_d d ∧
-        kappaStar_depth_d d ≤ c₂ * log_2 d + 1 :=
-  bernoulli_real_power_estimate_OPEN
-
 /-- **Upper-bound half** of the Θ-asymptotic: `κ*(d) ≤ log_2 d + c₃`
     for `d ≥ 1`, where `c₃ = (1/2) log_2(1/c* + 1)`. This is a
-    closed (kernel-pure) partial result; combined with a lower
-    bound it would give the full Θ-asymptotic.
+    closed (kernel-pure) partial result; combined with the R83
+    lower bound `kappaStar_depth_d_lower_bound` it gives the full
+    Θ-asymptotic (`bernoulli_real_power_estimate_OPEN`).
 
     Proof: for `d ≥ 1` (natural), `1 ≤ d²`, so
     `d²/c* + 1 ≤ d²/c* + d² = d² (1/c* + 1)`. Apply `log_2`
@@ -871,6 +824,165 @@ theorem gap_kappaStar_depth_d_upper_bound :
         ≤ Real.log ((d : ℝ)^2 * (1 / c_star_constant + 1)) := h_log_le
       _ = 2 * Real.log (d : ℝ) + Real.log (1 / c_star_constant + 1) := h_log_split
   · positivity
+
+/-- **R83 lower-bound half of the `κ*(d) = Θ(log d)` asymptotic.**
+    For `d ≥ 1` and the (opaque, positive) constant `c*`, the
+    weighted AM–GM inequality gives the Bernoulli-style power bound
+    `d^(2/(1+c*)) ≤ d²/c* + 1`, hence
+    `(1/(1+c*)) · log_2 d ≤ κ*(d)`.
+
+    Proof: weighted AM–GM (`Real.geom_mean_le_arith_mean2_weighted`)
+    with weights `w₁ = 1/(1+c*)`, `w₂ = c*/(1+c*)` and points
+    `p₁ = d²`, `p₂ = 1` yields
+    `(d²)^(1/(1+c*)) ≤ (d² + c*)/(1+c*)`. Rewriting
+    `(d²)^(1/(1+c*)) = d^(2/(1+c*))` (via `Real.rpow_natCast` +
+    `Real.rpow_mul`) and chaining with
+    `(d² + c*)/(1+c*) ≤ (d² + c*)/c* = d²/c* + 1` (since `c* ≤ 1+c*`)
+    gives `d^(2/(1+c*)) ≤ d²/c* + 1`. Applying `Real.log` monotonicity
+    (`Real.log_le_log`) and `Real.log_rpow` (`log (d^t) = t·log d` for
+    `d > 0`) gives `(2/(1+c*))·log d ≤ log(d²/c* + 1)`, i.e.
+    `(1/(1+c*))·log_2 d ≤ κ*(d)` after dividing by `2·log 2 > 0`.
+
+    paper source: Proposition `prop:error-compounding` Part 5, line 1044
+    (the `(1+1/K)^(log_2 d) ≤ d²/K + 1` Bernoulli-style estimate
+    underlying the `κ*(d) = log_2 d + O(1)` lower-bound half). -/
+private theorem kappaStar_depth_d_lower_bound (d : ℕ) (hd : 1 ≤ d) :
+    (1 / (1 + c_star_constant)) * log_2 d ≤ kappaStar_depth_d d := by
+  have hK : 0 < c_star_constant := gap_c_star_constant_pos_OPEN
+  have hd_real : (1 : ℝ) ≤ (d : ℝ) := by exact_mod_cast hd
+  have hd_pos : 0 < (d : ℝ) := lt_of_lt_of_le zero_lt_one hd_real
+  have hd_sq_pos : 0 < (d : ℝ) ^ 2 := by positivity
+  have h1K_pos : 0 < 1 + c_star_constant := by linarith
+  -- weights of the weighted AM–GM
+  set w₁ : ℝ := 1 / (1 + c_star_constant) with hw₁_def
+  set w₂ : ℝ := c_star_constant / (1 + c_star_constant) with hw₂_def
+  have hw₁_nonneg : 0 ≤ w₁ := by rw [hw₁_def]; positivity
+  have hw₂_nonneg : 0 ≤ w₂ := by rw [hw₂_def]; positivity
+  have hw_sum : w₁ + w₂ = 1 := by
+    rw [hw₁_def, hw₂_def]; field_simp
+  -- weighted AM–GM: `(d²)^w₁ · 1^w₂ ≤ w₁·d² + w₂·1`
+  have h_amgm :
+      ((d : ℝ) ^ 2) ^ w₁ * (1 : ℝ) ^ w₂
+        ≤ w₁ * (d : ℝ) ^ 2 + w₂ * 1 :=
+    Real.geom_mean_le_arith_mean2_weighted hw₁_nonneg hw₂_nonneg
+      (le_of_lt hd_sq_pos) (by norm_num) hw_sum
+  -- simplify the geometric-mean side: `1^w₂ = 1`,
+  -- `(d²)^w₁ = d^(2·w₁)`
+  have h_rpow_two : ((d : ℝ) ^ 2) ^ w₁ = (d : ℝ) ^ (2 * w₁) := by
+    rw [Real.rpow_mul (le_of_lt hd_pos), ← Real.rpow_natCast (d : ℝ) 2]
+    norm_num
+  have h_one_rpow : (1 : ℝ) ^ w₂ = 1 := Real.one_rpow w₂
+  -- arithmetic-mean side equals `(d² + c*)/(1+c*)`
+  have h_arith : w₁ * (d : ℝ) ^ 2 + w₂ * 1
+      = ((d : ℝ) ^ 2 + c_star_constant) / (1 + c_star_constant) := by
+    rw [hw₁_def, hw₂_def]; field_simp
+  have h_power_le_mean :
+      (d : ℝ) ^ (2 * w₁)
+        ≤ ((d : ℝ) ^ 2 + c_star_constant) / (1 + c_star_constant) := by
+    have := h_amgm
+    rw [h_rpow_two, h_one_rpow, mul_one, h_arith] at this
+    exact this
+  -- `(d² + c*)/(1+c*) ≤ d²/c* + 1`
+  have h_mean_le_target :
+      ((d : ℝ) ^ 2 + c_star_constant) / (1 + c_star_constant)
+        ≤ (d : ℝ) ^ 2 / c_star_constant + 1 := by
+    have h_num_pos : 0 < (d : ℝ) ^ 2 + c_star_constant := by positivity
+    have h_eq : (d : ℝ) ^ 2 / c_star_constant + 1
+        = ((d : ℝ) ^ 2 + c_star_constant) / c_star_constant := by
+      field_simp
+    rw [h_eq]
+    apply div_le_div_of_nonneg_left (le_of_lt h_num_pos) hK
+    linarith
+  -- chain: `d^(2·w₁) ≤ d²/c* + 1`
+  have h_power_le_target :
+      (d : ℝ) ^ (2 * w₁) ≤ (d : ℝ) ^ 2 / c_star_constant + 1 :=
+    le_trans h_power_le_mean h_mean_le_target
+  -- positivity of the rpow base for `log` monotonicity
+  have h_rpow_pos : 0 < (d : ℝ) ^ (2 * w₁) := Real.rpow_pos_of_pos hd_pos _
+  -- `Real.log` monotonicity + `Real.log_rpow`
+  have h_log_le :
+      (2 * w₁) * Real.log (d : ℝ)
+        ≤ Real.log ((d : ℝ) ^ 2 / c_star_constant + 1) := by
+    have h_step :
+        Real.log ((d : ℝ) ^ (2 * w₁))
+          ≤ Real.log ((d : ℝ) ^ 2 / c_star_constant + 1) :=
+      Real.log_le_log h_rpow_pos h_power_le_target
+    rwa [Real.log_rpow hd_pos] at h_step
+  -- divide by `2·log 2 > 0` to conclude
+  have h_log2_pos : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have h_two_log2_pos : 0 < 2 * Real.log 2 := by positivity
+  unfold kappaStar_depth_d log_2
+  rw [hw₁_def] at *
+  rw [show (1 / (1 + c_star_constant))
+        * (Real.log (d : ℝ) / Real.log 2)
+        = ((2 * (1 / (1 + c_star_constant))) * Real.log (d : ℝ))
+            / (2 * Real.log 2) by ring,
+      show (1 / 2 : ℝ)
+        * (Real.log ((d : ℝ) ^ 2 / c_star_constant + 1) / Real.log 2)
+        = Real.log ((d : ℝ) ^ 2 / c_star_constant + 1)
+            / (2 * Real.log 2) by ring]
+  exact div_le_div_of_nonneg_right h_log_le h_two_log2_pos.le
+
+/-- **R83 substantive closure of `bernoulli_real_power_estimate_OPEN`.**
+    The previous `axiom bernoulli_real_power_estimate_OPEN` is REPLACED
+    with this genuine theorem (`feedback_lean_real_math` +
+    `feedback_no_compute_retreat`). The closure couples two real-analysis
+    half-results on the concrete `kappaStar_depth_d` carrier:
+
+      * **lower bound** — `kappaStar_depth_d_lower_bound` (R83 NEW):
+        `(1/(1+c*)) · log_2 d ≤ κ*(d)` via the weighted-AM–GM
+        Bernoulli-style power estimate `d^(2/(1+c*)) ≤ d²/c* + 1`;
+      * **upper bound** — `gap_kappaStar_depth_d_upper_bound` (R-prior,
+        kernel-pure): `κ*(d) ≤ log_2 d + c₃` with the explicit
+        `c₃ = (1/2)·log_2(1/c* + 1)`.
+
+    PAPER-FAITHFUL CORRECTION: the previous axiom encoded the additive
+    constant as a literal `+ 1`, which is mathematically FALSE for
+    `c* ∈ (0, 1/3)` (at `d = 1`, `log_2 1 = 0` forces `κ*(1) ≤ 1`,
+    i.e. `c* ≥ 1/3` — see the previous OBSTACLE docstring). The paper's
+    actual claim (`prop:error-compounding` Part 5, line 1044) is
+    `κ*(d) = log_2 d + O(1)`, i.e. an EXISTENTIALLY-quantified additive
+    constant. The corrected statement adds `∃ c₃` exactly matching the
+    paper's `O(1)`; with that paper-faithful form the claim is fully
+    provable (NOT a `kappaStar_p_monotone`-style DEAD-END — the
+    over-strong `+ 1` literal was an honest-but-defective encoding,
+    fixed here to the paper's `Θ` statement and then DISCHARGED).
+
+    paper source: Proposition `prop:error-compounding` Part 5, line 1044
+    ("κ*(d) = log_2 d + O(1) as d → ∞"). -/
+theorem bernoulli_real_power_estimate_OPEN :
+    ∃ c₁ c₂ c₃ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
+      ∀ d : ℕ, 1 ≤ d →
+        c₁ * log_2 d ≤ kappaStar_depth_d d ∧
+        kappaStar_depth_d d ≤ c₂ * log_2 d + c₃ := by
+  have hK : 0 < c_star_constant := gap_c_star_constant_pos_OPEN
+  obtain ⟨c₃, h_upper⟩ := gap_kappaStar_depth_d_upper_bound
+  refine ⟨1 / (1 + c_star_constant), 1, c₃, ?_, ?_, ?_⟩
+  · positivity
+  · -- `1/(1+c*) ≤ 1` since `1 ≤ 1 + c*`
+    rw [div_le_one (by linarith)]; linarith
+  · intro d hd
+    refine ⟨kappaStar_depth_d_lower_bound d hd, ?_⟩
+    -- upper bound: `κ*(d) ≤ log_2 d + c₃ = 1 · log_2 d + c₃`
+    have := h_upper d hd
+    linarith
+
+/-- **`κ*(d) = Θ(log d)`** asymptotic (derived theorem composing
+    `bernoulli_real_power_estimate_OPEN` per `feedback_gap_ledger_in_lean4`
+    §18 Manufactured-Recognition pattern). Since R83 the underlying
+    `bernoulli_real_power_estimate_OPEN` is itself a genuine theorem
+    (no project `_OPEN` axiom), so this bundle theorem is kernel-pure
+    modulo the opaque `c_star_constant` carrier + its positivity atom
+    `gap_c_star_constant_pos_OPEN`. The additive constant is the
+    paper-faithful existentially-quantified `c₃` (paper's `O(1)`).
+
+    paper source: Proposition `prop:error-compounding` Part 5, line 1044. -/
+theorem gap_kappaStar_depth_d_log_growth :
+    ∃ c₁ c₂ c₃ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
+      ∀ d : ℕ, 1 ≤ d →
+        c₁ * log_2 d ≤ kappaStar_depth_d d ∧
+        kappaStar_depth_d d ≤ c₂ * log_2 d + c₃ :=
+  bernoulli_real_power_estimate_OPEN
 
 end TrapTree
 
