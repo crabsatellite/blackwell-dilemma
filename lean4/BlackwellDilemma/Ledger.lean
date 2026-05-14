@@ -1336,6 +1336,126 @@
   paired existence atoms are decomposed (or freshly introduced as
   paper-faithful smaller wA).
 
+  ## R75 2026-05-15 — Pattern 5 (existence-via-Classical.choose)
+  propagation to `smoothTransitionBeta`-class structural-equation
+  atom whose paired existence is provided by an EXISTING ledger atom
+  (`interior_minimiser_existence_OPEN`).
+
+  R75 SCOPE — propagate R74 Pattern 5 (existence-via-`Classical.choose`)
+  closure pattern to MORE atoms by surveying the ledger for cases
+  where: (a) an opaque carrier is paired with a structural-equation
+  atom claiming carrier-equals-witness for some externally-existing
+  witness, AND (b) an existing existence atom in the ledger already
+  provides the witness in a form consumable by `Classical.choose`.
+  Pattern: replace `axiom carrier : T → ℝ` + structural-equation atom
+  with `noncomputable def carrier := fun _ => Classical.choose
+  <existence_atom>` + derived theorem extracting the needed property
+  from `Classical.choose_spec`. Net delta: -1 structuralEquation atom
+  (gapDefinitional → gapClosed via derivedTheorem); 0 wA change
+  (existence atom retained; carrier promoted to def).
+
+  CLOSURE 1 (Pattern 5 existence-via-Classical.choose,
+  structuralEquation gapDefinitional → derivedTheorem gapClosed) —
+  `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
+  (Canonical.lean:1233). Paper Proposition `prop:threshold-five-state`
+  (iii) line 863: `the welfare function W(β, κ*, 1) is monotone but
+  has zero derivative at the inflection point corresponding to β*`
+  where `β*` is the interior optimum from prop:interior-optimum line
+  774. R75: `axiom smoothTransitionBeta : ℝ → ℝ` →
+  `noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ :=
+  Classical.choose interior_minimiser_existence_OPEN`. The existence
+  atom is INDEPENDENT of `p`, matching paper's "corresponding to β*"
+  identification with the SINGLE interior optimum (not a `p`-indexed
+  family). Carrier-identification structural-equation atom
+  `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` RETIRED;
+  existence atom `interior_minimiser_existence_OPEN` retained as the
+  substantive paper input. The R62 derived theorem `inflection_at_kstar`
+  is reproved using `unfold smoothTransitionBeta` + `Classical.choose_spec.1`.
+  NET delta: this closure does NOT change wA count (the retired entry
+  is structuralEquation, not workingAssumption); it reduces structural-
+  equation count by 1 and increases derivedTheorem by 1. Mirrors R74
+  `betaStarOfP` precedent — the same Pattern 5 mechanism, but where
+  R74 introduced a domain-guarded def (Regime (i)'s `[0, p_1)`-only
+  applicability), R75 uses an unguarded def (paper's β* is regime-
+  independent at κ = κ*).
+
+  R75 candidates examined and DEFERRED (still require fundamentally
+  new infrastructure beyond Pattern 5):
+   * `betaBarStar_def` (Principal.lean:111): same as R74 deferral —
+     paper line 632 says "an interior maximum β̄* ∈ (0, ∞) exists by
+     continuity" but this is paper-stated existence-of-maximizer, NOT
+     present in the ledger as a separately-atomized existence atom.
+     The existing R63 atoms `W_bar_eventually_decreasing_in_reversal_
+     OPEN` + `W_bar_exceeds_zero_at_positive_beta_OPEN` jointly imply
+     existence-of-maximizer via continuity + Bolzano-Weierstrass on
+     a compact interval, but this Mathlib derivation is NOT yet
+     encoded in the ledger. Adding a paper-faithful smaller wA
+     `W_bar_argmax_exists_OPEN : ∃ β_max ≥ 0, ∀ β, W_bar β ≤ W_bar β_max`
+     would be NET 0 wA (1 new wA closes 1 wA via Pattern 5); pending
+     dedicated round to introduce this atom + verify hostile-audit
+     that it's strictly smaller than `betaBarStar_def`. DEFERRED to R76+.
+   * `aggregateOptimalBeta_def` (Principal.lean:380): same NET 0
+     trade-off as `betaBarStar_def`. DEFERRED.
+   * `W_bar_limit_infty_def` (Principal.lean:657): paper-stated
+     `Filter.Tendsto W_bar atTop (nhds W_bar_limit_infty)`. The paper-
+     stated existence-of-limit is implicit in cor:disclosure Part 1
+     proof line 652 ("W converges to a finite limit"), but no
+     `∃ L : ℝ, Filter.Tendsto W_bar atTop (nhds L)` atom exists in the
+     ledger. Same NET 0 trade-off. DEFERRED.
+
+  R75 net delta vs R74 baseline (234 entries; gapOpen=62, gapClosed=82,
+  gapDefinitional=88; workingAssumption=54, structuralEquation=24,
+  derivedTheorem=65, carrier=55):
+   * Total: 234 → 234 (no entry add/delete; 1 reclassification).
+   * Status: gapOpen 62 → 62 (no change; the closed entry was
+     gapDefinitional); gapClosed 82 → 83 (+1: smoothTransitionBeta_
+     corresponds_to_interior_optimum_OPEN moves to gapClosed);
+     gapDefinitional 88 → 87 (-1).
+   * Cat 3 sub: workingAssumption 54 → 54 (no change);
+     structuralEquation 24 → 23 (-1 from smoothTransitionBeta_
+     corresponds_to_interior_optimum_OPEN reclassification);
+     derivedTheorem 65 → 66 (+1); carrier 55 → 55 (carrier remains
+     paper-Def-stipulated structural primitive but now `noncomputable
+     def` rather than opaque axiom; mirrors R74 `betaStarOfP` pattern).
+   * inputCategory: cat3PaperNovel 203 → 202 (-1 from atom moving
+     to cat1Mathlib derivedTheorem); cat1Mathlib 18 → 19 (+1).
+   * Build verified GREEN (lake build returns successful).
+
+  R75 verdict: SCALE-EXTENDING propagation of R74 Pattern 5 to a
+  SECOND atom (after R74's `betaStarOfP_eq_minimiser_witness_OPEN`).
+  Demonstrates that the Pattern 5 mechanism applies cleanly to ANY
+  structural-equation atom whose paper-stated identification can be
+  internalised by `Classical.choose` on an existing existence atom.
+  The closure is HONEST: paper line 863 explicitly claims the
+  inflection point "corresponds to β*", and the Pattern 5 def
+  faithfully implements this carrier-identification by `Classical.
+  choose` on the existing prop:interior-optimum existence atom. The
+  Pattern 5 def deliberately uses an unguarded `_p`-discarding form
+  (`fun _p : ℝ => Classical.choose ...`) because paper's β* is a
+  single regime-independent constant per prop:interior-optimum line
+  774 (`β* ≈ 1.5 bits`); the `p`-parametrisation in
+  `smoothTransitionBeta : ℝ → ℝ` is paper-Def carrier-typing
+  convention, not a paper-derived per-`p` family.
+
+  HONESTY check vs the R74 deferral note: R75 does NOT add any new
+  wA — it propagates Pattern 5 to a structuralEquation atom whose
+  paired existence is ALREADY present in the ledger as
+  `interior_minimiser_existence_OPEN` (R37 atom). The R74 deferral
+  note for `betaBarStar_def`/`aggregateOptimalBeta_def`/`W_bar_limit_
+  infty_def` was specifically about cases where adding a paper-
+  faithful existence atom would be NET 0 wA — those remain DEFERRED.
+  R75's `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
+  closure is qualitatively different: the existence atom is ALREADY
+  in the ledger (no new atom needed), so the Pattern 5 closure is a
+  pure win (-1 structuralEquation, +1 derivedTheorem, no wA change).
+
+  Pattern 5 propagation criterion (refined for R75+):
+    APPLICABLE: structuralEquation atom claims carrier-equals-witness,
+                AND an existing ledger atom provides existence of the
+                witness in `∃ x, P x` form.
+    NOT APPLICABLE (DEFER): no existing existence atom in ledger;
+                            adding new existence atom would be NET 0 wA.
+
   6-tier status × 3-input-category cross-table (post-R40 historical;
   superseded by R41-R55 above; live numbers printed by `#eval` block):
 
@@ -2502,7 +2622,7 @@ def entry_carrier_betaStarOfP : GapEntry where
 
 /-- smoothTransitionBeta carrier — paper-novel smooth-transition β-carrier. -/
 def entry_carrier_smoothTransitionBeta : GapEntry where
-  name := "smoothTransitionBeta"
+  name := "smoothTransitionBeta (R75: opaque axiom → noncomputable def via Classical.choose on existing interior_minimiser_existence_OPEN per Pattern 5; carrier still tracked as Cat 3 paper-novel primitive — paper-faithful Classical.choose selection)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.carrier
@@ -2514,10 +2634,11 @@ def entry_carrier_smoothTransitionBeta : GapEntry where
     "the agent transitions from below-threshold reversal to above-" ++
     "threshold monotone-recovery)"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom smoothTransitionBeta : ℝ → ℝ` at Canonical.lean ~L1124.  Pinpoints the paper-stated finite positive inflection point of the κ-agent welfare curve at `κ = κ*`.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque carrier characterising a curvature-sign-change point on the paper-novel `agentWelfare` carrier; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `smoothTransitionBeta : ℝ → ℝ` for the paper's β-inflection point of the κ-agent welfare curve at the cognitive threshold"
+    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom smoothTransitionBeta : ℝ → ℝ` at Canonical.lean ~L1124.  Pinpoints the paper-stated finite positive inflection point of the κ-agent welfare curve at `κ = κ*`.  Cat 1 reduction check: CLEAR-NO — paper-novel opaque carrier characterising a curvature-sign-change point on the paper-novel `agentWelfare` carrier; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R75 2026-05-15: SUBSTANTIVE-MATH refactor per `feedback_no_compute_retreat` + Pattern 5 propagation (R74 `betaStarOfP` precedent). The opaque `axiom smoothTransitionBeta : ℝ → ℝ` is REPLACED by `noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ := Classical.choose interior_minimiser_existence_OPEN`. Paper line 863 `corresponding to β*` IS the carrier's exact identification with the prop:interior-optimum line 774 witness, so the def is content-faithful (NOT R7's content-erasure). Carrier classification UNCHANGED: Cat 3 paper-novel structural primitive (the def body invokes the substantive existence atom `interior_minimiser_existence_OPEN` as input — no Cat 1/2 reduction; Mathlib still lacks the welfare-curvature inflection-point detection machinery). The downstream `entry_atom_smoothTransitionBeta_corresponds_to_interior_optimum` flips structuralEquation gapDefinitional → derivedTheorem gapClosed (Pattern 5 closure via `Classical.choose_spec.1`); the carrier itself stays as a paper-novel structural primitive (gapDefinitional 永不-close per §3.4.1)." ]
+  scope := "Concrete `noncomputable def smoothTransitionBeta : ℝ → ℝ := fun _ => Classical.choose interior_minimiser_existence_OPEN` (R75 substantive-math refactor; Pattern 5 closure) for the paper's β-inflection point of the κ-agent welfare curve at the cognitive threshold — paper line 863 `corresponding to β*` faithfully encoded by Classical.choose on the prop:interior-optimum existence witness"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  R75 made concrete via Classical.choose on existing interior_minimiser_existence_OPEN (Pattern 5).  永不 close."
   conditionalOn := []
 
 /-- W_info_oracle carrier — paper-novel within-R oracle informational residual. -/
@@ -5994,16 +6115,17 @@ def entry_atom_inflection_at_kstar : GapEntry where
     carrier with the interior_minimiser_existence witness from
     prop:interior-optimum line 774. -/
 def entry_atom_smoothTransitionBeta_corresponds_to_interior_optimum : GapEntry where
-  name := "smoothTransitionBeta_corresponds_to_interior_optimum_OPEN"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  name := "smoothTransitionBeta_corresponds_to_interior_optimum_OPEN [retired R75 → replaced by Pattern 5 Classical.choose closure: smoothTransitionBeta carrier promoted to noncomputable def := Classical.choose interior_minimiser_existence_OPEN; structural-equation atom no longer needed since Classical.choose_spec.1 gives positivity directly]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:threshold-five-state (iii), line 863 (`the welfare function W(β, κ*, 1) is monotone but has zero derivative at the inflection point corresponding to β*`); Proposition prop:interior-optimum, line 774 (β* witness)"
   attackHistory :=
-    [ "R62 2026-05-14: Cat 3 atomic structural-equation axiom extracted from the retired bundled `inflection_at_kstar_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R59 `forward_reachable_full_at_zero` precedent (surface paper-implicit identification as a structural equation). Paper Proposition prop:threshold-five-state (iii) line 863 explicitly reads `the welfare function W(β, κ*, 1) is monotone but has zero derivative at the inflection point CORRESPONDING TO β*` — paper-stipulated identification of the smoothTransitionBeta carrier with the interior_minimiser_existence witness from prop:interior-optimum (line 774, `β* ≈ 1.5 bits`). The structural equation pins the smoothTransitionBeta carrier to the existence-of-interior-optimum witness so that the strict positivity of smoothTransitionBeta p derives Cat 1 from the existing β*-positivity. Cat 1 reduction check: not Mathlib-derivable (paper-novel carrier identification). Cat 2 reduction check: paper-novel structural equation. Hosted by `inflection_at_kstar` (Canonical.lean) derived theorem." ]
+    [ "R62 2026-05-14: Cat 3 atomic structural-equation axiom extracted from the retired bundled `inflection_at_kstar_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R59 `forward_reachable_full_at_zero` precedent (surface paper-implicit identification as a structural equation). Paper Proposition prop:threshold-five-state (iii) line 863 explicitly reads `the welfare function W(β, κ*, 1) is monotone but has zero derivative at the inflection point CORRESPONDING TO β*` — paper-stipulated identification of the smoothTransitionBeta carrier with the interior_minimiser_existence witness from prop:interior-optimum (line 774, `β* ≈ 1.5 bits`). The structural equation pins the smoothTransitionBeta carrier to the existence-of-interior-optimum witness so that the strict positivity of smoothTransitionBeta p derives Cat 1 from the existing β*-positivity. Cat 1 reduction check: not Mathlib-derivable (paper-novel carrier identification). Cat 2 reduction check: paper-novel structural equation. Hosted by `inflection_at_kstar` (Canonical.lean) derived theorem.",
+      "R75 2026-05-15: structuralEquation gapDefinitional → derivedTheorem gapClosed via Pattern 5 (existence-via-Classical.choose) closure-path-A — same pattern as R74 `betaStarOfP` and R72 `W_bar`/`differentiatedDisclosureWelfare`. The opaque carrier `smoothTransitionBeta` is replaced by `noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ := Classical.choose interior_minimiser_existence_OPEN` (the existence atom is INDEPENDENT of `p`, matching paper line 863's `corresponding to β*` where `β*` is the SINGLE interior optimum from prop:interior-optimum line 774, not a `p`-indexed family). The Lean `def` IS the paper's `corresponding to β*` identification: `Classical.choose` literally picks the paper-stated minimiser of `L(·, 0)`. The structural-equation atom previously asserted `∀ p β_star, 0 < β_star → (∀ β ≥ 0, L β_star 0 ≤ L β 0) → smoothTransitionBeta p = β_star` (a uniqueness claim across all valid β_star); this stronger uniqueness is no longer needed because the downstream consumer `inflection_at_kstar` only requires the WEAKER positivity fact `0 < smoothTransitionBeta p`, which `Classical.choose_spec.1` delivers directly on the canonical chosen β_star. Net delta: -1 structuralEquation atom (gapDefinitional), +1 derivedTheorem (gapClosed); existence atom `interior_minimiser_existence_OPEN` retained as substantive paper input; carrier `smoothTransitionBeta` retained as paper-Def-stipulated structural primitive but now `noncomputable def` rather than opaque axiom (mirroring R74 `betaStarOfP` precedent)." ]
   scope := "Proposition prop:threshold-five-state (iii), line 863 inflection-point-corresponds-to-β* identification"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (paper-stated structural identity linking the smoothTransitionBeta carrier to the interior_minimiser_existence witness from prop:interior-optimum line 774; paper line 863 `corresponding to β*` is explicit). Downstream consumer: `inflection_at_kstar` derived theorem (Canonical.lean) hosts the structural equation."
+    "RETIRED via R75 Pattern 5 closure (Classical.choose on existing existence atom interior_minimiser_existence_OPEN). Replaced by `noncomputable def smoothTransitionBeta := Classical.choose interior_minimiser_existence_OPEN` + `inflection_at_kstar` derived theorem using `Classical.choose_spec.1` for positivity. Downstream `gap_threshold_fiveState_smooth_transition` re-routed to consume the new derived theorem (no signature change at consumer level)."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Prop:threshold-five-state (iii)

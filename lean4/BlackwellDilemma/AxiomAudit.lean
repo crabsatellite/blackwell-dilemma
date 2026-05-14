@@ -594,11 +594,18 @@ namespace BlackwellDilemma.AxiomAudit
 --    universal-inequality atoms class).
 --    Downstream `betaStarOfP_loss_below_limit` consumes the derived
 --    theorem at identical call signature.
+-- R75 update: `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
+-- RETIRED via Pattern 5 closure (`smoothTransitionBeta` carrier promoted to
+-- `noncomputable def := Classical.choose interior_minimiser_existence_OPEN`;
+-- positivity now derives Cat 1 from `Classical.choose_spec.1`). The
+-- `inflection_at_kstar` print remains as the canonical kernel-purity check
+-- for the new derivation; the previously-printed axiom name no longer
+-- exists in the source.
 #print axioms BlackwellDilemma.FiveState.inflection_at_kstar
-#print axioms BlackwellDilemma.FiveState.smoothTransitionBeta_corresponds_to_interior_optimum_OPEN
 #print axioms BlackwellDilemma.FiveState.betaStarOfP_def
 #print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
 #print axioms BlackwellDilemma.FiveState.betaStarOfP
+#print axioms BlackwellDilemma.FiveState.smoothTransitionBeta
 
 -- R73 substantive-math closures (concrete-def closure of paper-stated
 -- structural-equation atoms via R72 pattern continuation, applied to two

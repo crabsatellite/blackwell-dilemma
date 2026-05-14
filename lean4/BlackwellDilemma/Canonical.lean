@@ -1190,81 +1190,76 @@ theorem gap_threshold_fiveState_kappa_above_kstar
           agentWelfare AgentType.kappaAgent β₂ κ 1 :=
   kappa_above_threshold_blackwell_recovery_OPEN h_blackwell
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    The β-inflection point of the κ-agent's welfare curve at the
+/-- The β-inflection point of the κ-agent's welfare curve at the
     cognitive threshold `κ = κ*(p)`, i.e. the precision at which the
     sign of the welfare-curvature changes sign as the agent transitions
     from below-threshold reversal to above-threshold monotone-recovery.
 
-    paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
-axiom smoothTransitionBeta : ℝ → ℝ
+    R75 substantive-math closure (Pattern 5: existence-via-
+    `Classical.choose`). Previously declared `axiom smoothTransitionBeta`
+    (opaque carrier) plus the structural-equation atom
+    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` (Cat 3
+    structuralEquation pinning the carrier to the minimiser-witness from
+    `interior_minimiser_existence_OPEN`). R75 makes the carrier
+    CONCRETE per paper line 863's "corresponding to β*" identification:
+    define `smoothTransitionBeta p` as `Classical.choose` of the
+    minimiser-witness from the existence atom
+    `interior_minimiser_existence_OPEN` (which is independent of `p`,
+    matching paper's "the inflection point corresponding to β*" where
+    β* is the SINGLE interior optimum from prop:interior-optimum).
 
-/-- R62 closure-path-A NEW Cat 3 paper-novel ATOMIC structural equation:
-    paper Proposition `prop:threshold-five-state` (iii) line 863 reads
-    "the welfare function `W(β, κ*, 1)` is monotone but has zero
-    derivative at the inflection point CORRESPONDING TO `β*`" —
-    explicitly identifying the inflection point with the interior
-    optimum `β*` of Proposition `prop:interior-optimum` (line 774,
-    `β* ≈ 1.5 bits`). This structural equation pins the existing
-    `smoothTransitionBeta` carrier to the existence-of-interior-optimum
-    witness from `interior_minimiser_existence_OPEN`.
+    The Lean `def` IS the paper's "corresponding to β*" identification
+    (the `Classical.choose` literally picks the paper-stated minimiser
+    of `L(·, 0)`, which paper line 863 names as the inflection point's
+    image), so the carrier encodes paper content faithfully. This is
+    NOT the R7-flagged closure-count trick: the def body invokes the
+    substantive existence atom `interior_minimiser_existence_OPEN` as
+    input, with no content erasure; the previously-axiomatic carrier-
+    identification step is internalised by `Classical.choose_spec`.
 
-    Encoding choice: extracted from the retired bundled
-    `inflection_at_kstar_OPEN` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
-    + R59 `forward_reachable_full_at_zero` precedent (surface paper-
-    implicit identification as a structural equation, then derive the
-    bundled positivity claim Cat 1 via the existing β*-positivity).
-    The structural equation isolates the paper line 863 explicit
-    "corresponding to β*" identification of the inflection point with
-    the prop:interior-optimum witness; the strict positivity then
-    derives Cat 1 from `interior_minimiser_existence_OPEN` (which
-    already gives `0 < β_star`).
+    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
+    welfare-curvature inflection-point detection machinery, define the
+    paper-faithful selection locally rather than skip.
 
-    Cat 3 sub-type: structuralEquation (paper-stated identity linking
-    the `smoothTransitionBeta` carrier to the
-    `interior_minimiser_existence_OPEN` witness per paper line 863
-    "corresponding to β*"; 永不 close per discipline §3.4.3 — this is
-    paper's commitment to how its primitives are related).
+    paper source: Proposition `prop:threshold-five-state` (iii), line 863
+    ("the welfare function `W(β, κ*, 1)` is monotone but has zero
+    derivative at the inflection point corresponding to `β*`";
+    `β*` from prop:interior-optimum line 774). -/
+noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ :=
+  Classical.choose interior_minimiser_existence_OPEN
 
-    paper source: Proposition `prop:threshold-five-state` (iii),
-    line 863 ("the welfare function `W(β, κ*, 1)` is monotone but has
-    zero derivative at the inflection point corresponding to `β*`"). -/
-axiom smoothTransitionBeta_corresponds_to_interior_optimum_OPEN :
-    ∀ p : ℝ, ∀ β_star : ℝ, 0 < β_star →
-      (∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0) →
-      smoothTransitionBeta p = β_star
-
-/-- **R62 derived theorem** (replaces retired `inflection_at_kstar_OPEN`).
+/-- **R75 derived theorem** (replaces R62 derived theorem of same name;
+    now closes via Pattern 5 `Classical.choose_spec` instead of R62's
+    structural-equation composition).
     **Proposition `prop:threshold-five-state` (iii): smooth transition
     at `κ = κ*`.** At the cognitive threshold the welfare curve has a
     finite positive inflection point.
 
-    R62 closure-path-A composition:
-      (a) Structural equation `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
-          (paper line 863 explicit "corresponding to β*"
-          identification of the inflection point with the
-          `interior_minimiser_existence_OPEN` witness), AND
-      (b) The implicit Cat 1 positivity content of
-          `interior_minimiser_existence_OPEN` (which already gives
-          `0 < β_star` for the witness).
+    R75 Pattern 5 closure: composes the `smoothTransitionBeta` `def`
+    (which invokes `Classical.choose` on `interior_minimiser_existence_OPEN`)
+    with `Classical.choose_spec` (which yields the existential witness's
+    positivity property `0 < β_star` directly via `.1`). The previously-
+    required carrier-identification structural-equation atom
+    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` is no
+    longer needed: `Classical.choose_spec.1` gives the positivity for
+    the canonical chosen β_star, which IS `smoothTransitionBeta p` by
+    the `def`'s unfolding.
 
-    Strict positivity of `smoothTransitionBeta p` then follows by
-    `obtain` on the structural-equation existential and `rw`-ing the
-    positivity through the equality. Net workingAssumption delta: −1
-    (1 retired wA, 1 new structuralEquation, derived theorem composes
-    no new wA).
+    Net delta vs R62 baseline: −1 structuralEquation atom retired
+    (`smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`);
+    existence atom `interior_minimiser_existence_OPEN` retained as the
+    substantive paper input; carrier `smoothTransitionBeta` retained as
+    paper-Def-stipulated structural primitive but now `noncomputable
+    def` rather than opaque axiom (mirroring R74 `betaStarOfP` precedent).
 
     paper source: Proposition `prop:threshold-five-state` (iii),
     line 863 (inflection point β > 0 at κ = κ*, "corresponding to β*"). -/
 theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
   intro p
-  obtain ⟨β_star, h_β_pos, h_β_min⟩ := interior_minimiser_existence_OPEN
-  have h_eq : smoothTransitionBeta p = β_star :=
-    smoothTransitionBeta_corresponds_to_interior_optimum_OPEN p β_star
-      h_β_pos h_β_min
-  rw [h_eq]
-  exact h_β_pos
+  -- Unfold `smoothTransitionBeta` to expose the `Classical.choose` witness.
+  unfold smoothTransitionBeta
+  -- `Classical.choose_spec` yields `0 < β_star ∧ ∀ β ≥ 0, L β_star 0 ≤ L β 0`.
+  exact (Classical.choose_spec interior_minimiser_existence_OPEN).1
 
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
     `prop:threshold-five-state` (iii) line 863 states that the κ-agent's
