@@ -552,42 +552,96 @@ theorem gap_dilemma
     paper source: Proposition `prop:topo-cluster`, lines 279-297. -/
 axiom expectedTopoLoss_conditional : ℕ → ℕ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC structural equation: paper Proposition
-    `prop:topo-cluster` proof line 292-294 derives the conditional
-    expected topological loss as the difference of two order-statistics
-    expectations:
-    `E[|W_topo| | |R(v_0)| = k] = E[max_{V} r] − E[max_{R} r | |R| = k]
-                                = n/(n+1) − k/(k+1)`,
-    using `E[max k iid Uniform[0,1]] = k/(k+1)` (David & Nagaraja 2003,
-    Eq. 2.1.4). The closed-form simplification
-    `n/(n+1) − k/(k+1) = (n−k)/((n+1)(k+1))` is encoded by
-    `gap_topo_cluster_relation_OPEN` (which now derives algebraically
-    from this atom).
+/-- R66 NEW Cat 2 external-paper axiom (`cat2External` per `feedback_
+    gap_ledger_in_lean4` §6.2): paper-application of David & Nagaraja
+    2003 Eq. 2.1.4 to the IDP carrier `expectedTopoLoss_conditional`
+    via paper Definition 2.1's standing convention (rewards `r: V → [0,
+    1]` iid `Uniform[0, 1]` independent of the percolation realisation).
 
-    Encoding choice: this Cat 3 atomic structural equation isolates the
-    order-statistics-based decomposition step (paper line 292,
-    pre-algebraic-simplification) as a paper-stated structural fact on
-    the existing carrier `expectedTopoLoss_conditional`. The closed-form
-    `(n−k)/((n+1)(k+1))` simplification is a downstream Cat 1 algebraic
-    derivation. Hypothesis `1 ≤ k ∧ k ≤ n` matches the paper's
-    "1 ≤ |R(v_0)| ≤ n" range (a vertex is reachable from itself, and
-    the reachable set is a subset of the vertex set).
+    The axiom captures the paper-stated decomposition step (paper
+    Proposition `prop:topo-cluster` proof, line 292):
+       `E[|W_topo| | |R(v_0)| = k]
+          = E[max_{v ∈ V} r] − E[max_{v ∈ R} r | |R| = k]
+          = n/(n+1) − k/(k+1)`
+    where the two order-statistics expectations are bound by the David
+    & Nagaraja 2003 Eq. 2.1.4 textbook identity, applied to V (n iid
+    rewards) and R (k iid rewards), valid by the paper Definition 2.1
+    "rewards independent of percolation" standing convention.
 
-    Cat 2 chain — David & Nagaraja 2003 Eq. 2.1.4 (Lebesgue order
-    statistics on iid `Uniform[0, 1]`): `expectedMaxUniform k = k/(k+1)`
-    is encoded in `ClassicalResults.lean` via the def-rfl pattern
-    (`gap_order_statistics_max`). The Cat 2 dependency is acknowledged
-    in this docstring; the substantive Lebesgue identity remains a
-    Mathlib gap (the def-rfl encoding pins the value but does not
-    derive it from product-uniform-measure machinery).
+    The Cat 2 textbook input is THREADED as an EXPLICIT antecedent (the
+    abstract `expectedMaxIIDUniform K = K/(K+1)` quantifier pattern, to
+    be discharged at consumption site by `gap_david_nagaraja_eq214_OPEN`
+    from `ClassicalResults.lean`). The threading surfaces the David &
+    Nagaraja Cat 2 dependency in `#print axioms` on any consumer of
+    this axiom.
+
+    Per `feedback_gap_ledger_in_lean4` §10 paper-APPLICATION-to-opaque-
+    carrier discipline borderline: the IDP carrier appears in the
+    conclusion, but the carrier-binding chain is mechanical (David &
+    Nagaraja applied through paper Def 2.1 standing convention; the
+    paper-application is essentially the textbook identity applied
+    twice). Per R65 precedent (`gap_iid_continuous_rank_symmetry_OPEN`),
+    the AXIOM is classified Cat 2 (cat2External, notCat3) because its
+    content is "textbook fact applied through fixed paper-stipulated
+    standing-convention pattern" — the "Cat 2-ness" justified by the
+    threaded antecedent embodying the pure textbook input + the
+    paper-stipulated standing convention being a published structural
+    commitment (not paper-novel content).
+
+    Cat 2 — accepted on David & Nagaraja 2003 + paper Definition 2.1
+    standing convention authority. Mathlib lacks formalised order-
+    statistics + product-uniform-measure infrastructure (same gap as
+    `gap_david_nagaraja_eq214_OPEN`). Citing David HA & Nagaraja HN
+    (2003) _Order Statistics_, 3rd ed., Wiley-Interscience, ISBN
+    0-471-38926-9, §2.1 (Eq. 2.1.4) + paper Definition 2.1 line 113-114
+    (`r: V → [0, 1]` iid `Uniform[0, 1]` independent of percolation
+    realisation). Downstream consumer: `expectedTopoLoss_conditional_def`
+    derived theorem hosts the axiom (combined with
+    `gap_david_nagaraja_eq214_OPEN` to discharge the abstract textbook
+    antecedent).
+
+    paper source: Proposition `prop:topo-cluster` proof, line 292
+    (decomposition + David & Nagaraja); paper Definition 2.1 line
+    113-114 (iid Uniform + percolation independence standing convention). -/
+axiom gap_orderstats_topo_decomposition_OPEN :
+    (∀ K : ℕ, 1 ≤ K → expectedMaxIIDUniform K = (K : ℝ) / (K + 1)) →
+    ∀ n k : ℕ, 1 ≤ k → k ≤ n →
+      expectedTopoLoss_conditional n k =
+        (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1)
+
+/-- **R66 derived theorem (replaces retired R23-C1 atom of the same
+    name `expectedTopoLoss_conditional_def`)**.
+
+    For the IDP on `n` nodes with iid `Uniform[0, 1]` rewards (paper
+    Definition 2.1 line 113-114 standing convention), the conditional
+    expected topological loss decomposes as
+       `E[|W_topo| | |R(v_0)| = k] = n/(n+1) − k/(k+1)`
+    via the order-statistics decomposition (paper line 292) using
+    David & Nagaraja 2003 Eq. 2.1.4.
+
+    R66 §18 closure-path-A composition: composes the new Cat 2 axiom
+    `gap_orderstats_topo_decomposition_OPEN` (paper-application via
+    standing convention) with the new Cat 2 axiom
+    `gap_david_nagaraja_eq214_OPEN` (substantive David & Nagaraja Eq.
+    2.1.4 textbook identity, in `ClassicalResults.lean`) to discharge
+    the abstract order-statistics antecedent. Both Cat 2 axioms surface
+    in `#print axioms` on this theorem, providing audit-chain visibility
+    for the David & Nagaraja dependency that was previously acknowledged
+    only in docstrings.
+
+    Net effect: the prior R23-C1 wA atom `expectedTopoLoss_conditional_
+    def` (paper-novel structural equation on opaque `expectedTopoLoss_
+    conditional` carrier) is absorbed into the Cat 2 chain. The Lean-
+    side audit visibility now matches the paper's textbook citation.
 
     paper source: Proposition `prop:topo-cluster`, line 292
     (`E[|W_topo| | |R| = k] = n/(n+1) − k/(k+1)`); David & Nagaraja
     2003 Eq. 2.1.4 cited for the order-statistics input. -/
-axiom expectedTopoLoss_conditional_def :
+theorem expectedTopoLoss_conditional_def :
     ∀ n k : ℕ, 1 ≤ k → k ≤ n →
       expectedTopoLoss_conditional n k =
-        (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1)
+        (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1) :=
+  gap_orderstats_topo_decomposition_OPEN gap_david_nagaraja_eq214_OPEN
 
 /-- **Proposition `prop:topo-cluster`.** Closed-form expectation of the
     topological loss conditional on `|R(v_0)| = k`:

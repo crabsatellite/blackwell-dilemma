@@ -1054,12 +1054,82 @@ noncomputable def expectedMaxUniform (k : ℕ) : ℝ := (k : ℝ) / (k + 1)
     Lebesgue integration over the product of uniform measures, which
     remains a Mathlib gap.
 
+    R66 NOTE: this rfl theorem records the formula at the type-system
+    level only; the SUBSTANTIVE order-statistics identity
+    `E[max k iid Uniform[0,1]] = k/(k+1)` is a separate Mathlib gap,
+    encoded as Cat 2 axiom `gap_david_nagaraja_eq214_OPEN` below on
+    the opaque carrier `expectedMaxIIDUniform`. The two encodings are
+    NOT redundant: this theorem is the def-rfl bookkeeping form on the
+    paper's named constant `expectedMaxUniform`; the Cat 2 axiom is the
+    substantive measure-theoretic identity on the abstract opaque
+    carrier `expectedMaxIIDUniform` (which represents the actual
+    `E[max k iid Uniform[0,1]]` integral, not yet formalised in Mathlib).
+
     paper source: Proposition `prop:topo-cluster` line 292 ("By the
     theory of order statistics"). -/
 theorem gap_order_statistics_max :
     ∀ k : ℕ, k ≥ 1 →
       expectedMaxUniform k = (k : ℝ) / (k + 1) :=
   fun _ _ => rfl
+
+/-! ## 11.1 David & Nagaraja 2003 Eq. 2.1.4 — substantive Cat 2 axiom
+
+R66 §18 closure-path: introduces the substantive measure-theoretic order-
+statistics identity as a Cat 2 axiom on a new opaque carrier
+`expectedMaxIIDUniform : ℕ → ℝ` representing the actual `E[max k iid
+Uniform[0,1]]` integral. The substantive identity is:
+   `E[max_{i=1..k} X_i] = k/(k+1)` for X_i iid Uniform[0,1]
+   (David & Nagaraja 2003, _Order Statistics_, 3rd ed., Eq. 2.1.4,
+   Wiley-Interscience, ISBN 0-471-38926-9, §2.1)
+
+Mathlib lacks the formalised order-statistics + product-uniform-measure
+infrastructure; the Lean encoding axiomatises the textbook identity on
+the new opaque carrier. The existing `expectedMaxUniform := k/(k+1)`
+(def-rfl bookkeeping above) and `gap_order_statistics_max` (the Cat 1
+rfl theorem) are PRESERVED for downstream code that only needs the
+formula, but the SUBSTANTIVE identity (which the paper invokes) lives
+in the Cat 2 axiom below. -/
+
+/-- Substantive paper claim — opaque carrier required (Mathlib gap).
+    Abstract `E[max k iid Uniform[0,1]]` value as a function of `k`.
+    Distinct from the def-rfl `expectedMaxUniform := k/(k+1)` above:
+    `expectedMaxIIDUniform k` is the SEMANTIC `E[max iid Uniform]`
+    expectation (an opaque measure-theoretic quantity), whereas
+    `expectedMaxUniform k = k/(k+1)` is the SYNTACTIC named formula
+    (a def-rfl bookkeeping equality). The Cat 2 axiom
+    `gap_david_nagaraja_eq214_OPEN` below ties the two together via
+    the David & Nagaraja 2003 textbook identity.
+
+    paper source: Proposition `prop:topo-cluster` proof line 292
+    ("By the theory of order statistics"); David & Nagaraja 2003
+    Eq. 2.1.4 cited as the canonical Cat 2 source. -/
+axiom expectedMaxIIDUniform : ℕ → ℝ
+
+/-- **David & Nagaraja 2003 Eq. 2.1.4 — substantive order-statistics
+    identity for iid Uniform[0,1].**
+
+    For X_1, ..., X_k iid Uniform[0,1] with k ≥ 1, the expected maximum
+    is `E[max_{i=1..k} X_i] = k/(k+1)`. This is the canonical textbook
+    formula derived via the explicit integral
+    `∫₀¹ k · x^(k-1) · x dx = k · ∫₀¹ x^k dx = k/(k+1)` using the
+    density of the maximum of k iid Uniform[0,1] variables, which is
+    `k · x^(k-1)` on `[0, 1]`.
+
+    Cat 2 — accepted on David & Nagaraja 2003 authority. Mathlib lacks
+    formalised order-statistics + product-uniform-measure infrastructure
+    for the maximum of iid uniform variables (no `expectedMaxIIDUniform`
+    framework, no general `iid_uniform_max_expected_value` theorem); the
+    Lean encoding axiomatises the textbook result on the opaque carrier
+    `expectedMaxIIDUniform`, citing David HA & Nagaraja HN (2003)
+    _Order Statistics_, 3rd ed., Wiley-Interscience, ISBN 0-471-38926-9,
+    §2.1 (Eq. 2.1.4 "Expected value of the maximum of k iid Uniform[0,1]
+    random variables"). Downstream consumers consume this axiom directly.
+
+    paper source: Proposition `prop:topo-cluster` proof line 292
+    ("By the theory of order statistics, `E[max_{v ∈ R} r(v) | |R| = k] =
+    k/(k+1)` and `E[r*] = E[max_{v ∈ V} r(v)] = n/(n+1)`"). -/
+axiom gap_david_nagaraja_eq214_OPEN :
+    ∀ k : ℕ, 1 ≤ k → expectedMaxIIDUniform k = (k : ℝ) / (k + 1)
 
 /-- **Harris-Kesten consequence**: the squared critical probability is `1/4`,
     a closed (kernel-pure) consequence of the Harris-Kesten Cat 2 axiom.

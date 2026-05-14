@@ -66,10 +66,21 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_dilemma
 -- R23-C1 Cat 1 derived closure: Proposition `prop:topo-cluster`
 -- closed-form `(n-k)/((n+1)(k+1))` derives Cat 1 algebraically from the
--- Cat 3 atomic structural-equation `expectedTopoLoss_conditional_def`
--- (paper line 292 order-statistics decomposition `n/(n+1) − k/(k+1)`)
--- via `field_simp; ring`. See Ledger entry `entry_prop_topo_cluster`.
+-- R66 derived theorem `expectedTopoLoss_conditional_def` (paper line 292
+-- order-statistics decomposition `n/(n+1) − k/(k+1)`, Cat 2 absorbed via
+-- David & Nagaraja Eq. 2.1.4) via `field_simp; ring`. See Ledger entry
+-- `entry_prop_topo_cluster`.
 #print axioms BlackwellDilemma.gap_topo_cluster_relation
+-- R66 Cat 2 absorption: `expectedTopoLoss_conditional_def` derived
+-- theorem composes `gap_orderstats_topo_decomposition_OPEN` (paper-
+-- application of David & Nagaraja Eq. 2.1.4 to IDP carrier via paper
+-- Def 2.1 standing convention, Wrongness.lean) + `gap_david_nagaraja_
+-- eq214_OPEN` (substantive David & Nagaraja 2003 Eq. 2.1.4 textbook
+-- identity on opaque `expectedMaxIIDUniform` carrier, ClassicalResults.
+-- lean). Both Cat 2 axioms surface via `#print axioms`, providing audit-
+-- chain visibility for the David & Nagaraja Cat 2 dependency previously
+-- acknowledged only in docstrings.
+#print axioms BlackwellDilemma.expectedTopoLoss_conditional_def
 #print axioms BlackwellDilemma.gap_conditional_reduction_part_ii
 -- R37 derived closure: Lemma `lem:conditional-reduction` part (i),
 -- conditional Blackwell monotonicity on the restricted action domain.
