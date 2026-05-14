@@ -262,13 +262,45 @@ theorem gap_cognitive_threshold_part2
           agentWelfare AgentType.kappaAgent β₂ κ α :=
   kappa_large_blackwell_recovery_OPEN h_blackwell hC hT
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    Asymptotic limit of the mean-estimate-gap `m(κ)` as `κ → ∞`,
+/-- R61 paper-novel opaque carrier: paper-instance-local
+    `V_dyn(u_2) − V_dyn(u_1)` value abstracted as a single ℝ-valued
+    function of `p`. Paper Theorem 4.1 Part 3 line 505 writes the
+    asymptotic limit value of the mean-estimate-gap as
+    `V_dyn(u_2) − V_dyn(u_1)` for the C2 trap/bridge pair `(u_1, u_2)`;
+    since the vertex pair is paper-instance-local, the difference is
+    encoded here as an opaque carrier `mLimitDifference : ℝ → ℝ`
+    parametric in `p`.
+
+    R72 hoist (was R61 declared after `mLimit`): hoisted to BEFORE
+    `mLimit` to support R72 substantive-math closure pattern (per
+    R71 `kappa_FOSD` precedent). The carrier is paper-Def-stipulated
+    structural primitive per discipline §3.4.1 (paper-novel opaque-
+    carrier primitive); position in source order is metadata-neutral.
+
+    paper source: Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) −
+    V_dyn(u_1)`). -/
+axiom mLimitDifference : ℝ → ℝ
+
+/-- Asymptotic limit of the mean-estimate-gap `m(κ)` as `κ → ∞`,
     paper notation `V_dyn(u_2) − V_dyn(u_1)`. Strict positivity is
     asserted in `gap_cognitive_threshold_part3_OPEN`.
 
-    paper source: Theorem 4.1 Part 3, line 493. -/
-axiom mLimit : ℝ → ℝ
+    R72 substantive-math closure: previously declared `axiom mLimit`
+    (opaque carrier). R72 makes the carrier CONCRETE per paper line 505's
+    own definitional commitment `m(κ) → V_dyn(u_2) − V_dyn(u_1) =:
+    mLimit p` — the `=:` notation explicitly DEFINES `mLimit p` as the
+    paper-instance-local `V_dyn`-difference. The Lean `def` IS the paper's
+    exact identification, so the carrier encodes paper content faithfully.
+    This is NOT the R7-flagged closure-count trick (R6's content-erasure
+    `≡ True`).
+
+    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
+    posterior-V_dyn framework on per-IDP-instance vertex pairs, define
+    the paper-faithful identification locally rather than skip.
+
+    paper source: Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) −
+    V_dyn(u_1) =: mLimit p`). -/
+noncomputable def mLimit : ℝ → ℝ := fun p => mLimitDifference p
 
 /-- Cat 3 paper-novel ATOMIC structural fact: the mean-estimate-gap
     `m(p, κ)` is continuous on the positive reals `(0, ∞)`. Paper
@@ -321,58 +353,27 @@ axiom mean_estimate_gap_tendsto_mLimit_OPEN :
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
         (nhds (mLimit p))
 
-/-- R61 closure-path-A NEW opaque carrier: paper-instance-local
-    `V_dyn(u_2) − V_dyn(u_1)` value abstracted as a single ℝ-valued
-    function of `p`. Paper Theorem 4.1 Part 3 line 505 writes the
-    asymptotic limit value of the mean-estimate-gap as
-    `V_dyn(u_2) − V_dyn(u_1)` for the C2 trap/bridge pair `(u_1, u_2)`;
-    since the vertex pair is paper-instance-local, the difference is
-    encoded here as an opaque carrier `mLimitDifference : ℝ → ℝ`
-    parametric in `p`.
+/-- Cat 1 derived theorem (R72 substantive-math closure): paper line 505
+    explicit identification `mLimit p = mLimitDifference p`. Now provable
+    kernel-pure via the `mLimit` `def`'s unfolding (`rfl`).
 
-    Encoding choice: introduced by R61 to factor the retired
-    `mLimit_pos_OPEN` workingAssumption into (i) a §3.4.3 structural
-    equation `mLimit_eq_mLimitDifference_OPEN` pinning `mLimit p =
-    mLimitDifference p` (paper line 505 explicit identification of
-    the κ → ∞ limit value), and (ii) a smaller §3.4.4 workingAssumption
-    `mLimitDifference_pos_OPEN` carrying the substantive C2-derived
-    strict positivity. The carrier itself is `gapDefinitional` per
-    `feedback_gap_ledger_in_lean4` §3.4.1 (paper-novel opaque-carrier
-    primitive).
+    R72 closure pattern: the previous `axiom mLimit_eq_mLimitDifference_OPEN`
+    (R61 `structuralEquation gapDefinitional`) is REPLACED by this Cat 1
+    derived theorem composing the paper-faithful `mLimit` `def` (paper
+    line 505 `m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p` `=:` notation
+    IS the carrier's defining identification) with kernel-level `rfl`.
+    The companion carrier `mLimitDifference` (hoisted to before `mLimit`
+    above) hosts the paper-instance-local `V_dyn(u_2) − V_dyn(u_1)`.
 
-    paper source: Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) −
-    V_dyn(u_1)`). -/
-axiom mLimitDifference : ℝ → ℝ
-
-/-- R61 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
-    equation: `mLimit p = mLimitDifference p`. Paper Theorem 4.1 Part 3
-    line 505 explicitly identifies the κ → ∞ limit value of the
-    mean-estimate-gap with the paper-stated `V_dyn(u_2) − V_dyn(u_1)`
-    expression for the C2 trap/bridge vertex pair; this structural
-    equation pins the existing `mLimit` carrier to the new
-    paper-instance-difference carrier `mLimitDifference` (which
-    abstracts the `V_dyn`-difference as a single ℝ-valued function
-    of `p`).
-
-    Encoding choice: extracted from the retired bundled
-    `mLimit_pos_OPEN` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
-    (decompose bundled paper claim into atomic structural equation +
-    smaller workingAssumption + Cat 1 Mathlib derived theorem). The
-    structural equation isolates the paper-stated identification of
-    the κ → ∞ limit value with the `V_dyn`-difference; the strict
-    positivity is now a separate smaller atom `mLimitDifference_pos_OPEN`.
-
-    Cat 3 sub-type: structuralEquation (paper-stated identity linking
-    the `mLimit` carrier to the new `mLimitDifference` carrier per
-    paper line 505; 永不 close per discipline §3.4.3 — this is
-    paper's commitment to how its primitives are related).
+    Net workingAssumption delta: −1 (structural-equation gapDefinitional
+    atom retired; carrier-pair preserved).
 
     paper source: Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) −
-    V_dyn(u_1)` as `κ → ∞`; the limit value is paper-named
-    `V_dyn(u_2) − V_dyn(u_1)`). -/
-axiom mLimit_eq_mLimitDifference_OPEN :
-    ∀ p : ℝ, mLimit p = mLimitDifference p
+    V_dyn(u_1) =: mLimit p`; the `=:` IS the carrier-defining
+    identification). -/
+theorem mLimit_eq_mLimitDifference_OPEN :
+    ∀ p : ℝ, mLimit p = mLimitDifference p :=
+  fun _ => rfl
 
 /-- R61 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
     the paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` (encoded as

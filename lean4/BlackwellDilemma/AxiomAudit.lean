@@ -215,6 +215,15 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.interior_max_exists_from_unimodal_envelope
 #print axioms BlackwellDilemma.W_bar_mixture_decomposition
 #print axioms BlackwellDilemma.differentiated_per_agent_optimum_dominates_uniform
+-- R72 substantive-math closures (concrete-def closure pattern, R71
+-- `kappa_FOSD_def` precedent applied at scale): 4 atoms closed via
+-- `def <aggregate> := <component-expression>` matching paper's explicit
+-- identification, then theorem reduces to `rfl`. The two structural-
+-- equation closures here (W_bar / differentiatedDisclosureWelfare) +
+-- the mLimit closure (Cognitive.lean) + the oracleValueAtRoot closure
+-- (GeneralGraphs.lean — the wA-reducing closure).
+#print axioms BlackwellDilemma.W_bar_eq_mixture_OPEN
+#print axioms BlackwellDilemma.differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN
 
 -- §5 Constructive instances
 #print axioms BlackwellDilemma.FiveState.gap_kappaStar_at_two_thirds

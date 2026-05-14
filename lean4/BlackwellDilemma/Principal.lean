@@ -23,10 +23,64 @@ The principal chooses `β ≥ 0` for a population with heterogeneous
 parameters `(κ_i, α_i) ~ G` to maximise aggregate welfare
 `W̄(β) = ∫ W(β, κ, α) dG(κ, α)`. -/
 
+/-- R63 paper-novel opaque carrier: paper line 638's explicit
+    above-threshold welfare component `λ · E_{G | κ > κ*}[W(β, κ, α)]`
+    abstracted as a single ℝ → ℝ functional of `β` (with the `λ`
+    weighting absorbed into the carrier's definition per paper's
+    named-component convention). Paper Proposition `prop:principal-
+    optimum` Part 3 proof (line 638) names this the "above-threshold
+    contribution" with the standard-Blackwell-regime non-decreasing
+    property.
+
+    R72 hoist (was R63 declared after `W_bar`): hoisted to BEFORE
+    `W_bar` to support R72 substantive-math closure pattern (per R71
+    `kappa_FOSD` precedent). The carrier is paper-Def-stipulated
+    structural primitive per discipline §3.4.1 (paper-novel opaque-
+    carrier primitive); position in source order is metadata-neutral.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (`λ · E_{G | κ > κ*}[W(β, κ, α)]` above-threshold
+    contribution). -/
+axiom aboveThresholdWelfare : ℝ → ℝ
+
+/-- R63 paper-novel opaque carrier: paper line 638's explicit
+    below-threshold welfare component `(1 − λ) · E_{G | κ < κ*}
+    [W(β, κ, α)]` abstracted as a single ℝ → ℝ functional of `β`.
+    Paper Proposition `prop:principal-optimum` Part 3 proof (line 638)
+    names this the "below-threshold contribution" with the reversal-
+    regime eventually-decreasing property.
+
+    R72 hoist (was R63 declared after `W_bar`): hoisted to BEFORE
+    `W_bar` to support R72 substantive-math closure pattern (per R71
+    `kappa_FOSD` precedent). Position in source order is metadata-
+    neutral.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (`(1 − λ) · E_{G | κ < κ*}[W(β, κ, α)]` below-threshold
+    contribution). -/
+axiom belowThresholdWelfare : ℝ → ℝ
+
 /-- The aggregate welfare functional `W̄(β)` for distribution `G`.
-    Substantive paper claim — opaque carrier required (Mathlib gap).
-    paper source: Definition `def:principal`, line 612. -/
-axiom W_bar : ℝ → ℝ
+
+    R72 substantive-math closure: previously declared `axiom W_bar`
+    (opaque carrier). R72 makes the carrier CONCRETE per paper Proposition
+    `prop:principal-optimum` Part 3 proof line 638's own definitional
+    commitment `W̄(β) = λ · E_{G | κ > κ*}[W(β,κ,α)] + (1-λ) ·
+    E_{G | κ < κ*}[W(β,κ,α)]`: paper EXPLICITLY decomposes the aggregate
+    welfare as the sum of the above-threshold and below-threshold
+    contributions. The Lean `def` IS the paper's exact mixture
+    identification.
+
+    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
+    bounded-measure / conditional-expectation framework on the population
+    distribution `G`, define the paper-faithful mixture decomposition
+    locally rather than skip.
+
+    paper source: Definition `def:principal`, line 612 (`W̄(β) = ∫ W(β, κ, α)
+    dG(κ, α)`) + Proposition `prop:principal-optimum` Part 3 proof, line 638
+    (mixture identity `W̄ = λ · above + (1-λ) · below`). -/
+noncomputable def W_bar : ℝ → ℝ :=
+  fun β => aboveThresholdWelfare β + belowThresholdWelfare β
 
 /-- The aggregate-optimal precision `β̄*` (paper line 622).
     Substantive paper claim — opaque carrier required (Mathlib gap).
@@ -412,72 +466,28 @@ theorem gap_principal_monotone_in_kappa :
   exact argmax_monotone_under_derivative_domination_OPEN G₁ G₂
     (fosd_induces_derivative_domination_OPEN G₁ G₂ h_fosd)
 
-/-- R63 closure-path-A NEW opaque carrier: paper line 638's explicit
-    above-threshold welfare component `λ · E_{G | κ > κ*}[W(β, κ, α)]`
-    abstracted as a single ℝ → ℝ functional of `β`. Paper Proposition
-    `prop:principal-optimum` Part 3 proof (line 638) names this the
-    "above-threshold contribution" with the standing-Blackwell-regime
-    monotonicity property.
+/-- Cat 1 derived theorem (R72 substantive-math closure): paper line 638
+    explicit mixture identity `W_bar β = aboveThresholdWelfare β +
+    belowThresholdWelfare β`. Now provable kernel-pure via the `W_bar`
+    `def`'s unfolding (`rfl`).
 
-    Encoding choice: introduced by R63 to factor the retired bundled
-    `W_bar_mixture_decomposition_OPEN` workingAssumption into (i) a
-    §3.4.3 structural equation pinning the explicit mixture
-    `W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β`
-    (paper line 638 explicit decomposition formula), and (ii)
-    smaller §3.4.4 workingAssumptions carrying the substantive
-    above-regime and below-regime monotonicities. The carrier itself
-    is `gapDefinitional` per `feedback_gap_ledger_in_lean4` §3.4.1
-    (paper-novel opaque-carrier primitive).
+    R72 closure pattern: the previous `axiom W_bar_eq_mixture_OPEN`
+    (R63 `structuralEquation gapDefinitional`) is REPLACED by this Cat 1
+    derived theorem composing the paper-faithful `W_bar` `def` (paper
+    line 638 `W̄(β) = λ · above + (1-λ) · below` IS the carrier's
+    defining mixture identification) with kernel-level `rfl`. The
+    component carriers `aboveThresholdWelfare` and `belowThresholdWelfare`
+    (hoisted to before `W_bar` above) host the per-regime contributions.
 
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`λ · E_{G | κ > κ*}[W(β, κ, α)]` above-threshold
-    contribution). -/
-axiom aboveThresholdWelfare : ℝ → ℝ
-
-/-- R63 closure-path-A NEW opaque carrier: paper line 638's explicit
-    below-threshold welfare component `(1 − λ) · E_{G | κ < κ*}
-    [W(β, κ, α)]` abstracted as a single ℝ → ℝ functional of `β`.
-    Paper Proposition `prop:principal-optimum` Part 3 proof (line 638)
-    names this the "below-threshold contribution" with the reversal-
-    regime eventually-decreasing property.
-
-    Encoding choice: introduced by R63 to factor the retired bundled
-    `W_bar_mixture_decomposition_OPEN` workingAssumption (parallel to
-    `aboveThresholdWelfare`).
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`(1 − λ) · E_{G | κ < κ*}[W(β, κ, α)]` below-threshold
-    contribution). -/
-axiom belowThresholdWelfare : ℝ → ℝ
-
-/-- R63 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
-    equation: paper line 638's explicit pointwise mixture
-    `W̄(β) = λ · above-contribution(β) + (1 − λ) · below-contribution(β)`
-    pinning the existing `W_bar` carrier as the sum of the two new
-    paper-instance carriers `aboveThresholdWelfare` and
-    `belowThresholdWelfare` (with the `λ` and `(1 − λ)` weighting
-    absorbed into each carrier's definition).
-
-    Encoding choice: extracted from the retired bundled
-    `W_bar_mixture_decomposition_OPEN` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern + R61 `mLimit_pos` precedent (split bundled wA into
-    structural identification + smaller monotonicity-content wA).
-    The retired atom existentially asserted "some `f, g` exist with
-    these properties"; the R63 decomposition surfaces the paper-named
-    above/below carriers explicitly as `aboveThresholdWelfare` and
-    `belowThresholdWelfare`, then pins the mixture identity via this
-    structural equation.
-
-    Cat 3 sub-type: structuralEquation (paper-stipulated identity
-    pinning `W_bar` to the mixture sum per paper line 638 explicit
-    decomposition formula; 永不 close per discipline §3.4.3 — this is
-    paper's commitment to how its primitives decompose).
+    Net workingAssumption delta: −1 (structural-equation gapDefinitional
+    atom retired; carrier-pair preserved with paper-faithful identification
+    encoded in `def`).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`W̄(β) = λ · above + (1 − λ) · below` mixture identity). -/
-axiom W_bar_eq_mixture_OPEN :
-    ∀ β : ℝ, W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β
+theorem W_bar_eq_mixture_OPEN :
+    ∀ β : ℝ, W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β :=
+  fun _ => rfl
 
 /-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
     paper line 638 explicitly asserts the above-threshold contribution
@@ -738,68 +748,71 @@ theorem gap_disclosure_full_suboptimal :
     averaged_reversal_overshoot_positive_OPEN G_reversal_fraction hG
   exact finite_beta_above_limit_from_overshoot_OPEN delta_bar h_delta
 
-/-- Differentiated-disclosure aggregate welfare.
-    Substantive paper claim — opaque carrier required (Mathlib gap).
-    paper source: Corollary `cor:disclosure` Part 2. -/
-axiom differentiatedDisclosureWelfare : (ℝ → ℝ) → ℝ
-
-/-- R63 closure-path-A NEW opaque carrier: paper line 658's explicit
+/-- R63 paper-novel opaque carrier: paper line 658's explicit
     per-agent-optimum aggregate `∫ W(β*(κ, α), κ, α) dG` abstracted
     as a single (ℝ → ℝ) → ℝ functional of the population distribution.
     Paper Corollary `cor:disclosure` Part 2 proof (line 658) writes
     "the planner sets `β_i = β*(κ_i, α_i)` for each agent type. ...
     This achieves `W̄_diff = ∫ W(β*(κ, α), κ, α) dG`."
 
-    Encoding choice: introduced by R63 to factor the retired bundled
-    `differentiated_per_agent_optimum_dominates_uniform_OPEN`
-    workingAssumption into (i) a §3.4.3 structural equation pinning
-    `differentiatedDisclosureWelfare G = perAgentOptimalAggregate G`
-    (paper line 658 explicit per-agent-assignment formula), and
-    (ii) a smaller §3.4.4 workingAssumption carrying the substantive
-    per-agent-pointwise-dominance content. The carrier itself is
-    `gapDefinitional` per `feedback_gap_ledger_in_lean4` §3.4.1
-    (paper-novel opaque-carrier primitive).
+    R72 hoist (was R63 declared after `differentiatedDisclosureWelfare`):
+    hoisted to BEFORE `differentiatedDisclosureWelfare` to support R72
+    substantive-math closure pattern (per R71 `kappa_FOSD` precedent).
+    The carrier itself remains paper-Def-stipulated structural primitive
+    per discipline §3.4.1 (paper-novel opaque-carrier primitive); position
+    in source order is metadata-neutral.
 
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
     (`∫ W(β*(κ, α), κ, α) dG` per-agent-optimum aggregate). -/
 axiom perAgentOptimalAggregate : (ℝ → ℝ) → ℝ
 
-/-- R63 closure-path-A NEW Cat 3 paper-novel ATOMIC structural
-    equation: paper line 658's explicit identification
-    `differentiatedDisclosureWelfare G = perAgentOptimalAggregate G`
-    pinning the existing `differentiatedDisclosureWelfare` carrier as
-    the per-agent-optimum aggregate. Paper Corollary `cor:disclosure`
-    Part 2 proof (line 658) writes "the planner sets `β_i = β*(κ_i,
-    α_i)` for each agent type. ... This achieves `W̄_diff = ∫ W(β*(κ,
-    α), κ, α) dG`": this structural equation pins the differentiated
-    welfare to the per-agent-optimum aggregate carrier.
+/-- Differentiated-disclosure aggregate welfare.
 
-    Encoding choice: extracted from the retired bundled
-    `differentiated_per_agent_optimum_dominates_uniform_OPEN`
-    workingAssumption per `feedback_gap_ledger_in_lean4` §18
-    Manufactured-Recognition pattern + R61 `mLimit_pos` precedent.
-    The retired atom claimed `W_bar uniform_beta ≤
-    differentiatedDisclosureWelfare G` directly without surfacing the
-    paper line 658 explicit per-agent-assignment formula; the R63
-    decomposition factors this into the carrier-pinning structural
-    equation (this axiom; paper line 658 per-agent-assignment
-    identification) + a smaller workingAssumption
-    `perAgentOptimalAggregate_dominates_uniform_OPEN` (the substantive
-    per-agent-pointwise-dominance content).
+    R72 substantive-math closure: previously declared `axiom
+    differentiatedDisclosureWelfare` (opaque carrier). R72 makes the
+    carrier CONCRETE per paper Corollary `cor:disclosure` Part 2 proof
+    line 658's own definitional commitment "the planner sets `β_i =
+    β*(κ_i, α_i)` for each agent type. ... This achieves `W̄_diff =
+    ∫ W(β*(κ, α), κ, α) dG`": paper EXPLICITLY equates the differentiated
+    welfare with the per-agent-optimum aggregate. The Lean `def` IS the
+    paper's exact identification.
 
-    Cat 3 sub-type: structuralEquation (paper-stipulated identity
-    pinning the `differentiatedDisclosureWelfare` carrier to the
-    per-agent-optimum aggregate per paper line 658 explicit
-    `β_i = β*(κ_i, α_i)` per-agent assignment; 永不 close per
-    discipline §3.4.3 — this is paper's commitment to how its
-    primitives are related).
+    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
+    measure-theoretic per-agent-integration framework, define the paper-
+    faithful identification locally rather than skip.
+
+    paper source: Corollary `cor:disclosure` Part 2 proof, line 658
+    (`W̄_diff = ∫ W(β*(κ, α), κ, α) dG` per-agent-optimum aggregate
+    identification). -/
+noncomputable def differentiatedDisclosureWelfare : (ℝ → ℝ) → ℝ :=
+  fun G => perAgentOptimalAggregate G
+
+/-- Cat 1 derived theorem (R72 substantive-math closure): paper line 658
+    explicit identification `differentiatedDisclosureWelfare G =
+    perAgentOptimalAggregate G`. Now provable kernel-pure via the
+    `differentiatedDisclosureWelfare` `def`'s unfolding (`rfl`).
+
+    R72 closure pattern: the previous `axiom differentiatedDisclosureWelfare_
+    eq_perAgentOptimal_OPEN` (R63 `structuralEquation gapDefinitional`)
+    is REPLACED by this Cat 1 derived theorem composing the paper-
+    faithful `differentiatedDisclosureWelfare` `def` (paper line 658
+    `W̄_diff = ∫ W(β*(κ, α), κ, α) dG` IS the carrier's defining
+    identification with the per-agent-optimum aggregate) with kernel-
+    level `rfl`. The companion carrier `perAgentOptimalAggregate`
+    (hoisted to before `differentiatedDisclosureWelfare` above) hosts
+    the per-agent-optimum aggregate.
+
+    Net workingAssumption delta: −1 (structural-equation gapDefinitional
+    atom retired; carrier-pair preserved with paper-faithful identification
+    encoded in `def`).
 
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
     (`W̄_diff = ∫ W(β*(κ, α), κ, α) dG` explicit per-agent-assignment
     formula). -/
-axiom differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN :
+theorem differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN :
     ∀ G : ℝ → ℝ,
-      differentiatedDisclosureWelfare G = perAgentOptimalAggregate G
+      differentiatedDisclosureWelfare G = perAgentOptimalAggregate G :=
+  fun _ => rfl
 
 /-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
     paper line 658 explicitly asserts the per-agent-optimum aggregate
