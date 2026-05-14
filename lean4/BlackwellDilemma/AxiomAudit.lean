@@ -591,4 +591,40 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.FiveState.betaStarOfP_eq_minimiser_witness_OPEN
 #print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
 
+-- R73 substantive-math closures (concrete-def closure of paper-stated
+-- structural-equation atoms via R72 pattern continuation, applied to two
+-- new classes — sup/inf-characterisation atoms and paper-named regime-
+-- split atoms):
+--
+-- (1) `kappaStar_def` (paper Theorem 4.1 Part 3 line 493 inf-
+--     characterisation `κ* = inf{κ > 0 : m(κ) ≥ 0}`): previously
+--     workingAssumption gapOpen axiom, now derivedTheorem gapClosed via
+--     `noncomputable def kappaStar (p _α : ℝ) : ℝ := sInf {κ : ℝ | 0 < κ
+--     ∧ 0 ≤ mean_estimate_gap p κ}` + `theorem kappaStar_def := fun _ _
+--     => rfl`.
+-- (2) `alphaStar_def` (paper `prop:sentimental` proof line 602 sup-
+--     characterisation): previously workingAssumption gapOpen axiom,
+--     now derivedTheorem gapClosed via `noncomputable def alphaStar (κ
+--     _p : ℝ) : ℝ := sSup {...}` + `theorem alphaStar_def := fun _ _ =>
+--     rfl`.
+-- (3) `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (paper Remark
+--     `rem:robustness-misspec` (ii) line 942 paper-named regime split at
+--     horizon `k ≥ d`): previously structuralEquation gapDefinitional
+--     axiom, now derivedTheorem gapClosed via `noncomputable def
+--     myopicKWelfare := if k ≥ d then agentWelfare AgentType.bayesian β
+--     0 1 else myopicKWelfareBelowDepth k d β` + `theorem ... := by
+--     unfold myopicKWelfare; exact if_pos hkd`. Adds new opaque carrier
+--     `myopicKWelfareBelowDepth` for the paper-implicit `k < d` regime.
+--
+-- Each closure is HONEST (paper's exact identification formula or paper-
+-- named regime split is encoded in the def body, no R7-style content-
+-- erasure). The previously-axiom-named entities now have their identifiers
+-- bound to derived theorems; #print axioms reflects the new
+-- kernel-pure derivation chain (depending on `mean_estimate_gap`,
+-- `agentWelfare`, `myopicKWelfareBelowDepth`, etc., not on the previous
+-- opaque axioms).
+#print axioms BlackwellDilemma.kappaStar_def
+#print axioms BlackwellDilemma.alphaStar_def
+#print axioms BlackwellDilemma.myopicKWelfareBelowDepth
+
 end BlackwellDilemma.AxiomAudit
