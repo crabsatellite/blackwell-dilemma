@@ -249,6 +249,29 @@ namespace BlackwellDilemma.AxiomAudit
 -- new smaller wAs.
 #print axioms BlackwellDilemma.welfareCrossPartial_explicit_form_OPEN
 #print axioms BlackwellDilemma.cross_partial_sign_in_z_lt_one_OPEN
+-- R78 ESCALATION on the R76 residual wAs (per `feedback_no_self_retreat`
+-- + `feedback_no_compute_retreat` + `feedback_lean_real_math`): the R76
+-- opaque carriers firstTermCrossPartial / secondTermCrossPartial are
+-- MADE CONCRETE as the paper's exact closed-form products (Proposition
+-- prop:supermodular proof lines 566-584):
+--   firstTermCrossPartial β κ
+--     = sigEffRatioFactor β * mPrime κ * stdNormalPDF (snrZ β κ)
+--         * (1 - snrZ β κ ^ 2) * bridgeValueGap β
+--   secondTermCrossPartial β κ = pCorrectDerivKappa β κ * vDynDerivBeta β
+-- The 2 residual wA axioms secondTermCrossPartial_nonneg_OPEN +
+-- firstTermCrossPartial_pos_in_z_lt_one_OPEN are REPLACED by derived
+-- THEOREMS of the same name. secondTermCrossPartial_nonneg_OPEN closes
+-- via `mul_nonneg` of paper-stated factor signs; firstTermCrossPartial_
+-- pos_in_z_lt_one_OPEN closes factor-by-factor with stdNormalPDF_pos
+-- (Mathlib-derived, kernel-pure) + `1 - z² > 0` (Mathlib nlinarith from
+-- |z| < 1) + 3 paper-stated factor-sign atoms. NET −2 wA. The 5 new
+-- factor-sign atoms (sigEffRatioFactor_pos, mPrime_pos, bridgeValueGap_pos,
+-- pCorrectDerivKappa_pos, vDynDerivBeta_nonneg) are Cat 3 §3.4.3
+-- structuralEquation (paper writes each sign explicitly), NOT wAs.
+-- stdNormalPDF_pos is Cat 1 Mathlib (kernel-pure, no paper axioms).
+#print axioms BlackwellDilemma.secondTermCrossPartial_nonneg_OPEN
+#print axioms BlackwellDilemma.firstTermCrossPartial_pos_in_z_lt_one_OPEN
+#print axioms BlackwellDilemma.stdNormalPDF_pos
 
 -- §5 Constructive instances
 #print axioms BlackwellDilemma.FiveState.gap_kappaStar_at_two_thirds

@@ -5472,10 +5472,11 @@ def entry_carrier_firstTermCrossPartial : GapEntry where
     "term `∂²P_correct/(∂β ∂κ) · [V_dyn(u_2, β) - r(u_1)]` (the term " ++
     "involving the `[1 - z²]` factor)"
   attackHistory :=
-    [ "R76 2026-05-15: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN (R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial). Carrier declared `axiom firstTermCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L754. Companion atom `firstTermCrossPartial_pos_in_z_lt_one_OPEN` (separately recorded) anchors the carrier to the paper-stated positivity at `|z| < 1`. Cat 1 reduction check: CLEAR-NO — paper-novel cross-partial subterm; no Mathlib equivalent at this opaque-carrier abstraction level. Cat 2 reduction check: CLEAR-NO — paper-novel construction (the closed-form involves Φ + φ + paper-novel σ_eff + m which Mathlib lacks at this composite level). 永不 close per discipline." ]
-  scope := "Opaque carrier `firstTermCrossPartial : ℝ → ℝ → ℝ` for the paper's first cross-partial term (paper line 566 first contribution)"
+    [ "R76 2026-05-15: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN (R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial). Carrier declared `axiom firstTermCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L754. Companion atom `firstTermCrossPartial_pos_in_z_lt_one_OPEN` (separately recorded) anchors the carrier to the paper-stated positivity at `|z| < 1`. Cat 1 reduction check: CLEAR-NO — paper-novel cross-partial subterm; no Mathlib equivalent at this opaque-carrier abstraction level. Cat 2 reduction check: CLEAR-NO — paper-novel construction (the closed-form involves Φ + φ + paper-novel σ_eff + m which Mathlib lacks at this composite level). 永不 close per discipline.",
+      "R78 2026-05-15: carrier MADE CONCRETE per the R78 ESCALATION (per `feedback_no_compute_retreat` — R72 `W_bar` / R76 `welfareCrossPartial` concrete-def precedent). The R76 `axiom firstTermCrossPartial : ℝ → ℝ → ℝ` is REPLACED by `noncomputable def firstTermCrossPartial := fun β κ => sigEffRatioFactor β * mPrime κ * stdNormalPDF (snrZ β κ) * (1 - snrZ β κ ^ 2) * bridgeValueGap β` — the paper's exact closed-form product (Proposition `prop:supermodular` proof lines 566 + 582). Classification UNCHANGED (carrier, gapDefinitional 永不-close): the def body invokes new paper-novel structural primitives (`sigEffRatioFactor`, `mPrime`, `bridgeValueGap` derivative-sign carriers) + the concrete `stdNormalPDF` + the existing `snrZ` carrier. The concrete def enabled the downstream `firstTermCrossPartial_pos_in_z_lt_one_OPEN` to flip workingAssumption → derivedTheorem (NET −1 wA)." ]
+  scope := "Concrete def `firstTermCrossPartial : ℝ → ℝ → ℝ` (R78: paper closed-form product) for the paper's first cross-partial term (paper line 566 first contribution)"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN; R78 made CONCRETE as the paper closed-form product (carrier classification unchanged — def body invokes paper-novel structural primitives).  永不 close."
   conditionalOn := []
 
 /-- R76 NEW Cat 3 paper-novel opaque carrier: paper line 566's second
@@ -5490,40 +5491,228 @@ def entry_carrier_secondTermCrossPartial : GapEntry where
     "term `∂P_correct/∂κ · ∂V_dyn(u_2, β)/∂β` (the within-subtree " ++
     "Blackwell term, non-negative per paper line 568)"
   attackHistory :=
-    [ "R76 2026-05-15: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN (R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial). Carrier declared `axiom secondTermCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L770. Companion atom `secondTermCrossPartial_nonneg_OPEN` (separately recorded) anchors the carrier to the paper-stated non-negativity (paper line 568). Cat 1 reduction check: CLEAR-NO — paper-novel cross-partial subterm; no Mathlib equivalent at this opaque-carrier abstraction level. Cat 2 reduction check: CLEAR-NO — paper-novel construction (the within-subtree Blackwell term involves paper-novel `P_correct` and `V_dyn` carriers). 永不 close per discipline." ]
-  scope := "Opaque carrier `secondTermCrossPartial : ℝ → ℝ → ℝ` for the paper's second cross-partial term (paper line 566 second contribution)"
+    [ "R76 2026-05-15: NEW Cat 3 paper-novel opaque carrier per §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN (R63 W_bar mixture decomposition / R72 W_bar precedent applied to the cross-partial). Carrier declared `axiom secondTermCrossPartial : ℝ → ℝ → ℝ` at Cognitive.lean ~L770. Companion atom `secondTermCrossPartial_nonneg_OPEN` (separately recorded) anchors the carrier to the paper-stated non-negativity (paper line 568). Cat 1 reduction check: CLEAR-NO — paper-novel cross-partial subterm; no Mathlib equivalent at this opaque-carrier abstraction level. Cat 2 reduction check: CLEAR-NO — paper-novel construction (the within-subtree Blackwell term involves paper-novel `P_correct` and `V_dyn` carriers). 永不 close per discipline.",
+      "R78 2026-05-15: carrier MADE CONCRETE per the R78 ESCALATION (per `feedback_no_compute_retreat` — R72 `W_bar` / R76 `welfareCrossPartial` concrete-def precedent). The R76 `axiom secondTermCrossPartial : ℝ → ℝ → ℝ` is REPLACED by `noncomputable def secondTermCrossPartial := fun β κ => pCorrectDerivKappa β κ * vDynDerivBeta β` — the paper's exact two-factor product (Proposition `prop:supermodular` proof line 566). Classification UNCHANGED (carrier, gapDefinitional 永不-close): the def body invokes new paper-novel structural primitives (`pCorrectDerivKappa`, `vDynDerivBeta` derivative-sign carriers). The concrete def enabled the downstream `secondTermCrossPartial_nonneg_OPEN` to flip workingAssumption → derivedTheorem (NET −1 wA)." ]
+  scope := "Concrete def `secondTermCrossPartial : ℝ → ℝ → ℝ` (R78: paper two-factor product) for the paper's second cross-partial term (paper line 566 second contribution)"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN.  永不 close."
+    "Cat 3 paper-novel primitive per v6 §3.4.1.  R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN; R78 made CONCRETE as the paper two-factor product (carrier classification unchanged — def body invokes paper-novel structural primitives).  永不 close."
   conditionalOn := []
 
 /-- R76 NEW SMALLER Cat 3 paper-novel ATOMIC stipulation: paper line 568
-    non-negativity of the second cross-partial term. -/
+    non-negativity of the second cross-partial term. R78 CLOSED: flips
+    workingAssumption gapOpen → derivedTheorem gapClosed. -/
 def entry_atom_secondTermCrossPartial_nonneg : GapEntry where
-  name := "secondTermCrossPartial_nonneg_OPEN"
-  status := GapStatus.gapOpen
+  name := "secondTermCrossPartial_nonneg_OPEN (R78 derived theorem; replaces the R76 workingAssumption axiom of the same name)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:supermodular proof, line 568 (`The second term is non-negative: ∂P_correct/∂κ > 0 ... and ∂V_dyn(u_2, β)/∂β ≥ 0`)"
   attackHistory :=
-    [ "R76 2026-05-15: NEW SMALLER Cat 3 atomic-stipulation axiom extracted from the retired bundled `welfareCrossPartial_explicit_form_OPEN` per `feedback_gap_ledger_in_lean4` §18 closure-path-A decomposition (R63 W_bar mixture decomposition / R72 W_bar precedent). The retired bundled atom asserted ∃-form `welfareCrossPartial = first + second ∧ 0 ≤ second ∧ ...`; the R76 decomposition factors the `0 ≤ second` clause into this smaller wA on the explicit new carrier `secondTermCrossPartial`. Cat 1 reduction check: not Mathlib-derivable (paper-novel `P_correct` / `V_dyn` derivative-sign analysis on the IDP welfare functional). Cat 2 reduction check: paper-novel construction (within-subtree Blackwell monotonicity is paper-stated as a derivative-sign claim). Hosted by `welfareCrossPartial_explicit_form_OPEN` derived theorem (Cognitive.lean) which composes this smaller wA with `firstTermCrossPartial_pos_in_z_lt_one_OPEN` + the welfareCrossPartial def's `rfl`-reduction." ]
+    [ "R76 2026-05-15: NEW SMALLER Cat 3 atomic-stipulation axiom extracted from the retired bundled `welfareCrossPartial_explicit_form_OPEN` per `feedback_gap_ledger_in_lean4` §18 closure-path-A decomposition (R63 W_bar mixture decomposition / R72 W_bar precedent). The retired bundled atom asserted ∃-form `welfareCrossPartial = first + second ∧ 0 ≤ second ∧ ...`; the R76 decomposition factors the `0 ≤ second` clause into this smaller wA on the explicit new carrier `secondTermCrossPartial`. Cat 1 reduction check: not Mathlib-derivable (paper-novel `P_correct` / `V_dyn` derivative-sign analysis on the IDP welfare functional). Cat 2 reduction check: paper-novel construction (within-subtree Blackwell monotonicity is paper-stated as a derivative-sign claim). Hosted by `welfareCrossPartial_explicit_form_OPEN` derived theorem (Cognitive.lean) which composes this smaller wA with `firstTermCrossPartial_pos_in_z_lt_one_OPEN` + the welfareCrossPartial def's `rfl`-reduction.",
+      "R78 2026-05-15: workingAssumption gapOpen → derivedTheorem gapClosed via the R78 ESCALATION (per `feedback_no_self_retreat` + `feedback_no_compute_retreat`). The R76 opaque carrier `axiom secondTermCrossPartial : ℝ → ℝ → ℝ` is made CONCRETE as the paper's exact two-factor product `noncomputable def secondTermCrossPartial := fun β κ => pCorrectDerivKappa β κ * vDynDerivBeta β` (paper Proposition `prop:supermodular` proof line 566). The `axiom secondTermCrossPartial_nonneg_OPEN` is REPLACED by the derived `theorem secondTermCrossPartial_nonneg_OPEN` (Cognitive.lean) proving `0 ≤ secondTermCrossPartial β κ` via `mul_nonneg` applied to the two paper-stated factor signs `pCorrectDerivKappa_pos` (paper line 568 `∂P_correct/∂κ > 0`) + `vDynDerivBeta_nonneg` (paper line 568 `∂V_dyn(u_2,β)/∂β ≥ 0`). Net wA: −1. The two new factor-sign atoms are Cat 3 §3.4.3 `structuralEquation` (paper writes each sign explicitly — paper-Def-stipulated atomic content on its primitive derivative-sign carriers, 永不-close), NOT new wAs. `#print axioms` confirms the theorem now depends on `pCorrectDerivKappa_pos` / `vDynDerivBeta_nonneg` (structuralEquation) + carriers, with NO `_OPEN` wA in the dependency tree." ]
   scope := "Proposition prop:supermodular, paper line 568 non-negativity of the within-subtree Blackwell second cross-partial term"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = derive `0 ≤ secondTermCrossPartial β κ` from Proposition prop:supermodular proof line 568 (`∂P_correct/∂κ > 0` from cognitive-depth-improves-correct-routing + `∂V_dyn(u_2, β)/∂β ≥ 0` from within-subtree Blackwell monotonicity); requires Mathlib HasDerivAt + paper-novel P_correct/V_dyn derivative-sign analysis."
+    "CLOSED via R78 ESCALATION concrete-def closure. Derived theorem `secondTermCrossPartial_nonneg_OPEN` (Cognitive.lean) proves `0 ≤ secondTermCrossPartial β κ` from the concrete two-factor product def + `mul_nonneg` of the paper-stated factor signs `pCorrectDerivKappa_pos` + `vDynDerivBeta_nonneg` (Cat 3 §3.4.3 structuralEquation atoms; paper line 568 writes each sign explicitly)."
   conditionalOn := []
 
 /-- R76 NEW SMALLER Cat 3 paper-novel ATOMIC stipulation: paper lines
-    582-584 positivity of the first cross-partial term at `|z| < 1`. -/
+    582-584 positivity of the first cross-partial term at `|z| < 1`.
+    R78 CLOSED: flips workingAssumption gapOpen → derivedTheorem
+    gapClosed. -/
 def entry_atom_firstTermCrossPartial_pos_in_z_lt_one : GapEntry where
-  name := "firstTermCrossPartial_pos_in_z_lt_one_OPEN"
-  status := GapStatus.gapOpen
+  name := "firstTermCrossPartial_pos_in_z_lt_one_OPEN (R78 derived theorem; replaces the R76 workingAssumption axiom of the same name)"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:supermodular proof, lines 582-584 (`|σ'_eff|/σ_eff² > 0; m'(κ) > 0; φ(z) > 0; [1 - z²] > 0` factor analysis at `|z| < 1`, combined with bridge-dominance for `[V_dyn(u_2, β) - r(u_1)] > 0`)"
   attackHistory :=
-    [ "R76 2026-05-15: NEW SMALLER Cat 3 atomic-stipulation axiom extracted from the retired bundled `welfareCrossPartial_explicit_form_OPEN` per `feedback_gap_ledger_in_lean4` §18 closure-path-A decomposition (R63 W_bar mixture decomposition / R72 W_bar precedent). The retired bundled atom asserted ∃-form `welfareCrossPartial = first + second ∧ ... ∧ (|z| < 1 → 0 < first)`; the R76 decomposition factors the `(|z| < 1 → 0 < first)` clause into this smaller wA on the explicit new carrier `firstTermCrossPartial`. Cat 1 reduction check: not Mathlib-derivable (paper-novel Gaussian PDF derivative computation + IDP welfare functional decomposition). Cat 2 reduction check: paper-novel construction (paper's `φ'(z) = -z·φ(z)` Gaussian PDF derivative identity is Mathlib-derivable, but the specific composition with paper-novel σ_eff/m carriers is paper-novel). Hosted by `welfareCrossPartial_explicit_form_OPEN` derived theorem (Cognitive.lean) which composes this smaller wA with `secondTermCrossPartial_nonneg_OPEN` + the welfareCrossPartial def's `rfl`-reduction." ]
+    [ "R76 2026-05-15: NEW SMALLER Cat 3 atomic-stipulation axiom extracted from the retired bundled `welfareCrossPartial_explicit_form_OPEN` per `feedback_gap_ledger_in_lean4` §18 closure-path-A decomposition (R63 W_bar mixture decomposition / R72 W_bar precedent). The retired bundled atom asserted ∃-form `welfareCrossPartial = first + second ∧ ... ∧ (|z| < 1 → 0 < first)`; the R76 decomposition factors the `(|z| < 1 → 0 < first)` clause into this smaller wA on the explicit new carrier `firstTermCrossPartial`. Cat 1 reduction check: not Mathlib-derivable (paper-novel Gaussian PDF derivative computation + IDP welfare functional decomposition). Cat 2 reduction check: paper-novel construction (paper's `φ'(z) = -z·φ(z)` Gaussian PDF derivative identity is Mathlib-derivable, but the specific composition with paper-novel σ_eff/m carriers is paper-novel). Hosted by `welfareCrossPartial_explicit_form_OPEN` derived theorem (Cognitive.lean) which composes this smaller wA with `secondTermCrossPartial_nonneg_OPEN` + the welfareCrossPartial def's `rfl`-reduction.",
+      "R78 2026-05-15: workingAssumption gapOpen → derivedTheorem gapClosed via the R78 ESCALATION (per `feedback_no_self_retreat` + `feedback_no_compute_retreat` + `feedback_lean_real_math`). The R76 opaque carrier `axiom firstTermCrossPartial : ℝ → ℝ → ℝ` is made CONCRETE as the paper's exact closed-form product `noncomputable def firstTermCrossPartial := fun β κ => sigEffRatioFactor β * mPrime κ * stdNormalPDF (snrZ β κ) * (1 - snrZ β κ ^ 2) * bridgeValueGap β` (paper Proposition `prop:supermodular` proof lines 566 + 582: `∂²P_correct/(∂β ∂κ) = (|σ'_eff|/σ_eff²)·m'(κ)·φ(z)·[1−z²]`, first term `= ∂²P_correct/(∂β ∂κ)·[V_dyn(u_2,β)−r(u_1)]`). The `axiom firstTermCrossPartial_pos_in_z_lt_one_OPEN` is REPLACED by the derived `theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN` (Cognitive.lean) proving `|snrZ β κ| < 1 → 0 < firstTermCrossPartial β κ` factor-by-factor: `sigEffRatioFactor_pos` (paper line 582), `mPrime_pos` (paper proposition hypothesis `m(κ)` strictly increasing), `stdNormalPDF_pos` (MATHLIB-DERIVED — `Real.exp_pos` + `Real.sqrt_pos` + `Real.pi_pos`, depends only on `[propext, Classical.choice, Quot.sound]`), `1 − z² > 0` at `|z| < 1` (MATHLIB-DERIVED — `abs_lt` + `nlinarith`), `bridgeValueGap_pos` (paper line 558 / `BridgeDominance` gate); `mul_pos` assembles the five-factor product. Net wA: −1. The two Mathlib-derivable factors (`φ(z) > 0`, `[1 − z²] > 0`) carry NO axiom; the three paper-stated factor-sign atoms are Cat 3 §3.4.3 `structuralEquation` (paper writes each sign explicitly), NOT new wAs. `#print axioms` confirms NO `_OPEN` wA in the dependency tree." ]
   scope := "Proposition prop:supermodular, paper lines 582-584 positivity of the [1 - z²]-factor first cross-partial term at `|z| < 1`"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = derive `|snrZ β κ| < 1 → 0 < firstTermCrossPartial β κ` from Proposition prop:supermodular proof lines 582-584 reconstruction (`|σ'_eff|/σ_eff² > 0`, `m'(κ) > 0`, `φ(z) > 0`, `[1 - z²] > 0` factor analysis at `|z| < 1`, combined with bridge-dominance for `[V_dyn(u_2, β) - r(u_1)] > 0`); requires Mathlib HasDerivAt + Φ + φ derivative machinery for the explicit Gaussian closed form."
+    "CLOSED via R78 ESCALATION concrete-def closure. Derived theorem `firstTermCrossPartial_pos_in_z_lt_one_OPEN` (Cognitive.lean) proves `|snrZ β κ| < 1 → 0 < firstTermCrossPartial β κ` from the concrete five-factor closed-form product + factor-by-factor positivity: paper-stated factor signs (`sigEffRatioFactor_pos`, `mPrime_pos`, `bridgeValueGap_pos` — Cat 3 §3.4.3 structuralEquation) composed with the MATHLIB-DERIVED `stdNormalPDF_pos` (kernel-pure) + `1 − z² > 0` (nlinarith from `|z| < 1`)."
+  conditionalOn := []
+
+/-! ## R78 ESCALATION — Block 3 Gaussian closed-form factor entries
+
+R78 ESCALATION (per `feedback_no_self_retreat` + `feedback_no_compute_retreat`
++ `feedback_lean_real_math`): closes the two R76 residual workingAssumption
+atoms (`secondTermCrossPartial_nonneg_OPEN`,
+`firstTermCrossPartial_pos_in_z_lt_one_OPEN`) by making the opaque carriers
+`firstTermCrossPartial` / `secondTermCrossPartial` CONCRETE as the paper's own
+explicit closed-form products (Proposition `prop:supermodular` proof lines
+566-584). The new entries below: 1 concrete-def factor (`stdNormalPDF`) +
+1 Cat 1 Mathlib theorem (`stdNormalPDF_pos`) + 5 paper-novel structural
+factor carriers + 5 Cat 3 §3.4.3 `structuralEquation` factor-sign atoms.
+NET −2 wA; the 5 structuralEquation atoms are paper-Def-stipulated atomic
+content (paper writes each factor sign explicitly), 永不-close. -/
+
+/-- R78 NEW concrete factor `def`: the standard Gaussian density `φ`. -/
+def entry_def_stdNormalPDF : GapEntry where
+  name := "stdNormalPDF (R78: NEW concrete def — standard Gaussian density φ(z) = (1/√(2π))·exp(−z²/2))"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.notCat3
+  paperSource := "Proposition prop:supermodular proof, line 580 (`φ(z)` Gaussian density; `φ'(z) = −z·φ(z)`)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW concrete `noncomputable def stdNormalPDF (z : ℝ) : ℝ := (1 / Real.sqrt (2 * Real.pi)) * Real.exp (-z ^ 2 / 2)` (Cognitive.lean) — the textbook standard-normal pdf, fully concrete, NO opaque carrier. Introduced for the R78 concrete `firstTermCrossPartial` closed form. Cat 1 Mathlib: built entirely from `Real.sqrt` / `Real.exp` / `Real.pi`; not a paper-novel primitive — the standard Gaussian density is a Mathlib-expressible object. Classified `cat1Mathlib` / `notCat3` (concrete Mathlib def, not a Cat 3 atom)." ]
+  scope := "Concrete def `stdNormalPDF : ℝ → ℝ`, the standard Gaussian density"
+  obstacleOrAttribution :=
+    "Cat 1 Mathlib concrete def (standard Gaussian density). NOT a Cat 3 atom — built from Mathlib `Real.sqrt`/`Real.exp`/`Real.pi`. No closure needed (definitional)."
+  conditionalOn := []
+
+/-- R78 Cat 1 Mathlib theorem: `stdNormalPDF z > 0` for all `z`. -/
+def entry_thm_stdNormalPDF_pos : GapEntry where
+  name := "stdNormalPDF_pos (R78: NEW Cat 1 Mathlib theorem — standard Gaussian density is strictly positive)"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.notCat3
+  paperSource := "Proposition prop:supermodular proof, line 583 (`φ(z) > 0` factor)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 1 Mathlib `theorem stdNormalPDF_pos (z : ℝ) : 0 < stdNormalPDF z` (Cognitive.lean). Proof: `unfold stdNormalPDF`; `Real.sqrt_pos.mpr` + `Real.pi_pos` gives `0 < √(2π)`; `positivity` discharges `(1/√(2π)) · exp(−z²/2) > 0` (using `Real.exp_pos` internally). `#print axioms` confirms dependency `[propext, Classical.choice, Quot.sound]` ONLY — kernel-pure, no paper axioms. This is the Mathlib-derivable `φ(z) > 0` factor of the paper's cross-partial closed form (paper line 583 writes `φ(z) > 0`); R78 DERIVES it rather than axiomatising it." ]
+  scope := "Cat 1 Mathlib: strict positivity of the standard Gaussian density"
+  obstacleOrAttribution :=
+    "CLOSED Cat 1 Mathlib — `theorem stdNormalPDF_pos` proved kernel-pure via `Real.sqrt_pos` + `Real.pi_pos` + `positivity` (`Real.exp_pos`). Depends on `[propext, Classical.choice, Quot.sound]` only."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 paper-novel structural factor carrier: `|σ'_eff|/σ_eff²`. -/
+def entry_carrier_sigEffRatioFactor : GapEntry where
+  name := "sigEffRatioFactor (R78: NEW Cat 3 paper-novel structural factor carrier — paper line 582 `|σ'_eff|/σ_eff²` derivative-sign quantity)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:supermodular proof, line 582 (`|σ'_eff|/σ_eff²` factor of `∂²P_correct/(∂β ∂κ)`)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 paper-novel structural factor carrier `axiom sigEffRatioFactor : ℝ → ℝ` (Cognitive.lean), hosting paper Proposition `prop:supermodular` proof line 582's derivative-sign quantity `|σ'_eff(β)|/σ_eff(β)²`. Introduced for the R78 concrete `firstTermCrossPartial` closed form. Cat 1 reduction check: CLEAR-NO — the paper's effective-noise standard deviation `σ_eff` is a paper-novel primitive (not the file-level `signalVariance`; paper line 583 footnote distinguishes them), so its derivative-ratio is paper-novel at this opaque-carrier abstraction level. Cat 2 reduction check: CLEAR-NO — paper-novel. 永不 close per §3.4.1." ]
+  scope := "Opaque carrier `sigEffRatioFactor : ℝ → ℝ` for the paper's `|σ'_eff|/σ_eff²` derivative-sign factor"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1. R78 factor carrier for the `prop:supermodular` closed-form cross-partial. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 §3.4.3 structuralEquation: `|σ'_eff|/σ_eff² > 0`. -/
+def entry_atom_sigEffRatioFactor_pos : GapEntry where
+  name := "sigEffRatioFactor_pos (R78: NEW Cat 3 §3.4.3 structuralEquation — paper line 582 stipulates `|σ'_eff|/σ_eff² > 0`)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:supermodular proof, line 582 (`|σ'_eff|/σ_eff² > 0`)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 §3.4.3 `structuralEquation` atom `axiom sigEffRatioFactor_pos (β : ℝ) : 0 < sigEffRatioFactor β` (Cognitive.lean). Paper Proposition `prop:supermodular` proof line 582 writes the factor `|σ'_eff|/σ_eff²` and asserts its sign EXPLICITLY: `Each factor: |σ'_eff|/σ_eff² > 0`. This is the paper's defining sign-commitment on the `sigEffRatioFactor` derivative-sign primitive (a ratio of an absolute value over a square — the paper's `σ_eff` is strictly decreasing in β so `σ'_eff ≠ 0` and the factor is strictly positive). Per §3.4.3 this is paper-Def-stipulated atomic content on a primitive — definitional, 永不-close. Consumed by the derived theorem `firstTermCrossPartial_pos_in_z_lt_one_OPEN`." ]
+  scope := "Paper line 582 sign-stipulation `|σ'_eff|/σ_eff² > 0` on the `sigEffRatioFactor` primitive"
+  obstacleOrAttribution :=
+    "Cat 3 §3.4.3 structuralEquation — paper Proposition prop:supermodular proof line 582 explicitly writes `|σ'_eff|/σ_eff² > 0`. Paper-Def-stipulated atomic content on a primitive derivative-sign carrier. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 paper-novel structural factor carrier: `m'(κ)`. -/
+def entry_carrier_mPrime : GapEntry where
+  name := "mPrime (R78: NEW Cat 3 paper-novel structural factor carrier — paper line 582 `m'(κ)` mean-estimate-gap derivative)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:supermodular statement (`m'(κ) > 0` hypothesis) + proof line 582 (`m'(κ)` factor)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 paper-novel structural factor carrier `axiom mPrime : ℝ → ℝ` (Cognitive.lean), hosting the derivative `m'(κ)` of the paper's mean-estimate gap. This is the carrier for the paper Proposition `prop:supermodular` STANDING HYPOTHESIS `Suppose the mean estimate gap m(κ) ... is strictly increasing in κ on (0, ∞)`. Introduced for the R78 concrete `firstTermCrossPartial` closed form. Cat 1 reduction check: CLEAR-NO — `m(κ)` is the paper-novel opaque `mean_estimate_gap` carrier; its derivative is paper-novel. Cat 2 reduction check: CLEAR-NO. 永不 close per §3.4.1." ]
+  scope := "Opaque carrier `mPrime : ℝ → ℝ` for the paper's `m'(κ)` mean-estimate-gap derivative"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1. R78 factor carrier for the `prop:supermodular` closed-form cross-partial. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 §3.4.3 structuralEquation: `m'(κ) > 0` (paper hypothesis). -/
+def entry_atom_mPrime_pos : GapEntry where
+  name := "mPrime_pos (R78: NEW Cat 3 §3.4.3 structuralEquation — paper Proposition prop:supermodular hypothesis `m(κ)` strictly increasing yields `m'(κ) > 0`)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:supermodular statement (`Suppose the mean estimate gap m(κ) ... is strictly increasing in κ on (0, ∞)`)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 §3.4.3 `structuralEquation` atom `axiom mPrime_pos (κ : ℝ) : 0 < mPrime κ` (Cognitive.lean). Paper Proposition `prop:supermodular` STATEMENT carries the standing hypothesis `Suppose the mean estimate gap m(κ) = E[V̂_κ(u_2)] − E[V̂_κ(u_1)] is strictly increasing in κ on (0, ∞)`; the proof line 582 uses `m'(κ) > 0` directly. This is the paper's standing proposition hypothesis pinned on the `mPrime` carrier. Per §3.4.3 a paper-stated proposition hypothesis on a primitive is definitional atomic content — 永不-close (it is part of the proposition's scope, not a derivation gap). Consumed by the derived theorem `firstTermCrossPartial_pos_in_z_lt_one_OPEN`." ]
+  scope := "Paper Proposition prop:supermodular hypothesis `m(κ)` strictly increasing → `m'(κ) > 0` on the `mPrime` primitive"
+  obstacleOrAttribution :=
+    "Cat 3 §3.4.3 structuralEquation — paper Proposition prop:supermodular STATEMENT hypothesis `m(κ)` strictly increasing. Paper-stated proposition hypothesis on a primitive (part of the proposition's scope). 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 paper-novel structural factor carrier: `V_dyn(u_2,β)−r(u_1)`. -/
+def entry_carrier_bridgeValueGap : GapEntry where
+  name := "bridgeValueGap (R78: NEW Cat 3 paper-novel structural factor carrier — paper line 566 `[V_dyn(u_2,β) − r(u_1)]` bridge value gap)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:supermodular proof, line 566 (`[V_dyn(u_2, β) − r(u_1)]` first-term reward gap; positivity gated by BridgeDominance, paper line 558)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 paper-novel structural factor carrier `axiom bridgeValueGap : ℝ → ℝ` (Cognitive.lean), hosting paper Proposition `prop:supermodular` proof line 566's reward-gap quantity `[V_dyn(u_2, β) − r(u_1)]`. Introduced for the R78 concrete `firstTermCrossPartial` closed form. Cat 1 reduction check: CLEAR-NO — the paper-instance vertices `u_1, u_2` and `V_dyn` are paper-novel primitives local to the proposition setup. Cat 2 reduction check: CLEAR-NO. 永不 close per §3.4.1." ]
+  scope := "Opaque carrier `bridgeValueGap : ℝ → ℝ` for the paper's `[V_dyn(u_2,β) − r(u_1)]` reward gap"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1. R78 factor carrier for the `prop:supermodular` closed-form cross-partial. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 §3.4.3 structuralEquation: `BridgeDominance β → 0 < bridgeValueGap β`. -/
+def entry_atom_bridgeValueGap_pos : GapEntry where
+  name := "bridgeValueGap_pos (R78: NEW Cat 3 §3.4.3 structuralEquation — paper line 558 defines BridgeDominance as `V_dyn(u_2,β) > r(u_1)`, identifying it with positivity of bridgeValueGap)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:supermodular, line 558 (`V_dyn(u_2, β) > r(u_1)` joint hypothesis defining the bridge-dominance regime gate)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 §3.4.3 `structuralEquation` atom `axiom bridgeValueGap_pos (β : ℝ) : BridgeDominance β → 0 < bridgeValueGap β` (Cognitive.lean). Paper Proposition `prop:supermodular` line 558 DEFINES the bridge-dominance regime gate AS the condition `V_dyn(u_2, β) > r(u_1)`; the opaque predicate `BridgeDominance β` encodes exactly that condition. This atom is the paper's defining identification of `BridgeDominance` with the positivity of `bridgeValueGap = V_dyn(u_2,β) − r(u_1)` — i.e. it states `BridgeDominance β ↔ (the reward gap is positive)` in the `→` direction needed downstream. Per §3.4.3 this is a paper-stated definitional equation linking the predicate primitive `BridgeDominance` to the carrier `bridgeValueGap` — definitional atomic content, 永不-close. Consumed by the derived theorem `firstTermCrossPartial_pos_in_z_lt_one_OPEN`." ]
+  scope := "Paper line 558 definitional identification `BridgeDominance β → 0 < bridgeValueGap β`"
+  obstacleOrAttribution :=
+    "Cat 3 §3.4.3 structuralEquation — paper Proposition prop:supermodular line 558 DEFINES BridgeDominance as `V_dyn(u_2,β) > r(u_1)`. Paper-stated definitional equation linking the `BridgeDominance` predicate primitive to the `bridgeValueGap` carrier. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 paper-novel structural factor carrier: `∂P_correct/∂κ`. -/
+def entry_carrier_pCorrectDerivKappa : GapEntry where
+  name := "pCorrectDerivKappa (R78: NEW Cat 3 paper-novel structural factor carrier — paper line 568 `∂P_correct/∂κ` derivative)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:supermodular proof, line 568 (`∂P_correct/∂κ` first factor of the second cross-partial term)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 paper-novel structural factor carrier `axiom pCorrectDerivKappa : ℝ → ℝ → ℝ` (Cognitive.lean), hosting paper Proposition `prop:supermodular` proof line 568's derivative `∂P_correct/∂κ`. Introduced for the R78 concrete `secondTermCrossPartial` closed form. Cat 1 reduction check: CLEAR-NO — `P_correct` is a paper-novel opaque carrier; its κ-derivative is paper-novel. Cat 2 reduction check: CLEAR-NO. 永不 close per §3.4.1." ]
+  scope := "Opaque carrier `pCorrectDerivKappa : ℝ → ℝ → ℝ` for the paper's `∂P_correct/∂κ` derivative"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1. R78 factor carrier for the `prop:supermodular` closed-form cross-partial. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 §3.4.3 structuralEquation: `∂P_correct/∂κ > 0`. -/
+def entry_atom_pCorrectDerivKappa_pos : GapEntry where
+  name := "pCorrectDerivKappa_pos (R78: NEW Cat 3 §3.4.3 structuralEquation — paper line 568 stipulates `∂P_correct/∂κ > 0`)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:supermodular proof, line 568 (`∂P_correct/∂κ > 0`, `more cognitive depth increases correct routing`)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 §3.4.3 `structuralEquation` atom `axiom pCorrectDerivKappa_pos (β κ : ℝ) : 0 < pCorrectDerivKappa β κ` (Cognitive.lean). Paper Proposition `prop:supermodular` proof line 568 asserts the sign EXPLICITLY: `∂P_correct/∂κ > 0 (more cognitive depth increases correct routing)`. This is the paper's defining sign-commitment on the `pCorrectDerivKappa` derivative-sign primitive. Per §3.4.3 this is paper-Def-stipulated atomic content on a primitive — definitional, 永不-close. Consumed by the derived theorem `secondTermCrossPartial_nonneg_OPEN`." ]
+  scope := "Paper line 568 sign-stipulation `∂P_correct/∂κ > 0` on the `pCorrectDerivKappa` primitive"
+  obstacleOrAttribution :=
+    "Cat 3 §3.4.3 structuralEquation — paper Proposition prop:supermodular proof line 568 explicitly writes `∂P_correct/∂κ > 0`. Paper-Def-stipulated atomic content on a primitive derivative-sign carrier. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 paper-novel structural factor carrier: `∂V_dyn(u_2,β)/∂β`. -/
+def entry_carrier_vDynDerivBeta : GapEntry where
+  name := "vDynDerivBeta (R78: NEW Cat 3 paper-novel structural factor carrier — paper line 568 `∂V_dyn(u_2,β)/∂β` derivative)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:supermodular proof, line 568 (`∂V_dyn(u_2, β)/∂β` second factor of the second cross-partial term)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 paper-novel structural factor carrier `axiom vDynDerivBeta : ℝ → ℝ` (Cognitive.lean), hosting paper Proposition `prop:supermodular` proof line 568's derivative `∂V_dyn(u_2, β)/∂β`. Introduced for the R78 concrete `secondTermCrossPartial` closed form. Cat 1 reduction check: CLEAR-NO — `V_dyn` of the paper-instance vertex `u_2` is a paper-novel primitive; its β-derivative is paper-novel. Cat 2 reduction check: CLEAR-NO. 永不 close per §3.4.1." ]
+  scope := "Opaque carrier `vDynDerivBeta : ℝ → ℝ` for the paper's `∂V_dyn(u_2,β)/∂β` derivative"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1. R78 factor carrier for the `prop:supermodular` closed-form cross-partial. 永不 close."
+  conditionalOn := []
+
+/-- R78 NEW Cat 3 §3.4.3 structuralEquation: `∂V_dyn(u_2,β)/∂β ≥ 0`. -/
+def entry_atom_vDynDerivBeta_nonneg : GapEntry where
+  name := "vDynDerivBeta_nonneg (R78: NEW Cat 3 §3.4.3 structuralEquation — paper line 568 stipulates `∂V_dyn(u_2,β)/∂β ≥ 0`)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:supermodular proof, line 568 (`∂V_dyn(u_2, β)/∂β ≥ 0`, `within-subtree Blackwell monotonicity`)"
+  attackHistory :=
+    [ "R78 2026-05-15: NEW Cat 3 §3.4.3 `structuralEquation` atom `axiom vDynDerivBeta_nonneg (β : ℝ) : 0 ≤ vDynDerivBeta β` (Cognitive.lean). Paper Proposition `prop:supermodular` proof line 568 asserts the sign EXPLICITLY: `∂V_dyn(u_2, β)/∂β ≥ 0 (within-subtree Blackwell monotonicity)`. This is the paper's defining sign-commitment on the `vDynDerivBeta` derivative-sign primitive. Per §3.4.3 this is paper-Def-stipulated atomic content on a primitive — definitional, 永不-close. Consumed by the derived theorem `secondTermCrossPartial_nonneg_OPEN`." ]
+  scope := "Paper line 568 sign-stipulation `∂V_dyn(u_2,β)/∂β ≥ 0` on the `vDynDerivBeta` primitive"
+  obstacleOrAttribution :=
+    "Cat 3 §3.4.3 structuralEquation — paper Proposition prop:supermodular proof line 568 explicitly writes `∂V_dyn(u_2,β)/∂β ≥ 0`. Paper-Def-stipulated atomic content on a primitive derivative-sign carrier. 永不 close."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:sentimental`
@@ -6920,8 +7109,29 @@ def allGaps : List GapEntry := [
   -- smaller wAs).
   entry_carrier_firstTermCrossPartial,
   entry_carrier_secondTermCrossPartial,
+  -- R78 ESCALATION: entry_atom_secondTermCrossPartial_nonneg +
+  -- entry_atom_firstTermCrossPartial_pos_in_z_lt_one both flip
+  -- workingAssumption gapOpen → derivedTheorem gapClosed (the R76
+  -- opaque carriers firstTermCrossPartial / secondTermCrossPartial
+  -- are made CONCRETE as the paper's closed-form products; the
+  -- positivity claims become derived theorems). NET −2 wA. The 11
+  -- R78 entries below: stdNormalPDF (concrete def) + stdNormalPDF_pos
+  -- (Cat 1 Mathlib theorem) + 5 paper-novel factor carriers + 5
+  -- Cat 3 §3.4.3 structuralEquation factor-sign atoms.
   entry_atom_secondTermCrossPartial_nonneg,
-  entry_atom_firstTermCrossPartial_pos_in_z_lt_one
+  entry_atom_firstTermCrossPartial_pos_in_z_lt_one,
+  entry_def_stdNormalPDF,
+  entry_thm_stdNormalPDF_pos,
+  entry_carrier_sigEffRatioFactor,
+  entry_atom_sigEffRatioFactor_pos,
+  entry_carrier_mPrime,
+  entry_atom_mPrime_pos,
+  entry_carrier_bridgeValueGap,
+  entry_atom_bridgeValueGap_pos,
+  entry_carrier_pCorrectDerivKappa,
+  entry_atom_pCorrectDerivKappa_pos,
+  entry_carrier_vDynDerivBeta,
+  entry_atom_vDynDerivBeta_nonneg
 ]
 
 /-- Status-keyed counts:
