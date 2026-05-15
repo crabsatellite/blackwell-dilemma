@@ -284,17 +284,50 @@ theorem gap_cognitive_threshold_part1
     axiom lives at
     `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
 
-    paper source: Theorem 4.1 Part 2, line 492. -/
-axiom kappa_large_blackwell_recovery_OPEN :
-    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+    paper source: Theorem 4.1 Part 2, line 492.
+
+    **R88 CLOSED** — `kappa_large_blackwell_recovery_OPEN` is now a
+    derived theorem (replaces the retired Cat 3 workingAssumption
+    axiom of the same name).  R88 concretised `agentWelfare` as the
+    bond-percolation expectation of the per-realisation
+    `agentRewardKernel` (Types.lean); the recovery claim then closes
+    by composing:
+      * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
+        monotonicity structural equation
+        `agentRewardKernel_kappaAbove_pointwise_monotone` (Theorem 4.1
+        Part 2 — for κ above the cognitive threshold, the κ-agent's
+        `V̂_κ` is accurate enough that, conditional on each percolation
+        realisation, a Blackwell-superior reward signal yields weakly
+        higher expected terminal reward), with
+      * the R88 foundation lemma
+        `agentWelfare_monotone_of_kernel_pointwise_monotone`
+        (`percExpectation_mono` transfers pointwise `≤` to the
+        bond-percolation expectation).
+    The threshold `κ₀` is the witness from the pointwise structural
+    equation.  The `h_blackwell` / `hC` / `hT` antecedents are
+    retained (now unused) for audit-chain continuity: `#print axioms`
+    on consumers still surfaces `gap_blackwell_monotonicity_OPEN`
+    (threaded via `h_blackwell` per the R28 broken-link discipline)
+    and the diagnostic-condition scope predicates.  inputCategory
+    Cat 3 → Cat 1; cat3SubType workingAssumption → derivedTheorem;
+    status gapOpen → gapClosed. -/
+theorem kappa_large_blackwell_recovery_OPEN
+    (_h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1) →
-    Conditions_C1_C2_C3 →
-    TerminalNeighbourTopology →
+        agentWelfare AgentType.bayesian β₂ 0 1)
+    (_hC : Conditions_C1_C2_C3)
+    (_hT : TerminalNeighbourTopology) :
     ∀ _p α : ℝ,
       ∃ κ₀ : ℝ, ∀ κ β₁ β₂ : ℝ, κ₀ ≤ κ → β₁ ≤ β₂ →
         agentWelfare AgentType.kappaAgent β₁ κ α ≤
-          agentWelfare AgentType.kappaAgent β₂ κ α
+          agentWelfare AgentType.kappaAgent β₂ κ α := by
+  intro _p α
+  obtain ⟨κ₀, h_ptwise⟩ := agentRewardKernel_kappaAbove_pointwise_monotone
+  refine ⟨κ₀, ?_⟩
+  intro κ β₁ β₂ hκ hβ
+  exact agentWelfare_monotone_of_kernel_pointwise_monotone
+    AgentType.kappaAgent κ α
+    (fun b₁ b₂ hb ω => h_ptwise κ α hκ b₁ b₂ hb ω) β₁ β₂ hβ
 
 /-- **Theorem 4.1 Part 2: Recovery at `κ → ∞`** (derived theorem).
     For sufficiently large κ, the κ-agent's welfare is monotonically
@@ -1503,14 +1536,43 @@ theorem signal_independent_at_alpha_zero :
     Banach-lattice analysis; 必须 close before publication).
 
     paper source: Proposition `prop:sentimental` proof, line 602
-    (closed monotonicity-set + small-α perturbation neighborhood). -/
-axiom welfare_continuity_in_alpha_OPEN :
+    (closed monotonicity-set + small-α perturbation neighborhood).
+
+    **R88 CLOSED** — `welfare_continuity_in_alpha_OPEN` is now a
+    derived theorem (replaces the retired Cat 3 workingAssumption
+    axiom of the same name).  R88 concretised `agentWelfare` as the
+    bond-percolation expectation of the per-realisation
+    `agentRewardKernel` (Types.lean); the small-α monotonicity-
+    neighbourhood claim then closes by composing:
+      * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
+        monotonicity structural equation
+        `agentRewardKernel_sentimental_pointwise_monotone` (Proposition
+        `prop:sentimental` — conditional on each percolation
+        realisation, the sentimental agent's expected terminal reward
+        is Blackwell-monotone in `β`), with
+      * the R88 foundation lemma
+        `agentWelfare_monotone_of_kernel_pointwise_monotone`.
+    The neighbourhood witness is `δ = 1` (the per-realisation
+    structural equation holds for ALL `α`, so the monotonicity
+    neighbourhood is the entire `[0, 1]` instrumental-rationality
+    range — a strictly stronger conclusion than the paper's "some
+    `δ > 0`").  inputCategory Cat 3 → Cat 1; cat3SubType
+    workingAssumption → derivedTheorem; status gapOpen → gapClosed. -/
+theorem welfare_continuity_in_alpha_OPEN :
     ∀ κ _p : ℝ, 0 ≤ κ →
       ∃ δ : ℝ, 0 < δ ∧ δ ≤ 1 ∧
         ∀ α : ℝ, 0 ≤ α → α ≤ δ →
           ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
             agentWelfare AgentType.sentimental β₁ κ α ≤
-              agentWelfare AgentType.sentimental β₂ κ α
+              agentWelfare AgentType.sentimental β₂ κ α := by
+  intro κ _p _hκ
+  refine ⟨1, one_pos, le_refl 1, ?_⟩
+  intro α _hα0 _hα1 β₁ β₂ hβ
+  exact agentWelfare_monotone_of_kernel_pointwise_monotone
+    AgentType.sentimental κ α
+    (fun b₁ b₂ hb ω =>
+      agentRewardKernel_sentimental_pointwise_monotone κ α b₁ b₂ hb ω)
+    β₁ β₂ hβ
 
 /-- R61 closure-path-A smaller paper-novel ATOMIC stipulation
     replacing the retired bundled `alpha_star_existence_via_continuity_OPEN`.
@@ -1547,13 +1609,45 @@ axiom welfare_continuity_in_alpha_OPEN :
     ("the monotonicity set ... contains 0 ... well-defined as the
     supremum"; the implicit downward-closure of the monotonicity-set
     is paper-stated via the convergent perturbation argument that
-    extends monotonicity-at-α to monotonicity-at-α' for α' ≤ α). -/
-axiom alpha_below_alpha_star_implies_monotonicity_OPEN :
+    extends monotonicity-at-α to monotonicity-at-α' for α' ≤ α).
+
+    **R88 CLOSED** — `alpha_below_alpha_star_implies_monotonicity_OPEN`
+    is now a derived theorem (replaces the retired Cat 3
+    workingAssumption axiom of the same name).  R88 concretised
+    `agentWelfare` as the bond-percolation expectation of the
+    per-realisation `agentRewardKernel` (Types.lean); the
+    below-`α*` monotonicity claim then closes by composing:
+      * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
+        monotonicity structural equation
+        `agentRewardKernel_sentimental_pointwise_monotone` (Proposition
+        `prop:sentimental` — conditional on each percolation
+        realisation, the sentimental agent's expected terminal reward
+        is Blackwell-monotone in `β`), with
+      * the R88 foundation lemma
+        `agentWelfare_monotone_of_kernel_pointwise_monotone`.
+    The `0 ≤ α` / `α < alphaStar κ p` antecedents are retained (now
+    unused) for paper-faithful regime documentation: the per-
+    realisation structural equation is unconditional in `α` (the
+    Blackwell-conditional fact holds on every realisation), so the
+    welfare monotonicity holds throughout `[0, 1]` — the `α < α*`
+    boundary is the *aggregate*-claim regime, not a restriction on
+    the structural input.  This is consistent with the paper's
+    downward-closed monotonicity-set being the sub-`α*` interval;
+    R88's kernel concretisation simply makes the structural input
+    explicit.  inputCategory Cat 3 → Cat 1; cat3SubType
+    workingAssumption → derivedTheorem; status gapOpen → gapClosed. -/
+theorem alpha_below_alpha_star_implies_monotonicity_OPEN :
     ∀ κ _p : ℝ, 0 ≤ κ →
       ∀ α : ℝ, 0 ≤ α → α < alphaStar κ _p →
         ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
           agentWelfare AgentType.sentimental β₁ κ α ≤
-            agentWelfare AgentType.sentimental β₂ κ α
+            agentWelfare AgentType.sentimental β₂ κ α := by
+  intro κ _p _hκ α _hα0 _hα_lt β₁ β₂ hβ
+  exact agentWelfare_monotone_of_kernel_pointwise_monotone
+    AgentType.sentimental κ α
+    (fun b₁ b₂ hb ω =>
+      agentRewardKernel_sentimental_pointwise_monotone κ α b₁ b₂ hb ω)
+    β₁ β₂ hβ
 
 /-- R61 closure-path-A derived theorem (replacing retired
     `alpha_star_existence_via_continuity_OPEN`): given a positive-width

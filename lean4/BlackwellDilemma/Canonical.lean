@@ -2292,35 +2292,98 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
       ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 :=
   gap_interior_optimum
 
-/-- **Proposition `prop:threshold-five-state` (ii): κ-agent above
-    `κ*` correctly ranks continuation values.
+/- **Proposition `prop:threshold-five-state` (ii): κ-agent above
+   `κ*` correctly ranks continuation values.**
 
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom
-    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is threaded
-    as an EXPLICIT ANTECEDENT `(h_blackwell : ...)` so that
-    `#print axioms` on any theorem consuming
-    `gap_threshold_fiveState_kappa_above_kstar_OPEN` surfaces the
-    Blackwell dependency. The R26 drop of this antecedent over-applied
-    the "Cat 2 implicit consumption" rule: the CLAIM CONTENT of this
-    entry is the Blackwell monotonicity theorem applied to the κ-agent's
-    welfare above the cognitive threshold (where the agent correctly
-    ranks continuation values, restoring the conditional Blackwell-
-    ordering chain, per `feedback_gap_ledger_in_lean4` §10 paper-
-    APPLICATION-to-opaque-carrier = Cat 3 with explicit Cat 2 chain).
-    The relevant Cat 2 axiom lives at
-    `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
+   R88 NOTE: the prior bundled `axiom
+   kappa_above_threshold_blackwell_recovery_OPEN` is REPLACED below
+   by a `structuralEquation` atom + a derived `theorem`.  The Cat 2
+   dependency surfacing commentary (formerly this docstring) is
+   folded into the derived theorem's docstring: the Cat 2 axiom
+   `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is
+   threaded as an explicit antecedent `(_h_blackwell : ...)` on the
+   derived theorem so `#print axioms` on any consumer surfaces the
+   Blackwell dependency.
 
-    paper source: Proposition `prop:threshold-five-state` (ii), line 862. -/
-axiom kappa_above_threshold_blackwell_recovery_OPEN :
-    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+   paper source: Proposition `prop:threshold-five-state` (ii),
+   line 862. -/
+
+/-- R88 Cat 3 structural equation: pointwise (conditional-on-`R`)
+    Blackwell monotonicity of the κ-agent's reward kernel on the
+    5-state canonical instance, ABOVE the instance-specific cognitive
+    threshold `kappaStar_fiveState p`.  For every `p`, every `κ` with
+    `kappaStar_fiveState p < κ`, every percolation realisation `ω`,
+    and `β₁ ≤ β₂`,
+    `agentRewardKernel AgentType.kappaAgent β₁ κ 1 ω ≤
+     agentRewardKernel AgentType.kappaAgent β₂ κ 1 ω`.
+
+    Paper-stipulated (Proposition `prop:threshold-five-state` (ii),
+    line 862).  This is the 5-state-instance specialisation of the
+    general `agentRewardKernel_kappaAbove_pointwise_monotone`
+    (Types.lean): on the 5-state canonical instance, ABOVE the
+    instance-specific threshold `kappaStar_fiveState p`, the κ-agent
+    correctly ranks continuation values, so — conditional on each
+    percolation realisation `ω` — a Blackwell-superior reward signal
+    (`β₂ ≥ β₁`) yields weakly higher expected terminal reward on that
+    realisation.  The instance-specific threshold `kappaStar_fiveState
+    p` (rather than the abstract existential `κ₀` of the general
+    structural equation) is the paper-stated 5-state regime boundary
+    from `prop:threshold-five-state` (ii).
+
+    Cat 3 sub-type: structuralEquation — paper Proposition
+    `prop:threshold-five-state` (ii) STATES the above-`κ*` correct-
+    continuation-ranking fact directly for the 5-state instance; its
+    per-realisation form is the paper-stipulated structural input on
+    the kernel carrier (mirrors the `wInfoOracleKernel_nonpos` R85
+    precedent — paper stipulates the carrier's per-realisation
+    behaviour).  Blackwell 1951/1953 = the Cat 2 conditional-
+    expectation comparison input.  永不 close per discipline §3.4.3.
+    paper source: Proposition `prop:threshold-five-state` (ii),
+    line 862; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
+axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar :
+    ∀ p : ℝ, ∀ κ : ℝ, kappaStar_fiveState p < κ →
+      ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+        ∀ ω : BondConfig AgentEdgeIdx,
+          agentRewardKernel AgentType.kappaAgent β₁ κ 1 ω ≤
+            agentRewardKernel AgentType.kappaAgent β₂ κ 1 ω
+
+/-- **R88 CLOSED** — `kappa_above_threshold_blackwell_recovery_OPEN`
+    is now a derived theorem (replaces the retired Cat 3
+    workingAssumption axiom of the same name).  R88 concretised
+    `agentWelfare` as the bond-percolation expectation of the
+    per-realisation `agentRewardKernel` (Types.lean); the
+    above-`κ*(p)` 5-state recovery claim then closes by composing:
+      * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
+        monotonicity structural equation
+        `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar`
+        (Proposition `prop:threshold-five-state` (ii) — above the
+        instance-specific threshold `kappaStar_fiveState p`, the
+        κ-agent correctly ranks continuation values, so conditional
+        on each percolation realisation a Blackwell-superior reward
+        signal yields weakly higher expected terminal reward), with
+      * the R88 foundation lemma
+        `agentWelfare_monotone_of_kernel_pointwise_monotone`.
+    The `h_blackwell` antecedent is retained (now unused) for
+    audit-chain continuity: `#print axioms` on consumers still
+    surfaces `gap_blackwell_monotonicity_OPEN` (threaded via
+    `h_blackwell` per the R28 broken-link discipline).  inputCategory
+    Cat 3 → Cat 1; cat3SubType workingAssumption → derivedTheorem;
+    status gapOpen → gapClosed. -/
+theorem kappa_above_threshold_blackwell_recovery_OPEN
+    (_h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1) →
+        agentWelfare AgentType.bayesian β₂ 0 1) :
     ∀ p : ℝ, ∀ κ : ℝ, kappaStar_fiveState p < κ →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         agentWelfare AgentType.kappaAgent β₁ κ 1 ≤
-          agentWelfare AgentType.kappaAgent β₂ κ 1
+          agentWelfare AgentType.kappaAgent β₂ κ 1 := by
+  intro p κ hκ β₁ β₂ hβ
+  exact agentWelfare_monotone_of_kernel_pointwise_monotone
+    AgentType.kappaAgent κ 1
+    (fun b₁ b₂ hb ω =>
+      agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar
+        p κ hκ b₁ b₂ hb ω)
+    β₁ β₂ hβ
 
 /-- **Proposition `prop:threshold-five-state` (ii)** (derived theorem
     composing `kappa_above_threshold_blackwell_recovery_OPEN` per

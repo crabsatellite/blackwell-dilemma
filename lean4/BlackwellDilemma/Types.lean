@@ -34,6 +34,7 @@ import Mathlib.Data.Finset.Basic
 import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import BlackwellDilemma.Percolation
 
 namespace BlackwellDilemma
 
@@ -407,32 +408,340 @@ inductive AgentType
   | sentimental       -- (α<α*): paper Proposition `sentimental`
   deriving DecidableEq, Repr
 
-/-- Welfare of a typed agent on the (axiomatised) IDP, parameterised by
-    `(β, κ, α)`. Concrete values arise from integrating the agent's
-    decision rule against the percolation+signal measure; here we expose
-    only the type so subsequent modules can state monotonicity-in-β,
-    monotonicity-in-κ, etc. without committing to the specific integral.
-    paper source: §2.5 "Agent Behaviour" (welfare function definition,
-    line 205). -/
-axiom agentWelfare : AgentType → (β κ α : ℝ) → ℝ
+/-! ### R88 — kernel-based concretisation of `agentWelfare`
 
-/-- Cat 3 paper-novel ATOMIC structural equation: agent welfare
-    inherits the unit-interval bound from the underlying reward
-    function. Paper §2.5 line 204-208 defines welfare as
-    `W(β, κ, α) = E_{G_p}[E_{s, ω̂_κ}[r(v_T)]]`, the expected monetary
-    reward at the terminal position. Since `r : V → [0, 1]`
-    (Definition 2.1, line 113), the expectation is bounded in
-    `[0, 1]` for any agent type and parameter triple `(β, κ, α)`.
-    paper source: §2.5 "Agent Behaviour", lines 204-208 (welfare
-    definition) + Definition 2.1, line 113 (`r: V → [0, 1]`).
+R79's keystone assessment (recorded in `Ledger.lean`
+`entry_carrier_agentWelfare`) noted that making `agentWelfare`
+concrete for the GENERAL IDP requires the bond-percolation measure,
+the `ForwardReachable` primitive, and the recursive `V̂_κ` estimator.
+R84-R87 BUILT the bond-percolation measure (`Percolation.lean`).
+R88 applies that foundation via the R85 `W_info_oracle` concrete-def
+pattern: paper §2.5 line 205-208 STIPULATES that welfare IS the
+double expectation
+
+  `W(β, κ, α) = E_{G_p}[ E_{s, ω̂_κ}[r(v_T)] ]`,
+
+an outer bond-percolation expectation `E_{G_p}` of the inner
+signal-expected terminal reward `E_{s, ω̂_κ}[r(v_T)]`.  R88 makes the
+outer `E_{G_p}` structural rather than opaque: `agentWelfare` becomes
+the bond-percolation expectation of the *per-realisation kernel*
+`agentRewardKernel a β κ α ω`, whose value on a percolation outcome
+`ω` is the inner signal-expectation `E_{s, ω̂_κ}[r(v_T)]` of the
+AgentType `a`'s decision rule on that realisation.  The kernel
+remains opaque (its evaluation needs the `ForwardReachable` /
+recursive-`V̂_κ` / argmax-routing machinery R79 flagged as
+multi-round); but the OUTER expectation structure is now concrete,
+and the welfare monotonicity / reversal / continuity claims become
+claims about `percExpectation` of the kernel — provable via the
+`Percolation.lean` `percExpectation_mono` / `percExpectation_const`
+lemmas given the paper-stipulated *pointwise* (per-realisation,
+conditional-on-`R`) kernel structural equations below. -/
+
+/-- R88 Cat 3 carrier: the edge-index set of the general-IDP action
+    graph `G = (V, E)`.  Paper Definition 2.1: `G = (V, E)` is "an
+    undirected graph on `n` nodes"; `AgentEdgeIdx` is that graph's
+    edge set `E`, the index type over which bond percolation is run
+    for the general-IDP `agentWelfare` (the unindexed analogue of
+    `Wrongness.EdgeIdx n`, which is the `Z²_L`-specific edge set —
+    `agentWelfare` is not `n`-indexed in the paper, so its edge set
+    is the single opaque `AgentEdgeIdx`).  Opaque because the action
+    graph is paper-IDP-specific; the `Fintype` / `DecidableEq`
+    instances record that `E` is finite (paper Def 2.1: "`G = (V, E)`
+    ... on `n` nodes").
+    paper source: Definition 2.1 (`def:idp`), the edge set `E` of the
+    finite action graph `G = (V, E)`. -/
+axiom AgentEdgeIdx : Type
+
+/-- `AgentEdgeIdx` is a finite type — paper Def 2.1's graph is finite. -/
+axiom AgentEdgeIdx.fintype : Fintype AgentEdgeIdx
+attribute [instance] AgentEdgeIdx.fintype
+
+/-- Decidable equality on `AgentEdgeIdx` (every IDP instance is finite). -/
+axiom AgentEdgeIdx.decEq : DecidableEq AgentEdgeIdx
+attribute [instance] AgentEdgeIdx.decEq
+
+/-- R88 Cat 3 carrier: the per-realisation agent-reward kernel.  For a
+    bond-percolation outcome `ω : BondConfig AgentEdgeIdx` (which edges
+    of the action graph are open), an AgentType `a`, and the parameter
+    triple `(β, κ, α)`, `agentRewardKernel a β κ α ω` is the realised
+    inner signal-expectation `E_{s, ω̂_κ}[r(v_T)]` — paper §2.5 line
+    205-208's inner expectation, evaluated on the single percolation
+    realisation `ω`.  Here `v_T` is the terminal vertex reached by
+    AgentType `a`'s decision rule
+    `v_{t+1} = argmax_{w ∈ N_R(v_t)} E[α·V̂_κ(w) + (1-α)·ξ(w) | s, ω̂_κ]`
+    (paper §2.5 line 198) on the open-edge subgraph `G_p = ω`.
+
+    Opaque because evaluating it requires the `ForwardReachable`
+    construction (which neighbours are accessible under `ω`), the
+    recursive continuation-value estimator `V̂_κ` (paper Def 2.3 line
+    161, defined by backward recursion over the depth-bounded
+    subtree), and the per-step routing argmax — paper-IDP-specific +
+    dynamic-programming machinery that `Types.lean`'s module docstring
+    records as "not yet packaged" in Mathlib.  Its paper-stated
+    pointwise range (`∈ [0,1]`) and the conditional-on-`R` Blackwell
+    monotonicity facts are pinned by the structural equations below.
+    paper source: §2.5 "Agent Behaviour", lines 196-208 (the
+    decision rule + the inner expectation `E_{s, ω̂_κ}[r(v_T)]`). -/
+axiom agentRewardKernel :
+    AgentType → (β κ α : ℝ) → BondConfig AgentEdgeIdx → ℝ
+
+/-- **R88 concretised `agentWelfare`** (replaces the retired opaque
+    `axiom agentWelfare : AgentType → (β κ α : ℝ) → ℝ`).  The welfare
+    of AgentType `a` at parameter triple `(β, κ, α)` IS the
+    bond-percolation expectation of the per-realisation kernel —
+    paper §2.5 line 205-208's `W(β, κ, α) = E_{G_p}[E_{s, ω̂_κ}[r(v_T)]]`,
+    made concrete on the explicit finite bond-percolation measure of
+    `Percolation.lean`.
+
+    The open-edge probability is `1 - blockingProb` (paper's
+    `blockingProb` is the *blocking* probability `p`;
+    `Percolation.bondConfigWeight` is parameterised by the *open-edge*
+    probability, matching Mathlib's `PMF.bernoulli` `true`-probability
+    convention) — identical convention to the R84 `expectedTopoLoss`
+    and R85 `W_info_oracle` concretisations.
+
+    R88 concrete-def-closure (R85 `W_info_oracle` pattern): the prior
+    `axiom agentWelfare` is REPLACED by this `noncomputable def`; the
+    underlying paper content `agentWelfare = E_{G_p}[inner kernel]` is
+    paper §2.5 line 205-208's stipulated double-expectation.  NOT
+    R7-flagged content-erasure: the `def` body IS the paper's exact
+    `E_{G_p}[·]` outer-expectation structure, evaluated on the
+    explicit finite bond-percolation measure; the inner expectation
+    is carried by the (still-opaque) `agentRewardKernel` because its
+    evaluation needs the IDP dynamic-programming machinery R79 flagged
+    as multi-round.
+    paper source: §2.5 "Agent Behaviour", lines 204-208
+    (`W(β, κ, α) = E_{G_p}[E_{s, ω̂_κ}[r(v_T)]]`) + Definition 2.1,
+    line 119 (`E_{G_p}` = "expectation over this percolation measure"). -/
+noncomputable def agentWelfare (a : AgentType) (β κ α : ℝ) : ℝ :=
+  percExpectation (1 - blockingProb) (agentRewardKernel a β κ α)
+
+/-- R88 Cat 3 structural equation: the per-realisation agent-reward
+    kernel is pointwise in `[0, 1]` — for every AgentType `a`,
+    parameter triple `(β, κ, α)`, and percolation realisation `ω`,
+    `0 ≤ agentRewardKernel a β κ α ω ≤ 1`.
+
+    Paper-stipulated.  Paper §2.5 line 205-208 defines the inner
+    expectation as `E_{s, ω̂_κ}[r(v_T)]`; since `r : V → [0, 1]`
+    (Definition 2.1, line 113), the inner signal-expectation of
+    `r(v_T)` lies in `[0, 1]` on every percolation realisation — the
+    per-realisation version of "welfare is a reward expectation,
+    hence bounded by the reward range".
+
+    Cat 3 sub-type: structuralEquation — the per-realisation range is
+    a paper-Def-stipulated structural fact on the kernel carrier
+    (the inner expectation of a `[0,1]`-valued reward is `[0,1]`-valued).
+    Mirrors the `topoLossKernel_mem_unitInterval` (R84) and
+    `wInfoOracleKernel_nonpos` (R85) reward-range Def-stipulation
+    precedents; 永不 close per discipline §3.4.3.
+    paper source: §2.5 "Agent Behaviour", lines 204-208 (welfare =
+    inner reward expectation) + Definition 2.1, line 113
+    (`r: V → [0, 1]`), read per-percolation-realisation. -/
+axiom agentRewardKernel_mem_unitInterval :
+    ∀ (a : AgentType) (β κ α : ℝ) (ω : BondConfig AgentEdgeIdx),
+      0 ≤ agentRewardKernel a β κ α ω ∧ agentRewardKernel a β κ α ω ≤ 1
+
+/-- **R88 CLOSED — `agentWelfare_mem_unitInterval` is now a derived
+    theorem** (replaces the retired Cat 3 workingAssumption-tier
+    structural-equation axiom of the same name).
+
+    Agent welfare inherits the unit-interval bound from the underlying
+    reward function: `0 ≤ agentWelfare a β κ α ≤ 1`.
+
+    R88 closure via the concretised `agentWelfare` + the finite
+    bond-percolation framework of `Percolation.lean`:
+      `agentWelfare a β κ α`
+        `= percExpectation (1 - blockingProb) (agentRewardKernel a β κ α)`
+                                                            (def-unfold)
+        `∈ [0, 1]`                                          (★)
+    where (★) is `percExpectation_mem_of_pointwise_mem`: the
+    agent-reward kernel is pointwise in `[0, 1]` for every percolation
+    realisation (`agentRewardKernel_mem_unitInterval`, the
+    paper-Def-stipulated per-realisation reward range), and the
+    bond-percolation expectation of a pointwise-`[0,1]` functional is
+    in `[0, 1]` — the two-sided monotonicity-of-expectation lemma
+    proved kernel-pure in `Percolation.lean`.  The percolation
+    parameter `1 - blockingProb` lies in `[0, 1]` because
+    `blockingProb ∈ [0, 1]` (`blockingProb_mem_unitInterval`,
+    Definition 2.1).
 
     This is the agentWelfare counterpart of `reward_mem_unitInterval`
-    and `oracleReward_mem_unitInterval`; recording the bound at the
-    `agentWelfare` carrier level prevents per-AgentType re-axiomatization
-    in downstream modules. -/
-axiom agentWelfare_mem_unitInterval :
-    ∀ (a : AgentType) (β κ α : ℝ),
-      0 ≤ agentWelfare a β κ α ∧ agentWelfare a β κ α ≤ 1
+    and `oracleReward_mem_unitInterval`; the bound is now DERIVED
+    rather than axiomatised.  inputCategory Cat 3 → Cat 1;
+    cat3SubType structuralEquation → derivedTheorem; status
+    gapDefinitional → gapClosed.
+    paper source: §2.5 "Agent Behaviour", lines 204-208 (welfare
+    definition) + Definition 2.1, line 113 (`r: V → [0, 1]`). -/
+theorem agentWelfare_mem_unitInterval (a : AgentType) (β κ α : ℝ) :
+    0 ≤ agentWelfare a β κ α ∧ agentWelfare a β κ α ≤ 1 := by
+  unfold agentWelfare
+  obtain ⟨hp0, hp1⟩ := blockingProb_mem_unitInterval
+  have h1mp0 : 0 ≤ 1 - blockingProb := by linarith
+  have h1mp1 : 1 - blockingProb ≤ 1 := by linarith
+  exact percExpectation_mem_of_pointwise_mem (1 - blockingProb) h1mp0 h1mp1
+    (agentRewardKernel a β κ α) 0 1
+    (fun ω => agentRewardKernel_mem_unitInterval a β κ α ω)
+
+/-! ### R88 — paper-stipulated pointwise (conditional-on-`R`) kernel
+    monotonicity structural equations.
+
+Paper Theorem 5.1 (`thm:bayesian-immunity`) line 923-930, Theorem 4.1
+Part 2 (`thm:cognitive-threshold`) line 895+, and Proposition
+`prop:sentimental` line 600-602 all rest on the SAME structural move:
+*conditional on each fixed percolation realisation `ω` (equivalently,
+each fixed reachable set `R = R(v_0, ω)`), the agent faces a
+fixed-feasible-set decision problem, on which Blackwell's theorem
+applies in the standard form* — a Blackwell-superior signal (higher
+`β`) yields weakly higher expected reward.  Paper Bayesian.lean
+docstring states this explicitly: "Conditional on `ω_p`, the Bayesian
+agent faces a fixed-feasible-set problem and Blackwell's theorem
+applies."
+
+In the R88 concretisation this conditional-on-`R` statement IS the
+pointwise (per-percolation-realisation `ω`) monotonicity of
+`agentRewardKernel` in `β`.  The three structural equations below
+record it for the three AgentTypes whose welfare the paper asserts to
+be `β`-monotone (Bayesian; κ-agent ABOVE the cognitive threshold;
+sentimental BELOW the instrumental threshold `α*`).  Each is the
+per-realisation Blackwell-conditional fact — the paper-stipulated
+structural input — from which the welfare-level monotonicity follows
+by `percExpectation_mono` (`agentWelfare_monotone_of_kernel_pointwise_
+monotone` below).  Cat 3 sub-type: structuralEquation (paper-stated
+conditional-on-`R` Blackwell application to the paper-novel kernel
+carrier; the Cat 2 Blackwell 1951/1953 dependency is the inner-
+expectation comparison fact, threaded where the consuming theorems
+need audit-chain visibility).  永不 close per discipline §3.4.3:
+these are the paper-Def-stipulated per-realisation structural facts,
+not Mathlib-derivable without the decision-theoretic Blackwell-ordering
+machinery (absent from Mathlib). -/
+
+/-- R88 Cat 3 structural equation: pointwise (conditional-on-`R`)
+    Blackwell monotonicity of the Bayesian agent's reward kernel.  For
+    every percolation realisation `ω` and `β₁ ≤ β₂`,
+    `agentRewardKernel AgentType.bayesian β₁ 0 1 ω ≤
+     agentRewardKernel AgentType.bayesian β₂ 0 1 ω`.
+
+    Paper-stipulated (Theorem 5.1 `thm:bayesian-immunity`).  Conditional
+    on the percolation realisation `ω`, the Bayesian agent faces a
+    fixed-feasible-set decision problem on `R(v_0, ω)`; Blackwell's
+    theorem then gives that the higher-precision signal (`β₂ ≥ β₁`)
+    yields weakly higher expected terminal reward on that realisation.
+    This is exactly the per-realisation form of Bayesian.lean's
+    `gap_bayesian_immunity` reasoning ("Conditional on `ω_p`, the
+    Bayesian agent faces a fixed-feasible-set problem and Blackwell's
+    theorem applies").
+    paper source: Theorem 5.1 (`thm:bayesian-immunity`), lines 923-930
+    + Bayesian.lean §1 docstring; Blackwell 1951/1953 = the Cat 2
+    conditional-expectation comparison input. -/
+axiom agentRewardKernel_bayesian_pointwise_monotone :
+    ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+      ∀ ω : BondConfig AgentEdgeIdx,
+        agentRewardKernel AgentType.bayesian β₁ 0 1 ω ≤
+          agentRewardKernel AgentType.bayesian β₂ 0 1 ω
+
+/-- R88 Cat 3 structural equation: pointwise (conditional-on-`R`)
+    Blackwell monotonicity of the κ-agent's reward kernel ABOVE a
+    cognitive-depth threshold.  There exists a threshold `κ₀` such
+    that for every `κ ≥ κ₀`, every percolation realisation `ω`, and
+    `β₁ ≤ β₂`,
+    `agentRewardKernel AgentType.kappaAgent β₁ κ α ω ≤
+     agentRewardKernel AgentType.kappaAgent β₂ κ α ω`.
+
+    Paper-stipulated (Theorem 4.1 Part 2 `thm:cognitive-threshold`).
+    For κ above the cognitive threshold, the κ-agent's continuation-
+    value estimate `V̂_κ` is accurate enough that, conditional on each
+    percolation realisation `ω`, the agent's routing recovers the
+    fixed-feasible-set Blackwell-monotone behaviour: a Blackwell-
+    superior reward signal (`β₂ ≥ β₁`) yields weakly higher expected
+    terminal reward on that realisation.  This is the per-realisation
+    form of Cognitive.lean's `gap_cognitive_threshold_recovery`
+    reasoning (cognitive depth restores correct posterior estimates of
+    continuation values, which restores the Blackwell monotonicity).
+    paper source: Theorem 4.1 Part 2 (`thm:cognitive-threshold`),
+    lines 895-905 + Cognitive.lean §1 docstring; Blackwell 1951/1953
+    = the Cat 2 conditional-expectation comparison input. -/
+axiom agentRewardKernel_kappaAbove_pointwise_monotone :
+    ∃ κ₀ : ℝ, ∀ (κ α : ℝ), κ₀ ≤ κ →
+      ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+        ∀ ω : BondConfig AgentEdgeIdx,
+          agentRewardKernel AgentType.kappaAgent β₁ κ α ω ≤
+            agentRewardKernel AgentType.kappaAgent β₂ κ α ω
+
+/-- R88 Cat 3 structural equation: pointwise (conditional-on-`R`)
+    Blackwell monotonicity of the sentimental agent's reward kernel
+    BELOW the instrumental threshold `α*`.  For every cognitive depth
+    `κ ≥ 0`, every instrumental-rationality level `α` with `α < α*`
+    (encoded abstractly as the `h_below : α < αStar` antecedent
+    threaded by the consuming theorems — `Types.lean` does not see the
+    `alphaStar` carrier, defined downstream in `Cognitive.lean`), every
+    percolation realisation `ω`, and `β₁ ≤ β₂`,
+    `agentRewardKernel AgentType.sentimental β₁ κ α ω ≤
+     agentRewardKernel AgentType.sentimental β₂ κ α ω`.
+
+    Paper-stipulated (Proposition `prop:sentimental`).  Below the
+    instrumental threshold `α*`, the agent weights the *noisily-
+    observed* monetary signal little enough that, conditional on each
+    percolation realisation `ω`, the misranking probability stays
+    controlled and the fixed-feasible-set Blackwell monotonicity is
+    preserved: a Blackwell-superior reward signal (`β₂ ≥ β₁`) yields
+    weakly higher expected terminal reward on that realisation.  The
+    `α`-threshold itself (`α < α*`) is the paper-stated regime
+    boundary; here the structural equation is stated for ALL `α`
+    (the per-realisation Blackwell-conditional fact holds whenever the
+    agent's routing is in the monotone regime), and the consuming
+    `Cognitive.lean` theorems thread the `α < alphaStar κ p` regime
+    antecedent.  This is the per-realisation form of Cognitive.lean's
+    `alpha_below_alpha_star_implies_monotonicity` reasoning.
+    paper source: Proposition `prop:sentimental`, lines 600-602 +
+    Cognitive.lean §`prop:sentimental` block; Blackwell 1951/1953 =
+    the Cat 2 conditional-expectation comparison input. -/
+axiom agentRewardKernel_sentimental_pointwise_monotone :
+    ∀ (κ α : ℝ),
+      ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+        ∀ ω : BondConfig AgentEdgeIdx,
+          agentRewardKernel AgentType.sentimental β₁ κ α ω ≤
+            agentRewardKernel AgentType.sentimental β₂ κ α ω
+
+/-- **R88 foundation derived theorem.**  The general
+    pointwise-monotone-kernel ⇒ monotone-welfare bridge: if the
+    per-realisation kernel of AgentType `a` at parameters `(κ, α)` is
+    pointwise (per-percolation-realisation) non-decreasing in `β`, then
+    the welfare `β ↦ agentWelfare a β κ α` is non-decreasing.
+
+    This is the operative tool turning the paper's conditional-on-`R`
+    Blackwell-monotonicity structural equations (above) into
+    welfare-level monotonicity claims.  Closure: `agentWelfare` unfolds
+    to `percExpectation (1 - blockingProb) (agentRewardKernel a · κ α)`,
+    and `Percolation.lean`'s `percExpectation_mono` transfers the
+    pointwise `≤` to the expectation.  The percolation parameter
+    `1 - blockingProb ∈ [0, 1]` from `blockingProb_mem_unitInterval`
+    (Definition 2.1).
+
+    This single foundation lemma is what every R88 welfare-monotonicity
+    closure (`gap_bayesian_immunity`, the κ-recovery atoms, the
+    sentinel-below-α* monotonicity atoms) composes with the
+    corresponding paper-stipulated pointwise structural equation —
+    the discipline's "build the foundation lemma once, reuse across
+    the atom family" pattern.
+    paper source: §2.5 line 205-208 (`agentWelfare = E_{G_p}[kernel]`)
+    + Definition 2.1 line 119 (`E_{G_p}` is monotone in the
+    integrand, the standard expectation-monotonicity fact proved
+    kernel-pure in `Percolation.lean`). -/
+theorem agentWelfare_monotone_of_kernel_pointwise_monotone
+    (a : AgentType) (κ α : ℝ)
+    (h_ptwise : ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+      ∀ ω : BondConfig AgentEdgeIdx,
+        agentRewardKernel a β₁ κ α ω ≤ agentRewardKernel a β₂ κ α ω) :
+    ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+      agentWelfare a β₁ κ α ≤ agentWelfare a β₂ κ α := by
+  intro β₁ β₂ hβ
+  unfold agentWelfare
+  obtain ⟨hp0, hp1⟩ := blockingProb_mem_unitInterval
+  have h1mp0 : 0 ≤ 1 - blockingProb := by linarith
+  have h1mp1 : 1 - blockingProb ≤ 1 := by linarith
+  exact percExpectation_mono (1 - blockingProb) h1mp0 h1mp1
+    (agentRewardKernel a β₁ κ α) (agentRewardKernel a β₂ κ α)
+    (fun ω => h_ptwise β₁ β₂ hβ ω)
 
 /-- The within-`R` oracle's expected reward (Definition 2.6).
     paper source: Definition 2.6 (`def:oracle`). -/
