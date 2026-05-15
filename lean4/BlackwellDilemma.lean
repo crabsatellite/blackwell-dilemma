@@ -100,3 +100,5 @@ import BlackwellDilemma.Infrastructure.PercolationExpectation
 import BlackwellDilemma.Infrastructure.MonotoneCDFAlgebra
 import BlackwellDilemma.Infrastructure.FOSDLiftedExpectation
 import BlackwellDilemma.Infrastructure.MaxOverFinset
+import BlackwellDilemma.Infrastructure.TendstoFiniteSum
+import BlackwellDilemma.Infrastructure.PiecewiseFunction
