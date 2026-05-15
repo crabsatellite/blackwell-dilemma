@@ -159,6 +159,31 @@ Per `feedback_truth_over_publication` + `feedback_gap_ledger_in_lean4`:
 modules verified kernel-pure via `#print axioms` showing only
 `[propext, Classical.choice, Quot.sound]`.
 
+**R141-R145 wire-up milestone (2026-05-15)**:
+
+ALL 18 paper_witness axioms RETIRED. Each is replaced by:
+* A smaller `_workingAssumption` axiom (carrier-identification only)
+* A Cat 1 derivation through Infrastructure modules
+
+`grep -c "^axiom .*_paper_witness"` returned 0 (was 18). The
+AxiomAudit `#print axioms` trail confirms ZERO `_paper_witness` in
+any dependency graph. The pattern `paper_witness → workingAssumption +
+Infrastructure Cat 1` is now the project-wide standard.
+
+Wire-up summary by Phase:
+* Phase 1 → MLimitDifferenceConcrete (R142)
+* Phase 1b → ArgmaxExistence (R143)
+* Phase 1c → ContinuousArithmetic (R143)
+* Phase 2 → GaussianPosterior + TendstoLimitArithmetic (R142)
+* Phase 4 → EVTBoundedDecreasing (R142, x2)
+* Phase 5 → TopkisCrossPartial (R141)
+* Phase 6 → MillsRatioTail (R142, x5)
+* Phase 7 → SimpleGraphReachable (R141)
+* Phase 8 → BlackwellConditional (R141)
+* Phase 9 → DifferenceQuotientAlgebra (R141)
+* Phase 10 → ArgmaxMonotone (R141)
+* Phase 11 → KappaStarConcrete (R141)
+
 ## Mathlib-PR readiness
 
 The following modules are Mathlib-PR-contributable as standalone
