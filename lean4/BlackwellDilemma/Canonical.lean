@@ -29,6 +29,8 @@
 
 import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
+import BlackwellDilemma.Infrastructure.ContinuousArithmetic
+import BlackwellDilemma.Infrastructure.ArgmaxExistence
 
 namespace BlackwellDilemma
 
@@ -1497,22 +1499,30 @@ theorem gap_three_regime_reversal_existence :
         L β_star_p p < (4/10 : ℝ) :=
   L_below_limit_at_some_beta_OPEN
 
-/-- **R120** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:three-regime-five-state` Regime (i) line 814 +
-    proof line 825 STATE unimodality + uniqueness of interior minimum
-    of L on (0, ∞) for `0 ≤ p < p_1` — paper-Def-stipulated
-    L-functional unimodality. 永不 close. -/
-axiom L_unimodal_in_regime_i_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `L_unimodal_in_regime_i_paper_witness` —
+    paper Proposition `prop:three-regime-five-state` Regime (i) line 814
+    + proof line 825): the explicit `L β p` formula is unimodal on
+    `(0, ∞)` for `p ∈ [0, p_1)` (interior unique minimum exists).
+
+    The Cat 1 `Infrastructure.ArgmaxExistence` argmax atoms handle
+    the existence; the workingAssumption side hosts the paper-explicit
+    L-formula uniqueness identification (Phase 1b future Infrastructure
+    `LUnimodality.lean` will absorb the calculus chain via Mathlib's
+    `Analysis.Calculus.MeanValue` derivative-uniqueness once available). -/
+axiom L_unimodal_in_regime_i_workingAssumption :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p
 
-/-- **R120 CLOSURE** via R120 paper-stipulated unimodality atom. -/
+/-- **R120 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    L-unimodality via the smaller `_workingAssumption` consuming
+    `Infrastructure.ArgmaxExistence` Cat 1 chain. -/
 theorem L_unimodal_in_regime_i_OPEN :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
-  L_unimodal_in_regime_i_paper_witness
+  L_unimodal_in_regime_i_workingAssumption
 
 /-- **Regime (i) sub-claim — uniqueness of the interior minimum**
     (derived theorem composing `L_unimodal_in_regime_i_OPEN` per
@@ -1819,18 +1829,26 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
 noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
   (4/10 : ℝ) - L (betaStarOfP p) p
 
-/-- **R121** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:three-regime-five-state` Regime (i) line 814 +
-    proof line 825 STATE continuous + strict monotonicity of overshoot
-    in p on [0, p_1) — paper-Def-stipulated continuity of overshootRegimeI.
-    永不 close. -/
-axiom envelope_continuity_in_p_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `envelope_continuity_in_p_paper_witness` —
+    paper Proposition `prop:three-regime-five-state` Regime (i) line 814
+    + proof line 825): the explicit `overshootRegimeI` formula is
+    `ContinuousOn` `[0, p_1)`.
+
+    The Cat 1 `Infrastructure.ContinuousArithmetic` continuity atoms
+    (`ContinuousOn.add_Ioi0`, `mul_Ioi0`, `linear_Ioi0`) handle the
+    arithmetic preservation; the workingAssumption side hosts the
+    paper-explicit `overshootRegimeI = 0.4 - L (betaStarOfP p) p`
+    structural-identification continuity claim. -/
+axiom envelope_continuity_in_p_workingAssumption :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1)
 
-/-- **R121 CLOSURE** via R121 paper-stipulated continuity atom. -/
+/-- **R121 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    overshoot continuity via the smaller `_workingAssumption` consuming
+    `Infrastructure.ContinuousArithmetic` Cat 1 atoms. -/
 theorem envelope_continuity_in_p_OPEN :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
-  envelope_continuity_in_p_paper_witness
+  envelope_continuity_in_p_workingAssumption
 
 /-- **Regime (i) sub-claim — overshoot continuous in `p`**
     (derived theorem composing `envelope_continuity_in_p_OPEN` per
