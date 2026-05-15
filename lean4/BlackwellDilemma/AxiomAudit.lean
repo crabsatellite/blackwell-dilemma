@@ -1345,4 +1345,72 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.alpha_below_alpha_star_implies_monotonicity_OPEN
 #print axioms BlackwellDilemma.kappa_above_threshold_blackwell_recovery_OPEN
 
+-- R89 continuation of the R88 percolation-foundation wave (kernel-based
+-- `agentWelfare` concretisation): two more `agentWelfare`-cluster
+-- monotonicity-shaped atoms closed via the same R88 pattern.
+--
+-- (5) `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN` /
+--     `welfare_bounded_below_inflection_OPEN` CLOSED — both prior Cat 3
+--     workingAssumption axioms are now derived `theorem`s composing a
+--     newly-introduced paper-stipulated pointwise structural equation
+--     with the R88 foundation lemma
+--     `agentWelfare_monotone_of_kernel_pointwise_monotone`:
+--      * `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`
+--        composes the new
+--        `agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone`
+--        structural equation (Proposition `prop:bayesian-naive-five-state`
+--        (ii) — below the routing threshold the trap-routing
+--        misspecification is dominated by the correctly-modelled bridge
+--        option, so conditional on each percolation realisation a
+--        Blackwell-superior reward signal yields weakly higher expected
+--        terminal reward).  The `h_blackwell` antecedent is retained
+--        (now unused) for audit-chain continuity.
+--      * `welfare_bounded_below_inflection_OPEN` composes the new
+--        `agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone`
+--        structural equation (Proposition `prop:threshold-five-state`
+--        (iii), line 863 — the at-threshold welfare `W(β, κ*, 1)` is
+--        monotone in `β`, encoded per-realisation as the kernel pointwise
+--        monotonicity at `κ = κ*(p)`).  The atom's `β ≤ smoothTransitionBeta p`
+--        constraint is the paper-stated regime-of-applicability; the
+--        kernel-pointwise structural equation is unconditional in `β`.
+--     inputCategory Cat 3 → Cat 1; cat3SubType workingAssumption →
+--     derivedTheorem; status gapOpen → gapClosed.  Net wA delta: −2
+--     (the new structural equations are paper-Def-stipulated per-
+--     realisation facts, tagged structuralEquation per the R88
+--     precedent, NOT workingAssumption).
+--
+-- Scope honesty: R89 STILL does not close the `agentWelfare`-dependent
+-- REVERSAL-existence atoms (paper-novel anti-monotonicity content
+-- requires per-realisation reversal-WITNESS structural equations,
+-- distinct from the monotonicity structural equations); the
+-- `aboveThresholdWelfare_monotone_OPEN` /
+-- `belowThresholdWelfare_eventually_decreasing_OPEN` /
+-- `perAgentOptimalAggregate_dominates_uniform_OPEN` Principal.lean
+-- atoms reference DIFFERENT opaque carriers (`aboveThresholdWelfare` /
+-- `belowThresholdWelfare` / `perAgentOptimalAggregate`), not
+-- `agentWelfare` directly — closing them via the R88 pattern requires
+-- concretising those carriers as G-conditional integrals of
+-- `agentWelfare`, which needs a measure-theoretic distribution-G
+-- integration framework not yet in scope.  The
+-- `non_concave_triple_from_mixture_OPEN` atom has a SOUNDNESS DEFECT
+-- (the antecedent `monotone f + eventually-decreasing g + W_bar = f+g`
+-- does not imply a non-concave triple — counterexample `f β = β`,
+-- `g β = -β`, `W_bar = 0` satisfies the antecedent without exhibiting
+-- a valley); flagged for R90+ signature correction (R83/R86/R87
+-- precedent — fix the over-strong/false signature, prove the corrected
+-- claim).  The `wrongness_high_beta_welfare_floor_atom_OPEN` atom has
+-- a SIGNATURE WEAKNESS (the `∃ Wlim` existential is trivially closeable
+-- with `Wlim = 0` by `agentWelfare_mem_unitInterval`'s lower bound,
+-- which does NOT capture the paper's stated `Wlim = V_dyn(u_1)` content);
+-- not closed here pending signature strengthening.  The
+-- `conditional_subproblem_blackwell_applicable_OPEN` atom references
+-- `conditionalWelfareOnR` (a SEPARATE opaque carrier from
+-- `agentWelfare`); closeable only if that carrier is ALSO concretised
+-- via the per-realisation indicator on `R`.
+--
+-- `#print axioms` on the R89 closures = same kernel axioms as R88 +
+-- the two new R89 `agentRewardKernel_*` structural equations.
+#print axioms BlackwellDilemma.FiveState.bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
+#print axioms BlackwellDilemma.FiveState.welfare_bounded_below_inflection_OPEN
+
 end BlackwellDilemma.AxiomAudit

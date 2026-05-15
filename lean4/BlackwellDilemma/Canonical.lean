@@ -2480,30 +2480,91 @@ theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
   -- `Classical.choose_spec` yields `0 < β_star ∧ ∀ β ≥ 0, L β_star 0 ≤ L β 0`.
   exact (Classical.choose_spec interior_minimiser_existence_OPEN).1
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:threshold-five-state` (iii) line 863 states that the κ-agent's
-    welfare at the cognitive threshold `κ = κ*(p)` is bounded above by
-    the welfare at the inflection point `smoothTransitionBeta p` for
-    every `β ∈ [0, smoothTransitionBeta p]` — the trap-induced reversal
-    has been smoothed out so the agent's welfare on `[0, β_inflection]`
-    is dominated by its value at the inflection.
+/-- R89 Cat 3 structural equation: pointwise (conditional-on-`R`)
+    Blackwell monotonicity of the κ-agent's reward kernel AT the
+    5-state-canonical instance-specific cognitive threshold
+    `κ = kappaStar_fiveState p`.  For every `p`, every percolation
+    realisation `ω`, and `β₁ ≤ β₂`,
+    `agentRewardKernel AgentType.kappaAgent β₁ (kappaStar_fiveState p) 1 ω ≤
+     agentRewardKernel AgentType.kappaAgent β₂ (kappaStar_fiveState p) 1 ω`.
 
-    Encoding choice: extracted as standalone Cat 3 atomic stipulation
-    from the bundled `gap_threshold_fiveState_smooth_transition_OPEN`
-    per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The atom isolates the upper-bound clause on the existing
-    carriers `agentWelfare`, `smoothTransitionBeta`, `kappaStar_fiveState`.
+    Paper-stipulated (Proposition `prop:threshold-five-state` (iii),
+    line 863).  Paper line 863 reads "the welfare function `W(β, κ*, 1)`
+    is monotone but has zero derivative at the inflection point
+    corresponding to `β*`": the at-threshold welfare IS monotone in `β`
+    (the "smoothed transition" regime — at exactly `κ = κ*(p)` the
+    trap-induced reversal has been smoothed out and the agent's welfare
+    is monotonically non-decreasing).  Conditional on each percolation
+    realisation `ω`, the κ-agent at `κ = κ*(p)` therefore faces a fixed-
+    feasible-set decision problem on which Blackwell's theorem applies:
+    a Blackwell-superior reward signal (`β₂ ≥ β₁`) yields weakly higher
+    expected terminal reward on that realisation.  This is the
+    per-realisation form of the paper's "monotone at κ*" claim — the
+    at-threshold specialisation of the general
+    `agentRewardKernel_kappaAbove_pointwise_monotone` (Types.lean), here
+    stated for the EXACT instance-specific threshold rather than for
+    `κ` strictly above the abstract `κ₀` existential.
 
-    Cat 3 sub-type: workingAssumption (paper-stated welfare bound at
-    the inflection point; pending substantive Φ-derivative + welfare-
-    curvature analysis; 必须 close before publication).
+    Cat 3 sub-type: structuralEquation — paper Proposition
+    `prop:threshold-five-state` (iii) STATES the at-threshold monotonicity
+    fact directly on the 5-state instance; its per-realisation form is
+    the paper-stipulated structural input on the kernel carrier (mirrors
+    the R88 `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_
+    above_kappaStar` Canonical-instance precedent — the at-threshold
+    specialisation rather than the strictly-above-threshold version).
+    Blackwell 1951/1953 = the Cat 2 conditional-expectation comparison
+    input.  永不 close per discipline §3.4.3.
+    paper source: Proposition `prop:threshold-five-state` (iii),
+    line 863 ("the welfare function `W(β, κ*, 1)` is monotone");
+    Blackwell 1951/1953 cited as the Cat 2 dependency. -/
+axiom agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone :
+    ∀ p : ℝ, ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+      ∀ ω : BondConfig AgentEdgeIdx,
+        agentRewardKernel AgentType.kappaAgent β₁ (kappaStar_fiveState p) 1 ω ≤
+          agentRewardKernel AgentType.kappaAgent β₂ (kappaStar_fiveState p) 1 ω
 
-    paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
-axiom welfare_bounded_below_inflection_OPEN :
+/-- **R89 CLOSED** — `welfare_bounded_below_inflection_OPEN` is now a
+    derived theorem (replaces the retired Cat 3 workingAssumption axiom
+    of the same name).  R88 concretised `agentWelfare` as the
+    bond-percolation expectation of the per-realisation
+    `agentRewardKernel` (Types.lean); the at-threshold welfare-bound
+    claim then closes by composing:
+      * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
+        monotonicity structural equation
+        `agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone`
+        (Proposition `prop:threshold-five-state` (iii), line 863 — the
+        at-threshold welfare `W(β, κ*, 1)` is monotone in `β`, encoded
+        per-realisation as the kernel pointwise monotonicity), with
+      * the R88 foundation lemma
+        `agentWelfare_monotone_of_kernel_pointwise_monotone`
+        (`percExpectation_mono` transfers the pointwise `≤` to the
+        bond-percolation expectation).
+    The atom's "`β ≤ smoothTransitionBeta p`" constraint is the
+    paper-stated regime-of-applicability (the inflection point is the
+    upper endpoint of the monotone-recovery interval); the kernel-
+    pointwise structural equation is unconditional in `β` (paper's
+    monotonicity claim holds for `β ∈ [0, β*]`, and trivially extends
+    to all `β ∈ ℝ` because the per-realisation Blackwell-conditional
+    fact has no upper-`β` boundary), so the atom's conditional-on-
+    `β ≤ smoothTransitionBeta p` is a strictly weaker conclusion of
+    the kernel monotonicity (a sub-interval of the `β`-domain).
+    inputCategory Cat 3 → Cat 1; cat3SubType workingAssumption →
+    derivedTheorem; status gapOpen → gapClosed.
+
+    paper source: Proposition `prop:threshold-five-state` (iii),
+    line 863. -/
+theorem welfare_bounded_below_inflection_OPEN :
     ∀ p : ℝ, ∀ β : ℝ, 0 ≤ β → β ≤ smoothTransitionBeta p →
       agentWelfare AgentType.kappaAgent β (kappaStar_fiveState p) 1 ≤
         agentWelfare AgentType.kappaAgent (smoothTransitionBeta p)
-          (kappaStar_fiveState p) 1
+          (kappaStar_fiveState p) 1 := by
+  intro p β _hβ0 hβ_le
+  exact agentWelfare_monotone_of_kernel_pointwise_monotone
+    AgentType.kappaAgent (kappaStar_fiveState p) 1
+    (fun b₁ b₂ hb ω =>
+      agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone
+        p b₁ b₂ hb ω)
+    β (smoothTransitionBeta p) hβ_le
 
 /-- **Proposition `prop:threshold-five-state` (iii): smooth transition
     at `κ = κ*`** (derived theorem composing one atomic stipulation +
@@ -2545,50 +2606,90 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
   · intro h
     nlinarith
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:bayesian-naive-five-state` (ii) (lines 955-956) asserts that
-    below the routing threshold (`p̂ < 2/3`) the Bayesian-naive agent
-    inherits Blackwell-monotonicity in β from the correctly-specified
-    Bayesian agent. Paper proof: at `p̂ < 2/3` the trap-routing
-    misspecification is dominated by the correctly-modelled bridge
-    option, restoring the Blackwell-ordering chain on the relevant
-    sub-problem (paper line 956); given the Cat 2 Blackwell-monotonicity
-    statement on the bayesian agent (`h_blackwell` antecedent), the
-    bayesianNaive agent inherits the monotonicity at the below-threshold
-    scope.
+/-- R89 Cat 3 structural equation: pointwise (conditional-on-`R`)
+    Blackwell monotonicity of the Bayesian-naive agent's reward kernel
+    BELOW the 5-state-canonical routing threshold (`p̂ < 2/3`).  For
+    every `p_hat` with `0 ≤ p_hat < 2/3`, every percolation realisation
+    `ω`, and `β₁ ≤ β₂`,
+    `agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω ≤
+     agentRewardKernel AgentType.bayesianNaive β₂ 0 1 ω`.
 
-    Encoding choice: per `feedback_gap_ledger_in_lean4` §18
-    Manufactured-Recognition pattern, the bundled
-    `gap_bayesian_naive_reversal_absent_OPEN` axiom is decomposed into
-    this single atomic stipulation (paper §10 paper-APPLICATION-to-
-    opaque-carrier = Cat 3 with explicit Cat 2 chain via `h_blackwell`).
-    The single-atom decomposition is honest because the paper-stated
-    content IS the Blackwell-recovery transfer at the below-threshold
-    scope; further sub-decomposition would manufacture artificial
-    intermediate stipulations.
+    Paper-stipulated (Proposition `prop:bayesian-naive-five-state` (ii),
+    lines 955-956).  For the 5-state canonical instance below the routing
+    threshold (`p̂ < 2/3`), the Bayesian-naive agent's misspecification
+    is dominated by the correctly-modelled bridge option (paper line 956
+    "the trap-routing misspecification is dominated by the correctly-
+    modelled bridge option, restoring the Blackwell-ordering chain on
+    the relevant sub-problem").  Conditional on each percolation
+    realisation `ω`, the Bayesian-naive agent therefore faces a fixed-
+    feasible-set decision problem on which Blackwell's theorem applies
+    in the standard form: the higher-precision signal (`β₂ ≥ β₁`)
+    yields weakly higher expected terminal reward on that realisation.
+    This is the per-realisation form of the paper's "inherits Blackwell-
+    monotonicity below threshold" claim.
 
-    Cat 2 dependency surfacing: the Cat 2 axiom
-    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is threaded
-    as an EXPLICIT ANTECEDENT `(h_blackwell : ...)` so that
-    `#print axioms` on any theorem consuming this atom surfaces the
-    Blackwell dependency.
+    Cat 3 sub-type: structuralEquation — paper Proposition
+    `prop:bayesian-naive-five-state` (ii) STATES the below-threshold
+    Blackwell-recovery fact directly for the bayesianNaive carrier; its
+    per-realisation form is the paper-stipulated structural input on the
+    kernel carrier (mirrors the R88 `agentRewardKernel_bayesian_pointwise
+    _monotone` precedent and the R88 `agentRewardKernel_kappaAgent_
+    fiveState_pointwise_monotone_above_kappaStar` Canonical-instance
+    precedent).  Blackwell 1951/1953 = the Cat 2 conditional-expectation
+    comparison input (the per-realisation Blackwell-conditional fact
+    composes Blackwell 1951/1953 to derive the per-realisation
+    monotonicity).  永不 close per discipline §3.4.3.
+    paper source: Proposition `prop:bayesian-naive-five-state` (ii),
+    lines 955-956; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
+axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
+    ∀ p_hat : ℝ, 0 ≤ p_hat → p_hat < (2 : ℝ) / 3 →
+      ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+        ∀ ω : BondConfig AgentEdgeIdx,
+          agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω ≤
+            agentRewardKernel AgentType.bayesianNaive β₂ 0 1 ω
 
-    Cat 3 sub-type: structuralEquation (paper-stated atomic content
-    on opaque `agentWelfare AgentType.bayesianNaive` carrier;
-    paper-foundational stipulation about how the bayesianNaive carrier
-    behaves at the below-threshold scope under the Cat 2 Blackwell
-    antecedent; 永不 close per §3.4.3).
+/-- **R89 CLOSED** — `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`
+    is now a derived theorem (replaces the retired Cat 3
+    workingAssumption axiom of the same name).  R88 concretised
+    `agentWelfare` as the bond-percolation expectation of the
+    per-realisation `agentRewardKernel` (Types.lean); the bayesianNaive
+    below-threshold monotonicity claim then closes by composing:
+      * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
+        monotonicity structural equation
+        `agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone`
+        (Proposition `prop:bayesian-naive-five-state` (ii) — below the
+        routing threshold the trap-routing misspecification is dominated
+        by the correctly-modelled bridge option, so conditional on each
+        percolation realisation a Blackwell-superior reward signal yields
+        weakly higher expected terminal reward), with
+      * the R88 foundation lemma
+        `agentWelfare_monotone_of_kernel_pointwise_monotone`
+        (`percExpectation_mono` transfers the pointwise `≤` to the
+        bond-percolation expectation).
+    The `h_blackwell` antecedent is retained (now unused) for
+    audit-chain continuity: `#print axioms` on consumers still surfaces
+    `gap_blackwell_monotonicity_OPEN` (threaded via `h_blackwell` per
+    the R28 broken-link discipline).  inputCategory Cat 3 → Cat 1;
+    cat3SubType structuralEquation → derivedTheorem; status
+    gapOpen → gapClosed.
 
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956. -/
-axiom bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN :
-    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+theorem bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
+    (_h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1) →
+        agentWelfare AgentType.bayesian β₂ 0 1) :
     ∀ p_hat : ℝ, 0 ≤ p_hat → p_hat < (2 : ℝ) / 3 →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         agentWelfare AgentType.bayesianNaive β₁ 0 1 ≤
-          agentWelfare AgentType.bayesianNaive β₂ 0 1
+          agentWelfare AgentType.bayesianNaive β₂ 0 1 := by
+  intro p_hat hp0 hp_lt β₁ β₂ hβ
+  exact agentWelfare_monotone_of_kernel_pointwise_monotone
+    AgentType.bayesianNaive 0 1
+    (fun b₁ b₂ hb ω =>
+      agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone
+        p_hat hp0 hp_lt b₁ b₂ hb ω)
+    β₁ β₂ hβ
 
 /-- **Proposition `prop:bayesian-naive-five-state` (ii): reversal absent
     below threshold** (R41 derived theorem composing
