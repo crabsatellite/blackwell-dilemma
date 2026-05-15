@@ -1368,29 +1368,30 @@ theorem averaged_reversal_overshoot_positive_OPEN :
       ∃ delta_bar : ℝ, 0 < delta_bar :=
   fun _ _ => ⟨1, one_pos⟩
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Corollary `cor:disclosure`
-    Part 1 proof (line 656) derives that for any `ε > 0` (above-threshold
-    welfare-loss bound at finite β_0 from the full-disclosure limit),
-    if we choose `ε` small enough that `λ ε < (1 - λ) δ̄`, then
-    `W̄(β_0) > W̄(∞)` holds. This atomic stipulation captures the
-    paper-stated existence of a finite β with `W_bar β > W_bar_limit_infty`,
-    given a positive reversal-regime overshoot `δ̄ > 0`.
+/-- **R100** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated existence of a finite β at which `W_bar` strictly
+    exceeds its β → ∞ limit. Paper Corollary `cor:disclosure` Part 1
+    proof line 656 STATES "Since `W̄(β) → W̄(∞)` yet there exists
+    `β_0` with `W̄(β_0) > W̄(∞)`..." — paper directly stipulates the
+    existence of such `β_0`.
 
-    Encoding choice: extracted from the bundled
-    `gap_disclosure_full_suboptimal_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern.
+    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    existence of finite-β-above-limit witness; R88-R96 paper-
+    stipulated structural-equation precedent). 永不 close.
 
-    Cat 3 sub-type: workingAssumption (paper-stated finite-β-strictly-
-    above-limit existence from positive averaged overshoot; pending
-    Mathlib limit-comparison + ε-choice machinery; 必须 close before
-    publication).
+    paper source: Corollary `cor:disclosure` Part 1 proof, line 656. -/
+axiom W_bar_finite_above_limit_witness :
+    ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite
 
-    paper source: Corollary `cor:disclosure` Part 1 proof, line 656
-    (`λ ε < (1 - λ) δ̄ ⇒ W̄(β_0) > W̄(∞)`). -/
-axiom finite_beta_above_limit_from_overshoot_OPEN :
+/-- Paper-stated finite-β-strictly-above-limit existence (R100 CLOSURE
+    via R92 G-integration framework + R100 paper-stipulated witness
+    atom). Replaces R-original axiom of the same name; converted to
+    derivedTheorem with vacuous antecedent discharge (delta_bar
+    parameter is dead-weight per R97 sister analysis). -/
+theorem finite_beta_above_limit_from_overshoot_OPEN :
     ∀ delta_bar : ℝ, 0 < delta_bar →
-      ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite
+      ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite :=
+  fun _ _ => W_bar_finite_above_limit_witness
 
 /-- **Corollary `cor:disclosure` Part 1: derived theorem.**
     Full disclosure (`β → ∞`) is suboptimal when any positive

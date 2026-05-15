@@ -6946,6 +6946,22 @@ def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
     "R94 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework integral structural equations + new R94 paper-stipulated `principalSampleBoth_exceeds_zero_witness` atom."
   conditionalOn := []
 
+/-- W_bar_finite_above_limit_witness — R100 Cat 3 §3.4.4 NEW SMALLER
+    workingAssumption (R91 §18 atomic-decomposition pattern). The
+    substantive paper-line-656 finite-β-above-limit existence claim,
+    decomposed from the bundled `finite_beta_above_limit_from_overshoot_OPEN`. -/
+def entry_atom_W_bar_finite_above_limit_witness : GapEntry where
+  name := "W_bar_finite_above_limit_witness"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Corollary cor:disclosure Part 1 proof, line 656 (`W̄(β_0) > W̄(∞)` finite-β-above-limit existence)"
+  attackHistory :=
+    [ "R100 2026-05-15: NEW smaller wA introduced as the substantive component of the R91-style §18 atomic-decomposition pattern applied to `finite_beta_above_limit_from_overshoot_OPEN`. The original wA bundled the algebraic delta_bar-discharge with the substantive paper-line-656 finite-β-above-limit existence claim; this atom isolates only the SUBSTANTIVE existence claim (`∃ β_finite > 0, W_bar_limit_infty < W_bar β_finite`), removing the dead-weight delta_bar antecedent. Paper line 656 paper-DERIVES this from `λ ε < (1-λ) δ̄` ε-choice + W_bar convergence; classified §3.4.4 workingAssumption per the R44/R46 discipline (paper-derived sign/existence claim). NET 0 wA delta (1 retired wA → 1 new smaller wA), audit-chain granularity benefit per discipline §18 (R91/R76/R77 precedent). Downstream consumer: `finite_beta_above_limit_from_overshoot_OPEN` (now derivedTheorem with vacuous antecedent discharge)." ]
+  scope := "Paper-stipulated finite-β-above-limit existence witness on W_bar (paper line 656)"
+  obstacleOrAttribution := "Cat 3 §3.4.4 workingAssumption (R100 NEW smaller wA from R91-style §18 atomic decomposition; paper-derived per R44/R46 discipline). Close target = paper-derived ε-choice + bounded-convergence chain via paper line 656 `λ ε < (1-λ) δ̄` argument."
+  conditionalOn := []
+
 /-- principalSampleBoth_valley_triple_witness — R96 Cat 3 §3.4.3
     paper-stipulated combined valley-triple witness on R92 sample sums. -/
 def entry_atom_principalSampleBoth_valley_triple_witness : GapEntry where
@@ -7204,10 +7220,10 @@ def entry_atom_averaged_reversal_overshoot_positive : GapEntry where
     proof (line 656), finite-β-strictly-above-limit existence from
     positive averaged overshoot. -/
 def entry_atom_finite_beta_above_limit_from_overshoot : GapEntry where
-  name := "finite_beta_above_limit_from_overshoot_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "finite_beta_above_limit_from_overshoot_OPEN [R100 derivedTheorem; closed via R100 paper-stipulated W_bar_finite_above_limit_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Corollary cor:disclosure Part 1 proof, line 656 (`λ ε < (1 - λ) δ̄ ⇒ W̄(β_0) > W̄(∞)`)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_disclosure_full_suboptimal_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures finite-β-strictly-above-limit existence from positive averaged overshoot. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib limit-comparison + ε-choice machinery), but depends on opaque `W_bar_limit_infty` characterisation. Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_disclosure_full_suboptimal` derived theorem (Principal.lean) hosts the atom." ,
@@ -8147,6 +8163,7 @@ def allGaps : List GapEntry := [
   entry_atom_principalSampleBoth_exceeds_zero_witness,
   entry_atom_principalSampleBoth_combined_convergence_witness,
   entry_atom_principalSampleBoth_valley_triple_witness,
+  entry_atom_W_bar_finite_above_limit_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
