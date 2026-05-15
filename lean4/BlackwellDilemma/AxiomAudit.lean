@@ -1484,7 +1484,7 @@ graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).
 #print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN
 #print axioms BlackwellDilemma.wInfoTopoRatioMillsConst_pos_above_pc_OPEN
 #print axioms BlackwellDilemma.wInfoTopoRatio_le_MillsConst_decay_OPEN
-#print axioms BlackwellDilemma.L_unimodal_in_regime_i_OPEN
-#print axioms BlackwellDilemma.envelope_continuity_in_p_OPEN
+#print axioms BlackwellDilemma.FiveState.L_unimodal_in_regime_i_OPEN
+#print axioms BlackwellDilemma.FiveState.envelope_continuity_in_p_OPEN
 
 end BlackwellDilemma.AxiomAudit
