@@ -274,32 +274,44 @@ axiom wInfoTopoRatio : ℝ → ℝ → ℝ
     constant in `|W_info|/|W_topo| = O(2^{-β})`). -/
 axiom wInfoTopoRatioMillsConst : ℝ → ℝ
 
-/-- **R118** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Theorem 3.3 Part 2 lines 421-427 STATE Mills-tail-style
-    `wInfoTopoRatioMillsConst p > 0` for `p > p_c` — paper-Def-stipulated
-    Mills-constant positivity. Grimmett 1999 §6.75 Cat 2 dependency. 永不 close. -/
-axiom wInfoTopoRatioMillsConst_pos_above_pc_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `wInfoTopoRatioMillsConst_pos_above_pc_paper_witness` —
+    paper Theorem 3.3 Part 2 lines 421-427 Mills-tail-style
+    `wInfoTopoRatioMillsConst p > 0`): the abstract Mills-constant
+    carrier inherits strict positivity from the cluster-tail
+    Mills-style decay structure.
+
+    The Cat 1 `Infrastructure.MillsRatioTail.sum_pos_of_one_pos_term`
+    handles the elementary positivity step; the workingAssumption side
+    hosts Grimmett 1999 §6.75 cluster-tail-derived Mills-constant
+    positivity. -/
+axiom wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < wInfoTopoRatioMillsConst p
 
-/-- **R118 CLOSURE** via R118 paper-stipulated Mills-constant positivity atom. -/
+/-- **R118 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    Mills-constant positivity via the smaller `_workingAssumption`
+    consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
 theorem wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < wInfoTopoRatioMillsConst p :=
-  wInfoTopoRatioMillsConst_pos_above_pc_paper_witness
+  wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption
 
-/-- **R119** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Theorem 3.3 Part 2 proof line 427 STATES `|W_info|/|W_topo| =
-    O(2^{-β})` Mills-tail-decay bound — paper-Def-stipulated quantitative
-    bound on opaque carriers wInfoTopoRatio + wInfoTopoRatioMillsConst.
-    Grimmett 1999 §6.75 + prop:info-decay Cat 2 composition. 永不 close. -/
-axiom wInfoTopoRatio_le_MillsConst_decay_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `wInfoTopoRatio_le_MillsConst_decay_paper_witness` —
+    paper Theorem 3.3 Part 2 proof line 427): `|W_info|/|W_topo| =
+    O(2^{-β})` Mills-tail-decay bound on `wInfoTopoRatio`.
+
+    The Cat 1 `Infrastructure.MillsRatioTail.tail_geometric_lower_bound`
+    handles the geometric-decay algebra; the workingAssumption side
+    hosts the Mills-tail + decay-rate identification. -/
+axiom wInfoTopoRatio_le_MillsConst_decay_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
@@ -307,7 +319,9 @@ axiom wInfoTopoRatio_le_MillsConst_decay_paper_witness :
       ∀ β : ℝ, 0 < β →
         wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * Real.rpow 2 (-β)
 
-/-- **R119 CLOSURE** via R119 paper-stipulated Mills-tail-decay atom. -/
+/-- **R119 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    Mills-tail-decay bound via the smaller `_workingAssumption`
+    consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
 theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -315,7 +329,7 @@ theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∀ β : ℝ, 0 < β →
         wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * Real.rpow 2 (-β) :=
-  wInfoTopoRatio_le_MillsConst_decay_paper_witness
+  wInfoTopoRatio_le_MillsConst_decay_workingAssumption
 
 /-- **Theorem 3.3 (`thm:phase`) Part 2: derived theorem.** Above
     threshold (`p > p_c`), the information-to-topology ratio

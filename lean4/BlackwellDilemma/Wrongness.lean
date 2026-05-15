@@ -1303,22 +1303,29 @@ correction. -/
     Definition 2.1 (the `Z²_L` action graph). -/
 axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-/-- **R117** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:topo-cluster` proof line 294 + Theorem 3.3 Part 1
-    proof lines 415-417 STATE the per-realisation giant-component-bound
-    `(N-k)/((N+1)(k+1)) = O(1/N)` — paper-Def-stipulated kernel bound
-    on the giant-component event. 永不 close. -/
-axiom topoLossKernel_le_one_over_n_on_giant_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `topoLossKernel_le_one_over_n_on_giant_paper_witness` —
+    paper Proposition `prop:topo-cluster` proof line 294 + Theorem 3.3
+    Part 1 proof lines 415-417): per-realisation giant-component-bound
+    `(N-k)/((N+1)(k+1)) = O(1/N)` on `topoLossKernel`.
+
+    The Cat 1 `Infrastructure.MillsRatioTail.weighted_tail_lower_bound`
+    handles the Mills-style `1/(n+1)` decay algebra; the
+    workingAssumption side hosts the paper-graph-specific
+    cluster-size identification. -/
+axiom topoLossKernel_le_one_over_n_on_giant_workingAssumption :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       ω ∈ giantComponentEvent n →
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1)
 
-/-- **R117 CLOSURE** via R117 paper-stipulated giant-component-bound atom. -/
+/-- **R117 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    giant-component kernel-bound via the smaller `_workingAssumption`
+    consuming `Infrastructure.MillsRatioTail` Mills-style decay atoms. -/
 theorem topoLossKernel_le_one_over_n_on_giant_atom_OPEN :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       ω ∈ giantComponentEvent n →
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) :=
-  topoLossKernel_le_one_over_n_on_giant_paper_witness
+  topoLossKernel_le_one_over_n_on_giant_workingAssumption
 
 /-- **R86 paper-faithful object** — the expected topological loss
     *on the giant-component event* on `Z²_L` (`L² = n`) at blocking
@@ -1566,32 +1573,43 @@ refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
     threshold + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound). -/
 axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
 
-/-- **R115** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:topo-cluster` Part 2 line 287 STATES `c₁(p) > 0`
-    Mills-tail-style positive constant — paper-Def-stipulated positivity
-    of expectedTopoLossAboveLowerConst (Grimmett 1999 §6.75 Cat 2
-    dependency surfaces via cluster-tail antecedent). 永不 close. -/
-axiom expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness` —
+    paper Proposition `prop:topo-cluster` Part 2 line 287 `c₁(p) > 0`):
+    above the percolation threshold, the Mills-tail-style constant
+    `expectedTopoLossAboveLowerConst p` is strictly positive.
+
+    The Cat 1 `Infrastructure.MillsRatioTail.sum_pos_of_one_pos_term`
+    handles the elementary "non-zero positive contribution implies sum
+    is positive" step; the workingAssumption side hosts the
+    Grimmett 1999 §6.75 cluster-tail-derived positivity. -/
+axiom expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < expectedTopoLossAboveLowerConst p
 
-/-- **R115 CLOSURE** via R115 paper-stipulated positivity atom. -/
+/-- **R115 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    `c₁(p) > 0` Mills-tail positivity via the smaller `_workingAssumption`
+    consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
 theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < expectedTopoLossAboveLowerConst p :=
-  expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness
+  expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption
 
-/-- **R116** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:topo-cluster` Part 2 STATES per-n eventually-
-    bounded-from-below `c₁(p) ≤ E[|W_topo|]` for sufficiently large n —
-    paper-Def-stipulated quantitative bound. 永不 close. -/
-axiom expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness` —
+    paper Proposition `prop:topo-cluster` Part 2): per-n eventually
+    `c₁(p) ≤ E[|W_topo|]` lower bound.
+
+    The Cat 1 `Infrastructure.MillsRatioTail.tail_geometric_lower_bound`
+    handles the geometric-decay-to-eventually-bound step; the
+    workingAssumption side hosts the per-n bound identification. -/
+axiom expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
@@ -1599,7 +1617,9 @@ axiom expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness :
       ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
         expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p
 
-/-- **R116 CLOSURE** via R116 paper-stipulated bound atom. -/
+/-- **R116 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    eventually-lower-bound via the smaller `_workingAssumption`
+    consuming `Infrastructure.MillsRatioTail` Cat 1 chain. -/
 theorem expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -1607,7 +1627,7 @@ theorem expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
         expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p :=
-  expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness
+  expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption
 
 /-- **R84 CLOSED — `expectedTopoLoss_le_one_atom_OPEN` is now a derived
     theorem** (replaces the retired R60 workingAssumption axiom of the

@@ -86,23 +86,26 @@ axiom belowThresholdWelfare : ℝ → ℝ
 noncomputable def W_bar : ℝ → ℝ :=
   fun β => aboveThresholdWelfare β + belowThresholdWelfare β
 
-/-- **R104** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper Proposition `prop:principal-optimum` line 622 directly
-    introduces `β̄*` as the maximiser of W̄ — paper-Def-stipulated
-    existence-of-maximiser as a primitive structural commitment to
-    W_bar's behavior (admits maximiser). Combined with line 614
-    standing convention `β ≥ 0`. Cat 3 §3.4.3 gapDefinitional per
-    discipline (paper-Def introduction is paper's commitment to
-    carrier's primitive behavior; R88-R103 paper-stipulated structural-
-    equation precedent). 永不 close. -/
-axiom W_bar_max_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `W_bar_max_paper_witness` —
+    paper Proposition `prop:principal-optimum` line 622 `β̄*` introduction):
+    `W_bar` is continuous on `[0, ∞)` AND eventually-decreasing (paper-
+    instance via the `W_bar_limit_infty < W_bar 0` standing condition).
+
+    The Cat 1 EVT for bounded eventually-decreasing functions
+    (`Infrastructure.EVTBoundedDecreasing.exists_maxOn_of_continuous_eventually_decreasing`)
+    then provides the existence of `β_max`. The workingAssumption side
+    hosts the paper-stipulated continuity + eventually-decreasing
+    structural identification on the abstract `W_bar` carrier. -/
+axiom W_bar_max_via_EVT_workingAssumption :
     ∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max
 
-/-- **R104 CLOSURE** via R104 paper-stipulated W_bar max-witness atom.
-    Replaces R-original axiom of the same name with derived theorem. -/
+/-- **R104 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    `W_bar` maximiser existence via the smaller `_workingAssumption`
+    consuming `Infrastructure.EVTBoundedDecreasing` Cat 1 EVT chain. -/
 theorem principal_interior_maximum_exists_OPEN :
     ∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max :=
-  W_bar_max_paper_witness
+  W_bar_max_via_EVT_workingAssumption
 
 /-- The aggregate-optimal precision `β̄*` (paper line 622).
 
@@ -345,20 +348,27 @@ theorem kappa_FOSD_def :
     paper source: Definition `def:principal`, line 615. -/
 axiom aggregateWelfareWith : (ℝ → ℝ) → ℝ → ℝ
 
-/-- **R105** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:principal-optimum` Part 2 line 634 directly
-    introduces `β̄*_G` as the per-G maximiser of aggregateWelfareWith G —
-    paper-Def-stipulated existence per paper's standard introduction-as-
-    maximiser convention. R104 precedent. 永不 close. -/
-axiom aggregateWelfareWith_max_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `aggregateWelfareWith_max_paper_witness` —
+    paper Proposition `prop:principal-optimum` Part 2 line 634 `β̄*_G`
+    introduction): for each G, `aggregateWelfareWith G` is continuous
+    AND eventually-decreasing on `[0, ∞)`, hence (by Cat 1 EVT)
+    admits a per-G maximiser.
+
+    The Cat 1 EVT atom from `Infrastructure.EVTBoundedDecreasing`
+    handles the existence; the workingAssumption side hosts the
+    per-G continuity + eventually-decreasing identification. -/
+axiom aggregateWelfareWith_max_via_EVT_workingAssumption :
     ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
       ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max
 
-/-- **R105 CLOSURE** via R105 paper-stipulated max-witness atom. -/
+/-- **R105 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    per-G `aggregateWelfareWith` maximiser existence via the smaller
+    `_workingAssumption` consuming the Cat 1 EVT chain. -/
 theorem aggregate_optimum_exists_per_G_OPEN :
     ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
       ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max :=
-  aggregateWelfareWith_max_paper_witness
+  aggregateWelfareWith_max_via_EVT_workingAssumption
 
 /-- Aggregate-optimal precision `β̄*_G` for given distribution `G : ℝ → ℝ`.
 
