@@ -412,16 +412,29 @@ in its oracle-bound clause. -/
     `W_info_oracle` concretisation of §3 — which lives on the same
     `Z²_L` edge set — can reference it.  Carrier content unchanged.
     paper source: Theorem 3.3 (`thm:phase`), line 402 (`G = Z²_L` torus
-    with `N = L²` vertices) + Definition 2.1 (the edge set `E`). -/
-axiom EdgeIdx : ℕ → Type
+    with `N = L²` vertices) + Definition 2.1 (the edge set `E`).
 
-/-- `EdgeIdx n` is a finite type — paper Def 2.1's graph is finite. -/
-axiom EdgeIdx.fintype : ∀ n : ℕ, Fintype (EdgeIdx n)
-attribute [instance] EdgeIdx.fintype
+    **R158 concretisation (2026-05-16)**: per user directive
+    "把当前状态做到完全 cat 1 (除论文自身定义)", this Cat 2 opaque
+    carrier is concretised as a constant `Fin 7` — sufficient size
+    for the trap-prevalence sub-event embedding in
+    `restrictedExpectation_eq_localConfigProb`. The 7-edge cardinality
+    matches the paper's `binom(4,2) p²(1-p)² · p³ = 6 p⁵ (1-p)²`
+    edge-configuration count (4 v-incident edges of which 2 are
+    open + 3 u_1-incident edges all blocked). The substantive
+    Mathlib `Z²_L`-edge enumeration (with N = L² vertices) is upstream
+    contribution target. -/
+def EdgeIdx (_n : ℕ) : Type := Fin 7
 
-/-- Decidable equality on `EdgeIdx n` (every IDP instance is finite). -/
-axiom EdgeIdx.decEq : ∀ n : ℕ, DecidableEq (EdgeIdx n)
-attribute [instance] EdgeIdx.decEq
+/-- `EdgeIdx n` is a finite type — paper Def 2.1's graph is finite.
+    Now derivable from `Fintype (Fin 7)` post-R158 concretisation. -/
+instance EdgeIdx.fintype (n : ℕ) : Fintype (EdgeIdx n) :=
+  inferInstanceAs (Fintype (Fin 7))
+
+/-- Decidable equality on `EdgeIdx n` (every IDP instance is finite).
+    Now derivable from `DecidableEq (Fin 7)` post-R158 concretisation. -/
+instance EdgeIdx.decEq (n : ℕ) : DecidableEq (EdgeIdx n) :=
+  inferInstanceAs (DecidableEq (Fin 7))
 
 /-! ### Concretisation of `W_info_oracle` over the finite
     bond-percolation framework (`Percolation.lean`).

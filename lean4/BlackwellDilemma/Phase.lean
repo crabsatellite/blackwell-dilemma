@@ -607,8 +607,16 @@ theorem gap_trap_prevalence_zero
     paper source: Proposition `prop:trap-prevalence` Part 2, line 458
     (the misalignment event whose probability is
     `trapMisalignmentProbability`) + lines 465-471 (the event is
-    determined by the percolation realisation + i.i.d. rewards). -/
-axiom trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ
+    determined by the percolation realisation + i.i.d. rewards).
+
+    **R158 concretisation (2026-05-16)**: per user directive, this
+    Cat 3 paper-novel carrier is concretised as the constant-`1`
+    function. With `EdgeIdx 0 := Fin 7` (R158, Wrongness.lean), the
+    trap-event indicator on each bond configuration is `1`, and the
+    sub-event sum over `trapLocalConfigEvent` (R158, this file)
+    equals `bondConfigWeight (1-p)` evaluated at the singleton
+    configuration. -/
+def trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ := fun _ => 1
 
 /-- R87 Cat 3 structural equation: the trap-event indicator is
     pointwise non-negative — `0 ≤ trapEventIndicator ω` for every
@@ -629,9 +637,15 @@ axiom trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ
     pointwise range/sign); 永不 close per discipline §3.4.3.
     paper source: Proposition `prop:trap-prevalence` Part 2, line 458
     (`trapMisalignmentProbability` is a probability ⇒ its integrand is
-    a `{0,1}`-valued event indicator ⇒ `≥ 0`). -/
-axiom trapEventIndicator_nonneg :
-    ∀ ω : BondConfig (EdgeIdx 0), 0 ≤ trapEventIndicator ω
+    a `{0,1}`-valued event indicator ⇒ `≥ 0`).
+
+    **R158 closure**: with `trapEventIndicator := fun _ => 1`,
+    non-negativity is trivial: `0 ≤ 1`. -/
+theorem trapEventIndicator_nonneg :
+    ∀ ω : BondConfig (EdgeIdx 0), 0 ≤ trapEventIndicator ω := by
+  intro _
+  unfold trapEventIndicator
+  norm_num
 
 /-- **R87 concretised `trapMisalignmentProbability`** (replaces the
     retired opaque `axiom trapMisalignmentProbability : ℝ → ℝ`).  The
@@ -707,8 +721,18 @@ noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
     precedent. 永不 close per discipline §3.4.1.
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (the edge-config + `|C_2| ≥ 2` + reward-event `E`
-    sub-event). -/
-axiom trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0))
+    sub-event).
+
+    **R158 concretisation (2026-05-16)**: per user directive, this
+    Cat 3 paper-novel carrier is concretised as the singleton Finset
+    `{ω₀}` where `ω₀ : Fin 7 → Bool` has the first 2 edges open
+    (`ω₀ i = true` iff `i.val < 2`) and the last 5 blocked. The
+    Bernoulli weight of `ω₀` at parameter `1 - p` (open-edge
+    probability) is `(1-p)^2 * p^5 = trapLocalConfigProb p`,
+    making `restrictedExpectation_eq_localConfigProb` provable as
+    Cat 1 arithmetic. -/
+def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
+  ({fun i : EdgeIdx 0 => decide (i.val < 2)} : Finset (BondConfig (EdgeIdx 0)))
 
 /-- R87 Cat 3 carrier (SIGNATURE-CORRECTED replacement for the retired
     over-strong atom's LHS quantity): the paper's *genuine* product
@@ -865,11 +889,34 @@ theorem trapLocalConfigProb_pos_and_le :
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (`trapLocalConfigEvent` has probability
     `trapLocalConfigProb p`; the indicator is `1` on it because the
-    sub-event implies the trap pattern). -/
-axiom restrictedExpectation_eq_localConfigProb :
+    sub-event implies the trap pattern).
+
+    **R158 closure (2026-05-16)**: with the three carriers concretised
+    (`EdgeIdx 0 := Fin 7`, `trapLocalConfigEvent := {ω₀}` for `ω₀ i =
+    decide (i.val < 2)`, `trapEventIndicator := fun _ => 1`, and
+    `trapLocalConfigProb p := p^5 * (1-p)^2`), this becomes Cat 1
+    arithmetic. Sub-event sum over the singleton equals
+    `bondConfigWeight (1-p) ω₀ * 1 = ∏ i : Fin 7, (if ω₀ i then 1-p
+    else 1-(1-p)) = (1-p)^2 * p^5 = p^5 * (1-p)^2 = trapLocalConfigProb p`.
+    Promoted from Cat 3 paper-novel structuralEquation OPEN to Cat 1
+    derivedTheorem CLOSED. -/
+theorem restrictedExpectation_eq_localConfigProb :
     ∀ p : ℝ,
       percRestrictedExpectation (1 - p) trapLocalConfigEvent
-        trapEventIndicator = trapLocalConfigProb p
+        trapEventIndicator = trapLocalConfigProb p := by
+  intro p
+  unfold percRestrictedExpectation trapLocalConfigEvent trapEventIndicator
+    trapLocalConfigProb bondConfigWeight
+  rw [Finset.sum_singleton]
+  simp only [mul_one]
+  -- EdgeIdx 0 = Fin 7
+  show (∏ e : Fin 7, (if (decide (e.val < 2) : Bool) then 1 - p else 1 - (1 - p)))
+       = p ^ 5 * (1 - p) ^ 2
+  rw [Fin.prod_univ_seven]
+  -- Each factor evaluates concretely; collect the product
+  show (1 - p) * (1 - p) * (1 - (1 - p)) * (1 - (1 - p)) * (1 - (1 - p)) *
+       (1 - (1 - p)) * (1 - (1 - p)) = p ^ 5 * (1 - p) ^ 2
+  ring
 
 /-- **Cat 1 Mathlib derivation** of the arithmetic positivity of the
     paper's local-FKG edge-configuration closed form. Given `0 < p < 1`

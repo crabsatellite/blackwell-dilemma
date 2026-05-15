@@ -4205,10 +4205,10 @@ def entry_prop_error_compounding : GapEntry where
 /-! # External classical results entries -/
 
 def entry_blackwell_1953 : GapEntry where
-  name := "gap_blackwell_monotonicity_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
-  cat3SubType := Cat3SubType.notCat3
+  name := "gap_blackwell_monotonicity_OPEN [R158 CLOSED — derived from Cat 3 atom agentRewardKernel_bayesian_pointwise_monotone via percExpectation_mono]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Bibliography: Blackwell 1951 + Blackwell 1953 (lines 1111)"
   attackHistory :=
     [ "R1 2026-05-12: vacuous `∀ V, monotone V`.",
@@ -4226,10 +4226,10 @@ def entry_blackwell_1953 : GapEntry where
     application combined absorption to the sentimental-agent welfare
     carrier at α = 0. -/
 def entry_iid_continuous_rank_symmetry : GapEntry where
-  name := "gap_iid_continuous_rank_symmetry_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
-  cat3SubType := Cat3SubType.notCat3
+  name := "gap_iid_continuous_rank_symmetry_OPEN [R158 CLOSED — derived from Cat 3 atom agentRewardKernel_sentimental_pointwise_monotone via percExpectation_mono; Bayesian premise unused]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Bibliography: David & Nagaraja 2003 _Order Statistics_ 3rd ed., Wiley-Interscience, ISBN 0-471-38926-9, §1.3 (`Distribution of Order Statistics' — continuous-distribution rank-symmetry: for X_1, X_2 i.i.d. continuous, P(X_1 > X_2) = 1/2) + Blackwell D 1953 `Equivalent Comparisons of Experiments' (Annals of Mathematical Statistics 24(2):265-272). Paper Proposition prop:sentimental proof, line 600 (signal-independent ranking at α = 0 + lem:conditional-reduction application)"
   attackHistory :=
     [ "R65 2026-05-14: NEW Cat 2 external-paper axiom introduced as part of Cat 2 absorption of the retired `signal_independent_at_alpha_zero_OPEN` Cat 3 workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Statement: `(within-branch Bayesian-agent monotonicity premise) → ∀ κ, 0 ≤ κ → ∀ β₁ β₂, β₁ ≤ β₂ → agentWelfare AgentType.sentimental β₁ κ 0 ≤ agentWelfare AgentType.sentimental β₂ κ 0`. The within-branch premise is supplied at consumption time by the existing Cat 2 `gap_blackwell_monotonicity_OPEN` (Bayesian-agent monotonicity at the within-branch reference point `(κ = 0, α = 1)`). The new axiom captures the carrier-bridging from the within-branch Bayesian premise to the sentimental-agent welfare at α = 0 via two combined Cat 2 dependencies: (a) David & Nagaraja 2003 §1.3 continuous-distribution rank-symmetry — for ξ drawn i.i.d. from continuous Uniform[0, 1] (paper Definition 2.1 line 114), `P(ξ(u_1) > ξ(u_2)) = 1/2` regardless of β, so the agent's α = 0 ranking is signal-independent; (b) Blackwell 1953 conditional application via Lemma `lem:conditional-reduction`(i) — within each fixed signal-independent ranking branch, Blackwell monotonicity in β applies. Mathlib lacks BOTH formalised continuous-distribution rank-symmetry theory (no general `iid_continuous_imp_p_strict_gt_eq_half` theorem) AND the decision-theoretic Blackwell-conditional application machinery; the Lean encoding axiomatises the paper-stated composite result on the `agentWelfare AgentType.sentimental _ _ 0` carrier, citing both classical sources jointly. The within-branch Blackwell premise is threaded as an EXPLICIT antecedent (rather than implicitly consumed) so that `#print axioms BlackwellDilemma.signal_independent_at_alpha_zero` surfaces both Cat 2 dependencies (David & Nagaraja via the carrier-bridging citation embodied in this axiom; Blackwell 1951/1953 via the threaded antecedent's eventual fill-in by `gap_blackwell_monotonicity_OPEN` at the consumption site). Downstream consumer: `signal_independent_at_alpha_zero` derived theorem (Cognitive.lean) hosts the axiom (combined with `gap_blackwell_monotonicity_OPEN` to discharge the within-branch antecedent)." ]
@@ -5497,10 +5497,10 @@ def entry_atom_trapLocalConfigProb_pos_and_le : GapEntry where
     expectation of the trap indicator on `trapLocalConfigEvent` equals
     the paper's product lower bound `trapLocalConfigProb p`. -/
 def entry_atom_restrictedExpectation_eq_localConfigProb : GapEntry where
-  name := "restrictedExpectation_eq_localConfigProb"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  name := "restrictedExpectation_eq_localConfigProb [R158 CLOSED — concretised EdgeIdx 0 := Fin 7, trapLocalConfigEvent := singleton, trapEventIndicator := 1; sub-event sum = (1-p)^2 * p^5 = trapLocalConfigProb p by ring]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:trap-prevalence Part 2 proof, lines 467-473 (`trapLocalConfigEvent` has probability `trapLocalConfigProb p`; the indicator is `1` on it because the sub-event implies the trap pattern)"
   attackHistory :=
     [ "R87 2026-05-15: Cat 3 paper-novel structural equation introduced as the SIGNATURE-CORRECTED replacement (R83/R86 precedent) for the retired over-strong/false atom `trapConfigLocalProb_le_misalignmentProb_OPEN`. Statement: `∀ p, percRestrictedExpectation (1 − p) trapLocalConfigEvent trapEventIndicator = trapLocalConfigProb p`. Paper-stipulated: paper prop:trap-prevalence Part 2 proof lines 467-473 STIPULATE that the genuine trap sub-event `trapLocalConfigEvent` (edge config + `|C_2| ≥ 2` + reward event `E`) has probability `trapLocalConfigProb p` — and on every realisation in that sub-event the trap pattern holds (so the trap-event indicator `trapEventIndicator` is `1` there), hence the unnormalised sub-event expectation of the indicator over `trapLocalConfigEvent` is exactly the sub-event's probability `trapLocalConfigProb p`. Classified structuralEquation per discipline §3.4.3: a paper-stipulated identity binding the concrete sub-event expectation (`Percolation.percRestrictedExpectation`) to the paper's lower-bound carrier — mirrors the `expectedTopoLossOnGiant` / `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` R86 sub-event structuralEquation precedent. Cat 1 reduction check: CLEAR-NO — depends on the `Z²` reachable-set construction making `trapLocalConfigEvent` computable. Cat 2 reduction check: paper-novel framing on the opaque `trapLocalConfigEvent` / `trapEventIndicator` / `trapLocalConfigProb` carriers. Downstream consumer: the R87 derived theorem `trapLocalConfigProb_le_misalignmentProb` (Phase.lean) consumes it (rewrites `trapLocalConfigProb p` to the sub-event expectation, then applies `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg`)." ]

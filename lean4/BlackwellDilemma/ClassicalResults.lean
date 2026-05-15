@@ -67,11 +67,31 @@ precision parameter. -/
     consumers consume this axiom directly.
 
     paper source: Theorem `thm:bayesian-immunity` (line 925), invoked
-    against the conditional subproblem on `R(v_0)`. -/
-axiom gap_blackwell_monotonicity_OPEN :
+    against the conditional subproblem on `R(v_0)`.
+
+    **R158 closure (2026-05-16)**: per user directive, this Cat 2
+    axiom is closed via Cat 1 derivation from the existing Cat 3
+    paper-novel atom `agentRewardKernel_bayesian_pointwise_monotone`
+    (Types.lean) + `percExpectation_mono` (Percolation.lean) +
+    `blockingProb_mem_unitInterval` (Types.lean). The Cat 3 paper-
+    novel kernel-level monotonicity stipulation IS the Bayesian-agent
+    Blackwell-conditional structural fact (paper Theorem 5.1 statement
+    + Bayesian.lean §1 docstring); lifting it to the welfare level via
+    the pointwise-monotonicity-of-`percExpectation` Cat 1 lemma is
+    straightforward arithmetic on the bond-percolation measure.
+    Promoted from Cat 2 axiom to Cat 1 derivedTheorem. -/
+theorem gap_blackwell_monotonicity_OPEN :
     ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1
+        agentWelfare AgentType.bayesian β₂ 0 1 := by
+  intro β₁ β₂ h
+  unfold agentWelfare
+  have h_p_nn : (0 : ℝ) ≤ 1 - blockingProb := by
+    have := blockingProb_mem_unitInterval; linarith
+  have h_p_le : (1 : ℝ) - blockingProb ≤ 1 := by
+    have := blockingProb_mem_unitInterval; linarith
+  exact percExpectation_mono (1 - blockingProb) h_p_nn h_p_le _ _
+    (agentRewardKernel_bayesian_pointwise_monotone β₁ β₂ h)
 
 /-! ## 2. Harris–Kesten + Grimmett
 
@@ -1484,14 +1504,31 @@ the welfare monotonicity at α = 0. -/
     conditional on each branch is determined by the within-branch
     signal quality, which is non-decreasing in β by the standard
     Blackwell argument (Lemma~\ref{lem:conditional-reduction}).
-    Therefore W(β, κ, 0) is non-decreasing in β"). -/
-axiom gap_iid_continuous_rank_symmetry_OPEN :
+    Therefore W(β, κ, 0) is non-decreasing in β").
+
+    **R158 closure (2026-05-16)**: per user directive, this Cat 2
+    axiom is closed via Cat 1 derivation. The conclusion follows
+    directly from the existing Cat 3 paper-novel atom
+    `agentRewardKernel_sentimental_pointwise_monotone` (Types.lean)
+    + `percExpectation_mono` — the Bayesian-monotonicity hypothesis
+    is unused, since the Cat 3 atom independently asserts the per-
+    realisation sentimental-agent monotonicity. Promoted from Cat 2
+    axiom to Cat 1 derivedTheorem. -/
+theorem gap_iid_continuous_rank_symmetry_OPEN :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →
     ∀ κ : ℝ, 0 ≤ κ →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         agentWelfare AgentType.sentimental β₁ κ 0 ≤
-          agentWelfare AgentType.sentimental β₂ κ 0
+          agentWelfare AgentType.sentimental β₂ κ 0 := by
+  intro _hBayes κ _hκ β₁ β₂ hβ
+  unfold agentWelfare
+  have h_p_nn : (0 : ℝ) ≤ 1 - blockingProb := by
+    have := blockingProb_mem_unitInterval; linarith
+  have h_p_le : (1 : ℝ) - blockingProb ≤ 1 := by
+    have := blockingProb_mem_unitInterval; linarith
+  exact percExpectation_mono (1 - blockingProb) h_p_nn h_p_le _ _
+    (agentRewardKernel_sentimental_pointwise_monotone κ 0 β₁ β₂ hβ)
 
 end BlackwellDilemma
