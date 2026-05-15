@@ -98,3 +98,5 @@ import BlackwellDilemma.Infrastructure.BernoulliProductFinite
 import BlackwellDilemma.Infrastructure.UnitIntervalAlgebra
 import BlackwellDilemma.Infrastructure.PercolationExpectation
 import BlackwellDilemma.Infrastructure.MonotoneCDFAlgebra
+import BlackwellDilemma.Infrastructure.FOSDLiftedExpectation
+import BlackwellDilemma.Infrastructure.MaxOverFinset
