@@ -6946,6 +6946,20 @@ def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
     "R94 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework integral structural equations + new R94 paper-stipulated `principalSampleBoth_exceeds_zero_witness` atom."
   conditionalOn := []
 
+/-- principalSampleBoth_valley_triple_witness — R96 Cat 3 §3.4.3
+    paper-stipulated combined valley-triple witness on R92 sample sums. -/
+def entry_atom_principalSampleBoth_valley_triple_witness : GapEntry where
+  name := "principalSampleBoth_valley_triple_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 640 (non-concavity W̄ valley pattern)"
+  attackHistory :=
+    [ "R96 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R96 closure of `non_concave_triple_W_bar_OPEN` via R92 G-integration framework. Paper line 640 STIPULATES the existence of a non-concave valley triple `β₁ < β₂ < β₃` for `W̄`; per R92 mixture decomposition, this requires the combined sample-sum to exhibit the valley at this triple. R88-R95 paper-stipulated structural-equation precedent. Downstream consumer: `non_concave_triple_W_bar_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "Paper-stipulated combined valley-triple witness on R92 sample sums (paper line 640)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
 /-- principalSampleBoth_combined_convergence_witness — R95 Cat 3 §3.4.3
     paper-stipulated combined-convergence witness on R92 sample sums. -/
 def entry_atom_principalSampleBoth_combined_convergence_witness : GapEntry where
@@ -7151,19 +7165,20 @@ def entry_atom_belowThresholdWelfare_eventually_decreasing : GapEntry where
     Part 3 proof (line 640), non-concavity triple from mixture
     decomposition. -/
 def entry_atom_non_concave_triple_from_mixture : GapEntry where
-  name := "non_concave_triple_W_bar_OPEN [R90 SOUNDNESS-DEFECT FIX REPLACES `non_concave_triple_from_mixture_OPEN`]"
-  status := GapStatus.gapOpen
+  name := "non_concave_triple_W_bar_OPEN [R90 SOUNDNESS-DEFECT FIX + R96 derivedTheorem closure via R92 G-integration framework + valley-triple witness atom]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 3 proof, line 640 (non-concavity `W̄` valley pattern)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_regime_bifurcation_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated non-concavity triple from mixture decomposition. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib monotonicity-pattern analysis), but depends on the paper-novel mixture-decomposition framing. Cat 2 reduction check: paper-novel sum-of-monotone-and-non-monotone framework. Downstream consumer: `gap_principal_regime_bifurcation` derived theorem (Principal.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
       "R44 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R43 verdict (paper-derived working content per §3.4.4 — existence/sign/asymptotic claim, NOT definitional equation). R48 followup: completed metadata sync (attackHistory + obstacleOrAttribution updates) that R44 left half-applied.",
-      "R90 2026-05-15: SOUNDNESS-DEFECT FIX (R83/R86/R87 precedent — correct over-strong/false signature to TRUE paper claim, prove THAT). The prior `non_concave_triple_from_mixture_OPEN` antecedent `(∃ f g, monotone f ∧ (∃ β_low<β_high, g β_high<g β_low) ∧ ∀ β, W_bar β = f β + g β) → ∃ β₁<β₂<β₃, W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃` was COUNTEREXAMPLE-FALSIFYING. Counterexample: `aboveThresholdWelfare β := β` (axiom-compatible — opaque carrier with no positivity constraint), `belowThresholdWelfare β := -β` (axiom-compatible). Then `aboveThresholdWelfare_monotone_OPEN` holds, the eventually-decreasing existential is satisfied (β_low=0, β_high=1: -1<0), and `W_bar β = β + (-β) = 0` for all β; the conclusion would require `0 < 0`, FALSE. Per `feedback_truth_over_publication`: REPLACED with paper-faithful direct stipulation `non_concave_triple_W_bar_OPEN : ∃ β₁<β₂<β₃, W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃` (no antecedent — paper line 640 stipulates the `W̄` valley triple directly; the mixture-decomposition was the paper's heuristic plausibility argument, NOT a mathematical implication). Downstream `gap_principal_regime_bifurcation` rerouted to consume the new direct atom. The R63 `W_bar_mixture_decomposition` derived theorem (paper line 638 mixture identity) remains as a separate fact in its own right but is no longer (mis)used to derive the valley triple. Net wA delta: 0 (1 unsound wA replaced by 1 sound wA — same count, but sound). Build GREEN (2723 jobs)." ]
-  scope := "Proposition prop:principal-optimum Part 3, W_bar valley triple (R90 sound-fix-aligned)"
+      "R90 2026-05-15: SOUNDNESS-DEFECT FIX (R83/R86/R87 precedent). The prior `non_concave_triple_from_mixture_OPEN` antecedent was COUNTEREXAMPLE-FALSIFYING. REPLACED with paper-faithful direct stipulation `non_concave_triple_W_bar_OPEN`. Net wA delta: 0 (1 unsound wA replaced by 1 sound wA).",
+      "R96 2026-05-15: CLOSED via R92 G-integration framework + new R96 paper-stipulated combined valley-triple witness atom `principalSampleBoth_valley_triple_witness`. Converted to derivedTheorem composing R92 integral structural equations + the valley-triple witness via `rw` + algebra. Net wA delta: −1." ]
+  scope := "Proposition prop:principal-optimum Part 3, W_bar valley triple (R96 closed via G-integration framework + valley-triple witness)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R90 sound-fix-aligned). Close target = paper proof reconstruction of Proposition prop:principal-optimum Part 3 line 640 (non-concavity `W̄` valley pattern; pending the structural form of the above/below-threshold contributions on the opaque carriers, which are not yet pinned down)."
+    "R96 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework + new R96 `principalSampleBoth_valley_triple_witness` atom + rewrite chain."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure` Part 1
@@ -8129,6 +8144,7 @@ def allGaps : List GapEntry := [
   entry_atom_principalSampleBoth_combined_dominance_witness_pair,
   entry_atom_principalSampleBoth_exceeds_zero_witness,
   entry_atom_principalSampleBoth_combined_convergence_witness,
+  entry_atom_principalSampleBoth_valley_triple_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,

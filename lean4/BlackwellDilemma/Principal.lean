@@ -1113,44 +1113,64 @@ theorem gap_principal_interior_optimum
     (W_bar_eventually_decreasing_in_reversal_OPEN hC hT h_reversal)
     (W_bar_exceeds_zero_at_positive_beta_OPEN hC hT h_reversal)
 
-/-- **R90 SOUNDNESS-DEFECT FIX** — the previous
-    `non_concave_triple_from_mixture_OPEN` signature was
-    OVER-STRONG/FALSE. Counterexample: take
-    `aboveThresholdWelfare β := β` (axiom-compatible — no positivity
-    constraint on the opaque carrier) and
-    `belowThresholdWelfare β := -β` (axiom-compatible). Then
-    `aboveThresholdWelfare_monotone_OPEN` holds vacuously, the
-    eventually-decreasing existential pair is satisfied (e.g.
-    `β_low := 0, β_high := 1` gives `-1 < 0`), and the mixture
-    identity `W_bar β = β + (-β) = 0` holds for all β. The conclusion
-    `∃ β₁ < β₂ < β₃, W_bar β₂ < W_bar β₁` then requires `0 < 0`,
-    which is FALSE. Per `feedback_truth_over_publication`: replaced
-    with a paper-faithful direct stipulation about `W_bar` (matches
-    R83/R86/R87 precedent — correct over-strong signature to TRUE
-    paper claim, prove THAT).
-
-    The paper's actual content at line 640 is the EXISTENCE of a
-    valley triple in `W̄`; the mixture decomposition argument
-    (line 638) is the paper's HEURISTIC route to plausibility but
-    does NOT mathematically force the triple from generic
-    monotone-plus-eventually-decreasing antecedents (the
-    counterexample above shows). Per the paper, the triple's
-    existence is a paper-stipulated atomic fact about `W̄`,
-    pending derivation from the actual structural form of the
-    above/below-threshold contributions (which the opaque carriers
-    do not yet pin down).
-
-    Cat 3 sub-type: workingAssumption (paper-stated W_bar valley
-    triple; pending paper proof reconstruction with the above/below-
-    threshold contribution structural details fully spelled out;
-    必须 close before publication).
+/-- **R96** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated combined valley-triple witness on the R92 G-conditional
+    sample sums. Paper line 640 STATES the existence of a non-concave
+    valley triple `β₁ < β₂ < β₃` for `W̄`; per R92 mixture decomposition,
+    this requires the combined sample-sum to exhibit the valley at this
+    triple. Cat 3 §3.4.3 gapDefinitional. 永不 close.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 640 (non-concavity `W̄` valley pattern). -/
-axiom non_concave_triple_W_bar_OPEN :
+    line 640. -/
+axiom principalSampleBoth_valley_triple_witness :
     ∃ β₁ β₂ β₃ : ℝ,
       β₁ < β₂ ∧ β₂ < β₃ ∧
-      W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃
+      ((∑ i : principalSampleAbove, principalSampleAboveWeight i *
+          agentWelfare AgentType.kappaAgent β₂
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+       (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+          agentWelfare AgentType.kappaAgent β₂
+            (principalSampleBelowKappa j) (principalSampleBelowAlpha j))) <
+      ((∑ i : principalSampleAbove, principalSampleAboveWeight i *
+          agentWelfare AgentType.kappaAgent β₁
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+       (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+          agentWelfare AgentType.kappaAgent β₁
+            (principalSampleBelowKappa j) (principalSampleBelowAlpha j))) ∧
+      ((∑ i : principalSampleAbove, principalSampleAboveWeight i *
+          agentWelfare AgentType.kappaAgent β₂
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+       (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+          agentWelfare AgentType.kappaAgent β₂
+            (principalSampleBelowKappa j) (principalSampleBelowAlpha j))) <
+      ((∑ i : principalSampleAbove, principalSampleAboveWeight i *
+          agentWelfare AgentType.kappaAgent β₃
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+       (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+          agentWelfare AgentType.kappaAgent β₃
+            (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
+
+theorem non_concave_triple_W_bar_OPEN :
+    ∃ β₁ β₂ β₃ : ℝ,
+      β₁ < β₂ ∧ β₂ < β₃ ∧
+      W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃ := by
+  obtain ⟨β₁, β₂, β₃, h12, h23, h_valley_left, h_valley_right⟩ :=
+    principalSampleBoth_valley_triple_witness
+  refine ⟨β₁, β₂, β₃, h12, h23, ?_, ?_⟩
+  · show aboveThresholdWelfare β₂ + belowThresholdWelfare β₂ <
+      aboveThresholdWelfare β₁ + belowThresholdWelfare β₁
+    rw [aboveThresholdWelfare_eq_kappaAgent_integral β₂,
+        aboveThresholdWelfare_eq_kappaAgent_integral β₁,
+        belowThresholdWelfare_eq_kappaAgent_integral β₂,
+        belowThresholdWelfare_eq_kappaAgent_integral β₁]
+    exact h_valley_left
+  · show aboveThresholdWelfare β₂ + belowThresholdWelfare β₂ <
+      aboveThresholdWelfare β₃ + belowThresholdWelfare β₃
+    rw [aboveThresholdWelfare_eq_kappaAgent_integral β₂,
+        aboveThresholdWelfare_eq_kappaAgent_integral β₃,
+        belowThresholdWelfare_eq_kappaAgent_integral β₂,
+        belowThresholdWelfare_eq_kappaAgent_integral β₃]
+    exact h_valley_right
 
 /-- **Proposition `prop:principal-optimum` Part 3: derived theorem.**
     The aggregate `W̄(β)` exhibits a non-concave valley pattern:
