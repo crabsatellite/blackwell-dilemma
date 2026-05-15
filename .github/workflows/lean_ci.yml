@@ -1,0 +1,67 @@
+name: Lean CI
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'lean4/**'
+      - '.github/workflows/lean_ci.yml'
+  pull_request:
+    paths:
+      - 'lean4/**'
+      - '.github/workflows/lean_ci.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lean4
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Cache Mathlib
+        uses: actions/cache@v4
+        with:
+          path: lean4/.lake
+          key: lake-${{ runner.os }}-${{ hashFiles('lean4/lean-toolchain', 'lean4/lakefile.toml', 'lean4/lake-manifest.json') }}
+          restore-keys: lake-${{ runner.os }}-
+
+      - name: Get Mathlib cache
+        run: lake exe cache get || true
+
+      - name: Build BlackwellDilemma
+        run: lake build BlackwellDilemma
+
+      - name: Verify no proof-position sorry in source
+        run: |
+          # Match only REAL proof-position `sorry` in Lean 4 syntax:
+          #   `:= sorry` or `:=sorry` (term-mode proof)
+          #   `by sorry` (tactic-mode proof when sorry is the only tactic)
+          #   bare `sorry` on its own line (often inside a `by` block)
+          # Ignore docstring / comment mentions of "sorry" entirely
+          # (these are NOT proof-position so they cannot affect kernel-purity).
+          if grep -rnE ':=[[:space:]]*sorry\b|^[[:space:]]+sorry[[:space:]]*$|\bby[[:space:]]+sorry\b' BlackwellDilemma/ BlackwellDilemma.lean --include="*.lean"; then
+            echo "ERROR: proof-position sorry found in source code"
+            exit 1
+          fi
+          echo "OK: no proof-position sorry"
+
+      - name: Verify no native_decide in source
+        run: |
+          # native_decide bypasses kernel verification; project discipline
+          # prohibits it. Match `\bnative_decide\b` outside docstrings/comments.
+          if grep -rnE '\bnative_decide\b' BlackwellDilemma/ BlackwellDilemma.lean --include="*.lean" | grep -vE '^[^:]+:[0-9]+:\s*--'; then
+            echo "ERROR: native_decide found in source code"
+            exit 1
+          fi
+          echo "OK: no native_decide"
+
+      - name: Build AxiomAudit (kernel-purity surface)
+        run: lake build BlackwellDilemma.AxiomAudit
