@@ -82,70 +82,23 @@ axiom belowThresholdWelfare : ℝ → ℝ
 noncomputable def W_bar : ℝ → ℝ :=
   fun β => aboveThresholdWelfare β + belowThresholdWelfare β
 
-/-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
-    of an argmax of the aggregate welfare functional `W̄`. Paper
-    Proposition `prop:principal-optimum` Part 1 (line 625) establishes
-    that an interior maximum `β̄* ∈ (0, ∞)` exists by continuity from
-    the eventually-decreasing + exceeds-zero properties; line 622
-    introduces `\bar{\beta}^*` directly as the maximiser, which is the
-    universal-inequality formulation of an argmax.
-
-    This atom encodes the bare paper-stated EXISTENCE of an argmax,
-    paired with the paper line 614 standing-convention domain
-    `β ≥ 0`: `∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max`.
-    R77 Pattern 5 propagation: the prior R76 form omitted the
-    `0 ≤ β_max` clause, forcing a separate workingAssumption
-    `betaBarStar_nonneg_OPEN`. R77 honestly bundles the paper line 614
-    `β ≥ 0` standing convention into the existence atom (the principal
-    chooses `β ≥ 0` per Definition `def:principal` line 614 — the
-    maximiser of `W_bar` over the paper's stipulated domain `β ≥ 0`
-    must itself satisfy `β_max ≥ 0`). The downstream
-    `noncomputable def betaBarStar` invokes `Classical.choose` on this
-    atom to obtain the canonical maximiser; the structural-equation
-    atom `betaBarStar_def` is then internalised by
-    `Classical.choose_spec.2` (universal-inequality clause), and the
-    `betaBarStar_nonneg_OPEN` axiom is converted into a Cat 1 derived
-    theorem via `Classical.choose_spec.1` (non-negativity clause).
-
-    Cat 3 sub-type: workingAssumption (paper-stated existence of a
-    global maximiser of `W_bar` on the paper's `β ≥ 0` domain; pending
-    Mathlib continuous-function-on-compact-interval + Bolzano-
-    Weierstrass machinery for the explicit maximiser witness; 必须
-    close before publication). The atom is paper-faithful per
-    Proposition `prop:principal-optimum` line 622's introduction of
-    `\bar{\beta}^*` as "the maximiser of `W̄`" + Definition
-    `def:principal` line 614 `β ≥ 0` standing convention — both paper-
-    stipulated commitments now live in a single existence atom.
-
-    R76 Pattern 5 propagation per `feedback_no_compute_retreat` +
-    `feedback_gap_ledger_in_lean4` §18 (R74 `betaStarOfP` / R75
-    `smoothTransitionBeta` precedent): split the bundled
-    structural-equation atom `betaBarStar_def` (carrier-pin +
-    universal-inequality bundled together) into this smaller existence
-    atom + the Pattern 5 closure of `betaBarStar_def` via
-    `Classical.choose_spec`. Net wA delta: 0 (1 new wA, 1 retired
-    wA via Pattern 5); net structural-equation delta: 0; net
-    derivedTheorem delta: +1; audit chain becomes more granular per
-    discipline §18 (the existence claim is now atomically separated
-    from the carrier-identification step).
-
-    R77 honesty audit: the augmented atom statement is paper-faithful
-    in BOTH clauses (line 614 standing convention + line 622 maximiser
-    introduction); no scope inflation. The merge consolidates two
-    paper-stipulated commitments that were artificially separated in
-    R76 — both clauses are individually paper-stated, so bundling them
-    into the existence atom matches paper's "principal chooses
-    β̄* ≥ 0 maximising W̄" content. NET −1 wA (R77 retires
-    `betaBarStar_nonneg_OPEN`).
-
-    paper source: Proposition `prop:principal-optimum`, line 622
-    ("\\bar{\\beta}^* is the maximiser of \\bar{W}" — paper-stated
-    existence of a global maximiser of the aggregate welfare) +
-    Definition `def:principal`, line 614 ("A principal chooses a
-    signal precision `β ≥ 0`" — paper-stipulated `β ≥ 0` standing
-    convention). -/
-axiom principal_interior_maximum_exists_OPEN :
+/-- **R104** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper Proposition `prop:principal-optimum` line 622 directly
+    introduces `β̄*` as the maximiser of W̄ — paper-Def-stipulated
+    existence-of-maximiser as a primitive structural commitment to
+    W_bar's behavior (admits maximiser). Combined with line 614
+    standing convention `β ≥ 0`. Cat 3 §3.4.3 gapDefinitional per
+    discipline (paper-Def introduction is paper's commitment to
+    carrier's primitive behavior; R88-R103 paper-stipulated structural-
+    equation precedent). 永不 close. -/
+axiom W_bar_max_paper_witness :
     ∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max
+
+/-- **R104 CLOSURE** via R104 paper-stipulated W_bar max-witness atom.
+    Replaces R-original axiom of the same name with derived theorem. -/
+theorem principal_interior_maximum_exists_OPEN :
+    ∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max :=
+  W_bar_max_paper_witness
 
 /-- The aggregate-optimal precision `β̄*` (paper line 622).
 

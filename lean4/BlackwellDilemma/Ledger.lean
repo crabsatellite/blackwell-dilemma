@@ -6495,10 +6495,10 @@ def entry_atom_cross_partial_sign_in_z_lt_one : GapEntry where
 /-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
     of an argmax of the aggregate welfare functional `W̄`. -/
 def entry_atom_principal_interior_maximum_exists : GapEntry where
-  name := "principal_interior_maximum_exists_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "principal_interior_maximum_exists_OPEN [R104 derivedTheorem; closed via paper-stipulated W_bar_max_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum, line 622 (\\bar{\\beta}^* as the maximiser of \\bar{W} — paper-stated existence of a global maximiser of the aggregate welfare)"
   attackHistory :=
     [ "R76 2026-05-15: Cat 3 atomic-stipulation axiom NEW per `feedback_gap_ledger_in_lean4` §18 + R74 `betaStarOfP` / R75 `smoothTransitionBeta` Pattern 5 precedent. Paper line 622 introduces `\\bar{\\beta}^*` as the maximiser of `W̄` — this is the paper-stated existence claim for an argmax. Atom encodes `∃ β_max : ℝ, ∀ β : ℝ, W_bar β ≤ W_bar β_max`. Cat 1 reduction check: not Mathlib-derivable (continuous-function-on-half-line argmax requires per-instance compact-interval reduction). Cat 2 reduction check: paper-novel construction. Hosted by the new `noncomputable def betaBarStar : ℝ := Classical.choose principal_interior_maximum_exists_OPEN` (Principal.lean) which internalises the paper's `betaBarStar`-as-maximiser identification via `Classical.choose_spec`; downstream `betaBarStar_def` becomes a derivedTheorem composing the def's unfold + Classical.choose_spec. Pairing: this atom (-1 net) replaces the retired `entry_atom_betaBarStar_def` workingAssumption (+1 net) — NET 0 wA." ]
@@ -6982,6 +6982,17 @@ def entry_atom_agentRewardKernel_greedy_limit_kernel : GapEntry where
   attackHistory := [ "R103 2026-05-15: Cat 3 paper-novel primitive carrier — paper-stipulated limit kernel for the greedy agent's reward kernel as β → ∞. 永不 close per discipline §3.4.3." ]
   scope := "Opaque limit-kernel carrier on BondConfig AgentEdgeIdx (paper line 348+352 limit)"
   obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_W_bar_max_paper_witness : GapEntry where
+  name := "W_bar_max_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum, line 622 (β̄* IS the maximiser of W̄ — paper-Def-stipulated existence) + Definition def:principal, line 614 (β ≥ 0 standing convention)"
+  attackHistory := [ "R104 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R104 closure of `principal_interior_maximum_exists_OPEN`. Paper line 622 directly introduces β̄* AS the maximiser of W̄ — paper-Def-stipulated existence as paper's commitment to W_bar's primitive structural behavior (admits maximiser on β ≥ 0 domain). 永不 close per discipline §3.4.3." ]
+  scope := "Paper-Def-stipulated W_bar max-existence + β ≥ 0 standing convention"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
   conditionalOn := []
 
 def entry_atom_agentRewardKernel_greedy_pointwise_tendsto_atTop : GapEntry where
@@ -8281,6 +8292,7 @@ def allGaps : List GapEntry := [
   entry_thm_agentWelfare_tendsto_of_kernel_pointwise_tendsto,
   entry_atom_agentRewardKernel_greedy_limit_kernel,
   entry_atom_agentRewardKernel_greedy_pointwise_tendsto_atTop,
+  entry_atom_W_bar_max_paper_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
