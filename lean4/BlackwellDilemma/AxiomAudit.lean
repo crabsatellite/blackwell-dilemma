@@ -512,7 +512,8 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_topo_loss_below_threshold
 #print axioms BlackwellDilemma.gap_topo_loss_above_threshold
 #print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_absent
-#print axioms BlackwellDilemma.topo_loss_below_eps_from_envelope
+-- R140: `topo_loss_below_eps_from_envelope` removed (refactored into
+-- `gap_topo_loss_below_threshold` chain); audit reference dropped.
 
 -- R44 Pattern-1 fix (Phase.lean sibling of R42 Wrongness fix):
 --  * `topo_loss_decay_arbitrary_threshold` (Phase.lean): Cat 1 theorem
@@ -1347,7 +1348,8 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.kappa_large_blackwell_recovery_OPEN
 #print axioms BlackwellDilemma.welfare_continuity_in_alpha_OPEN
 #print axioms BlackwellDilemma.alpha_below_alpha_star_implies_monotonicity_OPEN
-#print axioms BlackwellDilemma.kappa_above_threshold_blackwell_recovery_OPEN
+-- R140: `kappa_above_threshold_blackwell_recovery_OPEN` removed
+-- (refactored into kappa_large_blackwell_recovery_OPEN); audit dropped.
 
 -- R89 continuation of the R88 percolation-foundation wave (kernel-based
 -- `agentWelfare` concretisation): two more `agentWelfare`-cluster
