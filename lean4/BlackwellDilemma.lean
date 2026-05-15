@@ -78,3 +78,4 @@ import BlackwellDilemma.Infrastructure.FiveStateVDyn
 import BlackwellDilemma.Infrastructure.MLimitDifferenceConcrete
 import BlackwellDilemma.Infrastructure.EVTBoundedDecreasing
 import BlackwellDilemma.Infrastructure.SimpleGraphReachable
+import BlackwellDilemma.Infrastructure.TopkisCrossPartial
