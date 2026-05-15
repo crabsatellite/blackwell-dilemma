@@ -91,3 +91,6 @@ import BlackwellDilemma.Infrastructure.MonotoneFunctionAlgebra
 import BlackwellDilemma.Infrastructure.TendstoLimitArithmetic
 import BlackwellDilemma.Infrastructure.ContinuousArithmetic
 import BlackwellDilemma.Infrastructure.MonotoneIntegralFOSD
+import BlackwellDilemma.Infrastructure.ArgmaxExistence
+import BlackwellDilemma.Infrastructure.FiniteConvexCombination
+import BlackwellDilemma.Infrastructure.AbstractKernelMonotonicity
