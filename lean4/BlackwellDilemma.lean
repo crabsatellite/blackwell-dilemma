@@ -87,3 +87,7 @@ import BlackwellDilemma.Infrastructure.GaussianPosterior
 import BlackwellDilemma.Infrastructure.SupermodularExtended
 import BlackwellDilemma.Infrastructure.DifferenceQuotientAlgebra
 import BlackwellDilemma.Infrastructure.MillsRatioTail
+import BlackwellDilemma.Infrastructure.MonotoneFunctionAlgebra
+import BlackwellDilemma.Infrastructure.TendstoLimitArithmetic
+import BlackwellDilemma.Infrastructure.ContinuousArithmetic
+import BlackwellDilemma.Infrastructure.MonotoneIntegralFOSD
