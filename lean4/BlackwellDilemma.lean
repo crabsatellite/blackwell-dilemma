@@ -70,3 +70,10 @@ import BlackwellDilemma.Canonical
 import BlackwellDilemma.Bayesian
 import BlackwellDilemma.GeneralGraphs
 import BlackwellDilemma.Ledger
+
+-- Cat 1 Infrastructure (Mathlib-PR-ready, kernel-pure)
+import BlackwellDilemma.Infrastructure.Roadmap
+import BlackwellDilemma.Infrastructure.FiveStateRewards
+import BlackwellDilemma.Infrastructure.FiveStateVDyn
+import BlackwellDilemma.Infrastructure.MLimitDifferenceConcrete
+import BlackwellDilemma.Infrastructure.EVTBoundedDecreasing
