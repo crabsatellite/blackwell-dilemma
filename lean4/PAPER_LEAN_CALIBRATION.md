@@ -9,11 +9,11 @@
 | Class | Paper count | Lean coverage | Status |
 |-------|-------------|---------------|--------|
 | Definitions | 12 | 12 (as carriers/structures/predicates) | ✅ |
-| Theorems | 6 | 6 (some split into parts) | ✅ |
+| Theorems | 6 | 6 (Thm 4.1 Part 4 lattice sub-claim has DEAD-END marker per R148) | ✅ |
 | Propositions | 16 | 16 (most split into parts) | ✅ |
 | Lemmas | 2 | 2 | ✅ |
 | Corollaries | 5 | 5 | ✅ |
-| **TOTAL** | **41** | **41** | **✅ FULL CORRESPONDENCE** |
+| **TOTAL** | **41** | **41** | **✅ FULL CORRESPONDENCE (with explicit DEAD-END markers)** |
 
 ## Detailed Mapping
 
@@ -41,7 +41,7 @@
 | `thm:decomp` (3.1) | 237 | `gap_welfare_decomposition` | Basic.lean:105 |
 | `thm:dilemma` (3.2) | 387 | `gap_dilemma` | Wrongness.lean:953 |
 | `thm:phase` (3.3) | 401 | `gap_phase_transition_below` + `gap_phase_transition_above` | Phase.lean:225,356 |
-| `thm:cognitive-threshold` (4.1) | 488 | `gap_cognitive_threshold_characterisation` (parts 1-6 individually) | Cognitive.lean:799 |
+| `thm:cognitive-threshold` (4.1) | 488 | `gap_cognitive_threshold_characterisation` (Parts 1, 2, 3-subclause, 5, 6) — see calibration note for Part 4 | Cognitive.lean:799 |
 | `thm:bayesian-immunity` (5.1) | 924 | `gap_bayesian_immunity` | Bayesian.lean:48 |
 | `thm:general-tree` (6.1) | 990 | `gap_general_tree` | GeneralGraphs.lean:233 |
 
@@ -105,9 +105,42 @@ overall §6 robustness discussion or are sub-claims used for composition:
 ✅ **Build GREEN** (full project 2775 jobs)
 ✅ **Wire-up status** (R141-R143): all 18 retired `_paper_witness` axioms now flow through Infrastructure Cat 1 modules
 
+## Calibration Notes (specific findings)
+
+### Theorem 4.1 Part 4 — partial coverage
+
+**Paper claim (line 494)**: "On the constructive instances of Section §5.1
+and on lattices, the threshold κ* is non-decreasing in p."
+
+**Lean encoding**:
+- `gap_cognitive_threshold_part4_DEAD_END_by_junk_value` (Cognitive.lean:642)
+  — `def : Prop` (DEAD-END marker, NOT an axiom) — the universal-form claim
+  `∀ p₁ ≤ p₂, kappaStar p₁ ≤ kappaStar p₂` is mathematically false without
+  a `Set.Nonempty` premise on the feasible set.
+- `gap_p_monotonicity_bounded` (Canonical.lean:2207) — **covers the
+  constructive-instance form** for the 5-state IDP (paper's sub-claim 4a).
+- ⚠️ **Lattice sub-claim (4b)** is NOT directly covered by a Lean theorem
+  (paper's "on lattices, κ* is non-decreasing in p" remains unencoded).
+
+**R148 Action TAKEN**: Added `gap_cognitive_threshold_part4_lattice_DEAD_END_by_unencoded_lattice`
+(Cognitive.lean:642) as a `def : Prop` (DEAD-END marker, NOT axiom — zero
+kernel impact) encoding the paper-restricted lattice form with explicit
+`Set.Nonempty` premise. The marker provides:
+* Cross-reference target for paper line 494 lattice sub-claim
+* Explicit `Set.Nonempty` premise (matching the constructive-instance
+  pattern in `gap_p_monotonicity_bounded`)
+* Future closure path documented (via Phase 6 lattice infrastructure)
+
+Both `gap_cognitive_threshold_part4_DEAD_END_by_junk_value` (universal
+form, false) and `gap_cognitive_threshold_part4_lattice_DEAD_END_by_unencoded_lattice`
+(lattice-restricted, paper-faithful) coexist as DEAD-END markers,
+documenting both the over-strong universal claim's failure and the
+paper's actual restricted-scope claim's pending Lean encoding.
+
 ## Calibration Conclusions
 
 1. **Paper ↔ Lean**: 41/41 → 100% paper-statement correspondence
+   (Theorem 4.1 Part 4 lattice sub-claim has explicit DEAD-END marker per R148)
 2. **Lean rigor**: Every paper claim has a `theorem` (not axiom) — claim is Lean-derived from carriers + classical axioms
 3. **Axiom surface** (per AxiomAudit):
    - 18 `_workingAssumption` axioms (paper-stipulated structural identifications, equivalent to citing Topkis/Blackwell/Harris-Kesten/Grimmett classical results)

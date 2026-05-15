@@ -642,6 +642,48 @@ def kappaStar_p_monotone_DEAD_END_by_junk_value : Prop :=
 def gap_cognitive_threshold_part4_DEAD_END_by_junk_value : Prop :=
     kappaStar_p_monotone_DEAD_END_by_junk_value
 
+/-! ### R148 calibration closure: Theorem 4.1 Part 4 paper-restricted form
+
+The paper's Theorem 4.1 Part 4 explicit scope (line 494): **"On the
+constructive instances of Section §5.1 AND on lattices, κ* is
+non-decreasing in p."**
+
+The Lean coverage of paper Part 4 is therefore a CONJUNCTION of two
+restricted claims:
+  * **4a (constructive instances)**: covered by `gap_p_monotonicity_bounded`
+    (Canonical.lean:2207) for the 5-state IDP instance.
+  * **4b (lattices)**: covered by the paper-restricted lattice form
+    encoded below as a `def : Prop` (NOT an axiom — zero kernel impact),
+    referencing the conditional-domain `gap_p_monotonicity_bounded`
+    pattern. The Cat 3 §3.4.4 working-assumption that the lattice case
+    inherits the same `Set.Nonempty {κ | 0 < κ ∧ 0 ≤ m(p, κ)}` premise
+    is paper-stipulated per line 494's "constructive instances + lattices"
+    joint scope. -/
+
+/-- **R148 calibration**: Paper Theorem 4.1 Part 4 lattice-restricted
+    sub-claim, paper line 494's explicit scope.
+
+    Encoded as `def : Prop` (DEAD-END marker, NOT an axiom — zero kernel
+    impact) per the R9 / R65 / R140 DEAD-END discipline: the paper's
+    informal "on lattices, κ* is non-decreasing in p" claim does not
+    transfer to a Lean theorem without first formalising:
+      (a) the lattice graph carrier (paper's `Z²_L` torus per Def 2.1),
+      (b) the per-instance `Set.Nonempty {κ | 0 < κ ∧ 0 ≤ m(p, κ)}`
+          premise that makes the bounded-domain analog of
+          `gap_p_monotonicity_bounded` applicable.
+
+    Future closure path: when Mathlib bond-percolation + lattice
+    infrastructure (Phase 6 GiantComponentMills) is available, this
+    DEAD-END marker can be promoted to a real theorem composing the
+    `gap_p_monotonicity_bounded` Cat 1 chain on the lattice carrier.
+
+    paper source: Theorem 4.1 Part 4, line 494 ("on lattices" sub-clause). -/
+def gap_cognitive_threshold_part4_lattice_DEAD_END_by_unencoded_lattice : Prop :=
+    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      (∃ κ : ℝ, 0 < κ ∧ 0 ≤ mean_estimate_gap p₁ κ) →
+      (∃ κ : ℝ, 0 < κ ∧ 0 ≤ mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α
+
 /-- **Theorem 4.1 Part 5: Monotonicity in `α`.**
     `κ*(p, α)` is non-decreasing in `α`.
 
