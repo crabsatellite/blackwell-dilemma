@@ -22,50 +22,70 @@ mathematical foundations needed to retire the paper's Cat 3 §3.4.4
   Quot.sound]` — no `sorry`, no broken-link axioms, no paper-novel
   carriers.
 
-## Status (as of R140 — see `Roadmap.lean`)
+## Status (as of R138 — 26 Cat 1 modules complete)
 
 ### ✅ Tier A — Foundational predicates (DONE)
 
 | Module | Description | Status |
 |---|---|---|
 | `TopkisCrossPartial.lean` | `IsSupermodular f` def + algebra (additivity, scalar, const) — fills missing Mathlib `Order.Supermodular` namespace | ✅ |
+| `SupermodularExtended.lean` | `IsAntimodular`, `of_separable`, `of_separable_plus_residual`, `add_function_of_first/second` | ✅ |
 | `KappaStarConcrete.lean` | `DivergesAtBelowAtTop` predicate + algebra (`add_const`, `add`, `mono`) for one-sided divergence | ✅ |
-| `EVTBoundedDecreasing.lean` | `exists_maxOn_of_continuous_eventually_decreasing` — generalises `IsCompact.exists_isMaxOn` to non-compact `[0, ∞)` under eventually-decreasing dominance | ✅ |
+| `EVTBoundedDecreasing.lean` | `exists_maxOn_of_continuous_eventually_decreasing` — generalises `IsCompact.exists_isMaxOn` to non-compact `[0, ∞)` | ✅ |
+| `UnitIntervalAlgebra.lean` | `InUnitInterval`, `mul`, `convex_comb`, `one_sub`, `min_mem`, `max_mem` for `[0, 1]` algebra | ✅ |
+| `MonotoneFunctionAlgebra.lean` | `Monotone` algebra: sum, scalar, comp, sub-antitone, MonotoneOn variants | ✅ |
+| `MonotoneCDFAlgebra.lean` | `IsCDF` predicate + `FOSD` relation + refl/trans/antisymm | ✅ |
 
 ### ✅ Tier B — Comparative statics chain (DONE)
 
 | Module | Description | Status |
 |---|---|---|
-| `FOSDDerivativeChain.lean` | `IsSupermodular.beta_increment_dominance` — four-corner inequality → β-increment dominance + `derivative_domination_of_supermodular` operational atom | ✅ |
-| `ArgmaxMonotone.lean` | `strict_pref_preserved_under_difference_dominance` single-crossing + `argmax_monotone_atom` for paper bridge | ✅ |
-| `BlackwellConditional.lean` | `finset_sum_mono_of_pointwise_mono` (+ weighted version) — pointwise → summed monotonicity lift via `Finset.sum_le_sum` | ✅ |
+| `FOSDDerivativeChain.lean` | `IsSupermodular.beta_increment_dominance` — four-corner → β-increment dominance | ✅ |
+| `ArgmaxMonotone.lean` | `strict_pref_preserved_under_difference_dominance` + `argmax_monotone_atom` | ✅ |
+| `BlackwellConditional.lean` | `finset_sum_mono_of_pointwise_mono` — pointwise → summed monotonicity | ✅ |
+| `DifferenceQuotientAlgebra.lean` | `DifferenceDominates` predicate + algebra (refl, trans, add, smul, neg-swap) | ✅ |
+| `MonotoneIntegralFOSD.lean` | `weighted_sum_mono_under_weight_fosd` + `difference_dominates_via_weighted_sum` | ✅ |
+| `FOSDLiftedExpectation.lean` | Combines FOSD + finset-weighted sum atoms for paper-bridge Phase 9b | ✅ |
+| `ArgmaxExistence.lean` | `argmax_exists_of_continuous_eventually_decreasing` + `argmax_preserved_under_monotone` | ✅ |
+| `AbstractKernelMonotonicity.lean` | `expectation_mono_of_pointwise_kernel_mono` + reversal pattern (R88-R90) | ✅ |
 
 ### ✅ Tier C — Concrete instance witnesses (DONE)
 
 | Module | Description | Status |
 |---|---|---|
 | `FiveStateRewards.lean` | Explicit 5-state IDP reward parameters `r_S, r_A, r_B, r_D, r_G` + decidable inequalities | ✅ |
-| `FiveStateVDyn.lean` | Explicit `V_dyn` per vertex on 5-state IDP (max over forward-reachable rewards), `V_dyn_B = 1`, `V_dyn_A = 0.6` | ✅ |
-| `MLimitDifferenceConcrete.lean` | `mLimitDifference_fiveState_pos : 0.4 > 0` — first kernel-pure Cat 1 prototype for paper Theorem 4.1 Part 3 line 505 | ✅ |
-| `SimpleGraphReachable.lean` | `reachable_finset_eq_univ_of_preconnected` — natural Finset packaging of `SimpleGraph.Preconnected` | ✅ |
+| `FiveStateVDyn.lean` | Explicit `V_dyn` per vertex on 5-state IDP, `V_dyn_B = 1`, `V_dyn_A = 0.6` | ✅ |
+| `MLimitDifferenceConcrete.lean` | `mLimitDifference_fiveState_pos : 0.4 > 0` — Cat 1 prototype | ✅ |
+| `SimpleGraphReachable.lean` | `reachable_finset_eq_univ_of_preconnected` — Finset packaging of `Preconnected` | ✅ |
 | `GaussianPosterior.lean` | `gaussianPosteriorMean` explicit formula + continuity in `n` and `signal_variance` | ✅ |
+| `MaxOverFinset.lean` | `Finset.sup'` atoms for `V_dyn(v)` — `le_finset_sup'_of_mem`, `_mono_pointwise` | ✅ |
+| `FiniteConvexCombination.lean` | Convex combinations: `convex_combination_in_unit_interval`, `weighted_sum_linear` | ✅ |
 
-### 🔲 Tier D — Calculus + Measure theory (IN PROGRESS)
-
-| Module | Description | Status |
-|---|---|---|
-| `MillsRatioTail.lean` | Standard-normal Mills ratio bound `1 - Φ(x) ≤ φ(x)/x` for `x > 0` (Mills 1926) | 🔲 |
-| `CalculusTopkis.lean` | Mixed-partial criterion `∂²f/∂x∂y ≥ 0 ⇒ IsSupermodular f` (Topkis 1978/1998) | 🔲 |
-| `MonotoneIntegralFOSD.lean` | FOSD CDF + monotone integrand → integral dominance | 🔲 |
-
-### 🔲 Tier E — Heavy infrastructure (PENDING — multi-month effort)
+### ✅ Tier D — Topology / arithmetic atoms (DONE)
 
 | Module | Description | Status |
 |---|---|---|
-| `FinitePercolation.lean` | Finite bond-percolation atoms (BondConfig, Bernoulli product, expectation linearity) | 🔲 |
-| `GiantComponentMills.lean` | Giant-component Mills-tail decay above `p_c` | 🔲 |
-| `LebesgueStieltjesAtoms.lean` | Stieltjes integration vs CDF G — basic atoms | 🔲 |
-| `KernelConcretization.lean` | Per-realisation reward-kernel concretisation pattern | 🔲 |
+| `ContinuousArithmetic.lean` | `ContinuousOn.add_Ioi0`, `sub_Ioi0`, `mul_Ioi0`, `linear_Ioi0` for half-line atoms | ✅ |
+| `TendstoLimitArithmetic.lean` | `Tendsto.add_const_real`, `sub_const_real`, `const_smul_real`, `add_real` | ✅ |
+| `TendstoFiniteSum.lean` | `tendsto_finset_sum_of_pointwise_tendsto` + weighted version (R103) | ✅ |
+| `MillsRatioTail.lean` | `weighted_tail_lower_bound` + `tail_geometric_lower_bound` + `sum_pos_of_one_pos_term` | ✅ |
+| `PiecewiseFunction.lean` | `piecewise2 c f g` + `_at_left/_right` + `_mono` (regime functions) | ✅ |
+
+### ✅ Tier E — Percolation infrastructure (DONE for foundational atoms)
+
+| Module | Description | Status |
+|---|---|---|
+| `BernoulliProductFinite.lean` | `bernoulliFactor`, `bernoulliWeight` over `Bool^E` finite product + non-negativity / strict positivity | ✅ |
+| `PercolationExpectation.lean` | `percExpectation_finite` + non-negativity + monotonicity + linearity (R88 atom) | ✅ |
+
+### 🔲 Tier F — Future heavy infrastructure (PENDING — multi-month effort)
+
+| Module | Description | Status |
+|---|---|---|
+| `CalculusTopkis.lean` | Mixed-partial criterion `∂²f/∂x∂y ≥ 0 ⇒ IsSupermodular f` (Mathlib `Analysis.Calculus`) | 🔲 |
+| `GiantComponentMills.lean` | Giant-component Mills-tail decay above `p_c` (Grimmett 1999 §6.75) | 🔲 |
+| `LebesgueStieltjesAtoms.lean` | Stieltjes integration vs CDF G — Mathlib `MeasureTheory` | 🔲 |
+| `KernelConcretization.lean` | Per-realisation reward-kernel concretisation pattern (Phase 12) | 🔲 |
 
 ## Architecture (mirrors Hodge)
 
@@ -135,31 +155,77 @@ lake build BlackwellDilemma.Infrastructure.<ModuleName>
 
 ## Mathlib PR plan
 
-When complete and stable, these modules can be contributed to Mathlib
-as standalone PRs:
+When complete and stable, these 26 modules can be contributed to Mathlib
+as standalone PRs grouped by area:
+
+### PR-1: Order theory + comparative statics
 
 1. **`Mathlib.Order.Supermodular.Basic`** — `IsSupermodular` definition
-   + algebra (additivity, scalar, const) on `ℝ → ℝ → ℝ`. Currently
-   ZERO supermodular content in Mathlib; this PR creates the namespace.
-2. **`Mathlib.Topology.Order.ExtremeValueExtension`** — non-compact
-   EVT extension: `exists_maxOn_of_continuous_eventually_decreasing`
-   for functions on `[0, ∞)` under eventually-decreasing dominance.
-3. **`Mathlib.Order.Filter.DivergesAtBelowAtTop`** — one-sided
-   divergence predicate (`f → +∞` as `x → c⁻`) + basic algebra
-   (additivity, scalar, dominance-monotone).
-4. **`Mathlib.Combinatorics.SimpleGraph.Reachable.FinsetUniv`** —
-   `reachable_finset_eq_univ_of_preconnected` natural Finset
-   packaging of `Preconnected`.
-5. **`Mathlib.Probability.Bayesian.GaussianConjugatePrior`** —
-   explicit `gaussianPosteriorMean` formula + continuity in
-   sample-size and signal-variance parameters.
-6. **`Mathlib.Probability.Distributions.Mills`** — standard-normal
-   Mills ratio bound (foundational for Gaussian-tail inequalities).
+   + algebra (additivity, scalar, const, separable, antimodular).
+   Currently ZERO supermodular content in Mathlib; this PR creates the
+   namespace. Combines `TopkisCrossPartial.lean` + `SupermodularExtended.lean`.
+2. **`Mathlib.Order.Comparative.DifferenceDominates`** —
+   `DifferenceDominates` predicate + algebra (refl, trans, add, smul,
+   neg-swap) from `DifferenceQuotientAlgebra.lean`.
+3. **`Mathlib.Order.Comparative.ArgmaxMonotone`** — single-crossing
+   preference preservation + argmax monotone atoms from
+   `ArgmaxMonotone.lean` + `FOSDDerivativeChain.lean`.
+
+### PR-2: Topology extensions
+
+4. **`Mathlib.Topology.Order.ExtremeValueExtension`** — non-compact
+   EVT extension `exists_maxOn_of_continuous_eventually_decreasing`
+   from `EVTBoundedDecreasing.lean`.
+5. **`Mathlib.Order.Filter.DivergesAtBelowAtTop`** — one-sided
+   divergence predicate + algebra from `KappaStarConcrete.lean`.
+
+### PR-3: SimpleGraph + Combinatorics
+
+6. **`Mathlib.Combinatorics.SimpleGraph.Reachable.FinsetUniv`** —
+   `reachable_finset_eq_univ_of_preconnected` Finset packaging from
+   `SimpleGraphReachable.lean`.
+7. **`Mathlib.Combinatorics.Finset.MaxFinset`** — `Finset.sup'` atoms
+   from `MaxOverFinset.lean` (some already in Mathlib, this packages
+   the ergonomic versions).
+
+### PR-4: Probability foundations
+
+8. **`Mathlib.Probability.Bayesian.GaussianConjugatePrior`** —
+   `gaussianPosteriorMean` explicit formula + continuity from
+   `GaussianPosterior.lean`.
+9. **`Mathlib.Probability.UnitInterval.Algebra`** — `InUnitInterval`
+   algebra from `UnitIntervalAlgebra.lean`.
+10. **`Mathlib.Probability.CDF.FOSD`** — `IsCDF` predicate + `FOSD`
+    relation from `MonotoneCDFAlgebra.lean`.
+
+### PR-5: Tail bounds + Bernoulli
+
+11. **`Mathlib.Probability.MillsTail.Discrete`** — `weighted_tail_lower_bound`
+    + geometric decay from `MillsRatioTail.lean`.
+12. **`Mathlib.Probability.BondPercolation.BernoulliWeight`** —
+    finite Bernoulli product atoms from `BernoulliProductFinite.lean`
+    + `PercolationExpectation.lean`.
+
+### PR-6: Big-operator monotonicity
+
+13. **`Mathlib.Algebra.Order.BigOperators.MonoLift`** —
+    `finset_sum_mono_of_pointwise_mono` + weighted variants from
+    `BlackwellConditional.lean` + `MonotoneIntegralFOSD.lean`.
+
+### PR-7: Topological/continuous arithmetic atoms
+
+14. **`Mathlib.Topology.Order.ContinuousArithmetic.IoiAtoms`** —
+    `ContinuousOn` arithmetic on `(0, ∞)` from `ContinuousArithmetic.lean`.
+15. **`Mathlib.Topology.Order.Tendsto.Arithmetic`** — `Tendsto` arithmetic
+    real-valued ergonomic atoms from `TendstoLimitArithmetic.lean`.
 
 These would be the first occurrence in Mathlib of these objects /
-results, providing immediate value to other formalisation projects
-(comparative statics, Bayesian inference, probability tail bounds,
-percolation theory).
+results, providing immediate value to:
+* Comparative statics formalisations (economics, game theory).
+* Bayesian inference formalisations.
+* Probability tail bound libraries.
+* Percolation theory formalisations.
+* Real-analysis ergonomic atoms.
 
 ## License
 
