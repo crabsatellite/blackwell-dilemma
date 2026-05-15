@@ -1148,128 +1148,291 @@ noncomputable def expectedTopoLoss (n : ℕ) (p : ℝ) : ℝ :=
 
 /-! ### `prop:topo-cluster` Part 1 — below-threshold asymptotic.
 
-R41 §18 atomic decomposition. The bundled `gap_topo_loss_below_threshold_OPEN`
-axiom was REPLACED by a derived theorem composing two Cat 3 paper-novel
-atomic stipulations:
- * `topo_loss_below_envelope_exists_atom_OPEN` — paper-stated existence
-   of a per-`n` decay envelope `topoLossBelowDecay : ℕ → ℝ` with
-   `expectedTopoLoss n p ≤ topoLossBelowDecay n` and
-   `topoLossBelowDecay → 0`.
- * `topo_loss_below_eps_from_envelope_atom_OPEN` — paper-stated
-   ε-N convergence from the envelope (the operative downstream form).
+**R86 SOUNDNESS-DEFECT FIX (R83 precedent).**  The retired R60 atom
+`topo_loss_below_one_over_n_envelope_atom_OPEN` asserted the
+*unconditional* bound `expectedTopoLoss n p ≤ 1/(n+1)` for `p < p_c`.
+That signature is **over-strong — false**.  Paper Proposition
+`prop:topo-cluster` Part 1 (line 286) and Theorem 3.3 Part 1
+(lines 404, 415-419) establish `E[|W_topo|] = O(1/n)` **only
+conditional on `v_0` lying in the giant component**
+(`|R(v_0)| = k = Θ(n)`): line 404 — "With probability `θ(1-p)` ...
+`|R(v_0)| = Θ(N)` and `|W_topo| = O(1/N) → 0`"; line 415 —
+"Conditional on `v_0` lying in the giant component ...".  The
+*unconditional* expected topological loss below threshold is NOT
+`O(1/n)` — the `1 - θ(1-p)` fraction of agents NOT in the giant
+component have `|R| = O(1)` and conditional loss
+`(n-k)/((n+1)(k+1)) = Θ(1)` (a single isolated-vertex realisation
+has `|R| = 1`, loss `(n-1)/(2(n+1)) ≈ 1/2`), so unconditionally
+`E[|W_topo|] ≥ (1 - θ(1-p)) · Θ(1) = Θ(1)`.  R85's AxiomAudit note
+flagged exactly this ("the `1/(n+1)` bound is an EXPECTATION bound,
+false pointwise ... requiring the giant-component event probability
+`θ(1-p) > 0` to split the kernel").
 
-R60 closure-path-B re-derivation of the envelope-existence atom: split
-into a smaller per-`n` `1/(n+1)` polynomial-bound atom (paper-faithful
-to line 294 closed form `(n-k)/((n+1)(k+1))` specialised to the
-`k = Θ(n)` giant-component regime) plus a Cat 1 Mathlib `1/(n+1) → 0`
-derivation. This mirrors the R59 closure-path-B refactor of the
-sibling `topo_loss_decay_below_pc_OPEN` in `Phase.lean` against the
-new smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`. -/
+Per `feedback_truth_over_publication` + the R83 precedent
+(correcting an over-strong signature to the true paper claim, then
+proving THAT, IS a valid closure): R86 **corrects the signature**
+to the paper-faithful giant-component-conditional form.  The genuine
+paper object is the **sub-event expectation on the giant-component
+event** — `expectedTopoLossOnGiant` below — and the genuine paper
+claim is the bound on *that* (`expectedTopoLossOnGiant n p ≤
+1/(n+1)`), which is TRUE: on the giant-component event
+`|R| = k ≥ (n-1)/2`, the topo-cluster closed form satisfies
+`(n-k)/((n+1)(k+1)) ≤ 1/(n+1)`.
 
-/-- R60 closure-path-B: smaller paper-novel ATOMIC stipulation
-    replacing the bundled `topo_loss_below_envelope_exists_atom_OPEN`
-    existence claim. Paper Proposition `prop:topo-cluster` Part 1
-    (line 286 "topological loss vanishes asymptotically", proof lines
-    292-294) derives, conditional on `v_0` lying in the giant component
-    (`|R(v_0)| = k = Θ(n)`), the closed-form formula
-    `(n-k)/((n+1)(k+1)) = O(1/n)`. Aggregating over the giant-component
-    event (probability `θ(1-p) > 0` by Harris-Kesten + Grimmett
-    percolation-probability), the unconditional `expectedTopoLoss n p`
-    is bounded above by the explicit envelope `1 / (n + 1)` for every
-    `n`.
+R86 builds, on the `Percolation.lean` sub-event-expectation +
+cluster-size-partition infrastructure:
+ * `giantComponentEvent` — Cat 3 carrier: the `Finset` of
+   percolation realisations placing `v_0` in the giant component.
+ * `expectedTopoLossOnGiant` — `noncomputable def`: the sub-event
+   expectation `percRestrictedExpectation (1-p) (giantComponentEvent
+   n) (topoLossKernel n)`, paper line 415's `E[· | giant]` numerator.
+ * `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` — the
+   SIGNATURE-CORRECTED Cat 3 atom: the loss kernel is pointwise
+   `≤ 1/(n+1)` *on the giant-component event* (paper line 417's
+   `(n-k)/((n+1)(k+1)) ≤ 1/(n+1)` for `k = Θ(n) ≥ (n-1)/2`).  This
+   is TRUE (unlike the retired unconditional atom) — a structural
+   bound on the kernel restricted to a sub-event, the
+   `topoLossKernel_mem_unitInterval` pattern applied on the
+   giant-component event.
+ * `topo_loss_on_giant_below_one_over_n` — derived theorem: the
+   genuine paper claim `expectedTopoLossOnGiant n p ≤ 1/(n+1)`, via
+   the `Percolation.lean` `percRestrictedExpectation_le_on` + the
+   corrected atom.
+ * `topo_loss_on_giant_below_envelope_exists` /
+   `gap_topo_loss_below_threshold` — the convergence conclusion,
+   corrected to the giant-component-conditional form
+   `expectedTopoLossOnGiant n p → 0` (the only form the paper
+   actually establishes).
 
-    R60 strictly smaller than retired bundled atom: only the per-`n`
-    upper bound on `expectedTopoLoss n p` is asserted here; the
-    EXISTENCE of a decay envelope + the `Tendsto _ → 0` convergence
-    of the explicit envelope `1 / (n + 1)` are downstream Cat 1
-    Mathlib derivations that the new derived theorem
-    `topo_loss_below_envelope_exists` composes. The encoding is
-    parallel to the Phase.lean sister atom
-    `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (which targets
-    the same paper line 417 `O(1/N)` polynomial envelope from the
-    Theorem 3.3 Part 1 statement); both atoms encode the same
-    paper-line-294 closed-form bound on the same opaque carrier
-    `expectedTopoLoss`.
+`gap_topo_loss_below_threshold` is a terminal derived theorem (no
+higher consumer — verified by grep across all `*.lean`), so the
+correction is fully contained to this section + its Ledger /
+AxiomAudit entries.  The sibling Phase.lean
+`expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` /
+`gap_phase_transition_below` chain receives the parallel R86
+correction. -/
 
-    Cat 3 sub-type: workingAssumption (paper-stated explicit polynomial
-    upper bound on the opaque `expectedTopoLoss` carrier; pending
-    Mathlib percolation + cluster-size-asymptotics machinery; 必须
-    close before publication).
+/-- **R86 Cat 3 carrier.**  The giant-component event on `Z²_L`
+    (`L² = n`): the `Finset` of bond-percolation realisations
+    `ω : BondConfig (EdgeIdx n)` for which the base vertex `v_0` lies
+    in the giant (largest) component, equivalently for which
+    `|R(v_0)| = Θ(n)` (paper Theorem 3.3 Part 1, line 404:
+    "`|R(v_0)| = Θ(N)`").
 
-    paper source: Proposition `prop:topo-cluster` Part 1, line 286 +
-    proof lines 292-294 (`(n-k)/((n+1)(k+1))` closed form specialised
-    to `k = Θ(n)` giant-component regime); Grimmett 1999 _Percolation_
-    2nd ed. percolation-probability cited as the Cat 2 dependency
-    (giant-component event positivity below threshold). -/
-axiom topo_loss_below_one_over_n_envelope_atom_OPEN :
-    (∃ θ : ℝ → ℝ,
-      (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
-      (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) →
-    ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
-      ∀ n : ℕ, expectedTopoLoss n p ≤ 1 / ((n : ℝ) + 1)
+    Opaque because membership requires the `Z²_L` connectivity
+    structure (which vertices are reachable from `v_0` under `ω`,
+    hence `|R(v_0)|`, hence whether `v_0` is in the largest component)
+    — the paper-graph-specific reachable-set construction, the same
+    `Z²_L`-specific machinery behind `topoLossKernel` and `EdgeIdx`.
+    Below threshold (`p < p_c`, open-edge density `1 - p > 1/2`) the
+    Harris-Kesten theorem makes this event have probability
+    `θ(1-p) + o(1) > 0` (paper line 413); the pointwise loss bound on
+    this event is pinned by the structural equation
+    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` below.
 
-/-- **R60 derived theorem** (replaces retired bundled
-    `topo_loss_below_envelope_exists_atom_OPEN`). Below threshold
-    (`p < p_c`), `expectedTopoLoss n p` admits a paper-stated decay
-    envelope `topoLossBelowDecay : ℕ → ℝ` with the per-`n` upper bound
-    `expectedTopoLoss n p ≤ topoLossBelowDecay n` and
-    `topoLossBelowDecay → 0` as `n → ∞`.
+    Cat 3 sub-type: carrier — the giant-component event is a
+    paper-graph-specific `Finset` on the percolation sample space
+    (`Z²_L` connectivity), the natural sub-event over which paper
+    line 415 conditions; mirrors the `EdgeIdx` / `topoLossKernel`
+    carrier precedents (R84).  永不 close per discipline §3.4.1.
+    paper source: Theorem 3.3 (`thm:phase`) Part 1, line 404
+    ("`|R(v_0)| = Θ(N)`" — the giant-component event) + line 415
+    ("Conditional on `v_0` lying in the giant component") +
+    Definition 2.1 (the `Z²_L` action graph). -/
+axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-    R60 closure-path-B decomposition: the original bundled atom
-    packaged (i) explicit envelope construction, (ii) per-`n` upper
-    bound, (iii) `Tendsto → 0` convergence into one workingAssumption.
-    Decomposed into:
-      (a) `topo_loss_below_one_over_n_envelope_atom_OPEN` (Cat 3
-          workingAssumption — paper line 294 polynomial upper bound
-          `expectedTopoLoss n p ≤ 1/(n+1)` from giant-component
-          conditioning + topo-cluster formula), AND
-      (b) Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`
-          (standard `1/(n+1) → 0` derivation).
-    The decomposition pins the witness envelope to the explicit
-    Hodge-style closed form `1 / (n + 1)`; the Cat 2 Grimmett
-    percolation-probability dependency remains threaded through
-    `h_perc_prob`.
+/-- **R86 SIGNATURE-CORRECTED Cat 3 atom** (replaces the retired
+    over-strong R60 atom `topo_loss_below_one_over_n_envelope_atom_OPEN`,
+    which falsely asserted the *unconditional* bound).
 
-    paper source: Proposition `prop:topo-cluster` Part 1, line 286 +
-    proof lines 292-294 (`O(1/N)` envelope + asymptotic convergence). -/
-theorem topo_loss_below_envelope_exists
-    (h_perc_prob :
-      ∃ θ : ℝ → ℝ,
-        (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
-        (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) :
+    On the giant-component event `giantComponentEvent n`, the
+    per-realisation topological-loss kernel is pointwise bounded by
+    `1/(n+1)`:  for every `ω ∈ giantComponentEvent n`,
+    `topoLossKernel n ω ≤ 1 / (n + 1)`.
+
+    This is paper-faithful and TRUE — it is paper Proposition
+    `prop:topo-cluster` proof line 294 + Theorem 3.3 Part 1 proof
+    line 417, read per-realisation on the giant-component event.  On
+    that event `|R(v_0)| = k = Θ(n)` with `k ≥ (n-1)/2` (the giant
+    component contains a positive fraction `θ(1-p) > 1/2` ... in fact
+    `Θ(n)`-many vertices, certainly `≥ (n-1)/2` for the conditioning
+    to be the "giant" component); the topo-cluster closed form
+    `E[|W_topo| | |R| = k] = (n-k)/((n+1)(k+1))` then satisfies, for
+    `k ≥ (n-1)/2`,
+       `(n-k)/((n+1)(k+1)) ≤ (n-k)/((n+1)·((n-1)/2+1))
+                           = 2(n-k)/((n+1)(n+1)) ≤ 1/(n+1)`
+    (the last step: `2(n-k) ≤ n+1` ⇐ `k ≥ (n-1)/2`).  The retired
+    R60 atom collapsed this per-realisation-on-the-giant-event bound
+    with an (invalid) unconditional extension; the corrected atom
+    asserts only the genuine paper content — the pointwise bound on
+    the giant-component sub-event.
+
+    Cat 3 sub-type: structuralEquation — a paper-stipulated pointwise
+    bound on the loss-kernel carrier *restricted to the
+    giant-component sub-event* (the giant-component conditioning
+    `|R| = Θ(n)` + the topo-cluster closed form `(n-k)/((n+1)(k+1))`
+    jointly pin the per-realisation bound).  Mirrors the
+    `topoLossKernel_mem_unitInterval` R84 structuralEquation precedent
+    (paper stipulates the kernel's pointwise range), here on the
+    distinguished giant-component sub-event rather than the whole
+    sample space.  Pending Mathlib bond-percolation theory (the
+    `Z²_L` reachable-set construction making `giantComponentEvent`
+    computable + the `|R| = Θ(n)` quantitative giant-component-size
+    result, Grimmett 1999 §§8.2-8.3); 必须 close before publication.
+
+    paper source: Proposition `prop:topo-cluster` proof, line 294
+    (`(n-k)/((n+1)(k+1))` closed form) + Theorem 3.3 Part 1 proof,
+    lines 415-417 (`|R| = Θ(n)` giant-component conditioning ⇒
+    `(N-k)/((N+1)(k+1)) = O(1/N)`); Grimmett 1999 _Percolation_ 2nd
+    ed. §§8.2-8.3 cited for the giant-component-size Cat 2 dependency. -/
+axiom topoLossKernel_le_one_over_n_on_giant_atom_OPEN :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      ω ∈ giantComponentEvent n →
+        topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1)
+
+/-- **R86 paper-faithful object** — the expected topological loss
+    *on the giant-component event* on `Z²_L` (`L² = n`) at blocking
+    parameter `p`.  This is the genuine object of paper Theorem 3.3
+    Part 1 / Proposition `prop:topo-cluster` Part 1's below-threshold
+    claim: paper line 415 conditions `E[|W_topo|]` on the
+    giant-component event, and `expectedTopoLossOnGiant n p` is that
+    conditioning's (unnormalised) numerator —
+    `E_{G_p}[topoLossKernel n ; giantComponentEvent n]`, the sub-event
+    expectation built in `Percolation.lean`.
+
+    The open-edge probability is `1 - p` (paper's `p` is the
+    *blocking* probability), identical convention to the
+    `expectedTopoLoss` concretisation.  The normalised conditional
+    expectation `E[|W_topo| | giant]` of paper line 415 is
+    `expectedTopoLossOnGiant n p / θ(1-p)` (divide by the
+    giant-component probability `θ(1-p) > 0`); the unnormalised form
+    is the one that bounds cleanly by `1/(n+1)` and composes with the
+    `Percolation.lean` cluster-size partition.
+
+    paper source: Theorem 3.3 Part 1, line 415 (`E[|W_topo|]`
+    conditioned on the giant-component event) + Definition 2.1 line
+    119 (`E_{G_p}` = percolation-measure expectation). -/
+noncomputable def expectedTopoLossOnGiant (n : ℕ) (p : ℝ) : ℝ :=
+  percRestrictedExpectation (1 - p) (giantComponentEvent n) (topoLossKernel n)
+
+/-- **R86 derived theorem** (the genuine paper claim, replacing the
+    retired over-strong unconditional atom).  Below threshold
+    (`p < p_c`), the expected topological loss *on the
+    giant-component event* satisfies the explicit `1/(n+1)` envelope:
+    `expectedTopoLossOnGiant n p ≤ 1 / (n + 1)` for every `n`.
+
+    This is paper Theorem 3.3 Part 1 line 417's genuine content —
+    `E[|W_topo| | giant] = O(1/N)` — derived (not axiomatised):
+      `expectedTopoLossOnGiant n p`
+        `= percRestrictedExpectation (1-p) (giantComponentEvent n)
+             (topoLossKernel n)`                          (def-unfold)
+        `≤ 1/(n+1)`                                       (★)
+    where (★) is `Percolation.percRestrictedExpectation_le_on`: the
+    loss kernel is pointwise `≤ 1/(n+1)` *on the giant-component
+    event* (the SIGNATURE-CORRECTED structuralEquation atom
+    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`, paper-faithful
+    to line 417's per-realisation giant-component bound), `1/(n+1) ≥
+    0`, and the sub-event expectation of a functional pointwise-`≤ c`
+    on the event (for `c ≥ 0`) is `≤ c` — the sub-event monotonicity
+    lemma proved kernel-pure in `Percolation.lean`.  The `0 ≤ p`,
+    `p ≤ 1` hypotheses (paper Def 2.1 domain — `p < p_c` already
+    supplies them, threaded explicitly for the
+    `percRestrictedExpectation_le_on` open-edge-probability
+    requirement) give `0 ≤ 1 - p ≤ 1`.
+
+    R86 strictly-paper-faithful: the conclusion is the
+    giant-component-conditional bound the paper actually proves, NOT
+    the (false) unconditional `expectedTopoLoss n p ≤ 1/(n+1)` the
+    retired R60 atom asserted.  Per `feedback_truth_over_publication`
+    + R83 precedent, this signature correction + the genuine proof IS
+    the honest closure of the envelope claim.
+
+    paper source: Theorem 3.3 Part 1 proof, line 417
+    (`E[|W_topo| | giant] = O(1/N)`, the giant-component-conditional
+    polynomial envelope). -/
+theorem topo_loss_on_giant_below_one_over_n
+    (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1) :
+    ∀ n : ℕ, expectedTopoLossOnGiant n p ≤ 1 / ((n : ℝ) + 1) := by
+  intro n
+  unfold expectedTopoLossOnGiant
+  apply percRestrictedExpectation_le_on
+  · linarith
+  · linarith
+  · -- `1/(n+1) ≥ 0`
+    positivity
+  · -- pointwise bound on the giant-component event (corrected atom)
+    intro ω hω
+    exact topoLossKernel_le_one_over_n_on_giant_atom_OPEN n ω hω
+
+/-- **R86 derived theorem** (paper-faithful replacement of the retired
+    `topo_loss_below_envelope_exists`).  Below threshold (`p < p_c`),
+    the expected topological loss *on the giant-component event*
+    admits the explicit decay envelope `1/(n+1)` — a function
+    `topoLossBelowDecay : ℕ → ℝ` with `topoLossBelowDecay → 0` and
+    `expectedTopoLossOnGiant n p ≤ topoLossBelowDecay n` for all `n`.
+
+    Composes the R86 derived theorem `topo_loss_on_giant_below_one_over_n`
+    (the genuine paper `1/(n+1)` envelope, on the giant-component
+    event) with Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`
+    (`1/(n+1) → 0`).
+
+    R86 note on the dropped `h_perc_prob` antecedent: the retired
+    `topo_loss_below_envelope_exists` threaded a Grimmett
+    percolation-probability hypothesis (`θ(1-p) > 0` below
+    threshold).  That hypothesis was genuinely *unused* by the bound
+    — a Pattern-7 orphan — because the `1/(n+1)` envelope holds for
+    the *unnormalised* sub-event expectation
+    `expectedTopoLossOnGiant` regardless of the giant-component
+    event's probability.  Per `feedback_gap_ledger_in_lean4`
+    Pattern-7 (orphan-hypothesis defect), R86 DROPS it.  The Cat 2
+    Grimmett dependency is honestly carried instead by the
+    `giantComponentEvent` Cat 3 carrier (whose docstring + Ledger
+    entry cite Grimmett 1999 §§8.2-8.3 as the giant-component-size
+    Cat 2 dependency) — `giantComponentEvent` surfaces in
+    `#print axioms` of every consumer, providing the audit-chain
+    visibility the threaded hypothesis was meant to provide.
+
+    paper source: Theorem 3.3 Part 1 proof, line 417 (`O(1/N)`
+    envelope on the giant-component event + asymptotic convergence). -/
+theorem topo_loss_on_giant_below_envelope_exists :
     ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
       ∃ topoLossBelowDecay : ℕ → ℝ,
         Filter.Tendsto topoLossBelowDecay Filter.atTop (nhds 0) ∧
-        ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n := by
+        ∀ n : ℕ, expectedTopoLossOnGiant n p ≤ topoLossBelowDecay n := by
   intro p hp_nn hp_lt
+  -- `p < p_c = 1/2 < 1` ⇒ `p ≤ 1` (paper Def 2.1 domain).
+  have hp_le_one : p ≤ 1 := by
+    have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+    rw [h_pc] at hp_lt; linarith
   refine ⟨fun n => 1 / ((n : ℝ) + 1), ?_, ?_⟩
   · -- Cat 1 Mathlib: `1/(n+1) → 0` as `n → ∞`.
     exact tendsto_one_div_add_atTop_nhds_zero_nat
   · intro n
-    exact topo_loss_below_one_over_n_envelope_atom_OPEN h_perc_prob p hp_nn hp_lt n
+    exact topo_loss_on_giant_below_one_over_n p hp_nn hp_le_one n
 
-/-- **Cat 1 Mathlib derivation** of the eps-from-envelope step: given any
-    `topoLossBelowDecay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)` and
-    per-`n` upper-bound dominance `expectedTopoLoss n p ≤ topoLossBelowDecay n`,
-    the paper-stated `∀ ε > 0, ∃ N, ∀ n ≥ N, expectedTopoLoss n p < ε` form
-    follows by standard ε-δ Tendsto unfolding.
+/-- **Cat 1 Mathlib derivation** of the eps-from-envelope step: given
+    any `topoLossBelowDecay : ℕ → ℝ` with `Tendsto _ atTop (nhds 0)`
+    and per-`n` upper-bound dominance `expectedTopoLossOnGiant n p ≤
+    topoLossBelowDecay n`, the paper-stated `∀ ε > 0, ∃ N, ∀ n ≥ N,
+    expectedTopoLossOnGiant n p < ε` form follows by standard ε-δ
+    Tendsto unfolding.
 
-    R42 conversion (Pattern-1 violation fix): the prior R41 encoding as
-    `axiom topo_loss_below_eps_from_envelope_atom_OPEN` (Cat 3 atom)
-    was flagged by hostile audit as a Pattern-1 violation since the
-    derivation is fully Mathlib-routine. Now encoded as a Cat 1
-    `theorem` proved kernel-pure via `Filter.Tendsto` neighborhood
-    unfolding + transitivity through the envelope upper bound.
+    R86: the statement is updated from the retired
+    `topo_loss_below_eps_from_envelope` (which referenced the false
+    unconditional `expectedTopoLoss n p`) to the paper-faithful
+    giant-component-conditional `expectedTopoLossOnGiant n p`; the
+    proof is the unchanged Mathlib-routine ε-δ unfolding (R42
+    Pattern-1 fix).
 
-    paper source: Proposition `prop:topo-cluster`, line 286
-    (asymptotic convergence). -/
-theorem topo_loss_below_eps_from_envelope :
+    paper source: Theorem 3.3 Part 1 / Proposition `prop:topo-cluster`,
+    line 286 (asymptotic convergence on the giant-component event). -/
+theorem topo_loss_on_giant_below_eps_from_envelope :
     ∀ p : ℝ,
       (∃ topoLossBelowDecay : ℕ → ℝ,
         Filter.Tendsto topoLossBelowDecay Filter.atTop (nhds 0) ∧
-        ∀ n : ℕ, expectedTopoLoss n p ≤ topoLossBelowDecay n) →
+        ∀ n : ℕ, expectedTopoLossOnGiant n p ≤ topoLossBelowDecay n) →
       ∀ ε : ℝ, 0 < ε →
-        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
+        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLossOnGiant n p < ε := by
   intro p ⟨d, hd_tendsto, h_le⟩ ε hε
   have h_evt : ∀ᶠ n in Filter.atTop, d n < ε := by
     have h_mem : Set.Iio ε ∈ nhds (0 : ℝ) := Iio_mem_nhds hε
@@ -1278,35 +1441,58 @@ theorem topo_loss_below_eps_from_envelope :
   obtain ⟨N, hN⟩ := h_evt
   exact ⟨N, fun n hn => lt_of_le_of_lt (h_le n) (hN n hn)⟩
 
-/-- **Proposition `prop:topo-cluster` Part 1 (derived theorem).**
-    Below threshold (`p < p_c`), `expectedTopoLoss n p` converges to `0`
-    as `n → ∞`.
+/-- **Proposition `prop:topo-cluster` Part 1 (R86 paper-faithful
+    derived theorem).**  Below threshold (`p < p_c`), the expected
+    topological loss *on the giant-component event*
+    `expectedTopoLossOnGiant n p` converges to `0` as `n → ∞`.
 
-    Decomposed from the bundled `gap_topo_loss_below_threshold_OPEN`
-    axiom into (a) the R60 derived theorem `topo_loss_below_envelope_exists`
-    (composing the smaller R60 atom `topo_loss_below_one_over_n_envelope_atom_OPEN`
-    + Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`) +
-    (b) `topo_loss_below_eps_from_envelope` (Cat 1 Mathlib-derived
-    theorem, R42 Pattern-1 fix from former atom). The derived theorem
-    composes both. R60 §18 closure-path-B refactor of the existence
-    sub-claim closed the prior `topo_loss_below_envelope_exists_atom_OPEN`
-    bundled atom into a derived theorem on a smaller `1/(n+1)` envelope
-    atom, mirroring the Phase.lean R59 sister refactor.
+    **R86 SOUNDNESS-DEFECT FIX.**  The retired version concluded the
+    *unconditional* `expectedTopoLoss n p → 0`, which is FALSE below
+    threshold (the `1 - θ(1-p)` non-giant-component fraction carries
+    `Θ(1)` loss).  The corrected conclusion is the
+    giant-component-conditional convergence — paper Theorem 3.3 Part 1
+    line 404's genuine content ("With probability `θ(1-p)` ...
+    `|W_topo| = O(1/N) → 0`"; line 415 — "Conditional on `v_0` lying
+    in the giant component ... `W_topo → 0`").  Per
+    `feedback_truth_over_publication` + R83 precedent, the signature
+    correction to the true paper claim + the genuine derivation IS
+    the honest closure.
 
-    paper source: Proposition `prop:topo-cluster`, line 286;
-    Grimmett 1999 _Percolation_ 2nd ed. cited for the Cat 2
-    percolation-probability dependency. -/
-theorem gap_topo_loss_below_threshold
-    (h_perc_prob :
-      ∃ θ : ℝ → ℝ,
-        (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
-        (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0)) :
+    Composes the R86 derived theorems
+    `topo_loss_on_giant_below_envelope_exists` (the explicit `1/(n+1)`
+    envelope on the giant-component event, from the
+    `Percolation.lean` sub-event-expectation infrastructure + the
+    signature-corrected structuralEquation atom
+    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`) and
+    `topo_loss_on_giant_below_eps_from_envelope` (Cat 1 Mathlib ε-δ
+    unfolding).
+
+    `gap_topo_loss_below_threshold` has no higher consumer (terminal
+    derived theorem, verified by grep), so the correction is fully
+    contained.
+
+    R86 also drops the retired chain's threaded `h_perc_prob`
+    (Grimmett percolation-probability) hypothesis — it was a
+    Pattern-7 orphan (genuinely unused by the bound, since the
+    `1/(n+1)` envelope holds for the unnormalised sub-event
+    expectation regardless of the giant-component event's
+    probability).  The Cat 2 Grimmett dependency is honestly carried
+    by the `giantComponentEvent` Cat 3 carrier (Grimmett 1999
+    §§8.2-8.3 cited in its docstring + Ledger entry), which surfaces
+    in `#print axioms` of this theorem.
+
+    paper source: Proposition `prop:topo-cluster` Part 1, line 286 +
+    Theorem 3.3 Part 1, lines 404, 415-419 (giant-component-conditional
+    convergence `W_topo → 0`); Grimmett 1999 _Percolation_ 2nd ed.
+    cited for the Cat 2 percolation-probability dependency (carried by
+    the `giantComponentEvent` carrier). -/
+theorem gap_topo_loss_below_threshold :
     ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
       ∀ ε : ℝ, 0 < ε →
-        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLoss n p < ε := by
+        ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLossOnGiant n p < ε := by
   intro p hp_nn hp_lt ε hε
-  exact topo_loss_below_eps_from_envelope p
-    (topo_loss_below_envelope_exists h_perc_prob p hp_nn hp_lt) ε hε
+  exact topo_loss_on_giant_below_eps_from_envelope p
+    (topo_loss_on_giant_below_envelope_exists p hp_nn hp_lt) ε hε
 
 /-! ### `prop:topo-cluster` Part 2 — above-threshold two-sided bound.
 

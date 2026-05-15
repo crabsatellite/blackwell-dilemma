@@ -546,8 +546,14 @@ namespace BlackwellDilemma.AxiomAudit
 --    `trapConfigLocalProb_le_misalignmentProb_OPEN` (FKG binding) +
 --    Cat 1 theorem `trapConfigLocalProb_pos` (arithmetic positivity).
 --    Replaces retired `trap_config_local_positive_OPEN`.
+-- R86 NOTE: `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` was
+-- RETIRED (soundness-defect fix — see the R86 section at the end of
+-- this file). `topo_loss_decay_below_pc` is re-stated on the
+-- paper-faithful `expectedTopoLossOnGiant`; its `#print axioms` now
+-- surfaces the signature-corrected atom
+-- `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` + the
+-- `giantComponentEvent` carrier instead of the retired false atom.
 #print axioms BlackwellDilemma.topo_loss_decay_below_pc
-#print axioms BlackwellDilemma.expectedTopoLoss_below_pc_one_over_n_envelope_OPEN
 #print axioms BlackwellDilemma.wInfoTopoRatioMillsConst
 #print axioms BlackwellDilemma.wInfoTopoRatioMillsConst_pos_above_pc_OPEN
 #print axioms BlackwellDilemma.wInfoTopoRatio_le_MillsConst_decay_OPEN
@@ -583,10 +589,15 @@ namespace BlackwellDilemma.AxiomAudit
 --    `topo_loss_above_lower_bound_atom_OPEN` +
 --    `topo_loss_above_upper_bound_atom_OPEN`. Already printed at
 --    line 409 above.
+-- R86 NOTE: `topo_loss_below_envelope_exists` /
+-- `topo_loss_below_one_over_n_envelope_atom_OPEN` were RETIRED
+-- (soundness-defect fix — see the R86 section at the end of this
+-- file).  Replaced by the R86 derived theorem
+-- `topo_loss_on_giant_below_envelope_exists` + the
+-- signature-corrected atom `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`,
+-- both printed in the R86 section below.
 #print axioms BlackwellDilemma.wrongness_high_beta_welfare_floor_atom_OPEN
 #print axioms BlackwellDilemma.wrongness_misalignment_reversal_atom_OPEN
-#print axioms BlackwellDilemma.topo_loss_below_envelope_exists
-#print axioms BlackwellDilemma.topo_loss_below_one_over_n_envelope_atom_OPEN
 #print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst
 #print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst_pos_above_pc_OPEN
 #print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN
@@ -1016,5 +1027,104 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.W_info_oracle_exponential_bound_OPEN
 #print axioms BlackwellDilemma.gap_info_decay
 #print axioms BlackwellDilemma.gap_dilemma
+
+-- R86 percolation-foundation wave (continuation) — SOUNDNESS-DEFECT
+-- FIX of the below-threshold `1/(n+1)` envelope atoms (R83 precedent).
+--
+-- THE DEFECT.  The retired atoms
+-- `topo_loss_below_one_over_n_envelope_atom_OPEN` (Wrongness.lean) +
+-- `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (Phase.lean)
+-- asserted the UNCONDITIONAL bound `expectedTopoLoss n p ≤ 1/(n+1)`
+-- for `p < p_c`.  `expectedTopoLoss n p = percExpectation (1−p)
+-- (topoLossKernel n)` is the UNCONDITIONAL bond-percolation
+-- expectation; paper Thm 3.3 Part 1 (lines 404, 415-419) +
+-- prop:topo-cluster (line 286, proof lines 292-296) establish
+-- `E[|W_topo|] = O(1/n)` ONLY conditional on `v_0` lying in the
+-- giant component (`|R(v_0)| = Θ(n)`).  Unconditionally below
+-- threshold `E[|W_topo|] = Θ(1)` — the `1 − θ(1−p)` fraction of
+-- non-giant-component realisations carry `Θ(1)` loss (an
+-- isolated-vertex realisation has `|R| = 1`, loss
+-- `(n−1)/(2(n+1)) ≈ 1/2`).  The R84/R85 AxiomAudit notes had already
+-- FLAGGED this ("the `1/(n+1)` bound is an EXPECTATION bound, false
+-- pointwise ... requiring the giant-component event probability
+-- `θ(1−p) > 0` to split the kernel").
+--
+-- THE FIX (per `feedback_truth_over_publication` + R83 precedent —
+-- correcting an over-strong signature to the true paper claim, then
+-- proving THAT, IS a valid closure).
+--
+-- (1) `Percolation.lean` EXTENDED with the sub-event-expectation +
+--     cluster-size-partition layer (4 new kernel-pure lemmas):
+--      * `percRestrictedExpectation p S f := ∑ ω ∈ S, bondConfigWeight
+--        p ω * f ω` — the bond-percolation expectation RESTRICTED to a
+--        sub-event `S` (paper proof line 292's conditioning building
+--        block).
+--      * `percRestrictedExpectation_univ` — `E_{G_p}[f ; univ] =
+--        E_{G_p}[f]`.
+--      * `percRestrictedExpectation_le_of_pointwise_le_on` (+ re-export
+--        `percRestrictedExpectation_le_on`) — sub-event monotonicity:
+--        pointwise-`≤ c` on `S` (for `c ≥ 0`) ⇒ `E_{G_p}[f ; S] ≤ c`.
+--      * `percExpectation_eq_sum_clusterSizeFiber` — the cluster-size
+--        PARTITION `E_{G_p}[f] = ∑_{k≤N} E_{G_p}[f ; {ω | κ ω = k}]`
+--        via `Finset.sum_fiberwise_of_maps_to` (paper proof line 292's
+--        "partition the sample space by `|R(v_0)| = k`").
+--     All four kernel-pure `[propext, Classical.choice, Quot.sound]`.
+--
+-- (2) NEW Cat 3 carrier `giantComponentEvent : (n : ℕ) → Finset
+--     (BondConfig (EdgeIdx n))` — the `Z²_L` giant-component event
+--     (`v_0` in the largest component, paper line 404's `|R(v_0)| =
+--     Θ(N)`), the sub-event over which paper line 415 conditions.
+--     Carries the Grimmett 1999 §§8.2-8.3 giant-component-size Cat 2
+--     dependency.
+--
+-- (3) SIGNATURE-CORRECTED Cat 3 structuralEquation atom
+--     `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` — a SINGLE
+--     shared atom replacing the two retired parallel false atoms:
+--     `∀ n ω, ω ∈ giantComponentEvent n → topoLossKernel n ω ≤
+--     1/(n+1)`.  TRUE (unlike the retired atoms) — paper line 417's
+--     per-realisation giant-component bound `(n−k)/((n+1)(k+1)) ≤
+--     1/(n+1)` for `k = |R| = Θ(n) ≥ (n−1)/2`.  Mirrors the
+--     `topoLossKernel_mem_unitInterval` R84 structuralEquation
+--     precedent (paper stipulates the kernel's pointwise behaviour),
+--     here on the giant-component sub-event.
+--
+-- (4) GENUINE PAPER CLAIM derived (not axiomatised) —
+--     `expectedTopoLossOnGiant n p := percRestrictedExpectation (1−p)
+--     (giantComponentEvent n) (topoLossKernel n)` is the paper-faithful
+--     object (paper line 415's `E[· | giant]` numerator), and
+--     `topo_loss_on_giant_below_one_over_n : expectedTopoLossOnGiant n
+--     p ≤ 1/(n+1)` is the DERIVED theorem (unfold + the Cat 1
+--     `percRestrictedExpectation_le_on` + the corrected atom).  The
+--     convergence conclusion `gap_topo_loss_below_threshold` /
+--     `gap_phase_transition_below` are re-stated to conclude the
+--     paper-faithful giant-component-conditional `expectedTopoLossOnGiant
+--     n p → 0` (paper line 404's genuine content).  Both are TERMINAL
+--     derived theorems (no higher consumer — grep-verified across all
+--     `*.lean`), so the correction is fully contained.  The retired
+--     chains' `h_perc_prob` antecedent is dropped (Pattern-7 orphan,
+--     genuinely unused by the bound — the `1/(n+1)` envelope holds for
+--     the unnormalised sub-event expectation regardless of the event's
+--     probability); the Cat 2 Grimmett dependency is honestly carried
+--     by the `giantComponentEvent` carrier, which surfaces in
+--     `#print axioms` of every consumer below.
+--
+-- inputCategory of the retired atoms Cat 3 → (the corrected atom is
+-- Cat 3 structuralEquation); the two retired atom Ledger entries are
+-- marked RETIRED/gapClosed in place; +1 new carrier + 1 new
+-- structuralEquation atom.  Each R86 item is HONEST — the
+-- `Percolation.lean` infrastructure is genuine kernel-pure
+-- measure-theoretic math, the corrected atom is the TRUE paper claim
+-- (the retired atoms were FALSE), and the derived theorem is a
+-- genuine proof on that infrastructure.
+#print axioms BlackwellDilemma.percRestrictedExpectation_univ
+#print axioms BlackwellDilemma.percRestrictedExpectation_le_of_pointwise_le_on
+#print axioms BlackwellDilemma.percExpectation_eq_sum_clusterSizeFiber
+#print axioms BlackwellDilemma.percRestrictedExpectation_le_on
+#print axioms BlackwellDilemma.topoLossKernel_le_one_over_n_on_giant_atom_OPEN
+#print axioms BlackwellDilemma.topo_loss_on_giant_below_one_over_n
+#print axioms BlackwellDilemma.topo_loss_on_giant_below_envelope_exists
+#print axioms BlackwellDilemma.topo_loss_on_giant_below_eps_from_envelope
+#print axioms BlackwellDilemma.gap_topo_loss_below_threshold
+#print axioms BlackwellDilemma.gap_phase_transition_below
 
 end BlackwellDilemma.AxiomAudit

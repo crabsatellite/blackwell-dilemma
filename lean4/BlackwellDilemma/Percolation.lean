@@ -308,4 +308,147 @@ theorem percExpectation_mono {E : Type} [Fintype E] [DecidableEq E]
   exact mul_le_mul_of_nonneg_left (hfg ω)
     (bondConfigWeight_nonneg p hp0 hp1 ω)
 
+/-! ## 5. Restricted (sub-event) expectation `E_{G_p}[· ; S]` and the
+   cluster-size partition.
+
+The §3.3 below-threshold envelope bounds are NOT unconditional: paper
+Proposition `prop:topo-cluster` Part 1 / Theorem 3.3 Part 1 (lines
+286, 404, 415-419) establish `E[|W_topo|] = O(1/n)` only *conditional
+on the giant-component event* `|R(v_0)| = Θ(n)` — a single
+small-cluster realisation has topological loss up to `1`, so the
+`1/(n+1)` bound is FALSE pointwise and FALSE unconditionally
+(the `1 - θ(1-p)` fraction of non-giant-component agents carry
+`Θ(1)` loss).
+
+To express the paper's genuine conditional claim, this section builds
+the **sub-event expectation** `percRestrictedExpectation p S f`
+(the weighted sum over an event `S : Finset (BondConfig E)`) and the
+**cluster-size partition** of the full expectation into its
+sub-event pieces, indexed by the value of a `ℕ`-valued functional
+(`clusterSizeOf`) on the percolation realisation.  This is exactly
+the "partition the sample space by `|R(v_0)| = k`" decomposition the
+paper's proof opens with (line 292: "conditioning on `|R(v_0)| = k`").
+-/
+
+/-- The bond-percolation expectation of `f` **restricted to a
+    sub-event** `S : Finset (BondConfig E)`:
+    `E_{G_p}[f ; S] = ∑ ω ∈ S, bondConfigWeight p ω * f ω`.
+
+    Paper Proposition `prop:topo-cluster` proof line 292 conditions
+    `E[|W_topo|]` on the event `{|R(v_0)| = k}`; the unnormalised
+    sub-event expectation `E_{G_p}[f ; S]` is the building block of
+    that conditioning — `percExpectation p f` is `E_{G_p}[f ; univ]`,
+    and the conditional expectation `E[f | S]` is
+    `E_{G_p}[f ; S] / P(S)` where `P(S) = E_{G_p}[1 ; S]`.
+
+    We work with the *unnormalised* sub-event expectation: the paper's
+    below-threshold envelope claim `E[|W_topo|] ≤ 1/(n+1)` is, read
+    faithfully, the bound on the giant-component sub-event expectation
+    (the conditional bound `E[· | giant] ≤ 1/(n+1)` is recovered by
+    dividing by `θ(1-p) > 0`, and the unnormalised form is the one
+    that composes cleanly with the partition identity below). -/
+noncomputable def percRestrictedExpectation {E : Type} [Fintype E]
+    [DecidableEq E] (p : ℝ) (S : Finset (BondConfig E))
+    (f : BondConfig E → ℝ) : ℝ :=
+  ∑ ω ∈ S, bondConfigWeight p ω * f ω
+
+/-- `E_{G_p}[f ; univ] = E_{G_p}[f]`: the sub-event expectation over
+    the whole sample space is the ordinary expectation. -/
+theorem percRestrictedExpectation_univ {E : Type} [Fintype E]
+    [DecidableEq E] (p : ℝ) (f : BondConfig E → ℝ) :
+    percRestrictedExpectation p Finset.univ f = percExpectation p f := by
+  unfold percRestrictedExpectation percExpectation
+  rfl
+
+/-- **Sub-event monotonicity — upper bound.**  If `f` is pointwise
+    bounded above by a *non-negative* constant `c` **on the sub-event
+    `S`** (`f ω ≤ c` for `ω ∈ S`), then the sub-event expectation is
+    bounded above by `c`:  `E_{G_p}[f ; S] ≤ c`.
+
+    The non-negativity hypothesis `0 ≤ c` is genuinely needed: the
+    bound drops the (non-negative-weighted) terms outside `S`, so it
+    only holds when the retained terms sum to `≤ c` — which follows
+    from `∑ ω ∈ S, weight ≤ ∑ ω, weight = 1` (sub-event probability
+    `≤ 1`) times `c ≥ 0`.  This is the precise tool for the paper's
+    *conditional* envelope bound: paper bounds `|W_topo|` per
+    realisation **on the giant-component event**, then sums the
+    sub-event weights (which total the giant-component probability
+    `θ(1-p) ≤ 1`). -/
+theorem percRestrictedExpectation_le_of_pointwise_le_on {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (S : Finset (BondConfig E)) (f : BondConfig E → ℝ) (c : ℝ)
+    (hc : 0 ≤ c) (hf : ∀ ω ∈ S, f ω ≤ c) :
+    percRestrictedExpectation p S f ≤ c := by
+  unfold percRestrictedExpectation
+  -- `∑_{ω ∈ S} w ω * f ω ≤ ∑_{ω ∈ S} w ω * c` (pointwise on `S`)
+  have hstep1 :
+      (∑ ω ∈ S, bondConfigWeight p ω * f ω)
+        ≤ ∑ ω ∈ S, bondConfigWeight p ω * c := by
+    apply Finset.sum_le_sum
+    intro ω hω
+    exact mul_le_mul_of_nonneg_left (hf ω hω)
+      (bondConfigWeight_nonneg p hp0 hp1 ω)
+  -- `∑_{ω ∈ S} w ω * c = (∑_{ω ∈ S} w ω) * c ≤ (∑_{ω} w ω) * c = 1 * c = c`
+  have hstep2 :
+      (∑ ω ∈ S, bondConfigWeight p ω * c)
+        ≤ (∑ ω : BondConfig E, bondConfigWeight p ω) * c := by
+    rw [← Finset.sum_mul]
+    apply mul_le_mul_of_nonneg_right _ hc
+    apply Finset.sum_le_sum_of_subset_of_nonneg (Finset.subset_univ S)
+    intro ω _ _
+    exact bondConfigWeight_nonneg p hp0 hp1 ω
+  calc ∑ ω ∈ S, bondConfigWeight p ω * f ω
+      ≤ ∑ ω ∈ S, bondConfigWeight p ω * c := hstep1
+    _ ≤ (∑ ω : BondConfig E, bondConfigWeight p ω) * c := hstep2
+    _ = 1 * c := by rw [bondMeasureTotal_eq_one]
+    _ = c := one_mul c
+
+/-- **The cluster-size partition of the expectation.**  Given a
+    `ℕ`-valued functional `κ : BondConfig E → ℕ` on the percolation
+    realisation (paper: `κ ω = |R(v_0)|`, the reachable-set
+    cardinality on realisation `ω`) **bounded by `N`**
+    (`κ ω ≤ N` for all `ω`), the full expectation decomposes as the
+    sum, over each possible value `k ∈ {0, …, N}`, of the sub-event
+    expectation on the fiber `{ω | κ ω = k}`:
+    `E_{G_p}[f] = ∑_{k=0}^{N} E_{G_p}[f ; {ω | κ ω = k}]`.
+
+    This is paper Proposition `prop:topo-cluster` proof line 292's
+    opening move — "partition the sample space by `|R(v_0)| = k`" —
+    made an exact `Finset` identity via `Finset.sum_fiberwise_of_maps_to`.
+    The hypothesis `hκ : ∀ ω, κ ω ≤ N` is the paper-graph fact that
+    on `Z²_L` with `L² = n` the reachable set `R(v_0) ⊆ V` has
+    `|R(v_0)| ≤ n` (so `N = n` works). -/
+theorem percExpectation_eq_sum_clusterSizeFiber {E : Type} [Fintype E]
+    [DecidableEq E] (p : ℝ) (f : BondConfig E → ℝ)
+    (κ : BondConfig E → ℕ) (N : ℕ) (hκ : ∀ ω : BondConfig E, κ ω ≤ N) :
+    percExpectation p f
+      = ∑ k ∈ Finset.range (N + 1),
+          percRestrictedExpectation p
+            (Finset.univ.filter (fun ω => κ ω = k)) f := by
+  unfold percExpectation percRestrictedExpectation
+  -- `κ` maps `univ` into `range (N+1)` (since `κ ω ≤ N`).
+  have hmaps : ∀ ω ∈ (Finset.univ : Finset (BondConfig E)),
+      κ ω ∈ Finset.range (N + 1) := by
+    intro ω _
+    rw [Finset.mem_range]
+    exact Nat.lt_succ_of_le (hκ ω)
+  -- `Finset.sum_fiberwise_of_maps_to` gives
+  --   `∑_{k ∈ range(N+1)} ∑_{ω ∈ univ, κ ω = k} g ω = ∑_{ω ∈ univ} g ω`.
+  rw [← Finset.sum_fiberwise_of_maps_to hmaps
+        (fun ω => bondConfigWeight p ω * f ω)]
+
+/-- **Sub-event upper bound from the partition.**  If `f` is pointwise
+    bounded above by a non-negative constant `c` **on a distinguished
+    sub-event `S`**, the sub-event expectation `E_{G_p}[f ; S] ≤ c`.
+    This is `percRestrictedExpectation_le_of_pointwise_le_on`
+    re-exported as the operative envelope-bound tool — paper's
+    "bound `|W_topo|` per realisation on the giant-component event,
+    then take the sub-event expectation". -/
+theorem percRestrictedExpectation_le_on {E : Type} [Fintype E]
+    [DecidableEq E] (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (S : Finset (BondConfig E)) (f : BondConfig E → ℝ) (c : ℝ)
+    (hc : 0 ≤ c) (hf : ∀ ω ∈ S, f ω ≤ c) :
+    percRestrictedExpectation p S f ≤ c :=
+  percRestrictedExpectation_le_of_pointwise_le_on p hp0 hp1 S f c hc hf
+
 end BlackwellDilemma
