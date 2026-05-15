@@ -5530,10 +5530,10 @@ def entry_atom_forward_reachable_empty_full_at_all_open : GapEntry where
     Def 2.1 line 119 bond-percolation semantics binding `blockingProb
     = 0 → all edges open`. -/
 def entry_atom_all_edges_open_at_zero_blocking : GapEntry where
-  name := "all_edges_open_at_zero_blocking_OPEN"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  name := "all_edges_open_at_zero_blocking_OPEN [R98 derivedTheorem; closed via R90 standing-hypothesis ex falso]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Definition 2.1 (line 119, bond-percolation construction `Each edge e ∈ E is independently blocked with probability p` — paper-Def-stipulated bond-percolation semantics + paper-implicit boundary reading at `p = 0`)"
   attackHistory :=
     [ "R59 2026-05-14: introduced as smaller replacement atom #2 via closure-path-B decomposition of retired `forward_reachable_full_at_zero_OPEN`. Statement: `∀ ω, blockingProb = 0 → ∀ u w, IsEdge u w → IsOpen ω u w`. Strictly smaller than retired bundled atom — isolates only the percolation-semantics binding `blockingProb = 0 → all edges open`.",

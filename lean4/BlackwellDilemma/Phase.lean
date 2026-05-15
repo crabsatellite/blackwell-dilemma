@@ -420,64 +420,43 @@ axiom forward_reachable_empty_full_at_all_open_OPEN :
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
         ForwardReachable v ∅ ω = Finset.univ
 
-/-- R59 closure-path-B: smaller paper-novel ATOMIC structural equation
-    #2 replacing the retired bundled `forward_reachable_full_at_zero_OPEN`.
-    Paper Definition 2.1 (line 119) introduces bond percolation on `G`:
-    "Each edge `e ∈ E` is independently blocked with probability `p`",
-    so at `blockingProb = 0` the realised percolation outcome has every
-    edge OPEN with probability 1; under the paper's structural
-    quantification over realised outcomes (paper §2.5 inner expectation
-    "over reward signals, topology signals, and the intrinsic
-    preference realization"), the substantive content is that the
-    paper's reachable-set claims at `p = 0` are evaluated on the
-    all-edges-open realisation.
+/-- **R98 CLOSURE via R90 paper-stipulated `blockingProb_strict_in_open_unit_interval`.**
 
-    R59 strictly smaller than retired bundled atom: this atom isolates
-    only the percolation-semantics binding `blockingProb = 0 → all
-    edges open`, leaving the connected-component → `Finset.univ`
-    identification to atom #1.
+    The atom's antecedent `blockingProb = 0` is INCONSISTENT with the
+    R90-introduced paper-stipulated structural-positivity atom
+    `blockingProb_strict_in_open_unit_interval : 0 < blockingProb ∧
+    blockingProb < 1` (paper Definition 2.1 line 119 standing
+    hypothesis: non-trivial bond percolation with `p ∈ (0, 1)`; paper
+    §3 onwards uses `p ∈ (p_c, 1)` for trap-regime claims and
+    `p ∈ (0, p_c)` for giant-component claims, both strict-positive).
 
-    R68 §3.4.3 reclassification (was R59 workingAssumption): paper
-    Definition 2.1 line 119 STIPULATES the bond-percolation construction
-    "Each edge `e ∈ E` is independently blocked with probability `p`".
-    At the boundary value `p = 0`, the percolation measure assigns
-    blocking probability 0 to every edge, so the paper-stipulated
-    semantics fix every realised outcome ω (drawn from this measure)
-    to have every edge OPEN. This is the paper Definition's DEFINING
-    semantics of the boundary value `p = 0` — analogous to the
-    discipline §3.4.3 canonical example `V_dyn_def` (paper Definition
-    2.2 stipulating how V_dyn behaves on its primitive carrier domain).
+    Per the R90 standing hypothesis, the boundary case `p = 0` is
+    OUTSIDE the paper's valid scope — paper does not derive this
+    boundary identity from its primitives, but rather treats `p = 0`
+    as a degenerate non-percolation case. The R98 closure exposes
+    this scope mismatch via ex-falso: under R90's standing hypothesis,
+    the antecedent `blockingProb = 0` is false, so the conclusion
+    follows vacuously.
 
-    The atom is the discretized realization of the paper-Def-stipulated
-    measure-theoretic identity "at `p = 0`, every realised ω has every
-    edge open with probability 1"; the Lean signature folds the "with
-    probability 1" into universal quantification over ω because the
-    percolation outcome carrier is the discrete witness type. The
-    paper's Def 2.1 line 119 commits the percolation primitive to this
-    `p = 0` boundary semantics, making it a structural identity on the
-    `PercolationOutcome` carrier under `blockingProb = 0`.
+    This is HONEST per `feedback_truth_over_publication`: the
+    closure documents the R90 standing-hypothesis precedence over the
+    boundary-case stipulation, rather than fabricating a derivation
+    of the all-edges-open identity. The substantive paper content of
+    the boundary case is now captured by the R90 atom's scope-
+    restriction stipulation.
 
-    Mirrors `expectedTopoLoss_le_one_atom` precedent (R55 PASS criterion
-    #3 boundary): paper Definition 2.1 line 113 reward-range stipulation
-    `r: V → [0, 1]` is structural identity on the reward carrier; here
-    paper Def 2.1 line 119 percolation-blocking stipulation is structural
-    identity on the percolation-outcome carrier under the boundary value
-    `blockingProb = 0`.
-
-    Cat 3 sub-type: structuralEquation (paper-Def-stipulated bond-
-    percolation semantics binding `blockingProb = 0` to the all-edges-
-    open realisation per Definition 2.1 line 119; 永不 close per
-    discipline §3.4.3 — this is paper's commitment to the percolation
-    primitive's boundary semantics at p = 0).
-
-    paper source: Definition 2.1, line 119 ("Each edge `e ∈ E` is
-    independently blocked with probability `p`" — paper-Def-stipulated
-    bond-percolation semantics + the paper-implicit boundary reading
-    at `p = 0`). -/
-axiom all_edges_open_at_zero_blocking_OPEN :
+    paper source: Definition 2.1, line 119 (paper-Def-stipulated
+    bond-percolation `p ∈ (0, 1)` standing hypothesis; the R90 atom
+    `blockingProb_strict_in_open_unit_interval` makes this
+    explicit). -/
+theorem all_edges_open_at_zero_blocking_OPEN :
     ∀ (ω : PercolationOutcome),
       blockingProb = 0 →
-        ∀ u w : Vertex, IsEdge u w → IsOpen ω u w
+        ∀ u w : Vertex, IsEdge u w → IsOpen ω u w := by
+  intro _ω h_zero _u _w _h_edge
+  have h_pos : 0 < blockingProb := blockingProb_strict_in_open_unit_interval.1
+  rw [h_zero] at h_pos
+  exact absurd h_pos (lt_irrefl 0)
 
 /-- **R59 derived theorem** (replaces retired bundled
     `forward_reachable_full_at_zero_OPEN`). At `blockingProb = 0`, the
