@@ -106,3 +106,5 @@ import BlackwellDilemma.Infrastructure.NonNegativeRealAlgebra
 import BlackwellDilemma.Infrastructure.AbsValueBounds
 import BlackwellDilemma.Infrastructure.CalculusTopkis
 import BlackwellDilemma.Infrastructure.LebesgueStieltjesAtoms
+import BlackwellDilemma.Infrastructure.IntegerLattice
+import BlackwellDilemma.Infrastructure.BondPercolationLattice

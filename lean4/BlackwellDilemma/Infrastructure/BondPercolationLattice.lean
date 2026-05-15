@@ -1,0 +1,110 @@
+/-
+Copyright (c) 2026 Alex Chengyu Li. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Alex Chengyu Li
+-/
+import BlackwellDilemma.Infrastructure.IntegerLattice
+import BlackwellDilemma.Infrastructure.BernoulliProductFinite
+import Mathlib.Combinatorics.SimpleGraph.Subgraph
+
+/-!
+# Bond percolation on the integer lattice (Phase 2 stub)
+
+This file is the **Phase 2 stub** of the Mathlib contribution roadmap
+(`MATHLIB_CONTRIBUTION_ROADMAP.md`). It assembles the Phase 1
+`integerLatticeGraph` and the Cat 1 finite Bernoulli-product weight
+infrastructure into a unified namespace where the bond-percolation
+constructions used in the BlackwellDilemma paper Theorem `thm:phase`
+(line 411 ff.) and Theorem `thm:cognitive-threshold` Part 6 (line 498)
+can be developed without the open-cluster measure-theoretic apparatus
+that Mathlib does not yet host.
+
+## Main definitions
+
+* `BondConfigOnGraph G` — a bond-percolation outcome on a `SimpleGraph G`:
+  a function from `Sym2 V` (unordered edge type) to `Bool` (open/closed).
+  Specialised to `integerLatticeGraph d` for the lattice setting.
+* `IsOpenEdge G ω e` — predicate that an edge `e ∈ G.edgeSet` is open
+  under outcome `ω`.
+* `latticeBondConfig d` — abbreviation for `BondConfigOnGraph
+  (integerLatticeGraph d)`.
+
+## Why this is "Phase 2 stub" not "Phase 2 complete"
+
+The complete Phase 2 from `MATHLIB_CONTRIBUTION_ROADMAP.md` requires:
+1. Measure-theoretic product Bernoulli on `(BondConfigOnGraph G)` —
+   blocked by Mathlib's lack of an `MeasureTheory.Measure.pi`-friendly
+   formulation for `Sym2 V` index sets when `V` is infinite (the lattice
+   case has `V = Fin d → ℤ`, infinite even for `d = 1`).
+2. Cluster + connected-component analysis on the random subgraph —
+   needs `SimpleGraph.Subgraph`/`Connectivity` API extended to the
+   percolation-induced random subgraph.
+3. Strassen monotone coupling — straightforward once #1 is in place.
+
+For now this stub provides only the discrete edge-state predicate and
+bridges to the existing `Infrastructure.bernoulliWeight` framework
+(which is finite-edge-set only). Full lattice infrastructure is a
+multi-month upstream Mathlib contribution and is the path to closing
+the 2 Cat 3 lattice OPEN entries (`trapLocalConfigProb_pos_and_le`,
+`restrictedExpectation_eq_localConfigProb`) and the lattice DEAD-END
+marker for Theorem 4.1 Part 4.
+
+## Mathlib upstream targets
+
+The contents of this file (when developed) are intended for:
+* `Mathlib/Probability/Percolation/Basic.lean` — `BondConfigOnGraph`
+  + `IsOpenEdge` + edge independence.
+* `Mathlib/Probability/Percolation/Cluster.lean` — cluster + open-subgraph.
+* `Mathlib/Probability/Percolation/Coupling.lean` — Strassen monotone coupling.
+
+## Tags
+
+bond percolation, simple graph, integer lattice, statistical mechanics
+-/
+
+namespace BlackwellDilemma.Infrastructure.BondPercolationLattice
+
+open SimpleGraph
+
+/-! ### Bond-configuration outcome on a SimpleGraph -/
+
+/-- A bond-percolation outcome on a `SimpleGraph G`: assigns each
+unordered edge a Boolean state (`true` = open, `false` = blocked).
+
+We index by `Sym2 V` rather than by `G.edgeSet` directly because the
+`Sym2 V → Bool` formulation gives the standard Mathlib treatment for
+percolation processes (per the planned `Mathlib/Probability/Percolation/`
+namespace). The `IsOpenEdge` predicate below restricts attention to
+actual edges of `G`. -/
+def BondConfigOnGraph {V : Type*} (_G : SimpleGraph V) : Type _ :=
+  Sym2 V → Bool
+
+/-- Edge `e` is open under bond-configuration `ω` and graph `G` iff
+`e ∈ G.edgeSet` and `ω e = true`. -/
+def IsOpenEdge {V : Type*} (G : SimpleGraph V) (ω : BondConfigOnGraph G)
+    (e : Sym2 V) : Prop :=
+  e ∈ G.edgeSet ∧ ω e = true
+
+/-- The integer-lattice specialisation: a bond-percolation outcome on
+the `d`-dimensional integer lattice graph. Used in BlackwellDilemma
+paper §3.3 for the `Z²` percolation analysis. -/
+abbrev latticeBondConfig (d : ℕ) : Type _ :=
+  BondConfigOnGraph (integerLatticeGraph d)
+
+/-- The `Z²` specialisation, for the canonical Harris–Kesten setting. -/
+abbrev Z2BondConfig : Type _ := latticeBondConfig 2
+
+/-! ### Connection to the existing finite-edge bond weight framework
+
+The existing `BlackwellDilemma.bondConfigWeight` (in `Percolation.lean`,
+also routed through `Infrastructure.bernoulliWeight` via R153) handles
+the FINITE-edge case where the edge type is a `Fintype`. The lattice
+case `integerLatticeGraph d` has infinitely many edges (for any `d ≥ 1`),
+so the existing finite-edge framework applies only to BOUNDED-BOX
+restrictions of the lattice (an `EdgeFinset` on a `[-N, N]^d` cube).
+
+The infinite-edge measure-theoretic extension is the Phase 2 substantive
+work; this stub records the discrete-edge predicate that the eventual
+`Probability/Percolation/Basic.lean` Mathlib file will instantiate. -/
+
+end BlackwellDilemma.Infrastructure.BondPercolationLattice
