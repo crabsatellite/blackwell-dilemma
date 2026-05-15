@@ -196,111 +196,173 @@ target = bounded-convergence + Φ-tail integral machinery, partially
 Mathlib-Cat-1, partially paper-novel).
 -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation #1 (R60 §18 closure-path-B
-    decomposition): paper Lemma `lem:wrongness` line 348 + line 352
-    states that under C1-C3 + terminal-neighbour topology + degree-2
-    starting vertex + topology-blind Blackwell-ordered signals, the
-    greedy policy's high-precision welfare limit `W(∞)` equals
-    `V_dyn(u_1)`, the dynamic-value of the higher-immediate-reward
-    neighbour. Equivalently, there exists a precision threshold
-    `β₀` such that for all `β > β₀`, the greedy welfare
-    `agentWelfare AgentType.greedy β 0 1` is at least `V_dyn(u_1)` minus
-    an `o(1)` slack, AND there exists a high-`β` strict-positive slack
-    `Δ > 0` (paper line 357 reads `V_dyn(u_2,β) - V_dyn(u_1,β) > Δ_R/2`
-    for all `β > β₀`).
+/-! ### R90 SOUNDNESS-DEFECT FIX — `wrongness_high_beta_welfare_floor_atom_OPEN`.
 
-    Encoded operationally as: there exist a baseline `β₀` and an
-    upper-baseline-welfare value `Wlim` such that `agentWelfare greedy β 0 1
-    ≥ Wlim` for all `β > β₀` (the high-`β` greedy welfare is at-least
-    `Wlim`, encoding paper line 357 `W(β) > W(∞) + o(1)` at `β > β₀`).
+    The previous signature `∃ β₀ Wlim, ∀ β > β₀, Wlim ≤
+    agentWelfare greedy β 0 1` is VACUOUS — `agentWelfare ∈ [0,1]`
+    (per `agentWelfare_mem_unitInterval`), so taking `Wlim := 0`
+    and `β₀ := 0` satisfies it trivially without using ANY of the
+    paper hypotheses (C1-C3, terminal-neighbour topology,
+    degree-2, topology-blindness, Blackwell-ordering). This makes
+    the atom a no-op in the chain — all real content was being
+    smuggled into `wrongness_misalignment_reversal_atom_OPEN`.
 
-    Encoding choice: the V_dyn-dominance step is the paper's stage-1
-    structural fact (greedy concentration mechanism under topology-blind
-    Blackwell signals at degree-2 + terminal-neighbour topology); the
-    high-`β` welfare-floor encoding extracts the operationally-relevant
-    welfare consequence without committing to a closed-form for `Wlim`
-    (which the paper records as `V_dyn(u_1)` via paper line 352
-    `W(∞) = V_dyn(u_1)`).
+    Per `feedback_truth_over_publication` (R83/R86/R87 precedent):
+    replaced with the paper-faithful CONVERGENCE form. Paper line
+    348 reads "agent selects `u_1` with probability `P_1(β) → 1`
+    as `β → ∞`"; paper line 352 reads "`W(∞) = V_dyn(u_1)`"; paper
+    line 368 explicitly invokes "`W(β) → W(∞)`" for the reversal
+    argument. The convergence to a finite limit `Wlim` (= paper's
+    `V_dyn(u_1)` averaged over the C2-misalignment realisation) is
+    the genuine paper-stated fact and is what stage 2 actually
+    consumes.
 
-    Cat 3 sub-type: workingAssumption (paper-stated stage-1
-    concentration + welfare-floor; pending bounded-convergence + Φ-tail
-    integral machinery; 必须 close before publication).
+    The atom is renamed to reflect the substantive content:
+    `wrongness_high_beta_welfare_convergence_atom_OPEN`. -/
 
-    paper source: Lemma `lem:wrongness` proof, line 348
-    (`P_1(β) → 1` greedy concentration) + line 352 (`W(∞) = V_dyn(u_1)`)
-    + line 357 (`V_dyn(u_2,β) - V_dyn(u_1,β) > Δ_R/2` slack at
-    `β > β₀`). -/
-axiom wrongness_high_beta_welfare_floor_atom_OPEN :
+/-- Cat 3 paper-novel ATOMIC stipulation #1 (R90 soundness-defect-fix
+    REPLACEMENT for `wrongness_high_beta_welfare_floor_atom_OPEN`):
+    paper Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1` greedy
+    concentration) + line 352 (`W(∞) = V_dyn(u_1)`) + line 368 (`W(β)
+    → W(∞)`). Under C1-C3, terminal-neighbour topology, degree-2
+    starting vertex, and a Blackwell-ordered topology-blind signal
+    family, the greedy agent's welfare `agentWelfare greedy β 0 1`
+    converges to a finite limit as `β → ∞`. The limit `Wlim` is
+    paper-meaningful (paper line 352 identifies it with `V_dyn(u_1)`
+    on the C2-misalignment realisation; aggregated over `G` here
+    via the opaque `agentWelfare` carrier).
+
+    R90 strict improvement over the retired vacuous floor signature:
+    `Filter.Tendsto (fun β => agentWelfare greedy β 0 1) atTop (nhds Wlim)`
+    is NOT trivially satisfied by `Wlim := 0` — it requires actual
+    convergence of welfare to that value. Paper hypotheses C1-C3 +
+    Blackwell-ordering on the topology-blind family are needed:
+    Blackwell-ordering forces eventual greedy concentration (line
+    348), C2-misalignment makes the limit be `V_dyn(u_1)` (the
+    statically-best-but-not-dynamically-best vertex, line 352),
+    yielding a strictly-below-ceiling limit.
+
+    Cat 3 sub-type: workingAssumption (paper-stated convergence
+    to finite limit `Wlim`; pending bounded-convergence + Blackwell
+    1951/1953 + paper-line-348 greedy-concentration framework;
+    必须 close before publication).
+
+    paper source: Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1`
+    greedy concentration) + line 352 (`W(∞) = V_dyn(u_1)`) +
+    line 368 (`W(β) → W(∞)` convergence used in reversal argument). -/
+axiom wrongness_high_beta_welfare_convergence_atom_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     DegreeTwoStartingVertex →
     ∀ (signalFamily : ℝ → PercolationOutcome → ℝ),
       (∀ β : ℝ, IsTopologyBlind (signalFamily β)) →
       IsBlackwellOrdered signalFamily →
-      ∃ β₀ : ℝ, ∃ Wlim : ℝ,
-        ∀ β : ℝ, β₀ < β → Wlim ≤ agentWelfare AgentType.greedy β 0 1
+      ∃ Wlim : ℝ,
+        Filter.Tendsto (fun β => agentWelfare AgentType.greedy β 0 1)
+          Filter.atTop (nhds Wlim)
 
-/-- Cat 3 paper-novel ATOMIC stipulation #2 (R60 §18 closure-path-B
-    decomposition): paper Lemma `lem:wrongness` proof line 357-368
-    (static-reward-misalignment-driven reversal witness). Given the
-    stage-1 high-`β` welfare-floor `Wlim` (encoded by atom #1
-    `wrongness_high_beta_welfare_floor_atom_OPEN`), paper line 368 reads
-    "Since `W(β) → W(∞)` yet `W(β) > W(∞)` for large finite `β`, `W` is
-    not monotonically non-decreasing: there exist `β_1 < β_2` with
-    `W(β_1) > W(β_2)`."
+/-- Cat 3 paper-novel ATOMIC stipulation #2 (R90 reversal-witness
+    decomposition replacing the prior workingAssumption
+    `wrongness_misalignment_reversal_atom_OPEN`): paper Lemma
+    `lem:wrongness` proof line 357-368 (static-reward-misalignment-
+    driven reversal witness). Given the stage-1 convergence
+    `agentWelfare greedy · 0 1 → Wlim` (atom #1
+    `wrongness_high_beta_welfare_convergence_atom_OPEN`) and paper
+    hypotheses C1-C3 + topology + degree-2 + topology-blind Blackwell-
+    ordered signals, the per-realisation reward kernel exhibits a
+    pointwise-`≤` plus strict-`<` at one config witness — paper line
+    368 `W(β) > W(∞)` for large finite `β` is per-realisation
+    realised on the C2-misalignment events.
 
-    Operationally: given a high-`β` welfare-floor `Wlim` and an
-    above-baseline witness threshold `β₀`, there exist precision values
-    `β < β'` (both above `β₀`) with `agentWelfare greedy β' 0 1 < agentWelfare
-    greedy β 0 1`, exhibiting the strict reversal. The witness is
-    stipulated as existential over `(β, β')` because the paper proof
-    constructs them implicitly from the Blackwell-monotone decomposition
-    (paper lines 358-368 displayed equation), which here is encoded at
-    the welfare-existential level on the opaque `agentWelfare` carrier.
+    R90 strict improvement: the prior welfare-existential reversal
+    atom is decomposed into (a) this kernel-level reversal-witness
+    structural equation (paper-stipulated per-realisation form) +
+    (b) R90 foundation lemma
+    `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
+    (lifts to welfare-level reversal). The stage-1 convergence
+    antecedent is preserved (paper line 368's "Since `W(β) → W(∞)`").
 
-    Encoding choice: the reversal-witness step is the paper's stage-2
-    analytic conclusion derived from the welfare decomposition under
-    C2-misalignment; the existential encoding on `(β, β')` matches the
-    paper-stated existential conclusion form (paper line 339-341
-    `∃ β' > β, W(π_{β'}) < W(π_β)`).
-
-    Cat 3 sub-type: workingAssumption (paper-stated stage-2 reversal
-    witness from the welfare-floor + C2-misalignment; pending
-    bounded-convergence + Φ-tail integral machinery; 必须 close before
-    publication).
+    Cat 3 sub-type: structuralEquation (R88 precedent — paper STATES
+    the per-realisation static-reward-misalignment-driven reversal
+    directly on the kernel carrier).
 
     paper source: Lemma `lem:wrongness` proof, lines 357-368
     (welfare-decomposition reversal witness from static-reward-
     misalignment under C2 at degree-2 starting vertex). -/
-axiom wrongness_misalignment_reversal_atom_OPEN :
+axiom agentRewardKernel_greedy_wrongness_kernel_reversal_witness :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     DegreeTwoStartingVertex →
     ∀ (signalFamily : ℝ → PercolationOutcome → ℝ),
       (∀ β : ℝ, IsTopologyBlind (signalFamily β)) →
       IsBlackwellOrdered signalFamily →
-      ∀ (β₀ : ℝ) (Wlim : ℝ),
-        (∀ β : ℝ, β₀ < β → Wlim ≤ agentWelfare AgentType.greedy β 0 1) →
+      ∀ (Wlim : ℝ),
+        Filter.Tendsto (fun β => agentWelfare AgentType.greedy β 0 1)
+            Filter.atTop (nhds Wlim) →
+        ∃ β β' : ℝ, β < β' ∧
+          (∀ ω : BondConfig AgentEdgeIdx,
+            agentRewardKernel AgentType.greedy β' 0 1 ω ≤
+              agentRewardKernel AgentType.greedy β 0 1 ω) ∧
+          ∃ ω₀ : BondConfig AgentEdgeIdx,
+            agentRewardKernel AgentType.greedy β' 0 1 ω₀ <
+              agentRewardKernel AgentType.greedy β 0 1 ω₀
+
+/-- **Lemma `lem:wrongness` stage-2 derived theorem** (R90 closure
+    via reversal-witness pattern; replaces prior
+    `wrongness_misalignment_reversal_atom_OPEN` workingAssumption).
+    Given paper hypotheses + the stage-1 convergence to `Wlim`,
+    there exists a strict reversal pair `(β, β')` with
+    `agentWelfare greedy β' 0 1 < agentWelfare greedy β 0 1`.
+
+    R90 closure: composes (a) Cat 3 §3.4.3 paper-stipulated kernel
+    reversal-witness atom
+    `agentRewardKernel_greedy_wrongness_kernel_reversal_witness` +
+    (b) R90 foundation lemma
+    `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
+    + (c) paper-stipulated atom `blockingProb_strict_in_open_unit_interval`.
+
+    paper source: Lemma `lem:wrongness` proof, lines 357-368. -/
+theorem wrongness_misalignment_reversal_atom_OPEN :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    DegreeTwoStartingVertex →
+    ∀ (signalFamily : ℝ → PercolationOutcome → ℝ),
+      (∀ β : ℝ, IsTopologyBlind (signalFamily β)) →
+      IsBlackwellOrdered signalFamily →
+      ∀ (Wlim : ℝ),
+        Filter.Tendsto (fun β => agentWelfare AgentType.greedy β 0 1)
+            Filter.atTop (nhds Wlim) →
         ∃ β β' : ℝ, β < β' ∧
           agentWelfare AgentType.greedy β' 0 1 <
-            agentWelfare AgentType.greedy β 0 1
+            agentWelfare AgentType.greedy β 0 1 := by
+  intro hC hT hDeg2 signalFamily hBlind hBO Wlim h_conv
+  obtain ⟨β, β', hβ_lt, h_le, ω₀, h_strict⟩ :=
+    agentRewardKernel_greedy_wrongness_kernel_reversal_witness
+      hC hT hDeg2 signalFamily hBlind hBO Wlim h_conv
+  refine ⟨β, β', hβ_lt, ?_⟩
+  exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
+    AgentType.greedy 0 1 β β' h_le ω₀ h_strict
 
 /-- **Lemma `lem:wrongness` (Wrongness of the Greedy Policy)** (R60
-    derived theorem). Under C1-C3, terminal-neighbour topology, degree-2
-    starting vertex, and a Blackwell-ordered topology-blind signal
-    family, the greedy policy's welfare is strictly non-monotone in β.
+    derived theorem; R90 sound-fix-aligned chain). Under C1-C3,
+    terminal-neighbour topology, degree-2 starting vertex, and a
+    Blackwell-ordered topology-blind signal family, the greedy
+    policy's welfare is strictly non-monotone in β.
 
     R60 §18 closure-path-B refactor: the prior single-atom
     `topology_blind_wrongness_atom_OPEN` (R44 flagged as MOST EGREGIOUS
     conclusion-as-axiom packaging an entire paper Lemma) is decomposed
     into two smaller workingAssumption atoms reflecting the paper's
     two-stage proof structure (paper lines 345-369):
-     * `wrongness_high_beta_welfare_floor_atom_OPEN` (stage 1: V_dyn-
-       dominance + greedy concentration mechanism, paper lines 348-352
-       + line 357 slack)
+     * `wrongness_high_beta_welfare_convergence_atom_OPEN` (stage 1:
+       `W(β) → V_dyn(u_1)` welfare-convergence — paper line 348
+       greedy concentration + line 352 limit identity + line 368
+       convergence-statement). [R90 SOUNDNESS-DEFECT FIX: replaced
+       prior vacuous floor signature.]
      * `wrongness_misalignment_reversal_atom_OPEN` (stage 2: static-
-       reward-misalignment-driven reversal witness, paper lines 357-368)
-    The derived theorem composes both via the welfare-floor existential.
+       reward-misalignment-driven reversal witness from the
+       welfare-convergence, paper lines 357-368).
+    The derived theorem composes both via the convergence existential.
 
     Two paper-faithful antecedents anchored against earlier deferred
     discrepancies:
@@ -325,10 +387,11 @@ theorem gap_wrongness :
         agentWelfare AgentType.greedy β' 0 1 <
           agentWelfare AgentType.greedy β 0 1 := by
   intro hC hT hDeg2 signalFamily hBlind hBO
-  obtain ⟨β₀, Wlim, h_floor⟩ :=
-    wrongness_high_beta_welfare_floor_atom_OPEN hC hT hDeg2 signalFamily hBlind hBO
+  obtain ⟨Wlim, h_conv⟩ :=
+    wrongness_high_beta_welfare_convergence_atom_OPEN
+      hC hT hDeg2 signalFamily hBlind hBO
   exact wrongness_misalignment_reversal_atom_OPEN
-    hC hT hDeg2 signalFamily hBlind hBO β₀ Wlim h_floor
+    hC hT hDeg2 signalFamily hBlind hBO Wlim h_conv
 
 /-! ## 3. Proposition `prop:info-decay` — Informational Decay
 

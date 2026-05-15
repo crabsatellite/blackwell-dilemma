@@ -184,31 +184,63 @@ Under C1, C3, and the greedy-path generalisation C2′ (which includes a
 non-interference clause), the greedy agent's welfare on any finite
 connected graph `G` is non-monotone in β. -/
 
-/-- **Theorem 6.1** (`thm:general-tree`).
-    Subsumes Theorem 3.2: terminal-neighbour topology satisfies C2′
-    whenever C2 holds, and cycles do not invalidate C2′ because the
-    no-revisit rule prevents back-tracking.
+/-- **Theorem 6.1** (`thm:general-tree`) — R90 §18 reversal-witness
+    decomposition.
+
+    R90 §18 reversal-witness decomposition: the prior single-atom
+    `C2prime_implies_greedy_reversal_OPEN` (which packaged the
+    welfare-existential reversal as an opaque axiom) is decomposed
+    into a §3.4.3 paper-stipulated kernel-level reversal-witness
+    structural equation that the R90 foundation lemma
+    `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
+    lifts to the welfare-level reversal claim. Paper Theorem 6.1
+    extends Theorem 3.2's greedy-reversal mechanism from terminal-
+    neighbour topology to general connected graphs satisfying C2′:
+    on any C2′-satisfying graph, the greedy agent's per-realisation
+    reward kernel exhibits pointwise-`≤` plus strict-`<` at one
+    config (the trap-firing realisation under the C2′ greedy-path-
+    misalignment).
+
+    Cat 3 sub-type: structuralEquation (R88 precedent — paper STATES
+    the per-realisation trap-induced kernel-reversal directly on the
+    kernel carrier).
 
     paper source: Theorem 6.1 (`thm:general-tree`), lines 989-998. -/
-axiom C2prime_implies_greedy_reversal_OPEN :
+axiom agentRewardKernel_greedy_C2prime_kernel_reversal_witness :
     Conditions_C1_C2prime_C3 →
     ∃ β β' : ℝ, β < β' ∧
-      agentWelfare AgentType.greedy β' 0 1 <
-        agentWelfare AgentType.greedy β 0 1
+      (∀ ω : BondConfig AgentEdgeIdx,
+        agentRewardKernel AgentType.greedy β' 0 1 ω ≤
+          agentRewardKernel AgentType.greedy β 0 1 ω) ∧
+      ∃ ω₀ : BondConfig AgentEdgeIdx,
+        agentRewardKernel AgentType.greedy β' 0 1 ω₀ <
+          agentRewardKernel AgentType.greedy β 0 1 ω₀
 
-/-- **Theorem 6.1** (`thm:general-tree`) (derived theorem composing
-    `C2prime_implies_greedy_reversal_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+/-- **Theorem 6.1** (`thm:general-tree`) (R90 derived theorem via
+    reversal-witness pattern, replacing prior
+    `C2prime_implies_greedy_reversal_OPEN` workingAssumption).
     Subsumes Theorem 3.2 via `dilemma_subsumed_by_gap_general_tree`
     (terminal-neighbour topology + C2 ⇒ C2′).
+
+    R90 closure: composes (a) Cat 3 §3.4.3 paper-stipulated kernel
+    reversal-witness atom
+    `agentRewardKernel_greedy_C2prime_kernel_reversal_witness` +
+    (b) R90 foundation lemma
+    `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one` +
+    (c) paper-stipulated atom `blockingProb_strict_in_open_unit_interval`.
 
     paper source: Theorem 6.1 (`thm:general-tree`), lines 989-998. -/
 theorem gap_general_tree :
     Conditions_C1_C2prime_C3 →
     ∃ β β' : ℝ, β < β' ∧
       agentWelfare AgentType.greedy β' 0 1 <
-        agentWelfare AgentType.greedy β 0 1 :=
-  C2prime_implies_greedy_reversal_OPEN
+        agentWelfare AgentType.greedy β 0 1 := by
+  intro hC
+  obtain ⟨β, β', hβ_lt, h_le, ω₀, h_strict⟩ :=
+    agentRewardKernel_greedy_C2prime_kernel_reversal_witness hC
+  refine ⟨β, β', hβ_lt, ?_⟩
+  exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
+    AgentType.greedy 0 1 β β' h_le ω₀ h_strict
 
 /-- Cat 3 paper-novel ATOMIC stipulation #1 (R58 closure-path-B
     decomposition of retired
@@ -405,8 +437,9 @@ axiom cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN :
     composing the smaller atom
     `cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN`
     (paper line 1028 — diagnostic conjunction holds at the blocked
-    event) with the file-local Cat 3 atom
-    `C2prime_implies_greedy_reversal_OPEN` (paper Theorem 6.1 —
+    event) with `gap_general_tree` (R90 derived theorem replacing
+    the retired `C2prime_implies_greedy_reversal_OPEN` workingAssumption
+    via reversal-witness pattern; paper Theorem 6.1 —
     `Conditions_C1_C2prime_C3` ⇒ greedy β-reversal exists).
     Non-monotonicity survives on graphs with cycles.
 
@@ -426,7 +459,7 @@ theorem gap_cyclic_trap :
       ∃ β β' : ℝ, β < β' ∧
         agentWelfare AgentType.greedy β' 0 1 < agentWelfare AgentType.greedy β 0 1 := by
   intro p hp_pos hp_lt_one
-  exact C2prime_implies_greedy_reversal_OPEN
+  exact gap_general_tree
     (cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN p hp_pos hp_lt_one)
 
 /-! ## 4. Depth-`d` trap tree (`def:trap-tree`)

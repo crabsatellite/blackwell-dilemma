@@ -87,6 +87,37 @@ axiom blockingProb : ℝ
 /-- Constraint: blocking probability lies in `[0, 1]`. -/
 axiom blockingProb_mem_unitInterval : 0 ≤ blockingProb ∧ blockingProb ≤ 1
 
+/-- **R90 Cat 3 §3.4.3 paper-Def-stipulated structural-positivity atom**:
+    the paper's bond-percolation parameter is non-trivial,
+    `0 < blockingProb ∧ blockingProb < 1`.  Required for the R90
+    reversal-witness pattern: lifting per-realisation strict-`<` to
+    expectation strict-`<` requires every bond configuration to carry
+    POSITIVE measure, which holds iff `0 < p < 1` (Percolation.lean
+    `bondConfigWeight_pos`).
+
+    This is paper-stipulated by the Definition 2.1 setup —
+    "endogenous feasibility" requires non-trivial percolation:
+     * `p = 0` collapses to the deterministic full-graph case
+       (no bond-percolation randomness);
+     * `p = 1` collapses to the deterministic empty-graph case
+       (every edge blocked, `R(v_0) = {v_0}`).
+    Both degenerate to non-percolation problems where the paper's
+    trap-prevalence / C2-misalignment / reversal mechanism (which
+    require `p > p_c = 1/2 > 0` and `p < 1` for non-degenerate
+    cluster structure) does not arise.  Cat 3 §3.4.3 gapDefinitional
+    per the discipline (paper-Def-stipulated structural fact about
+    the primitive carrier `blockingProb`'s scope of validity);
+    永不 close.
+
+    paper source: Definition 2.1, line 119 ("each edge `e ∈ E` is
+    independently blocked with probability `p`" — the bond-percolation
+    setup is non-trivial in the paper's standing hypothesis); paper
+    §3 onwards uses `p ∈ (p_c, 1)` for trap-regime claims and
+    `p ∈ (0, p_c)` for giant-component claims, both strict-positive
+    strict-below-1. -/
+axiom blockingProb_strict_in_open_unit_interval :
+    0 < blockingProb ∧ blockingProb < 1
+
 /-! ## 3. Reachable set + dynamic value
 
 Definition 2.2 (`def:reachable`): `R(v_0) = { v : ∃ path from v_0 to v
@@ -742,6 +773,53 @@ theorem agentWelfare_monotone_of_kernel_pointwise_monotone
   exact percExpectation_mono (1 - blockingProb) h1mp0 h1mp1
     (agentRewardKernel a β₁ κ α) (agentRewardKernel a β₂ κ α)
     (fun ω => h_ptwise β₁ β₂ hβ ω)
+
+/-- **R90 reversal-witness foundation derived theorem.**  The general
+    pointwise-`≤`-with-strict-witness ⇒ strict-welfare-reversal
+    bridge: if for some pair `(β₁, β₂)` the per-realisation kernel of
+    AgentType `a` at parameters `(κ, α)` is pointwise-`≤` (with `β₂`'s
+    kernel everywhere `≤` `β₁`'s) AND there exists at least one
+    realisation `ω₀` at which the kernel is strictly less, then the
+    welfare exhibits the strict reversal `agentWelfare a β₂ κ α <
+    agentWelfare a β₁ κ α` — under the paper-stipulated non-trivial
+    percolation `0 < blockingProb < 1`
+    (`blockingProb_strict_in_open_unit_interval`).
+
+    This is the strict-`<` analogue of
+    `agentWelfare_monotone_of_kernel_pointwise_monotone` and is the
+    operative tool turning the paper's per-realisation reversal-WITNESS
+    structural equations (per-atom Cat 3 §3.4.3 atoms encoding paper-
+    stipulated reversal mechanisms — C2-misalignment / trap-induced
+    misranking) into welfare-level reversal claims.
+
+    Closure: `agentWelfare` unfolds to
+    `percExpectation (1 - blockingProb) (agentRewardKernel a · κ α)`,
+    and `Percolation.lean`'s
+    `percExpectation_lt_of_pointwise_le_strict_at_one` transfers the
+    pointwise-`≤`-with-strict-witness to the expectation under
+    `0 < 1 - blockingProb < 1` (from
+    `blockingProb_strict_in_open_unit_interval`).
+
+    paper source: §2.5 line 205-208 (`agentWelfare = E_{G_p}[kernel]`)
+    + Definition 2.1 line 119 (non-trivial bond percolation setup —
+    every config carries positive weight, so per-realisation strict
+    inequalities lift to strict expectation inequalities). -/
+theorem agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
+    (a : AgentType) (κ α : ℝ) (β₁ β₂ : ℝ)
+    (h_ptwise_le : ∀ ω : BondConfig AgentEdgeIdx,
+      agentRewardKernel a β₂ κ α ω ≤ agentRewardKernel a β₁ κ α ω)
+    (ω₀ : BondConfig AgentEdgeIdx)
+    (h_strict_at_one :
+      agentRewardKernel a β₂ κ α ω₀ < agentRewardKernel a β₁ κ α ω₀) :
+    agentWelfare a β₂ κ α < agentWelfare a β₁ κ α := by
+  unfold agentWelfare
+  obtain ⟨hp0, hp1⟩ := blockingProb_strict_in_open_unit_interval
+  have h1mp0 : 0 < 1 - blockingProb := by linarith
+  have h1mp1 : 1 - blockingProb < 1 := by linarith
+  exact percExpectation_lt_of_pointwise_le_strict_at_one
+    (1 - blockingProb) h1mp0 h1mp1
+    (agentRewardKernel a β₂ κ α) (agentRewardKernel a β₁ κ α)
+    h_ptwise_le ω₀ h_strict_at_one
 
 /-- The within-`R` oracle's expected reward (Definition 2.6).
     paper source: Definition 2.6 (`def:oracle`). -/

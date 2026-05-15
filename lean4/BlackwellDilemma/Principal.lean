@@ -748,33 +748,41 @@ theorem W_bar_mixture_decomposition :
   · exact belowThresholdWelfare_eventually_decreasing_OPEN
   · exact W_bar_eq_mixture_OPEN
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:principal-optimum` Part 3 proof (line 640) derives that
-    "the sum of a non-decreasing function and a non-monotone function
-    can be non-concave: `W_bar` may increase, then decrease, then
-    increase again", giving an explicit triple `β_1 < β_2 < β_3` with
-    `W_bar β_2 < W_bar β_1 ∧ W_bar β_2 < W_bar β_3` (the non-concave
-    "valley" pattern). This atomic stipulation captures the paper-
-    stated existence of such a triple from the mixture decomposition.
+/-- **R90 SOUNDNESS-DEFECT FIX** — the previous
+    `non_concave_triple_from_mixture_OPEN` signature was
+    OVER-STRONG/FALSE. Counterexample: take
+    `aboveThresholdWelfare β := β` (axiom-compatible — no positivity
+    constraint on the opaque carrier) and
+    `belowThresholdWelfare β := -β` (axiom-compatible). Then
+    `aboveThresholdWelfare_monotone_OPEN` holds vacuously, the
+    eventually-decreasing existential pair is satisfied (e.g.
+    `β_low := 0, β_high := 1` gives `-1 < 0`), and the mixture
+    identity `W_bar β = β + (-β) = 0` holds for all β. The conclusion
+    `∃ β₁ < β₂ < β₃, W_bar β₂ < W_bar β₁` then requires `0 < 0`,
+    which is FALSE. Per `feedback_truth_over_publication`: replaced
+    with a paper-faithful direct stipulation about `W_bar` (matches
+    R83/R86/R87 precedent — correct over-strong signature to TRUE
+    paper claim, prove THAT).
 
-    Encoding choice: extracted from the bundled
-    `gap_principal_regime_bifurcation_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The atom takes the paper-derived premise (mixture
-    decomposition with non-decreasing + eventually-decreasing terms)
-    and extracts the paper-stated non-concavity triple.
+    The paper's actual content at line 640 is the EXISTENCE of a
+    valley triple in `W̄`; the mixture decomposition argument
+    (line 638) is the paper's HEURISTIC route to plausibility but
+    does NOT mathematically force the triple from generic
+    monotone-plus-eventually-decreasing antecedents (the
+    counterexample above shows). Per the paper, the triple's
+    existence is a paper-stipulated atomic fact about `W̄`,
+    pending derivation from the actual structural form of the
+    above/below-threshold contributions (which the opaque carriers
+    do not yet pin down).
 
-    Cat 3 sub-type: workingAssumption (paper-stated non-concavity
-    from mixture decomposition; pending Mathlib monotonicity-pattern
-    analysis; 必须 close before publication).
+    Cat 3 sub-type: workingAssumption (paper-stated W_bar valley
+    triple; pending paper proof reconstruction with the above/below-
+    threshold contribution structural details fully spelled out;
+    必须 close before publication).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 640 (non-concavity `W̄` valley pattern). -/
-axiom non_concave_triple_from_mixture_OPEN :
-    (∃ f g : ℝ → ℝ,
-      (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ → f β₁ ≤ f β₂) ∧
-      (∃ β_low β_high : ℝ, β_low < β_high ∧ g β_high < g β_low) ∧
-      ∀ β : ℝ, W_bar β = f β + g β) →
+axiom non_concave_triple_W_bar_OPEN :
     ∃ β₁ β₂ β₃ : ℝ,
       β₁ < β₂ ∧ β₂ < β₃ ∧
       W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃
@@ -782,21 +790,24 @@ axiom non_concave_triple_from_mixture_OPEN :
 /-- **Proposition `prop:principal-optimum` Part 3: derived theorem.**
     The aggregate `W̄(β)` exhibits a non-concave valley pattern:
     there exists a triple `β₁ < β₂ < β₃` with `W_bar β₂ < W_bar β₁`
-    and `W_bar β₂ < W_bar β₃`. Decomposed from the bundled
-    `gap_principal_regime_bifurcation_OPEN` axiom per
-    `feedback_gap_ledger_in_lean4` §18 pattern: composes
-    `W_bar_mixture_decomposition_OPEN` (paper-stated mixture
-    decomposition into above-threshold non-decreasing + below-
-    threshold eventually-decreasing parts) +
-    `non_concave_triple_from_mixture_OPEN` (paper-stated non-concavity
-    triple from the mixture decomposition).
+    and `W_bar β₂ < W_bar β₃`. R90 SOUNDNESS-DEFECT FIX: the
+    previous chain via
+    `non_concave_triple_from_mixture_OPEN(W_bar_mixture_decomposition)`
+    rested on a counterexample-falsifying axiom (see docstring on
+    `non_concave_triple_W_bar_OPEN` above). Now derived directly
+    from the signature-corrected paper-faithful atom.
+
+    The R63 mixture decomposition `W_bar_mixture_decomposition`
+    (line 638 paper-stated mixture identity) remains as a separate
+    derived theorem in its own right, but is no longer (mis)used
+    to derive the valley triple.
 
     paper source: Proposition `prop:principal-optimum` Part 3, line 627. -/
 theorem gap_principal_regime_bifurcation :
     ∃ β₁ β₂ β₃ : ℝ,
       β₁ < β₂ ∧ β₂ < β₃ ∧
       W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃ :=
-  non_concave_triple_from_mixture_OPEN W_bar_mixture_decomposition
+  non_concave_triple_W_bar_OPEN
 
 /-! ## 3. Corollary `cor:disclosure` — Disclosure Policy Design -/
 

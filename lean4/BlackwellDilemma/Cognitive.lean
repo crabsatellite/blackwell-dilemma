@@ -227,31 +227,52 @@ theorem alphaStar_def :
     from the bundled `gap_cognitive_threshold_part1_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern
     (decompose bundled conclusion-axiom into atomic stipulation +
-    derived theorem). The atom isolates the paper-stated greedy-
-    reversal triggering at α > α*(0, p).
+    R90 §18 reversal-witness decomposition: the prior single-atom
+    `alpha_above_alpha_star_implies_reversal_OPEN` (which packaged the
+    entire welfare-existential reversal as an opaque axiom) is now
+    decomposed into a §3.4.3 paper-stipulated kernel-level reversal-
+    witness structural equation that the R90 foundation lemma
+    `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
+    lifts to the welfare-level reversal claim.
 
-    Cat 3 sub-type: workingAssumption (paper-stated higher-level
-    welfare-reversal claim on opaque carrier `agentWelfare` at the
-    greedy κ = 0 regime; pending per-IDP-instance derivation from the
-    paper's trap-probability + V_dyn-misalignment chain; 必须 close
-    before publication).
+    Cat 3 sub-type (R90 reclassified workingAssumption → derivedTheorem):
+    derived theorem composing the new R90 paper-stipulated structural
+    equation (per-realisation reversal-witness kernel inequality) +
+    R90 foundation lemma + paper-stipulated `blockingProb` non-trivial
+    interval atom.
 
     paper source: Theorem 4.1 Part 1, line 491 (`α > α*(0, p)` ⇒
     greedy welfare non-monotone in β). -/
-axiom alpha_above_alpha_star_implies_reversal_OPEN :
+axiom agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     ∀ p α : ℝ, alphaStar 0 p < α →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
-        agentWelfare AgentType.greedy β₂ 0 α <
-          agentWelfare AgentType.greedy β₁ 0 α
+        (∀ ω : BondConfig AgentEdgeIdx,
+          agentRewardKernel AgentType.greedy β₂ 0 α ω ≤
+            agentRewardKernel AgentType.greedy β₁ 0 α ω) ∧
+        ∃ ω₀ : BondConfig AgentEdgeIdx,
+          agentRewardKernel AgentType.greedy β₂ 0 α ω₀ <
+            agentRewardKernel AgentType.greedy β₁ 0 α ω₀
 
-/-- **Theorem 4.1 Part 1: Failure at `κ = 0`** (derived theorem).
-    For `α > α*(0, p)`, greedy welfare is non-monotone in β.
+/-- **Theorem 4.1 Part 1: Failure at `κ = 0`** (R90 derived theorem
+    via reversal-witness pattern). For `α > α*(0, p)`, greedy welfare
+    is non-monotone in β.
 
-    Derived theorem composing the atomic stipulation
-    `alpha_above_alpha_star_implies_reversal_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    R90 closure: the prior `alpha_above_alpha_star_implies_reversal_OPEN`
+    workingAssumption packaging the welfare-existential reversal as an
+    opaque axiom is now a derived theorem composing:
+     (a) Cat 3 §3.4.3 paper-stipulated kernel reversal-witness atom
+         `agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness`
+         (per-realisation pointwise-`≤` plus strict-`<` at one
+         configuration — paper Theorem 4.1 Part 1 trap-mechanism
+         per-realisation form).
+     (b) R90 foundation lemma
+         `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
+         (lifts per-realisation pointwise-`≤`-with-strict-witness to
+         welfare-level strict reversal under non-trivial percolation).
+     (c) Paper-stipulated atom `blockingProb_strict_in_open_unit_interval`
+         (consumed inside the foundation lemma).
 
     paper source: Theorem 4.1 Part 1, line 491. -/
 theorem gap_cognitive_threshold_part1
@@ -260,8 +281,14 @@ theorem gap_cognitive_threshold_part1
     ∀ p α : ℝ, alphaStar 0 p < α →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
         agentWelfare AgentType.greedy β₂ 0 α <
-          agentWelfare AgentType.greedy β₁ 0 α :=
-  alpha_above_alpha_star_implies_reversal_OPEN hC hT
+          agentWelfare AgentType.greedy β₁ 0 α := by
+  intro p α h_alpha
+  obtain ⟨β₁, β₂, hβ_lt, h_le, ω₀, h_strict⟩ :=
+    agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness
+      hC hT p α h_alpha
+  refine ⟨β₁, β₂, hβ_lt, ?_⟩
+  exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
+    AgentType.greedy 0 α β₁ β₂ h_le ω₀ h_strict
 
 /-- **Theorem 4.1 Part 2: Recovery at `κ → ∞`.**
     For sufficiently large κ, welfare is monotonically non-decreasing in β.

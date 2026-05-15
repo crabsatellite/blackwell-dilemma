@@ -157,6 +157,24 @@ theorem bondConfigWeight_le_one {E : Type} [Fintype E] (p : ℝ)
         · intro e _; exact (bondConfig_factor_mem p hp0 hp1 ω e).2
     _ = 1 := by simp
 
+/-- **R90 strict-positive bond weight** — under non-trivial open-edge
+    probability `p ∈ (0, 1)`, EVERY bond configuration has STRICTLY
+    POSITIVE weight: `0 < bondConfigWeight p ω` for all `ω`.  Required
+    for the reversal-witness integration pattern (R90): a strict
+    pointwise-`<` at a single configuration `ω₀` lifts to a strict
+    expectation-`<` only if `ω₀` carries positive measure.  Each
+    per-edge factor `(if ω e then p else 1 - p)` is `> 0` when
+    `0 < p < 1`, so the product over `E` is `> 0`. -/
+theorem bondConfigWeight_pos {E : Type} [Fintype E] (p : ℝ)
+    (hp0 : 0 < p) (hp1 : p < 1) (ω : BondConfig E) :
+    0 < bondConfigWeight p ω := by
+  unfold bondConfigWeight
+  apply Finset.prod_pos
+  intro e _
+  by_cases h : ω e
+  · simp [h]; exact hp0
+  · simp [h]; linarith
+
 /-! ## 3. Normalisation: the weights sum to `1`
 
 The defining property of a probability measure: summing `bondConfigWeight`
@@ -307,6 +325,47 @@ theorem percExpectation_mono {E : Type} [Fintype E] [DecidableEq E]
   intro ω _
   exact mul_le_mul_of_nonneg_left (hfg ω)
     (bondConfigWeight_nonneg p hp0 hp1 ω)
+
+/-- **R90 STRICT monotonicity of `E_{G_p}` in the integrand** — the
+    foundation lemma for the reversal-witness integration pattern.
+    If `f ω ≤ g ω` pointwise AND `f ω₀ < g ω₀` strictly at some
+    single `ω₀`, then under non-trivial open-edge probability
+    `p ∈ (0, 1)` the strict pointwise inequality at `ω₀` lifts to a
+    strict expectation inequality `E_{G_p}[f] < E_{G_p}[g]`.
+
+    Why: the expectation is `∑ ω, w(ω) · h(ω)` with `h := g - f ≥ 0`
+    pointwise and `h ω₀ > 0`; under `0 < p < 1` we have
+    `0 < w(ω₀)` (`bondConfigWeight_pos`), so the `ω₀` term
+    contributes a strict positive amount to the sum, while every
+    other term is `≥ 0`.  This is the strict-`<` analogue of
+    `percExpectation_mono` and is what every "reversal lifts
+    pointwise → reversal lifts in expectation" argument needs.
+
+    Mathlib lemma: `Finset.sum_lt_sum_of_nonempty` with a strict-at-
+    one + everywhere-`≤` partition; we use the explicit `lt_iff_le_and_ne`
+    decomposition (`≤` from `Finset.sum_le_sum`; `≠` from the strict
+    contribution at `ω₀`). -/
+theorem percExpectation_lt_of_pointwise_le_strict_at_one
+    {E : Type} [Fintype E] [DecidableEq E]
+    (p : ℝ) (hp0 : 0 < p) (hp1 : p < 1) (f g : BondConfig E → ℝ)
+    (hfg : ∀ ω : BondConfig E, f ω ≤ g ω)
+    (ω₀ : BondConfig E) (hω₀ : f ω₀ < g ω₀) :
+    percExpectation p f < percExpectation p g := by
+  unfold percExpectation
+  -- Pointwise per-term inequality `w * f ≤ w * g`.
+  have h_term_le : ∀ ω : BondConfig E,
+      bondConfigWeight p ω * f ω ≤ bondConfigWeight p ω * g ω := by
+    intro ω
+    exact mul_le_mul_of_nonneg_left (hfg ω)
+      (bondConfigWeight_nonneg p hp0.le hp1.le ω)
+  -- Strict at ω₀: positive weight × strict pointwise gap.
+  have hw₀ : 0 < bondConfigWeight p ω₀ := bondConfigWeight_pos p hp0 hp1 ω₀
+  have h_term_strict :
+      bondConfigWeight p ω₀ * f ω₀ < bondConfigWeight p ω₀ * g ω₀ :=
+    mul_lt_mul_of_pos_left hω₀ hw₀
+  -- Lift via Finset.sum_lt_sum_of_lt_of_le (everywhere `≤`, one strict `<`).
+  exact Finset.sum_lt_sum (fun ω _ => h_term_le ω)
+    ⟨ω₀, Finset.mem_univ _, h_term_strict⟩
 
 /-! ## 5. Restricted (sub-event) expectation `E_{G_p}[· ; S]` and the
    cluster-size partition.

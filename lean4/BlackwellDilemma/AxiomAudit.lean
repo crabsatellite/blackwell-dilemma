@@ -190,13 +190,14 @@ namespace BlackwellDilemma.AxiomAudit
 --  * `gap_principal_monotone_in_kappa`: composes 2 atoms (paper proof
 --    line 626, 634) — `fosd_induces_derivative_domination_OPEN` +
 --    `argmax_monotone_under_derivative_domination_OPEN`.
---  * `gap_principal_regime_bifurcation`: composes 2 sub-claims (paper
---    proof line 627, 636-640) — `W_bar_mixture_decomposition` (R63
---    derived theorem composing `aboveThresholdWelfare` +
---    `belowThresholdWelfare` carriers + `W_bar_eq_mixture_OPEN` structural
---    eq + `aboveThresholdWelfare_monotone_OPEN` smaller wA +
---    `belowThresholdWelfare_eventually_decreasing_OPEN` smaller wA) +
---    `non_concave_triple_from_mixture_OPEN`.
+--  * `gap_principal_regime_bifurcation` (R90 sound-fix-aligned):
+--    direct application of `non_concave_triple_W_bar_OPEN`. The R63
+--    chain via `non_concave_triple_from_mixture_OPEN(W_bar_mixture_decomposition)`
+--    rested on a counterexample-falsifying axiom (R90 SOUNDNESS-DEFECT
+--    FIX); the new direct atom is paper-faithful (paper line 640
+--    valley triple stipulation directly on `W_bar`). The R63 derived
+--    theorem `W_bar_mixture_decomposition` (paper line 638 mixture
+--    identity) remains as a separate fact in its own right.
 --  * `gap_disclosure_full_suboptimal`: composes 2 atoms (paper proof
 --    line 645, 652-656) — `averaged_reversal_overshoot_positive_OPEN` +
 --    `finite_beta_above_limit_from_overshoot_OPEN`.
@@ -578,11 +579,14 @@ namespace BlackwellDilemma.AxiomAudit
 -- new smaller atoms + 1 new opaque carrier). New derived theorems +
 -- new smaller atoms + new carrier surface here for kernel-purity
 -- baseline + audit-chain visibility:
---  * `gap_wrongness` (R60 re-derivation): composes the new smaller
---    atoms `wrongness_high_beta_welfare_floor_atom_OPEN` (paper stage 1
---    V_dyn-dominance + greedy concentration) +
+--  * `gap_wrongness` (R60 re-derivation; R90 sound-fix-aligned chain):
+--    composes the new smaller atoms
+--    `wrongness_high_beta_welfare_convergence_atom_OPEN` (paper stage 1
+--    welfare convergence `W(β) → V_dyn(u_1)` — R90 SOUNDNESS FIX
+--    replacing prior vacuous floor signature) +
 --    `wrongness_misalignment_reversal_atom_OPEN` (paper stage 2 reversal
---    witness) via the welfare-floor existential. Replaces retired
+--    witness, R90 antecedent strengthened to convergence form) via the
+--    convergence existential. Replaces retired
 --    `topology_blind_wrongness_atom_OPEN` (R44 MOST EGREGIOUS). Already
 --    printed at line 352 above.
 --  * `topo_loss_below_envelope_exists` (R60 derived theorem): new Cat 1
@@ -606,7 +610,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- `topo_loss_on_giant_below_envelope_exists` + the
 -- signature-corrected atom `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`,
 -- both printed in the R86 section below.
-#print axioms BlackwellDilemma.wrongness_high_beta_welfare_floor_atom_OPEN
+#print axioms BlackwellDilemma.wrongness_high_beta_welfare_convergence_atom_OPEN
 #print axioms BlackwellDilemma.wrongness_misalignment_reversal_atom_OPEN
 #print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst
 #print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst_pos_above_pc_OPEN
@@ -1392,17 +1396,24 @@ namespace BlackwellDilemma.AxiomAudit
 -- concretising those carriers as G-conditional integrals of
 -- `agentWelfare`, which needs a measure-theoretic distribution-G
 -- integration framework not yet in scope.  The
--- `non_concave_triple_from_mixture_OPEN` atom has a SOUNDNESS DEFECT
+-- `non_concave_triple_from_mixture_OPEN` atom HAD a SOUNDNESS DEFECT
 -- (the antecedent `monotone f + eventually-decreasing g + W_bar = f+g`
--- does not imply a non-concave triple — counterexample `f β = β`,
+-- did not imply a non-concave triple — counterexample `f β = β`,
 -- `g β = -β`, `W_bar = 0` satisfies the antecedent without exhibiting
--- a valley); flagged for R90+ signature correction (R83/R86/R87
--- precedent — fix the over-strong/false signature, prove the corrected
--- claim).  The `wrongness_high_beta_welfare_floor_atom_OPEN` atom has
--- a SIGNATURE WEAKNESS (the `∃ Wlim` existential is trivially closeable
--- with `Wlim = 0` by `agentWelfare_mem_unitInterval`'s lower bound,
--- which does NOT capture the paper's stated `Wlim = V_dyn(u_1)` content);
--- not closed here pending signature strengthening.  The
+-- a valley); R90 FIXED via signature correction (R83/R86/R87 precedent)
+-- — replaced with the paper-faithful direct atom
+-- `non_concave_triple_W_bar_OPEN` (no antecedent — paper line 640
+-- stipulates the W_bar valley triple directly).  The
+-- `wrongness_high_beta_welfare_floor_atom_OPEN` atom HAD a SIGNATURE
+-- WEAKNESS (the `∃ Wlim` existential was trivially closeable with
+-- `Wlim = 0` by `agentWelfare_mem_unitInterval`'s lower bound, which
+-- did NOT capture the paper's stated convergence content); R90 FIXED
+-- via signature strengthening — replaced with the paper-faithful
+-- `wrongness_high_beta_welfare_convergence_atom_OPEN`
+-- (`∃ Wlim, Tendsto welfare atTop (nhds Wlim)` — non-trivially
+-- discharges paper line 348/352/368 convergence) + R90 antecedent
+-- strengthening on `wrongness_misalignment_reversal_atom_OPEN` to take
+-- convergence as antecedent (not vacuous floor).  The
 -- `conditional_subproblem_blackwell_applicable_OPEN` atom references
 -- `conditionalWelfareOnR` (a SEPARATE opaque carrier from
 -- `agentWelfare`); closeable only if that carrier is ALSO concretised
@@ -1412,5 +1423,32 @@ namespace BlackwellDilemma.AxiomAudit
 -- the two new R89 `agentRewardKernel_*` structural equations.
 #print axioms BlackwellDilemma.FiveState.bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
 #print axioms BlackwellDilemma.FiveState.welfare_bounded_below_inflection_OPEN
+
+-- R90 reversal-witness pattern (sister to R88 monotonicity foundation).
+-- 4 reversal-existence wA atoms closed via a single shared infrastructure:
+--   (a) Percolation.lean strict-`<` integration lemma
+--       `percExpectation_lt_of_pointwise_le_strict_at_one` (Cat 1 — uses
+--       new `bondConfigWeight_pos` lemma, which requires `0 < p < 1`);
+--   (b) Types.lean foundation derived theorem
+--       `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
+--       (lifts kernel pointwise-`≤`-with-strict-witness to welfare-strict-
+--       reversal under non-trivial percolation);
+--   (c) New Cat 3 §3.4.3 atom `blockingProb_strict_in_open_unit_interval`
+--       (paper Definition 2.1 — non-trivial bond percolation `p ∈ (0, 1)`);
+--   (d) 4 paper-stipulated kernel-level reversal-witness structural
+--       equations (Cat 3 §3.4.3, one per reversal atom).
+-- Each previously-wA atom now becomes a derived `theorem` composing
+-- (b) with the corresponding kernel atom from (d).
+--
+-- `#print axioms` on each R90 closure = kernel axioms + the
+-- `AgentEdgeIdx` carrier + its `Fintype`/`DecidableEq` instances + the
+-- `agentRewardKernel` carrier + the relevant kernel reversal-witness
+-- structural equation + `blockingProb` + `blockingProb_strict_in_open_unit_interval`
+-- (paper-stipulated R90 atom) — NO workingAssumption axiom remains.
+#print axioms BlackwellDilemma.agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part1
+#print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_present
+#print axioms BlackwellDilemma.gap_general_tree
+#print axioms BlackwellDilemma.wrongness_misalignment_reversal_atom_OPEN
 
 end BlackwellDilemma.AxiomAudit
