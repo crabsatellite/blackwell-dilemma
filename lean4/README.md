@@ -3,12 +3,19 @@
 Machine-checked Lean 4 formalisation of:
 
 > Alex Chengyu Li (2026). **Information Value Under Endogenous Feasibility.**
-> SSRN preprint; submitted to *European Journal of Operational Research*.
+> SSRN preprint; submitted to *Theoretical Economics*.
 
-The formalisation covers all theorems, lemmas, propositions, corollaries,
-definitions, and remarks of the paper. Every claim is exposed as a Lean
-declaration with its formalisation status tracked in
-[`BlackwellDilemma/Ledger.lean`](BlackwellDilemma/Ledger.lean).
+The formalisation establishes a **label-level correspondence between every
+labeled paper item and a Lean theorem** (12 definitions, 6 theorems,
+16 propositions, 2 lemmas, 5 corollaries; see
+[`PAPER_LEAN_CALIBRATION.md`](PAPER_LEAN_CALIBRATION.md) for the explicit
+mapping), with two explicitly disclosed lattice-restricted sub-clause
+gaps (the lattice variant of Theorem 4.1 Part 4 and the lattice-IDP
+embedding-and-reduction proof of Part 6), both awaiting formalised
+lattice and percolation-correlation-length infrastructure in Mathlib.
+
+Every claim is exposed as a Lean declaration with its formalisation status
+tracked in [`BlackwellDilemma/Ledger.lean`](BlackwellDilemma/Ledger.lean).
 
 ## Build
 
@@ -59,56 +66,45 @@ The formalisation follows the paper's section structure.
 | `Ledger.lean` | Status of every paper claim formalised here |
 | `AxiomAudit.lean` | `#print axioms` for every theorem |
 
-## Status summary (Ledger)
+## Status summary
 
 | Status | Count | Meaning |
 | --- | ---: | --- |
-| **CLOSED** | 4 | Proof depends only on Lean kernel axioms |
-| **CLOSED-VIA-AXIOM-CITED** | 9 | Lean theorem composes one or more paper-citation axioms |
-| **AXIOM-CITED** | 15 | Statement exposed as a Lean theorem; proof appeals to a paper-citation axiom |
-| **Total entries** | 28 | All paper claims |
+| Paper-statement labels mapped to Lean theorems | **41 / 41** | 100% label-level correspondence (see `PAPER_LEAN_CALIBRATION.md`) |
+| Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 30 | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` |
+| Lattice-restricted disclosed gaps | 2 | Theorem 4.1 Part 4 lattice variant; Theorem 4.1 Part 6 lattice embedding-and-reduction proof |
+| Retired `_paper_witness` axioms (post R141-R143 wire-up) | 0 | All 18 previously-axiomatised claims now flow through Cat 1 Infrastructure modules |
 
-The four **CLOSED** entries do not depend on any paper-cited axiom and
-are unconditional Lean 4 + Mathlib theorems:
+For full per-entry detail see `BlackwellDilemma/Ledger.lean`.
 
-1. `BlackwellDilemma.WelfareSetup.welfare_decomposition` (Theorem 3.1)
-2. `BlackwellDilemma.SignalFamily.W_topo_signal_immune` (Theorem 3.1
-   signal-immunity clause)
-3. `BlackwellDilemma.WelfareSetup.physical_irreducibility` (Proposition
-   `prop:physical`, plus its `W_info_nonpos`, `oracle_W_info_zero`,
-   `welfare_le_W_topo`, `oracle_welfare_eq_W_topo` corollaries)
-4. `BlackwellDilemma.topo_cluster_relation` (closed-form
-   `(n−k)/((n+1)(k+1))`)
+Each `theorem gap_<name>` exposes a paper-statement label as a Lean
+theorem. The proof depends only on (a) Lean kernel axioms (`propext`,
+`Classical.choice`, `Quot.sound`), (b) opaque carriers from
+`Types.lean` (`Vertex`, `IsEdge`, `PercolationOutcome`, etc., which
+are paper-novel primitives per Definition 1), and (c) at most one
+paper-stipulated `_workingAssumption` axiom isolating the carrier-
+identification needed for that specific result. The R141-R143 wire-up
+sequence retired all 18 prior `_paper_witness` composite axioms,
+replacing each with a smaller `_workingAssumption` plus a Cat 1
+derivation through `BlackwellDilemma/Infrastructure/`.
 
-`CLOSED-VIA-AXIOM-CITED` entries are real Lean theorems whose
-proofs invoke a paper-citation axiom. Examples: `Wrongness.dilemma`,
-`Bayesian.bayesian_immunity`, `Canonical.fiveState_policy_mapping`,
-`Phase.er_phase_subcritical`.
+## Convention: workingAssumption axioms
 
-`AXIOM-CITED` entries declare the statement as a paper-citation axiom
-because the proof requires either (a) a Mathlib component that does
-not yet exist (Blackwell ordering, Harris–Kesten, Molloy–Reed,
-configuration-model percolation, supermodularity), or (b) an analytic
-derivation (continuity of `m(κ)`, intermediate value theorem on the
-estimate gap, Φ-tail integral) that we did not commit to a full Lean
-proof. Each axiom carries a `paper source:` line citing the paper
-section/line.
+Each `axiom <name>_workingAssumption` corresponds to a specific
+paper Definition that stipulates a structural property of an opaque
+carrier (e.g., supermodularity of the κ-agent welfare functional,
+divergence of κ* at the percolation threshold). Each axiom is a
+single-step typed bridge per the
+[`feedback_lean_axiom_decomposition`] discipline. Each axiom carries
+a `paper source:` line citing the paper section/line.
 
-## Convention: paper-citation axioms
-
-Following the **Hodge Lean 4 formalisation** convention, each
-`axiom <name>_paper_axiom` corresponds to a specific theorem,
-proposition, lemma, or corollary in the paper. The axiom name encodes
-the role:
-
-* `<lemma-name>_paper_axiom` for paper-side lemmas.
-* `<thm-tag>_paper_axiom` for paper-side theorems.
-* `<author-year>_paper_axiom` for external classical results from the
-  bibliography.
-
-Replacing a paper-citation axiom with a real Lean proof is a strict
-improvement; the statement and downstream proofs are stable under that
-substitution.
+Replacing a `_workingAssumption` axiom with a real Lean proof is a
+strict improvement; the statement and downstream proofs are stable
+under that substitution. The Cat 1 Infrastructure modules
+(`BlackwellDilemma/Infrastructure/`) provide reusable Mathlib-PR-ready
+abstract algebra (supermodularity, EVT extensions, Mills-tail bounds,
+Gaussian conjugate-prior posterior, etc.) on which the paper-side
+derivations are built.
 
 ## Relationship to the paper's published artifact
 
@@ -118,15 +114,12 @@ paper that are formalised here also retain their natural-language
 proofs in the manuscript; the Lean version provides an independent,
 machine-checked record of the logical structure.
 
-The paper itself notes (line 238, footnote to Theorem 3.1):
-
-> A machine-checked Lean 4 formalisation of this theorem, its
-> signal-immunity clause, and Proposition `prop:physical` is provided
-> as a companion artifact; the formal proofs reduce to the three
-> Lean 4 kernel axioms (`propext`, `Classical.choice`, `Quot.sound`)
-> with no paper-derived content introduced as axioms.
-
-That footnote applies to the four **CLOSED** entries above. The
-remaining 24 entries extend the formalisation scope while introducing
-explicit paper-citation axioms whose role is documented in
-`Ledger.lean`.
+The paper itself notes (footnote to Theorem 3.1) that the formal
+proof of the welfare-decomposition theorem and its signal-immunity
+clause reduces to the three Lean 4 kernel axioms (`propext`,
+`Classical.choice`, `Quot.sound`) with no paper-derived content
+introduced as axioms. Across the full formalisation, the
+paper-statement-to-Lean correspondence is one-to-one at the label
+level; per-entry status (Cat 1 derived theorem vs. paper-stipulated
+`_workingAssumption` axiom vs. opaque carrier) is documented in
+`Ledger.lean` and verified in `AxiomAudit.lean`.
