@@ -826,6 +826,10 @@ axiom principalSampleBelow_weightedSum_eventually_decreasing :
         agentWelfare AgentType.kappaAgent β_low
           (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
 
+-- R101 RELOCATION: per-agent-optimal β* extension axioms MOVED to
+-- AFTER `perAgentOptimalAggregate` carrier declaration (line ~1487+);
+-- see the R101-block right before `perAgentOptimalAggregate_dominates_uniform_OPEN`.
+
 /-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
     paper line 638 explicitly asserts the below-threshold contribution
     is "eventually decreasing (reversal regime)" by the reversal
@@ -1480,34 +1484,75 @@ theorem differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN :
       differentiatedDisclosureWelfare G = perAgentOptimalAggregate G :=
   fun _ => rfl
 
-/-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
-    paper line 658 explicitly asserts the per-agent-optimum aggregate
-    `∫ W(β*(κ, α), κ, α) dG` dominates any uniform-β aggregate
-    `W̄(β̄*) = ∫ W(β̄*, κ, α) dG`. The pointwise rationale: for each
-    agent type `(κ, α)`, `W(β*(κ, α), κ, α) ≥ W(β̄*, κ, α)` by
-    definition of `β*` as the per-agent optimum; integrating against
-    `dG` preserves the inequality. This atomic stipulation captures
-    the paper-stated per-agent-pointwise-dominance content on the
-    new opaque carrier `perAgentOptimalAggregate`.
+/-! ### R101 per-agent-optimal β* extension to R92 framework -/
 
-    Encoding choice: extracted from the retired bundled
-    `differentiated_per_agent_optimum_dominates_uniform_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The retired atom bundled (a) the paper line 658 per-
-    agent-assignment formula identification (now a structural eq
-    above) and (b) the per-agent-pointwise-dominance content (this
-    smaller wA). The R63 decomposition surfaces both separately.
+/-- **R101** — per-agent-optimal β* on the above-threshold sample
+    (paper line 658 `β_i = β*(κ_i, α_i)`). Cat 3 §3.4.3 carrier per
+    discipline (paper-stipulated per-agent optimal β assignment).
+    永不 close. -/
+axiom principalSampleAboveBetaStar : principalSampleAbove → ℝ
 
-    Cat 3 sub-type: workingAssumption (paper-stated per-agent-
-    pointwise dominance integrated against `G`; pending Mathlib
-    measure-theoretic per-agent integration + per-agent-optimum
-    pointwise dominance; 必须 close before publication).
+/-- **R101** — per-agent-optimal β* on the below-threshold sample
+    (paper line 658, below-threshold sister). Cat 3 §3.4.3 carrier
+    per discipline. 永不 close. -/
+axiom principalSampleBelowBetaStar : principalSampleBelow → ℝ
 
-    paper source: Corollary `cor:disclosure` Part 2 proof, line 658
-    ("achieves `W̄_diff ≥ W̄(β̄*)` for any uniform `β̄*`"). -/
-axiom perAgentOptimalAggregate_dominates_uniform_OPEN :
+/-- **R101** Cat 3 §3.4.3 paper-stipulated structural equation:
+    `perAgentOptimalAggregate G` is the weighted-finite-sum realisation
+    of paper line 658's `∫ W(β*(κ,α), κ,α) dG` per-agent-optimal
+    aggregate. Cat 3 §3.4.3 gapDefinitional. 永不 close. -/
+axiom perAgentOptimalAggregate_eq_kappaAgent_integral :
+    ∀ G : ℝ → ℝ, perAgentOptimalAggregate G =
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent (principalSampleAboveBetaStar i)
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        agentWelfare AgentType.kappaAgent (principalSampleBelowBetaStar j)
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j))
+
+/-- **R101** Cat 3 §3.4.3 paper-stipulated structural equation:
+    at every above-threshold sample point, the per-agent-optimal β*ᵢ
+    yields welfare at least as great as ANY uniform β. 永不 close. -/
+axiom principalSampleAbove_per_agent_optimum_dominance :
+    ∀ i : principalSampleAbove, ∀ uniform_beta : ℝ,
+      agentWelfare AgentType.kappaAgent uniform_beta
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ≤
+        agentWelfare AgentType.kappaAgent (principalSampleAboveBetaStar i)
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+
+/-- **R101** Cat 3 §3.4.3 paper-stipulated structural equation:
+    below-threshold sister of `principalSampleAbove_per_agent_optimum_dominance`. -/
+axiom principalSampleBelow_per_agent_optimum_dominance :
+    ∀ j : principalSampleBelow, ∀ uniform_beta : ℝ,
+      agentWelfare AgentType.kappaAgent uniform_beta
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j) ≤
+        agentWelfare AgentType.kappaAgent (principalSampleBelowBetaStar j)
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)
+
+theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
     ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
-      W_bar uniform_beta ≤ perAgentOptimalAggregate G
+      W_bar uniform_beta ≤ perAgentOptimalAggregate G := by
+  intro G uniform_beta
+  -- W_bar uniform_beta = ∑ above-sample at uniform_beta + ∑ below-sample at uniform_beta
+  -- perAgentOptimalAggregate G = ∑ above-sample at β*ᵢ + ∑ below-sample at β*ⱼ
+  -- For each i: agentWelfare uniform_beta ≤ agentWelfare β*ᵢ (R101 dominance)
+  -- Sum preserves ≤ via Finset.sum_le_sum + non-negative weights
+  show aboveThresholdWelfare uniform_beta + belowThresholdWelfare uniform_beta ≤
+       perAgentOptimalAggregate G
+  rw [aboveThresholdWelfare_eq_kappaAgent_integral uniform_beta,
+      belowThresholdWelfare_eq_kappaAgent_integral uniform_beta,
+      perAgentOptimalAggregate_eq_kappaAgent_integral G]
+  apply add_le_add
+  · apply Finset.sum_le_sum
+    intro i _
+    exact mul_le_mul_of_nonneg_left
+      (principalSampleAbove_per_agent_optimum_dominance i uniform_beta)
+      (principalSampleAboveWeight_nonneg i)
+  · apply Finset.sum_le_sum
+    intro j _
+    exact mul_le_mul_of_nonneg_left
+      (principalSampleBelow_per_agent_optimum_dominance j uniform_beta)
+      (principalSampleBelowWeight_nonneg j)
 
 /-- **R63 derived theorem** (replaces retired
     `differentiated_per_agent_optimum_dominates_uniform_OPEN` axiom).

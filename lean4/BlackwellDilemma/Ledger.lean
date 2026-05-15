@@ -6946,6 +6946,64 @@ def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
     "R94 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework integral structural equations + new R94 paper-stipulated `principalSampleBoth_exceeds_zero_witness` atom."
   conditionalOn := []
 
+/-! ## R101 per-agent-optimal β* extension (5 entries enabling
+    `perAgentOptimalAggregate_dominates_uniform` closure). -/
+
+def entry_atom_principalSampleAboveBetaStar : GapEntry where
+  name := "principalSampleAboveBetaStar (paper-novel per-agent-optimal β* carrier; above-threshold)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (`β_i = β*(κ_i, α_i)` per-agent argmax)"
+  attackHistory := [ "R101 2026-05-15: Cat 3 paper-novel primitive carrier — per-agent-optimal β* on the above-threshold sample. 永不 close per discipline §3.4.3." ]
+  scope := "Opaque per-agent-optimal β* carrier on principalSampleAbove"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_principalSampleBelowBetaStar : GapEntry where
+  name := "principalSampleBelowBetaStar (paper-novel per-agent-optimal β* carrier; below-threshold)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658"
+  attackHistory := [ "R101 2026-05-15: Cat 3 paper-novel primitive carrier — below-threshold sister. 永不 close." ]
+  scope := "Opaque per-agent-optimal β* carrier on principalSampleBelow"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_perAgentOptimalAggregate_eq_kappaAgent_integral : GapEntry where
+  name := "perAgentOptimalAggregate_eq_kappaAgent_integral"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (`W̄_diff = ∫ W(β*(κ,α), κ,α) dG`)"
+  attackHistory := [ "R101 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation pinning `perAgentOptimalAggregate G` to the weighted-finite-sum realisation across the R92 above + below sample partition. Downstream consumer: `perAgentOptimalAggregate_dominates_uniform_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "perAgentOptimalAggregate G = weighted-finite-sum realisation over R92 above + below samples (paper line 658)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_principalSampleAbove_per_agent_optimum_dominance : GapEntry where
+  name := "principalSampleAbove_per_agent_optimum_dominance"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (`β_i = β*(κ_i, α_i)` per-agent argmax)"
+  attackHistory := [ "R101 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation for above-threshold sample's per-agent-β* dominance. Paper line 658 STIPULATES `β*(κ,α)` as per-agent argmax — paper-Def-stipulated optimum dominance. Downstream consumer: `perAgentOptimalAggregate_dominates_uniform_OPEN`. 永不 close per discipline §3.4.3." ]
+  scope := "Per-agent-β* dominance on above-threshold sample (paper line 658)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_principalSampleBelow_per_agent_optimum_dominance : GapEntry where
+  name := "principalSampleBelow_per_agent_optimum_dominance"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (per-agent argmax; below-threshold sister)"
+  attackHistory := [ "R101 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation; below-threshold sister of `principalSampleAbove_per_agent_optimum_dominance`. 永不 close." ]
+  scope := "Per-agent-β* dominance on below-threshold sample (paper line 658)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
 /-- W_bar_finite_above_limit_witness — R100 Cat 3 §3.4.4 NEW SMALLER
     workingAssumption (R91 §18 atomic-decomposition pattern). The
     substantive paper-line-656 finite-β-above-limit existence claim,
@@ -7289,10 +7347,10 @@ def entry_atom_differentiatedDisclosureWelfare_eq_perAgentOptimal : GapEntry whe
 /-- R63 NEW smaller paper-novel ATOMIC stipulation: paper line 658
     per-agent-pointwise dominance integrated against G. -/
 def entry_atom_perAgentOptimalAggregate_dominates_uniform : GapEntry where
-  name := "perAgentOptimalAggregate_dominates_uniform_OPEN"
-  status := GapStatus.gapOpen
+  name := "perAgentOptimalAggregate_dominates_uniform_OPEN [R101 derivedTheorem; closed via R101 per-agent-β* extension to R92 framework]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Corollary cor:disclosure Part 2 proof, line 658 (`achieves W̄_diff ≥ W̄(β̄*) for any uniform β̄*`)"
   attackHistory :=
     [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `differentiated_per_agent_optimum_dominates_uniform_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller substantive wA). Paper line 658 explicitly asserts `W̄_diff = ∫ W(β*(κ,α), κ,α) dG ≥ W̄(β̄*)` for any uniform β̄* via per-agent-pointwise dominance: for each agent `(κ, α)`, `W(β*(κ,α), κ,α) ≥ W(β̄*, κ,α)` by definition of β* as the per-agent optimum; integrating against dG preserves the inequality. Statement: `∀ G uniform_beta, W_bar uniform_beta ≤ perAgentOptimalAggregate G`. Strictly smaller than retired bundled atom — isolates only the per-agent-pointwise dominance content on the new perAgentOptimalAggregate carrier, leaving the per-agent-assignment formula identification to the structural eq sibling. Cat 1 reduction check: not Mathlib-derivable (depends on per-agent-optimum pointwise dominance + measure-theoretic per-agent integration). Cat 2 reduction check: paper-novel per-agent-aggregation framework. Hosted by `differentiated_per_agent_optimum_dominates_uniform` (Principal.lean) derived theorem." ]
@@ -8164,6 +8222,13 @@ def allGaps : List GapEntry := [
   entry_atom_principalSampleBoth_combined_convergence_witness,
   entry_atom_principalSampleBoth_valley_triple_witness,
   entry_atom_W_bar_finite_above_limit_witness,
+  -- R101 per-agent-β* extension entries (5 atoms enabling
+  -- perAgentOptimalAggregate_dominates_uniform closure).
+  entry_atom_principalSampleAboveBetaStar,
+  entry_atom_principalSampleBelowBetaStar,
+  entry_atom_perAgentOptimalAggregate_eq_kappaAgent_integral,
+  entry_atom_principalSampleAbove_per_agent_optimum_dominance,
+  entry_atom_principalSampleBelow_per_agent_optimum_dominance,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
