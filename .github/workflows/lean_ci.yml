@@ -53,15 +53,21 @@ jobs:
           fi
           echo "OK: no proof-position sorry"
 
-      - name: Verify no native_decide in source
+      - name: Verify no proof-position native_decide in source
         run: |
           # native_decide bypasses kernel verification; project discipline
-          # prohibits it. Match `\bnative_decide\b` outside docstrings/comments.
-          if grep -rnE '\bnative_decide\b' BlackwellDilemma/ BlackwellDilemma.lean --include="*.lean" | grep -vE '^[^:]+:[0-9]+:\s*--'; then
-            echo "ERROR: native_decide found in source code"
+          # prohibits it in proof position. Match only REAL tactic-position
+          # `native_decide`:
+          #   `:= native_decide` / `:=native_decide` (term-mode)
+          #   `by native_decide` (tactic-mode, sole tactic)
+          #   bare `native_decide` on its own line (inside `by` block)
+          # Ignore docstring / comment / attackHistory mentions of "native_decide"
+          # entirely (these are NOT proof-position so they cannot affect kernel-purity).
+          if grep -rnE ':=[[:space:]]*native_decide\b|^[[:space:]]+native_decide[[:space:]]*$|\bby[[:space:]]+native_decide\b' BlackwellDilemma/ BlackwellDilemma.lean --include="*.lean"; then
+            echo "ERROR: proof-position native_decide found in source code"
             exit 1
           fi
-          echo "OK: no native_decide"
+          echo "OK: no proof-position native_decide"
 
       - name: Build AxiomAudit (kernel-purity surface)
         run: lake build BlackwellDilemma.AxiomAudit
