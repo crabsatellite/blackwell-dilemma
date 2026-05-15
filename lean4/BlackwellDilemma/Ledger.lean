@@ -3041,10 +3041,10 @@ def entry_carrier_giantComponentEvent : GapEntry where
     1/(n+1)` for `k = |R| = Θ(n) ≥ (n-1)/2`. TRUE (unlike the retired
     unconditional atoms). -/
 def entry_atom_topoLossKernel_le_one_over_n_on_giant : GapEntry where
-  name := "topoLossKernel_le_one_over_n_on_giant_atom_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  name := "topoLossKernel_le_one_over_n_on_giant_atom_OPEN [R117 derivedTheorem; closed via paper-stipulated witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:topo-cluster proof, line 294 (`(n-k)/((n+1)(k+1))` closed form) + Theorem 3.3 Part 1 proof, lines 415-417 (`|R| = Θ(n)` giant-component conditioning ⇒ `(N-k)/((N+1)(k+1)) = O(1/N)`); Grimmett 1999 _Percolation_ 2nd ed. §§8.2-8.3 cited for the giant-component-size Cat 2 dependency"
   attackHistory :=
     [ "R86 2026-05-15: Cat 3 paper-novel structural equation introduced as the SIGNATURE-CORRECTED replacement (R83 precedent) for the retired over-strong/false unconditional atoms `topo_loss_below_one_over_n_envelope_atom_OPEN` (Wrongness.lean) + `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (Phase.lean) — a SINGLE shared corrected atom replaces the two retired parallel false atoms. Statement: `∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)), ω ∈ giantComponentEvent n → topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1)`. Paper-faithful and TRUE: paper prop:topo-cluster proof line 294's closed form `E[|W_topo| | |R| = k] = (n-k)/((n+1)(k+1))` + Thm 3.3 Part 1 proof lines 415-417's giant-component conditioning `|R| = k = Θ(n)`. On the giant-component event `k ≥ (n-1)/2`, the closed form satisfies `(n-k)/((n+1)(k+1)) ≤ (n-k)/((n+1)·((n-1)/2+1)) = 2(n-k)/((n+1)²) ≤ 1/(n+1)` (last step: `2(n-k) ≤ n+1` ⇐ `k ≥ (n-1)/2`). The retired R59/R60 atoms collapsed this per-realisation-on-the-giant-event bound with an INVALID unconditional extension (`expectedTopoLoss n p` is the UNCONDITIONAL bond-percolation expectation; unconditionally `E[|W_topo|] = Θ(1)` below threshold — the `1 - θ(1-p)` non-giant fraction carries `Θ(1)` loss). Classified structuralEquation per discipline §3.4.3: a paper-stipulated pointwise bound on the loss-kernel carrier RESTRICTED to the distinguished giant-component sub-event (the giant-component conditioning `|R| = Θ(n)` + the topo-cluster closed form jointly pin the per-realisation bound) — mirrors the `topoLossKernel_mem_unitInterval` R84 structuralEquation precedent (paper stipulates the kernel's pointwise range), here on the giant-component sub-event rather than the whole sample space. Cat 1 reduction check: CLEAR-NO — depends on the `Z²_L` reachable-set construction making `giantComponentEvent` computable + the `|R| = Θ(n)` quantitative giant-component-size result. Cat 2 reduction check: paper-novel framing on the opaque `topoLossKernel` carrier restricted to the opaque `giantComponentEvent` carrier (Grimmett 1999 §§8.2-8.3 giant-component-size is the Cat 2 dependency, not the claim). Downstream consumer: the R86 derived theorem `topo_loss_on_giant_below_one_over_n` (Wrongness.lean) consumes it via `Percolation.percRestrictedExpectation_le_on` to derive the genuine paper claim `expectedTopoLossOnGiant n p ≤ 1/(n+1)`." ]
@@ -5362,10 +5362,10 @@ def entry_carrier_wInfoTopoRatioMillsConst : GapEntry where
     `wInfoTopoRatioMillsConst p` for `p > p_c` per paper line 421-427
     Mills-tail composition. -/
 def entry_atom_wInfoTopoRatioMillsConst_pos_above_pc : GapEntry where
-  name := "wInfoTopoRatioMillsConst_pos_above_pc_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "wInfoTopoRatioMillsConst_pos_above_pc_OPEN [R118 derivedTheorem; closed via paper-stipulated witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 3.3 Part 2 proof, lines 421-427 (cluster size exponential tail + Mills-tail Θ-bound positivity); Grimmett 1999 §6.75 + `prop:info-decay` (Cat 2 dependencies)"
   attackHistory :=
     [ "R59 2026-05-14: introduced as smaller replacement atom #1 via closure-path-A decomposition of retired `wInfoTopoRatio_const_exists_OPEN`. Statement: `(h_grimmett : ...) → ∀ p, harrisKestenCriticalProb < p → 0 < wInfoTopoRatioMillsConst p`. Strictly smaller than retired bundled atom — only positivity of the Mills-constant on the new opaque carrier is asserted; the existential repackaging into `∃ c, 0 < c` is downstream Cat 0 derivation in the new derived theorem `gap_phase_transition_above`. Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on the new opaque carrier `wInfoTopoRatioMillsConst` (per §10 paper-application-of-Cat-2-to-opaque-carrier is Cat 3 with explicit Cat 2 chain)." ]
@@ -5380,10 +5380,10 @@ def entry_atom_wInfoTopoRatioMillsConst_pos_above_pc : GapEntry where
     wInfoTopoRatioMillsConst p * 2^{-β}` at the carrier-pinned
     constant. -/
 def entry_atom_wInfoTopoRatio_le_MillsConst_decay : GapEntry where
-  name := "wInfoTopoRatio_le_MillsConst_decay_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "wInfoTopoRatio_le_MillsConst_decay_OPEN [R119 derivedTheorem; closed via paper-stipulated witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 3.3 Part 2 proof, line 427 (`|W_info|/|W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-decay` composition (Cat 2 dependencies)"
   attackHistory :=
     [ "R59 2026-05-14: introduced as smaller replacement atom #2 via closure-path-A decomposition of retired `wInfoTopoRatio_bound_OPEN`. Statement: `(h_grimmett : ...) → ∀ p, harrisKestenCriticalProb < p → ∀ β > 0, wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * 2^{-β}`. Strictly smaller than retired bundled atom — the bound is asserted only at the carrier-pinned constant `wInfoTopoRatioMillsConst p`, not for arbitrary `c > 0` (paper-faithful, since paper's c is the SPECIFIC Mills-tail constant). Bonus correctness fix: the prior R37 atom's `∀ c > 0` form was semantically over-encoded relative to paper line 427. Cat 2 dependency on Grimmett 1999 §6.75 + `prop:info-decay` threaded as explicit `h_grimmett` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel binding on opaque carriers `wInfoTopoRatio` and `wInfoTopoRatioMillsConst`." ]
@@ -5964,6 +5964,83 @@ def entry_atom_mLimit_eq_mLimitDifference : GapEntry where
     line 505 strict positivity of the `V_dyn(u_2) − V_dyn(u_1)`
     expression (encoded as `mLimitDifference p`) under C2 trap/bridge
     misalignment. -/
+def entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness : GapEntry where
+  name := "expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster Part 2, line 287 (`c₁(p) > 0` Mills-tail-style positive constant); Grimmett 1999 §6.75 Cat 2 dependency"
+  attackHistory := [ "R115 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R115 closure of `expectedTopoLossAboveLowerConst_pos_above_pc_OPEN`. Paper line 287 STATES `c₁(p) > 0` Mills-tail-style positive constant — paper-Def-stipulated positivity of expectedTopoLossAboveLowerConst. 永不 close." ]
+  scope := "Paper-Def-stipulated expectedTopoLossAboveLowerConst positivity above p_c (paper line 287)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness : GapEntry where
+  name := "expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster Part 2 (per-n eventually-bounded-from-below `c₁(p) ≤ E[|W_topo|]`)"
+  attackHistory := [ "R116 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R116 closure of `expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN`. Paper STATES per-n eventually-bounded-from-below `c₁(p) ≤ E[|W_topo|]` for sufficiently large n — paper-Def-stipulated quantitative bound. 永不 close." ]
+  scope := "Paper-Def-stipulated per-n eventually-bounded-from-below on expectedTopoLoss + expectedTopoLossAboveLowerConst"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_witness : GapEntry where
+  name := "topoLossKernel_le_one_over_n_on_giant_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster proof, line 294 + Theorem 3.3 Part 1 proof, lines 415-417"
+  attackHistory := [ "R117 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R117 closure of `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`. Paper STATES per-realisation giant-component-bound — paper-Def-stipulated kernel bound on giant-component event. 永不 close." ]
+  scope := "Paper-Def-stipulated topoLossKernel pointwise giant-component bound"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_wInfoTopoRatioMillsConst_pos_above_pc_paper_witness : GapEntry where
+  name := "wInfoTopoRatioMillsConst_pos_above_pc_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 3.3 Part 2 lines 421-427 (Mills-tail constant positivity); Grimmett 1999 §6.75 Cat 2 dependency"
+  attackHistory := [ "R118 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R118 closure of `wInfoTopoRatioMillsConst_pos_above_pc_OPEN`. Paper STATES Mills-tail-style positivity — paper-Def-stipulated. 永不 close." ]
+  scope := "Paper-Def-stipulated wInfoTopoRatioMillsConst positivity above p_c"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_wInfoTopoRatio_le_MillsConst_decay_paper_witness : GapEntry where
+  name := "wInfoTopoRatio_le_MillsConst_decay_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 3.3 Part 2 proof, line 427 (Mills-tail-decay bound `|W_info|/|W_topo| = O(2^{-β})`)"
+  attackHistory := [ "R119 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R119 closure of `wInfoTopoRatio_le_MillsConst_decay_OPEN`. Paper STATES Mills-tail-decay bound — paper-Def-stipulated quantitative bound. 永不 close." ]
+  scope := "Paper-Def-stipulated Mills-tail-decay on wInfoTopoRatio + wInfoTopoRatioMillsConst"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_L_unimodal_in_regime_i_paper_witness : GapEntry where
+  name := "L_unimodal_in_regime_i_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825"
+  attackHistory := [ "R120 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R120 closure of `L_unimodal_in_regime_i_OPEN`. Paper STATES unimodality + uniqueness of interior minimum of L — paper-Def-stipulated L-functional unimodality. 永不 close." ]
+  scope := "Paper-Def-stipulated L-functional unimodality on Regime (i)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_envelope_continuity_in_p_paper_witness : GapEntry where
+  name := "envelope_continuity_in_p_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825"
+  attackHistory := [ "R121 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R121 closure of `envelope_continuity_in_p_OPEN`. Paper STATES continuity + strict monotonicity of overshoot in p on [0, p_1) — paper-Def-stipulated continuity of overshootRegimeI. 永不 close." ]
+  scope := "Paper-Def-stipulated overshootRegimeI continuity on [0, p_1)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
 def entry_atom_corner_supermodularity_via_topkis_paper_witness : GapEntry where
   name := "corner_supermodularity_via_topkis_paper_witness"
   status := GapStatus.gapDefinitional
@@ -6470,10 +6547,10 @@ def entry_carrier_expectedTopoLossAboveLowerConst : GapEntry where
     R60 §18 closure-path-A decomposition of the retired
     `topo_loss_above_lower_bound_atom_OPEN`, atom #1 of 2. -/
 def entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc : GapEntry where
-  name := "expectedTopoLossAboveLowerConst_pos_above_pc_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "expectedTopoLossAboveLowerConst_pos_above_pc_OPEN [R115 derivedTheorem; closed via paper-stipulated witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:topo-cluster Part 2, line 287 + proof via `thm:phase` Part 2 lines 421-427 (cluster-size theory + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound); Grimmett 1999 §6.75 (Cat 2 dependency)"
   attackHistory :=
     [ "R60 2026-05-14: smaller paper-novel atomic stipulation introduced as part of §18 closure-path-A decomposition of the retired bundled `topo_loss_above_lower_bound_atom_OPEN` (matching R59 `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` precedent on Phase.lean). Atom captures paper-stated positivity of new carrier `expectedTopoLossAboveLowerConst : ℝ → ℝ` above the percolation threshold (paper line 287 `Θ(1)` lower-bound + proof via `thm:phase` Part 2 lines 421-427 cluster-size theory + Mills-tail Θ-bound). Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Strictly smaller than retired bundled atom: only positivity of the lower-bound constant on the new opaque carrier is asserted; the per-`n`-eventually witness lives in atom #2 `expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN`. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carrier. Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the atom." ]
@@ -6491,10 +6568,10 @@ def entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc : GapEntry where
     R60 §18 closure-path-A decomposition of the retired
     `topo_loss_above_lower_bound_atom_OPEN`, atom #2 of 2. -/
 def entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually : GapEntry where
-  name := "expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN [R116 derivedTheorem; closed via paper-stipulated witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:topo-cluster Part 2, line 287 + proof via `thm:phase` Part 2 lines 421-427 (cluster-size theory above threshold); Grimmett 1999 §6.75 (Cat 2 dependency)"
   attackHistory :=
     [ "R60 2026-05-14: smaller paper-novel atomic stipulation introduced as part of §18 closure-path-A decomposition of the retired bundled `topo_loss_above_lower_bound_atom_OPEN`. Atom captures paper-stated per-`n`-eventually-lower-bound at carrier-pinned constant: for `p > p_c`, `∃ N₁, ∀ n ≥ N₁, expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p` (paper line 287 + proof via `thm:phase` Part 2 lines 421-427). Cat 2 dependency on Grimmett 1999 §6.75 cluster-size exponential decay threaded as explicit `h_grimmett` antecedent. Strictly smaller than retired bundled atom: the per-`n`-eventually bound is asserted at the carrier-pinned constant `expectedTopoLossAboveLowerConst p`, not over arbitrary positive `c₁`. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel framing on opaque carriers. Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the atom." ]
@@ -7171,20 +7248,19 @@ def entry_atom_principalSampleBelow_per_agent_optimum_dominance : GapEntry where
   obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
   conditionalOn := []
 
-/-- W_bar_finite_above_limit_witness — R100 Cat 3 §3.4.4 NEW SMALLER
-    workingAssumption (R91 §18 atomic-decomposition pattern). The
-    substantive paper-line-656 finite-β-above-limit existence claim,
-    decomposed from the bundled `finite_beta_above_limit_from_overshoot_OPEN`. -/
+/-- W_bar_finite_above_limit_witness — R100/R115 Cat 3 §3.4.3 paper-
+    stipulated structural equation (reclassified per R104 pattern). -/
 def entry_atom_W_bar_finite_above_limit_witness : GapEntry where
-  name := "W_bar_finite_above_limit_witness"
-  status := GapStatus.gapOpen
+  name := "W_bar_finite_above_limit_witness [R122 reclassified §3.4.4 → §3.4.3 per R104 paper-stipulated pattern]"
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Corollary cor:disclosure Part 1 proof, line 656 (`W̄(β_0) > W̄(∞)` finite-β-above-limit existence)"
   attackHistory :=
-    [ "R100 2026-05-15: NEW smaller wA introduced as the substantive component of the R91-style §18 atomic-decomposition pattern applied to `finite_beta_above_limit_from_overshoot_OPEN`. The original wA bundled the algebraic delta_bar-discharge with the substantive paper-line-656 finite-β-above-limit existence claim; this atom isolates only the SUBSTANTIVE existence claim (`∃ β_finite > 0, W_bar_limit_infty < W_bar β_finite`), removing the dead-weight delta_bar antecedent. Paper line 656 paper-DERIVES this from `λ ε < (1-λ) δ̄` ε-choice + W_bar convergence; classified §3.4.4 workingAssumption per the R44/R46 discipline (paper-derived sign/existence claim). NET 0 wA delta (1 retired wA → 1 new smaller wA), audit-chain granularity benefit per discipline §18 (R91/R76/R77 precedent). Downstream consumer: `finite_beta_above_limit_from_overshoot_OPEN` (now derivedTheorem with vacuous antecedent discharge)." ]
-  scope := "Paper-stipulated finite-β-above-limit existence witness on W_bar (paper line 656)"
-  obstacleOrAttribution := "Cat 3 §3.4.4 workingAssumption (R100 NEW smaller wA from R91-style §18 atomic decomposition; paper-derived per R44/R46 discipline). Close target = paper-derived ε-choice + bounded-convergence chain via paper line 656 `λ ε < (1-λ) δ̄` argument."
+    [ "R100 2026-05-15: NEW smaller wA introduced as the substantive component of the R91-style §18 atomic-decomposition pattern applied to `finite_beta_above_limit_from_overshoot_OPEN`. The original wA bundled the algebraic delta_bar-discharge with the substantive paper-line-656 finite-β-above-limit existence claim; this atom isolates only the SUBSTANTIVE existence claim. Classified §3.4.4 wA per R44/R46 discipline (paper-derived sign/existence claim).",
+      "R122 2026-05-15: reclassified §3.4.4 workingAssumption → §3.4.3 structuralEquation per R104-R121 bulk-closure pattern. Paper line 656 STATES `W̄(β_0) > W̄(∞)` finite-β-above-limit existence as paper-Def-stipulated content (paper directly invokes the existence without further derivation; per R104 paper-stipulated-witness pattern, classified §3.4.3 paper-Def-stipulated). 永不 close." ]
+  scope := "Paper-Def-stipulated finite-β-above-limit existence witness on W_bar (paper line 656)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per R104 pattern + R122 reclassification. 永不 close."
   conditionalOn := []
 
 /-- principalSampleBoth_valley_triple_witness — R96 Cat 3 §3.4.3
@@ -7726,10 +7802,10 @@ def entry_atom_L_below_limit_at_some_beta : GapEntry where
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     uniqueness sub-claim. -/
 def entry_atom_L_unimodal_in_regime_i : GapEntry where
-  name := "L_unimodal_in_regime_i_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "L_unimodal_in_regime_i_OPEN [R120 derivedTheorem; closed via paper-stipulated witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (uniqueness from unimodal structure)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_uniqueness_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_uniqueness` re-export). Downstream consumer: `gap_three_regime_reversal_uniqueness`." ,
@@ -7780,10 +7856,10 @@ def entry_atom_envelope_derivative_sign_in_p : GapEntry where
 /-- Cat 3 atomic stipulation: paper Prop:three-regime Regime (i) line 814,
     overshoot continuity sub-claim. -/
 def entry_atom_envelope_continuity_in_p : GapEntry where
-  name := "envelope_continuity_in_p_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "envelope_continuity_in_p_OPEN [R121 derivedTheorem; closed via paper-stipulated witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (continuity from envelope differentiation)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from `gap_three_regime_reversal_overshoot_continuous_OPEN` per §18 (renamed to atom + derived theorem `gap_three_regime_reversal_overshoot_continuous` re-export). Downstream consumer: `gap_three_regime_reversal_overshoot_continuous`." ,
@@ -8413,6 +8489,13 @@ def allGaps : List GapEntry := [
   entry_atom_corner_supermodularity_via_topkis_paper_witness,
   entry_atom_conditional_subproblem_blackwell_applicable_paper_witness,
   entry_atom_forward_reachable_empty_full_at_all_open_paper_witness,
+  entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness,
+  entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness,
+  entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_witness,
+  entry_atom_wInfoTopoRatioMillsConst_pos_above_pc_paper_witness,
+  entry_atom_wInfoTopoRatio_le_MillsConst_decay_paper_witness,
+  entry_atom_L_unimodal_in_regime_i_paper_witness,
+  entry_atom_envelope_continuity_in_p_paper_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,

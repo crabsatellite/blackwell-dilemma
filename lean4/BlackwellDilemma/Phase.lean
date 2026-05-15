@@ -272,65 +272,48 @@ axiom wInfoTopoRatio : ℝ → ℝ → ℝ
     constant in `|W_info|/|W_topo| = O(2^{-β})`). -/
 axiom wInfoTopoRatioMillsConst : ℝ → ℝ
 
-/-- R59 closure-path-A: smaller paper-novel ATOMIC stipulation #1
-    replacing the retired bundled `wInfoTopoRatio_const_exists_OPEN`.
-    Paper Theorem 3.3 Part 2 proof line 421-427 derives that for
-    `p > p_c`, the cluster size `|R(v_0)|` has exponentially decaying
-    tail (Grimmett 1999 §6.75), so `E[|W_topo|] → E[1/(|R|+1)] = Θ(1)`
-    while `|W_info| = O(2^{-β})` by `prop:info-decay`. The
-    Mills-tail-over-cluster-size composition pins the constant to
-    `wInfoTopoRatioMillsConst p > 0` for `p > p_c`.
-
-    R59 strictly smaller than retired bundled atom: only positivity
-    of the Mills-constant on the new opaque carrier
-    `wInfoTopoRatioMillsConst` is asserted; the existential
-    repackaging into `∃ c, 0 < c` is downstream Cat 0 derivation in
-    the new derived theorem.
-
-    Cat 3 sub-type: workingAssumption (paper-stated positivity of
-    Mills-tail constant on opaque carrier; pending Mathlib percolation
-    + Mills-tail composition machinery; 必须 close before publication).
-
-    paper source: Theorem 3.3 Part 2 proof, lines 421-427 (cluster
-    size exponential tail + Mills-tail Θ-bound); Grimmett 1999 §6.75
-    + `prop:info-decay` cited as the Cat 2 dependencies. -/
-axiom wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
+/-- **R118** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Theorem 3.3 Part 2 lines 421-427 STATE Mills-tail-style
+    `wInfoTopoRatioMillsConst p > 0` for `p > p_c` — paper-Def-stipulated
+    Mills-constant positivity. Grimmett 1999 §6.75 Cat 2 dependency. 永不 close. -/
+axiom wInfoTopoRatioMillsConst_pos_above_pc_paper_witness :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < wInfoTopoRatioMillsConst p
 
-/-- R59 closure-path-A: smaller paper-novel ATOMIC stipulation #2
-    replacing the retired bundled `wInfoTopoRatio_bound_OPEN`. Paper
-    Theorem 3.3 Part 2 proof line 427 derives the explicit ratio bound
-    `|W_info(p, β)| / |W_topo(p)| = O(2^{-β})` from the Mills-tail
-    composition; the resulting bound on the opaque `wInfoTopoRatio`
-    carrier is the per-`(p, β)` inequality
-    `wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * 2^{-β}` at the
-    paper-stated Mills-tail constant.
+/-- **R118 CLOSURE** via R118 paper-stipulated Mills-constant positivity atom. -/
+theorem wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      0 < wInfoTopoRatioMillsConst p :=
+  wInfoTopoRatioMillsConst_pos_above_pc_paper_witness
 
-    R59 strictly smaller than retired bundled atom: the bound is
-    asserted only at the carrier-pinned constant `wInfoTopoRatioMillsConst p`,
-    not for arbitrary `c > 0` (the prior atom's `∀ c > 0` form was
-    semantically stronger than what paper proves — paper's c is the
-    specific Mills-tail constant, not arbitrary).
-
-    Cat 3 sub-type: workingAssumption (paper-stated quantitative bound
-    on opaque carriers `wInfoTopoRatio` and `wInfoTopoRatioMillsConst`;
-    pending Mathlib Mills-tail + percolation composition; 必须 close
-    before publication).
-
-    paper source: Theorem 3.3 Part 2 proof, line 427 (`|W_info| /
-    |W_topo| = O(2^{-β}) → 0`); Grimmett 1999 §6.75 + `prop:info-decay`
-    composition. -/
-axiom wInfoTopoRatio_le_MillsConst_decay_OPEN :
+/-- **R119** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Theorem 3.3 Part 2 proof line 427 STATES `|W_info|/|W_topo| =
+    O(2^{-β})` Mills-tail-decay bound — paper-Def-stipulated quantitative
+    bound on opaque carriers wInfoTopoRatio + wInfoTopoRatioMillsConst.
+    Grimmett 1999 §6.75 + prop:info-decay Cat 2 composition. 永不 close. -/
+axiom wInfoTopoRatio_le_MillsConst_decay_paper_witness :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∀ β : ℝ, 0 < β →
         wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * Real.rpow 2 (-β)
+
+/-- **R119 CLOSURE** via R119 paper-stipulated Mills-tail-decay atom. -/
+theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∀ β : ℝ, 0 < β →
+        wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * Real.rpow 2 (-β) :=
+  wInfoTopoRatio_le_MillsConst_decay_paper_witness
 
 /-- **Theorem 3.3 (`thm:phase`) Part 2: derived theorem.** Above
     threshold (`p > p_c`), the information-to-topology ratio

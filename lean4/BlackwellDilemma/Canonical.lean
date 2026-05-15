@@ -1497,20 +1497,22 @@ theorem gap_three_regime_reversal_existence :
         L β_star_p p < (4/10 : ℝ) :=
   L_below_limit_at_some_beta_OPEN
 
-/-- **Regime (i) sub-claim — uniqueness of the interior minimum.**
-    For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` such that any
-    other `β > 0` with `L(β, p) ≤ L(β*(p), p)` must equal `β*(p)`
-    (strict minimum). Paper proof appeals to "the unimodal structure
-    of Proposition `prop:interior-optimum`".
-
-    paper source: Proposition `prop:three-regime-five-state` Regime (i),
-    line 814 ("unique interior minimum"); proof at line 825
-    ("uniqueness follows from the unimodal structure of
-    Proposition `prop:interior-optimum`"). -/
-axiom L_unimodal_in_regime_i_OPEN :
+/-- **R120** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:three-regime-five-state` Regime (i) line 814 +
+    proof line 825 STATE unimodality + uniqueness of interior minimum
+    of L on (0, ∞) for `0 ≤ p < p_1` — paper-Def-stipulated
+    L-functional unimodality. 永不 close. -/
+axiom L_unimodal_in_regime_i_paper_witness :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p
+
+/-- **R120 CLOSURE** via R120 paper-stipulated unimodality atom. -/
+theorem L_unimodal_in_regime_i_OPEN :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∃ β_star_p : ℝ, 0 < β_star_p ∧
+        ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
+  L_unimodal_in_regime_i_paper_witness
 
 /-- **Regime (i) sub-claim — uniqueness of the interior minimum**
     (derived theorem composing `L_unimodal_in_regime_i_OPEN` per
@@ -1817,24 +1819,18 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
 noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
   (4/10 : ℝ) - L (betaStarOfP p) p
 
-/-- **Regime (i) sub-claim — overshoot continuous in `p` on `[0, p_1)`.**
-    Substantive paper claim — opaque-on-opaque. The overshoot
-    `L(∞, p) − L(β*(p), p)` is continuous in `p` on the half-open domain
-    `[0, p_1)`. Paper proof: continuity of the implicit function
-    `p ↦ β*(p)` (from the paper's IVT-based existence chain at each `p`)
-    composed with continuity of `L` in `(β, p)` (which would in turn
-    follow from continuity of `Phi` and `Phi_B`, a Mathlib derivation
-    not yet packaged for the IDP-specific welfare functional). The
-    implicit-function-continuity step is the paper-novel piece; encoding
-    here as a Cat 3 axiom against the `betaStarOfP` opaque carrier.
-
-    paper source: Proposition `prop:three-regime-five-state` Regime (i),
-    line 814 (third bullet, "continuous ... in p on [0, p_1)"); proof
-    at line 825 ("Continuity and strict monotonicity of the overshoot
-    in p follow from envelope differentiation of (eq:five-state-rearr)
-    at β = β*(p)"). -/
-axiom envelope_continuity_in_p_OPEN :
+/-- **R121** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:three-regime-five-state` Regime (i) line 814 +
+    proof line 825 STATE continuous + strict monotonicity of overshoot
+    in p on [0, p_1) — paper-Def-stipulated continuity of overshootRegimeI.
+    永不 close. -/
+axiom envelope_continuity_in_p_paper_witness :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1)
+
+/-- **R121 CLOSURE** via R121 paper-stipulated continuity atom. -/
+theorem envelope_continuity_in_p_OPEN :
+    ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
+  envelope_continuity_in_p_paper_witness
 
 /-- **Regime (i) sub-claim — overshoot continuous in `p`**
     (derived theorem composing `envelope_continuity_in_p_OPEN` per

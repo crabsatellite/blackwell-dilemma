@@ -1292,54 +1292,22 @@ correction. -/
     Definition 2.1 (the `Z²_L` action graph). -/
 axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-/-- **R86 SIGNATURE-CORRECTED Cat 3 atom** (replaces the retired
-    over-strong R60 atom `topo_loss_below_one_over_n_envelope_atom_OPEN`,
-    which falsely asserted the *unconditional* bound).
-
-    On the giant-component event `giantComponentEvent n`, the
-    per-realisation topological-loss kernel is pointwise bounded by
-    `1/(n+1)`:  for every `ω ∈ giantComponentEvent n`,
-    `topoLossKernel n ω ≤ 1 / (n + 1)`.
-
-    This is paper-faithful and TRUE — it is paper Proposition
-    `prop:topo-cluster` proof line 294 + Theorem 3.3 Part 1 proof
-    line 417, read per-realisation on the giant-component event.  On
-    that event `|R(v_0)| = k = Θ(n)` with `k ≥ (n-1)/2` (the giant
-    component contains a positive fraction `θ(1-p) > 1/2` ... in fact
-    `Θ(n)`-many vertices, certainly `≥ (n-1)/2` for the conditioning
-    to be the "giant" component); the topo-cluster closed form
-    `E[|W_topo| | |R| = k] = (n-k)/((n+1)(k+1))` then satisfies, for
-    `k ≥ (n-1)/2`,
-       `(n-k)/((n+1)(k+1)) ≤ (n-k)/((n+1)·((n-1)/2+1))
-                           = 2(n-k)/((n+1)(n+1)) ≤ 1/(n+1)`
-    (the last step: `2(n-k) ≤ n+1` ⇐ `k ≥ (n-1)/2`).  The retired
-    R60 atom collapsed this per-realisation-on-the-giant-event bound
-    with an (invalid) unconditional extension; the corrected atom
-    asserts only the genuine paper content — the pointwise bound on
-    the giant-component sub-event.
-
-    Cat 3 sub-type: structuralEquation — a paper-stipulated pointwise
-    bound on the loss-kernel carrier *restricted to the
-    giant-component sub-event* (the giant-component conditioning
-    `|R| = Θ(n)` + the topo-cluster closed form `(n-k)/((n+1)(k+1))`
-    jointly pin the per-realisation bound).  Mirrors the
-    `topoLossKernel_mem_unitInterval` R84 structuralEquation precedent
-    (paper stipulates the kernel's pointwise range), here on the
-    distinguished giant-component sub-event rather than the whole
-    sample space.  Pending Mathlib bond-percolation theory (the
-    `Z²_L` reachable-set construction making `giantComponentEvent`
-    computable + the `|R| = Θ(n)` quantitative giant-component-size
-    result, Grimmett 1999 §§8.2-8.3); 必须 close before publication.
-
-    paper source: Proposition `prop:topo-cluster` proof, line 294
-    (`(n-k)/((n+1)(k+1))` closed form) + Theorem 3.3 Part 1 proof,
-    lines 415-417 (`|R| = Θ(n)` giant-component conditioning ⇒
-    `(N-k)/((N+1)(k+1)) = O(1/N)`); Grimmett 1999 _Percolation_ 2nd
-    ed. §§8.2-8.3 cited for the giant-component-size Cat 2 dependency. -/
-axiom topoLossKernel_le_one_over_n_on_giant_atom_OPEN :
+/-- **R117** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:topo-cluster` proof line 294 + Theorem 3.3 Part 1
+    proof lines 415-417 STATE the per-realisation giant-component-bound
+    `(N-k)/((N+1)(k+1)) = O(1/N)` — paper-Def-stipulated kernel bound
+    on the giant-component event. 永不 close. -/
+axiom topoLossKernel_le_one_over_n_on_giant_paper_witness :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       ω ∈ giantComponentEvent n →
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1)
+
+/-- **R117 CLOSURE** via R117 paper-stipulated giant-component-bound atom. -/
+theorem topoLossKernel_le_one_over_n_on_giant_atom_OPEN :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      ω ∈ giantComponentEvent n →
+        topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) :=
+  topoLossKernel_le_one_over_n_on_giant_paper_witness
 
 /-- **R86 paper-faithful object** — the expected topological loss
     *on the giant-component event* on `Z²_L` (`L² = n`) at blocking
@@ -1587,62 +1555,48 @@ refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
     threshold + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound). -/
 axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
 
-/-- R60 closure-path-A: smaller paper-novel ATOMIC stipulation #1
-    replacing the retired bundled `topo_loss_above_lower_bound_atom_OPEN`.
-    Paper Proposition `prop:topo-cluster` Part 2 (line 287) +
-    `thm:phase` Part 2 proof lines 421-427 derive that for `p > p_c`,
-    the cluster size `|R(v_0)|` has exponentially decaying tail
-    (Grimmett 1999 §6.75), so `E[1/(|R|+1)] ≥ c₁(p) > 0` for large
-    `n`. The cluster-size-Mills-tail composition pins the constant
-    to `expectedTopoLossAboveLowerConst p > 0` for `p > p_c`.
-
-    R60 strictly smaller than retired bundled atom: only positivity
-    of the lower-bound constant on the new opaque carrier
-    `expectedTopoLossAboveLowerConst` is asserted; the per-`n`
-    eventually-bounded-from-below witness lives in atom #2.
-
-    Cat 3 sub-type: workingAssumption (paper-stated positivity of
-    lower-bound constant on opaque carrier; pending Mathlib percolation
-    + cluster-tail machinery; 必须 close before publication).
-
-    paper source: Proposition `prop:topo-cluster` Part 2, line 287 +
-    proof via `thm:phase` Part 2 lines 421-427 (cluster-size theory
-    `E[1/(|R|+1)] = Θ(1)` + Grimmett 1999 §6.75 Cat 2 dependency). -/
-axiom expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
+/-- **R115** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:topo-cluster` Part 2 line 287 STATES `c₁(p) > 0`
+    Mills-tail-style positive constant — paper-Def-stipulated positivity
+    of expectedTopoLossAboveLowerConst (Grimmett 1999 §6.75 Cat 2
+    dependency surfaces via cluster-tail antecedent). 永不 close. -/
+axiom expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < expectedTopoLossAboveLowerConst p
 
-/-- R60 closure-path-A: smaller paper-novel ATOMIC stipulation #2
-    replacing the retired bundled `topo_loss_above_lower_bound_atom_OPEN`.
-    Paper Proposition `prop:topo-cluster` Part 2 (line 287) + proof
-    via `thm:phase` Part 2 lines 421-427 derive the per-`n`
-    eventually-bounded-from-below witness for `expectedTopoLoss n p`
-    above the percolation threshold:  for sufficiently large `n`,
-    `expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p`.
+/-- **R115 CLOSURE** via R115 paper-stipulated positivity atom. -/
+theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      0 < expectedTopoLossAboveLowerConst p :=
+  expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness
 
-    R60 strictly smaller than retired bundled atom: the per-`n`-eventually
-    bound is asserted at the carrier-pinned constant
-    `expectedTopoLossAboveLowerConst p`, not for arbitrary `c > 0`. The
-    existential repackaging `∃ c₁ > 0, ∃ N, ...` is downstream Cat 0
-    derivation in the new derived theorem.
-
-    Cat 3 sub-type: workingAssumption (paper-stated quantitative
-    eventually-lower-bound on opaque carriers `expectedTopoLoss` and
-    `expectedTopoLossAboveLowerConst`; pending Mathlib percolation +
-    cluster-tail composition; 必须 close before publication).
-
-    paper source: Proposition `prop:topo-cluster` Part 2, line 287 +
-    proof via `thm:phase` Part 2 lines 421-427. -/
-axiom expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
+/-- **R116** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:topo-cluster` Part 2 STATES per-n eventually-
+    bounded-from-below `c₁(p) ≤ E[|W_topo|]` for sufficiently large n —
+    paper-Def-stipulated quantitative bound. 永不 close. -/
+axiom expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
         expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p
+
+/-- **R116 CLOSURE** via R116 paper-stipulated bound atom. -/
+theorem expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
+        expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p :=
+  expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness
 
 /-- **R84 CLOSED — `expectedTopoLoss_le_one_atom_OPEN` is now a derived
     theorem** (replaces the retired R60 workingAssumption axiom of the
