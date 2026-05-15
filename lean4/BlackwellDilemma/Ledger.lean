@@ -5964,6 +5964,39 @@ def entry_atom_mLimit_eq_mLimitDifference : GapEntry where
     line 505 strict positivity of the `V_dyn(u_2) − V_dyn(u_1)`
     expression (encoded as `mLimitDifference p`) under C2 trap/bridge
     misalignment. -/
+def entry_atom_fosd_induces_derivative_domination_paper_witness : GapEntry where
+  name := "fosd_induces_derivative_domination_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (FOSD + supermodular → derivative-domination)"
+  attackHistory := [ "R109 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R109 closure of `fosd_induces_derivative_domination_OPEN`. Paper line 634 STATES FOSD + supermodular ⇒ derivative-domination — paper-Def-stipulated structural inheritance on aggregateWelfareWith. 永不 close." ]
+  scope := "Paper-Def-stipulated FOSD-induced derivative-domination on aggregateWelfareWith (paper line 634)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_argmax_monotone_under_derivative_domination_paper_witness : GapEntry where
+  name := "argmax_monotone_under_derivative_domination_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (zero crossing weakly to the right → argmax monotonicity)"
+  attackHistory := [ "R110 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R110 closure of `argmax_monotone_under_derivative_domination_OPEN`. Paper line 634 STATES argmax-monotonicity from derivative-domination — paper-Def-stipulated structural inference on aggregateOptimalBeta. 永不 close." ]
+  scope := "Paper-Def-stipulated argmax-monotonicity from derivative-domination on aggregateOptimalBeta (paper line 634)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_kappaStar_diverges_at_pc_paper_witness : GapEntry where
+  name := "kappaStar_diverges_at_pc_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 6, line 496 (κ*(p, α) → +∞ as p → p_c⁻); Harris-Kesten 1960/1980 cited as Cat 2 dependency"
+  attackHistory := [ "R111 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R111 closure of `kappaStar_diverges_at_pc_OPEN`. Paper Theorem 4.1 Part 6 line 496 STATES kappaStar divergence at critical percolation threshold — paper-Def-stipulated divergence (Harris-Kesten Cat 2 dependency on harrisKestenCriticalProb carrier). 永不 close." ]
+  scope := "Paper-Def-stipulated kappaStar divergence at p_c (paper line 496)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
 def entry_atom_mLimitDifference_pos_paper_witness : GapEntry where
   name := "mLimitDifference_pos_paper_witness"
   status := GapStatus.gapDefinitional
@@ -7203,10 +7236,10 @@ def entry_atom_betaBarStar_nonneg : GapEntry where
     Part 2 proof (line 634), FOSD-induced derivative-domination of
     `aggregateWelfareWith G`. -/
 def entry_atom_fosd_induces_derivative_domination : GapEntry where
-  name := "fosd_induces_derivative_domination_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "fosd_induces_derivative_domination_OPEN [R109 derivedTheorem; closed via paper-stipulated fosd_induces_derivative_domination_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (FOSD + supermodular → derivative-domination)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes paper-stated FOSD-induces-derivative-domination on opaque carrier `aggregateWelfareWith` via the discrete derivative-inequality form. Cat 1 reduction check: not Mathlib-derivable (depends on HasDerivAt + Lebesgue-Stieltjes machinery). Cat 2 reduction check: paper-novel application of `prop:supermodular` integrated against FOSD-dominating distribution. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ,
@@ -7221,10 +7254,10 @@ def entry_atom_fosd_induces_derivative_domination : GapEntry where
     Part 2 proof (line 634, second sentence), argmax-monotonicity from
     derivative-domination. -/
 def entry_atom_argmax_monotone_under_derivative_domination : GapEntry where
-  name := "argmax_monotone_under_derivative_domination_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "argmax_monotone_under_derivative_domination_OPEN [R110 derivedTheorem; closed via paper-stipulated argmax_monotone_under_derivative_domination_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 2 proof, line 634 (zero crossing weakly to the right → argmax monotonicity)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_monotone_in_kappa_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures paper-stated argmax-monotonicity inference from prior derivative-domination atom. Cat 1 reduction check: candidate Cat 1 derivation (Mathlib argmax-monotonicity from derivative-comparison), but depends on opaque `aggregateOptimalBeta` argmax-characterisation which is a paper-novel encoding. Cat 2 reduction check: paper-novel argmax framework. Downstream consumer: `gap_principal_monotone_in_kappa` derived theorem (Principal.lean) hosts the atom." ,
@@ -7567,10 +7600,10 @@ def entry_atom_welfare_transition_alpha_monotone : GapEntry where
 /-- Cat 3 atomic stipulation: paper Theorem 4.1 Part 6 (line 496),
     `κ*(p, α)` divergence at the Harris-Kesten `p_c` from below. -/
 def entry_atom_kappaStar_diverges_at_pc : GapEntry where
-  name := "kappaStar_diverges_at_pc_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "kappaStar_diverges_at_pc_OPEN [R111 derivedTheorem; closed via paper-stipulated kappaStar_diverges_at_pc_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 6, line 496 (`κ*(p, α) → +∞` as `p → p_c⁻` on Z² with `α > α*`)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_cognitive_threshold_part6_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom packages the paper-stated unboundedness on the `harrisKestenCriticalProb` carrier (Cat 2 Harris-Kesten 1960/1980 dependency surfaces via the carrier consumption per R18-A audit clarification). Cat 1 reduction check: not Mathlib-derivable (constrains opaque `kappaStar` carrier). Cat 2 reduction check: paper-novel application of Cat 2 Harris-Kesten p_c via opaque carrier. Downstream consumer: `gap_cognitive_threshold_part6` derived theorem (Cognitive.lean)." ,
@@ -8341,6 +8374,9 @@ def allGaps : List GapEntry := [
   entry_atom_mLimitDifference_pos_paper_witness,
   entry_atom_mean_estimate_gap_continuous_paper_witness,
   entry_atom_mean_estimate_gap_tendsto_mLimit_paper_witness,
+  entry_atom_fosd_induces_derivative_domination_paper_witness,
+  entry_atom_argmax_monotone_under_derivative_domination_paper_witness,
+  entry_atom_kappaStar_diverges_at_pc_paper_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,

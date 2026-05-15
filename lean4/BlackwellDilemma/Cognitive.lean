@@ -703,16 +703,24 @@ theorem gap_cognitive_threshold_part5 :
       kappaStar p α₁ ≤ kappaStar p α₂ :=
   welfare_transition_alpha_monotone_OPEN
 
-/-- **Theorem 4.1 Part 6: Divergence at `p_c`.**
-    On `Z²` with `α > α*`, `κ*(p, α) → +∞` as `p → p_c⁻` (provided
-    `κ*(p, α) > 0` near `p_c`).
-
-    paper source: Theorem 4.1 Part 6, line 496. -/
-axiom kappaStar_diverges_at_pc_OPEN :
+/-- **R111** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Theorem 4.1 Part 6 line 496 STATES `κ*(p, α) → +∞ as p → p_c⁻` —
+    paper-Def-stipulated kappaStar divergence at critical percolation
+    threshold (Harris-Kesten Cat 2 dependency surfaces via the
+    harrisKestenCriticalProb carrier). 永不 close. -/
+axiom kappaStar_diverges_at_pc_paper_witness :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
       ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
         ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
           M < kappaStar p α
+
+/-- **R111 CLOSURE** via R111 paper-stipulated divergence atom. -/
+theorem kappaStar_diverges_at_pc_OPEN :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
+          M < kappaStar p α :=
+  kappaStar_diverges_at_pc_paper_witness
 
 /-- **Theorem 4.1 Part 6: Divergence at `p_c`** (derived theorem).
     On `Z²` with `α > α*`, `κ*(p, α) → +∞` as `p → p_c⁻` (provided

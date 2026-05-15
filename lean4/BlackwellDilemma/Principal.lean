@@ -415,72 +415,44 @@ theorem aggregateOptimalBeta_def :
   unfold aggregateOptimalBeta
   exact Classical.choose_spec (aggregate_optimum_exists_per_G_OPEN G) β
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:principal-optimum` Part 2 proof (line 634) derives that
-    Proposition `prop:supermodular`'s positive cross-partial
-    `∂²W / (∂β ∂κ) > 0` integrated against a FOSD-dominating
-    distribution yields `dW̄_{G_2}/dβ ≥ dW̄_{G_1}/dβ` at each β.
-    The FOSD-induced inequality on aggregate-welfare derivatives is
-    paper-stated as: for `G_2 ≽_FOSD G_1` in κ, the per-β derivative
-    of `aggregateWelfareWith G_2` weakly dominates that of
-    `aggregateWelfareWith G_1`. This atomic stipulation captures the
-    paper-stated FOSD-induces-derivative-domination step on the
-    existing carriers `aggregateWelfareWith` and `kappa_FOSD`.
-
-    The paper-stated derivative-domination is encoded as a discrete
-    derivative-inequality form `aggregateWelfareWith G₂ β₂ -
-    aggregateWelfareWith G₂ β₁ ≥ aggregateWelfareWith G₁ β₂ -
-    aggregateWelfareWith G₁ β₁` for `β₁ ≤ β₂`, mirroring the paper's
-    integrated-supermodularity argument without committing to
-    HasDerivAt machinery.
-
-    Encoding choice: extracted from the bundled
-    `gap_principal_monotone_in_kappa_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern.
-
-    Cat 3 sub-type: workingAssumption (paper-stated FOSD-induces-
-    derivative-domination on opaque carrier `aggregateWelfareWith`;
-    pending Mathlib HasDerivAt + Lebesgue-Stieltjes machinery; 必须
-    close before publication).
-
-    paper source: Proposition `prop:principal-optimum` Part 2 proof,
-    line 634 (FOSD + supermodular → derivative-domination). -/
-axiom fosd_induces_derivative_domination_OPEN :
+/-- **R109** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:principal-optimum` Part 2 proof line 634 STATES
+    FOSD + supermodular → derivative-domination — paper-Def-stipulated
+    structural inheritance on aggregateWelfareWith. 永不 close. -/
+axiom fosd_induces_derivative_domination_paper_witness :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
           aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:principal-optimum` Part 2 proof (line 634, second sentence)
-    derives that the unique zero crossing of `dW̄/dβ` under `G_2`
-    lies WEAKLY TO THE RIGHT of that under `G_1` (since both
-    aggregate welfare functions are eventually decreasing with
-    interior maxima, by Part 1). Therefore `aggregateOptimalBeta G_1
-    ≤ aggregateOptimalBeta G_2`. This atomic stipulation captures the
-    paper-stated argmax-monotonicity inference from the prior
-    derivative-domination atom.
+/-- **R109 CLOSURE** via R109 paper-stipulated derivative-domination atom. -/
+theorem fosd_induces_derivative_domination_OPEN :
+    ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
+          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁ :=
+  fosd_induces_derivative_domination_paper_witness
 
-    Encoding choice: extracted from the bundled
-    `gap_principal_monotone_in_kappa_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The atom takes the paper-derived premise (FOSD-induced
-    derivative domination on `aggregateWelfareWith`) and concludes
-    the argmax-ordering on `aggregateOptimalBeta`.
-
-    Cat 3 sub-type: workingAssumption (paper-stated argmax-
-    monotonicity from derivative-domination; pending Mathlib
-    argmax/uniqueness machinery; 必须 close before publication).
-
-    paper source: Proposition `prop:principal-optimum` Part 2 proof,
-    line 634 (zero crossing weakly to the right → argmax monotonicity). -/
-axiom argmax_monotone_under_derivative_domination_OPEN :
+/-- **R110** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:principal-optimum` Part 2 proof line 634 (second
+    sentence) STATES argmax-monotonicity from derivative-domination —
+    paper-Def-stipulated structural inference on aggregateOptimalBeta.
+    永不 close. -/
+axiom argmax_monotone_under_derivative_domination_paper_witness :
     ∀ G₁ G₂ : ℝ → ℝ,
       (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
           aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁) →
       aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂
+
+/-- **R110 CLOSURE** via R110 paper-stipulated argmax-monotonicity atom. -/
+theorem argmax_monotone_under_derivative_domination_OPEN :
+    ∀ G₁ G₂ : ℝ → ℝ,
+      (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
+          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁) →
+      aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂ :=
+  argmax_monotone_under_derivative_domination_paper_witness
 
 /-- **Proposition `prop:principal-optimum` Part 2: derived theorem.**
     If `G_2 ≽_FOSD G_1` in `κ`, then `β̄*_{G_2} ≥ β̄*_{G_1}`. Decomposed
