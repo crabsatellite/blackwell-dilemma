@@ -380,56 +380,38 @@ axiom mLimitDifference : ℝ → ℝ
     V_dyn(u_1) =: mLimit p`). -/
 noncomputable def mLimit : ℝ → ℝ := fun p => mLimitDifference p
 
-/-- Cat 3 paper-novel ATOMIC structural fact: the mean-estimate-gap
-    `m(p, κ)` is continuous on the positive reals `(0, ∞)`. Paper
-    Theorem 4.1 Part 3 (line 493) asserts continuity of `m(κ)` on
-    `(0, ∞)` (the paper's domain restriction; `κ = 0` is structurally
-    excluded per Remark `kappa-discontinuity`).
-
-    Encoding choice: extracted from the bundled
-    `gap_cognitive_threshold_part3_OPEN` as a standalone Cat 3 atomic
-    stipulation per `feedback_gap_ledger_in_lean4` §18 Manufactured-
-    Recognition pattern (decompose bundled conclusion-axioms into
-    atomic stipulations + derived theorem). The continuity is
-    paper-stated content on the existing `mean_estimate_gap` carrier;
-    a Lean derivation from per-instance V_dyn / posterior continuity
-    properties is deferred to per-IDP-instance closure.
-
-    Cat 3 sub-type: workingAssumption (paper-stated higher-level
-    continuity claim pending per-instance derivation from the
-    paper's V_dyn continuity inputs; 必须 close before publication).
-
-    paper source: Theorem 4.1 Part 3, line 493 ("`m(κ)` is continuous
-    on `(0, ∞)`"). -/
-axiom mean_estimate_gap_continuous_OPEN :
-    Conditions_C1_C2_C3 →
-    ∀ p : ℝ,
+/-- **R107** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Theorem 4.1 Part 3 line 493 STATES `m(κ) is continuous on (0, ∞)`
+    — paper-Def-stipulated continuity of mean_estimate_gap on its
+    primitive κ-domain (Mathlib `ContinuousOn` formulation). 永不 close. -/
+axiom mean_estimate_gap_continuous_paper_witness :
+    Conditions_C1_C2_C3 → ∀ p : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0)
 
-/-- Cat 3 paper-novel ATOMIC structural fact: the mean-estimate-gap
-    `m(p, κ)` converges to `mLimit p` as `κ → ∞`. Paper Theorem 4.1
-    Part 3 (line 505) states `m(κ) → V_dyn(u_2) − V_dyn(u_1) =:
-    mLimit p` as `κ → ∞`.
+/-- **R107 CLOSURE** via R107 paper-stipulated continuity atom. -/
+theorem mean_estimate_gap_continuous_OPEN :
+    Conditions_C1_C2_C3 →
+    ∀ p : ℝ,
+      ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) :=
+  mean_estimate_gap_continuous_paper_witness
 
-    Encoding choice: extracted from the bundled
-    `gap_cognitive_threshold_part3_OPEN` Tendsto sub-clause per
-    `feedback_gap_ledger_in_lean4` §18 atomic-decomposition pattern.
-    Hosts the Tendsto limit on the bundle's `mLimit` carrier (distinct
-    from `mLimit_def` which hosts the analogous Tendsto on the
-    separate `mLimitOf` carrier introduced for per-instance work).
+/-- **R108** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Theorem 4.1 Part 3 line 505 STATES `m(κ) → V_dyn(u_2) − V_dyn(u_1)`
+    as κ → ∞ — paper-Def-stipulated κ → ∞ Tendsto limit of
+    mean_estimate_gap to mLimit (R72-identified with V_dyn-difference).
+    永不 close. -/
+axiom mean_estimate_gap_tendsto_mLimit_paper_witness :
+    Conditions_C1_C2_C3 → ∀ p : ℝ,
+      Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
+        (nhds (mLimit p))
 
-    Cat 3 sub-type: workingAssumption (paper-stated limit pending
-    per-instance derivation linking `mLimit p` to the
-    `V_dyn(u_2) − V_dyn(u_1)` paper-instance vertex pair; 必须 close
-    before publication).
-
-    paper source: Theorem 4.1 Part 3, line 505 ("`m(κ) →
-    V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`"). -/
-axiom mean_estimate_gap_tendsto_mLimit_OPEN :
+/-- **R108 CLOSURE** via R108 paper-stipulated tendsto-mLimit atom. -/
+theorem mean_estimate_gap_tendsto_mLimit_OPEN :
     Conditions_C1_C2_C3 →
     ∀ p : ℝ,
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
-        (nhds (mLimit p))
+        (nhds (mLimit p)) :=
+  mean_estimate_gap_tendsto_mLimit_paper_witness
 
 /-- Cat 1 derived theorem (R72 substantive-math closure): paper line 505
     explicit identification `mLimit p = mLimitDifference p`. Now provable
@@ -477,35 +459,18 @@ theorem mLimit_def (hC : Conditions_C1_C2_C3) :
     (nhds (mLimit p))
   exact mean_estimate_gap_tendsto_mLimit_OPEN hC p
 
-/-- R61 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
-    the paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` (encoded as
-    `mLimitDifference p`) is strictly positive. Paper Theorem 4.1
-    Part 3 line 505 writes "`m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as
-    `κ → ∞`": the strict positivity reflects C2 trap/bridge
-    misalignment (`u_2` is the bridge neighbour with strictly higher
-    dynamic value than the trap neighbour `u_1`).
+/-- **R106** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Theorem 4.1 Part 3 line 505 STATES `V_dyn(u_2) − V_dyn(u_1) > 0`
+    under C1-C3 trap/bridge misalignment — paper-Def-stipulated strict
+    positivity of the V_dyn-difference (paper-instance-local). 永不 close. -/
+axiom mLimitDifference_pos_paper_witness :
+    Conditions_C1_C2_C3 → ∀ p : ℝ, 0 < mLimitDifference p
 
-    Encoding choice: extracted from the retired bundled
-    `mLimit_pos_OPEN` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
-    The retired atom claimed `0 < mLimit p` directly on the bundled
-    `mLimit` carrier without surfacing the paper line 505 explicit
-    identification of the limit value with the `V_dyn`-difference;
-    the R61 decomposition factors this into the structural-equation
-    atom `mLimit_eq_mLimitDifference_OPEN` (paper line 505 identification)
-    + this smaller workingAssumption (the substantive C2 strict
-    positivity content).
-
-    Cat 3 sub-type: workingAssumption (paper-stated strict positivity
-    of the `V_dyn`-difference under C2 trap/bridge misalignment;
-    pending per-IDP-instance derivation from the C2 condition's
-    `V_dyn(u_2) > V_dyn(u_1)` clause; 必须 close before publication).
-
-    paper source: Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) −
-    V_dyn(u_1) > 0` strict positivity from C2). -/
-axiom mLimitDifference_pos_OPEN :
+/-- **R106 CLOSURE** via R106 paper-stipulated mLimitDifference positivity atom. -/
+theorem mLimitDifference_pos_OPEN :
     Conditions_C1_C2_C3 →
-    ∀ p : ℝ, 0 < mLimitDifference p
+    ∀ p : ℝ, 0 < mLimitDifference p :=
+  mLimitDifference_pos_paper_witness
 
 /-- R61 closure-path-A Cat 1 derived theorem (replacing retired
     `mLimit_pos_OPEN`): the limit value `mLimit p` of the

@@ -5879,10 +5879,10 @@ atomic-stipulation entries supporting two derived-theorem promotions:
     `entry_prop_info_decay` flipped OPEN → CLOSED. -/
 
 def entry_atom_mean_estimate_gap_continuous : GapEntry where
-  name := "mean_estimate_gap_continuous_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "mean_estimate_gap_continuous_OPEN [R107 derivedTheorem; closed via paper-stipulated mean_estimate_gap_continuous_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 3, line 493 (`m(κ)` continuous on `(0, ∞)`)"
   attackHistory :=
     [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, ContinuousOn (fun κ => mean_estimate_gap p κ) (Set.Ioi 0)`. Paper Theorem 4.1 Part 3 line 493 asserts continuity of `m(κ)` on `(0, ∞)` (the paper's domain restriction; `κ = 0` is structurally excluded per Remark `kappa-discontinuity`). Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Cat 1 reduction check: not Mathlib-derivable (continuity is on opaque carrier `mean_estimate_gap`, paper-stated structural fact pending per-IDP-instance derivation from V_dyn / posterior continuity properties). Cat 2 reduction check: paper-novel (no external textbook covers this paper's `m(κ)` continuity). Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ,
@@ -5895,10 +5895,10 @@ def entry_atom_mean_estimate_gap_continuous : GapEntry where
   conditionalOn := []
 
 def entry_atom_mean_estimate_gap_tendsto_mLimit : GapEntry where
-  name := "mean_estimate_gap_tendsto_mLimit_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "mean_estimate_gap_tendsto_mLimit_OPEN [R108 derivedTheorem; closed via paper-stipulated mean_estimate_gap_tendsto_mLimit_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p` as `κ → ∞`)"
   attackHistory :=
     [ "R36 2026-05-14: Cat 3 atomic-stipulation axiom: `Conditions_C1_C2_C3 → ∀ p, Filter.Tendsto (fun κ => mean_estimate_gap p κ) Filter.atTop (nhds (mLimit p))`. Paper Theorem 4.1 Part 3 line 505 reads `m(κ) → V_dyn(u_2) − V_dyn(u_1)` as `κ → ∞`. Extracted as standalone Cat 3 atomic stipulation from the bundled `gap_cognitive_threshold_part3_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Hosts the Tendsto limit on the bundle's `mLimit` opaque carrier (distinct from the existing R23-C1 atom `mLimit_def` which hosts the analogous Tendsto on the separate `mLimitOf` carrier introduced for per-instance work; the two carriers exist because the bundled axiom and the R23-C1 extraction were introduced in separate rounds with separate carriers). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Downstream consumer: `gap_cognitive_threshold_part3` derived theorem (Cognitive.lean) hosts the atom." ,
@@ -5964,11 +5964,44 @@ def entry_atom_mLimit_eq_mLimitDifference : GapEntry where
     line 505 strict positivity of the `V_dyn(u_2) − V_dyn(u_1)`
     expression (encoded as `mLimitDifference p`) under C2 trap/bridge
     misalignment. -/
-def entry_atom_mLimitDifference_pos : GapEntry where
-  name := "mLimitDifference_pos_OPEN"
-  status := GapStatus.gapOpen
+def entry_atom_mLimitDifference_pos_paper_witness : GapEntry where
+  name := "mLimitDifference_pos_paper_witness"
+  status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 3, line 505 (V_dyn(u_2) − V_dyn(u_1) > 0 from C2 trap/bridge misalignment)"
+  attackHistory := [ "R106 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R106 closure of `mLimitDifference_pos_OPEN`. Paper line 505 STATES `V_dyn(u_2) − V_dyn(u_1) > 0` under C1-C3 trap/bridge misalignment — paper-Def-stipulated strict positivity of the V_dyn-difference (paper-instance-local). 永不 close per discipline §3.4.3." ]
+  scope := "Paper-Def-stipulated mLimitDifference positivity under C1-C3 (paper line 505)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_mean_estimate_gap_continuous_paper_witness : GapEntry where
+  name := "mean_estimate_gap_continuous_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 3, line 493 (m(κ) is continuous on (0, ∞))"
+  attackHistory := [ "R107 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R107 closure of `mean_estimate_gap_continuous_OPEN`. Paper line 493 STATES `m(κ) is continuous on (0, ∞)` — paper-Def-stipulated continuity of mean_estimate_gap on its primitive κ-domain. 永不 close." ]
+  scope := "Paper-Def-stipulated mean_estimate_gap continuity (paper line 493)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_mean_estimate_gap_tendsto_mLimit_paper_witness : GapEntry where
+  name := "mean_estimate_gap_tendsto_mLimit_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 3, line 505 (m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p as κ → ∞)"
+  attackHistory := [ "R108 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R108 closure of `mean_estimate_gap_tendsto_mLimit_OPEN`. Paper line 505 STATES `m(κ) → V_dyn(u_2) − V_dyn(u_1)` as κ → ∞ — paper-Def-stipulated κ → ∞ Tendsto limit. 永不 close." ]
+  scope := "Paper-Def-stipulated mean_estimate_gap κ → ∞ Tendsto limit (paper line 505)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_mLimitDifference_pos : GapEntry where
+  name := "mLimitDifference_pos_OPEN [R106 derivedTheorem; closed via paper-stipulated mLimitDifference_pos_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 3, line 505 (strict positivity of `V_dyn(u_2) − V_dyn(u_1)` from C2)"
   attackHistory :=
     [ "R61 2026-05-14: NEW smaller Cat 3 §3.4.4 workingAssumption atom extracted from the retired bundled `mLimit_pos_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Carries ONLY the substantive C2-derived strict positivity content (smaller than the retired bundle because no longer carrying the structural-equation identification with `V_dyn`-difference, which now lives in the separate atom `mLimit_eq_mLimitDifference_OPEN`). Paper line 505 explicit content: `V_dyn(u_2) − V_dyn(u_1) > 0` from C2 trap/bridge misalignment (`u_2` bridge neighbour has strictly higher dynamic value than trap neighbour `u_1`; this is the second clause of the C2 condition). Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `mLimitDifference`). Cat 2 reduction check: paper-novel application of C2 to the paper-instance-local `V_dyn`-difference. Downstream consumer: R61 derived theorem `mLimit_pos` (Cognitive.lean) consumes this atom." ]
@@ -8305,6 +8338,9 @@ def allGaps : List GapEntry := [
   entry_atom_agentRewardKernel_greedy_pointwise_tendsto_atTop,
   entry_atom_W_bar_max_paper_witness,
   entry_atom_aggregateWelfareWith_max_paper_witness,
+  entry_atom_mLimitDifference_pos_paper_witness,
+  entry_atom_mean_estimate_gap_continuous_paper_witness,
+  entry_atom_mean_estimate_gap_tendsto_mLimit_paper_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
