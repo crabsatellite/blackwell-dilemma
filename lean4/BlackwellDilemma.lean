@@ -84,3 +84,6 @@ import BlackwellDilemma.Infrastructure.ArgmaxMonotone
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
 import BlackwellDilemma.Infrastructure.BlackwellConditional
 import BlackwellDilemma.Infrastructure.GaussianPosterior
+import BlackwellDilemma.Infrastructure.SupermodularExtended
+import BlackwellDilemma.Infrastructure.DifferenceQuotientAlgebra
+import BlackwellDilemma.Infrastructure.MillsRatioTail
