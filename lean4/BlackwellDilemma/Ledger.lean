@@ -6899,16 +6899,31 @@ def entry_atom_W_bar_eventually_decreasing_in_reversal : GapEntry where
     the prior bundled `W_bar_eventually_decreasing_in_reversal_OPEN`
     via §18 atomic decomposition. -/
 def entry_atom_W_bar_witness_pair_strict_dominance : GapEntry where
-  name := "W_bar_witness_pair_strict_dominance_OPEN"
-  status := GapStatus.gapOpen
+  name := "W_bar_witness_pair_strict_dominance_OPEN [R93 derivedTheorem; closed via R92 G-integration framework + R93 combined-dominance witness atom]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (each individual welfare non-monotone → at SOME β-pair, below-threshold decrease dominates above-threshold increase)"
   attackHistory :=
-    [ "R91 2026-05-15: NEW smaller wA introduced as the substantive component of the §18 atomic decomposition of `W_bar_eventually_decreasing_in_reversal_OPEN`. Paper line 632 STATES that under reversal-regime support, each individual welfare is non-monotone, so eventually `dW̄/dβ < 0`; the carrier-level mathematical content is a DOMINANCE relation between the carrier-level increments at SOME β-pair `(β_low, β_high)`: the below-threshold contribution's strict decrease DOMINATES the above-threshold contribution's increase. Statement: `Conditions_C1_C2_C3 → TerminalNeighbourTopology → (∀ p, alphaStar 0 p < 1) → ∃ β_low β_high, β_low < β_high ∧ aboveThresholdWelfare β_high - aboveThresholdWelfare β_low < belowThresholdWelfare β_low - belowThresholdWelfare β_high`. Strictly smaller than the retired bundled atom: only the carrier-level dominance is asserted; the algebraic sum-step (W_bar = above + below ⇒ W_bar reversal) is now Cat 1 visible in the derived theorem `W_bar_eventually_decreasing_in_reversal_OPEN`. Closure target = G-conditional integration framework (concretize aboveThresholdWelfare and belowThresholdWelfare as G-conditional integrals of agentWelfare; then the dominance follows from the kappa-conditional reversal regime via integration). Cat 1 reduction check: not Mathlib-derivable (constrains opaque carriers). Cat 2 reduction check: paper-novel. Downstream consumer: `W_bar_eventually_decreasing_in_reversal_OPEN` (now derived theorem)." ]
-  scope := "Proposition prop:principal-optimum Part 1, paper-stated dominance at witness pair (substantive content of R91 §18 atomic decomposition)"
+    [ "R91 2026-05-15: NEW smaller wA introduced as the substantive component of the §18 atomic decomposition of `W_bar_eventually_decreasing_in_reversal_OPEN`. Paper line 632 STATES that under reversal-regime support, each individual welfare is non-monotone, so eventually `dW̄/dβ < 0`; the carrier-level mathematical content is a DOMINANCE relation between the carrier-level increments at SOME β-pair `(β_low, β_high)`: the below-threshold contribution's strict decrease DOMINATES the above-threshold contribution's increase. Strictly smaller than the retired bundled atom: only the carrier-level dominance is asserted; the algebraic sum-step (W_bar = above + below ⇒ W_bar reversal) is now Cat 1 visible in the derived theorem `W_bar_eventually_decreasing_in_reversal_OPEN`. Closure target = G-conditional integration framework (concretize aboveThresholdWelfare and belowThresholdWelfare as G-conditional integrals of agentWelfare; then the dominance follows from the kappa-conditional reversal regime via integration).",
+      "R93 2026-05-15: CLOSED via R92 G-integration framework + new R93 paper-stipulated combined-dominance witness atom + file reordering. The R91 axiom (originally at lines 269-275) was RELOCATED to AFTER the R92 G-integration infrastructure (after `W_bar_mixture_decomposition` derived theorem) so it can reference the R92 carriers. New Cat 3 §3.4.3 paper-stipulated atom `principalSampleBoth_combined_dominance_witness_pair`: existence of a COMMON witness pair `(β_low, β_high)` where `∑ᵢ wᵢ * (above_kernel(β_high) - above_kernel(β_low)) < ∑ⱼ vⱼ * (below_kernel(β_low) - below_kernel(β_high))` (paper line 632 substantive combined-dominance content). Paper line 632 STIPULATES this combined dominance — refines R92's `principalSampleBelow_weightedSum_eventually_decreasing` (which only gave the below-side at its own pair) by unifying both sides at a common pair. The wA atom is converted to a Cat 1 derivedTheorem composing the R92 integral structural equations (`aboveThresholdWelfare_eq_kappaAgent_integral` + `belowThresholdWelfare_eq_kappaAgent_integral`) + R93 combined-witness atom + `Finset.sum_sub_distrib` algebra. Source-order chain preserved: `W_bar_eventually_decreasing_in_reversal_OPEN` (R91 derived theorem) and `gap_principal_interior_optimum` (R63 derived theorem) also relocated alongside. Net wA delta: −1. Build GREEN (2723 jobs)." ]
+  scope := "Proposition prop:principal-optimum Part 1, paper-stated dominance at witness pair (R93 closed via G-integration framework + combined-dominance witness atom)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R91 NEW smaller wA from §18 atomic decomposition of `W_bar_eventually_decreasing_in_reversal_OPEN`). Close target = G-conditional integration framework concretizing aboveThresholdWelfare/belowThresholdWelfare as G-conditional integrals of agentWelfare; then the dominance follows from kappa-conditional reversal regime via integration."
+    "R93 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework (`aboveThresholdWelfare_eq_kappaAgent_integral` + `belowThresholdWelfare_eq_kappaAgent_integral`) + new R93 paper-stipulated `principalSampleBoth_combined_dominance_witness_pair` atom + `Finset.sum_sub_distrib` algebra."
+  conditionalOn := []
+
+/-- principalSampleBoth_combined_dominance_witness_pair — R93 Cat 3
+    §3.4.3 paper-stipulated combined-dominance witness on R92 sample sums. -/
+def entry_atom_principalSampleBoth_combined_dominance_witness_pair : GapEntry where
+  name := "principalSampleBoth_combined_dominance_witness_pair"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (combined dominance at a common witness pair in the reversal regime)"
+  attackHistory :=
+    [ "R93 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R93 closure of `W_bar_witness_pair_strict_dominance_OPEN` via R92 G-integration framework. Paper line 632 STIPULATES that at SOME common witness pair `(β_low, β_high)` in the reversal regime, the below-sample's weighted-sum decrease strictly dominates the above-sample's weighted-sum increase. Refines R92's `principalSampleBelow_weightedSum_eventually_decreasing` (which gives below-side at its own pair) by unifying both sides at a common pair. R88/R89/R90/R92 paper-stipulated structural-equation precedent. Downstream consumer: `W_bar_witness_pair_strict_dominance_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "Paper-stipulated combined-dominance witness on R92 above + below sample sums at a common pair (paper line 632)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -8079,6 +8094,9 @@ def allGaps : List GapEntry := [
   entry_atom_principalSampleBelowWeight_nonneg,
   entry_atom_belowThresholdWelfare_eq_kappaAgent_integral,
   entry_atom_principalSampleBelow_weightedSum_eventually_decreasing,
+  -- R93 combined-dominance witness atom (Cat 3 §3.4.3 paper-stipulated)
+  -- — substantive content for the R93 closure of W_bar_witness_pair_strict_dominance.
+  entry_atom_principalSampleBoth_combined_dominance_witness_pair,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,

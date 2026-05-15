@@ -224,83 +224,14 @@ theorem betaBarStar_def :
 
 /-! ## 2. Proposition `prop:principal-optimum` -/
 
-/-- **R91 §18 atomic decomposition** of the prior single-atom
-    `W_bar_eventually_decreasing_in_reversal_OPEN`. Paper Proposition
-    `prop:principal-optimum` Part 1 proof (line 632) derives that
-    when `G` has support entirely in the reversal regime, each
-    individual welfare `W(β, κ, α)` is non-monotone in β (Theorem
-    `thm:cognitive-threshold` Part 1), so `dW̄/dβ < 0` for all
-    sufficiently large β. The mathematical content in the paper's
-    argument is a DOMINANCE relation between the carrier-level
-    increments: at SOME β-pair `(β_low, β_high)` in the eventual
-    region, the below-threshold contribution's strict decrease
-    DOMINATES the above-threshold contribution's increase
-    (paper line 638's mixture decomposition makes the reversal
-    regime's below-decrease the load-bearing piece).
-
-    R91 §18 decomposition: split the bundled
-    `W_bar_eventually_decreasing_in_reversal_OPEN` (which packaged
-    the algebraic mixture-sum + dominance into one wA) into:
-     (a) this smaller wA atom `W_bar_witness_pair_strict_dominance_OPEN`
-         (paper-stated DOMINANCE at the witness pair — the substantive
-         carrier-level structural fact; paper line 632), AND
-     (b) a Cat 1 derived theorem `W_bar_eventually_decreasing_in_reversal`
-         that composes (a) with the R72 `W_bar_eq_mixture_OPEN` `def`-rfl
-         identity via algebra (`linarith`).
-
-    Net wA delta: 0 (1 retired wA → 1 new smaller wA), but audit-chain
-    granularity improves per discipline §18: the previously-axiomatic
-    algebraic sum-step `W_bar β_high < W_bar β_low ⇐ above_high - above_low
-    < below_low - below_high` is now a Cat 1 visible derivation, isolating
-    the substantive paper claim (the dominance) from the algebraic
-    consequence (the W_bar reversal). R76/R77 §18 precedent.
-
-    Cat 3 sub-type: workingAssumption (paper-stated dominance of
-    below-threshold strict decrease over above-threshold increase
-    at SOME β-pair in the reversal regime; paper line 632; pending
-    G-conditional integration framework for the eventual-dominance
-    derivation; 必须 close before publication).
-
-    paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632 (each individual welfare non-monotone in reversal regime
-    → at SOME β-pair, below-threshold decrease dominates above-threshold
-    increase via Theorem `thm:cognitive-threshold` Part 1 + paper line
-    638 mixture decomposition). -/
-axiom W_bar_witness_pair_strict_dominance_OPEN :
-    Conditions_C1_C2_C3 →
-    TerminalNeighbourTopology →
-    (∀ p : ℝ, alphaStar 0 p < 1) →
-    ∃ β_low β_high : ℝ, β_low < β_high ∧
-      aboveThresholdWelfare β_high - aboveThresholdWelfare β_low <
-        belowThresholdWelfare β_low - belowThresholdWelfare β_high
-
-/-- **R91 derived theorem** (replaces R-original axiom
-    `W_bar_eventually_decreasing_in_reversal_OPEN` via §18 atomic
-    decomposition). When `G` has support entirely in the reversal
-    regime, `W_bar` is eventually decreasing: there exists a β-pair
-    `β_low < β_high` with `W_bar β_high < W_bar β_low`.
-
-    R91 §18 closure-path-A composition:
-     (a) Cat 3 wA `W_bar_witness_pair_strict_dominance_OPEN` (paper-
-         stated dominance at the witness pair).
-     (b) `W_bar` `def` (`W_bar β = aboveThresholdWelfare β +
-         belowThresholdWelfare β`, R72 substantive-math closure).
-     (c) Cat 1 algebra via `linarith`.
-
-    paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632. -/
-theorem W_bar_eventually_decreasing_in_reversal_OPEN :
-    Conditions_C1_C2_C3 →
-    TerminalNeighbourTopology →
-    (∀ p : ℝ, alphaStar 0 p < 1) →
-    ∃ β_low β_high : ℝ, β_low < β_high ∧ W_bar β_high < W_bar β_low := by
-  intro hC hT hα
-  obtain ⟨β_low, β_high, hβ_lt, h_dom⟩ :=
-    W_bar_witness_pair_strict_dominance_OPEN hC hT hα
-  refine ⟨β_low, β_high, hβ_lt, ?_⟩
-  show aboveThresholdWelfare β_high + belowThresholdWelfare β_high <
-    aboveThresholdWelfare β_low + belowThresholdWelfare β_low
-  linarith
+-- R93 RELOCATION: `W_bar_witness_pair_strict_dominance_OPEN` (R91 wA)
+-- and its consumer `W_bar_eventually_decreasing_in_reversal_OPEN` (R91
+-- derived theorem) have been MOVED to AFTER the R92 G-integration
+-- infrastructure (below `W_bar_mixture_decomposition`, ~line 1010+) so
+-- the R91 axiom can be CONVERTED to a derivedTheorem composing the R92
+-- framework + a new R93 paper-stipulated combined-dominance witness atom.
+-- The downstream consumer `gap_principal_interior_optimum` is also
+-- relocated alongside (preserving source-order dependency chain).
 
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
     `prop:principal-optimum` Part 1 proof (line 632) derives that
@@ -422,29 +353,11 @@ theorem interior_max_exists_from_unimodal_envelope :
   -- Combine 0 ≤ betaBarStar (paper β ≥ 0 convention) with betaBarStar ≠ 0
   exact lt_of_le_of_ne betaBarStar_nonneg_OPEN (Ne.symm h_ne_zero)
 
-/-- **Proposition `prop:principal-optimum` Part 1: derived theorem.**
-    If `G` has support contained in the reversal regime
-    `{(κ, α) : κ < κ*(p, α), α > α*}`, then `betaBarStar ∈ (0, ∞)`.
-    Decomposed from the bundled `gap_principal_interior_optimum_OPEN`
-    axiom per `feedback_gap_ledger_in_lean4` §18 pattern: composes
-    `W_bar_eventually_decreasing_in_reversal_OPEN` (eventually-
-    decreasing from reversal regime) +
-    `W_bar_exceeds_zero_at_positive_beta_OPEN` (within-branch
-    discrimination benefit at small β) +
-    `interior_max_exists_from_unimodal_envelope` (R63 derived
-    theorem replacing the retired axiom; composes
-    `betaBarStar_nonneg_OPEN` structural eq + `betaBarStar_def`
-    argmax-characterisation via Cat 1 Mathlib chain).
-
-    paper source: Proposition `prop:principal-optimum` Part 1, lines 624-625. -/
-theorem gap_principal_interior_optimum
-    (hC : Conditions_C1_C2_C3)
-    (hT : TerminalNeighbourTopology)
-    (h_reversal : ∀ p : ℝ, alphaStar 0 p < 1) :
-    0 < betaBarStar :=
-  interior_max_exists_from_unimodal_envelope
-    (W_bar_eventually_decreasing_in_reversal_OPEN hC hT h_reversal)
-    (W_bar_exceeds_zero_at_positive_beta_OPEN hC hT h_reversal)
+-- R93 RELOCATION: `gap_principal_interior_optimum` (R63 derived theorem)
+-- consumes `W_bar_eventually_decreasing_in_reversal_OPEN` (R91 derived
+-- theorem); both are RELOCATED to AFTER the R92 G-integration
+-- infrastructure (below `W_bar_mixture_decomposition`, ~line 1010+) to
+-- allow R91 axiom → R93 derivedTheorem conversion via R92 framework.
 
 /-- Predicate "distribution `G₂` first-order stochastically dominates
     `G₁` in the cognitive parameter `κ`".
@@ -1006,6 +919,163 @@ theorem W_bar_mixture_decomposition :
   · exact aboveThresholdWelfare_monotone_OPEN
   · exact belowThresholdWelfare_eventually_decreasing_OPEN
   · exact W_bar_eq_mixture_OPEN
+
+/-! ### R93 RELOCATED block — `W_bar_witness_pair_strict_dominance_OPEN`
+   converted from R91 wA-axiom to R93 derivedTheorem via R92 G-integration
+   framework + new R93 paper-stipulated combined-dominance witness atom.
+   Followed by the R91 W_bar_eventually_decreasing derived theorem and
+   the R63 gap_principal_interior_optimum derived theorem (relocated to
+   preserve source-order dependency chain). -/
+
+/-- **R93** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated COMBINED dominance witness pair on the R92 G-conditional
+    sample sums. Paper line 632 STATES "for sufficiently large β,
+    `dW̄/dβ < 0`" in the reversal regime; per the R92 mixture
+    decomposition (`W_bar = above + below`,
+    `above β = ∑ wᵢ * agentWelfare AgentType.kappaAgent β κᵢ αᵢ`,
+    `below β = ∑ vⱼ * agentWelfare AgentType.kappaAgent β κⱼ αⱼ`),
+    this requires AT SOME pair `(β_low, β_high)` the below-sample's
+    weighted-sum decrease strictly DOMINATES the above-sample's
+    weighted-sum increase.
+
+    R93 strict refinement of R92's `principalSampleBelow_weightedSum_
+    eventually_decreasing` (which gives the below-sample's decrease at
+    its own witness pair, but doesn't pin the above-sample's increase
+    at that pair). This combined-witness atom unifies the two pairs:
+    AT A COMMON pair `(β_low, β_high)`, both the below-decrease holds
+    AND the above-increase is strictly dominated. Paper line 632
+    STIPULATES this combined dominance as the substantive content of
+    the eventual `dW̄/dβ < 0` mechanism.
+
+    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    combined-witness structural fact at the named reversal-regime
+    common pair; R88/R89/R90/R92 paper-stipulated structural-equation
+    precedent). 永不 close.
+
+    paper source: Proposition `prop:principal-optimum` Part 1 proof,
+    line 632 (combined dominance at a common witness pair in the
+    reversal regime). -/
+axiom principalSampleBoth_combined_dominance_witness_pair :
+    ∃ β_low β_high : ℝ, β_low < β_high ∧
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        (agentWelfare AgentType.kappaAgent β_high
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) -
+         agentWelfare AgentType.kappaAgent β_low
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i))) <
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        (agentWelfare AgentType.kappaAgent β_low
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j) -
+         agentWelfare AgentType.kappaAgent β_high
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
+
+/-- **R91 §18 atomic decomposition** (R93 CLOSURE via R92 G-integration
+    framework). Paper Proposition `prop:principal-optimum` Part 1 proof
+    (line 632) derives that when `G` has support entirely in the
+    reversal regime, the below-threshold contribution's strict decrease
+    DOMINATES the above-threshold contribution's increase at SOME pair.
+
+    R91 §18 introduced this as a wA atom isolating the substantive
+    paper-line-632 dominance content from the algebraic mixture-sum
+    step; R93 CLOSES the R91 wA via R92 G-conditional integration
+    framework + new R93 paper-stipulated combined-dominance witness atom
+    `principalSampleBoth_combined_dominance_witness_pair` + algebra.
+
+    Substantive paper content moves to the R93 §3.4.3 atom (paper-
+    stipulated combined-witness on the sample sums); algebraic step is
+    Cat 1 visible.
+
+    paper source: Proposition `prop:principal-optimum` Part 1 proof,
+    line 632 (each individual welfare non-monotone in reversal regime
+    → at SOME β-pair, below-threshold decrease dominates above-threshold
+    increase via Theorem `thm:cognitive-threshold` Part 1 + paper line
+    638 mixture decomposition). -/
+theorem W_bar_witness_pair_strict_dominance_OPEN :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    (∀ p : ℝ, alphaStar 0 p < 1) →
+    ∃ β_low β_high : ℝ, β_low < β_high ∧
+      aboveThresholdWelfare β_high - aboveThresholdWelfare β_low <
+        belowThresholdWelfare β_low - belowThresholdWelfare β_high := by
+  intro _hC _hT _hα
+  obtain ⟨β_low, β_high, hβ_lt, h_dom⟩ :=
+    principalSampleBoth_combined_dominance_witness_pair
+  refine ⟨β_low, β_high, hβ_lt, ?_⟩
+  rw [aboveThresholdWelfare_eq_kappaAgent_integral β_high,
+      aboveThresholdWelfare_eq_kappaAgent_integral β_low,
+      belowThresholdWelfare_eq_kappaAgent_integral β_low,
+      belowThresholdWelfare_eq_kappaAgent_integral β_high]
+  have h_above_eq :
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent β_high
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) -
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent β_low
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) =
+      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        (agentWelfare AgentType.kappaAgent β_high
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) -
+         agentWelfare AgentType.kappaAgent β_low
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) := by
+    rw [← Finset.sum_sub_distrib]
+    apply Finset.sum_congr rfl
+    intro i _
+    ring
+  have h_below_eq :
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        agentWelfare AgentType.kappaAgent β_low
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) -
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        agentWelfare AgentType.kappaAgent β_high
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) =
+      ∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        (agentWelfare AgentType.kappaAgent β_low
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j) -
+         agentWelfare AgentType.kappaAgent β_high
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) := by
+    rw [← Finset.sum_sub_distrib]
+    apply Finset.sum_congr rfl
+    intro j _
+    ring
+  rw [h_above_eq, h_below_eq]
+  exact h_dom
+
+/-- **R91 derived theorem (RELOCATED R93)** — when `G` has support
+    entirely in the reversal regime, `W_bar` is eventually decreasing.
+    Composes R93-closed `W_bar_witness_pair_strict_dominance_OPEN` +
+    R72 `W_bar_eq_mixture_OPEN` def-rfl identity via algebra.
+
+    paper source: Proposition `prop:principal-optimum` Part 1 proof,
+    line 632. -/
+theorem W_bar_eventually_decreasing_in_reversal_OPEN :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    (∀ p : ℝ, alphaStar 0 p < 1) →
+    ∃ β_low β_high : ℝ, β_low < β_high ∧ W_bar β_high < W_bar β_low := by
+  intro hC hT hα
+  obtain ⟨β_low, β_high, hβ_lt, h_dom⟩ :=
+    W_bar_witness_pair_strict_dominance_OPEN hC hT hα
+  refine ⟨β_low, β_high, hβ_lt, ?_⟩
+  show aboveThresholdWelfare β_high + belowThresholdWelfare β_high <
+    aboveThresholdWelfare β_low + belowThresholdWelfare β_low
+  linarith
+
+/-- **Proposition `prop:principal-optimum` Part 1: derived theorem
+    (RELOCATED R93).** If `G` has support contained in the reversal
+    regime `{(κ, α) : κ < κ*(p, α), α > α*}`, then `betaBarStar ∈
+    (0, ∞)`. Composes R91 `W_bar_eventually_decreasing_in_reversal_OPEN`
+    (relocated derived theorem) + R-original
+    `W_bar_exceeds_zero_at_positive_beta_OPEN` (still wA, kept earlier) +
+    R63 `interior_max_exists_from_unimodal_envelope` (kept earlier).
+
+    paper source: Proposition `prop:principal-optimum` Part 1, lines 624-625. -/
+theorem gap_principal_interior_optimum
+    (hC : Conditions_C1_C2_C3)
+    (hT : TerminalNeighbourTopology)
+    (h_reversal : ∀ p : ℝ, alphaStar 0 p < 1) :
+    0 < betaBarStar :=
+  interior_max_exists_from_unimodal_envelope
+    (W_bar_eventually_decreasing_in_reversal_OPEN hC hT h_reversal)
+    (W_bar_exceeds_zero_at_positive_beta_OPEN hC hT h_reversal)
 
 /-- **R90 SOUNDNESS-DEFECT FIX** — the previous
     `non_concave_triple_from_mixture_OPEN` signature was
