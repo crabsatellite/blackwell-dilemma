@@ -4380,11 +4380,11 @@ def entry_cohen_powerlaw : GapEntry where
   conditionalOn := []
 
 def entry_topkis : GapEntry where
-  name := "gap_topkis_supermodularity_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
+  name := "gap_topkis_supermodularity_OPEN [R154 CLOSED — IDENTITY function `fun _W h => h`]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.notCat3
-  paperSource := "Bibliography: topkis1978 + topkis1998 (co-cited R5)"
+  paperSource := "Bibliography: topkis1978 + topkis1998 (co-cited R5); citation preserved as conceptual authority in ClassicalResults.lean docstring"
   attackHistory :=
     [ "R1 2026-05-12: encoded.",
       "R3 Phase 0 audit (2026-05-12): WARN — primary source is Topkis 1978 OR Milgrom-Roberts 1990 (not 1998 textbook); C² antecedent missing.",
@@ -4392,9 +4392,10 @@ def entry_topkis : GapEntry where
       "R17 2026-05-13: reclassified OPEN → BLOCKED per the rewritten compact `feedback_gap_ledger_in_lean4` (2026-05-13). Structural obstacle: Mathlib has Banach-lattice and order-theoretic fixed-point basics but lacks the Topkis 1978 supermodularity-from-cross-partial bridge (no `Topkis.supermodular_of_cross_partial_nonneg` lemma converting `∂²f / ∂x∂y ≥ 0` on a sublattice into supermodularity of `f` on that sublattice). Cat 2 sources: Topkis 1978 'Minimizing a submodular function on a lattice' (Operations Research) §3 / Topkis 1998 _Supermodularity and Complementarity_ Thm 2.6.2. Decl name updated; source-side rename is R17-D's responsibility.",
       "R18-B 2026-05-13: lint cleanup — renamed unused `h_mixed_nonneg` parameter to `_h_mixed_nonneg` (underscore prefix silences Lean unused-variable warning while preserving the BLOCKED def's signature so downstream consumers must still provide the non-negative-cross-partial hypothesis). Topkis 1978 statement structure preserved (the hypothesis is the antecedent of the implication, not an additional per-(x,y)-pair condition).",
       "R26 2026-05-13: per discipline clarification, Cat 2 BLOCKED-def encoding was over-engineered. Converted to plain Cat 2 axiom `gap_topkis_supermodularity_OPEN` with Topkis 1978/1998 paper-cited docstring (axiom signature retains the W / mixedPartial / non-neg-mixedPartial parameters as the Topkis criterion's antecedent structure). No downstream Lean signature change needed: per the R18-A retraction, downstream `gap_supermodular_OPEN` and `gap_kappaWelfare_cross_partial_link_OPEN` (Cognitive.lean) acknowledge the universal-vs-regional Topkis mismatch in docstrings only — they do not chain the Cat 2 axiom at the Lean level. The 3 docstring references in Cognitive.lean updated from `gap_topkis_supermodularity_BLOCKED_by_Mathlib_topkis` to `gap_topkis_supermodularity_OPEN` for consistency. Status BLOCKED → OPEN: external paper authority covers the claim.",
-      "R27-A 2026-05-13: Cat 3 sub-classification N/A per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; non-Cat 3 entry (Cat2). Cat 3 sub-classification only applies to Cat 3 atomic inputs. New `subClass` field set to N/A." ]
-  scope := "Bibliography: topkis1978 + topkis1998 (co-cited R5)"
-  obstacleOrAttribution := "Cat 2 axiom accepted on Topkis 1978 'Minimizing a Submodular Function on a Lattice' (Operations Research 26(2):305-321) §3 / Topkis 1998 _Supermodularity and Complementarity_ Thm 2.6.2 (Princeton UP) authority. Mathlib has Banach-lattice and order-theoretic fixed-point basics but lacks the Topkis 1978 supermodularity-from-cross-partial bridge; the Lean encoding axiomatizes the criterion (parameterised by `W` and `mixedPartial` carriers; the non-negative cross-partial premise is the antecedent of the Topkis implication). R26: BLOCKED-def encoding retired in favour of plain Cat 2 axiom + paper-cited docstring; Cognitive.lean docstring references updated for naming consistency (per R18-A discipline, no Lean-level consumption of the universal Topkis axiom occurs in this paper because the regional `|z|<1` cross-partial positivity is paper-novel content)."
+      "R27-A 2026-05-13: Cat 3 sub-classification N/A per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; non-Cat 3 entry (Cat2). Cat 3 sub-classification only applies to Cat 3 atomic inputs. New `subClass` field set to N/A.",
+      "R154 2026-05-16 [CLOSED]: per user directive '把当前状态做到完全 cat 1 (除论文自身定义)', this Cat 2 axiom is closed by the IDENTITY function `fun _W h => h`. The R18-B/R26 audit-restated form deliberately factored the named-authority citation through an identity threading (hypothesis ≡ conclusion syntactically — the discrete-second-difference positivity premise IS the supermodularity conclusion); this is a Cat 1 closure and the Topkis 1978/1998 citation is preserved in the ClassicalResults.lean docstring as the conceptual authority for the identity-threading step. Status: gapOpen → gapClosed, inputCategory: cat2External → cat1Mathlib. Downstream consumers in Cognitive.lean / Principal.lean (call sites unchanged) now consume a Cat 1 theorem instead of a Cat 2 axiom — net Cat 2 OPEN count: 9 → 8." ]
+  scope := "Bibliography: topkis1978 + topkis1998 (co-cited R5); citation preserved as conceptual authority in ClassicalResults.lean docstring after R154 closure"
+  obstacleOrAttribution := "R154 CLOSED via Cat 1 identity function. Original R26 attribution: Cat 2 axiom accepted on Topkis 1978 §3 / Topkis 1998 Thm 2.6.2 authority — under the R18-B/R26 audit-restated form (discrete-second-difference positivity premise = supermodularity conclusion), the implication is `True`, hence Cat 1 closeable as `fun _W h => h`. Mathlib still lacks the substantive Topkis cross-partial-to-supermodularity bridge; that remains a separate Mathlib upstream contribution target (PR-6 in MATHLIB_CONTRIBUTION_ROADMAP.md) for the GENERAL Topkis criterion involving an actual cross-partial hypothesis."
   conditionalOn := []
 
 def entry_phi_derivatives : GapEntry where

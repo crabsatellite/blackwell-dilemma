@@ -320,13 +320,30 @@ Princeton UP. — synthesis monograph, Theorem 2.6.2. -/
     instance handled by the Cognitive.lean `gap_supermodular_OPEN`
     chain; this Cat 2 axiom remains as the named external authority
     (Topkis 1978 §3) for the bridge, with downstream consumers threading
-    it for audit-chain visibility. -/
-axiom gap_topkis_supermodularity_OPEN :
+    it for audit-chain visibility.
+
+    **R154 closure (2026-05-16)**: this axiom is the IDENTITY function
+    on the Topkis-supermodularity hypothesis — hypothesis and conclusion
+    are syntactically identical (the audit-restated form deliberately
+    factored the named-authority citation through an identity threading
+    rather than a substantive bridge). Per the user directive of
+    "把当前状态做到完全 cat 1 (除论文自身定义)", we promote this from
+    Cat 2 axiom to Cat 1 theorem `id`, eliminating one external-axiom
+    dependency for downstream consumers without changing the citation
+    chain (the named authority Topkis 1998 §3.1 is preserved in this
+    docstring as the conceptual source of the identity-threading step).
+
+    Downstream consumers (Cognitive.lean / Principal.lean Topkis-route
+    lemmas) that previously consumed `gap_topkis_supermodularity_OPEN`
+    as a Cat 2 axiom now consume it as a Cat 1 theorem; the call sites
+    are unchanged. -/
+theorem gap_topkis_supermodularity_OPEN :
     ∀ (W : ℝ → ℝ → ℝ),
       (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
         W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
       ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁
+        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁ :=
+  fun _W h => h
 
 /-! ## 6. Standard analytic facts
 
