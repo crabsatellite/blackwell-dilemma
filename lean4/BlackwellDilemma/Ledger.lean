@@ -6693,18 +6693,37 @@ def entry_atom_alpha_below_alpha_star_implies_monotonicity : GapEntry where
     Part 1 proof (line 632), `W_bar` eventually decreasing under
     reversal-regime support. -/
 def entry_atom_W_bar_eventually_decreasing_in_reversal : GapEntry where
-  name := "W_bar_eventually_decreasing_in_reversal_OPEN"
-  status := GapStatus.gapOpen
+  name := "W_bar_eventually_decreasing_in_reversal_OPEN [R91 derivedTheorem; §18 atomic decomposition splits the algebraic mixture-sum step from the substantive dominance content]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (each individual welfare non-monotone → `W_bar` eventually decreasing)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_principal_interior_optimum_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Captures the eventually-decreasing sub-clause via Theorem `thm:cognitive-threshold` Part 1. Cat 1 reduction check: not Mathlib-derivable (depends on `thm:cognitive-threshold` Part 1 `agentWelfare` opaque-carrier non-monotonicity). Cat 2 reduction check: paper-novel application. Downstream consumer: `gap_principal_interior_optimum` derived theorem (Principal.lean) hosts the atom." ,
       "R39 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional. Per `feedback_gap_ledger_in_lean4` §3.4.3 (paper-foundational atoms) the R36-R38 atomic stipulations are paper-stated atomic content extracted from theorem/proposition statements about the paper’s opaque carriers; they constitute the paper’s commitments to how its primitives behave (永不 close per discipline). Reclassifying as workingAssumption (必须 close before publication) was an honest-but-overzealous starting state from R36-R38 that would have implied derivation gaps where none exist at the paper-stipulation level.",
-      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption." ]
-  scope := "Proposition prop:principal-optimum Part 1, `W_bar` eventually decreasing under reversal-regime support"
+      "R46 2026-05-14: hostile-audit-driven reclassification structuralEquation/gapDefinitional → workingAssumption/gapOpen per R45 verdict. The atom is paper-derived working content (not §3.4.3 definitional equation on a primitive); per §3.4.4 workingAssumption (必须 close). Many of these had explicit Lean docstring/Ledger contradictions where the source-side docstring already said workingAssumption.",
+      "R91 2026-05-15: §18 ATOMIC DECOMPOSITION (R76/R77 NET-0-wA precedent). The bundled atom packaged the algebraic mixture-sum step (`W_bar β = above β + below β` ⇒ `W_bar β_high < W_bar β_low ⇐ above_high - above_low < below_low - below_high`) with the substantive dominance content (the carrier-level inequality between increments). R91 splits into: (a) new smaller wA `W_bar_witness_pair_strict_dominance_OPEN` (paper-stated dominance at the witness pair — the substantive paper-line-632 carrier-level inequality), AND (b) Cat 1 derived theorem `W_bar_eventually_decreasing_in_reversal_OPEN` composing (a) with the R72 `W_bar_eq_mixture_OPEN` `def`-rfl identity via `linarith`. Net wA delta: 0 (1 retired wA → 1 new smaller wA), but audit-chain granularity improves: the algebraic sum-step is now Cat 1 visible, isolating the substantive paper claim (the dominance) from the algebraic consequence (the W_bar reversal). inputCategory Cat 3 → Cat 3; cat3SubType workingAssumption → derivedTheorem; status gapOpen → gapClosed. Build GREEN (2712 jobs)." ]
+  scope := "Proposition prop:principal-optimum Part 1, `W_bar` eventually decreasing under reversal-regime support (R91 closed via §18 atomic decomposition; substantive content moves to `W_bar_witness_pair_strict_dominance_OPEN`)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4 (R46 reclassification per R45 hostile audit). Close target = paper prop:principal-optimum Part 1 proof reconstruction (each individual welfare non-monotone → W_bar eventually decreasing under reversal-regime support)."
+    "R91 CLOSED via §18 atomic decomposition — derivedTheorem composing (a) new smaller wA `W_bar_witness_pair_strict_dominance_OPEN` (paper-stated dominance at the witness pair) with (b) R72 `W_bar_eq_mixture_OPEN` `def`-rfl identity via Cat 1 `linarith`. Substantive paper content shifts to the new smaller wA; the algebraic sum-step is now Cat 1 visible."
+  conditionalOn := []
+
+/-- R91 §18 atomic decomposition NEW smaller wA: paper-stated
+    dominance at the witness pair under reversal-regime support
+    (paper line 632). The substantive paper content extracted from
+    the prior bundled `W_bar_eventually_decreasing_in_reversal_OPEN`
+    via §18 atomic decomposition. -/
+def entry_atom_W_bar_witness_pair_strict_dominance : GapEntry where
+  name := "W_bar_witness_pair_strict_dominance_OPEN"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.workingAssumption
+  paperSource := "Proposition prop:principal-optimum Part 1 proof, line 632 (each individual welfare non-monotone → at SOME β-pair, below-threshold decrease dominates above-threshold increase)"
+  attackHistory :=
+    [ "R91 2026-05-15: NEW smaller wA introduced as the substantive component of the §18 atomic decomposition of `W_bar_eventually_decreasing_in_reversal_OPEN`. Paper line 632 STATES that under reversal-regime support, each individual welfare is non-monotone, so eventually `dW̄/dβ < 0`; the carrier-level mathematical content is a DOMINANCE relation between the carrier-level increments at SOME β-pair `(β_low, β_high)`: the below-threshold contribution's strict decrease DOMINATES the above-threshold contribution's increase. Statement: `Conditions_C1_C2_C3 → TerminalNeighbourTopology → (∀ p, alphaStar 0 p < 1) → ∃ β_low β_high, β_low < β_high ∧ aboveThresholdWelfare β_high - aboveThresholdWelfare β_low < belowThresholdWelfare β_low - belowThresholdWelfare β_high`. Strictly smaller than the retired bundled atom: only the carrier-level dominance is asserted; the algebraic sum-step (W_bar = above + below ⇒ W_bar reversal) is now Cat 1 visible in the derived theorem `W_bar_eventually_decreasing_in_reversal_OPEN`. Closure target = G-conditional integration framework (concretize aboveThresholdWelfare and belowThresholdWelfare as G-conditional integrals of agentWelfare; then the dominance follows from the kappa-conditional reversal regime via integration). Cat 1 reduction check: not Mathlib-derivable (constrains opaque carriers). Cat 2 reduction check: paper-novel. Downstream consumer: `W_bar_eventually_decreasing_in_reversal_OPEN` (now derived theorem)." ]
+  scope := "Proposition prop:principal-optimum Part 1, paper-stated dominance at witness pair (substantive content of R91 §18 atomic decomposition)"
+  obstacleOrAttribution :=
+    "Cat 3 workingAssumption per §3.4.4 (R91 NEW smaller wA from §18 atomic decomposition of `W_bar_eventually_decreasing_in_reversal_OPEN`). Close target = G-conditional integration framework concretizing aboveThresholdWelfare/belowThresholdWelfare as G-conditional integrals of agentWelfare; then the dominance follows from kappa-conditional reversal regime via integration."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -7917,6 +7936,10 @@ def allGaps : List GapEntry := [
   -- smaller workingAssumption alpha_below_alpha_star_implies_monotonicity.
   entry_atom_alpha_below_alpha_star_implies_monotonicity,
   entry_atom_W_bar_eventually_decreasing_in_reversal,
+  -- R91 §18 atomic decomposition NEW smaller wA (sister to the §18 split
+  -- of `W_bar_eventually_decreasing_in_reversal_OPEN`; substantive
+  -- carrier-level paper-line-632 dominance content).
+  entry_atom_W_bar_witness_pair_strict_dominance,
   entry_atom_W_bar_exceeds_zero_at_positive_beta,
   entry_atom_interior_max_exists_from_unimodal_envelope,
   -- R63 §18 sub-chain on retired

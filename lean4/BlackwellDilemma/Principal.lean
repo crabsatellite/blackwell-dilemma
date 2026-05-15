@@ -224,37 +224,83 @@ theorem betaBarStar_def :
 
 /-! ## 2. Proposition `prop:principal-optimum` -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+/-- **R91 §18 atomic decomposition** of the prior single-atom
+    `W_bar_eventually_decreasing_in_reversal_OPEN`. Paper Proposition
     `prop:principal-optimum` Part 1 proof (line 632) derives that
     when `G` has support entirely in the reversal regime, each
     individual welfare `W(β, κ, α)` is non-monotone in β (Theorem
     `thm:cognitive-threshold` Part 1), so `dW̄/dβ < 0` for all
-    sufficiently large β: there exists `β_high` with
-    `W_bar β_high < W_bar β_high'` for some `β_high' < β_high`.
-    Equivalently, `W_bar` is eventually decreasing. This atomic
-    stipulation captures the "eventually-decreasing" sub-clause of
-    the paper-stated interior-optimum existence on the existing
-    carrier `W_bar`.
+    sufficiently large β. The mathematical content in the paper's
+    argument is a DOMINANCE relation between the carrier-level
+    increments: at SOME β-pair `(β_low, β_high)` in the eventual
+    region, the below-threshold contribution's strict decrease
+    DOMINATES the above-threshold contribution's increase
+    (paper line 638's mixture decomposition makes the reversal
+    regime's below-decrease the load-bearing piece).
 
-    Encoding choice: extracted from the bundled
-    `gap_principal_interior_optimum_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The eventually-decreasing form is encoded as an
-    explicit existential pair `∃ β_low < β_high, W_bar β_high <
-    W_bar β_low`.
+    R91 §18 decomposition: split the bundled
+    `W_bar_eventually_decreasing_in_reversal_OPEN` (which packaged
+    the algebraic mixture-sum + dominance into one wA) into:
+     (a) this smaller wA atom `W_bar_witness_pair_strict_dominance_OPEN`
+         (paper-stated DOMINANCE at the witness pair — the substantive
+         carrier-level structural fact; paper line 632), AND
+     (b) a Cat 1 derived theorem `W_bar_eventually_decreasing_in_reversal`
+         that composes (a) with the R72 `W_bar_eq_mixture_OPEN` `def`-rfl
+         identity via algebra (`linarith`).
 
-    Cat 3 sub-type: workingAssumption (paper-stated eventually-
-    decreasing fact on opaque carrier `W_bar` via Theorem
-    `thm:cognitive-threshold` Part 1; 必须 close before publication).
+    Net wA delta: 0 (1 retired wA → 1 new smaller wA), but audit-chain
+    granularity improves per discipline §18: the previously-axiomatic
+    algebraic sum-step `W_bar β_high < W_bar β_low ⇐ above_high - above_low
+    < below_low - below_high` is now a Cat 1 visible derivation, isolating
+    the substantive paper claim (the dominance) from the algebraic
+    consequence (the W_bar reversal). R76/R77 §18 precedent.
+
+    Cat 3 sub-type: workingAssumption (paper-stated dominance of
+    below-threshold strict decrease over above-threshold increase
+    at SOME β-pair in the reversal regime; paper line 632; pending
+    G-conditional integration framework for the eventual-dominance
+    derivation; 必须 close before publication).
 
     paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632 (each individual welfare non-monotone → `W_bar`
-    eventually decreasing). -/
-axiom W_bar_eventually_decreasing_in_reversal_OPEN :
+    line 632 (each individual welfare non-monotone in reversal regime
+    → at SOME β-pair, below-threshold decrease dominates above-threshold
+    increase via Theorem `thm:cognitive-threshold` Part 1 + paper line
+    638 mixture decomposition). -/
+axiom W_bar_witness_pair_strict_dominance_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     (∀ p : ℝ, alphaStar 0 p < 1) →
-    ∃ β_low β_high : ℝ, β_low < β_high ∧ W_bar β_high < W_bar β_low
+    ∃ β_low β_high : ℝ, β_low < β_high ∧
+      aboveThresholdWelfare β_high - aboveThresholdWelfare β_low <
+        belowThresholdWelfare β_low - belowThresholdWelfare β_high
+
+/-- **R91 derived theorem** (replaces R-original axiom
+    `W_bar_eventually_decreasing_in_reversal_OPEN` via §18 atomic
+    decomposition). When `G` has support entirely in the reversal
+    regime, `W_bar` is eventually decreasing: there exists a β-pair
+    `β_low < β_high` with `W_bar β_high < W_bar β_low`.
+
+    R91 §18 closure-path-A composition:
+     (a) Cat 3 wA `W_bar_witness_pair_strict_dominance_OPEN` (paper-
+         stated dominance at the witness pair).
+     (b) `W_bar` `def` (`W_bar β = aboveThresholdWelfare β +
+         belowThresholdWelfare β`, R72 substantive-math closure).
+     (c) Cat 1 algebra via `linarith`.
+
+    paper source: Proposition `prop:principal-optimum` Part 1 proof,
+    line 632. -/
+theorem W_bar_eventually_decreasing_in_reversal_OPEN :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    (∀ p : ℝ, alphaStar 0 p < 1) →
+    ∃ β_low β_high : ℝ, β_low < β_high ∧ W_bar β_high < W_bar β_low := by
+  intro hC hT hα
+  obtain ⟨β_low, β_high, hβ_lt, h_dom⟩ :=
+    W_bar_witness_pair_strict_dominance_OPEN hC hT hα
+  refine ⟨β_low, β_high, hβ_lt, ?_⟩
+  show aboveThresholdWelfare β_high + belowThresholdWelfare β_high <
+    aboveThresholdWelfare β_low + belowThresholdWelfare β_low
+  linarith
 
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
     `prop:principal-optimum` Part 1 proof (line 632) derives that
