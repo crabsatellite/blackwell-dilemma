@@ -4964,6 +4964,191 @@ def entry_atom_agentRewardKernel_greedy_C2prime_kernel_reversal_witness :
     "Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated per-realisation kernel reversal-witness; R88 / R89 kernel-structural-equation precedent). 永不 close."
   conditionalOn := []
 
+/-! ### R92 G-conditional integration infrastructure entries -/
+
+/-- principalSampleAbove — R92 Cat 3 §3.4.3 paper-novel opaque carrier
+    for the principal's above-threshold finite-sample support type
+    (paper Def `principal` line 615 + line 638 above-threshold partition). -/
+def entry_atom_principalSampleAbove : GapEntry where
+  name := "principalSampleAbove (paper-novel finite-sample carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Definition def:principal, line 615 (`G(κ, α)` principal distribution) + Proposition prop:principal-optimum Part 3 proof, line 638 (above-threshold partition `G | κ > κ*`)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier introduced for the R92 G-conditional integration framework (R88 percolation-foundation precedent for the analog measure-theoretic infrastructure). Paper-stipulated finite-sample realisation of paper line 638's `G | κ > κ*` above-threshold partition. Companion structural-equation atoms (`principalSampleAboveWeight_nonneg`, `aboveThresholdWelfare_eq_kappaAgent_integral`, `principalSampleAbove_individual_welfare_monotone`) pin the carrier's behavior + its consumption by the R92 closure of `aboveThresholdWelfare_monotone_OPEN`. 永不 close per discipline §3.4.3 — paper-novel primitive realising paper Definition's above-threshold partition." ]
+  scope := "Opaque finite-sample carrier `principalSampleAbove : Type` realising paper line 638's above-threshold partition `G | κ > κ*`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline (R88 `BondConfig` precedent for analog measure-theoretic infrastructure carrier). 永不 close."
+  conditionalOn := []
+
+/-- principalSampleAboveWeight — R92 Cat 3 §3.4.3 paper-novel opaque
+    carrier for the above-threshold sample weights. -/
+def entry_atom_principalSampleAboveWeight : GapEntry where
+  name := "principalSampleAboveWeight (paper-novel weight carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Definition def:principal, line 615 (`G(κ, α)` weights) + Proposition prop:principal-optimum Part 3 proof, line 638 (above-threshold mixture weight `λ`)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier introduced for the R92 G-conditional integration framework. Paper-stipulated weight on each above-threshold sample point realising paper's `λ · pᵢ` from the finite-G realisation. 永不 close per discipline §3.4.3." ]
+  scope := "Opaque weight carrier `principalSampleAboveWeight : principalSampleAbove → ℝ`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+/-- principalSampleAboveKappa — R92 Cat 3 §3.4.3 paper-novel opaque
+    carrier for the above-threshold sample κ values. -/
+def entry_atom_principalSampleAboveKappa : GapEntry where
+  name := "principalSampleAboveKappa (paper-novel κ-parameter carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (above-threshold partition `κ > κ*` indexes the sample)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier introduced for the R92 G-conditional integration framework. Paper-stipulated κ parameter at each above-threshold sample point (all `> κ*` by partition's defining property). 永不 close per discipline §3.4.3." ]
+  scope := "Opaque κ-parameter carrier `principalSampleAboveKappa : principalSampleAbove → ℝ`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+/-- principalSampleAboveAlpha — R92 Cat 3 §3.4.3 paper-novel opaque
+    carrier for the above-threshold sample α values. -/
+def entry_atom_principalSampleAboveAlpha : GapEntry where
+  name := "principalSampleAboveAlpha (paper-novel α-parameter carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`α` parameter in `W(β, κ, α)` integrand)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier introduced for the R92 G-conditional integration framework. Paper-stipulated α parameter at each above-threshold sample point. 永不 close per discipline §3.4.3." ]
+  scope := "Opaque α-parameter carrier `principalSampleAboveAlpha : principalSampleAbove → ℝ`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+/-- principalSampleAboveWeight_nonneg — R92 Cat 3 §3.4.3 paper-stipulated
+    structural equation: above-threshold sample weights are non-negative. -/
+def entry_atom_principalSampleAboveWeight_nonneg : GapEntry where
+  name := "principalSampleAboveWeight_nonneg"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition def:principal, line 615 (`G(κ, α)` standing-convention probability-measure)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-stipulated structural equation introduced for the R92 G-conditional integration framework. Probability-measure positivity of each above-threshold sample weight. 永不 close per discipline §3.4.3." ]
+  scope := "Above-threshold sample weights are non-negative (probability-measure positivity)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+/-- aboveThresholdWelfare_eq_kappaAgent_integral — R92 Cat 3 §3.4.3
+    paper-stipulated structural equation: aboveThresholdWelfare β is the
+    weighted-finite-sum realisation of paper line 638's `λ · E_{G | κ > κ*}[W]`. -/
+def entry_atom_aboveThresholdWelfare_eq_kappaAgent_integral : GapEntry where
+  name := "aboveThresholdWelfare_eq_kappaAgent_integral"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`W̄(β) = λ · E_{G | κ > κ*}[W(β,κ,α)] + (1-λ) · E_{G | κ < κ*}[W(β,κ,α)]` above-threshold component)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-stipulated structural equation introduced for the R92 G-conditional integration framework (R88 `agentWelfare = percExpectation kernel` precedent for the analog welfare-carrier concretisation). Pins opaque `aboveThresholdWelfare β` to the weighted-finite-sum `∑ i, principalSampleAboveWeight i * agentWelfare AgentType.kappaAgent β (principalSampleAboveKappa i) (principalSampleAboveAlpha i)`. Paper line 638 STIPULATES this integral form as the above-threshold component's defining identification. 永不 close per discipline §3.4.3 — paper-Def-stipulated carrier-defining equation." ]
+  scope := "aboveThresholdWelfare β = weighted-finite-sum of agentWelfare kappaAgent over above-threshold sample (paper line 638)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline (paper line 638 STIPULATES the partition's integral form). 永不 close."
+  conditionalOn := []
+
+/-- principalSampleAbove_individual_welfare_monotone — R92 Cat 3 §3.4.3
+    paper-stipulated structural equation: at every above-threshold sample
+    point, individual welfare is monotone in β. -/
+def entry_atom_principalSampleAbove_individual_welfare_monotone : GapEntry where
+  name := "principalSampleAbove_individual_welfare_monotone"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (above-threshold partition `κ > κ*`) + Theorem 4.1 Part 2, line 492 (κ-recovery welfare monotonicity in β)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-stipulated structural equation introduced for the R92 G-conditional integration framework. Paper line 638 STIPULATES the above-threshold sample by `κᵢ > κ*` partition; paper Theorem 4.1 Part 2 (line 492) STATES that for `κ` above the cognitive threshold, the κ-agent's welfare is non-decreasing in β. Composing: at each above-threshold sample point, individual welfare is monotone in β. R88 `kappa_large_blackwell_recovery_OPEN` derives the per-`κ` form but the sample's `above-recovery-threshold` partition is paper-Def-stipulated. Downstream consumer: `aboveThresholdWelfare_monotone_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "At each above-threshold sample point, individual welfare is monotone in β (paper Theorem 4.1 Part 2 + line 638 partition)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+/-- principalSampleBelow + below-threshold sister entries (carriers + structural
+    equations + weighted-sum reversal-witness). -/
+def entry_atom_principalSampleBelow : GapEntry where
+  name := "principalSampleBelow (paper-novel finite-sample carrier; below-threshold sister)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Definition def:principal, line 615 + Proposition prop:principal-optimum Part 3 proof, line 638 (below-threshold partition `G | κ < κ*`)"
+  attackHistory :=
+    [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier — below-threshold sister of `principalSampleAbove`. 永不 close per discipline §3.4.3." ]
+  scope := "Opaque finite-sample carrier `principalSampleBelow : Type` realising paper line 638's below-threshold partition `G | κ < κ*`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_principalSampleBelowWeight : GapEntry where
+  name := "principalSampleBelowWeight (paper-novel weight carrier; below-threshold sister)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Definition def:principal, line 615 + Proposition prop:principal-optimum Part 3 proof, line 638"
+  attackHistory := [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier — below-threshold sister of `principalSampleAboveWeight`. 永不 close." ]
+  scope := "Opaque weight carrier `principalSampleBelowWeight : principalSampleBelow → ℝ`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_principalSampleBelowKappa : GapEntry where
+  name := "principalSampleBelowKappa (paper-novel κ-parameter carrier; below-threshold sister)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-threshold partition `κ < κ*` indexes the sample)"
+  attackHistory := [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier — below-threshold sister. 永不 close." ]
+  scope := "Opaque κ-parameter carrier `principalSampleBelowKappa : principalSampleBelow → ℝ`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_principalSampleBelowAlpha : GapEntry where
+  name := "principalSampleBelowAlpha (paper-novel α-parameter carrier; below-threshold sister)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638"
+  attackHistory := [ "R92 2026-05-15: Cat 3 paper-novel primitive carrier — below-threshold sister. 永不 close." ]
+  scope := "Opaque α-parameter carrier `principalSampleBelowAlpha : principalSampleBelow → ℝ`"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_principalSampleBelowWeight_nonneg : GapEntry where
+  name := "principalSampleBelowWeight_nonneg"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition def:principal, line 615 (probability-measure positivity)"
+  attackHistory := [ "R92 2026-05-15: Cat 3 paper-stipulated structural equation — below-threshold sister of `principalSampleAboveWeight_nonneg`. 永不 close." ]
+  scope := "Below-threshold sample weights are non-negative"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_belowThresholdWelfare_eq_kappaAgent_integral : GapEntry where
+  name := "belowThresholdWelfare_eq_kappaAgent_integral"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-threshold component `(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`)"
+  attackHistory := [ "R92 2026-05-15: Cat 3 paper-stipulated structural equation — below-threshold sister of `aboveThresholdWelfare_eq_kappaAgent_integral`. Pins opaque `belowThresholdWelfare β` to weighted-finite-sum of `agentWelfare AgentType.kappaAgent` over below-threshold sample. Paper line 638 STIPULATES this integral form. Downstream consumer: `belowThresholdWelfare_eventually_decreasing_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "belowThresholdWelfare β = weighted-finite-sum of agentWelfare kappaAgent over below-threshold sample (paper line 638)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+/-- principalSampleBelow_weightedSum_eventually_decreasing — R92 Cat 3
+    §3.4.3 paper-stipulated weighted-sum reversal-witness. -/
+def entry_atom_principalSampleBelow_weightedSum_eventually_decreasing : GapEntry where
+  name := "principalSampleBelow_weightedSum_eventually_decreasing"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-threshold partition + eventually-decreasing) + Theorem 4.1 Part 1, line 491 (per-sample reversal mechanism)"
+  attackHistory := [ "R92 2026-05-15: Cat 3 paper-stipulated weighted-sum reversal-witness structural equation. Paper line 638 STIPULATES that the below-threshold sample's weighted-sum welfare contribution is eventually decreasing in β; paper Theorem 4.1 Part 1 (line 491) STATES that for the below-threshold (κ < κ*) sample, individual welfare is non-monotone in β; aggregating against the sample's positive-weight measure preserves the strict-decrease at the witness pair. Mirrors R90's reversal-witness pattern lifted to the sample-sum level. Downstream consumer: `belowThresholdWelfare_eventually_decreasing_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "Paper-stipulated witness pair on the below-threshold weighted-sum carrier where the sum strictly decreases (paper line 638 + Theorem 4.1 Part 1)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
 /-- agentRewardKernel_greedy_wrongness_kernel_reversal_witness — R90
     Cat 3 §3.4.3 paper-stipulated kernel reversal-witness for Lemma
     `lem:wrongness` stage-2 reversal. -/
@@ -6888,31 +7073,33 @@ def entry_atom_W_bar_eq_mixture : GapEntry where
 /-- R63 NEW smaller paper-novel ATOMIC stipulation: paper line 638
     above-regime non-decreasing under standard Blackwell regime. -/
 def entry_atom_aboveThresholdWelfare_monotone : GapEntry where
-  name := "aboveThresholdWelfare_monotone_OPEN"
-  status := GapStatus.gapOpen
+  name := "aboveThresholdWelfare_monotone_OPEN [R92 derivedTheorem; closed via G-conditional integration framework]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`the first term is non-decreasing in β (standard Blackwell regime)`)"
   attackHistory :=
-    [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller per-component wA). Paper line 638 explicitly asserts the above-threshold contribution is `non-decreasing in β (standard Blackwell regime)` because the κ > κ* regime exhibits monotone individual welfare per Theorem `thm:cognitive-threshold` Part 0. Statement: `∀ β₁ β₂, β₁ ≤ β₂ → aboveThresholdWelfare β₁ ≤ aboveThresholdWelfare β₂`. Strictly smaller than retired bundled atom — isolates only the above-regime monotonicity content on the new aboveThresholdWelfare carrier, leaving the below-regime eventually-decreasing content to a separate atom + the mixture-identity content to a separate structural eq. Cat 1 reduction check: not Mathlib-derivable (depends on conditional-expectation aggregation infrastructure for the explicit `λ E_{G | κ > κ*}[W(β,κ,α)]` derivation). Cat 2 reduction check: paper-novel sub-population aggregation. Hosted by `W_bar_mixture_decomposition` (Principal.lean) derived theorem." ]
-  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (above-regime non-decreasing in β)"
+    [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent (split bundled wA into structural identification + smaller per-component wA). Paper line 638 explicitly asserts the above-threshold contribution is `non-decreasing in β (standard Blackwell regime)` because the κ > κ* regime exhibits monotone individual welfare per Theorem `thm:cognitive-threshold` Part 0. Statement: `∀ β₁ β₂, β₁ ≤ β₂ → aboveThresholdWelfare β₁ ≤ aboveThresholdWelfare β₂`. Strictly smaller than retired bundled atom — isolates only the above-regime monotonicity content on the new aboveThresholdWelfare carrier, leaving the below-regime eventually-decreasing content to a separate atom + the mixture-identity content to a separate structural eq. Cat 1 reduction check: not Mathlib-derivable (depends on conditional-expectation aggregation infrastructure for the explicit `λ E_{G | κ > κ*}[W(β,κ,α)]` derivation). Cat 2 reduction check: paper-novel sub-population aggregation. Hosted by `W_bar_mixture_decomposition` (Principal.lean) derived theorem.",
+      "R92 2026-05-15: CLOSED via R92 G-conditional integration framework (R88 percolation-foundation precedent — build the framework once, reuse across the atom family). New Cat 3 §3.4.3 paper-novel infrastructure (Principal.lean): (a) finite-sample carrier `principalSampleAbove : Type` + `Fintype` + `DecidableEq` instances (paper Def `principal` line 615 + line 638 above-threshold partition realisation); (b) parameter carriers `principalSampleAboveWeight` / `principalSampleAboveKappa` / `principalSampleAboveAlpha`; (c) paper-stipulated structural equations `principalSampleAboveWeight_nonneg` (probability-measure positivity), `aboveThresholdWelfare_eq_kappaAgent_integral` (paper line 638 weighted-finite-sum realisation pinning aboveThresholdWelfare to ∑ᵢ wᵢ * agentWelfare kappaAgent β κᵢ αᵢ), `principalSampleAbove_individual_welfare_monotone` (paper line 638 + Theorem 4.1 Part 2 — at each above-threshold sample point, individual welfare is monotone in β). The wA atom `aboveThresholdWelfare_monotone_OPEN` is converted to a Cat 1 derivedTheorem composing (i) the integral structural equation + (ii) `Finset.sum_le_sum` over per-sample pointwise monotonicity + (iii) per-sample weight non-negativity. Substantive paper content moves to `principalSampleAbove_individual_welfare_monotone` (paper Theorem 4.1 Part 2 + line 638 above-threshold partition — paper-Def-stipulated per-sample fact). inputCategory Cat 3 → Cat 3; cat3SubType workingAssumption → derivedTheorem; status gapOpen → gapClosed. Net wA delta: −1." ]
+  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (above-regime non-decreasing in β; R92 closed via G-conditional integration framework)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = paper proof reconstruction of above-threshold contribution monotonicity from κ > κ* regime monotone individual welfare (per Theorem thm:cognitive-threshold Part 0) + Mathlib bounded-measure / conditional-expectation aggregation for `λ E_{G | κ > κ*}[W(β,κ,α)]` explicit derivation."
+    "R92 CLOSED — Cat 1 derivedTheorem composing R92 G-conditional integration infrastructure (`aboveThresholdWelfare_eq_kappaAgent_integral` weighted-finite-sum realisation + `principalSampleAbove_individual_welfare_monotone` per-sample structural equation + `principalSampleAboveWeight_nonneg`) via `Finset.sum_le_sum`."
   conditionalOn := []
 
 /-- R63 NEW smaller paper-novel ATOMIC stipulation: paper line 638
     below-regime eventually-decreasing under reversal regime. -/
 def entry_atom_belowThresholdWelfare_eventually_decreasing : GapEntry where
-  name := "belowThresholdWelfare_eventually_decreasing_OPEN"
-  status := GapStatus.gapOpen
+  name := "belowThresholdWelfare_eventually_decreasing_OPEN [R92 derivedTheorem; closed via G-conditional integration framework]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (`the second term is eventually decreasing (reversal regime)`)"
   attackHistory :=
-    [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent. Paper line 638 explicitly asserts the below-threshold contribution is `eventually decreasing (reversal regime)` because the κ < κ* regime exhibits non-monotone individual welfare per Theorem `thm:cognitive-threshold` Part 1. Statement: `∃ β_low β_high, β_low < β_high ∧ belowThresholdWelfare β_high < belowThresholdWelfare β_low`. Strictly smaller than retired bundled atom — isolates only the below-regime eventually-decreasing content on the new belowThresholdWelfare carrier (parallel to the above-regime monotonicity sibling atom). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Hosted by `W_bar_mixture_decomposition` (Principal.lean) derived theorem." ]
-  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-regime eventually-decreasing in β)"
+    [ "R63 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the retired bundled `W_bar_mixture_decomposition_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern + R61 `mLimit_pos` precedent. Paper line 638 explicitly asserts the below-threshold contribution is `eventually decreasing (reversal regime)` because the κ < κ* regime exhibits non-monotone individual welfare per Theorem `thm:cognitive-threshold` Part 1. Statement: `∃ β_low β_high, β_low < β_high ∧ belowThresholdWelfare β_high < belowThresholdWelfare β_low`. Strictly smaller than retired bundled atom — isolates only the below-regime eventually-decreasing content on the new belowThresholdWelfare carrier (parallel to the above-regime monotonicity sibling atom). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel. Hosted by `W_bar_mixture_decomposition` (Principal.lean) derived theorem.",
+      "R92 2026-05-15: CLOSED via R92 G-conditional integration framework (sister to aboveThresholdWelfare_monotone R92 closure). New Cat 3 §3.4.3 paper-novel infrastructure (Principal.lean): (a) finite-sample carrier `principalSampleBelow : Type` + `Fintype` + `DecidableEq` instances; (b) parameter carriers `principalSampleBelowWeight` / `principalSampleBelowKappa` / `principalSampleBelowAlpha`; (c) paper-stipulated structural equations `principalSampleBelowWeight_nonneg`, `belowThresholdWelfare_eq_kappaAgent_integral` (paper line 638 weighted-finite-sum realisation), `principalSampleBelow_weightedSum_eventually_decreasing` (paper line 638 + Theorem 4.1 Part 1 — paper-stipulated witness pair on the weighted-sum carrier where the sum strictly decreases; mirrors R90's reversal-witness pattern lifted to the sample-sum level). The wA atom `belowThresholdWelfare_eventually_decreasing_OPEN` is converted to a Cat 1 derivedTheorem composing the integral structural equation + weighted-sum reversal witness. Substantive paper content moves to `principalSampleBelow_weightedSum_eventually_decreasing` (paper Theorem 4.1 Part 1 + line 638 below-threshold partition). inputCategory Cat 3 → Cat 3; cat3SubType workingAssumption → derivedTheorem; status gapOpen → gapClosed. Net wA delta: −1." ]
+  scope := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-regime eventually-decreasing in β; R92 closed via G-conditional integration framework)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = paper proof reconstruction of below-threshold contribution eventually-decreasing from κ < κ* reversal regime non-monotone individual welfare (per Theorem thm:cognitive-threshold Part 1) + Mathlib bounded-measure / conditional-expectation aggregation."
+    "R92 CLOSED — Cat 1 derivedTheorem composing R92 G-conditional integration infrastructure (`belowThresholdWelfare_eq_kappaAgent_integral` weighted-finite-sum realisation + `principalSampleBelow_weightedSum_eventually_decreasing` paper-stipulated witness-pair structural equation)."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:principal-optimum`
@@ -7876,6 +8063,22 @@ def allGaps : List GapEntry := [
   entry_atom_agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness,
   entry_atom_agentRewardKernel_greedy_C2prime_kernel_reversal_witness,
   entry_atom_agentRewardKernel_greedy_wrongness_kernel_reversal_witness,
+  -- R92 G-conditional integration infrastructure entries (foundation for
+  -- W_bar / aboveThresholdWelfare / belowThresholdWelfare cluster closures).
+  entry_atom_principalSampleAbove,
+  entry_atom_principalSampleAboveWeight,
+  entry_atom_principalSampleAboveKappa,
+  entry_atom_principalSampleAboveAlpha,
+  entry_atom_principalSampleAboveWeight_nonneg,
+  entry_atom_aboveThresholdWelfare_eq_kappaAgent_integral,
+  entry_atom_principalSampleAbove_individual_welfare_monotone,
+  entry_atom_principalSampleBelow,
+  entry_atom_principalSampleBelowWeight,
+  entry_atom_principalSampleBelowKappa,
+  entry_atom_principalSampleBelowAlpha,
+  entry_atom_principalSampleBelowWeight_nonneg,
+  entry_atom_belowThresholdWelfare_eq_kappaAgent_integral,
+  entry_atom_principalSampleBelow_weightedSum_eventually_decreasing,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
