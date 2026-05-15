@@ -68,14 +68,50 @@ The formalisation follows the paper's section structure.
 
 ## Status summary
 
+Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce):
+
 | Status | Count | Meaning |
 | --- | ---: | --- |
-| Paper-statement labels mapped to Lean theorems | **41 / 41** | 100% label-level correspondence (see `PAPER_LEAN_CALIBRATION.md`) |
-| Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 30 | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` |
-| Lattice-restricted disclosed gaps | 2 | Theorem 4.1 Part 4 lattice variant; Theorem 4.1 Part 6 lattice embedding-and-reduction proof |
+| Total ledger entries | **334** | Typed `GapEntry`s in `Ledger.lean` (carriers + atomic stipulations + derived theorems + classical citations) |
+| `gapClosed` | 158 | Lean theorem (no `sorry`) |
+| `gapDefinitional` | 163 | Cat 3 §3.4.3 paper-foundational atomic content (carriers + structural equations + hypothesis predicates) — 永不 close per discipline |
+| `gapOpen` | 11 | 9 paper-cited Cat 2 classical results (Blackwell 1953, Harris-Kesten 1980, Topkis 1998, Molloy-Reed 1995, Cohen et al. 2000, ER subcritical/supercritical, Grimmett 1999, David-Nagaraja, order-statistics rank-symmetry) + 2 Cat 3 lattice-percolation structural equations (`trapLocalConfigProb_pos_and_le`, `restrictedExpectation_eq_localConfigProb`) awaiting Mathlib bond-percolation infrastructure |
+| `gapPartial` | 1 | bundle entry (`gap_phi_tail_bound` + `gap_order_statistics_max`) — Phi-tail bound closed, order-statistics part remains paper-cited |
+| `gapDeadEnd` | 1 | `kappaStar_p_monotone_DEAD_END_by_junk_value` (`def : Prop` marker, NOT axiom — zero kernel impact) |
+| `gapBlocked` | 0 | None |
+| Cat 3 sub-type breakdown | — | carrier=79, hypothesisPredicate=9, structuralEquation=76, **workingAssumption=1**, derivedTheorem=140 |
+| Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 32+ | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` |
+| Lattice-restricted disclosed gaps | 2 | Theorem 4.1 Part 4 lattice variant (DEAD-END marker); Proposition `prop:trap-prevalence` Part 2 R87 atomic chain (2 Cat 3 structural equations) — both await Mathlib `Z²`-lattice + bond-percolation infrastructure |
 | Retired `_paper_witness` axioms (post R141-R143 wire-up) | 0 | All 18 previously-axiomatised claims now flow through Cat 1 Infrastructure modules |
 
 For full per-entry detail see `BlackwellDilemma/Ledger.lean`.
+
+## Paper R10 §5 two-regime rewrite (2026-05-16) — calibration impact
+
+The paper underwent an R8-R15 audit cycle (see `crabsatellite/academic-papers`
+commit `bf462f97`) that rewrote Section 5 from a three-regime to a two-regime
+structure on the 5-state instance, after audit dimension 8 (definition–use
+consistency) caught a `V_dyn` definitional inconsistency between paper §2
+(max-over-reachable convention) and §5 5-state numerical claims (forced-
+continuation convention). The unified recursive-Bellman convention collapses
+the spurious thresholds `p_1 = 4/9, p_2 = 2/3` to a single `p^♯ = 4/9`.
+
+**Lean side impact**: the existing 10 sub-theorems for `prop:three-regime-five-state`
+(now `prop:two-regime-five-state` in the paper) remain mathematically valid as
+proofs of Regime I (reversal regime) sub-claims; the Regime II/III sub-theorems
+(`gap_three_regime_cognitive_augmentation_*`, `gap_three_regime_sufficient_cognition_*`)
+prove math results that no longer correspond to standalone paper claims under
+the new two-regime story. The `kappaStar_fiveState` closed-form is marked
+**SUPERSEDED** in `Canonical.lean` line ~2105 (kept for build preservation
+and historical traceability). The corresponding `gap_kappaStar_at_two_thirds`
+theorem still proves a true mathematical fact but its paper paper anchor
+has been retired; see the `Canonical.lean` SUPERSEDED block for context.
+
+A full v2.0 Lean-side recalibration (renaming `gap_three_regime_*` →
+`gap_two_regime_*`, removing the obsolete `kappaStar_fiveState` closed-form,
+re-anchoring downstream theorems to the new paper labels) is the natural
+next step but is deferred to a Lean v2.0 release; the current build and
+audit verify the math results underlying the two-regime claims are sound.
 
 Each `theorem gap_<name>` exposes a paper-statement label as a Lean
 theorem. The proof depends only on (a) Lean kernel axioms (`propext`,
@@ -105,6 +141,44 @@ under that substitution. The Cat 1 Infrastructure modules
 abstract algebra (supermodularity, EVT extensions, Mills-tail bounds,
 Gaussian conjugate-prior posterior, etc.) on which the paper-side
 derivations are built.
+
+## Roadmap toward Cat 1 only (Mathlib-pure)
+
+The long-term goal is to reduce all paper-novel Cat 3 entries to derivations
+from Cat 1 (Mathlib + kernel) inputs only. The remaining obstacles are:
+
+1. **Lattice + bond percolation infrastructure** (Mathlib gap). Two Cat 3
+   structural-equation entries (`trapLocalConfigProb_pos_and_le`,
+   `restrictedExpectation_eq_localConfigProb`) and the disclosed lattice
+   variant of Theorem 4.1 Part 4 require: `Z²`-lattice graph structure,
+   bond-percolation probability measure, FKG inequality, Harris-Kesten
+   1980 critical-probability theorem, and Grimmett 1999 Theorem 6.75
+   exponential cluster-size decay. These are well-defined Mathlib
+   contribution targets.
+
+2. **Mixed-partial calculus extension** (Mathlib gap). The `prop:supermodular`
+   cross-partial computation depends on Topkis 1978 mixed-partial criterion
+   for supermodularity on continuous lattices. Mathlib has discrete
+   supermodularity (`Topkis.lean`) but lacks the continuous-lattice mixed-
+   partial integration; a self-contained extension is in
+   `Infrastructure/TopkisCrossPartial.lean` and is a candidate for
+   Mathlib upstream.
+
+3. **Classical Cat 2 citations** (paper-cited but not Mathlib). Blackwell
+   1953 (sufficiency theorem), Topkis 1998 (interval supermodularity book),
+   Molloy-Reed 1995 (configuration-model giant-component criterion), Cohen
+   et al. 2000 (power-law percolation), Grimmett 1999 (Bond Percolation
+   §6.75), David-Nagaraja 2003 (order-statistics formulas) — each is a
+   discrete Mathlib contribution that would close the corresponding
+   `gap_*_OPEN` Cat 2 entry.
+
+Each of these contributes broadly reusable infrastructure to Mathlib beyond
+just this paper, which is the strategic motivation for pursuing them.
+
+The current Lean v1.0 verifies that the paper's mathematical content is
+internally consistent under the explicit Cat 3 paper-foundational
+commitments; full Cat 1 only is a multi-paper, multi-month Mathlib
+contribution effort and is not a prerequisite for paper publication.
 
 ## Relationship to the paper's published artifact
 

@@ -1,8 +1,8 @@
 # Paper ↔ Lean Calibration Matrix
 
-**Date**: 2026-05-15 (R148 calibration audit)
-**Paper**: `blackwell_dilemma.tex` (1108 lines)
-**Lean**: `BlackwellDilemma/` (15 main files + 32 Infrastructure modules)
+**Date**: 2026-05-16 (post-paper-R10 §5 two-regime rewrite + post-R148 calibration audit)
+**Paper**: `blackwell_dilemma.tex` (~1207 lines, post R8-R15 audit cycle commit `bf462f97`)
+**Lean**: `BlackwellDilemma/` (15 main files + 32+ Infrastructure modules)
 
 ## Summary
 
@@ -59,9 +59,9 @@
 | `prop:principal-optimum` | 622 | `principal_interior_maximum_exists_OPEN` (Part 1) + `gap_principal_monotone_in_kappa` (Part 2) + `gap_principal_regime_bifurcation` (Part 3) + `gap_principal_interior_optimum` | Principal.lean:139,557,1101,1185 |
 | `prop:canonical` (5.1) | 709 | `gap_W_open_limit_infty` + `gap_W_open_limit_zero` (paper's two limit cases) | Canonical.lean:72,157 |
 | `prop:interior-optimum` (5.2) | 769 | `gap_interior_optimum` | Canonical.lean:1430 |
-| `prop:three-regime-five-state` | 807 | 10 sub-theorems: `gap_three_regime_reversal_existence/uniqueness/nonmonotone/overshoot_decreasing/overshoot_continuous/overshoot_vanishes_at_p1`, `gap_three_regime_cognitive_augmentation_arithmetic_part/monotonicity/sufficient_cognition/sufficient_cognition_kappaStar_pos` | Canonical.lean:1496–2147 |
-| `prop:threshold-five-state` | 858 | `gap_threshold_fiveState_greedy_has_interior_optimum` + `gap_threshold_fiveState_kappa_above_kstar` + `gap_threshold_fiveState_smooth_transition` | Canonical.lean:2304,2416,2595 |
-| `prop:p-monotonicity-five-state` | 876 | `gap_p_monotonicity_bounded` + `gap_kappaStar_at_two_thirds` | Canonical.lean:2207,2291 |
+| `prop:two-regime-five-state` (paper R10 rewrite of former `prop:three-regime-five-state`) | 817 | 10 sub-theorems: `gap_three_regime_reversal_existence/uniqueness/nonmonotone/overshoot_decreasing/overshoot_continuous/overshoot_vanishes_at_p1` (Regime I — fully consistent with paper R10 Regime (i)), `gap_three_regime_cognitive_augmentation_arithmetic_part/monotonicity/sufficient_cognition/sufficient_cognition_kappaStar_pos` (Regime II/III in pre-R10 formulation — collapse to Regime II in paper R10; sub-theorems still mathematically valid but no longer 1-to-1 with paper claims, see SUPERSEDED block in Canonical.lean line ~2105) | Canonical.lean:1496–2147 |
+| `prop:threshold-five-state` (paper R10 rewrite to "Cognitive Sufficiency on the 5-State Instance") | 866 | `gap_threshold_fiveState_greedy_has_interior_optimum` + `gap_threshold_fiveState_kappa_above_kstar` + `gap_threshold_fiveState_smooth_transition` (Lean theorems still valid; paper R10 (iii) clause about high-κ signal-conditional routing toward `1 - 0.4p` is NEW and not yet encoded in a dedicated Lean theorem — pending v2.0 Lean recalibration) | Canonical.lean:2304,2416,2595 |
+| `prop:p-monotonicity-five-state` | 884 | `gap_p_monotonicity_bounded` + `gap_kappaStar_at_two_thirds` (latter is mathematically true but its `kappaStar_fiveState` referent is SUPERSEDED in paper R10; see Canonical.lean line ~2105 deprecation block) | Canonical.lean:2207,2291 |
 | `prop:complementarity` | 933 | `gap_information_knowledge_complementarity` | Bayesian.lean:90 |
 | `prop:bayesian-naive-five-state` | 951 | `gap_bayesian_naive_routing_threshold` + `gap_bayesian_naive_reversal_absent` + `gap_bayesian_naive_reversal_present` | Canonical.lean:2615,2717,2776 |
 | `prop:error-compounding` | 1037 | `gap_error_compounding_part1` + `gap_error_compounding_part2` | GeneralGraphs.lean:513,729 |
@@ -150,8 +150,16 @@ paper's actual restricted-scope claim's pending Lean encoding.
 ## Remaining work (post-publication)
 
 For full kernel-pure cover (v2.0 future iteration):
-- Reduce 17 `_workingAssumption` axioms via R147-style decomposition (each into smaller atoms + Cat 1 derivation)
-- Phase 6 Mathlib bond-percolation infrastructure (Grimmett 1999 §6.75) — multi-month
-- Phase 5b Mathlib mixed-partial calculus (Topkis 1978 mixed-partial criterion) — multi-month
+- Lean v2.0 recalibration of §5: rename `gap_three_regime_*` → `gap_two_regime_*` to match paper R10 labels; remove SUPERSEDED `kappaStar_fiveState` closed-form; add a dedicated theorem for paper R10 `prop:threshold-five-state` clause (iii) (high-κ signal-conditional routing in Regime II achieving oracle `1 - 0.4p`)
+- Close 2 Cat 3 lattice-percolation structural-equation OPEN entries (`trapLocalConfigProb_pos_and_le`, `restrictedExpectation_eq_localConfigProb`) via Mathlib bond-percolation infrastructure (currently unavailable in Mathlib; multi-month contribution)
+- Close lattice variant of Theorem 4.1 Part 4 (currently DEAD-END marker, NOT axiom — zero kernel impact) via the same Mathlib bond-percolation infrastructure
+- Phase 5b Mathlib mixed-partial calculus contribution (Topkis 1978 mixed-partial criterion via `Infrastructure/TopkisCrossPartial.lean` upstream)
+- Close 9 Cat 2 classical OPEN citations (Blackwell 1953, Topkis 1998, Harris-Kesten 1980, Molloy-Reed 1995, Cohen et al. 2000, Grimmett 1999, ER subcritical/supercritical, David-Nagaraja 2003, order-statistics rank-symmetry) by Mathlib upstream contributions
+
+The 2 Cat 3 lattice gaps + 1 lattice DEAD-END marker are the substantive
+"awaits Mathlib lattice infrastructure" items disclosed in the paper's
+"Code and Lean 4 formalisation" section. The 9 Cat 2 OPEN entries are
+classical results paper-cited in standard form (analogous to citing
+Blackwell 1953 in a paper without re-proving it).
 
 These do NOT block paper publication; the paper's mathematical content is complete and the Lean v1.0 verifies correspondence.

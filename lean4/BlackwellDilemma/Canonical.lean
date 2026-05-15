@@ -2104,24 +2104,53 @@ theorem gap_three_regime_sufficient_cognition :
 
 /-! ## 4. Proposition `prop:p-monotonicity-five-state`
 
-`κ*(p) = (1/2) log_2(2 log[p/(2(1-p))] + 1)` for `p > 2/3`;
-`κ*(p) = 0` for `p ≤ 2/3`. The function is continuous at `p = 2/3`,
-strictly increasing on `(2/3, 1)`, diverges as `p → 1⁻`. -/
+**SUPERSEDED 2026-05-16 by paper R10 §5 two-regime rewrite.** The closed-form
+`κ*(p)` formula below was derived under the OLD `V_dyn(B|blocked) = 0.4`
+convention (max-over-reachable, including the agent's current vertex).
+Under the unified recursive-Bellman convention adopted in the paper R10
+revision (see paper Definition `def:reachable` rewrite), forced continuation
+gives `V_dyn(B|blocked) = r(D) = 0.1`, which collapses the cognitive
+threshold story on the 5-state instance: `κ*(p) ≡ 0` throughout the
+reversal regime `[0, p^♯)` with `p^♯ = 4/9`, and on `[p^♯, 1)` the
+prior-correct routing is to `A` (no β-monotonicity issue, no sharp κ*
+threshold; cognitive depth still smoothly improves welfare via
+signal-conditional routing toward the oracle `1 - 0.4p`, but no closed-form
+bifurcation appears). The definitions and theorems below are RETAINED for
+historical traceability and to preserve the build, but their paper
+correspondence has been retired in the v2.0 paper rewrite. The current
+paper presents the corresponding result as the much simpler
+`Prop:p-monotonicity-five-state` (one-line statement) without a closed-form
+`κ*(p)` illustration; the non-trivial closed-form moves to the depth-`d`
+trap-tree (`Prop:error-compounding`, `κ*(d) = Θ(log d)`).
 
-/-- The closed-form `c*(p) = 1 / (2 log[p/(2(1-p))])` for `p > 2/3`.
+The earlier piecewise formula `κ*(p) = (1/2) log_2(2 log[p/(2(1-p))] + 1)`
+for `p > 2/3`, `κ*(p) = 0` for `p ≤ 2/3` was a real-but-spurious result
+driven by the V_dyn definitional inconsistency between paper §2 (max-over-R)
+and §5 (forced-continuation in the loss formula). See R8-R15 audit cycle
+documented in the public `crabsatellite/academic-papers` commit
+`bf462f97 blackwell_dilemma: R8-R15 audit cycle`. -/
 
-    paper source: Equation `eq:cstar-five-state`, line 897. -/
+/-- **SUPERSEDED.** The closed-form `c*(p) = 1 / (2 log[p/(2(1-p))])` for
+    `p > 2/3` under the OLD V_dyn convention. Retained for build
+    preservation only; not in the current (R10) paper.
+
+    paper source (historical): Equation `eq:cstar-five-state` of paper
+    pre-R10 formulation. Removed in paper R10 §5 two-regime rewrite. -/
 noncomputable def c_star (p : ℝ) : ℝ :=
   1 / (2 * Real.log (p / (2 * (1 - p))))
 
-/-- The closed-form `κ*(p) = (1/2) log_2(2 log[p/(2(1-p))] + 1)` for
-    `p > 2/3`; extended by `0` for `p ≤ 2/3`.
+/-- **SUPERSEDED.** The closed-form `κ*(p) = (1/2) log_2(2 log[p/(2(1-p))] + 1)`
+    for `p > 2/3`; extended by `0` for `p ≤ 2/3`. Derived under the OLD
+    V_dyn(B|blocked) = 0.4 convention. Under recursive-Bellman this
+    collapses to `κ*(p) ≡ 0` on `[0, p^♯=4/9)` (true cognitive lever
+    moves to depth-`d` trap-tree).
 
     `Real.logb` is in a separate Mathlib import that may not be
     available in older Mathlib snapshots; we use the explicit
     `Real.log _ / Real.log 2` form instead.
 
-    paper source: Equation `eq:kstar-five-state`, line 901. -/
+    paper source (historical): Equation `eq:kstar-five-state` of paper
+    pre-R10 formulation. Removed in paper R10 §5 two-regime rewrite. -/
 noncomputable def kappaStar_fiveState (p : ℝ) : ℝ :=
   if p ≤ (2 : ℝ) / 3 then 0
   else (1/2 : ℝ) *
