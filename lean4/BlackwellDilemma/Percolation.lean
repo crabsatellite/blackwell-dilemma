@@ -82,6 +82,7 @@ import Mathlib.Data.Finset.Basic
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Probability.ProbabilityMassFunction.Constructions
+import BlackwellDilemma.Infrastructure.BernoulliProductFinite
 
 namespace BlackwellDilemma
 
@@ -126,54 +127,65 @@ noncomputable def bondConfigWeight {E : Type} [Fintype E]
     (p : ℝ) (ω : BondConfig E) : ℝ :=
   ∏ e : E, (if ω e then p else 1 - p)
 
+/-! ### Cat 1 bridge to `Infrastructure.BernoulliProductFinite`
+
+Local `bondConfigWeight p ω` (`[Fintype E]`, sum over `Finset.univ`)
+coincides definitionally with `Infrastructure.bernoulliWeight p Finset.univ ω`
+(explicit `Finset` argument): both expand to
+`∏_{e ∈ Finset.univ} (if ω e then p else 1 - p)`. The bridge lemma
+records this as `rfl` and lets the local properties below route through
+the Cat 1 Infrastructure module instead of re-deriving the algebra
+locally. Net effect: the four local theorems below become thin Cat 1
+wrappers around `Infrastructure.bernoulliWeight_*`, eliminating duplicated
+Mathlib-style proof effort. -/
+
+/-- **Cat 1 bridge** — the local bond-percolation weight equals the
+    Infrastructure Bernoulli product over `Finset.univ`. Definitional
+    equality after unfolding `Infrastructure.bernoulliFactor`. -/
+theorem bondConfigWeight_eq_bernoulliWeight_univ {E : Type} [Fintype E]
+    (p : ℝ) (ω : BondConfig E) :
+    bondConfigWeight p ω = Infrastructure.bernoulliWeight p Finset.univ ω := by
+  unfold bondConfigWeight Infrastructure.bernoulliWeight Infrastructure.bernoulliFactor
+  rfl
+
 /-- Each per-edge factor lies in `[0, 1]` when `p ∈ [0, 1]`. -/
 theorem bondConfig_factor_mem {E : Type} (p : ℝ)
     (hp0 : 0 ≤ p) (hp1 : p ≤ 1) (ω : BondConfig E) (e : E) :
     0 ≤ (if ω e then p else 1 - p) ∧ (if ω e then p else 1 - p) ≤ 1 := by
-  by_cases h : ω e
-  · simp [h]; exact ⟨hp0, hp1⟩
-  · simp [h]; constructor <;> linarith
+  refine ⟨?_, ?_⟩
+  · simpa [Infrastructure.bernoulliFactor] using
+      Infrastructure.bernoulliFactor_nonneg ⟨hp0, hp1⟩ (ω e)
+  · simpa [Infrastructure.bernoulliFactor] using
+      Infrastructure.bernoulliFactor_le_one ⟨hp0, hp1⟩ (ω e)
 
-/-- The bond-percolation weight is non-negative: it is a product of
-    non-negative per-edge factors. -/
+/-- The bond-percolation weight is non-negative: routes through the Cat 1
+    Infrastructure `bernoulliWeight_nonneg`. -/
 theorem bondConfigWeight_nonneg {E : Type} [Fintype E] (p : ℝ)
     (hp0 : 0 ≤ p) (hp1 : p ≤ 1) (ω : BondConfig E) :
     0 ≤ bondConfigWeight p ω := by
-  unfold bondConfigWeight
-  apply Finset.prod_nonneg
-  intro e _
-  exact (bondConfig_factor_mem p hp0 hp1 ω e).1
+  rw [bondConfigWeight_eq_bernoulliWeight_univ]
+  exact Infrastructure.bernoulliWeight_nonneg Finset.univ ⟨hp0, hp1⟩ ω
 
-/-- The bond-percolation weight is at most `1`: it is a product of
-    per-edge factors each in `[0, 1]`. -/
+/-- The bond-percolation weight is at most `1`: routes through the Cat 1
+    Infrastructure `bernoulliWeight_le_one`. -/
 theorem bondConfigWeight_le_one {E : Type} [Fintype E] (p : ℝ)
     (hp0 : 0 ≤ p) (hp1 : p ≤ 1) (ω : BondConfig E) :
     bondConfigWeight p ω ≤ 1 := by
-  unfold bondConfigWeight
-  calc ∏ e : E, (if ω e then p else 1 - p)
-      ≤ ∏ _e : E, (1 : ℝ) := by
-        apply Finset.prod_le_prod
-        · intro e _; exact (bondConfig_factor_mem p hp0 hp1 ω e).1
-        · intro e _; exact (bondConfig_factor_mem p hp0 hp1 ω e).2
-    _ = 1 := by simp
+  rw [bondConfigWeight_eq_bernoulliWeight_univ]
+  exact Infrastructure.bernoulliWeight_le_one Finset.univ ⟨hp0, hp1⟩ ω
 
 /-- **R90 strict-positive bond weight** — under non-trivial open-edge
     probability `p ∈ (0, 1)`, EVERY bond configuration has STRICTLY
-    POSITIVE weight: `0 < bondConfigWeight p ω` for all `ω`.  Required
-    for the reversal-witness integration pattern (R90): a strict
-    pointwise-`<` at a single configuration `ω₀` lifts to a strict
-    expectation-`<` only if `ω₀` carries positive measure.  Each
-    per-edge factor `(if ω e then p else 1 - p)` is `> 0` when
-    `0 < p < 1`, so the product over `E` is `> 0`. -/
+    POSITIVE weight: `0 < bondConfigWeight p ω` for all `ω`. Routes
+    through Cat 1 Infrastructure `bernoulliWeight_pos`. Required for the
+    reversal-witness integration pattern (R90): a strict pointwise-`<`
+    at a single configuration `ω₀` lifts to a strict expectation-`<`
+    only if `ω₀` carries positive measure. -/
 theorem bondConfigWeight_pos {E : Type} [Fintype E] (p : ℝ)
     (hp0 : 0 < p) (hp1 : p < 1) (ω : BondConfig E) :
     0 < bondConfigWeight p ω := by
-  unfold bondConfigWeight
-  apply Finset.prod_pos
-  intro e _
-  by_cases h : ω e
-  · simp [h]; exact hp0
-  · simp [h]; linarith
+  rw [bondConfigWeight_eq_bernoulliWeight_univ]
+  exact Infrastructure.bernoulliWeight_pos Finset.univ hp0 hp1 ω
 
 /-! ## 3. Normalisation: the weights sum to `1`
 
