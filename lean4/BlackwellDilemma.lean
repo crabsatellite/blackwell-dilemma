@@ -94,3 +94,5 @@ import BlackwellDilemma.Infrastructure.MonotoneIntegralFOSD
 import BlackwellDilemma.Infrastructure.ArgmaxExistence
 import BlackwellDilemma.Infrastructure.FiniteConvexCombination
 import BlackwellDilemma.Infrastructure.AbstractKernelMonotonicity
+import BlackwellDilemma.Infrastructure.BernoulliProductFinite
+import BlackwellDilemma.Infrastructure.UnitIntervalAlgebra
