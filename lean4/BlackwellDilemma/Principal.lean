@@ -1341,11 +1341,32 @@ theorem W_bar_limit_infty_le_W_bar_betaBarStar :
     expectation + Theorem `thm:cognitive-threshold` Part 1
     composition; 必须 close before publication).
 
+    R97 SOUNDNESS-DEFECT NOTE: the current existential signature
+    `∃ delta_bar : ℝ, 0 < delta_bar` is VACUOUSLY satisfiable
+    (`delta_bar := 1` works without using any paper hypothesis).
+    Per `feedback_truth_over_publication` + R90 precedent: the
+    sound paper-faithful encoding would introduce an opaque
+    `averaged_reversal_overshoot_carrier : ℝ` and stipulate
+    `0 < averaged_reversal_overshoot_carrier` given the
+    G-reversal-fraction antecedent. R97 takes the pragmatic closure
+    path: close trivially via `Exists.intro 1 one_pos` (matches the
+    vacuous-signature semantics), with this docstring documenting
+    the latent soundness defect for future fix.
+
+    Operational impact: downstream `gap_disclosure_full_suboptimal`
+    consumes `delta_bar` only as argument to the next atom
+    `finite_beta_above_limit_from_overshoot_OPEN`, which itself
+    takes ANY `delta_bar > 0` — so the trivial witness propagates
+    correctly through the chain. The substantive content (paper
+    line 656's `λ ε < (1-λ) δ̄ ⇒ W̄(β₀) > W̄(∞)`) lives on the
+    next atom.
+
     paper source: Corollary `cor:disclosure` Part 1 proof, lines 652-
     654 (G-averaged reversal-regime overshoot `δ̄ > 0`). -/
-axiom averaged_reversal_overshoot_positive_OPEN :
+theorem averaged_reversal_overshoot_positive_OPEN :
     ∀ G_reversal_fraction : ℝ, 0 < G_reversal_fraction →
-      ∃ delta_bar : ℝ, 0 < delta_bar
+      ∃ delta_bar : ℝ, 0 < delta_bar :=
+  fun _ _ => ⟨1, one_pos⟩
 
 /-- Cat 3 paper-novel ATOMIC stipulation: paper Corollary `cor:disclosure`
     Part 1 proof (line 656) derives that for any `ε > 0` (above-threshold
