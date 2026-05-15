@@ -83,3 +83,4 @@ import BlackwellDilemma.Infrastructure.FOSDDerivativeChain
 import BlackwellDilemma.Infrastructure.ArgmaxMonotone
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
 import BlackwellDilemma.Infrastructure.BlackwellConditional
+import BlackwellDilemma.Infrastructure.GaussianPosterior
