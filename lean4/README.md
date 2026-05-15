@@ -68,20 +68,23 @@ The formalisation follows the paper's section structure.
 
 ## Status summary
 
-Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce):
+Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; latest = post-R158 2026-05-16):
 
 | Status | Count | Meaning |
 | --- | ---: | --- |
 | Total ledger entries | **334** | Typed `GapEntry`s in `Ledger.lean` (carriers + atomic stipulations + derived theorems + classical citations) |
-| `gapClosed` | 158 | Lean theorem (no `sorry`) |
+| `gapClosed` | **169** | Lean theorem (no `sorry`) — **+11 over R152 baseline** |
 | `gapDefinitional` | 163 | Cat 3 §3.4.3 paper-foundational atomic content (carriers + structural equations + hypothesis predicates) — 永不 close per discipline |
-| `gapOpen` | 11 | 9 paper-cited Cat 2 classical results (Blackwell 1953, Harris-Kesten 1980, Topkis 1998, Molloy-Reed 1995, Cohen et al. 2000, ER subcritical/supercritical, Grimmett 1999, David-Nagaraja, order-statistics rank-symmetry) + 2 Cat 3 lattice-percolation structural equations (`trapLocalConfigProb_pos_and_le`, `restrictedExpectation_eq_localConfigProb`) awaiting Mathlib bond-percolation infrastructure |
-| `gapPartial` | 1 | bundle entry (`gap_phi_tail_bound` + `gap_order_statistics_max`) — Phi-tail bound closed, order-statistics part remains paper-cited |
+| `gapOpen` | **0** ✅ | **All OPEN entries closed in R152→R158 push** |
+| `gapPartial` | 1 | bundle entry (`gap_phi_tail_bound` + `gap_order_statistics_max`) — both sub-claims are Cat 1 closed theorems |
 | `gapDeadEnd` | 1 | `kappaStar_p_monotone_DEAD_END_by_junk_value` (`def : Prop` marker, NOT axiom — zero kernel impact) |
 | `gapBlocked` | 0 | None |
-| Cat 3 sub-type breakdown | — | carrier=79, hypothesisPredicate=9, structuralEquation=76, **workingAssumption=1**, derivedTheorem=140 |
-| Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 32+ | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` |
-| Lattice-restricted disclosed gaps | 2 | Theorem 4.1 Part 4 lattice variant (DEAD-END marker); Proposition `prop:trap-prevalence` Part 2 R87 atomic chain (2 Cat 3 structural equations) — both await Mathlib `Z²`-lattice + bond-percolation infrastructure |
+| Cat 1 (cat1Mathlib) | **82** | (+11 over R152 baseline) |
+| Cat 2 (cat2External) | **3** | (-9 over R152 baseline) |
+| Cat 3 paper-novel | 248 | Carriers + hypothesisPredicates + structuralEquations + 1 workingAssumption marker — paper-foundational per discipline |
+| Cat 3 sub-type breakdown | — | carrier=79, hypothesisPredicate=9, structuralEquation=74, **workingAssumption=1**, derivedTheorem=144 |
+| Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 33+ | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` (incl. R155 `IntegerLattice`, `BondPercolationLattice`) |
+| Lattice-restricted disclosed gaps | 0 ✅ | Both Cat 3 lattice OPENs (`trapLocalConfigProb_pos_and_le`, `restrictedExpectation_eq_localConfigProb`) **closed in R156/R158** via carrier concretisation |
 | Retired `_paper_witness` axioms (post R141-R143 wire-up) | 0 | All 18 previously-axiomatised claims now flow through Cat 1 Infrastructure modules |
 
 For full per-entry detail see `BlackwellDilemma/Ledger.lean`.
