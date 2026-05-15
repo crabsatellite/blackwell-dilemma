@@ -451,4 +451,35 @@ theorem percRestrictedExpectation_le_on {E : Type} [Fintype E]
     percRestrictedExpectation p S f ≤ c :=
   percRestrictedExpectation_le_of_pointwise_le_on p hp0 hp1 S f c hc hf
 
+/-- **Sub-event expectation is dominated by the full expectation, for a
+    pointwise-non-negative functional.**  If `f ω ≥ 0` for every
+    realisation `ω`, then the bond-percolation expectation restricted to
+    *any* sub-event `S` is at most the full (whole-sample-space)
+    expectation:  `E_{G_p}[f ; S] ≤ E_{G_p}[f]`.
+
+    This is the measure-theoretic "monotonicity in the integration
+    domain" fact for a non-negative integrand: dropping the
+    (non-negative-weighted, non-negative-valued) terms `ω ∉ S` only
+    decreases the sum.  Proof: `∑_{ω ∈ S} w ω · f ω ≤ ∑_{ω ∈ univ} w ω
+    · f ω` via `Finset.sum_le_sum_of_subset_of_nonneg` (`S ⊆ univ`, each
+    dropped term `w ω · f ω ≥ 0` because `w ω ≥ 0` and `f ω ≥ 0`).
+
+    This is the precise tool for an FKG-style "the probability of a
+    sub-event is at most the probability of the containing event"
+    lower-bound argument: paper `prop:trap-prevalence` proof line 473
+    bounds the trap probability below by the probability of a *specific*
+    local edge-and-reward configuration sub-event — that sub-event
+    probability is `E_{G_p}[trap-indicator ; localConfigEvent]`, which by
+    this lemma is `≤ E_{G_p}[trap-indicator] =` the full trap
+    probability. -/
+theorem percRestrictedExpectation_le_percExpectation_of_nonneg {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (S : Finset (BondConfig E)) (f : BondConfig E → ℝ)
+    (hf : ∀ ω : BondConfig E, 0 ≤ f ω) :
+    percRestrictedExpectation p S f ≤ percExpectation p f := by
+  unfold percRestrictedExpectation percExpectation
+  apply Finset.sum_le_sum_of_subset_of_nonneg (Finset.subset_univ S)
+  intro ω _ _
+  exact mul_nonneg (bondConfigWeight_nonneg p hp0 hp1 ω) (hf ω)
+
 end BlackwellDilemma

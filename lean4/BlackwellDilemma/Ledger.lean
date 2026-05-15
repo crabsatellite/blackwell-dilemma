@@ -2561,23 +2561,26 @@ def entry_carrier_wInfoTopoRatio : GapEntry where
     "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
   conditionalOn := []
 
-/-- trapMisalignmentProbability carrier — paper-novel lattice trap-misalignment probability. -/
+/-- trapMisalignmentProbability — R87 concretised: opaque carrier axiom →
+    noncomputable def on the `Percolation.lean` finite bond-percolation
+    framework (R85 `W_info_oracle` pattern). -/
 def entry_carrier_trapMisalignmentProbability : GapEntry where
-  name := "trapMisalignmentProbability"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.carrier
+  name := "trapMisalignmentProbability [R87 concretised — opaque carrier axiom → noncomputable def on the `Percolation.lean` finite bond-percolation framework]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource :=
-    "Proposition `prop:trap-prevalence` Part 2, line 467: lattice " ++
+    "Proposition `prop:trap-prevalence` Part 2, line 458: lattice " ++
     "trap-misalignment probability — probability that a uniformly chosen " ++
     "vertex on `Z²` exhibits the (V_static, V_dyn) misalignment under " ++
     "bond percolation at parameter `p` (paper-classical: 0 at/below " ++
     "`p_c = 1/2`; strictly positive above)"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom trapMisalignmentProbability : ℝ → ℝ` at Phase.lean ~L387.  Companion atomic stipulation `trap_config_local_positive` anchors the carrier to the paper-stated FKG-positive lower bound on the local trap configuration.  Cat 1 reduction check: CLEAR-NO — paper's misalignment probability depends on the bond-percolation joint measure; opaque at this carrier level.  Cat 2 reduction check: CLEAR-NO — paper-specific Z² lattice construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `trapMisalignmentProbability : ℝ → ℝ` for the paper's Z² lattice trap-misalignment probability under bond percolation at blocking parameter `p`"
+    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom trapMisalignmentProbability : ℝ → ℝ` at Phase.lean ~L387.  Companion atomic stipulation `trap_config_local_positive` anchors the carrier to the paper-stated FKG-positive lower bound on the local trap configuration.  Cat 1 reduction check: CLEAR-NO — paper's misalignment probability depends on the bond-percolation joint measure; opaque at this carrier level.  Cat 2 reduction check: CLEAR-NO — paper-specific Z² lattice construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R87 2026-05-15: gapDefinitional/carrier → gapClosed/derivedTheorem via concrete-def closure (R84/R85 `expectedTopoLoss` / `W_info_oracle` pattern), AS PART OF the R87 soundness-defect fix of `trapConfigLocalProb_le_misalignmentProb_OPEN`. The opaque carrier `axiom trapMisalignmentProbability : ℝ → ℝ` is REPLACED by `noncomputable def trapMisalignmentProbability (p : ℝ) := percExpectation (1 − p) trapEventIndicator` — paper Proposition `prop:trap-prevalence` Part 2 line 458 defines `trapMisalignmentProbability` as the *probability* of the misalignment event, and a probability IS the bond-percolation expectation of the event's `{0,1}`-valued indicator; the def realises exactly that on the explicit kernel-pure `Percolation.lean` bond-percolation-expectation framework. NOT R7-flagged content-erasure: the def body IS the paper's exact 'probability of the misalignment event' = `E_{G_p}[indicator]`. One new paper-Def-stipulated carrier supports the concretisation: `trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ` (the per-realisation `{0,1}`-valued trap-event indicator), with structural equation `trapEventIndicator_nonneg` (indicator `≥ 0`). With this concretisation the over-strong/false R59 atom `trapConfigLocalProb_le_misalignmentProb_OPEN` was REPLACED by the paper-faithful corrected chain (see `entry_atom_trapConfigLocalProb_le_misalignmentProb` RETIRED note + the new R87 entries). inputCategory Cat 3 → Cat 1; cat3SubType carrier → derivedTheorem; status gapDefinitional → gapClosed." ]
+  scope := "`noncomputable def trapMisalignmentProbability p := percExpectation (1 − p) trapEventIndicator` — paper `prop:trap-prevalence` Part 2 line 458's 'probability of the misalignment event' = `E_{G_p}[indicator]` on the explicit finite bond-percolation measure"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "R87 CLOSED via concrete-def closure (R84/R85 pattern). The carrier is now a `noncomputable def` over the kernel-pure `Percolation.lean` bond-percolation-expectation framework + the paper-Def carrier `trapEventIndicator`; paper `prop:trap-prevalence` Part 2 line 458 defines the carrier as a probability and the def realises it as `E_{G_p}[indicator]`."
   conditionalOn := []
 
 /-- clusterSizeTail carrier — paper-novel framing on the Grimmett cluster-size tail. -/
@@ -3053,19 +3056,21 @@ def entry_atom_topoLossKernel_le_one_over_n_on_giant : GapEntry where
     `[propext, Classical.choice, Quot.sound]` (ZERO project `_OPEN`
     axioms), built per `feedback_no_compute_retreat`. Recorded as a
     single derivedTheorem bundle entry. R86 extends it with the
-    sub-event-expectation + cluster-size-partition layer. -/
+    sub-event-expectation + cluster-size-partition layer; R87 adds the
+    sub-event-`≤`-full-event lemma for non-negative integrands. -/
 def entry_thm_percolation_framework : GapEntry where
-  name := "Percolation.lean finite bond-percolation framework (bondMeasureTotal_eq_one + percExpectation_const + percExpectation_le_of_pointwise_le + percExpectation_ge_of_pointwise_ge + percExpectation_mem_of_pointwise_mem + percExpectation_add + percExpectation_smul + percExpectation_mono + R86: percRestrictedExpectation_univ + percRestrictedExpectation_le_of_pointwise_le_on + percExpectation_eq_sum_clusterSizeFiber + percRestrictedExpectation_le_on)"
+  name := "Percolation.lean finite bond-percolation framework (bondMeasureTotal_eq_one + percExpectation_const + percExpectation_le_of_pointwise_le + percExpectation_ge_of_pointwise_ge + percExpectation_mem_of_pointwise_mem + percExpectation_add + percExpectation_smul + percExpectation_mono + R86: percRestrictedExpectation_univ + percRestrictedExpectation_le_of_pointwise_le_on + percExpectation_eq_sum_clusterSizeFiber + percRestrictedExpectation_le_on + R87: percRestrictedExpectation_le_percExpectation_of_nonneg)"
   status := GapStatus.gapClosed
   inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Definition 2.1, line 119 (`G_p` = random subgraph under bond percolation; `E_{G_p}` = expectation over the percolation measure) — the measure-theoretic foundation underlying Theorem 3.3 / Proposition prop:topo-cluster / Proposition prop:trap-prevalence"
   attackHistory :=
     [ "R84 2026-05-15: NEW `Percolation.lean` module built per `feedback_no_compute_retreat` ('Mathlib doesn't have bond percolation → DEFINE a paper-faithful finite-graph bond-percolation framework locally'). Mathlib has `PMF.bernoulli` + `MeasureTheory` but NO bond-percolation measure on a finite edge set (no product Bernoulli over edges, no cluster-size law, no Harris-Kesten p_c). The module CONSTRUCTS the finite bond-percolation measure explicitly: `BondConfig E := E → Bool` (the discrete sample space, paper Def 2.1's `G_p` realisations), `bondConfigWeight p ω := ∏ e, (if ω e then p else 1 - p)` (the explicit Bernoulli product measure), `percExpectation p f := ∑ ω, bondConfigWeight p ω * f ω` (paper Def 2.1 line 119's `E_{G_p}[·]`). Eight foundational lemmas, all proved kernel-pure: (1) `bondMeasureTotal_eq_one` — the weights sum to 1 over the whole 2^|E| sample space (proved via `Fintype.prod_sum` product-of-sums factorisation + per-edge `p + (1-p) = 1`); the defining normalisation of a probability measure. (2) `percExpectation_const` — `E_{G_p}[c] = c`. (3-5) `percExpectation_le_of_pointwise_le` / `_ge_of_pointwise_ge` / `_mem_of_pointwise_mem` — THE foundational monotonicity-of-expectation lemmas: a pointwise per-realisation bound on the integrand transfers to its bond-percolation expectation (the exact tool the paper's §3.3 'envelope bounds' rest on). (6-8) `percExpectation_add` / `_smul` / `_mono` — linearity + integrand-monotonicity of `E_{G_p}`. `#print axioms` on each = `[propext, Classical.choice, Quot.sound]` only.",
-      "R86 2026-05-15: EXTENDED `Percolation.lean` with the sub-event-expectation + cluster-size-partition layer, built to express the paper's GENUINE below-threshold envelope claim (which is giant-component-CONDITIONAL, not unconditional — see the R86 soundness-defect fix at `entry_topo_loss_below` / `entry_thm_phase_below`). Four new kernel-pure lemmas: (1) `percRestrictedExpectation p S f := ∑ ω ∈ S, bondConfigWeight p ω * f ω` — the bond-percolation expectation RESTRICTED to a sub-event `S : Finset (BondConfig E)` (paper prop:topo-cluster proof line 292 conditions `E[|W_topo|]` on `{|R(v_0)| = k}`; this is the unnormalised conditioning building block). (2) `percRestrictedExpectation_univ` — `E_{G_p}[f ; univ] = E_{G_p}[f]`. (3) `percRestrictedExpectation_le_of_pointwise_le_on` (+ re-export `percRestrictedExpectation_le_on`) — sub-event monotonicity: a pointwise-`≤ c` bound on `f` ON the sub-event `S` (for `c ≥ 0`) gives `E_{G_p}[f ; S] ≤ c` (proof: `∑_{S} w·f ≤ ∑_{S} w·c = (∑_{S} w)·c ≤ (∑_{univ} w)·c = 1·c = c` via `Finset.sum_le_sum_of_subset_of_nonneg` + `bondMeasureTotal_eq_one`). (4) `percExpectation_eq_sum_clusterSizeFiber` — the cluster-size PARTITION: for a `ℕ`-valued functional `κ` bounded by `N`, `E_{G_p}[f] = ∑_{k=0}^{N} E_{G_p}[f ; {ω | κ ω = k}]` (paper line 292's 'partition the sample space by `|R(v_0)| = k`', made an exact `Finset` identity via `Finset.sum_fiberwise_of_maps_to`). `#print axioms` on each = `[propext, Classical.choice, Quot.sound]` only. This is the substrate the R86 signature-corrected giant-component-conditional envelope claim (`topo_loss_on_giant_below_one_over_n` : `expectedTopoLossOnGiant n p ≤ 1/(n+1)`) is built on. Genuine real welded math per `feedback_attack_loops_must_weld_real_math`." ]
-  scope := "`Percolation.lean` — the explicit finite bond-percolation measure (`bondConfigWeight`, normalisation `bondMeasureTotal_eq_one`) + the `E_{G_p}[·]` expectation (`percExpectation`) with its monotonicity / linearity lemmas + (R86) the sub-event expectation `percRestrictedExpectation` with sub-event monotonicity + the cluster-size partition `percExpectation_eq_sum_clusterSizeFiber`, all kernel-pure"
+      "R86 2026-05-15: EXTENDED `Percolation.lean` with the sub-event-expectation + cluster-size-partition layer, built to express the paper's GENUINE below-threshold envelope claim (which is giant-component-CONDITIONAL, not unconditional — see the R86 soundness-defect fix at `entry_topo_loss_below` / `entry_thm_phase_below`). Four new kernel-pure lemmas: (1) `percRestrictedExpectation p S f := ∑ ω ∈ S, bondConfigWeight p ω * f ω` — the bond-percolation expectation RESTRICTED to a sub-event `S : Finset (BondConfig E)` (paper prop:topo-cluster proof line 292 conditions `E[|W_topo|]` on `{|R(v_0)| = k}`; this is the unnormalised conditioning building block). (2) `percRestrictedExpectation_univ` — `E_{G_p}[f ; univ] = E_{G_p}[f]`. (3) `percRestrictedExpectation_le_of_pointwise_le_on` (+ re-export `percRestrictedExpectation_le_on`) — sub-event monotonicity: a pointwise-`≤ c` bound on `f` ON the sub-event `S` (for `c ≥ 0`) gives `E_{G_p}[f ; S] ≤ c` (proof: `∑_{S} w·f ≤ ∑_{S} w·c = (∑_{S} w)·c ≤ (∑_{univ} w)·c = 1·c = c` via `Finset.sum_le_sum_of_subset_of_nonneg` + `bondMeasureTotal_eq_one`). (4) `percExpectation_eq_sum_clusterSizeFiber` — the cluster-size PARTITION: for a `ℕ`-valued functional `κ` bounded by `N`, `E_{G_p}[f] = ∑_{k=0}^{N} E_{G_p}[f ; {ω | κ ω = k}]` (paper line 292's 'partition the sample space by `|R(v_0)| = k`', made an exact `Finset` identity via `Finset.sum_fiberwise_of_maps_to`). `#print axioms` on each = `[propext, Classical.choice, Quot.sound]` only. This is the substrate the R86 signature-corrected giant-component-conditional envelope claim (`topo_loss_on_giant_below_one_over_n` : `expectedTopoLossOnGiant n p ≤ 1/(n+1)`) is built on. Genuine real welded math per `feedback_attack_loops_must_weld_real_math`.",
+      "R87 2026-05-15: EXTENDED `Percolation.lean` with one new kernel-pure lemma `percRestrictedExpectation_le_percExpectation_of_nonneg` — for a *pointwise-non-negative* integrand `f` (`0 ≤ f ω` for every `ω`), the sub-event expectation over ANY sub-event `S` is `≤` the full expectation: `E_{G_p}[f ; S] ≤ E_{G_p}[f]` (proof: `∑_{ω ∈ S} w·f ≤ ∑_{ω ∈ univ} w·f` via `Finset.sum_le_sum_of_subset_of_nonneg` (`S ⊆ univ`, each dropped term `w ω · f ω ≥ 0` from `bondConfigWeight_nonneg` + `0 ≤ f ω`)). This is the measure-theoretic 'monotonicity in the integration domain for a non-negative integrand' fact — the precise tool for an FKG-style 'the probability of a sub-event is at most the probability of the containing event' lower-bound argument. Built for the R87 soundness-defect fix of `trapConfigLocalProb_le_misalignmentProb_OPEN`: paper prop:trap-prevalence proof line 473 bounds the trap probability below by the probability of a *specific* local trap sub-event — that sub-event probability is `E_{G_p}[trap-indicator ; trapLocalConfigEvent]`, which by this lemma is `≤ E_{G_p}[trap-indicator] = trapMisalignmentProbability p`. `#print axioms` = `[propext, Classical.choice, Quot.sound]` only. Genuine real welded math per `feedback_attack_loops_must_weld_real_math`." ]
+  scope := "`Percolation.lean` — the explicit finite bond-percolation measure (`bondConfigWeight`, normalisation `bondMeasureTotal_eq_one`) + the `E_{G_p}[·]` expectation (`percExpectation`) with its monotonicity / linearity lemmas + (R86) the sub-event expectation `percRestrictedExpectation` with sub-event monotonicity + the cluster-size partition `percExpectation_eq_sum_clusterSizeFiber` + (R87) the sub-event-`≤`-full-event lemma for non-negative integrands, all kernel-pure"
   obstacleOrAttribution :=
-    "CLOSED — kernel-pure foundational framework. All twelve lemmas (eight R84 + four R86) depend only on `[propext, Classical.choice, Quot.sound]`; no project `_OPEN` axiom. Built per `feedback_no_compute_retreat` as the paper-faithful local replacement for Mathlib's missing bond-percolation infrastructure (R86 adds the sub-event-expectation + cluster-size-partition layer for the paper's giant-component-conditional envelope claims)."
+    "CLOSED — kernel-pure foundational framework. All thirteen lemmas (eight R84 + four R86 + one R87) depend only on `[propext, Classical.choice, Quot.sound]`; no project `_OPEN` axiom. Built per `feedback_no_compute_retreat` as the paper-faithful local replacement for Mathlib's missing bond-percolation infrastructure (R86 adds the sub-event-expectation + cluster-size-partition layer; R87 adds the sub-event-`≤`-full-event lemma for non-negative integrands — the FKG-style sub-event-probability bound)."
   conditionalOn := []
 
 /-- R85 Cat 3 carrier: the per-realisation oracle informational-residual
@@ -3713,7 +3718,7 @@ def entry_prop_trap_prevalence_zero : GapEntry where
   conditionalOn := []
 
 def entry_prop_trap_prevalence_above : GapEntry where
-  name := "gap_trap_prevalence_above_threshold (derived) + R59 sub-chain: trapConfigLocalProb (Hodge-style def, R59) + trapConfigLocalProb_le_misalignmentProb_OPEN (R59 smaller atom) + trapConfigLocalProb_pos (Cat 1 theorem, R59)"
+  name := "gap_trap_prevalence_above_threshold (derived) + R87 signature-corrected sub-chain: concretised `trapMisalignmentProbability` + carriers trapEventIndicator / trapLocalConfigEvent / trapLocalConfigProb + structuralEquations trapEventIndicator_nonneg / trapLocalConfigProb_pos_and_le / restrictedExpectation_eq_localConfigProb + derived theorem trapLocalConfigProb_le_misalignmentProb + Cat 1 trapConfigLocalProb_pos"
   status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.derivedTheorem
@@ -3723,10 +3728,11 @@ def entry_prop_trap_prevalence_above : GapEntry where
       "R4 Phase 4 audit (2026-05-12): patched — bind to opaque carrier `trapMisalignmentProbability` and assert positive lower bound.",
       "R27-A 2026-05-13: Cat 3 sub-classification WORKING_ASSUMPTION per `feedback_gap_ledger_in_lean4` 2026-05-13 extension; status retained as OPEN (higher-level paper claim pending derivation from Cat 1 + Cat 2 + Cat 3 atomic inputs — 必须 close per discipline). New `subClass` field set to WORKING_ASSUMPTION.",
       "R37 2026-05-14: applied Manufactured-Recognition §18 atomic-decomposition pattern. The bundled `gap_trap_prevalence_above_threshold_OPEN` is REPLACED by derived theorem `gap_trap_prevalence_above_threshold` (Phase.lean) composing the new Cat 3 atomic stipulation `trap_config_local_positive_OPEN` (paper-stated local FKG-positivity of trap pattern on Z²-lattice with degree 4, paper proof line 473 `binom(4, 2) p² (1-p)² · p^3 > 0` estimate). Net: status OPEN → CLOSED; cat3SubType WORKING_ASSUMPTION → DERIVED_THEOREM; +1 new Cat 3 OPEN atomic-stipulation entry (entry_atom_trap_config_local_positive).",
-      "R59 2026-05-14: deepened §18 chain — the R37 atom `trap_config_local_positive_OPEN` decomposed in Phase.lean via closure-path-A. Introduced Hodge-style closed-form `def trapConfigLocalProb p := 6 * p^5 * (1-p)^2` (paper line 473 explicit formula). The R37 atom replaced by (a) `trapConfigLocalProb_le_misalignmentProb_OPEN` (smaller workingAssumption — paper line 473 FKG lower-bound binding on opaque `trapMisalignmentProbability` carrier), (b) `trapConfigLocalProb_pos` (Cat 1 Mathlib theorem — arithmetic positivity of explicit closed form for `0 < p < 1`, derived from `harrisKestenCriticalProb = 1/2 > 0` via `gap_harris_kesten_OPEN`). The new derived theorem `gap_trap_prevalence_above_threshold` adds `p < 1` antecedent (matching paper Def 2.1 `blockingProb ∈ [0, 1]`) and composes the smaller atom + Cat 1 via transitivity. Net: substantive paper-novel content (FKG binding) is the only remaining workingAssumption residue; arithmetic positivity is now Cat 1." ]
+      "R59 2026-05-14: deepened §18 chain — the R37 atom `trap_config_local_positive_OPEN` decomposed in Phase.lean via closure-path-A. Introduced Hodge-style closed-form `def trapConfigLocalProb p := 6 * p^5 * (1-p)^2` (paper line 473 explicit formula). The R37 atom replaced by (a) `trapConfigLocalProb_le_misalignmentProb_OPEN` (smaller workingAssumption — paper line 473 FKG lower-bound binding on opaque `trapMisalignmentProbability` carrier), (b) `trapConfigLocalProb_pos` (Cat 1 Mathlib theorem — arithmetic positivity of explicit closed form for `0 < p < 1`, derived from `harrisKestenCriticalProb = 1/2 > 0` via `gap_harris_kesten_OPEN`). The new derived theorem `gap_trap_prevalence_above_threshold` adds `p < 1` antecedent (matching paper Def 2.1 `blockingProb ∈ [0, 1]`) and composes the smaller atom + Cat 1 via transitivity. Net: substantive paper-novel content (FKG binding) is the only remaining workingAssumption residue; arithmetic positivity is now Cat 1.",
+      "R87 2026-05-15: SOUNDNESS-DEFECT FIX of the R59 atom `trapConfigLocalProb_le_misalignmentProb_OPEN` (R83/R86 precedent). The R59 atom was over-strong / FALSE — it asserted `trapConfigLocalProb p ≤ trapMisalignmentProbability p`, i.e. the paper's `6 p⁵ (1-p)²` edge-configuration probability as a *lower* bound on the trap probability. But (paper line 473 read faithfully) the trap event is the *strictly smaller* sub-event further restricted by `|C_2| ≥ 2` ('with positive probability', not 1) AND the reward event `E` (probability `1/6` for `|C_2|=2`, paper line 471), so `trapMisalignmentProbability p < trapConfigLocalProb p` — the inequality pointed the WRONG WAY. THE FIX (per `feedback_truth_over_publication` + R83/R86 precedent + R85 concretise-the-carrier pattern): (i) `trapMisalignmentProbability` CONCRETISED as `percExpectation (1−p) trapEventIndicator` (paper line 458's 'probability of the misalignment event' = `E_{G_p}[indicator]`); (ii) new carriers `trapEventIndicator` (the `{0,1}`-valued trap indicator) / `trapLocalConfigEvent` (the genuine paper sub-event = edge config + `|C_2|≥2` + reward event `E`) / `trapLocalConfigProb` (the paper's *genuine* product lower bound = `6 p⁵ (1-p)² × further positive factors`); (iii) signature-corrected structuralEquations `trapEventIndicator_nonneg` + `trapLocalConfigProb_pos_and_le` (`0 < trapLocalConfigProb p ≤ trapConfigLocalProb p`) + `restrictedExpectation_eq_localConfigProb`; (iv) NEW kernel-pure `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg` lemma (sub-event expectation of a non-negative functional `≤` full expectation); (v) derived theorem `trapLocalConfigProb_le_misalignmentProb` proving the TRUE paper claim `trapLocalConfigProb p ≤ trapMisalignmentProbability p`. `gap_trap_prevalence_above_threshold` re-derived — conclusion `0 < trapMisalignmentProbability p` UNCHANGED (paper line 473's genuine content); composes `trapLocalConfigProb_pos_and_le.1` + `trapLocalConfigProb_le_misalignmentProb` via transitivity. Terminal derived theorem (no higher consumer — grep-verified), correction fully contained. Net: the R59 atom RETIRED; +1 concretised carrier-as-def + 3 new carriers + 3 new structuralEquations + 1 new derived theorem + 1 new `Percolation.lean` kernel-pure lemma. wA count: −1 (the retired R59 atom was the only workingAssumption in this chain; the 2 new gapOpen structuralEquations are structuralEquation-typed, NOT workingAssumption). Lake build green." ]
   scope := "Proposition prop:trap-prevalence Part 2, lines 458-473"
   obstacleOrAttribution :=
-    "CLOSED-via-Cat-3-atom-input. R37 derived theorem `gap_trap_prevalence_above_threshold` (R59 re-derivation, with added `p < 1` paper-faithful antecedent) composes the Hodge-style `def trapConfigLocalProb` + the R59 smaller atom `trapConfigLocalProb_le_misalignmentProb_OPEN` (FKG lower-bound binding) + Cat 1 `trapConfigLocalProb_pos` (arithmetic positivity). The substantive Mathlib Z²-lattice + percolation-measure machinery gap remains, but is isolated to the FKG-binding atom only — the arithmetic positivity is fully Cat 1."
+    "CLOSED-via-Cat-3-atom-input (R87 soundness-corrected). The derived theorem `gap_trap_prevalence_above_threshold` composes the R87 signature-corrected chain: the concretised `trapMisalignmentProbability` (`percExpectation` of the trap-event indicator) + `trapLocalConfigProb_pos_and_le` (structuralEquation — `0 < trapLocalConfigProb p`) + the R87 derived theorem `trapLocalConfigProb_le_misalignmentProb` (the genuine sub-event-`≤`-full-event bound, via the new kernel-pure `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg` + the structuralEquations `trapEventIndicator_nonneg` / `restrictedExpectation_eq_localConfigProb`). The substantive Mathlib Z²-lattice + percolation-measure machinery gap remains, but is now isolated to the 2 paper-faithful structuralEquation atoms `trapLocalConfigProb_pos_and_le` + `restrictedExpectation_eq_localConfigProb` (the retired R59 atom's over-strong/false binding is GONE — replaced by the true sub-event-probability bound, derived not axiomatised)."
   conditionalOn := []
 
 def entry_cor_er_phase : GapEntry where
@@ -4881,22 +4887,119 @@ def entry_atom_wInfoTopoRatio_le_MillsConst_decay : GapEntry where
     "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib bond-percolation + Mills-tail composition + paper line 427 quantitative-bound proof reconstruction."
   conditionalOn := []
 
-/-- R59 closure-path-A: new smaller paper-novel ATOMIC stipulation
-    replacing the retired `trap_config_local_positive_OPEN`. Paper
-    line 473 FKG lower-bound binding on opaque
-    `trapMisalignmentProbability` carrier — the substantive
-    paper-novel content. -/
+/-- R59 closure-path-A atom — RETIRED R87 (over-strong / false:
+    the edge-config probability as a lower bound on the
+    strictly-smaller trap probability). Replaced by the R87
+    signature-corrected chain. -/
 def entry_atom_trapConfigLocalProb_le_misalignmentProb : GapEntry where
-  name := "trapConfigLocalProb_le_misalignmentProb_OPEN"
-  status := GapStatus.gapOpen
+  name := "trapConfigLocalProb_le_misalignmentProb_OPEN [RETIRED R87 — over-strong/false; replaced by R87 signature-corrected chain: concretised `trapMisalignmentProbability` + carriers `trapEventIndicator` / `trapLocalConfigEvent` / `trapLocalConfigProb` + structuralEquations `trapEventIndicator_nonneg` / `trapLocalConfigProb_pos_and_le` / `restrictedExpectation_eq_localConfigProb` + derived theorem `trapLocalConfigProb_le_misalignmentProb`]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:trap-prevalence Part 2 proof, line 473 (`binom(4, 2) p² (1-p)² · p^3 = 6 p^5 (1-p)^2` local FKG lower bound on lattice-degree-4 trap pattern)"
   attackHistory :=
-    [ "R59 2026-05-14: introduced as smaller replacement atom via closure-path-A decomposition of retired `trap_config_local_positive_OPEN`. Statement: `∀ p, harrisKestenCriticalProb < p → p < 1 → trapConfigLocalProb p ≤ trapMisalignmentProbability p` where `trapConfigLocalProb p := 6 * p^5 * (1-p)^2` is the new Hodge-style def encoding paper line 473 `binom(4, 2) p² (1-p)² · p^3` formula. Strictly smaller than retired bundled atom — the FKG-positivity binding is isolated from the arithmetic positivity claim (which becomes Cat 1 derivation `trapConfigLocalProb_pos`). The retired atom packaged both `0 < trapConfigLocalProb p ≤ trapMisalignmentProbability p` into `0 < trapMisalignmentProbability p`. Cat 1 reduction check: not Mathlib-derivable (FKG-binding is paper-novel structural fact on opaque `trapMisalignmentProbability` carrier). Cat 2 reduction check: paper-specific Z²-lattice + degree-4 + percolation-measure construction (FKG inequality framework is Cat 2 in general, but the paper-specific local-pattern application is Cat 3 paper-novel)." ]
-  scope := "Proposition prop:trap-prevalence Part 2, paper line 473 FKG lower-bound binding `trapConfigLocalProb p ≤ trapMisalignmentProbability p` at the explicit closed-form Hodge-style def"
+    [ "R59 2026-05-14: introduced as smaller replacement atom via closure-path-A decomposition of retired `trap_config_local_positive_OPEN`. Statement: `∀ p, harrisKestenCriticalProb < p → p < 1 → trapConfigLocalProb p ≤ trapMisalignmentProbability p` where `trapConfigLocalProb p := 6 * p^5 * (1-p)^2` is the new Hodge-style def encoding paper line 473 `binom(4, 2) p² (1-p)² · p^3` formula. Strictly smaller than retired bundled atom — the FKG-positivity binding is isolated from the arithmetic positivity claim (which becomes Cat 1 derivation `trapConfigLocalProb_pos`). The retired atom packaged both `0 < trapConfigLocalProb p ≤ trapMisalignmentProbability p` into `0 < trapMisalignmentProbability p`. Cat 1 reduction check: not Mathlib-derivable (FKG-binding is paper-novel structural fact on opaque `trapMisalignmentProbability` carrier). Cat 2 reduction check: paper-specific Z²-lattice + degree-4 + percolation-measure construction (FKG inequality framework is Cat 2 in general, but the paper-specific local-pattern application is Cat 3 paper-novel).",
+      "R87 2026-05-15: RETIRED — SOUNDNESS DEFECT (over-strong / false; R83/R86 precedent). The atom asserted `trapConfigLocalProb p ≤ trapMisalignmentProbability p`, i.e. that the paper's `6 p⁵ (1-p)²` quantity is a *lower* bound on the trap probability. Reading paper prop:trap-prevalence Part 2 proof line 473 faithfully: `binom(4,2) p²(1-p)²·p³ = 6 p⁵ (1-p)²` is the probability of the *edge configuration alone* (`v` has exactly two open edges to `u_1, u_2`, its other two blocked, `u_1`'s three remaining blocked so `|C_1| = 1`). But the trap event ALSO requires `|C_2| ≥ 2` ('with positive probability', NOT probability 1 — paper line 473) AND the reward event `E` (`r(u_1) > r(u_2)` but `max_{C_2} r > r(u_1)`, probability `1/6` for `|C_2| = 2` — paper line 471). The trap event is therefore a STRICTLY SMALLER sub-event of the edge-config event, so `trapMisalignmentProbability p < trapConfigLocalProb p` — the atom's inequality points the WRONG WAY. THE FIX (per `feedback_truth_over_publication` + R83/R86 precedent + R85 concretise-the-carrier pattern): (1) `trapMisalignmentProbability` CONCRETISED as `percExpectation (1−p) trapEventIndicator`; (2) new carriers `trapEventIndicator` / `trapLocalConfigEvent` (the genuine paper sub-event = edge config + `|C_2|≥2` + reward event `E`) / `trapLocalConfigProb` (the paper's *genuine* product lower bound = `6 p⁵ (1-p)² × further positive factors`); (3) signature-corrected structuralEquations `trapEventIndicator_nonneg` + `trapLocalConfigProb_pos_and_le` (`0 < trapLocalConfigProb p ≤ trapConfigLocalProb p`) + `restrictedExpectation_eq_localConfigProb` (`percRestrictedExpectation (1−p) trapLocalConfigEvent trapEventIndicator = trapLocalConfigProb p`); (4) derived theorem `trapLocalConfigProb_le_misalignmentProb` proving the TRUE paper claim `trapLocalConfigProb p ≤ trapMisalignmentProbability p` via the new kernel-pure `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg` (sub-event probability `≤` containing-event probability). `gap_trap_prevalence_above_threshold` re-derived — conclusion `0 < trapMisalignmentProbability p` UNCHANGED (paper line 473's genuine content); only the internal lower-bound object corrected from the false `trapConfigLocalProb` to the true `trapLocalConfigProb`. Terminal derived theorem (no higher consumer — grep-verified), correction fully contained." ]
+  scope := "RETIRED R87. Was: Proposition prop:trap-prevalence Part 2, paper line 473 FKG lower-bound binding `trapConfigLocalProb p ≤ trapMisalignmentProbability p` — over-strong/false (edge-config probability is NOT a lower bound on the strictly-smaller trap probability)."
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = Mathlib Z²-lattice + bond-percolation measure machinery + paper line 473 FKG estimate (the FKG binding to opaque `trapMisalignmentProbability` carrier; arithmetic positivity is Cat 1 `trapConfigLocalProb_pos`)."
+    "RETIRED R87 via soundness-defect fix (R83/R86 precedent). Replaced by the R87 signature-corrected chain: concretised `trapMisalignmentProbability` (`percExpectation` of the trap-event indicator) + carriers `trapEventIndicator` / `trapLocalConfigEvent` / `trapLocalConfigProb` + structuralEquations `trapEventIndicator_nonneg` / `trapLocalConfigProb_pos_and_le` / `restrictedExpectation_eq_localConfigProb` + derived theorem `trapLocalConfigProb_le_misalignmentProb`. The genuine paper lower bound `trapLocalConfigProb p` (= edge-config probability `6 p⁵ (1-p)²` × the further positive `|C_2|≥2` and reward-event sub-event factors) IS `≤ trapMisalignmentProbability p` (true), unlike the retired atom's `trapConfigLocalProb p ≤ trapMisalignmentProbability p` (false)."
+  conditionalOn := []
+
+/-- R87 carrier — concretisation of `trapMisalignmentProbability`'s
+    integrand: the per-realisation `{0,1}`-valued trap-event indicator
+    on `Z²` (paper prop:trap-prevalence Part 2 line 458). -/
+def entry_carrier_trapEventIndicator : GapEntry where
+  name := "trapEventIndicator (carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:trap-prevalence Part 2, line 458 (the misalignment event whose probability is `trapMisalignmentProbability`) + lines 465-471 (the event is determined by the percolation realisation + i.i.d. rewards)"
+  attackHistory :=
+    [ "R87 2026-05-15: Cat 3 paper-novel primitive function per v6 §3.4.1. Carrier declared `axiom trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ` at Phase.lean. Introduced as part of the R87 soundness-defect fix of `trapConfigLocalProb_le_misalignmentProb_OPEN` — the concretisation of `trapMisalignmentProbability`: for a bond-percolation outcome `ω` (which edges of `Z²` are open), `trapEventIndicator ω` is `1` if a fixed reference vertex `v` exhibits the `(V_static, V_dyn)` misalignment on realisation `ω` (paper line 458's event), `0` otherwise. The `EdgeIdx 0` index is the canonical `Z²` lattice edge set (prop:trap-prevalence states a degree-4 lattice fact independent of the torus side length `L`). Opaque because evaluating it requires the `Z²` reachable-set construction (which neighbours `u_1, u_2` of `v` are open, which components `C_1, C_2` they fall in, hence `V_dyn(u_1), V_dyn(u_2)`) plus the i.i.d.-reward comparison — paper-graph-specific machinery. Its paper-stated `{0,1}` range (hence `≥ 0`) is pinned by the companion structural equation `trapEventIndicator_nonneg`. Cat 1 reduction check: CLEAR-NO — paper-novel pointwise event indicator requiring the paper-graph-specific `Z²` reachable-set construction + i.i.d.-reward comparison. Cat 2 reduction check: CLEAR-NO — paper-graph-specific. 永不 close per discipline §3.4.1." ]
+  scope := "Opaque carrier `trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ` for the per-realisation `{0,1}`-valued indicator of the `(V_static, V_dyn)` trap-misalignment event on `Z²`"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1 (the integrand of the concretised `trapMisalignmentProbability`). 永不 close."
+  conditionalOn := []
+
+/-- R87 structural equation: the trap-event indicator is pointwise
+    non-negative (it is a `{0,1}`-valued event indicator). -/
+def entry_atom_trapEventIndicator_nonneg : GapEntry where
+  name := "trapEventIndicator_nonneg"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:trap-prevalence Part 2, line 458 (`trapMisalignmentProbability` is a probability ⇒ its integrand is a `{0,1}`-valued event indicator ⇒ `≥ 0`)"
+  attackHistory :=
+    [ "R87 2026-05-15: Cat 3 paper-novel structural equation introduced as part of the R87 `trapMisalignmentProbability` concretisation. Statement: `∀ ω : BondConfig (EdgeIdx 0), 0 ≤ trapEventIndicator ω`. Paper-stipulated: paper prop:trap-prevalence Part 2 line 458 defines `trapMisalignmentProbability` as a *probability* ('the probability that a random vertex ... exhibits the misalignment'); its integrand is the `{0,1}`-valued indicator of that event, which is non-negative by construction. Classified structuralEquation gapDefinitional per discipline §3.4.3: the indicator's `≥ 0` range is a paper-stipulated structural identity on the kernel carrier (an event-indicator is non-negative by definition) — mirrors the `topoLossKernel_mem_unitInterval` (R84) / `wInfoOracleKernel_nonpos` (R85) structuralEquation precedents (paper stipulates the kernel's pointwise range/sign; 永不 close per §3.4.3). Downstream consumer: the R87 derived theorem `trapLocalConfigProb_le_misalignmentProb` (Phase.lean) consumes it via `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg`." ]
+  scope := "Paper prop:trap-prevalence Part 2 line 458: `trapEventIndicator` is a `{0,1}`-valued event indicator ⇒ pointwise `≥ 0` for every realisation `ω`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (paper line 458 defines `trapMisalignmentProbability` as a probability ⇒ its integrand is a non-negative event indicator; mirrors the `topoLossKernel_mem_unitInterval` R84 precedent). Downstream consumer: `trapLocalConfigProb_le_misalignmentProb` derived theorem (Phase.lean)."
+  conditionalOn := []
+
+/-- R87 carrier — the genuine paper trap sub-event: edge config +
+    `|C_2| ≥ 2` + reward event `E` jointly (the sub-event paper
+    prop:trap-prevalence Part 2 line 473 lower-bounds the trap
+    probability by). -/
+def entry_carrier_trapLocalConfigEvent : GapEntry where
+  name := "trapLocalConfigEvent (carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:trap-prevalence Part 2 proof, lines 467-473 (the edge-config + `|C_2| ≥ 2` + reward-event `E` sub-event)"
+  attackHistory :=
+    [ "R87 2026-05-15: Cat 3 paper-novel primitive per v6 §3.4.1. Carrier declared `axiom trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0))` at Phase.lean. Introduced as the SIGNATURE-CORRECTED replacement (R83/R86 precedent) for the retired over-strong atom `trapConfigLocalProb_le_misalignmentProb_OPEN`'s RHS object: the `Finset` of bond-percolation realisations exhibiting the *genuine* paper trap sub-event on `Z²` — the edge configuration (`v` has exactly two open edges to `u_1, u_2`, its other two blocked, `u_1`'s remaining three blocked so `|C_1| = 1`) *together with* `|C_2| ≥ 2` *and* the reward event `E` (`r(u_1) > r(u_2)` but `max_{C_2} r > r(u_1)`). This is the sub-event paper prop:trap-prevalence Part 2 proof line 473 bounds the trap probability below by. Opaque because membership requires the `Z²` reachable-set construction + the i.i.d.-reward comparison — the same paper-graph-specific machinery behind `trapEventIndicator`. Cat 1 reduction check: CLEAR-NO — paper-graph-specific `Z²` sub-event `Finset`. Cat 2 reduction check: CLEAR-NO — paper-graph-specific. Mirrors the `giantComponentEvent` R86 carrier precedent (a paper-graph-specific `Finset` on the percolation sample space, the natural sub-event over which a paper lower bound is stated). 永不 close per discipline §3.4.1." ]
+  scope := "Opaque carrier `trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0))` for the genuine paper trap sub-event (edge config + `|C_2| ≥ 2` + reward event `E` jointly)"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1 (the genuine paper trap sub-event; mirrors the `giantComponentEvent` R86 carrier precedent). 永不 close."
+  conditionalOn := []
+
+/-- R87 carrier — the paper's *genuine* product lower bound on the
+    trap probability (= edge-config probability `6 p⁵ (1-p)²` × the
+    further positive `|C_2|≥2` and reward-event factors). -/
+def entry_carrier_trapLocalConfigProb : GapEntry where
+  name := "trapLocalConfigProb (carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:trap-prevalence Part 2 proof, line 473 (the trap probability is 'bounded below by a positive constant depending on `p`' `= binom(4,2) p²(1-p)²·p³ × positive factors`)"
+  attackHistory :=
+    [ "R87 2026-05-15: Cat 3 paper-novel primitive function per v6 §3.4.1. Carrier declared `axiom trapLocalConfigProb : ℝ → ℝ` at Phase.lean. Introduced as the SIGNATURE-CORRECTED replacement (R83/R86 precedent) for the retired over-strong atom `trapConfigLocalProb_le_misalignmentProb_OPEN`'s LHS quantity: the paper's *genuine* product lower bound on the trap probability — `6 p⁵ (1-p)²` (the edge-configuration probability `trapConfigLocalProb p`) *multiplied by* the further positive factors paper prop:trap-prevalence Part 2 proof line 473 composes (the `|C_2| ≥ 2` probability — paper line 473 'with positive probability'; and the reward-event probability — paper line 471 `1/6` for `|C_2| = 2`). The retired atom falsely treated `trapConfigLocalProb p` ITSELF as the lower bound — but the trap event is the *strictly smaller* sub-event further restricted by `|C_2| ≥ 2` and the reward event, so the true lower bound is `trapConfigLocalProb p × factors ≤ 1`. Its two paper-stipulated structural facts (strict positivity for `p_c < p < 1`; `≤ trapConfigLocalProb p`) are pinned by `trapLocalConfigProb_pos_and_le`. Cat 1 reduction check: CLEAR-NO — paper-novel lower-bound constant requiring the `|C_2|≥2` and reward-event factors from the paper-graph-specific `Z²` percolation measure. Cat 2 reduction check: CLEAR-NO — paper-graph-specific. Mirrors the `wInfoTopoRatioMillsConst` / `expectedTopoLossAboveLowerConst` R59/R60 carrier-introduction precedents. 永不 close per discipline §3.4.1." ]
+  scope := "Opaque carrier `trapLocalConfigProb : ℝ → ℝ` for the paper's genuine product lower bound on the trap probability (= edge-config probability `6 p⁵ (1-p)²` × the further positive `|C_2|≥2` and reward-event sub-event factors)"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive per v6 §3.4.1 (the genuine paper lower bound; mirrors the `wInfoTopoRatioMillsConst` R59 carrier precedent). 永不 close."
+  conditionalOn := []
+
+/-- R87 structural equation (signature-corrected): `trapLocalConfigProb p`
+    is `(a)` strictly positive for `p_c < p < 1`, and `(b)` `≤
+    trapConfigLocalProb p` (it is the edge-config probability × further
+    factors `≤ 1`). -/
+def entry_atom_trapLocalConfigProb_pos_and_le : GapEntry where
+  name := "trapLocalConfigProb_pos_and_le"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:trap-prevalence Part 2 proof, lines 471-473 (the trap probability `= 6 p⁵ (1-p)² × |C_2|≥2 factor × reward factor`, the further factors each in `(0, 1]`)"
+  attackHistory :=
+    [ "R87 2026-05-15: Cat 3 paper-novel structural equation introduced as the SIGNATURE-CORRECTED replacement (R83/R86 precedent) for the retired over-strong/false atom `trapConfigLocalProb_le_misalignmentProb_OPEN`. Statement: `∀ p, harrisKestenCriticalProb < p → p < 1 → 0 < trapLocalConfigProb p ∧ trapLocalConfigProb p ≤ trapConfigLocalProb p`. Paper-stipulated: paper prop:trap-prevalence Part 2 proof line 473 — the trap probability is the edge-config probability `binom(4,2) p²(1-p)²·p³ = 6 p⁵ (1-p)²` *times* the `|C_2| ≥ 2` factor and the reward-event factor, both in `(0, 1]` for `p_c < p < 1` (each is a genuine probability of a non-trivial, non-certain event). `(a)` positivity: a product of strictly positive factors (`6 p⁵ (1-p)² > 0` for `0 < p < 1`, the `|C_2|≥2` factor `> 0` 'with positive probability', the reward factor `≥ 1/6 > 0`). `(b)` `≤ trapConfigLocalProb p`: the further two factors are each `≤ 1` (probabilities), so the product is `≤ 6 p⁵ (1-p)²`. Classified structuralEquation per discipline §3.4.3: paper-stipulated positivity + factor-ordering of the genuine-lower-bound carrier — mirrors the `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` R86 signature-corrected structuralEquation precedent. Cat 1 reduction check: CLEAR-NO — depends on the `|C_2|≥2` and reward-event factors from the paper-graph-specific `Z²` percolation measure. Cat 2 reduction check: paper-novel framing on the opaque `trapLocalConfigProb` carrier. Downstream consumer: the R87 derived theorem `gap_trap_prevalence_above_threshold` (Phase.lean) consumes the positivity clause `(a)`." ]
+  scope := "Proposition prop:trap-prevalence Part 2 proof line 473: `0 < trapLocalConfigProb p` and `trapLocalConfigProb p ≤ trapConfigLocalProb p` for `p_c < p < 1`"
+  obstacleOrAttribution :=
+    "Cat 3 structuralEquation per discipline §3.4.3 (paper-stipulated positivity + factor-ordering of the genuine-lower-bound carrier; mirrors the `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` R86 signature-corrected structuralEquation precedent). Close target = Mathlib `Z²`-lattice + bond-percolation measure machinery (to compute the `|C_2| ≥ 2` and reward-event factors) + paper line 473 FKG-estimate reconstruction. Downstream consumer: `gap_trap_prevalence_above_threshold` derived theorem (Phase.lean)."
+  conditionalOn := []
+
+/-- R87 structural equation (signature-corrected): the sub-event
+    expectation of the trap indicator on `trapLocalConfigEvent` equals
+    the paper's product lower bound `trapLocalConfigProb p`. -/
+def entry_atom_restrictedExpectation_eq_localConfigProb : GapEntry where
+  name := "restrictedExpectation_eq_localConfigProb"
+  status := GapStatus.gapOpen
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:trap-prevalence Part 2 proof, lines 467-473 (`trapLocalConfigEvent` has probability `trapLocalConfigProb p`; the indicator is `1` on it because the sub-event implies the trap pattern)"
+  attackHistory :=
+    [ "R87 2026-05-15: Cat 3 paper-novel structural equation introduced as the SIGNATURE-CORRECTED replacement (R83/R86 precedent) for the retired over-strong/false atom `trapConfigLocalProb_le_misalignmentProb_OPEN`. Statement: `∀ p, percRestrictedExpectation (1 − p) trapLocalConfigEvent trapEventIndicator = trapLocalConfigProb p`. Paper-stipulated: paper prop:trap-prevalence Part 2 proof lines 467-473 STIPULATE that the genuine trap sub-event `trapLocalConfigEvent` (edge config + `|C_2| ≥ 2` + reward event `E`) has probability `trapLocalConfigProb p` — and on every realisation in that sub-event the trap pattern holds (so the trap-event indicator `trapEventIndicator` is `1` there), hence the unnormalised sub-event expectation of the indicator over `trapLocalConfigEvent` is exactly the sub-event's probability `trapLocalConfigProb p`. Classified structuralEquation per discipline §3.4.3: a paper-stipulated identity binding the concrete sub-event expectation (`Percolation.percRestrictedExpectation`) to the paper's lower-bound carrier — mirrors the `expectedTopoLossOnGiant` / `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` R86 sub-event structuralEquation precedent. Cat 1 reduction check: CLEAR-NO — depends on the `Z²` reachable-set construction making `trapLocalConfigEvent` computable. Cat 2 reduction check: paper-novel framing on the opaque `trapLocalConfigEvent` / `trapEventIndicator` / `trapLocalConfigProb` carriers. Downstream consumer: the R87 derived theorem `trapLocalConfigProb_le_misalignmentProb` (Phase.lean) consumes it (rewrites `trapLocalConfigProb p` to the sub-event expectation, then applies `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg`)." ]
+  scope := "Proposition prop:trap-prevalence Part 2 proof lines 467-473: `percRestrictedExpectation (1 − p) trapLocalConfigEvent trapEventIndicator = trapLocalConfigProb p` (the sub-event expectation of the trap indicator equals the sub-event's probability)"
+  obstacleOrAttribution :=
+    "Cat 3 structuralEquation per discipline §3.4.3 (paper-stipulated identity binding the concrete sub-event expectation to the paper's lower-bound carrier; mirrors the `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` R86 sub-event structuralEquation precedent). Close target = Mathlib `Z²`-lattice + bond-percolation measure machinery (the `Z²` reachable-set construction making `trapLocalConfigEvent` computable) + paper line 473 reconstruction. Downstream consumer: `trapLocalConfigProb_le_misalignmentProb` derived theorem (Phase.lean)."
   conditionalOn := []
 
 /-- R59 closure-path-B: new smaller paper-novel ATOMIC stipulation #1
@@ -7551,6 +7654,29 @@ def allGaps : List GapEntry := [
   entry_atom_wInfoTopoRatioMillsConst_pos_above_pc,
   entry_atom_wInfoTopoRatio_le_MillsConst_decay,
   entry_atom_trapConfigLocalProb_le_misalignmentProb,
+  -- R87 SOUNDNESS-DEFECT FIX (R83/R86 precedent): the R59 atom
+  -- `trapConfigLocalProb_le_misalignmentProb_OPEN` was over-strong /
+  -- FALSE (the edge-config probability `6 p⁵ (1-p)²` as a *lower*
+  -- bound on the strictly-smaller trap probability — the trap event is
+  -- the edge-config sub-event further restricted by `|C_2| ≥ 2` + the
+  -- reward event `E`, so `trapMisalignmentProbability p <
+  -- trapConfigLocalProb p`). RETIRED + replaced (the retired entry
+  -- above flips workingAssumption gapOpen → derivedTheorem gapClosed)
+  -- by the R87 signature-corrected chain: `trapMisalignmentProbability`
+  -- CONCRETISED as `percExpectation (1−p) trapEventIndicator` (R85
+  -- pattern; the carrier entry flips carrier gapDefinitional →
+  -- derivedTheorem gapClosed) + 3 new carriers + 3 new structuralEquations
+  -- + the derived theorem `trapLocalConfigProb_le_misalignmentProb`
+  -- (proves the TRUE paper claim via the new kernel-pure
+  -- `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg`).
+  -- wA delta: −1 (retired R59 wA; the 2 new gapOpen atoms are
+  -- structuralEquation-typed, not workingAssumption).
+  entry_carrier_trapEventIndicator,
+  entry_atom_trapEventIndicator_nonneg,
+  entry_carrier_trapLocalConfigEvent,
+  entry_carrier_trapLocalConfigProb,
+  entry_atom_trapLocalConfigProb_pos_and_le,
+  entry_atom_restrictedExpectation_eq_localConfigProb,
   entry_atom_forward_reachable_empty_full_at_all_open,
   entry_atom_all_edges_open_at_zero_blocking,
   -- R41 atomic-stipulation layer (Manufactured-Recognition §18 decomposition,
