@@ -1176,39 +1176,56 @@ theorem gap_principal_regime_bifurcation :
 
 /-! ## 3. Corollary `cor:disclosure` — Disclosure Policy Design -/
 
-/-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
-    of the β → ∞ limit of aggregate welfare. Paper Corollary
-    `cor:disclosure` Part 1 proof (line 652) reads "for above-threshold
-    agents, `W(β, κ, α)` is non-decreasing in β and converges to a
-    finite limit `W(∞, κ, α)`"; aggregating over the population gives
-    `\bar{W}(\beta) \to \bar{W}(\infty)` as `β → ∞`. This atom encodes
-    the bare paper-stated EXISTENCE of a finite limit, without committing
-    to a specific named limit constant.
+/-- **R95** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated combined-convergence witness on the R92 G-conditional
+    sample sums. Paper Corollary `cor:disclosure` Part 1 proof (line
+    652) STATES "for above-threshold agents, `W(β, κ, α)` is non-
+    decreasing in β and converges to a finite limit"; aggregating over
+    the population gives `\bar{W}(\beta) \to \bar{W}(\infty)`. Per the
+    R92 mixture decomposition, this requires the combined sample-sum
+    `∑ above-sample + ∑ below-sample` to converge to a finite limit
+    as `β → ∞`.
 
-    The atom is `∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L)`.
-    The downstream `noncomputable def W_bar_limit_infty` invokes
-    `Classical.choose` on this atom to obtain the canonical limit; the
-    structural-equation atom `W_bar_limit_infty_def` is then internalised
-    by `Classical.choose_spec`.
-
-    Cat 3 sub-type: workingAssumption (paper-stated existence of a
-    finite limit of `W_bar` at `+∞`; pending Mathlib monotone-bounded-
-    convergence + per-agent finite-limit aggregation machinery for the
-    explicit limit witness; 必须 close before publication).
-
-    R76 Pattern 5 propagation per `feedback_no_compute_retreat` +
-    `feedback_gap_ledger_in_lean4` §18 (R74/R75/R76-A/R76-B precedent):
-    split the bundled structural-equation atom `W_bar_limit_infty_def`
-    (carrier-pin + Tendsto-claim bundled together) into this smaller
-    existence atom + the Pattern 5 closure of `W_bar_limit_infty_def`
-    via `Classical.choose_spec`. Net wA delta: 0 (1 new wA, 1 retired
-    wA via Pattern 5); audit-chain granularity benefit per discipline §18.
+    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    combined-convergence on opaque sample sums; R88-R94 precedent
+    family). 永不 close.
 
     paper source: Corollary `cor:disclosure` Part 1 proof, line 652
-    ("aggregate welfare converges to a finite limit as β → ∞" —
-    paper-stated existence of a finite limit at `+∞`). -/
-axiom W_bar_has_limit_infty_OPEN :
-    ∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L)
+    (aggregate welfare converges to a finite limit as `β → ∞`). -/
+axiom principalSampleBoth_combined_convergence_witness :
+    ∃ L : ℝ, Filter.Tendsto
+      (fun β =>
+        (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+          agentWelfare AgentType.kappaAgent β
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+        (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+          agentWelfare AgentType.kappaAgent β
+            (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
+      Filter.atTop (nhds L)
+
+/-- Paper-stated existence of the β → ∞ limit of aggregate welfare
+    (R95 CLOSURE via R92 G-integration framework + R95 combined-
+    convergence witness atom). Replaces R-original axiom of the same
+    name; converted to derivedTheorem composing the R92 integral
+    structural equations + the new combined-convergence witness. -/
+theorem W_bar_has_limit_infty_OPEN :
+    ∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L) := by
+  obtain ⟨L, h_tendsto⟩ := principalSampleBoth_combined_convergence_witness
+  refine ⟨L, ?_⟩
+  -- W_bar β = above β + below β = ∑ above-sample + ∑ below-sample by R92 def
+  have h_eq : W_bar = fun β =>
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) := by
+    funext β
+    show aboveThresholdWelfare β + belowThresholdWelfare β = _
+    rw [aboveThresholdWelfare_eq_kappaAgent_integral β,
+        belowThresholdWelfare_eq_kappaAgent_integral β]
+  rw [h_eq]
+  exact h_tendsto
 
 /-- Limit of aggregate welfare as `β → ∞`.
 

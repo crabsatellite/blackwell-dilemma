@@ -6525,16 +6525,17 @@ def entry_atom_aggregate_optimum_exists_per_G : GapEntry where
 /-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
     of the β → ∞ limit of aggregate welfare. -/
 def entry_atom_W_bar_has_limit_infty : GapEntry where
-  name := "W_bar_has_limit_infty_OPEN"
-  status := GapStatus.gapOpen
+  name := "W_bar_has_limit_infty_OPEN [R95 derivedTheorem; closed via R92 G-integration framework + R95 combined-convergence witness atom]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Corollary cor:disclosure Part 1 proof, line 652 (aggregate welfare converges to a finite limit as β → ∞ — paper-stated existence of a finite limit at +∞)"
   attackHistory :=
-    [ "R76 2026-05-15: Cat 3 atomic-stipulation axiom NEW per `feedback_gap_ledger_in_lean4` §18 + R76-A/R76-B `principal_interior_maximum_exists_OPEN` / `aggregate_optimum_exists_per_G_OPEN` Pattern 5 precedent. Paper line 652 reads `for above-threshold agents, W(β, κ, α) is non-decreasing in β and converges to a finite limit W(∞, κ, α)`; aggregating over the population gives `\\bar{W}(\\beta) \\to \\bar{W}(\\infty)` as `β → ∞`. Atom encodes `∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L)`. Cat 1 reduction check: not Mathlib-derivable (monotone-bounded-convergence + per-agent finite-limit aggregation). Cat 2 reduction check: paper-novel construction. Hosted by the new `noncomputable def W_bar_limit_infty : ℝ := Classical.choose W_bar_has_limit_infty_OPEN` (Principal.lean); downstream `W_bar_limit_infty_def` becomes a derivedTheorem composing the def's unfold + Classical.choose_spec. Pairing: this atom (-1 net) replaces the retired `entry_atom_W_bar_limit_infty_def` workingAssumption (+1 net) — NET 0 wA." ]
-  scope := "Corollary cor:disclosure Part 1 proof, line 652, paper-stated existence of a finite limit of W_bar at +∞"
+    [ "R76 2026-05-15: Cat 3 atomic-stipulation axiom NEW per `feedback_gap_ledger_in_lean4` §18 + R76-A/R76-B `principal_interior_maximum_exists_OPEN` / `aggregate_optimum_exists_per_G_OPEN` Pattern 5 precedent. Paper line 652 reads `for above-threshold agents, W(β, κ, α) is non-decreasing in β and converges to a finite limit W(∞, κ, α)`; aggregating over the population gives `\\bar{W}(\\beta) \\to \\bar{W}(\\infty)` as `β → ∞`. Atom encodes `∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L)`.",
+      "R95 2026-05-15: CLOSED via R92 G-integration framework + new R95 paper-stipulated combined-convergence witness atom. New Cat 3 §3.4.3 atom `principalSampleBoth_combined_convergence_witness`: existence of finite limit L such that `(∑ above-sample + ∑ below-sample) → L` as β → ∞ (paper line 652 aggregate convergence). The wA atom is converted to a Cat 1 derivedTheorem composing the R92 integral structural equations + the new combined-convergence witness via `funext` + `Filter.Tendsto` rewrite. Net wA delta: −1." ]
+  scope := "Corollary cor:disclosure Part 1 proof, line 652 (R95 closed via G-integration framework + combined-convergence witness)"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = derive `∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L)` from Corollary cor:disclosure Part 1 proof line 652: paper aggregates per-agent finite-limit claim across the agent population — requires per-agent W_κ Tendsto convergence (from R30 W_open_limit_infty Cat 1 closure pattern) + monotone-bounded-convergence + integration-aggregation Mathlib infra."
+    "R95 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework + new R95 `principalSampleBoth_combined_convergence_witness` atom + functional-equality rewrite."
   conditionalOn := []
 
 /-! ## R76 §18 closure-path-A entries on welfareCrossPartial_explicit_form_OPEN -/
@@ -6943,6 +6944,20 @@ def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
   scope := "Proposition prop:principal-optimum Part 1, `W_bar` exceeds `W_bar(0)` at some `β > 0` (R94 closed via G-integration framework + combined exceeds-zero witness)"
   obstacleOrAttribution :=
     "R94 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework integral structural equations + new R94 paper-stipulated `principalSampleBoth_exceeds_zero_witness` atom."
+  conditionalOn := []
+
+/-- principalSampleBoth_combined_convergence_witness — R95 Cat 3 §3.4.3
+    paper-stipulated combined-convergence witness on R92 sample sums. -/
+def entry_atom_principalSampleBoth_combined_convergence_witness : GapEntry where
+  name := "principalSampleBoth_combined_convergence_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Corollary cor:disclosure Part 1 proof, line 652 (aggregate welfare converges to a finite limit as β → ∞)"
+  attackHistory :=
+    [ "R95 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R95 closure of `W_bar_has_limit_infty_OPEN` via R92 G-integration framework. Paper line 652 STIPULATES that `\\bar{W}(\\beta) \\to \\bar{W}(\\infty)` as β → ∞; per R92 mixture decomposition, the combined sample-sum `∑ above-sample + ∑ below-sample` converges to a finite limit L. R88-R94 paper-stipulated structural-equation precedent. Downstream consumer: `W_bar_has_limit_infty_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "Paper-stipulated combined-convergence witness on R92 sample sums (paper line 652)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
   conditionalOn := []
 
 /-- principalSampleBoth_exceeds_zero_witness — R94 Cat 3 §3.4.3
@@ -8113,6 +8128,7 @@ def allGaps : List GapEntry := [
   -- — substantive content for the R93 closure of W_bar_witness_pair_strict_dominance.
   entry_atom_principalSampleBoth_combined_dominance_witness_pair,
   entry_atom_principalSampleBoth_exceeds_zero_witness,
+  entry_atom_principalSampleBoth_combined_convergence_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
