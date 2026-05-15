@@ -5578,10 +5578,10 @@ def entry_atom_kappaStar_def : GapEntry where
   conditionalOn := []
 
 def entry_atom_mLimit_def : GapEntry where
-  name := "mLimit_def + mLimitOf carrier"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "mLimit_def + mLimitOf carrier [R102 derivedTheorem; mLimitOf := mLimit concretization + mean_estimate_gap_tendsto_mLimit composition]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`)"
   attackHistory :=
     [ "Cat 3 atomic structural-equation axiom: `Filter.Tendsto (mean_estimate_gap p) atTop (nhds (mLimitOf p))`. Paper Theorem 4.1 Part 3 line 505 limit. New opaque carrier `mLimitOf : ℝ → ℝ` introduced to host the limit value; the paper-stated `mLimitOf p = V_dyn(u_2) − V_dyn(u_1)` link is deferred to per-IDP-instance closure (paper's `(u_1, u_2)` are local to the instance). Extracted as standalone atom from the bundled `gap_cognitive_threshold_part3_OPEN`. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel.",

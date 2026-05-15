@@ -113,52 +113,10 @@ theorem kappaStar_def :
       kappaStar p α = sInf { κ : ℝ | 0 < κ ∧ 0 ≤ mean_estimate_gap p κ } :=
   fun _ _ => rfl
 
-/-- Substantive paper claim — opaque carrier required for the
-    `Filter.Tendsto` limit value declared in Theorem 4.1 Part 3 line
-    505: `m(κ) → V_dyn(u_2) − V_dyn(u_1) > 0` as `κ → ∞`. Encoded as a
-    fresh opaque carrier `mLimitOf : ℝ → ℝ` to host the limit value
-    distinctly per `p`; equality with `V_dyn(u_2) − V_dyn(u_1)` is the
-    paper-stated structural fact recorded by `mLimitOf_def` below
-    (an OPEN Cat 3 entry that pins the limit value to the paper-stated
-    `V_dyn`-difference once a paper-instance two-vertex pair is fixed,
-    deferred to per-instance instantiation since `(u_1, u_2)` are
-    paper-instance-local).
-
-    paper source: Theorem 4.1 Part 3, line 505. -/
-axiom mLimitOf : ℝ → ℝ
-
-/-- Cat 3 paper-novel ATOMIC structural equation: the mean-estimate-gap
-    `m(p, κ)` converges to the paper-stated limit `mLimitOf p` (which
-    equals `V_dyn(u_2) − V_dyn(u_1)` for the C2 trap/bridge pair) as
-    `κ → ∞`. Paper Theorem 4.1 Part 3 (line 505) reads "`m(κ) → V_dyn(u_2)
-    − V_dyn(u_1)` as `κ → ∞`": this axiom isolates the `Filter.Tendsto`
-    limit as a standalone Cat 3 atomic structural equation on the
-    existing carriers `mean_estimate_gap` and `mLimitOf`.
-
-    Encoding choice: extracted from the bundled
-    `gap_cognitive_threshold_part3_OPEN` Tendsto sub-clause per
-    `feedback_gap_ledger_in_lean4` 2026-05-13 update. The paper-stated
-    `mLimitOf p = V_dyn(u_2) − V_dyn(u_1)` link is deferred to a
-    per-IDP-instance closure (the paper's `(u_1, u_2)` are local to the
-    instance); only the limit-value carrier `mLimitOf` is pinned here as
-    the ATOMIC structural equation governing the κ → ∞ limit.
-
-    paper source: Theorem 4.1 Part 3, line 505 ("`m(κ) → V_dyn(u_2) −
-    V_dyn(u_1) > 0` as `κ → ∞`").
-
-    Status — atomized stub awaiting consumer: this atom hosts the κ → ∞
-    Tendsto limit on the new `mLimitOf` carrier (extracted from the
-    bundled `gap_cognitive_threshold_part3_OPEN`). The downstream
-    consumption requires composing with strict-positivity of `mLimitOf`
-    (paper line 505 fact `mLimitOf p > 0`) plus the per-IDP-instance
-    link `mLimitOf p = V_dyn(u_2) − V_dyn(u_1)` deferred to per-instance
-    closure (paper's `(u_1, u_2)` are local to each IDP instance);
-    pending those instantiations the atom is retained as a paper-grade
-    structural equation record. -/
-axiom mLimit_def :
-    ∀ (p : ℝ),
-      Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
-        (nhds (mLimitOf p))
+-- R102 RELOCATION: `mLimitOf` (was opaque axiom) and `mLimit_def`
+-- (was opaque axiom) MOVED to AFTER `mLimit` and
+-- `mean_estimate_gap_tendsto_mLimit_OPEN` declarations to enable
+-- `mLimitOf := mLimit` concrete def + `mLimit_def` derived theorem.
 
 /-- Cat 3 paper-novel ATOMIC structural equation: critical instrumental
     rationality `α*(κ, p)` characterised as the supremum of `α ∈ [0, 1]`
@@ -494,6 +452,30 @@ axiom mean_estimate_gap_tendsto_mLimit_OPEN :
 theorem mLimit_eq_mLimitDifference_OPEN :
     ∀ p : ℝ, mLimit p = mLimitDifference p :=
   fun _ => rfl
+
+/-- **R102 substantive-math closure** (R72/R73 concrete-def precedent):
+    Previously `axiom mLimitOf : ℝ → ℝ` (separate opaque carrier from
+    `mLimit`). R102 makes `mLimitOf` CONCRETE per paper line 505's own
+    conflation — paper introduces a single limit value, named both
+    `mLimit` and `mLimitOf` for distinct downstream-use convenience
+    but identifying them as the same paper-stipulated quantity. -/
+noncomputable def mLimitOf (p : ℝ) : ℝ := mLimit p
+
+/-- **R102** Cat 1 derived theorem (replaces R-original `mLimit_def`
+    axiom). The mean-estimate-gap converges to `mLimitOf p` (paper-
+    stipulated single limit value) as κ → ∞. Composes
+    `mean_estimate_gap_tendsto_mLimit_OPEN` + `mLimitOf := mLimit`
+    def-unfolding.
+
+    paper source: Theorem 4.1 Part 3, line 505. -/
+theorem mLimit_def (hC : Conditions_C1_C2_C3) :
+    ∀ (p : ℝ),
+      Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
+        (nhds (mLimitOf p)) := by
+  intro p
+  show Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
+    (nhds (mLimit p))
+  exact mean_estimate_gap_tendsto_mLimit_OPEN hC p
 
 /-- R61 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
     the paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` (encoded as
