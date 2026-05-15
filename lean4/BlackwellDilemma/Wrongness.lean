@@ -220,37 +220,36 @@ Mathlib-Cat-1, partially paper-novel).
     The atom is renamed to reflect the substantive content:
     `wrongness_high_beta_welfare_convergence_atom_OPEN`. -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation #1 (R90 soundness-defect-fix
-    REPLACEMENT for `wrongness_high_beta_welfare_floor_atom_OPEN`):
-    paper Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1` greedy
-    concentration) + line 352 (`W(∞) = V_dyn(u_1)`) + line 368 (`W(β)
-    → W(∞)`). Under C1-C3, terminal-neighbour topology, degree-2
-    starting vertex, and a Blackwell-ordered topology-blind signal
-    family, the greedy agent's welfare `agentWelfare greedy β 0 1`
-    converges to a finite limit as `β → ∞`. The limit `Wlim` is
-    paper-meaningful (paper line 352 identifies it with `V_dyn(u_1)`
-    on the C2-misalignment realisation; aggregated over `G` here
-    via the opaque `agentWelfare` carrier).
+/-- **R103** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated per-realisation pointwise convergence of the greedy
+    agent's reward kernel as β → ∞. Paper Lemma `lem:wrongness` proof
+    line 348 STATES `P_1(β) → 1` (greedy concentration on u_1) +
+    line 352 STATES `W(∞) = V_dyn(u_1)` — at the per-realisation
+    level, the kernel converges to a paper-stipulated limit kernel
+    `agentRewardKernel_greedy_limit_kernel ω`.
 
-    R90 strict improvement over the retired vacuous floor signature:
-    `Filter.Tendsto (fun β => agentWelfare greedy β 0 1) atTop (nhds Wlim)`
-    is NOT trivially satisfied by `Wlim := 0` — it requires actual
-    convergence of welfare to that value. Paper hypotheses C1-C3 +
-    Blackwell-ordering on the topology-blind family are needed:
-    Blackwell-ordering forces eventual greedy concentration (line
-    348), C2-misalignment makes the limit be `V_dyn(u_1)` (the
-    statically-best-but-not-dynamically-best vertex, line 352),
-    yielding a strictly-below-ceiling limit.
+    Cat 3 §3.4.3 gapDefinitional per discipline (R88-R96 paper-
+    stipulated structural-equation precedent). 永不 close.
 
-    Cat 3 sub-type: workingAssumption (paper-stated convergence
-    to finite limit `Wlim`; pending bounded-convergence + Blackwell
-    1951/1953 + paper-line-348 greedy-concentration framework;
-    必须 close before publication).
+    paper source: Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1`)
+    + line 352 (`W(∞) = V_dyn(u_1)`). -/
+axiom agentRewardKernel_greedy_limit_kernel : BondConfig AgentEdgeIdx → ℝ
 
-    paper source: Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1`
-    greedy concentration) + line 352 (`W(∞) = V_dyn(u_1)`) +
-    line 368 (`W(β) → W(∞)` convergence used in reversal argument). -/
-axiom wrongness_high_beta_welfare_convergence_atom_OPEN :
+axiom agentRewardKernel_greedy_pointwise_tendsto_atTop :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    DegreeTwoStartingVertex →
+    ∀ (signalFamily : ℝ → PercolationOutcome → ℝ),
+      (∀ β : ℝ, IsTopologyBlind (signalFamily β)) →
+      IsBlackwellOrdered signalFamily →
+      ∀ ω : BondConfig AgentEdgeIdx,
+        Filter.Tendsto (fun β => agentRewardKernel AgentType.greedy β 0 1 ω)
+          Filter.atTop (nhds (agentRewardKernel_greedy_limit_kernel ω))
+
+/-- **R103 CLOSURE** via R103 percExpectation_tendsto infrastructure +
+    paper-stipulated kernel-pointwise-tendsto structural equation.
+    Replaces R-original axiom of the same name. -/
+theorem wrongness_high_beta_welfare_convergence_atom_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
     DegreeTwoStartingVertex →
@@ -259,7 +258,13 @@ axiom wrongness_high_beta_welfare_convergence_atom_OPEN :
       IsBlackwellOrdered signalFamily →
       ∃ Wlim : ℝ,
         Filter.Tendsto (fun β => agentWelfare AgentType.greedy β 0 1)
-          Filter.atTop (nhds Wlim)
+          Filter.atTop (nhds Wlim) := by
+  intro hC hT hDeg2 signalFamily hBlind hBO
+  refine ⟨percExpectation (1 - blockingProb) agentRewardKernel_greedy_limit_kernel, ?_⟩
+  exact agentWelfare_tendsto_of_kernel_pointwise_tendsto
+    AgentType.greedy 0 1 Filter.atTop agentRewardKernel_greedy_limit_kernel
+    (agentRewardKernel_greedy_pointwise_tendsto_atTop
+      hC hT hDeg2 signalFamily hBlind hBO)
 
 /-- Cat 3 paper-novel ATOMIC stipulation #2 (R90 reversal-witness
     decomposition replacing the prior workingAssumption

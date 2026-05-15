@@ -326,6 +326,35 @@ theorem percExpectation_mono {E : Type} [Fintype E] [DecidableEq E]
   exact mul_le_mul_of_nonneg_left (hfg ω)
     (bondConfigWeight_nonneg p hp0 hp1 ω)
 
+/-- **R103 Filter.Tendsto preservation by `E_{G_p}`** — finite-sample
+    bounded-convergence theorem on the bond-percolation expectation.
+    If for each percolation realisation `ω`, the integrand sequence
+    `f β ω` converges to `g ω` as `β` evolves along filter `l`, then
+    the percolation expectation `percExpectation p (f β)` converges to
+    `percExpectation p g` along the same filter.
+
+    Cat 1 derivation via Mathlib's `tendsto_finsetSum` over the finite
+    `BondConfig E` carrier: per-term `bondConfigWeight p ω * f β ω →
+    bondConfigWeight p ω * g ω` (continuous-mult); finite-sum
+    aggregation preserves the limit.
+
+    Foundation lemma for the R103 reversal-of-monotonicity convergence
+    pattern — the strict-`<` analogue of `percExpectation_lt_of_pointwise_le_strict_at_one`
+    converted to a Tendsto-preservation statement, enabling closure of
+    Tendsto-style welfare-convergence atoms. -/
+theorem percExpectation_tendsto_of_pointwise_tendsto
+    {E : Type} [Fintype E] [DecidableEq E]
+    (p : ℝ) (f : ℝ → BondConfig E → ℝ) (g : BondConfig E → ℝ)
+    (l : Filter ℝ)
+    (h_ptwise : ∀ ω : BondConfig E,
+      Filter.Tendsto (fun β => f β ω) l (nhds (g ω))) :
+    Filter.Tendsto (fun β => percExpectation p (f β)) l
+      (nhds (percExpectation p g)) := by
+  unfold percExpectation
+  apply tendsto_finsetSum
+  intro ω _
+  exact (h_ptwise ω).const_mul (bondConfigWeight p ω)
+
 /-- **R90 STRICT monotonicity of `E_{G_p}` in the integrand** — the
     foundation lemma for the reversal-witness integration pattern.
     If `f ω ≤ g ω` pointwise AND `f ω₀ < g ω₀` strictly at some

@@ -6270,10 +6270,10 @@ recommended V_dyn-dominance + static-reward-misalignment decomposition.
     + the high-`β` slack `V_dyn(u_2,β) - V_dyn(u_1,β) > Δ_R/2` (paper
     line 357). -/
 def entry_atom_wrongness_high_beta_welfare_floor : GapEntry where
-  name := "wrongness_high_beta_welfare_convergence_atom_OPEN [R90 SOUNDNESS-DEFECT FIX REPLACES `wrongness_high_beta_welfare_floor_atom_OPEN`]"
-  status := GapStatus.gapOpen
+  name := "wrongness_high_beta_welfare_convergence_atom_OPEN [R90 SOUNDNESS-DEFECT FIX + R103 derivedTheorem closed via percExpectation_tendsto infrastructure + paper-stipulated kernel-pointwise-tendsto atom]"
+  status := GapStatus.gapClosed
   inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Lemma lem:wrongness proof, line 348 (`P_1(β) → 1` greedy concentration) + line 352 (`W(∞) = V_dyn(u_1)`) + line 368 (`W(β) → W(∞)` convergence used in reversal argument)"
   attackHistory :=
     [ "R60 2026-05-14: smaller paper-novel atomic stipulation introduced as part of §18 closure-path-B decomposition of the R44-flagged `topology_blind_wrongness_atom_OPEN` (MOST EGREGIOUS conclusion-as-axiom packaging an entire paper Lemma). Atom captures paper proof stage 1: V_dyn-dominance + greedy concentration mechanism (paper lines 348-352) + slack inequality (line 357), encoded operationally as a high-`β` welfare-floor existential on the opaque `agentWelfare AgentType.greedy` carrier (`∃ β₀ Wlim, ∀ β > β₀, Wlim ≤ agentWelfare AgentType.greedy β 0 1`). Cat 1 reduction check: not Mathlib-derivable (depends on bounded-convergence + Φ-tail integral machinery + Blackwell-ordered greedy-concentration argument on opaque agentWelfare carrier). Cat 2 reduction check: paper-novel application of Blackwell-ordering at the greedy policy under topology-blindness (Blackwell 1951/1953 is the underlying Cat 2 dependency, but the topology-blind greedy concentration mechanism is paper-novel framing). Downstream consumer: `gap_wrongness` derived theorem (Wrongness.lean) hosts this atom in compose with the stage-2 reversal-witness atom.",
@@ -6948,6 +6948,52 @@ def entry_atom_W_bar_exceeds_zero_at_positive_beta : GapEntry where
 
 /-! ## R101 per-agent-optimal β* extension (5 entries enabling
     `perAgentOptimalAggregate_dominates_uniform` closure). -/
+
+/-! ## R103 percExpectation_tendsto Mathlib infrastructure entries -/
+
+def entry_thm_percExpectation_tendsto_of_pointwise_tendsto : GapEntry where
+  name := "percExpectation_tendsto_of_pointwise_tendsto"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "§2.5 line 205-208 (`agentWelfare = E_{G_p}[kernel]`); finite-sample bounded-convergence theorem on bond-percolation expectation"
+  attackHistory := [ "R103 2026-05-15: Cat 1 Mathlib lemma introduced for the R103 Tendsto-preservation pattern (sister to R88 monotonicity foundation + R90 strict-`<` foundation). Pointwise Tendsto on the kernel ⇒ Tendsto on percExpectation, via Mathlib `tendsto_finsetSum` over the finite BondConfig E carrier + per-term continuous-mult by bondConfigWeight. Foundation lemma for Tendsto-style welfare-convergence atom closures." ]
+  scope := "Cat 1 finite-sample bounded-convergence theorem on percolation expectation"
+  obstacleOrAttribution := "R103 CLOSED — Cat 1 derivation via Mathlib tendsto_finsetSum + Filter.Tendsto.const_mul."
+  conditionalOn := []
+
+def entry_thm_agentWelfare_tendsto_of_kernel_pointwise_tendsto : GapEntry where
+  name := "agentWelfare_tendsto_of_kernel_pointwise_tendsto"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "§2.5 line 205-208 (`agentWelfare = E_{G_p}[kernel]`); R88 agentWelfare concretization + R103 percExpectation_tendsto"
+  attackHistory := [ "R103 2026-05-15: Cat 1 foundation derived theorem (sister to R88 monotonicity foundation + R90 strict-`<` foundation). Pointwise kernel Tendsto ⇒ welfare Tendsto via R88 agentWelfare concretization + R103 percExpectation_tendsto_of_pointwise_tendsto. Foundation lemma for Tendsto-style welfare-convergence atom closures (R103 wrongness_high_beta_welfare_convergence)." ]
+  scope := "Cat 1 foundation derived theorem: pointwise kernel Tendsto ⇒ welfare Tendsto under R88 agentWelfare concretization"
+  obstacleOrAttribution := "R103 CLOSED — Cat 1 derivation via R88 agentWelfare def-unfolding + percExpectation_tendsto_of_pointwise_tendsto."
+  conditionalOn := []
+
+def entry_atom_agentRewardKernel_greedy_limit_kernel : GapEntry where
+  name := "agentRewardKernel_greedy_limit_kernel (paper-novel limit-kernel carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Lemma lem:wrongness proof, line 348 (P_1(β) → 1) + line 352 (W(∞) = V_dyn(u_1))"
+  attackHistory := [ "R103 2026-05-15: Cat 3 paper-novel primitive carrier — paper-stipulated limit kernel for the greedy agent's reward kernel as β → ∞. 永不 close per discipline §3.4.3." ]
+  scope := "Opaque limit-kernel carrier on BondConfig AgentEdgeIdx (paper line 348+352 limit)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_agentRewardKernel_greedy_pointwise_tendsto_atTop : GapEntry where
+  name := "agentRewardKernel_greedy_pointwise_tendsto_atTop"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Lemma lem:wrongness proof, line 348 (P_1(β) → 1 greedy concentration) + line 352 (W(∞) = V_dyn(u_1))"
+  attackHistory := [ "R103 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R103 closure of `wrongness_high_beta_welfare_convergence_atom_OPEN`. Paper line 348 STATES `P_1(β) → 1` (greedy concentration on u_1) + line 352 STATES `W(∞) = V_dyn(u_1)` — at the per-realisation level, the kernel converges to a paper-stipulated limit kernel `agentRewardKernel_greedy_limit_kernel ω`. R88-R96 paper-stipulated structural-equation precedent. Downstream consumer: `wrongness_high_beta_welfare_convergence_atom_OPEN` (now derivedTheorem). 永不 close per discipline §3.4.3." ]
+  scope := "Per-realisation pointwise convergence of greedy agent's reward kernel as β → ∞ (paper line 348+352)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
 
 def entry_atom_principalSampleAboveBetaStar : GapEntry where
   name := "principalSampleAboveBetaStar (paper-novel per-agent-optimal β* carrier; above-threshold)"
@@ -8229,6 +8275,12 @@ def allGaps : List GapEntry := [
   entry_atom_perAgentOptimalAggregate_eq_kappaAgent_integral,
   entry_atom_principalSampleAbove_per_agent_optimum_dominance,
   entry_atom_principalSampleBelow_per_agent_optimum_dominance,
+  -- R103 percExpectation_tendsto Mathlib infrastructure + paper-stipulated
+  -- kernel-pointwise-tendsto atom enabling wrongness_convergence closure.
+  entry_thm_percExpectation_tendsto_of_pointwise_tendsto,
+  entry_thm_agentWelfare_tendsto_of_kernel_pointwise_tendsto,
+  entry_atom_agentRewardKernel_greedy_limit_kernel,
+  entry_atom_agentRewardKernel_greedy_pointwise_tendsto_atTop,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,

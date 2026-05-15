@@ -821,6 +821,26 @@ theorem agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
     (agentRewardKernel a β₂ κ α) (agentRewardKernel a β₁ κ α)
     h_ptwise_le ω₀ h_strict_at_one
 
+/-- **R103 Tendsto-preservation foundation derived theorem.** If for
+    each percolation realisation `ω` the kernel sequence `agentRewardKernel
+    a β κ α ω` converges to `g ω` as β evolves along filter `l`, then
+    the welfare `agentWelfare a β κ α` converges to
+    `percExpectation (1 - blockingProb) g` along the same filter.
+
+    Sister to R88 monotonicity foundation + R90 strict-`<` foundation;
+    enables Tendsto-style welfare-convergence closures via paper-
+    stipulated kernel-pointwise-tendsto structural equations. -/
+theorem agentWelfare_tendsto_of_kernel_pointwise_tendsto
+    (a : AgentType) (κ α : ℝ) (l : Filter ℝ)
+    (g : BondConfig AgentEdgeIdx → ℝ)
+    (h_ptwise : ∀ ω : BondConfig AgentEdgeIdx,
+      Filter.Tendsto (fun β => agentRewardKernel a β κ α ω) l (nhds (g ω))) :
+    Filter.Tendsto (fun β => agentWelfare a β κ α) l
+      (nhds (percExpectation (1 - blockingProb) g)) := by
+  unfold agentWelfare
+  exact percExpectation_tendsto_of_pointwise_tendsto
+    (1 - blockingProb) (fun β => agentRewardKernel a β κ α) g l h_ptwise
+
 /-- The within-`R` oracle's expected reward (Definition 2.6).
     paper source: Definition 2.6 (`def:oracle`). -/
 axiom oracleReward : ℝ → ℝ  -- as a function of β
