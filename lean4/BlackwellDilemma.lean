@@ -102,3 +102,5 @@ import BlackwellDilemma.Infrastructure.FOSDLiftedExpectation
 import BlackwellDilemma.Infrastructure.MaxOverFinset
 import BlackwellDilemma.Infrastructure.TendstoFiniteSum
 import BlackwellDilemma.Infrastructure.PiecewiseFunction
+import BlackwellDilemma.Infrastructure.NonNegativeRealAlgebra
+import BlackwellDilemma.Infrastructure.AbsValueBounds
