@@ -120,13 +120,62 @@ Per `feedback_truth_over_publication` + `feedback_gap_ledger_in_lean4`:
 * `#print axioms` on final theorems should surface only Mathlib kernel
   + paper-novel `Types.lean` carriers.
 
-## Phase 1 starting point (this commit)
+## Phase progress (2026-05-15)
 
-This file is the architectural skeleton; concrete implementation
-begins with Phase 1 in `EnvelopeContinuity.lean` and `LUnimodality.lean`,
-both unlocked by existing `Canonical.lean` infrastructure
-(`L β p`, `P_trap β`, `Phi_B β` all concrete + Mathlib `Phi`,
-`signalVariance` continuity already proved in `ClassicalResults.lean`).
+* **Phase 1** ✅ DONE (R123): `FiveStateRewards` + `FiveStateVDyn` +
+  `MLimitDifferenceConcrete` — concrete 5-state IDP reward parameters
+  + `V_dyn` per vertex + `mLimitDifference_fiveState_pos` (kernel-pure).
+* **Phase 2** ✅ DONE (R130): `GaussianPosterior` — explicit
+  conjugate-prior posterior mean + continuity in sample-size and
+  signal-variance parameters.
+* **Phase 4** ✅ DONE (R124): `EVTBoundedDecreasing` — EVT for
+  continuous bounded eventually-decreasing functions on `[0, ∞)`.
+* **Phase 5** ✅ DONE (R126): `TopkisCrossPartial` — abstract
+  `IsSupermodular` definition + algebra (additivity, scalar, const).
+* **Phase 5b** PENDING: calculus-based Topkis criterion
+  (`∂²f/∂x∂y ≥ 0 ⇒ IsSupermodular`) — requires Mathlib
+  `Analysis.Calculus` infrastructure.
+* **Phase 6** PENDING: `GiantComponentMills` — Mathlib bond percolation
+  giant-component cluster Mills-tail (multi-month Mathlib infrastructure
+  effort).
+* **Phase 7** ✅ DONE (R125): `SimpleGraphReachable` — reachable
+  finset = univ under preconnected.
+* **Phase 8** ✅ DONE (R129): `BlackwellConditional` — Finset-sum lift
+  of pointwise monotonicity.
+* **Phase 9** ✅ DONE (R127): `FOSDDerivativeChain` — supermodular
+  → β-increment dominance.
+* **Phase 9b** PENDING: integration step (FOSD CDF + supermodular
+  integrand → integral β-increment dominance).
+* **Phase 10** ✅ DONE (R127): `ArgmaxMonotone` — single-crossing
+  preference preservation + argmax monotonicity atom.
+* **Phase 11** ✅ DONE (R128): `KappaStarConcrete` —
+  `DivergesAtBelowAtTop` predicate + algebra.
+* **Phase 12** PENDING: `AgentRewardKernelExplicit` — per-realisation
+  kernel concretisation.
+* **Phase 13** PENDING: `GConditionalIntegral` — full Lebesgue-Stieltjes
+  integration.
+
+**8 of 13 Tier 1-3 phases complete (R123-R130).** All completed Cat 1
+modules verified kernel-pure via `#print axioms` showing only
+`[propext, Classical.choice, Quot.sound]`.
+
+## Mathlib-PR readiness
+
+The following modules are Mathlib-PR-contributable as standalone
+generalisations:
+
+* `EVTBoundedDecreasing.exists_maxOn_of_continuous_eventually_decreasing`
+  → generalises `IsCompact.exists_isMaxOn` to non-compact `[0, ∞)`.
+* `SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected` →
+  natural Finset packaging of `SimpleGraph.Preconnected`.
+* `TopkisCrossPartial.IsSupermodular` → fills missing Mathlib
+  `Order.Supermodular` namespace.
+* `KappaStarConcrete.DivergesAtBelowAtTop` → one-sided divergence
+  predicate + algebra.
+* `BlackwellConditional.finset_sum_mono_of_pointwise_mono` →
+  pointwise → summed monotonicity packaging.
+* `GaussianPosterior.gaussianPosteriorMean` → conjugate-prior posterior
+  mean infrastructure.
 -/
 namespace BlackwellDilemma.Infrastructure
 
