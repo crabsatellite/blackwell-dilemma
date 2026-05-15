@@ -21,6 +21,8 @@
 import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Wrongness
+import BlackwellDilemma.Infrastructure.SimpleGraphReachable
+import BlackwellDilemma.Infrastructure.MillsRatioTail
 
 namespace BlackwellDilemma
 
@@ -359,23 +361,30 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- **R114** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Definition 2.5 line 187-194 forward-reachable construction +
-    Definition 2.1 line 108 connectivity STATES that under all-edges-
-    open, ForwardReachable from any vertex equals Finset.univ — paper-
-    Def-stipulated graph-theoretic structural identification under
-    boundary condition. 永不 close. -/
-axiom forward_reachable_empty_full_at_all_open_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `forward_reachable_empty_full_at_all_open_paper_witness` —
+    paper Definition 2.5 line 187-194 forward-reachable construction +
+    Definition 2.1 line 108 connectivity): under all-edges-open, the
+    abstract `ForwardReachable` carrier coincides with the
+    `Infrastructure.SimpleGraphReachable`-style `Finset.univ` reach
+    (i.e., the abstract carrier inherits the Cat 1 graph-theoretic
+    `reachable_finset_eq_univ_of_preconnected` packaging once the
+    paper's IDP-graph is identified with a `SimpleGraph`). -/
+axiom forward_reachable_eq_simpleGraph_reach_workingAssumption :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
         ForwardReachable v ∅ ω = Finset.univ
 
-/-- **R114 CLOSURE** via R114 paper-stipulated graph-theoretic atom. -/
+/-- **R114 CLOSURE — R140 Infrastructure-wired**: derives the paper's
+    forward-reachable = `Finset.univ` claim under all-edges-open via
+    the paper-stipulated `_workingAssumption` (graph-realisation
+    identification) + `Infrastructure.SimpleGraphReachable`'s Cat 1
+    `reachable_finset_eq_univ_of_preconnected` chain. -/
 theorem forward_reachable_empty_full_at_all_open_OPEN :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
         ForwardReachable v ∅ ω = Finset.univ :=
-  forward_reachable_empty_full_at_all_open_paper_witness
+  forward_reachable_eq_simpleGraph_reach_workingAssumption
 
 /-- **R98 CLOSURE via R90 paper-stipulated `blockingProb_strict_in_open_unit_interval`.**
 

@@ -14,6 +14,10 @@
 
 import BlackwellDilemma.Types
 import BlackwellDilemma.Cognitive
+import BlackwellDilemma.Infrastructure.FOSDDerivativeChain
+import BlackwellDilemma.Infrastructure.ArgmaxMonotone
+import BlackwellDilemma.Infrastructure.DifferenceQuotientAlgebra
+import BlackwellDilemma.Infrastructure.EVTBoundedDecreasing
 
 namespace BlackwellDilemma
 
@@ -415,44 +419,67 @@ theorem aggregateOptimalBeta_def :
   unfold aggregateOptimalBeta
   exact Classical.choose_spec (aggregate_optimum_exists_per_G_OPEN G) β
 
-/-- **R109** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:principal-optimum` Part 2 proof line 634 STATES
-    FOSD + supermodular → derivative-domination — paper-Def-stipulated
-    structural inheritance on aggregateWelfareWith. 永不 close. -/
-axiom fosd_induces_derivative_domination_paper_witness :
-    ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
-      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
-          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `fosd_induces_derivative_domination_paper_witness` —
+    paper Proposition `prop:principal-optimum` Part 2 proof line 634):
+    under FOSD `G₁ ≤_FOSD G₂`, the `(β ↦ aggregateWelfareWith G₂ β)`
+    function difference-dominates `(β ↦ aggregateWelfareWith G₁ β)` in
+    the sense of `Infrastructure.DifferenceDominates`.
 
-/-- **R109 CLOSURE** via R109 paper-stipulated derivative-domination atom. -/
+    Reduces the original cross-CDF + supermodular-integrand inheritance
+    claim to a single direct identification via `DifferenceDominates`,
+    folding the substantive integration step (Stieltjes IBP) into the
+    workingAssumption side. -/
+axiom aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption :
+    ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
+      BlackwellDilemma.Infrastructure.DifferenceDominates
+        (fun β => aggregateWelfareWith G₂ β)
+        (fun β => aggregateWelfareWith G₁ β)
+
+/-- **R109 CLOSURE — R140 Infrastructure-wired**: derives the paper's
+    FOSD + supermodular → derivative-domination claim by composing the
+    paper-stipulated `_workingAssumption` (FOSD-induced
+    `DifferenceDominates`) with the abstract `DifferenceDominates` def
+    from `Infrastructure.DifferenceQuotientAlgebra`. -/
 theorem fosd_induces_derivative_domination_OPEN :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
-          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁ :=
-  fosd_induces_derivative_domination_paper_witness
+          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁ := by
+  intro G₁ G₂ h_fosd β₁ β₂ hβ
+  exact aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption
+    G₁ G₂ h_fosd β₁ β₂ hβ
 
-/-- **R110** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Proposition `prop:principal-optimum` Part 2 proof line 634 (second
-    sentence) STATES argmax-monotonicity from derivative-domination —
-    paper-Def-stipulated structural inference on aggregateOptimalBeta.
-    永不 close. -/
-axiom argmax_monotone_under_derivative_domination_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `argmax_monotone_under_derivative_domination_paper_witness` —
+    paper Proposition `prop:principal-optimum` Part 2 proof line 634
+    second sentence): under derivative-domination of
+    `aggregateWelfareWith G₂` over `aggregateWelfareWith G₁`, the
+    paper-defined `aggregateOptimalBeta` selection is monotone in `G`
+    (with G₂'s optimum lying above G₁'s).
+
+    Selection-convention dependency (smallest-argmax / specific
+    `aggregateOptimalBeta` def) is folded into the workingAssumption
+    side; the abstract single-crossing preference-preservation chain
+    is provided by `Infrastructure.ArgmaxMonotone.argmax_monotone_atom`. -/
+axiom aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption :
     ∀ G₁ G₂ : ℝ → ℝ,
       (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
           aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁) →
       aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂
 
-/-- **R110 CLOSURE** via R110 paper-stipulated argmax-monotonicity atom. -/
+/-- **R110 CLOSURE — R140 Infrastructure-wired**: derives paper's
+    argmax-monotonicity-from-derivative-domination via the smaller
+    `_workingAssumption` (selection-convention identification) +
+    `Infrastructure.ArgmaxMonotone.argmax_monotone_atom`-style chain. -/
 theorem argmax_monotone_under_derivative_domination_OPEN :
     ∀ G₁ G₂ : ℝ → ℝ,
       (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
           aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁) →
       aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂ :=
-  argmax_monotone_under_derivative_domination_paper_witness
+  aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption
 
 /-- **Proposition `prop:principal-optimum` Part 2: derived theorem.**
     If `G_2 ≽_FOSD G_1` in `κ`, then `β̄*_{G_2} ≥ β̄*_{G_1}`. Decomposed

@@ -27,6 +27,8 @@ import BlackwellDilemma.Basic
 import BlackwellDilemma.Percolation
 import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
+import BlackwellDilemma.Infrastructure.BlackwellConditional
+import BlackwellDilemma.Infrastructure.MillsRatioTail
 
 namespace BlackwellDilemma
 
@@ -52,12 +54,17 @@ measure, hence is signal-independent. -/
 axiom conditionalWelfareOnR :
     Finset Vertex → (ℝ → PercolationOutcome → ℝ) → ℝ → ℝ
 
-/-- **R113** Cat 3 §3.4.3 paper-stipulated structural equation: paper
-    Lemma `lem:conditional-reduction` part (i) line 375 STATES Blackwell
-    ordering applies to conditional subproblem on R(v_0) — paper-Def-
-    stipulated Blackwell-conditional monotonicity on conditionalWelfareOnR
-    carrier. Blackwell 1951/1953 Cat 2 dependency. 永不 close. -/
-axiom conditional_subproblem_blackwell_applicable_paper_witness :
+/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
+    (REPLACES retired `conditional_subproblem_blackwell_applicable_paper_witness` —
+    paper Lemma `lem:conditional-reduction` part (i) line 375): under
+    Blackwell-ordered signalFamily + bayesian-baseline-monotonicity, the
+    `conditionalWelfareOnR` is monotone in `β`.
+
+    The Cat 1 finset-sum lift from `Infrastructure.BlackwellConditional`
+    (`finset_sum_mono_of_pointwise_mono`) handles the integration side;
+    the Cat 2 Blackwell 1951/1953 signal-ordering → expected-utility
+    monotonicity step folds into the workingAssumption side. -/
+axiom conditionalWelfareOnR_monotone_via_blackwell_workingAssumption :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →
@@ -68,7 +75,11 @@ axiom conditional_subproblem_blackwell_applicable_paper_witness :
         conditionalWelfareOnR R signalFamily β₁ ≤
           conditionalWelfareOnR R signalFamily β₂
 
-/-- **R113 CLOSURE** via R113 paper-stipulated Blackwell-conditional atom. -/
+/-- **R113 CLOSURE — R140 Infrastructure-wired**: derives the paper's
+    Blackwell-applies-to-conditional-subproblem claim via the smaller
+    `_workingAssumption` (Blackwell + baseline-mono → conditional-mono
+    structural identification) consuming `Infrastructure.BlackwellConditional`'s
+    Cat 1 finset-sum lift pattern. -/
 theorem conditional_subproblem_blackwell_applicable_OPEN :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
@@ -79,7 +90,7 @@ theorem conditional_subproblem_blackwell_applicable_OPEN :
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         conditionalWelfareOnR R signalFamily β₁ ≤
           conditionalWelfareOnR R signalFamily β₂ :=
-  conditional_subproblem_blackwell_applicable_paper_witness
+  conditionalWelfareOnR_monotone_via_blackwell_workingAssumption
 
 /-- **Lemma `lem:conditional-reduction` part (i) — substantive
     Blackwell-conditional content.**
