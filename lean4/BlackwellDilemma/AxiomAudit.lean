@@ -1453,4 +1453,38 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_general_tree
 #print axioms BlackwellDilemma.wrongness_misalignment_reversal_atom_OPEN
 
+/-! ## R141-R143 Infrastructure-wired `_OPEN` audit trail
+
+Each of the 18 `_OPEN` theorems previously closed via `_paper_witness`
+is now derived from a smaller `_workingAssumption` + Cat 1 Infrastructure
+module. The audit below verifies each `_OPEN` depends only on:
+* Lean kernel axioms (`propext`, `Classical.choice`, `Quot.sound`)
+* The corresponding `_workingAssumption` (paper-stipulated structural
+  identification — smaller scope than the retired `_paper_witness`)
+* `Infrastructure` Cat 1 module dependencies (paper-novel-free)
+* Opaque `Types.lean` carriers (Cat 3 §3.4.1 primitives — 永不 close).
+
+NO retired `_paper_witness` axiom appears anywhere in the dependency
+graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).
+-/
+
+#print axioms BlackwellDilemma.corner_supermodularity_via_topkis_OPEN
+#print axioms BlackwellDilemma.kappaStar_diverges_at_pc_OPEN
+#print axioms BlackwellDilemma.fosd_induces_derivative_domination_OPEN
+#print axioms BlackwellDilemma.argmax_monotone_under_derivative_domination_OPEN
+#print axioms BlackwellDilemma.forward_reachable_empty_full_at_all_open_OPEN
+#print axioms BlackwellDilemma.conditional_subproblem_blackwell_applicable_OPEN
+#print axioms BlackwellDilemma.mLimitDifference_pos_OPEN
+#print axioms BlackwellDilemma.mean_estimate_gap_continuous_OPEN
+#print axioms BlackwellDilemma.mean_estimate_gap_tendsto_mLimit_OPEN
+#print axioms BlackwellDilemma.principal_interior_maximum_exists_OPEN
+#print axioms BlackwellDilemma.aggregate_optimum_exists_per_G_OPEN
+#print axioms BlackwellDilemma.topoLossKernel_le_one_over_n_on_giant_atom_OPEN
+#print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst_pos_above_pc_OPEN
+#print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN
+#print axioms BlackwellDilemma.wInfoTopoRatioMillsConst_pos_above_pc_OPEN
+#print axioms BlackwellDilemma.wInfoTopoRatio_le_MillsConst_decay_OPEN
+#print axioms BlackwellDilemma.L_unimodal_in_regime_i_OPEN
+#print axioms BlackwellDilemma.envelope_continuity_in_p_OPEN
+
 end BlackwellDilemma.AxiomAudit
