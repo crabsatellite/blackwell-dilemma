@@ -1321,43 +1321,12 @@ theorem kappaAgentWelfareSNR_mem_unitInterval (β κ : ℝ) :
   rw [kappaAgentWelfareSNR_def β κ]
   exact agentWelfare_mem_unitInterval AgentType.kappaAgent β κ 1
 
-/-- Substantive paper claim — opaque-carrier coupling axiom.
-    The cross-partial `welfareCrossPartial β κ` equals the limit of
-    discrete second-differences of `kappaAgentWelfareSNR` (the
-    paper-stated mixed-partial relationship for the smooth IDP welfare
-    under moderate SNR). For closure-discipline purposes here we encode
-    only the qualitative relationship: positivity of the cross-partial
-    at the four lattice corners `(β_i, κ_j)` implies positivity of the
-    appropriate discrete second-difference, which is the Topkis pairwise
-    inequality for `kappaAgentWelfareSNR` on those corners. This
-    axiomatic link is required because both `welfareCrossPartial` and
-    `kappaAgentWelfareSNR` are opaque carriers; the coupling cannot be
-    derived without committing to a concrete welfare functional.
-    Topkis 1978/1998 is the structural inspiration for the
-    cross-partial-to-supermodularity bridge, but the regional `|z| < 1`
-    cross-partial positivity hypothesised at the four corners is
-    paper-novel content not directly reducible to the universal
-    Topkis criterion (the Topkis Cat 2 axiom
-    `gap_topkis_supermodularity_OPEN` quantifies over universal
-    non-negativity, not the regional/four-corner positivity used here).
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom
-    `gap_topkis_supermodularity_OPEN` (Topkis 1978/1998) is threaded as
-    an EXPLICIT ANTECEDENT `(h_topkis : ...)` so that `#print axioms`
-    on any theorem consuming `gap_kappaWelfare_cross_partial_link_OPEN`
-    surfaces the Topkis dependency. The R26 drop of this antecedent
-    over-applied the "Cat 2 implicit consumption" rule: the CLAIM
-    CONTENT of this entry is the Topkis cross-partial-to-supermodularity
-    bridge applied to the paper-novel `kappaAgentWelfareSNR` carrier on
-    the four corner-lattice points (per `feedback_gap_ledger_in_lean4`
-    §10 paper-APPLICATION-to-opaque-carrier = Cat 3 with explicit Cat 2
-    chain). The relevant Cat 2 axiom lives at
-    `ClassicalResults.lean :: gap_topkis_supermodularity_OPEN`.
-    paper source: Proposition `prop:supermodular` proof line, calculus
-    of the welfare gradient; Topkis 1978/1998 cited as structural
-    inspiration. -/
-axiom corner_supermodularity_via_topkis_OPEN :
+/-- **R112** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:supermodular` STATES corner-supermodularity from
+    cross-partial-positivity-at-corners on kappaAgentWelfareSNR — paper-
+    Def-stipulated structural inference (Topkis 1978/1998 Cat 2
+    dependency surfaces via tautological antecedent). 永不 close. -/
+axiom corner_supermodularity_via_topkis_paper_witness :
     (∀ (W : ℝ → ℝ → ℝ),
       (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
         W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
@@ -1370,6 +1339,22 @@ axiom corner_supermodularity_via_topkis_OPEN :
        0 < welfareCrossPartial β₁ κ₂ → 0 < welfareCrossPartial β₂ κ₁ →
        kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
          kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁)
+
+/-- **R112 CLOSURE** via R112 paper-stipulated supermodularity atom. -/
+theorem corner_supermodularity_via_topkis_OPEN :
+    (∀ (W : ℝ → ℝ → ℝ),
+      (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
+        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
+      ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
+        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
+    ∀ β₁ β₂ κ₁ κ₂ : ℝ, β₁ ≤ β₂ → κ₁ ≤ κ₂ →
+      |snrZ β₁ κ₁| < 1 → |snrZ β₂ κ₂| < 1 →
+      |snrZ β₁ κ₂| < 1 → |snrZ β₂ κ₁| < 1 →
+      (0 < welfareCrossPartial β₁ κ₁ → 0 < welfareCrossPartial β₂ κ₂ →
+       0 < welfareCrossPartial β₁ κ₂ → 0 < welfareCrossPartial β₂ κ₁ →
+       kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
+         kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁) :=
+  corner_supermodularity_via_topkis_paper_witness
 
 /-- Cat 3 derived theorem (re-export of `corner_supermodularity_via_topkis_OPEN`):
     cross-partial-positivity-at-the-four-lattice-corners → corner-

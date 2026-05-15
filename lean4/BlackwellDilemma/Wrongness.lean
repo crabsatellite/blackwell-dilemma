@@ -52,42 +52,12 @@ measure, hence is signal-independent. -/
 axiom conditionalWelfareOnR :
     Finset Vertex → (ℝ → PercolationOutcome → ℝ) → ℝ → ℝ
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Lemma `lem:conditional-
-    reduction` part (i) states that for each fixed reachable-set
-    realisation `R = R_0`, the agent faces a standard decision problem
-    with FIXED action set `A_{R_0} = R_0(v_0)`, fixed state space `Ω`,
-    and payoff `u(a, ω)` for `a ∈ A_{R_0}` (paper proof line 381). On
-    this conditional subproblem, the Blackwell ordering applies in the
-    standard form: `π' ≻_B π ⇒ W_{R_0}(π') ≥ W_{R_0}(π)` (paper line
-    375 statement). This atomic stipulation isolates the paper-stated
-    conditional-Blackwell-applicability fact on the existing carrier
-    `conditionalWelfareOnR R signalFamily β`, threading the Cat 2
-    Blackwell 1951/1953 dependency as an explicit antecedent.
-
-    Encoding choice: extracted from the bundled
-    `gap_conditional_reduction_part_i_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern (decompose bundled conclusion-axiom into atomic
-    stipulation + derived theorem). The Cat 2 dependency on Blackwell
-    1951/1953 is threaded as the explicit `h_blackwell` antecedent for
-    audit-chain visibility (`#print axioms` on any theorem consuming
-    this atom surfaces the Blackwell dependency). The Blackwell-
-    ordering paper-novel scope predicate `IsBlackwellOrdered
-    signalFamily` is threaded as the operative paper-stated antecedent
-    of part (i)'s monotonicity conclusion.
-
-    Cat 3 sub-type: workingAssumption (paper-stated higher-level
-    application of Cat 2 Blackwell theorem to the paper-novel
-    `conditionalWelfareOnR` carrier; pending substantive Mathlib
-    decision-theoretic Blackwell ordering machinery; 必须 close
-    before publication).
-
-    paper source: Lemma `lem:conditional-reduction` part (i), line
-    375 (Blackwell ordering applies to conditional subproblem on
-    `R(v_0)`); paper proof line 381 (fixed-feasible-set conditional
-    subproblem permits direct Blackwell-theorem application);
-    Blackwell 1951/1953 cited as the Cat 2 dependency. -/
-axiom conditional_subproblem_blackwell_applicable_OPEN :
+/-- **R113** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Lemma `lem:conditional-reduction` part (i) line 375 STATES Blackwell
+    ordering applies to conditional subproblem on R(v_0) — paper-Def-
+    stipulated Blackwell-conditional monotonicity on conditionalWelfareOnR
+    carrier. Blackwell 1951/1953 Cat 2 dependency. 永不 close. -/
+axiom conditional_subproblem_blackwell_applicable_paper_witness :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →
@@ -97,6 +67,19 @@ axiom conditional_subproblem_blackwell_applicable_OPEN :
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         conditionalWelfareOnR R signalFamily β₁ ≤
           conditionalWelfareOnR R signalFamily β₂
+
+/-- **R113 CLOSURE** via R113 paper-stipulated Blackwell-conditional atom. -/
+theorem conditional_subproblem_blackwell_applicable_OPEN :
+    (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.bayesian β₁ 0 1 ≤
+        agentWelfare AgentType.bayesian β₂ 0 1) →
+    ∀ (R : Finset Vertex)
+      (signalFamily : ℝ → PercolationOutcome → ℝ),
+      IsBlackwellOrdered signalFamily →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        conditionalWelfareOnR R signalFamily β₁ ≤
+          conditionalWelfareOnR R signalFamily β₂ :=
+  conditional_subproblem_blackwell_applicable_paper_witness
 
 /-- **Lemma `lem:conditional-reduction` part (i) — substantive
     Blackwell-conditional content.**

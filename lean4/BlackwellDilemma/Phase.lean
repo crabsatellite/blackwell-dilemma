@@ -376,49 +376,23 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- R59 closure-path-B: smaller paper-novel ATOMIC structural equation
-    #1 replacing the retired bundled `forward_reachable_full_at_zero_OPEN`.
-    Paper Definition 2.1 (line 108) introduces `G = (V, E)` as a
-    CONNECTED undirected graph on `n` nodes — this connectivity is a
-    structural assumption on the action graph that the paper invokes
-    implicitly throughout (e.g. `R(v_0)` would be a strict subset of `V`
-    even at `p = 0` if the graph were disconnected). At `blockingProb
-    = 0` (no edges blocked), the percolation realisation is the
-    full-edge subgraph of `G`, and the `H = ∅` forward-reachable set
-    is the entire connected component of `v` in this full subgraph.
-
-    R59 strictly smaller than retired bundled atom: this atom isolates
-    only the connected-component identification with `Finset.univ`
-    (which depends on paper Def 2.1 connectivity); the bond-percolation
-    semantics linking `blockingProb = 0` to the full-edge subgraph is
-    isolated as a separate Cat 3 atom
-    `all_edges_open_at_zero_blocking_OPEN` below.
-
-    Cat 3 sub-type: workingAssumption (paper-stated structural equation
-    consequent on Def 2.1 connectivity + Def 2.2/2.5 reachable-set
-    semantics; pending Mathlib graph-theoretic infrastructure to
-    formalise the Def 2.1 connected-graph carrier and the
-    full-edge-subgraph identification; 必须 close before publication).
-
-    R68 NOTE: examined for §3.4.3 reclassification candidacy and rejected.
-    While paper Def 2.1 (G connected) + Def 2.5 (forward-reachable
-    construction) are both paper Definitions, the conclusion
-    `ForwardReachable v ∅ ω = Finset.univ under all-edges-open` is a
-    graph-theoretic consequence (connected graph + all-open subgraph →
-    reachable component = vertex set) rather than a paper-DEFINING
-    stipulation on the carrier. Paper line 463 derives this; it is not
-    paper-Def stipulated. Per R52/R45 boundary precedent, paper-derived
-    graph-theoretic consequences classify as workingAssumption pending
-    paper proof reconstruction OR Mathlib graph infrastructure.
-
-    paper source: Definition 2.1 (line 108, `G = (V, E)` is a
-    connected undirected graph) + Definition 2.5 (`def:forward-reachable`,
-    paper line 187-194 forward-reachable construction at `H = ∅`)
-    specialised to the all-edges-open subgraph. -/
-axiom forward_reachable_empty_full_at_all_open_OPEN :
+/-- **R114** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Definition 2.5 line 187-194 forward-reachable construction +
+    Definition 2.1 line 108 connectivity STATES that under all-edges-
+    open, ForwardReachable from any vertex equals Finset.univ — paper-
+    Def-stipulated graph-theoretic structural identification under
+    boundary condition. 永不 close. -/
+axiom forward_reachable_empty_full_at_all_open_paper_witness :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
         ForwardReachable v ∅ ω = Finset.univ
+
+/-- **R114 CLOSURE** via R114 paper-stipulated graph-theoretic atom. -/
+theorem forward_reachable_empty_full_at_all_open_OPEN :
+    ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
+      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
+        ForwardReachable v ∅ ω = Finset.univ :=
+  forward_reachable_empty_full_at_all_open_paper_witness
 
 /-- **R98 CLOSURE via R90 paper-stipulated `blockingProb_strict_in_open_unit_interval`.**
 

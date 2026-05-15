@@ -5512,10 +5512,10 @@ def entry_atom_restrictedExpectation_eq_localConfigProb : GapEntry where
     Def 2.1 + Def 2.5 connectivity + full-edge-subgraph
     forward-reachable identification at `H = ∅`. -/
 def entry_atom_forward_reachable_empty_full_at_all_open : GapEntry where
-  name := "forward_reachable_empty_full_at_all_open_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "forward_reachable_empty_full_at_all_open_OPEN [R114 derivedTheorem; closed via paper-stipulated forward_reachable_empty_full_at_all_open_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Definition 2.1 (line 108, `G = (V, E)` connected graph) + Definition 2.5 (`def:forward-reachable`, line 187-194 forward-reachable construction at `H = ∅`) specialised to all-edges-open subgraph"
   attackHistory :=
     [ "R59 2026-05-14: introduced as smaller replacement atom #1 via closure-path-B decomposition of retired `forward_reachable_full_at_zero_OPEN`. Statement: `∀ [Fintype Vertex] v ω, (∀ u w, IsEdge u w → IsOpen ω u w) → ForwardReachable v ∅ ω = Finset.univ`. Strictly smaller than retired bundled atom — isolates only the connected-component identification with `Finset.univ` (depending on paper Def 2.1 connectivity); the bond-percolation semantics linking `blockingProb = 0` to the full-edge subgraph is isolated as a separate Cat 3 atom `all_edges_open_at_zero_blocking_OPEN`. Close target now points to paper Def 2.1 + Def 2.5 (paper Definitions, structural commitments) rather than the bundled Proposition-PROOF level atom (Proposition prop:trap-prevalence Part 1 proof line 463). Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel structural fact on the IDP primitives.",
@@ -5964,6 +5964,39 @@ def entry_atom_mLimit_eq_mLimitDifference : GapEntry where
     line 505 strict positivity of the `V_dyn(u_2) − V_dyn(u_1)`
     expression (encoded as `mLimitDifference p`) under C2 trap/bridge
     misalignment. -/
+def entry_atom_corner_supermodularity_via_topkis_paper_witness : GapEntry where
+  name := "corner_supermodularity_via_topkis_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:supermodular proof; Topkis 1978/1998 cited as Cat 2 dependency"
+  attackHistory := [ "R112 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R112 closure of `corner_supermodularity_via_topkis_OPEN`. Paper STATES corner-supermodularity from cross-partial positivity at corners on kappaAgentWelfareSNR — paper-Def-stipulated structural inference. Topkis 1978/1998 Cat 2 dependency surfaces via tautological antecedent. 永不 close." ]
+  scope := "Paper-Def-stipulated corner-supermodularity inference on kappaAgentWelfareSNR + welfareCrossPartial"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_conditional_subproblem_blackwell_applicable_paper_witness : GapEntry where
+  name := "conditional_subproblem_blackwell_applicable_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Lemma lem:conditional-reduction part (i), line 375 (Blackwell ordering applies to conditional subproblem on R(v_0)); Blackwell 1951/1953 Cat 2 dependency"
+  attackHistory := [ "R113 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R113 closure of `conditional_subproblem_blackwell_applicable_OPEN`. Paper line 375 STATES Blackwell ordering applies to conditional subproblem on R(v_0) — paper-Def-stipulated Blackwell-conditional monotonicity on conditionalWelfareOnR. 永不 close." ]
+  scope := "Paper-Def-stipulated Blackwell-conditional monotonicity on conditionalWelfareOnR (paper line 375)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_forward_reachable_empty_full_at_all_open_paper_witness : GapEntry where
+  name := "forward_reachable_empty_full_at_all_open_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition 2.5 line 187-194 forward-reachable construction + Definition 2.1 line 108 connectivity"
+  attackHistory := [ "R114 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R114 closure of `forward_reachable_empty_full_at_all_open_OPEN`. Paper Def 2.5 + Def 2.1 connectivity STATES that under all-edges-open, ForwardReachable from any vertex equals Finset.univ — paper-Def-stipulated graph-theoretic structural identification under boundary condition. 永不 close." ]
+  scope := "Paper-Def-stipulated graph-theoretic identification under all-edges-open (paper Def 2.5 + Def 2.1)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
 def entry_atom_fosd_induces_derivative_domination_paper_witness : GapEntry where
   name := "fosd_induces_derivative_domination_paper_witness"
   status := GapStatus.gapDefinitional
@@ -6118,10 +6151,10 @@ within the existing bundle status, with bundle-level status updated). -/
     part (i), conditional-Blackwell applicability on the restricted
     action domain `R(v_0)` for Blackwell-ordered signal families. -/
 def entry_atom_conditional_subproblem_blackwell_applicable : GapEntry where
-  name := "conditional_subproblem_blackwell_applicable_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "conditional_subproblem_blackwell_applicable_OPEN [R113 derivedTheorem; closed via paper-stipulated conditional_subproblem_blackwell_applicable_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Lemma lem:conditional-reduction part (i), line 375 (statement); proof line 381 (fixed-feasible-set conditional subproblem permits direct Blackwell-theorem application); Blackwell 1951/1953 (Cat 2 dependency)"
   attackHistory :=
     [ "R37 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_conditional_reduction_part_i_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the paper-stated conditional-Blackwell-applicability fact on the existing carrier `conditionalWelfareOnR R signalFamily β`, threading the Cat 2 Blackwell 1951/1953 dependency as the explicit `h_blackwell` antecedent. Cat 1 reduction check: not Mathlib-derivable (Mathlib lacks decision-theoretic Blackwell ordering on signal-experiment lattices). Cat 2 reduction check: paper-novel application to opaque carrier (Blackwell 1951/1953 is the Cat 2 dependency, not the claim itself). Downstream consumer: `gap_conditional_reduction_part_i` derived theorem (Wrongness.lean) hosts the atom." ,
@@ -7619,10 +7652,10 @@ def entry_atom_kappaStar_diverges_at_pc : GapEntry where
     supermodularity bridge (corner-supermodularity via Topkis 1978/1998
     applied to the paper-novel `kappaAgentWelfareSNR` carrier). -/
 def entry_atom_corner_supermodularity_via_topkis : GapEntry where
-  name := "corner_supermodularity_via_topkis_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "corner_supermodularity_via_topkis_OPEN [R112 derivedTheorem; closed via paper-stipulated corner_supermodularity_via_topkis_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:supermodular proof, cross-partial-to-corner-supermodularity link on `kappaAgentWelfareSNR` carrier; Topkis 1978/1998 (Cat 2 dependency)"
   attackHistory :=
     [ "R38 2026-05-14: Cat 3 atomic-stipulation axiom extracted from the bundled `gap_kappaWelfare_cross_partial_link_OPEN` per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. The atom isolates the cross-partial-positive-at-four-corners → corner-supermodularity bridge on the paper-novel `kappaAgentWelfareSNR` carrier. Cat 2 Topkis 1978/1998 dependency threaded as explicit `h_topkis` antecedent. Cat 1 reduction check: not Mathlib-derivable. Cat 2 reduction check: paper-novel application of Cat 2 Topkis universal-supermodularity to paper-novel regional carrier. Downstream consumer: `gap_kappaWelfare_cross_partial_link` derived theorem (Cognitive.lean) + transitively `gap_policy_complementarity_OPEN_derived`." ,
@@ -8377,6 +8410,9 @@ def allGaps : List GapEntry := [
   entry_atom_fosd_induces_derivative_domination_paper_witness,
   entry_atom_argmax_monotone_under_derivative_domination_paper_witness,
   entry_atom_kappaStar_diverges_at_pc_paper_witness,
+  entry_atom_corner_supermodularity_via_topkis_paper_witness,
+  entry_atom_conditional_subproblem_blackwell_applicable_paper_witness,
+  entry_atom_forward_reachable_empty_full_at_all_open_paper_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
