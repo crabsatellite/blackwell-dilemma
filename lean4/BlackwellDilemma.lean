@@ -96,3 +96,5 @@ import BlackwellDilemma.Infrastructure.FiniteConvexCombination
 import BlackwellDilemma.Infrastructure.AbstractKernelMonotonicity
 import BlackwellDilemma.Infrastructure.BernoulliProductFinite
 import BlackwellDilemma.Infrastructure.UnitIntervalAlgebra
+import BlackwellDilemma.Infrastructure.PercolationExpectation
+import BlackwellDilemma.Infrastructure.MonotoneCDFAlgebra
