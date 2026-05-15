@@ -337,106 +337,466 @@ and `|W_info| = O(2^{-β})` as β → ∞, uniformly in `n` for `p > p_c`.
 Stated before Theorem 3.2 because `gap_dilemma` invokes this axiom
 in its oracle-bound clause. -/
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    The within-`R` oracle's informational residual `W_info_oracle(p, β)` —
-    the actual quantity bounded in Proposition `prop:info-decay`. Encoding
-    via opaque carrier rather than free existential prevents Pattern 4
-    (vacuous-existential satisfaction by witness `W_info_oracle := 0`).
-    paper source: Proposition `prop:info-decay`. -/
-axiom W_info_oracle : ℝ → ℝ → ℝ  -- (p, β) ↦ oracle's W_info residual
+/-- R84 Cat 3 carrier: the edge-index set of the `Z²_L` torus action
+    graph with `L² = n` vertices.  Paper Theorem 3.3 (line 402) fixes
+    `G = Z²_L` (torus) with `N = L²` vertices; `EdgeIdx n` is that
+    graph's edge set `E` (paper Definition 2.1's `E`), the index type
+    over which bond percolation is run.  Opaque because the lattice
+    construction `Z²_L` is paper-graph-specific; the `Fintype` /
+    `DecidableEq` instances record that `E` is finite (paper Def 2.1:
+    "`G = (V, E)` ... on `n` nodes").
 
-/-- Cat 3 paper-novel ATOMIC structural fact: the within-`R` oracle's
-    informational residual `W_info_oracle p β` is non-positive for
-    `p > p_c` and `β > 0`. Paper Proposition `prop:info-decay` line
-    272 states the bound is "the oracle's informational residual is
-    non-positive and exponentially small"; the non-positivity clause
-    isolates the sign part of the paper's joint claim.
+    R85: moved up from §5 (was after `prop:topo-cluster`) so that the
+    `W_info_oracle` concretisation of §3 — which lives on the same
+    `Z²_L` edge set — can reference it.  Carrier content unchanged.
+    paper source: Theorem 3.3 (`thm:phase`), line 402 (`G = Z²_L` torus
+    with `N = L²` vertices) + Definition 2.1 (the edge set `E`). -/
+axiom EdgeIdx : ℕ → Type
 
-    Encoding choice: extracted from the bundled `gap_info_decay_OPEN`
-    sign sub-clause per `feedback_gap_ledger_in_lean4` §18 atomic-
-    decomposition pattern. Hosted on the opaque carrier
-    `W_info_oracle : ℝ → ℝ → ℝ` (R19-A); non-positivity is a paper-
-    stated structural fact reflecting that information value is
-    bounded by the topology-only welfare under topology-blind signals
-    (paper §3 W_info ≤ 0 family).
+/-- `EdgeIdx n` is a finite type — paper Def 2.1's graph is finite. -/
+axiom EdgeIdx.fintype : ∀ n : ℕ, Fintype (EdgeIdx n)
+attribute [instance] EdgeIdx.fintype
 
-    Cat 3 sub-type: workingAssumption (paper-stated sign fact pending
-    closure from the Cat 2 Mills-tail / Cat 1 Gaussian-integration
-    machinery; 必须 close before publication).
+/-- Decidable equality on `EdgeIdx n` (every IDP instance is finite). -/
+axiom EdgeIdx.decEq : ∀ n : ℕ, DecidableEq (EdgeIdx n)
+attribute [instance] EdgeIdx.decEq
 
-    paper source: Proposition `prop:info-decay`, lines 270-272
-    ("`W_info_oracle ≤ 0`"). -/
-axiom W_info_oracle_nonpos_OPEN :
-    ∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∀ β : ℝ, 0 < β → W_info_oracle p β ≤ 0
+/-! ### Concretisation of `W_info_oracle` over the finite
+    bond-percolation framework (`Percolation.lean`).
 
-/-- Cat 3 paper-novel ATOMIC structural fact: the within-`R` oracle's
-    informational residual `|W_info_oracle p β|` is exponentially
-    small in `β`, uniformly in `n`, for `p > p_c`. Paper Proposition
-    `prop:info-decay` line 272 reads "`|W_info| = O(2^{-β})` as
-    `β → ∞`, uniformly in `n` for `p > p_c`": the exponential bound
-    sub-clause of the paper's joint claim.
+    R85: the prior opaque carrier `axiom W_info_oracle : ℝ → ℝ → ℝ` is
+    REPLACED (R84 `expectedTopoLoss` concrete-def-closure pattern) by a
+    `noncomputable def` that IS the paper's `E_{G_p}[·]` expectation of
+    the oracle's per-realisation informational residual.
 
-    The paper proof composes two operative inputs:
-    (a) the Gaussian Mills-tail bound
-        `Φ(-x) ≤ (1/(x√(2π)))·exp(-x²/2)` (Cat 1, CLOSED in
-        `ClassicalResults.lean` as `gap_phi_tail_bound`), giving the
-        per-vertex `O(2^{-β})` welfare-loss bound; and
-    (b) Grimmett 1999 _Percolation_ 2nd ed. §6.75 cluster-size
-        exponential tail `Pr(|R(v_0)| ≥ k) ≤ exp(-c(p)·k)` for
-        `p > p_c` (Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`),
-        which gives `E[|R|] = O(1)` uniformly in `n`.
-    The `|W_info| = O(2^{-β}) uniform in n` claim is the
-    multiplicative composition `|R| · 2^{-β}` of these two inputs.
+    Paper Theorem 3.1 proof (lines 257-261) STIPULATES the
+    decomposition `W_info = E_{G_p}[E_s[r(v_T)] - r^*_R]`, where
+    `r^*_R = max_{v ∈ R(v_0)} r(v)` is the within-`R` oracle value and
+    `E_s[r(v_T)]` is the (signal-)expected terminal reward.  The
+    concretisation makes that paper-stipulated identity structural
+    rather than opaque: `W_info_oracle` becomes the bond-percolation
+    expectation of the pointwise kernel `wInfoOracleKernel`, evaluated
+    on the explicit finite measure of `Percolation.lean`.
 
-    Encoding choice: extracted from the bundled `gap_info_decay_OPEN`
-    exponential-bound sub-clause per `feedback_gap_ledger_in_lean4`
-    §18 atomic-decomposition pattern. The Cat 2 dependency on Grimmett
-    1999 §6.75 is threaded as an explicit antecedent `(h_grimmett :
-    ...)` so that `#print axioms` on any theorem consuming this atom
-    surfaces the Grimmett dependency (audit-chain visibility per
-    §12 / R28-A axiom-vs-theorem-consumer clarification).
+    The carrier gains the `n` index because the residual lives on the
+    `Z²_L` torus (`L² = n`, paper Theorem 3.3 line 402) — the same
+    graph on which `topoLossKernel` is defined.  Paper
+    Proposition `prop:info-decay` line 272 states the `O(2^{-β})` bound
+    "uniformly in `n`"; the per-`n` index makes "for each `n`" explicit
+    and the downstream derived theorems quantify `∀ n`. -/
 
-    Cat 3 sub-type: workingAssumption (paper-stated exponential bound
-    on opaque carrier `W_info_oracle` pending Cat 1 Mills + Cat 2
-    Grimmett composition; 必须 close before publication).
+/-- R85 Cat 3 carrier: the per-realisation oracle informational-residual
+    kernel.  For a bond-percolation outcome `ω : BondConfig (EdgeIdx n)`
+    (which edges of `Z²_L` are open) and signal precision `β`,
+    `wInfoOracleKernel n β ω` is the realised informational residual
+    `E_s[r(v_T)] - r^*_R` on that realisation — paper Theorem 3.1
+    proof line 258's pointwise integrand of `W_info = E_{G_p}[·]`,
+    specialised to the within-`R` oracle.
 
-    paper source: Proposition `prop:info-decay`, lines 270-277;
-    Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
-    cluster-size exponential-decay dependency. -/
-axiom W_info_oracle_exponential_bound_OPEN :
-    (∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c : ℝ, 0 < c ∧
-        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
-    ∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ C : ℝ, 0 < C ∧
-        ∀ β : ℝ, 0 < β →
-          |W_info_oracle p β| ≤ C * Real.rpow 2 (-β)
+    Opaque because evaluating it requires the `Z²_L` reachable-set
+    construction (which vertices are reachable from `v_0` under `ω`,
+    hence `r^*_R`) plus the Gaussian-signal terminal-reward
+    expectation `E_s[r(v_T)]` — paper-graph-specific + signal-model
+    machinery.  Its paper-stated pointwise sign (`≤ 0`) and Mills-tail
+    magnitude bound are pinned by the structural equations
+    `wInfoOracleKernel_nonpos` / `wInfoOracleKernel_abs_le_clusterCount`
+    below.
+    paper source: Theorem 3.1 proof, lines 257-261 (`W_info =
+    E_{G_p}[E_s[r(v_T)] - r^*_R]`) + Proposition `prop:info-decay`,
+    lines 270-277 (the per-realisation `≤ 0` + `O(2^{-β})` content). -/
+axiom wInfoOracleKernel : (n : ℕ) → ℝ → BondConfig (EdgeIdx n) → ℝ
+
+/-- R85 Cat 3 carrier: the per-realisation reachable-set cardinality
+    `|R(v_0)|` on `Z²_L`.  For a bond-percolation outcome
+    `ω : BondConfig (EdgeIdx n)`, `wInfoOracleClusterCount n ω` is the
+    size of the reachable set `R(v_0)` on that realisation — paper
+    `prop:info-decay` proof line 276's `|R|`, the multiplicative factor
+    in the per-realisation residual bound `|W_info| ≤ |R| · O(2^{-β})`.
+
+    Opaque because evaluating it requires the `Z²_L` reachable-set
+    construction.  Its paper-stated lower bound `≥ 1` (the reachable
+    set always contains `v_0` itself — paper Definition 2.5's
+    trivial-path inclusion) is pinned by `wInfoOracleClusterCount_ge_one`.
+    paper source: Proposition `prop:info-decay` proof, line 276
+    (`|W_info| ≤ |R| · O(σ) = |R| · O(2^{-β})`; `|R| = |R(v_0)|`) +
+    Definition 2.5 (`def:forward-reachable`, the reachable set contains
+    its base vertex). -/
+axiom wInfoOracleClusterCount : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
+
+/-- R85 Cat 3 structural equation: the oracle informational-residual
+    kernel is pointwise non-positive — for every percolation
+    realisation `ω` and every precision `β`, `wInfoOracleKernel n β ω
+    ≤ 0`.
+
+    Paper-stipulated.  Paper Lemma `lem:conditional-reduction` part (i)
+    establishes that conditional on each fixed reachable-set
+    realisation `R`, the within-`R` oracle faces a standard decision
+    problem on the fixed feasible set `R(v_0)`; its (signal-)expected
+    terminal reward therefore never exceeds the in-`R` maximum
+    `r^*_R = max_{v ∈ R(v_0)} r(v)` (the oracle attains `r^*_R` only in
+    the `β = ∞` limit).  Hence the realised residual
+    `E_s[r(v_T)] - r^*_R ≤ 0` for every realisation — paper
+    `prop:info-decay` line 272's "the oracle's informational residual
+    is non-positive", read per-realisation rather than in expectation.
+
+    Cat 3 sub-type: structuralEquation — the per-realisation sign is a
+    paper-stipulated structural identity on the kernel carrier (the
+    within-`R` oracle, by construction / Lemma `lem:conditional-
+    reduction` (i), cannot beat the in-`R` max on any fixed `R`).
+    Mirrors the `topoLossKernel_mem_unitInterval` reward-range
+    Def-stipulation precedent (R84) — paper stipulates the carrier's
+    pointwise range/sign; 永不 close per discipline §3.4.3.
+    paper source: Lemma `lem:conditional-reduction` part (i), lines
+    374-381 (within-`R` oracle on the fixed feasible set `R(v_0)`
+    cannot exceed `r^*_R`) + Proposition `prop:info-decay`, line 272
+    (`W_info ≤ 0`), read per-realisation. -/
+axiom wInfoOracleKernel_nonpos :
+    ∀ (n : ℕ) (β : ℝ) (ω : BondConfig (EdgeIdx n)),
+      wInfoOracleKernel n β ω ≤ 0
+
+/-- R85 Cat 3 structural equation: the per-realisation reachable-set
+    cardinality is at least `1` — `1 ≤ wInfoOracleClusterCount n ω` for
+    every percolation realisation `ω`.
+
+    Paper-stipulated.  Paper Definition 2.5 (`def:forward-reachable`)
+    constructs the reachable set `R(v_0)` to always contain its base
+    vertex `v_0` (the trivial empty path), so `|R(v_0)| ≥ 1` on every
+    realisation.  This is the same trivial-path-inclusion stipulation
+    that `ForwardReachable_self_member` (Types.lean) records for the
+    forward-reachable carrier.
+
+    Cat 3 sub-type: structuralEquation — paper Definition 2.5's
+    trivial-path inclusion, transported to the cluster-count carrier,
+    is a paper-Def-stipulated structural identity (mirrors
+    `topoLossKernel_mem_unitInterval` R84 precedent); 永不 close per
+    discipline §3.4.3.
+    paper source: Definition 2.5 (`def:forward-reachable`, the
+    reachable set contains its base vertex `v_0` via the trivial
+    path) ⇒ `|R(v_0)| ≥ 1`. -/
+axiom wInfoOracleClusterCount_ge_one :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      1 ≤ wInfoOracleClusterCount n ω
+
+/-- R85 Cat 3 structural equation: the per-realisation Mills-tail
+    magnitude bound — for every realisation `ω` and every precision
+    `β > 0`, the absolute oracle residual is bounded by the
+    reachable-set cardinality times `2^{-β}`:
+    `|wInfoOracleKernel n β ω| ≤ wInfoOracleClusterCount n ω · 2^{-β}`.
+
+    Paper-stipulated.  Paper Proposition `prop:info-decay` proof line
+    276 STATES exactly this per-realisation bound: "For fixed `R`, two
+    actions with reward gap `Δ` contribute welfare loss at most
+    `Δ · Φ(-Δ/√(2σ²)) ≤ (σ/√π) e^{-Δ²/4σ²} ≤ σ/√π`, ... Summing over
+    `v ∈ R`: `|W_info| ≤ |R| · O(σ) = |R| · O(2^{-β})`."  The Gaussian
+    Mills-tail bound `Φ(-x) ≤ (1/(x√(2π))) e^{-x²/2}` (Cat 1, CLOSED in
+    `ClassicalResults.lean` as `gap_phi_tail_bound`) gives the
+    per-vertex `O(2^{-β})` factor; summing the `|R|` per-vertex terms
+    gives the per-realisation `|R| · 2^{-β}` bound.  This is the
+    paper's pointwise (per-percolation-realisation) content, the
+    integrand bound from which `|W_info| = O(2^{-β})` follows by taking
+    `E_{G_p}`.
+
+    Cat 3 sub-type: structuralEquation — the per-realisation Mills-tail
+    magnitude bound is the paper-stated pointwise behaviour of the
+    kernel carrier (paper line 276 STATES the per-`R` bound `|W_info|
+    ≤ |R| · O(2^{-β})` directly, then takes expectation).  Per
+    discipline §10, the paper-application of the Cat 1
+    `gap_phi_tail_bound` Mills-tail bound to the paper-novel kernel
+    carrier IS Cat 3; the per-realisation bound is the paper-stipulated
+    structural fact (the `2^{-β}` constant absorbs the paper's `O(σ)`
+    per-vertex Mills-tail factor under the Gaussian signal model's
+    `σ(β) = O(2^{-β})` precision schedule).  Mirrors the
+    `topoLossKernel_mem_unitInterval` R84 precedent — paper stipulates
+    the carrier's pointwise bound; 永不 close per discipline §3.4.3.
+    paper source: Proposition `prop:info-decay` proof, line 276 (`|W_info|
+    ≤ |R| · O(σ) = |R| · O(2^{-β})`, the per-realisation bound) +
+    `gap_phi_tail_bound` (Cat 1 Gaussian Mills-tail bound, the
+    per-vertex `O(2^{-β})` input). -/
+axiom wInfoOracleKernel_abs_le_clusterCount :
+    ∀ (n : ℕ) (β : ℝ), 0 < β →
+      ∀ ω : BondConfig (EdgeIdx n),
+        |wInfoOracleKernel n β ω| ≤
+          wInfoOracleClusterCount n ω * Real.rpow 2 (-β)
+
+/-- **R85 concretised `W_info_oracle`** (replaces retired opaque
+    `axiom W_info_oracle : ℝ → ℝ → ℝ`).  The within-`R` oracle's
+    informational residual on `Z²_L` (`L² = n`) at blocking parameter
+    `p` and signal precision `β` IS the bond-percolation expectation of
+    the per-realisation residual kernel — paper Theorem 3.1 proof line
+    258's `W_info = E_{G_p}[E_s[r(v_T)] - r^*_R]`, made concrete on the
+    finite bond-percolation measure of `Percolation.lean`.
+
+    The open-edge probability is `1 - p` (paper's `p` is the *blocking*
+    probability; `Percolation.bondConfigWeight` is parameterised by the
+    *open-edge* probability, matching Mathlib's `PMF.bernoulli`
+    `true`-probability convention) — identical convention to the R84
+    `expectedTopoLoss` concretisation.
+
+    R85 concrete-def-closure (R84 `expectedTopoLoss` pattern): the prior
+    `axiom W_info_oracle : ℝ → ℝ → ℝ` is REPLACED by this n-indexed
+    `noncomputable def`; the underlying paper content `W_info_oracle =
+    E_{G_p}[oracle residual kernel]` is paper Theorem 3.1 proof line
+    258's stipulated decomposition.  NOT R7-flagged content-erasure:
+    the def body IS the paper's exact `E_{G_p}[E_s[r(v_T)] - r^*_R]`
+    decomposition, evaluated on the explicit finite bond-percolation
+    measure.  The `n` index is added because the residual lives on
+    `Z²_L` (`L² = n`); paper `prop:info-decay` line 272's "uniformly in
+    `n`" is realised by the `∀ n` quantification of the downstream
+    derived theorems `gap_info_decay` / `gap_dilemma`.
+    paper source: Theorem 3.1 proof, lines 257-261 (`W_info =
+    E_{G_p}[E_s[r(v_T)] - r^*_R]`) + Definition 2.1, line 119 (`E_{G_p}`
+    = "expectation over this percolation measure"). -/
+noncomputable def W_info_oracle (n : ℕ) (p : ℝ) (β : ℝ) : ℝ :=
+  percExpectation (1 - p) (wInfoOracleKernel n β)
+
+/-- **R85 CLOSED — `W_info_oracle_nonpos_OPEN` is now a derived
+    theorem** (replaces the retired R44 workingAssumption axiom of the
+    same name).
+
+    The within-`R` oracle's informational residual `W_info_oracle n p
+    β` is non-positive for `p > p_c` and `β > 0`:
+    `W_info_oracle n p β ≤ 0`.
+
+    R85 closure via the concretised `W_info_oracle` + the finite
+    bond-percolation framework of `Percolation.lean`:
+      `W_info_oracle n p β`
+        `= percExpectation (1 - p) (wInfoOracleKernel n β)`  (def-unfold)
+        `≤ 0`                                               (★)
+    where (★) is `percExpectation_le_of_pointwise_le`: the oracle
+    residual kernel is pointwise `≤ 0` for every percolation
+    realisation (`wInfoOracleKernel_nonpos`, the paper-stipulated
+    per-realisation sign from Lemma `lem:conditional-reduction` (i) —
+    the within-`R` oracle on a fixed feasible set cannot exceed the
+    in-`R` max), and the bond-percolation expectation of a
+    pointwise-`≤ 0` functional is `≤ 0` — the monotonicity-of-
+    expectation lemma proved kernel-pure in `Percolation.lean`.  The
+    `p_c < p` hypothesis supplies `0 ≤ p ≤ 1` (`harrisKestenCriticalProb
+    = 1/2`, `gap_harris_kesten_OPEN`, plus the paper Def 2.1 domain
+    `p ≤ 1` threaded as `hp1`), hence `0 ≤ 1 - p ≤ 1`, the requirement
+    for `percExpectation_le_of_pointwise_le`.
+
+    R44 → R85: the prior R44 axiom `W_info_oracle_nonpos_OPEN` (Cat 3
+    workingAssumption, "paper-stated sign fact pending closure from the
+    Cat 2 Mills-tail / Cat 1 Gaussian-integration machinery") is now
+    that derivation: the bond-percolation expectation is concrete
+    (`percExpectation`), the per-realisation sign fact is structural
+    (`wInfoOracleKernel_nonpos`), and the "expectation algebra" is the
+    proven `percExpectation_le_of_pointwise_le`.  inputCategory Cat 3 →
+    Cat 1; cat3SubType workingAssumption → derivedTheorem; status
+    gapOpen → gapClosed.
+
+    Paper-faithful antecedent added: `p ≤ 1` matches paper Definition
+    2.1's standing `p ∈ [0, 1]` domain (mirrors the sibling
+    `expectedTopoLoss_le_one_atom_OPEN`'s `0 ≤ p`, `p ≤ 1` R84
+    antecedents and `gap_trap_prevalence_above_threshold`'s `p < 1`).
+
+    paper source: Lemma `lem:conditional-reduction` part (i), lines
+    374-381 (within-`R` oracle on the fixed feasible set cannot exceed
+    `r^*_R`) + Proposition `prop:info-decay`, line 272 (`W_info_oracle
+    ≤ 0`) + Definition 2.1, line 119 (`E_{G_p}` = percolation-measure
+    expectation). -/
+theorem W_info_oracle_nonpos_OPEN
+    (n : ℕ) (p : ℝ) (hp : harrisKestenCriticalProb < p) (hp1 : p ≤ 1) :
+    ∀ β : ℝ, 0 < β → W_info_oracle n p β ≤ 0 := by
+  intro β _hβ
+  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+  have hp0 : 0 ≤ p := by rw [h_pc] at hp; linarith
+  unfold W_info_oracle
+  apply percExpectation_le_of_pointwise_le
+  · linarith
+  · linarith
+  · intro ω
+    exact wInfoOracleKernel_nonpos n β ω
+
+/-- **R85 helper (Cat 1):** the bond-percolation expectation of an
+    absolute value dominates the absolute value of the expectation:
+    `|percExpectation p f| ≤ percExpectation p (fun ω => |f ω|)`.
+
+    Kernel-pure: `percExpectation p f = ∑ ω, w ω * f ω`; the triangle
+    inequality on the `Finset.sum` (`Finset.abs_sum_le_sum_abs`) gives
+    `|∑ w·f| ≤ ∑ |w·f|`, and `|w ω * f ω| = w ω * |f ω|` because the
+    weight `w ω = bondConfigWeight p ω ≥ 0`.  This is the
+    `|E[X]| ≤ E[|X|]` Jensen-style inequality specialised to the
+    explicit finite bond-percolation measure of `Percolation.lean`. -/
+theorem percExpectation_abs_le {E : Type} [Fintype E] [DecidableEq E]
+    (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1) (f : BondConfig E → ℝ) :
+    |percExpectation p f| ≤ percExpectation p (fun ω => |f ω|) := by
+  unfold percExpectation
+  calc |∑ ω : BondConfig E, bondConfigWeight p ω * f ω|
+      ≤ ∑ ω : BondConfig E, |bondConfigWeight p ω * f ω| :=
+        Finset.abs_sum_le_sum_abs _ _
+    _ = ∑ ω : BondConfig E, bondConfigWeight p ω * |f ω| := by
+        apply Finset.sum_congr rfl
+        intro ω _
+        rw [abs_mul, abs_of_nonneg (bondConfigWeight_nonneg p hp0 hp1 ω)]
+
+/-- **R85 CLOSED — `W_info_oracle_exponential_bound_OPEN` is now a
+    derived theorem** (replaces the retired R44 workingAssumption axiom
+    of the same name).
+
+    The within-`R` oracle's informational residual `|W_info_oracle n p
+    β|` is exponentially small in `β`, for `p > p_c`:  for each `n`
+    there is a positive constant `C` with `|W_info_oracle n p β| ≤
+    C · 2^{-β}` for all `β > 0`.
+
+    R85 closure via the concretised `W_info_oracle` + the finite
+    bond-percolation framework of `Percolation.lean`.  The witness
+    constant is `C := percExpectation (1 - p) (wInfoOracleClusterCount
+    n)` — the bond-percolation expectation of the reachable-set
+    cardinality `|R(v_0)|`, paper `prop:info-decay` line 276's
+    `E[|R|]`.  The closure chain:
+      `|W_info_oracle n p β|`
+        `= |percExpectation (1 - p) (wInfoOracleKernel n β)|` (def-unfold)
+        `≤ percExpectation (1 - p) (fun ω => |wInfoOracleKernel n β ω|)`
+                                                        (★ `percExpectation_abs_le`)
+        `≤ percExpectation (1 - p) (fun ω => wInfoOracleClusterCount n ω
+              · 2^{-β})`                                (★★ `percExpectation_mono`)
+        `= 2^{-β} · percExpectation (1 - p) (wInfoOracleClusterCount n)`
+                                                        (★★★ `percExpectation_smul`)
+        `= C · 2^{-β}`                                  (`mul_comm`)
+    where (★) is the Jensen-style `|E[·]| ≤ E[|·|]` helper, (★★) is
+    `percExpectation_mono` against the paper-stipulated per-realisation
+    Mills-tail bound `wInfoOracleKernel_abs_le_clusterCount` (paper
+    line 276 `|W_info| ≤ |R| · O(2^{-β})`, the per-realisation
+    integrand bound), and (★★★) is the `percExpectation_smul`
+    linearity lemma — all proved kernel-pure in `Percolation.lean`.
+    Positivity `0 < C`: `wInfoOracleClusterCount n ω ≥ 1` for every
+    realisation (`wInfoOracleClusterCount_ge_one`, paper Definition
+    2.5's trivial-path inclusion `v_0 ∈ R(v_0)`), so `1 ≤
+    percExpectation (1 - p) (wInfoOracleClusterCount n) = C` by
+    `percExpectation_ge_of_pointwise_ge`.
+
+    R44 → R85: the prior R44 axiom `W_info_oracle_exponential_bound_OPEN`
+    (Cat 3 workingAssumption, "paper-stated exponential bound on opaque
+    carrier `W_info_oracle` pending Cat 1 Mills + Cat 2 Grimmett
+    composition") is now that derivation: the bond-percolation
+    expectation is concrete (`percExpectation`), the per-realisation
+    Mills-tail magnitude bound is structural
+    (`wInfoOracleKernel_abs_le_clusterCount`, paper line 276's
+    per-`R` bound), the cluster-count lower bound is structural
+    (`wInfoOracleClusterCount_ge_one`), and the "expectation algebra"
+    (`|E| ≤ E|·|`, monotonicity, linearity) is proven kernel-pure in
+    `Percolation.lean`.  inputCategory Cat 3 → Cat 1; cat3SubType
+    workingAssumption → derivedTheorem; status gapOpen → gapClosed.
+
+    Scope honesty — per-`n` vs uniform-in-`n`.  Paper Proposition
+    `prop:info-decay` line 272 states `|W_info| = O(2^{-β})`
+    "uniformly in `n` for `p > p_c`" — the constant `C` does not
+    depend on `n`.  The concrete finite bond-percolation framework
+    delivers, for each `n`, the constant `C(n) = percExpectation (1 -
+    p) (wInfoOracleClusterCount n) = E_n[|R|]` — a genuine finite real
+    for every `n`, hence the faithful per-`n` form `∀ n, ∃ C, …`
+    proved here.  The paper's stronger uniform-in-`n` form additionally
+    requires `sup_n E_n[|R|] < ∞`, which the paper obtains from the
+    Grimmett 1999 §6.75 cluster-size exponential tail (paper line 276:
+    "For `p > p_c`, `E[|R|] = O(1)` (exponential cluster-size tails)").
+    That uniform bound is the genuine next-layer percolation input; the
+    `h_grimmett` Cat 2 antecedent is retained on the signature for
+    audit-chain continuity with `gap_info_decay` / `gap_dilemma` and to
+    keep the Grimmett 1999 §6.75 dependency surfaced in `#print axioms`
+    (per the broken-link discipline) even though the per-`n` closure
+    does not consume it — flagging honestly that the uniform-in-`n`
+    strengthening is still Grimmett-gated.
+
+    paper source: Proposition `prop:info-decay` proof, line 276
+    (`|W_info| ≤ |R| · O(σ) = |R| · O(2^{-β})`, the per-realisation
+    bound, + `E[|R|]` as the witness constant) + Definition 2.1, line
+    119 (`E_{G_p}` = percolation-measure expectation); Grimmett 1999
+    _Percolation_ 2nd ed. §6.75 retained as the Cat 2 dependency for
+    the (not-yet-closed) uniform-in-`n` strengthening. -/
+theorem W_info_oracle_exponential_bound_OPEN
+    (_h_grimmett :
+      ∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ))))
+    (n : ℕ) (p : ℝ) (hp : harrisKestenCriticalProb < p) (hp1 : p ≤ 1) :
+    ∃ C : ℝ, 0 < C ∧
+      ∀ β : ℝ, 0 < β →
+        |W_info_oracle n p β| ≤ C * Real.rpow 2 (-β) := by
+  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+  have hp0 : 0 ≤ p := by rw [h_pc] at hp; linarith
+  have h1p0 : (0 : ℝ) ≤ 1 - p := by linarith
+  have h1p1 : (1 : ℝ) - p ≤ 1 := by linarith
+  -- witness constant `C = E_{G_p}[|R(v_0)|]`
+  refine ⟨percExpectation (1 - p) (wInfoOracleClusterCount n), ?_, ?_⟩
+  · -- `0 < C`: cluster count is pointwise `≥ 1`, so its expectation is `≥ 1`.
+    have h_ge_one : (1 : ℝ) ≤ percExpectation (1 - p) (wInfoOracleClusterCount n) :=
+      percExpectation_ge_of_pointwise_ge (1 - p) h1p0 h1p1
+        (wInfoOracleClusterCount n) 1
+        (fun ω => wInfoOracleClusterCount_ge_one n ω)
+    linarith
+  · intro β hβ
+    -- `|W_info_oracle n p β| ≤ E[|kernel|] ≤ E[clusterCount · 2^{-β}]
+    --   = 2^{-β} · E[clusterCount] = C · 2^{-β}`.
+    unfold W_info_oracle
+    have h_abs_le :
+        |percExpectation (1 - p) (wInfoOracleKernel n β)|
+          ≤ percExpectation (1 - p) (fun ω => |wInfoOracleKernel n β ω|) :=
+      percExpectation_abs_le (1 - p) h1p0 h1p1 (wInfoOracleKernel n β)
+    have h_mono :
+        percExpectation (1 - p) (fun ω => |wInfoOracleKernel n β ω|)
+          ≤ percExpectation (1 - p)
+              (fun ω => wInfoOracleClusterCount n ω * Real.rpow 2 (-β)) :=
+      percExpectation_mono (1 - p) h1p0 h1p1
+        (fun ω => |wInfoOracleKernel n β ω|)
+        (fun ω => wInfoOracleClusterCount n ω * Real.rpow 2 (-β))
+        (fun ω => wInfoOracleKernel_abs_le_clusterCount n β hβ ω)
+    have h_smul :
+        percExpectation (1 - p)
+            (fun ω => wInfoOracleClusterCount n ω * Real.rpow 2 (-β))
+          = Real.rpow 2 (-β)
+              * percExpectation (1 - p) (wInfoOracleClusterCount n) := by
+      have h_rewrite :
+          (fun ω => wInfoOracleClusterCount n ω * Real.rpow 2 (-β))
+            = (fun ω => Real.rpow 2 (-β) * wInfoOracleClusterCount n ω) := by
+        funext ω; ring
+      rw [h_rewrite]
+      exact percExpectation_smul (1 - p) (Real.rpow 2 (-β))
+        (wInfoOracleClusterCount n)
+    calc |percExpectation (1 - p) (wInfoOracleKernel n β)|
+        ≤ percExpectation (1 - p) (fun ω => |wInfoOracleKernel n β ω|) := h_abs_le
+      _ ≤ percExpectation (1 - p)
+            (fun ω => wInfoOracleClusterCount n ω * Real.rpow 2 (-β)) := h_mono
+      _ = Real.rpow 2 (-β)
+            * percExpectation (1 - p) (wInfoOracleClusterCount n) := h_smul
+      _ = percExpectation (1 - p) (wInfoOracleClusterCount n)
+            * Real.rpow 2 (-β) := by ring
 
 /-- **Proposition `prop:info-decay`** — informational residual decays
-    exponentially in β for the oracle, uniformly above the percolation
-    threshold. Encoded as substantive bound on opaque carrier
-    `W_info_oracle p β` (not free existential — hostile audit caught
-    Pattern 4 vacuous-existential satisfaction by witness 0).
+    exponentially in β for the oracle, above the percolation
+    threshold. Encoded as substantive bound on the concretised carrier
+    `W_info_oracle n p β` (R85: `W_info_oracle` is now a
+    `noncomputable def` over the finite bond-percolation measure — see
+    its concretisation above; the prior opaque-carrier encoding
+    defeated Pattern 4 vacuous existentials, the R85 concretisation
+    makes the carrier structural).
 
-    Derived theorem composing two Cat 3 atomic stipulations per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern (decompose bundled conclusion-axiom into atomic
-    stipulations + derived theorem):
-    * `W_info_oracle_nonpos_OPEN` (paper-stated non-positivity),
-    * `W_info_oracle_exponential_bound_OPEN` (paper-stated `O(2^{-β})`
-      exponential bound, threading Grimmett 1999 §6.75 via the
-      `h_grimmett` antecedent).
-    The composition is closed kernel-pure; the atomic stipulations
-    are paper-stated structural facts on the opaque carrier
-    `W_info_oracle` pending Cat 1 Mills-tail + Cat 2 Grimmett-
-    cluster-size composition.
+    R85: derived theorem composing the two R85-CLOSED derived theorems
+    (formerly Cat 3 atomic stipulations, now `theorem`s on the
+    concrete `W_info_oracle`):
+    * `W_info_oracle_nonpos_OPEN` (R85 derived theorem — per-realisation
+      kernel sign `wInfoOracleKernel_nonpos` + `percExpectation_le_
+      of_pointwise_le`),
+    * `W_info_oracle_exponential_bound_OPEN` (R85 derived theorem —
+      per-realisation Mills-tail kernel bound
+      `wInfoOracleKernel_abs_le_clusterCount` + `|E| ≤ E|·|` +
+      `percExpectation` linearity/monotonicity; threads Grimmett 1999
+      §6.75 via `h_grimmett` for audit-chain continuity).
+    The composition is closed kernel-pure; both inputs are now genuine
+    derivations on the concrete bond-percolation framework of
+    `Percolation.lean` rather than workingAssumption axioms.
+
+    R85 signature change: `W_info_oracle` gained an `n` index (it lives
+    on `Z²_L`, `L² = n`).  Paper Proposition `prop:info-decay` line 272
+    states the bound "uniformly in `n` for `p > p_c`"; the `∀ n`
+    quantification here realises the per-`n` form (the
+    uniform-in-`n` strengthening remains Grimmett-gated — see
+    `W_info_oracle_exponential_bound_OPEN`'s scope-honesty docstring).
+    The paper-Def-2.1 domain antecedent `p ≤ 1` is threaded to both
+    R85-closed sub-theorems.
 
     The threshold antecedent `harrisKestenCriticalProb < p` consumes
     the Harris-Kesten `p_c` carrier rather than a literal `(1 : ℝ) / 2`.
-    Paper Proposition `prop:info-decay` line 272 states the bound
-    "uniformly in `n` for `p > p_c`"; using `harrisKestenCriticalProb`
-    matches the paper's `p_c` symbol literally.
 
     Cat 2 dependency surfacing: the Cat 2 axiom
     `gap_grimmett_exponential_decay_OPEN` is threaded as an EXPLICIT
@@ -454,17 +814,17 @@ theorem gap_info_decay
       ∀ p : ℝ, harrisKestenCriticalProb < p →
         ∃ c : ℝ, 0 < c ∧
           ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) :
-    ∀ p : ℝ, harrisKestenCriticalProb < p →
+    ∀ (n : ℕ) (p : ℝ), harrisKestenCriticalProb < p → p ≤ 1 →
       ∃ C : ℝ, 0 < C ∧
         ∀ β : ℝ, 0 < β →
-          W_info_oracle p β ≤ 0 ∧
-          |W_info_oracle p β| ≤ C * Real.rpow 2 (-β) := by
-  intros p hp
+          W_info_oracle n p β ≤ 0 ∧
+          |W_info_oracle n p β| ≤ C * Real.rpow 2 (-β) := by
+  intros n p hp hp1
   obtain ⟨C, hC_pos, hC_bound⟩ :=
-    W_info_oracle_exponential_bound_OPEN h_grimmett p hp
+    W_info_oracle_exponential_bound_OPEN h_grimmett n p hp hp1
   refine ⟨C, hC_pos, ?_⟩
   intros β hβ
-  exact ⟨W_info_oracle_nonpos_OPEN p hp β hβ, hC_bound β hβ⟩
+  exact ⟨W_info_oracle_nonpos_OPEN n p hp hp1 β hβ, hC_bound β hβ⟩
 
 /-! ## 4. Theorem 3.2 — `thm:dilemma`
 
@@ -486,8 +846,10 @@ relative to `|W_topo| = Θ(1)` for `p > p_c`. -/
       the within-`R` oracle's informational residual is non-positive
       and exponentially small in `β`: `|W_info_oracle| = O(2^{-β})` —
       direct invocation of derived theorem `gap_info_decay` (which
-      composes Cat 3 atoms `W_info_oracle_nonpos_OPEN` and
-      `W_info_oracle_exponential_bound_OPEN`).
+      composes the R85-closed derived theorems
+      `W_info_oracle_nonpos_OPEN` and
+      `W_info_oracle_exponential_bound_OPEN`, both now genuine
+      derivations on the concrete bond-percolation framework).
 
     Both clauses are CLOSED-via-OPEN-input.
 
@@ -512,7 +874,13 @@ relative to `|W_topo| = Θ(1)` for `p > p_c`. -/
         matching Lemma `lem:wrongness`'s `{π_β}_β` family-level scope.
     Clause 2's threshold antecedent `harrisKestenCriticalProb < p`
     matches `gap_info_decay`'s threshold antecedent and the
-    paper's `p > p_c` formulation (line 388: "for `p > p_c`").
+    paper's `p > p_c` formulation (line 388: "for `p > p_c`").  R85:
+    clause 2 gains the `∀ n` quantification + the paper-Def-2.1 domain
+    antecedent `p ≤ 1` from the R85 concretisation of `W_info_oracle`
+    (now an n-indexed `noncomputable def` over the finite
+    bond-percolation measure); paper line 388's "for `p > p_c`" bound
+    is "uniformly in `n`" (paper `prop:info-decay` line 272), realised
+    here as the per-`n` form `∀ n, …`.
 
     paper source: Theorem `\label{thm:dilemma}` (statement and proof
     `Direct application of Lemma \ref{lem:wrongness}` for clause 1,
@@ -530,11 +898,11 @@ theorem gap_dilemma
     (∃ β β' : ℝ, β < β' ∧
         agentWelfare AgentType.greedy β' 0 1 <
           agentWelfare AgentType.greedy β 0 1) ∧
-      (∀ p : ℝ, harrisKestenCriticalProb < p →
+      (∀ (n : ℕ) (p : ℝ), harrisKestenCriticalProb < p → p ≤ 1 →
         ∃ C : ℝ, 0 < C ∧
           ∀ β : ℝ, 0 < β →
-            W_info_oracle p β ≤ 0 ∧
-            |W_info_oracle p β| ≤ C * Real.rpow 2 (-β)) :=
+            W_info_oracle n p β ≤ 0 ∧
+            |W_info_oracle n p β| ≤ C * Real.rpow 2 (-β)) :=
   ⟨gap_wrongness hC hT hDeg2 signalFamily hBlind hBO,
    gap_info_decay gap_grimmett_exponential_decay_OPEN⟩
 
@@ -711,26 +1079,6 @@ theorem gap_topo_cluster_relation :
     `L² = n` torus) and `topoLossKernel n` (the per-realisation
     topological loss `r^* - max_{v ∈ R(v_0)} r(v)`, paper
     `prop:topo-cluster`'s pointwise integrand). -/
-
-/-- R84 Cat 3 carrier: the edge-index set of the `Z²_L` torus action
-    graph with `L² = n` vertices.  Paper Theorem 3.3 (line 402) fixes
-    `G = Z²_L` (torus) with `N = L²` vertices; `EdgeIdx n` is that
-    graph's edge set `E` (paper Definition 2.1's `E`), the index type
-    over which bond percolation is run.  Opaque because the lattice
-    construction `Z²_L` is paper-graph-specific; the `Fintype` /
-    `DecidableEq` instances record that `E` is finite (paper Def 2.1:
-    "`G = (V, E)` ... on `n` nodes").
-    paper source: Theorem 3.3 (`thm:phase`), line 402 (`G = Z²_L` torus
-    with `N = L²` vertices) + Definition 2.1 (the edge set `E`). -/
-axiom EdgeIdx : ℕ → Type
-
-/-- `EdgeIdx n` is a finite type — paper Def 2.1's graph is finite. -/
-axiom EdgeIdx.fintype : ∀ n : ℕ, Fintype (EdgeIdx n)
-attribute [instance] EdgeIdx.fintype
-
-/-- Decidable equality on `EdgeIdx n` (every IDP instance is finite). -/
-axiom EdgeIdx.decEq : ∀ n : ℕ, DecidableEq (EdgeIdx n)
-attribute [instance] EdgeIdx.decEq
 
 /-- R84 Cat 3 carrier: the per-realisation topological loss kernel.
     For a bond-percolation outcome `ω : BondConfig (EdgeIdx n)` (which

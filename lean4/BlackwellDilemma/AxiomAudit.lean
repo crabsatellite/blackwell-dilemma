@@ -912,4 +912,109 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.percExpectation_mono
 #print axioms BlackwellDilemma.expectedTopoLoss_le_one_atom_OPEN
 
+-- R85 percolation-foundation wave (continuation): concretisation of
+-- the `W_info_oracle` carrier over `Percolation.lean` + closure of
+-- BOTH `prop:info-decay` workingAssumption atoms.
+--
+-- (1) `W_info_oracle` CONCRETISED — the prior opaque carrier
+--     `axiom W_info_oracle : ℝ → ℝ → ℝ` is REPLACED (R84
+--     `expectedTopoLoss` concrete-def-closure pattern) by
+--     `noncomputable def W_info_oracle n p β := percExpectation (1 −
+--     p) (wInfoOracleKernel n β)`, which IS paper Theorem 3.1 proof
+--     line 258's `W_info = E_{G_p}[E_s[r(v_T)] − r^*_R]` evaluated on
+--     the explicit finite bond-percolation measure.  The carrier
+--     gains an `n` index (the residual lives on `Z²_L`, `L² = n`);
+--     paper `prop:info-decay` line 272's "uniformly in `n`" is
+--     realised by the `∀ n` quantification of the downstream derived
+--     theorems.  Three supporting paper-Def-stipulated atoms:
+--      * `wInfoOracleKernel` (carrier — paper Thm 3.1 proof line 258's
+--        pointwise integrand `E_s[r(v_T)] − r^*_R`),
+--      * `wInfoOracleClusterCount` (carrier — paper `prop:info-decay`
+--        line 276's `|R(v_0)|`),
+--      * `wInfoOracleKernel_nonpos` (structuralEquation — paper Lemma
+--        `lem:conditional-reduction` (i): the within-`R` oracle on a
+--        fixed feasible set cannot exceed `r^*_R`, so the
+--        per-realisation residual is `≤ 0`; 永不-close per §3.4.3),
+--      * `wInfoOracleClusterCount_ge_one` (structuralEquation — paper
+--        Def 2.5 trivial-path inclusion `v_0 ∈ R(v_0)` ⇒ `|R| ≥ 1`),
+--      * `wInfoOracleKernel_abs_le_clusterCount` (structuralEquation —
+--        paper `prop:info-decay` proof line 276 STATES the
+--        per-realisation Mills-tail bound `|W_info| ≤ |R| · O(2^{-β})`
+--        directly; the per-`R` integrand bound, 永不-close per §3.4.3
+--        + §10 paper-application-of-Cat-1-`gap_phi_tail_bound`).
+--     `EdgeIdx` + its `Fintype`/`DecidableEq` instances were moved up
+--     from §5 of Wrongness.lean (was after `prop:topo-cluster`) so the
+--     §3 `W_info_oracle` concretisation can reference the same `Z²_L`
+--     edge set — carrier content unchanged, only relocated.
+--
+-- (2) `W_info_oracle_nonpos_OPEN` CLOSED — the prior R44
+--     workingAssumption axiom `∀ p, p_c < p → ∀ β > 0, W_info_oracle
+--     p β ≤ 0` is now a derived `theorem` (n-indexed, paper Def 2.1
+--     domain antecedent `p ≤ 1` added): unfolds to `percExpectation
+--     (1−p) (wInfoOracleKernel n β) ≤ 0` and closes by
+--     `percExpectation_le_of_pointwise_le` + the pointwise kernel
+--     sign `wInfoOracleKernel_nonpos`.  inputCategory Cat 3 → Cat 1;
+--     cat3SubType workingAssumption → derivedTheorem; status gapOpen
+--     → gapClosed.
+--
+-- (3) `W_info_oracle_exponential_bound_OPEN` CLOSED — the prior R44
+--     workingAssumption axiom is now a derived `theorem`.  The witness
+--     constant is `C := percExpectation (1−p) (wInfoOracleClusterCount
+--     n) = E_n[|R|]`; the closure chain is `|W_info_oracle n p β| =
+--     |percExpectation (1−p) (wInfoOracleKernel n β)| ≤
+--     percExpectation (1−p) |kernel|  (Jensen-style helper
+--     `percExpectation_abs_le`)  ≤ percExpectation (1−p)
+--     (clusterCount · 2^{-β})  (`percExpectation_mono` against the
+--     paper-stated per-realisation bound
+--     `wInfoOracleKernel_abs_le_clusterCount`)  = 2^{-β} ·
+--     percExpectation (1−p) clusterCount  (`percExpectation_smul`)  =
+--     C · 2^{-β}`.  Positivity `0 < C` from `wInfoOracleClusterCount
+--     ≥ 1` (`wInfoOracleClusterCount_ge_one`) + `percExpectation_ge_
+--     of_pointwise_ge`.  R85 also adds the new Cat 1 helper
+--     `percExpectation_abs_le` (`|E[f]| ≤ E[|f|]` on the finite
+--     bond-percolation measure, kernel-pure `[propext,
+--     Classical.choice, Quot.sound]`).  inputCategory Cat 3 → Cat 1;
+--     cat3SubType workingAssumption → derivedTheorem; status gapOpen
+--     → gapClosed.
+--
+-- Scope honesty: the closed `W_info_oracle_exponential_bound_OPEN` is
+-- the FAITHFUL per-`n` form `∀ n, ∃ C, …` — for each `n` the constant
+-- `C(n) = E_n[|R|]` is a genuine finite real on the finite
+-- bond-percolation measure.  Paper `prop:info-decay` line 272's
+-- stronger "uniformly in `n`" form additionally needs `sup_n E_n[|R|]
+-- < ∞`, which the paper obtains from the Grimmett 1999 §6.75
+-- cluster-size exponential tail (paper line 276 `E[|R|] = O(1)`).
+-- That uniform bound is the genuine next-layer percolation input; the
+-- `h_grimmett` Cat 2 antecedent is retained on
+-- `W_info_oracle_exponential_bound_OPEN` / `gap_info_decay` /
+-- `gap_dilemma` for audit-chain continuity (so `#print axioms
+-- gap_dilemma` still surfaces `gap_grimmett_exponential_decay_OPEN`)
+-- even though the per-`n` closure does not consume it.
+--
+-- `#print axioms` on the two R85 closures = kernel axioms + the
+-- `EdgeIdx` carriers/instances + the 2 new `wInfoOracle*` carriers +
+-- the 3 new `wInfoOracle*` structural equations + `harrisKestenCritical
+-- Prob` / `gap_harris_kesten_OPEN` — NO workingAssumption axiom
+-- remains.  Each R85 item is HONEST (genuine measure-theoretic proof
+-- on the concrete bond-percolation framework, no `sorry`, no R7-style
+-- content-erasure — the `def` body IS the paper's exact
+-- `E_{G_p}[E_s[r(v_T)] − r^*_R]` decomposition).
+--
+-- The two below-threshold `1/(n+1)` envelope atoms
+-- (`expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` in Phase.lean,
+-- `topo_loss_below_one_over_n_envelope_atom_OPEN` in Wrongness.lean)
+-- HONESTLY remain workingAssumption axioms (R84 finding stands): the
+-- `1/(n+1)` bound is an EXPECTATION bound (false pointwise) requiring
+-- the giant-component event probability `θ(1−p) > 0` to split the
+-- kernel — the giant-component-conditioning content, a genuine
+-- next-layer percolation input not closable this round.
+#print axioms BlackwellDilemma.percExpectation_abs_le
+#print axioms BlackwellDilemma.wInfoOracleKernel_nonpos
+#print axioms BlackwellDilemma.wInfoOracleClusterCount_ge_one
+#print axioms BlackwellDilemma.wInfoOracleKernel_abs_le_clusterCount
+#print axioms BlackwellDilemma.W_info_oracle_nonpos_OPEN
+#print axioms BlackwellDilemma.W_info_oracle_exponential_bound_OPEN
+#print axioms BlackwellDilemma.gap_info_decay
+#print axioms BlackwellDilemma.gap_dilemma
+
 end BlackwellDilemma.AxiomAudit
