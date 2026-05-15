@@ -14,6 +14,12 @@
     PhysicalIrreducibility.lean §3.1 Prop physical-irreducibility,
                                        W_info ≤ 0, oracle saturation
 
+    Percolation.lean            §2-§3.3 paper-faithful finite
+                                  bond-percolation framework: the
+                                  BondConfig sample space, the explicit
+                                  Bernoulli-product measure, and the
+                                  E_{G_p}[·] expectation with its
+                                  monotonicity / linearity lemmas
     Types.lean                  §2 IDP primitives, agents, signal /
                                   topology signal families
     ClassicalResults.lean       Blackwell 1953, Harris-Kesten,
@@ -53,6 +59,7 @@
 import BlackwellDilemma.Basic
 import BlackwellDilemma.SignalImmunity
 import BlackwellDilemma.PhysicalIrreducibility
+import BlackwellDilemma.Percolation
 import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Wrongness

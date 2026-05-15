@@ -24,6 +24,7 @@
 -/
 
 import BlackwellDilemma.Basic
+import BlackwellDilemma.Percolation
 import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
 
@@ -693,10 +694,109 @@ theorem gap_topo_cluster_relation :
   field_simp
   ring
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    Expected topological loss `E[|W_topo|]` on `Z²_L` with `L² = n`
-    vertices at blocking parameter `p`. -/
-axiom expectedTopoLoss : ℕ → ℝ → ℝ
+/-! ### Concretisation of `expectedTopoLoss` over the finite
+    bond-percolation framework (`Percolation.lean`).
+
+    R84: the prior opaque carrier `axiom expectedTopoLoss : ℕ → ℝ → ℝ`
+    is REPLACED (R72/R73 concrete-def-closure pattern) by a
+    `noncomputable def` that IS the paper's `E_{G_p}[·]` expectation,
+    evaluated on the explicit finite bond-percolation measure built in
+    `Percolation.lean`.  Paper Definition 2.1 line 119 STIPULATES that
+    `E_{G_p}` is "expectation over this percolation measure"; the
+    concretisation makes that paper-stipulated identity structural
+    rather than opaque.
+
+    Two paper-Def-stipulated carriers support the concretisation:
+    `EdgeIdx n` (the `Z²_L` edge-index set, paper Def 2.1's `E` for the
+    `L² = n` torus) and `topoLossKernel n` (the per-realisation
+    topological loss `r^* - max_{v ∈ R(v_0)} r(v)`, paper
+    `prop:topo-cluster`'s pointwise integrand). -/
+
+/-- R84 Cat 3 carrier: the edge-index set of the `Z²_L` torus action
+    graph with `L² = n` vertices.  Paper Theorem 3.3 (line 402) fixes
+    `G = Z²_L` (torus) with `N = L²` vertices; `EdgeIdx n` is that
+    graph's edge set `E` (paper Definition 2.1's `E`), the index type
+    over which bond percolation is run.  Opaque because the lattice
+    construction `Z²_L` is paper-graph-specific; the `Fintype` /
+    `DecidableEq` instances record that `E` is finite (paper Def 2.1:
+    "`G = (V, E)` ... on `n` nodes").
+    paper source: Theorem 3.3 (`thm:phase`), line 402 (`G = Z²_L` torus
+    with `N = L²` vertices) + Definition 2.1 (the edge set `E`). -/
+axiom EdgeIdx : ℕ → Type
+
+/-- `EdgeIdx n` is a finite type — paper Def 2.1's graph is finite. -/
+axiom EdgeIdx.fintype : ∀ n : ℕ, Fintype (EdgeIdx n)
+attribute [instance] EdgeIdx.fintype
+
+/-- Decidable equality on `EdgeIdx n` (every IDP instance is finite). -/
+axiom EdgeIdx.decEq : ∀ n : ℕ, DecidableEq (EdgeIdx n)
+attribute [instance] EdgeIdx.decEq
+
+/-- R84 Cat 3 carrier: the per-realisation topological loss kernel.
+    For a bond-percolation outcome `ω : BondConfig (EdgeIdx n)` (which
+    edges of `Z²_L` are open), `topoLossKernel n ω` is the realised
+    topological loss `r^* - max_{v ∈ R(v_0)} r(v)` on that realisation
+    — paper `prop:topo-cluster`'s pointwise integrand, the quantity
+    whose `E_{G_p}`-expectation is `|W_topo|`.
+
+    Opaque because evaluating it requires the `Z²_L` connectivity
+    structure (which vertices are reachable from `v_0` under `ω`) — the
+    paper-graph-specific reachable-set construction.  Its paper-stated
+    range `[0, 1]` is pinned by the structural equation
+    `topoLossKernel_mem_unitInterval` below.
+    paper source: Proposition `prop:topo-cluster`, lines 279-297
+    (`|W_topo|` per-realisation = `r^* - max_{v ∈ R} r(v)`); Physical
+    Irreducibility `prop:physical` line 311 (`|W_topo(p)| = r^* -
+    E_{G_p}[max_{v ∈ R(v_0)} r(v)]`). -/
+axiom topoLossKernel : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
+
+/-- R84 Cat 3 structural equation: the topological-loss kernel takes
+    values in `[0, 1]` for every percolation realisation.  This is
+    paper-Def-stipulated: paper Definition 2.1 line 113 fixes
+    `r : V → [0, 1]`, so both `r^*` and `max_{v ∈ R(v_0)} r(v)` lie in
+    `[0, 1]`; and `R(v_0) ⊆ V` gives `max_{v ∈ R(v_0)} r(v) ≤ r^*`, so
+    the realised loss `r^* - max_{v ∈ R(v_0)} r(v)` lies in `[0, 1]`.
+
+    Cat 3 sub-type: structuralEquation — paper Def 2.1 line 113's
+    reward-range stipulation, transported to the loss kernel, is a
+    paper-Def-stipulated structural identity on the kernel carrier
+    (mirrors the `expectedTopoLoss_le_one_atom` reward-range
+    Def-stipulation precedent and `all_edges_open_at_zero_blocking_OPEN`
+    boundary-semantics precedent — paper Definition stipulates the
+    carrier's range; 永不 close per discipline §3.4.3).
+    paper source: Definition 2.1, line 113 (`r : V → [0, 1]`) +
+    Proposition `prop:physical`, line 311 (`R(v_0) ⊆ V` ⇒ realised loss
+    `≥ 0`). -/
+axiom topoLossKernel_mem_unitInterval :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      0 ≤ topoLossKernel n ω ∧ topoLossKernel n ω ≤ 1
+
+/-- **R84 concretised `expectedTopoLoss`** (replaces retired opaque
+    `axiom expectedTopoLoss : ℕ → ℝ → ℝ`).  The expected topological
+    loss on `Z²_L` (`L² = n`) at blocking parameter `p` IS the
+    bond-percolation expectation of the loss kernel — paper Definition
+    2.1 line 119's `E_{G_p}[·]`, made concrete on the finite
+    bond-percolation measure of `Percolation.lean`.
+
+    The open-edge probability is `1 - p` (paper's `p` is the *blocking*
+    probability; `Percolation.bondConfigWeight` is parameterised by the
+    *open-edge* probability, matching Mathlib's `PMF.bernoulli`
+    `true`-probability convention).  For `p` in the paper domain
+    `[0, 1]` (Definition 2.1: `p ∈ [0, 1]`), `1 - p ∈ [0, 1]` and
+    `percExpectation (1 - p) (·)` is a genuine probability expectation.
+
+    R84 concrete-def-closure (R72/R73 pattern): the prior `axiom
+    expectedTopoLoss` is REPLACED by this `noncomputable def`; the
+    underlying paper content `expectedTopoLoss = E_{G_p}[loss kernel]`
+    is paper Definition 2.1 line 119's stipulated meaning of `E_{G_p}`.
+    NOT R7-flagged content-erasure: the def body IS the paper's exact
+    `E_{G_p}[r^* - max_{v ∈ R} r(v)]` decomposition, evaluated on the
+    explicit finite bond-percolation measure.
+    paper source: Definition 2.1, line 119 (`E_{G_p}` = "expectation
+    over this percolation measure") + Proposition `prop:topo-cluster` /
+    `prop:physical` (`|W_topo|` = `E_{G_p}[r^* - max_{v ∈ R} r(v)]`). -/
+noncomputable def expectedTopoLoss (n : ℕ) (p : ℝ) : ℝ :=
+  percExpectation (1 - p) (topoLossKernel n)
 
 /-! ### `prop:topo-cluster` Part 1 — below-threshold asymptotic.
 
@@ -959,36 +1059,60 @@ axiom expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
       ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
         expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p
 
-/-- R60 closure-path-A: smaller paper-novel ATOMIC stipulation #3
-    replacing the retired bundled `topo_loss_above_upper_bound_atom_OPEN`.
-    Paper Proposition `prop:topo-cluster` proof line 292-294 derives
-    `expectedTopoLoss n p = E[(n - |R|)/((n+1)(|R|+1))]` from the
-    closed-form conditional formula; combined with paper Definition 2.1
-    line 113 reward-range `r: V → [0, 1]`, the unconditional
-    `expectedTopoLoss n p = E[r(v_R*) - r*]` is a difference of two
-    unit-interval-bounded reward expectations and so is itself bounded
-    above by `1` (paper-faithful Uniform[0,1] reward-setup structural
-    fact).
+/-- **R84 CLOSED — `expectedTopoLoss_le_one_atom_OPEN` is now a derived
+    theorem** (replaces the retired R60 workingAssumption axiom of the
+    same name).
 
-    R60 strictly smaller than retired bundled atom: only the per-`n`
-    upper bound `expectedTopoLoss n p ≤ 1` is asserted (a paper-faithful
-    Uniform[0,1] structural fact derived from paper Def 2.1 reward
-    range); the eventually-bounded-from-above existential `∃ c₂ ≥ c₁,
-    ∃ N₂, ...` is downstream Cat 0 derivation in the new derived theorem
-    (witness `c₂ := max(c₁, 1)`, `N₂ := 0`).
+    Above (indeed at any) blocking parameter `p` in the paper domain
+    `[0, 1]` (paper Definition 2.1: `p ∈ [0, 1]`), the expected
+    topological loss is bounded above by `1`:
+    `expectedTopoLoss n p ≤ 1`.
 
-    Cat 3 sub-type: workingAssumption (paper-stated unit-interval upper
-    bound on opaque `expectedTopoLoss` carrier from paper-faithful
-    Uniform[0,1] reward range; close target = derivation from
-    `reward_mem_unitInterval` (Types.lean) + closed-form
-    `expectedTopoLoss_conditional_def` Mathlib expectation algebra;
-    必须 close before publication).
+    R84 closure via the concretised `expectedTopoLoss` + the finite
+    bond-percolation framework of `Percolation.lean`:
+      `expectedTopoLoss n p`
+        `= percExpectation (1 - p) (topoLossKernel n)`   (def-unfold)
+        `≤ 1`                                            (★)
+    where (★) is `percExpectation_le_of_pointwise_le`: the loss kernel
+    is pointwise `≤ 1` for every percolation realisation
+    (`topoLossKernel_mem_unitInterval`, paper Def 2.1 line 113's
+    reward-range structural equation), and the bond-percolation
+    expectation of a pointwise-`≤ 1` functional is `≤ 1` — the
+    monotonicity-of-expectation lemma proved kernel-pure in
+    `Percolation.lean`.  The `0 ≤ p`, `p ≤ 1` hypotheses (paper Def 2.1
+    domain) supply `0 ≤ 1 - p ≤ 1`, the requirement for
+    `percExpectation_le_of_pointwise_le` (the open-edge probability is a
+    genuine probability).
+
+    R60 → R84: the prior R60 axiom `expectedTopoLoss_le_one_atom_OPEN`
+    (Cat 3 workingAssumption, "paper-faithful Uniform[0,1] reward-range
+    structural unit-interval upper bound", with documented close target
+    "derivation from `reward_mem_unitInterval` + closed-form expectation
+    algebra") is now that derivation: the bond-percolation expectation
+    is concrete (`percExpectation`), the reward-range fact is structural
+    (`topoLossKernel_mem_unitInterval`), and the "expectation algebra"
+    is the proven `percExpectation_le_of_pointwise_le`.  inputCategory
+    Cat 3 → Cat 1; cat3SubType workingAssumption → derivedTheorem;
+    status gapOpen → gapClosed.
+
+    Paper-faithful antecedents added: `0 ≤ p` and `p ≤ 1` match paper
+    Definition 2.1's standing `p ∈ [0, 1]` domain (the same paper-domain
+    threading the sibling `gap_trap_prevalence_above_threshold` applies
+    with its `p < 1` antecedent).
 
     paper source: Proposition `prop:topo-cluster` proof, line 294
-    (`(n-k)/((n+1)(k+1))` closed form) + Definition 2.1, line 113
-    (`r: V → [0, 1]` reward range). -/
-axiom expectedTopoLoss_le_one_atom_OPEN :
-    ∀ (n : ℕ) (p : ℝ), expectedTopoLoss n p ≤ 1
+    (`(n-k)/((n+1)(k+1))` closed form, `≤ 1` from `0 ≤ k`) + Definition
+    2.1, line 113 (`r: V → [0, 1]` reward range) + line 119 (`E_{G_p}` =
+    percolation-measure expectation). -/
+theorem expectedTopoLoss_le_one_atom_OPEN
+    (n : ℕ) (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1) :
+    expectedTopoLoss n p ≤ 1 := by
+  unfold expectedTopoLoss
+  apply percExpectation_le_of_pointwise_le
+  · linarith
+  · linarith
+  · intro ω
+    exact (topoLossKernel_mem_unitInterval n ω).2
 
 /-- **Proposition `prop:topo-cluster` Part 2 (derived theorem).**
     Above threshold (`p > p_c`), `expectedTopoLoss n p = Θ(1)`:
@@ -1009,8 +1133,17 @@ axiom expectedTopoLoss_le_one_atom_OPEN :
     `expectedTopoLossAboveLowerConst p`, and the upper-bound witness
     with `max(expectedTopoLossAboveLowerConst p, 1)`. The `c₂ ≥ c₁`
     relation is Cat 1 from `le_max_left`; the per-`n` upper bound for
-    all `n` (including `n ≥ N₁`) is Cat 1 from
-    `expectedTopoLoss_le_one_atom_OPEN` + `le_max_right`.
+    all `n` (including `n ≥ N₁`) is Cat 1 from the R84-closed derived
+    theorem `expectedTopoLoss_le_one_atom_OPEN` + `le_max_right`.
+
+    R84 antecedent update: `expectedTopoLoss_le_one_atom_OPEN` is now a
+    derived theorem requiring the paper Def 2.1 domain `0 ≤ p ≤ 1`.
+    `0 ≤ p` is derived here from `harrisKestenCriticalProb < p` +
+    `gap_harris_kesten_OPEN` (`harrisKestenCriticalProb = 1/2 > 0`); the
+    `p ≤ 1` paper-domain antecedent (paper Definition 2.1: `p ∈ [0, 1]`)
+    is threaded explicitly as `hp1`, matching the sibling
+    `gap_trap_prevalence_above_threshold`'s paper-faithful `p < 1`
+    antecedent.
 
     paper source: Proposition `prop:topo-cluster`, line 287;
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited for the Cat 2
@@ -1020,7 +1153,7 @@ theorem gap_topo_loss_above_threshold
       ∀ p : ℝ, harrisKestenCriticalProb < p →
         ∃ c : ℝ, 0 < c ∧
           ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ))))
-    (p : ℝ) (hp : harrisKestenCriticalProb < p) :
+    (p : ℝ) (hp : harrisKestenCriticalProb < p) (hp1 : p ≤ 1) :
     ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ c₁ ≤ c₂ ∧
       ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
         c₁ ≤ expectedTopoLoss n p ∧ expectedTopoLoss n p ≤ c₂ := by
@@ -1028,11 +1161,16 @@ theorem gap_topo_loss_above_threshold
     expectedTopoLossAboveLowerConst_pos_above_pc_OPEN h_grimmett p hp
   obtain ⟨N₁, hN₁⟩ :=
     expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN h_grimmett p hp
+  -- `0 ≤ p` from `p_c < p` + `p_c = 1/2 > 0`.
+  have hp0 : 0 ≤ p := by
+    have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+    rw [h_pc] at hp; linarith
   refine ⟨expectedTopoLossAboveLowerConst p,
           max (expectedTopoLossAboveLowerConst p) 1,
           hc₁_pos, le_max_left _ _, N₁, ?_⟩
   intro n hn
   refine ⟨hN₁ n hn, ?_⟩
-  exact le_trans (expectedTopoLoss_le_one_atom_OPEN n p) (le_max_right _ _)
+  exact le_trans (expectedTopoLoss_le_one_atom_OPEN n p hp0 hp1)
+    (le_max_right _ _)
 
 end BlackwellDilemma

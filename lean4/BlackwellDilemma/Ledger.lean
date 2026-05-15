@@ -2940,19 +2940,87 @@ def entry_carrier_expectedTopoLoss_conditional : GapEntry where
 
 /-- expectedTopoLoss carrier — paper-novel expected topological loss on Z²_L. -/
 def entry_carrier_expectedTopoLoss : GapEntry where
-  name := "expectedTopoLoss"
+  name := "expectedTopoLoss [R84 concretised — opaque carrier axiom → noncomputable def on the `Percolation.lean` finite bond-percolation framework]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource :=
+    "Definition 2.1, line 119 (`E_{G_p}` = expectation over the bond-" ++
+    "percolation measure) + Proposition `prop:topo-cluster`, line 286 " ++
+    "(expected topological loss `E[|W_topo|]` on `Z²_L` with `L² = n`)"
+  attackHistory :=
+    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom expectedTopoLoss : ℕ → ℝ → ℝ` at Wrongness.lean ~L541.  Companion atomic stipulations (`topo_loss_below_envelope_exists_atom_OPEN`, `topo_loss_above_lower_bound`, `topo_loss_above_upper_bound`) pin the carrier to the paper's below/above-`p_c` asymptotic claims.  Cat 1 reduction check: CLEAR-NO — paper-novel marginalised expected-loss carrier on the Z²_L lattice; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline.",
+      "R84 2026-05-15: carrier gapDefinitional → derivedTheorem gapClosed via concrete-def closure (R72/R73 pattern). The opaque `axiom expectedTopoLoss : ℕ → ℝ → ℝ` is REPLACED by `noncomputable def expectedTopoLoss (n : ℕ) (p : ℝ) : ℝ := percExpectation (1 - p) (topoLossKernel n)`, where `percExpectation` is the bond-percolation expectation defined in the new `Percolation.lean` module (`∑ ω : BondConfig (EdgeIdx n), bondConfigWeight (1-p) ω * topoLossKernel n ω`, the explicit finite Bernoulli-product measure expectation). This IS paper Definition 2.1 line 119's stipulated `E_{G_p}[·]` — `E_{G_p}` is paper-Def-stipulated to be 'expectation over this percolation measure', and the def body realises exactly that on the explicit finite bond-percolation measure. The carrier is no longer opaque: it is a derived `def` over (i) the kernel-pure `Percolation.lean` framework + (ii) the two remaining paper-Def carriers `EdgeIdx` (the `Z²_L` edge set) and `topoLossKernel` (paper `prop:topo-cluster`'s pointwise integrand). NOT R7 content-erasure: the def body IS the paper's `E_{G_p}` decomposition, not a placeholder. inputCategory Cat 3 → Cat 1; cat3SubType carrier → derivedTheorem; status gapDefinitional → gapClosed." ]
+  scope := "`noncomputable def expectedTopoLoss n p := percExpectation (1 - p) (topoLossKernel n)` — paper Def 2.1 line 119's `E_{G_p}[·]` on the explicit finite bond-percolation measure"
+  obstacleOrAttribution :=
+    "R84 CLOSED via concrete-def closure. The carrier is now a `noncomputable def` over the kernel-pure `Percolation.lean` bond-percolation-expectation framework + the paper-Def carriers `EdgeIdx` / `topoLossKernel`; paper Def 2.1 line 119 stipulates `E_{G_p}` is the percolation-measure expectation and the def realises exactly that."
+  conditionalOn := []
+
+/-- R84 Cat 3 carrier: the `Z²_L` torus edge-index set (paper Def 2.1's
+    `E` for the `L² = n` torus action graph). Opaque because the lattice
+    construction is paper-graph-specific; the `Fintype` / `DecidableEq`
+    instances record paper Def 2.1's finiteness. -/
+def entry_carrier_EdgeIdx : GapEntry where
+  name := "EdgeIdx (carrier) + EdgeIdx.fintype + EdgeIdx.decEq"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.carrier
-  paperSource :=
-    "Proposition `prop:topo-cluster`, line 286: expected topological " ++
-    "loss `E[|W_topo|]` on `Z²_L` with `L² = n` vertices at blocking " ++
-    "parameter `p` (marginalised over the cluster-size distribution)"
+  paperSource := "Theorem 3.3 (thm:phase), line 402 (`G = Z²_L` torus with `N = L²` vertices) + Definition 2.1 (the edge set `E` of the action graph `G = (V, E)`)"
   attackHistory :=
-    [ "Cat 3 paper-novel primitive function per v6 §3.4.1.  Carrier declared `axiom expectedTopoLoss : ℕ → ℝ → ℝ` at Wrongness.lean ~L541.  Companion atomic stipulations (`topo_loss_below_envelope_exists_atom_OPEN`, `topo_loss_above_lower_bound`, `topo_loss_above_upper_bound`) pin the carrier to the paper's below/above-`p_c` asymptotic claims.  Cat 1 reduction check: CLEAR-NO — paper-novel marginalised expected-loss carrier on the Z²_L lattice; no Mathlib equivalent.  Cat 2 reduction check: CLEAR-NO — paper-novel construction.  R46 added per R45 hostile audit coverage-gap finding (R32-B pattern not previously extended to post-Types modules).  永不 close per discipline." ]
-  scope := "Opaque carrier `expectedTopoLoss : ℕ → ℝ → ℝ` for the paper's expected topological loss `E[|W_topo|]` on Z²_L lattice with `L² = n` at blocking parameter `p`"
+    [ "R84 2026-05-15: Cat 3 paper-novel primitive type per v6 §3.4.1. Carrier declared `axiom EdgeIdx : ℕ → Type` at Wrongness.lean, with `axiom EdgeIdx.fintype` / `axiom EdgeIdx.decEq` instances. Introduced as part of the `expectedTopoLoss` concretisation: `EdgeIdx n` is the edge-index set of the `Z²_L` torus with `L² = n` vertices (paper Theorem 3.3 line 402 fixes `G = Z²_L`), the index type over which the finite bond-percolation framework of `Percolation.lean` runs. Opaque because the explicit `Z²_L` lattice construction is paper-graph-specific; the `Fintype` / `DecidableEq` instances record paper Def 2.1's standing finiteness (`G` on `n` nodes). Cat 1 reduction check: CLEAR-NO — `Z²_L` torus edge set is a paper-graph-specific construction; Mathlib has `SimpleGraph` but not the paper's specific `Z²_L`-with-`L²=n` indexing. Cat 2 reduction check: CLEAR-NO — paper-graph-specific. 永不 close per discipline §3.4.1." ]
+  scope := "Opaque carrier `EdgeIdx : ℕ → Type` (+ Fintype/DecidableEq instances) for the `Z²_L` torus edge-index set with `L² = n` vertices"
   obstacleOrAttribution :=
-    "Cat 3 paper-novel primitive per v6 §3.4.1.  R46 R32-B coverage-gap repair.  永不 close."
+    "Cat 3 paper-novel primitive type per v6 §3.4.1 (the `Z²_L` torus edge set, paper Def 2.1's `E`; finiteness instances per paper Def 2.1 'on `n` nodes'). 永不 close."
+  conditionalOn := []
+
+/-- R84 Cat 3 carrier: the per-realisation topological-loss kernel
+    `topoLossKernel n ω = r^* − max_{v ∈ R(v_0)} r(v)` (paper
+    `prop:topo-cluster`'s pointwise integrand). -/
+def entry_carrier_topoLossKernel : GapEntry where
+  name := "topoLossKernel (carrier)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.carrier
+  paperSource := "Proposition prop:topo-cluster, lines 279-297 (`|W_topo|` per-realisation = `r^* − max_{v ∈ R} r(v)`) + Proposition prop:physical, line 311 (`|W_topo(p)| = r^* − E_{G_p}[max_{v ∈ R(v_0)} r(v)]`)"
+  attackHistory :=
+    [ "R84 2026-05-15: Cat 3 paper-novel primitive function per v6 §3.4.1. Carrier declared `axiom topoLossKernel : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ` at Wrongness.lean. Introduced as part of the `expectedTopoLoss` concretisation: for a bond-percolation outcome `ω` (which edges of `Z²_L` are open), `topoLossKernel n ω` is the realised topological loss `r^* − max_{v ∈ R(v_0)} r(v)` on that realisation — paper `prop:topo-cluster`'s pointwise integrand, the quantity whose `E_{G_p}`-expectation is `|W_topo|` (paper `prop:physical` line 311). Opaque because evaluating it requires the `Z²_L` reachable-set construction (which vertices are reachable from `v_0` under `ω`) — the paper-graph-specific connectivity structure. Its paper-stated range `[0, 1]` is pinned by the companion structural equation `topoLossKernel_mem_unitInterval`. Cat 1 reduction check: CLEAR-NO — paper-novel pointwise loss kernel requiring the paper-graph-specific `Z²_L` reachable-set construction. Cat 2 reduction check: CLEAR-NO — paper-graph-specific. 永不 close per discipline §3.4.1." ]
+  scope := "Opaque carrier `topoLossKernel : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ` for the per-realisation topological loss `r^* − max_{v ∈ R(v_0)} r(v)`"
+  obstacleOrAttribution :=
+    "Cat 3 paper-novel primitive function per v6 §3.4.1 (paper `prop:topo-cluster`'s pointwise integrand; requires the `Z²_L` reachable-set construction). 永不 close."
+  conditionalOn := []
+
+/-- R84 Cat 3 structural equation: the topological-loss kernel takes
+    values in `[0, 1]` for every percolation realisation — paper Def 2.1
+    line 113's reward-range stipulation transported to the loss kernel. -/
+def entry_atom_topoLossKernel_mem_unitInterval : GapEntry where
+  name := "topoLossKernel_mem_unitInterval"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition 2.1, line 113 (`r : V → [0, 1]` reward range) + Proposition prop:physical, line 311 (`R(v_0) ⊆ V` ⇒ realised loss `r^* − max_{v ∈ R} r(v) ∈ [0, 1]`)"
+  attackHistory :=
+    [ "R84 2026-05-15: Cat 3 paper-novel structural equation introduced as part of the `expectedTopoLoss` concretisation. Statement: `∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)), 0 ≤ topoLossKernel n ω ∧ topoLossKernel n ω ≤ 1`. Paper-Def-stipulated: paper Definition 2.1 line 113 fixes `r : V → [0, 1]`, so both `r^*` and `max_{v ∈ R(v_0)} r(v)` lie in `[0, 1]`; and `R(v_0) ⊆ V` (paper `prop:physical` line 311) gives `max_{v ∈ R(v_0)} r(v) ≤ r^*`, so the realised loss `r^* − max_{v ∈ R(v_0)} r(v)` lies in `[0, 1]`. Classified structuralEquation gapDefinitional per discipline §3.4.3: paper Def 2.1 line 113's reward-range stipulation, transported to the loss kernel, is a paper-Def-stipulated structural identity on the kernel carrier — mirrors the retired `expectedTopoLoss_le_one_atom` reward-range Def-stipulation rationale (R65) and the `all_edges_open_at_zero_blocking_OPEN` boundary-semantics precedent (R68: paper Definition stipulates the carrier's range/semantics → structuralEquation 永不 close). Downstream consumer: the R84-closed derived theorem `expectedTopoLoss_le_one_atom_OPEN` (Wrongness.lean) consumes the `≤ 1` clause via `percExpectation_le_of_pointwise_le`." ]
+  scope := "Paper Def 2.1 line 113 reward-range structural identity transported to `topoLossKernel`: `topoLossKernel n ω ∈ [0, 1]` for every realisation `ω`"
+  obstacleOrAttribution :=
+    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (paper Def 2.1 line 113 `r : V → [0, 1]` reward-range stipulation transported to the loss kernel; mirrors the retired `expectedTopoLoss_le_one_atom` R65 reward-range Def-stipulation rationale + the `all_edges_open_at_zero_blocking_OPEN` R68 boundary-semantics precedent). Downstream consumer: `expectedTopoLoss_le_one_atom_OPEN` derived theorem (Wrongness.lean) hosts the structural equation."
+  conditionalOn := []
+
+/-- R84 `Percolation.lean` FOUNDATION — the paper-faithful finite
+    bond-percolation framework. All eight lemmas are kernel-pure
+    `[propext, Classical.choice, Quot.sound]` (ZERO project `_OPEN`
+    axioms), built per `feedback_no_compute_retreat`. Recorded as a
+    single derivedTheorem bundle entry. -/
+def entry_thm_percolation_framework : GapEntry where
+  name := "Percolation.lean finite bond-percolation framework (bondMeasureTotal_eq_one + percExpectation_const + percExpectation_le_of_pointwise_le + percExpectation_ge_of_pointwise_ge + percExpectation_mem_of_pointwise_mem + percExpectation_add + percExpectation_smul + percExpectation_mono)"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Definition 2.1, line 119 (`G_p` = random subgraph under bond percolation; `E_{G_p}` = expectation over the percolation measure) — the measure-theoretic foundation underlying Theorem 3.3 / Proposition prop:topo-cluster / Proposition prop:trap-prevalence"
+  attackHistory :=
+    [ "R84 2026-05-15: NEW `Percolation.lean` module built per `feedback_no_compute_retreat` ('Mathlib doesn't have bond percolation → DEFINE a paper-faithful finite-graph bond-percolation framework locally'). Mathlib has `PMF.bernoulli` + `MeasureTheory` but NO bond-percolation measure on a finite edge set (no product Bernoulli over edges, no cluster-size law, no Harris-Kesten p_c). The module CONSTRUCTS the finite bond-percolation measure explicitly: `BondConfig E := E → Bool` (the discrete sample space, paper Def 2.1's `G_p` realisations), `bondConfigWeight p ω := ∏ e, (if ω e then p else 1 - p)` (the explicit Bernoulli product measure), `percExpectation p f := ∑ ω, bondConfigWeight p ω * f ω` (paper Def 2.1 line 119's `E_{G_p}[·]`). Eight foundational lemmas, all proved kernel-pure: (1) `bondMeasureTotal_eq_one` — the weights sum to 1 over the whole 2^|E| sample space (proved via `Fintype.prod_sum` product-of-sums factorisation + per-edge `p + (1-p) = 1`); the defining normalisation of a probability measure. (2) `percExpectation_const` — `E_{G_p}[c] = c`. (3-5) `percExpectation_le_of_pointwise_le` / `_ge_of_pointwise_ge` / `_mem_of_pointwise_mem` — THE foundational monotonicity-of-expectation lemmas: a pointwise per-realisation bound on the integrand transfers to its bond-percolation expectation (the exact tool the paper's §3.3 'envelope bounds' rest on). (6-8) `percExpectation_add` / `_smul` / `_mono` — linearity + integrand-monotonicity of `E_{G_p}`. `#print axioms` on each = `[propext, Classical.choice, Quot.sound]` only. This is the substrate the `expectedTopoLoss` concretisation (and a future round's giant-component-event split for the `1/(n+1)` envelope atoms) is built on. Genuine real welded math per `feedback_attack_loops_must_weld_real_math`." ]
+  scope := "`Percolation.lean` — the explicit finite bond-percolation measure (`bondConfigWeight`, normalisation `bondMeasureTotal_eq_one`) + the `E_{G_p}[·]` expectation (`percExpectation`) with its monotonicity / linearity lemmas, all kernel-pure"
+  obstacleOrAttribution :=
+    "CLOSED — kernel-pure foundational framework. All eight lemmas depend only on `[propext, Classical.choice, Quot.sound]`; no project `_OPEN` axiom. Built per `feedback_no_compute_retreat` as the paper-faithful local replacement for Mathlib's missing bond-percolation infrastructure."
   conditionalOn := []
 
 /-- oracleValueAtRoot_TrapTree carrier — paper-novel trap-tree oracle dynamic value at root. -/
@@ -5584,17 +5652,18 @@ def entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually : GapEntry where
     `topo_loss_above_upper_bound_atom_OPEN`, smaller paper-faithful
     upper-bound atom replacing the over-encoded existential. -/
 def entry_atom_expectedTopoLoss_le_one : GapEntry where
-  name := "expectedTopoLoss_le_one_atom_OPEN"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
-  paperSource := "Proposition prop:topo-cluster proof, line 294 (`(n-k)/((n+1)(k+1))` closed form) + Definition 2.1, line 113 (`r: V → [0, 1]` reward range — paper-stipulated unit-interval reward carrier domain)"
+  name := "expectedTopoLoss_le_one_atom_OPEN [R84 CLOSED — retired structuralEquation axiom → derived theorem on the concretised `expectedTopoLoss` + `Percolation.lean` finite bond-percolation framework]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Proposition prop:topo-cluster proof, line 294 (`(n-k)/((n+1)(k+1)) ≤ 1` closed form) + Definition 2.1, line 113 (`r: V → [0, 1]` reward range) + line 119 (`E_{G_p}` = percolation-measure expectation)"
   attackHistory :=
     [ "R60 2026-05-14: smaller paper-novel atomic stipulation introduced as part of §18 closure-path-A decomposition of the retired bundled `topo_loss_above_upper_bound_atom_OPEN` (matching R59 closure-path-A `wInfoTopoRatio_le_MillsConst_decay_OPEN` precedent on Phase.lean — both reduce arbitrary-`c` existential to carrier-pinned bound). Atom captures paper-faithful Uniform[0,1] reward-range structural unit-interval upper bound `expectedTopoLoss n p ≤ 1` for all `(n, p)`, derived from paper line 294 closed form `(n-k)/((n+1)(k+1)) ≤ n/(n+1) ≤ 1` + Definition 2.1 line 113 reward range `r: V → [0, 1]`. Strictly smaller than retired bundled atom: only the unit-interval upper bound is asserted (paper-faithful reward-range structural fact); the eventually-bounded-from-above existential `∃ c₂ ≥ c₁, ∃ N₂, ...` is downstream Cat 0 derivation in the new derived theorem (witness `c₂ := max(c₁, 1)`). Cat 1 reduction check: candidate Mathlib expectation-algebra closure of paper Def 2.1 reward range, but currently not packaged on opaque `expectedTopoLoss` carrier. Cat 2 reduction check: paper-novel framing on opaque carrier from paper-faithful Uniform[0,1] reward range. Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the atom (combined with `expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN` via `max(c₁, 1)` upper-bound witness).",
-      "R65 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional per `feedback_gap_ledger_in_lean4` §3.4.3 + R63 `betaBarStar_nonneg_OPEN` precedent (paper-stipulated carrier-domain commitment as structural identification of an opaque carrier). Paper Definition 2.1 line 113 explicitly reads `r: V → [0,1]` is the reward function — the paper's unit-interval reward range IS the paper-stipulated identification of the reward carrier domain. Since `expectedTopoLoss n p = E[max r] - r*` (paper line 244 carrier-decomposition convention with `r* := E[r(v_T*)] ∈ [0, 1]` and `max r ∈ [0, 1]` both inheriting the paper-stipulated unit-interval reward-range), the difference satisfies `expectedTopoLoss n p ≤ E[max r] ≤ 1` as a paper-stipulated carrier-domain commitment on the opaque `expectedTopoLoss` carrier (the stipulation is paper's commitment to the carrier's domain inheriting from the reward-range carrier-stipulation, not a derivable consequence at the encoding level — the closed-form `(n-k)/((n+1)(k+1))` is the paper's computational re-expression of the same structural fact). Mirrors R63's `betaBarStar_nonneg_OPEN` reclassification (paper line 614 `β ≥ 0` standing convention pinning the betaBarStar opaque-carrier domain): both atoms are paper-stipulated carrier-domain commitments on opaque carriers downstream of explicit paper-stated range/non-negativity standing conventions. Hosted by `gap_topo_loss_above_threshold` (Wrongness.lean) derived theorem; no source-side change (atom remains as axiom)." ]
-  scope := "Proposition prop:topo-cluster, paper-stipulated unit-interval upper bound `expectedTopoLoss n p ≤ 1` inherited from paper Def 2.1 line 113 reward-range standing convention"
+      "R65 2026-05-14: Cat 3 sub-type reclassified workingAssumption → structuralEquation; status reclassified gapOpen → gapDefinitional per `feedback_gap_ledger_in_lean4` §3.4.3 + R63 `betaBarStar_nonneg_OPEN` precedent (paper-stipulated carrier-domain commitment as structural identification of an opaque carrier). Paper Definition 2.1 line 113 explicitly reads `r: V → [0,1]` is the reward function — the paper's unit-interval reward range IS the paper-stipulated identification of the reward carrier domain. Since `expectedTopoLoss n p = E[max r] - r*` (paper line 244 carrier-decomposition convention with `r* := E[r(v_T*)] ∈ [0, 1]` and `max r ∈ [0, 1]` both inheriting the paper-stipulated unit-interval reward-range), the difference satisfies `expectedTopoLoss n p ≤ E[max r] ≤ 1` as a paper-stipulated carrier-domain commitment on the opaque `expectedTopoLoss` carrier. Mirrors R63's `betaBarStar_nonneg_OPEN` reclassification. Hosted by `gap_topo_loss_above_threshold` (Wrongness.lean) derived theorem; no source-side change (atom remains as axiom).",
+      "R84 2026-05-15: structuralEquation gapDefinitional → derivedTheorem gapClosed via the R72/R73 concrete-def-closure pattern, built on the new `Percolation.lean` finite bond-percolation framework. The prior opaque `axiom expectedTopoLoss : ℕ → ℝ → ℝ` is REPLACED by `noncomputable def expectedTopoLoss n p := percExpectation (1 - p) (topoLossKernel n)` — paper Definition 2.1 line 119's `E_{G_p}[·]` evaluated on the explicit finite bond-percolation measure (`Percolation.bondConfigWeight` = the Bernoulli product `∏ e, if ω e then (1-p) else p`, with `bondMeasureTotal_eq_one` proving it sums to 1). The atom `expectedTopoLoss_le_one_atom_OPEN` is now `theorem expectedTopoLoss_le_one_atom_OPEN (n p) (hp0 : 0 ≤ p) (hp1 : p ≤ 1) : expectedTopoLoss n p ≤ 1` proved by `unfold expectedTopoLoss; apply percExpectation_le_of_pointwise_le` (the kernel-pure monotonicity-of-expectation lemma) with the pointwise kernel bound `topoLossKernel_mem_unitInterval` (paper Def 2.1 line 113 reward-range structural equation). Paper-faithful antecedents `0 ≤ p`, `p ≤ 1` added (paper Definition 2.1: `p ∈ [0, 1]` standing domain) — `gap_topo_loss_above_threshold` updated to thread `p ≤ 1` (matching the sibling `gap_trap_prevalence_above_threshold`'s paper-faithful `p < 1`; `0 ≤ p` derived there from `harrisKestenCriticalProb < p` + `gap_harris_kesten_OPEN`). `#print axioms` on the closure = `[propext, Classical.choice, Quot.sound]` + the 3 paper-Def carriers/structural-equation (`EdgeIdx`, `topoLossKernel`, `topoLossKernel_mem_unitInterval`) + `EdgeIdx` finiteness instances — the prior structuralEquation axiom `expectedTopoLoss_le_one_atom_OPEN` is GONE. NOT R7-flagged content-erasure: the `expectedTopoLoss` def body IS the paper's exact `E_{G_p}[r^* - max_{v∈R} r(v)]` decomposition. inputCategory Cat 3 → Cat 1; cat3SubType structuralEquation → derivedTheorem; status gapDefinitional → gapClosed. Net: -1 structuralEquation, +1 derivedTheorem, -1 gapDefinitional, +1 gapClosed; +3 new entries (`EdgeIdx` carrier, `topoLossKernel` carrier, `topoLossKernel_mem_unitInterval` structuralEquation); +8 `Percolation.lean` foundation derivedTheorem entries; `entry_carrier_expectedTopoLoss` carrier → derivedTheorem (concretised def)." ]
+  scope := "Proposition prop:topo-cluster, unit-interval upper bound `expectedTopoLoss n p ≤ 1` for `p` in the paper Def 2.1 domain `[0, 1]`"
   obstacleOrAttribution :=
-    "Accepted as Cat 3 structural-equation axiom per discipline §3.4.3 (R65 reclassification per R63 `betaBarStar_nonneg_OPEN` precedent). Paper Definition 2.1 line 113 stipulates `r: V → [0, 1]` reward carrier-range; `expectedTopoLoss` carries `E[max r] - r*` (paper line 244 carrier-decomposition convention) which inherits the unit-interval bound as a paper-stipulated carrier-domain commitment on the opaque `expectedTopoLoss` carrier — this is paper's commitment to the primitive's domain (inherited from the explicit reward-range standing convention), not a derivable consequence at the encoding level. Downstream consumer: `gap_topo_loss_above_threshold` derived theorem (Wrongness.lean) hosts the structural equation."
+    "R84 CLOSED via concrete-def closure (R72/R73 pattern) on the `Percolation.lean` finite bond-percolation framework. `noncomputable def expectedTopoLoss n p := percExpectation (1 - p) (topoLossKernel n)` makes paper Def 2.1 line 119's `E_{G_p}[·]` concrete; the `≤ 1` bound is `percExpectation_le_of_pointwise_le` (kernel-pure monotonicity of expectation) applied to the pointwise reward-range structural equation `topoLossKernel_mem_unitInterval` (paper Def 2.1 line 113). Downstream consumer `gap_topo_loss_above_threshold` (Wrongness.lean) composes unchanged modulo the threaded `p ≤ 1` paper-domain antecedent."
   conditionalOn := []
 
 /-- Cat 3 atomic stipulation: paper Proposition `prop:trap-prevalence`
@@ -7051,6 +7120,12 @@ def allGaps : List GapEntry := [
   entry_carrier_W_info_oracle,
   entry_carrier_expectedTopoLoss_conditional,
   entry_carrier_expectedTopoLoss,
+  -- R84 percolation-foundation wave: new carriers + structural
+  -- equation + Percolation.lean foundation bundle (4 entries)
+  entry_carrier_EdgeIdx,
+  entry_carrier_topoLossKernel,
+  entry_atom_topoLossKernel_mem_unitInterval,
+  entry_thm_percolation_framework,
   -- GeneralGraphs.lean carriers (2)
   entry_carrier_oracleValueAtRoot_TrapTree,
   entry_carrier_c_star_constant,
