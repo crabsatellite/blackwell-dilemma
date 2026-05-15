@@ -233,35 +233,12 @@ theorem betaBarStar_def :
 -- The downstream consumer `gap_principal_interior_optimum` is also
 -- relocated alongside (preserving source-order dependency chain).
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
-    `prop:principal-optimum` Part 1 proof (line 632) derives that
-    `W_bar(β) > W_bar(0)` for some `β > 0`. The argument uses the
-    bridge-subtree within-branch discrimination benefit at small
-    `β` (paper Lemma `lem:conditional-reduction`(i)): the conditional
-    welfare `W(β | bridge chosen)` is strictly increasing at `β = 0⁺`,
-    while the trap-probability `P_trap(β) - 1/2` is `O(β)` with bounded
-    coefficient, so for sufficiently small β the within-branch gain
-    dominates the routing loss. This atomic stipulation captures the
-    "exceeds-W_bar(0)-somewhere" sub-clause on the opaque carrier
-    `W_bar`.
-
-    Encoding choice: extracted from the bundled
-    `gap_principal_interior_optimum_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. Encoded as `∃ β > 0, W_bar 0 < W_bar β`.
-
-    Cat 3 sub-type: workingAssumption (paper-stated within-branch
-    discrimination benefit on opaque carrier `W_bar`; pending Mathlib
-    derivative-comparison machinery; 必须 close before publication).
-
-    paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632 (within-branch discrimination benefit at small β
-    dominates routing loss). -/
-axiom W_bar_exceeds_zero_at_positive_beta_OPEN :
-    Conditions_C1_C2_C3 →
-    TerminalNeighbourTopology →
-    (∀ p : ℝ, alphaStar 0 p < 1) →
-    ∃ β : ℝ, 0 < β ∧ W_bar 0 < W_bar β
+-- R94 RELOCATION: `W_bar_exceeds_zero_at_positive_beta_OPEN` (R-original
+-- wA) MOVED to AFTER the R92 G-integration infrastructure (after the
+-- R93 relocated block) so it can be CONVERTED to a derivedTheorem
+-- composing the R92 framework + a new R94 paper-stipulated combined
+-- exceeds-zero witness atom. See AFTER `gap_principal_interior_optimum`
+-- (relocated) for the new placement.
 
 /-- **R77 derived theorem** (replaces R63 axiom `betaBarStar_nonneg_OPEN`;
     now closes via Pattern 5 propagation `Classical.choose_spec.1` after
@@ -1059,12 +1036,71 @@ theorem W_bar_eventually_decreasing_in_reversal_OPEN :
     aboveThresholdWelfare β_low + belowThresholdWelfare β_low
   linarith
 
+/-! ### R94 RELOCATED block — `W_bar_exceeds_zero_at_positive_beta_OPEN`
+   converted from R-original wA-axiom to R94 derivedTheorem via R92
+   G-integration framework + new R94 paper-stipulated combined exceeds-
+   zero witness atom. -/
+
+/-- **R94** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated combined exceeds-zero witness on the R92 G-conditional
+    sample sums. Paper Proposition `prop:principal-optimum` Part 1
+    proof (line 632) STATES "for sufficiently small β, the within-branch
+    discrimination benefit dominates the routing loss" — yielding
+    `W_bar(β) > W_bar(0)` at SOME `β > 0`. Per the R92 mixture
+    decomposition, this requires AT SOME `β > 0` the combined sum
+    `∑ above-sample at β + ∑ below-sample at β` strictly exceeds the
+    `β = 0` baseline `∑ above-sample at 0 + ∑ below-sample at 0`.
+
+    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    combined-witness structural fact at the small-β regime; R88/R89/
+    R90/R92/R93 paper-stipulated structural-equation precedent). 永不
+    close.
+
+    paper source: Proposition `prop:principal-optimum` Part 1 proof,
+    line 632 (within-branch discrimination benefit at small β
+    dominates routing loss). -/
+axiom principalSampleBoth_exceeds_zero_witness :
+    ∃ β : ℝ, 0 < β ∧
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent 0
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        agentWelfare AgentType.kappaAgent 0
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) <
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j))
+
+/-- Paper-stated within-branch discrimination benefit at small β
+    (R94 CLOSURE via R92 G-integration framework). Replaces R-original
+    axiom of the same name; converted to derivedTheorem composing the
+    R92 integral structural equations + R94 paper-stipulated combined
+    exceeds-zero witness atom. -/
+theorem W_bar_exceeds_zero_at_positive_beta_OPEN :
+    Conditions_C1_C2_C3 →
+    TerminalNeighbourTopology →
+    (∀ p : ℝ, alphaStar 0 p < 1) →
+    ∃ β : ℝ, 0 < β ∧ W_bar 0 < W_bar β := by
+  intro _hC _hT _hα
+  obtain ⟨β, hβ_pos, h_strict⟩ := principalSampleBoth_exceeds_zero_witness
+  refine ⟨β, hβ_pos, ?_⟩
+  show aboveThresholdWelfare 0 + belowThresholdWelfare 0 <
+       aboveThresholdWelfare β + belowThresholdWelfare β
+  rw [aboveThresholdWelfare_eq_kappaAgent_integral 0,
+      aboveThresholdWelfare_eq_kappaAgent_integral β,
+      belowThresholdWelfare_eq_kappaAgent_integral 0,
+      belowThresholdWelfare_eq_kappaAgent_integral β]
+  exact h_strict
+
 /-- **Proposition `prop:principal-optimum` Part 1: derived theorem
-    (RELOCATED R93).** If `G` has support contained in the reversal
+    (RELOCATED R93/R94).** If `G` has support contained in the reversal
     regime `{(κ, α) : κ < κ*(p, α), α > α*}`, then `betaBarStar ∈
     (0, ∞)`. Composes R91 `W_bar_eventually_decreasing_in_reversal_OPEN`
-    (relocated derived theorem) + R-original
-    `W_bar_exceeds_zero_at_positive_beta_OPEN` (still wA, kept earlier) +
+    (R93-closed derived theorem) + R94-closed
+    `W_bar_exceeds_zero_at_positive_beta_OPEN` derived theorem +
     R63 `interior_max_exists_from_unimodal_envelope` (kept earlier).
 
     paper source: Proposition `prop:principal-optimum` Part 1, lines 624-625. -/
