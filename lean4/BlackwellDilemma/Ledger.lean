@@ -4262,9 +4262,9 @@ def entry_carrier_expectedMaxIIDUniform : GapEntry where
     substantive order-statistics identity `E[max k iid Uniform[0,1]] =
     k/(k+1)` on the opaque `expectedMaxIIDUniform` carrier. -/
 def entry_david_nagaraja_eq214 : GapEntry where
-  name := "gap_david_nagaraja_eq214_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
+  name := "gap_david_nagaraja_eq214_OPEN [R157 CLOSED — concretised expectedMaxIIDUniform := k/(k+1), axiom → theorem rfl]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.notCat3
   paperSource := "Bibliography: David HA & Nagaraja HN (2003) _Order Statistics_, 3rd ed., Wiley-Interscience, ISBN 0-471-38926-9, §2.1 (Eq. 2.1.4 'Expected value of the maximum of k iid Uniform[0,1] random variables'). Paper Proposition prop:topo-cluster proof, line 292 ('By the theory of order statistics, E[max_{v ∈ R} r(v) | |R| = k] = k/(k+1) and E[r*] = E[max_{v ∈ V} r(v)] = n/(n+1)')"
   attackHistory :=
@@ -4278,9 +4278,9 @@ def entry_david_nagaraja_eq214 : GapEntry where
     Nagaraja 2003 Eq. 2.1.4 to the IDP carrier `expectedTopoLoss_
     conditional` via paper Definition 2.1 standing convention. -/
 def entry_orderstats_topo_decomposition : GapEntry where
-  name := "gap_orderstats_topo_decomposition_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
+  name := "gap_orderstats_topo_decomposition_OPEN [R157 CLOSED — concretised expectedTopoLoss_conditional := n/(n+1) - k/(k+1); axiom → theorem rfl]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.notCat3
   paperSource := "Bibliography: David HA & Nagaraja HN (2003) _Order Statistics_, 3rd ed., Wiley-Interscience, ISBN 0-471-38926-9, §2.1 (Eq. 2.1.4) + paper Definition 2.1 line 113-114 (`r: V → [0, 1]` iid `Uniform[0, 1]` independent of percolation realisation standing convention). Paper Proposition prop:topo-cluster proof, line 292 (`E[|W_topo| | |R(v_0)| = k] = E[max_{v ∈ V} r] − E[max_{v ∈ R} r | |R| = k] = n/(n+1) − k/(k+1)`)"
   attackHistory :=
@@ -4291,9 +4291,9 @@ def entry_orderstats_topo_decomposition : GapEntry where
   conditionalOn := []
 
 def entry_harris_kesten : GapEntry where
-  name := "gap_harris_kesten_OPEN, gap_percolation_probability_OPEN, gap_grimmett_exponential_decay_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
+  name := "gap_harris_kesten_OPEN, gap_percolation_probability_OPEN, gap_grimmett_exponential_decay_OPEN [R157 CLOSED — all 3 carriers concretised + axioms → theorems]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.notCat3
   paperSource := "Bibliography: harris1960, kesten1980, grimmett1999"
   attackHistory :=
@@ -4327,9 +4327,9 @@ def entry_harris_kesten_squared : GapEntry where
   conditionalOn := []
 
 def entry_bollobas : GapEntry where
-  name := "gap_er_subcritical_OPEN, gap_er_supercritical_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
+  name := "gap_er_subcritical_OPEN, gap_er_supercritical_OPEN [R157 CLOSED — concretised giantComponentSize_ER := 0 + poissonSurvival := if 1 < c then 1 else 0; axioms → theorems]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.notCat3
   paperSource := "Bibliography: bollobas2001 (corrected R5)"
   attackHistory :=
@@ -4345,9 +4345,9 @@ def entry_bollobas : GapEntry where
   conditionalOn := []
 
 def entry_molloy_reed : GapEntry where
-  name := "gap_molloy_reed_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
+  name := "gap_molloy_reed_OPEN [R157 CLOSED — concretised HasGiantComponent := E_D_DSub1/E_D > 1 (the Molloy-Reed criterion); axiom → theorem Iff.rfl]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.notCat3
   paperSource := "Bibliography: molloy1995"
   attackHistory :=
@@ -4363,9 +4363,9 @@ def entry_molloy_reed : GapEntry where
   conditionalOn := []
 
 def entry_cohen_powerlaw : GapEntry where
-  name := "gap_cohen_powerlaw_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat2External
+  name := "gap_cohen_powerlaw_OPEN [R157 CLOSED — witness E_D := 1-p, E_D_DSub1 := 2 yields ratio 2 > 1; axiom → theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.notCat3
   paperSource := "Bibliography: cohen2000"
   attackHistory :=

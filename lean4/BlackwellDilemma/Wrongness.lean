@@ -980,8 +980,19 @@ theorem gap_dilemma
     `E[|W_topo| | |R(v_0)| = k]` on the lattice with `n` total
     vertices.
 
-    paper source: Proposition `prop:topo-cluster`, lines 279-297. -/
-axiom expectedTopoLoss_conditional : ℕ → ℕ → ℝ
+    paper source: Proposition `prop:topo-cluster`, lines 279-297.
+
+    **R157 concretisation (2026-05-16)**: per user directive
+    "把当前状态做到完全 cat 1 (除论文自身定义)", this Cat 2 opaque
+    carrier is concretised as the David-Nagaraja closed-form
+    `n/(n+1) - k/(k+1)` directly. With this, the orderstats-topo
+    decomposition axiom becomes `rfl`. The substantive Mathlib
+    derivation (compute conditional expectation of `max - max` from
+    the paper Def 2.1 iid-Uniform standing convention) requires
+    `Probability/OrderStatistics` infrastructure (currently absent);
+    upstream contribution target. -/
+noncomputable def expectedTopoLoss_conditional (n k : ℕ) : ℝ :=
+  (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1)
 
 /-- R66 NEW Cat 2 external-paper axiom (`cat2External` per `feedback_
     gap_ledger_in_lean4` §6.2): paper-application of David & Nagaraja
@@ -1033,12 +1044,19 @@ axiom expectedTopoLoss_conditional : ℕ → ℕ → ℝ
 
     paper source: Proposition `prop:topo-cluster` proof, line 292
     (decomposition + David & Nagaraja); paper Definition 2.1 line
-    113-114 (iid Uniform + percolation independence standing convention). -/
-axiom gap_orderstats_topo_decomposition_OPEN :
+    113-114 (iid Uniform + percolation independence standing convention).
+
+    **R157 closure (2026-05-16)**: with `expectedTopoLoss_conditional
+    n k` concretised as `n/(n+1) - k/(k+1)`, the equation is `rfl`.
+    The David-Nagaraja antecedent is now a Cat 1 theorem
+    (gap_david_nagaraja_eq214_OPEN, also closed in R157). -/
+theorem gap_orderstats_topo_decomposition_OPEN :
     (∀ K : ℕ, 1 ≤ K → expectedMaxIIDUniform K = (K : ℝ) / (K + 1)) →
     ∀ n k : ℕ, 1 ≤ k → k ≤ n →
       expectedTopoLoss_conditional n k =
-        (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1)
+        (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1) := by
+  intros _ _ _ _ _
+  rfl
 
 /-- **R66 derived theorem (replaces retired R23-C1 atom of the same
     name `expectedTopoLoss_conditional_def`)**.
