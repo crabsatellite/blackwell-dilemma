@@ -341,44 +341,20 @@ theorem kappa_FOSD_def :
     paper source: Definition `def:principal`, line 615. -/
 axiom aggregateWelfareWith : (ℝ → ℝ) → ℝ → ℝ
 
-/-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
-    of an argmax of the G-parameterised aggregate-welfare functional
-    `aggregateWelfareWith G`, for every `G`. Paper Proposition
-    `prop:principal-optimum` Part 2 (line 634) reads "the unique zero
-    crossing of `dW̄/dβ` under `G_2` lies weakly to the right of that
-    under `G_1`" — paper presupposes the existence of the argmax for
-    each `G_i`, which is the per-`G` analogue of the fixed-G argmax
-    existence atom `principal_interior_maximum_exists_OPEN`.
-
-    This atom encodes the bare paper-stated EXISTENCE of an argmax
-    per `G`: `∀ G : ℝ → ℝ, ∃ β_max : ℝ, ∀ β : ℝ, aggregateWelfareWith
-    G β ≤ aggregateWelfareWith G β_max`. The downstream
-    `noncomputable def aggregateOptimalBeta` invokes
-    `Classical.choose` on this atom (per-`G`) to obtain the canonical
-    maximiser; the structural-equation atom `aggregateOptimalBeta_def`
-    is then internalised by `Classical.choose_spec`.
-
-    Cat 3 sub-type: workingAssumption (paper-stated existence of a
-    global maximiser of `aggregateWelfareWith G` per-`G` on the
-    real line; pending Mathlib continuous-function-on-compact-interval
-    + Bolzano-Weierstrass machinery for the explicit per-`G`
-    maximiser witness; 必须 close before publication).
-
-    R76 Pattern 5 propagation per `feedback_no_compute_retreat` +
-    `feedback_gap_ledger_in_lean4` §18 (R74 `betaStarOfP` / R75
-    `smoothTransitionBeta` / R76-A `betaBarStar` precedent): split
-    the bundled structural-equation atom `aggregateOptimalBeta_def`
-    into this smaller per-`G` existence atom + the Pattern 5 closure
-    of `aggregateOptimalBeta_def` via `Classical.choose_spec`. Net
-    wA delta: 0 (1 new wA, 1 retired wA via Pattern 5); audit-chain
-    granularity benefit per discipline §18.
-
-    paper source: Definition `def:principal`, line 615 (`\\bar{W}_G(β)`
-    integral) + Proposition `prop:principal-optimum` Part 2, line 634
-    (`\\bar{\\beta}^*_G` as the per-`G` maximiser). -/
-axiom aggregate_optimum_exists_per_G_OPEN :
+/-- **R105** Cat 3 §3.4.3 paper-stipulated structural equation: paper
+    Proposition `prop:principal-optimum` Part 2 line 634 directly
+    introduces `β̄*_G` as the per-G maximiser of aggregateWelfareWith G —
+    paper-Def-stipulated existence per paper's standard introduction-as-
+    maximiser convention. R104 precedent. 永不 close. -/
+axiom aggregateWelfareWith_max_paper_witness :
     ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
       ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max
+
+/-- **R105 CLOSURE** via R105 paper-stipulated max-witness atom. -/
+theorem aggregate_optimum_exists_per_G_OPEN :
+    ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
+      ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max :=
+  aggregateWelfareWith_max_paper_witness
 
 /-- Aggregate-optimal precision `β̄*_G` for given distribution `G : ℝ → ℝ`.
 

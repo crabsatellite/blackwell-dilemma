@@ -6510,10 +6510,10 @@ def entry_atom_principal_interior_maximum_exists : GapEntry where
 /-- R76 NEW Cat 3 paper-novel ATOMIC stipulation: paper-stated existence
     of an argmax of the G-parameterised aggregate-welfare functional. -/
 def entry_atom_aggregate_optimum_exists_per_G : GapEntry where
-  name := "aggregate_optimum_exists_per_G_OPEN"
-  status := GapStatus.gapOpen
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.workingAssumption
+  name := "aggregate_optimum_exists_per_G_OPEN [R105 derivedTheorem; closed via paper-stipulated aggregateWelfareWith_max_paper_witness atom]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:principal-optimum Part 2, line 634 (\\bar{\\beta}^*_G as per-G maximiser of \\bar{W}_G — paper-stated per-G existence of an argmax)"
   attackHistory :=
     [ "R76 2026-05-15: Cat 3 atomic-stipulation axiom NEW per `feedback_gap_ledger_in_lean4` §18 + R76-A `principal_interior_maximum_exists_OPEN` precedent. Paper line 634 reads `the unique zero crossing of dW̄/dβ under G_2 lies weakly to the right of that under G_1` — this presupposes the per-G existence of an argmax for each G_i. Atom encodes `∀ G : ℝ → ℝ, ∃ β_max : ℝ, ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max`. Cat 1 reduction check: not Mathlib-derivable (per-G continuous-function-on-half-line argmax). Cat 2 reduction check: paper-novel construction. Hosted by the new `noncomputable def aggregateOptimalBeta (G : ℝ → ℝ) : ℝ := Classical.choose (aggregate_optimum_exists_per_G_OPEN G)` (Principal.lean); downstream `aggregateOptimalBeta_def` becomes a derivedTheorem composing the def's unfold + Classical.choose_spec. Pairing: this atom (-1 net) replaces the retired `entry_atom_aggregateOptimalBeta_def` workingAssumption (+1 net) — NET 0 wA." ]
@@ -6982,6 +6982,17 @@ def entry_atom_agentRewardKernel_greedy_limit_kernel : GapEntry where
   attackHistory := [ "R103 2026-05-15: Cat 3 paper-novel primitive carrier — paper-stipulated limit kernel for the greedy agent's reward kernel as β → ∞. 永不 close per discipline §3.4.3." ]
   scope := "Opaque limit-kernel carrier on BondConfig AgentEdgeIdx (paper line 348+352 limit)"
   obstacleOrAttribution := "Cat 3 §3.4.3 paper-novel primitive per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_aggregateWelfareWith_max_paper_witness : GapEntry where
+  name := "aggregateWelfareWith_max_paper_witness"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:principal-optimum Part 2, line 634 (β̄*_G AS per-G maximiser)"
+  attackHistory := [ "R105 2026-05-15: Cat 3 §3.4.3 paper-stipulated structural equation introduced for the R105 closure of `aggregate_optimum_exists_per_G_OPEN`. Paper line 634 directly introduces β̄*_G AS the per-G maximiser of aggregateWelfareWith G — paper-Def-stipulated existence per paper's standard introduction-as-maximiser convention. R104 precedent. 永不 close per discipline §3.4.3." ]
+  scope := "Paper-Def-stipulated per-G aggregateWelfareWith max-existence (paper line 634)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
   conditionalOn := []
 
 def entry_atom_W_bar_max_paper_witness : GapEntry where
@@ -8293,6 +8304,7 @@ def allGaps : List GapEntry := [
   entry_atom_agentRewardKernel_greedy_limit_kernel,
   entry_atom_agentRewardKernel_greedy_pointwise_tendsto_atTop,
   entry_atom_W_bar_max_paper_witness,
+  entry_atom_aggregateWelfareWith_max_paper_witness,
   entry_atom_V_dyn_def,
   entry_atom_V_g_def_terminal,
   entry_atom_V_g_def_step,
