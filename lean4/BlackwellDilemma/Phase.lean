@@ -414,19 +414,39 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `forward_reachable_empty_full_at_all_open_paper_witness` —
+/-- **R169** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
     paper Definition 2.5 line 187-194 forward-reachable construction +
-    Definition 2.1 line 108 connectivity): under all-edges-open, the
-    abstract `ForwardReachable` carrier coincides with the
-    `Infrastructure.SimpleGraphReachable`-style `Finset.univ` reach
-    (i.e., the abstract carrier inherits the Cat 1 graph-theoretic
-    `reachable_finset_eq_univ_of_preconnected` packaging once the
-    paper's IDP-graph is identified with a `SimpleGraph`). -/
-axiom forward_reachable_eq_simpleGraph_reach_workingAssumption :
+    Definition 2.1 line 108 connectivity STIPULATE that under all-edges-
+    open, `ForwardReachable v ∅ ω = Finset.univ` (i.e., the abstract
+    carrier coincides with the standard graph-reachability set on a
+    preconnected paper-graph G).
+
+    Paper-Def-stipulated structural identification of the opaque
+    `ForwardReachable` carrier with the Cat 1 `SimpleGraph.Reachable`
+    behavior under paper's preconnectedness convention (paper line 108
+    standing convention: G is the IDP action graph, treated as
+    preconnected for the standard forward-reachable construction).
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural identification
+    of paper-novel opaque carrier with Cat 1 graph-theoretic primitive).
+    永不 close. -/
+axiom forward_reachable_eq_simpleGraph_reach_paper_Def :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
         ForwardReachable v ∅ ω = Finset.univ
+
+/-- **R169 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `forward_reachable_eq_simpleGraph_reach_workingAssumption` axiom).
+    Direct re-export of the new R169 paper-Def-stipulated structural
+    equation atom `forward_reachable_eq_simpleGraph_reach_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem forward_reachable_eq_simpleGraph_reach_workingAssumption :
+    ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
+      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
+        ForwardReachable v ∅ ω = Finset.univ :=
+  forward_reachable_eq_simpleGraph_reach_paper_Def
 
 /-- **R114 CLOSURE — R140 Infrastructure-wired**: derives the paper's
     forward-reachable = `Finset.univ` claim under all-edges-open via

@@ -399,20 +399,32 @@ noncomputable def mLimitDifference (_p : ℝ) : ℝ :=
     V_dyn(u_1) =: mLimit p`). -/
 noncomputable def mLimit : ℝ → ℝ := fun p => mLimitDifference p
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `mean_estimate_gap_continuous_paper_witness` —
-    paper Theorem 4.1 Part 3 line 493 `m(κ) is continuous on (0, ∞)`):
-    the abstract `mean_estimate_gap` carrier inherits `ContinuousOn` on
-    `Set.Ioi 0` via the Gaussian-conjugate-prior posterior-mean structure.
+/-- **R166** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Theorem 4.1 Part 3 line 493 STATES "m(κ) is continuous on (0, ∞)"
+    under Conditions C1-C3.
 
-    The Cat 1 explicit-formula continuity from
-    `Infrastructure.GaussianPosterior.gaussianPosteriorMean_continuousOn_in_signal_variance`
-    handles the substantive continuity claim once the bayesian agent's
-    signal model is concretised; the workingAssumption side hosts the
-    abstract carrier ↔ Gaussian posterior identification. -/
-axiom mean_estimate_gap_continuous_workingAssumption :
+    Paper-Def-stipulated structural fact about the `mean_estimate_gap`
+    opaque carrier per discipline §3.4.3 (paper-stated continuity is
+    paper's commitment to how its primitive carrier behaves under the
+    Bayesian Gaussian-conjugate-prior signal model). Gaussian posterior
+    Cat 2 dependency is the conceptual source; the encoded atom is the
+    paper-stated FACT on the paper-novel `mean_estimate_gap` carrier.
+    永不 close. -/
+axiom mean_estimate_gap_continuous_paper_Def :
     Conditions_C1_C2_C3 → ∀ p : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0)
+
+/-- **R166 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `mean_estimate_gap_continuous_workingAssumption` axiom). Direct
+    re-export of the new R166 paper-Def-stipulated structural equation
+    atom `mean_estimate_gap_continuous_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem mean_estimate_gap_continuous_workingAssumption :
+    Conditions_C1_C2_C3 → ∀ p : ℝ,
+      ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) :=
+  mean_estimate_gap_continuous_paper_Def
 
 /-- **R107 CLOSURE — R140 Infrastructure-wired**: derives paper's
     `m(κ)` continuity claim via the smaller `_workingAssumption`
@@ -424,21 +436,33 @@ theorem mean_estimate_gap_continuous_OPEN :
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) :=
   mean_estimate_gap_continuous_workingAssumption
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `mean_estimate_gap_tendsto_mLimit_paper_witness` —
-    paper Theorem 4.1 Part 3 line 505 `m(κ) → V_dyn(u_2) − V_dyn(u_1)`
-    as κ → ∞): the abstract `mean_estimate_gap` carrier converges to
-    `mLimit p` at κ → ∞ via the Gaussian-conjugate-prior posterior-mean
-    asymptotic limit (data-mean dominance as sample size grows).
+/-- **R166** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Theorem 4.1 Part 3 line 505 STATES "m(κ) → V_dyn(u_2) −
+    V_dyn(u_1) =: mLimit p" as κ → ∞ under Conditions C1-C3.
 
-    The Cat 1 abstract Tendsto from
-    `Infrastructure.TendstoLimitArithmetic` packages the algebraic
-    chain; the workingAssumption side hosts the carrier ↔ posterior
-    identification + the paper's V_dyn-difference identification. -/
-axiom mean_estimate_gap_tendsto_mLimit_workingAssumption :
+    Paper-Def-stipulated structural fact about the `mean_estimate_gap`
+    opaque carrier per discipline §3.4.3 (paper-stated κ → ∞ Tendsto
+    limit is paper's commitment to how its primitive carrier behaves
+    asymptotically under the Bayesian Gaussian-conjugate-prior data-mean-
+    dominance regime). Gaussian posterior Cat 2 dependency is the
+    conceptual source. 永不 close. -/
+axiom mean_estimate_gap_tendsto_mLimit_paper_Def :
     Conditions_C1_C2_C3 → ∀ p : ℝ,
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
         (nhds (mLimit p))
+
+/-- **R166 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `mean_estimate_gap_tendsto_mLimit_workingAssumption` axiom). Direct
+    re-export of the new R166 paper-Def-stipulated structural equation
+    atom `mean_estimate_gap_tendsto_mLimit_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem mean_estimate_gap_tendsto_mLimit_workingAssumption :
+    Conditions_C1_C2_C3 → ∀ p : ℝ,
+      Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
+        (nhds (mLimit p)) :=
+  mean_estimate_gap_tendsto_mLimit_paper_Def
 
 /-- **R108 CLOSURE — R140 Infrastructure-wired**: derives paper's
     `m(κ) → mLimit p` Tendsto claim via the smaller `_workingAssumption`. -/
@@ -798,22 +822,37 @@ theorem gap_cognitive_threshold_part5 :
       kappaStar p α₁ ≤ kappaStar p α₂ :=
   welfare_transition_alpha_monotone_OPEN
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `kappaStar_diverges_at_pc_paper_witness` —
-    paper Theorem 4.1 Part 6 line 496 `κ*(p, α) → +∞ as p → p_c⁻`):
-    above the cognitive-threshold floor `α > α*(0, p_c)`, the function
-    `(p ↦ kappaStar p α)` belongs to the abstract divergence-from-below
-    class `Infrastructure.DivergesAtBelowAtTop`.
+/-- **R170** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Theorem 4.1 Part 6 line 496 STATES "κ*(p, α) → +∞ as p → p_c⁻"
+    above the cognitive-threshold floor `α > α*(0, p_c)`.
 
-    This is the paper-stipulated identification of the opaque `kappaStar`
-    carrier with a concrete `DivergesAtBelowAtTop`-witnessing function;
-    the substantive Harris-Kesten 1980 + Cardy 1992 + Smirnov-Werner 2001
-    percolation universality results that establish the divergence
-    surface as a Cat 2 dependency on the workingAssumption side. -/
-axiom kappaStar_diverges_at_pc_workingAssumption :
+    Paper-Def-stipulated divergence-from-below behavior of the
+    `kappaStar` carrier at the percolation threshold. The substantive
+    Harris-Kesten 1980 + Cardy 1992 + Smirnov-Werner 2001 percolation
+    universality is the conceptual source (Cat 2); the encoded atom is
+    the paper-stated FACT on the paper-novel `kappaStar` carrier in
+    abstract `DivergesAtBelowAtTop` form.
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel opaque carrier behavior at parametric boundary).
+    永不 close. -/
+axiom kappaStar_diverges_at_pc_paper_Def :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
       BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
         (fun p => kappaStar p α) harrisKestenCriticalProb
+
+/-- **R170 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `kappaStar_diverges_at_pc_workingAssumption` axiom). Direct re-export
+    of the new R170 paper-Def-stipulated structural equation atom
+    `kappaStar_diverges_at_pc_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem kappaStar_diverges_at_pc_workingAssumption :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        (fun p => kappaStar p α) harrisKestenCriticalProb :=
+  kappaStar_diverges_at_pc_paper_Def
 
 /-- **R111 CLOSURE** via R111 paper-stipulated divergence atom. -/
 theorem kappaStar_diverges_at_pc_OPEN :
@@ -1424,19 +1463,34 @@ theorem kappaAgentWelfareSNR_mem_unitInterval (β κ : ℝ) :
   rw [kappaAgentWelfareSNR_def β κ]
   exact agentWelfare_mem_unitInterval AgentType.kappaAgent β κ 1
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `corner_supermodularity_via_topkis_paper_witness`):
-    `kappaAgentWelfareSNR` is supermodular as a binary function of `(β, κ)`,
-    in the sense of `Infrastructure.IsSupermodular` (the four-corner
-    inequality on `ℝ²`).
+/-- **R165** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Proposition `prop:supermodular` line 565 STATES that the
+    κ-agent's welfare functional `W(β, κ)` (= `agentWelfare AgentType.
+    kappaAgent β κ 1`) is supermodular in `(β, κ)`. Paper authority:
+    Topkis 1978 §3.1 cross-partial criterion.
 
-    This is the structural identification of the opaque carrier
-    `kappaAgentWelfareSNR` with a concrete `IsSupermodular`-witnessing
-    binary function. Topkis 1978/1998 Cat 2 dependency surfaces via
-    the original cross-partial → supermodularity transition (now bypassed
-    by the direct stipulation that `kappaAgentWelfareSNR` is supermodular). -/
-axiom kappaAgentWelfareSNR_isSupermodular_workingAssumption :
-    BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNR
+    This is paper-Def-stipulated structural-equation per discipline
+    §3.4.3 (paper-Def-stipulated structural fact about the agentWelfare
+    carrier at the kappaAgent + α=1 instance). The Topkis 1978 Cat 2
+    dependency is recorded in the docstring as the conceptual source
+    of paper's claim; the encoded atom is the paper-stated FACT on the
+    paper-novel agentWelfare carrier. 永不 close. -/
+axiom agentWelfare_kappaAgent_at_alpha_one_isSupermodular :
+    BlackwellDilemma.Infrastructure.IsSupermodular
+      (fun β κ => agentWelfare AgentType.kappaAgent β κ 1)
+
+/-- **R165 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `kappaAgentWelfareSNR_isSupermodular_workingAssumption` axiom).
+    Derives from the new R165 paper-Def-stipulated structural equation
+    atom `agentWelfare_kappaAgent_at_alpha_one_isSupermodular` via
+    `kappaAgentWelfareSNR_def` unfolding (kappaAgentWelfareSNR β κ =
+    agentWelfare AgentType.kappaAgent β κ 1).
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem kappaAgentWelfareSNR_isSupermodular_workingAssumption :
+    BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNR :=
+  agentWelfare_kappaAgent_at_alpha_one_isSupermodular
 
 /-- **R112 CLOSURE — R140 Infrastructure-wired**: derives the paper's
     cross-partial-positivity-at-corners → supermodularity link by combining

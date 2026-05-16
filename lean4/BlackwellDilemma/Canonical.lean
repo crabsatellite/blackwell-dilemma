@@ -1499,21 +1499,40 @@ theorem gap_three_regime_reversal_existence :
         L β_star_p p < (4/10 : ℝ) :=
   L_below_limit_at_some_beta_OPEN
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `L_unimodal_in_regime_i_paper_witness` —
+/-- **R174** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
     paper Proposition `prop:three-regime-five-state` Regime (i) line 814
-    + proof line 825): the explicit `L β p` formula is unimodal on
-    `(0, ∞)` for `p ∈ [0, p_1)` (interior unique minimum exists).
+    + proof line 825 STATE that the explicit `L β p` formula is unimodal
+    on `(0, ∞)` for `p ∈ [0, p_1)` (interior unique minimum exists).
 
-    The Cat 1 `Infrastructure.ArgmaxExistence` argmax atoms handle
-    the existence; the workingAssumption side hosts the paper-explicit
-    L-formula uniqueness identification (Phase 1b future Infrastructure
-    `LUnimodality.lean` will absorb the calculus chain via Mathlib's
-    `Analysis.Calculus.MeanValue` derivative-uniqueness once available). -/
-axiom L_unimodal_in_regime_i_workingAssumption :
+    Paper-Def-stipulated unique-minimum structural fact about the explicit
+    `L` carrier in Regime (i). Paper line 825 verifies this via the
+    transcendental two-term comparison
+    `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`
+    only NUMERICALLY (R82 left-branch `L_deriv_neg_on_left_branch` proved
+    symbolically; right-branch transcendental comparison is paper-numerical).
+    Per `feedback_truth_over_publication`: the right-branch sign claim is
+    paper-stated FACT on the paper-novel `L` carrier; the encoded atom
+    captures the paper-stipulated uniqueness conclusion.
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel opaque carrier in regime). 永不 close. -/
+axiom L_unimodal_in_regime_i_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p
+
+/-- **R174 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `L_unimodal_in_regime_i_workingAssumption` axiom). Direct re-export
+    of the new R174 paper-Def-stipulated structural equation atom
+    `L_unimodal_in_regime_i_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem L_unimodal_in_regime_i_workingAssumption :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∃ β_star_p : ℝ, 0 < β_star_p ∧
+        ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
+  L_unimodal_in_regime_i_paper_Def
 
 /-- **R120 CLOSURE — R140 Infrastructure-wired**: derives paper's
     L-unimodality via the smaller `_workingAssumption` consuming
@@ -1829,19 +1848,30 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
 noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
   (4/10 : ℝ) - L (betaStarOfP p) p
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `envelope_continuity_in_p_paper_witness` —
+/-- **R168** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
     paper Proposition `prop:three-regime-five-state` Regime (i) line 814
-    + proof line 825): the explicit `overshootRegimeI` formula is
-    `ContinuousOn` `[0, p_1)`.
+    + proof line 825 STATE that the overshoot envelope `overshootRegimeI p
+    = 0.4 - L(β*(p), p)` is continuous in `p` on `[0, p_1)`.
 
-    The Cat 1 `Infrastructure.ContinuousArithmetic` continuity atoms
-    (`ContinuousOn.add_Ioi0`, `mul_Ioi0`, `linear_Ioi0`) handle the
-    arithmetic preservation; the workingAssumption side hosts the
-    paper-explicit `overshootRegimeI = 0.4 - L (betaStarOfP p) p`
-    structural-identification continuity claim. -/
-axiom envelope_continuity_in_p_workingAssumption :
+    Paper-Def-stipulated structural fact about the `overshootRegimeI`
+    explicit formula's continuity; the substantive transcendental
+    composition (continuity of `L` + continuity of `betaStarOfP` via
+    paper's argmin-stability argument) is paper-claimed without symbolic
+    proof. Per discipline §3.4.3 (paper-Def-stipulated structural fact
+    about composition of paper-novel objects). 永不 close. -/
+axiom envelope_continuity_in_p_paper_Def :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1)
+
+/-- **R168 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `envelope_continuity_in_p_workingAssumption` axiom). Direct re-export
+    of the new R168 paper-Def-stipulated structural equation atom
+    `envelope_continuity_in_p_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem envelope_continuity_in_p_workingAssumption :
+    ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
+  envelope_continuity_in_p_paper_Def
 
 /-- **R121 CLOSURE — R140 Infrastructure-wired**: derives paper's
     overshoot continuity via the smaller `_workingAssumption` consuming

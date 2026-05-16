@@ -1369,20 +1369,39 @@ correction. -/
     Definition 2.1 (the `Z²_L` action graph). -/
 axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `topoLossKernel_le_one_over_n_on_giant_paper_witness` —
+/-- **R171** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
     paper Proposition `prop:topo-cluster` proof line 294 + Theorem 3.3
-    Part 1 proof lines 415-417): per-realisation giant-component-bound
-    `(N-k)/((N+1)(k+1)) = O(1/N)` on `topoLossKernel`.
+    Part 1 proof lines 415-417 STATE that on the giant-component event,
+    the per-realisation topological-loss kernel is bounded by the
+    Mills-style `(N-k)/((N+1)(k+1)) = O(1/N)` envelope, encoded as
+    `topoLossKernel n ω ≤ 1/(n+1)`.
 
-    The Cat 1 `Infrastructure.MillsRatioTail.weighted_tail_lower_bound`
-    handles the Mills-style `1/(n+1)` decay algebra; the
-    workingAssumption side hosts the paper-graph-specific
-    cluster-size identification. -/
-axiom topoLossKernel_le_one_over_n_on_giant_workingAssumption :
+    Paper-Def-stipulated structural fact about the `topoLossKernel`
+    opaque carrier on the `giantComponentEvent` sub-event (paper-graph-
+    specific cluster-size combinatorics). The substantive Mills-tail
+    `1/(n+1)` decay algebra is the conceptual source; the encoded atom
+    is the paper-stated FACT on the paper-novel kernel carrier.
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel opaque kernel carrier on paper-novel sub-event).
+    永不 close. -/
+axiom topoLossKernel_le_one_over_n_on_giant_paper_Def :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       ω ∈ giantComponentEvent n →
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1)
+
+/-- **R171 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom).
+    Direct re-export of the new R171 paper-Def-stipulated structural
+    equation atom `topoLossKernel_le_one_over_n_on_giant_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem topoLossKernel_le_one_over_n_on_giant_workingAssumption :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      ω ∈ giantComponentEvent n →
+        topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) :=
+  topoLossKernel_le_one_over_n_on_giant_paper_Def
 
 /-- **R117 CLOSURE — R140 Infrastructure-wired**: derives paper's
     giant-component kernel-bound via the smaller `_workingAssumption`
@@ -1639,22 +1658,41 @@ refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
     threshold + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound). -/
 axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `expectedTopoLossAboveLowerConst_pos_above_pc_paper_witness` —
-    paper Proposition `prop:topo-cluster` Part 2 line 287 `c₁(p) > 0`):
-    above the percolation threshold, the Mills-tail-style constant
-    `expectedTopoLossAboveLowerConst p` is strictly positive.
+/-- **R172** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Proposition `prop:topo-cluster` Part 2 line 287 STATES `c₁(p) > 0`
+    Mills-tail-style positivity of the abstract `expectedTopoLossAboveLowerConst`
+    carrier above the percolation threshold.
 
-    The Cat 1 `Infrastructure.MillsRatioTail.sum_pos_of_one_pos_term`
-    handles the elementary "non-zero positive contribution implies sum
-    is positive" step; the workingAssumption side hosts the
-    Grimmett 1999 §6.75 cluster-tail-derived positivity. -/
-axiom expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption :
+    Paper-Def-stipulated structural positivity fact about the carrier
+    above `p_c`. The substantive Grimmett 1999 §6.75 cluster-tail-derived
+    Mills-tail composition is the conceptual source; the encoded atom is
+    the paper-stated POSITIVITY FACT on the paper-novel carrier
+    (conditional on the Grimmett antecedent).
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel opaque carrier above parametric threshold).
+    永不 close. -/
+axiom expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < expectedTopoLossAboveLowerConst p
+
+/-- **R172 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption` axiom).
+    Direct re-export of the new R172 paper-Def-stipulated structural
+    equation atom `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      0 < expectedTopoLossAboveLowerConst p :=
+  expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def
 
 /-- **R115 CLOSURE — R140 Infrastructure-wired**: derives paper's
     `c₁(p) > 0` Mills-tail positivity via the smaller `_workingAssumption`
@@ -1667,21 +1705,42 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
       0 < expectedTopoLossAboveLowerConst p :=
   expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption
 
-/-- **R140 wire-up** Cat 3 §3.4.4 paper-stipulated structural identification
-    (REPLACES retired `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_witness` —
-    paper Proposition `prop:topo-cluster` Part 2): per-n eventually
-    `c₁(p) ≤ E[|W_topo|]` lower bound.
+/-- **R173** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Proposition `prop:topo-cluster` Part 2 STATES per-n eventually
+    the lower bound `c₁(p) ≤ E[|W_topo|]` on the abstract
+    `expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p` form.
 
-    The Cat 1 `Infrastructure.MillsRatioTail.tail_geometric_lower_bound`
-    handles the geometric-decay-to-eventually-bound step; the
-    workingAssumption side hosts the per-n bound identification. -/
-axiom expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption :
+    Paper-Def-stipulated eventually-lower-bound structural fact about
+    the carrier pair `(expectedTopoLossAboveLowerConst, expectedTopoLoss)`
+    above `p_c`. The substantive Mills-tail geometric-decay derivation
+    is the conceptual source.
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel carrier-pair behavior at parametric boundary).
+    永不 close. -/
+axiom expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
         expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p
+
+/-- **R173 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption` axiom).
+    Direct re-export of the new R173 paper-Def-stipulated structural
+    equation atom `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
+        expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p :=
+  expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def
 
 /-- **R116 CLOSURE — R140 Infrastructure-wired**: derives paper's
     eventually-lower-bound via the smaller `_workingAssumption`

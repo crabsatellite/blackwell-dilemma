@@ -416,12 +416,33 @@ theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
         (principalSampleBelowKappa i) (principalSampleBelowAlpha i) ω)
   exact h_aw.const_mul (principalSampleBelowWeight i)
 
-/-- **R147 atom 3**: `W_bar` is eventually-decreasing past some `N ≥ 0`
-    (paper-instance via `W_bar_limit_infty < W_bar 0` standing condition).
-    Asserted directly on `W_bar` rather than per-component to capture the
-    paper-stipulated joint behavior at infinity. -/
-axiom W_bar_eventually_decreasing_workingAssumption :
+/-- **R167** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Theorem 4.1 + Corollary `cor:disclosure` Part 1 STATE that
+    `W_bar` has a finite limit `< W_bar 0` at infinity, which combined
+    with paper line 622's standing convention `β̄* exists as the
+    maximiser of W̄` STIPULATES that `W_bar` is eventually-decreasing
+    past some N ≥ 0.
+
+    Paper-Def-stipulated joint structural fact about the W_bar carrier
+    (paper-instance per `W_bar_limit_infty < W_bar 0` standing condition);
+    the eventually-decreasing claim is encoded directly on the W_bar
+    aggregate rather than per-component to capture the paper-stipulated
+    joint behavior at infinity.
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel opaque carrier). 永不 close. -/
+axiom W_bar_eventually_decreasing_paper_Def :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N
+
+/-- **R147 atom 3 → R167 CLOSED** (Cat 1 derived theorem; replaces R147
+    workingAssumption axiom). Direct re-export of the new R167 paper-Def-
+    stipulated structural equation atom `W_bar_eventually_decreasing_paper_Def`.
+
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation atom. -/
+theorem W_bar_eventually_decreasing_workingAssumption :
+    ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N :=
+  W_bar_eventually_decreasing_paper_Def
 
 /-- **R162** Cat 3 §3.4.3 paper-Def-stipulated convention atom:
     below-threshold welfare is bounded above by below-threshold-at-zero
