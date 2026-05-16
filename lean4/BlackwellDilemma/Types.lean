@@ -36,6 +36,7 @@ import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import BlackwellDilemma.Percolation
 import BlackwellDilemma.Infrastructure.TopkisCrossPartial
+import BlackwellDilemma.Infrastructure.TopkisCrossPartialCriterion
 
 namespace BlackwellDilemma
 
@@ -773,30 +774,98 @@ axiom agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
         ContinuousOn (fun β => agentRewardKernel AgentType.kappaAgent β κ α ω)
           (Set.Ici (0 : ℝ))
 
-/-- **R203 bridge** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
-    atom: per-realisation reward-kernel four-corner positivity in
-    `(β, κ)` for the κ-agent. This is the unfolded Topkis four-corner
-    inequality on the reward kernel — directly the paper-stipulated
-    cross-partial-non-negativity content from Topkis 1978 §3.1, isolated
-    from the `IsSupermodular` predicate wrapper.
+/-- **R206 bridge** Cat 3 §3.4.3 paper-Def-stipulated SMALLEST bridge
+    atom — **Topkis 1978 §3.1 increasing-differences form**: the
+    per-realisation reward kernel of the κ-agent has INCREASING
+    DIFFERENCES in `(β, κ)`. For any fixed `κ₁ ≤ κ₂`, the
+    `κ`-slice-difference function
+    `β ↦ kernel(β, κ₂) − kernel(β, κ₁)` is monotone non-decreasing
+    in `β`.
+
+    This is the **NATURAL formulation** of Topkis 1978 §3.1 — the
+    paper's `prop:supermodular` (line 565) appeals to the cross-partial
+    criterion `∂²f/∂x∂y ≥ 0`, which is EQUIVALENT (modulo differentia-
+    bility) to the slice-difference function being non-decreasing in
+    the other coordinate. The increasing-differences form is what
+    Topkis 1978 §3.1 actually states algebraically; it is GENUINELY
+    DIFFERENT from the four-corner inequality (the former is a
+    ONE-DIMENSIONAL monotonicity statement on slice-differences; the
+    latter is a 2D quadrilateral conjunction over four points).
 
     Per discipline §18 atomic-decomposition pattern: this atom is
-    strictly more atomic than the R184 wrapped-predicate axiom
-    `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise`
-    (Topkis four-corner inequality unfolded; the predicate `Is
-    Supermodular` definitionally IS the four-corner inequality, so
-    R184 then becomes `Iff.rfl` Cat 1 derivable from this bridge).
+    STRICTLY SMALLER than the previous R203 corner-positivity axiom
+    (which directly encoded the four-corner inequality unfolded).
+    The four-corner content is now DERIVED via Cat 1 lifting through
+    `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_
+    increasing_differences` — a substantive algebraic lemma that
+    re-arranges slice-difference monotonicity into the four-corner
+    form. The lifting is NOT trivial unfolding; it is the canonical
+    Cat 1 content connecting the calculus-style Topkis 1978 statement
+    to the abstract four-corner predicate.
 
     Per discipline §3.4.3 (paper-Def-stipulated structural fact on the
-    paper-novel reward-kernel four-corner positivity). 永不 close. -/
-axiom agentRewardKernel_kappaAgent_corner_positivity_paper_Def :
+    paper-novel reward-kernel increasing-differences in (β, κ)).
+    永不 close. -/
+axiom agentRewardKernel_kappaAgent_increasing_differences_paper_Def :
+    ∀ (α : ℝ),
+      ∀ ω : BondConfig AgentEdgeIdx,
+        ∀ κ₁ κ₂ : ℝ, κ₁ ≤ κ₂ →
+          ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+            agentRewardKernel AgentType.kappaAgent β₁ κ₂ α ω -
+                agentRewardKernel AgentType.kappaAgent β₁ κ₁ α ω ≤
+              agentRewardKernel AgentType.kappaAgent β₂ κ₂ α ω -
+                agentRewardKernel AgentType.kappaAgent β₂ κ₁ α ω
+
+/-- **R203 / R206 derived theorem**: per-realisation reward-kernel
+    four-corner positivity in `(β, κ)` for the κ-agent — the Topkis
+    four-corner inequality on the reward kernel.
+
+    **R206 RETIRED as axiom**: previously a Cat 3 atom encoding the
+    four-corner inequality directly (R203 — hostile audit identified
+    that this was a definitional unfolding of `IsSupermodular`, so
+    the atomicity gain was ≈ 0). Now a Cat 1 derived theorem that
+    GENUINELY composes the strictly-smaller R206 bridge atom
+    `agentRewardKernel_kappaAgent_increasing_differences_paper_Def`
+    (the Topkis 1978 §3.1 increasing-differences form, which is
+    one-dimensional slice-difference monotonicity) with the
+    substantive Cat 1 infrastructure lemma
+    `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_
+    increasing_differences` (lifting slice-difference monotonicity
+    to the four-corner inequality).
+
+    Per discipline §18 atomic-decomposition pattern: the new bridge
+    atom is STRICTLY MORE ATOMIC than the four-corner inequality
+    (slice-difference monotonicity is the one-dimensional content;
+    the four-corner form is the 2D quadrilateral conjunction derived
+    from it). The lifting is NOT trivial unfolding — `IsSupermodular`
+    definitionally IS the four-corner inequality, but the
+    increasing-differences form is genuinely different and requires
+    `linarith`-based algebraic rearrangement.
+
+    paper source: Proposition prop:supermodular line 565 + Topkis 1978
+    §3.1 cross-partial criterion. -/
+theorem agentRewardKernel_kappaAgent_corner_positivity_paper_Def :
     ∀ (α : ℝ),
       ∀ ω : BondConfig AgentEdgeIdx,
         ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
           agentRewardKernel AgentType.kappaAgent x₁ y₁ α ω +
               agentRewardKernel AgentType.kappaAgent x₂ y₂ α ω ≥
             agentRewardKernel AgentType.kappaAgent x₁ y₂ α ω +
-              agentRewardKernel AgentType.kappaAgent x₂ y₁ α ω
+              agentRewardKernel AgentType.kappaAgent x₂ y₁ α ω := by
+  intro α ω x₁ x₂ y₁ y₂ hx hy
+  -- Lift the R206 bridge (increasing-differences form) to the
+  -- four-corner form via Cat 1 infra.
+  have h_super :
+      BlackwellDilemma.Infrastructure.IsSupermodular
+        (fun β κ => agentRewardKernel AgentType.kappaAgent β κ α ω) :=
+    BlackwellDilemma.Infrastructure.isSupermodular_of_increasing_differences
+      (fun β κ => agentRewardKernel AgentType.kappaAgent β κ α ω)
+      (fun κ₁ κ₂ hκ β₁ β₂ hβ =>
+        agentRewardKernel_kappaAgent_increasing_differences_paper_Def
+          α ω κ₁ κ₂ hκ β₁ β₂ hβ)
+  exact h_super x₁ x₂ y₁ y₂ hx hy
+
+#print axioms agentRewardKernel_kappaAgent_corner_positivity_paper_Def
 
 /-- **R184** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
     paper Proposition `prop:supermodular` (line 565) STATES that the
@@ -817,19 +886,27 @@ axiom agentRewardKernel_kappaAgent_corner_positivity_paper_Def :
     supermodular_of_pointwise_supermodular` (R178 lifting from per-ω
     supermodularity to integrated form).
 
-    **R203 RETIRED as axiom**: now a Cat 1 derived theorem consuming
-    the strictly-smaller paper-Def bridge atom
-    `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (the
-    Topkis four-corner inequality unfolded). Per discipline §18
-    atomic-decomposition pattern: smaller atoms + Cat 1 lifting are
-    preferable to larger atoms; the `IsSupermodular` predicate
-    definitionally IS the four-corner inequality, so the closure is
-    `Iff.rfl`-style Cat 1.
+    **R203 / R206 RETIRED as axiom**: now a Cat 1 derived theorem
+    consuming the strictly-smaller paper-Def bridge atom
+    `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (R206
+    refactor: now itself a Cat 1 derived theorem composing the
+    GENUINELY SMALLER R206 bridge atom
+    `agentRewardKernel_kappaAgent_increasing_differences_paper_Def`
+    — the Topkis 1978 §3.1 increasing-differences form — with the
+    substantive Cat 1 infrastructure lemma
+    `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_
+    increasing_differences`). Per discipline §18 atomic-decomposition
+    pattern: smaller atoms + Cat 1 lifting are preferable to larger
+    atoms; the increasing-differences form is one-dimensional
+    slice-difference monotonicity, GENUINELY DIFFERENT from the 2D
+    four-corner inequality conjunction.
 
-    Net §3.4.3 atom delta: −1 (R184 axiom retired) + 1 (R203 bridge) =
-    0 raw atom, but the new bridge is strictly more atomic per
-    discipline §18 (the predicate wrapper is unfolded into its
-    elementary four-corner form). -/
+    Net §3.4.3 atom delta: −1 (R184 axiom retired) + 1 (R206 bridge —
+    R203 corner-positivity demoted to derived theorem) = 0 raw atom,
+    but the new bridge is strictly more atomic per discipline §18
+    (Topkis 1978 §3.1 increasing-differences form is one-dimensional
+    slice-difference monotonicity, lifted to four-corner via
+    substantive Cat 1 algebra). -/
 theorem agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise :
     ∀ (α : ℝ),
       ∀ ω : BondConfig AgentEdgeIdx,

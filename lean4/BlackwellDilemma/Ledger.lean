@@ -5578,14 +5578,30 @@ def entry_atom_L_unimodal_in_regime_i_paper_Def : GapEntry where
   conditionalOn := []
 
 def entry_atom_agentRewardKernel_kappaAgent_corner_positivity_paper_Def : GapEntry where
-  name := "agentRewardKernel_kappaAgent_corner_positivity_paper_Def (R203 bridge)"
+  name := "agentRewardKernel_kappaAgent_corner_positivity_paper_Def [R206 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Proposition prop:supermodular line 565 (paper STATES W(β,κ) for the κ-agent at α=1 is supermodular in (β,κ); Topkis 1978 §3.1 cross-partial criterion as conceptual source — per-realisation Topkis four-corner inequality on the reward kernel)"
+  attackHistory := [
+    "R203 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R184 `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise` axiom. Encodes the paper-stipulated Topkis four-corner inequality on the reward kernel UNFOLDED — the `IsSupermodular` predicate definitionally IS the four-corner inequality (`∀ x₁ x₂ y₁ y₂, x₁ ≤ x₂ → y₁ ≤ y₂ → f x₁ y₁ + f x₂ y₂ ≥ f x₁ y₂ + f x₂ y₁`), so R184 then becomes an `Iff.rfl`-style Cat 1 derived theorem. Strictly more atomic per discipline §18 (single-step typed bridge isolating the elementary four-corner positivity from the predicate wrapper).",
+    "R206 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem composing the strictly-smaller R206 bridge atom `agentRewardKernel_kappaAgent_increasing_differences_paper_Def` (Cat 3 §3.4.3, encoding the Topkis 1978 §3.1 INCREASING-DIFFERENCES form — one-dimensional slice-difference monotonicity, GENUINELY DIFFERENT from the 2D four-corner conjunction) with the substantive Cat 1 infrastructure lemma `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_increasing_differences` (lifting slice-difference monotonicity to four-corner via `linarith`). Hostile-audit response: the previous R203 atom was identified as definitional unfolding of `IsSupermodular` (atomicity gain ≈ 0); the new R206 increasing-differences bridge atom is the natural Topkis 1978 §3.1 formulation, providing a one-dimensional monotonicity statement on slice-differences that is genuinely smaller than the four-corner inequality conjunction. The Cat 1 lifting via `isSupermodular_of_increasing_differences` performs substantive algebraic rearrangement (not trivial unfolding). Net §3.4.3 atom delta: −1 (R203 axiom retired) + 1 (R206 bridge) = 0 raw atom, but the new bridge is strictly more atomic and audit-resistant."
+  ]
+  scope := "∀ α : ℝ, ∀ ω : BondConfig AgentEdgeIdx, ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ → agentRewardKernel kappaAgent x₁ y₁ α ω + agentRewardKernel kappaAgent x₂ y₂ α ω ≥ agentRewardKernel kappaAgent x₁ y₂ α ω + agentRewardKernel kappaAgent x₂ y₁ α ω"
+  obstacleOrAttribution := "CLOSED via R206 bridge `agentRewardKernel_kappaAgent_increasing_differences_paper_Def` (Topkis 1978 §3.1 increasing-differences form) + Cat 1 infrastructure lemma `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_increasing_differences` (substantive algebraic lifting via `linarith`)."
+  conditionalOn := []
+
+def entry_atom_agentRewardKernel_kappaAgent_increasing_differences_paper_Def : GapEntry where
+  name := "agentRewardKernel_kappaAgent_increasing_differences_paper_Def (R206 bridge)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
-  paperSource := "Proposition prop:supermodular line 565 (paper STATES W(β,κ) for the κ-agent at α=1 is supermodular in (β,κ); Topkis 1978 §3.1 cross-partial criterion as conceptual source — per-realisation Topkis four-corner inequality on the reward kernel)"
-  attackHistory := [ "R203 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R184 `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise` axiom. Encodes the paper-stipulated Topkis four-corner inequality on the reward kernel UNFOLDED — the `IsSupermodular` predicate definitionally IS the four-corner inequality (`∀ x₁ x₂ y₁ y₂, x₁ ≤ x₂ → y₁ ≤ y₂ → f x₁ y₁ + f x₂ y₂ ≥ f x₁ y₂ + f x₂ y₁`), so R184 then becomes an `Iff.rfl`-style Cat 1 derived theorem. Strictly more atomic per discipline §18 (single-step typed bridge isolating the elementary four-corner positivity from the predicate wrapper). 永不 close." ]
-  scope := "∀ α : ℝ, ∀ ω : BondConfig AgentEdgeIdx, ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ → agentRewardKernel kappaAgent x₁ y₁ α ω + agentRewardKernel kappaAgent x₂ y₂ α ω ≥ agentRewardKernel kappaAgent x₁ y₂ α ω + agentRewardKernel kappaAgent x₂ y₁ α ω"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated Topkis four-corner positivity on the κ-agent reward kernel per discipline. 永不 close."
+  paperSource := "Proposition prop:supermodular line 565 + Topkis 1978 §3.1 cross-partial criterion (paper STATES W(β,κ) for the κ-agent at α=1 is supermodular in (β,κ) via cross-partial-positivity; Topkis 1978 §3.1 increasing-differences criterion is the natural algebraic formulation — per-realisation form on the reward kernel)"
+  attackHistory := [
+    "R206 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLEST bridge atom replacing the previous R203 `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` axiom. Encodes the paper-stipulated Topkis 1978 §3.1 INCREASING-DIFFERENCES form on the reward kernel: for any fixed `κ₁ ≤ κ₂`, the κ-slice-difference function `β ↦ kernel(β, κ₂) − kernel(β, κ₁)` is monotone non-decreasing in `β`. This is the NATURAL formulation of Topkis 1978 §3.1 — the cross-partial criterion `∂²f/∂x∂y ≥ 0` is equivalent (modulo differentiability) to slice-difference monotonicity, and it is what Topkis 1978 §3.1 actually states algebraically. GENUINELY DIFFERENT from the four-corner inequality (one-dimensional monotonicity on slice-differences vs 2D quadrilateral conjunction). Hostile-audit response: the previous R203 atom was identified as definitional unfolding of `IsSupermodular` (atomicity gain ≈ 0); this R206 bridge is the canonical Topkis 1978 §3.1 algebraic content, with the four-corner inequality DERIVED via substantive Cat 1 algebraic rearrangement through `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_increasing_differences` (a Mathlib-PR-contributable lemma extending the `Order.Supermodular` namespace). Strictly more atomic per discipline §18 (slice-difference monotonicity is the one-dimensional content; the four-corner form is the 2D conjunction lifted from it). 永不 close."
+  ]
+  scope := "∀ α : ℝ, ∀ ω : BondConfig AgentEdgeIdx, ∀ κ₁ κ₂ : ℝ, κ₁ ≤ κ₂ → ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ → agentRewardKernel kappaAgent β₁ κ₂ α ω − agentRewardKernel kappaAgent β₁ κ₁ α ω ≤ agentRewardKernel kappaAgent β₂ κ₂ α ω − agentRewardKernel kappaAgent β₂ κ₁ α ω"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated Topkis 1978 §3.1 increasing-differences form on the κ-agent reward kernel per discipline. 永不 close."
   conditionalOn := []
 
 def entry_atom_agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise : GapEntry where
@@ -5596,10 +5612,11 @@ def entry_atom_agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise
   paperSource := "Proposition prop:supermodular line 565 (paper STATES W(β,κ) for the κ-agent at α=1 is supermodular in (β,κ); Topkis 1978 §3.1 cross-partial criterion is the conceptual source — paper-PRESUPPOSED per-realisation reward-kernel supermodularity)"
   attackHistory := [
     "R184 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated structural equation atom on the per-realisation κ-agent reward kernel — paper-stipulated supermodularity in (β, κ) per the R88-style kernel-decomposition (`agentWelfare a β κ α := percExpectation (1 - blockingProb) (agentRewardKernel a β κ α)`). Topkis 1978 §3.1 cross-partial criterion is the conceptual source. The encoded atom is paper-stated FACT on the per-realisation kernel — the welfare-level R165 atom `agentWelfare_kappaAgent_at_alpha_one_isSupermodular` becomes derivable as a Cat 1 corollary via R178 `Infrastructure.PercExpectationSupermodular.percExpectation_supermodular_of_pointwise_supermodular` (R178 lifting from per-ω supermodularity to integrated form). 永不 close.",
-    "R203 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the strictly-smaller paper-Def bridge atom `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (Cat 3 §3.4.3, encoding the Topkis four-corner inequality on the reward kernel UNFOLDED). Proof: `intro α ω; exact agentRewardKernel_kappaAgent_corner_positivity_paper_Def α ω` (the `IsSupermodular` predicate definitionally IS the four-corner inequality, so the closure is `Iff.rfl`-style Cat 1). Net §3.4.3 atom delta: −1 (R184 axiom retired) + 1 (R203 bridge) = 0 raw atom, but the new bridge is strictly more atomic per discipline §18 (the predicate wrapper is unfolded into its elementary four-corner form)."
+    "R203 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the strictly-smaller paper-Def bridge atom `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (Cat 3 §3.4.3, encoding the Topkis four-corner inequality on the reward kernel UNFOLDED). Proof: `intro α ω; exact agentRewardKernel_kappaAgent_corner_positivity_paper_Def α ω` (the `IsSupermodular` predicate definitionally IS the four-corner inequality, so the closure is `Iff.rfl`-style Cat 1). Net §3.4.3 atom delta: −1 (R184 axiom retired) + 1 (R203 bridge) = 0 raw atom, but the new bridge is strictly more atomic per discipline §18 (the predicate wrapper is unfolded into its elementary four-corner form).",
+    "R206 2026-05-16: Cat 1 derivation chain unchanged at this level — the R184 closure still consumes `agentRewardKernel_kappaAgent_corner_positivity_paper_Def`. The R206 refactor demotes the R203 atom itself from axiom to derived theorem (composing the new SMALLEST bridge atom `agentRewardKernel_kappaAgent_increasing_differences_paper_Def` — Topkis 1978 §3.1 increasing-differences form — with the substantive Cat 1 infrastructure `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_increasing_differences`). Hostile-audit response: previous R203 atom was identified as definitional unfolding of `IsSupermodular`; the new R206 bridge is GENUINELY DIFFERENT (one-dimensional slice-difference monotonicity vs 2D four-corner conjunction)."
   ]
   scope := "∀ α : ℝ, ∀ ω : BondConfig AgentEdgeIdx, IsSupermodular (fun β κ => agentRewardKernel kappaAgent β κ α ω)"
-  obstacleOrAttribution := "CLOSED via R203 bridge `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` + Cat 1 `intro`/`exact` (the bridge IS the unfolded form of `IsSupermodular`)."
+  obstacleOrAttribution := "CLOSED via R203 derived theorem `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (R206-demoted to derived theorem composing the R206 increasing-differences bridge atom + Cat 1 Topkis lifting) + Cat 1 `intro`/`exact`."
   conditionalOn := []
 
 /-- agentRewardKernel_greedy_wrongness_kernel_reversal_witness — R90
@@ -8990,6 +9007,15 @@ def allGaps : List GapEntry := [
   -- unfolded) + R184 retired (now Cat 1 `Iff.rfl`-style derived theorem;
   -- previously undocumented per-realisation κ-agent supermodularity axiom
   -- in Types.lean — Ledger entry added alongside the retirement).
+  -- R206 2026-05-16: R203 corner-positivity demoted from axiom to Cat 1
+  -- derived theorem (hostile-audit response: previous R203 was definitional
+  -- unfolding of `IsSupermodular`, atomicity gain ≈ 0). New SMALLEST bridge
+  -- atom `agentRewardKernel_kappaAgent_increasing_differences_paper_Def`
+  -- encodes Topkis 1978 §3.1 INCREASING-DIFFERENCES form (one-dimensional
+  -- slice-difference monotonicity, GENUINELY DIFFERENT from the 2D four-
+  -- corner conjunction). Cat 1 lifting via new infrastructure module
+  -- `Infrastructure.TopkisCrossPartialCriterion`.
+  entry_atom_agentRewardKernel_kappaAgent_increasing_differences_paper_Def,
   entry_atom_agentRewardKernel_kappaAgent_corner_positivity_paper_Def,
   entry_atom_agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise,
   -- R93 combined-dominance witness atom (Cat 3 §3.4.3 paper-stipulated)

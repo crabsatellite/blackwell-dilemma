@@ -79,6 +79,7 @@ import BlackwellDilemma.Infrastructure.MLimitDifferenceConcrete
 import BlackwellDilemma.Infrastructure.EVTBoundedDecreasing
 import BlackwellDilemma.Infrastructure.SimpleGraphReachable
 import BlackwellDilemma.Infrastructure.TopkisCrossPartial
+import BlackwellDilemma.Infrastructure.TopkisCrossPartialCriterion
 import BlackwellDilemma.Infrastructure.FOSDDerivativeChain
 import BlackwellDilemma.Infrastructure.ArgmaxMonotone
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
