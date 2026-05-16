@@ -89,12 +89,23 @@ Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; late
 | **Mathlib-PR-able infrastructure modules** | **35+** | NEW R175 + R178: 2 new generic Cat 1 modules built specifically as future Mathlib PR targets (in addition to 33+ pre-existing Infrastructure modules). |
 | **Actually-retired §3.4.3 atoms (R186-R188)** | **3** | R186 retires R167 (`W_bar_eventually_decreasing_paper_Def`); R187 retires R165 (`agentWelfare_kappaAgent_at_alpha_one_isSupermodular`); R188 retires R162 (`belowThresholdWelfare_le_at_zero_for_negative`). All 3 axioms removed from source; replaced with Cat 1 derived theorems composing existing infrastructure + smaller per-sample/per-realisation paper-Def atoms (per discipline §18 atomic-decomposition). Remaining §3.4.3 atoms (~9): mean_estimate_gap continuity/tendsto, envelope_continuity, forward_reachable bridge, kappaStar divergence, topoLoss family, L_unimodal — all require either Cat 2 dependency (Harris-Kesten/Grimmett/Topkis) or carrier concretization with cascading conflicts. |
 
-### Mathlib-PR-ready modules (R175, R178)
+### Cat 1 infrastructure modules (R175-R194; 12 new modules)
 
 | Module | Contribution | Future Mathlib namespace |
 | --- | --- | --- |
-| **`Infrastructure/EventuallyDecreasingWithLowerBound.lean` (R175)** | 3 generic Cat 1 lemmas about eventually-decreasing functions with lower-bound witnesses: `eventually_le_of_decreasing_past_witness`, `bounded_above_of_compact_max_and_eventually_decreasing`, `eventually_le_of_tendsto_lt_witness`. Generalizes monotone-convergence theory to settings where monotonicity holds only past a threshold. | `Mathlib.Order.Filter.EventuallyMonotone` or `Mathlib.Topology.Algebra.Order.EventuallyDecreasing` |
-| **`Infrastructure/PercExpectationSupermodular.lean` (R178)** | Lifting lemma: if for every realisation `ω`, the kernel `(β, κ) → f β κ ω` is `IsSupermodular`, then `(β, κ) → percExpectation p (fun ω => f β κ ω)` is `IsSupermodular`. Generic over `Fintype E`. | `Mathlib.Order.Supermodular` (yet-to-be-created; would package the abstract `IsSupermodular` definition + algebraic + measure-weighted preservation lemmas) |
+| **R175 `EventuallyDecreasingWithLowerBound`** | 3 lemmas: eventually-decreasing patterns with lower-bound witnesses | `Mathlib.Order.Filter.EventuallyMonotone` |
+| **R178 `PercExpectationSupermodular`** | Pointwise → integrated supermodularity lifting | `Mathlib.Order.Supermodular` |
+| **R179 `SupermodularityFinsetSum`** | Generic `IsSupermodular.finset_sum` + weighted sum | `Mathlib.Order.Supermodular` |
+| **R180 `ArgmaxOnHalfLine`** | Non-compact `[a, ∞)` EVT for tendsto-finite-with-strict-witness | `Mathlib.Topology.Order.Compact.HalfLine` |
+| **R181 `IsSupermodularPointwiseLimit`** | Supermodularity preserved under pointwise limits | `Mathlib.Order.Supermodular` |
+| **R182 `DifferenceDominatesFinsetSum`** | R179 sister for `DifferenceDominates` | `Mathlib.Order.DifferenceDominates` |
+| **R183 `PercExpectationDifferenceDominates`** | R178 sister for `DifferenceDominates` | `Mathlib.Order.DifferenceDominates` |
+| **R189 `GaussianPosteriorAsymptotic`** | Posterior mean → data mean as n → ∞ (Bayesian asymptotic data dominance) | `Mathlib.Probability.Bayesian.Gaussian` |
+| **R190 `EnvelopeContinuity`** | Berge-type sandwich estimates for value functions | `Mathlib.Topology.Order.ValueFunction` |
+| **R191 `MillsTailFromExponentialDecay`** | Geometric series bound + uniform tail bound from exponential decay | `Mathlib.Analysis.SpecialFunctions.Exp.GeometricBound` |
+| **R192 `PercExpectationStrictPositive`** | Positivity from per-realisation positive kernel + p ∈ (0,1) | `Mathlib.Probability.BondPercolation.Expectation` |
+| **R193 `PaperGraphFromIsEdge`** | SimpleGraph from paper IsEdge + IsOpen (no new axioms — loopless via `u ≠ v` intersection) | reusable adapter pattern |
+| **R194 `MillsConstantPositive`** | Positivity + lower bound for Mills-tail constants | `Mathlib.Analysis.SpecialFunctions.Mills` |
 | Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 33+ | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` (incl. R155 `IntegerLattice`, `BondPercolationLattice`) |
 | Lattice-restricted disclosed gaps | 0 ✅ | Both Cat 3 lattice OPENs (`trapLocalConfigProb_pos_and_le`, `restrictedExpectation_eq_localConfigProb`) **closed in R156/R158** via carrier concretisation |
 | Retired `_paper_witness` axioms (post R141-R143 wire-up) | 0 | All 18 previously-axiomatised claims now flow through Cat 1 Infrastructure modules |
