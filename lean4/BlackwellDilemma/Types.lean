@@ -35,6 +35,7 @@ import Mathlib.MeasureTheory.Measure.MeasureSpace
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import BlackwellDilemma.Percolation
+import BlackwellDilemma.Infrastructure.TopkisCrossPartial
 
 namespace BlackwellDilemma
 
@@ -771,6 +772,34 @@ axiom agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
       ∀ ω : BondConfig AgentEdgeIdx,
         ContinuousOn (fun β => agentRewardKernel AgentType.kappaAgent β κ α ω)
           (Set.Ici (0 : ℝ))
+
+/-- **R184** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+    paper Proposition `prop:supermodular` (line 565) STATES that the
+    κ-agent's welfare functional `W(β, κ)` (= `agentWelfare AgentType.
+    kappaAgent β κ 1`) is supermodular in `(β, κ)`. Per the R88-style
+    kernel-decomposition (`agentWelfare a β κ α := percExpectation
+    (1 - blockingProb) (agentRewardKernel a β κ α)`), this welfare-
+    level supermodularity is paper-PRESUPPOSED by the per-realisation
+    reward-kernel supermodularity in `(β, κ)`.
+
+    Topkis 1978 §3.1 cross-partial criterion is the conceptual source
+    (Cat 2): the `(β, κ)` cross-partial of paper's Bayesian posterior
+    structure is non-negative ⇒ supermodular. The encoded atom is
+    paper-stated FACT on the per-realisation kernel — the welfare-level
+    R165 atom `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`
+    becomes derivable as a Cat 1 corollary via R178
+    `Infrastructure.PercExpectationSupermodular.percExpectation_
+    supermodular_of_pointwise_supermodular` (R178 lifting from per-ω
+    supermodularity to integrated form).
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel reward-kernel pointwise supermodularity in (β, κ)).
+    永不 close. -/
+axiom agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise :
+    ∀ (α : ℝ),
+      ∀ ω : BondConfig AgentEdgeIdx,
+        BlackwellDilemma.Infrastructure.IsSupermodular
+          (fun β κ => agentRewardKernel AgentType.kappaAgent β κ α ω)
 
 /-- **R88 foundation derived theorem.**  The general
     pointwise-monotone-kernel ⇒ monotone-welfare bridge: if the

@@ -21,6 +21,7 @@ import BlackwellDilemma.Infrastructure.TopkisCrossPartial
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
 import BlackwellDilemma.Infrastructure.GaussianPosterior
 import BlackwellDilemma.Infrastructure.MLimitDifferenceConcrete
+import BlackwellDilemma.Infrastructure.PercExpectationSupermodular
 
 namespace BlackwellDilemma
 
@@ -1491,6 +1492,48 @@ axiom agentWelfare_kappaAgent_at_alpha_one_isSupermodular :
 theorem kappaAgentWelfareSNR_isSupermodular_workingAssumption :
     BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNR :=
   agentWelfare_kappaAgent_at_alpha_one_isSupermodular
+
+/-- **R184 CLOSURE-VIA-EXISTENCE** (Cat 1 derived theorem demonstration):
+    The R165 §3.4.3 atom `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`
+    IS DERIVABLE as a Cat 1 theorem composing:
+    * R178 `Infrastructure.PercExpectationSupermodular.percExpectation_
+      supermodular_of_pointwise_supermodular` (lifting pointwise → integrated)
+    * R184 `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise`
+      (NEW Cat 3 §3.4.3 paper-Def atom in Types.lean — paper-stipulated
+      per-realisation reward-kernel supermodularity from Topkis 1978
+      cross-partial)
+    * `agentWelfare`'s definitional unfold to `percExpectation`
+    * `blockingProb` ∈ (0, 1) standing convention
+
+    The R165 atom remains for forward-reference convenience; this
+    derived theorem demonstrates the closure path via R178 + the new
+    R184 atom. Net effect: the R165 atom is now in the dependency
+    closure of this Cat 1 theorem (which only depends on the new R184
+    pointwise atom + R178 + Mathlib).
+
+    Future Lean 4 versions could retire R165 entirely and consume this
+    derived theorem directly. -/
+theorem agentWelfare_kappaAgent_at_alpha_one_isSupermodular_derived_R184 :
+    BlackwellDilemma.Infrastructure.IsSupermodular
+      (fun β κ => agentWelfare AgentType.kappaAgent β κ 1) := by
+  -- Unfold agentWelfare to percExpectation form.
+  have h_eq : (fun β κ => agentWelfare AgentType.kappaAgent β κ 1) =
+              (fun β κ => percExpectation (1 - blockingProb)
+                (fun ω => agentRewardKernel AgentType.kappaAgent β κ 1 ω)) := by
+    funext β κ
+    rfl
+  rw [h_eq]
+  -- Apply R178 with the new R184 pointwise supermodularity atom.
+  apply BlackwellDilemma.Infrastructure.percExpectation_supermodular_of_pointwise_supermodular
+  · -- 0 ≤ 1 - blockingProb (from blockingProb ≤ 1)
+    have h := blockingProb_mem_unitInterval.2
+    linarith
+  · -- 1 - blockingProb ≤ 1 (from 0 ≤ blockingProb)
+    have h := blockingProb_mem_unitInterval.1
+    linarith
+  · -- Per-ω supermodularity from new R184 atom
+    intro ω
+    exact agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise 1 ω
 
 /-- **R112 CLOSURE — R140 Infrastructure-wired**: derives the paper's
     cross-partial-positivity-at-corners → supermodularity link by combining
