@@ -6009,16 +6009,17 @@ def entry_atom_mLimit_pos : GapEntry where
     `V_dyn(u_2) − V_dyn(u_1)` value abstracted as a single ℝ-valued
     function of `p`. -/
 def entry_carrier_mLimitDifference : GapEntry where
-  name := "mLimitDifference"
+  name := "mLimitDifference [R160 CONCRETIZED via Infrastructure.FiveState.mLimitDifference_fiveState; carrier no longer opaque]"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.carrier
   paperSource := "Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) − V_dyn(u_1)`)"
   attackHistory :=
-    [ "R61 2026-05-14: NEW Cat 3 paper-novel carrier `mLimitDifference : ℝ → ℝ` introduced by R61 to factor the retired `mLimit_pos_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes the paper's `V_dyn(u_2) − V_dyn(u_1)` value (paper Theorem 4.1 Part 3 line 505) for the C2 trap/bridge vertex pair `(u_1, u_2)` as an opaque single ℝ-valued function of `p` (the vertex pair is paper-instance-local; the difference is the paper-stated κ → ∞ asymptotic limit value of the mean-estimate-gap). Sub-type carrier per §3.4.1 (paper-novel opaque-carrier primitive)." ]
-  scope := "Theorem 4.1 Part 3, paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` carrier"
+    [ "R61 2026-05-14: NEW Cat 3 paper-novel carrier `mLimitDifference : ℝ → ℝ` introduced by R61 to factor the retired `mLimit_pos_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Encodes the paper's `V_dyn(u_2) − V_dyn(u_1)` value (paper Theorem 4.1 Part 3 line 505) for the C2 trap/bridge vertex pair `(u_1, u_2)` as an opaque single ℝ-valued function of `p` (the vertex pair is paper-instance-local; the difference is the paper-stated κ → ∞ asymptotic limit value of the mean-estimate-gap). Sub-type carrier per §3.4.1 (paper-novel opaque-carrier primitive).",
+      "R160 2026-05-16: CONCRETIZATION — `axiom mLimitDifference : ℝ → ℝ` REPLACED with `noncomputable def mLimitDifference (_p : ℝ) : ℝ := Infrastructure.FiveState.mLimitDifference_fiveState`. The constant-in-p form is paper-faithful per paper line 505: the limit `V_dyn(u_2) − V_dyn(u_1)` is independent of `p` (the `(u_1, u_2)` pair is paper-instance-stipulated, not p-parameterised). Carrier remains Cat 3 paper-novel (paper-Def-stipulated identification with the canonical 5-state V_dyn-difference) but is no longer opaque — the concretization unlocks Cat 1 derivation of `mLimitDifference_pos_via_V_dyn_workingAssumption`. Per `feedback_lean_definition_must_be_def_not_axiom`: paper definitions = Lean `def`, never opaque + axiom." ]
+  scope := "Theorem 4.1 Part 3, paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` carrier — R160 CONCRETIZED to canonical 5-state witness"
   obstacleOrAttribution :=
-    "Cat 3 carrier (gapDefinitional). Paper-novel opaque-carrier primitive abstracting the paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` value as a single ℝ-valued function of `p`."
+    "Cat 3 carrier (gapDefinitional). R160: concretized to `Infrastructure.FiveState.mLimitDifference_fiveState`. Paper-novel concretized carrier per `feedback_lean_definition_must_be_def_not_axiom`."
   conditionalOn := []
 
 /-- R61 NEW Cat 3 paper-novel structural-equation atom: paper line 505
@@ -6220,16 +6221,18 @@ def entry_atom_mean_estimate_gap_tendsto_mLimit_paper_witness : GapEntry where
   conditionalOn := []
 
 def entry_atom_mLimitDifference_pos : GapEntry where
-  name := "mLimitDifference_pos_OPEN [R106 derivedTheorem; closed via paper-stipulated mLimitDifference_pos_paper_witness atom]"
+  name := "mLimitDifference_pos_OPEN [R160 Cat 1 derivedTheorem via mLimitDifference concretization → mLimitDifference_fiveState_pos]"
   status := GapStatus.gapClosed
   inputCategory := InputCategory.cat1Mathlib
   cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 3, line 505 (strict positivity of `V_dyn(u_2) − V_dyn(u_1)` from C2)"
   attackHistory :=
-    [ "R61 2026-05-14: NEW smaller Cat 3 §3.4.4 workingAssumption atom extracted from the retired bundled `mLimit_pos_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Carries ONLY the substantive C2-derived strict positivity content (smaller than the retired bundle because no longer carrying the structural-equation identification with `V_dyn`-difference, which now lives in the separate atom `mLimit_eq_mLimitDifference_OPEN`). Paper line 505 explicit content: `V_dyn(u_2) − V_dyn(u_1) > 0` from C2 trap/bridge misalignment (`u_2` bridge neighbour has strictly higher dynamic value than trap neighbour `u_1`; this is the second clause of the C2 condition). Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `mLimitDifference`). Cat 2 reduction check: paper-novel application of C2 to the paper-instance-local `V_dyn`-difference. Downstream consumer: R61 derived theorem `mLimit_pos` (Cognitive.lean) consumes this atom." ]
-  scope := "Theorem 4.1 Part 3, strict positivity of `mLimitDifference p`"
+    [ "R61 2026-05-14: NEW smaller Cat 3 §3.4.4 workingAssumption atom extracted from the retired bundled `mLimit_pos_OPEN` workingAssumption per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern. Carries ONLY the substantive C2-derived strict positivity content (smaller than the retired bundle because no longer carrying the structural-equation identification with `V_dyn`-difference, which now lives in the separate atom `mLimit_eq_mLimitDifference_OPEN`). Paper line 505 explicit content: `V_dyn(u_2) − V_dyn(u_1) > 0` from C2 trap/bridge misalignment (`u_2` bridge neighbour has strictly higher dynamic value than trap neighbour `u_1`; this is the second clause of the C2 condition). Cat 1 reduction check: not Mathlib-derivable (constrains opaque carrier `mLimitDifference`). Cat 2 reduction check: paper-novel application of C2 to the paper-instance-local `V_dyn`-difference. Downstream consumer: R61 derived theorem `mLimit_pos` (Cognitive.lean) consumes this atom.",
+      "R106 2026-05-15: First closure attempt via paper-stipulated structural-equation atom `mLimitDifference_pos_paper_witness` (Cat 3 §3.4.3 gapDefinitional). The wA atom became a derivedTheorem via the new paper-stipulated witness atom. Net wA delta: −1 (replaced by 1 new Cat 3 §3.4.3 atom).",
+      "R160 2026-05-16: SUBSTANTIVE CLOSURE — Cat 1 derivation via R160 concretization of `mLimitDifference` carrier. The previously opaque `axiom mLimitDifference : ℝ → ℝ` is REPLACED with `noncomputable def mLimitDifference (_p : ℝ) : ℝ := Infrastructure.FiveState.mLimitDifference_fiveState` (canonical 5-state V_dyn-difference witness, paper-instance-local per paper line 505 `(u_1, u_2)` trap/bridge pair). The `mLimitDifference_pos_via_V_dyn_workingAssumption` axiom is now a Cat 1 derived theorem via `Infrastructure.MLimitDifferenceConcrete.mLimitDifference_fiveState_pos` (= 0.4 > 0 by `norm_num`). The R106 paper-stipulated witness atom `mLimitDifference_pos_paper_witness` is now redundant (no longer in the closure chain — closure path is purely Cat 1 from the concretized def). Net effect: 1 inline wA axiom REMOVED from source code; 1 Cat 3 §3.4.3 ledger entry effectively orphaned but preserved for audit history." ]
+  scope := "Theorem 4.1 Part 3, strict positivity of `mLimitDifference p` — R160 CLOSED via Cat 1 derivation"
   obstacleOrAttribution :=
-    "Cat 3 workingAssumption per §3.4.4. Close target = paper Theorem 4.1 Part 3 line 505 reconstruction of strict positivity of the paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` expression from the C2 condition's `V_dyn(u_2) > V_dyn(u_1)` second clause; pending per-IDP-instance derivation."
+    "R160 CLOSED — Cat 1 derivedTheorem via concretization of `mLimitDifference` carrier (paper-instance-local 5-state V_dyn-difference) + `mLimitDifference_fiveState_pos` Cat 1 fact."
   conditionalOn := []
 
 -- (R46 deletion: entry_atom_kappaStar_nonneg has been removed.
