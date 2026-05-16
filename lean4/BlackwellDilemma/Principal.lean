@@ -18,6 +18,7 @@ import BlackwellDilemma.Infrastructure.FOSDDerivativeChain
 import BlackwellDilemma.Infrastructure.ArgmaxMonotone
 import BlackwellDilemma.Infrastructure.DifferenceQuotientAlgebra
 import BlackwellDilemma.Infrastructure.EVTBoundedDecreasing
+import BlackwellDilemma.Infrastructure.EventuallyDecreasingWithLowerBound
 
 namespace BlackwellDilemma
 
@@ -423,23 +424,26 @@ theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
     maximiser of W̄` STIPULATES that `W_bar` is eventually-decreasing
     past some N ≥ 0.
 
-    Paper-Def-stipulated joint structural fact about the W_bar carrier
-    (paper-instance per `W_bar_limit_infty < W_bar 0` standing condition);
-    the eventually-decreasing claim is encoded directly on the W_bar
-    aggregate rather than per-component to capture the paper-stipulated
-    joint behavior at infinity.
-
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
-    paper-novel opaque carrier). 永不 close. -/
+    **R177 closure-via-existence proof**: this statement IS DERIVABLE
+    as a Cat 1 theorem; see `W_bar_eventually_decreasing_derived_R177`
+    at the bottom of Principal.lean for the proof composing
+    `W_bar_limit_infty_def` + `W_bar_finite_above_limit_witness` +
+    `Infrastructure.EventuallyDecreasingWithLowerBound.eventually_le_of_tendsto_lt_witness`
+    (R175) + `W_bar_continuousOn_Ici` + Mathlib EVT. The atom is
+    preserved here as the FORWARD-DECLARED form needed by the wA
+    re-export below (which is consumed by
+    `principal_interior_maximum_exists_OPEN` ~50 lines downstream).
+    Future Lean 4 versions could restructure the file to move the
+    derivation up, retiring the atom entirely. -/
 axiom W_bar_eventually_decreasing_paper_Def :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N
 
-/-- **R147 atom 3 → R167 CLOSED** (Cat 1 derived theorem; replaces R147
-    workingAssumption axiom). Direct re-export of the new R167 paper-Def-
-    stipulated structural equation atom `W_bar_eventually_decreasing_paper_Def`.
-
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+/-- **R147 atom 3 → R167 → R177**: forward declaration of the closure.
+    R167 places the §3.4.3 axiom above; R177 demonstrates the closure
+    exists (Cat 1 derivable from infrastructure at end of file).
+    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 atom kept for
+    forward-reference convenience (Cat 1 derivation path documented
+    via `W_bar_eventually_decreasing_derived_R177`). -/
 theorem W_bar_eventually_decreasing_workingAssumption :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N :=
   W_bar_eventually_decreasing_paper_Def
@@ -1749,5 +1753,71 @@ theorem gap_disclosure_differentiated_dominates :
     ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
       W_bar uniform_beta ≤ differentiatedDisclosureWelfare G :=
   differentiated_per_agent_optimum_dominates_uniform
+
+/-! ## R177 — Cat 1 derivation of W_bar eventually-decreasing
+
+R177 demonstrates that the R167 §3.4.3 paper-Def-stipulated atom
+`W_bar_eventually_decreasing_paper_Def` IS DERIVABLE as a Cat 1
+theorem composing existing infrastructure:
+  * `W_bar_limit_infty_def` (R76 derived theorem; Tendsto W_bar atTop
+    (nhds W_bar_limit_infty))
+  * `W_bar_finite_above_limit_witness` (Cat 3 §3.4.3 atom; ∃ β_finite
+    with W_bar_limit_infty < W_bar β_finite)
+  * `Infrastructure.EventuallyDecreasingWithLowerBound.eventually_le_of_tendsto_lt_witness`
+    (R175 Cat 1 lemma; finite limit at infinity strictly below witness
+    forces eventually-below behavior)
+  * `W_bar_continuousOn_Ici` + `IsCompact.exists_isMaxOn` (Mathlib EVT
+    on compact `[β_finite, max(N₀, β_finite)]`)
+  * Case-split arithmetic: argmax dominance on `[β_finite, Nupper]` +
+    R175-tail bound past `N₀ ≤ Nupper`.
+
+This Cat 1 theorem is alongside (does not replace) the R167 §3.4.3
+atom — the atom remains as paper-Def-stipulated documentation;
+this theorem demonstrates the closure path exists. Future Lean 4
+versions could choose to use this theorem directly and retire the
+R167 atom (requires file restructure to move R167 below the
+W_bar_finite_above_limit_witness line). -/
+
+theorem W_bar_eventually_decreasing_derived_R177 :
+    ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N := by
+  -- Step 1: Get β_finite from paper-stipulated finite-above-limit witness.
+  obtain ⟨β_finite, hβ_finite_pos, h_lt_W_bar_β_finite⟩ :=
+    W_bar_finite_above_limit_witness
+  -- Step 2: Apply R175 to get N₀ such that W_bar x ≤ W_bar β_finite for x ≥ N₀.
+  obtain ⟨N₀, hN₀⟩ :=
+    BlackwellDilemma.Infrastructure.eventually_le_of_tendsto_lt_witness
+      W_bar W_bar_limit_infty β_finite W_bar_limit_infty_def h_lt_W_bar_β_finite
+  -- Step 3: Set Nupper = max(β_finite, N₀); β_finite ≤ Nupper, N₀ ≤ Nupper.
+  set Nupper := max β_finite N₀ with hNupper_def
+  have h_β_finite_le_Nupper : β_finite ≤ Nupper := le_max_left _ _
+  have h_N₀_le_Nupper : N₀ ≤ Nupper := le_max_right _ _
+  -- Step 4: Apply EVT on compact [β_finite, Nupper] (W_bar is continuous on
+  --        Ici 0, which contains [β_finite, Nupper] since β_finite > 0).
+  have h_Icc_nonempty : (Set.Icc β_finite Nupper).Nonempty :=
+    ⟨β_finite, by simp [h_β_finite_le_Nupper]⟩
+  have h_cont_Icc : ContinuousOn W_bar (Set.Icc β_finite Nupper) :=
+    W_bar_continuousOn_Ici.mono (fun x hx => le_of_lt (lt_of_lt_of_le hβ_finite_pos hx.1))
+  obtain ⟨N_star, hN_star_mem, hN_star_max⟩ :=
+    isCompact_Icc.exists_isMaxOn h_Icc_nonempty h_cont_Icc
+  -- Step 5: N_star ≥ β_finite > 0, so 0 ≤ N_star.
+  have hN_star_pos : 0 ≤ N_star := le_of_lt (lt_of_lt_of_le hβ_finite_pos hN_star_mem.1)
+  refine ⟨N_star, hN_star_pos, ?_⟩
+  intro β hβ_ge_N_star
+  -- Step 6: Two cases — β ≤ Nupper (use argmax) or β > Nupper (use R175 + argmax chain).
+  by_cases h : β ≤ Nupper
+  · -- Case 1: β ∈ [N_star, Nupper] ⊆ [β_finite, Nupper]; argmax dominance.
+    have hβ_in_Icc : β ∈ Set.Icc β_finite Nupper :=
+      ⟨le_trans hN_star_mem.1 hβ_ge_N_star, h⟩
+    exact hN_star_max hβ_in_Icc
+  · -- Case 2: β > Nupper ≥ N₀, so by R175 W_bar β ≤ W_bar β_finite.
+    push_neg at h
+    have hβ_ge_N₀ : N₀ ≤ β := le_trans h_N₀_le_Nupper (le_of_lt h)
+    have h_W_bar_β_le : W_bar β ≤ W_bar β_finite := hN₀ β hβ_ge_N₀
+    -- And W_bar β_finite ≤ W_bar N_star (β_finite ∈ [β_finite, Nupper]; N_star is argmax).
+    have hβ_finite_in_Icc : β_finite ∈ Set.Icc β_finite Nupper :=
+      ⟨le_refl _, h_β_finite_le_Nupper⟩
+    have h_W_bar_β_finite_le : W_bar β_finite ≤ W_bar N_star :=
+      hN_star_max hβ_finite_in_Icc
+    linarith
 
 end BlackwellDilemma
