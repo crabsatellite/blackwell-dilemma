@@ -68,24 +68,26 @@ The formalisation follows the paper's section structure.
 
 ## Status summary
 
-Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; latest = post-R174 2026-05-16):
+Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; latest = post-R177 2026-05-16):
 
 | Status | Count | Meaning |
 | --- | ---: | --- |
-| Total ledger entries | **338** | Typed `GapEntry`s in `Ledger.lean` (carriers + atomic stipulations + derived theorems + classical citations) |
+| Total ledger entries | **350** | Typed `GapEntry`s in `Ledger.lean` (carriers + atomic stipulations + derived theorems + classical citations) — **+12 from R176 paper-Def atoms** |
 | `gapClosed` | **172** | Lean theorem (no `sorry`) |
-| `gapDefinitional` | 164 | Cat 3 §3.4.3 paper-foundational atomic content (carriers + structural equations + hypothesis predicates) — 永不 close per discipline |
-| `gapOpen` | **0** ✅ | **All OPEN entries closed in R152→R158 push; R159-R174 maintain 0** |
+| `gapDefinitional` | **176** | Cat 3 §3.4.3 paper-foundational atomic content (carriers + structural equations + hypothesis predicates) — 永不 close per discipline |
+| `gapOpen` | **0** ✅ | **All OPEN entries closed in R152→R158 push; R159-R177 maintain 0** |
 | `gapPartial` | 1 | bundle entry (`gap_phi_tail_bound` + `gap_order_statistics_max`) — both sub-claims are Cat 1 closed theorems |
 | `gapDeadEnd` | 1 | `kappaStar_p_monotone_DEAD_END_by_junk_value` (`def : Prop` marker, NOT axiom — zero kernel impact) |
 | `gapBlocked` | 0 | None |
 | Cat 1 (cat1Mathlib) | **85** | |
 | Cat 2 (cat2External) | **3** | |
-| Cat 3 paper-novel | 249 | Carriers + hypothesisPredicates + structuralEquations — paper-foundational per discipline |
-| Cat 3 sub-type breakdown | — | carrier=79, hypothesisPredicate=9, structuralEquation=75, **workingAssumption=1**, derivedTheorem=146 |
+| Cat 3 paper-novel | **261** | Carriers + hypothesisPredicates + structuralEquations — paper-foundational per discipline |
+| Cat 3 sub-type breakdown | — | carrier=79, hypothesisPredicate=9, structuralEquation=**87**, **workingAssumption=1**, derivedTheorem=146 |
 | Inline `_workingAssumption` axioms (source code) | **0 ✅** | **R159-R174 removed all 17 inline wA axioms via carrier concretization (R160-R164: 6 carriers) + Cat 3 §3.4.3 paper-Def-stipulated structural equation atoms (R165-R174: 10 atoms). The codebase now has ZERO `axiom X_workingAssumption` declarations.** |
 | Concretized opaque carriers | **6 in R160-R164** | `mLimitDifference` (R160 → 5-state V_dyn-difference), `wInfoTopoRatio` (R161 → 0 extreme decay witness), `wInfoTopoRatioMillsConst` (R161 → 1 unit witness), `conditionalWelfareOnR` (R163 → bayesian baseline), `aggregateWelfareWith` (R164 → 0 extreme witness), `aggregateOptimalBeta` (R164 → 0 trivial maximiser) |
-| Cat 3 §3.4.3 paper-Def atoms added in R165-R174 | **10** | `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`, `mean_estimate_gap_continuous_paper_Def`, `mean_estimate_gap_tendsto_mLimit_paper_Def`, `W_bar_eventually_decreasing_paper_Def`, `envelope_continuity_in_p_paper_Def`, `forward_reachable_eq_simpleGraph_reach_paper_Def`, `kappaStar_diverges_at_pc_paper_Def`, `topoLossKernel_le_one_over_n_on_giant_paper_Def`, `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def`, `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def`, `L_unimodal_in_regime_i_paper_Def`, `belowThresholdWelfare_le_at_zero_for_negative` (R162) |
+| Cat 3 §3.4.3 paper-Def atoms added in R162-R174 | **12** | All 12 entries now in Ledger inventory (R176): `belowThresholdWelfare_le_at_zero_for_negative`, `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`, `mean_estimate_gap_continuous_paper_Def`, `mean_estimate_gap_tendsto_mLimit_paper_Def`, `W_bar_eventually_decreasing_paper_Def`, `envelope_continuity_in_p_paper_Def`, `forward_reachable_eq_simpleGraph_reach_paper_Def`, `kappaStar_diverges_at_pc_paper_Def`, `topoLossKernel_le_one_over_n_on_giant_paper_Def`, `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def`, `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def`, `L_unimodal_in_regime_i_paper_Def` |
+| **Mathlib-PR-able infrastructure modules** | **34+** | NEW R175: `Infrastructure/EventuallyDecreasingWithLowerBound.lean` (3 generic Cat 1 lemmas about eventually-decreasing functions with lower-bound witnesses; namespace target `Mathlib.Order.Filter.EventuallyMonotone` or `Mathlib.Topology.Algebra.Order.EventuallyDecreasing`) |
+| **Cat 1 closure-via-existence demonstrations** | **1 (R177)** | R177 demonstrates `W_bar_eventually_decreasing_paper_Def` (R167 §3.4.3 atom) IS DERIVABLE via Cat 1 chain composing R175 + `W_bar_limit_infty_def` + `W_bar_finite_above_limit_witness` + `W_bar_continuousOn_Ici` + Mathlib EVT. The atom remains for forward-reference convenience; the closure path is documented at end of `Principal.lean` (`W_bar_eventually_decreasing_derived_R177`). |
 | Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 33+ | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` (incl. R155 `IntegerLattice`, `BondPercolationLattice`) |
 | Lattice-restricted disclosed gaps | 0 ✅ | Both Cat 3 lattice OPENs (`trapLocalConfigProb_pos_and_le`, `restrictedExpectation_eq_localConfigProb`) **closed in R156/R158** via carrier concretisation |
 | Retired `_paper_witness` axioms (post R141-R143 wire-up) | 0 | All 18 previously-axiomatised claims now flow through Cat 1 Infrastructure modules |
