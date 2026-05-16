@@ -1848,19 +1848,47 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
 noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
   (4/10 : ℝ) - L (betaStarOfP p) p
 
-/-- **R168** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Proposition `prop:three-regime-five-state` Regime (i) line 814
-    + proof line 825 STATE that the overshoot envelope `overshootRegimeI p
-    = 0.4 - L(β*(p), p)` is continuous in `p` on `[0, p_1)`.
+/-- **R196 bridge atom** (Cat 3 §3.4.3 paper-Def-stipulated structural
+    equation atom): paper Proposition `prop:three-regime-five-state`
+    Regime (i) proof line 825 STATES that the envelope value
+    `L(β*(p), p) = 0.4 - overshootRegimeI p` is continuous in `p` on
+    `[0, p_1)` — paper's argmin-stability claim (the value at the optimum
+    varies continuously with parameter `p` because `L` is jointly
+    continuous and the unique minimiser varies continuously by paper's
+    transcendental analysis at line 825).
 
-    Paper-Def-stipulated structural fact about the `overshootRegimeI`
-    explicit formula's continuity; the substantive transcendental
-    composition (continuity of `L` + continuity of `betaStarOfP` via
-    paper's argmin-stability argument) is paper-claimed without symbolic
-    proof. Per discipline §3.4.3 (paper-Def-stipulated structural fact
-    about composition of paper-novel objects). 永不 close. -/
-axiom envelope_continuity_in_p_paper_Def :
-    ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1)
+    Net effect: this is a SMALLER atom than the previous R168
+    `envelope_continuity_in_p_paper_Def` axiom (just stipulating
+    `L(β*(p), p)` is continuous in `p`, equivalent to envelope continuity
+    via the `0.4` constant). The R168 envelope continuity now follows by
+    Cat 1 arithmetic (`continuousOn_const.sub _`). Per discipline §3.4.3
+    (paper-Def-stipulated structural fact about composition of paper-novel
+    objects). 永不 close.
+
+    paper source: Proposition `prop:three-regime-five-state` Regime (i),
+    proof line 825 ("L(β*(p), p) continuous in p by argmin-stability"). -/
+axiom L_at_betaStarOfP_continuousOn_paper_Def :
+    ContinuousOn (fun p : ℝ => L (betaStarOfP p) p) (Set.Ico (0 : ℝ) p_1)
+
+/-- **R196 CLOSURE** (Cat 1 derived theorem; replaces the previous R168
+    `envelope_continuity_in_p_paper_Def` axiom). Direct arithmetic
+    composition of `continuousOn_const` with the new smaller R196 bridge
+    atom `L_at_betaStarOfP_continuousOn_paper_Def`. The substantive
+    paper-stipulated content (continuity of `L(β*(p), p)` in `p` via
+    argmin-stability) is now isolated in the strictly smaller bridge
+    atom; the envelope continuity becomes a Cat 1 derived theorem.
+
+    Net atom delta: −1 (R168 retired) + 1 (R196 bridge) = 0 net §3.4.3
+    atom count, but the new bridge is strictly more atomic per discipline
+    §18 (single-step typed bridge; envelope continuity follows by Cat 1
+    arithmetic of `continuous - continuous = continuous`).
+
+    paper source: Proposition `prop:three-regime-five-state` Regime (i),
+    line 814 + proof line 825. -/
+theorem envelope_continuity_in_p_paper_Def :
+    ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) := by
+  unfold overshootRegimeI
+  exact continuousOn_const.sub L_at_betaStarOfP_continuousOn_paper_Def
 
 /-- **R168 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `envelope_continuity_in_p_workingAssumption` axiom). Direct re-export

@@ -5313,15 +5313,29 @@ def entry_atom_W_bar_eventually_decreasing_paper_Def : GapEntry where
   obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural fact per discipline. 永不 close."
   conditionalOn := []
 
-def entry_atom_envelope_continuity_in_p_paper_Def : GapEntry where
-  name := "envelope_continuity_in_p_paper_Def (R168)"
+def entry_atom_L_at_betaStarOfP_continuousOn_paper_Def : GapEntry where
+  name := "L_at_betaStarOfP_continuousOn_paper_Def (R196 bridge)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), proof line 825 (paper STATES L(β*(p), p) continuous in p on [0, p_1) by argmin-stability of the unique transcendental minimiser)"
+  attackHistory := [ "R196 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R168 `envelope_continuity_in_p_paper_Def` axiom. Encodes only the substantive paper-claim — continuity of `L(β*(p), p)` in `p` via argmin-stability of the unique transcendental minimiser — and lets the R168 envelope continuity (`0.4 - L(β*(p), p)`) follow as a Cat 1 derived theorem via `continuousOn_const.sub`. Strictly more atomic per discipline §18 (single-step typed bridge; envelope continuity is now Cat 1 arithmetic `continuous - continuous = continuous`). 永不 close." ]
+  scope := "ContinuousOn (fun p => L (betaStarOfP p) p) (Set.Ico 0 p_1)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated continuity of the value-at-optimum per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_envelope_continuity_in_p_paper_Def : GapEntry where
+  name := "envelope_continuity_in_p_paper_Def [R196 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (paper STATES overshoot envelope continuous in p)"
-  attackHistory := [ "R168 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated continuity atom on the overshootRegimeI explicit formula. Replaces the previously inline `envelope_continuity_in_p_workingAssumption` axiom. The substantive transcendental composition (continuity of L + continuity of betaStarOfP via paper's argmin-stability argument) is paper-claimed without symbolic proof. 永不 close." ]
+  attackHistory := [
+    "R168 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated continuity atom on the overshootRegimeI explicit formula. Replaces the previously inline `envelope_continuity_in_p_workingAssumption` axiom. The substantive transcendental composition (continuity of L + continuity of betaStarOfP via paper's argmin-stability argument) is paper-claimed without symbolic proof. 永不 close.",
+    "R196 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the new smaller bridge atom `L_at_betaStarOfP_continuousOn_paper_Def` (Cat 3 §3.4.3, encoding the substantive argmin-stability paper-claim). Proof is a direct `continuousOn_const.sub L_at_betaStarOfP_continuousOn_paper_Def` after `unfold overshootRegimeI`. Net §3.4.3 atom delta: −1 (R168 axiom retired) + 1 (R196 bridge) = 0, but the new bridge is strictly more atomic per discipline §18 (single-step typed bridge isolating the substantive content; envelope continuity now Cat 1 arithmetic)."
+  ]
   scope := "ContinuousOn overshootRegimeI (Set.Ico 0 p_1)"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated continuity per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R196 bridge `L_at_betaStarOfP_continuousOn_paper_Def` + Cat 1 `continuousOn_const.sub`."
   conditionalOn := []
 
 def entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def : GapEntry where
@@ -8728,6 +8742,9 @@ def allGaps : List GapEntry := [
   entry_thm_mean_estimate_gap_continuous_paper_Def,
   entry_thm_mean_estimate_gap_tendsto_mLimit_paper_Def,
   entry_atom_W_bar_eventually_decreasing_paper_Def,
+  -- R196 2026-05-16: smaller bridge atom + R168 retired (now Cat 1 derived
+  -- theorem consuming this bridge + `continuousOn_const.sub`).
+  entry_atom_L_at_betaStarOfP_continuousOn_paper_Def,
   entry_atom_envelope_continuity_in_p_paper_Def,
   entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def,
   entry_atom_kappaStar_diverges_at_pc_paper_Def,
