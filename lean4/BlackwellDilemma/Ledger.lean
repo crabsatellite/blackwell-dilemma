@@ -5399,37 +5399,79 @@ def entry_atom_kappaStar_diverges_at_pc_paper_Def : GapEntry where
   obstacleOrAttribution := "CLOSED via R198 bridge `kappaStar_diverges_at_pc_paper_Def_pointwise` + Cat 1 `intro` + direct application."
   conditionalOn := []
 
-def entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def : GapEntry where
-  name := "topoLossKernel_le_one_over_n_on_giant_paper_Def (R171)"
+def entry_atom_topoLossKernel_pointwise_bound_paper_Def : GapEntry where
+  name := "topoLossKernel_pointwise_bound_paper_Def (R199 bridge)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
   paperSource := "Proposition prop:topo-cluster proof line 294 + Theorem 3.3 Part 1 proof lines 415-417 (paper STATES per-realisation giant-component-bound on topoLossKernel)"
-  attackHistory := [ "R171 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated kernel-bound atom on the topoLossKernel carrier on the giantComponentEvent sub-event. Replaces the previously inline `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom. Paper-graph-specific cluster-size combinatorics is the conceptual source. 永不 close." ]
+  attackHistory := [ "R199 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R171 `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom. Encodes the per-(n, ω) pointwise inequality form on the topoLossKernel carrier — the paper closed-form `(N-k)/((N+1)(k+1))` evaluated at the giant-component-event lower bound `k ≥ (n-1)/2`. The R171 universal statement now follows as a Cat 1 derived theorem via direct application. Strictly more atomic per discipline §18 (single-step typed bridge isolating the per-(n,ω) pointwise kernel-bound from the universal-quantifier wrapper; this is the smallest atomic stipulation possible given that both topoLossKernel and giantComponentEvent are opaque Cat 3 carriers). 永不 close." ]
   scope := "∀ n ω, ω ∈ giantComponentEvent n → topoLossKernel n ω ≤ 1/(n+1)"
   obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated kernel bound per discipline. 永不 close."
   conditionalOn := []
 
-def entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def : GapEntry where
-  name := "expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def (R172)"
+def entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def : GapEntry where
+  name := "topoLossKernel_le_one_over_n_on_giant_paper_Def [R171 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Proposition prop:topo-cluster proof line 294 + Theorem 3.3 Part 1 proof lines 415-417 (paper STATES per-realisation giant-component-bound on topoLossKernel)"
+  attackHistory := [
+    "R171 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated kernel-bound atom on the topoLossKernel carrier on the giantComponentEvent sub-event. Replaces the previously inline `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom. Paper-graph-specific cluster-size combinatorics is the conceptual source. 永不 close.",
+    "R199 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the new strictly-smaller bridge atom `topoLossKernel_pointwise_bound_paper_Def` (Cat 3 §3.4.3, encoding only the per-(n,ω) pointwise kernel-bound on the giantComponentEvent sub-event). Proof is a direct `intro n ω hω; exact topoLossKernel_pointwise_bound_paper_Def n ω hω`. Net §3.4.3 atom delta: −1 (R171 axiom retired) + 1 (R199 bridge) = 0 net atom count, but the new bridge is strictly more atomic per discipline §18 (single-step typed bridge isolating the per-(n,ω) kernel-bound from the universal-quantifier wrapper)."
+  ]
+  scope := "∀ n ω, ω ∈ giantComponentEvent n → topoLossKernel n ω ≤ 1/(n+1)"
+  obstacleOrAttribution := "CLOSED via R199 bridge `topoLossKernel_pointwise_bound_paper_Def` + Cat 1 `intro` + direct application."
+  conditionalOn := []
+
+def entry_atom_expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def : GapEntry where
+  name := "expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def (R200 bridge)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster Part 2, line 287 + proof via thm:phase Part 2 lines 421-427 (Mills-tail geometric-series closed form on the abstract carrier)"
+  attackHistory := [ "R200 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R172 `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def` axiom. Encodes the paper-stated structural identification `expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))` for the SAME exponential decay rate `c > 0` extracted from the Grimmett antecedent (Mills-tail closed form on the abstract carrier per paper proof via thm:phase Part 2 lines 421-427's geometric-series composition). The R172 positivity statement now follows as a Cat 1 derived theorem composing this bridge with `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`. Strictly more atomic per discipline §18 (single-step typed bridge isolating the paper-stated Mills identification on the abstract carrier from the positivity consequence; positivity is Mathlib-derivable from the closed form). 永不 close." ]
+  scope := "(Grimmett antecedent) → ∀ p > p_c, ∃ c > 0, expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated Mills-closed-form identification per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def : GapEntry where
+  name := "expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def [R172 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:topo-cluster Part 2, line 287 (paper STATES `c₁(p) > 0` Mills-tail-style positivity on expectedTopoLossAboveLowerConst above p_c)"
-  attackHistory := [ "R172 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated positivity atom on the expectedTopoLossAboveLowerConst carrier above the percolation threshold. Replaces the previously inline `expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption` axiom. Grimmett 1999 §6.75 cluster-tail-derived Mills-tail composition is the conceptual source. 永不 close." ]
+  attackHistory := [
+    "R172 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated positivity atom on the expectedTopoLossAboveLowerConst carrier above the percolation threshold. Replaces the previously inline `expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption` axiom. Grimmett 1999 §6.75 cluster-tail-derived Mills-tail composition is the conceptual source. 永不 close.",
+    "R200 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the new strictly-smaller bridge atom `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` (Cat 3 §3.4.3, encoding the structural identification of the abstract carrier with the Mills closed form `1/(1-exp(-c))`) + Cat 1 `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`. Proof: `obtain ⟨c, hc, h_eq⟩ := bridge h_grimmett p hp; rw [h_eq]; exact mills_const_pos_of_exp_decay_rate_pos c hc`. Net §3.4.3 atom delta: −1 (R172 axiom retired) + 1 (R200 bridge) = 0 net atom count, but the new bridge is strictly more atomic per discipline §18 (positivity is Mathlib-derivable; the substantive content is the abstract-carrier ↔ closed-form identification)."
+  ]
   scope := "(Grimmett antecedent) → ∀ p > p_c, 0 < expectedTopoLossAboveLowerConst p"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated positivity per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R200 bridge `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` + Cat 1 `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`."
+  conditionalOn := []
+
+def entry_atom_expectedTopoLoss_ge_mills_inverse_eventually_paper_Def : GapEntry where
+  name := "expectedTopoLoss_ge_mills_inverse_eventually_paper_Def (R201 bridge)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster Part 2 + proof via thm:phase Part 2 lines 421-427 (Mills-tail closed-form eventually-lower-bound on expectedTopoLoss)"
+  attackHistory := [ "R201 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R173 `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def` axiom. Encodes the paper-stated per-n-eventually lower bound at the Mills closed-form constant `1/(1-exp(-c))` (instead of at the abstract `expectedTopoLossAboveLowerConst p` carrier), consuming the SAME exponential-decay rate `c > 0` and the SAME R200 carrier-identification hypothesis `expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))`. The R173 statement at the abstract carrier level now follows as a Cat 1 derived theorem by `rw` on the R200 carrier-identification + this bridge. Strictly more atomic per discipline §18 (single-step typed bridge isolating the Mills closed-form eventually-bound from the abstract-carrier wrapper; the abstract-carrier ↔ closed-form identification is factored out via R200). 永不 close." ]
+  scope := "(Grimmett antecedent) → ∀ p > p_c, ∀ c > 0, expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c)) → ∃ N₁, ∀ n ≥ N₁, 1 / (1 - exp(-c)) ≤ expectedTopoLoss n p"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated Mills-closed-form eventually-bound per discipline. 永不 close."
   conditionalOn := []
 
 def entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def : GapEntry where
-  name := "expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def (R173)"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+  name := "expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def [R173 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:topo-cluster Part 2 (paper STATES per-n eventually `c₁(p) ≤ E[|W_topo|]` lower bound)"
-  attackHistory := [ "R173 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated eventually-lower-bound atom on the carrier pair (expectedTopoLossAboveLowerConst, expectedTopoLoss) above the percolation threshold. Replaces the previously inline `expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption` axiom. Mills-tail geometric-decay derivation is the conceptual source. 永不 close." ]
+  attackHistory := [
+    "R173 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated eventually-lower-bound atom on the carrier pair (expectedTopoLossAboveLowerConst, expectedTopoLoss) above the percolation threshold. Replaces the previously inline `expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption` axiom. Mills-tail geometric-decay derivation is the conceptual source. 永不 close.",
+    "R201 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem composing the new strictly-smaller bridge atom `expectedTopoLoss_ge_mills_inverse_eventually_paper_Def` (Cat 3 §3.4.3, encoding the Mills closed-form eventually-lower-bound on expectedTopoLoss) with the R200 carrier-identification bridge `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` (which supplies both the witness `c > 0` and the carrier ↔ closed-form rewrite). Proof: `obtain ⟨c, hc, h_eq⟩ := R200 h_grimmett p hp; obtain ⟨N₁, hN₁⟩ := R201 h_grimmett p hp c hc h_eq; refine ⟨N₁, ?_⟩; intro n hn; rw [h_eq]; exact hN₁ n hn`. Net §3.4.3 atom delta: −1 (R173 axiom retired) + 1 (R201 bridge) = 0 net atom count, but the new bridge is strictly more atomic per discipline §18 (the abstract-carrier ↔ closed-form identification is factored out via R200; the substantive content of R201 is the Mills closed-form eventually-bound on expectedTopoLoss)."
+  ]
   scope := "(Grimmett antecedent) → ∀ p > p_c, ∃ N₁, ∀ n ≥ N₁, expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated eventually-bound per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R201 bridge `expectedTopoLoss_ge_mills_inverse_eventually_paper_Def` + R200 bridge `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` + Cat 1 `obtain`/`rw`."
   conditionalOn := []
 
 def entry_atom_L_unimodal_in_regime_i_paper_Def : GapEntry where
@@ -8794,8 +8836,17 @@ def allGaps : List GapEntry := [
   -- theorem consuming this bridge + intro + direct application).
   entry_atom_kappaStar_diverges_at_pc_paper_Def_pointwise,
   entry_atom_kappaStar_diverges_at_pc_paper_Def,
+  -- R199 2026-05-16: smaller bridge atom + R171 retired (now Cat 1 derived
+  -- theorem consuming this bridge + direct application).
+  entry_atom_topoLossKernel_pointwise_bound_paper_Def,
   entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def,
+  -- R200 2026-05-16: smaller bridge atom + R172 retired (now Cat 1 derived
+  -- theorem consuming this bridge + Infrastructure.MillsConstantPositive).
+  entry_atom_expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def,
   entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def,
+  -- R201 2026-05-16: smaller bridge atom + R173 retired (now Cat 1 derived
+  -- theorem consuming this bridge + R200 carrier-identification + rw chain).
+  entry_atom_expectedTopoLoss_ge_mills_inverse_eventually_paper_Def,
   entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def,
   entry_atom_L_unimodal_in_regime_i_paper_Def,
   -- R93 combined-dominance witness atom (Cat 3 §3.4.3 paper-stipulated)

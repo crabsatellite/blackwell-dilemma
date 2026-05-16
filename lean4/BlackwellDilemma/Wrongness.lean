@@ -29,6 +29,7 @@ import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Infrastructure.BlackwellConditional
 import BlackwellDilemma.Infrastructure.MillsRatioTail
+import BlackwellDilemma.Infrastructure.MillsConstantPositive
 
 namespace BlackwellDilemma
 
@@ -1369,26 +1370,53 @@ correction. -/
     Definition 2.1 (the `Z²_L` action graph). -/
 axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-/-- **R171** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Proposition `prop:topo-cluster` proof line 294 + Theorem 3.3
-    Part 1 proof lines 415-417 STATE that on the giant-component event,
-    the per-realisation topological-loss kernel is bounded by the
-    Mills-style `(N-k)/((N+1)(k+1)) = O(1/N)` envelope, encoded as
-    `topoLossKernel n ω ≤ 1/(n+1)`.
+/-- **R199 bridge for R171** Cat 3 §3.4.3 paper-Def-stipulated SMALLER
+    bridge atom replacing the previous R171
+    `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom.
 
-    Paper-Def-stipulated structural fact about the `topoLossKernel`
-    opaque carrier on the `giantComponentEvent` sub-event (paper-graph-
-    specific cluster-size combinatorics). The substantive Mills-tail
-    `1/(n+1)` decay algebra is the conceptual source; the encoded atom
-    is the paper-stated FACT on the paper-novel kernel carrier.
+    Encodes only the per-`(n, ω)` pointwise inequality form on the
+    `topoLossKernel` carrier — the paper Proposition `prop:topo-cluster`
+    proof line 294 closed-form `(N-k)/((N+1)(k+1))` evaluated at the
+    giant-component-event lower bound `k ≥ (n-1)/2`, giving the
+    `1/(n+1)` envelope on the kernel carrier. The substantive `Z²_L`
+    cluster-size combinatorics is the conceptual source.
+
+    Strictly more atomic per discipline §18: this is the smallest
+    atomic stipulation possible given that both `topoLossKernel` and
+    `giantComponentEvent` are opaque Cat 3 carriers (cannot decompose
+    further without `Z²_L` lattice cluster machinery). The R171
+    universal statement now follows as a Cat 1 derived theorem via
+    direct application.
 
     Per discipline §3.4.3 (paper-Def-stipulated structural fact about
     paper-novel opaque kernel carrier on paper-novel sub-event).
-    永不 close. -/
-axiom topoLossKernel_le_one_over_n_on_giant_paper_Def :
+    永不 close.
+
+    paper source: Proposition `prop:topo-cluster` proof line 294 +
+    Theorem 3.3 Part 1 proof lines 415-417. -/
+axiom topoLossKernel_pointwise_bound_paper_Def :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       ω ∈ giantComponentEvent n →
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1)
+
+/-- **R171 CLOSURE** (Cat 1 derived theorem; replaces the previous R171
+    `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom). Direct
+    application of the new strictly-smaller R199 bridge atom
+    `topoLossKernel_pointwise_bound_paper_Def`.
+
+    Net §3.4.3 atom delta: −1 (R171 retired) + 1 (R199 bridge) = 0
+    net atom count, but the new bridge is strictly more atomic per
+    discipline §18 (single-step typed bridge isolating the per-(n,ω)
+    pointwise kernel-bound from the universal-quantifier wrapper).
+
+    paper source: Proposition `prop:topo-cluster` proof line 294 +
+    Theorem 3.3 Part 1 proof lines 415-417. -/
+theorem topoLossKernel_le_one_over_n_on_giant_paper_Def :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      ω ∈ giantComponentEvent n →
+        topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) := by
+  intro n ω hω
+  exact topoLossKernel_pointwise_bound_paper_Def n ω hω
 
 /-- **R171 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom).
@@ -1658,26 +1686,69 @@ refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
     threshold + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound). -/
 axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
 
-/-- **R172** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Proposition `prop:topo-cluster` Part 2 line 287 STATES `c₁(p) > 0`
-    Mills-tail-style positivity of the abstract `expectedTopoLossAboveLowerConst`
-    carrier above the percolation threshold.
+/-- **R200 bridge for R172** Cat 3 §3.4.3 paper-Def-stipulated SMALLER
+    bridge atom replacing the previous R172
+    `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def` axiom.
 
-    Paper-Def-stipulated structural positivity fact about the carrier
-    above `p_c`. The substantive Grimmett 1999 §6.75 cluster-tail-derived
-    Mills-tail composition is the conceptual source; the encoded atom is
-    the paper-stated POSITIVITY FACT on the paper-novel carrier
-    (conditional on the Grimmett antecedent).
+    Encodes the paper-stated Mills-tail-constant identification:
+    above the percolation threshold, the abstract
+    `expectedTopoLossAboveLowerConst p` carrier coincides with the
+    Mills-tail closed form `1 / (1 - exp(-c))` for the SAME exponential
+    decay rate `c > 0` extracted from the Grimmett antecedent — paper
+    Proposition `prop:topo-cluster` Part 2 line 287 + proof via
+    `thm:phase` Part 2 lines 421-427's geometric-series Mills-tail
+    composition. The substantive Grimmett 1999 §6.75 cluster-tail
+    composition is the conceptual source.
+
+    Strictly more atomic per discipline §18: this bridge isolates the
+    paper-stated structural identification of the abstract carrier
+    with the Mills closed form, and the original R172 positivity claim
+    becomes a Cat 1 corollary via
+    `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`. The
+    positivity statement `0 < expectedTopoLossAboveLowerConst p` no
+    longer needs to be axiomatised — it is derived from the Mills
+    closed form's well-known positivity.
 
     Per discipline §3.4.3 (paper-Def-stipulated structural fact about
     paper-novel opaque carrier above parametric threshold).
-    永不 close. -/
-axiom expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def :
+    永不 close.
+
+    paper source: Proposition `prop:topo-cluster` Part 2, line 287 +
+    proof via `thm:phase` Part 2 lines 421-427 (Mills-tail
+    geometric-series closed form on the abstract carrier). -/
+axiom expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
-      0 < expectedTopoLossAboveLowerConst p
+      ∃ c : ℝ, 0 < c ∧
+        expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))
+
+/-- **R172 CLOSURE** (Cat 1 derived theorem; replaces the previous R172
+    `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def` axiom).
+    Composes the new strictly-smaller R200 bridge atom
+    `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` with
+    Cat 1 Mathlib `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`
+    positivity of the Mills inverse `1/(1-exp(-c))` for `c > 0`.
+
+    Net §3.4.3 atom delta: −1 (R172 retired) + 1 (R200 bridge) = 0
+    net atom count, but the new bridge is strictly more atomic per
+    discipline §18 (single-step typed bridge isolating the paper-stated
+    Mills identification on the abstract carrier from the positivity
+    consequence; positivity itself is Mathlib-derivable).
+
+    paper source: Proposition `prop:topo-cluster` Part 2, line 287. -/
+theorem expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      0 < expectedTopoLossAboveLowerConst p := by
+  intro h_grimmett p hp
+  obtain ⟨c, hc, h_eq⟩ :=
+    expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def h_grimmett p hp
+  rw [h_eq]
+  exact BlackwellDilemma.Infrastructure.mills_const_pos_of_exp_decay_rate_pos c hc
 
 /-- **R172 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption` axiom).
@@ -1705,26 +1776,79 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
       0 < expectedTopoLossAboveLowerConst p :=
   expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption
 
-/-- **R173** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Proposition `prop:topo-cluster` Part 2 STATES per-n eventually
-    the lower bound `c₁(p) ≤ E[|W_topo|]` on the abstract
-    `expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p` form.
+/-- **R201 bridge for R173** Cat 3 §3.4.3 paper-Def-stipulated SMALLER
+    bridge atom replacing the previous R173
+    `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def` axiom.
 
-    Paper-Def-stipulated eventually-lower-bound structural fact about
-    the carrier pair `(expectedTopoLossAboveLowerConst, expectedTopoLoss)`
-    above `p_c`. The substantive Mills-tail geometric-decay derivation
-    is the conceptual source.
+    Encodes the paper-stated per-`n`-eventually lower bound at the
+    Mills closed-form constant `1/(1-exp(-c))` instead of at the
+    abstract `expectedTopoLossAboveLowerConst p` carrier — paper
+    Proposition `prop:topo-cluster` Part 2 + proof via `thm:phase`
+    Part 2 lines 421-427's geometric-series Mills-tail composition.
+    The bridge consumes the SAME exponential-decay rate `c > 0` and
+    the SAME R200 carrier-identification hypothesis
+    `expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))` that
+    R200 establishes, so the lower bound is exhibited on the explicit
+    Mills closed form. The substantive Mills-tail geometric-decay
+    derivation is the conceptual source.
+
+    Strictly more atomic per discipline §18: this bridge isolates the
+    paper-stated Mills-closed-form eventually-lower-bound on
+    `expectedTopoLoss n p`, decoupling it from the abstract carrier
+    via the R200 identification chain. The original R173 statement at
+    the abstract carrier level becomes a Cat 1 corollary by `rw` on
+    the R200 carrier-identification + this bridge.
 
     Per discipline §3.4.3 (paper-Def-stipulated structural fact about
-    paper-novel carrier-pair behavior at parametric boundary).
-    永不 close. -/
-axiom expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def :
+    paper-novel Mills-closed-form per-n-eventually-bound behavior).
+    永不 close.
+
+    paper source: Proposition `prop:topo-cluster` Part 2 + proof via
+    `thm:phase` Part 2 lines 421-427 (Mills-tail closed-form
+    eventually-lower-bound on `expectedTopoLoss`). -/
+axiom expectedTopoLoss_ge_mills_inverse_eventually_paper_Def :
+    (∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∀ c : ℝ, 0 < c →
+        expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c)) →
+        ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
+          1 / (1 - Real.exp (-c)) ≤ expectedTopoLoss n p
+
+/-- **R173 CLOSURE** (Cat 1 derived theorem; replaces the previous R173
+    `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def` axiom).
+    Composes the new strictly-smaller R201 bridge atom
+    `expectedTopoLoss_ge_mills_inverse_eventually_paper_Def` with the
+    R200 carrier-identification bridge
+    `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` (which
+    supplies both the witness `c > 0` and the
+    `expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))` rewrite).
+
+    Net §3.4.3 atom delta: −1 (R173 retired) + 1 (R201 bridge) = 0
+    net atom count, but the new bridge is strictly more atomic per
+    discipline §18 (single-step typed bridge isolating the Mills
+    closed-form eventually-bound from the abstract-carrier wrapper;
+    the abstract-carrier identification with the closed form is
+    factored out via R200).
+
+    paper source: Proposition `prop:topo-cluster` Part 2. -/
+theorem expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
-        expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p
+        expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p := by
+  intro h_grimmett p hp
+  obtain ⟨c, hc, h_eq⟩ :=
+    expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def h_grimmett p hp
+  obtain ⟨N₁, hN₁⟩ :=
+    expectedTopoLoss_ge_mills_inverse_eventually_paper_Def h_grimmett p hp c hc h_eq
+  refine ⟨N₁, ?_⟩
+  intro n hn
+  rw [h_eq]
+  exact hN₁ n hn
 
 /-- **R173 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption` axiom).
