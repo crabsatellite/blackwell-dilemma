@@ -1487,4 +1487,50 @@ graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).
 #print axioms BlackwellDilemma.FiveState.L_unimodal_in_regime_i_OPEN
 #print axioms BlackwellDilemma.FiveState.envelope_continuity_in_p_OPEN
 
+/-! ## R207 strict axiom-closure verification of all 13 retired §3.4.3 atoms
+
+For each retired theorem, prints the dependency closure to verify
+NO `sorry`, NO `native_decide`, NO un-credited axioms — only
+KERNEL + Cat 3 §3.4.1 carriers + Cat 3 §3.4.3 paper-Def bridges +
+Cat 2 ClassicalResults axioms. -/
+
+-- R162 retired (R188): belowThresholdWelfare boundary convention
+#print axioms BlackwellDilemma.belowThresholdWelfare_le_at_zero_for_negative
+
+-- R165 retired (R187): agentWelfare kappaAgent supermodular
+#print axioms BlackwellDilemma.agentWelfare_kappaAgent_at_alpha_one_isSupermodular
+
+-- R166a retired (R195): mean_estimate_gap continuity
+#print axioms BlackwellDilemma.mean_estimate_gap_continuous_paper_Def
+
+-- R166b retired (R195): mean_estimate_gap tendsto
+#print axioms BlackwellDilemma.mean_estimate_gap_tendsto_mLimit_paper_Def
+
+-- R167 retired (R186): W_bar eventually decreasing
+#print axioms BlackwellDilemma.W_bar_eventually_decreasing_R186
+
+-- R168 retired (R196): envelope continuity
+#print axioms BlackwellDilemma.FiveState.envelope_continuity_in_p_paper_Def
+
+-- R169 retired (R197): forward_reachable = SimpleGraph reach
+#print axioms BlackwellDilemma.forward_reachable_eq_simpleGraph_reach_paper_Def
+
+-- R170 retired (R198 → R203/R204): kappaStar diverges at p_c
+#print axioms BlackwellDilemma.kappaStar_diverges_at_pc_paper_Def_pointwise
+
+-- R171 retired (R199 → R205): topoLossKernel pointwise bound
+#print axioms BlackwellDilemma.topoLossKernel_pointwise_bound_paper_Def
+
+-- R172 retired (R199): expectedTopoLossAboveLowerConst positivity
+#print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def
+
+-- R173 retired (R199): expectedTopoLoss eventually bound
+#print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def
+
+-- R174 retired (R200): L_unimodal in Regime (i)
+#print axioms BlackwellDilemma.FiveState.L_unimodal_in_regime_i_paper_Def
+
+-- R184 retired (R201 → R206): agentRewardKernel kappaAgent corner positivity
+#print axioms BlackwellDilemma.agentRewardKernel_kappaAgent_corner_positivity_paper_Def
+
 end BlackwellDilemma.AxiomAudit
