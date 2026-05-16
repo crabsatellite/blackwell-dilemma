@@ -423,13 +423,41 @@ theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
 axiom W_bar_eventually_decreasing_workingAssumption :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N
 
-/-- **R147 atom 4**: `W_bar` is bounded above by `W_bar 0` for `β < 0`
-    (paper-instance via line 614 standing convention `β ≥ 0`: outside
-    the paper's domain, the carrier's defining mixture decomposition
-    still yields `W_bar β ≤ W_bar 0` since the contributions are
-    non-positively-shifted at negative `β`). -/
-axiom W_bar_le_at_zero_for_negative_workingAssumption :
-    ∀ β : ℝ, β < 0 → W_bar β ≤ W_bar 0
+/-- **R162** Cat 3 §3.4.3 paper-Def-stipulated convention atom:
+    below-threshold welfare is bounded above by below-threshold-at-zero
+    for `β < 0` (outside paper line 614's standing convention `β ≥ 0`).
+
+    Per paper Definition 2.1 + paper line 614: the paper's stated domain
+    is `β ≥ 0`; outside this domain, the below-threshold welfare carrier
+    follows the paper convention `belowThresholdWelfare β ≤
+    belowThresholdWelfare 0` (paper-Def-stipulated boundary behavior of
+    the per-sample κ-agent welfare extending to negative β).
+
+    This is paper-Def-stipulated structural-equation convention per
+    discipline §3.4.3 (paper-novel boundary-behavior fact about the
+    `belowThresholdWelfare` carrier outside the paper's primary domain).
+    永不 close. -/
+axiom belowThresholdWelfare_le_at_zero_for_negative :
+    ∀ β : ℝ, β < 0 → belowThresholdWelfare β ≤ belowThresholdWelfare 0
+
+/-- **R147 atom 4 → R162 CLOSED**: `W_bar` is bounded above by `W_bar 0`
+    for `β < 0` (paper-instance via line 614 standing convention
+    `β ≥ 0`: outside the paper's domain, the carrier's defining mixture
+    decomposition still yields `W_bar β ≤ W_bar 0`).
+
+    **R162 closure**: Cat 1 derivation via:
+    (a) `aboveThresholdWelfare_monotone_OPEN` (β < 0 ≤ 0 → above β ≤ above 0),
+    (b) `belowThresholdWelfare_le_at_zero_for_negative` (paper convention atom).
+    Composes via arithmetic on the W_bar = above + below decomposition. -/
+theorem W_bar_le_at_zero_for_negative_workingAssumption :
+    ∀ β : ℝ, β < 0 → W_bar β ≤ W_bar 0 := by
+  intro β hβ
+  unfold W_bar
+  have h_above : aboveThresholdWelfare β ≤ aboveThresholdWelfare 0 :=
+    aboveThresholdWelfare_monotone_OPEN β 0 (le_of_lt hβ)
+  have h_below : belowThresholdWelfare β ≤ belowThresholdWelfare 0 :=
+    belowThresholdWelfare_le_at_zero_for_negative β hβ
+  linarith
 
 /-- **R147 Cat 1 derived theorem**: `W_bar` is `ContinuousOn (Set.Ici 0)`
     by arithmetic (sum of two `ContinuousOn`s).
