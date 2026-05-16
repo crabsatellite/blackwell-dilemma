@@ -109,3 +109,4 @@ import BlackwellDilemma.Infrastructure.CalculusTopkis
 import BlackwellDilemma.Infrastructure.LebesgueStieltjesAtoms
 import BlackwellDilemma.Infrastructure.IntegerLattice
 import BlackwellDilemma.Infrastructure.BondPercolationLattice
+import BlackwellDilemma.Infrastructure.OrderStatisticsAlgebraicBound

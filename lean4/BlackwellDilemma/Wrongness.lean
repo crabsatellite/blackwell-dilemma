@@ -30,6 +30,7 @@ import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Infrastructure.BlackwellConditional
 import BlackwellDilemma.Infrastructure.MillsRatioTail
 import BlackwellDilemma.Infrastructure.MillsConstantPositive
+import BlackwellDilemma.Infrastructure.OrderStatisticsAlgebraicBound
 
 namespace BlackwellDilemma
 
@@ -1370,44 +1371,117 @@ correction. -/
     Definition 2.1 (the `Z²_L` action graph). -/
 axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-/-- **R199 bridge for R171** Cat 3 §3.4.3 paper-Def-stipulated SMALLER
-    bridge atom replacing the previous R171
-    `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom.
+/-- **R205 bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated
+    structural equation): the paper Proposition `prop:topo-cluster`
+    proof line 294 STATES that, on the giant-component event, the
+    per-realisation topological-loss kernel takes the explicit
+    order-statistics closed form `(N - k) / ((N + 1) (k + 1))`, where
+    `k = |R(v_0)|` is the cluster size of `v_0` under `ω`.
 
-    Encodes only the per-`(n, ω)` pointwise inequality form on the
-    `topoLossKernel` carrier — the paper Proposition `prop:topo-cluster`
-    proof line 294 closed-form `(N-k)/((N+1)(k+1))` evaluated at the
-    giant-component-event lower bound `k ≥ (n-1)/2`, giving the
-    `1/(n+1)` envelope on the kernel carrier. The substantive `Z²_L`
-    cluster-size combinatorics is the conceptual source.
+    This is the kernel-formula identification on the giant-component
+    sub-event: it asserts existence of the cluster-size index `k ≤ n`
+    such that `topoLossKernel n ω` equals the David & Nagaraja 2003
+    §1.3 expression evaluated at `(N, k) = (n, k)`. The substantive
+    `Z²_L` connectivity / cluster-counting combinatorics + the
+    uniform-order-statistics expectation formula are the conceptual
+    sources (Cat 3 §3.4.3 paper-Def per discipline; carriers
+    `topoLossKernel` and `giantComponentEvent` are opaque Cat 3 — this
+    is the smallest decomposition possible without `Z²_L` lattice
+    cluster machinery).
 
-    Strictly more atomic per discipline §18: this is the smallest
-    atomic stipulation possible given that both `topoLossKernel` and
-    `giantComponentEvent` are opaque Cat 3 carriers (cannot decompose
-    further without `Z²_L` lattice cluster machinery). The R171
-    universal statement now follows as a Cat 1 derived theorem via
-    direct application.
+    Per discipline §3.4.3. 永不 close.
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
-    paper-novel opaque kernel carrier on paper-novel sub-event).
-    永不 close.
-
-    paper source: Proposition `prop:topo-cluster` proof line 294 +
-    Theorem 3.3 Part 1 proof lines 415-417. -/
-axiom topoLossKernel_pointwise_bound_paper_Def :
+    paper source: Proposition `prop:topo-cluster` proof line 294
+    (`E[r* - max_{v ∈ R} r(v) | |R| = k] = (N - k) / ((N + 1) (k + 1))`,
+    via David & Nagaraja 2003 §1.3 order-statistics formula for `k`
+    iid `Uniform[0, 1]` samples on `{0, 1/(N+1), …, N/(N+1)}`). -/
+axiom topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       ω ∈ giantComponentEvent n →
-        topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1)
+        ∃ k : ℕ, k ≤ n ∧
+          topoLossKernel n ω =
+            ((n : ℝ) - (k : ℝ)) / (((n : ℝ) + 1) * ((k : ℝ) + 1))
+
+/-- **R205 bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated
+    structural fact): the giant-component event of paper Theorem 3.3
+    Part 1 proof lines 415-417 — by the paper-Def definition of "giant
+    component" (cluster size `k ≥ θ(1 - p) · n` with `θ(1 - p) > 1/2`
+    in the supercritical regime) — STIPULATES the cluster-size lower
+    bound `n ≤ 2 k + 1`, equivalently `k ≥ (n - 1) / 2`.
+
+    This is the cluster-size lower-bound consequence of the
+    giant-component event: any cluster-size index `k` such that
+    `topoLossKernel n ω = (n - k) / ((n + 1) (k + 1))` (per R205 bridge
+    atom 1) must satisfy the giant-component lower bound. Without
+    this, the Cat 1 algebraic bound
+    `Infrastructure.orderStatisticsRatio_le_one_over_n_succ` fails:
+    `(n - k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)` is equivalent to
+    `n ≤ 2 k + 1`, NOT true uniformly in `k ∈ {0, …, n}`.
+
+    Per discipline §3.4.3. 永不 close.
+
+    paper source: Theorem 3.3 Part 1 proof lines 415-417 (the
+    giant-component event of line 404, `|R(v_0)| = Θ(N)`, gives a
+    constant-fraction cluster-size lower bound — supercritical-regime
+    `θ(1 - p) > 1/2` implies `k ≥ n/2`, hence `n ≤ 2 k + 1`). -/
+axiom giantComponent_cluster_size_lower_bound_paper_Def :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      ω ∈ giantComponentEvent n →
+        ∀ k : ℕ,
+          topoLossKernel n ω =
+              ((n : ℝ) - (k : ℝ)) / (((n : ℝ) + 1) * ((k : ℝ) + 1)) →
+          n ≤ 2 * k + 1
+
+/-- **R205 bridge — Cat 1 derived theorem** (replaces R199 atomic
+    bridge `topoLossKernel_pointwise_bound_paper_Def`).
+
+    Genuine Cat 1 composition: extract the cluster-size witness `k`
+    from R205 bridge atom 1, derive the algebraic hypothesis
+    `n ≤ 2 k + 1` from R205 bridge atom 2, then apply the Cat 1
+    `Infrastructure.orderStatisticsRatio_le_one_over_n_succ` lemma
+    to convert `(n - k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)`.
+
+    Net §3.4.3 atom delta vs. the previous R199 axiom: −1 (R199
+    monolithic axiom retired) + 2 (R205 smaller paper-Def atoms:
+    kernel-formula identification + cluster-size lower bound). The
+    substantive algebra is now a Cat 1 lemma
+    (`Infrastructure.OrderStatisticsAlgebraicBound`), Mathlib-PR-ready,
+    kernel-pure (only `propext, Classical.choice, Quot.sound`). The
+    decomposition surfaces the previously implicit reliance on the
+    giant-component cluster-size lower bound, which is now an
+    explicit, separately auditable atomic stipulation.
+
+    paper source: Proposition `prop:topo-cluster` proof line 294
+    (order-statistics formula) + Theorem 3.3 Part 1 proof lines
+    415-417 (giant-component cluster-size lower bound) +
+    Cat 1 algebra in `Infrastructure.OrderStatisticsAlgebraicBound`. -/
+theorem topoLossKernel_pointwise_bound_paper_Def :
+    ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
+      ω ∈ giantComponentEvent n →
+        topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) := by
+  intro n ω hω
+  obtain ⟨k, _hk_le, h_eq⟩ :=
+    topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def n ω hω
+  have h_k_large : n ≤ 2 * k + 1 :=
+    giantComponent_cluster_size_lower_bound_paper_Def n ω hω k h_eq
+  calc topoLossKernel n ω
+      = ((n : ℝ) - (k : ℝ)) / (((n : ℝ) + 1) * ((k : ℝ) + 1)) := h_eq
+    _ ≤ 1 / ((n : ℝ) + 1) :=
+        BlackwellDilemma.Infrastructure.orderStatisticsRatio_le_one_over_n_succ
+          n k h_k_large
 
 /-- **R171 CLOSURE** (Cat 1 derived theorem; replaces the previous R171
     `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom). Direct
-    application of the new strictly-smaller R199 bridge atom
+    application of the R205-derived theorem
     `topoLossKernel_pointwise_bound_paper_Def`.
 
-    Net §3.4.3 atom delta: −1 (R171 retired) + 1 (R199 bridge) = 0
-    net atom count, but the new bridge is strictly more atomic per
-    discipline §18 (single-step typed bridge isolating the per-(n,ω)
-    pointwise kernel-bound from the universal-quantifier wrapper).
+    Net §3.4.3 atom delta vs. R171 axiom: −1 (R171 retired) + 2 (R205
+    bridges) + 1 Cat 1 algebraic lemma; the substantive `Z²_L` cluster
+    combinatorics is decomposed into (i) the paper-stated
+    order-statistics closed form (bridge atom 1), (ii) the
+    giant-component cluster-size lower bound (bridge atom 2), and
+    (iii) the Cat 1 algebraic bound on the order-statistics ratio
+    (Mathlib-PR-ready).
 
     paper source: Proposition `prop:topo-cluster` proof line 294 +
     Theorem 3.3 Part 1 proof lines 415-417. -/
@@ -1417,6 +1491,20 @@ theorem topoLossKernel_le_one_over_n_on_giant_paper_Def :
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) := by
   intro n ω hω
   exact topoLossKernel_pointwise_bound_paper_Def n ω hω
+
+/-! ### R205 axiom-audit witness
+
+`#print axioms` confirms the new R205-derived theorem
+`topoLossKernel_pointwise_bound_paper_Def` depends on BOTH new bridge
+atoms (`topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def` and
+`giantComponent_cluster_size_lower_bound_paper_Def`) — it is NOT a
+1-line restatement of either. The Cat 1 algebraic lemma
+`Infrastructure.orderStatisticsRatio_le_one_over_n_succ` is consumed
+within the proof and contributes only kernel axioms (`propext,
+Classical.choice, Quot.sound`). -/
+
+#print axioms topoLossKernel_pointwise_bound_paper_Def
+#print axioms topoLossKernel_le_one_over_n_on_giant_paper_Def
 
 /-- **R171 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom).

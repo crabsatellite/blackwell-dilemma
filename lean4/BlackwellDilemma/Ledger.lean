@@ -5436,15 +5436,44 @@ def entry_atom_kappaStar_diverges_at_pc_paper_Def : GapEntry where
   obstacleOrAttribution := "CLOSED via R204-derived `kappaStar_diverges_at_pc_paper_Def_pointwise` theorem + Cat 1 `intro` + direct application."
   conditionalOn := []
 
-def entry_atom_topoLossKernel_pointwise_bound_paper_Def : GapEntry where
-  name := "topoLossKernel_pointwise_bound_paper_Def (R199 bridge)"
+def entry_atom_topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def : GapEntry where
+  name := "topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def (R205 bridge atom 1)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster proof line 294 (David & Nagaraja 2003 §1.3 order-statistics formula `E[r* − max_{v ∈ R} r(v) | |R| = k] = (N − k) / ((N + 1) (k + 1))` evaluated on the kernel carrier)"
+  attackHistory := [
+    "R205 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom 1 (of 2) introduced to genuinely retire (not rename) the R199 monolithic `topoLossKernel_pointwise_bound_paper_Def` axiom. Encodes only the kernel-formula identification — the existence of a cluster-size index `k ≤ n` such that `topoLossKernel n ω = (n − k) / ((n + 1) (k + 1))` on the giantComponentEvent sub-event, i.e., the paper-stated order-statistics closed form on the opaque kernel carrier. Substantive `Z²_L` cluster-counting combinatorics + uniform-order-statistics expectation formula are the conceptual sources. The R199 pointwise-bound conclusion is now a Cat 1 derived theorem composing this bridge with R205 bridge atom 2 (`giantComponent_cluster_size_lower_bound_paper_Def`) and the new Cat 1 algebraic lemma `Infrastructure.orderStatisticsRatio_le_one_over_n_succ`. Strictly more atomic per discipline §18 (separates the kernel-formula identification from the cluster-size lower bound from the algebraic ratio bound). 永不 close."
+  ]
+  scope := "∀ n ω, ω ∈ giantComponentEvent n → ∃ k ≤ n, topoLossKernel n ω = (n − k) / ((n + 1) (k + 1))"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated kernel-formula identification per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_giantComponent_cluster_size_lower_bound_paper_Def : GapEntry where
+  name := "giantComponent_cluster_size_lower_bound_paper_Def (R205 bridge atom 2)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 3.3 Part 1 proof lines 415-417 (giant-component event of line 404 `|R(v_0)| = Θ(N)`; supercritical-regime cluster-size lower bound `k ≥ θ(1 − p) · n` with `θ(1 − p) > 1/2` ⇒ `n ≤ 2 k + 1`)"
+  attackHistory := [
+    "R205 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom 2 (of 2) introduced to genuinely retire (not rename) the R199 monolithic `topoLossKernel_pointwise_bound_paper_Def` axiom. Encodes the giant-component cluster-size lower bound — any cluster-size index `k` such that `topoLossKernel n ω = (n − k) / ((n + 1) (k + 1))` (per R205 bridge atom 1) must satisfy `n ≤ 2 k + 1`, equivalently `k ≥ (n − 1) / 2`, on the giantComponentEvent sub-event. Substantive `Z²_L` lattice cluster combinatorics + Harris-Kesten supercritical-regime structure are the conceptual sources. Without this lower bound, the Cat 1 algebraic lemma `Infrastructure.orderStatisticsRatio_le_one_over_n_succ` fails: `(n − k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)` is equivalent to `n ≤ 2 k + 1`, NOT true uniformly in `k`. This bridge isolates the previously-implicit cluster-size-lower-bound dependency. Strictly more atomic per discipline §18. 永不 close."
+  ]
+  scope := "∀ n ω, ω ∈ giantComponentEvent n → ∀ k, topoLossKernel n ω = (n − k) / ((n + 1) (k + 1)) → n ≤ 2 k + 1"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated cluster-size lower bound per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_topoLossKernel_pointwise_bound_paper_Def : GapEntry where
+  name := "topoLossKernel_pointwise_bound_paper_Def [R199 retired — replaced with Cat 1 derived theorem via R205 bridge decomposition + Infrastructure.OrderStatisticsAlgebraicBound]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:topo-cluster proof line 294 + Theorem 3.3 Part 1 proof lines 415-417 (paper STATES per-realisation giant-component-bound on topoLossKernel)"
-  attackHistory := [ "R199 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R171 `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom. Encodes the per-(n, ω) pointwise inequality form on the topoLossKernel carrier — the paper closed-form `(N-k)/((N+1)(k+1))` evaluated at the giant-component-event lower bound `k ≥ (n-1)/2`. The R171 universal statement now follows as a Cat 1 derived theorem via direct application. Strictly more atomic per discipline §18 (single-step typed bridge isolating the per-(n,ω) pointwise kernel-bound from the universal-quantifier wrapper; this is the smallest atomic stipulation possible given that both topoLossKernel and giantComponentEvent are opaque Cat 3 carriers). 永不 close." ]
+  attackHistory := [
+    "R199 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated monolithic bridge atom replacing the previous R171 `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom. Encoded the per-(n, ω) pointwise inequality form on the topoLossKernel carrier — the paper closed-form `(N-k)/((N+1)(k+1))` evaluated at the giant-component-event lower bound `k ≥ (n-1)/2`. The R171 universal statement followed as a Cat 1 derived theorem via direct application.",
+    "R205 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem via SUBSTANTIVE 3-way decomposition. Hostile audit caught R199 as bit-for-bit identical to retired R171 (pure rename, no genuine decomposition). R205 fixes this: introduces (i) Cat 3 bridge atom 1 `topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def` encoding the paper's order-statistics closed-form identification of the kernel carrier on the giant-component sub-event; (ii) Cat 3 bridge atom 2 `giantComponent_cluster_size_lower_bound_paper_Def` encoding the paper's giant-component cluster-size lower bound `n ≤ 2 k + 1`; (iii) Cat 1 algebraic lemma `Infrastructure.orderStatisticsRatio_le_one_over_n_succ` in the new `Infrastructure/OrderStatisticsAlgebraicBound.lean` module deriving `(n − k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)` from `n ≤ 2 k + 1` via `div_le_div_iff₀` + `mul_le_mul_of_nonneg_right` + `nlinarith`. Proof: `intro n ω hω; obtain ⟨k, _, h_eq⟩ := bridge1 n ω hω; have h_k_large := bridge2 n ω hω k h_eq; calc kernel = (n−k)/((n+1)(k+1)) := h_eq; _ ≤ 1/(n+1) := Cat1_lemma n k h_k_large`. Net §3.4.3 atom delta: −1 (R199 monolithic axiom retired) + 2 (R205 SMALLER paper-Def atoms: kernel-formula identification + cluster-size lower bound). New Cat 1 lemma (kernel-pure: `[propext, Classical.choice, Quot.sound]`) is Mathlib-PR-ready and generically useful for order-statistics-style bounds. The decomposition surfaces the previously-implicit cluster-size-lower-bound dependency as an explicit, separately auditable atomic stipulation."
+  ]
   scope := "∀ n ω, ω ∈ giantComponentEvent n → topoLossKernel n ω ≤ 1/(n+1)"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated kernel bound per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R205 bridge atoms `topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def` + `giantComponent_cluster_size_lower_bound_paper_Def` + Cat 1 `Infrastructure.orderStatisticsRatio_le_one_over_n_succ` (algebra `n ≤ 2k+1 ⇒ (n−k)/((n+1)(k+1)) ≤ 1/(n+1)`)."
   conditionalOn := []
 
 def entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def : GapEntry where
@@ -5455,10 +5484,11 @@ def entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def : GapEntry where
   paperSource := "Proposition prop:topo-cluster proof line 294 + Theorem 3.3 Part 1 proof lines 415-417 (paper STATES per-realisation giant-component-bound on topoLossKernel)"
   attackHistory := [
     "R171 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated kernel-bound atom on the topoLossKernel carrier on the giantComponentEvent sub-event. Replaces the previously inline `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom. Paper-graph-specific cluster-size combinatorics is the conceptual source. 永不 close.",
-    "R199 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the new strictly-smaller bridge atom `topoLossKernel_pointwise_bound_paper_Def` (Cat 3 §3.4.3, encoding only the per-(n,ω) pointwise kernel-bound on the giantComponentEvent sub-event). Proof is a direct `intro n ω hω; exact topoLossKernel_pointwise_bound_paper_Def n ω hω`. Net §3.4.3 atom delta: −1 (R171 axiom retired) + 1 (R199 bridge) = 0 net atom count, but the new bridge is strictly more atomic per discipline §18 (single-step typed bridge isolating the per-(n,ω) kernel-bound from the universal-quantifier wrapper)."
+    "R199 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the new strictly-smaller bridge atom `topoLossKernel_pointwise_bound_paper_Def` (Cat 3 §3.4.3, encoding only the per-(n,ω) pointwise kernel-bound on the giantComponentEvent sub-event). Proof is a direct `intro n ω hω; exact topoLossKernel_pointwise_bound_paper_Def n ω hω`. Net §3.4.3 atom delta: −1 (R171 axiom retired) + 1 (R199 bridge) = 0 net atom count, but the new bridge is strictly more atomic per discipline §18 (single-step typed bridge isolating the per-(n,ω) kernel-bound from the universal-quantifier wrapper).",
+    "R205 2026-05-16: R199 bridge atom RETIRED in turn (substantively rederived via 2 new R205 atoms — bridge atom 1 `topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def` (kernel-formula identification) + bridge atom 2 `giantComponent_cluster_size_lower_bound_paper_Def` (cluster-size lower bound) — composed via the new Cat 1 `Infrastructure.OrderStatisticsAlgebraicBound.orderStatisticsRatio_le_one_over_n_succ` algebraic lemma). This entry's underlying derivation chain is now: R205 bridges + Cat 1 lemma → R205-derived `topoLossKernel_pointwise_bound_paper_Def` theorem → this R171-shaped derived theorem. Net effect on this entry: status remains CLOSED; underlying derivation depth deepens by +1 Cat 1 algebraic-lemma layer + +1 atomic decomposition of the previous R199 bridge."
   ]
   scope := "∀ n ω, ω ∈ giantComponentEvent n → topoLossKernel n ω ≤ 1/(n+1)"
-  obstacleOrAttribution := "CLOSED via R199 bridge `topoLossKernel_pointwise_bound_paper_Def` + Cat 1 `intro` + direct application."
+  obstacleOrAttribution := "CLOSED via R205-derived `topoLossKernel_pointwise_bound_paper_Def` theorem + Cat 1 `intro` + direct application."
   conditionalOn := []
 
 def entry_atom_expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def : GapEntry where
@@ -8931,8 +8961,16 @@ def allGaps : List GapEntry := [
   entry_atom_kappaStar_dominates_percolation_scaling_paper_Def,
   entry_atom_kappaStar_diverges_at_pc_paper_Def_pointwise,
   entry_atom_kappaStar_diverges_at_pc_paper_Def,
-  -- R199 2026-05-16: smaller bridge atom + R171 retired (now Cat 1 derived
-  -- theorem consuming this bridge + direct application).
+  -- R205 2026-05-16: 2 SMALLER paper-Def bridge atoms (kernel-formula
+  -- identification + giant-component cluster-size lower bound)
+  -- substantively rederiving the previous R199 monolithic bridge atom
+  -- (now retired as a Cat 1 derived theorem composing the 2 new bridges
+  -- with the new Cat 1 `Infrastructure/OrderStatisticsAlgebraicBound.lean`
+  -- algebraic lemma `(n − k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)` under
+  -- the giant-component hypothesis `n ≤ 2 k + 1`). R171 derived theorem
+  -- chain extended through this new R205 substantive decomposition.
+  entry_atom_topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def,
+  entry_atom_giantComponent_cluster_size_lower_bound_paper_Def,
   entry_atom_topoLossKernel_pointwise_bound_paper_Def,
   entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def,
   -- R200 2026-05-16: smaller bridge atom + R172 retired (now Cat 1 derived
