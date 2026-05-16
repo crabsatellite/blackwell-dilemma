@@ -5269,26 +5269,37 @@ def entry_atom_agentWelfare_kappaAgent_at_alpha_one_isSupermodular : GapEntry wh
   obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
   conditionalOn := []
 
-def entry_atom_mean_estimate_gap_continuous_paper_Def : GapEntry where
-  name := "mean_estimate_gap_continuous_paper_Def (R166)"
+def entry_atom_mean_estimate_gap_eq_posterior_difference_paper_Def : GapEntry where
+  name := "mean_estimate_gap_eq_posterior_difference_paper_Def (R195a)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
-  paperSource := "Theorem 4.1 Part 3, line 493 (paper STATES m(κ) is continuous on (0,∞) under C1-C3)"
-  attackHistory := [ "R166 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated continuity atom on the mean_estimate_gap carrier. Replaces the previously inline `mean_estimate_gap_continuous_workingAssumption` axiom. Gaussian posterior Cat 2 dependency is the conceptual source. 永不 close." ]
-  scope := "Conditions_C1_C2_C3 → ∀ p, ContinuousOn (fun κ => mean_estimate_gap p κ) (Set.Ioi 0)"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated continuity per discipline. 永不 close."
+  paperSource := "Theorem 4.1 statement, line 489 (paper STATES m(κ) = E[V̂_κ(u_2)] − E[V̂_κ(u_1)] = posterior-mean-difference) + Theorem 4.1 Part 3, line 505 (paper STATES m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p, asymptotic alignment)"
+  attackHistory := [ "R195a 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated bridge atom realising mean_estimate_gap p κ as a difference of two gaussianPosteriorMean values whose prior moments / signal sample means / signal-noise variance are paper-instance-specific constants (independent of κ). The witness additionally aligns the asymptotic limit ybar2 - ybar1 with mLimit p. Single shared bridge replacing TWO previously stand-alone Cat 3 atoms (continuous + tendsto): with this bridge in place, BOTH the R166 continuity claim AND the R166 tendsto-mLimit claim become Cat 1 derived theorems consuming only Infrastructure/GaussianPosterior.lean + Infrastructure/GaussianPosteriorAsymptotic.lean. Net atom delta: −2 (R166a continuous + R166b tendsto retired) + 1 (this bridge) = −1. 永不 close." ]
+  scope := "Conditions_C1_C2_C3 → ∀ p, ∃ mu0 tau0sq tausq ybar1 ybar2, 0 < tau0sq ∧ 0 ≤ tausq ∧ ybar2 - ybar1 = mLimit p ∧ ∀ κ, mean_estimate_gap p κ = gaussianPosteriorMean mu0 tau0sq ybar2 κ tausq - gaussianPosteriorMean mu0 tau0sq ybar1 κ tausq"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation (Gaussian conjugate-prior posterior structure) per discipline. 永不 close."
   conditionalOn := []
 
-def entry_atom_mean_estimate_gap_tendsto_mLimit_paper_Def : GapEntry where
-  name := "mean_estimate_gap_tendsto_mLimit_paper_Def (R166)"
-  status := GapStatus.gapDefinitional
-  inputCategory := InputCategory.cat3PaperNovel
-  cat3SubType := Cat3SubType.structuralEquation
+def entry_thm_mean_estimate_gap_continuous_paper_Def : GapEntry where
+  name := "mean_estimate_gap_continuous_paper_Def (R195a CLOSURE; was R166 axiom)"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.notInput
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Theorem 4.1 Part 3, line 493 (paper STATES m(κ) is continuous on (0,∞) under C1-C3)"
+  attackHistory := [ "R195a 2026-05-16: Cat 1 derived theorem closure replacing the previous R166 axiom. Extracts the bridge witness mean_estimate_gap_eq_posterior_difference_paper_Def, rewrites pointwise as a difference of two gaussianPosteriorMean values, then applies ContinuousOn.sub with two instances of gaussianPosteriorMean_continuousOn_in_n (Cat 1, kernel-pure, Mathlib-PR-contributable infrastructure)." ]
+  scope := "Conditions_C1_C2_C3 → ∀ p, ContinuousOn (fun κ => mean_estimate_gap p κ) (Set.Ioi 0)"
+  obstacleOrAttribution := "CLOSED via R195a bridge + Infrastructure/GaussianPosterior.lean."
+  conditionalOn := []
+
+def entry_thm_mean_estimate_gap_tendsto_mLimit_paper_Def : GapEntry where
+  name := "mean_estimate_gap_tendsto_mLimit_paper_Def (R195a CLOSURE; was R166 axiom)"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.notInput
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 3, line 505 (paper STATES m(κ) → mLimit p as κ → ∞ under C1-C3)"
-  attackHistory := [ "R166 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated tendsto atom on the mean_estimate_gap carrier. Replaces the previously inline `mean_estimate_gap_tendsto_mLimit_workingAssumption` axiom. Gaussian posterior data-dominance Cat 2 dependency is the conceptual source. 永不 close." ]
+  attackHistory := [ "R195a 2026-05-16: Cat 1 derived theorem closure replacing the previous R166 axiom. Extracts the bridge witness mean_estimate_gap_eq_posterior_difference_paper_Def, rewrites pointwise as a difference of two gaussianPosteriorMean values, then applies Filter.Tendsto.sub with two instances of gaussianPosteriorMean_tendsto_data_mean_atTop_n (Cat 1, kernel-pure asymptotic data dominance). The bridge's ybar2 - ybar1 = mLimit p clause aligns the resulting limit with mLimit p." ]
   scope := "Conditions_C1_C2_C3 → ∀ p, Tendsto (fun κ => mean_estimate_gap p κ) atTop (nhds (mLimit p))"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated asymptotic limit per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R195a bridge + Infrastructure/GaussianPosteriorAsymptotic.lean."
   conditionalOn := []
 
 def entry_atom_W_bar_eventually_decreasing_paper_Def : GapEntry where
@@ -8710,8 +8721,12 @@ def allGaps : List GapEntry := [
   -- paper-novel opaque carriers; 永不 close).
   entry_atom_belowThresholdWelfare_le_at_zero_for_negative,
   entry_atom_agentWelfare_kappaAgent_at_alpha_one_isSupermodular,
-  entry_atom_mean_estimate_gap_continuous_paper_Def,
-  entry_atom_mean_estimate_gap_tendsto_mLimit_paper_Def,
+  -- R195a 2026-05-16: bridge atom replacing R166 continuous + tendsto pair;
+  -- both former axioms are now Cat 1 derived theorems (gapClosed entries
+  -- below) consuming Infrastructure/GaussianPosterior(Asymptotic).lean.
+  entry_atom_mean_estimate_gap_eq_posterior_difference_paper_Def,
+  entry_thm_mean_estimate_gap_continuous_paper_Def,
+  entry_thm_mean_estimate_gap_tendsto_mLimit_paper_Def,
   entry_atom_W_bar_eventually_decreasing_paper_Def,
   entry_atom_envelope_continuity_in_p_paper_Def,
   entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def,

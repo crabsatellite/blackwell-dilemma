@@ -20,6 +20,7 @@ import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Infrastructure.TopkisCrossPartial
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
 import BlackwellDilemma.Infrastructure.GaussianPosterior
+import BlackwellDilemma.Infrastructure.GaussianPosteriorAsymptotic
 import BlackwellDilemma.Infrastructure.MLimitDifferenceConcrete
 import BlackwellDilemma.Infrastructure.PercExpectationSupermodular
 
@@ -400,28 +401,96 @@ noncomputable def mLimitDifference (_p : ℝ) : ℝ :=
     V_dyn(u_1) =: mLimit p`). -/
 noncomputable def mLimit : ℝ → ℝ := fun p => mLimitDifference p
 
-/-- **R166** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Theorem 4.1 Part 3 line 493 STATES "m(κ) is continuous on (0, ∞)"
-    under Conditions C1-C3.
+/-- **R195a** Cat 3 §3.4.3 paper-Def-stipulated bridge atom: paper
+    Theorem 4.1 Part 3 (line 489 + line 505) STATES that
+    `m(κ) = E[V̂_κ(u_2)] − E[V̂_κ(u_1)]` is realised as a difference of
+    Gaussian conjugate-prior posterior means under Conditions C1-C3.
+
+    The bridge encodes the structural identification of the opaque
+    `mean_estimate_gap` carrier with a difference of two
+    `gaussianPosteriorMean` values whose prior moments / signal sample
+    means / signal-noise variance are paper-instance-specific constants
+    (independent of κ); the κ-parameter enters only through the effective
+    sample-size argument of each posterior mean. The witness additionally
+    aligns the asymptotic limit `ybar2 - ybar1` with the paper's
+    `mLimit p` (paper line 505 `m(κ) → V_dyn(u_2) − V_dyn(u_1) =:
+    mLimit p`).
+
+    With this single bridge atom in place, BOTH the R166 continuity
+    claim AND the R166 tendsto-mLimit claim become Cat 1 derived
+    theorems consuming only `Infrastructure/GaussianPosterior.lean` +
+    `Infrastructure/GaussianPosteriorAsymptotic.lean`. Net atom delta:
+    −2 (continuous + tendsto axioms retired) + 1 (this bridge) = −1.
 
     Paper-Def-stipulated structural fact about the `mean_estimate_gap`
-    opaque carrier per discipline §3.4.3 (paper-stated continuity is
-    paper's commitment to how its primitive carrier behaves under the
-    Bayesian Gaussian-conjugate-prior signal model). Gaussian posterior
-    Cat 2 dependency is the conceptual source; the encoded atom is the
-    paper-stated FACT on the paper-novel `mean_estimate_gap` carrier.
-    永不 close. -/
-axiom mean_estimate_gap_continuous_paper_Def :
+    opaque carrier per discipline §3.4.3 (paper-stated Gaussian
+    conjugate-prior posterior structure is paper's commitment to how
+    its primitive carrier is realised under the Bayesian signal model).
+    Gaussian posterior Cat 2 dependency is the conceptual source;
+    the encoded atom is the paper-stated FACT on the paper-novel
+    `mean_estimate_gap` carrier. 永不 close.
+
+    paper source: Theorem 4.1 statement, line 489 (`m(κ) = E[V̂_κ(u_2)]
+    − E[V̂_κ(u_1)]` posterior-mean-difference encoding); Theorem 4.1
+    Part 3, line 505 (`m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p`
+    asymptotic alignment). -/
+axiom mean_estimate_gap_eq_posterior_difference_paper_Def :
     Conditions_C1_C2_C3 → ∀ p : ℝ,
-      ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0)
+      ∃ mu0 tau0sq tausq ybar1 ybar2 : ℝ,
+        0 < tau0sq ∧ 0 ≤ tausq ∧
+        ybar2 - ybar1 = mLimit p ∧
+        ∀ κ : ℝ, mean_estimate_gap p κ =
+          BlackwellDilemma.Infrastructure.gaussianPosteriorMean mu0 tau0sq ybar2 κ tausq -
+          BlackwellDilemma.Infrastructure.gaussianPosteriorMean mu0 tau0sq ybar1 κ tausq
+
+/-- **R166 CLOSURE** (Cat 1 derived theorem). Continuity of the mean-
+    estimate-gap on `(0, ∞)` under Conditions C1-C3.
+
+    Derivation: extract the bridge witness
+    `mean_estimate_gap_eq_posterior_difference_paper_Def`, rewrite the
+    function pointwise as a difference of two
+    `gaussianPosteriorMean` values, then apply
+    `ContinuousOn.sub` with two instances of
+    `gaussianPosteriorMean_continuousOn_in_n` (Cat 1, kernel-pure,
+    Mathlib-PR-contributable infrastructure in
+    `Infrastructure/GaussianPosterior.lean`).
+
+    Net axiom delta vs prior R166: −1 (the previous
+    `mean_estimate_gap_continuous_paper_Def` axiom is retired); the
+    single shared bridge atom
+    `mean_estimate_gap_eq_posterior_difference_paper_Def` covers both
+    the continuity AND the tendsto claims, yielding net −1 across the
+    R166a + R166b pair.
+
+    paper source: Theorem 4.1 Part 3, line 493 (`m(κ) is continuous on
+    (0, ∞)` under C1-C3). -/
+theorem mean_estimate_gap_continuous_paper_Def :
+    Conditions_C1_C2_C3 → ∀ p : ℝ,
+      ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) := by
+  intro hC p
+  obtain ⟨mu0, tau0sq, tausq, ybar1, ybar2, htau0sq, htausq, _h_mlimit, h_eq⟩ :=
+    mean_estimate_gap_eq_posterior_difference_paper_Def hC p
+  have h_fun_eq : (fun κ : ℝ => mean_estimate_gap p κ) =
+      (fun κ : ℝ =>
+        BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          mu0 tau0sq ybar2 κ tausq -
+        BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          mu0 tau0sq ybar1 κ tausq) := by
+    funext κ
+    exact h_eq κ
+  rw [h_fun_eq]
+  exact ContinuousOn.sub
+    (BlackwellDilemma.Infrastructure.gaussianPosteriorMean_continuousOn_in_n
+      mu0 tau0sq ybar2 tausq htau0sq htausq)
+    (BlackwellDilemma.Infrastructure.gaussianPosteriorMean_continuousOn_in_n
+      mu0 tau0sq ybar1 tausq htau0sq htausq)
 
 /-- **R166 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `mean_estimate_gap_continuous_workingAssumption` axiom). Direct
-    re-export of the new R166 paper-Def-stipulated structural equation
-    atom `mean_estimate_gap_continuous_paper_Def`.
+    re-export of the R166 derived theorem
+    `mean_estimate_gap_continuous_paper_Def`.
 
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+    Net workingAssumption delta: −1. -/
 theorem mean_estimate_gap_continuous_workingAssumption :
     Conditions_C1_C2_C3 → ∀ p : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) :=
@@ -437,28 +506,57 @@ theorem mean_estimate_gap_continuous_OPEN :
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) :=
   mean_estimate_gap_continuous_workingAssumption
 
-/-- **R166** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Theorem 4.1 Part 3 line 505 STATES "m(κ) → V_dyn(u_2) −
-    V_dyn(u_1) =: mLimit p" as κ → ∞ under Conditions C1-C3.
+/-- **R166 CLOSURE** (Cat 1 derived theorem). Asymptotic limit of the
+    mean-estimate-gap as `κ → ∞` under Conditions C1-C3.
 
-    Paper-Def-stipulated structural fact about the `mean_estimate_gap`
-    opaque carrier per discipline §3.4.3 (paper-stated κ → ∞ Tendsto
-    limit is paper's commitment to how its primitive carrier behaves
-    asymptotically under the Bayesian Gaussian-conjugate-prior data-mean-
-    dominance regime). Gaussian posterior Cat 2 dependency is the
-    conceptual source. 永不 close. -/
-axiom mean_estimate_gap_tendsto_mLimit_paper_Def :
+    Derivation: extract the bridge witness
+    `mean_estimate_gap_eq_posterior_difference_paper_Def`, rewrite the
+    function pointwise as a difference of two
+    `gaussianPosteriorMean` values, then apply
+    `Filter.Tendsto.sub` with two instances of
+    `gaussianPosteriorMean_tendsto_data_mean_atTop_n` (Cat 1, kernel-
+    pure asymptotic data dominance from
+    `Infrastructure/GaussianPosteriorAsymptotic.lean`). The bridge's
+    `ybar2 - ybar1 = mLimit p` clause aligns the resulting limit with
+    the paper's `mLimit p`.
+
+    Net axiom delta vs prior R166: −1 (the previous
+    `mean_estimate_gap_tendsto_mLimit_paper_Def` axiom is retired);
+    the single shared bridge atom
+    `mean_estimate_gap_eq_posterior_difference_paper_Def` covers both
+    the continuity AND the tendsto claims, yielding net −1 across the
+    R166a + R166b pair.
+
+    paper source: Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) −
+    V_dyn(u_1) =: mLimit p` under C1-C3). -/
+theorem mean_estimate_gap_tendsto_mLimit_paper_Def :
     Conditions_C1_C2_C3 → ∀ p : ℝ,
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
-        (nhds (mLimit p))
+        (nhds (mLimit p)) := by
+  intro hC p
+  obtain ⟨mu0, tau0sq, tausq, ybar1, ybar2, htau0sq, htausq, h_mlimit, h_eq⟩ :=
+    mean_estimate_gap_eq_posterior_difference_paper_Def hC p
+  have h_fun_eq : (fun κ : ℝ => mean_estimate_gap p κ) =
+      (fun κ : ℝ =>
+        BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          mu0 tau0sq ybar2 κ tausq -
+        BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          mu0 tau0sq ybar1 κ tausq) := by
+    funext κ
+    exact h_eq κ
+  rw [h_fun_eq, ← h_mlimit]
+  exact Filter.Tendsto.sub
+    (BlackwellDilemma.Infrastructure.gaussianPosteriorMean_tendsto_data_mean_atTop_n
+      mu0 tau0sq ybar2 tausq htau0sq htausq)
+    (BlackwellDilemma.Infrastructure.gaussianPosteriorMean_tendsto_data_mean_atTop_n
+      mu0 tau0sq ybar1 tausq htau0sq htausq)
 
 /-- **R166 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `mean_estimate_gap_tendsto_mLimit_workingAssumption` axiom). Direct
-    re-export of the new R166 paper-Def-stipulated structural equation
-    atom `mean_estimate_gap_tendsto_mLimit_paper_Def`.
+    re-export of the R166 derived theorem
+    `mean_estimate_gap_tendsto_mLimit_paper_Def`.
 
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+    Net workingAssumption delta: −1. -/
 theorem mean_estimate_gap_tendsto_mLimit_workingAssumption :
     Conditions_C1_C2_C3 → ∀ p : ℝ,
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
