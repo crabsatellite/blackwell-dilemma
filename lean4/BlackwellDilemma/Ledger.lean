@@ -5338,15 +5338,40 @@ def entry_atom_envelope_continuity_in_p_paper_Def : GapEntry where
   obstacleOrAttribution := "CLOSED via R196 bridge `L_at_betaStarOfP_continuousOn_paper_Def` + Cat 1 `continuousOn_const.sub`."
   conditionalOn := []
 
-def entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def : GapEntry where
-  name := "forward_reachable_eq_simpleGraph_reach_paper_Def (R169)"
+def entry_atom_paperGraph_preconnected_paper_Def : GapEntry where
+  name := "paperGraph_preconnected_paper_Def (R197 bridge 1)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition 2.1 line 108 standing convention (paper STIPULATES the IDP underlying graph G is preconnected — every pair of vertices is connected by a path)"
+  attackHistory := [ "R197 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom 1/2 replacing the previous R169 `forward_reachable_eq_simpleGraph_reach_paper_Def` axiom. Encodes only paper Definition 2.1 line 108's standing convention — paper's underlying graph G (encoded as the Cat 1 `Infrastructure.paperGraph` SimpleGraph adapter from `IsEdge`, R193) is preconnected. Strictly more atomic per discipline §18 (single-step typed bridge isolating the substantive preconnectedness paper-claim from the structural identification of `ForwardReachable` with SimpleGraph `Reachable`). 永不 close." ]
+  scope := "BlackwellDilemma.Infrastructure.paperGraph.Preconnected"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated preconnectedness of the IDP underlying graph per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def : GapEntry where
+  name := "ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def (R197 bridge 2)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition 2.5 line 187-194 (paper STIPULATES structural identification of the opaque ForwardReachable v ∅ ω carrier with the standard `Finset.univ.filter (paperGraph.Reachable v ·)` under the all-edges-open antecedent)"
+  attackHistory := [ "R197 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom 2/2 replacing the previous R169 `forward_reachable_eq_simpleGraph_reach_paper_Def` axiom. Encodes only paper Definition 2.5 line 187-194's structural identification of the paper-novel opaque carrier `ForwardReachable v ∅ ω` with the `Finset.univ.filter` over the Cat 1 `Infrastructure.paperGraph.Reachable v` predicate, under the paper's standing all-edges-open antecedent. Decidability of `Reachable` is supplied via `Classical.decPred`. Stated at the paper-graph level because under all-edges-open the paper graph and percolation subgraph share Adj (cf. `Infrastructure.percolationGraph_adj_eq_paperGraph_at_all_open`, R193 Cat 1). Strictly more atomic per discipline §18 (single-step typed bridge isolating the structural identification from the preconnectedness paper-claim). 永不 close." ]
+  scope := "∀ v ω, (∀ u w, IsEdge u w → IsOpen ω u w) → ForwardReachable v ∅ ω = Finset.univ.filter (fun w => paperGraph.Reachable v w)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated identification of the opaque ForwardReachable carrier with the SimpleGraph Reachable filter under paper's all-edges-open antecedent per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def : GapEntry where
+  name := "forward_reachable_eq_simpleGraph_reach_paper_Def [R197 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Definition 2.5 line 187-194 + Definition 2.1 line 108 connectivity (paper STIPULATES under all-edges-open that ForwardReachable v ∅ ω = Finset.univ on a preconnected paper-graph G)"
-  attackHistory := [ "R169 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated structural identification of the opaque ForwardReachable carrier with the Cat 1 SimpleGraph.Reachable behavior under paper's preconnectedness convention. Replaces the previously inline `forward_reachable_eq_simpleGraph_reach_workingAssumption` axiom. Existing `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected` provides the Cat 1 backbone; this atom encodes the paper-stipulated bridge to the opaque carrier. 永不 close." ]
+  attackHistory := [
+    "R169 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated structural identification of the opaque ForwardReachable carrier with the Cat 1 SimpleGraph.Reachable behavior under paper's preconnectedness convention. Replaces the previously inline `forward_reachable_eq_simpleGraph_reach_workingAssumption` axiom. Existing `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected` provides the Cat 1 backbone; this atom encodes the paper-stipulated bridge to the opaque carrier. 永不 close.",
+    "R197 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem composing two strictly-smaller R197 paper-Def-stipulated bridge atoms — `paperGraph_preconnected_paper_Def` (paper Def 2.1 line 108 — IDP graph is preconnected) + `ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def` (paper Def 2.5 line 187-194 — structural identification of the opaque carrier with the SimpleGraph `Reachable` filter under all-edges-open) — with the Cat 1 Mathlib chain `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected` collapsing the filter to `Finset.univ`. Proof rewrites with the structural-identification bridge then closes via the preconnected-reachable lemma. Decidability of `paperGraph.Reachable v` is supplied via `Classical.decPred`. Net §3.4.3 atom delta: −1 (R169 axiom retired) + 2 (R197 bridges) = +1 raw atom, but each new bridge is strictly more atomic per discipline §18 (single-step typed bridges isolating the preconnectedness paper-claim and the structural identification of `ForwardReachable` with the SimpleGraph `Reachable` filter respectively)."
+  ]
   scope := "∀ v ω, (∀ u w, IsEdge u w → IsOpen ω u w) → ForwardReachable v ∅ ω = Finset.univ"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural identification per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R197 bridges `paperGraph_preconnected_paper_Def` + `ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def` + Cat 1 `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected`."
   conditionalOn := []
 
 def entry_atom_kappaStar_diverges_at_pc_paper_Def : GapEntry where
@@ -8746,6 +8771,10 @@ def allGaps : List GapEntry := [
   -- theorem consuming this bridge + `continuousOn_const.sub`).
   entry_atom_L_at_betaStarOfP_continuousOn_paper_Def,
   entry_atom_envelope_continuity_in_p_paper_Def,
+  -- R197 2026-05-16: 2 smaller bridge atoms + R169 retired (now Cat 1 derived
+  -- theorem consuming the 2 bridges + Cat 1 SimpleGraphReachable lemma).
+  entry_atom_paperGraph_preconnected_paper_Def,
+  entry_atom_ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def,
   entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def,
   entry_atom_kappaStar_diverges_at_pc_paper_Def,
   entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def,

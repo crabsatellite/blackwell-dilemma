@@ -21,6 +21,7 @@
 import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Wrongness
+import BlackwellDilemma.Infrastructure.PaperGraphFromIsEdge
 import BlackwellDilemma.Infrastructure.SimpleGraphReachable
 import BlackwellDilemma.Infrastructure.MillsRatioTail
 
@@ -414,34 +415,88 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- **R169** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Definition 2.5 line 187-194 forward-reachable construction +
-    Definition 2.1 line 108 connectivity STIPULATE that under all-edges-
-    open, `ForwardReachable v ∅ ω = Finset.univ` (i.e., the abstract
-    carrier coincides with the standard graph-reachability set on a
-    preconnected paper-graph G).
+/-- **R197 bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated):
+    paper Definition 2.1 line 108 standing convention — the paper's
+    underlying graph `G` is preconnected (every pair of vertices is
+    connected by a path). This is paper's standing assumption for the
+    IDP (information-design problem) framework.
 
-    Paper-Def-stipulated structural identification of the opaque
-    `ForwardReachable` carrier with the Cat 1 `SimpleGraph.Reachable`
-    behavior under paper's preconnectedness convention (paper line 108
-    standing convention: G is the IDP action graph, treated as
-    preconnected for the standard forward-reachable construction).
+    Encoded on the `Infrastructure.paperGraph` SimpleGraph adapter
+    (R193) built from paper's `IsEdge` predicate (no new axioms for
+    the construction; only the preconnectedness conclusion is paper-
+    stipulated).
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural identification
-    of paper-novel opaque carrier with Cat 1 graph-theoretic primitive).
-    永不 close. -/
-axiom forward_reachable_eq_simpleGraph_reach_paper_Def :
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel `Vertex` carrier + `IsEdge` predicate). 永不 close. -/
+axiom paperGraph_preconnected_paper_Def :
+    BlackwellDilemma.Infrastructure.paperGraph.Preconnected
+
+/-- **R197 bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated):
+    paper Definition 2.5 line 187-194 structural identification of the
+    opaque `ForwardReachable v ∅ ω` carrier with the standard Finset
+    `filter` over the paper graph's `Reachable v` predicate under the
+    all-edges-open antecedent (every paper edge open at ω).
+
+    The classical decidability of `Reachable` is supplied via
+    `Classical.decPred`. Stated at the paper-graph level (not the
+    `percolationGraph ω` level) because under the all-edges-open
+    antecedent the two SimpleGraphs share the same Adj relation
+    (cf. `Infrastructure.percolationGraph_adj_eq_paperGraph_at_all_open`).
+
+    Per discipline §3.4.3 (paper-Def-stipulated identification of the
+    paper-novel opaque carrier `ForwardReachable` with a Cat 1
+    SimpleGraph reachability primitive under paper Def 2.5). 永不 close. -/
+axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
-        ForwardReachable v ∅ ω = Finset.univ
+      haveI : DecidablePred
+          (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w) :=
+        Classical.decPred _
+      ForwardReachable v ∅ ω =
+        Finset.univ.filter
+          (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w)
+
+/-- **R169 CLOSURE** (Cat 1 derived theorem; was Cat 3 §3.4.3 paper-Def-
+    stipulated structural equation atom). RETIRED as an axiom in R197
+    via decomposition into the two strictly-smaller R197 paper-Def-
+    stipulated bridge atoms `paperGraph_preconnected_paper_Def` (paper
+    Definition 2.1 line 108 standing convention — paper graph is
+    preconnected) + `ForwardReachable_at_empty_history_eq_paperGraph_
+    reach_under_all_open_paper_Def` (paper Definition 2.5 line 187-194 —
+    opaque carrier identification with SimpleGraph `Reachable` filter
+    under all-edges-open), composed with the Cat 1 Mathlib chain
+    `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_
+    preconnected` to derive `ForwardReachable v ∅ ω = Finset.univ`
+    under the all-edges-open antecedent.
+
+    Net atom delta: −1 (R169 axiom retired) + 2 (R197 bridges) = +1
+    raw atom; but each new bridge is strictly more atomic per
+    discipline §18 (R197 atom 1 is a pure SimpleGraph property of the
+    Cat 1 adapter `paperGraph`; R197 atom 2 is a pure structural
+    identification of `ForwardReachable` with the SimpleGraph
+    `Reachable` filter on `paperGraph`). -/
+theorem forward_reachable_eq_simpleGraph_reach_paper_Def :
+    ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
+      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
+        ForwardReachable v ∅ ω = Finset.univ := by
+  intro _ v ω h_all_open
+  haveI : DecidablePred
+      (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w) :=
+    Classical.decPred _
+  have h_filter_eq :=
+    ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def
+      v ω h_all_open
+  rw [h_filter_eq]
+  exact BlackwellDilemma.Infrastructure.reachable_finset_eq_univ_of_preconnected
+    paperGraph_preconnected_paper_Def v
 
 /-- **R169 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `forward_reachable_eq_simpleGraph_reach_workingAssumption` axiom).
-    Direct re-export of the new R169 paper-Def-stipulated structural
-    equation atom `forward_reachable_eq_simpleGraph_reach_paper_Def`.
+    Direct re-export of the R197-derived
+    `forward_reachable_eq_simpleGraph_reach_paper_Def` theorem.
 
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+    Net workingAssumption delta: 0 (already a derived theorem); R197
+    further decomposes the paper-Def atom into 2 smaller bridge atoms. -/
 theorem forward_reachable_eq_simpleGraph_reach_workingAssumption :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
