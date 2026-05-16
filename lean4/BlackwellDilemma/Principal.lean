@@ -417,36 +417,281 @@ theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
         (principalSampleBelowKappa i) (principalSampleBelowAlpha i) ω)
   exact h_aw.const_mul (principalSampleBelowWeight i)
 
-/-- **R167** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Theorem 4.1 + Corollary `cor:disclosure` Part 1 STATE that
-    `W_bar` has a finite limit `< W_bar 0` at infinity, which combined
-    with paper line 622's standing convention `β̄* exists as the
-    maximiser of W̄` STIPULATES that `W_bar` is eventually-decreasing
-    past some N ≥ 0.
+/-! ## R186 — Hoisted W_bar limit-at-infinity infrastructure
 
-    **R177 closure-via-existence proof**: this statement IS DERIVABLE
-    as a Cat 1 theorem; see `W_bar_eventually_decreasing_derived_R177`
-    at the bottom of Principal.lean for the proof composing
-    `W_bar_limit_infty_def` + `W_bar_finite_above_limit_witness` +
-    `Infrastructure.EventuallyDecreasingWithLowerBound.eventually_le_of_tendsto_lt_witness`
-    (R175) + `W_bar_continuousOn_Ici` + Mathlib EVT. The atom is
-    preserved here as the FORWARD-DECLARED form needed by the wA
-    re-export below (which is consumed by
-    `principal_interior_maximum_exists_OPEN` ~50 lines downstream).
-    Future Lean 4 versions could restructure the file to move the
-    derivation up, retiring the atom entirely. -/
-axiom W_bar_eventually_decreasing_paper_Def :
-    ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N
+R186 closure of the §3.4.3 atom `W_bar_eventually_decreasing_paper_Def`
+(R167) requires the W_bar limit-at-infinity infrastructure
+(`W_bar_limit_infty_def`, `W_bar_finite_above_limit_witness`) to be
+available BEFORE the eventually-decreasing derivation. The block below
+hoists the infrastructure (originally placed alongside the
+`cor:disclosure` Part 1 derivations near line 1369+) to its earliest
+sound position, immediately after the R92 G-conditional integration
+infrastructure + R147 continuity atoms, so the R186 derived theorem
+(replacing the R167 axiom) can compose them inline.
 
-/-- **R147 atom 3 → R167 → R177**: forward declaration of the closure.
-    R167 places the §3.4.3 axiom above; R177 demonstrates the closure
-    exists (Cat 1 derivable from infrastructure at end of file).
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 atom kept for
-    forward-reference convenience (Cat 1 derivation path documented
-    via `W_bar_eventually_decreasing_derived_R177`). -/
+The hoisted items are:
+  * `principalSampleBoth_combined_convergence_witness` (R95 Cat 3 §3.4.3
+    paper-stipulated combined-convergence witness on the R92 sample sums)
+  * `W_bar_has_limit_infty_OPEN` (R95 derived theorem; existence of
+    finite β → ∞ limit of `W_bar`)
+  * `W_bar_limit_infty` (R76 noncomputable def via `Classical.choose`)
+  * `W_bar_limit_infty_def` (R76 derived theorem; Tendsto W_bar atTop
+    (nhds W_bar_limit_infty))
+  * `W_bar_finite_above_limit_witness` (R100 Cat 3 §3.4.3 paper-
+    stipulated finite-β-above-limit witness)
+  * `W_bar_continuousOn_Ici` (R147 Cat 1 derived theorem; sum of two
+    `ContinuousOn`s)
+
+Position in source order is metadata-neutral per discipline §3; the
+hoist is justified by the R186 closure's forward-reference need. -/
+
+/-- **R95** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated combined-convergence witness on the R92 G-conditional
+    sample sums. Paper Corollary `cor:disclosure` Part 1 proof (line
+    652) STATES "for above-threshold agents, `W(β, κ, α)` is non-
+    decreasing in β and converges to a finite limit"; aggregating over
+    the population gives `\bar{W}(\beta) \to \bar{W}(\infty)`. Per the
+    R92 mixture decomposition, this requires the combined sample-sum
+    `∑ above-sample + ∑ below-sample` to converge to a finite limit
+    as `β → ∞`.
+
+    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    combined-convergence on opaque sample sums; R88-R94 precedent
+    family). 永不 close.
+
+    R186 hoist: hoisted from its R95 source-order position
+    (post-`cor:disclosure` Part 1 derivations) to BEFORE the R186
+    closure of `W_bar_eventually_decreasing_paper_Def`. Position in
+    source order is metadata-neutral per discipline §3.
+
+    paper source: Corollary `cor:disclosure` Part 1 proof, line 652
+    (aggregate welfare converges to a finite limit as `β → ∞`). -/
+axiom principalSampleBoth_combined_convergence_witness :
+    ∃ L : ℝ, Filter.Tendsto
+      (fun β =>
+        (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+          agentWelfare AgentType.kappaAgent β
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+        (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+          agentWelfare AgentType.kappaAgent β
+            (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
+      Filter.atTop (nhds L)
+
+/-- Paper-stated existence of the β → ∞ limit of aggregate welfare
+    (R95 CLOSURE via R92 G-integration framework + R95 combined-
+    convergence witness atom). Replaces R-original axiom of the same
+    name; converted to derivedTheorem composing the R92 integral
+    structural equations + the new combined-convergence witness.
+
+    R186 hoist: hoisted alongside the R95 axiom to support the R186
+    closure of `W_bar_eventually_decreasing_paper_Def`. -/
+theorem W_bar_has_limit_infty_OPEN :
+    ∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L) := by
+  obtain ⟨L, h_tendsto⟩ := principalSampleBoth_combined_convergence_witness
+  refine ⟨L, ?_⟩
+  -- W_bar β = above β + below β = ∑ above-sample + ∑ below-sample by R92 def
+  have h_eq : W_bar = fun β =>
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) := by
+    funext β
+    show aboveThresholdWelfare β + belowThresholdWelfare β = _
+    rw [aboveThresholdWelfare_eq_kappaAgent_integral β,
+        belowThresholdWelfare_eq_kappaAgent_integral β]
+  rw [h_eq]
+  exact h_tendsto
+
+/-- Limit of aggregate welfare as `β → ∞`.
+
+    R76 substantive-math closure (concrete-def closure, Pattern 5:
+    existence-via-`Classical.choose`). Previously declared
+    `axiom W_bar_limit_infty : ℝ` (opaque carrier) plus the structural-
+    equation atom `W_bar_limit_infty_def` (Cat 3 workingAssumption
+    pinning the carrier to the Tendsto-limit of `W_bar`). R76 makes the
+    carrier CONCRETE per paper line 652's own paper-stated existence
+    claim of the finite limit: define `W_bar_limit_infty` as
+    `Classical.choose` of the limit-witness from the existence atom
+    `W_bar_has_limit_infty_OPEN`.
+
+    The Lean `def` IS the paper's "convergence-to-finite-limit"
+    identification (the `Classical.choose` literally picks the paper-
+    stated finite limit of `W_bar` at `+∞`), so the carrier encodes
+    paper content faithfully. NOT the R7-flagged closure-count trick:
+    the def body invokes the substantive existence atom
+    `W_bar_has_limit_infty_OPEN` as input, with no content erasure;
+    the previously-axiomatic carrier-identification step
+    (`W_bar_limit_infty_def`) is internalised by `Classical.choose_spec`.
+
+    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
+    monotone-bounded-convergence + per-agent finite-limit aggregation
+    machinery, define the paper-faithful selection locally rather than
+    skip.
+
+    R186 hoist: hoisted alongside the R95/R76 chain to support the
+    R186 closure of `W_bar_eventually_decreasing_paper_Def`.
+
+    paper source: Corollary `cor:disclosure` Part 1, line 652
+    (`\bar{W}(\beta) \to \bar{W}(\infty)` as `β → ∞`). -/
+noncomputable def W_bar_limit_infty : ℝ :=
+  Classical.choose W_bar_has_limit_infty_OPEN
+
+/-- **R76 derived theorem** (replaces R-original axiom
+    `W_bar_limit_infty_def`; now closes via Pattern 5
+    `Classical.choose_spec` instead of standalone structural-equation
+    axiom).
+    Cat 3 Tendsto-characterisation of `W_bar_limit_infty`:
+    `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)`.
+
+    R76 Pattern 5 closure: composes the `W_bar_limit_infty` `def`
+    (which invokes `Classical.choose` on `W_bar_has_limit_infty_OPEN`)
+    with `Classical.choose_spec` (which yields the Tendsto-property
+    of the chosen limit witness directly).
+
+    Net delta: 0 wA (1 new existence wA + 1 retired wA via Pattern 5);
+    +1 derivedTheorem; audit-chain granularity benefit per discipline
+    §18 (R75 deferral note's "DEFERRED to R76+" now executed).
+
+    R186 hoist: hoisted alongside the R95/R76 chain to support the
+    R186 closure of `W_bar_eventually_decreasing_paper_Def`.
+
+    paper source: Corollary `cor:disclosure` Part 1 proof, line 652
+    ("aggregate welfare converges to a finite limit as β → ∞"). -/
+theorem W_bar_limit_infty_def :
+    Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty) := by
+  unfold W_bar_limit_infty
+  exact Classical.choose_spec W_bar_has_limit_infty_OPEN
+
+/-- **R100** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated existence of a finite β at which `W_bar` strictly
+    exceeds its β → ∞ limit. Paper Corollary `cor:disclosure` Part 1
+    proof line 656 STATES "Since `W̄(β) → W̄(∞)` yet there exists
+    `β_0` with `W̄(β_0) > W̄(∞)`..." — paper directly stipulates the
+    existence of such `β_0`.
+
+    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    existence of finite-β-above-limit witness; R88-R96 paper-
+    stipulated structural-equation precedent). 永不 close.
+
+    R186 hoist: hoisted from its R100 source-order position
+    (post-`averaged_reversal_overshoot_positive_OPEN`) to BEFORE the
+    R186 closure of `W_bar_eventually_decreasing_paper_Def`. Position
+    in source order is metadata-neutral per discipline §3.
+
+    paper source: Corollary `cor:disclosure` Part 1 proof, line 656. -/
+axiom W_bar_finite_above_limit_witness :
+    ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite
+
+/-- **R147 Cat 1 derived theorem**: `W_bar` is `ContinuousOn (Set.Ici 0)`
+    by arithmetic (sum of two `ContinuousOn`s).
+
+    Derivation from atoms 1 + 2 via `Infrastructure.ContinuousArithmetic.ContinuousOn.add_Ioi0`-style
+    addition. Kernel-pure.
+
+    R186 hoist: hoisted from its original post-axiom position to
+    BEFORE the R186 closure of `W_bar_eventually_decreasing_paper_Def`
+    (the closure proof composes this continuity fact with the limit
+    infrastructure above + R175 + Mathlib EVT). -/
+theorem W_bar_continuousOn_Ici : ContinuousOn W_bar (Set.Ici 0) := by
+  unfold W_bar
+  exact aboveThresholdWelfare_continuousOn_Ici_workingAssumption.add
+    belowThresholdWelfare_continuousOn_Ici_workingAssumption
+
+/-- **R186** Cat 1 derived theorem (replaces retired R167 axiom
+    `W_bar_eventually_decreasing_paper_Def`): `W_bar` is eventually-
+    decreasing past some `N ≥ 0`. Composes the hoisted limit-at-
+    infinity infrastructure + Mathlib EVT to produce the eventual-
+    decrease witness directly.
+
+    **R186 closure path** (formerly the bottom-of-file
+    `W_bar_eventually_decreasing_derived_R177` proof, now inlined here
+    after the R186 hoist of the dependency chain):
+      1. From `W_bar_finite_above_limit_witness` get `β_finite > 0`
+         with `W_bar_limit_infty < W_bar β_finite`.
+      2. Apply `eventually_le_of_tendsto_lt_witness` (R175) to
+         `W_bar_limit_infty_def` + the strict inequality from step 1
+         to obtain `N₀` such that `W_bar x ≤ W_bar β_finite` for all
+         `x ≥ N₀`.
+      3. Set `Nupper := max β_finite N₀`. By `W_bar_continuousOn_Ici`
+         and Mathlib's `IsCompact.exists_isMaxOn`, get `N_star ∈
+         [β_finite, Nupper]` realising the max of `W_bar` on the
+         compact interval.
+      4. Argmax dominance + R175-tail bound: for `β ≥ N_star`, either
+         `β ≤ Nupper` (use compact-interval argmax) or `β > Nupper ≥
+         N₀` (use R175 to dominate by `W_bar β_finite ≤ W_bar N_star`).
+
+    Net atom delta: −1 axiom (R167 `W_bar_eventually_decreasing_paper_Def`
+    retired); 0 net wA delta (the wA re-export
+    `W_bar_eventually_decreasing_workingAssumption` below is preserved
+    as a re-export of the new R186 theorem, maintaining the consumer
+    interface for `principal_interior_maximum_exists_OPEN`).
+
+    Net infrastructure delta: 0 (the hoisted block is a relocation of
+    pre-existing items from elsewhere in the file, NOT new atoms).
+    The R186 closure thus genuinely retires an axiom without
+    introducing replacement axioms.
+
+    paper source: composes paper Theorem 4.1 + Corollary
+    `cor:disclosure` Part 1 (lines 652-656) — finite limit at infinity
+    plus finite-β-above-limit witness force eventual decrease past
+    some `N ≥ 0`. -/
+theorem W_bar_eventually_decreasing_R186 :
+    ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N := by
+  -- Step 1: Get β_finite from paper-stipulated finite-above-limit witness.
+  obtain ⟨β_finite, hβ_finite_pos, h_lt_W_bar_β_finite⟩ :=
+    W_bar_finite_above_limit_witness
+  -- Step 2: Apply R175 to get N₀ such that W_bar x ≤ W_bar β_finite for x ≥ N₀.
+  obtain ⟨N₀, hN₀⟩ :=
+    BlackwellDilemma.Infrastructure.eventually_le_of_tendsto_lt_witness
+      W_bar W_bar_limit_infty β_finite W_bar_limit_infty_def h_lt_W_bar_β_finite
+  -- Step 3: Set Nupper = max(β_finite, N₀); β_finite ≤ Nupper, N₀ ≤ Nupper.
+  set Nupper := max β_finite N₀ with hNupper_def
+  have h_β_finite_le_Nupper : β_finite ≤ Nupper := le_max_left _ _
+  have h_N₀_le_Nupper : N₀ ≤ Nupper := le_max_right _ _
+  -- Step 4: Apply EVT on compact [β_finite, Nupper] (W_bar is continuous on
+  --        Ici 0, which contains [β_finite, Nupper] since β_finite > 0).
+  have h_Icc_nonempty : (Set.Icc β_finite Nupper).Nonempty :=
+    ⟨β_finite, by simp [h_β_finite_le_Nupper]⟩
+  have h_cont_Icc : ContinuousOn W_bar (Set.Icc β_finite Nupper) :=
+    W_bar_continuousOn_Ici.mono (fun x hx => le_of_lt (lt_of_lt_of_le hβ_finite_pos hx.1))
+  obtain ⟨N_star, hN_star_mem, hN_star_max⟩ :=
+    isCompact_Icc.exists_isMaxOn h_Icc_nonempty h_cont_Icc
+  -- Step 5: N_star ≥ β_finite > 0, so 0 ≤ N_star.
+  have hN_star_pos : 0 ≤ N_star := le_of_lt (lt_of_lt_of_le hβ_finite_pos hN_star_mem.1)
+  refine ⟨N_star, hN_star_pos, ?_⟩
+  intro β hβ_ge_N_star
+  -- Step 6: Two cases — β ≤ Nupper (use argmax) or β > Nupper (use R175 + argmax chain).
+  by_cases h : β ≤ Nupper
+  · -- Case 1: β ∈ [N_star, Nupper] ⊆ [β_finite, Nupper]; argmax dominance.
+    have hβ_in_Icc : β ∈ Set.Icc β_finite Nupper :=
+      ⟨le_trans hN_star_mem.1 hβ_ge_N_star, h⟩
+    exact hN_star_max hβ_in_Icc
+  · -- Case 2: β > Nupper ≥ N₀, so by R175 W_bar β ≤ W_bar β_finite.
+    push_neg at h
+    have hβ_ge_N₀ : N₀ ≤ β := le_trans h_N₀_le_Nupper (le_of_lt h)
+    have h_W_bar_β_le : W_bar β ≤ W_bar β_finite := hN₀ β hβ_ge_N₀
+    -- And W_bar β_finite ≤ W_bar N_star (β_finite ∈ [β_finite, Nupper]; N_star is argmax).
+    have hβ_finite_in_Icc : β_finite ∈ Set.Icc β_finite Nupper :=
+      ⟨le_refl _, h_β_finite_le_Nupper⟩
+    have h_W_bar_β_finite_le : W_bar β_finite ≤ W_bar N_star :=
+      hN_star_max hβ_finite_in_Icc
+    linarith
+
+/-- **R147 atom 3 → R186 CLOSED**: re-export of the R186 derived theorem
+    `W_bar_eventually_decreasing_R186` under the consumer-interface
+    name `W_bar_eventually_decreasing_workingAssumption` (preserved
+    for the downstream consumer `principal_interior_maximum_exists_OPEN`).
+
+    R186 closure: previously this re-export pointed to the R167 axiom
+    `W_bar_eventually_decreasing_paper_Def`, which has now been RETIRED
+    (Cat 1 derivable from the hoisted limit infrastructure above).
+    Net axiom delta: −1; net wA delta: 0 (re-export preserved as
+    consumer-interface convenience). -/
 theorem W_bar_eventually_decreasing_workingAssumption :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N :=
-  W_bar_eventually_decreasing_paper_Def
+  W_bar_eventually_decreasing_R186
 
 /-- **R162** Cat 3 §3.4.3 paper-Def-stipulated convention atom:
     below-threshold welfare is bounded above by below-threshold-at-zero
@@ -483,16 +728,6 @@ theorem W_bar_le_at_zero_for_negative_workingAssumption :
   have h_below : belowThresholdWelfare β ≤ belowThresholdWelfare 0 :=
     belowThresholdWelfare_le_at_zero_for_negative β hβ
   linarith
-
-/-- **R147 Cat 1 derived theorem**: `W_bar` is `ContinuousOn (Set.Ici 0)`
-    by arithmetic (sum of two `ContinuousOn`s).
-
-    Derivation from atoms 1 + 2 via `Infrastructure.ContinuousArithmetic.ContinuousOn.add_Ioi0`-style
-    addition. Kernel-pure. -/
-theorem W_bar_continuousOn_Ici : ContinuousOn W_bar (Set.Ici 0) := by
-  unfold W_bar
-  exact aboveThresholdWelfare_continuousOn_Ici_workingAssumption.add
-    belowThresholdWelfare_continuousOn_Ici_workingAssumption
 
 /-- **R104 CLOSURE — R147 Cat 1 derivation via decomposition**: derives
     paper's `W_bar` maximiser existence via:
@@ -1350,110 +1585,15 @@ theorem gap_principal_regime_bifurcation :
 
 /-! ## 3. Corollary `cor:disclosure` — Disclosure Policy Design -/
 
-/-- **R95** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper-stated combined-convergence witness on the R92 G-conditional
-    sample sums. Paper Corollary `cor:disclosure` Part 1 proof (line
-    652) STATES "for above-threshold agents, `W(β, κ, α)` is non-
-    decreasing in β and converges to a finite limit"; aggregating over
-    the population gives `\bar{W}(\beta) \to \bar{W}(\infty)`. Per the
-    R92 mixture decomposition, this requires the combined sample-sum
-    `∑ above-sample + ∑ below-sample` to converge to a finite limit
-    as `β → ∞`.
-
-    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
-    combined-convergence on opaque sample sums; R88-R94 precedent
-    family). 永不 close.
-
-    paper source: Corollary `cor:disclosure` Part 1 proof, line 652
-    (aggregate welfare converges to a finite limit as `β → ∞`). -/
-axiom principalSampleBoth_combined_convergence_witness :
-    ∃ L : ℝ, Filter.Tendsto
-      (fun β =>
-        (∑ i : principalSampleAbove, principalSampleAboveWeight i *
-          agentWelfare AgentType.kappaAgent β
-            (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
-        (∑ j : principalSampleBelow, principalSampleBelowWeight j *
-          agentWelfare AgentType.kappaAgent β
-            (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
-      Filter.atTop (nhds L)
-
-/-- Paper-stated existence of the β → ∞ limit of aggregate welfare
-    (R95 CLOSURE via R92 G-integration framework + R95 combined-
-    convergence witness atom). Replaces R-original axiom of the same
-    name; converted to derivedTheorem composing the R92 integral
-    structural equations + the new combined-convergence witness. -/
-theorem W_bar_has_limit_infty_OPEN :
-    ∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L) := by
-  obtain ⟨L, h_tendsto⟩ := principalSampleBoth_combined_convergence_witness
-  refine ⟨L, ?_⟩
-  -- W_bar β = above β + below β = ∑ above-sample + ∑ below-sample by R92 def
-  have h_eq : W_bar = fun β =>
-      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
-      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) := by
-    funext β
-    show aboveThresholdWelfare β + belowThresholdWelfare β = _
-    rw [aboveThresholdWelfare_eq_kappaAgent_integral β,
-        belowThresholdWelfare_eq_kappaAgent_integral β]
-  rw [h_eq]
-  exact h_tendsto
-
-/-- Limit of aggregate welfare as `β → ∞`.
-
-    R76 substantive-math closure (concrete-def closure, Pattern 5:
-    existence-via-`Classical.choose`). Previously declared
-    `axiom W_bar_limit_infty : ℝ` (opaque carrier) plus the structural-
-    equation atom `W_bar_limit_infty_def` (Cat 3 workingAssumption
-    pinning the carrier to the Tendsto-limit of `W_bar`). R76 makes the
-    carrier CONCRETE per paper line 652's own paper-stated existence
-    claim of the finite limit: define `W_bar_limit_infty` as
-    `Classical.choose` of the limit-witness from the existence atom
-    `W_bar_has_limit_infty_OPEN`.
-
-    The Lean `def` IS the paper's "convergence-to-finite-limit"
-    identification (the `Classical.choose` literally picks the paper-
-    stated finite limit of `W_bar` at `+∞`), so the carrier encodes
-    paper content faithfully. NOT the R7-flagged closure-count trick:
-    the def body invokes the substantive existence atom
-    `W_bar_has_limit_infty_OPEN` as input, with no content erasure;
-    the previously-axiomatic carrier-identification step
-    (`W_bar_limit_infty_def`) is internalised by `Classical.choose_spec`.
-
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    monotone-bounded-convergence + per-agent finite-limit aggregation
-    machinery, define the paper-faithful selection locally rather than
-    skip.
-
-    paper source: Corollary `cor:disclosure` Part 1, line 652
-    (`\bar{W}(\beta) \to \bar{W}(\infty)` as `β → ∞`). -/
-noncomputable def W_bar_limit_infty : ℝ :=
-  Classical.choose W_bar_has_limit_infty_OPEN
-
-/-- **R76 derived theorem** (replaces R-original axiom
-    `W_bar_limit_infty_def`; now closes via Pattern 5
-    `Classical.choose_spec` instead of standalone structural-equation
-    axiom).
-    Cat 3 Tendsto-characterisation of `W_bar_limit_infty`:
-    `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)`.
-
-    R76 Pattern 5 closure: composes the `W_bar_limit_infty` `def`
-    (which invokes `Classical.choose` on `W_bar_has_limit_infty_OPEN`)
-    with `Classical.choose_spec` (which yields the Tendsto-property
-    of the chosen limit witness directly).
-
-    Net delta: 0 wA (1 new existence wA + 1 retired wA via Pattern 5);
-    +1 derivedTheorem; audit-chain granularity benefit per discipline
-    §18 (R75 deferral note's "DEFERRED to R76+" now executed).
-
-    paper source: Corollary `cor:disclosure` Part 1 proof, line 652
-    ("aggregate welfare converges to a finite limit as β → ∞"). -/
-theorem W_bar_limit_infty_def :
-    Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty) := by
-  unfold W_bar_limit_infty
-  exact Classical.choose_spec W_bar_has_limit_infty_OPEN
+-- R186 RELOCATION: `principalSampleBoth_combined_convergence_witness`
+-- (R95 axiom), `W_bar_has_limit_infty_OPEN` (R95 derived theorem),
+-- `W_bar_limit_infty` (R76 noncomputable def), and `W_bar_limit_infty_def`
+-- (R76 derived theorem) have been HOISTED to BEFORE the R186 closure of
+-- `W_bar_eventually_decreasing_paper_Def` (formerly the R167 axiom; now
+-- a Cat 1 derivedTheorem `W_bar_eventually_decreasing_R186`). See the
+-- "## R186 — Hoisted W_bar limit-at-infinity infrastructure" section
+-- earlier in this file. Position in source order is metadata-neutral
+-- per discipline §3.
 
 /-- Cat 1 derived theorem: the β → ∞ limit of aggregate welfare is bounded
     above by the welfare at the maximiser `betaBarStar`. Composes the
@@ -1522,20 +1662,13 @@ theorem averaged_reversal_overshoot_positive_OPEN :
       ∃ delta_bar : ℝ, 0 < delta_bar :=
   fun _ _ => ⟨1, one_pos⟩
 
-/-- **R100** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper-stated existence of a finite β at which `W_bar` strictly
-    exceeds its β → ∞ limit. Paper Corollary `cor:disclosure` Part 1
-    proof line 656 STATES "Since `W̄(β) → W̄(∞)` yet there exists
-    `β_0` with `W̄(β_0) > W̄(∞)`..." — paper directly stipulates the
-    existence of such `β_0`.
-
-    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
-    existence of finite-β-above-limit witness; R88-R96 paper-
-    stipulated structural-equation precedent). 永不 close.
-
-    paper source: Corollary `cor:disclosure` Part 1 proof, line 656. -/
-axiom W_bar_finite_above_limit_witness :
-    ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite
+-- R186 RELOCATION: `W_bar_finite_above_limit_witness` (R100 axiom) has
+-- been HOISTED to BEFORE the R186 closure of
+-- `W_bar_eventually_decreasing_paper_Def` (formerly the R167 axiom; now
+-- a Cat 1 derivedTheorem `W_bar_eventually_decreasing_R186`). See the
+-- "## R186 — Hoisted W_bar limit-at-infinity infrastructure" section
+-- earlier in this file. Position in source order is metadata-neutral
+-- per discipline §3.
 
 /-- Paper-stated finite-β-strictly-above-limit existence (R100 CLOSURE
     via R92 G-integration framework + R100 paper-stipulated witness
@@ -1754,70 +1887,17 @@ theorem gap_disclosure_differentiated_dominates :
       W_bar uniform_beta ≤ differentiatedDisclosureWelfare G :=
   differentiated_per_agent_optimum_dominates_uniform
 
-/-! ## R177 — Cat 1 derivation of W_bar eventually-decreasing
-
-R177 demonstrates that the R167 §3.4.3 paper-Def-stipulated atom
-`W_bar_eventually_decreasing_paper_Def` IS DERIVABLE as a Cat 1
-theorem composing existing infrastructure:
-  * `W_bar_limit_infty_def` (R76 derived theorem; Tendsto W_bar atTop
-    (nhds W_bar_limit_infty))
-  * `W_bar_finite_above_limit_witness` (Cat 3 §3.4.3 atom; ∃ β_finite
-    with W_bar_limit_infty < W_bar β_finite)
-  * `Infrastructure.EventuallyDecreasingWithLowerBound.eventually_le_of_tendsto_lt_witness`
-    (R175 Cat 1 lemma; finite limit at infinity strictly below witness
-    forces eventually-below behavior)
-  * `W_bar_continuousOn_Ici` + `IsCompact.exists_isMaxOn` (Mathlib EVT
-    on compact `[β_finite, max(N₀, β_finite)]`)
-  * Case-split arithmetic: argmax dominance on `[β_finite, Nupper]` +
-    R175-tail bound past `N₀ ≤ Nupper`.
-
-This Cat 1 theorem is alongside (does not replace) the R167 §3.4.3
-atom — the atom remains as paper-Def-stipulated documentation;
-this theorem demonstrates the closure path exists. Future Lean 4
-versions could choose to use this theorem directly and retire the
-R167 atom (requires file restructure to move R167 below the
-W_bar_finite_above_limit_witness line). -/
-
-theorem W_bar_eventually_decreasing_derived_R177 :
-    ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N := by
-  -- Step 1: Get β_finite from paper-stipulated finite-above-limit witness.
-  obtain ⟨β_finite, hβ_finite_pos, h_lt_W_bar_β_finite⟩ :=
-    W_bar_finite_above_limit_witness
-  -- Step 2: Apply R175 to get N₀ such that W_bar x ≤ W_bar β_finite for x ≥ N₀.
-  obtain ⟨N₀, hN₀⟩ :=
-    BlackwellDilemma.Infrastructure.eventually_le_of_tendsto_lt_witness
-      W_bar W_bar_limit_infty β_finite W_bar_limit_infty_def h_lt_W_bar_β_finite
-  -- Step 3: Set Nupper = max(β_finite, N₀); β_finite ≤ Nupper, N₀ ≤ Nupper.
-  set Nupper := max β_finite N₀ with hNupper_def
-  have h_β_finite_le_Nupper : β_finite ≤ Nupper := le_max_left _ _
-  have h_N₀_le_Nupper : N₀ ≤ Nupper := le_max_right _ _
-  -- Step 4: Apply EVT on compact [β_finite, Nupper] (W_bar is continuous on
-  --        Ici 0, which contains [β_finite, Nupper] since β_finite > 0).
-  have h_Icc_nonempty : (Set.Icc β_finite Nupper).Nonempty :=
-    ⟨β_finite, by simp [h_β_finite_le_Nupper]⟩
-  have h_cont_Icc : ContinuousOn W_bar (Set.Icc β_finite Nupper) :=
-    W_bar_continuousOn_Ici.mono (fun x hx => le_of_lt (lt_of_lt_of_le hβ_finite_pos hx.1))
-  obtain ⟨N_star, hN_star_mem, hN_star_max⟩ :=
-    isCompact_Icc.exists_isMaxOn h_Icc_nonempty h_cont_Icc
-  -- Step 5: N_star ≥ β_finite > 0, so 0 ≤ N_star.
-  have hN_star_pos : 0 ≤ N_star := le_of_lt (lt_of_lt_of_le hβ_finite_pos hN_star_mem.1)
-  refine ⟨N_star, hN_star_pos, ?_⟩
-  intro β hβ_ge_N_star
-  -- Step 6: Two cases — β ≤ Nupper (use argmax) or β > Nupper (use R175 + argmax chain).
-  by_cases h : β ≤ Nupper
-  · -- Case 1: β ∈ [N_star, Nupper] ⊆ [β_finite, Nupper]; argmax dominance.
-    have hβ_in_Icc : β ∈ Set.Icc β_finite Nupper :=
-      ⟨le_trans hN_star_mem.1 hβ_ge_N_star, h⟩
-    exact hN_star_max hβ_in_Icc
-  · -- Case 2: β > Nupper ≥ N₀, so by R175 W_bar β ≤ W_bar β_finite.
-    push_neg at h
-    have hβ_ge_N₀ : N₀ ≤ β := le_trans h_N₀_le_Nupper (le_of_lt h)
-    have h_W_bar_β_le : W_bar β ≤ W_bar β_finite := hN₀ β hβ_ge_N₀
-    -- And W_bar β_finite ≤ W_bar N_star (β_finite ∈ [β_finite, Nupper]; N_star is argmax).
-    have hβ_finite_in_Icc : β_finite ∈ Set.Icc β_finite Nupper :=
-      ⟨le_refl _, h_β_finite_le_Nupper⟩
-    have h_W_bar_β_finite_le : W_bar β_finite ≤ W_bar N_star :=
-      hN_star_max hβ_finite_in_Icc
-    linarith
+-- R186 RELOCATION: the R177 Cat 1 derivation
+-- `W_bar_eventually_decreasing_derived_R177` (formerly here at the
+-- bottom of Principal.lean as a side-by-side closure-path
+-- demonstration alongside the R167 axiom
+-- `W_bar_eventually_decreasing_paper_Def`) has been INLINED at the
+-- R186 closure point earlier in this file, where it now serves as
+-- the actual definition of `W_bar_eventually_decreasing_R186` (the
+-- Cat 1 derivedTheorem replacing the retired R167 axiom). See the
+-- "## R186 — Hoisted W_bar limit-at-infinity infrastructure" section
+-- earlier in this file for the inlined proof. The R186 closure is
+-- truly axiom-eliminating (not side-by-side) since the R167 atom is
+-- now retired entirely.
 
 end BlackwellDilemma
