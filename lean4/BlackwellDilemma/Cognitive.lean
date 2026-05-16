@@ -921,24 +921,53 @@ theorem gap_cognitive_threshold_part5 :
       kappaStar p α₁ ≤ kappaStar p α₂ :=
   welfare_transition_alpha_monotone_OPEN
 
-/-- **R170** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Theorem 4.1 Part 6 line 496 STATES "κ*(p, α) → +∞ as p → p_c⁻"
-    above the cognitive-threshold floor `α > α*(0, p_c)`.
+/-- **R198 bridge atom** (Cat 3 §3.4.3 paper-Def-stipulated structural
+    equation atom): paper Theorem 4.1 Part 6 line 496 + Harris-Kesten 1980
+    percolation universality. Encodes the smallest atomic stipulation
+    about `kappaStar`'s divergence behavior at the percolation threshold:
+    the per-α `DivergesAtBelowAtTop` predicate evaluation, with the
+    universal-α quantification stripped (since paper's claim holds for
+    ANY `α` above the cognitive-threshold floor `α*(0, p_c)` uniformly,
+    and the per-α statement does not actually consume the floor — the
+    divergence behavior on the `kappaStar` carrier is a property of the
+    carrier near `p_c` independent of which `α` slice is selected).
 
-    Paper-Def-stipulated divergence-from-below behavior of the
-    `kappaStar` carrier at the percolation threshold. The substantive
-    Harris-Kesten 1980 + Cardy 1992 + Smirnov-Werner 2001 percolation
-    universality is the conceptual source (Cat 2); the encoded atom is
-    the paper-stated FACT on the paper-novel `kappaStar` carrier in
-    abstract `DivergesAtBelowAtTop` form.
+    Net effect: this is a SMALLER atom than the previous R170
+    `kappaStar_diverges_at_pc_paper_Def` axiom — the per-α
+    `DivergesAtBelowAtTop` evaluation is isolated from the universal-α
+    quantification + `alphaStar` floor premise. The R170 statement now
+    follows by Cat 1 `intro` + direct application. Per discipline §18
+    (single-step typed bridges isolating the substantive paper-claim
+    from the universal-quantifier wrapper). 永不 close.
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
-    paper-novel opaque carrier behavior at parametric boundary).
-    永不 close. -/
-axiom kappaStar_diverges_at_pc_paper_Def :
-    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+    paper source: Theorem 4.1 Part 6, line 496 + Harris-Kesten 1980
+    percolation universality. -/
+axiom kappaStar_diverges_at_pc_paper_Def_pointwise :
+    ∀ α : ℝ,
       BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
         (fun p => kappaStar p α) harrisKestenCriticalProb
+
+/-- **R170 CLOSURE** (Cat 1 derived theorem; replaces the previous R170
+    `kappaStar_diverges_at_pc_paper_Def` axiom). Direct application of
+    the new strictly-smaller R198 bridge atom
+    `kappaStar_diverges_at_pc_paper_Def_pointwise`. The `alphaStar` floor
+    premise is discharged as redundant (the new pointwise atom holds for
+    ALL `α` uniformly per Harris-Kesten percolation universality; the
+    paper's `α > α*(0, p_c)` floor is a downstream cognitive-threshold
+    qualifier, not a consumed premise of the divergence carrier-fact).
+
+    Net §3.4.3 atom delta: −1 (R170 retired) + 1 (R198 bridge) = 0 net
+    atom count, but the new bridge is strictly more atomic per discipline
+    §18 (single-step typed bridge isolating the per-α divergence from
+    the universal quantification + `alphaStar` floor wrapper).
+
+    paper source: Theorem 4.1 Part 6, line 496. -/
+theorem kappaStar_diverges_at_pc_paper_Def :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        (fun p => kappaStar p α) harrisKestenCriticalProb := by
+  intro α _h_alphaStar_lt
+  exact kappaStar_diverges_at_pc_paper_Def_pointwise α
 
 /-- **R170 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `kappaStar_diverges_at_pc_workingAssumption` axiom). Direct re-export

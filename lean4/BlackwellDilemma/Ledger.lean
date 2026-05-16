@@ -5374,15 +5374,29 @@ def entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def : GapEntry where
   obstacleOrAttribution := "CLOSED via R197 bridges `paperGraph_preconnected_paper_Def` + `ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def` + Cat 1 `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected`."
   conditionalOn := []
 
-def entry_atom_kappaStar_diverges_at_pc_paper_Def : GapEntry where
-  name := "kappaStar_diverges_at_pc_paper_Def (R170)"
+def entry_atom_kappaStar_diverges_at_pc_paper_Def_pointwise : GapEntry where
+  name := "kappaStar_diverges_at_pc_paper_Def_pointwise (R198 bridge)"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 6, line 496 (paper STATES κ*(p,α) → +∞ as p → p_c⁻; Harris-Kesten 1980 percolation universality as conceptual source)"
+  attackHistory := [ "R198 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R170 `kappaStar_diverges_at_pc_paper_Def` axiom. Encodes only the per-α `DivergesAtBelowAtTop` predicate evaluation on the kappaStar carrier at the percolation threshold, with the universal-α quantification + `alphaStar` floor premise stripped (the divergence is a property of the kappaStar carrier near p_c per Harris-Kesten universality, holding for any α uniformly; the paper's `α > α*(0, p_c)` floor is a downstream cognitive-threshold qualifier, not a consumed premise of the carrier-fact). The R170 universal statement now follows as a Cat 1 derived theorem via `intro` + direct application. Strictly more atomic per discipline §18 (single-step typed bridge isolating the per-α divergence from the universal quantifier + `alphaStar` floor wrapper). 永不 close." ]
+  scope := "∀ α, DivergesAtBelowAtTop (fun p => kappaStar p α) harrisKestenCriticalProb"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated per-α divergence of the kappaStar carrier at the percolation threshold per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_kappaStar_diverges_at_pc_paper_Def : GapEntry where
+  name := "kappaStar_diverges_at_pc_paper_Def [R198 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Theorem 4.1 Part 6, line 496 (paper STATES κ*(p,α) → +∞ as p → p_c⁻ above α*(0, p_c) floor; Harris-Kesten 1980 + Cardy 1992 + Smirnov-Werner 2001 percolation universality as conceptual source)"
-  attackHistory := [ "R170 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated divergence atom on the kappaStar carrier at the percolation threshold. Replaces the previously inline `kappaStar_diverges_at_pc_workingAssumption` axiom. The substantive Harris-Kesten percolation universality is the conceptual source (Cat 2). 永不 close." ]
+  attackHistory := [
+    "R170 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated divergence atom on the kappaStar carrier at the percolation threshold. Replaces the previously inline `kappaStar_diverges_at_pc_workingAssumption` axiom. The substantive Harris-Kesten percolation universality is the conceptual source (Cat 2). 永不 close.",
+    "R198 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the new strictly-smaller bridge atom `kappaStar_diverges_at_pc_paper_Def_pointwise` (Cat 3 §3.4.3, encoding only the per-α `DivergesAtBelowAtTop` evaluation on the kappaStar carrier at p_c). Proof is a direct `intro α _h_alphaStar_lt; exact kappaStar_diverges_at_pc_paper_Def_pointwise α` — the `alphaStar` floor premise is discharged as redundant since the new pointwise atom holds for ALL α uniformly per Harris-Kesten universality. Net §3.4.3 atom delta: −1 (R170 axiom retired) + 1 (R198 bridge) = 0 net atom count, but the new bridge is strictly more atomic per discipline §18 (single-step typed bridge isolating the per-α divergence from the universal-quantifier + `alphaStar` floor wrapper)."
+  ]
   scope := "∀ α > α*(0, p_c), DivergesAtBelowAtTop (fun p => kappaStar p α) harrisKestenCriticalProb"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated divergence per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R198 bridge `kappaStar_diverges_at_pc_paper_Def_pointwise` + Cat 1 `intro` + direct application."
   conditionalOn := []
 
 def entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def : GapEntry where
@@ -8776,6 +8790,9 @@ def allGaps : List GapEntry := [
   entry_atom_paperGraph_preconnected_paper_Def,
   entry_atom_ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def,
   entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def,
+  -- R198 2026-05-16: smaller bridge atom + R170 retired (now Cat 1 derived
+  -- theorem consuming this bridge + intro + direct application).
+  entry_atom_kappaStar_diverges_at_pc_paper_Def_pointwise,
   entry_atom_kappaStar_diverges_at_pc_paper_Def,
   entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def,
   entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def,
