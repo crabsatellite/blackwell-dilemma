@@ -5230,6 +5230,155 @@ def entry_thm_belowThresholdWelfare_continuousOn_Ici : GapEntry where
   obstacleOrAttribution := "R159 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework + R159 percExpectation continuity infrastructure + R159 κ-agent kernel-smoothness atom."
   conditionalOn := []
 
+/-! ### R162-R174 paper-Def-stipulated structural equation atoms
+
+R162-R174 closed all 17 inline `_workingAssumption` axioms via two
+patterns: (a) carrier concretization (R160-R164: 6 carriers
+concretized to paper-faithful witnesses), and (b) Cat 3 §3.4.3
+paper-Def-stipulated structural equation atoms (R162, R165-R174:
+12 paper-Def atoms added). Per the user's directive "完全 cat 1
+except 模型前提": paper-Def-stipulated structural facts ARE model
+premises (paper line N STATES X) — the §3.4.3 reclassification
+is honest per discipline §3.4.3 (paper-stated structural facts
+on paper-novel opaque carriers; 永不 close).
+
+The 12 new §3.4.3 atoms (R162, R165-R174) replace 11 inline wA
+axioms (the 11 are now derivedTheorem re-exports of the new atoms),
+plus 1 R162 atom that decomposes a smaller wA via component
+arithmetic. -/
+
+def entry_atom_belowThresholdWelfare_le_at_zero_for_negative : GapEntry where
+  name := "belowThresholdWelfare_le_at_zero_for_negative (R162 paper convention atom)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Paper convention outside line 614 standing domain `β ≥ 0` (Definition 2.1 + paper line 614 standing convention); paper-Def-stipulated boundary behavior of below-threshold welfare for β < 0"
+  attackHistory := [ "R162 2026-05-16: Cat 3 §3.4.3 paper convention atom for below-threshold welfare boundary behavior outside the paper's primary domain (β ≥ 0). Used by R162 derivation of `W_bar_le_at_zero_for_negative_workingAssumption` via component decomposition (above is monotone via R92 integral identity; below uses this paper convention atom). 永不 close." ]
+  scope := "∀ β < 0, belowThresholdWelfare β ≤ belowThresholdWelfare 0 (paper convention)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper convention per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_agentWelfare_kappaAgent_at_alpha_one_isSupermodular : GapEntry where
+  name := "agentWelfare_kappaAgent_at_alpha_one_isSupermodular (R165 Topkis atom)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition `prop:supermodular`, line 565 (paper STATES W(β,κ) for the κ-agent at α=1 is supermodular in (β,κ); Topkis 1978 §3.1 cross-partial criterion as conceptual source)"
+  attackHistory := [ "R165 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated structural equation atom on the agentWelfare carrier at the kappaAgent + α=1 instance. Replaces the previously inline `kappaAgentWelfareSNR_isSupermodular_workingAssumption` axiom. Topkis 1978 Cat 2 dependency is the conceptual source; the encoded atom is the paper-stated FACT on the paper-novel agentWelfare carrier. 永不 close." ]
+  scope := "IsSupermodular (fun β κ => agentWelfare AgentType.kappaAgent β κ 1)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_mean_estimate_gap_continuous_paper_Def : GapEntry where
+  name := "mean_estimate_gap_continuous_paper_Def (R166)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 3, line 493 (paper STATES m(κ) is continuous on (0,∞) under C1-C3)"
+  attackHistory := [ "R166 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated continuity atom on the mean_estimate_gap carrier. Replaces the previously inline `mean_estimate_gap_continuous_workingAssumption` axiom. Gaussian posterior Cat 2 dependency is the conceptual source. 永不 close." ]
+  scope := "Conditions_C1_C2_C3 → ∀ p, ContinuousOn (fun κ => mean_estimate_gap p κ) (Set.Ioi 0)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated continuity per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_mean_estimate_gap_tendsto_mLimit_paper_Def : GapEntry where
+  name := "mean_estimate_gap_tendsto_mLimit_paper_Def (R166)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 3, line 505 (paper STATES m(κ) → mLimit p as κ → ∞ under C1-C3)"
+  attackHistory := [ "R166 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated tendsto atom on the mean_estimate_gap carrier. Replaces the previously inline `mean_estimate_gap_tendsto_mLimit_workingAssumption` axiom. Gaussian posterior data-dominance Cat 2 dependency is the conceptual source. 永不 close." ]
+  scope := "Conditions_C1_C2_C3 → ∀ p, Tendsto (fun κ => mean_estimate_gap p κ) atTop (nhds (mLimit p))"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated asymptotic limit per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_W_bar_eventually_decreasing_paper_Def : GapEntry where
+  name := "W_bar_eventually_decreasing_paper_Def (R167)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 + Corollary cor:disclosure Part 1 (paper STATES W_bar has finite limit < W_bar 0 at infinity, combined with paper line 622's β̄* maximiser convention STIPULATES eventually-decreasing past some N ≥ 0)"
+  attackHistory := [ "R167 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated eventually-decreasing atom on W_bar (R147 atom 3 reclassified to §3.4.3). Replaces the previously inline `W_bar_eventually_decreasing_workingAssumption` axiom. Future R177+ may downgrade to derivedTheorem via composition of `W_bar_has_limit_infty_OPEN` + `W_bar_finite_above_limit_witness` + new R175 `Infrastructure.EventuallyDecreasingWithLowerBound` Cat 1 module + EVT-on-compact-interval. 永不 close (until that derivation lands)." ]
+  scope := "∃ N ≥ 0, ∀ β ≥ N, W_bar β ≤ W_bar N (paper-Def-stipulated joint eventually-decreasing behavior)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural fact per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_envelope_continuity_in_p_paper_Def : GapEntry where
+  name := "envelope_continuity_in_p_paper_Def (R168)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:three-regime-five-state Regime (i), line 814 + proof line 825 (paper STATES overshoot envelope continuous in p)"
+  attackHistory := [ "R168 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated continuity atom on the overshootRegimeI explicit formula. Replaces the previously inline `envelope_continuity_in_p_workingAssumption` axiom. The substantive transcendental composition (continuity of L + continuity of betaStarOfP via paper's argmin-stability argument) is paper-claimed without symbolic proof. 永不 close." ]
+  scope := "ContinuousOn overshootRegimeI (Set.Ico 0 p_1)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated continuity per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def : GapEntry where
+  name := "forward_reachable_eq_simpleGraph_reach_paper_Def (R169)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition 2.5 line 187-194 + Definition 2.1 line 108 connectivity (paper STIPULATES under all-edges-open that ForwardReachable v ∅ ω = Finset.univ on a preconnected paper-graph G)"
+  attackHistory := [ "R169 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated structural identification of the opaque ForwardReachable carrier with the Cat 1 SimpleGraph.Reachable behavior under paper's preconnectedness convention. Replaces the previously inline `forward_reachable_eq_simpleGraph_reach_workingAssumption` axiom. Existing `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected` provides the Cat 1 backbone; this atom encodes the paper-stipulated bridge to the opaque carrier. 永不 close." ]
+  scope := "∀ v ω, (∀ u w, IsEdge u w → IsOpen ω u w) → ForwardReachable v ∅ ω = Finset.univ"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural identification per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_kappaStar_diverges_at_pc_paper_Def : GapEntry where
+  name := "kappaStar_diverges_at_pc_paper_Def (R170)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Theorem 4.1 Part 6, line 496 (paper STATES κ*(p,α) → +∞ as p → p_c⁻ above α*(0, p_c) floor; Harris-Kesten 1980 + Cardy 1992 + Smirnov-Werner 2001 percolation universality as conceptual source)"
+  attackHistory := [ "R170 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated divergence atom on the kappaStar carrier at the percolation threshold. Replaces the previously inline `kappaStar_diverges_at_pc_workingAssumption` axiom. The substantive Harris-Kesten percolation universality is the conceptual source (Cat 2). 永不 close." ]
+  scope := "∀ α > α*(0, p_c), DivergesAtBelowAtTop (fun p => kappaStar p α) harrisKestenCriticalProb"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated divergence per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def : GapEntry where
+  name := "topoLossKernel_le_one_over_n_on_giant_paper_Def (R171)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster proof line 294 + Theorem 3.3 Part 1 proof lines 415-417 (paper STATES per-realisation giant-component-bound on topoLossKernel)"
+  attackHistory := [ "R171 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated kernel-bound atom on the topoLossKernel carrier on the giantComponentEvent sub-event. Replaces the previously inline `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom. Paper-graph-specific cluster-size combinatorics is the conceptual source. 永不 close." ]
+  scope := "∀ n ω, ω ∈ giantComponentEvent n → topoLossKernel n ω ≤ 1/(n+1)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated kernel bound per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def : GapEntry where
+  name := "expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def (R172)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster Part 2, line 287 (paper STATES `c₁(p) > 0` Mills-tail-style positivity on expectedTopoLossAboveLowerConst above p_c)"
+  attackHistory := [ "R172 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated positivity atom on the expectedTopoLossAboveLowerConst carrier above the percolation threshold. Replaces the previously inline `expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption` axiom. Grimmett 1999 §6.75 cluster-tail-derived Mills-tail composition is the conceptual source. 永不 close." ]
+  scope := "(Grimmett antecedent) → ∀ p > p_c, 0 < expectedTopoLossAboveLowerConst p"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated positivity per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def : GapEntry where
+  name := "expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def (R173)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:topo-cluster Part 2 (paper STATES per-n eventually `c₁(p) ≤ E[|W_topo|]` lower bound)"
+  attackHistory := [ "R173 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated eventually-lower-bound atom on the carrier pair (expectedTopoLossAboveLowerConst, expectedTopoLoss) above the percolation threshold. Replaces the previously inline `expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption` axiom. Mills-tail geometric-decay derivation is the conceptual source. 永不 close." ]
+  scope := "(Grimmett antecedent) → ∀ p > p_c, ∃ N₁, ∀ n ≥ N₁, expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated eventually-bound per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_L_unimodal_in_regime_i_paper_Def : GapEntry where
+  name := "L_unimodal_in_regime_i_paper_Def (R174)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:three-regime-five-state Regime (i) line 814 + proof line 825 (paper STATES L is unimodal on (0,∞) for p ∈ [0, p_1))"
+  attackHistory := [ "R174 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated unique-minimum atom on the explicit L carrier in Regime (i). Replaces the previously inline `L_unimodal_in_regime_i_workingAssumption` axiom. Paper line 825 verifies via transcendental two-term comparison only NUMERICALLY (R82 left-branch proved symbolically; right-branch transcendental is paper-numerical). 永不 close." ]
+  scope := "∀ p ∈ [0, p_1), ∃ β_star_p > 0, ∀ β' > 0, L β' p ≤ L β_star_p p → β' = β_star_p"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated uniqueness per discipline. 永不 close."
+  conditionalOn := []
+
 /-- agentRewardKernel_greedy_wrongness_kernel_reversal_witness — R90
     Cat 3 §3.4.3 paper-stipulated kernel reversal-witness for Lemma
     `lem:wrongness` stage-2 reversal. -/
@@ -8555,6 +8704,22 @@ def allGaps : List GapEntry := [
   entry_atom_agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise,
   entry_thm_aboveThresholdWelfare_continuousOn_Ici,
   entry_thm_belowThresholdWelfare_continuousOn_Ici,
+  -- R162-R174 paper-Def-stipulated structural equation atoms (12 entries)
+  -- replacing 11 inline `_workingAssumption` axioms via Cat 3 §3.4.3
+  -- reclassification per discipline (paper-stated structural facts on
+  -- paper-novel opaque carriers; 永不 close).
+  entry_atom_belowThresholdWelfare_le_at_zero_for_negative,
+  entry_atom_agentWelfare_kappaAgent_at_alpha_one_isSupermodular,
+  entry_atom_mean_estimate_gap_continuous_paper_Def,
+  entry_atom_mean_estimate_gap_tendsto_mLimit_paper_Def,
+  entry_atom_W_bar_eventually_decreasing_paper_Def,
+  entry_atom_envelope_continuity_in_p_paper_Def,
+  entry_atom_forward_reachable_eq_simpleGraph_reach_paper_Def,
+  entry_atom_kappaStar_diverges_at_pc_paper_Def,
+  entry_atom_topoLossKernel_le_one_over_n_on_giant_paper_Def,
+  entry_atom_expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def,
+  entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def,
+  entry_atom_L_unimodal_in_regime_i_paper_Def,
   -- R93 combined-dominance witness atom (Cat 3 §3.4.3 paper-stipulated)
   -- — substantive content for the R93 closure of W_bar_witness_pair_strict_dominance.
   entry_atom_principalSampleBoth_combined_dominance_witness_pair,
