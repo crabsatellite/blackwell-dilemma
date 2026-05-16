@@ -201,6 +201,58 @@ generalisations:
   pointwise → summed monotonicity packaging.
 * `GaussianPosterior.gaussianPosteriorMean` → conjugate-prior posterior
   mean infrastructure.
+
+## R175-R184 Mathlib-PR-ready additions (2026-05-16)
+
+After ZERO inline `_workingAssumption` axioms achieved (R159-R174
+closed all 17 internally), R175-R184 added 7 new Mathlib-PR-ready
+modules + 2 closure-via-existence demonstrations:
+
+* `EventuallyDecreasingWithLowerBound` (R175) — eventually-decreasing
+  patterns with lower-bound witnesses (3 generic Cat 1 lemmas).
+  Target namespace: `Mathlib.Order.Filter.EventuallyMonotone` or
+  `Mathlib.Topology.Algebra.Order.EventuallyDecreasing`.
+* `PercExpectationSupermodular` (R178) — pointwise → integrated
+  supermodularity lifting for percolation expectation. Target:
+  `Mathlib.Order.Supermodular` (yet-to-be-created).
+* `SupermodularityFinsetSum` (R179) — extension of
+  `IsSupermodular.add` to arbitrary finite sums + weighted sums.
+  Target: `Mathlib.Order.Supermodular`.
+* `ArgmaxOnHalfLine` (R180) — generic argmax existence on `[a, ∞)`
+  from continuous + tendsto-finite-with-strict-witness. Combined with
+  R175 provides complete "EVT for non-compact `[a, ∞)`" toolkit.
+  Target: `Mathlib.Topology.Order.Compact.HalfLine`.
+* `IsSupermodularPointwiseLimit` (R181) — supermodularity is closed
+  under pointwise limits of sequences. Target: `Mathlib.Order.Supermodular`.
+* `DifferenceDominatesFinsetSum` (R182) — sister of R179 for the
+  `DifferenceDominates` lattice (finset sum + weighted sum
+  preservation). Target: envisioned `Mathlib.Order.DifferenceDominates`.
+* `PercExpectationDifferenceDominates` (R183) — pointwise → integrated
+  difference-dominance lifting (sister of R178 for `DifferenceDominates`).
+  Target: envisioned `Mathlib.Order.DifferenceDominates`.
+
+Closure-via-existence demonstrations (use the modules above):
+* R177 (`Principal.lean`): `W_bar_eventually_decreasing_derived_R177`
+  uses R175 + W_bar_limit_infty + W_bar_finite_above_limit_witness +
+  Mathlib EVT to prove the R167 §3.4.3 atom statement is Cat 1
+  derivable.
+* R184 (`Cognitive.lean`):
+  `agentWelfare_kappaAgent_at_alpha_one_isSupermodular_derived_R184`
+  uses R178 + new R184 per-realisation kernel-supermodularity atom in
+  Types.lean to prove R165's atom statement is Cat 1 derivable.
+
+These demonstrate the closure-via-existence pattern: each §3.4.3
+paper-Def atom can be replaced (in dependency closure) by smaller
+atomic stipulations + Cat 1 lifting infrastructure. Future work:
+restructure files to retire the §3.4.3 atoms entirely (currently
+preserved for forward-reference convenience in source order).
+
+Future Mathlib-PR sequence:
+  Phase A — Mathlib `Order.Supermodular` namespace creation
+  Phase B — `Mathlib.Order.DifferenceDominates` namespace creation
+  Phase C — `Mathlib.Topology.Algebra.Order.EventuallyDecreasing`
+  Phase D — Once Phases A-C are merged, retire R177/R184 etc. and
+            convert §3.4.3 atoms to derivedTheorem
 -/
 namespace BlackwellDilemma.Infrastructure
 
