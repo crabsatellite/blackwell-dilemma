@@ -82,6 +82,7 @@ import BlackwellDilemma.Infrastructure.TopkisCrossPartial
 import BlackwellDilemma.Infrastructure.FOSDDerivativeChain
 import BlackwellDilemma.Infrastructure.ArgmaxMonotone
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
+import BlackwellDilemma.Infrastructure.HarrisKestenCriticalDivergence
 import BlackwellDilemma.Infrastructure.BlackwellConditional
 import BlackwellDilemma.Infrastructure.GaussianPosterior
 import BlackwellDilemma.Infrastructure.SupermodularExtended
