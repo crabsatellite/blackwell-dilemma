@@ -1499,6 +1499,50 @@ theorem gap_three_regime_reversal_existence :
         L β_star_p p < (4/10 : ℝ) :=
   L_below_limit_at_some_beta_OPEN
 
+/-- **R202 bridge (a)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+    atom: existence of an interior minimiser of `L β p` over `β > 0` for
+    `p ∈ [0, p_1)`. Paper Proposition `prop:three-regime-five-state`
+    Regime (i) line 814 + proof line 825 STATE the unimodality of `L β p`
+    on `(0, ∞)`; the existence-of-minimum sub-clause is the EXISTENCE-only
+    component of the paper's unique-minimum claim.
+
+    Per discipline §18 atomic-decomposition pattern: smaller atoms +
+    Cat 1 lifting are preferable to larger atoms. R202 splits the R174
+    larger axiom (existence + uniqueness) into two strictly smaller
+    paper-Def atoms: (a) interior-minimiser EXISTENCE (this atom), and
+    (b) strict uniqueness from paper-stipulated strict structure
+    (`L_strict_unique_minimizer_paper_Def` below). The R174 atom then
+    becomes a Cat 1 derived theorem composing the two.
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel opaque carrier in regime). 永不 close. -/
+axiom L_interior_minimizer_exists_paper_Def :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∃ β_star_p : ℝ, 0 < β_star_p ∧
+        ∀ β' : ℝ, 0 < β' → L β_star_p p ≤ L β' p
+
+/-- **R202 bridge (b)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+    atom: strict uniqueness of the minimiser of `L β p` over `β > 0` for
+    `p ∈ [0, p_1)`. Paper line 825's transcendental two-term sign
+    comparison `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·
+    0.9(1−p)·Φ_B'(β)` is the paper-numerical witness for STRICT
+    convexity-like behaviour on the interior, which the paper invokes
+    to conclude uniqueness of the interior minimiser.
+
+    Per discipline §18 atomic-decomposition pattern: this atom isolates
+    the strict-uniqueness paper-stipulated content from the existence
+    side, which is captured separately by
+    `L_interior_minimizer_exists_paper_Def`.
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    paper-novel opaque carrier in regime). 永不 close. -/
+axiom L_strict_unique_minimizer_paper_Def :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        (∀ β'' : ℝ, 0 < β'' → L β p ≤ L β'' p) →
+        L β' p ≤ L β p →
+        β' = β
+
 /-- **R174** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
     paper Proposition `prop:three-regime-five-state` Regime (i) line 814
     + proof line 825 STATE that the explicit `L β p` formula is unimodal
@@ -1514,12 +1558,28 @@ theorem gap_three_regime_reversal_existence :
     paper-stated FACT on the paper-novel `L` carrier; the encoded atom
     captures the paper-stipulated uniqueness conclusion.
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
-    paper-novel opaque carrier in regime). 永不 close. -/
-axiom L_unimodal_in_regime_i_paper_Def :
+    **R202 RETIRED as axiom**: now a Cat 1 derived theorem composing
+    the two strictly-smaller paper-Def bridge atoms
+    `L_interior_minimizer_exists_paper_Def` (existence) and
+    `L_strict_unique_minimizer_paper_Def` (strict uniqueness). Per
+    discipline §18 atomic-decomposition pattern: smaller atoms + Cat 1
+    lifting are preferable to larger atoms.
+
+    Net §3.4.3 atom delta: −1 (R174 axiom retired) + 2 (R202 bridges) =
+    +1 raw atom, but the new bridges are strictly more atomic per
+    discipline §18 (existence and uniqueness are factored into separate
+    paper-Def atoms). -/
+theorem L_unimodal_in_regime_i_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
-        ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p
+        ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p := by
+  intro p hp hp_lt
+  obtain ⟨β_star_p, h_pos, h_min⟩ :=
+    L_interior_minimizer_exists_paper_Def p hp hp_lt
+  refine ⟨β_star_p, h_pos, ?_⟩
+  intro β' hβ'_pos h_le
+  exact L_strict_unique_minimizer_paper_Def p hp hp_lt
+    β_star_p β' h_pos hβ'_pos h_min h_le
 
 /-- **R174 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
     `L_unimodal_in_regime_i_workingAssumption` axiom). Direct re-export

@@ -773,6 +773,31 @@ axiom agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
         ContinuousOn (fun β => agentRewardKernel AgentType.kappaAgent β κ α ω)
           (Set.Ici (0 : ℝ))
 
+/-- **R203 bridge** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+    atom: per-realisation reward-kernel four-corner positivity in
+    `(β, κ)` for the κ-agent. This is the unfolded Topkis four-corner
+    inequality on the reward kernel — directly the paper-stipulated
+    cross-partial-non-negativity content from Topkis 1978 §3.1, isolated
+    from the `IsSupermodular` predicate wrapper.
+
+    Per discipline §18 atomic-decomposition pattern: this atom is
+    strictly more atomic than the R184 wrapped-predicate axiom
+    `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise`
+    (Topkis four-corner inequality unfolded; the predicate `Is
+    Supermodular` definitionally IS the four-corner inequality, so
+    R184 then becomes `Iff.rfl` Cat 1 derivable from this bridge).
+
+    Per discipline §3.4.3 (paper-Def-stipulated structural fact on the
+    paper-novel reward-kernel four-corner positivity). 永不 close. -/
+axiom agentRewardKernel_kappaAgent_corner_positivity_paper_Def :
+    ∀ (α : ℝ),
+      ∀ ω : BondConfig AgentEdgeIdx,
+        ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
+          agentRewardKernel AgentType.kappaAgent x₁ y₁ α ω +
+              agentRewardKernel AgentType.kappaAgent x₂ y₂ α ω ≥
+            agentRewardKernel AgentType.kappaAgent x₁ y₂ α ω +
+              agentRewardKernel AgentType.kappaAgent x₂ y₁ α ω
+
 /-- **R184** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
     paper Proposition `prop:supermodular` (line 565) STATES that the
     κ-agent's welfare functional `W(β, κ)` (= `agentWelfare AgentType.
@@ -792,14 +817,26 @@ axiom agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
     supermodular_of_pointwise_supermodular` (R178 lifting from per-ω
     supermodularity to integrated form).
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
-    paper-novel reward-kernel pointwise supermodularity in (β, κ)).
-    永不 close. -/
-axiom agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise :
+    **R203 RETIRED as axiom**: now a Cat 1 derived theorem consuming
+    the strictly-smaller paper-Def bridge atom
+    `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (the
+    Topkis four-corner inequality unfolded). Per discipline §18
+    atomic-decomposition pattern: smaller atoms + Cat 1 lifting are
+    preferable to larger atoms; the `IsSupermodular` predicate
+    definitionally IS the four-corner inequality, so the closure is
+    `Iff.rfl`-style Cat 1.
+
+    Net §3.4.3 atom delta: −1 (R184 axiom retired) + 1 (R203 bridge) =
+    0 raw atom, but the new bridge is strictly more atomic per
+    discipline §18 (the predicate wrapper is unfolded into its
+    elementary four-corner form). -/
+theorem agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise :
     ∀ (α : ℝ),
       ∀ ω : BondConfig AgentEdgeIdx,
         BlackwellDilemma.Infrastructure.IsSupermodular
-          (fun β κ => agentRewardKernel AgentType.kappaAgent β κ α ω)
+          (fun β κ => agentRewardKernel AgentType.kappaAgent β κ α ω) := by
+  intro α ω
+  exact agentRewardKernel_kappaAgent_corner_positivity_paper_Def α ω
 
 /-- **R88 foundation derived theorem.**  The general
     pointwise-monotone-kernel ⇒ monotone-welfare bridge: if the

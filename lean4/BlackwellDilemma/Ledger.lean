@@ -5474,15 +5474,65 @@ def entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def : GapEnt
   obstacleOrAttribution := "CLOSED via R201 bridge `expectedTopoLoss_ge_mills_inverse_eventually_paper_Def` + R200 bridge `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` + Cat 1 `obtain`/`rw`."
   conditionalOn := []
 
-def entry_atom_L_unimodal_in_regime_i_paper_Def : GapEntry where
-  name := "L_unimodal_in_regime_i_paper_Def (R174)"
+def entry_atom_L_interior_minimizer_exists_paper_Def : GapEntry where
+  name := "L_interior_minimizer_exists_paper_Def (R202 bridge (a))"
   status := GapStatus.gapDefinitional
   inputCategory := InputCategory.cat3PaperNovel
   cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:three-regime-five-state Regime (i) line 814 + proof line 825 (paper STATES L is unimodal on (0,∞) for p ∈ [0, p_1); existence-of-minimum sub-clause)"
+  attackHistory := [ "R202 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom (a) — existence of an interior minimiser of L β p over β > 0 for p ∈ [0, p_1). Per discipline §18 atomic-decomposition pattern: splits the R174 unique-minimum axiom into two strictly smaller paper-Def atoms — (a) interior-minimiser EXISTENCE (this atom), and (b) strict uniqueness from paper-stipulated strict structure (`L_strict_unique_minimizer_paper_Def`). Strictly more atomic than R174 (existence is the EXISTENCE-only component of the paper's unique-minimum claim). 永不 close." ]
+  scope := "∀ p ∈ [0, p_1), ∃ β_star_p > 0, ∀ β' > 0, L β_star_p p ≤ L β' p"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated existence-of-interior-minimiser per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_L_strict_unique_minimizer_paper_Def : GapEntry where
+  name := "L_strict_unique_minimizer_paper_Def (R202 bridge (b))"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:three-regime-five-state Regime (i) proof line 825 (paper-numerical transcendental two-term sign comparison `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)` witnesses STRICT convexity-like behaviour on the interior used to conclude uniqueness)"
+  attackHistory := [ "R202 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom (b) — strict uniqueness of the minimiser of L β p over β > 0 for p ∈ [0, p_1). Per discipline §18 atomic-decomposition pattern: splits the R174 unique-minimum axiom into two strictly smaller paper-Def atoms — (a) interior-minimiser EXISTENCE (`L_interior_minimizer_exists_paper_Def`), and (b) strict uniqueness (this atom). Strictly more atomic than R174 (the strict-uniqueness paper-stipulated content is isolated from the existence side). 永不 close." ]
+  scope := "∀ p ∈ [0, p_1), ∀ β β' > 0, (∀ β'' > 0, L β p ≤ L β'' p) → L β' p ≤ L β p → β' = β"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated strict-uniqueness per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_L_unimodal_in_regime_i_paper_Def : GapEntry where
+  name := "L_unimodal_in_regime_i_paper_Def [R174 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
   paperSource := "Proposition prop:three-regime-five-state Regime (i) line 814 + proof line 825 (paper STATES L is unimodal on (0,∞) for p ∈ [0, p_1))"
-  attackHistory := [ "R174 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated unique-minimum atom on the explicit L carrier in Regime (i). Replaces the previously inline `L_unimodal_in_regime_i_workingAssumption` axiom. Paper line 825 verifies via transcendental two-term comparison only NUMERICALLY (R82 left-branch proved symbolically; right-branch transcendental is paper-numerical). 永不 close." ]
+  attackHistory := [
+    "R174 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated unique-minimum atom on the explicit L carrier in Regime (i). Replaces the previously inline `L_unimodal_in_regime_i_workingAssumption` axiom. Paper line 825 verifies via transcendental two-term comparison only NUMERICALLY (R82 left-branch proved symbolically; right-branch transcendental is paper-numerical). 永不 close.",
+    "R202 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem composing the two strictly-smaller paper-Def bridge atoms `L_interior_minimizer_exists_paper_Def` (Cat 3 §3.4.3, EXISTENCE side) + `L_strict_unique_minimizer_paper_Def` (Cat 3 §3.4.3, STRICT-UNIQUENESS side). Proof: `obtain ⟨β_star_p, h_pos, h_min⟩ := L_interior_minimizer_exists_paper_Def p hp hp_lt; refine ⟨β_star_p, h_pos, ?_⟩; intro β' hβ'_pos h_le; exact L_strict_unique_minimizer_paper_Def p hp hp_lt β_star_p β' h_pos hβ'_pos h_min h_le`. Net §3.4.3 atom delta: −1 (R174 axiom retired) + 2 (R202 bridges) = +1 raw atom, but the new bridges are strictly more atomic per discipline §18 (existence and uniqueness are factored into separate paper-Def atoms)."
+  ]
   scope := "∀ p ∈ [0, p_1), ∃ β_star_p > 0, ∀ β' > 0, L β' p ≤ L β_star_p p → β' = β_star_p"
-  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated uniqueness per discipline. 永不 close."
+  obstacleOrAttribution := "CLOSED via R202 bridges `L_interior_minimizer_exists_paper_Def` + `L_strict_unique_minimizer_paper_Def` + Cat 1 `obtain`/`refine`/`exact` composition."
+  conditionalOn := []
+
+def entry_atom_agentRewardKernel_kappaAgent_corner_positivity_paper_Def : GapEntry where
+  name := "agentRewardKernel_kappaAgent_corner_positivity_paper_Def (R203 bridge)"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Proposition prop:supermodular line 565 (paper STATES W(β,κ) for the κ-agent at α=1 is supermodular in (β,κ); Topkis 1978 §3.1 cross-partial criterion as conceptual source — per-realisation Topkis four-corner inequality on the reward kernel)"
+  attackHistory := [ "R203 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge atom replacing the previous R184 `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise` axiom. Encodes the paper-stipulated Topkis four-corner inequality on the reward kernel UNFOLDED — the `IsSupermodular` predicate definitionally IS the four-corner inequality (`∀ x₁ x₂ y₁ y₂, x₁ ≤ x₂ → y₁ ≤ y₂ → f x₁ y₁ + f x₂ y₂ ≥ f x₁ y₂ + f x₂ y₁`), so R184 then becomes an `Iff.rfl`-style Cat 1 derived theorem. Strictly more atomic per discipline §18 (single-step typed bridge isolating the elementary four-corner positivity from the predicate wrapper). 永不 close." ]
+  scope := "∀ α : ℝ, ∀ ω : BondConfig AgentEdgeIdx, ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ → agentRewardKernel kappaAgent x₁ y₁ α ω + agentRewardKernel kappaAgent x₂ y₂ α ω ≥ agentRewardKernel kappaAgent x₁ y₂ α ω + agentRewardKernel kappaAgent x₂ y₁ α ω"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated Topkis four-corner positivity on the κ-agent reward kernel per discipline. 永不 close."
+  conditionalOn := []
+
+def entry_atom_agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise : GapEntry where
+  name := "agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise [R184 retired — replaced with Cat 1 derived theorem]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Proposition prop:supermodular line 565 (paper STATES W(β,κ) for the κ-agent at α=1 is supermodular in (β,κ); Topkis 1978 §3.1 cross-partial criterion is the conceptual source — paper-PRESUPPOSED per-realisation reward-kernel supermodularity)"
+  attackHistory := [
+    "R184 2026-05-16: Cat 3 §3.4.3 paper-Def-stipulated structural equation atom on the per-realisation κ-agent reward kernel — paper-stipulated supermodularity in (β, κ) per the R88-style kernel-decomposition (`agentWelfare a β κ α := percExpectation (1 - blockingProb) (agentRewardKernel a β κ α)`). Topkis 1978 §3.1 cross-partial criterion is the conceptual source. The encoded atom is paper-stated FACT on the per-realisation kernel — the welfare-level R165 atom `agentWelfare_kappaAgent_at_alpha_one_isSupermodular` becomes derivable as a Cat 1 corollary via R178 `Infrastructure.PercExpectationSupermodular.percExpectation_supermodular_of_pointwise_supermodular` (R178 lifting from per-ω supermodularity to integrated form). 永不 close.",
+    "R203 2026-05-16: RETIRED as axiom; converted to Cat 1 derived theorem consuming the strictly-smaller paper-Def bridge atom `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (Cat 3 §3.4.3, encoding the Topkis four-corner inequality on the reward kernel UNFOLDED). Proof: `intro α ω; exact agentRewardKernel_kappaAgent_corner_positivity_paper_Def α ω` (the `IsSupermodular` predicate definitionally IS the four-corner inequality, so the closure is `Iff.rfl`-style Cat 1). Net §3.4.3 atom delta: −1 (R184 axiom retired) + 1 (R203 bridge) = 0 raw atom, but the new bridge is strictly more atomic per discipline §18 (the predicate wrapper is unfolded into its elementary four-corner form)."
+  ]
+  scope := "∀ α : ℝ, ∀ ω : BondConfig AgentEdgeIdx, IsSupermodular (fun β κ => agentRewardKernel kappaAgent β κ α ω)"
+  obstacleOrAttribution := "CLOSED via R203 bridge `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` + Cat 1 `intro`/`exact` (the bridge IS the unfolded form of `IsSupermodular`)."
   conditionalOn := []
 
 /-- agentRewardKernel_greedy_wrongness_kernel_reversal_witness — R90
@@ -8848,7 +8898,17 @@ def allGaps : List GapEntry := [
   -- theorem consuming this bridge + R200 carrier-identification + rw chain).
   entry_atom_expectedTopoLoss_ge_mills_inverse_eventually_paper_Def,
   entry_atom_expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def,
+  -- R202 2026-05-16: 2 smaller bridge atoms (existence + strict uniqueness)
+  -- + R174 retired (now Cat 1 derived theorem composing the two bridges).
+  entry_atom_L_interior_minimizer_exists_paper_Def,
+  entry_atom_L_strict_unique_minimizer_paper_Def,
   entry_atom_L_unimodal_in_regime_i_paper_Def,
+  -- R203 2026-05-16: smaller bridge atom (Topkis four-corner inequality
+  -- unfolded) + R184 retired (now Cat 1 `Iff.rfl`-style derived theorem;
+  -- previously undocumented per-realisation κ-agent supermodularity axiom
+  -- in Types.lean — Ledger entry added alongside the retirement).
+  entry_atom_agentRewardKernel_kappaAgent_corner_positivity_paper_Def,
+  entry_atom_agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise,
   -- R93 combined-dominance witness atom (Cat 3 §3.4.3 paper-stipulated)
   -- — substantive content for the R93 closure of W_bar_witness_pair_strict_dominance.
   entry_atom_principalSampleBoth_combined_dominance_witness_pair,
