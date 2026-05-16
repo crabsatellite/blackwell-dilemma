@@ -1464,56 +1464,25 @@ theorem kappaAgentWelfareSNR_mem_unitInterval (β κ : ℝ) :
   rw [kappaAgentWelfareSNR_def β κ]
   exact agentWelfare_mem_unitInterval AgentType.kappaAgent β κ 1
 
-/-- **R165** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
-    paper Proposition `prop:supermodular` line 565 STATES that the
-    κ-agent's welfare functional `W(β, κ)` (= `agentWelfare AgentType.
-    kappaAgent β κ 1`) is supermodular in `(β, κ)`. Paper authority:
-    Topkis 1978 §3.1 cross-partial criterion.
-
-    This is paper-Def-stipulated structural-equation per discipline
-    §3.4.3 (paper-Def-stipulated structural fact about the agentWelfare
-    carrier at the kappaAgent + α=1 instance). The Topkis 1978 Cat 2
-    dependency is recorded in the docstring as the conceptual source
-    of paper's claim; the encoded atom is the paper-stated FACT on the
-    paper-novel agentWelfare carrier. 永不 close. -/
-axiom agentWelfare_kappaAgent_at_alpha_one_isSupermodular :
-    BlackwellDilemma.Infrastructure.IsSupermodular
-      (fun β κ => agentWelfare AgentType.kappaAgent β κ 1)
-
-/-- **R165 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
-    `kappaAgentWelfareSNR_isSupermodular_workingAssumption` axiom).
-    Derives from the new R165 paper-Def-stipulated structural equation
-    atom `agentWelfare_kappaAgent_at_alpha_one_isSupermodular` via
-    `kappaAgentWelfareSNR_def` unfolding (kappaAgentWelfareSNR β κ =
-    agentWelfare AgentType.kappaAgent β κ 1).
-
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
-theorem kappaAgentWelfareSNR_isSupermodular_workingAssumption :
-    BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNR :=
-  agentWelfare_kappaAgent_at_alpha_one_isSupermodular
-
-/-- **R184 CLOSURE-VIA-EXISTENCE** (Cat 1 derived theorem demonstration):
-    The R165 §3.4.3 atom `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`
-    IS DERIVABLE as a Cat 1 theorem composing:
+/-- **R165 → R187 RETIRED**: Cat 1 derived theorem (replaces R165
+    §3.4.3 paper-Def axiom). Composes:
     * R178 `Infrastructure.PercExpectationSupermodular.percExpectation_
       supermodular_of_pointwise_supermodular` (lifting pointwise → integrated)
     * R184 `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise`
-      (NEW Cat 3 §3.4.3 paper-Def atom in Types.lean — paper-stipulated
+      (Cat 3 §3.4.3 paper-Def atom in Types.lean — paper-stipulated
       per-realisation reward-kernel supermodularity from Topkis 1978
       cross-partial)
     * `agentWelfare`'s definitional unfold to `percExpectation`
     * `blockingProb` ∈ (0, 1) standing convention
 
-    The R165 atom remains for forward-reference convenience; this
-    derived theorem demonstrates the closure path via R178 + the new
-    R184 atom. Net effect: the R165 atom is now in the dependency
-    closure of this Cat 1 theorem (which only depends on the new R184
-    pointwise atom + R178 + Mathlib).
+    Net axiom delta: −1 (R165 retired); the R184 per-realisation atom
+    in Types.lean is the SMALLER paper-Def-stipulated atom that
+    replaces the welfare-level R165 atom. Per discipline §18
+    atomic-decomposition pattern: smaller atoms + Cat 1 lifting are
+    preferable to larger atoms.
 
-    Future Lean 4 versions could retire R165 entirely and consume this
-    derived theorem directly. -/
-theorem agentWelfare_kappaAgent_at_alpha_one_isSupermodular_derived_R184 :
+    paper source: Proposition `prop:supermodular`, line 565. -/
+theorem agentWelfare_kappaAgent_at_alpha_one_isSupermodular :
     BlackwellDilemma.Infrastructure.IsSupermodular
       (fun β κ => agentWelfare AgentType.kappaAgent β κ 1) := by
   -- Unfold agentWelfare to percExpectation form.
@@ -1523,7 +1492,7 @@ theorem agentWelfare_kappaAgent_at_alpha_one_isSupermodular_derived_R184 :
     funext β κ
     rfl
   rw [h_eq]
-  -- Apply R178 with the new R184 pointwise supermodularity atom.
+  -- Apply R178 with the R184 pointwise supermodularity atom.
   apply BlackwellDilemma.Infrastructure.percExpectation_supermodular_of_pointwise_supermodular
   · -- 0 ≤ 1 - blockingProb (from blockingProb ≤ 1)
     have h := blockingProb_mem_unitInterval.2
@@ -1531,9 +1500,21 @@ theorem agentWelfare_kappaAgent_at_alpha_one_isSupermodular_derived_R184 :
   · -- 1 - blockingProb ≤ 1 (from 0 ≤ blockingProb)
     have h := blockingProb_mem_unitInterval.1
     linarith
-  · -- Per-ω supermodularity from new R184 atom
+  · -- Per-ω supermodularity from R184 atom
     intro ω
     exact agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise 1 ω
+
+/-- **R165 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+    `kappaAgentWelfareSNR_isSupermodular_workingAssumption` axiom).
+    R187 substantive update: now derives from R187-promoted Cat 1
+    theorem `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`
+    (was R165 §3.4.3 axiom) via `kappaAgentWelfareSNR_def` unfolding.
+
+    Net workingAssumption delta: −1; closure chain is now Cat 1 +
+    R184 pointwise paper-Def atom (smaller per discipline §18). -/
+theorem kappaAgentWelfareSNR_isSupermodular_workingAssumption :
+    BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNR :=
+  agentWelfare_kappaAgent_at_alpha_one_isSupermodular
 
 /-- **R112 CLOSURE — R140 Infrastructure-wired**: derives the paper's
     cross-partial-positivity-at-corners → supermodularity link by combining
