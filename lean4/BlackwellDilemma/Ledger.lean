@@ -5150,6 +5150,83 @@ def entry_atom_principalSampleBelow_weightedSum_eventually_decreasing : GapEntry
   obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline. 永不 close."
   conditionalOn := []
 
+/-! ### R159 continuity-derivation infrastructure (closing 2 R147 wA atoms)
+
+The R147 axiom decomposition split the previous monolithic
+`W_bar_max_via_EVT_workingAssumption` into 4 smaller atoms (continuityOn
+above + below; eventually-decreasing; le-at-zero-for-negative). The
+continuity-pair atoms (atoms 1 and 2) were then closed in R159 by
+composing two newly-introduced infrastructure entries:
+  * Cat 1 lemma `percExpectation_continuousOn_of_pointwise_continuousOn`
+    (Percolation.lean) — pointwise continuity of an integrand lifts to
+    continuity of its `percExpectation`, via Mathlib's
+    `continuousOn_finsetSum` + `ContinuousOn.const_smul`.
+  * Cat 3 paper-novel structural equation
+    `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`
+    (Types.lean) — for the κ-agent, the reward kernel
+    `agentRewardKernel AgentType.kappaAgent β κ α ω` is `ContinuousOn`
+    in β on `[0, ∞)` for every fixed (κ, α, ω). Cat 3 §3.4.3
+    paper-stipulated structural fact about the κ-agent's reward-kernel
+    smoothness in the precision parameter (mirrors R88 `agentWelfare =
+    percExpectation kernel` precedent for the analog smoothness atom).
+
+Both R147 continuity atoms are then derived theorems composing the
+above two pieces of infrastructure with the R92 G-conditional
+integration framework (`{above, below}ThresholdWelfare_eq_kappaAgent_
+integral`), via `continuousOn_finsetSum` + `ContinuousOn.const_mul`. -/
+
+def entry_thm_percExpectation_continuousOn_of_pointwise_continuousOn :
+    GapEntry where
+  name := "percExpectation_continuousOn_of_pointwise_continuousOn"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.notCat3
+  paperSource := "Cat 1 Mathlib derivation (no paper claim) — generic infrastructure for lifting pointwise continuity to percExpectation continuity"
+  attackHistory :=
+    [ "R159 2026-05-16: NEW Cat 1 derived theorem in Percolation.lean. Statement: for every finite event-type `E` and every parametrised integrand `f : ℝ → BondConfig E → ℝ`, if `∀ ω, ContinuousOn (fun β => f β ω) S`, then `ContinuousOn (fun β => percExpectation p (f β)) S`. Proof composes Mathlib's `continuousOn_finsetSum` (continuity of finite sums) + `ContinuousOn.const_smul` (continuity of constant-times-continuous) over the canonical `Finset.univ : Finset (BondConfig E)`. Reusable infrastructure for any `percExpectation`-based continuity claim — consumed by R159 closures of `aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and `belowThresholdWelfare_continuousOn_Ici_workingAssumption`." ]
+  scope := "Percolation.lean: ∀ ω, ContinuousOn (fun β => f β ω) S ⇒ ContinuousOn (fun β => percExpectation p (f β)) S"
+  obstacleOrAttribution := "Cat 1 derived theorem; kernel-pure (axioms = [propext, Classical.choice, Quot.sound] only)."
+  conditionalOn := []
+
+def entry_atom_agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
+    GapEntry where
+  name := "agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise"
+  status := GapStatus.gapDefinitional
+  inputCategory := InputCategory.cat3PaperNovel
+  cat3SubType := Cat3SubType.structuralEquation
+  paperSource := "Definition def:kappa-agent (κ-agent posterior + reward), paper §3 — paper-stipulated regularity (the κ-agent's posterior-mean / reward kernel is continuous in the precision parameter β at each fixed (κ, α, ω)); used by R159 closures of `aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and `belowThresholdWelfare_continuousOn_Ici_workingAssumption`"
+  attackHistory :=
+    [ "R159 2026-05-16: Cat 3 paper-stipulated structural equation introduced in Types.lean. For the κ-agent, the reward kernel `agentRewardKernel AgentType.kappaAgent β κ α ω` is `ContinuousOn (fun β => …) (Set.Ici 0)` for every fixed (κ, α, ω). Paper-Def-stipulated regularity on the κ-agent reward kernel — the kernel inherits its continuity in β from the posterior-mean's continuity in the precision parameter (paper §3 κ-agent definition). Cat 3 §3.4.3 paper-stipulated structural equation per discipline (paper-Def-stipulated kernel-smoothness fact; mirrors R88 `agentWelfare = percExpectation kernel` precedent for the analog kernel-level smoothness atom). 永不 close per discipline §3.4.3. Downstream consumer: R159 closures of `aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and `belowThresholdWelfare_continuousOn_Ici_workingAssumption` (Principal.lean)." ]
+  scope := "Types.lean: ∀ (κ α : ℝ), ∀ ω : BondConfig AgentEdgeIdx, ContinuousOn (fun β => agentRewardKernel AgentType.kappaAgent β κ α ω) (Set.Ici 0)"
+  obstacleOrAttribution := "Cat 3 §3.4.3 paper-stipulated structural equation per discipline (paper-Def-stipulated κ-agent reward-kernel pointwise smoothness). 永不 close."
+  conditionalOn := []
+
+def entry_thm_aboveThresholdWelfare_continuousOn_Ici : GapEntry where
+  name := "aboveThresholdWelfare_continuousOn_Ici_workingAssumption [R147 atom 1 → R159 CLOSED — Cat 1 derivedTheorem composing percExpectation_continuousOn_of_pointwise_continuousOn + agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise + R92 aboveThresholdWelfare_eq_kappaAgent_integral]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (above-threshold contribution as continuous functional of β, paper-stipulated structural inheritance from Stieltjes-integral form)"
+  attackHistory :=
+    [ "R147 2026-05-15: R147 axiom decomposition — `W_bar_max_via_EVT_workingAssumption` split into 4 smaller atoms (continuity above + below; eventually-decreasing; le-at-zero-for-negative). This atom (atom 1) declared as standalone workingAssumption pending R159 closure infrastructure.",
+      "R159 2026-05-16: SUBSTANTIVE CLOSURE workingAssumption/gapOpen → derivedTheorem/gapClosed. The opaque axiom is replaced by a Cat 1 derived theorem composing: (a) R92 `aboveThresholdWelfare_eq_kappaAgent_integral` (carrier-defining structural equation pinning aboveThresholdWelfare β to a weighted-finite-sum of agentWelfare AgentType.kappaAgent over above-threshold sample); (b) `agentWelfare = percExpectation (1-blockingProb) (agentRewardKernel ...)` (carrier-defining identity in Types.lean); (c) NEW Cat 1 lemma `percExpectation_continuousOn_of_pointwise_continuousOn` (Percolation.lean — lifts pointwise continuity to percExpectation continuity); (d) NEW Cat 3 paper-stipulated structural equation `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise` (Types.lean — paper-Def-stipulated κ-agent reward-kernel pointwise smoothness in β). Proof: rewrite via the R92 integral identity, apply `continuousOn_finsetSum` over the finite sample, then for each sample point derive continuity of the agentWelfare term via the Cat 1 lemma (with the Cat 3 atom as the per-ω continuity input) and lift via `ContinuousOn.const_mul` against the principalSampleAboveWeight constant. Net wA delta: −1." ]
+  scope := "Principal.lean: ContinuousOn aboveThresholdWelfare (Set.Ici 0) — R159 CLOSED via Cat 1 derivation"
+  obstacleOrAttribution := "R159 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework + R159 percExpectation continuity infrastructure + R159 κ-agent kernel-smoothness atom."
+  conditionalOn := []
+
+def entry_thm_belowThresholdWelfare_continuousOn_Ici : GapEntry where
+  name := "belowThresholdWelfare_continuousOn_Ici_workingAssumption [R147 atom 2 → R159 CLOSED — Cat 1 derivedTheorem composing percExpectation_continuousOn_of_pointwise_continuousOn + agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise + R92 belowThresholdWelfare_eq_kappaAgent_integral]"
+  status := GapStatus.gapClosed
+  inputCategory := InputCategory.cat1Mathlib
+  cat3SubType := Cat3SubType.derivedTheorem
+  paperSource := "Proposition prop:principal-optimum Part 3 proof, line 638 (below-threshold contribution as continuous functional of β, paper-stipulated structural inheritance from Stieltjes-integral form)"
+  attackHistory :=
+    [ "R147 2026-05-15: R147 axiom decomposition — `W_bar_max_via_EVT_workingAssumption` split into 4 smaller atoms. This atom (atom 2) declared as standalone workingAssumption pending R159 closure infrastructure.",
+      "R159 2026-05-16: SUBSTANTIVE CLOSURE workingAssumption/gapOpen → derivedTheorem/gapClosed. Same R159 derivation pattern as the above-threshold sister, with `principalSampleBelow` carriers and the R92 `belowThresholdWelfare_eq_kappaAgent_integral` carrier-defining structural equation. Net wA delta: −1." ]
+  scope := "Principal.lean: ContinuousOn belowThresholdWelfare (Set.Ici 0) — R159 CLOSED via Cat 1 derivation"
+  obstacleOrAttribution := "R159 CLOSED — Cat 1 derivedTheorem composing R92 G-integration framework + R159 percExpectation continuity infrastructure + R159 κ-agent kernel-smoothness atom."
+  conditionalOn := []
+
 /-- agentRewardKernel_greedy_wrongness_kernel_reversal_witness — R90
     Cat 3 §3.4.3 paper-stipulated kernel reversal-witness for Lemma
     `lem:wrongness` stage-2 reversal. -/
@@ -8460,6 +8537,13 @@ def allGaps : List GapEntry := [
   entry_atom_principalSampleBelowWeight_nonneg,
   entry_atom_belowThresholdWelfare_eq_kappaAgent_integral,
   entry_atom_principalSampleBelow_weightedSum_eventually_decreasing,
+  -- R159 continuity-derivation infrastructure: 2 closures of R147
+  -- continuity workingAssumption atoms + 1 Cat 1 reusable lemma + 1
+  -- Cat 3 paper-stipulated κ-agent kernel-smoothness atom.
+  entry_thm_percExpectation_continuousOn_of_pointwise_continuousOn,
+  entry_atom_agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise,
+  entry_thm_aboveThresholdWelfare_continuousOn_Ici,
+  entry_thm_belowThresholdWelfare_continuousOn_Ici,
   -- R93 combined-dominance witness atom (Cat 3 §3.4.3 paper-stipulated)
   -- — substantive content for the R93 closure of W_bar_witness_pair_strict_dominance.
   entry_atom_principalSampleBoth_combined_dominance_witness_pair,

@@ -733,6 +733,45 @@ axiom agentRewardKernel_sentimental_pointwise_monotone :
           agentRewardKernel AgentType.sentimental β₁ κ α ω ≤
             agentRewardKernel AgentType.sentimental β₂ κ α ω
 
+/-- **R159 Cat 3 structural equation**: pointwise (per-percolation-
+    realisation) continuity of the κ-agent's reward kernel in `β`.
+    For every cognitive depth `κ`, instrumental rationality `α`, and
+    percolation realisation `ω`, the function `β ↦ agentRewardKernel
+    AgentType.kappaAgent β κ α ω` is continuous on `Set.Ici 0`.
+
+    Paper-stipulated. Paper §2.5 line 205-208 STIPULATES the inner
+    expectation `E_{s, ω̂_κ}[r(v_T)]` as a continuous function of the
+    signal-precision parameter `β` (the Gaussian signal model with
+    variance `σ²(β) = 1/(2^{2β} - 1)` is continuous in `β` on
+    `(0, ∞)`, and the paper extends this continuously to `β = 0`).
+    The per-realisation form here STIPULATES the pointwise version of
+    this paper-Def-stipulated continuity, paralleling the
+    pointwise-monotone structural equations above
+    (`agentRewardKernel_*_pointwise_monotone`).
+
+    Cat 3 sub-type: structuralEquation — paper-Def-stipulated kernel-
+    pointwise continuity per discipline §3.4.3. 永不 close per
+    discipline (paper-Def-stipulated structural fact on the kernel
+    carrier; mirrors the R88 monotone-pointwise-structural-equation
+    precedent).
+
+    Foundation atom for R159 closure of `aboveThresholdWelfare_
+    continuousOn` and `belowThresholdWelfare_continuousOn`
+    workingAssumption axioms (Principal.lean lines 106 / 110), via
+    `percExpectation_continuousOn_of_pointwise_continuousOn`
+    (Percolation.lean R159 Cat 1 lemma) lifted to a finite-sum of
+    weighted welfares.
+
+    paper source: §2.5 "Agent Behaviour", lines 205-208 (the inner
+    expectation `E_{s, ω̂_κ}[r(v_T)]` as a continuous function of
+    `β`); §2.2 (Gaussian signal variance `σ²(β) = 1/(2^{2β} - 1)` is
+    continuous in `β` on `(0, ∞)`). -/
+axiom agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
+    ∀ (κ α : ℝ),
+      ∀ ω : BondConfig AgentEdgeIdx,
+        ContinuousOn (fun β => agentRewardKernel AgentType.kappaAgent β κ α ω)
+          (Set.Ici (0 : ℝ))
+
 /-- **R88 foundation derived theorem.**  The general
     pointwise-monotone-kernel ⇒ monotone-welfare bridge: if the
     per-realisation kernel of AgentType `a` at parameters `(κ, α)` is

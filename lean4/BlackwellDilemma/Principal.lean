@@ -86,6 +86,250 @@ axiom belowThresholdWelfare : ℝ → ℝ
 noncomputable def W_bar : ℝ → ℝ :=
   fun β => aboveThresholdWelfare β + belowThresholdWelfare β
 
+/-! ## R92 G-conditional integration infrastructure
+
+Paper Definition `def:principal` line 615 introduces the aggregate
+`W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)`; paper Proposition
+`prop:principal-optimum` Part 3 proof line 638 partitions this into
+above/below-threshold components `W̄(β) = λ · E_{G | κ > κ*}[W] +
+(1-λ) · E_{G | κ < κ*}[W]`.
+
+The R92 infrastructure introduces a finite-dimensional realisation of
+this partition: paper-stipulated finite sample types for the
+above/below-threshold supports, with paper-stipulated weights and
+parameters. Paper-stipulated structural equations pin
+`aboveThresholdWelfare` / `belowThresholdWelfare` to weighted sums of
+`agentWelfare AgentType.kappaAgent` over these samples — the
+finite-sample realisation of paper's continuous-G integral. Mirrors
+R88's percolation-foundation infrastructure (concrete bond-percolation
+framework on `BondConfig`) but for the distribution-G integration on
+the principal's mixture decomposition.
+
+R159 hoist: this block was originally placed after `W_bar_eq_mixture_OPEN`
+(paper-source-order convention). R159 hoists it to BEFORE the R147 axiom
+decomposition section so the closure proofs of
+`aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and
+`belowThresholdWelfare_continuousOn_Ici_workingAssumption` (Cat 1 derivations
+via `percExpectation_continuousOn_of_pointwise_continuousOn` +
+`agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`) can reference
+the carrier-defining structural equations
+(`aboveThresholdWelfare_eq_kappaAgent_integral`,
+`belowThresholdWelfare_eq_kappaAgent_integral`) without forward-reference
+errors. Position in source order is metadata-neutral per discipline §3.
+
+Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
+measure-theoretic G-integration framework, define the paper-faithful
+finite-sample realisation locally rather than skip. -/
+
+/-- **R92 G-conditional integration infrastructure** — Cat 3 §3.4.3
+    paper-novel opaque carrier: paper's `G | κ > κ*` above-threshold
+    finite-sample support type. Paper Definition `def:principal`
+    line 615 + Proposition `prop:principal-optimum` Part 3 proof line
+    638 stipulate the principal's above-threshold partition; the
+    finite-sample realisation hosts paper's `E_{G | κ > κ*}[·]`
+    integral as a weighted finite sum.
+
+    Cat 3 §3.4.3 carrier per discipline (paper-novel primitive
+    realising paper line 638's above-threshold partition). 永不 close.
+
+    paper source: Definition `def:principal`, line 615 (`G(κ, α)`
+    principal distribution) + Proposition `prop:principal-optimum`
+    Part 3 proof, line 638 (above-threshold partition `G | κ > κ*`). -/
+axiom principalSampleAbove : Type
+
+@[instance] axiom principalSampleAbove_fintype : Fintype principalSampleAbove
+@[instance] axiom principalSampleAbove_decEq : DecidableEq principalSampleAbove
+
+/-- **R92** — paper-stipulated weight on each above-threshold sample
+    point (paper's mixture weight `λ · pᵢ` from the finite-G
+    realisation). Cat 3 §3.4.3 carrier per discipline. 永不 close.
+
+    paper source: Definition `def:principal`, line 615 (principal
+    distribution `G(κ, α)` weights) + Proposition `prop:principal-
+    optimum` Part 3 proof, line 638 (above-threshold mixture weight `λ`). -/
+axiom principalSampleAboveWeight : principalSampleAbove → ℝ
+
+/-- **R92** — paper-stipulated `κ` parameter at each above-threshold
+    sample point (all `> κ*` by the partition's defining property).
+    Cat 3 §3.4.3 carrier per discipline. 永不 close.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (above-threshold partition `κ > κ*` indexes the sample). -/
+axiom principalSampleAboveKappa : principalSampleAbove → ℝ
+
+/-- **R92** — paper-stipulated `α` parameter at each above-threshold
+    sample point. Cat 3 §3.4.3 carrier per discipline. 永不 close.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (`α` parameter in `W(β, κ, α)` integrand). -/
+axiom principalSampleAboveAlpha : principalSampleAbove → ℝ
+
+/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation: each
+    above-threshold sample weight is non-negative (probability-measure
+    positivity from paper Definition `def:principal` line 615's
+    standing-convention probability-measure status of `G`). Cat 3
+    §3.4.3 gapDefinitional per discipline. 永不 close.
+
+    paper source: Definition `def:principal`, line 615 (`G(κ, α)`
+    standing-convention probability-measure). -/
+axiom principalSampleAboveWeight_nonneg :
+    ∀ i : principalSampleAbove, 0 ≤ principalSampleAboveWeight i
+
+/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+    `aboveThresholdWelfare β` is the weighted-finite-sum realisation of
+    paper line 638's `λ · E_{G | κ > κ*}[W(β,κ,α)]`. This pins the
+    opaque `aboveThresholdWelfare` carrier to a concrete sum of
+    `agentWelfare AgentType.kappaAgent` over the paper-stipulated
+    above-threshold sample, mirroring R88's percolation-expectation
+    concretisation of `agentWelfare`. Cat 3 §3.4.3 gapDefinitional per
+    discipline (paper-Def-stipulated carrier-defining equation; paper
+    line 638 STIPULATES the partition's integral form). 永不 close.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (`W̄(β) = λ · E_{G | κ > κ*}[W(β,κ,α)] + (1-λ) ·
+    E_{G | κ < κ*}[W(β,κ,α)]` above-threshold component as paper
+    Definition's defining identification on `aboveThresholdWelfare`
+    carrier). -/
+axiom aboveThresholdWelfare_eq_kappaAgent_integral :
+    ∀ β : ℝ, aboveThresholdWelfare β =
+      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+
+/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation: at every
+    above-threshold sample point, the κ-agent's welfare is monotone in
+    β. Paper line 638 STIPULATES the above-threshold sample by
+    `κᵢ > κ*` partition; paper Theorem 4.1 Part 2 (line 492) STATES
+    that for `κ` above the cognitive threshold, the κ-agent's welfare
+    is non-decreasing in β. Composing: at each above-threshold sample
+    point, individual welfare is monotone in β. Cat 3 §3.4.3
+    gapDefinitional per discipline (paper-Def-stipulated structural
+    fact about the sample's individual welfare behavior at the named
+    above-threshold regime; R88 `kappa_large_blackwell_recovery_OPEN`
+    derives the per-`κ` form but the sample's "above-recovery-
+    threshold" partition is paper-Def-stipulated). 永不 close.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (above-threshold partition `κ > κ*`) + Theorem 4.1
+    Part 2, line 492 (κ-recovery welfare monotonicity in β). -/
+axiom principalSampleAbove_individual_welfare_monotone :
+    ∀ i : principalSampleAbove, ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.kappaAgent β₁
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ≤
+        agentWelfare AgentType.kappaAgent β₂
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+
+/-- R63 closure-path-A smaller paper-novel ATOMIC stipulation
+    (R92 CLOSURE via G-conditional integration infrastructure):
+    paper line 638 explicitly asserts the above-threshold contribution
+    is "non-decreasing in β" by the standard Blackwell regime applied
+    to the above-threshold sub-population (where κ > κ* yields the
+    standard monotone-welfare regime per Theorem `thm:cognitive-
+    threshold` Part 0). This atomic stipulation captures the paper-
+    stated above-regime monotonicity on the new opaque carrier
+    `aboveThresholdWelfare`.
+
+    Encoding choice: extracted from the retired bundled
+    `W_bar_mixture_decomposition_OPEN` workingAssumption per
+    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+    pattern. The smaller wA isolates the paper-stated above-regime
+    monotonicity content separately from the below-regime eventually-
+    decreasing content (also a smaller wA below) and the mixture-
+    identity content (now a structural eq above).
+
+    R92 CLOSURE: this wA is now a Cat 1 derived theorem composing the
+    R92 G-conditional integration infrastructure
+    (`aboveThresholdWelfare_eq_kappaAgent_integral` + per-sample
+    monotonicity + non-negative weights + finite-sum monotonicity).
+    The substantive paper content moves to the per-sample monotonicity
+    structural equation `principalSampleAbove_individual_welfare_monotone`
+    (paper Theorem 4.1 Part 2 + line 638 above-threshold partition).
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 ("the first term is non-decreasing in β (standard
+    Blackwell regime)"). -/
+theorem aboveThresholdWelfare_monotone_OPEN :
+    ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ → aboveThresholdWelfare β₁ ≤ aboveThresholdWelfare β₂ := by
+  intro β₁ β₂ hβ
+  rw [aboveThresholdWelfare_eq_kappaAgent_integral β₁,
+      aboveThresholdWelfare_eq_kappaAgent_integral β₂]
+  apply Finset.sum_le_sum
+  intro i _
+  exact mul_le_mul_of_nonneg_left
+    (principalSampleAbove_individual_welfare_monotone i β₁ β₂ hβ)
+    (principalSampleAboveWeight_nonneg i)
+
+/-! ### R92 G-conditional integration infrastructure (below-threshold sister) -/
+
+/-- **R92** Cat 3 §3.4.3 paper-novel opaque carrier (below-threshold
+    sister to `principalSampleAbove`). 永不 close per discipline.
+
+    paper source: Definition `def:principal`, line 615 + Proposition
+    `prop:principal-optimum` Part 3 proof, line 638 (below-threshold
+    partition `G | κ < κ*`). -/
+axiom principalSampleBelow : Type
+
+@[instance] axiom principalSampleBelow_fintype : Fintype principalSampleBelow
+@[instance] axiom principalSampleBelow_decEq : DecidableEq principalSampleBelow
+
+/-- **R92** below-threshold sister of `principalSampleAboveWeight`.
+    永不 close per discipline. -/
+axiom principalSampleBelowWeight : principalSampleBelow → ℝ
+
+/-- **R92** below-threshold sister of `principalSampleAboveKappa`
+    (all `< κ*` by partition's defining property). 永不 close. -/
+axiom principalSampleBelowKappa : principalSampleBelow → ℝ
+
+/-- **R92** below-threshold sister of `principalSampleAboveAlpha`.
+    永不 close. -/
+axiom principalSampleBelowAlpha : principalSampleBelow → ℝ
+
+/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+    each below-threshold sample weight is non-negative. 永不 close. -/
+axiom principalSampleBelowWeight_nonneg :
+    ∀ i : principalSampleBelow, 0 ≤ principalSampleBelowWeight i
+
+/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+    `belowThresholdWelfare β` is the weighted-finite-sum realisation of
+    paper line 638's `(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`. Below-threshold
+    sister of `aboveThresholdWelfare_eq_kappaAgent_integral`. Cat 3
+    §3.4.3 gapDefinitional per discipline. 永不 close.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (below-threshold component as paper Definition's defining
+    identification on `belowThresholdWelfare` carrier). -/
+axiom belowThresholdWelfare_eq_kappaAgent_integral :
+    ∀ β : ℝ, belowThresholdWelfare β =
+      ∑ i : principalSampleBelow, principalSampleBelowWeight i *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleBelowKappa i) (principalSampleBelowAlpha i)
+
+/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper line 638 STIPULATES that the below-threshold sample's
+    weighted-sum welfare contribution is eventually decreasing in β
+    (the reversal regime: at SOME `(β_low, β_high)` pair, the
+    weighted-sum welfare strictly decreases). Paper Theorem 4.1 Part 1
+    (line 491) STATES that for the below-threshold (κ < κ*) sample,
+    individual welfare is non-monotone in β; aggregating against the
+    sample's positive-weight measure preserves the strict-decrease at
+    the witness pair. This atom encodes the paper-stipulated witness
+    pair on the weighted-sum carrier. Cat 3 §3.4.3 gapDefinitional per
+    discipline (paper-Def-stipulated witness-pair on the sample-sum
+    carrier; mirrors R90's reversal-witness pattern lifted to the
+    sample-sum level). 永不 close.
+
+    paper source: Proposition `prop:principal-optimum` Part 3 proof,
+    line 638 (below-threshold partition + eventually-decreasing) +
+    Theorem 4.1 Part 1, line 491 (per-sample reversal mechanism). -/
+axiom principalSampleBelow_weightedSum_eventually_decreasing :
+    ∃ β_low β_high : ℝ, β_low < β_high ∧
+      (∑ i : principalSampleBelow, principalSampleBelowWeight i *
+        agentWelfare AgentType.kappaAgent β_high
+          (principalSampleBelowKappa i) (principalSampleBelowAlpha i)) <
+      (∑ i : principalSampleBelow, principalSampleBelowWeight i *
+        agentWelfare AgentType.kappaAgent β_low
+          (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
+
 /-! ### R147 axiom decomposition — `W_bar_max_via_EVT_workingAssumption`
        split into 4 smaller atoms + Cat 1 EVT derivation
 
@@ -100,15 +344,77 @@ the EVT-application step now fully Cat 1 via
 Per `feedback_lean_axiom_decomposition`: composite axioms hide gaps;
 decompose into single-step typed bridges. -/
 
-/-- **R147 atom 1**: `aboveThresholdWelfare` is `ContinuousOn (Set.Ici 0)`.
-    Paper-stipulated structural inheritance from the carrier's defining
-    `λ · E_{G | κ > κ*}[W(β, κ, α)]` Stieltjes-integral form. -/
-axiom aboveThresholdWelfare_continuousOn_Ici_workingAssumption :
-    ContinuousOn aboveThresholdWelfare (Set.Ici 0)
+/-- **R147 atom 1 → R159 CLOSED**: `aboveThresholdWelfare` is
+    `ContinuousOn (Set.Ici 0)`. Paper-stipulated structural inheritance
+    from the carrier's defining `λ · E_{G | κ > κ*}[W(β, κ, α)]`
+    Stieltjes-integral form.
 
-/-- **R147 atom 2**: `belowThresholdWelfare` is `ContinuousOn (Set.Ici 0)`. -/
-axiom belowThresholdWelfare_continuousOn_Ici_workingAssumption :
-    ContinuousOn belowThresholdWelfare (Set.Ici 0)
+    **R159 closure**: Cat 1 derivation via composition of:
+    (a) `aboveThresholdWelfare_eq_kappaAgent_integral` (carrier-defining
+        identity, paper Def stipulated),
+    (b) `agentWelfare = percExpectation (1-blockingProb) (agentRewardKernel ...)`
+        (carrier-defining identity in Types.lean),
+    (c) `percExpectation_continuousOn_of_pointwise_continuousOn`
+        (Cat 1 lemma in Percolation.lean),
+    (d) `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`
+        (Cat 3 paper-Def-stipulated structural equation in Types.lean).
+    Promoted from workingAssumption axiom to derivedTheorem. -/
+theorem aboveThresholdWelfare_continuousOn_Ici_workingAssumption :
+    ContinuousOn aboveThresholdWelfare (Set.Ici 0) := by
+  -- Rewrite via the carrier-defining integral identity
+  have h_eq : aboveThresholdWelfare = fun β =>
+      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) := by
+    funext β
+    exact aboveThresholdWelfare_eq_kappaAgent_integral β
+  rw [h_eq]
+  -- ContinuousOn of finite sum
+  apply continuousOn_finsetSum
+  intro i _
+  -- Each term: weight * agentWelfare(β, κᵢ, αᵢ).
+  -- agentWelfare = percExpectation (1-blockingProb) (agentRewardKernel ...)
+  have h_aw : ContinuousOn (fun β =>
+      agentWelfare AgentType.kappaAgent β
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i))
+      (Set.Ici (0 : ℝ)) := by
+    unfold agentWelfare
+    exact percExpectation_continuousOn_of_pointwise_continuousOn
+      (1 - blockingProb)
+      (fun β => agentRewardKernel AgentType.kappaAgent β
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i))
+      (Set.Ici 0)
+      (fun ω => agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ω)
+  exact h_aw.const_mul (principalSampleAboveWeight i)
+
+/-- **R147 atom 2 → R159 CLOSED**: `belowThresholdWelfare` is
+    `ContinuousOn (Set.Ici 0)`. Same R159 derivation pattern as the
+    above-threshold sister, with `principalSampleBelow` carriers. -/
+theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
+    ContinuousOn belowThresholdWelfare (Set.Ici 0) := by
+  have h_eq : belowThresholdWelfare = fun β =>
+      ∑ i : principalSampleBelow, principalSampleBelowWeight i *
+        agentWelfare AgentType.kappaAgent β
+          (principalSampleBelowKappa i) (principalSampleBelowAlpha i) := by
+    funext β
+    exact belowThresholdWelfare_eq_kappaAgent_integral β
+  rw [h_eq]
+  apply continuousOn_finsetSum
+  intro i _
+  have h_aw : ContinuousOn (fun β =>
+      agentWelfare AgentType.kappaAgent β
+        (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
+      (Set.Ici (0 : ℝ)) := by
+    unfold agentWelfare
+    exact percExpectation_continuousOn_of_pointwise_continuousOn
+      (1 - blockingProb)
+      (fun β => agentRewardKernel AgentType.kappaAgent β
+        (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
+      (Set.Ici 0)
+      (fun ω => agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise
+        (principalSampleBelowKappa i) (principalSampleBelowAlpha i) ω)
+  exact h_aw.const_mul (principalSampleBelowWeight i)
 
 /-- **R147 atom 3**: `W_bar` is eventually-decreasing past some `N ≥ 0`
     (paper-instance via `W_bar_limit_infty < W_bar 0` standing condition).
@@ -584,237 +890,16 @@ theorem W_bar_eq_mixture_OPEN :
     ∀ β : ℝ, W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β :=
   fun _ => rfl
 
-/-! ## R92 G-conditional integration infrastructure
-
-Paper Definition `def:principal` line 615 introduces the aggregate
-`W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)`; paper Proposition
-`prop:principal-optimum` Part 3 proof line 638 partitions this into
-above/below-threshold components `W̄(β) = λ · E_{G | κ > κ*}[W] +
-(1-λ) · E_{G | κ < κ*}[W]`.
-
-The R92 infrastructure introduces a finite-dimensional realisation of
-this partition: paper-stipulated finite sample types for the
-above/below-threshold supports, with paper-stipulated weights and
-parameters. Paper-stipulated structural equations pin
-`aboveThresholdWelfare` / `belowThresholdWelfare` to weighted sums of
-`agentWelfare AgentType.kappaAgent` over these samples — the
-finite-sample realisation of paper's continuous-G integral. Mirrors
-R88's percolation-foundation infrastructure (concrete bond-percolation
-framework on `BondConfig`) but for the distribution-G integration on
-the principal's mixture decomposition.
-
-Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-measure-theoretic G-integration framework, define the paper-faithful
-finite-sample realisation locally rather than skip. -/
-
-/-- **R92 G-conditional integration infrastructure** — Cat 3 §3.4.3
-    paper-novel opaque carrier: paper's `G | κ > κ*` above-threshold
-    finite-sample support type. Paper Definition `def:principal`
-    line 615 + Proposition `prop:principal-optimum` Part 3 proof line
-    638 stipulate the principal's above-threshold partition; the
-    finite-sample realisation hosts paper's `E_{G | κ > κ*}[·]`
-    integral as a weighted finite sum.
-
-    Cat 3 §3.4.3 carrier per discipline (paper-novel primitive
-    realising paper line 638's above-threshold partition). 永不 close.
-
-    paper source: Definition `def:principal`, line 615 (`G(κ, α)`
-    principal distribution) + Proposition `prop:principal-optimum`
-    Part 3 proof, line 638 (above-threshold partition `G | κ > κ*`). -/
-axiom principalSampleAbove : Type
-
-@[instance] axiom principalSampleAbove_fintype : Fintype principalSampleAbove
-@[instance] axiom principalSampleAbove_decEq : DecidableEq principalSampleAbove
-
-/-- **R92** — paper-stipulated weight on each above-threshold sample
-    point (paper's mixture weight `λ · pᵢ` from the finite-G
-    realisation). Cat 3 §3.4.3 carrier per discipline. 永不 close.
-
-    paper source: Definition `def:principal`, line 615 (principal
-    distribution `G(κ, α)` weights) + Proposition `prop:principal-
-    optimum` Part 3 proof, line 638 (above-threshold mixture weight `λ`). -/
-axiom principalSampleAboveWeight : principalSampleAbove → ℝ
-
-/-- **R92** — paper-stipulated `κ` parameter at each above-threshold
-    sample point (all `> κ*` by the partition's defining property).
-    Cat 3 §3.4.3 carrier per discipline. 永不 close.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (above-threshold partition `κ > κ*` indexes the sample). -/
-axiom principalSampleAboveKappa : principalSampleAbove → ℝ
-
-/-- **R92** — paper-stipulated `α` parameter at each above-threshold
-    sample point. Cat 3 §3.4.3 carrier per discipline. 永不 close.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`α` parameter in `W(β, κ, α)` integrand). -/
-axiom principalSampleAboveAlpha : principalSampleAbove → ℝ
-
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation: each
-    above-threshold sample weight is non-negative (probability-measure
-    positivity from paper Definition `def:principal` line 615's
-    standing-convention probability-measure status of `G`). Cat 3
-    §3.4.3 gapDefinitional per discipline. 永不 close.
-
-    paper source: Definition `def:principal`, line 615 (`G(κ, α)`
-    standing-convention probability-measure). -/
-axiom principalSampleAboveWeight_nonneg :
-    ∀ i : principalSampleAbove, 0 ≤ principalSampleAboveWeight i
-
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
-    `aboveThresholdWelfare β` is the weighted-finite-sum realisation of
-    paper line 638's `λ · E_{G | κ > κ*}[W(β,κ,α)]`. This pins the
-    opaque `aboveThresholdWelfare` carrier to a concrete sum of
-    `agentWelfare AgentType.kappaAgent` over the paper-stipulated
-    above-threshold sample, mirroring R88's percolation-expectation
-    concretisation of `agentWelfare`. Cat 3 §3.4.3 gapDefinitional per
-    discipline (paper-Def-stipulated carrier-defining equation; paper
-    line 638 STIPULATES the partition's integral form). 永不 close.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`W̄(β) = λ · E_{G | κ > κ*}[W(β,κ,α)] + (1-λ) ·
-    E_{G | κ < κ*}[W(β,κ,α)]` above-threshold component as paper
-    Definition's defining identification on `aboveThresholdWelfare`
-    carrier). -/
-axiom aboveThresholdWelfare_eq_kappaAgent_integral :
-    ∀ β : ℝ, aboveThresholdWelfare β =
-      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
-
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation: at every
-    above-threshold sample point, the κ-agent's welfare is monotone in
-    β. Paper line 638 STIPULATES the above-threshold sample by
-    `κᵢ > κ*` partition; paper Theorem 4.1 Part 2 (line 492) STATES
-    that for `κ` above the cognitive threshold, the κ-agent's welfare
-    is non-decreasing in β. Composing: at each above-threshold sample
-    point, individual welfare is monotone in β. Cat 3 §3.4.3
-    gapDefinitional per discipline (paper-Def-stipulated structural
-    fact about the sample's individual welfare behavior at the named
-    above-threshold regime; R88 `kappa_large_blackwell_recovery_OPEN`
-    derives the per-`κ` form but the sample's "above-recovery-
-    threshold" partition is paper-Def-stipulated). 永不 close.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (above-threshold partition `κ > κ*`) + Theorem 4.1
-    Part 2, line 492 (κ-recovery welfare monotonicity in β). -/
-axiom principalSampleAbove_individual_welfare_monotone :
-    ∀ i : principalSampleAbove, ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-      agentWelfare AgentType.kappaAgent β₁
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ≤
-        agentWelfare AgentType.kappaAgent β₂
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
-
-/-- R63 closure-path-A smaller paper-novel ATOMIC stipulation
-    (R92 CLOSURE via G-conditional integration infrastructure):
-    paper line 638 explicitly asserts the above-threshold contribution
-    is "non-decreasing in β" by the standard Blackwell regime applied
-    to the above-threshold sub-population (where κ > κ* yields the
-    standard monotone-welfare regime per Theorem `thm:cognitive-
-    threshold` Part 0). This atomic stipulation captures the paper-
-    stated above-regime monotonicity on the new opaque carrier
-    `aboveThresholdWelfare`.
-
-    Encoding choice: extracted from the retired bundled
-    `W_bar_mixture_decomposition_OPEN` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The smaller wA isolates the paper-stated above-regime
-    monotonicity content separately from the below-regime eventually-
-    decreasing content (also a smaller wA below) and the mixture-
-    identity content (now a structural eq above).
-
-    R92 CLOSURE: this wA is now a Cat 1 derived theorem composing the
-    R92 G-conditional integration infrastructure
-    (`aboveThresholdWelfare_eq_kappaAgent_integral` + per-sample
-    monotonicity + non-negative weights + finite-sum monotonicity).
-    The substantive paper content moves to the per-sample monotonicity
-    structural equation `principalSampleAbove_individual_welfare_monotone`
-    (paper Theorem 4.1 Part 2 + line 638 above-threshold partition).
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 ("the first term is non-decreasing in β (standard
-    Blackwell regime)"). -/
-theorem aboveThresholdWelfare_monotone_OPEN :
-    ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ → aboveThresholdWelfare β₁ ≤ aboveThresholdWelfare β₂ := by
-  intro β₁ β₂ hβ
-  rw [aboveThresholdWelfare_eq_kappaAgent_integral β₁,
-      aboveThresholdWelfare_eq_kappaAgent_integral β₂]
-  apply Finset.sum_le_sum
-  intro i _
-  exact mul_le_mul_of_nonneg_left
-    (principalSampleAbove_individual_welfare_monotone i β₁ β₂ hβ)
-    (principalSampleAboveWeight_nonneg i)
-
-/-! ### R92 G-conditional integration infrastructure (below-threshold sister) -/
-
-/-- **R92** Cat 3 §3.4.3 paper-novel opaque carrier (below-threshold
-    sister to `principalSampleAbove`). 永不 close per discipline.
-
-    paper source: Definition `def:principal`, line 615 + Proposition
-    `prop:principal-optimum` Part 3 proof, line 638 (below-threshold
-    partition `G | κ < κ*`). -/
-axiom principalSampleBelow : Type
-
-@[instance] axiom principalSampleBelow_fintype : Fintype principalSampleBelow
-@[instance] axiom principalSampleBelow_decEq : DecidableEq principalSampleBelow
-
-/-- **R92** below-threshold sister of `principalSampleAboveWeight`.
-    永不 close per discipline. -/
-axiom principalSampleBelowWeight : principalSampleBelow → ℝ
-
-/-- **R92** below-threshold sister of `principalSampleAboveKappa`
-    (all `< κ*` by partition's defining property). 永不 close. -/
-axiom principalSampleBelowKappa : principalSampleBelow → ℝ
-
-/-- **R92** below-threshold sister of `principalSampleAboveAlpha`.
-    永不 close. -/
-axiom principalSampleBelowAlpha : principalSampleBelow → ℝ
-
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
-    each below-threshold sample weight is non-negative. 永不 close. -/
-axiom principalSampleBelowWeight_nonneg :
-    ∀ i : principalSampleBelow, 0 ≤ principalSampleBelowWeight i
-
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
-    `belowThresholdWelfare β` is the weighted-finite-sum realisation of
-    paper line 638's `(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`. Below-threshold
-    sister of `aboveThresholdWelfare_eq_kappaAgent_integral`. Cat 3
-    §3.4.3 gapDefinitional per discipline. 永不 close.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (below-threshold component as paper Definition's defining
-    identification on `belowThresholdWelfare` carrier). -/
-axiom belowThresholdWelfare_eq_kappaAgent_integral :
-    ∀ β : ℝ, belowThresholdWelfare β =
-      ∑ i : principalSampleBelow, principalSampleBelowWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleBelowKappa i) (principalSampleBelowAlpha i)
-
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper line 638 STIPULATES that the below-threshold sample's
-    weighted-sum welfare contribution is eventually decreasing in β
-    (the reversal regime: at SOME `(β_low, β_high)` pair, the
-    weighted-sum welfare strictly decreases). Paper Theorem 4.1 Part 1
-    (line 491) STATES that for the below-threshold (κ < κ*) sample,
-    individual welfare is non-monotone in β; aggregating against the
-    sample's positive-weight measure preserves the strict-decrease at
-    the witness pair. This atom encodes the paper-stipulated witness
-    pair on the weighted-sum carrier. Cat 3 §3.4.3 gapDefinitional per
-    discipline (paper-Def-stipulated witness-pair on the sample-sum
-    carrier; mirrors R90's reversal-witness pattern lifted to the
-    sample-sum level). 永不 close.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (below-threshold partition + eventually-decreasing) +
-    Theorem 4.1 Part 1, line 491 (per-sample reversal mechanism). -/
-axiom principalSampleBelow_weightedSum_eventually_decreasing :
-    ∃ β_low β_high : ℝ, β_low < β_high ∧
-      (∑ i : principalSampleBelow, principalSampleBelowWeight i *
-        agentWelfare AgentType.kappaAgent β_high
-          (principalSampleBelowKappa i) (principalSampleBelowAlpha i)) <
-      (∑ i : principalSampleBelow, principalSampleBelowWeight i *
-        agentWelfare AgentType.kappaAgent β_low
-          (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
+-- R159 RELOCATION: R92 G-conditional integration infrastructure block
+-- MOVED to BEFORE the R147 axiom decomposition section (right after
+-- `W_bar` definition) so the closure proofs of
+-- `aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and
+-- `belowThresholdWelfare_continuousOn_Ici_workingAssumption` can
+-- reference the carrier-defining structural equations
+-- (`aboveThresholdWelfare_eq_kappaAgent_integral`,
+-- `belowThresholdWelfare_eq_kappaAgent_integral`) without forward-
+-- reference errors. Position in source order is metadata-neutral per
+-- discipline §3 (paper-source-order is convention, not requirement).
 
 -- R101 RELOCATION: per-agent-optimal β* extension axioms MOVED to
 -- AFTER `perAgentOptimalAggregate` carrier declaration (line ~1487+);

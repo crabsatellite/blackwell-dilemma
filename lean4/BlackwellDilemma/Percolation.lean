@@ -338,6 +338,30 @@ theorem percExpectation_mono {E : Type} [Fintype E] [DecidableEq E]
   exact mul_le_mul_of_nonneg_left (hfg ω)
     (bondConfigWeight_nonneg p hp0 hp1 ω)
 
+/-- **R159 ContinuousOn preservation by `E_{G_p}`** (Cat 1, kernel-pure).
+    If for each percolation realisation `ω`, the integrand `f β ω` is
+    continuous in `β` on `S ⊆ ℝ`, then the percolation expectation
+    `percExpectation p (f β)` is also continuous on `S`.
+
+    Cat 1 derivation via Mathlib's `ContinuousOn.finset_sum` over the
+    finite `BondConfig E` carrier: per-term `bondConfigWeight p ω *
+    f β ω` is `continuousOn` (constant times continuous), and finite-
+    sum of `continuousOn` functions is `continuousOn`.
+
+    Foundation lemma for closing `aboveThresholdWelfare_continuousOn`-
+    style workingAssumption axioms by lifting per-realisation kernel
+    continuity to integrated welfare continuity. -/
+theorem percExpectation_continuousOn_of_pointwise_continuousOn
+    {E : Type} [Fintype E] [DecidableEq E]
+    (p : ℝ) (f : ℝ → BondConfig E → ℝ) (S : Set ℝ)
+    (h_ptwise : ∀ ω : BondConfig E,
+      ContinuousOn (fun β => f β ω) S) :
+    ContinuousOn (fun β => percExpectation p (f β)) S := by
+  unfold percExpectation
+  apply continuousOn_finsetSum
+  intro ω _
+  exact (h_ptwise ω).const_smul (bondConfigWeight p ω)
+
 /-- **R103 Filter.Tendsto preservation by `E_{G_p}`** — finite-sample
     bounded-convergence theorem on the bond-percolation expectation.
     If for each percolation realisation `ω`, the integrand sequence
