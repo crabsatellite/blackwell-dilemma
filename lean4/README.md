@@ -68,14 +68,14 @@ The formalisation follows the paper's section structure.
 
 ## Status summary
 
-Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; latest = post-R159 2026-05-16):
+Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; latest = post-R161 2026-05-16):
 
 | Status | Count | Meaning |
 | --- | ---: | --- |
 | Total ledger entries | **338** | Typed `GapEntry`s in `Ledger.lean` (carriers + atomic stipulations + derived theorems + classical citations) — **+4 over R158** |
 | `gapClosed` | **172** | Lean theorem (no `sorry`) — **+3 over R158 (R159 closes 2 R147 wA atoms + adds 1 Cat 1 lemma)** |
 | `gapDefinitional` | 164 | Cat 3 §3.4.3 paper-foundational atomic content (carriers + structural equations + hypothesis predicates) — 永不 close per discipline |
-| `gapOpen` | **0** ✅ | **All OPEN entries closed in R152→R158 push (R159 stays at 0)** |
+| `gapOpen` | **0** ✅ | **All OPEN entries closed in R152→R158 push; R159-R161 maintain 0** |
 | `gapPartial` | 1 | bundle entry (`gap_phi_tail_bound` + `gap_order_statistics_max`) — both sub-claims are Cat 1 closed theorems |
 | `gapDeadEnd` | 1 | `kappaStar_p_monotone_DEAD_END_by_junk_value` (`def : Prop` marker, NOT axiom — zero kernel impact) |
 | `gapBlocked` | 0 | None |
@@ -83,6 +83,8 @@ Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; late
 | Cat 2 (cat2External) | **3** | (-9 over R152 baseline) |
 | Cat 3 paper-novel | 249 | Carriers + hypothesisPredicates + structuralEquations + 1 workingAssumption marker — paper-foundational per discipline |
 | Cat 3 sub-type breakdown | — | carrier=79, hypothesisPredicate=9, structuralEquation=75, **workingAssumption=1**, derivedTheorem=146 |
+| Inline `_workingAssumption` axioms (source code, not inventory-tracked) | 14 | **R159-R161 removed 5 inline wA axioms** (2 R147 continuity + 1 mLimitDifference_pos + 2 wInfoTopo). 14 remaining: paper-Def-stipulated identifications of opaque carriers requiring substantial Mathlib infrastructure (Z²-percolation, Mills-tail, Blackwell-decision-theory, Topkis supermodularity) for substantive closure. |
+| Concretized opaque carriers | **+3 in R160-R161** | `mLimitDifference` (R160 → 5-state V_dyn-difference), `wInfoTopoRatio` (R161 → 0 extreme decay witness), `wInfoTopoRatioMillsConst` (R161 → 1 unit witness) |
 | Cat 1 Infrastructure modules (Mathlib-PR-ready, kernel-pure) | 33+ | Self-contained Cat 1 modules under `BlackwellDilemma/Infrastructure/` (incl. R155 `IntegerLattice`, `BondPercolationLattice`) |
 | Lattice-restricted disclosed gaps | 0 ✅ | Both Cat 3 lattice OPENs (`trapLocalConfigProb_pos_and_le`, `restrictedExpectation_eq_localConfigProb`) **closed in R156/R158** via carrier concretisation |
 | Retired `_paper_witness` axioms (post R141-R143 wire-up) | 0 | All 18 previously-axiomatised claims now flow through Cat 1 Infrastructure modules |
