@@ -15,6 +15,20 @@ Blackwell's theorem (1953) states that more informative signals lead to weakly b
 
 **[View the computational appendix](https://crabsatellite.github.io/blackwell-dilemma/)** — six experiment families verifying all theoretical predictions, rendered with full math formatting.
 
+## Installation
+
+Python 3.9 or newer is required.
+
+```bash
+python -m venv .venv
+# macOS / Linux
+source .venv/bin/activate
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+pip install -r requirements.txt
+```
+
 ## Replication
 
 All paper-relevant scripts live under `simulation/`. Run from that directory.

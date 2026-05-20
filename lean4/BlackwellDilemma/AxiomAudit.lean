@@ -400,9 +400,9 @@ namespace BlackwellDilemma.AxiomAudit
 
 -- Derived closures composing orphan atoms with Mathlib and companion
 -- atoms to give them explicit downstream consumers:
---  * `ReachableSet_self_member`: refactored from atomic axiom to derived
---    theorem via `ReachableSet_eq_ForwardReachable_empty` (Def 2.5
---    line 193) + `ForwardReachable_self_member` (Def 2.5 length-0 path).
+--  * `ReachableSet_self_member`: derived theorem composing
+--    `ReachableSet_eq_ForwardReachable_empty` (Def 2.5 line 193) +
+--    `ForwardReachable_self_member` (Def 2.5 length-0 path).
 --  * `realisedUtility_mem_unitInterval`: composes `intrinsicPref_mem_unitInterval`
 --    (Def 2.1 line 114) + `reward_mem_unitInterval` (Def 2.1 line 113)
 --    via convex-combination Cat 1 arithmetic.
