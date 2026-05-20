@@ -183,8 +183,9 @@ noncomputable def myopicKWelfare (k d : ℕ) (β : ℝ) : ℝ :=
     kernel-level `if_pos`. The companion carrier `myopicKWelfareBelowDepth`
     (introduced above) hosts the `k < d` regime's welfare.
 
-    Discipline §3.4.3 boundary check: paper Remark line 942 STIPULATES
-    the carrier-defining equation at the paper-named regime `k ≥ d`;
+    Cat 3 structural-equation boundary check: paper Remark line 942
+    STIPULATES the carrier-defining equation at the paper-named regime
+    `k ≥ d`;
     on opaque carriers (where Mathlib lacks the substrate), the
     identification becomes definitional at the carrier level via the
     paper-named regime split. The `def` faithfully encodes the paper
@@ -257,10 +258,10 @@ axiom satisficingWelfare : ℝ → ℝ → ℝ
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
 
-/-- §3.4.3 classification: paper Remark `rem:robustness-misspec` (iii) line
-    945 STIPULATES the defining behavior of the
-    `satisficingTrapAcceptanceProb` carrier in the signal-precision
-    parameter β: "Better signals make the agent more confident that A
+/-- Cat 3 structural-equation classification: paper Remark
+    `rem:robustness-misspec` (iii) line 945 STIPULATES the defining
+    behavior of the `satisficingTrapAcceptanceProb` carrier in the
+    signal-precision parameter β: "Better signals make the agent more confident that A
     exceeds the threshold" — paper-defining commitment that, under the
     satisficing decision rule with threshold `r̄ < r(A)`, the carrier
     `satisficingTrapAcceptanceProb r̄ β` is strictly increasing in β.
@@ -277,18 +278,18 @@ axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
     `k ≥ d`.
 
     Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
-    (§3.4.3 precedent): paper introduces the carrier AND
-    stipulates its base-case/named-regime behavior in the same
+    (Cat 3 structural-equation precedent): paper introduces the carrier
+    AND stipulates its base-case/named-regime behavior in the same
     Remark; the equation/monotonicity at the paper-named regime is
     the carrier's defining content, not a derivation.
 
-    Cat 3 sub-type: structuralEquation (paper-Remark-stipulated
+    Cat 3 structural equation: paper-Remark-stipulated
     carrier-defining monotonicity behavior on the opaque
     `satisficingTrapAcceptanceProb` carrier under the paper-named
     regime `r̄ < r(A)` per paper Remark `rem:robustness-misspec` (iii)
-    line 945; per discipline §3.4.3 — paper's commitment to
-    what `satisficingTrapAcceptanceProb r̄ β` MEANS as β grows under
-    `r̄ < r(A)`).
+    line 945 — paper's commitment to what
+    `satisficingTrapAcceptanceProb r̄ β` MEANS as β grows under
+    `r̄ < r(A)`.
 
     paper source: Remark `rem:robustness-misspec` (iii), line 945
     ("Better signals make the agent more confident that A exceeds the
@@ -300,9 +301,10 @@ axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
         satisficingTrapAcceptanceProb rBar β₁ <
           satisficingTrapAcceptanceProb rBar β₂
 
-/-- §3.4.3 classification: paper Remark `rem:robustness-misspec` (iii) line
-    946 STIPULATES the structural binding between trap-acceptance
-    probability and satisficing welfare under the paper-named regime
+/-- Cat 3 structural-equation classification: paper Remark
+    `rem:robustness-misspec` (iii) line 946 STIPULATES the structural
+    binding between trap-acceptance probability and satisficing welfare
+    under the paper-named regime
     `r̄ ∈ (r(B), r(A))`: "reinforcing the trap" — paper-defining
     commitment that, with the satisficing rule accepting `A` (the trap)
     on its first acceptance event, increased trap-acceptance probability
@@ -321,18 +323,17 @@ axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
     acceptance of A forecloses bridge B → G".
 
     Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
-    (§3.4.3 precedent) and the companion atom #1 above:
-    paper Remark (iii) introduces both carriers AND
+    (Cat 3 structural-equation precedent) and the companion atom #1
+    above: paper Remark (iii) introduces both carriers AND
     stipulates their inter-carrier binding at the paper-named regime;
     this binding IS the carriers' defining inter-relationship at the
     regime, not a derivation.
 
-    Cat 3 sub-type: structuralEquation (paper-Remark-stipulated
+    Cat 3 structural equation: paper-Remark-stipulated
     inter-carrier binding between `satisficingTrapAcceptanceProb` and
     `satisficingWelfare` at the paper-named regime `r̄ ∈ (r(B), r(A))`
-    per paper Remark `rem:robustness-misspec` (iii) line 946;
-    per discipline §3.4.3 — paper's commitment to how the two
-    carriers relate at the regime).
+    per paper Remark `rem:robustness-misspec` (iii) line 946 — paper's
+    commitment to how the two carriers relate at the regime.
 
     paper source: Remark `rem:robustness-misspec` (iii), line 946
     ("reinforcing the trap"; satisficing acceptance of A forecloses

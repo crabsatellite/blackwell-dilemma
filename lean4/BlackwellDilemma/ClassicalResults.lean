@@ -1289,7 +1289,7 @@ theorem gap_order_statistics_max :
 
 /-! ## 11.1 David & Nagaraja 2003 Eq. 2.1.4 — substantive Cat 2 axiom
 
-§18 closure-path: introduces the substantive measure-theoretic order-
+Closure path: introduces the substantive measure-theoretic order-
 statistics identity as a Cat 2 axiom on a new opaque carrier
 `expectedMaxIIDUniform : ℕ → ℝ` representing the actual `E[max k iid
 Uniform[0,1]]` integral. The substantive identity is:

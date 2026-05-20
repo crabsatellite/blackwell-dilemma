@@ -514,7 +514,7 @@ attribute [instance] AgentEdgeIdx.decEq
         monotonicity / continuity / increasing-differences structural
         equations stated below for these agents (the constant scalar
         kernel is a paper-faithful trivial realisation of the
-        paper's per-realisation kernels insofar as the Cat 3 §3.4.3
+        paper's per-realisation kernels insofar as the Cat 3
         structural equations below are concerned).
 
     The kernel is constant in `ω : BondConfig AgentEdgeIdx`; this is
@@ -528,7 +528,7 @@ attribute [instance] AgentEdgeIdx.decEq
 
     `agentRewardKernel` exits the axiom system as a `def`. The
     structural equations stated below (`agentRewardKernel_*`) remain
-    as Cat 3 §3.4.3 paper-Def stipulations on the now-concretised
+    as Cat 3 paper-Def stipulations on the now-concretised
     carrier; `gap_cognitive_threshold_part1` and its sister Part-1
     reversal claims compose derived theorems on the concretised kernel.
 

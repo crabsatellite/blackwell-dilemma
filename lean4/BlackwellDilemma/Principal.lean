@@ -37,8 +37,8 @@ parameters `(κ_i, α_i) ~ G` to maximise aggregate welfare
     contribution" with the standard-Blackwell-regime non-decreasing
     property.
 
-    The carrier is paper-Def-stipulated structural primitive per
-    discipline §3.4.1 (opaque-carrier primitive).
+    The carrier is paper-Def-stipulated structural primitive (Cat 3
+    opaque carrier).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`λ · E_{G | κ > κ*}[W(β, κ, α)]` above-threshold
@@ -110,7 +110,7 @@ Where Mathlib lacks the typed measure-theoretic G-integration
 framework, the paper-faithful finite-sample realisation is defined
 locally. -/
 
-/-- **G-conditional integration infrastructure** — Cat 3 §3.4.3
+/-- **G-conditional integration infrastructure** — Cat 3
     opaque carrier: paper's `G | κ > κ*` above-threshold finite-sample
     support type. Paper Definition `def:principal` line 615 +
     Proposition `prop:principal-optimum` Part 3 proof line 638 stipulate
@@ -118,7 +118,7 @@ locally. -/
     realisation hosts paper's `E_{G | κ > κ*}[·]` integral as a weighted
     finite sum.
 
-    Cat 3 §3.4.3 carrier (primitive realising paper line 638's
+    Cat 3 carrier (primitive realising paper line 638's
     above-threshold partition).
 
     paper source: Definition `def:principal`, line 615 (`G(κ, α)`
@@ -131,7 +131,7 @@ axiom principalSampleAbove : Type
 
 /-- Paper-stipulated weight on each above-threshold sample
     point (paper's mixture weight `λ · pᵢ` from the finite-G
-    realisation). Cat 3 §3.4.3 carrier.
+    realisation). Cat 3 carrier.
 
     paper source: Definition `def:principal`, line 615 (principal
     distribution `G(κ, α)` weights) + Proposition `prop:principal-
@@ -140,37 +140,37 @@ axiom principalSampleAboveWeight : principalSampleAbove → ℝ
 
 /-- Paper-stipulated `κ` parameter at each above-threshold
     sample point (all `> κ*` by the partition's defining property).
-    Cat 3 §3.4.3 carrier.
+    Cat 3 carrier.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (above-threshold partition `κ > κ*` indexes the sample). -/
 axiom principalSampleAboveKappa : principalSampleAbove → ℝ
 
 /-- Paper-stipulated `α` parameter at each above-threshold
-    sample point. Cat 3 §3.4.3 carrier.
+    sample point. Cat 3 carrier.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`α` parameter in `W(β, κ, α)` integrand). -/
 axiom principalSampleAboveAlpha : principalSampleAbove → ℝ
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation: each
+/-- Cat 3 paper-stipulated structural equation: each
     above-threshold sample weight is non-negative (probability-measure
     positivity from paper Definition `def:principal` line 615's
     standing-convention probability-measure status of `G`). Cat 3
-    §3.4.3 structural equation.
+    structural equation.
 
     paper source: Definition `def:principal`, line 615 (`G(κ, α)`
     standing-convention probability-measure). -/
 axiom principalSampleAboveWeight_nonneg :
     ∀ i : principalSampleAbove, 0 ≤ principalSampleAboveWeight i
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     `aboveThresholdWelfare β` is the weighted-finite-sum realisation of
     paper line 638's `λ · E_{G | κ > κ*}[W(β,κ,α)]`. This pins the
     opaque `aboveThresholdWelfare` carrier to a concrete sum of
     `agentWelfare AgentType.kappaAgent` over the paper-stipulated
     above-threshold sample, mirroring the percolation-expectation
-    concretisation of `agentWelfare`. Cat 3 §3.4.3 structural equation
+    concretisation of `agentWelfare`. Cat 3 structural equation
     (paper-Def-stipulated carrier-defining equation; paper line 638
     STIPULATES the partition's integral form).
 
@@ -185,13 +185,13 @@ axiom aboveThresholdWelfare_eq_kappaAgent_integral :
         agentWelfare AgentType.kappaAgent β
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation: at every
+/-- Cat 3 paper-stipulated structural equation: at every
     above-threshold sample point, the κ-agent's welfare is monotone in
     β. Paper line 638 STIPULATES the above-threshold sample by
     `κᵢ > κ*` partition; paper Theorem 4.1 Part 2 (line 492) STATES
     that for `κ` above the cognitive threshold, the κ-agent's welfare
     is non-decreasing in β. Composing: at each above-threshold sample
-    point, individual welfare is monotone in β. Cat 3 §3.4.3 structural
+    point, individual welfare is monotone in β. Cat 3 structural
     equation (paper-Def-stipulated structural fact about the sample's
     individual welfare behavior at the named above-threshold regime;
     `kappa_large_blackwell_recovery_OPEN` derives the per-`κ` form but
@@ -238,7 +238,7 @@ theorem aboveThresholdWelfare_monotone_OPEN :
 
 /-! ### G-conditional integration infrastructure (below-threshold sister) -/
 
-/-- Cat 3 §3.4.3 opaque carrier (below-threshold sister to
+/-- Cat 3 opaque carrier (below-threshold sister to
     `principalSampleAbove`).
 
     paper source: Definition `def:principal`, line 615 + Proposition
@@ -259,16 +259,16 @@ axiom principalSampleBelowKappa : principalSampleBelow → ℝ
 /-- Below-threshold sister of `principalSampleAboveAlpha`. -/
 axiom principalSampleBelowAlpha : principalSampleBelow → ℝ
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     each below-threshold sample weight is non-negative. -/
 axiom principalSampleBelowWeight_nonneg :
     ∀ i : principalSampleBelow, 0 ≤ principalSampleBelowWeight i
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     `belowThresholdWelfare β` is the weighted-finite-sum realisation of
     paper line 638's `(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`. Below-threshold
     sister of `aboveThresholdWelfare_eq_kappaAgent_integral`. Cat 3
-    §3.4.3 structural equation.
+    structural equation.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (below-threshold component as paper Definition's defining
@@ -279,7 +279,7 @@ axiom belowThresholdWelfare_eq_kappaAgent_integral :
         agentWelfare AgentType.kappaAgent β
           (principalSampleBelowKappa i) (principalSampleBelowAlpha i)
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     paper line 638 STIPULATES that the below-threshold sample's
     weighted-sum welfare contribution is eventually decreasing in β
     (the reversal regime: at SOME `(β_low, β_high)` pair, the
@@ -288,10 +288,9 @@ axiom belowThresholdWelfare_eq_kappaAgent_integral :
     individual welfare is non-monotone in β; aggregating against the
     sample's positive-weight measure preserves the strict-decrease at
     the witness pair. This atom encodes the paper-stipulated witness
-    pair on the weighted-sum carrier. Cat 3 §3.4.3 gapDefinitional per
-    discipline (paper-Def-stipulated witness-pair on the sample-sum
-    carrier; mirrors the reversal-witness pattern lifted to the
-    sample-sum level).
+    pair on the weighted-sum carrier. Cat 3 paper-Def-stipulated
+    witness-pair on the sample-sum carrier (mirrors the reversal-witness
+    pattern lifted to the sample-sum level).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (below-threshold partition + eventually-decreasing) +
@@ -390,7 +389,7 @@ theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
 
 /-! ## W_bar limit-at-infinity infrastructure
 
-Derivation of the §3.4.3 eventually-decreasing claim
+Derivation of the eventually-decreasing claim
 `W_bar_eventually_decreasing_paper_Def` requires the W_bar
 limit-at-infinity infrastructure (`W_bar_limit_infty_def`,
 `W_bar_finite_above_limit_witness`) to be available BEFORE the
@@ -400,14 +399,14 @@ infrastructure + continuity atoms so the derived theorem can compose
 them inline.
 
 The items here are:
-  * `principalSampleBoth_combined_convergence_witness` (Cat 3 §3.4.3
+  * `principalSampleBoth_combined_convergence_witness` (Cat 3
     paper-stipulated combined-convergence witness on the sample sums)
   * `W_bar_has_limit_infty_OPEN` (derived theorem; existence of
     finite β → ∞ limit of `W_bar`)
   * `W_bar_limit_infty` (noncomputable def via `Classical.choose`)
   * `W_bar_limit_infty_def` (derived theorem; Tendsto W_bar atTop
     (nhds W_bar_limit_infty))
-  * `W_bar_finite_above_limit_witness` (Cat 3 §3.4.3 paper-
+  * `W_bar_finite_above_limit_witness` (Cat 3 paper-
     stipulated finite-β-above-limit witness)
   * `W_bar_continuousOn_Ici` (Cat 1 derived theorem; sum of two
     `ContinuousOn`s)
@@ -416,7 +415,7 @@ Position in source order is metadata-neutral per discipline §3; the
 ordering is justified by the eventually-decreasing closure's
 forward-reference need. -/
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     paper-stated combined-convergence witness on the G-conditional
     sample sums. Paper Corollary `cor:disclosure` Part 1 proof (line
     652) STATES "for above-threshold agents, `W(β, κ, α)` is non-
@@ -426,7 +425,7 @@ forward-reference need. -/
     `∑ above-sample + ∑ below-sample` to converge to a finite limit
     as `β → ∞`.
 
-    Cat 3 §3.4.3 structural equation (paper-stipulated combined-
+    Cat 3 structural equation (paper-stipulated combined-
     convergence on opaque sample sums; standard structural-equation
     precedent).
 
@@ -505,14 +504,14 @@ theorem W_bar_limit_infty_def :
   unfold W_bar_limit_infty
   exact Classical.choose_spec W_bar_has_limit_infty_OPEN
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     paper-stated existence of a finite β at which `W_bar` strictly
     exceeds its β → ∞ limit. Paper Corollary `cor:disclosure` Part 1
     proof line 656 STATES "Since `W̄(β) → W̄(∞)` yet there exists
     `β_0` with `W̄(β_0) > W̄(∞)`..." — paper directly stipulates the
     existence of such `β_0`.
 
-    Cat 3 §3.4.3 structural equation (paper-stipulated existence of
+    Cat 3 structural equation (paper-stipulated existence of
     finite-β-above-limit witness; standard structural-equation
     precedent).
 
@@ -610,7 +609,7 @@ theorem W_bar_eventually_decreasing_workingAssumption :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N :=
   W_bar_eventually_decreasing
 
-/-- Cat 3 §3.4.3 paper-Def-stipulated convention atom: per-sample
+/-- Cat 3 paper-Def-stipulated convention atom: per-sample
     below-threshold κ-agent welfare is bounded above by
     below-threshold-at-zero for `β < 0` (outside paper line 614's
     standing convention `β ≥ 0`).
@@ -623,7 +622,7 @@ theorem W_bar_eventually_decreasing_workingAssumption :
     + Mathlib `Finset.sum_le_sum` + non-negative weights, derives the
     `belowThresholdWelfare` carrier-level statement directly.
 
-    Per discipline §3.4.3 + §18 atomic-decomposition: smaller per-sample
+    Per atomic-decomposition discipline: smaller per-sample
     atoms preferred over carrier-level atoms. -/
 axiom belowThresholdWelfare_per_sample_le_at_zero_for_negative :
     ∀ j : principalSampleBelow, ∀ β : ℝ, β < 0 →
@@ -1031,7 +1030,7 @@ theorem W_bar_mixture_decomposition :
    `W_bar_eventually_decreasing` derived theorem and the
    `gap_principal_interior_optimum` derived theorem. -/
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     paper-stated COMBINED dominance witness pair on the G-conditional
     sample sums. Paper line 632 STATES "for sufficiently large β,
     `dW̄/dβ < 0`" in the reversal regime; per the mixture decomposition
@@ -1051,7 +1050,7 @@ theorem W_bar_mixture_decomposition :
     this combined dominance as the substantive content of the eventual
     `dW̄/dβ < 0` mechanism.
 
-    Cat 3 §3.4.3 structural equation (paper-stipulated combined-witness
+    Cat 3 structural equation (paper-stipulated combined-witness
     structural fact at the named reversal-regime common pair; standard
     structural-equation precedent).
 
@@ -1071,8 +1070,9 @@ axiom principalSampleBoth_combined_dominance_witness_pair :
          agentWelfare AgentType.kappaAgent β_high
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
 
-/-- §18 atomic decomposition. Paper Proposition `prop:principal-optimum`
-    Part 1 proof (line 632) derives that when `G` has support entirely
+/-- Atomic-decomposition closure. Paper Proposition
+    `prop:principal-optimum` Part 1 proof (line 632) derives that when
+    `G` has support entirely
     in the reversal regime, the below-threshold contribution's strict
     decrease DOMINATES the above-threshold contribution's increase at
     SOME pair.
@@ -1080,7 +1080,7 @@ axiom principalSampleBoth_combined_dominance_witness_pair :
     Cat 1 derived theorem composing the G-conditional integration
     framework + paper-stipulated combined-dominance witness atom
     `principalSampleBoth_combined_dominance_witness_pair` + algebra.
-    Substantive paper content sits on the §3.4.3 atom
+    Substantive paper content sits on the Cat 3 atom
     (paper-stipulated combined-witness on the sample sums); algebraic
     step is Cat 1 visible.
 
@@ -1163,7 +1163,7 @@ theorem W_bar_eventually_decreasing_in_reversal_OPEN :
    theorem via the G-integration framework + a paper-stipulated
    combined exceeds-zero witness atom. -/
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     paper-stated combined exceeds-zero witness on the G-conditional
     sample sums. Paper Proposition `prop:principal-optimum` Part 1
     proof (line 632) STATES "for sufficiently small β, the within-branch
@@ -1173,7 +1173,7 @@ theorem W_bar_eventually_decreasing_in_reversal_OPEN :
     `∑ above-sample at β + ∑ below-sample at β` strictly exceeds the
     `β = 0` baseline `∑ above-sample at 0 + ∑ below-sample at 0`.
 
-    Cat 3 §3.4.3 structural equation (paper-stipulated combined-witness
+    Cat 3 structural equation (paper-stipulated combined-witness
     structural fact at the small-β regime; standard structural-equation
     precedent).
 
@@ -1232,12 +1232,12 @@ theorem gap_principal_interior_optimum
     (W_bar_eventually_decreasing_in_reversal_OPEN hC hT h_reversal)
     (W_bar_exceeds_zero_at_positive_beta_OPEN hC hT h_reversal)
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     paper-stated combined valley-triple witness on the G-conditional
     sample sums. Paper line 640 STATES the existence of a non-concave
     valley triple `β₁ < β₂ < β₃` for `W̄`; per the mixture decomposition,
     this requires the combined sample-sum to exhibit the valley at this
-    triple. Cat 3 §3.4.3 structural equation.
+    triple. Cat 3 structural equation.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 640. -/
@@ -1340,8 +1340,9 @@ theorem W_bar_limit_infty_le_W_bar_betaBarStar :
     a positive reversal-regime fraction.
 
     Encoding choice: extracted from the bundled
-    `gap_disclosure_full_suboptimal_OPEN` per §18 Manufactured-
-    Recognition pattern. The atom encodes the existence of a positive
+    `gap_disclosure_full_suboptimal_OPEN` per Manufactured-
+    Recognition decomposition pattern. The atom encodes the existence
+    of a positive
     overshoot constant `δ̄_bar > 0` directly on the carrier `W_bar`,
     without committing to the underlying conditional-expectation
     machinery.
@@ -1388,7 +1389,8 @@ theorem finite_beta_above_limit_from_overshoot_OPEN :
     Full disclosure (`β → ∞`) is suboptimal when any positive
     `G`-fraction is in the reversal regime: there exists a finite β
     with `W_bar β > W_bar_limit_infty`. Decomposed from the bundled
-    `gap_disclosure_full_suboptimal_OPEN` axiom per §18 pattern:
+    `gap_disclosure_full_suboptimal_OPEN` axiom per atomic-decomposition
+    pattern:
     composes `averaged_reversal_overshoot_positive_OPEN` (paper-stated
     positive averaged overshoot in reversal regime) +
     `finite_beta_above_limit_from_overshoot_OPEN` (paper-stated
@@ -1411,8 +1413,8 @@ theorem gap_disclosure_full_suboptimal :
     "the planner sets `β_i = β*(κ_i, α_i)` for each agent type. ...
     This achieves `W̄_diff = ∫ W(β*(κ, α), κ, α) dG`."
 
-    The carrier is paper-Def-stipulated structural primitive per
-    discipline §3.4.1 (opaque-carrier primitive).
+    The carrier is paper-Def-stipulated structural primitive (Cat 3
+    opaque carrier).
 
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
     (`∫ W(β*(κ, α), κ, α) dG` per-agent-optimum aggregate). -/
@@ -1459,18 +1461,18 @@ theorem differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN :
 /-! ### Per-agent-optimal β* extension to G-integration framework -/
 
 /-- Per-agent-optimal β* on the above-threshold sample
-    (paper line 658 `β_i = β*(κ_i, α_i)`). Cat 3 §3.4.3 carrier
+    (paper line 658 `β_i = β*(κ_i, α_i)`). Cat 3 carrier
     (paper-stipulated per-agent optimal β assignment). -/
 axiom principalSampleAboveBetaStar : principalSampleAbove → ℝ
 
 /-- Per-agent-optimal β* on the below-threshold sample
-    (paper line 658, below-threshold sister). Cat 3 §3.4.3 carrier. -/
+    (paper line 658, below-threshold sister). Cat 3 carrier. -/
 axiom principalSampleBelowBetaStar : principalSampleBelow → ℝ
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     `perAgentOptimalAggregate G` is the weighted-finite-sum realisation
     of paper line 658's `∫ W(β*(κ,α), κ,α) dG` per-agent-optimal
-    aggregate. Cat 3 §3.4.3 structural equation. -/
+    aggregate. Cat 3 structural equation. -/
 axiom perAgentOptimalAggregate_eq_kappaAgent_integral :
     ∀ G : ℝ → ℝ, perAgentOptimalAggregate G =
       (∑ i : principalSampleAbove, principalSampleAboveWeight i *
@@ -1480,7 +1482,7 @@ axiom perAgentOptimalAggregate_eq_kappaAgent_integral :
         agentWelfare AgentType.kappaAgent (principalSampleBelowBetaStar j)
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j))
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     at every above-threshold sample point, the per-agent-optimal β*ᵢ
     yields welfare at least as great as ANY uniform β. -/
 axiom principalSampleAbove_per_agent_optimum_dominance :
@@ -1490,7 +1492,7 @@ axiom principalSampleAbove_per_agent_optimum_dominance :
         agentWelfare AgentType.kappaAgent (principalSampleAboveBetaStar i)
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     below-threshold sister of `principalSampleAbove_per_agent_optimum_dominance`. -/
 axiom principalSampleBelow_per_agent_optimum_dominance :
     ∀ j : principalSampleBelow, ∀ uniform_beta : ℝ,
@@ -1537,9 +1539,10 @@ theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
           `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
           (paper line 658 per-agent-assignment formula identification).
 
-    The smaller wA is strictly smaller per discipline §18 standard:
-    states dominance on the per-agent-optimum aggregate (with the
-    carrier identification surfaced separately).
+    The smaller working-assumption atom is strictly smaller per
+    atomic-decomposition standard: states dominance on the
+    per-agent-optimum aggregate (with the carrier identification
+    surfaced separately).
 
     paper source: Corollary `cor:disclosure` Part 2, line 647 +
     proof line 658. -/
@@ -1554,12 +1557,12 @@ theorem differentiated_per_agent_optimum_dominates_uniform :
     Differentiated disclosure strictly dominates uniform disclosure:
     `W_bar uniform_beta ≤ differentiatedDisclosureWelfare G` for any
     `G` and uniform β. Decomposed from the bundled
-    `gap_disclosure_differentiated_dominates_OPEN` claim per §18
-    pattern: re-exports the derived theorem
+    `gap_disclosure_differentiated_dominates_OPEN` claim per
+    atomic-decomposition pattern: re-exports the derived theorem
     `differentiated_per_agent_optimum_dominates_uniform`
     (which composes `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
     structural eq + `perAgentOptimalAggregate_dominates_uniform_OPEN`
-    smaller wA).
+    smaller working-assumption atom).
 
     paper source: Corollary `cor:disclosure` Part 2, line 647. -/
 theorem gap_disclosure_differentiated_dominates :
