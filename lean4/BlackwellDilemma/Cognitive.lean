@@ -1855,13 +1855,10 @@ noncomputable def kappaAgentWelfareSNR (β κ : ℝ) : ℝ :=
 
 /-- Cat 1 derived theorem: definitional unfolding of `kappaAgentWelfareSNR`
     to its underlying `agentWelfare` instance at `α = 1`. Closes via
-    `rfl` because `kappaAgentWelfareSNR` is now a Mathlib-level `def`
-    (formerly the axiom-pair `axiom kappaAgentWelfareSNR + axiom
-    kappaAgentWelfareSNR_def`). Eliminates the opaque-on-opaque pattern
-    between `kappaAgentWelfareSNR` and the welfare ledger; downstream
-    consumers (the `prop:supermodular` cross-partial closure and
-    `cor:policy-complementarity`) inherit the binding to `agentWelfare`
-    automatically.
+    `rfl` because `kappaAgentWelfareSNR` is a Mathlib-level `def`.
+    Downstream consumers (the `prop:supermodular` cross-partial closure
+    and `cor:policy-complementarity`) inherit the binding to
+    `agentWelfare` directly through this definitional identity.
 
     paper source: Proposition `prop:supermodular`, line 565 (welfare
     object `W(β, κ)` for the κ-agent at `α = 1`). -/
@@ -2123,8 +2120,7 @@ theorem signal_independent_at_alpha_zero :
     Encoding choice: extracted from the bundled
     `gap_sentimental_immunity_OPEN` as an atomic stipulation.
 
-    Paper-stated perturbative continuity argument; pending Mathlib
-    closed-set / compact-domain Banach-lattice analysis.
+    Paper-stated perturbative continuity argument.
 
     paper source: Proposition `prop:sentimental` proof, line 602
     (closed monotonicity-set + small-α perturbation neighborhood).
@@ -2187,9 +2183,7 @@ theorem welfare_continuity_in_alpha_OPEN :
     closure of the monotonicity set).
 
     Paper-stated downward-closure of the monotonicity-set on the
-    opaque `agentWelfare` carrier; pending Mathlib closed-set /
-    perturbation-bound + sentimental-agent welfare-functional
-    machinery.
+    `agentWelfare` carrier.
 
     paper source: Proposition `prop:sentimental` proof, line 602
     ("the monotonicity set ... contains 0 ... well-defined as the

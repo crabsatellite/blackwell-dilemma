@@ -1354,9 +1354,7 @@ theorem W_bar_limit_infty_le_W_bar_betaBarStar :
     constant `δ̄_bar > 0` directly on the carrier `W_bar`, without
     committing to the underlying conditional-expectation machinery.
 
-    Paper-stated overshoot positivity in reversal regime; pending
-    Mathlib conditional-expectation + Theorem `thm:cognitive-threshold`
-    Part 1 composition (close target before publication).
+    Paper-stated overshoot positivity in reversal regime.
 
     The current existential signature `∃ delta_bar : ℝ, 0 < delta_bar`
     is VACUOUSLY satisfiable (`delta_bar := 1` works without using any

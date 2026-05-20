@@ -141,8 +141,7 @@ namespace BlackwellDilemma.Infrastructure
     theorem" (line 586). -/
 noncomputable def alphaWelfareShift (α : ℝ) : ℝ := α
 
-/-- **Cat 1 derived theorem** (kernel-pure; replaces the previous
-    `axiom alphaWelfareShift_monotone_paper_Def`).
+/-- **Cat 1 derived theorem** (kernel-pure).
 
     The α-welfare-transition shift `alphaWelfareShift` is monotone
     non-decreasing in α. Under the slope-1 affine concrete
@@ -158,10 +157,6 @@ noncomputable def alphaWelfareShift (α : ℝ) : ℝ := α
     `M(p, κ, α) = 0`'s zero-crossing in κ; the slope-1 affine concrete
     identification realises this monotonicity via the kernel-pure
     `monotone_id` derivation.
-
-    Net Cat 3 §3.4.3 atom delta: −1 (paper-Def-stipulated structural
-    equation axiom retired; carrier-pair preserved with paper-faithful
-    slope-1 concrete identification + Cat 1 `monotone_id` derivation).
 
     paper source: Proposition `\label{prop:threshold-alpha}` proof
     paragraph "Strict positivity of `∂κ*/∂α` via the implicit function

@@ -866,9 +866,7 @@ noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
     edge-config probability with the `|C_2| ≥ 2` and reward factors,
     each a probability in `(0, 1]`). Mirrors the
     `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` structural-equation
-    precedent. Pending Mathlib `Z²`-lattice + bond-percolation measure
-    machinery (to compute the `|C_2| ≥ 2` and reward factors); close
-    target before publication.
+    precedent.
 
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 471-473 (the trap probability `= 6 p⁵ (1-p)² × |C_2|≥2 factor
@@ -937,9 +935,7 @@ theorem trapLocalConfigProb_pos_and_le :
     because it implies the trap pattern). Mirrors the
     `expectedTopoLossOnGiant` /
     `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` sub-event
-    structural-equation precedent. Pending Mathlib `Z²`-lattice +
-    bond-percolation measure machinery (close target before
-    publication).
+    structural-equation precedent.
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (`trapLocalConfigEvent` has probability
     `trapLocalConfigProb p`; the indicator is `1` on it because the

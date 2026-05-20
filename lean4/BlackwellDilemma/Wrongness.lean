@@ -838,13 +838,11 @@ theorem W_info_oracle_exponential_bound_OPEN
     threshold. Encoded as substantive bound on the concretised carrier
     `W_info_oracle n p β` (`W_info_oracle` is a
     `noncomputable def` over the finite bond-percolation measure — see
-    its concretisation above; the prior opaque-carrier encoding
-    defeated Pattern 4 vacuous existentials, the concretisation
-    makes the carrier structural).
+    its concretisation above; the concretisation makes the carrier
+    structural).
 
-    Derived theorem composing the two CLOSED derived theorems
-    (formerly Cat 3 atomic stipulations, now `theorem`s on the
-    concrete `W_info_oracle`):
+    Derived theorem composing the two CLOSED derived `theorem`s on the
+    concrete `W_info_oracle`:
     * `W_info_oracle_nonpos_OPEN` (derived theorem — per-realisation
       kernel sign `wInfoOracleKernel_nonpos` + `percExpectation_le_
       of_pointwise_le`),

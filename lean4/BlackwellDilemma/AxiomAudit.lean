@@ -398,9 +398,8 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_V_g_le_V_dyn
 #print axioms BlackwellDilemma.dilemma_subsumed_by_gap_general_tree
 
--- Derived closures from Pattern 7 phantom-downstream repair
--- (Wires #1-#6: composing orphan atoms with Mathlib + companion atoms
--- to give them explicit downstream consumers):
+-- Derived closures composing orphan atoms with Mathlib and companion
+-- atoms to give them explicit downstream consumers:
 --  * `ReachableSet_self_member`: refactored from atomic axiom to derived
 --    theorem via `ReachableSet_eq_ForwardReachable_empty` (Def 2.5
 --    line 193) + `ForwardReachable_self_member` (Def 2.5 length-0 path).
