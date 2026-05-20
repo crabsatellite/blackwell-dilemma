@@ -127,9 +127,9 @@ above, this becomes the cleaner bridge axiom
 
   `IsSupermodular kappaAgentWelfareSNR`
 
-which is a paper-stipulated property of the opaque carrier
-(workingAssumption to convert via the calculus-Topkis criterion once
-the concrete realisation of `kappaAgentWelfareSNR` is supplied). -/
+which is a paper-stipulated property of the opaque carrier (to be
+discharged via the calculus-Topkis criterion once the concrete
+realisation of `kappaAgentWelfareSNR` is supplied). -/
 
 /-- **Tautological link**: any function satisfying the four-corner
     positivity is supermodular (which IS the definition). Provides

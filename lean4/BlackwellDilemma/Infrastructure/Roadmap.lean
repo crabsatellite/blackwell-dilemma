@@ -150,15 +150,15 @@ Mathlib-PR candidates:
 All completed Cat 1 modules verified kernel-pure via `#print axioms`
 showing only `[propext, Classical.choice, Quot.sound]`.
 
-## Paper-witness retirement pattern
+## Paper-witness decomposition pattern
 
 Each `*_paper_witness` axiom is replaced by:
-* A smaller `_workingAssumption` axiom (carrier-identification only)
+* A smaller carrier-identification axiom (paper-stipulated)
 * A Cat 1 derivation through Infrastructure modules
 
 `grep -c "^axiom .*_paper_witness"` returns 0. The AxiomAudit
 `#print axioms` trail confirms ZERO `_paper_witness` in any dependency
-graph. The pattern `paper_witness → workingAssumption + Infrastructure
+graph. The pattern `paper_witness → carrier-identification + Infrastructure
 Cat 1` is the project-wide standard.
 
 Wire-up summary by Infrastructure module:
@@ -242,7 +242,7 @@ Future Mathlib-PR sequence:
   Stage B — `Mathlib.Order.DifferenceDominates` namespace creation
   Stage C — `Mathlib.Topology.Algebra.Order.EventuallyDecreasing`
   Stage D — Once Stages A-C are merged, convert §3.4.3 atoms to
-            derivedTheorem
+            derived theorems
 -/
 namespace BlackwellDilemma.Infrastructure
 

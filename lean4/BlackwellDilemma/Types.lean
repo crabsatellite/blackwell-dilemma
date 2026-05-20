@@ -181,9 +181,7 @@ axiom ForwardReachable_self_member :
     ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
       u ∈ ForwardReachable u H ω
 
-/-- Cat 3 derived theorem (refactored from prior atomic axiom
-    `ReachableSet_self_member` per the gap-ledger discipline's
-    "atoms must serve downstream consumers" mandate): the trivial-path
+/-- Cat 3 derived theorem `ReachableSet_self_member`: the trivial-path
     inclusion convention `v ∈ R(v, ω)`. Paper Definition 2.2
     (`def:reachable`) is the source convention; the convention is now
     derived by composing the two atomic structural equations

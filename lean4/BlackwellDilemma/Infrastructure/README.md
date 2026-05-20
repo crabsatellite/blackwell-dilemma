@@ -5,8 +5,9 @@ Mathlib-PR-ready. Each module fills a gap in Mathlib (currently no
 `Order.Supermodular`, no Gaussian conjugate-prior infrastructure, no
 non-compact EVT extension, no one-sided divergence predicate, no
 finite bond-percolation framework, etc.) while providing the
-mathematical foundations needed to retire the paper's Cat 3 §3.4.4
-`workingAssumption` axioms with genuine Cat 1 derived theorems.
+mathematical foundations needed to discharge the paper's Cat 3 §3.4.4
+paper-derived working-content axioms with genuine Cat 1 derived
+theorems.
 
 ## Design principles
 

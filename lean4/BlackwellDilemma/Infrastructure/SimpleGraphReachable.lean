@@ -28,7 +28,7 @@ The paper's opaque carrier `ForwardReachable : Vertex → Finset Vertex →
 PercolationOutcome → Finset Vertex` (paper Def 2.5) reduces to
 `SimpleGraph.Reachable`-based reachability under the all-edges-open
 percolation outcome on the underlying graph G. The bridge is the
-paper-stipulated workingAssumption that the abstract carrier MATCHES
+paper-stipulated structural premise that the abstract carrier MATCHES
 this concrete realisation when the underlying graph is provided as a
 `SimpleGraph`. With that bridge in place, the
 `forward_reachable_empty_full_at_all_open_paper_witness` axiom becomes a

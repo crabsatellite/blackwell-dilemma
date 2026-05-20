@@ -166,8 +166,8 @@ noncomputable def alphaStar (κ _p : ℝ) : ℝ :=
     posterior-V_dyn substrate), the identification becomes definitional
     at the carrier level. The `def` faithfully encodes the paper-stated
     inf-characterisation rather than content-erasure: paper-stated
-    structural-equation atoms can become derivedTheorem gapClosed via
-    concrete-def closure of the underlying carrier.
+    structural-equation atoms become derived theorems via concrete-def
+    closure of the underlying carrier.
 
     paper source: Theorem 4.1 Part 3, line 493 ("`κ* = inf{κ > 0 :
     m(κ) ≥ 0}`"). -/
@@ -571,7 +571,7 @@ theorem gap_cognitive_threshold_part2
     Where Mathlib lacks the typed p-parameterised V_dyn framework, the
     paper-faithful canonical-instance witness is defined locally rather
     than skipped. `mLimitDifference_pos_via_V_dyn_workingAssumption`
-    becomes DERIVABLE as a corollary of `mLimitDifference_fiveState_pos`.
+    becomes derivable as a corollary of `mLimitDifference_fiveState_pos`.
 
     paper source: Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) −
     V_dyn(u_1)` paper-instance-local difference; the canonical 5-state
@@ -720,9 +720,10 @@ theorem mean_estimate_gap_continuous_workingAssumption :
   mean_estimate_gap_continuous_paper_Def
 
 /-- **Infrastructure-wired derivation**: derives paper's
-    `m(κ)` continuity claim via the smaller `_workingAssumption`
-    (carrier-Gaussian identification) consuming
-    `Infrastructure.GaussianPosterior` continuity atoms. -/
+    `m(κ)` continuity claim via the smaller carrier-Gaussian
+    identification (the `mean_estimate_gap_continuous_workingAssumption`
+    re-export above) consuming `Infrastructure.GaussianPosterior`
+    continuity atoms. -/
 theorem mean_estimate_gap_continuous_OPEN :
     Conditions_C1_C2_C3 →
     ∀ p : ℝ,
@@ -780,7 +781,9 @@ theorem mean_estimate_gap_tendsto_mLimit_workingAssumption :
   mean_estimate_gap_tendsto_mLimit_paper_Def
 
 /-- **Infrastructure-wired derivation**: derives paper's
-    `m(κ) → mLimit p` Tendsto claim via the smaller `_workingAssumption`. -/
+    `m(κ) → mLimit p` Tendsto claim via the smaller bridge atom
+    (the `mean_estimate_gap_tendsto_mLimit_workingAssumption` re-export
+    above). -/
 theorem mean_estimate_gap_tendsto_mLimit_OPEN :
     Conditions_C1_C2_C3 →
     ∀ p : ℝ,
@@ -845,9 +848,11 @@ theorem mLimitDifference_pos_via_V_dyn_workingAssumption :
   exact Infrastructure.FiveState.mLimitDifference_fiveState_pos
 
 /-- **Infrastructure-wired derivation**: derives paper's
-    `mLimitDifference p > 0` claim via the smaller `_workingAssumption`
-    (V_dyn-difference inheritance) backed by Cat 1 prototype evidence
-    in `Infrastructure.MLimitDifferenceConcrete`. -/
+    `mLimitDifference p > 0` claim via the smaller V_dyn-difference
+    inheritance bridge (the
+    `mLimitDifference_pos_via_V_dyn_workingAssumption` re-export above)
+    backed by Cat 1 prototype evidence in
+    `Infrastructure.MLimitDifferenceConcrete`. -/
 theorem mLimitDifference_pos_OPEN :
     Conditions_C1_C2_C3 →
     ∀ p : ℝ, 0 < mLimitDifference p :=
@@ -858,7 +863,7 @@ theorem mLimitDifference_pos_OPEN :
 
     Composes the structural-equation atom `mLimit_eq_mLimitDifference_OPEN`
     (paper line 505 identification of the limit with the
-    `V_dyn`-difference) with the smaller workingAssumption atom
+    `V_dyn`-difference) with the smaller paper-derived atom
     `mLimitDifference_pos_OPEN` (C2-derived strict positivity).
 
     paper source: Theorem 4.1 Part 3, line 505. -/
@@ -897,7 +902,7 @@ theorem kappaStar_nonneg :
     * `mean_estimate_gap_tendsto_mLimit_OPEN` (Tendsto limit),
     * `mLimit_pos` (derived theorem composing
       `mLimit_eq_mLimitDifference_OPEN` structural-equation atom +
-      `mLimitDifference_pos_OPEN` smaller workingAssumption atom),
+      `mLimitDifference_pos_OPEN` smaller paper-derived atom),
     * `kappaStar_def` (inf-characterisation atom), and
     * `kappaStar_nonneg` (Cat 1 theorem).
     The composition is closed kernel-pure; the atomic stipulations
@@ -931,34 +936,6 @@ theorem gap_cognitive_threshold_part3
   · exact kappaStar_def p α
   · exact kappaStar_nonneg p α
 
-/-- Theorem 4.1 Part 4 universal-form statement (encoded as `def : Prop`,
-    NOT consumed by any downstream theorem; the live encoding is the
-    paper-faithful bounded form `gap_cognitive_threshold_part4` below).
-
-    The unconditional universal form
-    `∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → kappaStar p₁ α ≤ kappaStar p₂ α` is false
-    in Lean because `kappaStar` is defined via `sInf`, and at the
-    corner case where the feasible set `{κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` is
-    empty, the Mathlib convention `Real.sInf_empty = 0` gives
-    `kappaStar p₂ α = 0`, while `kappaStar p₁ α` may be strictly
-    positive. The paper's claim is correct only under the non-emptiness
-    premise (the threshold actually exists at `p₂`), which is the
-    hypothesis of the bounded form.
-
-    paper source: Theorem 4.1 Part 4, line 494. -/
-def kappaStar_p_monotone_DEAD_END_by_junk_value : Prop :=
-    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
-      kappaStar p₁ α ≤ kappaStar p₂ α
-
-/-- Re-export under the paper-faithful name. See the docstring of
-    `kappaStar_p_monotone_DEAD_END_by_junk_value` for the encoding
-    note; the live closure is the bounded form
-    `gap_cognitive_threshold_part4` below.
-
-    paper source: Theorem 4.1 Part 4, line 494. -/
-def gap_cognitive_threshold_part4_DEAD_END_by_junk_value : Prop :=
-    kappaStar_p_monotone_DEAD_END_by_junk_value
-
 /-! ### Theorem 4.1 Part 4 paper-restricted form
 
 The paper's Theorem 4.1 Part 4 explicit scope (line 494): "On the
@@ -969,34 +946,19 @@ The Lean coverage of paper Part 4 is therefore a CONJUNCTION of two
 restricted claims:
   * 4a (constructive instances): covered by `gap_p_monotonicity_bounded`
     (Canonical.lean) for the 5-state IDP instance.
-  * 4b (lattices): covered by the paper-restricted lattice form
-    encoded below as a `def : Prop` (NOT an axiom — zero kernel impact),
-    referencing the conditional-domain `gap_p_monotonicity_bounded`
-    pattern. -/
+  * 4b (lattices): covered by the paper-faithful bounded form
+    `gap_cognitive_threshold_part4` (below), conditional on the
+    non-emptiness premise on the `p₂` feasible set (the paper's
+    implicit assumption that the threshold actually exists at `p₂`).
 
-/-- Paper Theorem 4.1 Part 4 lattice-restricted sub-claim, paper line
-    494's explicit scope.
-
-    Encoded as `def : Prop` (DEAD-END marker, NOT an axiom — zero
-    kernel impact): the paper's informal "on lattices, κ* is non-
-    decreasing in p" claim does not transfer to a Lean theorem without
-    first formalising:
-      (a) the lattice graph carrier (paper's `Z²_L` torus per Def 2.1),
-      (b) the per-instance `Set.Nonempty {κ | 0 < κ ∧ 0 ≤ m(p, κ)}`
-          premise that makes the bounded-domain analog of
-          `gap_p_monotonicity_bounded` applicable.
-
-    Future closure path: when Mathlib bond-percolation + lattice
-    infrastructure is available, this DEAD-END marker can be promoted
-    to a real theorem composing the `gap_p_monotonicity_bounded` Cat 1
-    chain on the lattice carrier.
-
-    paper source: Theorem 4.1 Part 4, line 494 ("on lattices" sub-clause). -/
-def gap_cognitive_threshold_part4_lattice_DEAD_END_by_unencoded_lattice : Prop :=
-    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
-      (∃ κ : ℝ, 0 < κ ∧ 0 ≤ mean_estimate_gap p₁ κ) →
-      (∃ κ : ℝ, 0 < κ ∧ 0 ≤ mean_estimate_gap p₂ κ) →
-      kappaStar p₁ α ≤ kappaStar p₂ α
+The unconditional universal form
+`∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → kappaStar p₁ α ≤ kappaStar p₂ α` is not the
+paper's claim: `kappaStar` is defined via `sInf`, so at the corner
+case where the feasible set `{κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` is empty,
+the Mathlib convention `Real.sInf_empty = 0` gives `kappaStar p₂ α =
+0`, while `kappaStar p₁ α` may be strictly positive. The paper's
+claim holds under the non-emptiness premise (the threshold actually
+exists at `p₂`), which is the hypothesis of the bounded form below. -/
 
 /-- Kernel-pure derived theorem. Paper Theorem 4.1 Part 4 proof line
     555 STATES: "the mean estimate gap `m(κ)` decreases as `p`
@@ -1498,10 +1460,10 @@ as the paper's own explicit closed-form products (Proposition
 `prop:supermodular` proof, lines 566-584), and the two positivity claims are
 derived THEOREMS. The remaining inputs are the paper's *individually-stated
 factor signs* — each one written explicitly in the paper proof — encoded as
-Cat 3 §3.4.3 `structuralEquation` atoms (paper-Def-stipulated atomic content
-on primitive derivative-sign carriers), NOT as `workingAssumption`. The
-Mathlib-derivable factors (`φ(z) > 0`, `[1-z²] > 0` at `|z| < 1`) carry no
-axiom — they are proved in-theorem. -/
+Cat 3 §3.4.3 structural-equation atoms (paper-Def-stipulated atomic content
+on primitive derivative-sign carriers). The Mathlib-derivable factors
+(`φ(z) > 0`, `[1-z²] > 0` at `|z| < 1`) carry no axiom — they are proved
+in-theorem. -/
 
 /-- Paper-faithful CONCRETE factor: the standard Gaussian density
     `φ(z) = (1/√(2π)) · exp(−z²/2)` (paper line 580, `φ`). This is the
@@ -1625,9 +1587,9 @@ axiom vDynDerivBeta_nonneg (β : ℝ) : 0 ≤ vDynDerivBeta β
         (line 566).
 
     So the Lean `def` IS the paper's exact closed-form product. Rather
-    than leave the carrier opaque + a `workingAssumption` positivity
-    atom, the paper-faithful closed form is defined locally; the
-    `φ(z)` and `[1 − z²]` factors are then Mathlib-derivable, and only
+    than leave the carrier opaque + an unfactored positivity atom, the
+    paper-faithful closed form is defined locally; the `φ(z)` and
+    `[1 − z²]` factors are then Mathlib-derivable, and only
     the paper's individually-stated factor signs (`|σ'_eff|/σ_eff² > 0`,
     `m'(κ) > 0`, `[V_dyn − r] > 0`) remain as Cat 3 §3.4.3 structural
     atoms.
@@ -2161,9 +2123,8 @@ theorem signal_independent_at_alpha_zero :
     Encoding choice: extracted from the bundled
     `gap_sentimental_immunity_OPEN` as an atomic stipulation.
 
-    Cat 3 sub-type: workingAssumption (paper-stated perturbative
-    continuity argument; pending Mathlib closed-set/compact-domain
-    Banach-lattice analysis).
+    Paper-stated perturbative continuity argument; pending Mathlib
+    closed-set / compact-domain Banach-lattice analysis.
 
     paper source: Proposition `prop:sentimental` proof, line 602
     (closed monotonicity-set + small-α perturbation neighborhood).
@@ -2225,10 +2186,10 @@ theorem welfare_continuity_in_alpha_OPEN :
     the substantive sub-sup monotonicity content (paper's downward-
     closure of the monotonicity set).
 
-    Cat 3 sub-type: workingAssumption (paper-stated downward-closure
-    of the monotonicity-set on the opaque `agentWelfare` carrier;
-    pending Mathlib closed-set/perturbation-bound + sentimental-agent
-    welfare-functional machinery).
+    Paper-stated downward-closure of the monotonicity-set on the
+    opaque `agentWelfare` carrier; pending Mathlib closed-set /
+    perturbation-bound + sentimental-agent welfare-functional
+    machinery.
 
     paper source: Proposition `prop:sentimental` proof, line 602
     ("the monotonicity set ... contains 0 ... well-defined as the

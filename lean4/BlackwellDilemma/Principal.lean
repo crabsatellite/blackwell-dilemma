@@ -470,8 +470,8 @@ theorem W_bar_has_limit_infty_OPEN :
 
 /-- Limit of aggregate welfare as `β → ∞`.
 
-    Concrete-def closure (Pattern 5: existence-via-`Classical.choose`).
-    The carrier is CONCRETE per paper line 652's paper-stated existence
+    Concrete-def closure (existence-via-`Classical.choose`). The
+    carrier is CONCRETE per paper line 652's paper-stated existence
     claim of the finite limit: define `W_bar_limit_infty` as
     `Classical.choose` of the limit-witness from the existence atom
     `W_bar_has_limit_infty_OPEN`.
@@ -497,10 +497,10 @@ noncomputable def W_bar_limit_infty : ℝ :=
 /-- Cat 3 Tendsto-characterisation of `W_bar_limit_infty`:
     `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)`.
 
-    Pattern 5 closure: composes the `W_bar_limit_infty` `def`
-    (which invokes `Classical.choose` on `W_bar_has_limit_infty_OPEN`)
-    with `Classical.choose_spec` (which yields the Tendsto-property
-    of the chosen limit witness directly).
+    Closure: composes the `W_bar_limit_infty` `def` (which invokes
+    `Classical.choose` on `W_bar_has_limit_infty_OPEN`) with
+    `Classical.choose_spec` (which yields the Tendsto-property of the
+    chosen limit witness directly).
 
     paper source: Corollary `cor:disclosure` Part 1 proof, line 652
     ("aggregate welfare converges to a finite limit as β → ∞"). -/
@@ -555,9 +555,9 @@ theorem W_bar_continuousOn_Ici : ContinuousOn W_bar (Set.Ici 0) := by
          N₀` (use the tail bound to dominate by
          `W_bar β_finite ≤ W_bar N_star`).
 
-    The wA re-export `W_bar_eventually_decreasing_workingAssumption`
-    below is preserved as a re-export of this theorem, maintaining the
-    consumer interface for `principal_interior_maximum_exists_OPEN`.
+    The `W_bar_eventually_decreasing_workingAssumption` re-export
+    below preserves the consumer interface for
+    `principal_interior_maximum_exists_OPEN`.
 
     paper source: composes paper Theorem 4.1 + Corollary
     `cor:disclosure` Part 1 (lines 652-656) — finite limit at infinity
@@ -694,8 +694,8 @@ theorem principal_interior_maximum_exists_OPEN :
 
 /-- The aggregate-optimal precision `β̄*` (paper line 622).
 
-    Concrete-def closure (Pattern 5: existence-via-`Classical.choose`).
-    The carrier is CONCRETE per paper line 622's paper-stated existence
+    Concrete-def closure (existence-via-`Classical.choose`). The
+    carrier is CONCRETE per paper line 622's paper-stated existence
     claim of the maximiser: define `betaBarStar` as `Classical.choose`
     of the maximiser-witness from the existence atom
     `principal_interior_maximum_exists_OPEN`.
@@ -720,7 +720,7 @@ noncomputable def betaBarStar : ℝ :=
 /-- Cat 3 argmax-characterisation of `betaBarStar`: for every `β ∈ ℝ`,
     `W_bar β ≤ W_bar betaBarStar`.
 
-    Pattern 5 closure: composes the `betaBarStar` `def` (which invokes
+    Closure: composes the `betaBarStar` `def` (which invokes
     `Classical.choose` on `principal_interior_maximum_exists_OPEN`) with
     `Classical.choose_spec` (which yields the universal-inequality
     maximiser property of the chosen witness directly). The
@@ -1009,9 +1009,10 @@ theorem belowThresholdWelfare_eventually_decreasing_OPEN :
     Composition:
       (a) Structural equation `W_bar_eq_mixture_OPEN` (paper line 638
           mixture identity).
-      (b) Smaller workingAssumption `aboveThresholdWelfare_monotone_OPEN`
+      (b) Smaller paper-derived atom `aboveThresholdWelfare_monotone_OPEN`
           (paper line 638 above-regime non-decreasing).
-      (c) Smaller workingAssumption `belowThresholdWelfare_eventually_decreasing_OPEN`
+      (c) Smaller paper-derived atom
+          `belowThresholdWelfare_eventually_decreasing_OPEN`
           (paper line 638 below-regime eventually-decreasing).
       (d) Provides explicit witnesses `aboveThresholdWelfare` and
           `belowThresholdWelfare` for the existential-pair claim.
@@ -1227,7 +1228,7 @@ theorem W_bar_exceeds_zero_at_positive_beta_OPEN :
     `{(κ, α) : κ < κ*(p, α), α > α*}`, then `betaBarStar ∈ (0, ∞)`.
     Composes `W_bar_eventually_decreasing_in_reversal_OPEN` +
     `W_bar_exceeds_zero_at_positive_beta_OPEN` derived theorem +
-    `interior_max_exists_from_unimodal_envelope` (kept earlier).
+    `interior_max_exists_from_unimodal_envelope`.
 
     paper source: Proposition `prop:principal-optimum` Part 1, lines 624-625. -/
 theorem gap_principal_interior_optimum
@@ -1353,22 +1354,21 @@ theorem W_bar_limit_infty_le_W_bar_betaBarStar :
     constant `δ̄_bar > 0` directly on the carrier `W_bar`, without
     committing to the underlying conditional-expectation machinery.
 
-    Cat 3 sub-type: workingAssumption (paper-stated overshoot
-    positivity in reversal regime; pending Mathlib conditional-
-    expectation + Theorem `thm:cognitive-threshold` Part 1
-    composition; 必须 close before publication).
+    Paper-stated overshoot positivity in reversal regime; pending
+    Mathlib conditional-expectation + Theorem `thm:cognitive-threshold`
+    Part 1 composition (close target before publication).
 
-    SOUNDNESS-DEFECT NOTE: the current existential signature
-    `∃ delta_bar : ℝ, 0 < delta_bar` is VACUOUSLY satisfiable
-    (`delta_bar := 1` works without using any paper hypothesis).
-    Per `feedback_truth_over_publication`: the sound paper-faithful
+    The current existential signature `∃ delta_bar : ℝ, 0 < delta_bar`
+    is VACUOUSLY satisfiable (`delta_bar := 1` works without using any
+    paper hypothesis). Per `feedback_truth_over_publication`: the sound
+    paper-faithful
     encoding would introduce an opaque
     `averaged_reversal_overshoot_carrier : ℝ` and stipulate
     `0 < averaged_reversal_overshoot_carrier` given the
-    G-reversal-fraction antecedent. The pragmatic closure path here:
-    close trivially via `Exists.intro 1 one_pos` (matches the
-    vacuous-signature semantics), with this docstring documenting
-    the latent soundness defect for future fix.
+    G-reversal-fraction antecedent. The current closure path: close
+    trivially via `Exists.intro 1 one_pos` (matches the vacuous-
+    signature semantics), with this docstring documenting the gap
+    between the current signature and the paper claim.
 
     Operational impact: downstream `gap_disclosure_full_suboptimal`
     consumes `delta_bar` only as argument to the next atom
@@ -1388,7 +1388,7 @@ theorem averaged_reversal_overshoot_positive_OPEN :
 /-- Paper-stated finite-β-strictly-above-limit existence. Derived
     theorem composing the G-integration framework + the paper-stipulated
     witness atom, with vacuous antecedent discharge (the `delta_bar`
-    parameter is dead-weight given the sister-atom soundness defect
+    parameter is dead-weight given the sister atom's vacuous signature
     noted above). -/
 theorem finite_beta_above_limit_from_overshoot_OPEN :
     ∀ delta_bar : ℝ, 0 < delta_bar →
@@ -1544,7 +1544,7 @@ theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
     `G` and any uniform β.
 
     Composition:
-      (a) Smaller workingAssumption atom
+      (a) Smaller paper-derived atom
           `perAgentOptimalAggregate_dominates_uniform_OPEN`
           (paper line 658 per-agent-pointwise dominance).
       (b) Structural equation

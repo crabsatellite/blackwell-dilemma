@@ -189,9 +189,9 @@ noncomputable def myopicKWelfare (k d : ℕ) (β : ℝ) : ℝ :=
     on opaque carriers (where Mathlib lacks the substrate), the
     identification becomes definitional at the carrier level via the
     paper-named regime split. The `def` faithfully encodes the paper
-    stipulation rather than content-erasure. Structural-equation atom
-    classified as gapDefinitional becomes derivedTheorem gapClosed
-    via concrete-def closure of the underlying carrier.
+    stipulation rather than content-erasure. The paper-stated
+    structural equation becomes a derived theorem via concrete-def
+    closure of the underlying carrier.
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942
     (k-step lookahead horizon spans full divergence depth d ⇒
@@ -228,7 +228,7 @@ theorem myopic_k_eq_bayesian_above_divergence_depth_OPEN :
 
     The atomic equality stipulation + Cat 2 Blackwell decomposition is
     genuinely smaller than a bundled `∀ β₁ β₂, β₁ ≤ β₂ → myopic ≤ myopic`
-    workingAssumption (just horizon-suffices structural equality, no
+    premise (just horizon-suffices structural equality, no
     monotonicity built in).
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942. -/

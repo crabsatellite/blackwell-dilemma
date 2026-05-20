@@ -349,8 +349,8 @@ theorem percExpectation_mono {E : Type} [Fintype E] [DecidableEq E]
     sum of `continuousOn` functions is `continuousOn`.
 
     Foundation lemma for closing `aboveThresholdWelfare_continuousOn`-
-    style workingAssumption axioms by lifting per-realisation kernel
-    continuity to integrated welfare continuity. -/
+    style claims by lifting per-realisation kernel continuity to
+    integrated welfare continuity. -/
 theorem percExpectation_continuousOn_of_pointwise_continuousOn
     {E : Type} [Fintype E] [DecidableEq E]
     (p : ℝ) (f : ℝ → BondConfig E → ℝ) (S : Set ℝ)

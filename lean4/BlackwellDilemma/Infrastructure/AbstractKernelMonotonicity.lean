@@ -28,7 +28,7 @@ Paper's `agentRewardKernel_normal_pointwise_monotone` etc. claim
 monotonicity of the per-realisation kernel `K(ω, β)`, and the
 expectation `agentWelfare β = Σ π(ω) · K(ω, β)` then inherits
 monotonicity. The bridge from per-realisation kernel monotonicity
-(paper-stipulated workingAssumption per ω) to expectation monotonicity
+(paper-stipulated structural premise per ω) to expectation monotonicity
 (paper claim) is exactly the lift below.
 
 ## Cat 1 status

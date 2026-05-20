@@ -37,8 +37,9 @@ The bridge from this Cat 1 abstract result to the paper-stipulated
 1. **β-increment-dominance preservation under integration** — the
    substantive integration step (Mathlib `MeasureTheory.Integral`).
 2. **Supermodularity of `agentWelfare β κ`** — paper carrier
-   property (workingAssumption per paper Proposition `prop:supermodular`,
-   to be retired via a calculus-Topkis criterion when carrier is concretized).
+   property (paper-stated structural premise per paper Proposition
+   `prop:supermodular`; discharged via a calculus-Topkis criterion
+   when the carrier is concretised).
 
 With (1) and (2), the paper axiom becomes a direct Cat 1 corollary of
 `IsSupermodular.beta_increment_dominance` composed with the integration

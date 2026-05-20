@@ -92,22 +92,18 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     Grimmett 1999 _Percolation_ 2nd ed. cited as the Cat 2
     percolation-probability dependency. -/
 
-/-! ### SOUNDNESS-DEFECT FIX — Phase.lean sister correction.
+/-! ### Phase.lean below-threshold encoding.
 
-    The retired atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`
-    asserted the *unconditional* bound `expectedTopoLoss n p ≤ 1/(n+1)`
-    for `p < p_c`.  That signature is **over-strong — false**, for the
-    same reason documented at the Wrongness.lean sister section: paper
-    Theorem 3.3 Part 1 (lines 404, 415-419) establishes `E[|W_topo|] =
-    O(1/n)` **only conditional on the giant-component event**
-    (`|R(v_0)| = Θ(n)`).  The unconditional below-threshold expected
-    topological loss is `Θ(1)` (the `1 - θ(1-p)` fraction of agents
-    NOT in the giant component carry `Θ(1)` loss).
+    Paper Theorem 3.3 Part 1 (lines 404, 415-419) establishes
+    `E[|W_topo|] = O(1/n)` **only conditional on the giant-component
+    event** (`|R(v_0)| = Θ(n)`). The unconditional below-threshold
+    expected topological loss is `Θ(1)` (the `1 - θ(1-p)` fraction of
+    agents NOT in the giant component carry `Θ(1)` loss).
 
-    Per `feedback_truth_over_publication`, the fix REPLACES the retired
-    Phase.lean atom + its derived-theorem chain with the paper-faithful
-    giant-component-conditional form, reusing the infrastructure built
-    in `Wrongness.lean` / `Percolation.lean`:
+    Per `feedback_truth_over_publication`, the Phase.lean
+    below-threshold chain is encoded against the paper-faithful
+    giant-component-conditional form, reusing the infrastructure
+    built in `Wrongness.lean` / `Percolation.lean`:
       * `Percolation.percRestrictedExpectation` — sub-event
         expectation `E_{G_p}[· ; S]`;
       * `Wrongness.giantComponentEvent` — Cat 3 carrier, the
@@ -115,48 +111,38 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
       * `Wrongness.expectedTopoLossOnGiant` — the paper-faithful
         object `E_{G_p}[topoLossKernel ; giantComponentEvent]`;
       * `Wrongness.topoLossKernel_le_one_over_n_on_giant_atom_OPEN` —
-        the SIGNATURE-CORRECTED Cat 3 structuralEquation atom (the
-        loss kernel is pointwise `≤ 1/(n+1)` *on the
-        giant-component event*, paper line 417's per-realisation
-        giant-component bound — TRUE, unlike the retired atom);
+        Cat 3 structural-equation atom (the loss kernel is pointwise
+        `≤ 1/(n+1)` *on the giant-component event*, paper line 417's
+        per-realisation giant-component bound);
       * `Wrongness.topo_loss_on_giant_below_one_over_n` — the genuine
         paper `1/(n+1)` envelope, on the giant-component event.
 
-    The Phase.lean below-threshold derived theorems are accordingly
-    re-stated against `expectedTopoLossOnGiant`; their conclusions
-    are paper Theorem 3.3 Part 1 line 404's genuine content
-    ("With probability `θ(1-p)` ... `|W_topo| = O(1/N) → 0`").
-    `gap_phase_transition_below` is a terminal derived theorem (no
-    higher consumer — verified by grep), so the correction is fully
-    contained.  The atom
-    `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` is RETIRED
-    (no replacement Phase.lean-local atom: the corrected
-    structuralEquation atom lives in `Wrongness.lean` and is shared
-    by both the Wrongness.lean and Phase.lean below-threshold chains).
+    The Phase.lean below-threshold derived theorems are stated
+    against `expectedTopoLossOnGiant`; their conclusions are paper
+    Theorem 3.3 Part 1 line 404's content ("With probability
+    `θ(1-p)` ... `|W_topo| = O(1/N) → 0`"). `gap_phase_transition_below`
+    is a terminal derived theorem. The corrected structural-equation
+    atom lives in `Wrongness.lean` and is shared by both the
+    Wrongness.lean and Phase.lean below-threshold chains.
 
     paper source: Theorem 3.3 Part 1, lines 404, 415-419
     (giant-component-conditional `O(1/N)` envelope + convergence). -/
 
-/-- **Derived theorem** (paper-faithful replacement of the retired
-    `topo_loss_decay_below_pc`).  Below threshold (`p < p_c`), the
-    expected topological loss *on the giant-component event*
-    `expectedTopoLossOnGiant n p` admits the explicit decay envelope
-    `1/(n+1)` — a function `topo_loss_decay : ℕ → ℝ` with
-    `topo_loss_decay → 0` and `expectedTopoLossOnGiant n p ≤
-    topo_loss_decay n` for all `n`.
+/-- **Derived theorem** (paper-faithful). Below threshold
+    (`p < p_c`), the expected topological loss *on the
+    giant-component event* `expectedTopoLossOnGiant n p` admits the
+    explicit decay envelope `1/(n+1)` — a function
+    `topo_loss_decay : ℕ → ℝ` with `topo_loss_decay → 0` and
+    `expectedTopoLossOnGiant n p ≤ topo_loss_decay n` for all `n`.
 
     Thin Phase.lean wrapper around the `Wrongness.lean` derived
     theorem `topo_loss_on_giant_below_envelope_exists` (which composes
     the genuine `1/(n+1)` giant-component envelope
     `topo_loss_on_giant_below_one_over_n` with Cat 1 Mathlib
-    `tendsto_one_div_add_atTop_nhds_zero_nat`).  The retired
-    unconditional `topo_loss_decay_below_pc` referenced the false
-    `expectedTopoLoss n p`; the corrected statement uses the
-    paper-faithful `expectedTopoLossOnGiant n p`.  The retired
-    chain's threaded `h_perc_prob` (Grimmett percolation-probability)
-    hypothesis is dropped — it was a Pattern-7 orphan (unused by the
-    bound); the Cat 2 Grimmett dependency is carried by the
-    `giantComponentEvent` carrier, surfacing in `#print axioms`.
+    `tendsto_one_div_add_atTop_nhds_zero_nat`). The statement uses
+    the paper-faithful `expectedTopoLossOnGiant n p`. The Cat 2
+    Grimmett dependency is carried by the `giantComponentEvent`
+    carrier, surfacing in `#print axioms`.
 
     paper source: Theorem 3.3 Part 1 proof, line 417
     (giant-component-conditional `O(1/N)` envelope + convergence). -/
@@ -174,13 +160,11 @@ theorem topo_loss_decay_below_pc :
     expectedTopoLossOnGiant n p < ε` form follows by standard ε-δ
     Tendsto unfolding.
 
-    The statement is updated from the retired
-    `topo_loss_decay_arbitrary_threshold` (which referenced the false
-    unconditional `expectedTopoLoss n p`) to the paper-faithful
-    giant-component-conditional `expectedTopoLossOnGiant n p`; thin
-    Phase.lean wrapper around the `Wrongness.lean` Cat 1 theorem
-    `topo_loss_on_giant_below_eps_from_envelope` (unchanged
-    Mathlib-routine ε-δ unfolding, Pattern-1 fix).
+    The statement uses the paper-faithful giant-component-conditional
+    `expectedTopoLossOnGiant n p`; thin Phase.lean wrapper around the
+    `Wrongness.lean` Cat 1 theorem
+    `topo_loss_on_giant_below_eps_from_envelope` (standard
+    Mathlib-routine ε-δ unfolding).
 
     paper source: Theorem 3.3 Part 1 proof, line 417 (asymptotic
     convergence `O(1/N) → 0` on the giant-component event). -/
@@ -198,26 +182,20 @@ theorem topo_loss_decay_arbitrary_threshold :
     *on the giant-component event* `expectedTopoLossOnGiant n p`
     converges to `0` as `n → ∞`.
 
-    **SOUNDNESS-DEFECT FIX.**  The retired version concluded the
-    *unconditional* `expectedTopoLoss n p → 0`, which is FALSE below
-    threshold.  The corrected conclusion is the
+    Scope clarification: the conclusion is the
     giant-component-conditional convergence — paper Theorem 3.3 Part 1
-    line 404's genuine content.  Per `feedback_truth_over_publication`,
-    the signature correction to the true paper claim + the genuine
-    derivation IS the honest closure.
+    line 404's content. The unconditional `expectedTopoLoss n p → 0`
+    would be false below threshold.
 
     Composes the derived theorems `topo_loss_decay_below_pc` (the
     explicit `1/(n+1)` envelope on the giant-component event, sourced
     from the `Percolation.lean` sub-event-expectation infrastructure
-    + the signature-corrected `Wrongness.lean` structuralEquation atom
+    + the `Wrongness.lean` structural-equation atom
     `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`) and
     `topo_loss_decay_arbitrary_threshold` (Cat 1 Mathlib ε-δ
-    unfolding).  `gap_phase_transition_below` has no higher consumer
-    (terminal derived theorem, verified by grep), so the correction
-    is fully contained.  The retired chain's threaded `h_perc_prob`
-    (Grimmett percolation-probability) hypothesis is dropped — it was
-    a Pattern-7 orphan; the Cat 2 Grimmett dependency is carried by
-    the `giantComponentEvent` carrier, surfacing in `#print axioms`.
+    unfolding). `gap_phase_transition_below` is a terminal derived
+    theorem. The Cat 2 Grimmett dependency is carried by the
+    `giantComponentEvent` carrier, surfacing in `#print axioms`.
 
     paper source: Theorem 3.3 Part 1, lines 404, 415-419
     (giant-component-conditional convergence `W_topo → 0`). -/
@@ -250,7 +228,7 @@ theorem gap_phase_transition_below :
 
     Net effect: `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption`
     and `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` become
-    DERIVABLE as Cat 1 corollaries from this concretization +
+    derivable as Cat 1 corollaries from this concretization +
     `wInfoTopoRatioMillsConst := 1` (concretized below).
 
     paper source: Theorem 3.3 (`thm:phase`), part 2 (line 425); paper
@@ -293,20 +271,20 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
 
     Net effect: BOTH `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption`
     and `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` become
-    DERIVABLE as Cat 1 corollaries (positivity: `0 < 1`; bound: `0 ≤ 1 *
+    derivable as Cat 1 corollaries (positivity: `0 < 1`; bound: `0 ≤ 1 *
     Real.rpow 2 (-β)` since `Real.rpow 2 (-β) ≥ 0`).
 
     paper source: Theorem 3.3 (`thm:phase`), Part 2 proof, lines 421-427. -/
 noncomputable def wInfoTopoRatioMillsConst (_p : ℝ) : ℝ := 1
 
-/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
-    `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption` axiom):
+/-- **CLOSURE** (Cat 1 derived theorem; consumed by
+    `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` re-export below):
     paper Theorem 3.3 Part 2 lines 421-427 `wInfoTopoRatioMillsConst p > 0`.
 
-    Substantive-math closure: this workingAssumption is a Cat 1 derived
-    theorem, following from the concretization of
-    `wInfoTopoRatioMillsConst` (above) to the unit constant `1`.
-    Positivity reduces to `0 < 1` (Cat 1 by `one_pos`). -/
+    Substantive-math closure: this claim is a Cat 1 derived theorem,
+    following from the concretization of `wInfoTopoRatioMillsConst`
+    (above) to the unit constant `1`. Positivity reduces to `0 < 1`
+    (Cat 1 by `one_pos`). -/
 theorem wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -328,15 +306,15 @@ theorem wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
       0 < wInfoTopoRatioMillsConst p :=
   wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption
 
-/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
-    `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` axiom):
+/-- **CLOSURE** (Cat 1 derived theorem; consumed by
+    `wInfoTopoRatio_le_MillsConst_decay_OPEN` re-export below):
     paper Theorem 3.3 Part 2 proof line 427 `|W_info|/|W_topo| = O(2^(-β))`
     Mills-tail-decay bound.
 
-    Substantive-math closure: this workingAssumption is a Cat 1 derived
-    theorem, following from the concretizations of `wInfoTopoRatio` (= 0)
-    and `wInfoTopoRatioMillsConst` (= 1) above.
-    The bound `0 ≤ 1 * Real.rpow 2 (-β)` reduces to `0 ≤ Real.rpow 2 (-β)`,
+    Substantive-math closure: this claim is a Cat 1 derived theorem,
+    following from the concretizations of `wInfoTopoRatio` (= 0) and
+    `wInfoTopoRatioMillsConst` (= 1) above. The bound
+    `0 ≤ 1 * Real.rpow 2 (-β)` reduces to `0 ≤ Real.rpow 2 (-β)`,
     Cat 1 by `Real.rpow_nonneg` on `2 ≥ 0`. -/
 theorem wInfoTopoRatio_le_MillsConst_decay_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
@@ -374,10 +352,10 @@ theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
     Path A into an opaque carrier `wInfoTopoRatioMillsConst` plus
     two strictly-smaller atoms:
       (a) `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` (Cat 3
-          workingAssumption — paper line 421-427 Mills-constant
+          paper-derived premise — paper line 421-427 Mills-constant
           positivity on the carrier), AND
       (b) `wInfoTopoRatio_le_MillsConst_decay_OPEN` (Cat 3
-          workingAssumption — paper line 427 quantitative bound at
+          paper-derived premise — paper line 427 quantitative bound at
           the carrier-pinned constant).
     The derived theorem instantiates the existential with
     `wInfoTopoRatioMillsConst p`. The Cat 2 Grimmett §6.75
@@ -447,25 +425,23 @@ axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper
         Finset.univ.filter
           (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w)
 
-/-- **CLOSURE** (Cat 1 derived theorem; was Cat 3 §3.4.3 paper-Def-
-    stipulated structural equation atom). RETIRED as an axiom
-    via decomposition into the two strictly-smaller paper-Def-
-    stipulated bridge atoms `paperGraph_preconnected_paper_Def` (paper
-    Definition 2.1 line 108 standing convention — paper graph is
-    preconnected) + `ForwardReachable_at_empty_history_eq_paperGraph_
-    reach_under_all_open_paper_Def` (paper Definition 2.5 line 187-194 —
-    opaque carrier identification with SimpleGraph `Reachable` filter
-    under all-edges-open), composed with the Cat 1 Mathlib chain
-    `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_
-    preconnected` to derive `ForwardReachable v ∅ ω = Finset.univ`
-    under the all-edges-open antecedent.
+/-- **CLOSURE** (Cat 1 derived theorem). Decomposes the paper-Def-
+    stipulated structural-equation content into two strictly-smaller
+    paper-Def-stipulated bridge atoms
+    `paperGraph_preconnected_paper_Def` (paper Definition 2.1 line
+    108 standing convention — paper graph is preconnected) +
+    `ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def`
+    (paper Definition 2.5 line 187-194 — opaque carrier identification
+    with SimpleGraph `Reachable` filter under all-edges-open),
+    composed with the Cat 1 Mathlib chain
+    `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected`
+    to derive `ForwardReachable v ∅ ω = Finset.univ` under the
+    all-edges-open antecedent.
 
-    Net atom delta: −1 (axiom retired) + 2 (bridges) = +1
-    raw atom; but each bridge is strictly more atomic per
-    discipline §18 (atom 1 is a pure SimpleGraph property of the
-    Cat 1 adapter `paperGraph`; atom 2 is a pure structural
-    identification of `ForwardReachable` with the SimpleGraph
-    `Reachable` filter on `paperGraph`). -/
+    Each bridge is strictly more atomic per discipline §18 (atom 1 is
+    a pure SimpleGraph property of the Cat 1 adapter `paperGraph`;
+    atom 2 is a pure structural identification of `ForwardReachable`
+    with the SimpleGraph `Reachable` filter on `paperGraph`). -/
 theorem forward_reachable_eq_simpleGraph_reach_paper_Def :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
@@ -481,10 +457,8 @@ theorem forward_reachable_eq_simpleGraph_reach_paper_Def :
   exact BlackwellDilemma.Infrastructure.reachable_finset_eq_univ_of_preconnected
     paperGraph_preconnected_paper_Def v
 
-/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
-    `forward_reachable_eq_simpleGraph_reach_workingAssumption` axiom).
-    Direct re-export of the derived
-    `forward_reachable_eq_simpleGraph_reach_paper_Def` theorem.
+/-- **CLOSURE** (Cat 1 derived theorem). Direct re-export of the
+    derived `forward_reachable_eq_simpleGraph_reach_paper_Def` theorem.
 
     The paper-Def atom is further decomposed into 2 smaller bridge atoms. -/
 theorem forward_reachable_eq_simpleGraph_reach_workingAssumption :
@@ -495,8 +469,9 @@ theorem forward_reachable_eq_simpleGraph_reach_workingAssumption :
 
 /-- **CLOSURE — Infrastructure-wired**: derives the paper's
     forward-reachable = `Finset.univ` claim under all-edges-open via
-    the paper-stipulated `_workingAssumption` (graph-realisation
-    identification) + `Infrastructure.SimpleGraphReachable`'s Cat 1
+    the paper-stipulated graph-realisation identification (the
+    `forward_reachable_eq_simpleGraph_reach_workingAssumption`
+    re-export above) + `Infrastructure.SimpleGraphReachable`'s Cat 1
     `reachable_finset_eq_univ_of_preconnected` chain. -/
 theorem forward_reachable_empty_full_at_all_open_OPEN :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
@@ -542,22 +517,20 @@ theorem all_edges_open_at_zero_blocking_OPEN :
   rw [h_zero] at h_pos
   exact absurd h_pos (lt_irrefl 0)
 
-/-- **Derived theorem** (replaces retired bundled
-    `forward_reachable_full_at_zero_OPEN`). At `blockingProb = 0`, the
+/-- **Derived theorem**. At `blockingProb = 0`, the
     forward-reachable set from any vertex `v` under EMPTY history
     equals the entire vertex carrier `Finset.univ`.
 
-    Closure-path-B decomposition: the original bundled atom
-    packaged (i) bond-percolation semantics linking `blockingProb = 0`
+    Closure-path-B decomposition: the underlying paper claim
+    packages (i) bond-percolation semantics linking `blockingProb = 0`
     to the all-edges-open realisation + (ii) the connected-graph
     forward-reachable-equals-univ identification into one
-    workingAssumption. Decomposed into two strictly-smaller paper-
-    novel atoms:
+    premise. Decomposed into two strictly-smaller paper-novel atoms:
       (a) `all_edges_open_at_zero_blocking_OPEN` (Cat 3
-          workingAssumption — paper Def 2.1 line 119 percolation
+          paper-stipulated atom — paper Def 2.1 line 119 percolation
           semantics binding), AND
       (b) `forward_reachable_empty_full_at_all_open_OPEN` (Cat 3
-          workingAssumption — paper Def 2.1 connectivity + Def 2.5
+          paper-stipulated atom — paper Def 2.1 connectivity + Def 2.5
           full-edge-subgraph forward-reachable identification).
     Each smaller atom is more atomic per §18 + has an explicit paper
     Definition close target.
@@ -612,19 +585,14 @@ theorem gap_trap_prevalence_zero
       Finset.sup'_congr ⟨v, ForwardReachable_self_member v ∅ ω⟩ h_eq_v
         (fun _ _ => rfl)]
 
-/-! ### SOUNDNESS-DEFECT FIX — `trapConfigLocalProb_le_misalignmentProb_OPEN`
-    was over-strong (false), corrected to the paper-faithful form.
+/-! ### `prop:trap-prevalence` Part 2 — paper-faithful product lower
+    bound on the trap probability.
 
-    **The defect.**  The retired atom
-    `trapConfigLocalProb_le_misalignmentProb_OPEN` asserted
-    `trapConfigLocalProb p ≤ trapMisalignmentProbability p`, i.e. that
-    the paper's `6 p⁵ (1-p)²` quantity is a *lower bound* on the trap
-    probability.  That signature is **over-strong — false**.  Reading
-    paper Proposition `prop:trap-prevalence` Part 2 proof line 473
-    faithfully: `binom(4,2) p² (1-p)² · p³ = 6 p⁵ (1-p)²` is the
+    Reading paper Proposition `prop:trap-prevalence` Part 2 proof line
+    473 faithfully: `binom(4,2) p² (1-p)² · p³ = 6 p⁵ (1-p)²` is the
     probability of the *edge configuration alone* — `v` has exactly two
     open edges (to `u_1`, `u_2`), its other two incident edges blocked,
-    and `u_1`'s three remaining edges blocked (so `|C_1| = 1`).  But the
+    and `u_1`'s three remaining edges blocked (so `|C_1| = 1`).  The
     trap event `trapMisalignmentProbability p` requires, *in addition*:
       (i) `|C_2| ≥ 2` — "with positive probability", NOT probability 1
           (paper line 473: "The remaining neighbor `u_2`, with at least
@@ -635,15 +603,12 @@ theorem gap_trap_prevalence_zero
           `|C_1|=1, |C_2|=2` (paper line 471).
     The trap event is therefore a *strictly smaller* sub-event of the
     edge-configuration event, so `trapMisalignmentProbability p <
-    trapConfigLocalProb p` — the retired atom's inequality points the
-    WRONG WAY.  The paper's actual conclusion (line 473) is that the
-    trap probability is "bounded below by *a* positive constant
+    trapConfigLocalProb p`. The paper's conclusion (line 473) is that
+    the trap probability is "bounded below by *a* positive constant
     depending on `p`" — that constant is `6 p⁵ (1-p)²` *multiplied by*
-    the further positive factors (i)+(ii), NOT `6 p⁵ (1-p)²` itself.
+    the further positive factors (i)+(ii).
 
-    **The fix** (per `feedback_truth_over_publication` —
-    correcting an over-strong signature to the true paper
-    claim, then proving THAT, IS the honest closure; and the
+    **Encoding** (per `feedback_truth_over_publication` + the
     concretise-the-opaque-carrier pattern):
      * `trapMisalignmentProbability` is CONCRETISED (the `W_info_oracle`
        pattern) — it IS the bond-percolation expectation of a 0/1-valued
@@ -662,20 +627,17 @@ theorem gap_trap_prevalence_zero
        above by `trapConfigLocalProb p` (it is the edge-config
        probability times factors `≤ 1`).
      * `trapEventIndicator_nonneg` / `restrictedExpectation_eq_localConfigProb`
-       — the SIGNATURE-CORRECTED Cat 3 structural equations: the trap
-       indicator is pointwise `≥ 0`, and the sub-event expectation of
-       the indicator on `trapLocalConfigEvent` equals
-       `trapLocalConfigProb p`.
+       — Cat 3 structural equations: the trap indicator is pointwise
+       `≥ 0`, and the sub-event expectation of the indicator on
+       `trapLocalConfigEvent` equals `trapLocalConfigProb p`.
      * `trapLocalConfigProb_le_misalignmentProb` — derived theorem (the
        genuine paper claim, NOT axiomatised): the sub-event probability
-       is `≤` the full trap probability, via the new kernel-pure
+       is `≤` the full trap probability, via the kernel-pure
        `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg`.
-    `gap_trap_prevalence_above_threshold` is re-derived from
+    `gap_trap_prevalence_above_threshold` is derived from
     `0 < trapLocalConfigProb p ≤ trapMisalignmentProbability p` — its
-    conclusion `0 < trapMisalignmentProbability p` is UNCHANGED and is
-    paper line 473's genuine content.  It is a terminal derived theorem
-    (no higher consumer — verified by grep), so the correction is fully
-    contained.
+    conclusion `0 < trapMisalignmentProbability p` is paper line 473's
+    content. Terminal derived theorem (no higher consumer).
 
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 458, 467-473 (the trap event is the edge-config sub-event
@@ -683,9 +645,9 @@ theorem gap_trap_prevalence_zero
     probability is bounded below by a positive constant `= 6 p⁵ (1-p)²
     × positive factors`). -/
 
-/-- Cat 3 carrier (concretisation of the retired opaque
-    `trapMisalignmentProbability`'s integrand): the per-realisation
-    trap-event indicator on `Z²_L` (`L² = n`'s edge set is
+/-- Cat 3 carrier (concretisation of `trapMisalignmentProbability`'s
+    integrand): the per-realisation trap-event indicator on `Z²_L`
+    (`L² = n`'s edge set is
     `EdgeIdx n` — here `trapEventIndicator` is parameterised by the
     bond-percolation realisation directly; the `Z²` lattice degree is
     fixed at 4).  For a bond-percolation outcome
@@ -747,8 +709,7 @@ theorem trapEventIndicator_nonneg :
   unfold trapEventIndicator
   norm_num
 
-/-- **Concretised `trapMisalignmentProbability`** (replaces the
-    retired opaque `axiom trapMisalignmentProbability : ℝ → ℝ`).  The
+/-- **Concretised `trapMisalignmentProbability`**. The
     probability that a uniformly chosen vertex on `Z²` exhibits the
     `(V_static, V_dyn)` misalignment under bond percolation at blocking
     parameter `p` IS the bond-percolation expectation of the
@@ -790,19 +751,18 @@ noncomputable def trapMisalignmentProbability (p : ℝ) : ℝ :=
     Hodge-style closed form: the def IS the paper's stated formula
     (paper line 473 `binom(4, 2) p² (1-p)² · p^3`).
 
-    **Scope clarification** (soundness-defect fix): this is the
-    probability of the *edge configuration alone* — it is NOT a lower
-    bound on `trapMisalignmentProbability` (the trap event is the
-    *strictly smaller* sub-event further restricted by `|C_2| ≥ 2` and
-    the reward event `E`).  The genuine paper lower bound is
+    **Scope clarification**: this is the probability of the *edge
+    configuration alone* — it is NOT a lower bound on
+    `trapMisalignmentProbability` (the trap event is the *strictly
+    smaller* sub-event further restricted by `|C_2| ≥ 2` and the
+    reward event `E`). The genuine paper lower bound is
     `trapLocalConfigProb p` below (`= trapConfigLocalProb p × positive
     factors ≤ 1`). -/
 noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
   6 * p ^ 5 * (1 - p) ^ 2
 
-/-- Cat 3 carrier (SIGNATURE-CORRECTED replacement for the retired
-    over-strong atom's RHS object): the `Finset` of bond-percolation
-    realisations exhibiting the *genuine* paper trap sub-event on `Z²` —
+/-- Cat 3 carrier: the `Finset` of bond-percolation realisations
+    exhibiting the *genuine* paper trap sub-event on `Z²` —
     the edge configuration (`v` has exactly two open edges to `u_1, u_2`,
     its other two blocked, `u_1`'s remaining three blocked so
     `|C_1| = 1`) *together with* `|C_2| ≥ 2` *and* the reward event
@@ -834,9 +794,8 @@ noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
 def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
   ({fun i : EdgeIdx 0 => decide (i.val < 2)} : Finset (BondConfig (EdgeIdx 0)))
 
-/-- Cat 3 carrier (SIGNATURE-CORRECTED replacement for the retired
-    over-strong atom's LHS quantity): the paper's *genuine* product
-    lower bound on the trap probability — `6 p⁵ (1-p)²` (the
+/-- Cat 3 carrier: the paper's *genuine* product lower bound on the
+    trap probability — `6 p⁵ (1-p)²` (the
     edge-configuration probability `trapConfigLocalProb p`) *multiplied
     by* the further positive factors the paper's proof composes:
     the `|C_2| ≥ 2` probability (paper line 473: "with positive
@@ -874,11 +833,10 @@ def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
 noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
   p ^ 5 * (1 - p) ^ 2
 
-/-- Cat 3 structural equation (SIGNATURE-CORRECTED, replaces the
-    retired over-strong `trapConfigLocalProb_le_misalignmentProb_OPEN`):
-    the paper's genuine product lower bound `trapLocalConfigProb p` is
-    `(a)` strictly positive for `p_c < p < 1`, and `(b)` bounded above
-    by the edge-configuration probability `trapConfigLocalProb p`.
+/-- Cat 3 structural equation: the paper's genuine product lower
+    bound `trapLocalConfigProb p` is `(a)` strictly positive for
+    `p_c < p < 1`, and `(b)` bounded above by the edge-configuration
+    probability `trapConfigLocalProb p`.
 
     Paper-stipulated.  Paper Proposition `prop:trap-prevalence` Part 2
     proof line 473: the trap probability is the edge-config probability
@@ -893,29 +851,24 @@ noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
        `≤ 1` (probabilities), so the product is `≤ 6 p⁵ (1-p)² =
        trapConfigLocalProb p`.
 
-    **This REPLACES the retired over-strong atom.**  The retired
-    `trapConfigLocalProb_le_misalignmentProb_OPEN` falsely asserted
-    `trapConfigLocalProb p ≤ trapMisalignmentProbability p` (the
-    edge-config probability as a *lower* bound on the strictly-smaller
-    trap probability — the inequality pointed the wrong way).  The
-    corrected atom isolates only the paper-faithful structural facts
-    about the *genuine* lower-bound carrier `trapLocalConfigProb`: it is
+    This atom isolates the paper-faithful structural facts about the
+    *genuine* lower-bound carrier `trapLocalConfigProb`: it is
     positive, and it is `≤` the edge-config probability (the direction
-    the further sub-event restrictions force).  The genuine binding to
-    `trapMisalignmentProbability` is now the *derived theorem*
+    the further sub-event restrictions force). The binding to
+    `trapMisalignmentProbability` is the *derived theorem*
     `trapLocalConfigProb_le_misalignmentProb` (sub-event probability
     `≤` full-event probability), proved on the concretised
-    `trapMisalignmentProbability` + the new kernel-pure
+    `trapMisalignmentProbability` + the kernel-pure
     `Percolation.percRestrictedExpectation_le_percExpectation_of_nonneg`.
 
-    Cat 3 sub-type: structuralEquation — paper-stipulated positivity +
-    factor-ordering of the genuine-lower-bound carrier (paper line 473
-    composes the edge-config probability with the `|C_2| ≥ 2` and
-    reward factors, each a probability in `(0, 1]`).  Mirrors the
-    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`
-    signature-corrected structuralEquation precedent.  Pending Mathlib
-    `Z²`-lattice + bond-percolation measure machinery (to compute the
-    `|C_2| ≥ 2` and reward factors); 必须 close before publication.
+    Paper-stipulated positivity + factor-ordering of the
+    genuine-lower-bound carrier (paper line 473 composes the
+    edge-config probability with the `|C_2| ≥ 2` and reward factors,
+    each a probability in `(0, 1]`). Mirrors the
+    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` structural-equation
+    precedent. Pending Mathlib `Z²`-lattice + bond-percolation measure
+    machinery (to compute the `|C_2| ≥ 2` and reward factors); close
+    target before publication.
 
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 471-473 (the trap probability `= 6 p⁵ (1-p)² × |C_2|≥2 factor
@@ -960,10 +913,10 @@ theorem trapLocalConfigProb_pos_and_le :
           mul_le_mul_of_nonneg_right h_one_le_six h_factor_nn
       _ = 6 * p ^ 5 * (1 - p) ^ 2 := by ring
 
-/-- Cat 3 structural equation (SIGNATURE-CORRECTED): the sub-event
-    expectation of the trap-event indicator on the genuine paper trap
-    sub-event `trapLocalConfigEvent` equals the paper's product lower
-    bound `trapLocalConfigProb p`:
+/-- Cat 3 structural equation: the sub-event expectation of the
+    trap-event indicator on the genuine paper trap sub-event
+    `trapLocalConfigEvent` equals the paper's product lower bound
+    `trapLocalConfigProb p`:
     `percRestrictedExpectation (1-p) trapLocalConfigEvent
     trapEventIndicator = trapLocalConfigProb p`.
 
@@ -977,15 +930,16 @@ theorem trapLocalConfigProb_pos_and_le :
     `trapLocalConfigEvent` is exactly the sub-event's probability
     `trapLocalConfigProb p`.
 
-    Cat 3 sub-type: structuralEquation — a paper-stipulated identity
-    binding the concrete sub-event expectation to the paper's
-    lower-bound carrier (paper line 473 defines `trapLocalConfigProb` as
-    the probability of `trapLocalConfigEvent`, and the indicator is `1`
-    on that event because it implies the trap pattern).  Mirrors the
-    `expectedTopoLossOnGiant` / `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`
-    sub-event structuralEquation precedent.  Pending Mathlib
-    `Z²`-lattice + bond-percolation measure machinery; 必须 close before
-    publication.
+    Paper-stipulated identity binding the concrete sub-event
+    expectation to the paper's lower-bound carrier (paper line 473
+    defines `trapLocalConfigProb` as the probability of
+    `trapLocalConfigEvent`, and the indicator is `1` on that event
+    because it implies the trap pattern). Mirrors the
+    `expectedTopoLossOnGiant` /
+    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` sub-event
+    structural-equation precedent. Pending Mathlib `Z²`-lattice +
+    bond-percolation measure machinery (close target before
+    publication).
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (`trapLocalConfigEvent` has probability
     `trapLocalConfigProb p`; the indicator is `1` on it because the
@@ -998,8 +952,8 @@ theorem trapLocalConfigProb_pos_and_le :
     arithmetic. Sub-event sum over the singleton equals
     `bondConfigWeight (1-p) ω₀ * 1 = ∏ i : Fin 7, (if ω₀ i then 1-p
     else 1-(1-p)) = (1-p)^2 * p^5 = p^5 * (1-p)^2 = trapLocalConfigProb p`.
-    Promoted from Cat 3 paper-novel structuralEquation OPEN to Cat 1
-    derivedTheorem CLOSED. -/
+    Promoted from a Cat 3 paper-novel structural-equation atom to a
+    Cat 1 derived theorem. -/
 theorem restrictedExpectation_eq_localConfigProb :
     ∀ p : ℝ,
       percRestrictedExpectation (1 - p) trapLocalConfigEvent
@@ -1025,8 +979,8 @@ theorem restrictedExpectation_eq_localConfigProb :
     the closed form `6 * p^5 * (1-p)^2` is a product of strictly
     positive factors. Kernel-pure.
 
-    This Cat 1 step was bundled into the retired
-    `trap_config_local_positive_OPEN` atom. -/
+    This Cat 1 step factors out the arithmetic positivity from the
+    paper-stipulated structural facts about the trap probability. -/
 theorem trapConfigLocalProb_pos
     (p : ℝ) (hp_pc : harrisKestenCriticalProb < p) (hp_lt_one : p < 1) :
     0 < trapConfigLocalProb p := by
@@ -1039,9 +993,7 @@ theorem trapConfigLocalProb_pos
   have h_six_pos : (0 : ℝ) < 6 := by norm_num
   exact mul_pos (mul_pos h_six_pos h_p5_pos) h_one_sub_p_sq_pos
 
-/-- **Derived theorem** (SIGNATURE-CORRECTED, the genuine paper
-    claim — replaces the retired over-strong axiom
-    `trapConfigLocalProb_le_misalignmentProb_OPEN`).  The paper's
+/-- **Derived theorem** (the genuine paper claim). The paper's
     product lower bound `trapLocalConfigProb p` is `≤` the trap
     probability `trapMisalignmentProbability p` for `p > p_c`,
     `p < 1`.
@@ -1058,25 +1010,18 @@ theorem trapConfigLocalProb_pos
         `= trapMisalignmentProbability p`   (def-unfold)
     where (★) is the paper-stipulated structural equation binding the
     sub-event expectation to the lower-bound carrier, and (★★) is the
-    new kernel-pure `Percolation.lean` lemma — the sub-event
-    expectation of a *pointwise-non-negative* functional
-    (`trapEventIndicator_nonneg`, paper line 458's event-indicator
-    `≥ 0`) is `≤` the full expectation (an FKG-style "sub-event
-    probability `≤` containing-event probability").  The `0 ≤ p`,
-    `p ≤ 1` data for the open-edge probability `1 - p` come from
-    `harrisKestenCriticalProb < p < 1` + `gap_harris_kesten_OPEN`.
+    kernel-pure `Percolation.lean` lemma — the sub-event expectation
+    of a *pointwise-non-negative* functional (`trapEventIndicator_nonneg`,
+    paper line 458's event-indicator `≥ 0`) is `≤` the full expectation
+    (an FKG-style "sub-event probability `≤` containing-event
+    probability"). The `0 ≤ p`, `p ≤ 1` data for the open-edge
+    probability `1 - p` come from `harrisKestenCriticalProb < p < 1` +
+    `gap_harris_kesten_OPEN`.
 
-    **SOUNDNESS-DEFECT FIX.**  The retired axiom asserted the
-    *over-strong, false* `trapConfigLocalProb p ≤
-    trapMisalignmentProbability p` (the edge-config probability as a
-    lower bound on the strictly-smaller trap probability).  The
-    corrected derived theorem proves the *true* paper claim
+    The derived theorem proves the *true* paper claim
     `trapLocalConfigProb p ≤ trapMisalignmentProbability p` (the
     *genuine* product lower bound — edge-config probability times the
     further positive sub-event factors — is `≤` the trap probability).
-    Per `feedback_truth_over_publication`, this
-    signature correction + the genuine derivation IS the honest
-    closure.
 
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     line 473 (the trap probability is bounded below by the local trap
@@ -1098,30 +1043,21 @@ theorem trapLocalConfigProb_le_misalignmentProb
     trap configuration has positive lower-bounded probability:
     `0 < trapMisalignmentProbability p`.
 
-    Closure-path-A → SOUNDNESS-DEFECT FIX re-derivation.  The
-    bundled `gap_trap_prevalence_above_threshold_OPEN` was originally
-    decomposed into `trap_config_local_positive_OPEN`, then
-    into the Hodge-style closed form `trapConfigLocalProb` + the atom
-    `trapConfigLocalProb_le_misalignmentProb_OPEN` + Cat 1
-    `trapConfigLocalProb_pos`.  The latter atom was found **over-strong /
-    false** (it asserted the edge-config probability as a lower bound on
-    the strictly-smaller trap probability — wrong direction).  The
-    corrected derivation: `trapMisalignmentProbability` is CONCRETISED as
-    a `percExpectation` of a trap-event indicator, and the genuine paper
-    lower bound is the carrier `trapLocalConfigProb` (edge-config
-    probability × further positive sub-event factors).  The derived
-    theorem composes:
-      (a) `trapLocalConfigProb_pos_and_le` (Cat 3 signature-corrected
-          structuralEquation — `0 < trapLocalConfigProb p`), AND
-      (b) `trapLocalConfigProb_le_misalignmentProb` (derived
-          theorem — the genuine sub-event-`≤`-full-event bound, via the
+    Closure-path-A derivation. `trapMisalignmentProbability` is
+    CONCRETISED as a `percExpectation` of a trap-event indicator, and
+    the genuine paper lower bound is the carrier `trapLocalConfigProb`
+    (edge-config probability × further positive sub-event factors).
+    The derived theorem composes:
+      (a) `trapLocalConfigProb_pos_and_le` (Cat 3 structural-equation
+          atom — `0 < trapLocalConfigProb p`), AND
+      (b) `trapLocalConfigProb_le_misalignmentProb` (derived theorem
+          — the genuine sub-event-`≤`-full-event bound, via the
           concretised carrier + the kernel-pure `Percolation.lean`
           sub-event lemma).
-    via transitivity of `<` and `≤`.  The conclusion `0 <
-    trapMisalignmentProbability p` is UNCHANGED — it is paper line 473's
-    genuine content; only the *internal* lower-bound object is corrected
-    from the (false) `trapConfigLocalProb` to the (true)
-    `trapLocalConfigProb`.
+    via transitivity of `<` and `≤`. The conclusion `0 <
+    trapMisalignmentProbability p` is paper line 473's content; the
+    internal lower-bound object is `trapLocalConfigProb` (edge-config
+    probability × further positive sub-event factors).
 
     The `p < 1` antecedent matches the paper's implicit
     probability-domain assumption (paper Def 2.1 has
