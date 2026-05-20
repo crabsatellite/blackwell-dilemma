@@ -1488,8 +1488,7 @@ theorem L_below_limit_at_some_beta_OPEN :
     `L(β*(p), p) < L(∞, p) = 0.4`.
 
     Derived theorem composing
-    `L_below_limit_at_some_beta_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
+    `L_below_limit_at_some_beta_OPEN` .
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814. -/
@@ -1499,14 +1498,14 @@ theorem gap_three_regime_reversal_existence :
         L β_star_p p < (4/10 : ℝ) :=
   L_below_limit_at_some_beta_OPEN
 
-/-- **Bridge (a)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+/-- **Bridge (a)** Cat 3 paper-Def-stipulated SMALLER bridge
     atom: existence of an interior minimiser of `L β p` over `β > 0` for
     `p ∈ [0, p_1)`. Paper Proposition `prop:three-regime-five-state`
     Regime (i) line 814 + proof line 825 STATE the unimodality of `L β p`
     on `(0, ∞)`; the existence-of-minimum sub-clause is the EXISTENCE-only
     component of the paper's unique-minimum claim.
 
-    Per discipline §18 atomic-decomposition pattern: smaller atoms +
+    Atomic-decomposition pattern: smaller atoms +
     Cat 1 lifting are preferable to larger atoms. The larger axiom
     (existence + uniqueness) is split into two strictly smaller
     paper-Def atoms: (a) interior-minimiser EXISTENCE (this atom), and
@@ -1514,14 +1513,14 @@ theorem gap_three_regime_reversal_existence :
     (`L_strict_unique_minimizer_paper_Def` below). The combined statement
     becomes a Cat 1 derived theorem composing the two.
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    Per paper-Def discipline (paper-stipulated structural fact about
     paper-novel opaque carrier in regime). 永不 close. -/
 axiom L_interior_minimizer_exists_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β_star_p p ≤ L β' p
 
-/-- **Bridge (b)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+/-- **Bridge (b)** Cat 3 paper-Def-stipulated SMALLER bridge
     atom: strict uniqueness of the minimiser of `L β p` over `β > 0` for
     `p ∈ [0, p_1)`. Paper line 825's transcendental two-term sign
     comparison `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·
@@ -1529,12 +1528,12 @@ axiom L_interior_minimizer_exists_paper_Def :
     convexity-like behaviour on the interior, which the paper invokes
     to conclude uniqueness of the interior minimiser.
 
-    Per discipline §18 atomic-decomposition pattern: this atom isolates
+    Atomic-decomposition pattern: this atom isolates
     the strict-uniqueness paper-stipulated content from the existence
     side, which is captured separately by
     `L_interior_minimizer_exists_paper_Def`.
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    Per paper-Def discipline (paper-stipulated structural fact about
     paper-novel opaque carrier in regime). 永不 close. -/
 axiom L_strict_unique_minimizer_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
@@ -1561,10 +1560,10 @@ axiom L_strict_unique_minimizer_paper_Def :
 
     Composed as a Cat 1 derived theorem from
     `L_interior_minimizer_exists_paper_Def` (existence) and
-    `L_strict_unique_minimizer_paper_Def` (strict uniqueness). Per
-    discipline §18 atomic-decomposition pattern: smaller atoms + Cat 1
-    lifting are preferable to larger atoms. Existence and uniqueness
-    are factored into separate paper-Def atoms. -/
+    `L_strict_unique_minimizer_paper_Def` (strict uniqueness).
+    Atomic-decomposition pattern: smaller atoms + Cat 1 lifting are
+    preferable to larger atoms. Existence and uniqueness are factored
+    into separate paper-Def atoms. -/
 theorem L_unimodal_in_regime_i_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
@@ -1597,8 +1596,7 @@ theorem L_unimodal_in_regime_i_OPEN :
   L_unimodal_in_regime_i_workingAssumption
 
 /-- **Regime (i) sub-claim — uniqueness of the interior minimum**
-    (derived theorem composing `L_unimodal_in_regime_i_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    (derived theorem composing `L_unimodal_in_regime_i_OPEN`).
     paper source: Regime (i), line 814 + proof line 825. -/
 theorem gap_three_regime_reversal_uniqueness :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
@@ -1670,8 +1668,7 @@ theorem L_nonmonotone_witnesses_OPEN :
 
 /-- **Regime (i) sub-claim — non-monotonicity of `L(·, p)` in `β`**
     (derived theorem composing
-    `L_nonmonotone_witnesses_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    `L_nonmonotone_witnesses_OPEN`).
     paper source: Regime (i), line 814 + proof at lines 821-825. -/
 theorem gap_three_regime_reversal_nonmonotone :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
@@ -1736,8 +1733,7 @@ theorem envelope_derivative_sign_in_p_OPEN :
 
 /-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`**
     (derived theorem composing
-    `envelope_derivative_sign_in_p_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    `envelope_derivative_sign_in_p_OPEN`).
     paper source: Regime (i), line 814 + proof at line 825. -/
 theorem gap_three_regime_reversal_overshoot_decreasing :
     ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
@@ -1879,7 +1875,7 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
 noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
   (4/10 : ℝ) - L (betaStarOfP p) p
 
-/-- **Bridge atom** (Cat 3 §3.4.3 paper-Def-stipulated structural
+/-- **Bridge atom** (Cat 3 paper-Def-stipulated structural
     equation atom): paper Proposition `prop:three-regime-five-state`
     Regime (i) proof line 825 STATES that the envelope value
     `L(β*(p), p) = 0.4 - overshootRegimeI p` is continuous in `p` on
@@ -1892,8 +1888,8 @@ noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
     `envelope_continuity_in_p_paper_Def` axiom (just stipulating
     `L(β*(p), p)` is continuous in `p`, equivalent to envelope continuity
     via the `0.4` constant). The envelope continuity follows by
-    Cat 1 arithmetic (`continuousOn_const.sub _`). Per discipline §3.4.3
-    (paper-Def-stipulated structural fact about composition of paper-novel
+    Cat 1 arithmetic (`continuousOn_const.sub _`). Paper-Def discipline
+    (paper-stipulated structural fact about composition of paper-novel
     objects). 永不 close.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
@@ -1908,9 +1904,9 @@ axiom L_at_betaStarOfP_continuousOn_paper_Def :
     argmin-stability) is isolated in the strictly smaller bridge
     atom; the envelope continuity is a Cat 1 derived theorem.
 
-    The bridge is strictly more atomic per discipline
-    §18 (single-step typed bridge; envelope continuity follows by Cat 1
-    arithmetic of `continuous - continuous = continuous`).
+    The bridge is strictly more atomic (single-step typed bridge;
+    envelope continuity follows by Cat 1 arithmetic of
+    `continuous - continuous = continuous`).
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 + proof line 825. -/
@@ -1935,8 +1931,7 @@ theorem envelope_continuity_in_p_OPEN :
   envelope_continuity_in_p_workingAssumption
 
 /-- **Regime (i) sub-claim — overshoot continuous in `p`**
-    (derived theorem composing `envelope_continuity_in_p_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    (derived theorem composing `envelope_continuity_in_p_OPEN`).
     paper source: Regime (i), line 814 + proof at line 825. -/
 theorem gap_three_regime_reversal_overshoot_continuous :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
@@ -2104,8 +2099,7 @@ theorem Tendsto_overshoot_at_p1_OPEN :
     h_lower_tendsto h_upper_tendsto h_ev_lower h_ev_upper
 
 /-- **Regime (i) sub-claim — overshoot vanishes at `p_1`**
-    (derived theorem composing `Tendsto_overshoot_at_p1_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    (derived theorem composing `Tendsto_overshoot_at_p1_OPEN`).
     paper source: Regime (i), line 814 + Figure caption line 846. -/
 theorem gap_three_regime_reversal_overshoot_vanishes_at_p1 :
     Filter.Tendsto overshootRegimeI
@@ -2403,8 +2397,7 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
 /- **Proposition `prop:threshold-five-state` (ii): κ-agent above
    `κ*` correctly ranks continuation values.**
 
-   NOTE: a bundled `axiom kappa_above_threshold_blackwell_recovery_OPEN`
-   is REPLACED below by a `structuralEquation` atom + a derived
+   NOTE: encoded below as a `structuralEquation` atom + a derived
    `theorem`. The Cat 2 dependency surfacing commentary is
    folded into the derived theorem's docstring: the Cat 2 axiom
    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is
@@ -2444,7 +2437,7 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
     the kernel carrier (mirrors the `wInfoOracleKernel_nonpos`
     precedent — paper stipulates the carrier's per-realisation
     behaviour).  Blackwell 1951/1953 = the Cat 2 conditional-
-    expectation comparison input.  永不 close per discipline §3.4.3.
+    expectation comparison input.  Paper-Def foundational atom (永不 close).
     paper source: Proposition `prop:threshold-five-state` (ii),
     line 862; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
 axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar :
@@ -2489,8 +2482,7 @@ theorem kappa_above_threshold_blackwell_recovery_OPEN
     β₁ β₂ hβ
 
 /-- **Proposition `prop:threshold-five-state` (ii)** (derived theorem
-    composing `kappa_above_threshold_blackwell_recovery_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    composing `kappa_above_threshold_blackwell_recovery_OPEN`).
     For κ above the cognitive threshold `κ*(p)`, the κ-agent's welfare
     is non-decreasing in β: the trap-induced reversal vanishes once
     cognitive depth restores correct continuation-value ranking.
@@ -2607,7 +2599,7 @@ theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
     Canonical-instance precedent — the at-threshold
     specialisation rather than the strictly-above-threshold version).
     Blackwell 1951/1953 = the Cat 2 conditional-expectation comparison
-    input.  永不 close per discipline §3.4.3.
+    input.  Paper-Def foundational atom (永不 close).
     paper source: Proposition `prop:threshold-five-state` (iii),
     line 863 ("the welfare function `W(β, κ*, 1)` is monotone");
     Blackwell 1951/1953 cited as the Cat 2 dependency. -/
@@ -2661,8 +2653,7 @@ theorem welfare_bounded_below_inflection_OPEN :
 
 /-- **Proposition `prop:threshold-five-state` (iii): smooth transition
     at `κ = κ*`** (derived theorem composing one atomic stipulation +
-    one derived theorem per `feedback_gap_ledger_in_lean4` §18
-    Manufactured-Recognition pattern). At the cognitive threshold the
+    one derived theorem). At the cognitive threshold the
     welfare curve has a finite positive inflection point
     (`inflection_at_kstar`, derived theorem from
     `interior_minimiser_existence_OPEN`) and the κ-agent's welfare at
@@ -2729,7 +2720,7 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
     Canonical-instance precedent).  Blackwell 1951/1953 = the Cat 2 conditional-expectation
     comparison input (the per-realisation Blackwell-conditional fact
     composes Blackwell 1951/1953 to derive the per-realisation
-    monotonicity).  永不 close per discipline §3.4.3.
+    monotonicity).  Paper-Def foundational atom (永不 close).
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
 axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
@@ -2780,8 +2771,7 @@ theorem bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
 
 /-- **Proposition `prop:bayesian-naive-five-state` (ii): reversal absent
     below threshold** (derived theorem composing
-    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
+    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`).
 
     For `p̂ < 2/3`, welfare is non-decreasing in β.
 
@@ -2798,12 +2788,12 @@ theorem gap_bayesian_naive_reversal_absent :
   bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
 
 /-- **Proposition `prop:bayesian-naive-five-state` (iii): reversal
-    appears above threshold** — §18 reversal-witness decomposition.
+    appears above threshold** — reversal-witness decomposition.
 
-    §18 reversal-witness decomposition: a single-atom
+    Reversal-witness decomposition: a single-atom
     `bayesian_naive_above_threshold_reversal_OPEN` (which would package the
     welfare-existential reversal as an opaque axiom) is decomposed
-    into a §3.4.3 paper-stipulated kernel-level reversal-witness
+    into a paper-stipulated kernel-level reversal-witness
     structural equation that the foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
     lifts to the welfare-level reversal claim. Paper line 957
@@ -2835,7 +2825,7 @@ axiom agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness :
     pattern).  For `p̂ ≥ 2/3`, the Bayesian-naive agent's
     welfare exhibits the same β-non-monotonicity as the greedy agent.
 
-    Closure composes (a) Cat 3 §3.4.3 paper-stipulated kernel
+    Closure composes (a) Cat 3 paper-stipulated kernel
     reversal-witness atom
     `agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness`
     + (b) foundation lemma

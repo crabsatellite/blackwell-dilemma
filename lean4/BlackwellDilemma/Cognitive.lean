@@ -160,7 +160,7 @@ noncomputable def alphaStar (κ _p : ℝ) : ℝ :=
     paper-faithful `kappaStar` `def` (paper line 493 inf-characterisation
     IS the carrier's defining identification) with kernel-level `rfl`.
 
-    Discipline §3.4.3 boundary check: paper Theorem 4.1 Part 3 line 493
+    Paper-Def discipline boundary check: paper Theorem 4.1 Part 3 line 493
     states `κ* = inf{κ > 0 : m(κ) ≥ 0}` as the carrier's defining
     inf-characterisation; on opaque carriers (where Mathlib lacks the
     posterior-V_dyn substrate), the identification becomes definitional
@@ -209,7 +209,7 @@ theorem kappaStar_def :
     `alphaStar` `def` (paper line 602 sup-characterisation IS the
     carrier's defining identification) with kernel-level `rfl`.
 
-    Discipline §3.4.3 boundary check: paper `prop:sentimental` proof
+    Paper-Def discipline boundary check: paper `prop:sentimental` proof
     line 602 STATES the sup-characterisation as the carrier's defining
     identification; on opaque carriers (where Mathlib lacks the
     bounded-convergence + Φ-tail integral substrate for the paper's
@@ -1178,7 +1178,7 @@ theorem gap_cognitive_threshold_part5 :
     a concrete carrier whose divergence at `p_c⁻` IS the Harris-Kesten
     universality lifted through the cognitive-percolation dominance
     ordering. The Cat 2 substance (universality) remains intact; only
-    the Cat 3 §3.4.3 stipulation about the cognitive-percolation
+    the Cat 3 stipulation about the cognitive-percolation
     ordering is discharged as a Cat 1 derived theorem via `csInf_le`
     on the new carrier.
 
@@ -1212,7 +1212,7 @@ noncomputable def harrisKestenScalingFunction (p : ℝ) : ℝ :=
     1/2`) lies beyond Mathlib's current bond-percolation
     infrastructure (GiantComponentMills + SLE/Cardy);
     the divergence at `p_c = 1/2` is encoded here as a Cat 2 axiom
-    per discipline §3.4.3. Substantive Cat 2 content
+    per paper-Def discipline. Substantive Cat 2 content
     awaiting Mathlib bond-percolation + Cardy + SLE infrastructure.
 
     paper source: Harris 1960 + Kesten 1980 percolation universality at
@@ -1460,7 +1460,7 @@ as the paper's own explicit closed-form products (Proposition
 `prop:supermodular` proof, lines 566-584), and the two positivity claims are
 derived THEOREMS. The remaining inputs are the paper's *individually-stated
 factor signs* — each one written explicitly in the paper proof — encoded as
-Cat 3 §3.4.3 structural-equation atoms (paper-Def-stipulated atomic content
+Cat 3 structural-equation atoms (paper-Def-stipulated atomic content
 on primitive derivative-sign carriers). The Mathlib-derivable factors
 (`φ(z) > 0`, `[1-z²] > 0` at `|z| < 1`) carry no axiom — they are proved
 in-theorem. -/
@@ -1487,7 +1487,7 @@ theorem stdNormalPDF_pos (z : ℝ) : 0 < stdNormalPDF z := by
     Real.sqrt_pos.mpr (by positivity)
   positivity
 
-/-- Cat 3 §3.4.3 `structuralEquation` factor carrier: the paper-stated
+/-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     derivative-sign quantity `|σ'_eff(β)|/σ_eff(β)²` (paper line 582).
     Paper proof line 582 writes this factor and asserts its sign
     explicitly: "`|σ'_eff|/σ_eff² > 0`". The carrier hosts that
@@ -1497,7 +1497,7 @@ theorem stdNormalPDF_pos (z : ℝ) : 0 < stdNormalPDF z := by
     (`|σ'_eff|/σ_eff²` factor of `∂²P_correct/(∂β ∂κ)`). -/
 axiom sigEffRatioFactor : ℝ → ℝ
 
-/-- Cat 3 §3.4.3 `structuralEquation` atom: paper line 582 stipulates
+/-- Cat 3 `structuralEquation` atom: paper line 582 stipulates
     `|σ'_eff|/σ_eff² > 0` (a ratio of an absolute value and a square; the
     paper's effective-noise standard deviation `σ_eff` is strictly
     decreasing in `β`, so `σ'_eff ≠ 0` and the displayed factor is
@@ -1505,7 +1505,7 @@ axiom sigEffRatioFactor : ℝ → ℝ
     the `sigEffRatioFactor` derivative-sign primitive. -/
 axiom sigEffRatioFactor_pos (β : ℝ) : 0 < sigEffRatioFactor β
 
-/-- Cat 3 §3.4.3 `structuralEquation` factor carrier: the paper-stated
+/-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     derivative `m'(κ)` of the mean-estimate gap (paper line 582). The
     carrier for the paper's *proposition hypothesis* "Suppose the mean
     estimate gap `m(κ)` ... is strictly increasing in `κ` on `(0, ∞)`"
@@ -1516,13 +1516,13 @@ axiom sigEffRatioFactor_pos (β : ℝ) : 0 < sigEffRatioFactor β
     hypothesis) + proof line 582 (`m'(κ)` factor). -/
 axiom mPrime : ℝ → ℝ
 
-/-- Cat 3 §3.4.3 `structuralEquation` atom: the paper Proposition
+/-- Cat 3 `structuralEquation` atom: the paper Proposition
     `prop:supermodular` *hypothesis* "`m(κ)` is strictly increasing on
     `(0, ∞)`" yields `m'(κ) > 0`. The paper's standing
     proposition hypothesis pinned on the `mPrime` carrier. -/
 axiom mPrime_pos (κ : ℝ) : 0 < mPrime κ
 
-/-- Cat 3 §3.4.3 `structuralEquation` factor carrier: the paper-stated
+/-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     bridge value gap `[V_dyn(u_2, β) − r(u_1)]` (paper line 566). Paper
     proof states this is `> 0` for all `β` above a finite threshold (the
     `BridgeDominance β` regime gate, paper line 558). The carrier hosts
@@ -1533,14 +1533,14 @@ axiom mPrime_pos (κ : ℝ) : 0 < mPrime κ
     by `BridgeDominance β`, paper line 558). -/
 axiom bridgeValueGap : ℝ → ℝ
 
-/-- Cat 3 §3.4.3 `structuralEquation` atom: under the paper's
+/-- Cat 3 `structuralEquation` atom: under the paper's
     bridge-dominance regime gate `BridgeDominance β` (paper line 558,
     `V_dyn(u_2, β) > r(u_1)`), the bridge value gap is strictly positive.
     The paper's defining identification of `BridgeDominance` with
     the positivity of `bridgeValueGap`. -/
 axiom bridgeValueGap_pos (β : ℝ) : BridgeDominance β → 0 < bridgeValueGap β
 
-/-- Cat 3 §3.4.3 `structuralEquation` factor carrier: the paper-stated
+/-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     derivative `∂P_correct/∂κ` (paper line 568). Paper proof line 568
     asserts its sign explicitly: "`∂P_correct/∂κ > 0` (more cognitive
     depth increases correct routing)". The carrier hosts the
@@ -1550,13 +1550,13 @@ axiom bridgeValueGap_pos (β : ℝ) : BridgeDominance β → 0 < bridgeValueGap 
     (`∂P_correct/∂κ` first factor of the second cross-partial term). -/
 axiom pCorrectDerivKappa : ℝ → ℝ → ℝ
 
-/-- Cat 3 §3.4.3 `structuralEquation` atom: paper line 568 stipulates
+/-- Cat 3 `structuralEquation` atom: paper line 568 stipulates
     `∂P_correct/∂κ > 0` ("more cognitive depth increases correct
     routing"). Paper's defining sign-commitment on the `pCorrectDerivKappa`
     derivative-sign primitive. -/
 axiom pCorrectDerivKappa_pos (β κ : ℝ) : 0 < pCorrectDerivKappa β κ
 
-/-- Cat 3 §3.4.3 `structuralEquation` factor carrier: the paper-stated
+/-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     derivative `∂V_dyn(u_2, β)/∂β` (paper line 568). Paper proof line 568
     asserts its sign explicitly: "`∂V_dyn(u_2, β)/∂β ≥ 0` (within-subtree
     Blackwell monotonicity)". The carrier hosts the paper-Def-stipulated
@@ -1567,7 +1567,7 @@ axiom pCorrectDerivKappa_pos (β κ : ℝ) : 0 < pCorrectDerivKappa β κ
     term). -/
 axiom vDynDerivBeta : ℝ → ℝ
 
-/-- Cat 3 §3.4.3 `structuralEquation` atom: paper line 568 stipulates
+/-- Cat 3 `structuralEquation` atom: paper line 568 stipulates
     `∂V_dyn(u_2, β)/∂β ≥ 0` ("within-subtree Blackwell monotonicity").
     Paper's defining sign-commitment on the `vDynDerivBeta` derivative-sign
     primitive. -/
@@ -1591,7 +1591,7 @@ axiom vDynDerivBeta_nonneg (β : ℝ) : 0 ≤ vDynDerivBeta β
     paper-faithful closed form is defined locally; the `φ(z)` and
     `[1 − z²]` factors are then Mathlib-derivable, and only
     the paper's individually-stated factor signs (`|σ'_eff|/σ_eff² > 0`,
-    `m'(κ) > 0`, `[V_dyn − r] > 0`) remain as Cat 3 §3.4.3 structural
+    `m'(κ) > 0`, `[V_dyn − r] > 0`) remain as Cat 3 structural
     atoms.
 
     paper source: Proposition `prop:supermodular` proof, lines 566 + 582
@@ -1671,8 +1671,8 @@ noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ :=
     product `pCorrectDerivKappa β κ · vDynDerivBeta β`; the non-negativity
     of the product then follows from `mul_nonneg` applied to the two
     paper-stated factor signs:
-      * `pCorrectDerivKappa_pos`  (paper line 568, Cat 3 §3.4.3), and
-      * `vDynDerivBeta_nonneg`    (paper line 568, Cat 3 §3.4.3).
+      * `pCorrectDerivKappa_pos`  (paper line 568, Cat 3), and
+      * `vDynDerivBeta_nonneg`    (paper line 568, Cat 3).
 
     paper source: Proposition `prop:supermodular` proof, line 568. -/
 theorem secondTermCrossPartial_nonneg_OPEN
@@ -1699,18 +1699,18 @@ theorem secondTermCrossPartial_nonneg_OPEN
     when `|z| < 1`". `firstTermCrossPartial β κ` is CONCRETE as
     exactly this product (paper line 582), and positivity is
     discharged factor-by-factor:
-      * `sigEffRatioFactor_pos`  — paper line 582 (Cat 3 §3.4.3),
-      * `mPrime_pos`             — paper proposition hypothesis (Cat 3 §3.4.3),
+      * `sigEffRatioFactor_pos`  — paper line 582 (Cat 3),
+      * `mPrime_pos`             — paper proposition hypothesis (Cat 3),
       * `stdNormalPDF_pos`       — **Mathlib-derived** (`Real.exp_pos` etc.),
       * `1 − z² > 0` at `|z| < 1` — **Mathlib-derived** (`abs_lt` + `nlinarith`),
       * `bridgeValueGap_pos`     — paper line 558 / `BridgeDominance` gate
-                                   (Cat 3 §3.4.3).
+                                   (Cat 3).
     `positivity`/`mul_pos` then assembles the strict positivity of the
     five-factor product.
 
     The two Mathlib-derivable factors (`φ(z) > 0`, `[1 − z²] > 0`)
     carry NO axiom; the three paper-stated factor-sign atoms are Cat 3
-    §3.4.3 `structuralEquation` (paper writes each sign explicitly).
+    `structuralEquation` (paper writes each sign explicitly).
 
     paper source: Proposition `prop:supermodular` proof, lines 582-584. -/
 theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN
@@ -1751,9 +1751,8 @@ theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN
         (paper lines 582-584 positivity of the `[1 - z²]`-factor term
         at `|z| < 1`).
 
-    Granularity: the bundled ∃-form atom is replaced by 2 targeted wAs
-    each stating a SINGLE paper-line-anchored property (line 568 vs
-    lines 582-584).
+    Granularity: 2 targeted working assumptions each state a SINGLE
+    paper-line-anchored property (line 568 vs lines 582-584).
 
     paper source: Proposition `prop:supermodular` proof, lines 564-583
     (welfare decomposition + cross-partial closed form via φ'(z) =
@@ -1892,7 +1891,7 @@ theorem kappaAgentWelfareSNR_mem_unitInterval (β κ : ℝ) :
     * `Infrastructure.PercExpectationSupermodular.percExpectation_
       supermodular_of_pointwise_supermodular` (lifting pointwise → integrated)
     * `agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise`
-      (Cat 3 §3.4.3 paper-Def atom in Types.lean — paper-stipulated
+      (Cat 3 paper-Def atom in Types.lean — paper-stipulated
       per-realisation reward-kernel supermodularity from Topkis 1978
       cross-partial)
     * `agentWelfare`'s definitional unfold to `percExpectation`

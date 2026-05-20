@@ -14,7 +14,7 @@ theorems** built from concrete Mathlib + finite-instance infrastructure.
 
 ```
 BlackwellDilemma/
-├─ Types.lean                  -- opaque carriers + paper-novel scope predicates (Cat 3 §3.4.1/2)
+├─ Types.lean                  -- opaque carriers + paper-novel scope predicates (Cat 3)
 ├─ Basic.lean                  -- foundational wrappers
 ├─ ClassicalResults.lean       -- Cat 2 axioms (Blackwell, Harris-Kesten, Grimmett, …)
 ├─ Percolation.lean            -- finite bond-percolation framework (Cat 1)
@@ -224,25 +224,26 @@ Closure-via-existence demonstrations:
 * `Principal.lean`: `W_bar_eventually_decreasing_derived` uses
   `EventuallyDecreasingWithLowerBound` + `W_bar_limit_infty` +
   `W_bar_finite_above_limit_witness` + Mathlib EVT to prove the
-  §3.4.3 atom statement is Cat 1 derivable.
+  paper-Def structural-equation atom statement is Cat 1 derivable.
 * `Cognitive.lean`:
   `agentWelfare_kappaAgent_at_alpha_one_isSupermodular_derived`
   uses `PercExpectationSupermodular` + per-realisation
-  kernel-supermodularity atom in `Types.lean` to prove the §3.4.3
-  atom statement is Cat 1 derivable.
+  kernel-supermodularity atom in `Types.lean` to prove the
+  paper-Def structural-equation atom statement is Cat 1 derivable.
 
-These demonstrate the closure-via-existence pattern: each §3.4.3
-paper-Def atom can be replaced (in dependency closure) by smaller
-atomic stipulations + Cat 1 lifting infrastructure. Future work:
-restructure files to retire the §3.4.3 atoms entirely (currently
-preserved for forward-reference convenience in source order).
+These demonstrate the closure-via-existence pattern: each
+paper-Def structural-equation atom can be replaced (in dependency
+closure) by smaller atomic stipulations + Cat 1 lifting
+infrastructure. Future work: restructure files to retire the
+paper-Def structural-equation atoms entirely (currently preserved for
+forward-reference convenience in source order).
 
 Future Mathlib-PR sequence:
   Stage A — Mathlib `Order.Supermodular` namespace creation
   Stage B — `Mathlib.Order.DifferenceDominates` namespace creation
   Stage C — `Mathlib.Topology.Algebra.Order.EventuallyDecreasing`
-  Stage D — Once Stages A-C are merged, convert §3.4.3 atoms to
-            derived theorems
+  Stage D — Once Stages A-C are merged, convert paper-Def
+            structural-equation atoms to derived theorems
 -/
 namespace BlackwellDilemma.Infrastructure
 

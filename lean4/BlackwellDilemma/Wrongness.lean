@@ -20,7 +20,7 @@
   `Types.lean` and the paper-cited classical results in
   `ClassicalResults.lean`. The proofs are wired through paper-citation
   axioms that take the form `gap_<theorem-name>_OPEN`, following the
-  `feedback_gap_ledger_in_lean4` status-tag-in-name convention.
+  status-tag-in-name convention.
 -/
 
 import BlackwellDilemma.Basic
@@ -136,13 +136,10 @@ theorem conditional_subproblem_blackwell_applicable_OPEN :
     operationally relevant antecedent.
 
     Derived theorem composing the paper-stated atomic stipulation
-    `conditional_subproblem_blackwell_applicable_OPEN` per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The bundled `gap_conditional_reduction_part_i_OPEN`
-    axiom is REPLACED by this derived theorem, which isolates the
-    paper-stated conditional-Blackwell-applicability fact as a
-    standalone Cat 3 atomic stipulation and threads the Cat 2 Blackwell
-    dependency as the explicit `h_blackwell` antecedent.
+    `conditional_subproblem_blackwell_applicable_OPEN`. This derived
+    theorem isolates the paper-stated conditional-Blackwell-applicability
+    fact as a standalone Cat 3 atomic stipulation and threads the Cat 2
+    Blackwell dependency as the explicit `h_blackwell` antecedent.
 
     paper source: Lemma `lem:conditional-reduction` part (i),
     invoking Blackwell's theorem `\citep{blackwell1951,blackwell1953}`. -/
@@ -187,7 +184,7 @@ C1-C3 with terminal-neighbour topology and `|N_R(v_0)| = 2`, the greedy
 policy's welfare is non-monotone in β: there exist `β' > β` with
 `W(π_{β'}) < W(π_β)`. -/
 
-/-! ### §18 closure-path-B decomposition of `lem:wrongness`
+/-! ### Closure-path-B decomposition of `lem:wrongness`
 
 The single-atom `topology_blind_wrongness_atom_OPEN` packaged an entire
 paper Lemma as a single bundled atom. It is decomposed below into
@@ -213,9 +210,9 @@ the topology-blind concentration mechanism (paper-novel application of
 Blackwell-ordering at the greedy policy under topology-blindness), and
 stage 2 is the C2-misalignment-driven reversal witness (paper-novel
 analytic argument over the IDP welfare functional). Both atoms remain
-paper-derived working content per §3.4.4 (close target =
-bounded-convergence + Φ-tail integral machinery, partially
-Mathlib-Cat-1, partially paper-novel).
+paper-derived working content (close target = bounded-convergence +
+Φ-tail integral machinery, partially Mathlib-Cat-1, partially
+paper-novel).
 -/
 
 /-! ### `wrongness_high_beta_welfare_convergence_atom_OPEN`.
@@ -228,7 +225,7 @@ Mathlib-Cat-1, partially paper-novel).
     averaged over the C2-misalignment realisation) is the
     paper-stated fact stage 2 consumes. -/
 
-/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 paper-stipulated structural equation:
     paper-stated per-realisation pointwise convergence of the greedy
     agent's reward kernel as β → ∞. Paper Lemma `lem:wrongness` proof
     line 348 STATES `P_1(β) → 1` (greedy concentration on u_1) +
@@ -236,7 +233,7 @@ Mathlib-Cat-1, partially paper-novel).
     level, the kernel converges to a paper-stipulated limit kernel
     `agentRewardKernel_greedy_limit_kernel ω`.
 
-    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    Cat 3 gapDefinitional per discipline (paper-stipulated
     structural-equation precedent). 永不 close.
 
     paper source: Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1`)
@@ -324,7 +321,7 @@ axiom agentRewardKernel_greedy_wrongness_kernel_reversal_witness :
     there exists a strict reversal pair `(β, β')` with
     `agentWelfare greedy β' 0 1 < agentWelfare greedy β 0 1`.
 
-    Closure: composes (a) Cat 3 §3.4.3 paper-stipulated kernel
+    Closure: composes (a) Cat 3 paper-stipulated kernel
     reversal-witness atom
     `agentRewardKernel_greedy_wrongness_kernel_reversal_witness` +
     (b) the foundation lemma
@@ -359,7 +356,7 @@ theorem wrongness_misalignment_reversal_atom_OPEN :
     Blackwell-ordered topology-blind signal family, the greedy
     policy's welfare is strictly non-monotone in β.
 
-    §18 closure-path-B decomposition: the conclusion-as-axiom
+    Closure-path-B decomposition: the conclusion-as-axiom
     `topology_blind_wrongness_atom_OPEN` (packaging an entire paper
     Lemma) is decomposed into two smaller paper-derived atoms
     reflecting the paper's two-stage proof structure (paper lines
@@ -446,10 +443,10 @@ instance EdgeIdx.decEq (n : ℕ) : DecidableEq (EdgeIdx n) :=
 /-! ### Concretisation of `W_info_oracle` over the finite
     bond-percolation framework (`Percolation.lean`).
 
-    The opaque carrier `axiom W_info_oracle : ℝ → ℝ → ℝ` is
-    REPLACED (concrete-def-closure pattern from `expectedTopoLoss`) by a
-    `noncomputable def` that IS the paper's `E_{G_p}[·]` expectation of
-    the oracle's per-realisation informational residual.
+    `W_info_oracle : ℝ → ℝ → ℝ` is given (concrete-def-closure
+    pattern, shared with `expectedTopoLoss`) as a `noncomputable def`
+    that IS the paper's `E_{G_p}[·]` expectation of the oracle's
+    per-realisation informational residual.
 
     Paper Theorem 3.1 proof (lines 257-261) STIPULATES the
     decomposition `W_info = E_{G_p}[E_s[r(v_T)] - r^*_R]`, where
@@ -527,7 +524,7 @@ axiom wInfoOracleClusterCount : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
     reduction` (i), cannot beat the in-`R` max on any fixed `R`).
     Mirrors the `topoLossKernel_mem_unitInterval` reward-range
     Def-stipulation precedent — paper stipulates the carrier's
-    pointwise range/sign; 永不 close per discipline §3.4.3.
+    pointwise range/sign; Paper-Def foundational atom (永不 close).
     paper source: Lemma `lem:conditional-reduction` part (i), lines
     374-381 (within-`R` oracle on the fixed feasible set `R(v_0)`
     cannot exceed `r^*_R`) + Proposition `prop:info-decay`, line 272
@@ -550,8 +547,8 @@ axiom wInfoOracleKernel_nonpos :
     Cat 3 sub-type: structuralEquation — paper Definition 2.5's
     trivial-path inclusion, transported to the cluster-count carrier,
     is a paper-Def-stipulated structural identity (mirrors
-    `topoLossKernel_mem_unitInterval` precedent); 永不 close per
-    discipline §3.4.3.
+    `topoLossKernel_mem_unitInterval` precedent); paper-Def
+    foundational atom (永不 close).
     paper source: Definition 2.5 (`def:forward-reachable`, the
     reachable set contains its base vertex `v_0` via the trivial
     path) ⇒ `|R(v_0)| ≥ 1`. -/
@@ -589,7 +586,7 @@ axiom wInfoOracleClusterCount_ge_one :
     per-vertex Mills-tail factor under the Gaussian signal model's
     `σ(β) = O(2^{-β})` precision schedule).  Mirrors the
     `topoLossKernel_mem_unitInterval` precedent — paper stipulates
-    the carrier's pointwise bound; 永不 close per discipline §3.4.3.
+    the carrier's pointwise bound; Paper-Def foundational atom (永不 close).
     paper source: Proposition `prop:info-decay` proof, line 276 (`|W_info|
     ≤ |R| · O(σ) = |R| · O(2^{-β})`, the per-realisation bound) +
     `gap_phi_tail_bound` (Cat 1 Gaussian Mills-tail bound, the
@@ -1024,12 +1021,12 @@ noncomputable def expectedTopoLoss_conditional (n k : ℕ) : ℝ :=
     Nagaraja Cat 2 dependency in `#print axioms` on any consumer of
     this axiom.
 
-    Per `feedback_gap_ledger_in_lean4` §10 paper-APPLICATION-to-opaque-
-    carrier discipline borderline: the IDP carrier appears in the
-    conclusion, but the carrier-binding chain is mechanical (David &
-    Nagaraja applied through paper Def 2.1 standing convention; the
-    paper-application is essentially the textbook identity applied
-    twice). Per the precedent of `gap_iid_continuous_rank_symmetry_OPEN`,
+    Paper-APPLICATION-to-opaque-carrier discipline borderline: the IDP
+    carrier appears in the conclusion, but the carrier-binding chain is
+    mechanical (David & Nagaraja applied through paper Def 2.1 standing
+    convention; the paper-application is essentially the textbook
+    identity applied twice). Per the precedent of
+    `gap_iid_continuous_rank_symmetry_OPEN`,
     the AXIOM is classified Cat 2 (cat2External, notCat3) because its
     content is "textbook fact applied through fixed paper-stipulated
     standing-convention pattern" — the "Cat 2-ness" justified by the
@@ -1074,7 +1071,7 @@ theorem gap_orderstats_topo_decomposition_OPEN :
     via the order-statistics decomposition (paper line 292) using
     David & Nagaraja 2003 Eq. 2.1.4.
 
-    §18 closure-path-A composition: composes the Cat 2 axiom
+    Closure-path-A composition: composes the Cat 2 axiom
     `gap_orderstats_topo_decomposition_OPEN` (paper-application via
     standing convention) with the Cat 2 axiom
     `gap_david_nagaraja_eq214_OPEN` (substantive David & Nagaraja Eq.
@@ -1122,8 +1119,8 @@ theorem expectedTopoLoss_conditional_def :
     David & Nagaraja 2003 Eq. 2.1.4 cited as the Cat 2
     order-statistics dependency.
 
-    Refactored: closed-form simplification step derives Cat 1 from
-    the order-statistics-based atomic structural equation
+    Closed-form simplification step derives Cat 1 from the
+    order-statistics-based atomic structural equation
     `expectedTopoLoss_conditional_def` (`= n/(n+1) − k/(k+1)`) via
     direct algebraic identity
     `n/(n+1) − k/(k+1) = (n−k)/((n+1)(k+1))` over `ℝ`. -/
@@ -1147,11 +1144,10 @@ theorem gap_topo_cluster_relation :
 /-! ### Concretisation of `expectedTopoLoss` over the finite
     bond-percolation framework (`Percolation.lean`).
 
-    The opaque carrier `axiom expectedTopoLoss : ℕ → ℝ → ℝ`
-    is REPLACED (concrete-def-closure pattern) by a
-    `noncomputable def` that IS the paper's `E_{G_p}[·]` expectation,
-    evaluated on the explicit finite bond-percolation measure built in
-    `Percolation.lean`.  Paper Definition 2.1 line 119 STIPULATES that
+    `expectedTopoLoss : ℕ → ℝ → ℝ` is given (concrete-def-closure
+    pattern) as a `noncomputable def` that IS the paper's `E_{G_p}[·]`
+    expectation, evaluated on the explicit finite bond-percolation
+    measure built in `Percolation.lean`.  Paper Definition 2.1 line 119 STIPULATES that
     `E_{G_p}` is "expectation over this percolation measure"; the
     concretisation makes that paper-stipulated identity structural
     rather than opaque.
@@ -1193,7 +1189,7 @@ axiom topoLossKernel : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
     (mirrors the `expectedTopoLoss_le_one_atom` reward-range
     Def-stipulation precedent and `all_edges_open_at_zero_blocking_OPEN`
     boundary-semantics precedent — paper Definition stipulates the
-    carrier's range; 永不 close per discipline §3.4.3).
+    carrier's range; paper-Def foundational atom, 永不 close).
     paper source: Definition 2.1, line 113 (`r : V → [0, 1]`) +
     Proposition `prop:physical`, line 311 (`R(v_0) ⊆ V` ⇒ realised loss
     `≥ 0`). -/
@@ -1294,14 +1290,14 @@ cluster-size-partition infrastructure:
     paper-graph-specific `Finset` on the percolation sample space
     (`Z²_L` connectivity), the natural sub-event over which paper
     line 415 conditions; mirrors the `EdgeIdx` / `topoLossKernel`
-    carrier precedents.  永不 close per discipline §3.4.1.
+    carrier precedents.  Cat 3 carrier (永不 close).
     paper source: Theorem 3.3 (`thm:phase`) Part 1, line 404
     ("`|R(v_0)| = Θ(N)`" — the giant-component event) + line 415
     ("Conditional on `v_0` lying in the giant component") +
     Definition 2.1 (the `Z²_L` action graph). -/
 axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-/-- **Bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated
+/-- **Bridge atom 1** (Cat 3 paper-Def-stipulated
     structural equation): the paper Proposition `prop:topo-cluster`
     proof line 294 STATES that, on the giant-component event, the
     per-realisation topological-loss kernel takes the explicit
@@ -1314,12 +1310,12 @@ axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
     §1.3 expression evaluated at `(N, k) = (n, k)`. The substantive
     `Z²_L` connectivity / cluster-counting combinatorics + the
     uniform-order-statistics expectation formula are the conceptual
-    sources (Cat 3 §3.4.3 paper-Def per discipline; carriers
+    sources (Cat 3 paper-Def per discipline; carriers
     `topoLossKernel` and `giantComponentEvent` are opaque Cat 3 — this
     is the smallest decomposition possible without `Z²_L` lattice
     cluster machinery).
 
-    Per discipline §3.4.3. 永不 close.
+    Paper-Def discipline (永不 close).
 
     paper source: Proposition `prop:topo-cluster` proof line 294
     (`E[r* - max_{v ∈ R} r(v) | |R| = k] = (N - k) / ((N + 1) (k + 1))`,
@@ -1332,7 +1328,7 @@ axiom topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def :
           topoLossKernel n ω =
             ((n : ℝ) - (k : ℝ)) / (((n : ℝ) + 1) * ((k : ℝ) + 1))
 
-/-- **Bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated
+/-- **Bridge atom 2** (Cat 3 paper-Def-stipulated
     structural fact): the giant-component event of paper Theorem 3.3
     Part 1 proof lines 415-417 — by the paper-Def definition of "giant
     component" (cluster size `k ≥ θ(1 - p) · n` with `θ(1 - p) > 1/2`
@@ -1348,7 +1344,7 @@ axiom topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def :
     `(n - k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)` is equivalent to
     `n ≤ 2 k + 1`, NOT true uniformly in `k ∈ {0, …, n}`.
 
-    Per discipline §3.4.3. 永不 close.
+    Paper-Def discipline (永不 close).
 
     paper source: Theorem 3.3 Part 1 proof lines 415-417 (the
     giant-component event of line 404, `|R(v_0)| = Θ(N)`, gives a
@@ -1633,8 +1629,7 @@ theorem gap_topo_loss_below_threshold :
 
 /-! ### `prop:topo-cluster` Part 2 — above-threshold two-sided bound.
 
-§18 atomic decomposition. The bundled
-`gap_topo_loss_above_threshold_OPEN` axiom was REPLACED by a derived
+Atomic decomposition. `gap_topo_loss_above_threshold` is a derived
 theorem composing two Cat 3 paper-novel atomic stipulations:
  * `topo_loss_above_lower_bound_atom_OPEN` — paper-stated existence of
    a positive lower bound `c₁(p) > 0` on `expectedTopoLoss n p` for
@@ -1673,7 +1668,7 @@ refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
     threshold + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound). -/
 axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
 
-/-- **Bridge** — Cat 3 §3.4.3 paper-Def-stipulated SMALLER
+/-- **Bridge** — Cat 3 paper-Def-stipulated SMALLER
     bridge atom replacing the prior
     `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def` axiom.
 
@@ -1687,7 +1682,7 @@ axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
     composition. The substantive Grimmett 1999 §6.75 cluster-tail
     composition is the conceptual source.
 
-    Strictly more atomic per discipline §18: this bridge isolates the
+    Strictly more atomic: this bridge isolates the
     paper-stated structural identification of the abstract carrier
     with the Mills closed form, and the prior positivity claim
     becomes a Cat 1 corollary via
@@ -1696,7 +1691,7 @@ axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
     longer needs to be axiomatised — it is derived from the Mills
     closed form's well-known positivity.
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    Paper-Def discipline (paper-stipulated structural fact about
     paper-novel opaque carrier above parametric threshold).
     永不 close.
 
@@ -1716,9 +1711,9 @@ axiom expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def :
     with Cat 1 Mathlib `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`
     positivity of the Mills inverse `1/(1-exp(-c))` for `c > 0`.
 
-    The bridge is strictly more atomic per discipline §18 (single-step
-    typed bridge isolating the paper-stated Mills identification on the
-    abstract carrier from the positivity consequence; positivity itself
+    The bridge is strictly more atomic (single-step typed bridge
+    isolating the paper-stated Mills identification on the abstract
+    carrier from the positivity consequence; positivity itself
     is Mathlib-derivable).
 
     paper source: Proposition `prop:topo-cluster` Part 2, line 287. -/
@@ -1758,7 +1753,7 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
       0 < expectedTopoLossAboveLowerConst p :=
   expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption
 
-/-- **Bridge** — Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+/-- **Bridge** — Cat 3 paper-Def-stipulated SMALLER bridge
     atom for the per-`n`-eventually lower bound on
     `expectedTopoLoss`.
 
@@ -1774,14 +1769,14 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
     on the explicit Mills closed form. The substantive Mills-tail
     geometric-decay derivation is the conceptual source.
 
-    Strictly more atomic per discipline §18: this bridge isolates the
+    Strictly more atomic: this bridge isolates the
     paper-stated Mills-closed-form eventually-lower-bound on
     `expectedTopoLoss n p`, decoupling it from the abstract carrier
     via the identification chain. The prior statement at the
     abstract carrier level becomes a Cat 1 corollary by `rw` on
     the carrier-identification + this bridge.
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    Paper-Def discipline (paper-stipulated structural fact about
     paper-novel Mills-closed-form per-n-eventually-bound behavior).
     永不 close.
 
@@ -1806,8 +1801,8 @@ axiom expectedTopoLoss_ge_mills_inverse_eventually_paper_Def :
     `expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))` rewrite).
 
     The bridge isolates the Mills closed-form eventually-bound from the
-    abstract-carrier wrapper per discipline §18 (single-step typed
-    bridge); the abstract-carrier identification with the closed form
+    abstract-carrier wrapper (single-step typed bridge); the
+    abstract-carrier identification with the closed form
     is factored out via the sibling bridge.
 
     paper source: Proposition `prop:topo-cluster` Part 2. -/

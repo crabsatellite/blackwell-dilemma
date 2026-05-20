@@ -4,9 +4,9 @@
   Prints the axiom dependency list for every theorem (CLOSED entry)
   in the formalisation.
 
-  Per `feedback_gap_ledger_in_lean4`: status `CLOSED` requires `theorem
-  gap_X : <statement> := <proof>` with no `sorry`. The audit verifies
-  this by checking #print axioms for each CLOSED entry.
+  Status `CLOSED` requires `theorem gap_X : <statement> := <proof>`
+  with no `sorry`. The audit verifies this by checking #print axioms
+  for each CLOSED entry.
 
   Expected axioms:
    * Lean 4 / Mathlib kernel: `propext`, `Classical.choice`, `Quot.sound`.
@@ -20,7 +20,7 @@
   Any axiom outside the union of these three categories is a RED FLAG.
 
   Note on BLOCKED/DEAD-END status:
-  Per the `feedback_gap_ledger_in_lean4` 6-tier discipline
+  Per the 6-tier discipline
   (OPEN / PARTIAL / BLOCKED / DEAD-END / CLOSED / DEFINITIONAL),
   BLOCKED is reserved for genuine no-acceptance-possible cases
   (folkloric, conjectural-unproven, or no-source-at-all). External
@@ -224,7 +224,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_principal_regime_bifurcation
 #print axioms BlackwellDilemma.gap_disclosure_full_suboptimal
 #print axioms BlackwellDilemma.gap_disclosure_differentiated_dominates
--- §18 closure-path-A derived theorems (closing bundled paper
+-- Closure-path-A derived theorems (closing bundled paper
 -- conclusions through smaller atoms; ledger entries consume these).
 #print axioms BlackwellDilemma.interior_max_exists_from_unimodal_envelope
 #print axioms BlackwellDilemma.W_bar_mixture_decomposition
@@ -249,7 +249,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.betaBarStar_def
 #print axioms BlackwellDilemma.aggregateOptimalBeta_def
 #print axioms BlackwellDilemma.W_bar_limit_infty_def
--- §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN:
+-- Closure-path-A on welfareCrossPartial_explicit_form_OPEN:
 -- bundled paper conclusion decomposed into 2 carriers
 -- (firstTermCrossPartial + secondTermCrossPartial per paper line 566
 -- explicit two-term decomposition) + 2 smaller atoms
@@ -277,7 +277,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- (Mathlib nlinarith from |z| < 1) + 3 paper-stated factor-sign atoms.
 -- The 5 factor-sign atoms (sigEffRatioFactor_pos, mPrime_pos,
 -- bridgeValueGap_pos, pCorrectDerivKappa_pos, vDynDerivBeta_nonneg)
--- are Cat 3 §3.4.3 structural-equation atoms (paper writes each sign
+-- are Cat 3 structural-equation atoms (paper writes each sign
 -- explicitly). stdNormalPDF_pos is Cat 1 Mathlib (kernel-pure, no
 -- paper axioms).
 #print axioms BlackwellDilemma.secondTermCrossPartial_nonneg_OPEN
@@ -296,7 +296,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- §6 Bayesian + complementarity
 #print axioms BlackwellDilemma.gap_bayesian_immunity
 #print axioms BlackwellDilemma.gap_information_knowledge_complementarity
--- §18 decompositions (Bayesian.lean): gap_robustness_myopic_k +
+-- Decompositions (Bayesian.lean): gap_robustness_myopic_k +
 -- gap_robustness_satisficing are derived theorems re-derived via
 -- strictly-smaller atoms + Cat 2 Blackwell chain (myopic side —
 -- `h_blackwell` antecedent threaded into `gap_robustness_myopic_k`) /
@@ -428,12 +428,11 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.V_g_terminal_mem_unitInterval
 #print axioms BlackwellDilemma.W_bar_limit_infty_le_W_bar_betaBarStar
 
--- §18 atomic-decomposition derived theorems: 22 conclusion-axioms
--- decomposed into atomic stipulations + derived theorems per
--- `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
--- pattern. Each entry below is the derived theorem now hosting the
--- bundled paper conclusion; the corresponding atomic-stipulation
--- axiom (named `<paper_content>_OPEN`) is the underlying paper-stated
+-- Atomic-decomposition derived theorems: 22 conclusion-axioms
+-- decomposed into atomic stipulations + derived theorems.
+-- Each entry below is the derived theorem now hosting the bundled
+-- paper conclusion; the corresponding atomic-stipulation axiom
+-- (named `<paper_content>_OPEN`) is the underlying paper-stated
 -- substance pending per-instance closure.
 
 -- Cognitive.lean Theorem 4.1 derived theorems (Part 4 is the
@@ -461,10 +460,10 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part6
 #print axioms BlackwellDilemma.gap_kappaWelfare_cross_partial_link
 
--- Wrongness.lean §18 decomposition (1 derived theorem):
+-- Wrongness.lean decomposition (1 derived theorem):
 #print axioms BlackwellDilemma.gap_wrongness
 
--- Canonical.lean §18 decomposition (8 derived theorems):
+-- Canonical.lean decomposition (8 derived theorems):
 #print axioms BlackwellDilemma.FiveState.gap_interior_optimum
 #print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_existence
 #print axioms BlackwellDilemma.FiveState.gap_three_regime_reversal_uniqueness
@@ -476,7 +475,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_smooth_transition
 #print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_present
 
--- GeneralGraphs.lean §18 decomposition (3 derived theorems):
+-- GeneralGraphs.lean decomposition (3 derived theorems):
 #print axioms BlackwellDilemma.gap_general_tree
 #print axioms BlackwellDilemma.gap_cyclic_trap
 -- `gap_kappaStar_depth_d_log_growth`: the print surfaces only
@@ -499,7 +498,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.TrapTree.oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN
 #print axioms BlackwellDilemma.TrapTree.oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN
 
--- §18 decompositions (3 derived theorems):
+-- Phase.lean decompositions (3 derived theorems):
 --  * `gap_topo_loss_below_threshold` (Wrongness.lean): composes a
 --    paper-derived envelope-existence atom (paper line 286) + Cat 1
 --    theorem `topo_loss_below_eps_from_envelope` (Mathlib-discharge
@@ -529,7 +528,7 @@ namespace BlackwellDilemma.AxiomAudit
 --    through envelope upper bound. Ports the Wrongness.lean proof verbatim.
 #print axioms BlackwellDilemma.topo_loss_decay_arbitrary_threshold
 
--- §18 closure wave on Phase.lean — 5 derived theorems built from
+-- Closure wave on Phase.lean — 5 derived theorems built from
 -- smaller atoms + 1 carrier:
 --  * `topo_loss_decay_below_pc` (derived theorem): composes the
 --    paper-faithful giant-component-conditional bound and Cat 1
@@ -830,9 +829,8 @@ namespace BlackwellDilemma.AxiomAudit
 --        `percExpectation_mono` — linearity + integrand-monotonicity
 --        of `E_{G_p}`.
 --
--- (2) `expectedTopoLoss` CONCRETISED — the opaque carrier
---     `axiom expectedTopoLoss : ℕ → ℝ → ℝ` is REPLACED by
---     `noncomputable def expectedTopoLoss n p :=
+-- (2) `expectedTopoLoss` CONCRETISED — `expectedTopoLoss : ℕ → ℝ → ℝ`
+--     is given as `noncomputable def expectedTopoLoss n p :=
 --     percExpectation (1 − p) (topoLossKernel n)`, which IS paper
 --     Definition 2.1 line 119's `E_{G_p}[·]` evaluated on the
 --     explicit finite bond-percolation measure.  Two supporting
@@ -841,8 +839,8 @@ namespace BlackwellDilemma.AxiomAudit
 --     `prop:topo-cluster`'s pointwise integrand `r^* − max_{v∈R} r`),
 --     with the structural equation `topoLossKernel_mem_unitInterval`
 --     (paper Def 2.1 line 113 reward-range `r : V → [0,1]`,
---     transported to the loss kernel — structuralEquation, 永不-close
---     per §3.4.3, mirroring the
+--     transported to the loss kernel — structuralEquation, paper-Def
+--     foundational atom, mirroring the
 --     `all_edges_open_at_zero_blocking_OPEN` boundary-semantics
 --     precedent).
 --
@@ -900,14 +898,14 @@ namespace BlackwellDilemma.AxiomAudit
 --      * `wInfoOracleKernel_nonpos` (structuralEquation — paper Lemma
 --        `lem:conditional-reduction` (i): the within-`R` oracle on a
 --        fixed feasible set cannot exceed `r^*_R`, so the
---        per-realisation residual is `≤ 0`; 永不-close per §3.4.3),
+--        per-realisation residual is `≤ 0`; paper-Def foundational atom),
 --      * `wInfoOracleClusterCount_ge_one` (structuralEquation — paper
 --        Def 2.5 trivial-path inclusion `v_0 ∈ R(v_0)` ⇒ `|R| ≥ 1`),
 --      * `wInfoOracleKernel_abs_le_clusterCount` (structuralEquation —
 --        paper `prop:info-decay` proof line 276 STATES the
 --        per-realisation Mills-tail bound `|W_info| ≤ |R| · O(2^{-β})`
---        directly; the per-`R` integrand bound, 永不-close per §3.4.3
---        + §10 paper-application-of-Cat-1-`gap_phi_tail_bound`).
+--        directly; the per-`R` integrand bound, paper-Def foundational
+--        atom + paper-application-of-Cat-1-`gap_phi_tail_bound`).
 --     `EdgeIdx` + its `Fintype`/`DecidableEq` instances were moved up
 --     from §5 of Wrongness.lean (was after `prop:topo-cluster`) so the
 --     §3 `W_info_oracle` concretisation can reference the same `Z²_L`
@@ -1123,9 +1121,9 @@ namespace BlackwellDilemma.AxiomAudit
 -- concretisation of the `agentWelfare` carrier over `Percolation.lean`
 -- + closure of FIVE `agentWelfare`-dependent atoms.
 --
--- (1) `agentWelfare` CONCRETISED — the opaque carrier
---     `axiom agentWelfare : AgentType → (β κ α : ℝ) → ℝ` is REPLACED
---     (via the `W_info_oracle` concrete-def-closure pattern) by
+-- (1) `agentWelfare` CONCRETISED — `agentWelfare : AgentType → (β κ α
+--     : ℝ) → ℝ` is given (concrete-def-closure pattern, shared with
+--     `W_info_oracle`) as
 --     `noncomputable def agentWelfare a β κ α := percExpectation
 --     (1 − blockingProb) (agentRewardKernel a β κ α)`, which IS paper
 --     §2.5 line 205-208's `W(β,κ,α) = E_{G_p}[E_{s,ω̂_κ}[r(v_T)]]`
@@ -1296,10 +1294,10 @@ namespace BlackwellDilemma.AxiomAudit
 --       `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
 --       (lifts kernel pointwise-`≤`-with-strict-witness to welfare-strict-
 --       reversal under non-trivial percolation);
---   (c) New Cat 3 §3.4.3 atom `blockingProb_strict_in_open_unit_interval`
+--   (c) New Cat 3 atom `blockingProb_strict_in_open_unit_interval`
 --       (paper Definition 2.1 — non-trivial bond percolation `p ∈ (0, 1)`);
 --   (d) 4 paper-stipulated kernel-level reversal-witness structural
---       equations (Cat 3 §3.4.3, one per reversal atom).
+--       equations (Cat 3, one per reversal atom).
 -- Each closure: kernel axioms + the `AgentEdgeIdx` carrier + its
 -- `Fintype`/`DecidableEq` instances + the `agentRewardKernel` carrier
 -- + the relevant kernel reversal-witness structural equation +
@@ -1371,7 +1369,7 @@ each `_OPEN` depends only on:
 * The corresponding bridge atom (paper-stipulated structural
   identification)
 * `Infrastructure` Cat 1 module dependencies (paper-novel-free)
-* Opaque `Types.lean` carriers (Cat 3 §3.4.1 primitives — 永不 close).
+* Opaque `Types.lean` carriers (Cat 3 primitives — 永不 close).
 
 NO `_paper_witness` axiom appears anywhere in the dependency
 graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).
@@ -1396,12 +1394,12 @@ graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).
 #print axioms BlackwellDilemma.FiveState.L_unimodal_in_regime_i_OPEN
 #print axioms BlackwellDilemma.FiveState.envelope_continuity_in_p_OPEN
 
-/-! ## Strict axiom-closure verification of §3.4.3 derived-theorem
+/-! ## Strict axiom-closure verification of paper-Def derived-theorem
     targets
 
 For each derived theorem below, prints the dependency closure to
 verify NO `sorry`, NO `native_decide`, NO un-credited axioms — only
-KERNEL + Cat 3 §3.4.1 carriers + Cat 3 §3.4.3 paper-Def bridges +
+KERNEL + Cat 3 carriers + Cat 3 paper-Def bridges +
 Cat 2 ClassicalResults axioms. -/
 
 -- belowThresholdWelfare boundary convention
@@ -1426,7 +1424,7 @@ Cat 2 ClassicalResults axioms. -/
 #print axioms BlackwellDilemma.forward_reachable_eq_simpleGraph_reach_paper_Def
 
 -- kappaStar diverges at p_c.
--- `kappaStar_dominates_percolation_scaling_paper_Def` (Cat 3 §3.4.3
+-- `kappaStar_dominates_percolation_scaling_paper_Def` (Cat 3
 -- paper-Def stipulated cognitive-percolation ordering) is discharged
 -- as a Cat 1 derived theorem via concretising
 -- `harrisKestenScalingFunction` as the lower envelope of `kappaStar`
@@ -1467,8 +1465,8 @@ characterisation) and discharging the bridge
 derived theorem (`rfl`-witness on the canonical paper-instance constants
 `(mu0, tau0sq, tausq, ybar1, ybar2) = (0, 1, 1, 0,
 mLimitDifference_fiveState)`), `gap_cognitive_threshold_part3` is now
-STRICT kernel-pure modulo only the Types.lean §3.4.1 paper-Def
-primitives `C1_Irreversibility`, `C2_RewardTopologyMisalignment`,
+STRICT kernel-pure modulo only the Types.lean paper-Def primitives
+`C1_Irreversibility`, `C2_RewardTopologyMisalignment`,
 `C3_InformationLocality`. No `mean_estimate_gap` opaque axiom; no
 `_paper_Def` bridge atom. -/
 

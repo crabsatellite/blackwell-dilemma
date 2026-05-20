@@ -79,14 +79,12 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     (Cat 2 — Grimmett 1999), `gap_topo_cluster_relation_OPEN`,
     conditional Blackwell.
 
-    The bundled `gap_phase_transition_below_OPEN` axiom is now
-    REPLACED by the derived theorem `gap_phase_transition_below`
-    composing two atomic stipulations per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern: see
-    `topo_loss_decay_below_pc_OPEN` (existence of decay envelope) and
-    `topo_loss_decay_arbitrary_threshold_OPEN` (arbitrary-threshold
-    convergence) below. The Cat 2 Grimmett percolation-probability
-    dependency is threaded as the explicit `h_perc_prob` antecedent.
+    The derived theorem `gap_phase_transition_below` composes two
+    atomic stipulations: `topo_loss_decay_below_pc_OPEN` (existence of
+    decay envelope) and `topo_loss_decay_arbitrary_threshold_OPEN`
+    (arbitrary-threshold convergence) below. The Cat 2 Grimmett
+    percolation-probability dependency is threaded as the explicit
+    `h_perc_prob` antecedent.
 
     paper source: Theorem 3.3 (`thm:phase`), lines 400-419;
     Grimmett 1999 _Percolation_ 2nd ed. cited as the Cat 2
@@ -241,14 +239,11 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
     the Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`,
     `gap_info_decay_OPEN`, the wrongness lemma at `prop:trap-prevalence`.
 
-    The bundled `gap_phase_transition_above_OPEN` axiom is now
-    REPLACED by the derived theorem `gap_phase_transition_above`
-    composing two atomic stipulations per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern: see
-    `wInfoTopoRatio_const_exists_OPEN` (existence of positive constant)
-    and `wInfoTopoRatio_bound_OPEN` (quantitative ratio bound) below.
-    The Cat 2 Grimmett §6.75 exponential-decay dependency is threaded
-    as the explicit `h_grimmett` antecedent.
+    The derived theorem `gap_phase_transition_above` composes two
+    atomic stipulations: `wInfoTopoRatio_const_exists_OPEN` (existence
+    of positive constant) and `wInfoTopoRatio_bound_OPEN` (quantitative
+    ratio bound) below. The Cat 2 Grimmett §6.75 exponential-decay
+    dependency is threaded as the explicit `h_grimmett` antecedent.
 
     paper source: Theorem 3.3 (`thm:phase`), lines 420-431;
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
@@ -384,7 +379,7 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- **Bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated):
+/-- **Bridge atom 1** (Cat 3 paper-Def-stipulated):
     paper Definition 2.1 line 108 standing convention — the paper's
     underlying graph `G` is preconnected (every pair of vertices is
     connected by a path). This is paper's standing assumption for the
@@ -395,12 +390,12 @@ depending on `p`. -/
     the construction; only the preconnectedness conclusion is paper-
     stipulated).
 
-    Per discipline §3.4.3 (paper-Def-stipulated structural fact about
+    Paper-Def discipline (paper-stipulated structural fact about
     paper-novel `Vertex` carrier + `IsEdge` predicate). 永不 close. -/
 axiom paperGraph_preconnected_paper_Def :
     BlackwellDilemma.Infrastructure.paperGraph.Preconnected
 
-/-- **Bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated):
+/-- **Bridge atom 2** (Cat 3 paper-Def-stipulated):
     paper Definition 2.5 line 187-194 structural identification of the
     opaque `ForwardReachable v ∅ ω` carrier with the standard Finset
     `filter` over the paper graph's `Reachable v` predicate under the
@@ -412,7 +407,7 @@ axiom paperGraph_preconnected_paper_Def :
     antecedent the two SimpleGraphs share the same Adj relation
     (cf. `Infrastructure.percolationGraph_adj_eq_paperGraph_at_all_open`).
 
-    Per discipline §3.4.3 (paper-Def-stipulated identification of the
+    Paper-Def discipline (paper-stipulated identification of the
     paper-novel opaque carrier `ForwardReachable` with a Cat 1
     SimpleGraph reachability primitive under paper Def 2.5). 永不 close. -/
 axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def :
@@ -438,10 +433,10 @@ axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper
     to derive `ForwardReachable v ∅ ω = Finset.univ` under the
     all-edges-open antecedent.
 
-    Each bridge is strictly more atomic per discipline §18 (atom 1 is
-    a pure SimpleGraph property of the Cat 1 adapter `paperGraph`;
-    atom 2 is a pure structural identification of `ForwardReachable`
-    with the SimpleGraph `Reachable` filter on `paperGraph`). -/
+    Each bridge is strictly more atomic (atom 1 is a pure SimpleGraph
+    property of the Cat 1 adapter `paperGraph`; atom 2 is a pure
+    structural identification of `ForwardReachable` with the
+    SimpleGraph `Reachable` filter on `paperGraph`). -/
 theorem forward_reachable_eq_simpleGraph_reach_paper_Def :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
@@ -532,7 +527,7 @@ theorem all_edges_open_at_zero_blocking_OPEN :
       (b) `forward_reachable_empty_full_at_all_open_OPEN` (Cat 3
           paper-stipulated atom — paper Def 2.1 connectivity + Def 2.5
           full-edge-subgraph forward-reachable identification).
-    Each smaller atom is more atomic per §18 + has an explicit paper
+    Each smaller atom is more atomic and has an explicit paper
     Definition close target.
 
     paper source: Proposition `prop:trap-prevalence` Part 1 proof,
@@ -696,7 +691,7 @@ def trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ := fun _ => 1
     event-indicator is non-negative by definition).  Mirrors the
     `topoLossKernel_mem_unitInterval` / `wInfoOracleKernel_nonpos`
     structuralEquation precedents (paper stipulates the kernel's
-    pointwise range/sign); 永不 close per discipline §3.4.3.
+    pointwise range/sign); paper-Def foundational atom (永不 close).
     paper source: Proposition `prop:trap-prevalence` Part 2, line 458
     (`trapMisalignmentProbability` is a probability ⇒ its integrand is
     a `{0,1}`-valued event indicator ⇒ `≥ 0`).
@@ -723,7 +718,7 @@ theorem trapEventIndicator_nonneg :
     `expectedTopoLoss` / `W_info_oracle` concretisations.
 
     Concrete-def-closure (`expectedTopoLoss` / `W_info_oracle` pattern):
-    the `axiom trapMisalignmentProbability : ℝ → ℝ` is REPLACED by this
+    `trapMisalignmentProbability : ℝ → ℝ` is given as this
     `noncomputable def`.  Not content-erasure: the def body
     IS the paper's exact "probability of the misalignment event" =
     `E_{G_p}[indicator]`, evaluated on the explicit finite
@@ -778,7 +773,7 @@ noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
     Cat 3 sub-type: carrier — a paper-graph-specific `Finset` on the
     percolation sample space, the natural sub-event over which paper
     line 473 lower-bounds; mirrors the `giantComponentEvent` carrier
-    precedent. 永不 close per discipline §3.4.1.
+    precedent. Cat 3 carrier (永不 close).
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (the edge-config + `|C_2| ≥ 2` + reward-event `E`
     sub-event).
