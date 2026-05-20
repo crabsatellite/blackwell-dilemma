@@ -174,11 +174,11 @@ theorem bondConfigWeight_le_one {E : Type} [Fintype E] (p : ℝ)
   rw [bondConfigWeight_eq_bernoulliWeight_univ]
   exact Infrastructure.bernoulliWeight_le_one Finset.univ ⟨hp0, hp1⟩ ω
 
-/-- **R90 strict-positive bond weight** — under non-trivial open-edge
+/-- **Strict-positive bond weight** — under non-trivial open-edge
     probability `p ∈ (0, 1)`, EVERY bond configuration has STRICTLY
     POSITIVE weight: `0 < bondConfigWeight p ω` for all `ω`. Routes
     through Cat 1 Infrastructure `bernoulliWeight_pos`. Required for the
-    reversal-witness integration pattern (R90): a strict pointwise-`<`
+    reversal-witness integration pattern: a strict pointwise-`<`
     at a single configuration `ω₀` lifts to a strict expectation-`<`
     only if `ω₀` carries positive measure. -/
 theorem bondConfigWeight_pos {E : Type} [Fintype E] (p : ℝ)
@@ -338,7 +338,7 @@ theorem percExpectation_mono {E : Type} [Fintype E] [DecidableEq E]
   exact mul_le_mul_of_nonneg_left (hfg ω)
     (bondConfigWeight_nonneg p hp0 hp1 ω)
 
-/-- **R159 ContinuousOn preservation by `E_{G_p}`** (Cat 1, kernel-pure).
+/-- **ContinuousOn preservation by `E_{G_p}`** (Cat 1, kernel-pure).
     If for each percolation realisation `ω`, the integrand `f β ω` is
     continuous in `β` on `S ⊆ ℝ`, then the percolation expectation
     `percExpectation p (f β)` is also continuous on `S`.
@@ -362,7 +362,7 @@ theorem percExpectation_continuousOn_of_pointwise_continuousOn
   intro ω _
   exact (h_ptwise ω).const_smul (bondConfigWeight p ω)
 
-/-- **R103 Filter.Tendsto preservation by `E_{G_p}`** — finite-sample
+/-- **Filter.Tendsto preservation by `E_{G_p}`** — finite-sample
     bounded-convergence theorem on the bond-percolation expectation.
     If for each percolation realisation `ω`, the integrand sequence
     `f β ω` converges to `g ω` as `β` evolves along filter `l`, then
@@ -374,7 +374,7 @@ theorem percExpectation_continuousOn_of_pointwise_continuousOn
     bondConfigWeight p ω * g ω` (continuous-mult); finite-sum
     aggregation preserves the limit.
 
-    Foundation lemma for the R103 reversal-of-monotonicity convergence
+    Foundation lemma for the reversal-of-monotonicity convergence
     pattern — the strict-`<` analogue of `percExpectation_lt_of_pointwise_le_strict_at_one`
     converted to a Tendsto-preservation statement, enabling closure of
     Tendsto-style welfare-convergence atoms. -/
@@ -391,7 +391,7 @@ theorem percExpectation_tendsto_of_pointwise_tendsto
   intro ω _
   exact (h_ptwise ω).const_mul (bondConfigWeight p ω)
 
-/-- **R90 STRICT monotonicity of `E_{G_p}` in the integrand** — the
+/-- **STRICT monotonicity of `E_{G_p}` in the integrand** — the
     foundation lemma for the reversal-witness integration pattern.
     If `f ω ≤ g ω` pointwise AND `f ω₀ < g ω₀` strictly at some
     single `ω₀`, then under non-trivial open-edge probability

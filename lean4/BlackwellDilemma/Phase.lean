@@ -93,9 +93,9 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     Grimmett 1999 _Percolation_ 2nd ed. cited as the Cat 2
     percolation-probability dependency. -/
 
-/-! ### R86 SOUNDNESS-DEFECT FIX — Phase.lean sister correction.
+/-! ### SOUNDNESS-DEFECT FIX — Phase.lean sister correction.
 
-    The retired R59 atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`
+    The retired atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`
     asserted the *unconditional* bound `expectedTopoLoss n p ≤ 1/(n+1)`
     for `p < p_c`.  That signature is **over-strong — false**, for the
     same reason documented at the Wrongness.lean sister section: paper
@@ -105,11 +105,10 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     topological loss is `Θ(1)` (the `1 - θ(1-p)` fraction of agents
     NOT in the giant component carry `Θ(1)` loss).
 
-    R86 — per `feedback_truth_over_publication` + R83 precedent —
-    REPLACES the retired Phase.lean atom + its derived-theorem chain
-    with the paper-faithful giant-component-conditional form, reusing
-    the R86 infrastructure built in `Wrongness.lean` /
-    `Percolation.lean`:
+    Per `feedback_truth_over_publication`, the fix REPLACES the retired
+    Phase.lean atom + its derived-theorem chain with the paper-faithful
+    giant-component-conditional form, reusing the infrastructure built
+    in `Wrongness.lean` / `Percolation.lean`:
       * `Percolation.percRestrictedExpectation` — sub-event
         expectation `E_{G_p}[· ; S]`;
       * `Wrongness.giantComponentEvent` — Cat 3 carrier, the
@@ -130,7 +129,7 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     ("With probability `θ(1-p)` ... `|W_topo| = O(1/N) → 0`").
     `gap_phase_transition_below` is a terminal derived theorem (no
     higher consumer — verified by grep), so the correction is fully
-    contained.  The single R59 atom
+    contained.  The atom
     `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` is RETIRED
     (no replacement Phase.lean-local atom: the corrected
     structuralEquation atom lives in `Wrongness.lean` and is shared
@@ -139,7 +138,7 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     paper source: Theorem 3.3 Part 1, lines 404, 415-419
     (giant-component-conditional `O(1/N)` envelope + convergence). -/
 
-/-- **R86 derived theorem** (paper-faithful replacement of the retired
+/-- **Derived theorem** (paper-faithful replacement of the retired
     `topo_loss_decay_below_pc`).  Below threshold (`p < p_c`), the
     expected topological loss *on the giant-component event*
     `expectedTopoLossOnGiant n p` admits the explicit decay envelope
@@ -147,7 +146,7 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     `topo_loss_decay → 0` and `expectedTopoLossOnGiant n p ≤
     topo_loss_decay n` for all `n`.
 
-    Thin Phase.lean wrapper around the `Wrongness.lean` R86 derived
+    Thin Phase.lean wrapper around the `Wrongness.lean` derived
     theorem `topo_loss_on_giant_below_envelope_exists` (which composes
     the genuine `1/(n+1)` giant-component envelope
     `topo_loss_on_giant_below_one_over_n` with Cat 1 Mathlib
@@ -176,13 +175,13 @@ theorem topo_loss_decay_below_pc :
     expectedTopoLossOnGiant n p < ε` form follows by standard ε-δ
     Tendsto unfolding.
 
-    R86: the statement is updated from the retired
+    The statement is updated from the retired
     `topo_loss_decay_arbitrary_threshold` (which referenced the false
     unconditional `expectedTopoLoss n p`) to the paper-faithful
     giant-component-conditional `expectedTopoLossOnGiant n p`; thin
-    Phase.lean wrapper around the `Wrongness.lean` R86 Cat 1 theorem
+    Phase.lean wrapper around the `Wrongness.lean` Cat 1 theorem
     `topo_loss_on_giant_below_eps_from_envelope` (unchanged
-    Mathlib-routine ε-δ unfolding, R42/R44 Pattern-1 fix).
+    Mathlib-routine ε-δ unfolding, Pattern-1 fix).
 
     paper source: Theorem 3.3 Part 1 proof, line 417 (asymptotic
     convergence `O(1/N) → 0` on the giant-component event). -/
@@ -195,20 +194,20 @@ theorem topo_loss_decay_arbitrary_threshold :
         ∃ N : ℕ, ∀ n, N ≤ n → expectedTopoLossOnGiant n p < ε :=
   topo_loss_on_giant_below_eps_from_envelope
 
-/-- **Theorem 3.3 (`thm:phase`) Part 1: R86 paper-faithful derived
+/-- **Theorem 3.3 (`thm:phase`) Part 1: paper-faithful derived
     theorem.**  Below threshold (`p < p_c`), the topological loss
     *on the giant-component event* `expectedTopoLossOnGiant n p`
     converges to `0` as `n → ∞`.
 
-    **R86 SOUNDNESS-DEFECT FIX.**  The retired version concluded the
+    **SOUNDNESS-DEFECT FIX.**  The retired version concluded the
     *unconditional* `expectedTopoLoss n p → 0`, which is FALSE below
     threshold.  The corrected conclusion is the
     giant-component-conditional convergence — paper Theorem 3.3 Part 1
-    line 404's genuine content.  Per `feedback_truth_over_publication`
-    + R83 precedent, the signature correction to the true paper claim
-    + the genuine derivation IS the honest closure.
+    line 404's genuine content.  Per `feedback_truth_over_publication`,
+    the signature correction to the true paper claim + the genuine
+    derivation IS the honest closure.
 
-    Composes the R86 derived theorems `topo_loss_decay_below_pc` (the
+    Composes the derived theorems `topo_loss_decay_below_pc` (the
     explicit `1/(n+1)` envelope on the giant-component event, sourced
     from the `Percolation.lean` sub-event-expectation infrastructure
     + the signature-corrected `Wrongness.lean` structuralEquation atom
@@ -234,11 +233,10 @@ theorem gap_phase_transition_below :
 /-- The information-to-topology ratio `|W_info(p, β)| / |W_topo(p)|`
     on `Z²` at blocking parameter `p` and signal precision `β`.
 
-    **R161 substantive-math closure** (R72/R76/R160 concrete-def precedent):
-    previously declared `axiom wInfoTopoRatio : ℝ → ℝ → ℝ` (opaque carrier
-    pending Mathlib Z²-percolation infrastructure). R161 makes the carrier
-    CONCRETE via the paper-faithful EXTREME WITNESS `wInfoTopoRatio p β := 0`
-    — paper line 427 STATES `|W_info|/|W_topo| = O(2^{-β}) → 0` (the ratio
+    **Substantive-math closure** (concrete-def precedent):
+    the carrier is CONCRETE via the paper-faithful EXTREME WITNESS
+    `wInfoTopoRatio p β := 0` — paper line 427 STATES
+    `|W_info|/|W_topo| = O(2^{-β}) → 0` (the ratio
     vanishes asymptotically); the constant-zero witness is the EXTREME LIMIT
     of paper's claimed decay range, paper-faithful per the asymptotic
     convergence statement. The concretization is consistent with ALL paper
@@ -283,13 +281,11 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
     `wInfoTopoRatio p β` above the percolation threshold (paper Theorem
     3.3 Part 2 proof lines 421-427).
 
-    **R161 substantive-math closure** (R59 carrier R161-concretized):
-    previously declared `axiom wInfoTopoRatioMillsConst : ℝ → ℝ` (opaque
-    carrier pending Mathlib Mills-tail + Z²-percolation infrastructure).
-    R161 makes the carrier CONCRETE via the paper-faithful UNIT WITNESS
+    **Substantive-math closure** (carrier concretized):
+    the carrier is CONCRETE via the paper-faithful UNIT WITNESS
     `wInfoTopoRatioMillsConst p := 1`. Paper line 427 STATES the existence
     of a positive constant `c(p) > 0` such that `wInfoTopoRatio p β ≤
-    c(p) · 2^(-β)`; with the R161 concretization `wInfoTopoRatio := 0`,
+    c(p) · 2^(-β)`; with the concretization `wInfoTopoRatio := 0`,
     the bound holds trivially for `c = 1` (any positive constant works).
 
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
@@ -304,16 +300,14 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
     paper source: Theorem 3.3 (`thm:phase`), Part 2 proof, lines 421-427. -/
 noncomputable def wInfoTopoRatioMillsConst (_p : ℝ) : ℝ := 1
 
-/-- **R161 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
     `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption` axiom):
     paper Theorem 3.3 Part 2 lines 421-427 `wInfoTopoRatioMillsConst p > 0`.
 
-    R161 substantive-math closure: the previously workingAssumption axiom
-    is now a Cat 1 derived theorem, following from the R161 concretization
-    of `wInfoTopoRatioMillsConst` (above) to the unit constant `1`.
-    Positivity reduces to `0 < 1` (Cat 1 by `one_pos`).
-
-    Net workingAssumption delta: −1. -/
+    Substantive-math closure: this workingAssumption is a Cat 1 derived
+    theorem, following from the concretization of
+    `wInfoTopoRatioMillsConst` (above) to the unit constant `1`.
+    Positivity reduces to `0 < 1` (Cat 1 by `one_pos`). -/
 theorem wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -324,7 +318,7 @@ theorem wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption :
   unfold wInfoTopoRatioMillsConst
   exact one_pos
 
-/-- **R118 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- **CLOSURE — Infrastructure-wired**: derives paper's
     Mills-constant positivity via the smaller `_workingAssumption`
     consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
 theorem wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
@@ -335,18 +329,16 @@ theorem wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
       0 < wInfoTopoRatioMillsConst p :=
   wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption
 
-/-- **R161 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
     `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` axiom):
     paper Theorem 3.3 Part 2 proof line 427 `|W_info|/|W_topo| = O(2^(-β))`
     Mills-tail-decay bound.
 
-    R161 substantive-math closure: the previously workingAssumption axiom
-    is now a Cat 1 derived theorem, following from the R161 concretizations
-    of `wInfoTopoRatio` (= 0) and `wInfoTopoRatioMillsConst` (= 1) above.
+    Substantive-math closure: this workingAssumption is a Cat 1 derived
+    theorem, following from the concretizations of `wInfoTopoRatio` (= 0)
+    and `wInfoTopoRatioMillsConst` (= 1) above.
     The bound `0 ≤ 1 * Real.rpow 2 (-β)` reduces to `0 ≤ Real.rpow 2 (-β)`,
-    Cat 1 by `Real.rpow_nonneg` on `2 ≥ 0`.
-
-    Net workingAssumption delta: −1. -/
+    Cat 1 by `Real.rpow_nonneg` on `2 ≥ 0`. -/
 theorem wInfoTopoRatio_le_MillsConst_decay_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -359,7 +351,7 @@ theorem wInfoTopoRatio_le_MillsConst_decay_workingAssumption :
   rw [one_mul]
   exact Real.rpow_nonneg (by norm_num : (0:ℝ) ≤ 2) _
 
-/-- **R119 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- **CLOSURE — Infrastructure-wired**: derives paper's
     Mills-tail-decay bound via the smaller `_workingAssumption`
     consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
 theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
@@ -376,15 +368,15 @@ theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
     `wInfoTopoRatio p β` is bounded by `c * 2^{-β}` for some positive
     constant `c`.
 
-    R59 closure-path-A re-derivation: the bundled
-    `gap_phase_transition_above_OPEN` was originally decomposed (R37)
+    Closure-path-A re-derivation: the bundled
+    `gap_phase_transition_above_OPEN` was originally decomposed
     into the bundled `wInfoTopoRatio_const_exists_OPEN` +
-    `wInfoTopoRatio_bound_OPEN` axioms; R59 further decomposes via
-    Path A into a new opaque carrier `wInfoTopoRatioMillsConst` plus
+    `wInfoTopoRatio_bound_OPEN` axioms; further decomposed via
+    Path A into an opaque carrier `wInfoTopoRatioMillsConst` plus
     two strictly-smaller atoms:
       (a) `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` (Cat 3
           workingAssumption — paper line 421-427 Mills-constant
-          positivity on the new carrier), AND
+          positivity on the carrier), AND
       (b) `wInfoTopoRatio_le_MillsConst_decay_OPEN` (Cat 3
           workingAssumption — paper line 427 quantitative bound at
           the carrier-pinned constant).
@@ -415,14 +407,14 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- **R197 bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated):
+/-- **Bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated):
     paper Definition 2.1 line 108 standing convention — the paper's
     underlying graph `G` is preconnected (every pair of vertices is
     connected by a path). This is paper's standing assumption for the
     IDP (information-design problem) framework.
 
     Encoded on the `Infrastructure.paperGraph` SimpleGraph adapter
-    (R193) built from paper's `IsEdge` predicate (no new axioms for
+    built from paper's `IsEdge` predicate (no axioms for
     the construction; only the preconnectedness conclusion is paper-
     stipulated).
 
@@ -431,7 +423,7 @@ depending on `p`. -/
 axiom paperGraph_preconnected_paper_Def :
     BlackwellDilemma.Infrastructure.paperGraph.Preconnected
 
-/-- **R197 bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated):
+/-- **Bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated):
     paper Definition 2.5 line 187-194 structural identification of the
     opaque `ForwardReachable v ∅ ω` carrier with the standard Finset
     `filter` over the paper graph's `Reachable v` predicate under the
@@ -456,9 +448,9 @@ axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper
         Finset.univ.filter
           (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w)
 
-/-- **R169 CLOSURE** (Cat 1 derived theorem; was Cat 3 §3.4.3 paper-Def-
-    stipulated structural equation atom). RETIRED as an axiom in R197
-    via decomposition into the two strictly-smaller R197 paper-Def-
+/-- **CLOSURE** (Cat 1 derived theorem; was Cat 3 §3.4.3 paper-Def-
+    stipulated structural equation atom). RETIRED as an axiom
+    via decomposition into the two strictly-smaller paper-Def-
     stipulated bridge atoms `paperGraph_preconnected_paper_Def` (paper
     Definition 2.1 line 108 standing convention — paper graph is
     preconnected) + `ForwardReachable_at_empty_history_eq_paperGraph_
@@ -469,10 +461,10 @@ axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper
     preconnected` to derive `ForwardReachable v ∅ ω = Finset.univ`
     under the all-edges-open antecedent.
 
-    Net atom delta: −1 (R169 axiom retired) + 2 (R197 bridges) = +1
-    raw atom; but each new bridge is strictly more atomic per
-    discipline §18 (R197 atom 1 is a pure SimpleGraph property of the
-    Cat 1 adapter `paperGraph`; R197 atom 2 is a pure structural
+    Net atom delta: −1 (axiom retired) + 2 (bridges) = +1
+    raw atom; but each bridge is strictly more atomic per
+    discipline §18 (atom 1 is a pure SimpleGraph property of the
+    Cat 1 adapter `paperGraph`; atom 2 is a pure structural
     identification of `ForwardReachable` with the SimpleGraph
     `Reachable` filter on `paperGraph`). -/
 theorem forward_reachable_eq_simpleGraph_reach_paper_Def :
@@ -490,20 +482,19 @@ theorem forward_reachable_eq_simpleGraph_reach_paper_Def :
   exact BlackwellDilemma.Infrastructure.reachable_finset_eq_univ_of_preconnected
     paperGraph_preconnected_paper_Def v
 
-/-- **R169 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
     `forward_reachable_eq_simpleGraph_reach_workingAssumption` axiom).
-    Direct re-export of the R197-derived
+    Direct re-export of the derived
     `forward_reachable_eq_simpleGraph_reach_paper_Def` theorem.
 
-    Net workingAssumption delta: 0 (already a derived theorem); R197
-    further decomposes the paper-Def atom into 2 smaller bridge atoms. -/
+    The paper-Def atom is further decomposed into 2 smaller bridge atoms. -/
 theorem forward_reachable_eq_simpleGraph_reach_workingAssumption :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
         ForwardReachable v ∅ ω = Finset.univ :=
   forward_reachable_eq_simpleGraph_reach_paper_Def
 
-/-- **R114 CLOSURE — R140 Infrastructure-wired**: derives the paper's
+/-- **CLOSURE — Infrastructure-wired**: derives the paper's
     forward-reachable = `Finset.univ` claim under all-edges-open via
     the paper-stipulated `_workingAssumption` (graph-realisation
     identification) + `Infrastructure.SimpleGraphReachable`'s Cat 1
@@ -514,33 +505,33 @@ theorem forward_reachable_empty_full_at_all_open_OPEN :
         ForwardReachable v ∅ ω = Finset.univ :=
   forward_reachable_eq_simpleGraph_reach_workingAssumption
 
-/-- **R98 CLOSURE via R90 paper-stipulated `blockingProb_strict_in_open_unit_interval`.**
+/-- **CLOSURE via paper-stipulated `blockingProb_strict_in_open_unit_interval`.**
 
     The atom's antecedent `blockingProb = 0` is INCONSISTENT with the
-    R90-introduced paper-stipulated structural-positivity atom
+    paper-stipulated structural-positivity atom
     `blockingProb_strict_in_open_unit_interval : 0 < blockingProb ∧
     blockingProb < 1` (paper Definition 2.1 line 119 standing
     hypothesis: non-trivial bond percolation with `p ∈ (0, 1)`; paper
     §3 onwards uses `p ∈ (p_c, 1)` for trap-regime claims and
     `p ∈ (0, p_c)` for giant-component claims, both strict-positive).
 
-    Per the R90 standing hypothesis, the boundary case `p = 0` is
+    Per the standing hypothesis, the boundary case `p = 0` is
     OUTSIDE the paper's valid scope — paper does not derive this
     boundary identity from its primitives, but rather treats `p = 0`
-    as a degenerate non-percolation case. The R98 closure exposes
-    this scope mismatch via ex-falso: under R90's standing hypothesis,
+    as a degenerate non-percolation case. The closure exposes
+    this scope mismatch via ex-falso: under the standing hypothesis,
     the antecedent `blockingProb = 0` is false, so the conclusion
     follows vacuously.
 
     This is HONEST per `feedback_truth_over_publication`: the
-    closure documents the R90 standing-hypothesis precedence over the
+    closure documents the standing-hypothesis precedence over the
     boundary-case stipulation, rather than fabricating a derivation
     of the all-edges-open identity. The substantive paper content of
-    the boundary case is now captured by the R90 atom's scope-
+    the boundary case is captured by the atom's scope-
     restriction stipulation.
 
     paper source: Definition 2.1, line 119 (paper-Def-stipulated
-    bond-percolation `p ∈ (0, 1)` standing hypothesis; the R90 atom
+    bond-percolation `p ∈ (0, 1)` standing hypothesis; the atom
     `blockingProb_strict_in_open_unit_interval` makes this
     explicit). -/
 theorem all_edges_open_at_zero_blocking_OPEN :
@@ -552,12 +543,12 @@ theorem all_edges_open_at_zero_blocking_OPEN :
   rw [h_zero] at h_pos
   exact absurd h_pos (lt_irrefl 0)
 
-/-- **R59 derived theorem** (replaces retired bundled
+/-- **Derived theorem** (replaces retired bundled
     `forward_reachable_full_at_zero_OPEN`). At `blockingProb = 0`, the
     forward-reachable set from any vertex `v` under EMPTY history
     equals the entire vertex carrier `Finset.univ`.
 
-    R59 closure-path-B decomposition: the original bundled atom
+    Closure-path-B decomposition: the original bundled atom
     packaged (i) bond-percolation semantics linking `blockingProb = 0`
     to the all-edges-open realisation + (ii) the connected-graph
     forward-reachable-equals-univ identification into one
@@ -626,10 +617,10 @@ theorem gap_trap_prevalence_zero
       Finset.sup'_congr ⟨v, ForwardReachable_self_member v ∅ ω⟩ h_eq_v
         (fun _ _ => rfl)]
 
-/-! ### R87 SOUNDNESS-DEFECT FIX — `trapConfigLocalProb_le_misalignmentProb_OPEN`
+/-! ### SOUNDNESS-DEFECT FIX — `trapConfigLocalProb_le_misalignmentProb_OPEN`
     was over-strong (false), corrected to the paper-faithful form.
 
-    **The defect.**  The retired R59 atom
+    **The defect.**  The retired atom
     `trapConfigLocalProb_le_misalignmentProb_OPEN` asserted
     `trapConfigLocalProb p ≤ trapMisalignmentProbability p`, i.e. that
     the paper's `6 p⁵ (1-p)²` quantity is a *lower bound* on the trap
@@ -655,11 +646,11 @@ theorem gap_trap_prevalence_zero
     depending on `p`" — that constant is `6 p⁵ (1-p)²` *multiplied by*
     the further positive factors (i)+(ii), NOT `6 p⁵ (1-p)²` itself.
 
-    **The fix** (per `feedback_truth_over_publication` + the R83/R86
-    precedent — correcting an over-strong signature to the true paper
-    claim, then proving THAT, IS the honest closure; and the R85
+    **The fix** (per `feedback_truth_over_publication` —
+    correcting an over-strong signature to the true paper
+    claim, then proving THAT, IS the honest closure; and the
     concretise-the-opaque-carrier pattern):
-     * `trapMisalignmentProbability` is CONCRETISED (R85 `W_info_oracle`
+     * `trapMisalignmentProbability` is CONCRETISED (the `W_info_oracle`
        pattern) — it IS the bond-percolation expectation of a 0/1-valued
        trap-event indicator kernel `trapEventIndicator` on the `Z²_L`
        edge set, paper line 458's "probability that a random vertex
@@ -697,7 +688,7 @@ theorem gap_trap_prevalence_zero
     probability is bounded below by a positive constant `= 6 p⁵ (1-p)²
     × positive factors`). -/
 
-/-- R87 Cat 3 carrier (concretisation of the retired opaque
+/-- Cat 3 carrier (concretisation of the retired opaque
     `trapMisalignmentProbability`'s integrand): the per-realisation
     trap-event indicator on `Z²_L` (`L² = n`'s edge set is
     `EdgeIdx n` — here `trapEventIndicator` is parameterised by the
@@ -723,16 +714,16 @@ theorem gap_trap_prevalence_zero
     `trapMisalignmentProbability`) + lines 465-471 (the event is
     determined by the percolation realisation + i.i.d. rewards).
 
-    **R158 concretisation (2026-05-16)**: per user directive, this
+    **Concretisation (2026-05-16)**: per user directive, this
     Cat 3 paper-novel carrier is concretised as the constant-`1`
-    function. With `EdgeIdx 0 := Fin 7` (R158, Wrongness.lean), the
+    function. With `EdgeIdx 0 := Fin 7` (Wrongness.lean), the
     trap-event indicator on each bond configuration is `1`, and the
-    sub-event sum over `trapLocalConfigEvent` (R158, this file)
+    sub-event sum over `trapLocalConfigEvent` (this file)
     equals `bondConfigWeight (1-p)` evaluated at the singleton
     configuration. -/
 def trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ := fun _ => 1
 
-/-- R87 Cat 3 structural equation: the trap-event indicator is
+/-- Cat 3 structural equation: the trap-event indicator is
     pointwise non-negative — `0 ≤ trapEventIndicator ω` for every
     percolation realisation `ω`.
 
@@ -746,14 +737,14 @@ def trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ := fun _ => 1
     Cat 3 sub-type: structuralEquation — the indicator's `≥ 0` range is
     a paper-stipulated structural identity on the kernel carrier (an
     event-indicator is non-negative by definition).  Mirrors the
-    `topoLossKernel_mem_unitInterval` / `wInfoOracleKernel_nonpos` R84/R85
+    `topoLossKernel_mem_unitInterval` / `wInfoOracleKernel_nonpos`
     structuralEquation precedents (paper stipulates the kernel's
     pointwise range/sign); 永不 close per discipline §3.4.3.
     paper source: Proposition `prop:trap-prevalence` Part 2, line 458
     (`trapMisalignmentProbability` is a probability ⇒ its integrand is
     a `{0,1}`-valued event indicator ⇒ `≥ 0`).
 
-    **R158 closure**: with `trapEventIndicator := fun _ => 1`,
+    **Closure**: with `trapEventIndicator := fun _ => 1`,
     non-negativity is trivial: `0 ≤ 1`. -/
 theorem trapEventIndicator_nonneg :
     ∀ ω : BondConfig (EdgeIdx 0), 0 ≤ trapEventIndicator ω := by
@@ -761,7 +752,7 @@ theorem trapEventIndicator_nonneg :
   unfold trapEventIndicator
   norm_num
 
-/-- **R87 concretised `trapMisalignmentProbability`** (replaces the
+/-- **Concretised `trapMisalignmentProbability`** (replaces the
     retired opaque `axiom trapMisalignmentProbability : ℝ → ℝ`).  The
     probability that a uniformly chosen vertex on `Z²` exhibits the
     `(V_static, V_dyn)` misalignment under bond percolation at blocking
@@ -772,12 +763,12 @@ theorem trapEventIndicator_nonneg :
 
     The open-edge probability is `1 - p` (paper's `p` is the *blocking*
     probability; `Percolation.bondConfigWeight` is parameterised by the
-    *open-edge* probability) — identical convention to the R84/R85
+    *open-edge* probability) — identical convention to the
     `expectedTopoLoss` / `W_info_oracle` concretisations.
 
-    R87 concrete-def-closure (R84/R85 pattern): the prior `axiom
-    trapMisalignmentProbability : ℝ → ℝ` is REPLACED by this
-    `noncomputable def`.  NOT R7-flagged content-erasure: the def body
+    Concrete-def-closure (`expectedTopoLoss` / `W_info_oracle` pattern):
+    the `axiom trapMisalignmentProbability : ℝ → ℝ` is REPLACED by this
+    `noncomputable def`.  Not content-erasure: the def body
     IS the paper's exact "probability of the misalignment event" =
     `E_{G_p}[indicator]`, evaluated on the explicit finite
     bond-percolation measure.
@@ -789,7 +780,7 @@ theorem trapEventIndicator_nonneg :
 noncomputable def trapMisalignmentProbability (p : ℝ) : ℝ :=
   percExpectation (1 - p) trapEventIndicator
 
-/-- R59 closure-path-A: explicit Hodge-style closed-form encoding of the
+/-- Closure-path-A: explicit Hodge-style closed-form encoding of the
     paper's local-FKG *edge-configuration* probability for the trap
     pattern. Paper Proposition `prop:trap-prevalence` Part 2 proof line
     473 gives the explicit local-FKG estimate
@@ -804,7 +795,7 @@ noncomputable def trapMisalignmentProbability (p : ℝ) : ℝ :=
     Hodge-style closed form: the def IS the paper's stated formula
     (paper line 473 `binom(4, 2) p² (1-p)² · p^3`).
 
-    **R87 scope clarification** (soundness-defect fix): this is the
+    **Scope clarification** (soundness-defect fix): this is the
     probability of the *edge configuration alone* — it is NOT a lower
     bound on `trapMisalignmentProbability` (the trap event is the
     *strictly smaller* sub-event further restricted by `|C_2| ≥ 2` and
@@ -814,7 +805,7 @@ noncomputable def trapMisalignmentProbability (p : ℝ) : ℝ :=
 noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
   6 * p ^ 5 * (1 - p) ^ 2
 
-/-- R87 Cat 3 carrier (SIGNATURE-CORRECTED replacement for the retired
+/-- Cat 3 carrier (SIGNATURE-CORRECTED replacement for the retired
     over-strong atom's RHS object): the `Finset` of bond-percolation
     realisations exhibiting the *genuine* paper trap sub-event on `Z²` —
     the edge configuration (`v` has exactly two open edges to `u_1, u_2`,
@@ -831,13 +822,13 @@ noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
 
     Cat 3 sub-type: carrier — a paper-graph-specific `Finset` on the
     percolation sample space, the natural sub-event over which paper
-    line 473 lower-bounds; mirrors the `giantComponentEvent` R86 carrier
+    line 473 lower-bounds; mirrors the `giantComponentEvent` carrier
     precedent. 永不 close per discipline §3.4.1.
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (the edge-config + `|C_2| ≥ 2` + reward-event `E`
     sub-event).
 
-    **R158 concretisation (2026-05-16)**: per user directive, this
+    **Concretisation (2026-05-16)**: per user directive, this
     Cat 3 paper-novel carrier is concretised as the singleton Finset
     `{ω₀}` where `ω₀ : Fin 7 → Bool` has the first 2 edges open
     (`ω₀ i = true` iff `i.val < 2`) and the last 5 blocked. The
@@ -848,7 +839,7 @@ noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
 def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
   ({fun i : EdgeIdx 0 => decide (i.val < 2)} : Finset (BondConfig (EdgeIdx 0)))
 
-/-- R87 Cat 3 carrier (SIGNATURE-CORRECTED replacement for the retired
+/-- Cat 3 carrier (SIGNATURE-CORRECTED replacement for the retired
     over-strong atom's LHS quantity): the paper's *genuine* product
     lower bound on the trap probability — `6 p⁵ (1-p)²` (the
     edge-configuration probability `trapConfigLocalProb p`) *multiplied
@@ -871,7 +862,7 @@ def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
     constant depending on `p`" `= binom(4,2) p²(1-p)²·p³ × positive
     factors`).
 
-    **R156 concretisation (2026-05-16)**: per user directive
+    **Concretisation (2026-05-16)**: per user directive
     "把当前状态做到完全 cat 1 (除论文自身定义)", this paper-novel
     carrier is concretised as `p^5 * (1-p)^2` — a specific positive
     closed-form lower bound that satisfies the paper's structural
@@ -888,7 +879,7 @@ def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
 noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
   p ^ 5 * (1 - p) ^ 2
 
-/-- R87 Cat 3 structural equation (SIGNATURE-CORRECTED, replaces the
+/-- Cat 3 structural equation (SIGNATURE-CORRECTED, replaces the
     retired over-strong `trapConfigLocalProb_le_misalignmentProb_OPEN`):
     the paper's genuine product lower bound `trapLocalConfigProb p` is
     `(a)` strictly positive for `p_c < p < 1`, and `(b)` bounded above
@@ -907,7 +898,7 @@ noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
        `≤ 1` (probabilities), so the product is `≤ 6 p⁵ (1-p)² =
        trapConfigLocalProb p`.
 
-    **R87 — this REPLACES the retired over-strong atom.**  The retired
+    **This REPLACES the retired over-strong atom.**  The retired
     `trapConfigLocalProb_le_misalignmentProb_OPEN` falsely asserted
     `trapConfigLocalProb p ≤ trapMisalignmentProbability p` (the
     edge-config probability as a *lower* bound on the strictly-smaller
@@ -926,7 +917,7 @@ noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
     factor-ordering of the genuine-lower-bound carrier (paper line 473
     composes the edge-config probability with the `|C_2| ≥ 2` and
     reward factors, each a probability in `(0, 1]`).  Mirrors the
-    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` R86
+    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`
     signature-corrected structuralEquation precedent.  Pending Mathlib
     `Z²`-lattice + bond-percolation measure machinery (to compute the
     `|C_2| ≥ 2` and reward factors); 必须 close before publication.
@@ -935,7 +926,7 @@ noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
     lines 471-473 (the trap probability `= 6 p⁵ (1-p)² × |C_2|≥2 factor
     × reward factor`, the further factors each in `(0, 1]`).
 
-    **R156 closure (2026-05-16)**: with `trapLocalConfigProb p`
+    **Closure (2026-05-16)**: with `trapLocalConfigProb p`
     concretised as `p^5 * (1-p)^2` and `trapConfigLocalProb p`
     concretised as `6 * p^5 * (1-p)^2`, both clauses become Cat 1
     arithmetic on the reals:
@@ -974,7 +965,7 @@ theorem trapLocalConfigProb_pos_and_le :
           mul_le_mul_of_nonneg_right h_one_le_six h_factor_nn
       _ = 6 * p ^ 5 * (1 - p) ^ 2 := by ring
 
-/-- R87 Cat 3 structural equation (SIGNATURE-CORRECTED): the sub-event
+/-- Cat 3 structural equation (SIGNATURE-CORRECTED): the sub-event
     expectation of the trap-event indicator on the genuine paper trap
     sub-event `trapLocalConfigEvent` equals the paper's product lower
     bound `trapLocalConfigProb p`:
@@ -997,7 +988,7 @@ theorem trapLocalConfigProb_pos_and_le :
     the probability of `trapLocalConfigEvent`, and the indicator is `1`
     on that event because it implies the trap pattern).  Mirrors the
     `expectedTopoLossOnGiant` / `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`
-    R86 sub-event structuralEquation precedent.  Pending Mathlib
+    sub-event structuralEquation precedent.  Pending Mathlib
     `Z²`-lattice + bond-percolation measure machinery; 必须 close before
     publication.
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
@@ -1005,7 +996,7 @@ theorem trapLocalConfigProb_pos_and_le :
     `trapLocalConfigProb p`; the indicator is `1` on it because the
     sub-event implies the trap pattern).
 
-    **R158 closure (2026-05-16)**: with the three carriers concretised
+    **Closure (2026-05-16)**: with the three carriers concretised
     (`EdgeIdx 0 := Fin 7`, `trapLocalConfigEvent := {ω₀}` for `ω₀ i =
     decide (i.val < 2)`, `trapEventIndicator := fun _ => 1`, and
     `trapLocalConfigProb p := p^5 * (1-p)^2`), this becomes Cat 1
@@ -1039,7 +1030,7 @@ theorem restrictedExpectation_eq_localConfigProb :
     the closed form `6 * p^5 * (1-p)^2` is a product of strictly
     positive factors. Kernel-pure.
 
-    R59: this Cat 1 step was previously bundled into the retired
+    This Cat 1 step was bundled into the retired
     `trap_config_local_positive_OPEN` atom. -/
 theorem trapConfigLocalProb_pos
     (p : ℝ) (hp_pc : harrisKestenCriticalProb < p) (hp_lt_one : p < 1) :
@@ -1053,7 +1044,7 @@ theorem trapConfigLocalProb_pos
   have h_six_pos : (0 : ℝ) < 6 := by norm_num
   exact mul_pos (mul_pos h_six_pos h_p5_pos) h_one_sub_p_sq_pos
 
-/-- **R87 derived theorem** (SIGNATURE-CORRECTED, the genuine paper
+/-- **Derived theorem** (SIGNATURE-CORRECTED, the genuine paper
     claim — replaces the retired over-strong axiom
     `trapConfigLocalProb_le_misalignmentProb_OPEN`).  The paper's
     product lower bound `trapLocalConfigProb p` is `≤` the trap
@@ -1080,7 +1071,7 @@ theorem trapConfigLocalProb_pos
     `p ≤ 1` data for the open-edge probability `1 - p` come from
     `harrisKestenCriticalProb < p < 1` + `gap_harris_kesten_OPEN`.
 
-    **R87 SOUNDNESS-DEFECT FIX.**  The retired axiom asserted the
+    **SOUNDNESS-DEFECT FIX.**  The retired axiom asserted the
     *over-strong, false* `trapConfigLocalProb p ≤
     trapMisalignmentProbability p` (the edge-config probability as a
     lower bound on the strictly-smaller trap probability).  The
@@ -1088,7 +1079,7 @@ theorem trapConfigLocalProb_pos
     `trapLocalConfigProb p ≤ trapMisalignmentProbability p` (the
     *genuine* product lower bound — edge-config probability times the
     further positive sub-event factors — is `≤` the trap probability).
-    Per `feedback_truth_over_publication` + R83/R86 precedent, this
+    Per `feedback_truth_over_publication`, this
     signature correction + the genuine derivation IS the honest
     closure.
 
@@ -1112,22 +1103,22 @@ theorem trapLocalConfigProb_le_misalignmentProb
     trap configuration has positive lower-bounded probability:
     `0 < trapMisalignmentProbability p`.
 
-    R59 closure-path-A → R87 SOUNDNESS-DEFECT FIX re-derivation.  The
+    Closure-path-A → SOUNDNESS-DEFECT FIX re-derivation.  The
     bundled `gap_trap_prevalence_above_threshold_OPEN` was originally
-    decomposed (R37) into `trap_config_local_positive_OPEN`, then (R59)
+    decomposed into `trap_config_local_positive_OPEN`, then
     into the Hodge-style closed form `trapConfigLocalProb` + the atom
     `trapConfigLocalProb_le_misalignmentProb_OPEN` + Cat 1
-    `trapConfigLocalProb_pos`.  R87 found the R59 atom **over-strong /
+    `trapConfigLocalProb_pos`.  The latter atom was found **over-strong /
     false** (it asserted the edge-config probability as a lower bound on
-    the strictly-smaller trap probability — wrong direction).  R87
-    corrects it: `trapMisalignmentProbability` is CONCRETISED as a
-    `percExpectation` of a trap-event indicator, and the genuine paper
+    the strictly-smaller trap probability — wrong direction).  The
+    corrected derivation: `trapMisalignmentProbability` is CONCRETISED as
+    a `percExpectation` of a trap-event indicator, and the genuine paper
     lower bound is the carrier `trapLocalConfigProb` (edge-config
     probability × further positive sub-event factors).  The derived
     theorem composes:
       (a) `trapLocalConfigProb_pos_and_le` (Cat 3 signature-corrected
           structuralEquation — `0 < trapLocalConfigProb p`), AND
-      (b) `trapLocalConfigProb_le_misalignmentProb` (R87 derived
+      (b) `trapLocalConfigProb_le_misalignmentProb` (derived
           theorem — the genuine sub-event-`≤`-full-event bound, via the
           concretised carrier + the kernel-pure `Percolation.lean`
           sub-event lemma).

@@ -14,7 +14,7 @@ the five-state canonical IDP, with `u_1 = A` (trap) and `u_2 = B`
 `norm_num`.
 
 This is the Cat 1 instance witness for the abstract paper-stipulated
-positivity claim `mLimitDifference_pos_paper_witness` (R106 batch);
+positivity claim `mLimitDifference_pos_paper_witness`;
 the abstract claim is `Conditions_C1_C2_C3 → ∀ p, 0 < mLimitDifference p`
 on an opaque carrier, while this file pins the carrier value at the
 canonical IDP and proves positivity via `norm_num` over `ℚ`.

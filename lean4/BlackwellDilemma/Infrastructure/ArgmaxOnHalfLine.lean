@@ -29,7 +29,7 @@ witness-strictly-above-limit).
 
 ## Proof strategy
 
-1. From R175 `eventually_le_of_tendsto_lt_witness`: get `N₀` such
+1. From `eventually_le_of_tendsto_lt_witness`: get `N₀` such
    that `f x ≤ f x_high` for all `x ≥ N₀`.
 2. Set `Nupper = max(x_high, N₀)`; both `x_high ≤ Nupper` and
    `N₀ ≤ Nupper`.
@@ -37,11 +37,13 @@ witness-strictly-above-limit).
    `[a, Nupper]` (assuming `a ≤ x_high ≤ Nupper`) to get a maximizer
    `x_max ∈ [a, Nupper]`.
 4. For any `x ∈ [a, ∞)`: case-split on `x ≤ Nupper` (use argmax) or
-   `x > Nupper ≥ N₀` (use R175 + argmax dominance at `x_high`).
+   `x > Nupper ≥ N₀` (use `eventually_le_of_tendsto_lt_witness`
+   + argmax dominance at `x_high`).
 
 ## Cat 1 status
 
-Built only from R175 + Mathlib. Kernel-pure (`#print axioms` shows
+Built only from `eventually_le_of_tendsto_lt_witness` + Mathlib.
+Kernel-pure (`#print axioms` shows
 only `[propext, Classical.choice, Quot.sound]`). No paper-novel
 axioms, no `sorry`. Generic on `ℝ` (could extend to ordered metric
 spaces).
@@ -50,7 +52,7 @@ spaces).
 
 Suggested namespace: `Mathlib.Topology.Order.Compact.HalfLine` or
 `Mathlib.Topology.Algebra.Order.ExtremeValueExtended`. Combined with
-R175's `eventually_le_of_tendsto_lt_witness`, this provides a complete
+`eventually_le_of_tendsto_lt_witness`, this provides a complete
 "EVT for non-compact `[a, ∞)`" toolkit.
 
 ## Tags
@@ -68,7 +70,7 @@ open Set Filter Topology
     `+∞`, and there is some `x_high ∈ [a, ∞)` with `L < f x_high`,
     then `f` attains its supremum on `[a, ∞)`.
 
-    Proof: combine R175 `eventually_le_of_tendsto_lt_witness` (gives
+    Proof: combine `eventually_le_of_tendsto_lt_witness` (gives
     `N₀` with `f x ≤ f x_high` past `N₀`) + Mathlib EVT on the compact
     `[a, max(x_high, N₀)]` + case-split argmax dominance. -/
 theorem argmax_on_Ici_of_tendsto_lt_witness
@@ -78,7 +80,7 @@ theorem argmax_on_Ici_of_tendsto_lt_witness
     (hf_tendsto : Filter.Tendsto f Filter.atTop (nhds L))
     (h_witness : L < f x_high) :
     ∃ x_max : ℝ, a ≤ x_max ∧ ∀ x : ℝ, a ≤ x → f x ≤ f x_max := by
-  -- Step 1: Apply R175 to get N₀ such that f x ≤ f x_high for x ≥ N₀.
+  -- Step 1: Apply `eventually_le_of_tendsto_lt_witness` to get N₀ such that f x ≤ f x_high for x ≥ N₀.
   obtain ⟨N₀, hN₀⟩ :=
     eventually_le_of_tendsto_lt_witness f L x_high hf_tendsto h_witness
   -- Step 2: Set Nupper = max(x_high, N₀).
@@ -99,7 +101,7 @@ theorem argmax_on_Ici_of_tendsto_lt_witness
   by_cases h : x ≤ Nupper
   · -- Case 1: x ∈ [a, Nupper], apply compact-interval maximizer.
     exact hx_max ⟨hx_a, h⟩
-  · -- Case 2: x > Nupper ≥ N₀, use R175 + argmax-dominance at x_high.
+  · -- Case 2: x > Nupper ≥ N₀, use the tendsto-le witness + argmax-dominance at x_high.
     push_neg at h
     have hx_ge_N₀ : N₀ ≤ x := le_trans h_N₀_le_Nupper (le_of_lt h)
     have h_fx_le_fxhigh : f x ≤ f x_high := hN₀ x hx_ge_N₀

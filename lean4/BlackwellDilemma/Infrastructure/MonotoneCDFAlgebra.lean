@@ -56,7 +56,7 @@ namespace BlackwellDilemma.Infrastructure
 /-- **CDF predicate**. A function `G : ℝ → ℝ` is a CDF iff it is
     monotone non-decreasing with values in `[0, 1]`. (The limit
     conditions `G(-∞) = 0`, `G(+∞) = 1` are deferred to a
-    `MeasureTheory`-laden Phase 13b extension.) -/
+    `MeasureTheory`-laden follow-up extension.) -/
 def IsCDF (G : ℝ → ℝ) : Prop :=
   Monotone G ∧ ∀ x, InUnitInterval (G x)
 

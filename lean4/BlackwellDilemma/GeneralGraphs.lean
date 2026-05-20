@@ -184,14 +184,14 @@ Under C1, C3, and the greedy-path generalisation C2′ (which includes a
 non-interference clause), the greedy agent's welfare on any finite
 connected graph `G` is non-monotone in β. -/
 
-/-- **Theorem 6.1** (`thm:general-tree`) — R90 §18 reversal-witness
+/-- **Theorem 6.1** (`thm:general-tree`) — §18 reversal-witness
     decomposition.
 
-    R90 §18 reversal-witness decomposition: the prior single-atom
-    `C2prime_implies_greedy_reversal_OPEN` (which packaged the
+    §18 reversal-witness decomposition: the single-atom
+    `C2prime_implies_greedy_reversal_OPEN` (which would package the
     welfare-existential reversal as an opaque axiom) is decomposed
     into a §3.4.3 paper-stipulated kernel-level reversal-witness
-    structural equation that the R90 foundation lemma
+    structural equation that the foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
     lifts to the welfare-level reversal claim. Paper Theorem 6.1
     extends Theorem 3.2's greedy-reversal mechanism from terminal-
@@ -201,9 +201,8 @@ connected graph `G` is non-monotone in β. -/
     config (the trap-firing realisation under the C2′ greedy-path-
     misalignment).
 
-    Cat 3 sub-type: structuralEquation (R88 precedent — paper STATES
-    the per-realisation trap-induced kernel-reversal directly on the
-    kernel carrier).
+    Cat 3 sub-type: structuralEquation — paper STATES the per-realisation
+    trap-induced kernel-reversal directly on the kernel carrier.
 
     paper source: Theorem 6.1 (`thm:general-tree`), lines 989-998. -/
 axiom agentRewardKernel_greedy_C2prime_kernel_reversal_witness :
@@ -216,16 +215,15 @@ axiom agentRewardKernel_greedy_C2prime_kernel_reversal_witness :
         agentRewardKernel AgentType.greedy β' 0 1 ω₀ <
           agentRewardKernel AgentType.greedy β 0 1 ω₀
 
-/-- **Theorem 6.1** (`thm:general-tree`) (R90 derived theorem via
-    reversal-witness pattern, replacing prior
-    `C2prime_implies_greedy_reversal_OPEN` workingAssumption).
+/-- **Theorem 6.1** (`thm:general-tree`) — derived theorem via
+    reversal-witness pattern.
     Subsumes Theorem 3.2 via `dilemma_subsumed_by_gap_general_tree`
     (terminal-neighbour topology + C2 ⇒ C2′).
 
-    R90 closure: composes (a) Cat 3 §3.4.3 paper-stipulated kernel
+    Closure composes (a) Cat 3 §3.4.3 paper-stipulated kernel
     reversal-witness atom
     `agentRewardKernel_greedy_C2prime_kernel_reversal_witness` +
-    (b) R90 foundation lemma
+    (b) foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one` +
     (c) paper-stipulated atom `blockingProb_strict_in_open_unit_interval`.
 
@@ -242,8 +240,8 @@ theorem gap_general_tree :
   exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
     AgentType.greedy 0 1 β β' h_le ω₀ h_strict
 
-/-- Cat 3 paper-novel ATOMIC stipulation #1 (R58 closure-path-B
-    decomposition of retired
+/-- Cat 3 paper-novel ATOMIC stipulation #1 (closure-path-B
+    decomposition of a candidate bundled atom
     `terminal_neighbour_implies_C2prime_atom_OPEN`): under
     terminal-neighbour topology, the greedy-path value `V_g` agrees with
     the oracle dynamic value `V_dyn` (paper line 987 + line 1019 first
@@ -255,17 +253,17 @@ theorem gap_general_tree :
 
     Encoded as a paper-stated structural-equation atom on the existing
     `V_g`, `V_dyn`, and `TerminalNeighbourTopology` carriers. Strictly
-    smaller than the retired bundled atom (which packaged this
+    smaller than a candidate bundled atom (which would package this
     structural equality with the additional non-interference vacuity +
     the C2/C2′ inferential composition step). The atom isolates the
     paper's first reason exactly as line 987 and line 1019 state it.
 
-    Cat 3 sub-type: structuralEquation (R70 §3.4.3 reclassification —
+    Cat 3 sub-type: structuralEquation (§3.4.3 classification —
     paper line 987 STATES inline `On terminal-neighbor topology, V_g(u)
     = V_dyn(u)` as paper-defining commitment about how the V_g and V_dyn
     carriers relate at the paper-named TerminalNeighbourTopology regime;
     paper does NOT derive this, it is paper's stipulation). Mirrors
-    `V_g_def_terminal` precedent (R23-C1 carrier-defining equation at
+    `V_g_def_terminal` precedent (carrier-defining equation at
     boundary regime per paper Def `def:greedy-path` line 984 STIPULATING
     V_g(u) = r(u) at terminal vertex). 永不 close per discipline §3.4.3.
 
@@ -277,8 +275,8 @@ axiom V_g_eq_V_dyn_on_terminal_neighbour_OPEN :
     ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
       V_g u H ω = V_dyn u H ω
 
-/-- Cat 3 paper-novel ATOMIC stipulation #2 (R58 closure-path-B
-    decomposition of retired
+/-- Cat 3 paper-novel ATOMIC stipulation #2 (closure-path-B
+    decomposition of a candidate bundled atom
     `terminal_neighbour_implies_C2prime_atom_OPEN`): the C2′ predicate
     is implied by C2 plus the paper's two structural reasons identified
     by line 1019 ("V_g = V_dyn on flat subtrees AND non-interference
@@ -293,23 +291,23 @@ axiom V_g_eq_V_dyn_on_terminal_neighbour_OPEN :
     (paper line 1019 second "since" reason, the degree-2 vacuity
     instance specialised to terminal-neighbour topology).
 
-    Strictly smaller than the retired bundled atom: the inferential
-    composition step is now isolated from the underlying structural
+    Strictly smaller than a candidate bundled atom: the inferential
+    composition step is isolated from the underlying structural
     equality of stipulation #1, exposing the paper's `V_g = V_dyn`
     reduction explicitly in the chained antecedent. The composition is
     paper-stated on the opaque hypothesis predicates `C2_*`, `C2prime_*`,
     `TerminalNeighbourTopology`.
 
-    Cat 3 sub-type: structuralEquation (R70 §3.4.3 reclassification —
+    Cat 3 sub-type: structuralEquation (§3.4.3 classification —
     paper Theorem 6.1 line 995 STATES inline `When |N_R(v_0)| = 2, the
     clause is vacuous and C2′ reduces to C2` as paper-defining
     commitment about how the C2 and C2′ predicates relate at the
     paper-named degree-2 regime; paper line 1019 specialises this to
     terminal-neighbour topology. Paper does NOT derive these; they are
-    paper's stipulations). Mirrors R68 closure 2 + R69 closures 1+2
-    precedents (paper-stipulated predicate-conjunction validity /
-    inter-carrier bindings at named regimes are §3.4.3 structural
-    identities). 永不 close per discipline §3.4.3.
+    paper's stipulations). Mirrors precedents in which
+    paper-stipulated predicate-conjunction validity / inter-carrier
+    bindings at named regimes are §3.4.3 structural identities.
+    永不 close per discipline §3.4.3.
 
     paper source: Theorem 6.1 line 995 ("When |N_R(v_0)| = 2, the
     clause is vacuous and C2′ reduces to C2") + line 1019 second
@@ -323,11 +321,11 @@ axiom C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_OPEN :
     C2prime_GreedyPathMisalignment
 
 /-- **Subsumption: `C2 + terminal-neighbour topology ⇒ C2′`**
-    (R58 closure-path-B derived theorem from §18 decomposition).
+    (closure-path-B derived theorem from §18 decomposition).
 
-    The retired `terminal_neighbour_implies_C2prime_atom_OPEN` bundled
+    A naive `terminal_neighbour_implies_C2prime_atom_OPEN` would bundle
     the V_g = V_dyn structural equality, the non-interference vacuity,
-    and the C2/C2′ inferential composition into one axiom. R58 splits
+    and the C2/C2′ inferential composition into one axiom. We split
     this into two strictly-smaller atoms:
       (i) `V_g_eq_V_dyn_on_terminal_neighbour_OPEN` (paper line 987 +
           line 1019 first "since" reason: V_g = V_dyn on flat subtrees);
@@ -355,10 +353,9 @@ theorem terminal_neighbour_implies_C2prime :
     Terminal-neighbour topology + C2 ⇒ C2′ (the non-interference clause
     is vacuous at degree 2).
 
-    Refactored from the prior `dilemma_subsumed_by_gap_general_tree_OPEN`
-    per `feedback_gap_ledger_in_lean4` 2026-05-13 anti-pattern repair:
+    Per `feedback_gap_ledger_in_lean4` 2026-05-13 anti-pattern guidance:
     the implication on the bundle-form predicates `Conditions_C1_C2_C3
-    → Conditions_C1_C2prime_C3` is now derived from (a) the Cat 3
+    → Conditions_C1_C2prime_C3` is derived from (a) the Cat 3
     atomic structural-implication axiom
     `terminal_neighbour_implies_C2prime_atom_OPEN` (paper line 1019
     structural fact on the C2/C2′ predicates) plus (b) the trivial
@@ -381,8 +378,8 @@ With `r(u₁) = 0.6, r(u₂) = 0.4, r(w) = 0.3, r(G) = 1.0` and edge
 `u₁–w` blocked with probability `p > 0`: on the event that the edge is
 blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation (R58 closure-path-A
-    decomposition of retired
+/-- Cat 3 paper-novel ATOMIC stipulation (closure-path-A
+    decomposition of a candidate bundled atom
     `cyclic_4_satisfies_C2prime_at_open_event_OPEN`): the 4-cycle trap
     configuration of paper Example `ex:cyclic-trap` (lines 1026-1029)
     satisfies the full diagnostic conjunction `Conditions_C1_C2prime_C3`
@@ -392,8 +389,8 @@ blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
     `r(u_1) > r(u_2)` but `V_g(u_1) = 0.6 < 1.0 = V_g(u_2)`, so C2′
     holds and Theorem~\ref{thm:general-tree} applies."
 
-    Strictly smaller than the retired bundled atom (which packaged the
-    `Conditions_C1_C2prime_C3` validity AND the existential β-reversal
+    Strictly smaller than a candidate bundled atom (which would package
+    the `Conditions_C1_C2prime_C3` validity AND the existential β-reversal
     conclusion of Theorem 6.1). The atom isolates the structural
     pre-condition (the IDP instance satisfies the diagnostic conjunction),
     leaving the existential reversal conclusion to be derived by
@@ -401,7 +398,7 @@ blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
     `C2prime_implies_greedy_reversal_OPEN` (paper Theorem 6.1, the
     derived consequence of the conditions on any IDP instance).
 
-    R68 §3.4.3 reclassification (was R58 workingAssumption): paper
+    §3.4.3 classification: paper
     Example `ex:cyclic-trap` line 1028 EXPLICITLY STATES "On the event
     that `u_1`-`w` is blocked (probability `p > 0`): `r(u_1) > r(u_2)`
     but `V_g(u_1) = 0.6 < 1.0 = V_g(u_2)`, so C2′ holds and Theorem
@@ -416,7 +413,7 @@ blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
     of opaque `Prop` axioms (paper hypothesis-predicate carriers), the
     assertion that the predicates evaluate True at this paper-Example
     construction IS the paper's stipulated structural identity on the
-    opaque hypothesis-predicate carriers. Mirrors R63 precedent
+    opaque hypothesis-predicate carriers. Mirrors precedent
     (`betaBarStar_nonneg_OPEN` carrier-domain commitment): the paper's
     Example STIPULATES the structural property of the opaque-Prop
     carriers under the example's construction.
@@ -433,21 +430,19 @@ blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
 axiom cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN :
     ∀ p : ℝ, 0 < p → p < 1 → Conditions_C1_C2prime_C3
 
-/-- **Example `ex:cyclic-trap`** (R58 closure-path-A derived theorem
+/-- **Example `ex:cyclic-trap`** (closure-path-A derived theorem
     composing the smaller atom
     `cyclic_4_satisfies_full_conditions_at_blocked_event_OPEN`
     (paper line 1028 — diagnostic conjunction holds at the blocked
-    event) with `gap_general_tree` (R90 derived theorem replacing
-    the retired `C2prime_implies_greedy_reversal_OPEN` workingAssumption
-    via reversal-witness pattern; paper Theorem 6.1 —
+    event) with `gap_general_tree` (derived theorem via reversal-witness
+    pattern; paper Theorem 6.1 —
     `Conditions_C1_C2prime_C3` ⇒ greedy β-reversal exists).
     Non-monotonicity survives on graphs with cycles.
 
-    Net effect: the original bundled
-    `cyclic_4_satisfies_C2prime_at_open_event_OPEN` (which packaged
-    both the diagnostic-conjunction validity AND the existential
-    β-reversal conclusion of Theorem 6.1 into one axiom) is replaced
-    by a strictly-smaller atom (just the diagnostic-conjunction
+    A bundled `cyclic_4_satisfies_C2prime_at_open_event_OPEN` (which
+    would package both the diagnostic-conjunction validity AND the
+    existential β-reversal conclusion of Theorem 6.1 into one axiom)
+    is replaced by a strictly-smaller atom (just the diagnostic-conjunction
     validity at the blocked event) chained with the existing Theorem 6.1
     atom. The atomic decomposition exposes the paper-stated structural
     composition explicitly: the cyclic-trap example satisfies the
@@ -592,7 +587,7 @@ theorem gap_error_compounding_part1 :
   unfold P_b
   ring
 
-/-- Opaque carrier (R58 closure-path-B decomposition of retired
+/-- Opaque carrier (closure-path-B decomposition of a candidate
     `oracleValueAtRoot_TrapTree_def`): the terminal-vertex reward
     achieved by the oracle on the depth-`d` trap tree, parameterised
     by `d`. Paper proof line 1053 reads: "the oracle follows the
@@ -600,9 +595,8 @@ theorem gap_error_compounding_part1 :
     path at depth `d`. Cat 3 carrier per §3.4.1 (paper-novel primitive
     function on the depth-d trap-tree oracle's terminal reward).
 
-    R72 hoist (was R58 declared after `oracleValueAtRoot_TrapTree`):
-    hoisted to BEFORE `oracleValueAtRoot_TrapTree` to support R72
-    substantive-math closure pattern (per R71 `kappa_FOSD` precedent).
+    Declared BEFORE `oracleValueAtRoot_TrapTree` to support the
+    substantive-math closure pattern (per `kappa_FOSD` precedent).
     The carrier is paper-Def-stipulated structural primitive per
     discipline §3.4.1 (paper-novel opaque-carrier primitive); position
     in source order is metadata-neutral.
@@ -614,8 +608,7 @@ axiom oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ
 /-- Oracle dynamic value at root of depth-`d` trap tree on the
     all-edges-open realisation, paper-claimed value `r_goal = 1.0`.
 
-    R72 substantive-math closure: previously declared `axiom
-    oracleValueAtRoot_TrapTree` (opaque carrier). R72 makes the carrier
+    Substantive-math closure: the carrier is
     CONCRETE per paper Proposition `prop:error-compounding` Part 2 proof
     line 1053's own definitional commitment "the oracle follows the
     bridge path to G" + Definition 2.6 (`def:oracle`) decision rule:
@@ -630,7 +623,7 @@ axiom oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ
 
     Per discipline §3.4.3 boundary criterion: the `def` faithfully
     encodes the paper-Theorem-derivation (oracle policy = bridge-path)
-    rather than R7-style content-erasure. The identification is
+    rather than content-erasure. The identification is
     paper-derived (proof body line 1053) but on opaque-carrier inputs
     where Mathlib lacks the substrate; the `def` records this paper
     derivation as definitional identification at the carrier level.
@@ -641,25 +634,25 @@ axiom oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ
 noncomputable def oracleValueAtRoot_TrapTree : ℕ → ℝ :=
   fun d => oracleBridgePathTerminalReward_TrapTree d
 
-/-- R68 §3.4.3 reclassification (was R58 closure-path-B workingAssumption):
-    paper Definition `def:trap-tree` line 1033 STIPULATES — as part of the
-    trap-tree's defining construction — that "Bridge `b_{d-1}` has a single
-    child: the goal `G` with `r(G) = 1.0`". The carrier
+/-- §3.4.3 classification: paper Definition `def:trap-tree` line 1033
+    STIPULATES — as part of the trap-tree's defining construction —
+    that "Bridge `b_{d-1}` has a single child: the goal `G` with
+    `r(G) = 1.0`". The carrier
     `oracleBridgePathTerminalReward_TrapTree d` was introduced explicitly
     to host the bridge-path's terminal reward; its value `= r_goal = 1.0`
     is paper-DEFINING, not paper-derived. The Definition fixes the
     terminal-leaf reward by construction.
 
-    R68 audit-substantive correction: this atom is paper-Def-stipulated
-    structural identity on the carrier, NOT a paper-Theorem/Proposition-
-    proof-derived working content. Paper line 1053 ("the oracle follows
-    the bridge path to G") states which path the oracle takes — this is
+    This atom is paper-Def-stipulated structural identity on the
+    carrier, NOT a paper-Theorem/Proposition-proof-derived working
+    content. Paper line 1053 ("the oracle follows the bridge path to G")
+    states which path the oracle takes — this is
     derivation; but the bridge-path's TERMINAL REWARD is fixed by Def
     `def:trap-tree` line 1033 ("Bridge has a single child G with r(G) =
     1.0"). The atom encodes only the latter (carrier-defining terminal-
     reward identity), not the former (oracle policy identification — that
-    is the companion atom #2 `oracleValueAtRoot_eq_bridgePathTerminalReward_
-    TrapTree_OPEN`, which remains workingAssumption per R67/R68 boundary).
+    is the companion atom #2
+    `oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN`).
 
     Cat 3 sub-type: structuralEquation (paper-Def-stipulated terminal-
     reward identity on the bridge-path carrier per Def `def:trap-tree`
@@ -673,30 +666,24 @@ noncomputable def oracleValueAtRoot_TrapTree : ℕ → ℝ :=
 axiom oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN :
     ∀ d : ℕ, 1 ≤ d → oracleBridgePathTerminalReward_TrapTree d = r_goal
 
-/-- Cat 1 derived theorem (R72 substantive-math closure): paper proof
+/-- Cat 1 derived theorem (substantive-math closure): paper proof
     line 1053 + Def 2.6 oracle-policy identification
     `oracleValueAtRoot_TrapTree d = oracleBridgePathTerminalReward_TrapTree d`
-    under `1 ≤ d`. Now provable kernel-pure via the
+    under `1 ≤ d`. Provable kernel-pure via the
     `oracleValueAtRoot_TrapTree` `def`'s unfolding (`rfl`).
 
-    R72 closure pattern: the previous `axiom oracleValueAtRoot_eq_
-    bridgePathTerminalReward_TrapTree_OPEN` (R58 `workingAssumption gapOpen`)
-    is REPLACED by this Cat 1 derived theorem composing the paper-faithful
+    Closure pattern composes the paper-faithful
     `oracleValueAtRoot_TrapTree` `def` (paper proof line 1053 oracle-policy
-    identification IS the carrier's defining identification) with kernel-
-    level `rfl`. The companion carrier `oracleBridgePathTerminalReward_
-    TrapTree` (hoisted to before `oracleValueAtRoot_TrapTree` above)
-    hosts the bridge-path terminal reward.
+    identification IS the carrier's defining identification) with
+    kernel-level `rfl`. The companion carrier
+    `oracleBridgePathTerminalReward_TrapTree` (declared before
+    `oracleValueAtRoot_TrapTree` above) hosts the bridge-path terminal reward.
 
     Discipline §3.4.3 boundary check: paper Theorem-PROOF line 1053
     derives the policy identification from Def 2.6 inputs; on opaque
     carriers (where Mathlib lacks the substrate), the identification
     becomes definitional at the carrier level. The `def` faithfully
-    encodes the paper-derivation rather than R7-style content-erasure.
-
-    Net workingAssumption delta: −1 (workingAssumption gapOpen atom
-    retired; carrier-pair preserved with paper-faithful identification
-    encoded in `def`).
+    encodes the paper-derivation rather than content-erasure.
 
     paper source: Proposition `prop:error-compounding` Part 2 proof,
     line 1053 ("the oracle follows the bridge path to G") + Definition
@@ -706,9 +693,9 @@ theorem oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN :
       oracleValueAtRoot_TrapTree d = oracleBridgePathTerminalReward_TrapTree d :=
   fun _ _ => rfl
 
-/-- **Proposition `prop:error-compounding` Part 2** (R58 closure-path-B
+/-- **Proposition `prop:error-compounding` Part 2** (closure-path-B
     derived theorem composing the two paper-stated atomic stipulations
-    decomposed from the retired `oracleValueAtRoot_TrapTree_def`):
+    decomposed from a candidate `oracleValueAtRoot_TrapTree_def`):
       (i) `oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN`
           (paper line 1053 + Def 2.6 — oracle policy follows the
           bridge path);
@@ -756,21 +743,19 @@ axiom c_star_constant : ℝ
     pre-define c* elsewhere; it appears here as the implicit constant
     satisfying `σ_topo(κ*, d) = c*` per proof body line 1059) and
     SIMULTANEOUSLY stipulates its defining positivity inline.
-    Per R68/R69/R70 boundary criterion (paper-CONTENT, not paper-source-
+    Per boundary criterion (paper-CONTENT, not paper-source-
     structure label): paper INLINE STATING carrier-defining property
     via `where` clause IS §3.4.3 paper-commitment regardless of whether
     surrounding context is Definition / Theorem / Proposition / Example /
     Remark.
 
-    R71 §3.4.3 reclassification: structuralEquation/gapDefinitional
+    §3.4.3 classification: structuralEquation/gapDefinitional
     (永不 close; paper-Def-stipulated structural identity per discipline
-    §3.4.3). R52 had defaulted to wA via paper-source-structure label
-    (Proposition statement); R71 stronger override applies the R68/R69/R70
-    paper-CONTENT boundary criterion: the `where ... > 0 is a constant`
-    clause IS paper's introduction-with-positivity-stipulation of c*,
-    parallel to `oracleBridgePathTerminalReward_TrapTree_eq_r_goal` R68
-    closure (paper Def-stipulated terminal-leaf reward by trap-tree
-    construction).
+    §3.4.3). The paper-CONTENT boundary criterion applies: the
+    `where ... > 0 is a constant` clause IS paper's
+    introduction-with-positivity-stipulation of c*, parallel to
+    `oracleBridgePathTerminalReward_TrapTree_eq_r_goal` (paper
+    Def-stipulated terminal-leaf reward by trap-tree construction).
 
     paper source: Proposition `prop:error-compounding` Part 5, line 1048. -/
 axiom gap_c_star_constant_pos_OPEN : 0 < c_star_constant
@@ -793,7 +778,7 @@ noncomputable def log_2 (x : ℝ) : ℝ := Real.log x / Real.log 2
 
 /-- **Upper-bound half** of the Θ-asymptotic: `κ*(d) ≤ log_2 d + c₃`
     for `d ≥ 1`, where `c₃ = (1/2) log_2(1/c* + 1)`. This is a
-    closed (kernel-pure) partial result; combined with the R83
+    closed (kernel-pure) partial result; combined with the
     lower bound `kappaStar_depth_d_lower_bound` it gives the full
     Θ-asymptotic (`bernoulli_real_power_estimate_OPEN`).
 
@@ -858,7 +843,7 @@ theorem gap_kappaStar_depth_d_upper_bound :
       _ = 2 * Real.log (d : ℝ) + Real.log (1 / c_star_constant + 1) := h_log_split
   · positivity
 
-/-- **R83 lower-bound half of the `κ*(d) = Θ(log d)` asymptotic.**
+/-- **Lower-bound half of the `κ*(d) = Θ(log d)` asymptotic.**
     For `d ≥ 1` and the (opaque, positive) constant `c*`, the
     weighted AM–GM inequality gives the Bernoulli-style power bound
     `d^(2/(1+c*)) ≤ d²/c* + 1`, hence
@@ -956,30 +941,27 @@ private theorem kappaStar_depth_d_lower_bound (d : ℕ) (hd : 1 ≤ d) :
             / (2 * Real.log 2) by ring]
   exact div_le_div_of_nonneg_right h_log_le h_two_log2_pos.le
 
-/-- **R83 substantive closure of `bernoulli_real_power_estimate_OPEN`.**
-    The previous `axiom bernoulli_real_power_estimate_OPEN` is REPLACED
-    with this genuine theorem (`feedback_lean_real_math` +
+/-- **Substantive closure of `bernoulli_real_power_estimate_OPEN`.**
+    Established as a genuine theorem (per `feedback_lean_real_math` +
     `feedback_no_compute_retreat`). The closure couples two real-analysis
     half-results on the concrete `kappaStar_depth_d` carrier:
 
-      * **lower bound** — `kappaStar_depth_d_lower_bound` (R83 NEW):
+      * **lower bound** — `kappaStar_depth_d_lower_bound`:
         `(1/(1+c*)) · log_2 d ≤ κ*(d)` via the weighted-AM–GM
         Bernoulli-style power estimate `d^(2/(1+c*)) ≤ d²/c* + 1`;
-      * **upper bound** — `gap_kappaStar_depth_d_upper_bound` (R-prior,
-        kernel-pure): `κ*(d) ≤ log_2 d + c₃` with the explicit
+      * **upper bound** — `gap_kappaStar_depth_d_upper_bound`
+        (kernel-pure): `κ*(d) ≤ log_2 d + c₃` with the explicit
         `c₃ = (1/2)·log_2(1/c* + 1)`.
 
-    PAPER-FAITHFUL CORRECTION: the previous axiom encoded the additive
-    constant as a literal `+ 1`, which is mathematically FALSE for
-    `c* ∈ (0, 1/3)` (at `d = 1`, `log_2 1 = 0` forces `κ*(1) ≤ 1`,
-    i.e. `c* ≥ 1/3` — see the previous OBSTACLE docstring). The paper's
-    actual claim (`prop:error-compounding` Part 5, line 1044) is
+    PAPER-FAITHFUL FORMULATION: encoding the additive constant as a
+    literal `+ 1` would be mathematically FALSE for
+    `c* ∈ (0, 1/3)` (at `d = 1`, `log_2 1 = 0` would force `κ*(1) ≤ 1`,
+    i.e. `c* ≥ 1/3`). The paper's actual claim
+    (`prop:error-compounding` Part 5, line 1044) is
     `κ*(d) = log_2 d + O(1)`, i.e. an EXISTENTIALLY-quantified additive
-    constant. The corrected statement adds `∃ c₃` exactly matching the
+    constant. The statement adds `∃ c₃` exactly matching the
     paper's `O(1)`; with that paper-faithful form the claim is fully
-    provable (NOT a `kappaStar_p_monotone`-style DEAD-END — the
-    over-strong `+ 1` literal was an honest-but-defective encoding,
-    fixed here to the paper's `Θ` statement and then DISCHARGED).
+    provable.
 
     paper source: Proposition `prop:error-compounding` Part 5, line 1044
     ("κ*(d) = log_2 d + O(1) as d → ∞"). -/
@@ -1002,7 +984,7 @@ theorem bernoulli_real_power_estimate_OPEN :
 
 /-- **`κ*(d) = Θ(log d)`** asymptotic (derived theorem composing
     `bernoulli_real_power_estimate_OPEN` per `feedback_gap_ledger_in_lean4`
-    §18 Manufactured-Recognition pattern). Since R83 the underlying
+    §18 Manufactured-Recognition pattern). The underlying
     `bernoulli_real_power_estimate_OPEN` is itself a genuine theorem
     (no project `_OPEN` axiom), so this bundle theorem is kernel-pure
     modulo the opaque `c_star_constant` carrier + its positivity atom

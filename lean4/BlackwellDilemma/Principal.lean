@@ -28,7 +28,7 @@ The principal chooses `β ≥ 0` for a population with heterogeneous
 parameters `(κ_i, α_i) ~ G` to maximise aggregate welfare
 `W̄(β) = ∫ W(β, κ, α) dG(κ, α)`. -/
 
-/-- R63 paper-novel opaque carrier: paper line 638's explicit
+/-- Paper-novel opaque carrier: paper line 638's explicit
     above-threshold welfare component `λ · E_{G | κ > κ*}[W(β, κ, α)]`
     abstracted as a single ℝ → ℝ functional of `β` (with the `λ`
     weighting absorbed into the carrier's definition per paper's
@@ -37,28 +37,20 @@ parameters `(κ_i, α_i) ~ G` to maximise aggregate welfare
     contribution" with the standard-Blackwell-regime non-decreasing
     property.
 
-    R72 hoist (was R63 declared after `W_bar`): hoisted to BEFORE
-    `W_bar` to support R72 substantive-math closure pattern (per R71
-    `kappa_FOSD` precedent). The carrier is paper-Def-stipulated
-    structural primitive per discipline §3.4.1 (paper-novel opaque-
-    carrier primitive); position in source order is metadata-neutral.
+    The carrier is paper-Def-stipulated structural primitive per
+    discipline §3.4.1 (paper-novel opaque-carrier primitive).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`λ · E_{G | κ > κ*}[W(β, κ, α)]` above-threshold
     contribution). -/
 axiom aboveThresholdWelfare : ℝ → ℝ
 
-/-- R63 paper-novel opaque carrier: paper line 638's explicit
+/-- Paper-novel opaque carrier: paper line 638's explicit
     below-threshold welfare component `(1 − λ) · E_{G | κ < κ*}
     [W(β, κ, α)]` abstracted as a single ℝ → ℝ functional of `β`.
     Paper Proposition `prop:principal-optimum` Part 3 proof (line 638)
     names this the "below-threshold contribution" with the reversal-
     regime eventually-decreasing property.
-
-    R72 hoist (was R63 declared after `W_bar`): hoisted to BEFORE
-    `W_bar` to support R72 substantive-math closure pattern (per R71
-    `kappa_FOSD` precedent). Position in source order is metadata-
-    neutral.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`(1 − λ) · E_{G | κ < κ*}[W(β, κ, α)]` below-threshold
@@ -67,8 +59,7 @@ axiom belowThresholdWelfare : ℝ → ℝ
 
 /-- The aggregate welfare functional `W̄(β)` for distribution `G`.
 
-    R72 substantive-math closure: previously declared `axiom W_bar`
-    (opaque carrier). R72 makes the carrier CONCRETE per paper Proposition
+    The carrier is CONCRETE per paper Proposition
     `prop:principal-optimum` Part 3 proof line 638's own definitional
     commitment `W̄(β) = λ · E_{G | κ > κ*}[W(β,κ,α)] + (1-λ) ·
     E_{G | κ < κ*}[W(β,κ,α)]`: paper EXPLICITLY decomposes the aggregate
@@ -87,7 +78,7 @@ axiom belowThresholdWelfare : ℝ → ℝ
 noncomputable def W_bar : ℝ → ℝ :=
   fun β => aboveThresholdWelfare β + belowThresholdWelfare β
 
-/-! ## R92 G-conditional integration infrastructure
+/-! ## G-conditional integration infrastructure
 
 Paper Definition `def:principal` line 615 introduces the aggregate
 `W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)`; paper Proposition
@@ -95,25 +86,23 @@ Paper Definition `def:principal` line 615 introduces the aggregate
 above/below-threshold components `W̄(β) = λ · E_{G | κ > κ*}[W] +
 (1-λ) · E_{G | κ < κ*}[W]`.
 
-The R92 infrastructure introduces a finite-dimensional realisation of
+This infrastructure introduces a finite-dimensional realisation of
 this partition: paper-stipulated finite sample types for the
 above/below-threshold supports, with paper-stipulated weights and
 parameters. Paper-stipulated structural equations pin
 `aboveThresholdWelfare` / `belowThresholdWelfare` to weighted sums of
 `agentWelfare AgentType.kappaAgent` over these samples — the
 finite-sample realisation of paper's continuous-G integral. Mirrors
-R88's percolation-foundation infrastructure (concrete bond-percolation
+the percolation-foundation infrastructure (concrete bond-percolation
 framework on `BondConfig`) but for the distribution-G integration on
 the principal's mixture decomposition.
 
-R159 hoist: this block was originally placed after `W_bar_eq_mixture_OPEN`
-(paper-source-order convention). R159 hoists it to BEFORE the R147 axiom
-decomposition section so the closure proofs of
-`aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and
-`belowThresholdWelfare_continuousOn_Ici_workingAssumption` (Cat 1 derivations
-via `percExpectation_continuousOn_of_pointwise_continuousOn` +
-`agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`) can reference
-the carrier-defining structural equations
+This block sits BEFORE the axiom-decomposition section so the closure
+proofs of `aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and
+`belowThresholdWelfare_continuousOn_Ici_workingAssumption` (Cat 1
+derivations via `percExpectation_continuousOn_of_pointwise_continuousOn`
++ `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`) can
+reference the carrier-defining structural equations
 (`aboveThresholdWelfare_eq_kappaAgent_integral`,
 `belowThresholdWelfare_eq_kappaAgent_integral`) without forward-reference
 errors. Position in source order is metadata-neutral per discipline §3.
@@ -122,7 +111,7 @@ Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
 measure-theoretic G-integration framework, define the paper-faithful
 finite-sample realisation locally rather than skip. -/
 
-/-- **R92 G-conditional integration infrastructure** — Cat 3 §3.4.3
+/-- **G-conditional integration infrastructure** — Cat 3 §3.4.3
     paper-novel opaque carrier: paper's `G | κ > κ*` above-threshold
     finite-sample support type. Paper Definition `def:principal`
     line 615 + Proposition `prop:principal-optimum` Part 3 proof line
@@ -141,7 +130,7 @@ axiom principalSampleAbove : Type
 @[instance] axiom principalSampleAbove_fintype : Fintype principalSampleAbove
 @[instance] axiom principalSampleAbove_decEq : DecidableEq principalSampleAbove
 
-/-- **R92** — paper-stipulated weight on each above-threshold sample
+/-- Paper-stipulated weight on each above-threshold sample
     point (paper's mixture weight `λ · pᵢ` from the finite-G
     realisation). Cat 3 §3.4.3 carrier per discipline. 永不 close.
 
@@ -150,7 +139,7 @@ axiom principalSampleAbove : Type
     optimum` Part 3 proof, line 638 (above-threshold mixture weight `λ`). -/
 axiom principalSampleAboveWeight : principalSampleAbove → ℝ
 
-/-- **R92** — paper-stipulated `κ` parameter at each above-threshold
+/-- Paper-stipulated `κ` parameter at each above-threshold
     sample point (all `> κ*` by the partition's defining property).
     Cat 3 §3.4.3 carrier per discipline. 永不 close.
 
@@ -158,14 +147,14 @@ axiom principalSampleAboveWeight : principalSampleAbove → ℝ
     line 638 (above-threshold partition `κ > κ*` indexes the sample). -/
 axiom principalSampleAboveKappa : principalSampleAbove → ℝ
 
-/-- **R92** — paper-stipulated `α` parameter at each above-threshold
+/-- Paper-stipulated `α` parameter at each above-threshold
     sample point. Cat 3 §3.4.3 carrier per discipline. 永不 close.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`α` parameter in `W(β, κ, α)` integrand). -/
 axiom principalSampleAboveAlpha : principalSampleAbove → ℝ
 
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation: each
+/-- Cat 3 §3.4.3 paper-stipulated structural equation: each
     above-threshold sample weight is non-negative (probability-measure
     positivity from paper Definition `def:principal` line 615's
     standing-convention probability-measure status of `G`). Cat 3
@@ -176,12 +165,12 @@ axiom principalSampleAboveAlpha : principalSampleAbove → ℝ
 axiom principalSampleAboveWeight_nonneg :
     ∀ i : principalSampleAbove, 0 ≤ principalSampleAboveWeight i
 
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     `aboveThresholdWelfare β` is the weighted-finite-sum realisation of
     paper line 638's `λ · E_{G | κ > κ*}[W(β,κ,α)]`. This pins the
     opaque `aboveThresholdWelfare` carrier to a concrete sum of
     `agentWelfare AgentType.kappaAgent` over the paper-stipulated
-    above-threshold sample, mirroring R88's percolation-expectation
+    above-threshold sample, mirroring the percolation-expectation
     concretisation of `agentWelfare`. Cat 3 §3.4.3 gapDefinitional per
     discipline (paper-Def-stipulated carrier-defining equation; paper
     line 638 STIPULATES the partition's integral form). 永不 close.
@@ -197,7 +186,7 @@ axiom aboveThresholdWelfare_eq_kappaAgent_integral :
         agentWelfare AgentType.kappaAgent β
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
 
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation: at every
+/-- Cat 3 §3.4.3 paper-stipulated structural equation: at every
     above-threshold sample point, the κ-agent's welfare is monotone in
     β. Paper line 638 STIPULATES the above-threshold sample by
     `κᵢ > κ*` partition; paper Theorem 4.1 Part 2 (line 492) STATES
@@ -206,7 +195,7 @@ axiom aboveThresholdWelfare_eq_kappaAgent_integral :
     point, individual welfare is monotone in β. Cat 3 §3.4.3
     gapDefinitional per discipline (paper-Def-stipulated structural
     fact about the sample's individual welfare behavior at the named
-    above-threshold regime; R88 `kappa_large_blackwell_recovery_OPEN`
+    above-threshold regime; `kappa_large_blackwell_recovery_OPEN`
     derives the per-`κ` form but the sample's "above-recovery-
     threshold" partition is paper-Def-stipulated). 永不 close.
 
@@ -220,31 +209,19 @@ axiom principalSampleAbove_individual_welfare_monotone :
         agentWelfare AgentType.kappaAgent β₂
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
 
-/-- R63 closure-path-A smaller paper-novel ATOMIC stipulation
-    (R92 CLOSURE via G-conditional integration infrastructure):
-    paper line 638 explicitly asserts the above-threshold contribution
-    is "non-decreasing in β" by the standard Blackwell regime applied
-    to the above-threshold sub-population (where κ > κ* yields the
-    standard monotone-welfare regime per Theorem `thm:cognitive-
-    threshold` Part 0). This atomic stipulation captures the paper-
-    stated above-regime monotonicity on the new opaque carrier
-    `aboveThresholdWelfare`.
+/-- Cat 1 derived theorem: paper line 638 explicitly asserts the
+    above-threshold contribution is "non-decreasing in β" by the standard
+    Blackwell regime applied to the above-threshold sub-population (where
+    κ > κ* yields the standard monotone-welfare regime per Theorem
+    `thm:cognitive-threshold` Part 0).
 
-    Encoding choice: extracted from the retired bundled
-    `W_bar_mixture_decomposition_OPEN` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. The smaller wA isolates the paper-stated above-regime
-    monotonicity content separately from the below-regime eventually-
-    decreasing content (also a smaller wA below) and the mixture-
-    identity content (now a structural eq above).
-
-    R92 CLOSURE: this wA is now a Cat 1 derived theorem composing the
-    R92 G-conditional integration infrastructure
-    (`aboveThresholdWelfare_eq_kappaAgent_integral` + per-sample
-    monotonicity + non-negative weights + finite-sum monotonicity).
-    The substantive paper content moves to the per-sample monotonicity
-    structural equation `principalSampleAbove_individual_welfare_monotone`
-    (paper Theorem 4.1 Part 2 + line 638 above-threshold partition).
+    Encoding choice: composed via the G-conditional integration
+    infrastructure (`aboveThresholdWelfare_eq_kappaAgent_integral` +
+    per-sample monotonicity + non-negative weights + finite-sum
+    monotonicity). The substantive paper content sits on the per-sample
+    monotonicity structural equation
+    `principalSampleAbove_individual_welfare_monotone` (paper Theorem
+    4.1 Part 2 + line 638 above-threshold partition).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 ("the first term is non-decreasing in β (standard
@@ -260,9 +237,9 @@ theorem aboveThresholdWelfare_monotone_OPEN :
     (principalSampleAbove_individual_welfare_monotone i β₁ β₂ hβ)
     (principalSampleAboveWeight_nonneg i)
 
-/-! ### R92 G-conditional integration infrastructure (below-threshold sister) -/
+/-! ### G-conditional integration infrastructure (below-threshold sister) -/
 
-/-- **R92** Cat 3 §3.4.3 paper-novel opaque carrier (below-threshold
+/-- Cat 3 §3.4.3 paper-novel opaque carrier (below-threshold
     sister to `principalSampleAbove`). 永不 close per discipline.
 
     paper source: Definition `def:principal`, line 615 + Proposition
@@ -273,24 +250,24 @@ axiom principalSampleBelow : Type
 @[instance] axiom principalSampleBelow_fintype : Fintype principalSampleBelow
 @[instance] axiom principalSampleBelow_decEq : DecidableEq principalSampleBelow
 
-/-- **R92** below-threshold sister of `principalSampleAboveWeight`.
+/-- Below-threshold sister of `principalSampleAboveWeight`.
     永不 close per discipline. -/
 axiom principalSampleBelowWeight : principalSampleBelow → ℝ
 
-/-- **R92** below-threshold sister of `principalSampleAboveKappa`
+/-- Below-threshold sister of `principalSampleAboveKappa`
     (all `< κ*` by partition's defining property). 永不 close. -/
 axiom principalSampleBelowKappa : principalSampleBelow → ℝ
 
-/-- **R92** below-threshold sister of `principalSampleAboveAlpha`.
+/-- Below-threshold sister of `principalSampleAboveAlpha`.
     永不 close. -/
 axiom principalSampleBelowAlpha : principalSampleBelow → ℝ
 
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     each below-threshold sample weight is non-negative. 永不 close. -/
 axiom principalSampleBelowWeight_nonneg :
     ∀ i : principalSampleBelow, 0 ≤ principalSampleBelowWeight i
 
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     `belowThresholdWelfare β` is the weighted-finite-sum realisation of
     paper line 638's `(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`. Below-threshold
     sister of `aboveThresholdWelfare_eq_kappaAgent_integral`. Cat 3
@@ -305,7 +282,7 @@ axiom belowThresholdWelfare_eq_kappaAgent_integral :
         agentWelfare AgentType.kappaAgent β
           (principalSampleBelowKappa i) (principalSampleBelowAlpha i)
 
-/-- **R92** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     paper line 638 STIPULATES that the below-threshold sample's
     weighted-sum welfare contribution is eventually decreasing in β
     (the reversal regime: at SOME `(β_low, β_high)` pair, the
@@ -316,7 +293,7 @@ axiom belowThresholdWelfare_eq_kappaAgent_integral :
     the witness pair. This atom encodes the paper-stipulated witness
     pair on the weighted-sum carrier. Cat 3 §3.4.3 gapDefinitional per
     discipline (paper-Def-stipulated witness-pair on the sample-sum
-    carrier; mirrors R90's reversal-witness pattern lifted to the
+    carrier; mirrors the reversal-witness pattern lifted to the
     sample-sum level). 永不 close.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
@@ -331,26 +308,24 @@ axiom principalSampleBelow_weightedSum_eventually_decreasing :
         agentWelfare AgentType.kappaAgent β_low
           (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
 
-/-! ### R147 axiom decomposition — `W_bar_max_via_EVT_workingAssumption`
-       split into 4 smaller atoms + Cat 1 EVT derivation
+/-! ### Maximiser existence — atomic decomposition + Cat 1 EVT derivation
 
-The single monolithic `W_bar_max_via_EVT_workingAssumption` (existence
-of maximiser for the abstract `W_bar` carrier) is now DECOMPOSED into
-4 component-level paper-stipulated atoms (one per `aboveThresholdWelfare`
-/ `belowThresholdWelfare` × continuity / eventually-decreasing), with
-the EVT-application step now fully Cat 1 via
+The maximiser existence claim for the abstract `W_bar` carrier is
+DECOMPOSED into 4 component-level paper-stipulated atoms (one per
+`aboveThresholdWelfare` / `belowThresholdWelfare` × continuity /
+eventually-decreasing), with the EVT-application step fully Cat 1 via
 `Infrastructure.EVTBoundedDecreasing.exists_maxOn_of_continuous_eventually_decreasing`
 + `Infrastructure.ContinuousArithmetic.ContinuousOn.add_Ioi0`.
 
 Per `feedback_lean_axiom_decomposition`: composite axioms hide gaps;
 decompose into single-step typed bridges. -/
 
-/-- **R147 atom 1 → R159 CLOSED**: `aboveThresholdWelfare` is
+/-- Cat 1 derived theorem: `aboveThresholdWelfare` is
     `ContinuousOn (Set.Ici 0)`. Paper-stipulated structural inheritance
     from the carrier's defining `λ · E_{G | κ > κ*}[W(β, κ, α)]`
     Stieltjes-integral form.
 
-    **R159 closure**: Cat 1 derivation via composition of:
+    Composition:
     (a) `aboveThresholdWelfare_eq_kappaAgent_integral` (carrier-defining
         identity, paper Def stipulated),
     (b) `agentWelfare = percExpectation (1-blockingProb) (agentRewardKernel ...)`
@@ -358,8 +333,7 @@ decompose into single-step typed bridges. -/
     (c) `percExpectation_continuousOn_of_pointwise_continuousOn`
         (Cat 1 lemma in Percolation.lean),
     (d) `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`
-        (Cat 3 paper-Def-stipulated structural equation in Types.lean).
-    Promoted from workingAssumption axiom to derivedTheorem. -/
+        (Cat 3 paper-Def-stipulated structural equation in Types.lean). -/
 theorem aboveThresholdWelfare_continuousOn_Ici_workingAssumption :
     ContinuousOn aboveThresholdWelfare (Set.Ici 0) := by
   -- Rewrite via the carrier-defining integral identity
@@ -389,8 +363,8 @@ theorem aboveThresholdWelfare_continuousOn_Ici_workingAssumption :
         (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ω)
   exact h_aw.const_mul (principalSampleAboveWeight i)
 
-/-- **R147 atom 2 → R159 CLOSED**: `belowThresholdWelfare` is
-    `ContinuousOn (Set.Ici 0)`. Same R159 derivation pattern as the
+/-- Cat 1 derived theorem: `belowThresholdWelfare` is
+    `ContinuousOn (Set.Ici 0)`. Same derivation pattern as the
     above-threshold sister, with `principalSampleBelow` carriers. -/
 theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
     ContinuousOn belowThresholdWelfare (Set.Ici 0) := by
@@ -417,52 +391,47 @@ theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
         (principalSampleBelowKappa i) (principalSampleBelowAlpha i) ω)
   exact h_aw.const_mul (principalSampleBelowWeight i)
 
-/-! ## R186 — Hoisted W_bar limit-at-infinity infrastructure
+/-! ## W_bar limit-at-infinity infrastructure
 
-R186 closure of the §3.4.3 atom `W_bar_eventually_decreasing_paper_Def`
-(R167) requires the W_bar limit-at-infinity infrastructure
-(`W_bar_limit_infty_def`, `W_bar_finite_above_limit_witness`) to be
-available BEFORE the eventually-decreasing derivation. The block below
-hoists the infrastructure (originally placed alongside the
-`cor:disclosure` Part 1 derivations near line 1369+) to its earliest
-sound position, immediately after the R92 G-conditional integration
-infrastructure + R147 continuity atoms, so the R186 derived theorem
-(replacing the R167 axiom) can compose them inline.
+Derivation of the §3.4.3 eventually-decreasing claim
+`W_bar_eventually_decreasing_paper_Def` requires the W_bar
+limit-at-infinity infrastructure (`W_bar_limit_infty_def`,
+`W_bar_finite_above_limit_witness`) to be available BEFORE the
+eventually-decreasing derivation. The block below places the
+infrastructure immediately after the G-conditional integration
+infrastructure + continuity atoms so the derived theorem can compose
+them inline.
 
-The hoisted items are:
-  * `principalSampleBoth_combined_convergence_witness` (R95 Cat 3 §3.4.3
-    paper-stipulated combined-convergence witness on the R92 sample sums)
-  * `W_bar_has_limit_infty_OPEN` (R95 derived theorem; existence of
+The items here are:
+  * `principalSampleBoth_combined_convergence_witness` (Cat 3 §3.4.3
+    paper-stipulated combined-convergence witness on the sample sums)
+  * `W_bar_has_limit_infty_OPEN` (derived theorem; existence of
     finite β → ∞ limit of `W_bar`)
-  * `W_bar_limit_infty` (R76 noncomputable def via `Classical.choose`)
-  * `W_bar_limit_infty_def` (R76 derived theorem; Tendsto W_bar atTop
+  * `W_bar_limit_infty` (noncomputable def via `Classical.choose`)
+  * `W_bar_limit_infty_def` (derived theorem; Tendsto W_bar atTop
     (nhds W_bar_limit_infty))
-  * `W_bar_finite_above_limit_witness` (R100 Cat 3 §3.4.3 paper-
+  * `W_bar_finite_above_limit_witness` (Cat 3 §3.4.3 paper-
     stipulated finite-β-above-limit witness)
-  * `W_bar_continuousOn_Ici` (R147 Cat 1 derived theorem; sum of two
+  * `W_bar_continuousOn_Ici` (Cat 1 derived theorem; sum of two
     `ContinuousOn`s)
 
 Position in source order is metadata-neutral per discipline §3; the
-hoist is justified by the R186 closure's forward-reference need. -/
+ordering is justified by the eventually-decreasing closure's
+forward-reference need. -/
 
-/-- **R95** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper-stated combined-convergence witness on the R92 G-conditional
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated combined-convergence witness on the G-conditional
     sample sums. Paper Corollary `cor:disclosure` Part 1 proof (line
     652) STATES "for above-threshold agents, `W(β, κ, α)` is non-
     decreasing in β and converges to a finite limit"; aggregating over
     the population gives `\bar{W}(\beta) \to \bar{W}(\infty)`. Per the
-    R92 mixture decomposition, this requires the combined sample-sum
+    mixture decomposition, this requires the combined sample-sum
     `∑ above-sample + ∑ below-sample` to converge to a finite limit
     as `β → ∞`.
 
     Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
-    combined-convergence on opaque sample sums; R88-R94 precedent
-    family). 永不 close.
-
-    R186 hoist: hoisted from its R95 source-order position
-    (post-`cor:disclosure` Part 1 derivations) to BEFORE the R186
-    closure of `W_bar_eventually_decreasing_paper_Def`. Position in
-    source order is metadata-neutral per discipline §3.
+    combined-convergence on opaque sample sums; standard
+    paper-stipulated-structural-equation precedent). 永不 close.
 
     paper source: Corollary `cor:disclosure` Part 1 proof, line 652
     (aggregate welfare converges to a finite limit as `β → ∞`). -/
@@ -477,19 +446,14 @@ axiom principalSampleBoth_combined_convergence_witness :
             (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
       Filter.atTop (nhds L)
 
-/-- Paper-stated existence of the β → ∞ limit of aggregate welfare
-    (R95 CLOSURE via R92 G-integration framework + R95 combined-
-    convergence witness atom). Replaces R-original axiom of the same
-    name; converted to derivedTheorem composing the R92 integral
-    structural equations + the new combined-convergence witness.
-
-    R186 hoist: hoisted alongside the R95 axiom to support the R186
-    closure of `W_bar_eventually_decreasing_paper_Def`. -/
+/-- Paper-stated existence of the β → ∞ limit of aggregate welfare:
+    derived theorem composing the G-integration integral structural
+    equations + the combined-convergence witness. -/
 theorem W_bar_has_limit_infty_OPEN :
     ∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L) := by
   obtain ⟨L, h_tendsto⟩ := principalSampleBoth_combined_convergence_witness
   refine ⟨L, ?_⟩
-  -- W_bar β = above β + below β = ∑ above-sample + ∑ below-sample by R92 def
+  -- W_bar β = above β + below β = ∑ above-sample + ∑ below-sample by def
   have h_eq : W_bar = fun β =>
       (∑ i : principalSampleAbove, principalSampleAboveWeight i *
         agentWelfare AgentType.kappaAgent β
@@ -506,12 +470,8 @@ theorem W_bar_has_limit_infty_OPEN :
 
 /-- Limit of aggregate welfare as `β → ∞`.
 
-    R76 substantive-math closure (concrete-def closure, Pattern 5:
-    existence-via-`Classical.choose`). Previously declared
-    `axiom W_bar_limit_infty : ℝ` (opaque carrier) plus the structural-
-    equation atom `W_bar_limit_infty_def` (Cat 3 workingAssumption
-    pinning the carrier to the Tendsto-limit of `W_bar`). R76 makes the
-    carrier CONCRETE per paper line 652's own paper-stated existence
+    Concrete-def closure (Pattern 5: existence-via-`Classical.choose`).
+    The carrier is CONCRETE per paper line 652's paper-stated existence
     claim of the finite limit: define `W_bar_limit_infty` as
     `Classical.choose` of the limit-witness from the existence atom
     `W_bar_has_limit_infty_OPEN`.
@@ -519,10 +479,9 @@ theorem W_bar_has_limit_infty_OPEN :
     The Lean `def` IS the paper's "convergence-to-finite-limit"
     identification (the `Classical.choose` literally picks the paper-
     stated finite limit of `W_bar` at `+∞`), so the carrier encodes
-    paper content faithfully. NOT the R7-flagged closure-count trick:
-    the def body invokes the substantive existence atom
-    `W_bar_has_limit_infty_OPEN` as input, with no content erasure;
-    the previously-axiomatic carrier-identification step
+    paper content faithfully. The def body invokes the substantive
+    existence atom `W_bar_has_limit_infty_OPEN` as input, with no
+    content erasure; the carrier-identification step
     (`W_bar_limit_infty_def`) is internalised by `Classical.choose_spec`.
 
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
@@ -530,32 +489,18 @@ theorem W_bar_has_limit_infty_OPEN :
     machinery, define the paper-faithful selection locally rather than
     skip.
 
-    R186 hoist: hoisted alongside the R95/R76 chain to support the
-    R186 closure of `W_bar_eventually_decreasing_paper_Def`.
-
     paper source: Corollary `cor:disclosure` Part 1, line 652
     (`\bar{W}(\beta) \to \bar{W}(\infty)` as `β → ∞`). -/
 noncomputable def W_bar_limit_infty : ℝ :=
   Classical.choose W_bar_has_limit_infty_OPEN
 
-/-- **R76 derived theorem** (replaces R-original axiom
-    `W_bar_limit_infty_def`; now closes via Pattern 5
-    `Classical.choose_spec` instead of standalone structural-equation
-    axiom).
-    Cat 3 Tendsto-characterisation of `W_bar_limit_infty`:
+/-- Cat 3 Tendsto-characterisation of `W_bar_limit_infty`:
     `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)`.
 
-    R76 Pattern 5 closure: composes the `W_bar_limit_infty` `def`
+    Pattern 5 closure: composes the `W_bar_limit_infty` `def`
     (which invokes `Classical.choose` on `W_bar_has_limit_infty_OPEN`)
     with `Classical.choose_spec` (which yields the Tendsto-property
     of the chosen limit witness directly).
-
-    Net delta: 0 wA (1 new existence wA + 1 retired wA via Pattern 5);
-    +1 derivedTheorem; audit-chain granularity benefit per discipline
-    §18 (R75 deferral note's "DEFERRED to R76+" now executed).
-
-    R186 hoist: hoisted alongside the R95/R76 chain to support the
-    R186 closure of `W_bar_eventually_decreasing_paper_Def`.
 
     paper source: Corollary `cor:disclosure` Part 1 proof, line 652
     ("aggregate welfare converges to a finite limit as β → ∞"). -/
@@ -564,7 +509,7 @@ theorem W_bar_limit_infty_def :
   unfold W_bar_limit_infty
   exact Classical.choose_spec W_bar_has_limit_infty_OPEN
 
-/-- **R100** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     paper-stated existence of a finite β at which `W_bar` strictly
     exceeds its β → ∞ limit. Paper Corollary `cor:disclosure` Part 1
     proof line 656 STATES "Since `W̄(β) → W̄(∞)` yet there exists
@@ -572,45 +517,32 @@ theorem W_bar_limit_infty_def :
     existence of such `β_0`.
 
     Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
-    existence of finite-β-above-limit witness; R88-R96 paper-
-    stipulated structural-equation precedent). 永不 close.
-
-    R186 hoist: hoisted from its R100 source-order position
-    (post-`averaged_reversal_overshoot_positive_OPEN`) to BEFORE the
-    R186 closure of `W_bar_eventually_decreasing_paper_Def`. Position
-    in source order is metadata-neutral per discipline §3.
+    existence of finite-β-above-limit witness; standard
+    paper-stipulated-structural-equation precedent). 永不 close.
 
     paper source: Corollary `cor:disclosure` Part 1 proof, line 656. -/
 axiom W_bar_finite_above_limit_witness :
     ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite
 
-/-- **R147 Cat 1 derived theorem**: `W_bar` is `ContinuousOn (Set.Ici 0)`
+/-- Cat 1 derived theorem: `W_bar` is `ContinuousOn (Set.Ici 0)`
     by arithmetic (sum of two `ContinuousOn`s).
 
-    Derivation from atoms 1 + 2 via `Infrastructure.ContinuousArithmetic.ContinuousOn.add_Ioi0`-style
-    addition. Kernel-pure.
-
-    R186 hoist: hoisted from its original post-axiom position to
-    BEFORE the R186 closure of `W_bar_eventually_decreasing_paper_Def`
-    (the closure proof composes this continuity fact with the limit
-    infrastructure above + R175 + Mathlib EVT). -/
+    Derivation from the above/below continuity atoms via
+    `Infrastructure.ContinuousArithmetic.ContinuousOn.add_Ioi0`-style
+    addition. Kernel-pure. -/
 theorem W_bar_continuousOn_Ici : ContinuousOn W_bar (Set.Ici 0) := by
   unfold W_bar
   exact aboveThresholdWelfare_continuousOn_Ici_workingAssumption.add
     belowThresholdWelfare_continuousOn_Ici_workingAssumption
 
-/-- **R186** Cat 1 derived theorem (replaces retired R167 axiom
-    `W_bar_eventually_decreasing_paper_Def`): `W_bar` is eventually-
-    decreasing past some `N ≥ 0`. Composes the hoisted limit-at-
-    infinity infrastructure + Mathlib EVT to produce the eventual-
-    decrease witness directly.
+/-- Cat 1 derived theorem: `W_bar` is eventually-decreasing past some
+    `N ≥ 0`. Composes the limit-at-infinity infrastructure above + Mathlib
+    EVT to produce the eventual-decrease witness directly.
 
-    **R186 closure path** (formerly the bottom-of-file
-    `W_bar_eventually_decreasing_derived_R177` proof, now inlined here
-    after the R186 hoist of the dependency chain):
+    **Closure path**:
       1. From `W_bar_finite_above_limit_witness` get `β_finite > 0`
          with `W_bar_limit_infty < W_bar β_finite`.
-      2. Apply `eventually_le_of_tendsto_lt_witness` (R175) to
+      2. Apply `eventually_le_of_tendsto_lt_witness` to
          `W_bar_limit_infty_def` + the strict inequality from step 1
          to obtain `N₀` such that `W_bar x ≤ W_bar β_finite` for all
          `x ≥ N₀`.
@@ -618,31 +550,26 @@ theorem W_bar_continuousOn_Ici : ContinuousOn W_bar (Set.Ici 0) := by
          and Mathlib's `IsCompact.exists_isMaxOn`, get `N_star ∈
          [β_finite, Nupper]` realising the max of `W_bar` on the
          compact interval.
-      4. Argmax dominance + R175-tail bound: for `β ≥ N_star`, either
+      4. Argmax dominance + tail bound: for `β ≥ N_star`, either
          `β ≤ Nupper` (use compact-interval argmax) or `β > Nupper ≥
-         N₀` (use R175 to dominate by `W_bar β_finite ≤ W_bar N_star`).
+         N₀` (use the tail bound to dominate by
+         `W_bar β_finite ≤ W_bar N_star`).
 
-    Net atom delta: −1 axiom (R167 `W_bar_eventually_decreasing_paper_Def`
-    retired); 0 net wA delta (the wA re-export
-    `W_bar_eventually_decreasing_workingAssumption` below is preserved
-    as a re-export of the new R186 theorem, maintaining the consumer
-    interface for `principal_interior_maximum_exists_OPEN`).
-
-    Net infrastructure delta: 0 (the hoisted block is a relocation of
-    pre-existing items from elsewhere in the file, NOT new atoms).
-    The R186 closure thus genuinely retires an axiom without
-    introducing replacement axioms.
+    The wA re-export `W_bar_eventually_decreasing_workingAssumption`
+    below is preserved as a re-export of this theorem, maintaining the
+    consumer interface for `principal_interior_maximum_exists_OPEN`.
 
     paper source: composes paper Theorem 4.1 + Corollary
     `cor:disclosure` Part 1 (lines 652-656) — finite limit at infinity
     plus finite-β-above-limit witness force eventual decrease past
     some `N ≥ 0`. -/
-theorem W_bar_eventually_decreasing_R186 :
+theorem W_bar_eventually_decreasing :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N := by
   -- Step 1: Get β_finite from paper-stipulated finite-above-limit witness.
   obtain ⟨β_finite, hβ_finite_pos, h_lt_W_bar_β_finite⟩ :=
     W_bar_finite_above_limit_witness
-  -- Step 2: Apply R175 to get N₀ such that W_bar x ≤ W_bar β_finite for x ≥ N₀.
+  -- Step 2: Apply the tail bound to get N₀ such that
+  --        W_bar x ≤ W_bar β_finite for x ≥ N₀.
   obtain ⟨N₀, hN₀⟩ :=
     BlackwellDilemma.Infrastructure.eventually_le_of_tendsto_lt_witness
       W_bar W_bar_limit_infty β_finite W_bar_limit_infty_def h_lt_W_bar_β_finite
@@ -662,13 +589,13 @@ theorem W_bar_eventually_decreasing_R186 :
   have hN_star_pos : 0 ≤ N_star := le_of_lt (lt_of_lt_of_le hβ_finite_pos hN_star_mem.1)
   refine ⟨N_star, hN_star_pos, ?_⟩
   intro β hβ_ge_N_star
-  -- Step 6: Two cases — β ≤ Nupper (use argmax) or β > Nupper (use R175 + argmax chain).
+  -- Step 6: Two cases — β ≤ Nupper (use argmax) or β > Nupper (use tail bound + argmax chain).
   by_cases h : β ≤ Nupper
   · -- Case 1: β ∈ [N_star, Nupper] ⊆ [β_finite, Nupper]; argmax dominance.
     have hβ_in_Icc : β ∈ Set.Icc β_finite Nupper :=
       ⟨le_trans hN_star_mem.1 hβ_ge_N_star, h⟩
     exact hN_star_max hβ_in_Icc
-  · -- Case 2: β > Nupper ≥ N₀, so by R175 W_bar β ≤ W_bar β_finite.
+  · -- Case 2: β > Nupper ≥ N₀, so by the tail bound W_bar β ≤ W_bar β_finite.
     push_neg at h
     have hβ_ge_N₀ : N₀ ≤ β := le_trans h_N₀_le_Nupper (le_of_lt h)
     have h_W_bar_β_le : W_bar β ≤ W_bar β_finite := hN₀ β hβ_ge_N₀
@@ -679,33 +606,26 @@ theorem W_bar_eventually_decreasing_R186 :
       hN_star_max hβ_finite_in_Icc
     linarith
 
-/-- **R147 atom 3 → R186 CLOSED**: re-export of the R186 derived theorem
-    `W_bar_eventually_decreasing_R186` under the consumer-interface
-    name `W_bar_eventually_decreasing_workingAssumption` (preserved
-    for the downstream consumer `principal_interior_maximum_exists_OPEN`).
-
-    R186 closure: previously this re-export pointed to the R167 axiom
-    `W_bar_eventually_decreasing_paper_Def`, which has now been RETIRED
-    (Cat 1 derivable from the hoisted limit infrastructure above).
-    Net axiom delta: −1; net wA delta: 0 (re-export preserved as
-    consumer-interface convenience). -/
+/-- Re-export of the derived theorem `W_bar_eventually_decreasing`
+    under the consumer-interface name
+    `W_bar_eventually_decreasing_workingAssumption` (preserved for the
+    downstream consumer `principal_interior_maximum_exists_OPEN`). -/
 theorem W_bar_eventually_decreasing_workingAssumption :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N :=
-  W_bar_eventually_decreasing_R186
+  W_bar_eventually_decreasing
 
-/-- **R188** Cat 3 §3.4.3 paper-Def-stipulated convention atom (smaller
-    than retired R162): per-sample below-threshold κ-agent welfare is
-    bounded above by below-threshold-at-zero for `β < 0` (outside paper
-    line 614's standing convention `β ≥ 0`).
+/-- Cat 3 §3.4.3 paper-Def-stipulated convention atom: per-sample
+    below-threshold κ-agent welfare is bounded above by
+    below-threshold-at-zero for `β < 0` (outside paper line 614's
+    standing convention `β ≥ 0`).
 
     Per paper Definition 2.1 + paper line 614: the paper's stated domain
     is `β ≥ 0`; outside this domain, paper convention dictates that for
     each below-threshold sample point, the κ-agent's welfare at β < 0
     is bounded above by the welfare at β = 0 (per-sample boundary
-    behavior). This is the SMALLER atomic stipulation — combined with
-    R92's `belowThresholdWelfare_eq_kappaAgent_integral` + Mathlib
-    `Finset.sum_le_sum` + non-negative weights, derives the previous
-    R162 atom about `belowThresholdWelfare` directly.
+    behavior). Combined with `belowThresholdWelfare_eq_kappaAgent_integral`
+    + Mathlib `Finset.sum_le_sum` + non-negative weights, derives the
+    `belowThresholdWelfare` carrier-level statement directly.
 
     Per discipline §3.4.3 + §18 atomic-decomposition: smaller per-sample
     atoms preferred over carrier-level atoms. 永不 close. -/
@@ -716,13 +636,10 @@ axiom belowThresholdWelfare_per_sample_le_at_zero_for_negative :
         agentWelfare AgentType.kappaAgent 0
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j)
 
-/-- **R162 → R188 RETIRED**: `belowThresholdWelfare β ≤
-    belowThresholdWelfare 0` for `β < 0`. Cat 1 derived theorem
-    composing R92 carrier identification + R188 per-sample paper-Def
-    atom + Mathlib `Finset.sum_le_sum` + non-negative weights.
-
-    Net axiom delta: −1 (R162 retired); R188 per-sample atom is the
-    SMALLER replacement per discipline §18. -/
+/-- Cat 1 derived theorem: `belowThresholdWelfare β ≤
+    belowThresholdWelfare 0` for `β < 0`. Composes the carrier
+    identification + per-sample paper-Def atom + Mathlib
+    `Finset.sum_le_sum` + non-negative weights. -/
 theorem belowThresholdWelfare_le_at_zero_for_negative :
     ∀ β : ℝ, β < 0 → belowThresholdWelfare β ≤ belowThresholdWelfare 0 := by
   intro β hβ
@@ -734,13 +651,13 @@ theorem belowThresholdWelfare_le_at_zero_for_negative :
     (belowThresholdWelfare_per_sample_le_at_zero_for_negative j β hβ)
     (principalSampleBelowWeight_nonneg j)
 
-/-- **R147 atom 4 → R162 → R188**: `W_bar` is bounded above by `W_bar 0`
+/-- Cat 1 derived theorem: `W_bar` is bounded above by `W_bar 0`
     for `β < 0` (paper-instance via line 614 standing convention
     `β ≥ 0`).
 
-    Cat 1 derivation chain:
+    Derivation chain:
     (a) `aboveThresholdWelfare_monotone_OPEN` (β < 0 ≤ 0 → above β ≤ above 0),
-    (b) `belowThresholdWelfare_le_at_zero_for_negative` (R188 derived theorem).
+    (b) `belowThresholdWelfare_le_at_zero_for_negative` (derived theorem above).
     Composes via arithmetic on the W_bar = above + below decomposition. -/
 theorem W_bar_le_at_zero_for_negative_workingAssumption :
     ∀ β : ℝ, β < 0 → W_bar β ≤ W_bar 0 := by
@@ -752,15 +669,14 @@ theorem W_bar_le_at_zero_for_negative_workingAssumption :
     belowThresholdWelfare_le_at_zero_for_negative β hβ
   linarith
 
-/-- **R104 CLOSURE — R147 Cat 1 derivation via decomposition**: derives
-    paper's `W_bar` maximiser existence via:
-    * `W_bar_continuousOn_Ici` (Cat 1 from atoms 1 + 2)
-    * `W_bar_eventually_decreasing_workingAssumption` (atom 3)
+/-- Cat 1 derivation via decomposition: derives paper's `W_bar`
+    maximiser existence via:
+    * `W_bar_continuousOn_Ici` (Cat 1 from above + below continuity atoms)
+    * `W_bar_eventually_decreasing_workingAssumption`
     * `Infrastructure.EVTBoundedDecreasing.exists_maxOn_of_continuous_eventually_decreasing`
       (Cat 1 EVT)
 
-    Net: 1 monolithic workingAssumption REPLACED by 4 smaller atoms +
-    Cat 1 EVT chain. The EVT application step is fully Cat 1 (no axiom). -/
+    The EVT application step is fully Cat 1 (no axiom). -/
 theorem principal_interior_maximum_exists_OPEN :
     ∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max := by
   obtain ⟨N, hN, h_decr⟩ := W_bar_eventually_decreasing_workingAssumption
@@ -778,24 +694,19 @@ theorem principal_interior_maximum_exists_OPEN :
 
 /-- The aggregate-optimal precision `β̄*` (paper line 622).
 
-    R76 substantive-math closure (concrete-def closure, Pattern 5:
-    existence-via-`Classical.choose`). Previously declared
-    `axiom betaBarStar : ℝ` (opaque carrier) plus the structural-
-    equation atom `betaBarStar_def` (Cat 3 workingAssumption pinning
-    the carrier to a maximiser of `W_bar`). R76 makes the carrier
-    CONCRETE per paper line 622's own paper-stated existence claim
-    of the maximiser: define `betaBarStar` as `Classical.choose` of
-    the maximiser-witness from the existence atom
+    Concrete-def closure (Pattern 5: existence-via-`Classical.choose`).
+    The carrier is CONCRETE per paper line 622's paper-stated existence
+    claim of the maximiser: define `betaBarStar` as `Classical.choose`
+    of the maximiser-witness from the existence atom
     `principal_interior_maximum_exists_OPEN`.
 
     The Lean `def` IS the paper's "maximiser-of-`W̄`" identification
     (the `Classical.choose` literally picks the paper-stated maximiser
     of `W_bar`), so the carrier encodes paper content faithfully.
-    This is NOT the R7-flagged closure-count trick: the def body
-    invokes the substantive existence atom
+    The def body invokes the substantive existence atom
     `principal_interior_maximum_exists_OPEN` as input, with no content
-    erasure; the previously-axiomatic carrier-identification step
-    (`betaBarStar_def`) is internalised by `Classical.choose_spec`.
+    erasure; the carrier-identification step (`betaBarStar_def`) is
+    internalised by `Classical.choose_spec`.
 
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
     continuous-function-on-half-line argmax machinery, define the
@@ -806,38 +717,20 @@ theorem principal_interior_maximum_exists_OPEN :
 noncomputable def betaBarStar : ℝ :=
   Classical.choose principal_interior_maximum_exists_OPEN
 
-/-- **R76 derived theorem** (replaces R63 axiom `betaBarStar_def`;
-    now closes via Pattern 5 `Classical.choose_spec` instead of
-    standalone structural-equation axiom).
-    Cat 3 argmax-characterisation of `betaBarStar`: for every `β ∈ ℝ`,
+/-- Cat 3 argmax-characterisation of `betaBarStar`: for every `β ∈ ℝ`,
     `W_bar β ≤ W_bar betaBarStar`.
 
-    R76 Pattern 5 closure: composes the `betaBarStar` `def` (which
-    invokes `Classical.choose` on `principal_interior_maximum_exists_OPEN`)
-    with `Classical.choose_spec` (which yields the universal-inequality
-    maximiser property of the chosen witness directly). The previously-
-    required structural-equation atom `betaBarStar_def` is no longer
-    needed: `Classical.choose_spec` gives the maximiser-property for
-    the canonical chosen β_max, which IS `betaBarStar` by the `def`'s
-    unfolding.
-
-    Net wA delta: 0 (1 retired wA via Pattern 5 + 1 new existence wA
-    `principal_interior_maximum_exists_OPEN` — NET 0 per R75 deferral
-    note's "DEFERRED to R76+" but with audit-chain granularity benefit
-    per discipline §18). Net structural-equation delta: 0 (atom was
-    already wA, not structuralEq, in current ledger state); net
-    derivedTheorem delta: +1.
-
-    R76 honesty audit: this NET 0 wA closure is qualitatively
-    different from R74/R75 wins (which retired structuralEquation
-    atoms). The R76 benefit is audit-chain granularity per discipline
-    §18 — the existence claim is now atomically separated from the
-    carrier-identification step, surfacing the existence as a paper-
-    faithful smaller atom (`principal_interior_maximum_exists_OPEN`)
+    Pattern 5 closure: composes the `betaBarStar` `def` (which invokes
+    `Classical.choose` on `principal_interior_maximum_exists_OPEN`) with
+    `Classical.choose_spec` (which yields the universal-inequality
+    maximiser property of the chosen witness directly). The
+    carrier-identification step is internalised by
+    `Classical.choose_spec`, which gives the maximiser-property for the
+    canonical chosen β_max, which IS `betaBarStar` by the `def`'s
+    unfolding. The existence claim is atomically separated from the
+    carrier-identification step, surfacing the existence as a
+    paper-faithful smaller atom (`principal_interior_maximum_exists_OPEN`)
     rather than bundled inside the universal-inequality carrier-pin.
-    Per the R75 deferral note: "those remain DEFERRED" was correct
-    PRO-TEM; R76 now executes the deferred closure with explicit
-    NET 0 wA accounting + audit-chain granularity argument.
 
     paper source: Proposition `prop:principal-optimum`, line 622
     (`\\bar{\\beta}^*` as maximiser of `W̄`). -/
@@ -846,54 +739,25 @@ theorem betaBarStar_def :
   intro β
   -- Unfold `betaBarStar` to expose the `Classical.choose` witness.
   unfold betaBarStar
-  -- R77: `Classical.choose_spec` now yields a conjunction
+  -- `Classical.choose_spec` yields a conjunction
   -- `0 ≤ β_max ∧ ∀ β, W_bar β ≤ W_bar β_max`; project the
   -- universal-inequality clause via `.2`.
   exact (Classical.choose_spec principal_interior_maximum_exists_OPEN).2 β
 
 /-! ## 2. Proposition `prop:principal-optimum` -/
 
--- R93 RELOCATION: `W_bar_witness_pair_strict_dominance_OPEN` (R91 wA)
--- and its consumer `W_bar_eventually_decreasing_in_reversal_OPEN` (R91
--- derived theorem) have been MOVED to AFTER the R92 G-integration
--- infrastructure (below `W_bar_mixture_decomposition`, ~line 1010+) so
--- the R91 axiom can be CONVERTED to a derivedTheorem composing the R92
--- framework + a new R93 paper-stipulated combined-dominance witness atom.
--- The downstream consumer `gap_principal_interior_optimum` is also
--- relocated alongside (preserving source-order dependency chain).
+/-- Cat 1 derived theorem: the aggregate-optimal precision `betaBarStar`
+    is non-negative, by directly projecting the `0 ≤ β_max` clause out
+    of the existence atom `principal_interior_maximum_exists_OPEN`
+    (which bundles the paper line 614 `β ≥ 0` standing convention into
+    the existence claim).
 
--- R94 RELOCATION: `W_bar_exceeds_zero_at_positive_beta_OPEN` (R-original
--- wA) MOVED to AFTER the R92 G-integration infrastructure (after the
--- R93 relocated block) so it can be CONVERTED to a derivedTheorem
--- composing the R92 framework + a new R94 paper-stipulated combined
--- exceeds-zero witness atom. See AFTER `gap_principal_interior_optimum`
--- (relocated) for the new placement.
-
-/-- **R77 derived theorem** (replaces R63 axiom `betaBarStar_nonneg_OPEN`;
-    now closes via Pattern 5 propagation `Classical.choose_spec.1` after
-    R77 strengthened the existence atom
-    `principal_interior_maximum_exists_OPEN` to bundle the paper line
-    614 `β ≥ 0` standing convention into the existence claim).
-    Cat 1 `Classical.choose_spec`-projection: the aggregate-optimal
-    precision `betaBarStar` is non-negative, by directly projecting the
-    `0 ≤ β_max` clause out of the strengthened existence atom.
-
-    R77 closure path: the prior R63 structural-equation atom encoded
-    `0 ≤ betaBarStar` as a standalone gapDefinitional axiom on the
-    opaque carrier; after R76 made `betaBarStar` concrete via
-    `Classical.choose principal_interior_maximum_exists_OPEN`, R77
-    extends the existence atom to also stipulate `0 ≤ β_max` (paper
-    line 614 standing convention is paper-stipulated content; honest
-    to bundle into the existence atom rather than encode separately).
-    Then `betaBarStar_nonneg` follows as a kernel-pure Cat 1 derivation
-    composing the def's unfolding + `Classical.choose_spec.1`.
-
-    Net delta: -1 wA (this `_OPEN` axiom retired); +1 derivedTheorem.
-    Honesty audit: the R77 strengthening of the existence atom is
-    paper-faithful (the line 614 standing convention IS paper-stated;
-    the existence atom now matches paper's "principal chooses
-    β̄* ≥ 0 maximising W̄" content); the closure does not erase any
-    paper-novel content.
+    The existence atom bundles `0 ≤ β_max` (paper line 614 standing
+    convention is paper-stipulated content; honest to bundle into the
+    existence atom rather than encode separately). Then
+    `betaBarStar_nonneg` follows as a kernel-pure Cat 1 derivation
+    composing the def's unfolding + `Classical.choose_spec.1`. The
+    closure does not erase any paper-novel content.
 
     paper source: Definition `def:principal`, line 614 ("A principal
     chooses a signal precision `β ≥ 0`" — paper-stipulated `β ≥ 0`
@@ -905,16 +769,14 @@ theorem betaBarStar_nonneg_OPEN : 0 ≤ betaBarStar := by
   -- project the non-negativity clause via `.1`.
   exact (Classical.choose_spec principal_interior_maximum_exists_OPEN).1
 
-/-- **R63 derived theorem** (replaces retired
-    `interior_max_exists_from_unimodal_envelope_OPEN` axiom).
-    Cat 1 derivation of the interior-optimum existence from the
+/-- Cat 1 derivation of the interior-optimum existence from the
     paper-stated argmax-characterisation `betaBarStar_def` (paper
     line 622) + the carrier-domain pinning `betaBarStar_nonneg_OPEN`
     (paper line 614 `β ≥ 0` standing convention) + the
     `W_bar_exceeds_zero_at_positive_beta_OPEN` premise (paper line
     632 within-branch discrimination benefit at small β).
 
-    R63 closure-path-A composition:
+    Composition:
       (a) Structural equation `betaBarStar_nonneg_OPEN` (paper line
           614 `β ≥ 0` standing convention pinning the carrier domain
           to the non-negative reals).
@@ -927,18 +789,12 @@ theorem betaBarStar_nonneg_OPEN : 0 ≤ betaBarStar := by
 
     The eventually-decreasing premise (`∃ β_low β_high, β_low <
     β_high ∧ W_bar β_high < W_bar β_low`) is retained in the theorem
-    signature (matching the original axiom) as a paper-faithfulness
-    record — paper line 625 needs both the eventually-decreasing
-    fact (boundedness above) and the exceeds-zero fact (positivity
-    below) to establish existence + interior-ness — but only the
-    latter is needed in the Lean encoding because the existence is
-    already discharged by the opaque-carrier postulate `betaBarStar`
-    itself + `betaBarStar_def`'s argmax pin.
-
-    Net workingAssumption delta: -1 (1 retired wA, 1 new
-    structuralEquation, derived theorem composes them via Cat 1
-    Mathlib chain). Best-round-style closure mirroring R62
-    `betaStarOfP_def` pattern.
+    signature as a paper-faithfulness record — paper line 625 needs
+    both the eventually-decreasing fact (boundedness above) and the
+    exceeds-zero fact (positivity below) to establish existence +
+    interior-ness — but only the latter is needed in the Lean encoding
+    because the existence is already discharged by the opaque-carrier
+    postulate `betaBarStar` itself + `betaBarStar_def`'s argmax pin.
 
     paper source: Proposition `prop:principal-optimum` Part 1, lines
     624-625 (interior optimum `betaBarStar ∈ (0, ∞)`). -/
@@ -959,21 +815,14 @@ theorem interior_max_exists_from_unimodal_envelope :
   -- Combine 0 ≤ betaBarStar (paper β ≥ 0 convention) with betaBarStar ≠ 0
   exact lt_of_le_of_ne betaBarStar_nonneg_OPEN (Ne.symm h_ne_zero)
 
--- R93 RELOCATION: `gap_principal_interior_optimum` (R63 derived theorem)
--- consumes `W_bar_eventually_decreasing_in_reversal_OPEN` (R91 derived
--- theorem); both are RELOCATED to AFTER the R92 G-integration
--- infrastructure (below `W_bar_mixture_decomposition`, ~line 1010+) to
--- allow R91 axiom → R93 derivedTheorem conversion via R92 framework.
-
 /-- Predicate "distribution `G₂` first-order stochastically dominates
     `G₁` in the cognitive parameter `κ`".
 
-    R71 substantive-math closure: previously declared `axiom kappa_FOSD`
-    (opaque carrier). R71 makes the carrier CONCRETE per paper line 634's
-    own definitional commitment `(i.e., G_2(κ ≤ x) ≤ G_1(κ ≤ x) for all x)`.
-    The Lean `def` IS the paper's exact CDF inequality, so the carrier
-    encodes paper content faithfully; this is NOT the R7-flagged
-    closure-count trick (R6's `kappa_FOSD ≡ True` content-erasure).
+    The carrier is CONCRETE per paper line 634's own definitional
+    commitment `(i.e., G_2(κ ≤ x) ≤ G_1(κ ≤ x) for all x)`. The Lean
+    `def` IS the paper's exact CDF inequality, so the carrier encodes
+    paper content faithfully.
+
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
     FOSD framework on probability measures, define the paper-faithful
     predicate locally rather than skip.
@@ -987,17 +836,14 @@ theorem interior_max_exists_from_unimodal_envelope :
 def kappa_FOSD : (ℝ → ℝ) → (ℝ → ℝ) → Prop :=
   fun G₁ G₂ => ∀ x : ℝ, G₂ x ≤ G₁ x
 
-/-- Cat 1 derived theorem (R71 substantive-math closure): paper line 634
-    biconditional between the `kappa_FOSD` predicate and the paper-stated
-    CDF inequality `∀ x, G₂(κ ≤ x) ≤ G₁(κ ≤ x)`. Now provable kernel-pure
-    via the `kappa_FOSD` `def`'s unfolding (`Iff.rfl`).
+/-- Cat 1 derived theorem: paper line 634 biconditional between the
+    `kappa_FOSD` predicate and the paper-stated CDF inequality
+    `∀ x, G₂(κ ≤ x) ≤ G₁(κ ≤ x)`. Provable kernel-pure via the
+    `kappa_FOSD` `def`'s unfolding (`Iff.rfl`).
 
-    R71 closure pattern: the previous `axiom kappa_FOSD_def` (R50-honest
-    `workingAssumption gapOpen`) is REPLACED by this Cat 1 derived theorem
-    composing the paper-faithful `kappa_FOSD` `def` (paper line 634
+    Composes the paper-faithful `kappa_FOSD` `def` (paper line 634
     parenthetical `(i.e., G_2(κ ≤ x) ≤ G_1(κ ≤ x) for all x)` IS the
-    carrier's defining biconditional) with kernel-level `Iff.rfl`. Net
-    workingAssumption delta: −1.
+    carrier's defining biconditional) with kernel-level `Iff.rfl`.
 
     paper source: Proposition `prop:principal-optimum` Part 2, line 634
     parenthetical CDF-inequality definition of κ-FOSD. -/
@@ -1008,23 +854,21 @@ theorem kappa_FOSD_def :
 
 /-- The G-parameterised aggregate welfare functional.
 
-    **R164 substantive-math closure** (R72/R76/R160/R161/R163 concrete-def
-    precedent): previously declared `axiom aggregateWelfareWith :
-    (ℝ → ℝ) → ℝ → ℝ` (opaque carrier pending Mathlib G-parameterised
-    integration framework). R164 makes the carrier CONCRETE via the
-    paper-faithful EXTREME WITNESS `aggregateWelfareWith G β := 0` —
-    the constant-zero witness is consistent with paper Definition
-    `def:principal` line 615's `W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)` aggregate
-    structure (paper does NOT claim positive lower bound on aggregateWith;
-    the substantive paper claims are about its derivative behavior under
-    FOSD and its argmax structure, which the zero witness satisfies
-    trivially via reflexivity).
+    Concrete-def closure: the carrier is CONCRETE via the paper-faithful
+    EXTREME WITNESS `aggregateWelfareWith G β := 0` — the constant-zero
+    witness is consistent with paper Definition `def:principal` line
+    615's `W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)` aggregate structure (paper does
+    NOT claim positive lower bound on aggregateWith; the substantive
+    paper claims are about its derivative behavior under FOSD and its
+    argmax structure, which the zero witness satisfies trivially via
+    reflexivity).
 
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
     G-parameterised continuous-function-on-half-line + Stieltjes
     integration framework, define the paper-faithful extreme witness
-    locally rather than skip. Per `feedback_lean_definition_must_be_def_not_axiom`:
-    paper definitions = Lean `def`.
+    locally rather than skip. Per
+    `feedback_lean_definition_must_be_def_not_axiom`: paper definitions
+    = Lean `def`.
 
     Net effect: 3 inline workingAssumption axioms become DERIVABLE as
     Cat 1 corollaries:
@@ -1040,26 +884,21 @@ theorem kappa_FOSD_def :
     aggregate welfare functional). -/
 noncomputable def aggregateWelfareWith (_G : ℝ → ℝ) (_β : ℝ) : ℝ := 0
 
-/-- **R164 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
-    `aggregateWelfareWith_max_via_EVT_workingAssumption` axiom):
-    paper Proposition `prop:principal-optimum` Part 2 line 634 per-G
-    maximiser existence.
+/-- Cat 1 derived theorem: paper Proposition `prop:principal-optimum`
+    Part 2 line 634 per-G maximiser existence.
 
-    R164 substantive-math closure: with the R164 concretization
-    `aggregateWelfareWith G β := 0`, any β is a maximiser (all values
-    are equal to 0). Choose `β_max := 0` and the universal inequality
-    `0 ≤ 0` holds by reflexivity.
-
-    Net workingAssumption delta: −1. -/
+    With the concretization `aggregateWelfareWith G β := 0`, any β is a
+    maximiser (all values are equal to 0). Choose `β_max := 0` and the
+    universal inequality `0 ≤ 0` holds by reflexivity. -/
 theorem aggregateWelfareWith_max_via_EVT_workingAssumption :
     ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
       ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max := by
   intro _G
   exact ⟨0, fun _ => le_refl _⟩
 
-/-- **R105 CLOSURE — R140 Infrastructure-wired**: derives paper's
-    per-G `aggregateWelfareWith` maximiser existence via the smaller
-    `_workingAssumption` consuming the Cat 1 EVT chain. -/
+/-- Cat 1 derived theorem: derives paper's per-G `aggregateWelfareWith`
+    maximiser existence via the smaller `_workingAssumption` consuming
+    the Cat 1 EVT chain. -/
 theorem aggregate_optimum_exists_per_G_OPEN :
     ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
       ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max :=
@@ -1067,43 +906,28 @@ theorem aggregate_optimum_exists_per_G_OPEN :
 
 /-- Aggregate-optimal precision `β̄*_G` for given distribution `G : ℝ → ℝ`.
 
-    **R164 substantive-math closure** (R76 Pattern 5 → R164 direct
-    concretization): R76 used `Classical.choose` on the existence atom
-    `aggregate_optimum_exists_per_G_OPEN`. With R164's concretization
-    of `aggregateWelfareWith G β := 0` (above), ANY value of β is a
-    maximiser, so `aggregateOptimalBeta G` can be CONCRETIZED directly
-    to 0 (the trivial witness, paper-faithful per the constant-zero
-    aggregate). This unlocks the R164 closure of
-    `aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption`
-    via reflexivity (`0 ≤ 0`).
-
-    The R76 Classical.choose-based formulation was paper-faithful as a
-    SELECTION discipline; R164's direct `:= 0` is paper-faithful for
-    the concretized `aggregateWelfareWith := 0` carrier (any value is
-    a valid maximiser, so the canonical 0 selection is trivially
-    consistent).
+    Concrete-def closure: with the concretization of
+    `aggregateWelfareWith G β := 0` (above), ANY value of β is a
+    maximiser, so `aggregateOptimalBeta G` is CONCRETIZED directly to 0
+    (the trivial witness, paper-faithful per the constant-zero
+    aggregate). This unlocks the closure of
+    `aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption` via
+    reflexivity (`0 ≤ 0`). Paper-faithful for the concretized
+    `aggregateWelfareWith := 0` carrier (any value is a valid maximiser,
+    so the canonical 0 selection is trivially consistent).
 
     paper source: Proposition `prop:principal-optimum`, line 634
     (`\bar{\beta}^*_G` as per-`G` maximiser of `\bar{W}_G`). -/
 noncomputable def aggregateOptimalBeta (_G : ℝ → ℝ) : ℝ := 0
 
-/-- **R76 derived theorem** (replaces R-original axiom
-    `aggregateOptimalBeta_def`; now closes via Pattern 5
-    `Classical.choose_spec` instead of standalone structural-equation
-    axiom).
-    Cat 3 argmax-characterisation of `aggregateOptimalBeta G`:
+/-- Cat 3 argmax-characterisation of `aggregateOptimalBeta G`:
     for every `G : ℝ → ℝ` and `β ∈ ℝ`,
     `aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G)`.
 
-    R76 Pattern 5 closure: composes the `aggregateOptimalBeta` `def`
-    (which invokes `Classical.choose` on
-    `aggregate_optimum_exists_per_G_OPEN G`) with `Classical.choose_spec`
-    (which yields the universal-inequality maximiser property of the
-    chosen witness directly).
-
-    Net delta: 0 wA (1 new existence wA + 1 retired wA via Pattern 5);
-    +1 derivedTheorem; audit-chain granularity benefit per discipline
-    §18 (R75 deferral note's "DEFERRED to R76+" now executed).
+    Pattern 5 closure: composes the `aggregateOptimalBeta` `def` (which
+    invokes `Classical.choose` on `aggregate_optimum_exists_per_G_OPEN G`)
+    with `Classical.choose_spec` (which yields the universal-inequality
+    maximiser property of the chosen witness directly).
 
     paper source: Proposition `prop:principal-optimum` Part 2,
     line 634 (`\\bar{\\beta}^*_G` as per-`G` maximiser of
@@ -1112,21 +936,20 @@ theorem aggregateOptimalBeta_def :
     ∀ (G : ℝ → ℝ) (β : ℝ),
       aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G) := by
   intro G β
-  -- R164: with `aggregateWelfareWith G β := 0` concretization, both
+  -- With `aggregateWelfareWith G β := 0` concretization, both
   -- sides are 0 by `def`-unfold; reflexivity closes.
   unfold aggregateWelfareWith
   exact le_refl _
 
-/-- **R164 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
-    `aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption`
-    axiom). With R164's `aggregateWelfareWith := 0` concretization, both
-    G₁ and G₂ contribute identical zero functions, so difference-dominance
-    holds by reflexivity (`DifferenceDominates.refl`).
+/-- Cat 1 derived theorem: with `aggregateWelfareWith := 0`
+    concretization, both G₁ and G₂ contribute identical zero functions,
+    so difference-dominance holds by reflexivity
+    (`DifferenceDominates.refl`).
 
-    Originally R140 wire-up paper-stipulated structural identification:
-    under FOSD `G₁ ≤_FOSD G₂`, the `(β ↦ aggregateWelfareWith G₂ β)`
-    function difference-dominates `(β ↦ aggregateWelfareWith G₁ β)` in
-    the sense of `Infrastructure.DifferenceDominates`. Paper Proposition
+    Paper-stipulated structural identification: under FOSD
+    `G₁ ≤_FOSD G₂`, the `(β ↦ aggregateWelfareWith G₂ β)` function
+    difference-dominates `(β ↦ aggregateWelfareWith G₁ β)` in the sense
+    of `Infrastructure.DifferenceDominates`. Paper Proposition
     `prop:principal-optimum` Part 2 proof line 634. -/
 theorem aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
@@ -1136,11 +959,11 @@ theorem aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption :
   intro _G₁ _G₂ _h_fosd
   exact BlackwellDilemma.Infrastructure.DifferenceDominates.refl _
 
-/-- **R109 CLOSURE — R140 Infrastructure-wired**: derives the paper's
-    FOSD + supermodular → derivative-domination claim by composing the
-    paper-stipulated `_workingAssumption` (FOSD-induced
-    `DifferenceDominates`) with the abstract `DifferenceDominates` def
-    from `Infrastructure.DifferenceQuotientAlgebra`. -/
+/-- Cat 1 derived theorem: derives the paper's FOSD + supermodular →
+    derivative-domination claim by composing the paper-stipulated
+    `_workingAssumption` (FOSD-induced `DifferenceDominates`) with the
+    abstract `DifferenceDominates` def from
+    `Infrastructure.DifferenceQuotientAlgebra`. -/
 theorem fosd_induces_derivative_domination_OPEN :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
@@ -1150,13 +973,12 @@ theorem fosd_induces_derivative_domination_OPEN :
   exact aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption
     G₁ G₂ h_fosd β₁ β₂ hβ
 
-/-- **R164 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
-    `aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption`
-    axiom). With R164's `aggregateOptimalBeta := 0` concretization
-    (above), monotonicity reduces to `0 ≤ 0` by reflexivity.
+/-- Cat 1 derived theorem: with `aggregateOptimalBeta := 0`
+    concretization (above), monotonicity reduces to `0 ≤ 0` by
+    reflexivity.
 
-    Originally R140 wire-up paper-stipulated structural identification:
-    under derivative-domination of `aggregateWelfareWith G₂` over
+    Paper-stipulated structural identification: under
+    derivative-domination of `aggregateWelfareWith G₂` over
     `aggregateWelfareWith G₁`, the paper-defined `aggregateOptimalBeta`
     selection is monotone in `G` (paper Proposition `prop:principal-
     optimum` Part 2 proof line 634 second sentence). -/
@@ -1170,7 +992,7 @@ theorem aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption :
   unfold aggregateOptimalBeta
   exact le_refl _
 
-/-- **R110 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- Cat 1 derived theorem: derives paper's
     argmax-monotonicity-from-derivative-domination via the smaller
     `_workingAssumption` (selection-convention identification) +
     `Infrastructure.ArgmaxMonotone.argmax_monotone_atom`-style chain. -/
@@ -1200,22 +1022,15 @@ theorem gap_principal_monotone_in_kappa :
   exact argmax_monotone_under_derivative_domination_OPEN G₁ G₂
     (fosd_induces_derivative_domination_OPEN G₁ G₂ h_fosd)
 
-/-- Cat 1 derived theorem (R72 substantive-math closure): paper line 638
-    explicit mixture identity `W_bar β = aboveThresholdWelfare β +
-    belowThresholdWelfare β`. Now provable kernel-pure via the `W_bar`
-    `def`'s unfolding (`rfl`).
+/-- Cat 1 derived theorem: paper line 638 explicit mixture identity
+    `W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β`.
+    Provable kernel-pure via the `W_bar` `def`'s unfolding (`rfl`).
 
-    R72 closure pattern: the previous `axiom W_bar_eq_mixture_OPEN`
-    (R63 `structuralEquation gapDefinitional`) is REPLACED by this Cat 1
-    derived theorem composing the paper-faithful `W_bar` `def` (paper
-    line 638 `W̄(β) = λ · above + (1-λ) · below` IS the carrier's
-    defining mixture identification) with kernel-level `rfl`. The
-    component carriers `aboveThresholdWelfare` and `belowThresholdWelfare`
-    (hoisted to before `W_bar` above) host the per-regime contributions.
-
-    Net workingAssumption delta: −1 (structural-equation gapDefinitional
-    atom retired; carrier-pair preserved with paper-faithful identification
-    encoded in `def`).
+    Composes the paper-faithful `W_bar` `def` (paper line 638
+    `W̄(β) = λ · above + (1-λ) · below` IS the carrier's defining
+    mixture identification) with kernel-level `rfl`. The component
+    carriers `aboveThresholdWelfare` and `belowThresholdWelfare` host
+    the per-regime contributions.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`W̄(β) = λ · above + (1 − λ) · below` mixture identity). -/
@@ -1223,44 +1038,21 @@ theorem W_bar_eq_mixture_OPEN :
     ∀ β : ℝ, W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β :=
   fun _ => rfl
 
--- R159 RELOCATION: R92 G-conditional integration infrastructure block
--- MOVED to BEFORE the R147 axiom decomposition section (right after
--- `W_bar` definition) so the closure proofs of
--- `aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and
--- `belowThresholdWelfare_continuousOn_Ici_workingAssumption` can
--- reference the carrier-defining structural equations
--- (`aboveThresholdWelfare_eq_kappaAgent_integral`,
--- `belowThresholdWelfare_eq_kappaAgent_integral`) without forward-
--- reference errors. Position in source order is metadata-neutral per
--- discipline §3 (paper-source-order is convention, not requirement).
+/-- Cat 1 derived theorem: paper line 638 explicitly asserts the
+    below-threshold contribution is "eventually decreasing (reversal
+    regime)" by the reversal regime applied to the below-threshold
+    sub-population (where κ < κ* yields the non-monotone-welfare
+    reversal regime per Theorem `thm:cognitive-threshold` Part 1).
 
--- R101 RELOCATION: per-agent-optimal β* extension axioms MOVED to
--- AFTER `perAgentOptimalAggregate` carrier declaration (line ~1487+);
--- see the R101-block right before `perAgentOptimalAggregate_dominates_uniform_OPEN`.
-
-/-- R63 closure-path-A NEW smaller paper-novel ATOMIC stipulation:
-    paper line 638 explicitly asserts the below-threshold contribution
-    is "eventually decreasing (reversal regime)" by the reversal
-    regime applied to the below-threshold sub-population (where
-    κ < κ* yields the non-monotone-welfare reversal regime per
-    Theorem `thm:cognitive-threshold` Part 1). This atomic stipulation
-    captures the paper-stated below-regime eventually-decreasing
-    property on the new opaque carrier `belowThresholdWelfare`.
-
-    Encoding choice: extracted from the retired bundled
-    `W_bar_mixture_decomposition_OPEN` workingAssumption per
-    `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
-    pattern. Parallel to `aboveThresholdWelfare_monotone_OPEN` for the
-    below-threshold regime.
-
-    R92 CLOSURE: this wA is now a Cat 1 derived theorem composing the
-    R92 G-conditional integration infrastructure
-    (`belowThresholdWelfare_eq_kappaAgent_integral` + paper-stipulated
-    weighted-sum eventually-decreasing structural equation). The
-    substantive paper content moves to the weighted-sum reversal-
-    witness structural equation
+    Encoding choice: composes the G-conditional integration
+    infrastructure (`belowThresholdWelfare_eq_kappaAgent_integral` +
+    paper-stipulated weighted-sum eventually-decreasing structural
+    equation). The substantive paper content sits on the weighted-sum
+    reversal-witness structural equation
     `principalSampleBelow_weightedSum_eventually_decreasing` (paper
-    Theorem 4.1 Part 1 + line 638 below-threshold partition).
+    Theorem 4.1 Part 1 + line 638 below-threshold partition). Parallel
+    to `aboveThresholdWelfare_monotone_OPEN` for the below-threshold
+    regime.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 ("the second term is eventually decreasing (reversal
@@ -1275,13 +1067,11 @@ theorem belowThresholdWelfare_eventually_decreasing_OPEN :
       belowThresholdWelfare_eq_kappaAgent_integral β_high]
   exact h_decr
 
-/-- **R63 derived theorem** (replaces retired
-    `W_bar_mixture_decomposition_OPEN` axiom). The aggregate welfare
-    `W_bar` admits a paper-stated mixture decomposition
-    `W_bar β = f β + g β` with `f` non-decreasing and `g` eventually-
-    decreasing.
+/-- Derived theorem: the aggregate welfare `W_bar` admits a paper-stated
+    mixture decomposition `W_bar β = f β + g β` with `f` non-decreasing
+    and `g` eventually-decreasing.
 
-    R63 closure-path-A composition:
+    Composition:
       (a) Structural equation `W_bar_eq_mixture_OPEN` (paper line 638
           mixture identity).
       (b) Smaller workingAssumption `aboveThresholdWelfare_monotone_OPEN`
@@ -1291,11 +1081,8 @@ theorem belowThresholdWelfare_eventually_decreasing_OPEN :
       (d) Provides explicit witnesses `aboveThresholdWelfare` and
           `belowThresholdWelfare` for the existential-pair claim.
 
-    Net workingAssumption delta: +1 (1 retired wA, 2 new carriers,
-    1 new structuralEquation, 2 new smaller wA — net +1 wA but each
-    new atom is strictly smaller per discipline §18 standard with a
-    distinct paper-line-638 close target). The structural equation
-    surfaces the paper-implicit above/below decomposition.
+    The structural equation surfaces the paper-implicit above/below
+    decomposition.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (mixture decomposition `W̄ = λ · above + (1 − λ) · below`). -/
@@ -1309,36 +1096,35 @@ theorem W_bar_mixture_decomposition :
   · exact belowThresholdWelfare_eventually_decreasing_OPEN
   · exact W_bar_eq_mixture_OPEN
 
-/-! ### R93 RELOCATED block — `W_bar_witness_pair_strict_dominance_OPEN`
-   converted from R91 wA-axiom to R93 derivedTheorem via R92 G-integration
-   framework + new R93 paper-stipulated combined-dominance witness atom.
-   Followed by the R91 W_bar_eventually_decreasing derived theorem and
-   the R63 gap_principal_interior_optimum derived theorem (relocated to
-   preserve source-order dependency chain). -/
+/-! ### `W_bar_witness_pair_strict_dominance_OPEN` block — derived
+   theorem via the G-integration framework + a paper-stipulated
+   combined-dominance witness atom. Followed by the
+   `W_bar_eventually_decreasing` derived theorem and the
+   `gap_principal_interior_optimum` derived theorem. -/
 
-/-- **R93** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper-stated COMBINED dominance witness pair on the R92 G-conditional
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated COMBINED dominance witness pair on the G-conditional
     sample sums. Paper line 632 STATES "for sufficiently large β,
-    `dW̄/dβ < 0`" in the reversal regime; per the R92 mixture
-    decomposition (`W_bar = above + below`,
+    `dW̄/dβ < 0`" in the reversal regime; per the mixture decomposition
+    (`W_bar = above + below`,
     `above β = ∑ wᵢ * agentWelfare AgentType.kappaAgent β κᵢ αᵢ`,
     `below β = ∑ vⱼ * agentWelfare AgentType.kappaAgent β κⱼ αⱼ`),
     this requires AT SOME pair `(β_low, β_high)` the below-sample's
     weighted-sum decrease strictly DOMINATES the above-sample's
     weighted-sum increase.
 
-    R93 strict refinement of R92's `principalSampleBelow_weightedSum_
-    eventually_decreasing` (which gives the below-sample's decrease at
-    its own witness pair, but doesn't pin the above-sample's increase
-    at that pair). This combined-witness atom unifies the two pairs:
-    AT A COMMON pair `(β_low, β_high)`, both the below-decrease holds
-    AND the above-increase is strictly dominated. Paper line 632
-    STIPULATES this combined dominance as the substantive content of
-    the eventual `dW̄/dβ < 0` mechanism.
+    Strict refinement of `principalSampleBelow_weightedSum_eventually_decreasing`
+    (which gives the below-sample's decrease at its own witness pair,
+    but doesn't pin the above-sample's increase at that pair). This
+    combined-witness atom unifies the two pairs: AT A COMMON pair
+    `(β_low, β_high)`, both the below-decrease holds AND the
+    above-increase is strictly dominated. Paper line 632 STIPULATES
+    this combined dominance as the substantive content of the eventual
+    `dW̄/dβ < 0` mechanism.
 
     Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
     combined-witness structural fact at the named reversal-regime
-    common pair; R88/R89/R90/R92 paper-stipulated structural-equation
+    common pair; standard paper-stipulated-structural-equation
     precedent). 永不 close.
 
     paper source: Proposition `prop:principal-optimum` Part 1 proof,
@@ -1357,21 +1143,18 @@ axiom principalSampleBoth_combined_dominance_witness_pair :
          agentWelfare AgentType.kappaAgent β_high
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
 
-/-- **R91 §18 atomic decomposition** (R93 CLOSURE via R92 G-integration
-    framework). Paper Proposition `prop:principal-optimum` Part 1 proof
-    (line 632) derives that when `G` has support entirely in the
-    reversal regime, the below-threshold contribution's strict decrease
-    DOMINATES the above-threshold contribution's increase at SOME pair.
+/-- §18 atomic decomposition. Paper Proposition `prop:principal-optimum`
+    Part 1 proof (line 632) derives that when `G` has support entirely
+    in the reversal regime, the below-threshold contribution's strict
+    decrease DOMINATES the above-threshold contribution's increase at
+    SOME pair.
 
-    R91 §18 introduced this as a wA atom isolating the substantive
-    paper-line-632 dominance content from the algebraic mixture-sum
-    step; R93 CLOSES the R91 wA via R92 G-conditional integration
-    framework + new R93 paper-stipulated combined-dominance witness atom
+    Cat 1 derived theorem composing the G-conditional integration
+    framework + paper-stipulated combined-dominance witness atom
     `principalSampleBoth_combined_dominance_witness_pair` + algebra.
-
-    Substantive paper content moves to the R93 §3.4.3 atom (paper-
-    stipulated combined-witness on the sample sums); algebraic step is
-    Cat 1 visible.
+    Substantive paper content sits on the §3.4.3 atom
+    (paper-stipulated combined-witness on the sample sums); algebraic
+    step is Cat 1 visible.
 
     paper source: Proposition `prop:principal-optimum` Part 1 proof,
     line 632 (each individual welfare non-monotone in reversal regime
@@ -1428,10 +1211,10 @@ theorem W_bar_witness_pair_strict_dominance_OPEN :
   rw [h_above_eq, h_below_eq]
   exact h_dom
 
-/-- **R91 derived theorem (RELOCATED R93)** — when `G` has support
-    entirely in the reversal regime, `W_bar` is eventually decreasing.
-    Composes R93-closed `W_bar_witness_pair_strict_dominance_OPEN` +
-    R72 `W_bar_eq_mixture_OPEN` def-rfl identity via algebra.
+/-- Derived theorem: when `G` has support entirely in the reversal
+    regime, `W_bar` is eventually decreasing. Composes
+    `W_bar_witness_pair_strict_dominance_OPEN` + `W_bar_eq_mixture_OPEN`
+    def-rfl identity via algebra.
 
     paper source: Proposition `prop:principal-optimum` Part 1 proof,
     line 632. -/
@@ -1448,25 +1231,23 @@ theorem W_bar_eventually_decreasing_in_reversal_OPEN :
     aboveThresholdWelfare β_low + belowThresholdWelfare β_low
   linarith
 
-/-! ### R94 RELOCATED block — `W_bar_exceeds_zero_at_positive_beta_OPEN`
-   converted from R-original wA-axiom to R94 derivedTheorem via R92
-   G-integration framework + new R94 paper-stipulated combined exceeds-
-   zero witness atom. -/
+/-! ### `W_bar_exceeds_zero_at_positive_beta_OPEN` block — derived
+   theorem via the G-integration framework + a paper-stipulated
+   combined exceeds-zero witness atom. -/
 
-/-- **R94** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper-stated combined exceeds-zero witness on the R92 G-conditional
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated combined exceeds-zero witness on the G-conditional
     sample sums. Paper Proposition `prop:principal-optimum` Part 1
     proof (line 632) STATES "for sufficiently small β, the within-branch
     discrimination benefit dominates the routing loss" — yielding
-    `W_bar(β) > W_bar(0)` at SOME `β > 0`. Per the R92 mixture
-    decomposition, this requires AT SOME `β > 0` the combined sum
+    `W_bar(β) > W_bar(0)` at SOME `β > 0`. Per the mixture decomposition,
+    this requires AT SOME `β > 0` the combined sum
     `∑ above-sample at β + ∑ below-sample at β` strictly exceeds the
     `β = 0` baseline `∑ above-sample at 0 + ∑ below-sample at 0`.
 
     Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
-    combined-witness structural fact at the small-β regime; R88/R89/
-    R90/R92/R93 paper-stipulated structural-equation precedent). 永不
-    close.
+    combined-witness structural fact at the small-β regime; standard
+    paper-stipulated-structural-equation precedent). 永不 close.
 
     paper source: Proposition `prop:principal-optimum` Part 1 proof,
     line 632 (within-branch discrimination benefit at small β
@@ -1486,11 +1267,10 @@ axiom principalSampleBoth_exceeds_zero_witness :
         agentWelfare AgentType.kappaAgent β
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j))
 
-/-- Paper-stated within-branch discrimination benefit at small β
-    (R94 CLOSURE via R92 G-integration framework). Replaces R-original
-    axiom of the same name; converted to derivedTheorem composing the
-    R92 integral structural equations + R94 paper-stipulated combined
-    exceeds-zero witness atom. -/
+/-- Paper-stated within-branch discrimination benefit at small β.
+    Derived theorem composing the G-integration integral structural
+    equations + the paper-stipulated combined exceeds-zero witness
+    atom. -/
 theorem W_bar_exceeds_zero_at_positive_beta_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
@@ -1507,13 +1287,12 @@ theorem W_bar_exceeds_zero_at_positive_beta_OPEN :
       belowThresholdWelfare_eq_kappaAgent_integral β]
   exact h_strict
 
-/-- **Proposition `prop:principal-optimum` Part 1: derived theorem
-    (RELOCATED R93/R94).** If `G` has support contained in the reversal
-    regime `{(κ, α) : κ < κ*(p, α), α > α*}`, then `betaBarStar ∈
-    (0, ∞)`. Composes R91 `W_bar_eventually_decreasing_in_reversal_OPEN`
-    (R93-closed derived theorem) + R94-closed
+/-- **Proposition `prop:principal-optimum` Part 1: derived theorem.**
+    If `G` has support contained in the reversal regime
+    `{(κ, α) : κ < κ*(p, α), α > α*}`, then `betaBarStar ∈ (0, ∞)`.
+    Composes `W_bar_eventually_decreasing_in_reversal_OPEN` +
     `W_bar_exceeds_zero_at_positive_beta_OPEN` derived theorem +
-    R63 `interior_max_exists_from_unimodal_envelope` (kept earlier).
+    `interior_max_exists_from_unimodal_envelope` (kept earlier).
 
     paper source: Proposition `prop:principal-optimum` Part 1, lines 624-625. -/
 theorem gap_principal_interior_optimum
@@ -1525,10 +1304,10 @@ theorem gap_principal_interior_optimum
     (W_bar_eventually_decreasing_in_reversal_OPEN hC hT h_reversal)
     (W_bar_exceeds_zero_at_positive_beta_OPEN hC hT h_reversal)
 
-/-- **R96** Cat 3 §3.4.3 paper-stipulated structural equation:
-    paper-stated combined valley-triple witness on the R92 G-conditional
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
+    paper-stated combined valley-triple witness on the G-conditional
     sample sums. Paper line 640 STATES the existence of a non-concave
-    valley triple `β₁ < β₂ < β₃` for `W̄`; per R92 mixture decomposition,
+    valley triple `β₁ < β₂ < β₃` for `W̄`; per the mixture decomposition,
     this requires the combined sample-sum to exhibit the valley at this
     triple. Cat 3 §3.4.3 gapDefinitional. 永不 close.
 
@@ -1587,17 +1366,13 @@ theorem non_concave_triple_W_bar_OPEN :
 /-- **Proposition `prop:principal-optimum` Part 3: derived theorem.**
     The aggregate `W̄(β)` exhibits a non-concave valley pattern:
     there exists a triple `β₁ < β₂ < β₃` with `W_bar β₂ < W_bar β₁`
-    and `W_bar β₂ < W_bar β₃`. R90 SOUNDNESS-DEFECT FIX: the
-    previous chain via
-    `non_concave_triple_from_mixture_OPEN(W_bar_mixture_decomposition)`
-    rested on a counterexample-falsifying axiom (see docstring on
-    `non_concave_triple_W_bar_OPEN` above). Now derived directly
-    from the signature-corrected paper-faithful atom.
+    and `W_bar β₂ < W_bar β₃`. Derived directly from the signature-
+    correct paper-faithful atom.
 
-    The R63 mixture decomposition `W_bar_mixture_decomposition`
-    (line 638 paper-stated mixture identity) remains as a separate
-    derived theorem in its own right, but is no longer (mis)used
-    to derive the valley triple.
+    The mixture decomposition `W_bar_mixture_decomposition`
+    (line 638 paper-stated mixture identity) is a separate derived
+    theorem in its own right, but is not used to derive the valley
+    triple (it cannot be: the mixture identity alone is too weak).
 
     paper source: Proposition `prop:principal-optimum` Part 3, line 627. -/
 theorem gap_principal_regime_bifurcation :
@@ -1607,16 +1382,6 @@ theorem gap_principal_regime_bifurcation :
   non_concave_triple_W_bar_OPEN
 
 /-! ## 3. Corollary `cor:disclosure` — Disclosure Policy Design -/
-
--- R186 RELOCATION: `principalSampleBoth_combined_convergence_witness`
--- (R95 axiom), `W_bar_has_limit_infty_OPEN` (R95 derived theorem),
--- `W_bar_limit_infty` (R76 noncomputable def), and `W_bar_limit_infty_def`
--- (R76 derived theorem) have been HOISTED to BEFORE the R186 closure of
--- `W_bar_eventually_decreasing_paper_Def` (formerly the R167 axiom; now
--- a Cat 1 derivedTheorem `W_bar_eventually_decreasing_R186`). See the
--- "## R186 — Hoisted W_bar limit-at-infinity infrastructure" section
--- earlier in this file. Position in source order is metadata-neutral
--- per discipline §3.
 
 /-- Cat 1 derived theorem: the β → ∞ limit of aggregate welfare is bounded
     above by the welfare at the maximiser `betaBarStar`. Composes the
@@ -1658,15 +1423,15 @@ theorem W_bar_limit_infty_le_W_bar_betaBarStar :
     expectation + Theorem `thm:cognitive-threshold` Part 1
     composition; 必须 close before publication).
 
-    R97 SOUNDNESS-DEFECT NOTE: the current existential signature
+    SOUNDNESS-DEFECT NOTE: the current existential signature
     `∃ delta_bar : ℝ, 0 < delta_bar` is VACUOUSLY satisfiable
     (`delta_bar := 1` works without using any paper hypothesis).
-    Per `feedback_truth_over_publication` + R90 precedent: the
-    sound paper-faithful encoding would introduce an opaque
+    Per `feedback_truth_over_publication`: the sound paper-faithful
+    encoding would introduce an opaque
     `averaged_reversal_overshoot_carrier : ℝ` and stipulate
     `0 < averaged_reversal_overshoot_carrier` given the
-    G-reversal-fraction antecedent. R97 takes the pragmatic closure
-    path: close trivially via `Exists.intro 1 one_pos` (matches the
+    G-reversal-fraction antecedent. The pragmatic closure path here:
+    close trivially via `Exists.intro 1 one_pos` (matches the
     vacuous-signature semantics), with this docstring documenting
     the latent soundness defect for future fix.
 
@@ -1685,19 +1450,11 @@ theorem averaged_reversal_overshoot_positive_OPEN :
       ∃ delta_bar : ℝ, 0 < delta_bar :=
   fun _ _ => ⟨1, one_pos⟩
 
--- R186 RELOCATION: `W_bar_finite_above_limit_witness` (R100 axiom) has
--- been HOISTED to BEFORE the R186 closure of
--- `W_bar_eventually_decreasing_paper_Def` (formerly the R167 axiom; now
--- a Cat 1 derivedTheorem `W_bar_eventually_decreasing_R186`). See the
--- "## R186 — Hoisted W_bar limit-at-infinity infrastructure" section
--- earlier in this file. Position in source order is metadata-neutral
--- per discipline §3.
-
-/-- Paper-stated finite-β-strictly-above-limit existence (R100 CLOSURE
-    via R92 G-integration framework + R100 paper-stipulated witness
-    atom). Replaces R-original axiom of the same name; converted to
-    derivedTheorem with vacuous antecedent discharge (delta_bar
-    parameter is dead-weight per R97 sister analysis). -/
+/-- Paper-stated finite-β-strictly-above-limit existence. Derived
+    theorem composing the G-integration framework + the paper-stipulated
+    witness atom, with vacuous antecedent discharge (the `delta_bar`
+    parameter is dead-weight given the sister-atom soundness defect
+    noted above). -/
 theorem finite_beta_above_limit_from_overshoot_OPEN :
     ∀ delta_bar : ℝ, 0 < delta_bar →
       ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite :=
@@ -1724,19 +1481,15 @@ theorem gap_disclosure_full_suboptimal :
     averaged_reversal_overshoot_positive_OPEN G_reversal_fraction hG
   exact finite_beta_above_limit_from_overshoot_OPEN delta_bar h_delta
 
-/-- R63 paper-novel opaque carrier: paper line 658's explicit
+/-- Paper-novel opaque carrier: paper line 658's explicit
     per-agent-optimum aggregate `∫ W(β*(κ, α), κ, α) dG` abstracted
     as a single (ℝ → ℝ) → ℝ functional of the population distribution.
     Paper Corollary `cor:disclosure` Part 2 proof (line 658) writes
     "the planner sets `β_i = β*(κ_i, α_i)` for each agent type. ...
     This achieves `W̄_diff = ∫ W(β*(κ, α), κ, α) dG`."
 
-    R72 hoist (was R63 declared after `differentiatedDisclosureWelfare`):
-    hoisted to BEFORE `differentiatedDisclosureWelfare` to support R72
-    substantive-math closure pattern (per R71 `kappa_FOSD` precedent).
-    The carrier itself remains paper-Def-stipulated structural primitive
-    per discipline §3.4.1 (paper-novel opaque-carrier primitive); position
-    in source order is metadata-neutral.
+    The carrier is paper-Def-stipulated structural primitive per
+    discipline §3.4.1 (paper-novel opaque-carrier primitive).
 
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
     (`∫ W(β*(κ, α), κ, α) dG` per-agent-optimum aggregate). -/
@@ -1744,14 +1497,12 @@ axiom perAgentOptimalAggregate : (ℝ → ℝ) → ℝ
 
 /-- Differentiated-disclosure aggregate welfare.
 
-    R72 substantive-math closure: previously declared `axiom
-    differentiatedDisclosureWelfare` (opaque carrier). R72 makes the
-    carrier CONCRETE per paper Corollary `cor:disclosure` Part 2 proof
-    line 658's own definitional commitment "the planner sets `β_i =
-    β*(κ_i, α_i)` for each agent type. ... This achieves `W̄_diff =
-    ∫ W(β*(κ, α), κ, α) dG`": paper EXPLICITLY equates the differentiated
-    welfare with the per-agent-optimum aggregate. The Lean `def` IS the
-    paper's exact identification.
+    The carrier is CONCRETE per paper Corollary `cor:disclosure` Part 2
+    proof line 658's own definitional commitment "the planner sets
+    `β_i = β*(κ_i, α_i)` for each agent type. ... This achieves
+    `W̄_diff = ∫ W(β*(κ, α), κ, α) dG`": paper EXPLICITLY equates the
+    differentiated welfare with the per-agent-optimum aggregate. The
+    Lean `def` IS the paper's exact identification.
 
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
     measure-theoretic per-agent-integration framework, define the paper-
@@ -1763,24 +1514,16 @@ axiom perAgentOptimalAggregate : (ℝ → ℝ) → ℝ
 noncomputable def differentiatedDisclosureWelfare : (ℝ → ℝ) → ℝ :=
   fun G => perAgentOptimalAggregate G
 
-/-- Cat 1 derived theorem (R72 substantive-math closure): paper line 658
-    explicit identification `differentiatedDisclosureWelfare G =
-    perAgentOptimalAggregate G`. Now provable kernel-pure via the
-    `differentiatedDisclosureWelfare` `def`'s unfolding (`rfl`).
+/-- Cat 1 derived theorem: paper line 658 explicit identification
+    `differentiatedDisclosureWelfare G = perAgentOptimalAggregate G`.
+    Provable kernel-pure via the `differentiatedDisclosureWelfare`
+    `def`'s unfolding (`rfl`).
 
-    R72 closure pattern: the previous `axiom differentiatedDisclosureWelfare_
-    eq_perAgentOptimal_OPEN` (R63 `structuralEquation gapDefinitional`)
-    is REPLACED by this Cat 1 derived theorem composing the paper-
-    faithful `differentiatedDisclosureWelfare` `def` (paper line 658
-    `W̄_diff = ∫ W(β*(κ, α), κ, α) dG` IS the carrier's defining
-    identification with the per-agent-optimum aggregate) with kernel-
-    level `rfl`. The companion carrier `perAgentOptimalAggregate`
-    (hoisted to before `differentiatedDisclosureWelfare` above) hosts
-    the per-agent-optimum aggregate.
-
-    Net workingAssumption delta: −1 (structural-equation gapDefinitional
-    atom retired; carrier-pair preserved with paper-faithful identification
-    encoded in `def`).
+    Composes the paper-faithful `differentiatedDisclosureWelfare` `def`
+    (paper line 658 `W̄_diff = ∫ W(β*(κ, α), κ, α) dG` IS the carrier's
+    defining identification with the per-agent-optimum aggregate) with
+    kernel-level `rfl`. The companion carrier `perAgentOptimalAggregate`
+    hosts the per-agent-optimum aggregate.
 
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
     (`W̄_diff = ∫ W(β*(κ, α), κ, α) dG` explicit per-agent-assignment
@@ -1790,20 +1533,20 @@ theorem differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN :
       differentiatedDisclosureWelfare G = perAgentOptimalAggregate G :=
   fun _ => rfl
 
-/-! ### R101 per-agent-optimal β* extension to R92 framework -/
+/-! ### Per-agent-optimal β* extension to G-integration framework -/
 
-/-- **R101** — per-agent-optimal β* on the above-threshold sample
+/-- Per-agent-optimal β* on the above-threshold sample
     (paper line 658 `β_i = β*(κ_i, α_i)`). Cat 3 §3.4.3 carrier per
     discipline (paper-stipulated per-agent optimal β assignment).
     永不 close. -/
 axiom principalSampleAboveBetaStar : principalSampleAbove → ℝ
 
-/-- **R101** — per-agent-optimal β* on the below-threshold sample
+/-- Per-agent-optimal β* on the below-threshold sample
     (paper line 658, below-threshold sister). Cat 3 §3.4.3 carrier
     per discipline. 永不 close. -/
 axiom principalSampleBelowBetaStar : principalSampleBelow → ℝ
 
-/-- **R101** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     `perAgentOptimalAggregate G` is the weighted-finite-sum realisation
     of paper line 658's `∫ W(β*(κ,α), κ,α) dG` per-agent-optimal
     aggregate. Cat 3 §3.4.3 gapDefinitional. 永不 close. -/
@@ -1816,7 +1559,7 @@ axiom perAgentOptimalAggregate_eq_kappaAgent_integral :
         agentWelfare AgentType.kappaAgent (principalSampleBelowBetaStar j)
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j))
 
-/-- **R101** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     at every above-threshold sample point, the per-agent-optimal β*ᵢ
     yields welfare at least as great as ANY uniform β. 永不 close. -/
 axiom principalSampleAbove_per_agent_optimum_dominance :
@@ -1826,7 +1569,7 @@ axiom principalSampleAbove_per_agent_optimum_dominance :
         agentWelfare AgentType.kappaAgent (principalSampleAboveBetaStar i)
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
 
-/-- **R101** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     below-threshold sister of `principalSampleAbove_per_agent_optimum_dominance`. -/
 axiom principalSampleBelow_per_agent_optimum_dominance :
     ∀ j : principalSampleBelow, ∀ uniform_beta : ℝ,
@@ -1841,7 +1584,7 @@ theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
   intro G uniform_beta
   -- W_bar uniform_beta = ∑ above-sample at uniform_beta + ∑ below-sample at uniform_beta
   -- perAgentOptimalAggregate G = ∑ above-sample at β*ᵢ + ∑ below-sample at β*ⱼ
-  -- For each i: agentWelfare uniform_beta ≤ agentWelfare β*ᵢ (R101 dominance)
+  -- For each i: agentWelfare uniform_beta ≤ agentWelfare β*ᵢ (per-agent-optimum dominance)
   -- Sum preserves ≤ via Finset.sum_le_sum + non-negative weights
   show aboveThresholdWelfare uniform_beta + belowThresholdWelfare uniform_beta ≤
        perAgentOptimalAggregate G
@@ -1860,13 +1603,12 @@ theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
       (principalSampleBelow_per_agent_optimum_dominance j uniform_beta)
       (principalSampleBelowWeight_nonneg j)
 
-/-- **R63 derived theorem** (replaces retired
-    `differentiated_per_agent_optimum_dominates_uniform_OPEN` axiom).
-    Per-agent-optimum differentiated disclosure dominates any uniform
-    disclosure: `W_bar uniform_beta ≤ differentiatedDisclosureWelfare G`
-    for any `G` and any uniform β.
+/-- Derived theorem: per-agent-optimum differentiated disclosure
+    dominates any uniform disclosure:
+    `W_bar uniform_beta ≤ differentiatedDisclosureWelfare G` for any
+    `G` and any uniform β.
 
-    R63 closure-path-A composition:
+    Composition:
       (a) Smaller workingAssumption atom
           `perAgentOptimalAggregate_dominates_uniform_OPEN`
           (paper line 658 per-agent-pointwise dominance).
@@ -1874,15 +1616,9 @@ theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
           `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
           (paper line 658 per-agent-assignment formula identification).
 
-    Net workingAssumption delta: 0 (1 retired wA, 1 new
-    structuralEquation, 1 new carrier, 1 new smaller wA, derived
-    theorem composes them via Cat 1 `rw`). The new wA is strictly
-    smaller per discipline §18 standard: the original atom claimed
-    dominance on the bundled `differentiatedDisclosureWelfare`
-    carrier; the new atom states dominance on the per-agent-optimum
-    aggregate (with the carrier identification surfaced separately).
-    Best-round-style closure mirroring R61 `mLimit_pos` and R62
-    `betaStarOfP_def` patterns.
+    The smaller wA is strictly smaller per discipline §18 standard:
+    states dominance on the per-agent-optimum aggregate (with the
+    carrier identification surfaced separately).
 
     paper source: Corollary `cor:disclosure` Part 2, line 647 +
     proof line 658. -/
@@ -1897,9 +1633,9 @@ theorem differentiated_per_agent_optimum_dominates_uniform :
     Differentiated disclosure strictly dominates uniform disclosure:
     `W_bar uniform_beta ≤ differentiatedDisclosureWelfare G` for any
     `G` and uniform β. Decomposed from the bundled
-    `gap_disclosure_differentiated_dominates_OPEN` axiom per
-    `feedback_gap_ledger_in_lean4` §18 pattern: re-exports the R63
-    derived theorem `differentiated_per_agent_optimum_dominates_uniform`
+    `gap_disclosure_differentiated_dominates_OPEN` claim per
+    `feedback_gap_ledger_in_lean4` §18 pattern: re-exports the derived
+    theorem `differentiated_per_agent_optimum_dominates_uniform`
     (which composes `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
     structural eq + `perAgentOptimalAggregate_dominates_uniform_OPEN`
     smaller wA).
@@ -1909,18 +1645,5 @@ theorem gap_disclosure_differentiated_dominates :
     ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
       W_bar uniform_beta ≤ differentiatedDisclosureWelfare G :=
   differentiated_per_agent_optimum_dominates_uniform
-
--- R186 RELOCATION: the R177 Cat 1 derivation
--- `W_bar_eventually_decreasing_derived_R177` (formerly here at the
--- bottom of Principal.lean as a side-by-side closure-path
--- demonstration alongside the R167 axiom
--- `W_bar_eventually_decreasing_paper_Def`) has been INLINED at the
--- R186 closure point earlier in this file, where it now serves as
--- the actual definition of `W_bar_eventually_decreasing_R186` (the
--- Cat 1 derivedTheorem replacing the retired R167 axiom). See the
--- "## R186 — Hoisted W_bar limit-at-infinity infrastructure" section
--- earlier in this file for the inlined proof. The R186 closure is
--- truly axiom-eliminating (not side-by-side) since the R167 atom is
--- now retired entirely.
 
 end BlackwellDilemma

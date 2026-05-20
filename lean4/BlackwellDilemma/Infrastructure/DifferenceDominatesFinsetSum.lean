@@ -14,7 +14,7 @@ finite sums, providing the Mathlib-PR-ready generic lemma:
 
 **Pointwise-pair difference-dominance is preserved under finite sums.**
 
-Sister module to `SupermodularityFinsetSum.lean` (R179) for the
+Sister module to `SupermodularityFinsetSum.lean` for the
 `DifferenceDominates` lattice structure.
 
 ## Main results

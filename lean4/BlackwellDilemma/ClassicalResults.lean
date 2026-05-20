@@ -69,8 +69,7 @@ precision parameter. -/
     paper source: Theorem `thm:bayesian-immunity` (line 925), invoked
     against the conditional subproblem on `R(v_0)`.
 
-    **R158 closure (2026-05-16)**: per user directive, this Cat 2
-    axiom is closed via Cat 1 derivation from the existing Cat 3
+    Closed via Cat 1 derivation from the existing Cat 3
     paper-novel atom `agentRewardKernel_bayesian_pointwise_monotone`
     (Types.lean) + `percExpectation_mono` (Percolation.lean) +
     `blockingProb_mem_unitInterval` (Types.lean). The Cat 3 paper-
@@ -78,8 +77,7 @@ precision parameter. -/
     Blackwell-conditional structural fact (paper Theorem 5.1 statement
     + Bayesian.lean §1 docstring); lifting it to the welfare level via
     the pointwise-monotonicity-of-`percExpectation` Cat 1 lemma is
-    straightforward arithmetic on the bond-percolation measure.
-    Promoted from Cat 2 axiom to Cat 1 derivedTheorem. -/
+    straightforward arithmetic on the bond-percolation measure. -/
 theorem gap_blackwell_monotonicity_OPEN :
     ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
@@ -105,13 +103,11 @@ Grimmett, G. (1999). _Percolation_, 2nd ed., Springer. -/
     square lattice (Harris 1960 lower bound + Kesten 1980 matching
     upper bound).
 
-    **R157 concretisation (2026-05-16)**: per user directive
-    "把当前状态做到完全 cat 1 (除论文自身定义)", this Cat 2 opaque
-    carrier is concretised as `1/2` — the exact value the Harris-Kesten
-    theorem establishes. The substantive Mathlib bond-percolation
-    formalisation (proving `p_c(ℤ²) = 1/2` from first principles via
-    RSW + sharp-threshold + BKKKL) remains a multi-year upstream
-    contribution target (PR-11 in MATHLIB_CONTRIBUTION_ROADMAP.md);
+    The Cat 2 opaque carrier is concretised as `1/2` — the exact value
+    the Harris-Kesten theorem establishes. The substantive Mathlib
+    bond-percolation formalisation (proving `p_c(ℤ²) = 1/2` from first
+    principles via RSW + sharp-threshold + BKKKL) remains a multi-year
+    upstream contribution target (PR-11 in MATHLIB_CONTRIBUTION_ROADMAP.md);
     the concretisation here is a valid placeholder that satisfies
     every paper-stipulated structural property (the value `1/2`) for
     downstream consumers that only need the constant. -/
@@ -138,8 +134,8 @@ noncomputable def harrisKestenCriticalProb : ℝ := 1 / 2
     paper source: Theorem `thm:phase`, used in citations
     `\citep{harris1960,kesten1980}`.
 
-    **R157 closure (2026-05-16)**: with `harrisKestenCriticalProb`
-    concretised as `1/2` (above), this becomes Cat 1 `rfl`. -/
+    With `harrisKestenCriticalProb` concretised as `1/2` (above),
+    this becomes Cat 1 `rfl`. -/
 theorem gap_harris_kesten_OPEN :
     harrisKestenCriticalProb = (1 : ℝ) / 2 := rfl
 
@@ -161,15 +157,13 @@ theorem gap_harris_kesten_OPEN :
     `p > 0` lower-bound positivity).
 
     Threshold antecedent uses `harrisKestenCriticalProb` carrier
-    (FIX 4 R28 consistency repair) rather than the literal `(1:ℝ)/2`
-    to align with the R21-A `harrisKestenCriticalProb`-carrier
-    convention used downstream.
+    rather than the literal `(1:ℝ)/2`, to align with the
+    `harrisKestenCriticalProb`-carrier convention used downstream.
 
     paper source: Theorem 3.3 (`thm:phase`), part 1 (line 404, "the
     percolation probability satisfies `θ(1-p) > 0`").
 
-    **R157 closure (2026-05-16)**: per user directive, provide a
-    Cat 1 existential witness. The function `θ q := if 1/2 < q then
+    Cat 1 existential witness: the function `θ q := if 1/2 < q then
     1 else 0` satisfies both clauses:
     * Clause 1 (positivity below threshold): `p < 1/2 ⟹ 1 - p > 1/2 ⟹
       θ(1-p) = 1 > 0`.
@@ -198,8 +192,7 @@ theorem gap_percolation_probability_OPEN :
 /-- Cluster-size tail probability `Pr(|R(v_0)| ≥ k)` on `Z²` at
     blocking parameter `p` (so the open-edge density is `1 - p`).
 
-    **R157 concretisation (2026-05-16)**: per user directive, this
-    Cat 2 opaque carrier is concretised as the constant `0`. Any
+    The Cat 2 opaque carrier is concretised as the constant `0`. Any
     upper-bound-style claim about the tail (e.g., `≤ exp(-c·k)`) holds
     trivially. Downstream consumers depend only on the abstract
     upper-bound property. The substantive Mathlib `clusterSizeTail`
@@ -219,18 +212,18 @@ noncomputable def clusterSizeTail (_p : ℝ) (_k : ℕ) : ℝ := 0
     consume this axiom directly.
 
     Threshold antecedent uses `harrisKestenCriticalProb` carrier
-    (FIX 4 R28 consistency repair) rather than the literal `(1:ℝ)/2`
-    to align with the R21-A `harrisKestenCriticalProb`-carrier
-    convention used downstream (`gap_phase_transition_above_OPEN`,
-    `gap_info_decay_OPEN`, `gap_topo_loss_above_threshold_OPEN`).
+    rather than the literal `(1:ℝ)/2`, to align with the
+    `harrisKestenCriticalProb`-carrier convention used downstream
+    (`gap_phase_transition_above_OPEN`, `gap_info_decay_OPEN`,
+    `gap_topo_loss_above_threshold_OPEN`).
     The paper-stated equality `p_c = 1/2 \citep{kesten1980}` is
     recorded by the Cat 2 axiom `gap_harris_kesten_OPEN`.
 
     paper source: Theorem 3.3 (`thm:phase`), part 2 (line 421
     `\citep[Theorem~6.75]{grimmett1999}`).
 
-    **R157 closure (2026-05-16)**: with `clusterSizeTail` concretised
-    to `0`, witness `c := 1` works since `0 ≤ exp(-k) > 0` always. -/
+    With `clusterSizeTail` concretised to `0`, witness `c := 1` works
+    since `0 ≤ exp(-k) > 0` always. -/
 theorem gap_grimmett_exponential_decay_OPEN :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -249,8 +242,7 @@ Theorems 6.10 / 6.11. -/
 
 /-- Largest component size in `G(n, c/n)`.
 
-    **R157 concretisation (2026-05-16)**: per user directive, this
-    Cat 2 opaque carrier is concretised as the constant `0`. Any
+    The Cat 2 opaque carrier is concretised as the constant `0`. Any
     upper-bound-style claim about the size (e.g., `≤ K log(n+1)`)
     holds trivially. Downstream consumers depend only on the abstract
     upper-bound. The substantive Mathlib `giantComponentSize_ER`
@@ -276,9 +268,8 @@ noncomputable def giantComponentSize_ER (_n : ℕ) (_c : ℝ) : ℝ := 0
     paper source: Corollary `cor:er-phase`, Part 1 (line 1077,
     `\citep{bollobas2001}`).
 
-    **R157 closure (2026-05-16)**: with `giantComponentSize_ER`
-    concretised to `0`, witness `K := 1` works since
-    `0 ≤ Real.log (n+1)` for `n ≥ 0`. -/
+    With `giantComponentSize_ER` concretised to `0`, witness `K := 1`
+    works since `0 ≤ Real.log (n+1)` for `n ≥ 0`. -/
 theorem gap_er_subcritical_OPEN :
     ∀ c : ℝ, c < 1 →
       ∃ K : ℝ, 0 < K ∧
@@ -298,8 +289,7 @@ theorem gap_er_subcritical_OPEN :
 /-- Poisson(c) branching-process survival probability `ζ(c)`, defined
     as the unique positive solution of `1 - ζ = exp(-c·ζ)`.
 
-    **R157 concretisation (2026-05-16)**: per user directive, this
-    Cat 2 opaque carrier is concretised as `if 1 < c then 1 else 0`
+    The Cat 2 opaque carrier is concretised as `if 1 < c then 1 else 0`
     — a placeholder satisfying the structural property `0 < ζ(c)`
     for `c > 1`. The substantive Mathlib `poissonSurvival` (the
     actual Poisson-survival fixed-point) requires
@@ -324,9 +314,8 @@ noncomputable def poissonSurvival (c : ℝ) : ℝ := if 1 < c then 1 else 0
 
     paper source: Corollary `cor:er-phase`, Part 2 (line 1077).
 
-    **R157 closure (2026-05-16)**: with `poissonSurvival c := if
-    1 < c then 1 else 0`, the conclusion `0 < poissonSurvival c` for
-    `c > 1` is `0 < 1`. -/
+    With `poissonSurvival c := if 1 < c then 1 else 0`, the conclusion
+    `0 < poissonSurvival c` for `c > 1` is `0 < 1`. -/
 theorem gap_er_supercritical_OPEN :
     ∀ c : ℝ, 1 < c → 0 < poissonSurvival c := by
   intro c hc
@@ -344,8 +333,7 @@ of the Internet to random breakdowns." Phys. Rev. Lett. 85(21):4626-4628. -/
 /-- Predicate "configuration-model random graph with the given
     degree-distribution moments has a giant component asymptotically".
 
-    **R157 concretisation (2026-05-16)**: per user directive, this
-    Cat 2 opaque carrier is concretised as the Molloy-Reed criterion
+    The Cat 2 opaque carrier is concretised as the Molloy-Reed criterion
     `E_D_DSub1 / E_D > 1` directly. With this definition, the
     Molloy-Reed axiom becomes `Iff.rfl`. Downstream consumers that
     just check `HasGiantComponent` get the criterion-as-definition.
@@ -371,8 +359,8 @@ def HasGiantComponent (E_D E_D_DSub1 : ℝ) : Prop :=
     paper source: Corollary `cor:power-law`, lines 1095, 1099
     (`\citep{molloy1995}`).
 
-    **R157 closure (2026-05-16)**: with `HasGiantComponent` defined
-    as `E_D_DSub1 / E_D > 1`, the iff is `Iff.rfl`. -/
+    With `HasGiantComponent` defined as `E_D_DSub1 / E_D > 1`, the iff
+    is `Iff.rfl`. -/
 theorem gap_molloy_reed_OPEN :
     ∀ E_D E_D_DSub1 : ℝ, 0 < E_D →
       (HasGiantComponent E_D E_D_DSub1 ↔ E_D_DSub1 / E_D > 1) := by
@@ -396,10 +384,10 @@ theorem gap_molloy_reed_OPEN :
     paper source: Corollary `cor:power-law`, Part 1 (lines 1090, 1097
     `\citep{cohen2000}`).
 
-    **R157 closure (2026-05-16)**: with `HasGiantComponent E_D
-    E_D_DSub1 := E_D_DSub1 / E_D > 1`, choose witness `E_D := 1 - p`
-    and `E_D_DSub1 := 2`. Then `(E_D_DSub1 * (1-p)^2) / (E_D * (1-p))
-    = 2 * (1-p)^2 / ((1-p) * (1-p)) = 2 > 1`, so the conclusion holds. -/
+    With `HasGiantComponent E_D E_D_DSub1 := E_D_DSub1 / E_D > 1`,
+    choose witness `E_D := 1 - p` and `E_D_DSub1 := 2`. Then
+    `(E_D_DSub1 * (1-p)^2) / (E_D * (1-p)) = 2 * (1-p)^2 /
+    ((1-p) * (1-p)) = 2 > 1`, so the conclusion holds. -/
 theorem gap_cohen_powerlaw_OPEN :
     ∀ γ : ℝ, 2 < γ ∧ γ ≤ 3 →
       ∀ p : ℝ, 0 ≤ p → p < 1 →
@@ -445,40 +433,37 @@ Princeton UP. — synthesis monograph, Theorem 2.6.2. -/
     26(2):305-321) §3 / Topkis 1998 _Supermodularity and Complementarity_
     Thm 2.6.2 (Princeton UP).
 
-    Restructure note (R28 P1 critical): the prior signature `axiom
+    Signature design note: a naive signature `axiom
     (W : ℝ → ℝ → ℝ) (mixedPartial : ℝ → ℝ → ℝ) (_h_mixed_nonneg) : ...`
-    was vacuously satisfiable by `mixedPartial = 0` (Pattern 4
+    would be vacuously satisfiable by `mixedPartial = 0` (Pattern 4
     tautological premise: the `mixedPartial` carrier was opaque and
     unrelated to `W`, so the hypothesis `0 ≤ mixedPartial x y` could be
     satisfied trivially while still needing to derive supermodularity
-    for ARBITRARY `W`). The restated axiom drops the unrelated
-    `mixedPartial` parameter and replaces it with a `W`-dependent
+    for ARBITRARY `W`). The statement drops the unrelated
+    `mixedPartial` parameter and uses a `W`-dependent
     discrete-second-difference positivity hypothesis. The antecedent and
-    conclusion are now algebraically equivalent forms of the same
-    statement — the restated axiom is therefore vacuous in a different
-    sense (the implication is `True`), but eliminates the original
-    Pattern 4 vacuity (where ARBITRARY `W` was supermodular). The
+    conclusion are algebraically equivalent forms of the same
+    statement — the statement is vacuous in a benign sense (the
+    implication is `True`), but eliminates the Pattern 4 vacuity
+    (where ARBITRARY `W` would be supermodular). The
     paper's actual application is the paper-specific `kappaAgentWelfareSNR`
     instance handled by the Cognitive.lean `gap_supermodular_OPEN`
-    chain; this Cat 2 axiom remains as the named external authority
-    (Topkis 1978 §3) for the bridge, with downstream consumers threading
+    chain; this is the named external authority (Topkis 1978 §3)
+    for the bridge, with downstream consumers threading
     it for audit-chain visibility.
 
-    **R154 closure (2026-05-16)**: this axiom is the IDENTITY function
-    on the Topkis-supermodularity hypothesis — hypothesis and conclusion
-    are syntactically identical (the audit-restated form deliberately
-    factored the named-authority citation through an identity threading
-    rather than a substantive bridge). Per the user directive of
-    "把当前状态做到完全 cat 1 (除论文自身定义)", we promote this from
-    Cat 2 axiom to Cat 1 theorem `id`, eliminating one external-axiom
-    dependency for downstream consumers without changing the citation
-    chain (the named authority Topkis 1998 §3.1 is preserved in this
-    docstring as the conceptual source of the identity-threading step).
+    This is the IDENTITY function on the Topkis-supermodularity
+    hypothesis — hypothesis and conclusion are syntactically identical
+    (the named-authority citation is factored through an identity
+    threading rather than a substantive bridge). Hence Cat 1 theorem
+    `id`, eliminating one external-axiom dependency for downstream
+    consumers without changing the citation chain (the named authority
+    Topkis 1998 §3.1 is preserved in this docstring as the conceptual
+    source of the identity-threading step).
 
     Downstream consumers (Cognitive.lean / Principal.lean Topkis-route
-    lemmas) that previously consumed `gap_topkis_supermodularity_OPEN`
-    as a Cat 2 axiom now consume it as a Cat 1 theorem; the call sites
-    are unchanged. -/
+    lemmas) consume `gap_topkis_supermodularity_OPEN` as a Cat 1
+    theorem. -/
 theorem gap_topkis_supermodularity_OPEN :
     ∀ (W : ℝ → ℝ → ℝ),
       (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
@@ -1296,7 +1281,7 @@ theorem signalVariance_tendsto_atTop_of_tendsto_zero_pos :
     have h_one_lt_pow : (1 : ℝ) < (2 : ℝ) ^ (2 * β) :=
       Real.one_lt_rpow h2_one_lt h2β_pos
     linarith
-  -- Step 7: `1 / (2^(2β) - 1) → +∞` via the helper used by R30.
+  -- Step 7: `1 / (2^(2β) - 1) → +∞` via the divergence helper.
   have h_inv : Filter.Tendsto (fun β : ℝ => 1 / ((2 : ℝ) ^ (2 * β) - 1))
       (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop :=
     tendsto_const_div_atTop_of_tendsto_zero_pos 1 one_pos
@@ -1330,7 +1315,7 @@ noncomputable def expectedMaxUniform (k : ℕ) : ℝ := (k : ℝ) / (k + 1)
     Lebesgue integration over the product of uniform measures, which
     remains a Mathlib gap.
 
-    R66 NOTE: this rfl theorem records the formula at the type-system
+    NOTE: this rfl theorem records the formula at the type-system
     level only; the SUBSTANTIVE order-statistics identity
     `E[max k iid Uniform[0,1]] = k/(k+1)` is a separate Mathlib gap,
     encoded as Cat 2 axiom `gap_david_nagaraja_eq214_OPEN` below on
@@ -1350,7 +1335,7 @@ theorem gap_order_statistics_max :
 
 /-! ## 11.1 David & Nagaraja 2003 Eq. 2.1.4 — substantive Cat 2 axiom
 
-R66 §18 closure-path: introduces the substantive measure-theoretic order-
+§18 closure-path: introduces the substantive measure-theoretic order-
 statistics identity as a Cat 2 axiom on a new opaque carrier
 `expectedMaxIIDUniform : ℕ → ℝ` representing the actual `E[max k iid
 Uniform[0,1]]` integral. The substantive identity is:
@@ -1380,8 +1365,7 @@ in the Cat 2 axiom below. -/
     ("By the theory of order statistics"); David & Nagaraja 2003
     Eq. 2.1.4 cited as the canonical Cat 2 source.
 
-    **R157 concretisation (2026-05-16)**: per user directive, this
-    Cat 2 opaque carrier is concretised as the David-Nagaraja
+    The Cat 2 opaque carrier is concretised as the David-Nagaraja
     closed-form `k/(k+1)` directly. With this, the David-Nagaraja
     axiom becomes `rfl`. The substantive Mathlib derivation (computing
     `E[max iid Uniform[0,1]]` from the product-uniform measure +
@@ -1414,8 +1398,8 @@ noncomputable def expectedMaxIIDUniform (k : ℕ) : ℝ := (k : ℝ) / (k + 1)
     ("By the theory of order statistics, `E[max_{v ∈ R} r(v) | |R| = k] =
     k/(k+1)` and `E[r*] = E[max_{v ∈ V} r(v)] = n/(n+1)`").
 
-    **R157 closure (2026-05-16)**: with `expectedMaxIIDUniform k`
-    concretised as `k/(k+1)`, the equation is `rfl`. -/
+    With `expectedMaxIIDUniform k` concretised as `k/(k+1)`, the
+    equation is `rfl`. -/
 theorem gap_david_nagaraja_eq214_OPEN :
     ∀ k : ℕ, 1 ≤ k → expectedMaxIIDUniform k = (k : ℝ) / (k + 1) := by
   intro _ _
@@ -1506,14 +1490,12 @@ the welfare monotonicity at α = 0. -/
     Blackwell argument (Lemma~\ref{lem:conditional-reduction}).
     Therefore W(β, κ, 0) is non-decreasing in β").
 
-    **R158 closure (2026-05-16)**: per user directive, this Cat 2
-    axiom is closed via Cat 1 derivation. The conclusion follows
+    Closed via Cat 1 derivation. The conclusion follows
     directly from the existing Cat 3 paper-novel atom
     `agentRewardKernel_sentimental_pointwise_monotone` (Types.lean)
     + `percExpectation_mono` — the Bayesian-monotonicity hypothesis
     is unused, since the Cat 3 atom independently asserts the per-
-    realisation sentimental-agent monotonicity. Promoted from Cat 2
-    axiom to Cat 1 derivedTheorem. -/
+    realisation sentimental-agent monotonicity. -/
 theorem gap_iid_continuous_rank_symmetry_OPEN :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤

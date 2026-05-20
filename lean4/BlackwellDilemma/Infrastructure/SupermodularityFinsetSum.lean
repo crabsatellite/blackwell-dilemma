@@ -18,7 +18,7 @@ set is supermodular.**
 This generalises both `IsSupermodular.add` (the `Finset` `{a, b}`
 special case) and the percolation-specific
 `percExpectation_supermodular_of_pointwise_supermodular`
-(R178; the bond-config-weighted Finset.sum special case).
+(the bond-config-weighted Finset.sum special case).
 
 ## Main results
 

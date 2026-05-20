@@ -9,8 +9,8 @@ import BlackwellDilemma.Infrastructure.MonotoneFunctionAlgebra
 # Abstract per-realisation kernel monotonicity (Cat 1)
 
 This file provides the **abstract kernel-monotonicity pattern** that
-paper's `agentRewardKernel_*_pointwise_monotone` axioms instantiate
-(R88/R89 batch — Phase 12). The pattern is: a per-realisation
+paper's `agentRewardKernel_*_pointwise_monotone` axioms instantiate.
+The pattern is: a per-realisation
 kernel `K : ω → β → ℝ` is "pointwise-monotone in β for each ω", and
 its expectation is monotone by lifting via `Finset.sum_le_sum`.
 

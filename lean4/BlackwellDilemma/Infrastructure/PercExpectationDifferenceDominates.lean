@@ -17,8 +17,8 @@ percolation expectation pair
 also satisfies `DifferenceDominates`.**
 
 Sister module to:
-* `PercExpectationSupermodular.lean` (R178; lifting of supermodularity)
-* `DifferenceDominatesFinsetSum.lean` (R182; finset-sum extension)
+* `PercExpectationSupermodular.lean` (lifting of supermodularity)
+* `DifferenceDominatesFinsetSum.lean` (finset-sum extension)
 
 ## Main result
 

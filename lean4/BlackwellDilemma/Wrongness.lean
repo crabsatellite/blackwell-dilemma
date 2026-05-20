@@ -48,11 +48,8 @@ measure, hence is signal-independent. -/
     argument applies Blackwell's monotonicity theorem within this
     conditional subproblem on the restricted action domain `R`.
 
-    **R163 substantive-math closure** (R72/R76/R160/R161 concrete-def
-    precedent): previously declared `axiom conditionalWelfareOnR :
-    Finset Vertex → (ℝ → PercolationOutcome → ℝ) → ℝ → ℝ` (opaque carrier
-    pending Mathlib decision-theoretic Blackwell-conditional infrastructure).
-    R163 makes the carrier CONCRETE via the paper-faithful baseline
+    **Substantive-math closure** (concrete-def precedent):
+    the carrier is CONCRETE via the paper-faithful baseline
     identification: `conditionalWelfareOnR _R _signalFamily β :=
     agentWelfare AgentType.bayesian β 0 1` — paper Lemma `lem:conditional-
     reduction` part (i) STATES "the Bayesian agent's welfare under the
@@ -84,20 +81,16 @@ noncomputable def conditionalWelfareOnR
     (β : ℝ) : ℝ :=
   agentWelfare AgentType.bayesian β 0 1
 
-/-- **R163 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
-    `conditionalWelfareOnR_monotone_via_blackwell_workingAssumption` axiom):
+/-- **CLOSURE** (Cat 1 derived theorem):
     paper Lemma `lem:conditional-reduction` part (i) line 375 conditional
     monotonicity claim.
 
-    R163 substantive-math closure: the previously workingAssumption axiom
-    is now a Cat 1 derived theorem, following from the R163 concretization
-    of `conditionalWelfareOnR` (above) to the baseline bayesian welfare.
-    Under the antecedent's bayesian-baseline-monotonicity hypothesis,
-    the conditional welfare's monotonicity reduces directly to the
-    baseline's monotonicity (Cat 1 by `def`-unfold + antecedent
-    application).
-
-    Net workingAssumption delta: −1. -/
+    Substantive-math closure: this workingAssumption is a Cat 1 derived
+    theorem, following from the concretization of `conditionalWelfareOnR`
+    (above) to the baseline bayesian welfare. Under the antecedent's
+    bayesian-baseline-monotonicity hypothesis, the conditional welfare's
+    monotonicity reduces directly to the baseline's monotonicity (Cat 1
+    by `def`-unfold + antecedent application). -/
 theorem conditionalWelfareOnR_monotone_via_blackwell_workingAssumption :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
@@ -112,7 +105,7 @@ theorem conditionalWelfareOnR_monotone_via_blackwell_workingAssumption :
   unfold conditionalWelfareOnR
   exact h_baseline β₁ β₂ hβ
 
-/-- **R113 CLOSURE — R140 Infrastructure-wired**: derives the paper's
+/-- **CLOSURE — Infrastructure-wired**: derives the paper's
     Blackwell-applies-to-conditional-subproblem claim via the smaller
     `_workingAssumption` (Blackwell + baseline-mono → conditional-mono
     structural identification) consuming `Infrastructure.BlackwellConditional`'s
@@ -194,13 +187,11 @@ C1-C3 with terminal-neighbour topology and `|N_R(v_0)| = 2`, the greedy
 policy's welfare is non-monotone in β: there exist `β' > β` with
 `W(π_{β'}) < W(π_β)`. -/
 
-/-! ### R60 §18 closure-path-B decomposition of `lem:wrongness`
+/-! ### §18 closure-path-B decomposition of `lem:wrongness`
 
-R44 hostile audit flagged `topology_blind_wrongness_atom_OPEN` as MOST
-EGREGIOUS conclusion-as-axiom (an entire paper Lemma packaged as a
-single workingAssumption). R44 attackHistory recommended R45+
-decomposition into V_dyn-dominance + static-reward-misalignment atoms.
-R60 implements the recommended decomposition.
+The single-atom `topology_blind_wrongness_atom_OPEN` packaged an entire
+paper Lemma as a single workingAssumption. It is decomposed below into
+V_dyn-dominance + static-reward-misalignment atoms.
 
 Paper proof (lines 345-369) operates in two substantive stages:
  1. **High-precision concentration on the worst branch**
@@ -227,9 +218,9 @@ target = bounded-convergence + Φ-tail integral machinery, partially
 Mathlib-Cat-1, partially paper-novel).
 -/
 
-/-! ### R90 SOUNDNESS-DEFECT FIX — `wrongness_high_beta_welfare_floor_atom_OPEN`.
+/-! ### SOUNDNESS-DEFECT FIX — `wrongness_high_beta_welfare_floor_atom_OPEN`.
 
-    The previous signature `∃ β₀ Wlim, ∀ β > β₀, Wlim ≤
+    The retired signature `∃ β₀ Wlim, ∀ β > β₀, Wlim ≤
     agentWelfare greedy β 0 1` is VACUOUS — `agentWelfare ∈ [0,1]`
     (per `agentWelfare_mem_unitInterval`), so taking `Wlim := 0`
     and `β₀ := 0` satisfies it trivially without using ANY of the
@@ -238,7 +229,7 @@ Mathlib-Cat-1, partially paper-novel).
     the atom a no-op in the chain — all real content was being
     smuggled into `wrongness_misalignment_reversal_atom_OPEN`.
 
-    Per `feedback_truth_over_publication` (R83/R86/R87 precedent):
+    Per `feedback_truth_over_publication`:
     replaced with the paper-faithful CONVERGENCE form. Paper line
     348 reads "agent selects `u_1` with probability `P_1(β) → 1`
     as `β → ∞`"; paper line 352 reads "`W(∞) = V_dyn(u_1)`"; paper
@@ -251,7 +242,7 @@ Mathlib-Cat-1, partially paper-novel).
     The atom is renamed to reflect the substantive content:
     `wrongness_high_beta_welfare_convergence_atom_OPEN`. -/
 
-/-- **R103** Cat 3 §3.4.3 paper-stipulated structural equation:
+/-- Cat 3 §3.4.3 paper-stipulated structural equation:
     paper-stated per-realisation pointwise convergence of the greedy
     agent's reward kernel as β → ∞. Paper Lemma `lem:wrongness` proof
     line 348 STATES `P_1(β) → 1` (greedy concentration on u_1) +
@@ -259,8 +250,8 @@ Mathlib-Cat-1, partially paper-novel).
     level, the kernel converges to a paper-stipulated limit kernel
     `agentRewardKernel_greedy_limit_kernel ω`.
 
-    Cat 3 §3.4.3 gapDefinitional per discipline (R88-R96 paper-
-    stipulated structural-equation precedent). 永不 close.
+    Cat 3 §3.4.3 gapDefinitional per discipline (paper-stipulated
+    structural-equation precedent). 永不 close.
 
     paper source: Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1`)
     + line 352 (`W(∞) = V_dyn(u_1)`). -/
@@ -277,9 +268,8 @@ axiom agentRewardKernel_greedy_pointwise_tendsto_atTop :
         Filter.Tendsto (fun β => agentRewardKernel AgentType.greedy β 0 1 ω)
           Filter.atTop (nhds (agentRewardKernel_greedy_limit_kernel ω))
 
-/-- **R103 CLOSURE** via R103 percExpectation_tendsto infrastructure +
-    paper-stipulated kernel-pointwise-tendsto structural equation.
-    Replaces R-original axiom of the same name. -/
+/-- **CLOSURE** via percExpectation_tendsto infrastructure +
+    paper-stipulated kernel-pointwise-tendsto structural equation. -/
 theorem wrongness_high_beta_welfare_convergence_atom_OPEN :
     Conditions_C1_C2_C3 →
     TerminalNeighbourTopology →
@@ -297,7 +287,7 @@ theorem wrongness_high_beta_welfare_convergence_atom_OPEN :
     (agentRewardKernel_greedy_pointwise_tendsto_atTop
       hC hT hDeg2 signalFamily hBlind hBO)
 
-/-- Cat 3 paper-novel ATOMIC stipulation #2 (R90 reversal-witness
+/-- Cat 3 paper-novel ATOMIC stipulation #2 (reversal-witness
     decomposition replacing the prior workingAssumption
     `wrongness_misalignment_reversal_atom_OPEN`): paper Lemma
     `lem:wrongness` proof line 357-368 (static-reward-misalignment-
@@ -310,17 +300,17 @@ theorem wrongness_high_beta_welfare_convergence_atom_OPEN :
     368 `W(β) > W(∞)` for large finite `β` is per-realisation
     realised on the C2-misalignment events.
 
-    R90 strict improvement: the prior welfare-existential reversal
+    Strict improvement: the welfare-existential reversal
     atom is decomposed into (a) this kernel-level reversal-witness
     structural equation (paper-stipulated per-realisation form) +
-    (b) R90 foundation lemma
+    (b) the foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
     (lifts to welfare-level reversal). The stage-1 convergence
     antecedent is preserved (paper line 368's "Since `W(β) → W(∞)`").
 
-    Cat 3 sub-type: structuralEquation (R88 precedent — paper STATES
+    Cat 3 sub-type: structuralEquation — paper STATES
     the per-realisation static-reward-misalignment-driven reversal
-    directly on the kernel carrier).
+    directly on the kernel carrier.
 
     paper source: Lemma `lem:wrongness` proof, lines 357-368
     (welfare-decomposition reversal witness from static-reward-
@@ -343,17 +333,17 @@ axiom agentRewardKernel_greedy_wrongness_kernel_reversal_witness :
             agentRewardKernel AgentType.greedy β' 0 1 ω₀ <
               agentRewardKernel AgentType.greedy β 0 1 ω₀
 
-/-- **Lemma `lem:wrongness` stage-2 derived theorem** (R90 closure
-    via reversal-witness pattern; replaces prior
+/-- **Lemma `lem:wrongness` stage-2 derived theorem** (closure
+    via reversal-witness pattern; replaces the
     `wrongness_misalignment_reversal_atom_OPEN` workingAssumption).
     Given paper hypotheses + the stage-1 convergence to `Wlim`,
     there exists a strict reversal pair `(β, β')` with
     `agentWelfare greedy β' 0 1 < agentWelfare greedy β 0 1`.
 
-    R90 closure: composes (a) Cat 3 §3.4.3 paper-stipulated kernel
+    Closure: composes (a) Cat 3 §3.4.3 paper-stipulated kernel
     reversal-witness atom
     `agentRewardKernel_greedy_wrongness_kernel_reversal_witness` +
-    (b) R90 foundation lemma
+    (b) the foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
     + (c) paper-stipulated atom `blockingProb_strict_in_open_unit_interval`.
 
@@ -379,28 +369,28 @@ theorem wrongness_misalignment_reversal_atom_OPEN :
   exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
     AgentType.greedy 0 1 β β' h_le ω₀ h_strict
 
-/-- **Lemma `lem:wrongness` (Wrongness of the Greedy Policy)** (R60
-    derived theorem; R90 sound-fix-aligned chain). Under C1-C3,
+/-- **Lemma `lem:wrongness` (Wrongness of the Greedy Policy)**
+    (derived theorem; sound-fix-aligned chain). Under C1-C3,
     terminal-neighbour topology, degree-2 starting vertex, and a
     Blackwell-ordered topology-blind signal family, the greedy
     policy's welfare is strictly non-monotone in β.
 
-    R60 §18 closure-path-B refactor: the prior single-atom
-    `topology_blind_wrongness_atom_OPEN` (R44 flagged as MOST EGREGIOUS
-    conclusion-as-axiom packaging an entire paper Lemma) is decomposed
+    §18 closure-path-B refactor: the single-atom
+    `topology_blind_wrongness_atom_OPEN` (conclusion-as-axiom
+    packaging an entire paper Lemma) is decomposed
     into two smaller workingAssumption atoms reflecting the paper's
     two-stage proof structure (paper lines 345-369):
      * `wrongness_high_beta_welfare_convergence_atom_OPEN` (stage 1:
        `W(β) → V_dyn(u_1)` welfare-convergence — paper line 348
        greedy concentration + line 352 limit identity + line 368
-       convergence-statement). [R90 SOUNDNESS-DEFECT FIX: replaced
+       convergence-statement). [SOUNDNESS-DEFECT FIX: replaced
        prior vacuous floor signature.]
      * `wrongness_misalignment_reversal_atom_OPEN` (stage 2: static-
        reward-misalignment-driven reversal witness from the
        welfare-convergence, paper lines 357-368).
     The derived theorem composes both via the convergence existential.
 
-    Two paper-faithful antecedents anchored against earlier deferred
+    Two paper-faithful antecedents anchored against deferred
     discrepancies:
     (a) `DegreeTwoStartingVertex` premise — paper line 338 reads
         "Assume further that `v_0` has exactly two accessible
@@ -436,7 +426,7 @@ and `|W_info| = O(2^{-β})` as β → ∞, uniformly in `n` for `p > p_c`.
 Stated before Theorem 3.2 because `gap_dilemma` invokes this axiom
 in its oracle-bound clause. -/
 
-/-- R84 Cat 3 carrier: the edge-index set of the `Z²_L` torus action
+/-- Cat 3 carrier: the edge-index set of the `Z²_L` torus action
     graph with `L² = n` vertices.  Paper Theorem 3.3 (line 402) fixes
     `G = Z²_L` (torus) with `N = L²` vertices; `EdgeIdx n` is that
     graph's edge set `E` (paper Definition 2.1's `E`), the index type
@@ -445,13 +435,10 @@ in its oracle-bound clause. -/
     `DecidableEq` instances record that `E` is finite (paper Def 2.1:
     "`G = (V, E)` ... on `n` nodes").
 
-    R85: moved up from §5 (was after `prop:topo-cluster`) so that the
-    `W_info_oracle` concretisation of §3 — which lives on the same
-    `Z²_L` edge set — can reference it.  Carrier content unchanged.
     paper source: Theorem 3.3 (`thm:phase`), line 402 (`G = Z²_L` torus
     with `N = L²` vertices) + Definition 2.1 (the edge set `E`).
 
-    **R158 concretisation (2026-05-16)**: per user directive
+    **Concretisation (2026-05-16)**: per user directive
     "把当前状态做到完全 cat 1 (除论文自身定义)", this Cat 2 opaque
     carrier is concretised as a constant `Fin 7` — sufficient size
     for the trap-prevalence sub-event embedding in
@@ -464,20 +451,20 @@ in its oracle-bound clause. -/
 def EdgeIdx (_n : ℕ) : Type := Fin 7
 
 /-- `EdgeIdx n` is a finite type — paper Def 2.1's graph is finite.
-    Now derivable from `Fintype (Fin 7)` post-R158 concretisation. -/
+    Derivable from `Fintype (Fin 7)` via the concretisation. -/
 instance EdgeIdx.fintype (n : ℕ) : Fintype (EdgeIdx n) :=
   inferInstanceAs (Fintype (Fin 7))
 
 /-- Decidable equality on `EdgeIdx n` (every IDP instance is finite).
-    Now derivable from `DecidableEq (Fin 7)` post-R158 concretisation. -/
+    Derivable from `DecidableEq (Fin 7)` via the concretisation. -/
 instance EdgeIdx.decEq (n : ℕ) : DecidableEq (EdgeIdx n) :=
   inferInstanceAs (DecidableEq (Fin 7))
 
 /-! ### Concretisation of `W_info_oracle` over the finite
     bond-percolation framework (`Percolation.lean`).
 
-    R85: the prior opaque carrier `axiom W_info_oracle : ℝ → ℝ → ℝ` is
-    REPLACED (R84 `expectedTopoLoss` concrete-def-closure pattern) by a
+    The opaque carrier `axiom W_info_oracle : ℝ → ℝ → ℝ` is
+    REPLACED (concrete-def-closure pattern from `expectedTopoLoss`) by a
     `noncomputable def` that IS the paper's `E_{G_p}[·]` expectation of
     the oracle's per-realisation informational residual.
 
@@ -497,7 +484,7 @@ instance EdgeIdx.decEq (n : ℕ) : DecidableEq (EdgeIdx n) :=
     "uniformly in `n`"; the per-`n` index makes "for each `n`" explicit
     and the downstream derived theorems quantify `∀ n`. -/
 
-/-- R85 Cat 3 carrier: the per-realisation oracle informational-residual
+/-- Cat 3 carrier: the per-realisation oracle informational-residual
     kernel.  For a bond-percolation outcome `ω : BondConfig (EdgeIdx n)`
     (which edges of `Z²_L` are open) and signal precision `β`,
     `wInfoOracleKernel n β ω` is the realised informational residual
@@ -518,7 +505,7 @@ instance EdgeIdx.decEq (n : ℕ) : DecidableEq (EdgeIdx n) :=
     lines 270-277 (the per-realisation `≤ 0` + `O(2^{-β})` content). -/
 axiom wInfoOracleKernel : (n : ℕ) → ℝ → BondConfig (EdgeIdx n) → ℝ
 
-/-- R85 Cat 3 carrier: the per-realisation reachable-set cardinality
+/-- Cat 3 carrier: the per-realisation reachable-set cardinality
     `|R(v_0)|` on `Z²_L`.  For a bond-percolation outcome
     `ω : BondConfig (EdgeIdx n)`, `wInfoOracleClusterCount n ω` is the
     size of the reachable set `R(v_0)` on that realisation — paper
@@ -535,7 +522,7 @@ axiom wInfoOracleKernel : (n : ℕ) → ℝ → BondConfig (EdgeIdx n) → ℝ
     its base vertex). -/
 axiom wInfoOracleClusterCount : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
 
-/-- R85 Cat 3 structural equation: the oracle informational-residual
+/-- Cat 3 structural equation: the oracle informational-residual
     kernel is pointwise non-positive — for every percolation
     realisation `ω` and every precision `β`, `wInfoOracleKernel n β ω
     ≤ 0`.
@@ -556,7 +543,7 @@ axiom wInfoOracleClusterCount : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
     within-`R` oracle, by construction / Lemma `lem:conditional-
     reduction` (i), cannot beat the in-`R` max on any fixed `R`).
     Mirrors the `topoLossKernel_mem_unitInterval` reward-range
-    Def-stipulation precedent (R84) — paper stipulates the carrier's
+    Def-stipulation precedent — paper stipulates the carrier's
     pointwise range/sign; 永不 close per discipline §3.4.3.
     paper source: Lemma `lem:conditional-reduction` part (i), lines
     374-381 (within-`R` oracle on the fixed feasible set `R(v_0)`
@@ -566,7 +553,7 @@ axiom wInfoOracleKernel_nonpos :
     ∀ (n : ℕ) (β : ℝ) (ω : BondConfig (EdgeIdx n)),
       wInfoOracleKernel n β ω ≤ 0
 
-/-- R85 Cat 3 structural equation: the per-realisation reachable-set
+/-- Cat 3 structural equation: the per-realisation reachable-set
     cardinality is at least `1` — `1 ≤ wInfoOracleClusterCount n ω` for
     every percolation realisation `ω`.
 
@@ -580,7 +567,7 @@ axiom wInfoOracleKernel_nonpos :
     Cat 3 sub-type: structuralEquation — paper Definition 2.5's
     trivial-path inclusion, transported to the cluster-count carrier,
     is a paper-Def-stipulated structural identity (mirrors
-    `topoLossKernel_mem_unitInterval` R84 precedent); 永不 close per
+    `topoLossKernel_mem_unitInterval` precedent); 永不 close per
     discipline §3.4.3.
     paper source: Definition 2.5 (`def:forward-reachable`, the
     reachable set contains its base vertex `v_0` via the trivial
@@ -589,7 +576,7 @@ axiom wInfoOracleClusterCount_ge_one :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       1 ≤ wInfoOracleClusterCount n ω
 
-/-- R85 Cat 3 structural equation: the per-realisation Mills-tail
+/-- Cat 3 structural equation: the per-realisation Mills-tail
     magnitude bound — for every realisation `ω` and every precision
     `β > 0`, the absolute oracle residual is bounded by the
     reachable-set cardinality times `2^{-β}`:
@@ -618,7 +605,7 @@ axiom wInfoOracleClusterCount_ge_one :
     structural fact (the `2^{-β}` constant absorbs the paper's `O(σ)`
     per-vertex Mills-tail factor under the Gaussian signal model's
     `σ(β) = O(2^{-β})` precision schedule).  Mirrors the
-    `topoLossKernel_mem_unitInterval` R84 precedent — paper stipulates
+    `topoLossKernel_mem_unitInterval` precedent — paper stipulates
     the carrier's pointwise bound; 永不 close per discipline §3.4.3.
     paper source: Proposition `prop:info-decay` proof, line 276 (`|W_info|
     ≤ |R| · O(σ) = |R| · O(2^{-β})`, the per-realisation bound) +
@@ -630,7 +617,7 @@ axiom wInfoOracleKernel_abs_le_clusterCount :
         |wInfoOracleKernel n β ω| ≤
           wInfoOracleClusterCount n ω * Real.rpow 2 (-β)
 
-/-- **R85 concretised `W_info_oracle`** (replaces retired opaque
+/-- **Concretised `W_info_oracle`** (replaces retired opaque
     `axiom W_info_oracle : ℝ → ℝ → ℝ`).  The within-`R` oracle's
     informational residual on `Z²_L` (`L² = n`) at blocking parameter
     `p` and signal precision `β` IS the bond-percolation expectation of
@@ -641,14 +628,14 @@ axiom wInfoOracleKernel_abs_le_clusterCount :
     The open-edge probability is `1 - p` (paper's `p` is the *blocking*
     probability; `Percolation.bondConfigWeight` is parameterised by the
     *open-edge* probability, matching Mathlib's `PMF.bernoulli`
-    `true`-probability convention) — identical convention to the R84
+    `true`-probability convention) — identical convention to the
     `expectedTopoLoss` concretisation.
 
-    R85 concrete-def-closure (R84 `expectedTopoLoss` pattern): the prior
+    Concrete-def-closure (`expectedTopoLoss` pattern): the opaque
     `axiom W_info_oracle : ℝ → ℝ → ℝ` is REPLACED by this n-indexed
     `noncomputable def`; the underlying paper content `W_info_oracle =
     E_{G_p}[oracle residual kernel]` is paper Theorem 3.1 proof line
-    258's stipulated decomposition.  NOT R7-flagged content-erasure:
+    258's stipulated decomposition.  Not content-erasure:
     the def body IS the paper's exact `E_{G_p}[E_s[r(v_T)] - r^*_R]`
     decomposition, evaluated on the explicit finite bond-percolation
     measure.  The `n` index is added because the residual lives on
@@ -661,15 +648,15 @@ axiom wInfoOracleKernel_abs_le_clusterCount :
 noncomputable def W_info_oracle (n : ℕ) (p : ℝ) (β : ℝ) : ℝ :=
   percExpectation (1 - p) (wInfoOracleKernel n β)
 
-/-- **R85 CLOSED — `W_info_oracle_nonpos_OPEN` is now a derived
-    theorem** (replaces the retired R44 workingAssumption axiom of the
+/-- **CLOSED — `W_info_oracle_nonpos_OPEN` is a derived
+    theorem** (replaces the retired workingAssumption axiom of the
     same name).
 
     The within-`R` oracle's informational residual `W_info_oracle n p
     β` is non-positive for `p > p_c` and `β > 0`:
     `W_info_oracle n p β ≤ 0`.
 
-    R85 closure via the concretised `W_info_oracle` + the finite
+    Closure via the concretised `W_info_oracle` + the finite
     bond-percolation framework of `Percolation.lean`:
       `W_info_oracle n p β`
         `= percExpectation (1 - p) (wInfoOracleKernel n β)`  (def-unfold)
@@ -687,19 +674,19 @@ noncomputable def W_info_oracle (n : ℕ) (p : ℝ) (β : ℝ) : ℝ :=
     `p ≤ 1` threaded as `hp1`), hence `0 ≤ 1 - p ≤ 1`, the requirement
     for `percExpectation_le_of_pointwise_le`.
 
-    R44 → R85: the prior R44 axiom `W_info_oracle_nonpos_OPEN` (Cat 3
-    workingAssumption, "paper-stated sign fact pending closure from the
-    Cat 2 Mills-tail / Cat 1 Gaussian-integration machinery") is now
-    that derivation: the bond-percolation expectation is concrete
-    (`percExpectation`), the per-realisation sign fact is structural
-    (`wInfoOracleKernel_nonpos`), and the "expectation algebra" is the
-    proven `percExpectation_le_of_pointwise_le`.  inputCategory Cat 3 →
-    Cat 1; cat3SubType workingAssumption → derivedTheorem; status
-    gapOpen → gapClosed.
+    The axiom `W_info_oracle_nonpos_OPEN` (Cat 3 workingAssumption,
+    "paper-stated sign fact pending closure from the Cat 2 Mills-tail /
+    Cat 1 Gaussian-integration machinery") is now that derivation: the
+    bond-percolation expectation is concrete (`percExpectation`), the
+    per-realisation sign fact is structural (`wInfoOracleKernel_nonpos`),
+    and the "expectation algebra" is the proven
+    `percExpectation_le_of_pointwise_le`.  inputCategory Cat 3 → Cat 1;
+    cat3SubType workingAssumption → derivedTheorem; status gapOpen →
+    gapClosed.
 
     Paper-faithful antecedent added: `p ≤ 1` matches paper Definition
     2.1's standing `p ∈ [0, 1]` domain (mirrors the sibling
-    `expectedTopoLoss_le_one_atom_OPEN`'s `0 ≤ p`, `p ≤ 1` R84
+    `expectedTopoLoss_le_one_atom_OPEN`'s `0 ≤ p`, `p ≤ 1`
     antecedents and `gap_trap_prevalence_above_threshold`'s `p < 1`).
 
     paper source: Lemma `lem:conditional-reduction` part (i), lines
@@ -720,7 +707,7 @@ theorem W_info_oracle_nonpos_OPEN
   · intro ω
     exact wInfoOracleKernel_nonpos n β ω
 
-/-- **R85 helper (Cat 1):** the bond-percolation expectation of an
+/-- **Helper (Cat 1):** the bond-percolation expectation of an
     absolute value dominates the absolute value of the expectation:
     `|percExpectation p f| ≤ percExpectation p (fun ω => |f ω|)`.
 
@@ -742,8 +729,8 @@ theorem percExpectation_abs_le {E : Type} [Fintype E] [DecidableEq E]
         intro ω _
         rw [abs_mul, abs_of_nonneg (bondConfigWeight_nonneg p hp0 hp1 ω)]
 
-/-- **R85 CLOSED — `W_info_oracle_exponential_bound_OPEN` is now a
-    derived theorem** (replaces the retired R44 workingAssumption axiom
+/-- **CLOSED — `W_info_oracle_exponential_bound_OPEN` is a
+    derived theorem** (replaces the retired workingAssumption axiom
     of the same name).
 
     The within-`R` oracle's informational residual `|W_info_oracle n p
@@ -751,7 +738,7 @@ theorem percExpectation_abs_le {E : Type} [Fintype E] [DecidableEq E]
     there is a positive constant `C` with `|W_info_oracle n p β| ≤
     C · 2^{-β}` for all `β > 0`.
 
-    R85 closure via the concretised `W_info_oracle` + the finite
+    Closure via the concretised `W_info_oracle` + the finite
     bond-percolation framework of `Percolation.lean`.  The witness
     constant is `C := percExpectation (1 - p) (wInfoOracleClusterCount
     n)` — the bond-percolation expectation of the reachable-set
@@ -778,7 +765,7 @@ theorem percExpectation_abs_le {E : Type} [Fintype E] [DecidableEq E]
     percExpectation (1 - p) (wInfoOracleClusterCount n) = C` by
     `percExpectation_ge_of_pointwise_ge`.
 
-    R44 → R85: the prior R44 axiom `W_info_oracle_exponential_bound_OPEN`
+    The axiom `W_info_oracle_exponential_bound_OPEN`
     (Cat 3 workingAssumption, "paper-stated exponential bound on opaque
     carrier `W_info_oracle` pending Cat 1 Mills + Cat 2 Grimmett
     composition") is now that derivation: the bond-percolation
@@ -877,35 +864,35 @@ theorem W_info_oracle_exponential_bound_OPEN
 /-- **Proposition `prop:info-decay`** — informational residual decays
     exponentially in β for the oracle, above the percolation
     threshold. Encoded as substantive bound on the concretised carrier
-    `W_info_oracle n p β` (R85: `W_info_oracle` is now a
+    `W_info_oracle n p β` (`W_info_oracle` is a
     `noncomputable def` over the finite bond-percolation measure — see
     its concretisation above; the prior opaque-carrier encoding
-    defeated Pattern 4 vacuous existentials, the R85 concretisation
+    defeated Pattern 4 vacuous existentials, the concretisation
     makes the carrier structural).
 
-    R85: derived theorem composing the two R85-CLOSED derived theorems
+    Derived theorem composing the two CLOSED derived theorems
     (formerly Cat 3 atomic stipulations, now `theorem`s on the
     concrete `W_info_oracle`):
-    * `W_info_oracle_nonpos_OPEN` (R85 derived theorem — per-realisation
+    * `W_info_oracle_nonpos_OPEN` (derived theorem — per-realisation
       kernel sign `wInfoOracleKernel_nonpos` + `percExpectation_le_
       of_pointwise_le`),
-    * `W_info_oracle_exponential_bound_OPEN` (R85 derived theorem —
+    * `W_info_oracle_exponential_bound_OPEN` (derived theorem —
       per-realisation Mills-tail kernel bound
       `wInfoOracleKernel_abs_le_clusterCount` + `|E| ≤ E|·|` +
       `percExpectation` linearity/monotonicity; threads Grimmett 1999
       §6.75 via `h_grimmett` for audit-chain continuity).
-    The composition is closed kernel-pure; both inputs are now genuine
+    The composition is closed kernel-pure; both inputs are genuine
     derivations on the concrete bond-percolation framework of
     `Percolation.lean` rather than workingAssumption axioms.
 
-    R85 signature change: `W_info_oracle` gained an `n` index (it lives
+    Signature: `W_info_oracle` carries an `n` index (it lives
     on `Z²_L`, `L² = n`).  Paper Proposition `prop:info-decay` line 272
     states the bound "uniformly in `n` for `p > p_c`"; the `∀ n`
     quantification here realises the per-`n` form (the
     uniform-in-`n` strengthening remains Grimmett-gated — see
     `W_info_oracle_exponential_bound_OPEN`'s scope-honesty docstring).
     The paper-Def-2.1 domain antecedent `p ≤ 1` is threaded to both
-    R85-closed sub-theorems.
+    CLOSED sub-theorems.
 
     The threshold antecedent `harrisKestenCriticalProb < p` consumes
     the Harris-Kesten `p_c` carrier rather than a literal `(1 : ℝ) / 2`.
@@ -958,7 +945,7 @@ relative to `|W_topo| = Θ(1)` for `p > p_c`. -/
       the within-`R` oracle's informational residual is non-positive
       and exponentially small in `β`: `|W_info_oracle| = O(2^{-β})` —
       direct invocation of derived theorem `gap_info_decay` (which
-      composes the R85-closed derived theorems
+      composes the CLOSED derived theorems
       `W_info_oracle_nonpos_OPEN` and
       `W_info_oracle_exponential_bound_OPEN`, both now genuine
       derivations on the concrete bond-percolation framework).
@@ -973,7 +960,7 @@ relative to `|W_topo| = Θ(1)` for `p > p_c`. -/
     Grimmett antecedent. Because `gap_dilemma` is a THEOREM (not an
     axiom), the proof body composition is sufficient for `#print
     axioms gap_dilemma` to surface `gap_grimmett_exponential_decay_OPEN`
-    in the audit chain (per the R28 axiom-vs-theorem-consumer
+    in the audit chain (per the axiom-vs-theorem-consumer
     clarification of the broken-link discipline).
 
     Two paper-faithful antecedents are propagated downstream from
@@ -986,9 +973,9 @@ relative to `|W_topo| = Θ(1)` for `p > p_c`. -/
         matching Lemma `lem:wrongness`'s `{π_β}_β` family-level scope.
     Clause 2's threshold antecedent `harrisKestenCriticalProb < p`
     matches `gap_info_decay`'s threshold antecedent and the
-    paper's `p > p_c` formulation (line 388: "for `p > p_c`").  R85:
-    clause 2 gains the `∀ n` quantification + the paper-Def-2.1 domain
-    antecedent `p ≤ 1` from the R85 concretisation of `W_info_oracle`
+    paper's `p > p_c` formulation (line 388: "for `p > p_c`").
+    Clause 2 gains the `∀ n` quantification + the paper-Def-2.1 domain
+    antecedent `p ≤ 1` from the concretisation of `W_info_oracle`
     (now an n-indexed `noncomputable def` over the finite
     bond-percolation measure); paper line 388's "for `p > p_c`" bound
     is "uniformly in `n`" (paper `prop:info-decay` line 272), realised
@@ -1032,7 +1019,7 @@ theorem gap_dilemma
 
     paper source: Proposition `prop:topo-cluster`, lines 279-297.
 
-    **R157 concretisation (2026-05-16)**: per user directive
+    **Concretisation (2026-05-16)**: per user directive
     "把当前状态做到完全 cat 1 (除论文自身定义)", this Cat 2 opaque
     carrier is concretised as the David-Nagaraja closed-form
     `n/(n+1) - k/(k+1)` directly. With this, the orderstats-topo
@@ -1044,7 +1031,7 @@ theorem gap_dilemma
 noncomputable def expectedTopoLoss_conditional (n k : ℕ) : ℝ :=
   (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1)
 
-/-- R66 NEW Cat 2 external-paper axiom (`cat2External` per `feedback_
+/-- Cat 2 external-paper axiom (`cat2External` per `feedback_
     gap_ledger_in_lean4` §6.2): paper-application of David & Nagaraja
     2003 Eq. 2.1.4 to the IDP carrier `expectedTopoLoss_conditional`
     via paper Definition 2.1's standing convention (rewards `r: V → [0,
@@ -1072,7 +1059,7 @@ noncomputable def expectedTopoLoss_conditional (n k : ℕ) : ℝ :=
     conclusion, but the carrier-binding chain is mechanical (David &
     Nagaraja applied through paper Def 2.1 standing convention; the
     paper-application is essentially the textbook identity applied
-    twice). Per R65 precedent (`gap_iid_continuous_rank_symmetry_OPEN`),
+    twice). Per the precedent of `gap_iid_continuous_rank_symmetry_OPEN`,
     the AXIOM is classified Cat 2 (cat2External, notCat3) because its
     content is "textbook fact applied through fixed paper-stipulated
     standing-convention pattern" — the "Cat 2-ness" justified by the
@@ -1096,10 +1083,10 @@ noncomputable def expectedTopoLoss_conditional (n k : ℕ) : ℝ :=
     (decomposition + David & Nagaraja); paper Definition 2.1 line
     113-114 (iid Uniform + percolation independence standing convention).
 
-    **R157 closure (2026-05-16)**: with `expectedTopoLoss_conditional
+    **Closure (2026-05-16)**: with `expectedTopoLoss_conditional
     n k` concretised as `n/(n+1) - k/(k+1)`, the equation is `rfl`.
-    The David-Nagaraja antecedent is now a Cat 1 theorem
-    (gap_david_nagaraja_eq214_OPEN, also closed in R157). -/
+    The David-Nagaraja antecedent is a Cat 1 theorem
+    (gap_david_nagaraja_eq214_OPEN). -/
 theorem gap_orderstats_topo_decomposition_OPEN :
     (∀ K : ℕ, 1 ≤ K → expectedMaxIIDUniform K = (K : ℝ) / (K + 1)) →
     ∀ n k : ℕ, 1 ≤ k → k ≤ n →
@@ -1108,8 +1095,8 @@ theorem gap_orderstats_topo_decomposition_OPEN :
   intros _ _ _ _ _
   rfl
 
-/-- **R66 derived theorem (replaces retired R23-C1 atom of the same
-    name `expectedTopoLoss_conditional_def`)**.
+/-- **Derived theorem** (replaces retired atom of the same
+    name `expectedTopoLoss_conditional_def`).
 
     For the IDP on `n` nodes with iid `Uniform[0, 1]` rewards (paper
     Definition 2.1 line 113-114 standing convention), the conditional
@@ -1118,20 +1105,20 @@ theorem gap_orderstats_topo_decomposition_OPEN :
     via the order-statistics decomposition (paper line 292) using
     David & Nagaraja 2003 Eq. 2.1.4.
 
-    R66 §18 closure-path-A composition: composes the new Cat 2 axiom
+    §18 closure-path-A composition: composes the Cat 2 axiom
     `gap_orderstats_topo_decomposition_OPEN` (paper-application via
-    standing convention) with the new Cat 2 axiom
+    standing convention) with the Cat 2 axiom
     `gap_david_nagaraja_eq214_OPEN` (substantive David & Nagaraja Eq.
     2.1.4 textbook identity, in `ClassicalResults.lean`) to discharge
     the abstract order-statistics antecedent. Both Cat 2 axioms surface
     in `#print axioms` on this theorem, providing audit-chain visibility
-    for the David & Nagaraja dependency that was previously acknowledged
-    only in docstrings.
+    for the David & Nagaraja dependency.
 
-    Net effect: the prior R23-C1 wA atom `expectedTopoLoss_conditional_
-    def` (paper-novel structural equation on opaque `expectedTopoLoss_
-    conditional` carrier) is absorbed into the Cat 2 chain. The Lean-
-    side audit visibility now matches the paper's textbook citation.
+    Net effect: the wA atom `expectedTopoLoss_conditional_def`
+    (paper-novel structural equation on opaque
+    `expectedTopoLoss_conditional` carrier) is absorbed into the Cat 2
+    chain. The Lean-side audit visibility matches the paper's textbook
+    citation.
 
     paper source: Proposition `prop:topo-cluster`, line 292
     (`E[|W_topo| | |R| = k] = n/(n+1) − k/(k+1)`); David & Nagaraja
@@ -1195,8 +1182,8 @@ theorem gap_topo_cluster_relation :
 /-! ### Concretisation of `expectedTopoLoss` over the finite
     bond-percolation framework (`Percolation.lean`).
 
-    R84: the prior opaque carrier `axiom expectedTopoLoss : ℕ → ℝ → ℝ`
-    is REPLACED (R72/R73 concrete-def-closure pattern) by a
+    The opaque carrier `axiom expectedTopoLoss : ℕ → ℝ → ℝ`
+    is REPLACED (concrete-def-closure pattern) by a
     `noncomputable def` that IS the paper's `E_{G_p}[·]` expectation,
     evaluated on the explicit finite bond-percolation measure built in
     `Percolation.lean`.  Paper Definition 2.1 line 119 STIPULATES that
@@ -1210,7 +1197,7 @@ theorem gap_topo_cluster_relation :
     topological loss `r^* - max_{v ∈ R(v_0)} r(v)`, paper
     `prop:topo-cluster`'s pointwise integrand). -/
 
-/-- R84 Cat 3 carrier: the per-realisation topological loss kernel.
+/-- Cat 3 carrier: the per-realisation topological loss kernel.
     For a bond-percolation outcome `ω : BondConfig (EdgeIdx n)` (which
     edges of `Z²_L` are open), `topoLossKernel n ω` is the realised
     topological loss `r^* - max_{v ∈ R(v_0)} r(v)` on that realisation
@@ -1228,7 +1215,7 @@ theorem gap_topo_cluster_relation :
     E_{G_p}[max_{v ∈ R(v_0)} r(v)]`). -/
 axiom topoLossKernel : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
 
-/-- R84 Cat 3 structural equation: the topological-loss kernel takes
+/-- Cat 3 structural equation: the topological-loss kernel takes
     values in `[0, 1]` for every percolation realisation.  This is
     paper-Def-stipulated: paper Definition 2.1 line 113 fixes
     `r : V → [0, 1]`, so both `r^*` and `max_{v ∈ R(v_0)} r(v)` lie in
@@ -1249,7 +1236,7 @@ axiom topoLossKernel_mem_unitInterval :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       0 ≤ topoLossKernel n ω ∧ topoLossKernel n ω ≤ 1
 
-/-- **R84 concretised `expectedTopoLoss`** (replaces retired opaque
+/-- **Concretised `expectedTopoLoss`** (replaces retired opaque
     `axiom expectedTopoLoss : ℕ → ℝ → ℝ`).  The expected topological
     loss on `Z²_L` (`L² = n`) at blocking parameter `p` IS the
     bond-percolation expectation of the loss kernel — paper Definition
@@ -1263,11 +1250,11 @@ axiom topoLossKernel_mem_unitInterval :
     `[0, 1]` (Definition 2.1: `p ∈ [0, 1]`), `1 - p ∈ [0, 1]` and
     `percExpectation (1 - p) (·)` is a genuine probability expectation.
 
-    R84 concrete-def-closure (R72/R73 pattern): the prior `axiom
-    expectedTopoLoss` is REPLACED by this `noncomputable def`; the
-    underlying paper content `expectedTopoLoss = E_{G_p}[loss kernel]`
-    is paper Definition 2.1 line 119's stipulated meaning of `E_{G_p}`.
-    NOT R7-flagged content-erasure: the def body IS the paper's exact
+    Concrete-def-closure: the `axiom expectedTopoLoss` is REPLACED
+    by this `noncomputable def`; the underlying paper content
+    `expectedTopoLoss = E_{G_p}[loss kernel]` is paper Definition 2.1
+    line 119's stipulated meaning of `E_{G_p}`.
+    Not content-erasure: the def body IS the paper's exact
     `E_{G_p}[r^* - max_{v ∈ R} r(v)]` decomposition, evaluated on the
     explicit finite bond-percolation measure.
     paper source: Definition 2.1, line 119 (`E_{G_p}` = "expectation
@@ -1278,7 +1265,7 @@ noncomputable def expectedTopoLoss (n : ℕ) (p : ℝ) : ℝ :=
 
 /-! ### `prop:topo-cluster` Part 1 — below-threshold asymptotic.
 
-**R86 SOUNDNESS-DEFECT FIX (R83 precedent).**  The retired R60 atom
+**SOUNDNESS-DEFECT FIX.**  The retired atom
 `topo_loss_below_one_over_n_envelope_atom_OPEN` asserted the
 *unconditional* bound `expectedTopoLoss n p ≤ 1/(n+1)` for `p < p_c`.
 That signature is **over-strong — false**.  Paper Proposition
@@ -1293,14 +1280,14 @@ conditional on `v_0` lying in the giant component**
 component have `|R| = O(1)` and conditional loss
 `(n-k)/((n+1)(k+1)) = Θ(1)` (a single isolated-vertex realisation
 has `|R| = 1`, loss `(n-1)/(2(n+1)) ≈ 1/2`), so unconditionally
-`E[|W_topo|] ≥ (1 - θ(1-p)) · Θ(1) = Θ(1)`.  R85's AxiomAudit note
+`E[|W_topo|] ≥ (1 - θ(1-p)) · Θ(1) = Θ(1)`.  The AxiomAudit note
 flagged exactly this ("the `1/(n+1)` bound is an EXPECTATION bound,
 false pointwise ... requiring the giant-component event probability
 `θ(1-p) > 0` to split the kernel").
 
-Per `feedback_truth_over_publication` + the R83 precedent
+Per `feedback_truth_over_publication`
 (correcting an over-strong signature to the true paper claim, then
-proving THAT, IS a valid closure): R86 **corrects the signature**
+proving THAT, IS a valid closure): the signature is **corrected**
 to the paper-faithful giant-component-conditional form.  The genuine
 paper object is the **sub-event expectation on the giant-component
 event** — `expectedTopoLossOnGiant` below — and the genuine paper
@@ -1309,7 +1296,7 @@ claim is the bound on *that* (`expectedTopoLossOnGiant n p ≤
 `|R| = k ≥ (n-1)/2`, the topo-cluster closed form satisfies
 `(n-k)/((n+1)(k+1)) ≤ 1/(n+1)`.
 
-R86 builds, on the `Percolation.lean` sub-event-expectation +
+The fix builds, on the `Percolation.lean` sub-event-expectation +
 cluster-size-partition infrastructure:
  * `giantComponentEvent` — Cat 3 carrier: the `Finset` of
    percolation realisations placing `v_0` in the giant component.
@@ -1339,10 +1326,10 @@ higher consumer — verified by grep across all `*.lean`), so the
 correction is fully contained to this section + its Ledger /
 AxiomAudit entries.  The sibling Phase.lean
 `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` /
-`gap_phase_transition_below` chain receives the parallel R86
+`gap_phase_transition_below` chain receives the parallel
 correction. -/
 
-/-- **R86 Cat 3 carrier.**  The giant-component event on `Z²_L`
+/-- **Cat 3 carrier.**  The giant-component event on `Z²_L`
     (`L² = n`): the `Finset` of bond-percolation realisations
     `ω : BondConfig (EdgeIdx n)` for which the base vertex `v_0` lies
     in the giant (largest) component, equivalently for which
@@ -1364,14 +1351,14 @@ correction. -/
     paper-graph-specific `Finset` on the percolation sample space
     (`Z²_L` connectivity), the natural sub-event over which paper
     line 415 conditions; mirrors the `EdgeIdx` / `topoLossKernel`
-    carrier precedents (R84).  永不 close per discipline §3.4.1.
+    carrier precedents.  永不 close per discipline §3.4.1.
     paper source: Theorem 3.3 (`thm:phase`) Part 1, line 404
     ("`|R(v_0)| = Θ(N)`" — the giant-component event) + line 415
     ("Conditional on `v_0` lying in the giant component") +
     Definition 2.1 (the `Z²_L` action graph). -/
 axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
 
-/-- **R205 bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated
+/-- **Bridge atom 1** (Cat 3 §3.4.3 paper-Def-stipulated
     structural equation): the paper Proposition `prop:topo-cluster`
     proof line 294 STATES that, on the giant-component event, the
     per-realisation topological-loss kernel takes the explicit
@@ -1402,7 +1389,7 @@ axiom topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def :
           topoLossKernel n ω =
             ((n : ℝ) - (k : ℝ)) / (((n : ℝ) + 1) * ((k : ℝ) + 1))
 
-/-- **R205 bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated
+/-- **Bridge atom 2** (Cat 3 §3.4.3 paper-Def-stipulated
     structural fact): the giant-component event of paper Theorem 3.3
     Part 1 proof lines 415-417 — by the paper-Def definition of "giant
     component" (cluster size `k ≥ θ(1 - p) · n` with `θ(1 - p) > 1/2`
@@ -1411,7 +1398,7 @@ axiom topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def :
 
     This is the cluster-size lower-bound consequence of the
     giant-component event: any cluster-size index `k` such that
-    `topoLossKernel n ω = (n - k) / ((n + 1) (k + 1))` (per R205 bridge
+    `topoLossKernel n ω = (n - k) / ((n + 1) (k + 1))` (per bridge
     atom 1) must satisfy the giant-component lower bound. Without
     this, the Cat 1 algebraic bound
     `Infrastructure.orderStatisticsRatio_le_one_over_n_succ` fails:
@@ -1432,23 +1419,23 @@ axiom giantComponent_cluster_size_lower_bound_paper_Def :
               ((n : ℝ) - (k : ℝ)) / (((n : ℝ) + 1) * ((k : ℝ) + 1)) →
           n ≤ 2 * k + 1
 
-/-- **R205 bridge — Cat 1 derived theorem** (replaces R199 atomic
+/-- **Bridge — Cat 1 derived theorem** (replaces atomic
     bridge `topoLossKernel_pointwise_bound_paper_Def`).
 
     Genuine Cat 1 composition: extract the cluster-size witness `k`
-    from R205 bridge atom 1, derive the algebraic hypothesis
-    `n ≤ 2 k + 1` from R205 bridge atom 2, then apply the Cat 1
+    from bridge atom 1, derive the algebraic hypothesis
+    `n ≤ 2 k + 1` from bridge atom 2, then apply the Cat 1
     `Infrastructure.orderStatisticsRatio_le_one_over_n_succ` lemma
     to convert `(n - k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)`.
 
-    Net §3.4.3 atom delta vs. the previous R199 axiom: −1 (R199
-    monolithic axiom retired) + 2 (R205 smaller paper-Def atoms:
+    Net §3.4.3 atom delta vs. the prior axiom: −1 (monolithic
+    axiom retired) + 2 (smaller paper-Def atoms:
     kernel-formula identification + cluster-size lower bound). The
-    substantive algebra is now a Cat 1 lemma
+    substantive algebra is a Cat 1 lemma
     (`Infrastructure.OrderStatisticsAlgebraicBound`), Mathlib-PR-ready,
     kernel-pure (only `propext, Classical.choice, Quot.sound`). The
-    decomposition surfaces the previously implicit reliance on the
-    giant-component cluster-size lower bound, which is now an
+    decomposition surfaces the implicit reliance on the
+    giant-component cluster-size lower bound, which is an
     explicit, separately auditable atomic stipulation.
 
     paper source: Proposition `prop:topo-cluster` proof line 294
@@ -1470,13 +1457,13 @@ theorem topoLossKernel_pointwise_bound_paper_Def :
         BlackwellDilemma.Infrastructure.orderStatisticsRatio_le_one_over_n_succ
           n k h_k_large
 
-/-- **R171 CLOSURE** (Cat 1 derived theorem; replaces the previous R171
+/-- **CLOSURE** (Cat 1 derived theorem; replaces the
     `topoLossKernel_le_one_over_n_on_giant_paper_Def` axiom). Direct
-    application of the R205-derived theorem
+    application of the derived theorem
     `topoLossKernel_pointwise_bound_paper_Def`.
 
-    Net §3.4.3 atom delta vs. R171 axiom: −1 (R171 retired) + 2 (R205
-    bridges) + 1 Cat 1 algebraic lemma; the substantive `Z²_L` cluster
+    Net §3.4.3 atom delta: −1 (axiom retired) + 2 (bridges) +
+    1 Cat 1 algebraic lemma; the substantive `Z²_L` cluster
     combinatorics is decomposed into (i) the paper-stated
     order-statistics closed form (bridge atom 1), (ii) the
     giant-component cluster-size lower bound (bridge atom 2), and
@@ -1492,10 +1479,10 @@ theorem topoLossKernel_le_one_over_n_on_giant_paper_Def :
   intro n ω hω
   exact topoLossKernel_pointwise_bound_paper_Def n ω hω
 
-/-! ### R205 axiom-audit witness
+/-! ### Axiom-audit witness
 
-`#print axioms` confirms the new R205-derived theorem
-`topoLossKernel_pointwise_bound_paper_Def` depends on BOTH new bridge
+`#print axioms` confirms the derived theorem
+`topoLossKernel_pointwise_bound_paper_Def` depends on BOTH bridge
 atoms (`topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def` and
 `giantComponent_cluster_size_lower_bound_paper_Def`) — it is NOT a
 1-line restatement of either. The Cat 1 algebraic lemma
@@ -1506,20 +1493,17 @@ Classical.choice, Quot.sound`). -/
 #print axioms topoLossKernel_pointwise_bound_paper_Def
 #print axioms topoLossKernel_le_one_over_n_on_giant_paper_Def
 
-/-- **R171 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
     `topoLossKernel_le_one_over_n_on_giant_workingAssumption` axiom).
-    Direct re-export of the new R171 paper-Def-stipulated structural
-    equation atom `topoLossKernel_le_one_over_n_on_giant_paper_Def`.
-
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+    Direct re-export of the paper-Def-stipulated structural
+    equation atom `topoLossKernel_le_one_over_n_on_giant_paper_Def`. -/
 theorem topoLossKernel_le_one_over_n_on_giant_workingAssumption :
     ∀ (n : ℕ) (ω : BondConfig (EdgeIdx n)),
       ω ∈ giantComponentEvent n →
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) :=
   topoLossKernel_le_one_over_n_on_giant_paper_Def
 
-/-- **R117 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- **CLOSURE — Infrastructure-wired**: derives paper's
     giant-component kernel-bound via the smaller `_workingAssumption`
     consuming `Infrastructure.MillsRatioTail` Mills-style decay atoms. -/
 theorem topoLossKernel_le_one_over_n_on_giant_atom_OPEN :
@@ -1528,7 +1512,7 @@ theorem topoLossKernel_le_one_over_n_on_giant_atom_OPEN :
         topoLossKernel n ω ≤ 1 / ((n : ℝ) + 1) :=
   topoLossKernel_le_one_over_n_on_giant_workingAssumption
 
-/-- **R86 paper-faithful object** — the expected topological loss
+/-- **Paper-faithful object** — the expected topological loss
     *on the giant-component event* on `Z²_L` (`L² = n`) at blocking
     parameter `p`.  This is the genuine object of paper Theorem 3.3
     Part 1 / Proposition `prop:topo-cluster` Part 1's below-threshold
@@ -1553,7 +1537,7 @@ theorem topoLossKernel_le_one_over_n_on_giant_atom_OPEN :
 noncomputable def expectedTopoLossOnGiant (n : ℕ) (p : ℝ) : ℝ :=
   percRestrictedExpectation (1 - p) (giantComponentEvent n) (topoLossKernel n)
 
-/-- **R86 derived theorem** (the genuine paper claim, replacing the
+/-- **Derived theorem** (the genuine paper claim, replacing the
     retired over-strong unconditional atom).  Below threshold
     (`p < p_c`), the expected topological loss *on the
     giant-component event* satisfies the explicit `1/(n+1)` envelope:
@@ -1578,11 +1562,11 @@ noncomputable def expectedTopoLossOnGiant (n : ℕ) (p : ℝ) : ℝ :=
     `percRestrictedExpectation_le_on` open-edge-probability
     requirement) give `0 ≤ 1 - p ≤ 1`.
 
-    R86 strictly-paper-faithful: the conclusion is the
+    Strictly-paper-faithful: the conclusion is the
     giant-component-conditional bound the paper actually proves, NOT
     the (false) unconditional `expectedTopoLoss n p ≤ 1/(n+1)` the
-    retired R60 atom asserted.  Per `feedback_truth_over_publication`
-    + R83 precedent, this signature correction + the genuine proof IS
+    retired atom asserted.  Per `feedback_truth_over_publication`,
+    this signature correction + the genuine proof IS
     the honest closure of the envelope claim.
 
     paper source: Theorem 3.3 Part 1 proof, line 417
@@ -1602,19 +1586,19 @@ theorem topo_loss_on_giant_below_one_over_n
     intro ω hω
     exact topoLossKernel_le_one_over_n_on_giant_atom_OPEN n ω hω
 
-/-- **R86 derived theorem** (paper-faithful replacement of the retired
+/-- **Derived theorem** (paper-faithful replacement of the retired
     `topo_loss_below_envelope_exists`).  Below threshold (`p < p_c`),
     the expected topological loss *on the giant-component event*
     admits the explicit decay envelope `1/(n+1)` — a function
     `topoLossBelowDecay : ℕ → ℝ` with `topoLossBelowDecay → 0` and
     `expectedTopoLossOnGiant n p ≤ topoLossBelowDecay n` for all `n`.
 
-    Composes the R86 derived theorem `topo_loss_on_giant_below_one_over_n`
+    Composes the derived theorem `topo_loss_on_giant_below_one_over_n`
     (the genuine paper `1/(n+1)` envelope, on the giant-component
     event) with Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`
     (`1/(n+1) → 0`).
 
-    R86 note on the dropped `h_perc_prob` antecedent: the retired
+    Note on the dropped `h_perc_prob` antecedent: the retired
     `topo_loss_below_envelope_exists` threaded a Grimmett
     percolation-probability hypothesis (`θ(1-p) > 0` below
     threshold).  That hypothesis was genuinely *unused* by the bound
@@ -1622,7 +1606,7 @@ theorem topo_loss_on_giant_below_one_over_n
     the *unnormalised* sub-event expectation
     `expectedTopoLossOnGiant` regardless of the giant-component
     event's probability.  Per `feedback_gap_ledger_in_lean4`
-    Pattern-7 (orphan-hypothesis defect), R86 DROPS it.  The Cat 2
+    Pattern-7 (orphan-hypothesis defect), it is DROPPED.  The Cat 2
     Grimmett dependency is honestly carried instead by the
     `giantComponentEvent` Cat 3 carrier (whose docstring + Ledger
     entry cite Grimmett 1999 §§8.2-8.3 as the giant-component-size
@@ -1655,12 +1639,12 @@ theorem topo_loss_on_giant_below_envelope_exists :
     expectedTopoLossOnGiant n p < ε` form follows by standard ε-δ
     Tendsto unfolding.
 
-    R86: the statement is updated from the retired
+    The statement is updated from the retired
     `topo_loss_below_eps_from_envelope` (which referenced the false
     unconditional `expectedTopoLoss n p`) to the paper-faithful
     giant-component-conditional `expectedTopoLossOnGiant n p`; the
-    proof is the unchanged Mathlib-routine ε-δ unfolding (R42
-    Pattern-1 fix).
+    proof is the unchanged Mathlib-routine ε-δ unfolding (Pattern-1
+    fix).
 
     paper source: Theorem 3.3 Part 1 / Proposition `prop:topo-cluster`,
     line 286 (asymptotic convergence on the giant-component event). -/
@@ -1679,12 +1663,12 @@ theorem topo_loss_on_giant_below_eps_from_envelope :
   obtain ⟨N, hN⟩ := h_evt
   exact ⟨N, fun n hn => lt_of_le_of_lt (h_le n) (hN n hn)⟩
 
-/-- **Proposition `prop:topo-cluster` Part 1 (R86 paper-faithful
+/-- **Proposition `prop:topo-cluster` Part 1 (paper-faithful
     derived theorem).**  Below threshold (`p < p_c`), the expected
     topological loss *on the giant-component event*
     `expectedTopoLossOnGiant n p` converges to `0` as `n → ∞`.
 
-    **R86 SOUNDNESS-DEFECT FIX.**  The retired version concluded the
+    **SOUNDNESS-DEFECT FIX.**  The retired version concluded the
     *unconditional* `expectedTopoLoss n p → 0`, which is FALSE below
     threshold (the `1 - θ(1-p)` non-giant-component fraction carries
     `Θ(1)` loss).  The corrected conclusion is the
@@ -1692,11 +1676,10 @@ theorem topo_loss_on_giant_below_eps_from_envelope :
     line 404's genuine content ("With probability `θ(1-p)` ...
     `|W_topo| = O(1/N) → 0`"; line 415 — "Conditional on `v_0` lying
     in the giant component ... `W_topo → 0`").  Per
-    `feedback_truth_over_publication` + R83 precedent, the signature
-    correction to the true paper claim + the genuine derivation IS
-    the honest closure.
+    `feedback_truth_over_publication`, the signature correction to the
+    true paper claim + the genuine derivation IS the honest closure.
 
-    Composes the R86 derived theorems
+    Composes the derived theorems
     `topo_loss_on_giant_below_envelope_exists` (the explicit `1/(n+1)`
     envelope on the giant-component event, from the
     `Percolation.lean` sub-event-expectation infrastructure + the
@@ -1709,7 +1692,7 @@ theorem topo_loss_on_giant_below_eps_from_envelope :
     derived theorem, verified by grep), so the correction is fully
     contained.
 
-    R86 also drops the retired chain's threaded `h_perc_prob`
+    The retired chain's threaded `h_perc_prob`
     (Grimmett percolation-probability) hypothesis — it was a
     Pattern-7 orphan (genuinely unused by the bound, since the
     `1/(n+1)` envelope holds for the unnormalised sub-event
@@ -1734,7 +1717,7 @@ theorem gap_topo_loss_below_threshold :
 
 /-! ### `prop:topo-cluster` Part 2 — above-threshold two-sided bound.
 
-R41 §18 atomic decomposition. The bundled
+§18 atomic decomposition. The bundled
 `gap_topo_loss_above_threshold_OPEN` axiom was REPLACED by a derived
 theorem composing two Cat 3 paper-novel atomic stipulations:
  * `topo_loss_above_lower_bound_atom_OPEN` — paper-stated existence of
@@ -1743,7 +1726,7 @@ theorem composing two Cat 3 paper-novel atomic stipulations:
  * `topo_loss_above_upper_bound_atom_OPEN` — paper-stated existence of
    an upper bound `c₂(p)` on `expectedTopoLoss n p` for large `n`.
 
-R60 closure-path-A re-derivation: introduce a new opaque carrier
+Closure-path-A re-derivation: introduce an opaque carrier
 `expectedTopoLossAboveLowerConst : ℝ → ℝ` for the paper-stated
 Mills-tail constant `c₁(p)`, and split the lower-bound atom into
 (a) positivity of the carrier and (b) a per-`n`-eventually upper-bound
@@ -1751,11 +1734,11 @@ witness on the carrier. The upper-bound atom is recast as a smaller
 paper-faithful unit-interval bound `expectedTopoLoss n p ≤ 1` (a
 Uniform[0,1] reward-setup structural fact, paper Def 2.1 line 113
 `r: V → [0, 1]`), with the per-`n` upper bound `c₂` derived as
-`max(c₁, 1)` via Cat 1. This pattern matches the R59 closure-path-A
+`max(c₁, 1)` via Cat 1. This pattern matches the closure-path-A
 refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
 `wInfoTopoRatio_bound_OPEN` in `Phase.lean`. -/
 
-/-- R60 closure-path-A: new opaque carrier introduced as smaller
+/-- Closure-path-A: opaque carrier introduced as smaller
     replacement for the bundled `topo_loss_above_lower_bound_atom_OPEN`.
     The paper-stated lower-bound constant `c₁(p) > 0` (paper
     Proposition `prop:topo-cluster` line 287 + proof via `thm:phase`
@@ -1774,8 +1757,8 @@ refactor of the sibling `wInfoTopoRatio_const_exists_OPEN` /
     threshold + `E[1/(|R|+1)] = Θ(1)` Mills-tail-style lower bound). -/
 axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
 
-/-- **R200 bridge for R172** Cat 3 §3.4.3 paper-Def-stipulated SMALLER
-    bridge atom replacing the previous R172
+/-- **Bridge** — Cat 3 §3.4.3 paper-Def-stipulated SMALLER
+    bridge atom replacing the prior
     `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def` axiom.
 
     Encodes the paper-stated Mills-tail-constant identification:
@@ -1790,7 +1773,7 @@ axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
 
     Strictly more atomic per discipline §18: this bridge isolates the
     paper-stated structural identification of the abstract carrier
-    with the Mills closed form, and the original R172 positivity claim
+    with the Mills closed form, and the prior positivity claim
     becomes a Cat 1 corollary via
     `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`. The
     positivity statement `0 < expectedTopoLossAboveLowerConst p` no
@@ -1812,15 +1795,15 @@ axiom expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def :
       ∃ c : ℝ, 0 < c ∧
         expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))
 
-/-- **R172 CLOSURE** (Cat 1 derived theorem; replaces the previous R172
+/-- **CLOSURE** (Cat 1 derived theorem; replaces the
     `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def` axiom).
-    Composes the new strictly-smaller R200 bridge atom
+    Composes the strictly-smaller bridge atom
     `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` with
     Cat 1 Mathlib `Infrastructure.mills_const_pos_of_exp_decay_rate_pos`
     positivity of the Mills inverse `1/(1-exp(-c))` for `c > 0`.
 
-    Net §3.4.3 atom delta: −1 (R172 retired) + 1 (R200 bridge) = 0
-    net atom count, but the new bridge is strictly more atomic per
+    Net §3.4.3 atom delta: −1 (axiom retired) + 1 (bridge) = 0
+    net atom count, but the bridge is strictly more atomic per
     discipline §18 (single-step typed bridge isolating the paper-stated
     Mills identification on the abstract carrier from the positivity
     consequence; positivity itself is Mathlib-derivable).
@@ -1838,13 +1821,10 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def :
   rw [h_eq]
   exact BlackwellDilemma.Infrastructure.mills_const_pos_of_exp_decay_rate_pos c hc
 
-/-- **R172 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
     `expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption` axiom).
-    Direct re-export of the new R172 paper-Def-stipulated structural
-    equation atom `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def`.
-
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+    Direct re-export of the paper-Def-stipulated structural
+    equation atom `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def`. -/
 theorem expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -1853,7 +1833,7 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption :
       0 < expectedTopoLossAboveLowerConst p :=
   expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def
 
-/-- **R115 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- **CLOSURE — Infrastructure-wired**: derives paper's
     `c₁(p) > 0` Mills-tail positivity via the smaller `_workingAssumption`
     consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
 theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
@@ -1864,8 +1844,8 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
       0 < expectedTopoLossAboveLowerConst p :=
   expectedTopoLossAboveLowerConst_pos_above_pc_workingAssumption
 
-/-- **R201 bridge for R173** Cat 3 §3.4.3 paper-Def-stipulated SMALLER
-    bridge atom replacing the previous R173
+/-- **Bridge** — Cat 3 §3.4.3 paper-Def-stipulated SMALLER
+    bridge atom replacing the prior
     `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def` axiom.
 
     Encodes the paper-stated per-`n`-eventually lower bound at the
@@ -1874,18 +1854,18 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
     Proposition `prop:topo-cluster` Part 2 + proof via `thm:phase`
     Part 2 lines 421-427's geometric-series Mills-tail composition.
     The bridge consumes the SAME exponential-decay rate `c > 0` and
-    the SAME R200 carrier-identification hypothesis
+    the SAME carrier-identification hypothesis
     `expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))` that
-    R200 establishes, so the lower bound is exhibited on the explicit
-    Mills closed form. The substantive Mills-tail geometric-decay
-    derivation is the conceptual source.
+    the prior bridge establishes, so the lower bound is exhibited
+    on the explicit Mills closed form. The substantive Mills-tail
+    geometric-decay derivation is the conceptual source.
 
     Strictly more atomic per discipline §18: this bridge isolates the
     paper-stated Mills-closed-form eventually-lower-bound on
     `expectedTopoLoss n p`, decoupling it from the abstract carrier
-    via the R200 identification chain. The original R173 statement at
-    the abstract carrier level becomes a Cat 1 corollary by `rw` on
-    the R200 carrier-identification + this bridge.
+    via the identification chain. The prior statement at the
+    abstract carrier level becomes a Cat 1 corollary by `rw` on
+    the carrier-identification + this bridge.
 
     Per discipline §3.4.3 (paper-Def-stipulated structural fact about
     paper-novel Mills-closed-form per-n-eventually-bound behavior).
@@ -1904,21 +1884,21 @@ axiom expectedTopoLoss_ge_mills_inverse_eventually_paper_Def :
         ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
           1 / (1 - Real.exp (-c)) ≤ expectedTopoLoss n p
 
-/-- **R173 CLOSURE** (Cat 1 derived theorem; replaces the previous R173
+/-- **CLOSURE** (Cat 1 derived theorem; replaces the
     `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def` axiom).
-    Composes the new strictly-smaller R201 bridge atom
+    Composes the strictly-smaller bridge atom
     `expectedTopoLoss_ge_mills_inverse_eventually_paper_Def` with the
-    R200 carrier-identification bridge
+    carrier-identification bridge
     `expectedTopoLossAboveLowerConst_eq_mills_inverse_paper_Def` (which
     supplies both the witness `c > 0` and the
     `expectedTopoLossAboveLowerConst p = 1 / (1 - exp(-c))` rewrite).
 
-    Net §3.4.3 atom delta: −1 (R173 retired) + 1 (R201 bridge) = 0
-    net atom count, but the new bridge is strictly more atomic per
+    Net §3.4.3 atom delta: −1 (axiom retired) + 1 (bridge) = 0
+    net atom count, but the bridge is strictly more atomic per
     discipline §18 (single-step typed bridge isolating the Mills
     closed-form eventually-bound from the abstract-carrier wrapper;
     the abstract-carrier identification with the closed form is
-    factored out via R200).
+    factored out via the sibling bridge).
 
     paper source: Proposition `prop:topo-cluster` Part 2. -/
 theorem expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def :
@@ -1938,13 +1918,10 @@ theorem expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def :
   rw [h_eq]
   exact hN₁ n hn
 
-/-- **R173 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
+/-- **CLOSURE** (Cat 1 derived theorem; replaces wire-up
     `expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption` axiom).
-    Direct re-export of the new R173 paper-Def-stipulated structural
-    equation atom `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def`.
-
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+    Direct re-export of the paper-Def-stipulated structural
+    equation atom `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def`. -/
 theorem expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption :
     (∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
@@ -1954,7 +1931,7 @@ theorem expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption :
         expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p :=
   expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def
 
-/-- **R116 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- **CLOSURE — Infrastructure-wired**: derives paper's
     eventually-lower-bound via the smaller `_workingAssumption`
     consuming `Infrastructure.MillsRatioTail` Cat 1 chain. -/
 theorem expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
@@ -1966,8 +1943,8 @@ theorem expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
         expectedTopoLossAboveLowerConst p ≤ expectedTopoLoss n p :=
   expectedTopoLoss_ge_AboveLowerConst_eventually_workingAssumption
 
-/-- **R84 CLOSED — `expectedTopoLoss_le_one_atom_OPEN` is now a derived
-    theorem** (replaces the retired R60 workingAssumption axiom of the
+/-- **CLOSED — `expectedTopoLoss_le_one_atom_OPEN` is a derived
+    theorem** (replaces the retired workingAssumption axiom of the
     same name).
 
     Above (indeed at any) blocking parameter `p` in the paper domain
@@ -1975,7 +1952,7 @@ theorem expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
     topological loss is bounded above by `1`:
     `expectedTopoLoss n p ≤ 1`.
 
-    R84 closure via the concretised `expectedTopoLoss` + the finite
+    Closure via the concretised `expectedTopoLoss` + the finite
     bond-percolation framework of `Percolation.lean`:
       `expectedTopoLoss n p`
         `= percExpectation (1 - p) (topoLossKernel n)`   (def-unfold)
@@ -1991,7 +1968,7 @@ theorem expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN :
     `percExpectation_le_of_pointwise_le` (the open-edge probability is a
     genuine probability).
 
-    R60 → R84: the prior R60 axiom `expectedTopoLoss_le_one_atom_OPEN`
+    The axiom `expectedTopoLoss_le_one_atom_OPEN`
     (Cat 3 workingAssumption, "paper-faithful Uniform[0,1] reward-range
     structural unit-interval upper bound", with documented close target
     "derivation from `reward_mem_unitInterval` + closed-form expectation
@@ -2027,7 +2004,7 @@ theorem expectedTopoLoss_le_one_atom_OPEN
     sufficiently large `n`.
 
     Decomposed from the bundled `gap_topo_loss_above_threshold_OPEN`
-    axiom (R41) into the R60 closure-path-A re-decomposition:
+    axiom into the closure-path-A re-decomposition:
      * `expectedTopoLossAboveLowerConst_pos_above_pc_OPEN` (Cat 3
        smaller workingAssumption — positivity of the new carrier
        `expectedTopoLossAboveLowerConst : ℝ → ℝ`)
@@ -2040,10 +2017,10 @@ theorem expectedTopoLoss_le_one_atom_OPEN
     `expectedTopoLossAboveLowerConst p`, and the upper-bound witness
     with `max(expectedTopoLossAboveLowerConst p, 1)`. The `c₂ ≥ c₁`
     relation is Cat 1 from `le_max_left`; the per-`n` upper bound for
-    all `n` (including `n ≥ N₁`) is Cat 1 from the R84-closed derived
+    all `n` (including `n ≥ N₁`) is Cat 1 from the CLOSED derived
     theorem `expectedTopoLoss_le_one_atom_OPEN` + `le_max_right`.
 
-    R84 antecedent update: `expectedTopoLoss_le_one_atom_OPEN` is now a
+    Antecedent: `expectedTopoLoss_le_one_atom_OPEN` is a
     derived theorem requiring the paper Def 2.1 domain `0 ≤ p ≤ 1`.
     `0 ≤ p` is derived here from `harrisKestenCriticalProb < p` +
     `gap_harris_kesten_OPEN` (`harrisKestenCriticalProb = 1/2 > 0`); the

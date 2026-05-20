@@ -48,7 +48,7 @@ combinatorics, statistical mechanics, and bond-percolation theory.
 
 ## Mathlib upstream target
 
-This file is the **Phase 1** deliverable of the Mathlib contribution
+This file is the foundational deliverable of the Mathlib contribution
 plan documented in `lean4/MATHLIB_CONTRIBUTION_ROADMAP.md` for the
 BlackwellDilemma paper's lattice infrastructure (see paper Theorem
 `thm:phase` line 411 ff. and Theorem `thm:cognitive-threshold` Part 6
@@ -60,7 +60,7 @@ carriers, no `axiom` declarations).
 
 The harder per-vertex `degree = 2 * d` formula, `LocallyFinite`
 instance, `Preconnected` proof, and `edgeFinset` on bounded boxes are
-deferred to a follow-up Phase 1b PR (they require either Mathlib's
+deferred to a follow-up PR (they require either Mathlib's
 neighbour-Finset infrastructure or a custom enumeration of unit-vector
 translates; both are routine but bulky).
 
@@ -208,6 +208,6 @@ to its four neighbours `(x ± e_0, x ± e_1)` via the unit-vector
 adjacency lemmas above (specialised to `d = 2`). A full per-coordinate
 characterisation `Adj (x, y) (x', y') ↔ ((x' = x+1 ∧ y' = y) ∨ ...)`
 would require either `Matrix.cons` notation manipulation or a
-case-split on `Fin 2`; deferred to Phase 1b PR. -/
+case-split on `Fin 2`; deferred to a follow-up PR. -/
 
 end SimpleGraph

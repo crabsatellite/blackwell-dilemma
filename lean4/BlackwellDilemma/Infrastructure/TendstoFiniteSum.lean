@@ -10,7 +10,7 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Defs
 
 This file provides **Tendsto preservation under Finset sums**, the
 operational tool for paper's `agentRewardKernel_greedy_pointwise_tendsto_atTop`
-axiom (Phase 12 / R103) where pointwise Tendsto of per-realisation
+axiom, where pointwise Tendsto of per-realisation
 kernel lifts to Tendsto of the expectation (Finset-weighted sum).
 
 ## Main results

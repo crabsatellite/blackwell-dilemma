@@ -25,7 +25,7 @@ form, modulo no integration. The substantive integration step
 (FOSD on CDFs G₁ ≤_FOSD G₂ + supermodular integrand `f β κ` ⇒
 `∫ f β κ d(G₂ κ)` β-increment dominates `∫ f β κ d(G₁ κ)` β-increment)
 requires Mathlib's `MeasureTheory.Integral` infrastructure and is
-deferred to a Phase 9b extension.
+deferred to a follow-up integration-step extension.
 
 ## Bridge to paper carrier `aggregateWelfareWith`
 
@@ -35,10 +35,10 @@ The bridge from this Cat 1 abstract result to the paper-stipulated
 `fosd_induces_derivative_domination_paper_witness` requires:
 
 1. **β-increment-dominance preservation under integration** — the
-   substantive Phase 9b integration step (Mathlib `MeasureTheory.Integral`).
+   substantive integration step (Mathlib `MeasureTheory.Integral`).
 2. **Supermodularity of `agentWelfare β κ`** — paper carrier
    property (workingAssumption per paper Proposition `prop:supermodular`,
-   to be retired via Phase 5b calculus-Topkis when carrier is concretized).
+   to be retired via a calculus-Topkis criterion when carrier is concretized).
 
 With (1) and (2), the paper axiom becomes a direct Cat 1 corollary of
 `IsSupermodular.beta_increment_dominance` composed with the integration
@@ -102,7 +102,7 @@ The paper's claim about `aggregateWelfareWith G β` is the
 under FOSD `G₁ ≤_FOSD G₂` and `β₁ ≤ β₂`. This is the integral
 version of `IsSupermodular.beta_increment_dominance` lifted from
 pointwise `agentWelfare β κ` to integrated `aggregateWelfareWith G β`.
-The lift requires Phase 9b's measure-theoretic
+The lift requires a measure-theoretic
 β-increment-dominance-preservation-under-integration lemma. -/
 
 /-- **Operational bridge atom** for the paper's
@@ -127,7 +127,7 @@ theorem derivative_domination_of_supermodular
 ONLY Mathlib kernel axioms (`propext, Classical.choice, Quot.sound`)
 — no paper-novel `Types.lean` carriers, no broken-link `_OPEN` axioms,
 no `sorry`. This is the abstract Cat 1 chain from supermodularity to
-β-increment-dominance, modulo the integration step (Phase 9b). -/
+β-increment-dominance, modulo the integration step. -/
 
 #print axioms derivative_domination_of_supermodular
 

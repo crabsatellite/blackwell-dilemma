@@ -27,9 +27,9 @@ last sentence).
   is `f₂` strictly better than at `β_high`).
 
 The clean operational content: derivative-domination → argmax-
-monotonicity. Combined with `IsSupermodular.beta_increment_dominance`
-(Phase 9), this completes the abstract Topkis monotone-comparative-
-statics chain end-to-end.
+monotonicity. Combined with `IsSupermodular.beta_increment_dominance`,
+this completes the abstract Topkis monotone-comparative-statics chain
+end-to-end.
 
 ## Bridge to paper carrier `aggregateOptimalBeta`
 
@@ -40,9 +40,9 @@ chain `IsSupermodular → derivative-domination → argmax-monotone` gives
 this Cat 1 abstract result to the paper-stipulated
 `argmax_monotone_under_derivative_domination_paper_witness` requires:
 
-1. **Existence of argmax** — Phase 4 EVT
-   (`exists_maxOn_of_continuous_eventually_decreasing`) provides the
-   existence under continuity + bounded + eventually-decreasing.
+1. **Existence of argmax** — `exists_maxOn_of_continuous_eventually_decreasing`
+   (from `EVTBoundedDecreasing.lean`) provides the existence under
+   continuity + bounded + eventually-decreasing.
 2. **Selection convention** — paper's `aggregateOptimalBeta` is
    defined as a specific argmax (typically the smallest); the
    `argmax_le_of_difference_dominance` lemma below works under that

@@ -13,8 +13,7 @@ import Mathlib.Tactic.Ring
 
 This file provides **convex-combination atoms** on Finset-weighted
 sums, foundational for paper's `principalSampleAbove*Weight` /
-`principalSampleBelow*Weight` discrete-integration framework
-(Phase 13 abstract atoms).
+`principalSampleBelow*Weight` discrete-integration framework.
 
 ## Main results
 

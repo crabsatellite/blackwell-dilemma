@@ -11,7 +11,7 @@ import Mathlib.Tactic.Ring
 
 This file provides the **abstract Finset-weighted FOSD-style dominance**,
 which is the discrete-version of the integration step needed for paper's
-`fosd_induces_derivative_domination_paper_witness` axiom (Phase 9b).
+`fosd_induces_derivative_domination_paper_witness` axiom.
 
 The full measure-theoretic version (`∫ f dG₁ ≤ ∫ f dG₂` under FOSD `G₁ ≤_FOSD G₂`
 and monotone `f`) requires Mathlib's `MeasureTheory.Integral` infrastructure.

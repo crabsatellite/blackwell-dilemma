@@ -41,9 +41,10 @@ The substantive Topkis 1978 result is: a continuously-differentiable
 `f : ℝ → ℝ → ℝ` with non-negative mixed cross-partial `∂²f/∂x∂y ≥ 0`
 is supermodular. This is the Cat 1 calculus result that requires
 `Mathlib.Analysis.Calculus` infrastructure (`HasFDerivAt`,
-mean-value-on-product-domains, etc.) and is left as a separate Phase 5b
-extension. The current file provides the foundational abstract
-supermodularity machinery on which the calculus theorem will be built.
+mean-value-on-product-domains, etc.) and is left as a separate
+calculus-Topkis extension. The current file provides the foundational
+abstract supermodularity machinery on which the calculus theorem will
+be built.
 
 ## Cat 1 status
 
@@ -127,8 +128,8 @@ above, this becomes the cleaner bridge axiom
   `IsSupermodular kappaAgentWelfareSNR`
 
 which is a paper-stipulated property of the opaque carrier
-(workingAssumption to convert post-Phase-5 calculus closure of
-`kappaAgentWelfareSNR` once its concrete realisation is supplied). -/
+(workingAssumption to convert via the calculus-Topkis criterion once
+the concrete realisation of `kappaAgentWelfareSNR` is supplied). -/
 
 /-- **Tautological link**: any function satisfying the four-corner
     positivity is supermodular (which IS the definition). Provides
@@ -145,8 +146,8 @@ theorem isSupermodular_of_corner_positivity {f : ℝ → ℝ → ℝ}
 axioms (`propext, Classical.choice, Quot.sound`) — no paper-novel
 `Types.lean` carriers, no broken-link `_OPEN` axioms, no `sorry`.
 This file establishes the foundational abstract supermodularity machinery
-that Mathlib lacks; future Phase 5b will extend this with the
-calculus-based Topkis criterion (`∂²f/∂x∂y ≥ 0 ⇒ IsSupermodular f`). -/
+that Mathlib lacks; a follow-up calculus-Topkis criterion module will
+extend this with `∂²f/∂x∂y ≥ 0 ⇒ IsSupermodular f`. -/
 
 #print axioms IsSupermodular.add
 

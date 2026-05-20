@@ -467,7 +467,7 @@ noncomputable def p_1 : ℝ := (4 : ℝ) / 9
 /-- The second regime boundary `p_2 = 2/3` (paper line 809). -/
 noncomputable def p_2 : ℝ := (2 : ℝ) / 3
 
-/-! ### R80 substantive L-carrier analysis.
+/-! ### Substantive L-carrier analysis.
 
 `L` is the concrete welfare-loss functional
 `L β p = P_trap β · 0.4 + (1 − P_trap β) · 0.9 · (1 − (1 − p)·Φ_B β)`.
@@ -478,8 +478,7 @@ the strict bounds `P_trap β < 1` / `Φ_B β ∈ (1/2, 1)` for finite
 `β > 0`, the limits `P_trap, Φ_B → 1` as `β → ∞` and `→ 1/2` as
 `β → 0⁺`, the algebraic rearrangement `eq:five-state-rearr`, and the
 endpoint limits `L → 0.4` (β → ∞) and `L → 0.425 + 0.225 p` (β → 0⁺).
-These convert the previously-axiomatic Regime (i) sub-claims into
-derived theorems.
+These yield derived theorems for Regime (i) sub-claims.
 
 Mathlib lemmas used: `Phi_lt_one`, `Phi_gt_half_of_pos`,
 `Phi_tendsto_one_atTop`, `Phi_continuousAt`, `Phi_zero`,
@@ -671,7 +670,7 @@ private theorem L_tendsto_atZero (p : ℝ) :
   rw [h_eq] at h_comb
   exact h_comb
 
-/-- **R80 substantive closure of `L_below_limit_at_some_beta_OPEN`.**
+/-- **Substantive closure of `L_below_limit_at_some_beta_OPEN`.**
     For `p ∈ [0, p_1)`, there exists a finite `β* > 0` with
     `L(β*, p) < 0.4`. Proof (paper line 825): in the rearrangement
     `L − 0.4 = (1 − P_trap β)·(0.5 − 0.9(1 − p)·Φ_B β)`, the factor
@@ -727,17 +726,17 @@ private theorem L_below_limit_at_some_beta_proof
     mul_neg_of_pos_of_neg h_first_pos h_second_neg
   linarith [h_rearr, h_prod_neg]
 
-/-! ### R81 substantive closure of `interior_minimiser_existence`.
+/-! ### Substantive closure of `interior_minimiser_existence`.
 
 The interior-minimiser existence claim follows from the extreme value
-theorem applied to the *concrete* `L` carrier, using the R80 endpoint
+theorem applied to the *concrete* `L` carrier, using the endpoint
 limits. The chain:
   * `L(·, 0)` is continuous on `(0, ∞)` (composition of the continuous
     `signalVariance`, `Real.sqrt`, division by a positive function,
     and `Phi`);
-  * R80's `L_below_limit_at_some_beta_proof` supplies an interior
+  * `L_below_limit_at_some_beta_proof` supplies an interior
     point `β* > 0` with `L(β*, 0) < 0.4`;
-  * R80's `L_tendsto_atZero` / `L_tendsto_limit_atTop` show `L` exceeds
+  * `L_tendsto_atZero` / `L_tendsto_limit_atTop` show `L` exceeds
     `L(β*, 0)` near both ends of `(0, ∞)` (it tends to `0.425 > L(β*,0)`
     at `0⁺` and to `0.4 > L(β*,0)` at `∞`), and the closed-form value
     `L(0, 0) = 0.425 > L(β*, 0)` handles the `β = 0` endpoint;
@@ -844,13 +843,14 @@ private theorem L_zero_zero : L 0 0 = (425 / 1000 : ℝ) := by
   rw [h_Pt, h_Pb]
   norm_num
 
-/-! ### R82 substantive `L'` derivative infrastructure.
+/-! ### Substantive `L'` derivative infrastructure.
 
 The paper's Regime (i) unimodality argument (line 825, "uniqueness
 follows from the unimodal structure of Proposition
 `prop:interior-optimum`") rests on a *derivative* analysis of the
-concrete welfare-loss `L(β, p)` in `β`. R80/R81 supplied the endpoint
-limits, continuity, and extreme-value-theorem existence; R82 builds
+concrete welfare-loss `L(β, p)` in `β`. The L-carrier analysis above
+supplied the endpoint limits, continuity, and extreme-value-theorem
+existence; this section builds
 the genuine `HasDerivAt` chain for `L(·, p)`, composing Mathlib's
 `HasDerivAt.const_rpow` (for `2^{2β}`), `HasDerivAt.inv` (for
 `σ²(β) = 1/(2^{2β}−1)`), `HasDerivAt.sqrt` (for `√(2σ²)`),
@@ -1184,8 +1184,8 @@ private theorem L_deriv_grouped (p : ℝ) (β : ℝ) (Pt' Pb' : ℝ) :
 
     This is the genuine *left-branch* portion of Regime (i)
     unimodality (paper line 825, "direct differentiation ... `L`
-    decreases then increases"), Lean-checked via the R82 `L'`
-    infrastructure on the concrete `L` carrier. The *right*-branch
+    decreases then increases"), Lean-checked via the `L'`
+    derivative infrastructure on the concrete `L` carrier. The *right*-branch
     sign (where the first summand is `> 0` and must strictly dominate
     the second) needs the transcendental two-term comparison
     `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`,
@@ -1216,12 +1216,12 @@ private theorem L_deriv_neg_on_left_branch (p : ℝ) (hp_le_one : p ≤ 1)
       mul_pos (mul_pos (mul_pos h_oneSubP_pos (by norm_num)) h_q_pos) hPb_pos
     linarith
 
-/-- **R81 substantive closure of `interior_minimiser_existence`.**
+/-- **Substantive closure of `interior_minimiser_existence`.**
     Existence of an interior global minimiser `β* > 0` of `L(·, 0)`:
     `∃ β* > 0, ∀ β ≥ 0, L(β*, 0) ≤ L(β, 0)`. Proof = extreme value
     theorem on the concrete `L` carrier.
 
-    Steps: (1) take R80's below-limit witness `β₀ > 0` with
+    Steps: (1) take the below-limit witness `β₀ > 0` with
     `L(β₀,0) < 0.4`; (2) `L_tendsto_atZero` (`L → 0.425 > L(β₀,0)` as
     `β → 0⁺`) gives `ε ∈ (0, β₀]` with `L β 0 > L β₀ 0` for
     `β ∈ (0, ε]`, and `L_zero_zero` covers `β = 0`; (3)
@@ -1239,7 +1239,7 @@ private theorem L_deriv_neg_on_left_branch (p : ℝ) (hp_le_one : p ≤ 1)
 private theorem interior_minimiser_existence_proof :
     ∃ β_star : ℝ, 0 < β_star ∧
       ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 := by
-  -- (1) R80 below-limit witness `β₀ > 0`, `L β₀ 0 < 0.4`.
+  -- (1) Below-limit witness `β₀ > 0`, `L β₀ 0 < 0.4`.
   obtain ⟨β₀, hβ₀_pos, hβ₀_lt⟩ :=
     L_below_limit_at_some_beta_proof 0 le_rfl
       (by unfold p_1; norm_num)
@@ -1307,7 +1307,7 @@ private theorem interior_minimiser_existence_proof :
       have := h_above_M β (le_of_lt hβ_gt_M)
       linarith [hβ_min_le_β₀]
 
-/-- Cat 3 paper-novel claim, **R81 SUBSTANTIVE CLOSURE**
+/-- Cat 3 paper-novel claim, **SUBSTANTIVE CLOSURE**
     (workingAssumption → derivedTheorem): paper Proposition
     `prop:interior-optimum` (line 774) gives the existence of an
     interior minimiser of the Regime (i) `p = 0` loss function
@@ -1315,14 +1315,14 @@ private theorem interior_minimiser_existence_proof :
     there exists a positive `β_star` such that `L(β_star, 0) ≤
     L(β, 0)` for all `β ≥ 0`.
 
-    Previously an opaque Cat 3 axiom (the explicit `β* ≈ 1.5 bits`
-    numeric witness was deferred to a transcendental optimisation).
-    R81 closes it by genuine real analysis: the *existence* of an
+    The explicit `β* ≈ 1.5 bits` numeric witness is a separate
+    transcendental optimisation.
+    Closure by genuine real analysis: the *existence* of an
     interior minimiser does not require the explicit numeric witness
     — it follows from the extreme value theorem
-    (`interior_minimiser_existence_proof`), composing R80's L-analysis
+    (`interior_minimiser_existence_proof`), composing the L-analysis
     machinery (`L_below_limit_at_some_beta_proof`, `L_tendsto_atZero`,
-    `L_tendsto_limit_atTop`) with the new continuity lemma
+    `L_tendsto_limit_atTop`) with the continuity lemma
     `L_continuousOn_Ioi` and the closed-form boundary value
     `L_zero_zero` (`L(0,0) = 0.425`). No `Classical.choose`, no opaque
     carrier — fully derived. The numeric value `β* ≈ 1.5 bits` remains
@@ -1335,14 +1335,14 @@ theorem interior_minimiser_existence_OPEN :
       ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 :=
   interior_minimiser_existence_proof
 
-/-- **R81 substantive closure of `L_minimum_exists_in_regime_i`.**
+/-- **Substantive closure of `L_minimum_exists_in_regime_i`.**
     For every `p ∈ [0, p_1)`, the loss `L(·, p)` has an interior
     minimiser over the positive reals: `∃ β_min > 0, ∀ β > 0,
     L(β_min, p) ≤ L(β, p)`. Same extreme-value-theorem argument as
     `interior_minimiser_existence_proof`, generalised to `p` and
     restricted to `β > 0` (so no `β = 0` endpoint to handle).
 
-    Steps: (1) R80's `L_below_limit_at_some_beta_proof p` gives
+    Steps: (1) `L_below_limit_at_some_beta_proof p` gives
     `β₀ > 0` with `L(β₀,p) < 0.4`; (2) `L_tendsto_atZero p`
     (`L → 0.425 + 0.225p ≥ 0.425 > 0.4 > L(β₀,p)` as `β → 0⁺`) gives
     `ε ∈ (0, β₀]` with `L β p > L β₀ p` for `β ∈ (0, ε]`; (3)
@@ -1360,7 +1360,7 @@ private theorem L_minimum_exists_in_regime_i_proof
     (p : ℝ) (hp_nonneg : 0 ≤ p) (hp_lt_p1 : p < p_1) :
     ∃ β_min : ℝ, 0 < β_min ∧
       ∀ β : ℝ, 0 < β → L β_min p ≤ L β p := by
-  -- (1) R80 below-limit witness `β₀ > 0`, `L β₀ p < 0.4`.
+  -- (1) Below-limit witness `β₀ > 0`, `L β₀ p < 0.4`.
   obtain ⟨β₀, hβ₀_pos, hβ₀_lt⟩ :=
     L_below_limit_at_some_beta_proof p hp_nonneg hp_lt_p1
   -- (2) Near `0⁺`: `L → 0.425 + 0.225p ≥ 0.425 > 0.4 > L β₀ p`.
@@ -1421,7 +1421,7 @@ private theorem L_minimum_exists_in_regime_i_proof
 /-- **Existence of interior optimum** at `β* ≈ 1.5 bits` (derived theorem).
 
     Derived theorem composing `interior_minimiser_existence_OPEN`,
-    itself **R81-closed** as a derived theorem (extreme value theorem
+    itself closed as a derived theorem (extreme value theorem
     on the concrete `L` carrier — see
     `interior_minimiser_existence_proof`). No longer rests on an
     opaque axiom.
@@ -1461,9 +1461,8 @@ noncomputable def W_topo_p (p : ℝ) : ℝ := (4/10 : ℝ) * p
     For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` with
     `L(β*(p), p) < L(∞, p) = 0.4`.
 
-    **R80 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
-    Previously an opaque Cat 3 axiom; R80 proves it by genuine
-    real-analysis on the concrete `L` carrier. The proof
+    **SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    Proved by genuine real-analysis on the concrete `L` carrier. The proof
     (`L_below_limit_at_some_beta_proof`) uses the rearrangement
     identity `eq:five-state-rearr` (`L_rearrangement`), the strict
     bound `P_trap β < 1` for finite `β` (`P_trap_lt_one`, from
@@ -1487,7 +1486,7 @@ theorem L_below_limit_at_some_beta_OPEN :
     For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` with
     `L(β*(p), p) < L(∞, p) = 0.4`.
 
-    Derived theorem composing the R80-closed
+    Derived theorem composing
     `L_below_limit_at_some_beta_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern.
 
@@ -1499,7 +1498,7 @@ theorem gap_three_regime_reversal_existence :
         L β_star_p p < (4/10 : ℝ) :=
   L_below_limit_at_some_beta_OPEN
 
-/-- **R202 bridge (a)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+/-- **Bridge (a)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
     atom: existence of an interior minimiser of `L β p` over `β > 0` for
     `p ∈ [0, p_1)`. Paper Proposition `prop:three-regime-five-state`
     Regime (i) line 814 + proof line 825 STATE the unimodality of `L β p`
@@ -1507,11 +1506,11 @@ theorem gap_three_regime_reversal_existence :
     component of the paper's unique-minimum claim.
 
     Per discipline §18 atomic-decomposition pattern: smaller atoms +
-    Cat 1 lifting are preferable to larger atoms. R202 splits the R174
-    larger axiom (existence + uniqueness) into two strictly smaller
+    Cat 1 lifting are preferable to larger atoms. The larger axiom
+    (existence + uniqueness) is split into two strictly smaller
     paper-Def atoms: (a) interior-minimiser EXISTENCE (this atom), and
     (b) strict uniqueness from paper-stipulated strict structure
-    (`L_strict_unique_minimizer_paper_Def` below). The R174 atom then
+    (`L_strict_unique_minimizer_paper_Def` below). The combined statement
     becomes a Cat 1 derived theorem composing the two.
 
     Per discipline §3.4.3 (paper-Def-stipulated structural fact about
@@ -1521,7 +1520,7 @@ axiom L_interior_minimizer_exists_paper_Def :
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β_star_p p ≤ L β' p
 
-/-- **R202 bridge (b)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
+/-- **Bridge (b)** Cat 3 §3.4.3 paper-Def-stipulated SMALLER bridge
     atom: strict uniqueness of the minimiser of `L β p` over `β > 0` for
     `p ∈ [0, p_1)`. Paper line 825's transcendental two-term sign
     comparison `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·
@@ -1543,7 +1542,8 @@ axiom L_strict_unique_minimizer_paper_Def :
         L β' p ≤ L β p →
         β' = β
 
-/-- **R174** Cat 3 §3.4.3 paper-Def-stipulated structural equation atom:
+/-- **Unimodality statement** Cat 1 derived theorem composing the two
+    paper-Def bridge atoms above:
     paper Proposition `prop:three-regime-five-state` Regime (i) line 814
     + proof line 825 STATE that the explicit `L β p` formula is unimodal
     on `(0, ∞)` for `p ∈ [0, p_1)` (interior unique minimum exists).
@@ -1552,23 +1552,18 @@ axiom L_strict_unique_minimizer_paper_Def :
     `L` carrier in Regime (i). Paper line 825 verifies this via the
     transcendental two-term comparison
     `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`
-    only NUMERICALLY (R82 left-branch `L_deriv_neg_on_left_branch` proved
+    only NUMERICALLY (the left-branch `L_deriv_neg_on_left_branch` is proved
     symbolically; right-branch transcendental comparison is paper-numerical).
     Per `feedback_truth_over_publication`: the right-branch sign claim is
-    paper-stated FACT on the paper-novel `L` carrier; the encoded atom
-    captures the paper-stipulated uniqueness conclusion.
+    paper-stated FACT on the paper-novel `L` carrier; the encoded atoms
+    capture the paper-stipulated uniqueness conclusion.
 
-    **R202 RETIRED as axiom**: now a Cat 1 derived theorem composing
-    the two strictly-smaller paper-Def bridge atoms
+    Composed as a Cat 1 derived theorem from
     `L_interior_minimizer_exists_paper_Def` (existence) and
     `L_strict_unique_minimizer_paper_Def` (strict uniqueness). Per
     discipline §18 atomic-decomposition pattern: smaller atoms + Cat 1
-    lifting are preferable to larger atoms.
-
-    Net §3.4.3 atom delta: −1 (R174 axiom retired) + 2 (R202 bridges) =
-    +1 raw atom, but the new bridges are strictly more atomic per
-    discipline §18 (existence and uniqueness are factored into separate
-    paper-Def atoms). -/
+    lifting are preferable to larger atoms. Existence and uniqueness
+    are factored into separate paper-Def atoms. -/
 theorem L_unimodal_in_regime_i_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
@@ -1581,20 +1576,16 @@ theorem L_unimodal_in_regime_i_paper_Def :
   exact L_strict_unique_minimizer_paper_Def p hp hp_lt
     β_star_p β' h_pos hβ'_pos h_min h_le
 
-/-- **R174 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
-    `L_unimodal_in_regime_i_workingAssumption` axiom). Direct re-export
-    of the new R174 paper-Def-stipulated structural equation atom
-    `L_unimodal_in_regime_i_paper_Def`.
-
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+/-- **Unimodality** (Cat 1 derived theorem). Direct re-export
+    of the paper-Def-stipulated structural equation atom
+    `L_unimodal_in_regime_i_paper_Def`. -/
 theorem L_unimodal_in_regime_i_workingAssumption :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
   L_unimodal_in_regime_i_paper_Def
 
-/-- **R120 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- **Infrastructure-wired**: derives paper's
     L-unimodality via the smaller `_workingAssumption` consuming
     `Infrastructure.ArgmaxExistence` Cat 1 chain. -/
 theorem L_unimodal_in_regime_i_OPEN :
@@ -1619,9 +1610,9 @@ theorem gap_three_regime_reversal_uniqueness :
     AND there exist `β_a < β_b` (both `> 0`) such that
     `L(β_a, p) < L(β_b, p)`.
 
-    **R80 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
-    Previously an opaque Cat 3 axiom; R80 proves it by genuine
-    real-analysis on the concrete `L` carrier, mirroring the paper's
+    **SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    Proved by genuine real-analysis on the concrete `L` carrier,
+    mirroring the paper's
     "the loss decreases below 0.4 and then rises back toward the limit
     L(∞, p) = 0.4" argument (line 825). Let `β*` be the below-limit
     witness with `L β* p < 0.4` (`L_below_limit_at_some_beta_proof`).
@@ -1675,7 +1666,7 @@ theorem L_nonmonotone_witnesses_OPEN :
     exact ⟨β_star, β_b, hβ_star_pos, hβ_b_gt, hβ_b_L⟩
 
 /-- **Regime (i) sub-claim — non-monotonicity of `L(·, p)` in `β`**
-    (derived theorem composing the R80-closed
+    (derived theorem composing
     `L_nonmonotone_witnesses_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
     paper source: Regime (i), line 814 + proof at lines 821-825. -/
@@ -1711,8 +1702,8 @@ theorem gap_three_regime_reversal_nonmonotone :
     and strict monotonicity of the overshoot in p follow from envelope
     differentiation of (eq:five-state-rearr) at β = β*(p)").
 
-    **R80 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
-    Previously an opaque Cat 3 axiom; R80 proves the existential
+    **SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    Proves the existential
     encoding by genuine real-analysis on the concrete `L` carrier.
     For `p₁`, the below-limit witness `β*₁` satisfies `L β*₁ p₁ < 0.4`
     (`L_below_limit_at_some_beta_proof`, applicable since `p₁ < p₂ <
@@ -1741,7 +1732,7 @@ theorem envelope_derivative_sign_in_p_OPEN :
   exact ⟨β_star₁, β_star₂, hβ₁_pos, hβ₂_pos, hβ₂_L⟩
 
 /-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`**
-    (derived theorem composing the R80-closed
+    (derived theorem composing
     `envelope_derivative_sign_in_p_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
     paper source: Regime (i), line 814 + proof at line 825. -/
@@ -1751,7 +1742,7 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
         L β_star₁ p₁ < L β_star₂ p₂ :=
   envelope_derivative_sign_in_p_OPEN
 
-/-- R62 closure-path-A smaller paper-novel claim, **R81 SUBSTANTIVE
+/-- Closure-path-A smaller paper-novel claim, **SUBSTANTIVE
     CLOSURE** (workingAssumption → derivedTheorem): on Regime (i)'s
     domain `p ∈ [0, p_1)`, the loss function `L(·, p)` has an interior
     minimiser over the positive reals — i.e., there exists
@@ -1762,11 +1753,11 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
     some β, and the unimodal structure of `prop:interior-optimum`
     (line 774) yields a global minimum on `(0, ∞)`.
 
-    Previously an opaque Cat 3 axiom (the explicit `β*(p)` witness was
-    deferred to a transcendental optimisation). R81 closes it by
+    The explicit `β*(p)` witness is deferred to a transcendental
+    optimisation. Closure by
     genuine real analysis: the *existence* of the interior minimiser
     follows from the extreme value theorem
-    (`L_minimum_exists_in_regime_i_proof`), composing R80's L-analysis
+    (`L_minimum_exists_in_regime_i_proof`), composing the L-analysis
     machinery (`L_below_limit_at_some_beta_proof`, `L_tendsto_atZero`,
     `L_tendsto_limit_atTop`) with the new continuity lemma
     `L_continuousOn_Ioi`. No `Classical.choose` for the *existence*,
@@ -1775,12 +1766,12 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
     minimiser from this now-derived existence theorem — that is the
     Pattern 5 implicit-function selection, unaffected.)
 
-    R74 elevation: this existence claim serves a STRONGER closure
+    This existence claim serves a STRONGER closure
     pattern (Pattern 5: existence-via-`Classical.choose`). The opaque
     carrier `betaStarOfP` is replaced by a `noncomputable def` that
     invokes `Classical.choose` on this claim (per-`p`, inside the
     `0 ≤ p ∧ p < p_1` domain guard); the carrier-identification atom
-    `betaStarOfP_eq_minimiser_witness_OPEN` is consequently retired
+    `betaStarOfP_eq_minimiser_witness_OPEN` is consequently absent
     since `Classical.choose_spec` directly yields the universal-
     inequality form needed by `betaStarOfP_def`.
 
@@ -1796,25 +1787,21 @@ theorem L_minimum_exists_in_regime_i_OPEN :
 
 /-- **Carrier `β*(p)` for Regime (i)'s implicit-function selection.**
 
-    R74 substantive-math closure (concrete-def closure, Pattern 5:
-    existence-via-`Classical.choose`). Previously declared
-    `axiom betaStarOfP : ℝ → ℝ` (opaque carrier) plus the structural-
-    equation atom `betaStarOfP_eq_minimiser_witness_OPEN` (Cat 3
-    workingAssumption pinning the carrier to the minimiser-witness).
-    R74 makes the carrier CONCRETE per paper line 814's own
-    paper-implied existence claim of the interior minimiser: on the
-    Regime (i) domain `p ∈ [0, p_1)`, define `betaStarOfP p` as
-    `Classical.choose` of the minimiser-witness from the existence
-    atom `L_minimum_exists_in_regime_i_OPEN`; outside the domain
-    (paper-irrelevant), `betaStarOfP p := 0` as a junk value.
+    Substantive-math closure (concrete-def closure, Pattern 5:
+    existence-via-`Classical.choose`). The carrier is CONCRETE per
+    paper line 814's own paper-implied existence claim of the interior
+    minimiser: on the Regime (i) domain `p ∈ [0, p_1)`, define
+    `betaStarOfP p` as `Classical.choose` of the minimiser-witness from
+    the existence atom `L_minimum_exists_in_regime_i_OPEN`; outside the
+    domain (paper-irrelevant), `betaStarOfP p := 0` as a junk value.
 
     The Lean `def` IS the paper's implicit-function selection
     (the `Classical.choose` literally picks the paper-stated
     minimiser of `L(·, p)`), so the carrier encodes paper content
-    faithfully. This is NOT the R7-flagged closure-count trick:
+    faithfully. This is NOT a closure-count trick:
     the def body invokes the substantive existence atom
     `L_minimum_exists_in_regime_i_OPEN` as input, with no content
-    erasure; the previously-axiomatic carrier-identification step
+    erasure; any candidate carrier-identification step
     (`betaStarOfP_eq_minimiser_witness_OPEN`) is internalised by
     `Classical.choose_spec`.
 
@@ -1831,28 +1818,23 @@ noncomputable def betaStarOfP (p : ℝ) : ℝ :=
     Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2)
   else 0
 
-/-- **R74 derived theorem** (replaces R62 derived theorem of same name;
-    now closes via Pattern 5 `Classical.choose_spec` instead of R62's
-    structural-equation composition).
+/-- **Derived theorem**: closes via Pattern 5 `Classical.choose_spec`.
     Cat 3 argmin characterisation of `betaStarOfP p` on Regime (i)'s
     domain `p ∈ [0, p_1)`: for every `β > 0`,
     `L (betaStarOfP p) p ≤ L β p`.
 
-    R74 Pattern 5 closure: composes the `betaStarOfP` `def` (which
+    Pattern 5 closure: composes the `betaStarOfP` `def` (which
     invokes `Classical.choose` on `L_minimum_exists_in_regime_i_OPEN`
     inside the domain guard) with `Classical.choose_spec` (which
     yields the universal-inequality minimiser property of the chosen
-    witness directly). The previously-required carrier-identification
+    witness directly). The carrier-identification
     structural-equation atom `betaStarOfP_eq_minimiser_witness_OPEN`
-    is no longer needed: `Classical.choose_spec` gives the
+    is not needed: `Classical.choose_spec` gives the
     minimiser-property for the canonical chosen β_min, which IS
     `betaStarOfP p` by the `def`'s `if_pos`-branch unfolding.
 
-    Net workingAssumption delta: −1 vs R62 baseline (1 wA atom
-    retired: `betaStarOfP_eq_minimiser_witness_OPEN`; existence atom
-    `L_minimum_exists_in_regime_i_OPEN` retained; carrier
-    `betaStarOfP` retained as paper-Def-stipulated structural
-    primitive but now `noncomputable def` rather than opaque axiom).
+    The carrier `betaStarOfP` is paper-Def-stipulated structural
+    primitive realised as a `noncomputable def` rather than opaque axiom.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("unique interior minimum `β*(p)`"). -/
@@ -1908,7 +1890,7 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
 noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
   (4/10 : ℝ) - L (betaStarOfP p) p
 
-/-- **R196 bridge atom** (Cat 3 §3.4.3 paper-Def-stipulated structural
+/-- **Bridge atom** (Cat 3 §3.4.3 paper-Def-stipulated structural
     equation atom): paper Proposition `prop:three-regime-five-state`
     Regime (i) proof line 825 STATES that the envelope value
     `L(β*(p), p) = 0.4 - overshootRegimeI p` is continuous in `p` on
@@ -1917,10 +1899,10 @@ noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
     continuous and the unique minimiser varies continuously by paper's
     transcendental analysis at line 825).
 
-    Net effect: this is a SMALLER atom than the previous R168
+    This is a SMALLER atom than a bundled
     `envelope_continuity_in_p_paper_Def` axiom (just stipulating
     `L(β*(p), p)` is continuous in `p`, equivalent to envelope continuity
-    via the `0.4` constant). The R168 envelope continuity now follows by
+    via the `0.4` constant). The envelope continuity follows by
     Cat 1 arithmetic (`continuousOn_const.sub _`). Per discipline §3.4.3
     (paper-Def-stipulated structural fact about composition of paper-novel
     objects). 永不 close.
@@ -1930,16 +1912,14 @@ noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
 axiom L_at_betaStarOfP_continuousOn_paper_Def :
     ContinuousOn (fun p : ℝ => L (betaStarOfP p) p) (Set.Ico (0 : ℝ) p_1)
 
-/-- **R196 CLOSURE** (Cat 1 derived theorem; replaces the previous R168
-    `envelope_continuity_in_p_paper_Def` axiom). Direct arithmetic
-    composition of `continuousOn_const` with the new smaller R196 bridge
+/-- **Envelope continuity** (Cat 1 derived theorem). Direct arithmetic
+    composition of `continuousOn_const` with the smaller bridge
     atom `L_at_betaStarOfP_continuousOn_paper_Def`. The substantive
     paper-stipulated content (continuity of `L(β*(p), p)` in `p` via
-    argmin-stability) is now isolated in the strictly smaller bridge
-    atom; the envelope continuity becomes a Cat 1 derived theorem.
+    argmin-stability) is isolated in the strictly smaller bridge
+    atom; the envelope continuity is a Cat 1 derived theorem.
 
-    Net atom delta: −1 (R168 retired) + 1 (R196 bridge) = 0 net §3.4.3
-    atom count, but the new bridge is strictly more atomic per discipline
+    The bridge is strictly more atomic per discipline
     §18 (single-step typed bridge; envelope continuity follows by Cat 1
     arithmetic of `continuous - continuous = continuous`).
 
@@ -1950,18 +1930,14 @@ theorem envelope_continuity_in_p_paper_Def :
   unfold overshootRegimeI
   exact continuousOn_const.sub L_at_betaStarOfP_continuousOn_paper_Def
 
-/-- **R168 CLOSURE** (Cat 1 derived theorem; replaces R140 wire-up
-    `envelope_continuity_in_p_workingAssumption` axiom). Direct re-export
-    of the new R168 paper-Def-stipulated structural equation atom
-    `envelope_continuity_in_p_paper_Def`.
-
-    Net workingAssumption delta: −1; +1 Cat 3 §3.4.3 paper-Def-stipulated
-    structural equation atom. -/
+/-- **Envelope continuity workingAssumption** (Cat 1 derived theorem).
+    Direct re-export of the paper-Def-stipulated structural equation atom
+    `envelope_continuity_in_p_paper_Def`. -/
 theorem envelope_continuity_in_p_workingAssumption :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
   envelope_continuity_in_p_paper_Def
 
-/-- **R121 CLOSURE — R140 Infrastructure-wired**: derives paper's
+/-- **Infrastructure-wired**: derives paper's
     overshoot continuity via the smaller `_workingAssumption` consuming
     `Infrastructure.ContinuousArithmetic` Cat 1 atoms. -/
 theorem envelope_continuity_in_p_OPEN :
@@ -1976,7 +1952,7 @@ theorem gap_three_regime_reversal_overshoot_continuous :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
   envelope_continuity_in_p_OPEN
 
-/-! ### R82 substantive closure of `Tendsto_overshoot_at_p1`.
+/-! ### Substantive closure of `Tendsto_overshoot_at_p1`.
 
 The overshoot-vanishing claim is closed by a genuine **squeeze**
 argument on the concrete `overshootRegimeI` carrier — *without* the
@@ -2071,9 +2047,9 @@ private theorem overshootRegimeI_upper_bound {p : ℝ} (h_p_nonneg : 0 ≤ p)
 
 /-- **Regime (i) sub-claim — overshoot vanishes at `p_1` (limit from below).**
 
-    **R82 SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
-    The overshoot `L(∞, p) − L(β*(p), p) → 0` as `p → p_1⁻`. Previously
-    an opaque Cat 3 axiom; R82 proves it by a genuine **squeeze**
+    **SUBSTANTIVE CLOSURE** (Cat 3 workingAssumption → derivedTheorem).
+    The overshoot `L(∞, p) − L(β*(p), p) → 0` as `p → p_1⁻`. Proved
+    by a genuine **squeeze**
     argument on the concrete `overshootRegimeI` carrier — crucially
     *without* the transcendental unimodality input
     (`L_unimodal_in_regime_i_OPEN` is NOT consumed).
@@ -2180,8 +2156,8 @@ theorem gap_three_regime_cognitive_augmentation_arithmetic_part :
     Split off from the composite `gap_three_regime_cognitive_augmentation_OPEN`
     per the Cat 1 reductionism review (the arithmetic conjunct was
     already promoted to the Cat 1 theorem
-    `gap_three_regime_cognitive_augmentation_arithmetic_part`); R22-A
-    closes the β-monotonicity conjunct as Cat 1.
+    `gap_three_regime_cognitive_augmentation_arithmetic_part`); the
+    β-monotonicity conjunct is closed as Cat 1.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (ii),
     line 815 ("L(β, p) is strictly decreasing in β on (0, ∞)"); proof
@@ -2222,10 +2198,10 @@ theorem gap_three_regime_sufficient_cognition :
 
 /-! ## 4. Proposition `prop:p-monotonicity-five-state`
 
-**SUPERSEDED 2026-05-16 by paper R10 §5 two-regime rewrite.** The closed-form
+**SUPERSEDED 2026-05-16 by paper §5 two-regime rewrite.** The closed-form
 `κ*(p)` formula below was derived under the OLD `V_dyn(B|blocked) = 0.4`
 convention (max-over-reachable, including the agent's current vertex).
-Under the unified recursive-Bellman convention adopted in the paper R10
+Under the unified recursive-Bellman convention adopted in the paper
 revision (see paper Definition `def:reachable` rewrite), forced continuation
 gives `V_dyn(B|blocked) = r(D) = 0.1`, which collapses the cognitive
 threshold story on the 5-state instance: `κ*(p) ≡ 0` throughout the
@@ -2244,16 +2220,14 @@ trap-tree (`Prop:error-compounding`, `κ*(d) = Θ(log d)`).
 The earlier piecewise formula `κ*(p) = (1/2) log_2(2 log[p/(2(1-p))] + 1)`
 for `p > 2/3`, `κ*(p) = 0` for `p ≤ 2/3` was a real-but-spurious result
 driven by the V_dyn definitional inconsistency between paper §2 (max-over-R)
-and §5 (forced-continuation in the loss formula). See R8-R15 audit cycle
-documented in the public `crabsatellite/academic-papers` commit
-`bf462f97 blackwell_dilemma: R8-R15 audit cycle`. -/
+and §5 (forced-continuation in the loss formula). -/
 
 /-- **SUPERSEDED.** The closed-form `c*(p) = 1 / (2 log[p/(2(1-p))])` for
     `p > 2/3` under the OLD V_dyn convention. Retained for build
-    preservation only; not in the current (R10) paper.
+    preservation only; not in the current paper.
 
     paper source (historical): Equation `eq:cstar-five-state` of paper
-    pre-R10 formulation. Removed in paper R10 §5 two-regime rewrite. -/
+    pre-revision formulation. Removed in §5 two-regime rewrite. -/
 noncomputable def c_star (p : ℝ) : ℝ :=
   1 / (2 * Real.log (p / (2 * (1 - p))))
 
@@ -2268,7 +2242,7 @@ noncomputable def c_star (p : ℝ) : ℝ :=
     `Real.log _ / Real.log 2` form instead.
 
     paper source (historical): Equation `eq:kstar-five-state` of paper
-    pre-R10 formulation. Removed in paper R10 §5 two-regime rewrite. -/
+    pre-revision formulation. Removed in §5 two-regime rewrite. -/
 noncomputable def kappaStar_fiveState (p : ℝ) : ℝ :=
   if p ≤ (2 : ℝ) / 3 then 0
   else (1/2 : ℝ) *
@@ -2456,10 +2430,9 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
 /- **Proposition `prop:threshold-five-state` (ii): κ-agent above
    `κ*` correctly ranks continuation values.**
 
-   R88 NOTE: the prior bundled `axiom
-   kappa_above_threshold_blackwell_recovery_OPEN` is REPLACED below
-   by a `structuralEquation` atom + a derived `theorem`.  The Cat 2
-   dependency surfacing commentary (formerly this docstring) is
+   NOTE: a bundled `axiom kappa_above_threshold_blackwell_recovery_OPEN`
+   is REPLACED below by a `structuralEquation` atom + a derived
+   `theorem`. The Cat 2 dependency surfacing commentary is
    folded into the derived theorem's docstring: the Cat 2 axiom
    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is
    threaded as an explicit antecedent `(_h_blackwell : ...)` on the
@@ -2469,7 +2442,7 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
    paper source: Proposition `prop:threshold-five-state` (ii),
    line 862. -/
 
-/-- R88 Cat 3 structural equation: pointwise (conditional-on-`R`)
+/-- Cat 3 structural equation: pointwise (conditional-on-`R`)
     Blackwell monotonicity of the κ-agent's reward kernel on the
     5-state canonical instance, ABOVE the instance-specific cognitive
     threshold `kappaStar_fiveState p`.  For every `p`, every `κ` with
@@ -2495,7 +2468,7 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
     `prop:threshold-five-state` (ii) STATES the above-`κ*` correct-
     continuation-ranking fact directly for the 5-state instance; its
     per-realisation form is the paper-stipulated structural input on
-    the kernel carrier (mirrors the `wInfoOracleKernel_nonpos` R85
+    the kernel carrier (mirrors the `wInfoOracleKernel_nonpos`
     precedent — paper stipulates the carrier's per-realisation
     behaviour).  Blackwell 1951/1953 = the Cat 2 conditional-
     expectation comparison input.  永不 close per discipline §3.4.3.
@@ -2508,10 +2481,9 @@ axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar 
           agentRewardKernel AgentType.kappaAgent β₁ κ 1 ω ≤
             agentRewardKernel AgentType.kappaAgent β₂ κ 1 ω
 
-/-- **R88 CLOSED** — `kappa_above_threshold_blackwell_recovery_OPEN`
-    is now a derived theorem (replaces the retired Cat 3
-    workingAssumption axiom of the same name).  R88 concretised
-    `agentWelfare` as the bond-percolation expectation of the
+/-- **CLOSED** — `kappa_above_threshold_blackwell_recovery_OPEN`
+    is a derived theorem.  `agentWelfare` is concretised
+    as the bond-percolation expectation of the
     per-realisation `agentRewardKernel` (Types.lean); the
     above-`κ*(p)` 5-state recovery claim then closes by composing:
       * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
@@ -2522,12 +2494,12 @@ axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar 
         κ-agent correctly ranks continuation values, so conditional
         on each percolation realisation a Blackwell-superior reward
         signal yields weakly higher expected terminal reward), with
-      * the R88 foundation lemma
+      * the foundation lemma
         `agentWelfare_monotone_of_kernel_pointwise_monotone`.
     The `h_blackwell` antecedent is retained (now unused) for
     audit-chain continuity: `#print axioms` on consumers still
     surfaces `gap_blackwell_monotonicity_OPEN` (threaded via
-    `h_blackwell` per the R28 broken-link discipline).  inputCategory
+    `h_blackwell` per the broken-link discipline).  inputCategory
     Cat 3 → Cat 1; cat3SubType workingAssumption → derivedTheorem;
     status gapOpen → gapClosed. -/
 theorem kappa_above_threshold_blackwell_recovery_OPEN
@@ -2575,13 +2547,9 @@ theorem gap_threshold_fiveState_kappa_above_kstar
     sign of the welfare-curvature changes sign as the agent transitions
     from below-threshold reversal to above-threshold monotone-recovery.
 
-    R75 substantive-math closure (Pattern 5: existence-via-
-    `Classical.choose`). Previously declared `axiom smoothTransitionBeta`
-    (opaque carrier) plus the structural-equation atom
-    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` (Cat 3
-    structuralEquation pinning the carrier to the minimiser-witness from
-    `interior_minimiser_existence_OPEN`). R75 makes the carrier
-    CONCRETE per paper line 863's "corresponding to β*" identification:
+    Substantive-math closure (Pattern 5: existence-via-
+    `Classical.choose`). The carrier is CONCRETE per paper line 863's
+    "corresponding to β*" identification:
     define `smoothTransitionBeta p` as `Classical.choose` of the
     minimiser-witness from the existence atom
     `interior_minimiser_existence_OPEN` (which is independent of `p`,
@@ -2592,10 +2560,10 @@ theorem gap_threshold_fiveState_kappa_above_kstar
     (the `Classical.choose` literally picks the paper-stated minimiser
     of `L(·, 0)`, which paper line 863 names as the inflection point's
     image), so the carrier encodes paper content faithfully. This is
-    NOT the R7-flagged closure-count trick: the def body invokes the
+    NOT a closure-count trick: the def body invokes the
     substantive existence atom `interior_minimiser_existence_OPEN` as
-    input, with no content erasure; the previously-axiomatic carrier-
-    identification step is internalised by `Classical.choose_spec`.
+    input, with no content erasure; the carrier-identification step
+    is internalised by `Classical.choose_spec`.
 
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
     welfare-curvature inflection-point detection machinery, define the
@@ -2608,29 +2576,26 @@ theorem gap_threshold_fiveState_kappa_above_kstar
 noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ :=
   Classical.choose interior_minimiser_existence_OPEN
 
-/-- **R75 derived theorem** (replaces R62 derived theorem of same name;
-    now closes via Pattern 5 `Classical.choose_spec` instead of R62's
-    structural-equation composition).
+/-- **Derived theorem**: closes via Pattern 5 `Classical.choose_spec`.
     **Proposition `prop:threshold-five-state` (iii): smooth transition
     at `κ = κ*`.** At the cognitive threshold the welfare curve has a
     finite positive inflection point.
 
-    R75 Pattern 5 closure: composes the `smoothTransitionBeta` `def`
+    Pattern 5 closure: composes the `smoothTransitionBeta` `def`
     (which invokes `Classical.choose` on `interior_minimiser_existence_OPEN`)
     with `Classical.choose_spec` (which yields the existential witness's
-    positivity property `0 < β_star` directly via `.1`). The previously-
-    required carrier-identification structural-equation atom
-    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` is no
-    longer needed: `Classical.choose_spec.1` gives the positivity for
+    positivity property `0 < β_star` directly via `.1`). A
+    carrier-identification structural-equation atom
+    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` is not
+    needed: `Classical.choose_spec.1` gives the positivity for
     the canonical chosen β_star, which IS `smoothTransitionBeta p` by
     the `def`'s unfolding.
 
-    Net delta vs R62 baseline: −1 structuralEquation atom retired
-    (`smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`);
-    existence atom `interior_minimiser_existence_OPEN` retained as the
-    substantive paper input; carrier `smoothTransitionBeta` retained as
-    paper-Def-stipulated structural primitive but now `noncomputable
-    def` rather than opaque axiom (mirroring R74 `betaStarOfP` precedent).
+    Existence atom `interior_minimiser_existence_OPEN` is the
+    substantive paper input; carrier `smoothTransitionBeta` is
+    paper-Def-stipulated structural primitive realised as
+    `noncomputable def` rather than opaque axiom (mirroring `betaStarOfP`
+    precedent).
 
     paper source: Proposition `prop:threshold-five-state` (iii),
     line 863 (inflection point β > 0 at κ = κ*, "corresponding to β*"). -/
@@ -2641,7 +2606,7 @@ theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
   -- `Classical.choose_spec` yields `0 < β_star ∧ ∀ β ≥ 0, L β_star 0 ≤ L β 0`.
   exact (Classical.choose_spec interior_minimiser_existence_OPEN).1
 
-/-- R89 Cat 3 structural equation: pointwise (conditional-on-`R`)
+/-- Cat 3 structural equation: pointwise (conditional-on-`R`)
     Blackwell monotonicity of the κ-agent's reward kernel AT the
     5-state-canonical instance-specific cognitive threshold
     `κ = kappaStar_fiveState p`.  For every `p`, every percolation
@@ -2670,8 +2635,8 @@ theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
     `prop:threshold-five-state` (iii) STATES the at-threshold monotonicity
     fact directly on the 5-state instance; its per-realisation form is
     the paper-stipulated structural input on the kernel carrier (mirrors
-    the R88 `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_
-    above_kappaStar` Canonical-instance precedent — the at-threshold
+    the `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar`
+    Canonical-instance precedent — the at-threshold
     specialisation rather than the strictly-above-threshold version).
     Blackwell 1951/1953 = the Cat 2 conditional-expectation comparison
     input.  永不 close per discipline §3.4.3.
@@ -2684,9 +2649,8 @@ axiom agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone :
         agentRewardKernel AgentType.kappaAgent β₁ (kappaStar_fiveState p) 1 ω ≤
           agentRewardKernel AgentType.kappaAgent β₂ (kappaStar_fiveState p) 1 ω
 
-/-- **R89 CLOSED** — `welfare_bounded_below_inflection_OPEN` is now a
-    derived theorem (replaces the retired Cat 3 workingAssumption axiom
-    of the same name).  R88 concretised `agentWelfare` as the
+/-- **CLOSED** — `welfare_bounded_below_inflection_OPEN` is a
+    derived theorem. `agentWelfare` is concretised as the
     bond-percolation expectation of the per-realisation
     `agentRewardKernel` (Types.lean); the at-threshold welfare-bound
     claim then closes by composing:
@@ -2696,7 +2660,7 @@ axiom agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone :
         (Proposition `prop:threshold-five-state` (iii), line 863 — the
         at-threshold welfare `W(β, κ*, 1)` is monotone in `β`, encoded
         per-realisation as the kernel pointwise monotonicity), with
-      * the R88 foundation lemma
+      * the foundation lemma
         `agentWelfare_monotone_of_kernel_pointwise_monotone`
         (`percExpectation_mono` transfers the pointwise `≤` to the
         bond-percolation expectation).
@@ -2729,11 +2693,10 @@ theorem welfare_bounded_below_inflection_OPEN :
 
 /-- **Proposition `prop:threshold-five-state` (iii): smooth transition
     at `κ = κ*`** (derived theorem composing one atomic stipulation +
-    one R62-derived theorem per `feedback_gap_ledger_in_lean4` §18
+    one derived theorem per `feedback_gap_ledger_in_lean4` §18
     Manufactured-Recognition pattern). At the cognitive threshold the
     welfare curve has a finite positive inflection point
-    (`inflection_at_kstar`, R62 derived theorem composing
-    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN` +
+    (`inflection_at_kstar`, derived theorem from
     `interior_minimiser_existence_OPEN`) and the κ-agent's welfare at
     the inflection point dominates the welfare at any β below it
     (`welfare_bounded_below_inflection_OPEN`).
@@ -2767,7 +2730,7 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
   · intro h
     nlinarith
 
-/-- R89 Cat 3 structural equation: pointwise (conditional-on-`R`)
+/-- Cat 3 structural equation: pointwise (conditional-on-`R`)
     Blackwell monotonicity of the Bayesian-naive agent's reward kernel
     BELOW the 5-state-canonical routing threshold (`p̂ < 2/3`).  For
     every `p_hat` with `0 ≤ p_hat < 2/3`, every percolation realisation
@@ -2793,10 +2756,9 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
     `prop:bayesian-naive-five-state` (ii) STATES the below-threshold
     Blackwell-recovery fact directly for the bayesianNaive carrier; its
     per-realisation form is the paper-stipulated structural input on the
-    kernel carrier (mirrors the R88 `agentRewardKernel_bayesian_pointwise
-    _monotone` precedent and the R88 `agentRewardKernel_kappaAgent_
-    fiveState_pointwise_monotone_above_kappaStar` Canonical-instance
-    precedent).  Blackwell 1951/1953 = the Cat 2 conditional-expectation
+    kernel carrier (mirrors the `agentRewardKernel_bayesian_pointwise_monotone`
+    precedent and the `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar`
+    Canonical-instance precedent).  Blackwell 1951/1953 = the Cat 2 conditional-expectation
     comparison input (the per-realisation Blackwell-conditional fact
     composes Blackwell 1951/1953 to derive the per-realisation
     monotonicity).  永不 close per discipline §3.4.3.
@@ -2809,10 +2771,9 @@ axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
           agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω ≤
             agentRewardKernel AgentType.bayesianNaive β₂ 0 1 ω
 
-/-- **R89 CLOSED** — `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`
-    is now a derived theorem (replaces the retired Cat 3
-    workingAssumption axiom of the same name).  R88 concretised
-    `agentWelfare` as the bond-percolation expectation of the
+/-- **CLOSED** — `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`
+    is a derived theorem.  `agentWelfare` is concretised
+    as the bond-percolation expectation of the
     per-realisation `agentRewardKernel` (Types.lean); the bayesianNaive
     below-threshold monotonicity claim then closes by composing:
       * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
@@ -2823,14 +2784,14 @@ axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
         by the correctly-modelled bridge option, so conditional on each
         percolation realisation a Blackwell-superior reward signal yields
         weakly higher expected terminal reward), with
-      * the R88 foundation lemma
+      * the foundation lemma
         `agentWelfare_monotone_of_kernel_pointwise_monotone`
         (`percExpectation_mono` transfers the pointwise `≤` to the
         bond-percolation expectation).
     The `h_blackwell` antecedent is retained (now unused) for
     audit-chain continuity: `#print axioms` on consumers still surfaces
     `gap_blackwell_monotonicity_OPEN` (threaded via `h_blackwell` per
-    the R28 broken-link discipline).  inputCategory Cat 3 → Cat 1;
+    the broken-link discipline).  inputCategory Cat 3 → Cat 1;
     cat3SubType structuralEquation → derivedTheorem; status
     gapOpen → gapClosed.
 
@@ -2853,7 +2814,7 @@ theorem bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
     β₁ β₂ hβ
 
 /-- **Proposition `prop:bayesian-naive-five-state` (ii): reversal absent
-    below threshold** (R41 derived theorem composing
+    below threshold** (derived theorem composing
     `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition pattern).
 
@@ -2872,13 +2833,13 @@ theorem gap_bayesian_naive_reversal_absent :
   bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
 
 /-- **Proposition `prop:bayesian-naive-five-state` (iii): reversal
-    appears above threshold** — R90 §18 reversal-witness decomposition.
+    appears above threshold** — §18 reversal-witness decomposition.
 
-    R90 §18 reversal-witness decomposition: the prior single-atom
-    `bayesian_naive_above_threshold_reversal_OPEN` (which packaged the
-    welfare-existential reversal as an opaque axiom) is now decomposed
+    §18 reversal-witness decomposition: a single-atom
+    `bayesian_naive_above_threshold_reversal_OPEN` (which would package the
+    welfare-existential reversal as an opaque axiom) is decomposed
     into a §3.4.3 paper-stipulated kernel-level reversal-witness
-    structural equation that the R90 foundation lemma
+    structural equation that the foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
     lifts to the welfare-level reversal claim. Paper line 957
     explicitly: "for `p̂ ≥ 2/3`, the Bayesian-naive agent's
@@ -2889,9 +2850,9 @@ theorem gap_bayesian_naive_reversal_absent :
     config (witnessed by a percolation realisation in which the trap
     bridge is forward-reachable and the misspecification fires).
 
-    Cat 3 sub-type: structuralEquation (R88 precedent — paper
+    Cat 3 sub-type: structuralEquation — paper
     STATES the per-realisation trap-induced kernel-reversal directly
-    on the kernel carrier on the 5-state Canonical instance).
+    on the kernel carrier on the 5-state Canonical instance.
     paper source: Proposition `prop:bayesian-naive-five-state` (iii),
     line 957. -/
 axiom agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness :
@@ -2905,15 +2866,14 @@ axiom agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness :
             agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω₀
 
 /-- **Proposition `prop:bayesian-naive-five-state` (iii): reversal
-    appears above threshold** (R90 derived theorem via reversal-witness
-    pattern, replacing prior `bayesian_naive_above_threshold_reversal_OPEN`
-    workingAssumption).  For `p̂ ≥ 2/3`, the Bayesian-naive agent's
+    appears above threshold** (derived theorem via reversal-witness
+    pattern).  For `p̂ ≥ 2/3`, the Bayesian-naive agent's
     welfare exhibits the same β-non-monotonicity as the greedy agent.
 
-    R90 closure: composes (a) Cat 3 §3.4.3 paper-stipulated kernel
+    Closure composes (a) Cat 3 §3.4.3 paper-stipulated kernel
     reversal-witness atom
     `agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness`
-    + (b) R90 foundation lemma
+    + (b) foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
     + (c) paper-stipulated atom `blockingProb_strict_in_open_unit_interval`
     (consumed inside the foundation lemma).

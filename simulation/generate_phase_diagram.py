@@ -2,11 +2,11 @@
 """
 Generate the phase diagram figure for the Blackwell Dilemma paper.
 
-Visualizes the Three-Regime Structure (Proposition 6.3) on the 5-state
-instance: greedy-agent welfare loss L(beta, p) as p varies across the
-three regimes delineated by p_1 = 4/9 and p_2 = 2/3.
+Visualizes the Two-Regime Structure (Proposition prop:two-regime-five-state)
+on the 5-state instance: greedy-agent welfare loss L(beta, p) as p varies
+across the two regimes delineated by p_sharp = 4/9.
 
-Output: PDF at paper/figures/three_regime_phase_diagram.pdf
+Output: PDF at paper/figures/two_regime_phase_diagram.pdf
 """
 
 import math
@@ -138,7 +138,7 @@ def loss_kappa_agent(beta, kappa, p):
     return (1.0 - p) * loss_open + p * loss_blocked
 
 
-def panel_three_regime(ax, p, label, color, regime):
+def panel_two_regime(ax, p, label, color, regime):
     """Draw L(beta) curve for a specific p, on a given axis."""
     betas = np.linspace(0.01, 5.0, 301)
     losses = [loss_greedy(b, p) for b in betas]
@@ -156,29 +156,28 @@ def panel_three_regime(ax, p, label, color, regime):
     return regime
 
 
-def figure_three_regime():
+def figure_two_regime():
     """
-    Figure 1: Three-regime welfare-loss structure on the 5-state instance.
+    Figure 1: Two-regime welfare-loss structure on the 5-state instance.
 
     Panel (a): L(beta) curves for p in each regime, showing regime shift
-               from interior optimum -> monotone -> capped.
+               from interior optimum (Regime I, p < 4/9) to monotone
+               (Regime II, p >= 4/9).
     Panel (b): overshoot = L(infty, p) - min_beta L(beta, p) as function of p,
-               showing it vanishes at p_1 = 4/9 and persistence up to p_2 = 2/3
-               is signal-immunity-driven rather than cognitive-threshold-driven.
+               showing it vanishes at p_sharp = 4/9, the single threshold
+               separating Regime I (reversal) from Regime II (monotone).
     """
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
 
-    # Panel (a): L(beta) for representative p values
-    ps = [(0.10, "Regime I: reversal", "#1f77b4", "I"),
+    # Panel (a): L(beta) for representative p values across the two regimes
+    ps = [(0.20, "Regime I: reversal", "#1f77b4", "I"),
           (0.40, "Regime I near boundary", "#4a90c2", "I"),
-          (0.55, "Regime II: monotone", "#ff7f0e", "II"),
-          (0.80, "Regime III: cognitive-binding", "#2ca02c", "III")]
+          (0.60, "Regime II: monotone", "#ff7f0e", "II")]
     for p, label, color, regime in ps:
-        panel_three_regime(ax1, p, label, color, regime)
-    # Vertical markers for p_1 and p_2 (not applicable to this axis)
+        panel_two_regime(ax1, p, label, color, regime)
     ax1.set_xlabel(r"Signal precision $\beta$ (bits)", fontsize=10)
     ax1.set_ylabel(r"Welfare loss $L(\beta, p)$", fontsize=10)
-    ax1.set_title(r"(a) Greedy $L(\beta, p)$ across regimes", fontsize=11)
+    ax1.set_title(r"(a) Greedy $L(\beta, p)$ across the two regimes", fontsize=11)
     ax1.set_xlim(0, 5)
     ax1.set_ylim(0.25, 0.65)
     ax1.legend(loc="upper left", fontsize=8, framealpha=0.9)
@@ -197,35 +196,29 @@ def figure_three_regime():
     ax2.plot(p_grid, overshoots, color="#1f77b4", linewidth=1.8)
     ax2.fill_between(p_grid, 0, overshoots, alpha=0.15, color="#1f77b4")
 
-    # Regime boundaries
-    p_1, p_2 = 4.0 / 9.0, 2.0 / 3.0
-    ax2.axvline(x=p_1, color="#d62728", linestyle="--", linewidth=1.0, alpha=0.85)
-    ax2.axvline(x=p_2, color="#9467bd", linestyle="--", linewidth=1.0, alpha=0.85)
-    ax2.text(p_1 - 0.005, 0.105, r"$p_1 = 4/9$", color="#d62728",
+    # Single regime boundary p_sharp = 4/9
+    p_sharp = 4.0 / 9.0
+    ax2.axvline(x=p_sharp, color="#d62728", linestyle="--", linewidth=1.0, alpha=0.85)
+    ax2.text(p_sharp - 0.005, 0.105, r"$p^\sharp = 4/9$", color="#d62728",
              ha="right", fontsize=9, rotation=90, va="bottom")
-    ax2.text(p_2 + 0.005, 0.105, r"$p_2 = 2/3$", color="#9467bd",
-             ha="left", fontsize=9, rotation=90, va="bottom")
 
     ax2.set_xlabel(r"Blocking probability $p$", fontsize=10)
     ax2.set_ylabel(r"Overshoot $L(\infty, p) - \min_\beta L(\beta, p)$", fontsize=10)
-    ax2.set_title(r"(b) Greedy-reversal overshoot vanishes at $p_1$", fontsize=11)
+    ax2.set_title(r"(b) Greedy-reversal overshoot vanishes at $p^\sharp$", fontsize=11)
     ax2.set_xlim(0, 0.95)
     ax2.set_ylim(-0.005, 0.135)
     ax2.grid(True, alpha=0.25, linewidth=0.4)
 
     # Regime labels at top of panel (b)
-    ax2.text((0 + p_1) / 2, 0.125, "Regime I",
+    ax2.text((0 + p_sharp) / 2, 0.125, "Regime I",
              ha="center", fontsize=8, color="#1f77b4",
              bbox=dict(boxstyle="round,pad=0.15", facecolor="#e8f1fa", edgecolor="none"))
-    ax2.text((p_1 + p_2) / 2, 0.125, "Regime II",
+    ax2.text((p_sharp + 0.95) / 2, 0.125, "Regime II",
              ha="center", fontsize=8, color="#ff7f0e",
              bbox=dict(boxstyle="round,pad=0.15", facecolor="#fdeedb", edgecolor="none"))
-    ax2.text((p_2 + 0.95) / 2, 0.125, "Regime III",
-             ha="center", fontsize=8, color="#2ca02c",
-             bbox=dict(boxstyle="round,pad=0.15", facecolor="#e5f3e3", edgecolor="none"))
 
     plt.tight_layout()
-    out_path = FIG_DIR / "three_regime_phase_diagram.pdf"
+    out_path = FIG_DIR / "two_regime_phase_diagram.pdf"
     fig.savefig(out_path, bbox_inches="tight", dpi=150)
     plt.close(fig)
     print(f"Wrote {out_path}")
@@ -233,8 +226,8 @@ def figure_three_regime():
 
 def figure_beta_kappa_heatmap():
     """
-    Figure 2: Welfare heatmap over (beta, kappa) at a representative p in the
-    cognitive-binding regime (p = 0.8, so kappa* = log2(2*log(2)+1)/2 ~ 0.63).
+    Figure 2: Welfare heatmap over (beta, kappa) at a representative p in
+    Regime II (p = 0.8 > p^sharp = 4/9), where kappa* = log2(2*log(2)+1)/2 ~ 0.63.
 
     Shows sharp transition in welfare as kappa crosses kappa*(p).
     """
@@ -271,7 +264,7 @@ def figure_beta_kappa_heatmap():
 
     ax.set_xlabel(r"Signal precision $\beta$ (bits)", fontsize=10)
     ax.set_ylabel(r"Cognitive depth $\kappa$ (bits)", fontsize=10)
-    ax.set_title(r"Welfare $W(\beta, \kappa)$ at $p=0.8$ (Regime III)", fontsize=11)
+    ax.set_title(r"Welfare $W(\beta, \kappa)$ at $p=0.8$ (Regime II)", fontsize=11)
 
     plt.tight_layout()
     out_path = FIG_DIR / "welfare_beta_kappa_heatmap.pdf"
@@ -284,7 +277,7 @@ def main():
     print("Generating phase-diagram figures for Blackwell Dilemma paper.")
     print("Output directory:", FIG_DIR)
     print()
-    figure_three_regime()
+    figure_two_regime()
     figure_beta_kappa_heatmap()
     print()
     print("Done.")

@@ -8,10 +8,10 @@ import BlackwellDilemma.Infrastructure.BernoulliProductFinite
 import Mathlib.Combinatorics.SimpleGraph.Subgraph
 
 /-!
-# Bond percolation on the integer lattice (Phase 2 stub)
+# Bond percolation on the integer lattice (measure-theoretic stub)
 
-This file is the **Phase 2 stub** of the Mathlib contribution roadmap
-(`MATHLIB_CONTRIBUTION_ROADMAP.md`). It assembles the Phase 1
+This file is the **measure-theoretic stub** of the Mathlib contribution
+roadmap (`MATHLIB_CONTRIBUTION_ROADMAP.md`). It assembles the
 `integerLatticeGraph` and the Cat 1 finite Bernoulli-product weight
 infrastructure into a unified namespace where the bond-percolation
 constructions used in the BlackwellDilemma paper Theorem `thm:phase`
@@ -29,9 +29,10 @@ that Mathlib does not yet host.
 * `latticeBondConfig d` — abbreviation for `BondConfigOnGraph
   (integerLatticeGraph d)`.
 
-## Why this is "Phase 2 stub" not "Phase 2 complete"
+## Why this is a stub
 
-The complete Phase 2 from `MATHLIB_CONTRIBUTION_ROADMAP.md` requires:
+The complete measure-theoretic development from
+`MATHLIB_CONTRIBUTION_ROADMAP.md` requires:
 1. Measure-theoretic product Bernoulli on `(BondConfigOnGraph G)` —
    blocked by Mathlib's lack of an `MeasureTheory.Measure.pi`-friendly
    formulation for `Sym2 V` index sets when `V` is infinite (the lattice
@@ -97,14 +98,15 @@ abbrev Z2BondConfig : Type _ := latticeBondConfig 2
 /-! ### Connection to the existing finite-edge bond weight framework
 
 The existing `BlackwellDilemma.bondConfigWeight` (in `Percolation.lean`,
-also routed through `Infrastructure.bernoulliWeight` via R153) handles
+also routed through `Infrastructure.bernoulliWeight`) handles
 the FINITE-edge case where the edge type is a `Fintype`. The lattice
 case `integerLatticeGraph d` has infinitely many edges (for any `d ≥ 1`),
 so the existing finite-edge framework applies only to BOUNDED-BOX
 restrictions of the lattice (an `EdgeFinset` on a `[-N, N]^d` cube).
 
-The infinite-edge measure-theoretic extension is the Phase 2 substantive
-work; this stub records the discrete-edge predicate that the eventual
-`Probability/Percolation/Basic.lean` Mathlib file will instantiate. -/
+The infinite-edge measure-theoretic extension is the substantive
+follow-up work; this stub records the discrete-edge predicate that the
+eventual `Probability/Percolation/Basic.lean` Mathlib file will
+instantiate. -/
 
 end BlackwellDilemma.Infrastructure.BondPercolationLattice

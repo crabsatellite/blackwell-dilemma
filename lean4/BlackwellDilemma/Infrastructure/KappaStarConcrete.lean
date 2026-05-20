@@ -44,7 +44,7 @@ Harris-Kesten (1980) + Cardy (1992) + Smirnov-Werner (2001) percolation
 universality results, which lie beyond Mathlib's current bond-percolation
 infrastructure. This file provides only the abstract predicate +
 algebra; substantive bond-percolation infrastructure is deferred to
-Phase 6 (`GiantComponentMills.lean`).
+the pending `GiantComponentMills.lean` module.
 
 ## Cat 1 status
 
@@ -159,8 +159,8 @@ kernel axioms (`propext, Classical.choice, Quot.sound`) — no
 paper-novel `Types.lean` carriers, no broken-link `_OPEN` axioms,
 no `sorry`. This provides the abstract divergence-from-below
 predicate + algebra; the substantive `kappaStar` divergence
-(Harris-Kesten 1980) is deferred to Phase 6 once Mathlib's
-bond-percolation infrastructure is available. -/
+(Harris-Kesten 1980) is deferred to the pending `GiantComponentMills.lean`
+module once Mathlib's bond-percolation infrastructure is available. -/
 
 #print axioms DivergesAtBelowAtTop.add
 

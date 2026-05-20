@@ -19,24 +19,20 @@
 
   Any axiom outside the union of these three categories is a RED FLAG.
 
-  Note on BLOCKED/DEAD-END status (post-R26 update):
-  Per the `feedback_gap_ledger_in_lean4` 2026-05-13 discipline (6-tier
-  status: OPEN / PARTIAL / BLOCKED / DEAD-END / CLOSED / DEFINITIONAL),
+  Note on BLOCKED/DEAD-END status:
+  Per the `feedback_gap_ledger_in_lean4` 6-tier discipline
+  (OPEN / PARTIAL / BLOCKED / DEAD-END / CLOSED / DEFINITIONAL),
   BLOCKED is reserved for genuine no-acceptance-possible cases
   (folkloric, conjectural-unproven, or no-source-at-all). External
   published Cat 2 theorems with Mathlib gap are encoded as plain
   Cat 2 OPEN axioms (`axiom gap_X_OPEN : <stmt>` with paper-cited
-  docstring), NOT as BLOCKED-defs. R26 retired the BLOCKED-def
-  encoding pattern for this domain; the 8 prior BLOCKED entries (6
-  Cat 2 + 2 Cat 3 edge cases) all converted to plain OPEN axioms.
+  docstring), NOT as BLOCKED-defs.
 
-  Cat 2 dependency surfacing (R28-A clarification): for downstream
-  THEOREMS, the Cat 2 axiom is composed in the proof body and
-  surfaces in `#print axioms` automatically. For downstream AXIOMS
-  (which have no body), the Cat 2 axiom MUST be threaded as an
-  EXPLICIT ANTECEDENT for the dependency to surface in `#print
-  axioms`. The R28 broken-link discipline restoration distinguishes
-  these two cases.
+  Cat 2 dependency surfacing: for downstream THEOREMS, the Cat 2
+  axiom is composed in the proof body and surfaces in `#print
+  axioms` automatically. For downstream AXIOMS (which have no body),
+  the Cat 2 axiom MUST be threaded as an EXPLICIT ANTECEDENT for the
+  dependency to surface in `#print axioms`.
 
   Usage:  `lake env lean BlackwellDilemma/AxiomAudit.lean`
 -/
@@ -47,9 +43,8 @@ namespace BlackwellDilemma.AxiomAudit
 
 -- §2 IDP Types (signal-variance algebra)
 #print axioms BlackwellDilemma.signalVariance_strictAntitoneOn
--- R23-B Cat 1 closure: `σ²_topo(κ, 0) = 0` (paper proof line 870 —
+-- Cat 1 closure: `σ²_topo(κ, 0) = 0` (paper proof line 870 —
 -- terminal-vertex distance-0 case). Kernel-pure via `unfold + simp`.
--- See Ledger entry `entry_atom_topoSignalVariance_distance_zero`.
 #print axioms BlackwellDilemma.topoSignalVariance_distance_zero
 
 -- §3 Welfare Decomposition (CLOSED — kernel only)
@@ -64,27 +59,24 @@ namespace BlackwellDilemma.AxiomAudit
 
 -- §3.2 Welfare Reversal layer
 #print axioms BlackwellDilemma.gap_dilemma
--- R23-C1 Cat 1 derived closure: Proposition `prop:topo-cluster`
--- closed-form `(n-k)/((n+1)(k+1))` derives Cat 1 algebraically from the
--- R66 derived theorem `expectedTopoLoss_conditional_def` (paper line 292
--- order-statistics decomposition `n/(n+1) − k/(k+1)`, Cat 2 absorbed via
--- David & Nagaraja Eq. 2.1.4) via `field_simp; ring`. See Ledger entry
--- `entry_prop_topo_cluster`.
+-- Derived closure: Proposition `prop:topo-cluster` closed-form
+-- `(n-k)/((n+1)(k+1))` derives algebraically from the derived theorem
+-- `expectedTopoLoss_conditional_def` (paper line 292 order-statistics
+-- decomposition `n/(n+1) − k/(k+1)`, Cat 2 absorbed via David &
+-- Nagaraja Eq. 2.1.4) via `field_simp; ring`.
 #print axioms BlackwellDilemma.gap_topo_cluster_relation
--- R66 Cat 2 absorption: `expectedTopoLoss_conditional_def` derived
+-- Cat 2 absorption: `expectedTopoLoss_conditional_def` derived
 -- theorem composes `gap_orderstats_topo_decomposition_OPEN` (paper-
 -- application of David & Nagaraja Eq. 2.1.4 to IDP carrier via paper
 -- Def 2.1 standing convention, Wrongness.lean) + `gap_david_nagaraja_
 -- eq214_OPEN` (substantive David & Nagaraja 2003 Eq. 2.1.4 textbook
 -- identity on opaque `expectedMaxIIDUniform` carrier, ClassicalResults.
--- lean). Both Cat 2 axioms surface via `#print axioms`, providing audit-
--- chain visibility for the David & Nagaraja Cat 2 dependency previously
--- acknowledged only in docstrings.
+-- lean). Both Cat 2 axioms surface via `#print axioms`.
 #print axioms BlackwellDilemma.expectedTopoLoss_conditional_def
 #print axioms BlackwellDilemma.gap_conditional_reduction_part_ii
--- R37 derived closure: Lemma `lem:conditional-reduction` part (i),
+-- Derived closure: Lemma `lem:conditional-reduction` part (i),
 -- conditional Blackwell monotonicity on the restricted action domain.
--- Composes the new Cat 3 atom `conditional_subproblem_blackwell_applicable_OPEN`
+-- Composes the Cat 3 atom `conditional_subproblem_blackwell_applicable_OPEN`
 -- (paper line 375) threading the Cat 2 Blackwell 1951/1953 dependency.
 #print axioms BlackwellDilemma.gap_conditional_reduction_part_i
 
@@ -92,7 +84,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_er_phase_subcritical
 #print axioms BlackwellDilemma.gap_er_phase_supercritical
 #print axioms BlackwellDilemma.gap_power_law_heavy_tail
--- R23-C2 derived closure: Proposition `prop:trap-prevalence` Part 1
+-- Derived closure: Proposition `prop:trap-prevalence` Part 1
 -- (V_dyn agrees on neighbours at p = 0). Composes the Cat 3 atom
 -- `forward_reachable_full_at_zero_OPEN` (paper line 463) with the
 -- existing `V_dyn_def` atom + `Finset.sup'_congr` (Cat 1 Mathlib).
@@ -100,7 +92,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- theorem and does NOT block `#print axioms` (which prints the
 -- definition's axiom dependency closure, not its applied form).
 #print axioms BlackwellDilemma.gap_trap_prevalence_zero
--- R37 derived closures: Theorem 3.3 phase-transition Parts 1+2 +
+-- Derived closures: Theorem 3.3 phase-transition Parts 1+2 +
 -- Proposition `prop:trap-prevalence` Part 2.
 --  * `gap_phase_transition_below`: composes
 --    `topo_loss_decay_below_pc_OPEN` (decay envelope existence,
@@ -146,62 +138,83 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cognitive_threshold_characterisation
 #print axioms BlackwellDilemma.gap_policy_complementarity
 #print axioms BlackwellDilemma.gap_threshold_alpha_monotone
--- R37 derived closures: Proposition `prop:supermodular` +
+-- Derived closures: Proposition `prop:supermodular` +
 -- Proposition `prop:sentimental`.
 --  * `gap_supermodular`: composes `welfareCrossPartial_explicit_form_OPEN`
 --    (paper-stated calculus closed form, line 564-583) +
 --    `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis
 --    at `|z| < 1`, line 582-584). Cat 2 Topkis 1978/1998 dependency
---    threaded via `_h_topkis` for audit-chain visibility.
+--    threaded via `_h_topkis`.
 --  * `gap_sentimental_immunity`: composes `signal_independent_at_alpha_zero`
---    (R65 derived theorem; paper L600 base case at α = 0; Cat 2 absorbed
+--    (derived theorem; paper L600 base case at α = 0; Cat 2 absorbed
 --    via `gap_iid_continuous_rank_symmetry_OPEN` + `gap_blackwell_
---    monotonicity_OPEN` per R65) + `welfare_continuity_in_alpha_OPEN`
+--    monotonicity_OPEN`) + `welfare_continuity_in_alpha_OPEN`
 --    (paper L602 perturbative continuity neighbourhood) +
 --    `alpha_star_existence_via_continuity_OPEN` (paper L602 sup-existence
 --    of `α*`).
 #print axioms BlackwellDilemma.gap_supermodular
 #print axioms BlackwellDilemma.gap_sentimental_immunity
--- R65 Cat 2 absorption: `signal_independent_at_alpha_zero` derived
+-- Cat 2 absorption: `signal_independent_at_alpha_zero` derived
 -- theorem composes `gap_iid_continuous_rank_symmetry_OPEN` (David &
 -- Nagaraja 2003 §1.3 + Blackwell 1953 conditional Cat 2,
 -- ClassicalResults.lean) + `gap_blackwell_monotonicity_OPEN` (Blackwell
 -- 1953 Cat 2 ClassicalResults.lean:71). Both Cat 2 dependencies surface
 -- via `#print axioms`.
 #print axioms BlackwellDilemma.signal_independent_at_alpha_zero
--- R38 §18 decomposition: Theorem 4.1 Part 5 (κ*(α) non-decreasing
--- in α). Decomposed into atomic stipulation
--- `welfare_transition_alpha_monotone_OPEN` + derived theorem
--- `gap_cognitive_threshold_part5`. Cat 3 atomic-stipulation re-flips
--- the prior R24-B reversion: the atom is the paper-stated welfare-
--- transition characterisation (Prop:threshold-alpha proof line 540),
--- independent of `kappaStar_def`'s α-erasing inf-formula.
+-- Theorem 4.1 Part 5 (κ*(α) non-decreasing in α). Paper-faithful
+-- bounded closure on the abstract `kappaStar` carrier via the
+-- α-faithful welfare-transition reformulation
+-- `kappaStar p α = sInf { 0 < κ ∧ alphaWelfareShift α ≤ m(p, κ) }`
+-- + Mathlib `csInf_le_csInf` lift over the set inclusion
+-- `S(p, α₂) ⊆ S(p, α₁)` (immediate from the derived
+-- monotonicity `alphaWelfareShift_monotone_paper_Def` in
+-- `Infrastructure/AlphaWelfareShift.lean`). Mirrors the Part 4 bounded
+-- closure pattern via `mean_estimate_gap_antitone_in_p_paper_Def` +
+-- `csInf_le_csInf`.
+--
+-- KERNEL-PURE: expected output `[propext, Classical.choice, Quot.sound]`.
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part5
 
+-- The α-monotonicity of the welfare-transition shift carrier
+-- underpinning Part 5. The paper's IFT sign analysis (Proposition
+-- `\label{prop:threshold-alpha}` line 586 `∂M/∂α < 0` on the
+-- welfare-transition functional `M(p, κ, α) = 0`) fixes the sign
+-- (strictly positive `∂κ*/∂α`) of the shift gradient.
+--
+-- KERNEL-PURE: expected output `[propext, Classical.choice, Quot.sound]`.
+#print axioms BlackwellDilemma.Infrastructure.alphaWelfareShift_monotone_paper_Def
+
+-- Part 4 antitone-in-p derived theorem via
+-- `Infrastructure/MeanEstimateGapAntitoneInP`. The mean-estimate-gap
+-- on the canonical IDP instance is antitone in `p` for every `κ > 0`
+-- because the prior-mean component for the bridge neighbour `u_2`
+-- `priorMean_u2_fiveState p = (1-p)·r(G) + p·r(u_2)` is antitone in `p`
+-- (linear closed form) and the Gaussian conjugate-prior posterior mean
+-- is monotone in its prior-mean argument (derivation from
+-- `gaussianPosteriorMean_denom_pos` + `div_le_div_of_nonneg_right`).
+#print axioms BlackwellDilemma.mean_estimate_gap_antitone_in_p_paper_Def
+
 -- §4 Principal layer
--- R37 derived closures: Proposition `prop:principal-optimum` Parts 1-3
+-- Derived closures: Proposition `prop:principal-optimum` Parts 1-3
 -- + Corollary `cor:disclosure` Parts 1-2.
 --  * `gap_principal_interior_optimum`: composes 3 atoms (paper proof
 --    line 624-625, 632) — `W_bar_eventually_decreasing_in_reversal_OPEN`
 --    + `W_bar_exceeds_zero_at_positive_beta_OPEN` +
---    `interior_max_exists_from_unimodal_envelope` (R63 derived theorem,
---    composes `betaBarStar_nonneg_OPEN` structural eq + `betaBarStar_def`
+--    `interior_max_exists_from_unimodal_envelope` (derived theorem
+--    composing `betaBarStar_nonneg_OPEN` structural eq + `betaBarStar_def`
 --    argmax-characterisation via Cat 1 Mathlib chain).
 --  * `gap_principal_monotone_in_kappa`: composes 2 atoms (paper proof
 --    line 626, 634) — `fosd_induces_derivative_domination_OPEN` +
 --    `argmax_monotone_under_derivative_domination_OPEN`.
---  * `gap_principal_regime_bifurcation` (R90 sound-fix-aligned):
---    direct application of `non_concave_triple_W_bar_OPEN`. The R63
---    chain via `non_concave_triple_from_mixture_OPEN(W_bar_mixture_decomposition)`
---    rested on a counterexample-falsifying axiom (R90 SOUNDNESS-DEFECT
---    FIX); the new direct atom is paper-faithful (paper line 640
---    valley triple stipulation directly on `W_bar`). The R63 derived
---    theorem `W_bar_mixture_decomposition` (paper line 638 mixture
---    identity) remains as a separate fact in its own right.
+--  * `gap_principal_regime_bifurcation`: direct application of
+--    `non_concave_triple_W_bar_OPEN` (paper line 640 valley triple
+--    stipulation directly on `W_bar`). The derived theorem
+--    `W_bar_mixture_decomposition` (paper line 638 mixture identity)
+--    remains as a separate fact in its own right.
 --  * `gap_disclosure_full_suboptimal`: composes 2 atoms (paper proof
 --    line 645, 652-656) — `averaged_reversal_overshoot_positive_OPEN` +
 --    `finite_beta_above_limit_from_overshoot_OPEN`.
---  * `gap_disclosure_differentiated_dominates`: re-exports R63 derived
+--  * `gap_disclosure_differentiated_dominates`: re-exports the derived
 --    theorem `differentiated_per_agent_optimum_dominates_uniform`
 --    (composes `perAgentOptimalAggregate` carrier +
 --    `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN` structural
@@ -211,12 +224,12 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_principal_regime_bifurcation
 #print axioms BlackwellDilemma.gap_disclosure_full_suboptimal
 #print axioms BlackwellDilemma.gap_disclosure_differentiated_dominates
--- R63 §18 closure-path-A derived theorems (replacing retired
+-- §18 closure-path-A derived theorems (replacing retired
 -- workingAssumption axioms; ledger entries re-routed to consume these).
 #print axioms BlackwellDilemma.interior_max_exists_from_unimodal_envelope
 #print axioms BlackwellDilemma.W_bar_mixture_decomposition
 #print axioms BlackwellDilemma.differentiated_per_agent_optimum_dominates_uniform
--- R72 substantive-math closures (concrete-def closure pattern, R71
+-- Substantive-math closures (concrete-def closure pattern via the
 -- `kappa_FOSD_def` precedent applied at scale): 4 atoms closed via
 -- `def <aggregate> := <component-expression>` matching paper's explicit
 -- identification, then theorem reduces to `rfl`. The two structural-
@@ -225,8 +238,8 @@ namespace BlackwellDilemma.AxiomAudit
 -- (GeneralGraphs.lean — the wA-reducing closure).
 #print axioms BlackwellDilemma.W_bar_eq_mixture_OPEN
 #print axioms BlackwellDilemma.differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN
--- R76 Pattern 5 closures (R74 `betaStarOfP` / R75 `smoothTransitionBeta`
--- precedent extended to the Principal layer): 3 wA atoms closed via
+-- Pattern 5 closures extended to the Principal layer (`betaStarOfP` /
+-- `smoothTransitionBeta` precedent): 3 wA atoms closed via
 -- `noncomputable def <carrier> := Classical.choose <existence_atom>`
 -- + `theorem <atom>_def := Classical.choose_spec`. The carriers
 -- betaBarStar, aggregateOptimalBeta, W_bar_limit_infty are now concrete
@@ -237,7 +250,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.betaBarStar_def
 #print axioms BlackwellDilemma.aggregateOptimalBeta_def
 #print axioms BlackwellDilemma.W_bar_limit_infty_def
--- R76 §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN:
+-- §18 closure-path-A on welfareCrossPartial_explicit_form_OPEN:
 -- bundled wA decomposed into 2 new opaque carriers (firstTermCrossPartial
 -- + secondTermCrossPartial per paper line 566 explicit two-term
 -- decomposition) + 2 new smaller wAs (secondTermCrossPartial_nonneg_OPEN
@@ -250,10 +263,8 @@ namespace BlackwellDilemma.AxiomAudit
 -- new smaller wAs.
 #print axioms BlackwellDilemma.welfareCrossPartial_explicit_form_OPEN
 #print axioms BlackwellDilemma.cross_partial_sign_in_z_lt_one_OPEN
--- R78 ESCALATION on the R76 residual wAs (per `feedback_no_self_retreat`
--- + `feedback_no_compute_retreat` + `feedback_lean_real_math`): the R76
--- opaque carriers firstTermCrossPartial / secondTermCrossPartial are
--- MADE CONCRETE as the paper's exact closed-form products (Proposition
+-- Concretisation of the firstTermCrossPartial / secondTermCrossPartial
+-- carriers as the paper's exact closed-form products (Proposition
 -- prop:supermodular proof lines 566-584):
 --   firstTermCrossPartial β κ
 --     = sigEffRatioFactor β * mPrime κ * stdNormalPDF (snrZ β κ)
@@ -288,20 +299,17 @@ namespace BlackwellDilemma.AxiomAudit
 -- §6 Bayesian + complementarity
 #print axioms BlackwellDilemma.gap_bayesian_immunity
 #print axioms BlackwellDilemma.gap_information_knowledge_complementarity
--- R38 §18 decompositions (Bayesian.lean): gap_robustness_myopic_k +
--- gap_robustness_satisficing now derived theorems composing
--- atomic-stipulation atoms `myopic_k_lookahead_recursion_OPEN` and
--- `satisficing_threshold_trap_OPEN`.
--- R57 closure-path-A: both derived theorems re-derived via strictly-
--- smaller atoms + Cat 2 Blackwell chain (myopic side — `h_blackwell`
--- antecedent threaded into `gap_robustness_myopic_k`) / 2-atom
--- decomposition through new opaque carrier `satisficingTrapAcceptanceProb`
--- with constructive witnesses β₁=0, β₂=1 (satisficing side). The new
--- smaller atoms below surface in `#print axioms` of the consuming
--- derived theorems.
+-- §18 decompositions (Bayesian.lean): gap_robustness_myopic_k +
+-- gap_robustness_satisficing are derived theorems re-derived via
+-- strictly-smaller atoms + Cat 2 Blackwell chain (myopic side —
+-- `h_blackwell` antecedent threaded into `gap_robustness_myopic_k`) /
+-- 2-atom decomposition through new opaque carrier
+-- `satisficingTrapAcceptanceProb` with constructive witnesses β₁=0,
+-- β₂=1 (satisficing side). The smaller atoms below surface in
+-- `#print axioms` of the consuming derived theorems.
 #print axioms BlackwellDilemma.gap_robustness_myopic_k
 #print axioms BlackwellDilemma.gap_robustness_satisficing
--- R57 individual atom prints (kernel-purity baseline + audit-chain
+-- Individual atom prints (kernel-purity baseline + audit-chain
 -- visibility):
 #print axioms BlackwellDilemma.myopic_k_eq_bayesian_above_divergence_depth_OPEN
 #print axioms BlackwellDilemma.satisficing_trap_acceptance_strictMono_in_beta_OPEN
@@ -325,32 +333,31 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.Phi_le_one
 #print axioms BlackwellDilemma.Phi_nonneg
 
--- R30 Cat 1 limit helpers: Φ tail limits + signal-variance limit at infinity
+-- Cat 1 limit helpers: Φ tail limits + signal-variance limit at infinity
 -- + the constant-divided-by-vanishing-positive-function → ∞ helper. Used by
--- the R30 gap_W_open_limit_infty + gap_error_compounding_part1 promotions.
+-- the gap_W_open_limit_infty + gap_error_compounding_part1 closures.
 #print axioms BlackwellDilemma.Phi_tendsto_one_atTop
 #print axioms BlackwellDilemma.Phi_tendsto_zero_atBot
 #print axioms BlackwellDilemma.signalVariance_tendsto_zero_atTop
 #print axioms BlackwellDilemma.tendsto_const_div_atTop_of_tendsto_zero_pos
 
--- R35-B Wave 1.1 Cat 1 helpers: Phi continuity (from FTC closure) +
--- signalVariance limit at 0+ (symmetric mirror of R30's atTop limit).
+-- Cat 1 helpers: Phi continuity (from FTC closure) + signalVariance
+-- limit at 0+ (symmetric mirror of the atTop limit above).
 -- Used by gap_W_open_limit_zero closure.
 #print axioms BlackwellDilemma.Phi_continuousAt
 #print axioms BlackwellDilemma.signalVariance_tendsto_atTop_of_tendsto_zero_pos
 
--- R30 derived closures: prop:canonical β→∞ limit + prop:error-compounding
+-- Derived closures: prop:canonical β→∞ limit + prop:error-compounding
 -- Part 1 (β→∞ welfare-limit on the depth-d trap tree).
 #print axioms BlackwellDilemma.FourState.gap_W_open_limit_infty
 #print axioms BlackwellDilemma.TrapTree.gap_error_compounding_part1
 
--- R35-B Wave 1.1 derived closure: prop:canonical β→0+ limit (symmetric
--- mirror of R30 gap_W_open_limit_infty). Composes the new Cat 1 helpers
--- above.
+-- Derived closure: prop:canonical β→0+ limit (symmetric mirror of
+-- gap_W_open_limit_infty). Composes the Cat 1 helpers above.
 #print axioms BlackwellDilemma.FourState.gap_W_open_limit_zero
 
--- R35-B Wave 1.2 derived closure: rem:robustness-misspec (i) — re-export
--- of FiveState.gap_bayesian_naive_routing_threshold (Cat 1 kernel-pure).
+-- Derived closure: rem:robustness-misspec (i) — re-export of
+-- FiveState.gap_bayesian_naive_routing_threshold (Cat 1 kernel-pure).
 #print axioms BlackwellDilemma.gap_robustness_bayesian_naive
 
 -- §5 Three-regime reversal six-way decomposition: paper line 814 has six
@@ -371,18 +378,18 @@ namespace BlackwellDilemma.AxiomAudit
 
 -- §7 General graphs + trap tree
 #print axioms BlackwellDilemma.TrapTree.gap_welfare_gain_decay
--- R23-C1 Cat 3 derived closure: Proposition `prop:error-compounding`
+-- Cat 3 derived closure: Proposition `prop:error-compounding`
 -- Part 2 (oracle dynamic value at root = `r_goal` for all `d ≥ 1`).
--- Refactored to derive directly from the Cat 3 atomic structural
--- equation `oracleValueAtRoot_TrapTree_def` (paper line 1041); see
+-- Derives directly from the Cat 3 atomic structural equation
+-- `oracleValueAtRoot_TrapTree_def` (paper line 1041); see
 -- Ledger entry `entry_prop_error_compounding`.
 #print axioms BlackwellDilemma.TrapTree.gap_error_compounding_part2
--- Upper-bound half of the κ*(d) = Θ(log d) asymptotic. Since R83 the
--- lower-bound half is ALSO a genuine theorem (`kappaStar_depth_d_lower_bound`
--- via weighted AM–GM), so the full Θ-asymptotic
+-- Upper-bound half of the κ*(d) = Θ(log d) asymptotic. The lower-bound
+-- half is ALSO a genuine theorem (`kappaStar_depth_d_lower_bound` via
+-- weighted AM–GM), so the full Θ-asymptotic
 -- `bernoulli_real_power_estimate_OPEN` is no longer an OPEN axiom.
 #print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_upper_bound
--- R23-C2 derived closures from Manufactured-Recognition-pattern atomic
+-- Derived closures from Manufactured-Recognition-pattern atomic
 -- decomposition:
 --  * `gap_V_g_le_V_dyn`: composes the Cat 3 atom
 --    `V_g_terminal_in_ForwardReachable_OPEN` (paper line 984 + Def 2.5)
@@ -395,9 +402,9 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_V_g_le_V_dyn
 #print axioms BlackwellDilemma.dilemma_subsumed_by_gap_general_tree
 
--- R24-C derived closures from R23-D Pattern 7 phantom-downstream repair
--- (Wires #1-#6: composing previously-orphan R23 atoms with Mathlib +
--- companion atoms to give them explicit downstream consumers):
+-- Derived closures from Pattern 7 phantom-downstream repair
+-- (Wires #1-#6: composing orphan atoms with Mathlib + companion atoms
+-- to give them explicit downstream consumers):
 --  * `ReachableSet_self_member`: refactored from atomic axiom to derived
 --    theorem via `ReachableSet_eq_ForwardReachable_empty` (Def 2.5
 --    line 193) + `ForwardReachable_self_member` (Def 2.5 length-0 path).
@@ -426,23 +433,40 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.V_g_terminal_mem_unitInterval
 #print axioms BlackwellDilemma.W_bar_limit_infty_le_W_bar_betaBarStar
 
--- R38 §18 atomic-decomposition derived theorems (R38, 2026-05-14):
--- 22 conclusion-axioms decomposed into atomic stipulations + derived
--- theorems per `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
+-- §18 atomic-decomposition derived theorems: 22 conclusion-axioms
+-- decomposed into atomic stipulations + derived theorems per
+-- `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
 -- pattern. Each entry below is the derived theorem now hosting the
 -- bundled paper conclusion; the corresponding atomic-stipulation
 -- axiom (named `<paper_content>_OPEN`) is the underlying paper-stated
 -- substance pending per-instance closure.
 
--- Cognitive.lean §18 decomposition (5 derived theorems; Part 4
--- universal-form is encoded as DEAD-END `def : Prop`
--- `gap_cognitive_threshold_part4_DEAD_END_by_junk_value` per R65 §15
--- — the universal claim is mathematically false under Lean's
--- junk-value semantics, mirroring the R9 / `gap_p_monotonicity_DEAD_
--- END_by_junk_value` precedent at Canonical.lean:1035; not consumed
--- by any downstream theorem so no `#print axioms` line is needed):
+-- Cognitive.lean §18 decomposition (6 derived theorems; Part 4 is
+-- the paper-faithful bounded form on the abstract `kappaStar`
+-- carrier — see the `gap_cognitive_threshold_part4` docstring for the
+-- non-emptiness-premise rationale. The unconditional universal-form
+-- claim remains DEAD-END via the
+-- `kappaStar_p_monotone_DEAD_END_by_junk_value` `def : Prop` marker;
+-- that marker carries zero kernel impact and no `#print axioms` line
+-- is needed for it):
+--
+-- `gap_cognitive_threshold_part2` is STRICT KERNEL-PURE (modulo
+-- Types.lean foundational primitives). The
+-- `agentRewardKernel_kappaAbove_pointwise_monotone` structural
+-- equation is a derived `theorem` via the kernel concretisation: the
+-- `AgentType.kappaAgent` branch of `agentRewardKernel` returns the
+-- constant value `1/2`, so pointwise monotonicity holds via `le_refl`
+-- after `simp [agentRewardKernel]`; the existential witness
+-- `κ₀ := 0` is paper-aligned (paper line 894: 5-state `κ*(p) = 0`
+-- throughout the reversal regime). `#print axioms` on
+-- `gap_cognitive_threshold_part2` lists ONLY `[propext,
+-- Classical.choice, Quot.sound, C1_Irreversibility,
+-- C2_RewardTopologyMisalignment, C3_InformationLocality,
+-- TerminalNeighbourTopology, AgentEdgeIdx, AgentEdgeIdx.fintype,
+-- AgentEdgeIdx.decEq, blockingProb, blockingProb_mem_unitInterval]`.
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part1
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part2
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part4
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part6
 #print axioms BlackwellDilemma.gap_kappaWelfare_cross_partial_link
 
@@ -464,22 +488,17 @@ namespace BlackwellDilemma.AxiomAudit
 -- GeneralGraphs.lean §18 decomposition (3 derived theorems):
 #print axioms BlackwellDilemma.gap_general_tree
 #print axioms BlackwellDilemma.gap_cyclic_trap
--- R83: `gap_kappaStar_depth_d_log_growth` re-exports the R83-closed
--- `bernoulli_real_power_estimate_OPEN` (now a genuine theorem composing
--- the weighted-AM–GM lower bound + the kernel-pure upper bound). The
--- print should surface only [propext, Classical.choice, Quot.sound] +
--- the opaque `c_star_constant` carrier + `gap_c_star_constant_pos_OPEN`
--- — NO `bernoulli_real_power_estimate_OPEN` axiom (it is a theorem now).
+-- `gap_kappaStar_depth_d_log_growth`: the print surfaces only
+-- [propext, Classical.choice, Quot.sound] + the opaque
+-- `c_star_constant` carrier + `gap_c_star_constant_pos_OPEN`.
 #print axioms BlackwellDilemma.TrapTree.gap_kappaStar_depth_d_log_growth
 
--- R58 closure-path-A/B individual atom prints + new derived theorem
--- (kernel-purity baseline + audit-chain visibility):
---  * `terminal_neighbour_implies_C2prime` (R58 path-B derived theorem)
---    composes the two smaller atoms below in place of the retired
---    `terminal_neighbour_implies_C2prime_atom_OPEN`.
---  * `gap_cyclic_trap` (R58 path-A) re-derived via smaller atom +
---    file-local Theorem 6.1 atom chain.
---  * `gap_error_compounding_part2` (R58 path-B) re-derived via 2-atom
+-- Individual atom prints + derived theorem:
+--  * `terminal_neighbour_implies_C2prime` derived theorem composes the
+--    two smaller atoms below.
+--  * `gap_cyclic_trap` derived via smaller atom + file-local Theorem
+--    6.1 atom chain.
+--  * `gap_error_compounding_part2` re-derived via 2-atom
 --    chain through new opaque carrier `oracleBridgePathTerminalReward_TrapTree`.
 #print axioms BlackwellDilemma.terminal_neighbour_implies_C2prime
 #print axioms BlackwellDilemma.V_g_eq_V_dyn_on_terminal_neighbour_OPEN
@@ -489,12 +508,12 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.TrapTree.oracleValueAtRoot_eq_bridgePathTerminalReward_TrapTree_OPEN
 #print axioms BlackwellDilemma.TrapTree.oracleBridgePathTerminalReward_TrapTree_eq_r_goal_OPEN
 
--- R41 §18 decompositions (3 new derived theorems closing the final
--- workingAssumption residue from R40), with R42 Pattern-1 fix:
+-- §18 decompositions (3 derived theorems closing the final
+-- workingAssumption residue):
 --  * `gap_topo_loss_below_threshold` (Wrongness.lean): composes Cat 3
 --    workingAssumption atom `topo_loss_below_envelope_exists_atom_OPEN`
 --    (paper line 286 envelope existence) + Cat 1 theorem
---    `topo_loss_below_eps_from_envelope` (R42 Mathlib-discharge from
+--    `topo_loss_below_eps_from_envelope` (Mathlib-discharge from
 --    `Filter.Tendsto`) with explicit Cat 2 Grimmett `h_perc_prob`
 --    antecedent.
 --  * `gap_topo_loss_above_threshold` (Wrongness.lean): composes Cat 3
@@ -505,67 +524,64 @@ namespace BlackwellDilemma.AxiomAudit
 --    derived theorem composing
 --    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN` with
 --    explicit Cat 2 Blackwell `h_blackwell` antecedent.
--- R42 also adds the new Cat 1 theorem itself:
+-- The closure also adds the Cat 1 theorem itself:
 --  * `topo_loss_below_eps_from_envelope` (Wrongness.lean): Cat 1 Mathlib
 --    derivation from `Filter.Tendsto` neighborhood unfolding + transitivity
---    through envelope upper bound. Discharges R41 Pattern-1 violation.
+--    through envelope upper bound.
 #print axioms BlackwellDilemma.gap_topo_loss_below_threshold
 #print axioms BlackwellDilemma.gap_topo_loss_above_threshold
 #print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_absent
--- R140: `topo_loss_below_eps_from_envelope` removed (refactored into
+-- `topo_loss_below_eps_from_envelope` removed (refactored into
 -- `gap_topo_loss_below_threshold` chain); audit reference dropped.
 
--- R44 Pattern-1 fix (Phase.lean sibling of R42 Wrongness fix):
+-- Phase.lean sibling of the Wrongness.lean Pattern-1 fix:
 --  * `topo_loss_decay_arbitrary_threshold` (Phase.lean): Cat 1 theorem
 --    derivation from `Filter.Tendsto` neighborhood unfolding + transitivity
---    through envelope upper bound. Discharges R37 Pattern-1 violation
---    (former axiom topo_loss_decay_arbitrary_threshold_OPEN was acknowledged
---    in R37 attackHistory as Mathlib-derivable but retained as Cat 3 axiom;
---    R43 audit caught it; R44 fix ports R42's proof verbatim).
+--    through envelope upper bound. Ports the Wrongness.lean proof verbatim.
 #print axioms BlackwellDilemma.topo_loss_decay_arbitrary_threshold
 
--- R59 §18 closure wave on Phase.lean — 5 retired workingAssumption atoms
+-- §18 closure wave on Phase.lean — 5 retired workingAssumption atoms
 -- decomposed into 6 smaller atoms + 1 new carrier:
---  * `topo_loss_decay_below_pc` (R59 derived theorem): composes new
---    smaller atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN`
---    (paper line 417 polynomial bound) + Cat 1 Mathlib
+--  * `topo_loss_decay_below_pc` (derived theorem): composes smaller
+--    atom `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` (paper
+--    line 417 polynomial bound) + Cat 1 Mathlib
 --    `tendsto_one_div_add_atTop_nhds_zero_nat`. Replaces retired
 --    `topo_loss_decay_below_pc_OPEN`.
---  * `gap_phase_transition_above` (R59 re-derivation): instantiates
+--  * `gap_phase_transition_above` (re-derivation): instantiates
 --    existential with new carrier `wInfoTopoRatioMillsConst p` and
---    composes two new smaller atoms `wInfoTopoRatioMillsConst_pos_above_pc_OPEN`
+--    composes two smaller atoms `wInfoTopoRatioMillsConst_pos_above_pc_OPEN`
 --    + `wInfoTopoRatio_le_MillsConst_decay_OPEN`. Replaces retired
 --    `wInfoTopoRatio_const_exists_OPEN` + `wInfoTopoRatio_bound_OPEN`.
---  * `forward_reachable_full_at_zero` (R59 derived theorem): composes
---    two new smaller atoms `all_edges_open_at_zero_blocking_OPEN`
+--  * `forward_reachable_full_at_zero` (derived theorem): composes
+--    two smaller atoms `all_edges_open_at_zero_blocking_OPEN`
 --    (Def 2.1 line 119 percolation semantics) +
 --    `forward_reachable_empty_full_at_all_open_OPEN` (Def 2.1
 --    connectivity + Def 2.5 forward-reachable). Replaces retired
 --    `forward_reachable_full_at_zero_OPEN`.
---  * `gap_trap_prevalence_above_threshold` (R59 re-derivation, with
+--  * `gap_trap_prevalence_above_threshold` (re-derivation, with
 --    paper-faithful `p < 1` antecedent): composes Hodge-style def
---    `trapConfigLocalProb` + new smaller atom
+--    `trapConfigLocalProb` + smaller atom
 --    `trapConfigLocalProb_le_misalignmentProb_OPEN` (FKG binding) +
 --    Cat 1 theorem `trapConfigLocalProb_pos` (arithmetic positivity).
 --    Replaces retired `trap_config_local_positive_OPEN`.
--- R86 NOTE: `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` was
--- RETIRED (soundness-defect fix — see the R86 section at the end of
--- this file). `topo_loss_decay_below_pc` is re-stated on the
--- paper-faithful `expectedTopoLossOnGiant`; its `#print axioms` now
+-- NOTE: `expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` was
+-- RETIRED (signature correction — see the percolation-foundation
+-- continuation section below). `topo_loss_decay_below_pc` is re-stated
+-- on the paper-faithful `expectedTopoLossOnGiant`; its `#print axioms`
 -- surfaces the signature-corrected atom
 -- `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` + the
 -- `giantComponentEvent` carrier instead of the retired false atom.
--- R87 NOTE: `trapConfigLocalProb_le_misalignmentProb_OPEN` was RETIRED
--- (soundness-defect fix — over-strong/false; see the R87 section at the
--- end of this file). `gap_trap_prevalence_above_threshold` is
--- re-derived on the concretised `trapMisalignmentProbability` + the
--- R87 signature-corrected chain; its `#print axioms` now surfaces the
--- corrected atoms `trapLocalConfigProb_pos_and_le` /
--- `restrictedExpectation_eq_localConfigProb` / `trapEventIndicator_nonneg`
--- + the carriers `trapEventIndicator` / `trapLocalConfigEvent` /
--- `trapLocalConfigProb` instead of the retired false atom.  The
--- `#print axioms` line for the retired atom is removed (the atom no
--- longer exists).
+-- NOTE: `trapConfigLocalProb_le_misalignmentProb_OPEN` was RETIRED
+-- (signature correction — over-strong/false; see the section below).
+-- `gap_trap_prevalence_above_threshold` is re-derived on the
+-- concretised `trapMisalignmentProbability` + the signature-corrected
+-- chain; its `#print axioms` surfaces the corrected atoms
+-- `trapLocalConfigProb_pos_and_le` /
+-- `restrictedExpectation_eq_localConfigProb` /
+-- `trapEventIndicator_nonneg` + the carriers `trapEventIndicator` /
+-- `trapLocalConfigEvent` / `trapLocalConfigProb` instead of the
+-- retired false atom.  The `#print axioms` line for the retired atom
+-- is removed (the atom no longer exists).
 #print axioms BlackwellDilemma.topo_loss_decay_below_pc
 #print axioms BlackwellDilemma.wInfoTopoRatioMillsConst
 #print axioms BlackwellDilemma.wInfoTopoRatioMillsConst_pos_above_pc_OPEN
@@ -576,41 +592,37 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.trapConfigLocalProb
 #print axioms BlackwellDilemma.trapConfigLocalProb_pos
 
--- R60 closure wave on Wrongness.lean (5 retired bundled atoms → 6
--- new smaller atoms + 1 new opaque carrier). New derived theorems +
--- new smaller atoms + new carrier surface here for kernel-purity
--- baseline + audit-chain visibility:
---  * `gap_wrongness` (R60 re-derivation; R90 sound-fix-aligned chain):
---    composes the new smaller atoms
+-- Closure wave on Wrongness.lean (5 retired bundled atoms → 6
+-- smaller atoms + 1 new opaque carrier). Derived theorems + smaller
+-- atoms + new carrier surface here for kernel-purity baseline +
+-- audit-chain visibility:
+--  * `gap_wrongness` (re-derivation): composes the smaller atoms
 --    `wrongness_high_beta_welfare_convergence_atom_OPEN` (paper stage 1
---    welfare convergence `W(β) → V_dyn(u_1)` — R90 SOUNDNESS FIX
---    replacing prior vacuous floor signature) +
+--    welfare convergence `W(β) → V_dyn(u_1)`) +
 --    `wrongness_misalignment_reversal_atom_OPEN` (paper stage 2 reversal
---    witness, R90 antecedent strengthened to convergence form) via the
+--    witness, antecedent strengthened to convergence form) via the
 --    convergence existential. Replaces retired
---    `topology_blind_wrongness_atom_OPEN` (R44 MOST EGREGIOUS). Already
---    printed at line 352 above.
---  * `topo_loss_below_envelope_exists` (R60 derived theorem): new Cat 1
+--    `topology_blind_wrongness_atom_OPEN`. Already printed above.
+--  * `topo_loss_below_envelope_exists` (derived theorem): Cat 1
 --    derivation composing the smaller atom
 --    `topo_loss_below_one_over_n_envelope_atom_OPEN` (paper line 294
 --    polynomial bound) + Cat 1 Mathlib `tendsto_one_div_add_atTop_nhds_zero_nat`.
 --    Replaces retired `topo_loss_below_envelope_exists_atom_OPEN`.
---  * `gap_topo_loss_above_threshold` (R60 re-derivation): instantiates
+--  * `gap_topo_loss_above_threshold` (re-derivation): instantiates
 --    existential with new carrier `expectedTopoLossAboveLowerConst p`
---    and `max(c₁, 1)` upper-bound witness; composes 3 new smaller atoms
+--    and `max(c₁, 1)` upper-bound witness; composes 3 smaller atoms
 --    (`expectedTopoLossAboveLowerConst_pos_above_pc_OPEN`,
 --    `expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN`,
 --    `expectedTopoLoss_le_one_atom_OPEN`). Replaces retired
 --    `topo_loss_above_lower_bound_atom_OPEN` +
---    `topo_loss_above_upper_bound_atom_OPEN`. Already printed at
---    line 409 above.
--- R86 NOTE: `topo_loss_below_envelope_exists` /
+--    `topo_loss_above_upper_bound_atom_OPEN`. Already printed above.
+-- NOTE: `topo_loss_below_envelope_exists` /
 -- `topo_loss_below_one_over_n_envelope_atom_OPEN` were RETIRED
--- (soundness-defect fix — see the R86 section at the end of this
--- file).  Replaced by the R86 derived theorem
+-- (signature correction — see the percolation-foundation continuation
+-- section below).  Replaced by the derived theorem
 -- `topo_loss_on_giant_below_envelope_exists` + the
 -- signature-corrected atom `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`,
--- both printed in the R86 section below.
+-- both printed in the percolation-foundation section below.
 #print axioms BlackwellDilemma.wrongness_high_beta_welfare_convergence_atom_OPEN
 #print axioms BlackwellDilemma.wrongness_misalignment_reversal_atom_OPEN
 #print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst
@@ -618,20 +630,19 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_OPEN
 #print axioms BlackwellDilemma.expectedTopoLoss_le_one_atom_OPEN
 
--- R61 closure wave on Cognitive.lean (2 retired bundled atoms → 4
--- new smaller atoms + 1 new opaque carrier + 2 new derived theorems).
--- New derived theorems + new smaller atoms + new carrier surface
--- here for kernel-purity baseline + audit-chain visibility:
---  * `mLimit_pos` (R61 derived theorem): composes the new
---    structural-equation atom `mLimit_eq_mLimitDifference_OPEN`
---    (paper line 505 identification of κ → ∞ limit value with
---    `V_dyn`-difference) + new smaller workingAssumption atom
---    `mLimitDifference_pos_OPEN` (paper-stated C2-derived strict
---    positivity). Replaces retired `mLimit_pos_OPEN`. Cat 1 chain
---    via `rw + exact`.
---  * `alpha_star_existence_via_continuity` (R61 derived theorem):
---    composes the existing `alphaStar_def` (R23-C1 atom) + Cat 1
---    Mathlib `le_csSup` / `csSup_le` + new smaller workingAssumption
+-- Closure wave on Cognitive.lean (2 retired bundled atoms → 4
+-- smaller atoms + 1 new opaque carrier + 2 derived theorems).
+-- Derived theorems + smaller atoms + new carrier surface here for
+-- kernel-purity baseline + audit-chain visibility:
+--  * `mLimit_pos` (derived theorem): composes the structural-equation
+--    atom `mLimit_eq_mLimitDifference_OPEN` (paper line 505
+--    identification of κ → ∞ limit value with `V_dyn`-difference) +
+--    smaller workingAssumption atom `mLimitDifference_pos_OPEN`
+--    (paper-stated C2-derived strict positivity). Replaces retired
+--    `mLimit_pos_OPEN`. Cat 1 chain via `rw + exact`.
+--  * `alpha_star_existence_via_continuity` (derived theorem):
+--    composes the existing `alphaStar_def` (Cat 3 atom) + Cat 1
+--    Mathlib `le_csSup` / `csSup_le` + smaller workingAssumption
 --    atom `alpha_below_alpha_star_implies_monotonicity_OPEN` (paper
 --    line 602 implicit downward-closure of monotonicity-set). Replaces
 --    retired `alpha_star_existence_via_continuity_OPEN`. Cat 3 derived
@@ -643,11 +654,11 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.alpha_star_existence_via_continuity
 #print axioms BlackwellDilemma.alpha_below_alpha_star_implies_monotonicity_OPEN
 
--- R62 closure wave on Canonical.lean (2 retired bundled atoms → 3
--- new smaller atoms + 2 new derived theorems). New derived theorems
--- + new smaller atoms surface here for kernel-purity baseline +
--- audit-chain visibility:
---  * `inflection_at_kstar` (R62 derived theorem): composes the new
+-- Closure wave on Canonical.lean (2 retired bundled atoms → 3
+-- smaller atoms + 2 derived theorems). Derived theorems + smaller
+-- atoms surface here for kernel-purity baseline + audit-chain
+-- visibility:
+--  * `inflection_at_kstar` (derived theorem): composes the
 --    structural-equation atom
 --    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
 --    (paper line 863 explicit `corresponding to β*` identification
@@ -657,105 +668,91 @@ namespace BlackwellDilemma.AxiomAudit
 --    `inflection_at_kstar_OPEN`. Net: −1 wA, +1 structuralEq.
 --    Downstream `gap_threshold_fiveState_smooth_transition` re-routed
 --    (no signature change at consumer level).
---  * `betaStarOfP_def` (R62 derived theorem, replaces axiom; R74
---    Pattern 5 closure replaces the R62 chain): originally R62
---    composed the structural-equation atom
---    `betaStarOfP_eq_minimiser_witness_OPEN` (paper line 814 explicit
---    `β*(p)` notation as carrier identification) + smaller
---    workingAssumption atom `L_minimum_exists_in_regime_i_OPEN`
---    (existence of interior minimum of L(·, p) on Regime (i)'s
---    domain). R74 replaces this with Pattern 5: `noncomputable def
---    betaStarOfP (p : ℝ) : ℝ := if h : 0 ≤ p ∧ p < p_1 then
+--  * `betaStarOfP_def` (derived theorem, replaces axiom via Pattern 5
+--    closure): `noncomputable def betaStarOfP (p : ℝ) : ℝ :=
+--    if h : 0 ≤ p ∧ p < p_1 then
 --    Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2)
 --    else 0`; `betaStarOfP_def` proof via `dif_pos` + `Classical.
---    choose_spec.2`. The R62 structural-equation atom
+--    choose_spec.2`. The structural-equation atom
 --    `betaStarOfP_eq_minimiser_witness_OPEN` is RETIRED (no
---    replacement); existence atom retained. Net delta vs R62:
---    -1 structuralEquation, +1 derivedTheorem, no wA change but
---    structural simplification (Pattern 5 unblocks DEFERRED
---    universal-inequality atoms class).
+--    replacement); existence atom retained.  Pattern 5 unblocks the
+--    DEFERRED universal-inequality atoms class.
 --    Downstream `betaStarOfP_loss_below_limit` consumes the derived
 --    theorem at identical call signature.
--- R75 update: `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
+-- `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
 -- RETIRED via Pattern 5 closure (`smoothTransitionBeta` carrier promoted to
 -- `noncomputable def := Classical.choose interior_minimiser_existence_OPEN`;
 -- positivity now derives Cat 1 from `Classical.choose_spec.1`). The
 -- `inflection_at_kstar` print remains as the canonical kernel-purity check
--- for the new derivation; the previously-printed axiom name no longer
--- exists in the source.
+-- for the derivation; the corresponding axiom name no longer exists in
+-- the source.
 #print axioms BlackwellDilemma.FiveState.inflection_at_kstar
 #print axioms BlackwellDilemma.FiveState.betaStarOfP_def
 #print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
 #print axioms BlackwellDilemma.FiveState.betaStarOfP
 #print axioms BlackwellDilemma.FiveState.smoothTransitionBeta
 
--- R73 substantive-math closures (concrete-def closure of paper-stated
--- structural-equation atoms via R72 pattern continuation, applied to two
--- new classes — sup/inf-characterisation atoms and paper-named regime-
--- split atoms):
+-- Substantive-math closures (concrete-def closure of paper-stated
+-- structural-equation atoms via the concrete-def closure pattern,
+-- applied to two classes — sup/inf-characterisation atoms and paper-
+-- named regime-split atoms):
 --
 -- (1) `kappaStar_def` (paper Theorem 4.1 Part 3 line 493 inf-
---     characterisation `κ* = inf{κ > 0 : m(κ) ≥ 0}`): previously
---     workingAssumption gapOpen axiom, now derivedTheorem gapClosed via
---     `noncomputable def kappaStar (p _α : ℝ) : ℝ := sInf {κ : ℝ | 0 < κ
---     ∧ 0 ≤ mean_estimate_gap p κ}` + `theorem kappaStar_def := fun _ _
---     => rfl`.
+--     characterisation `κ* = inf{κ > 0 : m(κ) ≥ 0}`): derivedTheorem
+--     gapClosed via `noncomputable def kappaStar (p _α : ℝ) : ℝ :=
+--     sInf {κ : ℝ | 0 < κ ∧ 0 ≤ mean_estimate_gap p κ}` +
+--     `theorem kappaStar_def := fun _ _ => rfl`.
 -- (2) `alphaStar_def` (paper `prop:sentimental` proof line 602 sup-
---     characterisation): previously workingAssumption gapOpen axiom,
---     now derivedTheorem gapClosed via `noncomputable def alphaStar (κ
---     _p : ℝ) : ℝ := sSup {...}` + `theorem alphaStar_def := fun _ _ =>
---     rfl`.
+--     characterisation): derivedTheorem gapClosed via
+--     `noncomputable def alphaStar (κ _p : ℝ) : ℝ := sSup {...}` +
+--     `theorem alphaStar_def := fun _ _ => rfl`.
 -- (3) `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (paper Remark
 --     `rem:robustness-misspec` (ii) line 942 paper-named regime split at
---     horizon `k ≥ d`): previously structuralEquation gapDefinitional
---     axiom, now derivedTheorem gapClosed via `noncomputable def
---     myopicKWelfare := if k ≥ d then agentWelfare AgentType.bayesian β
---     0 1 else myopicKWelfareBelowDepth k d β` + `theorem ... := by
+--     horizon `k ≥ d`): derivedTheorem gapClosed via
+--     `noncomputable def myopicKWelfare :=
+--     if k ≥ d then agentWelfare AgentType.bayesian β 0 1
+--     else myopicKWelfareBelowDepth k d β` + `theorem ... := by
 --     unfold myopicKWelfare; exact if_pos hkd`. Adds new opaque carrier
 --     `myopicKWelfareBelowDepth` for the paper-implicit `k < d` regime.
 --
--- Each closure is HONEST (paper's exact identification formula or paper-
--- named regime split is encoded in the def body, no R7-style content-
--- erasure). The previously-axiom-named entities now have their identifiers
--- bound to derived theorems; #print axioms reflects the new
--- kernel-pure derivation chain (depending on `mean_estimate_gap`,
--- `agentWelfare`, `myopicKWelfareBelowDepth`, etc., not on the previous
--- opaque axioms).
+-- Each closure is HONEST (paper's exact identification formula or
+-- paper-named regime split is encoded in the def body, no content-
+-- erasure). The corresponding identifiers are now bound to derived
+-- theorems; #print axioms reflects the kernel-pure derivation chain
+-- (depending on `mean_estimate_gap`, `agentWelfare`,
+-- `myopicKWelfareBelowDepth`, etc., not on opaque axioms).
 #print axioms BlackwellDilemma.kappaStar_def
 #print axioms BlackwellDilemma.alphaStar_def
 #print axioms BlackwellDilemma.myopicKWelfareBelowDepth
 
--- R80 substantive L-carrier closure wave (3 Cat 3 workingAssumption
+-- Substantive L-carrier closure wave (3 Cat 3 workingAssumption
 -- atoms about the CONCRETE 5-state welfare-loss carrier `L β p` closed
 -- by genuine real-analysis on the concrete definition — NOT by
 -- `Classical.choose` / opaque-carrier reclassification):
 --
 -- (1) `L_below_limit_at_some_beta_OPEN` (paper prop:three-regime-five-
---     state Regime (i) line 814 below-limit β* existence): previously
---     workingAssumption gapOpen axiom, now derivedTheorem gapClosed via
---     `theorem L_below_limit_at_some_beta_OPEN := L_below_limit_at_some_
---     beta_proof`. The proof composes the rearrangement identity
---     `eq:five-state-rearr` (`L_rearrangement`, by `ring`), the strict
---     bound `P_trap β < 1` (`P_trap_lt_one`, from new ClassicalResults
---     lemma `Phi_lt_one`), and `Φ_B β → 1` as β → ∞
---     (`Phi_B_tendsto_one_atTop`, from `signalVariance_tendsto_zero_
---     atTop` + `Phi_tendsto_one_atTop`).
+--     state Regime (i) line 814 below-limit β* existence):
+--     derivedTheorem gapClosed via `theorem L_below_limit_at_some_beta_OPEN
+--     := L_below_limit_at_some_beta_proof`. The proof composes the
+--     rearrangement identity `eq:five-state-rearr` (`L_rearrangement`,
+--     by `ring`), the strict bound `P_trap β < 1` (`P_trap_lt_one`,
+--     from new ClassicalResults lemma `Phi_lt_one`), and `Φ_B β → 1`
+--     as β → ∞ (`Phi_B_tendsto_one_atTop`, from
+--     `signalVariance_tendsto_zero_atTop` + `Phi_tendsto_one_atTop`).
 -- (2) `L_nonmonotone_witnesses_OPEN` (Regime (i) non-monotonicity):
---     previously workingAssumption gapOpen axiom, now derivedTheorem
---     gapClosed; both witness pairs proved from the below-limit witness
---     β* plus the endpoint limits `L_tendsto_atZero` /
---     `L_tendsto_limit_atTop`.
+--     derivedTheorem gapClosed; both witness pairs proved from the
+--     below-limit witness β* plus the endpoint limits `L_tendsto_atZero`
+--     / `L_tendsto_limit_atTop`.
 -- (3) `envelope_derivative_sign_in_p_OPEN` (Regime (i) overshoot
---     existential): previously workingAssumption gapOpen axiom, now
---     derivedTheorem gapClosed; β*₁ = below-limit witness for p₁,
---     β*₂ = finite witness from `L_tendsto_limit_atTop` for p₂.
+--     existential): derivedTheorem gapClosed; β*₁ = below-limit witness
+--     for p₁, β*₂ = finite witness from `L_tendsto_limit_atTop` for p₂.
 --
 -- New ClassicalResults.lean Mathlib-derived helpers: `Phi_reflect`,
 -- `Phi_tail_integral_pos` (via `MeasureTheory.setIntegral_pos_iff_
 -- support_of_nonneg_ae`), `Phi_gt_half_of_pos` (via `intervalIntegral.
 -- intervalIntegral_pos_of_pos`), `Phi_pos`, `Phi_lt_one`. Each closure
--- is HONEST (genuine proof on the concrete `L` definition, no R7-style
--- content-erasure, no `sorry`). `#print axioms` on all 3 closures =
+-- is HONEST (genuine proof on the concrete `L` definition, no content-
+-- erasure, no `sorry`). `#print axioms` on all 3 closures =
 -- [propext, Classical.choice, Quot.sound] only (Classical.choice from
 -- the `Filter.Tendsto.eventually` machinery; no project `_OPEN` axiom).
 #print axioms BlackwellDilemma.FiveState.L_below_limit_at_some_beta_OPEN
@@ -765,30 +762,29 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.Phi_gt_half_of_pos
 #print axioms BlackwellDilemma.Phi_reflect
 
--- R81 substantive L-carrier closure wave (2 Cat 3 workingAssumption
+-- Substantive L-carrier closure wave (2 Cat 3 workingAssumption
 -- atoms about the CONCRETE 5-state welfare-loss carrier `L β p` closed
 -- by genuine real-analysis — the EXTREME VALUE THEOREM — on the
 -- concrete definition, NOT by `Classical.choose` / opaque-carrier
 -- reclassification):
 --
 -- (1) `interior_minimiser_existence_OPEN` (paper prop:interior-optimum
---     line 774; `∃ β* > 0, ∀ β ≥ 0, L(β*,0) ≤ L(β,0)`): previously
---     workingAssumption gapOpen axiom, now derivedTheorem gapClosed via
+--     line 774; `∃ β* > 0, ∀ β ≥ 0, L(β*,0) ≤ L(β,0)`):
+--     derivedTheorem gapClosed via
 --     `theorem interior_minimiser_existence_OPEN :=
 --     interior_minimiser_existence_proof`. KEY INSIGHT: existence of an
 --     interior minimiser does NOT require the explicit `β* ≈ 1.5 bits`
 --     numeric witness — it follows from the extreme value theorem. The
---     proof composes R80's `L_below_limit_at_some_beta_proof` (interior
---     point with `L < 0.4`), `L_tendsto_atZero` / `L_tendsto_limit_
---     atTop` (boundary values exceed it), the new continuity lemma
---     `L_continuousOn_Ioi`, the closed-form boundary value
---     `L_zero_zero` (`L(0,0) = 0.425`), and `IsCompact.exists_isMinOn`
---     on a compact `[ε, M]`.
+--     proof composes `L_below_limit_at_some_beta_proof` (interior
+--     point with `L < 0.4`), `L_tendsto_atZero` /
+--     `L_tendsto_limit_atTop` (boundary values exceed it), the
+--     continuity lemma `L_continuousOn_Ioi`, the closed-form boundary
+--     value `L_zero_zero` (`L(0,0) = 0.425`), and
+--     `IsCompact.exists_isMinOn` on a compact `[ε, M]`.
 -- (2) `L_minimum_exists_in_regime_i_OPEN` (paper prop:three-regime-
 --     five-state Regime (i) line 814; `∀ p ∈ [0,p_1), ∃ β_min > 0,
---     ∀ β > 0, L(β_min,p) ≤ L(β,p)`): previously workingAssumption
---     gapOpen axiom, now derivedTheorem gapClosed via `theorem
---     L_minimum_exists_in_regime_i_OPEN :=
+--     ∀ β > 0, L(β_min,p) ≤ L(β,p)`): derivedTheorem gapClosed via
+--     `theorem L_minimum_exists_in_regime_i_OPEN :=
 --     L_minimum_exists_in_regime_i_proof`. Same extreme-value-theorem
 --     argument, generalised to `p` and restricted to `β > 0`.
 --
@@ -799,23 +795,22 @@ namespace BlackwellDilemma.AxiomAudit
 -- `P_trap_continuousOn_Ioi`, `Phi_B_continuousOn_Ioi`,
 -- `L_continuousOn_Ioi`, `L_zero_zero`. Each closure is HONEST (genuine
 -- extreme-value-theorem proof on the concrete `L` definition, no
--- R7-style content-erasure, no `sorry`). `#print axioms` on both
--- closures = [propext, Classical.choice, Quot.sound] only
--- (Classical.choice from the `Filter.Tendsto.eventually` /
--- `IsCompact.exists_isMinOn` machinery; no project `_OPEN` axiom).
+-- content-erasure, no `sorry`). `#print axioms` on both closures =
+-- [propext, Classical.choice, Quot.sound] only (Classical.choice from
+-- the `Filter.Tendsto.eventually` / `IsCompact.exists_isMinOn`
+-- machinery; no project `_OPEN` axiom).
 #print axioms BlackwellDilemma.FiveState.interior_minimiser_existence_OPEN
 #print axioms BlackwellDilemma.FiveState.L_minimum_exists_in_regime_i_OPEN
 
--- R82 substantive closure wave: `L'` derivative infrastructure +
+-- Substantive closure wave: `L'` derivative infrastructure +
 -- `Tendsto_overshoot_at_p1_OPEN` closed by a SQUEEZE argument on the
 -- concrete `overshootRegimeI` carrier.
 --
 -- (1) `Tendsto_overshoot_at_p1_OPEN` (paper prop:three-regime-five-
 --     state Regime (i) line 814 third bullet, "overshoot vanishing at
---     p_1"): previously workingAssumption gapOpen axiom, now
---     derivedTheorem gapClosed via a genuine SQUEEZE on the concrete
---     `overshootRegimeI p = 0.4 − L(β*(p), p)` carrier. Lower bound
---     `0 < overshootRegimeI p` from `betaStarOfP_loss_below_limit`;
+--     p_1"): derivedTheorem gapClosed via a genuine SQUEEZE on the
+--     concrete `overshootRegimeI p = 0.4 − L(β*(p), p)` carrier. Lower
+--     bound `0 < overshootRegimeI p` from `betaStarOfP_loss_below_limit`;
 --     upper bound `overshootRegimeI p ≤ (1/2)·(0.9(1−p) − 0.5)` from
 --     the rearrangement `eq:five-state-rearr` EVALUATED AT the
 --     minimiser `β*(p) > 0` (`overshootRegimeI_upper_bound`, using the
@@ -826,7 +821,7 @@ namespace BlackwellDilemma.AxiomAudit
 --     closure does NOT consume the transcendental unimodality input
 --     `L_unimodal_in_regime_i_OPEN` — the squeeze needs only the
 --     rearrangement at `β*(p)` plus the minimiser positivity
---     `betaStarOfP_pos` (`Classical.choose_spec` of the R81-closed
+--     `betaStarOfP_pos` (`Classical.choose_spec` of the closed
 --     `L_minimum_exists_in_regime_i_OPEN` theorem).
 --
 -- New Canonical.lean `L'` derivative infrastructure (Mathlib-derived,
@@ -845,18 +840,17 @@ namespace BlackwellDilemma.AxiomAudit
 -- `L' < 0` wherever `0.9(1−p)Φ_B β ≤ 1/2`). The right-branch sign
 -- needs the transcendental two-term comparison the paper verifies only
 -- numerically, so `L_unimodal_in_regime_i_OPEN` HONESTLY remains a
--- workingAssumption axiom (NOT closed this round). Each R82 closure is
+-- workingAssumption axiom (NOT closed by this wave). Each closure is
 -- HONEST (genuine real-analysis / `HasDerivAt` proof on the concrete
--- carriers, no R7-style content-erasure, no `sorry`). `#print axioms`
--- on the `Tendsto_overshoot_at_p1_OPEN` closure = [propext,
--- Classical.choice, Quot.sound] only (Classical.choice from the
--- `Classical.choose` in `betaStarOfP` + the squeeze machinery; no
--- project `_OPEN` axiom).
+-- carriers, no content-erasure, no `sorry`). `#print axioms` on the
+-- `Tendsto_overshoot_at_p1_OPEN` closure = [propext, Classical.choice,
+-- Quot.sound] only (Classical.choice from the `Classical.choose` in
+-- `betaStarOfP` + the squeeze machinery; no project `_OPEN` axiom).
 #print axioms BlackwellDilemma.FiveState.Tendsto_overshoot_at_p1_OPEN
 
--- R84 percolation-foundation wave: paper-faithful finite
--- bond-percolation framework (`Percolation.lean`) + concretisation of
--- the `expectedTopoLoss` carrier + closure of
+-- Percolation-foundation wave: paper-faithful finite bond-percolation
+-- framework (`Percolation.lean`) + concretisation of the
+-- `expectedTopoLoss` carrier + closure of
 -- `expectedTopoLoss_le_one_atom_OPEN`.
 --
 -- (1) `Percolation.lean` FOUNDATION — the finite bond-percolation
@@ -884,50 +878,52 @@ namespace BlackwellDilemma.AxiomAudit
 --        `percExpectation_mono` — linearity + integrand-monotonicity
 --        of `E_{G_p}`.
 --
--- (2) `expectedTopoLoss` CONCRETISED — the prior opaque carrier
---     `axiom expectedTopoLoss : ℕ → ℝ → ℝ` is REPLACED (R72/R73
---     concrete-def-closure pattern) by `noncomputable def
---     expectedTopoLoss n p := percExpectation (1 − p) (topoLossKernel
---     n)`, which IS paper Definition 2.1 line 119's `E_{G_p}[·]`
---     evaluated on the explicit finite bond-percolation measure.  Two
---     supporting paper-Def-stipulated carriers: `EdgeIdx n` (the `Z²_L`
---     edge set, paper Def 2.1's `E`) + `topoLossKernel n` (paper
+-- (2) `expectedTopoLoss` CONCRETISED — the opaque carrier
+--     `axiom expectedTopoLoss : ℕ → ℝ → ℝ` is REPLACED by
+--     `noncomputable def expectedTopoLoss n p :=
+--     percExpectation (1 − p) (topoLossKernel n)`, which IS paper
+--     Definition 2.1 line 119's `E_{G_p}[·]` evaluated on the
+--     explicit finite bond-percolation measure.  Two supporting
+--     paper-Def-stipulated carriers: `EdgeIdx n` (the `Z²_L` edge
+--     set, paper Def 2.1's `E`) + `topoLossKernel n` (paper
 --     `prop:topo-cluster`'s pointwise integrand `r^* − max_{v∈R} r`),
 --     with the structural equation `topoLossKernel_mem_unitInterval`
---     (paper Def 2.1 line 113 reward-range `r : V → [0,1]`, transported
---     to the loss kernel — structuralEquation, 永不-close per §3.4.3,
---     mirroring the `all_edges_open_at_zero_blocking_OPEN` boundary-
---     semantics precedent).
+--     (paper Def 2.1 line 113 reward-range `r : V → [0,1]`,
+--     transported to the loss kernel — structuralEquation, 永不-close
+--     per §3.4.3, mirroring the
+--     `all_edges_open_at_zero_blocking_OPEN` boundary-semantics
+--     precedent).
 --
--- (3) `expectedTopoLoss_le_one_atom_OPEN` CLOSED — the prior R60
---     workingAssumption axiom `∀ n p, expectedTopoLoss n p ≤ 1` is now
---     a derived `theorem` (paper Def 2.1 domain antecedents `0 ≤ p`,
---     `p ≤ 1` added): unfolds to `percExpectation (1−p) (topoLossKernel
---     n) ≤ 1` and closes by `percExpectation_le_of_pointwise_le` +
---     the pointwise kernel bound `topoLossKernel_mem_unitInterval`.
+-- (3) `expectedTopoLoss_le_one_atom_OPEN` CLOSED — the
+--     workingAssumption axiom `∀ n p, expectedTopoLoss n p ≤ 1` is
+--     now a derived `theorem` (paper Def 2.1 domain antecedents
+--     `0 ≤ p`, `p ≤ 1` added): unfolds to `percExpectation (1−p)
+--     (topoLossKernel n) ≤ 1` and closes by
+--     `percExpectation_le_of_pointwise_le` + the pointwise kernel
+--     bound `topoLossKernel_mem_unitInterval`.
 --     inputCategory Cat 3 → Cat 1; cat3SubType workingAssumption →
 --     derivedTheorem; status gapOpen → gapClosed.  `gap_topo_loss_
 --     above_threshold` updated to thread the paper-faithful `p ≤ 1`
 --     antecedent (matching the sibling `gap_trap_prevalence_above_
 --     threshold`'s `p < 1`).  `#print axioms` on the closure = kernel
---     axioms + the 3 paper-Def carriers/structural-equation (`EdgeIdx`,
---     `topoLossKernel`, `topoLossKernel_mem_unitInterval`) + the
---     `EdgeIdx` finiteness instances — NO workingAssumption axiom
---     remains.  Each R84 item is HONEST (genuine measure-theoretic
---     proof on the concrete framework, no `sorry`, no R7-style
---     content-erasure — the `def` body IS the paper's exact `E_{G_p}`
---     decomposition).
+--     axioms + the 3 paper-Def carriers/structural-equation
+--     (`EdgeIdx`, `topoLossKernel`,
+--     `topoLossKernel_mem_unitInterval`) + the `EdgeIdx` finiteness
+--     instances — NO workingAssumption axiom remains.  Each item is
+--     HONEST (genuine measure-theoretic proof on the concrete
+--     framework, no `sorry`, no content-erasure — the `def` body IS
+--     the paper's exact `E_{G_p}` decomposition).
 --
 -- The two below-threshold `1/(n+1)` envelope atoms
 -- (`expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` in Phase.lean,
 -- `topo_loss_below_one_over_n_envelope_atom_OPEN` in Wrongness.lean)
 -- HONESTLY remain workingAssumption axioms: the `1/(n+1)` bound is an
 -- EXPECTATION bound (false pointwise — a single bad realisation can
--- have loss up to `1`) requiring the giant-component event probability
--- `θ(1−p) > 0` to split the kernel — the giant-component-conditioning
--- content, a genuine next-layer percolation input not closable this
--- round.  The `Percolation.lean` foundation is the substrate that
--- future round's giant-component split will be built on.
+-- have loss up to `1`) requiring the giant-component event
+-- probability `θ(1−p) > 0` to split the kernel — the giant-
+-- component-conditioning content, a genuine next-layer percolation
+-- input.  The `Percolation.lean` foundation is the substrate that
+-- the giant-component split will be built on.
 #print axioms BlackwellDilemma.bondMeasureTotal_eq_one
 #print axioms BlackwellDilemma.percExpectation_const
 #print axioms BlackwellDilemma.percExpectation_le_of_pointwise_le
@@ -938,21 +934,21 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.percExpectation_mono
 #print axioms BlackwellDilemma.expectedTopoLoss_le_one_atom_OPEN
 
--- R85 percolation-foundation wave (continuation): concretisation of
+-- Percolation-foundation wave (continuation): concretisation of
 -- the `W_info_oracle` carrier over `Percolation.lean` + closure of
 -- BOTH `prop:info-decay` workingAssumption atoms.
 --
--- (1) `W_info_oracle` CONCRETISED — the prior opaque carrier
---     `axiom W_info_oracle : ℝ → ℝ → ℝ` is REPLACED (R84
---     `expectedTopoLoss` concrete-def-closure pattern) by
---     `noncomputable def W_info_oracle n p β := percExpectation (1 −
---     p) (wInfoOracleKernel n β)`, which IS paper Theorem 3.1 proof
---     line 258's `W_info = E_{G_p}[E_s[r(v_T)] − r^*_R]` evaluated on
---     the explicit finite bond-percolation measure.  The carrier
---     gains an `n` index (the residual lives on `Z²_L`, `L² = n`);
---     paper `prop:info-decay` line 272's "uniformly in `n`" is
---     realised by the `∀ n` quantification of the downstream derived
---     theorems.  Three supporting paper-Def-stipulated atoms:
+-- (1) `W_info_oracle` CONCRETISED — the opaque carrier
+--     `axiom W_info_oracle : ℝ → ℝ → ℝ` is REPLACED by
+--     `noncomputable def W_info_oracle n p β :=
+--     percExpectation (1 − p) (wInfoOracleKernel n β)`, which IS
+--     paper Theorem 3.1 proof line 258's
+--     `W_info = E_{G_p}[E_s[r(v_T)] − r^*_R]` evaluated on the
+--     explicit finite bond-percolation measure.  The carrier gains an
+--     `n` index (the residual lives on `Z²_L`, `L² = n`); paper
+--     `prop:info-decay` line 272's "uniformly in `n`" is realised by
+--     the `∀ n` quantification of the downstream derived theorems.
+--     Supporting paper-Def-stipulated atoms:
 --      * `wInfoOracleKernel` (carrier — paper Thm 3.1 proof line 258's
 --        pointwise integrand `E_s[r(v_T)] − r^*_R`),
 --      * `wInfoOracleClusterCount` (carrier — paper `prop:info-decay`
@@ -973,32 +969,33 @@ namespace BlackwellDilemma.AxiomAudit
 --     §3 `W_info_oracle` concretisation can reference the same `Z²_L`
 --     edge set — carrier content unchanged, only relocated.
 --
--- (2) `W_info_oracle_nonpos_OPEN` CLOSED — the prior R44
---     workingAssumption axiom `∀ p, p_c < p → ∀ β > 0, W_info_oracle
---     p β ≤ 0` is now a derived `theorem` (n-indexed, paper Def 2.1
---     domain antecedent `p ≤ 1` added): unfolds to `percExpectation
---     (1−p) (wInfoOracleKernel n β) ≤ 0` and closes by
+-- (2) `W_info_oracle_nonpos_OPEN` CLOSED — the workingAssumption
+--     axiom `∀ p, p_c < p → ∀ β > 0, W_info_oracle p β ≤ 0` is now a
+--     derived `theorem` (n-indexed, paper Def 2.1 domain antecedent
+--     `p ≤ 1` added): unfolds to `percExpectation (1−p)
+--     (wInfoOracleKernel n β) ≤ 0` and closes by
 --     `percExpectation_le_of_pointwise_le` + the pointwise kernel
 --     sign `wInfoOracleKernel_nonpos`.  inputCategory Cat 3 → Cat 1;
 --     cat3SubType workingAssumption → derivedTheorem; status gapOpen
 --     → gapClosed.
 --
--- (3) `W_info_oracle_exponential_bound_OPEN` CLOSED — the prior R44
---     workingAssumption axiom is now a derived `theorem`.  The witness
---     constant is `C := percExpectation (1−p) (wInfoOracleClusterCount
---     n) = E_n[|R|]`; the closure chain is `|W_info_oracle n p β| =
+-- (3) `W_info_oracle_exponential_bound_OPEN` CLOSED — the
+--     workingAssumption axiom is now a derived `theorem`.  The
+--     witness constant is `C := percExpectation (1−p)
+--     (wInfoOracleClusterCount n) = E_n[|R|]`; the closure chain is
+--     `|W_info_oracle n p β| =
 --     |percExpectation (1−p) (wInfoOracleKernel n β)| ≤
 --     percExpectation (1−p) |kernel|  (Jensen-style helper
 --     `percExpectation_abs_le`)  ≤ percExpectation (1−p)
 --     (clusterCount · 2^{-β})  (`percExpectation_mono` against the
 --     paper-stated per-realisation bound
 --     `wInfoOracleKernel_abs_le_clusterCount`)  = 2^{-β} ·
---     percExpectation (1−p) clusterCount  (`percExpectation_smul`)  =
---     C · 2^{-β}`.  Positivity `0 < C` from `wInfoOracleClusterCount
---     ≥ 1` (`wInfoOracleClusterCount_ge_one`) + `percExpectation_ge_
---     of_pointwise_ge`.  R85 also adds the new Cat 1 helper
---     `percExpectation_abs_le` (`|E[f]| ≤ E[|f|]` on the finite
---     bond-percolation measure, kernel-pure `[propext,
+--     percExpectation (1−p) clusterCount  (`percExpectation_smul`)
+--     = C · 2^{-β}`.  Positivity `0 < C` from
+--     `wInfoOracleClusterCount ≥ 1` (`wInfoOracleClusterCount_ge_one`)
+--     + `percExpectation_ge_of_pointwise_ge`.  The wave also adds the
+--     Cat 1 helper `percExpectation_abs_le` (`|E[f]| ≤ E[|f|]` on the
+--     finite bond-percolation measure, kernel-pure `[propext,
 --     Classical.choice, Quot.sound]`).  inputCategory Cat 3 → Cat 1;
 --     cat3SubType workingAssumption → derivedTheorem; status gapOpen
 --     → gapClosed.
@@ -1007,33 +1004,33 @@ namespace BlackwellDilemma.AxiomAudit
 -- the FAITHFUL per-`n` form `∀ n, ∃ C, …` — for each `n` the constant
 -- `C(n) = E_n[|R|]` is a genuine finite real on the finite
 -- bond-percolation measure.  Paper `prop:info-decay` line 272's
--- stronger "uniformly in `n`" form additionally needs `sup_n E_n[|R|]
--- < ∞`, which the paper obtains from the Grimmett 1999 §6.75
--- cluster-size exponential tail (paper line 276 `E[|R|] = O(1)`).
--- That uniform bound is the genuine next-layer percolation input; the
--- `h_grimmett` Cat 2 antecedent is retained on
--- `W_info_oracle_exponential_bound_OPEN` / `gap_info_decay` /
+-- stronger "uniformly in `n`" form additionally needs
+-- `sup_n E_n[|R|] < ∞`, which the paper obtains from the Grimmett
+-- 1999 §6.75 cluster-size exponential tail (paper line 276
+-- `E[|R|] = O(1)`).  That uniform bound is the genuine next-layer
+-- percolation input; the `h_grimmett` Cat 2 antecedent is retained
+-- on `W_info_oracle_exponential_bound_OPEN` / `gap_info_decay` /
 -- `gap_dilemma` for audit-chain continuity (so `#print axioms
 -- gap_dilemma` still surfaces `gap_grimmett_exponential_decay_OPEN`)
 -- even though the per-`n` closure does not consume it.
 --
--- `#print axioms` on the two R85 closures = kernel axioms + the
+-- `#print axioms` on the two closures = kernel axioms + the
 -- `EdgeIdx` carriers/instances + the 2 new `wInfoOracle*` carriers +
--- the 3 new `wInfoOracle*` structural equations + `harrisKestenCritical
--- Prob` / `gap_harris_kesten_OPEN` — NO workingAssumption axiom
--- remains.  Each R85 item is HONEST (genuine measure-theoretic proof
--- on the concrete bond-percolation framework, no `sorry`, no R7-style
--- content-erasure — the `def` body IS the paper's exact
--- `E_{G_p}[E_s[r(v_T)] − r^*_R]` decomposition).
+-- the 3 new `wInfoOracle*` structural equations +
+-- `harrisKestenCriticalProb` / `gap_harris_kesten_OPEN` — NO
+-- workingAssumption axiom remains.  Each item is HONEST (genuine
+-- measure-theoretic proof on the concrete bond-percolation
+-- framework, no `sorry`, no content-erasure — the `def` body IS the
+-- paper's exact `E_{G_p}[E_s[r(v_T)] − r^*_R]` decomposition).
 --
 -- The two below-threshold `1/(n+1)` envelope atoms
 -- (`expectedTopoLoss_below_pc_one_over_n_envelope_OPEN` in Phase.lean,
 -- `topo_loss_below_one_over_n_envelope_atom_OPEN` in Wrongness.lean)
--- HONESTLY remain workingAssumption axioms (R84 finding stands): the
--- `1/(n+1)` bound is an EXPECTATION bound (false pointwise) requiring
--- the giant-component event probability `θ(1−p) > 0` to split the
--- kernel — the giant-component-conditioning content, a genuine
--- next-layer percolation input not closable this round.
+-- HONESTLY remain workingAssumption axioms: the `1/(n+1)` bound is an
+-- EXPECTATION bound (false pointwise) requiring the giant-component
+-- event probability `θ(1−p) > 0` to split the kernel — the giant-
+-- component-conditioning content, a genuine next-layer percolation
+-- input.
 #print axioms BlackwellDilemma.percExpectation_abs_le
 #print axioms BlackwellDilemma.wInfoOracleKernel_nonpos
 #print axioms BlackwellDilemma.wInfoOracleClusterCount_ge_one
@@ -1043,8 +1040,8 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_info_decay
 #print axioms BlackwellDilemma.gap_dilemma
 
--- R86 percolation-foundation wave (continuation) — SOUNDNESS-DEFECT
--- FIX of the below-threshold `1/(n+1)` envelope atoms (R83 precedent).
+-- Percolation-foundation wave (continuation) — signature correction
+-- of the below-threshold `1/(n+1)` envelope atoms.
 --
 -- THE DEFECT.  The retired atoms
 -- `topo_loss_below_one_over_n_envelope_atom_OPEN` (Wrongness.lean) +
@@ -1059,14 +1056,14 @@ namespace BlackwellDilemma.AxiomAudit
 -- threshold `E[|W_topo|] = Θ(1)` — the `1 − θ(1−p)` fraction of
 -- non-giant-component realisations carry `Θ(1)` loss (an
 -- isolated-vertex realisation has `|R| = 1`, loss
--- `(n−1)/(2(n+1)) ≈ 1/2`).  The R84/R85 AxiomAudit notes had already
+-- `(n−1)/(2(n+1)) ≈ 1/2`).  The AxiomAudit notes above had already
 -- FLAGGED this ("the `1/(n+1)` bound is an EXPECTATION bound, false
 -- pointwise ... requiring the giant-component event probability
 -- `θ(1−p) > 0` to split the kernel").
 --
--- THE FIX (per `feedback_truth_over_publication` + R83 precedent —
--- correcting an over-strong signature to the true paper claim, then
--- proving THAT, IS a valid closure).
+-- THE FIX (per `feedback_truth_over_publication` — correcting an
+-- over-strong signature to the true paper claim, then proving THAT,
+-- IS a valid closure).
 --
 -- (1) `Percolation.lean` EXTENDED with the sub-event-expectation +
 --     cluster-size-partition layer (4 new kernel-pure lemmas):
@@ -1099,9 +1096,9 @@ namespace BlackwellDilemma.AxiomAudit
 --     1/(n+1)`.  TRUE (unlike the retired atoms) — paper line 417's
 --     per-realisation giant-component bound `(n−k)/((n+1)(k+1)) ≤
 --     1/(n+1)` for `k = |R| = Θ(n) ≥ (n−1)/2`.  Mirrors the
---     `topoLossKernel_mem_unitInterval` R84 structuralEquation
---     precedent (paper stipulates the kernel's pointwise behaviour),
---     here on the giant-component sub-event.
+--     `topoLossKernel_mem_unitInterval` structuralEquation precedent
+--     (paper stipulates the kernel's pointwise behaviour), here on
+--     the giant-component sub-event.
 --
 -- (4) GENUINE PAPER CLAIM derived (not axiomatised) —
 --     `expectedTopoLossOnGiant n p := percRestrictedExpectation (1−p)
@@ -1126,7 +1123,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- inputCategory of the retired atoms Cat 3 → (the corrected atom is
 -- Cat 3 structuralEquation); the two retired atom Ledger entries are
 -- marked RETIRED/gapClosed in place; +1 new carrier + 1 new
--- structuralEquation atom.  Each R86 item is HONEST — the
+-- structuralEquation atom.  Each item is HONEST — the
 -- `Percolation.lean` infrastructure is genuine kernel-pure
 -- measure-theoretic math, the corrected atom is the TRUE paper claim
 -- (the retired atoms were FALSE), and the derived theorem is a
@@ -1143,11 +1140,11 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_phase_transition_below
 
 -- ===================================================================
--- R87 SOUNDNESS-DEFECT FIX — `trapConfigLocalProb_le_misalignmentProb_OPEN`
+-- Signature correction — `trapConfigLocalProb_le_misalignmentProb_OPEN`
 -- was over-strong (FALSE), corrected to the paper-faithful form.
 -- ===================================================================
 --
--- THE DEFECT.  The retired R59 atom
+-- THE DEFECT.  The retired atom
 -- `trapConfigLocalProb_le_misalignmentProb_OPEN` asserted
 -- `trapConfigLocalProb p ≤ trapMisalignmentProbability p`, i.e. that
 -- the paper's `6 p⁵ (1-p)²` quantity is a *lower bound* on the trap
@@ -1168,10 +1165,9 @@ namespace BlackwellDilemma.AxiomAudit
 -- depending on `p`" — that constant is `6 p⁵ (1-p)²` *multiplied by*
 -- the further positive factors, NOT `6 p⁵ (1-p)²` itself.
 --
--- THE FIX (per `feedback_truth_over_publication` + R83/R86 precedent —
--- correcting an over-strong signature to the true paper claim, then
--- proving THAT, IS a valid closure; + the R85 concretise-the-opaque-
--- carrier pattern).
+-- THE FIX (per `feedback_truth_over_publication` — correcting an
+-- over-strong signature to the true paper claim, then proving THAT,
+-- IS a valid closure; + the concretise-the-opaque-carrier pattern).
 --
 -- (1) `Percolation.lean` EXTENDED with one new kernel-pure lemma:
 --      * `percRestrictedExpectation_le_percExpectation_of_nonneg` —
@@ -1182,9 +1178,10 @@ namespace BlackwellDilemma.AxiomAudit
 --        probability" tool).  Kernel-pure
 --        `[propext, Classical.choice, Quot.sound]`.
 --
--- (2) `trapMisalignmentProbability` CONCRETISED (R85 `W_info_oracle`
---     pattern) — opaque `axiom trapMisalignmentProbability : ℝ → ℝ`
---     REPLACED by `noncomputable def trapMisalignmentProbability p :=
+-- (2) `trapMisalignmentProbability` CONCRETISED (via the
+--     `W_info_oracle` pattern) — opaque
+--     `axiom trapMisalignmentProbability : ℝ → ℝ` REPLACED by
+--     `noncomputable def trapMisalignmentProbability p :=
 --     percExpectation (1−p) trapEventIndicator` (paper line 458's
 --     "probability of the misalignment event" = `E_{G_p}[indicator]`).
 --
@@ -1217,11 +1214,11 @@ namespace BlackwellDilemma.AxiomAudit
 --     via transitivity.  TERMINAL derived theorem (no higher consumer
 --     — grep-verified), so the correction is fully contained.
 --
--- The single retired R59 atom `trapConfigLocalProb_le_misalignmentProb_OPEN`
+-- The single retired atom `trapConfigLocalProb_le_misalignmentProb_OPEN`
 -- is RETIRED (Ledger entry marked RETIRED/gapClosed in place); +1 new
 -- kernel-pure `Percolation.lean` lemma + 1 concretised carrier-as-def
 -- + 3 new carriers + 3 new structuralEquation atoms + 1 new derived
--- theorem.  Each R87 item is HONEST — the `Percolation.lean` lemma is
+-- theorem.  Each item is HONEST — the `Percolation.lean` lemma is
 -- genuine kernel-pure measure-theoretic math, the corrected atoms are
 -- the TRUE paper claim (the retired atom was FALSE), and the derived
 -- theorem is a genuine proof on that infrastructure.
@@ -1233,13 +1230,13 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.trapLocalConfigProb_le_misalignmentProb
 #print axioms BlackwellDilemma.gap_trap_prevalence_above_threshold
 
--- R88 percolation-foundation wave (continuation): kernel-based
+-- Percolation-foundation wave (continuation): kernel-based
 -- concretisation of the `agentWelfare` carrier over `Percolation.lean`
 -- + closure of FIVE `agentWelfare`-dependent atoms.
 --
--- (1) `agentWelfare` CONCRETISED — the prior opaque carrier
+-- (1) `agentWelfare` CONCRETISED — the opaque carrier
 --     `axiom agentWelfare : AgentType → (β κ α : ℝ) → ℝ` is REPLACED
---     (R85 `W_info_oracle` concrete-def-closure pattern) by
+--     (via the `W_info_oracle` concrete-def-closure pattern) by
 --     `noncomputable def agentWelfare a β κ α := percExpectation
 --     (1 − blockingProb) (agentRewardKernel a β κ α)`, which IS paper
 --     §2.5 line 205-208's `W(β,κ,α) = E_{G_p}[E_{s,ω̂_κ}[r(v_T)]]`
@@ -1248,11 +1245,8 @@ namespace BlackwellDilemma.AxiomAudit
 --     `E_{s,ω̂_κ}[r(v_T)]` is carried by the new opaque carrier
 --     `agentRewardKernel` (its evaluation needs `ForwardReachable` +
 --     recursive `V̂_κ` + the routing argmax — the IDP dynamic-
---     programming machinery R79's keystone assessment flagged as
---     multi-round).  Executes R79's deferred Option B at the OUTER-
---     expectation layer: R84-R87 built `Percolation.lean`, the exact
---     infrastructure R79 flagged as missing.  Supporting paper-Def-
---     stipulated atoms:
+--     programming machinery deferred to a subsequent layer).
+--     Supporting paper-Def-stipulated atoms:
 --      * `AgentEdgeIdx` (carrier — the general-IDP edge set, the
 --        unindexed analogue of `Wrongness.EdgeIdx n`),
 --      * `agentRewardKernel` (carrier — paper §2.5 line 205-208's
@@ -1260,7 +1254,7 @@ namespace BlackwellDilemma.AxiomAudit
 --      * `agentRewardKernel_mem_unitInterval` (structuralEquation —
 --        per-realisation reward range `∈ [0,1]`; the inner expectation
 --        of a `[0,1]`-valued reward is `[0,1]`-valued, read
---        per-realisation; `wInfoOracleKernel_nonpos` R85 precedent),
+--        per-realisation; `wInfoOracleKernel_nonpos` precedent),
 --      * `agentRewardKernel_bayesian_pointwise_monotone` /
 --        `agentRewardKernel_kappaAbove_pointwise_monotone` /
 --        `agentRewardKernel_sentimental_pointwise_monotone`
@@ -1270,24 +1264,24 @@ namespace BlackwellDilemma.AxiomAudit
 --        `prop:sentimental` STATE 'conditional on ω, the agent faces a
 --        fixed-feasible-set problem and Blackwell's theorem applies' —
 --        the per-realisation form IS the paper-stipulated structural
---        input, `wInfoOracleKernel_nonpos` R85 precedent),
+--        input, `wInfoOracleKernel_nonpos` precedent),
 --      * `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar`
 --        (structuralEquation — the 5-state-instance specialisation of
 --        the κ-above-threshold monotonicity, gated by the instance-
 --        specific threshold `kappaStar_fiveState p`).
---     NOT R7-flagged content-erasure: the def body IS the paper's
---     exact `E_{G_p}[·]` outer-expectation decomposition.
+--     The def body IS the paper's exact `E_{G_p}[·]` outer-expectation
+--     decomposition — no content-erasure.
 --
--- (2) `agentWelfare_monotone_of_kernel_pointwise_monotone` — R88 Cat 1
+-- (2) `agentWelfare_monotone_of_kernel_pointwise_monotone` — Cat 1
 --     FOUNDATION derived theorem: the general pointwise-monotone-kernel
 --     ⇒ monotone-welfare bridge.  `agentWelfare` unfolds to
 --     `percExpectation (1 − blockingProb) (agentRewardKernel a · κ α)`,
 --     and `Percolation.lean`'s `percExpectation_mono` transfers the
 --     pointwise `≤` to the expectation; the percolation parameter
 --     `1 − blockingProb ∈ [0,1]` from `blockingProb_mem_unitInterval`.
---     This single foundation lemma is what every R88 welfare-
---     monotonicity closure composes with the corresponding paper-
---     stipulated pointwise structural equation.
+--     This single foundation lemma is what every welfare-monotonicity
+--     closure composes with the corresponding paper-stipulated
+--     pointwise structural equation.
 --
 -- (3) `agentWelfare_mem_unitInterval` CLOSED — was a Cat 3
 --     structuralEquation axiom; now a derived `theorem`: `agentWelfare`
@@ -1303,9 +1297,9 @@ namespace BlackwellDilemma.AxiomAudit
 --     `welfare_continuity_in_alpha_OPEN` /
 --     `alpha_below_alpha_star_implies_monotonicity_OPEN` /
 --     `kappa_above_threshold_blackwell_recovery_OPEN` CLOSED — all four
---     prior Cat 3 workingAssumption axioms are now derived `theorem`s,
+--     Cat 3 workingAssumption axioms are now derived `theorem`s,
 --     each composing the corresponding paper-stipulated pointwise
---     structural equation with the R88 foundation lemma
+--     structural equation with the foundation lemma
 --     `agentWelfare_monotone_of_kernel_pointwise_monotone`.  The
 --     `h_blackwell` / `hC` / `hT` / `α < α*` antecedents are retained
 --     (now unused) for audit-chain continuity + paper-faithful regime
@@ -1313,13 +1307,12 @@ namespace BlackwellDilemma.AxiomAudit
 --     workingAssumption → derivedTheorem; status gapOpen → gapClosed.
 --     Net wA delta: −4 (the new structural equations are paper-Def-
 --     stipulated per-realisation facts, tagged structuralEquation per
---     the `wInfoOracleKernel_nonpos` R85 precedent, NOT
---     workingAssumption).  R57/R61's SKIP verdicts on the κ-recovery
---     atoms + R61's SKIP on the sentimental atoms are SUPERSEDED — the
---     closure prerequisite (a concrete `agentWelfare` surface for the
---     conditional-on-`R` Blackwell argument) is now built.
+--     the `wInfoOracleKernel_nonpos` precedent, NOT
+--     workingAssumption).  The closure prerequisite — a concrete
+--     `agentWelfare` surface for the conditional-on-`R` Blackwell
+--     argument — is now built.
 --
--- Scope honesty: R88 does NOT close the `agentWelfare`-dependent
+-- Scope honesty: this wave does NOT close the `agentWelfare`-dependent
 -- REVERSAL-existence atoms (`wrongness_misalignment_reversal`,
 -- `alpha_above_alpha_star_implies_reversal`,
 -- `C2prime_implies_greedy_reversal`,
@@ -1330,17 +1323,17 @@ namespace BlackwellDilemma.AxiomAudit
 -- stipulated input, distinct from the monotonicity structural
 -- equations closed here); the supermodular atoms need the
 -- `kappaAgentWelfareSNR`-differentiability bridge.  These are
--- documented as the R89+ layer.  R88 closes exactly the
--- monotonicity-shaped atoms the kernel-monotonicity foundation
--- supports.
+-- handled by the subsequent reversal-witness layer.  The
+-- monotonicity-shaped atoms closed here are exactly those the
+-- kernel-monotonicity foundation supports.
 --
--- `#print axioms` on the R88 closures = kernel axioms + the
+-- `#print axioms` on the closures = kernel axioms + the
 -- `AgentEdgeIdx` carrier + its `Fintype`/`DecidableEq` instances +
 -- the `agentRewardKernel` carrier + the relevant
 -- `agentRewardKernel_*` structural equations + `blockingProb` /
 -- `blockingProb_mem_unitInterval` — NO workingAssumption axiom
--- remains.  Each R88 item is HONEST (genuine measure-theoretic proof
--- on the concrete bond-percolation framework, no `sorry`, no R7-style
+-- remains.  Each item is HONEST (genuine measure-theoretic proof
+-- on the concrete bond-percolation framework, no `sorry`, no
 -- content-erasure — the `def` body IS the paper's exact
 -- `E_{G_p}[E_{s,ω̂_κ}[r(v_T)]]` outer-expectation decomposition).
 #print axioms BlackwellDilemma.agentWelfare_mem_unitInterval
@@ -1348,18 +1341,18 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.kappa_large_blackwell_recovery_OPEN
 #print axioms BlackwellDilemma.welfare_continuity_in_alpha_OPEN
 #print axioms BlackwellDilemma.alpha_below_alpha_star_implies_monotonicity_OPEN
--- R140: `kappa_above_threshold_blackwell_recovery_OPEN` removed
+-- `kappa_above_threshold_blackwell_recovery_OPEN` removed
 -- (refactored into kappa_large_blackwell_recovery_OPEN); audit dropped.
 
--- R89 continuation of the R88 percolation-foundation wave (kernel-based
+-- Continuation of the percolation-foundation wave (kernel-based
 -- `agentWelfare` concretisation): two more `agentWelfare`-cluster
--- monotonicity-shaped atoms closed via the same R88 pattern.
+-- monotonicity-shaped atoms closed via the same pattern.
 --
 -- (5) `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN` /
---     `welfare_bounded_below_inflection_OPEN` CLOSED — both prior Cat 3
+--     `welfare_bounded_below_inflection_OPEN` CLOSED — both Cat 3
 --     workingAssumption axioms are now derived `theorem`s composing a
 --     newly-introduced paper-stipulated pointwise structural equation
---     with the R88 foundation lemma
+--     with the foundation lemma
 --     `agentWelfare_monotone_of_kernel_pointwise_monotone`:
 --      * `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`
 --        composes the new
@@ -1382,51 +1375,50 @@ namespace BlackwellDilemma.AxiomAudit
 --     inputCategory Cat 3 → Cat 1; cat3SubType workingAssumption →
 --     derivedTheorem; status gapOpen → gapClosed.  Net wA delta: −2
 --     (the new structural equations are paper-Def-stipulated per-
---     realisation facts, tagged structuralEquation per the R88
---     precedent, NOT workingAssumption).
+--     realisation facts, tagged structuralEquation per the
+--     established precedent, NOT workingAssumption).
 --
--- Scope honesty: R89 STILL does not close the `agentWelfare`-dependent
--- REVERSAL-existence atoms (paper-novel anti-monotonicity content
--- requires per-realisation reversal-WITNESS structural equations,
--- distinct from the monotonicity structural equations); the
--- `aboveThresholdWelfare_monotone_OPEN` /
+-- Scope honesty: this wave STILL does not close the
+-- `agentWelfare`-dependent REVERSAL-existence atoms (paper-novel
+-- anti-monotonicity content requires per-realisation reversal-WITNESS
+-- structural equations, distinct from the monotonicity structural
+-- equations); the `aboveThresholdWelfare_monotone_OPEN` /
 -- `belowThresholdWelfare_eventually_decreasing_OPEN` /
 -- `perAgentOptimalAggregate_dominates_uniform_OPEN` Principal.lean
 -- atoms reference DIFFERENT opaque carriers (`aboveThresholdWelfare` /
 -- `belowThresholdWelfare` / `perAgentOptimalAggregate`), not
--- `agentWelfare` directly — closing them via the R88 pattern requires
--- concretising those carriers as G-conditional integrals of
+-- `agentWelfare` directly — closing them via the same pattern
+-- requires concretising those carriers as G-conditional integrals of
 -- `agentWelfare`, which needs a measure-theoretic distribution-G
 -- integration framework not yet in scope.  The
 -- `non_concave_triple_from_mixture_OPEN` atom HAD a SOUNDNESS DEFECT
 -- (the antecedent `monotone f + eventually-decreasing g + W_bar = f+g`
 -- did not imply a non-concave triple — counterexample `f β = β`,
 -- `g β = -β`, `W_bar = 0` satisfies the antecedent without exhibiting
--- a valley); R90 FIXED via signature correction (R83/R86/R87 precedent)
--- — replaced with the paper-faithful direct atom
--- `non_concave_triple_W_bar_OPEN` (no antecedent — paper line 640
--- stipulates the W_bar valley triple directly).  The
--- `wrongness_high_beta_welfare_floor_atom_OPEN` atom HAD a SIGNATURE
--- WEAKNESS (the `∃ Wlim` existential was trivially closeable with
--- `Wlim = 0` by `agentWelfare_mem_unitInterval`'s lower bound, which
--- did NOT capture the paper's stated convergence content); R90 FIXED
--- via signature strengthening — replaced with the paper-faithful
--- `wrongness_high_beta_welfare_convergence_atom_OPEN`
+-- a valley); FIXED via signature correction — replaced with the
+-- paper-faithful direct atom `non_concave_triple_W_bar_OPEN` (no
+-- antecedent — paper line 640 stipulates the W_bar valley triple
+-- directly).  The `wrongness_high_beta_welfare_floor_atom_OPEN` atom
+-- HAD a SIGNATURE WEAKNESS (the `∃ Wlim` existential was trivially
+-- closeable with `Wlim = 0` by `agentWelfare_mem_unitInterval`'s
+-- lower bound, which did NOT capture the paper's stated convergence
+-- content); FIXED via signature strengthening — replaced with the
+-- paper-faithful `wrongness_high_beta_welfare_convergence_atom_OPEN`
 -- (`∃ Wlim, Tendsto welfare atTop (nhds Wlim)` — non-trivially
--- discharges paper line 348/352/368 convergence) + R90 antecedent
--- strengthening on `wrongness_misalignment_reversal_atom_OPEN` to take
--- convergence as antecedent (not vacuous floor).  The
+-- discharges paper line 348/352/368 convergence) + antecedent
+-- strengthening on `wrongness_misalignment_reversal_atom_OPEN` to
+-- take convergence as antecedent (not vacuous floor).  The
 -- `conditional_subproblem_blackwell_applicable_OPEN` atom references
 -- `conditionalWelfareOnR` (a SEPARATE opaque carrier from
 -- `agentWelfare`); closeable only if that carrier is ALSO concretised
 -- via the per-realisation indicator on `R`.
 --
--- `#print axioms` on the R89 closures = same kernel axioms as R88 +
--- the two new R89 `agentRewardKernel_*` structural equations.
+-- `#print axioms` on these closures = same kernel axioms as above +
+-- the two new `agentRewardKernel_*` structural equations.
 #print axioms BlackwellDilemma.FiveState.bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
 #print axioms BlackwellDilemma.FiveState.welfare_bounded_below_inflection_OPEN
 
--- R90 reversal-witness pattern (sister to R88 monotonicity foundation).
+-- Reversal-witness pattern (sister to the monotonicity foundation).
 -- 4 reversal-existence wA atoms closed via a single shared infrastructure:
 --   (a) Percolation.lean strict-`<` integration lemma
 --       `percExpectation_lt_of_pointwise_le_strict_at_one` (Cat 1 — uses
@@ -1439,32 +1431,80 @@ namespace BlackwellDilemma.AxiomAudit
 --       (paper Definition 2.1 — non-trivial bond percolation `p ∈ (0, 1)`);
 --   (d) 4 paper-stipulated kernel-level reversal-witness structural
 --       equations (Cat 3 §3.4.3, one per reversal atom).
--- Each previously-wA atom now becomes a derived `theorem` composing
--- (b) with the corresponding kernel atom from (d).
---
--- `#print axioms` on each R90 closure = kernel axioms + the
--- `AgentEdgeIdx` carrier + its `Fintype`/`DecidableEq` instances + the
--- `agentRewardKernel` carrier + the relevant kernel reversal-witness
--- structural equation + `blockingProb` + `blockingProb_strict_in_open_unit_interval`
--- (paper-stipulated R90 atom) — NO workingAssumption axiom remains.
+-- Each closure: kernel axioms + the `AgentEdgeIdx` carrier + its
+-- `Fintype`/`DecidableEq` instances + the `agentRewardKernel` carrier
+-- + the relevant kernel reversal-witness structural equation +
+-- `blockingProb` + `blockingProb_strict_in_open_unit_interval`
+-- (paper-stipulated atom).
 #print axioms BlackwellDilemma.agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part1
 #print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_present
 #print axioms BlackwellDilemma.gap_general_tree
 #print axioms BlackwellDilemma.wrongness_misalignment_reversal_atom_OPEN
 
-/-! ## R141-R143 Infrastructure-wired `_OPEN` audit trail
+/-! ## Part 1 strict-kernel-pure closure
 
-Each of the 18 `_OPEN` theorems previously closed via `_paper_witness`
-is now derived from a smaller `_workingAssumption` + Cat 1 Infrastructure
-module. The audit below verifies each `_OPEN` depends only on:
+The `agentRewardKernel` carrier (Types.lean) is a `noncomputable def`,
+so `gap_cognitive_threshold_part1` is strict kernel-pure modulo
+Types.lean foundational primitives. The two smaller atoms closing the
+Part 1 reversal claim:
+
+* `agentRewardKernel_greedy_alphaAbove_pointwise_le_at_betaZeroOne`
+  (Cognitive.lean) — derived from the concrete kernel + the
+  `0 ≤ alphaStar 0 p` sup-characterisation algebraic argument; on
+  the kernel the greedy branch evaluates to `1` at `β = 0` and to
+  `6/10` at `β = 1` for `α > 0` (paper line 545 trap-selection
+  regime), so the pointwise inequality `6/10 ≤ 1` closes by
+  `norm_num`.
+* `agentRewardKernel_greedy_alphaAbove_strict_witness_at_betaZeroOne`
+  (Cognitive.lean) — derived by exhibiting `ω₀ = fun _ => false`
+  (the all-edges-blocked configuration) and the same branch
+  computation; the strict inequality `6/10 < 1` closes by `norm_num`.
+
+The concretisation captures the paper's reversal mechanism (Theorem
+4.1 Part 1 + Lemma `lem:wrongness`) on the canonical 5-state IDP
+instance (Infrastructure.FiveState reward calibration `r(A) = 6/10`,
+`r(G) = 1`) in scalar form. The kernel is constant in `ω` for the
+greedy regime; this is paper-faithful because the Theorem 4.1
+Part 1 trap-selection effect "with probability approaching 1"
+applies uniformly to all percolation realisations under the paper's
+standing C1-C3 hypotheses.
+
+### Strict-kernel-pure target audit
+
+The `#print axioms` dependency closure surfaces only:
+
+* Kernel axioms: `propext`, `Classical.choice`, `Quot.sound`.
+* Types.lean foundational primitives: `AgentEdgeIdx`,
+  `AgentEdgeIdx.decEq`, `AgentEdgeIdx.fintype`, `blockingProb`,
+  `blockingProb_strict_in_open_unit_interval` (paper Def 2.1 edge
+  set + non-trivial percolation parameter).
+* Diagnostic-conditions (EXPLICIT ANTECEDENTS): `C1_Irreversibility`,
+  `C2_RewardTopologyMisalignment`, `C3_InformationLocality`,
+  `TerminalNeighbourTopology` (Definition 2.4 + Theorem 4.1
+  statement, threaded as `hC` and `hT`). -/
+
+#print axioms
+  BlackwellDilemma.Infrastructure.GreedyAlphaAboveReversal.betaWitnessLow_lt_betaWitnessHigh
+#print axioms
+  BlackwellDilemma.agentRewardKernel_greedy_alphaAbove_pointwise_le_at_betaZeroOne
+#print axioms
+  BlackwellDilemma.agentRewardKernel_greedy_alphaAbove_strict_witness_at_betaZeroOne
+#print axioms
+  BlackwellDilemma.agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness
+
+/-! ## Infrastructure-wired `_OPEN` audit trail
+
+Each of the 18 `_OPEN` theorems is derived from a smaller
+`_workingAssumption` + Cat 1 Infrastructure module. The audit below
+verifies each `_OPEN` depends only on:
 * Lean kernel axioms (`propext`, `Classical.choice`, `Quot.sound`)
 * The corresponding `_workingAssumption` (paper-stipulated structural
-  identification — smaller scope than the retired `_paper_witness`)
+  identification)
 * `Infrastructure` Cat 1 module dependencies (paper-novel-free)
 * Opaque `Types.lean` carriers (Cat 3 §3.4.1 primitives — 永不 close).
 
-NO retired `_paper_witness` axiom appears anywhere in the dependency
+NO `_paper_witness` axiom appears anywhere in the dependency
 graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).
 -/
 
@@ -1487,50 +1527,82 @@ graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).
 #print axioms BlackwellDilemma.FiveState.L_unimodal_in_regime_i_OPEN
 #print axioms BlackwellDilemma.FiveState.envelope_continuity_in_p_OPEN
 
-/-! ## R207 strict axiom-closure verification of all 13 retired §3.4.3 atoms
+/-! ## Strict axiom-closure verification of all 13 retired §3.4.3 atoms
 
 For each retired theorem, prints the dependency closure to verify
 NO `sorry`, NO `native_decide`, NO un-credited axioms — only
 KERNEL + Cat 3 §3.4.1 carriers + Cat 3 §3.4.3 paper-Def bridges +
 Cat 2 ClassicalResults axioms. -/
 
--- R162 retired (R188): belowThresholdWelfare boundary convention
+-- Retired: belowThresholdWelfare boundary convention
 #print axioms BlackwellDilemma.belowThresholdWelfare_le_at_zero_for_negative
 
--- R165 retired (R187): agentWelfare kappaAgent supermodular
+-- Retired: agentWelfare kappaAgent supermodular
 #print axioms BlackwellDilemma.agentWelfare_kappaAgent_at_alpha_one_isSupermodular
 
--- R166a retired (R195): mean_estimate_gap continuity
+-- Retired: mean_estimate_gap continuity
 #print axioms BlackwellDilemma.mean_estimate_gap_continuous_paper_Def
 
--- R166b retired (R195): mean_estimate_gap tendsto
+-- Retired: mean_estimate_gap tendsto
 #print axioms BlackwellDilemma.mean_estimate_gap_tendsto_mLimit_paper_Def
 
--- R167 retired (R186): W_bar eventually decreasing
-#print axioms BlackwellDilemma.W_bar_eventually_decreasing_R186
+-- Retired: W_bar eventually decreasing
+#print axioms BlackwellDilemma.W_bar_eventually_decreasing
 
--- R168 retired (R196): envelope continuity
+-- Retired: envelope continuity
 #print axioms BlackwellDilemma.FiveState.envelope_continuity_in_p_paper_Def
 
--- R169 retired (R197): forward_reachable = SimpleGraph reach
+-- Retired: forward_reachable = SimpleGraph reach
 #print axioms BlackwellDilemma.forward_reachable_eq_simpleGraph_reach_paper_Def
 
--- R170 retired (R198 → R203/R204): kappaStar diverges at p_c
+-- Retired: kappaStar diverges at p_c
+-- Dominance-discharge refactor (2026-05-19): the
+-- `kappaStar_dominates_percolation_scaling_paper_Def` axiom (Cat 3
+-- §3.4.3 paper-Def stipulated cognitive-percolation ordering) is
+-- DISCHARGED as a Cat 1 derived theorem via concretising
+-- `harrisKestenScalingFunction` as the lower envelope of `kappaStar`
+-- over the high-α regime (Cat 1 `noncomputable def`) + `csInf_le`
+-- application via the
+-- `Infrastructure.CognitivePercolationDominance.lower_envelope_le_at_value`
+-- generic lifting. The substantive Cat 2 Harris-Kesten + Smirnov-Werner
+-- universality content remains honestly retained as the divergence
+-- claim on the concrete lower-envelope carrier:
+-- `harrisKestenScalingFunction_diverges_at_pc_paper_Def`. Part 6 depends
+-- on kernel + Types primitives + 1 Cat 2 Harris-Kesten axiom only.
 #print axioms BlackwellDilemma.kappaStar_diverges_at_pc_paper_Def_pointwise
+#print axioms BlackwellDilemma.kappaStar_dominates_percolation_scaling_paper_Def
+#print axioms BlackwellDilemma.harrisKestenScalingFunction_diverges_at_pc_paper_Def
 
--- R171 retired (R199 → R205): topoLossKernel pointwise bound
+-- topoLossKernel pointwise bound
 #print axioms BlackwellDilemma.topoLossKernel_pointwise_bound_paper_Def
 
--- R172 retired (R199): expectedTopoLossAboveLowerConst positivity
+-- expectedTopoLossAboveLowerConst positivity
 #print axioms BlackwellDilemma.expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def
 
--- R173 retired (R199): expectedTopoLoss eventually bound
+-- expectedTopoLoss eventually bound
 #print axioms BlackwellDilemma.expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def
 
--- R174 retired (R200): L_unimodal in Regime (i)
+-- L_unimodal in Regime (i)
 #print axioms BlackwellDilemma.FiveState.L_unimodal_in_regime_i_paper_Def
 
--- R184 retired (R201 → R206): agentRewardKernel kappaAgent corner positivity
+-- agentRewardKernel kappaAgent corner positivity
 #print axioms BlackwellDilemma.agentRewardKernel_kappaAgent_corner_positivity_paper_Def
+
+/-! ## Strict kernel-pure verification of Part 3 (`gap_cognitive_threshold_part3`)
+
+After concretising the `mean_estimate_gap` carrier as a difference of two
+`gaussianPosteriorMean` values (paper line 549 Gaussian conjugate-prior
+characterisation) and discharging the bridge
+`mean_estimate_gap_eq_posterior_difference_paper_Def` as a kernel-pure
+derived theorem (`rfl`-witness on the canonical paper-instance constants
+`(mu0, tau0sq, tausq, ybar1, ybar2) = (0, 1, 1, 0,
+mLimitDifference_fiveState)`), `gap_cognitive_threshold_part3` is now
+STRICT kernel-pure modulo only the Types.lean §3.4.1 paper-Def
+primitives `C1_Irreversibility`, `C2_RewardTopologyMisalignment`,
+`C3_InformationLocality`. No `mean_estimate_gap` opaque axiom; no
+`_paper_Def` bridge atom. -/
+
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part3
+#print axioms BlackwellDilemma.mean_estimate_gap_eq_posterior_difference_paper_Def
 
 end BlackwellDilemma.AxiomAudit

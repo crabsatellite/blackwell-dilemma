@@ -25,6 +25,8 @@ python finite_size_scaling.py        # Finite-size scaling with data collapse
 python blackwell_violation.py        # Analytical proof + VOI computation
 python rationality_trap.py           # 4-state & 5-state interior optimum
 python sharp_transition_exp.py       # Sharp transition + bimodality
+python generate_phase_diagram.py     # Phase diagram + welfare heatmap (Figures 1-2)
+python alpha_star_five_state.py      # alpha* verification (Remark 6.5)
 ```
 
 Results (JSON + PNG) are written to `results/`.

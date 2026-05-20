@@ -8,11 +8,10 @@ import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
 # Reachable-set covers `univ` under preconnected SimpleGraphs (Cat 1)
 
 This file provides the **graph-theoretic structural identification** that
-the missing Phase 7 axiom `forward_reachable_empty_full_at_all_open` is
-asking for: under the percolation outcome where every edge of the
-underlying graph is open, the forward-reachable set from any vertex
-covers the whole vertex space — provided the underlying graph is
-preconnected.
+the missing axiom `forward_reachable_empty_full_at_all_open` is asking
+for: under the percolation outcome where every edge of the underlying
+graph is open, the forward-reachable set from any vertex covers the
+whole vertex space — provided the underlying graph is preconnected.
 
 ## Main results
 

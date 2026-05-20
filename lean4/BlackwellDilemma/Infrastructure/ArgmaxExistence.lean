@@ -27,8 +27,9 @@ Proposition `prop:principal-optimum`).
 
 The paper's `aggregateOptimalBeta G` and `principalOptimalBeta` are
 typically defined as `argmax_β` of welfare functions on `[0, ∞)`. The
-existence proof requires Phase 4 EVT + paper's eventually-decreasing
-hypothesis. This module provides the operational atoms.
+existence proof requires the `EVTBoundedDecreasing` EVT + paper's
+eventually-decreasing hypothesis. This module provides the operational
+atoms.
 
 ## Cat 1 status
 

@@ -123,7 +123,7 @@ The greedy agent (`κ = 0`) exhibits the strongest reversal. -/
     is the threshold identification `p̂* = 2/3`, encoded directly via
     the routing-decision biconditional. The β-monotonicity sub-claim
     of `prop:bayesian-naive-five-state` (ii) is tracked separately by
-    `FiveState.gap_bayesian_naive_reversal_absent` (R41 derived theorem
+    `FiveState.gap_bayesian_naive_reversal_absent` (derived theorem
     composing Cat 3 atom
     `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`).
 
@@ -133,7 +133,7 @@ theorem gap_robustness_bayesian_naive :
     ∀ p_hat : ℝ, 0.4 + 0.6 * (1 - p_hat) > 0.6 ↔ p_hat < (2 : ℝ) / 3 :=
   FiveState.gap_bayesian_naive_routing_threshold
 
-/-- R73 paper-novel opaque carrier (component for `myopicKWelfare`):
+/-- Paper-novel opaque carrier (component for `myopicKWelfare`):
     welfare of the `k`-step lookahead myopic agent at horizon `k < d`
     (truncated below the divergence depth). Paper Remark
     `rem:robustness-misspec` (ii) line 942 only stipulates the carrier's
@@ -153,17 +153,16 @@ axiom myopicKWelfareBelowDepth : ℕ → ℕ → ℝ → ℝ
 /-- Welfare of a `k`-step lookahead myopic agent at precision `β` on a
     depth-`d` trap-tree instance.
 
-    R73 substantive-math closure (concrete-def closure, R72 pattern):
-    previously declared `axiom myopicKWelfare` (opaque carrier). R73 makes
-    the carrier CONCRETE per paper Remark `rem:robustness-misspec` (ii)
+    Substantive-math closure (concrete-def closure): the carrier is
+    CONCRETE per paper Remark `rem:robustness-misspec` (ii)
     line 942's own paper-named regime split: at horizon `k ≥ d`
     (planning horizon spans full divergence depth) the myopic-k welfare
     coincides with the Bayesian welfare; at `k < d` the welfare is
     paper-implicit and hosted by the opaque carrier
     `myopicKWelfareBelowDepth`. The Lean `def` IS the paper's exact
     paper-named regime split, so the carrier encodes paper content
-    faithfully. This is NOT the R7-flagged closure-count trick (R6's
-    content-erasure `≡ True`).
+    faithfully. This is NOT a closure-count trick (no content-erasure
+    `≡ True`).
 
     Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
     backward-induction framework on per-IDP-instance trap-tree subtree
@@ -178,16 +177,13 @@ noncomputable def myopicKWelfare (k d : ℕ) (β : ℝ) : ℝ :=
   if k ≥ d then agentWelfare AgentType.bayesian β 0 1
   else myopicKWelfareBelowDepth k d β
 
-/-- Cat 1 derived theorem (R73 substantive-math closure): paper Remark
+/-- Cat 1 derived theorem (substantive-math closure): paper Remark
     `rem:robustness-misspec` (ii) line 942 explicit identification
     `myopicKWelfare k d β = agentWelfare AgentType.bayesian β 0 1` at
-    horizon `k ≥ d`. Now provable kernel-pure via the `myopicKWelfare`
+    horizon `k ≥ d`. Provable kernel-pure via the `myopicKWelfare`
     `def`'s `if`-branch unfolding (`if_pos`).
 
-    R73 closure pattern (R72 successor): the previous
-    `axiom myopic_k_eq_bayesian_above_divergence_depth_OPEN` (R68
-    `structuralEquation gapDefinitional`) is REPLACED by this Cat 1
-    derived theorem composing the paper-faithful `myopicKWelfare` `def`
+    Closure pattern: composes the paper-faithful `myopicKWelfare` `def`
     (paper Remark (ii) line 942 paper-named regime split IS the carrier's
     defining identification at the paper-named regime `k ≥ d`) with
     kernel-level `if_pos`. The companion carrier `myopicKWelfareBelowDepth`
@@ -198,16 +194,9 @@ noncomputable def myopicKWelfare (k d : ℕ) (β : ℝ) : ℝ :=
     on opaque carriers (where Mathlib lacks the substrate), the
     identification becomes definitional at the carrier level via the
     paper-named regime split. The `def` faithfully encodes the paper
-    stipulation rather than R7-style content-erasure. Mirrors R72
-    CLOSURE 1 (`mLimit_eq_mLimitDifference_OPEN`) precedent: structural-
-    equation atom previously classified as gapDefinitional 永不 close
-    becomes derivedTheorem gapClosed via concrete-def closure of the
-    underlying carrier.
-
-    Net workingAssumption delta: 0 (was already structuralEquation, not
-    workingAssumption); structuralEquation gapDefinitional → derivedTheorem
-    gapClosed (-1 structuralEquation, +1 derivedTheorem; -1 gapDefinitional,
-    +1 gapClosed).
+    stipulation rather than content-erasure. Structural-equation atom
+    classified as gapDefinitional becomes derivedTheorem gapClosed
+    via concrete-def closure of the underlying carrier.
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942
     (k-step lookahead horizon spans full divergence depth d ⇒
@@ -221,13 +210,12 @@ theorem myopic_k_eq_bayesian_above_divergence_depth_OPEN :
   unfold myopicKWelfare
   exact if_pos hkd
 
-/-- **Remark `rem:robustness-misspec` (ii): Myopic-`k`** (derived theorem,
-    R57 closure-path-A).
+/-- **Remark `rem:robustness-misspec` (ii): Myopic-`k`** (derived theorem).
     A `k`-step lookahead agent experiences the reversal for `k = 0`
     (greedy) but not for `k ≥ d`, where `d` is the divergence depth of
     trap and bridge paths.
 
-    R57 closure path A: derived theorem composing
+    Closure path: derived theorem composing
       (i) Cat 3 atomic stipulation
           `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
           (paper line 942 — myopic equals Bayesian when planning
@@ -243,11 +231,10 @@ theorem myopic_k_eq_bayesian_above_divergence_depth_OPEN :
                             ≤ bayesian β₂                (h_blackwell)
                             = myopicKWelfare k d β₂      (atom symm).
 
-    Net effect: original ` myopic_k_lookahead_recursion_OPEN ` (a
-    bundled `∀ β₁ β₂, β₁ ≤ β₂ → myopic ≤ myopic` workingAssumption)
-    is replaced by a more atomic equality stipulation + Cat 2
-    Blackwell. The atomic stipulation is genuinely smaller (just
-    horizon-suffices structural equality, no monotonicity built in).
+    The atomic equality stipulation + Cat 2 Blackwell decomposition is
+    genuinely smaller than a bundled `∀ β₁ β₂, β₁ ≤ β₂ → myopic ≤ myopic`
+    workingAssumption (just horizon-suffices structural equality, no
+    monotonicity built in).
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942. -/
 theorem gap_robustness_myopic_k
@@ -276,8 +263,7 @@ axiom satisficingWelfare : ℝ → ℝ → ℝ
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
 
-/-- R69 §3.4.3 reclassification (was R57 closure-path-A
-    workingAssumption): paper Remark `rem:robustness-misspec` (iii) line
+/-- §3.4.3 classification: paper Remark `rem:robustness-misspec` (iii) line
     945 STIPULATES the defining behavior of the
     `satisficingTrapAcceptanceProb` carrier in the signal-precision
     parameter β: "Better signals make the agent more confident that A
@@ -285,8 +271,8 @@ axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
     satisficing decision rule with threshold `r̄ < r(A)`, the carrier
     `satisficingTrapAcceptanceProb r̄ β` is strictly increasing in β.
 
-    The carrier `satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ` was
-    introduced by R57 explicitly to host paper Remark (iii)'s claim;
+    The carrier `satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ` is
+    introduced explicitly to host paper Remark (iii)'s claim;
     paper Remark (iii) at line 945 STATES the carrier's defining
     behavior under the named regime `r̄ < r(A)` (better signals →
     more confidence-in-A → increased trap acceptance). Paper does NOT
@@ -294,10 +280,10 @@ axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
     "satisficing trap-acceptance probability with `r̄ < r(A)`" MEANS
     as β increases — analogous to paper Remark (ii) line 942
     STIPULATING the myopic-k carrier's defining behavior at horizon
-    `k ≥ d` (R68 closure 4 precedent).
+    `k ≥ d`.
 
-    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (R68
-    §3.4.3 closure 4 precedent): paper introduces the carrier AND
+    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
+    (§3.4.3 precedent): paper introduces the carrier AND
     stipulates its base-case/named-regime behavior in the same
     Remark; the equation/monotonicity at the paper-named regime is
     the carrier's defining content, not a derivation.
@@ -320,8 +306,7 @@ axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
         satisficingTrapAcceptanceProb rBar β₁ <
           satisficingTrapAcceptanceProb rBar β₂
 
-/-- R69 §3.4.3 reclassification (was R57 closure-path-A
-    workingAssumption): paper Remark `rem:robustness-misspec` (iii) line
+/-- §3.4.3 classification: paper Remark `rem:robustness-misspec` (iii) line
     946 STIPULATES the structural binding between trap-acceptance
     probability and satisficing welfare under the paper-named regime
     `r̄ ∈ (r(B), r(A))`: "reinforcing the trap" — paper-defining
@@ -331,7 +316,7 @@ axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
     is foregone.
 
     The carriers `satisficingTrapAcceptanceProb` and `satisficingWelfare`
-    were introduced by R57 explicitly to host paper Remark (iii)'s
+    are introduced explicitly to host paper Remark (iii)'s
     claims; paper Remark (iii) at line 946 ("reinforcing the trap")
     STATES the structural binding between the two carriers at the
     paper-named regime `r̄ ∈ (r(B), r(A))`. Paper does NOT separately
@@ -341,9 +326,9 @@ axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
     to acceptance events is paper-stipulated by paper text "satisficing
     acceptance of A forecloses bridge B → G".
 
-    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN` (R68
-    §3.4.3 closure 4 precedent) and the companion atom #1 above
-    (R69 closure 1): paper Remark (iii) introduces both carriers AND
+    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
+    (§3.4.3 precedent) and the companion atom #1 above:
+    paper Remark (iii) introduces both carriers AND
     stipulates their inter-carrier binding at the paper-named regime;
     this binding IS the carriers' defining inter-relationship at the
     regime, not a derivation.
@@ -367,11 +352,11 @@ axiom satisficing_welfare_antitone_in_trap_acceptance_OPEN :
           satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁
 
 /-- **Remark `rem:robustness-misspec` (iii): Satisficing** (derived
-    theorem, R57 closure-path-A). A satisficing agent with threshold
+    theorem). A satisficing agent with threshold
     `r̄ ∈ (r(B), r(A))` accepts the trap; the reversal mechanism is
     analogous (welfare strictly decreases in β).
 
-    R57 closure path A: derived theorem composing the two paper-stated
+    Closure path: derived theorem composing the two paper-stated
     atomic stipulations
       (i) `satisficing_trap_acceptance_strictMono_in_beta_OPEN`
           (paper line 945, "Better signals make the agent more

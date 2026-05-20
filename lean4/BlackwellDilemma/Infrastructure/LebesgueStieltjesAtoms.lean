@@ -10,8 +10,9 @@ import BlackwellDilemma.Infrastructure.FiniteConvexCombination
 # Stieltjes-style integration atoms (Cat 1)
 
 This file provides **abstract Stieltjes-style integration atoms** for
-finite discrete CDFs (sum form), the Phase 13 foundation for paper's
-`aggregateWelfareWith` carrier construction. The full measure-theoretic
+finite discrete CDFs (sum form), the discrete-grid foundation for
+paper's `aggregateWelfareWith` carrier construction. The full
+measure-theoretic
 Lebesgue-Stieltjes integral requires Mathlib `MeasureTheory.LStieltjes`
 which is multi-month effort; this module provides the discrete sum
 analog that captures the algebraic structure.
