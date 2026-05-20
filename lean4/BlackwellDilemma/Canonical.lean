@@ -1787,28 +1787,16 @@ theorem L_minimum_exists_in_regime_i_OPEN :
 
 /-- **Carrier `β*(p)` for Regime (i)'s implicit-function selection.**
 
-    Substantive-math closure (concrete-def closure, Pattern 5:
-    existence-via-`Classical.choose`). The carrier is CONCRETE per
-    paper line 814's own paper-implied existence claim of the interior
-    minimiser: on the Regime (i) domain `p ∈ [0, p_1)`, define
-    `betaStarOfP p` as `Classical.choose` of the minimiser-witness from
-    the existence atom `L_minimum_exists_in_regime_i_OPEN`; outside the
-    domain (paper-irrelevant), `betaStarOfP p := 0` as a junk value.
+    On the Regime (i) domain `p ∈ [0, p_1)`, `betaStarOfP p` is the
+    minimiser of `L(·, p)` picked via `Classical.choose` from the
+    existence atom `L_minimum_exists_in_regime_i_OPEN`. Outside the
+    domain (paper-irrelevant), the definition follows the Mathlib
+    convention of returning `0`.
 
-    The Lean `def` IS the paper's implicit-function selection
-    (the `Classical.choose` literally picks the paper-stated
-    minimiser of `L(·, p)`), so the carrier encodes paper content
-    faithfully. This is NOT a closure-count trick:
-    the def body invokes the substantive existence atom
-    `L_minimum_exists_in_regime_i_OPEN` as input, with no content
-    erasure; any candidate carrier-identification step
-    (`betaStarOfP_eq_minimiser_witness_OPEN`) is internalised by
-    `Classical.choose_spec`.
-
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    continuous-function-on-half-open-interval implicit-function
-    machinery, define the paper-faithful selection locally rather
-    than skip.
+    The Lean `def` IS the paper's implicit-function selection: the
+    `Classical.choose` picks the paper-stated minimiser of `L(·, p)`,
+    and `Classical.choose_spec` discharges the minimiser-property
+    universally without a separate carrier-identification step.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 (the "β*(p)" of the third bullet's overshoot expression
@@ -2287,27 +2275,19 @@ theorem gap_three_regime_sufficient_cognition_kappaStar_pos
   exact mul_pos h_half_pos h_div_pos
 
 /-- **Proposition `prop:p-monotonicity-five-state`** — `κ*(p)` is
-    non-decreasing in `p` on the natural domain `p ∈ [0, 1)`, with
-    strict increase on `(2/3, 1)`.
+    non-decreasing in `p` on the paper's intended domain `p ∈ [0, 1)`,
+    with strict increase on `(2/3, 1)`.
 
-    DEAD-END (universal form is mathematically false under Lean's
-    junk-value semantics): the statement as written quantifies over
-    all real `p₁ ≤ p₂` without restricting `p₂ < 1`. Under Lean's
-    junk-value semantics for division, when `p₂ ≥ 1` we have
-    `2 * (1 - p₂) ≤ 0`, so `p₂ / (2 * (1 - p₂))` is either `0` (at
-    `p₂ = 1`, by `div_zero`) or negative (for `p₂ > 1`), and
-    `Real.log` of a non-positive argument follows the
-    `log_neg_eq_log` convention `log x = log |x|` (with `log 0 = 0`).
-    Counterexample: at `p₁ = 0, p₂ = 10`,
-    `|p₂ / (2 * (1 - p₂))| = 10 / 18 ≈ 0.556 < 1`, hence
-    `Real.log (p₂ / (2 * (1 - p₂))) < 0`, and the closed form
-    `kappaStar_fiveState 10 ≈ -1.26 < 0 = kappaStar_fiveState 0`,
-    falsifying the universal statement. The paper claim is only
-    intended for `p ∈ [0, 1)`; the bounded version
-    `gap_p_monotonicity_bounded` (below) is the live CLOSED Cat 1
-    sub-claim restoring the paper's intended domain restriction.
-    Encoded as `def : Prop` per DEAD-END discipline; not consumed by
-    any downstream theorem.
+    The unrestricted universal statement is not mathematically valid
+    for the closed-form `kappaStar_fiveState`: at `p ≥ 1` the
+    denominator `2*(1 - p)` becomes non-positive, so the closed form's
+    `Real.log` factor changes sign discontinuously. Counterexample:
+    at `p₁ = 0, p₂ = 10`, `kappaStar_fiveState 10 ≈ -1.26 < 0
+    = kappaStar_fiveState 0`. The live closure is the bounded version
+    `gap_p_monotonicity_bounded` (below), which restricts to the
+    paper's domain `p ∈ [0, 1)`. The unrestricted statement is
+    recorded here as a `def : Prop` (not consumed by any downstream
+    theorem) for completeness.
 
     paper source: Proposition `prop:p-monotonicity-five-state`,
     lines 875-892. -/
@@ -2496,12 +2476,9 @@ axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar 
         signal yields weakly higher expected terminal reward), with
       * the foundation lemma
         `agentWelfare_monotone_of_kernel_pointwise_monotone`.
-    The `h_blackwell` antecedent is retained (now unused) for
-    audit-chain continuity: `#print axioms` on consumers still
-    surfaces `gap_blackwell_monotonicity_OPEN` (threaded via
-    `h_blackwell` per the broken-link discipline).  inputCategory
-    Cat 3 → Cat 1; cat3SubType workingAssumption → derivedTheorem;
-    status gapOpen → gapClosed. -/
+    The `h_blackwell` antecedent is retained (now unused) so that
+    `#print axioms` on consumers still surfaces
+    `gap_blackwell_monotonicity_OPEN`. -/
 theorem kappa_above_threshold_blackwell_recovery_OPEN
     (_h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
@@ -2525,11 +2502,9 @@ theorem kappa_above_threshold_blackwell_recovery_OPEN
     is non-decreasing in β: the trap-induced reversal vanishes once
     cognitive depth restores correct continuation-value ranking.
 
-    Cat 2 dependency on Blackwell 1951/1953 surfaces via the
-    `h_blackwell` antecedent thread (per the audit-chain discipline,
-    derived-theorem-with-axiom-input pattern; `#print axioms` on this
-    theorem will surface `gap_blackwell_monotonicity_OPEN` once the
-    consumer supplies it).
+    Cat 2 dependency on Blackwell 1951/1953 is threaded as the
+    `h_blackwell` antecedent; `#print axioms` on this theorem surfaces
+    `gap_blackwell_monotonicity_OPEN` once the consumer supplies it.
 
     paper source: Proposition `prop:threshold-five-state` (ii), line 862. -/
 theorem gap_threshold_fiveState_kappa_above_kstar
@@ -2788,12 +2763,9 @@ axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
         `agentWelfare_monotone_of_kernel_pointwise_monotone`
         (`percExpectation_mono` transfers the pointwise `≤` to the
         bond-percolation expectation).
-    The `h_blackwell` antecedent is retained (now unused) for
-    audit-chain continuity: `#print axioms` on consumers still surfaces
-    `gap_blackwell_monotonicity_OPEN` (threaded via `h_blackwell` per
-    the broken-link discipline).  inputCategory Cat 3 → Cat 1;
-    cat3SubType structuralEquation → derivedTheorem; status
-    gapOpen → gapClosed.
+    The `h_blackwell` antecedent is retained (now unused) so that
+    `#print axioms` on consumers still surfaces
+    `gap_blackwell_monotonicity_OPEN`.
 
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956. -/

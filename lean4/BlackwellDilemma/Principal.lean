@@ -852,118 +852,60 @@ theorem kappa_FOSD_def :
       kappa_FOSD G₁ G₂ ↔ ∀ x : ℝ, G₂ x ≤ G₁ x :=
   fun _ _ => Iff.rfl
 
-/-- The G-parameterised aggregate welfare functional.
+/-- The G-parameterised aggregate welfare functional
+    `W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)`. The Lebesgue-Stieltjes integration
+    framework against a measure on `ℝ²` lies outside the current
+    formalisation scope; the functional is declared as an opaque
+    carrier and consumed via the paper-stipulated structural atoms
+    below.
 
-    Concrete-def closure: the carrier is CONCRETE via the paper-faithful
-    EXTREME WITNESS `aggregateWelfareWith G β := 0` — the constant-zero
-    witness is consistent with paper Definition `def:principal` line
-    615's `W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)` aggregate structure (paper does
-    NOT claim positive lower bound on aggregateWith; the substantive
-    paper claims are about its derivative behavior under FOSD and its
-    argmax structure, which the zero witness satisfies trivially via
-    reflexivity).
+    paper source: Definition `def:principal`, line 615. -/
+axiom aggregateWelfareWith : (ℝ → ℝ) → ℝ → ℝ
 
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    G-parameterised continuous-function-on-half-line + Stieltjes
-    integration framework, define the paper-faithful extreme witness
-    locally rather than skip. Per
-    `feedback_lean_definition_must_be_def_not_axiom`: paper definitions
-    = Lean `def`.
+/-- Paper Proposition `prop:principal-optimum` Part 2 line 634 per-G
+    maximiser existence. The paper's argument applies the extreme value
+    theorem to `W̄_G(·)` on a compact β-range; the EVT-on-Stieltjes-
+    integral chain is out of scope and the existence is axiomatised
+    here as the carrier-level structural atom.
 
-    Net effect: 3 inline workingAssumption axioms become DERIVABLE as
-    Cat 1 corollaries:
-      * `aggregateWelfareWith_max_via_EVT_workingAssumption` (any β
-         maximises a constant-zero function),
-      * `aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption`
-        (`DifferenceDominates 0 0` via `.refl`),
-      * `aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption`
-        (with `aggregateOptimalBeta G := 0` concretization, monotonicity
-        is trivial reflexivity).
-
-    paper source: Definition `def:principal`, line 615 (`W̄_G(β)`
-    aggregate welfare functional). -/
-noncomputable def aggregateWelfareWith (_G : ℝ → ℝ) (_β : ℝ) : ℝ := 0
-
-/-- Cat 1 derived theorem: paper Proposition `prop:principal-optimum`
-    Part 2 line 634 per-G maximiser existence.
-
-    With the concretization `aggregateWelfareWith G β := 0`, any β is a
-    maximiser (all values are equal to 0). Choose `β_max := 0` and the
-    universal inequality `0 ≤ 0` holds by reflexivity. -/
-theorem aggregateWelfareWith_max_via_EVT_workingAssumption :
+    paper source: Proposition `prop:principal-optimum` Part 2,
+    line 634. -/
+axiom aggregate_optimum_exists_per_G_OPEN :
     ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
-      ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max := by
-  intro _G
-  exact ⟨0, fun _ => le_refl _⟩
+      ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max
 
-/-- Cat 1 derived theorem: derives paper's per-G `aggregateWelfareWith`
-    maximiser existence via the smaller `_workingAssumption` consuming
-    the Cat 1 EVT chain. -/
-theorem aggregate_optimum_exists_per_G_OPEN :
-    ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
-      ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max :=
-  aggregateWelfareWith_max_via_EVT_workingAssumption
-
-/-- Aggregate-optimal precision `β̄*_G` for given distribution `G : ℝ → ℝ`.
-
-    Concrete-def closure: with the concretization of
-    `aggregateWelfareWith G β := 0` (above), ANY value of β is a
-    maximiser, so `aggregateOptimalBeta G` is CONCRETIZED directly to 0
-    (the trivial witness, paper-faithful per the constant-zero
-    aggregate). This unlocks the closure of
-    `aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption` via
-    reflexivity (`0 ≤ 0`). Paper-faithful for the concretized
-    `aggregateWelfareWith := 0` carrier (any value is a valid maximiser,
-    so the canonical 0 selection is trivially consistent).
+/-- Aggregate-optimal precision `β̄*_G` for given distribution `G : ℝ → ℝ`,
+    picked via `Classical.choose` from the existence atom.
 
     paper source: Proposition `prop:principal-optimum`, line 634
     (`\bar{\beta}^*_G` as per-`G` maximiser of `\bar{W}_G`). -/
-noncomputable def aggregateOptimalBeta (_G : ℝ → ℝ) : ℝ := 0
+noncomputable def aggregateOptimalBeta (G : ℝ → ℝ) : ℝ :=
+  Classical.choose (aggregate_optimum_exists_per_G_OPEN G)
 
-/-- Cat 3 argmax-characterisation of `aggregateOptimalBeta G`:
-    for every `G : ℝ → ℝ` and `β ∈ ℝ`,
-    `aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G)`.
-
-    Pattern 5 closure: composes the `aggregateOptimalBeta` `def` (which
-    invokes `Classical.choose` on `aggregate_optimum_exists_per_G_OPEN G`)
-    with `Classical.choose_spec` (which yields the universal-inequality
-    maximiser property of the chosen witness directly).
+/-- Argmax-characterisation of `aggregateOptimalBeta G`: closes via
+    `Classical.choose_spec` against the existence atom.
 
     paper source: Proposition `prop:principal-optimum` Part 2,
-    line 634 (`\\bar{\\beta}^*_G` as per-`G` maximiser of
-    `\\bar{W}_G`). -/
+    line 634 (`\bar{\beta}^*_G` as per-`G` maximiser of
+    `\bar{W}_G`). -/
 theorem aggregateOptimalBeta_def :
     ∀ (G : ℝ → ℝ) (β : ℝ),
-      aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G) := by
-  intro G β
-  -- With `aggregateWelfareWith G β := 0` concretization, both
-  -- sides are 0 by `def`-unfold; reflexivity closes.
-  unfold aggregateWelfareWith
-  exact le_refl _
+      aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G) :=
+  fun G => Classical.choose_spec (aggregate_optimum_exists_per_G_OPEN G)
 
-/-- Cat 1 derived theorem: with `aggregateWelfareWith := 0`
-    concretization, both G₁ and G₂ contribute identical zero functions,
-    so difference-dominance holds by reflexivity
-    (`DifferenceDominates.refl`).
-
-    Paper-stipulated structural identification: under FOSD
+/-- Paper-stipulated structural identification: under FOSD
     `G₁ ≤_FOSD G₂`, the `(β ↦ aggregateWelfareWith G₂ β)` function
     difference-dominates `(β ↦ aggregateWelfareWith G₁ β)` in the sense
     of `Infrastructure.DifferenceDominates`. Paper Proposition
     `prop:principal-optimum` Part 2 proof line 634. -/
-theorem aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption :
+axiom aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
       BlackwellDilemma.Infrastructure.DifferenceDominates
         (fun β => aggregateWelfareWith G₂ β)
-        (fun β => aggregateWelfareWith G₁ β) := by
-  intro _G₁ _G₂ _h_fosd
-  exact BlackwellDilemma.Infrastructure.DifferenceDominates.refl _
+        (fun β => aggregateWelfareWith G₁ β)
 
-/-- Cat 1 derived theorem: derives the paper's FOSD + supermodular →
-    derivative-domination claim by composing the paper-stipulated
-    `_workingAssumption` (FOSD-induced `DifferenceDominates`) with the
-    abstract `DifferenceDominates` def from
-    `Infrastructure.DifferenceQuotientAlgebra`. -/
+/-- Paper's FOSD + supermodular → derivative-domination claim, derived
+    by unfolding `DifferenceDominates` against the structural atom. -/
 theorem fosd_induces_derivative_domination_OPEN :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
@@ -973,24 +915,17 @@ theorem fosd_induces_derivative_domination_OPEN :
   exact aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption
     G₁ G₂ h_fosd β₁ β₂ hβ
 
-/-- Cat 1 derived theorem: with `aggregateOptimalBeta := 0`
-    concretization (above), monotonicity reduces to `0 ≤ 0` by
-    reflexivity.
-
-    Paper-stipulated structural identification: under
+/-- Paper-stipulated structural identification: under
     derivative-domination of `aggregateWelfareWith G₂` over
     `aggregateWelfareWith G₁`, the paper-defined `aggregateOptimalBeta`
-    selection is monotone in `G` (paper Proposition `prop:principal-
-    optimum` Part 2 proof line 634 second sentence). -/
-theorem aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption :
+    selection is monotone in `G` (paper Proposition
+    `prop:principal-optimum` Part 2 proof line 634 second sentence). -/
+axiom aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption :
     ∀ G₁ G₂ : ℝ → ℝ,
       (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
           aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁) →
-      aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂ := by
-  intro _G₁ _G₂ _h_diff
-  unfold aggregateOptimalBeta
-  exact le_refl _
+      aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂
 
 /-- Cat 1 derived theorem: derives paper's
     argmax-monotonicity-from-derivative-domination via the smaller

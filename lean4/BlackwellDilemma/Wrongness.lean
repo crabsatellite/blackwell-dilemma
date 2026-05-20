@@ -138,11 +138,10 @@ theorem conditional_subproblem_blackwell_applicable_OPEN :
     `conditional_subproblem_blackwell_applicable_OPEN` per
     `feedback_gap_ledger_in_lean4` §18 Manufactured-Recognition
     pattern. The bundled `gap_conditional_reduction_part_i_OPEN`
-    axiom is REPLACED by this derived theorem (which is structurally
-    a re-export of the atomic stipulation; the decomposition isolates
-    the paper-stated conditional-Blackwell-applicability fact as a
-    standalone Cat 3 atomic stipulation, separating the audit-chain
-    Cat 2 Blackwell threading from the higher-level lemma claim).
+    axiom is REPLACED by this derived theorem, which isolates the
+    paper-stated conditional-Blackwell-applicability fact as a
+    standalone Cat 3 atomic stipulation and threads the Cat 2 Blackwell
+    dependency as the explicit `h_blackwell` antecedent.
 
     paper source: Lemma `lem:conditional-reduction` part (i),
     invoking Blackwell's theorem `\citep{blackwell1951,blackwell1953}`. -/
@@ -790,12 +789,10 @@ theorem percExpectation_abs_le {E : Type} [Fintype E] [DecidableEq E]
     Grimmett 1999 §6.75 cluster-size exponential tail (paper line 276:
     "For `p > p_c`, `E[|R|] = O(1)` (exponential cluster-size tails)").
     That uniform bound is the genuine next-layer percolation input; the
-    `h_grimmett` Cat 2 antecedent is retained on the signature for
-    audit-chain continuity with `gap_info_decay` / `gap_dilemma` and to
-    keep the Grimmett 1999 §6.75 dependency surfaced in `#print axioms`
-    (per the broken-link discipline) even though the per-`n` closure
-    does not consume it — flagging honestly that the uniform-in-`n`
-    strengthening is still Grimmett-gated.
+    `h_grimmett` Cat 2 antecedent is retained on the signature so that
+    `#print axioms` keeps the Grimmett 1999 §6.75 dependency surfaced,
+    honestly flagging that the uniform-in-`n` strengthening is still
+    Grimmett-gated.
 
     paper source: Proposition `prop:info-decay` proof, line 276
     (`|W_info| ≤ |R| · O(σ) = |R| · O(2^{-β})`, the per-realisation
@@ -880,7 +877,7 @@ theorem W_info_oracle_exponential_bound_OPEN
       per-realisation Mills-tail kernel bound
       `wInfoOracleKernel_abs_le_clusterCount` + `|E| ≤ E|·|` +
       `percExpectation` linearity/monotonicity; threads Grimmett 1999
-      §6.75 via `h_grimmett` for audit-chain continuity).
+      §6.75 via `h_grimmett`).
     The composition is closed kernel-pure; both inputs are genuine
     derivations on the concrete bond-percolation framework of
     `Percolation.lean` rather than workingAssumption axioms.
@@ -1111,8 +1108,7 @@ theorem gap_orderstats_topo_decomposition_OPEN :
     `gap_david_nagaraja_eq214_OPEN` (substantive David & Nagaraja Eq.
     2.1.4 textbook identity, in `ClassicalResults.lean`) to discharge
     the abstract order-statistics antecedent. Both Cat 2 axioms surface
-    in `#print axioms` on this theorem, providing audit-chain visibility
-    for the David & Nagaraja dependency.
+    in `#print axioms` on this theorem.
 
     Net effect: the wA atom `expectedTopoLoss_conditional_def`
     (paper-novel structural equation on opaque
@@ -1607,12 +1603,11 @@ theorem topo_loss_on_giant_below_one_over_n
     `expectedTopoLossOnGiant` regardless of the giant-component
     event's probability.  Per `feedback_gap_ledger_in_lean4`
     Pattern-7 (orphan-hypothesis defect), it is DROPPED.  The Cat 2
-    Grimmett dependency is honestly carried instead by the
+    Grimmett dependency is carried instead by the
     `giantComponentEvent` Cat 3 carrier (whose docstring + Ledger
     entry cite Grimmett 1999 §§8.2-8.3 as the giant-component-size
-    Cat 2 dependency) — `giantComponentEvent` surfaces in
-    `#print axioms` of every consumer, providing the audit-chain
-    visibility the threaded hypothesis was meant to provide.
+    Cat 2 dependency); `giantComponentEvent` surfaces in
+    `#print axioms` of every consumer.
 
     paper source: Theorem 3.3 Part 1 proof, line 417 (`O(1/N)`
     envelope on the giant-component event + asymptotic convergence). -/

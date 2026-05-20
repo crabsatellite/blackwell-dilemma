@@ -477,21 +477,14 @@ theorem gap_cognitive_threshold_part1
 /-- **Theorem 4.1 Part 2: Recovery at `κ → ∞`.**
     For sufficiently large κ, welfare is monotonically non-decreasing in β.
 
-    Cat 2 dependency surfacing: per the audit-chain discipline (axioms
-    have no body, so a downstream axiom cannot "compose" an upstream
-    axiom by direct call), the Cat 2 axiom
-    `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is threaded
-    as an EXPLICIT ANTECEDENT `(h_blackwell : ...)` so that
-    `#print axioms` on any theorem consuming
-    `gap_cognitive_threshold_part2_OPEN` surfaces the Blackwell
-    dependency. The "Cat 2 implicit consumption" rule does not apply
-    here: the CLAIM CONTENT of this entry
-    is the Blackwell monotonicity theorem applied to the κ-agent's
-    welfare at sufficiently large `κ` (the high-cognition limit where
-    the agent's posterior converges to the truth and the conditional
-    Blackwell-ordering argument applies — a paper-application to an
-    opaque carrier, Cat 3 with explicit Cat 2 chain). The relevant
-    Cat 2 axiom lives at
+    The claim content is the Blackwell monotonicity theorem applied to
+    the κ-agent's welfare at sufficiently large `κ` (the high-cognition
+    limit where the agent's posterior converges to the truth and the
+    conditional Blackwell-ordering argument applies — a paper-
+    application to an opaque carrier, Cat 3 with explicit Cat 2 chain).
+    The Cat 2 axiom `gap_blackwell_monotonicity_OPEN` (Blackwell
+    1951/1953) is threaded as the explicit `h_blackwell` antecedent;
+    the relevant axiom lives at
     `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
 
     paper source: Theorem 4.1 Part 2, line 492.
@@ -878,8 +871,8 @@ theorem mLimit_pos
     is non-negative. Paper Theorem 4.1 Part 3 (line 493) characterises
     `kappaStar p α` as `sInf {κ > 0 : m(κ) ≥ 0}`, so `0 ≤ kappaStar p α`
     follows directly from `Real.sInf_nonneg` applied to a set of strictly
-    positive reals (junk-value branch `Real.sInf_empty = 0` preserves
-    the bound).
+    positive reals (the empty-set inf convention `Real.sInf_empty = 0`
+    preserves the bound).
 
     `kappaStar_nonneg` is encoded as a Cat 1 `theorem` with kernel-pure
     proof, via `kappaStar_def` (Cat 3 atom) composed with Mathlib's
@@ -938,53 +931,29 @@ theorem gap_cognitive_threshold_part3
   · exact kappaStar_def p α
   · exact kappaStar_nonneg p α
 
-/-- Theorem 4.1 Part 4: Monotonicity in `p` — DEAD-END for the
-    universal form under Lean's junk-value semantics.
+/-- Theorem 4.1 Part 4 universal-form statement (encoded as `def : Prop`,
+    NOT consumed by any downstream theorem; the live encoding is the
+    paper-faithful bounded form `gap_cognitive_threshold_part4` below).
 
-    The unconditional universal-form claim
-    `∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → kappaStar p₁ α ≤ kappaStar p₂ α` is
-    junk-value-defective at the encoding level (mirroring the
-    `gap_p_monotonicity_DEAD_END_by_junk_value` finding for the
-    five-state closed form in Canonical.lean). After composing with
-    the natural Cat 3 atom `mean_estimate_gap_antitone_in_p_OPEN`
-    (paper line 511 stating `m(p, κ)` is non-increasing in `p`), the
-    standard sInf-monotonicity chain breaks at the corner case where
-    the feasible set `{κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` is empty: by
-    Mathlib convention `Real.sInf_empty = 0`, but `kappaStar p₁ α`
-    could be strictly positive in that case, violating the
-    inequality. The paper's claim is correct only under the implicit
-    non-emptiness premise (paper assumes the threshold exists).
-
-    DEAD-END encoding: the universal-form claim is encoded as
-    `def : Prop` with zero kernel impact (NOT an axiom; not consumed
-    by any downstream theorem). The DEAD-END marker is purely
-    documentational signposting why the universal form fails under
-    Lean's junk-value semantics. The bundle
-    `gap_cognitive_threshold_characterisation` no longer claims Part
-    4's universal form.
-
-    The paper's intended-domain content (paper assumes implicit non-
-    emptiness premise on the feasible set) remains as a future
-    candidate: a bounded version `gap_cognitive_threshold_part4_bounded`
-    conditional on `Set.Nonempty {κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` would be
-    the live closure for the paper's intended scope. Not yet encoded.
+    The unconditional universal form
+    `∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → kappaStar p₁ α ≤ kappaStar p₂ α` is false
+    in Lean because `kappaStar` is defined via `sInf`, and at the
+    corner case where the feasible set `{κ | 0 < κ ∧ 0 ≤ m(p₂, κ)}` is
+    empty, the Mathlib convention `Real.sInf_empty = 0` gives
+    `kappaStar p₂ α = 0`, while `kappaStar p₁ α` may be strictly
+    positive. The paper's claim is correct only under the non-emptiness
+    premise (the threshold actually exists at `p₂`), which is the
+    hypothesis of the bounded form.
 
     paper source: Theorem 4.1 Part 4, line 494. -/
 def kappaStar_p_monotone_DEAD_END_by_junk_value : Prop :=
     ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
       kappaStar p₁ α ≤ kappaStar p₂ α
 
-/-- Theorem 4.1 Part 4: Monotonicity in `p` — DEAD-END marker
-    (purely documentational `def : Prop`, NOT an axiom — zero kernel
-    impact).
-
-    Re-export of `kappaStar_p_monotone_DEAD_END_by_junk_value`. The
-    bundle `gap_cognitive_threshold_characterisation` no longer
-    consumes Part 4 (the universal form is mathematically false under
-    Lean's junk-value semantics; see the marker docstring above). This
-    re-export retains the paper-faithful name
-    `gap_cognitive_threshold_part4` for cross-reference but is encoded
-    as `def : Prop`.
+/-- Re-export under the paper-faithful name. See the docstring of
+    `kappaStar_p_monotone_DEAD_END_by_junk_value` for the encoding
+    note; the live closure is the bounded form
+    `gap_cognitive_threshold_part4` below.
 
     paper source: Theorem 4.1 Part 4, line 494. -/
 def gap_cognitive_threshold_part4_DEAD_END_by_junk_value : Prop :=
@@ -1055,11 +1024,10 @@ def gap_cognitive_threshold_part4_lattice_DEAD_END_by_unencoded_lattice : Prop :
     **κ > 0 premise**: the antitonicity holds for `κ > 0` (paper's
     canonical domain — paper Theorem 4.1 Part 3 explicitly restricts to
     `(0, ∞)` per Remark `kappa-discontinuity`). For `κ ≤ 0`, the
-    Gaussian-posterior denominator `τ₀²·κ + τ²` is non-positive and the
-    junk-value semantics break monotonicity; this is consistent with the
-    paper's Part 3 domain restriction. Part 4's downstream consumer
-    `gap_cognitive_threshold_part4` already supplies `κ > 0` via set
-    membership `hκ.1`.
+    Gaussian-posterior denominator `τ₀²·κ + τ²` is non-positive and
+    monotonicity fails outside the paper's Part 3 domain restriction.
+    Part 4's downstream consumer `gap_cognitive_threshold_part4` already
+    supplies `κ > 0` via set membership `hκ.1`.
 
     paper source: Theorem 4.1 Part 4 proof, line 555 ("the mean estimate
     gap `m(κ)` decreases as `p` increases"); Theorem 4.1 Part 4 line 555
@@ -1082,11 +1050,9 @@ theorem mean_estimate_gap_antitone_in_p_paper_Def :
     Part 4): "On the constructive instances of §5.1 and on lattices,
     the threshold `κ*` is non-decreasing in `p`."
 
-    The paper's intended-domain content — under the implicit non-
-    emptiness premise that the cognitive threshold actually exists at
-    `p₂` (i.e. the feasible set `{κ > 0 : m(p₂, κ) ≥ 0}` is non-empty
-    so `κ*(p₂)` is the genuine inf rather than the junk-value
-    `Real.sInf_empty = 0`) — IS provable as a Lean theorem composing:
+    Under the paper's implicit non-emptiness premise — the cognitive
+    threshold exists at `p₂` (the feasible set `{κ > 0 : m(p₂, κ) ≥ 0}`
+    is non-empty) — the closure composes:
 
       1. The paper-Def-stipulated atom
          `mean_estimate_gap_antitone_in_p_paper_Def` (m antitone in p),
@@ -1103,12 +1069,6 @@ theorem mean_estimate_gap_antitone_in_p_paper_Def :
     (which the paper STATES on lattices — "on lattices, increasing `p`
     raises the fraction of vertices exhibiting C2 misalignment" — and
     therefore inherits the same antitone-in-p structural fact).
-
-    The unconditional universal form (without the non-emptiness premise)
-    remains DEAD-END per the `kappaStar_p_monotone_DEAD_END_by_junk_value`
-    `def : Prop` marker above (Lean's `Real.sInf_empty = 0` junk-value
-    convention falsifies the universal form; paper assumes non-emptiness
-    implicitly).
 
     paper source: Theorem 4.1 Part 4 (label `\label{thm:cognitive-
     threshold}`); paper proof, Part 4 paragraph ("the mean estimate gap
@@ -1180,10 +1140,7 @@ theorem gap_cognitive_threshold_part4 :
     paper assumes the cognitive threshold exists at the larger
     parameter (i.e. `S(p, α₂) := {κ > 0 : alphaWelfareShift α₂ ≤
     m(p, κ)}` is non-empty so `κ*(p, α₂)` is the genuine inf rather
-    than the junk-value `Real.sInf_empty = 0`). Outside this regime
-    the universal-form claim fails by junk-value semantics, mirroring
-    the `kappaStar_p_monotone_DEAD_END_by_junk_value` finding for the
-    Part 4 universal form.
+    than the empty-set `Real.sInf` convention `0`).
 
     paper source: Proposition `\label{prop:threshold-alpha}` proof
     paragraph ("Strict positivity of `∂κ*/∂α` via the implicit function
@@ -1455,12 +1412,8 @@ theorem gap_cognitive_threshold_part6 :
 /-- Theorem 4.1 (full statement, conjunction). Combines all six paper-
     stated parts (Parts 1, 2, 3, 4, 5, 6). Part 4 is bundled here as
     the paper-faithful bounded form on the abstract `kappaStar` carrier
-    (paper's intended-domain content under the implicit non-emptiness
-    premise — see `gap_cognitive_threshold_part4` docstring above). The
-    unconditional universal form remains DEAD-END via the
-    `kappaStar_p_monotone_DEAD_END_by_junk_value` `def : Prop` marker
-    (Lean's `Real.sInf_empty = 0` junk-value convention falsifies the
-    universal form). -/
+    under the paper's implicit non-emptiness premise — see
+    `gap_cognitive_threshold_part4` docstring above. -/
 theorem gap_cognitive_threshold_characterisation
     (hC : Conditions_C1_C2_C3)
     (hT : TerminalNeighbourTopology) :
@@ -1739,8 +1692,7 @@ noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ :=
     (paper-stated calculus expression, line 580-583) and
     `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis at
     `|z| < 1`, line 582-584) below. The Cat 2 Topkis dependency is
-    threaded as the explicit `h_topkis` antecedent for audit-chain
-    visibility.
+    threaded as the explicit `h_topkis` antecedent.
 
     paper source: Proposition `prop:supermodular`, lines 552-585
     (joint antecedent `|z| < 1 ∧ V_dyn(u_2, β) > r(u_1)` at line 558);
@@ -1905,10 +1857,10 @@ theorem cross_partial_sign_in_z_lt_one_OPEN
     (paper-stated sign analysis at `|z| < 1`, line 582-584).
 
     The Cat 2 Topkis 1978/1998 dependency is threaded as the explicit
-    `h_topkis` antecedent for audit-chain visibility (the wider
-    cross-partial-to-supermodularity bridge inspired by Topkis is
-    consumed downstream by `gap_kappaWelfare_cross_partial_link_OPEN`
-    rather than at this proposition's decomposition).
+    `h_topkis` antecedent; the wider cross-partial-to-supermodularity
+    bridge inspired by Topkis is consumed downstream by
+    `gap_kappaWelfare_cross_partial_link_OPEN` rather than at this
+    proposition's decomposition.
 
     paper source: Proposition `prop:supermodular`, lines 552-585. -/
 theorem gap_supermodular
@@ -2085,19 +2037,18 @@ theorem gap_kappaWelfare_cross_partial_link
     corners → corner-supermodularity → policy complementarity.
 
     Bridge-dominance hypothesis `h_dom : ∀ β, BridgeDominance β` is
-    threaded per the Audit 2D paper-source-verification finding: the
-    paper's positivity claim on `welfareCrossPartial` requires the
-    joint antecedent `|z| < 1 ∧ V_dyn(u_2, β) > r(u_1)` (paper line
-    558), so each of the four corner-applications of
-    `gap_supermodular_OPEN` must be supplied with the bridge-dominance
-    witness at the corresponding `β`-coordinate.
+    threaded because the paper's positivity claim on
+    `welfareCrossPartial` requires the joint antecedent
+    `|z| < 1 ∧ V_dyn(u_2, β) > r(u_1)` (paper line 558), so each of
+    the four corner-applications of `gap_supermodular_OPEN` must be
+    supplied with the bridge-dominance witness at the corresponding
+    `β`-coordinate.
 
     Topkis 1978/1998 is the structural inspiration for the
     cross-partial-to-supermodularity bridge. The Cat 2 axiom
     `gap_topkis_supermodularity_OPEN` is consumed via the proof body
     composition through `gap_supermodular_OPEN`'s `h_topkis`
-    antecedent (audit-chain restoration), making the dependency
-    visible to `#print axioms`. -/
+    antecedent, making the dependency visible to `#print axioms`. -/
 theorem gap_policy_complementarity_OPEN_derived
     (hC : Conditions_C1_C2_C3) (hT : TerminalNeighbourTopology)
     (h_snr : ∀ β κ : ℝ, |snrZ β κ| < 1)
@@ -2418,11 +2369,7 @@ theorem gap_sentimental_immunity :
 
     The non-emptiness premise mirrors Part 4: the paper assumes the
     cognitive threshold exists at the larger parameter (the feasible
-    set is non-empty) so that `κ*(p, α₂)` is the genuine inf rather
-    than the junk-value `Real.sInf_empty = 0`. The bounded form is the
-    paper-intended-domain content; the unconditional universal form
-    fails by junk-value semantics, analogous to the Part 4 DEAD-END
-    marker `kappaStar_p_monotone_DEAD_END_by_junk_value`.
+    set is non-empty) so that `κ*(p, α₂)` is the genuine inf.
 
     paper source: Proposition `\label{prop:threshold-alpha}`. -/
 theorem gap_threshold_alpha_monotone :

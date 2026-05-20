@@ -2,3 +2,8 @@ __pycache__/
 *.pyc
 *.png
 .env
+
+# Lean4 build artifacts (kept locally, excluded from git)
+.lake/
+lake-packages/
+build/

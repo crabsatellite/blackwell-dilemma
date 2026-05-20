@@ -80,11 +80,10 @@ noncomputable def W_mix (W_B W_G : ℝ → ℝ) (β lam : ℝ) : ℝ :=
     `W_B' ≥ 0` + `W_G' < 0` derivative chain at `β > β*_G`, i.e. above
     the greedy optimum). The dominance fact itself is Cat 3 paper
     substance; the Lean theorem closes the arithmetic step from
-    dominance to mixture-supermodularity. The vestigial unused
-    antecedents (W_B monotonicity, W_G anti-monotonicity above β*_G,
-    `β > β*_G`) flagged in hostile audit have been removed: they are
-    the upstream content from which `h_dom` is derived in the paper,
-    but they are not consumed by the Lean arithmetic closure here.
+    dominance to mixture-supermodularity. The upstream content from
+    which `h_dom` is derived in the paper (W_B monotonicity, W_G
+    anti-monotonicity above β*_G, `β > β*_G`) is not consumed by the
+    Lean arithmetic closure here.
 
     paper source: Proposition `prop:complementarity`, lines 932-935. -/
 theorem gap_information_knowledge_complementarity
@@ -115,16 +114,12 @@ The greedy agent (`κ = 0`) exhibits the strongest reversal. -/
 
     **CLOSED** Cat 1 — re-export of
     `FiveState.gap_bayesian_naive_routing_threshold` (kernel-pure
-    `nlinarith` arithmetic closure). The prior `axiom` form
-    quantified `∀ p_hat : ℝ, p_hat < 2/3 ↔ <p_hat-free welfare
-    monotonicity claim>` which was Pattern 4 (tautological premise):
-    the RHS is independent of `p_hat`, so the universal iff cannot be
-    a non-trivial theorem. The substantive paper content of the Remark
-    is the threshold identification `p̂* = 2/3`, encoded directly via
-    the routing-decision biconditional. The β-monotonicity sub-claim
-    of `prop:bayesian-naive-five-state` (ii) is tracked separately by
-    `FiveState.gap_bayesian_naive_reversal_absent` (derived theorem
-    composing Cat 3 atom
+    `nlinarith` arithmetic closure). The substantive paper content of
+    the Remark is the threshold identification `p̂* = 2/3`, encoded
+    directly via the routing-decision biconditional. The β-monotonicity
+    sub-claim of `prop:bayesian-naive-five-state` (ii) is tracked
+    separately by `FiveState.gap_bayesian_naive_reversal_absent`
+    (derived theorem composing Cat 3 atom
     `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`).
 
     paper source: Remark `rem:robustness-misspec` (i), line 941;

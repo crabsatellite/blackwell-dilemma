@@ -17,16 +17,52 @@ Blackwell's theorem (1953) states that more informative signals lead to weakly b
 
 ## Replication
 
+All paper-relevant scripts live under `simulation/`. Run from that directory.
+
+### Core theory (figures and analytical results)
+
 ```bash
 cd simulation
-python phase_transition_sim.py       # Core phase transition experiments
-python counterfactual_exp.py         # Within-model counterfactual
-python finite_size_scaling.py        # Finite-size scaling with data collapse
-python blackwell_violation.py        # Analytical proof + VOI computation
-python rationality_trap.py           # 4-state & 5-state interior optimum
-python sharp_transition_exp.py       # Sharp transition + bimodality
-python generate_phase_diagram.py     # Phase diagram + welfare heatmap (Figures 1-2)
-python alpha_star_five_state.py      # alpha* verification (Remark 6.5)
+python blackwell_violation.py        # Analytical proof + VOI computation (Thm 3.1)
+python rationality_trap.py           # 4-state & 5-state interior optimum (Prop 6.4)
+python generate_phase_diagram.py     # Two-regime phase diagram + welfare heatmap (Figs 1-2)
+python alpha_star_five_state.py      # alpha* verification (Prop prop:threshold-alpha)
+python approximation_audit.py        # Systematic audit of all numerical claims (~ values)
+python bayesian_immunity.py          # Bayesian-agent immunity check (Thm 7.1)
+python bayesian_agent.py             # Optimal Bayesian agent: monotone welfare in beta
+python bayesian_agent_fast.py        # Vectorised Bayesian-agent variant
+```
+
+### Phase transition and finite-size scaling
+
+```bash
+python phase_transition_sim.py       # Core: 2D torus, bounded-rational agent (Thm 4.1)
+python finite_size_scaling.py        # FSS with critical exponent nu = 4/3
+python enhanced_fss.py               # Extended FSS + Proposition 5 verification
+python sharp_transition_exp.py       # Sharp transition + bimodality on larger grids
+python counterfactual_exp.py         # Within-model counterfactual (lowering p)
+python trap_prevalence.py            # Fraction of vertices where V_static and V_dynamic disagree
+```
+
+### Robustness and structural extensions
+
+```bash
+python k_horizon_trap.py             # k-horizon robustness: trap persists for finite lookahead
+python complementarity.py            # beta-alpha complementarity / phase transition
+python upgrade_experiments.py        # Decomposition, policy gradients, structural identity
+python weitzman_blindspot.py         # Error of applying Sims/Weitzman (p=0) to p>0 problems
+python policy_disaster_sim.py        # Sims/Gabaix policy fails in supercritical regime
+```
+
+### Audit protocol and empirical applications
+
+```bash
+python bdes.py                       # Blackwell Dilemma Execution System (audit protocol)
+python benchmark.py                  # Unified reproducible benchmark suite
+python empirical_github.py           # ML-framework ecosystem application (Sec applic)
+python replay_experiment.py          # Temporal IDP replay (platform lock-in)
+python analyze_cfpb.py               # CFPB cross-domain irreversibility comparison
+python analyze_hmda.py               # HMDA mortgage welfare-loss distribution
 ```
 
 Results (JSON + PNG) are written to `results/`.

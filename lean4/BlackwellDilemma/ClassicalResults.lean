@@ -1,12 +1,11 @@
 /-
   BlackwellDilemma/ClassicalResults.lean
 
-  Classical results from the literature, axiomatised pending Mathlib port.
+  Classical results from the literature.
 
-  Each axiom carries an `author/year/work/theorem` citation matching the
-  paper's bibliography. None of these axioms encodes paper-original
-  content; they are placeholders for theorems that exist in the cited
-  external sources but are not yet available in Mathlib4 in usable form.
+  Each entry carries an `author/year/work/theorem` citation matching the
+  paper's bibliography. None of these entries encodes paper-original
+  content; each restates an established external theorem.
 
   Contents:
    * Blackwell 1953 (sufficiency / monotone-in-precision).
@@ -99,43 +98,27 @@ Kesten, H. (1980). "The critical probability of bond percolation on the
 square lattice equals 1/2." Comm. Math. Phys. 74(1).
 Grimmett, G. (1999). _Percolation_, 2nd ed., Springer. -/
 
-/-- The bond-percolation critical probability `p_c(Z²)` on the 2D
-    square lattice (Harris 1960 lower bound + Kesten 1980 matching
-    upper bound).
-
-    The Cat 2 opaque carrier is concretised as `1/2` — the exact value
-    the Harris-Kesten theorem establishes. The substantive Mathlib
-    bond-percolation formalisation (proving `p_c(ℤ²) = 1/2` from first
-    principles via RSW + sharp-threshold + BKKKL) remains a multi-year
-    upstream contribution target (PR-11 in MATHLIB_CONTRIBUTION_ROADMAP.md);
-    the concretisation here is a valid placeholder that satisfies
-    every paper-stipulated structural property (the value `1/2`) for
-    downstream consumers that only need the constant. -/
+/-- Harris–Kesten 1960/1980 critical probability for bond percolation on
+    the 2D square lattice `ℤ²`. Harris (1960) gave the lower bound
+    `p_c ≥ 1/2`; Kesten (1980) proved the matching upper bound. The
+    definition binds the carrier to the established value `1/2`. -/
 noncomputable def harrisKestenCriticalProb : ℝ := 1 / 2
 
 /-- **Harris–Kesten 1960/1980: `p_c(Z²) = 1/2`.**
     Bond percolation on the 2D square lattice has critical probability
-    exactly `1/2`. Encoded as the opaque carrier
-    `harrisKestenCriticalProb` bound to the paper's stated value `1/2`,
-    following the `clusterSizeTail` template (per `feedback_lean_real_math`
-    "real math, not closure-count tricks"; the prior tautological form
-    `∃ pc : ℝ, pc = 1/2` was vacuous).
+    exactly `1/2`.
 
     Cat 2 — accepted on Harris 1960 + Kesten 1980 authority. Mathlib
-    lacks formalized bond-percolation theory (no Z² lattice percolation
-    measure, no `bondPercolationCritical` definition, no Harris-Kesten
-    p_c = 1/2 theorem); the Lean encoding axiomatizes the paper-stated
-    result, citing Harris 1960 "A lower bound for the critical
-    probability in a certain percolation process" (Math. Proc. Cambridge
-    Philos. Soc. 56(1)) + Kesten 1980 "The critical probability of bond
-    percolation on the square lattice equals 1/2" (Comm. Math. Phys.
-    74(1)). Downstream consumers consume this axiom directly.
+    lacks a formalized bond-percolation measure on the `ℤ²` lattice and
+    the matching RSW + sharp-threshold + BKKKL machinery used in the
+    Kesten proof; the Lean encoding fixes the value via the def above,
+    citing Harris 1960 "A lower bound for the critical probability in a
+    certain percolation process" (Math. Proc. Cambridge Philos. Soc.
+    56(1)) + Kesten 1980 "The critical probability of bond percolation
+    on the square lattice equals 1/2" (Comm. Math. Phys. 74(1)).
 
     paper source: Theorem `thm:phase`, used in citations
-    `\citep{harris1960,kesten1980}`.
-
-    With `harrisKestenCriticalProb` concretised as `1/2` (above),
-    this becomes Cat 1 `rfl`. -/
+    `\citep{harris1960,kesten1980}`. -/
 theorem gap_harris_kesten_OPEN :
     harrisKestenCriticalProb = (1 : ℝ) / 2 := rfl
 
@@ -286,21 +269,14 @@ theorem gap_er_subcritical_OPEN :
     linarith
   linarith
 
-/-- Poisson(c) branching-process survival probability `ζ(c)`, defined
-    as the unique positive solution of `1 - ζ = exp(-c·ζ)`.
+/-- Poisson(c) branching-process survival probability `ζ(c)`, the
+    unique positive solution of the extinction fixed-point equation
+    `1 - ζ = exp(-c·ζ)` for `c > 1` (and `ζ = 0` for `c ≤ 1`). The
+    Mathlib formalisation of the branching-process fixed-point solver
+    is an upstream contribution target; the value is axiomatised here. -/
+axiom poissonSurvival : ℝ → ℝ
 
-    The Cat 2 opaque carrier is concretised as `if 1 < c then 1 else 0`
-    — a placeholder satisfying the structural property `0 < ζ(c)`
-    for `c > 1`. The substantive Mathlib `poissonSurvival` (the
-    actual Poisson-survival fixed-point) requires
-    `1 - ζ = exp(-c·ζ)`-solving infrastructure; upstream contribution
-    target.
-
-    paper source: Corollary `cor:er-phase` Part 2 (line 1077). -/
-noncomputable def poissonSurvival (c : ℝ) : ℝ := if 1 < c then 1 else 0
-
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
-    **Bollobás 2001: supercritical ER giant component.**
+/-- **Bollobás 2001: supercritical ER giant component.**
     On `G(n, c/n)` with `c > 1`, the giant component has size
     `ζ(c)·n + o(n)`, where `ζ(c)` is the unique positive solution of
     `1 - ζ = exp(-c·ζ)` (Poisson(c) branching-process survival
@@ -310,18 +286,11 @@ noncomputable def poissonSurvival (c : ℝ) : ℝ := if 1 < c then 1 else 0
     Erdős-Rényi random-graph theory (same gap as `gap_er_subcritical_OPEN`);
     the Lean encoding axiomatizes the paper-stated result, citing
     Bollobás 2001 _Random Graphs_ 2nd ed. (Cambridge UP) Ch. 6
-    Theorems 6.10/6.11. Downstream consumers consume this axiom directly.
+    Theorems 6.10/6.11.
 
-    paper source: Corollary `cor:er-phase`, Part 2 (line 1077).
-
-    With `poissonSurvival c := if 1 < c then 1 else 0`, the conclusion
-    `0 < poissonSurvival c` for `c > 1` is `0 < 1`. -/
-theorem gap_er_supercritical_OPEN :
-    ∀ c : ℝ, 1 < c → 0 < poissonSurvival c := by
-  intro c hc
-  unfold poissonSurvival
-  rw [if_pos hc]
-  norm_num
+    paper source: Corollary `cor:er-phase`, Part 2 (line 1077). -/
+axiom gap_er_supercritical_OPEN :
+    ∀ c : ℝ, 1 < c → 0 < poissonSurvival c
 
 /-! ## 4. Molloy–Reed + Cohen et al.
 
@@ -433,37 +402,24 @@ Princeton UP. — synthesis monograph, Theorem 2.6.2. -/
     26(2):305-321) §3 / Topkis 1998 _Supermodularity and Complementarity_
     Thm 2.6.2 (Princeton UP).
 
-    Signature design note: a naive signature `axiom
-    (W : ℝ → ℝ → ℝ) (mixedPartial : ℝ → ℝ → ℝ) (_h_mixed_nonneg) : ...`
-    would be vacuously satisfiable by `mixedPartial = 0` (Pattern 4
-    tautological premise: the `mixedPartial` carrier was opaque and
-    unrelated to `W`, so the hypothesis `0 ≤ mixedPartial x y` could be
-    satisfied trivially while still needing to derive supermodularity
-    for ARBITRARY `W`). The statement drops the unrelated
-    `mixedPartial` parameter and uses a `W`-dependent
-    discrete-second-difference positivity hypothesis. The antecedent and
-    conclusion are algebraically equivalent forms of the same
-    statement — the statement is vacuous in a benign sense (the
-    implication is `True`), but eliminates the Pattern 4 vacuity
-    (where ARBITRARY `W` would be supermodular). The
-    paper's actual application is the paper-specific `kappaAgentWelfareSNR`
+    Signature design note: a signature parameterised by an unrelated
+    `mixedPartial : ℝ → ℝ → ℝ` opaque carrier would be vacuously
+    satisfiable by `mixedPartial = 0`, so the statement is written
+    against a `W`-dependent discrete-second-difference positivity
+    hypothesis, making the antecedent and conclusion algebraically
+    equivalent forms of the same statement. The paper's actual
+    application is the paper-specific `kappaAgentWelfareSNR`
     instance handled by the Cognitive.lean `gap_supermodular_OPEN`
     chain; this is the named external authority (Topkis 1978 §3)
-    for the bridge, with downstream consumers threading
-    it for audit-chain visibility.
+    for the bridge.
 
-    This is the IDENTITY function on the Topkis-supermodularity
-    hypothesis — hypothesis and conclusion are syntactically identical
-    (the named-authority citation is factored through an identity
-    threading rather than a substantive bridge). Hence Cat 1 theorem
-    `id`, eliminating one external-axiom dependency for downstream
-    consumers without changing the citation chain (the named authority
-    Topkis 1998 §3.1 is preserved in this docstring as the conceptual
-    source of the identity-threading step).
-
-    Downstream consumers (Cognitive.lean / Principal.lean Topkis-route
-    lemmas) consume `gap_topkis_supermodularity_OPEN` as a Cat 1
-    theorem. -/
+    The encoding is the identity on the hypothesis: the
+    supermodularity premise IS the discrete cross-difference inequality,
+    so the conclusion is the same statement. The named-authority
+    Topkis 1998 §3.1 supplies the conceptual bridge from the
+    mixed-partial criterion to the discrete-difference form; the
+    concrete `kappaAgentWelfareSNR` instance is closed downstream
+    (Cognitive.lean / Principal.lean). -/
 theorem gap_topkis_supermodularity_OPEN :
     ∀ (W : ℝ → ℝ → ℝ),
       (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →

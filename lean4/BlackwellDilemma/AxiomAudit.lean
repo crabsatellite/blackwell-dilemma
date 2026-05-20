@@ -10,9 +10,9 @@
 
   Expected axioms:
    * Lean 4 / Mathlib kernel: `propext`, `Classical.choice`, `Quot.sound`.
-   * Paper-citation axioms (named `gap_<name>_OPEN`) — these stand for
-     paper claims whose Lean version is a placeholder pending Mathlib
-     port + substantive proof.
+   * Paper-citation axioms (named `gap_<name>_OPEN`) — these state
+     paper claims whose Lean derivation depends on external sources
+     (Cat 2) or paper-novel structure (Cat 3).
    * Opaque types and carriers declared in `Types.lean`,
      `ClassicalResults.lean`, etc. (`Vertex`, `IsEdge`, `Phi`, `phi`,
      `agentWelfare`, `kappaStar`, etc.).
@@ -291,9 +291,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_greedy_has_interior_optimum
 #print axioms BlackwellDilemma.gap_fiveState_policy_mapping
 #print axioms BlackwellDilemma.FiveState.gap_three_regime_sufficient_cognition_kappaStar_pos
--- p-monotonicity bounded version (the unconditional axiom is provably
--- false under Lean's junk-value semantics; bounded version restores
--- paper's intended domain p ∈ [0, 1)).
+-- p-monotonicity on the paper's intended domain p ∈ [0, 1).
 #print axioms BlackwellDilemma.FiveState.gap_p_monotonicity_bounded
 
 -- §6 Bayesian + complementarity
@@ -309,8 +307,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- `#print axioms` of the consuming derived theorems.
 #print axioms BlackwellDilemma.gap_robustness_myopic_k
 #print axioms BlackwellDilemma.gap_robustness_satisficing
--- Individual atom prints (kernel-purity baseline + audit-chain
--- visibility):
+-- Individual atom prints (kernel-purity baseline):
 #print axioms BlackwellDilemma.myopic_k_eq_bayesian_above_divergence_depth_OPEN
 #print axioms BlackwellDilemma.satisficing_trap_acceptance_strictMono_in_beta_OPEN
 #print axioms BlackwellDilemma.satisficing_welfare_antitone_in_trap_acceptance_OPEN
@@ -594,8 +591,7 @@ namespace BlackwellDilemma.AxiomAudit
 
 -- Closure wave on Wrongness.lean (5 retired bundled atoms → 6
 -- smaller atoms + 1 new opaque carrier). Derived theorems + smaller
--- atoms + new carrier surface here for kernel-purity baseline +
--- audit-chain visibility:
+-- atoms + new carrier surface here for kernel-purity baseline:
 --  * `gap_wrongness` (re-derivation): composes the smaller atoms
 --    `wrongness_high_beta_welfare_convergence_atom_OPEN` (paper stage 1
 --    welfare convergence `W(β) → V_dyn(u_1)`) +
@@ -633,7 +629,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- Closure wave on Cognitive.lean (2 retired bundled atoms → 4
 -- smaller atoms + 1 new opaque carrier + 2 derived theorems).
 -- Derived theorems + smaller atoms + new carrier surface here for
--- kernel-purity baseline + audit-chain visibility:
+-- kernel-purity baseline:
 --  * `mLimit_pos` (derived theorem): composes the structural-equation
 --    atom `mLimit_eq_mLimitDifference_OPEN` (paper line 505
 --    identification of κ → ∞ limit value with `V_dyn`-difference) +
@@ -656,8 +652,7 @@ namespace BlackwellDilemma.AxiomAudit
 
 -- Closure wave on Canonical.lean (2 retired bundled atoms → 3
 -- smaller atoms + 2 derived theorems). Derived theorems + smaller
--- atoms surface here for kernel-purity baseline + audit-chain
--- visibility:
+-- atoms surface here for kernel-purity baseline:
 --  * `inflection_at_kstar` (derived theorem): composes the
 --    structural-equation atom
 --    `smoothTransitionBeta_corresponds_to_interior_optimum_OPEN`
@@ -1010,9 +1005,9 @@ namespace BlackwellDilemma.AxiomAudit
 -- `E[|R|] = O(1)`).  That uniform bound is the genuine next-layer
 -- percolation input; the `h_grimmett` Cat 2 antecedent is retained
 -- on `W_info_oracle_exponential_bound_OPEN` / `gap_info_decay` /
--- `gap_dilemma` for audit-chain continuity (so `#print axioms
--- gap_dilemma` still surfaces `gap_grimmett_exponential_decay_OPEN`)
--- even though the per-`n` closure does not consume it.
+-- `gap_dilemma` so that `#print axioms gap_dilemma` still surfaces
+-- `gap_grimmett_exponential_decay_OPEN`, even though the per-`n`
+-- closure does not consume it.
 --
 -- `#print axioms` on the two closures = kernel axioms + the
 -- `EdgeIdx` carriers/instances + the 2 new `wInfoOracle*` carriers +
@@ -1302,9 +1297,7 @@ namespace BlackwellDilemma.AxiomAudit
 --     structural equation with the foundation lemma
 --     `agentWelfare_monotone_of_kernel_pointwise_monotone`.  The
 --     `h_blackwell` / `hC` / `hT` / `α < α*` antecedents are retained
---     (now unused) for audit-chain continuity + paper-faithful regime
---     documentation.  inputCategory Cat 3 → Cat 1; cat3SubType
---     workingAssumption → derivedTheorem; status gapOpen → gapClosed.
+--     (now unused) for paper-faithful regime documentation.
 --     Net wA delta: −4 (the new structural equations are paper-Def-
 --     stipulated per-realisation facts, tagged structuralEquation per
 --     the `wInfoOracleKernel_nonpos` precedent, NOT
@@ -1363,7 +1356,7 @@ namespace BlackwellDilemma.AxiomAudit
 --        option, so conditional on each percolation realisation a
 --        Blackwell-superior reward signal yields weakly higher expected
 --        terminal reward).  The `h_blackwell` antecedent is retained
---        (now unused) for audit-chain continuity.
+--        (now unused).
 --      * `welfare_bounded_below_inflection_OPEN` composes the new
 --        `agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone`
 --        structural equation (Proposition `prop:threshold-five-state`

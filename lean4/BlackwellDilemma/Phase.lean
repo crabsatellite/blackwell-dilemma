@@ -86,8 +86,7 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     `topo_loss_decay_below_pc_OPEN` (existence of decay envelope) and
     `topo_loss_decay_arbitrary_threshold_OPEN` (arbitrary-threshold
     convergence) below. The Cat 2 Grimmett percolation-probability
-    dependency is threaded as the explicit `h_perc_prob` antecedent for
-    audit-chain visibility.
+    dependency is threaded as the explicit `h_perc_prob` antecedent.
 
     paper source: Theorem 3.3 (`thm:phase`), lines 400-419;
     Grimmett 1999 _Percolation_ 2nd ed. cited as the Cat 2
@@ -271,7 +270,7 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
     `wInfoTopoRatio_const_exists_OPEN` (existence of positive constant)
     and `wInfoTopoRatio_bound_OPEN` (quantitative ratio bound) below.
     The Cat 2 Grimmett §6.75 exponential-decay dependency is threaded
-    as the explicit `h_grimmett` antecedent for audit-chain visibility.
+    as the explicit `h_grimmett` antecedent.
 
     paper source: Theorem 3.3 (`thm:phase`), lines 420-431;
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
@@ -580,18 +579,14 @@ theorem forward_reachable_full_at_zero
     the full vertex carrier `Finset.univ`. Hence the Vstatic/Vdyn rankings
     agree on all neighbours.
 
-    Refactored from the prior `gap_trap_prevalence_zero_OPEN` per
-    `feedback_gap_ledger_in_lean4` 2026-05-13 anti-pattern repair, then
-    restated per the SCOPE-INFLATION audit: the prior axiom form
-    (`V_dyn u {v} ω = V_dyn v ∅ ω`) and the prior `∀ H` atom form were
-    SCOPE-INFLATED beyond paper line 463 — paper's `R(v) = V` is the
-    `H = ∅` (i.e. `ReachableSet`) statement. The refactored statement
-    encodes the paper's actual conclusion (`V_dyn` is constant over the
-    `H = ∅` family at `p = 0`) and is derived from the H=∅-scoped
-    Cat 3 atomic structural equation `forward_reachable_full_at_zero_OPEN`
-    plus the existing `V_dyn_def` atom — the equality follows because
-    both sides reduce to a `sup'` over the SAME carrier `Finset.univ`
-    (with both witnesses providing the same non-emptiness data).
+    The statement scope matches paper line 463 exactly: paper's `R(v) = V`
+    is the `H = ∅` (i.e. `ReachableSet`) statement, so the conclusion
+    `V_dyn` is constant over the `H = ∅` family at `p = 0`. Derived
+    from the H=∅-scoped Cat 3 atomic structural equation
+    `forward_reachable_full_at_zero_OPEN` plus the existing `V_dyn_def`
+    atom — the equality follows because both sides reduce to a `sup'`
+    over the SAME carrier `Finset.univ` (with both witnesses providing
+    the same non-emptiness data).
 
     paper source: Proposition `prop:trap-prevalence` Part 1, line 457
     + line 463 proof. -/

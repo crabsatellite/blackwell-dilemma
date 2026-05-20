@@ -22,7 +22,7 @@ mathematical foundations needed to retire the paper's Cat 3 §3.4.4
   Quot.sound]` — no `sorry`, no broken-link axioms, no paper-novel
   carriers.
 
-## Status (as of R138 — 26 Cat 1 modules complete)
+## Status — 26 Cat 1 modules complete
 
 ### ✅ Tier A — Foundational predicates (DONE)
 
@@ -45,9 +45,9 @@ mathematical foundations needed to retire the paper's Cat 3 §3.4.4
 | `BlackwellConditional.lean` | `finset_sum_mono_of_pointwise_mono` — pointwise → summed monotonicity | ✅ |
 | `DifferenceQuotientAlgebra.lean` | `DifferenceDominates` predicate + algebra (refl, trans, add, smul, neg-swap) | ✅ |
 | `MonotoneIntegralFOSD.lean` | `weighted_sum_mono_under_weight_fosd` + `difference_dominates_via_weighted_sum` | ✅ |
-| `FOSDLiftedExpectation.lean` | Combines FOSD + finset-weighted sum atoms for paper-bridge Phase 9b | ✅ |
+| `FOSDLiftedExpectation.lean` | Combines FOSD + finset-weighted sum atoms for paper-bridge expectation lift | ✅ |
 | `ArgmaxExistence.lean` | `argmax_exists_of_continuous_eventually_decreasing` + `argmax_preserved_under_monotone` | ✅ |
-| `AbstractKernelMonotonicity.lean` | `expectation_mono_of_pointwise_kernel_mono` + reversal pattern (R88-R90) | ✅ |
+| `AbstractKernelMonotonicity.lean` | `expectation_mono_of_pointwise_kernel_mono` + reversal pattern | ✅ |
 
 ### ✅ Tier C — Concrete instance witnesses (DONE)
 
@@ -67,7 +67,7 @@ mathematical foundations needed to retire the paper's Cat 3 §3.4.4
 |---|---|---|
 | `ContinuousArithmetic.lean` | `ContinuousOn.add_Ioi0`, `sub_Ioi0`, `mul_Ioi0`, `linear_Ioi0` for half-line atoms | ✅ |
 | `TendstoLimitArithmetic.lean` | `Tendsto.add_const_real`, `sub_const_real`, `const_smul_real`, `add_real` | ✅ |
-| `TendstoFiniteSum.lean` | `tendsto_finset_sum_of_pointwise_tendsto` + weighted version (R103) | ✅ |
+| `TendstoFiniteSum.lean` | `tendsto_finset_sum_of_pointwise_tendsto` + weighted version | ✅ |
 | `MillsRatioTail.lean` | `weighted_tail_lower_bound` + `tail_geometric_lower_bound` + `sum_pos_of_one_pos_term` | ✅ |
 | `PiecewiseFunction.lean` | `piecewise2 c f g` + `_at_left/_right` + `_mono` (regime functions) | ✅ |
 
@@ -76,7 +76,7 @@ mathematical foundations needed to retire the paper's Cat 3 §3.4.4
 | Module | Description | Status |
 |---|---|---|
 | `BernoulliProductFinite.lean` | `bernoulliFactor`, `bernoulliWeight` over `Bool^E` finite product + non-negativity / strict positivity | ✅ |
-| `PercolationExpectation.lean` | `percExpectation_finite` + non-negativity + monotonicity + linearity (R88 atom) | ✅ |
+| `PercolationExpectation.lean` | `percExpectation_finite` + non-negativity + monotonicity + linearity | ✅ |
 
 ### 🔲 Tier F — Future heavy infrastructure (PENDING — multi-month effort)
 
@@ -85,7 +85,7 @@ mathematical foundations needed to retire the paper's Cat 3 §3.4.4
 | `CalculusTopkis.lean` | Mixed-partial criterion `∂²f/∂x∂y ≥ 0 ⇒ IsSupermodular f` (Mathlib `Analysis.Calculus`) | 🔲 |
 | `GiantComponentMills.lean` | Giant-component Mills-tail decay above `p_c` (Grimmett 1999 §6.75) | 🔲 |
 | `LebesgueStieltjesAtoms.lean` | Stieltjes integration vs CDF G — Mathlib `MeasureTheory` | 🔲 |
-| `KernelConcretization.lean` | Per-realisation reward-kernel concretisation pattern (Phase 12) | 🔲 |
+| `KernelConcretization.lean` | Per-realisation reward-kernel concretisation pattern | 🔲 |
 
 ## Architecture (mirrors Hodge)
 
