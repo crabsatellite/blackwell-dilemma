@@ -75,8 +75,8 @@ noncomputable def W_mix (W_B W_G : ℝ → ℝ) (β lam : ℝ) : ℝ :=
     `prop:interior-optimum`). Signal precision and structural knowledge
     are Topkis complements above `β*_G`.
 
-    Cat 1 closure is ARITHMETIC ONLY — it presupposes the paper-novel
-    dominance fact `h_dom : W_G β ≤ W_B β` (which integrates the paper's
+    Cat 1 closure is ARITHMETIC ONLY — it presupposes the dominance
+    fact `h_dom : W_G β ≤ W_B β` (which integrates the paper's
     `W_B' ≥ 0` + `W_G' < 0` derivative chain at `β > β*_G`, i.e. above
     the greedy optimum). The dominance fact itself is Cat 3 paper
     substance; the Lean theorem closes the arithmetic step from
@@ -159,10 +159,9 @@ axiom myopicKWelfareBelowDepth : ℕ → ℕ → ℝ → ℝ
     faithfully. This is NOT a closure-count trick (no content-erasure
     `≡ True`).
 
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    backward-induction framework on per-IDP-instance trap-tree subtree
-    structures, define the paper-faithful identification locally rather
-    than skip.
+    Where Mathlib lacks the typed backward-induction framework on
+    per-IDP-instance trap-tree subtree structures, the paper-faithful
+    identification is defined locally.
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942
     (k-step lookahead horizon spans full divergence depth d ⇒
@@ -216,8 +215,8 @@ theorem myopic_k_eq_bayesian_above_divergence_depth_OPEN :
           (paper line 942 — myopic equals Bayesian when planning
           horizon `k ≥ d`); plus
       (ii) Cat 2 Blackwell 1951/1953 monotonicity threaded as an
-          explicit `h_blackwell` antecedent per `feedback_gap_ledger_in_lean4`
-          §10 (paper-APPLICATION-of-Cat-2-to-opaque-carrier is Cat 3 with
+          explicit `h_blackwell` antecedent per §10 (paper-APPLICATION-
+          of-Cat-2-to-opaque-carrier is Cat 3 with
           explicit Cat 2 dependency chain). The Cat 2 axiom lives at
           `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
 
@@ -287,7 +286,7 @@ axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
     carrier-defining monotonicity behavior on the opaque
     `satisficingTrapAcceptanceProb` carrier under the paper-named
     regime `r̄ < r(A)` per paper Remark `rem:robustness-misspec` (iii)
-    line 945; 永不 close per discipline §3.4.3 — paper's commitment to
+    line 945; per discipline §3.4.3 — paper's commitment to
     what `satisficingTrapAcceptanceProb r̄ β` MEANS as β grows under
     `r̄ < r(A)`).
 
@@ -331,8 +330,8 @@ axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
     Cat 3 sub-type: structuralEquation (paper-Remark-stipulated
     inter-carrier binding between `satisficingTrapAcceptanceProb` and
     `satisficingWelfare` at the paper-named regime `r̄ ∈ (r(B), r(A))`
-    per paper Remark `rem:robustness-misspec` (iii) line 946; 永不
-    close per discipline §3.4.3 — paper's commitment to how the two
+    per paper Remark `rem:robustness-misspec` (iii) line 946;
+    per discipline §3.4.3 — paper's commitment to how the two
     carriers relate at the regime).
 
     paper source: Remark `rem:robustness-misspec` (iii), line 946

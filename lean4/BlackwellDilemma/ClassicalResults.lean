@@ -68,11 +68,11 @@ precision parameter. -/
     paper source: Theorem `thm:bayesian-immunity` (line 925), invoked
     against the conditional subproblem on `R(v_0)`.
 
-    Closed via Cat 1 derivation from the existing Cat 3
-    paper-novel atom `agentRewardKernel_bayesian_pointwise_monotone`
+    Closed via Cat 1 derivation from the existing Cat 3 atom
+    `agentRewardKernel_bayesian_pointwise_monotone`
     (Types.lean) + `percExpectation_mono` (Percolation.lean) +
-    `blockingProb_mem_unitInterval` (Types.lean). The Cat 3 paper-
-    novel kernel-level monotonicity stipulation IS the Bayesian-agent
+    `blockingProb_mem_unitInterval` (Types.lean). The Cat 3
+    kernel-level monotonicity stipulation IS the Bayesian-agent
     Blackwell-conditional structural fact (paper Theorem 5.1 statement
     + Bayesian.lean §1 docstring); lifting it to the welfare level via
     the pointwise-monotonicity-of-`percExpectation` Cat 1 lemma is
@@ -893,8 +893,8 @@ theorem Phi_nonneg (x : ℝ) : 0 ≤ Phi x := by
     constant `1/2` via `Filter.Tendsto.const_add` yields the limit
     `1/2 + 1/2 = 1`.
 
-    paper source: standard normal CDF asymptotic Φ(x) → 1 (textbook;
-    not paper-novel). -/
+    paper source: standard normal CDF asymptotic Φ(x) → 1 (textbook
+    fact). -/
 theorem Phi_tendsto_one_atTop :
     Filter.Tendsto Phi Filter.atTop (nhds 1) := by
   have h_int : Filter.Tendsto (fun x : ℝ => ∫ t in (0 : ℝ)..x, phi t)
@@ -918,7 +918,7 @@ theorem Phi_tendsto_one_atTop :
     via `Filter.tendsto_atBot_atTop_neg`.
 
     paper source: standard normal CDF asymptotic Φ(x) → 0 as x → -∞
-    (textbook; not paper-novel). -/
+    (textbook fact). -/
 theorem Phi_tendsto_zero_atBot :
     Filter.Tendsto Phi Filter.atBot (nhds 0) := by
   -- Step 1. The map y ↦ Phi(-y) tends to 0 at atTop.
@@ -992,8 +992,7 @@ theorem tendsto_const_div_atTop_of_tendsto_zero_pos
     Used by `gap_W_open_limit_infty` (Canonical.lean) for the β → ∞
     welfare-limit derivation.
 
-    paper source: textbook reciprocal-of-exponential asymptotic
-    (not paper-novel). -/
+    paper source: textbook reciprocal-of-exponential asymptotic. -/
 theorem signalVariance_tendsto_zero_atTop :
     Filter.Tendsto signalVariance Filter.atTop (nhds 0) := by
   -- Step 1: `2 * β → ∞` as `β → ∞`.
@@ -1041,7 +1040,7 @@ theorem signalVariance_tendsto_zero_atTop :
     `Phi (Δ / √(2σ²(β)))` through to its limiting value `Phi 0 = 1/2`.
 
     paper source: standard normal CDF is continuous everywhere
-    (textbook; not paper-novel). -/
+    (textbook fact). -/
 theorem Phi_continuousAt (x : ℝ) : ContinuousAt Phi x :=
   (gap_Phi_derivative x).continuousAt
 
@@ -1051,9 +1050,9 @@ theorem Phi_continuousAt (x : ℝ) : ContinuousAt Phi x :=
     integrals cancel, leaving `1`. This is the standard-normal CDF
     symmetry `Φ(x) = 1 − Φ(−x)`.
 
-    paper source: standard normal CDF symmetry (textbook; not
-    paper-novel). Used to derive the strict bounds `0 < Phi` and
-    `Phi < 1` for the 5-state welfare-loss analysis. -/
+    paper source: standard normal CDF symmetry (textbook fact). Used
+    to derive the strict bounds `0 < Phi` and `Phi < 1` for the
+    5-state welfare-loss analysis. -/
 theorem Phi_reflect (x : ℝ) : Phi x + Phi (-x) = 1 := by
   have h_neg : Phi (-x) = 1/2 - ∫ t in (0 : ℝ)..x, phi t := Phi_neg_eq x
   have h_pos : Phi x = 1/2 + ∫ t in (0 : ℝ)..x, phi t := rfl
@@ -1182,8 +1181,7 @@ theorem Phi_lt_one (x : ℝ) : Phi x < 1 := by
     β → 0⁺ branch.  Used by `gap_W_open_limit_zero` (Canonical.lean) for
     the β → 0⁺ welfare-limit derivation.
 
-    paper source: textbook reciprocal-of-exponential asymptotic
-    (not paper-novel). -/
+    paper source: textbook reciprocal-of-exponential asymptotic. -/
 theorem signalVariance_tendsto_atTop_of_tendsto_zero_pos :
     Filter.Tendsto signalVariance (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop := by
   -- Step 1: `2 * β → 0` as `β → 0⁺` (within `nhdsWithin 0 (Ioi 0)`).
@@ -1447,7 +1445,7 @@ the welfare monotonicity at α = 0. -/
     Therefore W(β, κ, 0) is non-decreasing in β").
 
     Closed via Cat 1 derivation. The conclusion follows
-    directly from the existing Cat 3 paper-novel atom
+    directly from the existing Cat 3 atom
     `agentRewardKernel_sentimental_pointwise_monotone` (Types.lean)
     + `percExpectation_mono` — the Bayesian-monotonicity hypothesis
     is unused, since the Cat 3 atom independently asserts the per-

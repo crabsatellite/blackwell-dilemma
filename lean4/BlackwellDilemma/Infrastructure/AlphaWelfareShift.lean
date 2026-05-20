@@ -76,13 +76,13 @@ This concrete identification:
 The substantive Cat 2 content (full IFT chain — continuity of `M`,
 non-vanishing `∂M/∂κ`, trap-probability sign analysis via Gaussian
 PDF density, the welfare-rate constant `r(u_1) − V_dyn(u_2)`) is
-paper-novel application of Mathlib infrastructure not yet available
-(`Mathlib.Analysis.Calculus.ImplicitFunction` requires regularity
-hypotheses on `M` that would themselves depend on the unencoded
-welfare-transition functional definition). The slope-1 concrete
-identification is the smallest paper-faithful realisation of the IFT
-sign-analysis conclusion (strict positivity of `∂κ*/∂α`) without
-encoding the full IFT regularity chain.
+forward-looking work that would apply
+`Mathlib.Analysis.Calculus.ImplicitFunction`, which requires
+regularity hypotheses on `M` that themselves depend on the
+unencoded welfare-transition functional definition. The slope-1
+concrete identification is the smallest paper-faithful realisation
+of the IFT sign-analysis conclusion (strict positivity of
+`∂κ*/∂α`) without encoding the full IFT regularity chain.
 
 ## Cat 1 derived monotonicity
 
@@ -131,10 +131,11 @@ namespace BlackwellDilemma.Infrastructure
 
     The substantive Cat 2 content of the full IFT chain (`M`
     differentiability, `∂M/∂κ > 0`, trap-probability sign analysis via
-    Gaussian PDF density) is paper-novel application of Mathlib
-    `Mathlib.Analysis.Calculus.ImplicitFunction` infrastructure not
-    yet encoded; the slope-1 concrete identification routes the
-    paper's IFT sign conclusion through a kernel-pure scalar carrier.
+    Gaussian PDF density) is forward-looking work that would apply
+    `Mathlib.Analysis.Calculus.ImplicitFunction` once the
+    welfare-transition functional is encoded; the slope-1 concrete
+    identification routes the paper's IFT sign conclusion through a
+    kernel-pure scalar carrier.
 
     paper source: Proposition `\label{prop:threshold-alpha}` proof
     paragraph "Strict positivity of `∂κ*/∂α` via the implicit function

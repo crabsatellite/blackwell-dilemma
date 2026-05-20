@@ -12,7 +12,7 @@
    * Lean 4 / Mathlib kernel: `propext`, `Classical.choice`, `Quot.sound`.
    * Paper-citation axioms (named `gap_<name>_OPEN`) — these state
      paper claims whose Lean derivation depends on external sources
-     (Cat 2) or paper-novel structure (Cat 3).
+     (Cat 2) or paper-stipulated structure (Cat 3).
    * Opaque types and carriers declared in `Types.lean`,
      `ClassicalResults.lean`, etc. (`Vertex`, `IsEdge`, `Phi`, `phi`,
      `agentWelfare`, `kappaStar`, etc.).
@@ -359,8 +359,8 @@ namespace BlackwellDilemma.AxiomAudit
 -- §5 Three-regime reversal six-way decomposition: paper line 814 has six
 -- sub-claims — existence, uniqueness, non-monotonicity, overshoot
 -- strictly decreasing in p, overshoot continuous in p on [0, p_1), and
--- overshoot vanishing at p_1 — split per `feedback_lean_axiom_decomposition`
--- Anti-pattern #2. Each sub-axiom is a Cat 3 paper-novel OPEN claim with
+-- overshoot vanishing at p_1 — split per axiom-decomposition
+-- Anti-pattern #2. Each sub-axiom is a Cat 3 OPEN claim with
 -- explicit single-clause encoding; the continuity + vanishing-at-p_1
 -- sub-axioms are stated against the opaque carrier `betaStarOfP` (whose
 -- own dependencies appear under each consuming axiom). Only the existence
@@ -805,10 +805,10 @@ namespace BlackwellDilemma.AxiomAudit
 -- `expectedTopoLoss_le_one_atom_OPEN`.
 --
 -- (1) `Percolation.lean` FOUNDATION — the finite bond-percolation
---     measure and its expectation, built per `feedback_no_compute_
---     retreat` ("Mathlib doesn't have bond percolation → DEFINE a
---     paper-faithful finite-graph bond-percolation framework
---     locally").  All lemmas are kernel-pure `[propext,
+--     measure and its expectation, built locally because Mathlib
+--     doesn't have bond percolation. A paper-faithful finite-graph
+--     bond-percolation framework is defined.  All lemmas are
+--     kernel-pure `[propext,
 --     Classical.choice, Quot.sound]` — ZERO project `_OPEN` axioms:
 --      * `bondMeasureTotal_eq_one` — the explicit Bernoulli-product
 --        weights `∏ e, (if ω e then p else 1−p)` sum to `1` over the
@@ -984,7 +984,7 @@ namespace BlackwellDilemma.AxiomAudit
 -- event probability `θ(1−p) > 0` to split the kernel.
 --
 -- The Lean encoding follows paper line 415's giant-component-conditional
--- form (per `feedback_truth_over_publication`).
+-- form (truth-over-publication discipline).
 --
 -- (1) `Percolation.lean` EXTENDED with the sub-event-expectation +
 --     cluster-size-partition layer (4 new kernel-pure lemmas):
@@ -1064,9 +1064,9 @@ namespace BlackwellDilemma.AxiomAudit
 -- depending on `p`" — that constant is `6 p⁵ (1-p)²` *multiplied by*
 -- the further positive factors.
 --
--- Per `feedback_truth_over_publication`: the encoding establishes the
--- genuine product lower bound + the concretise-the-opaque-carrier
--- pattern.
+-- The encoding establishes the genuine product lower bound + the
+-- concretise-the-opaque-carrier pattern (truth-over-publication
+-- discipline).
 --
 -- (1) `Percolation.lean` EXTENDED with one new kernel-pure lemma:
 --      * `percRestrictedExpectation_le_percExpectation_of_nonneg` —
@@ -1257,10 +1257,10 @@ namespace BlackwellDilemma.AxiomAudit
 --     per the established precedent).
 --
 -- Scope honesty: this wave STILL does not close the
--- `agentWelfare`-dependent REVERSAL-existence atoms (paper-novel
--- anti-monotonicity content requires per-realisation reversal-WITNESS
--- structural equations, distinct from the monotonicity structural
--- equations); the `aboveThresholdWelfare_monotone_OPEN` /
+-- `agentWelfare`-dependent REVERSAL-existence atoms (anti-monotonicity
+-- content requires per-realisation reversal-WITNESS structural
+-- equations, distinct from the monotonicity structural equations);
+-- the `aboveThresholdWelfare_monotone_OPEN` /
 -- `belowThresholdWelfare_eventually_decreasing_OPEN` /
 -- `perAgentOptimalAggregate_dominates_uniform_OPEN` Principal.lean
 -- atoms reference DIFFERENT opaque carriers (`aboveThresholdWelfare` /
@@ -1368,8 +1368,8 @@ each `_OPEN` depends only on:
 * Lean kernel axioms (`propext`, `Classical.choice`, `Quot.sound`)
 * The corresponding bridge atom (paper-stipulated structural
   identification)
-* `Infrastructure` Cat 1 module dependencies (paper-novel-free)
-* Opaque `Types.lean` carriers (Cat 3 primitives — 永不 close).
+* `Infrastructure` Cat 1 module dependencies
+* Opaque `Types.lean` carriers (Cat 3 primitives).
 
 NO `_paper_witness` axiom appears anywhere in the dependency
 graph (verified by `grep -c "^axiom .*_paper_witness" → 0`).

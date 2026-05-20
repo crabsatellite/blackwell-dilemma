@@ -41,7 +41,7 @@ noncomputable def V_static (v : Vertex) : ℝ := reward v
     paper source: Definition `def:value-functions`, line 443. -/
 axiom V_dyn : Vertex → Finset Vertex → PercolationOutcome → ℝ
 
-/-- Cat 3 paper-novel ATOMIC structural equation: the dynamic value of
+/-- Cat 3 ATOMIC structural equation: the dynamic value of
     a vertex `v` (under parent set `H`, percolation outcome `ω`) is the
     paper-stated sup of rewards over the forward-reachable set
     `ForwardReachable v H ω`. Paper Definition 2.2 line 127 reads
@@ -98,7 +98,7 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
     expected topological loss is `Θ(1)` (the `1 - θ(1-p)` fraction of
     agents NOT in the giant component carry `Θ(1)` loss).
 
-    Per `feedback_truth_over_publication`, the Phase.lean
+    The Phase.lean
     below-threshold chain is encoded against the paper-faithful
     giant-component-conditional form, reusing the infrastructure
     built in `Wrongness.lean` / `Percolation.lean`:
@@ -218,11 +218,11 @@ theorem gap_phase_transition_below :
     upper-bound claims (paper claims `wInfoTopoRatio p β ≤ c · 2^(-β)` for
     some c > 0; with witness 0, this holds trivially).
 
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed Z²-
+    Where Mathlib lacks the typed Z²-
     bond-percolation + Mills-tail framework needed for the substantive
     cluster-tail derivation, define the paper-faithful extreme witness
-    locally rather than skip. Per `feedback_lean_definition_must_be_def_not_axiom`:
-    paper definitions = Lean `def`, never opaque + axiom.
+    locally rather than skip. Paper definitions = Lean `def`, never
+    opaque + axiom.
 
     Net effect: `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption`
     and `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` become
@@ -260,9 +260,9 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
     c(p) · 2^(-β)`; with the concretization `wInfoTopoRatio := 0`,
     the bound holds trivially for `c = 1` (any positive constant works).
 
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    Mills-tail + Z²-percolation framework, define the paper-faithful
-    unit witness locally rather than skip.
+    Where Mathlib lacks the typed Mills-tail + Z²-percolation
+    framework, define the paper-faithful unit witness locally rather
+    than skip.
 
     Net effect: BOTH `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption`
     and `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` become
@@ -391,7 +391,7 @@ depending on `p`. -/
     stipulated).
 
     Paper-Def discipline (paper-stipulated structural fact about
-    paper-novel `Vertex` carrier + `IsEdge` predicate). 永不 close. -/
+    the `Vertex` carrier + `IsEdge` predicate). Cat 3 atom. -/
 axiom paperGraph_preconnected_paper_Def :
     BlackwellDilemma.Infrastructure.paperGraph.Preconnected
 
@@ -408,8 +408,8 @@ axiom paperGraph_preconnected_paper_Def :
     (cf. `Infrastructure.percolationGraph_adj_eq_paperGraph_at_all_open`).
 
     Paper-Def discipline (paper-stipulated identification of the
-    paper-novel opaque carrier `ForwardReachable` with a Cat 1
-    SimpleGraph reachability primitive under paper Def 2.5). 永不 close. -/
+    opaque carrier `ForwardReachable` with a Cat 1
+    SimpleGraph reachability primitive under paper Def 2.5). Cat 3 atom. -/
 axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def :
     ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
       (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
@@ -492,7 +492,7 @@ theorem forward_reachable_empty_full_at_all_open_OPEN :
     the antecedent `blockingProb = 0` is false, so the conclusion
     follows vacuously.
 
-    This is HONEST per `feedback_truth_over_publication`: the
+    This is HONEST: the
     closure documents the standing-hypothesis precedence over the
     boundary-case stipulation, rather than fabricating a derivation
     of the all-edges-open identity. The substantive paper content of
@@ -520,7 +520,7 @@ theorem all_edges_open_at_zero_blocking_OPEN :
     packages (i) bond-percolation semantics linking `blockingProb = 0`
     to the all-edges-open realisation + (ii) the connected-graph
     forward-reachable-equals-univ identification into one
-    premise. Decomposed into two strictly-smaller paper-novel atoms:
+    premise. Decomposed into two strictly-smaller Cat 3 atoms:
       (a) `all_edges_open_at_zero_blocking_OPEN` (Cat 3
           paper-stipulated atom — paper Def 2.1 line 119 percolation
           semantics binding), AND
@@ -603,8 +603,7 @@ theorem gap_trap_prevalence_zero
     depending on `p`" — that constant is `6 p⁵ (1-p)²` *multiplied by*
     the further positive factors (i)+(ii).
 
-    **Encoding** (per `feedback_truth_over_publication` + the
-    concretise-the-opaque-carrier pattern):
+    **Encoding** (concretise-the-opaque-carrier pattern):
      * `trapMisalignmentProbability` is CONCRETISED (the `W_info_oracle`
        pattern) — it IS the bond-percolation expectation of a 0/1-valued
        trap-event indicator kernel `trapEventIndicator` on the `Z²_L`
@@ -667,7 +666,7 @@ theorem gap_trap_prevalence_zero
     determined by the percolation realisation + i.i.d. rewards).
 
     **Concretisation (2026-05-16)**: per user directive, this
-    Cat 3 paper-novel carrier is concretised as the constant-`1`
+    Cat 3 carrier is concretised as the constant-`1`
     function. With `EdgeIdx 0 := Fin 7` (Wrongness.lean), the
     trap-event indicator on each bond configuration is `1`, and the
     sub-event sum over `trapLocalConfigEvent` (this file)
@@ -691,7 +690,7 @@ def trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ := fun _ => 1
     event-indicator is non-negative by definition).  Mirrors the
     `topoLossKernel_mem_unitInterval` / `wInfoOracleKernel_nonpos`
     structuralEquation precedents (paper stipulates the kernel's
-    pointwise range/sign); paper-Def foundational atom (永不 close).
+    pointwise range/sign); paper-Def foundational Cat 3 atom.
     paper source: Proposition `prop:trap-prevalence` Part 2, line 458
     (`trapMisalignmentProbability` is a probability ⇒ its integrand is
     a `{0,1}`-valued event indicator ⇒ `≥ 0`).
@@ -773,13 +772,13 @@ noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
     Cat 3 sub-type: carrier — a paper-graph-specific `Finset` on the
     percolation sample space, the natural sub-event over which paper
     line 473 lower-bounds; mirrors the `giantComponentEvent` carrier
-    precedent. Cat 3 carrier (永不 close).
+    precedent. Cat 3 carrier.
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (the edge-config + `|C_2| ≥ 2` + reward-event `E`
     sub-event).
 
     **Concretisation (2026-05-16)**: per user directive, this
-    Cat 3 paper-novel carrier is concretised as the singleton Finset
+    Cat 3 carrier is concretised as the singleton Finset
     `{ω₀}` where `ω₀ : Fin 7 → Bool` has the first 2 edges open
     (`ω₀ i = true` iff `i.val < 2`) and the last 5 blocked. The
     Bernoulli weight of `ω₀` at parameter `1 - p` (open-edge
@@ -812,7 +811,7 @@ def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
     factors`).
 
     **Concretisation (2026-05-16)**: per user directive
-    "把当前状态做到完全 cat 1 (除论文自身定义)", this paper-novel
+    "把当前状态做到完全 cat 1 (除论文自身定义)", this Cat 3
     carrier is concretised as `p^5 * (1-p)^2` — a specific positive
     closed-form lower bound that satisfies the paper's structural
     equation `trapLocalConfigProb_pos_and_le`. The paper says the
@@ -943,7 +942,7 @@ theorem trapLocalConfigProb_pos_and_le :
     arithmetic. Sub-event sum over the singleton equals
     `bondConfigWeight (1-p) ω₀ * 1 = ∏ i : Fin 7, (if ω₀ i then 1-p
     else 1-(1-p)) = (1-p)^2 * p^5 = p^5 * (1-p)^2 = trapLocalConfigProb p`.
-    Promoted from a Cat 3 paper-novel structural-equation atom to a
+    Promoted from a Cat 3 structural-equation atom to a
     Cat 1 derived theorem. -/
 theorem restrictedExpectation_eq_localConfigProb :
     ∀ p : ℝ,

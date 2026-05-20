@@ -1307,8 +1307,8 @@ private theorem interior_minimiser_existence_proof :
       have := h_above_M β (le_of_lt hβ_gt_M)
       linarith [hβ_min_le_β₀]
 
-/-- Cat 3 paper-novel claim, **SUBSTANTIVE CLOSURE** (derived theorem
-    from a paper-derived atom): paper Proposition
+/-- Cat 3 claim, fully derived theorem from a paper-derived atom:
+    paper Proposition
     `prop:interior-optimum` (line 774) gives the existence of an
     interior minimiser of the Regime (i) `p = 0` loss function
     `L(·, 0)`. Encoded existentially on the existing carrier `L`:
@@ -1450,21 +1450,19 @@ noncomputable def W_topo_p (p : ℝ) : ℝ := (4/10 : ℝ) * p
     the overshoot `L(∞, p) − L(β*(p), p)` is continuous and strictly
     decreasing in `p` on `[0, p_1)`, vanishing at `p_1`.
 
-    Per `feedback_lean_axiom_decomposition` (composite axioms hide
-    gaps) the original single bundled axiom
+    Composite axioms hide gaps; the original single bundled axiom
     `gap_three_regime_reversal_OPEN` is decomposed into four
-    single-clause sub-axioms below. Each sub-axiom is a Cat 3
-    paper-novel claim with explicit single-clause encoding; the
-    bundle entry `entry_prop_three_regime` lists all four. -/
+    single-clause sub-axioms below. Each sub-axiom is a Cat 3 claim
+    with explicit single-clause encoding; the bundle entry
+    `entry_prop_three_regime` lists all four. -/
 
 /-- **Regime (i) sub-claim — existence of below-limit `β*`.**
     For `p ∈ [0, p_1)`, there exists `β*(p) ∈ (0, ∞)` with
     `L(β*(p), p) < L(∞, p) = 0.4`.
 
-    **SUBSTANTIVE CLOSURE** (derived theorem from a paper-derived
-    Cat 3 atom). Proved by genuine real-analysis on the concrete `L`
-    carrier. The proof (`L_below_limit_at_some_beta_proof`) uses the
-    rearrangement
+    Fully derived theorem from a paper-derived Cat 3 atom. Proved by
+    genuine real-analysis on the concrete `L` carrier. The proof
+    (`L_below_limit_at_some_beta_proof`) uses the rearrangement
     identity `eq:five-state-rearr` (`L_rearrangement`), the strict
     bound `P_trap β < 1` for finite `β` (`P_trap_lt_one`, from
     `Phi_lt_one`), and the limit `Φ_B β → 1` as `β → ∞`
@@ -1514,7 +1512,7 @@ theorem gap_three_regime_reversal_existence :
     becomes a Cat 1 derived theorem composing the two.
 
     Per paper-Def discipline (paper-stipulated structural fact about
-    paper-novel opaque carrier in regime). 永不 close. -/
+    opaque carrier in regime). -/
 axiom L_interior_minimizer_exists_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
@@ -1534,7 +1532,7 @@ axiom L_interior_minimizer_exists_paper_Def :
     `L_interior_minimizer_exists_paper_Def`.
 
     Per paper-Def discipline (paper-stipulated structural fact about
-    paper-novel opaque carrier in regime). 永不 close. -/
+    opaque carrier in regime). -/
 axiom L_strict_unique_minimizer_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∀ β β' : ℝ, 0 < β → 0 < β' →
@@ -1554,8 +1552,8 @@ axiom L_strict_unique_minimizer_paper_Def :
     `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`
     only NUMERICALLY (the left-branch `L_deriv_neg_on_left_branch` is proved
     symbolically; right-branch transcendental comparison is paper-numerical).
-    Per `feedback_truth_over_publication`: the right-branch sign claim is
-    paper-stated FACT on the paper-novel `L` carrier; the encoded atoms
+    The right-branch sign claim is paper-stated FACT on the `L`
+    carrier; the encoded atoms
     capture the paper-stipulated uniqueness conclusion.
 
     Composed as a Cat 1 derived theorem from
@@ -1610,10 +1608,9 @@ theorem gap_three_regime_reversal_uniqueness :
     AND there exist `β_a < β_b` (both `> 0`) such that
     `L(β_a, p) < L(β_b, p)`.
 
-    **SUBSTANTIVE CLOSURE** (derived theorem from a paper-derived
-    Cat 3 atom). Proved by genuine real-analysis on the concrete `L`
-    carrier,
-    mirroring the paper's
+    Fully derived theorem from a paper-derived Cat 3 atom. Proved by
+    genuine real-analysis on the concrete `L` carrier, mirroring the
+    paper's
     "the loss decreases below 0.4 and then rises back toward the limit
     L(∞, p) = 0.4" argument (line 825). Let `β*` be the below-limit
     witness with `L β* p < 0.4` (`L_below_limit_at_some_beta_proof`).
@@ -1702,9 +1699,9 @@ theorem gap_three_regime_reversal_nonmonotone :
     and strict monotonicity of the overshoot in p follow from envelope
     differentiation of (eq:five-state-rearr) at β = β*(p)").
 
-    **SUBSTANTIVE CLOSURE** (derived theorem from a paper-derived
-    Cat 3 atom). Proves the existential encoding by genuine
-    real-analysis on the concrete `L` carrier.
+    Fully derived theorem from a paper-derived Cat 3 atom. Proves the
+    existential encoding by genuine real-analysis on the concrete `L`
+    carrier.
     For `p₁`, the below-limit witness `β*₁` satisfies `L β*₁ p₁ < 0.4`
     (`L_below_limit_at_some_beta_proof`, applicable since `p₁ < p₂ <
     p_1`). For `p₂`, the loss limit `L(β, p₂) → 0.4` as `β → ∞`
@@ -1741,10 +1738,9 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
         L β_star₁ p₁ < L β_star₂ p₂ :=
   envelope_derivative_sign_in_p_OPEN
 
-/-- Closure-path-A smaller paper-novel claim, **SUBSTANTIVE
-    CLOSURE** (derived theorem from a paper-derived atom): on
-    Regime (i)'s domain `p ∈ [0, p_1)`, the loss function `L(·, p)`
-    has an interior
+/-- Closure-path-A smaller claim, fully derived theorem from a
+    paper-derived atom: on Regime (i)'s domain `p ∈ [0, p_1)`, the
+    loss function `L(·, p)` has an interior
     minimiser over the positive reals — i.e., there exists
     `β_min > 0` such that for every `β > 0`, `L β_min p ≤ L β p`.
     Paper `prop:three-regime-five-state` Regime (i) (line 814 + proof
@@ -1889,8 +1885,7 @@ noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
     `L(β*(p), p)` is continuous in `p`, equivalent to envelope continuity
     via the `0.4` constant). The envelope continuity follows by
     Cat 1 arithmetic (`continuousOn_const.sub _`). Paper-Def discipline
-    (paper-stipulated structural fact about composition of paper-novel
-    objects). 永不 close.
+    (paper-stipulated structural fact about composition of objects).
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     proof line 825 ("L(β*(p), p) continuous in p by argmin-stability"). -/
@@ -2032,9 +2027,8 @@ private theorem overshootRegimeI_upper_bound {p : ℝ} (h_p_nonneg : 0 ≤ p)
 
 /-- **Regime (i) sub-claim — overshoot vanishes at `p_1` (limit from below).**
 
-    **SUBSTANTIVE CLOSURE** (derived theorem from a paper-derived
-    Cat 3 atom). The overshoot `L(∞, p) − L(β*(p), p) → 0` as
-    `p → p_1⁻`. Proved
+    Fully derived theorem from a paper-derived Cat 3 atom. The
+    overshoot `L(∞, p) − L(β*(p), p) → 0` as `p → p_1⁻`. Proved
     by a genuine **squeeze**
     argument on the concrete `overshootRegimeI` carrier — crucially
     *without* the transcendental unimodality input
@@ -2437,7 +2431,7 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
     the kernel carrier (mirrors the `wInfoOracleKernel_nonpos`
     precedent — paper stipulates the carrier's per-realisation
     behaviour).  Blackwell 1951/1953 = the Cat 2 conditional-
-    expectation comparison input.  Paper-Def foundational atom (永不 close).
+    expectation comparison input.  Paper-Def foundational atom.
     paper source: Proposition `prop:threshold-five-state` (ii),
     line 862; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
 axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar :
@@ -2525,9 +2519,9 @@ theorem gap_threshold_fiveState_kappa_above_kstar
     input, with no content erasure; the carrier-identification step
     is internalised by `Classical.choose_spec`.
 
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    welfare-curvature inflection-point detection machinery, define the
-    paper-faithful selection locally rather than skip.
+    Where Mathlib lacks the typed welfare-curvature inflection-point
+    detection machinery, the paper-faithful selection is defined
+    locally.
 
     paper source: Proposition `prop:threshold-five-state` (iii), line 863
     ("the welfare function `W(β, κ*, 1)` is monotone but has zero
@@ -2599,7 +2593,7 @@ theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
     Canonical-instance precedent — the at-threshold
     specialisation rather than the strictly-above-threshold version).
     Blackwell 1951/1953 = the Cat 2 conditional-expectation comparison
-    input.  Paper-Def foundational atom (永不 close).
+    input.  Paper-Def foundational atom.
     paper source: Proposition `prop:threshold-five-state` (iii),
     line 863 ("the welfare function `W(β, κ*, 1)` is monotone");
     Blackwell 1951/1953 cited as the Cat 2 dependency. -/
@@ -2720,7 +2714,7 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
     Canonical-instance precedent).  Blackwell 1951/1953 = the Cat 2 conditional-expectation
     comparison input (the per-realisation Blackwell-conditional fact
     composes Blackwell 1951/1953 to derive the per-realisation
-    monotonicity).  Paper-Def foundational atom (永不 close).
+    monotonicity).  Paper-Def foundational atom.
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
 axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :

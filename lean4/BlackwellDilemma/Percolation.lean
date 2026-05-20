@@ -17,9 +17,9 @@
   Mathlib has `PMF.bernoulli` (Bernoulli `PMF` on `Bool`) and the
   `MeasureTheory` library, but it has **no bond-percolation measure** on a
   finite edge set: no product Bernoulli over edges, no cluster-size law, no
-  Harris–Kesten `p_c = 1/2`.  Per `feedback_no_compute_retreat` ("Mathlib
-  doesn't have bond percolation → DEFINE a paper-faithful finite-graph
-  bond-percolation framework locally"), this module **constructs** the finite
+  Harris–Kesten `p_c = 1/2`.  Where Mathlib lacks bond percolation, this
+  module **defines** a paper-faithful finite-graph bond-percolation
+  framework locally and **constructs** the finite
   bond-percolation measure explicitly and proves the foundational expectation
   lemmas the paper's percolation arguments rest on.
 

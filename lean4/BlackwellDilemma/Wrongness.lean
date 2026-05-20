@@ -60,11 +60,10 @@ measure, hence is signal-independent. -/
     signature for paper-citation visibility but the conditional reduction
     factors them out via the Blackwell-conditional argument (paper part (i)).
 
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    decision-theoretic Blackwell-conditional + integration framework on
-    finite reachable-set realisations, define the paper-faithful baseline
-    witness locally rather than skip. Per `feedback_lean_definition_must_be_def_not_axiom`:
-    paper definitions = Lean `def`.
+    Where Mathlib lacks the typed decision-theoretic Blackwell-
+    conditional + integration framework on finite reachable-set
+    realisations, the paper-faithful baseline witness is defined
+    locally as a Lean `def` (paper definitions = Lean `def`).
 
     Net effect: `conditionalWelfareOnR_monotone_via_blackwell_workingAssumption`
     becomes derivable as a Cat 1 corollary from this concretization +
@@ -206,13 +205,12 @@ Paper proof (lines 345-369) operates in two substantive stages:
     the existence of `β < β'` with `W(β') < W(β)` (paper line 368).
 
 The decomposition exposes the paper's two-step structure: stage 1 is
-the topology-blind concentration mechanism (paper-novel application of
+the topology-blind concentration mechanism (application of
 Blackwell-ordering at the greedy policy under topology-blindness), and
-stage 2 is the C2-misalignment-driven reversal witness (paper-novel
-analytic argument over the IDP welfare functional). Both atoms remain
+stage 2 is the C2-misalignment-driven reversal witness (analytic
+argument over the IDP welfare functional). Both atoms remain
 paper-derived working content (close target = bounded-convergence +
-Φ-tail integral machinery, partially Mathlib-Cat-1, partially
-paper-novel).
+Φ-tail integral machinery, partially Mathlib-Cat-1).
 -/
 
 /-! ### `wrongness_high_beta_welfare_convergence_atom_OPEN`.
@@ -233,8 +231,8 @@ paper-novel).
     level, the kernel converges to a paper-stipulated limit kernel
     `agentRewardKernel_greedy_limit_kernel ω`.
 
-    Cat 3 gapDefinitional per discipline (paper-stipulated
-    structural-equation precedent). 永不 close.
+    Cat 3 structural equation (paper-stipulated structural-equation
+    precedent).
 
     paper source: Lemma `lem:wrongness` proof, line 348 (`P_1(β) → 1`)
     + line 352 (`W(∞) = V_dyn(u_1)`). -/
@@ -270,10 +268,10 @@ theorem wrongness_high_beta_welfare_convergence_atom_OPEN :
     (agentRewardKernel_greedy_pointwise_tendsto_atTop
       hC hT hDeg2 signalFamily hBlind hBO)
 
-/-- Cat 3 paper-novel ATOMIC stipulation #2 (reversal-witness
-    decomposition; paper Lemma
-    `lem:wrongness` proof line 357-368 (static-reward-misalignment-
-    driven reversal witness). Given the stage-1 convergence
+/-- Cat 3 atomic stipulation #2 (reversal-witness decomposition; paper
+    Lemma `lem:wrongness` proof line 357-368 (static-reward-
+    misalignment-driven reversal witness). Given the stage-1
+    convergence
     `agentWelfare greedy · 0 1 → Wlim` (atom #1
     `wrongness_high_beta_welfare_convergence_atom_OPEN`) and paper
     hypotheses C1-C3 + topology + degree-2 + topology-blind Blackwell-
@@ -375,7 +373,7 @@ theorem wrongness_misalignment_reversal_atom_OPEN :
     (a) `DegreeTwoStartingVertex` premise — paper line 338 reads
         "Assume further that `v_0` has exactly two accessible
         neighbours (`|N_R(v_0)| = 2`)"; declared in `Types.lean` as a
-        paper-novel scope predicate.
+        scope predicate.
     (b) Whole-family topology-blindness `∀ β, IsTopologyBlind
         (signalFamily β)` — paper line 338 reads "topology-blind signal
         family `{π_β}_{β ≥ 0}`" (the family quantifier ranges over the
@@ -524,7 +522,7 @@ axiom wInfoOracleClusterCount : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
     reduction` (i), cannot beat the in-`R` max on any fixed `R`).
     Mirrors the `topoLossKernel_mem_unitInterval` reward-range
     Def-stipulation precedent — paper stipulates the carrier's
-    pointwise range/sign; Paper-Def foundational atom (永不 close).
+    pointwise range/sign; Paper-Def foundational atom.
     paper source: Lemma `lem:conditional-reduction` part (i), lines
     374-381 (within-`R` oracle on the fixed feasible set `R(v_0)`
     cannot exceed `r^*_R`) + Proposition `prop:info-decay`, line 272
@@ -548,7 +546,7 @@ axiom wInfoOracleKernel_nonpos :
     trivial-path inclusion, transported to the cluster-count carrier,
     is a paper-Def-stipulated structural identity (mirrors
     `topoLossKernel_mem_unitInterval` precedent); paper-Def
-    foundational atom (永不 close).
+    foundational atom.
     paper source: Definition 2.5 (`def:forward-reachable`, the
     reachable set contains its base vertex `v_0` via the trivial
     path) ⇒ `|R(v_0)| ≥ 1`. -/
@@ -580,13 +578,13 @@ axiom wInfoOracleClusterCount_ge_one :
     kernel carrier (paper line 276 STATES the per-`R` bound `|W_info|
     ≤ |R| · O(2^{-β})` directly, then takes expectation).  Per
     discipline §10, the paper-application of the Cat 1
-    `gap_phi_tail_bound` Mills-tail bound to the paper-novel kernel
-    carrier IS Cat 3; the per-realisation bound is the paper-stipulated
+    `gap_phi_tail_bound` Mills-tail bound to the kernel carrier IS
+    Cat 3; the per-realisation bound is the paper-stipulated
     structural fact (the `2^{-β}` constant absorbs the paper's `O(σ)`
     per-vertex Mills-tail factor under the Gaussian signal model's
     `σ(β) = O(2^{-β})` precision schedule).  Mirrors the
     `topoLossKernel_mem_unitInterval` precedent — paper stipulates
-    the carrier's pointwise bound; Paper-Def foundational atom (永不 close).
+    the carrier's pointwise bound; Paper-Def foundational atom.
     paper source: Proposition `prop:info-decay` proof, line 276 (`|W_info|
     ≤ |R| · O(σ) = |R| · O(2^{-β})`, the per-realisation bound) +
     `gap_phi_tail_bound` (Cat 1 Gaussian Mills-tail bound, the
@@ -998,11 +996,11 @@ theorem gap_dilemma
 noncomputable def expectedTopoLoss_conditional (n k : ℕ) : ℝ :=
   (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1)
 
-/-- Cat 2 external-paper axiom (`cat2External` per `feedback_
-    gap_ledger_in_lean4` §6.2): paper-application of David & Nagaraja
-    2003 Eq. 2.1.4 to the IDP carrier `expectedTopoLoss_conditional`
-    via paper Definition 2.1's standing convention (rewards `r: V → [0,
-    1]` iid `Uniform[0, 1]` independent of the percolation realisation).
+/-- Cat 2 external-paper axiom (`cat2External` per §6.2):
+    paper-application of David & Nagaraja 2003 Eq. 2.1.4 to the IDP
+    carrier `expectedTopoLoss_conditional` via paper Definition 2.1's
+    standing convention (rewards `r: V → [0, 1]` iid `Uniform[0, 1]`
+    independent of the percolation realisation).
 
     The axiom captures the paper-stated decomposition step (paper
     Proposition `prop:topo-cluster` proof, line 292):
@@ -1032,7 +1030,7 @@ noncomputable def expectedTopoLoss_conditional (n k : ℕ) : ℝ :=
     standing-convention pattern" — the "Cat 2-ness" justified by the
     threaded antecedent embodying the pure textbook input + the
     paper-stipulated standing convention being a published structural
-    commitment (not paper-novel content).
+    commitment.
 
     Cat 2 — accepted on David & Nagaraja 2003 + paper Definition 2.1
     standing convention authority. Mathlib lacks formalised order-
@@ -1097,8 +1095,8 @@ theorem expectedTopoLoss_conditional_def :
 
     The substantive equality is encoded via the opaque carrier
     `expectedTopoLoss_conditional` rather than by tautological
-    existential bookkeeping (per `feedback_lean_real_math` "real math,
-    not closure-count tricks"). The paper's derivation uses the
+    existential bookkeeping ("real math, not closure-count tricks").
+    The paper's derivation uses the
     order-statistics identity `E[max k iid Uniform[0,1]] = k/(k+1)`
     (David & Nagaraja 2003, _Order Statistics_, 3rd ed., Eq. 2.1.4,
     Wiley, ISBN 0-471-38926-9), which remains a Mathlib gap.
@@ -1189,7 +1187,7 @@ axiom topoLossKernel : (n : ℕ) → BondConfig (EdgeIdx n) → ℝ
     (mirrors the `expectedTopoLoss_le_one_atom` reward-range
     Def-stipulation precedent and `all_edges_open_at_zero_blocking_OPEN`
     boundary-semantics precedent — paper Definition stipulates the
-    carrier's range; paper-Def foundational atom, 永不 close).
+    carrier's range; paper-Def foundational atom).
     paper source: Definition 2.1, line 113 (`r : V → [0, 1]`) +
     Proposition `prop:physical`, line 311 (`R(v_0) ⊆ V` ⇒ realised loss
     `≥ 0`). -/
@@ -1290,7 +1288,7 @@ cluster-size-partition infrastructure:
     paper-graph-specific `Finset` on the percolation sample space
     (`Z²_L` connectivity), the natural sub-event over which paper
     line 415 conditions; mirrors the `EdgeIdx` / `topoLossKernel`
-    carrier precedents.  Cat 3 carrier (永不 close).
+    carrier precedents.  Cat 3 carrier.
     paper source: Theorem 3.3 (`thm:phase`) Part 1, line 404
     ("`|R(v_0)| = Θ(N)`" — the giant-component event) + line 415
     ("Conditional on `v_0` lying in the giant component") +
@@ -1315,7 +1313,7 @@ axiom giantComponentEvent : (n : ℕ) → Finset (BondConfig (EdgeIdx n))
     is the smallest decomposition possible without `Z²_L` lattice
     cluster machinery).
 
-    Paper-Def discipline (永不 close).
+    Paper-Def discipline.
 
     paper source: Proposition `prop:topo-cluster` proof line 294
     (`E[r* - max_{v ∈ R} r(v) | |R| = k] = (N - k) / ((N + 1) (k + 1))`,
@@ -1344,7 +1342,7 @@ axiom topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def :
     `(n - k) / ((n + 1) (k + 1)) ≤ 1 / (n + 1)` is equivalent to
     `n ≤ 2 k + 1`, NOT true uniformly in `k ∈ {0, …, n}`.
 
-    Paper-Def discipline (永不 close).
+    Paper-Def discipline.
 
     paper source: Theorem 3.3 Part 1 proof lines 415-417 (the
     giant-component event of line 404, `|R(v_0)| = Θ(N)`, gives a
@@ -1504,8 +1502,8 @@ noncomputable def expectedTopoLossOnGiant (n : ℕ) (p : ℝ) : ℝ :=
     Strictly-paper-faithful: the conclusion is the
     giant-component-conditional bound the paper actually proves, NOT
     the unconditional `expectedTopoLoss n p ≤ 1/(n+1)` (which would
-    be false). Per `feedback_truth_over_publication`, the conditional
-    envelope is the honest paper-faithful closure.
+    be false). The conditional envelope is the honest paper-faithful
+    closure.
 
     paper source: Theorem 3.3 Part 1 proof, line 417
     (`E[|W_topo| | giant] = O(1/N)`, the giant-component-conditional
@@ -1630,7 +1628,7 @@ theorem gap_topo_loss_below_threshold :
 /-! ### `prop:topo-cluster` Part 2 — above-threshold two-sided bound.
 
 Atomic decomposition. `gap_topo_loss_above_threshold` is a derived
-theorem composing two Cat 3 paper-novel atomic stipulations:
+theorem composing two Cat 3 atomic stipulations:
  * `topo_loss_above_lower_bound_atom_OPEN` — paper-stated existence of
    a positive lower bound `c₁(p) > 0` on `expectedTopoLoss n p` for
    large `n`.
@@ -1692,8 +1690,7 @@ axiom expectedTopoLossAboveLowerConst : ℝ → ℝ
     closed form's well-known positivity.
 
     Paper-Def discipline (paper-stipulated structural fact about
-    paper-novel opaque carrier above parametric threshold).
-    永不 close.
+    opaque carrier above parametric threshold).
 
     paper source: Proposition `prop:topo-cluster` Part 2, line 287 +
     proof via `thm:phase` Part 2 lines 421-427 (Mills-tail
@@ -1777,8 +1774,7 @@ theorem expectedTopoLossAboveLowerConst_pos_above_pc_OPEN :
     the carrier-identification + this bridge.
 
     Paper-Def discipline (paper-stipulated structural fact about
-    paper-novel Mills-closed-form per-n-eventually-bound behavior).
-    永不 close.
+    Mills-closed-form per-n-eventually-bound behavior).
 
     paper source: Proposition `prop:topo-cluster` Part 2 + proof via
     `thm:phase` Part 2 lines 421-427 (Mills-tail closed-form

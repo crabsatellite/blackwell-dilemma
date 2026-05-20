@@ -35,8 +35,8 @@ at each vertex `w`, select `argmax_{c ∈ N_R(w) \ H_w} r(c)`. -/
     paper source: Definition `def:greedy-path`, lines 982-985. -/
 axiom V_g : Vertex → Finset Vertex → PercolationOutcome → ℝ
 
-/-- Cat 3 paper-novel ATOMIC structural equation: terminal-vertex base
-    case of the greedy-path-value recursion. Paper Definition
+/-- Cat 3 atomic structural equation: terminal-vertex base case of
+    the greedy-path-value recursion. Paper Definition
     `def:greedy-path` (lines 982-985) reads "if `u` is a leaf,
     `V_g(u) = r(u)`"; specialised to the IDP setting where "leaf"
     means "no unvisited accessible neighbour", which under the
@@ -80,7 +80,7 @@ theorem V_g_terminal_mem_unitInterval
   rw [V_g_def_terminal u H ω h_terminal]
   exact reward_mem_unitInterval u
 
-/-- Cat 3 paper-novel ATOMIC structural equation: recursive step of the
+/-- Cat 3 atomic structural equation: recursive step of the
     greedy-path-value definition. Paper Definition `def:greedy-path`
     (lines 982-985) reads "if `u` has children `c_1, ..., c_b` with open
     edges, `V_g(u) = V_g(argmax_{c_i} r(c_i))`": the greedy agent at `u`
@@ -122,8 +122,8 @@ axiom V_g_def_step :
               (hN_nonempty.image reward) ∧
           V_g u H ω = V_g c (insert u H) ω
 
-/-- Cat 3 paper-novel ATOMIC structural equation: the greedy-path
-    terminal vertex lies in the forward-reachable set. Paper Definition
+/-- Cat 3 atomic structural equation: the greedy-path terminal vertex
+    lies in the forward-reachable set. Paper Definition
     `def:greedy-path` (lines 982-985) describes the greedy traversal as
     "at each vertex `w`, the agent selects `argmax_{c ∈ N_R(w) ∖ H_w}
     r(c)` ... the process terminates when no such neighbor exists";
@@ -238,8 +238,8 @@ theorem gap_general_tree :
   exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
     AgentType.greedy 0 1 β β' h_le ω₀ h_strict
 
-/-- Cat 3 paper-novel ATOMIC stipulation #1 (closure-path-B
-    decomposition of a candidate bundled atom
+/-- Cat 3 atomic stipulation #1 (closure-path-B decomposition of a
+    candidate bundled atom
     `terminal_neighbour_implies_C2prime_atom_OPEN`): under
     terminal-neighbour topology, the greedy-path value `V_g` agrees with
     the oracle dynamic value `V_dyn` (paper line 987 + line 1019 first
@@ -263,7 +263,7 @@ theorem gap_general_tree :
     paper does NOT derive this, it is paper's stipulation). Mirrors
     `V_g_def_terminal` precedent (carrier-defining equation at
     boundary regime per paper Def `def:greedy-path` line 984 STIPULATING
-    V_g(u) = r(u) at terminal vertex). Paper-Def foundational atom (永不 close).
+    V_g(u) = r(u) at terminal vertex). Paper-Def foundational atom.
 
     paper source: line 987 ("On terminal-neighbor topology, V_g(u) =
     V_dyn(u)") + line 1019 first "since" ("V_g = V_dyn on flat
@@ -273,8 +273,8 @@ axiom V_g_eq_V_dyn_on_terminal_neighbour_OPEN :
     ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
       V_g u H ω = V_dyn u H ω
 
-/-- Cat 3 paper-novel ATOMIC stipulation #2 (closure-path-B
-    decomposition of a candidate bundled atom
+/-- Cat 3 atomic stipulation #2 (closure-path-B decomposition of a
+    candidate bundled atom
     `terminal_neighbour_implies_C2prime_atom_OPEN`): the C2′ predicate
     is implied by C2 plus the paper's two structural reasons identified
     by line 1019 ("V_g = V_dyn on flat subtrees AND non-interference
@@ -305,7 +305,7 @@ axiom V_g_eq_V_dyn_on_terminal_neighbour_OPEN :
     paper's stipulations). Mirrors precedents in which
     paper-stipulated predicate-conjunction validity / inter-carrier
     bindings at named regimes are paper-Def structural identities.
-    Paper-Def foundational atom (永不 close).
+    Paper-Def foundational atom.
 
     paper source: Theorem 6.1 line 995 ("When |N_R(v_0)| = 2, the
     clause is vacuous and C2′ reduces to C2") + line 1019 second
@@ -375,8 +375,8 @@ With `r(u₁) = 0.6, r(u₂) = 0.4, r(w) = 0.3, r(G) = 1.0` and edge
 `u₁–w` blocked with probability `p > 0`: on the event that the edge is
 blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
 
-/-- Cat 3 paper-novel ATOMIC stipulation (closure-path-A
-    decomposition of a candidate bundled atom
+/-- Cat 3 atomic stipulation (closure-path-A decomposition of a
+    candidate bundled atom
     `cyclic_4_satisfies_C2prime_at_open_event_OPEN`): the 4-cycle trap
     configuration of paper Example `ex:cyclic-trap` (lines 1026-1029)
     satisfies the full diagnostic conjunction `Conditions_C1_C2prime_C3`
@@ -419,8 +419,8 @@ blocked (probability `p > 0`), C2′ holds and Theorem 6.1 applies. -/
     structural identity on the opaque hypothesis-predicate carriers
     `C1_Irreversibility ∧ C2prime_GreedyPathMisalignment ∧
     C3_InformationLocality` under the cyclic-4-trap construction;
-    paper-Def foundational atom (永不 close) — paper Example IS the
-    construction's stipulation).
+    paper-Def foundational atom — paper Example IS the construction's
+    stipulation).
 
     paper source: Example `ex:cyclic-trap`, line 1028 (paper-Example-
     stipulated diagnostic conjunction at the blocked event). -/
@@ -590,13 +590,13 @@ theorem gap_error_compounding_part1 :
     achieved by the oracle on the depth-`d` trap tree, parameterised
     by `d`. Paper proof line 1053 reads: "the oracle follows the
     bridge path to G"; the carrier hosts the terminal reward of this
-    path at depth `d`. Cat 3 carrier (paper-novel primitive function on
-    the depth-d trap-tree oracle's terminal reward).
+    path at depth `d`. Cat 3 carrier (primitive function on the
+    depth-d trap-tree oracle's terminal reward).
 
     Declared BEFORE `oracleValueAtRoot_TrapTree` to support the
     substantive-math closure pattern (per `kappa_FOSD` precedent).
     The carrier is a paper-Def-stipulated structural primitive
-    (paper-novel opaque-carrier primitive); position in source order is
+    (opaque-carrier primitive); position in source order is
     metadata-neutral.
 
     paper source: paper Proposition `prop:error-compounding` Part 2
@@ -615,9 +615,9 @@ axiom oracleBridgePathTerminalReward_TrapTree : ℕ → ℝ
     the terminal reward of the bridge path. The Lean `def` IS the paper's
     oracle-policy identification.
 
-    Per `feedback_no_compute_retreat`: where Mathlib lacks the typed
-    oracle-policy framework on per-trap-tree-instance vertex paths,
-    define the paper-faithful identification locally rather than skip.
+    Where Mathlib lacks the typed oracle-policy framework on per-
+    trap-tree-instance vertex paths, the paper-faithful identification
+    is defined locally.
 
     Paper-Def boundary criterion: the `def` faithfully encodes the
     paper-Theorem-derivation (oracle policy = bridge-path) rather than
@@ -655,7 +655,7 @@ noncomputable def oracleValueAtRoot_TrapTree : ℕ → ℝ :=
     Cat 3 sub-type: structuralEquation (paper-Def-stipulated terminal-
     reward identity on the bridge-path carrier per Def `def:trap-tree`
     line 1033 — paper's commitment to the trap-tree primitive's bridge-
-    leaf reward; paper-Def foundational atom, 永不 close).
+    leaf reward; paper-Def foundational atom).
 
     paper source: Definition `def:trap-tree`, line 1033 ("Bridge `b_{d-1}`
     has a single child: the goal `G` with `r(G) = 1.0`" — paper-Def-
@@ -734,7 +734,7 @@ theorem gap_welfare_gain_decay (β : ℝ) (d : ℕ) :
     paper source: Proposition `prop:error-compounding` Part 5, line 1048. -/
 axiom c_star_constant : ℝ
 
-/-- Cat 3 paper-novel ATOMIC structural equation: paper line 1048
+/-- Cat 3 atomic structural equation: paper line 1048
     `where c* = c*(Δ_r, Δ_V) > 0 is a constant depending on the reward
     gap Δ_r and the continuation gap Δ_V`. Paper INTRODUCES the
     `c_star_constant` carrier via this `where` clause (paper does not
@@ -747,8 +747,8 @@ axiom c_star_constant : ℝ
     surrounding context is Definition / Theorem / Proposition / Example /
     Remark.
 
-    Paper-Def classification: structuralEquation/gapDefinitional
-    (永不 close; paper-Def-stipulated structural identity). The
+    Paper-Def classification: structuralEquation (paper-Def-stipulated
+    structural identity). The
     paper-CONTENT boundary criterion applies: the
     `where ... > 0 is a constant` clause IS paper's
     introduction-with-positivity-stipulation of c*, parallel to
@@ -940,8 +940,8 @@ private theorem kappaStar_depth_d_lower_bound (d : ℕ) (hd : 1 ≤ d) :
   exact div_le_div_of_nonneg_right h_log_le h_two_log2_pos.le
 
 /-- **Substantive closure of `bernoulli_real_power_estimate_OPEN`.**
-    Established as a genuine theorem (per `feedback_lean_real_math` +
-    `feedback_no_compute_retreat`). The closure couples two real-analysis
+    Established as a genuine theorem via real-analysis (no
+    closure-count tricks). The closure couples two real-analysis
     half-results on the concrete `kappaStar_depth_d` carrier:
 
       * **lower bound** — `kappaStar_depth_d_lower_bound`:

@@ -182,7 +182,7 @@ theorem kappaStar_def :
 -- `mean_estimate_gap_tendsto_mLimit_OPEN` so that `mLimitOf := mLimit`
 -- is a concrete def and `mLimit_def` becomes a derived theorem.
 
-/-- Cat 3 paper-novel ATOMIC structural equation: critical instrumental
+/-- Cat 3 atomic structural equation: critical instrumental
     rationality `α*(κ, p)` characterised as the supremum of `α ∈ [0, 1]`
     at which welfare is non-decreasing in `β`. Paper `prop:sentimental`
     proof (line 602) reads "The critical `α*` is therefore well-defined
@@ -1429,7 +1429,7 @@ Topkis complements. -/
     Substantive paper claim — opaque carrier required (Mathlib gap). -/
 axiom snrZ : ℝ → ℝ → ℝ
 
-/-- Substantive paper claim — Cat 3 paper-novel predicate.
+/-- Substantive paper claim — Cat 3 predicate.
     Bridge-dominance hypothesis for the supermodular regime: at signal
     precision `β`, the dynamic value of the bridge neighbour `u_2`
     exceeds the static reward of the trap neighbour `u_1`, i.e. the
@@ -1631,9 +1631,8 @@ noncomputable def secondTermCrossPartial : ℝ → ℝ → ℝ :=
     two-term identification.
 
     Where Mathlib lacks the typed HasDerivAt + Φ + φ derivative
-    framework on the paper-novel `agentWelfare` carrier, the
-    paper-faithful additive decomposition is defined locally rather
-    than skipped.
+    framework on the `agentWelfare` carrier, the paper-faithful
+    additive decomposition is defined locally rather than skipped.
 
     paper source: Proposition `prop:supermodular` proof, line 566
     (`∂²W/(∂β ∂κ) = ∂²P_correct/(∂β ∂κ) · [V_dyn(u_2, β) - r(u_1)]
@@ -1647,7 +1646,7 @@ noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ :=
     `∂²W / (∂β ∂κ) > 0` for `(β, κ)` jointly satisfying both
     (i) `|z(β, κ)| < 1` (moderate SNR) and
     (ii) `V_dyn(u_2, β) > r(u_1)` (bridge-dominance, paper line 558),
-    encoded as `BridgeDominance β` (Cat 3 paper-novel predicate).
+    encoded as `BridgeDominance β` (Cat 3 predicate).
 
     The derived theorem `gap_supermodular` composes two atomic
     stipulations: see `welfareCrossPartial_explicit_form_OPEN`
@@ -1782,8 +1781,8 @@ theorem welfareCrossPartial_explicit_form_OPEN
     welfareCrossPartial β κ` from the algebraic identity
     `welfareCrossPartial = first + second` plus `0 ≤ second` plus
     `0 < first`. This is a routine `linarith` arithmetic chain on
-    real numbers — no Mathlib gap, no paper-novel content beyond
-    the (now derived) decomposition.
+    real numbers — no Mathlib gap, no additional structural content
+    beyond the (now derived) decomposition.
 
     Closure path: derivable purely by Cat 1 arithmetic from its own
     ∀-quantified premises (the premises supply `0 ≤ second` and
@@ -1960,9 +1959,8 @@ theorem corner_supermodularity_via_topkis_OPEN :
 
 /-- Derived theorem (re-export of `corner_supermodularity_via_topkis_OPEN`):
     cross-partial-positivity-at-the-four-lattice-corners → corner-
-    supermodularity link on the paper-novel `kappaAgentWelfareSNR`
-    carrier. Threads the Topkis 1978/1998 dependency via the
-    `h_topkis` antecedent.
+    supermodularity link on the `kappaAgentWelfareSNR` carrier. Threads
+    the Topkis 1978/1998 dependency via the `h_topkis` antecedent.
 
     The atomic stipulation lives in `corner_supermodularity_via_topkis
     _OPEN`; this is the trivial consumer used by downstream policy-
@@ -2067,7 +2065,7 @@ For any IDP and any `κ ≥ 0`, there exists `α* > 0` such that for
 `α < α*`, welfare is monotonically non-decreasing in β. Sufficiently
 sentimental agents are immune. -/
 
-/-- Cat 3 paper-novel DERIVED THEOREM: paper Proposition
+/-- Cat 3 derived theorem: paper Proposition
     `prop:sentimental` proof line 600 (base case at α = 0). At α = 0,
     the agent's ranking of neighbours converges to `ξ(u)` (intrinsic
     preference), which is signal-independent. Therefore
@@ -2103,7 +2101,7 @@ theorem signal_independent_at_alpha_zero :
   exact gap_iid_continuous_rank_symmetry_OPEN
     gap_blackwell_monotonicity_OPEN κ hκ β₁ β₂ hβ
 
-/-- Cat 3 paper-novel ATOMIC stipulation: paper Proposition
+/-- Cat 3 atomic stipulation: paper Proposition
     `prop:sentimental` proof line 602 (perturbative continuity in α).
     Paper states that the set `{α ∈ [0, 1] : W(β, κ, α) non-decreasing
     in β}` is CLOSED in α (by pointwise convergence of continuous
@@ -2158,7 +2156,7 @@ theorem welfare_continuity_in_alpha_OPEN :
       agentRewardKernel_sentimental_pointwise_monotone κ α b₁ b₂ hb ω)
     β₁ β₂ hβ
 
-/-- Smaller paper-novel ATOMIC stipulation isolated from a bundled
+/-- Smaller atomic stipulation isolated from a bundled
     sentimental-immunity statement.
     Paper Proposition `prop:sentimental` proof line 602 establishes that
     the monotonicity-set `S = {α ∈ [0, 1] : W(β, κ, α) non-decreasing in

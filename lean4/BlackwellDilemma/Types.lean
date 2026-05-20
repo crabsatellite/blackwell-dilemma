@@ -133,7 +133,7 @@ axiom ReachableSet : Vertex → PercolationOutcome → Finset Vertex
 axiom ForwardReachable :
     Vertex → Finset Vertex → PercolationOutcome → Finset Vertex
 
-/-- Cat 3 paper-novel ATOMIC structural equation: the starting-vertex
+/-- Cat 3 atomic structural equation: the starting-vertex
     case relating `ReachableSet` and `ForwardReachable`. Paper
     Definition 2.5 (`def:forward-reachable`) explicitly states "For the
     starting vertex, `R(v_0) = R(v_0 | ∅)` is the full reachable set
@@ -147,7 +147,7 @@ axiom ReachableSet_eq_ForwardReachable_empty :
     ∀ (v : Vertex) (ω : PercolationOutcome),
       ReachableSet v ω = ForwardReachable v ∅ ω
 
-/-- Cat 3 paper-novel ATOMIC structural equation: forward-reachable set
+/-- Cat 3 atomic structural equation: forward-reachable set
     contains the starting vertex `u` (length-0 path convention applied
     to forward-reachable construction). Paper Definition 2.5
     (`def:forward-reachable`) defines `R(u | H_t) = {w ∈ V : ∃ path from
@@ -233,7 +233,7 @@ axiom reward_mem_unitInterval : ∀ v : Vertex, 0 ≤ reward v ∧ reward v ≤ 
     realization"). -/
 axiom intrinsicPref : Vertex → PercolationOutcome → ℝ
 
-/-- Cat 3 paper-novel ATOMIC structural equation: the intrinsic
+/-- Cat 3 atomic structural equation: the intrinsic
     preference function is bounded in `[0, 1]` per the paper's stated
     range. Companion to `reward_mem_unitInterval`; `intrinsicPref` was
     introduced opaquely without its paper-stated unit-interval support
@@ -647,8 +647,8 @@ per-realisation Blackwell-conditional fact — the paper-stipulated
 structural input — from which the welfare-level monotonicity follows
 by `percExpectation_mono` (`agentWelfare_monotone_of_kernel_pointwise_
 monotone` below). Paper-stated conditional-on-`R` Blackwell application
-to the paper-novel kernel carrier; the Blackwell 1951/1953 dependency
-is the inner-expectation comparison fact. -/
+to the kernel carrier; the Blackwell 1951/1953 dependency is the
+inner-expectation comparison fact. -/
 
 /-- Paper-stipulated structural equation: pointwise (conditional-on-`R`)
     Blackwell monotonicity of the Bayesian agent's reward kernel. For
@@ -836,8 +836,8 @@ axiom agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
     content connecting the calculus-style Topkis 1978 statement
     to the abstract four-corner predicate.
 
-    Paper-Def-stipulated structural fact on the paper-novel reward-
-    kernel increasing-differences in (β, κ). -/
+    Paper-Def-stipulated structural fact on the reward-kernel
+    increasing-differences in (β, κ). -/
 axiom agentRewardKernel_kappaAgent_increasing_differences_paper_Def :
     ∀ (α : ℝ),
       ∀ ω : BondConfig AgentEdgeIdx,
@@ -1033,7 +1033,7 @@ theorem agentWelfare_tendsto_of_kernel_pointwise_tendsto
     paper source: Definition 2.6 (`def:oracle`). -/
 axiom oracleReward : ℝ → ℝ  -- as a function of β
 
-/-- Cat 3 paper-novel ATOMIC structural equation: the oracle's expected
+/-- Cat 3 atomic structural equation: the oracle's expected
     reward inherits the unit-interval bound from the underlying reward
     function. Per paper Definition 2.1 line 113, `r: V → [0, 1]`; the
     within-`R` oracle of Definition 2.6 selects the argmax over `R(v_0)`
@@ -1081,7 +1081,7 @@ axiom TerminalNeighbourTopology : Prop
     `N_R(v_0)`"). The general-degree case is the subject of Theorem
     `thm:general-tree` under the non-interference condition C2′.
 
-    Cat 3 (paper-novel scope predicate): a structural hypothesis on the
+    Cat 3 (scope predicate): a structural hypothesis on the
     IDP instance characterising the degree-2 case under which the
     paper's wrongness construction reduces to a clean two-branch
     comparison. Encoded as opaque `Prop` rather than `def`-derived from
