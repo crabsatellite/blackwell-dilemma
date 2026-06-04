@@ -1,10 +1,10 @@
 # Blackwell Dilemma MRS: Prediction Tracker
 
-**Report date**: 2026-06-03
+**Report date**: 2026-06-04
 **Prediction made**: 2026-03-26
 **Verification date**: 2026-05-21
-**Days elapsed**: 69
-**Data points**: 70
+**Days elapsed**: 70
+**Data points**: 71
 
 ## Hypothesis
 > LangChain (quality leader at t0 with 131k stars, 2.3x #2) will show LOWER relative ecosystem growth over 8 weeks than at least one framework with <60k stars at t0. Ecosystem growth = (commits_4w(t1)/commits_4w(t0)) * (forks(t1)/forks(t0)). This tests the Blackwell Dilemma: the most visible framework is not necessarily the healthiest.
@@ -12,34 +12,34 @@
 ## Current Snapshot
 | Framework | Stars | Forks | 4w Commits | q (quality) | e (ecosystem) |
 |-----------|-------|-------|------------|-------------|---------------|
-| LangChain | 138,379 | 22,923 | 177 | 1.0000 | 0.4427 |
-| AutoGen | 58,656 | 8,855 | 0 | 0.9275 | 0.3019 |
-| Mem0 | 57,518 | 6,575 | 0 | 0.9258 | 0.2286 |
-| CrewAI | 52,721 | 7,352 | 0 | 0.9185 | 0.2789 |
-| LlamaIndex | 49,867 | 7,501 | 0 | 0.9138 | 0.3008 |
-| LiteLLM | 49,114 | 8,552 | 953 | 0.9125 | 0.9483 |
-| DSPy | 34,805 | 2,947 | 0 | 0.8834 | 0.1693 |
-| SemanticKernel | 28,037 | 4,628 | 0 | 0.8651 | 0.3301 |
-| Haystack | 25,445 | 2,827 | 0 | 0.8569 | 0.2222 |
-| PydanticAI | 17,481 | 2,163 | 0 | 0.8252 | 0.2475 |
+| LangChain | 138,463 | 22,940 | 190 | 1.0000 | 0.4456 |
+| AutoGen | 58,680 | 8,861 | 0 | 0.9275 | 0.3020 |
+| Mem0 | 57,650 | 6,585 | 0 | 0.9260 | 0.2284 |
+| CrewAI | 52,805 | 7,372 | 0 | 0.9186 | 0.2792 |
+| LlamaIndex | 49,901 | 7,505 | 0 | 0.9138 | 0.3008 |
+| LiteLLM | 49,232 | 8,583 | 998 | 0.9127 | 0.9487 |
+| DSPy | 34,838 | 2,952 | 0 | 0.8834 | 0.1695 |
+| SemanticKernel | 28,047 | 4,631 | 0 | 0.8651 | 0.3302 |
+| Haystack | 25,454 | 2,829 | 0 | 0.8569 | 0.2223 |
+| PydanticAI | 17,507 | 2,166 | 0 | 0.8253 | 0.2474 |
 
 ## Growth Since t0
 | Framework | Stars t0 | Stars now | Growth | Forks t0 | Forks now | Growth |
 |-----------|----------|-----------|--------|----------|-----------|--------|
-| LangChain | 131,190 | 138,379 | +5.48% | 21,601 | 22,923 | +6.12% |
-| AutoGen | 56,243 | 58,656 | +4.29% | 8,453 | 8,855 | +4.76% |
-| Mem0 | 51,132 | 57,518 | +12.49% | 5,717 | 6,575 | +15.01% |
-| CrewAI | 47,278 | 52,721 | +11.51% | 6,385 | 7,352 | +15.14% |
-| LlamaIndex | 48,012 | 49,867 | +3.86% | 7,093 | 7,501 | +5.75% |
-| LiteLLM | 40,982 | 49,114 | +19.84% | 6,752 | 8,552 | +26.66% |
-| DSPy | 33,187 | 34,805 | +4.88% | 2,728 | 2,947 | +8.03% |
-| SemanticKernel | 27,567 | 28,037 | +1.70% | 4,523 | 4,628 | +2.32% |
-| Haystack | 24,620 | 25,445 | +3.35% | 2,675 | 2,827 | +5.68% |
-| PydanticAI | 15,824 | 17,481 | +10.47% | 1,830 | 2,163 | +18.20% |
+| LangChain | 131,190 | 138,463 | +5.54% | 21,601 | 22,940 | +6.20% |
+| AutoGen | 56,243 | 58,680 | +4.33% | 8,453 | 8,861 | +4.83% |
+| Mem0 | 51,132 | 57,650 | +12.75% | 5,717 | 6,585 | +15.18% |
+| CrewAI | 47,278 | 52,805 | +11.69% | 6,385 | 7,372 | +15.46% |
+| LlamaIndex | 48,012 | 49,901 | +3.93% | 7,093 | 7,505 | +5.81% |
+| LiteLLM | 40,982 | 49,232 | +20.13% | 6,752 | 8,583 | +27.12% |
+| DSPy | 33,187 | 34,838 | +4.97% | 2,728 | 2,952 | +8.21% |
+| SemanticKernel | 27,567 | 28,047 | +1.74% | 4,523 | 4,631 | +2.39% |
+| Haystack | 24,620 | 25,454 | +3.39% | 2,675 | 2,829 | +5.76% |
+| PydanticAI | 15,824 | 17,507 | +10.64% | 1,830 | 2,166 | +18.36% |
 
 ## Diagnostic
 - Quality leader (q): **LangChain** (q=1.0000)
-- Ecosystem leader (e): **LiteLLM** (e=0.9483)
+- Ecosystem leader (e): **LiteLLM** (e=0.9487)
 - **Misalignment (C2)**: YES
   - Quality leader LangChain != ecosystem leader LiteLLM
   - Blackwell Dilemma structure present
