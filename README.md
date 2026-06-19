@@ -90,7 +90,13 @@ As an out-of-sample test, we track 10 AI agent/LLM frameworks daily via GitHub A
 
 See [prediction.md](prediction.md) for full details and falsification criteria.
 
+**Verification**: see [verification/live_prediction_verification_2026-05-21.md](verification/live_prediction_verification_2026-05-21.md). The short-note fork-growth predictions are confirmed; the commit-based EGR prediction is supported after recomputing 4-week commit windows from the GitHub commits API, with the pre-registered top-3 caution retained.
+
+**Formal note**: the verified public research artifact is available as [paper/prediction_note_public.pdf](paper/prediction_note_public.pdf), with source at [paper/prediction_note.tex](paper/prediction_note.tex). The verification code and machine-readable output are in [verification/](verification/).
+
 ## Structure
+
+The `paper/` directory contains the formal live-prediction note. The `verification/` directory contains the reproducible verifier, JSON output, and Markdown verification report.
 
 ```
 ├── simulation/             # All simulation code

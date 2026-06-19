@@ -1,0 +1,862 @@
+{
+  "generated_at": "2026-06-19T09:40:30Z",
+  "snapshot_file": "data\\snapshots.json",
+  "prediction": {
+    "t0": "2026-03-26",
+    "t1": "2026-05-21",
+    "window_weeks": 8,
+    "quality_leader": "LangChain",
+    "quality_leader_stars_t0": 131189,
+    "hypothesis": "LangChain (quality leader at t0 with 131k stars, 2.3x #2) will show LOWER relative ecosystem growth over 8 weeks than at least one framework with <60k stars at t0. Ecosystem growth = (commits_4w(t1)/commits_4w(t0)) * (forks(t1)/forks(t0)). This tests the Blackwell Dilemma: the most visible framework is not necessarily the healthiest.",
+    "falsification": "If LangChain shows the HIGHEST ecosystem growth ratio among all tracked frameworks at t1, the prediction fails.",
+    "mechanism": "C1: switching cost (workflow lock-in, API coupling) C2: quality signal (stars) misaligned with ecosystem health (commits, contributors) C3: stars/downloads do not reveal commit trajectory or contributor diversity"
+  },
+  "snapshot_range": {
+    "first": "2026-03-26",
+    "last": "2026-06-19",
+    "count": 86,
+    "missing_count": 0,
+    "missing_dates": []
+  },
+  "commit_count_method": {
+    "source": "GitHub commits API",
+    "window_days": 28,
+    "timestamp_basis": "snapshot timestamp, interpreted as UTC"
+  },
+  "commit_count_windows": {
+    "t0": {
+      "LangChain": {
+        "repo": "langchain-ai/langchain",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 196,
+        "rate_limit_remaining": "4998"
+      },
+      "AutoGen": {
+        "repo": "microsoft/autogen",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 2,
+        "rate_limit_remaining": "4997"
+      },
+      "Mem0": {
+        "repo": "mem0ai/mem0",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 110,
+        "rate_limit_remaining": "4996"
+      },
+      "LlamaIndex": {
+        "repo": "run-llama/llama_index",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 125,
+        "rate_limit_remaining": "4995"
+      },
+      "CrewAI": {
+        "repo": "crewAIInc/crewAI",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 132,
+        "rate_limit_remaining": "4994"
+      },
+      "LiteLLM": {
+        "repo": "BerriAI/litellm",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 2512,
+        "rate_limit_remaining": "4993"
+      },
+      "DSPy": {
+        "repo": "stanfordnlp/dspy",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 42,
+        "rate_limit_remaining": "4992"
+      },
+      "SemanticKernel": {
+        "repo": "microsoft/semantic-kernel",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 39,
+        "rate_limit_remaining": "4991"
+      },
+      "Haystack": {
+        "repo": "deepset-ai/haystack",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 170,
+        "rate_limit_remaining": "4990"
+      },
+      "PydanticAI": {
+        "repo": "pydantic/pydantic-ai",
+        "since": "2026-02-26T14:46:19Z",
+        "until": "2026-03-26T14:46:19Z",
+        "count": 71,
+        "rate_limit_remaining": "4989"
+      }
+    },
+    "verification": {
+      "LangChain": {
+        "repo": "langchain-ai/langchain",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 245,
+        "rate_limit_remaining": "4988"
+      },
+      "AutoGen": {
+        "repo": "microsoft/autogen",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 0,
+        "rate_limit_remaining": "4987"
+      },
+      "Mem0": {
+        "repo": "mem0ai/mem0",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 44,
+        "rate_limit_remaining": "4986"
+      },
+      "LlamaIndex": {
+        "repo": "run-llama/llama_index",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 60,
+        "rate_limit_remaining": "4985"
+      },
+      "CrewAI": {
+        "repo": "crewAIInc/crewAI",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 104,
+        "rate_limit_remaining": "4984"
+      },
+      "LiteLLM": {
+        "repo": "BerriAI/litellm",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 1499,
+        "rate_limit_remaining": "4983"
+      },
+      "DSPy": {
+        "repo": "stanfordnlp/dspy",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 48,
+        "rate_limit_remaining": "4982"
+      },
+      "SemanticKernel": {
+        "repo": "microsoft/semantic-kernel",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 36,
+        "rate_limit_remaining": "4981"
+      },
+      "Haystack": {
+        "repo": "deepset-ai/haystack",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 114,
+        "rate_limit_remaining": "4980"
+      },
+      "PydanticAI": {
+        "repo": "pydantic/pydantic-ai",
+        "since": "2026-04-23T07:07:53Z",
+        "until": "2026-05-21T07:07:53Z",
+        "count": 122,
+        "rate_limit_remaining": "4979"
+      }
+    },
+    "latest": {
+      "LangChain": {
+        "repo": "langchain-ai/langchain",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 214,
+        "rate_limit_remaining": "4978"
+      },
+      "AutoGen": {
+        "repo": "microsoft/autogen",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 0,
+        "rate_limit_remaining": "4977"
+      },
+      "Mem0": {
+        "repo": "mem0ai/mem0",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 141,
+        "rate_limit_remaining": "4976"
+      },
+      "LlamaIndex": {
+        "repo": "run-llama/llama_index",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 24,
+        "rate_limit_remaining": "4975"
+      },
+      "CrewAI": {
+        "repo": "crewAIInc/crewAI",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 127,
+        "rate_limit_remaining": "4974"
+      },
+      "LiteLLM": {
+        "repo": "BerriAI/litellm",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 407,
+        "rate_limit_remaining": "4973"
+      },
+      "DSPy": {
+        "repo": "stanfordnlp/dspy",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 42,
+        "rate_limit_remaining": "4972"
+      },
+      "SemanticKernel": {
+        "repo": "microsoft/semantic-kernel",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 28,
+        "rate_limit_remaining": "4971"
+      },
+      "Haystack": {
+        "repo": "deepset-ai/haystack",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 156,
+        "rate_limit_remaining": "4970"
+      },
+      "PydanticAI": {
+        "repo": "pydantic/pydantic-ai",
+        "since": "2026-05-22T07:41:31Z",
+        "until": "2026-06-19T07:41:31Z",
+        "count": 89,
+        "rate_limit_remaining": "4969"
+      }
+    }
+  },
+  "verification": {
+    "label": "verification",
+    "date": "2026-05-21",
+    "timestamp": "2026-05-21T07:07:53.642904",
+    "fork_growth_rows": [
+      {
+        "framework": "LangChain",
+        "repo": "langchain-ai/langchain",
+        "stars_t0": 131190,
+        "forks_t0": 21601,
+        "forks_t1": 22704,
+        "fork_growth_ratio": 1.0510624508124624,
+        "fork_growth_pct": 5.106245081246241,
+        "under_60k_stars_t0": false,
+        "fork_growth_rank": 6
+      },
+      {
+        "framework": "AutoGen",
+        "repo": "microsoft/autogen",
+        "stars_t0": 56243,
+        "forks_t0": 8453,
+        "forks_t1": 8792,
+        "fork_growth_ratio": 1.040104105051461,
+        "fork_growth_pct": 4.0104105051461,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 9
+      },
+      {
+        "framework": "Mem0",
+        "repo": "mem0ai/mem0",
+        "stars_t0": 51132,
+        "forks_t0": 5717,
+        "forks_t1": 6411,
+        "fork_growth_ratio": 1.1213923386391464,
+        "fork_growth_pct": 12.139233863914644,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 4
+      },
+      {
+        "framework": "LlamaIndex",
+        "repo": "run-llama/llama_index",
+        "stars_t0": 48012,
+        "forks_t0": 7093,
+        "forks_t1": 7435,
+        "fork_growth_ratio": 1.048216551529677,
+        "fork_growth_pct": 4.821655152967708,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 7
+      },
+      {
+        "framework": "CrewAI",
+        "repo": "crewAIInc/crewAI",
+        "stars_t0": 47278,
+        "forks_t0": 6385,
+        "forks_t1": 7182,
+        "fork_growth_ratio": 1.1248238057948317,
+        "fork_growth_pct": 12.482380579483166,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 3
+      },
+      {
+        "framework": "LiteLLM",
+        "repo": "BerriAI/litellm",
+        "stars_t0": 40982,
+        "forks_t0": 6752,
+        "forks_t1": 8217,
+        "fork_growth_ratio": 1.2169727488151658,
+        "fork_growth_pct": 21.69727488151658,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 1
+      },
+      {
+        "framework": "DSPy",
+        "repo": "stanfordnlp/dspy",
+        "stars_t0": 33187,
+        "forks_t0": 2728,
+        "forks_t1": 2913,
+        "fork_growth_ratio": 1.0678152492668622,
+        "fork_growth_pct": 6.781524926686222,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 5
+      },
+      {
+        "framework": "SemanticKernel",
+        "repo": "microsoft/semantic-kernel",
+        "stars_t0": 27567,
+        "forks_t0": 4523,
+        "forks_t1": 4602,
+        "fork_growth_ratio": 1.0174662834401946,
+        "fork_growth_pct": 1.746628344019463,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 10
+      },
+      {
+        "framework": "Haystack",
+        "repo": "deepset-ai/haystack",
+        "stars_t0": 24620,
+        "forks_t0": 2675,
+        "forks_t1": 2798,
+        "fork_growth_ratio": 1.045981308411215,
+        "fork_growth_pct": 4.598130841121506,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 8
+      },
+      {
+        "framework": "PydanticAI",
+        "repo": "pydantic/pydantic-ai",
+        "stars_t0": 15824,
+        "forks_t0": 1830,
+        "forks_t1": 2107,
+        "fork_growth_ratio": 1.1513661202185792,
+        "fork_growth_pct": 15.136612021857921,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 2
+      }
+    ],
+    "egr_rows": [
+      {
+        "framework": "LangChain",
+        "repo": "langchain-ai/langchain",
+        "stars_t0": 131190,
+        "forks_t0": 21601,
+        "forks_t1": 22704,
+        "commit_count_4w_t0": 196,
+        "commit_count_4w_t1": 245,
+        "commit_growth_ratio": 1.25,
+        "ecosystem_growth_ratio": 1.3138280635155781,
+        "under_60k_stars_t0": false,
+        "tracker_commits_4w_t0": 216,
+        "tracker_commits_4w_t1": 229,
+        "tracker_zero_artifact": false,
+        "ecosystem_growth_rank": 2
+      },
+      {
+        "framework": "AutoGen",
+        "repo": "microsoft/autogen",
+        "stars_t0": 56243,
+        "forks_t0": 8453,
+        "forks_t1": 8792,
+        "commit_count_4w_t0": 2,
+        "commit_count_4w_t1": 0,
+        "commit_growth_ratio": 0.0,
+        "ecosystem_growth_ratio": 0.0,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 10
+      },
+      {
+        "framework": "Mem0",
+        "repo": "mem0ai/mem0",
+        "stars_t0": 51132,
+        "forks_t0": 5717,
+        "forks_t1": 6411,
+        "commit_count_4w_t0": 110,
+        "commit_count_4w_t1": 44,
+        "commit_growth_ratio": 0.4,
+        "ecosystem_growth_ratio": 0.4485569354556586,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 9
+      },
+      {
+        "framework": "LlamaIndex",
+        "repo": "run-llama/llama_index",
+        "stars_t0": 48012,
+        "forks_t0": 7093,
+        "forks_t1": 7435,
+        "commit_count_4w_t0": 125,
+        "commit_count_4w_t1": 60,
+        "commit_growth_ratio": 0.48,
+        "ecosystem_growth_ratio": 0.503143944734245,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 8
+      },
+      {
+        "framework": "CrewAI",
+        "repo": "crewAIInc/crewAI",
+        "stars_t0": 47278,
+        "forks_t0": 6385,
+        "forks_t1": 7182,
+        "commit_count_4w_t0": 132,
+        "commit_count_4w_t1": 104,
+        "commit_growth_ratio": 0.7878787878787878,
+        "ecosystem_growth_ratio": 0.8862248166868371,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 116,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 5
+      },
+      {
+        "framework": "LiteLLM",
+        "repo": "BerriAI/litellm",
+        "stars_t0": 40982,
+        "forks_t0": 6752,
+        "forks_t1": 8217,
+        "commit_count_4w_t0": 2512,
+        "commit_count_4w_t1": 1499,
+        "commit_growth_ratio": 0.5967356687898089,
+        "ecosystem_growth_ratio": 0.7262110471631901,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 2609,
+        "tracker_commits_4w_t1": 1583,
+        "tracker_zero_artifact": false,
+        "ecosystem_growth_rank": 6
+      },
+      {
+        "framework": "DSPy",
+        "repo": "stanfordnlp/dspy",
+        "stars_t0": 33187,
+        "forks_t0": 2728,
+        "forks_t1": 2913,
+        "commit_count_4w_t0": 42,
+        "commit_count_4w_t1": 48,
+        "commit_growth_ratio": 1.1428571428571428,
+        "ecosystem_growth_ratio": 1.220360284876414,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 3
+      },
+      {
+        "framework": "SemanticKernel",
+        "repo": "microsoft/semantic-kernel",
+        "stars_t0": 27567,
+        "forks_t0": 4523,
+        "forks_t1": 4602,
+        "commit_count_4w_t0": 39,
+        "commit_count_4w_t1": 36,
+        "commit_growth_ratio": 0.9230769230769231,
+        "ecosystem_growth_ratio": 0.9391996462524874,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 4
+      },
+      {
+        "framework": "Haystack",
+        "repo": "deepset-ai/haystack",
+        "stars_t0": 24620,
+        "forks_t0": 2675,
+        "forks_t1": 2798,
+        "commit_count_4w_t0": 170,
+        "commit_count_4w_t1": 114,
+        "commit_growth_ratio": 0.6705882352941176,
+        "ecosystem_growth_ratio": 0.7014227597581089,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 7
+      },
+      {
+        "framework": "PydanticAI",
+        "repo": "pydantic/pydantic-ai",
+        "stars_t0": 15824,
+        "forks_t0": 1830,
+        "forks_t1": 2107,
+        "commit_count_4w_t0": 71,
+        "commit_count_4w_t1": 122,
+        "commit_growth_ratio": 1.7183098591549295,
+        "ecosystem_growth_ratio": 1.9784037558685446,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 1
+      }
+    ],
+    "short_note_predictions": {
+      "n_frameworks": 10,
+      "p1_spearman_stars_vs_fgr": -0.12727272727272726,
+      "p1_permutation_p_less": 0.36831263374732504,
+      "p1_confirmed": true,
+      "p2_langchain_fgr_rank": 6,
+      "p2_langchain_fgr": 1.0510624508124624,
+      "p2_confirmed": true,
+      "p3_litellm_fgr": 1.2169727488151658,
+      "p3_langchain_fgr": 1.0510624508124624,
+      "p3_confirmed": true,
+      "joint_verdict": "confirmed"
+    },
+    "prediction_md_egr": {
+      "n_egr_defined": 10,
+      "langchain_egr": 1.3138280635155781,
+      "langchain_egr_rank": 2,
+      "under60_beating_langchain": [
+        [
+          "PydanticAI",
+          1.9784037558685446
+        ]
+      ],
+      "main_prediction_supported": true,
+      "strict_falsification": false,
+      "top3_caution": true
+    },
+    "tracker_zero_artifact_count": 8
+  },
+  "current_extension": {
+    "label": "current_extension",
+    "date": "2026-06-19",
+    "timestamp": "2026-06-19T07:41:31.599064",
+    "fork_growth_rows": [
+      {
+        "framework": "LangChain",
+        "repo": "langchain-ai/langchain",
+        "stars_t0": 131190,
+        "forks_t0": 21601,
+        "forks_t1": 23153,
+        "fork_growth_ratio": 1.0718485255312253,
+        "fork_growth_pct": 7.184852553122534,
+        "under_60k_stars_t0": false,
+        "fork_growth_rank": 6
+      },
+      {
+        "framework": "AutoGen",
+        "repo": "microsoft/autogen",
+        "stars_t0": 56243,
+        "forks_t0": 8453,
+        "forks_t1": 8907,
+        "fork_growth_ratio": 1.053708742458299,
+        "fork_growth_pct": 5.370874245829893,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 9
+      },
+      {
+        "framework": "Mem0",
+        "repo": "mem0ai/mem0",
+        "stars_t0": 51132,
+        "forks_t0": 5717,
+        "forks_t1": 6782,
+        "fork_growth_ratio": 1.1862865139058947,
+        "fork_growth_pct": 18.628651390589468,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 3
+      },
+      {
+        "framework": "LlamaIndex",
+        "repo": "run-llama/llama_index",
+        "stars_t0": 48012,
+        "forks_t0": 7093,
+        "forks_t1": 7585,
+        "fork_growth_ratio": 1.069364161849711,
+        "fork_growth_pct": 6.936416184971095,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 8
+      },
+      {
+        "framework": "CrewAI",
+        "repo": "crewAIInc/crewAI",
+        "stars_t0": 47278,
+        "forks_t0": 6385,
+        "forks_t1": 7551,
+        "fork_growth_ratio": 1.1826155050900549,
+        "fork_growth_pct": 18.261550509005488,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 4
+      },
+      {
+        "framework": "LiteLLM",
+        "repo": "BerriAI/litellm",
+        "stars_t0": 40982,
+        "forks_t0": 6752,
+        "forks_t1": 8995,
+        "fork_growth_ratio": 1.3321978672985781,
+        "fork_growth_pct": 33.219786729857816,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 1
+      },
+      {
+        "framework": "DSPy",
+        "repo": "stanfordnlp/dspy",
+        "stars_t0": 33187,
+        "forks_t0": 2728,
+        "forks_t1": 2982,
+        "fork_growth_ratio": 1.093108504398827,
+        "fork_growth_pct": 9.310850439882689,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 5
+      },
+      {
+        "framework": "SemanticKernel",
+        "repo": "microsoft/semantic-kernel",
+        "stars_t0": 27567,
+        "forks_t0": 4523,
+        "forks_t1": 4654,
+        "fork_growth_ratio": 1.0289630776033607,
+        "fork_growth_pct": 2.89630776033607,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 10
+      },
+      {
+        "framework": "Haystack",
+        "repo": "deepset-ai/haystack",
+        "stars_t0": 24620,
+        "forks_t0": 2675,
+        "forks_t1": 2865,
+        "fork_growth_ratio": 1.0710280373831775,
+        "fork_growth_pct": 7.102803738317753,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 7
+      },
+      {
+        "framework": "PydanticAI",
+        "repo": "pydantic/pydantic-ai",
+        "stars_t0": 15824,
+        "forks_t0": 1830,
+        "forks_t1": 2233,
+        "fork_growth_ratio": 1.2202185792349727,
+        "fork_growth_pct": 22.02185792349727,
+        "under_60k_stars_t0": true,
+        "fork_growth_rank": 2
+      }
+    ],
+    "egr_rows": [
+      {
+        "framework": "LangChain",
+        "repo": "langchain-ai/langchain",
+        "stars_t0": 131190,
+        "forks_t0": 21601,
+        "forks_t1": 23153,
+        "commit_count_4w_t0": 196,
+        "commit_count_4w_t1": 214,
+        "commit_growth_ratio": 1.0918367346938775,
+        "ecosystem_growth_ratio": 1.1702835942024603,
+        "under_60k_stars_t0": false,
+        "tracker_commits_4w_t0": 216,
+        "tracker_commits_4w_t1": 264,
+        "tracker_zero_artifact": false,
+        "ecosystem_growth_rank": 3
+      },
+      {
+        "framework": "AutoGen",
+        "repo": "microsoft/autogen",
+        "stars_t0": 56243,
+        "forks_t0": 8453,
+        "forks_t1": 8907,
+        "commit_count_4w_t0": 2,
+        "commit_count_4w_t1": 0,
+        "commit_growth_ratio": 0.0,
+        "ecosystem_growth_ratio": 0.0,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 10
+      },
+      {
+        "framework": "Mem0",
+        "repo": "mem0ai/mem0",
+        "stars_t0": 51132,
+        "forks_t0": 5717,
+        "forks_t1": 6782,
+        "commit_count_4w_t0": 110,
+        "commit_count_4w_t1": 141,
+        "commit_growth_ratio": 1.2818181818181817,
+        "ecosystem_growth_ratio": 1.520603622370283,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 2
+      },
+      {
+        "framework": "LlamaIndex",
+        "repo": "run-llama/llama_index",
+        "stars_t0": 48012,
+        "forks_t0": 7093,
+        "forks_t1": 7585,
+        "commit_count_4w_t0": 125,
+        "commit_count_4w_t1": 24,
+        "commit_growth_ratio": 0.192,
+        "ecosystem_growth_ratio": 0.20531791907514452,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 24,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 9
+      },
+      {
+        "framework": "CrewAI",
+        "repo": "crewAIInc/crewAI",
+        "stars_t0": 47278,
+        "forks_t0": 6385,
+        "forks_t1": 7551,
+        "commit_count_4w_t0": 132,
+        "commit_count_4w_t1": 127,
+        "commit_growth_ratio": 0.9621212121212122,
+        "ecosystem_growth_ratio": 1.1378194632305831,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 116,
+        "tracker_commits_4w_t1": 122,
+        "tracker_zero_artifact": false,
+        "ecosystem_growth_rank": 4
+      },
+      {
+        "framework": "LiteLLM",
+        "repo": "BerriAI/litellm",
+        "stars_t0": 40982,
+        "forks_t0": 6752,
+        "forks_t1": 8995,
+        "commit_count_4w_t0": 2512,
+        "commit_count_4w_t1": 407,
+        "commit_growth_ratio": 0.16202229299363058,
+        "ecosystem_growth_ratio": 0.21584575318094001,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 2609,
+        "tracker_commits_4w_t1": 952,
+        "tracker_zero_artifact": false,
+        "ecosystem_growth_rank": 8
+      },
+      {
+        "framework": "DSPy",
+        "repo": "stanfordnlp/dspy",
+        "stars_t0": 33187,
+        "forks_t0": 2728,
+        "forks_t1": 2982,
+        "commit_count_4w_t0": 42,
+        "commit_count_4w_t1": 42,
+        "commit_growth_ratio": 1.0,
+        "ecosystem_growth_ratio": 1.093108504398827,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 38,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 5
+      },
+      {
+        "framework": "SemanticKernel",
+        "repo": "microsoft/semantic-kernel",
+        "stars_t0": 27567,
+        "forks_t0": 4523,
+        "forks_t1": 4654,
+        "commit_count_4w_t0": 39,
+        "commit_count_4w_t1": 28,
+        "commit_growth_ratio": 0.717948717948718,
+        "ecosystem_growth_ratio": 0.7387427223819,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 28,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 7
+      },
+      {
+        "framework": "Haystack",
+        "repo": "deepset-ai/haystack",
+        "stars_t0": 24620,
+        "forks_t0": 2675,
+        "forks_t1": 2865,
+        "commit_count_4w_t0": 170,
+        "commit_count_4w_t1": 156,
+        "commit_growth_ratio": 0.9176470588235294,
+        "ecosystem_growth_ratio": 0.9828257284222099,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 0,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 6
+      },
+      {
+        "framework": "PydanticAI",
+        "repo": "pydantic/pydantic-ai",
+        "stars_t0": 15824,
+        "forks_t0": 1830,
+        "forks_t1": 2233,
+        "commit_count_4w_t0": 71,
+        "commit_count_4w_t1": 89,
+        "commit_growth_ratio": 1.2535211267605635,
+        "ecosystem_growth_ratio": 1.5295697683367968,
+        "under_60k_stars_t0": true,
+        "tracker_commits_4w_t0": 0,
+        "tracker_commits_4w_t1": 78,
+        "tracker_zero_artifact": true,
+        "ecosystem_growth_rank": 1
+      }
+    ],
+    "short_note_predictions": {
+      "n_frameworks": 10,
+      "p1_spearman_stars_vs_fgr": -0.16363636363636364,
+      "p1_permutation_p_less": 0.3288134237315254,
+      "p1_confirmed": true,
+      "p2_langchain_fgr_rank": 6,
+      "p2_langchain_fgr": 1.0718485255312253,
+      "p2_confirmed": true,
+      "p3_litellm_fgr": 1.3321978672985781,
+      "p3_langchain_fgr": 1.0718485255312253,
+      "p3_confirmed": true,
+      "joint_verdict": "confirmed"
+    },
+    "prediction_md_egr": {
+      "n_egr_defined": 10,
+      "langchain_egr": 1.1702835942024603,
+      "langchain_egr_rank": 3,
+      "under60_beating_langchain": [
+        [
+          "PydanticAI",
+          1.5295697683367968
+        ],
+        [
+          "Mem0",
+          1.520603622370283
+        ]
+      ],
+      "main_prediction_supported": true,
+      "strict_falsification": false,
+      "top3_caution": true
+    },
+    "tracker_zero_artifact_count": 7
+  }
+}

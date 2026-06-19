@@ -1,0 +1,74 @@
+# Live Prediction Verification
+
+Generated: 2026-06-19T09:40:30Z
+
+## Verdict
+
+**Reliable conclusion:** the short-note fork-growth prediction is confirmed, and the commit-based EGR prediction is weakly supported after replacing the GitHub stats endpoint artifacts with explicit 4-week commit counts.
+
+The strongest result is not that LiteLLM had the highest relative growth. LiteLLM remains the ecosystem-health leader, but its baseline commit rate was already very high. The robust out-of-sample growth winner at the verification date is PydanticAI under EGR and LiteLLM under fork growth.
+
+## Data Integrity
+
+- Snapshot range: 2026-03-26 to 2026-06-19
+- Snapshot count: 86
+- Missing daily snapshots: 0
+- Verification date: 2026-05-21 (2026-05-21T07:07:53.642904)
+- Commit counts: recomputed from the GitHub commits API over explicit 28-day timestamp windows, not from the GitHub stats endpoint.
+- Tracker zero artifacts at verification: 8 framework(s).
+
+## Short Note Predictions
+
+| Prediction | Result | Verdict |
+| --- | --- | --- |
+| P1: Spearman stars(t0) vs FGR <= 0 | rho=-0.127, one-sided permutation p~0.368 | confirmed |
+| P2: LangChain FGR rank in bottom half | rank=6 of 10 | confirmed |
+| P3: LiteLLM FGR > LangChain FGR | 1.217 > 1.051 | confirmed |
+
+Joint verdict: **confirmed**.
+
+## EGR Verification
+
+LangChain EGR rank: 2 of 10 (EGR=1.314).
+Under-60k frameworks beating LangChain by EGR: PydanticAI (1.978)
+Main EGR prediction: supported; strict falsification: no; top-3 caution: yes.
+
+## Verification Rankings
+
+### Fork Growth Ratio
+
+| Rank | Framework | Stars t0 | Forks t0 | Forks t1 | FGR | Growth |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | LiteLLM | 40,982 | 6,752 | 8,217 | 1.217 | +21.70% |
+| 2 | PydanticAI | 15,824 | 1,830 | 2,107 | 1.151 | +15.14% |
+| 3 | CrewAI | 47,278 | 6,385 | 7,182 | 1.125 | +12.48% |
+| 4 | Mem0 | 51,132 | 5,717 | 6,411 | 1.121 | +12.14% |
+| 5 | DSPy | 33,187 | 2,728 | 2,913 | 1.068 | +6.78% |
+| 6 | LangChain | 131,190 | 21,601 | 22,704 | 1.051 | +5.11% |
+| 7 | LlamaIndex | 48,012 | 7,093 | 7,435 | 1.048 | +4.82% |
+| 8 | Haystack | 24,620 | 2,675 | 2,798 | 1.046 | +4.60% |
+| 9 | AutoGen | 56,243 | 8,453 | 8,792 | 1.040 | +4.01% |
+| 10 | SemanticKernel | 27,567 | 4,523 | 4,602 | 1.017 | +1.75% |
+
+### Ecosystem Growth Ratio
+
+| Rank | Framework | Commits t0 | Commits t1 | Forks t0 | Forks t1 | EGR | Tracker artifact |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 1 | PydanticAI | 71 | 122 | 1,830 | 2,107 | 1.978 | yes |
+| 2 | LangChain | 196 | 245 | 21,601 | 22,704 | 1.314 | no |
+| 3 | DSPy | 42 | 48 | 2,728 | 2,913 | 1.220 | yes |
+| 4 | SemanticKernel | 39 | 36 | 4,523 | 4,602 | 0.939 | yes |
+| 5 | CrewAI | 132 | 104 | 6,385 | 7,182 | 0.886 | yes |
+| 6 | LiteLLM | 2512 | 1499 | 6,752 | 8,217 | 0.726 | no |
+| 7 | Haystack | 170 | 114 | 2,675 | 2,798 | 0.701 | yes |
+| 8 | LlamaIndex | 125 | 60 | 7,093 | 7,435 | 0.503 | yes |
+| 9 | Mem0 | 110 | 44 | 5,717 | 6,411 | 0.449 | yes |
+| 10 | AutoGen | 2 | 0 | 8,453 | 8,792 | 0.000 | yes |
+
+## Holdout Extension
+
+As of 2026-06-19, the EGR result remains directionally supported: LangChain rank 3 of 10, with 2 under-60k framework(s) ahead.
+
+## Interpretation
+
+The evidence supports the Blackwell Dilemma diagnostic at the level this experiment can test: the visible quality leader was not the best growth choice once hidden ecosystem-health dynamics were measured. The result is predictive and out-of-sample, but still correlational and single-ecosystem. It should be used as supporting empirical evidence, not as causal proof of the theorem.

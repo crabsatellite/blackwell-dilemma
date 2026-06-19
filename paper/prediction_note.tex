@@ -1,0 +1,298 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\setlength{\emergencystretch}{2em}
+
+% ========== Blind/Public toggle ==========
+% Default: blind. To compile public version:
+%   pdflatex "\def\publicmode{}\input{prediction_note}"
+\ifdefined\publicmode
+  \newcommand{\blindmode}{0}
+\else
+  \newcommand{\blindmode}{1}
+\fi
+
+\title{Pre-Registered Prediction Test of the Blackwell Dilemma\\
+in the AI Framework Ecosystem}
+
+\ifnum\blindmode=1
+  \author{Anonymous}
+  \date{}
+\else
+  \author{Alex Chengyu Li\\[4pt]
+  \small Independent Researcher, Tokyo, Japan\\
+  \small \texttt{cl7076@nyu.edu}}
+  \date{March 27, 2026; verified June 19, 2026}
+\fi
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We design and verify a pre-registered prediction test of the Blackwell Dilemma, the phenomenon where the Blackwell ordering of information structures becomes irrelevant to welfare above the percolation threshold when actions are irreversible and quality signals are topology-blind. The AI agent/LLM framework ecosystem satisfies the three diagnostic conditions (irreversibility, signal--topology misalignment, signal locality) and provides a test case. On March 27, 2026, before post-baseline data were observed, we registered three predictions about the relative ecosystem growth of ten AI framework repositories. The verification snapshot on May 21, 2026 confirms all three primary fork-growth predictions: baseline star count has non-positive rank correlation with fork growth, LangChain ranks in the bottom half by fork growth, and LiteLLM's fork growth exceeds LangChain's. A supplemental commit-based ecosystem growth ratio is also directionally supported after recomputing 4-week commit counts from the GitHub commits API. The result is out-of-sample predictive evidence for the Blackwell Dilemma diagnostic, not causal proof of the theorem.
+\end{abstract}
+
+%% ================================================================
+\section{Theoretical Motivation}
+%% ================================================================
+
+The Blackwell Dilemma establishes that when actions are irreversible and quality signals are topology-blind (conditionally independent of the reachable set given rewards), the Blackwell ordering of information structures is irrelevant to welfare above the percolation threshold. The C1--C2--C3 diagnostic operationalizes this: (C1) actions have high switching costs, (C2) the quality-signal ranking misaligns with the ecosystem-health ranking, and (C3) the quality signal does not reveal the ecosystem dimension.
+
+This note applies the diagnostic to construct and verify a pre-registered prediction.
+
+%% ================================================================
+\section{System Selection}
+%% ================================================================
+
+The AI agent/LLM framework ecosystem satisfies all three conditions:
+
+\begin{description}
+\item[C1 (Irreversibility)] Framework adoption entails workflow integration, API coupling, and team retraining. Migrating from one framework's abstraction layer to another requires nontrivial rewriting. Switching costs are high and increase with depth of integration.
+
+\item[C2 (Signal--topology misalignment)] At $t_0$ = 2026-03-26, the quality-signal leader (LangChain, 131k GitHub stars, 2.3 times as many stars as the second-ranked framework) is \emph{not} the ecosystem-health leader. LiteLLM, with less than one-third the star count, shows 4.9 times the commit activity (14,706 vs.\ 3,007 commits/52 weeks). The quality ranking and ecosystem ranking diverge.
+
+\item[C3 (Signal locality)] GitHub stars, download counts, and tutorial availability measure \emph{popularity} (a reward signal). They do not reveal commit trajectory, contributor diversity, or maintenance health (the topology). A developer who selects a framework based on visibility cannot observe whether it is growing or contracting.
+\end{description}
+
+%% ================================================================
+\section{Empirical Design}
+%% ================================================================
+
+\subsection{Tracked Frameworks}
+
+We track 10 major AI agent/LLM frameworks via the GitHub API (Table~\ref{tab:baseline}). Selection criteria: at least 15k stars, active development, and independent codebases (no forks).
+
+\begin{table}[h]
+\centering
+\caption{Baseline data at $t_0$ = 2026-03-26. Stars, forks, and commit activity from live GitHub API.}
+\label{tab:baseline}
+\begin{tabular}{lrrrrr}
+\toprule
+Framework & Stars & Forks & 52w Commits & 4w Commits & $q(t_0)$ \\
+\midrule
+LangChain       & 131,190 & 21,601 & 3,007  & 216   & 1.000 \\
+AutoGen         &  56,243 &  8,453 &   ---  &  ---  & 0.928 \\
+Mem0            &  51,132 &  5,717 &   ---  &  ---  & 0.920 \\
+LlamaIndex      &  48,012 &  7,093 &   ---  &  ---  & 0.915 \\
+CrewAI          &  47,278 &  6,385 &   809  & 116   & 0.913 \\
+LiteLLM         &  40,982 &  6,752 & 14,706 & 2,609 & 0.901 \\
+DSPy            &  33,187 &  2,728 &   ---  &  ---  & 0.883 \\
+SemanticKernel  &  27,567 &  4,523 &   ---  &  ---  & 0.868 \\
+Haystack        &  24,620 &  2,675 &   ---  &  ---  & 0.858 \\
+PydanticAI      &  15,824 &  1,830 &   ---  &  ---  & 0.821 \\
+\bottomrule
+\end{tabular}
+
+\medskip
+{\footnotesize Quality proxy: $q = \log(1 + \text{stars}) / \log(1 + \text{stars}_{\max})$. Entries marked ``---'' indicate GitHub's commit-activity endpoint was unavailable at $t_0$; these are excluded from commit-based analyses but available for fork-based metrics.}
+\end{table}
+
+\subsection{Metrics}
+
+We define two ecosystem growth metrics.
+
+\paragraph{Primary: Fork Growth Rate.}
+\[
+\text{FGR}_i = \frac{\text{forks}_i(t_1)}{\text{forks}_i(t_0)}
+\]
+Fork counts are always available from the GitHub API and serve as a proxy for active adoption.
+
+\paragraph{Secondary: Commit Growth Rate.}
+\[
+\text{CGR}_i = \frac{\text{commits\_4w}_i(t_1)}{\text{commits\_4w}_i(t_0)}
+\]
+This metric provides a robustness check for frameworks with valid commit data at both $t_0$ and $t_1$.
+
+\paragraph{Supplemental: Ecosystem Growth Ratio.}
+The public pre-registration file also reports a composite ecosystem growth ratio:
+\[
+\text{EGR}_i =
+\frac{\text{commits\_4w}_i(t_1)}{\text{commits\_4w}_i(t_0)}
+\times
+\frac{\text{forks}_i(t_1)}{\text{forks}_i(t_0)}.
+\]
+Because GitHub's commit-activity endpoint can return empty ``computing'' responses, final EGR verification recomputes the 4-week commit windows from the GitHub commits API rather than trusting zero values in the daily tracker.
+
+\subsection{Addressing Regression to the Mean}
+
+Larger repositories may exhibit slower \emph{percentage} growth mechanically.
+
+Under the null hypothesis $H_0$ (no misalignment: stars accurately predict ecosystem trajectory), the Spearman rank correlation between star count at $t_0$ and ecosystem growth from $t_0$ to $t_1$ should be non-negative:
+\[
+H_0: \rho_S(\text{stars}(t_0),\; \text{FGR}(t_0, t_1)) \geq 0
+\]
+Under proportional growth (each repository's forks grow by a percentage independent of its base size), regression to the mean predicts $\rho_S \approx 0$, not $\rho_S < 0$. This assumption is plausible for GitHub repositories, where network effects (visibility, search ranking, tutorial availability) cause larger repositories to attract proportionally more forks. A negative correlation means that \emph{more visible} frameworks show \emph{less} ecosystem growth: consistent with the Blackwell Dilemma and distinct from generic deceleration. Under additive growth (constant absolute fork increments regardless of base size), the ratio metric FGR would produce a mechanically negative $\rho_S$; see Limitation~\ref{lim:rtm}.
+
+%% ================================================================
+\section{Predictions}
+%% ================================================================
+
+We register three predictions of increasing specificity.
+
+\begin{description}
+\item[P1 (Rank correlation)]
+The Spearman rank correlation between star count at $t_0$ and fork growth rate from $t_0$ to $t_1$ is non-positive:
+\[\rho_S(\text{stars}(t_0),\; \text{FGR}(t_0, t_1)) \leq 0\]
+\emph{Null base rate}: Under independence, $\Pr(\rho_S \leq 0) = 0.5$. Under the alternative that stars predict growth, $\Pr(\rho_S \leq 0) < 0.5$.
+
+\item[P2 (Quality leader below median)]
+LangChain (quality leader at $t_0$, rank 1 in stars) will rank in the bottom half (rank 6--10 out of 10) of the fork growth rate distribution.
+
+\emph{Null base rate}: $\Pr(\text{rank} \geq 6) = 5/10 = 0.5$ under random assignment.
+
+\item[P3 (Pairwise: ecosystem leader beats quality leader)]
+LiteLLM (ecosystem leader at $t_0$) will show strictly higher fork growth than LangChain:
+\[\text{FGR}_{\text{LiteLLM}} > \text{FGR}_{\text{LangChain}}\]
+
+\emph{Null base rate}: $\Pr = 0.5$ under exchangeability.
+\end{description}
+
+%% ================================================================
+\section{Falsification Criteria}
+%% ================================================================
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Prediction & Confirmed if & Falsified if \\
+\midrule
+P1 & $\rho_S \leq 0$ & $\rho_S > 0$ and $p < 0.10$ (one-sided) \\
+P2 & LangChain FGR rank $\geq 6$ & LangChain FGR rank $\leq 3$ \\
+P3 & $\text{FGR}_{\text{LiteLLM}} > \text{FGR}_{\text{LangChain}}$ & $\text{FGR}_{\text{LangChain}} > \text{FGR}_{\text{LiteLLM}}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The prediction is \emph{jointly confirmed} if all three hold. It is \emph{jointly falsified} if P1 is falsified (positive, significant rank correlation). Intermediate outcomes (e.g., P3 confirmed but P2 falsified) help isolate the mechanism.
+
+%% ================================================================
+\section{Verification Results}
+%% ================================================================
+
+\subsection{Data Integrity}
+
+The automated tracker ran daily from 2026-03-26 through 2026-06-19, producing 86 consecutive snapshots with no missing dates. The verification date for this pre-registered note is 2026-05-21.
+
+Fork counts are directly available in each snapshot. Commit counts require more care. The daily tracker used GitHub's \texttt{/stats/commit\_activity} endpoint, which can return empty values while GitHub computes repository statistics. At the verification date, eight frameworks had tracker-recorded zero commit counts that were contradicted by explicit commit-window counts. We therefore use the tracker snapshots for stars and forks, but recompute 28-day commit counts from the GitHub commits API for the supplemental EGR check. This preserves the pre-registered snapshots while avoiding a known GitHub API artifact.
+
+\subsection{Primary Predictions}
+
+All three pre-registered fork-growth predictions are confirmed (Table~\ref{tab:prediction-results}).
+
+\begin{table}[h]
+\centering
+\caption{Verification of the three pre-registered fork-growth predictions at $t_1$ = 2026-05-21.}
+\label{tab:prediction-results}
+\begin{tabular}{llll}
+\toprule
+Prediction & Registered condition & Observed result & Verdict \\
+\midrule
+P1 & $\rho_S(\text{stars}, \text{FGR}) \leq 0$ & $\rho_S = -0.127$ & Confirmed \\
+P2 & LangChain FGR rank $\geq 6$ & Rank $6/10$ & Confirmed \\
+P3 & LiteLLM FGR $>$ LangChain FGR & $1.217 > 1.051$ & Confirmed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For P1, the one-sided permutation calibration gives $p \approx 0.368$. This is not a high-power correlation test; with $N=10$, the evidentiary value is directional and pre-registered rather than conventionally significant. The stronger evidence is the joint pattern: the visible quality leader fails to lead the growth distribution, while the baseline ecosystem leader beats it on the primary growth metric.
+
+\subsection{Fork-Growth Ranking}
+
+Table~\ref{tab:fgr-ranking} reports the primary verification ranking. LangChain, the $t_0$ quality-signal leader by stars, ranks sixth by fork growth. LiteLLM, the $t_0$ ecosystem-health leader, ranks first.
+
+\begin{table}[h]
+\centering
+\caption{Fork growth from 2026-03-26 to 2026-05-21.}
+\label{tab:fgr-ranking}
+\begin{tabular}{lrrrr}
+\toprule
+Rank & Framework & Forks $t_0$ & Forks $t_1$ & FGR \\
+\midrule
+1 & LiteLLM        &  6,752 &  8,217 & 1.217 \\
+2 & PydanticAI     &  1,830 &  2,107 & 1.151 \\
+3 & CrewAI         &  6,385 &  7,182 & 1.125 \\
+4 & Mem0           &  5,717 &  6,411 & 1.121 \\
+5 & DSPy           &  2,728 &  2,913 & 1.068 \\
+6 & LangChain      & 21,601 & 22,704 & 1.051 \\
+7 & LlamaIndex     &  7,093 &  7,435 & 1.048 \\
+8 & Haystack       &  2,675 &  2,798 & 1.046 \\
+9 & AutoGen        &  8,453 &  8,792 & 1.040 \\
+10 & SemanticKernel &  4,523 &  4,602 & 1.017 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Supplemental EGR Check}
+
+The public markdown prediction additionally specified an EGR metric combining commit growth and fork growth. After recomputing 4-week commit counts from the GitHub commits API, PydanticAI is the only under-60k-star framework that beats LangChain on EGR at the verification date:
+\[
+\text{EGR}_{\text{PydanticAI}} = 1.978
+\quad > \quad
+\text{EGR}_{\text{LangChain}} = 1.314.
+\]
+Thus the EGR prediction is supported. However, LangChain ranks second by EGR, so the pre-registered ``top-3'' caution applies. This makes the EGR result weaker than the fork-growth result. The most reliable conclusion is not that LiteLLM had the highest relative growth on every metric; rather, the visible quality leader was not the best growth choice once hidden ecosystem-health dynamics were measured.
+
+As a holdout extension, the verification script also recomputes the same EGR metric through 2026-06-19. LangChain ranks third by EGR, with PydanticAI and Mem0 ahead. This post-verification extension is not part of the pre-registered test, but it shows that the direction of the EGR result did not immediately reverse.
+
+%% ================================================================
+\section{Limitations}
+%% ================================================================
+
+\begin{enumerate}
+\item \textbf{Small sample}: $N = 10$ frameworks limits the power of rank correlation tests against moderate alternatives.
+
+\item \textbf{LiteLLM's structural commit rate}: LiteLLM functions as an API proxy that interfaces with more than 100 LLM APIs. Each upstream API change requires a compatibility update. Its high commit count may reflect API churn rather than ecosystem health. Fork growth (the primary metric) is less susceptible to this concern.
+
+\item \textbf{Causal identification}: The three predictions hold, but the evidence is correlational. Alternative explanations include: (a) LangChain's maturity slowing development, (b) market saturation at the top, (c) LiteLLM serving a different niche (infrastructure vs.\ application framework). The C1--C2--C3 diagnostic provides necessary but not sufficient conditions for the Blackwell Dilemma.
+
+\item \textbf{Single ecosystem}: The AI framework market is a single realization. Cross-domain replication (e.g., cloud platforms, programming languages) would strengthen generalizability.
+
+\item \textbf{Incomplete baseline commit data}: At $t_0$, GitHub's commit-activity API was unavailable or unstable for several frameworks. The primary metric (fork growth) is unaffected. Supplemental EGR verification therefore recomputes commit counts from the GitHub commits API over explicit 28-day windows.
+
+\item \label{lim:rtm} \textbf{Growth-model dependence}: The regression-to-the-mean argument in Section~3.3 assumes proportional fork growth (percentage increments independent of base size). If fork growth is instead additive (constant absolute increments), the ratio metric FGR is mechanically negatively correlated with baseline forks, and hence with stars ($\rho_S(\text{stars}, \text{forks}) \approx 0.90$ in this sample). Under the additive model, observing $\rho_S < 0$ would not distinguish the Blackwell Dilemma from a pure size artifact. Verification at $t_1$ can adjudicate: if absolute fork increments are roughly proportional to $\text{forks}(t_0)$, the proportional model holds and the test is valid.
+\end{enumerate}
+
+%% ================================================================
+\section{Data and Replication}
+%% ================================================================
+
+All tracking data, verification outputs, and code are available in the repository:
+
+\begin{itemize}
+\item Daily snapshots: \texttt{data/snapshots.json}
+\item Tracking code: \texttt{tracker.py}
+\item Prediction status: \texttt{prediction\_status.md}
+\item Verification script: \texttt{verification/verify\_live\_prediction.py}
+\item Verification report: \texttt{verification/live\_prediction\_verification\_2026-05-21.md}
+\item Verification data: \texttt{verification/live\_prediction\_verification\_2026-05-21.json}
+\end{itemize}
+
+Data are collected daily via GitHub Actions and committed to the public repository.\footnote{Repository: \url{https://github.com/crabsatellite/blackwell-dilemma}}
+
+The raw pre-registered prediction (markdown format) is timestamped at $t_0$ = 2026-03-26 via git commit. The hypotheses were locked before any post-$t_0$ data were observed.
+
+\subsection*{Timeline}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Date & Event \\
+\midrule
+2026-03-26 & $t_0$: Baseline collected, prediction registered \\
+2026-03-27 & This note formalized \\
+2026-03-26--05-21 & Daily data collection (automated) \\
+2026-05-21 & $t_1$: Verification snapshot \\
+2026-06-19 & Verification script run; FGR and EGR results finalized \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%% ================================================================
+\section{Research Status}
+%% ================================================================
+
+This note is a formal research artifact accompanying \emph{Information Value Under Endogenous Feasibility}. Its role is narrower than the main paper: it records an out-of-sample prediction test of the C1--C2--C3 diagnostic in one real ecosystem. The result supports the diagnostic but should be cited as predictive empirical support, not as a proof of the Blackwell Dilemma theorem.
+
+\end{document}
