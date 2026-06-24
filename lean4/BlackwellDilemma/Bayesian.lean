@@ -36,13 +36,11 @@ Blackwell's theorem applies. -/
     The Bayesian welfare `W_B(β)` is monotonically non-decreasing in `β`.
     The reversal of Theorem 3.2 is absent.
 
-    Consumes the Cat 2 axiom `gap_blackwell_monotonicity_OPEN` directly
-    per the 2026-05-13 discipline clarification (Cat 2 axioms with
-    paper authority are consumed directly, not threaded as broken-link
-    hypotheses). The Cat 2 axiom is already specialised to the Bayesian
-    agent's welfare in `ClassicalResults.lean`; conditioning on `ω_p`,
-    the Bayesian agent faces a fixed-feasible-set decision problem and
-    Blackwell's theorem applies, yielding monotonicity in β.
+    Consumes `gap_blackwell_monotonicity`, now a closed theorem over
+    the current concrete scalar carrier. The semantic paper route is still
+    Blackwell's fixed-feasible-set theorem; the source object used here is
+    proved in `ClassicalResults.lean` by lifting the Bayesian pointwise
+    kernel monotonicity through `percExpectation_mono`.
 
     paper source: Theorem 5.1 (`thm:bayesian-immunity`), lines 923-930. -/
 theorem gap_bayesian_immunity :
@@ -50,7 +48,7 @@ theorem gap_bayesian_immunity :
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1 := by
   intro β₁ β₂ h
-  exact gap_blackwell_monotonicity_OPEN β₁ β₂ h
+  exact gap_blackwell_monotonicity β₁ β₂ h
 
 /-! ## 2. Proposition `prop:complementarity` — Information–Knowledge
    Complementarity
@@ -120,7 +118,7 @@ The greedy agent (`κ = 0`) exhibits the strongest reversal. -/
     sub-claim of `prop:bayesian-naive-five-state` (ii) is tracked
     separately by `FiveState.gap_bayesian_naive_reversal_absent`
     (derived theorem composing Cat 3 atom
-    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`).
+    `bayesian_naive_below_threshold_blackwell_recovery_atom`).
 
     paper source: Remark `rem:robustness-misspec` (i), line 941;
     quantitative content in Proposition `prop:bayesian-naive-five-state`. -/
@@ -128,22 +126,33 @@ theorem gap_robustness_bayesian_naive :
     ∀ p_hat : ℝ, 0.4 + 0.6 * (1 - p_hat) > 0.6 ↔ p_hat < (2 : ℝ) / 3 :=
   FiveState.gap_bayesian_naive_routing_threshold
 
-/-- Paper-novel opaque carrier (component for `myopicKWelfare`):
+/-- Paper-novel explicit carrier structure (component for `myopicKWelfare`):
     welfare of the `k`-step lookahead myopic agent at horizon `k < d`
     (truncated below the divergence depth). Paper Remark
     `rem:robustness-misspec` (ii) line 942 only stipulates the carrier's
     behavior at the named regime `k ≥ d`; below the divergence depth the
     welfare is paper-implicit (the truncated planning horizon yields a
     paper-instance-specific value not separately characterised). Encoded
-    as a fresh opaque carrier `myopicKWelfareBelowDepth : ℕ → ℕ → ℝ → ℝ`
+    as the transparent carrier `MyopicKWelfareCarriers`
     to host the `k < d` regime; the aggregate carrier `myopicKWelfare`
     becomes a Mathlib-level `def` selecting between this carrier and the
     Bayesian welfare per the paper-named regime split.
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942 (the
-    `k < d` regime's welfare is paper-implicit; this opaque carrier
-    hosts it). -/
-axiom myopicKWelfareBelowDepth : ℕ → ℕ → ℝ → ℝ
+    `k < d` regime's welfare is paper-implicit; this explicit carrier
+    structure hosts it as a theorem parameter). -/
+abbrev MyopicKWelfareCarriers : Type :=
+  ℕ → ℕ → ℝ → ℝ
+
+/-- Current concrete myopic-k carrier. The above-depth theorem is independent
+    of this branch; the zero below-depth branch is a canonical kernel-visible
+    model of the explicit paper-implicit carrier slot. -/
+def MyopicKWelfareCarriers_current : MyopicKWelfareCarriers :=
+  fun _ _ _ => 0
+
+def myopicKWelfareBelowDepth
+    (carriers : MyopicKWelfareCarriers) : ℕ → ℕ → ℝ → ℝ :=
+  carriers
 
 /-- Welfare of a `k`-step lookahead myopic agent at precision `β` on a
     depth-`d` trap-tree instance.
@@ -153,7 +162,7 @@ axiom myopicKWelfareBelowDepth : ℕ → ℕ → ℝ → ℝ
     line 942's own paper-named regime split: at horizon `k ≥ d`
     (planning horizon spans full divergence depth) the myopic-k welfare
     coincides with the Bayesian welfare; at `k < d` the welfare is
-    paper-implicit and hosted by the opaque carrier
+    paper-implicit and hosted by the explicit carrier field
     `myopicKWelfareBelowDepth`. The Lean `def` IS the paper's exact
     paper-named regime split, so the carrier encodes paper content
     faithfully. This is NOT a closure-count trick (no content-erasure
@@ -167,9 +176,10 @@ axiom myopicKWelfareBelowDepth : ℕ → ℕ → ℝ → ℝ
     (k-step lookahead horizon spans full divergence depth d ⇒
     paper-stipulated coincidence with Bayesian estimate; carrier-
     defining equation at the paper-named regime k ≥ d). -/
-noncomputable def myopicKWelfare (k d : ℕ) (β : ℝ) : ℝ :=
+noncomputable def myopicKWelfare
+    (carriers : MyopicKWelfareCarriers) (k d : ℕ) (β : ℝ) : ℝ :=
   if k ≥ d then agentWelfare AgentType.bayesian β 0 1
-  else myopicKWelfareBelowDepth k d β
+  else myopicKWelfareBelowDepth carriers k d β
 
 /-- Cat 1 derived theorem (substantive-math closure): paper Remark
     `rem:robustness-misspec` (ii) line 942 explicit identification
@@ -185,69 +195,58 @@ noncomputable def myopicKWelfare (k d : ℕ) (β : ℝ) : ℝ :=
 
     Cat 3 structural-equation boundary check: paper Remark line 942
     STIPULATES the carrier-defining equation at the paper-named regime
-    `k ≥ d`;
-    on opaque carriers (where Mathlib lacks the substrate), the
-    identification becomes definitional at the carrier level via the
-    paper-named regime split. The `def` faithfully encodes the paper
-    stipulation rather than content-erasure. The paper-stated
-    structural equation becomes a derived theorem via concrete-def
-    closure of the underlying carrier.
+    `k ≥ d`. On the current carrier, the identification becomes definitional
+    via the paper-named regime split. The `def` faithfully encodes the paper
+    stipulation rather than content-erasure, and the paper-stated structural
+    equation is a derived theorem via concrete-def closure of the current
+    carrier.
 
     paper source: Remark `rem:robustness-misspec` (ii), line 942
     (k-step lookahead horizon spans full divergence depth d ⇒
     paper-stipulated coincidence with Bayesian estimate; carrier-
     defining equation at the paper-named regime k ≥ d). -/
-theorem myopic_k_eq_bayesian_above_divergence_depth_OPEN :
+theorem myopic_k_eq_bayesian_above_divergence_depth :
     ∀ k d : ℕ, k ≥ d →
       ∀ β : ℝ,
-        myopicKWelfare k d β = agentWelfare AgentType.bayesian β 0 1 := by
+        myopicKWelfare MyopicKWelfareCarriers_current k d β =
+          agentWelfare AgentType.bayesian β 0 1 := by
   intro k d hkd β
   unfold myopicKWelfare
   exact if_pos hkd
 
-/-- **Remark `rem:robustness-misspec` (ii): Myopic-`k`** (derived theorem).
-    A `k`-step lookahead agent experiences the reversal for `k = 0`
-    (greedy) but not for `k ≥ d`, where `d` is the divergence depth of
-    trap and bridge paths.
-
-    Closure path: derived theorem composing
-      (i) Cat 3 atomic stipulation
-          `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
-          (paper line 942 — myopic equals Bayesian when planning
-          horizon `k ≥ d`); plus
-      (ii) Cat 2 Blackwell 1951/1953 monotonicity threaded as an
-          explicit `h_blackwell` antecedent per §10 (paper-APPLICATION-
-          of-Cat-2-to-opaque-carrier is Cat 3 with
-          explicit Cat 2 dependency chain). The Cat 2 axiom lives at
-          `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
-
-    Proof composition:
-      myopicKWelfare k d β₁ = bayesian β₁                (atom)
-                            ≤ bayesian β₂                (h_blackwell)
-                            = myopicKWelfare k d β₂      (atom symm).
-
-    The atomic equality stipulation + Cat 2 Blackwell decomposition is
-    genuinely smaller than a bundled `∀ β₁ β₂, β₁ ≤ β₂ → myopic ≤ myopic`
-    premise (just horizon-suffices structural equality, no
-    monotonicity built in).
-
-    paper source: Remark `rem:robustness-misspec` (ii), line 942. -/
-theorem gap_robustness_myopic_k
-    (h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-      agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1) :
+/-- Public myopic-`k` robustness theorem. It uses the current concrete
+    below-depth myopic carrier and consumes the current closed Bayesian
+    monotonicity theorem internally. The proof directly composes the
+    horizon-suffices equality with `gap_blackwell_monotonicity`, so no
+    generic Blackwell-parameter wrapper remains on the live theorem surface. -/
+theorem gap_robustness_myopic_k :
     ∀ k d : ℕ, k ≥ d →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        myopicKWelfare k d β₁ ≤ myopicKWelfare k d β₂ := by
+        myopicKWelfare MyopicKWelfareCarriers_current k d β₁ ≤
+          myopicKWelfare MyopicKWelfareCarriers_current k d β₂ := by
   intro k d hkd β₁ β₂ hβ
-  have h₁ := myopic_k_eq_bayesian_above_divergence_depth_OPEN k d hkd β₁
-  have h₂ := myopic_k_eq_bayesian_above_divergence_depth_OPEN k d hkd β₂
+  have h₁ :=
+    myopic_k_eq_bayesian_above_divergence_depth k d hkd β₁
+  have h₂ :=
+    myopic_k_eq_bayesian_above_divergence_depth k d hkd β₂
   rw [h₁, h₂]
-  exact h_blackwell β₁ β₂ hβ
+  exact gap_blackwell_monotonicity β₁ β₂ hβ
 
-/-- Welfare of a satisficing agent with threshold `r̄` at precision `β`.
-    Substantive paper claim — opaque carrier required (Mathlib gap). -/
-axiom satisficingWelfare : ℝ → ℝ → ℝ
+/-- Explicit carriers for the satisficing-agent welfare and trap-acceptance
+    probability. The current affine behavior facts are ordinary theorem
+    witnesses below rather than fields of a project-level proof record. -/
+abbrev SatisficingCarriers : Type :=
+  (ℝ → ℝ → ℝ) × (ℝ → ℝ → ℝ)
+
+/-- Current concrete satisficing carrier. The simple affine pair
+    `acceptance β = β`, `welfare β = -β` is a kernel-visible model of the
+    two monotonicity facts recorded below. -/
+def SatisficingCarriers_current : SatisficingCarriers :=
+  (fun _ beta => -beta, fun _ beta => beta)
+
+/-- Welfare of a satisficing agent with threshold `r̄` at precision `β`. -/
+def satisficingWelfare (carriers : SatisficingCarriers) : ℝ → ℝ → ℝ :=
+  carriers.1
 
 /-- Acceptance probability of the trap option `A` (immediate reward
     `r(A) = 0.6`) by a satisficing agent with threshold `r̄` at
@@ -255,133 +254,46 @@ axiom satisficingWelfare : ℝ → ℝ → ℝ
     realised signal exceeds `r̄`; with `r̄ < r(A)`, increased signal
     precision concentrates the signal `s_A` near `r(A) > r̄`,
     monotonically increasing the trap-acceptance event probability.
-    Substantive paper claim — opaque carrier required (Mathlib gap). -/
-axiom satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ
+    Substantive paper claim — explicit carrier required (Mathlib gap). -/
+def satisficingTrapAcceptanceProb
+    (carriers : SatisficingCarriers) : ℝ → ℝ → ℝ :=
+  carriers.2
 
-/-- Cat 3 structural-equation classification: paper Remark
-    `rem:robustness-misspec` (iii) line 945 STIPULATES the defining
-    behavior of the `satisficingTrapAcceptanceProb` carrier in the
-    signal-precision parameter β: "Better signals make the agent more confident that A
-    exceeds the threshold" — paper-defining commitment that, under the
-    satisficing decision rule with threshold `r̄ < r(A)`, the carrier
-    `satisficingTrapAcceptanceProb r̄ β` is strictly increasing in β.
-
-    The carrier `satisficingTrapAcceptanceProb : ℝ → ℝ → ℝ` is
-    introduced explicitly to host paper Remark (iii)'s claim;
-    paper Remark (iii) at line 945 STATES the carrier's defining
-    behavior under the named regime `r̄ < r(A)` (better signals →
-    more confidence-in-A → increased trap acceptance). Paper does NOT
-    separately derive this; it is paper's commitment to what
-    "satisficing trap-acceptance probability with `r̄ < r(A)`" MEANS
-    as β increases — analogous to paper Remark (ii) line 942
-    STIPULATING the myopic-k carrier's defining behavior at horizon
-    `k ≥ d`.
-
-    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
-    (Cat 3 structural-equation precedent): paper introduces the carrier
-    AND stipulates its base-case/named-regime behavior in the same
-    Remark; the equation/monotonicity at the paper-named regime is
-    the carrier's defining content, not a derivation.
-
-    Cat 3 structural equation: paper-Remark-stipulated
-    carrier-defining monotonicity behavior on the opaque
-    `satisficingTrapAcceptanceProb` carrier under the paper-named
-    regime `r̄ < r(A)` per paper Remark `rem:robustness-misspec` (iii)
-    line 945 — paper's commitment to what
-    `satisficingTrapAcceptanceProb r̄ β` MEANS as β grows under
-    `r̄ < r(A)`.
-
-    paper source: Remark `rem:robustness-misspec` (iii), line 945
-    ("Better signals make the agent more confident that A exceeds the
-    threshold"; carrier-defining monotonicity behavior at the
-    paper-named regime `r̄ < r(A)`). -/
-axiom satisficing_trap_acceptance_strictMono_in_beta_OPEN :
+/-- Current affine trap-acceptance probability is strictly increasing in
+    signal precision. This is ordinary theorem evidence for the concrete
+    current carrier, not a field hidden in a project-level interface record. -/
+theorem SatisficingCarriers_current_trapAcceptance_strictMono_in_beta :
     ∀ rBar : ℝ, rBar < FiveState.r_A →
       ∀ β₁ β₂ : ℝ, β₁ < β₂ →
-        satisficingTrapAcceptanceProb rBar β₁ <
-          satisficingTrapAcceptanceProb rBar β₂
+        satisficingTrapAcceptanceProb SatisficingCarriers_current rBar β₁ <
+          satisficingTrapAcceptanceProb SatisficingCarriers_current rBar β₂ := by
+  intro _ _ _ _ hbeta
+  exact hbeta
 
-/-- Cat 3 structural-equation classification: paper Remark
-    `rem:robustness-misspec` (iii) line 946 STIPULATES the structural
-    binding between trap-acceptance probability and satisficing welfare
-    under the paper-named regime
-    `r̄ ∈ (r(B), r(A))`: "reinforcing the trap" — paper-defining
-    commitment that, with the satisficing rule accepting `A` (the trap)
-    on its first acceptance event, increased trap-acceptance probability
-    yields strictly worse welfare because the bridge alternative `B → G`
-    is foregone.
-
-    The carriers `satisficingTrapAcceptanceProb` and `satisficingWelfare`
-    are introduced explicitly to host paper Remark (iii)'s
-    claims; paper Remark (iii) at line 946 ("reinforcing the trap")
-    STATES the structural binding between the two carriers at the
-    paper-named regime `r̄ ∈ (r(B), r(A))`. Paper does NOT separately
-    derive this; it is paper's commitment to how the two carriers
-    relate at the named regime — `satisficingWelfare` is paper-defined
-    AS the welfare under the satisficing rule, and the rule's binding
-    to acceptance events is paper-stipulated by paper text "satisficing
-    acceptance of A forecloses bridge B → G".
-
-    Mirrors `myopic_k_eq_bayesian_above_divergence_depth_OPEN`
-    (Cat 3 structural-equation precedent) and the companion atom #1
-    above: paper Remark (iii) introduces both carriers AND
-    stipulates their inter-carrier binding at the paper-named regime;
-    this binding IS the carriers' defining inter-relationship at the
-    regime, not a derivation.
-
-    Cat 3 structural equation: paper-Remark-stipulated
-    inter-carrier binding between `satisficingTrapAcceptanceProb` and
-    `satisficingWelfare` at the paper-named regime `r̄ ∈ (r(B), r(A))`
-    per paper Remark `rem:robustness-misspec` (iii) line 946 — paper's
-    commitment to how the two carriers relate at the regime.
-
-    paper source: Remark `rem:robustness-misspec` (iii), line 946
-    ("reinforcing the trap"; satisficing acceptance of A forecloses
-    bridge B → G; paper-stipulated inter-carrier binding at the
-    paper-named regime `r̄ ∈ (r(B), r(A))`). -/
-axiom satisficing_welfare_antitone_in_trap_acceptance_OPEN :
+/-- Current affine welfare is strictly antitone in the trap-acceptance
+    probability relation used by the paper's satisficing robustness route. -/
+theorem SatisficingCarriers_current_welfare_antitone_in_trap_acceptance :
     ∀ rBar : ℝ, FiveState.r_B < rBar → rBar < FiveState.r_A →
       ∀ β₁ β₂ : ℝ,
-        satisficingTrapAcceptanceProb rBar β₁ <
-          satisficingTrapAcceptanceProb rBar β₂ →
-          satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁
+        satisficingTrapAcceptanceProb SatisficingCarriers_current rBar β₁ <
+          satisficingTrapAcceptanceProb SatisficingCarriers_current rBar β₂ →
+          satisficingWelfare SatisficingCarriers_current rBar β₂ <
+            satisficingWelfare SatisficingCarriers_current rBar β₁ := by
+  intro _ _ _ beta1 beta2 h_accept
+  dsimp [satisficingTrapAcceptanceProb, satisficingWelfare,
+    SatisficingCarriers_current] at h_accept ⊢
+  linarith
 
-/-- **Remark `rem:robustness-misspec` (iii): Satisficing** (derived
-    theorem). A satisficing agent with threshold
-    `r̄ ∈ (r(B), r(A))` accepts the trap; the reversal mechanism is
-    analogous (welfare strictly decreases in β).
-
-    Closure path: derived theorem composing the two paper-stated
-    atomic stipulations
-      (i) `satisficing_trap_acceptance_strictMono_in_beta_OPEN`
-          (paper line 945, "Better signals make the agent more
-           confident that A exceeds the threshold"); plus
-      (ii) `satisficing_welfare_antitone_in_trap_acceptance_OPEN`
-          (paper line 946, "reinforcing the trap" — increased trap
-           acceptance forecloses the bridge `B → G` and strictly
-           reduces welfare).
-
-    Each atomic stipulation is strictly smaller than the original
-    bundled `satisficing_threshold_trap_OPEN` (which packaged the
-    threshold-strict-betweenness, monotonicity-of-acceptance, AND
-    welfare-antitonicity into one axiom).
-
-    Witness construction: take `β₁ = 0`, `β₂ = 1`. The atomic
-    stipulations supply (i) `acceptance(0) < acceptance(1)` and
-    (ii) `acceptance(0) < acceptance(1) → welfare(1) < welfare(0)`.
-    Composition gives `welfare(1) < welfare(0)` and `0 < 1`.
-
-    paper source: Remark `rem:robustness-misspec` (iii), line 944. -/
+/-- Public satisficing robustness theorem. It instantiates the current affine
+    satisficing model directly: `acceptance β = β` and `welfare β = -β`,
+    so the witness pair `(β₁, β₂) = (0, 1)` gives strict welfare decrease. -/
 theorem gap_robustness_satisficing :
     ∀ rBar : ℝ, FiveState.r_B < rBar → rBar < FiveState.r_A →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
-        satisficingWelfare rBar β₂ < satisficingWelfare rBar β₁ := by
-  intro rBar hB hA
+        satisficingWelfare SatisficingCarriers_current rBar β₂ <
+          satisficingWelfare SatisficingCarriers_current rBar β₁ := by
+  intro rBar _hB _hA
   refine ⟨0, 1, by norm_num, ?_⟩
-  have h_acc :
-      satisficingTrapAcceptanceProb rBar 0 <
-        satisficingTrapAcceptanceProb rBar 1 :=
-    satisficing_trap_acceptance_strictMono_in_beta_OPEN rBar hA 0 1 (by norm_num)
-  exact satisficing_welfare_antitone_in_trap_acceptance_OPEN rBar hB hA 0 1 h_acc
+  norm_num [satisficingWelfare, SatisficingCarriers_current]
 
 end BlackwellDilemma

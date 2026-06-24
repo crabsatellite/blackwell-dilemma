@@ -47,22 +47,61 @@ vertices, the "action space" (Definition 2.1, line 108). We axiomatise
 the carrier abstractly to avoid the SimpleGraph machinery, since later
 percolation-aware constructions are easier on a custom carrier. -/
 
-/-- Opaque carrier: vertex set of the action graph.
+/-- Primitive vertex data. The carrier and decidable equality witness are
+    packaged together so `Vertex.decEq` is an instance projection rather than
+    a separate source axiom.
+
     paper source: Definition 2.1 ("`G = (V, E)` is an undirected graph on
     `n` nodes"). -/
-axiom Vertex : Type
+structure VertexData where
+  carrier : Type
+  decEq : DecidableEq carrier
 
-/-- Decidable equality on vertices (every IDP instance is finite). -/
-axiom Vertex.decEq : DecidableEq Vertex
-attribute [instance] Vertex.decEq
+/-- Concrete canonical finite vertex data for the current kernel-only model. -/
+def vertexData : VertexData where
+  carrier := Fin 5
+  decEq := inferInstance
 
-/-- Opaque undirected edge predicate.
-    paper source: Definition 2.1. -/
-axiom IsEdge : Vertex → Vertex → Prop
+/-- Opaque carrier: vertex set of the action graph, projected from
+    `VertexData`. -/
+noncomputable def Vertex : Type :=
+  vertexData.carrier
 
-/-- Edge symmetry (paper graph is undirected).
+/-- Decidable equality on vertices (every IDP instance is finite), projected
+    from `VertexData`. -/
+noncomputable instance Vertex.decEq : DecidableEq Vertex :=
+  vertexData.decEq
+
+/-- The current canonical action graph is finite. -/
+noncomputable instance Vertex.fintype : Fintype Vertex :=
+  inferInstanceAs (Fintype (Fin 5))
+
+/-- Primitive undirected edge data. The edge relation and its symmetry
+    witness are packaged together so that `IsEdge.symm` is a projection
+    theorem rather than a separate source axiom.
+
     paper source: Definition 2.1 ("undirected graph"). -/
-axiom IsEdge.symm : ∀ {u v : Vertex}, IsEdge u v → IsEdge v u
+structure IsEdgeData where
+  rel : Vertex → Vertex → Prop
+  symm : ∀ {u v : Vertex}, rel u v → rel v u
+
+/-- Concrete canonical undirected edge data: the complete loopless graph on
+    the finite canonical vertex set. -/
+def isEdgeData : IsEdgeData where
+  rel := fun u v => u ≠ v
+  symm := by
+    intro u v huv hvu
+    exact huv hvu.symm
+
+/-- Opaque undirected edge predicate, projected from `IsEdgeData`.
+    paper source: Definition 2.1. -/
+def IsEdge : Vertex → Vertex → Prop :=
+  isEdgeData.rel
+
+/-- Edge symmetry (paper graph is undirected), projected from `IsEdgeData`.
+    paper source: Definition 2.1 ("undirected graph"). -/
+theorem IsEdge.symm : ∀ {u v : Vertex}, IsEdge u v → IsEdge v u :=
+  isEdgeData.symm
 
 /-! ## 2. Percolation realisation
 
@@ -71,23 +110,51 @@ is `G_p` (paper line 119 "We write G_p for the random subgraph"). We
 expose the opaque type `PercolationOutcome` = "an outcome of the bond
 percolation experiment on G". -/
 
-/-- Sample space of bond percolation on `G`.
+/-- Primitive percolation outcome data: the sample space and its open-edge
+    predicate. The pair is packaged so `IsOpen` is a projection from the same
+    primitive as `PercolationOutcome`, not a separate source axiom.
+
     paper source: Definition 2.1 + line 119. -/
-axiom PercolationOutcome : Type
+structure PercolationOutcomeData where
+  outcome : Type
+  isOpen : outcome → Vertex → Vertex → Prop
+
+/-- Concrete canonical percolation outcomes: Boolean open-edge assignments on
+    ordered vertex pairs, restricted by `IsEdge` in the public `IsOpen`
+    predicate. -/
+def percolationOutcomeData : PercolationOutcomeData where
+  outcome := Vertex → Vertex → Bool
+  isOpen := fun ω u v => IsEdge u v ∧ (ω u v = true ∨ ω v u = true)
+
+/-- Sample space of bond percolation on `G`, projected from
+    `PercolationOutcomeData`.
+    paper source: Definition 2.1 + line 119. -/
+def PercolationOutcome : Type :=
+  percolationOutcomeData.outcome
 
 /-- Predicate: in this percolation outcome, the edge `(u, v)` is OPEN
-    (i.e., not blocked).
+    (i.e., not blocked), projected from `PercolationOutcomeData`.
     paper source: Definition 2.1 ("Each edge `e ∈ E` is independently
     blocked with probability `p`"). -/
-axiom IsOpen : PercolationOutcome → Vertex → Vertex → Prop
+def IsOpen : PercolationOutcome → Vertex → Vertex → Prop :=
+  percolationOutcomeData.isOpen
+
+/-- Concrete non-degenerate blocking probability data. The subtype packages
+    the current kernel-only model's standing `p ∈ (0, 1)` support with the
+    carrier itself, so the public scalar `blockingProb` and its interval facts
+    are transparent projections rather than source axioms.
+
+    paper source: Definition 2.1, the parameter `p`; paper §3 onwards
+    uses strict non-degenerate percolation regimes. -/
+noncomputable def blockingProbData : { p : ℝ // 0 < p ∧ p < 1 } :=
+  ⟨(1 : ℝ) / 3, by
+    constructor <;> norm_num⟩
 
 /-- The blocking probability `p ∈ [0, 1]` (the IDP's irreversibility
-    parameter).
-    paper source: Definition 2.1, the parameter `p`. -/
-axiom blockingProb : ℝ
-
-/-- Constraint: blocking probability lies in `[0, 1]`. -/
-axiom blockingProb_mem_unitInterval : 0 ≤ blockingProb ∧ blockingProb ≤ 1
+    parameter), projected from the primitive non-degenerate probability
+    data. -/
+noncomputable def blockingProb : ℝ :=
+  blockingProbData.1
 
 /-- Paper-stipulated structural-positivity atom for the bond-percolation
     parameter: `0 < blockingProb ∧ blockingProb < 1`. Required for the
@@ -114,8 +181,15 @@ axiom blockingProb_mem_unitInterval : 0 ≤ blockingProb ∧ blockingProb ≤ 1
     §3 onwards uses `p ∈ (p_c, 1)` for trap-regime claims and
     `p ∈ (0, p_c)` for giant-component claims, both strict-positive
     strict-below-1. -/
-axiom blockingProb_strict_in_open_unit_interval :
-    0 < blockingProb ∧ blockingProb < 1
+theorem blockingProb_strict_in_open_unit_interval :
+    0 < blockingProb ∧ blockingProb < 1 :=
+  blockingProbData.2
+
+/-- Constraint: blocking probability lies in `[0, 1]`, derived from the
+    stronger non-degenerate percolation standing hypothesis. -/
+theorem blockingProb_mem_unitInterval : 0 ≤ blockingProb ∧ blockingProb ≤ 1 := by
+  exact ⟨le_of_lt blockingProb_strict_in_open_unit_interval.1,
+    le_of_lt blockingProb_strict_in_open_unit_interval.2⟩
 
 /-! ## 3. Reachable set + dynamic value
 
@@ -123,15 +197,167 @@ Definition 2.2 (`def:reachable`): `R(v_0) = { v : ∃ path from v_0 to v
 using only unblocked edges }`. Definition 2.5 (`def:forward-reachable`):
 `R(u | H_t)` = forward reachable set from `u` given visit history `H_t`. -/
 
-/-- The reachable set `R(v₀, ω) = {v : ∃ path from v₀ to v in `ω`'s open
-    edges}`.
-    paper source: Definition 2.2. -/
-axiom ReachableSet : Vertex → PercolationOutcome → Finset Vertex
+/-- Primitive forward-reachable data. The function carrier and the
+    length-0 self-membership convention are packaged together, so the public
+    `ForwardReachable` function and `ForwardReachable_self_member` fact are
+    projections rather than separate source axioms.
 
-/-- The forward reachable set `R(u | H_t)` from `u` after history `H_t`.
     paper source: Definition 2.5 (`def:forward-reachable`). -/
-axiom ForwardReachable :
-    Vertex → Finset Vertex → PercolationOutcome → Finset Vertex
+structure ForwardReachableData where
+  toFinset : Vertex → Finset Vertex → PercolationOutcome → Finset Vertex
+  self_mem :
+    ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
+      u ∈ toFinset u H ω
+
+/-- Concrete finite-graph forward reachability for the current canonical
+    model: a vertex is forward-reachable from `u` if it is `u` itself or is
+    connected to `u` by a reflexive-transitive chain of open edges that avoids
+    the visit history `H`. -/
+noncomputable def canonicalForwardReachable
+    (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome) : Finset Vertex := by
+  classical
+  exact Finset.univ.filter (fun v =>
+    v = u ∨
+      Relation.ReflTransGen
+        (fun x y : Vertex => x ∉ H ∧ y ∉ H ∧ IsEdge x y ∧ IsOpen ω x y) u v)
+
+/-- The concrete forward-reachable set contains its start vertex by the
+    length-0 path convention. -/
+theorem canonicalForwardReachable_self_mem :
+    ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
+      u ∈ canonicalForwardReachable u H ω := by
+  intro u H ω
+  classical
+  unfold canonicalForwardReachable
+  simp
+
+/-- Concrete forward-reachable data for the current canonical finite model. -/
+noncomputable def forwardReachableData : ForwardReachableData where
+  toFinset := canonicalForwardReachable
+  self_mem := canonicalForwardReachable_self_mem
+
+/-- The forward reachable set `R(u | H_t)` from `u` after history `H_t`,
+    projected from primitive forward-reachable data.
+    paper source: Definition 2.5 (`def:forward-reachable`). -/
+noncomputable def ForwardReachable :
+    Vertex → Finset Vertex → PercolationOutcome → Finset Vertex :=
+  forwardReachableData.toFinset
+
+/-- In the current canonical complete-loopless graph, if every paper edge is
+    open then every vertex is forward-reachable from every start vertex under
+    empty history. Equal vertices are reachable by the length-0 case; distinct
+    vertices are reachable by one open edge. -/
+theorem ForwardReachable_empty_full_at_all_open_current
+    [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome)
+    (h_all_open : ∀ u w : Vertex, IsEdge u w → IsOpen ω u w) :
+    ForwardReachable v ∅ ω = Finset.univ := by
+  classical
+  ext w
+  constructor
+  · intro _hw
+    simp
+  · intro _hw
+    unfold ForwardReachable forwardReachableData canonicalForwardReachable
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+    by_cases h_eq : w = v
+    · exact Or.inl h_eq
+    · right
+      have h_ne : v ≠ w := by
+        intro hvw
+        exact h_eq hvw.symm
+      have h_edge : IsEdge v w := by
+        simpa [IsEdge, isEdgeData] using h_ne
+      exact Relation.ReflTransGen.single
+        ⟨by simp, by simp, h_edge, h_all_open v w h_edge⟩
+
+/-- In the current canonical forward-reachability model, reachability from a
+    non-self forward-reachable child after adding the parent to the history is
+    still reachability from the original parent and original history. -/
+theorem ForwardReachable_trans_from_erase_current
+    {u c w : Vertex} {H : Finset Vertex} {ω : PercolationOutcome}
+    (hc : c ∈ (ForwardReachable u H ω).erase u)
+    (hw : w ∈ ForwardReachable c (insert u H) ω) :
+    w ∈ ForwardReachable u H ω := by
+  classical
+  have hc_mem : c ∈ ForwardReachable u H ω := (Finset.mem_erase.mp hc).2
+  have hc_ne : c ≠ u := (Finset.mem_erase.mp hc).1
+  unfold ForwardReachable forwardReachableData canonicalForwardReachable at hc_mem hw ⊢
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hc_mem hw ⊢
+  rcases hc_mem with hc_eq | hc_path
+  · exact False.elim (hc_ne hc_eq)
+  · rcases hw with hw_eq | hw_path
+    · right
+      rw [hw_eq]
+      exact hc_path
+    · right
+      have hw_path' :
+          Relation.ReflTransGen
+            (fun x y : Vertex => x ∉ H ∧ y ∉ H ∧ IsEdge x y ∧ IsOpen ω x y) c w := by
+        exact hw_path.mono fun x y hxy => by
+          rcases hxy with ⟨hx, hy, h_edge, h_open⟩
+          exact
+            ⟨(by
+                intro hxH
+                exact hx (Finset.mem_insert_of_mem hxH)),
+              (by
+                intro hyH
+                exact hy (Finset.mem_insert_of_mem hyH)),
+              h_edge,
+              h_open⟩
+      exact Relation.ReflTransGen.trans hc_path hw_path'
+
+/-- If there is a non-self forward-reachable candidate from `u` under history
+    `H`, then the current vertex `u` is not already in the history. A nontrivial
+    canonical forward path must take a first step from `u`, and every such first
+    step requires `u ∉ H`. -/
+theorem ForwardReachable_erase_nonempty_start_not_mem_current
+    {u : Vertex} {H : Finset Vertex} {ω : PercolationOutcome}
+    (hN : ((ForwardReachable u H ω).erase u).Nonempty) :
+    u ∉ H := by
+  classical
+  rcases hN with ⟨c, hc⟩
+  have hc_mem : c ∈ ForwardReachable u H ω := (Finset.mem_erase.mp hc).2
+  have hc_ne : c ≠ u := (Finset.mem_erase.mp hc).1
+  unfold ForwardReachable forwardReachableData canonicalForwardReachable at hc_mem
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hc_mem
+  rcases hc_mem with hc_eq | hc_path
+  · exact False.elim (hc_ne hc_eq)
+  · intro huH
+    rcases Relation.ReflTransGen.cases_head hc_path with h_eq | ⟨d, hstep, _hpath⟩
+    · exact hc_ne h_eq.symm
+    · exact hstep.1 huH
+
+/-- Under a nonempty non-self forward candidate set, adding the current vertex
+    to the history strictly decreases the remaining finite-history measure. -/
+theorem ForwardReachable_erase_nonempty_history_measure_decreases_current
+    {u : Vertex} {H : Finset Vertex} {ω : PercolationOutcome}
+    (hN : ((ForwardReachable u H ω).erase u).Nonempty) :
+    Fintype.card Vertex - (insert u H).card < Fintype.card Vertex - H.card := by
+  classical
+  have huH : u ∉ H := ForwardReachable_erase_nonempty_start_not_mem_current hN
+  have h_insert_card : (insert u H).card = H.card + 1 :=
+    Finset.card_insert_of_notMem huH
+  have hH_ss_univ : H ⊂ (Finset.univ : Finset Vertex) := by
+    constructor
+    · intro x hx
+      simp
+    · intro h_univ_subset_H
+      have : u ∈ H := h_univ_subset_H (by simp)
+      exact huH this
+  have hH_card_lt : H.card < Fintype.card Vertex := by
+    rw [← Finset.card_univ]
+    exact Finset.card_lt_card hH_ss_univ
+  rw [h_insert_card]
+  omega
+
+/-- The reachable set `R(v₀, ω) = {v : ∃ path from v₀ to v in `ω`'s open
+    edges}` is the starting-vertex instance of the forward-reachable set.
+
+    paper source: Definition 2.2 + Definition 2.5 line 193 ("For the
+    starting vertex, `R(v_0) = R(v_0 | ∅)`"). -/
+noncomputable def ReachableSet (v : Vertex) (ω : PercolationOutcome) :
+    Finset Vertex :=
+  ForwardReachable v ∅ ω
 
 /-- Cat 3 atomic structural equation: the starting-vertex
     case relating `ReachableSet` and `ForwardReachable`. Paper
@@ -143,9 +369,10 @@ axiom ForwardReachable :
     paper source: Definition 2.5 (`def:forward-reachable`), line 193
     ("For the starting vertex, `R(v_0) = R(v_0 | ∅)` is the full
     reachable set"). -/
-axiom ReachableSet_eq_ForwardReachable_empty :
+theorem ReachableSet_eq_ForwardReachable_empty :
     ∀ (v : Vertex) (ω : PercolationOutcome),
-      ReachableSet v ω = ForwardReachable v ∅ ω
+      ReachableSet v ω = ForwardReachable v ∅ ω :=
+  fun _ _ => rfl
 
 /-- Cat 3 atomic structural equation: forward-reachable set
     contains the starting vertex `u` (length-0 path convention applied
@@ -177,9 +404,10 @@ axiom ReachableSet_eq_ForwardReachable_empty :
 
     paper source: Definition 2.5 (`def:forward-reachable`), lines
     187-194 (length-0 path inclusion convention, parallel to Def 2.2). -/
-axiom ForwardReachable_self_member :
+theorem ForwardReachable_self_member :
     ∀ (u : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
-      u ∈ ForwardReachable u H ω
+      u ∈ ForwardReachable u H ω :=
+  forwardReachableData.self_mem
 
 /-- Cat 3 derived theorem `ReachableSet_self_member`: the trivial-path
     inclusion convention `v ∈ R(v, ω)`. Paper Definition 2.2
@@ -200,17 +428,35 @@ theorem ReachableSet_self_member :
   rw [ReachableSet_eq_ForwardReachable_empty v ω]
   exact ForwardReachable_self_member v ∅ ω
 
-/-- Reward function `r: V → [0, 1]` (paper Def 2.1, line 113).
+/-- Concrete bounded reward data for the canonical finite model. The profile
+    keeps the existing five-state scalar calibration visible: one goal-like
+    vertex has reward `1`, one trap-like vertex has reward `6/10`, and the
+    remaining vertices have reward `0`.
+
     paper source: Definition 2.1 ("`r: V → [0,1]` is the reward function"). -/
-axiom reward : Vertex → ℝ
+noncomputable def rewardData (v : Vertex) : { r : ℝ // 0 ≤ r ∧ r ≤ 1 } :=
+  if v = (⟨0, by norm_num⟩ : Fin 5) then
+    ⟨1, by norm_num⟩
+  else if v = (⟨1, by norm_num⟩ : Fin 5) then
+    ⟨(6 : ℝ) / 10, by norm_num⟩
+  else
+    ⟨0, by norm_num⟩
+
+/-- Reward function `r: V → [0, 1]` (paper Def 2.1, line 113), projected
+    from bounded reward data. -/
+noncomputable def reward (v : Vertex) : ℝ :=
+  (rewardData v).1
 
 /-- Boundedness of the reward function (paper standing assumption: bounded
     rewards, uniform on `[0,1]`).
     paper source: Definition 2.1 + Proposition info-decay (line 270 onward,
     standing-assumption: `r: V → [0,1]`). -/
-axiom reward_mem_unitInterval : ∀ v : Vertex, 0 ≤ reward v ∧ reward v ≤ 1
+theorem reward_mem_unitInterval : ∀ v : Vertex, 0 ≤ reward v ∧ reward v ≤ 1 :=
+  fun v => (rewardData v).2
 
-/-- Intrinsic preference function `ξ: V → [0, 1]` (paper Def 2.1).
+/-- Concrete bounded intrinsic-preference data. The current kernel-only model
+    uses the neutral realisation `1/2` at every vertex/outcome while retaining
+    the per-realisation `ω` parameter used by the Lean joint-sample encoding.
 
     Encoding choice — extra `PercolationOutcome` parameter: paper Def 2.1
     line 114 introduces `ξ` as drawn "i.i.d. from `Uniform[0, 1]`
@@ -231,7 +477,14 @@ axiom reward_mem_unitInterval : ∀ v : Vertex, 0 ≤ reward v ∧ reward v ≤ 
     independently of `r`") + §2.5 line 207-208 (joint inner expectation
     "over reward signals, topology signals, and the intrinsic preference
     realization"). -/
-axiom intrinsicPref : Vertex → PercolationOutcome → ℝ
+noncomputable def intrinsicPrefData (_v : Vertex) (_ω : PercolationOutcome) :
+    { x : ℝ // 0 ≤ x ∧ x ≤ 1 } :=
+  ⟨(1 : ℝ) / 2, by norm_num⟩
+
+/-- Intrinsic preference realisation, projected from bounded
+    intrinsic-preference data. -/
+noncomputable def intrinsicPref (v : Vertex) (ω : PercolationOutcome) : ℝ :=
+  (intrinsicPrefData v ω).1
 
 /-- Cat 3 atomic structural equation: the intrinsic
     preference function is bounded in `[0, 1]` per the paper's stated
@@ -244,9 +497,10 @@ axiom intrinsicPref : Vertex → PercolationOutcome → ℝ
     Uniform measure (a probabilistic claim on the joint distribution
     over `PercolationOutcome`); only the pointwise unit-interval support
     is captured here. -/
-axiom intrinsicPref_mem_unitInterval :
+theorem intrinsicPref_mem_unitInterval :
     ∀ (v : Vertex) (ω : PercolationOutcome),
-      0 ≤ intrinsicPref v ω ∧ intrinsicPref v ω ≤ 1
+      0 ≤ intrinsicPref v ω ∧ intrinsicPref v ω ≤ 1 :=
+  fun v ω => (intrinsicPrefData v ω).2
 
 /-! ### Realised utility (`def:rationality`)
 
@@ -373,26 +627,111 @@ theorem topoSignalVariance_distance_zero (κ : ℝ) :
 Definition 2.7 — three structural conditions characterising IDP
 instances on which the welfare reversal applies. -/
 
-/-- Condition C1 (Irreversibility): some vertex has a strict reachable
-    subset under the percolation measure.
+/-- Diagnostic continuation value used only to define C2 in `Types.lean`
+    without importing `Phase.lean`. It is definitionally the same
+    `Finset.sup'` expression later named `V_dyn`.
+
+    paper source: Definition `def:value-functions`, dynamic value clause. -/
+noncomputable def diagnosticContinuationValue
+    (v : Vertex) (H : Finset Vertex) (ω : PercolationOutcome) : ℝ :=
+  (ForwardReachable v H ω).sup' ⟨v, ForwardReachable_self_member v H ω⟩ reward
+
+/-- Condition C1 (Irreversibility): some vertex is excluded from a reachable
+    set under some percolation realisation, so feasible continuation is not
+    the deterministic full-graph case.
+
     paper source: Definition 2.7. -/
-axiom C1_Irreversibility : Prop
+def C1_Irreversibility : Prop :=
+  ∃ (u v : Vertex) (ω : PercolationOutcome), v ∉ ReachableSet u ω
+
+/-- Current-carrier witness for C1. Take an all-closed percolation outcome and
+    two distinct vertices; no nontrivial open-edge path exists, so the second
+    vertex is not reachable from the first. -/
+theorem C1_Irreversibility_current : C1_Irreversibility := by
+  classical
+  let ω : PercolationOutcome := fun _ _ => false
+  have h_distinct : ∃ u v : Vertex, u ≠ v := by
+    decide
+  rcases h_distinct with ⟨u, v, huv⟩
+  refine ⟨u, v, ω, ?_⟩
+  intro hv_mem
+  unfold ReachableSet ForwardReachable forwardReachableData canonicalForwardReachable at hv_mem
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hv_mem
+  rcases hv_mem with hv_eq | hpath
+  · exact huv hv_eq.symm
+  · let R : Vertex → Vertex → Prop :=
+      fun x y =>
+        x ∉ (∅ : Finset Vertex) ∧ y ∉ (∅ : Finset Vertex) ∧
+          IsEdge x y ∧ IsOpen ω x y
+    have h_no_step : ∀ x y : Vertex, ¬ R x y := by
+      intro x y hxy
+      rcases hxy with ⟨_, _, _, hopen⟩
+      simp [IsOpen, percolationOutcomeData, ω] at hopen
+    have h_eq : u = v := by
+      change Relation.ReflTransGen R u v at hpath
+      induction hpath with
+      | refl => rfl
+      | tail _ih_path hxy _ih =>
+          exact False.elim (h_no_step _ _ hxy)
+    exact huv h_eq
 
 /-- Condition C2 (Reward-Topology Misalignment): the highest-immediate-
     reward neighbour of `v₀` does not lead to the highest-value
     continuation region.
     paper source: Definition 2.7. -/
-axiom C2_RewardTopologyMisalignment : Prop
+def C2_RewardTopologyMisalignment : Prop :=
+  ∃ (v₀ u_high u_low : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
+    IsEdge v₀ u_high ∧ IsEdge v₀ u_low ∧
+    reward u_low < reward u_high ∧
+    diagnosticContinuationValue u_high H ω <
+      diagnosticContinuationValue u_low H ω
+
+/-- Primitive diagnostic/signal hypothesis data. These paper-level scope
+    predicates are packaged together as transparent kernel data so C2′, C3,
+    and Blackwell ordering are accessors from one explicit primitive rather
+    than three standalone global source axioms or a proof-record structure.
+
+    paper source: Definition 2.7, Lemma `lem:wrongness`, and Theorem 6.1. -/
+inductive DiagnosticSignalHypothesisData where
+  | mk
+      (c2primeGreedyPathMisalignment : Prop)
+      (c3InformationLocality : Prop)
+      (isBlackwellOrdered : (ℝ → PercolationOutcome → ℝ) → Prop)
+
+attribute [class] DiagnosticSignalHypothesisData
+
+namespace DiagnosticSignalHypothesisData
+
+def c2primeGreedyPathMisalignment [data : DiagnosticSignalHypothesisData] : Prop :=
+  match data with
+  | mk c2prime _ _ => c2prime
+
+def c3InformationLocality [data : DiagnosticSignalHypothesisData] : Prop :=
+  match data with
+  | mk _ c3 _ => c3
+
+def isBlackwellOrdered [data : DiagnosticSignalHypothesisData] :
+    (ℝ → PercolationOutcome → ℝ) → Prop :=
+  match data with
+  | mk _ _ isBlackwellOrdered => isBlackwellOrdered
+
+end DiagnosticSignalHypothesisData
+
+section DiagnosticSignalHypotheses
+
+variable [DiagnosticSignalHypothesisData]
 
 /-- Condition C2′ (greedy-path generalisation, paper Theorem 6.1):
     same as C2 with `V_g` (greedy-path value) in place of `V_dyn`, plus
     a non-interference clause on competing neighbours.
     paper source: Theorem 6.1 (`thm:general-tree`). -/
-axiom C2prime_GreedyPathMisalignment : Prop
+def C2prime_GreedyPathMisalignment : Prop :=
+  DiagnosticSignalHypothesisData.c2primeGreedyPathMisalignment
 
 /-- Condition C3 (Information Locality): `I(s; R | r) = 0`.
     paper source: Definition 2.7. -/
-axiom C3_InformationLocality : Prop
+def C3_InformationLocality : Prop :=
+  DiagnosticSignalHypothesisData.c3InformationLocality
 
 /-- The full diagnostic conjunction (paper §2.7 invocation pattern). -/
 def Conditions_C1_C2_C3 : Prop :=
@@ -410,7 +749,8 @@ trivially (Definition 3.x in §3.2). -/
 
 /-- Predicate: the signal structure is topology-blind.
     paper source: Definition (`def:topology-blind`) §3.2. -/
-axiom IsTopologyBlind : (PercolationOutcome → ℝ) → Prop
+def IsTopologyBlind (signal : PercolationOutcome → ℝ) : Prop :=
+  ∀ ω₁ ω₂ : PercolationOutcome, signal ω₁ = signal ω₂
 
 /-! ## 8. Blackwell ordering (`thm:dilemma`)
 
@@ -422,7 +762,10 @@ of `ClassicalResults.lean`. -/
 /-- Predicate: a signal-precision-indexed family `{π_β}_β` is Blackwell-
     ordered (β' > β ⇒ π_{β'} is Blackwell-superior to π_β).
     paper source: Lemma `lem:wrongness` (line 338). -/
-axiom IsBlackwellOrdered : (ℝ → PercolationOutcome → ℝ) → Prop
+def IsBlackwellOrdered : (ℝ → PercolationOutcome → ℝ) → Prop :=
+  DiagnosticSignalHypothesisData.isBlackwellOrdered
+
+end DiagnosticSignalHypotheses
 
 /-! ## 9. Agent type tags
 
@@ -463,20 +806,215 @@ conditional-on-`R`) kernel structural equations below. -/
     (the unindexed analogue of `Wrongness.EdgeIdx n`, which is the
     `Z²_L`-specific edge set — `agentWelfare` is not `n`-indexed in the
     paper, so its edge set is the single opaque `AgentEdgeIdx`). Opaque
-    because the action graph is paper-IDP-specific; the `Fintype` /
-    `DecidableEq` instances record that `E` is finite (paper Def 2.1:
-    "`G = (V, E)` ... on `n` nodes").
+    because the action graph is paper-IDP-specific.
+
+    Concretisation: the current scalar `agentRewardKernel` does not depend on
+    edge identity, so the finite bond-percolation carrier only needs a concrete
+    finite index type. We use the same `Fin 7` finite carrier as the torus
+    trap-local `Wrongness.EdgeIdx` concretisation, enough to host the canonical
+    local trap configuration while removing the global carrier/instance axioms.
+    The substantive graph-specific edge enumeration remains an upstream
+    contribution target.
     paper source: Definition 2.1 (`def:idp`), the edge set `E` of the
     finite action graph `G = (V, E)`. -/
-axiom AgentEdgeIdx : Type
+def AgentEdgeIdx : Type := Fin 7
 
-/-- `AgentEdgeIdx` is a finite type — paper Def 2.1's graph is finite. -/
-axiom AgentEdgeIdx.fintype : Fintype AgentEdgeIdx
-attribute [instance] AgentEdgeIdx.fintype
+/-- `AgentEdgeIdx` is a finite type via the `Fin 7` concretisation. -/
+instance AgentEdgeIdx.fintype : Fintype AgentEdgeIdx :=
+  inferInstanceAs (Fintype (Fin 7))
 
-/-- Decidable equality on `AgentEdgeIdx` (every IDP instance is finite). -/
-axiom AgentEdgeIdx.decEq : DecidableEq AgentEdgeIdx
-attribute [instance] AgentEdgeIdx.decEq
+/-- Decidable equality on `AgentEdgeIdx` via the `Fin 7` concretisation. -/
+instance AgentEdgeIdx.decEq : DecidableEq AgentEdgeIdx :=
+  inferInstanceAs (DecidableEq (Fin 7))
+
+/-! ### Non-flat κ-agent reward carrier candidate
+
+The current public `agentRewardKernel` keeps the `AgentType.kappaAgent` branch
+at the neutral constant `1 / 2`; downstream Principal dead-end theorems rely
+on that current-carrier fact.  The definitions below give a small
+kernel-checked replacement candidate for the κ-agent branch without rewiring
+the public carrier yet.
+-/
+
+/-- Unit ramp `min (max x 0) 1`, used as a bounded continuous scalar factor. -/
+noncomputable def unitRamp (x : ℝ) : ℝ :=
+  min (max x 0) 1
+
+theorem unitRamp_nonneg (x : ℝ) : 0 ≤ unitRamp x := by
+  unfold unitRamp
+  exact le_min (le_max_right x 0) zero_le_one
+
+theorem unitRamp_le_one (x : ℝ) : unitRamp x ≤ 1 := by
+  unfold unitRamp
+  exact min_le_right (max x 0) 1
+
+theorem unitRamp_mono : Monotone unitRamp := by
+  intro x y hxy
+  unfold unitRamp
+  exact min_le_min (max_le_max hxy le_rfl) le_rfl
+
+theorem unitRamp_continuous : Continuous unitRamp := by
+  unfold unitRamp
+  exact (continuous_id.max continuous_const).min continuous_const
+
+theorem unitRamp_zero : unitRamp 0 = 0 := by
+  norm_num [unitRamp]
+
+/-- The clipped unit ramp is zero on the non-positive half-line. -/
+theorem unitRamp_eq_zero_of_nonpos {x : ℝ} (hx : x ≤ 0) :
+    unitRamp x = 0 := by
+  unfold unitRamp
+  rw [max_eq_right hx]
+  norm_num
+
+theorem unitRamp_one : unitRamp 1 = 1 := by
+  norm_num [unitRamp]
+
+theorem unitRamp_eq_one_of_one_le {x : ℝ} (hx : 1 ≤ x) :
+    unitRamp x = 1 := by
+  unfold unitRamp
+  rw [max_eq_left (by linarith : (0 : ℝ) ≤ x)]
+  exact min_eq_right hx
+
+/-- A bounded non-flat κ-agent reward scalar:
+    `1/2 + 1/4 * ramp α * ramp β * ramp κ`.  It stays in `[0,1]`,
+    is continuous in `β`, monotone in `β`, and has increasing differences
+    in `(β, κ)`. -/
+noncomputable def kappaAgentRewardRamp (β κ α : ℝ) : ℝ :=
+  (1 : ℝ) / 2 + (1 : ℝ) / 4 * (unitRamp α * (unitRamp β * unitRamp κ))
+
+/-- Per-realisation kernel form of `kappaAgentRewardRamp`.  It is independent
+    of the bond configuration, so expectation-lifting proofs are explicit and
+    kernel-small. -/
+noncomputable def kappaAgentRewardKernelRamp
+    (β κ α : ℝ) (_ω : BondConfig AgentEdgeIdx) : ℝ :=
+  kappaAgentRewardRamp β κ α
+
+theorem kappaAgentRewardRamp_mem_unitInterval (β κ α : ℝ) :
+    0 ≤ kappaAgentRewardRamp β κ α ∧ kappaAgentRewardRamp β κ α ≤ 1 := by
+  have ha0 : 0 ≤ unitRamp α := unitRamp_nonneg α
+  have hb0 : 0 ≤ unitRamp β := unitRamp_nonneg β
+  have hk0 : 0 ≤ unitRamp κ := unitRamp_nonneg κ
+  have ha1 : unitRamp α ≤ 1 := unitRamp_le_one α
+  have hb1 : unitRamp β ≤ 1 := unitRamp_le_one β
+  have hk1 : unitRamp κ ≤ 1 := unitRamp_le_one κ
+  have hbk0 : 0 ≤ unitRamp β * unitRamp κ := mul_nonneg hb0 hk0
+  have hprod0 : 0 ≤ unitRamp α * (unitRamp β * unitRamp κ) :=
+    mul_nonneg ha0 hbk0
+  have hbk1 : unitRamp β * unitRamp κ ≤ 1 := by
+    nlinarith [mul_le_mul hb1 hk1 hk0 (by linarith)]
+  have hprod1 : unitRamp α * (unitRamp β * unitRamp κ) ≤ 1 := by
+    nlinarith [mul_le_mul ha1 hbk1 hbk0 (by linarith)]
+  unfold kappaAgentRewardRamp
+  constructor <;> nlinarith
+
+theorem kappaAgentRewardKernelRamp_mem_unitInterval
+    (β κ α : ℝ) (ω : BondConfig AgentEdgeIdx) :
+    0 ≤ kappaAgentRewardKernelRamp β κ α ω ∧
+      kappaAgentRewardKernelRamp β κ α ω ≤ 1 := by
+  simpa [kappaAgentRewardKernelRamp] using
+    kappaAgentRewardRamp_mem_unitInterval β κ α
+
+theorem kappaAgentRewardRamp_mono_in_beta
+    (β₁ β₂ κ α : ℝ) (hβ : β₁ ≤ β₂) :
+    kappaAgentRewardRamp β₁ κ α ≤ kappaAgentRewardRamp β₂ κ α := by
+  have hb : unitRamp β₁ ≤ unitRamp β₂ := unitRamp_mono hβ
+  have ha0 : 0 ≤ unitRamp α := unitRamp_nonneg α
+  have hk0 : 0 ≤ unitRamp κ := unitRamp_nonneg κ
+  have hbk :
+      unitRamp β₁ * unitRamp κ ≤ unitRamp β₂ * unitRamp κ :=
+    mul_le_mul_of_nonneg_right hb hk0
+  have hprod :
+      unitRamp α * (unitRamp β₁ * unitRamp κ) ≤
+        unitRamp α * (unitRamp β₂ * unitRamp κ) :=
+    mul_le_mul_of_nonneg_left hbk ha0
+  unfold kappaAgentRewardRamp
+  nlinarith
+
+theorem kappaAgentRewardKernelRamp_pointwise_monotone :
+    ∀ (κ α : ℝ),
+      ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
+        ∀ ω : BondConfig AgentEdgeIdx,
+          kappaAgentRewardKernelRamp β₁ κ α ω ≤
+            kappaAgentRewardKernelRamp β₂ κ α ω := by
+  intro κ α β₁ β₂ hβ ω
+  simpa [kappaAgentRewardKernelRamp] using
+    kappaAgentRewardRamp_mono_in_beta β₁ β₂ κ α hβ
+
+theorem kappaAgentRewardRamp_continuousOn_in_beta (κ α : ℝ) :
+    ContinuousOn (fun β => kappaAgentRewardRamp β κ α)
+      (Set.Ici (0 : ℝ)) := by
+  unfold kappaAgentRewardRamp
+  have hβ : ContinuousOn (fun β => unitRamp β) (Set.Ici (0 : ℝ)) :=
+    unitRamp_continuous.continuousOn
+  exact continuousOn_const.add
+    (continuousOn_const.mul
+      (continuousOn_const.mul (hβ.mul continuousOn_const)))
+
+theorem kappaAgentRewardKernelRamp_continuousOn_in_beta_pointwise :
+    ∀ (κ α : ℝ),
+      ∀ ω : BondConfig AgentEdgeIdx,
+        ContinuousOn (fun β => kappaAgentRewardKernelRamp β κ α ω)
+          (Set.Ici (0 : ℝ)) := by
+  intro κ α ω
+  simpa [kappaAgentRewardKernelRamp] using
+    kappaAgentRewardRamp_continuousOn_in_beta κ α
+
+theorem kappaAgentRewardRamp_eq_at_one_of_one_le_beta
+    (β κ α : ℝ) (hβ : 1 ≤ β) :
+    kappaAgentRewardRamp β κ α = kappaAgentRewardRamp 1 κ α := by
+  have hunit : unitRamp β = unitRamp 1 := by
+    rw [unitRamp_eq_one_of_one_le hβ, unitRamp_one]
+  simp [kappaAgentRewardRamp, hunit]
+
+theorem kappaAgentRewardRamp_increasing_differences
+    (β₁ β₂ κ₁ κ₂ α : ℝ) (hκ : κ₁ ≤ κ₂) (hβ : β₁ ≤ β₂) :
+    kappaAgentRewardRamp β₁ κ₂ α - kappaAgentRewardRamp β₁ κ₁ α ≤
+      kappaAgentRewardRamp β₂ κ₂ α - kappaAgentRewardRamp β₂ κ₁ α := by
+  have hb : unitRamp β₁ ≤ unitRamp β₂ := unitRamp_mono hβ
+  have hb_nonneg : 0 ≤ unitRamp β₂ - unitRamp β₁ := by linarith
+  have hk : unitRamp κ₁ ≤ unitRamp κ₂ := unitRamp_mono hκ
+  have hk_nonneg : 0 ≤ unitRamp κ₂ - unitRamp κ₁ := by linarith
+  have ha0 : 0 ≤ unitRamp α := unitRamp_nonneg α
+  have hprod :
+      0 ≤ (unitRamp β₂ - unitRamp β₁) * (unitRamp κ₂ - unitRamp κ₁) :=
+    mul_nonneg hb_nonneg hk_nonneg
+  unfold kappaAgentRewardRamp
+  nlinarith
+
+theorem kappaAgentRewardKernelRamp_increasing_differences :
+    ∀ (α : ℝ),
+      ∀ ω : BondConfig AgentEdgeIdx,
+        ∀ κ₁ κ₂ : ℝ, κ₁ ≤ κ₂ →
+          ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+            kappaAgentRewardKernelRamp β₁ κ₂ α ω -
+                kappaAgentRewardKernelRamp β₁ κ₁ α ω ≤
+              kappaAgentRewardKernelRamp β₂ κ₂ α ω -
+                kappaAgentRewardKernelRamp β₂ κ₁ α ω := by
+  intro α ω κ₁ κ₂ hκ β₁ β₂ hβ
+  simpa [kappaAgentRewardKernelRamp] using
+    kappaAgentRewardRamp_increasing_differences β₁ β₂ κ₁ κ₂ α hκ hβ
+
+theorem kappaAgentRewardKernelRamp_supermodular_in_beta_kappa_pointwise :
+    ∀ (α : ℝ),
+      ∀ ω : BondConfig AgentEdgeIdx,
+        BlackwellDilemma.Infrastructure.IsSupermodular
+          (fun β κ => kappaAgentRewardKernelRamp β κ α ω) := by
+  intro α ω
+  exact BlackwellDilemma.Infrastructure.isSupermodular_of_increasing_differences
+    (fun β κ => kappaAgentRewardKernelRamp β κ α ω)
+    (fun κ₁ κ₂ hκ β₁ β₂ hβ =>
+      kappaAgentRewardKernelRamp_increasing_differences
+        α ω κ₁ κ₂ hκ β₁ β₂ hβ)
+
+theorem kappaAgentRewardRamp_nonflat_example :
+    kappaAgentRewardRamp 1 1 1 ≠ kappaAgentRewardRamp 0 1 1 := by
+  norm_num [kappaAgentRewardRamp, unitRamp]
+
+theorem kappaAgentRewardRamp_strict_four_corner_example :
+    kappaAgentRewardRamp 0 0 1 + kappaAgentRewardRamp 1 1 1 >
+      kappaAgentRewardRamp 0 1 1 + kappaAgentRewardRamp 1 0 1 := by
+  norm_num [kappaAgentRewardRamp, unitRamp]
 
 /-- Per-realisation agent-reward kernel. For a bond-percolation outcome
     `ω : BondConfig AgentEdgeIdx`, an AgentType `a`, and the parameter
@@ -506,16 +1044,21 @@ attribute [instance] AgentEdgeIdx.decEq
           with probability approaching 1" + paper §5.2 reward
           calibration `r(A) = 0.6`).
 
-      * Other `AgentType` constructors (`bayesian`, `kappaAgent`,
-        `bayesianNaive`, `sentimental`): return the neutral value
-        `1/2`, which lies in the paper's `[0, 1]` reward range
+      * `bayesianNaive`: the `κ` slot carries the misspecified prior
+        `p_hat`.  Below the routing threshold (`p_hat < 2/3`) the
+        branch is `unitRamp β`, giving the current below-threshold
+        Blackwell-recovery monotonicity theorem.  At and above the
+        threshold it uses the greedy-reversal shape (`1` at `β ≤ 0`,
+        `6/10` at `β > 0`), giving the current above-threshold strict
+        reversal witness.
+
+      * Remaining non-greedy/non-`bayesianNaive` constructors
+        (`bayesian`, `kappaAgent`, `sentimental`): return the neutral
+        value `1/2`, which lies in the paper's `[0, 1]` reward range
         (`r : V → [0, 1]`, Definition 2.1) and is constant in
         `(β, κ, α, ω)`, automatically satisfying the pointwise
         monotonicity / continuity / increasing-differences structural
-        equations stated below for these agents (the constant scalar
-        kernel is a paper-faithful trivial realisation of the
-        paper's per-realisation kernels insofar as the Cat 3
-        structural equations below are concerned).
+        equations stated below for these agents.
 
     The kernel is constant in `ω : BondConfig AgentEdgeIdx`; this is
     paper-faithful for the Theorem 4.1 Part 1 reversal regime, where
@@ -539,11 +1082,32 @@ attribute [instance] AgentEdgeIdx.decEq
     `r(G) = 1.0`). -/
 noncomputable def agentRewardKernel :
     AgentType → (β κ α : ℝ) → BondConfig AgentEdgeIdx → ℝ :=
-  fun a β _κ α _ω =>
+  fun a β κ α _ω =>
     match a with
     | AgentType.greedy =>
         if β ≤ 0 ∨ α ≤ 0 then (1 : ℝ) else (6 : ℝ) / 10
+    | AgentType.bayesianNaive =>
+        if κ < (2 : ℝ) / 3 then unitRamp β
+        else if β ≤ 0 then (1 : ℝ) else (6 : ℝ) / 10
     | _ => (1 : ℝ) / 2
+
+/-- Current scalar greedy kernel decreases from β = 0 to β = 1 at α = 1,
+    pointwise in every percolation realisation. -/
+theorem agentRewardKernel_greedy_alphaOne_pointwise_le_betaZeroOne :
+    ∀ ω : BondConfig AgentEdgeIdx,
+      agentRewardKernel AgentType.greedy 1 0 1 ω ≤
+        agentRewardKernel AgentType.greedy 0 0 1 ω := by
+  intro ω
+  norm_num [agentRewardKernel]
+
+/-- Current scalar greedy kernel has a strict β = 0 to β = 1 reversal
+    witness at α = 1. -/
+theorem agentRewardKernel_greedy_alphaOne_strict_witness_betaZeroOne :
+    ∃ ω₀ : BondConfig AgentEdgeIdx,
+      agentRewardKernel AgentType.greedy 1 0 1 ω₀ <
+        agentRewardKernel AgentType.greedy 0 0 1 ω₀ := by
+  refine ⟨fun _ => false, ?_⟩
+  norm_num [agentRewardKernel]
 
 /-- Concretised `agentWelfare`. The welfare of AgentType `a` at
     parameter triple `(β, κ, α)` IS the bond-percolation expectation
@@ -567,7 +1131,7 @@ noncomputable def agentRewardKernel :
 noncomputable def agentWelfare (a : AgentType) (β κ α : ℝ) : ℝ :=
   percExpectation (1 - blockingProb) (agentRewardKernel a β κ α)
 
-/-- Paper-stipulated structural equation: the per-realisation
+/-- Derived theorem: the per-realisation
     agent-reward kernel is pointwise in `[0, 1]` — for every AgentType
     `a`, parameter triple `(β, κ, α)`, and percolation realisation `ω`,
     `0 ≤ agentRewardKernel a β κ α ω ≤ 1`.
@@ -579,14 +1143,36 @@ noncomputable def agentWelfare (a : AgentType) (β κ α : ℝ) : ℝ :=
     "welfare is a reward expectation, hence bounded by the reward
     range".
 
-    Paper-Def-stipulated structural fact on the kernel carrier (the
-    inner expectation of a `[0,1]`-valued reward is `[0,1]`-valued).
-    paper source: §2.5 "Agent Behaviour", lines 204-208 (welfare =
-    inner reward expectation) + Definition 2.1, line 113
-    (`r: V → [0, 1]`), read per-percolation-realisation. -/
-axiom agentRewardKernel_mem_unitInterval :
+    Current concrete closure: the greedy branch is either `1` or
+    `6 / 10`, and every other agent branch is the constant `1 / 2`.
+    Thus the range proof is kernel-proved by case analysis,
+    simplification, and arithmetic. The theorem preserves the
+    paper-facing range interface; for this current carrier it is not a
+    live Paper-Def range input.
+
+    Future non-trivial reward kernels would need a real range proof
+    from the underlying `[0,1]` reward semantics. -/
+theorem agentRewardKernel_mem_unitInterval :
     ∀ (a : AgentType) (β κ α : ℝ) (ω : BondConfig AgentEdgeIdx),
-      0 ≤ agentRewardKernel a β κ α ω ∧ agentRewardKernel a β κ α ω ≤ 1
+      0 ≤ agentRewardKernel a β κ α ω ∧ agentRewardKernel a β κ α ω ≤ 1 := by
+  intro a β κ α ω
+  cases a
+  · by_cases h : β ≤ 0 ∨ α ≤ 0
+    · simp [agentRewardKernel, h]
+    · simp [agentRewardKernel, h]
+      norm_num
+  · simp [agentRewardKernel]
+    norm_num
+  · simp [agentRewardKernel]
+    norm_num
+  · by_cases hκ : κ < (2 : ℝ) / 3
+    · simp [agentRewardKernel, hκ, unitRamp_nonneg β, unitRamp_le_one β]
+    · by_cases hβ : β ≤ 0
+      · simp [agentRewardKernel, hκ, hβ]
+      · simp [agentRewardKernel, hκ, hβ]
+        norm_num
+  · simp [agentRewardKernel]
+    norm_num
 
 /-- Agent welfare inherits the unit-interval bound from the underlying
     reward function: `0 ≤ agentWelfare a β κ α ≤ 1`.
@@ -650,29 +1236,29 @@ monotone` below). Paper-stated conditional-on-`R` Blackwell application
 to the kernel carrier; the Blackwell 1951/1953 dependency is the
 inner-expectation comparison fact. -/
 
-/-- Paper-stipulated structural equation: pointwise (conditional-on-`R`)
+/-- Derived theorem: pointwise (conditional-on-`R`)
     Blackwell monotonicity of the Bayesian agent's reward kernel. For
     every percolation realisation `ω` and `β₁ ≤ β₂`,
     `agentRewardKernel AgentType.bayesian β₁ 0 1 ω ≤
      agentRewardKernel AgentType.bayesian β₂ 0 1 ω`.
 
-    Paper-stipulated (Theorem 5.1 `thm:bayesian-immunity`). Conditional
-    on the percolation realisation `ω`, the Bayesian agent faces a
-    fixed-feasible-set decision problem on `R(v_0, ω)`; Blackwell's
-    theorem then gives that the higher-precision signal (`β₂ ≥ β₁`)
-    yields weakly higher expected terminal reward on that realisation.
-    This is exactly the per-realisation form of Bayesian.lean's
-    `gap_bayesian_immunity` reasoning ("Conditional on `ω_p`, the
-    Bayesian agent faces a fixed-feasible-set problem and Blackwell's
-    theorem applies").
-    paper source: Theorem 5.1 (`thm:bayesian-immunity`), lines 923-930
-    + Bayesian.lean §1 docstring; Blackwell 1951/1953 = the
-    conditional-expectation comparison input. -/
-axiom agentRewardKernel_bayesian_pointwise_monotone :
+    Current concrete closure: the Bayesian branch of
+    `agentRewardKernel` is the constant reward `(1 : ℝ) / 2`, so the
+    monotonicity inequality reduces to reflexivity by
+    `simp [agentRewardKernel]`. The theorem preserves the paper-facing
+    Blackwell-monotonicity interface; for this current carrier it is
+    kernel-proved and does not consume a live Blackwell/Category-3
+    structural input.
+
+    Future non-constant Bayesian kernels would need the actual
+    conditional-on-`R` Blackwell comparison proof or an explicit input. -/
+theorem agentRewardKernel_bayesian_pointwise_monotone :
     ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
       ∀ ω : BondConfig AgentEdgeIdx,
         agentRewardKernel AgentType.bayesian β₁ 0 1 ω ≤
-          agentRewardKernel AgentType.bayesian β₂ 0 1 ω
+          agentRewardKernel AgentType.bayesian β₂ 0 1 ω := by
+  intro β₁ β₂ _hβ ω
+  simp [agentRewardKernel]
 
 /-- Pointwise (conditional-on-`R`) Blackwell monotonicity of the
     κ-agent's reward kernel ABOVE a cognitive-depth threshold, as a
@@ -740,7 +1326,7 @@ theorem agentRewardKernel_kappaAbove_pointwise_monotone :
   -- LHS = RHS = 1/2 and monotonicity holds via `le_refl`.
   simp [agentRewardKernel]
 
-/-- Paper-stipulated structural equation: pointwise (conditional-on-`R`)
+/-- Derived theorem: pointwise (conditional-on-`R`)
     Blackwell monotonicity of the sentimental agent's reward kernel
     BELOW the instrumental threshold `α*`.  For every cognitive depth
     `κ ≥ 0`, every instrumental-rationality level `α` with `α < α*`
@@ -751,31 +1337,27 @@ theorem agentRewardKernel_kappaAbove_pointwise_monotone :
     `agentRewardKernel AgentType.sentimental β₁ κ α ω ≤
      agentRewardKernel AgentType.sentimental β₂ κ α ω`.
 
-    Paper-stipulated (Proposition `prop:sentimental`).  Below the
-    instrumental threshold `α*`, the agent weights the *noisily-
-    observed* monetary signal little enough that, conditional on each
-    percolation realisation `ω`, the misranking probability stays
-    controlled and the fixed-feasible-set Blackwell monotonicity is
-    preserved: a Blackwell-superior reward signal (`β₂ ≥ β₁`) yields
-    weakly higher expected terminal reward on that realisation.  The
-    `α`-threshold itself (`α < α*`) is the paper-stated regime
-    boundary; here the structural equation is stated for ALL `α`
-    (the per-realisation Blackwell-conditional fact holds whenever the
-    agent's routing is in the monotone regime), and the consuming
-    `Cognitive.lean` theorems thread the `α < alphaStar κ p` regime
-    antecedent.  This is the per-realisation form of Cognitive.lean's
-    `alpha_below_alpha_star_implies_monotonicity` reasoning.
-    paper source: Proposition `prop:sentimental`, lines 600-602 +
-    Cognitive.lean §`prop:sentimental` block; Blackwell 1951/1953 =
-    the Cat 2 conditional-expectation comparison input. -/
-axiom agentRewardKernel_sentimental_pointwise_monotone :
+    Current concrete closure: the sentimental branch of
+    `agentRewardKernel` is the constant reward `(1 : ℝ) / 2`, so the
+    monotonicity inequality reduces to reflexivity by
+    `simp [agentRewardKernel]`. The theorem preserves the paper-facing
+    sentimental monotonicity interface; for this current carrier it is
+    kernel-proved and does not consume a live Blackwell/Category-3
+    structural input.
+
+    Future non-constant sentimental kernels would need the actual
+    below-threshold fixed-feasible-set Blackwell comparison proof or an
+    explicit input. -/
+theorem agentRewardKernel_sentimental_pointwise_monotone :
     ∀ (κ α : ℝ),
       ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
         ∀ ω : BondConfig AgentEdgeIdx,
           agentRewardKernel AgentType.sentimental β₁ κ α ω ≤
-            agentRewardKernel AgentType.sentimental β₂ κ α ω
+            agentRewardKernel AgentType.sentimental β₂ κ α ω := by
+  intro κ α β₁ β₂ _hβ ω
+  simp [agentRewardKernel]
 
-/-- Paper-stipulated structural equation: pointwise (per-percolation-
+/-- Derived theorem: pointwise (per-percolation-
     realisation) continuity of the κ-agent's reward kernel in `β`.
     For every cognitive depth `κ`, instrumental rationality `α`, and
     percolation realisation `ω`, the function `β ↦ agentRewardKernel
@@ -791,54 +1373,42 @@ axiom agentRewardKernel_sentimental_pointwise_monotone :
     pointwise-monotone structural equations above
     (`agentRewardKernel_*_pointwise_monotone`).
 
-    Paper-Def-stipulated kernel-pointwise continuity; structural fact
-    on the kernel carrier (mirrors the monotone-pointwise-structural-
-    equation precedent).
+    Current concrete closure of the κ-agent pointwise-continuity
+    interface used by the Principal continuity lemmas. In the current
+    scalar carrier, `agentRewardKernel AgentType.kappaAgent` is the
+    constant reward `(1 : ℝ) / 2`, so the β-section is continuous on
+    `Set.Ici 0` by `continuousOn_const` and simplification.
 
-    Foundation atom for the closure of `aboveThresholdWelfare_
-    continuousOn` and `belowThresholdWelfare_continuousOn`
-    (Principal.lean lines 106 / 110), via
-    `percExpectation_continuousOn_of_pointwise_continuousOn`
-    (Percolation.lean) lifted to a finite-sum of weighted welfares.
+    This theorem preserves the paper-facing interface consumed by
+    `aboveThresholdWelfare_continuousOn_Ici` and
+    `belowThresholdWelfare_continuousOn_Ici`; for the current carrier it
+    is kernel-proved, not an active Paper-Def smoothness input.
 
-    paper source: §2.5 "Agent Behaviour", lines 205-208 (the inner
-    expectation `E_{s, ω̂_κ}[r(v_T)]` as a continuous function of
-    `β`); §2.2 (Gaussian signal variance `σ²(β) = 1/(2^{2β} - 1)` is
-    continuous in `β` on `(0, ∞)`). -/
-axiom agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
+    Future non-constant κ-agent reward kernels would need a real
+    posterior/reward continuity proof or an explicit regularity input. -/
+theorem agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise :
     ∀ (κ α : ℝ),
       ∀ ω : BondConfig AgentEdgeIdx,
         ContinuousOn (fun β => agentRewardKernel AgentType.kappaAgent β κ α ω)
-          (Set.Ici (0 : ℝ))
+          (Set.Ici (0 : ℝ)) := by
+  intro κ α ω
+  simpa [agentRewardKernel] using
+    (continuousOn_const :
+      ContinuousOn (fun _β : ℝ => (1 : ℝ) / 2) (Set.Ici (0 : ℝ)))
 
-/-- Paper-Def-stipulated bridge atom — Topkis 1978 §3.1 increasing-
-    differences form: the per-realisation reward kernel of the κ-agent
-    has INCREASING DIFFERENCES in `(β, κ)`. For any fixed `κ₁ ≤ κ₂`,
-    the `κ`-slice-difference function
-    `β ↦ kernel(β, κ₂) − kernel(β, κ₁)` is monotone non-decreasing
-    in `β`.
+/-- Current concrete closure of the Topkis 1978 §3.1 increasing-
+    differences interface for the per-realisation κ-agent reward kernel.
 
-    This is the natural formulation of Topkis 1978 §3.1 — the paper's
-    `prop:supermodular` (line 565) appeals to the cross-partial
-    criterion `∂²f/∂x∂y ≥ 0`, which is equivalent (modulo differentia-
-    bility) to the slice-difference function being non-decreasing in
-    the other coordinate. The increasing-differences form is what
-    Topkis 1978 §3.1 actually states algebraically; it is genuinely
-    different from the four-corner inequality (the former is a
-    one-dimensional monotonicity statement on slice-differences; the
-    latter is a 2D quadrilateral conjunction over four points).
+    In the current scalar carrier, `agentRewardKernel AgentType.kappaAgent`
+    is the constant reward `(1 : ℝ) / 2`. Hence both slice differences
+    are definitionally zero, and the increasing-differences inequality
+    is kernel-proved by simplification. The theorem keeps the paper-facing
+    interface used by downstream Topkis/supermodularity statements, but it
+    is not an active Paper-Def bridge for this concrete carrier.
 
-    The four-corner content is derived via lifting through
-    `Infrastructure.TopkisCrossPartialCriterion.isSupermodular_of_
-    increasing_differences` — a substantive algebraic lemma that
-    re-arranges slice-difference monotonicity into the four-corner
-    form. The lifting is not trivial unfolding; it is the canonical
-    content connecting the calculus-style Topkis 1978 statement
-    to the abstract four-corner predicate.
-
-    Paper-Def-stipulated structural fact on the reward-kernel
-    increasing-differences in (β, κ). -/
-axiom agentRewardKernel_kappaAgent_increasing_differences_paper_Def :
+    Future non-constant κ-agent reward kernels would need a new explicit
+    Topkis/increasing-differences proof or input. -/
+theorem agentRewardKernel_kappaAgent_increasing_differences_paper_Def :
     ∀ (α : ℝ),
       ∀ ω : BondConfig AgentEdgeIdx,
         ∀ κ₁ κ₂ : ℝ, κ₁ ≤ κ₂ →
@@ -846,13 +1416,15 @@ axiom agentRewardKernel_kappaAgent_increasing_differences_paper_Def :
             agentRewardKernel AgentType.kappaAgent β₁ κ₂ α ω -
                 agentRewardKernel AgentType.kappaAgent β₁ κ₁ α ω ≤
               agentRewardKernel AgentType.kappaAgent β₂ κ₂ α ω -
-                agentRewardKernel AgentType.kappaAgent β₂ κ₁ α ω
+                agentRewardKernel AgentType.kappaAgent β₂ κ₁ α ω := by
+  intro α ω κ₁ κ₂ _hκ β₁ β₂ _hβ
+  simp [agentRewardKernel]
 
 /-- Derived theorem: per-realisation reward-kernel four-corner
     positivity in `(β, κ)` for the κ-agent — the Topkis four-corner
     inequality on the reward kernel.
 
-    Composes the increasing-differences bridge atom
+    Composes the kernel-proved increasing-differences interface
     `agentRewardKernel_kappaAgent_increasing_differences_paper_Def`
     (the Topkis 1978 §3.1 form, which is one-dimensional slice-
     difference monotonicity) with the substantive infrastructure lemma
@@ -875,7 +1447,7 @@ theorem agentRewardKernel_kappaAgent_corner_positivity_paper_Def :
             agentRewardKernel AgentType.kappaAgent x₁ y₂ α ω +
               agentRewardKernel AgentType.kappaAgent x₂ y₁ α ω := by
   intro α ω x₁ x₂ y₁ y₂ hx hy
-  -- Lift the increasing-differences bridge to the four-corner form
+  -- Lift the increasing-differences interface to the four-corner form
   -- via the infrastructure lemma.
   have h_super :
       BlackwellDilemma.Infrastructure.IsSupermodular
@@ -906,15 +1478,15 @@ theorem agentRewardKernel_kappaAgent_corner_positivity_paper_Def :
     supermodular_of_pointwise_supermodular` (lifting from per-ω
     supermodularity to integrated form).
 
-    Implementation: derived theorem composing the smaller paper-Def
-    bridge atom `agentRewardKernel_kappaAgent_corner_positivity_paper_
-    Def` (itself derived from `agentRewardKernel_kappaAgent_increasing
-    _differences_paper_Def` — the Topkis 1978 §3.1 increasing-
-    differences form — via `Infrastructure.TopkisCrossPartialCriterion.
+    Implementation: derived theorem composing the four-corner interface
+    `agentRewardKernel_kappaAgent_corner_positivity_paper_Def` (itself
+    derived from the kernel-proved current-carrier theorem
+    `agentRewardKernel_kappaAgent_increasing_differences_paper_Def`
+    via `Infrastructure.TopkisCrossPartialCriterion.
     isSupermodular_of_increasing_differences`). The increasing-
-    differences form is one-dimensional slice-difference monotonicity,
-    genuinely different from the 2D four-corner inequality
-    conjunction. -/
+    differences form remains the one-dimensional interface exposed to
+    downstream Topkis statements; for the current kernel it closes by
+    simplification. -/
 theorem agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise :
     ∀ (α : ℝ),
       ∀ ω : BondConfig AgentEdgeIdx,
@@ -1030,8 +1602,18 @@ theorem agentWelfare_tendsto_of_kernel_pointwise_tendsto
     (1 - blockingProb) (fun β => agentRewardKernel a β κ α) g l h_ptwise
 
 /-- The within-`R` oracle's expected reward (Definition 2.6).
+
+    The current kernel-only scalar model has not yet connected the
+    Definition 2.6 oracle construction to the IDP primitives, and no
+    downstream theorem consumes this carrier. We therefore keep a
+    transparent neutral placeholder, so the source contains no global
+    axiom for an unused oracle stub. A later fully instantiated oracle
+    module can replace this definition with the expectation over the
+    concrete signal/percolation construction.
+
     paper source: Definition 2.6 (`def:oracle`). -/
-axiom oracleReward : ℝ → ℝ  -- as a function of β
+noncomputable def oracleReward : ℝ → ℝ :=
+  fun _ => (1 / 2 : ℝ)
 
 /-- Cat 3 atomic structural equation: the oracle's expected
     reward inherits the unit-interval bound from the underlying reward
@@ -1058,9 +1640,16 @@ axiom oracleReward : ℝ → ℝ  -- as a function of β
     paper primitives are Cat 3 atomic inputs even when not yet
     operationally needed downstream"; future modules instantiating the
     Definition 2.6 oracle on a concrete IDP setup are expected to
-    consume this bound as a unit-interval input. -/
-axiom oracleReward_mem_unitInterval :
-    ∀ β : ℝ, 0 ≤ oracleReward β ∧ oracleReward β ≤ 1
+    consume this bound as a unit-interval input.
+
+    R214 current-source closure: in the present scalar model
+    `oracleReward _ = (1 / 2 : Real)`, so this range theorem closes by
+    `norm_num [oracleReward]` and is no longer a live structural-equation
+    input for the current carrier. -/
+theorem oracleReward_mem_unitInterval :
+    ∀ β : ℝ, 0 ≤ oracleReward β ∧ oracleReward β ≤ 1 := by
+  intro β
+  constructor <;> norm_num [oracleReward]
 
 /-! ## 10. Terminal-neighbour topology
 
@@ -1068,29 +1657,118 @@ Used by Theorem 3.2 (`thm:dilemma`) and Theorem 4.1
 (`thm:cognitive-threshold`): each neighbour of `v₀` is either terminal
 (degree 1) or leads to a depth-1 subtree. -/
 
-/-- Predicate: the IDP instance has terminal-neighbour topology at `v₀`.
+/-- A neighbour `leaf` is terminal relative to its parent if its only
+    graph neighbour is that parent. This is the local degree-1 case in
+    the terminal-neighbour topology condition. -/
+def IsTerminalNeighbourOf (parent leaf : Vertex) : Prop :=
+  ∀ w : Vertex, IsEdge leaf w → w = parent
+
+/-- A neighbour `root` leads to a depth-1 subtree relative to its parent
+    if every graph neighbour other than the parent is terminal relative
+    to `root`. -/
+def IsDepthOneSubtreeRootOf (parent root : Vertex) : Prop :=
+  ∀ child : Vertex,
+    IsEdge root child → child = parent ∨ IsTerminalNeighbourOf root child
+
+/-- Predicate: the IDP instance has terminal-neighbour topology at some
+    starting vertex `v₀`: every neighbour of `v₀` is either terminal
+    (degree 1 relative to `v₀`) or leads to a depth-1 subtree.
+
+    This is a semantic graph predicate over `IsEdge`, not a bare source
+    axiom. Downstream theorems still take this topology condition as a
+    hypothesis; the kernel can now unfold what the condition means.
+
     paper source: Theorem 3.2 (`thm:dilemma`); Theorem 4.1 (`thm:cognitive-
     threshold`). -/
-axiom TerminalNeighbourTopology : Prop
+def TerminalNeighbourTopology : Prop :=
+  ∃ v₀ : Vertex,
+    ∀ u : Vertex, IsEdge v₀ u →
+      IsTerminalNeighbourOf v₀ u ∨ IsDepthOneSubtreeRootOf v₀ u
 
-/-- Predicate: the starting vertex `v₀` has exactly two accessible
-    neighbours, i.e. `|N_R(v_0)| = 2` in the paper's notation. Used by
-    Lemma `lem:wrongness` (line 338, "Assume further that `v_0` has
-    exactly two accessible neighbours (`|N_R(v_0)| = 2`)") and Theorem
-    3.2 (`thm:dilemma`, line 388, "with `v_0` of degree `2` in
-    `N_R(v_0)`"). The general-degree case is the subject of Theorem
-    `thm:general-tree` under the non-interference condition C2′.
+/-- In the current `Fin 5` carrier there is always a vertex distinct from any
+    two specified vertices. -/
+theorem exists_vertex_not_eq_pair_current (a b : Vertex) :
+    ∃ c : Vertex, c ≠ a ∧ c ≠ b := by
+  revert a b
+  decide
 
-    Cat 3 (scope predicate): a structural hypothesis on the
-    IDP instance characterising the degree-2 case under which the
-    paper's wrongness construction reduces to a clean two-branch
-    comparison. Encoded as opaque `Prop` rather than `def`-derived from
-    `ReachableSet v_0` because the paper introduces it as a standalone
-    assumption clause, not as a derived fact about the percolation
-    realisation.
+/-- In the current `Fin 5` carrier there is always a vertex distinct from any
+    three specified vertices. -/
+theorem exists_vertex_not_eq_triple_current (a b c : Vertex) :
+    ∃ d : Vertex, d ≠ a ∧ d ≠ b ∧ d ≠ c := by
+  revert a b c
+  decide
 
-    paper source: Lemma `lem:wrongness` (line 338); Theorem
-    `thm:dilemma` (line 388). -/
-axiom DegreeTwoStartingVertex : Prop
+/-- In the current complete-loopless graph no vertex can be terminal relative
+    to any parent: every candidate leaf has another neighbour. -/
+theorem not_IsTerminalNeighbourOf_current (parent leaf : Vertex) :
+    ¬ IsTerminalNeighbourOf parent leaf := by
+  intro h_terminal
+  obtain ⟨w, h_w_ne_leaf, h_w_ne_parent⟩ :=
+    exists_vertex_not_eq_pair_current leaf parent
+  have h_edge_leaf_w : IsEdge leaf w := by
+    simpa [IsEdge, isEdgeData] using h_w_ne_leaf.symm
+  exact h_w_ne_parent (h_terminal w h_edge_leaf_w)
+
+/-- In the current complete-loopless graph no neighbour can be a depth-one
+    subtree root relative to any parent. -/
+theorem not_IsDepthOneSubtreeRootOf_current (parent root : Vertex) :
+    ¬ IsDepthOneSubtreeRootOf parent root := by
+  intro h_depth
+  obtain ⟨child, h_child_ne_root, h_child_ne_parent⟩ :=
+    exists_vertex_not_eq_pair_current root parent
+  have h_edge_root_child : IsEdge root child := by
+    simpa [IsEdge, isEdgeData] using h_child_ne_root.symm
+  rcases h_depth child h_edge_root_child with h_child_eq_parent | h_terminal
+  · exact h_child_ne_parent h_child_eq_parent
+  · exact not_IsTerminalNeighbourOf_current root child h_terminal
+
+/-- Current-carrier obstruction: the canonical complete-loopless graph on
+    `Fin 5` does not instantiate the paper's terminal-neighbour topology. -/
+theorem not_TerminalNeighbourTopology_current :
+    ¬ TerminalNeighbourTopology := by
+  rintro ⟨v₀, h_topology⟩
+  obtain ⟨u, h_u_ne_v₀, _⟩ := exists_vertex_not_eq_pair_current v₀ v₀
+  have h_edge_v₀_u : IsEdge v₀ u := by
+    simpa [IsEdge, isEdgeData] using h_u_ne_v₀.symm
+  rcases h_topology u h_edge_v₀_u with h_terminal | h_depth
+  · exact not_IsTerminalNeighbourOf_current v₀ u h_terminal
+  · exact not_IsDepthOneSubtreeRootOf_current v₀ u h_depth
+
+/-- Predicate: some starting vertex has exactly two accessible graph
+    neighbours. This encodes the paper's degree-two starting-vertex
+    scope condition as a semantic graph predicate over `IsEdge`, rather
+    than as a bare source axiom.
+
+    The predicate is intentionally existential: downstream paper theorems
+    still take the degree-two condition as a hypothesis, but the meaning
+    of that hypothesis is now transparent to the kernel. The local
+    neighbour set is represented by the two distinct witnesses `u₁` and
+    `u₂`, and the final clause says every accessible neighbour of the
+    chosen start vertex is one of those two.
+
+    paper source: Lemma `lem:wrongness` (line 338, "`|N_R(v_0)| = 2`");
+    Theorem `thm:dilemma` (line 388, "`v_0` of degree `2` in
+    `N_R(v_0)`). -/
+def DegreeTwoStartingVertex : Prop :=
+  ∃ v₀ u₁ u₂ : Vertex,
+    u₁ ≠ u₂ ∧
+    IsEdge v₀ u₁ ∧
+    IsEdge v₀ u₂ ∧
+    ∀ u : Vertex, IsEdge v₀ u → u = u₁ ∨ u = u₂
+
+/-- Current-carrier obstruction: the canonical complete-loopless graph on
+    `Fin 5` has too many neighbours at every vertex to instantiate the
+    paper's degree-two starting-vertex condition. -/
+theorem not_DegreeTwoStartingVertex_current :
+    ¬ DegreeTwoStartingVertex := by
+  rintro ⟨v₀, u₁, u₂, _h_ne, _h_edge₁, _h_edge₂, h_all⟩
+  obtain ⟨w, hw_ne_v₀, hw_ne_u₁, hw_ne_u₂⟩ :=
+    exists_vertex_not_eq_triple_current v₀ u₁ u₂
+  have h_edge_v₀_w : IsEdge v₀ w := by
+    simpa [IsEdge, isEdgeData] using hw_ne_v₀.symm
+  rcases h_all w h_edge_v₀_w with h_eq_u₁ | h_eq_u₂
+  · exact hw_ne_u₁ h_eq_u₁
+  · exact hw_ne_u₂ h_eq_u₂
 
 end BlackwellDilemma

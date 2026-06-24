@@ -246,6 +246,33 @@ theorem percExpectation_const {E : Type} [Fintype E] [DecidableEq E]
   unfold percExpectation
   rw [← Finset.sum_mul, bondMeasureTotal_eq_one, one_mul]
 
+/-- **Degenerate open-edge probability.** At open probability `0`, the
+    finite Bernoulli product puts all mass on the all-closed configuration. -/
+theorem percExpectation_zero_eq_eval_allFalse {E : Type} [Fintype E] [DecidableEq E]
+    (f : BondConfig E → ℝ) :
+    percExpectation 0 f = f (fun _ : E => false) := by
+  classical
+  unfold percExpectation
+  rw [Finset.sum_eq_single (fun _ : E => false)]
+  · simp [bondConfigWeight]
+  · intro ω _hω hω_ne
+    have hex : ∃ e : E, ω e = true := by
+      by_contra hnot
+      apply hω_ne
+      funext e
+      cases hωe : ω e with
+      | false => rfl
+      | true =>
+          exact False.elim (hnot ⟨e, hωe⟩)
+    rcases hex with ⟨e, he⟩
+    have hweight : bondConfigWeight 0 ω = 0 := by
+      unfold bondConfigWeight
+      apply Finset.prod_eq_zero (i := e) (Finset.mem_univ e)
+      simp [he]
+    simp [hweight]
+  · intro hnot
+    exact False.elim (hnot (Finset.mem_univ _))
+
 /-- **Foundational monotonicity lemma — upper bound.**  If the outcome
     functional `f` is pointwise bounded above by `c` (`f ω ≤ c` for every
     realisation `ω`), then its bond-percolation expectation is bounded
@@ -526,6 +553,500 @@ theorem percRestrictedExpectation_le_of_pointwise_le_on {E : Type}
     _ ≤ (∑ ω : BondConfig E, bondConfigWeight p ω) * c := hstep2
     _ = 1 * c := by rw [bondMeasureTotal_eq_one]
     _ = c := one_mul c
+
+/-- **Sub-event monotonicity - lower bound.**  If `f` is pointwise
+    bounded below by `c` on the sub-event `S`, then the restricted
+    expectation of the constant `c` over `S` is below the restricted
+    expectation of `f` over `S`.
+
+    This preserves the event mass instead of normalising it away. -/
+theorem percRestrictedExpectation_ge_of_pointwise_ge_on {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (S : Finset (BondConfig E)) (f : BondConfig E → ℝ) (c : ℝ)
+    (hf : ∀ ω ∈ S, c ≤ f ω) :
+    percRestrictedExpectation p S (fun _ : BondConfig E => c) ≤
+      percRestrictedExpectation p S f := by
+  unfold percRestrictedExpectation
+  apply Finset.sum_le_sum
+  intro ω hω
+  exact mul_le_mul_of_nonneg_left (hf ω hω)
+    (bondConfigWeight_nonneg p hp0 hp1 ω)
+
+/-- **Linearity of restricted expectation - scalar multiplication.**
+    `E_{G_p}[a * f ; S] = a * E_{G_p}[f ; S]`. -/
+theorem percRestrictedExpectation_smul {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ)
+    (S : Finset (BondConfig E)) (a : ℝ) (f : BondConfig E → ℝ) :
+    percRestrictedExpectation p S (fun ω => a * f ω) =
+      a * percRestrictedExpectation p S f := by
+  unfold percRestrictedExpectation
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro ω _hω
+  ring
+
+/-- **Finite subadditivity of event mass.**  The unnormalised Bernoulli
+    mass of a union of two finite events is at most the sum of their masses. -/
+theorem percRestrictedExpectation_union_const_one_le {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (S T : Finset (BondConfig E)) :
+    percRestrictedExpectation p (S ∪ T)
+        (fun _ : BondConfig E => (1 : ℝ)) ≤
+      percRestrictedExpectation p S (fun _ : BondConfig E => (1 : ℝ)) +
+        percRestrictedExpectation p T (fun _ : BondConfig E => (1 : ℝ)) := by
+  unfold percRestrictedExpectation
+  have hsum := Finset.sum_union_inter
+    (s₁ := S) (s₂ := T)
+    (f := fun ω : BondConfig E => bondConfigWeight p ω * (1 : ℝ))
+  have hinter_nonneg :
+      0 ≤ ∑ ω ∈ S ∩ T, bondConfigWeight p ω * (1 : ℝ) := by
+    apply Finset.sum_nonneg
+    intro ω _hω
+    exact mul_nonneg (bondConfigWeight_nonneg p hp0 hp1 ω) zero_le_one
+  linarith
+
+/-- **Finite union bound.**  The mass of a finite union of events is at most
+    the sum of the individual event masses. -/
+theorem percRestrictedExpectation_biUnion_const_one_le_sum
+    {E α : Type} [Fintype E] [DecidableEq E] [DecidableEq α]
+    (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (I : Finset α) (S : α → Finset (BondConfig E)) :
+    percRestrictedExpectation p (I.biUnion S)
+        (fun _ : BondConfig E => (1 : ℝ)) ≤
+      ∑ i ∈ I,
+        percRestrictedExpectation p (S i)
+          (fun _ : BondConfig E => (1 : ℝ)) := by
+  classical
+  induction I using Finset.induction_on with
+  | empty =>
+      simp [percRestrictedExpectation]
+  | insert a I ha ih =>
+      have hunion :=
+        percRestrictedExpectation_union_const_one_le
+          p hp0 hp1 (S a) (I.biUnion S)
+      calc
+        percRestrictedExpectation p ((insert a I).biUnion S)
+            (fun _ : BondConfig E => (1 : ℝ))
+            =
+          percRestrictedExpectation p (S a ∪ I.biUnion S)
+            (fun _ : BondConfig E => (1 : ℝ)) := by
+              simp
+        _ ≤
+          percRestrictedExpectation p (S a)
+              (fun _ : BondConfig E => (1 : ℝ)) +
+            percRestrictedExpectation p (I.biUnion S)
+              (fun _ : BondConfig E => (1 : ℝ)) := hunion
+        _ ≤
+          percRestrictedExpectation p (S a)
+              (fun _ : BondConfig E => (1 : ℝ)) +
+            ∑ i ∈ I,
+              percRestrictedExpectation p (S i)
+                (fun _ : BondConfig E => (1 : ℝ)) := by
+              exact add_le_add_right ih _
+        _ =
+          ∑ i ∈ insert a I,
+            percRestrictedExpectation p (S i)
+              (fun _ : BondConfig E => (1 : ℝ)) := by
+              simp [ha]
+
+/-- **Finite open-edge event mass.**  In a finite Bernoulli product over
+    bond configurations, the unnormalised restricted expectation of the
+    constant `1` on the event that every edge in a finite set `A` is open
+    is exactly `p ^ A.card`.
+
+    This packages the independence/marginalisation step for later path and
+    rectangle events: fixing finitely many edge coordinates to `true`
+    contributes one factor of `p` per fixed coordinate, while all remaining
+    coordinates sum to `1`. -/
+theorem percRestrictedExpectation_open_edgeSet_const_one {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (A : Finset E) :
+    percRestrictedExpectation p
+      (Finset.univ.filter (fun omega : BondConfig E =>
+        ∀ e, Membership.mem A e -> omega e = true))
+      (fun _ : BondConfig E => (1 : ℝ)) = p ^ A.card := by
+  classical
+  let g : E → Bool → ℝ := fun e b =>
+    if Membership.mem A e then (if b then p else 0)
+    else if b then p else 1 - p
+  have hfactor :
+      (Finset.univ.sum (fun omega : BondConfig E =>
+        Finset.univ.prod (fun e : E => g e (omega e)))) =
+        Finset.univ.sum (fun omega : BondConfig E =>
+          if (∀ e, Membership.mem A e -> omega e = true)
+          then bondConfigWeight p omega else 0) := by
+    apply Finset.sum_congr rfl
+    intro omega _homega
+    by_cases hopen : ∀ e, Membership.mem A e -> omega e = true
+    case pos =>
+      rw [if_pos hopen]
+      unfold bondConfigWeight
+      apply Finset.prod_congr rfl
+      intro e _he
+      unfold g
+      by_cases heA : Membership.mem A e
+      case pos =>
+        simp [heA, hopen e heA]
+      case neg =>
+        simp [heA]
+    case neg =>
+      have hex : ∃ e, Membership.mem A e ∧ Not (omega e = true) := by
+        by_contra hno
+        apply hopen
+        intro e heA
+        by_cases htrue : omega e = true
+        case pos =>
+          exact htrue
+        case neg =>
+          exfalso
+          exact hno (Exists.intro e (And.intro heA htrue))
+      cases hex with
+      | intro e0 hexrest =>
+          cases hexrest with
+          | intro he0A hfalse =>
+              rw [if_neg hopen]
+              apply Finset.prod_eq_zero (i := e0) (Finset.mem_univ e0)
+              unfold g
+              simp [he0A, hfalse]
+  have hprod_sum :
+      (Finset.univ.prod
+        (fun e : E => Finset.univ.sum (fun b : Bool => g e b))) =
+        Finset.univ.sum (fun omega : BondConfig E =>
+          Finset.univ.prod (fun e : E => g e (omega e))) := by
+    simpa using (Fintype.prod_sum g)
+  have hsum_edge : ∀ e : E,
+      (Finset.univ.sum (fun b : Bool => g e b)) =
+        (if Membership.mem A e then p else 1) := by
+    intro e
+    unfold g
+    by_cases heA : Membership.mem A e
+    case pos =>
+      simp [heA]
+    case neg =>
+      simp [heA]
+  have hprod_eval :
+      (Finset.univ.prod
+        (fun e : E => Finset.univ.sum (fun b : Bool => g e b))) =
+        p ^ A.card := by
+    let f : E → ℝ := fun e => if Membership.mem A e then p else 1
+    have hsubset : A.prod f = Finset.univ.prod f := by
+      apply Finset.prod_subset (Finset.subset_univ A)
+      intro e _he_univ he_notA
+      simp [he_notA]
+    calc
+      (Finset.univ.prod
+          (fun e : E => Finset.univ.sum (fun b : Bool => g e b)))
+          = Finset.univ.prod f := by
+            apply Finset.prod_congr rfl
+            intro e _he
+            exact hsum_edge e
+      _ = A.prod f := hsubset.symm
+      _ = p ^ A.card := by
+            simp [f]
+  unfold percRestrictedExpectation
+  rw [Finset.sum_filter]
+  simp only [mul_one]
+  calc
+    Finset.univ.sum (fun omega : BondConfig E =>
+        (if (∀ e, Membership.mem A e -> omega e = true)
+          then bondConfigWeight p omega else 0)) =
+        Finset.univ.sum (fun omega : BondConfig E =>
+          Finset.univ.prod (fun e : E => g e (omega e))) := hfactor.symm
+    _ =
+        Finset.univ.prod
+          (fun e : E => Finset.univ.sum (fun b : Bool => g e b)) :=
+            hprod_sum.symm
+    _ = p ^ A.card := hprod_eval
+
+/-- **Finite closed-edge event mass.**  In a finite Bernoulli product over
+    bond configurations, the unnormalised restricted expectation of the
+    constant `1` on the event that every edge in a finite set `A` is closed
+    is exactly `(1 - p) ^ A.card`.
+
+    This is the closed-edge analogue of
+    `percRestrictedExpectation_open_edgeSet_const_one`. -/
+theorem percRestrictedExpectation_closed_edgeSet_const_one {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (A : Finset E) :
+    percRestrictedExpectation p
+      (Finset.univ.filter (fun omega : BondConfig E =>
+        ∀ e, Membership.mem A e -> omega e = false))
+      (fun _ : BondConfig E => (1 : ℝ)) = (1 - p) ^ A.card := by
+  classical
+  let g : E -> Bool -> ℝ := fun e b =>
+    if Membership.mem A e then (if b then 0 else 1 - p)
+    else if b then p else 1 - p
+  have hfactor :
+      (Finset.univ.sum (fun omega : BondConfig E =>
+        Finset.univ.prod (fun e : E => g e (omega e)))) =
+        Finset.univ.sum (fun omega : BondConfig E =>
+          if (∀ e, Membership.mem A e -> omega e = false)
+          then bondConfigWeight p omega else 0) := by
+    apply Finset.sum_congr rfl
+    intro omega _homega
+    by_cases hclosed : ∀ e, Membership.mem A e -> omega e = false
+    case pos =>
+      rw [if_pos hclosed]
+      unfold bondConfigWeight
+      apply Finset.prod_congr rfl
+      intro e _he
+      unfold g
+      by_cases heA : Membership.mem A e
+      case pos =>
+        simp [heA, hclosed e heA]
+      case neg =>
+        simp [heA]
+    case neg =>
+      have hex : ∃ e, Membership.mem A e ∧ Not (omega e = false) := by
+        by_contra hno
+        apply hclosed
+        intro e heA
+        by_cases hfalse : omega e = false
+        case pos =>
+          exact hfalse
+        case neg =>
+          exfalso
+          exact hno (Exists.intro e (And.intro heA hfalse))
+      cases hex with
+      | intro e0 hexrest =>
+          cases hexrest with
+          | intro he0A hnotFalse =>
+              rw [if_neg hclosed]
+              apply Finset.prod_eq_zero (i := e0) (Finset.mem_univ e0)
+              unfold g
+              simp [he0A, hnotFalse]
+  have hprod_sum :
+      (Finset.univ.prod
+        (fun e : E => Finset.univ.sum (fun b : Bool => g e b))) =
+        Finset.univ.sum (fun omega : BondConfig E =>
+          Finset.univ.prod (fun e : E => g e (omega e))) := by
+    simpa using (Fintype.prod_sum g)
+  have hsum_edge : ∀ e : E,
+      (Finset.univ.sum (fun b : Bool => g e b)) =
+        (if Membership.mem A e then 1 - p else 1) := by
+    intro e
+    unfold g
+    by_cases heA : Membership.mem A e
+    case pos =>
+      simp [heA]
+    case neg =>
+      simp [heA]
+  have hprod_eval :
+      (Finset.univ.prod
+        (fun e : E => Finset.univ.sum (fun b : Bool => g e b))) =
+        (1 - p) ^ A.card := by
+    let f : E -> ℝ := fun e => if Membership.mem A e then 1 - p else 1
+    have hsubset : A.prod f = Finset.univ.prod f := by
+      apply Finset.prod_subset (Finset.subset_univ A)
+      intro e _he_univ he_notA
+      simp [he_notA]
+    calc
+      (Finset.univ.prod
+          (fun e : E => Finset.univ.sum (fun b : Bool => g e b)))
+          = Finset.univ.prod f := by
+            apply Finset.prod_congr rfl
+            intro e _he
+            exact hsum_edge e
+      _ = A.prod f := hsubset.symm
+      _ = (1 - p) ^ A.card := by
+            simp [f]
+  unfold percRestrictedExpectation
+  rw [Finset.sum_filter]
+  simp only [mul_one]
+  calc
+    Finset.univ.sum (fun omega : BondConfig E =>
+        (if (∀ e, Membership.mem A e -> omega e = false)
+          then bondConfigWeight p omega else 0)) =
+        Finset.univ.sum (fun omega : BondConfig E =>
+          Finset.univ.prod (fun e : E => g e (omega e))) := hfactor.symm
+    _ =
+        Finset.univ.prod
+          (fun e : E => Finset.univ.sum (fun b : Bool => g e b)) :=
+            hprod_sum.symm
+    _ = (1 - p) ^ A.card := hprod_eval
+
+/-- **Two-open-edge event mass.**  In a finite Bernoulli product over
+    bond configurations, the unnormalised restricted expectation of the
+    constant `1` on the event that two distinct edges are both open is
+    exactly `p * p`.
+
+    This is the finite-product independence calculation needed to turn a
+    pointwise cluster lower bound on a two-edge local event into an explicit
+    probabilistic lower bound. -/
+theorem percRestrictedExpectation_two_open_edges_const_one {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) {e1 e2 : E}
+    (hne : Not (e1 = e2)) :
+    percRestrictedExpectation p
+      (Finset.univ.filter (fun omega : BondConfig E =>
+        omega e1 = true /\ omega e2 = true))
+      (fun _ : BondConfig E => (1 : ℝ)) = p * p := by
+  have hne' : Not (e2 = e1) := by
+    intro h
+    exact hne h.symm
+  have hmass :=
+    percRestrictedExpectation_open_edgeSet_const_one
+      p ({e1, e2} : Finset E)
+  simpa [hne, hne', Finset.card_pair hne, pow_two] using hmass
+
+/-- Event-mass monotonicity for finite Bernoulli products. -/
+theorem percRestrictedExpectation_const_one_mono_event {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    {S T : Finset (BondConfig E)}
+    (hST : ∀ omega, Membership.mem S omega -> Membership.mem T omega) :
+    percRestrictedExpectation p S
+        (fun _ : BondConfig E => (1 : ℝ)) ≤
+      percRestrictedExpectation p T
+        (fun _ : BondConfig E => (1 : ℝ)) := by
+  unfold percRestrictedExpectation
+  exact Finset.sum_le_sum_of_subset_of_nonneg hST (by
+    intro omega _hT _hnotS
+    exact mul_nonneg (bondConfigWeight_nonneg p hp0 hp1 omega) zero_le_one)
+
+/-- The expectation of an event indicator is the restricted expectation of
+    the constant `1` on that event. -/
+theorem percExpectation_indicator_eq_restrictedExpectation_const_one
+    {E : Type} [Fintype E] [DecidableEq E] (p : ℝ)
+    (S : Finset (BondConfig E)) :
+    percExpectation p
+        (fun omega : BondConfig E =>
+          if Membership.mem S omega then (1 : ℝ) else 0) =
+      percRestrictedExpectation p S
+        (fun _ : BondConfig E => (1 : ℝ)) := by
+  classical
+  unfold percExpectation percRestrictedExpectation
+  calc
+    (∑ omega : BondConfig E,
+        bondConfigWeight p omega *
+          (if Membership.mem S omega then (1 : ℝ) else 0))
+        =
+      ∑ omega : BondConfig E,
+        if Membership.mem S omega then
+          bondConfigWeight p omega * (1 : ℝ)
+        else
+          0 := by
+            apply Finset.sum_congr rfl
+            intro omega _homega
+            by_cases hmem : Membership.mem S omega <;> simp [hmem]
+    _ =
+      (Finset.univ.filter
+          (fun omega : BondConfig E => Membership.mem S omega)).sum
+        (fun omega => bondConfigWeight p omega * (1 : ℝ)) := by
+            rw [Finset.sum_filter]
+    _ = ∑ omega ∈ S, bondConfigWeight p omega * (1 : ℝ) := by
+            have hfilter :
+                (Finset.univ.filter
+                  (fun omega : BondConfig E => Membership.mem S omega)) = S := by
+              ext omega
+              simp
+            rw [hfilter]
+
+/-- The mass of an event plus the mass of its finite-sample-space complement
+    is one.  This is the finite Bernoulli-product partition identity used to
+    expose success/failure probability decompositions without introducing any
+    measure-theoretic primitive beyond the kernel-defined finite sum. -/
+theorem percRestrictedExpectation_const_one_add_compl
+    {E : Type} [Fintype E] [DecidableEq E] (p : ℝ)
+    (S : Finset (BondConfig E)) :
+    percRestrictedExpectation p S
+        (fun _ : BondConfig E => (1 : ℝ)) +
+      percRestrictedExpectation p
+        (Finset.univ.filter (fun omega : BondConfig E =>
+          Not (Membership.mem S omega)))
+        (fun _ : BondConfig E => (1 : ℝ)) = 1 := by
+  classical
+  let T := Finset.univ.filter (fun omega : BondConfig E =>
+    Not (Membership.mem S omega))
+  have hdisj : Disjoint S T := by
+    rw [Finset.disjoint_left]
+    intro omega hS hT
+    simp [T, hS] at hT
+  have hunion : S ∪ T = Finset.univ := by
+    ext omega
+    by_cases hS : Membership.mem S omega
+    · simp [T, hS]
+    · simp [T, hS]
+  unfold percRestrictedExpectation
+  rw [← Finset.sum_union hdisj]
+  rw [hunion]
+  calc
+    (∑ omega : BondConfig E, bondConfigWeight p omega * (1 : ℝ)) =
+        ∑ omega : BondConfig E, bondConfigWeight p omega := by
+          apply Finset.sum_congr rfl
+          intro omega _homega
+          ring
+    _ = 1 := bondMeasureTotal_eq_one p
+
+/-- The mass of the finite-sample-space complement is `1` minus the event
+    mass.  This is a restatement of
+    `percRestrictedExpectation_const_one_add_compl` in the algebraic form used
+    by success/failure event interfaces. -/
+theorem percRestrictedExpectation_compl_const_one_eq_one_sub
+    {E : Type} [Fintype E] [DecidableEq E] (p : ℝ)
+    (S : Finset (BondConfig E)) :
+    percRestrictedExpectation p
+        (Finset.univ.filter (fun omega : BondConfig E =>
+          Not (Membership.mem S omega)))
+        (fun _ : BondConfig E => (1 : ℝ)) =
+      1 -
+        percRestrictedExpectation p S
+          (fun _ : BondConfig E => (1 : ℝ)) := by
+  have hpartition :=
+    percRestrictedExpectation_const_one_add_compl (E := E) p S
+  linarith
+
+/-- The open-edge set of a finite bond configuration. -/
+def bondOpenEdgeSet {E : Type} [Fintype E]
+    (omega : BondConfig E) : Finset E :=
+  Finset.univ.filter (fun e : E => omega e = true)
+
+/-- A single edge has open probability `p` under the finite Bernoulli product. -/
+theorem percExpectation_open_edge_indicator {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (e0 : E) :
+    percExpectation p
+      (fun omega : BondConfig E => if omega e0 then (1 : ℝ) else 0) = p := by
+  classical
+  have hmass := percRestrictedExpectation_open_edgeSet_const_one
+    p ({e0} : Finset E)
+  unfold percRestrictedExpectation at hmass
+  unfold percExpectation
+  rw [Finset.sum_filter] at hmass
+  simp at hmass
+  simpa using hmass
+
+/-- First moment of the number of open edges in the finite Bernoulli product. -/
+theorem percExpectation_openEdgeSet_card {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) :
+    percExpectation p
+      (fun omega : BondConfig E => ((bondOpenEdgeSet omega).card : ℝ)) =
+      p * (Fintype.card E : ℝ) := by
+  classical
+  unfold percExpectation
+  calc
+    (Finset.univ.sum fun omega : BondConfig E =>
+        bondConfigWeight p omega * ((bondOpenEdgeSet omega).card : ℝ))
+        =
+      Finset.univ.sum fun omega : BondConfig E =>
+        bondConfigWeight p omega *
+          (Finset.univ.sum
+            (fun e : E => if omega e then (1 : ℝ) else 0)) := by
+          apply Finset.sum_congr rfl
+          intro omega _homega
+          simp [bondOpenEdgeSet]
+    _ =
+      Finset.univ.sum fun e : E =>
+        Finset.univ.sum fun omega : BondConfig E =>
+          bondConfigWeight p omega * (if omega e then (1 : ℝ) else 0) := by
+          rw [Finset.sum_comm]
+          apply Finset.sum_congr rfl
+          intro omega _homega
+          rw [Finset.mul_sum]
+    _ = Finset.univ.sum fun _e : E => p := by
+          apply Finset.sum_congr rfl
+          intro e _he
+          exact percExpectation_open_edge_indicator p e
+    _ = p * (Fintype.card E : ℝ) := by
+          rw [Finset.sum_const]
+          rw [Fintype.card]
+          norm_num
+          ring
 
 /-- **The cluster-size partition of the expectation.**  Given a
     `ℕ`-valued functional `κ : BondConfig E → ℕ` on the percolation

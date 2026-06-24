@@ -111,3 +111,4 @@ import BlackwellDilemma.Infrastructure.LebesgueStieltjesAtoms
 import BlackwellDilemma.Infrastructure.IntegerLattice
 import BlackwellDilemma.Infrastructure.BondPercolationLattice
 import BlackwellDilemma.Infrastructure.OrderStatisticsAlgebraicBound
+import BlackwellDilemma.Infrastructure.TerminalNeighbourTopology

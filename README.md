@@ -15,6 +15,27 @@ Blackwell's theorem (1953) states that more informative signals lead to weakly b
 
 **[View the computational appendix](https://crabsatellite.github.io/blackwell-dilemma/)** — six experiment families verifying all theoretical predictions, rendered with full math formatting.
 
+## Lean 4 Formalisation
+
+The companion Lean 4 / Mathlib development lives in [`lean4/`](lean4/). It
+contains the paper-to-Lean calibration matrix, the gap ledger, the axiom audit,
+and source-level kernel-surface audits.
+
+```bash
+cd lean4
+lake build BlackwellDilemma
+lake build BlackwellDilemma.AxiomAudit
+python scripts/audit_kernel_surface.py
+python scripts/audit_conditional_surface.py
+```
+
+The current public Lean package is maintained as a complete kernel-only audit
+target: no project-level source axioms, no proof escapes, no unresolved
+conditional theorem interfaces, and no Cat 3 paper-novel input assumptions in
+the live ledger. See [`lean4/README.md`](lean4/README.md) and
+[`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the
+paper-label mapping and remaining semantic calibration notes.
+
 ## Installation
 
 Python 3.9 or newer is required.

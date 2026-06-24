@@ -42,6 +42,7 @@ BlackwellDilemma/
    ├─ FOSDDerivativeChain.lean      -- FOSD + supermodular ⇒ derivative-domination
    ├─ ArgmaxMonotone.lean           -- derivative-domination ⇒ argmax-monotone
    ├─ KappaStarConcrete.lean        -- kappaStar concrete + Harris-Kesten divergence
+   ├─ TerminalNeighbourTopology.lean -- non-vacuous finite terminal-neighbour witness
    ├─ AgentRewardKernelExplicit.lean -- per-realisation kernel monotone/reversal/tendsto
    └─ GConditionalIntegral.lean     -- G-integration concrete
 ```
@@ -62,9 +63,9 @@ BlackwellDilemma/
 |---|---|
 | `mean_estimate_gap_continuous_paper_witness` | `MeanEstimateGap.lean` |
 | `mean_estimate_gap_tendsto_mLimit_paper_witness` | `MeanEstimateGap.lean` |
-| `principal_interior_maximum_exists_OPEN` (witness) | `EVTBoundedDecreasing.lean` |
+| `principal_interior_maximum_exists` (witness) | `EVTBoundedDecreasing.lean` |
 | `aggregate_optimum_exists_per_G_OPEN` (witness) | `EVTBoundedDecreasing.lean` |
-| `W_bar_finite_above_limit_witness` | `EVTBoundedDecreasing.lean` |
+| future non-constant `W_bar` finite-above-limit theorem | `EVTBoundedDecreasing.lean` |
 
 ### Tier 3 (hard: needs Mathlib-PR-grade infrastructure)
 
@@ -78,21 +79,24 @@ BlackwellDilemma/
 | `wInfoTopoRatio_le_MillsConst_decay_paper_witness` | `GiantComponentMills.lean` |
 | `forward_reachable_empty_full_at_all_open_paper_witness` | `SimpleGraphReachable.lean` |
 | `conditional_subproblem_blackwell_applicable_paper_witness` | `BlackwellConditional.lean` |
-| `fosd_induces_derivative_domination_paper_witness` | `FOSDDerivativeChain.lean` |
-| `argmax_monotone_under_derivative_domination_paper_witness` | `ArgmaxMonotone.lean` |
-| `kappaStar_diverges_at_pc_paper_witness` | `KappaStarConcrete.lean` |
+| future refined aggregate-welfare FOSD-to-difference-domination theorem | `FOSDDerivativeChain.lean` |
+| future refined aggregate-optimum monotonicity theorem | `ArgmaxMonotone.lean` |
+| `kappaStar_diverges_at_pc_via_scaling_carrier` | `KappaStarConcrete.lean` + `HarrisKestenCriticalDivergence.lean` |
 
 ### Tier 4 (large: requires per-realisation kernel concretization)
+
+The greedy high-precision limit kernel and pointwise-atTop convergence are now
+closed for the current concrete scalar `agentRewardKernel`: the limit is the
+constant `6/10`, and the convergence proof is eventual equality at
+`Filter.atTop`.
 
 | Witness atom group | Count | Infra module |
 |---|---|---|
 | `agentRewardKernel_*_pointwise_monotone` | 5 | `AgentRewardKernelExplicit.lean` |
 | `agentRewardKernel_*_kernel_reversal_witness` | 4 | `AgentRewardKernelExplicit.lean` |
-| `agentRewardKernel_greedy_pointwise_tendsto_atTop` | 1 | `AgentRewardKernelExplicit.lean` |
 | `principalSampleAbove/Below_*` | 6 | `GConditionalIntegral.lean` |
 | `principalSampleBoth_*_witness` | 4 | `GConditionalIntegral.lean` |
 | `W_bar_max_paper_witness` + `aggregateWelfareWith_max_paper_witness` | 2 | `GConditionalIntegral.lean` + `EVTBoundedDecreasing.lean` |
-| `agentRewardKernel_greedy_limit_kernel` (carrier) | 1 | `AgentRewardKernelExplicit.lean` |
 | `mean_estimate_gap` carrier concretization | 1 | `MeanEstimateGap.lean` |
 
 ### Tier 5 (Mathlib-PR-ready contributions)
@@ -135,6 +139,9 @@ Mathlib-PR candidates:
 * `ArgmaxMonotone` — single-crossing preference preservation + argmax
   monotonicity atom.
 * `KappaStarConcrete` — `DivergesAtBelowAtTop` predicate + algebra.
+* `TerminalNeighbourTopology` — parameterized graph predicate plus an
+  explicit `Fin 3` path witness showing the terminal-neighbour shape is
+  non-vacuous outside the current complete-loopless carrier.
 
 ## Pending modules
 
@@ -174,6 +181,7 @@ Wire-up summary by Infrastructure module:
 * `DifferenceQuotientAlgebra`
 * `ArgmaxMonotone`
 * `KappaStarConcrete`
+* `TerminalNeighbourTopology`
 
 ## Mathlib-PR readiness
 
@@ -192,6 +200,8 @@ generalisations:
   pointwise → summed monotonicity packaging.
 * `GaussianPosterior.gaussianPosteriorMean` → conjugate-prior posterior
   mean infrastructure.
+* `TerminalNeighbourTopology.TerminalNeighbourTopologyOn` → portable
+  graph-theoretic terminal-neighbour predicate plus finite witness.
 
 ## Additional Mathlib-PR-ready modules
 
@@ -221,10 +231,11 @@ generalisations:
   `Mathlib.Order.DifferenceDominates`.
 
 Closure-via-existence demonstrations:
-* `Principal.lean`: `W_bar_eventually_decreasing_derived` uses
-  `EventuallyDecreasingWithLowerBound` + `W_bar_limit_infty` +
-  `W_bar_finite_above_limit_witness` + Mathlib EVT to prove the
-  paper-Def structural-equation atom statement is Cat 1 derivable.
+* `Principal.lean`: the current scalar `W_bar` is constant, so the old
+  finite-above-limit route is dead-ended. A future non-constant Principal
+  kernel can use `EventuallyDecreasingWithLowerBound` + `W_bar_limit_infty`
+  + a proved strict finite-above-limit theorem + Mathlib EVT to re-establish
+  the paper disclosure-suboptimality route.
 * `Cognitive.lean`:
   `agentWelfare_kappaAgent_at_alpha_one_isSupermodular_derived`
   uses `PercExpectationSupermodular` + per-realisation

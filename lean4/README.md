@@ -68,24 +68,1102 @@ The formalisation follows the paper's section structure.
 
 ## Status summary
 
-Live counts (run `lake env lean BlackwellDilemma/Ledger.lean` to reproduce; latest = post-R177 2026-05-16):
+Current kernel-only audit target (2026-06-23):
+
+Commands:
+
+```bash
+lake build BlackwellDilemma
+lake env lean BlackwellDilemma/AxiomAudit.lean
+python scripts/audit_kernel_surface.py
+python scripts/audit_conditional_surface.py
+```
+
+Current results:
+
+| Surface | Current value | Complete kernel-only target |
+| --- | ---: | --- |
+| `lake build BlackwellDilemma` | pass | pass |
+| `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
+| proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
+| source-level project `axiom` declarations | 0 | 0 |
+| source-level `_OPEN` axioms | 0 | 0 |
+| source-level `_paper_Def` axioms | 0 | 0 |
+| source-level `_workingAssumption` axioms | 0 | 0 |
+| source-level `_paper_witness` axioms | 0 | 0 |
+| source-level `_OPEN` theorem declarations | 0 | 0 |
+| conditional proof interfaces (`audit_conditional_surface.py`) | 0 | no remaining counted proof/carrier interface containers |
+| closed `True` compatibility interfaces (`audit_conditional_surface.py`) | 0 | no remaining `True` compatibility aliases in the Prop-interface audit |
+| conditional theorem signatures (`audit_conditional_surface.py`) | 0 | R454 demotes the last generic family-core promotion bridge to a proof-valued `def`; no theorem/lemma signature now takes an interface premise |
+| interfaces with current/no-premise closure | 0 | no counted interface remains in the conditional-surface audit |
+| interfaces with current-carrier refutation | 1 | the corrected unit-compatible above-threshold package is refuted for the current all-open boxed-torus carrier |
+| unresolved proof/carrier interfaces | 0 | every remaining conditional interface has a current closure or current-carrier refutation |
+| unresolved Prop bridge interfaces | 0 | no remaining unresolved theorem-interface obligations under the syntactic audit |
+| unresolved structure carrier interfaces | 0 | explicit carrier packages now have concrete current models |
+| unresolved class interfaces | 0 | diagnostic typeclass surface has a current concrete package |
+| conditional theorem signatures using unresolved interfaces | 0 | no live theorem signature depends on an unresolved interface |
+| conditional signatures using unresolved Prop bridges | 0 | no live theorem signature depends on an unresolved Prop bridge |
+| conditional signatures using unresolved structure carriers | 0 | structure-carrier signatures have current concrete models |
+| conditional signatures using unresolved classes | 0 | no direct theorem-signature count under the current syntactic audit |
+| ledger total entries | 498 | tracked |
+| ledger status | open=0, partial=0, deadEnd=59, closed=353, definitional=86 | no open/partial theorem target; dead-end/retired markers are kernel-inert and do not count as live closed evidence |
+| ledger input classes | cat1Mathlib=435, cat2External=0, cat3PaperNovel=0, mixed=0, notInput=63 | all live theorem dependencies reduced to Cat 1 or explicit theorem assumptions; dead-end routes require replacement |
+| ledger Cat 3 subtype | carrier=0, hypothesisPredicate=0, structuralEquation=0, workingAssumption=0, derivedTheorem=329, notCat3=169 | paper primitives represented transparently; no hidden proof-carrying global axioms |
+
+Complete kernel-only means stronger than "gapOpen = 0": main paper theorem
+`#print axioms` output should contain only Lean/Mathlib kernel axioms, and
+`audit_conditional_surface.py` should expose any remaining explicit bridge,
+witness, or carrier-interface hypotheses. Paper primitives should be
+structures, definitions, or theorem parameters, not global bridge axioms; a
+fully instantiated proof also needs replacement carriers for interfaces that
+the current neutral/scalar carriers refute.
+
+As of R510, the former Principal Part 2 bridge interfaces
+`AggregateWelfareWithDifferenceDominatesUnderFOSD` and
+`AggregateOptimalBetaMonotoneUnderDiffDom` remain retired, but the public
+aggregate carrier has been rewired to the finite FOSD-ramp route.
+`aggregateWelfareWith_principal_part2_package` now closes per-`G` argmax
+existence, FOSD-induced beta-increment domination, and monotone aggregate-beta
+selection for the public `aggregateWelfareWith` / `aggregateOptimalBeta`
+surface. The earlier unrestricted-carrier refutations are retained only as
+diagnostics for the retired arbitrary-function route.
+
+The former `gap_c_star_constant_pos_OPEN` source axiom is now the projection
+theorem `c_star_constant_pos` for the current
+positive-subtype witness in `KappaStarDepthDCarriers_current`, so the
+trap-tree `κ*(d)` bounds no longer take an external positivity hypothesis or
+carrier parameter.
+`KappaStarDepthDCarriers_current` supplies the unit positive constant as a
+kernel-visible current model; the depth-d `κ*` asymptotic theorems are now
+current-carrier results for the paper route.
+
+`ReachableSet` is now the starting-history instance of `ForwardReachable`,
+`ReachableSet v ω := ForwardReachable v ∅ ω`, and
+`ReachableSet_eq_ForwardReachable_empty` is a definitional theorem. The C1/C2
+diagnostic predicates and `IsTopologyBlind` are now concrete semantic
+definitions over the existing IDP carriers rather than bare source axioms.
+
+The foundational IDP carrier block is now concrete for the canonical finite
+artifact: `Vertex` is `Fin 5`, with `Fintype` and `DecidableEq` inherited from
+Mathlib.
+
+`IsEdge` is the concrete loopless complete relation `u ≠ v`; `IsEdge.symm` is
+a theorem, not a source axiom.
+
+`PercolationOutcome` is the concrete Boolean open-edge assignment space
+`Vertex → Vertex → Bool`; `IsOpen` is the symmetric open-edge predicate over
+that assignment.
+
+`ForwardReachable` is now a concrete finite reachable set: the start vertex
+itself plus vertices connected by a reflexive-transitive chain of open edges
+outside the visit history. `ForwardReachable_self_member` is a theorem.
+
+`DegreeTwoStartingVertex` is also no longer a bare source axiom: it is a
+semantic graph predicate over `IsEdge`, asserting the existence of a starting
+vertex whose accessible neighbours are exactly two distinct vertices.
+
+`TerminalNeighbourTopology` is likewise a semantic `IsEdge` topology predicate:
+for some start vertex, every neighbour is terminal or leads only to a depth-1
+subtree.
+
+The remaining diagnostic/signal scope predicates `C2prime_GreedyPathMisalignment`,
+`C3_InformationLocality`, and `IsBlackwellOrdered` now project from
+`DiagnosticSignalHypothesisData`, a transparent inductive kernel-data package
+marked for local instance resolution. This keeps the diagnostic assumptions
+explicit without introducing a source-level project axiom or a counted
+proof-record interface.
+The current parametric local-C2prime route also exposes
+`DiagnosticSignalHypothesisData_current`: its C2prime field is the fin5Trap
+parametric local-greedy witness package, its C3 field is the constant-signal
+concrete witness, and its Blackwell-ordering field is intentionally `False`
+because Theorem 6.1's current fin5Trap route does not consume Blackwell
+ordering.
+
+The paperGraph preconnectedness bridge for trap-prevalence Part 1 is now the
+current theorem `Infrastructure.paperGraph_preconnected_current` from the
+complete-loopless `IsEdge` definition. The all-open forward-reachability
+identification is now also closed by
+`ForwardReachable_empty_full_at_all_open_current` from the concrete
+`ForwardReachable` definition.
+
+`V_dyn` is now the concrete `Finset.sup'` over `ForwardReachable` from paper
+Definition 2.2 / `def:value-functions`; `V_dyn_def` is a definitional theorem
+rather than a source-level structural-equation axiom.
+
+`blockingProb` is the concrete canonical non-degenerate value `1/3`. `reward`
+is a concrete bounded five-state profile and `intrinsicPref` is the neutral
+`1/2` realisation. Their strict/range facts, including
+`blockingProb_mem_unitInterval`, `reward_mem_unitInterval`, and
+`intrinsicPref_mem_unitInterval`, are theorems rather than separate global
+source axioms.
+Future fully parameterised coverage should move the blocking probability to
+theorem/module parameters rather than reintroducing a global source axiom.
+
+The unused `oracleReward` stub is now a transparent neutral placeholder
+definition in the current scalar model, and `oracleReward_mem_unitInterval` is
+a theorem. The full Definition 2.6 oracle expectation remains future work for a
+concrete signal/percolation oracle module, but it no longer contributes hidden
+global axioms.
+
+In the Wrongness/topo-cluster layer, the topo-loss unit-interval range proof
+is now a derived theorem over the concrete finite percolation expectation.
+The current Mills-inverse above-threshold route is now a kernel-proved
+dead-end, not merely unsupported by the neutral carrier. The theorem
+`not_mills_inverse_above_threshold_route_with_unit_bound` proves that R200
+Mills identification plus R201 eventual lower bound would force
+`expectedTopoLoss n p > 1`, contradicting the derived unit upper bound
+`expectedTopoLoss_le_one_atom`. The final route must replace the
+`1/(1-exp(-c))` lower constant with a unit-compatible `Z^2_L`
+above-threshold lower-bound carrier/theorem.
+R407 adds the corrected interface
+`UnitCompatibleAboveThresholdLowerBoundConclusion data` and proves
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_current`: the selected
+all-open boxed-torus core carrier has identically zero carrier-local expected
+topological loss, so it cannot witness any positive lower bound.
+R408 adds `unitPositiveTopoLossData` and proves
+`unitPositiveTopoLossData_unitCompatibleAboveThresholdLowerBoundConclusion`,
+so the corrected interface is kernel-consistent on a transparent nonzero
+diagnostic carrier; the remaining missing object is the real stochastic
+finite-lattice `Z^2_L` carrier.
+R409 adds `firstEdgeStochasticTopoLossData`, where topological loss is the
+first finite edge's Bernoulli open indicator scaled by `1/2`; its expectation
+is proved to be `(1-p)/2`, closing the corrected interface with `p=3/4` and
+`c=1/8` on a genuinely edge-state-dependent finite carrier.
+R410 then ties the same first-edge topological loss to a positive-mass finite
+event: `firstEdgeGiantStochasticTopoLossData` uses `firstEdgeOpenEvent n` as
+its giant event, proves exact event mass `q`, restricted topological loss
+`expectedTopoLossOnGiantOn = (1-p)/2`, positive/full-cluster giant-event
+conclusions, and the same corrected lower-bound interface. This is still a
+finite regression witness, not the final `Z^2_L` giant-component theorem.
+R411 moves the positive topo-loss regression from a first-edge diagnostic to
+the boxed-torus all-open coordinate-edge event:
+`boxedTorusAllOpenPositiveTopoLossData` proves all-open event-indicator mass,
+positive restricted/full topo-loss expectation
+`((1-p) ^ Fintype.card (BoxedTorusEdgeIdx L)) / 2` at
+`n = boxedTorusFlatGraphN L`, and the full-cluster giant-event package. Lean
+also proves this fixed-`L` carrier cannot satisfy the eventual
+`UnitCompatibleAboveThresholdLowerBoundConclusion`, so the remaining target is
+a positive lower-bound family across all large finite lattices.
+R412 adds `boxedTorusAllOpenFirstEdgeAwayTopoLossData`: the boxed-torus
+oracle/cluster/giant packages remain on the all-open finite-torus event, while
+the topo-loss kernel is zero at that flat index and uses the first-edge
+stochastic loss for every larger `n`. Lean proves its oracle interfaces,
+nonzero oracle witness, below-threshold giant-event envelope,
+full-cluster/boxed-torus cluster-count packages, and the corrected
+above-threshold lower-bound package in one data object. R412 also made the
+public `ParametricGraphLocalDilemmaTheoremCore` require
+`UnitCompatibleAboveThresholdLowerBoundConclusion data`.
+R413 replaces that separated-tail witness in the public graph-local core with
+`firstEdgeOpenGiantClosedTopoLossData`: the same first-edge-open event is the
+giant event, topo loss is zero on that event, and its first-edge-closed
+complement carries loss `1/2`, so Lean proves `expectedTopoLossOnGiantOn = 0`
+while `expectedTopoLossOnData = p / 2`. This closes the below-envelope and
+corrected above-threshold lower-bound packages through one event/complement
+mechanism. It remains diagnostic, not the final `Z^2_L` random
+giant-component/reward-loss carrier.
+R414 upgrades that diagnostic mechanism to
+`allEdgeOpenGiantComplementTopoLossData`: the selected giant event is
+`allEdgeOpenEvent n`, meaning every edge in the current finite `EdgeIdx n`
+carrier is open, and the topo-loss kernel is zero on that event and `1/2` on
+its complement. Lean proves the all-edge-open event is nonempty, has mass
+`q ^ Fintype.card (EdgeIdx n)`, has zero restricted giant-event loss, and has
+full expected topo loss bounded below by the R413 first-edge-closed loss
+`p / 2`. The public graph-local core now uses this all-current-edge
+event/complement package. This is still diagnostic because the cluster-count
+carrier is transparent, not the random supercritical `Z^2_L` geometry.
+R415 migrates that public core back onto the boxed-torus reachable-set oracle
+with `boxedTorusAllOpenComplementTopoLossData 1`. At the flattened
+boxed-torus size, the selected giant event is the all-coordinate-edge-open
+event, the cluster count is the concrete finite-bond reachable-set
+cardinality, and topo loss is zero on that event and `1/2` on its complement.
+Away from the flat index it retains the first-edge-closed tail to keep the
+corrected above-threshold lower-bound package eventual and uniform. This is
+still not the final random supercritical `Z^2_L` theorem, but the public core
+no longer relies on R414's transparent `n + 1` cluster-count carrier.
+R416 adds a flat boxed-torus family lower-bound route that does not use the
+away-from-flat tail. Lean proves the exact flat-index expectation for
+`boxedTorusAllOpenComplementTopoLossData L`:
+`(1 - (1 - p) ^ Fintype.card (BoxedTorusEdgeIdx L)) / 2`, then proves that
+at `p = 3/4` every flattened boxed-torus member has expected topo loss at
+least `1/8`. The new family-level interface
+`BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion` is closed
+for `boxedTorusAllOpenComplementTopoLossData` with `L0 = 0`.
+R417 wires that family-level result into the public graph-local theorem core:
+`ParametricGraphLocalDilemmaTheoremCore` now selects the
+`boxedTorusAllOpenComplementTopoLossData` family plus member `L = 1`, uses
+that member for the oracle/giant-event/cluster-count packages, and uses
+`BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current` for
+the above-threshold lower-bound side. The public core therefore no longer
+depends on the fixed-carrier all-`n` `UnitCompatibleAboveThresholdLowerBoundConclusion`
+tail.
+R418 reroutes the same public core to
+`boxedTorusFullReachComplementTopoLossData` with member `L = 1`. At the
+flattened boxed-torus size, the selected giant event is now full reachability
+of the concrete oracle reachable set, not the all-coordinate-edge-open event;
+all-open is used only as a sub-event to prove positive mass on the Bernoulli
+probability domain `0 < q <= 1`. The flat lower-bound side is closed by
+`BoxedTorusFullReachFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current`
+with witnesses `p = 3/4`, `c = 1/512`, and `L0 = 1`, using the local
+base-incident-closed obstruction and the degree bound
+`boxedTorusIncidentEdgeSet_card_le_four`. The remaining paper-faithful gap is
+the random supercritical `Z^2_L` giant-component/reward-loss theorem, not an
+all-open definition of the event.
+R419 reroutes the public core one step further to
+`boxedTorusFullReachFlatOnlyComplementTopoLossData` with member `L = 1`. This
+new public witness is identical to the R418 full-reach complement carrier on
+the flattened boxed-torus size, but has zero topological loss and empty giant
+event off the flat sequence. The public theorem core therefore no longer
+carries the R418 first-edge off-flat diagnostic tail; the remaining
+above-threshold lower-bound obligation is exactly the flat-family interface
+`BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion`.
+R420 proves the flat-only carrier's `1/512` lower bound directly from
+`boxedTorusBaseIncidentClosedEvent_not_fullReach`, the finite-product mass of
+the closed base-incident event, and `boxedTorusIncidentEdgeSet_card_le_four`.
+The equality-to-R418 theorem remains only as an audit/comparison fact; the
+current public lower-bound package no longer depends on the R418 carrier
+theorem.
+R421 factors that direct proof through an explicit event statement:
+`boxedTorusFullReachFailureEvent` is the complement of the full-reach event,
+`boxedTorusBaseIncidentClosedEvent_subset_fullReachFailureEvent` gives the
+local obstruction as a sub-event, and
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass`
+identifies flat expected loss with one half of the failure-event mass.
+R422 exposes the success/failure probability partition behind that same
+argument: `boxedTorusFullReachGiantFailureEventMass_add_eq_one` and
+`boxedTorusFullReachFailureEventMass_eq_one_sub_fullReachGiantEventMass` make
+failure mass equal to `1 -` full-reach success mass, and the flat expected-loss
+proof now factors through
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_one_sub_fullReachMass`.
+R423 isolates the obstruction as a replaceable separator/cutset interface:
+`BoxedTorusBaseTargetSeparator` states that closing a coordinate edge set
+blocks every base-to-horizontal-target open path, and the full-reach failure
+mass and success-mass upper-bound theorems now work for any such separator.
+The current instance is still the local base-incident cut, but the probability
+route no longer hard-codes that instance.
+R424 makes the cutset layer omega-free: `BoxedTorusBaseTargetEdgeCutset`
+requires every edge-simple base-to-horizontal-target skeleton to meet the cut,
+and `boxedTorusBaseTargetSeparator_of_edgeCutset` turns that pure combinatorial
+fact into the closed-edge separator consumed by the probability layer.
+R425 proves the converse `boxedTorusBaseTargetEdgeCutset_of_separator`, so the
+separator predicate and the omega-free edge-cutset predicate are now connected
+in both directions on the current finite coordinate model.
+R426 adds the standard vertex-region source of such cutsets:
+`boxedTorusCoordEdgeBoundarySet_baseTargetEdgeCutset` proves that any finite
+vertex set containing the base and excluding the horizontal target generates a
+base-target edge cutset through its coordinate edge boundary.
+R427 exposes that boundary source directly at the probability and loss layers:
+`boxedTorusCoordEdgeBoundarySet_baseTargetSeparator` feeds boundary-generated
+separators into the full-reach failure-mass, success-mass upper-bound, and
+flat-only expected-loss lower-bound theorems.
+R428 instantiates the public numerical route through the singleton base-region
+boundary: the coordinate boundary of `{base}` has cardinality at most four by
+comparison with the base incident-edge set, and the `1/512` flat-only lower
+bound now calls the singleton-boundary expected-loss theorem.
+R429 factors that numerical step once more: any base-containing,
+target-excluding vertex region whose coordinate boundary has cardinality at
+most four now feeds the same `1/512` flat-only lower-bound theorem shape; the
+singleton base-region boundary is just the current instance.
+R430 lifts this from a pointwise expected-loss theorem to the family package:
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_smallBoundary`
+closes the flat boxed-torus lower-bound interface from any eventual family of
+such small boundaries, and the current public theorem instantiates it with
+the singleton base-region family.
+R431 generalizes the package-level bridge once more:
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedBoundary`
+closes the same interface from any eventual boundary family with a uniform
+finite coordinate-boundary bound `B`, using the explicit kernel constant
+`(3/4)^B / 2`; the small-boundary theorem is now just the `B = 4`
+specialization.
+R432 makes that bounded-boundary theorem probability-parametric:
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedBoundary_at`
+accepts any explicit `p` with `p_c < p <= 1` and uses constant `p^B / 2`;
+the fixed `p = 3/4` theorem is now just the current witness instance.
+R433 exposes the same quantitative step at the pointwise loss layer:
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedBoundary_pow_div_two_of_card_le`
+states the explicit `p^B / 2` expected-loss lower bound for any qualifying
+boundary before that bound is repackaged into the family interface.
+R434 exposes the current singleton instance separately:
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_baseSingletonBoundary_pow_four_div_two`
+gives the explicit `p^4 / 2` loss lower bound for the base-region boundary,
+and the public `1/512` theorem now factors through this stronger local fact.
+R435 moves the reusable lower-bound bridge below vertex boundaries:
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedSeparator_pow_div_two_of_card_le`
+and
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedSeparator_at`
+accept any bounded edge separator, while
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedCutset_at`
+accepts the omega-free edge-cutset form. The boundary-family theorem is now a
+specialization of this separator package.
+R436 exposes the omega-free cutset route one layer lower:
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedCutset_pow_div_two_of_card_le`
+is the pointwise `p^B / 2` theorem for bounded edge cutsets, and the
+bounded-cutset package now consumes it directly.
+R437 folds the legacy base-incident pointwise theorem into the same cutset
+path: `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedIncident`
+now instantiates `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedCutset`
+with `boxedTorusBaseIncidentEdgeSet_baseTargetEdgeCutset`.
+R438 mirrors that interface on the sibling full-reach complement carrier:
+`boxedTorusFullReachComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedSeparator`
+and `..._ge_closedCutset` are now audited theorem targets, and the historical
+`..._ge_closedIncident` theorem delegates to the cutset specialization.
+R439 adds the sibling quantitative forms
+`boxedTorusFullReachComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedSeparator_pow_div_two_of_card_le`
+and `..._ge_closedCutset_pow_div_two_of_card_le`; the older `1/512` theorem
+now instantiates the `B = 4`, `p = 3/4` cutset theorem instead of calling the
+incident theorem.
+R440 lifts the same sibling route through vertex boundaries and the current
+singleton base region:
+`boxedTorusFullReachComplementTopoLossData_expectedTopoLossOnData_flat_ge_baseSingletonBoundary_pow_four_div_two`
+is now the predecessor's explicit `p^4 / 2` local witness, and its `1/512`
+theorem delegates to that singleton-boundary specialization.
+R441 promotes that predecessor route to the same package-level interface:
+`BoxedTorusFullReachComplementLowerBoundConclusion_of_eventually_boundedSeparator_at`,
+`..._of_eventually_boundedCutset_at`, and the boundary specializations now
+close `BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion` for the
+sibling carrier from any eventual uniformly bounded local separator/cutset
+family; the historical current theorem delegates to that package-level current
+instance.
+The below-threshold giant-component bridge facts remain explicit interface
+predicates at the lower bridge layer: the order-statistics formula on the giant
+event and the giant-component cluster-size lower bound are not erased. On the
+current diagnostic global carrier, however,
+`topoLossKernel_pointwise_bound_paper_Def`,
+`topoLossKernel_le_one_over_n_on_giant_paper_Def`,
+`topoLossKernel_le_one_over_n_on_giant_from_bridges`, and
+`topoLossKernel_le_one_over_n_on_giant_atom` now consume the current bridge
+closures internally and expose no theorem-level bridge premises. The
+full finite-lattice route is preserved by the explicit-package bridge theorem
+`topoLossKernel_pointwise_bound_on data`.
+The public wrappers `topo_loss_on_giant_below_one_over_n`,
+`topo_loss_on_giant_below_envelope_exists`, `gap_topo_loss_below_threshold`,
+`topo_loss_decay_below_pc`, and `gap_phase_transition_below` therefore no
+longer expose those bridge parameters in theorem signatures.
+The underlying Wrongness/topo percolation carriers (`wInfoOracleKernel`,
+`wInfoOracleClusterCount`, `topoLossKernel`, `giantComponentEvent`, and
+`expectedTopoLossAboveLowerConst`) now project from a transparent diagnostic
+`WrongnessPercolationData` package. This removes the former source axiom. The
+oracle and above-threshold lower-bound sides remain neutral, while the topo
+side has a nonempty `n = 1` diagnostic giant event:
+`giantComponentEvent_one_current_nonempty` and
+`expectedTopoLossOnGiant_one_current_pos` are kernel theorems. The full
+non-trivial `Z^2_L` giant-component and above-threshold lower-bound content is
+still exposed as explicit theorem interfaces rather than claimed by this
+diagnostic carrier.
+The two below-threshold giant-event bridge statements
+`topoLossKernel_eq_orderStatisticsRatio_on_giant_current` and
+`giantComponent_cluster_size_lower_bound_current` are kernel theorems for the
+current carrier with a real `n = 1` witness; this is a non-vacuity regression
+for the bridge mechanism, not a full `Z^2_L` giant-component proof.
+
+The concrete scalar `agentRewardKernel` now also proves its general
+unit-interval range, Bayesian/Sentimental pointwise monotonicity, κ-agent
+pointwise continuity, and κ-agent increasing-differences facts directly as
+theorems. Those five facts no longer contribute source-level axioms.
+The 5-state κ-agent above-threshold, 5-state κ-agent at-threshold, and
+Bayesian-naive below-threshold pointwise monotonicity facts are likewise
+kernel theorems by unfolding the current concrete scalar kernel, removing
+three more former source axioms.
+The Bayesian-naive above-threshold strict reversal witness is now a current
+theorem, not a source axiom: the public `bayesianNaive` branch carries `p_hat`
+in the `κ` slot and switches from the below-threshold `unitRamp` branch to the
+above-threshold greedy-reversal shape at `p_hat ≥ 2/3`.
+The greedy high-precision limit kernel is also no longer a source axiom:
+`agentRewardKernel_greedy_limit_kernel` is the concrete constant `6/10`, and
+`greedyKernelPointwiseTendstoAtTop` proves the atTop convergence by eventual
+equality to that constant.
+
+The R205 Harris-Kesten / Cardy / Smirnov-Werner lower-envelope divergence claim
+is no longer retained as a live Prop interface:
+`not_harrisKestenScalingFunction_diverges_at_pc_paper_Def` proves that the
+current unbounded lower-envelope carrier is identically zero on `p ≥ 0`, due to
+the `α = 2` feasible-set-empty branch and `Real.sInf_empty = 0`. The paper
+Part 6 route now uses the parameterized
+`kappaStar_diverges_at_pc_via_scaling_carrier` transfer interface: callers must
+provide a replacement scaling carrier `s`, a proof that `s` diverges at `p_c`,
+and a domination proof `s p ≤ kappaStar p α` in the high-α regime. R467 now
+supplies an explicit hyperbolic replacement carrier
+`criticalHyperbolicScaling p := 1 / (p_c - p)` and proves
+`criticalHyperbolicScaling_diverges_at_pc`. R468 proves this exact carrier
+cannot satisfy the current unbounded high-alpha domination target:
+`not_criticalHyperbolicScaling_dominates_kappaStar_current` uses the
+`alpha = 2`, `p = 0` counterexample, where the hyperbolic carrier is positive
+but `kappaStar 0 2 = 0`. The remaining Part 6 repair is therefore a
+paper-faithful carrier/domain change, or another replacement carrier whose
+domination theorem avoids the empty-feasible-set high-alpha branch. That repair
+is the precondition for any Harris-Kesten/Cardy/SLE formalisation to become a
+valid closure target.
+
+The five-state loss-shape existence bridge
+`L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
+`L_minimum_exists_in_regime_i_proof` extreme-value argument. R238 also proves
+`L_at_betaStarOfP_continuousOn_paper_Def` by a Lipschitz value-function proof:
+fixed-`β` Lipschitz continuity in `p` plus the minimizer inequalities for
+`betaStarOfP`. R256 closes the former loss-shape paper-Def obligation, and R469
+retires the former `L_strict_unique_minimizer_paper_Def` `True` compatibility
+theorem from source. The closed proof chain derives the former Gaussian factor bridge from
+`L_lowerGaussianHazard_antitoneOn_pos` and `L_upperGaussianMills_antitoneOn_pos`
+using `gap_phi_derivative`, `gap_Phi_derivative`, `gap_phi_tail_bound`, and
+`Phi_reflect`. The R238 continuity fact and the R249-R255 Gaussian/threshold
+single-crossing chain are now ordinary theorem reductions rather than
+`Prop`-interface surfaces. R245 defines the
+explicit residual `L_balanceResidual` and makes `L_firstOrderBalance` its zero
+set. R246 corrects the live bridge to the weaker single-crossing-after-zero
+property: after a residual zero on the positive right branch, all later
+positive right-branch points have strictly positive residual. R247 factors out
+the common positive chain-rule scale as `L_balanceResidualScale`; R248 rewrites
+the reduced beta-core as the one-variable Gaussian z-core
+`L_balanceResidualZCore` under `z = Delta_B / sqrt(2 * signalVariance β)`;
+R249 removes the positive `Delta_B` factor and exposes
+`c = 0.9 * (1 - p)` in `L_balanceResidualNormalizedZCore`; R250 rewrites that
+normalized core as `c * H(z) - K(z)` and moves the bridge to positivity
+persistence of `H` plus strict decrease of the threshold `K/H`; R251 factors
+`H = scale * D` and `K = (1/2) * scale`, so the live bridge is positivity
+persistence and strict increase of the normalized denominator `D`; R252 rewrites
+`D` as the explicit hazard/Mills denominator
+`Phi z * (1 - (upperMills((2/9)z) * lowerHazard z) / (2/9))`, and proves
+`D(z) > 0` iff that hazard/Mills product is `< 2/9`; R253 reduces denominator
+shape to non-increase of that explicit product on positive `z`.
+R236 closes the left-branch derivative
+sign as `L_hasDerivAt_negative_on_left_branch`, and R237 closes the
+right-branch chain-rule/algebra layer conditionally as
+`L_hasDerivAt_positive_of_right_branch_dominance`. R241 closes the
+left-branch global-minimiser exclusion as
+`L_global_minimizer_not_left_branch`: a positive global minimiser cannot lie
+on the negative-derivative branch. R242 also closes
+`L_global_minimizer_not_right_branch_dominance`: the current right-branch
+dominance condition cannot hold at a positive global minimiser because it
+would give a positive derivative and a better positive point to the left. The
+R243 Fermat step proves the exact first-order balance equation at every
+positive global minimiser via
+`L_global_minimizer_first_order_balance`. The strict-uniqueness burden is now
+the pair of pure one-variable Gaussian ratio antitonicity facts for upper
+Mills and lower hazard, which imply product antitonicity, denominator shape,
+threshold shape, full residual single-crossing, and then balance uniqueness.
+The source-level `_paper_Def`
+axiom count is now zero.
+
+`AgentEdgeIdx` is now the concrete finite carrier `Fin 7`, matching the
+existing `Wrongness.EdgeIdx` finite-carrier pattern and removing the separate
+type/Fintype/DecidableEq carrier axioms.
+
+The Principal above/below-threshold welfare components
+`aboveThresholdWelfare` and `belowThresholdWelfare` are now concrete finite
+weighted sums over the explicit `principalSampleAbove` / `principalSampleBelow`
+carriers; their integral-identification lemmas are `rfl` theorems rather than
+global structural-equation axioms.
+The above/below sample support types now project from `PrincipalSampleData`,
+which packages the support carrier with its `Fintype` and `DecidableEq`
+instances, plus the sample `weight`, `kappa`, and `alpha` fields consumed by
+the finite weighted sums. The public parameter functions are projections from
+that data package rather than standalone global source axioms.
+The two sample-data packages and the G-parameterised `aggregateWelfareWith`
+functional now come from concrete one-point principal samples; this removes the
+former `PrincipalData` source axiom entirely. The two sample-weight
+non-negativity facts are kernel-proved for the unit-weight samples.
+
+The per-agent optimal aggregate `perAgentOptimalAggregate` is likewise a
+concrete finite weighted sum over the sample carriers and their per-agent
+`β*` assignments; `perAgentOptimalAggregate_eq_reversalValley_sum` is now a
+definitional theorem over the public reversal-valley carrier.
+
+The legacy scalar κ-agent welfare branch is still constant at `1/2`, and
+Principal keeps its direct refutation evidence for the old false witness
+interfaces:
+`principalSampleAbove_individual_welfare_monotone`,
+`principalSampleBoth_combined_convergence_witness`,
+`belowThresholdWelfare_per_sample_le_at_zero_for_negative`, and the two
+legacy per-agent optimum dominance facts. Four strict scalar sample predicates
+remain kernel-proved false for that legacy carrier and are tracked as
+diagnostic routes rather than live public inputs:
+`PrincipalSampleBelowWeightedSumEventuallyDecreasing`,
+`PrincipalSampleBothCombinedDominanceWitnessPair`,
+`PrincipalSampleBothExceedsZeroWitness`, and
+`PrincipalSampleBothValleyTripleWitness`.
+R507 rewires the public Principal carrier: `aboveThresholdWelfare` now uses
+`kappaAgentRewardRamp`, `belowThresholdWelfare` now uses
+`principalBelowReversalValleyReward`, and `W_bar_eq_reversalValleyCandidate`
+bridges the public aggregate to the bounded reversal-valley carrier.
+`principal_interior_maximum_exists`, `W_bar_eventually_decreasing`,
+`W_bar_limit_infty_eq_W_bar_three`, and
+`W_bar_finite_above_limit_witness` are current public theorems on that carrier.
+R508 lifts the remaining public strict-shape evidence to the installed
+carrier: `W_bar_exceeds_zero_at_positive_beta`,
+`W_bar_witness_pair_strict_dominance`, and
+`W_bar_valley_triple_witness` are now direct public `W_bar` theorems, while
+the legacy scalar sample refutations remain diagnostic only.
+R510 completes the Part 2 public rewire:
+`aggregateWelfareWith_principal_part2_package` proves the public finite
+FOSD-ramp carrier has per-`G` maxima, FOSD-induced difference domination, and
+monotone stable beta selection kernel-purely.
+The old false-premise `gap_disclosure_full_suboptimal` wrapper remains retired;
+the live Part 1 evidence is the direct finite-above-limit theorem. R470 also
+retires the old vacuous averaged-overshoot atom from the live theorem
+inventory: the
+`delta_bar := 1` existential discharge is tracked as a dead-end/notInput marker,
+not as Cat 1 evidence for the disclosure mechanism.
+
+The trap-tree terminal reward equation
+`oracleBridgePathTerminalReward_TrapTree_eq_r_goal` is now a theorem from the
+concrete bridge-terminal reward definition
+`oracleBridgePathTerminalReward_TrapTree := fun _ => r_goal`; it is no
+longer an explicit hypothesis of `gap_error_compounding_part2`. The remaining
+empty compatibility carrier has also been removed: public
+`gap_error_compounding_part2` is now the direct kernel theorem.
+
+The `V_g_terminal_in_ForwardReachable` bridge is now a theorem from the
+well-founded `V_g` recursion and canonical `ForwardReachable` transitivity, so
+`gap_V_g_le_V_dyn` no longer consumes a terminal-membership structural
+equation. The remaining terminal-neighbour bridge interfaces are Prop-valued
+theorem parameters consumed by `terminal_neighbour_implies_C2prime` and
+`dilemma_subsumed_by_gap_general_tree`, not global source-level axioms.
+
+`V_g` is now a well-founded concrete greedy traversal over the current
+canonical finite vertex carrier (`Vertex = Fin 5`). The paper recursion
+equations `V_g_def_terminal` and `V_g_def_step` are current theorems obtained
+from `greedyPathValue.eq_def`, so no `V_gRecursionCarriers` interface remains
+on this path.
+
+The terminal-neighbour bridge `V_g_eq_V_dyn_on_terminal_neighbour_current`
+is now tracked as a dead-end route marker rather than a closed contribution:
+the theorem is kernel-closed only vacuously because
+`not_TerminalNeighbourTopology_current` proves the complete-loopless `Fin 5`
+graph cannot instantiate the paper's terminal-neighbour topology. A
+non-vacuous theorem needs a graph-parametric carrier. The companion
+`C2_to_C2prime_via_V_g_eq_V_dyn_at_terminal_neighbour_current` theorem is
+tracked the same way, since it closes for the same false-premise reason.
+The old `gap_dilemma_parametricGraphScope_current` wrapper has been removed:
+its graph-scope parameter was not proof-relevant, so the concrete
+`fin5Trap_parametricGraphScope_current` route now calls the current scalar
+dilemma theorem directly and the audit no longer counts a misleading
+conditional theorem signature there.
+
+The Theorem 6.1 greedy C2′ kernel-reversal witness
+`agentRewardKernel_greedy_C2prime_kernel_reversal_witness` is discharged for
+the current scalar carrier by
+`agentRewardKernel_greedy_C2prime_kernel_reversal_witness_current`. The generic
+routes remain available as `gap_general_tree_from_reversal` and
+`gap_cyclic_trap_from_reversal`; public `gap_general_tree` and
+`gap_cyclic_trap` consume the current witness internally.
+
+The former Bayesian satisficing atoms, ER supercritical atom, and Principal
+aggregate-optimum existence atom are also explicit theorem interfaces. As of
+this audit there are no remaining source-level `_OPEN` axioms.
+
+For the myopic-k robustness theorem, the public
+`gap_robustness_myopic_k` now consumes the closed current
+`gap_blackwell_monotonicity` theorem and current myopic carrier directly. The concrete
+`MyopicKWelfareCarriers_current` witness uses the zero below-depth branch as a
+kernel-visible model of the paper-implicit carrier slot; the former generic
+Blackwell wrapper is retired from the live theorem-signature surface. The
+horizon-suffices equality is now stated over the current carrier, so
+`MyopicKWelfareCarriers` no longer contributes a conditional theorem signature.
+
+The satisficing robustness theorem now proves the current concrete model
+directly: `SatisficingCarriers_current` uses `acceptance β = β` and
+`welfare β = -β`, and public `gap_robustness_satisficing` closes the
+strict-reversal witness without a carrier-parameter theorem signature. The
+current affine trap-acceptance and welfare-antitonicity facts are ordinary
+theorems rather than fields of a project-level carrier record.
+
+The old current-carrier C2 local-greedy bridge route is now retired from the
+live interface surface. The finite path counterexample has `u_high = 1`
+already in history, so its diagnostic continuation value is `0.6`; the low
+branch `2` can reach reward-`1` vertex `0`, but local greedy continues along
+`0 -> 3` and terminates at reward `0`. This proves both direct refutations
+`not_C2LocalGreedyDominatesForwardReachableAtWitnesses_current` and
+`not_C2LocalGreedyDiagnosticWitnessBridge_current`. The same complete-loopless
+carrier also proves the expanded same-witness full C2prime local-greedy
+existential impossible via `not_C2primeLocalGreedyFullWitness_current`. The
+non-vacuous route is the graph-parametric fin5Trap/terminal-neighbour theorem
+path, not the retired current-carrier wrapper.
+
+Likewise, conditional-reduction part (i) now has a public
+`gap_conditional_reduction_part_i` theorem that consumes the closed current
+Blackwell monotonicity theorem internally; the generic route remains
+`gap_conditional_reduction_part_i_from_blackwell`. Its current theorem surface
+is standard-only; the theorem still exposes `IsBlackwellOrdered signalFamily`,
+which is the substantive scope condition for the conditional subproblem.
+
+Cognitive-threshold Part 2 follows the same pattern:
+`gap_cognitive_threshold_part2` consumes the closed current Blackwell
+monotonicity theorem internally, while
+`gap_cognitive_threshold_part2_from_blackwell` preserves the generic route.
+The public theorem no longer exposes the non-load-bearing diagnostic
+graph-scope hypotheses. The surrounding Theorem 4.1 bundle no longer carries
+`hC`, `hT`, or the ambient diagnostic class on the current scalar route; the
+Part 3 Gaussian bridge is now discharged directly by the concrete posterior
+witness.
+
+The Canonical five-state Blackwell-transfer clauses now follow the same
+public/generic split. Public `gap_threshold_fiveState_kappa_above_kstar` and
+`gap_bayesian_naive_reversal_absent` consume the closed current Blackwell
+monotonicity theorem internally; the reusable routes
+`gap_threshold_fiveState_kappa_above_kstar_from_blackwell` and
+`gap_bayesian_naive_reversal_absent_from_blackwell` retain the explicit
+Blackwell antecedent.
+R511 closes the above-threshold Bayesian-naive reversal status for the current
+public carrier.  The `bayesianNaive` reward kernel now carries the misspecified
+prior `p_hat` in the `κ` slot: below threshold it is `unitRamp β`, and above
+threshold it has the greedy-reversal shape, so
+`prop:bayesian-naive-five-state` Parts (i), (ii), and (iii) are all current
+kernel theorems.
+
+The five supermodular factor-sign inputs
+(`sigEffRatioFactor_pos`, `mPrime_pos`, `bridgeValueGap_pos`,
+`pCorrectDerivKappa_pos`, `vDynDerivBeta_nonneg`) are no longer global
+source-level axioms. They are collected in `SupermodularFactorSigns`, and the
+current canonical scalar package supplies the theorem
+`canonicalSupermodularFactorSigns`.
+The generalized theorem routes remain available as `gap_supermodular_from_signs`
+and `gap_policy_complementarity_from_signs`; public `gap_supermodular` and
+`gap_policy_complementarity` consume `canonicalSupermodularFactorSigns`
+internally and no longer expose a factor-sign package parameter. R494 aligns
+the public policy-complementarity export with the paper-facing supermodular
+corner inequality direction (`W(β₁,κ₁)+W(β₂,κ₂) ≥ W(β₁,κ₂)+W(β₂,κ₁)`).
+R495 made the prior current-carrier limitation explicit: the old
+`kappaAgentWelfareSNR` route was kernel-proved constant at `1/2`, so its weak
+corner inequality was a flat closure. R496 added the checked replacement core:
+`kappaAgentRewardRamp` / `kappaAgentRewardKernelRamp` are bounded,
+β-continuous, β-monotone, and have increasing differences; R497 switches the
+public `kappaAgentWelfareSNR` carrier to that ramp expectation and proves both
+nonflatness and a strict four-corner witness. R498 adds a Principal-side ramp
+calibration: `W_bar_ramp` is non-flat and saturates after β = 1, but
+`W_bar_ramp_le_at_one` / `not_W_bar_ramp_above_saturation_witness` rule out
+ramp-only overshoot above the saturation value, and
+`not_PrincipalRampBelowWeightedSumEventuallyDecreasing` proves the current
+below sample (`κ = 0`, `α = 0`) still cannot provide the strict below-regime
+decrease. The existing Principal dead-end theorems still document the older
+global `agentWelfare AgentType.kappaAgent` constant branch, and full Principal
+recalibration now specifically requires a reversal-capable below-threshold
+kernel rather than merely reusing the monotone ramp. R499 adds that positive
+next target without rewiring the public carrier yet:
+`principalBelowReversalReward` is bounded in `[0,1]`, rises from `1/2` at
+β = 0 to `1` at β = 1, falls back to `1/2` at β = 2, and yields
+`principalReversalBelowWeightedSumEventuallyDecreasing`,
+`W_bar_reversalCandidate_finite_above_tail_witness`, and
+`W_bar_reversalCandidate_strict_drop_after_peak` as kernel-proved witnesses.
+R500 adds `W_bar_reversalCandidate_tendsto_atTop` and
+`W_bar_reversalCandidate_disclosure_part1_witness`, proving the candidate
+aggregate is eventually equal to its saturated tail value and has a finite
+β strictly above that tail limit. This is still a candidate-carrier result,
+not a public `W_bar` rewire.
+R501 adds `principalReversalCandidate_combined_exceeds_zero_witness` and
+`principalReversalCandidate_combined_dominance_witness_pair`, giving the
+candidate-carrier analogues of the strict-interior witnesses refuted for the
+then-current scalar public carrier.
+R502 then adds the unified `principalBelowReversalValleyReward` /
+`W_bar_reversalValleyCandidate` carrier: the below reward takes exact values
+`1/2`, `1`, `0`, and `1/2` at β = 0, 1, 2, and 3, stays in `[0,1]`, and
+the aggregate proves below strict decrease, finite-above-tail, atTop-tail,
+combined-dominance, and valley-triple witnesses kernel-purely. At that point
+it was the best Principal rewire target; R507 later installed it as the public
+carrier.
+R503 strengthens that target with `W_bar_reversalValleyCandidate_le_at_one`
+and `W_bar_reversalValleyCandidate_strict_interior_optimum_witness`: β = 1 is
+a global maximizer of the candidate aggregate and strictly improves over
+β = 0. R504 bundles the same route into
+`W_bar_reversalValleyCandidate_complete_principal_package`, a single
+kernel-only package covering strict interior global optimum, finite-beta
+overshoot above the disclosure tail, and the valley-triple non-concavity
+witness. R505 adds the continuity bridge for that rewire target:
+`principalRampAboveThresholdWelfare_continuousOn_Ici`,
+`principalBelowReversalValleyReward_continuousOn_Ici`,
+`principalReversalValleyBelowThresholdWelfare_continuousOn_Ici`, and
+`W_bar_reversalValleyCandidate_continuousOn_Ici`. R506 adds
+`W_bar_reversalValleyCandidate_has_limit_infty`,
+`W_bar_reversalValleyCandidate_eventually_decreasing`, and
+`W_bar_reversalValleyCandidate_public_interface_package`, so the candidate now
+matches the public Principal interface surface for continuity, eventual
+decrease, limit existence, strict interior optimum, disclosure-tail overshoot,
+and valley evidence. R507 installs that target as the public carrier:
+`W_bar_eq_reversalValleyCandidate` is definitional, and the public
+finite-above-limit/disclosure-tail, eventual-decrease, and strict-interior
+maximizer statements now close on the same kernel-only reversal-valley
+aggregate.
+R508 adds the remaining public strict-response and non-concavity surface:
+`W_bar_exceeds_zero_at_positive_beta`, `W_bar_witness_pair_strict_dominance`,
+and `W_bar_valley_triple_witness` are kernel-only consequences of that same
+public aggregate.
+R510 completes the remaining Part 2 rewire path: the public
+`aggregateWelfareWith` is definitionally bridged to `aggregateWelfareWithFOSDRamp`,
+public `aggregateOptimalBeta` uses the stable finite-ramp selector, and
+`aggregateWelfareWith_principal_part2_package` proves per-`G` maximizer
+existence, FOSD-induced difference dominance, and monotone beta selection
+without new project axioms.
+The current supermodular
+and policy-complementarity routes also no longer carry a
+non-load-bearing Topkis theorem parameter; Topkis remains roadmap-relevant for
+semantic alignment, not a current proof input.
+The underlying supermodular scalar carriers (`snrZ`, `BridgeDominance`,
+`sigEffRatioFactor`, `mPrime`, `bridgeValueGap`, `pCorrectDerivKappa`, and
+`vDynDerivBeta`) now come from a concrete scalar package, so this block has no
+source-level axiom.
+
+The above-threshold topological-loss Mills route is explicitly dead-ended:
+`not_mills_inverse_above_threshold_route_with_unit_bound` shows the R200/R201
+Mills-inverse decomposition is incompatible with the unit upper bound on
+topological loss. The surviving task is a corrected, unit-compatible
+above-threshold lower-bound theorem for a real `Z^2_L` carrier.
+That corrected target is now present as
+`UnitCompatibleAboveThresholdLowerBoundConclusion data`; Lean also proves the
+current all-open boxed-torus carrier cannot satisfy it because its
+`expectedTopoLossOnData` value is always zero.
+Lean also proves a positive diagnostic instance,
+`unitPositiveTopoLossData_unitCompatibleAboveThresholdLowerBoundConclusion`,
+with `expectedTopoLossOnData = 1/2`; this validates the corrected interface
+shape without pretending to close the paper's random finite-lattice theorem.
+The stronger R409 regression witness
+`firstEdgeStochasticTopoLossData_unitCompatibleAboveThresholdLowerBoundConclusion`
+computes the lower bound from `percExpectation_open_edge_indicator`, so the
+route now exercises the finite Bernoulli product measure rather than only a
+constant integrand.
+R410 additionally proves
+`firstEdgeGiantStochasticTopoLossData_positiveGiant_and_unitCompatible`: the
+same stochastic lower-bound carrier is supported on a positive-mass
+first-edge-open event and has restricted topo-loss expectation `(1-p)/2`.
+R411 adds `boxedTorusAllOpenPositiveTopoLossData`, the first positive
+topo-loss regression carrier supported on the finite boxed-torus all-open
+coordinate-edge event. It also proves
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusAllOpenPositive`,
+which rules out a fixed-`L` boxed-torus event as the final eventual
+above-threshold theorem.
+R412 then strengthens the graph-local theorem core itself with
+`UnitCompatibleAboveThresholdLowerBoundConclusion data` and supplies the
+combined witness `boxedTorusAllOpenFirstEdgeAwayTopoLossData 1`. The same
+selected data package now stores oracle interfaces, finite nonzero oracle
+decay, below-threshold giant-event envelope, full-cluster boxed-torus evidence,
+boxed-torus cluster-count bounds, and the corrected above-threshold
+lower-bound package.
+R413 reroutes that public core to `firstEdgeOpenGiantClosedTopoLossData`, where
+the giant event and lower-bound loss are the same first-edge-open event and its
+closed complement rather than two separated supports. The selected package
+still stores the oracle interfaces, finite nonzero oracle witness,
+below-envelope, full-cluster, cluster-count, and corrected lower-bound
+conclusions required by the strengthened core.
+R414 reroutes the same public core again to
+`allEdgeOpenGiantComplementTopoLossData`, replacing the single-edge event with
+the all-edge-open event over the current finite carrier. The lower-bound proof
+uses monotonicity against the R413 first-edge-closed loss, so the corrected
+above-threshold package remains uniform while the event side is less
+single-edge-specific.
+R415 reroutes the public core to `boxedTorusAllOpenComplementTopoLossData 1`,
+keeping the all-open/complement loss at the boxed-torus flat index while using
+the concrete boxed-torus reachable-set cluster count from
+`boxedTorusFiniteBondGraphOracleData 1`. The first-edge-closed tail remains
+only away from the flat boxed-torus index to satisfy the eventual
+above-threshold lower-bound interface.
+R416 adds the flat-sequence lower-bound package
+`BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current`,
+showing that the boxed-torus flat sizes themselves already have a uniform
+positive complement-loss lower bound. R417 replaces the public core's
+all-`n` lower-bound field with this family-level flat-sequence interface, so
+the unqualified `fin5Trap_parametricGraphLocalDilemmaTheoremCore` no longer
+consumes the away-from-flat tail.
+R418 replaces the public witness family with
+`boxedTorusFullReachComplementTopoLossData`: the selected flat-size event is
+the full reachable-set cardinality event, all-open is only a positive-mass
+sub-event, and the complement-loss lower bound now comes from the explicit
+base-incident-closed obstruction.
+R419 changes the selected public witness family to
+`boxedTorusFullReachFlatOnlyComplementTopoLossData`: the flat-size theorem
+surface is unchanged from R418, but off-flat indices are zero/empty rather
+than using the old first-edge diagnostic fallback. The public core now matches
+the flat-family lower-bound interface it consumes.
+R420 moves the flat-size `1/512` lower-bound proof onto the flat-only carrier
+itself, via
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedIncident`;
+the public lower-bound theorem no longer rewrites through the R418 carrier.
+R421 makes the same proof event-level: the failure event has a kernel-proved
+mass lower bound from the closed base-incident event, and the flat-only
+expected topo loss is exactly half of that failure-event mass.
+R422 rewrites that event-level proof into the success-probability form: the
+local obstruction gives an upper bound on full-reach success mass, and the
+flat-only expected topo loss is exactly half of `1 -` that success mass.
+R423 factors the local obstruction through a generic separator/cutset
+interface, so replacing the current local base-incident cut with a nonlocal
+`Z^2_L` separator or crossing theorem no longer requires changing the
+event-mass or expected-loss layers.
+R424 separates the combinatorial and percolation sides of that interface:
+future work can prove an omega-free edge-cutset statement and reuse the
+kernel-proved cutset-to-separator bridge.
+R425 adds the reverse bridge, showing that the separator interface is not a
+weaker semantic wrapper: it is equivalent to hitting every edge-simple
+base-target skeleton in the current finite model.
+R426 lowers the future nonlocal task again: it is enough to produce a
+vertex-region boundary separating base from target, and the kernel route turns
+that boundary into the required edge cutset and separator.
+R427 carries that boundary specialization through the finite event-mass and
+flat expected-loss layers, so a future nonlocal region-boundary proof can plug
+in without changing the Bernoulli-product or loss algebra.
+R428 makes the current public `1/512` lower-bound theorem use that boundary
+surface: the singleton base-region boundary is proved to have at most four
+edges, and the numerical lower bound now flows through
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_baseSingletonBoundary`.
+R429 inserts the generic small-boundary theorem above that instance:
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedBoundary_one_over_512`.
+The public theorem therefore specializes a cardinality-`<= 4` boundary route,
+not a singleton-only numerical proof.
+R430 moves the same bridge to package level:
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current` now delegates to
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_smallBoundary`
+before specializing to `{base}`.
+R431 inserts the more general bounded-boundary package theorem
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedBoundary`
+under that small-boundary theorem, so the proof no longer hard-codes the
+number four except in the current singleton specialization.
+R432 inserts the probability-parametric version
+`BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedBoundary_at`
+under the fixed `3/4` theorem, so the reusable package interface now follows
+the paper's arbitrary above-threshold `p` form.
+R433 moves the reusable quantitative step one layer lower:
+the pointwise flat expected-loss theorem now exposes `p^B / 2` directly from
+a boundary-cardinality bound, and the package theorem consumes that theorem.
+R434 does the same for the current singleton obstruction: the public
+singleton lower bound first proves an arbitrary-`p` `p^4 / 2` pointwise
+theorem, then specializes to `p = 3/4` and weakens numerically to `1/512`.
+R435 moves that reusable package one level closer to the nonlocal target:
+bounded edge separators and omega-free edge cutsets now close the same
+above-threshold package directly; vertex-boundary families are just one
+instantiation route.
+R436 makes the cutset route visible before package closure: a future nonlocal
+`Z^2_L` skeleton or crossing proof can target the pointwise cutset lower-bound
+theorem directly, then reuse the existing package theorem.
+R437 makes the current local base-incident witness a direct instance of that
+same cutset theorem, leaving fewer special-case local calculations in the
+public route.
+R438 keeps the older full-reach complement carrier aligned with that route:
+its flat expected-loss lower bound now exposes separator/cutset theorem names
+instead of only the legacy base-incident theorem.
+R439 makes that predecessor quantitative too: its public `1/512` witness now
+flows through the same `p^B / 2` cutset theorem at `B = 4`, `p = 3/4`.
+R440 makes the predecessor's current witness boundary-generated as well:
+`{base}` supplies the same `p^4 / 2` theorem before the fixed numerical
+specialization.
+R441 then gives that predecessor the same eventual bounded
+separator/cutset/boundary package surface as the flat-only successor, so the
+older current theorem is no longer a one-off existential proof.
+R442 adds `BoxedTorusFlatFamilyCoreConclusion`, an audited family-level
+package requiring the flat above-threshold lower bound plus eventual
+per-member oracle, pointwise topo-loss, giant-event, and cluster-count
+packages. Both the predecessor and public flat-only full-reach families now
+close this package, and `ParametricGraphLocalDilemmaTheoremCore` stores it
+explicitly.
+R443 adds the generic bridge
+`parametricGraphLocalDilemmaTheoremCore_of_boxedTorusFlatFamilyCore`: any
+family proving `BoxedTorusFlatFamilyCoreConclusion` now directly yields the
+public graph-local theorem core, so a future random finite-`Z^2_L` family proof
+can plug into the main theorem core without reworking the fin5Trap graph-local
+side.
+R444 tightens that family-core package by removing the redundant
+`OracleInfoDecayConclusionOn (family L)` field from the eventual per-member
+requirements. The public graph-local core can still recover selected-member
+oracle decay, but the generic bridge now derives it from
+`WInfoOracleInterfacesOn (family L)` instead of asking a future `Z^2_L` family
+proof to carry a second proof of the derived consequence.
+R445 applies the same cleanup to the unqualified
+`ParametricGraphLocalDilemmaTheoremCore` selected-member contract itself: it
+stores `WInfoOracleInterfacesOn data` as the oracle proof surface, not the
+derived `OracleInfoDecayConclusionOn data` field. The older `...CoreOn`
+compatibility surfaces still expose oracle decay when a consumer specifically
+needs that derived theorem.
+R446 removes the remaining selected-member package duplication from the
+unqualified core.  The public core now stores the closed
+`BoxedTorusFlatFamilyCoreConclusion family` plus the already audited
+`ParametricGraphLocalGreedyDilemmaCore`; the selected member's oracle,
+nonzero, topo-loss, giant-event, and cluster-count packages are recovered from
+the family-core eventual witness instead of being duplicated in the
+theorem-core tuple.
+R447 removes the remaining graph-local tuple expansion from the unqualified
+core.  The public theorem-core witness now reuses
+`ParametricGraphLocalGreedyDilemmaCore` directly, so graph scope and greedy
+reversal are supplied by one closed subpackage rather than repeated as
+separate fields.
+R448 applies the same packaging discipline to the legacy nonzero-oracle
+compatibility surface: `ParametricGraphLocalDilemmaTheoremCoreOnWithNonzeroOracle`
+is now just `ParametricGraphLocalDilemmaTheoremCoreOn data` plus the
+`OracleInfoNonzeroWitnessOn data` field.
+R449 removes the graph-local tuple expansion from that on-data compatibility
+core as well: `ParametricGraphLocalDilemmaTheoremCoreOn data` now stores
+`ParametricGraphLocalGreedyDilemmaCore` plus the selected member's derived
+oracle-decay theorem.
+R450 removes another derived field from the family-core package:
+`ExpectedTopoLossOnGiantEnvelopeConclusion (family L)` is no longer an
+eventual per-member input.  The family-core stores the pointwise
+`TopoLossKernelPointwiseBoundOn (family L)` proof, and
+`BoxedTorusFlatFamilyCoreConclusion_expectedTopoLossOnGiantEnvelope` recovers
+the restricted-expectation envelope through
+`expectedTopoLossOnGiantEnvelopeConclusion_from_pointwise_bound`.
+R451 applies the same reduction to `CurrentOracleInfoDecayConclusion`: the
+existential current oracle package no longer stores the already-derived
+`OracleInfoDecayConclusionOn data` field alongside `WInfoOracleInterfacesOn
+data`. It stores the oracle interfaces and the nonzero witness; decay remains
+recoverable from `oracleInfoDecayConclusionOn_from_finite_interfaces`.
+R452 retires `GiantComponentEventPositiveMassConclusion` as a standalone
+Prop-interface package. The positive-mass-only fact is now an expanded theorem
+target and a proof-valued projection from the stronger
+`GiantComponentEventFullClusterConclusion`, which already contains nonempty,
+positive-mass, and full-cluster evidence on the same event.
+R453 applies the same theorem-interface downgrade to the family-core envelope
+projection: `BoxedTorusFlatFamilyCoreConclusion_expectedTopoLossOnGiantEnvelope`
+is now a proof-valued `def`, not a conditional theorem signature. The remaining
+conditional theorem signature is the R443 generic promotion from a closed
+`BoxedTorusFlatFamilyCoreConclusion family` package into the public graph-local
+theorem core.
+R454 demotes that remaining generic promotion bridge,
+`parametricGraphLocalDilemmaTheoremCore_of_boxedTorusFlatFamilyCore`, from a
+conditional theorem signature to a proof-valued `def`. It still constructs the
+same public theorem-core package from a closed family-core proof, but the
+syntactic theorem-interface audit now has no theorem/lemma declarations that
+take interface packages as premises.
+R455 retires `CurrentDilemmaConclusion` as a standalone Prop-interface wrapper.
+The current dilemma route now targets the expanded conjunction
+`CurrentGreedyWelfareReversalConclusion ∧ CurrentOracleInfoDecayConclusion`
+directly, so the audit no longer counts a conclusion package that merely
+repeated its two already-audited component packages.
+R456 applies the same cleanup to `CurrentGreedyWelfareReversalConclusion`.
+The current greedy route now states the beta/beta-prime welfare reversal
+existential directly, while `currentGreedyWelfareReversalConclusion` remains as
+the theorem name proving that expanded statement.
+R457 removes the matching `CurrentOracleInfoDecayConclusion` Prop-interface
+wrapper.  The current oracle route now states the finite nonzero
+`WrongnessPercolationData` existential directly, and the current bridge
+declarations that expose `OracleInfoNonzeroWitnessOn` in their proof target are
+proof-valued `def`s, preserving the zero conditional-theorem-signature audit.
+R458 demotes `OracleInfoNonzeroWitnessOn` itself from a standalone `def`-level
+Prop interface to a transparent `abbrev` for the same expanded nonzero
+existential. Existing proof names still document the finite nonzero witnesses,
+but the syntactic Prop-interface audit no longer treats the abbreviation as a
+separate package layer.
+R459 demotes `ExpectedTopoLossOnGiantEnvelopeConclusion` from a standalone
+`def`-level Prop interface to a transparent `abbrev` for the same
+restricted-expectation envelope. The named theorem
+`expectedTopoLossOnGiantEnvelopeConclusion_from_pointwise_bound` still recovers
+that envelope from `TopoLossKernelPointwiseBoundOn`, but the envelope alias is
+no longer counted as a separate Prop-interface package.
+R460 demotes the two below-threshold topo-cluster bridge statements,
+`topoLossKernel_eq_orderStatisticsRatio_on_giant_paper_Def` and
+`giantComponent_cluster_size_lower_bound_paper_Def`, from `def`-level Prop
+interfaces to transparent `abbrev`s. Their current diagnostic closure theorems
+and downstream pointwise topo-loss theorem remain unchanged, but the aliases no
+longer contribute two separate counted interface packages.
+R461 demotes the remaining counted `def`-level Prop packages in the
+graph-local/wrongness core to transparent `abbrev`s: the parametric C2prime and
+graph-scope witnesses, the local C2prime witness-on-data alias, the greedy
+wrongness reversal witness, and the giant-event/cluster-count/above-threshold
+boxed-torus family packages. The audit surface now contains only five
+structure/class carrier interfaces; theorem content and current closure proofs
+are unchanged.
+R462 removes the remaining single-field `WrongnessGreedyInterfaces` structure
+from the counted interface surface by making it a transparent abbreviation for
+`GreedyWrongnessKernelReversalWitness`. The current wrongness reversal theorem
+now applies `WrongnessGreedyInterfaces_current` directly rather than projecting
+a record field.
+R463 demotes the single-field `MyopicKWelfareCarriers` data record to a
+transparent function-type abbreviation for the below-depth welfare branch. The
+current carrier remains the same zero below-depth branch, and the public
+myopic-k robustness theorem still uses the same kernel-pure `if_pos` route in
+the paper-named `k >= d` regime.
+R464 demotes the trap-tree `KappaStarDepthDCarriers` record to a transparent
+positive-subtype carrier `{ cStar : ℝ // 0 < cStar }`. The public depth-d
+`κ*` asymptotic route is unchanged: `c_star_constant` projects the value and
+`c_star_constant_pos` projects the subtype proof for the current unit carrier.
+R465 demotes `SatisficingCarriers` from a proof-bearing record to a transparent
+pair of carrier functions. The current affine monotonicity and
+welfare-antitonicity evidence is now exposed as ordinary theorems, so the
+conditional-surface audit leaves only `DiagnosticSignalHypothesisData`.
+R466 demotes `DiagnosticSignalHypothesisData` from a `class` record to a
+class-attributed inductive kernel-data package with explicit accessor
+definitions. The existing local-instance route is preserved, but the
+conditional-surface audit now reports zero counted proof/carrier interfaces.
+
+There are no remaining source-level project axioms. The residual work is now
+in explicit theorem interfaces and ledger-tracked partial/dead-end items, not
+hidden global declarations.
+
+The three oracle information-decay pointwise obligations
+(`wInfoOracleKernel_nonpos`, `wInfoOracleClusterCount_ge_one`,
+`wInfoOracleKernel_abs_le_clusterCount`) now close directly on the current
+neutral global carrier through `W_info_oracle_current_uniform_unit_bound`; the
+legacy global `WInfoOracleInterfaces` route has been retired. Future
+non-neutral oracle work remains represented by the parameterized
+`WInfoOracleInterfacesOn data` surface and its finite/boxed-torus instances.
+The public `currentOracleInfoDecayConclusion` theorem has also moved off the
+legacy global zero residual and no longer targets a standalone
+`CurrentOracleInfoDecayConclusion` package: it proves directly the existential
+finite nonzero `WrongnessPercolationData` package carrying its
+`WInfoOracleInterfacesOn data` proof and no separate derived oracle-decay
+field, witnessed by the all-open boxed-torus carrier
+`boxedTorusAllOpenGiantTopoLossData 1`. The smaller
+`boxedTorusFiniteBondGraphOracleData 1` theorem remains as a regression
+witness with the same explicit-interface package shape.
+The nonzero oracle side is no longer only a roadmap item. The unqualified
+`fin5Trap_parametricGraphLocalDilemmaTheoremCore` now selects a finite nonzero
+oracle/topological carrier
+(`boxedTorusFullReachFlatOnlyComplementTopoLossData 1`) whose
+boxed-torus flat-index giant event is full reachability of the concrete
+finite-bond reachable set and whose complement loss is lower-bounded by the
+base-incident-closed obstruction. Off the flat sequence, this public carrier
+has zero topological loss and empty giant event instead of an eventual
+first-edge fallback. Its type now requires the same data package to satisfy
+the family-level `BoxedTorusFlatFamilyCoreConclusion family` package. That
+family-core package supplies eventual per-member
+`WInfoOracleInterfacesOn data`, `TopoLossKernelPointwiseBoundOn data`,
+`GiantComponentEventFullClusterConclusion data`,
+`BoxedTorusClusterCountExpectationBoundsConclusion data`,
+not a derived oracle-decay theorem, a derived restricted-expectation envelope,
+a positive-mass-only event, a nonempty event, or only a nonzero oracle
+witness package. The nonzero witness is now a transparent abbreviation for the
+expanded oracle-residual existential, and the envelope package is still
+available from the stored pointwise
+topo-loss proof.
+`fin5Trap_parametricGraphLocalDilemmaTheoremCoreWithNonzeroOracle` is retained
+as the compatibility name for that same strengthened core. The concrete
+boxed-torus theorem
+`fin5Trap_boxedTorusAllOpenGiant_parametricGraphLocalDilemmaTheoremCoreOnWithNonzeroOracle`
+packages the oracle-interface-derived on-data core together with
+the transparent `OracleInfoNonzeroWitnessOn` nonzero existential abbreviation
+directly.
+The generic proof-valued bridge
+`parametricGraphLocalDilemmaTheoremCore_of_boxedTorusFlatFamilyCore` is now the
+single graph-local bridge from a boxed-torus family package to the public core;
+the current `fin5Trap_parametricGraphLocalDilemmaTheoremCore` is just its
+flat-only full-reach instance.
+This core route therefore no longer depends solely on the neutral zero oracle
+package, on a selected-member derived oracle-decay field, or on a prose-only
+topo-loss/nonempty-event side condition.  It also no longer duplicates the
+selected-member package already contained in the family-core witness. The
+remaining percolation repair is the random topological-loss/giant-component
+carrier that ties the positive lower-bound loss to a genuine all-large finite
+lattice event, not the oracle residual's finite nonzero witness.
+
+The greedy-kernel reversal witness is bundled by
+`WrongnessGreedyInterfaces_current` for the current scalar kernel. Public
+`gap_wrongness` and `gap_dilemma` consume the current bundle directly and no
+longer expose or retain an `h_greedy` interface-parameter theorem route. The
+stage-1 high-β convergence theorem
+is now closed from the concrete greedy kernel and no longer requires that
+interface.
+
+Current audit snapshot:
 
 | Status | Count | Meaning |
 | --- | ---: | --- |
-| Total ledger entries | **350** | Typed `GapEntry`s in `Ledger.lean` (carriers + atomic stipulations + derived theorems + classical citations) — **+12 from R176 paper-Def atoms** |
-| `gapClosed` | **172** | Lean theorem (no `sorry`) |
-| `gapDefinitional` | **176** | Cat 3 §3.4.3 paper-foundational atomic content (carriers + structural equations + hypothesis predicates) — 永不 close per discipline |
-| `gapOpen` | **0** ✅ | **All OPEN entries closed in R152→R158 push; R159-R177 maintain 0** |
-| `gapPartial` | 1 | bundle entry (`gap_phi_tail_bound` + `gap_order_statistics_max`) — both sub-claims are Cat 1 closed theorems |
-| `gapDeadEnd` | 1 | `kappaStar_p_monotone_DEAD_END_by_junk_value` (`def : Prop` marker, NOT axiom — zero kernel impact) |
+| Total ledger entries | **498** | Typed `GapEntry`s in `Ledger.lean` (carriers + atomic stipulations + derived theorems + classical citations) |
+| `gapClosed` | **353** | Lean theorem (no `sorry`) |
+| `gapDefinitional` | **86** | Definition primitives and remaining paper-foundational model surface (Cat 3 subset tracked separately) |
+| `gapOpen` | **0** | No live open ledger entries after the R207 lower-envelope route was proved dead-end |
+| `gapPartial` | **0** | `entry_phi_tail` is now closed after the Cat 1 `gap_order_statistics_density_integral` proof |
+| `gapDeadEnd` | **59** | Kernel-proved route failures and retired false/over-strong markers under current carriers, including retired-signature cleanup entries (all NOT axioms) |
 | `gapBlocked` | 0 | None |
-| Cat 1 (cat1Mathlib) | **85** | |
-| Cat 2 (cat2External) | **3** | |
-| Cat 3 paper-novel | **261** | Carriers + hypothesisPredicates + structuralEquations — paper-foundational per discipline |
-| Cat 3 sub-type breakdown | — | carrier=79, hypothesisPredicate=9, structuralEquation=**87**, **workingAssumption=1**, derivedTheorem=146 |
+| Cat 1 (cat1Mathlib) | **435** | |
+| Cat 2 (cat2External) | **0** | |
+| Cat 3 paper-novel | **0** | No project-level Cat3 input assumptions remain in the ledger; paper scope predicates are transparent definitions |
+| Mixed input class | **0** | |
+| Not input | **63** | Retired, dead-ended, or documentation-only routes |
+| Cat 3 sub-type breakdown | - | carrier=0, hypothesisPredicate=0, structuralEquation=0, **workingAssumption=0**, derivedTheorem=329, notCat3=169 |
 | Inline `_workingAssumption` axioms (source code) | **0 ✅** | **R159-R174 removed all 17 inline wA axioms via carrier concretization (R160-R164: 6 carriers) + Cat 3 §3.4.3 paper-Def-stipulated structural equation atoms (R165-R174: 10 atoms). The codebase now has ZERO `axiom X_workingAssumption` declarations.** |
-| Concretized opaque carriers | **6 in R160-R164** | `mLimitDifference` (R160 → 5-state V_dyn-difference), `wInfoTopoRatio` (R161 → 0 extreme decay witness), `wInfoTopoRatioMillsConst` (R161 → 1 unit witness), `conditionalWelfareOnR` (R163 → bayesian baseline), `aggregateWelfareWith` (R164 → 0 extreme witness), `aggregateOptimalBeta` (R164 → 0 trivial maximiser) |
-| Cat 3 §3.4.3 paper-Def atoms added in R162-R174 | **12** | All 12 entries now in Ledger inventory (R176): `belowThresholdWelfare_le_at_zero_for_negative`, `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`, `mean_estimate_gap_continuous_paper_Def`, `mean_estimate_gap_tendsto_mLimit_paper_Def`, `W_bar_eventually_decreasing_paper_Def`, `envelope_continuity_in_p_paper_Def`, `forward_reachable_eq_simpleGraph_reach_paper_Def`, `kappaStar_diverges_at_pc_paper_Def`, `topoLossKernel_le_one_over_n_on_giant_paper_Def`, `expectedTopoLossAboveLowerConst_pos_above_pc_paper_Def`, `expectedTopoLoss_ge_AboveLowerConst_eventually_paper_Def`, `L_unimodal_in_regime_i_paper_Def` |
+| Concretized opaque carriers/predicates | **64+ through R528** | R525-R528 metadata now classifies current concrete source definitions and scope predicates as Cat 1 / notCat3 for input-counting; Cat3 input assumptions are zero |
+| R162-R174 paper-Def atom lineage | **12** | All 12 historical entries remain tracked; some have since been closed or dead-ended by kernel proofs, including `W_bar_eventually_decreasing_paper_Def` in R210, `agentRewardKernel_kappaAgent_increasing_differences_paper_Def` in R211, `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise` in R212, the R213 current-carrier reward-kernel range/Bayesian/sentimental monotonicity trio, the R214 definitional/current-carrier closures for `ReachableSet_eq_ForwardReachable_empty`, `oracleReward_mem_unitInterval`, `V_dyn_def`, and `trapEventIndicator_nonneg`, and the R215 current-carrier Canonical/Principal/Cognitive theorem closures. |
 | **Mathlib-PR-able infrastructure modules** | **35+** | NEW R175 + R178: 2 new generic Cat 1 modules built specifically as future Mathlib PR targets (in addition to 33+ pre-existing Infrastructure modules). |
 | **Actually-retired §3.4.3 atoms (R186-R201)** | **13** | All 13 original carrier-level §3.4.3 atoms (R162, R165, R166a/b, R167, R168, R169, R170, R171, R172, R173, R174, R184) NO LONGER `axiom`s — converted to `theorem`s (signature-preserving, no weakening). |
 | **Hostile audit verdict (R202)** | **10 GENUINE / 3 RENAME** | Independent fresh-agent audit: 10 retirements are genuine substantive decompositions (R162 carrier→per-sample lift; R165 welfare→per-ω lift via R178; R166a/b shared posterior bridge + R189; R167 6-step EVT chain; R168 envelope split; R169 graph preconnected + identification; R172 abstract→Mills closed form; R173 Mills bound + carrier id; R174 existence/uniqueness factorisation). 3 retirements are essentially RENAMES (bridge atom is same/near-same content as retired statement): R170 (drops unused `alphaStar` premise), R171 (bit-for-bit identical bridge — pure rename), R184 (unfolds `IsSupermodular` predicate definition). The 3 rename retirements are HONEST per discipline §3.4.3 (paper-Def-stipulated structural facts that genuinely cannot decompose further without major Z²-percolation/Harris-Kesten infrastructure), but they don't gain atomicity per §18. |
@@ -175,16 +1253,99 @@ derivations are built.
 The long-term goal is to reduce all paper-novel Cat 3 entries to derivations
 from Cat 1 (Mathlib + kernel) inputs only. The remaining obstacles are:
 
-1. **Lattice + bond percolation infrastructure** (Mathlib gap). Two Cat 3
-   structural-equation entries (`trapLocalConfigProb_pos_and_le`,
-   `restrictedExpectation_eq_localConfigProb`) and the disclosed lattice
-   variant of Theorem 4.1 Part 4 require: `Z²`-lattice graph structure,
-   bond-percolation probability measure, FKG inequality, Harris-Kesten
-   1980 critical-probability theorem, and Grimmett 1999 Theorem 6.75
-   exponential cluster-size decay. These are well-defined Mathlib
-   contribution targets.
+1. **Five-state loss-shape analysis.** The value-at-argmin continuity item
+   `L_at_betaStarOfP_continuousOn_paper_Def` is closed by the R238
+   Lipschitz value-function proof, and R256 closes the former
+   `L_gaussianHazardMillsFactorAntitone_paper_Def` obligation. The upper Mills
+   ratio and lower hazard ratio antitonicity facts are now kernel theorems;
+   the former `L_strict_unique_minimizer_paper_Def` `True` compatibility
+   theorem has been retired from source. The left-branch
+   derivative sign is already kernel proved by
+   `L_hasDerivAt_negative_on_left_branch`; the right-branch derivative sign is
+   kernel-proved conditional on the exact dominance inequality by
+   `L_hasDerivAt_positive_of_right_branch_dominance`. R241 also proves
+   `L_global_minimizer_not_left_branch`, ruling out positive global minimisers
+   on the left branch. R242 proves
+   `L_global_minimizer_not_right_branch_dominance`, ruling out the current
+   positive-derivative dominance condition at a positive global minimiser. The
+   R243 Fermat step proves `L_global_minimizer_first_order_balance`, the exact
+   first-order balance equation at any positive global minimiser. R250 reduces
+   balance uniqueness to the pure z-threshold shape theorem; R251 reduces that
+   theorem to the normalized denominator-shape bridge; R252 rewrites the
+   denominator in hazard/Mills form; R253 reduces that denominator shape to
+   product antitonicity; R254 reduces product antitonicity to the two factor
+   antitonicity facts; R255/R256 close both factor facts, with the normalized
+   z-core, z-core, beta-core, and full-residual bridges derived kernel-purely.
 
-2. **Mixed-partial calculus extension** (Mathlib gap). The `prop:supermodular`
+2. **Concrete diagnostic carrier.** The former cyclic-trap structural equation
+   is closed in R240 as a conditional wrapper: `C1_Irreversibility_current`
+   proves C1 for the current carrier, while C2′ and C3 remain explicit
+   diagnostic evidence consumed by `gap_cyclic_trap`. The two former
+   satisficing structural equations were closed in R239/R322/R389/R465 by
+   moving the public theorem to the current affine carrier and then exposing
+   the current behavior evidence as ordinary theorems instead of carrier proof
+   fields.
+
+3. **Non-vacuous percolation carrier repair.** The current Wrongness
+   percolation package is oracle-neutral and above-threshold-neutral, but its
+   topo-loss side is no longer empty: `giantComponentEvent 1` is nonempty and
+   `expectedTopoLossOnGiant 1 p = 1/2` is kernel-proved. The R200 Mills
+   identification is still kernel-proved false because the current
+   `expectedTopoLossAboveLowerConst` is identically `0`. A complete paper
+   proof still needs a finite `Z²_L` carrier with real giant-component and
+   above-threshold lower-bound content. The oracle residual half now has a
+   separate finite nonzero carrier theorem via
+   `fin5Trap_parametricGraphLocalDilemmaTheoremCoreWithNonzeroOracle`, now a
+   compatibility name for the all-open
+   `boxedTorusAllOpenGiantTopoLossData 1` core that explicitly stores
+   `WInfoOracleInterfacesOn data`, a pointwise topo-loss bound from which the
+   restricted-expectation envelope is derived, and the full-cluster positive-mass
+   `GiantComponentEventFullClusterConclusion data`, plus
+   `BoxedTorusClusterCountExpectationBoundsConclusion data`. The public
+   `currentOracleInfoDecayConclusion` now proves a finite nonzero
+   `boxedTorusAllOpenGiantTopoLossData 1` witness directly, storing
+   `WInfoOracleInterfacesOn` evidence and recovers oracle decay from that
+   interface proof, while the earlier finite-bond-only witness remains as a
+   regression theorem. This does not close the topo-loss
+   carrier repair, but it removes the neutral-zero and finite-bond-only oracle
+   witnesses as the public current/core-dilemma route. The current public
+   graph-local route has since moved one step further to
+   `boxedTorusFullReachFlatOnlyComplementTopoLossData 1`, where the selected
+   flat-size event is full finite-oracle reachability rather than all-open and
+   the off-flat public surface is zero/empty instead of the old first-edge
+   diagnostic tail.
+   The topo-loss half now also
+   has `oneStepGiantTopoLossData`, a nonempty `n = 1` diagnostic
+   giant-event carrier proving the parameterized order-statistics bridge,
+   cluster-size lower bound, pointwise `1/(n+1)` bound, and restricted
+   expectation envelope kernel-purely. This is a non-vacuity regression
+   witness for the bridge mechanism, not the full finite `Z^2_L` carrier.
+   The next finite-graph step is `boxedTorusAllOpenGiantTopoLossData`: it
+   reuses the real boxed-torus finite-bond oracle carrier, takes the all-open
+   boxed-torus coordinate-edge event at `n = boxedTorusFlatGraphN L`, proves
+   that event nonempty and of Bernoulli mass `q ^ |E_L|`, proves that the
+   reachable cluster from the base vertex has full cardinality
+   `boxedTorusFlatGraphN L + 1 = (L + 1)^2`, and closes the same
+   order-statistics/cluster-bound/restricted-expectation chain with the
+   all-open zero-loss witness `k = n`. It also now exposes the data-level
+   flat giant-event mass theorem and inherits the boxed-torus square-event
+   cluster-count expectation lower/upper bounds for the same data package.
+   The graph-local theorem core now stores the data-level restricted
+   `expectedTopoLossOnGiantOn` envelope package for this same carrier rather
+   than leaving the envelope as a separate downstream theorem, and it stores
+   the all-open giant event as a full-cluster positive-mass event rather than
+   as a bare nonempty set or a positive-mass-only event package. It also stores
+   the boxed-torus cluster-count expectation lower/upper bounds as an explicit
+   data-level package rather than leaving them as nearby standalone theorems.
+   The below-threshold envelope and epsilon-convergence wrappers are now
+   available at the `WrongnessPercolationData` parameter level and are
+   instantiated for this boxed-torus all-open package.
+   The existential nonzero-oracle core
+   theorem now uses this all-open boxed-torus giant-event data package. This
+   still leaves the stochastic finite `Z^2_L` giant-component/Mills
+   lower-bound carrier as the remaining topo-loss target.
+
+4. **Mixed-partial calculus extension** (Mathlib gap). The `prop:supermodular`
    cross-partial computation depends on Topkis 1978 mixed-partial criterion
    for supermodularity on continuous lattices. Mathlib has discrete
    supermodularity (`Topkis.lean`) but lacks the continuous-lattice mixed-
@@ -192,7 +1353,7 @@ from Cat 1 (Mathlib + kernel) inputs only. The remaining obstacles are:
    `Infrastructure/TopkisCrossPartial.lean` and is a candidate for
    Mathlib upstream.
 
-3. **Classical Cat 2 citations** (paper-cited but not Mathlib). Blackwell
+5. **Classical Cat 2 citations** (paper-cited but not Mathlib). Blackwell
    1953 (sufficiency theorem), Topkis 1998 (interval supermodularity book),
    Molloy-Reed 1995 (configuration-model giant-component criterion), Cohen
    et al. 2000 (power-law percolation), Grimmett 1999 (Bond Percolation

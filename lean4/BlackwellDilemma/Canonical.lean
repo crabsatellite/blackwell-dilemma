@@ -31,6 +31,8 @@ import BlackwellDilemma.Types
 import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Infrastructure.ContinuousArithmetic
 import BlackwellDilemma.Infrastructure.ArgmaxExistence
+import Mathlib.Analysis.Calculus.Deriv.Slope
+import Mathlib.Topology.MetricSpace.Lipschitz
 
 namespace BlackwellDilemma
 
@@ -288,6 +290,12 @@ private theorem Delta_B_pos : 0 < Delta_B := by
   unfold Delta_B r_G r_D
   norm_num
 
+/-- The five-state reward gaps have the exact ratio `Delta_S / Delta_B = 2 / 9`. -/
+private theorem Delta_S_eq_two_ninths_mul_Delta_B :
+    Delta_S = (2/9 : ℝ) * Delta_B := by
+  unfold Delta_S Delta_B r_A r_B r_G r_D
+  norm_num
+
 /-- `signalVariance β > 0` for `β > 0`. -/
 private theorem signalVariance_pos {β : ℝ} (hβ : 0 < β) : 0 < signalVariance β := by
   unfold signalVariance
@@ -350,6 +358,24 @@ private theorem arg_B_monotone {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (h_le : 
     sqrt_two_sigma_pos hβ₂
   exact div_le_div_of_nonneg_left (le_of_lt Delta_B_pos)
     h_sqrt_pos₂ (le_of_lt h_sqrt_lt)
+
+/-- Strict version of `arg_B_monotone`: the `B` Gaussian argument is strictly
+    increasing with precision on `(0, ∞)`. -/
+private theorem arg_B_strictMono {β₁ β₂ : ℝ} (hβ₁ : 0 < β₁) (hlt : β₁ < β₂) :
+    Delta_B / Real.sqrt (2 * signalVariance β₁) <
+      Delta_B / Real.sqrt (2 * signalVariance β₂) := by
+  have hβ₂ : 0 < β₂ := lt_trans hβ₁ hlt
+  have h_sigma : signalVariance β₂ < signalVariance β₁ :=
+    signalVariance_strictAntitoneOn hβ₁ hlt
+  have h_2sigma_pos₂ : 0 < 2 * signalVariance β₂ :=
+    mul_pos (by norm_num) (signalVariance_pos hβ₂)
+  have h_2sigma_lt : 2 * signalVariance β₂ < 2 * signalVariance β₁ := by linarith
+  have h_sqrt_lt :
+      Real.sqrt (2 * signalVariance β₂) < Real.sqrt (2 * signalVariance β₁) :=
+    Real.sqrt_lt_sqrt (le_of_lt h_2sigma_pos₂) h_2sigma_lt
+  have h_sqrt_pos₂ : 0 < Real.sqrt (2 * signalVariance β₂) :=
+    sqrt_two_sigma_pos hβ₂
+  exact div_lt_div_of_pos_left Delta_B_pos h_sqrt_pos₂ h_sqrt_lt
 
 /-- `P_trap` is monotonically non-decreasing on `(0, ∞)`: as precision
     `β` increases, the trap-selection probability rises. -/
@@ -670,7 +696,7 @@ private theorem L_tendsto_atZero (p : ℝ) :
   rw [h_eq] at h_comb
   exact h_comb
 
-/-- **Substantive closure of `L_below_limit_at_some_beta_OPEN`.**
+/-- **Substantive closure of `L_below_limit_at_some_beta`.**
     For `p ∈ [0, p_1)`, there exists a finite `β* > 0` with
     `L(β*, p) < 0.4`. Proof (paper line 825): in the rearrangement
     `L − 0.4 = (1 − P_trap β)·(0.5 − 0.9(1 − p)·Φ_B β)`, the factor
@@ -684,7 +710,7 @@ private theorem L_tendsto_atZero (p : ℝ) :
     `L_rearrangement`, `Filter.Tendsto.eventually`, `eventually_gt_nhds`,
     `Filter.eventually_gt_atTop`. -/
 private theorem L_below_limit_at_some_beta_proof
-    (p : ℝ) (hp_nonneg : 0 ≤ p) (hp_lt_p1 : p < p_1) :
+    (p : ℝ) (_hp_nonneg : 0 ≤ p) (hp_lt_p1 : p < p_1) :
     ∃ β_star_p : ℝ, 0 < β_star_p ∧ L β_star_p p < (4/10 : ℝ) := by
   -- `c := 0.9·(1 − p)` exceeds `1/2` since `p < 4/9`.
   set c : ℝ := (9/10 : ℝ) * (1 - p) with hc_def
@@ -1103,6 +1129,465 @@ private theorem Phi_B_deriv_pos {β : ℝ} (hβ : 0 < β) :
     · positivity
   exact mul_pos h_phi_pos h_arg_pos
 
+/-- The concrete derivative value of `P_trap` at precision `β`, exposed as a
+    named expression so downstream right-branch dominance statements can refer
+    to the exact kernel-proved derivative rather than duplicating the chain
+    rule expression. -/
+noncomputable def P_trapDerivValue (β : ℝ) : ℝ :=
+  phi (Delta_S / Real.sqrt (2 * signalVariance β)) *
+    (-(Delta_S *
+      ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+        ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+        / (2 * Real.sqrt (2 * signalVariance β)))) /
+      Real.sqrt (2 * signalVariance β) ^ 2)
+
+/-- The concrete derivative value of `Phi_B` at precision `β`, exposed as a
+    named expression for the remaining right-branch dominance theorem. -/
+noncomputable def Phi_BDerivValue (β : ℝ) : ℝ :=
+  phi (Delta_B / Real.sqrt (2 * signalVariance β)) *
+    (-(Delta_B *
+      ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+        ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+        / (2 * Real.sqrt (2 * signalVariance β)))) /
+      Real.sqrt (2 * signalVariance β) ^ 2)
+
+/-- The common positive chain-rule factor in `P_trapDerivValue` and
+    `Phi_BDerivValue`, namely `- (d/dβ sqrt(2σ² β)) / sqrt(2σ² β)^2`.
+    R247 factors this out of the first-order residual so the remaining bridge
+    only mentions the Gaussian CDF/PDF layer and the two reward gaps. -/
+noncomputable def L_balanceResidualScale (β : ℝ) : ℝ :=
+  -((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+      ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+      / (2 * Real.sqrt (2 * signalVariance β))) /
+    Real.sqrt (2 * signalVariance β) ^ 2
+
+/-- The common chain-rule factor is strictly positive on positive precisions. -/
+private theorem L_balanceResidualScale_pos {β : ℝ} (hβ : 0 < β) :
+    0 < L_balanceResidualScale β := by
+  unfold L_balanceResidualScale
+  have h_sqrt_deriv_neg := sqrt_two_sigma_deriv_neg hβ
+  have h_sqrt_pos := sqrt_two_sigma_pos hβ
+  apply div_pos
+  · linarith
+  · positivity
+
+/-- The derivative of `P_trap` is the common positive scale times the
+    Gaussian-PDF / reward-gap factor. -/
+private theorem P_trapDerivValue_eq_scale_mul (β : ℝ) :
+    P_trapDerivValue β =
+      L_balanceResidualScale β *
+        (Delta_S * phi (Delta_S / Real.sqrt (2 * signalVariance β))) := by
+  unfold P_trapDerivValue L_balanceResidualScale
+  ring
+
+/-- The derivative of `Phi_B` is the common positive scale times the
+    Gaussian-PDF / reward-gap factor. -/
+private theorem Phi_BDerivValue_eq_scale_mul (β : ℝ) :
+    Phi_BDerivValue β =
+      L_balanceResidualScale β *
+        (Delta_B * phi (Delta_B / Real.sqrt (2 * signalVariance β))) := by
+  unfold Phi_BDerivValue L_balanceResidualScale
+  ring
+
+/-- The right derivative branch for the five-state loss: the paper's bracket
+    `0.9(1-p)Φ_B(β) - 1/2` is strictly positive. -/
+def L_rightBranch (p β : ℝ) : Prop :=
+  (1/2 : ℝ) < (9/10 : ℝ) * (1 - p) * Phi_B β
+
+/-- The same right derivative branch after the change of variables
+    `z = Delta_B / sqrt(2 * signalVariance β)`. -/
+def L_zRightBranch (p z : ℝ) : Prop :=
+  (1/2 : ℝ) < (9/10 : ℝ) * (1 - p) * Phi z
+
+/-- The z-space right branch with the linear coefficient
+    `c = 0.9 * (1 - p)` made explicit. -/
+def L_cRightBranch (c z : ℝ) : Prop :=
+  (1/2 : ℝ) < c * Phi z
+
+/-- The residual of the grouped first-order balance equation. Its zero set is
+    exactly the first-order balance surface for positive global minimisers. -/
+noncomputable def L_balanceResidual (p β : ℝ) : ℝ :=
+  P_trapDerivValue β *
+      ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+    (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Phi_BDerivValue β
+
+/-- The first-order residual with the common positive chain-rule factor
+    removed. Its sign and zero set agree with `L_balanceResidual` on positive
+    precisions. -/
+noncomputable def L_balanceResidualCore (p β : ℝ) : ℝ :=
+  Delta_S * phi (Delta_S / Real.sqrt (2 * signalVariance β)) *
+      ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+    (1 - P_trap β) * (9/10 : ℝ) * (1 - p) *
+      Delta_B * phi (Delta_B / Real.sqrt (2 * signalVariance β))
+
+/-- The reduced first-order residual written entirely in the Gaussian
+    coordinate `z = Delta_B / sqrt(2 * signalVariance β)`. The trap argument
+    is `(2/9) * z` because `Delta_S = (2/9) * Delta_B`. -/
+noncomputable def L_balanceResidualZCore (p z : ℝ) : ℝ :=
+  Delta_S * phi ((2/9 : ℝ) * z) *
+      ((9/10 : ℝ) * (1 - p) * Phi z - (1/2 : ℝ)) -
+    (1 - Phi ((2/9 : ℝ) * z)) * (9/10 : ℝ) * (1 - p) *
+      Delta_B * phi z
+
+/-- The same z-core with the positive `Delta_B` factor removed and
+    `c = 0.9 * (1 - p)` exposed as the only parameter. -/
+noncomputable def L_balanceResidualNormalizedZCore (c z : ℝ) : ℝ :=
+  (2/9 : ℝ) * phi ((2/9 : ℝ) * z) *
+      (c * Phi z - (1/2 : ℝ)) -
+    c * (1 - Phi ((2/9 : ℝ) * z)) * phi z
+
+/-- The coefficient of `c` in the normalized z-core. -/
+noncomputable def L_normalizedZLinearCoeff (z : ℝ) : ℝ :=
+  (2/9 : ℝ) * phi ((2/9 : ℝ) * z) * Phi z -
+    (1 - Phi ((2/9 : ℝ) * z)) * phi z
+
+/-- The positive constant term subtracted from `c * L_normalizedZLinearCoeff`. -/
+noncomputable def L_normalizedZConstantTerm (z : ℝ) : ℝ :=
+  (1/2 : ℝ) * (2/9 : ℝ) * phi ((2/9 : ℝ) * z)
+
+/-- The common positive scale in the affine threshold decomposition. -/
+noncomputable def L_normalizedZThresholdScale (z : ℝ) : ℝ :=
+  (2/9 : ℝ) * phi ((2/9 : ℝ) * z)
+
+/-- The normalized denominator of the threshold `K(z) / H(z)`.
+
+    Algebraically, `H(z) = scale(z) * denom(z)` and
+    `K(z) = (1/2) * scale(z)`, so strict decrease of `K/H` is just strict
+    increase of this denominator wherever it is positive. The quotient form
+    isolates the Gaussian tail-density comparison left by the paper. -/
+noncomputable def L_normalizedZThresholdDenom (z : ℝ) : ℝ :=
+  Phi z -
+    ((1 - Phi ((2/9 : ℝ) * z)) * phi z) /
+      L_normalizedZThresholdScale z
+
+/-- Lower-tail Gaussian hazard ratio `phi(z) / Phi(z)`. -/
+noncomputable def L_lowerGaussianHazard (z : ℝ) : ℝ :=
+  phi z / Phi z
+
+/-- Upper-tail Gaussian Mills ratio `(1 - Phi(z)) / phi(z)`. -/
+noncomputable def L_upperGaussianMills (z : ℝ) : ℝ :=
+  (1 - Phi z) / phi z
+
+/-- The hazard/Mills product controlling the normalized threshold denominator. -/
+noncomputable def L_normalizedZHazardProduct (z : ℝ) : ℝ :=
+  L_upperGaussianMills ((2/9 : ℝ) * z) * L_lowerGaussianHazard z
+
+/-- The same normalized denominator, written in explicit hazard/Mills form. -/
+noncomputable def L_normalizedZHazardDenom (z : ℝ) : ℝ :=
+  Phi z * (1 - L_normalizedZHazardProduct z / (2/9 : ℝ))
+
+/-- Change-of-variables identity for the trap Gaussian argument. -/
+private theorem Delta_S_arg_eq_two_ninths_mul_B_arg (β : ℝ) :
+    Delta_S / Real.sqrt (2 * signalVariance β) =
+      (2/9 : ℝ) * (Delta_B / Real.sqrt (2 * signalVariance β)) := by
+  rw [Delta_S_eq_two_ninths_mul_Delta_B]
+  ring
+
+/-- The R247 beta-core is exactly the one-variable Gaussian `z`-core under
+    `z = Delta_B / sqrt(2 * signalVariance β)`. -/
+theorem L_balanceResidualCore_eq_zCore (p β : ℝ) :
+    L_balanceResidualCore p β =
+      L_balanceResidualZCore p (Delta_B / Real.sqrt (2 * signalVariance β)) := by
+  unfold L_balanceResidualCore L_balanceResidualZCore P_trap Phi_B
+  rw [Delta_S_arg_eq_two_ninths_mul_B_arg β]
+
+/-- The z-core is the normalized z-core times the positive reward-gap factor
+    `Delta_B`. -/
+theorem L_balanceResidualZCore_eq_deltaB_mul_normalized (p z : ℝ) :
+    L_balanceResidualZCore p z =
+      Delta_B * L_balanceResidualNormalizedZCore ((9/10 : ℝ) * (1 - p)) z := by
+  unfold L_balanceResidualZCore L_balanceResidualNormalizedZCore
+  rw [Delta_S_eq_two_ninths_mul_Delta_B]
+  ring
+
+/-- The normalized z-core is affine in the coefficient
+    `c = 0.9 * (1 - p)`. -/
+theorem L_balanceResidualNormalizedZCore_eq_linear (c z : ℝ) :
+    L_balanceResidualNormalizedZCore c z =
+      c * L_normalizedZLinearCoeff z - L_normalizedZConstantTerm z := by
+  unfold L_balanceResidualNormalizedZCore
+    L_normalizedZLinearCoeff L_normalizedZConstantTerm
+  ring
+
+/-- The subtracted constant term in the affine normalized z-core is positive. -/
+private theorem L_normalizedZConstantTerm_pos (z : ℝ) :
+    0 < L_normalizedZConstantTerm z := by
+  unfold L_normalizedZConstantTerm
+  exact mul_pos (by norm_num) (phi_pos_local ((2/9 : ℝ) * z))
+
+/-- The common threshold scale is positive. -/
+private theorem L_normalizedZThresholdScale_pos (z : ℝ) :
+    0 < L_normalizedZThresholdScale z := by
+  unfold L_normalizedZThresholdScale
+  exact mul_pos (by norm_num) (phi_pos_local ((2/9 : ℝ) * z))
+
+/-- The affine coefficient `H(z)` factors through the threshold denominator. -/
+theorem L_normalizedZLinearCoeff_eq_scale_mul_thresholdDenom (z : ℝ) :
+    L_normalizedZLinearCoeff z =
+      L_normalizedZThresholdScale z * L_normalizedZThresholdDenom z := by
+  unfold L_normalizedZLinearCoeff L_normalizedZThresholdDenom
+  change
+    L_normalizedZThresholdScale z * Phi z -
+        (1 - Phi ((2/9 : ℝ) * z)) * phi z =
+      L_normalizedZThresholdScale z *
+        (Phi z -
+          ((1 - Phi ((2/9 : ℝ) * z)) * phi z) /
+            L_normalizedZThresholdScale z)
+  rw [mul_sub]
+  rw [mul_div_cancel₀ _ (L_normalizedZThresholdScale_pos z).ne']
+
+/-- The affine constant `K(z)` is one half of the common threshold scale. -/
+theorem L_normalizedZConstantTerm_eq_half_mul_thresholdScale (z : ℝ) :
+    L_normalizedZConstantTerm z =
+      (1/2 : ℝ) * L_normalizedZThresholdScale z := by
+  unfold L_normalizedZConstantTerm L_normalizedZThresholdScale
+  ring
+
+/-- The threshold denominator is exactly the hazard/Mills denominator. -/
+theorem L_normalizedZThresholdDenom_eq_hazardDenom (z : ℝ) :
+    L_normalizedZThresholdDenom z = L_normalizedZHazardDenom z := by
+  unfold L_normalizedZThresholdDenom L_normalizedZHazardDenom
+    L_normalizedZHazardProduct L_upperGaussianMills L_lowerGaussianHazard
+    L_normalizedZThresholdScale
+  have hphi : phi ((2/9 : ℝ) * z) ≠ 0 :=
+    (phi_pos_local ((2/9 : ℝ) * z)).ne'
+  have hPhi : Phi z ≠ 0 :=
+    (Phi_pos z).ne'
+  field_simp [hphi, hPhi]
+
+/-- Positivity of the hazard denominator is exactly the product being below
+    the trap scale `2/9`. -/
+theorem L_normalizedZHazardDenom_pos_iff_product_lt (z : ℝ) :
+    0 < L_normalizedZHazardDenom z ↔
+      L_normalizedZHazardProduct z < (2/9 : ℝ) := by
+  unfold L_normalizedZHazardDenom
+  have hPhi_pos : 0 < Phi z := Phi_pos z
+  constructor
+  · intro hpos
+    have hcore_pos :
+        0 < 1 - L_normalizedZHazardProduct z / (2/9 : ℝ) := by
+      by_contra hnot
+      have hcore_nonpos :
+          1 - L_normalizedZHazardProduct z / (2/9 : ℝ) ≤ 0 :=
+        le_of_not_gt hnot
+      have hmul_nonpos :
+          Phi z *
+              (1 - L_normalizedZHazardProduct z / (2/9 : ℝ)) ≤ 0 :=
+        mul_nonpos_of_nonneg_of_nonpos (le_of_lt hPhi_pos) hcore_nonpos
+      linarith
+    nlinarith
+  · intro hprod_lt
+    have hcore_pos :
+        0 < 1 - L_normalizedZHazardProduct z / (2/9 : ℝ) := by
+      nlinarith
+    exact mul_pos hPhi_pos hcore_pos
+
+/-- Positivity of the affine coefficient `H(z)` is the same hazard/Mills
+    product bound. -/
+theorem L_normalizedZLinearCoeff_pos_iff_hazardProduct_lt (z : ℝ) :
+    0 < L_normalizedZLinearCoeff z ↔
+      L_normalizedZHazardProduct z < (2/9 : ℝ) := by
+  rw [L_normalizedZLinearCoeff_eq_scale_mul_thresholdDenom z,
+    L_normalizedZThresholdDenom_eq_hazardDenom z]
+  have hscale_pos : 0 < L_normalizedZThresholdScale z :=
+    L_normalizedZThresholdScale_pos z
+  constructor
+  · intro hpos
+    have hdenom_pos : 0 < L_normalizedZHazardDenom z := by
+      by_contra hnot
+      have hdenom_nonpos : L_normalizedZHazardDenom z ≤ 0 :=
+        le_of_not_gt hnot
+      have hmul_nonpos :
+          L_normalizedZThresholdScale z *
+              L_normalizedZHazardDenom z ≤ 0 :=
+        mul_nonpos_of_nonneg_of_nonpos (le_of_lt hscale_pos) hdenom_nonpos
+      linarith
+    exact (L_normalizedZHazardDenom_pos_iff_product_lt z).mp hdenom_pos
+  · intro hprod_lt
+    have hdenom_pos : 0 < L_normalizedZHazardDenom z :=
+      (L_normalizedZHazardDenom_pos_iff_product_lt z).mpr hprod_lt
+    exact mul_pos hscale_pos hdenom_pos
+
+/-- The lower Gaussian hazard ratio is positive. -/
+private theorem L_lowerGaussianHazard_pos (z : ℝ) :
+    0 < L_lowerGaussianHazard z := by
+  unfold L_lowerGaussianHazard
+  exact div_pos (phi_pos_local z) (Phi_pos z)
+
+/-- The upper Gaussian Mills ratio is positive. -/
+private theorem L_upperGaussianMills_pos (z : ℝ) :
+    0 < L_upperGaussianMills z := by
+  unfold L_upperGaussianMills
+  exact div_pos (sub_pos.mpr (Phi_lt_one z)) (phi_pos_local z)
+
+/-- Derivative of the lower Gaussian hazard ratio `phi(z) / Phi(z)`. -/
+theorem L_lowerGaussianHazard_hasDerivAt (z : ℝ) :
+    HasDerivAt L_lowerGaussianHazard
+      (((-z * phi z) * Phi z - phi z * phi z) / (Phi z)^2) z := by
+  unfold L_lowerGaussianHazard
+  have hphi : HasDerivAt phi (-z * phi z) z := gap_phi_derivative z
+  have hPhi : HasDerivAt Phi (phi z) z := gap_Phi_derivative z
+  have hPhi_ne : Phi z ≠ 0 := (Phi_pos z).ne'
+  exact hphi.div hPhi hPhi_ne
+
+/-- On positive arguments, the lower Gaussian hazard ratio is strictly
+    decreasing. -/
+theorem L_lowerGaussianHazard_deriv_neg_of_pos {z : ℝ} (hz : 0 < z) :
+    deriv L_lowerGaussianHazard z < 0 := by
+  have hderiv := L_lowerGaussianHazard_hasDerivAt z
+  rw [hderiv.deriv]
+  have hphi_pos : 0 < phi z := phi_pos_local z
+  have hPhi_pos : 0 < Phi z := Phi_pos z
+  have hden_pos : 0 < (Phi z)^2 := sq_pos_of_ne_zero hPhi_pos.ne'
+  have hfirst_pos : 0 < z * phi z * Phi z :=
+    mul_pos (mul_pos hz hphi_pos) hPhi_pos
+  have hsecond_pos : 0 < phi z * phi z := mul_pos hphi_pos hphi_pos
+  have hnum_neg : ((-z * phi z) * Phi z - phi z * phi z) < 0 := by
+    nlinarith
+  exact div_neg_of_neg_of_pos hnum_neg hden_pos
+
+/-- Kernel proof of the positive-half-line antitonicity of the lower
+    Gaussian hazard ratio. -/
+theorem L_lowerGaussianHazard_antitoneOn_pos :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_lowerGaussianHazard z' ≤ L_lowerGaussianHazard z := by
+  intro z z' hz _hz' hlt
+  have hanti : AntitoneOn L_lowerGaussianHazard (Set.Ici z) := by
+    apply antitoneOn_of_deriv_nonpos (convex_Ici z)
+    · intro s hs
+      have hs_pos : 0 < s := lt_of_lt_of_le hz hs
+      exact (L_lowerGaussianHazard_hasDerivAt s).continuousAt.continuousWithinAt
+    · rw [interior_Ici]
+      intro s hs
+      have hs_pos : 0 < s := lt_trans hz hs
+      exact (L_lowerGaussianHazard_hasDerivAt s).differentiableAt.differentiableWithinAt
+    · rw [interior_Ici]
+      intro s hs
+      have hs_pos : 0 < s := lt_trans hz hs
+      exact le_of_lt (L_lowerGaussianHazard_deriv_neg_of_pos hs_pos)
+  have hz_mem : z ∈ Set.Ici z := by exact (le_rfl : z ≤ z)
+  have hz'_mem : z' ∈ Set.Ici z := by exact (le_of_lt hlt : z ≤ z')
+  exact hanti hz_mem hz'_mem (le_of_lt hlt : z ≤ z')
+
+/-- Derivative of the upper Gaussian Mills ratio `(1 - Phi(z)) / phi(z)`. -/
+theorem L_upperGaussianMills_hasDerivAt (z : ℝ) :
+    HasDerivAt L_upperGaussianMills
+      ((z * (1 - Phi z) - phi z) / phi z) z := by
+  unfold L_upperGaussianMills
+  have hPhi : HasDerivAt Phi (phi z) z := gap_Phi_derivative z
+  have hnum : HasDerivAt (fun x : ℝ => 1 - Phi x) (-phi z) z := by
+    simpa using (hasDerivAt_const z (1 : ℝ)).sub hPhi
+  have hphi : HasDerivAt phi (-z * phi z) z := gap_phi_derivative z
+  have hphi_ne : phi z ≠ 0 := (phi_pos_local z).ne'
+  have hdiv := hnum.div hphi hphi_ne
+  convert hdiv using 1
+  field_simp [hphi_ne]
+  ring
+
+/-- Mills tail bound in the exact product form needed for the derivative
+    sign of the upper Gaussian Mills ratio. -/
+theorem L_upperGaussianMills_tail_mul_le {z : ℝ} (hz : 0 < z) :
+    z * (1 - Phi z) ≤ phi z := by
+  have htail := gap_phi_tail_bound z hz
+  have hsqrt_pos : 0 < Real.sqrt (2 * Real.pi) :=
+    Real.sqrt_pos.mpr (mul_pos (by norm_num) Real.pi_pos)
+  have hsqrt_ne : Real.sqrt (2 * Real.pi) ≠ 0 := hsqrt_pos.ne'
+  have hz_ne : z ≠ 0 := hz.ne'
+  have h_rhs :
+      (1 / (z * Real.sqrt (2 * Real.pi))) * Real.exp (-(z^2 / 2))
+        = phi z / z := by
+    unfold phi
+    have h_exp_eq : Real.exp (-(z^2 / 2)) = Real.exp (-z^2 / 2) := by
+      congr 1
+      ring
+    rw [h_exp_eq]
+    field_simp [hz_ne, hsqrt_ne]
+  have htail_phi : Phi (-z) ≤ phi z / z := by
+    calc
+      Phi (-z) ≤
+          (1 / (z * Real.sqrt (2 * Real.pi))) * Real.exp (-(z^2 / 2)) := htail
+      _ = phi z / z := h_rhs
+  have h_reflect : 1 - Phi z = Phi (-z) := by
+    have href := Phi_reflect z
+    linarith
+  have htail_one : 1 - Phi z ≤ phi z / z := by
+    rw [h_reflect]
+    exact htail_phi
+  have hmul := mul_le_mul_of_nonneg_left htail_one hz.le
+  have hright : z * (phi z / z) = phi z := by
+    field_simp [hz_ne]
+  linarith
+
+/-- On positive arguments, the upper Gaussian Mills ratio has non-positive
+    derivative. -/
+theorem L_upperGaussianMills_deriv_nonpos_of_pos {z : ℝ} (hz : 0 < z) :
+    deriv L_upperGaussianMills z ≤ 0 := by
+  have hderiv := L_upperGaussianMills_hasDerivAt z
+  rw [hderiv.deriv]
+  have hbracket : z * (1 - Phi z) - phi z ≤ 0 :=
+    sub_nonpos.mpr (L_upperGaussianMills_tail_mul_le hz)
+  exact div_nonpos_of_nonpos_of_nonneg hbracket (le_of_lt (phi_pos_local z))
+
+/-- Kernel proof of the positive-half-line antitonicity of the upper
+    Gaussian Mills ratio. -/
+theorem L_upperGaussianMills_antitoneOn_pos :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_upperGaussianMills z' ≤ L_upperGaussianMills z := by
+  intro z z' hz _hz' hlt
+  have hanti : AntitoneOn L_upperGaussianMills (Set.Ici z) := by
+    apply antitoneOn_of_deriv_nonpos (convex_Ici z)
+    · intro s hs
+      have hs_pos : 0 < s := lt_of_lt_of_le hz hs
+      exact (L_upperGaussianMills_hasDerivAt s).continuousAt.continuousWithinAt
+    · rw [interior_Ici]
+      intro s hs
+      have hs_pos : 0 < s := lt_trans hz hs
+      exact (L_upperGaussianMills_hasDerivAt s).differentiableAt.differentiableWithinAt
+    · rw [interior_Ici]
+      intro s hs
+      have hs_pos : 0 < s := lt_trans hz hs
+      exact L_upperGaussianMills_deriv_nonpos_of_pos hs_pos
+  have hz_mem : z ∈ Set.Ici z := by exact (le_rfl : z ≤ z)
+  have hz'_mem : z' ∈ Set.Ici z := by exact (le_of_lt hlt : z ≤ z')
+  exact hanti hz_mem hz'_mem (le_of_lt hlt : z ≤ z')
+
+/-- The grouped first-order residual factors into the common positive scale
+    times the reduced Gaussian CDF/PDF core. -/
+theorem L_balanceResidual_eq_scale_mul_core (p β : ℝ) :
+    L_balanceResidual p β =
+      L_balanceResidualScale β * L_balanceResidualCore p β := by
+  unfold L_balanceResidual
+  rw [P_trapDerivValue_eq_scale_mul β, Phi_BDerivValue_eq_scale_mul β]
+  unfold L_balanceResidualCore
+  ring
+
+/-- The exact first-order balance equation for the grouped derivative of
+    `β ↦ L β p`. -/
+def L_firstOrderBalance (p β : ℝ) : Prop :=
+  L_balanceResidual p β = 0
+
+/-- Right-branch monotonicity of the branch predicate itself: once the
+    right-branch inequality holds at a positive precision, it keeps holding at
+    larger precisions in Regime (i), because `Phi_B` is non-decreasing and
+    `0 < 1 - p`. -/
+private theorem L_rightBranch_mono_of_le
+    (p : ℝ) (hp_lt : p < p_1) {β β' : ℝ}
+    (hβ : 0 < β) (h_right : L_rightBranch p β) (h_le : β ≤ β') :
+    L_rightBranch p β' := by
+  dsimp [L_rightBranch] at h_right ⊢
+  have hp_lt_one : p < 1 := by
+    exact lt_trans hp_lt (by unfold p_1; norm_num)
+  have hcoef_nonneg : 0 ≤ (9/10 : ℝ) * (1 - p) := by
+    have hq_nonneg : 0 ≤ 1 - p := by linarith
+    exact mul_nonneg (by norm_num) hq_nonneg
+  have h_phi : Phi_B β ≤ Phi_B β' :=
+    Phi_B_monotone hβ h_le
+  have h_mul :
+      (9/10 : ℝ) * (1 - p) * Phi_B β ≤
+        (9/10 : ℝ) * (1 - p) * Phi_B β' := by
+    exact mul_le_mul_of_nonneg_left h_phi hcoef_nonneg
+  exact lt_of_lt_of_le h_right h_mul
+
 /-- **Derivative of `L(·, p)` on `(0, ∞)`.** Composes
     `hasDerivAt_P_trap` and `hasDerivAt_Phi_B` through the concrete
     `L` definition `L β p = P_trap β·0.4 + (1−P_trap β)·0.9·
@@ -1190,7 +1675,7 @@ private theorem L_deriv_grouped (p : ℝ) (β : ℝ) (Pt' Pb' : ℝ) :
     the second) needs the transcendental two-term comparison
     `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·0.9(1−p)·Φ_B'(β)`,
     which the paper itself verifies only numerically; it is therefore
-    NOT closed here, and `L_unimodal_in_regime_i_OPEN` remains a
+    NOT closed here, and `L_unimodal_in_regime_i` remains a
     paper-derived working content atom (see Ledger). -/
 private theorem L_deriv_neg_on_left_branch (p : ℝ) (hp_le_one : p ≤ 1)
     {β : ℝ} (_hβ : 0 < β)
@@ -1215,6 +1700,720 @@ private theorem L_deriv_neg_on_left_branch (p : ℝ) (hp_le_one : p ≤ 1)
     have h_second_pos : 0 < (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Pb' :=
       mul_pos (mul_pos (mul_pos h_oneSubP_pos (by norm_num)) h_q_pos) hPb_pos
     linarith
+
+/-- **Left-branch derivative theorem for `L`.** On the part of the
+    positive-precision domain where
+    `0.9 * (1 - p) * Phi_B β ≤ 1/2`, the concrete derivative of
+    `β ↦ L β p` is strictly negative.
+
+    This packages the private derivative chain into an audit-facing theorem:
+    `hasDerivAt_P_trap`, `hasDerivAt_Phi_B`, `hasDerivAt_L`, the grouped
+    derivative identity `L_deriv_grouped`, and the sign theorem
+    `L_deriv_neg_on_left_branch`. It closes the left half of the paper's
+    Regime (i) unimodality calculus; the remaining uniqueness input is the
+    right-branch transcendental dominance plus the global stitching from
+    derivative signs to strict uniqueness. -/
+theorem L_hasDerivAt_negative_on_left_branch
+    (p : ℝ) (hp_le_one : p ≤ 1) {β : ℝ} (hβ : 0 < β)
+    (h_branch : (9/10 : ℝ) * (1 - p) * Phi_B β ≤ (1/2 : ℝ)) :
+    ∃ d : ℝ, HasDerivAt (fun β : ℝ => L β p) d β ∧ d < 0 := by
+  let Pt' : ℝ :=
+    phi (Delta_S / Real.sqrt (2 * signalVariance β)) *
+      (-(Delta_S *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2)
+  let Pb' : ℝ :=
+    phi (Delta_B / Real.sqrt (2 * signalVariance β)) *
+      (-(Delta_B *
+        ((2 * (-((2 : ℝ) ^ (2 * β) * Real.log 2 * 2) /
+          ((2 : ℝ) ^ (2 * β) - 1) ^ 2))
+          / (2 * Real.sqrt (2 * signalVariance β)))) /
+        Real.sqrt (2 * signalVariance β) ^ 2)
+  refine ⟨
+    Pt' * ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+      (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Pb',
+    ?_, ?_⟩
+  · have hPt : HasDerivAt P_trap Pt' β := by
+      dsimp [Pt']
+      exact hasDerivAt_P_trap hβ
+    have hPb : HasDerivAt Phi_B Pb' β := by
+      dsimp [Pb']
+      exact hasDerivAt_Phi_B hβ
+    have hL := hasDerivAt_L p hβ hPt hPb
+    have h_group := L_deriv_grouped p β Pt' Pb'
+    rwa [h_group] at hL
+  · have hPt_pos : 0 < Pt' := by
+      dsimp [Pt']
+      exact P_trap_deriv_pos hβ
+    have hPb_pos : 0 < Pb' := by
+      dsimp [Pb']
+      exact Phi_B_deriv_pos hβ
+    exact L_deriv_neg_on_left_branch p hp_le_one hβ hPt_pos hPb_pos h_branch
+
+/-- **Right-branch derivative theorem for `L`, conditional on the remaining
+    transcendental dominance inequality.** If the positive first term in the
+    grouped derivative strictly dominates the second term, then the concrete
+    derivative of `β ↦ L β p` is strictly positive at `β`.
+
+    This is not a proof of the paper's right-branch dominance; rather, it
+    isolates the exact inequality still needed for the strict-uniqueness route
+    and discharges the chain-rule/algebra part kernel-purely. -/
+theorem L_hasDerivAt_positive_of_right_branch_dominance
+    (p : ℝ) {β : ℝ} (hβ : 0 < β)
+    (h_dominance :
+      (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Phi_BDerivValue β <
+        P_trapDerivValue β *
+          ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ))) :
+    ∃ d : ℝ, HasDerivAt (fun β : ℝ => L β p) d β ∧ 0 < d := by
+  refine ⟨
+    P_trapDerivValue β *
+        ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+      (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Phi_BDerivValue β,
+    ?_, ?_⟩
+  · have hPt : HasDerivAt P_trap (P_trapDerivValue β) β := by
+      unfold P_trapDerivValue
+      exact hasDerivAt_P_trap hβ
+    have hPb : HasDerivAt Phi_B (Phi_BDerivValue β) β := by
+      unfold Phi_BDerivValue
+      exact hasDerivAt_Phi_B hβ
+    have hL := hasDerivAt_L p hβ hPt hPb
+    have h_group := L_deriv_grouped p β (P_trapDerivValue β) (Phi_BDerivValue β)
+    rwa [h_group] at hL
+  · linarith
+
+/-- A negative derivative gives a strict descent point to the right. This is a
+    small one-dimensional calculus helper used to rule out global minimisers
+    at points where the derivative of `L(·, p)` is negative. -/
+private theorem exists_right_lt_of_hasDerivAt_neg
+    {f : ℝ → ℝ} {x d : ℝ} (hderiv : HasDerivAt f d x) (hd : d < 0) :
+    ∃ y : ℝ, x < y ∧ f y < f x := by
+  have h_slope :
+      Filter.Tendsto (fun t : ℝ => t⁻¹ * (f (x + t) - f x))
+        (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds d) := by
+    simpa using hderiv.tendsto_slope_zero_right
+  have h_event :
+      ∀ᶠ t in nhdsWithin (0 : ℝ) (Set.Ioi 0), t⁻¹ * (f (x + t) - f x) < 0 :=
+    h_slope.eventually (IsOpen.mem_nhds isOpen_Iio hd)
+  have h_pos_event : ∀ᶠ t in nhdsWithin (0 : ℝ) (Set.Ioi 0), 0 < t :=
+    eventually_mem_nhdsWithin
+  rcases (h_event.and h_pos_event).exists with ⟨t, ht_slope, ht_pos⟩
+  refine ⟨x + t, by linarith, ?_⟩
+  have ht_inv_pos : 0 < t⁻¹ := inv_pos.mpr ht_pos
+  have hdiff_neg : f (x + t) - f x < 0 := by
+    have hmul_lt : t⁻¹ * (f (x + t) - f x) < t⁻¹ * 0 := by
+      simpa using ht_slope
+    simpa using lt_of_mul_lt_mul_left hmul_lt ht_inv_pos.le
+  linarith
+
+/-- A positive derivative at a positive point gives a strict descent point to
+    the left that remains in the positive half-line. -/
+private theorem exists_left_lt_of_hasDerivAt_pos
+    {f : ℝ → ℝ} {x d : ℝ} (hx : 0 < x)
+    (hderiv : HasDerivAt f d x) (hd : 0 < d) :
+    ∃ y : ℝ, 0 < y ∧ y < x ∧ f y < f x := by
+  have h_slope :
+      Filter.Tendsto (fun t : ℝ => t⁻¹ * (f (x + t) - f x))
+        (nhdsWithin (0 : ℝ) (Set.Iio 0)) (nhds d) := by
+    simpa using hderiv.tendsto_slope_zero_left
+  have h_event :
+      ∀ᶠ t in nhdsWithin (0 : ℝ) (Set.Iio 0),
+        0 < t⁻¹ * (f (x + t) - f x) :=
+    h_slope.eventually (IsOpen.mem_nhds isOpen_Ioi hd)
+  have h_neg_event : ∀ᶠ t in nhdsWithin (0 : ℝ) (Set.Iio 0), t < 0 :=
+    eventually_mem_nhdsWithin
+  have h_lower_event : ∀ᶠ t in nhdsWithin (0 : ℝ) (Set.Iio 0), -x < t :=
+    (eventually_gt_nhds (by linarith : -x < (0 : ℝ))).filter_mono nhdsWithin_le_nhds
+  rcases ((h_event.and h_neg_event).and h_lower_event).exists with
+    ⟨t, ⟨⟨ht_slope, ht_neg⟩, ht_lower⟩⟩
+  refine ⟨x + t, by linarith, by linarith, ?_⟩
+  have ht_inv_neg : t⁻¹ < 0 := inv_lt_zero.2 ht_neg
+  have hdiff_neg : f (x + t) - f x < 0 :=
+    neg_of_mul_pos_right ht_slope ht_inv_neg.le
+  linarith
+
+/-- A positive global minimiser of `β ↦ L β p` cannot lie on the left
+    derivative branch. If `β` minimises `L(·, p)` over positive precisions and
+    `p ≤ 1`, then the branch expression is strictly above `1/2`.
+
+    This closes the global-minimiser exclusion half of the strict-uniqueness
+    route: the already-kernel-proved left-branch negative derivative would
+    otherwise produce a strictly better positive precision to the right. -/
+theorem L_global_minimizer_not_left_branch
+    (p : ℝ) (hp_le_one : p ≤ 1) {β : ℝ} (hβ : 0 < β)
+    (h_min : ∀ β' : ℝ, 0 < β' → L β p ≤ L β' p) :
+    (1/2 : ℝ) < (9/10 : ℝ) * (1 - p) * Phi_B β := by
+  by_contra h_not
+  have h_branch : (9/10 : ℝ) * (1 - p) * Phi_B β ≤ (1/2 : ℝ) :=
+    le_of_not_gt h_not
+  obtain ⟨d, hd_deriv, hd_neg⟩ :=
+    L_hasDerivAt_negative_on_left_branch p hp_le_one hβ h_branch
+  obtain ⟨β_next, hβ_lt_next, h_next_lt⟩ :=
+    exists_right_lt_of_hasDerivAt_neg hd_deriv hd_neg
+  have hβ_next_pos : 0 < β_next := lt_trans hβ hβ_lt_next
+  have h_min_le := h_min β_next hβ_next_pos
+  linarith
+
+/-- A positive global minimiser cannot satisfy the current right-branch
+    dominance condition, since that condition gives a positive derivative and
+    hence a better positive point to the left. -/
+theorem L_global_minimizer_not_right_branch_dominance
+    (p : ℝ) {β : ℝ} (hβ : 0 < β)
+    (h_min : ∀ β' : ℝ, 0 < β' → L β p ≤ L β' p) :
+    ¬ (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Phi_BDerivValue β <
+        P_trapDerivValue β *
+          ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) := by
+  intro h_dominance
+  obtain ⟨d, hd_deriv, hd_pos⟩ :=
+    L_hasDerivAt_positive_of_right_branch_dominance p hβ h_dominance
+  obtain ⟨β_prev, hβ_prev_pos, _hβ_prev_lt, h_prev_lt⟩ :=
+    exists_left_lt_of_hasDerivAt_pos hβ hd_deriv hd_pos
+  have h_min_le := h_min β_prev hβ_prev_pos
+  linarith
+
+/-- Fermat condition for a positive-domain global minimiser. If a function has
+    a derivative at an interior point of `(0, ∞)` and that point minimises the
+    function over all positive arguments, then the derivative value is zero. -/
+private theorem deriv_eq_zero_of_global_min_on_Ioi
+    {f : ℝ → ℝ} {x d : ℝ} (hx : 0 < x)
+    (hderiv : HasDerivAt f d x)
+    (h_min : ∀ y : ℝ, 0 < y → f x ≤ f y) :
+    d = 0 := by
+  by_contra hd_ne
+  rcases lt_or_gt_of_ne hd_ne with hd_neg | hd_pos
+  · obtain ⟨y, hy_gt, hy_lt⟩ :=
+      exists_right_lt_of_hasDerivAt_neg hderiv hd_neg
+    have hy_pos : 0 < y := lt_trans hx hy_gt
+    have h_min_le := h_min y hy_pos
+    linarith
+  · obtain ⟨y, hy_pos, _hy_lt_x, hy_lt⟩ :=
+      exists_left_lt_of_hasDerivAt_pos hx hderiv hd_pos
+    have h_min_le := h_min y hy_pos
+    linarith
+
+/-- First-order condition for positive global minimisers of the concrete
+    five-state loss `L`: at any positive global minimiser, the grouped
+    derivative expression is exactly zero. -/
+theorem L_global_minimizer_derivative_grouped_eq_zero
+    (p : ℝ) {β : ℝ} (hβ : 0 < β)
+    (h_min : ∀ β' : ℝ, 0 < β' → L β p ≤ L β' p) :
+    P_trapDerivValue β *
+        ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+      (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Phi_BDerivValue β = 0 := by
+  have hPt : HasDerivAt P_trap (P_trapDerivValue β) β := by
+    unfold P_trapDerivValue
+    exact hasDerivAt_P_trap hβ
+  have hPb : HasDerivAt Phi_B (Phi_BDerivValue β) β := by
+    unfold Phi_BDerivValue
+    exact hasDerivAt_Phi_B hβ
+  have hL := hasDerivAt_L p hβ hPt hPb
+  have h_group := L_deriv_grouped p β (P_trapDerivValue β) (Phi_BDerivValue β)
+  have hL_grouped :
+      HasDerivAt (fun β : ℝ => L β p)
+        (P_trapDerivValue β *
+            ((9/10 : ℝ) * (1 - p) * Phi_B β - (1/2 : ℝ)) -
+          (1 - P_trap β) * (9/10 : ℝ) * (1 - p) * Phi_BDerivValue β) β := by
+    rwa [h_group] at hL
+  exact deriv_eq_zero_of_global_min_on_Ioi hβ hL_grouped h_min
+
+/-- Balanced first-order equation at positive global minimisers of `L`. This is
+    the paper's two-term comparison surface promoted to an equality at an
+    actual minimiser. -/
+theorem L_global_minimizer_first_order_balance
+    (p : ℝ) {β : ℝ} (hβ : 0 < β)
+    (h_min : ∀ β' : ℝ, 0 < β' → L β p ≤ L β' p) :
+    L_firstOrderBalance p β := by
+  have h_zero :=
+    L_global_minimizer_derivative_grouped_eq_zero p hβ h_min
+  simpa [L_firstOrderBalance, L_balanceResidual] using h_zero
+
+/-- R255 live bridge after closing the lower-hazard factor: only the
+    upper-tail Gaussian Mills ratio remains as a paper-level monotonicity
+    target. It is now a theorem, not a `Prop` interface. -/
+theorem L_upperGaussianMills_antitoneOn_pos_paper_Def :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_upperGaussianMills z' ≤ L_upperGaussianMills z :=
+  L_upperGaussianMills_antitoneOn_pos
+
+/-- Closed paper-interface alias for the upper Gaussian Mills antitonicity
+    theorem. This keeps the old `_paper_Def` surface auditable while the
+    actual proof is the kernel theorem `L_upperGaussianMills_antitoneOn_pos`. -/
+theorem L_upperGaussianMills_antitoneOn_pos_paper_Def_closed :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_upperGaussianMills z' ≤ L_upperGaussianMills z :=
+  L_upperGaussianMills_antitoneOn_pos_paper_Def
+
+/-- R254 factor-monotonicity bridge. It splits the product antitonicity
+    target into the two standard one-dimensional Gaussian ratio facts. This is
+    now a theorem assembled from the closed upper-Mills and lower-hazard
+    one-dimensional facts, not a `Prop` interface. -/
+theorem L_gaussianHazardMillsFactorAntitone_paper_Def :
+    (∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_upperGaussianMills z' ≤ L_upperGaussianMills z) ∧
+    (∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_lowerGaussianHazard z' ≤ L_lowerGaussianHazard z) := by
+  exact ⟨L_upperGaussianMills_antitoneOn_pos_paper_Def,
+    L_lowerGaussianHazard_antitoneOn_pos⟩
+
+/-- Kernel reduction from the R255 upper-Mills bridge to the R254
+    factor-antitonicity bridge. The lower-hazard factor is now proved
+    directly by `L_lowerGaussianHazard_antitoneOn_pos`. -/
+theorem L_gaussianHazardMillsFactorAntitone_from_upperMills_antitone :
+    (∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_upperGaussianMills z' ≤ L_upperGaussianMills z) ∧
+    (∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_lowerGaussianHazard z' ≤ L_lowerGaussianHazard z) :=
+  L_gaussianHazardMillsFactorAntitone_paper_Def
+
+/-- R253 product-monotonicity theorem. Once the hazard/Mills product is
+    non-increasing on positive `z`, the R252 denominator is strictly
+    increasing on the region where it is positive because `Phi` is strictly
+    increasing and the multiplier `1 - product / (2/9)` is non-decreasing.
+    This is now proved from the R254 factor-antitonicity theorem rather than
+    exposed as a `Prop` interface. -/
+theorem L_normalizedZHazardProduct_antitoneOn_pos_paper_Def :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_normalizedZHazardProduct z' ≤ L_normalizedZHazardProduct z := by
+  intro z z' hz hz' hlt
+  obtain ⟨h_upper, h_lower⟩ :=
+    L_gaussianHazardMillsFactorAntitone_from_upperMills_antitone
+  have hscale_pos : 0 < (2/9 : ℝ) := by norm_num
+  have haz_pos : 0 < (2/9 : ℝ) * z := mul_pos hscale_pos hz
+  have haz'_pos : 0 < (2/9 : ℝ) * z' := mul_pos hscale_pos hz'
+  have haz_lt : (2/9 : ℝ) * z < (2/9 : ℝ) * z' := by
+    nlinarith
+  have hM_le :
+      L_upperGaussianMills ((2/9 : ℝ) * z') ≤
+        L_upperGaussianMills ((2/9 : ℝ) * z) :=
+    h_upper ((2/9 : ℝ) * z) ((2/9 : ℝ) * z') haz_pos haz'_pos haz_lt
+  have hH_le :
+      L_lowerGaussianHazard z' ≤ L_lowerGaussianHazard z :=
+    h_lower z z' hz hz' hlt
+  unfold L_normalizedZHazardProduct
+  have h_step1 :
+      L_upperGaussianMills ((2/9 : ℝ) * z') *
+          L_lowerGaussianHazard z' ≤
+        L_upperGaussianMills ((2/9 : ℝ) * z) *
+          L_lowerGaussianHazard z' :=
+    mul_le_mul_of_nonneg_right hM_le
+      (le_of_lt (L_lowerGaussianHazard_pos z'))
+  have h_step2 :
+      L_upperGaussianMills ((2/9 : ℝ) * z) *
+          L_lowerGaussianHazard z' ≤
+        L_upperGaussianMills ((2/9 : ℝ) * z) *
+          L_lowerGaussianHazard z :=
+    mul_le_mul_of_nonneg_left hH_le
+      (le_of_lt (L_upperGaussianMills_pos ((2/9 : ℝ) * z)))
+  exact le_trans h_step1 h_step2
+
+/-- Compatibility alias for the former R253 reduction theorem name. -/
+theorem L_normalizedZHazardProduct_antitone_from_factor_antitone :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      L_normalizedZHazardProduct z' ≤ L_normalizedZHazardProduct z :=
+  L_normalizedZHazardProduct_antitoneOn_pos_paper_Def
+
+/-- R252 hazard/Mills denominator-shape theorem. This is the R251 denominator
+    bridge after rewriting the denominator as
+    `Phi z * (1 - (upperMills((2/9)z) * lowerHazard z) / (2/9))`. It is now
+    a theorem derived from product antitonicity, not a `Prop` interface. -/
+theorem L_normalizedZHazardDenomShape_paper_Def :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      0 < L_normalizedZHazardDenom z →
+        0 < L_normalizedZHazardDenom z' ∧
+          L_normalizedZHazardDenom z <
+            L_normalizedZHazardDenom z' := by
+  intro z z' hz hz' hlt hD_pos
+  have hP_le :
+      L_normalizedZHazardProduct z' ≤ L_normalizedZHazardProduct z :=
+    L_normalizedZHazardProduct_antitone_from_factor_antitone z z' hz hz' hlt
+  have hP_lt :
+      L_normalizedZHazardProduct z < (2/9 : ℝ) :=
+    (L_normalizedZHazardDenom_pos_iff_product_lt z).mp hD_pos
+  have hP'_lt :
+      L_normalizedZHazardProduct z' < (2/9 : ℝ) :=
+    lt_of_le_of_lt hP_le hP_lt
+  have hD'_pos : 0 < L_normalizedZHazardDenom z' :=
+    (L_normalizedZHazardDenom_pos_iff_product_lt z').mpr hP'_lt
+  have hPhi_lt : Phi z < Phi z' := Phi_strictMono hlt
+  have hPhi'_nonneg : 0 ≤ Phi z' := (Phi_pos z').le
+  have hF_pos :
+      0 < 1 - L_normalizedZHazardProduct z / (2/9 : ℝ) := by
+    nlinarith
+  have hF_le :
+      1 - L_normalizedZHazardProduct z / (2/9 : ℝ) ≤
+        1 - L_normalizedZHazardProduct z' / (2/9 : ℝ) := by
+    nlinarith
+  constructor
+  · exact hD'_pos
+  · unfold L_normalizedZHazardDenom
+    calc
+      Phi z *
+          (1 - L_normalizedZHazardProduct z / (2/9 : ℝ)) <
+        Phi z' *
+          (1 - L_normalizedZHazardProduct z / (2/9 : ℝ)) :=
+        mul_lt_mul_of_pos_right hPhi_lt hF_pos
+      _ ≤ Phi z' *
+          (1 - L_normalizedZHazardProduct z' / (2/9 : ℝ)) :=
+        mul_le_mul_of_nonneg_left hF_le hPhi'_nonneg
+
+/-- Compatibility alias for the former R252 reduction theorem name. -/
+theorem L_normalizedZHazardDenomShape_from_product_antitone :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      0 < L_normalizedZHazardDenom z →
+        0 < L_normalizedZHazardDenom z' ∧
+          L_normalizedZHazardDenom z <
+            L_normalizedZHazardDenom z' :=
+  L_normalizedZHazardDenomShape_paper_Def
+
+/-- R251 denominator-shape theorem. Since `H = scale * denom` and
+    `K = (1/2) * scale` with positive scale, the R250 threshold-shape theorem
+    follows from positivity persistence and strict increase of this normalized
+    denominator. -/
+theorem L_normalizedZThresholdDenomShape_paper_Def :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      0 < L_normalizedZThresholdDenom z →
+        0 < L_normalizedZThresholdDenom z' ∧
+          L_normalizedZThresholdDenom z <
+            L_normalizedZThresholdDenom z' := by
+  intro z z' hz hz' hlt hD_pos
+  have hHz_pos : 0 < L_normalizedZHazardDenom z := by
+    simpa [L_normalizedZThresholdDenom_eq_hazardDenom z] using hD_pos
+  obtain ⟨hHz'_pos, hHz_lt⟩ :=
+    L_normalizedZHazardDenomShape_from_product_antitone z z' hz hz' hlt hHz_pos
+  constructor
+  · simpa [L_normalizedZThresholdDenom_eq_hazardDenom z'] using hHz'_pos
+  · simpa [L_normalizedZThresholdDenom_eq_hazardDenom z,
+      L_normalizedZThresholdDenom_eq_hazardDenom z'] using hHz_lt
+
+/-- Compatibility alias for the former R251 reduction theorem name. -/
+theorem L_normalizedZThresholdDenomShape_from_hazardDenomShape :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      0 < L_normalizedZThresholdDenom z →
+        0 < L_normalizedZThresholdDenom z' ∧
+          L_normalizedZThresholdDenom z <
+            L_normalizedZThresholdDenom z' :=
+  L_normalizedZThresholdDenomShape_paper_Def
+
+/-- R250 pure z-shape theorem after the affine-threshold reduction. Writing
+    the normalized core as `c * H(z) - K(z)`, this says that once the linear
+    coefficient `H` is positive, it stays positive to the right and the
+    threshold ratio `K/H` is strictly decreasing. The ratio is encoded by
+    cross-multiplication to avoid adding division side conditions downstream. -/
+theorem L_normalizedZThresholdShape_paper_Def :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      0 < L_normalizedZLinearCoeff z →
+        0 < L_normalizedZLinearCoeff z' ∧
+          L_normalizedZConstantTerm z' * L_normalizedZLinearCoeff z <
+            L_normalizedZConstantTerm z * L_normalizedZLinearCoeff z' := by
+  intro z z' hz hz' hlt hH_pos
+  have hscale_pos : 0 < L_normalizedZThresholdScale z :=
+    L_normalizedZThresholdScale_pos z
+  have hscale'_pos : 0 < L_normalizedZThresholdScale z' :=
+    L_normalizedZThresholdScale_pos z'
+  have hH_eq := L_normalizedZLinearCoeff_eq_scale_mul_thresholdDenom z
+  have hH'_eq := L_normalizedZLinearCoeff_eq_scale_mul_thresholdDenom z'
+  have hK_eq := L_normalizedZConstantTerm_eq_half_mul_thresholdScale z
+  have hK'_eq := L_normalizedZConstantTerm_eq_half_mul_thresholdScale z'
+  have hD_pos : 0 < L_normalizedZThresholdDenom z := by
+    rw [hH_eq] at hH_pos
+    by_contra hD_not_pos
+    have hD_nonpos : L_normalizedZThresholdDenom z ≤ 0 :=
+      le_of_not_gt hD_not_pos
+    have hH_nonpos :
+        L_normalizedZThresholdScale z *
+            L_normalizedZThresholdDenom z ≤ 0 :=
+      mul_nonpos_of_nonneg_of_nonpos (le_of_lt hscale_pos) hD_nonpos
+    linarith
+  obtain ⟨hD'_pos, hD_lt⟩ :=
+    L_normalizedZThresholdDenomShape_from_hazardDenomShape z z' hz hz' hlt hD_pos
+  have hH'_pos : 0 < L_normalizedZLinearCoeff z' := by
+    rw [hH'_eq]
+    exact mul_pos hscale'_pos hD'_pos
+  have h_common_pos :
+      0 < (1/2 : ℝ) * L_normalizedZThresholdScale z *
+          L_normalizedZThresholdScale z' := by
+    exact mul_pos (mul_pos (by norm_num) hscale_pos) hscale'_pos
+  have h_threshold :
+      L_normalizedZConstantTerm z' * L_normalizedZLinearCoeff z <
+        L_normalizedZConstantTerm z * L_normalizedZLinearCoeff z' := by
+    calc
+      L_normalizedZConstantTerm z' * L_normalizedZLinearCoeff z =
+          ((1/2 : ℝ) * L_normalizedZThresholdScale z *
+              L_normalizedZThresholdScale z') *
+              L_normalizedZThresholdDenom z := by
+        rw [hK'_eq, hH_eq]
+        ring
+      _ < ((1/2 : ℝ) * L_normalizedZThresholdScale z *
+              L_normalizedZThresholdScale z') *
+              L_normalizedZThresholdDenom z' :=
+        mul_lt_mul_of_pos_left hD_lt h_common_pos
+      _ = L_normalizedZConstantTerm z * L_normalizedZLinearCoeff z' := by
+        rw [hK_eq, hH'_eq]
+        ring
+  exact ⟨hH'_pos, h_threshold⟩
+
+/-- Compatibility alias for the former R250 reduction theorem name. -/
+theorem L_normalizedZThresholdShape_from_denomShape :
+    ∀ z z' : ℝ, 0 < z → 0 < z' → z < z' →
+      0 < L_normalizedZLinearCoeff z →
+        0 < L_normalizedZLinearCoeff z' ∧
+          L_normalizedZConstantTerm z' * L_normalizedZLinearCoeff z <
+            L_normalizedZConstantTerm z * L_normalizedZLinearCoeff z' :=
+  L_normalizedZThresholdShape_paper_Def
+
+/-- R249 normalized z-core single-crossing theorem after the R250
+    affine-threshold reduction. It follows from the pure z-threshold shape
+    theorem and is no longer exposed as a `Prop` interface. -/
+theorem L_balanceResidualNormalizedZCore_singleCrossingOn_rightBranch_paper_Def :
+    ∀ c : ℝ, (1/2 : ℝ) < c → c ≤ (9/10 : ℝ) →
+      ∀ z z' : ℝ, 0 < z → 0 < z' →
+        L_cRightBranch c z → L_cRightBranch c z' →
+          z < z' →
+            L_balanceResidualNormalizedZCore c z = 0 →
+              0 < L_balanceResidualNormalizedZCore c z' := by
+  intro c hc_gt _hc_le z z' hz hz' _h_right _h_right' hlt h_zero
+  have hc_pos : 0 < c := by
+    linarith
+  rw [L_balanceResidualNormalizedZCore_eq_linear] at h_zero
+  have hK_pos : 0 < L_normalizedZConstantTerm z :=
+    L_normalizedZConstantTerm_pos z
+  have hcH_eq : c * L_normalizedZLinearCoeff z =
+      L_normalizedZConstantTerm z := by
+    linarith
+  have hH_pos : 0 < L_normalizedZLinearCoeff z := by
+    nlinarith
+  obtain ⟨hH'_pos, h_threshold⟩ :=
+    L_normalizedZThresholdShape_from_denomShape z z' hz hz' hlt hH_pos
+  have hK'_lt_cH' :
+      L_normalizedZConstantTerm z' < c * L_normalizedZLinearCoeff z' := by
+    have htmp :
+        L_normalizedZConstantTerm z' * L_normalizedZLinearCoeff z <
+          (c * L_normalizedZLinearCoeff z') *
+            L_normalizedZLinearCoeff z := by
+      calc
+        L_normalizedZConstantTerm z' * L_normalizedZLinearCoeff z
+            < L_normalizedZConstantTerm z * L_normalizedZLinearCoeff z' :=
+          h_threshold
+        _ = (c * L_normalizedZLinearCoeff z') *
+              L_normalizedZLinearCoeff z := by
+          rw [← hcH_eq]
+          ring
+    exact lt_of_mul_lt_mul_right htmp (le_of_lt hH_pos)
+  rw [L_balanceResidualNormalizedZCore_eq_linear]
+  linarith
+
+/-- Compatibility alias for the former R249 reduction theorem name. -/
+theorem L_balanceResidualNormalizedZCore_singleCrossingOn_from_thresholdShape :
+    ∀ c : ℝ, (1/2 : ℝ) < c → c ≤ (9/10 : ℝ) →
+      ∀ z z' : ℝ, 0 < z → 0 < z' →
+        L_cRightBranch c z → L_cRightBranch c z' →
+          z < z' →
+            L_balanceResidualNormalizedZCore c z = 0 →
+              0 < L_balanceResidualNormalizedZCore c z' :=
+  L_balanceResidualNormalizedZCore_singleCrossingOn_rightBranch_paper_Def
+
+/-- R248 z-core single-crossing theorem. It follows from the normalized bridge
+    because `c = 0.9 * (1 - p)` lies in `(1/2, 0.9]` for `p ∈ [0, p_1)`,
+    and `Delta_B` is positive. -/
+theorem L_balanceResidualZCore_singleCrossingOn_rightBranch_paper_Def :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ z z' : ℝ, 0 < z → 0 < z' →
+        L_zRightBranch p z → L_zRightBranch p z' →
+          z < z' →
+            L_balanceResidualZCore p z = 0 →
+              0 < L_balanceResidualZCore p z' := by
+  intro p hp hp_lt z z' hz hz' h_rightz h_rightz' hlt h_zcore_zero
+  let c := (9/10 : ℝ) * (1 - p)
+  have hc_gt : (1/2 : ℝ) < c := by
+    dsimp [c]
+    unfold p_1 at hp_lt
+    nlinarith
+  have hc_le : c ≤ (9/10 : ℝ) := by
+    dsimp [c]
+    nlinarith
+  have hc_right : L_cRightBranch c z := by
+    simpa [c, L_cRightBranch, L_zRightBranch] using h_rightz
+  have hc_right' : L_cRightBranch c z' := by
+    simpa [c, L_cRightBranch, L_zRightBranch] using h_rightz'
+  have h_norm_zero : L_balanceResidualNormalizedZCore c z = 0 := by
+    rw [L_balanceResidualZCore_eq_deltaB_mul_normalized] at h_zcore_zero
+    exact eq_zero_of_ne_zero_of_mul_left_eq_zero Delta_B_pos.ne'
+      (by simpa [c] using h_zcore_zero)
+  have h_norm_pos :
+      0 < L_balanceResidualNormalizedZCore c z' :=
+    L_balanceResidualNormalizedZCore_singleCrossingOn_from_thresholdShape
+      c hc_gt hc_le z z' hz hz' hc_right hc_right' hlt h_norm_zero
+  rw [L_balanceResidualZCore_eq_deltaB_mul_normalized]
+  exact mul_pos Delta_B_pos (by simpa [c] using h_norm_pos)
+
+/-- Compatibility alias for the former R248 reduction theorem name. -/
+theorem L_balanceResidualZCore_singleCrossingOn_from_normalized :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ z z' : ℝ, 0 < z → 0 < z' →
+        L_zRightBranch p z → L_zRightBranch p z' →
+          z < z' →
+            L_balanceResidualZCore p z = 0 →
+              0 < L_balanceResidualZCore p z' :=
+  L_balanceResidualZCore_singleCrossingOn_rightBranch_paper_Def
+
+/-- R247 beta-core single-crossing theorem. It follows from the one-variable
+    z-core theorem because the change of variables
+    `β ↦ Delta_B / sqrt(2 * signalVariance β)` is strictly increasing on
+    positive precisions. -/
+theorem L_balanceResidualCore_singleCrossingOn_rightBranch_paper_Def :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        L_rightBranch p β → L_rightBranch p β' →
+          β < β' →
+            L_balanceResidualCore p β = 0 →
+              0 < L_balanceResidualCore p β' := by
+  intro p hp hp_lt β β' hβ hβ' h_rightβ h_rightβ' hlt h_core_zero
+  let z := Delta_B / Real.sqrt (2 * signalVariance β)
+  let z' := Delta_B / Real.sqrt (2 * signalVariance β')
+  have hz_pos : 0 < z := by
+    dsimp [z]
+    exact div_pos Delta_B_pos (sqrt_two_sigma_pos hβ)
+  have hz'_pos : 0 < z' := by
+    dsimp [z']
+    exact div_pos Delta_B_pos (sqrt_two_sigma_pos hβ')
+  have hz_lt : z < z' := by
+    dsimp [z, z']
+    exact arg_B_strictMono hβ hlt
+  have hz_right : L_zRightBranch p z := by
+    simpa [z, L_zRightBranch, L_rightBranch, Phi_B] using h_rightβ
+  have hz'_right : L_zRightBranch p z' := by
+    simpa [z', L_zRightBranch, L_rightBranch, Phi_B] using h_rightβ'
+  have hz_zero : L_balanceResidualZCore p z = 0 := by
+    rw [L_balanceResidualCore_eq_zCore p β] at h_core_zero
+    simpa [z] using h_core_zero
+  have hz_pos_core :
+      0 < L_balanceResidualZCore p z' :=
+    L_balanceResidualZCore_singleCrossingOn_from_normalized
+      p hp hp_lt z z' hz_pos hz'_pos hz_right hz'_right hz_lt hz_zero
+  rw [L_balanceResidualCore_eq_zCore p β']
+  simpa [z'] using hz_pos_core
+
+/-- Compatibility alias for the former R247 reduction theorem name. -/
+theorem L_balanceResidualCore_singleCrossingOn_from_zCore :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        L_rightBranch p β → L_rightBranch p β' →
+          β < β' →
+            L_balanceResidualCore p β = 0 →
+              0 < L_balanceResidualCore p β' :=
+  L_balanceResidualCore_singleCrossingOn_rightBranch_paper_Def
+
+/-- Full grouped first-order residual single-crossing theorem after the R247
+    core-factor reduction: once the full residual is zero at a positive
+    right-branch point, it is strictly positive at every later positive
+    right-branch point. -/
+theorem L_balanceResidual_singleCrossingOn_rightBranch_paper_Def :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        L_rightBranch p β → L_rightBranch p β' →
+          β < β' →
+            L_balanceResidual p β = 0 →
+              0 < L_balanceResidual p β' := by
+  intro p hp hp_lt β β' hβ hβ' h_rightβ h_rightβ' hlt h_res_zero
+  have hscaleβ_pos : 0 < L_balanceResidualScale β :=
+    L_balanceResidualScale_pos hβ
+  have hscaleβ'_pos : 0 < L_balanceResidualScale β' :=
+    L_balanceResidualScale_pos hβ'
+  have h_core_zero : L_balanceResidualCore p β = 0 := by
+    have hfact := L_balanceResidual_eq_scale_mul_core p β
+    rw [hfact] at h_res_zero
+    exact eq_zero_of_ne_zero_of_mul_left_eq_zero hscaleβ_pos.ne' h_res_zero
+  have hcore_pos :
+      0 < L_balanceResidualCore p β' :=
+    L_balanceResidualCore_singleCrossingOn_from_zCore
+      p hp hp_lt β β' hβ hβ' h_rightβ h_rightβ' hlt h_core_zero
+  have hfact' := L_balanceResidual_eq_scale_mul_core p β'
+  rw [hfact']
+  exact mul_pos hscaleβ'_pos hcore_pos
+
+/-- Compatibility alias for the former full-residual reduction theorem name. -/
+theorem L_balanceResidual_singleCrossingOn_from_core :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        L_rightBranch p β → L_rightBranch p β' →
+          β < β' →
+            L_balanceResidual p β = 0 →
+              0 < L_balanceResidual p β' :=
+  L_balanceResidual_singleCrossingOn_rightBranch_paper_Def
+
+/-- First-order balance has at most one positive right-branch solution. This
+    is now derived from the strict single-crossing theorem, not exposed as a
+    standalone `Prop` interface. -/
+theorem L_first_order_balance_unique_paper_Def :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        L_rightBranch p β → L_rightBranch p β' →
+          L_firstOrderBalance p β → L_firstOrderBalance p β' →
+            β' = β := by
+  intro p hp hp_lt β β' hβ hβ' h_rightβ h_rightβ' h_balβ h_balβ'
+  have h_resβ : L_balanceResidual p β = 0 := by
+    simpa [L_firstOrderBalance] using h_balβ
+  have h_resβ' : L_balanceResidual p β' = 0 := by
+    simpa [L_firstOrderBalance] using h_balβ'
+  by_cases h_eq : β' = β
+  · exact h_eq
+  · rcases lt_or_gt_of_ne h_eq with hβ'_lt_β | hβ_lt_β'
+    · have hlt_res :=
+        L_balanceResidual_singleCrossingOn_from_core
+          p hp hp_lt β' β hβ' hβ h_rightβ' h_rightβ hβ'_lt_β h_resβ'
+      have hzero_lt : (0 : ℝ) < 0 := by
+        rw [h_resβ] at hlt_res
+        exact hlt_res
+      exact False.elim ((lt_irrefl (0 : ℝ)) hzero_lt)
+    · have hlt_res :=
+        L_balanceResidual_singleCrossingOn_from_core
+          p hp hp_lt β β' hβ hβ' h_rightβ h_rightβ' hβ_lt_β' h_resβ
+      have hzero_lt : (0 : ℝ) < 0 := by
+        rw [h_resβ'] at hlt_res
+        exact hlt_res
+      exact False.elim ((lt_irrefl (0 : ℝ)) hzero_lt)
+
+/-- Compatibility alias for the former first-order-balance reduction theorem
+    name. -/
+theorem L_first_order_balance_unique_from_balanceResidual_singleCrossingOn :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        L_rightBranch p β → L_rightBranch p β' →
+          L_firstOrderBalance p β → L_firstOrderBalance p β' →
+            β' = β :=
+  L_first_order_balance_unique_paper_Def
+
+/-- Kernel reduction from the right-branch first-order-balance uniqueness
+    bridge to the original strict-uniqueness statement. -/
+theorem L_strict_unique_minimizer_from_first_order_balance_unique :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∀ β β' : ℝ, 0 < β → 0 < β' →
+        (∀ β'' : ℝ, 0 < β'' → L β p ≤ L β'' p) →
+        L β' p ≤ L β p →
+          β' = β := by
+  intro p hp hp_lt β β' hβ hβ' h_min h_le
+  have hp_le_one : p ≤ 1 := by
+    have hp_lt_one : p < 1 := by
+      have h := hp_lt
+      unfold p_1 at h
+      linarith
+    exact le_of_lt hp_lt_one
+  have hβ'_min : ∀ β'' : ℝ, 0 < β'' → L β' p ≤ L β'' p := by
+    intro β'' hβ''
+    exact le_trans h_le (h_min β'' hβ'')
+  have h_rightβ : L_rightBranch p β := by
+    dsimp [L_rightBranch]
+    exact L_global_minimizer_not_left_branch p hp_le_one hβ h_min
+  have h_rightβ' : L_rightBranch p β' := by
+    dsimp [L_rightBranch]
+    exact L_global_minimizer_not_left_branch p hp_le_one hβ' hβ'_min
+  have h_balβ : L_firstOrderBalance p β :=
+    L_global_minimizer_first_order_balance p hβ h_min
+  have h_balβ' : L_firstOrderBalance p β' :=
+    L_global_minimizer_first_order_balance p hβ' hβ'_min
+  exact L_first_order_balance_unique_from_balanceResidual_singleCrossingOn
+    p hp hp_lt β β' hβ hβ' h_rightβ h_rightβ' h_balβ h_balβ'
 
 /-- **Substantive closure of `interior_minimiser_existence`.**
     Existence of an interior global minimiser `β* > 0` of `L(·, 0)`:
@@ -1330,7 +2529,7 @@ private theorem interior_minimiser_existence_proof :
     existence claim.
 
     paper source: Proposition `prop:interior-optimum`, line 774. -/
-theorem interior_minimiser_existence_OPEN :
+theorem interior_minimiser_existence :
     ∃ β_star : ℝ, 0 < β_star ∧
       ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 :=
   interior_minimiser_existence_proof
@@ -1420,7 +2619,7 @@ private theorem L_minimum_exists_in_regime_i_proof
 
 /-- **Existence of interior optimum** at `β* ≈ 1.5 bits` (derived theorem).
 
-    Derived theorem composing `interior_minimiser_existence_OPEN`,
+    Derived theorem composing `interior_minimiser_existence`,
     itself closed as a derived theorem (extreme value theorem
     on the concrete `L` carrier — see
     `interior_minimiser_existence_proof`). No longer rests on an
@@ -1430,7 +2629,7 @@ private theorem L_minimum_exists_in_regime_i_proof
 theorem gap_interior_optimum :
     ∃ β_star : ℝ, 0 < β_star ∧
       ∀ β : ℝ, 0 ≤ β → L β_star 0 ≤ L β 0 :=
-  interior_minimiser_existence_OPEN
+  interior_minimiser_existence
 
 /-! ## 3. Three-regime structure (`prop:three-regime-five-state`)
 
@@ -1475,7 +2674,7 @@ noncomputable def W_topo_p (p : ℝ) : ℝ := (4/10 : ℝ) * p
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("unique interior minimum ... satisfying L(β*(p), p) <
     L(∞, p) = 0.4"); proof line 825. -/
-theorem L_below_limit_at_some_beta_OPEN :
+theorem L_below_limit_at_some_beta :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         L β_star_p p < (4/10 : ℝ) :=
@@ -1486,7 +2685,7 @@ theorem L_below_limit_at_some_beta_OPEN :
     `L(β*(p), p) < L(∞, p) = 0.4`.
 
     Derived theorem composing
-    `L_below_limit_at_some_beta_OPEN` .
+    `L_below_limit_at_some_beta` .
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814. -/
@@ -1494,54 +2693,57 @@ theorem gap_three_regime_reversal_existence :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         L β_star_p p < (4/10 : ℝ) :=
-  L_below_limit_at_some_beta_OPEN
+  L_below_limit_at_some_beta
 
-/-- **Bridge (a)** Cat 3 paper-Def-stipulated SMALLER bridge
-    atom: existence of an interior minimiser of `L β p` over `β > 0` for
+/-- **Bridge (a), now closed**: existence of an interior minimiser of `L β p`
+    over `β > 0` for
     `p ∈ [0, p_1)`. Paper Proposition `prop:three-regime-five-state`
     Regime (i) line 814 + proof line 825 STATE the unimodality of `L β p`
     on `(0, ∞)`; the existence-of-minimum sub-clause is the EXISTENCE-only
     component of the paper's unique-minimum claim.
 
     Atomic-decomposition pattern: smaller atoms +
-    Cat 1 lifting are preferable to larger atoms. The larger axiom
-    (existence + uniqueness) is split into two strictly smaller
-    paper-Def atoms: (a) interior-minimiser EXISTENCE (this atom), and
+    Cat 1 lifting are preferable to larger atoms. The larger theorem
+    interface (existence + uniqueness) is split into two strictly smaller
+    paper-Def interfaces: (a) interior-minimiser EXISTENCE (this interface), and
     (b) strict uniqueness from paper-stipulated strict structure
-    (`L_strict_unique_minimizer_paper_Def` below). The combined statement
-    becomes a Cat 1 derived theorem composing the two.
+    (formerly exposed through `L_strict_unique_minimizer_paper_Def`). The
+    combined statement becomes a Cat 1 derived theorem composing the two.
 
-    Per paper-Def discipline (paper-stipulated structural fact about
-    opaque carrier in regime). -/
-axiom L_interior_minimizer_exists_paper_Def :
+    R228 closure: this is now exactly the already-proved
+    `L_minimum_exists_in_regime_i` theorem, a concrete real-analysis
+    proof on the explicit `L` carrier using the extreme value theorem. -/
+theorem L_interior_minimizer_exists_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
-        ∀ β' : ℝ, 0 < β' → L β_star_p p ≤ L β' p
+        ∀ β' : ℝ, 0 < β' → L β_star_p p ≤ L β' p :=
+  L_minimum_exists_in_regime_i_proof
 
-/-- **Bridge (b)** Cat 3 paper-Def-stipulated SMALLER bridge
-    atom: strict uniqueness of the minimiser of `L β p` over `β > 0` for
-    `p ∈ [0, p_1)`. Paper line 825's transcendental two-term sign
-    comparison `P_trap'(β)·(0.9(1−p)Φ_B(β) − 0.5) > (1−P_trap β)·
-    0.9(1−p)·Φ_B'(β)` is the paper-numerical witness for STRICT
-    convexity-like behaviour on the interior, which the paper invokes
-    to conclude uniqueness of the interior minimiser.
+/- **Bridge (b), retired compatibility name after R469.** The former Cat 3
+    paper-Def bridge is no longer the whole strict-uniqueness conclusion.
+    It was reduced to the two-factor antitonicity statement
+    `L_gaussianHazardMillsFactorAntitone_paper_Def`; the R253 product
+    antitonicity bridge, R252 hazard/Mills denominator-shape bridge, R251
+    threshold-denominator bridge, R250 threshold-shape bridge, normalized
+    z-core single-crossing,
+    z-core/beta-core/full residual single-crossing, balance uniqueness, and
+    original strict uniqueness follow by the kernel theorems
+    `L_normalizedZHazardProduct_antitone_from_factor_antitone`,
+    `L_normalizedZHazardDenomShape_from_product_antitone`,
+    `L_normalizedZThresholdDenomShape_from_hazardDenomShape`,
+    `L_normalizedZThresholdShape_from_denomShape`,
+    `L_balanceResidualNormalizedZCore_singleCrossingOn_from_thresholdShape`,
+    `L_balanceResidual_singleCrossingOn_from_core`,
+    `L_first_order_balance_unique_from_balanceResidual_singleCrossingOn` and
+    `L_strict_unique_minimizer_from_first_order_balance_unique`.
 
-    Atomic-decomposition pattern: this atom isolates
-    the strict-uniqueness paper-stipulated content from the existence
-    side, which is captured separately by
-    `L_interior_minimizer_exists_paper_Def`.
-
-    Per paper-Def discipline (paper-stipulated structural fact about
-    opaque carrier in regime). -/
-axiom L_strict_unique_minimizer_paper_Def :
-    ∀ p : ℝ, 0 ≤ p → p < p_1 →
-      ∀ β β' : ℝ, 0 < β → 0 < β' →
-        (∀ β'' : ℝ, 0 < β'' → L β p ≤ L β'' p) →
-        L β' p ≤ L β p →
-        β' = β
+    The former compatibility name `L_strict_unique_minimizer_paper_Def` has
+    been retired from source: public theorem signatures no longer take it as a
+    premise, and the right-branch single-crossing content is discharged below
+    from the closed upper-Mills antitonicity theorem. -/
 
 /-- **Unimodality statement** Cat 1 derived theorem composing the two
-    paper-Def bridge atoms above:
+    explicit paper-Def theorem interfaces above:
     paper Proposition `prop:three-regime-five-state` Regime (i) line 814
     + proof line 825 STATE that the explicit `L β p` formula is unimodal
     on `(0, ∞)` for `p ∈ [0, p_1)` (interior unique minimum exists).
@@ -1556,12 +2758,10 @@ axiom L_strict_unique_minimizer_paper_Def :
     carrier; the encoded atoms
     capture the paper-stipulated uniqueness conclusion.
 
-    Composed as a Cat 1 derived theorem from
-    `L_interior_minimizer_exists_paper_Def` (existence) and
-    `L_strict_unique_minimizer_paper_Def` (strict uniqueness).
-    Atomic-decomposition pattern: smaller atoms + Cat 1 lifting are
-    preferable to larger atoms. Existence and uniqueness are factored
-    into separate paper-Def atoms. -/
+    Composed as a Cat 1 derived theorem from the current concrete theorem
+    `L_interior_minimizer_exists_paper_Def` (existence) and the closed
+    right-branch single-crossing chain below; no external uniqueness premise
+    remains. -/
 theorem L_unimodal_in_regime_i_paper_Def :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
@@ -1571,36 +2771,35 @@ theorem L_unimodal_in_regime_i_paper_Def :
     L_interior_minimizer_exists_paper_Def p hp hp_lt
   refine ⟨β_star_p, h_pos, ?_⟩
   intro β' hβ'_pos h_le
-  exact L_strict_unique_minimizer_paper_Def p hp hp_lt
-    β_star_p β' h_pos hβ'_pos h_min h_le
+  exact L_strict_unique_minimizer_from_first_order_balance_unique
+    p hp hp_lt β_star_p β' h_pos hβ'_pos h_min h_le
 
-/-- **Unimodality** (Cat 1 derived theorem). Direct re-export
-    of the paper-Def-stipulated structural equation atom
-    `L_unimodal_in_regime_i_paper_Def`. -/
-theorem L_unimodal_in_regime_i_workingAssumption :
+/-- **Unimodality** (Cat 1 derived theorem). Direct re-export of
+    `L_unimodal_in_regime_i_paper_Def` with no external premise. -/
+theorem L_unimodal_in_regime_i_from_unique_minimizer :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
   L_unimodal_in_regime_i_paper_Def
 
 /-- **Infrastructure-wired**: derives paper's
-    L-unimodality via the smaller bridge atom (the
-    `L_unimodal_in_regime_i_workingAssumption` re-export above)
+    L-unimodality via the closed theorem
+    `L_unimodal_in_regime_i_from_unique_minimizer` above,
     consuming `Infrastructure.ArgmaxExistence` Cat 1 chain. -/
-theorem L_unimodal_in_regime_i_OPEN :
+theorem L_unimodal_in_regime_i :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
-  L_unimodal_in_regime_i_workingAssumption
+  L_unimodal_in_regime_i_from_unique_minimizer
 
 /-- **Regime (i) sub-claim — uniqueness of the interior minimum**
-    (derived theorem composing `L_unimodal_in_regime_i_OPEN`).
+    (derived theorem composing `L_unimodal_in_regime_i`).
     paper source: Regime (i), line 814 + proof line 825. -/
 theorem gap_three_regime_reversal_uniqueness :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       ∃ β_star_p : ℝ, 0 < β_star_p ∧
         ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
-  L_unimodal_in_regime_i_OPEN
+  L_unimodal_in_regime_i
 
 /-- **Regime (i) sub-claim — non-monotonicity of `L(·, p)` in `β`.**
     For `p ∈ [0, p_1)`, `L(β, p)` is non-monotone in `β`: there exist
@@ -1625,7 +2824,7 @@ theorem gap_three_regime_reversal_uniqueness :
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     line 814 ("L(β, p) is non-monotone in β"); proof at lines 821-825. -/
-theorem L_nonmonotone_witnesses_OPEN :
+theorem L_nonmonotone_witnesses :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
       (∃ β_low β_high : ℝ, 0 < β_low ∧ β_low < β_high ∧
         L β_high p < L β_low p) ∧
@@ -1665,7 +2864,7 @@ theorem L_nonmonotone_witnesses_OPEN :
 
 /-- **Regime (i) sub-claim — non-monotonicity of `L(·, p)` in `β`**
     (derived theorem composing
-    `L_nonmonotone_witnesses_OPEN`).
+    `L_nonmonotone_witnesses`).
     paper source: Regime (i), line 814 + proof at lines 821-825. -/
 theorem gap_three_regime_reversal_nonmonotone :
     ∀ p : ℝ, 0 ≤ p → p < p_1 →
@@ -1673,7 +2872,7 @@ theorem gap_three_regime_reversal_nonmonotone :
         L β_high p < L β_low p) ∧
       (∃ β_a β_b : ℝ, 0 < β_a ∧ β_a < β_b ∧
         L β_a p < L β_b p) :=
-  L_nonmonotone_witnesses_OPEN
+  L_nonmonotone_witnesses
 
 /-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`.**
     For `p₁ < p₂` both in `[0, p_1)`, the overshoot
@@ -1710,7 +2909,7 @@ theorem gap_three_regime_reversal_nonmonotone :
     `L β*₁ p₁ < L β*₂ p₂` is the existential the paper's overshoot-
     monotonicity claim reduces to. No `Classical.choose`, no opaque
     carrier — fully derived. -/
-theorem envelope_derivative_sign_in_p_OPEN :
+theorem envelope_derivative_sign_in_p :
     ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
       ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
         L β_star₁ p₁ < L β_star₂ p₂ := by
@@ -1730,13 +2929,13 @@ theorem envelope_derivative_sign_in_p_OPEN :
 
 /-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`**
     (derived theorem composing
-    `envelope_derivative_sign_in_p_OPEN`).
+    `envelope_derivative_sign_in_p`).
     paper source: Regime (i), line 814 + proof at line 825. -/
 theorem gap_three_regime_reversal_overshoot_decreasing :
     ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
       ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
         L β_star₁ p₁ < L β_star₂ p₂ :=
-  envelope_derivative_sign_in_p_OPEN
+  envelope_derivative_sign_in_p
 
 /-- Closure-path-A smaller claim, fully derived theorem from a
     paper-derived atom: on Regime (i)'s domain `p ∈ [0, p_1)`, the
@@ -1772,7 +2971,7 @@ theorem gap_three_regime_reversal_overshoot_decreasing :
     line 814 + proof line 825 (existence of interior minimum from
     IVT chain `0.9(1-p)·sup_β Φ_B > 0.5` for `p < p_1` plus the
     unimodal structure of `prop:interior-optimum` line 774). -/
-theorem L_minimum_exists_in_regime_i_OPEN :
+theorem L_minimum_exists_in_regime_i :
     ∀ (p : ℝ), 0 ≤ p → p < p_1 →
       ∃ β_min : ℝ, 0 < β_min ∧
         ∀ (β : ℝ), 0 < β → L β_min p ≤ L β p :=
@@ -1782,7 +2981,7 @@ theorem L_minimum_exists_in_regime_i_OPEN :
 
     On the Regime (i) domain `p ∈ [0, p_1)`, `betaStarOfP p` is the
     minimiser of `L(·, p)` picked via `Classical.choose` from the
-    existence atom `L_minimum_exists_in_regime_i_OPEN`. Outside the
+    existence atom `L_minimum_exists_in_regime_i`. Outside the
     domain (paper-irrelevant), the definition follows the Mathlib
     convention of returning `0`.
 
@@ -1796,7 +2995,7 @@ theorem L_minimum_exists_in_regime_i_OPEN :
     `L(∞, p) − L(β*(p), p)`). -/
 noncomputable def betaStarOfP (p : ℝ) : ℝ :=
   if h : 0 ≤ p ∧ p < p_1 then
-    Classical.choose (L_minimum_exists_in_regime_i_OPEN p h.1 h.2)
+    Classical.choose (L_minimum_exists_in_regime_i p h.1 h.2)
   else 0
 
 /-- **Derived theorem**: closes via `Classical.choose_spec`.
@@ -1805,7 +3004,7 @@ noncomputable def betaStarOfP (p : ℝ) : ℝ :=
     `L (betaStarOfP p) p ≤ L β p`.
 
     Closure: composes the `betaStarOfP` `def` (which invokes
-    `Classical.choose` on `L_minimum_exists_in_regime_i_OPEN` inside
+    `Classical.choose` on `L_minimum_exists_in_regime_i` inside
     the domain guard) with `Classical.choose_spec` (which yields the
     universal-inequality minimiser property of the chosen witness
     directly). The carrier-identification structural-equation atom
@@ -1826,12 +3025,12 @@ theorem betaStarOfP_def
   -- Unfold `betaStarOfP` at the `if_pos` branch (in-domain).
   have h_dom : 0 ≤ p ∧ p < p_1 := ⟨h_p_nonneg, h_p_lt_p1⟩
   have h_unfold : betaStarOfP p =
-      Classical.choose (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1) := by
+      Classical.choose (L_minimum_exists_in_regime_i p h_p_nonneg h_p_lt_p1) := by
     unfold betaStarOfP
     rw [dif_pos h_dom]
   -- `Classical.choose_spec` yields `0 < β_min ∧ ∀ β > 0, L β_min p ≤ L β p`.
   have h_spec :=
-    Classical.choose_spec (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1)
+    Classical.choose_spec (L_minimum_exists_in_regime_i p h_p_nonneg h_p_lt_p1)
   -- Extract the universal-inequality minimiser property.
   rw [h_unfold]
   exact h_spec.2 β h_β_pos
@@ -1862,6 +3061,91 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
     betaStarOfP_def p h_p_nonneg h_p_lt_p1 β_star_p h_β_pos
   linarith
 
+/-- `betaStarOfP p > 0` for `p ∈ [0, p_1)`, exposed before the
+    envelope-continuity proof. -/
+private theorem betaStarOfP_pos_for_lipschitz {p : ℝ} (h_p_nonneg : 0 ≤ p)
+    (h_p_lt_p1 : p < p_1) : 0 < betaStarOfP p := by
+  have h_dom : 0 ≤ p ∧ p < p_1 := ⟨h_p_nonneg, h_p_lt_p1⟩
+  have h_unfold : betaStarOfP p =
+      Classical.choose (L_minimum_exists_in_regime_i p h_p_nonneg h_p_lt_p1) := by
+    unfold betaStarOfP
+    rw [dif_pos h_dom]
+  rw [h_unfold]
+  exact (Classical.choose_spec
+    (L_minimum_exists_in_regime_i p h_p_nonneg h_p_lt_p1)).1
+
+/-- At fixed precision `β`, the dependence of `L β p` on `p` is affine with
+    slope `(1 - P_trap β) * 0.9 * Phi_B β`. -/
+private theorem L_sub_same_beta (β p q : ℝ) :
+    L β p - L β q =
+      ((1 - P_trap β) * (9/10 : ℝ) * Phi_B β) * (p - q) := by
+  unfold L
+  ring
+
+/-- Uniform Lipschitz bound in the parameter `p` at fixed `β`. The coefficient
+    is bounded by `0.9` because both `1 - P_trap β` and `Phi_B β` lie in
+    `[0,1]`. -/
+private theorem L_same_beta_lipschitz (β p q : ℝ) :
+    |L β p - L β q| ≤ (9/10 : ℝ) * |p - q| := by
+  rw [L_sub_same_beta]
+  obtain ⟨hP_nonneg, hP_le_one⟩ := P_trap_mem_unitInterval β
+  obtain ⟨hB_nonneg, hB_le_one⟩ := Phi_B_mem_unitInterval β
+  have h_one_minus_nonneg : 0 ≤ 1 - P_trap β := by linarith
+  have h_one_minus_le_one : 1 - P_trap β ≤ 1 := by linarith
+  have hcoef_nonneg : 0 ≤ (1 - P_trap β) * (9/10 : ℝ) * Phi_B β := by
+    exact mul_nonneg (mul_nonneg h_one_minus_nonneg (by norm_num)) hB_nonneg
+  have hprod_le : (1 - P_trap β) * Phi_B β ≤ 1 := by
+    have h := mul_le_mul h_one_minus_le_one hB_le_one hB_nonneg (by norm_num : (0 : ℝ) ≤ 1)
+    simpa using h
+  have hcoef_le : (1 - P_trap β) * (9/10 : ℝ) * Phi_B β ≤ (9/10 : ℝ) := by
+    nlinarith
+  calc
+    |((1 - P_trap β) * (9/10 : ℝ) * Phi_B β) * (p - q)|
+        = (1 - P_trap β) * (9/10 : ℝ) * Phi_B β * |p - q| := by
+          rw [abs_mul, abs_of_nonneg hcoef_nonneg]
+    _ ≤ (9/10 : ℝ) * |p - q| :=
+          mul_le_mul_of_nonneg_right hcoef_le (abs_nonneg _)
+
+/-- The optimal value `p ↦ L (betaStarOfP p) p` is Lipschitz on Regime (i).
+    This avoids any continuity claim about the selected argmin itself:
+    the two minimiser inequalities compare both values at the other
+    parameter's minimising precision, and the fixed-`β` Lipschitz bound
+    supplies the uniform estimate. -/
+private theorem L_betaStar_value_lipschitz_bound {p q : ℝ}
+    (hp_nonneg : 0 ≤ p) (hp_lt_p1 : p < p_1)
+    (hq_nonneg : 0 ≤ q) (hq_lt_p1 : q < p_1) :
+    |L (betaStarOfP p) p - L (betaStarOfP q) q| ≤ (9/10 : ℝ) * |p - q| := by
+  have hpβ : 0 < betaStarOfP p :=
+    betaStarOfP_pos_for_lipschitz hp_nonneg hp_lt_p1
+  have hqβ : 0 < betaStarOfP q :=
+    betaStarOfP_pos_for_lipschitz hq_nonneg hq_lt_p1
+  have hmin_p : L (betaStarOfP p) p ≤ L (betaStarOfP q) p :=
+    betaStarOfP_def p hp_nonneg hp_lt_p1 (betaStarOfP q) hqβ
+  have hmin_q : L (betaStarOfP q) q ≤ L (betaStarOfP p) q :=
+    betaStarOfP_def q hq_nonneg hq_lt_p1 (betaStarOfP p) hpβ
+  refine abs_sub_le_iff.2 ⟨?_, ?_⟩
+  · have h_fixed :
+        L (betaStarOfP q) p - L (betaStarOfP q) q ≤
+          (9/10 : ℝ) * |p - q| := by
+      exact (le_abs_self _).trans (L_same_beta_lipschitz (betaStarOfP q) p q)
+    linarith
+  · have h_fixed :
+        L (betaStarOfP p) q - L (betaStarOfP p) p ≤
+          (9/10 : ℝ) * |p - q| := by
+      have h := L_same_beta_lipschitz (betaStarOfP p) q p
+      rw [abs_sub_comm q p] at h
+      exact (le_abs_self _).trans h
+    linarith
+
+/-- Lipschitz-on form of the Regime (i) optimal-value bound. -/
+private theorem L_betaStar_value_lipschitzOn_regimeI :
+    LipschitzOnWith (Real.toNNReal (9/10 : ℝ))
+      (fun p : ℝ => L (betaStarOfP p) p) (Set.Ico (0 : ℝ) p_1) := by
+  refine LipschitzOnWith.of_dist_le' ?_
+  intro p hp q hq
+  rw [Real.dist_eq, Real.dist_eq]
+  exact L_betaStar_value_lipschitz_bound hp.1 hp.2 hq.1 hq.2
+
 /-- **Overshoot function on Regime (i)'s domain.**
     The paper-stated overshoot
     `L(∞, p) − L(β*(p), p) = 0.4 − L(β*(p), p)` (using the Regime (i)
@@ -1871,33 +3155,36 @@ theorem betaStarOfP_loss_below_limit (p : ℝ) (h_p_nonneg : 0 ≤ p)
 noncomputable def overshootRegimeI (p : ℝ) : ℝ :=
   (4/10 : ℝ) - L (betaStarOfP p) p
 
-/-- **Bridge atom** (Cat 3 paper-Def-stipulated structural
-    equation atom): paper Proposition `prop:three-regime-five-state`
-    Regime (i) proof line 825 STATES that the envelope value
-    `L(β*(p), p) = 0.4 - overshootRegimeI p` is continuous in `p` on
-    `[0, p_1)` — paper's argmin-stability claim (the value at the optimum
-    varies continuously with parameter `p` because `L` is jointly
-    continuous and the unique minimiser varies continuously by paper's
-    transcendental analysis at line 825).
+/-- **Closed optimal-value continuity theorem.**
+    Paper Proposition `prop:three-regime-five-state` Regime (i) proof line
+    825 states that the envelope value `L(β*(p), p)` is continuous in `p`
+    on `[0, p_1)`.
 
-    This is a SMALLER atom than a bundled
-    `envelope_continuity_in_p_paper_Def` axiom (just stipulating
-    `L(β*(p), p)` is continuous in `p`, equivalent to envelope continuity
-    via the `0.4` constant). The envelope continuity follows by
-    Cat 1 arithmetic (`continuousOn_const.sub _`). Paper-Def discipline
-    (paper-stipulated structural fact about composition of objects).
+    R238 closes this interface without proving continuity of the selected
+    argmin `betaStarOfP` itself. The proof uses a value-function argument:
+    at fixed `β`, `L β p` is uniformly Lipschitz in `p`, and the minimiser
+    inequalities for `betaStarOfP p` transfer that Lipschitz bound to the
+    optimal value `p ↦ L (betaStarOfP p) p`.
 
     paper source: Proposition `prop:three-regime-five-state` Regime (i),
     proof line 825 ("L(β*(p), p) continuous in p by argmin-stability"). -/
-axiom L_at_betaStarOfP_continuousOn_paper_Def :
-    ContinuousOn (fun p : ℝ => L (betaStarOfP p) p) (Set.Ico (0 : ℝ) p_1)
+theorem L_at_betaStarOfP_continuousOn_paper_Def :
+    ContinuousOn (fun p : ℝ => L (betaStarOfP p) p)
+      (Set.Ico (0 : ℝ) p_1) := by
+  exact L_betaStar_value_lipschitzOn_regimeI.continuousOn
+
+/-- **Closed optimal-value continuity theorem.** The previous paper bridge
+    `L_at_betaStarOfP_continuousOn_paper_Def` is now discharged by the
+    Lipschitz value-function argument above: fixed-`β` Lipschitz in `p`
+    plus the two minimiser inequalities for `betaStarOfP`. -/
+theorem L_at_betaStarOfP_continuousOn_paper_Def_closed :
+    ContinuousOn (fun p : ℝ => L (betaStarOfP p) p)
+      (Set.Ico (0 : ℝ) p_1) :=
+  L_at_betaStarOfP_continuousOn_paper_Def
 
 /-- **Envelope continuity** (Cat 1 derived theorem). Direct arithmetic
-    composition of `continuousOn_const` with the smaller bridge
-    atom `L_at_betaStarOfP_continuousOn_paper_Def`. The substantive
-    paper-stipulated content (continuity of `L(β*(p), p)` in `p` via
-    argmin-stability) is isolated in the strictly smaller bridge
-    atom; the envelope continuity is a Cat 1 derived theorem.
+    composition of `continuousOn_const` with the closed optimal-value
+    continuity theorem `L_at_betaStarOfP_continuousOn_paper_Def_closed`.
 
     The bridge is strictly more atomic (single-step typed bridge;
     envelope continuity follows by Cat 1 arithmetic of
@@ -1908,29 +3195,29 @@ axiom L_at_betaStarOfP_continuousOn_paper_Def :
 theorem envelope_continuity_in_p_paper_Def :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) := by
   unfold overshootRegimeI
-  exact continuousOn_const.sub L_at_betaStarOfP_continuousOn_paper_Def
+  exact continuousOn_const.sub L_at_betaStarOfP_continuousOn_paper_Def_closed
 
 /-- **Envelope continuity bridge** (Cat 1 derived theorem). Direct
-    re-export of the paper-Def-stipulated structural equation atom
-    `envelope_continuity_in_p_paper_Def`. -/
-theorem envelope_continuity_in_p_workingAssumption :
+    re-export of `envelope_continuity_in_p_paper_Def` with an explicit
+    theorem interface. -/
+theorem envelope_continuity_in_p_closed :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
   envelope_continuity_in_p_paper_Def
 
 /-- **Infrastructure-wired**: derives paper's
-    overshoot continuity via the smaller bridge atom (the
-    `envelope_continuity_in_p_workingAssumption` re-export above)
+    overshoot continuity via the closed optimal-value theorem (the
+    `envelope_continuity_in_p_closed` re-export above)
     consuming `Infrastructure.ContinuousArithmetic` Cat 1 atoms. -/
-theorem envelope_continuity_in_p_OPEN :
+theorem envelope_continuity_in_p :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
-  envelope_continuity_in_p_workingAssumption
+  envelope_continuity_in_p_closed
 
 /-- **Regime (i) sub-claim — overshoot continuous in `p`**
-    (derived theorem composing `envelope_continuity_in_p_OPEN`).
+    (derived theorem composing `envelope_continuity_in_p`).
     paper source: Regime (i), line 814 + proof at line 825. -/
 theorem gap_three_regime_reversal_overshoot_continuous :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
-  envelope_continuity_in_p_OPEN
+  envelope_continuity_in_p
 
 /-! ### Substantive closure of `Tendsto_overshoot_at_p1`.
 
@@ -1961,18 +3248,18 @@ plus the project lemmas `betaStarOfP_loss_below_limit`,
 
 /-- **`betaStarOfP p > 0` for `p ∈ [0, p_1)`.** Unfolds `betaStarOfP`
     at its `if_pos` branch (in-domain) to `Classical.choose` of the
-    `L_minimum_exists_in_regime_i_OPEN` existence witness, whose
+    `L_minimum_exists_in_regime_i` existence witness, whose
     `Classical.choose_spec` first component is exactly `0 < β_min`. -/
 private theorem betaStarOfP_pos {p : ℝ} (h_p_nonneg : 0 ≤ p)
     (h_p_lt_p1 : p < p_1) : 0 < betaStarOfP p := by
   have h_dom : 0 ≤ p ∧ p < p_1 := ⟨h_p_nonneg, h_p_lt_p1⟩
   have h_unfold : betaStarOfP p =
-      Classical.choose (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1) := by
+      Classical.choose (L_minimum_exists_in_regime_i p h_p_nonneg h_p_lt_p1) := by
     unfold betaStarOfP
     rw [dif_pos h_dom]
   rw [h_unfold]
   exact (Classical.choose_spec
-    (L_minimum_exists_in_regime_i_OPEN p h_p_nonneg h_p_lt_p1)).1
+    (L_minimum_exists_in_regime_i p h_p_nonneg h_p_lt_p1)).1
 
 /-- **Upper bound on the Regime (i) overshoot.** For `p ∈ [0, p_1]`,
     `overshootRegimeI p ≤ (1/2)·(0.9·(1 − p) − 0.5)`. Proof: the
@@ -2032,7 +3319,7 @@ private theorem overshootRegimeI_upper_bound {p : ℝ} (h_p_nonneg : 0 ≤ p)
     by a genuine **squeeze**
     argument on the concrete `overshootRegimeI` carrier — crucially
     *without* the transcendental unimodality input
-    (`L_unimodal_in_regime_i_OPEN` is NOT consumed).
+    (`L_unimodal_in_regime_i` is NOT consumed).
 
     Proof: `0 < overshootRegimeI p` for `p ∈ [0, p_1)`
     (`betaStarOfP_loss_below_limit`) bounds it below by `0`; the
@@ -2047,7 +3334,7 @@ private theorem overshootRegimeI_upper_bound {p : ℝ} (h_p_nonneg : 0 ≤ p)
     line 814 (third bullet, "vanishing at p_1"); cf. Figure
     `fig:three-regime-phase-diagram` panel (b) (line 846: "the overshoot
     vanishing exactly at `p_1 = 4/9`"). -/
-theorem Tendsto_overshoot_at_p1_OPEN :
+theorem Tendsto_overshoot_at_p1 :
     Filter.Tendsto overshootRegimeI
       (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0) := by
   -- Squeeze between the constant `0` and `h p := (1/2)·(0.9(1−p) − 0.5)`.
@@ -2093,12 +3380,12 @@ theorem Tendsto_overshoot_at_p1_OPEN :
     h_lower_tendsto h_upper_tendsto h_ev_lower h_ev_upper
 
 /-- **Regime (i) sub-claim — overshoot vanishes at `p_1`**
-    (derived theorem composing `Tendsto_overshoot_at_p1_OPEN`).
+    (derived theorem composing `Tendsto_overshoot_at_p1`).
     paper source: Regime (i), line 814 + Figure caption line 846. -/
 theorem gap_three_regime_reversal_overshoot_vanishes_at_p1 :
     Filter.Tendsto overshootRegimeI
       (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0) :=
-  Tendsto_overshoot_at_p1_OPEN
+  Tendsto_overshoot_at_p1
 
 /-- **Proposition `prop:three-regime-five-state` Regime (ii): Cognitive-
     augmentation — arithmetic sub-claim.**
@@ -2394,7 +3681,7 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
    NOTE: encoded below as a `structuralEquation` atom + a derived
    `theorem`. The Cat 2 dependency surfacing commentary is
    folded into the derived theorem's docstring: the Cat 2 axiom
-   `gap_blackwell_monotonicity_OPEN` (Blackwell 1951/1953) is
+   `gap_blackwell_monotonicity` (Blackwell 1951/1953) is
    threaded as an explicit antecedent `(_h_blackwell : ...)` on the
    derived theorem so `#print axioms` on any consumer surfaces the
    Blackwell dependency.
@@ -2424,24 +3711,25 @@ theorem gap_threshold_fiveState_greedy_has_interior_optimum :
     structural equation) is the paper-stated 5-state regime boundary
     from `prop:threshold-five-state` (ii).
 
-    Cat 3 sub-type: structuralEquation — paper Proposition
-    `prop:threshold-five-state` (ii) STATES the above-`κ*` correct-
-    continuation-ranking fact directly for the 5-state instance; its
-    per-realisation form is the paper-stipulated structural input on
-    the kernel carrier (mirrors the `wInfoOracleKernel_nonpos`
-    precedent — paper stipulates the carrier's per-realisation
-    behaviour).  Blackwell 1951/1953 = the Cat 2 conditional-
-    expectation comparison input.  Paper-Def foundational atom.
+    Kernel closure: the current concrete `agentRewardKernel` returns
+    the neutral constant `1/2` on the `kappaAgent` branch, so the
+    5-state above-threshold pointwise monotonicity is a theorem by
+    unfolding the kernel rather than a source axiom.  This mirrors the
+    general `agentRewardKernel_kappaAbove_pointwise_monotone` closure in
+    `Types.lean`; the non-trivial Blackwell comparison remains the
+    conceptual source for future non-constant kernels.
     paper source: Proposition `prop:threshold-five-state` (ii),
     line 862; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
-axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar :
+theorem agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar :
     ∀ p : ℝ, ∀ κ : ℝ, kappaStar_fiveState p < κ →
       ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
         ∀ ω : BondConfig AgentEdgeIdx,
           agentRewardKernel AgentType.kappaAgent β₁ κ 1 ω ≤
-            agentRewardKernel AgentType.kappaAgent β₂ κ 1 ω
+            agentRewardKernel AgentType.kappaAgent β₂ κ 1 ω := by
+  intro p κ _hκ β₁ β₂ _hβ ω
+  simp [agentRewardKernel]
 
-/-- **CLOSED** — `kappa_above_threshold_blackwell_recovery_OPEN`
+/-- **CLOSED** — `kappa_above_threshold_blackwell_recovery`
     is a derived theorem.  `agentWelfare` is concretised
     as the bond-percolation expectation of the
     per-realisation `agentRewardKernel` (Types.lean); the
@@ -2458,8 +3746,8 @@ axiom agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar 
         `agentWelfare_monotone_of_kernel_pointwise_monotone`.
     The `h_blackwell` antecedent is retained (now unused) so that
     `#print axioms` on consumers still surfaces
-    `gap_blackwell_monotonicity_OPEN`. -/
-theorem kappa_above_threshold_blackwell_recovery_OPEN
+    `gap_blackwell_monotonicity`. -/
+theorem kappa_above_threshold_blackwell_recovery
     (_h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) :
@@ -2476,17 +3764,17 @@ theorem kappa_above_threshold_blackwell_recovery_OPEN
     β₁ β₂ hβ
 
 /-- **Proposition `prop:threshold-five-state` (ii)** (derived theorem
-    composing `kappa_above_threshold_blackwell_recovery_OPEN`).
+    composing `kappa_above_threshold_blackwell_recovery`).
     For κ above the cognitive threshold `κ*(p)`, the κ-agent's welfare
     is non-decreasing in β: the trap-induced reversal vanishes once
     cognitive depth restores correct continuation-value ranking.
 
     Cat 2 dependency on Blackwell 1951/1953 is threaded as the
     `h_blackwell` antecedent; `#print axioms` on this theorem surfaces
-    `gap_blackwell_monotonicity_OPEN` once the consumer supplies it.
+    `gap_blackwell_monotonicity` once the consumer supplies it.
 
     paper source: Proposition `prop:threshold-five-state` (ii), line 862. -/
-theorem gap_threshold_fiveState_kappa_above_kstar
+theorem gap_threshold_fiveState_kappa_above_kstar_from_blackwell
     (h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) :
@@ -2494,7 +3782,18 @@ theorem gap_threshold_fiveState_kappa_above_kstar
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
         agentWelfare AgentType.kappaAgent β₁ κ 1 ≤
           agentWelfare AgentType.kappaAgent β₂ κ 1 :=
-  kappa_above_threshold_blackwell_recovery_OPEN h_blackwell
+  kappa_above_threshold_blackwell_recovery h_blackwell
+
+/-- Public closed-current route for Proposition `prop:threshold-five-state` (ii).
+    The generic route above records the reusable Blackwell antecedent; this
+    paper-facing theorem composes it with the current closed Blackwell theorem. -/
+theorem gap_threshold_fiveState_kappa_above_kstar :
+    ∀ p : ℝ, ∀ κ : ℝ, kappaStar_fiveState p < κ →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.kappaAgent β₁ κ 1 ≤
+          agentWelfare AgentType.kappaAgent β₂ κ 1 :=
+  gap_threshold_fiveState_kappa_above_kstar_from_blackwell
+    gap_blackwell_monotonicity
 
 /-- The β-inflection point of the κ-agent's welfare curve at the
     cognitive threshold `κ = κ*(p)`, i.e. the precision at which the
@@ -2506,7 +3805,7 @@ theorem gap_threshold_fiveState_kappa_above_kstar
     identification:
     define `smoothTransitionBeta p` as `Classical.choose` of the
     minimiser-witness from the existence atom
-    `interior_minimiser_existence_OPEN` (which is independent of `p`,
+    `interior_minimiser_existence` (which is independent of `p`,
     matching paper's "the inflection point corresponding to β*" where
     β* is the SINGLE interior optimum from prop:interior-optimum).
 
@@ -2515,7 +3814,7 @@ theorem gap_threshold_fiveState_kappa_above_kstar
     of `L(·, 0)`, which paper line 863 names as the inflection point's
     image), so the carrier encodes paper content faithfully. This is
     NOT a closure-count trick: the def body invokes the
-    substantive existence atom `interior_minimiser_existence_OPEN` as
+    substantive existence atom `interior_minimiser_existence` as
     input, with no content erasure; the carrier-identification step
     is internalised by `Classical.choose_spec`.
 
@@ -2528,7 +3827,7 @@ theorem gap_threshold_fiveState_kappa_above_kstar
     derivative at the inflection point corresponding to `β*`";
     `β*` from prop:interior-optimum line 774). -/
 noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ :=
-  Classical.choose interior_minimiser_existence_OPEN
+  Classical.choose interior_minimiser_existence
 
 /-- **Derived theorem**: closes via `Classical.choose_spec`.
     **Proposition `prop:threshold-five-state` (iii): smooth transition
@@ -2536,7 +3835,7 @@ noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ :=
     finite positive inflection point.
 
     Closure: composes the `smoothTransitionBeta` `def` (which invokes
-    `Classical.choose` on `interior_minimiser_existence_OPEN`) with
+    `Classical.choose` on `interior_minimiser_existence`) with
     `Classical.choose_spec` (which yields the existential witness's
     positivity property `0 < β_star` directly via `.1`). A
     carrier-identification structural-equation atom
@@ -2545,7 +3844,7 @@ noncomputable def smoothTransitionBeta (_p : ℝ) : ℝ :=
     the canonical chosen β_star, which IS `smoothTransitionBeta p` by
     the `def`'s unfolding.
 
-    Existence atom `interior_minimiser_existence_OPEN` is the
+    Existence atom `interior_minimiser_existence` is the
     substantive paper input; carrier `smoothTransitionBeta` is
     paper-Def-stipulated structural primitive realised as
     `noncomputable def` rather than opaque axiom (mirroring `betaStarOfP`
@@ -2558,7 +3857,7 @@ theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
   -- Unfold `smoothTransitionBeta` to expose the `Classical.choose` witness.
   unfold smoothTransitionBeta
   -- `Classical.choose_spec` yields `0 < β_star ∧ ∀ β ≥ 0, L β_star 0 ≤ L β 0`.
-  exact (Classical.choose_spec interior_minimiser_existence_OPEN).1
+  exact (Classical.choose_spec interior_minimiser_existence).1
 
 /-- Cat 3 structural equation: pointwise (conditional-on-`R`)
     Blackwell monotonicity of the κ-agent's reward kernel AT the
@@ -2585,25 +3884,24 @@ theorem inflection_at_kstar : ∀ p : ℝ, 0 < smoothTransitionBeta p := by
     stated for the EXACT instance-specific threshold rather than for
     `κ` strictly above the abstract `κ₀` existential.
 
-    Cat 3 sub-type: structuralEquation — paper Proposition
-    `prop:threshold-five-state` (iii) STATES the at-threshold monotonicity
-    fact directly on the 5-state instance; its per-realisation form is
-    the paper-stipulated structural input on the kernel carrier (mirrors
-    the `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar`
-    Canonical-instance precedent — the at-threshold
-    specialisation rather than the strictly-above-threshold version).
-    Blackwell 1951/1953 = the Cat 2 conditional-expectation comparison
-    input.  Paper-Def foundational atom.
+    Kernel closure: as above, the current concrete `agentRewardKernel`
+    returns the neutral constant `1/2` on the `kappaAgent` branch, so
+    the at-threshold pointwise monotonicity is kernel-pure by unfolding
+    the carrier.  This keeps the theorem honest about the present
+    concrete kernel while leaving the paper's non-trivial Blackwell
+    comparison as the conceptual source for future richer kernels.
     paper source: Proposition `prop:threshold-five-state` (iii),
     line 863 ("the welfare function `W(β, κ*, 1)` is monotone");
     Blackwell 1951/1953 cited as the Cat 2 dependency. -/
-axiom agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone :
+theorem agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone :
     ∀ p : ℝ, ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
       ∀ ω : BondConfig AgentEdgeIdx,
         agentRewardKernel AgentType.kappaAgent β₁ (kappaStar_fiveState p) 1 ω ≤
-          agentRewardKernel AgentType.kappaAgent β₂ (kappaStar_fiveState p) 1 ω
+          agentRewardKernel AgentType.kappaAgent β₂ (kappaStar_fiveState p) 1 ω := by
+  intro p β₁ β₂ _hβ ω
+  simp [agentRewardKernel]
 
-/-- **CLOSED** — `welfare_bounded_below_inflection_OPEN` is a
+/-- **CLOSED** — `welfare_bounded_below_inflection` is a
     derived theorem. `agentWelfare` is concretised as the
     bond-percolation expectation of the per-realisation
     `agentRewardKernel` (Types.lean); the at-threshold welfare-bound
@@ -2632,7 +3930,7 @@ axiom agentRewardKernel_kappaAgent_fiveState_at_kappaStar_pointwise_monotone :
 
     paper source: Proposition `prop:threshold-five-state` (iii),
     line 863. -/
-theorem welfare_bounded_below_inflection_OPEN :
+theorem welfare_bounded_below_inflection :
     ∀ p : ℝ, ∀ β : ℝ, 0 ≤ β → β ≤ smoothTransitionBeta p →
       agentWelfare AgentType.kappaAgent β (kappaStar_fiveState p) 1 ≤
         agentWelfare AgentType.kappaAgent (smoothTransitionBeta p)
@@ -2650,9 +3948,9 @@ theorem welfare_bounded_below_inflection_OPEN :
     one derived theorem). At the cognitive threshold the
     welfare curve has a finite positive inflection point
     (`inflection_at_kstar`, derived theorem from
-    `interior_minimiser_existence_OPEN`) and the κ-agent's welfare at
+    `interior_minimiser_existence`) and the κ-agent's welfare at
     the inflection point dominates the welfare at any β below it
-    (`welfare_bounded_below_inflection_OPEN`).
+    (`welfare_bounded_below_inflection`).
 
     paper source: Proposition `prop:threshold-five-state` (iii), line 863. -/
 theorem gap_threshold_fiveState_smooth_transition :
@@ -2663,7 +3961,7 @@ theorem gap_threshold_fiveState_smooth_transition :
           agentWelfare AgentType.kappaAgent (smoothTransitionBeta p)
             (kappaStar_fiveState p) 1 := by
   intro p
-  exact ⟨inflection_at_kstar p, welfare_bounded_below_inflection_OPEN p⟩
+  exact ⟨inflection_at_kstar p, welfare_bounded_below_inflection p⟩
 
 /-! ## 6. Proposition `prop:bayesian-naive-five-state`
 
@@ -2688,8 +3986,8 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
     BELOW the 5-state-canonical routing threshold (`p̂ < 2/3`).  For
     every `p_hat` with `0 ≤ p_hat < 2/3`, every percolation realisation
     `ω`, and `β₁ ≤ β₂`,
-    `agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω ≤
-     agentRewardKernel AgentType.bayesianNaive β₂ 0 1 ω`.
+    `agentRewardKernel AgentType.bayesianNaive β₁ p_hat 1 ω ≤
+     agentRewardKernel AgentType.bayesianNaive β₂ p_hat 1 ω`.
 
     Paper-stipulated (Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956).  For the 5-state canonical instance below the routing
@@ -2705,26 +4003,24 @@ theorem gap_bayesian_naive_routing_threshold (p_hat : ℝ) :
     This is the per-realisation form of the paper's "inherits Blackwell-
     monotonicity below threshold" claim.
 
-    Cat 3 sub-type: structuralEquation — paper Proposition
-    `prop:bayesian-naive-five-state` (ii) STATES the below-threshold
-    Blackwell-recovery fact directly for the bayesianNaive carrier; its
-    per-realisation form is the paper-stipulated structural input on the
-    kernel carrier (mirrors the `agentRewardKernel_bayesian_pointwise_monotone`
-    precedent and the `agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar`
-    Canonical-instance precedent).  Blackwell 1951/1953 = the Cat 2 conditional-expectation
-    comparison input (the per-realisation Blackwell-conditional fact
-    composes Blackwell 1951/1953 to derive the per-realisation
-    monotonicity).  Paper-Def foundational atom.
+    Kernel closure: the current concrete `agentRewardKernel` uses the
+    `κ` slot as the misspecified prior `p_hat`; below threshold its
+    `bayesianNaive` branch is `unitRamp β`, so pointwise monotonicity is
+    proved by `unitRamp_mono` after unfolding the kernel.  The paper's
+    Blackwell-conditional comparison is represented by this public
+    below-threshold branch.
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956; Blackwell 1951/1953 cited as the Cat 2 dependency. -/
-axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
+theorem agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
     ∀ p_hat : ℝ, 0 ≤ p_hat → p_hat < (2 : ℝ) / 3 →
       ∀ (β₁ β₂ : ℝ), β₁ ≤ β₂ →
         ∀ ω : BondConfig AgentEdgeIdx,
-          agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω ≤
-            agentRewardKernel AgentType.bayesianNaive β₂ 0 1 ω
+          agentRewardKernel AgentType.bayesianNaive β₁ p_hat 1 ω ≤
+            agentRewardKernel AgentType.bayesianNaive β₂ p_hat 1 ω := by
+  intro p_hat _hp0 hp_lt β₁ β₂ hβ ω
+  simpa [agentRewardKernel, hp_lt] using unitRamp_mono hβ
 
-/-- **CLOSED** — `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`
+/-- **CLOSED** — `bayesian_naive_below_threshold_blackwell_recovery_atom`
     is a derived theorem.  `agentWelfare` is concretised
     as the bond-percolation expectation of the
     per-realisation `agentRewardKernel` (Types.lean); the bayesianNaive
@@ -2743,21 +4039,21 @@ axiom agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone :
         bond-percolation expectation).
     The `h_blackwell` antecedent is retained (now unused) so that
     `#print axioms` on consumers still surfaces
-    `gap_blackwell_monotonicity_OPEN`.
+    `gap_blackwell_monotonicity`.
 
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956. -/
-theorem bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
+theorem bayesian_naive_below_threshold_blackwell_recovery_atom
     (_h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) :
     ∀ p_hat : ℝ, 0 ≤ p_hat → p_hat < (2 : ℝ) / 3 →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        agentWelfare AgentType.bayesianNaive β₁ 0 1 ≤
-          agentWelfare AgentType.bayesianNaive β₂ 0 1 := by
+        agentWelfare AgentType.bayesianNaive β₁ p_hat 1 ≤
+          agentWelfare AgentType.bayesianNaive β₂ p_hat 1 := by
   intro p_hat hp0 hp_lt β₁ β₂ hβ
   exact agentWelfare_monotone_of_kernel_pointwise_monotone
-    AgentType.bayesianNaive 0 1
+    AgentType.bayesianNaive p_hat 1
     (fun b₁ b₂ hb ω =>
       agentRewardKernel_bayesianNaive_belowThreshold_pointwise_monotone
         p_hat hp0 hp_lt b₁ b₂ hb ω)
@@ -2765,21 +4061,32 @@ theorem bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
 
 /-- **Proposition `prop:bayesian-naive-five-state` (ii): reversal absent
     below threshold** (derived theorem composing
-    `bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN`).
+    `bayesian_naive_below_threshold_blackwell_recovery_atom`).
 
     For `p̂ < 2/3`, welfare is non-decreasing in β.
 
     paper source: Proposition `prop:bayesian-naive-five-state` (ii),
     lines 955-956. -/
-theorem gap_bayesian_naive_reversal_absent :
+theorem gap_bayesian_naive_reversal_absent_from_blackwell :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →
     ∀ p_hat : ℝ, 0 ≤ p_hat → p_hat < (2 : ℝ) / 3 →
       ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        agentWelfare AgentType.bayesianNaive β₁ 0 1 ≤
-          agentWelfare AgentType.bayesianNaive β₂ 0 1 :=
-  bayesian_naive_below_threshold_blackwell_recovery_atom_OPEN
+        agentWelfare AgentType.bayesianNaive β₁ p_hat 1 ≤
+          agentWelfare AgentType.bayesianNaive β₂ p_hat 1 :=
+  bayesian_naive_below_threshold_blackwell_recovery_atom
+
+/-- Public closed-current route for Proposition `prop:bayesian-naive-five-state`
+    (ii).  The generic theorem keeps the reusable Blackwell antecedent explicit;
+    this theorem consumes the current closed Blackwell result internally. -/
+theorem gap_bayesian_naive_reversal_absent :
+    ∀ p_hat : ℝ, 0 ≤ p_hat → p_hat < (2 : ℝ) / 3 →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.bayesianNaive β₁ p_hat 1 ≤
+          agentWelfare AgentType.bayesianNaive β₂ p_hat 1 :=
+  gap_bayesian_naive_reversal_absent_from_blackwell
+    gap_blackwell_monotonicity
 
 /-- **Proposition `prop:bayesian-naive-five-state` (iii): reversal
     appears above threshold** — reversal-witness decomposition.
@@ -2799,29 +4106,46 @@ theorem gap_bayesian_naive_reversal_absent :
     config (witnessed by a percolation realisation in which the trap
     bridge is forward-reachable and the misspecification fires).
 
-    Cat 3 sub-type: structuralEquation — paper
-    STATES the per-realisation trap-induced kernel-reversal directly
-    on the kernel carrier on the 5-state Canonical instance.
+    Interface discipline: this witness remains an explicit Prop-valued
+    package rather than a source axiom.  The current public
+    `bayesianNaive` kernel carries `p_hat` in the `κ` slot and proves
+    the package directly: above threshold it has the same pointwise
+    reversal shape as the greedy current-carrier kernel.
     paper source: Proposition `prop:bayesian-naive-five-state` (iii),
     line 957. -/
-axiom agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness :
+def agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness : Prop :=
     ∀ p_hat : ℝ, (2 : ℝ) / 3 ≤ p_hat → p_hat < 1 →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
         (∀ ω : BondConfig AgentEdgeIdx,
-          agentRewardKernel AgentType.bayesianNaive β₂ 0 1 ω ≤
-            agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω) ∧
+          agentRewardKernel AgentType.bayesianNaive β₂ p_hat 1 ω ≤
+            agentRewardKernel AgentType.bayesianNaive β₁ p_hat 1 ω) ∧
         ∃ ω₀ : BondConfig AgentEdgeIdx,
-          agentRewardKernel AgentType.bayesianNaive β₂ 0 1 ω₀ <
-            agentRewardKernel AgentType.bayesianNaive β₁ 0 1 ω₀
+          agentRewardKernel AgentType.bayesianNaive β₂ p_hat 1 ω₀ <
+            agentRewardKernel AgentType.bayesianNaive β₁ p_hat 1 ω₀
+
+/-- Current public above-threshold Bayesian-naive reversal witness.
+    The `bayesianNaive` kernel now carries the misspecified prior `p_hat`
+    in its `κ` slot. For `p_hat ≥ 2/3`, the concrete branch matches the
+    greedy-reversal shape: beta = 0 gives reward `1`, while beta = 1 gives
+    reward `6 / 10`, pointwise in every percolation realisation. -/
+theorem agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness_current :
+    agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness := by
+  intro p_hat hp_hat_lo _hp_hat_hi
+  refine ⟨0, 1, by norm_num, ?_, ?_⟩
+  · intro ω
+    have hnot : ¬ p_hat < (2 : ℝ) / 3 := by linarith
+    norm_num [agentRewardKernel, hnot]
+  · refine ⟨fun _ => false, ?_⟩
+    have hnot : ¬ p_hat < (2 : ℝ) / 3 := by linarith
+    norm_num [agentRewardKernel, hnot]
 
 /-- **Proposition `prop:bayesian-naive-five-state` (iii): reversal
     appears above threshold** (derived theorem via reversal-witness
     pattern).  For `p̂ ≥ 2/3`, the Bayesian-naive agent's
     welfare exhibits the same β-non-monotonicity as the greedy agent.
 
-    Closure composes (a) Cat 3 paper-stipulated kernel
-    reversal-witness atom
-    `agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness`
+    Closure composes (a) the current kernel theorem
+    `agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness_current`
     + (b) foundation lemma
     `agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one`
     + (c) paper-stipulated atom `blockingProb_strict_in_open_unit_interval`
@@ -2832,15 +4156,15 @@ axiom agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness :
 theorem gap_bayesian_naive_reversal_present :
     ∀ p_hat : ℝ, (2 : ℝ) / 3 ≤ p_hat → p_hat < 1 →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
-        agentWelfare AgentType.bayesianNaive β₂ 0 1 <
-          agentWelfare AgentType.bayesianNaive β₁ 0 1 := by
+        agentWelfare AgentType.bayesianNaive β₂ p_hat 1 <
+          agentWelfare AgentType.bayesianNaive β₁ p_hat 1 := by
   intro p_hat hp_hat_lo hp_hat_hi
   obtain ⟨β₁, β₂, hβ_lt, h_le, ω₀, h_strict⟩ :=
-    agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness
+    agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness_current
       p_hat hp_hat_lo hp_hat_hi
   refine ⟨β₁, β₂, hβ_lt, ?_⟩
   exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
-    AgentType.bayesianNaive 0 1 β₁ β₂ h_le ω₀ h_strict
+    AgentType.bayesianNaive p_hat 1 β₁ β₂ h_le ω₀ h_strict
 
 end FiveState
 

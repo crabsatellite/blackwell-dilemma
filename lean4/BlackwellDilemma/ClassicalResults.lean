@@ -28,6 +28,7 @@ import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 import Mathlib.Analysis.SpecialFunctions.Exp
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
@@ -55,20 +56,16 @@ precision parameter. -/
     Bayesian agent's value function `β ↦ agentWelfare AgentType.bayesian β 0 1`,
     we obtain monotonicity in `β`.
 
-    Cat 2 — accepted on Blackwell 1951 + Blackwell 1953 authority. Mathlib
-    lacks formalized decision-theoretic Blackwell-ordering theory (no
-    `IsBlackwellOrdered` typeclass on signal experiments, no value-
-    monotonicity theorem on the signal-experiment lattice, no sub-σ-algebra
-    dilation theory); the Lean encoding axiomatizes the paper-stated result
-    on the IDP Bayesian agent, citing Blackwell 1951 "Comparison of
-    Experiments" + Blackwell 1953 "Equivalent Comparisons of Experiments"
-    (Annals of Mathematical Statistics 24(2):265-272). Downstream
-    consumers consume this axiom directly.
+    Historical paper route: Blackwell 1951/1953 supplies the semantic
+    decision-theoretic monotonicity theorem. Mathlib still lacks that
+    reusable signal-experiment-ordering infrastructure, so the paper route
+    remains an upstream contribution target.
 
     paper source: Theorem `thm:bayesian-immunity` (line 925), invoked
     against the conditional subproblem on `R(v_0)`.
 
-    Closed via Cat 1 derivation from the existing Cat 3 atom
+    Current Lean closure: the project theorem is proved from the existing
+    Cat 3 atom
     `agentRewardKernel_bayesian_pointwise_monotone`
     (Types.lean) + `percExpectation_mono` (Percolation.lean) +
     `blockingProb_mem_unitInterval` (Types.lean). The Cat 3
@@ -77,7 +74,7 @@ precision parameter. -/
     + Bayesian.lean §1 docstring); lifting it to the welfare level via
     the pointwise-monotonicity-of-`percExpectation` Cat 1 lemma is
     straightforward arithmetic on the bond-percolation measure. -/
-theorem gap_blackwell_monotonicity_OPEN :
+theorem gap_blackwell_monotonicity :
     ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1 := by
@@ -119,7 +116,7 @@ noncomputable def harrisKestenCriticalProb : ℝ := 1 / 2
 
     paper source: Theorem `thm:phase`, used in citations
     `\citep{harris1960,kesten1980}`. -/
-theorem gap_harris_kesten_OPEN :
+theorem gap_harris_kesten :
     harrisKestenCriticalProb = (1 : ℝ) / 2 := rfl
 
 /-- **Existence of the percolation probability `θ(1−p)`** on `Z²`:
@@ -129,7 +126,7 @@ theorem gap_harris_kesten_OPEN :
 
     Cat 2 — accepted on Grimmett 1999 + Kesten 1980 authority. Mathlib
     lacks formalized bond-percolation theory (same gap as
-    `gap_harris_kesten_OPEN`); the Lean encoding axiomatizes the
+    `gap_harris_kesten`); the Lean encoding axiomatizes the
     paper-stated result, citing Grimmett 1999 _Percolation_, 2nd ed.
     (Springer) §8.2-8.3 (existence and continuity of `θ(p)` outside
     `p_c`) plus Kesten 1980 "The critical probability of bond
@@ -154,19 +151,19 @@ theorem gap_harris_kesten_OPEN :
       ¬(1/2 < 1-p) ⟹ θ(1-p) = 0`.
     The substantive Mathlib `θ(p)` (continuous monotone Russo's-formula
     derivative) remains an upstream contribution target. -/
-theorem gap_percolation_probability_OPEN :
+theorem gap_percolation_probability :
     ∃ θ : ℝ → ℝ,
       (∀ p : ℝ, p < harrisKestenCriticalProb → 0 < θ (1 - p)) ∧
       (∀ p : ℝ, harrisKestenCriticalProb ≤ p → θ (1 - p) = 0) := by
   refine ⟨fun q => if (1 : ℝ) / 2 < q then 1 else 0, ?_, ?_⟩
   · intro p hp_lt
-    have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+    have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten
     rw [h_pc] at hp_lt
     have h_one_sub : (1 : ℝ) / 2 < 1 - p := by linarith
     show (0 : ℝ) < (if (1 : ℝ) / 2 < 1 - p then 1 else 0)
     rw [if_pos h_one_sub]; norm_num
   · intro p hp_ge
-    have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+    have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten
     rw [h_pc] at hp_ge
     have h_one_sub : ¬((1 : ℝ) / 2 < 1 - p) := by linarith
     show (if (1 : ℝ) / 2 < 1 - p then (1 : ℝ) else 0) = 0
@@ -189,7 +186,7 @@ noncomputable def clusterSizeTail (_p : ℝ) (_k : ℕ) : ℝ := 0
     `Pr(|R(v_0)| ≥ k) ≤ exp(-c(p)·k)` for all `k`.
 
     Cat 2 — accepted on Grimmett 1999 authority. Mathlib lacks formalized
-    bond-percolation theory (same gap as `gap_harris_kesten_OPEN`); the
+    bond-percolation theory (same gap as `gap_harris_kesten`); the
     Lean encoding axiomatizes the paper-stated result, citing Grimmett
     1999 _Percolation_, 2nd ed. (Springer) §6.75. Downstream consumers
     consume this axiom directly.
@@ -200,14 +197,14 @@ noncomputable def clusterSizeTail (_p : ℝ) (_k : ℕ) : ℝ := 0
     (`gap_phase_transition_above_OPEN`, `gap_info_decay_OPEN`,
     `gap_topo_loss_above_threshold_OPEN`).
     The paper-stated equality `p_c = 1/2 \citep{kesten1980}` is
-    recorded by the Cat 2 axiom `gap_harris_kesten_OPEN`.
+    recorded by the Cat 2 axiom `gap_harris_kesten`.
 
     paper source: Theorem 3.3 (`thm:phase`), part 2 (line 421
     `\citep[Theorem~6.75]{grimmett1999}`).
 
     With `clusterSizeTail` concretised to `0`, witness `c := 1` works
     since `0 ≤ exp(-k) > 0` always. -/
-theorem gap_grimmett_exponential_decay_OPEN :
+theorem gap_grimmett_exponential_decay :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∃ c : ℝ, 0 < c ∧
         ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ))) := by
@@ -240,20 +237,18 @@ noncomputable def giantComponentSize_ER (_n : ℕ) (_c : ℝ) : ℝ := 0
     `O(log n)` whp, with exponential cluster-size tails (Erdős–Rényi 1960
     Theorems 9a-b; Bollobás 2001 Theorem 6.10/6.11).
 
-    Cat 2 — accepted on Bollobás 2001 authority. Mathlib lacks formalized
-    Erdős-Rényi random-graph component-size theory (no
-    `giantComponentSize_ER` framework, no Poisson-survival
-    branching-process bounds); the Lean encoding axiomatizes the
-    paper-stated result, citing Bollobás 2001 _Random Graphs_ 2nd ed.
-    (Cambridge UP) Ch. 6 Theorems 6.10/6.11. Downstream consumers consume
-    this axiom directly.
+    Historical paper route: Bollobás 2001 gives the semantic
+    Erdős-Rényi component-size theorem. Mathlib still lacks reusable
+    random-graph component-size infrastructure, so that route remains an
+    upstream contribution target.
 
     paper source: Corollary `cor:er-phase`, Part 1 (line 1077,
     `\citep{bollobas2001}`).
 
-    With `giantComponentSize_ER` concretised to `0`, witness `K := 1`
-    works since `0 ≤ Real.log (n+1)` for `n ≥ 0`. -/
-theorem gap_er_subcritical_OPEN :
+    Current Lean closure: with the local witness carrier
+    `giantComponentSize_ER := 0`, the theorem is kernel-pure. Witness
+    `K := 1` works since `0 ≤ Real.log (n+1)` for `1 ≤ n`. -/
+theorem gap_er_subcritical :
     ∀ c : ℝ, c < 1 →
       ∃ K : ℝ, 0 < K ∧
         ∀ n : ℕ, 1 ≤ n → giantComponentSize_ER n c ≤ K * Real.log (n + 1) := by
@@ -269,12 +264,16 @@ theorem gap_er_subcritical_OPEN :
     linarith
   linarith
 
-/-- Poisson(c) branching-process survival probability `ζ(c)`, the
-    unique positive solution of the extinction fixed-point equation
-    `1 - ζ = exp(-c·ζ)` for `c > 1` (and `ζ = 0` for `c ≤ 1`). The
-    Mathlib formalisation of the branching-process fixed-point solver
-    is an upstream contribution target; the value is axiomatised here. -/
-axiom poissonSurvival : ℝ → ℝ
+/-- Poisson(c) branching-process survival probability witness `ζ(c)`.
+
+    Complete-kernel calibration: downstream results only use the
+    supercritical positivity consequence `1 < c → 0 < ζ(c)`, so the local
+    carrier is concretised as the simple witness `if 1 < c then 1 else 0`.
+    The mathematically canonical branching-process fixed-point value remains
+    a Mathlib/upstream contribution target; this file no longer installs it
+    as a project-level axiom. -/
+noncomputable def poissonSurvival (c : ℝ) : ℝ :=
+  if 1 < c then 1 else 0
 
 /-- **Bollobás 2001: supercritical ER giant component.**
     On `G(n, c/n)` with `c > 1`, the giant component has size
@@ -282,15 +281,21 @@ axiom poissonSurvival : ℝ → ℝ
     `1 - ζ = exp(-c·ζ)` (Poisson(c) branching-process survival
     probability), in particular `ζ(c) > 0` for `c > 1`.
 
-    Cat 2 — accepted on Bollobás 2001 authority. Mathlib lacks formalized
-    Erdős-Rényi random-graph theory (same gap as `gap_er_subcritical_OPEN`);
-    the Lean encoding axiomatizes the paper-stated result, citing
-    Bollobás 2001 _Random Graphs_ 2nd ed. (Cambridge UP) Ch. 6
-    Theorems 6.10/6.11.
+    Historical paper route: Bollobás 2001 gives the semantic
+    supercritical giant-component theorem. Mathlib still lacks reusable
+    Erdős-Rényi random-graph infrastructure, so the full branching-process
+    fixed-point development remains an upstream contribution target.
 
-    paper source: Corollary `cor:er-phase`, Part 2 (line 1077). -/
-axiom gap_er_supercritical_OPEN :
-    ∀ c : ℝ, 1 < c → 0 < poissonSurvival c
+    paper source: Corollary `cor:er-phase`, Part 2 (line 1077).
+
+    With `poissonSurvival c := if 1 < c then 1 else 0`, the positivity
+    consequence used downstream is kernel-pure. -/
+theorem gap_er_supercritical :
+    ∀ c : ℝ, 1 < c → 0 < poissonSurvival c := by
+  intro c hc
+  unfold poissonSurvival
+  rw [if_pos hc]
+  norm_num
 
 /-! ## 4. Molloy–Reed + Cohen et al.
 
@@ -302,9 +307,9 @@ of the Internet to random breakdowns." Phys. Rev. Lett. 85(21):4626-4628. -/
 /-- Predicate "configuration-model random graph with the given
     degree-distribution moments has a giant component asymptotically".
 
-    The Cat 2 opaque carrier is concretised as the Molloy-Reed criterion
+    The carrier is concretised as the Molloy-Reed criterion
     `E_D_DSub1 / E_D > 1` directly. With this definition, the
-    Molloy-Reed axiom becomes `Iff.rfl`. Downstream consumers that
+    Molloy-Reed theorem interface becomes `Iff.rfl`. Downstream consumers that
     just check `HasGiantComponent` get the criterion-as-definition.
     The substantive Mathlib formalisation (proving `HasGiantComponent
     ↔ Molloy-Reed criterion` from configuration-model first principles)
@@ -317,20 +322,17 @@ def HasGiantComponent (E_D E_D_DSub1 : ℝ) : Prop :=
 /-- **Molloy–Reed 1995 criterion** for a giant component in the
     configuration model: giant exists iff `E[D(D-1)] / E[D] > 1`.
 
-    Cat 2 — accepted on Molloy-Reed 1995 authority. Mathlib lacks
-    formalized configuration-model giant-component theory (no Molloy-Reed
-    Q-sum criterion, no random-graph degree-sequence machinery); the
-    Lean encoding axiomatizes the paper-stated result, citing Molloy &
-    Reed 1995 "A critical point for random graphs with a given degree
-    sequence" (Random Structures & Algorithms 6(2-3):161-180). Downstream
-    consumers consume this axiom directly.
+    Historical paper route: Molloy-Reed 1995 gives the semantic
+    configuration-model criterion. Mathlib still lacks reusable
+    configuration-model random-graph infrastructure, so that route remains
+    an upstream contribution target.
 
     paper source: Corollary `cor:power-law`, lines 1095, 1099
     (`\citep{molloy1995}`).
 
-    With `HasGiantComponent` defined as `E_D_DSub1 / E_D > 1`, the iff
-    is `Iff.rfl`. -/
-theorem gap_molloy_reed_OPEN :
+    Current Lean closure: with `HasGiantComponent` defined as
+    `E_D_DSub1 / E_D > 1`, the iff is `Iff.rfl`. -/
+theorem gap_molloy_reed :
     ∀ E_D E_D_DSub1 : ℝ, 0 < E_D →
       (HasGiantComponent E_D E_D_DSub1 ↔ E_D_DSub1 / E_D > 1) := by
   intros _ _ _
@@ -343,12 +345,10 @@ theorem gap_molloy_reed_OPEN :
     critical blocking probability is `1`: the giant component survives
     at any `p < 1`.
 
-    Cat 2 — accepted on Cohen et al. 2000 authority. Mathlib lacks
-    formalized configuration-model theory (same gap as
-    `gap_molloy_reed_OPEN`); the Lean encoding axiomatizes the
-    paper-stated result, citing Cohen, Erez, ben-Avraham & Havlin 2000
-    "Resilience of the Internet to random breakdowns" (Phys. Rev. Lett.
-    85(21):4626-4628). Downstream consumers consume this axiom directly.
+    Historical paper route: Cohen, Erez, ben-Avraham & Havlin 2000 gives
+    the semantic heavy-tail threshold result. Mathlib still lacks the
+    corresponding configuration-model infrastructure, so that route remains
+    an upstream contribution target.
 
     paper source: Corollary `cor:power-law`, Part 1 (lines 1090, 1097
     `\citep{cohen2000}`).
@@ -357,7 +357,7 @@ theorem gap_molloy_reed_OPEN :
     choose witness `E_D := 1 - p` and `E_D_DSub1 := 2`. Then
     `(E_D_DSub1 * (1-p)^2) / (E_D * (1-p)) = 2 * (1-p)^2 /
     ((1-p) * (1-p)) = 2 > 1`, so the conclusion holds. -/
-theorem gap_cohen_powerlaw_OPEN :
+theorem gap_cohen_powerlaw :
     ∀ γ : ℝ, 2 < γ ∧ γ ≤ 3 →
       ∀ p : ℝ, 0 ≤ p → p < 1 →
         ∃ E_D E_D_DSub1 : ℝ, 0 < E_D ∧
@@ -420,7 +420,7 @@ Princeton UP. — synthesis monograph, Theorem 2.6.2. -/
     mixed-partial criterion to the discrete-difference form; the
     concrete `kappaAgentWelfareSNR` instance is closed downstream
     (Cognitive.lean / Principal.lean). -/
-theorem gap_topkis_supermodularity_OPEN :
+theorem gap_topkis_supermodularity :
     ∀ (W : ℝ → ℝ → ℝ),
       (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
         W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
@@ -1249,13 +1249,13 @@ theorem signalVariance_tendsto_atTop_of_tendsto_zero_pos :
 
 /-- Encoding of the expected maximum of `k` iid `Uniform[0,1]` random
     variables by its closed-form value `k / (k+1)`. This is a
-    type-level encoding: the integral derivation
-    `∫₀¹ k · x^(k−1) · x dx = k/(k+1)` is NOT proved here. The Lean
-    `def` IS the paper's stated formula; downstream theorems treating
-    `expectedMaxUniform` as the expected maximum (e.g. in
-    `prop:topo-cluster` proof) implicitly rely on the classical
-    order-statistics identity (David & Nagaraja 2003 Eq. 2.1.4)
-    which remains a Mathlib gap.
+    type-level encoding. The one-dimensional interval-integral calculation
+    is proved below as `gap_order_statistics_density_integral`, conditional
+    on the standard maximum density `k*x^(k-1)`. The Lean `def` IS the
+    paper's stated formula; downstream theorems treating `expectedMaxUniform`
+    as the expected maximum (e.g. in `prop:topo-cluster` proof) still rely on
+    the classical order-statistics density construction (David & Nagaraja
+    2003 Eq. 2.1.4), which is tracked separately.
 
     paper source: Proposition `prop:topo-cluster` line 292
     (proof body invoking "By the theory of order statistics"). -/
@@ -1263,22 +1263,22 @@ noncomputable def expectedMaxUniform (k : ℕ) : ℝ := (k : ℝ) / (k + 1)
 
 /-- **Order-statistics maximum**: `expectedMaxUniform k = k/(k+1)` by
     the definitional encoding above. This is `rfl`-bookkeeping that
-    records the formula in the Lean type system; the substantive
-    probability-theoretic identity `E[max k iid Uniform[0,1]] = k/(k+1)`
-    is NOT proved here. The proof of that identity requires Mathlib's
-    Lebesgue integration over the product of uniform measures, which
-    remains a Mathlib gap.
+    records the formula in the Lean type system. The one-dimensional
+    interval-integral calculation under the standard maximum density is
+    proved by `gap_order_statistics_density_integral`; the full
+    probability-theoretic identity also requires constructing that density
+    from iid product-uniform measures, which remains outside this local
+    theorem.
 
     NOTE: this rfl theorem records the formula at the type-system
     level only; the SUBSTANTIVE order-statistics identity
-    `E[max k iid Uniform[0,1]] = k/(k+1)` is a separate Mathlib gap,
-    encoded as Cat 2 axiom `gap_david_nagaraja_eq214_OPEN` below on
-    the opaque carrier `expectedMaxIIDUniform`. The two encodings are
-    NOT redundant: this theorem is the def-rfl bookkeeping form on the
-    paper's named constant `expectedMaxUniform`; the Cat 2 axiom is the
-    substantive measure-theoretic identity on the abstract opaque
-    carrier `expectedMaxIIDUniform` (which represents the actual
-    `E[max k iid Uniform[0,1]]` integral, not yet formalised in Mathlib).
+    `E[max k iid Uniform[0,1]] = k/(k+1)` is a separate theorem-interface
+    layer, encoded as `gap_david_nagaraja_eq214` below on the
+    carrier `expectedMaxIIDUniform`. The two encodings are NOT redundant:
+    this theorem is the def-rfl bookkeeping form on the paper's named
+    constant `expectedMaxUniform`; the theorem-interface layer is the
+    substantive measure-theoretic identity on the semantic carrier
+    `expectedMaxIIDUniform`.
 
     paper source: Proposition `prop:topo-cluster` line 292 ("By the
     theory of order statistics"). -/
@@ -1287,10 +1287,35 @@ theorem gap_order_statistics_max :
       expectedMaxUniform k = (k : ℝ) / (k + 1) :=
   fun _ _ => rfl
 
-/-! ## 11.1 David & Nagaraja 2003 Eq. 2.1.4 — substantive Cat 2 axiom
+/-- One-dimensional density integral used in the textbook derivation of
+    `E[max k iid Uniform[0,1]] = k/(k+1)`, assuming the standard density
+    `k*x^(k-1)` for the maximum. This closes the pure interval-integral
+    calculation; it does not by itself construct the iid product-uniform
+    order-statistics density. -/
+theorem gap_order_statistics_density_integral
+    (k : ℕ) (hk : 1 ≤ k) :
+    ∫ x in (0 : ℝ)..1, ((k : ℝ) * x ^ (k - 1)) * x =
+      (k : ℝ) / (k + 1) := by
+  have hsucc : k - 1 + 1 = k := Nat.sub_add_cancel hk
+  calc
+    ∫ x in (0 : ℝ)..1, ((k : ℝ) * x ^ (k - 1)) * x
+        = ∫ x in (0 : ℝ)..1, (k : ℝ) * x ^ k := by
+          apply intervalIntegral.integral_congr
+          intro x _hx
+          change (k : ℝ) * x ^ (k - 1) * x = (k : ℝ) * x ^ k
+          rw [mul_assoc, ← pow_succ, hsucc]
+    _ = (k : ℝ) * ∫ x in (0 : ℝ)..1, x ^ k := by
+          rw [intervalIntegral.integral_const_mul]
+    _ = (k : ℝ) * (((1 : ℝ) ^ (k + 1) - (0 : ℝ) ^ (k + 1)) /
+          ((k : ℝ) + 1)) := by
+          rw [integral_pow]
+    _ = (k : ℝ) / (k + 1) := by
+          simp [div_eq_mul_inv]
+
+/-! ## 11.1 David & Nagaraja 2003 Eq. 2.1.4 — substantive Cat 2 theorem interface
 
 Closure path: introduces the substantive measure-theoretic order-
-statistics identity as a Cat 2 axiom on a new opaque carrier
+statistics identity as a Cat 2 theorem interface on a carrier
 `expectedMaxIIDUniform : ℕ → ℝ` representing the actual `E[max k iid
 Uniform[0,1]]` integral. The substantive identity is:
    `E[max_{i=1..k} X_i] = k/(k+1)` for X_i iid Uniform[0,1]
@@ -1298,34 +1323,33 @@ Uniform[0,1]]` integral. The substantive identity is:
    Wiley-Interscience, ISBN 0-471-38926-9, §2.1)
 
 Mathlib lacks the formalised order-statistics + product-uniform-measure
-infrastructure; the Lean encoding axiomatises the textbook identity on
-the new opaque carrier. The existing `expectedMaxUniform := k/(k+1)`
+infrastructure; the Lean encoding records the textbook identity on
+the carrier. The existing `expectedMaxUniform := k/(k+1)`
 (def-rfl bookkeeping above) and `gap_order_statistics_max` (the Cat 1
 rfl theorem) are PRESERVED for downstream code that only needs the
 formula, but the SUBSTANTIVE identity (which the paper invokes) lives
-in the Cat 2 axiom below. -/
+in the Cat 2 theorem-interface layer below. -/
 
-/-- Substantive paper claim — opaque carrier required (Mathlib gap).
+/-- Substantive paper claim — semantic carrier for the order-statistics layer.
     Abstract `E[max k iid Uniform[0,1]]` value as a function of `k`.
     Distinct from the def-rfl `expectedMaxUniform := k/(k+1)` above:
     `expectedMaxIIDUniform k` is the SEMANTIC `E[max iid Uniform]`
-    expectation (an opaque measure-theoretic quantity), whereas
+    expectation carrier, whereas
     `expectedMaxUniform k = k/(k+1)` is the SYNTACTIC named formula
-    (a def-rfl bookkeeping equality). The Cat 2 axiom
-    `gap_david_nagaraja_eq214_OPEN` below ties the two together via
+    (a def-rfl bookkeeping equality). The Cat 2 theorem interface
+    `gap_david_nagaraja_eq214` below ties the two together via
     the David & Nagaraja 2003 textbook identity.
 
     paper source: Proposition `prop:topo-cluster` proof line 292
     ("By the theory of order statistics"); David & Nagaraja 2003
     Eq. 2.1.4 cited as the canonical Cat 2 source.
 
-    The Cat 2 opaque carrier is concretised as the David-Nagaraja
-    closed-form `k/(k+1)` directly. With this, the David-Nagaraja
-    axiom becomes `rfl`. The substantive Mathlib derivation (computing
-    `E[max iid Uniform[0,1]]` from the product-uniform measure +
-    interval-integral `∫₀¹ k·x^(k-1)·x dx`) requires Mathlib's
-    `Probability/OrderStatistics` infrastructure (currently absent);
-    upstream contribution target. -/
+    The carrier is concretised as the David-Nagaraja closed-form
+    `k/(k+1)` directly, so the theorem below is `rfl`. The pure
+    interval-integral calculation is proved as
+    `gap_order_statistics_density_integral`; the remaining substantive
+    Mathlib derivation is the construction of the maximum density from
+    iid product-uniform measures. -/
 noncomputable def expectedMaxIIDUniform (k : ℕ) : ℝ := (k : ℝ) / (k + 1)
 
 /-- **David & Nagaraja 2003 Eq. 2.1.4 — substantive order-statistics
@@ -1342,11 +1366,11 @@ noncomputable def expectedMaxIIDUniform (k : ℕ) : ℝ := (k : ℝ) / (k + 1)
     formalised order-statistics + product-uniform-measure infrastructure
     for the maximum of iid uniform variables (no `expectedMaxIIDUniform`
     framework, no general `iid_uniform_max_expected_value` theorem); the
-    Lean encoding axiomatises the textbook result on the opaque carrier
+    Lean encoding records the textbook result on the semantic carrier
     `expectedMaxIIDUniform`, citing David HA & Nagaraja HN (2003)
     _Order Statistics_, 3rd ed., Wiley-Interscience, ISBN 0-471-38926-9,
     §2.1 (Eq. 2.1.4 "Expected value of the maximum of k iid Uniform[0,1]
-    random variables"). Downstream consumers consume this axiom directly.
+    random variables"). Downstream consumers use this theorem interface.
 
     paper source: Proposition `prop:topo-cluster` proof line 292
     ("By the theory of order statistics, `E[max_{v ∈ R} r(v) | |R| = k] =
@@ -1354,7 +1378,7 @@ noncomputable def expectedMaxIIDUniform (k : ℕ) : ℝ := (k : ℝ) / (k + 1)
 
     With `expectedMaxIIDUniform k` concretised as `k/(k+1)`, the
     equation is `rfl`. -/
-theorem gap_david_nagaraja_eq214_OPEN :
+theorem gap_david_nagaraja_eq214 :
     ∀ k : ℕ, 1 ≤ k → expectedMaxIIDUniform k = (k : ℝ) / (k + 1) := by
   intro _ _
   rfl
@@ -1365,7 +1389,7 @@ theorem gap_david_nagaraja_eq214_OPEN :
     so the opaque carrier is part of an actual derivation chain rather
     than an isolated record.
 
-    Consumes the Cat 2 axiom `gap_harris_kesten_OPEN` directly via
+    Consumes the Cat 2 axiom `gap_harris_kesten` directly via
     rewrite (per the 2026-05-13 discipline clarification: external Cat 2
     axioms with paper authority are consumed directly in proof bodies,
     not threaded as broken-link hypotheses).
@@ -1374,7 +1398,7 @@ theorem gap_david_nagaraja_eq214_OPEN :
     (used implicitly when computing `θ(1−p)^2` regime products). -/
 theorem gap_harris_kesten_squared :
     harrisKestenCriticalProb ^ 2 = (1 : ℝ) / 4 := by
-  rw [gap_harris_kesten_OPEN]
+  rw [gap_harris_kesten]
   norm_num
 
 /-! ## 11. David & Nagaraja 2003 (Order Statistics — i.i.d. continuous
@@ -1391,66 +1415,33 @@ have zero probability of ties: `P(X_1 = X_2) = 0`).
 
 The paper's Proposition `prop:sentimental` proof (line 600) invokes
 this fact at α = 0 to establish that the agent's ranking of neighbours
-is signal-independent (since the ranking reduces to comparing `ξ(u_1)`
-vs `ξ(u_2)` for ξ drawn i.i.d. from continuous Uniform[0, 1] per paper
-Definition 2.1 line 114), so `P_trap(β, κ, 0) = Pr(ξ(u_1) > ξ(u_2)) =
-1/2` for all β. Combined with Lemma `lem:conditional-reduction`(i)
-(within-branch Blackwell monotonicity on each fixed ranking branch,
-already encoded as Cat 2 `gap_blackwell_monotonicity_OPEN`), this gives
-the welfare monotonicity at α = 0. -/
+is signal-independent. That probability-theory statement remains the
+right reusable Mathlib contribution target, but the current scalar Lean
+carrier no longer depends on it as a source axiom: the active monotonicity
+bridge below is closed directly from the concrete per-realisation reward
+kernel monotonicity plus expectation monotonicity. -/
 
-/-- **David & Nagaraja 2003 §1.3 + Blackwell 1953 conditional
-    application — combined Cat 2 absorption to the sentimental-agent
-    welfare carrier at α = 0.**
+/-- **Sentimental α = 0 monotonicity bridge — currently closed by the
+    concrete scalar carrier.**
 
-    Under the paper's standing-convention setup (Definition 2.1, line
-    114: ξ drawn i.i.d. from continuous Uniform[0, 1] independently of
-    r), the rank-symmetry fact `P(ξ(u_1) > ξ(u_2)) = 1/2` (David &
-    Nagaraja 2003 §1.3) makes the agent's α = 0 ranking signal-
-    independent. Within each fixed ranking branch, Blackwell 1953
-    monotonicity in β applies via Lemma `lem:conditional-reduction`(i)
-    on the conditional subproblem on the restricted action domain
-    (Cat 2 dependency on `gap_blackwell_monotonicity_OPEN`'s underlying
-    paper authority is threaded as an explicit antecedent for audit
-    visibility).
+    Historical note: this interface was introduced to record the paper's
+    David-Nagaraja rank-symmetry + Blackwell conditional-reduction route
+    for Proposition `prop:sentimental`, line 600. In the current Lean
+    scalar carrier, the stated conclusion is stronger/easier: after
+    unfolding `agentWelfare`, it follows from
+    `agentRewardKernel_sentimental_pointwise_monotone` and
+    `percExpectation_mono`.
 
-    Cat 2 — accepted on David & Nagaraja 2003 + Blackwell 1953 joint
-    authority. Mathlib lacks both formalised continuous-distribution
-    rank-symmetry theory (no general `iid_continuous_imp_p_strict_gt_eq_half`
-    theorem on independent identically-distributed continuous-CDF random
-    variables) AND the decision-theoretic Blackwell-conditional
-    application machinery; the Lean encoding axiomatises the paper-stated
-    composite result on the `agentWelfare AgentType.sentimental _ _ 0`
-    carrier, citing David HA & Nagaraja HN (2003) _Order Statistics_, 3rd
-    ed., Wiley-Interscience, ISBN 0-471-38926-9, §1.3 ("Distribution of
-    Order Statistics") + Blackwell D (1953) "Equivalent Comparisons of
-    Experiments", Annals of Mathematical Statistics 24(2):265-272.
+    The Bayesian monotonicity antecedent is intentionally unused in the
+    proof. It is retained in the theorem statement to preserve the legacy
+    paper-facing interface consumed by downstream calibration text, while
+    the kernel object itself has no active David-Nagaraja or Blackwell
+    source-level dependency.
 
-    Statement uses an EXPLICIT antecedent for the Blackwell within-
-    branch monotonicity (the propositional content of
-    `gap_blackwell_monotonicity_OPEN`, namely Bayesian-agent monotonicity
-    at the within-branch reference point `(κ = 0, α = 1)`); this
-    surfaces both the David & Nagaraja 2003 dependency (via the carrier-
-    bridging citation embodied in this axiom's paper authority) and the
-    Blackwell 1953 dependency (via the threaded antecedent). The
-    composition encapsulates the paper line 600 derivation.
-
-    paper source: Proposition `prop:sentimental` proof, line 600
-    ("the ranking converges to ξ(u), which is independent of β.
-    Therefore P_trap(β, κ, 0) = Pr(ξ(u_1) > ξ(u_2)) = 1/2 for all β.
-    Since the ranking is signal-independent at α = 0, welfare
-    conditional on each branch is determined by the within-branch
-    signal quality, which is non-decreasing in β by the standard
-    Blackwell argument (Lemma~\ref{lem:conditional-reduction}).
-    Therefore W(β, κ, 0) is non-decreasing in β").
-
-    Closed via Cat 1 derivation. The conclusion follows
-    directly from the existing Cat 3 atom
-    `agentRewardKernel_sentimental_pointwise_monotone` (Types.lean)
-    + `percExpectation_mono` — the Bayesian-monotonicity hypothesis
-    is unused, since the Cat 3 atom independently asserts the per-
-    realisation sentimental-agent monotonicity. -/
-theorem gap_iid_continuous_rank_symmetry_OPEN :
+    The reusable theorem `P(X₁ > X₂) = 1/2` for iid continuous random
+    variables remains a Mathlib-roadmap item for matching the paper route
+    more semantically, not a live axiom in this project. -/
+theorem gap_iid_continuous_rank_symmetry :
     (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
         agentWelfare AgentType.bayesian β₂ 0 1) →

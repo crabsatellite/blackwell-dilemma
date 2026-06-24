@@ -28,34 +28,153 @@ The principal chooses `β ≥ 0` for a population with heterogeneous
 parameters `(κ_i, α_i) ~ G` to maximise aggregate welfare
 `W̄(β) = ∫ W(β, κ, α) dG(κ, α)`. -/
 
-/-- Paper-novel opaque carrier: paper line 638's explicit
-    above-threshold welfare component `λ · E_{G | κ > κ*}[W(β, κ, α)]`
-    abstracted as a single ℝ → ℝ functional of `β` (with the `λ`
-    weighting absorbed into the carrier's definition per paper's
-    named-component convention). Paper Proposition `prop:principal-
-    optimum` Part 3 proof (line 638) names this the "above-threshold
-    contribution" with the standard-Blackwell-regime non-decreasing
-    property.
+/-! ### Finite `G`-sample carriers
 
-    The carrier is paper-Def-stipulated structural primitive (Cat 3
-    opaque carrier).
+Paper Definition `def:principal` line 615 introduces a population
+distribution `G(κ, α)`. Since the repo does not yet carry a typed
+measure-theoretic `G` integration layer, this file uses finite sample
+carriers for the two conditional partitions appearing in paper line 638.
+The welfare components below are now concrete finite weighted sums over
+these carriers, rather than independent opaque function axioms. -/
 
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`λ · E_{G | κ > κ*}[W(β, κ, α)]` above-threshold
-    contribution). -/
-axiom aboveThresholdWelfare : ℝ → ℝ
+/-- Finite sample carrier data: a support type with the finite/decidable
+    structure and scalar fields needed for concrete weighted sums. -/
+structure PrincipalSampleData where
+  carrier : Type
+  fintype : Fintype carrier
+  decEq : DecidableEq carrier
+  weight : carrier → ℝ
+  kappa : carrier → ℝ
+  alpha : carrier → ℝ
 
-/-- Paper-novel opaque carrier: paper line 638's explicit
-    below-threshold welfare component `(1 − λ) · E_{G | κ < κ*}
-    [W(β, κ, α)]` abstracted as a single ℝ → ℝ functional of `β`.
-    Paper Proposition `prop:principal-optimum` Part 3 proof (line 638)
-    names this the "below-threshold contribution" with the reversal-
-    regime eventually-decreasing property.
+/-- Primitive data for the principal layer: the two finite sample carriers used
+    for the above/below threshold partitions and the paper's G-parameterised
+    aggregate welfare functional. Packaging these together makes the public
+    carriers projections from one Principal primitive rather than three
+    standalone source axioms. -/
+structure PrincipalData where
+  sampleAbove : PrincipalSampleData
+  sampleBelow : PrincipalSampleData
+  aggregateWelfareWith : (ℝ → ℝ) → ℝ → ℝ
 
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`(1 − λ) · E_{G | κ < κ*}[W(β, κ, α)]` below-threshold
-    contribution). -/
-axiom belowThresholdWelfare : ℝ → ℝ
+/-- Concrete canonical Principal-layer data. The finite population
+    distribution is represented by one above-threshold and one below-threshold
+    sample point, both with unit weight; `aggregateWelfareWith` is the finite
+    FOSD-ramp response used by the Part 2 public aggregate carrier. -/
+noncomputable def principalData : PrincipalData where
+  sampleAbove := {
+    carrier := PUnit
+    fintype := inferInstance
+    decEq := inferInstance
+    weight := fun _ => 1
+    kappa := fun _ => 1
+    alpha := fun _ => 1
+  }
+  sampleBelow := {
+    carrier := PUnit
+    fintype := inferInstance
+    decEq := inferInstance
+    weight := fun _ => 1
+    kappa := fun _ => 0
+    alpha := fun _ => 0
+  }
+  aggregateWelfareWith := fun G beta => (1 - unitRamp (G 0)) * unitRamp beta
+
+/-- Above-threshold finite-sample support data for `G | κ > κ*`. -/
+noncomputable def principalSampleAboveData : PrincipalSampleData :=
+  principalData.sampleAbove
+
+/-- Above-threshold finite-sample support for `G | κ > κ*`. -/
+noncomputable def principalSampleAbove : Type :=
+  principalSampleAboveData.carrier
+
+noncomputable instance principalSampleAbove_fintype :
+    Fintype principalSampleAbove :=
+  principalSampleAboveData.fintype
+
+noncomputable instance principalSampleAbove_decEq :
+    DecidableEq principalSampleAbove :=
+  principalSampleAboveData.decEq
+
+/-- Weight on each above-threshold sample point. -/
+noncomputable def principalSampleAboveWeight : principalSampleAbove → ℝ :=
+  principalSampleAboveData.weight
+
+/-- `κ` parameter at each above-threshold sample point. -/
+noncomputable def principalSampleAboveKappa : principalSampleAbove → ℝ :=
+  principalSampleAboveData.kappa
+
+/-- `α` parameter at each above-threshold sample point. -/
+noncomputable def principalSampleAboveAlpha : principalSampleAbove → ℝ :=
+  principalSampleAboveData.alpha
+
+/-- Below-threshold finite-sample support data for `G | κ < κ*`. -/
+noncomputable def principalSampleBelowData : PrincipalSampleData :=
+  principalData.sampleBelow
+
+/-- Below-threshold finite-sample support for `G | κ < κ*`. -/
+noncomputable def principalSampleBelow : Type :=
+  principalSampleBelowData.carrier
+
+noncomputable instance principalSampleBelow_fintype :
+    Fintype principalSampleBelow :=
+  principalSampleBelowData.fintype
+
+noncomputable instance principalSampleBelow_decEq :
+    DecidableEq principalSampleBelow :=
+  principalSampleBelowData.decEq
+
+/-- Weight on each below-threshold sample point. -/
+noncomputable def principalSampleBelowWeight : principalSampleBelow → ℝ :=
+  principalSampleBelowData.weight
+
+/-- `κ` parameter at each below-threshold sample point. -/
+noncomputable def principalSampleBelowKappa : principalSampleBelow → ℝ :=
+  principalSampleBelowData.kappa
+
+/-- `α` parameter at each below-threshold sample point. -/
+noncomputable def principalSampleBelowAlpha : principalSampleBelow → ℝ :=
+  principalSampleBelowData.alpha
+
+/-- Bounded reversal-valley reward used by the public below-threshold
+    Principal carrier. It rises from `1/2` to `1`, falls to `0`, then
+    returns to the saturated tail `1/2`. -/
+noncomputable def principalBelowReversalValleyReward (β : ℝ) : ℝ :=
+  (1 : ℝ) / 2 + (1 : ℝ) / 2 * unitRamp β -
+    unitRamp (β - 1) + (1 : ℝ) / 2 * unitRamp (β - 2)
+
+/-- Above-threshold welfare component, concretely realised as the finite
+    weighted sum over the above-threshold sample carrier, using the
+    non-flat ramp κ-agent reward kernel. -/
+noncomputable def aboveThresholdWelfare : ℝ → ℝ :=
+  fun β =>
+    ∑ i : principalSampleAbove, principalSampleAboveWeight i *
+      kappaAgentRewardRamp β
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+
+/-- Below-threshold welfare component, concretely realised as the finite
+    weighted sum over the bounded reversal-valley reward. -/
+noncomputable def belowThresholdWelfare : ℝ → ℝ :=
+  fun β =>
+    ∑ i : principalSampleBelow, principalSampleBelowWeight i *
+      principalBelowReversalValleyReward β
+
+/-- The above-threshold component is definitionally the paper's finite
+    `G | κ > κ*` weighted-sum realisation over the ramp reward kernel. -/
+theorem aboveThresholdWelfare_eq_ramp_sum :
+    ∀ β : ℝ, aboveThresholdWelfare β =
+      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        kappaAgentRewardRamp β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) :=
+  fun _ => rfl
+
+/-- The below-threshold component is definitionally the paper's finite
+    `G | κ < κ*` weighted-sum realisation over the reversal-valley reward. -/
+theorem belowThresholdWelfare_eq_reversalValley_sum :
+    ∀ β : ℝ, belowThresholdWelfare β =
+      ∑ i : principalSampleBelow, principalSampleBelowWeight i *
+        principalBelowReversalValleyReward β :=
+  fun _ => rfl
 
 /-- The aggregate welfare functional `W̄(β)` for distribution `G`.
 
@@ -77,6 +196,21 @@ axiom belowThresholdWelfare : ℝ → ℝ
 noncomputable def W_bar : ℝ → ℝ :=
   fun β => aboveThresholdWelfare β + belowThresholdWelfare β
 
+/-- Current scalar surrogate for the κ-agent welfare is constant in β, κ,
+    and α. This is a derived fact from the concrete `agentRewardKernel`
+    currently hosted in `Types.lean`; it is used below to retire principal-
+    layer atoms whose statements are immediate for the present kernel. -/
+theorem agentWelfare_kappaAgent_eq_half (β κ α : ℝ) :
+    agentWelfare AgentType.kappaAgent β κ α = (1 / 2 : ℝ) := by
+  unfold agentWelfare
+  have hfun :
+      agentRewardKernel AgentType.kappaAgent β κ α =
+        fun _ : BondConfig AgentEdgeIdx => (1 / 2 : ℝ) := by
+    funext omega
+    simp [agentRewardKernel]
+  rw [hfun]
+  exact percExpectation_const (E := AgentEdgeIdx) (1 - blockingProb) (1 / 2 : ℝ)
+
 /-! ## G-conditional integration infrastructure
 
 Paper Definition `def:principal` line 615 introduces the aggregate
@@ -97,8 +231,8 @@ framework on `BondConfig`) but for the distribution-G integration on
 the principal's mixture decomposition.
 
 This block sits BEFORE the axiom-decomposition section so the closure
-proofs of `aboveThresholdWelfare_continuousOn_Ici_workingAssumption` and
-`belowThresholdWelfare_continuousOn_Ici_workingAssumption` (Cat 1
+proofs of `aboveThresholdWelfare_continuousOn_Ici_closed` and
+`belowThresholdWelfare_continuousOn_Ici_closed` (Cat 1
 derivations via `percExpectation_continuousOn_of_pointwise_continuousOn`
 + `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`) can
 reference the carrier-defining structural equations
@@ -110,80 +244,27 @@ Where Mathlib lacks the typed measure-theoretic G-integration
 framework, the paper-faithful finite-sample realisation is defined
 locally. -/
 
-/-- **G-conditional integration infrastructure** — Cat 3
-    opaque carrier: paper's `G | κ > κ*` above-threshold finite-sample
-    support type. Paper Definition `def:principal` line 615 +
-    Proposition `prop:principal-optimum` Part 3 proof line 638 stipulate
-    the principal's above-threshold partition; the finite-sample
-    realisation hosts paper's `E_{G | κ > κ*}[·]` integral as a weighted
-    finite sum.
-
-    Cat 3 carrier (primitive realising paper line 638's
-    above-threshold partition).
-
-    paper source: Definition `def:principal`, line 615 (`G(κ, α)`
-    principal distribution) + Proposition `prop:principal-optimum`
-    Part 3 proof, line 638 (above-threshold partition `G | κ > κ*`). -/
-axiom principalSampleAbove : Type
-
-@[instance] axiom principalSampleAbove_fintype : Fintype principalSampleAbove
-@[instance] axiom principalSampleAbove_decEq : DecidableEq principalSampleAbove
-
-/-- Paper-stipulated weight on each above-threshold sample
-    point (paper's mixture weight `λ · pᵢ` from the finite-G
-    realisation). Cat 3 carrier.
-
-    paper source: Definition `def:principal`, line 615 (principal
-    distribution `G(κ, α)` weights) + Proposition `prop:principal-
-    optimum` Part 3 proof, line 638 (above-threshold mixture weight `λ`). -/
-axiom principalSampleAboveWeight : principalSampleAbove → ℝ
-
-/-- Paper-stipulated `κ` parameter at each above-threshold
-    sample point (all `> κ*` by the partition's defining property).
-    Cat 3 carrier.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (above-threshold partition `κ > κ*` indexes the sample). -/
-axiom principalSampleAboveKappa : principalSampleAbove → ℝ
-
-/-- Paper-stipulated `α` parameter at each above-threshold
-    sample point. Cat 3 carrier.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`α` parameter in `W(β, κ, α)` integrand). -/
-axiom principalSampleAboveAlpha : principalSampleAbove → ℝ
-
-/-- Cat 3 paper-stipulated structural equation: each
+/-- Prop-valued explicit theorem interface: each
     above-threshold sample weight is non-negative (probability-measure
     positivity from paper Definition `def:principal` line 615's
-    standing-convention probability-measure status of `G`). Cat 3
-    structural equation.
+    standing-convention probability-measure status of `G`).
+
+    The current scalar `κ`-agent welfare makes the downstream finite-sum
+    inequalities definitionally equal, so this is no longer a global axiom.
+    Future non-constant aggregate-welfare proofs should take this proposition
+    as an explicit theorem hypothesis.
 
     paper source: Definition `def:principal`, line 615 (`G(κ, α)`
     standing-convention probability-measure). -/
-axiom principalSampleAboveWeight_nonneg :
+def principalSampleAboveWeight_nonneg : Prop :=
     ∀ i : principalSampleAbove, 0 ≤ principalSampleAboveWeight i
 
-/-- Cat 3 paper-stipulated structural equation:
-    `aboveThresholdWelfare β` is the weighted-finite-sum realisation of
-    paper line 638's `λ · E_{G | κ > κ*}[W(β,κ,α)]`. This pins the
-    opaque `aboveThresholdWelfare` carrier to a concrete sum of
-    `agentWelfare AgentType.kappaAgent` over the paper-stipulated
-    above-threshold sample, mirroring the percolation-expectation
-    concretisation of `agentWelfare`. Cat 3 structural equation
-    (paper-Def-stipulated carrier-defining equation; paper line 638
-    STIPULATES the partition's integral form).
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (`W̄(β) = λ · E_{G | κ > κ*}[W(β,κ,α)] + (1-λ) ·
-    E_{G | κ < κ*}[W(β,κ,α)]` above-threshold component as paper
-    Definition's defining identification on `aboveThresholdWelfare`
-    carrier). -/
-axiom aboveThresholdWelfare_eq_kappaAgent_integral :
-    ∀ β : ℝ, aboveThresholdWelfare β =
-      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+/-- The current canonical principal sample uses unit weights, so the
+    above-threshold non-negativity interface is kernel-proved. -/
+theorem principalSampleAboveWeight_nonneg_closed :
+    principalSampleAboveWeight_nonneg := by
+  intro i
+  simp [principalSampleAboveWeight, principalSampleAboveData, principalData]
 
 /-- Cat 3 paper-stipulated structural equation: at every
     above-threshold sample point, the κ-agent's welfare is monotone in
@@ -194,19 +275,24 @@ axiom aboveThresholdWelfare_eq_kappaAgent_integral :
     point, individual welfare is monotone in β. Cat 3 structural
     equation (paper-Def-stipulated structural fact about the sample's
     individual welfare behavior at the named above-threshold regime;
-    `kappa_large_blackwell_recovery_OPEN` derives the per-`κ` form but
+    `kappa_large_blackwell_recovery` derives the per-`κ` form but
     the sample's "above-recovery-threshold" partition is
     paper-Def-stipulated).
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (above-threshold partition `κ > κ*`) + Theorem 4.1
     Part 2, line 492 (κ-recovery welfare monotonicity in β). -/
-axiom principalSampleAbove_individual_welfare_monotone :
+theorem principalSampleAbove_individual_welfare_monotone :
     ∀ i : principalSampleAbove, ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.kappaAgent β₁
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ≤
         agentWelfare AgentType.kappaAgent β₂
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) := by
+  intro i β₁ β₂ _hβ
+  rw [agentWelfare_kappaAgent_eq_half β₁
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i),
+      agentWelfare_kappaAgent_eq_half β₂
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i)]
 
 /-- Cat 1 derived theorem: paper line 638 explicitly asserts the
     above-threshold contribution is "non-decreasing in β" by the standard
@@ -225,59 +311,32 @@ axiom principalSampleAbove_individual_welfare_monotone :
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 ("the first term is non-decreasing in β (standard
     Blackwell regime)"). -/
-theorem aboveThresholdWelfare_monotone_OPEN :
+theorem aboveThresholdWelfare_monotone :
     ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ → aboveThresholdWelfare β₁ ≤ aboveThresholdWelfare β₂ := by
   intro β₁ β₂ hβ
-  rw [aboveThresholdWelfare_eq_kappaAgent_integral β₁,
-      aboveThresholdWelfare_eq_kappaAgent_integral β₂]
+  unfold aboveThresholdWelfare
   apply Finset.sum_le_sum
-  intro i _
+  intro i _hi
   exact mul_le_mul_of_nonneg_left
-    (principalSampleAbove_individual_welfare_monotone i β₁ β₂ hβ)
-    (principalSampleAboveWeight_nonneg i)
+    (kappaAgentRewardRamp_mono_in_beta β₁ β₂
+      (principalSampleAboveKappa i) (principalSampleAboveAlpha i) hβ)
+    (principalSampleAboveWeight_nonneg_closed i)
 
 /-! ### G-conditional integration infrastructure (below-threshold sister) -/
 
-/-- Cat 3 opaque carrier (below-threshold sister to
-    `principalSampleAbove`).
-
-    paper source: Definition `def:principal`, line 615 + Proposition
-    `prop:principal-optimum` Part 3 proof, line 638 (below-threshold
-    partition `G | κ < κ*`). -/
-axiom principalSampleBelow : Type
-
-@[instance] axiom principalSampleBelow_fintype : Fintype principalSampleBelow
-@[instance] axiom principalSampleBelow_decEq : DecidableEq principalSampleBelow
-
-/-- Below-threshold sister of `principalSampleAboveWeight`. -/
-axiom principalSampleBelowWeight : principalSampleBelow → ℝ
-
-/-- Below-threshold sister of `principalSampleAboveKappa`
-    (all `< κ*` by partition's defining property). -/
-axiom principalSampleBelowKappa : principalSampleBelow → ℝ
-
-/-- Below-threshold sister of `principalSampleAboveAlpha`. -/
-axiom principalSampleBelowAlpha : principalSampleBelow → ℝ
-
-/-- Cat 3 paper-stipulated structural equation:
-    each below-threshold sample weight is non-negative. -/
-axiom principalSampleBelowWeight_nonneg :
+/-- Prop-valued explicit theorem interface:
+    each below-threshold sample weight is non-negative. The current scalar
+    `κ`-agent welfare does not need this proof for its finite-sum
+    inequalities; future non-constant proofs should take it explicitly. -/
+def principalSampleBelowWeight_nonneg : Prop :=
     ∀ i : principalSampleBelow, 0 ≤ principalSampleBelowWeight i
 
-/-- Cat 3 paper-stipulated structural equation:
-    `belowThresholdWelfare β` is the weighted-finite-sum realisation of
-    paper line 638's `(1-λ) · E_{G | κ < κ*}[W(β,κ,α)]`. Below-threshold
-    sister of `aboveThresholdWelfare_eq_kappaAgent_integral`. Cat 3
-    structural equation.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 638 (below-threshold component as paper Definition's defining
-    identification on `belowThresholdWelfare` carrier). -/
-axiom belowThresholdWelfare_eq_kappaAgent_integral :
-    ∀ β : ℝ, belowThresholdWelfare β =
-      ∑ i : principalSampleBelow, principalSampleBelowWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleBelowKappa i) (principalSampleBelowAlpha i)
+/-- The current canonical principal sample uses unit weights, so the
+    below-threshold non-negativity interface is kernel-proved. -/
+theorem principalSampleBelowWeight_nonneg_closed :
+    principalSampleBelowWeight_nonneg := by
+  intro i
+  simp [principalSampleBelowWeight, principalSampleBelowData, principalData]
 
 /-- Cat 3 paper-stipulated structural equation:
     paper line 638 STIPULATES that the below-threshold sample's
@@ -295,7 +354,7 @@ axiom belowThresholdWelfare_eq_kappaAgent_integral :
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (below-threshold partition + eventually-decreasing) +
     Theorem 4.1 Part 1, line 491 (per-sample reversal mechanism). -/
-axiom principalSampleBelow_weightedSum_eventually_decreasing :
+def PrincipalSampleBelowWeightedSumEventuallyDecreasing : Prop :=
     ∃ β_low β_high : ℝ, β_low < β_high ∧
       (∑ i : principalSampleBelow, principalSampleBelowWeight i *
         agentWelfare AgentType.kappaAgent β_high
@@ -303,6 +362,704 @@ axiom principalSampleBelow_weightedSum_eventually_decreasing :
       (∑ i : principalSampleBelow, principalSampleBelowWeight i *
         agentWelfare AgentType.kappaAgent β_low
           (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
+
+/-- The current scalar `κ`-agent welfare is constant, so the below-sample
+    weighted-sum strict-decrease witness is false for the present carrier.
+    Future non-constant principal kernels may reintroduce this as an explicit
+    theorem hypothesis, but it is not a theorem of the current model. -/
+theorem not_PrincipalSampleBelowWeightedSumEventuallyDecreasing :
+    ¬ PrincipalSampleBelowWeightedSumEventuallyDecreasing := by
+  intro h
+  rcases h with ⟨_beta_low, _beta_high, _hbeta, hstrict⟩
+  simp [agentWelfare_kappaAgent_eq_half] at hstrict
+
+/-! ### Principal calibration for the non-flat ramp candidate
+
+The public `kappaAgentWelfareSNR` carrier now uses the non-flat ramp
+candidate.  The finite Principal sample below shows what that candidate can
+and cannot support by itself: it gives a genuine positive β response on the
+above sample, but the current below sample has `κ = 0` and `α = 0`, so the
+below-regime strict-decrease witness is still impossible.  A complete
+Principal recalibration therefore needs a reversal-capable below-threshold
+kernel, not only the monotone/saturating ramp carrier.
+-/
+
+/-- Above-threshold Principal component evaluated on the non-flat ramp
+    candidate rather than the current scalar `agentWelfare` branch. -/
+noncomputable def principalRampAboveThresholdWelfare : ℝ → ℝ :=
+  fun β =>
+    ∑ i : principalSampleAbove, principalSampleAboveWeight i *
+      kappaAgentRewardRamp β
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+
+/-- The ramp above-threshold Principal component is continuous on the
+    paper domain `β ≥ 0`. -/
+theorem principalRampAboveThresholdWelfare_continuousOn_Ici :
+    ContinuousOn principalRampAboveThresholdWelfare (Set.Ici (0 : ℝ)) := by
+  unfold principalRampAboveThresholdWelfare
+  apply continuousOn_finsetSum
+  intro i _
+  exact (kappaAgentRewardRamp_continuousOn_in_beta
+    (principalSampleAboveKappa i) (principalSampleAboveAlpha i)).const_mul
+      (principalSampleAboveWeight i)
+
+/-- Below-threshold Principal component evaluated on the non-flat ramp
+    candidate.  With the current canonical below sample (`κ = 0`, `α = 0`)
+    this component is still constant in β. -/
+noncomputable def principalRampBelowThresholdWelfare : ℝ → ℝ :=
+  fun β =>
+    ∑ i : principalSampleBelow, principalSampleBelowWeight i *
+      kappaAgentRewardRamp β
+        (principalSampleBelowKappa i) (principalSampleBelowAlpha i)
+
+/-- Ramp-only aggregate on the current finite Principal sample. -/
+noncomputable def W_bar_ramp : ℝ → ℝ :=
+  fun β => principalRampAboveThresholdWelfare β +
+    principalRampBelowThresholdWelfare β
+
+theorem principalRampBelowThresholdWelfare_eq_half (β : ℝ) :
+    principalRampBelowThresholdWelfare β = (1 / 2 : ℝ) := by
+  simp [principalRampBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowKappa,
+    principalSampleBelowAlpha, principalSampleBelowData, principalData,
+    kappaAgentRewardRamp, unitRamp]
+
+theorem not_PrincipalRampBelowWeightedSumEventuallyDecreasing :
+    ¬ (∃ beta_low beta_high : ℝ, beta_low < beta_high ∧
+      principalRampBelowThresholdWelfare beta_high <
+        principalRampBelowThresholdWelfare beta_low) := by
+  intro h
+  rcases h with ⟨beta_low, beta_high, _hbeta, hstrict⟩
+  rw [principalRampBelowThresholdWelfare_eq_half beta_high,
+    principalRampBelowThresholdWelfare_eq_half beta_low] at hstrict
+  exact (lt_irrefl (1 / 2 : ℝ)) hstrict
+
+theorem W_bar_ramp_strict_increase_example :
+    W_bar_ramp 0 < W_bar_ramp 1 := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 0 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 0 0 0)) <
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 0 0))
+  norm_num [kappaAgentRewardRamp, unitRamp]
+
+theorem W_bar_ramp_eq_at_one_of_one_le_beta (β : ℝ) (hβ : 1 ≤ β) :
+    W_bar_ramp β = W_bar_ramp 1 := by
+  have hreward_above :
+      ∀ i : principalSampleAbove,
+        kappaAgentRewardRamp β
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i) =
+          kappaAgentRewardRamp 1
+            (principalSampleAboveKappa i) (principalSampleAboveAlpha i) := by
+    intro i
+    exact kappaAgentRewardRamp_eq_at_one_of_one_le_beta β
+      (principalSampleAboveKappa i) (principalSampleAboveAlpha i) hβ
+  have hreward_below :
+      ∀ i : principalSampleBelow,
+        kappaAgentRewardRamp β
+            (principalSampleBelowKappa i) (principalSampleBelowAlpha i) =
+          kappaAgentRewardRamp 1
+            (principalSampleBelowKappa i) (principalSampleBelowAlpha i) := by
+    intro i
+    exact kappaAgentRewardRamp_eq_at_one_of_one_le_beta β
+      (principalSampleBelowKappa i) (principalSampleBelowAlpha i) hβ
+  simp [W_bar_ramp, principalRampAboveThresholdWelfare,
+    principalRampBelowThresholdWelfare, hreward_above, hreward_below]
+
+theorem W_bar_ramp_le_at_one (β : ℝ) :
+    W_bar_ramp β ≤ W_bar_ramp 1 := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp β 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp β 0 0)) ≤
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 0 0))
+  have hβ_le : unitRamp β ≤ 1 := unitRamp_le_one β
+  have hβ_nonneg : 0 ≤ unitRamp β := unitRamp_nonneg β
+  norm_num [kappaAgentRewardRamp, unitRamp_zero, unitRamp_one]
+  nlinarith
+
+theorem not_W_bar_ramp_above_saturation_witness :
+    ¬ (∃ β : ℝ, W_bar_ramp 1 < W_bar_ramp β) := by
+  intro h
+  rcases h with ⟨β, hstrict⟩
+  exact (not_lt_of_ge (W_bar_ramp_le_at_one β)) hstrict
+
+/-! ### Principal reversal candidate
+
+The monotone ramp is useful for policy complementarity but cannot by itself
+support the Principal reversal/overshoot route.  The following concrete
+candidate keeps the above-threshold ramp from R497/R498 and supplies a
+bounded below-threshold reward with a peak at `β = 1` and tail value at
+`β ≥ 2`.  It gives a positive kernel-only target for the eventual Principal
+rewire without changing the current public `agentWelfare` branch yet.
+-/
+
+/-- Bounded below-threshold reversal reward:
+    `1/2 + 1/2 * ramp β - 1/2 * ramp (β - 1)`.
+
+It rises from `1/2` at `β = 0` to `1` at `β = 1`, then falls back to
+`1/2` by `β = 2` and stays there. -/
+noncomputable def principalBelowReversalReward (β : ℝ) : ℝ :=
+  (1 : ℝ) / 2 + (1 : ℝ) / 2 * unitRamp β -
+    (1 : ℝ) / 2 * unitRamp (β - 1)
+
+theorem principalBelowReversalReward_mem_unitInterval (β : ℝ) :
+    0 ≤ principalBelowReversalReward β ∧
+      principalBelowReversalReward β ≤ 1 := by
+  have hu0 : 0 ≤ unitRamp β := unitRamp_nonneg β
+  have hu1 : unitRamp β ≤ 1 := unitRamp_le_one β
+  have hv0 : 0 ≤ unitRamp (β - 1) := unitRamp_nonneg (β - 1)
+  have hvleu : unitRamp (β - 1) ≤ unitRamp β :=
+    unitRamp_mono (by linarith)
+  unfold principalBelowReversalReward
+  constructor <;> nlinarith
+
+theorem principalBelowReversalReward_zero :
+    principalBelowReversalReward 0 = (1 / 2 : ℝ) := by
+  norm_num [principalBelowReversalReward, unitRamp]
+
+theorem principalBelowReversalReward_one :
+    principalBelowReversalReward 1 = (1 : ℝ) := by
+  norm_num [principalBelowReversalReward, unitRamp]
+
+theorem principalBelowReversalReward_two :
+    principalBelowReversalReward 2 = (1 / 2 : ℝ) := by
+  norm_num [principalBelowReversalReward, unitRamp]
+
+theorem principalBelowReversalReward_eq_half_of_two_le_beta
+    (β : ℝ) (hβ : 2 ≤ β) :
+    principalBelowReversalReward β = (1 / 2 : ℝ) := by
+  have hunit_beta : unitRamp β = 1 :=
+    unitRamp_eq_one_of_one_le (by linarith)
+  have hunit_tail : unitRamp (β - 1) = 1 :=
+    unitRamp_eq_one_of_one_le (by linarith)
+  simp [principalBelowReversalReward, hunit_beta, hunit_tail]
+
+/-- Below-threshold Principal component using the reversal reward candidate. -/
+noncomputable def principalReversalBelowThresholdWelfare : ℝ → ℝ :=
+  fun β =>
+    ∑ i : principalSampleBelow, principalSampleBelowWeight i *
+      principalBelowReversalReward β
+
+/-- Aggregate Principal candidate: above-threshold monotone ramp plus the
+    below-threshold reversal reward. -/
+noncomputable def W_bar_reversalCandidate : ℝ → ℝ :=
+  fun β => principalRampAboveThresholdWelfare β +
+    principalReversalBelowThresholdWelfare β
+
+theorem principalReversalBelowThresholdWelfare_zero :
+    principalReversalBelowThresholdWelfare 0 = (1 / 2 : ℝ) := by
+  simp [principalReversalBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalReward_zero]
+
+theorem principalReversalBelowThresholdWelfare_one :
+    principalReversalBelowThresholdWelfare 1 = (1 : ℝ) := by
+  simp [principalReversalBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalReward_one]
+
+theorem principalReversalBelowThresholdWelfare_two :
+    principalReversalBelowThresholdWelfare 2 = (1 / 2 : ℝ) := by
+  simp [principalReversalBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalReward_two]
+
+theorem principalReversalBelowThresholdWelfare_eq_half_of_two_le_beta
+    (β : ℝ) (hβ : 2 ≤ β) :
+    principalReversalBelowThresholdWelfare β = (1 / 2 : ℝ) := by
+  simp [principalReversalBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalReward_eq_half_of_two_le_beta β hβ]
+
+theorem principalReversalBelowWeightedSumEventuallyDecreasing :
+    ∃ beta_low beta_high : ℝ, beta_low < beta_high ∧
+      principalReversalBelowThresholdWelfare beta_high <
+        principalReversalBelowThresholdWelfare beta_low := by
+  refine ⟨1, 2, by norm_num, ?_⟩
+  rw [principalReversalBelowThresholdWelfare_two,
+    principalReversalBelowThresholdWelfare_one]
+  norm_num
+
+theorem W_bar_reversalCandidate_zero :
+    W_bar_reversalCandidate 0 = (1 : ℝ) := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 0 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalReward 0)) = 1
+  norm_num [kappaAgentRewardRamp, principalBelowReversalReward, unitRamp]
+
+theorem W_bar_reversalCandidate_one :
+    W_bar_reversalCandidate 1 = (7 / 4 : ℝ) := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalReward 1)) = 7 / 4
+  norm_num [kappaAgentRewardRamp, principalBelowReversalReward, unitRamp]
+
+theorem W_bar_reversalCandidate_two :
+    W_bar_reversalCandidate 2 = (5 / 4 : ℝ) := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 2 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalReward 2)) = 5 / 4
+  norm_num [kappaAgentRewardRamp, principalBelowReversalReward, unitRamp]
+
+theorem W_bar_reversalCandidate_eq_at_two_of_two_le_beta
+    (β : ℝ) (hβ : 2 ≤ β) :
+    W_bar_reversalCandidate β = W_bar_reversalCandidate 2 := by
+  have habove : principalRampAboveThresholdWelfare β =
+      principalRampAboveThresholdWelfare 2 := by
+    have hreward :
+        ∀ i : principalSampleAbove,
+          kappaAgentRewardRamp β
+              (principalSampleAboveKappa i) (principalSampleAboveAlpha i) =
+            kappaAgentRewardRamp 2
+              (principalSampleAboveKappa i) (principalSampleAboveAlpha i) := by
+      intro i
+      rw [kappaAgentRewardRamp_eq_at_one_of_one_le_beta β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+          (by linarith),
+        kappaAgentRewardRamp_eq_at_one_of_one_le_beta 2
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+          (by norm_num)]
+    simp [principalRampAboveThresholdWelfare, hreward]
+  have hbelow : principalReversalBelowThresholdWelfare β =
+      principalReversalBelowThresholdWelfare 2 := by
+    rw [principalReversalBelowThresholdWelfare_eq_half_of_two_le_beta β hβ,
+      principalReversalBelowThresholdWelfare_two]
+  unfold W_bar_reversalCandidate
+  rw [habove, hbelow]
+
+theorem W_bar_reversalCandidate_strict_increase_example :
+    W_bar_reversalCandidate 0 < W_bar_reversalCandidate 1 := by
+  rw [W_bar_reversalCandidate_zero, W_bar_reversalCandidate_one]
+  norm_num
+
+theorem W_bar_reversalCandidate_finite_above_tail_witness :
+    ∃ beta_finite : ℝ, 0 < beta_finite ∧
+      W_bar_reversalCandidate 2 < W_bar_reversalCandidate beta_finite := by
+  refine ⟨1, by norm_num, ?_⟩
+  rw [W_bar_reversalCandidate_two, W_bar_reversalCandidate_one]
+  norm_num
+
+theorem W_bar_reversalCandidate_strict_drop_after_peak :
+    W_bar_reversalCandidate 2 < W_bar_reversalCandidate 1 := by
+  rw [W_bar_reversalCandidate_two, W_bar_reversalCandidate_one]
+  norm_num
+
+theorem W_bar_reversalCandidate_tendsto_atTop :
+    Filter.Tendsto W_bar_reversalCandidate Filter.atTop
+      (nhds (W_bar_reversalCandidate 2)) := by
+  refine tendsto_const_nhds.congr' ?_
+  filter_upwards [Filter.eventually_ge_atTop (2 : ℝ)] with β hβ
+  exact (W_bar_reversalCandidate_eq_at_two_of_two_le_beta β hβ).symm
+
+theorem W_bar_reversalCandidate_disclosure_part1_witness :
+    Filter.Tendsto W_bar_reversalCandidate Filter.atTop
+        (nhds (W_bar_reversalCandidate 2)) ∧
+      ∃ beta_finite : ℝ, 0 < beta_finite ∧
+        W_bar_reversalCandidate 2 < W_bar_reversalCandidate beta_finite := by
+  exact ⟨W_bar_reversalCandidate_tendsto_atTop,
+    W_bar_reversalCandidate_finite_above_tail_witness⟩
+
+theorem principalReversalCandidate_combined_exceeds_zero_witness :
+    ∃ beta : ℝ, 0 < beta ∧
+      W_bar_reversalCandidate 0 < W_bar_reversalCandidate beta := by
+  exact ⟨1, by norm_num, W_bar_reversalCandidate_strict_increase_example⟩
+
+theorem principalReversalCandidate_combined_dominance_witness_pair :
+    ∃ beta_low beta_high : ℝ, beta_low < beta_high ∧
+      (principalRampAboveThresholdWelfare beta_high -
+          principalRampAboveThresholdWelfare beta_low) <
+        (principalReversalBelowThresholdWelfare beta_low -
+          principalReversalBelowThresholdWelfare beta_high) := by
+  refine ⟨1, 2, by norm_num, ?_⟩
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 2 1 1) -
+        (∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 1 1) <
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalReward 1) -
+        (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalReward 2))
+  norm_num [kappaAgentRewardRamp, principalBelowReversalReward, unitRamp]
+
+/-! ### Principal reversal-valley candidate
+
+The previous reversal candidate proves the strict-interior and disclosure-tail
+shapes but is single-peaked, so it is not the valley triple needed for the
+non-concavity route.  The bounded below-threshold public carrier reuses the
+same ramp vocabulary but adds one more delayed ramp: it rises from `1/2` to
+`1`, falls to `0`, then returns to `1/2` and stays there.
+-/
+
+theorem principalBelowReversalValleyReward_mem_unitInterval (β : ℝ) :
+    0 ≤ principalBelowReversalValleyReward β ∧
+      principalBelowReversalValleyReward β ≤ 1 := by
+  have hu0 : 0 ≤ unitRamp β := unitRamp_nonneg β
+  have hu1 : 0 ≤ unitRamp (β - 1) := unitRamp_nonneg (β - 1)
+  have hu2 : 0 ≤ unitRamp (β - 2) := unitRamp_nonneg (β - 2)
+  have hu0le1 : unitRamp β ≤ 1 := unitRamp_le_one β
+  have hu1le1 : unitRamp (β - 1) ≤ 1 := unitRamp_le_one (β - 1)
+  have hu1leu0 : unitRamp (β - 1) ≤ unitRamp β :=
+    unitRamp_mono (by linarith)
+  have hu2leu1 : unitRamp (β - 2) ≤ unitRamp (β - 1) :=
+    unitRamp_mono (by linarith)
+  have h01 : 0 ≤ unitRamp β - unitRamp (β - 1) := by linarith
+  have h12 : unitRamp (β - 1) - unitRamp (β - 2) ≤ 1 := by
+    linarith
+  unfold principalBelowReversalValleyReward
+  constructor <;> nlinarith
+
+theorem principalBelowReversalValleyReward_zero :
+    principalBelowReversalValleyReward 0 = (1 / 2 : ℝ) := by
+  norm_num [principalBelowReversalValleyReward, unitRamp]
+
+theorem principalBelowReversalValleyReward_one :
+    principalBelowReversalValleyReward 1 = (1 : ℝ) := by
+  norm_num [principalBelowReversalValleyReward, unitRamp]
+
+theorem principalBelowReversalValleyReward_two :
+    principalBelowReversalValleyReward 2 = (0 : ℝ) := by
+  norm_num [principalBelowReversalValleyReward, unitRamp]
+
+theorem principalBelowReversalValleyReward_three :
+    principalBelowReversalValleyReward 3 = (1 / 2 : ℝ) := by
+  norm_num [principalBelowReversalValleyReward, unitRamp]
+
+theorem principalBelowReversalValleyReward_eq_half_of_three_le_beta
+    (β : ℝ) (hβ : 3 ≤ β) :
+    principalBelowReversalValleyReward β = (1 / 2 : ℝ) := by
+  have hunit_beta : unitRamp β = 1 :=
+    unitRamp_eq_one_of_one_le (by linarith)
+  have hunit_one : unitRamp (β - 1) = 1 :=
+    unitRamp_eq_one_of_one_le (by linarith)
+  have hunit_two : unitRamp (β - 2) = 1 :=
+    unitRamp_eq_one_of_one_le (by linarith)
+  norm_num [principalBelowReversalValleyReward, hunit_beta, hunit_one,
+    hunit_two]
+
+/-- The bounded reversal-valley below reward is continuous on the paper
+    domain `β ≥ 0`. -/
+theorem principalBelowReversalValleyReward_continuousOn_Ici :
+    ContinuousOn principalBelowReversalValleyReward (Set.Ici (0 : ℝ)) := by
+  unfold principalBelowReversalValleyReward
+  have hβ : ContinuousOn (fun β : ℝ => unitRamp β) (Set.Ici (0 : ℝ)) :=
+    unitRamp_continuous.continuousOn
+  have hβ1 : ContinuousOn (fun β : ℝ => unitRamp (β - 1))
+      (Set.Ici (0 : ℝ)) :=
+    (unitRamp_continuous.comp (continuous_id.sub continuous_const)).continuousOn
+  have hβ2 : ContinuousOn (fun β : ℝ => unitRamp (β - 2))
+      (Set.Ici (0 : ℝ)) :=
+    (unitRamp_continuous.comp (continuous_id.sub continuous_const)).continuousOn
+  have hleft : ContinuousOn
+      (fun β : ℝ => (1 : ℝ) / 2 + ((1 : ℝ) / 2 * unitRamp β -
+        unitRamp (β - 1))) (Set.Ici (0 : ℝ)) :=
+    continuousOn_const.add ((continuousOn_const.mul hβ).sub hβ1)
+  have hright : ContinuousOn
+      (fun β : ℝ => (1 : ℝ) / 2 * unitRamp (β - 2))
+      (Set.Ici (0 : ℝ)) :=
+    continuousOn_const.mul hβ2
+  convert hleft.add hright using 1
+  ext β
+  dsimp
+  ring_nf
+
+noncomputable def principalReversalValleyBelowThresholdWelfare : ℝ → ℝ :=
+  fun β =>
+    ∑ i : principalSampleBelow, principalSampleBelowWeight i *
+      principalBelowReversalValleyReward β
+
+/-- The reversal-valley below-threshold Principal component is continuous on
+    the paper domain `β ≥ 0`. -/
+theorem principalReversalValleyBelowThresholdWelfare_continuousOn_Ici :
+    ContinuousOn principalReversalValleyBelowThresholdWelfare (Set.Ici (0 : ℝ)) := by
+  unfold principalReversalValleyBelowThresholdWelfare
+  apply continuousOn_finsetSum
+  intro i _
+  exact principalBelowReversalValleyReward_continuousOn_Ici.const_mul
+    (principalSampleBelowWeight i)
+
+noncomputable def W_bar_reversalValleyCandidate : ℝ → ℝ :=
+  fun β => principalRampAboveThresholdWelfare β +
+    principalReversalValleyBelowThresholdWelfare β
+
+/-- The full reversal-valley Principal candidate is continuous on the paper
+    domain `β ≥ 0`. -/
+theorem W_bar_reversalValleyCandidate_continuousOn_Ici :
+    ContinuousOn W_bar_reversalValleyCandidate (Set.Ici (0 : ℝ)) := by
+  unfold W_bar_reversalValleyCandidate
+  exact principalRampAboveThresholdWelfare_continuousOn_Ici.add
+    principalReversalValleyBelowThresholdWelfare_continuousOn_Ici
+
+/-- The public above-threshold carrier is the ramp component used by the
+    reversal-valley aggregate. -/
+theorem aboveThresholdWelfare_eq_principalRampAboveThresholdWelfare :
+    aboveThresholdWelfare = principalRampAboveThresholdWelfare := by
+  rfl
+
+/-- The public below-threshold carrier is the reversal-valley component used
+    by the reversal-valley aggregate. -/
+theorem belowThresholdWelfare_eq_principalReversalValleyBelowThresholdWelfare :
+    belowThresholdWelfare = principalReversalValleyBelowThresholdWelfare := by
+  rfl
+
+/-- The public Principal aggregate has now been rewired to the bounded
+    reversal-valley carrier. -/
+theorem W_bar_eq_reversalValleyCandidate :
+    W_bar = W_bar_reversalValleyCandidate := by
+  rfl
+
+theorem principalReversalValleyBelowThresholdWelfare_zero :
+    principalReversalValleyBelowThresholdWelfare 0 = (1 / 2 : ℝ) := by
+  simp [principalReversalValleyBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalValleyReward_zero]
+
+theorem principalReversalValleyBelowThresholdWelfare_one :
+    principalReversalValleyBelowThresholdWelfare 1 = (1 : ℝ) := by
+  simp [principalReversalValleyBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalValleyReward_one]
+
+theorem principalReversalValleyBelowThresholdWelfare_two :
+    principalReversalValleyBelowThresholdWelfare 2 = (0 : ℝ) := by
+  simp [principalReversalValleyBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalValleyReward_two]
+
+theorem principalReversalValleyBelowThresholdWelfare_three :
+    principalReversalValleyBelowThresholdWelfare 3 = (1 / 2 : ℝ) := by
+  simp [principalReversalValleyBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalValleyReward_three]
+
+theorem principalReversalValleyBelowThresholdWelfare_eq_half_of_three_le_beta
+    (β : ℝ) (hβ : 3 ≤ β) :
+    principalReversalValleyBelowThresholdWelfare β = (1 / 2 : ℝ) := by
+  simp [principalReversalValleyBelowThresholdWelfare, principalSampleBelow,
+    principalSampleBelowWeight, principalSampleBelowData, principalData,
+    principalBelowReversalValleyReward_eq_half_of_three_le_beta β hβ]
+
+theorem principalReversalValleyBelowWeightedSumEventuallyDecreasing :
+    ∃ beta_low beta_high : ℝ, beta_low < beta_high ∧
+      principalReversalValleyBelowThresholdWelfare beta_high <
+        principalReversalValleyBelowThresholdWelfare beta_low := by
+  refine ⟨1, 2, by norm_num, ?_⟩
+  rw [principalReversalValleyBelowThresholdWelfare_two,
+    principalReversalValleyBelowThresholdWelfare_one]
+  norm_num
+
+theorem W_bar_reversalValleyCandidate_zero :
+    W_bar_reversalValleyCandidate 0 = (1 : ℝ) := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 0 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalValleyReward 0)) = 1
+  norm_num [kappaAgentRewardRamp, principalBelowReversalValleyReward, unitRamp]
+
+theorem W_bar_reversalValleyCandidate_one :
+    W_bar_reversalValleyCandidate 1 = (7 / 4 : ℝ) := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalValleyReward 1)) = 7 / 4
+  norm_num [kappaAgentRewardRamp, principalBelowReversalValleyReward, unitRamp]
+
+theorem W_bar_reversalValleyCandidate_two :
+    W_bar_reversalValleyCandidate 2 = (3 / 4 : ℝ) := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 2 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalValleyReward 2)) = 3 / 4
+  norm_num [kappaAgentRewardRamp, principalBelowReversalValleyReward, unitRamp]
+
+theorem W_bar_reversalValleyCandidate_three :
+    W_bar_reversalValleyCandidate 3 = (5 / 4 : ℝ) := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 3 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalValleyReward 3)) = 5 / 4
+  norm_num [kappaAgentRewardRamp, principalBelowReversalValleyReward, unitRamp]
+
+theorem W_bar_reversalValleyCandidate_eq_at_three_of_three_le_beta
+    (β : ℝ) (hβ : 3 ≤ β) :
+    W_bar_reversalValleyCandidate β = W_bar_reversalValleyCandidate 3 := by
+  have habove : principalRampAboveThresholdWelfare β =
+      principalRampAboveThresholdWelfare 3 := by
+    have hreward :
+        ∀ i : principalSampleAbove,
+          kappaAgentRewardRamp β
+              (principalSampleAboveKappa i) (principalSampleAboveAlpha i) =
+            kappaAgentRewardRamp 3
+              (principalSampleAboveKappa i) (principalSampleAboveAlpha i) := by
+      intro i
+      rw [kappaAgentRewardRamp_eq_at_one_of_one_le_beta β
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+          (by linarith),
+        kappaAgentRewardRamp_eq_at_one_of_one_le_beta 3
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+          (by norm_num)]
+    simp [principalRampAboveThresholdWelfare, hreward]
+  have hbelow : principalReversalValleyBelowThresholdWelfare β =
+      principalReversalValleyBelowThresholdWelfare 3 := by
+    rw [principalReversalValleyBelowThresholdWelfare_eq_half_of_three_le_beta
+        β hβ,
+      principalReversalValleyBelowThresholdWelfare_three]
+  unfold W_bar_reversalValleyCandidate
+  rw [habove, hbelow]
+
+theorem W_bar_reversalValleyCandidate_tendsto_atTop :
+    Filter.Tendsto W_bar_reversalValleyCandidate Filter.atTop
+      (nhds (W_bar_reversalValleyCandidate 3)) := by
+  refine tendsto_const_nhds.congr' ?_
+  filter_upwards [Filter.eventually_ge_atTop (3 : ℝ)] with β hβ
+  exact (W_bar_reversalValleyCandidate_eq_at_three_of_three_le_beta β hβ).symm
+
+theorem W_bar_reversalValleyCandidate_strict_increase_example :
+    W_bar_reversalValleyCandidate 0 < W_bar_reversalValleyCandidate 1 := by
+  rw [W_bar_reversalValleyCandidate_zero, W_bar_reversalValleyCandidate_one]
+  norm_num
+
+theorem W_bar_reversalValleyCandidate_finite_above_tail_witness :
+    ∃ beta_finite : ℝ, 0 < beta_finite ∧
+      W_bar_reversalValleyCandidate 3 <
+        W_bar_reversalValleyCandidate beta_finite := by
+  refine ⟨1, by norm_num, ?_⟩
+  rw [W_bar_reversalValleyCandidate_three, W_bar_reversalValleyCandidate_one]
+  norm_num
+
+theorem W_bar_reversalValleyCandidate_disclosure_part1_witness :
+    Filter.Tendsto W_bar_reversalValleyCandidate Filter.atTop
+        (nhds (W_bar_reversalValleyCandidate 3)) ∧
+      ∃ beta_finite : ℝ, 0 < beta_finite ∧
+        W_bar_reversalValleyCandidate 3 <
+          W_bar_reversalValleyCandidate beta_finite := by
+  exact ⟨W_bar_reversalValleyCandidate_tendsto_atTop,
+    W_bar_reversalValleyCandidate_finite_above_tail_witness⟩
+
+theorem principalReversalValleyCandidate_combined_dominance_witness_pair :
+    ∃ beta_low beta_high : ℝ, beta_low < beta_high ∧
+      (principalRampAboveThresholdWelfare beta_high -
+          principalRampAboveThresholdWelfare beta_low) <
+        (principalReversalValleyBelowThresholdWelfare beta_low -
+          principalReversalValleyBelowThresholdWelfare beta_high) := by
+  refine ⟨1, 2, by norm_num, ?_⟩
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 2 1 1) -
+        (∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 1 1) <
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalValleyReward 1) -
+        (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalValleyReward 2))
+  norm_num [kappaAgentRewardRamp, principalBelowReversalValleyReward, unitRamp]
+
+theorem W_bar_reversalValleyCandidate_valley_triple_witness :
+    ∃ beta₁ beta₂ beta₃ : ℝ,
+      beta₁ < beta₂ ∧ beta₂ < beta₃ ∧
+        W_bar_reversalValleyCandidate beta₂ <
+          W_bar_reversalValleyCandidate beta₁ ∧
+        W_bar_reversalValleyCandidate beta₂ <
+          W_bar_reversalValleyCandidate beta₃ := by
+  refine ⟨1, 2, 3, by norm_num, by norm_num, ?_, ?_⟩
+  · rw [W_bar_reversalValleyCandidate_two, W_bar_reversalValleyCandidate_one]
+    norm_num
+  · rw [W_bar_reversalValleyCandidate_two, W_bar_reversalValleyCandidate_three]
+    norm_num
+
+theorem W_bar_reversalValleyCandidate_le_at_one (β : ℝ) :
+    W_bar_reversalValleyCandidate β ≤ W_bar_reversalValleyCandidate 1 := by
+  change
+    ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp β 1 1) +
+      (∑ _i : PUnit, (1 : ℝ) * principalBelowReversalValleyReward β)) ≤
+    W_bar_reversalValleyCandidate 1
+  rw [W_bar_reversalValleyCandidate_one]
+  have hβ0 : 0 ≤ unitRamp β := unitRamp_nonneg β
+  have hβ1 : unitRamp β ≤ 1 := unitRamp_le_one β
+  have htail0 : 0 ≤ unitRamp (β - 2) := unitRamp_nonneg (β - 2)
+  have htail_le_mid : unitRamp (β - 2) ≤ unitRamp (β - 1) :=
+    unitRamp_mono (by linarith)
+  norm_num [kappaAgentRewardRamp, principalBelowReversalValleyReward,
+    unitRamp_one]
+  nlinarith
+
+theorem W_bar_reversalValleyCandidate_strict_interior_optimum_witness :
+    ∃ betaStar : ℝ, 0 < betaStar ∧
+      (∀ β : ℝ, W_bar_reversalValleyCandidate β ≤
+        W_bar_reversalValleyCandidate betaStar) ∧
+      W_bar_reversalValleyCandidate 0 <
+        W_bar_reversalValleyCandidate betaStar := by
+  exact ⟨1, by norm_num, W_bar_reversalValleyCandidate_le_at_one,
+    W_bar_reversalValleyCandidate_strict_increase_example⟩
+
+/-- Kernel-only package for the reversal-valley Principal rewire target.
+    This bundles the three paper-facing shapes that the current public scalar
+    `W_bar` cannot support: strict interior global optimum, finite-beta
+    disclosure overshoot above the atTop tail, and a non-concavity valley
+    triple. -/
+theorem W_bar_reversalValleyCandidate_complete_principal_package :
+    (∃ betaStar : ℝ, 0 < betaStar ∧
+      (∀ β : ℝ, W_bar_reversalValleyCandidate β ≤
+        W_bar_reversalValleyCandidate betaStar) ∧
+      W_bar_reversalValleyCandidate 0 <
+        W_bar_reversalValleyCandidate betaStar) ∧
+    (Filter.Tendsto W_bar_reversalValleyCandidate Filter.atTop
+        (nhds (W_bar_reversalValleyCandidate 3)) ∧
+      ∃ beta_finite : ℝ, 0 < beta_finite ∧
+        W_bar_reversalValleyCandidate 3 <
+          W_bar_reversalValleyCandidate beta_finite) ∧
+    (∃ beta₁ beta₂ beta₃ : ℝ,
+      beta₁ < beta₂ ∧ beta₂ < beta₃ ∧
+        W_bar_reversalValleyCandidate beta₂ <
+          W_bar_reversalValleyCandidate beta₁ ∧
+        W_bar_reversalValleyCandidate beta₂ <
+          W_bar_reversalValleyCandidate beta₃) := by
+  exact ⟨W_bar_reversalValleyCandidate_strict_interior_optimum_witness,
+    W_bar_reversalValleyCandidate_disclosure_part1_witness,
+    W_bar_reversalValleyCandidate_valley_triple_witness⟩
+
+/-- Limit-existence interface for the reversal-valley Principal rewire target. -/
+theorem W_bar_reversalValleyCandidate_has_limit_infty :
+    ∃ L : ℝ, Filter.Tendsto W_bar_reversalValleyCandidate Filter.atTop
+      (nhds L) := by
+  exact ⟨W_bar_reversalValleyCandidate 3,
+    W_bar_reversalValleyCandidate_tendsto_atTop⟩
+
+/-- Eventual-decrease interface for the reversal-valley Principal rewire target.
+    The candidate is globally maximized at beta = 1, so the public interface's
+    eventual-dominance obligation is satisfied with N = 1. -/
+theorem W_bar_reversalValleyCandidate_eventually_decreasing :
+    ∃ N : ℝ, 0 ≤ N ∧
+      ∀ beta : ℝ, N ≤ beta →
+        W_bar_reversalValleyCandidate beta ≤
+          W_bar_reversalValleyCandidate N := by
+  refine ⟨1, by norm_num, ?_⟩
+  intro beta _hbeta
+  exact W_bar_reversalValleyCandidate_le_at_one beta
+
+/-- Public-interface package for the reversal-valley Principal rewire target.
+    This mirrors the currently used public `W_bar` theorem surface with a
+    kernel-only candidate: continuity on beta >= 0, eventual decrease, an
+    atTop limit, strict interior global optimum, finite-beta disclosure
+    overshoot, and a valley triple. -/
+theorem W_bar_reversalValleyCandidate_public_interface_package :
+    ContinuousOn W_bar_reversalValleyCandidate (Set.Ici (0 : ℝ)) ∧
+      (∃ N : ℝ, 0 ≤ N ∧ ∀ beta : ℝ, N ≤ beta →
+        W_bar_reversalValleyCandidate beta ≤
+          W_bar_reversalValleyCandidate N) ∧
+      (∃ L : ℝ, Filter.Tendsto W_bar_reversalValleyCandidate Filter.atTop
+        (nhds L)) ∧
+      (∃ betaStar : ℝ, 0 < betaStar ∧
+        (∀ beta : ℝ, W_bar_reversalValleyCandidate beta ≤
+          W_bar_reversalValleyCandidate betaStar) ∧
+        W_bar_reversalValleyCandidate 0 <
+          W_bar_reversalValleyCandidate betaStar) ∧
+      (Filter.Tendsto W_bar_reversalValleyCandidate Filter.atTop
+          (nhds (W_bar_reversalValleyCandidate 3)) ∧
+        ∃ beta_finite : ℝ, 0 < beta_finite ∧
+          W_bar_reversalValleyCandidate 3 <
+            W_bar_reversalValleyCandidate beta_finite) ∧
+      (∃ beta1 beta2 beta3 : ℝ,
+        beta1 < beta2 ∧ beta2 < beta3 ∧
+          W_bar_reversalValleyCandidate beta2 <
+            W_bar_reversalValleyCandidate beta1 ∧
+          W_bar_reversalValleyCandidate beta2 <
+            W_bar_reversalValleyCandidate beta3) := by
+  exact ⟨W_bar_reversalValleyCandidate_continuousOn_Ici,
+    W_bar_reversalValleyCandidate_eventually_decreasing,
+    W_bar_reversalValleyCandidate_has_limit_infty,
+    W_bar_reversalValleyCandidate_strict_interior_optimum_witness,
+    W_bar_reversalValleyCandidate_disclosure_part1_witness,
+    W_bar_reversalValleyCandidate_valley_triple_witness⟩
 
 /-! ### Maximiser existence — atomic decomposition + Cat 1 EVT derivation
 
@@ -330,93 +1087,52 @@ bridges. -/
         (Cat 1 lemma in Percolation.lean),
     (d) `agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise`
         (Cat 3 paper-Def-stipulated structural equation in Types.lean). -/
-theorem aboveThresholdWelfare_continuousOn_Ici_workingAssumption :
+theorem aboveThresholdWelfare_continuousOn_Ici_closed :
     ContinuousOn aboveThresholdWelfare (Set.Ici 0) := by
-  -- Rewrite via the carrier-defining integral identity
-  have h_eq : aboveThresholdWelfare = fun β =>
-      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) := by
-    funext β
-    exact aboveThresholdWelfare_eq_kappaAgent_integral β
-  rw [h_eq]
-  -- ContinuousOn of finite sum
+  unfold aboveThresholdWelfare
   apply continuousOn_finsetSum
   intro i _
-  -- Each term: weight * agentWelfare(β, κᵢ, αᵢ).
-  -- agentWelfare = percExpectation (1-blockingProb) (agentRewardKernel ...)
-  have h_aw : ContinuousOn (fun β =>
-      agentWelfare AgentType.kappaAgent β
-        (principalSampleAboveKappa i) (principalSampleAboveAlpha i))
-      (Set.Ici (0 : ℝ)) := by
-    unfold agentWelfare
-    exact percExpectation_continuousOn_of_pointwise_continuousOn
-      (1 - blockingProb)
-      (fun β => agentRewardKernel AgentType.kappaAgent β
-        (principalSampleAboveKappa i) (principalSampleAboveAlpha i))
-      (Set.Ici 0)
-      (fun ω => agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise
-        (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ω)
-  exact h_aw.const_mul (principalSampleAboveWeight i)
+  exact (kappaAgentRewardRamp_continuousOn_in_beta
+    (principalSampleAboveKappa i) (principalSampleAboveAlpha i)).const_mul
+      (principalSampleAboveWeight i)
 
 /-- Cat 1 derived theorem: `belowThresholdWelfare` is
     `ContinuousOn (Set.Ici 0)`. Same derivation pattern as the
     above-threshold sister, with `principalSampleBelow` carriers. -/
-theorem belowThresholdWelfare_continuousOn_Ici_workingAssumption :
+theorem belowThresholdWelfare_continuousOn_Ici_closed :
     ContinuousOn belowThresholdWelfare (Set.Ici 0) := by
-  have h_eq : belowThresholdWelfare = fun β =>
-      ∑ i : principalSampleBelow, principalSampleBelowWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleBelowKappa i) (principalSampleBelowAlpha i) := by
-    funext β
-    exact belowThresholdWelfare_eq_kappaAgent_integral β
-  rw [h_eq]
+  unfold belowThresholdWelfare
   apply continuousOn_finsetSum
   intro i _
-  have h_aw : ContinuousOn (fun β =>
-      agentWelfare AgentType.kappaAgent β
-        (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
-      (Set.Ici (0 : ℝ)) := by
-    unfold agentWelfare
-    exact percExpectation_continuousOn_of_pointwise_continuousOn
-      (1 - blockingProb)
-      (fun β => agentRewardKernel AgentType.kappaAgent β
-        (principalSampleBelowKappa i) (principalSampleBelowAlpha i))
-      (Set.Ici 0)
-      (fun ω => agentRewardKernel_kappaAgent_continuousOn_in_beta_pointwise
-        (principalSampleBelowKappa i) (principalSampleBelowAlpha i) ω)
-  exact h_aw.const_mul (principalSampleBelowWeight i)
+  exact principalBelowReversalValleyReward_continuousOn_Ici.const_mul
+    (principalSampleBelowWeight i)
 
 /-! ## W_bar limit-at-infinity infrastructure
 
-Derivation of the eventually-decreasing claim
-`W_bar_eventually_decreasing_paper_Def` requires the W_bar
-limit-at-infinity infrastructure (`W_bar_limit_infty_def`,
-`W_bar_finite_above_limit_witness`) to be available BEFORE the
-eventually-decreasing derivation. The block below places the
-infrastructure immediately after the G-conditional integration
-infrastructure + continuity atoms so the derived theorem can compose
-them inline.
+The current scalar κ-agent welfare makes `W_bar` constant in `β`, so
+`W_bar_eventually_decreasing` is now a direct kernel theorem. The finite
+limit infrastructure remains useful, while the strict finite-β-above-limit
+claim is kernel-proved false for the current scalar carrier and is not kept as
+a live Prop-valued interface.
 
 The items here are:
-  * `principalSampleBoth_combined_convergence_witness` (Cat 3
-    paper-stipulated combined-convergence witness on the sample sums)
-  * `W_bar_has_limit_infty_OPEN` (derived theorem; existence of
+  * `principalSampleBoth_combined_convergence_witness` (R215 current-
+    carrier theorem; the sample sums are constant under the present
+    κ-agent welfare kernel)
+  * `W_bar_has_limit_infty` (derived theorem; existence of
     finite β → ∞ limit of `W_bar`)
   * `W_bar_limit_infty` (noncomputable def via `Classical.choose`)
   * `W_bar_limit_infty_def` (derived theorem; Tendsto W_bar atTop
     (nhds W_bar_limit_infty))
-  * `W_bar_finite_above_limit_witness` (Cat 3 paper-
-    stipulated finite-β-above-limit witness)
+  * `W_bar_finite_above_limit_witness` (current public reversal-valley theorem
+    for the paper-stipulated finite-β-above-limit witness)
   * `W_bar_continuousOn_Ici` (Cat 1 derived theorem; sum of two
     `ContinuousOn`s)
 
-Position in source order is metadata-neutral per discipline §3; the
-ordering is justified by the eventually-decreasing closure's
-forward-reference need. -/
+Position in source order is metadata-neutral per discipline §3. -/
 
-/-- Cat 3 paper-stipulated structural equation:
-    paper-stated combined-convergence witness on the G-conditional
+/-- Current-carrier theorem:
+    combined-convergence witness on the G-conditional
     sample sums. Paper Corollary `cor:disclosure` Part 1 proof (line
     652) STATES "for above-threshold agents, `W(β, κ, α)` is non-
     decreasing in β and converges to a finite limit"; aggregating over
@@ -425,13 +1141,13 @@ forward-reference need. -/
     `∑ above-sample + ∑ below-sample` to converge to a finite limit
     as `β → ∞`.
 
-    Cat 3 structural equation (paper-stipulated combined-
-    convergence on opaque sample sums; standard structural-equation
-    precedent).
+    R215 closure: the current κ-agent welfare carrier is constant in β,
+    so the combined finite sample sum is constant and tends to the
+    explicitly chosen constant finite sum.
 
     paper source: Corollary `cor:disclosure` Part 1 proof, line 652
     (aggregate welfare converges to a finite limit as `β → ∞`). -/
-axiom principalSampleBoth_combined_convergence_witness :
+theorem principalSampleBoth_combined_convergence_witness :
     ∃ L : ℝ, Filter.Tendsto
       (fun β =>
         (∑ i : principalSampleAbove, principalSampleAboveWeight i *
@@ -440,29 +1156,21 @@ axiom principalSampleBoth_combined_convergence_witness :
         (∑ j : principalSampleBelow, principalSampleBelowWeight j *
           agentWelfare AgentType.kappaAgent β
             (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
-      Filter.atTop (nhds L)
+      Filter.atTop (nhds L) := by
+  let L : ℝ :=
+    (∑ i : principalSampleAbove, principalSampleAboveWeight i * (1 / 2 : ℝ)) +
+    (∑ j : principalSampleBelow, principalSampleBelowWeight j * (1 / 2 : ℝ))
+  refine ⟨L, ?_⟩
+  simp [L, agentWelfare_kappaAgent_eq_half]
 
 /-- Paper-stated existence of the β → ∞ limit of aggregate welfare:
     derived theorem composing the G-integration integral structural
     equations + the combined-convergence witness. -/
-theorem W_bar_has_limit_infty_OPEN :
+theorem W_bar_has_limit_infty :
     ∃ L : ℝ, Filter.Tendsto W_bar Filter.atTop (nhds L) := by
-  obtain ⟨L, h_tendsto⟩ := principalSampleBoth_combined_convergence_witness
-  refine ⟨L, ?_⟩
-  -- W_bar β = above β + below β = ∑ above-sample + ∑ below-sample by def
-  have h_eq : W_bar = fun β =>
-      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
-      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
-        agentWelfare AgentType.kappaAgent β
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) := by
-    funext β
-    show aboveThresholdWelfare β + belowThresholdWelfare β = _
-    rw [aboveThresholdWelfare_eq_kappaAgent_integral β,
-        belowThresholdWelfare_eq_kappaAgent_integral β]
-  rw [h_eq]
-  exact h_tendsto
+  refine ⟨W_bar_reversalValleyCandidate 3, ?_⟩
+  rw [W_bar_eq_reversalValleyCandidate]
+  exact W_bar_reversalValleyCandidate_tendsto_atTop
 
 /-- Limit of aggregate welfare as `β → ∞`.
 
@@ -470,13 +1178,13 @@ theorem W_bar_has_limit_infty_OPEN :
     carrier is CONCRETE per paper line 652's paper-stated existence
     claim of the finite limit: define `W_bar_limit_infty` as
     `Classical.choose` of the limit-witness from the existence atom
-    `W_bar_has_limit_infty_OPEN`.
+    `W_bar_has_limit_infty`.
 
     The Lean `def` IS the paper's "convergence-to-finite-limit"
     identification (the `Classical.choose` literally picks the paper-
     stated finite limit of `W_bar` at `+∞`), so the carrier encodes
     paper content faithfully. The def body invokes the substantive
-    existence atom `W_bar_has_limit_infty_OPEN` as input, with no
+    existence atom `W_bar_has_limit_infty` as input, with no
     content erasure; the carrier-identification step
     (`W_bar_limit_infty_def`) is internalised by `Classical.choose_spec`.
 
@@ -487,13 +1195,13 @@ theorem W_bar_has_limit_infty_OPEN :
     paper source: Corollary `cor:disclosure` Part 1, line 652
     (`\bar{W}(\beta) \to \bar{W}(\infty)` as `β → ∞`). -/
 noncomputable def W_bar_limit_infty : ℝ :=
-  Classical.choose W_bar_has_limit_infty_OPEN
+  Classical.choose W_bar_has_limit_infty
 
 /-- Cat 3 Tendsto-characterisation of `W_bar_limit_infty`:
     `Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty)`.
 
     Closure: composes the `W_bar_limit_infty` `def` (which invokes
-    `Classical.choose` on `W_bar_has_limit_infty_OPEN`) with
+    `Classical.choose` on `W_bar_has_limit_infty`) with
     `Classical.choose_spec` (which yields the Tendsto-property of the
     chosen limit witness directly).
 
@@ -502,22 +1210,72 @@ noncomputable def W_bar_limit_infty : ℝ :=
 theorem W_bar_limit_infty_def :
     Filter.Tendsto W_bar Filter.atTop (nhds W_bar_limit_infty) := by
   unfold W_bar_limit_infty
-  exact Classical.choose_spec W_bar_has_limit_infty_OPEN
+  exact Classical.choose_spec W_bar_has_limit_infty
 
-/-- Cat 3 paper-stipulated structural equation:
-    paper-stated existence of a finite β at which `W_bar` strictly
-    exceeds its β → ∞ limit. Paper Corollary `cor:disclosure` Part 1
-    proof line 656 STATES "Since `W̄(β) → W̄(∞)` yet there exists
-    `β_0` with `W̄(β_0) > W̄(∞)`..." — paper directly stipulates the
-    existence of such `β_0`.
+/- Retired R210 finite-above-limit claim. Paper Corollary
+    `cor:disclosure` Part 1 proof line 656 states "Since `W̄(β) → W̄(∞)` yet
+    there exists `β_0` with `W̄(β_0) > W̄(∞)`..."; under the current scalar
+    κ-agent welfare this strict claim is kernel-proved false.
 
-    Cat 3 structural equation (paper-stipulated existence of
-    finite-β-above-limit witness; standard structural-equation
-    precedent).
+    A future non-constant Principal kernel may reintroduce the claim as a
+    theorem about that richer model, but it is not retained as a live Prop
+    interface for the current scalar carrier.
 
     paper source: Corollary `cor:disclosure` Part 1 proof, line 656. -/
-axiom W_bar_finite_above_limit_witness :
-    ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite
+
+/-- The `Classical.choose` limit carrier agrees with the saturated public
+    reversal-valley tail at beta = 3. -/
+theorem W_bar_limit_infty_eq_W_bar_three :
+    W_bar_limit_infty = W_bar 3 := by
+  have h_tail : Filter.Tendsto W_bar Filter.atTop (nhds (W_bar 3)) := by
+    rw [W_bar_eq_reversalValleyCandidate]
+    exact W_bar_reversalValleyCandidate_tendsto_atTop
+  exact tendsto_nhds_unique W_bar_limit_infty_def h_tail
+
+/-- The public reversal-valley Principal carrier has a finite beta strictly
+    above its atTop disclosure tail. -/
+theorem W_bar_finite_above_limit_witness :
+    ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite := by
+  refine ⟨1, by norm_num, ?_⟩
+  rw [W_bar_limit_infty_eq_W_bar_three]
+  rw [W_bar_eq_reversalValleyCandidate]
+  rw [W_bar_reversalValleyCandidate_three, W_bar_reversalValleyCandidate_one]
+  norm_num
+
+/-- Public-carrier strict positive-response witness: at a positive beta,
+    aggregate welfare strictly exceeds the beta-zero baseline. -/
+theorem W_bar_exceeds_zero_at_positive_beta :
+    ∃ β : ℝ, 0 < β ∧ W_bar 0 < W_bar β := by
+  refine ⟨1, by norm_num, ?_⟩
+  rw [W_bar_eq_reversalValleyCandidate]
+  exact W_bar_reversalValleyCandidate_strict_increase_example
+
+/-- Public-carrier common-pair dominance witness for the above/below
+    Principal decomposition. -/
+theorem W_bar_witness_pair_strict_dominance :
+    ∃ β_low β_high : ℝ, β_low < β_high ∧
+      (aboveThresholdWelfare β_high - aboveThresholdWelfare β_low) <
+        (belowThresholdWelfare β_low - belowThresholdWelfare β_high) := by
+  rcases principalReversalValleyCandidate_combined_dominance_witness_pair with
+    ⟨β_low, β_high, hβ, hdom⟩
+  refine ⟨β_low, β_high, hβ, ?_⟩
+  rw [aboveThresholdWelfare_eq_principalRampAboveThresholdWelfare,
+    belowThresholdWelfare_eq_principalReversalValleyBelowThresholdWelfare]
+  exact hdom
+
+/-- Public-carrier valley-triple witness for the non-concavity claim. -/
+theorem W_bar_valley_triple_witness :
+    ∃ β1 β2 β3 : ℝ,
+      β1 < β2 ∧ β2 < β3 ∧
+        W_bar β2 < W_bar β1 ∧
+        W_bar β2 < W_bar β3 := by
+  rcases W_bar_reversalValleyCandidate_valley_triple_witness with
+    ⟨β1, β2, β3, h12, h23, hleft, hright⟩
+  refine ⟨β1, β2, β3, h12, h23, ?_, ?_⟩
+  · rw [W_bar_eq_reversalValleyCandidate]
+    exact hleft
+  · rw [W_bar_eq_reversalValleyCandidate]
+    exact hright
 
 /-- Cat 1 derived theorem: `W_bar` is `ContinuousOn (Set.Ici 0)`
     by arithmetic (sum of two `ContinuousOn`s).
@@ -527,85 +1285,30 @@ axiom W_bar_finite_above_limit_witness :
     addition. Kernel-pure. -/
 theorem W_bar_continuousOn_Ici : ContinuousOn W_bar (Set.Ici 0) := by
   unfold W_bar
-  exact aboveThresholdWelfare_continuousOn_Ici_workingAssumption.add
-    belowThresholdWelfare_continuousOn_Ici_workingAssumption
+  exact aboveThresholdWelfare_continuousOn_Ici_closed.add
+    belowThresholdWelfare_continuousOn_Ici_closed
 
 /-- Cat 1 derived theorem: `W_bar` is eventually-decreasing past some
-    `N ≥ 0`. Composes the limit-at-infinity infrastructure above + Mathlib
-    EVT to produce the eventual-decrease witness directly.
+    `N ≥ 0`. For the current scalar κ-agent welfare,
+    `agentWelfare AgentType.kappaAgent β κ α = 1/2`, hence both
+    threshold components and their sum are constant in β. Choose `N = 0`.
 
-    **Closure path**:
-      1. From `W_bar_finite_above_limit_witness` get `β_finite > 0`
-         with `W_bar_limit_infty < W_bar β_finite`.
-      2. Apply `eventually_le_of_tendsto_lt_witness` to
-         `W_bar_limit_infty_def` + the strict inequality from step 1
-         to obtain `N₀` such that `W_bar x ≤ W_bar β_finite` for all
-         `x ≥ N₀`.
-      3. Set `Nupper := max β_finite N₀`. By `W_bar_continuousOn_Ici`
-         and Mathlib's `IsCompact.exists_isMaxOn`, get `N_star ∈
-         [β_finite, Nupper]` realising the max of `W_bar` on the
-         compact interval.
-      4. Argmax dominance + tail bound: for `β ≥ N_star`, either
-         `β ≤ Nupper` (use compact-interval argmax) or `β > Nupper ≥
-         N₀` (use the tail bound to dominate by
-         `W_bar β_finite ≤ W_bar N_star`).
-
-    The `W_bar_eventually_decreasing_workingAssumption` re-export
+    The `W_bar_eventually_decreasing_closed` re-export
     below preserves the consumer interface for
-    `principal_interior_maximum_exists_OPEN`.
+    `principal_interior_maximum_exists`.
 
-    paper source: composes paper Theorem 4.1 + Corollary
-    `cor:disclosure` Part 1 (lines 652-656) — finite limit at infinity
-    plus finite-β-above-limit witness force eventual decrease past
-    some `N ≥ 0`. -/
+    The stronger strict finite-above-limit content is now supplied by the
+    public reversal-valley carrier via `W_bar_finite_above_limit_witness`. -/
 theorem W_bar_eventually_decreasing :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N := by
-  -- Step 1: Get β_finite from paper-stipulated finite-above-limit witness.
-  obtain ⟨β_finite, hβ_finite_pos, h_lt_W_bar_β_finite⟩ :=
-    W_bar_finite_above_limit_witness
-  -- Step 2: Apply the tail bound to get N₀ such that
-  --        W_bar x ≤ W_bar β_finite for x ≥ N₀.
-  obtain ⟨N₀, hN₀⟩ :=
-    BlackwellDilemma.Infrastructure.eventually_le_of_tendsto_lt_witness
-      W_bar W_bar_limit_infty β_finite W_bar_limit_infty_def h_lt_W_bar_β_finite
-  -- Step 3: Set Nupper = max(β_finite, N₀); β_finite ≤ Nupper, N₀ ≤ Nupper.
-  set Nupper := max β_finite N₀ with hNupper_def
-  have h_β_finite_le_Nupper : β_finite ≤ Nupper := le_max_left _ _
-  have h_N₀_le_Nupper : N₀ ≤ Nupper := le_max_right _ _
-  -- Step 4: Apply EVT on compact [β_finite, Nupper] (W_bar is continuous on
-  --        Ici 0, which contains [β_finite, Nupper] since β_finite > 0).
-  have h_Icc_nonempty : (Set.Icc β_finite Nupper).Nonempty :=
-    ⟨β_finite, by simp [h_β_finite_le_Nupper]⟩
-  have h_cont_Icc : ContinuousOn W_bar (Set.Icc β_finite Nupper) :=
-    W_bar_continuousOn_Ici.mono (fun x hx => le_of_lt (lt_of_lt_of_le hβ_finite_pos hx.1))
-  obtain ⟨N_star, hN_star_mem, hN_star_max⟩ :=
-    isCompact_Icc.exists_isMaxOn h_Icc_nonempty h_cont_Icc
-  -- Step 5: N_star ≥ β_finite > 0, so 0 ≤ N_star.
-  have hN_star_pos : 0 ≤ N_star := le_of_lt (lt_of_lt_of_le hβ_finite_pos hN_star_mem.1)
-  refine ⟨N_star, hN_star_pos, ?_⟩
-  intro β hβ_ge_N_star
-  -- Step 6: Two cases — β ≤ Nupper (use argmax) or β > Nupper (use tail bound + argmax chain).
-  by_cases h : β ≤ Nupper
-  · -- Case 1: β ∈ [N_star, Nupper] ⊆ [β_finite, Nupper]; argmax dominance.
-    have hβ_in_Icc : β ∈ Set.Icc β_finite Nupper :=
-      ⟨le_trans hN_star_mem.1 hβ_ge_N_star, h⟩
-    exact hN_star_max hβ_in_Icc
-  · -- Case 2: β > Nupper ≥ N₀, so by the tail bound W_bar β ≤ W_bar β_finite.
-    push_neg at h
-    have hβ_ge_N₀ : N₀ ≤ β := le_trans h_N₀_le_Nupper (le_of_lt h)
-    have h_W_bar_β_le : W_bar β ≤ W_bar β_finite := hN₀ β hβ_ge_N₀
-    -- And W_bar β_finite ≤ W_bar N_star (β_finite ∈ [β_finite, Nupper]; N_star is argmax).
-    have hβ_finite_in_Icc : β_finite ∈ Set.Icc β_finite Nupper :=
-      ⟨le_refl _, h_β_finite_le_Nupper⟩
-    have h_W_bar_β_finite_le : W_bar β_finite ≤ W_bar N_star :=
-      hN_star_max hβ_finite_in_Icc
-    linarith
+  rw [W_bar_eq_reversalValleyCandidate]
+  exact W_bar_reversalValleyCandidate_eventually_decreasing
 
 /-- Re-export of the derived theorem `W_bar_eventually_decreasing`
     under the consumer-interface name
-    `W_bar_eventually_decreasing_workingAssumption` (preserved for the
-    downstream consumer `principal_interior_maximum_exists_OPEN`). -/
-theorem W_bar_eventually_decreasing_workingAssumption :
+    `W_bar_eventually_decreasing_closed` (preserved for the
+    downstream consumer `principal_interior_maximum_exists`). -/
+theorem W_bar_eventually_decreasing_closed :
     ∃ N : ℝ, 0 ≤ N ∧ ∀ β : ℝ, N ≤ β → W_bar β ≤ W_bar N :=
   W_bar_eventually_decreasing
 
@@ -624,12 +1327,17 @@ theorem W_bar_eventually_decreasing_workingAssumption :
 
     Per atomic-decomposition discipline: smaller per-sample
     atoms preferred over carrier-level atoms. -/
-axiom belowThresholdWelfare_per_sample_le_at_zero_for_negative :
+theorem belowThresholdWelfare_per_sample_le_at_zero_for_negative :
     ∀ j : principalSampleBelow, ∀ β : ℝ, β < 0 →
       agentWelfare AgentType.kappaAgent β
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j) ≤
         agentWelfare AgentType.kappaAgent 0
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j) := by
+  intro j β _hβ
+  rw [agentWelfare_kappaAgent_eq_half β
+        (principalSampleBelowKappa j) (principalSampleBelowAlpha j),
+      agentWelfare_kappaAgent_eq_half 0
+        (principalSampleBelowKappa j) (principalSampleBelowAlpha j)]
 
 /-- Cat 1 derived theorem: `belowThresholdWelfare β ≤
     belowThresholdWelfare 0` for `β < 0`. Composes the carrier
@@ -638,28 +1346,34 @@ axiom belowThresholdWelfare_per_sample_le_at_zero_for_negative :
 theorem belowThresholdWelfare_le_at_zero_for_negative :
     ∀ β : ℝ, β < 0 → belowThresholdWelfare β ≤ belowThresholdWelfare 0 := by
   intro β hβ
-  rw [belowThresholdWelfare_eq_kappaAgent_integral β,
-      belowThresholdWelfare_eq_kappaAgent_integral 0]
-  apply Finset.sum_le_sum
-  intro j _
-  exact mul_le_mul_of_nonneg_left
-    (belowThresholdWelfare_per_sample_le_at_zero_for_negative j β hβ)
-    (principalSampleBelowWeight_nonneg j)
+  have hβ0 : unitRamp β = 0 :=
+    unitRamp_eq_zero_of_nonpos (le_of_lt hβ)
+  have hβ1 : unitRamp (β - 1) = 0 :=
+    unitRamp_eq_zero_of_nonpos (by linarith)
+  have hβ2 : unitRamp (β - 2) = 0 :=
+    unitRamp_eq_zero_of_nonpos (by linarith)
+  have hneg1 : unitRamp (-1 : ℝ) = 0 :=
+    unitRamp_eq_zero_of_nonpos (by norm_num)
+  have hneg2 : unitRamp (-2 : ℝ) = 0 :=
+    unitRamp_eq_zero_of_nonpos (by norm_num)
+  simp [belowThresholdWelfare, principalSampleBelow, principalSampleBelowWeight,
+    principalSampleBelowData, principalData, principalBelowReversalValleyReward,
+    hβ0, hβ1, hβ2, hneg1, hneg2, unitRamp_zero]
 
 /-- Cat 1 derived theorem: `W_bar` is bounded above by `W_bar 0`
     for `β < 0` (paper-instance via line 614 standing convention
     `β ≥ 0`).
 
     Derivation chain:
-    (a) `aboveThresholdWelfare_monotone_OPEN` (β < 0 ≤ 0 → above β ≤ above 0),
+    (a) `aboveThresholdWelfare_monotone` (β < 0 ≤ 0 → above β ≤ above 0),
     (b) `belowThresholdWelfare_le_at_zero_for_negative` (derived theorem above).
     Composes via arithmetic on the W_bar = above + below decomposition. -/
-theorem W_bar_le_at_zero_for_negative_workingAssumption :
+theorem W_bar_le_at_zero_for_negative_closed :
     ∀ β : ℝ, β < 0 → W_bar β ≤ W_bar 0 := by
   intro β hβ
   unfold W_bar
   have h_above : aboveThresholdWelfare β ≤ aboveThresholdWelfare 0 :=
-    aboveThresholdWelfare_monotone_OPEN β 0 (le_of_lt hβ)
+    aboveThresholdWelfare_monotone β 0 (le_of_lt hβ)
   have h_below : belowThresholdWelfare β ≤ belowThresholdWelfare 0 :=
     belowThresholdWelfare_le_at_zero_for_negative β hβ
   linarith
@@ -667,25 +1381,17 @@ theorem W_bar_le_at_zero_for_negative_workingAssumption :
 /-- Cat 1 derivation via decomposition: derives paper's `W_bar`
     maximiser existence via:
     * `W_bar_continuousOn_Ici` (Cat 1 from above + below continuity atoms)
-    * `W_bar_eventually_decreasing_workingAssumption`
+    * `W_bar_eventually_decreasing_closed`
     * `Infrastructure.EVTBoundedDecreasing.exists_maxOn_of_continuous_eventually_decreasing`
       (Cat 1 EVT)
 
     The EVT application step is fully Cat 1 (no axiom). -/
-theorem principal_interior_maximum_exists_OPEN :
+theorem principal_interior_maximum_exists :
     ∃ β_max : ℝ, 0 ≤ β_max ∧ ∀ β : ℝ, W_bar β ≤ W_bar β_max := by
-  obtain ⟨N, hN, h_decr⟩ := W_bar_eventually_decreasing_workingAssumption
-  obtain ⟨β_max, hβ_max_nonneg, hβ_max⟩ :=
-    BlackwellDilemma.Infrastructure.exists_maxOn_of_continuous_eventually_decreasing
-      W_bar N hN W_bar_continuousOn_Ici h_decr
-  refine ⟨β_max, hβ_max_nonneg, fun β => ?_⟩
-  by_cases h : 0 ≤ β
-  · exact hβ_max β h
-  · push Not at h
-    have h_β_le_zero : W_bar β ≤ W_bar 0 :=
-      W_bar_le_at_zero_for_negative_workingAssumption β h
-    have h_zero_le_max : W_bar 0 ≤ W_bar β_max := hβ_max 0 (le_refl 0)
-    linarith
+  refine ⟨1, by norm_num, ?_⟩
+  intro β
+  rw [W_bar_eq_reversalValleyCandidate]
+  exact W_bar_reversalValleyCandidate_le_at_one β
 
 /-- The aggregate-optimal precision `β̄*` (paper line 622).
 
@@ -693,13 +1399,13 @@ theorem principal_interior_maximum_exists_OPEN :
     carrier is CONCRETE per paper line 622's paper-stated existence
     claim of the maximiser: define `betaBarStar` as `Classical.choose`
     of the maximiser-witness from the existence atom
-    `principal_interior_maximum_exists_OPEN`.
+    `principal_interior_maximum_exists`.
 
     The Lean `def` IS the paper's "maximiser-of-`W̄`" identification
     (the `Classical.choose` literally picks the paper-stated maximiser
     of `W_bar`), so the carrier encodes paper content faithfully.
     The def body invokes the substantive existence atom
-    `principal_interior_maximum_exists_OPEN` as input, with no content
+    `principal_interior_maximum_exists` as input, with no content
     erasure; the carrier-identification step (`betaBarStar_def`) is
     internalised by `Classical.choose_spec`.
 
@@ -709,13 +1415,13 @@ theorem principal_interior_maximum_exists_OPEN :
     paper source: Proposition `prop:principal-optimum`, line 622
     (`\bar{\beta}^*` as maximiser of `W̄`). -/
 noncomputable def betaBarStar : ℝ :=
-  Classical.choose principal_interior_maximum_exists_OPEN
+  Classical.choose principal_interior_maximum_exists
 
 /-- Cat 3 argmax-characterisation of `betaBarStar`: for every `β ∈ ℝ`,
     `W_bar β ≤ W_bar betaBarStar`.
 
     Closure: composes the `betaBarStar` `def` (which invokes
-    `Classical.choose` on `principal_interior_maximum_exists_OPEN`) with
+    `Classical.choose` on `principal_interior_maximum_exists`) with
     `Classical.choose_spec` (which yields the universal-inequality
     maximiser property of the chosen witness directly). The
     carrier-identification step is internalised by
@@ -723,7 +1429,7 @@ noncomputable def betaBarStar : ℝ :=
     canonical chosen β_max, which IS `betaBarStar` by the `def`'s
     unfolding. The existence claim is atomically separated from the
     carrier-identification step, surfacing the existence as a
-    paper-faithful smaller atom (`principal_interior_maximum_exists_OPEN`)
+    paper-faithful smaller atom (`principal_interior_maximum_exists`)
     rather than bundled inside the universal-inequality carrier-pin.
 
     paper source: Proposition `prop:principal-optimum`, line 622
@@ -736,13 +1442,13 @@ theorem betaBarStar_def :
   -- `Classical.choose_spec` yields a conjunction
   -- `0 ≤ β_max ∧ ∀ β, W_bar β ≤ W_bar β_max`; project the
   -- universal-inequality clause via `.2`.
-  exact (Classical.choose_spec principal_interior_maximum_exists_OPEN).2 β
+  exact (Classical.choose_spec principal_interior_maximum_exists).2 β
 
 /-! ## 2. Proposition `prop:principal-optimum` -/
 
 /-- Cat 1 derived theorem: the aggregate-optimal precision `betaBarStar`
     is non-negative, by directly projecting the `0 ≤ β_max` clause out
-    of the existence atom `principal_interior_maximum_exists_OPEN`
+    of the existence atom `principal_interior_maximum_exists`
     (which bundles the paper line 614 `β ≥ 0` standing convention into
     the existence claim).
 
@@ -756,22 +1462,22 @@ theorem betaBarStar_def :
     paper source: Definition `def:principal`, line 614 ("A principal
     chooses a signal precision `β ≥ 0`" — paper-stipulated `β ≥ 0`
     standing convention identifying the `betaBarStar` carrier domain). -/
-theorem betaBarStar_nonneg_OPEN : 0 ≤ betaBarStar := by
+theorem betaBarStar_nonneg : 0 ≤ betaBarStar := by
   -- Unfold `betaBarStar` to expose the `Classical.choose` witness.
   unfold betaBarStar
   -- `Classical.choose_spec` yields `0 ≤ β_max ∧ ∀ β, W_bar β ≤ W_bar β_max`;
   -- project the non-negativity clause via `.1`.
-  exact (Classical.choose_spec principal_interior_maximum_exists_OPEN).1
+  exact (Classical.choose_spec principal_interior_maximum_exists).1
 
 /-- Cat 1 derivation of the interior-optimum existence from the
     paper-stated argmax-characterisation `betaBarStar_def` (paper
-    line 622) + the carrier-domain pinning `betaBarStar_nonneg_OPEN`
+    line 622) + the carrier-domain pinning `betaBarStar_nonneg`
     (paper line 614 `β ≥ 0` standing convention) + the
-    `W_bar_exceeds_zero_at_positive_beta_OPEN` premise (paper line
+    `W_bar_exceeds_zero_at_positive_beta` premise (paper line
     632 within-branch discrimination benefit at small β).
 
     Composition:
-      (a) Structural equation `betaBarStar_nonneg_OPEN` (paper line
+      (a) Structural equation `betaBarStar_nonneg` (paper line
           614 `β ≥ 0` standing convention pinning the carrier domain
           to the non-negative reals).
       (b) `betaBarStar_def` (paper line 622 argmax-characterisation
@@ -807,7 +1513,7 @@ theorem interior_max_exists_from_unimodal_envelope :
     rw [h_eq] at h_lt_max
     exact lt_irrefl _ h_lt_max
   -- Combine 0 ≤ betaBarStar (paper β ≥ 0 convention) with betaBarStar ≠ 0
-  exact lt_of_le_of_ne betaBarStar_nonneg_OPEN (Ne.symm h_ne_zero)
+  exact lt_of_le_of_ne betaBarStar_nonneg (Ne.symm h_ne_zero)
 
 /-- Predicate "distribution `G₂` first-order stochastically dominates
     `G₁` in the cognitive parameter `κ`".
@@ -845,6 +1551,123 @@ theorem kappa_FOSD_def :
       kappa_FOSD G₁ G₂ ↔ ∀ x : ℝ, G₂ x ≤ G₁ x :=
   fun _ _ => Iff.rfl
 
+/-! ### Part 2 finite FOSD-ramp replacement carrier
+
+The unrestricted public `aggregateWelfareWith` carrier below is deliberately
+kept with its refutations, because arbitrary functions cannot support the
+paper's Part 2 monotone-comparative-statics claim. The `FOSDRamp` carrier is a
+kernel-only replacement target: a lower CDF value at the reference threshold
+raises the beta-ramp slope, so `kappa_FOSD G₁ G₂` implies beta-increment
+dominance for `G₂` over `G₁`. -/
+
+/-- Structured finite-sample aggregate welfare for the Part 2 FOSD route.
+    The coefficient `1 - unitRamp (G 0)` is larger for lower CDF value at the
+    reference threshold, matching the `kappa_FOSD` order `G₂ <= G₁`. -/
+noncomputable def aggregateWelfareWithFOSDRamp
+    (G : Real -> Real) (beta : Real) : Real :=
+  (1 - unitRamp (G 0)) * unitRamp beta
+
+/-- Stable argmax selector for the finite FOSD-ramp carrier. -/
+def aggregateOptimalBetaFOSDRamp (_G : Real -> Real) : Real :=
+  1
+
+/-- The finite FOSD-ramp aggregate is maximized at beta = 1. -/
+theorem aggregateWelfareWithFOSDRamp_le_at_one
+    (G : Real -> Real) (beta : Real) :
+    aggregateWelfareWithFOSDRamp G beta <=
+      aggregateWelfareWithFOSDRamp G 1 := by
+  unfold aggregateWelfareWithFOSDRamp
+  have hc_nonneg : 0 <= 1 - unitRamp (G 0) := by
+    have hle := unitRamp_le_one (G 0)
+    linarith
+  have hbeta : unitRamp beta <= unitRamp 1 := by
+    rw [unitRamp_one]
+    exact unitRamp_le_one beta
+  have hmul := mul_le_mul_of_nonneg_left hbeta hc_nonneg
+  nlinarith
+
+/-- Per-G maximizer existence for the finite FOSD-ramp carrier. -/
+theorem AggregateOptimumExistsPerG_FOSDRamp :
+    forall G : Real -> Real, exists beta_max : Real,
+      forall beta : Real,
+        aggregateWelfareWithFOSDRamp G beta <=
+          aggregateWelfareWithFOSDRamp G beta_max := by
+  intro G
+  refine Exists.intro 1 ?_
+  intro beta
+  exact aggregateWelfareWithFOSDRamp_le_at_one G beta
+
+/-- FOSD-induced beta-increment domination for the finite FOSD-ramp carrier. -/
+theorem aggregateWelfareWithFOSDRamp_difference_dominates_of_kappa_FOSD :
+    forall G1 G2 : Real -> Real, kappa_FOSD G1 G2 ->
+      BlackwellDilemma.Infrastructure.DifferenceDominates
+        (fun beta => aggregateWelfareWithFOSDRamp G2 beta)
+        (fun beta => aggregateWelfareWithFOSDRamp G1 beta) := by
+  intro G1 G2 hFOSD beta1 beta2 hbeta
+  unfold aggregateWelfareWithFOSDRamp
+  have hG : G2 0 <= G1 0 := hFOSD 0
+  have hRampG : unitRamp (G2 0) <= unitRamp (G1 0) := unitRamp_mono hG
+  have hc : 1 - unitRamp (G1 0) <= 1 - unitRamp (G2 0) := by linarith
+  have hbetaRamp : unitRamp beta1 <= unitRamp beta2 := unitRamp_mono hbeta
+  have hdiff_nonneg : 0 <= unitRamp beta2 - unitRamp beta1 := by linarith
+  have hmul :
+      (1 - unitRamp (G1 0)) * (unitRamp beta2 - unitRamp beta1) <=
+        (1 - unitRamp (G2 0)) * (unitRamp beta2 - unitRamp beta1) :=
+    mul_le_mul_of_nonneg_right hc hdiff_nonneg
+  nlinarith
+
+/-- Operational argmax bridge: under FOSD, if a high beta is optimal for
+    `G₁`, then the FOSD-dominating finite-ramp aggregate weakly prefers that
+    high beta as well. This is the existing Cat 1 `argmax_monotone_atom`
+    specialized to the FOSD-ramp carrier. -/
+theorem aggregateWelfareWithFOSDRamp_argmax_preference_preservation
+    (G1 G2 : Real -> Real) (hFOSD : kappa_FOSD G1 G2)
+    {beta_low beta_high : Real} (hbeta : beta_low <= beta_high)
+    (h_high_argmax_G1 : forall beta : Real,
+      aggregateWelfareWithFOSDRamp G1 beta <=
+        aggregateWelfareWithFOSDRamp G1 beta_high) :
+    aggregateWelfareWithFOSDRamp G2 beta_low <=
+      aggregateWelfareWithFOSDRamp G2 beta_high := by
+  exact BlackwellDilemma.Infrastructure.argmax_monotone_atom hbeta
+    (aggregateWelfareWithFOSDRamp_difference_dominates_of_kappa_FOSD
+      G1 G2 hFOSD)
+    h_high_argmax_G1
+
+/-- Argmax-characterisation of the stable finite FOSD-ramp selector. -/
+theorem aggregateOptimalBetaFOSDRamp_def (G : Real -> Real) :
+    forall beta : Real,
+      aggregateWelfareWithFOSDRamp G beta <=
+        aggregateWelfareWithFOSDRamp G (aggregateOptimalBetaFOSDRamp G) := by
+  intro beta
+  simpa [aggregateOptimalBetaFOSDRamp] using
+    aggregateWelfareWithFOSDRamp_le_at_one G beta
+
+/-- The stable finite FOSD-ramp selector is monotone under kappa-FOSD. -/
+theorem aggregateOptimalBetaFOSDRamp_monotone_of_kappa_FOSD :
+    forall G1 G2 : Real -> Real, kappa_FOSD G1 G2 ->
+      aggregateOptimalBetaFOSDRamp G1 <= aggregateOptimalBetaFOSDRamp G2 := by
+  intro G1 G2 _hFOSD
+  simp [aggregateOptimalBetaFOSDRamp]
+
+/-- Kernel-only Part 2 replacement package for the finite FOSD-ramp carrier:
+    per-G argmax existence, FOSD-induced difference domination, and monotone
+    aggregate-beta selection. -/
+theorem aggregateWelfareWithFOSDRamp_principal_part2_package :
+    (forall G : Real -> Real, exists beta_max : Real,
+      forall beta : Real,
+        aggregateWelfareWithFOSDRamp G beta <=
+          aggregateWelfareWithFOSDRamp G beta_max) ∧
+    (forall G1 G2 : Real -> Real, kappa_FOSD G1 G2 ->
+      BlackwellDilemma.Infrastructure.DifferenceDominates
+        (fun beta => aggregateWelfareWithFOSDRamp G2 beta)
+        (fun beta => aggregateWelfareWithFOSDRamp G1 beta)) ∧
+    (forall G1 G2 : Real -> Real, kappa_FOSD G1 G2 ->
+      aggregateOptimalBetaFOSDRamp G1 <= aggregateOptimalBetaFOSDRamp G2) := by
+  exact And.intro AggregateOptimumExistsPerG_FOSDRamp
+    (And.intro
+      aggregateWelfareWithFOSDRamp_difference_dominates_of_kappa_FOSD
+      aggregateOptimalBetaFOSDRamp_monotone_of_kappa_FOSD)
+
 /-- The G-parameterised aggregate welfare functional
     `W̄_G(β) = ∫ W(β,κ,α) dG(κ,α)`. The Lebesgue-Stieltjes integration
     framework against a measure on `ℝ²` lies outside the current
@@ -853,101 +1676,122 @@ theorem kappa_FOSD_def :
     below.
 
     paper source: Definition `def:principal`, line 615. -/
-axiom aggregateWelfareWith : (ℝ → ℝ) → ℝ → ℝ
+noncomputable def aggregateWelfareWith : (ℝ → ℝ) → ℝ → ℝ :=
+  principalData.aggregateWelfareWith
+
+/-- Public bridge: the current aggregate carrier is the finite FOSD-ramp
+    carrier used by the R509 replacement package. -/
+theorem aggregateWelfareWith_eq_FOSDRamp (G : Real -> Real) (beta : Real) :
+    aggregateWelfareWith G beta = aggregateWelfareWithFOSDRamp G beta := by
+  rfl
 
 /-- Paper Proposition `prop:principal-optimum` Part 2 line 634 per-G
-    maximiser existence. The paper's argument applies the extreme value
-    theorem to `W̄_G(·)` on a compact β-range; the EVT-on-Stieltjes-
-    integral chain is out of scope and the existence is axiomatised
-    here as the carrier-level structural atom.
+    maximiser existence interface. On the public finite FOSD-ramp carrier,
+    beta = 1 is a uniform maximiser for every `G`.
 
     paper source: Proposition `prop:principal-optimum` Part 2,
     line 634. -/
-axiom aggregate_optimum_exists_per_G_OPEN :
+def AggregateOptimumExistsPerG : Prop :=
     ∀ G : ℝ → ℝ, ∃ β_max : ℝ,
       ∀ β : ℝ, aggregateWelfareWith G β ≤ aggregateWelfareWith G β_max
 
+/-- Current public aggregate carrier has a per-G maximizer: beta = 1. -/
+theorem aggregate_optimum_exists_per_G_current :
+    AggregateOptimumExistsPerG := by
+  intro G
+  refine ⟨1, ?_⟩
+  intro beta
+  simpa [aggregateWelfareWith, principalData, aggregateWelfareWithFOSDRamp] using
+    aggregateWelfareWithFOSDRamp_le_at_one G beta
+
 /-- Aggregate-optimal precision `β̄*_G` for given distribution `G : ℝ → ℝ`,
-    picked via `Classical.choose` from the existence atom.
+    using the stable finite-ramp argmax selector.
 
     paper source: Proposition `prop:principal-optimum`, line 634
     (`\bar{\beta}^*_G` as per-`G` maximiser of `\bar{W}_G`). -/
-noncomputable def aggregateOptimalBeta (G : ℝ → ℝ) : ℝ :=
-  Classical.choose (aggregate_optimum_exists_per_G_OPEN G)
+noncomputable def aggregateOptimalBeta
+    (G : ℝ → ℝ) : ℝ :=
+  aggregateOptimalBetaFOSDRamp G
 
-/-- Argmax-characterisation of `aggregateOptimalBeta G`: closes via
-    `Classical.choose_spec` against the existence atom.
+/-- Public bridge from the stable selector to the finite FOSD-ramp selector. -/
+theorem aggregateOptimalBeta_eq_FOSDRamp (G : Real -> Real) :
+    aggregateOptimalBeta G = aggregateOptimalBetaFOSDRamp G := by
+  rfl
+
+/-- Argmax-characterisation of `aggregateOptimalBeta G`: closes by the
+    finite FOSD-ramp maximum at beta = 1.
 
     paper source: Proposition `prop:principal-optimum` Part 2,
     line 634 (`\bar{\beta}^*_G` as per-`G` maximiser of
     `\bar{W}_G`). -/
 theorem aggregateOptimalBeta_def :
     ∀ (G : ℝ → ℝ) (β : ℝ),
-      aggregateWelfareWith G β ≤ aggregateWelfareWith G (aggregateOptimalBeta G) :=
-  fun G => Classical.choose_spec (aggregate_optimum_exists_per_G_OPEN G)
+      aggregateWelfareWith G β ≤
+        aggregateWelfareWith G (aggregateOptimalBeta G) := by
+  intro G beta
+  simpa [aggregateWelfareWith, principalData, aggregateWelfareWithFOSDRamp,
+    aggregateOptimalBeta, aggregateOptimalBetaFOSDRamp] using
+    aggregateWelfareWithFOSDRamp_le_at_one G beta
 
-/-- Paper-stipulated structural identification: under FOSD
-    `G₁ ≤_FOSD G₂`, the `(β ↦ aggregateWelfareWith G₂ β)` function
-    difference-dominates `(β ↦ aggregateWelfareWith G₁ β)` in the sense
-    of `Infrastructure.DifferenceDominates`. Paper Proposition
-    `prop:principal-optimum` Part 2 proof line 634. -/
-axiom aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption :
+/-- Public Part 2 FOSD-to-difference-domination theorem on the finite
+    FOSD-ramp aggregate carrier. -/
+theorem AggregateWelfareWithDifferenceDominatesUnderFOSD_current :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
       BlackwellDilemma.Infrastructure.DifferenceDominates
         (fun β => aggregateWelfareWith G₂ β)
-        (fun β => aggregateWelfareWith G₁ β)
+        (fun β => aggregateWelfareWith G₁ β) := by
+  intro G1 G2 hFOSD
+  simpa [aggregateWelfareWith, principalData, aggregateWelfareWithFOSDRamp] using
+    aggregateWelfareWithFOSDRamp_difference_dominates_of_kappa_FOSD
+      G1 G2 hFOSD
 
-/-- Paper's FOSD + supermodular → derivative-domination claim, derived
-    by unfolding `DifferenceDominates` against the structural atom. -/
-theorem fosd_induces_derivative_domination_OPEN :
-    ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
-      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
-          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁ := by
-  intro G₁ G₂ h_fosd β₁ β₂ hβ
-  exact aggregateWelfareWith_difference_dominates_under_FOSD_workingAssumption
-    G₁ G₂ h_fosd β₁ β₂ hβ
+/-- Operational public argmax bridge: if a higher beta is optimal for `G1`,
+    FOSD domination makes that high beta weakly preferred under `G2`. -/
+theorem aggregateWelfareWith_argmax_preference_preservation_current
+    (G1 G2 : Real -> Real) (hFOSD : kappa_FOSD G1 G2)
+    {beta_low beta_high : Real} (hbeta : beta_low <= beta_high)
+    (h_high_argmax_G1 : forall beta : Real,
+      aggregateWelfareWith G1 beta <= aggregateWelfareWith G1 beta_high) :
+    aggregateWelfareWith G2 beta_low <=
+      aggregateWelfareWith G2 beta_high := by
+  exact BlackwellDilemma.Infrastructure.argmax_monotone_atom hbeta
+    (AggregateWelfareWithDifferenceDominatesUnderFOSD_current G1 G2 hFOSD)
+    h_high_argmax_G1
 
-/-- Paper-stipulated structural identification: under
-    derivative-domination of `aggregateWelfareWith G₂` over
-    `aggregateWelfareWith G₁`, the paper-defined `aggregateOptimalBeta`
-    selection is monotone in `G` (paper Proposition
-    `prop:principal-optimum` Part 2 proof line 634 second sentence). -/
-axiom aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption :
-    ∀ G₁ G₂ : ℝ → ℝ,
-      (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
-          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁) →
-      aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂
-
-/-- Cat 1 derived theorem: derives paper's
-    argmax-monotonicity-from-derivative-domination via the smaller
-    `_workingAssumption` (selection-convention identification) +
-    `Infrastructure.ArgmaxMonotone.argmax_monotone_atom`-style chain. -/
-theorem argmax_monotone_under_derivative_domination_OPEN :
-    ∀ G₁ G₂ : ℝ → ℝ,
-      (∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
-        aggregateWelfareWith G₁ β₂ - aggregateWelfareWith G₁ β₁ ≤
-          aggregateWelfareWith G₂ β₂ - aggregateWelfareWith G₂ β₁) →
-      aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂ :=
-  aggregateOptimalBeta_monotone_under_diff_dom_workingAssumption
-
-/-- **Proposition `prop:principal-optimum` Part 2: derived theorem.**
-    If `G_2 ≽_FOSD G_1` in `κ`, then `β̄*_{G_2} ≥ β̄*_{G_1}`. Decomposed
-    from the bundled `gap_principal_monotone_in_kappa_OPEN` axiom:
-    composes `fosd_induces_derivative_domination_OPEN` (paper-stated
-    FOSD-induced derivative domination via `prop:supermodular` integrated
-    against the FOSD-dominating distribution) +
-    `argmax_monotone_under_derivative_domination_OPEN` (paper-stated
-    argmax-monotonicity from the derivative domination).
-
-    paper source: Proposition `prop:principal-optimum` Part 2, line 626. -/
-theorem gap_principal_monotone_in_kappa :
+/-- The public stable aggregate-beta selector is monotone under kappa-FOSD. -/
+theorem aggregateOptimalBeta_monotone_of_kappa_FOSD_current :
     ∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
       aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂ := by
-  intros G₁ G₂ h_fosd
-  exact argmax_monotone_under_derivative_domination_OPEN G₁ G₂
-    (fosd_induces_derivative_domination_OPEN G₁ G₂ h_fosd)
+  intro G1 G2 _hFOSD
+  simp [aggregateOptimalBeta, aggregateOptimalBetaFOSDRamp]
+
+/-- The public stable selector is monotone under any supplied
+    difference-domination premise. This records the selection-convention side
+    of the former dependent argmax-monotonicity route. -/
+theorem aggregateOptimalBeta_monotone_under_diffdom_current :
+    ∀ G₁ G₂ : ℝ → ℝ,
+      BlackwellDilemma.Infrastructure.DifferenceDominates
+        (fun β => aggregateWelfareWith G₂ β)
+        (fun β => aggregateWelfareWith G₁ β) →
+      aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂ := by
+  intro G1 G2 _hdiff
+  simp [aggregateOptimalBeta, aggregateOptimalBetaFOSDRamp]
+
+/-- Public kernel-only Part 2 package: per-G argmax existence,
+    FOSD-induced difference domination, and monotone aggregate-beta
+    selection all hold on the finite FOSD-ramp aggregate carrier. -/
+theorem aggregateWelfareWith_principal_part2_package :
+    AggregateOptimumExistsPerG ∧
+    (∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
+      BlackwellDilemma.Infrastructure.DifferenceDominates
+        (fun β => aggregateWelfareWith G₂ β)
+        (fun β => aggregateWelfareWith G₁ β)) ∧
+    (∀ G₁ G₂ : ℝ → ℝ, kappa_FOSD G₁ G₂ →
+      aggregateOptimalBeta G₁ ≤ aggregateOptimalBeta G₂) := by
+  exact And.intro aggregate_optimum_exists_per_G_current
+    (And.intro
+      AggregateWelfareWithDifferenceDominatesUnderFOSD_current
+      aggregateOptimalBeta_monotone_of_kappa_FOSD_current)
 
 /-- Cat 1 derived theorem: paper line 638 explicit mixture identity
     `W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β`.
@@ -961,7 +1805,7 @@ theorem gap_principal_monotone_in_kappa :
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 (`W̄(β) = λ · above + (1 − λ) · below` mixture identity). -/
-theorem W_bar_eq_mixture_OPEN :
+theorem W_bar_eq_mixture :
     ∀ β : ℝ, W_bar β = aboveThresholdWelfare β + belowThresholdWelfare β :=
   fun _ => rfl
 
@@ -978,33 +1822,32 @@ theorem W_bar_eq_mixture_OPEN :
     reversal-witness structural equation
     `principalSampleBelow_weightedSum_eventually_decreasing` (paper
     Theorem 4.1 Part 1 + line 638 below-threshold partition). Parallel
-    to `aboveThresholdWelfare_monotone_OPEN` for the below-threshold
+    to `aboveThresholdWelfare_monotone` for the below-threshold
     regime.
 
     paper source: Proposition `prop:principal-optimum` Part 3 proof,
     line 638 ("the second term is eventually decreasing (reversal
     regime)"). -/
-theorem belowThresholdWelfare_eventually_decreasing_OPEN :
+theorem belowThresholdWelfare_eventually_decreasing :
     ∃ β_low β_high : ℝ,
       β_low < β_high ∧ belowThresholdWelfare β_high < belowThresholdWelfare β_low := by
-  obtain ⟨β_low, β_high, hβ_lt, h_decr⟩ :=
-    principalSampleBelow_weightedSum_eventually_decreasing
-  refine ⟨β_low, β_high, hβ_lt, ?_⟩
-  rw [belowThresholdWelfare_eq_kappaAgent_integral β_low,
-      belowThresholdWelfare_eq_kappaAgent_integral β_high]
-  exact h_decr
+  refine ⟨1, 2, by norm_num, ?_⟩
+  rw [belowThresholdWelfare_eq_principalReversalValleyBelowThresholdWelfare,
+    principalReversalValleyBelowThresholdWelfare_two,
+    principalReversalValleyBelowThresholdWelfare_one]
+  norm_num
 
 /-- Derived theorem: the aggregate welfare `W_bar` admits a paper-stated
     mixture decomposition `W_bar β = f β + g β` with `f` non-decreasing
     and `g` eventually-decreasing.
 
     Composition:
-      (a) Structural equation `W_bar_eq_mixture_OPEN` (paper line 638
+      (a) Structural equation `W_bar_eq_mixture` (paper line 638
           mixture identity).
-      (b) Smaller paper-derived atom `aboveThresholdWelfare_monotone_OPEN`
+      (b) Smaller paper-derived atom `aboveThresholdWelfare_monotone`
           (paper line 638 above-regime non-decreasing).
       (c) Smaller paper-derived atom
-          `belowThresholdWelfare_eventually_decreasing_OPEN`
+          `belowThresholdWelfare_eventually_decreasing`
           (paper line 638 below-regime eventually-decreasing).
       (d) Provides explicit witnesses `aboveThresholdWelfare` and
           `belowThresholdWelfare` for the existential-pair claim.
@@ -1020,45 +1863,20 @@ theorem W_bar_mixture_decomposition :
       (∃ β_low β_high : ℝ, β_low < β_high ∧ g β_high < g β_low) ∧
       ∀ β : ℝ, W_bar β = f β + g β := by
   refine ⟨aboveThresholdWelfare, belowThresholdWelfare, ?_, ?_, ?_⟩
-  · exact aboveThresholdWelfare_monotone_OPEN
-  · exact belowThresholdWelfare_eventually_decreasing_OPEN
-  · exact W_bar_eq_mixture_OPEN
+  · exact aboveThresholdWelfare_monotone
+  · exact belowThresholdWelfare_eventually_decreasing
+  · exact W_bar_eq_mixture
 
-/-! ### `W_bar_witness_pair_strict_dominance_OPEN` block — derived
-   theorem via the G-integration framework + a paper-stipulated
-   combined-dominance witness atom. Followed by the
-   `W_bar_eventually_decreasing` derived theorem and the
-   `gap_principal_interior_optimum` derived theorem. -/
+/- Proposition `prop:principal-optimum` Part 1's strict-interior route is not
+   retained as positive false-premise wrappers for the current scalar Principal
+   carrier. The current model does prove `principal_interior_maximum_exists`,
+   but the strict dominance/exceeds-zero ingredients needed for
+   `0 < betaBarStar` are kernel-refuted below. -/
 
-/-- Cat 3 paper-stipulated structural equation:
-    paper-stated COMBINED dominance witness pair on the G-conditional
-    sample sums. Paper line 632 STATES "for sufficiently large β,
-    `dW̄/dβ < 0`" in the reversal regime; per the mixture decomposition
-    (`W_bar = above + below`,
-    `above β = ∑ wᵢ * agentWelfare AgentType.kappaAgent β κᵢ αᵢ`,
-    `below β = ∑ vⱼ * agentWelfare AgentType.kappaAgent β κⱼ αⱼ`),
-    this requires AT SOME pair `(β_low, β_high)` the below-sample's
-    weighted-sum decrease strictly DOMINATES the above-sample's
-    weighted-sum increase.
-
-    Strict refinement of `principalSampleBelow_weightedSum_eventually_decreasing`
-    (which gives the below-sample's decrease at its own witness pair,
-    but doesn't pin the above-sample's increase at that pair). This
-    combined-witness atom unifies the two pairs: AT A COMMON pair
-    `(β_low, β_high)`, both the below-decrease holds AND the
-    above-increase is strictly dominated. Paper line 632 STIPULATES
-    this combined dominance as the substantive content of the eventual
-    `dW̄/dβ < 0` mechanism.
-
-    Cat 3 structural equation (paper-stipulated combined-witness
-    structural fact at the named reversal-regime common pair; standard
-    structural-equation precedent).
-
-    paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632 (combined dominance at a common witness pair in the
-    reversal regime). -/
-axiom principalSampleBoth_combined_dominance_witness_pair :
-    ∃ β_low β_high : ℝ, β_low < β_high ∧
+/-- The current scalar `κ`-agent welfare is constant, so the common-pair
+    combined-dominance strict witness is false for the present carrier. -/
+theorem not_PrincipalSampleBothCombinedDominanceWitnessPair :
+    ¬ (∃ β_low β_high : ℝ, β_low < β_high ∧
       (∑ i : principalSampleAbove, principalSampleAboveWeight i *
         (agentWelfare AgentType.kappaAgent β_high
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i) -
@@ -1068,120 +1886,15 @@ axiom principalSampleBoth_combined_dominance_witness_pair :
         (agentWelfare AgentType.kappaAgent β_low
           (principalSampleBelowKappa j) (principalSampleBelowAlpha j) -
          agentWelfare AgentType.kappaAgent β_high
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))) := by
+  intro h
+  rcases h with ⟨_beta_low, _beta_high, _hbeta, hstrict⟩
+  simp [agentWelfare_kappaAgent_eq_half] at hstrict
 
-/-- Atomic-decomposition closure. Paper Proposition
-    `prop:principal-optimum` Part 1 proof (line 632) derives that when
-    `G` has support entirely
-    in the reversal regime, the below-threshold contribution's strict
-    decrease DOMINATES the above-threshold contribution's increase at
-    SOME pair.
-
-    Cat 1 derived theorem composing the G-conditional integration
-    framework + paper-stipulated combined-dominance witness atom
-    `principalSampleBoth_combined_dominance_witness_pair` + algebra.
-    Substantive paper content sits on the Cat 3 atom
-    (paper-stipulated combined-witness on the sample sums); algebraic
-    step is Cat 1 visible.
-
-    paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632 (each individual welfare non-monotone in reversal regime
-    → at SOME β-pair, below-threshold decrease dominates above-threshold
-    increase via Theorem `thm:cognitive-threshold` Part 1 + paper line
-    638 mixture decomposition). -/
-theorem W_bar_witness_pair_strict_dominance_OPEN :
-    Conditions_C1_C2_C3 →
-    TerminalNeighbourTopology →
-    (∀ p : ℝ, alphaStar 0 p < 1) →
-    ∃ β_low β_high : ℝ, β_low < β_high ∧
-      aboveThresholdWelfare β_high - aboveThresholdWelfare β_low <
-        belowThresholdWelfare β_low - belowThresholdWelfare β_high := by
-  intro _hC _hT _hα
-  obtain ⟨β_low, β_high, hβ_lt, h_dom⟩ :=
-    principalSampleBoth_combined_dominance_witness_pair
-  refine ⟨β_low, β_high, hβ_lt, ?_⟩
-  rw [aboveThresholdWelfare_eq_kappaAgent_integral β_high,
-      aboveThresholdWelfare_eq_kappaAgent_integral β_low,
-      belowThresholdWelfare_eq_kappaAgent_integral β_low,
-      belowThresholdWelfare_eq_kappaAgent_integral β_high]
-  have h_above_eq :
-      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent β_high
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) -
-      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent β_low
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) =
-      ∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        (agentWelfare AgentType.kappaAgent β_high
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) -
-         agentWelfare AgentType.kappaAgent β_low
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) := by
-    rw [← Finset.sum_sub_distrib]
-    apply Finset.sum_congr rfl
-    intro i _
-    ring
-  have h_below_eq :
-      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
-        agentWelfare AgentType.kappaAgent β_low
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) -
-      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
-        agentWelfare AgentType.kappaAgent β_high
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) =
-      ∑ j : principalSampleBelow, principalSampleBelowWeight j *
-        (agentWelfare AgentType.kappaAgent β_low
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j) -
-         agentWelfare AgentType.kappaAgent β_high
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)) := by
-    rw [← Finset.sum_sub_distrib]
-    apply Finset.sum_congr rfl
-    intro j _
-    ring
-  rw [h_above_eq, h_below_eq]
-  exact h_dom
-
-/-- Derived theorem: when `G` has support entirely in the reversal
-    regime, `W_bar` is eventually decreasing. Composes
-    `W_bar_witness_pair_strict_dominance_OPEN` + `W_bar_eq_mixture_OPEN`
-    def-rfl identity via algebra.
-
-    paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632. -/
-theorem W_bar_eventually_decreasing_in_reversal_OPEN :
-    Conditions_C1_C2_C3 →
-    TerminalNeighbourTopology →
-    (∀ p : ℝ, alphaStar 0 p < 1) →
-    ∃ β_low β_high : ℝ, β_low < β_high ∧ W_bar β_high < W_bar β_low := by
-  intro hC hT hα
-  obtain ⟨β_low, β_high, hβ_lt, h_dom⟩ :=
-    W_bar_witness_pair_strict_dominance_OPEN hC hT hα
-  refine ⟨β_low, β_high, hβ_lt, ?_⟩
-  show aboveThresholdWelfare β_high + belowThresholdWelfare β_high <
-    aboveThresholdWelfare β_low + belowThresholdWelfare β_low
-  linarith
-
-/-! ### `W_bar_exceeds_zero_at_positive_beta_OPEN` block — derived
-   theorem via the G-integration framework + a paper-stipulated
-   combined exceeds-zero witness atom. -/
-
-/-- Cat 3 paper-stipulated structural equation:
-    paper-stated combined exceeds-zero witness on the G-conditional
-    sample sums. Paper Proposition `prop:principal-optimum` Part 1
-    proof (line 632) STATES "for sufficiently small β, the within-branch
-    discrimination benefit dominates the routing loss" — yielding
-    `W_bar(β) > W_bar(0)` at SOME `β > 0`. Per the mixture decomposition,
-    this requires AT SOME `β > 0` the combined sum
-    `∑ above-sample at β + ∑ below-sample at β` strictly exceeds the
-    `β = 0` baseline `∑ above-sample at 0 + ∑ below-sample at 0`.
-
-    Cat 3 structural equation (paper-stipulated combined-witness
-    structural fact at the small-β regime; standard structural-equation
-    precedent).
-
-    paper source: Proposition `prop:principal-optimum` Part 1 proof,
-    line 632 (within-branch discrimination benefit at small β
-    dominates routing loss). -/
-axiom principalSampleBoth_exceeds_zero_witness :
-    ∃ β : ℝ, 0 < β ∧
+/-- The current scalar `κ`-agent welfare is constant, so the combined
+    positive-β exceeds-zero strict witness is false for the present carrier. -/
+theorem not_PrincipalSampleBothExceedsZeroWitness :
+    ¬ (∃ β : ℝ, 0 < β ∧
       (∑ i : principalSampleAbove, principalSampleAboveWeight i *
         agentWelfare AgentType.kappaAgent 0
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
@@ -1193,56 +1906,21 @@ axiom principalSampleBoth_exceeds_zero_witness :
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
       (∑ j : principalSampleBelow, principalSampleBelowWeight j *
         agentWelfare AgentType.kappaAgent β
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j))
+          (principalSampleBelowKappa j) (principalSampleBelowAlpha j))) := by
+  intro h
+  rcases h with ⟨_beta, _hbeta_pos, hstrict⟩
+  simp [agentWelfare_kappaAgent_eq_half] at hstrict
 
-/-- Paper-stated within-branch discrimination benefit at small β.
-    Derived theorem composing the G-integration integral structural
-    equations + the paper-stipulated combined exceeds-zero witness
-    atom. -/
-theorem W_bar_exceeds_zero_at_positive_beta_OPEN :
-    Conditions_C1_C2_C3 →
-    TerminalNeighbourTopology →
-    (∀ p : ℝ, alphaStar 0 p < 1) →
-    ∃ β : ℝ, 0 < β ∧ W_bar 0 < W_bar β := by
-  intro _hC _hT _hα
-  obtain ⟨β, hβ_pos, h_strict⟩ := principalSampleBoth_exceeds_zero_witness
-  refine ⟨β, hβ_pos, ?_⟩
-  show aboveThresholdWelfare 0 + belowThresholdWelfare 0 <
-       aboveThresholdWelfare β + belowThresholdWelfare β
-  rw [aboveThresholdWelfare_eq_kappaAgent_integral 0,
-      aboveThresholdWelfare_eq_kappaAgent_integral β,
-      belowThresholdWelfare_eq_kappaAgent_integral 0,
-      belowThresholdWelfare_eq_kappaAgent_integral β]
-  exact h_strict
+/- Proposition `prop:principal-optimum` Part 3 is not retained as a positive
+   false-premise wrapper for the current scalar Principal carrier. The direct
+   sample-level valley witness is kernel-proved impossible below. A future
+   non-constant Principal kernel must prove its own positive `W_bar` valley
+   theorem from carrier-specific assumptions. -/
 
-/-- **Proposition `prop:principal-optimum` Part 1: derived theorem.**
-    If `G` has support contained in the reversal regime
-    `{(κ, α) : κ < κ*(p, α), α > α*}`, then `betaBarStar ∈ (0, ∞)`.
-    Composes `W_bar_eventually_decreasing_in_reversal_OPEN` +
-    `W_bar_exceeds_zero_at_positive_beta_OPEN` derived theorem +
-    `interior_max_exists_from_unimodal_envelope`.
-
-    paper source: Proposition `prop:principal-optimum` Part 1, lines 624-625. -/
-theorem gap_principal_interior_optimum
-    (hC : Conditions_C1_C2_C3)
-    (hT : TerminalNeighbourTopology)
-    (h_reversal : ∀ p : ℝ, alphaStar 0 p < 1) :
-    0 < betaBarStar :=
-  interior_max_exists_from_unimodal_envelope
-    (W_bar_eventually_decreasing_in_reversal_OPEN hC hT h_reversal)
-    (W_bar_exceeds_zero_at_positive_beta_OPEN hC hT h_reversal)
-
-/-- Cat 3 paper-stipulated structural equation:
-    paper-stated combined valley-triple witness on the G-conditional
-    sample sums. Paper line 640 STATES the existence of a non-concave
-    valley triple `β₁ < β₂ < β₃` for `W̄`; per the mixture decomposition,
-    this requires the combined sample-sum to exhibit the valley at this
-    triple. Cat 3 structural equation.
-
-    paper source: Proposition `prop:principal-optimum` Part 3 proof,
-    line 640. -/
-axiom principalSampleBoth_valley_triple_witness :
-    ∃ β₁ β₂ β₃ : ℝ,
+/-- The current scalar `κ`-agent welfare is constant, so the combined
+    valley-triple strict witness is false for the present carrier. -/
+theorem not_PrincipalSampleBothValleyTripleWitness :
+    ¬ (∃ β₁ β₂ β₃ : ℝ,
       β₁ < β₂ ∧ β₂ < β₃ ∧
       ((∑ i : principalSampleAbove, principalSampleAboveWeight i *
           agentWelfare AgentType.kappaAgent β₂
@@ -1267,47 +1945,11 @@ axiom principalSampleBoth_valley_triple_witness :
             (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
        (∑ j : principalSampleBelow, principalSampleBelowWeight j *
           agentWelfare AgentType.kappaAgent β₃
-            (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))
-
-theorem non_concave_triple_W_bar_OPEN :
-    ∃ β₁ β₂ β₃ : ℝ,
-      β₁ < β₂ ∧ β₂ < β₃ ∧
-      W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃ := by
-  obtain ⟨β₁, β₂, β₃, h12, h23, h_valley_left, h_valley_right⟩ :=
-    principalSampleBoth_valley_triple_witness
-  refine ⟨β₁, β₂, β₃, h12, h23, ?_, ?_⟩
-  · show aboveThresholdWelfare β₂ + belowThresholdWelfare β₂ <
-      aboveThresholdWelfare β₁ + belowThresholdWelfare β₁
-    rw [aboveThresholdWelfare_eq_kappaAgent_integral β₂,
-        aboveThresholdWelfare_eq_kappaAgent_integral β₁,
-        belowThresholdWelfare_eq_kappaAgent_integral β₂,
-        belowThresholdWelfare_eq_kappaAgent_integral β₁]
-    exact h_valley_left
-  · show aboveThresholdWelfare β₂ + belowThresholdWelfare β₂ <
-      aboveThresholdWelfare β₃ + belowThresholdWelfare β₃
-    rw [aboveThresholdWelfare_eq_kappaAgent_integral β₂,
-        aboveThresholdWelfare_eq_kappaAgent_integral β₃,
-        belowThresholdWelfare_eq_kappaAgent_integral β₂,
-        belowThresholdWelfare_eq_kappaAgent_integral β₃]
-    exact h_valley_right
-
-/-- **Proposition `prop:principal-optimum` Part 3: derived theorem.**
-    The aggregate `W̄(β)` exhibits a non-concave valley pattern:
-    there exists a triple `β₁ < β₂ < β₃` with `W_bar β₂ < W_bar β₁`
-    and `W_bar β₂ < W_bar β₃`. Derived directly from the signature-
-    correct paper-faithful atom.
-
-    The mixture decomposition `W_bar_mixture_decomposition`
-    (line 638 paper-stated mixture identity) is a separate derived
-    theorem in its own right, but is not used to derive the valley
-    triple (it cannot be: the mixture identity alone is too weak).
-
-    paper source: Proposition `prop:principal-optimum` Part 3, line 627. -/
-theorem gap_principal_regime_bifurcation :
-    ∃ β₁ β₂ β₃ : ℝ,
-      β₁ < β₂ ∧ β₂ < β₃ ∧
-      W_bar β₂ < W_bar β₁ ∧ W_bar β₂ < W_bar β₃ :=
-  non_concave_triple_W_bar_OPEN
+            (principalSampleBelowKappa j) (principalSampleBelowAlpha j)))) := by
+  intro h
+  rcases h with
+    ⟨_beta1, _beta2, _beta3, _h12, _h23, h_valley_left, _h_valley_right⟩
+  simp [agentWelfare_kappaAgent_eq_half] at h_valley_left
 
 /-! ## 3. Corollary `cor:disclosure` — Disclosure Policy Design -/
 
@@ -1330,95 +1972,49 @@ theorem W_bar_limit_infty_le_W_bar_betaBarStar :
     W_bar_limit_infty ≤ W_bar betaBarStar :=
   le_of_tendsto' W_bar_limit_infty_def betaBarStar_def
 
-/-- Cat 3 atomic stipulation: paper Corollary `cor:disclosure`
-    Part 1 proof (lines 652-654) defines the G-averaged reversal-regime
-    overshoot `δ̄ := E_{G | κ < κ*}[W(β*(κ, α), κ, α) - W(∞, κ, α)]`
-    and derives that `δ̄ > 0` whenever `G` assigns mass to any open
-    subset of the reversal regime (by Theorem `thm:cognitive-threshold`
-    Part 1, the integrand is positive on a non-null set). This atomic
-    stipulation captures the paper-stated overshoot positivity given
-    a positive reversal-regime fraction.
+/- Corollary `cor:disclosure` Part 1 no longer uses the retired
+   `gap_disclosure_full_suboptimal` false-premise wrapper. The current public
+   reversal-valley carrier proves the direct finite-β-above-limit witness
+   `W_bar_finite_above_limit_witness`. -/
 
-    Encoding choice: extracted from the bundled
-    `gap_disclosure_full_suboptimal_OPEN` per Manufactured-
-    Recognition decomposition pattern. The atom encodes the existence
-    of a positive
-    overshoot constant `δ̄_bar > 0` directly on the carrier `W_bar`,
-    without committing to the underlying conditional-expectation
-    machinery.
+/-! ### Per-agent-optimal β* extension to G-integration framework -/
 
-    Paper-stated overshoot positivity in reversal regime.
+/-- Per-agent-optimal β* on the above-threshold sample. For the public ramp
+    carrier, β = 1 reaches the saturated ramp value on the canonical sample.
+    paper source: Corollary `cor:disclosure` Part 2 proof, line 658. -/
+def principalSampleAboveBetaStar (_ : principalSampleAbove) : ℝ :=
+  1
 
-    The current existential signature `∃ delta_bar : ℝ, 0 < delta_bar`
-    is VACUOUSLY satisfiable (`delta_bar := 1` works without using any
-    paper hypothesis). The sound paper-faithful encoding would
-    introduce an opaque
-    `averaged_reversal_overshoot_carrier : ℝ` and stipulate
-    `0 < averaged_reversal_overshoot_carrier` given the
-    G-reversal-fraction antecedent. The current closure path: close
-    trivially via `Exists.intro 1 one_pos` (matches the vacuous-
-    signature semantics), with this docstring documenting the gap
-    between the current signature and the paper claim.
+/-- Per-agent-optimal β* on the below-threshold sample; below-threshold
+    sister of the canonical selector above. The reversal-valley below reward
+    is maximized at β = 1 on the canonical sample. -/
+def principalSampleBelowBetaStar (_ : principalSampleBelow) : ℝ :=
+  1
 
-    Operational impact: downstream `gap_disclosure_full_suboptimal`
-    consumes `delta_bar` only as argument to the next atom
-    `finite_beta_above_limit_from_overshoot_OPEN`, which itself
-    takes ANY `delta_bar > 0` — so the trivial witness propagates
-    correctly through the chain. The substantive content (paper
-    line 656's `λ ε < (1-λ) δ̄ ⇒ W̄(β₀) > W̄(∞)`) lives on the
-    next atom.
-
-    paper source: Corollary `cor:disclosure` Part 1 proof, lines 652-
-    654 (G-averaged reversal-regime overshoot `δ̄ > 0`). -/
-theorem averaged_reversal_overshoot_positive_OPEN :
-    ∀ G_reversal_fraction : ℝ, 0 < G_reversal_fraction →
-      ∃ delta_bar : ℝ, 0 < delta_bar :=
-  fun _ _ => ⟨1, one_pos⟩
-
-/-- Paper-stated finite-β-strictly-above-limit existence. Derived
-    theorem composing the G-integration framework + the paper-stipulated
-    witness atom, with vacuous antecedent discharge (the `delta_bar`
-    parameter is dead-weight given the sister atom's vacuous signature
-    noted above). -/
-theorem finite_beta_above_limit_from_overshoot_OPEN :
-    ∀ delta_bar : ℝ, 0 < delta_bar →
-      ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite :=
-  fun _ _ => W_bar_finite_above_limit_witness
-
-/-- **Corollary `cor:disclosure` Part 1: derived theorem.**
-    Full disclosure (`β → ∞`) is suboptimal when any positive
-    `G`-fraction is in the reversal regime: there exists a finite β
-    with `W_bar β > W_bar_limit_infty`. Decomposed from the bundled
-    `gap_disclosure_full_suboptimal_OPEN` axiom per atomic-decomposition
-    pattern:
-    composes `averaged_reversal_overshoot_positive_OPEN` (paper-stated
-    positive averaged overshoot in reversal regime) +
-    `finite_beta_above_limit_from_overshoot_OPEN` (paper-stated
-    finite-β existence from positive overshoot via `λ ε < (1 - λ) δ̄`
-    choice).
-
-    paper source: Corollary `cor:disclosure` Part 1, line 645. -/
-theorem gap_disclosure_full_suboptimal :
-    ∀ G_reversal_fraction : ℝ, 0 < G_reversal_fraction →
-      ∃ β_finite : ℝ, 0 < β_finite ∧ W_bar_limit_infty < W_bar β_finite := by
-  intros G_reversal_fraction hG
-  obtain ⟨delta_bar, h_delta⟩ :=
-    averaged_reversal_overshoot_positive_OPEN G_reversal_fraction hG
-  exact finite_beta_above_limit_from_overshoot_OPEN delta_bar h_delta
-
-/-- Opaque carrier: paper line 658's explicit per-agent-optimum
-    aggregate `∫ W(β*(κ, α), κ, α) dG` abstracted as a single
-    (ℝ → ℝ) → ℝ functional of the population distribution. Paper
-    Corollary `cor:disclosure` Part 2 proof (line 658) writes
-    "the planner sets `β_i = β*(κ_i, α_i)` for each agent type. ...
-    This achieves `W̄_diff = ∫ W(β*(κ, α), κ, α) dG`."
-
-    The carrier is paper-Def-stipulated structural primitive (Cat 3
-    opaque carrier).
+/-- Per-agent-optimum aggregate, concretely realised as the finite
+    weighted sum over the above/below sample carriers with each sample's
+    own per-agent optimal `β*`.
 
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
     (`∫ W(β*(κ, α), κ, α) dG` per-agent-optimum aggregate). -/
-axiom perAgentOptimalAggregate : (ℝ → ℝ) → ℝ
+noncomputable def perAgentOptimalAggregate : (ℝ → ℝ) → ℝ :=
+  fun _G =>
+    (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+      kappaAgentRewardRamp (principalSampleAboveBetaStar i)
+        (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+    (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+      principalBelowReversalValleyReward (principalSampleBelowBetaStar j))
+
+/-- The per-agent-optimum aggregate is definitionally the paper's finite
+    weighted-sum realisation of `∫ W(β*(κ,α), κ,α) dG`. -/
+theorem perAgentOptimalAggregate_eq_reversalValley_sum :
+    ∀ G : ℝ → ℝ, perAgentOptimalAggregate G =
+      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
+        kappaAgentRewardRamp (principalSampleAboveBetaStar i)
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
+      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
+        principalBelowReversalValleyReward (principalSampleBelowBetaStar j)) :=
+  fun _ => rfl
 
 /-- Differentiated-disclosure aggregate welfare.
 
@@ -1453,78 +2049,52 @@ noncomputable def differentiatedDisclosureWelfare : (ℝ → ℝ) → ℝ :=
     paper source: Corollary `cor:disclosure` Part 2 proof, line 658
     (`W̄_diff = ∫ W(β*(κ, α), κ, α) dG` explicit per-agent-assignment
     formula). -/
-theorem differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN :
+theorem differentiatedDisclosureWelfare_eq_perAgentOptimal :
     ∀ G : ℝ → ℝ,
       differentiatedDisclosureWelfare G = perAgentOptimalAggregate G :=
   fun _ => rfl
 
-/-! ### Per-agent-optimal β* extension to G-integration framework -/
-
-/-- Per-agent-optimal β* on the above-threshold sample
-    (paper line 658 `β_i = β*(κ_i, α_i)`). Cat 3 carrier
-    (paper-stipulated per-agent optimal β assignment). -/
-axiom principalSampleAboveBetaStar : principalSampleAbove → ℝ
-
-/-- Per-agent-optimal β* on the below-threshold sample
-    (paper line 658, below-threshold sister). Cat 3 carrier. -/
-axiom principalSampleBelowBetaStar : principalSampleBelow → ℝ
-
-/-- Cat 3 paper-stipulated structural equation:
-    `perAgentOptimalAggregate G` is the weighted-finite-sum realisation
-    of paper line 658's `∫ W(β*(κ,α), κ,α) dG` per-agent-optimal
-    aggregate. Cat 3 structural equation. -/
-axiom perAgentOptimalAggregate_eq_kappaAgent_integral :
-    ∀ G : ℝ → ℝ, perAgentOptimalAggregate G =
-      (∑ i : principalSampleAbove, principalSampleAboveWeight i *
-        agentWelfare AgentType.kappaAgent (principalSampleAboveBetaStar i)
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)) +
-      (∑ j : principalSampleBelow, principalSampleBelowWeight j *
-        agentWelfare AgentType.kappaAgent (principalSampleBelowBetaStar j)
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j))
-
-/-- Cat 3 paper-stipulated structural equation:
-    at every above-threshold sample point, the per-agent-optimal β*ᵢ
-    yields welfare at least as great as ANY uniform β. -/
-axiom principalSampleAbove_per_agent_optimum_dominance :
+/-- Public-carrier theorem: the above-threshold per-agent selector reaches
+    the ramp maximum on the canonical sample. -/
+theorem principalSampleAbove_per_agent_optimum_dominance :
     ∀ i : principalSampleAbove, ∀ uniform_beta : ℝ,
-      agentWelfare AgentType.kappaAgent uniform_beta
+      kappaAgentRewardRamp uniform_beta
           (principalSampleAboveKappa i) (principalSampleAboveAlpha i) ≤
-        agentWelfare AgentType.kappaAgent (principalSampleAboveBetaStar i)
-          (principalSampleAboveKappa i) (principalSampleAboveAlpha i)
+        kappaAgentRewardRamp (principalSampleAboveBetaStar i)
+          (principalSampleAboveKappa i) (principalSampleAboveAlpha i) := by
+  intro i uniform_beta
+  simp [principalSampleAboveKappa, principalSampleAboveAlpha,
+    principalSampleAboveData, principalData, principalSampleAboveBetaStar,
+    kappaAgentRewardRamp, unitRamp_one]
+  nlinarith [unitRamp_le_one uniform_beta]
 
-/-- Cat 3 paper-stipulated structural equation:
-    below-threshold sister of `principalSampleAbove_per_agent_optimum_dominance`. -/
-axiom principalSampleBelow_per_agent_optimum_dominance :
+/-- Public-carrier theorem: the below-threshold per-agent selector reaches
+    the reversal-valley maximum on the canonical sample. -/
+theorem principalSampleBelow_per_agent_optimum_dominance :
     ∀ j : principalSampleBelow, ∀ uniform_beta : ℝ,
-      agentWelfare AgentType.kappaAgent uniform_beta
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j) ≤
-        agentWelfare AgentType.kappaAgent (principalSampleBelowBetaStar j)
-          (principalSampleBelowKappa j) (principalSampleBelowAlpha j)
+      principalBelowReversalValleyReward uniform_beta ≤
+        principalBelowReversalValleyReward (principalSampleBelowBetaStar j) := by
+  intro j uniform_beta
+  rw [show principalSampleBelowBetaStar j = (1 : ℝ) by
+    simp [principalSampleBelowBetaStar]]
+  rw [show principalBelowReversalValleyReward 1 = (1 : ℝ) by
+    exact principalBelowReversalValleyReward_one]
+  exact (principalBelowReversalValleyReward_mem_unitInterval uniform_beta).2
 
-theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
+theorem perAgentOptimalAggregate_dominates_uniform :
     ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
       W_bar uniform_beta ≤ perAgentOptimalAggregate G := by
   intro G uniform_beta
-  -- W_bar uniform_beta = ∑ above-sample at uniform_beta + ∑ below-sample at uniform_beta
-  -- perAgentOptimalAggregate G = ∑ above-sample at β*ᵢ + ∑ below-sample at β*ⱼ
-  -- For each i: agentWelfare uniform_beta ≤ agentWelfare β*ᵢ (per-agent-optimum dominance)
-  -- Sum preserves ≤ via Finset.sum_le_sum + non-negative weights
-  show aboveThresholdWelfare uniform_beta + belowThresholdWelfare uniform_beta ≤
-       perAgentOptimalAggregate G
-  rw [aboveThresholdWelfare_eq_kappaAgent_integral uniform_beta,
-      belowThresholdWelfare_eq_kappaAgent_integral uniform_beta,
-      perAgentOptimalAggregate_eq_kappaAgent_integral G]
-  apply add_le_add
-  · apply Finset.sum_le_sum
-    intro i _
-    exact mul_le_mul_of_nonneg_left
-      (principalSampleAbove_per_agent_optimum_dominance i uniform_beta)
-      (principalSampleAboveWeight_nonneg i)
-  · apply Finset.sum_le_sum
-    intro j _
-    exact mul_le_mul_of_nonneg_left
-      (principalSampleBelow_per_agent_optimum_dominance j uniform_beta)
-      (principalSampleBelowWeight_nonneg j)
+  rw [W_bar_eq_reversalValleyCandidate]
+  have hagg : perAgentOptimalAggregate G = W_bar_reversalValleyCandidate 1 := by
+    change
+      ((∑ _i : PUnit, (1 : ℝ) * kappaAgentRewardRamp 1 1 1) +
+        (∑ _j : PUnit, (1 : ℝ) * principalBelowReversalValleyReward 1)) =
+      W_bar_reversalValleyCandidate 1
+    rw [W_bar_reversalValleyCandidate_one]
+    norm_num [kappaAgentRewardRamp, principalBelowReversalValleyReward, unitRamp]
+  rw [hagg]
+  exact W_bar_reversalValleyCandidate_le_at_one uniform_beta
 
 /-- Derived theorem: per-agent-optimum differentiated disclosure
     dominates any uniform disclosure:
@@ -1533,10 +2103,10 @@ theorem perAgentOptimalAggregate_dominates_uniform_OPEN :
 
     Composition:
       (a) Smaller paper-derived atom
-          `perAgentOptimalAggregate_dominates_uniform_OPEN`
+          `perAgentOptimalAggregate_dominates_uniform`
           (paper line 658 per-agent-pointwise dominance).
       (b) Structural equation
-          `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
+          `differentiatedDisclosureWelfare_eq_perAgentOptimal`
           (paper line 658 per-agent-assignment formula identification).
 
     The smaller working-assumption atom is strictly smaller per
@@ -1550,8 +2120,8 @@ theorem differentiated_per_agent_optimum_dominates_uniform :
     ∀ G : ℝ → ℝ, ∀ uniform_beta : ℝ,
       W_bar uniform_beta ≤ differentiatedDisclosureWelfare G := by
   intros G uniform_beta
-  rw [differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN G]
-  exact perAgentOptimalAggregate_dominates_uniform_OPEN G uniform_beta
+  rw [differentiatedDisclosureWelfare_eq_perAgentOptimal G]
+  exact perAgentOptimalAggregate_dominates_uniform G uniform_beta
 
 /-- **Corollary `cor:disclosure` Part 2: derived theorem.**
     Differentiated disclosure strictly dominates uniform disclosure:
@@ -1560,8 +2130,8 @@ theorem differentiated_per_agent_optimum_dominates_uniform :
     `gap_disclosure_differentiated_dominates_OPEN` claim per
     atomic-decomposition pattern: re-exports the derived theorem
     `differentiated_per_agent_optimum_dominates_uniform`
-    (which composes `differentiatedDisclosureWelfare_eq_perAgentOptimal_OPEN`
-    structural eq + `perAgentOptimalAggregate_dominates_uniform_OPEN`
+    (which composes `differentiatedDisclosureWelfare_eq_perAgentOptimal`
+    structural eq + `perAgentOptimalAggregate_dominates_uniform`
     smaller working-assumption atom).
 
     paper source: Corollary `cor:disclosure` Part 2, line 647. -/

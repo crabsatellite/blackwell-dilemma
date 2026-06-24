@@ -3,14 +3,16 @@ Copyright (c) 2026 Alex Chengyu Li. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 import Mathlib.Data.Real.Basic
+import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Positivity
 
 /-!
 # Divergence-from-below characterization (Cat 1)
 
 This file provides the **abstract divergence-from-below predicate**
-that the paper's `kappaStar_diverges_at_pc_paper_witness` axiom uses,
-plus its basic algebraic operations.
+used by the R208 parameterized Part 6 transfer interface, plus its
+basic algebraic operations.
 
 ## Main definitions
 
@@ -26,16 +28,18 @@ plus its basic algebraic operations.
   diverges (joint ε via `min`).
 * `DivergesAtBelowAtTop.mono` — pointwise dominance preserves
   divergence (if `f ≤ g` near `c⁻` and `f` diverges, so does `g`).
+* `hyperbolicBelowScaling_diverges_at` — the explicit carrier
+  `p ↦ 1 / (c - p)` diverges from below at `c`.
 
 ## Bridge to paper carrier `kappaStar`
 
-The paper's claim `kappaStar_diverges_at_pc_paper_witness` takes the
-form `∀ M, ∃ ε > 0, ∀ p ∈ (p_c - ε, p_c), M < kappaStar p α`, which
-is exactly `DivergesAtBelowAtTop (fun p => kappaStar p α) p_c`. With
-this Cat 1 abstract predicate available, the paper-stipulated axiom
-becomes a direct corollary once the substantive Cat 2 Harris-Kesten +
-percolation-cluster-size analysis provides the divergence claim on
-the concrete `kappaStar`.
+The paper's Part 6 claim takes the form
+`∀ M, ∃ ε > 0, ∀ p ∈ (p_c - ε, p_c), M < kappaStar p α`, which is exactly
+`DivergesAtBelowAtTop (fun p => kappaStar p α) p_c`. With this Cat 1
+abstract predicate available, the repaired source interface can state the
+remaining mathematics as explicit theorem parameters: a replacement scaling
+carrier `s`, a proof that `s` diverges at `p_c`, and a proof that `s` is
+bounded above by `kappaStar` in the high-α regime.
 
 ## Substantive divergence (Harris-Kesten)
 
@@ -48,7 +52,7 @@ the pending `GiantComponentMills.lean` module.
 
 ## Cat 1 status
 
-Built only from `Mathlib.Data.Real.Basic` + `Mathlib.Tactic.Linarith`.
+Built only from `Mathlib.Data.Real.Basic` plus elementary tactics.
 No paper-novel axioms, no `sorry`. The predicate + algebra is
 Mathlib-PR-contributable as a natural form of one-sided divergence.
 
@@ -70,6 +74,56 @@ namespace BlackwellDilemma.Infrastructure
 def DivergesAtBelowAtTop (f : ℝ → ℝ) (c : ℝ) : Prop :=
   ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
     ∀ p : ℝ, c - ε < p → p < c → M < f p
+
+/-! ### Explicit hyperbolic left-scaling carrier -/
+
+/-- The elementary left-side hyperbolic scaling carrier `p -> 1 / (c - p)`.
+    It is useful as a kernel-pure replacement-scaling prototype for
+    one-sided critical-threshold arguments. -/
+noncomputable def hyperbolicBelowScaling (c p : Real) : Real :=
+  1 / (c - p)
+
+/-- The explicit hyperbolic carrier diverges to `+infty` from below at
+    its pole. This supplies the divergence half of a replacement scaling
+    carrier without any project-specific paper axiom. -/
+theorem hyperbolicBelowScaling_diverges_at (c : Real) :
+    DivergesAtBelowAtTop (hyperbolicBelowScaling c) c := by
+  intro M
+  by_cases hMneg : M < 0
+  case pos =>
+    refine Exists.intro (1 : Real) ?_
+    constructor
+    case left =>
+      norm_num
+    case right =>
+      intro p _hp_left hp_right
+      have hden_pos : 0 < c - p := by linarith
+      have hdiv_pos : 0 < hyperbolicBelowScaling c p := by
+        unfold hyperbolicBelowScaling
+        positivity
+      linarith
+  case neg =>
+    have hM_nonneg : 0 <= M := le_of_not_gt hMneg
+    let eps : Real := 1 / (M + 1)
+    have hdenom_pos : 0 < M + 1 := by linarith
+    have heps_pos : 0 < eps := by
+      dsimp [eps]
+      positivity
+    refine Exists.intro eps ?_
+    constructor
+    case left =>
+      exact heps_pos
+    case right =>
+      intro p hp_left hp_right
+      have hden_pos : 0 < c - p := by linarith
+      have hden_lt_eps : c - p < eps := by linarith
+      have h_inv_lt : 1 / eps < 1 / (c - p) :=
+        one_div_lt_one_div_of_lt hden_pos hden_lt_eps
+      have hM_lt_one_div_eps : M < 1 / eps := by
+        dsimp [eps]
+        field_simp [hdenom_pos.ne']
+        linarith
+      exact lt_trans hM_lt_one_div_eps h_inv_lt
 
 /-! ### Basic algebraic operations -/
 
@@ -154,14 +208,17 @@ theorem DivergesAtBelowAtTop.mono
 
 /-! ### Kernel-purity audit
 
-`#print axioms` on `DivergesAtBelowAtTop.add` surfaces ONLY Mathlib
+`#print axioms` on `DivergesAtBelowAtTop.add` and
+`hyperbolicBelowScaling_diverges_at` surfaces ONLY Mathlib
 kernel axioms (`propext, Classical.choice, Quot.sound`) — no
 paper-novel `Types.lean` carriers, no broken-link `_OPEN` axioms,
 no `sorry`. This provides the abstract divergence-from-below
-predicate + algebra; the substantive `kappaStar` divergence
+predicate, algebra, and an explicit hyperbolic replacement-scaling
+carrier; the substantive `kappaStar` domination/divergence transfer
 (Harris-Kesten 1980) is deferred to the pending `GiantComponentMills.lean`
-module once Mathlib's bond-percolation infrastructure is available. -/
+module once the paper-specific domination input is available. -/
 
+#print axioms hyperbolicBelowScaling_diverges_at
 #print axioms DivergesAtBelowAtTop.add
 
 end BlackwellDilemma.Infrastructure

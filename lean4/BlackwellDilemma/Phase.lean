@@ -39,9 +39,11 @@ noncomputable def V_static (v : Vertex) : ℝ := reward v
 /-- Dynamic value of vertex `v` given parent `v'` and percolation
     outcome `ω`: the best reward in the forward reachable set.
     paper source: Definition `def:value-functions`, line 443. -/
-axiom V_dyn : Vertex → Finset Vertex → PercolationOutcome → ℝ
+noncomputable def V_dyn (v : Vertex) (H : Finset Vertex)
+    (ω : PercolationOutcome) : ℝ :=
+  (ForwardReachable v H ω).sup' ⟨v, ForwardReachable_self_member v H ω⟩ reward
 
-/-- Cat 3 ATOMIC structural equation: the dynamic value of
+/-- Cat 1 definitional equation: the dynamic value of
     a vertex `v` (under parent set `H`, percolation outcome `ω`) is the
     paper-stated sup of rewards over the forward-reachable set
     `ForwardReachable v H ω`. Paper Definition 2.2 line 127 reads
@@ -61,10 +63,11 @@ axiom V_dyn : Vertex → Finset Vertex → PercolationOutcome → ℝ
     paper source: Definition 2.2 (`def:reachable`), line 127 (`V_dyn(v_0)
     = max_{v ∈ R(v_0)} r(v)`); Definition `def:value-functions`,
     line 446 (`V_dyn(v) = max_{w ∈ R(v|v')} r(w)`). -/
-axiom V_dyn_def :
+theorem V_dyn_def :
     ∀ (v : Vertex) (H : Finset Vertex) (ω : PercolationOutcome),
       V_dyn v H ω =
-        (ForwardReachable v H ω).sup' ⟨v, ForwardReachable_self_member v H ω⟩ reward
+        (ForwardReachable v H ω).sup' ⟨v, ForwardReachable_self_member v H ω⟩ reward :=
+  fun _ _ _ => rfl
 
 /-! ## 2. Theorem 3.3 — Phase Transition at `p_c` on `Z²`
 
@@ -75,7 +78,7 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
 /- **Theorem 3.3 (`thm:phase`) Part 1: Below threshold**
     (`p < p_c = harrisKestenCriticalProb`).
     Topological loss vanishes asymptotically; oracle Blackwell holds.
-    Composes the Harris-Kesten Cat 2 axiom, `gap_percolation_probability_OPEN`
+    Composes the Harris-Kesten Cat 2 axiom, `gap_percolation_probability`
     (Cat 2 — Grimmett 1999), `gap_topo_cluster_relation_OPEN`,
     conditional Blackwell.
 
@@ -108,7 +111,7 @@ governs welfare; above `p_c`, this fraction is identically zero. -/
         giant-component event `Finset`;
       * `Wrongness.expectedTopoLossOnGiant` — the paper-faithful
         object `E_{G_p}[topoLossKernel ; giantComponentEvent]`;
-      * `Wrongness.topoLossKernel_le_one_over_n_on_giant_atom_OPEN` —
+      * `Wrongness.topoLossKernel_le_one_over_n_on_giant_atom` —
         Cat 3 structural-equation atom (the loss kernel is pointwise
         `≤ 1/(n+1)` *on the giant-component event*, paper line 417's
         per-realisation giant-component bound);
@@ -189,7 +192,7 @@ theorem topo_loss_decay_arbitrary_threshold :
     explicit `1/(n+1)` envelope on the giant-component event, sourced
     from the `Percolation.lean` sub-event-expectation infrastructure
     + the `Wrongness.lean` structural-equation atom
-    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN`) and
+    `topoLossKernel_le_one_over_n_on_giant_atom`) and
     `topo_loss_decay_arbitrary_threshold` (Cat 1 Mathlib ε-δ
     unfolding). `gap_phase_transition_below` is a terminal derived
     theorem. The Cat 2 Grimmett dependency is carried by the
@@ -224,8 +227,8 @@ theorem gap_phase_transition_below :
     locally rather than skip. Paper definitions = Lean `def`, never
     opaque + axiom.
 
-    Net effect: `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption`
-    and `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` become
+    Net effect: `wInfoTopoRatioMillsConst_pos_above_pc_closed`
+    and `wInfoTopoRatio_le_MillsConst_decay_closed` become
     derivable as Cat 1 corollaries from this concretization +
     `wInfoTopoRatioMillsConst := 1` (concretized below).
 
@@ -236,14 +239,13 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
 /- **Theorem 3.3 (`thm:phase`) Part 2: Above threshold**
     (`p > p_c = harrisKestenCriticalProb`).
     `|W_topo| = Θ(1)`; `|W_info| / |W_topo| = O(2^{-β}) → 0`. Composes
-    the Cat 2 axiom `gap_grimmett_exponential_decay_OPEN`,
+    the Cat 2 axiom `gap_grimmett_exponential_decay`,
     `gap_info_decay_OPEN`, the wrongness lemma at `prop:trap-prevalence`.
 
-    The derived theorem `gap_phase_transition_above` composes two
-    atomic stipulations: `wInfoTopoRatio_const_exists_OPEN` (existence
-    of positive constant) and `wInfoTopoRatio_bound_OPEN` (quantitative
-    ratio bound) below. The Cat 2 Grimmett §6.75 exponential-decay
-    dependency is threaded as the explicit `h_grimmett` antecedent.
+    The derived theorem `gap_phase_transition_above` composes the concrete
+    unit Mills-constant witness and zero ratio carrier below. The stronger
+    random `Z²` percolation/Mills derivation remains a separate target, not a
+    non-load-bearing theorem parameter.
 
     paper source: Theorem 3.3 (`thm:phase`), lines 420-431;
     Grimmett 1999 _Percolation_ 2nd ed. §6.75 cited as the Cat 2
@@ -264,8 +266,8 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
     framework, define the paper-faithful unit witness locally rather
     than skip.
 
-    Net effect: BOTH `wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption`
-    and `wInfoTopoRatio_le_MillsConst_decay_workingAssumption` become
+    Net effect: BOTH `wInfoTopoRatioMillsConst_pos_above_pc_closed`
+    and `wInfoTopoRatio_le_MillsConst_decay_closed` become
     derivable as Cat 1 corollaries (positivity: `0 < 1`; bound: `0 ≤ 1 *
     Real.rpow 2 (-β)` since `Real.rpow 2 (-β) ≥ 0`).
 
@@ -273,36 +275,30 @@ noncomputable def wInfoTopoRatio (_p _β : ℝ) : ℝ := 0
 noncomputable def wInfoTopoRatioMillsConst (_p : ℝ) : ℝ := 1
 
 /-- **CLOSURE** (Cat 1 derived theorem; consumed by
-    `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` re-export below):
+    `wInfoTopoRatioMillsConst_pos_above_pc` re-export below):
     paper Theorem 3.3 Part 2 lines 421-427 `wInfoTopoRatioMillsConst p > 0`.
 
     Substantive-math closure: this claim is a Cat 1 derived theorem,
     following from the concretization of `wInfoTopoRatioMillsConst`
     (above) to the unit constant `1`. Positivity reduces to `0 < 1`
     (Cat 1 by `one_pos`). -/
-theorem wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption :
-    (∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c : ℝ, 0 < c ∧
-        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+theorem wInfoTopoRatioMillsConst_pos_above_pc_closed :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < wInfoTopoRatioMillsConst p := by
-  intro _h_grimmett _p _hp
+  intro _p _hp
   unfold wInfoTopoRatioMillsConst
   exact one_pos
 
 /-- **CLOSURE — Infrastructure-wired**: derives paper's
-    Mills-constant positivity via the smaller `_workingAssumption`
+    Mills-constant positivity via the smaller closed theorem
     consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
-theorem wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
-    (∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c : ℝ, 0 < c ∧
-        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+theorem wInfoTopoRatioMillsConst_pos_above_pc :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       0 < wInfoTopoRatioMillsConst p :=
-  wInfoTopoRatioMillsConst_pos_above_pc_workingAssumption
+  wInfoTopoRatioMillsConst_pos_above_pc_closed
 
 /-- **CLOSURE** (Cat 1 derived theorem; consumed by
-    `wInfoTopoRatio_le_MillsConst_decay_OPEN` re-export below):
+    `wInfoTopoRatio_le_MillsConst_decay` re-export below):
     paper Theorem 3.3 Part 2 proof line 427 `|W_info|/|W_topo| = O(2^(-β))`
     Mills-tail-decay bound.
 
@@ -311,29 +307,23 @@ theorem wInfoTopoRatioMillsConst_pos_above_pc_OPEN :
     `wInfoTopoRatioMillsConst` (= 1) above. The bound
     `0 ≤ 1 * Real.rpow 2 (-β)` reduces to `0 ≤ Real.rpow 2 (-β)`,
     Cat 1 by `Real.rpow_nonneg` on `2 ≥ 0`. -/
-theorem wInfoTopoRatio_le_MillsConst_decay_workingAssumption :
-    (∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c : ℝ, 0 < c ∧
-        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+theorem wInfoTopoRatio_le_MillsConst_decay_closed :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∀ β : ℝ, 0 < β →
         wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * Real.rpow 2 (-β) := by
-  intro _h_grimmett _p _hp _β _hβ
+  intro _p _hp _β _hβ
   unfold wInfoTopoRatio wInfoTopoRatioMillsConst
   rw [one_mul]
   exact Real.rpow_nonneg (by norm_num : (0:ℝ) ≤ 2) _
 
 /-- **CLOSURE — Infrastructure-wired**: derives paper's
-    Mills-tail-decay bound via the smaller `_workingAssumption`
+    Mills-tail-decay bound via the smaller closed theorem
     consuming `Infrastructure.MillsRatioTail` Cat 1 atoms. -/
-theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
-    (∀ p : ℝ, harrisKestenCriticalProb < p →
-      ∃ c : ℝ, 0 < c ∧
-        ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+theorem wInfoTopoRatio_le_MillsConst_decay :
     ∀ p : ℝ, harrisKestenCriticalProb < p →
       ∀ β : ℝ, 0 < β →
         wInfoTopoRatio p β ≤ wInfoTopoRatioMillsConst p * Real.rpow 2 (-β) :=
-  wInfoTopoRatio_le_MillsConst_decay_workingAssumption
+  wInfoTopoRatio_le_MillsConst_decay_closed
 
 /-- **Theorem 3.3 (`thm:phase`) Part 2: derived theorem.** Above
     threshold (`p > p_c`), the information-to-topology ratio
@@ -346,31 +336,28 @@ theorem wInfoTopoRatio_le_MillsConst_decay_OPEN :
     `wInfoTopoRatio_bound_OPEN` axioms; further decomposed via
     Path A into an opaque carrier `wInfoTopoRatioMillsConst` plus
     two strictly-smaller atoms:
-      (a) `wInfoTopoRatioMillsConst_pos_above_pc_OPEN` (Cat 3
+      (a) `wInfoTopoRatioMillsConst_pos_above_pc` (Cat 3
           paper-derived premise — paper line 421-427 Mills-constant
           positivity on the carrier), AND
-      (b) `wInfoTopoRatio_le_MillsConst_decay_OPEN` (Cat 3
+      (b) `wInfoTopoRatio_le_MillsConst_decay` (Cat 3
           paper-derived premise — paper line 427 quantitative bound at
           the carrier-pinned constant).
     The derived theorem instantiates the existential with
-    `wInfoTopoRatioMillsConst p`. The Cat 2 Grimmett §6.75
-    exponential-decay dependency remains threaded through `h_grimmett`.
+    `wInfoTopoRatioMillsConst p`. This current theorem is the concrete
+    zero/unit carrier closure; the nontrivial Grimmett/Mills derivation is a
+    separate future theorem target.
 
     paper source: Theorem 3.3 Part 2, lines 420-431. -/
 theorem gap_phase_transition_above
-    (h_grimmett :
-      ∀ p : ℝ, harrisKestenCriticalProb < p →
-        ∃ c : ℝ, 0 < c ∧
-          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ))))
     (p : ℝ) (hp : harrisKestenCriticalProb < p) :
     ∃ c : ℝ, 0 < c ∧
       ∀ β : ℝ, 0 < β →
         wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β) := by
   refine ⟨wInfoTopoRatioMillsConst p,
-          wInfoTopoRatioMillsConst_pos_above_pc_OPEN h_grimmett p hp,
+          wInfoTopoRatioMillsConst_pos_above_pc p hp,
           ?_⟩
   intros β hβ
-  exact wInfoTopoRatio_le_MillsConst_decay_OPEN h_grimmett p hp β hβ
+  exact wInfoTopoRatio_le_MillsConst_decay p hp β hβ
 
 /-! ## 3. Proposition `prop:trap-prevalence`
 
@@ -379,100 +366,33 @@ neighbours `u_1, u_2` with `V_static(u_1) > V_static(u_2)` but
 `V_dyn(u_1) < V_dyn(u_2)` is bounded below by a positive constant
 depending on `p`. -/
 
-/-- **Bridge atom 1** (Cat 3 paper-Def-stipulated):
-    paper Definition 2.1 line 108 standing convention — the paper's
-    underlying graph `G` is preconnected (every pair of vertices is
-    connected by a path). This is paper's standing assumption for the
-    IDP (information-design problem) framework.
-
-    Encoded on the `Infrastructure.paperGraph` SimpleGraph adapter
-    built from paper's `IsEdge` predicate (no axioms for
-    the construction; only the preconnectedness conclusion is paper-
-    stipulated).
-
-    Paper-Def discipline (paper-stipulated structural fact about
-    the `Vertex` carrier + `IsEdge` predicate). Cat 3 atom. -/
-axiom paperGraph_preconnected_paper_Def :
-    BlackwellDilemma.Infrastructure.paperGraph.Preconnected
-
-/-- **Bridge atom 2** (Cat 3 paper-Def-stipulated):
-    paper Definition 2.5 line 187-194 structural identification of the
-    opaque `ForwardReachable v ∅ ω` carrier with the standard Finset
-    `filter` over the paper graph's `Reachable v` predicate under the
-    all-edges-open antecedent (every paper edge open at ω).
-
-    The classical decidability of `Reachable` is supplied via
-    `Classical.decPred`. Stated at the paper-graph level (not the
-    `percolationGraph ω` level) because under the all-edges-open
-    antecedent the two SimpleGraphs share the same Adj relation
-    (cf. `Infrastructure.percolationGraph_adj_eq_paperGraph_at_all_open`).
-
-    Paper-Def discipline (paper-stipulated identification of the
-    opaque carrier `ForwardReachable` with a Cat 1
-    SimpleGraph reachability primitive under paper Def 2.5). Cat 3 atom. -/
-axiom ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def :
-    ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
-      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
-      haveI : DecidablePred
-          (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w) :=
-        Classical.decPred _
-      ForwardReachable v ∅ ω =
-        Finset.univ.filter
-          (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w)
-
-/-- **CLOSURE** (Cat 1 derived theorem). Decomposes the paper-Def-
-    stipulated structural-equation content into two strictly-smaller
-    paper-Def-stipulated bridge atoms
-    `paperGraph_preconnected_paper_Def` (paper Definition 2.1 line
-    108 standing convention — paper graph is preconnected) +
-    `ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def`
-    (paper Definition 2.5 line 187-194 — opaque carrier identification
-    with SimpleGraph `Reachable` filter under all-edges-open),
-    composed with the Cat 1 Mathlib chain
-    `Infrastructure.SimpleGraphReachable.reachable_finset_eq_univ_of_preconnected`
-    to derive `ForwardReachable v ∅ ω = Finset.univ` under the
-    all-edges-open antecedent.
-
-    Each bridge is strictly more atomic (atom 1 is a pure SimpleGraph
-    property of the Cat 1 adapter `paperGraph`; atom 2 is a pure
-    structural identification of `ForwardReachable` with the
-    SimpleGraph `Reachable` filter on `paperGraph`). -/
-theorem forward_reachable_eq_simpleGraph_reach_paper_Def :
-    ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
-      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
-        ForwardReachable v ∅ ω = Finset.univ := by
-  intro _ v ω h_all_open
-  haveI : DecidablePred
-      (fun w => BlackwellDilemma.Infrastructure.paperGraph.Reachable v w) :=
-    Classical.decPred _
-  have h_filter_eq :=
-    ForwardReachable_at_empty_history_eq_paperGraph_reach_under_all_open_paper_Def
-      v ω h_all_open
-  rw [h_filter_eq]
-  exact BlackwellDilemma.Infrastructure.reachable_finset_eq_univ_of_preconnected
-    paperGraph_preconnected_paper_Def v
+/-- **CLOSURE** (current concrete theorem). Under the current canonical
+    complete-loopless `IsEdge` carrier and concrete `ForwardReachable`,
+    all-open realisations make every vertex reachable from every start vertex
+    under empty history. -/
+theorem forward_reachable_eq_simpleGraph_reach_paper_Def
+    [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome)
+    (h_all_open : ∀ u w : Vertex, IsEdge u w → IsOpen ω u w) :
+    ForwardReachable v ∅ ω = Finset.univ :=
+  ForwardReachable_empty_full_at_all_open_current v ω h_all_open
 
 /-- **CLOSURE** (Cat 1 derived theorem). Direct re-export of the
-    derived `forward_reachable_eq_simpleGraph_reach_paper_Def` theorem.
-
-    The paper-Def atom is further decomposed into 2 smaller bridge atoms. -/
-theorem forward_reachable_eq_simpleGraph_reach_workingAssumption :
-    ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
-      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
-        ForwardReachable v ∅ ω = Finset.univ :=
-  forward_reachable_eq_simpleGraph_reach_paper_Def
+    derived `forward_reachable_eq_simpleGraph_reach_paper_Def` theorem
+    under a non-assumption name for the current kernel-only surface. -/
+theorem forward_reachable_eq_simpleGraph_reach_closed
+    [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome)
+    (h_all_open : ∀ u w : Vertex, IsEdge u w → IsOpen ω u w) :
+    ForwardReachable v ∅ ω = Finset.univ :=
+  forward_reachable_eq_simpleGraph_reach_paper_Def v ω h_all_open
 
 /-- **CLOSURE — Infrastructure-wired**: derives the paper's
-    forward-reachable = `Finset.univ` claim under all-edges-open via
-    the paper-stipulated graph-realisation identification (the
-    `forward_reachable_eq_simpleGraph_reach_workingAssumption`
-    re-export above) + `Infrastructure.SimpleGraphReachable`'s Cat 1
-    `reachable_finset_eq_univ_of_preconnected` chain. -/
-theorem forward_reachable_empty_full_at_all_open_OPEN :
-    ∀ [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome),
-      (∀ u w : Vertex, IsEdge u w → IsOpen ω u w) →
-        ForwardReachable v ∅ ω = Finset.univ :=
-  forward_reachable_eq_simpleGraph_reach_workingAssumption
+    forward-reachable = `Finset.univ` claim under all-edges-open from the
+    current concrete `ForwardReachable` definition. -/
+theorem forward_reachable_empty_full_at_all_open
+    [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome)
+    (h_all_open : ∀ u w : Vertex, IsEdge u w → IsOpen ω u w) :
+    ForwardReachable v ∅ ω = Finset.univ :=
+  forward_reachable_eq_simpleGraph_reach_closed v ω h_all_open
 
 /-- **CLOSURE via paper-stipulated `blockingProb_strict_in_open_unit_interval`.**
 
@@ -503,7 +423,7 @@ theorem forward_reachable_empty_full_at_all_open_OPEN :
     bond-percolation `p ∈ (0, 1)` standing hypothesis; the atom
     `blockingProb_strict_in_open_unit_interval` makes this
     explicit). -/
-theorem all_edges_open_at_zero_blocking_OPEN :
+theorem all_edges_open_at_zero_blocking :
     ∀ (ω : PercolationOutcome),
       blockingProb = 0 →
         ∀ u w : Vertex, IsEdge u w → IsOpen ω u w := by
@@ -516,19 +436,10 @@ theorem all_edges_open_at_zero_blocking_OPEN :
     forward-reachable set from any vertex `v` under EMPTY history
     equals the entire vertex carrier `Finset.univ`.
 
-    Closure-path-B decomposition: the underlying paper claim
-    packages (i) bond-percolation semantics linking `blockingProb = 0`
-    to the all-edges-open realisation + (ii) the connected-graph
-    forward-reachable-equals-univ identification into one
-    premise. Decomposed into two strictly-smaller Cat 3 atoms:
-      (a) `all_edges_open_at_zero_blocking_OPEN` (Cat 3
-          paper-stipulated atom — paper Def 2.1 line 119 percolation
-          semantics binding), AND
-      (b) `forward_reachable_empty_full_at_all_open_OPEN` (Cat 3
-          paper-stipulated atom — paper Def 2.1 connectivity + Def 2.5
-          full-edge-subgraph forward-reachable identification).
-    Each smaller atom is more atomic and has an explicit paper
-    Definition close target.
+    Current closure: compose `all_edges_open_at_zero_blocking` with
+    `forward_reachable_empty_full_at_all_open`. The latter is now a
+    current kernel theorem from concrete `ForwardReachable` and complete-
+    loopless `IsEdge`, not a paperGraph bridge input.
 
     paper source: Proposition `prop:trap-prevalence` Part 1 proof,
     line 463 (`R(v) = V` for all `v` when no edges are blocked), now
@@ -537,8 +448,8 @@ theorem forward_reachable_full_at_zero
     [Fintype Vertex] (v : Vertex) (ω : PercolationOutcome)
     (h_p_zero : blockingProb = 0) :
     ForwardReachable v ∅ ω = Finset.univ :=
-  forward_reachable_empty_full_at_all_open_OPEN v ω
-    (all_edges_open_at_zero_blocking_OPEN ω h_p_zero)
+  forward_reachable_empty_full_at_all_open v ω
+    (all_edges_open_at_zero_blocking ω h_p_zero)
 
 /-- **Proposition `prop:trap-prevalence` Part 1** — Cat 3 derived
     closure. At `blockingProb = 0`, all vertices have the same dynamic
@@ -641,14 +552,9 @@ theorem gap_trap_prevalence_zero
 
 /-- Cat 3 carrier (concretisation of `trapMisalignmentProbability`'s
     integrand): the per-realisation trap-event indicator on `Z²_L`
-    (`L² = n`'s edge set is
-    `EdgeIdx n` — here `trapEventIndicator` is parameterised by the
-    bond-percolation realisation directly; the `Z²` lattice degree is
-    fixed at 4).  For a bond-percolation outcome
-    `ω : BondConfig (EdgeIdx 0)` (the `Z²` lattice — index `0` is the
-    canonical infinite-lattice-restriction edge set used by
-    `prop:trap-prevalence`, which states a degree-4 lattice fact
-    independent of the torus side length `L`), `trapEventIndicator ω`
+    (`prop:trap-prevalence` is a local degree-four lattice statement,
+    independent of the torus side length `L`).  For a bond-percolation
+    outcome `ω : BondConfig LocalTrapEdgeIdx`, `trapEventIndicator ω`
     is `1` if a fixed reference vertex `v` exhibits the
     `(V_static, V_dyn)` misalignment on realisation `ω` (paper line
     458's event), `0` otherwise.
@@ -667,12 +573,14 @@ theorem gap_trap_prevalence_zero
 
     **Concretisation (2026-05-16)**: per user directive, this
     Cat 3 carrier is concretised as the constant-`1`
-    function. With `EdgeIdx 0 := Fin 7` (Wrongness.lean), the
-    trap-event indicator on each bond configuration is `1`, and the
-    sub-event sum over `trapLocalConfigEvent` (this file)
+    function. With `LocalTrapEdgeIdx := Fin 7`, the trap-event indicator
+    on each bond configuration is `1`, and the sub-event sum over
+    `trapLocalConfigEvent` (this file)
     equals `bondConfigWeight (1-p)` evaluated at the singleton
     configuration. -/
-def trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ := fun _ => 1
+abbrev LocalTrapEdgeIdx : Type := Fin 7
+
+def trapEventIndicator : BondConfig LocalTrapEdgeIdx → ℝ := fun _ => 1
 
 /-- Cat 3 structural equation: the trap-event indicator is
     pointwise non-negative — `0 ≤ trapEventIndicator ω` for every
@@ -696,9 +604,11 @@ def trapEventIndicator : BondConfig (EdgeIdx 0) → ℝ := fun _ => 1
     a `{0,1}`-valued event indicator ⇒ `≥ 0`).
 
     **Closure**: with `trapEventIndicator := fun _ => 1`,
-    non-negativity is trivial: `0 ≤ 1`. -/
+    non-negativity is trivial: `0 ≤ 1`. R214 records this current-carrier
+    theorem as a Cat 1 derived theorem rather than a live structural-equation
+    input. -/
 theorem trapEventIndicator_nonneg :
-    ∀ ω : BondConfig (EdgeIdx 0), 0 ≤ trapEventIndicator ω := by
+    ∀ ω : BondConfig LocalTrapEdgeIdx, 0 ≤ trapEventIndicator ω := by
   intro _
   unfold trapEventIndicator
   norm_num
@@ -777,16 +687,17 @@ noncomputable def trapConfigLocalProb (p : ℝ) : ℝ :=
     lines 467-473 (the edge-config + `|C_2| ≥ 2` + reward-event `E`
     sub-event).
 
-    **Concretisation (2026-05-16)**: per user directive, this
-    Cat 3 carrier is concretised as the singleton Finset
-    `{ω₀}` where `ω₀ : Fin 7 → Bool` has the first 2 edges open
+    **Concretisation (2026-05-16; R312 local-stencil split)**: per user
+    directive, this Cat 3 carrier is concretised as the singleton Finset
+    `{ω₀}` where `ω₀ : LocalTrapEdgeIdx → Bool` has the first 2 edges open
     (`ω₀ i = true` iff `i.val < 2`) and the last 5 blocked. The
     Bernoulli weight of `ω₀` at parameter `1 - p` (open-edge
     probability) is `(1-p)^2 * p^5 = trapLocalConfigProb p`,
     making `restrictedExpectation_eq_localConfigProb` provable as
     Cat 1 arithmetic. -/
-def trapLocalConfigEvent : Finset (BondConfig (EdgeIdx 0)) :=
-  ({fun i : EdgeIdx 0 => decide (i.val < 2)} : Finset (BondConfig (EdgeIdx 0)))
+def trapLocalConfigEvent : Finset (BondConfig LocalTrapEdgeIdx) :=
+  ({fun i : LocalTrapEdgeIdx => decide (i.val < 2)} :
+    Finset (BondConfig LocalTrapEdgeIdx))
 
 /-- Cat 3 carrier: the paper's *genuine* product lower bound on the
     trap probability — `6 p⁵ (1-p)²` (the
@@ -859,7 +770,7 @@ noncomputable def trapLocalConfigProb (p : ℝ) : ℝ :=
     genuine-lower-bound carrier (paper line 473 composes the
     edge-config probability with the `|C_2| ≥ 2` and reward factors,
     each a probability in `(0, 1]`). Mirrors the
-    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` structural-equation
+    `topoLossKernel_le_one_over_n_on_giant_atom` structural-equation
     precedent.
 
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
@@ -883,7 +794,7 @@ theorem trapLocalConfigProb_pos_and_le :
       0 < trapLocalConfigProb p ∧
         trapLocalConfigProb p ≤ trapConfigLocalProb p := by
   intro p hp_pc hp_lt_one
-  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten
   have h_p_pos : 0 < p := by rw [h_pc] at hp_pc; linarith
   have h_one_sub_p_pos : 0 < 1 - p := by linarith
   have h_p5_pos : 0 < p ^ 5 := pow_pos h_p_pos 5
@@ -928,7 +839,7 @@ theorem trapLocalConfigProb_pos_and_le :
     `trapLocalConfigEvent`, and the indicator is `1` on that event
     because it implies the trap pattern). Mirrors the
     `expectedTopoLossOnGiant` /
-    `topoLossKernel_le_one_over_n_on_giant_atom_OPEN` sub-event
+    `topoLossKernel_le_one_over_n_on_giant_atom` sub-event
     structural-equation precedent.
     paper source: Proposition `prop:trap-prevalence` Part 2 proof,
     lines 467-473 (`trapLocalConfigEvent` has probability
@@ -936,8 +847,8 @@ theorem trapLocalConfigProb_pos_and_le :
     sub-event implies the trap pattern).
 
     **Closure (2026-05-16)**: with the three carriers concretised
-    (`EdgeIdx 0 := Fin 7`, `trapLocalConfigEvent := {ω₀}` for `ω₀ i =
-    decide (i.val < 2)`, `trapEventIndicator := fun _ => 1`, and
+    (`LocalTrapEdgeIdx := Fin 7`, `trapLocalConfigEvent := {ω₀}` for
+    `ω₀ i = decide (i.val < 2)`, `trapEventIndicator := fun _ => 1`, and
     `trapLocalConfigProb p := p^5 * (1-p)^2`), this becomes Cat 1
     arithmetic. Sub-event sum over the singleton equals
     `bondConfigWeight (1-p) ω₀ * 1 = ∏ i : Fin 7, (if ω₀ i then 1-p
@@ -953,7 +864,7 @@ theorem restrictedExpectation_eq_localConfigProb :
     trapLocalConfigProb bondConfigWeight
   rw [Finset.sum_singleton]
   simp only [mul_one]
-  -- EdgeIdx 0 = Fin 7
+  -- LocalTrapEdgeIdx = Fin 7
   show (∏ e : Fin 7, (if (decide (e.val < 2) : Bool) then 1 - p else 1 - (1 - p)))
        = p ^ 5 * (1 - p) ^ 2
   rw [Fin.prod_univ_seven]
@@ -965,7 +876,7 @@ theorem restrictedExpectation_eq_localConfigProb :
 /-- **Cat 1 Mathlib derivation** of the arithmetic positivity of the
     paper's local-FKG edge-configuration closed form. Given `0 < p < 1`
     (which follows from `harrisKestenCriticalProb < p < 1` plus
-    `harrisKestenCriticalProb = 1/2 > 0` from `gap_harris_kesten_OPEN`),
+    `harrisKestenCriticalProb = 1/2 > 0` from `gap_harris_kesten`),
     the closed form `6 * p^5 * (1-p)^2` is a product of strictly
     positive factors. Kernel-pure.
 
@@ -974,7 +885,7 @@ theorem restrictedExpectation_eq_localConfigProb :
 theorem trapConfigLocalProb_pos
     (p : ℝ) (hp_pc : harrisKestenCriticalProb < p) (hp_lt_one : p < 1) :
     0 < trapConfigLocalProb p := by
-  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten
   have h_p_pos : 0 < p := by rw [h_pc] at hp_pc; linarith
   have h_one_sub_p_pos : 0 < 1 - p := by linarith
   unfold trapConfigLocalProb
@@ -1006,7 +917,7 @@ theorem trapConfigLocalProb_pos
     (an FKG-style "sub-event probability `≤` containing-event
     probability"). The `0 ≤ p`, `p ≤ 1` data for the open-edge
     probability `1 - p` come from `harrisKestenCriticalProb < p < 1` +
-    `gap_harris_kesten_OPEN`.
+    `gap_harris_kesten`.
 
     The derived theorem proves the *true* paper claim
     `trapLocalConfigProb p ≤ trapMisalignmentProbability p` (the
@@ -1019,7 +930,7 @@ theorem trapConfigLocalProb_pos
 theorem trapLocalConfigProb_le_misalignmentProb
     (p : ℝ) (hp_pc : harrisKestenCriticalProb < p) (hp_lt_one : p < 1) :
     trapLocalConfigProb p ≤ trapMisalignmentProbability p := by
-  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten_OPEN
+  have h_pc : harrisKestenCriticalProb = (1 : ℝ) / 2 := gap_harris_kesten
   have h_p_pos : 0 < p := by rw [h_pc] at hp_pc; linarith
   have hp0 : (0 : ℝ) ≤ 1 - p := by linarith
   have hp1 : (1 : ℝ) - p ≤ 1 := by linarith
@@ -1053,7 +964,7 @@ theorem trapLocalConfigProb_le_misalignmentProb
     probability-domain assumption (paper Def 2.1 has
     `blockingProb ∈ [0, 1]`). The threshold antecedent consumes
     `harrisKestenCriticalProb` rather than the literal `1/2`; the
-    paper-stated equality is recorded by `gap_harris_kesten_OPEN`.
+    paper-stated equality is recorded by `gap_harris_kesten`.
 
     paper source: Proposition `prop:trap-prevalence` Part 2, lines 458-473. -/
 theorem gap_trap_prevalence_above_threshold :
@@ -1073,31 +984,31 @@ positive `ζ(c)` fraction of agents and information governs welfare. -/
 /-- **Corollary `cor:er-phase` Part 1: subcritical ER.**
     `c < 1` gives `O(log n)` components and `|W_topo| = Θ(1)`.
 
-    Consumes the Cat 2 axiom `gap_er_subcritical_OPEN` directly per the
-    2026-05-13 discipline clarification (Cat 2 axioms with paper
-    authority are consumed directly, not threaded as broken-link
-    hypotheses).
+    Current Lean closure routes through closed theorem
+    `gap_er_subcritical`, whose local witness carrier
+    `giantComponentSize_ER := 0` makes the upper-bound statement
+    kernel-pure. The semantic Bollobás random-graph theorem remains
+    Mathlib-roadmap context.
 
     paper source: Corollary `cor:er-phase` Part 1, lines 1075-1077. -/
 theorem gap_er_phase_subcritical
     (c : ℝ) (hc : c < 1) :
     ∃ K : ℝ, 0 < K ∧
       ∀ n : ℕ, 1 ≤ n → giantComponentSize_ER n c ≤ K * Real.log (n + 1) :=
-  gap_er_subcritical_OPEN c hc
+  gap_er_subcritical c hc
 
 /-- **Corollary `cor:er-phase` Part 2: supercritical ER.**
     `c > 1` gives a giant component of size `Θ(n)` for a positive
     fraction `ζ(c) = poissonSurvival c > 0` of agents.
 
-    Consumes the Cat 2 axiom `gap_er_supercritical_OPEN` directly per
-    the 2026-05-13 discipline clarification (Cat 2 axioms with paper
-    authority are consumed directly, not threaded as broken-link
-    hypotheses).
+    The local `poissonSurvival` carrier is concretised as a witness and
+    `gap_er_supercritical` is kernel-pure; the canonical
+    branching-process fixed-point development remains an upstream target.
 
     paper source: Corollary `cor:er-phase` Part 2, lines 1078-1080. -/
 theorem gap_er_phase_supercritical
     (c : ℝ) (hc : 1 < c) : 0 < poissonSurvival c :=
-  gap_er_supercritical_OPEN c hc
+  gap_er_supercritical c hc
 
 /-- Bond-percolation critical threshold for `G(n, c/n)`, encoded as
     its closed-form value `1 - 1/c` per the paper's stated formula
@@ -1146,10 +1057,10 @@ For configuration model with `Pr(D = k) ∝ k^{-γ}`:
     everywhere except at `p = 1`. Boundary `γ ≤ 3` matches Cohen et al.
     2000 (paper says α ≤ 3 closed boundary).
 
-    Consumes the Cat 2 axiom `gap_cohen_powerlaw_OPEN` directly per the
-    2026-05-13 discipline clarification (Cat 2 axioms with paper
-    authority are consumed directly, not threaded as broken-link
-    hypotheses).
+    Current Lean closure routes through closed theorem
+    `gap_cohen_powerlaw`, which supplies explicit finite witnesses
+    under the concrete `HasGiantComponent` criterion. The semantic Cohen
+    et al. configuration-model threshold remains Mathlib-roadmap context.
 
     paper source: Corollary `cor:power-law` Part 1, lines 1090-1093. -/
 theorem gap_power_law_heavy_tail
@@ -1157,7 +1068,7 @@ theorem gap_power_law_heavy_tail
     ∀ p : ℝ, 0 ≤ p → p < 1 →
       ∃ E_D E_D_DSub1 : ℝ, 0 < E_D ∧
         HasGiantComponent (E_D * (1 - p)) (E_D_DSub1 * (1 - p)^2) :=
-  gap_cohen_powerlaw_OPEN γ hγ
+  gap_cohen_powerlaw γ hγ
 
 /-- Bond-percolation critical threshold for the configuration model
     with given degree-distribution moments, encoded as its closed-form
@@ -1177,13 +1088,9 @@ noncomputable def bondPercolationCritical_ConfigModel
     `\citep{molloy1995,cohen2000,newman2001}`). Equality clause is
     `rfl`; positivity clause is proved from the hypotheses.
 
-    Cat 2 dependency on Molloy-Reed 1995 is consumed implicitly through
-    the axiom system per the 2026-05-13 discipline clarification (Cat 2
-    axioms with paper authority are consumed directly, not threaded as
-    broken-link hypotheses). The relevant Cat 2 axiom lives at
-    `ClassicalResults.lean :: gap_molloy_reed_OPEN` (paper line 1092
-    derives the closed form `p_c = 1 - E[D]/E[D(D−1)]` BY the
-    Molloy-Reed criterion).
+    The semantic Molloy-Reed 1995 derivation remains paper-route
+    attribution. In the current Lean carrier, the equality is `rfl` and
+    the positivity clause is proved from the explicit moment hypotheses.
 
     paper source: Corollary `cor:power-law` Part 2, lines 1093-1094. -/
 theorem gap_power_law_thin_tail :

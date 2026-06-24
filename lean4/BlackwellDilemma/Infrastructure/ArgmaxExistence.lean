@@ -9,7 +9,7 @@ import BlackwellDilemma.Infrastructure.EVTBoundedDecreasing
 
 This file extends `EVTBoundedDecreasing.lean` with **argmax existence
 atoms** for the paper's `aggregate_optimum_exists_per_G_OPEN` and
-`principal_interior_maximum_exists_OPEN`-style claims (paper
+`principal_interior_maximum_exists`-style claims (paper
 Proposition `prop:principal-optimum`).
 
 ## Main results

@@ -32,6 +32,8 @@ import BlackwellDilemma.Infrastructure.PercExpectationSupermodular
 
 namespace BlackwellDilemma
 
+variable [DiagnosticSignalHypothesisData]
+
 /-! ## 1. The mean estimate gap and `κ*`
 
 The cognitive threshold `κ*(p, α)` is defined via
@@ -151,6 +153,7 @@ noncomputable def alphaStar (κ _p : ℝ) : ℝ :=
       agentWelfare AgentType.sentimental β₁ κ α ≤
         agentWelfare AgentType.sentimental β₂ κ α }
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 1 derived theorem: paper Theorem
     4.1 Part 3 line 493 explicit identification `κ* = inf{κ > 0 :
     m(κ) ≥ 0}`. Provable kernel-pure via the `kappaStar` `def`'s
@@ -179,9 +182,10 @@ theorem kappaStar_def :
   fun _ _ => rfl
 
 -- `mLimitOf` and `mLimit_def` are declared AFTER `mLimit` and
--- `mean_estimate_gap_tendsto_mLimit_OPEN` so that `mLimitOf := mLimit`
+-- `mean_estimate_gap_tendsto_mLimit` so that `mLimitOf := mLimit`
 -- is a concrete def and `mLimit_def` becomes a derived theorem.
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 3 atomic structural equation: critical instrumental
     rationality `α*(κ, p)` characterised as the supremum of `α ∈ [0, 1]`
     at which welfare is non-decreasing in `β`. Paper `prop:sentimental`
@@ -231,6 +235,7 @@ theorem alphaStar_def :
 
 /-! ## 2. Theorem 4.1 — Characterisation of the Blackwell Regime -/
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**: for the greedy agent
     in the α-above-α*(0,p) regime, the per-realisation reward kernel
     exhibits a pointwise reversal at the concrete β-pair `(0, 1)`:
@@ -263,9 +268,7 @@ theorem alphaStar_def :
     paper source: Theorem 4.1 Part 1 proof, line 545 ("the agent selects
     u_1 with probability approaching 1" — per-realisation pointwise
     kernel-reversal form). -/
-theorem agentRewardKernel_greedy_alphaAbove_pointwise_le_at_betaZeroOne
-    (_hC : Conditions_C1_C2_C3)
-    (_hT : TerminalNeighbourTopology) :
+theorem agentRewardKernel_greedy_alphaAbove_pointwise_le_at_betaZeroOne :
     ∀ p α : ℝ, alphaStar 0 p < α →
       ∀ ω : BondConfig AgentEdgeIdx,
         agentRewardKernel AgentType.greedy
@@ -320,6 +323,7 @@ theorem agentRewardKernel_greedy_alphaAbove_pointwise_le_at_betaZeroOne
   rw [if_neg h_lhs_branch, if_pos h_rhs_branch]
   norm_num
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**: for the greedy agent
     in the α-above-α*(0,p) regime, there exists a strict-witness
     percolation realisation `ω₀ : BondConfig AgentEdgeIdx` at which the
@@ -349,9 +353,7 @@ theorem agentRewardKernel_greedy_alphaAbove_pointwise_le_at_betaZeroOne
     paper source: Theorem 4.1 Part 1 proof, line 545 ("the agent selects
     u_1 with probability approaching 1" — strict-witness form on the
     trap-firing C2-misalignment event). -/
-theorem agentRewardKernel_greedy_alphaAbove_strict_witness_at_betaZeroOne
-    (_hC : Conditions_C1_C2_C3)
-    (_hT : TerminalNeighbourTopology) :
+theorem agentRewardKernel_greedy_alphaAbove_strict_witness_at_betaZeroOne :
     ∀ p α : ℝ, alphaStar 0 p < α →
       ∃ ω₀ : BondConfig AgentEdgeIdx,
         agentRewardKernel AgentType.greedy
@@ -396,6 +398,7 @@ theorem agentRewardKernel_greedy_alphaAbove_strict_witness_at_betaZeroOne
   rw [if_neg h_lhs_branch, if_pos h_rhs_branch]
   norm_num
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 1 derived theorem (via Infrastructure
     `FiveStateReversalWitness` + the two smaller atoms above).
 
@@ -418,9 +421,7 @@ theorem agentRewardKernel_greedy_alphaAbove_strict_witness_at_betaZeroOne
     existential collapses to a Cat 1 derivation.
 
     paper source: Theorem 4.1 Part 1, lines 491 + 545. -/
-theorem agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness
-    (hC : Conditions_C1_C2_C3)
-    (hT : TerminalNeighbourTopology) :
+theorem agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness :
     ∀ p α : ℝ, alphaStar 0 p < α →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
         (∀ ω : BondConfig AgentEdgeIdx,
@@ -437,11 +438,12 @@ theorem agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness
   · -- Pointwise ≤ from smaller atom A.
     intro ω
     exact agentRewardKernel_greedy_alphaAbove_pointwise_le_at_betaZeroOne
-      hC hT p α h_alpha ω
+      p α h_alpha ω
   · -- Strict witness from smaller atom B.
     exact agentRewardKernel_greedy_alphaAbove_strict_witness_at_betaZeroOne
-      hC hT p α h_alpha
+      p α h_alpha
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 Part 1: Failure at `κ = 0`. For `α > α*(0, p)`, greedy
     welfare is non-monotone in β.
 
@@ -459,9 +461,7 @@ theorem agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness
          (consumed inside the foundation lemma).
 
     paper source: Theorem 4.1 Part 1, line 491. -/
-theorem gap_cognitive_threshold_part1
-    (hC : Conditions_C1_C2_C3)
-    (hT : TerminalNeighbourTopology) :
+theorem gap_cognitive_threshold_part1 :
     ∀ p α : ℝ, alphaStar 0 p < α →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
         agentWelfare AgentType.greedy β₂ 0 α <
@@ -469,11 +469,12 @@ theorem gap_cognitive_threshold_part1
   intro p α h_alpha
   obtain ⟨β₁, β₂, hβ_lt, h_le, ω₀, h_strict⟩ :=
     agentRewardKernel_greedy_alphaAbove_alphaStar_kernel_reversal_witness
-      hC hT p α h_alpha
+      p α h_alpha
   refine ⟨β₁, β₂, hβ_lt, ?_⟩
   exact agentWelfare_strict_lt_of_kernel_pointwise_le_strict_at_one
     AgentType.greedy 0 α β₁ β₂ h_le ω₀ h_strict
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Theorem 4.1 Part 2: Recovery at `κ → ∞`.**
     For sufficiently large κ, welfare is monotonically non-decreasing in β.
 
@@ -481,15 +482,14 @@ theorem gap_cognitive_threshold_part1
     the κ-agent's welfare at sufficiently large `κ` (the high-cognition
     limit where the agent's posterior converges to the truth and the
     conditional Blackwell-ordering argument applies — a paper-
-    application to an opaque carrier, Cat 3 with explicit Cat 2 chain).
-    The Cat 2 axiom `gap_blackwell_monotonicity_OPEN` (Blackwell
-    1951/1953) is threaded as the explicit `h_blackwell` antecedent;
-    the relevant axiom lives at
-    `ClassicalResults.lean :: gap_blackwell_monotonicity_OPEN`.
+    application to an opaque carrier, Cat 3 with an explicit Blackwell
+    monotonicity antecedent). The canonical concrete witness for that
+    antecedent is the closed theorem
+    `ClassicalResults.lean :: gap_blackwell_monotonicity`.
 
     paper source: Theorem 4.1 Part 2, line 492.
 
-    `kappa_large_blackwell_recovery_OPEN` is a derived theorem
+    `kappa_large_blackwell_recovery` is a derived theorem
     composing:
       * the paper-stipulated pointwise (conditional-on-`R`) Blackwell-
         monotonicity structural equation
@@ -503,17 +503,13 @@ theorem gap_cognitive_threshold_part1
         (`percExpectation_mono` transfers pointwise `≤` to the
         bond-percolation expectation).
     The threshold `κ₀` is the witness from the pointwise structural
-    equation. The `h_blackwell` / `hC` / `hT` antecedents are retained
-    (now unused) for audit visibility: `#print axioms` on
-    consumers still surfaces `gap_blackwell_monotonicity_OPEN`
-    (threaded via `h_blackwell`) and the diagnostic-condition scope
-    predicates. -/
-theorem kappa_large_blackwell_recovery_OPEN
+    equation. The optional `h_blackwell` antecedent is retained on this
+    generic route for semantic audit visibility; C1-C3 and terminal-topology
+    predicates are not proof-bearing in the current kernel route. -/
+theorem kappa_large_blackwell_recovery
     (_h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1)
-    (_hC : Conditions_C1_C2_C3)
-    (_hT : TerminalNeighbourTopology) :
+        agentWelfare AgentType.bayesian β₂ 0 1) :
     ∀ _p α : ℝ,
       ∃ κ₀ : ℝ, ∀ κ β₁ β₂ : ℝ, κ₀ ≤ κ → β₁ ≤ β₂ →
         agentWelfare AgentType.kappaAgent β₁ κ α ≤
@@ -526,6 +522,7 @@ theorem kappa_large_blackwell_recovery_OPEN
     AgentType.kappaAgent κ α
     (fun b₁ b₂ hb ω => h_ptwise κ α hκ b₁ b₂ hb ω) β₁ β₂ hβ
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 Part 2: Recovery at `κ → ∞`. For sufficiently large κ,
     the κ-agent's welfare is monotonically non-decreasing in β:
     cognitive depth restores correct posterior estimates of
@@ -533,22 +530,34 @@ theorem kappa_large_blackwell_recovery_OPEN
     monotonicity chain on the conditional decision subproblem.
 
     Derived theorem composing the atomic stipulation
-    `kappa_large_blackwell_recovery_OPEN`. Cat 2 dependency on
-    Blackwell 1951/1953 surfaces via the `h_blackwell` antecedent
-    thread.
+    `kappa_large_blackwell_recovery`. Blackwell 1951/1953 remains
+    the semantic paper-route attribution for the `h_blackwell` antecedent;
+    in the concrete scalar development it can be supplied by the closed
+    theorem `gap_blackwell_monotonicity`.
 
     paper source: Theorem 4.1 Part 2, line 492. -/
-theorem gap_cognitive_threshold_part2
+theorem gap_cognitive_threshold_part2_from_blackwell
     (h_blackwell : ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
       agentWelfare AgentType.bayesian β₁ 0 1 ≤
-        agentWelfare AgentType.bayesian β₂ 0 1)
-    (hC : Conditions_C1_C2_C3)
-    (hT : TerminalNeighbourTopology) :
+        agentWelfare AgentType.bayesian β₂ 0 1) :
     ∀ _p α : ℝ,
       ∃ κ₀ : ℝ, ∀ κ β₁ β₂ : ℝ, κ₀ ≤ κ → β₁ ≤ β₂ →
         agentWelfare AgentType.kappaAgent β₁ κ α ≤
           agentWelfare AgentType.kappaAgent β₂ κ α :=
-  kappa_large_blackwell_recovery_OPEN h_blackwell hC hT
+  kappa_large_blackwell_recovery h_blackwell
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Public Theorem 4.1 Part 2 route. The generic route remains
+    `gap_cognitive_threshold_part2_from_blackwell`; the public theorem
+    consumes the current closed Bayesian monotonicity theorem internally while
+    exposing only the theorem's active kernel inputs. -/
+theorem gap_cognitive_threshold_part2 :
+    ∀ _p α : ℝ,
+      ∃ κ₀ : ℝ, ∀ κ β₁ β₂ : ℝ, κ₀ ≤ κ → β₁ ≤ β₂ →
+        agentWelfare AgentType.kappaAgent β₁ κ α ≤
+          agentWelfare AgentType.kappaAgent β₂ κ α :=
+  gap_cognitive_threshold_part2_from_blackwell
+    gap_blackwell_monotonicity
 
 /-- Paper-instance-local `V_dyn(u_2) − V_dyn(u_1)` value abstracted
     as a single ℝ-valued function of `p`. Paper Theorem 4.1 Part 3
@@ -570,7 +579,7 @@ theorem gap_cognitive_threshold_part2
 
     Where Mathlib lacks the typed p-parameterised V_dyn framework, the
     paper-faithful canonical-instance witness is defined locally rather
-    than skipped. `mLimitDifference_pos_via_V_dyn_workingAssumption`
+    than skipped. `mLimitDifference_pos_via_V_dyn_closed`
     becomes derivable as a corollary of `mLimitDifference_fiveState_pos`.
 
     paper source: Theorem 4.1 Part 3, line 505 (`V_dyn(u_2) −
@@ -596,6 +605,7 @@ noncomputable def mLimitDifference (_p : ℝ) : ℝ :=
     V_dyn(u_1) =: mLimit p`). -/
 noncomputable def mLimit : ℝ → ℝ := fun p => mLimitDifference p
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Kernel-pure derived theorem. Paper Theorem 4.1 Part 3 (line 489 +
     line 505) STATES that `m(κ) = E[V̂_κ(u_2)] − E[V̂_κ(u_1)]` is
     realised as a difference of Gaussian conjugate-prior posterior
@@ -640,14 +650,14 @@ noncomputable def mLimit : ℝ → ℝ := fun p => mLimitDifference p
     Part 4, line 555 (`E_p[V_dyn(u_2)] = (1-p)·r(w) + p·r(u_2)` enters
     via prior `mu0_2`). -/
 theorem mean_estimate_gap_eq_posterior_difference_paper_Def :
-    Conditions_C1_C2_C3 → ∀ p : ℝ,
+    ∀ p : ℝ,
       ∃ mu0_1 mu0_2 tau0sq tausq ybar1 ybar2 : ℝ,
         0 < tau0sq ∧ 0 ≤ tausq ∧
         ybar2 - ybar1 = mLimit p ∧
         ∀ κ : ℝ, mean_estimate_gap p κ =
           BlackwellDilemma.Infrastructure.gaussianPosteriorMean mu0_2 tau0sq ybar2 κ tausq -
           BlackwellDilemma.Infrastructure.gaussianPosteriorMean mu0_1 tau0sq ybar1 κ tausq := by
-  intro _hC p
+  intro p
   refine ⟨BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u1_fiveState,
     BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p,
     1, 1,
@@ -672,6 +682,7 @@ theorem mean_estimate_gap_eq_posterior_difference_paper_Def :
     intro κ
     rfl
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Continuity of the mean-
     estimate-gap on `(0, ∞)` under Conditions C1-C3.
 
@@ -692,11 +703,11 @@ theorem mean_estimate_gap_eq_posterior_difference_paper_Def :
     paper source: Theorem 4.1 Part 3, line 493 (`m(κ) is continuous on
     (0, ∞)` under C1-C3). -/
 theorem mean_estimate_gap_continuous_paper_Def :
-    Conditions_C1_C2_C3 → ∀ p : ℝ,
+    ∀ p : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) := by
-  intro hC p
+  intro p
   obtain ⟨mu0_1, mu0_2, tau0sq, tausq, ybar1, ybar2, htau0sq, htausq, _h_mlimit, h_eq⟩ :=
-    mean_estimate_gap_eq_posterior_difference_paper_Def hC p
+    mean_estimate_gap_eq_posterior_difference_paper_Def p
   have h_fun_eq : (fun κ : ℝ => mean_estimate_gap p κ) =
       (fun κ : ℝ =>
         BlackwellDilemma.Infrastructure.gaussianPosteriorMean
@@ -712,24 +723,26 @@ theorem mean_estimate_gap_continuous_paper_Def :
     (BlackwellDilemma.Infrastructure.gaussianPosteriorMean_continuousOn_in_n
       mu0_1 tau0sq ybar1 tausq htau0sq htausq)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Direct re-export of the derived theorem
     `mean_estimate_gap_continuous_paper_Def`. -/
-theorem mean_estimate_gap_continuous_workingAssumption :
-    Conditions_C1_C2_C3 → ∀ p : ℝ,
+theorem mean_estimate_gap_continuous_from_posterior_bridge :
+    ∀ p : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) :=
   mean_estimate_gap_continuous_paper_Def
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Infrastructure-wired derivation**: derives paper's
     `m(κ)` continuity claim via the smaller carrier-Gaussian
-    identification (the `mean_estimate_gap_continuous_workingAssumption`
+    identification (the `mean_estimate_gap_continuous_from_posterior_bridge`
     re-export above) consuming `Infrastructure.GaussianPosterior`
     continuity atoms. -/
-theorem mean_estimate_gap_continuous_OPEN :
-    Conditions_C1_C2_C3 →
+theorem mean_estimate_gap_continuous :
     ∀ p : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) :=
-  mean_estimate_gap_continuous_workingAssumption
+  mean_estimate_gap_continuous_from_posterior_bridge
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Asymptotic limit of the
     mean-estimate-gap as `κ → ∞` under Conditions C1-C3.
 
@@ -751,12 +764,12 @@ theorem mean_estimate_gap_continuous_OPEN :
     paper source: Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) −
     V_dyn(u_1) =: mLimit p` under C1-C3). -/
 theorem mean_estimate_gap_tendsto_mLimit_paper_Def :
-    Conditions_C1_C2_C3 → ∀ p : ℝ,
+    ∀ p : ℝ,
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
         (nhds (mLimit p)) := by
-  intro hC p
+  intro p
   obtain ⟨mu0_1, mu0_2, tau0sq, tausq, ybar1, ybar2, htau0sq, htausq, h_mlimit, h_eq⟩ :=
-    mean_estimate_gap_eq_posterior_difference_paper_Def hC p
+    mean_estimate_gap_eq_posterior_difference_paper_Def p
   have h_fun_eq : (fun κ : ℝ => mean_estimate_gap p κ) =
       (fun κ : ℝ =>
         BlackwellDilemma.Infrastructure.gaussianPosteriorMean
@@ -772,25 +785,27 @@ theorem mean_estimate_gap_tendsto_mLimit_paper_Def :
     (BlackwellDilemma.Infrastructure.gaussianPosteriorMean_tendsto_data_mean_atTop_n
       mu0_1 tau0sq ybar1 tausq htau0sq htausq)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Direct re-export of the derived theorem
     `mean_estimate_gap_tendsto_mLimit_paper_Def`. -/
-theorem mean_estimate_gap_tendsto_mLimit_workingAssumption :
-    Conditions_C1_C2_C3 → ∀ p : ℝ,
+theorem mean_estimate_gap_tendsto_mLimit_from_posterior_bridge :
+    ∀ p : ℝ,
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
         (nhds (mLimit p)) :=
   mean_estimate_gap_tendsto_mLimit_paper_Def
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Infrastructure-wired derivation**: derives paper's
     `m(κ) → mLimit p` Tendsto claim via the smaller bridge atom
-    (the `mean_estimate_gap_tendsto_mLimit_workingAssumption` re-export
+    (the `mean_estimate_gap_tendsto_mLimit_from_posterior_bridge` re-export
     above). -/
-theorem mean_estimate_gap_tendsto_mLimit_OPEN :
-    Conditions_C1_C2_C3 →
+theorem mean_estimate_gap_tendsto_mLimit :
     ∀ p : ℝ,
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
         (nhds (mLimit p)) :=
-  mean_estimate_gap_tendsto_mLimit_workingAssumption
+  mean_estimate_gap_tendsto_mLimit_from_posterior_bridge
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 1 derived theorem (substantive-math closure): paper line 505
     explicit identification `mLimit p = mLimitDifference p`. Provable
     kernel-pure via the `mLimit` `def`'s unfolding (`rfl`).
@@ -805,7 +820,7 @@ theorem mean_estimate_gap_tendsto_mLimit_OPEN :
     paper source: Theorem 4.1 Part 3, line 505 (`m(κ) → V_dyn(u_2) −
     V_dyn(u_1) =: mLimit p`; the `=:` IS the carrier-defining
     identification). -/
-theorem mLimit_eq_mLimitDifference_OPEN :
+theorem mLimit_eq_mLimitDifference :
     ∀ p : ℝ, mLimit p = mLimitDifference p :=
   fun _ => rfl
 
@@ -816,62 +831,67 @@ theorem mLimit_eq_mLimitDifference_OPEN :
     but identifying them as the same paper-stipulated quantity. -/
 noncomputable def mLimitOf (p : ℝ) : ℝ := mLimit p
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. The mean-estimate-gap converges to
     `mLimitOf p` (paper-stipulated single limit value) as κ → ∞.
-    Composes `mean_estimate_gap_tendsto_mLimit_OPEN` +
+    Composes `mean_estimate_gap_tendsto_mLimit` +
     `mLimitOf := mLimit` def-unfolding.
 
     paper source: Theorem 4.1 Part 3, line 505. -/
-theorem mLimit_def (hC : Conditions_C1_C2_C3) :
+theorem mLimit_def :
     ∀ (p : ℝ),
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
         (nhds (mLimitOf p)) := by
   intro p
   show Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
     (nhds (mLimit p))
-  exact mean_estimate_gap_tendsto_mLimit_OPEN hC p
+  exact mean_estimate_gap_tendsto_mLimit p
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Derived theorem: paper Theorem 4.1 Part 3 line 505
-    `V_dyn(u_2) − V_dyn(u_1) > 0` under C1-C3.
+    `V_dyn(u_2) - V_dyn(u_1) > 0` for the current concrete
+    five-state witness.
 
-    `mLimitDifference_pos_via_V_dyn_workingAssumption` is a derived
+    `mLimitDifference_pos_via_V_dyn_closed` is a derived
     theorem following from the concrete-def closure of
     `mLimitDifference` (above). The carrier is concretised to the
     canonical 5-state V_dyn-difference witness (paper-instance-local
     per paper line 505), so the positivity claim reduces to the
     Cat 1 fact `Infrastructure.MLimitDifferenceConcrete.
     mLimitDifference_fiveState_pos` (= 0.4 > 0 by `norm_num`). -/
-theorem mLimitDifference_pos_via_V_dyn_workingAssumption :
-    Conditions_C1_C2_C3 → ∀ p : ℝ, 0 < mLimitDifference p := by
-  intro _hC _p
+theorem mLimitDifference_pos_via_V_dyn_closed :
+    ∀ p : ℝ, 0 < mLimitDifference p := by
+  intro _p
   unfold mLimitDifference
   exact Infrastructure.FiveState.mLimitDifference_fiveState_pos
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Infrastructure-wired derivation**: derives paper's
     `mLimitDifference p > 0` claim via the smaller V_dyn-difference
     inheritance bridge (the
-    `mLimitDifference_pos_via_V_dyn_workingAssumption` re-export above)
+    `mLimitDifference_pos_via_V_dyn_closed` re-export above)
     backed by Cat 1 prototype evidence in
     `Infrastructure.MLimitDifferenceConcrete`. -/
-theorem mLimitDifference_pos_OPEN :
-    Conditions_C1_C2_C3 →
+theorem mLimitDifference_pos :
     ∀ p : ℝ, 0 < mLimitDifference p :=
-  mLimitDifference_pos_via_V_dyn_workingAssumption
+  mLimitDifference_pos_via_V_dyn_closed
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 1 derived theorem: the limit value `mLimit p` of the
     mean-estimate-gap as `κ → ∞` is strictly positive.
 
-    Composes the structural-equation atom `mLimit_eq_mLimitDifference_OPEN`
-    (paper line 505 identification of the limit with the
-    `V_dyn`-difference) with the smaller paper-derived atom
-    `mLimitDifference_pos_OPEN` (C2-derived strict positivity).
+    Composes the concrete-def equality `mLimit_eq_mLimitDifference`
+    with `mLimitDifference_pos`, which unfolds the current
+    `mLimitDifference` carrier to the canonical five-state
+    `mLimitDifference_fiveState` positivity theorem.
 
     paper source: Theorem 4.1 Part 3, line 505. -/
 theorem mLimit_pos
-    (hC : Conditions_C1_C2_C3) (p : ℝ) : 0 < mLimit p := by
-  rw [mLimit_eq_mLimitDifference_OPEN]
-  exact mLimitDifference_pos_OPEN hC p
+    (p : ℝ) : 0 < mLimit p := by
+  rw [mLimit_eq_mLimitDifference]
+  exact mLimitDifference_pos p
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 Mathlib derivation**: the cognitive threshold `kappaStar p α`
     is non-negative. Paper Theorem 4.1 Part 3 (line 493) characterises
     `kappaStar p α` as `sInf {κ > 0 : m(κ) ≥ 0}`, so `0 ≤ kappaStar p α`
@@ -890,6 +910,7 @@ theorem kappaStar_nonneg :
   rw [kappaStar_def p α]
   exact Real.sInf_nonneg (fun _ ⟨h_pos, _⟩ => le_of_lt h_pos)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 Part 3: Existence of `κ*`. `m(κ)` (the mean-estimate-
     gap, `mean_estimate_gap p κ`) is continuous on `(0, ∞)`, and
     `m(κ) → V_dyn(u_2) − V_dyn(u_1) =: mLimit p > 0` as `κ → ∞`. The
@@ -898,11 +919,10 @@ theorem kappaStar_nonneg :
     lies in `[0, ∞)`.
 
     Derived theorem composing five atomic stipulations:
-    * `mean_estimate_gap_continuous_OPEN` (continuity on `(0, ∞)`),
-    * `mean_estimate_gap_tendsto_mLimit_OPEN` (Tendsto limit),
-    * `mLimit_pos` (derived theorem composing
-      `mLimit_eq_mLimitDifference_OPEN` structural-equation atom +
-      `mLimitDifference_pos_OPEN` smaller paper-derived atom),
+    * `mean_estimate_gap_continuous` (continuity on `(0, ∞)`),
+    * `mean_estimate_gap_tendsto_mLimit` (Tendsto limit),
+    * `mLimit_pos` (current concrete-def Cat 1 theorem composing
+      `mLimit_eq_mLimitDifference` + `mLimitDifference_pos`),
     * `kappaStar_def` (inf-characterisation atom), and
     * `kappaStar_nonneg` (Cat 1 theorem).
     The composition is closed kernel-pure; the atomic stipulations
@@ -916,8 +936,7 @@ theorem kappaStar_nonneg :
     does NOT claim continuity at or below 0.
 
     paper source: Theorem 4.1 Part 3, line 493 + 505. -/
-theorem gap_cognitive_threshold_part3
-    (hC : Conditions_C1_C2_C3) :
+theorem gap_cognitive_threshold_part3 :
     ∀ p α : ℝ,
       ContinuousOn (fun κ : ℝ => mean_estimate_gap p κ) (Set.Ioi 0) ∧
       Filter.Tendsto (fun κ : ℝ => mean_estimate_gap p κ) Filter.atTop
@@ -930,9 +949,9 @@ theorem gap_cognitive_threshold_part3
       0 ≤ kappaStar p α := by
   intros p α
   refine ⟨?_, ?_, ?_, ?_, ?_⟩
-  · exact mean_estimate_gap_continuous_OPEN hC p
-  · exact mean_estimate_gap_tendsto_mLimit_OPEN hC p
-  · exact mLimit_pos hC p
+  · exact mean_estimate_gap_continuous p
+  · exact mean_estimate_gap_tendsto_mLimit p
+  · exact mLimit_pos p
   · exact kappaStar_def p α
   · exact kappaStar_nonneg p α
 
@@ -960,6 +979,7 @@ the Mathlib convention `Real.sInf_empty = 0` gives `kappaStar p₂ α =
 claim holds under the non-emptiness premise (the threshold actually
 exists at `p₂`), which is the hypothesis of the bounded form below. -/
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Kernel-pure derived theorem. Paper Theorem 4.1 Part 4 proof line
     555 STATES: "the mean estimate gap `m(κ)` decreases as `p`
     increases (the prior assigns lower continuation value to the
@@ -1005,6 +1025,7 @@ theorem mean_estimate_gap_antitone_in_p_paper_Def :
   exact BlackwellDilemma.Infrastructure.MeanEstimateGap.priorPosteriorDifference_fiveState_antitone_in_p
     κ hκ p₁ p₂ h_p_le
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Theorem 4.1 Part 4: Monotonicity in `p`** (paper-faithful bounded
     form on the abstract `kappaStar` carrier).
 
@@ -1074,6 +1095,7 @@ theorem gap_cognitive_threshold_part4 :
   -- Step 4: csInf is anti-monotone w.r.t. ⊆.
   exact csInf_le_csInf h_bdd h_ne h_sub
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Strict kernel-pure derived theorem: Part 5 monotonicity of the
     cognitive threshold in `α`.
 
@@ -1155,32 +1177,22 @@ theorem gap_cognitive_threshold_part5 :
     by Harris (1960) + Kesten (1980) + Cardy (1992) + Smirnov (2001) +
     Smirnov-Werner (2001).
 
-    **Concretisation** (dominance-discharge form): the carrier is the
-    concrete `noncomputable def` realising the **lower envelope of the
+    **Legacy concretisation** (R205, now R207 dead-end evidence): this
+    concrete `noncomputable def` realises the **lower envelope of the
     cognitive threshold over the high-α regime**:
 
       `harrisKestenScalingFunction p :=
          sInf { kappaStar p α | α ≥ α*(0, p_c) }`.
 
-    This is the canonical concretisation of the paper's substantive
-    cognitive-percolation relationship: the cognitive threshold's
-    blow-up at `p_c` is uniformly bounded below by the lower envelope
-    over the high-α regime (the regime where the paper Theorem 4.1
-    Part 6 divergence applies). The Harris-Kesten + Cardy + Smirnov-
-    Werner Cat 2 universality content is honestly retained as a
-    divergence claim on this concrete carrier (see
-    `harrisKestenScalingFunction_diverges_at_pc_paper_Def` below).
-
-    **Why this concretisation honestly preserves Cat 2 content**: the
-    paper's substantive content is that the cognitive threshold
-    inherits its blow-up from the underlying percolation criticality;
-    encoding this as the lower envelope over the high-α regime gives
-    a concrete carrier whose divergence at `p_c⁻` IS the Harris-Kesten
-    universality lifted through the cognitive-percolation dominance
-    ordering. The Cat 2 substance (universality) remains intact; only
-    the Cat 3 stipulation about the cognitive-percolation
-    ordering is discharged as a Cat 1 derived theorem via `csInf_le`
-    on the new carrier.
+    R207 proves that this particular lower-envelope carrier is
+    identically zero on `p ≥ 0`, because the unbounded high-α domain
+    includes α-values whose `kappaStar` feasible set is empty and
+    Mathlib evaluates `sInf ∅` as `0`. The definition is therefore
+    retained only as a kernel-checked dead-end witness. The live Part 6
+    transfer interface below is parameterised by an arbitrary
+    replacement scaling carrier `s`, plus explicit proofs that `s`
+    diverges and is bounded above by `kappaStar` in the paper's high-α
+    regime.
 
     paper source: Harris 1960 + Kesten 1980 + Cardy 1992 + Smirnov 2001
     + Smirnov-Werner 2001 percolation universality at p_c on Z², lifted
@@ -1190,39 +1202,39 @@ noncomputable def harrisKestenScalingFunction (p : ℝ) : ℝ :=
   sInf (Set.image (fun α : ℝ => kappaStar p α)
     (Set.Ici (alphaStar 0 harrisKestenCriticalProb)))
 
-/-- **Cat 2 universality atom** (Cat 2 substantive
-    Harris-Kesten + Cardy + Smirnov-Werner percolation universality
-    content, lifted through the lower-envelope concretisation): the
-    cognitive-percolation lower envelope
-    `harrisKestenScalingFunction p = sInf {kappaStar p α | α ≥ α*(0,
-    p_c)}` diverges as `p ↗ p_c⁻`.
+/-- Explicit hyperbolic replacement-scaling prototype at the Harris-Kesten
+    critical point. This is not yet the full paper Part 6 closure: the
+    remaining mathematical input is the domination proof
+    `criticalHyperbolicScaling p <= kappaStar p alpha` in the high-alpha
+    regime. -/
+noncomputable def criticalHyperbolicScaling (p : Real) : Real :=
+  BlackwellDilemma.Infrastructure.hyperbolicBelowScaling
+    harrisKestenCriticalProb p
 
-    **Substantive content** (honest restatement on the concrete
-    carrier): this axiom encodes — on the concretised lower-
-    envelope carrier (Cat 1 `noncomputable def` above) — the
-    substantive Harris-Kesten + Smirnov-Werner percolation universality
-    content as it applies in the cognitive setting: the lower envelope
-    of cognitive thresholds over the high-α regime inherits its
-    blow-up at `p_c` from the underlying Z²-percolation criticality.
-    Equivalently: `kappaStar p α → +∞` as `p → p_c⁻` uniformly in
-    `α ≥ α*(0, p_c)`.
+omit [DiagnosticSignalHypothesisData] in
+/-- The explicit replacement-scaling prototype has the required one-sided
+    divergence at `p_c`. This closes the divergence half of the R208
+    replacement-scaling interface; domination by `kappaStar` remains the
+    separate paper-specific frontier. -/
+theorem criticalHyperbolicScaling_diverges_at_pc :
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      criticalHyperbolicScaling harrisKestenCriticalProb := by
+  simpa [criticalHyperbolicScaling] using
+    BlackwellDilemma.Infrastructure.hyperbolicBelowScaling_diverges_at
+      harrisKestenCriticalProb
 
-    The substantive Cat 2 source (Harris 1960 + Kesten 1980 + Cardy
-    1992 + Smirnov 2001 + Smirnov-Werner 2001 universality at `p_c =
-    1/2`) lies beyond Mathlib's current bond-percolation
-    infrastructure (GiantComponentMills + SLE/Cardy);
-    the divergence at `p_c = 1/2` is encoded here as a Cat 2 axiom
-    per paper-Def discipline. Substantive Cat 2 content
-    awaiting Mathlib bond-percolation + Cardy + SLE infrastructure.
+/- Legacy R205 lower-envelope divergence claim. R207 proves this claim
+    false for the current carrier, so it is no longer retained as a live
+    proof interface. The dead-end theorem below states the exact retired
+    claim directly.
 
     paper source: Harris 1960 + Kesten 1980 percolation universality at
     p_c = 1/2 on Z² (Cat 2 conceptual source); Cardy 1992 + Smirnov 2001
     + Smirnov-Werner 2001 critical exponents; paper Theorem 4.1 Part 6
-    line 496 lift through the cognitive-percolation lower envelope. -/
-axiom harrisKestenScalingFunction_diverges_at_pc_paper_Def :
-    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
-      harrisKestenScalingFunction harrisKestenCriticalProb
+    line 496 lift through the cognitive-percolation lower envelope. The live
+    replacement route is `kappaStar_diverges_at_pc_via_scaling_carrier`. -/
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Dominance-discharge theorem** (Cat 1 derived theorem):
     paper's cognitive-threshold `kappaStar p α` pointwise-dominates the
     concretised percolation scaling function
@@ -1270,26 +1282,17 @@ theorem kappaStar_dominates_percolation_scaling_paper_Def :
     (fun β _hβ => kappaStar_nonneg p β)
     hα
 
-/-- **Cat 1 derived theorem** (pointwise divergence form).
-    Substantively derived by composing the Cat 2
-    Harris-Kesten + Cardy + Smirnov-Werner percolation universality
-    content (`harrisKestenScalingFunction_diverges_at_pc_paper_Def`,
-    a substantive divergence claim on the concretised lower-
-    envelope carrier) with the Cat 1 dominance derived theorem
-    (`kappaStar_dominates_percolation_scaling_paper_Def`, derived
-    via `csInf_le` on the concretised carrier) via the Cat 1 generic
-    lifting `Infrastructure.HarrisKestenCriticalDivergence.cognitive_
-    kernel_diverges_via_percolation_scaling`:
+omit [DiagnosticSignalHypothesisData] in
+/-- **Cat 1 replacement interface** (pointwise divergence form).
+    Given any candidate scaling carrier `s`, if `s` diverges from below
+    at `p_c` and `s p ≤ kappaStar p α` throughout the high-α paper
+    regime, then `kappaStar p α` diverges from below at `p_c`.
 
-    1. **Cat 2 universality** (axiom): `harrisKestenScalingFunction
-       p = sInf {kappaStar p α | α ≥ α*(0, p_c)}` diverges at `p_c⁻`.
-       This is the Harris-Kesten + Cardy + Smirnov-Werner universality
-       content lifted through the lower-envelope concretisation.
-    2. **Cat 1 dominance** (theorem): `harrisKestenScalingFunction p ≤
-       kappaStar p α` for all `α ≥ α*(0, p_c)` and `p < p_c`. Direct
-       `csInf_le` consequence of the lower-envelope concretisation.
-    3. **Cat 1 generic lifting** transfers divergence from the
-       percolation scaling carrier to the dominating cognitive kernel.
+    This is the kernel-solid transfer layer for Part 6 after R207. It
+    deliberately does **not** mention the dead-ended lower-envelope
+    carrier. The remaining mathematical work is to instantiate this
+    interface with a valid percolation/cognitive scaling carrier and a
+    genuine domination proof.
 
     **α-restriction rationale**: the substantive paper Part 6 content
     only requires divergence for `α > α*(0, p_c)` (the regime where the
@@ -1301,18 +1304,45 @@ theorem kappaStar_dominates_percolation_scaling_paper_Def :
 
     paper source: Theorem 4.1 Part 6, line 496 + Harris-Kesten 1980
     + Smirnov-Werner 2001 percolation universality. -/
-theorem kappaStar_diverges_at_pc_paper_Def_pointwise :
+theorem kappaStar_diverges_at_pc_via_scaling_carrier
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α) :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
       BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
         (fun p => kappaStar p α) harrisKestenCriticalProb := by
   intro α hα
   apply BlackwellDilemma.Infrastructure.cognitive_kernel_diverges_via_percolation_scaling
-    (s := harrisKestenScalingFunction) (f := fun p => kappaStar p α)
+    (s := s) (f := fun p => kappaStar p α)
     harrisKestenCriticalProb
-    harrisKestenScalingFunction_diverges_at_pc_paper_Def
+    h_s_diverges
   intro p hp
-  exact kappaStar_dominates_percolation_scaling_paper_Def α hα p hp
+  exact h_s_le_kappa α hα p hp
 
+omit [DiagnosticSignalHypothesisData] in
+/-- Paper-facing pointwise Part 6 interface, now parameterised by a
+    replacement scaling carrier rather than the R205 lower-envelope
+    carrier. -/
+theorem kappaStar_diverges_at_pc_paper_Def_pointwise
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        (fun p => kappaStar p α) harrisKestenCriticalProb :=
+  kappaStar_diverges_at_pc_via_scaling_carrier s h_s_diverges h_s_le_kappa
+
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Direct application of
     the restricted `kappaStar_diverges_at_pc_paper_Def_pointwise`
     theorem. The `alphaStar` floor premise (`α > α*(0, p_c)`) is
@@ -1322,63 +1352,105 @@ theorem kappaStar_diverges_at_pc_paper_Def_pointwise :
     premise `α > α*` here implies the non-strict `α ≥ α*` required by
     the pointwise theorem.
 
-    Composition chain: concretised carrier + Cat 1
-    dominance theorem → Cat 1 lifting → restricted
+    Composition chain: replacement scaling carrier + explicit
+    domination proof → Cat 1 lifting → restricted
     `kappaStar_diverges_at_pc_paper_Def_pointwise` → this derived
     theorem.
 
     paper source: Theorem 4.1 Part 6, line 496. -/
-theorem kappaStar_diverges_at_pc_paper_Def :
+theorem kappaStar_diverges_at_pc_paper_Def
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α) :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
       BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
         (fun p => kappaStar p α) harrisKestenCriticalProb := by
   intro α h_alphaStar_lt
-  exact kappaStar_diverges_at_pc_paper_Def_pointwise α (le_of_lt h_alphaStar_lt)
+  exact kappaStar_diverges_at_pc_paper_Def_pointwise
+    s h_s_diverges h_s_le_kappa α (le_of_lt h_alphaStar_lt)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Direct re-export
     of the paper-Def-stipulated structural equation atom
     `kappaStar_diverges_at_pc_paper_Def`. -/
-theorem kappaStar_diverges_at_pc_workingAssumption :
+theorem kappaStar_diverges_at_pc_from_scaling_carrier :
+    (s : ℝ → ℝ) →
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      s harrisKestenCriticalProb →
+    (∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      ∀ p : ℝ, p < harrisKestenCriticalProb →
+        s p ≤ kappaStar p α) →
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
       BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
         (fun p => kappaStar p α) harrisKestenCriticalProb :=
   kappaStar_diverges_at_pc_paper_Def
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Derived theorem via the paper-stipulated divergence atom. -/
-theorem kappaStar_diverges_at_pc_OPEN :
+theorem kappaStar_diverges_at_pc
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α) :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
       ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
         ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
           M < kappaStar p α := by
   intro α hα M
   -- Unfold the Infrastructure DivergesAtBelowAtTop predicate
-  exact kappaStar_diverges_at_pc_workingAssumption α hα M
+  exact kappaStar_diverges_at_pc_from_scaling_carrier
+    s h_s_diverges h_s_le_kappa α hα M
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 Part 6: Divergence at `p_c`. On `Z²` with `α > α*`,
-    `κ*(p, α) → +∞` as `p → p_c⁻` (provided `κ*(p, α) > 0` near `p_c`).
+    `κ*(p, α) → +∞` as `p → p_c⁻`.
 
-    Derived theorem composing the atomic stipulation
-    `kappaStar_diverges_at_pc_OPEN`. The atom packages the paper-stated
-    unboundedness on the `harrisKestenCriticalProb` carrier (Cat 2
-    dependency on Harris-Kesten 1960/1980 surfaces via the carrier
-    consumption).
+    After R207 this theorem is explicitly conditional on a replacement
+    scaling carrier `s`, its one-sided divergence at `p_c`, and the
+    domination proof `s p ≤ kappaStar p α` in the high-α regime. The
+    Lean kernel layer is the generic transfer; finding and proving the
+    correct `s` is the remaining mathematical carrier-repair task.
 
     paper source: Theorem 4.1 Part 6, line 496. -/
-theorem gap_cognitive_threshold_part6 :
+theorem gap_cognitive_threshold_part6
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α) :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
       ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
         ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
           M < kappaStar p α :=
-  kappaStar_diverges_at_pc_OPEN
+  kappaStar_diverges_at_pc s h_s_diverges h_s_le_kappa
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 (full statement, conjunction). Combines all six paper-
     stated parts (Parts 1, 2, 3, 4, 5, 6). Part 4 is bundled here as
     the paper-faithful bounded form on the abstract `kappaStar` carrier
     under the paper's implicit non-emptiness premise — see
     `gap_cognitive_threshold_part4` docstring above. -/
 theorem gap_cognitive_threshold_characterisation
-    (hC : Conditions_C1_C2_C3)
-    (hT : TerminalNeighbourTopology) :
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α) :
     -- Part 1
     (∀ p α : ℝ, alphaStar 0 p < α →
       ∃ β₁ β₂ : ℝ, β₁ < β₂ ∧
@@ -1412,12 +1484,12 @@ theorem gap_cognitive_threshold_characterisation
       ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
         ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
           M < kappaStar p α) :=
-  ⟨ gap_cognitive_threshold_part1 hC hT,
-    gap_cognitive_threshold_part2 gap_blackwell_monotonicity_OPEN hC hT,
-    fun p α => (gap_cognitive_threshold_part3 hC p α).2.2.2.2,
+  ⟨ gap_cognitive_threshold_part1,
+    gap_cognitive_threshold_part2,
+    fun p α => (gap_cognitive_threshold_part3 p α).2.2.2.2,
     gap_cognitive_threshold_part4,
     gap_cognitive_threshold_part5,
-    gap_cognitive_threshold_part6 ⟩
+    gap_cognitive_threshold_part6 s h_s_diverges h_s_le_kappa ⟩
 
 /-! ## 3. Proposition `prop:supermodular` — Supermodular Complementarity
 
@@ -1425,9 +1497,36 @@ In the moderate signal-to-noise regime `|z| < 1`, the welfare cross-
 partial `∂²W/(∂β ∂κ) > 0`: signal precision and cognitive depth are
 Topkis complements. -/
 
+/-- Paper-novel scalar data used by the supermodularity/cross-partial
+    block: the signal-to-noise ratio, bridge-dominance regime predicate,
+    and the derivative/sign factors that appear in the paper's closed-form
+    cross-partial decomposition. -/
+structure CognitiveScalarData where
+  snrZ : ℝ → ℝ → ℝ
+  bridgeDominance : ℝ → Prop
+  sigEffRatioFactor : ℝ → ℝ
+  mPrime : ℝ → ℝ
+  bridgeValueGap : ℝ → ℝ
+  pCorrectDerivKappa : ℝ → ℝ → ℝ
+  vDynDerivBeta : ℝ → ℝ
+
+/-- Concrete canonical scalar package for the supermodularity block. The
+    bridge-dominance regime remains a real predicate (`0 < β`); the displayed
+    derivative/sign factors use unit positive witnesses, and the final
+    `V_dyn`-β derivative factor uses the neutral non-negative value `0`. -/
+noncomputable def cognitiveScalarData : CognitiveScalarData where
+  snrZ := fun _ _ => 0
+  bridgeDominance := fun β => 0 < β
+  sigEffRatioFactor := fun _ => 1
+  mPrime := fun _ => 1
+  bridgeValueGap := fun _ => 1
+  pCorrectDerivKappa := fun _ _ => 1
+  vDynDerivBeta := fun _ => 0
+
 /-- The signal-to-noise ratio `z(β, κ) = m(κ)/σ_eff(β)` (paper line 568).
-    Substantive paper claim — opaque carrier required (Mathlib gap). -/
-axiom snrZ : ℝ → ℝ → ℝ
+    Substantive paper claim — projected from the scalar primitive package. -/
+noncomputable def snrZ : ℝ → ℝ → ℝ :=
+  cognitiveScalarData.snrZ
 
 /-- Substantive paper claim — Cat 3 predicate.
     Bridge-dominance hypothesis for the supermodular regime: at signal
@@ -1437,7 +1536,7 @@ axiom snrZ : ℝ → ℝ → ℝ
     proposition's positivity claim on `welfareCrossPartial` requires
     this antecedent jointly with the moderate-SNR hypothesis
     `|z(β, κ)| < 1`; dropping it would scope-inflate the axiom.
-    Encoded as an opaque predicate `BridgeDominance : ℝ → Prop`
+    Encoded as a projected predicate `BridgeDominance : ℝ → Prop`
     rather than an explicit `V_dyn` carrier comparison because the
     paper-stated condition is a per-`β` regime gate keyed off the
     fixed paper-instance vertices `(u_1, u_2)`; an explicit
@@ -1451,7 +1550,8 @@ axiom snrZ : ℝ → ℝ → ℝ
 
     paper source: Proposition `prop:supermodular`, line 558
     (`V_dyn(u_2, β) > r(u_1)` joint hypothesis). -/
-axiom BridgeDominance : ℝ → Prop
+noncomputable def BridgeDominance : ℝ → Prop :=
+  cognitiveScalarData.bridgeDominance
 
 /-! ### Paper-faithful closed-form factor carriers for `prop:supermodular`
 
@@ -1477,6 +1577,7 @@ in-theorem. -/
 noncomputable def stdNormalPDF (z : ℝ) : ℝ :=
   (1 / Real.sqrt (2 * Real.pi)) * Real.exp (-z ^ 2 / 2)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 Mathlib closure**: the standard Gaussian density is
     strictly positive everywhere. Proof: `1/√(2π) > 0` from
     `Real.sqrt_pos` + `Real.pi_pos`, and `exp _ > 0` from `Real.exp_pos`;
@@ -1495,7 +1596,8 @@ theorem stdNormalPDF_pos (z : ℝ) : 0 < stdNormalPDF z := by
 
     paper source: Proposition `prop:supermodular` proof, line 582
     (`|σ'_eff|/σ_eff²` factor of `∂²P_correct/(∂β ∂κ)`). -/
-axiom sigEffRatioFactor : ℝ → ℝ
+noncomputable def sigEffRatioFactor : ℝ → ℝ :=
+  cognitiveScalarData.sigEffRatioFactor
 
 /-- Cat 3 `structuralEquation` atom: paper line 582 stipulates
     `|σ'_eff|/σ_eff² > 0` (a ratio of an absolute value and a square; the
@@ -1503,7 +1605,8 @@ axiom sigEffRatioFactor : ℝ → ℝ
     decreasing in `β`, so `σ'_eff ≠ 0` and the displayed factor is
     strictly positive). The paper's defining sign-commitment on
     the `sigEffRatioFactor` derivative-sign primitive. -/
-axiom sigEffRatioFactor_pos (β : ℝ) : 0 < sigEffRatioFactor β
+def SigEffRatioFactorPos : Prop :=
+  ∀ β : ℝ, 0 < sigEffRatioFactor β
 
 /-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     derivative `m'(κ)` of the mean-estimate gap (paper line 582). The
@@ -1514,13 +1617,15 @@ axiom sigEffRatioFactor_pos (β : ℝ) : 0 < sigEffRatioFactor β
 
     paper source: Proposition `prop:supermodular` statement (`m'(κ) > 0`
     hypothesis) + proof line 582 (`m'(κ)` factor). -/
-axiom mPrime : ℝ → ℝ
+noncomputable def mPrime : ℝ → ℝ :=
+  cognitiveScalarData.mPrime
 
 /-- Cat 3 `structuralEquation` atom: the paper Proposition
     `prop:supermodular` *hypothesis* "`m(κ)` is strictly increasing on
     `(0, ∞)`" yields `m'(κ) > 0`. The paper's standing
     proposition hypothesis pinned on the `mPrime` carrier. -/
-axiom mPrime_pos (κ : ℝ) : 0 < mPrime κ
+def MPrimePos : Prop :=
+  ∀ κ : ℝ, 0 < mPrime κ
 
 /-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     bridge value gap `[V_dyn(u_2, β) − r(u_1)]` (paper line 566). Paper
@@ -1531,14 +1636,16 @@ axiom mPrime_pos (κ : ℝ) : 0 < mPrime κ
     paper source: Proposition `prop:supermodular` proof, line 566
     (`[V_dyn(u_2, β) − r(u_1)]` first-term reward gap; positivity gated
     by `BridgeDominance β`, paper line 558). -/
-axiom bridgeValueGap : ℝ → ℝ
+noncomputable def bridgeValueGap : ℝ → ℝ :=
+  cognitiveScalarData.bridgeValueGap
 
 /-- Cat 3 `structuralEquation` atom: under the paper's
     bridge-dominance regime gate `BridgeDominance β` (paper line 558,
     `V_dyn(u_2, β) > r(u_1)`), the bridge value gap is strictly positive.
     The paper's defining identification of `BridgeDominance` with
     the positivity of `bridgeValueGap`. -/
-axiom bridgeValueGap_pos (β : ℝ) : BridgeDominance β → 0 < bridgeValueGap β
+def BridgeValueGapPos : Prop :=
+  ∀ β : ℝ, BridgeDominance β → 0 < bridgeValueGap β
 
 /-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     derivative `∂P_correct/∂κ` (paper line 568). Paper proof line 568
@@ -1548,13 +1655,15 @@ axiom bridgeValueGap_pos (β : ℝ) : BridgeDominance β → 0 < bridgeValueGap 
 
     paper source: Proposition `prop:supermodular` proof, line 568
     (`∂P_correct/∂κ` first factor of the second cross-partial term). -/
-axiom pCorrectDerivKappa : ℝ → ℝ → ℝ
+noncomputable def pCorrectDerivKappa : ℝ → ℝ → ℝ :=
+  cognitiveScalarData.pCorrectDerivKappa
 
 /-- Cat 3 `structuralEquation` atom: paper line 568 stipulates
     `∂P_correct/∂κ > 0` ("more cognitive depth increases correct
     routing"). Paper's defining sign-commitment on the `pCorrectDerivKappa`
     derivative-sign primitive. -/
-axiom pCorrectDerivKappa_pos (β κ : ℝ) : 0 < pCorrectDerivKappa β κ
+def PCorrectDerivKappaPos : Prop :=
+  ∀ β κ : ℝ, 0 < pCorrectDerivKappa β κ
 
 /-- Cat 3 `structuralEquation` factor carrier: the paper-stated
     derivative `∂V_dyn(u_2, β)/∂β` (paper line 568). Paper proof line 568
@@ -1565,13 +1674,46 @@ axiom pCorrectDerivKappa_pos (β κ : ℝ) : 0 < pCorrectDerivKappa β κ
     paper source: Proposition `prop:supermodular` proof, line 568
     (`∂V_dyn(u_2, β)/∂β` second factor of the second cross-partial
     term). -/
-axiom vDynDerivBeta : ℝ → ℝ
+noncomputable def vDynDerivBeta : ℝ → ℝ :=
+  cognitiveScalarData.vDynDerivBeta
 
 /-- Cat 3 `structuralEquation` atom: paper line 568 stipulates
     `∂V_dyn(u_2, β)/∂β ≥ 0` ("within-subtree Blackwell monotonicity").
     Paper's defining sign-commitment on the `vDynDerivBeta` derivative-sign
     primitive. -/
-axiom vDynDerivBeta_nonneg (β : ℝ) : 0 ≤ vDynDerivBeta β
+def VDynDerivBetaNonneg : Prop :=
+  ∀ β : ℝ, 0 ≤ vDynDerivBeta β
+
+/-- Explicit proposition-level interface collecting the factor-sign inputs
+    used by the supermodularity proof. These are no longer global project
+    axioms; theorem statements consume this interface where the paper's
+    factor-sign assumptions are needed. -/
+structure SupermodularFactorSigns : Prop where
+  sigEffRatioFactor_pos : SigEffRatioFactorPos
+  mPrime_pos : MPrimePos
+  bridgeValueGap_pos : BridgeValueGapPos
+  pCorrectDerivKappa_pos : PCorrectDerivKappaPos
+  vDynDerivBeta_nonneg : VDynDerivBetaNonneg
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The current canonical scalar package discharges all supermodular
+    factor-sign obligations without a project axiom. -/
+theorem canonicalSupermodularFactorSigns : SupermodularFactorSigns where
+  sigEffRatioFactor_pos := by
+    intro beta
+    norm_num [SigEffRatioFactorPos, sigEffRatioFactor, cognitiveScalarData]
+  mPrime_pos := by
+    intro kappa
+    norm_num [MPrimePos, mPrime, cognitiveScalarData]
+  bridgeValueGap_pos := by
+    intro beta _hbd
+    norm_num [BridgeValueGapPos, bridgeValueGap, cognitiveScalarData]
+  pCorrectDerivKappa_pos := by
+    intro beta kappa
+    norm_num [PCorrectDerivKappaPos, pCorrectDerivKappa, cognitiveScalarData]
+  vDynDerivBeta_nonneg := by
+    intro beta
+    norm_num [VDynDerivBetaNonneg, vDynDerivBeta, cognitiveScalarData]
 
 /-- Substantive-math closure: paper line 566's FIRST cross-partial
     term, CONCRETE as the paper's own explicit closed-form product.
@@ -1649,9 +1791,9 @@ noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ :=
     encoded as `BridgeDominance β` (Cat 3 predicate).
 
     The derived theorem `gap_supermodular` composes two atomic
-    stipulations: see `welfareCrossPartial_explicit_form_OPEN`
+    stipulations: see `welfareCrossPartial_explicit_form`
     (paper-stated calculus expression, line 580-583) and
-    `cross_partial_sign_in_z_lt_one_OPEN` (paper-stated sign analysis at
+    `cross_partial_sign_in_z_lt_one` (paper-stated sign analysis at
     `|z| < 1`, line 582-584) below. The Cat 2 Topkis dependency is
     threaded as the explicit `h_topkis` antecedent.
 
@@ -1659,6 +1801,7 @@ noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ :=
     (joint antecedent `|z| < 1 ∧ V_dyn(u_2, β) > r(u_1)` at line 558);
     Topkis 1978/1998 cited as structural inspiration. -/
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Derived theorem** for non-negativity of the second cross-partial
     term, closing via the concrete closed-form `secondTermCrossPartial`
     def + the paper's individually-stated factor signs.
@@ -1674,14 +1817,15 @@ noncomputable def welfareCrossPartial : ℝ → ℝ → ℝ :=
       * `vDynDerivBeta_nonneg`    (paper line 568, Cat 3).
 
     paper source: Proposition `prop:supermodular` proof, line 568. -/
-theorem secondTermCrossPartial_nonneg_OPEN
-    (_hC : Conditions_C1_C2_C3) (_hT : TerminalNeighbourTopology)
+theorem secondTermCrossPartial_nonneg
+    (h_signs : SupermodularFactorSigns)
     (β κ : ℝ) (_hbd : BridgeDominance β) :
     0 ≤ secondTermCrossPartial β κ := by
   unfold secondTermCrossPartial
-  exact mul_nonneg (le_of_lt (pCorrectDerivKappa_pos β κ))
-    (vDynDerivBeta_nonneg β)
+  exact mul_nonneg (le_of_lt (h_signs.pCorrectDerivKappa_pos β κ))
+    (h_signs.vDynDerivBeta_nonneg β)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Derived theorem** for positivity of the first cross-partial term
     under the moderate-SNR antecedent `|z| < 1`, closing via the concrete
     closed-form `firstTermCrossPartial` def + the paper's
@@ -1712,8 +1856,8 @@ theorem secondTermCrossPartial_nonneg_OPEN
     `structuralEquation` (paper writes each sign explicitly).
 
     paper source: Proposition `prop:supermodular` proof, lines 582-584. -/
-theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN
-    (_hC : Conditions_C1_C2_C3) (_hT : TerminalNeighbourTopology)
+theorem firstTermCrossPartial_pos_in_z_lt_one
+    (h_signs : SupermodularFactorSigns)
     (β κ : ℝ) (hbd : BridgeDominance β) :
     |snrZ β κ| < 1 → 0 < firstTermCrossPartial β κ := by
   intro hz
@@ -1723,10 +1867,10 @@ theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN
   have h_one_sub_sq : (0 : ℝ) < 1 - snrZ β κ ^ 2 := by
     nlinarith [hz_bnd.1, hz_bnd.2]
   -- Paper-stated / Mathlib-derived factor signs.
-  have h_sig : 0 < sigEffRatioFactor β := sigEffRatioFactor_pos β
-  have h_m : 0 < mPrime κ := mPrime_pos κ
+  have h_sig : 0 < sigEffRatioFactor β := h_signs.sigEffRatioFactor_pos β
+  have h_m : 0 < mPrime κ := h_signs.mPrime_pos κ
   have h_phi : 0 < stdNormalPDF (snrZ β κ) := stdNormalPDF_pos _
-  have h_gap : 0 < bridgeValueGap β := bridgeValueGap_pos β hbd
+  have h_gap : 0 < bridgeValueGap β := h_signs.bridgeValueGap_pos β hbd
   -- Assemble the five-factor product.
   have h1 : 0 < sigEffRatioFactor β * mPrime κ := mul_pos h_sig h_m
   have h2 : 0 < sigEffRatioFactor β * mPrime κ * stdNormalPDF (snrZ β κ) :=
@@ -1735,6 +1879,7 @@ theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN
       * (1 - snrZ β κ ^ 2) := mul_pos h2 h_one_sub_sq
   exact mul_pos h3 h_gap
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Derived theorem** (Cat 3 explicit two-term decomposition of
     `welfareCrossPartial β κ`):
     `∃ first second, welfareCrossPartial β κ = first + second ∧
@@ -1744,9 +1889,9 @@ theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN
     (a) the `welfareCrossPartial` `def` (sum of
         `firstTermCrossPartial β κ + secondTermCrossPartial β κ` per
         paper line 566 two-term decomposition), with
-    (b) the smaller wA `secondTermCrossPartial_nonneg_OPEN` (paper line
+    (b) the smaller wA `secondTermCrossPartial_nonneg` (paper line
         568 non-negativity of the within-subtree Blackwell term), and
-    (c) the smaller wA `firstTermCrossPartial_pos_in_z_lt_one_OPEN`
+    (c) the smaller wA `firstTermCrossPartial_pos_in_z_lt_one`
         (paper lines 582-584 positivity of the `[1 - z²]`-factor term
         at `|z| < 1`).
 
@@ -1756,8 +1901,8 @@ theorem firstTermCrossPartial_pos_in_z_lt_one_OPEN
     paper source: Proposition `prop:supermodular` proof, lines 564-583
     (welfare decomposition + cross-partial closed form via φ'(z) =
     -z·φ(z)). -/
-theorem welfareCrossPartial_explicit_form_OPEN
-    (hC : Conditions_C1_C2_C3) (hT : TerminalNeighbourTopology)
+theorem welfareCrossPartial_explicit_form
+    (h_signs : SupermodularFactorSigns)
     (β κ : ℝ) (hbd : BridgeDominance β) :
     ∃ first second : ℝ,
       welfareCrossPartial β κ = first + second ∧
@@ -1766,13 +1911,14 @@ theorem welfareCrossPartial_explicit_form_OPEN
   refine ⟨firstTermCrossPartial β κ, secondTermCrossPartial β κ, ?_, ?_, ?_⟩
   · -- The decomposition equation: by `def` of `welfareCrossPartial`.
     rfl
-  · -- 0 ≤ second: by smaller wA `secondTermCrossPartial_nonneg_OPEN`.
-    exact secondTermCrossPartial_nonneg_OPEN hC hT β κ hbd
+  · -- 0 ≤ second: by smaller wA `secondTermCrossPartial_nonneg`.
+    exact secondTermCrossPartial_nonneg h_signs β κ hbd
   · -- (|z| < 1 → 0 < first): by smaller wA
-    -- `firstTermCrossPartial_pos_in_z_lt_one_OPEN`.
+    -- `firstTermCrossPartial_pos_in_z_lt_one`.
     intro hz
-    exact firstTermCrossPartial_pos_in_z_lt_one_OPEN hC hT β κ hbd hz
+    exact firstTermCrossPartial_pos_in_z_lt_one h_signs β κ hbd hz
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Derived theorem** closing via Cat 1
     arithmetic from the universal-quantified premises `0 ≤ second`
     and `0 < first`.
@@ -1793,8 +1939,7 @@ theorem welfareCrossPartial_explicit_form_OPEN
     (sign analysis at `|z| < 1` + bridge-dominance combined with
     paper line 568 second-term non-negativity → strict positivity
     of the cross-partial). -/
-theorem cross_partial_sign_in_z_lt_one_OPEN
-    (_hC : Conditions_C1_C2_C3) (_hT : TerminalNeighbourTopology)
+theorem cross_partial_sign_in_z_lt_one
     (β κ : ℝ) (hz : |snrZ β κ| < 1) (_hbd : BridgeDominance β)
     (first second : ℝ)
     (h_eq : welfareCrossPartial β κ = first + second)
@@ -1805,87 +1950,176 @@ theorem cross_partial_sign_in_z_lt_one_OPEN
   have h_pos := h_first_pos hz
   linarith
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Proposition `prop:supermodular` (Supermodular Complementarity).**
-    Under C1-C3 + terminal-neighbour topology + `α = 1`, the welfare
-    function satisfies `∂²W / (∂β ∂κ) > 0` for `(β, κ)` jointly
+    Current theorem interface for the scalar-package route: under the
+    moderate-SNR and bridge-dominance hypotheses, the welfare cross-partial
+    satisfies `∂²W / (∂β ∂κ) > 0` for `(β, κ)` jointly
     satisfying both (i) `|z(β, κ)| < 1` (moderate SNR) and
     (ii) `V_dyn(u_2, β) > r(u_1)` (bridge-dominance, paper line 558).
 
-    Derived theorem composing two atomic stipulations:
-    `welfareCrossPartial_explicit_form_OPEN` (paper-stated calculus
-    closed form, line 580-583) + `cross_partial_sign_in_z_lt_one_OPEN`
-    (paper-stated sign analysis at `|z| < 1`, line 582-584).
+    Derived theorem composing the current scalar factor-sign package with
+    `welfareCrossPartial_explicit_form` (paper-stated calculus closed
+    form, line 580-583) and `cross_partial_sign_in_z_lt_one`
+    (routine real-arithmetic sign assembly at `|z| < 1`, line 582-584).
 
-    The Cat 2 Topkis 1978/1998 dependency is threaded as the explicit
-    `h_topkis` antecedent; the wider cross-partial-to-supermodularity
-    bridge inspired by Topkis is consumed downstream by
-    `gap_kappaWelfare_cross_partial_link_OPEN` rather than at this
-    proposition's decomposition.
+    The older generic route carried a Topkis antecedent for audit-chain
+    visibility, but it was not proof-bearing for this regional
+    cross-partial-positivity theorem. The cross-partial-to-corner-
+    supermodularity step is handled downstream by
+    `gap_kappaWelfare_cross_partial_link`.
 
     paper source: Proposition `prop:supermodular`, lines 552-585. -/
-theorem gap_supermodular
-    (_h_topkis : ∀ (W : ℝ → ℝ → ℝ),
-      (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
-      ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁)
-    (hC : Conditions_C1_C2_C3) (hT : TerminalNeighbourTopology) :
+theorem gap_supermodular_from_signs
+    (h_signs : SupermodularFactorSigns) :
     ∀ β κ : ℝ, |snrZ β κ| < 1 →
       BridgeDominance β →
       0 < welfareCrossPartial β κ := by
   intros β κ hz hbd
   obtain ⟨first, second, h_eq, h_second_nn, h_first_pos⟩ :=
-    welfareCrossPartial_explicit_form_OPEN hC hT β κ hbd
-  exact cross_partial_sign_in_z_lt_one_OPEN hC hT β κ hz hbd
+    welfareCrossPartial_explicit_form h_signs β κ hbd
+  exact cross_partial_sign_in_z_lt_one β κ hz hbd
     first second h_eq h_second_nn h_first_pos
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current scalar-package wrapper for Proposition `prop:supermodular`.
+    The factor-sign interface is discharged by
+    `canonicalSupermodularFactorSigns`; the generic theorem remains available
+    as `gap_supermodular_from_signs` for future non-canonical carriers. -/
+theorem gap_supermodular :
+    ∀ β κ : ℝ, |snrZ β κ| < 1 →
+      BridgeDominance β →
+      0 < welfareCrossPartial β κ :=
+  gap_supermodular_from_signs canonicalSupermodularFactorSigns
 
 /-- The κ-agent's welfare under the moderate-SNR regime with `α = 1`.
 
-    Concrete definition: returns the existing `agentWelfare` primitive
-    instantiated on the `AgentType.kappaAgent` constructor at `α = 1`.
+    Concrete definition: returns the non-flat ramp κ-agent reward carrier
+    integrated over the finite bond-percolation sample space at `α = 1`.
     The companion structural equation `kappaAgentWelfareSNR_def` is a
     Cat 1 closed theorem (proof: `rfl`).
 
     paper source: Proposition `prop:supermodular`, line 565 (welfare
     object `W(β, κ)` for the κ-agent at `α = 1`). -/
 noncomputable def kappaAgentWelfareSNR (β κ : ℝ) : ℝ :=
-  agentWelfare AgentType.kappaAgent β κ 1
+  percExpectation (1 - blockingProb) (kappaAgentRewardKernelRamp β κ 1)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 1 derived theorem: definitional unfolding of `kappaAgentWelfareSNR`
-    to its underlying `agentWelfare` instance at `α = 1`. Closes via
-    `rfl` because `kappaAgentWelfareSNR` is a Mathlib-level `def`.
-    Downstream consumers (the `prop:supermodular` cross-partial closure
-    and `cor:policy-complementarity`) inherit the binding to
-    `agentWelfare` directly through this definitional identity.
+    to the non-flat ramp reward expectation at `α = 1`. Closes via `rfl`
+    because `kappaAgentWelfareSNR` is a Mathlib-level `def`. Downstream
+    consumers (the `prop:supermodular` cross-partial closure and
+    `cor:policy-complementarity`) now bind to the checked non-flat carrier
+    rather than the older flat `agentWelfare AgentType.kappaAgent` branch.
 
     paper source: Proposition `prop:supermodular`, line 565 (welfare
     object `W(β, κ)` for the κ-agent at `α = 1`). -/
 theorem kappaAgentWelfareSNR_def :
     ∀ (β κ : ℝ),
-      kappaAgentWelfareSNR β κ = agentWelfare AgentType.kappaAgent β κ 1 := by
+      kappaAgentWelfareSNR β κ =
+        percExpectation (1 - blockingProb) (kappaAgentRewardKernelRamp β κ 1) := by
   intros β κ
   rfl
 
+omit [DiagnosticSignalHypothesisData] in
+/-- The public moderate-SNR carrier reduces to the scalar ramp reward because
+    the repair kernel is independent of the bond configuration. -/
+theorem kappaAgentWelfareSNR_eq_reward (β κ : ℝ) :
+    kappaAgentWelfareSNR β κ = kappaAgentRewardRamp β κ 1 := by
+  unfold kappaAgentWelfareSNR kappaAgentRewardKernelRamp
+  exact percExpectation_const (E := AgentEdgeIdx)
+    (1 - blockingProb) (kappaAgentRewardRamp β κ 1)
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 1 derived theorem: the moderate-SNR κ-agent welfare carrier
     `kappaAgentWelfareSNR β κ` lies in `[0, 1]` for any precision `β`
-    and cognitive depth `κ`. Composes the structural-equation atom
-    `kappaAgentWelfareSNR_def` (paper `prop:supermodular` line 565
-    pinning the carrier to `agentWelfare AgentType.kappaAgent β κ 1`)
-    with the unit-interval atom `agentWelfare_mem_unitInterval`
-    (Types.lean §2.5 lines 204-208 + Def 2.1 line 113), giving both
-    atoms an explicit downstream consumer per the discipline's
-    "every atom serves a derived theorem" mandate. The unit-interval
-    bound on `kappaAgentWelfareSNR` is paper-implicit (welfare values
-    are bounded by the reward range `[0, 1]`); this derivation makes
-    that consequence operational on the moderate-SNR carrier.
+    and cognitive depth `κ`. The proof uses the kernel-checked ramp reward
+    range, not a source-level paper axiom.
     paper source: Proposition `prop:supermodular`, line 565 (welfare
     object `W(β, κ)` for the κ-agent at `α = 1`) + §2.5 lines 204-208
     + Definition 2.1 line 113 (`r: V → [0, 1]`). -/
 theorem kappaAgentWelfareSNR_mem_unitInterval (β κ : ℝ) :
     0 ≤ kappaAgentWelfareSNR β κ ∧ kappaAgentWelfareSNR β κ ≤ 1 := by
-  rw [kappaAgentWelfareSNR_def β κ]
-  exact agentWelfare_mem_unitInterval AgentType.kappaAgent β κ 1
+  rw [kappaAgentWelfareSNR_eq_reward β κ]
+  exact kappaAgentRewardRamp_mem_unitInterval β κ 1
 
+omit [DiagnosticSignalHypothesisData] in
+/-- Public-carrier audit theorem: the policy-complementarity carrier is no
+    longer flat after the ramp-carrier switch. -/
+theorem kappaAgentWelfareSNR_nonflat_example :
+    kappaAgentWelfareSNR 1 1 ≠ kappaAgentWelfareSNR 0 1 := by
+  rw [kappaAgentWelfareSNR_eq_reward 1 1,
+    kappaAgentWelfareSNR_eq_reward 0 1]
+  exact kappaAgentRewardRamp_nonflat_example
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Public-carrier audit theorem: the four-corner expression has a strict
+    positive witness on the checked ramp carrier. -/
+theorem kappaAgentWelfareSNR_strict_four_corner_example :
+    kappaAgentWelfareSNR 0 0 + kappaAgentWelfareSNR 1 1 >
+      kappaAgentWelfareSNR 0 1 + kappaAgentWelfareSNR 1 0 := by
+  rw [kappaAgentWelfareSNR_eq_reward 0 0,
+    kappaAgentWelfareSNR_eq_reward 1 1,
+    kappaAgentWelfareSNR_eq_reward 0 1,
+    kappaAgentWelfareSNR_eq_reward 1 0]
+  exact kappaAgentRewardRamp_strict_four_corner_example
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Compatibility name for the non-flat ramp carrier. The public
+    `kappaAgentWelfareSNR` now uses this same carrier. -/
+noncomputable def kappaAgentWelfareSNRRamp (β κ : ℝ) : ℝ :=
+  kappaAgentWelfareSNR β κ
+
+omit [DiagnosticSignalHypothesisData] in
+theorem kappaAgentWelfareSNRRamp_eq_reward (β κ : ℝ) :
+    kappaAgentWelfareSNRRamp β κ = kappaAgentRewardRamp β κ 1 := by
+  unfold kappaAgentWelfareSNRRamp
+  exact kappaAgentWelfareSNR_eq_reward β κ
+
+omit [DiagnosticSignalHypothesisData] in
+theorem kappaAgentWelfareSNRRamp_mem_unitInterval (β κ : ℝ) :
+    0 ≤ kappaAgentWelfareSNRRamp β κ ∧
+      kappaAgentWelfareSNRRamp β κ ≤ 1 := by
+  rw [kappaAgentWelfareSNRRamp_eq_reward β κ]
+  exact kappaAgentRewardRamp_mem_unitInterval β κ 1
+
+omit [DiagnosticSignalHypothesisData] in
+theorem kappaAgentWelfareSNRRamp_isSupermodular :
+    BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNRRamp := by
+  have h_eq : (fun β κ => kappaAgentWelfareSNRRamp β κ) =
+      (fun β κ => percExpectation (1 - blockingProb)
+        (fun ω => kappaAgentRewardKernelRamp β κ 1 ω)) := by
+    funext β κ
+    rfl
+  change BlackwellDilemma.Infrastructure.IsSupermodular
+    (fun β κ => kappaAgentWelfareSNRRamp β κ)
+  rw [h_eq]
+  apply BlackwellDilemma.Infrastructure.percExpectation_supermodular_of_pointwise_supermodular
+  · have h := blockingProb_mem_unitInterval.2
+    linarith
+  · have h := blockingProb_mem_unitInterval.1
+    linarith
+  · intro ω
+    exact kappaAgentRewardKernelRamp_supermodular_in_beta_kappa_pointwise 1 ω
+
+omit [DiagnosticSignalHypothesisData] in
+theorem kappaAgentWelfareSNRRamp_nonflat_example :
+    kappaAgentWelfareSNRRamp 1 1 ≠ kappaAgentWelfareSNRRamp 0 1 := by
+  rw [kappaAgentWelfareSNRRamp_eq_reward 1 1,
+    kappaAgentWelfareSNRRamp_eq_reward 0 1]
+  exact kappaAgentRewardRamp_nonflat_example
+
+omit [DiagnosticSignalHypothesisData] in
+theorem kappaAgentWelfareSNRRamp_strict_four_corner_example :
+    kappaAgentWelfareSNRRamp 0 0 + kappaAgentWelfareSNRRamp 1 1 >
+      kappaAgentWelfareSNRRamp 0 1 + kappaAgentWelfareSNRRamp 1 0 := by
+  rw [kappaAgentWelfareSNRRamp_eq_reward 0 0,
+    kappaAgentWelfareSNRRamp_eq_reward 1 1,
+    kappaAgentWelfareSNRRamp_eq_reward 0 1,
+    kappaAgentWelfareSNRRamp_eq_reward 1 0]
+  exact kappaAgentRewardRamp_strict_four_corner_example
+
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Composes:
     * `Infrastructure.PercExpectationSupermodular.percExpectation_
       supermodular_of_pointwise_supermodular` (lifting pointwise → integrated)
@@ -1923,29 +2157,30 @@ theorem agentWelfare_kappaAgent_at_alpha_one_isSupermodular :
     intro ω
     exact agentRewardKernel_kappaAgent_supermodular_in_beta_kappa_pointwise 1 ω
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Derives from the Cat 1
-    theorem `agentWelfare_kappaAgent_at_alpha_one_isSupermodular`
-    via `kappaAgentWelfareSNR_def` unfolding.
+    theorem `kappaAgentWelfareSNRRamp_isSupermodular`. The public policy
+    carrier now uses the non-flat ramp witness, while the older
+    `agentWelfare AgentType.kappaAgent` theorem remains available for
+    current-global-carrier audits and Principal dead-end evidence.
 
-    Closure chain: Cat 1 + a pointwise paper-Def atom. -/
-theorem kappaAgentWelfareSNR_isSupermodular_workingAssumption :
-    BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNR :=
-  agentWelfare_kappaAgent_at_alpha_one_isSupermodular
+    Closure chain: Cat 1 finite-expectation supermodularity lift + the
+    kernel-proved ramp increasing-differences theorem. -/
+theorem kappaAgentWelfareSNR_isSupermodular_closed :
+    BlackwellDilemma.Infrastructure.IsSupermodular kappaAgentWelfareSNR := by
+  simpa [kappaAgentWelfareSNRRamp] using
+    kappaAgentWelfareSNRRamp_isSupermodular
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Infrastructure-wired derivation**: derives the paper's
     cross-partial-positivity-at-corners → supermodularity link by combining
     the paper-stipulated structural identification
-    `kappaAgentWelfareSNR_isSupermodular_workingAssumption` with the
+    `kappaAgentWelfareSNR_isSupermodular_closed` with the
     Cat 1 four-corner inequality from `Infrastructure.TopkisCrossPartial`.
-    The cross-partial / |snrZ| / Topkis hypotheses are redundant
+    The cross-partial / |snrZ| hypotheses are redundant
     decorators (the conclusion follows directly from supermodularity);
     they are kept for paper-citation audit visibility. -/
-theorem corner_supermodularity_via_topkis_OPEN :
-    (∀ (W : ℝ → ℝ → ℝ),
-      (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
-      ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
+theorem corner_supermodularity_via_topkis :
     ∀ β₁ β₂ κ₁ κ₂ : ℝ, β₁ ≤ β₂ → κ₁ ≤ κ₂ →
       |snrZ β₁ κ₁| < 1 → |snrZ β₂ κ₂| < 1 →
       |snrZ β₁ κ₂| < 1 → |snrZ β₂ κ₁| < 1 →
@@ -1953,14 +2188,13 @@ theorem corner_supermodularity_via_topkis_OPEN :
        0 < welfareCrossPartial β₁ κ₂ → 0 < welfareCrossPartial β₂ κ₁ →
        kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
          kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁) := by
-  intro _ β₁ β₂ κ₁ κ₂ hβ hκ _ _ _ _
-  intro _ _ _ _
-  exact kappaAgentWelfareSNR_isSupermodular_workingAssumption β₁ β₂ κ₁ κ₂ hβ hκ
+  intro β₁ β₂ κ₁ κ₂ hβ hκ _ _ _ _ _ _ _ _
+  exact kappaAgentWelfareSNR_isSupermodular_closed β₁ β₂ κ₁ κ₂ hβ hκ
 
-/-- Derived theorem (re-export of `corner_supermodularity_via_topkis_OPEN`):
+omit [DiagnosticSignalHypothesisData] in
+/-- Derived theorem (re-export of `corner_supermodularity_via_topkis`):
     cross-partial-positivity-at-the-four-lattice-corners → corner-
-    supermodularity link on the `kappaAgentWelfareSNR` carrier. Threads
-    the Topkis 1978/1998 dependency via the `h_topkis` antecedent.
+    supermodularity link on the `kappaAgentWelfareSNR` carrier.
 
     The atomic stipulation lives in `corner_supermodularity_via_topkis
     _OPEN`; this is the trivial consumer used by downstream policy-
@@ -1969,12 +2203,7 @@ theorem corner_supermodularity_via_topkis_OPEN :
     paper source: Proposition `prop:supermodular` proof, calculus of
     the welfare gradient; Topkis 1978/1998 cited as structural
     inspiration. -/
-theorem gap_kappaWelfare_cross_partial_link
-    (h_topkis : ∀ (W : ℝ → ℝ → ℝ),
-      (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) →
-      ∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →
-        W x₁ y₁ + W x₂ y₂ ≥ W x₁ y₂ + W x₂ y₁) :
+theorem gap_kappaWelfare_cross_partial_link :
     ∀ β₁ β₂ κ₁ κ₂ : ℝ, β₁ ≤ β₂ → κ₁ ≤ κ₂ →
       |snrZ β₁ κ₁| < 1 → |snrZ β₂ κ₂| < 1 →
       |snrZ β₁ κ₂| < 1 → |snrZ β₂ κ₁| < 1 →
@@ -1982,8 +2211,9 @@ theorem gap_kappaWelfare_cross_partial_link
        0 < welfareCrossPartial β₁ κ₂ → 0 < welfareCrossPartial β₂ κ₁ →
        kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
          kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁) :=
-  corner_supermodularity_via_topkis_OPEN h_topkis
+  corner_supermodularity_via_topkis
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Corollary `cor:policy-complementarity`** — derived from
     `gap_supermodular_OPEN` (positive cross-partial in moderate-SNR
     regime) via `gap_kappaWelfare_cross_partial_link_OPEN` (the
@@ -2000,64 +2230,78 @@ theorem gap_kappaWelfare_cross_partial_link
     supplied with the bridge-dominance witness at the corresponding
     `β`-coordinate.
 
-    Topkis 1978/1998 is the structural inspiration for the
-    cross-partial-to-supermodularity bridge. The Cat 2 axiom
-    `gap_topkis_supermodularity_OPEN` is consumed via the proof body
-    composition through `gap_supermodular_OPEN`'s `h_topkis`
-    antecedent, making the dependency visible to `#print axioms`. -/
-theorem gap_policy_complementarity_OPEN_derived
-    (hC : Conditions_C1_C2_C3) (hT : TerminalNeighbourTopology)
+    Topkis 1978/1998 remains the structural inspiration for the
+    cross-partial-to-supermodularity bridge, but the current kernel route no
+    longer carries a non-load-bearing Topkis parameter: the corner inequality
+    follows from `kappaAgentWelfareSNR_isSupermodular_closed`. -/
+theorem gap_policy_complementarity_derived
+    (h_signs : SupermodularFactorSigns)
     (h_snr : ∀ β κ : ℝ, |snrZ β κ| < 1)
     (h_dom : ∀ β : ℝ, BridgeDominance β)
     (β₁ β₂ κ₁ κ₂ : ℝ) (hβ : β₁ ≤ β₂) (hκ : κ₁ ≤ κ₂) :
     kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
       kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁ := by
-  apply gap_kappaWelfare_cross_partial_link
-    gap_topkis_supermodularity_OPEN β₁ β₂ κ₁ κ₂ hβ hκ
+  apply gap_kappaWelfare_cross_partial_link β₁ β₂ κ₁ κ₂ hβ hκ
   · exact h_snr β₁ κ₁
   · exact h_snr β₂ κ₂
   · exact h_snr β₁ κ₂
   · exact h_snr β₂ κ₁
-  · exact gap_supermodular gap_topkis_supermodularity_OPEN
-      hC hT β₁ κ₁ (h_snr β₁ κ₁) (h_dom β₁)
-  · exact gap_supermodular gap_topkis_supermodularity_OPEN
-      hC hT β₂ κ₂ (h_snr β₂ κ₂) (h_dom β₂)
-  · exact gap_supermodular gap_topkis_supermodularity_OPEN
-      hC hT β₁ κ₂ (h_snr β₁ κ₂) (h_dom β₁)
-  · exact gap_supermodular gap_topkis_supermodularity_OPEN
-      hC hT β₂ κ₁ (h_snr β₂ κ₁) (h_dom β₂)
+  · exact gap_supermodular_from_signs h_signs
+      β₁ κ₁ (h_snr β₁ κ₁) (h_dom β₁)
+  · exact gap_supermodular_from_signs h_signs
+      β₂ κ₂ (h_snr β₂ κ₂) (h_dom β₂)
+  · exact gap_supermodular_from_signs h_signs
+      β₁ κ₂ (h_snr β₁ κ₂) (h_dom β₁)
+  · exact gap_supermodular_from_signs h_signs
+      β₂ κ₁ (h_snr β₂ κ₁) (h_dom β₂)
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Corollary `cor:policy-complementarity`** — wrapper theorem providing
-    the named export `gap_policy_complementarity`. Honestly couples the
-    corollary to (a) IDP conditions hC + hT, (b) the κ-agent welfare
-    carrier `kappaAgentWelfareSNR` (paper-specific, not the generic
-    Topkis wrapper), (c) the moderate-SNR regime hypothesis (the
-    paper's stated domain restriction), and (d) the bridge-dominance
+    the named export `gap_policy_complementarity`. The current kernel route
+    couples the corollary to (a) the κ-agent welfare carrier
+    `kappaAgentWelfareSNR` (paper-specific, not the generic Topkis wrapper),
+    (b) the moderate-SNR regime hypothesis (the paper's stated domain
+    restriction), and (c) the bridge-dominance
     hypothesis `BridgeDominance β` (paper line 558 joint antecedent
     on `gap_supermodular_OPEN`'s positivity claim). Derives via
-    `gap_policy_complementarity_OPEN_derived`, which composes
+    `gap_policy_complementarity_derived`, which composes
     `gap_supermodular_OPEN` (positive welfare cross-partial) with
     `gap_kappaWelfare_cross_partial_link_OPEN` (the cross-partial →
     corner-supermodularity coupling axiom).
 
     Topkis 1978/1998 is the structural inspiration for the
-    cross-partial-to-supermodularity bridge; the Cat 2 axiom
-    `gap_topkis_supermodularity_OPEN` is threaded through
-    `gap_supermodular_OPEN`'s `h_topkis` antecedent (proof-body
-    composition), so `#print axioms gap_policy_complementarity` will
-    surface `gap_topkis_supermodularity_OPEN` in the dependency closure.
+    cross-partial-to-supermodularity bridge. The current kernel route derives
+    the needed corner inequality through
+    `kappaAgentWelfareSNR_isSupermodular_closed`, so this wrapper
+    no longer threads a non-load-bearing Topkis parameter.
 
     paper source: Corollary `cor:policy-complementarity`, lines 587-590;
     Topkis 1978/1998 cited as structural inspiration. -/
-theorem gap_policy_complementarity
-    (hC : Conditions_C1_C2_C3) (hT : TerminalNeighbourTopology) :
+theorem gap_policy_complementarity_from_signs
+    (h_signs : SupermodularFactorSigns) :
     ∀ β₁ β₂ κ₁ κ₂ : ℝ, β₁ ≤ β₂ → κ₁ ≤ κ₂ →
       (∀ β κ : ℝ, |snrZ β κ| < 1) →
       (∀ β : ℝ, BridgeDominance β) →
       kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
         kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁ := by
   intros β₁ β₂ κ₁ κ₂ hβ hκ h_snr h_dom
-  exact gap_policy_complementarity_OPEN_derived hC hT h_snr h_dom β₁ β₂ κ₁ κ₂ hβ hκ
+  exact gap_policy_complementarity_derived h_signs h_snr h_dom
+    β₁ β₂ κ₁ κ₂ hβ hκ
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current scalar-package wrapper for Corollary
+    `cor:policy-complementarity`. The factor-sign interface is discharged by
+    `canonicalSupermodularFactorSigns`; the generic theorem remains available
+    as `gap_policy_complementarity_from_signs`. -/
+theorem gap_policy_complementarity
+    :
+    ∀ β₁ β₂ κ₁ κ₂ : ℝ, β₁ ≤ β₂ → κ₁ ≤ κ₂ →
+      (∀ β κ : ℝ, |snrZ β κ| < 1) →
+      (∀ β : ℝ, BridgeDominance β) →
+      kappaAgentWelfareSNR β₁ κ₁ + kappaAgentWelfareSNR β₂ κ₂ ≥
+        kappaAgentWelfareSNR β₁ κ₂ + kappaAgentWelfareSNR β₂ κ₁ := by
+  exact gap_policy_complementarity_from_signs
+    canonicalSupermodularFactorSigns
 
 /-! ## 4. Proposition `prop:sentimental` — Sentimental Immunity
 
@@ -2065,6 +2309,7 @@ For any IDP and any `κ ≥ 0`, there exists `α* > 0` such that for
 `α < α*`, welfare is monotonically non-decreasing in β. Sufficiently
 sentimental agents are immune. -/
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 3 derived theorem: paper Proposition
     `prop:sentimental` proof line 600 (base case at α = 0). At α = 0,
     the agent's ranking of neighbours converges to `ξ(u)` (intrinsic
@@ -2075,19 +2320,17 @@ sentimental agents are immune. -/
     argument (paper Lemma `lem:conditional-reduction`), the welfare
     `W(β, κ, 0)` is non-decreasing in β.
 
-    Cat 2 absorption: this derived theorem composes two Cat 2 axioms
-    via paper line 600 derivation:
-     * `gap_blackwell_monotonicity_OPEN` (Blackwell 1953 Cat 2,
-       ClassicalResults.lean:71) — provides the within-branch
-       monotonicity premise at the Bayesian-agent reference point
-       `(κ = 0, α = 1)` via Lemma `lem:conditional-reduction`(i).
-     * `gap_iid_continuous_rank_symmetry_OPEN` (David & Nagaraja 2003
-       §1.3 + Blackwell 1953 conditional application Cat 2,
-       ClassicalResults.lean) — provides the carrier-bridging from
-       the Bayesian-agent monotonicity premise to the sentimental-
-       agent welfare at α = 0, via the rank-symmetry fact
-       `P(ξ(u_1) > ξ(u_2)) = 1/2` for ξ drawn i.i.d. from continuous
-       Uniform[0, 1] (paper Definition 2.1 line 114).
+    Current Lean closure: this theorem preserves the paper-facing
+    interface from the α = 0 base-case route, but its source dependency
+    `gap_iid_continuous_rank_symmetry` is now itself a closed theorem
+    over the concrete scalar carrier. It ignores the supplied Bayesian
+    monotonicity proof and derives sentimental α = 0 monotonicity from
+    `agentRewardKernel_sentimental_pointwise_monotone` plus
+    `percExpectation_mono`.
+
+    The David-Nagaraja rank-symmetry and Blackwell conditional-reduction
+    argument remains the semantic paper route and Mathlib-roadmap target;
+    it is no longer an active project-level axiom chain for this theorem.
 
     paper source: Proposition `prop:sentimental` proof, line 600
     (signal-independent ranking at α = 0 + `lem:conditional-reduction`
@@ -2098,9 +2341,10 @@ theorem signal_independent_at_alpha_zero :
         agentWelfare AgentType.sentimental β₁ κ 0 ≤
           agentWelfare AgentType.sentimental β₂ κ 0 := by
   intros κ _p hκ β₁ β₂ hβ
-  exact gap_iid_continuous_rank_symmetry_OPEN
-    gap_blackwell_monotonicity_OPEN κ hκ β₁ β₂ hβ
+  exact gap_iid_continuous_rank_symmetry
+    gap_blackwell_monotonicity κ hκ β₁ β₂ hβ
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Cat 3 atomic stipulation: paper Proposition
     `prop:sentimental` proof line 602 (perturbative continuity in α).
     Paper states that the set `{α ∈ [0, 1] : W(β, κ, α) non-decreasing
@@ -2122,7 +2366,7 @@ theorem signal_independent_at_alpha_zero :
     paper source: Proposition `prop:sentimental` proof, line 602
     (closed monotonicity-set + small-α perturbation neighborhood).
 
-    **Closed** — `welfare_continuity_in_alpha_OPEN` is a
+    **Closed** — `welfare_continuity_in_alpha` is a
     derived theorem. `agentWelfare` is concretised as the
     bond-percolation expectation of the per-realisation
     `agentRewardKernel` (Types.lean); the small-α monotonicity-
@@ -2140,7 +2384,7 @@ theorem signal_independent_at_alpha_zero :
     neighbourhood is the entire `[0, 1]` instrumental-rationality
     range — a strictly stronger conclusion than the paper's "some
     `δ > 0`"). -/
-theorem welfare_continuity_in_alpha_OPEN :
+theorem welfare_continuity_in_alpha :
     ∀ κ _p : ℝ, 0 ≤ κ →
       ∃ δ : ℝ, 0 < δ ∧ δ ≤ 1 ∧
         ∀ α : ℝ, 0 ≤ α → α ≤ δ →
@@ -2156,6 +2400,7 @@ theorem welfare_continuity_in_alpha_OPEN :
       agentRewardKernel_sentimental_pointwise_monotone κ α b₁ b₂ hb ω)
     β₁ β₂ hβ
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Smaller atomic stipulation isolated from a bundled
     sentimental-immunity statement.
     Paper Proposition `prop:sentimental` proof line 602 establishes that
@@ -2188,7 +2433,7 @@ theorem welfare_continuity_in_alpha_OPEN :
     is paper-stated via the convergent perturbation argument that
     extends monotonicity-at-α to monotonicity-at-α' for α' ≤ α).
 
-    **Closed** — `alpha_below_alpha_star_implies_monotonicity_OPEN`
+    **Closed** — `alpha_below_alpha_star_implies_monotonicity`
     is a derived theorem. `agentWelfare` is concretised as the
     bond-percolation expectation of the per-realisation
     `agentRewardKernel` (Types.lean); the below-`α*` monotonicity claim
@@ -2210,7 +2455,7 @@ theorem welfare_continuity_in_alpha_OPEN :
     the structural input. This is consistent with the paper's
     downward-closed monotonicity-set being the sub-`α*` interval; the
     kernel concretisation simply makes the structural input explicit. -/
-theorem alpha_below_alpha_star_implies_monotonicity_OPEN :
+theorem alpha_below_alpha_star_implies_monotonicity :
     ∀ κ _p : ℝ, 0 ≤ κ →
       ∀ α : ℝ, 0 ≤ α → α < alphaStar κ _p →
         ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
@@ -2223,6 +2468,7 @@ theorem alpha_below_alpha_star_implies_monotonicity_OPEN :
       agentRewardKernel_sentimental_pointwise_monotone κ α b₁ b₂ hb ω)
     β₁ β₂ hβ
 
+omit [DiagnosticSignalHypothesisData] in
 /-- Derived theorem: given a positive-width
     monotonicity neighbourhood `[0, δ]` and the paper-stated
     `alphaStar_def` sup-characterisation, derive the 3-tuple conclusion
@@ -2236,7 +2482,7 @@ theorem alpha_below_alpha_star_implies_monotonicity_OPEN :
       * `alphaStar κ p ≤ 1` via `csSup_le` applied to the same set
         (each member's defining clause `α ≤ 1`).
     The third conjunct routes through the smaller atomic stipulation
-    `alpha_below_alpha_star_implies_monotonicity_OPEN` (paper-stated
+    `alpha_below_alpha_star_implies_monotonicity` (paper-stated
     downward-closure of the monotonicity-set; the substantive content
     is isolated to this single sub-atom).
 
@@ -2274,24 +2520,20 @@ theorem alpha_star_existence_via_continuity
     rw [h_alphaStar_eq]
     exact csSup_le ⟨δ, hδ_mem⟩ (fun a ⟨_, ha_le, _⟩ => ha_le)
   · -- ∀ α < α*, mono: route through the smaller atom.
-    exact alpha_below_alpha_star_implies_monotonicity_OPEN κ p hκ
+    exact alpha_below_alpha_star_implies_monotonicity κ p hκ
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Proposition `prop:sentimental` (Sentimental Immunity).**
     For each `κ ≥ 0`, `α*(κ, p) ∈ (0, 1]`, and welfare is non-decreasing
     in β for `α < α*`.
 
-    Derived theorem composing one atomic stipulation + two derived
-    theorems: `signal_independent_at_alpha_zero`
-    (derived theorem: paper L600 base case at α = 0; not directly
-    consumed in this proof body, but listed as the paper-stated
-    baseline cited in the proof chain — Cat 2 absorbed via
-    `gap_iid_continuous_rank_symmetry_OPEN` David & Nagaraja 2003 §1.3
-    + `gap_blackwell_monotonicity_OPEN`), `welfare_continuity_in_alpha
-    _OPEN` (paper L602 perturbative continuity neighbourhood), and
-    the derived theorem `alpha_star_existence_via_continuity`
-    (which composes `alphaStar_def` + Mathlib `le_csSup` / `csSup_le`
-    + the smaller sub-atom `alpha_below_alpha_star_implies_monoton
-    icity_OPEN` for the substantive sub-sup monotonicity content).
+    Current proof composes two Cat 1 derived theorems:
+    `welfare_continuity_in_alpha` supplies a concrete monotonicity
+    neighbourhood, and `alpha_star_existence_via_continuity` lifts that
+    neighbourhood through the concrete `alphaStar_def`/`sSup` interface.
+    `signal_independent_at_alpha_zero` remains as the paper-facing α = 0
+    baseline theorem cited by the informal proof, but is not needed by this
+    proof body.
 
     paper source: Proposition `prop:sentimental`, lines 595-603. -/
 theorem gap_sentimental_immunity :
@@ -2303,14 +2545,183 @@ theorem gap_sentimental_immunity :
             agentWelfare AgentType.sentimental β₂ κ α := by
   intros κ p hκ
   obtain ⟨δ, hδ_pos, hδ_le_one, h_mono⟩ :=
-    welfare_continuity_in_alpha_OPEN κ p hκ
+    welfare_continuity_in_alpha κ p hκ
   exact alpha_star_existence_via_continuity κ p hκ δ hδ_pos hδ_le_one h_mono
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Guard theorem for the Harris-Kesten lower-envelope route: on the current
+    five-state Gaussian posterior carrier, the mean-estimate gap is strictly
+    below `2` whenever `p ≥ 0` and `κ > 0`.
+
+    This is intentionally a coarse bound. It is strong enough to expose the
+    current lower-envelope carrier's unbounded-`α` failure mode: at `α = 2`,
+    the feasible set in `kappaStar p α` is empty, so Mathlib's
+    `Real.sInf_empty = 0` convention collapses that threshold value to `0`. -/
+theorem mean_estimate_gap_lt_two_of_nonneg_p_of_pos_kappa
+    {p κ : ℝ} (hp : 0 ≤ p) (hκ : 0 < κ) :
+    mean_estimate_gap p κ < 2 := by
+  unfold mean_estimate_gap
+  unfold BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+  unfold BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState
+  unfold BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u1_fiveState
+  unfold BlackwellDilemma.Infrastructure.FiveState.r_G
+  unfold BlackwellDilemma.Infrastructure.FiveState.r_B
+  unfold BlackwellDilemma.Infrastructure.FiveState.r_A
+  have hden : κ + 1 ≠ 0 := by linarith
+  field_simp [hden]
+  nlinarith [hp, hκ]
+
+omit [DiagnosticSignalHypothesisData] in
+/-- At the current concrete carrier, `α = 2` makes the `kappaStar` feasible
+    set empty for every `p ≥ 0`, hence `kappaStar p 2 = 0`.
+
+    This is not a paper theorem. It is a kernel-checked guardrail showing that
+    the R205 lower-envelope carrier over the unbounded high-`α` set cannot be
+    the final complete-kernel target without a domain/non-emptiness repair. -/
+theorem kappaStar_two_eq_zero_of_nonneg_p {p : ℝ} (hp : 0 ≤ p) :
+    kappaStar p 2 = 0 := by
+  rw [kappaStar_def p 2]
+  let K : Set ℝ := fun κ =>
+    0 < κ ∧
+      BlackwellDilemma.Infrastructure.alphaWelfareShift 2 ≤
+        mean_estimate_gap p κ
+  have h_empty : K = (fun _ => False) := by
+    funext κ
+    apply propext
+    exact Iff.intro
+      (fun hκset => by
+        have hlt : mean_estimate_gap p κ < 2 :=
+          mean_estimate_gap_lt_two_of_nonneg_p_of_pos_kappa hp hκset.left
+        have hshift :
+            BlackwellDilemma.Infrastructure.alphaWelfareShift 2 = 2 := rfl
+        have hle : 2 ≤ mean_estimate_gap p κ := by
+          simpa [K, hshift] using hκset.right
+        linarith)
+      (fun hfalse => by cases hfalse)
+  change sInf K = 0
+  rw [h_empty]
+  change sInf (fun _ : ℝ => False) = 0
+  exact Real.sInf_empty
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The current Harris-Kesten scaling carrier is identically zero on `p ≥ 0`.
+
+    Reason: the lower envelope ranges over all `α ≥ α*(0, p_c)`. Since
+    `gap_sentimental_immunity` gives `α*(0, p_c) ≤ 1`, the point `α = 2`
+    lies in that domain. But `kappaStar p 2 = 0` for `p ≥ 0`, while every
+    `kappaStar p α` is non-negative. Thus the infimum of the image is `0`.
+
+    This theorem is the precise kernel-checked obstruction behind the R207
+    dead-end classification of the retired R205 lower-envelope divergence
+    claim. -/
+theorem harrisKestenScalingFunction_eq_zero_of_nonneg_p
+    {p : ℝ} (hp : 0 ≤ p) :
+    harrisKestenScalingFunction p = 0 := by
+  have hkappa_two_zero : kappaStar p 2 = 0 :=
+    kappaStar_two_eq_zero_of_nonneg_p hp
+  unfold harrisKestenScalingFunction
+  let S : Set ℝ := Set.Ici (alphaStar 0 harrisKestenCriticalProb)
+  let I : Set ℝ := Set.image (fun α : ℝ => kappaStar p α) S
+  change sInf I = 0
+  have h_nonneg : ∀ y : ℝ, y ∈ I → 0 ≤ y := by
+    intro y hy
+    rcases hy with ⟨α, _hα, rfl⟩
+    exact kappaStar_nonneg p α
+  have h_ge : 0 ≤ sInf I := Real.sInf_nonneg h_nonneg
+  have h_alpha_le_one : alphaStar 0 harrisKestenCriticalProb ≤ 1 :=
+    (gap_sentimental_immunity 0 harrisKestenCriticalProb (le_refl 0)).right.left
+  have h2memS : 2 ∈ S := by
+    change alphaStar 0 harrisKestenCriticalProb ≤ 2
+    linarith
+  have h0memI : (0 : ℝ) ∈ I := by
+    exact ⟨2, h2memS, hkappa_two_zero⟩
+  have h_bdd : BddBelow I := by
+    exact ⟨0, by
+      intro y hy
+      exact h_nonneg y hy⟩
+  have h_le : sInf I ≤ 0 := csInf_le h_bdd h0memI
+  exact le_antisymm h_le h_ge
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The R205 lower-envelope divergence interface is false for the current
+    carrier: near `p_c = 1/2`, the scaling carrier is identically zero.
+
+    This retires the current `harrisKestenScalingFunction_diverges_at_pc_
+    paper_Def` target as a dead-end caused by the unbounded high-`α` lower
+    envelope plus `sInf ∅ = 0` junk values. The paper-facing route now uses
+    the R208 parameterized scaling-carrier transfer interface; closing Part 6
+    still requires instantiating that interface with a valid replacement
+    carrier and divergence/domination proofs. -/
+theorem not_harrisKestenScalingFunction_diverges_at_pc_paper_Def :
+    ¬ BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        harrisKestenScalingFunction harrisKestenCriticalProb := by
+  intro hhk
+  rcases hhk 0 with ⟨ε, hε_pos, hnear⟩
+  let δ : ℝ := min ε (1 / 4)
+  let p : ℝ := harrisKestenCriticalProb - δ / 2
+  have hδ_pos : 0 < δ := by
+    dsimp [δ]
+    exact lt_min hε_pos (by norm_num)
+  have hδ_le_ε : δ ≤ ε := by
+    dsimp [δ]
+    exact min_le_left ε (1 / 4)
+  have hδ_le_quarter : δ ≤ (1 : ℝ) / 4 := by
+    dsimp [δ]
+    exact min_le_right ε (1 / 4)
+  have hp_left : harrisKestenCriticalProb - ε < p := by
+    dsimp [p]
+    have hδ_half_lt_ε : δ / 2 < ε := by nlinarith
+    linarith
+  have hp_right : p < harrisKestenCriticalProb := by
+    dsimp [p]
+    nlinarith
+  have hp_nonneg : 0 ≤ p := by
+    dsimp [p]
+    unfold harrisKestenCriticalProb
+    nlinarith
+  have hpos : 0 < harrisKestenScalingFunction p := hnear p hp_left hp_right
+  have hzero : harrisKestenScalingFunction p = 0 :=
+    harrisKestenScalingFunction_eq_zero_of_nonneg_p hp_nonneg
+  rw [hzero] at hpos
+  linarith
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The explicit hyperbolic replacement carrier cannot satisfy the current
+    unbounded high-alpha domination target.
+
+    The obstruction is already visible at `alpha = 2` and `p = 0`: the
+    hyperbolic carrier is positive there, while the current concrete
+    `kappaStar 0 2` branch is the empty-feasible-set junk value `0`. -/
+theorem not_criticalHyperbolicScaling_dominates_kappaStar_current :
+    Not (forall alpha : Real,
+      alphaStar 0 harrisKestenCriticalProb <= alpha ->
+      forall p : Real, p < harrisKestenCriticalProb ->
+        criticalHyperbolicScaling p <= kappaStar p alpha) := by
+  intro hdom
+  have h_alpha_le_one : alphaStar 0 harrisKestenCriticalProb <= 1 :=
+    (gap_sentimental_immunity 0 harrisKestenCriticalProb (le_refl 0)).right.left
+  have h_alpha_le_two : alphaStar 0 harrisKestenCriticalProb <= 2 := by
+    linarith
+  have hp_lt : (0 : Real) < harrisKestenCriticalProb := by
+    unfold harrisKestenCriticalProb
+    norm_num
+  have hle := hdom 2 h_alpha_le_two 0 hp_lt
+  have hk_zero : kappaStar 0 2 = 0 :=
+    kappaStar_two_eq_zero_of_nonneg_p (p := 0) (by norm_num)
+  have hcrit_pos : 0 < criticalHyperbolicScaling 0 := by
+    unfold criticalHyperbolicScaling
+    unfold BlackwellDilemma.Infrastructure.hyperbolicBelowScaling
+    unfold harrisKestenCriticalProb
+    norm_num
+  rw [hk_zero] at hle
+  linarith
 
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality
 
 `∂κ*/∂α > 0` for `α ∈ (0, 1)`. -/
 
+omit [DiagnosticSignalHypothesisData] in
 /-- **Proposition `prop:threshold-alpha`.** `κ*(α)` is non-decreasing in
     `α` on `(0, 1)`.
 

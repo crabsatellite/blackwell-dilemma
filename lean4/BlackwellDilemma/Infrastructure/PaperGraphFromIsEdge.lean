@@ -67,6 +67,22 @@ def paperGraph : SimpleGraph Vertex where
     ⟨IsEdge.symm h_edge, fun h => h_ne h.symm⟩
   loopless := ⟨fun u h => h.2 rfl⟩
 
+/-- The current canonical `paperGraph` is preconnected. Since the current
+    `IsEdge` carrier is the complete loopless relation `u ≠ v`, any two
+    distinct vertices are adjacent and equal vertices are reachable by the
+    empty walk. -/
+theorem paperGraph_preconnected_current : paperGraph.Preconnected := by
+  intro u v
+  by_cases h : u = v
+  case pos =>
+    subst v
+    exact SimpleGraph.Reachable.refl u
+  case neg =>
+    have h_edge : IsEdge u v := by
+      simpa [IsEdge, isEdgeData] using h
+    have h_adj : paperGraph.Adj u v := And.intro h_edge h
+    exact h_adj.reachable
+
 /-- **Open-edge SimpleGraph at percolation realisation `ω`**. The Adj
     relation includes only edges that are paper-edges AND open in `ω`,
     plus loopless intersection. Symmetry follows from `IsEdge.symm`
@@ -109,6 +125,7 @@ satisfied by construction (`u ≠ v` intersection), and symmetry uses
 the existing paper `IsEdge.symm` axiom. -/
 
 #print axioms paperGraph
+#print axioms paperGraph_preconnected_current
 #print axioms percolationGraph_adj_eq_paperGraph_at_all_open
 
 end BlackwellDilemma.Infrastructure
