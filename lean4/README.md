@@ -1220,17 +1220,18 @@ next step but is deferred to a Lean v2.0 release; the current build and
 audit verify the math results underlying the two-regime claims are sound.
 
 Each `theorem gap_<name>` exposes a paper-statement label as a Lean
-theorem. The proof depends only on (a) Lean kernel axioms (`propext`,
-`Classical.choice`, `Quot.sound`), (b) opaque carriers from
-`Types.lean` (`Vertex`, `IsEdge`, `PercolationOutcome`, etc., which
-are paper-novel primitives per Definition 1), and (c) at most one
-paper-stipulated `_workingAssumption` axiom isolating the carrier-
-identification needed for that specific result. The R141-R143 wire-up
-sequence retired all 18 prior `_paper_witness` composite axioms,
-replacing each with a smaller `_workingAssumption` plus a Cat 1
-derivation through `BlackwellDilemma/Infrastructure/`.
+theorem. In the current R528 audit state, every live checked theorem depends
+only on Lean/Mathlib kernel axioms (`propext`, `Classical.choice`,
+`Quot.sound`) and transparent theorem parameters/definitions. The earlier
+paper-novel global carriers, `_paper_witness` axioms, and
+`_workingAssumption` axioms have been retired or converted into definitions,
+ordinary theorems, theorem parameters, or kernel-proved dead-end diagnostics.
 
-## Convention: workingAssumption axioms
+## Archived convention: workingAssumption axioms
+
+This section records the pre-R528 discipline that was used while reducing the
+formalisation. It is retained for audit history only. The current source has
+zero `axiom <name>_workingAssumption` declarations.
 
 Each `axiom <name>_workingAssumption` corresponds to a specific
 paper Definition that stipulates a structural property of an opaque
@@ -1240,18 +1241,20 @@ single-step typed bridge per the
 [`feedback_lean_axiom_decomposition`] discipline. Each axiom carries
 a `paper source:` line citing the paper section/line.
 
-Replacing a `_workingAssumption` axiom with a real Lean proof is a
-strict improvement; the statement and downstream proofs are stable
-under that substitution. The Cat 1 Infrastructure modules
+Replacing a historical `_workingAssumption` axiom with a real Lean proof was a
+strict improvement; the statement and downstream proofs were kept stable under
+that substitution. The Cat 1 Infrastructure modules
 (`BlackwellDilemma/Infrastructure/`) provide reusable Mathlib-PR-ready
 abstract algebra (supermodularity, EVT extensions, Mills-tail bounds,
 Gaussian conjugate-prior posterior, etc.) on which the paper-side
 derivations are built.
 
-## Roadmap toward Cat 1 only (Mathlib-pure)
+## Roadmap for semantic strengthening
 
-The long-term goal is to reduce all paper-novel Cat 3 entries to derivations
-from Cat 1 (Mathlib + kernel) inputs only. The remaining obstacles are:
+The current source-level and ledger-level Cat 3 input count is zero. The
+remaining roadmap is no longer about removing hidden global axioms; it is about
+strengthening paper-faithful semantic carriers and upstreaming reusable
+Mathlib infrastructure.
 
 1. **Five-state loss-shape analysis.** The value-at-argmin continuity item
    `L_at_betaStarOfP_continuousOn_paper_Def` is closed by the R238
@@ -1286,7 +1289,7 @@ from Cat 1 (Mathlib + kernel) inputs only. The remaining obstacles are:
    the current behavior evidence as ordinary theorems instead of carrier proof
    fields.
 
-3. **Non-vacuous percolation carrier repair.** The current Wrongness
+3. **Finite-lattice percolation carrier repair.** The current Wrongness
    percolation package is oracle-neutral and above-threshold-neutral, but its
    topo-loss side is no longer empty: `giantComponentEvent 1` is nonempty and
    `expectedTopoLossOnGiant 1 p = 1/2` is kernel-proved. The R200 Mills
@@ -1353,21 +1356,24 @@ from Cat 1 (Mathlib + kernel) inputs only. The remaining obstacles are:
    `Infrastructure/TopkisCrossPartial.lean` and is a candidate for
    Mathlib upstream.
 
-5. **Classical Cat 2 citations** (paper-cited but not Mathlib). Blackwell
+5. **Classical citation upstreaming** (paper-cited but not Mathlib). Blackwell
    1953 (sufficiency theorem), Topkis 1998 (interval supermodularity book),
    Molloy-Reed 1995 (configuration-model giant-component criterion), Cohen
    et al. 2000 (power-law percolation), Grimmett 1999 (Bond Percolation
    §6.75), David-Nagaraja 2003 (order-statistics formulas) — each is a
    discrete Mathlib contribution that would close the corresponding
-   `gap_*_OPEN` Cat 2 entry.
+    `gap_*_OPEN` Cat 2 entry. In the current R528 state these are no longer
+    project axioms; they are upstreaming opportunities for making the companion
+    proof more reusable at library level.
 
 Each of these contributes broadly reusable infrastructure to Mathlib beyond
 just this paper, which is the strategic motivation for pursuing them.
 
-The current Lean v1.0 verifies that the paper's mathematical content is
-internally consistent under the explicit Cat 3 paper-foundational
-commitments; full Cat 1 only is a multi-paper, multi-month Mathlib
-contribution effort and is not a prerequisite for paper publication.
+The current Lean v1.0 verifies the live theorem surface with no project-level
+source axioms, no proof escapes, no unresolved conditional proof interfaces,
+and no Cat 3 paper-novel input assumptions in the ledger. The remaining work is
+semantic strengthening of selected paper-facing carriers, especially the
+finite-lattice/percolation side, not repair of hidden proof unsoundness.
 
 ## Relationship to the paper's published artifact
 
@@ -1377,12 +1383,11 @@ paper that are formalised here also retain their natural-language
 proofs in the manuscript; the Lean version provides an independent,
 machine-checked record of the logical structure.
 
-The paper itself notes (footnote to Theorem 3.1) that the formal
-proof of the welfare-decomposition theorem and its signal-immunity
-clause reduces to the three Lean 4 kernel axioms (`propext`,
-`Classical.choice`, `Quot.sound`) with no paper-derived content
-introduced as axioms. Across the full formalisation, the
-paper-statement-to-Lean correspondence is one-to-one at the label
-level; per-entry status (Cat 1 derived theorem vs. paper-stipulated
-`_workingAssumption` axiom vs. opaque carrier) is documented in
-`Ledger.lean` and verified in `AxiomAudit.lean`.
+The paper itself notes (footnote to Theorem 3.1) that the formal proof of the
+welfare-decomposition theorem and its signal-immunity clause reduces to the
+three Lean 4 kernel axioms (`propext`, `Classical.choice`, `Quot.sound`) with
+no paper-derived content introduced as axioms. Across the current
+formalisation, the paper-statement-to-Lean correspondence is tracked at the
+label level; per-entry status, retired/dead-ended routes, and remaining
+semantic calibration notes are documented in `Ledger.lean`,
+`AxiomAudit.lean`, and `PAPER_LEAN_CALIBRATION.md`.
