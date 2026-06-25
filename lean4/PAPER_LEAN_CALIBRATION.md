@@ -627,6 +627,10 @@ It also proves
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
 so the route must project to the missing giant-loss closing field and to one
 same-tail flat/giant/mass/positive-realisation output package.
+It now also gates direct old-contract-to-output projections for the giant-loss,
+combined-support, and supported-nondiagnostic route outputs, so the refuted old
+contract's paper-closing obligations are machine-calibrated at each output
+layer.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
 so the route must expose arbitrarily large non-diagnostic finite members

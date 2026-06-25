@@ -691,6 +691,10 @@ It also gates
 so a future route must expose both the missing giant-loss closing field and the
 same-tail flat/giant/mass/positive-realisation output rather than merely an
 existential wrapper.
+It now also gates direct old-contract-to-output projections for the giant-loss,
+combined-support, and supported-nondiagnostic route outputs, so the refuted old
+contract's paper-closing obligations are machine-calibrated at each output
+layer.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
 so that same route must expose arbitrarily large non-diagnostic finite members

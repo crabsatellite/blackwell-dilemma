@@ -475,6 +475,10 @@ It also gates
 so the future route must project to the missing giant-loss field and to the
 same-tail flat/giant/mass/positive-realisation package before the remaining
 Mathlib/percolation work can count as paper-semantic closure.
+It now also gates direct old-contract-to-output projections for the giant-loss,
+combined-support, and supported-nondiagnostic route outputs, so the refuted old
+contract's paper-closing obligations are machine-calibrated at each output
+layer.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
 so any final route must expose arbitrarily large non-diagnostic finite members
