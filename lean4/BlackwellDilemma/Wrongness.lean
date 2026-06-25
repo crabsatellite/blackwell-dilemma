@@ -15791,6 +15791,45 @@ def RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
                 (bridge.family L).topoLossKernel
                   (boxedTorusFlatGraphN L) omega
 
+/-- Existential route for the full random-supercritical `Z^2_L` topo paper
+closing target.
+
+This is intentionally stronger than the repaired-bridge compatibility witness:
+it requires an inhabited repaired bridge together with the full paper-closing
+support surface, including the repaired giant-restricted lower-bound field. -/
+def RandomSupercriticalZ2TopoClusterFullPaperClosingRoute : Prop :=
+  Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+      bridge
+
+/-- A full-support repaired bridge is exactly enough to inhabit the named topo
+paper-closing route. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_repaired_bridge
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData)
+    (hsupport :
+      RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+        bridge) :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  exact ⟨bridge, hsupport⟩
+
+/-- The named full paper-closing route always contains an actual repaired
+random-supercritical bridge. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_repaired_bridge_nonempty :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData := by
+  rintro ⟨bridge, _hsupport⟩
+  exact ⟨bridge⟩
+
+/-- The named full paper-closing route exposes the full support witness rather
+than only repaired-bridge nonemptiness. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_witness :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+          bridge := by
+  intro hroute
+  exact hroute
+
 /-- The old final bridge contract would project to the full repaired
 paper-closing support surface.  Since that old contract is kernel-refuted, this
 theorem is used only to pin down the exact support obligations a repaired
@@ -15812,6 +15851,19 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_repaired_full_paper_closing_s
   ] using
     randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_event_mass_lower_bound_and_loss_realisation
       bridge
+
+/-- The old over-strong bridge contract would also inhabit the named full
+paper-closing route.  Since that old contract is refuted elsewhere, this is a
+calibration theorem for the future repaired route, not a closure claim. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_full_paper_closing_route
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_repaired_bridge
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeData_from_current_contract
+        bridge)
+      (randomSupercriticalZ2TopoClusterBridgeData_repaired_full_paper_closing_support
+        bridge)
 
 /-- Positive boxed-torus flat index fact used to separate the first-edge
 compatibility witness from the current boxed-torus diagnostic families. -/

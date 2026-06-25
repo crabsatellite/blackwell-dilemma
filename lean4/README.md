@@ -671,6 +671,11 @@ giant-restricted loss, giant-event mass, and an in-giant positive-loss
 realisation; the old final contract projects to this full surface, and
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support`
 refutes it for the current witness.
+The existential closing target is now also named as
+`RandomSupercriticalZ2TopoClusterFullPaperClosingRoute`; the gate checks that a
+full-support repaired bridge inhabits this route, that the route contains an
+actual repaired bridge and full-support witness, and that the old over-strong
+contract would project to it.
 It also gates the combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, which
 keeps the old over-strong contract obstruction and the repaired first-edge

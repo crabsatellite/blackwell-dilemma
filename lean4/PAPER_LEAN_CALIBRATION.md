@@ -593,6 +593,11 @@ loss, giant-event mass, and in-giant positive-loss support, is projected from
 the old final bridge contract, and is refuted for the current first-edge
 witness by
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support`.
+The existential closing route is now also named as
+`RandomSupercriticalZ2TopoClusterFullPaperClosingRoute`: the gate proves that
+full-support repaired bridges inhabit it, that it exposes both repaired-bridge
+nonemptiness and the full-support witness, and that the old over-strong bridge
+contract would project to this route.
 The topo current frontier is also packaged as
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
 the old over-strong bridge-contract obstruction with the repaired first-edge
