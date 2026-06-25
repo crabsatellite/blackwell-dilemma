@@ -12,12 +12,13 @@ labeled paper item and a Lean theorem** (12 definitions, 6 theorems,
 mapping). Complete paper-semantic closure is tracked separately by
 [`BlackwellDilemma/PaperSemanticGate.lean`](BlackwellDilemma/PaperSemanticGate.lean):
 the current open semantic targets are the lattice-specific Theorem 4.1 Part 4
-statement, the paper R10 high-kappa `threshold-five-state` routing clause,
-the lattice-IDP embedding route for Part 6, and the random supercritical
-`Z2_L` topological cluster/phase carrier.  The threshold-five-state target is
-now machine-diagnosed: `FiveState.not_current_kappaAgent_highKappa_oracle_at_p0`
-proves the current neutral kappa-agent carrier cannot achieve the R10 oracle
-value at `p = 0`.
+statement, the lattice-IDP embedding route for Part 6, and the random
+supercritical `Z2_L` topological cluster/phase carrier.  The
+threshold-five-state oracle-routing target is now closed by
+`FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
+kappa-agent carrier refutation
+`FiveState.not_current_kappaAgent_highKappa_oracle_at_p0` remains as diagnostic
+evidence for the retired carrier route.
 
 Every claim is exposed as a Lean declaration with its formalisation status
 tracked in [`BlackwellDilemma/Ledger.lean`](BlackwellDilemma/Ledger.lean).
@@ -75,7 +76,7 @@ The formalisation follows the paper's section structure.
 
 ## Status summary
 
-Current kernel-only audit target (2026-06-23):
+Current kernel-only audit target (2026-06-25):
 
 Commands:
 
@@ -93,7 +94,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=1, open=4 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=2, open=3 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |

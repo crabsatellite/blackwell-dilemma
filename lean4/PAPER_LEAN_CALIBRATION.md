@@ -60,10 +60,10 @@
 | `prop:canonical` (5.1) | 709 | Current standard-only theorem surfaces `FourState.W_open`, `gap_W_open_limit_infty`, and `gap_W_open_limit_zero` | Canonical.lean:63,74,159 |
 | `prop:interior-optimum` (5.2) | 769 | `gap_interior_optimum` | Canonical.lean:1430 |
 | `prop:two-regime-five-state` (paper R10 rewrite of former `prop:three-regime-five-state`) | 817 | Current standard-only theorem surfaces for the six reversal clauses plus cognitive augmentation and sufficient cognition; paper-facing `gap_two_regime_*` aliases now cover the R10 relabeling, with historical `gap_three_regime_*` names retained for traceability | Canonical.lean:2692,2798,2869,2934,3218,3385,3401,3431,3455,3534 |
-| `prop:threshold-five-state` (paper R10 rewrite to "Cognitive Sufficiency on the 5-State Instance") | 866 | Current standard-only theorem surfaces `gap_threshold_fiveState_greedy_has_interior_optimum`, `gap_threshold_fiveState_kappa_above_kstar`, and `gap_threshold_fiveState_smooth_transition`; paper R10 high-κ oracle-routing clause is now kernel-refuted for the current neutral κ-agent carrier by `not_current_kappaAgent_highKappa_oracle_at_p0` | Canonical.lean:3736,3853,4019,4054 |
+| `prop:threshold-five-state` (paper R10 rewrite to "Cognitive Sufficiency on the 5-State Instance") | 866 | Current standard-only theorem surfaces `gap_threshold_fiveState_greedy_has_interior_optimum`, `gap_threshold_fiveState_kappa_above_kstar`, and `gap_threshold_fiveState_smooth_transition`; paper R10 high-κ oracle-routing clause is now closed by the one-edge signal-conditional carrier `highKappaOracleRoutingWelfare_eq_oracle`; the current neutral κ-agent refutation `not_current_kappaAgent_highKappa_oracle_at_p0` remains as diagnostic evidence for the retired route | Canonical.lean:3736,3853,4019,4058,4095 |
 | `prop:p-monotonicity-five-state` | 884 | `gap_p_monotonicity_bounded` + `gap_kappaStar_at_two_thirds` (latter is mathematically true but its `kappaStar_fiveState` referent is SUPERSEDED in paper R10; see Canonical.lean line ~2105 deprecation block) | Canonical.lean:3553,3637 |
 | `prop:complementarity` | 933 | `gap_information_knowledge_complementarity` | Bayesian.lean:90 |
-| `prop:bayesian-naive-five-state` | 951 | Parts (i)/(ii)/(iii): `gap_bayesian_naive_routing_threshold` + `gap_bayesian_naive_reversal_absent` + `gap_bayesian_naive_reversal_present`; current kernel witness: `agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness_current` | Canonical.lean:3976,4083,4131,4156 |
+| `prop:bayesian-naive-five-state` | 951 | Parts (i)/(ii)/(iii): `gap_bayesian_naive_routing_threshold` + `gap_bayesian_naive_reversal_absent` + `gap_bayesian_naive_reversal_present`; current kernel witness: `agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness_current` | Canonical.lean:4113,4220,4293,4268 |
 | `prop:error-compounding` | 1037 | `gap_error_compounding_part1` + `gap_error_compounding_part2` | GeneralGraphs.lean:1939,2138 |
 
 ### Lemmas (2)
@@ -181,8 +181,8 @@ paper's actual restricted-scope claim's pending Lean encoding.
 
 Current 2026-06-25 correction: the project builds and the checked theorem
 surface has zero proof escapes. Complete paper-semantic kernel-only closure is
-not claimable while `PaperSemanticGate.lean` reports open threshold, lattice,
-and percolation semantic targets. The live source audit reports 0 project-level `axiom`
+not claimable while `PaperSemanticGate.lean` reports open lattice and
+percolation semantic targets. The live source audit reports 0 project-level `axiom`
 declarations, including 0 `_OPEN`, 0 `_paper_Def`, and 0 `_workingAssumption`
 declarations.
 The live ledger has no `gapOpen` entries, but the cognitive Part 6 route is not
@@ -511,12 +511,12 @@ For full kernel-pure cover (v2.0 future iteration):
   listed in `PaperSemanticGate.lean` with paper-faithful kernel theorems, or
   revising the manuscript claims to match the already closed theorem payload.
 - The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
-  recalibration is now closed by aliases in `Canonical.lean`; the remaining
-  §5 semantic target is the paper R10 `prop:threshold-five-state` clause (iii)
-  high-κ signal-conditional routing theorem achieving oracle `1 - 0.4p`;
-  the current neutral κ-agent carrier is machine-refuted at `p = 0` by
-  `not_current_kappaAgent_highKappa_oracle_at_p0`, so closure requires a
-  paper-faithful routing carrier or a manuscript claim revision.
+  recalibration is closed by aliases in `Canonical.lean`; the paper R10
+  `prop:threshold-five-state` clause (iii) high-κ signal-conditional routing
+  theorem is now closed by `highKappaOracleRoutingWelfare_eq_oracle`.  The
+  current neutral κ-agent carrier refutation
+  `not_current_kappaAgent_highKappa_oracle_at_p0` remains as diagnostic
+  evidence for the retired route, not as an open semantic target.
 - Upstream/polish the R256-closed Gaussian ratio interfaces:
   `L_lowerGaussianHazard_antitoneOn_pos` and
   `L_upperGaussianMills_antitoneOn_pos`; the former

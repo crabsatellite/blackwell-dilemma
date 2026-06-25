@@ -35,27 +35,25 @@ Conditional audit:  prop_interfaces=0 closed_true_prop_interfaces=0
                     conditional_signatures_using_unresolved_prop_def_interfaces=0
                     conditional_signatures_using_unresolved_structure_interfaces=0
                     conditional_signatures_using_unresolved_class_interfaces=0
-Paper semantic gate: closed=1 open=4
+Paper semantic gate: closed=2 open=3
 ```
 
 The source-level axiom surface and live Cat 3 input surface are now zero, but
 complete paper-semantic kernel-only closure is stricter than this live theorem
-surface. `PaperSemanticGate.lean` currently lists four open semantic targets:
-Theorem 4.1 Part 4 lattice p-monotonicity, paper R10
-`prop:threshold-five-state` clause (iii) high-κ signal-conditional routing,
-Theorem 4.1 Part 6 lattice embedding, and the random supercritical `Z2_L`
-topological cluster/phase carrier. These are not hidden source axioms or proof
-escapes; they are the remaining manuscript-semantics-to-kernel correspondence
-work.
+surface. `PaperSemanticGate.lean` currently lists three open semantic targets:
+Theorem 4.1 Part 4 lattice p-monotonicity, Theorem 4.1 Part 6 lattice
+embedding, and the random supercritical `Z2_L` topological cluster/phase
+carrier. These are not hidden source axioms or proof escapes; they are the
+remaining manuscript-semantics-to-kernel correspondence work.
 
 Current iteration result: the high-κ five-state oracle-routing target is now
-machine-diagnosed, not just text-diagnosed. `FiveState.fiveStateOracleWelfare`
-formalises the R10 value `1 - 0.4p`, and
-`FiveState.not_current_kappaAgent_highKappa_oracle_at_p0` proves that the
-current neutral `kappaAgent` carrier cannot achieve it at `p = 0`. Closing this
-semantic target therefore requires either a paper-faithful signal-conditional
-routing carrier or a manuscript revision to the already closed smooth-threshold
-payload.
+closed, not merely diagnosed. `FiveState.fiveStateOracleWelfare` formalises
+the R10 value `1 - 0.4p`, and
+`FiveState.highKappaOracleRoutingWelfare_eq_oracle` proves that the one-edge
+signal-conditional routing carrier achieves it. The prior
+`FiveState.not_current_kappaAgent_highKappa_oracle_at_p0` theorem remains as
+machine diagnostic evidence that the retired neutral `kappaAgent` carrier
+could not support the paper claim at `p = 0`.
 
 The R207 theorem
 `not_harrisKestenScalingFunction_diverges_at_pc_paper_Def` proves the current

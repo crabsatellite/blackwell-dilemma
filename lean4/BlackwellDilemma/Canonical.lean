@@ -4039,6 +4039,47 @@ being closed by a wrapper around the current kernel. -/
 noncomputable def fiveStateOracleWelfare (p : ℝ) : ℝ :=
   1 - (4/10 : ℝ) * p
 
+/-- One-edge signal-conditional routing carrier for the R10 high-κ clause.
+When the bridge signal is open, the agent routes to `G` and receives `1`;
+when it is blocked, the agent routes to the safe/trap option and receives
+`6/10`. -/
+noncomputable def highKappaOracleRoutingKernel : BondConfig (Fin 1) → ℝ :=
+  fun ω => if ω 0 then (1 : ℝ) else (6 / 10 : ℝ)
+
+/-- Paper-facing high-κ signal-conditional routing welfare.  The input `p`
+is the paper's blocking probability, so the one-edge Bernoulli expectation
+uses open-edge probability `1 - p`. -/
+noncomputable def highKappaOracleRoutingWelfare (p : ℝ) : ℝ :=
+  percExpectation (1 - p) highKappaOracleRoutingKernel
+
+/-- The explicit one-edge high-κ routing carrier realizes the R10 oracle
+value `1 - 0.4p`: open bridge routes to `G`, blocked bridge routes to the
+`6/10` safe/trap payoff. -/
+theorem highKappaOracleRoutingWelfare_eq_oracle (p : ℝ) :
+    highKappaOracleRoutingWelfare p = fiveStateOracleWelfare p := by
+  unfold highKappaOracleRoutingWelfare percExpectation
+  have hsum :
+      (Finset.univ.sum (fun ω : BondConfig (Fin 1) =>
+          bondConfigWeight (1 - p) ω * highKappaOracleRoutingKernel ω)) =
+        (Finset.univ.sum (fun b : Bool =>
+          (if b then 1 - p else p) *
+            (if b then (1 : ℝ) else (6 / 10 : ℝ)))) := by
+    exact Fintype.sum_equiv (Equiv.funUnique (Fin 1) Bool)
+      (fun ω : BondConfig (Fin 1) =>
+        bondConfigWeight (1 - p) ω * highKappaOracleRoutingKernel ω)
+      (fun b : Bool =>
+        (if b then 1 - p else p) *
+          (if b then (1 : ℝ) else (6 / 10 : ℝ)))
+      (by
+        intro ω
+        simp [highKappaOracleRoutingKernel, bondConfigWeight]
+        rfl)
+  rw [hsum]
+  rw [Fintype.sum_bool]
+  simp
+  unfold fiveStateOracleWelfare
+  ring_nf
+
 /-- Current public κ-agent welfare is the neutral constant `1/2` for every
 `β` and `κ`.  This is a theorem about the present carrier, not a paper claim. -/
 theorem agentWelfare_kappaAgent_current_eq_half (β κ : ℝ) :

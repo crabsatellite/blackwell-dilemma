@@ -12,6 +12,8 @@
   calibration matrix to overclaim complete paper-semantic closure.
 -/
 
+import BlackwellDilemma.Canonical
+
 namespace BlackwellDilemma
 namespace PaperSemanticGate
 
@@ -48,11 +50,11 @@ def semanticTargets : List SemanticTarget :=
         "Build a lattice/domain carrier where kappaStar monotonicity follows from a proved graph/percolation monotone-coupling theorem." },
     { id := "r10_threshold_five_state_high_kappa_routing",
       paperLabel := "prop:threshold-five-state clause iii",
-      status := SemanticStatus.open,
+      status := SemanticStatus.closed,
       shortReason :=
-        "The paper R10 high-kappa signal-conditional routing clause achieving oracle 1 - 0.4p is refuted for the current neutral kappaAgent carrier.",
+        "The paper R10 high-kappa signal-conditional routing clause is now represented by a one-edge signal-conditional carrier achieving oracle 1 - 0.4p.",
       closeRoute :=
-        "Replace the neutral kappaAgent carrier with a paper-faithful signal-conditional routing carrier, or revise the paper claim to the already closed smooth-threshold payload. Current-carrier obstruction: FiveState.not_current_kappaAgent_highKappa_oracle_at_p0." },
+        "FiveState.highKappaOracleRoutingWelfare_eq_oracle; the neutral kappaAgent obstruction FiveState.not_current_kappaAgent_highKappa_oracle_at_p0 remains as diagnostic evidence for the retired carrier route." },
     { id := "theorem_4_1_part6_lattice_embedding",
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
@@ -83,10 +85,18 @@ def paperSemanticClosedCount : Nat :=
 /-- Build gate: current paper-semantic closure has exactly the listed open
 targets.  If a target is closed or added, this theorem must be updated with the
 same patch that updates the machine-readable target list. -/
-theorem paperSemanticOpenCount_current : paperSemanticOpenCount = 4 := rfl
+theorem paperSemanticOpenCount_current : paperSemanticOpenCount = 3 := rfl
 
-/-- Build gate: the R10 relabeling calibration is now closed. -/
-theorem paperSemanticClosedCount_current : paperSemanticClosedCount = 1 := rfl
+/-- Build gate: the R10 relabeling and high-κ oracle-routing calibrations
+are now closed. -/
+theorem paperSemanticClosedCount_current : paperSemanticClosedCount = 2 := rfl
+
+/-- Build gate: the closed R10 high-κ semantic target is backed by the
+paper-facing one-edge signal-conditional routing theorem. -/
+theorem r10_threshold_five_state_high_kappa_routing_payload (p : ℝ) :
+    FiveState.highKappaOracleRoutingWelfare p =
+      FiveState.fiveStateOracleWelfare p :=
+  FiveState.highKappaOracleRoutingWelfare_eq_oracle p
 
 /-- Complete paper-semantic kernel-only status is not yet claimable while the
 open semantic target count is nonzero. -/
