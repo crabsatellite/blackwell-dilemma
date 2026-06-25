@@ -5037,6 +5037,30 @@ theorem part6_full_paper_closing_bridge_route_feasible_divergence_witness :
     (part6_full_paper_closing_support_of_bridge_route hroute)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Full Part 6 paper-closing support exposes both named output layers
+together: divergence and same-`alpha` feasible/divergence. -/
+theorem part6_full_paper_closing_support_output_pair :
+    Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hsupport
+  exact And.intro
+    (part6_full_paper_closing_support_divergence_witness hsupport)
+    (part6_full_paper_closing_support_feasible_divergence_witness hsupport)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A repaired Part 6 bridge route exposes both named output layers together,
+not just one projection at a time. -/
+theorem part6_full_paper_closing_bridge_route_output_pair :
+    Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hroute
+  exact And.intro
+    (part6_full_paper_closing_bridge_route_divergence_witness hroute)
+    (part6_full_paper_closing_bridge_route_feasible_divergence_witness hroute)
+
+omit [DiagnosticSignalHypothesisData] in
 /-- The current carrier cannot supply the divergence witness exposed by any
 complete Part 6 paper-closing support. -/
 theorem not_part6_full_paper_closing_divergence_witness_current :
@@ -5075,6 +5099,14 @@ theorem not_Part6FullPaperClosingFeasibleDivergenceWitness_current :
   not_part6_full_paper_closing_feasible_divergence_witness_current
 
 omit [DiagnosticSignalHypothesisData] in
+/-- The current carrier cannot supply the paired Part 6 output layer. -/
+theorem not_part6_full_paper_closing_output_pair_current :
+    Not (Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness) := by
+  intro hpair
+  exact not_part6_full_paper_closing_divergence_witness_current hpair.1
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current Part 6 non-closure rederived through the exposed divergence
 witness, not only by destructing the full support wrapper. -/
 theorem not_part6_full_paper_closing_support_current_via_divergence_witness :
@@ -5109,6 +5141,24 @@ theorem not_part6_full_paper_closing_bridge_route_current_via_feasible_divergenc
   intro hroute
   exact not_part6_full_paper_closing_feasible_divergence_witness_current
     (part6_full_paper_closing_bridge_route_feasible_divergence_witness hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 support non-closure rederived through the paired output
+layer. -/
+theorem not_part6_full_paper_closing_support_current_via_output_pair :
+    Not Part6FullPaperClosingSupport := by
+  intro hsupport
+  exact not_part6_full_paper_closing_output_pair_current
+    (part6_full_paper_closing_support_output_pair hsupport)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 bridge-route non-closure rederived through the paired
+output layer. -/
+theorem not_part6_full_paper_closing_bridge_route_current_via_output_pair :
+    Not Part6FullPaperClosingBridgeRoute := by
+  intro hroute
+  exact not_part6_full_paper_closing_output_pair_current
+    (part6_full_paper_closing_bridge_route_output_pair hroute)
 
 omit [DiagnosticSignalHypothesisData] in
 theorem not_unbounded_part6_full_paper_closing_support_current :

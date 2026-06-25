@@ -844,6 +844,10 @@ It now also gates `Part6FullPaperClosingFeasibleDivergenceWitness`,
 `part6_full_paper_closing_bridge_route_feasible_divergence_witness`, and
 the corresponding current obstructions, so support and bridge routes must
 expose feasible-set nonemptiness and divergence at one same `alpha`.
+It also gates the paired output projections
+`part6_full_paper_closing_support_output_pair` and
+`part6_full_paper_closing_bridge_route_output_pair`, plus the output-pair
+current obstructions, so both Part 6 output layers are checked together.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support
