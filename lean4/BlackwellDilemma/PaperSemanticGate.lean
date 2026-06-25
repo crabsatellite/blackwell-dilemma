@@ -61,9 +61,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current global scaling-transfer payload, local-domination transfer, named candidate obstructions, generic positive-at-zero global-carrier obstruction, and current local-bridge impossibility theorem are gated, but the full lattice embedding route still needs an alpha-domain/nonempty-feasible-set repair.",
+        "The current global scaling-transfer payload, local-domination transfer, named candidate obstructions, generic positive-at-zero global-carrier obstruction, current local-bridge impossibility theorem, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
       closeRoute :=
-        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful alpha-domain or explicit feasible-set/nonempty-domain certificate, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem." },
+        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem." },
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
@@ -356,6 +356,10 @@ structure Part6LatticeEmbeddingFrontierPayload where
         bridge.scalingCarrier = s
   local_bridge_current_obstruction :
     Not (Nonempty Z2LatticeEmbeddingLocalBridgeData)
+  alphaStar_current_eq_one_at_pc :
+    alphaStar 0 harrisKestenCriticalProb = 1
+  closed_unit_alpha_domain_empty_current :
+    ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
   z2_lattice_embedding_bridge_transfer :
     ∀ _bridge : Z2LatticeEmbeddingBridgeData,
       ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
@@ -374,7 +378,8 @@ structure Part6LatticeEmbeddingFrontierPayload where
 /-- Build gate: the open Part 6 lattice-embedding target is calibrated
 against the current transfer layer, local-domination transfer layer, and
 current-carrier obstructions.  The semantic target remains open until the
-local bridge's unbounded-`α` domain is repaired with a paper-faithful
+local bridge's unbounded-`α` domain and the current `alphaStar = 1`
+closed-unit degeneracy are repaired with a paper-faithful nonempty
 `α`/feasibility certificate and then instantiated by a genuine
 lattice/percolation carrier with divergence and near-`p_c` domination. -/
 def part6_lattice_embedding_frontier_payload :
@@ -404,6 +409,10 @@ def part6_lattice_embedding_frontier_payload :
     not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier
   local_bridge_current_obstruction :=
     not_z2_lattice_embedding_local_bridge_current
+  alphaStar_current_eq_one_at_pc :=
+    alphaStar_eq_one_current 0 harrisKestenCriticalProb
+  closed_unit_alpha_domain_empty_current :=
+    not_closed_unit_alpha_above_alphaStar_current
   z2_lattice_embedding_bridge_transfer :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
   z2_lattice_embedding_local_bridge_transfer :=

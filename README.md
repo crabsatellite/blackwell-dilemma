@@ -52,10 +52,11 @@ contract now machine-excludes the current full-reach, flat-only, and
 all-open-complement diagnostic families. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
 domination interface, a repaired local near-`p_c` domination transfer, and the
-current local-bridge impossibility theorem. The remaining repair is therefore
-to fix the Part 6 `α` domain or add an explicit feasible-set/nonempty-domain
-certificate before instantiating a `Z²` bridge with a real percolation scaling
-carrier.
+current local-bridge impossibility theorem. It also checks the current
+`alphaStar = 1` degeneracy, which makes the paper-bounded `α > α*`, `α <= 1`
+domain empty on the present scalar carrier. The remaining repair is therefore
+to supply a nondegenerate Part 6 `α`/feasible-set domain certificate before
+instantiating a `Z²` bridge with a real percolation scaling carrier.
 See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the

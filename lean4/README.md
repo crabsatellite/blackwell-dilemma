@@ -613,9 +613,12 @@ The Part 6 gate now also checks the repaired local-domination transfer
 It also checks `not_z2_lattice_embedding_local_bridge_current`, which proves
 the current local bridge shape is still uninhabitable: the unbounded `α` domain
 includes `α = 2`, while `kappaStar p 2 = 0` on the near-`p_c`, `p >= 0`
-region where any divergent scaling carrier is positive. The remaining Part 6
-repair is therefore no longer the transfer-domain theorem itself; it is to
-repair the bridge's `α` domain or add an explicit feasible-set/nonempty-domain
+region where any divergent scaling carrier is positive. The same gate now
+checks `alphaStar_eq_one_current` and
+`not_closed_unit_alpha_above_alphaStar_current`, showing that a naive
+paper-bounded domain repair `α <= 1` would be empty on the current scalar
+carrier. The remaining Part 6 repair is therefore no longer the transfer-domain
+theorem itself; it is to supply a nondegenerate `α`/feasible-set domain
 certificate, then instantiate the repaired bridge with a paper-faithful scaling
 carrier whose domination theorem holds near `p_c`.
 The current transfer and obstruction frontier is machine-gated by

@@ -145,11 +145,14 @@ transfer `gap_cognitive_threshold_part6_local` and the local bridge transfer
 current gate now also proves `not_z2_lattice_embedding_local_bridge_current`.
 Thus the local transfer is usable, but the present local bridge contract is
 still uninhabitable because its unbounded `α` domain includes `α = 2`, where
-the concrete `kappaStar p 2` branch is zero on `p >= 0`. The Part 6 repair is
-therefore first to repair the bridge's `α` domain or add an explicit
-feasible-set/nonempty-domain certificate, then instantiate that repaired bridge
-with a paper-faithful carrier whose domination theorem holds near `p_c`, before
-there can be a live Cat 2 percolation-universality closure target. R518 adds
+the concrete `kappaStar p 2` branch is zero on `p >= 0`. The same gate now
+proves `alphaStar_eq_one_current` and
+`not_closed_unit_alpha_above_alphaStar_current`, so a naive closed-unit
+paper-domain repair is also empty on the current scalar carrier. The Part 6
+repair is therefore first to supply a nondegenerate `α`/feasible-set domain
+certificate, then instantiate that repaired bridge with a paper-faithful
+carrier whose domination theorem holds near `p_c`, before there can be a live
+Cat 2 percolation-universality closure target. R518 adds
 `Z2LatticeEmbeddingBridgeData`, making that future
 certificate shape explicit in Lean: it must name `SimpleGraph.Z2LatticeGraph`
 and provide a replacement scaling carrier with both the `DivergesAtBelowAtTop`

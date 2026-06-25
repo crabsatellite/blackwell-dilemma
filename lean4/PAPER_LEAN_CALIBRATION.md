@@ -263,11 +263,13 @@ adds the repaired local-domination transfer
 current gate also proves `not_z2_lattice_embedding_local_bridge_current`: the
 unbounded `α` domain still includes `α = 2`, where the current concrete
 `kappaStar p 2` branch is zero for `p >= 0`, so no divergent near-`p_c`
-scaling carrier can satisfy the present local bridge. The remaining
-Harris-Kesten scaling work is therefore first to repair the bridge's `α` domain
-or add an explicit feasible-set/nonempty-domain certificate, then instantiate
-that repaired bridge with a paper-faithful carrier and valid near-`p_c`
-domination theorem.
+scaling carrier can satisfy the present local bridge. The gate also proves
+`alphaStar_eq_one_current` and
+`not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
+domain by `α <= 1` would make the current `α > α*` regime empty. The remaining
+Harris-Kesten scaling work is therefore first to supply a nondegenerate
+`α`/feasible-set domain certificate, then instantiate that repaired bridge with
+a paper-faithful carrier and valid near-`p_c` domination theorem.
 `V_g` is now a well-founded concrete greedy traversal over the current
 canonical finite vertex carrier (`Vertex = Fin 5`), and the paper recursion
 laws `V_g_def_terminal` and `V_g_def_step` are current theorems.
@@ -498,7 +500,8 @@ failed lower-envelope proposition; the failed route is still not a global
 `part6_lattice_embedding_frontier_payload`, which checks the live transfer
 theorem, prototype divergence theorem, lower-envelope dominance theorem, and
 the named plus generic obstruction theorems, including the current
-local-bridge impossibility theorem.
+local-bridge impossibility theorem and current `alphaStar = 1` bounded-domain
+degeneracy.
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
 `L_minimum_exists_in_regime_i_proof`. R238 also proves

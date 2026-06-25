@@ -3216,6 +3216,53 @@ theorem gap_sentimental_immunity :
   exact alpha_star_existence_via_continuity κ p hκ δ hδ_pos hδ_le_one h_mono
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier calibration: the concrete sentimental reward kernel is
+constant in `β`, so the monotonicity set in the current `alphaStar` definition
+is the whole closed unit interval and the supremum is `1`.
+
+This is a kernel-checked semantic diagnostic, not a paper theorem: it shows
+that merely restricting the Part 6 `α` domain to the paper's closed unit range
+would make the current `α > α*` regime empty. -/
+theorem alphaStar_eq_one_current (κ p : ℝ) :
+    alphaStar κ p = 1 := by
+  rw [alphaStar_def κ p]
+  let S : Set ℝ := { α : ℝ | 0 ≤ α ∧ α ≤ 1 ∧
+    ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+      agentWelfare AgentType.sentimental β₁ κ α ≤
+        agentWelfare AgentType.sentimental β₂ κ α }
+  change sSup S = 1
+  have h1mem : (1 : ℝ) ∈ S := by
+    refine ⟨by norm_num, le_refl (1 : ℝ), ?_⟩
+    intro β₁ β₂ hβ
+    exact agentWelfare_monotone_of_kernel_pointwise_monotone
+      AgentType.sentimental κ 1
+      (fun b₁ b₂ hb ω =>
+        agentRewardKernel_sentimental_pointwise_monotone κ 1 b₁ b₂ hb ω)
+      β₁ β₂ hβ
+  have h_bdd : BddAbove S := by
+    exact ⟨1, fun α hα => hα.2.1⟩
+  have h_le : sSup S ≤ 1 := by
+    exact csSup_le ⟨1, h1mem⟩ (fun α hα => hα.2.1)
+  have h_ge : 1 ≤ sSup S :=
+    le_csSup h_bdd h1mem
+  exact le_antisymm h_le h_ge
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the paper-bounded Part 6 `α` regime.
+
+Because `alphaStar 0 p_c = 1` on the current scalar carrier, there is no
+`α` in the closed paper range with `α > alphaStar 0 p_c`.  A complete Part 6
+semantic closure therefore needs a non-degenerate `alphaStar`/sentimental
+threshold carrier, not just the local near-`p_c` domination transfer. -/
+theorem not_closed_unit_alpha_above_alphaStar_current :
+    Not (Exists fun α : ℝ =>
+      alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) := by
+  intro h
+  rcases h with ⟨α, hα_gt, hα_le⟩
+  rw [alphaStar_eq_one_current] at hα_gt
+  linarith
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Guard theorem for the Harris-Kesten lower-envelope route: on the current
     five-state Gaussian posterior carrier, the mean-estimate gap is strictly
     below `2` whenever `p ≥ 0` and `κ > 0`.
