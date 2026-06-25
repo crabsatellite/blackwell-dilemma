@@ -182,6 +182,9 @@ It also gates `Part6FullPaperClosingDivergenceWitness`,
 `not_part6_full_paper_closing_support_current_via_divergence_witness`, so the
 future support theorem has to project to a real same-`alpha` divergence output
 and the current carrier is refuted at that projected output layer.
+The bridge route is also tied to that output by
+`part6_full_paper_closing_bridge_route_divergence_witness` and
+`not_part6_full_paper_closing_bridge_route_current_via_divergence_witness`.
 It also gates `Part6FullPaperClosingBridgeRoute`,
 `part6_full_paper_closing_support_of_bridge_route`, and
 `not_part6_full_paper_closing_bridge_route_current`, pinning the future

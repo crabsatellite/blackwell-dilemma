@@ -819,6 +819,9 @@ It also gates `Part6FullPaperClosingDivergenceWitness`,
 `not_part6_full_paper_closing_support_current_via_divergence_witness`, so full
 support must expose the same-`alpha` divergence output required by the paper
 and the current carrier is refuted at that projected output layer.
+The bridge route is now tied to the same output by
+`part6_full_paper_closing_bridge_route_divergence_witness` and
+`not_part6_full_paper_closing_bridge_route_current_via_divergence_witness`.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support

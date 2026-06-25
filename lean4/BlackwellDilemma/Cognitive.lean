@@ -4962,6 +4962,16 @@ theorem part6_full_paper_closing_support_divergence_witness :
       exact Or.inr ⟨alpha, halpha, halpha_le_one, hdivergence⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- A repaired Part 6 bridge route exposes the paper's actual same-`alpha`
+divergence output, not only the wrapper-level support proposition. -/
+theorem part6_full_paper_closing_bridge_route_divergence_witness :
+    Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingDivergenceWitness := by
+  intro hroute
+  exact part6_full_paper_closing_support_divergence_witness
+    (part6_full_paper_closing_support_of_bridge_route hroute)
+
+omit [DiagnosticSignalHypothesisData] in
 /-- The current carrier cannot supply the divergence witness exposed by any
 complete Part 6 paper-closing support. -/
 theorem not_part6_full_paper_closing_divergence_witness_current :
@@ -4988,6 +4998,15 @@ theorem not_part6_full_paper_closing_support_current_via_divergence_witness :
   intro hsupport
   exact not_part6_full_paper_closing_divergence_witness_current
     (part6_full_paper_closing_support_divergence_witness hsupport)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 bridge-route non-closure rederived through the exposed
+divergence output. -/
+theorem not_part6_full_paper_closing_bridge_route_current_via_divergence_witness :
+    Not Part6FullPaperClosingBridgeRoute := by
+  intro hroute
+  exact not_part6_full_paper_closing_divergence_witness_current
+    (part6_full_paper_closing_bridge_route_divergence_witness hroute)
 
 omit [DiagnosticSignalHypothesisData] in
 theorem not_unbounded_part6_full_paper_closing_support_current :
