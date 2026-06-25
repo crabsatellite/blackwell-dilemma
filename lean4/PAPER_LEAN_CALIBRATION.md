@@ -268,11 +268,15 @@ scaling carrier can satisfy the present local bridge. The gate also proves
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The
 closed-unit local bridge contract now carries an explicit nonempty-domain
-witness, and `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates
-that obstruction at the bridge-contract level. The remaining Harris-Kesten
-scaling work is therefore first to supply a nondegenerate `α`/feasible-set
-domain certificate, then instantiate that repaired bridge with a paper-faithful
-carrier and valid near-`p_c` domination theorem.
+witness, and the bounded transfer theorem
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge`
+now states the paper-facing divergence conclusion for any future instance on
+`alphaStar 0 p_c < α <= 1`. The theorem
+`not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
+obstruction at the bridge-contract level. The remaining Harris-Kesten scaling
+work is therefore first to supply a nondegenerate `α`/feasible-set domain
+certificate, then instantiate that repaired bridge with a paper-faithful carrier
+and valid near-`p_c` domination theorem.
 `V_g` is now a well-founded concrete greedy traversal over the current
 canonical finite vertex carrier (`Vertex = Fin 5`), and the paper recursion
 laws `V_g_def_terminal` and `V_g_def_step` are current theorems.
@@ -512,7 +516,7 @@ theorem, prototype divergence theorem, lower-envelope dominance theorem, and
 the named plus generic obstruction theorems, including the current
 local-bridge impossibility theorem and current `alphaStar = 1` bounded-domain
 degeneracy, including the closed-unit local bridge contract with an explicit
-nonempty-domain witness.
+nonempty-domain witness and its bounded transfer theorem.
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
 `L_minimum_exists_in_regime_i_proof`. R238 also proves

@@ -2124,6 +2124,38 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
     bridge.scaling_dominates_kappa_near_pc
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Part 6 transfer from a paper-bounded closed-unit local `Z²`
+lattice-embedding bridge.  Unlike the unbounded local bridge, this theorem
+only promises the paper-facing divergence conclusion on the explicit
+closed-unit domain `α*(0,p_c) < α ≤ 1`; the bridge itself must still carry a
+nonempty-domain certificate. -/
+theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      α ≤ 1 →
+        ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+            p < harrisKestenCriticalProb →
+              M < kappaStar p α := by
+  intro α hα hα_le_one M
+  rcases bridge.scaling_diverges M with ⟨εs, hεs_pos, hs_near⟩
+  rcases bridge.scaling_dominates_kappa_near_pc α hα hα_le_one with
+    ⟨εd, hεd_pos, hdom_near⟩
+  refine ⟨min εs εd, lt_min hεs_pos hεd_pos, ?_⟩
+  intro p hp_left hp_right
+  have hp_left_s : harrisKestenCriticalProb - εs < p := by
+    have hmin_le : min εs εd ≤ εs := min_le_left εs εd
+    linarith
+  have hp_left_d : harrisKestenCriticalProb - εd < p := by
+    have hmin_le : min εs εd ≤ εd := min_le_right εs εd
+    linarith
+  have hs_lt : M < bridge.scalingCarrier p :=
+    hs_near p hp_left_s hp_right
+  have hs_le : bridge.scalingCarrier p ≤ kappaStar p α :=
+    hdom_near p hp_left_d hp_right
+  linarith
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 (full statement, conjunction). Combines all six paper-
     stated parts (Parts 1, 2, 3, 4, 5, 6). Part 4 is bundled here as
     the paper-faithful bounded form on the abstract `kappaStar` carrier
