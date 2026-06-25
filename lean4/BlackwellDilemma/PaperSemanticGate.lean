@@ -134,6 +134,17 @@ structure Part4LatticePMonotonicityFrontierPayload where
           BlackwellDilemma.Infrastructure.BoolConfigMonotone f ->
             BlackwellDilemma.percExpectation p_low f ≤
               BlackwellDilemma.percExpectation p_high f
+  finite_bond_percolation_expectation_monotone_from_lattice_coupling :
+    forall d : Nat,
+      forall _coupling :
+        BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
+          d,
+      forall (E : Type) [Fintype E] [DecidableEq E],
+        forall p_low p_high : Real, 0 <= p_low -> p_low <= p_high -> p_high <= 1 ->
+          forall f : BlackwellDilemma.BondConfig E -> Real,
+            BlackwellDilemma.Infrastructure.BoolConfigMonotone f ->
+              BlackwellDilemma.percExpectation p_low f <=
+                BlackwellDilemma.percExpectation p_high f
   bridge_prior_reward_observable_mono :
     BlackwellDilemma.Infrastructure.BoolConfigMonotone
       BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable
@@ -183,6 +194,10 @@ structure Part4LatticePMonotonicityFrontierPayload where
         kappaStar p1 alpha <= kappaStar p2 alpha
   standard_z2_ranged_bridge_current :
     RangedLatticePMonotonicityBridgeData
+  ranged_lattice_local_edges_adjacent :
+    forall bridge : RangedLatticePMonotonicityBridgeData,
+      forall e : bridge.localEdge,
+        bridge.graph.Adj (bridge.local_edge_source e) (bridge.local_edge_target e)
   ranged_lattice_prior_mean_from_observable :
     forall _bridge : RangedLatticePMonotonicityBridgeData,
       forall p1 p2 : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
@@ -229,6 +244,10 @@ noncomputable def part4_lattice_p_monotonicity_frontier_payload :
     intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one f hf
     exact BlackwellDilemma.percExpectation_mono_in_p_of_BoolConfigMonotone
       (E := E) h_low_nonneg h_mono h_high_le_one f hf
+  finite_bond_percolation_expectation_monotone_from_lattice_coupling := by
+    intro d coupling E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one f hf
+    exact percExpectation_mono_in_p_of_lattice_monotone_coupling
+      (d := d) coupling h_low_nonneg h_mono h_high_le_one f hf
   bridge_prior_reward_observable_mono :=
     BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable_mono
   bridge_prior_reward_observable_eq_prior_mean :=
@@ -258,6 +277,9 @@ noncomputable def part4_lattice_p_monotonicity_frontier_payload :
     gap_cognitive_threshold_part4_from_ranged_lattice_bridge
   standard_z2_ranged_bridge_current :=
     standardZ2RangedLatticePMonotonicityBridge_current
+  ranged_lattice_local_edges_adjacent := by
+    intro bridge e
+    exact bridge.local_edge_adjacent e
   ranged_lattice_prior_mean_from_observable :=
     priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable
   ranged_lattice_mean_gap_from_observable :=

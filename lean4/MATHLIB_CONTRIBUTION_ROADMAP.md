@@ -98,8 +98,10 @@ derivation. The current ranged bridge
 `standardZ2RangedLatticePMonotonicityBridge_current` and
 `gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current`
 packages the same standard graph/coupling data with the explicit one-edge
-`BondConfig` observable, its monotonicity, and its `percExpectation (1 - p)`
-prior-mean equality. The Part 4 payload now gates
+`BondConfig` observable embedded as a real `Z^2` adjacent edge, its
+monotonicity, and its `percExpectation (1 - p)` prior-mean equality. The Part
+4 payload now gates the finite expectation monotonicity theorem routed through
+the bridge's own lattice monotone-coupling field plus
 `priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable` and
 `mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable`, so the
 ranged mean-gap antitonicity is derived from those observable fields rather

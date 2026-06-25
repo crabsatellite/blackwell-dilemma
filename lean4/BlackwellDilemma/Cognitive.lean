@@ -1250,9 +1250,10 @@ structure LatticePMonotonicityBridgeData where
 /-- Ranged machine-readable Part 4 lattice/domain bridge.
 
 This refines `LatticePMonotonicityBridgeData` with the paper's probability
-domain and with a finite local observable that realizes the bridge-neighbour
-prior mean as a bond-percolation expectation.  It is still a local/finite
-bridge, not the final infinite-lattice paper theorem. -/
+domain and with a finite local observable on explicitly named lattice edges
+that realizes the bridge-neighbour prior mean as a bond-percolation
+expectation.  It is still a local/finite bridge, not the final
+infinite-lattice paper theorem. -/
 structure RangedLatticePMonotonicityBridgeData where
   dimension : Nat
   positive_dimension : 0 < dimension
@@ -1264,6 +1265,10 @@ structure RangedLatticePMonotonicityBridgeData where
   localEdge : Type
   localEdge_fintype : Fintype localEdge
   localEdge_decidableEq : DecidableEq localEdge
+  local_edge_source : localEdge -> (Fin dimension -> Int)
+  local_edge_target : localEdge -> (Fin dimension -> Int)
+  local_edge_adjacent :
+    forall e : localEdge, graph.Adj (local_edge_source e) (local_edge_target e)
   local_observable : BondConfig localEdge -> Real
   local_observable_mono :
     BlackwellDilemma.Infrastructure.BoolConfigMonotone local_observable
@@ -1314,6 +1319,13 @@ noncomputable def standardZ2RangedLatticePMonotonicityBridge_current :
   localEdge := Fin 1
   localEdge_fintype := inferInstance
   localEdge_decidableEq := inferInstance
+  local_edge_source := fun _ => (0 : Fin 2 -> Int)
+  local_edge_target := fun _ =>
+    (0 : Fin 2 -> Int) + SimpleGraph.IntegerLattice.unitVec 2 (0 : Fin 2)
+  local_edge_adjacent := by
+    intro _e
+    exact SimpleGraph.integerLatticeGraph_adj_add_unitVec
+      (d := 2) (0 : Fin 2 -> Int) (0 : Fin 2)
   local_observable :=
     BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable
   local_observable_mono :=
@@ -1323,13 +1335,44 @@ noncomputable def standardZ2RangedLatticePMonotonicityBridge_current :
     exact BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable_expectation_eq_priorMean_u2 p
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Finite bond-percolation expectation monotonicity obtained from a lattice
+monotone-coupling package.
+
+This is the bridge-local version of finite product monotonicity: it rewrites
+the paper-facing `percExpectation` into the Bernoulli-product expectation and
+then uses the finite-product monotonicity field carried by the lattice bridge,
+rather than bypassing the bridge with the global theorem directly. -/
+theorem percExpectation_mono_in_p_of_lattice_monotone_coupling
+    {d : Nat}
+    (coupling :
+      BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
+        d)
+    {E : Type} [Fintype E] [DecidableEq E]
+    {p_low p_high : Real} (h_low_nonneg : 0 <= p_low)
+    (h_mono : p_low <= p_high) (h_high_le_one : p_high <= 1)
+    (f : BondConfig E -> Real)
+    (hf : BlackwellDilemma.Infrastructure.BoolConfigMonotone f) :
+    BlackwellDilemma.percExpectation p_low f <=
+      BlackwellDilemma.percExpectation p_high f := by
+  calc
+    BlackwellDilemma.percExpectation p_low f =
+        BlackwellDilemma.Infrastructure.bernoulliProductExpectation p_low f :=
+          BlackwellDilemma.percExpectation_eq_bernoulliProductExpectation p_low f
+    _ <= BlackwellDilemma.Infrastructure.bernoulliProductExpectation p_high f := by
+          exact coupling.finite_product_expectation_mono
+            E p_low p_high h_low_nonneg h_mono h_high_le_one f hf
+    _ = BlackwellDilemma.percExpectation p_high f :=
+          (BlackwellDilemma.percExpectation_eq_bernoulliProductExpectation p_high f).symm
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Prior-mean antitonicity derived from a ranged lattice/local-observable
 bridge.
 
 The bridge no longer carries mean-gap antitonicity as data: it only supplies a
 finite local observable, its coordinatewise monotonicity, and the equality
 identifying its `percExpectation (1 - p)` with the paper's bridge-neighbour
-prior mean. -/
+prior mean.  The expectation monotonicity step is routed through the bridge's
+own lattice monotone-coupling field. -/
 theorem priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable
     (bridge : RangedLatticePMonotonicityBridgeData)
     {p1 p2 : Real} (hp1_nonneg : 0 <= p1) (hp_mono : p1 <= p2)
@@ -1340,7 +1383,8 @@ theorem priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable
   letI : DecidableEq bridge.localEdge := bridge.localEdge_decidableEq
   rw [<- bridge.local_observable_eq_prior_mean p2,
     <- bridge.local_observable_eq_prior_mean p1]
-  exact BlackwellDilemma.percExpectation_mono_in_p_of_BoolConfigMonotone
+  exact percExpectation_mono_in_p_of_lattice_monotone_coupling
+    bridge.lattice_monotone_coupling
     (E := bridge.localEdge)
     (p_low := 1 - p2) (p_high := 1 - p1)
     (by linarith) (by linarith) (by linarith)

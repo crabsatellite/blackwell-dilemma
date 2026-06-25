@@ -50,15 +50,17 @@ antitonicity still comes from the already proved abstract/canonical theorem.
 The payload now also checks
 `standardZ2RangedLatticePMonotonicityBridge_current` and
 `gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current`.  The
-ranged bridge now carries only the standard `Z^2` graph/coupling data, the
-explicit one-edge `BondConfig` observable, its monotonicity, and the
-`percExpectation (1 - p)` prior-mean equality; the gate derives
+ranged bridge now carries the standard `Z^2` graph/coupling data, an explicit
+one-edge `BondConfig` observable embedded as a real `Z^2` adjacent edge, its
+monotonicity, and the `percExpectation (1 - p)` prior-mean equality; the gate
+also checks the finite expectation monotonicity theorem routed through the
+bridge's own lattice monotone-coupling field.  It derives
 `priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable` and
 `mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable` from those
 fields before transferring to bounded `kappaStar` monotonicity.  This is a
 local/finite bridge calibration, not the full infinite-lattice theorem.
-The still-open Part 4 work is deriving the lattice mean-gap antitonicity from
-the domain/coupling carrier itself.  The Part 6
+The still-open Part 4 work is replacing this finite/local witness with the
+full lattice/domain carrier.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the
 future embedding-certificate entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The topo

@@ -214,8 +214,10 @@ and on lattices, the threshold κ* is non-decreasing in p."
   `standardZ2RangedLatticePMonotonicityBridge_current` and
   `gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current`
   now package the standard graph/coupling data with the explicit one-edge
-  `BondConfig` observable, its monotonicity, and its `percExpectation (1 - p)`
-  prior-mean equality.  The mean-gap theorem is no longer a bridge field:
+  `BondConfig` observable embedded as a real `Z^2` adjacent edge, its
+  monotonicity, and its `percExpectation (1 - p)` prior-mean equality.  The
+  expectation monotonicity step is routed through the bridge's own lattice
+  monotone-coupling field.  The mean-gap theorem is no longer a bridge field:
   `priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable` and
   `mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable` derive it
   from the observable fields on `0 <= p_1 <= p_2 <= 1`.  This improves the
