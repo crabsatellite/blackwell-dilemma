@@ -53,10 +53,12 @@ lower bounds. The derived paper-support certificate now ties that support to
 the standard `Z²` graph, finite boxed-torus size facts, and the same
 `p > p_c` domain, and also packages the diagnostic-exclusion tail certificate,
 including arbitrarily large finite members outside all five deterministic
-diagnostic families. The gate separately keeps the derived uniform eventual
-positive flat-loss, giant-restricted positive-loss, unrestricted pointwise
-positive-loss, and in-giant pointwise positive-loss realisation witnesses, and
-the flat-sequence lower-bound package. It also gates the
+diagnostic families, with the same arbitrarily large tail now also required to
+carry the shared flat/giant lower bounds and an in-giant positive-loss
+realisation. The gate separately keeps the derived uniform eventual positive
+flat-loss, giant-restricted positive-loss, unrestricted pointwise positive-loss,
+and in-giant pointwise positive-loss realisation witnesses, and the
+flat-sequence lower-bound package. It also gates the
 current flat-only full-reach support
 mechanism: giant-restricted loss is zero, while the flat lower-bound loss is
 exactly half of the full-reach failure-event mass. The random-supercritical
@@ -68,7 +70,8 @@ positive diagnostic families, including pointwise hybrids assembled from those
 diagnostics. It derives an explicit finite member outside the first three
 diagnostic carriers, and now also rules out extended eventual diagnostic tails
 by deriving arbitrarily large members outside all five deterministic
-diagnostic carriers. The Part 6 gate now also
+diagnostic carriers, plus supported tail members where those exclusions hold at
+the same sizes as the lower-bound and in-giant witness support. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
 domination interface, a repaired local near-`p_c` domination transfer, a
 closed-unit local transfer on the explicit `alpha*(0,p_c) < alpha <= 1`

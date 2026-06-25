@@ -326,7 +326,10 @@ indexing facts, the same `p > p_c` domain, and the non-diagnostic tail
 certificate, the derived uniform eventual positive flat-loss witness, an
 eventual positive giant-restricted loss witness, eventual unrestricted and
 in-giant pointwise positive-loss realisation witnesses, the same family-core
-theorem package, and non-diagnostic guards excluding the
+theorem package, a supported non-diagnostic tail theorem choosing arbitrarily
+large finite members where the five-family exclusions, shared flat/giant lower
+bounds, and in-giant positive-loss realisation hold together, and
+non-diagnostic guards excluding the
 current full-reach, flat-only, all-open-complement, deterministic all-open
 giant, deterministic all-open positive, pointwise-hybrid, and extended
 eventual-tail diagnostic families, plus
@@ -338,7 +341,10 @@ which rules out eventual diagnostic tails by producing such a member above
 every finite threshold, plus
 `randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_extended_non_diagnostic_member`,
 which is now folded into the paper-support certificate and produces
-arbitrarily large members outside all five deterministic diagnostic carriers;
+arbitrarily large members outside all five deterministic diagnostic carriers,
+plus
+`randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_supported_extended_non_diagnostic_member`,
+which folds those exclusions into the same supported lower-bound tail;
 `PaperSemanticGate.lean` gates its projections and
 exclusions so the eventual closure target is now a concrete Lean structure,
 not a prose instruction. The topo payload now also
