@@ -14107,6 +14107,8 @@ structure RandomSupercriticalZ2TopoClusterBridgeData where
     0 <= supercriticalProbability
   supercriticalProbability_le_one :
     supercriticalProbability <= 1
+  supercriticalProbability_lt_one :
+    supercriticalProbability < 1
   supercritical_flat_lower_bound :
     Exists fun c : Real =>
       0 < c ∧ c <= 1 ∧
@@ -14211,6 +14213,18 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_supercriticalProbability_doma
   exact ⟨bridge.supercriticalProbability_above_pc,
     bridge.supercriticalProbability_nonneg,
     bridge.supercriticalProbability_le_one⟩
+
+/-- Projection of the strict non-endpoint Bernoulli parameter domain from the
+final random-supercritical `Z^2_L` bridge contract.  This rules out closing the
+paper's random finite-lattice theorem at the degenerate endpoint `p = 1`. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_supercriticalProbability_strict_domain
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    harrisKestenCriticalProb < bridge.supercriticalProbability ∧
+      0 <= bridge.supercriticalProbability ∧
+        bridge.supercriticalProbability < 1 := by
+  exact ⟨bridge.supercriticalProbability_above_pc,
+    bridge.supercriticalProbability_nonneg,
+    bridge.supercriticalProbability_lt_one⟩
 
 /-- Projection of the named flat-sequence lower bound at the bridge's own
 supercritical probability.  This prevents a future final bridge from hiding
@@ -14780,6 +14794,7 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
       harrisKestenCriticalProb < bridge.supercriticalProbability ∧
       0 <= bridge.supercriticalProbability ∧
       bridge.supercriticalProbability <= 1 ∧
+      bridge.supercriticalProbability < 1 ∧
       (forall L : Nat,
         forall n : Nat,
           forall omega : BondConfig (EdgeIdx n),
@@ -14880,6 +14895,7 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
     bridge.supercriticalProbability_above_pc,
     bridge.supercriticalProbability_nonneg,
     bridge.supercriticalProbability_le_one,
+    bridge.supercriticalProbability_lt_one,
     bridge.family_topoLossKernel_mem_unitInterval,
     randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_event_mass_lower_bound_and_loss_realisation
       bridge,
