@@ -108,8 +108,8 @@ paper-semantic lattice targets.  It is the kernel-checked local ingredient:
 for every ordered pair `0 <= p_low <= p_high <= 1`, each lattice edge has a
 one-edge monotone Bernoulli coupling with correct lower/upper marginals and no
 mass on the forbidden open-to-closed transition, and every finite edge set has
-the product support data with zero mass on any configuration pair containing a
-forbidden open-to-closed edge. -/
+the product data with total mass one, both Bernoulli marginals, and zero mass
+on any configuration pair containing a forbidden open-to-closed edge. -/
 structure LatticeMonotoneCouplingData (d : ℕ) where
   edge_coupling :
     ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
@@ -118,7 +118,7 @@ structure LatticeMonotoneCouplingData (d : ℕ) where
   finite_product_coupling :
     ∀ (E : Type*) [Fintype E] [DecidableEq E],
       ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
-        BlackwellDilemma.Infrastructure.BernoulliProductMonotoneCouplingData
+        BlackwellDilemma.Infrastructure.BernoulliProductMonotoneCouplingMarginalData
           (E := E) p_low p_high
 
 /-- Standard per-edge and finite-product monotone-coupling data for the
@@ -130,7 +130,7 @@ def standardLatticeMonotoneCouplingData (d : ℕ) :
       p_low p_high h_low_nonneg h_mono h_high_le_one
   finite_product_coupling := by
     intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one
-    exact BlackwellDilemma.Infrastructure.standardBernoulliProductMonotoneCouplingData
+    exact BlackwellDilemma.Infrastructure.standardBernoulliProductMonotoneCouplingMarginalData
       (E := E) p_low p_high h_low_nonneg h_mono h_high_le_one
 
 /-! ### Connection to the existing finite-edge bond weight framework

@@ -62,10 +62,11 @@ machine-gates the closed bounded theorem surface
 one-edge Bernoulli monotone-coupling table
 `standardBernoulliMonotoneCouplingData` and the standard per-edge lattice
 data package `standardLatticeMonotoneCouplingData`, and gates them in the
-Part 4 payload. R521 adds the finite-edge product support data
-`standardBernoulliProductMonotoneCouplingData`, with non-negative mass and zero
-mass on any configuration pair containing a forbidden open-to-closed edge, and
-threads it through the standard lattice data package and Part 4 payload. R517 adds
+Part 4 payload. R521 adds the finite-edge product marginal data
+`standardBernoulliProductMonotoneCouplingMarginalData`, with total mass one,
+both finite-product Bernoulli marginals, non-negative mass, and zero mass on
+any configuration pair containing a forbidden open-to-closed edge, and threads
+it through the standard lattice data package and Part 4 payload. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
 carry that per-edge plus finite-product monotone-coupling interface before proving the

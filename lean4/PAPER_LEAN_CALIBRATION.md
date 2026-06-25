@@ -176,8 +176,9 @@ and on lattices, the threshold κ* is non-decreasing in p."
   in `p`.  R520 adds the one-edge Bernoulli monotone-coupling mass table with
   both Bernoulli marginals and zero forbidden open-to-closed mass, plus the
   standard `Z^2` lattice per-edge interface.  R521 adds finite-edge product
-  support data with non-negative mass and zero mass on any configuration pair
-  containing a forbidden open-to-closed edge.  The generic `sInf` transfer from
+  marginal data with total mass one, both finite-product Bernoulli marginals,
+  non-negative mass, and zero mass on any configuration pair containing a
+  forbidden open-to-closed edge.  The generic `sInf` transfer from
   that bridge to bounded `kappaStar` p-monotonicity is now kernel-checked, but
   no full lattice/percolation certificate deriving the mean-gap antitonicity
   from the coupling/domain carrier is instantiated yet.

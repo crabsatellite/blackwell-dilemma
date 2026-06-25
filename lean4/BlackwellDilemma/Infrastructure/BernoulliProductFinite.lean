@@ -32,6 +32,8 @@ infrastructure does not yet exist in Mathlib for finite products on
 * `standardBernoulliProductMonotoneCouplingData` — the finite-edge product of
   the one-edge monotone coupling, with non-negative mass and zero mass on any
   configuration pair containing a forbidden open-to-closed edge.
+* `standardBernoulliProductMonotoneCouplingMarginalData` — the same finite
+  product with total mass one and both finite-product Bernoulli marginals.
 
 ## Bridge to paper carrier `BondConfig` / `percExpectation`
 
@@ -190,11 +192,11 @@ def bernoulliProductMonotoneCouplingFactor
 
 /-- Data package for the finite-edge product monotone coupling support.
 
-The full marginal proof for finite products is a separate product-sum theorem.
 This package records the kernel-checked finite-box ingredient needed before
 the lattice monotone-coupling bridge can close: non-negative joint mass and
 zero mass for every configuration pair that contains an edge with lower
-configuration open and upper configuration closed. -/
+configuration open and upper configuration closed.  The marginal package below
+adds total mass one and both finite-product Bernoulli marginals. -/
 structure BernoulliProductMonotoneCouplingData
     {E : Type*} [Fintype E] [DecidableEq E]
     (p_low p_high : ℝ) where
@@ -254,6 +256,149 @@ def standardBernoulliProductMonotoneCouplingData
 def bernoulliWeight {E : Type*} (p : ℝ) (E_finset : Finset E) (ω : E → Bool) : ℝ :=
   E_finset.prod (fun e => bernoulliFactor p (ω e))
 
+/-- The Bernoulli product weights over all configurations have total mass one. -/
+theorem bernoulliWeight_univ_total
+    {E : Type*} [Fintype E] [DecidableEq E] (p : ℝ) :
+    Finset.univ.sum (fun ω : E -> Bool =>
+      bernoulliWeight p Finset.univ ω) = 1 := by
+  classical
+  unfold bernoulliWeight
+  have hprod_sum :
+      (Finset.univ.prod
+        (fun e : E => Finset.univ.sum (fun b : Bool => bernoulliFactor p b))) =
+        Finset.univ.sum (fun ω : E -> Bool =>
+          Finset.univ.prod (fun e : E => bernoulliFactor p (ω e))) := by
+    simpa using
+      (Fintype.prod_sum (fun (_e : E) (b : Bool) => bernoulliFactor p b))
+  calc
+    Finset.univ.sum (fun ω : E -> Bool =>
+      Finset.univ.prod (fun e : E => bernoulliFactor p (ω e)))
+        = Finset.univ.prod
+            (fun e : E => Finset.univ.sum (fun b : Bool => bernoulliFactor p b)) := by
+          simpa using hprod_sum.symm
+    _ = 1 := by
+          apply Finset.prod_eq_one
+          intro e _he
+          simp [bernoulliFactor]
+
+/-- The lower marginal of the finite-product monotone coupling is the
+finite-product Bernoulli law with parameter `p_low`. -/
+theorem bernoulliProductMonotoneCouplingFactor_lower_marginal
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) (lower : E -> Bool) :
+    (Finset.univ.sum (fun upper : E -> Bool =>
+      bernoulliProductMonotoneCouplingFactor p_low p_high lower upper)) =
+        bernoulliWeight p_low Finset.univ lower := by
+  classical
+  unfold bernoulliProductMonotoneCouplingFactor bernoulliWeight
+  let g : E -> Bool -> ℝ := fun e b =>
+    bernoulliMonotoneCouplingFactor p_low p_high (lower e) b
+  have hprod_sum :
+      (Finset.univ.prod
+        (fun e : E => Finset.univ.sum (fun b : Bool => g e b))) =
+        Finset.univ.sum (fun upper : E -> Bool =>
+          Finset.univ.prod (fun e : E => g e (upper e))) := by
+    simpa using (Fintype.prod_sum g)
+  calc
+    Finset.univ.sum (fun upper : E -> Bool =>
+      Finset.univ.prod (fun e : E =>
+        bernoulliMonotoneCouplingFactor p_low p_high (lower e) (upper e)))
+        = Finset.univ.prod
+            (fun e : E => Finset.univ.sum (fun b : Bool => g e b)) := by
+          simpa [g] using hprod_sum.symm
+    _ = Finset.univ.prod (fun e : E => bernoulliFactor p_low (lower e)) := by
+          apply Finset.prod_congr rfl
+          intro e _he
+          exact bernoulliMonotoneCouplingFactor_lower_marginal
+            p_low p_high (lower e)
+
+/-- The upper marginal of the finite-product monotone coupling is the
+finite-product Bernoulli law with parameter `p_high`. -/
+theorem bernoulliProductMonotoneCouplingFactor_upper_marginal
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) (upper : E -> Bool) :
+    (Finset.univ.sum (fun lower : E -> Bool =>
+      bernoulliProductMonotoneCouplingFactor p_low p_high lower upper)) =
+        bernoulliWeight p_high Finset.univ upper := by
+  classical
+  unfold bernoulliProductMonotoneCouplingFactor bernoulliWeight
+  let g : E -> Bool -> ℝ := fun e b =>
+    bernoulliMonotoneCouplingFactor p_low p_high b (upper e)
+  have hprod_sum :
+      (Finset.univ.prod
+        (fun e : E => Finset.univ.sum (fun b : Bool => g e b))) =
+        Finset.univ.sum (fun lower : E -> Bool =>
+          Finset.univ.prod (fun e : E => g e (lower e))) := by
+    simpa using (Fintype.prod_sum g)
+  calc
+    Finset.univ.sum (fun lower : E -> Bool =>
+      Finset.univ.prod (fun e : E =>
+        bernoulliMonotoneCouplingFactor p_low p_high (lower e) (upper e)))
+        = Finset.univ.prod
+            (fun e : E => Finset.univ.sum (fun b : Bool => g e b)) := by
+          simpa [g] using hprod_sum.symm
+    _ = Finset.univ.prod (fun e : E => bernoulliFactor p_high (upper e)) := by
+          apply Finset.prod_congr rfl
+          intro e _he
+          exact bernoulliMonotoneCouplingFactor_upper_marginal
+            p_low p_high (upper e)
+
+/-- The finite-product monotone coupling has total mass one. -/
+theorem bernoulliProductMonotoneCouplingFactor_total_mass
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) :
+    Finset.univ.sum (fun lower : E -> Bool =>
+      Finset.univ.sum (fun upper : E -> Bool =>
+        bernoulliProductMonotoneCouplingFactor p_low p_high lower upper)) = 1 := by
+  classical
+  calc
+    Finset.univ.sum (fun lower : E -> Bool =>
+      Finset.univ.sum (fun upper : E -> Bool =>
+        bernoulliProductMonotoneCouplingFactor p_low p_high lower upper))
+        = Finset.univ.sum (fun lower : E -> Bool =>
+            bernoulliWeight p_low Finset.univ lower) := by
+          apply Finset.sum_congr rfl
+          intro lower _h
+          exact
+            bernoulliProductMonotoneCouplingFactor_lower_marginal
+              p_low p_high lower
+    _ = 1 := bernoulliWeight_univ_total p_low
+
+/-- Data package for the finite-edge product monotone coupling with total mass
+and both finite-product Bernoulli marginals. -/
+structure BernoulliProductMonotoneCouplingMarginalData
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) extends
+      BernoulliProductMonotoneCouplingData (E := E) p_low p_high where
+  total_mass :
+    Finset.univ.sum (fun lower : E -> Bool =>
+      Finset.univ.sum (fun upper : E -> Bool => factor lower upper)) = 1
+  lower_marginal :
+    (lower : E -> Bool) ->
+      Finset.univ.sum (fun upper : E -> Bool => factor lower upper) =
+        bernoulliWeight p_low Finset.univ lower
+  upper_marginal :
+    (upper : E -> Bool) ->
+      Finset.univ.sum (fun lower : E -> Bool => factor lower upper) =
+        bernoulliWeight p_high Finset.univ upper
+
+/-- Standard finite-product monotone Bernoulli coupling marginal data for
+`0 <= p_low <= p_high <= 1`. -/
+def standardBernoulliProductMonotoneCouplingMarginalData
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) (h_low_nonneg : 0 ≤ p_low)
+    (h_mono : p_low ≤ p_high) (h_high_le_one : p_high ≤ 1) :
+    BernoulliProductMonotoneCouplingMarginalData (E := E) p_low p_high where
+  toBernoulliProductMonotoneCouplingData :=
+    standardBernoulliProductMonotoneCouplingData
+      (E := E) p_low p_high h_low_nonneg h_mono h_high_le_one
+  total_mass :=
+    bernoulliProductMonotoneCouplingFactor_total_mass p_low p_high
+  lower_marginal :=
+    bernoulliProductMonotoneCouplingFactor_lower_marginal p_low p_high
+  upper_marginal :=
+    bernoulliProductMonotoneCouplingFactor_upper_marginal p_low p_high
+
 /-- **Bernoulli weight non-negativity** for `p ∈ [0, 1]`. -/
 theorem bernoulliWeight_nonneg
     {E : Type*} (E_finset : Finset E) {p : ℝ}
@@ -301,5 +446,10 @@ theorem bernoulliWeight_pos
 #print axioms bernoulliProductMonotoneCouplingFactor_nonneg
 #print axioms bernoulliProductMonotoneCouplingFactor_no_forbidden_open_to_closed_edge
 #print axioms standardBernoulliProductMonotoneCouplingData
+#print axioms bernoulliWeight_univ_total
+#print axioms bernoulliProductMonotoneCouplingFactor_total_mass
+#print axioms bernoulliProductMonotoneCouplingFactor_lower_marginal
+#print axioms bernoulliProductMonotoneCouplingFactor_upper_marginal
+#print axioms standardBernoulliProductMonotoneCouplingMarginalData
 
 end BlackwellDilemma.Infrastructure

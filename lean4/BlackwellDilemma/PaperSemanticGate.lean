@@ -116,7 +116,7 @@ structure Part4LatticePMonotonicityFrontierPayload where
   standard_finite_product_coupling :
     ∀ (E : Type*) [Fintype E] [DecidableEq E],
       ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
-        BlackwellDilemma.Infrastructure.BernoulliProductMonotoneCouplingData
+        BlackwellDilemma.Infrastructure.BernoulliProductMonotoneCouplingMarginalData
           (E := E) p_low p_high
   standard_z2_lattice_monotone_coupling :
     BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
@@ -148,7 +148,7 @@ def part4_lattice_p_monotonicity_frontier_payload :
     BlackwellDilemma.Infrastructure.standardBernoulliMonotoneCouplingData
   standard_finite_product_coupling := by
     intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one
-    exact BlackwellDilemma.Infrastructure.standardBernoulliProductMonotoneCouplingData
+    exact BlackwellDilemma.Infrastructure.standardBernoulliProductMonotoneCouplingMarginalData
       (E := E) p_low p_high h_low_nonneg h_mono h_high_le_one
   standard_z2_lattice_monotone_coupling :=
     BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData
