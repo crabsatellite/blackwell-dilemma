@@ -146,6 +146,9 @@ structure Part4LatticePMonotonicityFrontierPayload where
     ∀ p₁ p₂ : ℝ, 0 ≤ p₁ -> p₁ ≤ p₂ -> p₂ ≤ 1 ->
       BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₂ ≤
         BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₁
+  mean_gap_antitone_from_percExpectation :
+    ∀ p₁ p₂ κ : ℝ, 0 ≤ p₁ -> p₁ ≤ p₂ -> p₂ ≤ 1 -> 0 < κ ->
+      mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ
   standard_z2_lattice_monotone_coupling :
     BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
       2
@@ -202,6 +205,10 @@ def part4_lattice_p_monotonicity_frontier_payload :
     intro p₁ p₂ hp₁_nonneg hp_mono hp₂_le_one
     exact BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState_antitone_in_p_from_percExpectation
       hp₁_nonneg hp_mono hp₂_le_one
+  mean_gap_antitone_from_percExpectation := by
+    intro p₁ p₂ κ hp₁_nonneg hp_mono hp₂_le_one hκ
+    exact mean_estimate_gap_antitone_in_p_from_percExpectation
+      hp₁_nonneg hp_mono hp₂_le_one hκ
   standard_z2_lattice_monotone_coupling :=
     BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData
       2

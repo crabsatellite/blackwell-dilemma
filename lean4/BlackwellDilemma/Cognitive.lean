@@ -1118,6 +1118,43 @@ theorem mean_estimate_gap_antitone_in_p_paper_Def :
     κ hκ p₁ p₂ h_p_le
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Ranged finite-percolation reconstruction of the mean-estimate-gap
+antitonicity used by Part 4.
+
+Unlike `mean_estimate_gap_antitone_in_p_paper_Def`, this theorem explicitly
+routes the bridge-neighbour prior mean through the one-edge
+bond-percolation expectation `percExpectation (1 - p)
+bridgePriorRewardObservable`.  The statement is ranged over the paper's
+blocking-probability domain `0 <= p₁ <= p₂ <= 1`; within that domain, the
+finite Bernoulli-product monotonicity theorem proves that the bridge prior
+mean falls as blocking probability rises, and Gaussian posterior monotonicity
+then lifts the result to the full `mean_estimate_gap`. -/
+theorem mean_estimate_gap_antitone_in_p_from_percExpectation
+    {p₁ p₂ κ : ℝ} (hp₁_nonneg : 0 ≤ p₁) (hp_mono : p₁ ≤ p₂)
+    (hp₂_le_one : p₂ ≤ 1) (hκ : 0 < κ) :
+    mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ := by
+  unfold mean_estimate_gap
+  have hprior :
+      BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₂ ≤
+        BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₁ :=
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState_antitone_in_p_from_percExpectation
+      hp₁_nonneg hp_mono hp₂_le_one
+  have hu2 :
+      BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₂)
+          1 (BlackwellDilemma.Infrastructure.FiveState.r_G : ℝ) κ 1 ≤
+        BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₁)
+          1 (BlackwellDilemma.Infrastructure.FiveState.r_G : ℝ) κ 1 :=
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.gaussianPosteriorMean_antitone_in_mu0_arg
+      1 (BlackwellDilemma.Infrastructure.FiveState.r_G : ℝ) κ 1
+      (by norm_num) hκ (by norm_num)
+      (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₁)
+      (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₂)
+      hprior
+  linarith
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Generic Part 4 transfer theorem.  Any future domain-specific carrier
 that proves the mean-estimate-gap antitonicity in `p` can plug that theorem
 into this `sInf` transfer and obtain the bounded `kappaStar`

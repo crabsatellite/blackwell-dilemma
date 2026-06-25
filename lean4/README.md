@@ -32,7 +32,11 @@ one-edge percolation bridge
 `priorMean_u2_fiveState_antitone_in_p_from_percExpectation`, which identify
 the bridge-neighbour prior mean with an explicit finite bond-percolation
 expectation and recover its blocking-probability antitonicity from
-finite-product monotonicity.  The same payload checks the standard `Z^2`
+finite-product monotonicity.  The same route now lifts through Gaussian
+posterior monotonicity as
+`mean_estimate_gap_antitone_in_p_from_percExpectation`, giving a ranged
+finite-percolation reconstruction of the full mean-estimate-gap antitonicity
+on `0 <= p_1 <= p_2 <= 1`.  The same payload checks the standard `Z^2`
 lattice-coupling interface carrying the per-edge, finite-product, and
 finite-box expectation layers and
 `standardZ2LatticePMonotonicityBridgeSkeleton_current` and

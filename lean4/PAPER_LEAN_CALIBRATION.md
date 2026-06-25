@@ -191,10 +191,14 @@ and on lattices, the threshold κ* is non-decreasing in p."
   `percExpectation (1 - p) bridgePriorRewardObservable`, and
   `priorMean_u2_fiveState_antitone_in_p_from_percExpectation` recovers its
   blocking-probability antitonicity from finite-product monotonicity under
-  `0 <= p_1 <= p_2 <= 1`.  The generic `sInf` transfer from that bridge to
-  bounded `kappaStar` p-monotonicity is now kernel-checked, but no full
-  lattice/percolation certificate deriving the whole mean-gap antitonicity
-  from the coupling/domain carrier is instantiated yet.  The current
+  `0 <= p_1 <= p_2 <= 1`.  The current
+  `mean_estimate_gap_antitone_in_p_from_percExpectation` theorem lifts this
+  one-edge percolation route through Gaussian posterior monotonicity to the
+  full mean-estimate-gap antitonicity on the same probability domain.  The
+  generic `sInf` transfer from that bridge to bounded `kappaStar`
+  p-monotonicity is now kernel-checked, but no full lattice/percolation
+  certificate deriving the whole mean-gap antitonicity from the
+  coupling/domain carrier is instantiated yet.  The current
   `standardZ2LatticePMonotonicityBridgeSkeleton_current` diagnostic makes this
   distinction build-checked: the standard `Z^2` graph/coupling skeleton
   satisfies the present bridge type, and

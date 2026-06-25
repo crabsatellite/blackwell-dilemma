@@ -79,7 +79,10 @@ bridge-neighbour prior mean with an explicit `percExpectation (1 - p)`
 observable, and
 `priorMean_u2_fiveState_antitone_in_p_from_percExpectation`, deriving its
 blocking-probability antitonicity from finite-product monotonicity on
-`0 <= p_1 <= p_2 <= 1`. R517 adds
+`0 <= p_1 <= p_2 <= 1`. The theorem
+`mean_estimate_gap_antitone_in_p_from_percExpectation` now lifts that
+one-edge route through Gaussian posterior monotonicity to the full ranged
+mean-estimate-gap antitonicity. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
 carry that per-edge plus finite-product monotone-coupling/expectation interface before proving the
