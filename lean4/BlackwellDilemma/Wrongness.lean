@@ -14165,6 +14165,20 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_positive_flat_loss_witness
     ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
   exact ⟨L0, lt_of_lt_of_le hc_pos (hlower L0 le_rfl)⟩
 
+/-- Eventual non-vacuity projection from the final random-supercritical
+bridge: at the named supercritical probability, every sufficiently large flat
+boxed-torus member has strictly positive expected topological loss. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_flat_loss
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        0 <
+          expectedTopoLossOnData (bridge.family L)
+            (boxedTorusFlatGraphN L) bridge.supercriticalProbability := by
+  rcases bridge.supercritical_flat_lower_bound with
+    ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
+  exact ⟨L0, fun L hL => lt_of_lt_of_le hc_pos (hlower L hL)⟩
+
 /-- Pointwise non-vacuity projection from the final random-supercritical
 bridge: at the named supercritical probability, some flat boxed-torus member
 and bond configuration has strictly positive topological-loss kernel value. -/
@@ -14182,6 +14196,27 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_positive_loss_realisation_wit
       bridge.supercriticalProbability_le_one hpos with
     ⟨ω, hω⟩
   exact ⟨L, ω, hω⟩
+
+/-- Eventual pointwise non-vacuity projection from the final
+random-supercritical bridge: at the named supercritical probability, every
+sufficiently large flat boxed-torus member has a bond configuration with
+strictly positive topological-loss kernel value. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_loss_realisation_witness
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        Exists fun ω : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+          0 <
+            (bridge.family L).topoLossKernel (boxedTorusFlatGraphN L) ω := by
+  rcases randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_flat_loss
+      bridge with ⟨L0, hpositive⟩
+  refine ⟨L0, ?_⟩
+  intro L hL
+  exact expectedTopoLossOnData_pos_realisation_witness
+    (bridge.family L) (boxedTorusFlatGraphN L)
+    bridge.supercriticalProbability_nonneg
+    bridge.supercriticalProbability_le_one
+    (hpositive L hL)
 
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/
