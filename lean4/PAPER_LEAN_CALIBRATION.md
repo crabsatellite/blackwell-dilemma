@@ -300,6 +300,11 @@ output and the current carrier is machine-refuted at that output layer. It also
 ties the bridge route to this output by
 `part6_full_paper_closing_bridge_route_divergence_witness` and
 `not_part6_full_paper_closing_bridge_route_current_via_divergence_witness`.
+It now also gates `Part6FullPaperClosingFeasibleDivergenceWitness`,
+`part6_full_paper_closing_support_feasible_divergence_witness`,
+`part6_full_paper_closing_bridge_route_feasible_divergence_witness`, and
+the corresponding current obstructions, so support and bridge routes must
+expose feasible-set nonemptiness and divergence at one same `alpha`.
 It also
 gates `Part6FullPaperClosingBridgeRoute`,
 `part6_full_paper_closing_support_of_bridge_route`, and

@@ -832,6 +832,11 @@ and the current carrier is refuted at that projected output layer.
 The bridge route is now tied to the same output by
 `part6_full_paper_closing_bridge_route_divergence_witness` and
 `not_part6_full_paper_closing_bridge_route_current_via_divergence_witness`.
+It now also gates `Part6FullPaperClosingFeasibleDivergenceWitness`,
+`part6_full_paper_closing_support_feasible_divergence_witness`,
+`part6_full_paper_closing_bridge_route_feasible_divergence_witness`, and
+the corresponding current obstructions, so support and bridge routes must
+expose feasible-set nonemptiness and divergence at one same `alpha`.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support

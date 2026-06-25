@@ -4904,6 +4904,42 @@ def Part6FullPaperClosingDivergenceWitness : Prop :=
                 M < kappaStar p alpha)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Feasible/divergence witness that every full Part 6 paper-closing support
+must expose at one same `alpha`. -/
+def Part6FullPaperClosingFeasibleDivergenceWitness : Prop :=
+  (Exists fun alpha : Real =>
+    alphaStar 0 harrisKestenCriticalProb < alpha /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)) \/
+  (Exists fun alpha : Real =>
+    alphaStar 0 harrisKestenCriticalProb < alpha /\
+      alpha <= 1 /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha))
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Any repaired unbounded local bridge supplies the named full Part 6
 paper-closing support surface. -/
 theorem part6_full_paper_closing_support_of_z2_lattice_embedding_local_bridge
@@ -4962,6 +4998,25 @@ theorem part6_full_paper_closing_support_divergence_witness :
       exact Or.inr ⟨alpha, halpha, halpha_le_one, hdivergence⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Full Part 6 paper-closing support also exposes feasible-set nonemptiness
+and divergence at the same `alpha`. -/
+theorem part6_full_paper_closing_support_feasible_divergence_witness :
+    Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hsupport
+  cases hsupport with
+  | inl hunbounded =>
+      rcases hunbounded with
+        ⟨_scalingCarrier, alpha, halpha, _hdomination, hfeasible,
+          hdivergence⟩
+      exact Or.inl ⟨alpha, halpha, hfeasible, hdivergence⟩
+  | inr hclosed =>
+      rcases hclosed with
+        ⟨_scalingCarrier, alpha, halpha, halpha_le_one, _hdomination,
+          hfeasible, hdivergence⟩
+      exact Or.inr ⟨alpha, halpha, halpha_le_one, hfeasible, hdivergence⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- A repaired Part 6 bridge route exposes the paper's actual same-`alpha`
 divergence output, not only the wrapper-level support proposition. -/
 theorem part6_full_paper_closing_bridge_route_divergence_witness :
@@ -4969,6 +5024,16 @@ theorem part6_full_paper_closing_bridge_route_divergence_witness :
       Part6FullPaperClosingDivergenceWitness := by
   intro hroute
   exact part6_full_paper_closing_support_divergence_witness
+    (part6_full_paper_closing_support_of_bridge_route hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A repaired Part 6 bridge route exposes the same-`alpha`
+feasible/divergence output, not only the divergence projection. -/
+theorem part6_full_paper_closing_bridge_route_feasible_divergence_witness :
+    Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hroute
+  exact part6_full_paper_closing_support_feasible_divergence_witness
     (part6_full_paper_closing_support_of_bridge_route hroute)
 
 omit [DiagnosticSignalHypothesisData] in
@@ -4991,6 +5056,25 @@ theorem not_Part6FullPaperClosingDivergenceWitness_current :
   not_part6_full_paper_closing_divergence_witness_current
 
 omit [DiagnosticSignalHypothesisData] in
+/-- The current carrier cannot supply the same-`alpha`
+feasible/divergence witness exposed by any complete Part 6 support. -/
+theorem not_part6_full_paper_closing_feasible_divergence_witness_current :
+    Not Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hwitness
+  cases hwitness with
+  | inl hunbounded =>
+      exact not_unbounded_part6_feasible_divergence_witness_current hunbounded
+  | inr hclosed =>
+      exact not_closed_unit_part6_feasible_divergence_witness_current hclosed
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Audit-recognisable current refutation alias for the named Part 6
+feasible/divergence interface. -/
+theorem not_Part6FullPaperClosingFeasibleDivergenceWitness_current :
+    Not Part6FullPaperClosingFeasibleDivergenceWitness :=
+  not_part6_full_paper_closing_feasible_divergence_witness_current
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current Part 6 non-closure rederived through the exposed divergence
 witness, not only by destructing the full support wrapper. -/
 theorem not_part6_full_paper_closing_support_current_via_divergence_witness :
@@ -5007,6 +5091,24 @@ theorem not_part6_full_paper_closing_bridge_route_current_via_divergence_witness
   intro hroute
   exact not_part6_full_paper_closing_divergence_witness_current
     (part6_full_paper_closing_bridge_route_divergence_witness hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 non-closure rederived through the stronger same-`alpha`
+feasible/divergence output. -/
+theorem not_part6_full_paper_closing_support_current_via_feasible_divergence_witness :
+    Not Part6FullPaperClosingSupport := by
+  intro hsupport
+  exact not_part6_full_paper_closing_feasible_divergence_witness_current
+    (part6_full_paper_closing_support_feasible_divergence_witness hsupport)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 bridge-route non-closure rederived through the stronger
+same-`alpha` feasible/divergence output. -/
+theorem not_part6_full_paper_closing_bridge_route_current_via_feasible_divergence_witness :
+    Not Part6FullPaperClosingBridgeRoute := by
+  intro hroute
+  exact not_part6_full_paper_closing_feasible_divergence_witness_current
+    (part6_full_paper_closing_bridge_route_feasible_divergence_witness hroute)
 
 omit [DiagnosticSignalHypothesisData] in
 theorem not_unbounded_part6_full_paper_closing_support_current :
