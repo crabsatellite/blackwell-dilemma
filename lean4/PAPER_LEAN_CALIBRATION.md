@@ -50,7 +50,7 @@
 | Paper label | Line | Lean theorem(s) | File |
 |---|---|---|---|
 | `prop:info-decay` | 271 | finite-per-`n` current theorem `gap_info_decay_finite` plus compatibility name `gap_info_decay`; uniform-in-`n` strengthening remains a separate percolation target | Wrongness.lean:8809,8820 |
-| `prop:topo-cluster` | 280 | Current standard-only theorem surfaces `expectedTopoLoss_conditional_def`, `gap_topo_cluster_relation`, and `gap_topo_loss_below_threshold`; Part 2 old Mills route dead-end: `not_mills_inverse_above_threshold_route_with_unit_bound`; current public theorem-core lower-bound route: `BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current` plus `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion`; the stronger full-reach bridge `boxedTorusFullReachZ2TopoClusterBridge_current` gates the non-flat-only full-reach family/core/lower-bound route and its fixed-`L` all-`n` lower-bound theorem; the stronger paper-facing contract `RandomSupercriticalZ2TopoClusterBridgeData` now gates the future random-supercritical `Z^2_L` bridge projections; the flat-only diagnostic is kernel-gated by `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`; the fixed-`L` all-`n` obstruction is kernel-gated by `not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`; the open semantic frontier is machine-gated by `topo_cluster_random_supercritical_z2_frontier_payload`; random supercritical `Z^2_L` strengthening remains separate | Wrongness.lean; PaperSemanticGate.lean |
+| `prop:topo-cluster` | 280 | Current standard-only theorem surfaces `expectedTopoLoss_conditional_def`, `gap_topo_cluster_relation`, and `gap_topo_loss_below_threshold`; Part 2 old Mills route dead-end: `not_mills_inverse_above_threshold_route_with_unit_bound`; current public theorem-core lower-bound route: `BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current` plus `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion`; the stronger full-reach bridge `boxedTorusFullReachZ2TopoClusterBridge_current` gates the non-flat-only full-reach family/core/lower-bound route and its fixed-`L` all-`n` lower-bound theorem; the stronger paper-facing contract `RandomSupercriticalZ2TopoClusterBridgeData` now gates the future random-supercritical `Z^2_L` bridge projections and excludes the current full-reach, flat-only, and all-open-complement diagnostic families; the flat-only diagnostic is kernel-gated by `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`; the fixed-`L` all-`n` obstruction is kernel-gated by `not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`; the open semantic frontier is machine-gated by `topo_cluster_random_supercritical_z2_frontier_payload`; random supercritical `Z^2_L` strengthening remains separate | Wrongness.lean; PaperSemanticGate.lean |
 | `prop:physical` | 304 | `gap_physical_irreducibility` + `gap_W_info_nonpos` + `gap_oracle_W_info_zero` + `gap_welfare_le_W_topo` + `gap_oracle_welfare_eq_W_topo` | PhysicalIrreducibility.lean:46,58,74,91,105 |
 | `prop:trap-prevalence` | 454 | Current standard-only theorem surfaces `gap_trap_prevalence_zero` and `gap_trap_prevalence_above_threshold` | Phase.lean:569,970 |
 | `prop:threshold-alpha` | 528 | `gap_threshold_alpha_monotone` | Cognitive.lean:2610 |
@@ -442,8 +442,10 @@ kernel-checked certificate interface, but it does not instantiate that
 certificate or change the topo/phase open semantic count. The current gate
 also adds the stronger `RandomSupercriticalZ2TopoClusterBridgeData` contract,
 including the finite boxed-torus vertex/edge indexing facts and projections
-back to the current family-core and lower-bound interfaces; this is the object
-a final random finite-lattice proof must instantiate. The topo payload now also
+back to the current family-core and lower-bound interfaces. Its non-diagnostic
+fields and the corresponding gate theorems exclude the current full-reach,
+flat-only, and all-open-complement diagnostic families; this is the object a
+final random finite-lattice proof must instantiate. The topo payload now also
 gates the current standard-`Z^2` boxed-torus witness
 `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its family/core/
 lower-bound projections, and

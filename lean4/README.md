@@ -561,9 +561,11 @@ semantic target remains open because these are finite all-open, complement,
 and flat-sequence carriers rather than a random finite `Z^2_L`
 giant-component/lower-bound theorem.  The gate now records the stronger
 `RandomSupercriticalZ2TopoClusterBridgeData` contract and its projection
-theorems, so the next semantic closure step is to instantiate that contract
-with the paper's stochastic finite-lattice family rather than to add another
-wrapper around the current full-reach diagnostics.
+theorems, plus non-diagnostic guards excluding the current full-reach,
+flat-only, and all-open-complement families.  The next semantic closure step is
+therefore to instantiate that contract with the paper's stochastic
+finite-lattice family rather than to add another wrapper around the current
+diagnostics.
 
 The concrete scalar `agentRewardKernel` now also proves its general
 unit-interval range, Bayesian/Sentimental pointwise monotonicity, κ-agent

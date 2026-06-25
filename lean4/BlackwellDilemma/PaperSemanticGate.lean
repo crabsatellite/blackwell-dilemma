@@ -68,7 +68,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit random-supercritical bridge contract, flat-sequence lower-bound package, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract, flat-sequence lower-bound package, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
         "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier and its topological-loss lower-bound theorem." } ]
 
@@ -451,6 +451,18 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
         bridge.family
+  random_supercritical_z2_bridge_not_full_reach_diagnostic :
+    ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∀ L : Nat, bridge.family L =
+        boxedTorusFullReachComplementTopoLossData L)
+  random_supercritical_z2_bridge_not_flat_only_diagnostic :
+    ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∀ L : Nat, bridge.family L =
+        boxedTorusFullReachFlatOnlyComplementTopoLossData L)
+  random_supercritical_z2_bridge_not_all_open_complement_diagnostic :
+    ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∀ L : Nat, bridge.family L =
+        boxedTorusAllOpenComplementTopoLossData L)
   boxed_torus_z2_bridge_current :
     Z2TopoClusterBridgeData
   boxed_torus_z2_bridge_family_is_flat_only :
@@ -598,6 +610,12 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     BoxedTorusFlatFamilyCoreConclusion_from_random_supercritical_z2_topo_cluster_bridge
   random_supercritical_z2_bridge_lower_bound :=
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_random_supercritical_z2_topo_cluster_bridge
+  random_supercritical_z2_bridge_not_full_reach_diagnostic :=
+    not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic
+  random_supercritical_z2_bridge_not_flat_only_diagnostic :=
+    not_random_supercritical_z2_topo_cluster_bridge_flat_only_diagnostic
+  random_supercritical_z2_bridge_not_all_open_complement_diagnostic :=
+    not_random_supercritical_z2_topo_cluster_bridge_all_open_complement_diagnostic
   boxed_torus_z2_bridge_current :=
     boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
   boxed_torus_z2_bridge_family_is_flat_only :=

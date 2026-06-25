@@ -268,8 +268,10 @@ future random-supercritical `Z^2_L` bridge as an explicit machine-checked
 obligation rather than a prose-only roadmap item. The current gate strengthens
 this with `RandomSupercriticalZ2TopoClusterBridgeData`, whose fields include
 the finite boxed-torus vertex/edge indexing facts plus the same family-core
-theorem package; `PaperSemanticGate.lean` gates its projections so the eventual
-closure target is now a concrete Lean structure, not a prose instruction. The topo payload now also
+theorem package and non-diagnostic guards excluding the current full-reach,
+flat-only, and all-open-complement families; `PaperSemanticGate.lean` gates its
+projections and exclusions so the eventual closure target is now a concrete
+Lean structure, not a prose instruction. The topo payload now also
 gates `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its
 family/core/lower-bound projections through the bridge interface, and
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
