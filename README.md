@@ -42,9 +42,11 @@ status. The Part 4 lattice p-monotonicity target is now closed by the standard
 one-edge high-κ oracle-routing carrier
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the neutral-carrier
 refutation remains as diagnostic evidence for the retired route. The topo gate
-now also machine-checks all-open/complement boxed-torus giant-event and
-flat-sequence lower-bound witnesses, but the random-supercritical semantic
-target remains open. The Part 6 gate now also machine-checks a generic
+now also machine-checks all-open/complement boxed-torus giant-event witnesses,
+the full-reach `Z²` boxed-torus bridge with its fixed-`L` all-`n` lower-bound
+interface, and the flat-sequence lower-bound package, but the
+random-supercritical semantic target remains open. The Part 6 gate now also
+machine-checks a generic
 positive-at-zero scaling-carrier obstruction, so the remaining repair is a
 carrier/domain change rather than a missing proof for the current domination
 interface. See

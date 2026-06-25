@@ -267,7 +267,13 @@ family/core/lower-bound projections through the bridge interface, and
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
-every index. The same payload now also gates the all-open boxed-torus finite
+every index. R520 adds and gates the stronger full-reach bridge
+`boxedTorusFullReachZ2TopoClusterBridge_current`, its family/core/flat
+lower-bound projections, its fixed-`L`
+`UnitCompatibleAboveThresholdLowerBoundConclusion` theorem, and
+`not_boxedTorusFullReachComplementTopoLossData_flatOnlyDiagnostic`, separating
+the full-reach finite carrier from the flat-only diagnostic. The same payload
+now also gates the all-open boxed-torus finite
 giant-event package, its restricted-envelope theorem, the positive restricted
 loss regression on `boxedTorusAllOpenPositiveTopoLossData`, and the
 `boxedTorusAllOpenComplementTopoLossData` flat-sequence lower-bound package

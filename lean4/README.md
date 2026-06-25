@@ -72,6 +72,10 @@ and the flat-only diagnostic
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`, plus the
 fixed-`L` all-`n` obstruction
 `not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
+the stronger full-reach witness `boxedTorusFullReachZ2TopoClusterBridge_current`,
+its family/core/lower-bound projections, its fixed-`L`
+`UnitCompatibleAboveThresholdLowerBoundConclusion` theorem, and
+`not_boxedTorusFullReachComplementTopoLossData_flatOnlyDiagnostic`,
 without closing the still-missing random finite-lattice carrier theorem.  The
 threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
@@ -533,7 +537,14 @@ family/core/lower-bound projections, plus
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`: the
 current flat-only family has zero total expected topo loss off the flattened
 boxed-torus index and zero giant-restricted topo loss at every index.  The
-payload now also gates the all-open boxed-torus finite giant-event witnesses
+same payload now also gates the stronger full-reach bridge
+`boxedTorusFullReachZ2TopoClusterBridge_current`, its family/core/flat lower-bound
+projections, the per-member all-`n`
+`boxedTorusFullReachZ2TopoClusterBridge_current_unit_compatible` theorem, and
+`not_boxedTorusFullReachComplementTopoLossData_flatOnlyDiagnostic`, which
+separates that full-reach carrier from the flat-only diagnostic by its off-flat
+first-edge fallback loss.  The payload now also gates the all-open boxed-torus
+finite giant-event witnesses
 `boxedTorusAllOpenGiantTopoLossData_giantEventFullClusterConclusion`,
 `boxedTorusAllOpenGiantTopoLossData_expectedTopoLossOnGiantEnvelopeConclusion`,
 and the positive restricted-loss regression

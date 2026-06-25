@@ -68,9 +68,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, flat-sequence lower-bound package, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, flat-sequence lower-bound package, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
-        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: replace the diagnostic/all-open/flat-sequence carriers with a random finite Z2_L giant-component/topological-loss lower-bound theorem." } ]
+        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: identify the full-reach boxed-torus bridge with the paper's random finite Z2_L supercritical carrier, or replace it with that carrier and its topological-loss lower-bound theorem." } ]
 
 def openSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.open)
@@ -382,9 +382,10 @@ def part6_lattice_embedding_frontier_payload :
 
 /-- Typed frontier for the open random supercritical `Z2_L`
 topological-cluster/phase target.  This does not close the semantic target:
-it machine-checks the current closed theorem surface, all-open/complement
-boxed-torus finite witnesses, flat-sequence lower-bound package, and the
-obstruction evidence showing why the remaining paper claim still needs a real
+it machine-checks the current closed theorem surface, all-open/complement and
+full-reach boxed-torus finite witnesses, the current `Z²` bridge witnesses,
+the flat-sequence lower-bound package, and the obstruction evidence showing
+why the remaining paper claim still needs a semantic identification with the
 random finite-lattice giant-component/topological-loss carrier. -/
 structure TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :
@@ -432,6 +433,29 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     forall L : Nat,
       Not (UnitCompatibleAboveThresholdLowerBoundConclusion
         (boxed_torus_z2_bridge_current.family L))
+  boxed_torus_full_reach_z2_bridge_current :
+    Z2TopoClusterBridgeData
+  boxed_torus_full_reach_z2_bridge_family :
+    boxed_torus_full_reach_z2_bridge_current.family =
+      boxedTorusFullReachComplementTopoLossData
+  boxed_torus_full_reach_z2_bridge_core_current :
+    BoxedTorusFlatFamilyCoreConclusion
+      boxed_torus_full_reach_z2_bridge_current.family
+  boxed_torus_full_reach_z2_bridge_lower_bound_current :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      boxed_torus_full_reach_z2_bridge_current.family
+  boxed_torus_full_reach_z2_bridge_unit_compatible :
+    forall L : Nat,
+      UnitCompatibleAboveThresholdLowerBoundConclusion
+        (boxed_torus_full_reach_z2_bridge_current.family L)
+  boxed_torus_full_reach_not_flat_only_diagnostic :
+    ¬
+      ((∀ L n : Nat, ∀ p : Real, n ≠ boxedTorusFlatGraphN L →
+        expectedTopoLossOnData
+          (boxedTorusFullReachComplementTopoLossData L) n p = 0) ∧
+      (∀ L n : Nat, ∀ p : Real,
+        expectedTopoLossOnGiantOn
+          (boxedTorusFullReachComplementTopoLossData L) n p = 0))
   boxed_torus_flat_lower_bound_current :
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
       boxedTorusFullReachFlatOnlyComplementTopoLossData
@@ -515,8 +539,8 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
 
 /-- Build gate: the open topo/phase semantic target is calibrated against
 the current theorem surface.  The semantic target remains open until these
-finite diagnostic/all-open/flat-sequence carrier witnesses are refined to a
-genuine random supercritical finite `Z2_L` theorem. -/
+finite all-open/full-reach/flat-sequence carrier witnesses are identified with
+or replaced by a genuine random supercritical finite `Z2_L` theorem. -/
 noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :=
@@ -544,6 +568,18 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_lower_bound
   boxed_torus_z2_bridge_not_all_n_lower_bound :=
     not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
+  boxed_torus_full_reach_z2_bridge_current :=
+    boxedTorusFullReachZ2TopoClusterBridge_current
+  boxed_torus_full_reach_z2_bridge_family :=
+    boxedTorusFullReachZ2TopoClusterBridge_current_family
+  boxed_torus_full_reach_z2_bridge_core_current :=
+    boxedTorusFullReachZ2TopoClusterBridge_current_core
+  boxed_torus_full_reach_z2_bridge_lower_bound_current :=
+    boxedTorusFullReachZ2TopoClusterBridge_current_lower_bound
+  boxed_torus_full_reach_z2_bridge_unit_compatible :=
+    boxedTorusFullReachZ2TopoClusterBridge_current_unit_compatible
+  boxed_torus_full_reach_not_flat_only_diagnostic :=
+    not_boxedTorusFullReachComplementTopoLossData_flatOnlyDiagnostic
   boxed_torus_flat_lower_bound_current :=
     BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current
   boxed_torus_family_core_current :=

@@ -12786,6 +12786,30 @@ theorem boxedTorusFullReachComplementTopoLossData_expectedTopoLossOnData_eq_of_n
     firstEdgeOpenGiantClosedTopoLossData, hn]
     using firstEdgeOpenGiantClosedTopoLossData_expectedTopoLossOnData_eq n p
 
+/-- The full-reach complement carrier is not the flat-only diagnostic carrier:
+    away from the selected boxed-torus size it retains the first-edge fallback,
+    whose expected topological loss is `p / 2`, rather than zero. -/
+theorem not_boxedTorusFullReachComplementTopoLossData_flatOnlyDiagnostic :
+    ¬
+      ((∀ L n : Nat, ∀ p : Real, n ≠ boxedTorusFlatGraphN L →
+        expectedTopoLossOnData
+          (boxedTorusFullReachComplementTopoLossData L) n p = 0) ∧
+      (∀ L n : Nat, ∀ p : Real,
+        expectedTopoLossOnGiantOn
+          (boxedTorusFullReachComplementTopoLossData L) n p = 0)) := by
+  rintro ⟨hflat_zero, _hgiant_zero⟩
+  let n : Nat := boxedTorusFlatGraphN 0 + 1
+  have hn_gt : boxedTorusFlatGraphN 0 < n := by
+    dsimp [n]
+    omega
+  have hn_ne : n ≠ boxedTorusFlatGraphN 0 := ne_of_gt hn_gt
+  have hzero := hflat_zero 0 n ((1 : Real) / 2) hn_ne
+  have hvalue :=
+    boxedTorusFullReachComplementTopoLossData_expectedTopoLossOnData_eq_of_ne
+      0 n ((1 : Real) / 2) hn_ne
+  rw [hvalue] at hzero
+  norm_num at hzero
+
 theorem boxedTorusFullReachComplementTopoLossData_giantEventFullClusterConclusion
     (L : Nat) :
     GiantComponentEventFullClusterConclusion
@@ -13239,6 +13263,46 @@ theorem BoxedTorusFullReachFlatUnitCompatibleAboveThresholdLowerBoundConclusion_
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
       boxedTorusFullReachComplementTopoLossData := by
   exact BoxedTorusFullReachComplementLowerBoundConclusion_current
+
+/-- Current standard-`Z^2` topo-cluster bridge witness for the full-reach
+complement boxed-torus carrier.
+
+Unlike the later flat-only diagnostic bridge, this family keeps the first-edge
+fallback away from the selected flat boxed-torus size and therefore also
+supports the older fixed-`L` all-`n` lower-bound interface. It is still a
+finite boxed-torus carrier, so the paper-semantic target remains open until
+this is identified with the manuscript's intended random supercritical
+`Z^2_L` theorem. -/
+noncomputable def boxedTorusFullReachZ2TopoClusterBridge_current :
+    Z2TopoClusterBridgeData where
+  graph := SimpleGraph.Z2LatticeGraph
+  graph_is_z2_lattice := rfl
+  family := boxedTorusFullReachComplementTopoLossData
+  family_core := boxedTorusFullReachComplementTopoLossData_flatFamilyCoreConclusion
+
+theorem boxedTorusFullReachZ2TopoClusterBridge_current_family :
+    boxedTorusFullReachZ2TopoClusterBridge_current.family =
+      boxedTorusFullReachComplementTopoLossData := rfl
+
+theorem boxedTorusFullReachZ2TopoClusterBridge_current_core :
+    BoxedTorusFlatFamilyCoreConclusion
+      boxedTorusFullReachZ2TopoClusterBridge_current.family :=
+  BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge
+    boxedTorusFullReachZ2TopoClusterBridge_current
+
+theorem boxedTorusFullReachZ2TopoClusterBridge_current_lower_bound :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      boxedTorusFullReachZ2TopoClusterBridge_current.family :=
+  BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge
+    boxedTorusFullReachZ2TopoClusterBridge_current
+
+theorem boxedTorusFullReachZ2TopoClusterBridge_current_unit_compatible
+    (L : Nat) :
+    UnitCompatibleAboveThresholdLowerBoundConclusion
+      (boxedTorusFullReachZ2TopoClusterBridge_current.family L) := by
+  change UnitCompatibleAboveThresholdLowerBoundConclusion
+    (boxedTorusFullReachComplementTopoLossData L)
+  exact boxedTorusFullReachComplementTopoLossData_unitCompatibleAboveThresholdLowerBoundConclusion L
 
 /-- Flat-only full-reach complement diagnostic percolation package.
 
