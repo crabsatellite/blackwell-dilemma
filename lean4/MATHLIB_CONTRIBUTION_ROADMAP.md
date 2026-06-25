@@ -467,6 +467,10 @@ It also gates
 so the future route must project to the missing giant-loss field and to the
 same-tail flat/giant/mass/positive-realisation package before the remaining
 Mathlib/percolation work can count as paper-semantic closure.
+It also gates
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
+so any final route must expose arbitrarily large non-diagnostic finite members
+carrying full flat/giant/mass/in-giant-positive support.
 The combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate` now gates
 both the old over-strong bridge-contract obstruction and that repaired

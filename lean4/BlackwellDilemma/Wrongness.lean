@@ -15873,6 +15873,107 @@ theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_o
   rintro ⟨bridge, hsupport⟩
   exact ⟨bridge, hsupport.2.2⟩
 
+/-- The full topo paper-closing route exposes arbitrarily large
+non-diagnostic finite members carrying the same full support output.
+
+This prevents a future route from satisfying the paper-closing support on an
+eventual diagnostic tail: for every size threshold, the route supplies a later
+boxed-torus member that is non-diagnostic with respect to all current
+deterministic families and still carries flat loss, giant-restricted loss,
+giant-event mass, and an in-giant positive-loss realisation at the route's
+same supercritical probability and constant. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        Exists fun c : Real =>
+          0 < c /\ c <= 1 /\
+            forall L0 : Nat,
+              Exists fun L : Nat =>
+                L0 <= L /\
+                c <=
+                  expectedTopoLossOnData (bridge.family L)
+                    (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                c <=
+                  expectedTopoLossOnGiantOn (bridge.family L)
+                    (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                c <=
+                  percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                    ((bridge.family L).giantComponentEvent
+                      (boxedTorusFlatGraphN L))
+                    (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                      (1 : Real)) /\
+                (Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  Membership.mem
+                    ((bridge.family L).giantComponentEvent
+                      (boxedTorusFlatGraphN L)) omega /\
+                  0 <
+                    (bridge.family L).topoLossKernel
+                      (boxedTorusFlatGraphN L) omega) /\
+                Not (bridge.family L = boxedTorusFullReachComplementTopoLossData L) /\
+                Not (bridge.family L =
+                  boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+                Not (bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+                Not (bridge.family L = boxedTorusAllOpenGiantTopoLossData L) /\
+                Not (bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) := by
+  rintro ⟨bridge, hsupport⟩
+  rcases hsupport with ⟨_hpaper, _hgiant_closing,
+    c, hc_pos, hc_le_one, Lsupport, htail_support⟩
+  refine ⟨bridge, c, hc_pos, hc_le_one, ?_⟩
+  intro L0
+  let Lmin := max L0 Lsupport
+  have hmember :
+      Exists fun L : Nat =>
+        Lmin <= L /\
+        Not (bridge.family L = boxedTorusFullReachComplementTopoLossData L) /\
+        Not (bridge.family L =
+          boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+        Not (bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+        Not (bridge.family L = boxedTorusAllOpenGiantTopoLossData L) /\
+        Not (bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) := by
+    by_contra hno_member
+    apply bridge.not_eventually_pointwise_extended_diagnostic_combo
+    refine ⟨Lmin, ?_⟩
+    intro L hL
+    by_contra hnot_diagnostic
+    have hnot_full :
+        Not (bridge.family L = boxedTorusFullReachComplementTopoLossData L) := by
+      intro hfull
+      exact hnot_diagnostic (Or.inl hfull)
+    have hnot_flat :
+        Not (bridge.family L =
+          boxedTorusFullReachFlatOnlyComplementTopoLossData L) := by
+      intro hflat
+      exact hnot_diagnostic (Or.inr (Or.inl hflat))
+    have hnot_all_open_complement :
+        Not (bridge.family L = boxedTorusAllOpenComplementTopoLossData L) := by
+      intro hall_open_complement
+      exact hnot_diagnostic (Or.inr (Or.inr (Or.inl hall_open_complement)))
+    have hnot_all_open_giant :
+        Not (bridge.family L = boxedTorusAllOpenGiantTopoLossData L) := by
+      intro hall_open_giant
+      exact hnot_diagnostic
+        (Or.inr (Or.inr (Or.inr (Or.inl hall_open_giant))))
+    have hnot_all_open_positive :
+        Not (bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) := by
+      intro hall_open_positive
+      exact hnot_diagnostic
+        (Or.inr (Or.inr (Or.inr (Or.inr hall_open_positive))))
+    exact hno_member ⟨L, hL, hnot_full, hnot_flat,
+      hnot_all_open_complement, hnot_all_open_giant,
+      hnot_all_open_positive⟩
+  rcases hmember with
+    ⟨L, hL_min, hnot_full, hnot_flat, hnot_all_open_complement,
+      hnot_all_open_giant, hnot_all_open_positive⟩
+  have hL0 : L0 <= L := by
+    exact le_trans (Nat.le_max_left L0 Lsupport) hL_min
+  have hLsupport : Lsupport <= L := by
+    exact le_trans (Nat.le_max_right L0 Lsupport) hL_min
+  rcases htail_support L hLsupport with
+    ⟨hflat, hgiant, hmass, hpositive_in_giant⟩
+  exact ⟨L, hL0, hflat, hgiant, hmass, hpositive_in_giant,
+    hnot_full, hnot_flat, hnot_all_open_complement, hnot_all_open_giant,
+    hnot_all_open_positive⟩
+
 /-- The old final bridge contract would project to the full repaired
 paper-closing support surface.  Since that old contract is kernel-refuted, this
 theorem is used only to pin down the exact support obligations a repaired

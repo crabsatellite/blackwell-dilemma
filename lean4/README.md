@@ -688,6 +688,10 @@ It also gates
 so a future route must expose both the missing giant-loss closing field and the
 same-tail flat/giant/mass/positive-realisation output rather than merely an
 existential wrapper.
+It also gates
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
+so that same route must expose arbitrarily large non-diagnostic finite members
+carrying full flat/giant/mass/in-giant-positive support.
 It also gates the combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, which
 keeps the old over-strong contract obstruction and the repaired first-edge

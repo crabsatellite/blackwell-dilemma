@@ -619,6 +619,10 @@ It also proves
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
 so the route must project to the missing giant-loss closing field and to one
 same-tail flat/giant/mass/positive-realisation output package.
+It also gates
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
+so the route must expose arbitrarily large non-diagnostic finite members
+carrying full flat/giant/mass/in-giant-positive support.
 The topo current frontier is also packaged as
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
 the old over-strong bridge-contract obstruction with the repaired first-edge
