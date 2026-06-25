@@ -14123,6 +14123,16 @@ structure RandomSupercriticalZ2TopoClusterBridgeData where
             c <=
               expectedTopoLossOnGiantOn (family L)
                 (boxedTorusFlatGraphN L) supercriticalProbability
+  supercritical_giant_event_mass_lower_bound :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              percRestrictedExpectation (1 - supercriticalProbability)
+                ((family L).giantComponentEvent (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real))
   family_core : BoxedTorusFlatFamilyCoreConclusion family
   not_full_reach_diagnostic :
     Not (forall L : Nat,
@@ -14225,6 +14235,23 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_supercritical_giant_lower_bou
                 (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
   bridge.supercritical_giant_lower_bound
 
+/-- Projection of the named giant-event mass lower bound at the bridge's own
+supercritical probability.  This prevents a future final bridge from using a
+giant-restricted loss lower bound without also proving that the same event has
+positive Bernoulli product mass at the paper's `p > p_c` parameter. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_supercritical_giant_event_mass_lower_bound
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real)) :=
+  bridge.supercritical_giant_event_mass_lower_bound
+
 /-- Non-vacuity projection from the final random-supercritical bridge: at the
 named supercritical probability, some flat boxed-torus member has strictly
 positive expected topological loss. -/
@@ -14264,6 +14291,23 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_giant_los
           expectedTopoLossOnGiantOn (bridge.family L)
             (boxedTorusFlatGraphN L) bridge.supercriticalProbability := by
   rcases bridge.supercritical_giant_lower_bound with
+    ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
+  exact ⟨L0, fun L hL => lt_of_lt_of_le hc_pos (hlower L hL)⟩
+
+/-- Giant-event mass non-vacuity projection from the final
+random-supercritical bridge: at the named supercritical probability, every
+sufficiently large flat boxed-torus member gives positive Bernoulli product mass
+to the bridge's giant-component event. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_giant_event_mass
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        0 <
+          percRestrictedExpectation (1 - bridge.supercriticalProbability)
+            ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+            (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+              (1 : Real)) := by
+  rcases bridge.supercritical_giant_event_mass_lower_bound with
     ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
   exact ⟨L0, fun L hL => lt_of_lt_of_le hc_pos (hlower L hL)⟩
 
@@ -14483,6 +14527,121 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant
     bridge.supercriticalProbability_le_one
     h_giant_pos
 
+/-- Uniform eventual paper-support projection with event mass.
+
+The same positive constant and tail threshold simultaneously lower-bound the
+flat expected loss, the giant-restricted expected loss, and the giant-event
+Bernoulli mass, while also giving an in-giant positive-loss realisation for
+every sufficiently large flat boxed-torus member. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_event_mass_lower_bound_and_loss_realisation
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnData (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+            c <=
+              expectedTopoLossOnGiantOn (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+            c <=
+              percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real)) ∧
+            Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+              Membership.mem
+                  ((bridge.family L).giantComponentEvent
+                    (boxedTorusFlatGraphN L)) omega ∧
+                0 <
+                  (bridge.family L).topoLossKernel
+                    (boxedTorusFlatGraphN L) omega := by
+  rcases bridge.supercritical_flat_lower_bound with
+    ⟨cFlat, hcFlat_pos, hcFlat_le_one, L0Flat, hflat⟩
+  rcases bridge.supercritical_giant_lower_bound with
+    ⟨cGiant, hcGiant_pos, _hcGiant_le_one, L0Giant, hgiant⟩
+  rcases bridge.supercritical_giant_event_mass_lower_bound with
+    ⟨cMass, hcMass_pos, _hcMass_le_one, L0Mass, hmass⟩
+  let c := min cFlat (min cGiant cMass)
+  let L0 := max L0Flat (max L0Giant L0Mass)
+  have hc_pos : 0 < c := by
+    dsimp [c]
+    exact lt_min hcFlat_pos (lt_min hcGiant_pos hcMass_pos)
+  have hc_le_one : c <= 1 := by
+    dsimp [c]
+    exact le_trans (min_le_left cFlat (min cGiant cMass)) hcFlat_le_one
+  refine ⟨c, hc_pos, hc_le_one, L0, ?_⟩
+  intro L hL
+  have hL_flat : L0Flat <= L := by
+    exact le_trans (Nat.le_max_left L0Flat (max L0Giant L0Mass)) hL
+  have hL_giant : L0Giant <= L := by
+    exact le_trans
+      (le_trans
+        (Nat.le_max_left L0Giant L0Mass)
+        (Nat.le_max_right L0Flat (max L0Giant L0Mass))) hL
+  have hL_mass : L0Mass <= L := by
+    exact le_trans
+      (le_trans
+        (Nat.le_max_right L0Giant L0Mass)
+        (Nat.le_max_right L0Flat (max L0Giant L0Mass))) hL
+  have h_flat_lower :
+      cFlat <=
+        expectedTopoLossOnData (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    hflat L hL_flat
+  have h_giant_lower :
+      cGiant <=
+        expectedTopoLossOnGiantOn (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    hgiant L hL_giant
+  have h_mass_lower :
+      cMass <=
+        percRestrictedExpectation (1 - bridge.supercriticalProbability)
+          ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+            (1 : Real)) :=
+    hmass L hL_mass
+  have hc_le_cFlat : c <= cFlat := by
+    dsimp [c]
+    exact min_le_left cFlat (min cGiant cMass)
+  have hc_le_cGiant : c <= cGiant := by
+    dsimp [c]
+    exact le_trans (min_le_right cFlat (min cGiant cMass))
+      (min_le_left cGiant cMass)
+  have hc_le_cMass : c <= cMass := by
+    dsimp [c]
+    exact le_trans (min_le_right cFlat (min cGiant cMass))
+      (min_le_right cGiant cMass)
+  have h_flat :
+      c <=
+        expectedTopoLossOnData (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    le_trans hc_le_cFlat h_flat_lower
+  have h_giant :
+      c <=
+        expectedTopoLossOnGiantOn (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    le_trans hc_le_cGiant h_giant_lower
+  have h_mass :
+      c <=
+        percRestrictedExpectation (1 - bridge.supercriticalProbability)
+          ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+            (1 : Real)) :=
+    le_trans hc_le_cMass h_mass_lower
+  have h_giant_pos :
+      0 <
+        expectedTopoLossOnGiantOn (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    lt_of_lt_of_le hc_pos h_giant
+  refine ⟨h_flat, h_giant, h_mass, ?_⟩
+  exact expectedTopoLossOnGiantOn_pos_realisation_witness
+    (bridge.family L) (boxedTorusFlatGraphN L)
+    bridge.supercriticalProbability_nonneg
+    bridge.supercriticalProbability_le_one
+    h_giant_pos
+
 /-- Uniform supported non-diagnostic tail projection from the final
 random-supercritical bridge.
 
@@ -14504,6 +14663,11 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_supported_
             c <=
               expectedTopoLossOnGiantOn (bridge.family L)
                 (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+            c <=
+              percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real)) ∧
             (Exists fun omega :
                 BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
               Membership.mem
@@ -14518,7 +14682,7 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_supported_
             bridge.family L ≠ boxedTorusAllOpenGiantTopoLossData L ∧
             bridge.family L ≠ boxedTorusAllOpenPositiveTopoLossData L := by
   rcases
-    randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_lower_bound_and_loss_realisation
+    randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_event_mass_lower_bound_and_loss_realisation
       bridge with
     ⟨c, hc_pos, hc_le_one, Lsupport, hsupport⟩
   refine ⟨c, hc_pos, hc_le_one, ?_⟩
@@ -14569,8 +14733,8 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_supported_
     exact le_trans (Nat.le_max_left L0 Lsupport) hL_min
   have hLsupport : Lsupport <= L := by
     exact le_trans (Nat.le_max_right L0 Lsupport) hL_min
-  rcases hsupport L hLsupport with ⟨hflat, hgiant, hwitness⟩
-  exact ⟨L, hL0, hflat, hgiant, hwitness, hnot_full, hnot_flat,
+  rcases hsupport L hLsupport with ⟨hflat, hgiant, hmass, hwitness⟩
+  exact ⟨L, hL0, hflat, hgiant, hmass, hwitness, hnot_full, hnot_flat,
     hnot_all_open_complement, hnot_all_open_giant,
     hnot_all_open_positive⟩
 
@@ -14607,6 +14771,12 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
               c <=
                 expectedTopoLossOnGiantOn (bridge.family L)
                   (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+              c <=
+                percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                  ((bridge.family L).giantComponentEvent
+                    (boxedTorusFlatGraphN L))
+                  (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                    (1 : Real)) ∧
               Exists fun omega :
                   BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
                 Membership.mem
@@ -14657,12 +14827,18 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
               c <=
                 expectedTopoLossOnData (bridge.family L)
                   (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
-              c <=
-                expectedTopoLossOnGiantOn (bridge.family L)
-                  (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
-              (Exists fun omega :
-                  BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
-                Membership.mem
+               c <=
+                 expectedTopoLossOnGiantOn (bridge.family L)
+                   (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+               c <=
+                 percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                   ((bridge.family L).giantComponentEvent
+                     (boxedTorusFlatGraphN L))
+                   (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                     (1 : Real)) ∧
+               (Exists fun omega :
+                   BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                 Membership.mem
                     ((bridge.family L).giantComponentEvent
                       (boxedTorusFlatGraphN L)) omega ∧
                   0 <
@@ -14680,7 +14856,7 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
     bridge.supercriticalProbability_above_pc,
     bridge.supercriticalProbability_nonneg,
     bridge.supercriticalProbability_le_one,
-    randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_lower_bound_and_loss_realisation
+    randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_event_mass_lower_bound_and_loss_realisation
       bridge,
     bridge.not_full_reach_diagnostic,
     bridge.not_flat_only_diagnostic,
