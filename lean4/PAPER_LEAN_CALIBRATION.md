@@ -166,6 +166,7 @@ and on lattices, the threshold κ* is non-decreasing in p."
   `gap_cognitive_threshold_part4`, `gap_p_monotonicity_bounded`, and the
   standard one-edge/lattice monotone-coupling interface
   (`standardBernoulliMonotoneCouplingData`,
+  `standardBernoulliProductMonotoneCouplingData`,
   `standardLatticeMonotoneCouplingData`).
 - ⚠️ **Lattice sub-claim (4b)** is still not directly covered by a
   lattice/domain-carrier theorem.  R517 makes the missing bridge explicit as
@@ -174,7 +175,9 @@ and on lattices, the threshold κ* is non-decreasing in p."
   interface, and prove the lattice-derived antitonicity of `mean_estimate_gap`
   in `p`.  R520 adds the one-edge Bernoulli monotone-coupling mass table with
   both Bernoulli marginals and zero forbidden open-to-closed mass, plus the
-  standard `Z^2` lattice per-edge interface.  The generic `sInf` transfer from
+  standard `Z^2` lattice per-edge interface.  R521 adds finite-edge product
+  support data with non-negative mass and zero mass on any configuration pair
+  containing a forbidden open-to-closed edge.  The generic `sInf` transfer from
   that bridge to bounded `kappaStar` p-monotonicity is now kernel-checked, but
   no full lattice/percolation certificate deriving the mean-gap antitonicity
   from the coupling/domain carrier is instantiated yet.

@@ -28,9 +28,9 @@ that Mathlib does not yet host.
   under outcome `ω`.
 * `latticeBondConfig d` — abbreviation for `BondConfigOnGraph
   (integerLatticeGraph d)`.
-* `LatticeMonotoneCouplingData d` — the per-edge monotone Bernoulli
-  coupling ingredient that a future infinite-product lattice coupling must
-  extend.
+* `LatticeMonotoneCouplingData d` — the per-edge and finite-edge-product
+  monotone Bernoulli coupling ingredients that a future infinite-product
+  lattice coupling must extend.
 
 ## Why this is a stub
 
@@ -98,27 +98,40 @@ abbrev latticeBondConfig (d : ℕ) : Type _ :=
 /-- The `Z²` specialisation, for the canonical Harris–Kesten setting. -/
 abbrev Z2BondConfig : Type _ := latticeBondConfig 2
 
-/-! ### Per-edge monotone-coupling interface -/
+/-! ### Per-edge and finite-product monotone-coupling interface -/
 
-/-- Lattice-level monotone-coupling data at the per-edge Bernoulli layer.
+/-- Lattice-level monotone-coupling data at the per-edge and finite-box
+Bernoulli layers.
 
 This is still not the infinite-product Strassen coupling needed to close the
 paper-semantic lattice targets.  It is the kernel-checked local ingredient:
 for every ordered pair `0 <= p_low <= p_high <= 1`, each lattice edge has a
 one-edge monotone Bernoulli coupling with correct lower/upper marginals and no
-mass on the forbidden open-to-closed transition. -/
+mass on the forbidden open-to-closed transition, and every finite edge set has
+the product support data with zero mass on any configuration pair containing a
+forbidden open-to-closed edge. -/
 structure LatticeMonotoneCouplingData (d : ℕ) where
   edge_coupling :
     ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
       BlackwellDilemma.Infrastructure.BernoulliMonotoneCouplingData
         p_low p_high
+  finite_product_coupling :
+    ∀ (E : Type*) [Fintype E] [DecidableEq E],
+      ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
+        BlackwellDilemma.Infrastructure.BernoulliProductMonotoneCouplingData
+          (E := E) p_low p_high
 
-/-- Standard per-edge monotone-coupling data for the integer lattice. -/
+/-- Standard per-edge and finite-product monotone-coupling data for the
+integer lattice. -/
 def standardLatticeMonotoneCouplingData (d : ℕ) :
     LatticeMonotoneCouplingData d where
   edge_coupling := fun p_low p_high h_low_nonneg h_mono h_high_le_one =>
     BlackwellDilemma.Infrastructure.standardBernoulliMonotoneCouplingData
       p_low p_high h_low_nonneg h_mono h_high_le_one
+  finite_product_coupling := by
+    intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one
+    exact BlackwellDilemma.Infrastructure.standardBernoulliProductMonotoneCouplingData
+      (E := E) p_low p_high h_low_nonneg h_mono h_high_le_one
 
 /-! ### Connection to the existing finite-edge bond weight framework
 

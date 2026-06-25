@@ -29,6 +29,9 @@ infrastructure does not yet exist in Mathlib for finite products on
 * `standardBernoulliMonotoneCouplingData` — the one-edge Strassen monotone
   coupling table for `0 <= p_low <= p_high <= 1`, including both Bernoulli
   marginals and zero mass on the forbidden open-to-closed atom.
+* `standardBernoulliProductMonotoneCouplingData` — the finite-edge product of
+  the one-edge monotone coupling, with non-negative mass and zero mass on any
+  configuration pair containing a forbidden open-to-closed edge.
 
 ## Bridge to paper carrier `BondConfig` / `percExpectation`
 
@@ -176,6 +179,74 @@ def standardBernoulliMonotoneCouplingData
   no_lower_open_upper_closed :=
     bernoulliMonotoneCouplingFactor_no_lower_open_upper_closed p_low p_high
 
+/-! ### Finite-product monotone Bernoulli coupling -/
+
+/-- Finite-edge product of the one-edge monotone Bernoulli coupling. -/
+def bernoulliProductMonotoneCouplingFactor
+    {E : Type*} [Fintype E] (p_low p_high : ℝ)
+    (lower upper : E -> Bool) : ℝ :=
+  Finset.univ.prod (fun e : E =>
+    bernoulliMonotoneCouplingFactor p_low p_high (lower e) (upper e))
+
+/-- Data package for the finite-edge product monotone coupling support.
+
+The full marginal proof for finite products is a separate product-sum theorem.
+This package records the kernel-checked finite-box ingredient needed before
+the lattice monotone-coupling bridge can close: non-negative joint mass and
+zero mass for every configuration pair that contains an edge with lower
+configuration open and upper configuration closed. -/
+structure BernoulliProductMonotoneCouplingData
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) where
+  factor : (E -> Bool) -> (E -> Bool) -> ℝ
+  nonneg :
+    ∀ lower upper : E -> Bool, 0 ≤ factor lower upper
+  no_forbidden_open_to_closed_edge :
+    ∀ lower upper : E -> Bool,
+      (∃ e : E, lower e = true ∧ upper e = false) ->
+        factor lower upper = 0
+
+/-- Non-negativity of the finite-product monotone coupling factor. -/
+theorem bernoulliProductMonotoneCouplingFactor_nonneg
+    {E : Type*} [Fintype E] {p_low p_high : ℝ}
+    (h_low_nonneg : 0 ≤ p_low)
+    (h_mono : p_low ≤ p_high) (h_high_le_one : p_high ≤ 1)
+    (lower upper : E -> Bool) :
+    0 ≤ bernoulliProductMonotoneCouplingFactor p_low p_high lower upper := by
+  unfold bernoulliProductMonotoneCouplingFactor
+  apply Finset.prod_nonneg
+  intro e _he
+  exact
+    bernoulliMonotoneCouplingFactor_nonneg
+      h_low_nonneg h_mono h_high_le_one (lower e) (upper e)
+
+/-- Any forbidden open-to-closed edge gives zero mass in the finite-product
+monotone coupling factor. -/
+theorem bernoulliProductMonotoneCouplingFactor_no_forbidden_open_to_closed_edge
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) (lower upper : E -> Bool)
+    (h_forbidden : ∃ e : E, lower e = true ∧ upper e = false) :
+    bernoulliProductMonotoneCouplingFactor p_low p_high lower upper = 0 := by
+  rcases h_forbidden with ⟨e, h_lower, h_upper⟩
+  unfold bernoulliProductMonotoneCouplingFactor
+  apply Finset.prod_eq_zero (i := e) (Finset.mem_univ e)
+  simp [bernoulliMonotoneCouplingFactor, h_lower, h_upper]
+
+/-- Standard finite-product monotone Bernoulli coupling support data for
+`0 <= p_low <= p_high <= 1`. -/
+def standardBernoulliProductMonotoneCouplingData
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p_low p_high : ℝ) (h_low_nonneg : 0 ≤ p_low)
+    (h_mono : p_low ≤ p_high) (h_high_le_one : p_high ≤ 1) :
+    BernoulliProductMonotoneCouplingData (E := E) p_low p_high where
+  factor := bernoulliProductMonotoneCouplingFactor p_low p_high
+  nonneg :=
+    bernoulliProductMonotoneCouplingFactor_nonneg
+      h_low_nonneg h_mono h_high_le_one
+  no_forbidden_open_to_closed_edge :=
+    bernoulliProductMonotoneCouplingFactor_no_forbidden_open_to_closed_edge
+      p_low p_high
+
 /-! ### Finite product Bernoulli weight -/
 
 /-- **Bernoulli product weight** over a finite edge set with outcome
@@ -227,5 +298,8 @@ theorem bernoulliWeight_pos
 #print axioms bernoulliMonotoneCouplingFactor_lower_marginal
 #print axioms bernoulliMonotoneCouplingFactor_upper_marginal
 #print axioms standardBernoulliMonotoneCouplingData
+#print axioms bernoulliProductMonotoneCouplingFactor_nonneg
+#print axioms bernoulliProductMonotoneCouplingFactor_no_forbidden_open_to_closed_edge
+#print axioms standardBernoulliProductMonotoneCouplingData
 
 end BlackwellDilemma.Infrastructure
