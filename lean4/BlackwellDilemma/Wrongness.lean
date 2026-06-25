@@ -15560,6 +15560,368 @@ theorem randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support
     hnot_all_open_complement, hnot_all_open_giant,
     hnot_all_open_positive⟩
 
+/-- Positive boxed-torus flat index fact used to separate the first-edge
+compatibility witness from the current boxed-torus diagnostic families. -/
+theorem boxedTorusFlatGraphN_ne_zero_of_pos {L : Nat} (hL : 0 < L) :
+    boxedTorusFlatGraphN L ≠ 0 := by
+  intro hzero
+  have hsucc := boxedTorusFlatGraphN_succ L
+  rw [hzero] at hsucc
+  have htwo : 2 <= L + 1 := by omega
+  have hge : 4 ≤ (L + 1) * (L + 1) := by
+    calc
+      4 = 2 * 2 := by norm_num
+      _ <= (L + 1) * (L + 1) := Nat.mul_le_mul htwo htwo
+  omega
+
+theorem boxedTorusFullReachComplementTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+    {L : Nat} (hL : 0 < L) :
+    (boxedTorusFullReachComplementTopoLossData L).giantComponentEvent 0 =
+      (∅ : Finset (BondConfig (EdgeIdx 0))) := by
+  have hne : ¬ 0 = boxedTorusFlatGraphN L := by
+    intro h
+    exact boxedTorusFlatGraphN_ne_zero_of_pos hL h.symm
+  simp [boxedTorusFullReachComplementTopoLossData, hne]
+
+theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+    {L : Nat} (hL : 0 < L) :
+    (boxedTorusFullReachFlatOnlyComplementTopoLossData L).giantComponentEvent 0 =
+      (∅ : Finset (BondConfig (EdgeIdx 0))) := by
+  have hne : ¬ 0 = boxedTorusFlatGraphN L := by
+    intro h
+    exact boxedTorusFlatGraphN_ne_zero_of_pos hL h.symm
+  simp [boxedTorusFullReachFlatOnlyComplementTopoLossData, hne]
+
+theorem boxedTorusAllOpenComplementTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+    {L : Nat} (hL : 0 < L) :
+    (boxedTorusAllOpenComplementTopoLossData L).giantComponentEvent 0 =
+      (∅ : Finset (BondConfig (EdgeIdx 0))) := by
+  have hne : ¬ 0 = boxedTorusFlatGraphN L := by
+    intro h
+    exact boxedTorusFlatGraphN_ne_zero_of_pos hL h.symm
+  simp [boxedTorusAllOpenComplementTopoLossData, hne]
+
+theorem boxedTorusAllOpenGiantTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+    {L : Nat} (hL : 0 < L) :
+    (boxedTorusAllOpenGiantTopoLossData L).giantComponentEvent 0 =
+      (∅ : Finset (BondConfig (EdgeIdx 0))) := by
+  have hne : ¬ 0 = boxedTorusFlatGraphN L := by
+    intro h
+    exact boxedTorusFlatGraphN_ne_zero_of_pos hL h.symm
+  simp [boxedTorusAllOpenGiantTopoLossData, hne]
+
+theorem boxedTorusAllOpenPositiveTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+    {L : Nat} (hL : 0 < L) :
+    (boxedTorusAllOpenPositiveTopoLossData L).giantComponentEvent 0 =
+      (∅ : Finset (BondConfig (EdgeIdx 0))) := by
+  have hne : ¬ 0 = boxedTorusFlatGraphN L := by
+    intro h
+    exact boxedTorusFlatGraphN_ne_zero_of_pos hL h.symm
+  simp [boxedTorusAllOpenPositiveTopoLossData, hne]
+
+theorem firstEdgeOpenGiantClosedTopoLossData_ne_of_giantComponentEvent_zero_empty
+    {data : WrongnessPercolationData}
+    (hempty :
+      data.giantComponentEvent 0 = (∅ : Finset (BondConfig (EdgeIdx 0)))) :
+    firstEdgeOpenGiantClosedTopoLossData ≠ data := by
+  intro h
+  have hevent :=
+    congrArg (fun data : WrongnessPercolationData =>
+      data.giantComponentEvent 0) h
+  have hfirst_empty :
+      firstEdgeOpenEvent 0 = (∅ : Finset (BondConfig (EdgeIdx 0))) := by
+    simpa [firstEdgeOpenGiantClosedTopoLossData, hempty] using hevent
+  have hnonempty : (firstEdgeOpenEvent 0).Nonempty :=
+    firstEdgeOpenEvent_nonempty 0
+  rw [hfirst_empty] at hnonempty
+  simpa using hnonempty
+
+theorem firstEdgeOpenGiantClosedTopoLossData_ne_fullReachComplement_of_pos
+    {L : Nat} (hL : 0 < L) :
+    firstEdgeOpenGiantClosedTopoLossData ≠
+      boxedTorusFullReachComplementTopoLossData L :=
+  firstEdgeOpenGiantClosedTopoLossData_ne_of_giantComponentEvent_zero_empty
+    (boxedTorusFullReachComplementTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+      hL)
+
+theorem firstEdgeOpenGiantClosedTopoLossData_ne_flatOnlyComplement_of_pos
+    {L : Nat} (hL : 0 < L) :
+    firstEdgeOpenGiantClosedTopoLossData ≠
+      boxedTorusFullReachFlatOnlyComplementTopoLossData L :=
+  firstEdgeOpenGiantClosedTopoLossData_ne_of_giantComponentEvent_zero_empty
+    (boxedTorusFullReachFlatOnlyComplementTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+      hL)
+
+theorem firstEdgeOpenGiantClosedTopoLossData_ne_allOpenComplement_of_pos
+    {L : Nat} (hL : 0 < L) :
+    firstEdgeOpenGiantClosedTopoLossData ≠
+      boxedTorusAllOpenComplementTopoLossData L :=
+  firstEdgeOpenGiantClosedTopoLossData_ne_of_giantComponentEvent_zero_empty
+    (boxedTorusAllOpenComplementTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+      hL)
+
+theorem firstEdgeOpenGiantClosedTopoLossData_ne_allOpenGiant_of_pos
+    {L : Nat} (hL : 0 < L) :
+    firstEdgeOpenGiantClosedTopoLossData ≠
+      boxedTorusAllOpenGiantTopoLossData L :=
+  firstEdgeOpenGiantClosedTopoLossData_ne_of_giantComponentEvent_zero_empty
+    (boxedTorusAllOpenGiantTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+      hL)
+
+theorem firstEdgeOpenGiantClosedTopoLossData_ne_allOpenPositive_of_pos
+    {L : Nat} (hL : 0 < L) :
+    firstEdgeOpenGiantClosedTopoLossData ≠
+      boxedTorusAllOpenPositiveTopoLossData L :=
+  firstEdgeOpenGiantClosedTopoLossData_ne_of_giantComponentEvent_zero_empty
+    (boxedTorusAllOpenPositiveTopoLossData_giantComponentEvent_zero_eq_empty_of_pos
+      hL)
+
+noncomputable def firstEdgeOpenGiantClosedTopoLossFamily
+    (_L : Nat) : WrongnessPercolationData :=
+  firstEdgeOpenGiantClosedTopoLossData
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_flat_lower_bound :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      firstEdgeOpenGiantClosedTopoLossFamily := by
+  refine ⟨(3 : Real) / 4, (1 : Real) / 8, ?_, ?_, ?_, ?_, ?_, 0, ?_⟩
+  · have hpc : harrisKestenCriticalProb = (1 : Real) / 2 := gap_harris_kesten
+    rw [hpc]
+    norm_num
+  · norm_num
+  · norm_num
+  · norm_num
+  · norm_num
+  · intro L _hL
+    change (1 : Real) / 8 <=
+      expectedTopoLossOnData firstEdgeOpenGiantClosedTopoLossData
+        (boxedTorusFlatGraphN L) ((3 : Real) / 4)
+    rw [firstEdgeOpenGiantClosedTopoLossData_expectedTopoLossOnData_eq]
+    norm_num
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_core :
+    BoxedTorusFlatFamilyCoreConclusion
+      firstEdgeOpenGiantClosedTopoLossFamily := by
+  refine ⟨firstEdgeOpenGiantClosedTopoLossFamily_flat_lower_bound, 0, ?_⟩
+  intro L _hL
+  exact ⟨WInfoOracleInterfacesOn_firstEdgeOpenGiantClosedTopoLossData,
+    firstEdgeOpenGiantClosedTopoLossData_oracleInfoNonzeroWitnessOn,
+    firstEdgeOpenGiantClosedTopoLossData_topoLossKernel_pointwise_bound,
+    firstEdgeOpenGiantClosedTopoLossData_giantEventFullClusterConclusion,
+    firstEdgeOpenGiantClosedTopoLossData_clusterCountExpectationBoundsConclusion⟩
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_mem_unitInterval :
+    forall L : Nat,
+      forall n : Nat,
+        forall omega : BondConfig (EdgeIdx n),
+          0 <= (firstEdgeOpenGiantClosedTopoLossFamily L).topoLossKernel n omega /\
+            (firstEdgeOpenGiantClosedTopoLossFamily L).topoLossKernel n omega <= 1 := by
+  intro L
+  exact firstEdgeOpenGiantClosedTopoLossData_topoLossKernel_mem_unitInterval
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_flat_lower_bound_at_three_quarters :
+    Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnData (firstEdgeOpenGiantClosedTopoLossFamily L)
+                (boxedTorusFlatGraphN L) ((3 : Real) / 4) := by
+  refine ⟨(1 : Real) / 8, by norm_num, by norm_num, 0, ?_⟩
+  intro L _hL
+  change (1 : Real) / 8 <=
+    expectedTopoLossOnData firstEdgeOpenGiantClosedTopoLossData
+      (boxedTorusFlatGraphN L) ((3 : Real) / 4)
+  rw [firstEdgeOpenGiantClosedTopoLossData_expectedTopoLossOnData_eq]
+  norm_num
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_giant_event_mass_lower_bound_at_three_quarters :
+    Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              percRestrictedExpectation (1 - ((3 : Real) / 4))
+                ((firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+                  (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real)) := by
+  refine ⟨(1 : Real) / 4, by norm_num, by norm_num, 0, ?_⟩
+  intro L _hL
+  change (1 : Real) / 4 <=
+    percRestrictedExpectation (1 - ((3 : Real) / 4))
+      (firstEdgeOpenEvent (boxedTorusFlatGraphN L))
+      (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) => (1 : Real))
+  rw [firstEdgeOpenEvent_mass_eq]
+  norm_num
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_full_reach_diagnostic :
+    Not (forall L : Nat,
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusFullReachComplementTopoLossData L) := by
+  intro h
+  exact firstEdgeOpenGiantClosedTopoLossData_ne_fullReachComplement_of_pos
+    (L := 1) (by norm_num) (h 1)
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_flat_only_diagnostic :
+    Not (forall L : Nat,
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusFullReachFlatOnlyComplementTopoLossData L) := by
+  intro h
+  exact firstEdgeOpenGiantClosedTopoLossData_ne_flatOnlyComplement_of_pos
+    (L := 1) (by norm_num) (h 1)
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_all_open_complement_diagnostic :
+    Not (forall L : Nat,
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusAllOpenComplementTopoLossData L) := by
+  intro h
+  exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenComplement_of_pos
+    (L := 1) (by norm_num) (h 1)
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_all_open_giant_diagnostic :
+    Not (forall L : Nat,
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusAllOpenGiantTopoLossData L) := by
+  intro h
+  exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenGiant_of_pos
+    (L := 1) (by norm_num) (h 1)
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_all_open_positive_diagnostic :
+    Not (forall L : Nat,
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusAllOpenPositiveTopoLossData L) := by
+  intro h
+  exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenPositive_of_pos
+    (L := 1) (by norm_num) (h 1)
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_pointwise_diagnostic_combo :
+    Not (forall L : Nat,
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusFullReachComplementTopoLossData L \/
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+      firstEdgeOpenGiantClosedTopoLossFamily L =
+        boxedTorusAllOpenComplementTopoLossData L) := by
+  intro h
+  rcases h 1 with hfull | hflat | hall_open
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_fullReachComplement_of_pos
+      (L := 1) (by norm_num) hfull
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_flatOnlyComplement_of_pos
+      (L := 1) (by norm_num) hflat
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenComplement_of_pos
+      (L := 1) (by norm_num) hall_open
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_eventually_pointwise_diagnostic_combo :
+    Not (Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusFullReachComplementTopoLossData L \/
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusAllOpenComplementTopoLossData L) := by
+  rintro ⟨L0, htail⟩
+  let L := max L0 1
+  have hL0 : L0 <= L := Nat.le_max_left L0 1
+  have hLpos : 0 < L := lt_of_lt_of_le (by norm_num) (Nat.le_max_right L0 1)
+  rcases htail L hL0 with hfull | hflat | hall_open
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_fullReachComplement_of_pos
+      (L := L) hLpos hfull
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_flatOnlyComplement_of_pos
+      (L := L) hLpos hflat
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenComplement_of_pos
+      (L := L) hLpos hall_open
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_eventually_pointwise_extended_diagnostic_combo :
+    Not (Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusFullReachComplementTopoLossData L \/
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusAllOpenComplementTopoLossData L \/
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusAllOpenGiantTopoLossData L \/
+        firstEdgeOpenGiantClosedTopoLossFamily L =
+          boxedTorusAllOpenPositiveTopoLossData L) := by
+  rintro ⟨L0, htail⟩
+  let L := max L0 1
+  have hL0 : L0 <= L := Nat.le_max_left L0 1
+  have hLpos : 0 < L := lt_of_lt_of_le (by norm_num) (Nat.le_max_right L0 1)
+  rcases htail L hL0 with hfull | hflat | hall_open | hall_giant | hall_positive
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_fullReachComplement_of_pos
+      (L := L) hLpos hfull
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_flatOnlyComplement_of_pos
+      (L := L) hLpos hflat
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenComplement_of_pos
+      (L := L) hLpos hall_open
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenGiant_of_pos
+      (L := L) hLpos hall_giant
+  · exact firstEdgeOpenGiantClosedTopoLossData_ne_allOpenPositive_of_pos
+      (L := L) hLpos hall_positive
+
+/-- Finite first-edge compatibility witness for the repaired
+random-supercritical bridge surface.
+
+This proves the repaired bridge contract is kernel-consistent and non-vacuous
+after the refuted giant-restricted lower-bound field is removed.  It is
+deliberately not a paper-semantic closure of the open topo target: the selected
+event is the first-edge-open cylinder event, not the genuine random finite
+`Z^2_L` giant-component event. -/
+noncomputable def firstEdgeOpenGiantClosedTopoLossRepairedBridge_current :
+    RandomSupercriticalZ2TopoClusterRepairedBridgeData where
+  graph := SimpleGraph.Z2LatticeGraph
+  graph_is_z2_lattice := rfl
+  family := firstEdgeOpenGiantClosedTopoLossFamily
+  flat_vertex_count := by
+    intro L
+    rw [boxedTorusFlatGraphN_succ, boxedTorusVertex_card]
+  flat_edge_count := by
+    intro L
+    rw [boxedTorusEdgeIdx_card, boxedTorusFlatGraphN_succ]
+  supercriticalProbability := (3 : Real) / 4
+  supercriticalProbability_above_pc := by
+    have hpc : harrisKestenCriticalProb = (1 : Real) / 2 := gap_harris_kesten
+    rw [hpc]
+    norm_num
+  supercriticalProbability_nonneg := by norm_num
+  supercriticalProbability_le_one := by norm_num
+  supercriticalProbability_lt_one := by norm_num
+  supercritical_flat_lower_bound :=
+    firstEdgeOpenGiantClosedTopoLossFamily_flat_lower_bound_at_three_quarters
+  supercritical_giant_event_mass_lower_bound :=
+    firstEdgeOpenGiantClosedTopoLossFamily_giant_event_mass_lower_bound_at_three_quarters
+  family_topoLossKernel_mem_unitInterval :=
+    firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_mem_unitInterval
+  family_core := firstEdgeOpenGiantClosedTopoLossFamily_core
+  not_full_reach_diagnostic :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_full_reach_diagnostic
+  not_flat_only_diagnostic :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_flat_only_diagnostic
+  not_all_open_complement_diagnostic :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_all_open_complement_diagnostic
+  not_all_open_giant_diagnostic :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_all_open_giant_diagnostic
+  not_all_open_positive_diagnostic :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_all_open_positive_diagnostic
+  not_pointwise_diagnostic_combo :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_pointwise_diagnostic_combo
+  not_eventually_pointwise_diagnostic_combo :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_eventually_pointwise_diagnostic_combo
+  not_eventually_pointwise_extended_diagnostic_combo :=
+    firstEdgeOpenGiantClosedTopoLossFamily_not_eventually_pointwise_extended_diagnostic_combo
+
+theorem exists_firstEdgeOpenGiantClosedTopoLossRepairedBridge_current :
+    Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData :=
+  ⟨firstEdgeOpenGiantClosedTopoLossRepairedBridge_current⟩
+
+theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_paper_support :
+    RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current :=
+  randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current
+
 /-- Current-contract obstruction for the random-supercritical `Z^2_L`
 topological-cluster bridge.
 

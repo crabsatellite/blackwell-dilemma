@@ -376,6 +376,14 @@ showing that each fixed flat-only member cannot satisfy the all-`n`
 above-threshold lower-bound interface; this is the kernel-checked reason the
 current family remains a diagnostic/all-open/flat-sequence frontier rather
 than the final random-supercritical carrier.
+The active repaired random-supercritical bridge surface is now known to be
+nonempty: `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current` instantiates
+`RandomSupercriticalZ2TopoClusterRepairedBridgeData` using the first-edge-open
+cylinder event, `p = 3/4`, a uniform flat expected-loss lower bound, a uniform
+giant-event-mass lower bound, unit-interval topo loss, and the repaired
+paper-support certificate. This is a compatibility calibration for the repaired
+interface, not the final paper theorem, because the witness is not the genuine
+random finite `Z^2_L` giant-component carrier.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,
