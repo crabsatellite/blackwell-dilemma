@@ -68,9 +68,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence lower-bound package, uniform eventual positive flat and pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence and giant-restricted lower-bound packages at that same parameter, uniform eventual positive flat/giant and pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
-        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, and its topological-loss lower-bound theorem at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
+        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, and flat plus giant-restricted topological-loss lower-bound theorems at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
 
 def openSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.open)
@@ -526,6 +526,13 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
           c ≤
             expectedTopoLossOnData (bridge.family L)
               (boxedTorusFlatGraphN L) bridge.supercriticalProbability
+  random_supercritical_z2_bridge_giant_lower_bound :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∃ c : ℝ, 0 < c ∧ c ≤ 1 ∧
+        ∃ L0 : ℕ, ∀ L : ℕ, L0 ≤ L →
+          c ≤
+            expectedTopoLossOnGiantOn (bridge.family L)
+              (boxedTorusFlatGraphN L) bridge.supercriticalProbability
   random_supercritical_z2_bridge_positive_flat_loss_witness :
     ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∃ L : ℕ,
@@ -537,6 +544,12 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
       ∃ L0 : ℕ, ∀ L : ℕ, L0 ≤ L →
         0 <
           expectedTopoLossOnData (bridge.family L)
+            (boxedTorusFlatGraphN L) bridge.supercriticalProbability
+  random_supercritical_z2_bridge_eventually_positive_giant_loss :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∃ L0 : ℕ, ∀ L : ℕ, L0 ≤ L →
+        0 <
+          expectedTopoLossOnGiantOn (bridge.family L)
             (boxedTorusFlatGraphN L) bridge.supercriticalProbability
   random_supercritical_z2_bridge_positive_loss_realisation_witness :
     ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
@@ -710,9 +723,10 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
 the current theorem surface.  The semantic target remains open until the
 explicit `RandomSupercriticalZ2TopoClusterBridgeData` contract is instantiated
 by a genuine random supercritical finite `Z2_L` theorem carrying a named
-`p > p_c` parameter and a lower-bound theorem at that same parameter, rather
-than by the finite all-open/full-reach/flat-sequence diagnostic carriers or by
-the current full-reach failure-complement support mechanism. -/
+`p > p_c` parameter, flat and giant-restricted lower-bound theorems at that
+same parameter, rather than by the finite all-open/full-reach/flat-sequence
+diagnostic carriers or by the current full-reach failure-complement support
+mechanism. -/
 noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :=
@@ -740,10 +754,14 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     randomSupercriticalZ2TopoClusterBridgeData_supercriticalProbability_domain
   random_supercritical_z2_bridge_named_lower_bound :=
     randomSupercriticalZ2TopoClusterBridgeData_supercritical_flat_lower_bound
+  random_supercritical_z2_bridge_giant_lower_bound :=
+    randomSupercriticalZ2TopoClusterBridgeData_supercritical_giant_lower_bound
   random_supercritical_z2_bridge_positive_flat_loss_witness :=
     randomSupercriticalZ2TopoClusterBridgeData_positive_flat_loss_witness
   random_supercritical_z2_bridge_eventually_positive_flat_loss :=
     randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_flat_loss
+  random_supercritical_z2_bridge_eventually_positive_giant_loss :=
+    randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_giant_loss
   random_supercritical_z2_bridge_positive_loss_realisation_witness :=
     randomSupercriticalZ2TopoClusterBridgeData_positive_loss_realisation_witness
   random_supercritical_z2_bridge_eventually_positive_loss_realisation_witness :=

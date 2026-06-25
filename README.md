@@ -46,9 +46,10 @@ now also machine-checks all-open/complement boxed-torus giant-event witnesses,
 the full-reach `Z²` boxed-torus bridge with its fixed-`L` all-`n` lower-bound
 interface, the explicit non-diagnostic
 `RandomSupercriticalZ2TopoClusterBridgeData` contract with a named
-supercritical probability and a lower-bound theorem at that same parameter,
-its derived uniform eventual positive flat-loss and pointwise positive-loss
-realisation witnesses, and the flat-sequence lower-bound package. It also gates the
+supercritical probability and flat plus giant-restricted lower-bound theorems
+at that same parameter, its derived uniform eventual positive flat-loss,
+giant-restricted positive-loss, and pointwise positive-loss realisation
+witnesses, and the flat-sequence lower-bound package. It also gates the
 current flat-only full-reach support
 mechanism: giant-restricted loss is zero, while the flat lower-bound loss is
 exactly half of the full-reach failure-event mass. The random-supercritical

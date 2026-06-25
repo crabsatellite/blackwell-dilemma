@@ -14056,9 +14056,9 @@ supercritical `Z^2_L` topo-cluster bridge.
 Unlike `Z2TopoClusterBridgeData`, this is not meant to package the current
 full-reach, flat-only, or all-open-complement diagnostic carriers.  It records
 the finite boxed-torus indexing facts, a named supercritical probability
-parameter, and the family-level theorem core that a genuine random
-supercritical `Z^2_L` carrier must provide before the open topo semantic target
-can be closed. -/
+parameter, flat and giant-restricted lower bounds at that same parameter, and
+the family-level theorem core that a genuine random supercritical `Z^2_L`
+carrier must provide before the open topo semantic target can be closed. -/
 structure RandomSupercriticalZ2TopoClusterBridgeData where
   graph : SimpleGraph (Fin 2 -> Int)
   graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
@@ -14084,6 +14084,14 @@ structure RandomSupercriticalZ2TopoClusterBridgeData where
           forall L : Nat, L0 <= L ->
             c <=
               expectedTopoLossOnData (family L)
+                (boxedTorusFlatGraphN L) supercriticalProbability
+  supercritical_giant_lower_bound :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnGiantOn (family L)
                 (boxedTorusFlatGraphN L) supercriticalProbability
   family_core : BoxedTorusFlatFamilyCoreConclusion family
   not_full_reach_diagnostic :
@@ -14152,6 +14160,21 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_supercritical_flat_lower_boun
                 (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
   bridge.supercritical_flat_lower_bound
 
+/-- Projection of the named giant-restricted lower bound at the bridge's own
+supercritical probability.  This prevents a future final bridge from closing
+the topo target with lower-bound mass that is not also supported by the
+paper's giant-component event at the same `p > p_c` parameter. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_supercritical_giant_lower_bound
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnGiantOn (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+  bridge.supercritical_giant_lower_bound
+
 /-- Non-vacuity projection from the final random-supercritical bridge: at the
 named supercritical probability, some flat boxed-torus member has strictly
 positive expected topological loss. -/
@@ -14176,6 +14199,21 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_flat_loss
           expectedTopoLossOnData (bridge.family L)
             (boxedTorusFlatGraphN L) bridge.supercriticalProbability := by
   rcases bridge.supercritical_flat_lower_bound with
+    ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
+  exact ⟨L0, fun L hL => lt_of_lt_of_le hc_pos (hlower L hL)⟩
+
+/-- Giant-restricted non-vacuity projection from the final
+random-supercritical bridge: at the named supercritical probability, every
+sufficiently large flat boxed-torus member has strictly positive expected loss
+on the bridge's giant-component event. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_giant_loss
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        0 <
+          expectedTopoLossOnGiantOn (bridge.family L)
+            (boxedTorusFlatGraphN L) bridge.supercriticalProbability := by
+  rcases bridge.supercritical_giant_lower_bound with
     ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
   exact ⟨L0, fun L hL => lt_of_lt_of_le hc_pos (hlower L hL)⟩
 
