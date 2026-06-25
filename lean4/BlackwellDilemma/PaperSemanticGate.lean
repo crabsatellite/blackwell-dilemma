@@ -68,9 +68,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract, flat-sequence lower-bound package, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract, flat-sequence lower-bound package, failure-mass support diagnostics, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
-        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier and its topological-loss lower-bound theorem." } ]
+        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier and its topological-loss lower-bound theorem, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
 
 def openSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.open)
@@ -528,6 +528,19 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     (∀ L n : ℕ, ∀ p : ℝ,
       expectedTopoLossOnGiantOn
         (boxedTorusFullReachFlatOnlyComplementTopoLossData L) n p = 0)
+  boxed_torus_flat_only_giant_loss_zero_current :
+    ∀ L n : ℕ, ∀ p : ℝ,
+      expectedTopoLossOnGiantOn
+        (boxedTorusFullReachFlatOnlyComplementTopoLossData L) n p = 0
+  boxed_torus_flat_only_flat_loss_failure_mass_current :
+    ∀ L : ℕ, ∀ p : ℝ,
+      expectedTopoLossOnData
+        (boxedTorusFullReachFlatOnlyComplementTopoLossData L)
+        (boxedTorusFlatGraphN L) p =
+      ((1 : ℝ) / 2) *
+        percRestrictedExpectation (1 - p)
+          (boxedTorusFullReachFailureEvent L)
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) => (1 : ℝ))
   boxed_torus_all_open_giant_full_cluster :
     ∀ L : ℕ,
       GiantComponentEventFullClusterConclusion
@@ -600,7 +613,8 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
 the current theorem surface.  The semantic target remains open until the
 explicit `RandomSupercriticalZ2TopoClusterBridgeData` contract is instantiated
 by a genuine random supercritical finite `Z2_L` theorem, rather than by the
-finite all-open/full-reach/flat-sequence diagnostic carriers. -/
+finite all-open/full-reach/flat-sequence diagnostic carriers or by the current
+full-reach failure-complement support mechanism. -/
 noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :=
@@ -658,6 +672,10 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion
   boxed_torus_flat_only_diagnostic_current :=
     boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic
+  boxed_torus_flat_only_giant_loss_zero_current :=
+    boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnGiantOn_eq_zero
+  boxed_torus_flat_only_flat_loss_failure_mass_current :=
+    boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass
   boxed_torus_all_open_giant_full_cluster :=
     boxedTorusAllOpenGiantTopoLossData_giantEventFullClusterConclusion
   boxed_torus_all_open_giant_envelope :=

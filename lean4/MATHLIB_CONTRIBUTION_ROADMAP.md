@@ -286,7 +286,11 @@ family/core/lower-bound projections through the bridge interface, and
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
-every index. R520 adds and gates the stronger full-reach bridge
+every index. It also gates
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass`,
+so the current lower-bound support is explicitly the full-reach failure
+complement, not the final random-supercritical `Z^2_L` event.
+R520 adds and gates the stronger full-reach bridge
 `boxedTorusFullReachZ2TopoClusterBridge_current`, its family/core/flat
 lower-bound projections, its fixed-`L`
 `UnitCompatibleAboveThresholdLowerBoundConclusion` theorem, and

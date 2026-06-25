@@ -537,6 +537,10 @@ family/core/lower-bound projections, plus
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`: the
 current flat-only family has zero total expected topo loss off the flattened
 boxed-torus index and zero giant-restricted topo loss at every index.  The
+payload also gates the flat-size support identity
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass`,
+so the current lower-bound evidence is explicitly tied to the full-reach
+failure complement rather than to a random supercritical `Z^2_L` theorem.  The
 same payload now also gates the stronger full-reach bridge
 `boxedTorusFullReachZ2TopoClusterBridge_current`, its family/core/flat lower-bound
 projections, the per-member all-`n`
