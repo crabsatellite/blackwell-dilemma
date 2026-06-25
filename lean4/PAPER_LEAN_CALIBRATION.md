@@ -316,6 +316,10 @@ domain is nonempty exactly when the repaired carrier proves
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
 so this threshold repair must expose a genuine sentimental welfare reversal
 inside the closed unit alpha range, not merely a replacement scaling carrier.
+It also gates
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
+which ties that reversal requirement to the closed-unit Part 6 paper-support
+certificate for the same repaired bridge.
 The theorem
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 threshold-certificate obstruction at the bridge-contract level. The remaining

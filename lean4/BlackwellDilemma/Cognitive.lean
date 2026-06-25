@@ -3858,6 +3858,99 @@ theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal
     bridge.closed_unit_alphaStar_lt_one
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Combined closed-unit Part 6 repair contract.
+
+This named Prop keeps the closed-unit paper-support certificate and the
+sentimental reversal forced by `alphaStar 0 p_c < 1` in the same bridge-level
+surface.  A future closed-unit repair cannot satisfy the graph/scaling/
+feasible-set/divergence support theorem while leaving the required sentimental
+reversal as an unrelated side fact. -/
+def Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) : Prop :=
+  (bridge.graph = SimpleGraph.Z2LatticeGraph ∧
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        bridge.scalingCarrier harrisKestenCriticalProb ∧
+      alphaStar 0 harrisKestenCriticalProb < 1 ∧
+      (∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α → α ≤ 1 →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              bridge.scalingCarrier p ≤ kappaStar p α) ∧
+      (forall alpha : Real,
+        alphaStar 0 harrisKestenCriticalProb < alpha -> alpha <= 1 ->
+          Exists fun delta : Real =>
+            0 < delta /\
+              forall p : Real, harrisKestenCriticalProb - delta < p ->
+                p < harrisKestenCriticalProb ->
+                  Exists fun kappa : Real =>
+                    0 < kappa /\
+                      BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                        mean_estimate_gap p kappa) ∧
+      (∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
+        α ≤ 1 ∧
+          ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+              p < harrisKestenCriticalProb →
+                M < kappaStar p α) ∧
+      (Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha /\
+        alpha <= 1 /\
+        (Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa /\
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) /\
+        (forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon /\
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha)) /\
+      Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha /\
+        alpha <= 1 /\
+        (Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                bridge.scalingCarrier p <= kappaStar p alpha) /\
+        (Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa /\
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) /\
+        (forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon /\
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha)) ∧
+    Exists fun α : ℝ =>
+      Exists fun β₁ : ℝ =>
+        Exists fun β₂ : ℝ =>
+          0 ≤ α ∧ α ≤ 1 ∧ β₁ ≤ β₂ ∧
+            agentWelfare AgentType.sentimental β₂ 0 α <
+              agentWelfare AgentType.sentimental β₁ 0 α
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Bridge-level closed-unit Part 6 support plus the required sentimental
+reversal witness. -/
+theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+      bridge := by
+  unfold Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+  exact ⟨
+    z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate
+      bridge,
+    z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required
+      bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier calibration: the concrete sentimental reward kernel is
 constant in `β`, so the monotonicity set in the current `alphaStar` definition
 is the whole closed unit interval and the supremum is `1`.

@@ -201,6 +201,10 @@ threshold certificate. It also gates
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
 so the closed-unit repair must provide a genuine sentimental welfare reversal
 inside the closed unit alpha range, not merely another scaling-carrier wrapper.
+The gate also checks
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
+which combines that reversal requirement with the closed-unit paper-support
+certificate on the same bridge-level contract.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 threshold-certificate obstruction at the bridge-contract level. The Part 6
 repair is therefore first to supply a nondegenerate `α`/feasible-set domain

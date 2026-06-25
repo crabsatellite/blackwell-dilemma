@@ -759,7 +759,11 @@ current carrier cannot even supply those closed-unit output witness shapes while
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
 which binds the `Z^2` graph identity, scaling divergence, threshold
 certificate, local domination field, near-`p_c` feasible-set nonemptiness, and
-same-`alpha` witness projection into one paper-support theorem.  It now also checks
+same-`alpha` witness projection into one paper-support theorem. It also gates
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
+so a closed-unit repair must carry the paper-support surface and the
+sentimental reversal forced by `alphaStar 0 p_c < 1` on the same bridge-level
+contract. It now also checks
 `z2LatticeEmbeddingLocalBridgeData_pointwise_paper_domain_certificate`,
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_pointwise_paper_domain_certificate`,
 and
