@@ -393,10 +393,13 @@ then proves that the base horizontal target is in the boxed-torus open-edge
 reachable set on the selected event. The same calibration now proves
 `firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant` and
 `firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero`,
-so the current witness has zero topological loss on its selected giant event.
-This is a reachability and zero-loss calibration for the repaired interface,
-not the final paper theorem, because the witness remains a one-edge cylinder
-rather than the genuine random finite `Z^2_L` giant-component carrier.
+then turns that into
+`firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`,
+so the current witness has zero topological loss on its selected giant event
+and cannot provide a positive uniform giant-restricted lower bound. This is a
+reachability and zero-loss calibration for the repaired interface, not the
+final paper theorem, because the witness remains a one-edge cylinder rather
+than the genuine random finite `Z^2_L` giant-component carrier.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,

@@ -87,8 +87,11 @@ shows that the base horizontal target is reachable in the boxed-torus open-edge
 reachable set on that event.  The same gate also proves
 `firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant` and
 `firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero`,
-so this witness has zero topological loss on its selected giant event and
-remains separate from the genuine random `Z2_L` giant-component theorem.  The
+then packages that as
+`firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`,
+so this witness has zero topological loss on its selected giant event, cannot
+support a positive uniform giant-restricted loss lower bound, and remains
+separate from the genuine random `Z2_L` giant-component theorem.  The
 threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation
@@ -636,9 +639,12 @@ shows that the base horizontal target lies in the corresponding open-edge
 reachable set. The gate also checks
 `firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant` and
 `firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero`,
+plus
+`firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`,
 so the current witness is explicitly zero on its selected giant-restricted
-topological loss. This proves the repaired contract is satisfiable and linked
-to the finite reachable-set semantics, but it is still deliberately a one-edge
+topological loss and cannot provide a positive uniform giant-restricted lower
+bound. This proves the repaired contract is satisfiable and linked to the
+finite reachable-set semantics, but it is still deliberately a one-edge
 cylinder event rather than the paper's random finite `Z2_L` giant-component
 carrier, so the paper semantic gate remains `closed=3 open=2`.
 

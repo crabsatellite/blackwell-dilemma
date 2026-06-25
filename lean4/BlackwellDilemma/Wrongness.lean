@@ -15854,6 +15854,23 @@ theorem firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTo
     firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_eq_zero
       L (boxedTorusFlatGraphN L) ((3 : Real) / 4)
 
+theorem firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters :
+    Not (Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnGiantOn
+                (firstEdgeOpenGiantClosedTopoLossFamily L)
+                (boxedTorusFlatGraphN L) ((3 : Real) / 4)) := by
+  rintro ⟨c, hc_pos, _hc_le_one, L0, htail⟩
+  have hle_zero :
+      c <= (0 : Real) := by
+    simpa [
+      firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero
+    ] using htail L0 (le_refl L0)
+  exact (not_lt_of_ge hle_zero) hc_pos
+
 theorem firstEdgeOpenGiantClosedTopoLossFamily_not_full_reach_diagnostic :
     Not (forall L : Nat,
       firstEdgeOpenGiantClosedTopoLossFamily L =
