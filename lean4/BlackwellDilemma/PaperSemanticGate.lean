@@ -61,7 +61,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local nonempty alpha-domain projection, unbounded-local paper-support certificate with pointwise, existential, and full same-alpha domination/feasibility/divergence support, unbounded output-witness and full-witness current obstructions, closed-unit local transfer, closed-unit feasible-set nonemptiness, existential witness projection, same-alpha closed-unit feasible/divergence certificates, full same-alpha closed-unit domination/feasibility/divergence witness, closed-unit output-witness and full-witness current obstructions, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, feasible-set nonemptiness, and same-alpha witness fields, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
+        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local nonempty alpha-domain projection, unbounded-local paper-support certificate with pointwise, existential, and full same-alpha domination/feasibility/divergence support, unbounded output-witness and full-witness current obstructions, closed-unit local transfer, closed-unit feasible-set nonemptiness, existential witness projection, same-alpha closed-unit feasible/divergence certificates, full same-alpha closed-unit domination/feasibility/divergence witness, closed-unit output-witness and full-witness current obstructions, a unified closed-unit current-obstruction certificate, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, feasible-set nonemptiness, and same-alpha witness fields, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
       closeRoute :=
         "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1 by proving alphaStar 0 p_c < 1 for the repaired carrier, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem." },
     { id := "topo_cluster_random_supercritical_z2",
@@ -463,6 +463,29 @@ structure Part6LatticeEmbeddingFrontierPayload where
           ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
             p < harrisKestenCriticalProb →
               M < kappaStar p α)
+  closed_unit_current_obstruction_certificate :
+    alphaStar 0 harrisKestenCriticalProb = 1 ∧
+      ¬ alphaStar 0 harrisKestenCriticalProb < 1 ∧
+      (¬ ∃ α : ℝ,
+        alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) ∧
+      (∀ scalingCarrier : ℝ → ℝ,
+        ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
+          α ≤ 1 ∧
+          (∃ δ : ℝ, 0 < δ ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+              p < harrisKestenCriticalProb →
+                scalingCarrier p ≤ kappaStar p α) ∧
+          (∃ δ : ℝ, 0 < δ ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+              p < harrisKestenCriticalProb →
+                ∃ κ : ℝ, 0 < κ ∧
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift α <=
+                    mean_estimate_gap p κ) ∧
+          (∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+              p < harrisKestenCriticalProb →
+                M < kappaStar p α)) ∧
+      Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)
   z2_lattice_embedding_bridge_transfer :
     ∀ _bridge : Z2LatticeEmbeddingBridgeData,
       ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
@@ -879,6 +902,8 @@ def part6_lattice_embedding_frontier_payload :
     not_closed_unit_part6_feasible_divergence_witness_current
   closed_unit_full_paper_domain_witness_current_obstruction :=
     not_closed_unit_part6_full_paper_domain_witness_current
+  closed_unit_current_obstruction_certificate :=
+    closed_unit_part6_current_obstruction_certificate
   z2_lattice_embedding_bridge_transfer :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
   z2_lattice_embedding_local_bridge_transfer :=

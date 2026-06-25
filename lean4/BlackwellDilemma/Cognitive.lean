@@ -3956,6 +3956,43 @@ theorem not_z2_lattice_embedding_closed_unit_local_bridge_current :
     bridge.closed_unit_alphaStar_lt_one
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Unified current-carrier obstruction certificate for the paper-bounded
+closed-unit Part 6 route.
+
+This certificate ties the degenerate threshold value, the failed strict
+threshold requirement, the empty closed-unit `α` domain, the impossible
+same-`α` full paper-domain witness, and the non-instantiability of the
+closed-unit local bridge into one audited theorem. -/
+theorem closed_unit_part6_current_obstruction_certificate :
+    alphaStar 0 harrisKestenCriticalProb = 1 ∧
+      ¬ alphaStar 0 harrisKestenCriticalProb < 1 ∧
+      (¬ ∃ α : ℝ,
+        alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) ∧
+      (∀ scalingCarrier : ℝ → ℝ,
+        ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
+          α ≤ 1 ∧
+          (∃ δ : ℝ, 0 < δ ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+              p < harrisKestenCriticalProb →
+                scalingCarrier p ≤ kappaStar p α) ∧
+          (∃ δ : ℝ, 0 < δ ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+              p < harrisKestenCriticalProb →
+                ∃ κ : ℝ, 0 < κ ∧
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift α <=
+                    mean_estimate_gap p κ) ∧
+          (∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+              p < harrisKestenCriticalProb →
+                M < kappaStar p α)) ∧
+      Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) := by
+  exact ⟨alphaStar_eq_one_current 0 harrisKestenCriticalProb,
+    not_closed_unit_alphaStar_lt_one_current,
+    not_closed_unit_alpha_above_alphaStar_current,
+    not_closed_unit_part6_full_paper_domain_witness_current,
+    not_z2_lattice_embedding_closed_unit_local_bridge_current⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Guard theorem for the current unbounded Part 6 output shape: on the current
     five-state Gaussian posterior carrier, the mean-estimate gap is strictly
     below `1` whenever `p >= 0` and `κ > 0`.
