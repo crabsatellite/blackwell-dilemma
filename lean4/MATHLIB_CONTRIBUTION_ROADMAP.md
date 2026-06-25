@@ -170,8 +170,13 @@ at the local-bridge layer. It now also gates
 `not_unbounded_part6_full_paper_domain_witness_current` and the combined
 `unbounded_part6_current_obstruction_certificate`, tying the near-`p_c` zero
 branch, unbounded output-witness obstructions, full same-`alpha` witness
-obstruction, and local-bridge obstruction into one audited theorem. The same
-gate now
+obstruction, and local-bridge obstruction into one audited theorem. It also
+names `UnboundedPart6FullPaperClosingSupport`,
+`ClosedUnitPart6FullPaperClosingSupport`, and
+`Part6FullPaperClosingSupport`, then proves
+`not_part6_full_paper_closing_support_current`; the current formalized surface
+therefore rules out both existing routes as complete paper-closing supports.
+The same gate now
 proves `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so a naive closed-unit
 paper-domain repair is also empty on the current scalar carrier. The

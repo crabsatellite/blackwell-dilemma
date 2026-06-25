@@ -4808,6 +4808,98 @@ theorem unbounded_part6_current_obstruction_certificate :
     not_z2_lattice_embedding_local_bridge_current⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Same-`alpha` Part 6 support needed to close the paper route through the
+current unbounded local carrier. -/
+def UnboundedPart6FullPaperClosingSupport
+    (scalingCarrier : Real -> Real) : Prop :=
+  Exists fun alpha : Real =>
+    alphaStar 0 harrisKestenCriticalProb < alpha /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              scalingCarrier p <= kappaStar p alpha) /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Same-`alpha` Part 6 support needed to close the paper route through the
+current closed-unit local carrier. -/
+def ClosedUnitPart6FullPaperClosingSupport
+    (scalingCarrier : Real -> Real) : Prop :=
+  Exists fun alpha : Real =>
+    alphaStar 0 harrisKestenCriticalProb < alpha /\
+      alpha <= 1 /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              scalingCarrier p <= kappaStar p alpha) /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The current Part 6 full paper-closing support surface: either the
+unbounded route or the closed-unit route supplies a same-`alpha` carrier,
+feasibility, and blow-up package. -/
+def Part6FullPaperClosingSupport : Prop :=
+  (Exists fun scalingCarrier : Real -> Real =>
+    UnboundedPart6FullPaperClosingSupport scalingCarrier) \/
+  (Exists fun scalingCarrier : Real -> Real =>
+    ClosedUnitPart6FullPaperClosingSupport scalingCarrier)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem not_unbounded_part6_full_paper_closing_support_current :
+    Not (Exists fun scalingCarrier : Real -> Real =>
+      UnboundedPart6FullPaperClosingSupport scalingCarrier) := by
+  rintro ⟨scalingCarrier, hsupport⟩
+  exact not_unbounded_part6_full_paper_domain_witness_current
+    scalingCarrier hsupport
+
+omit [DiagnosticSignalHypothesisData] in
+theorem not_closed_unit_part6_full_paper_closing_support_current :
+    Not (Exists fun scalingCarrier : Real -> Real =>
+      ClosedUnitPart6FullPaperClosingSupport scalingCarrier) := by
+  rintro ⟨scalingCarrier, hsupport⟩
+  exact not_closed_unit_part6_full_paper_domain_witness_current
+    scalingCarrier hsupport
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 cannot be closed by merely selecting either of the existing
+paper-support routes. A genuine repair must change the carrier/domain
+semantics that feed the paper theorem. -/
+theorem not_part6_full_paper_closing_support_current :
+    Not Part6FullPaperClosingSupport := by
+  intro hsupport
+  cases hsupport with
+  | inl hunbounded =>
+      exact not_unbounded_part6_full_paper_closing_support_current hunbounded
+  | inr hclosed =>
+      exact not_closed_unit_part6_full_paper_closing_support_current hclosed
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Paired current-route obstruction certificate for the open Part 6
 lattice-embedding frontier.
 

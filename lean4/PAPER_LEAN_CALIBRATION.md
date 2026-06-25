@@ -285,7 +285,13 @@ only at the local-bridge layer. It also gates
 `unbounded_part6_current_obstruction_certificate`, so the near-`p_c` zero
 branch, unbounded output-witness obstructions, full same-`alpha` witness
 obstruction, and local-bridge obstruction are checked as one current-route
-certificate. The gate also proves
+certificate. The gate also names the full current paper-closing surfaces
+`UnboundedPart6FullPaperClosingSupport`,
+`ClosedUnitPart6FullPaperClosingSupport`, and
+`Part6FullPaperClosingSupport`, and proves
+`not_part6_full_paper_closing_support_current`; thus the remaining Part 6 gap
+cannot be closed by merely selecting either existing current route. The gate
+also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The

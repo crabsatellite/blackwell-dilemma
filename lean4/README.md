@@ -795,6 +795,13 @@ It now also checks
 and
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_feasible_divergence_witness`,
 with the first and third also folded into the single paper-support certificates.
+The gate now also names the full paper-closing surfaces as
+`UnboundedPart6FullPaperClosingSupport`,
+`ClosedUnitPart6FullPaperClosingSupport`, and
+`Part6FullPaperClosingSupport`, and proves
+`not_part6_full_paper_closing_support_current`; this makes the current
+unbounded/closed-unit non-closure a direct Lean theorem about the paper support
+surface rather than only a collection of bridge-level failures.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` proves the current
 carrier cannot instantiate that bridge because its threshold certificate is
 impossible. The remaining Part 6 repair is therefore
