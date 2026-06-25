@@ -23,10 +23,11 @@ generic `sInf` transfer
 `kappaStar_p_monotone_of_mean_gap_antitone` and the future lattice certificate
 entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  It now also
 checks the kernel-pure one-edge Bernoulli monotone-coupling table, the
-finite-product monotone-coupling marginal data, and the standard `Z^2`
-lattice-coupling interface carrying both per-edge and finite-product data; the
-still-open Part 4 work is deriving the lattice mean-gap antitonicity from that
-domain/coupling carrier.  The Part 6
+finite-product monotone-coupling marginal data, the finite-box expectation
+monotonicity theorem for coordinatewise monotone observables, and the standard
+`Z^2` lattice-coupling interface carrying the per-edge, finite-product, and
+finite-box expectation layers; the still-open Part 4 work is deriving the
+lattice mean-gap antitonicity from that domain/coupling carrier.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the
 future embedding-certificate entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The topo

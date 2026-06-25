@@ -109,17 +109,28 @@ for every ordered pair `0 <= p_low <= p_high <= 1`, each lattice edge has a
 one-edge monotone Bernoulli coupling with correct lower/upper marginals and no
 mass on the forbidden open-to-closed transition, and every finite edge set has
 the product data with total mass one, both Bernoulli marginals, and zero mass
-on any configuration pair containing a forbidden open-to-closed edge. -/
+on any configuration pair containing a forbidden open-to-closed edge.  The
+same finite-box interface also carries stochastic monotonicity for every
+coordinatewise monotone observable. -/
 structure LatticeMonotoneCouplingData (d : ℕ) where
   edge_coupling :
     ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
       BlackwellDilemma.Infrastructure.BernoulliMonotoneCouplingData
         p_low p_high
   finite_product_coupling :
-    ∀ (E : Type*) [Fintype E] [DecidableEq E],
+    ∀ (E : Type) [Fintype E] [DecidableEq E],
       ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
         BlackwellDilemma.Infrastructure.BernoulliProductMonotoneCouplingMarginalData
           (E := E) p_low p_high
+  finite_product_expectation_mono :
+    ∀ (E : Type) [Fintype E] [DecidableEq E],
+      ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
+        ∀ f : (E -> Bool) -> ℝ,
+          BlackwellDilemma.Infrastructure.BoolConfigMonotone f ->
+            BlackwellDilemma.Infrastructure.bernoulliProductExpectation
+              p_low f ≤
+            BlackwellDilemma.Infrastructure.bernoulliProductExpectation
+              p_high f
 
 /-- Standard per-edge and finite-product monotone-coupling data for the
 integer lattice. -/
@@ -132,6 +143,10 @@ def standardLatticeMonotoneCouplingData (d : ℕ) :
     intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one
     exact BlackwellDilemma.Infrastructure.standardBernoulliProductMonotoneCouplingMarginalData
       (E := E) p_low p_high h_low_nonneg h_mono h_high_le_one
+  finite_product_expectation_mono := by
+    intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one f hf
+    exact BlackwellDilemma.Infrastructure.bernoulliProductExpectation_mono_of_monotone
+      (E := E) h_low_nonneg h_mono h_high_le_one f hf
 
 /-! ### Connection to the existing finite-edge bond weight framework
 

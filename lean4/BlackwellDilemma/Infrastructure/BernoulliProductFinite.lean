@@ -34,6 +34,9 @@ infrastructure does not yet exist in Mathlib for finite products on
   configuration pair containing a forbidden open-to-closed edge.
 * `standardBernoulliProductMonotoneCouplingMarginalData` — the same finite
   product with total mass one and both finite-product Bernoulli marginals.
+* `bernoulliProductExpectation_mono_of_monotone` — finite-box stochastic
+  monotonicity: every coordinatewise monotone real-valued observable has
+  non-decreasing Bernoulli-product expectation in `p`.
 
 ## Bridge to paper carrier `BondConfig` / `percExpectation`
 
@@ -399,6 +402,132 @@ def standardBernoulliProductMonotoneCouplingMarginalData
   upper_marginal :=
     bernoulliProductMonotoneCouplingFactor_upper_marginal p_low p_high
 
+/-! ### Finite-product stochastic monotonicity -/
+
+/-- A forbidden monotone-coupling transition: an edge that is open in the lower
+configuration and closed in the upper configuration. -/
+def ForbiddenOpenToClosed {E : Type*} (lower upper : E -> Bool) : Prop :=
+  Exists (fun e : E => And (lower e = true) (upper e = false))
+
+/-- Coordinatewise order on Boolean configurations, with `false < true`. -/
+def BoolConfigLe {E : Type*} (lower upper : E -> Bool) : Prop :=
+  (e : E) -> lower e = true -> upper e = true
+
+/-- A real-valued observable on Boolean configurations is monotone if it is
+non-decreasing in the coordinatewise order. -/
+def BoolConfigMonotone {E : Type*} (f : (E -> Bool) -> ℝ) : Prop :=
+  (lower : E -> Bool) -> (upper : E -> Bool) ->
+    BoolConfigLe lower upper -> f lower ≤ f upper
+
+/-- Bernoulli-product expectation of a finite Boolean-configuration
+observable. -/
+noncomputable def bernoulliProductExpectation
+    {E : Type*} [Fintype E] [DecidableEq E]
+    (p : ℝ) (f : (E -> Bool) -> ℝ) : ℝ :=
+  Finset.univ.sum (fun ω : E -> Bool =>
+    bernoulliWeight p Finset.univ ω * f ω)
+
+/-- If no forbidden open-to-closed edge exists, then the lower configuration is
+coordinatewise below the upper configuration. -/
+theorem boolConfigLe_of_not_forbiddenOpenToClosed
+    {E : Type*} {lower upper : E -> Bool}
+    (hno : Not (ForbiddenOpenToClosed lower upper)) :
+    BoolConfigLe lower upper := by
+  intro e h_lower
+  cases h_upper : upper e with
+  | false =>
+      exfalso
+      exact hno (Exists.intro e (And.intro h_lower h_upper))
+  | true =>
+      rfl
+
+/-- A finite-product monotone coupling puts enough mass on ordered pairs to
+compare a monotone observable term-by-term. -/
+theorem bernoulliProductCoupling_term_mono
+    {E : Type*} [Fintype E] [DecidableEq E]
+    {p_low p_high : ℝ}
+    (c : BernoulliProductMonotoneCouplingMarginalData
+      (E := E) p_low p_high)
+    (f : (E -> Bool) -> ℝ) (hf : BoolConfigMonotone f)
+    (lower upper : E -> Bool) :
+    c.factor lower upper * f lower ≤ c.factor lower upper * f upper := by
+  classical
+  by_cases hle : BoolConfigLe lower upper
+  case pos =>
+    exact mul_le_mul_of_nonneg_left (hf lower upper hle)
+      (c.nonneg lower upper)
+  case neg =>
+    have hforbidden : ForbiddenOpenToClosed lower upper := by
+      by_contra hno
+      exact hle (boolConfigLe_of_not_forbiddenOpenToClosed hno)
+    have hzero := c.no_forbidden_open_to_closed_edge lower upper hforbidden
+    rw [hzero]
+    simp
+
+/-- Finite-product stochastic monotonicity from an explicit finite-product
+monotone coupling with correct Bernoulli marginals. -/
+theorem bernoulliProductExpectation_mono_of_monotone_coupling
+    {E : Type*} [Fintype E] [DecidableEq E]
+    {p_low p_high : ℝ}
+    (c : BernoulliProductMonotoneCouplingMarginalData
+      (E := E) p_low p_high)
+    (f : (E -> Bool) -> ℝ) (hf : BoolConfigMonotone f) :
+    bernoulliProductExpectation p_low f ≤
+      bernoulliProductExpectation p_high f := by
+  classical
+  unfold bernoulliProductExpectation
+  have hleft :
+      Finset.univ.sum (fun lower : E -> Bool =>
+        bernoulliWeight p_low Finset.univ lower * f lower) =
+      Finset.univ.sum (fun lower : E -> Bool =>
+        Finset.univ.sum (fun upper : E -> Bool =>
+          c.factor lower upper * f lower)) := by
+    apply Finset.sum_congr rfl
+    intro lower _hlower
+    rw [Eq.symm (c.lower_marginal lower)]
+    rw [Finset.sum_mul]
+  have hright :
+      Finset.univ.sum (fun upper : E -> Bool =>
+        bernoulliWeight p_high Finset.univ upper * f upper) =
+      Finset.univ.sum (fun lower : E -> Bool =>
+        Finset.univ.sum (fun upper : E -> Bool =>
+          c.factor lower upper * f upper)) := by
+    calc
+      Finset.univ.sum (fun upper : E -> Bool =>
+        bernoulliWeight p_high Finset.univ upper * f upper)
+          = Finset.univ.sum (fun upper : E -> Bool =>
+              Finset.univ.sum (fun lower : E -> Bool =>
+                c.factor lower upper * f upper)) := by
+              apply Finset.sum_congr rfl
+              intro upper _hupper
+              rw [Eq.symm (c.upper_marginal upper)]
+              rw [Finset.sum_mul]
+      _ = Finset.univ.sum (fun lower : E -> Bool =>
+            Finset.univ.sum (fun upper : E -> Bool =>
+              c.factor lower upper * f upper)) := by
+              rw [Finset.sum_comm]
+  rw [hleft, hright]
+  apply Finset.sum_le_sum
+  intro lower _hlower
+  apply Finset.sum_le_sum
+  intro upper _hupper
+  exact bernoulliProductCoupling_term_mono c f hf lower upper
+
+/-- Standard finite-product Bernoulli expectation monotonicity for every
+coordinatewise monotone observable. -/
+theorem bernoulliProductExpectation_mono_of_monotone
+    {E : Type*} [Fintype E] [DecidableEq E]
+    {p_low p_high : ℝ}
+    (h_low_nonneg : 0 ≤ p_low) (h_mono : p_low ≤ p_high)
+    (h_high_le_one : p_high ≤ 1)
+    (f : (E -> Bool) -> ℝ) (hf : BoolConfigMonotone f) :
+    bernoulliProductExpectation p_low f ≤
+      bernoulliProductExpectation p_high f := by
+  exact bernoulliProductExpectation_mono_of_monotone_coupling
+    (standardBernoulliProductMonotoneCouplingMarginalData
+      (E := E) p_low p_high h_low_nonneg h_mono h_high_le_one)
+    f hf
+
 /-- **Bernoulli weight non-negativity** for `p ∈ [0, 1]`. -/
 theorem bernoulliWeight_nonneg
     {E : Type*} (E_finset : Finset E) {p : ℝ}
@@ -451,5 +580,8 @@ theorem bernoulliWeight_pos
 #print axioms bernoulliProductMonotoneCouplingFactor_lower_marginal
 #print axioms bernoulliProductMonotoneCouplingFactor_upper_marginal
 #print axioms standardBernoulliProductMonotoneCouplingMarginalData
+#print axioms boolConfigLe_of_not_forbiddenOpenToClosed
+#print axioms bernoulliProductExpectation_mono_of_monotone_coupling
+#print axioms bernoulliProductExpectation_mono_of_monotone
 
 end BlackwellDilemma.Infrastructure

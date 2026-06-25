@@ -66,10 +66,14 @@ Part 4 payload. R521 adds the finite-edge product marginal data
 `standardBernoulliProductMonotoneCouplingMarginalData`, with total mass one,
 both finite-product Bernoulli marginals, non-negative mass, and zero mass on
 any configuration pair containing a forbidden open-to-closed edge, and threads
-it through the standard lattice data package and Part 4 payload. R517 adds
+it through the standard lattice data package and Part 4 payload. R522 adds
+`bernoulliProductExpectation_mono_of_monotone`, proving finite-box stochastic
+monotonicity for every coordinatewise monotone real-valued observable under
+`0 <= p_low <= p_high <= 1`, and gates that theorem in the standard lattice
+data package and Part 4 payload. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
-carry that per-edge plus finite-product monotone-coupling interface before proving the
+carry that per-edge plus finite-product monotone-coupling/expectation interface before proving the
 domain-derived antitonicity of `mean_estimate_gap` in `p`. The semantic target
 remains open because no full lattice/percolation certificate deriving the
 mean-gap antitonicity from that domain/coupling carrier has been instantiated.
