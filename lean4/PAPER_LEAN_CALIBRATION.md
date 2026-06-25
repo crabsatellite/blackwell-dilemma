@@ -267,8 +267,9 @@ scaling carrier can satisfy the present local bridge. The gate also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The
-closed-unit local bridge contract now carries an explicit nonempty-domain
-witness, and the bounded transfer theorem
+closed-unit local bridge contract now carries both an explicit
+`alphaStar 0 p_c < 1` threshold certificate and a nonempty-domain witness, and
+the bounded transfer theorem
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge`
 now states the paper-facing divergence conclusion for any future instance on
 `alphaStar 0 p_c < α <= 1`. The companion theorem
@@ -279,7 +280,7 @@ divergence witness. The gate also checks
 domain is nonempty exactly when the repaired carrier proves
 `alphaStar 0 p_c < 1`. The theorem
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
-obstruction at the bridge-contract level. The remaining Harris-Kesten scaling
+threshold-certificate obstruction at the bridge-contract level. The remaining Harris-Kesten scaling
 work is therefore first to supply a nondegenerate `α`/feasible-set domain
 certificate, including `alphaStar 0 p_c < 1` for the closed-unit route, then
 instantiate that repaired bridge with a paper-faithful carrier
@@ -524,7 +525,8 @@ theorem, prototype divergence theorem, lower-envelope dominance theorem, and
 the named plus generic obstruction theorems, including the current
 local-bridge impossibility theorem and current `alphaStar = 1` bounded-domain
 degeneracy, including the closed-unit local bridge contract with an explicit
-nonempty-domain witness, its bounded transfer theorem, and its existential
+`alphaStar 0 p_c < 1` threshold certificate, nonempty-domain witness, bounded
+transfer theorem, and existential
 paper-domain divergence witness projection.
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete

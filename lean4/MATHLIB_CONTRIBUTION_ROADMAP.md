@@ -149,8 +149,8 @@ the concrete `kappaStar p 2` branch is zero on `p >= 0`. The same gate now
 proves `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so a naive closed-unit
 paper-domain repair is also empty on the current scalar carrier. The
-closed-unit local bridge contract now makes the nonempty-domain requirement
-explicit, and
+closed-unit local bridge contract now makes both the `alphaStar 0 p_c < 1`
+threshold certificate and the nonempty-domain requirement explicit, and
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge`
 now provides the bounded transfer theorem for any future instance on
 `alphaStar 0 p_c < α <= 1`, and
@@ -161,7 +161,7 @@ divergence witness. The gate also checks
 closed-unit nonempty-domain repair to a positive `alphaStar 0 p_c < 1`
 threshold certificate.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
-obstruction at the bridge-contract level. The Part 6 repair is therefore first
+threshold-certificate obstruction at the bridge-contract level. The Part 6 repair is therefore first
 to supply a nondegenerate `α`/feasible-set domain certificate, including
 `alphaStar 0 p_c < 1` for the closed-unit route, then instantiate that repaired
 bridge with a paper-faithful carrier whose domination theorem

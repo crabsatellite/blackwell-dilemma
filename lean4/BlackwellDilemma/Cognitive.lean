@@ -2070,9 +2070,9 @@ structure Z2LatticeEmbeddingLocalBridgeData where
             scalingCarrier p ≤ kappaStar p α
 
 /-- Paper-bounded closed-unit variant of the local Part 6 `Z²`
-lattice-embedding bridge.  The explicit nonempty-domain witness prevents the
-closed-unit repair from being satisfied vacuously on a carrier where
-`alphaStar 0 p_c = 1`. -/
+lattice-embedding bridge.  The explicit `alphaStar 0 p_c < 1` certificate and
+nonempty-domain witness prevent the closed-unit repair from being satisfied
+vacuously on a carrier where `alphaStar 0 p_c = 1`. -/
 structure Z2LatticeEmbeddingClosedUnitLocalBridgeData where
   graph : SimpleGraph (Fin 2 → ℤ)
   graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
@@ -2080,6 +2080,8 @@ structure Z2LatticeEmbeddingClosedUnitLocalBridgeData where
   scaling_diverges :
     BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
       scalingCarrier harrisKestenCriticalProb
+  closed_unit_alphaStar_lt_one :
+    alphaStar 0 harrisKestenCriticalProb < 1
   nonempty_closed_unit_alpha_domain :
     ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
   scaling_dominates_kappa_near_pc :
@@ -3355,18 +3357,27 @@ theorem not_closed_unit_alpha_above_alphaStar_current :
   linarith
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the exact closed-unit threshold
+certificate required by the repaired Part 6 bridge. -/
+theorem not_closed_unit_alphaStar_lt_one_current :
+    Not (alphaStar 0 harrisKestenCriticalProb < 1) := by
+  rw [alphaStar_eq_one_current]
+  norm_num
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the closed-unit local Part 6 bridge.
 
-The closed-unit local bridge carries an explicit nonempty-domain witness for
+The closed-unit local bridge carries an explicit `alphaStar 0 p_c < 1`
+threshold certificate and a nonempty-domain witness for
 `α > alphaStar 0 p_c` and `α ≤ 1`.  Since the current scalar carrier has
-`alphaStar 0 p_c = 1`, that witness is impossible; hence this bridge contract
-cannot be instantiated without first replacing the degenerate threshold
-carrier/domain certificate. -/
+`alphaStar 0 p_c = 1`, that threshold certificate is impossible; hence this
+bridge contract cannot be instantiated without first replacing the degenerate
+threshold carrier/domain certificate. -/
 theorem not_z2_lattice_embedding_closed_unit_local_bridge_current :
     Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) := by
   rintro ⟨bridge⟩
-  exact not_closed_unit_alpha_above_alphaStar_current
-    bridge.nonempty_closed_unit_alpha_domain
+  exact not_closed_unit_alphaStar_lt_one_current
+    bridge.closed_unit_alphaStar_lt_one
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Guard theorem for the Harris-Kesten lower-envelope route: on the current

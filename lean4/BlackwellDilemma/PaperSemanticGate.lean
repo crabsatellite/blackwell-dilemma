@@ -61,9 +61,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current global scaling-transfer payload, local-domination transfer, closed-unit local transfer and existential witness projection, named candidate obstructions, generic positive-at-zero global-carrier obstruction, current local-bridge impossibility theorem, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
+        "The current global scaling-transfer payload, local-domination transfer, closed-unit local transfer and existential witness projection, named candidate obstructions, generic positive-at-zero global-carrier obstruction, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
       closeRoute :=
-        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem." },
+        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1 by proving alphaStar 0 p_c < 1 for the repaired carrier, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem." },
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
@@ -360,6 +360,8 @@ structure Part6LatticeEmbeddingFrontierPayload where
     Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)
   alphaStar_current_eq_one_at_pc :
     alphaStar 0 harrisKestenCriticalProb = 1
+  closed_unit_alphaStar_lt_one_current_obstruction :
+    ¬ alphaStar 0 harrisKestenCriticalProb < 1
   closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one :
     (Exists fun α : ℝ =>
       alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) ↔
@@ -388,6 +390,9 @@ structure Part6LatticeEmbeddingFrontierPayload where
             ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
               p < harrisKestenCriticalProb →
                 M < kappaStar p α
+  z2_lattice_embedding_closed_unit_local_bridge_alphaStar_lt_one :
+    ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
+      alphaStar 0 harrisKestenCriticalProb < 1
   z2_lattice_embedding_closed_unit_local_bridge_witness :
     ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
       ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
@@ -406,8 +411,8 @@ nonempty-domain obstruction is repaired with a paper-faithful
 lattice/percolation carrier with divergence and near-`p_c` domination; if the
 closed-unit route is repaired, the payload now also checks that it yields an
 actual paper-domain divergence witness rather than only a pointwise transfer
-surface, and that closed-unit domain nonemptiness is exactly the certificate
-`alphaStar 0 p_c < 1`. -/
+surface, that the bridge explicitly carries `alphaStar 0 p_c < 1`, and that
+closed-unit domain nonemptiness is exactly that same certificate. -/
 def part6_lattice_embedding_frontier_payload :
     Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_graph_standard := rfl
@@ -439,6 +444,8 @@ def part6_lattice_embedding_frontier_payload :
     not_z2_lattice_embedding_closed_unit_local_bridge_current
   alphaStar_current_eq_one_at_pc :=
     alphaStar_eq_one_current 0 harrisKestenCriticalProb
+  closed_unit_alphaStar_lt_one_current_obstruction :=
+    not_closed_unit_alphaStar_lt_one_current
   closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one :=
     closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one
   closed_unit_alpha_domain_empty_current :=
@@ -449,6 +456,8 @@ def part6_lattice_embedding_frontier_payload :
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
   z2_lattice_embedding_closed_unit_local_bridge_transfer :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
+  z2_lattice_embedding_closed_unit_local_bridge_alphaStar_lt_one :=
+    fun bridge => bridge.closed_unit_alphaStar_lt_one
   z2_lattice_embedding_closed_unit_local_bridge_witness :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness
 

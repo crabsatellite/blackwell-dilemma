@@ -69,8 +69,9 @@ domain empty on the present scalar carrier. The remaining repair is therefore
 to supply a nondegenerate Part 6 `α`/feasible-set domain certificate, concretely
 including an `alphaStar 0 p_c < 1` certificate for this closed-unit route, before
 instantiating a `Z²` bridge with a real percolation scaling carrier. The
-closed-unit local bridge contract now carries that nonempty-domain witness
-explicitly, the gate proves the current carrier cannot satisfy it, and the
+closed-unit local bridge contract now carries that threshold certificate and
+nonempty-domain witness explicitly, the gate proves the current carrier cannot
+satisfy the threshold certificate, and the
 closed-unit transfer plus existential witness theorem is ready for any repaired
 nonempty-domain instance.
 See
