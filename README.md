@@ -51,9 +51,11 @@ until that contract is instantiated by the real finite-lattice carrier. The
 contract now machine-excludes the current full-reach, flat-only, and
 all-open-complement diagnostic families. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
-domination interface and a repaired local near-`p_c` domination transfer, so
-the remaining repair is to instantiate the local `Z²` bridge with a real
-percolation scaling carrier rather than to prove the transfer theorem itself.
+domination interface, a repaired local near-`p_c` domination transfer, and the
+current local-bridge impossibility theorem. The remaining repair is therefore
+to fix the Part 6 `α` domain or add an explicit feasible-set/nonempty-domain
+certificate before instantiating a `Z²` bridge with a real percolation scaling
+carrier.
 See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the

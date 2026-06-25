@@ -142,16 +142,22 @@ neither candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
 transfer/obstruction frontier. R521 adds the repaired local-domination
 transfer `gap_cognitive_threshold_part6_local` and the local bridge transfer
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`; the
-Part 6 repair is therefore to instantiate that local bridge with a
-paper-faithful carrier whose domination theorem holds near `p_c`, before
+current gate now also proves `not_z2_lattice_embedding_local_bridge_current`.
+Thus the local transfer is usable, but the present local bridge contract is
+still uninhabitable because its unbounded `α` domain includes `α = 2`, where
+the concrete `kappaStar p 2` branch is zero on `p >= 0`. The Part 6 repair is
+therefore first to repair the bridge's `α` domain or add an explicit
+feasible-set/nonempty-domain certificate, then instantiate that repaired bridge
+with a paper-faithful carrier whose domination theorem holds near `p_c`, before
 there can be a live Cat 2 percolation-universality closure target. R518 adds
 `Z2LatticeEmbeddingBridgeData`, making that future
 certificate shape explicit in Lean: it must name `SimpleGraph.Z2LatticeGraph`
 and provide a replacement scaling carrier with both the `DivergesAtBelowAtTop`
 proof and the high-α domination theorem consumed by
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`; R521's
-`Z2LatticeEmbeddingLocalBridgeData` is the preferred repaired certificate
-shape because the divergence proof only consumes near-`p_c` domination. The
+local-transfer layer remains preferred because the divergence proof only
+consumes near-`p_c` domination, but its bridge data needs the domain repair
+above before it can be a final certificate shape. The
 thirty-five dead-end
 ledger markers are tracked as `notInput`, not as theorem targets. Main paper
 theorem `#print axioms` output must reduce to Lean/Mathlib kernel axioms plus

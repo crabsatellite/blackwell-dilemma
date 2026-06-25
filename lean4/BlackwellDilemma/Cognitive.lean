@@ -3449,6 +3449,73 @@ theorem not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling :
   exact not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier
     criticalHyperbolicScaling criticalHyperbolicScaling_pos_at_zero
 
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the repaired local Part 6 bridge.
+
+The local bridge no longer requires domination at `p = 0`, but its current
+signature still quantifies over every `α ≥ α*(0,p_c)`.  The point `α = 2`
+lies in that range, and on the current concrete carrier
+`kappaStar p 2 = 0` for every `p ≥ 0`.  Any divergent scaling carrier is
+positive on a deleted left-neighbourhood of `p_c`, so it cannot be dominated
+by `kappaStar · 2` there.
+
+This shows the remaining Part 6 repair is not merely to instantiate the local
+bridge: the bridge statement itself needs the paper-faithful `α` domain or an
+explicit feasible-set/nonempty-domain premise. -/
+theorem not_z2_lattice_embedding_local_bridge_current :
+    Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) := by
+  rintro ⟨bridge⟩
+  have h_alpha_le_one :
+      alphaStar 0 harrisKestenCriticalProb <= 1 :=
+    (gap_sentimental_immunity 0 harrisKestenCriticalProb (le_refl 0)).right.left
+  have h_alpha_le_two :
+      alphaStar 0 harrisKestenCriticalProb <= 2 := by
+    linarith
+  rcases bridge.scaling_diverges 0 with
+    ⟨ε, hε_pos, hε_near⟩
+  rcases bridge.scaling_dominates_kappa_near_pc
+      2 h_alpha_le_two with
+    ⟨δ, hδ_pos, hδ_near⟩
+  let ρ : Real := min (min ε δ) (1 / 4)
+  let p : Real := harrisKestenCriticalProb - ρ / 2
+  have hρ_pos : 0 < ρ := by
+    dsimp [ρ]
+    exact lt_min (lt_min hε_pos hδ_pos) (by norm_num)
+  have hρ_le_ε : ρ <= ε := by
+    dsimp [ρ]
+    exact le_trans (min_le_left (min ε δ) (1 / 4))
+      (min_le_left ε δ)
+  have hρ_le_δ : ρ <= δ := by
+    dsimp [ρ]
+    exact le_trans (min_le_left (min ε δ) (1 / 4))
+      (min_le_right ε δ)
+  have hρ_le_quarter : ρ <= (1 : Real) / 4 := by
+    dsimp [ρ]
+    exact min_le_right (min ε δ) (1 / 4)
+  have hp_left_ε : harrisKestenCriticalProb - ε < p := by
+    dsimp [p]
+    have hρ_half_lt_ε : ρ / 2 < ε := by nlinarith
+    linarith
+  have hp_left_δ : harrisKestenCriticalProb - δ < p := by
+    dsimp [p]
+    have hρ_half_lt_δ : ρ / 2 < δ := by nlinarith
+    linarith
+  have hp_right : p < harrisKestenCriticalProb := by
+    dsimp [p]
+    nlinarith
+  have hp_nonneg : 0 <= p := by
+    dsimp [p]
+    unfold harrisKestenCriticalProb
+    nlinarith
+  have hscale_pos : 0 < bridge.scalingCarrier p :=
+    hε_near p hp_left_ε hp_right
+  have hscale_le : bridge.scalingCarrier p <= kappaStar p 2 :=
+    hδ_near p hp_left_δ hp_right
+  have hkappa_zero : kappaStar p 2 = 0 :=
+    kappaStar_two_eq_zero_of_nonneg_p hp_nonneg
+  rw [hkappa_zero] at hscale_le
+  linarith
+
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality
 
