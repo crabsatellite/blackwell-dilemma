@@ -676,6 +676,12 @@ The existential closing target is now also named as
 full-support repaired bridge inhabits this route, that the route contains an
 actual repaired bridge and full-support witness, and that the old over-strong
 contract would project to it.
+It also gates
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output` and
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
+so a future route must expose both the missing giant-loss closing field and the
+same-tail flat/giant/mass/positive-realisation output rather than merely an
+existential wrapper.
 It also gates the combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, which
 keeps the old over-strong contract obstruction and the repaired first-edge

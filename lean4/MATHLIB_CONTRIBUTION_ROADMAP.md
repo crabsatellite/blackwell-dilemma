@@ -452,6 +452,12 @@ The final existential route is now named as
 full-support repaired bridges inhabit it, that the route exposes a repaired
 bridge and full-support witness, and that the old over-strong contract would
 project to it.
+It also gates
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output` and
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
+so the future route must project to the missing giant-loss field and to the
+same-tail flat/giant/mass/positive-realisation package before the remaining
+Mathlib/percolation work can count as paper-semantic closure.
 The combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate` now gates
 both the old over-strong bridge-contract obstruction and that repaired

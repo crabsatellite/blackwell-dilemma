@@ -604,6 +604,11 @@ The existential closing route is now also named as
 full-support repaired bridges inhabit it, that it exposes both repaired-bridge
 nonemptiness and the full-support witness, and that the old over-strong bridge
 contract would project to this route.
+It also proves
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output` and
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
+so the route must project to the missing giant-loss closing field and to one
+same-tail flat/giant/mass/positive-realisation output package.
 The topo current frontier is also packaged as
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
 the old over-strong bridge-contract obstruction with the repaired first-edge

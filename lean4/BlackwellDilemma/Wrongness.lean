@@ -15830,6 +15830,49 @@ theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_witness :
   intro hroute
   exact hroute
 
+/-- The full topo paper-closing route exposes the repaired giant-loss closing
+field, not only an inhabited repaired bridge. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge := by
+  rintro ⟨bridge, hsupport⟩
+  exact ⟨bridge, hsupport.2.1⟩
+
+/-- The full topo paper-closing route exposes the combined same-tail support
+output: one positive constant and one size threshold simultaneously support
+flat expected loss, giant-restricted expected loss, giant-event mass, and an
+in-giant positive-loss realisation. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        Exists fun c : Real =>
+          0 < c /\ c <= 1 /\
+            Exists fun L0 : Nat =>
+              forall L : Nat, L0 <= L ->
+                c <=
+                  expectedTopoLossOnData (bridge.family L)
+                    (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                c <=
+                  expectedTopoLossOnGiantOn (bridge.family L)
+                    (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                c <=
+                  percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                    ((bridge.family L).giantComponentEvent
+                      (boxedTorusFlatGraphN L))
+                    (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                      (1 : Real)) /\
+                Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  Membership.mem
+                    ((bridge.family L).giantComponentEvent
+                      (boxedTorusFlatGraphN L)) omega /\
+                  0 <
+                    (bridge.family L).topoLossKernel
+                      (boxedTorusFlatGraphN L) omega := by
+  rintro ⟨bridge, hsupport⟩
+  exact ⟨bridge, hsupport.2.2⟩
+
 /-- The old final bridge contract would project to the full repaired
 paper-closing support surface.  Since that old contract is kernel-refuted, this
 theorem is used only to pin down the exact support obligations a repaired
