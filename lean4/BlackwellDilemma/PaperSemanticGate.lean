@@ -68,7 +68,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence lower-bound package, eventual positive flat and pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence lower-bound package, uniform eventual positive flat and pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
         "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, and its topological-loss lower-bound theorem at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
 
@@ -525,6 +525,15 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
       ∃ L0 : ℕ, ∀ L : ℕ, L0 ≤ L →
         ∃ ω : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)),
           0 < (bridge.family L).topoLossKernel (boxedTorusFlatGraphN L) ω
+  random_supercritical_z2_bridge_eventually_uniform_lower_bound_and_loss_realisation :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∃ c : ℝ, 0 < c ∧ c ≤ 1 ∧
+        ∃ L0 : ℕ, ∀ L : ℕ, L0 ≤ L →
+          c ≤
+            expectedTopoLossOnData (bridge.family L)
+              (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+          ∃ ω : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)),
+            0 < (bridge.family L).topoLossKernel (boxedTorusFlatGraphN L) ω
   random_supercritical_z2_bridge_not_full_reach_diagnostic :
     ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∀ L : Nat, bridge.family L =
@@ -717,6 +726,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     randomSupercriticalZ2TopoClusterBridgeData_positive_loss_realisation_witness
   random_supercritical_z2_bridge_eventually_positive_loss_realisation_witness :=
     randomSupercriticalZ2TopoClusterBridgeData_eventually_positive_loss_realisation_witness
+  random_supercritical_z2_bridge_eventually_uniform_lower_bound_and_loss_realisation :=
+    randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_lower_bound_and_loss_realisation
   random_supercritical_z2_bridge_not_full_reach_diagnostic :=
     not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic
   random_supercritical_z2_bridge_not_flat_only_diagnostic :=

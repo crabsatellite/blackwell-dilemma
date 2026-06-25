@@ -288,8 +288,9 @@ obligation rather than a prose-only roadmap item. The current gate strengthens
 this with `RandomSupercriticalZ2TopoClusterBridgeData`, whose fields include
 the finite boxed-torus vertex/edge indexing facts, a named supercritical
 probability, a flat lower-bound theorem at that same parameter, the derived
-eventual positive flat-loss witness, an eventual pointwise positive-loss
-realisation witness, the same family-core theorem package, and non-diagnostic guards excluding the
+uniform eventual positive flat-loss witness, an eventual pointwise
+positive-loss realisation witness sharing the same lower-bound constant and
+size threshold, the same family-core theorem package, and non-diagnostic guards excluding the
 current full-reach, flat-only, all-open-complement, and pointwise-hybrid
 diagnostic families; `PaperSemanticGate.lean` gates its projections and
 exclusions so the eventual closure target is now a concrete Lean structure,
