@@ -68,7 +68,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence and giant-restricted lower-bound packages at that same parameter, single-certificate flat plus giant lower-bound support, uniform eventual positive flat/giant, unrestricted pointwise, and in-giant pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence and giant-restricted lower-bound packages at that same parameter, a single paper-support certificate tying the Z2 graph, boxed-torus size facts, probability domain, shared flat/giant lower bounds, and in-giant positive-loss witness, uniform eventual positive flat/giant, unrestricted pointwise, and in-giant pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
         "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, and flat plus giant-restricted topological-loss lower-bound theorems at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
 
@@ -628,6 +628,35 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
                 ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
                 ω ∧
               0 < (bridge.family L).topoLossKernel (boxedTorusFlatGraphN L) ω
+  random_supercritical_z2_bridge_paper_support_certificate :
+    forall bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      bridge.graph = SimpleGraph.Z2LatticeGraph /\
+      (forall L : Nat,
+        boxedTorusFlatGraphN L + 1 = Fintype.card (BoxedTorusVertex L)) /\
+      (forall L : Nat,
+        Fintype.card (BoxedTorusEdgeIdx L) =
+          2 * (boxedTorusFlatGraphN L + 1)) /\
+      harrisKestenCriticalProb < bridge.supercriticalProbability /\
+      0 <= bridge.supercriticalProbability /\
+      bridge.supercriticalProbability <= 1 /\
+      Exists fun c : Real =>
+        0 < c /\ c <= 1 /\
+          Exists fun L0 : Nat =>
+            forall L : Nat, L0 <= L ->
+              c <=
+                expectedTopoLossOnData (bridge.family L)
+                  (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+              c <=
+                expectedTopoLossOnGiantOn (bridge.family L)
+                  (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+              Exists fun omega :
+                  BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                Membership.mem
+                    ((bridge.family L).giantComponentEvent
+                      (boxedTorusFlatGraphN L)) omega /\
+                  0 <
+                    (bridge.family L).topoLossKernel
+                      (boxedTorusFlatGraphN L) omega
   random_supercritical_z2_bridge_not_full_reach_diagnostic :
     ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∀ L : Nat, bridge.family L =
@@ -784,8 +813,10 @@ explicit `RandomSupercriticalZ2TopoClusterBridgeData` contract is instantiated
 by a genuine random supercritical finite `Z2_L` theorem carrying a named
 `p > p_c` parameter, flat and giant-restricted lower-bound theorems at that
 same parameter, a single eventual constant and threshold supporting both
-lower bounds, and pointwise positive loss realisations inside that same
-giant-component event, rather than by the finite all-open/full-reach/
+lower bounds, a single certificate tying those facts to the standard `Z²`
+graph, finite boxed-torus indexing, and the named `p > p_c` domain, and
+pointwise positive loss realisations inside that same giant-component event,
+rather than by the finite all-open/full-reach/
 flat-sequence diagnostic carriers or by the current full-reach
 failure-complement support mechanism. -/
 noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
@@ -835,6 +866,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_giant_lower_bound_and_loss_realisation
   random_supercritical_z2_bridge_eventually_uniform_flat_giant_lower_bound_and_loss_realisation :=
     randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_lower_bound_and_loss_realisation
+  random_supercritical_z2_bridge_paper_support_certificate :=
+    randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
   random_supercritical_z2_bridge_not_full_reach_diagnostic :=
     not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic
   random_supercritical_z2_bridge_not_flat_only_diagnostic :=

@@ -470,9 +470,11 @@ also adds the stronger `RandomSupercriticalZ2TopoClusterBridgeData` contract,
 including the finite boxed-torus vertex/edge indexing facts, a named
 supercritical probability, flat and giant-restricted lower-bound theorems at
 that same parameter, the derived uniform eventual positive flat-loss witness,
-an eventual positive giant-restricted loss witness, eventual unrestricted and
-in-giant pointwise positive-loss realisation witnesses, and projections back to
-the current family-core and lower-bound
+the derived paper-support certificate tying those bounds to the standard `Z^2`
+graph, finite boxed-torus vertex/edge indexing facts, and the same `p > p_c`
+domain, an eventual positive giant-restricted loss witness, eventual
+unrestricted and in-giant pointwise positive-loss realisation witnesses, and
+projections back to the current family-core and lower-bound
 interfaces. Its non-diagnostic fields and the corresponding gate theorems
 exclude the current full-reach, flat-only, all-open-complement, and
 pointwise-hybrid diagnostic families; this is the object a final random

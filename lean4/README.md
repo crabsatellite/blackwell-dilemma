@@ -541,9 +541,13 @@ final `RandomSupercriticalZ2TopoClusterBridgeData` contract now also carries a
 named supercritical probability `p > p_c`, separate flat and giant-restricted
 lower-bound theorem fields at that same parameter, and a derived
 single-certificate projection with one positive constant and one size threshold
-supporting both lower bounds, so the future closure cannot hide the paper
-probability or giant-component support only inside the abstract family-core
-package; the payload also gates the derived uniform eventual positive
+supporting both lower bounds.  The gate also checks the derived
+`randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate`, which
+ties this support to the standard `Z^2` graph identity, finite boxed-torus
+vertex/edge indexing facts, and the same named `p > p_c` domain, so the future
+closure cannot hide the paper probability or giant-component support only
+inside the abstract family-core package; the payload also gates the derived
+uniform eventual positive
 flat-loss witness, eventual positive giant-restricted loss witness, eventual
 unrestricted pointwise positive-loss realisation witness, and eventual
 in-giant pointwise positive-loss realisation witness at that same parameter.

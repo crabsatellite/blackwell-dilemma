@@ -49,7 +49,9 @@ interface, the explicit non-diagnostic
 supercritical probability, separate flat and giant-restricted lower-bound
 theorem fields at that same parameter, and a derived single-certificate
 projection with one positive constant and one size threshold supporting both
-lower bounds; it also gates the derived uniform eventual positive flat-loss,
+lower bounds; it also gates the derived paper-support certificate tying that
+support to the standard `Z²` graph, finite boxed-torus size facts, and the same
+`p > p_c` domain, plus the derived uniform eventual positive flat-loss,
 giant-restricted positive-loss, unrestricted pointwise positive-loss, and
 in-giant pointwise positive-loss realisation witnesses, and the flat-sequence
 lower-bound package. It also gates the

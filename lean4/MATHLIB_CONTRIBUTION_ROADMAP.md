@@ -301,10 +301,13 @@ this with `RandomSupercriticalZ2TopoClusterBridgeData`, whose fields include
 the finite boxed-torus vertex/edge indexing facts, a named supercritical
 probability, flat and giant-restricted lower-bound theorems at that same
 parameter, a derived single-certificate projection with one positive constant
-and one size threshold supporting both lower bounds, the derived uniform
-eventual positive flat-loss witness, an eventual positive giant-restricted
-loss witness, eventual unrestricted and in-giant pointwise positive-loss
-realisation witnesses, the same family-core theorem package, and
+and one size threshold supporting both lower bounds, the derived
+`randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate` tying
+that support to the standard `Z^2` graph, finite boxed-torus vertex/edge
+indexing facts, and the same `p > p_c` domain, the derived uniform eventual
+positive flat-loss witness, an eventual positive giant-restricted loss witness,
+eventual unrestricted and in-giant pointwise positive-loss realisation
+witnesses, the same family-core theorem package, and
 non-diagnostic guards excluding the
 current full-reach, flat-only, all-open-complement, and pointwise-hybrid
 diagnostic families; `PaperSemanticGate.lean` gates its projections and
