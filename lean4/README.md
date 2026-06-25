@@ -79,8 +79,10 @@ its family/core/lower-bound projections, its fixed-`L`
 without closing the still-missing random finite-lattice carrier theorem.  It
 also gates `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current`, a finite
 first-edge Bernoulli compatibility witness proving that the repaired
-random-supercritical bridge contract is nonempty and kernel-clean; this remains
-separate from the genuine random `Z2_L` giant-component theorem.  The
+random-supercritical bridge contract is nonempty and kernel-clean.  The witness
+event is now also calibrated to the boxed-torus base horizontal edge via
+`boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx`; this remains separate
+from the genuine random `Z2_L` giant-component theorem.  The
 threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation
@@ -617,10 +619,15 @@ The repaired random-supercritical surface now also has an explicit compatibility
 instance,
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current`, with `p = 3/4`, a
 uniform flat expected-loss lower bound, a uniform giant-event-mass lower bound,
-unit-interval topo loss, and a paper-support certificate. This proves the
-repaired contract is satisfiable, but it is deliberately a first-edge cylinder
-event rather than the paper's random finite `Z2_L` giant-component carrier, so
-the paper semantic gate remains `closed=3 open=2`.
+unit-interval topo loss, and a paper-support certificate.  Its event is no
+longer only a naked `firstEdgeIdx`: the gate checks
+`boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx` and
+`firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff`,
+so the selected cylinder event is the existing boxed-torus base horizontal edge
+after flattening. This proves the repaired contract is satisfiable, but it is
+still deliberately a one-edge cylinder event rather than the paper's random
+finite `Z2_L` giant-component carrier, so the paper semantic gate remains
+`closed=3 open=2`.
 
 The concrete scalar `agentRewardKernel` now also proves its general
 unit-interval range, Bayesian/Sentimental pointwise monotonicity, κ-agent

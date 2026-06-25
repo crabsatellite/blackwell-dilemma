@@ -11612,6 +11612,14 @@ def firstEdgeIdx (n : Nat) : EdgeIdx n :=
     have h : 0 < 2 * (n + 1) := Nat.mul_pos (by decide) (Nat.succ_pos n)
     exact h⟩
 
+theorem boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx (L : Nat) :
+    boxedTorusFlattenEdgeIdx L (boxedTorusBaseHorizontalEdge L) =
+      firstEdgeIdx (boxedTorusFlatGraphN L) := by
+  apply Fin.ext
+  unfold boxedTorusFlattenEdgeIdx firstEdgeIdx boxedTorusBaseHorizontalEdge
+    boxedTorusBaseVertex boxedTorusFlattenEdgeRaw boxedTorusFlattenVertex
+  simp
+
 /-- Stochastic diagnostic topological-loss carrier for the corrected
     above-threshold interface.
 
@@ -11687,6 +11695,24 @@ theorem firstEdgeOpenEvent_mem_iff
     (n : Nat) (omega : BondConfig (EdgeIdx n)) :
     omega ∈ firstEdgeOpenEvent n ↔ omega (firstEdgeIdx n) = true := by
   simp [firstEdgeOpenEvent]
+
+theorem firstEdgeOpenEvent_boxedTorusBaseHorizontal_mem_iff
+    (L : Nat) (omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L))) :
+    omega ∈ firstEdgeOpenEvent (boxedTorusFlatGraphN L) ↔
+      omega (boxedTorusFlattenEdgeIdx L (boxedTorusBaseHorizontalEdge L)) =
+        true := by
+  simpa [boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx] using
+    firstEdgeOpenEvent_mem_iff (boxedTorusFlatGraphN L) omega
+
+theorem firstEdgeOpenEvent_eq_boxedTorusBaseHorizontalOpenEvent
+    (L : Nat) :
+    firstEdgeOpenEvent (boxedTorusFlatGraphN L) =
+      Finset.univ.filter
+        (fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+          omega (boxedTorusFlattenEdgeIdx L
+            (boxedTorusBaseHorizontalEdge L)) = true) := by
+  ext omega
+  simp [firstEdgeOpenEvent_boxedTorusBaseHorizontal_mem_iff]
 
 theorem firstEdgeOpenEvent_nonempty (n : Nat) :
     (firstEdgeOpenEvent n).Nonempty := by
@@ -15753,6 +15779,30 @@ theorem firstEdgeOpenGiantClosedTopoLossFamily_giant_event_mass_lower_bound_at_t
       (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) => (1 : Real))
   rw [firstEdgeOpenEvent_mass_eq]
   norm_num
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff
+    (L : Nat)
+    (omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L))) :
+    omega ∈
+        (firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+          (boxedTorusFlatGraphN L) ↔
+      omega (boxedTorusFlattenEdgeIdx L (boxedTorusBaseHorizontalEdge L)) =
+        true := by
+  simpa [firstEdgeOpenGiantClosedTopoLossFamily,
+    firstEdgeOpenGiantClosedTopoLossData] using
+    firstEdgeOpenEvent_boxedTorusBaseHorizontal_mem_iff L omega
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_giant_event_eq_boxedTorusBaseHorizontalOpenEvent
+    (L : Nat) :
+    (firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+        (boxedTorusFlatGraphN L) =
+      Finset.univ.filter
+        (fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+          omega (boxedTorusFlattenEdgeIdx L
+            (boxedTorusBaseHorizontalEdge L)) = true) := by
+  ext omega
+  simp [
+    firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff]
 
 theorem firstEdgeOpenGiantClosedTopoLossFamily_not_full_reach_diagnostic :
     Not (forall L : Nat,
