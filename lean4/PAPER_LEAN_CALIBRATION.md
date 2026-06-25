@@ -484,7 +484,10 @@ exclude the current full-reach, flat-only, all-open-complement, and
 pointwise-hybrid diagnostic families; the derived theorem
 `randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`
 turns that exclusion into an explicit finite member outside all three current
-diagnostic carriers. This is the object a final random finite-lattice proof
+diagnostic carriers, and
+`randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_non_diagnostic_member`
+rules out eventual diagnostic tails by producing such a member above every
+finite threshold. This is the object a final random finite-lattice proof
 must instantiate. The topo payload now also
 gates the current standard-`Z^2` boxed-torus witness
 `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its family/core/

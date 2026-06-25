@@ -555,7 +555,10 @@ It also gates
 `randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`,
 which turns the pointwise-hybrid exclusion into an explicit finite `L` whose
 family member is not the full-reach, flat-only, or all-open-complement
-diagnostic carrier.
+diagnostic carrier, and
+`randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_non_diagnostic_member`,
+which rules out eventual diagnostic tails by producing such a member above
+every finite threshold.
 The
 payload also gates the flat-size support identity
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass`,

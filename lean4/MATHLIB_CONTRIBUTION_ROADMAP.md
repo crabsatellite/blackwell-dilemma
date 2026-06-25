@@ -316,7 +316,11 @@ non-diagnostic guards excluding the
 current full-reach, flat-only, all-open-complement, and pointwise-hybrid
 diagnostic families, plus
 `randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`,
-which derives a finite member outside all three current diagnostic carriers;
+which derives a finite member outside all three current diagnostic carriers,
+and
+`randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_non_diagnostic_member`,
+which rules out eventual diagnostic tails by producing such a member above
+every finite threshold;
 `PaperSemanticGate.lean` gates its projections and
 exclusions so the eventual closure target is now a concrete Lean structure,
 not a prose instruction. The topo payload now also
