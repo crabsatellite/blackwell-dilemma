@@ -3172,17 +3172,23 @@ theorem not_harrisKestenScalingFunction_diverges_at_pc_paper_Def :
   linarith
 
 omit [DiagnosticSignalHypothesisData] in
-/-- The explicit hyperbolic replacement carrier cannot satisfy the current
-    unbounded high-alpha domination target.
+/-- Generic current-carrier obstruction for Part 6 scaling candidates.
 
-    The obstruction is already visible at `alpha = 2` and `p = 0`: the
-    hyperbolic carrier is positive there, while the current concrete
-    `kappaStar 0 2` branch is the empty-feasible-set junk value `0`. -/
-theorem not_criticalHyperbolicScaling_dominates_kappaStar_current :
+    Any replacement scaling carrier that is already positive at `p = 0`
+    cannot satisfy the current unbounded high-alpha domination target.  The
+    obstruction is not special to the hyperbolic prototype: at `alpha = 2`,
+    the current concrete `kappaStar 0 2` branch is the empty-feasible-set junk
+    value `0`, so a positive scaling value at `0` cannot be pointwise below it.
+
+    This theorem isolates the semantic repair needed for Part 6: either the
+    domination domain must be made paper-faithful near `p_c`, or the replacement
+    carrier must avoid the current low-`p` empty-feasible-set branch. -/
+theorem not_positive_at_zero_scaling_dominates_kappaStar_current
+    (s : Real -> Real) (hs0 : 0 < s 0) :
     Not (forall alpha : Real,
       alphaStar 0 harrisKestenCriticalProb <= alpha ->
       forall p : Real, p < harrisKestenCriticalProb ->
-        criticalHyperbolicScaling p <= kappaStar p alpha) := by
+        s p <= kappaStar p alpha) := by
   intro hdom
   have h_alpha_le_one : alphaStar 0 harrisKestenCriticalProb <= 1 :=
     (gap_sentimental_immunity 0 harrisKestenCriticalProb (le_refl 0)).right.left
@@ -3194,13 +3200,33 @@ theorem not_criticalHyperbolicScaling_dominates_kappaStar_current :
   have hle := hdom 2 h_alpha_le_two 0 hp_lt
   have hk_zero : kappaStar 0 2 = 0 :=
     kappaStar_two_eq_zero_of_nonneg_p (p := 0) (by norm_num)
-  have hcrit_pos : 0 < criticalHyperbolicScaling 0 := by
-    unfold criticalHyperbolicScaling
-    unfold BlackwellDilemma.Infrastructure.hyperbolicBelowScaling
-    unfold harrisKestenCriticalProb
-    norm_num
   rw [hk_zero] at hle
   linarith
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The explicit hyperbolic prototype is positive at `p = 0`, so it falls
+    under the generic current-carrier obstruction above. -/
+theorem criticalHyperbolicScaling_pos_at_zero :
+    0 < criticalHyperbolicScaling 0 := by
+  unfold criticalHyperbolicScaling
+  unfold BlackwellDilemma.Infrastructure.hyperbolicBelowScaling
+  unfold harrisKestenCriticalProb
+  norm_num
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The explicit hyperbolic replacement carrier cannot satisfy the current
+    unbounded high-alpha domination target.
+
+    The obstruction is already visible at `alpha = 2` and `p = 0`: the
+    hyperbolic carrier is positive there, while the current concrete
+    `kappaStar 0 2` branch is the empty-feasible-set junk value `0`. -/
+theorem not_criticalHyperbolicScaling_dominates_kappaStar_current :
+    Not (forall alpha : Real,
+      alphaStar 0 harrisKestenCriticalProb <= alpha ->
+      forall p : Real, p < harrisKestenCriticalProb ->
+        criticalHyperbolicScaling p <= kappaStar p alpha) := by
+  exact not_positive_at_zero_scaling_dominates_kappaStar_current
+    criticalHyperbolicScaling criticalHyperbolicScaling_pos_at_zero
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Bridge-level obstruction: the retired lower-envelope
@@ -3218,6 +3244,20 @@ theorem not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction :
   exact not_harrisKestenScalingFunction_diverges_at_pc_paper_Def hdiv
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Bridge-level form of the generic positive-at-zero obstruction.  Any
+    bridge whose scaling carrier is positive at `p = 0` cannot instantiate the
+    current Part 6 interface, because the bridge must provide the high-alpha
+    domination theorem refuted above. -/
+theorem not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier
+    (s : Real -> Real) (hs0 : 0 < s 0) :
+    ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+        bridge.scalingCarrier = s := by
+  rintro ⟨bridge, hscaling⟩
+  apply not_positive_at_zero_scaling_dominates_kappaStar_current s hs0
+  intro alpha halpha p hp
+  simpa [hscaling] using bridge.scaling_dominates_kappa alpha halpha p hp
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Bridge-level obstruction: the explicit hyperbolic prototype cannot
     instantiate the Part 6 `Z²` lattice-embedding bridge, because the bridge
     requires high-`α` domination of `kappaStar`, and that domination is
@@ -3225,10 +3265,8 @@ omit [DiagnosticSignalHypothesisData] in
 theorem not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling :
     ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
         bridge.scalingCarrier = criticalHyperbolicScaling := by
-  rintro ⟨bridge, hscaling⟩
-  apply not_criticalHyperbolicScaling_dominates_kappaStar_current
-  intro α hα p hp
-  simpa [hscaling] using bridge.scaling_dominates_kappa α hα p hp
+  exact not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier
+    criticalHyperbolicScaling criticalHyperbolicScaling_pos_at_zero
 
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality

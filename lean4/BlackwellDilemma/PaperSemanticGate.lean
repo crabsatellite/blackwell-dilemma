@@ -61,9 +61,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current scaling-transfer payload and obstruction diagnostics are gated, but the full lattice embedding route remains a semantic carrier repair.",
+        "The current scaling-transfer payload, two named candidate obstructions, and the generic positive-at-zero scaling-carrier obstruction are gated, but the full lattice embedding route remains a semantic carrier repair.",
       closeRoute :=
-        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: connect trap-tree embeddings to a finite/infinite Z2 lattice percolation carrier with proved positive occurrence and domination." },
+        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded high-alpha domination interface, or connect trap-tree embeddings to a finite/infinite Z2 lattice percolation carrier whose scaling theorem avoids the low-p empty-feasible-set branch." },
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
@@ -291,8 +291,9 @@ noncomputable def part4_lattice_p_monotonicity_frontier_payload :
 
 /-- Typed frontier for the open Theorem 4.1 Part 6 lattice-embedding target.
 This does not close the semantic target: it machine-checks the current
-kernel-solid transfer layer and the two obstruction diagnostics that force a
-replacement lattice/percolation carrier. -/
+kernel-solid transfer layer, the named candidate obstructions, and the generic
+positive-at-zero scaling-carrier obstruction that force a replacement
+lattice/percolation carrier or a repaired domination domain. -/
 structure Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_graph_standard :
     SimpleGraph.Z2LatticeGraph = SimpleGraph.integerLatticeGraph 2
@@ -322,12 +323,23 @@ structure Part6LatticeEmbeddingFrontierPayload where
     ¬ ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
       ∀ p : ℝ, p < harrisKestenCriticalProb →
         criticalHyperbolicScaling p ≤ kappaStar p α
+  positive_at_zero_domination_obstruction :
+    ∀ s : ℝ → ℝ, 0 < s 0 →
+      ¬ ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α
+  hyperbolic_positive_at_zero :
+    0 < criticalHyperbolicScaling 0
   lower_envelope_bridge_obstruction :
     ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
       bridge.scalingCarrier = harrisKestenScalingFunction
   hyperbolic_bridge_obstruction :
     ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
       bridge.scalingCarrier = criticalHyperbolicScaling
+  positive_at_zero_bridge_obstruction :
+    ∀ s : ℝ → ℝ, 0 < s 0 →
+      ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+        bridge.scalingCarrier = s
   z2_lattice_embedding_bridge_transfer :
     ∀ _bridge : Z2LatticeEmbeddingBridgeData,
       ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
@@ -339,7 +351,9 @@ structure Part6LatticeEmbeddingFrontierPayload where
 /-- Build gate: the open Part 6 lattice-embedding target is calibrated
 against the current transfer layer and current-carrier obstructions.  The
 semantic target remains open until a genuine lattice/percolation carrier
-supplies both divergence and domination without the documented obstructions. -/
+supplies both divergence and domination without the documented obstructions,
+or until the domination domain is repaired to avoid the current low-`p`
+empty-feasible-set branch. -/
 def part6_lattice_embedding_frontier_payload :
     Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_graph_standard := rfl
@@ -353,10 +367,16 @@ def part6_lattice_embedding_frontier_payload :
     not_harrisKestenScalingFunction_diverges_at_pc_paper_Def
   hyperbolic_domination_obstruction :=
     not_criticalHyperbolicScaling_dominates_kappaStar_current
+  positive_at_zero_domination_obstruction :=
+    not_positive_at_zero_scaling_dominates_kappaStar_current
+  hyperbolic_positive_at_zero :=
+    criticalHyperbolicScaling_pos_at_zero
   lower_envelope_bridge_obstruction :=
     not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction
   hyperbolic_bridge_obstruction :=
     not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling
+  positive_at_zero_bridge_obstruction :=
+    not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier
   z2_lattice_embedding_bridge_transfer :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
 

@@ -241,6 +241,12 @@ with the parameterized `kappaStar_diverges_at_pc_via_scaling_carrier` transfer
 interface. R467 proves the divergence half for the explicit hyperbolic carrier
 `criticalHyperbolicScaling`, but R468 proves that this exact carrier cannot
 satisfy the current unbounded high-alpha domination target.
+The obstruction is now generalized by
+`not_positive_at_zero_scaling_dominates_kappaStar_current`: every candidate
+with `0 < s 0` fails the current domination interface at the same
+`alpha = 2`, `p = 0` empty-feasible-set branch. Its bridge-level form
+`not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier` is also
+machine-gated.
 The bridge-level theorems
 `not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
 `not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now prove
@@ -471,7 +477,7 @@ failed lower-envelope proposition; the failed route is still not a global
 `_paper_Def` source axiom. The open semantic-gate target is now calibrated by
 `part6_lattice_embedding_frontier_payload`, which checks the live transfer
 theorem, prototype divergence theorem, lower-envelope dominance theorem, and
-both obstruction theorems.
+the named plus generic obstruction theorems.
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
 `L_minimum_exists_in_regime_i_proof`. R238 also proves

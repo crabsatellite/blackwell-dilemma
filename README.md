@@ -44,7 +44,10 @@ one-edge high-κ oracle-routing carrier
 refutation remains as diagnostic evidence for the retired route. The topo gate
 now also machine-checks all-open/complement boxed-torus giant-event and
 flat-sequence lower-bound witnesses, but the random-supercritical semantic
-target remains open. See
+target remains open. The Part 6 gate now also machine-checks a generic
+positive-at-zero scaling-carrier obstruction, so the remaining repair is a
+carrier/domain change rather than a missing proof for the current domination
+interface. See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the
 paper-label mapping and remaining semantic calibration notes.
