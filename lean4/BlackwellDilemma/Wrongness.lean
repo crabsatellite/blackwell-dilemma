@@ -14551,6 +14551,37 @@ theorem not_random_supercritical_z2_topo_cluster_bridge_pointwise_diagnostic_com
   rcases h with ⟨bridge, hfamily⟩
   exact bridge.not_pointwise_diagnostic_combo hfamily
 
+/-- Existential non-diagnostic projection from the final random-supercritical
+bridge contract.
+
+The final bridge cannot merely choose, for each boxed-torus size, one of the
+current diagnostic carriers.  Therefore every bridge supplies at least one
+finite member that is simultaneously distinct from the full-reach, flat-only,
+and all-open-complement diagnostic families. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun L : Nat =>
+      bridge.family L ≠ boxedTorusFullReachComplementTopoLossData L ∧
+      bridge.family L ≠ boxedTorusFullReachFlatOnlyComplementTopoLossData L ∧
+      bridge.family L ≠ boxedTorusAllOpenComplementTopoLossData L := by
+  by_contra hno_member
+  apply bridge.not_pointwise_diagnostic_combo
+  intro L
+  by_contra hnot_diagnostic
+  have hnot_full :
+      bridge.family L ≠ boxedTorusFullReachComplementTopoLossData L := by
+    intro hfull
+    exact hnot_diagnostic (Or.inl hfull)
+  have hnot_flat :
+      bridge.family L ≠ boxedTorusFullReachFlatOnlyComplementTopoLossData L := by
+    intro hflat
+    exact hnot_diagnostic (Or.inr (Or.inl hflat))
+  have hnot_all_open :
+      bridge.family L ≠ boxedTorusAllOpenComplementTopoLossData L := by
+    intro hall_open
+    exact hnot_diagnostic (Or.inr (Or.inr hall_open))
+  exact hno_member ⟨L, hnot_full, hnot_flat, hnot_all_open⟩
+
 theorem BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current :
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
       boxedTorusAllOpenComplementTopoLossData := by

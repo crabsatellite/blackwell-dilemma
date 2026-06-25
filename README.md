@@ -62,7 +62,8 @@ semantic target remains open until that contract is instantiated by the real
 finite-lattice carrier. The
 contract now machine-excludes the current full-reach, flat-only, and
 all-open-complement diagnostic families, including pointwise hybrids assembled
-only from those diagnostics. The Part 6 gate now also
+only from those diagnostics, and derives an explicit finite member that is
+simultaneously not any of those three diagnostic carriers. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
 domination interface, a repaired local near-`p_c` domination transfer, a
 closed-unit local transfer on the explicit `alpha*(0,p_c) < alpha <= 1`

@@ -481,8 +481,11 @@ unrestricted and in-giant pointwise positive-loss realisation witnesses, and
 projections back to the current family-core and lower-bound
 interfaces. Its non-diagnostic fields and the corresponding gate theorems
 exclude the current full-reach, flat-only, all-open-complement, and
-pointwise-hybrid diagnostic families; this is the object a final random
-finite-lattice proof must instantiate. The topo payload now also
+pointwise-hybrid diagnostic families; the derived theorem
+`randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`
+turns that exclusion into an explicit finite member outside all three current
+diagnostic carriers. This is the object a final random finite-lattice proof
+must instantiate. The topo payload now also
 gates the current standard-`Z^2` boxed-torus witness
 `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its family/core/
 lower-bound projections, and

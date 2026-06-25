@@ -551,6 +551,11 @@ uniform eventual positive
 flat-loss witness, eventual positive giant-restricted loss witness, eventual
 unrestricted pointwise positive-loss realisation witness, and eventual
 in-giant pointwise positive-loss realisation witness at that same parameter.
+It also gates
+`randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`,
+which turns the pointwise-hybrid exclusion into an explicit finite `L` whose
+family member is not the full-reach, flat-only, or all-open-complement
+diagnostic carrier.
 The
 payload also gates the flat-size support identity
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass`,
