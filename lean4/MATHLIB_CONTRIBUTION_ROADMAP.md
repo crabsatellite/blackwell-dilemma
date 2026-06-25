@@ -450,6 +450,12 @@ giant-restricted loss, giant-event mass, and in-giant positive-loss support;
 the old final contract projects to it, and
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support`
 refutes it for the current first-edge witness.
+The gate now generalizes this obstruction to every repaired bridge whose family
+is `firstEdgeOpenGiantClosedTopoLossFamily` at `p = 3/4`, via
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_giant_loss_paper_closing`,
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_full_paper_closing_support`,
+and
+`not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_witness`.
 The final existential route is now named as
 `RandomSupercriticalZ2TopoClusterFullPaperClosingRoute`; the gate checks that
 full-support repaired bridges inhabit it, that the route exposes a repaired
