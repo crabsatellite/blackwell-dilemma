@@ -659,6 +659,11 @@ so the current witness is explicitly zero on its selected giant-restricted
 topological loss and cannot provide a positive uniform giant-restricted lower
 bound. The gate packages these current compatibility and not-closing facts as
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+It now names the missing paper-closing field as
+`RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing`: every
+old final bridge would project to that field, while
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing`
+proves the current first-edge repaired witness cannot satisfy it.
 It also gates the combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, which
 keeps the old over-strong contract obstruction and the repaired first-edge

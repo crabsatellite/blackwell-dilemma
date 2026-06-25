@@ -571,6 +571,11 @@ The gate now also includes
 `firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`.
 It further gates the combined certificate
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+The missing paper-closing giant-loss field is now named as
+`RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing`; it is
+projected from the old final bridge contract and refuted for the current
+first-edge repaired witness by
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing`.
 The topo current frontier is also packaged as
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
 the old over-strong bridge-contract obstruction with the repaired first-edge
