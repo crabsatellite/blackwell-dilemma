@@ -481,6 +481,12 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
           c ≤
             expectedTopoLossOnData (bridge.family L)
               (boxedTorusFlatGraphN L) bridge.supercriticalProbability
+  random_supercritical_z2_bridge_positive_flat_loss_witness :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∃ L : ℕ,
+        0 <
+          expectedTopoLossOnData (bridge.family L)
+            (boxedTorusFlatGraphN L) bridge.supercriticalProbability
   random_supercritical_z2_bridge_not_full_reach_diagnostic :
     ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∀ L : Nat, bridge.family L =
@@ -665,6 +671,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     randomSupercriticalZ2TopoClusterBridgeData_supercriticalProbability_domain
   random_supercritical_z2_bridge_named_lower_bound :=
     randomSupercriticalZ2TopoClusterBridgeData_supercritical_flat_lower_bound
+  random_supercritical_z2_bridge_positive_flat_loss_witness :=
+    randomSupercriticalZ2TopoClusterBridgeData_positive_flat_loss_witness
   random_supercritical_z2_bridge_not_full_reach_diagnostic :=
     not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic
   random_supercritical_z2_bridge_not_flat_only_diagnostic :=

@@ -14127,6 +14127,19 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_supercritical_flat_lower_boun
                 (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
   bridge.supercritical_flat_lower_bound
 
+/-- Non-vacuity projection from the final random-supercritical bridge: at the
+named supercritical probability, some flat boxed-torus member has strictly
+positive expected topological loss. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_positive_flat_loss_witness
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun L : Nat =>
+      0 <
+        expectedTopoLossOnData (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability := by
+  rcases bridge.supercritical_flat_lower_bound with
+    ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
+  exact ⟨L0, lt_of_lt_of_le hc_pos (hlower L0 le_rfl)⟩
+
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/
 theorem not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic :
