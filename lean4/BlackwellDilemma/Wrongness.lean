@@ -15268,6 +15268,32 @@ theorem randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_positive_g
     ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
   exact ⟨L0, fun L hL => lt_of_lt_of_le hc_pos (hlower L hL)⟩
 
+/-- Eventual giant-event membership projection from the repaired bridge.
+
+Positive giant-event Bernoulli mass is not treated as prose-only
+non-vacuity: the finite-product measure proof in `Percolation.lean` extracts
+an actual configuration in the bridge's giant event for each sufficiently
+large boxed torus. -/
+theorem randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_giant_event_member
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) :
+    Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+          Membership.mem
+            ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+            omega := by
+  rcases
+    randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_positive_giant_event_mass
+      bridge with
+    ⟨L0, hmass_pos⟩
+  refine ⟨L0, ?_⟩
+  intro L hL
+  exact
+    percRestrictedExpectation_const_one_pos_event_nonempty
+      (1 - bridge.supercriticalProbability)
+      ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+      (hmass_pos L hL)
+
 /-- Uniform eventual repaired support projection: the same positive constant
 lower-bounds the flat expected loss and the giant-event mass, and the flat loss
 lower bound yields an unrestricted pointwise positive-loss realisation. -/

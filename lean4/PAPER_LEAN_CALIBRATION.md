@@ -541,6 +541,9 @@ every index. It also gates
 making explicit that the current flat lower-bound evidence is supported by the
 full-reach failure complement.
 The repaired first-edge compatibility witness is now also calibrated by
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_giant_event_member`,
+which turns the repaired bridge's positive giant-event mass into an actual
+finite configuration in the selected event, and by
 `firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant` and
 `firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero`.
 The gate now also includes

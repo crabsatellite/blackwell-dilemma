@@ -628,7 +628,12 @@ The repaired random-supercritical surface now also has an explicit compatibility
 instance,
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current`, with `p = 3/4`, a
 uniform flat expected-loss lower bound, a uniform giant-event-mass lower bound,
-unit-interval topo loss, and a paper-support certificate.  Its event is no
+unit-interval topo loss, and a paper-support certificate.  The payload also
+checks
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_giant_event_member`,
+so the positive giant-event mass is converted into actual finite
+configuration membership rather than left as a numerical-only non-vacuity
+claim.  Its event is no
 longer only a naked `firstEdgeIdx`: the gate checks
 `boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx` and
 `firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff`,

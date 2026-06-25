@@ -547,6 +547,33 @@ theorem percRestrictedExpectation_univ {E : Type} [Fintype E]
   unfold percRestrictedExpectation percExpectation
   rfl
 
+/-- Positive unnormalised event mass forces the finite event to contain an
+    actual realisation.
+
+    This is a kernel-pure finite-sum guardrail for paper-semantic bridges:
+    whenever a bridge advertises positive `E_{G_p}[1 ; S]`, downstream gates
+    may require an explicit `ω ∈ S` witness rather than treating the positive
+    mass as a prose-only non-vacuity claim. -/
+theorem percRestrictedExpectation_const_one_pos_event_nonempty {E : Type}
+    [Fintype E] [DecidableEq E] (p : ℝ) (S : Finset (BondConfig E))
+    (hpos : 0 < percRestrictedExpectation p S
+      (fun _ : BondConfig E => (1 : ℝ))) :
+    S.Nonempty := by
+  unfold percRestrictedExpectation at hpos
+  change 0 < S.sum
+    (fun ω =>
+      bondConfigWeight p ω *
+        ((fun _ : BondConfig E => (1 : ℝ)) ω)) at hpos
+  have hlt :
+      S.sum (fun _ : BondConfig E => (0 : ℝ)) <
+        S.sum
+          (fun ω =>
+            bondConfigWeight p ω *
+              ((fun _ : BondConfig E => (1 : ℝ)) ω)) := by
+    simpa using hpos
+  rcases Finset.exists_lt_of_sum_lt hlt with ⟨ω, hω, _hterm⟩
+  exact ⟨ω, hω⟩
+
 /-- **Sub-event monotonicity — upper bound.**  If `f` is pointwise
     bounded above by a *non-negative* constant `c` **on the sub-event
     `S`** (`f ω ≤ c` for `ω ∈ S`), then the sub-event expectation is
