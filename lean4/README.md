@@ -566,7 +566,8 @@ and flat-sequence carriers rather than a random finite `Z^2_L`
 giant-component/lower-bound theorem.  The gate now records the stronger
 `RandomSupercriticalZ2TopoClusterBridgeData` contract and its projection
 theorems, plus non-diagnostic guards excluding the current full-reach,
-flat-only, and all-open-complement families.  The next semantic closure step is
+flat-only, and all-open-complement families, including pointwise hybrids
+assembled only from those diagnostics.  The next semantic closure step is
 therefore to instantiate that contract with the paper's stochastic
 finite-lattice family rather than to add another wrapper around the current
 diagnostics.

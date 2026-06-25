@@ -14054,6 +14054,11 @@ structure RandomSupercriticalZ2TopoClusterBridgeData where
   not_all_open_complement_diagnostic :
     Not (forall L : Nat,
       family L = boxedTorusAllOpenComplementTopoLossData L)
+  not_pointwise_diagnostic_combo :
+    Not (forall L : Nat,
+      family L = boxedTorusFullReachComplementTopoLossData L ∨
+        family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L ∨
+        family L = boxedTorusAllOpenComplementTopoLossData L)
 
 /-- Any final random-supercritical `Z^2_L` bridge can be viewed as the weaker
 standard `Z^2` topo-cluster bridge consumed by the existing graph-local theorem
@@ -14110,6 +14115,18 @@ theorem not_random_supercritical_z2_topo_cluster_bridge_all_open_complement_diag
   intro h
   rcases h with ⟨bridge, hfamily⟩
   exact bridge.not_all_open_complement_diagnostic hfamily
+
+/-- The final random-supercritical bridge contract cannot be discharged by a
+pointwise hybrid assembled only from the current diagnostic families. -/
+theorem not_random_supercritical_z2_topo_cluster_bridge_pointwise_diagnostic_combo :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterBridgeData =>
+      forall L : Nat,
+        bridge.family L = boxedTorusFullReachComplementTopoLossData L ∨
+          bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L ∨
+          bridge.family L = boxedTorusAllOpenComplementTopoLossData L) := by
+  intro h
+  rcases h with ⟨bridge, hfamily⟩
+  exact bridge.not_pointwise_diagnostic_combo hfamily
 
 theorem BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current :
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion

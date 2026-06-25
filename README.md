@@ -52,7 +52,8 @@ exactly half of the full-reach failure-event mass. The random-supercritical
 semantic target remains open until that contract is instantiated by the real
 finite-lattice carrier. The
 contract now machine-excludes the current full-reach, flat-only, and
-all-open-complement diagnostic families. The Part 6 gate now also
+all-open-complement diagnostic families, including pointwise hybrids assembled
+only from those diagnostics. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
 domination interface, a repaired local near-`p_c` domination transfer, and the
 current local-bridge impossibility theorem. It also checks the current
