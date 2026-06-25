@@ -437,7 +437,17 @@ lower-bound projections, and
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
-every index. It also gates
+every index. It now also gates the all-open boxed-torus finite giant-event
+and restricted-envelope witnesses
+`boxedTorusAllOpenGiantTopoLossData_giantEventFullClusterConclusion`,
+`boxedTorusAllOpenGiantTopoLossData_expectedTopoLossOnGiantEnvelopeConclusion`,
+the positive restricted-loss regression
+`boxedTorusAllOpenPositiveTopoLossData_expectedTopoLossOnGiant_flat_pos`, and
+the complement-family flat-sequence lower-bound package
+`BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current`
+together with per-member unit-compatible, full-cluster, envelope, and `1/8`
+flat expected-loss lower-bound theorems for
+`boxedTorusAllOpenComplementTopoLossData`. It also gates
 `not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`
 and the same obstruction through the current `Z^2` bridge witness,
 which proves each fixed flat-only member fails the old all-`n`

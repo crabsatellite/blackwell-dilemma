@@ -533,12 +533,22 @@ family/core/lower-bound projections, plus
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`: the
 current flat-only family has zero total expected topo loss off the flattened
 boxed-torus index and zero giant-restricted topo loss at every index.  The
-payload also gates
+payload now also gates the all-open boxed-torus finite giant-event witnesses
+`boxedTorusAllOpenGiantTopoLossData_giantEventFullClusterConclusion`,
+`boxedTorusAllOpenGiantTopoLossData_expectedTopoLossOnGiantEnvelopeConclusion`,
+and the positive restricted-loss regression
+`boxedTorusAllOpenPositiveTopoLossData_expectedTopoLossOnGiant_flat_pos`.  It
+also gates the complement family `boxedTorusAllOpenComplementTopoLossData`:
+the flat-sequence lower-bound conclusion, every selected member's
+unit-compatible lower-bound package, its full-cluster giant-event and
+restricted-envelope packages, and the uniform `1/8` flat expected-loss lower
+bound at `p = 3/4`.  The payload also gates
 `not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`
 and its current-bridge form, showing that each fixed flat-only member cannot be repackaged as an all-`n`
 above-threshold lower-bound carrier.  The
-semantic target remains open because that payload still rests on diagnostic/flat carriers rather than a random finite
-`Z^2_L` giant-component/lower-bound theorem.
+semantic target remains open because these are finite all-open, complement,
+and flat-sequence carriers rather than a random finite `Z^2_L`
+giant-component/lower-bound theorem.
 
 The concrete scalar `agentRewardKernel` now also proves its general
 unit-interval range, Bayesian/Sentimental pointwise monotonicity, κ-agent

@@ -262,13 +262,18 @@ family/core/lower-bound projections through the bridge interface, and
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
-every index. The same payload also gates
+every index. The same payload now also gates the all-open boxed-torus finite
+giant-event package, its restricted-envelope theorem, the positive restricted
+loss regression on `boxedTorusAllOpenPositiveTopoLossData`, and the
+`boxedTorusAllOpenComplementTopoLossData` flat-sequence lower-bound package
+with its per-member unit-compatible, full-cluster, envelope, and `1/8` flat
+expected-loss lower-bound theorems. The same payload also gates
 `not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`
 and the current-bridge form of that obstruction,
 showing that each fixed flat-only member cannot satisfy the all-`n`
 above-threshold lower-bound interface; this is the kernel-checked reason the
-current family remains a diagnostic frontier rather than the final
-random-supercritical carrier.
+current family remains a diagnostic/all-open/flat-sequence frontier rather
+than the final random-supercritical carrier.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,

@@ -68,9 +68,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload is gated and kernel-clean, but it is still a diagnostic/flat finite carrier rather than the full random supercritical Z2_L giant-component theorem.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, flat-sequence lower-bound package, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
-        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: replace the diagnostic/flat carrier with a random finite Z2_L giant-component/topological-loss lower-bound theorem." } ]
+        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: replace the diagnostic/all-open/flat-sequence carriers with a random finite Z2_L giant-component/topological-loss lower-bound theorem." } ]
 
 def openSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.open)
@@ -362,9 +362,10 @@ def part6_lattice_embedding_frontier_payload :
 
 /-- Typed frontier for the open random supercritical `Z2_L`
 topological-cluster/phase target.  This does not close the semantic target:
-it machine-checks the current closed theorem surface and the obstruction
-evidence showing why the remaining paper claim still needs a real random
-finite-lattice giant-component/topological-loss carrier. -/
+it machine-checks the current closed theorem surface, all-open/complement
+boxed-torus finite witnesses, flat-sequence lower-bound package, and the
+obstruction evidence showing why the remaining paper claim still needs a real
+random finite-lattice giant-component/topological-loss carrier. -/
 structure TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :
     ∀ n k : ℕ, 1 ≤ k → k ≤ n →
@@ -424,6 +425,41 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     (∀ L n : ℕ, ∀ p : ℝ,
       expectedTopoLossOnGiantOn
         (boxedTorusFullReachFlatOnlyComplementTopoLossData L) n p = 0)
+  boxed_torus_all_open_giant_full_cluster :
+    ∀ L : ℕ,
+      GiantComponentEventFullClusterConclusion
+        (boxedTorusAllOpenGiantTopoLossData L)
+  boxed_torus_all_open_giant_envelope :
+    ∀ L : ℕ,
+      ExpectedTopoLossOnGiantEnvelopeConclusion
+        (boxedTorusAllOpenGiantTopoLossData L)
+  boxed_torus_all_open_positive_giant_flat_pos :
+    ∀ L : ℕ, ∀ p : ℝ, p < 1 →
+      0 <
+        expectedTopoLossOnGiantOn
+          (boxedTorusAllOpenPositiveTopoLossData L)
+          (boxedTorusFlatGraphN L) p
+  boxed_torus_all_open_complement_flat_lower_bound :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      boxedTorusAllOpenComplementTopoLossData
+  boxed_torus_all_open_complement_unit_compatible :
+    ∀ L : ℕ,
+      UnitCompatibleAboveThresholdLowerBoundConclusion
+        (boxedTorusAllOpenComplementTopoLossData L)
+  boxed_torus_all_open_complement_giant_full_cluster :
+    ∀ L : ℕ,
+      GiantComponentEventFullClusterConclusion
+        (boxedTorusAllOpenComplementTopoLossData L)
+  boxed_torus_all_open_complement_giant_envelope :
+    ∀ L : ℕ,
+      ExpectedTopoLossOnGiantEnvelopeConclusion
+        (boxedTorusAllOpenComplementTopoLossData L)
+  boxed_torus_all_open_complement_flat_loss_ge_eighth :
+    ∀ L : ℕ,
+      (1 : ℝ) / 8 ≤
+        expectedTopoLossOnData
+          (boxedTorusAllOpenComplementTopoLossData L)
+          (boxedTorusFlatGraphN L) ((3 : ℝ) / 4)
   boxed_torus_flat_only_not_all_n_lower_bound :
     ∀ L : ℕ,
       ¬ UnitCompatibleAboveThresholdLowerBoundConclusion
@@ -459,8 +495,8 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
 
 /-- Build gate: the open topo/phase semantic target is calibrated against
 the current theorem surface.  The semantic target remains open until these
-finite diagnostic/flat-carrier witnesses are refined to a genuine random
-supercritical finite `Z2_L` theorem. -/
+finite diagnostic/all-open/flat-sequence carrier witnesses are refined to a
+genuine random supercritical finite `Z2_L` theorem. -/
 noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :=
@@ -494,6 +530,24 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion
   boxed_torus_flat_only_diagnostic_current :=
     boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic
+  boxed_torus_all_open_giant_full_cluster :=
+    boxedTorusAllOpenGiantTopoLossData_giantEventFullClusterConclusion
+  boxed_torus_all_open_giant_envelope :=
+    boxedTorusAllOpenGiantTopoLossData_expectedTopoLossOnGiantEnvelopeConclusion
+  boxed_torus_all_open_positive_giant_flat_pos :=
+    fun L p hp =>
+      boxedTorusAllOpenPositiveTopoLossData_expectedTopoLossOnGiant_flat_pos
+        L (p := p) hp
+  boxed_torus_all_open_complement_flat_lower_bound :=
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current
+  boxed_torus_all_open_complement_unit_compatible :=
+    boxedTorusAllOpenComplementTopoLossData_unitCompatibleAboveThresholdLowerBoundConclusion
+  boxed_torus_all_open_complement_giant_full_cluster :=
+    boxedTorusAllOpenComplementTopoLossData_giantEventFullClusterConclusion
+  boxed_torus_all_open_complement_giant_envelope :=
+    boxedTorusAllOpenComplementTopoLossData_expectedTopoLossOnGiantEnvelopeConclusion
+  boxed_torus_all_open_complement_flat_loss_ge_eighth :=
+    boxedTorusAllOpenComplementTopoLossData_expectedTopoLossOnData_flat_ge_eighth
   boxed_torus_flat_only_not_all_n_lower_bound :=
     not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly
   current_mills_identifier_obstruction :=

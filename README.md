@@ -41,7 +41,10 @@ status. The Part 4 lattice p-monotonicity target is now closed by the standard
 `Z²` ranged local-lattice bridge; the former threshold target is closed by the
 one-edge high-κ oracle-routing carrier
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the neutral-carrier
-refutation remains as diagnostic evidence for the retired route. See
+refutation remains as diagnostic evidence for the retired route. The topo gate
+now also machine-checks all-open/complement boxed-torus giant-event and
+flat-sequence lower-bound witnesses, but the random-supercritical semantic
+target remains open. See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the
 paper-label mapping and remaining semantic calibration notes.
