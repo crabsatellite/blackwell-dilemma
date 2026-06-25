@@ -763,7 +763,10 @@ same-`alpha` witness projection into one paper-support theorem. It also gates
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 so a closed-unit repair must carry the paper-support surface and the
 sentimental reversal forced by `alphaStar 0 p_c < 1` on the same bridge-level
-contract. It now also checks
+contract. It also gates
+`not_z2_lattice_embedding_closed_unit_local_bridge_paper_support_with_sentimental_reversal_current`,
+which proves the current carrier cannot satisfy that exact combined contract.
+It now also checks
 `z2LatticeEmbeddingLocalBridgeData_pointwise_paper_domain_certificate`,
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_pointwise_paper_domain_certificate`,
 and

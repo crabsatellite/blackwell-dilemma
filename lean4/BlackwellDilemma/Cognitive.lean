@@ -4117,6 +4117,21 @@ theorem not_z2_lattice_embedding_closed_unit_local_bridge_current :
     bridge.closed_unit_alphaStar_lt_one
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the combined closed-unit paper-support plus
+sentimental-reversal contract.
+
+The combined support theorem is a bridge-level consequence, so any witness for
+it would first instantiate the closed-unit bridge itself.  The current scalar
+carrier cannot instantiate that bridge because its `alphaStar 0 p_c < 1`
+threshold certificate is impossible. -/
+theorem not_z2_lattice_embedding_closed_unit_local_bridge_paper_support_with_sentimental_reversal_current :
+    Not (Exists fun bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData =>
+      Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+        bridge) := by
+  rintro ⟨bridge, _hsupport⟩
+  exact not_z2_lattice_embedding_closed_unit_local_bridge_current ⟨bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Unified current-carrier obstruction certificate for the paper-bounded
 closed-unit Part 6 route.
 

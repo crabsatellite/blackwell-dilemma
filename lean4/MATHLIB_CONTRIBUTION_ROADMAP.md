@@ -205,6 +205,9 @@ The gate also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 which combines that reversal requirement with the closed-unit paper-support
 certificate on the same bridge-level contract.
+It also gates
+`not_z2_lattice_embedding_closed_unit_local_bridge_paper_support_with_sentimental_reversal_current`,
+so the current carrier is blocked at that exact combined-contract surface.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 threshold-certificate obstruction at the bridge-contract level. The Part 6
 repair is therefore first to supply a nondegenerate `α`/feasible-set domain

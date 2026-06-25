@@ -320,6 +320,10 @@ It also gates
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 which ties that reversal requirement to the closed-unit Part 6 paper-support
 certificate for the same repaired bridge.
+The matching current obstruction
+`not_z2_lattice_embedding_closed_unit_local_bridge_paper_support_with_sentimental_reversal_current`
+is also gated, so the current carrier cannot be mistaken for this exact
+combined contract.
 The theorem
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 threshold-certificate obstruction at the bridge-contract level. The remaining
