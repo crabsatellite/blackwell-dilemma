@@ -1471,6 +1471,41 @@ theorem gap_cognitive_threshold_part6
           M < kappaStar p α :=
   kappaStar_diverges_at_pc s h_s_diverges h_s_le_kappa
 
+/-! ### Theorem 4.1 Part 6 lattice-embedding bridge interface -/
+
+/-- Machine-readable shape of the missing Part 6 `Z²` lattice-embedding
+bridge.  A future certificate must name the standard integer-lattice graph
+and supply a scaling carrier whose divergence and domination proofs are both
+valid in the high-α regime. -/
+structure Z2LatticeEmbeddingBridgeData where
+  graph : SimpleGraph (Fin 2 → ℤ)
+  graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
+  scalingCarrier : ℝ → ℝ
+  scaling_diverges :
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      scalingCarrier harrisKestenCriticalProb
+  scaling_dominates_kappa :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      ∀ p : ℝ, p < harrisKestenCriticalProb →
+        scalingCarrier p ≤ kappaStar p α
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Part 6 transfer from an explicit `Z²` lattice-embedding bridge.  This is
+the build-checked entrypoint for the future paper-faithful lattice carrier;
+the current public project does not instantiate it because the available
+hyperbolic prototype fails the required domination theorem. -/
+theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
+    (bridge : Z2LatticeEmbeddingBridgeData) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+          p < harrisKestenCriticalProb →
+            M < kappaStar p α :=
+  gap_cognitive_threshold_part6
+    bridge.scalingCarrier
+    bridge.scaling_diverges
+    bridge.scaling_dominates_kappa
+
 omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 (full statement, conjunction). Combines all six paper-
     stated parts (Parts 1, 2, 3, 4, 5, 6). Part 4 is bundled here as

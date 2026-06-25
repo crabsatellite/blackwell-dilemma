@@ -21,7 +21,10 @@ the current kernel theorem surface while keeping the lattice/domain and random
 finite-lattice carrier repairs open.  The Part 4 payload now also checks the
 generic `sInf` transfer
 `kappaStar_p_monotone_of_mean_gap_antitone` and the future lattice certificate
-entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  The
+entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  The Part 6
+payload now likewise checks the standard `Z²` lattice graph identity and the
+future embedding-certificate entrypoint
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The
 threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation

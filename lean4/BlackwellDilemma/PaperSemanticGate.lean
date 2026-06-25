@@ -142,6 +142,8 @@ This does not close the semantic target: it machine-checks the current
 kernel-solid transfer layer and the two obstruction diagnostics that force a
 replacement lattice/percolation carrier. -/
 structure Part6LatticeEmbeddingFrontierPayload where
+  z2_lattice_graph_standard :
+    SimpleGraph.Z2LatticeGraph = SimpleGraph.integerLatticeGraph 2
   prototype_diverges :
     BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
       criticalHyperbolicScaling harrisKestenCriticalProb
@@ -168,6 +170,13 @@ structure Part6LatticeEmbeddingFrontierPayload where
     ¬ ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
       ∀ p : ℝ, p < harrisKestenCriticalProb →
         criticalHyperbolicScaling p ≤ kappaStar p α
+  z2_lattice_embedding_bridge_transfer :
+    ∀ _bridge : Z2LatticeEmbeddingBridgeData,
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+        ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+            p < harrisKestenCriticalProb →
+              M < kappaStar p α
 
 /-- Build gate: the open Part 6 lattice-embedding target is calibrated
 against the current transfer layer and current-carrier obstructions.  The
@@ -175,6 +184,7 @@ semantic target remains open until a genuine lattice/percolation carrier
 supplies both divergence and domination without the documented obstructions. -/
 def part6_lattice_embedding_frontier_payload :
     Part6LatticeEmbeddingFrontierPayload where
+  z2_lattice_graph_standard := rfl
   prototype_diverges :=
     criticalHyperbolicScaling_diverges_at_pc
   lower_envelope_dominates :=
@@ -185,6 +195,8 @@ def part6_lattice_embedding_frontier_payload :
     not_harrisKestenScalingFunction_diverges_at_pc_paper_Def
   hyperbolic_domination_obstruction :=
     not_criticalHyperbolicScaling_dominates_kappaStar_current
+  z2_lattice_embedding_bridge_transfer :=
+    gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
 
 /-- Typed frontier for the open random supercritical `Z2_L`
 topological-cluster/phase target.  This does not close the semantic target:

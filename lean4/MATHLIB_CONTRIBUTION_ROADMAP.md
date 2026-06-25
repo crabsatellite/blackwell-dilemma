@@ -89,7 +89,12 @@ machine-gates this transfer/obstruction frontier. The Part 6 repair is
 therefore a paper-faithful carrier/domain change, or another replacement
 carrier whose domination theorem avoids the empty-feasible-set high-alpha
 branch, before there can be a live Cat 2 percolation-universality closure
-target. The thirty-five dead-end
+target. R518 adds `Z2LatticeEmbeddingBridgeData`, making that future
+certificate shape explicit in Lean: it must name `SimpleGraph.Z2LatticeGraph`
+and provide a replacement scaling carrier with both the `DivergesAtBelowAtTop`
+proof and the high-α domination theorem consumed by
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`. The
+thirty-five dead-end
 ledger markers are tracked as `notInput`, not as theorem targets. Main paper
 theorem `#print axioms` output must reduce to Lean/Mathlib kernel axioms plus
 explicit hypotheses.
