@@ -366,7 +366,13 @@ the explicit-package theorem `topoLossKernel_pointwise_bound_on data`. R516
 adds `topo_cluster_random_supercritical_z2_frontier_payload`, a
 `PaperSemanticGate.lean` record that machine-gates the current topo theorem
 surface, the flat-family boxed-torus package, and the Mills-route obstructions
-while leaving the random `Z^2_L` semantic target open.
+while leaving the random `Z^2_L` semantic target open. R519 adds
+`Z2TopoClusterBridgeData` and gates its projection theorems
+`BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge` and
+`BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge`;
+this turns the future random-supercritical `Z^2_L` closure condition into a
+kernel-checked certificate interface, but it does not instantiate that
+certificate or change the open semantic count.
 The concrete scalar `agentRewardKernel` now proves its general range,
 Bayesian/Sentimental pointwise monotonicity, κ-agent pointwise continuity, and
 κ-agent increasing-differences facts directly as theorems.

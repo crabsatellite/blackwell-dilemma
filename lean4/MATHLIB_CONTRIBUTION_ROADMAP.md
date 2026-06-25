@@ -204,6 +204,10 @@ unit-compatible `Z^2_L` lower-bound carrier/theorem, not the current
 `topo_cluster_random_supercritical_z2_frontier_payload`, including the
 conditional expectation formulas, below/above phase theorem surfaces,
 boxed-torus flat-family lower-bound package, and Mills-route obstructions.
+R519 adds the `Z2TopoClusterBridgeData` certificate interface and gates its
+family-core/lower-bound projections in `PaperSemanticGate.lean`; this keeps the
+future random-supercritical `Z^2_L` bridge as an explicit machine-checked
+obligation rather than a prose-only roadmap item.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,

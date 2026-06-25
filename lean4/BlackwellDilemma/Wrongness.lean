@@ -31,6 +31,7 @@ import BlackwellDilemma.Infrastructure.BlackwellConditional
 import BlackwellDilemma.Infrastructure.MillsRatioTail
 import BlackwellDilemma.Infrastructure.MillsConstantPositive
 import BlackwellDilemma.Infrastructure.OrderStatisticsAlgebraicBound
+import BlackwellDilemma.Infrastructure.IntegerLattice
 import Mathlib.Combinatorics.SimpleGraph.Paths
 
 namespace BlackwellDilemma
@@ -12632,6 +12633,36 @@ def BoxedTorusFlatFamilyCoreConclusion_expectedTopoLossOnGiantEnvelope
   exact ⟨L0, fun L hL =>
     expectedTopoLossOnGiantEnvelopeConclusion_from_pointwise_bound
       (hmembers L hL).2.2.1⟩
+
+/-- Machine-readable shape of the missing random supercritical `Z^2_L`
+topological-cluster bridge.
+
+The graph field forces the future certificate to name the standard
+two-dimensional integer lattice.  The load-bearing field is the family-level
+core conclusion currently required by the graph-local theorem core.  This is
+not a witness for the missing random finite-lattice theorem; it is the
+kernel-checked interface that such a theorem must instantiate before the
+paper-semantic topo target can be closed. -/
+structure Z2TopoClusterBridgeData where
+  graph : SimpleGraph (Fin 2 -> Int)
+  graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
+  family : Nat -> WrongnessPercolationData
+  family_core : BoxedTorusFlatFamilyCoreConclusion family
+
+/-- Projection from an explicit `Z^2` topo-cluster bridge to the family-core
+conclusion needed by the public graph-local theorem core. -/
+theorem BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge
+    (bridge : Z2TopoClusterBridgeData) :
+    BoxedTorusFlatFamilyCoreConclusion bridge.family :=
+  bridge.family_core
+
+/-- Projection from an explicit `Z^2` topo-cluster bridge to the flat
+above-threshold lower-bound conclusion. -/
+theorem BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge
+    (bridge : Z2TopoClusterBridgeData) :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      bridge.family :=
+  bridge.family_core.1
 
 /-- Full-reach complement diagnostic percolation package.
 

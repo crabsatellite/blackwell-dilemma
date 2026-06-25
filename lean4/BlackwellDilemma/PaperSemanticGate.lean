@@ -225,6 +225,15 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
       ∃ c : ℝ, 0 < c ∧
         ∀ β : ℝ, 0 < β →
           wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β)
+  z2_lattice_graph_standard :
+    SimpleGraph.Z2LatticeGraph = SimpleGraph.integerLatticeGraph 2
+  z2_topo_cluster_bridge_core :
+    ∀ bridge : Z2TopoClusterBridgeData,
+      BoxedTorusFlatFamilyCoreConclusion bridge.family
+  z2_topo_cluster_bridge_lower_bound :
+    ∀ bridge : Z2TopoClusterBridgeData,
+      BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+        bridge.family
   boxed_torus_flat_lower_bound_current :
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
       boxedTorusFullReachFlatOnlyComplementTopoLossData
@@ -276,6 +285,11 @@ def topo_cluster_random_supercritical_z2_frontier_payload :
     gap_phase_transition_below
   above_threshold_phase_current :=
     gap_phase_transition_above
+  z2_lattice_graph_standard := rfl
+  z2_topo_cluster_bridge_core :=
+    BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge
+  z2_topo_cluster_bridge_lower_bound :=
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge
   boxed_torus_flat_lower_bound_current :=
     BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current
   boxed_torus_family_core_current :=

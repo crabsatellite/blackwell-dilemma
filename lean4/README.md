@@ -24,7 +24,12 @@ generic `sInf` transfer
 entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the
 future embedding-certificate entrypoint
-`gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The topo
+payload now also checks the future `Z2TopoClusterBridgeData` certificate
+projections
+`BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge` and
+`BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge`,
+without closing the still-missing random finite-lattice carrier theorem.  The
 threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation
@@ -477,9 +482,11 @@ for the bridge mechanism, not a full `Z^2_L` giant-component proof.
 `topo_cluster_random_supercritical_z2_frontier_payload` now machine-gates this
 current frontier by storing the conditional expectation formulas, below/above
 phase theorem surfaces, boxed-torus flat-family lower-bound package, and
-Mills-route obstructions in `PaperSemanticGate.lean`.  The semantic target
-remains open because that payload still rests on diagnostic/flat carriers
-rather than a random finite `Z^2_L` giant-component/lower-bound theorem.
+Mills-route obstructions in `PaperSemanticGate.lean`.  It also checks the
+future `Z2TopoClusterBridgeData` bridge projections into the family-core and
+flat lower-bound conclusions.  The semantic target remains open because that
+payload still rests on diagnostic/flat carriers rather than a random finite
+`Z^2_L` giant-component/lower-bound theorem.
 
 The concrete scalar `agentRewardKernel` now also proves its general
 unit-interval range, Bayesian/Sentimental pointwise monotonicity, κ-agent
