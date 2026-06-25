@@ -4720,6 +4720,94 @@ theorem not_z2_lattice_embedding_local_bridge_current :
     current_part6_unbounded_alpha_zero_branch_near_pc
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Unified current-carrier obstruction certificate for the unbounded local
+Part 6 route.
+
+This certificate ties the near-`p_c` zero branch, the impossible unbounded
+divergence output, the impossible pointwise paper-domain certificate, the
+impossible same-`alpha` feasible/divergence witness, the impossible full
+same-`alpha` domination/feasibility/divergence witness, and the
+non-instantiability of the current unbounded local bridge into one audited
+theorem. -/
+def UnboundedPart6CurrentObstructionCertificate : Prop :=
+  (Exists fun alpha : Real =>
+    alphaStar 0 harrisKestenCriticalProb <= alpha /\
+      forall epsilon : Real, 0 < epsilon ->
+        Exists fun p : Real =>
+          harrisKestenCriticalProb - epsilon < p /\
+          p < harrisKestenCriticalProb /\
+          0 <= p /\
+          kappaStar p alpha = 0) /\
+    Not (Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha /\
+        forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon /\
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha) /\
+    Not (forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)) /\
+    Not (Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)) /\
+    (forall scalingCarrier : Real -> Real,
+      Not (Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha /\
+        (Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                scalingCarrier p <= kappaStar p alpha) /\
+        (Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa /\
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) /\
+        (forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon /\
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha))) /\
+    Not (Nonempty Z2LatticeEmbeddingLocalBridgeData)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem unbounded_part6_current_obstruction_certificate :
+    UnboundedPart6CurrentObstructionCertificate := by
+  exact ⟨current_part6_unbounded_alpha_zero_branch_near_pc,
+    not_unbounded_part6_divergence_witness_current,
+    not_unbounded_part6_pointwise_paper_domain_certificate_current,
+    not_unbounded_part6_feasible_divergence_witness_current,
+    not_unbounded_part6_full_paper_domain_witness_current,
+    not_z2_lattice_embedding_local_bridge_current⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Paired current-route obstruction certificate for the open Part 6
 lattice-embedding frontier.
 

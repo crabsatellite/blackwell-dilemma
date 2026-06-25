@@ -166,7 +166,12 @@ this obstruction. It also gates
 `not_unbounded_part6_pointwise_paper_domain_certificate_current`, and
 `not_unbounded_part6_feasible_divergence_witness_current`, so the current
 carrier is ruled out at the unbounded pointwise/output witness layer as well as
-at the local-bridge layer. The same gate now
+at the local-bridge layer. It now also gates
+`not_unbounded_part6_full_paper_domain_witness_current` and the combined
+`unbounded_part6_current_obstruction_certificate`, tying the near-`p_c` zero
+branch, unbounded output-witness obstructions, full same-`alpha` witness
+obstruction, and local-bridge obstruction into one audited theorem. The same
+gate now
 proves `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so a naive closed-unit
 paper-domain repair is also empty on the current scalar carrier. The

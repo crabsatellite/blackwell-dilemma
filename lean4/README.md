@@ -732,7 +732,12 @@ spine for this obstruction. It also gates
 `not_unbounded_part6_feasible_divergence_witness_current`, proving that the
 current carrier cannot even supply the unbounded divergence, pointwise
 paper-domain certificate, or same-`alpha` feasible/divergence output witness
-once `alpha > alphaStar 0 p_c = 1`.
+once `alpha > alphaStar 0 p_c = 1`. It also gates
+`not_unbounded_part6_full_paper_domain_witness_current` and the combined
+`unbounded_part6_current_obstruction_certificate`, so the near-`p_c` zero
+branch, output-witness obstructions, full same-`alpha` witness obstruction,
+and current local-bridge impossibility are audited as one unbounded-route
+certificate.
 The same gate now
 checks `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, showing that a naive

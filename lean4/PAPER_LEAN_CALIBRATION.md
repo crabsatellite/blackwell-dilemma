@@ -280,7 +280,12 @@ carrier can satisfy the present local bridge. It also gates
 `not_unbounded_part6_pointwise_paper_domain_certificate_current`, and
 `not_unbounded_part6_feasible_divergence_witness_current`, so the current
 carrier is machine-blocked at the unbounded pointwise/output witness layer, not
-only at the local-bridge layer. The gate also proves
+only at the local-bridge layer. It also gates
+`not_unbounded_part6_full_paper_domain_witness_current` and the combined
+`unbounded_part6_current_obstruction_certificate`, so the near-`p_c` zero
+branch, unbounded output-witness obstructions, full same-`alpha` witness
+obstruction, and local-bridge obstruction are checked as one current-route
+certificate. The gate also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The
