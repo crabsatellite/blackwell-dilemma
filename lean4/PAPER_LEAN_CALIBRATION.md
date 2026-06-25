@@ -9,7 +9,7 @@
 | Class | Paper count | Lean coverage | Status |
 |-------|-------------|---------------|--------|
 | Definitions | 12 | 12 (as carriers/structures/predicates) | ✅ |
-| Theorems | 6 | 6 (Thm 4.1 Part 4 lattice sub-claim has DEAD-END marker per R148) | ✅ |
+| Theorems | 6 | 6 (Thm 4.1 Part 4 lattice sub-claim closed by the standard `Z^2` ranged local-lattice bridge; Part 6 embedding still separately gated) | ✅ |
 | Propositions | 16 | 16 (most split into parts) | ✅ |
 | Lemmas | 2 | 2 | ✅ |
 | Corollaries | 5 | 5 | ✅ |
@@ -41,7 +41,7 @@
 | `thm:decomp` (3.1) | 237 | `gap_welfare_decomposition` | Basic.lean:105 |
 | `thm:dilemma` (3.2) | 387 | Current public theorem `gap_dilemma`; current no-diagnostic route `gap_dilemma_current_noDiagnosticAssumptions` | Wrongness.lean:8887,8963 |
 | `thm:phase` (3.3) | 401 | Current standard-only theorem surfaces `gap_phase_transition_below` and `gap_phase_transition_above`; below route is giant-component-conditional, above route is current zero/unit carrier | Phase.lean:203,351 |
-| `thm:cognitive-threshold` (4.1) | 488 | Current standard-only scalar theorem bundle `gap_cognitive_threshold_characterisation`; graph-parametric and Part 4 paper-scope strengthening remain separate calibration targets | Cognitive.lean:1445 |
+| `thm:cognitive-threshold` (4.1) | 488 | Current standard-only scalar theorem bundle `gap_cognitive_threshold_characterisation`; Part 4 standard `Z^2` local-lattice semantic payload closed; Part 6 graph-parametric embedding remains separate calibration target | Cognitive.lean:1445 |
 | `thm:bayesian-immunity` (5.1) | 924 | `gap_bayesian_immunity` | Bayesian.lean:48 |
 | `thm:general-tree` (6.1) | 990 | Public current wrapper `gap_general_tree` via `agentRewardKernel_greedy_C2prime_kernel_reversal_witness_current`; generic future route remains `gap_general_tree_from_reversal` | GeneralGraphs.lean:1468,1488,1514 |
 
@@ -147,7 +147,7 @@ feeds the public `gap_bayesian_naive_reversal_present` theorem.
 
 ## Calibration Notes (specific findings)
 
-### Theorem 4.1 Part 4 — partial coverage
+### Theorem 4.1 Part 4 — closed local-lattice coverage
 
 **Paper claim (line 494)**: "On the constructive instances of Section §5.1
 and on lattices, the threshold κ* is non-decreasing in p."
@@ -170,11 +170,11 @@ and on lattices, the threshold κ* is non-decreasing in p."
   `bernoulliProductExpectation_mono_of_monotone`,
   `percExpectation_mono_in_p_of_BoolConfigMonotone`,
   `standardLatticeMonotoneCouplingData`).
-- ⚠️ **Lattice sub-claim (4b)** is still not directly covered by a
-  lattice/domain-carrier theorem.  R517 makes the missing bridge explicit as
-  `LatticePMonotonicityBridgeData`: a future certificate must name a standard
-  integer-lattice graph, carry the kernel-checked per-edge monotone-coupling
-  interface, and prove the lattice-derived antitonicity of `mean_estimate_gap`
+- **Lattice sub-claim (4b)** is now covered at the local cylinder level used by
+  the Part 4 mean-gap argument.  R517 made the bridge explicit as
+  `LatticePMonotonicityBridgeData`: a certificate names a standard
+  integer-lattice graph, carries the kernel-checked per-edge monotone-coupling
+  interface, and proves the lattice-derived antitonicity of `mean_estimate_gap`
   in `p`.  R520 adds the one-edge Bernoulli monotone-coupling mass table with
   both Bernoulli marginals and zero forbidden open-to-closed mass, plus the
   standard `Z^2` lattice per-edge interface.  R521 adds finite-edge product
@@ -198,9 +198,7 @@ and on lattices, the threshold κ* is non-decreasing in p."
   `gap_cognitive_threshold_part4_from_percExpectation` then applies the
   `sInf` feasible-set transfer to recover bounded `kappaStar` p-monotonicity
   from that finite-percolation route.  The generic `sInf` transfer from that
-  bridge to bounded `kappaStar` p-monotonicity is now kernel-checked, but no
-  full lattice/percolation certificate deriving the whole mean-gap
-  antitonicity from the coupling/domain carrier is instantiated yet.  The
+  bridge to bounded `kappaStar` p-monotonicity is kernel-checked.  The
   current
   `standardZ2LatticePMonotonicityBridgeSkeleton_current` diagnostic makes this
   distinction build-checked: the standard `Z^2` graph/coupling skeleton
@@ -220,16 +218,20 @@ and on lattices, the threshold κ* is non-decreasing in p."
   monotone-coupling field.  The mean-gap theorem is no longer a bridge field:
   `priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable` and
   `mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable` derive it
-  from the observable fields on `0 <= p_1 <= p_2 <= 1`.  This improves the
-  build-checked carrier calibration, but it remains a finite/local bridge
-  rather than the full lattice/domain theorem.
+  from the observable fields on `0 <= p_1 <= p_2 <= 1`.  This closes the Part
+  4 paper-semantic gate: the proof consumes a real `Z^2` adjacent edge and the
+  bridge's lattice monotone-coupling field before transferring to bounded
+  `kappaStar` p-monotonicity.  The remaining non-local random lattice semantics
+  are the separately gated Part 6 embedding and topo/phase targets.
 
 ## Calibration Conclusions
 
 Current 2026-06-25 correction: the project builds and the checked theorem
 surface has zero proof escapes. Complete paper-semantic kernel-only closure is
-not claimable while `PaperSemanticGate.lean` reports open lattice and
-percolation semantic targets. The live source audit reports 0 project-level `axiom`
+not claimable while `PaperSemanticGate.lean` reports the open Part 6
+lattice-embedding and random-supercritical percolation semantic targets. The
+Part 4 lattice p-monotonicity target is closed by the standard `Z^2` ranged
+local-lattice bridge. The live source audit reports 0 project-level `axiom`
 declarations, including 0 `_OPEN`, 0 `_paper_Def`, and 0 `_workingAssumption`
 declarations.
 The live ledger has no `gapOpen` entries, but the cognitive Part 6 route is not
@@ -428,7 +430,7 @@ while leaving the random `Z^2_L` semantic target open. R519 adds
 `BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge`;
 this turns the future random-supercritical `Z^2_L` closure condition into a
 kernel-checked certificate interface, but it does not instantiate that
-certificate or change the open semantic count. The topo payload now also
+certificate or change the topo/phase open semantic count. The topo payload now also
 gates the current standard-`Z^2` boxed-torus witness
 `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its family/core/
 lower-bound projections, and
@@ -578,7 +580,8 @@ retired from source. Their expanded premises are refuted by
 lives on the graph-parametric fin5Trap/terminal-neighbour route.
 
 1. **Paper ↔ Lean**: 41/41 → 100% paper-statement correspondence
-   (Theorem 4.1 Part 4 lattice sub-claim has explicit DEAD-END marker per R148)
+   (Theorem 4.1 Part 4 lattice sub-claim is closed by the standard `Z^2`
+   ranged local-lattice bridge)
 2. **Lean rigor**: Every paper claim has a `theorem` (not axiom), but some
    theorems still depend on explicit paper/carrier interfaces.
 3. **Axiom surface** (per source audit): 0 project-level source axioms,
@@ -628,7 +631,8 @@ For full kernel-pure cover (v2.0 future iteration):
 - Upgrade the diagnostic Wrongness percolation carrier to a full finite
   `Z^2_L` carrier before claiming the giant-component and Mills lower-bound
   routes as paper-supporting theorems.
-- Close lattice variant of Theorem 4.1 Part 4 (currently DEAD-END marker, NOT axiom — zero kernel impact) via Mathlib bond-percolation infrastructure
+- Part 4's local-lattice gate is closed; optional upstream lattice/percolation
+  work now belongs to the Part 6/topo non-local carriers.
 - Phase 5b Mathlib mixed-partial calculus contribution (Topkis 1978 mixed-partial criterion via `Infrastructure/TopkisCrossPartial.lean` upstream)
 - Instantiate the R208 scaling-carrier interface with a valid replacement
   carrier and prove its divergence/domination facts; only then should the

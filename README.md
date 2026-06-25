@@ -35,9 +35,11 @@ kernel-clean: no project-level source axioms, no proof escapes, no unresolved
 conditional theorem interfaces, and no Cat 3 paper-novel input assumptions in
 the live ledger. Complete paper-semantic closure is separately gated in
 `BlackwellDilemma/PaperSemanticGate.lean`; while that gate reports open
-lattice and percolation semantic targets, the project does not claim the
-stronger full-manuscript semantic closure status. The former threshold target
-is now closed by the one-edge high-κ oracle-routing carrier
+Part 6 lattice-embedding and random-supercritical percolation semantic targets,
+the project does not claim the stronger full-manuscript semantic closure
+status. The Part 4 lattice p-monotonicity target is now closed by the standard
+`Z²` ranged local-lattice bridge; the former threshold target is closed by the
+one-edge high-κ oracle-routing carrier
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the neutral-carrier
 refutation remains as diagnostic evidence for the retired route. See
 [`lean4/README.md`](lean4/README.md) and

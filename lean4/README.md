@@ -11,17 +11,15 @@ labeled paper item and a Lean theorem** (12 definitions, 6 theorems,
 [`PAPER_LEAN_CALIBRATION.md`](PAPER_LEAN_CALIBRATION.md) for the explicit
 mapping). Complete paper-semantic closure is tracked separately by
 [`BlackwellDilemma/PaperSemanticGate.lean`](BlackwellDilemma/PaperSemanticGate.lean):
-the current open semantic targets are the lattice-specific Theorem 4.1 Part 4
-statement, the lattice-IDP embedding route for Part 6, and the random
-supercritical `Z2_L` topological cluster/phase carrier.  The open frontiers
-are machine-gated by `part4_lattice_p_monotonicity_frontier_payload`,
-`part6_lattice_embedding_frontier_payload`, and
-`topo_cluster_random_supercritical_z2_frontier_payload`; these payloads check
-the current kernel theorem surface while keeping the lattice/domain and random
-finite-lattice carrier repairs open.  The Part 4 payload now also checks the
+the current open semantic targets are the lattice-IDP embedding route for Part
+6 and the random supercritical `Z2_L` topological cluster/phase carrier.  These
+open frontiers are machine-gated by `part6_lattice_embedding_frontier_payload`
+and `topo_cluster_random_supercritical_z2_frontier_payload`.  The Part 4
+lattice p-monotonicity semantic target is now closed by
+`part4_lattice_p_monotonicity_frontier_payload`, which checks the
 generic `sInf` transfer
-`kappaStar_p_monotone_of_mean_gap_antitone` and the future lattice certificate
-entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  It now also
+`kappaStar_p_monotone_of_mean_gap_antitone` and the lattice bridge transfer
+`gap_cognitive_threshold_part4_from_lattice_bridge`.  It now also
 checks the kernel-pure one-edge Bernoulli monotone-coupling table, the
 finite-product monotone-coupling marginal data, the finite-box expectation
 monotonicity theorem for coordinatewise monotone observables, and the standard
@@ -58,9 +56,8 @@ bridge's own lattice monotone-coupling field.  It derives
 `priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable` and
 `mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable` from those
 fields before transferring to bounded `kappaStar` monotonicity.  This is a
-local/finite bridge calibration, not the full infinite-lattice theorem.
-The still-open Part 4 work is replacing this finite/local witness with the
-full lattice/domain carrier.  The Part 6
+local/finite cylinder bridge on the standard lattice; non-local random lattice
+semantics remain tracked by Part 6 and the topo/phase target.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the
 future embedding-certificate entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The topo
@@ -156,7 +153,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=2, open=3 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |

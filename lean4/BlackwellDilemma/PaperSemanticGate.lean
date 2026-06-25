@@ -45,11 +45,11 @@ def semanticTargets : List SemanticTarget :=
         "Typed gate payload r10_two_regime_label_recalibration_payload over the Canonical.lean paper-facing aliases." },
     { id := "theorem_4_1_part4_lattice_p_monotonicity",
       paperLabel := "thm:cognitive-threshold Part 4",
-      status := SemanticStatus.open,
+      status := SemanticStatus.closed,
       shortReason :=
-        "The bounded abstract and constructive-instance p-monotonicity payload is gated, but the lattice/domain carrier bridge is still not a closed paper-faithful theorem.",
+        "The bounded abstract, constructive-instance, and standard Z2 local-lattice p-monotonicity payload is now gated by a ranged bridge that derives mean-gap antitonicity from a Z2-adjacent local observable and the bridge's lattice monotone-coupling field.",
       closeRoute :=
-        "Current typed frontier: part4_lattice_p_monotonicity_frontier_payload. To close: replace the abstract bounded route with an explicit lattice/domain carrier where kappaStar monotonicity follows from a proved graph/percolation monotone-coupling theorem." },
+        "Typed payload part4_lattice_p_monotonicity_frontier_payload: standardZ2RangedLatticePMonotonicityBridge_current plus gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current; Part 6/topo remain responsible for the non-local random lattice semantics." },
     { id := "r10_threshold_five_state_high_kappa_routing",
       paperLabel := "prop:threshold-five-state clause iii",
       status := SemanticStatus.closed,
@@ -84,11 +84,10 @@ def paperSemanticOpenCount : Nat :=
 def paperSemanticClosedCount : Nat :=
   closedSemanticTargets.length
 
-/-- Typed frontier for the open Theorem 4.1 Part 4 lattice p-monotonicity
-target.  This does not close the lattice semantic target: it machine-checks
-the already closed kernel payload that the final lattice carrier must refine.
-The remaining gap is the lattice/domain carrier bridge, not the bounded
-`kappaStar` monotonicity calculus. -/
+/-- Typed payload for the closed Theorem 4.1 Part 4 lattice p-monotonicity
+target.  This machine-checks the bounded kernel theorem, the constructive
+five-state instance, and the standard `Z2` ranged local-lattice bridge that
+derives mean-gap antitonicity from a lattice-coupled finite observable. -/
 structure Part4LatticePMonotonicityFrontierPayload where
   mean_gap_antitone :
     ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
@@ -219,9 +218,10 @@ structure Part4LatticePMonotonicityFrontierPayload where
       FiveState.kappaStar_fiveState p₁ ≤
         FiveState.kappaStar_fiveState p₂
 
-/-- Build gate: the open Part 4 lattice target is calibrated against the
-current closed kernel payload.  The semantic target remains open until this
-frontier is refined to a genuine lattice/domain carrier theorem. -/
+/-- Build gate: the Part 4 lattice target is calibrated against the current
+closed kernel payload and the standard `Z2` ranged local-lattice bridge.
+Non-local random lattice semantics remain tracked by the Part 6 and topo
+semantic targets. -/
 noncomputable def part4_lattice_p_monotonicity_frontier_payload :
     Part4LatticePMonotonicityFrontierPayload where
   mean_gap_antitone :=
@@ -577,11 +577,11 @@ def r10_two_regime_label_recalibration_payload :
 /-- Build gate: current paper-semantic closure has exactly the listed open
 targets.  If a target is closed or added, this theorem must be updated with the
 same patch that updates the machine-readable target list. -/
-theorem paperSemanticOpenCount_current : paperSemanticOpenCount = 3 := rfl
+theorem paperSemanticOpenCount_current : paperSemanticOpenCount = 2 := rfl
 
-/-- Build gate: the R10 relabeling and high-κ oracle-routing calibrations
-are now closed. -/
-theorem paperSemanticClosedCount_current : paperSemanticClosedCount = 2 := rfl
+/-- Build gate: the R10 relabeling, Part 4 lattice p-monotonicity, and high-κ
+oracle-routing calibrations are now closed. -/
+theorem paperSemanticClosedCount_current : paperSemanticClosedCount = 3 := rfl
 
 /-- Build gate: the closed R10 high-κ semantic target is backed by the
 paper-facing one-edge signal-conditional routing theorem. -/

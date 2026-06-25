@@ -35,24 +35,25 @@ Conditional audit:  prop_interfaces=0 closed_true_prop_interfaces=0
                     conditional_signatures_using_unresolved_prop_def_interfaces=0
                     conditional_signatures_using_unresolved_structure_interfaces=0
                     conditional_signatures_using_unresolved_class_interfaces=0
-Paper semantic gate: closed=2 open=3
+Paper semantic gate: closed=3 open=2
 ```
 
 The source-level axiom surface and live Cat 3 input surface are now zero, but
 complete paper-semantic kernel-only closure is stricter than this live theorem
-surface. `PaperSemanticGate.lean` currently lists three open semantic targets:
-Theorem 4.1 Part 4 lattice p-monotonicity, Theorem 4.1 Part 6 lattice
-embedding, and the random supercritical `Z2_L` topological cluster/phase
-carrier. These are not hidden source axioms or proof escapes; they are the
-remaining manuscript-semantics-to-kernel correspondence work.
+surface. `PaperSemanticGate.lean` currently lists two open semantic targets:
+Theorem 4.1 Part 6 lattice embedding and the random supercritical `Z2_L`
+topological cluster/phase carrier. These are not hidden source axioms or proof
+escapes; they are the remaining manuscript-semantics-to-kernel correspondence
+work.
 
 The current open-frontier theorem surfaces are themselves build-gated:
-`part4_lattice_p_monotonicity_frontier_payload`,
-`part6_lattice_embedding_frontier_payload`, and
+`part6_lattice_embedding_frontier_payload` and
 `topo_cluster_random_supercritical_z2_frontier_payload` are Lean records in
-`PaperSemanticGate.lean`, not README-only references.
+`PaperSemanticGate.lean`, not README-only references. The closed Part 4 local
+lattice payload is still build-gated by
+`part4_lattice_p_monotonicity_frontier_payload`.
 
-Current Part 4 frontier: `part4_lattice_p_monotonicity_frontier_payload`
+Closed Part 4 lattice payload: `part4_lattice_p_monotonicity_frontier_payload`
 machine-gates the closed bounded theorem surface
 (`mean_estimate_gap_antitone_in_p_paper_Def`,
 `kappaStar_p_monotone_of_mean_gap_antitone`,
@@ -105,10 +106,9 @@ the bridge's own lattice monotone-coupling field plus
 `priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable` and
 `mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable`, so the
 ranged mean-gap antitonicity is derived from those observable fields rather
-than stored as bridge data. This is the strongest current finite/local
-carrier calibration; the semantic target remains open because no full
-lattice/percolation certificate deriving the mean-gap antitonicity from that
-domain/coupling carrier has been instantiated.
+than stored as bridge data. This closes the Part 4 semantic target at the
+standard `Z^2` local-cylinder level; full non-local random lattice semantics
+remain tracked by the Part 6 embedding and topo/phase targets.
 
 Current iteration result: the high-κ five-state oracle-routing target is now
 closed, not merely diagnosed. `FiveState.fiveStateOracleWelfare` formalises
@@ -1171,7 +1171,7 @@ hypotheses.
 - Effort: medium-large (~60h total)
 - Acceptance: high (Mathlib explicitly waiting per `BinomialRandomGraph/README` stub)
 - **Closes `trapLocalConfigProb_pos_and_le` and `restrictedExpectation_eq_localConfigProb`** Cat 3 lattice interfaces
-- **Closes `gap_cognitive_threshold_part4_lattice` DEAD-END marker** (κ* monotonicity in p)
+- **Further upstreams non-local percolation machinery used by the Part 6/topo targets** (the Part 4 local-lattice gate is already closed in project source)
 
 **PR-10** — `Mathlib/Probability/Independence/FKG.lean` + `Mathlib/Probability/Percolation/FKG.lean`
 - Specialise existing `Combinatorics/SetFamily/FourFunctions` (Ahlswede-Daykin) to Bernoulli product
