@@ -14,7 +14,10 @@ mapping). Complete paper-semantic closure is tracked separately by
 the current open semantic targets are the lattice-specific Theorem 4.1 Part 4
 statement, the paper R10 high-kappa `threshold-five-state` routing clause,
 the lattice-IDP embedding route for Part 6, and the random supercritical
-`Z2_L` topological cluster/phase carrier.
+`Z2_L` topological cluster/phase carrier.  The threshold-five-state target is
+now machine-diagnosed: `FiveState.not_current_kappaAgent_highKappa_oracle_at_p0`
+proves the current neutral kappa-agent carrier cannot achieve the R10 oracle
+value at `p = 0`.
 
 Every claim is exposed as a Lean declaration with its formalisation status
 tracked in [`BlackwellDilemma/Ledger.lean`](BlackwellDilemma/Ledger.lean).

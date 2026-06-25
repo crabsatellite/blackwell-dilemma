@@ -48,6 +48,15 @@ topological cluster/phase carrier. These are not hidden source axioms or proof
 escapes; they are the remaining manuscript-semantics-to-kernel correspondence
 work.
 
+Current iteration result: the high-κ five-state oracle-routing target is now
+machine-diagnosed, not just text-diagnosed. `FiveState.fiveStateOracleWelfare`
+formalises the R10 value `1 - 0.4p`, and
+`FiveState.not_current_kappaAgent_highKappa_oracle_at_p0` proves that the
+current neutral `kappaAgent` carrier cannot achieve it at `p = 0`. Closing this
+semantic target therefore requires either a paper-faithful signal-conditional
+routing carrier or a manuscript revision to the already closed smooth-threshold
+payload.
+
 The R207 theorem
 `not_harrisKestenScalingFunction_diverges_at_pc_paper_Def` proves the current
 unbounded lower-envelope carrier route false, so the cognitive Part 6 route now

@@ -50,9 +50,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:threshold-five-state clause iii",
       status := SemanticStatus.open,
       shortReason :=
-        "The current threshold-five-state theorem surface does not yet prove the paper R10 high-kappa signal-conditional routing clause achieving oracle 1 - 0.4p.",
+        "The paper R10 high-kappa signal-conditional routing clause achieving oracle 1 - 0.4p is refuted for the current neutral kappaAgent carrier.",
       closeRoute :=
-        "Add a paper-facing five-state routing theorem over the R10 two-regime carrier, or revise the paper claim to the already closed smooth-threshold payload." },
+        "Replace the neutral kappaAgent carrier with a paper-faithful signal-conditional routing carrier, or revise the paper claim to the already closed smooth-threshold payload. Current-carrier obstruction: FiveState.not_current_kappaAgent_highKappa_oracle_at_p0." },
     { id := "theorem_4_1_part6_lattice_embedding",
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,

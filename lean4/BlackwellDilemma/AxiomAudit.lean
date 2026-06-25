@@ -748,6 +748,8 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_kappa_above_kstar_from_blackwell
 #print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_kappa_above_kstar
 #print axioms BlackwellDilemma.FiveState.gap_threshold_fiveState_smooth_transition
+#print axioms BlackwellDilemma.FiveState.agentWelfare_kappaAgent_current_eq_half
+#print axioms BlackwellDilemma.FiveState.not_current_kappaAgent_highKappa_oracle_at_p0
 #print axioms BlackwellDilemma.FiveState.gap_bayesian_naive_reversal_present
 
 -- GeneralGraphs.lean decomposition (generic interface routes + public current routes):

@@ -4026,6 +4026,39 @@ theorem gap_threshold_fiveState_smooth_transition :
   intro p
   exact ⟨inflection_at_kstar p, welfare_bounded_below_inflection p⟩
 
+/-! ### R10 high-κ oracle-routing obstruction for the current carrier
+
+The paper R10 text also describes high-κ signal-conditional routing achieving
+the five-state oracle value `1 - 0.4p`.  The current public `kappaAgent` kernel
+is still the neutral constant `1/2`, so that stronger oracle-routing claim is
+not merely unproved: it is false for the current carrier.  The following
+theorems make that obstruction machine-checked and keep the semantic gate from
+being closed by a wrapper around the current kernel. -/
+
+/-- Paper-facing five-state oracle value for the R10 high-κ routing clause. -/
+noncomputable def fiveStateOracleWelfare (p : ℝ) : ℝ :=
+  1 - (4/10 : ℝ) * p
+
+/-- Current public κ-agent welfare is the neutral constant `1/2` for every
+`β` and `κ`.  This is a theorem about the present carrier, not a paper claim. -/
+theorem agentWelfare_kappaAgent_current_eq_half (β κ : ℝ) :
+    agentWelfare AgentType.kappaAgent β κ 1 = (1/2 : ℝ) := by
+  unfold agentWelfare
+  change percExpectation (1 - blockingProb)
+    (fun _ : BondConfig AgentEdgeIdx => (1/2 : ℝ)) = (1/2 : ℝ)
+  exact percExpectation_const (E := AgentEdgeIdx)
+    (p := 1 - blockingProb) (c := (1/2 : ℝ))
+
+/-- At `p = 0`, the R10 five-state oracle value is `1`, so the current
+neutral κ-agent carrier cannot satisfy the high-κ oracle-routing clause. -/
+theorem not_current_kappaAgent_highKappa_oracle_at_p0 :
+    ¬ ∃ β κ : ℝ,
+      kappaStar_fiveState 0 < κ ∧
+        agentWelfare AgentType.kappaAgent β κ 1 = fiveStateOracleWelfare 0 := by
+  rintro ⟨β, κ, _hκ, h_eq⟩
+  rw [agentWelfare_kappaAgent_current_eq_half β κ] at h_eq
+  norm_num [fiveStateOracleWelfare] at h_eq
+
 /-! ## 6. Proposition `prop:bayesian-naive-five-state`
 
 A Bayesian-naive agent uses `V̂_p̂(B) = 0.4 + 0.6(1−p̂)` and picks `B` iff
