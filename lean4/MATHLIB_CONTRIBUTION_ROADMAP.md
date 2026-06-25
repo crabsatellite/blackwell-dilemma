@@ -326,39 +326,29 @@ R519 adds the `Z2TopoClusterBridgeData` certificate interface and gates its
 family-core/lower-bound projections in `PaperSemanticGate.lean`; this keeps the
 future random-supercritical `Z^2_L` bridge as an explicit machine-checked
 obligation rather than a prose-only roadmap item. The current gate strengthens
-this with `RandomSupercriticalZ2TopoClusterBridgeData`, whose fields include
-the finite boxed-torus vertex/edge indexing facts, a named supercritical
-probability, flat and giant-restricted lower-bound theorems at that same
-parameter, a derived single-certificate projection with one positive constant
-and one size threshold supporting both lower bounds, the derived
-`randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate` tying
-that support to the standard `Z^2` graph, finite boxed-torus vertex/edge
-indexing facts, the same `p > p_c` domain, and the non-diagnostic tail
-certificate, the derived uniform eventual positive flat-loss witness, an
-eventual positive giant-restricted loss witness, eventual unrestricted and
-in-giant pointwise positive-loss realisation witnesses, the same family-core
-theorem package, a supported non-diagnostic tail theorem choosing arbitrarily
-large finite members where the five-family exclusions, shared flat/giant lower
-bounds, and in-giant positive-loss realisation hold together, and
-non-diagnostic guards excluding the
-current full-reach, flat-only, all-open-complement, deterministic all-open
-giant, deterministic all-open positive, pointwise-hybrid, and extended
-eventual-tail diagnostic families, plus
-`randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`,
-which derives a finite member outside all three current diagnostic carriers,
-and
-`randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_non_diagnostic_member`,
-which rules out eventual diagnostic tails by producing such a member above
-every finite threshold, plus
-`randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_extended_non_diagnostic_member`,
-which is now folded into the paper-support certificate and produces
-arbitrarily large members outside all five deterministic diagnostic carriers,
-plus
-`randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_supported_extended_non_diagnostic_member`,
-which folds those exclusions into the same supported lower-bound tail;
-`PaperSemanticGate.lean` gates its projections and
-exclusions so the eventual closure target is now a concrete Lean structure,
-not a prose instruction. The topo payload now also
+this with `RandomSupercriticalZ2TopoClusterBridgeData`, but that old structure
+is now retained only as a kernel-refuted over-strong route:
+`not_random_supercritical_z2_topo_cluster_bridge_contract_current` proves that
+its uniform giant-restricted lower-bound field is incompatible with the
+pointwise giant-loss envelope on flattened boxed-torus sizes. The active
+closure interface is the repaired
+`RandomSupercriticalZ2TopoClusterRepairedBridgeData`, whose fields include the
+finite boxed-torus vertex/edge indexing facts, a named strict supercritical
+probability, a flat expected-loss lower-bound theorem, a giant-event mass
+lower-bound theorem, family-level unit-interval loss range, the same
+family-core theorem package, and non-diagnostic guards excluding the current
+full-reach, flat-only, all-open-complement, deterministic all-open giant,
+deterministic all-open positive, pointwise-hybrid, and extended eventual-tail
+diagnostic families. The repaired projections
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_flat_event_mass_lower_bound_and_loss_realisation`,
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_supported_extended_non_diagnostic_member`,
+and `randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support` fold the
+flat lower bound, giant-event mass, unrestricted positive-loss realisation,
+strict `p_c < p < 1` parameter, graph/indexing facts, and non-diagnostic tail
+into one gateable surface. `PaperSemanticGate.lean` gates both the old
+contract obstruction and the repaired bridge projections so the eventual
+closure target is now a concrete Lean structure, not a prose instruction. The
+topo payload now also
 gates `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its
 family/core/lower-bound projections through the bridge interface, and
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,

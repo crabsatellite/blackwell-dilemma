@@ -43,35 +43,29 @@ one-edge high-κ oracle-routing carrier
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the neutral-carrier
 refutation remains as diagnostic evidence for the retired route. The topo gate
 now also machine-checks all-open/complement boxed-torus giant-event witnesses,
-the full-reach `Z²` boxed-torus bridge with its fixed-`L` all-`n` lower-bound
-interface, the explicit non-diagnostic
-`RandomSupercriticalZ2TopoClusterBridgeData` contract with a named
-supercritical probability, separate flat and giant-restricted lower-bound
-theorem fields at that same parameter, and a derived single-certificate
-projection with one positive constant and one size threshold supporting both
-lower bounds. The derived paper-support certificate now ties that support to
-the standard `Z²` graph, finite boxed-torus size facts, and the same
-`p > p_c` domain, and also packages the diagnostic-exclusion tail certificate,
-including arbitrarily large finite members outside all five deterministic
-diagnostic families, with the same arbitrarily large tail now also required to
-carry the shared flat/giant lower bounds and an in-giant positive-loss
-realisation. The gate separately keeps the derived uniform eventual positive
-flat-loss, giant-restricted positive-loss, unrestricted pointwise positive-loss,
-and in-giant pointwise positive-loss realisation witnesses, and the
-flat-sequence lower-bound package. It also gates the
-current flat-only full-reach support
-mechanism: giant-restricted loss is zero, while the flat lower-bound loss is
-exactly half of the full-reach failure-event mass. The random-supercritical
-semantic target remains open until that contract is instantiated by the real
-finite-lattice carrier. The
+the full-reach `Z^2` boxed-torus bridge with its fixed-`L` all-`n` lower-bound
+interface, and the old non-diagnostic
+`RandomSupercriticalZ2TopoClusterBridgeData` contract as a kernel-refuted
+over-strong route: its uniform giant-restricted lower-bound field contradicts
+the pointwise giant-loss envelope along the flattened boxed-torus sizes. The
+active closure route is now the repaired
+`RandomSupercriticalZ2TopoClusterRepairedBridgeData` surface, which keeps the
+standard `Z^2` graph identity, boxed-torus size facts, strict `p_c < p < 1`
+parameter, unit-interval loss range, flat expected-loss lower bound,
+giant-event mass lower bound, unrestricted positive-loss realisation, and
+non-diagnostic tail certificate, while dropping the refuted uniform
+giant-restricted loss lower-bound obligation. The random-supercritical
+semantic target remains open until this repaired contract is instantiated by
+the real finite-lattice carrier. The
 separately named projections machine-exclude the current full-reach, flat-only,
 all-open-complement, deterministic all-open giant, and deterministic all-open
 positive diagnostic families, including pointwise hybrids assembled from those
 diagnostics. It derives an explicit finite member outside the first three
 diagnostic carriers, and now also rules out extended eventual diagnostic tails
 by deriving arbitrarily large members outside all five deterministic
-diagnostic carriers, plus supported tail members where those exclusions hold at
-the same sizes as the lower-bound and in-giant witness support. The Part 6 gate now also
+diagnostic carriers, plus repaired supported tail members where those exclusions
+hold at the same sizes as the flat lower-bound, giant-event mass, and
+unrestricted positive-loss support. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
 domination interface, a repaired local near-`p_c` domination transfer, a
 closed-unit local transfer on the explicit `alpha*(0,p_c) < alpha <= 1`
