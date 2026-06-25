@@ -655,7 +655,11 @@ threshold certificate, derives the nonempty-domain witness from it, and the gate
 for any future instance on `alphaStar 0 p_c < α <= 1`, plus
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`,
 which packages the derived nonempty-domain certificate into an actual
-paper-domain divergence witness.
+paper-domain divergence witness.  The gate also checks
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
+which binds the `Z^2` graph identity, scaling divergence, threshold
+certificate, local domination field, and witness projection into one
+paper-support theorem.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` proves the current
 carrier cannot instantiate that bridge because its threshold certificate is
 impossible. The remaining Part 6 repair is therefore

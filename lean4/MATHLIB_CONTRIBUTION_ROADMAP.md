@@ -165,6 +165,10 @@ now provides the bounded transfer theorem for any future instance on
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`
 turns the bridge's derived nonempty-domain certificate into an explicit paper-domain
 divergence witness. The gate also checks
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
+which binds the `Z^2` graph identity, scaling divergence, threshold
+certificate, local domination field, and witness projection into one
+closed-unit Part 6 paper-support theorem. The gate also checks
 `closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one`, reducing the
 closed-unit nonempty-domain repair to a positive `alphaStar 0 p_c < 1`
 threshold certificate.

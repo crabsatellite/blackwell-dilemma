@@ -2188,6 +2188,40 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_loca
       bridge α hα hα_le_one
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Single paper-support certificate extracted from the paper-bounded
+closed-unit local Part 6 bridge contract.
+
+This packages the standard `Z²` graph identity, the scaling divergence
+carrier, the nonempty closed-unit `α`-domain certificate, the local domination
+field over that same domain, and the resulting paper-domain divergence
+witness.  It is a gateable semantic contract for the repaired Part 6 route:
+a future bridge must carry all of these facts together, not merely a pointwise
+transfer surface over a vacuous domain. -/
+theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    bridge.graph = SimpleGraph.Z2LatticeGraph ∧
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        bridge.scalingCarrier harrisKestenCriticalProb ∧
+      alphaStar 0 harrisKestenCriticalProb < 1 ∧
+      (∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α → α ≤ 1 →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              bridge.scalingCarrier p ≤ kappaStar p α) ∧
+      ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
+        α ≤ 1 ∧
+          ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+            ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+              p < harrisKestenCriticalProb →
+                M < kappaStar p α := by
+  exact ⟨bridge.graph_is_z2_lattice,
+    bridge.scaling_diverges,
+    bridge.closed_unit_alphaStar_lt_one,
+    bridge.scaling_dominates_kappa_near_pc,
+    gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness
+      bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 (full statement, conjunction). Combines all six paper-
     stated parts (Parts 1, 2, 3, 4, 5, 6). Part 4 is bundled here as
     the paper-faithful bounded form on the abstract `kappaStar` carrier

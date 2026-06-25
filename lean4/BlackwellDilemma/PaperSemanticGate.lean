@@ -61,7 +61,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current global scaling-transfer payload, local-domination transfer, closed-unit local transfer and existential witness projection, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
+        "The current global scaling-transfer payload, local-domination transfer, closed-unit local transfer and existential witness projection, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, and witness fields, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
       closeRoute :=
         "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1 by proving alphaStar 0 p_c < 1 for the repaired carrier, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem." },
     { id := "topo_cluster_random_supercritical_z2",
@@ -421,6 +421,27 @@ structure Part6LatticeEmbeddingFrontierPayload where
             ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
               p < harrisKestenCriticalProb →
                 M < kappaStar p α
+  z2_lattice_embedding_closed_unit_local_bridge_paper_support_certificate :
+    forall bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
+      bridge.graph = SimpleGraph.Z2LatticeGraph /\
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        bridge.scalingCarrier harrisKestenCriticalProb /\
+      alphaStar 0 harrisKestenCriticalProb < 1 /\
+      (forall alpha : Real,
+        alphaStar 0 harrisKestenCriticalProb < alpha -> alpha <= 1 ->
+          Exists fun delta : Real =>
+            0 < delta /\
+              forall p : Real, harrisKestenCriticalProb - delta < p ->
+                p < harrisKestenCriticalProb ->
+                  bridge.scalingCarrier p <= kappaStar p alpha) /\
+      Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha /\
+        alpha <= 1 /\
+          forall M : Real, Exists fun epsilon : Real =>
+            0 < epsilon /\
+              forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+                p < harrisKestenCriticalProb ->
+                  M < kappaStar p alpha
 
 /-- Build gate: the open Part 6 lattice-embedding target is calibrated
 against the current transfer layer, local-domination transfer layers, and
@@ -435,7 +456,8 @@ this zero branch blocks the present local bridge shape; if the closed-unit
 route is repaired, the payload now also checks that it yields an
 actual paper-domain divergence witness rather than only a pointwise transfer
 surface, that the bridge explicitly carries `alphaStar 0 p_c < 1`, that the
-closed-unit domain witness is derived from that certificate, and that
+closed-unit domain witness is derived from that certificate, that all
+closed-unit bridge fields are tied by one paper-support certificate, and that
 nonemptiness is exactly the same certificate. -/
 def part6_lattice_embedding_frontier_payload :
     Part6LatticeEmbeddingFrontierPayload where
@@ -490,6 +512,8 @@ def part6_lattice_embedding_frontier_payload :
     z2LatticeEmbeddingClosedUnitLocalBridgeData_nonempty_closed_unit_alpha_domain
   z2_lattice_embedding_closed_unit_local_bridge_witness :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness
+  z2_lattice_embedding_closed_unit_local_bridge_paper_support_certificate :=
+    z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate
 
 /-- Typed frontier for the open random supercritical `Z2_L`
 topological-cluster/phase target.  This does not close the semantic target:
