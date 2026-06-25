@@ -2237,6 +2237,37 @@ theorem z2LatticeEmbeddingLocalBridgeData_paper_support_certificate
       bridge⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Same-`alpha` pointwise certificate from the repaired unbounded local Part 6
+bridge contract.
+
+For every paper-domain `alpha`, the bridge supplies both a near-`p_c`
+nonempty feasible set for `kappaStar p alpha` and the Part 6 divergence
+transfer at that same `alpha`.  This prevents a future gate from checking
+feasibility and divergence only as unrelated theorem surfaces. -/
+theorem z2LatticeEmbeddingLocalBridgeData_pointwise_paper_domain_certificate
+    (bridge : Z2LatticeEmbeddingLocalBridgeData) :
+    forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha) := by
+  intro alpha halpha
+  refine ⟨bridge.near_pc_feasible_nonempty alpha (le_of_lt halpha), ?_⟩
+  intro M
+  exact
+    gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
+      bridge alpha halpha M
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Part 6 transfer from a paper-bounded closed-unit local `Z²`
 lattice-embedding bridge.  Unlike the unbounded local bridge, this theorem
 only promises the paper-facing divergence conclusion on the explicit
@@ -2269,6 +2300,37 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_loca
   linarith
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Same-`alpha` pointwise certificate from the paper-bounded closed-unit
+local Part 6 bridge contract.
+
+For every `alpha` in the closed paper domain, the bridge supplies both a
+near-`p_c` nonempty feasible set and the bounded Part 6 divergence transfer at
+that same `alpha`. -/
+theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_pointwise_paper_domain_certificate
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+      alpha <= 1 ->
+        (Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa /\
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) /\
+        (forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon /\
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha) := by
+  intro alpha halpha halpha_le_one
+  refine ⟨bridge.near_pc_feasible_nonempty alpha halpha halpha_le_one, ?_⟩
+  intro M
+  exact
+    gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
+      bridge alpha halpha halpha_le_one M
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Existential closed-unit Part 6 witness from a paper-bounded local `Z²`
 lattice-embedding bridge.  This packages the bridge's explicit nonempty
 `α*(0,p_c) < α ≤ 1` certificate together with the bounded local transfer, so a
@@ -2287,6 +2349,39 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_loca
   exact
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
       bridge α hα hα_le_one
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Existential same-`alpha` feasible/divergence witness from a paper-bounded
+closed-unit local `Z²` lattice-embedding bridge.
+
+This strengthens the witness projection by tying the selected paper-domain
+`alpha` to both near-`p_c` feasible-set nonemptiness and the Part 6 divergence
+transfer. -/
+theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_feasible_divergence_witness
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha /\
+      alpha <= 1 /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha) := by
+  rcases z2LatticeEmbeddingClosedUnitLocalBridgeData_nonempty_closed_unit_alpha_domain
+      bridge with ⟨alpha, halpha, halpha_le_one⟩
+  rcases
+    z2LatticeEmbeddingClosedUnitLocalBridgeData_pointwise_paper_domain_certificate
+      bridge alpha halpha halpha_le_one with
+    ⟨hfeasible, hdiverges⟩
+  exact ⟨alpha, halpha, halpha_le_one, hfeasible, hdiverges⟩
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Single paper-support certificate extracted from the paper-bounded
