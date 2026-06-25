@@ -70,7 +70,10 @@ it through the standard lattice data package and Part 4 payload. R522 adds
 `bernoulliProductExpectation_mono_of_monotone`, proving finite-box stochastic
 monotonicity for every coordinatewise monotone real-valued observable under
 `0 <= p_low <= p_high <= 1`, and gates that theorem in the standard lattice
-data package and Part 4 payload. R517 adds
+data package and Part 4 payload. The current iteration bridges that theorem
+back to the paper-facing `BondConfig` / `percExpectation` carrier as
+`percExpectation_mono_in_p_of_BoolConfigMonotone` and gates the bridge in the
+Part 4 payload. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
 carry that per-edge plus finite-product monotone-coupling/expectation interface before proving the

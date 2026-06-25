@@ -365,6 +365,42 @@ theorem percExpectation_mono {E : Type} [Fintype E] [DecidableEq E]
   exact mul_le_mul_of_nonneg_left (hfg ω)
     (bondConfigWeight_nonneg p hp0 hp1 ω)
 
+/-- **Bridge to the finite Bernoulli-product expectation package.**
+    The paper-facing finite bond-percolation expectation `percExpectation`
+    is exactly the Infrastructure Bernoulli-product expectation over the
+    same Boolean configuration space. -/
+theorem percExpectation_eq_bernoulliProductExpectation
+    {E : Type} [Fintype E] [DecidableEq E]
+    (p : ℝ) (f : BondConfig E → ℝ) :
+    percExpectation p f =
+      Infrastructure.bernoulliProductExpectation p f := by
+  unfold percExpectation Infrastructure.bernoulliProductExpectation
+  apply Finset.sum_congr rfl
+  intro ω _
+  rw [bondConfigWeight_eq_bernoulliWeight_univ]
+
+/-- **Finite bond-percolation expectation monotonicity in `p`.**
+    For every coordinatewise monotone observable on finite bond
+    configurations, `E_{G_p}[f]` is non-decreasing in the open-edge
+    probability `p`. -/
+theorem percExpectation_mono_in_p_of_BoolConfigMonotone
+    {E : Type} [Fintype E] [DecidableEq E]
+    {p_low p_high : ℝ}
+    (h_low_nonneg : 0 ≤ p_low) (h_mono : p_low ≤ p_high)
+    (h_high_le_one : p_high ≤ 1)
+    (f : BondConfig E → ℝ)
+    (hf : Infrastructure.BoolConfigMonotone f) :
+    percExpectation p_low f ≤ percExpectation p_high f := by
+  calc
+    percExpectation p_low f
+        = Infrastructure.bernoulliProductExpectation p_low f :=
+          percExpectation_eq_bernoulliProductExpectation p_low f
+    _ ≤ Infrastructure.bernoulliProductExpectation p_high f := by
+          exact Infrastructure.bernoulliProductExpectation_mono_of_monotone
+            (E := E) h_low_nonneg h_mono h_high_le_one f hf
+    _ = percExpectation p_high f :=
+          (percExpectation_eq_bernoulliProductExpectation p_high f).symm
+
 /-- **ContinuousOn preservation by `E_{G_p}`** (Cat 1, kernel-pure).
     If for each percolation realisation `ω`, the integrand `f β ω` is
     continuous in `β` on `S ⊆ ℝ`, then the percolation expectation

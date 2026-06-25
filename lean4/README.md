@@ -25,7 +25,9 @@ entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  It now also
 checks the kernel-pure one-edge Bernoulli monotone-coupling table, the
 finite-product monotone-coupling marginal data, the finite-box expectation
 monotonicity theorem for coordinatewise monotone observables, and the standard
-`Z^2` lattice-coupling interface carrying the per-edge, finite-product, and
+paper-facing `BondConfig` / `percExpectation` bridge
+`percExpectation_mono_in_p_of_BoolConfigMonotone`, plus the standard `Z^2`
+lattice-coupling interface carrying the per-edge, finite-product, and
 finite-box expectation layers; the still-open Part 4 work is deriving the
 lattice mean-gap antitonicity from that domain/coupling carrier.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the

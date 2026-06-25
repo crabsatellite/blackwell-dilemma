@@ -127,6 +127,13 @@ structure Part4LatticePMonotonicityFrontierPayload where
               p_low f ≤
             BlackwellDilemma.Infrastructure.bernoulliProductExpectation
               p_high f
+  finite_bond_percolation_expectation_monotone :
+    ∀ (E : Type) [Fintype E] [DecidableEq E],
+      ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
+        ∀ f : BlackwellDilemma.BondConfig E -> ℝ,
+          BlackwellDilemma.Infrastructure.BoolConfigMonotone f ->
+            BlackwellDilemma.percExpectation p_low f ≤
+              BlackwellDilemma.percExpectation p_high f
   standard_z2_lattice_monotone_coupling :
     BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
       2
@@ -162,6 +169,10 @@ def part4_lattice_p_monotonicity_frontier_payload :
   finite_product_expectation_monotone := by
     intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one f hf
     exact BlackwellDilemma.Infrastructure.bernoulliProductExpectation_mono_of_monotone
+      (E := E) h_low_nonneg h_mono h_high_le_one f hf
+  finite_bond_percolation_expectation_monotone := by
+    intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one f hf
+    exact BlackwellDilemma.percExpectation_mono_in_p_of_BoolConfigMonotone
       (E := E) h_low_nonneg h_mono h_high_le_one f hf
   standard_z2_lattice_monotone_coupling :=
     BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData

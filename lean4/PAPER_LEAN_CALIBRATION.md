@@ -159,7 +159,7 @@ and on lattices, the threshold κ* is non-decreasing in p."
 - `gap_p_monotonicity_bounded` (Canonical.lean:3639) — **covers the
   constructive-instance form** for the 5-state IDP (paper's sub-claim 4a).
 - `part4_lattice_p_monotonicity_frontier_payload`
-  (PaperSemanticGate.lean:110) now machine-gates the current closed frontier:
+  (PaperSemanticGate.lean) now machine-gates the current closed frontier:
   `mean_estimate_gap_antitone_in_p_paper_Def`,
   `kappaStar_p_monotone_of_mean_gap_antitone`,
   `gap_cognitive_threshold_part4_from_lattice_bridge`,
@@ -168,6 +168,7 @@ and on lattices, the threshold κ* is non-decreasing in p."
   (`standardBernoulliMonotoneCouplingData`,
   `standardBernoulliProductMonotoneCouplingMarginalData`,
   `bernoulliProductExpectation_mono_of_monotone`,
+  `percExpectation_mono_in_p_of_BoolConfigMonotone`,
   `standardLatticeMonotoneCouplingData`).
 - ⚠️ **Lattice sub-claim (4b)** is still not directly covered by a
   lattice/domain-carrier theorem.  R517 makes the missing bridge explicit as
@@ -181,10 +182,13 @@ and on lattices, the threshold κ* is non-decreasing in p."
   non-negative mass, and zero mass on any configuration pair containing a
   forbidden open-to-closed edge.  R522 adds finite-box stochastic monotonicity:
   every coordinatewise monotone real-valued observable has non-decreasing
-  Bernoulli-product expectation in `p`.  The generic `sInf` transfer from
-  that bridge to bounded `kappaStar` p-monotonicity is now kernel-checked, but
-  no full lattice/percolation certificate deriving the mean-gap antitonicity
-  from the coupling/domain carrier is instantiated yet.
+  Bernoulli-product expectation in `p`.  The current iteration bridges that
+  product theorem back to the paper-facing `BondConfig` / `percExpectation`
+  carrier via `percExpectation_mono_in_p_of_BoolConfigMonotone` and gates it
+  in the Part 4 payload.  The generic `sInf` transfer from that bridge to
+  bounded `kappaStar` p-monotonicity is now kernel-checked, but no full
+  lattice/percolation certificate deriving the mean-gap antitonicity from the
+  coupling/domain carrier is instantiated yet.
 
 ## Calibration Conclusions
 
