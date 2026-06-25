@@ -15804,6 +15804,24 @@ theorem firstEdgeOpenGiantClosedTopoLossFamily_giant_event_eq_boxedTorusBaseHori
   simp [
     firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff]
 
+theorem firstEdgeOpenGiantClosedTopoLossFamily_giant_event_baseHorizontalTarget_reachable
+    (L : Nat)
+    (omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)))
+    (homega : omega ∈
+      (firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+        (boxedTorusFlatGraphN L)) :
+    Membership.mem
+      (oracleFiniteBondGraphReachableSet
+        (boxedTorusOracleFiniteBondGraphData L)
+        (boxedTorusFlatGraphN L) omega)
+      (boxedTorusFlattenMainVertex L (boxedTorusBaseHorizontalTarget L)) := by
+  have hopen :
+      omega (boxedTorusFlattenEdgeIdx L
+        (boxedTorusBaseHorizontalEdge L)) = true :=
+    (firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff
+      L omega).mp homega
+  exact boxedTorusReachableSet_horizontal_mem_of_open L omega hopen
+
 theorem firstEdgeOpenGiantClosedTopoLossFamily_not_full_reach_diagnostic :
     Not (forall L : Nat,
       firstEdgeOpenGiantClosedTopoLossFamily L =
