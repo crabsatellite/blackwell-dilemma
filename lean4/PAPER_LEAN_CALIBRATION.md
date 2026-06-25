@@ -185,10 +185,16 @@ and on lattices, the threshold κ* is non-decreasing in p."
   Bernoulli-product expectation in `p`.  The current iteration bridges that
   product theorem back to the paper-facing `BondConfig` / `percExpectation`
   carrier via `percExpectation_mono_in_p_of_BoolConfigMonotone` and gates it
-  in the Part 4 payload.  The generic `sInf` transfer from that bridge to
+  in the Part 4 payload.  The current one-edge percolation bridge
+  `bridgePriorRewardObservable_expectation_eq_priorMean_u2` identifies the
+  bridge-neighbour prior mean with
+  `percExpectation (1 - p) bridgePriorRewardObservable`, and
+  `priorMean_u2_fiveState_antitone_in_p_from_percExpectation` recovers its
+  blocking-probability antitonicity from finite-product monotonicity under
+  `0 <= p_1 <= p_2 <= 1`.  The generic `sInf` transfer from that bridge to
   bounded `kappaStar` p-monotonicity is now kernel-checked, but no full
-  lattice/percolation certificate deriving the mean-gap antitonicity from the
-  coupling/domain carrier is instantiated yet.  The current
+  lattice/percolation certificate deriving the whole mean-gap antitonicity
+  from the coupling/domain carrier is instantiated yet.  The current
   `standardZ2LatticePMonotonicityBridgeSkeleton_current` diagnostic makes this
   distinction build-checked: the standard `Z^2` graph/coupling skeleton
   satisfies the present bridge type, and

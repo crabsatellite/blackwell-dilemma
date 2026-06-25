@@ -26,9 +26,15 @@ checks the kernel-pure one-edge Bernoulli monotone-coupling table, the
 finite-product monotone-coupling marginal data, the finite-box expectation
 monotonicity theorem for coordinatewise monotone observables, and the standard
 paper-facing `BondConfig` / `percExpectation` bridge
-`percExpectation_mono_in_p_of_BoolConfigMonotone`, plus the standard `Z^2`
+`percExpectation_mono_in_p_of_BoolConfigMonotone`.  It also now checks the
+one-edge percolation bridge
+`bridgePriorRewardObservable_expectation_eq_priorMean_u2` and
+`priorMean_u2_fiveState_antitone_in_p_from_percExpectation`, which identify
+the bridge-neighbour prior mean with an explicit finite bond-percolation
+expectation and recover its blocking-probability antitonicity from
+finite-product monotonicity.  The same payload checks the standard `Z^2`
 lattice-coupling interface carrying the per-edge, finite-product, and
-finite-box expectation layers. It also checks
+finite-box expectation layers and
 `standardZ2LatticePMonotonicityBridgeSkeleton_current` and
 `gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current`,
 which deliberately remain diagnostic: the current bridge shape can be filled

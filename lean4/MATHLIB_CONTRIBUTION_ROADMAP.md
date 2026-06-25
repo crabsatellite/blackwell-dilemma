@@ -73,7 +73,13 @@ monotonicity for every coordinatewise monotone real-valued observable under
 data package and Part 4 payload. The current iteration bridges that theorem
 back to the paper-facing `BondConfig` / `percExpectation` carrier as
 `percExpectation_mono_in_p_of_BoolConfigMonotone` and gates the bridge in the
-Part 4 payload. R517 adds
+Part 4 payload. The current one-edge semantic bridge now proves
+`bridgePriorRewardObservable_expectation_eq_priorMean_u2`, identifying the
+bridge-neighbour prior mean with an explicit `percExpectation (1 - p)`
+observable, and
+`priorMean_u2_fiveState_antitone_in_p_from_percExpectation`, deriving its
+blocking-probability antitonicity from finite-product monotonicity on
+`0 <= p_1 <= p_2 <= 1`. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
 carry that per-edge plus finite-product monotone-coupling/expectation interface before proving the

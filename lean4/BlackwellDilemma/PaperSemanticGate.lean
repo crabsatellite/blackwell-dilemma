@@ -134,6 +134,18 @@ structure Part4LatticePMonotonicityFrontierPayload where
           BlackwellDilemma.Infrastructure.BoolConfigMonotone f ->
             BlackwellDilemma.percExpectation p_low f ≤
               BlackwellDilemma.percExpectation p_high f
+  bridge_prior_reward_observable_mono :
+    BlackwellDilemma.Infrastructure.BoolConfigMonotone
+      BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable
+  bridge_prior_reward_observable_eq_prior_mean :
+    ∀ p : ℝ,
+      BlackwellDilemma.percExpectation (1 - p)
+        BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable =
+          BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p
+  bridge_prior_mean_antitone_from_percExpectation :
+    ∀ p₁ p₂ : ℝ, 0 ≤ p₁ -> p₁ ≤ p₂ -> p₂ ≤ 1 ->
+      BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₂ ≤
+        BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p₁
   standard_z2_lattice_monotone_coupling :
     BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
       2
@@ -182,6 +194,14 @@ def part4_lattice_p_monotonicity_frontier_payload :
     intro E _instF _instD p_low p_high h_low_nonneg h_mono h_high_le_one f hf
     exact BlackwellDilemma.percExpectation_mono_in_p_of_BoolConfigMonotone
       (E := E) h_low_nonneg h_mono h_high_le_one f hf
+  bridge_prior_reward_observable_mono :=
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable_mono
+  bridge_prior_reward_observable_eq_prior_mean :=
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable_expectation_eq_priorMean_u2
+  bridge_prior_mean_antitone_from_percExpectation := by
+    intro p₁ p₂ hp₁_nonneg hp_mono hp₂_le_one
+    exact BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState_antitone_in_p_from_percExpectation
+      hp₁_nonneg hp_mono hp₂_le_one
   standard_z2_lattice_monotone_coupling :=
     BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData
       2

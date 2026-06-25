@@ -36,6 +36,96 @@ namespace BlackwellDilemma
 
 variable [DiagnosticSignalHypothesisData]
 
+namespace Infrastructure.MeanEstimateGap
+
+omit [DiagnosticSignalHypothesisData] in
+/-- One-edge bond-percolation observable for the bridge-neighbour prior mean.
+
+The edge is open with probability `1 - p` in the paper's blocking-probability
+convention.  An open bridge yields the goal reward `r_G`; a blocked bridge
+yields the bridge-node fallback reward `r_B`. -/
+noncomputable def bridgePriorRewardObservable : BondConfig (Fin 1) → ℝ :=
+  fun ω => if ω 0 then (FiveState.r_G : ℝ) else (FiveState.r_B : ℝ)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The bridge prior reward observable is monotone in the open-edge
+configuration. -/
+theorem bridgePriorRewardObservable_mono :
+    BoolConfigMonotone bridgePriorRewardObservable := by
+  intro lower upper hle
+  unfold bridgePriorRewardObservable
+  by_cases hlower : lower 0 = true
+  · have hupper : upper 0 = true := hle 0 hlower
+    simp [hlower, hupper]
+  · have hlower_false : lower 0 = false := by
+      cases h : lower 0 with
+      | false => rfl
+      | true => exact False.elim (hlower h)
+    by_cases hupper : upper 0 = true
+    · simp [hlower_false, hupper, FiveState.r_G, FiveState.r_B]
+      norm_num
+    · have hupper_false : upper 0 = false := by
+        cases h : upper 0 with
+        | false => rfl
+        | true => exact False.elim (hupper h)
+      simp [hlower_false, hupper_false]
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Explicit one-edge bond-percolation expectation for the bridge-neighbour
+prior reward. -/
+theorem bridgePriorRewardObservable_expectation_eq (p : ℝ) :
+    percExpectation (1 - p) bridgePriorRewardObservable =
+      (1 - p) * (FiveState.r_G : ℝ) + p * (FiveState.r_B : ℝ) := by
+  unfold percExpectation
+  have hsum :
+      (Finset.univ.sum (fun ω : BondConfig (Fin 1) =>
+          bondConfigWeight (1 - p) ω * bridgePriorRewardObservable ω)) =
+        (Finset.univ.sum (fun b : Bool =>
+          (if b then 1 - p else p) *
+            (if b then (FiveState.r_G : ℝ) else (FiveState.r_B : ℝ)))) := by
+    exact Fintype.sum_equiv (Equiv.funUnique (Fin 1) Bool)
+      (fun ω : BondConfig (Fin 1) =>
+        bondConfigWeight (1 - p) ω * bridgePriorRewardObservable ω)
+      (fun b : Bool =>
+        (if b then 1 - p else p) *
+          (if b then (FiveState.r_G : ℝ) else (FiveState.r_B : ℝ)))
+      (by
+        intro ω
+        simp [bridgePriorRewardObservable, bondConfigWeight]
+        rfl)
+  rw [hsum]
+  rw [Fintype.sum_bool]
+  simp
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The paper's bridge-neighbour prior mean is exactly the one-edge
+bond-percolation expectation of `bridgePriorRewardObservable`. -/
+theorem bridgePriorRewardObservable_expectation_eq_priorMean_u2
+    (p : ℝ) :
+    percExpectation (1 - p) bridgePriorRewardObservable =
+      priorMean_u2_fiveState p := by
+  rw [bridgePriorRewardObservable_expectation_eq]
+  unfold priorMean_u2_fiveState FiveState.r_G FiveState.r_B
+  ring_nf
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Percolation-derived antitonicity of the bridge-neighbour prior mean in the
+paper's blocking probability.  This is the finite one-edge semantic bridge
+behind the linear theorem `priorMean_u2_fiveState_antitone_in_p`. -/
+theorem priorMean_u2_fiveState_antitone_in_p_from_percExpectation
+    {p₁ p₂ : ℝ} (hp₁_nonneg : 0 ≤ p₁) (hp_mono : p₁ ≤ p₂)
+    (hp₂_le_one : p₂ ≤ 1) :
+    priorMean_u2_fiveState p₂ ≤ priorMean_u2_fiveState p₁ := by
+  rw [← bridgePriorRewardObservable_expectation_eq_priorMean_u2 p₂,
+    ← bridgePriorRewardObservable_expectation_eq_priorMean_u2 p₁]
+  exact percExpectation_mono_in_p_of_BoolConfigMonotone
+    (E := Fin 1)
+    (p_low := 1 - p₂) (p_high := 1 - p₁)
+    (by linarith) (by linarith) (by linarith)
+    bridgePriorRewardObservable bridgePriorRewardObservable_mono
+
+end Infrastructure.MeanEstimateGap
+
 /-! ## 1. The mean estimate gap and `κ*`
 
 The cognitive threshold `κ*(p, α)` is defined via
