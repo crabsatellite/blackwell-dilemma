@@ -2135,6 +2135,16 @@ theorem z2LatticeEmbeddingLocalBridgeData_near_pc_feasible_nonempty
   bridge.near_pc_feasible_nonempty
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Nonempty unbounded paper-domain projection for the repaired local Part 6
+bridge.  The unbounded route cannot be vacuous over `alpha`: the real line
+always contains an `alpha` strictly above the named threshold. -/
+theorem z2LatticeEmbeddingLocalBridgeData_nonempty_unbounded_alpha_domain
+    (_bridge : Z2LatticeEmbeddingLocalBridgeData) :
+    Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha := by
+  exact ⟨alphaStar 0 harrisKestenCriticalProb + 1, by linarith⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Near-`p_c` feasible-set nonemptiness projected from the paper-bounded
 closed-unit Part 6 bridge contract. -/
 theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_near_pc_feasible_nonempty
@@ -2202,8 +2212,8 @@ local Part 6 bridge contract.
 
 This binds the standard `Z²` graph identity, the scaling divergence carrier,
 near-`p_c` local domination, explicit near-`p_c` feasible-set nonemptiness, the
-resulting paper-facing divergence transfer, and a same-`alpha`
-feasible/divergence certificate into one gateable theorem. -/
+resulting paper-facing divergence transfer, and both pointwise and existential
+same-`alpha` feasible/divergence certificates into one gateable theorem. -/
 theorem z2LatticeEmbeddingLocalBridgeData_paper_support_certificate
     (bridge : Z2LatticeEmbeddingLocalBridgeData) :
     bridge.graph = SimpleGraph.Z2LatticeGraph ∧
@@ -2230,7 +2240,22 @@ theorem z2LatticeEmbeddingLocalBridgeData_paper_support_certificate
             forall p : Real, harrisKestenCriticalProb - epsilon < p ->
               p < harrisKestenCriticalProb ->
                 M < kappaStar p alpha) ∧
-      forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+      (forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+        (Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa /\
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) /\
+        (forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon /\
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha)) /\
+      Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha /\
         (Exists fun delta : Real =>
           0 < delta /\
             forall p : Real, harrisKestenCriticalProb - delta < p ->
@@ -2244,17 +2269,30 @@ theorem z2LatticeEmbeddingLocalBridgeData_paper_support_certificate
             forall p : Real, harrisKestenCriticalProb - epsilon < p ->
               p < harrisKestenCriticalProb ->
                 M < kappaStar p alpha) := by
-  exact ⟨bridge.graph_is_z2_lattice,
+  refine ⟨bridge.graph_is_z2_lattice,
     bridge.scaling_diverges,
     bridge.scaling_dominates_kappa_near_pc,
     bridge.near_pc_feasible_nonempty,
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
       bridge,
-    fun alpha halpha =>
-      ⟨bridge.near_pc_feasible_nonempty alpha (le_of_lt halpha),
-        fun M =>
-          gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
-            bridge alpha halpha M⟩⟩
+    ?_,
+    ?_⟩
+  · intro alpha halpha
+    refine ⟨bridge.near_pc_feasible_nonempty alpha (le_of_lt halpha), ?_⟩
+    intro M
+    exact
+      gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
+        bridge alpha halpha M
+  · let alpha := alphaStar 0 harrisKestenCriticalProb + 1
+    have halpha : alphaStar 0 harrisKestenCriticalProb < alpha := by
+      dsimp [alpha]
+      linarith
+    refine ⟨alpha, halpha, ?_, ?_⟩
+    · exact bridge.near_pc_feasible_nonempty alpha (le_of_lt halpha)
+    · intro M
+      exact
+        gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
+          bridge alpha halpha M
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Same-`alpha` pointwise certificate from the repaired unbounded local Part 6
@@ -2286,6 +2324,37 @@ theorem z2LatticeEmbeddingLocalBridgeData_pointwise_paper_domain_certificate
   exact
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
       bridge alpha halpha M
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Existential same-`alpha` feasible/divergence witness from the repaired
+unbounded local `Z²` lattice-embedding bridge.
+
+This is the unbounded-route analogue of the closed-unit witness: it projects one
+paper-domain `alpha` and ties that same value to both near-`p_c` feasible-set
+nonemptiness and the Part 6 divergence transfer. -/
+theorem z2LatticeEmbeddingLocalBridgeData_feasible_divergence_witness
+    (bridge : Z2LatticeEmbeddingLocalBridgeData) :
+    Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha /\
+      (Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) /\
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon /\
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha) := by
+  rcases z2LatticeEmbeddingLocalBridgeData_nonempty_unbounded_alpha_domain
+      bridge with ⟨alpha, halpha⟩
+  rcases z2LatticeEmbeddingLocalBridgeData_pointwise_paper_domain_certificate
+      bridge alpha halpha with
+    ⟨hfeasible, hdiverges⟩
+  exact ⟨alpha, halpha, hfeasible, hdiverges⟩
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 6 transfer from a paper-bounded closed-unit local `Z²`
