@@ -14388,6 +14388,80 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_giant_lowe
     bridge.supercriticalProbability_le_one
     h_pos
 
+/-- Uniform eventual paper-support projection from the final
+random-supercritical bridge: one positive constant and one size threshold
+simultaneously lower-bound the flat expected loss and the giant-restricted
+expected loss, and give an in-giant positive pointwise realisation for every
+sufficiently large flat boxed-torus member. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_lower_bound_and_loss_realisation
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnData (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+            c <=
+              expectedTopoLossOnGiantOn (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability ∧
+            Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+              Membership.mem
+                  ((bridge.family L).giantComponentEvent
+                    (boxedTorusFlatGraphN L)) omega ∧
+                0 <
+                  (bridge.family L).topoLossKernel
+                    (boxedTorusFlatGraphN L) omega := by
+  rcases bridge.supercritical_flat_lower_bound with
+    ⟨cFlat, hcFlat_pos, hcFlat_le_one, L0Flat, hflat⟩
+  rcases bridge.supercritical_giant_lower_bound with
+    ⟨cGiant, hcGiant_pos, _hcGiant_le_one, L0Giant, hgiant⟩
+  let c := min cFlat cGiant
+  let L0 := max L0Flat L0Giant
+  have hc_pos : 0 < c := by
+    dsimp [c]
+    exact lt_min hcFlat_pos hcGiant_pos
+  have hc_le_one : c <= 1 := by
+    dsimp [c]
+    exact le_trans (min_le_left cFlat cGiant) hcFlat_le_one
+  refine ⟨c, hc_pos, hc_le_one, L0, ?_⟩
+  intro L hL
+  have hL_flat : L0Flat <= L := by
+    exact le_trans (Nat.le_max_left L0Flat L0Giant) hL
+  have hL_giant : L0Giant <= L := by
+    exact le_trans (Nat.le_max_right L0Flat L0Giant) hL
+  have h_flat_lower :
+      cFlat <=
+        expectedTopoLossOnData (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    hflat L hL_flat
+  have h_giant_lower :
+      cGiant <=
+        expectedTopoLossOnGiantOn (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    hgiant L hL_giant
+  have h_flat :
+      c <=
+        expectedTopoLossOnData (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability := by
+    exact le_trans (by dsimp [c]; exact min_le_left cFlat cGiant) h_flat_lower
+  have h_giant :
+      c <=
+        expectedTopoLossOnGiantOn (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability := by
+    exact le_trans (by dsimp [c]; exact min_le_right cFlat cGiant) h_giant_lower
+  have h_giant_pos :
+      0 <
+        expectedTopoLossOnGiantOn (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    lt_of_lt_of_le hc_pos h_giant
+  refine ⟨h_flat, h_giant, ?_⟩
+  exact expectedTopoLossOnGiantOn_pos_realisation_witness
+    (bridge.family L) (boxedTorusFlatGraphN L)
+    bridge.supercriticalProbability_nonneg
+    bridge.supercriticalProbability_le_one
+    h_giant_pos
+
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/
 theorem not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic :
