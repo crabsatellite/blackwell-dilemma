@@ -68,9 +68,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence, giant-restricted, and giant-event-mass lower-bound packages at that same parameter, a single paper-support certificate tying the Z2 graph, boxed-torus size facts, probability domain, shared flat/giant/event-mass lower bounds, in-giant positive-loss witness, diagnostic exclusions, arbitrary-large five-family non-diagnostic tail witness, and supported non-diagnostic tail witness where those exclusions hold at the same sizes as the shared lower bounds, event-mass lower bound, and in-giant positive-loss realisation, uniform eventual positive flat/giant/event-mass, unrestricted pointwise, and in-giant pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, deterministic all-open giant/positive diagnostic exclusions, existential and arbitrary-large non-diagnostic finite-member projections, extended eventual-diagnostic-tail exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, family-level unit-interval topological-loss range, flat-sequence, giant-restricted, and giant-event-mass lower-bound packages at that same parameter, a single paper-support certificate tying the Z2 graph, boxed-torus size facts, probability domain, loss-range proof, shared flat/giant/event-mass lower bounds, in-giant positive-loss witness, diagnostic exclusions, arbitrary-large five-family non-diagnostic tail witness, and supported non-diagnostic tail witness where those exclusions hold at the same sizes as the shared lower bounds, event-mass lower bound, and in-giant positive-loss realisation, uniform eventual positive flat/giant/event-mass, unrestricted pointwise, and in-giant pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, deterministic all-open giant/positive diagnostic exclusions, existential and arbitrary-large non-diagnostic finite-member projections, extended eventual-diagnostic-tail exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
-        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, flat plus giant-restricted topological-loss lower-bound theorems, and a giant-event-mass lower-bound theorem at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
+        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, a family-level proof that the topological-loss kernel is unit-interval valued, flat plus giant-restricted topological-loss lower-bound theorems, and a giant-event-mass lower-bound theorem at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
 
 def openSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.open)
@@ -831,6 +831,13 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
       harrisKestenCriticalProb < bridge.supercriticalProbability ∧
         0 ≤ bridge.supercriticalProbability ∧
           bridge.supercriticalProbability ≤ 1
+  random_supercritical_z2_bridge_topoLossKernel_mem_unitInterval :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∀ L : ℕ,
+        ∀ n : ℕ,
+          ∀ omega : BondConfig (EdgeIdx n),
+            0 ≤ (bridge.family L).topoLossKernel n omega ∧
+              (bridge.family L).topoLossKernel n omega ≤ 1
   random_supercritical_z2_bridge_named_lower_bound :
     ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∃ c : ℝ, 0 < c ∧ c ≤ 1 ∧
@@ -993,6 +1000,11 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
       harrisKestenCriticalProb < bridge.supercriticalProbability /\
       0 <= bridge.supercriticalProbability /\
       bridge.supercriticalProbability <= 1 /\
+      (forall L : Nat,
+        forall n : Nat,
+          forall omega : BondConfig (EdgeIdx n),
+            0 <= (bridge.family L).topoLossKernel n omega /\
+              (bridge.family L).topoLossKernel n omega <= 1) /\
       (Exists fun c : Real =>
         0 < c /\ c <= 1 /\
           Exists fun L0 : Nat =>
@@ -1282,10 +1294,11 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
 the current theorem surface.  The semantic target remains open until the
 explicit `RandomSupercriticalZ2TopoClusterBridgeData` contract is instantiated
 by a genuine random supercritical finite `Z2_L` theorem carrying a named
-`p > p_c` parameter, flat, giant-restricted, and giant-event-mass lower-bound
-theorems at that same parameter, a single eventual constant and threshold
-supporting all three lower bounds, a single certificate tying those facts to
-the standard `Z²` graph, finite boxed-torus indexing, and the named `p > p_c`
+`p > p_c` parameter, a family-level unit-interval topological-loss range
+theorem, flat, giant-restricted, and giant-event-mass lower-bound theorems at
+that same parameter, a single eventual constant and threshold supporting all
+three lower bounds, a single certificate tying those facts to the standard
+`Z²` graph, finite boxed-torus indexing, the loss range, and the named `p > p_c`
 domain, and pointwise positive loss realisations inside that same
 giant-component event,
 not by a pointwise or eventual-tail selection among the current diagnostic
@@ -1317,6 +1330,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_random_supercritical_z2_topo_cluster_bridge
   random_supercritical_z2_bridge_probability_domain :=
     randomSupercriticalZ2TopoClusterBridgeData_supercriticalProbability_domain
+  random_supercritical_z2_bridge_topoLossKernel_mem_unitInterval :=
+    randomSupercriticalZ2TopoClusterBridgeData_family_topoLossKernel_mem_unitInterval
   random_supercritical_z2_bridge_named_lower_bound :=
     randomSupercriticalZ2TopoClusterBridgeData_supercritical_flat_lower_bound
   random_supercritical_z2_bridge_giant_lower_bound :=

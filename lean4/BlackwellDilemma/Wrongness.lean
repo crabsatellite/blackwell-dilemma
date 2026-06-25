@@ -14133,6 +14133,12 @@ structure RandomSupercriticalZ2TopoClusterBridgeData where
                 ((family L).giantComponentEvent (boxedTorusFlatGraphN L))
                 (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
                   (1 : Real))
+  family_topoLossKernel_mem_unitInterval :
+    forall L : Nat,
+      forall n : Nat,
+        forall omega : BondConfig (EdgeIdx n),
+          0 <= (family L).topoLossKernel n omega ∧
+            (family L).topoLossKernel n omega <= 1
   family_core : BoxedTorusFlatFamilyCoreConclusion family
   not_full_reach_diagnostic :
     Not (forall L : Nat,
@@ -14251,6 +14257,19 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_supercritical_giant_event_mas
                 (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
                   (1 : Real)) :=
   bridge.supercritical_giant_event_mass_lower_bound
+
+/-- Projection of the family-level topological-loss range contract from the
+final random-supercritical bridge.  Future closures must prove that the
+paper's bridge uses an actual unit-interval loss kernel, not just a lower-bound
+surrogate at the sampled sizes. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_family_topoLossKernel_mem_unitInterval
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    forall L : Nat,
+      forall n : Nat,
+        forall omega : BondConfig (EdgeIdx n),
+          0 <= (bridge.family L).topoLossKernel n omega ∧
+            (bridge.family L).topoLossKernel n omega <= 1 :=
+  bridge.family_topoLossKernel_mem_unitInterval
 
 /-- Non-vacuity projection from the final random-supercritical bridge: at the
 named supercritical probability, some flat boxed-torus member has strictly
@@ -14742,14 +14761,14 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_supported_
 random-supercritical bridge contract.
 
 This packages the standard `Z^2` graph identity, the finite boxed-torus
-indexing facts, the named supercritical probability domain, the same eventual
-flat/giant lower-bound support with an in-giant positive-loss realisation, and
-the non-diagnostic tail certificate excluding the current deterministic
-diagnostic families.  It also ties the supported lower-bound tail and the
-non-diagnostic tail to the same arbitrarily large finite members.  The theorem
-is a gateable semantic contract: a future closure must instantiate this
-certificate with the genuine random finite-lattice carrier, not only with a
-family-core wrapper. -/
+indexing facts, the named supercritical probability domain, the family-level
+unit-interval topological-loss range, the same eventual flat/giant lower-bound
+support with an in-giant positive-loss realisation, and the non-diagnostic tail
+certificate excluding the current deterministic diagnostic families.  It also
+ties the supported lower-bound tail and the non-diagnostic tail to the same
+arbitrarily large finite members.  The theorem is a gateable semantic
+contract: a future closure must instantiate this certificate with the genuine
+random finite-lattice carrier, not only with a family-core wrapper. -/
 theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
     (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
     bridge.graph = SimpleGraph.Z2LatticeGraph ∧
@@ -14761,6 +14780,11 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
       harrisKestenCriticalProb < bridge.supercriticalProbability ∧
       0 <= bridge.supercriticalProbability ∧
       bridge.supercriticalProbability <= 1 ∧
+      (forall L : Nat,
+        forall n : Nat,
+          forall omega : BondConfig (EdgeIdx n),
+            0 <= (bridge.family L).topoLossKernel n omega ∧
+              (bridge.family L).topoLossKernel n omega <= 1) ∧
       (Exists fun c : Real =>
         0 < c ∧ c <= 1 ∧
           Exists fun L0 : Nat =>
@@ -14856,6 +14880,7 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
     bridge.supercriticalProbability_above_pc,
     bridge.supercriticalProbability_nonneg,
     bridge.supercriticalProbability_le_one,
+    bridge.family_topoLossKernel_mem_unitInterval,
     randomSupercriticalZ2TopoClusterBridgeData_eventually_uniform_flat_giant_event_mass_lower_bound_and_loss_realisation
       bridge,
     bridge.not_full_reach_diagnostic,
