@@ -68,7 +68,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence and giant-restricted lower-bound packages at that same parameter, a single paper-support certificate tying the Z2 graph, boxed-torus size facts, probability domain, shared flat/giant lower bounds, and in-giant positive-loss witness, uniform eventual positive flat/giant, unrestricted pointwise, and in-giant pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, deterministic all-open giant/positive diagnostic exclusions, existential and arbitrary-large non-diagnostic finite-member projections, extended eventual-diagnostic-tail exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence and giant-restricted lower-bound packages at that same parameter, a single paper-support certificate tying the Z2 graph, boxed-torus size facts, probability domain, shared flat/giant lower bounds, in-giant positive-loss witness, diagnostic exclusions, and arbitrary-large five-family non-diagnostic tail witness, uniform eventual positive flat/giant, unrestricted pointwise, and in-giant pointwise loss witnesses, failure-mass support diagnostics, hybrid-diagnostic exclusion, deterministic all-open giant/positive diagnostic exclusions, existential and arbitrary-large non-diagnostic finite-member projections, extended eventual-diagnostic-tail exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
         "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, and flat plus giant-restricted topological-loss lower-bound theorems at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
 
@@ -822,7 +822,7 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
       harrisKestenCriticalProb < bridge.supercriticalProbability /\
       0 <= bridge.supercriticalProbability /\
       bridge.supercriticalProbability <= 1 /\
-      Exists fun c : Real =>
+      (Exists fun c : Real =>
         0 < c /\ c <= 1 /\
           Exists fun L0 : Nat =>
             forall L : Nat, L0 <= L ->
@@ -839,7 +839,41 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
                       (boxedTorusFlatGraphN L)) omega /\
                   0 <
                     (bridge.family L).topoLossKernel
-                      (boxedTorusFlatGraphN L) omega
+                      (boxedTorusFlatGraphN L) omega) /\
+      Not (forall L : Nat,
+        bridge.family L = boxedTorusFullReachComplementTopoLossData L) /\
+      Not (forall L : Nat,
+        bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+      Not (forall L : Nat,
+        bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+      Not (forall L : Nat,
+        bridge.family L = boxedTorusAllOpenGiantTopoLossData L) /\
+      Not (forall L : Nat,
+        bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) /\
+      Not (forall L : Nat,
+        bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+          bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+          bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+      Not (Exists fun L0 : Nat =>
+        forall L : Nat, L0 <= L ->
+          bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+            bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+      Not (Exists fun L0 : Nat =>
+        forall L : Nat, L0 <= L ->
+          bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+            bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenComplementTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenGiantTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) /\
+      forall L0 : Nat,
+        Exists fun L : Nat =>
+          L0 <= L /\
+          bridge.family L ≠ boxedTorusFullReachComplementTopoLossData L /\
+          bridge.family L ≠ boxedTorusFullReachFlatOnlyComplementTopoLossData L /\
+          bridge.family L ≠ boxedTorusAllOpenComplementTopoLossData L /\
+          bridge.family L ≠ boxedTorusAllOpenGiantTopoLossData L /\
+          bridge.family L ≠ boxedTorusAllOpenPositiveTopoLossData L
   random_supercritical_z2_bridge_not_full_reach_diagnostic :
     ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∀ L : Nat, bridge.family L =

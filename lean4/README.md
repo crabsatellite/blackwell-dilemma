@@ -544,14 +544,18 @@ single-certificate projection with one positive constant and one size threshold
 supporting both lower bounds.  The gate also checks the derived
 `randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate`, which
 ties this support to the standard `Z^2` graph identity, finite boxed-torus
-vertex/edge indexing facts, and the same named `p > p_c` domain, so the future
-closure cannot hide the paper probability or giant-component support only
-inside the abstract family-core package; the payload also gates the derived
-uniform eventual positive
-flat-loss witness, eventual positive giant-restricted loss witness, eventual
-unrestricted pointwise positive-loss realisation witness, and eventual
-in-giant pointwise positive-loss realisation witness at that same parameter.
-It also gates
+vertex/edge indexing facts, the same named `p > p_c` domain, and the
+non-diagnostic tail certificate.  That certificate now includes the current
+full-reach, flat-only, all-open-complement, deterministic all-open giant, and
+deterministic all-open positive exclusions; the pointwise and eventual hybrid
+exclusions; and arbitrarily large finite members outside all five deterministic
+diagnostic families.  Thus future closure cannot hide the paper probability,
+giant-component support, or non-diagnostic finite-lattice tail only inside the
+abstract family-core package; the payload also gates the derived uniform
+eventual positive flat-loss witness, eventual positive giant-restricted loss
+witness, eventual unrestricted pointwise positive-loss realisation witness,
+and eventual in-giant pointwise positive-loss realisation witness at that same
+parameter. It also gates
 `randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`,
 which turns the pointwise-hybrid exclusion into an explicit finite `L` whose
 family member is not the full-reach, flat-only, or all-open-complement

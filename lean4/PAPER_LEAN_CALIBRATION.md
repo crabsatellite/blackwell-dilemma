@@ -489,20 +489,22 @@ including the finite boxed-torus vertex/edge indexing facts, a named
 supercritical probability, flat and giant-restricted lower-bound theorems at
 that same parameter, the derived uniform eventual positive flat-loss witness,
 the derived paper-support certificate tying those bounds to the standard `Z^2`
-graph, finite boxed-torus vertex/edge indexing facts, and the same `p > p_c`
-domain, an eventual positive giant-restricted loss witness, eventual
-unrestricted and in-giant pointwise positive-loss realisation witnesses, and
-projections back to the current family-core and lower-bound
-interfaces. Its non-diagnostic fields and the corresponding gate theorems
-exclude the current full-reach, flat-only, all-open-complement, deterministic
-all-open giant, deterministic all-open positive, pointwise-hybrid, and
-extended eventual-tail diagnostic families; the derived theorem
+graph, finite boxed-torus vertex/edge indexing facts, the same `p > p_c`
+domain, and the non-diagnostic tail certificate, an eventual positive
+giant-restricted loss witness, eventual unrestricted and in-giant pointwise
+positive-loss realisation witnesses, and projections back to the current
+family-core and lower-bound interfaces. The certificate and corresponding
+gate theorems exclude the current full-reach, flat-only, all-open-complement,
+deterministic all-open giant, deterministic all-open positive,
+pointwise-hybrid, and extended eventual-tail diagnostic families; the derived
+theorem
 `randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`
 turns that exclusion into an explicit finite member outside all three current
 diagnostic carriers, and
 `randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_non_diagnostic_member`
 rules out eventual diagnostic tails by producing such a member above every
-finite threshold. The stronger
+finite threshold. The stronger extended projection is now also part of the
+paper-support certificate:
 `randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_extended_non_diagnostic_member`
 now produces arbitrarily large members outside all five deterministic
 diagnostic carriers. This is the object a final random finite-lattice proof

@@ -49,18 +49,20 @@ interface, the explicit non-diagnostic
 supercritical probability, separate flat and giant-restricted lower-bound
 theorem fields at that same parameter, and a derived single-certificate
 projection with one positive constant and one size threshold supporting both
-lower bounds; it also gates the derived paper-support certificate tying that
-support to the standard `Z²` graph, finite boxed-torus size facts, and the same
-`p > p_c` domain, plus the derived uniform eventual positive flat-loss,
-giant-restricted positive-loss, unrestricted pointwise positive-loss, and
-in-giant pointwise positive-loss realisation witnesses, and the flat-sequence
-lower-bound package. It also gates the
+lower bounds. The derived paper-support certificate now ties that support to
+the standard `Z²` graph, finite boxed-torus size facts, and the same
+`p > p_c` domain, and also packages the diagnostic-exclusion tail certificate,
+including arbitrarily large finite members outside all five deterministic
+diagnostic families. The gate separately keeps the derived uniform eventual
+positive flat-loss, giant-restricted positive-loss, unrestricted pointwise
+positive-loss, and in-giant pointwise positive-loss realisation witnesses, and
+the flat-sequence lower-bound package. It also gates the
 current flat-only full-reach support
 mechanism: giant-restricted loss is zero, while the flat lower-bound loss is
 exactly half of the full-reach failure-event mass. The random-supercritical
 semantic target remains open until that contract is instantiated by the real
 finite-lattice carrier. The
-contract now machine-excludes the current full-reach, flat-only,
+separately named projections machine-exclude the current full-reach, flat-only,
 all-open-complement, deterministic all-open giant, and deterministic all-open
 positive diagnostic families, including pointwise hybrids assembled from those
 diagnostics. It derives an explicit finite member outside the first three

@@ -322,11 +322,11 @@ parameter, a derived single-certificate projection with one positive constant
 and one size threshold supporting both lower bounds, the derived
 `randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate` tying
 that support to the standard `Z^2` graph, finite boxed-torus vertex/edge
-indexing facts, and the same `p > p_c` domain, the derived uniform eventual
-positive flat-loss witness, an eventual positive giant-restricted loss witness,
-eventual unrestricted and in-giant pointwise positive-loss realisation
-witnesses, the same family-core theorem package, and
-non-diagnostic guards excluding the
+indexing facts, the same `p > p_c` domain, and the non-diagnostic tail
+certificate, the derived uniform eventual positive flat-loss witness, an
+eventual positive giant-restricted loss witness, eventual unrestricted and
+in-giant pointwise positive-loss realisation witnesses, the same family-core
+theorem package, and non-diagnostic guards excluding the
 current full-reach, flat-only, all-open-complement, deterministic all-open
 giant, deterministic all-open positive, pointwise-hybrid, and extended
 eventual-tail diagnostic families, plus
@@ -337,8 +337,8 @@ and
 which rules out eventual diagnostic tails by producing such a member above
 every finite threshold, plus
 `randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_extended_non_diagnostic_member`,
-which produces arbitrarily large members outside all five deterministic
-diagnostic carriers;
+which is now folded into the paper-support certificate and produces
+arbitrarily large members outside all five deterministic diagnostic carriers;
 `PaperSemanticGate.lean` gates its projections and
 exclusions so the eventual closure target is now a concrete Lean structure,
 not a prose instruction. The topo payload now also
