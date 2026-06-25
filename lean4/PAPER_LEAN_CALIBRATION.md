@@ -274,11 +274,15 @@ now states the paper-facing divergence conclusion for any future instance on
 `alphaStar 0 p_c < α <= 1`. The companion theorem
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`
 packages the required nonempty-domain certificate into an actual paper-domain
-divergence witness. The theorem
+divergence witness. The gate also checks
+`closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one`, so this closed-unit
+domain is nonempty exactly when the repaired carrier proves
+`alphaStar 0 p_c < 1`. The theorem
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 obstruction at the bridge-contract level. The remaining Harris-Kesten scaling
 work is therefore first to supply a nondegenerate `α`/feasible-set domain
-certificate, then instantiate that repaired bridge with a paper-faithful carrier
+certificate, including `alphaStar 0 p_c < 1` for the closed-unit route, then
+instantiate that repaired bridge with a paper-faithful carrier
 and valid near-`p_c` domination theorem.
 `V_g` is now a well-founded concrete greedy traversal over the current
 canonical finite vertex carrier (`Vertex = Fin 5`), and the paper recursion

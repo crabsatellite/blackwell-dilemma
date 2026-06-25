@@ -3319,6 +3319,27 @@ theorem alphaStar_eq_one_current (κ p : ℝ) :
   exact le_antisymm h_le h_ge
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Exact nonempty-domain calibration for the paper-bounded closed-unit Part 6
+route.
+
+The bounded domain `alphaStar 0 p_c < alpha <= 1` is nonempty exactly when the
+threshold itself is strictly below the closed unit endpoint.  This isolates the
+semantic repair needed by the closed-unit bridge: a future carrier must provide
+a positive certificate `alphaStar 0 p_c < 1`, not merely another transfer
+surface over an empty domain. -/
+theorem closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one :
+    (Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha ∧ alpha <= 1) ↔
+      alphaStar 0 harrisKestenCriticalProb < 1 := by
+  constructor
+  · rintro ⟨alpha, h_alpha_gt, h_alpha_le_one⟩
+    exact lt_of_lt_of_le h_alpha_gt h_alpha_le_one
+  · intro h_alphaStar_lt_one
+    refine ⟨(alphaStar 0 harrisKestenCriticalProb + 1) / 2, ?_, ?_⟩
+    · linarith
+    · linarith
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the paper-bounded Part 6 `α` regime.
 
 Because `alphaStar 0 p_c = 1` on the current scalar carrier, there is no

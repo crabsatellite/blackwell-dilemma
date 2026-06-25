@@ -61,10 +61,13 @@ machine-checks a generic positive-at-zero obstruction for the old global
 domination interface, a repaired local near-`p_c` domination transfer, a
 closed-unit local transfer on the explicit `alpha*(0,p_c) < alpha <= 1`
 domain, a closed-unit existential paper-domain divergence witness projection,
-and the current local-bridge impossibility theorem. It also checks the current
+and the current local-bridge impossibility theorem. It also checks the exact
+closed-unit domain criterion
+`(exists alpha, alpha*(0,p_c) < alpha <= 1) iff alpha*(0,p_c) < 1` and the current
 `alphaStar = 1` degeneracy, which makes the paper-bounded `α > α*`, `α <= 1`
 domain empty on the present scalar carrier. The remaining repair is therefore
-to supply a nondegenerate Part 6 `α`/feasible-set domain certificate before
+to supply a nondegenerate Part 6 `α`/feasible-set domain certificate, concretely
+including an `alphaStar 0 p_c < 1` certificate for this closed-unit route, before
 instantiating a `Z²` bridge with a real percolation scaling carrier. The
 closed-unit local bridge contract now carries that nonempty-domain witness
 explicitly, the gate proves the current carrier cannot satisfy it, and the
