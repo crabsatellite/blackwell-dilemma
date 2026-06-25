@@ -55,10 +55,15 @@ The current open-frontier theorem surfaces are themselves build-gated:
 Current Part 4 frontier: `part4_lattice_p_monotonicity_frontier_payload`
 machine-gates the closed bounded theorem surface
 (`mean_estimate_gap_antitone_in_p_paper_Def`,
+`kappaStar_p_monotone_of_mean_gap_antitone`,
+`gap_cognitive_threshold_part4_from_lattice_bridge`,
 `gap_cognitive_threshold_part4`, and
-`FiveState.gap_p_monotonicity_bounded`).  The semantic target remains open
-because the paper-facing lattice/domain carrier and monotone-coupling bridge
-are not yet a theorem.
+`FiveState.gap_p_monotonicity_bounded`). R517 adds
+`LatticePMonotonicityBridgeData`, which fixes the shape of the missing
+lattice/domain certificate: it must name a standard integer-lattice graph and
+prove the domain-derived antitonicity of `mean_estimate_gap` in `p`. The
+semantic target remains open because that lattice/percolation
+monotone-coupling certificate has not been instantiated.
 
 Current iteration result: the high-κ five-state oracle-routing target is now
 closed, not merely diagnosed. `FiveState.fiveStateOracleWelfare` formalises

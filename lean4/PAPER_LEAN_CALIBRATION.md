@@ -161,12 +161,16 @@ and on lattices, the threshold κ* is non-decreasing in p."
 - `part4_lattice_p_monotonicity_frontier_payload`
   (PaperSemanticGate.lean:110) now machine-gates the current closed frontier:
   `mean_estimate_gap_antitone_in_p_paper_Def`,
+  `kappaStar_p_monotone_of_mean_gap_antitone`,
+  `gap_cognitive_threshold_part4_from_lattice_bridge`,
   `gap_cognitive_threshold_part4`, and `gap_p_monotonicity_bounded`.
 - ⚠️ **Lattice sub-claim (4b)** is still not directly covered by a
-  lattice/domain-carrier theorem.  The remaining work is to refine the
-  abstract bounded route into an explicit lattice/percolation
-  monotone-coupling carrier theorem, not to repair a source axiom or proof
-  escape.
+  lattice/domain-carrier theorem.  R517 makes the missing bridge explicit as
+  `LatticePMonotonicityBridgeData`: a future certificate must name a standard
+  integer-lattice graph and prove the lattice-derived antitonicity of
+  `mean_estimate_gap` in `p`.  The generic `sInf` transfer from that bridge to
+  bounded `kappaStar` p-monotonicity is now kernel-checked, but no such
+  lattice/percolation monotone-coupling certificate is instantiated yet.
 
 ## Calibration Conclusions
 

@@ -18,8 +18,11 @@ are machine-gated by `part4_lattice_p_monotonicity_frontier_payload`,
 `part6_lattice_embedding_frontier_payload`, and
 `topo_cluster_random_supercritical_z2_frontier_payload`; these payloads check
 the current kernel theorem surface while keeping the lattice/domain and random
-finite-lattice carrier repairs open.  The threshold-five-state oracle-routing
-target is now closed by
+finite-lattice carrier repairs open.  The Part 4 payload now also checks the
+generic `sInf` transfer
+`kappaStar_p_monotone_of_mean_gap_antitone` and the future lattice certificate
+entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  The
+threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation
 `FiveState.not_current_kappaAgent_highKappa_oracle_at_p0` remains as diagnostic

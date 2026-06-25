@@ -731,6 +731,8 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part1
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part2_from_blackwell
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part2
+#print axioms BlackwellDilemma.kappaStar_p_monotone_of_mean_gap_antitone
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part4_from_lattice_bridge
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part4
 #print axioms BlackwellDilemma.PaperSemanticGate.part4_lattice_p_monotonicity_frontier_payload
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part6

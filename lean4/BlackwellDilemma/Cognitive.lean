@@ -20,6 +20,7 @@ import BlackwellDilemma.ClassicalResults
 import BlackwellDilemma.Infrastructure.TopkisCrossPartial
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
 import BlackwellDilemma.Infrastructure.HarrisKestenCriticalDivergence
+import BlackwellDilemma.Infrastructure.IntegerLattice
 import BlackwellDilemma.Infrastructure.CognitivePercolationDominance
 import BlackwellDilemma.Infrastructure.GaussianPosterior
 import BlackwellDilemma.Infrastructure.GaussianPosteriorAsymptotic
@@ -1026,6 +1027,70 @@ theorem mean_estimate_gap_antitone_in_p_paper_Def :
     κ hκ p₁ p₂ h_p_le
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Generic Part 4 transfer theorem.  Any future domain-specific carrier
+that proves the mean-estimate-gap antitonicity in `p` can plug that theorem
+into this `sInf` transfer and obtain the bounded `kappaStar`
+p-monotonicity conclusion. -/
+theorem kappaStar_p_monotone_of_mean_gap_antitone
+    (h_antitone :
+      ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+        ∀ κ : ℝ, 0 < κ →
+          mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ) :
+    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      (∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α := by
+  intro α p₁ p₂ h_p_le h_nonempty_p2
+  rw [kappaStar_def p₁ α, kappaStar_def p₂ α]
+  set S₁ : Set ℝ := { κ : ℝ | 0 < κ ∧
+    BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+      mean_estimate_gap p₁ κ } with hS₁
+  set S₂ : Set ℝ := { κ : ℝ | 0 < κ ∧
+    BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+      mean_estimate_gap p₂ κ } with hS₂
+  have h_bdd : BddBelow S₁ := by
+    refine ⟨0, ?_⟩
+    intro κ hκ
+    exact le_of_lt hκ.1
+  have h_ne : S₂.Nonempty := h_nonempty_p2
+  have h_sub : S₂ ⊆ S₁ := by
+    intro κ hκ
+    refine ⟨hκ.1, ?_⟩
+    have h_anti : mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ :=
+      h_antitone p₁ p₂ h_p_le κ hκ.1
+    linarith [hκ.2]
+  exact csInf_le_csInf h_bdd h_ne h_sub
+
+/-- Machine-readable shape of the missing Part 4 lattice/domain bridge.
+The graph fields force the future certificate to name a standard integer
+lattice domain; the mathematical load-bearing field is the
+domain-derived antitonicity of the mean-estimate gap in `p`. -/
+structure LatticePMonotonicityBridgeData where
+  dimension : ℕ
+  positive_dimension : 0 < dimension
+  graph : SimpleGraph (Fin dimension → ℤ)
+  graph_is_integer_lattice : graph = SimpleGraph.integerLatticeGraph dimension
+  mean_gap_antitone_on_lattice :
+    ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      ∀ κ : ℝ, 0 < κ →
+        mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Part 4 transfer from an explicit lattice/domain bridge.  This theorem is
+not a witness for the missing bridge; it is the build-checked interface that
+the future lattice/percolation monotone-coupling theorem must instantiate. -/
+theorem gap_cognitive_threshold_part4_from_lattice_bridge
+    (bridge : LatticePMonotonicityBridgeData) :
+    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      (∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α :=
+  kappaStar_p_monotone_of_mean_gap_antitone
+    bridge.mean_gap_antitone_on_lattice
+
+omit [DiagnosticSignalHypothesisData] in
 /-- **Theorem 4.1 Part 4: Monotonicity in `p`** (paper-faithful bounded
     form on the abstract `kappaStar` carrier).
 
@@ -1061,39 +1126,9 @@ theorem gap_cognitive_threshold_part4 :
       (∃ κ : ℝ, 0 < κ ∧
         BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
           mean_estimate_gap p₂ κ) →
-      kappaStar p₁ α ≤ kappaStar p₂ α := by
-  intro α p₁ p₂ h_p_le h_nonempty_p2
-  -- Unfold both kappaStar instances via kappaStar_def.
-  rw [kappaStar_def p₁ α, kappaStar_def p₂ α]
-  -- Set-theoretic skeleton of the proof (welfare-transition form):
-  --   S(p, α) := {κ : ℝ | 0 < κ ∧ alphaWelfareShift α ≤ m(p, κ)}
-  --   antitone-in-p of m  ⟹  S(p₂, α) ⊆ S(p₁, α)
-  --   sInf is anti-monotone w.r.t. ⊆: smaller-of-superset ≤ smaller-of-subset
-  --   so sInf S(p₁, α) ≤ sInf S(p₂, α), i.e. κ*(p₁, α) ≤ κ*(p₂, α).
-  set S₁ : Set ℝ := { κ : ℝ | 0 < κ ∧
-    BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
-      mean_estimate_gap p₁ κ } with hS₁
-  set S₂ : Set ℝ := { κ : ℝ | 0 < κ ∧
-    BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
-      mean_estimate_gap p₂ κ } with hS₂
-  -- Step 1: S₁ is bounded below by 0 (every κ ∈ S₁ has 0 < κ).
-  have h_bdd : BddBelow S₁ := by
-    refine ⟨0, ?_⟩
-    intro κ hκ
-    exact le_of_lt hκ.1
-  -- Step 2: S₂ is non-empty (paper's intended-domain premise).
-  have h_ne : S₂.Nonempty := h_nonempty_p2
-  -- Step 3: S₂ ⊆ S₁ (from m antitone in p; α-shift fixed).
-  have h_sub : S₂ ⊆ S₁ := by
-    intro κ hκ
-    refine ⟨hκ.1, ?_⟩
-    -- Need: shift α ≤ m(p₁, κ).
-    -- Have: shift α ≤ m(p₂, κ); m(p₂, κ) ≤ m(p₁, κ).
-    have h_anti : mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ :=
-      mean_estimate_gap_antitone_in_p_paper_Def p₁ p₂ h_p_le κ hκ.1
-    linarith [hκ.2]
-  -- Step 4: csInf is anti-monotone w.r.t. ⊆.
-  exact csInf_le_csInf h_bdd h_ne h_sub
+      kappaStar p₁ α ≤ kappaStar p₂ α :=
+  kappaStar_p_monotone_of_mean_gap_antitone
+    mean_estimate_gap_antitone_in_p_paper_Def
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Strict kernel-pure derived theorem: Part 5 monotonicity of the

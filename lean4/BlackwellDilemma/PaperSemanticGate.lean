@@ -94,12 +94,28 @@ structure Part4LatticePMonotonicityFrontierPayload where
     ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
       ∀ κ : ℝ, 0 < κ →
         mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ
+  generic_antitone_transfer :
+    (∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      ∀ κ : ℝ, 0 < κ →
+        mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ) →
+    ∀ α p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      (∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α
   abstract_bounded_kappaStar_monotone :
     ∀ α p₁ p₂ : ℝ, p₁ ≤ p₂ →
       (∃ κ : ℝ, 0 < κ ∧
         BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
           mean_estimate_gap p₂ κ) →
       kappaStar p₁ α ≤ kappaStar p₂ α
+  lattice_bridge_transfer :
+    ∀ _bridge : LatticePMonotonicityBridgeData,
+      ∀ α p₁ p₂ : ℝ, p₁ ≤ p₂ →
+        (∃ κ : ℝ, 0 < κ ∧
+          BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+            mean_estimate_gap p₂ κ) →
+        kappaStar p₁ α ≤ kappaStar p₂ α
   constructive_five_state_bounded_monotone :
     ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → p₂ < 1 →
       FiveState.kappaStar_fiveState p₁ ≤
@@ -112,8 +128,12 @@ def part4_lattice_p_monotonicity_frontier_payload :
     Part4LatticePMonotonicityFrontierPayload where
   mean_gap_antitone :=
     mean_estimate_gap_antitone_in_p_paper_Def
+  generic_antitone_transfer :=
+    kappaStar_p_monotone_of_mean_gap_antitone
   abstract_bounded_kappaStar_monotone :=
     gap_cognitive_threshold_part4
+  lattice_bridge_transfer :=
+    gap_cognitive_threshold_part4_from_lattice_bridge
   constructive_five_state_bounded_monotone :=
     FiveState.gap_p_monotonicity_bounded
 
