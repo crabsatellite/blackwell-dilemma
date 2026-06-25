@@ -546,7 +546,12 @@ which turns the repaired bridge's positive giant-event mass into an actual
 finite configuration in the selected event,
 `randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_flat_event_mass_member_and_loss_realisation`,
 which keeps that membership on the same sufficiently large boxed-torus index
-as the flat lower bound, giant-event mass, and positive-loss realisation, and by
+as the flat lower bound, giant-event mass, and positive-loss realisation,
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_supported_extended_non_diagnostic_member_with_giant_member`,
+which gives arbitrarily large non-diagnostic repaired members where the flat
+lower bound, giant-event mass, giant-event member, positive-loss realisation,
+and five deterministic-diagnostic exclusions all hold at the same chosen `L`,
+and by
 `firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant` and
 `firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero`.
 The gate now also includes

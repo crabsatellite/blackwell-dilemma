@@ -15510,6 +15510,67 @@ theorem randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_su
     hnot_all_open_complement, hnot_all_open_giant,
     hnot_all_open_positive⟩
 
+/-- Supported non-diagnostic repaired tail with an explicit giant-event member
+at the same boxed-torus index as the flat lower bound, giant-event mass lower
+bound, positive-loss realisation, and deterministic-diagnostic exclusions. -/
+theorem randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_supported_extended_non_diagnostic_member_with_giant_member
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) :
+    Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        forall L0 : Nat,
+          Exists fun L : Nat =>
+            L0 <= L /\
+            c <=
+              expectedTopoLossOnData (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+            c <=
+              percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real)) /\
+            (Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+              Membership.mem
+                ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+                omega) /\
+            (Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+              0 <
+                (bridge.family L).topoLossKernel
+                  (boxedTorusFlatGraphN L) omega) /\
+            Not (bridge.family L = boxedTorusFullReachComplementTopoLossData L) /\
+            Not (bridge.family L =
+              boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+            Not (bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+            Not (bridge.family L = boxedTorusAllOpenGiantTopoLossData L) /\
+            Not (bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) := by
+  rcases
+    randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_supported_extended_non_diagnostic_member
+      bridge with
+    ⟨c, hc_pos, hc_le_one, htail⟩
+  refine ⟨c, hc_pos, hc_le_one, ?_⟩
+  intro L0
+  rcases htail L0 with
+    ⟨L, hL0, hflat, hmass, hloss_witness, hnot_full, hnot_flat,
+      hnot_all_open_complement, hnot_all_open_giant, hnot_all_open_positive⟩
+  have hmass_pos :
+      0 <
+        percRestrictedExpectation (1 - bridge.supercriticalProbability)
+          ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+            (1 : Real)) := by
+    exact lt_of_lt_of_le hc_pos hmass
+  have hgiant_member :
+      Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+        Membership.mem
+          ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+          omega :=
+    percRestrictedExpectation_const_one_pos_event_nonempty
+      (1 - bridge.supercriticalProbability)
+      ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+      hmass_pos
+  exact ⟨L, hL0, hflat, hmass, hgiant_member, hloss_witness, hnot_full,
+    hnot_flat, hnot_all_open_complement, hnot_all_open_giant,
+    hnot_all_open_positive⟩
+
 /-- Paper-support surface for the repaired random-supercritical bridge. -/
 def RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport
     (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) : Prop :=

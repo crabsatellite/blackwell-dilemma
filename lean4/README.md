@@ -637,7 +637,12 @@ claim. It also gates
 `randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_flat_event_mass_member_and_loss_realisation`,
 which keeps the flat lower bound, giant-event mass, giant-event member, and
 positive-loss realisation together at the same sufficiently large boxed-torus
-index. Its event is no
+index, and
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_supported_extended_non_diagnostic_member_with_giant_member`,
+which gives arbitrarily large non-diagnostic repaired members where that same
+flat lower bound, giant-event mass, giant-event member, positive-loss
+realisation, and the five deterministic-diagnostic exclusions all hold at the
+same chosen `L`. Its event is no
 longer only a naked `firstEdgeIdx`: the gate checks
 `boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx` and
 `firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff`,
