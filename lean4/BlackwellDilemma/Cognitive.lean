@@ -1080,6 +1080,26 @@ structure LatticePMonotonicityBridgeData where
       ∀ κ : ℝ, 0 < κ →
         mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ
 
+/-- Current standard `Z2` bridge skeleton for Part 4.
+
+This is a calibration witness, not a paper-semantic closure certificate: the
+graph and finite-box monotone-coupling fields are standard `Z2` data, but the
+load-bearing `mean_gap_antitone_on_lattice` field is still the already proved
+abstract/canonical `mean_estimate_gap_antitone_in_p_paper_Def` theorem.  A
+future paper-semantic closure must derive that antitonicity from the
+lattice/domain observable rather than only plugging it into this interface. -/
+def standardZ2LatticePMonotonicityBridgeSkeleton_current :
+    LatticePMonotonicityBridgeData where
+  dimension := 2
+  positive_dimension := by norm_num
+  graph := SimpleGraph.Z2LatticeGraph
+  graph_is_integer_lattice := rfl
+  lattice_monotone_coupling :=
+    BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData
+      2
+  mean_gap_antitone_on_lattice :=
+    mean_estimate_gap_antitone_in_p_paper_Def
+
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 4 transfer from an explicit lattice/domain bridge.  This theorem is
 not a witness for the missing bridge; it is the build-checked interface that
@@ -1093,6 +1113,22 @@ theorem gap_cognitive_threshold_part4_from_lattice_bridge
       kappaStar p₁ α ≤ kappaStar p₂ α :=
   kappaStar_p_monotone_of_mean_gap_antitone
     bridge.mean_gap_antitone_on_lattice
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 4 `Z2` bridge-skeleton transfer.
+
+This theorem intentionally remains diagnostic: it proves that the current
+bridge interface accepts the standard `Z2` graph/coupling skeleton, while the
+semantic target stays open because the skeleton's antitonicity field is not yet
+derived from a lattice observable. -/
+theorem gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current :
+    ∀ α : ℝ, ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      (∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α :=
+  gap_cognitive_threshold_part4_from_lattice_bridge
+    standardZ2LatticePMonotonicityBridgeSkeleton_current
 
 omit [DiagnosticSignalHypothesisData] in
 /-- **Theorem 4.1 Part 4: Monotonicity in `p`** (paper-faithful bounded

@@ -77,9 +77,15 @@ Part 4 payload. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
 carry that per-edge plus finite-product monotone-coupling/expectation interface before proving the
-domain-derived antitonicity of `mean_estimate_gap` in `p`. The semantic target
-remains open because no full lattice/percolation certificate deriving the
-mean-gap antitonicity from that domain/coupling carrier has been instantiated.
+domain-derived antitonicity of `mean_estimate_gap` in `p`. The current
+`standardZ2LatticePMonotonicityBridgeSkeleton_current` and
+`gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current` gate a
+diagnostic standard-`Z^2` bridge skeleton: it fills the graph/coupling fields
+and transfers through the `sInf` theorem, but its load-bearing antitonicity
+field is still the abstract/canonical theorem rather than a lattice-observable
+derivation. The semantic target remains open because no full
+lattice/percolation certificate deriving the mean-gap antitonicity from that
+domain/coupling carrier has been instantiated.
 
 Current iteration result: the high-κ five-state oracle-routing target is now
 closed, not merely diagnosed. `FiveState.fiveStateOracleWelfare` formalises

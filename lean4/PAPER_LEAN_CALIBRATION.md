@@ -188,7 +188,15 @@ and on lattices, the threshold κ* is non-decreasing in p."
   in the Part 4 payload.  The generic `sInf` transfer from that bridge to
   bounded `kappaStar` p-monotonicity is now kernel-checked, but no full
   lattice/percolation certificate deriving the mean-gap antitonicity from the
-  coupling/domain carrier is instantiated yet.
+  coupling/domain carrier is instantiated yet.  The current
+  `standardZ2LatticePMonotonicityBridgeSkeleton_current` diagnostic makes this
+  distinction build-checked: the standard `Z^2` graph/coupling skeleton
+  satisfies the present bridge type, and
+  `gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current`
+  transfers it through the same `sInf` theorem, but the skeleton's
+  load-bearing antitonicity field is still the abstract/canonical
+  `mean_estimate_gap_antitone_in_p_paper_Def` theorem rather than a theorem
+  derived from a lattice observable.
 
 ## Calibration Conclusions
 

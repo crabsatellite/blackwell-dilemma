@@ -144,6 +144,14 @@ structure Part4LatticePMonotonicityFrontierPayload where
           BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
             mean_estimate_gap p₂ κ) →
         kappaStar p₁ α ≤ kappaStar p₂ α
+  standard_z2_bridge_skeleton_current :
+    LatticePMonotonicityBridgeData
+  standard_z2_bridge_skeleton_transfer :
+    ∀ α p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      (∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α
   constructive_five_state_bounded_monotone :
     ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → p₂ < 1 →
       FiveState.kappaStar_fiveState p₁ ≤
@@ -179,6 +187,10 @@ def part4_lattice_p_monotonicity_frontier_payload :
       2
   lattice_bridge_transfer :=
     gap_cognitive_threshold_part4_from_lattice_bridge
+  standard_z2_bridge_skeleton_current :=
+    standardZ2LatticePMonotonicityBridgeSkeleton_current
+  standard_z2_bridge_skeleton_transfer :=
+    gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current
   constructive_five_state_bounded_monotone :=
     FiveState.gap_p_monotonicity_bounded
 

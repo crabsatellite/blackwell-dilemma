@@ -28,8 +28,14 @@ monotonicity theorem for coordinatewise monotone observables, and the standard
 paper-facing `BondConfig` / `percExpectation` bridge
 `percExpectation_mono_in_p_of_BoolConfigMonotone`, plus the standard `Z^2`
 lattice-coupling interface carrying the per-edge, finite-product, and
-finite-box expectation layers; the still-open Part 4 work is deriving the
-lattice mean-gap antitonicity from that domain/coupling carrier.  The Part 6
+finite-box expectation layers. It also checks
+`standardZ2LatticePMonotonicityBridgeSkeleton_current` and
+`gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current`,
+which deliberately remain diagnostic: the current bridge shape can be filled
+with standard `Z^2` graph/coupling data, but its load-bearing mean-gap
+antitonicity still comes from the already proved abstract/canonical theorem.
+The still-open Part 4 work is deriving the lattice mean-gap antitonicity from
+the domain/coupling carrier itself.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the
 future embedding-certificate entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The topo
