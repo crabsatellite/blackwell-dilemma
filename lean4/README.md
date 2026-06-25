@@ -633,7 +633,11 @@ checks
 `randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_giant_event_member`,
 so the positive giant-event mass is converted into actual finite
 configuration membership rather than left as a numerical-only non-vacuity
-claim.  Its event is no
+claim. It also gates
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_flat_event_mass_member_and_loss_realisation`,
+which keeps the flat lower bound, giant-event mass, giant-event member, and
+positive-loss realisation together at the same sufficiently large boxed-torus
+index. Its event is no
 longer only a naked `firstEdgeIdx`: the gate checks
 `boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx` and
 `firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff`,

@@ -347,11 +347,12 @@ deterministic all-open positive, pointwise-hybrid, and extended eventual-tail
 diagnostic families. The repaired projections
 `randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_flat_event_mass_lower_bound_and_loss_realisation`,
 `randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_giant_event_member`,
+`randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_flat_event_mass_member_and_loss_realisation`,
 `randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_supported_extended_non_diagnostic_member`,
 and `randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support` fold the
 flat lower bound, giant-event mass, explicit giant-event membership,
-unrestricted positive-loss realisation, strict `p_c < p < 1` parameter,
-graph/indexing facts, and non-diagnostic tail
+same-index support, unrestricted positive-loss realisation, strict
+`p_c < p < 1` parameter, graph/indexing facts, and non-diagnostic tail
 into one gateable surface. `PaperSemanticGate.lean` gates both the old
 contract obstruction and the repaired bridge projections so the eventual
 closure target is now a concrete Lean structure, not a prose instruction. The
