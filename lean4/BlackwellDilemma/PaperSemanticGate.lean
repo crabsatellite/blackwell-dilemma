@@ -14,6 +14,7 @@
 
 import BlackwellDilemma.Cognitive
 import BlackwellDilemma.Canonical
+import BlackwellDilemma.Phase
 
 namespace BlackwellDilemma
 namespace PaperSemanticGate
@@ -67,9 +68,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current finite graph-local route is kernel-clean but not the full random supercritical Z2_L giant-component theorem.",
+        "The current topo/phase payload is gated and kernel-clean, but it is still a diagnostic/flat finite carrier rather than the full random supercritical Z2_L giant-component theorem.",
       closeRoute :=
-        "Replace the diagnostic/flat carrier with a random finite Z2_L giant-component/topological-loss lower-bound theorem." } ]
+        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: replace the diagnostic/flat carrier with a random finite Z2_L giant-component/topological-loss lower-bound theorem." } ]
 
 def openSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.open)
@@ -164,6 +165,93 @@ def part6_lattice_embedding_frontier_payload :
     not_harrisKestenScalingFunction_diverges_at_pc_paper_Def
   hyperbolic_domination_obstruction :=
     not_criticalHyperbolicScaling_dominates_kappaStar_current
+
+/-- Typed frontier for the open random supercritical `Z2_L`
+topological-cluster/phase target.  This does not close the semantic target:
+it machine-checks the current closed theorem surface and the obstruction
+evidence showing why the remaining paper claim still needs a real random
+finite-lattice giant-component/topological-loss carrier. -/
+structure TopoClusterRandomSupercriticalZ2FrontierPayload where
+  conditional_expectation_def :
+    ∀ n k : ℕ, 1 ≤ k → k ≤ n →
+      expectedTopoLoss_conditional n k =
+        (n : ℝ) / (n + 1) - (k : ℝ) / (k + 1)
+  conditional_expectation_closed_form :
+    ∀ n k : ℕ, 1 ≤ k → k ≤ n →
+      expectedTopoLoss_conditional n k =
+        ((n : ℝ) - k) / ((n + 1) * (k + 1))
+  below_threshold_topo_loss_on_giant :
+    ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∀ ε : ℝ, 0 < ε →
+        ∃ N : ℕ, ∀ n : ℕ, N ≤ n → expectedTopoLossOnGiant n p < ε
+  below_threshold_phase :
+    ∀ p : ℝ, 0 ≤ p → p < harrisKestenCriticalProb →
+      ∀ ε : ℝ, 0 < ε →
+        ∃ N : ℕ, ∀ n : ℕ, N ≤ n → expectedTopoLossOnGiant n p < ε
+  above_threshold_phase_current :
+    ∀ p : ℝ, harrisKestenCriticalProb < p →
+      ∃ c : ℝ, 0 < c ∧
+        ∀ β : ℝ, 0 < β →
+          wInfoTopoRatio p β ≤ c * Real.rpow 2 (-β)
+  boxed_torus_flat_lower_bound_current :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      boxedTorusFullReachFlatOnlyComplementTopoLossData
+  boxed_torus_family_core_current :
+    BoxedTorusFlatFamilyCoreConclusion
+      boxedTorusFullReachFlatOnlyComplementTopoLossData
+  current_mills_identifier_obstruction :
+    ¬
+      ((∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+        ∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c)))
+  mills_inverse_unit_bound_route_obstruction :
+    topoLossKernel_mem_unitInterval →
+      ((∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+      ∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))) →
+      ((∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+      ∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∀ c : ℝ, 0 < c →
+          expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c)) →
+          ∃ N₁ : ℕ, ∀ n : ℕ, N₁ ≤ n →
+            1 / (1 - Real.exp (-c)) ≤ expectedTopoLoss n p) →
+      (∀ p : ℝ, harrisKestenCriticalProb < p →
+        ∃ c : ℝ, 0 < c ∧
+          ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+      ∀ p : ℝ, harrisKestenCriticalProb < p → p ≤ 1 → False
+
+/-- Build gate: the open topo/phase semantic target is calibrated against
+the current theorem surface.  The semantic target remains open until these
+finite diagnostic/flat-carrier witnesses are refined to a genuine random
+supercritical finite `Z2_L` theorem. -/
+def topo_cluster_random_supercritical_z2_frontier_payload :
+    TopoClusterRandomSupercriticalZ2FrontierPayload where
+  conditional_expectation_def :=
+    expectedTopoLoss_conditional_def
+  conditional_expectation_closed_form :=
+    gap_topo_cluster_relation
+  below_threshold_topo_loss_on_giant :=
+    gap_topo_loss_below_threshold
+  below_threshold_phase :=
+    gap_phase_transition_below
+  above_threshold_phase_current :=
+    gap_phase_transition_above
+  boxed_torus_flat_lower_bound_current :=
+    BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current
+  boxed_torus_family_core_current :=
+    boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion
+  current_mills_identifier_obstruction :=
+    not_expectedTopoLossAboveLowerConst_eq_mills_inverse_current
+  mills_inverse_unit_bound_route_obstruction :=
+    not_mills_inverse_above_threshold_route_with_unit_bound
 
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:

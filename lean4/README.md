@@ -13,11 +13,13 @@ mapping). Complete paper-semantic closure is tracked separately by
 [`BlackwellDilemma/PaperSemanticGate.lean`](BlackwellDilemma/PaperSemanticGate.lean):
 the current open semantic targets are the lattice-specific Theorem 4.1 Part 4
 statement, the lattice-IDP embedding route for Part 6, and the random
-supercritical `Z2_L` topological cluster/phase carrier.  The Part 4 bounded
-kernel frontier is machine-gated by
-`part4_lattice_p_monotonicity_frontier_payload`, but the lattice/domain carrier
-bridge remains open.  The threshold-five-state oracle-routing target is now
-closed by
+supercritical `Z2_L` topological cluster/phase carrier.  The open frontiers
+are machine-gated by `part4_lattice_p_monotonicity_frontier_payload`,
+`part6_lattice_embedding_frontier_payload`, and
+`topo_cluster_random_supercritical_z2_frontier_payload`; these payloads check
+the current kernel theorem surface while keeping the lattice/domain and random
+finite-lattice carrier repairs open.  The threshold-five-state oracle-routing
+target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation
 `FiveState.not_current_kappaAgent_highKappa_oracle_at_p0` remains as diagnostic
@@ -466,6 +468,12 @@ The two below-threshold giant-event bridge statements
 `giantComponent_cluster_size_lower_bound_current` are kernel theorems for the
 current carrier with a real `n = 1` witness; this is a non-vacuity regression
 for the bridge mechanism, not a full `Z^2_L` giant-component proof.
+`topo_cluster_random_supercritical_z2_frontier_payload` now machine-gates this
+current frontier by storing the conditional expectation formulas, below/above
+phase theorem surfaces, boxed-torus flat-family lower-bound package, and
+Mills-route obstructions in `PaperSemanticGate.lean`.  The semantic target
+remains open because that payload still rests on diagnostic/flat carriers
+rather than a random finite `Z^2_L` giant-component/lower-bound theorem.
 
 The concrete scalar `agentRewardKernel` now also proves its general
 unit-interval range, Bayesian/Sentimental pointwise monotonicity, κ-agent

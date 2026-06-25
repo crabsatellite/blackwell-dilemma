@@ -140,6 +140,7 @@ namespace BlackwellDilemma.AxiomAudit
 --    estimate, paper line 473).
 #print axioms BlackwellDilemma.gap_phase_transition_below
 #print axioms BlackwellDilemma.gap_phase_transition_above
+#print axioms BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_frontier_payload
 #print axioms BlackwellDilemma.gap_trap_prevalence_above_threshold
 
 -- Hodge-style paper-citation closures: def IS the paper's stated

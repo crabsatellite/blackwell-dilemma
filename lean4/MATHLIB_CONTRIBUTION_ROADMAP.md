@@ -46,6 +46,12 @@ embedding, and the random supercritical `Z2_L` topological cluster/phase
 carrier. These are not hidden source axioms or proof escapes; they are the
 remaining manuscript-semantics-to-kernel correspondence work.
 
+The current open-frontier theorem surfaces are themselves build-gated:
+`part4_lattice_p_monotonicity_frontier_payload`,
+`part6_lattice_embedding_frontier_payload`, and
+`topo_cluster_random_supercritical_z2_frontier_payload` are Lean records in
+`PaperSemanticGate.lean`, not README-only references.
+
 Current Part 4 frontier: `part4_lattice_p_monotonicity_frontier_payload`
 machine-gates the closed bounded theorem surface
 (`mean_estimate_gap_antitone_in_p_paper_Def`,
@@ -184,7 +190,11 @@ proves that R200 Mills identification plus R201 eventual lower bound would
 force `expectedTopoLoss n p > 1`, contradicting the derived unit upper bound
 `expectedTopoLoss_le_one_atom`. The remaining target is therefore a corrected,
 unit-compatible `Z^2_L` lower-bound carrier/theorem, not the current
-`1/(1-exp(-c))` bridge. R321 removes the positive Mills wrappers and the
+`1/(1-exp(-c))` bridge. R516 gates this state in
+`topo_cluster_random_supercritical_z2_frontier_payload`, including the
+conditional expectation formulas, below/above phase theorem surfaces,
+boxed-torus flat-family lower-bound package, and Mills-route obstructions.
+R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,
 `UnitCompatibleAboveThresholdLowerBoundConclusion data`, and proves the

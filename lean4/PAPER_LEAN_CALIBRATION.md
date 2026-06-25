@@ -50,7 +50,7 @@
 | Paper label | Line | Lean theorem(s) | File |
 |---|---|---|---|
 | `prop:info-decay` | 271 | finite-per-`n` current theorem `gap_info_decay_finite` plus compatibility name `gap_info_decay`; uniform-in-`n` strengthening remains a separate percolation target | Wrongness.lean:8809,8820 |
-| `prop:topo-cluster` | 280 | Current standard-only theorem surfaces `expectedTopoLoss_conditional_def`, `gap_topo_cluster_relation`, and `gap_topo_loss_below_threshold`; Part 2 old Mills route dead-end: `not_mills_inverse_above_threshold_route_with_unit_bound`; current public theorem-core lower-bound route: `BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current` plus `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion`; random supercritical `Z^2_L` strengthening remains separate | Wrongness.lean:9127,11272,13819,13836,13958 |
+| `prop:topo-cluster` | 280 | Current standard-only theorem surfaces `expectedTopoLoss_conditional_def`, `gap_topo_cluster_relation`, and `gap_topo_loss_below_threshold`; Part 2 old Mills route dead-end: `not_mills_inverse_above_threshold_route_with_unit_bound`; current public theorem-core lower-bound route: `BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current` plus `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion`; the open semantic frontier is machine-gated by `topo_cluster_random_supercritical_z2_frontier_payload`; random supercritical `Z^2_L` strengthening remains separate | Wrongness.lean:9127,11272,13819,13836,13958; PaperSemanticGate.lean |
 | `prop:physical` | 304 | `gap_physical_irreducibility` + `gap_W_info_nonpos` + `gap_oracle_W_info_zero` + `gap_welfare_le_W_topo` + `gap_oracle_welfare_eq_W_topo` | PhysicalIrreducibility.lean:46,58,74,91,105 |
 | `prop:trap-prevalence` | 454 | Current standard-only theorem surfaces `gap_trap_prevalence_zero` and `gap_trap_prevalence_above_threshold` | Phase.lean:569,970 |
 | `prop:threshold-alpha` | 528 | `gap_threshold_alpha_monotone` | Cognitive.lean:2610 |
@@ -353,7 +353,11 @@ closure for the current finite boxed-torus route. The below-threshold
 giant-component order-statistics and cluster-size lower-bound bridge facts
 remain explicit interfaces, but the current diagnostic global closure consumes
 their current closures internally; the full finite-lattice paper-facing route is
-the explicit-package theorem `topoLossKernel_pointwise_bound_on data`.
+the explicit-package theorem `topoLossKernel_pointwise_bound_on data`. R516
+adds `topo_cluster_random_supercritical_z2_frontier_payload`, a
+`PaperSemanticGate.lean` record that machine-gates the current topo theorem
+surface, the flat-family boxed-torus package, and the Mills-route obstructions
+while leaving the random `Z^2_L` semantic target open.
 The concrete scalar `agentRewardKernel` now proves its general range,
 Bayesian/Sentimental pointwise monotonicity, κ-agent pointwise continuity, and
 κ-agent increasing-differences facts directly as theorems.
