@@ -425,6 +425,13 @@ The missing paper-closing field is now named as
 final contract projects to it, and
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing`
 proves the current repaired witness cannot supply it.
+The gate also names
+`RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport`, which
+combines repaired paper support with same-constant flat loss,
+giant-restricted loss, giant-event mass, and in-giant positive-loss support;
+the old final contract projects to it, and
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support`
+refutes it for the current first-edge witness.
 The combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate` now gates
 both the old over-strong bridge-contract obstruction and that repaired

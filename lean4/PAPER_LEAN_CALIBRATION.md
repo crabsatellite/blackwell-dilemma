@@ -576,6 +576,13 @@ The missing paper-closing giant-loss field is now named as
 projected from the old final bridge contract and refuted for the current
 first-edge repaired witness by
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing`.
+The stronger full closing surface is now named as
+`RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport`; it
+requires repaired paper support plus same-constant flat loss, giant-restricted
+loss, giant-event mass, and in-giant positive-loss support, is projected from
+the old final bridge contract, and is refuted for the current first-edge
+witness by
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support`.
 The topo current frontier is also packaged as
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
 the old over-strong bridge-contract obstruction with the repaired first-edge
