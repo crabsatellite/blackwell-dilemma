@@ -63,6 +63,9 @@ payload now also checks the future `Z2TopoClusterBridgeData` certificate
 projections
 `BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge` and
 `BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge`,
+the current standard-`Z^2` boxed-torus witness
+`boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, and its
+family/core/lower-bound projections,
 and the flat-only diagnostic
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`, plus the
 fixed-`L` all-`n` obstruction
@@ -522,13 +525,15 @@ current frontier by storing the conditional expectation formulas, below/above
 phase theorem surfaces, boxed-torus flat-family lower-bound package, and
 Mills-route obstructions in `PaperSemanticGate.lean`.  It also checks the
 future `Z2TopoClusterBridgeData` bridge projections into the family-core and
-flat lower-bound conclusions, plus
+flat lower-bound conclusions, the current standard-`Z^2` witness
+`boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current` with its
+family/core/lower-bound projections, plus
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`: the
 current flat-only family has zero total expected topo loss off the flattened
 boxed-torus index and zero giant-restricted topo loss at every index.  The
 payload also gates
-`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
-showing that each fixed flat-only member cannot be repackaged as an all-`n`
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`
+and its current-bridge form, showing that each fixed flat-only member cannot be repackaged as an all-`n`
 above-threshold lower-bound carrier.  The
 semantic target remains open because that payload still rests on diagnostic/flat carriers rather than a random finite
 `Z^2_L` giant-component/lower-bound theorem.

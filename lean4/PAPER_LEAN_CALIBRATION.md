@@ -424,11 +424,15 @@ while leaving the random `Z^2_L` semantic target open. R519 adds
 this turns the future random-supercritical `Z^2_L` closure condition into a
 kernel-checked certificate interface, but it does not instantiate that
 certificate or change the open semantic count. The topo payload now also
-gates `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
+gates the current standard-`Z^2` boxed-torus witness
+`boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its family/core/
+lower-bound projections, and
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
 every index. It also gates
-`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`
+and the same obstruction through the current `Z^2` bridge witness,
 which proves each fixed flat-only member fails the old all-`n`
 above-threshold lower-bound interface.
 The concrete scalar `agentRewardKernel` now proves its general range,

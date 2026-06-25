@@ -361,6 +361,21 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     ∀ bridge : Z2TopoClusterBridgeData,
       BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
         bridge.family
+  boxed_torus_z2_bridge_current :
+    Z2TopoClusterBridgeData
+  boxed_torus_z2_bridge_family_is_flat_only :
+    boxed_torus_z2_bridge_current.family =
+      boxedTorusFullReachFlatOnlyComplementTopoLossData
+  boxed_torus_z2_bridge_core_current :
+    BoxedTorusFlatFamilyCoreConclusion
+      boxed_torus_z2_bridge_current.family
+  boxed_torus_z2_bridge_lower_bound_current :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      boxed_torus_z2_bridge_current.family
+  boxed_torus_z2_bridge_not_all_n_lower_bound :
+    forall L : Nat,
+      Not (UnitCompatibleAboveThresholdLowerBoundConclusion
+        (boxed_torus_z2_bridge_current.family L))
   boxed_torus_flat_lower_bound_current :
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
       boxedTorusFullReachFlatOnlyComplementTopoLossData
@@ -411,7 +426,7 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
 the current theorem surface.  The semantic target remains open until these
 finite diagnostic/flat-carrier witnesses are refined to a genuine random
 supercritical finite `Z2_L` theorem. -/
-def topo_cluster_random_supercritical_z2_frontier_payload :
+noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :=
     expectedTopoLoss_conditional_def
@@ -428,6 +443,16 @@ def topo_cluster_random_supercritical_z2_frontier_payload :
     BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge
   z2_topo_cluster_bridge_lower_bound :=
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge
+  boxed_torus_z2_bridge_current :=
+    boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
+  boxed_torus_z2_bridge_family_is_flat_only :=
+    boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_family
+  boxed_torus_z2_bridge_core_current :=
+    boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_core
+  boxed_torus_z2_bridge_lower_bound_current :=
+    boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_lower_bound
+  boxed_torus_z2_bridge_not_all_n_lower_bound :=
+    not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
   boxed_torus_flat_lower_bound_current :=
     BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current
   boxed_torus_family_core_current :=

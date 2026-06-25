@@ -251,11 +251,14 @@ R519 adds the `Z2TopoClusterBridgeData` certificate interface and gates its
 family-core/lower-bound projections in `PaperSemanticGate.lean`; this keeps the
 future random-supercritical `Z^2_L` bridge as an explicit machine-checked
 obligation rather than a prose-only roadmap item. The topo payload now also
-gates `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
+gates `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its
+family/core/lower-bound projections through the bridge interface, and
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
 every index. The same payload also gates
-`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`
+and the current-bridge form of that obstruction,
 showing that each fixed flat-only member cannot satisfy the all-`n`
 above-threshold lower-bound interface; this is the kernel-checked reason the
 current family remains a diagnostic frontier rather than the final

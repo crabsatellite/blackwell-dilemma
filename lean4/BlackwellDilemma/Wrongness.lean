@@ -13923,6 +13923,44 @@ theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusi
     boxedTorusFullReachFlatOnlyComplementTopoLossData_giantEventFullClusterConclusion L,
     boxedTorusFullReachFlatOnlyComplementTopoLossData_clusterCountExpectationBoundsConclusion L⟩
 
+/-- Current standard-`Z^2` topo-cluster bridge witness for the boxed-torus
+full-reach flat-only carrier.
+
+This packages the standard lattice graph and the current boxed-torus family
+into the future `Z2TopoClusterBridgeData` interface.  It remains diagnostic:
+the family is still the flat-only finite carrier, not the final random
+supercritical `Z2_L` theorem required for paper-semantic closure. -/
+noncomputable def boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current :
+    Z2TopoClusterBridgeData where
+  graph := SimpleGraph.Z2LatticeGraph
+  graph_is_z2_lattice := rfl
+  family := boxedTorusFullReachFlatOnlyComplementTopoLossData
+  family_core := boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion
+
+theorem boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_family :
+    boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current.family =
+      boxedTorusFullReachFlatOnlyComplementTopoLossData := rfl
+
+theorem boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_core :
+    BoxedTorusFlatFamilyCoreConclusion
+      boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current.family :=
+  BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge
+    boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
+
+theorem boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_lower_bound :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current.family :=
+  BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge
+    boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
+
+theorem not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
+    (L : Nat) :
+    Not (UnitCompatibleAboveThresholdLowerBoundConclusion
+      (boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current.family L)) := by
+  change Not (UnitCompatibleAboveThresholdLowerBoundConclusion
+    (boxedTorusFullReachFlatOnlyComplementTopoLossData L))
+  exact not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly L
+
 theorem BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_current :
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
       boxedTorusAllOpenComplementTopoLossData := by
