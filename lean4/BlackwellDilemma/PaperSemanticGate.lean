@@ -60,9 +60,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current scaling transfer is kernel-clean, but the full lattice embedding route remains a semantic carrier repair.",
+        "The current scaling-transfer payload and obstruction diagnostics are gated, but the full lattice embedding route remains a semantic carrier repair.",
       closeRoute :=
-        "Connect trap-tree embeddings to a finite/infinite Z2 lattice percolation carrier with proved positive occurrence and domination." },
+        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: connect trap-tree embeddings to a finite/infinite Z2 lattice percolation carrier with proved positive occurrence and domination." },
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
@@ -115,6 +115,55 @@ def part4_lattice_p_monotonicity_frontier_payload :
     gap_cognitive_threshold_part4
   constructive_five_state_bounded_monotone :=
     FiveState.gap_p_monotonicity_bounded
+
+/-- Typed frontier for the open Theorem 4.1 Part 6 lattice-embedding target.
+This does not close the semantic target: it machine-checks the current
+kernel-solid transfer layer and the two obstruction diagnostics that force a
+replacement lattice/percolation carrier. -/
+structure Part6LatticeEmbeddingFrontierPayload where
+  prototype_diverges :
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      criticalHyperbolicScaling harrisKestenCriticalProb
+  lower_envelope_dominates :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      ∀ p : ℝ, p < harrisKestenCriticalProb →
+        harrisKestenScalingFunction p ≤ kappaStar p α
+  transfer_interface :
+    ∀ s : ℝ → ℝ,
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb →
+      (∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∀ p : ℝ, p < harrisKestenCriticalProb →
+          s p ≤ kappaStar p α) →
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+        ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+            p < harrisKestenCriticalProb →
+              M < kappaStar p α
+  lower_envelope_divergence_obstruction :
+    ¬ BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      harrisKestenScalingFunction harrisKestenCriticalProb
+  hyperbolic_domination_obstruction :
+    ¬ ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      ∀ p : ℝ, p < harrisKestenCriticalProb →
+        criticalHyperbolicScaling p ≤ kappaStar p α
+
+/-- Build gate: the open Part 6 lattice-embedding target is calibrated
+against the current transfer layer and current-carrier obstructions.  The
+semantic target remains open until a genuine lattice/percolation carrier
+supplies both divergence and domination without the documented obstructions. -/
+def part6_lattice_embedding_frontier_payload :
+    Part6LatticeEmbeddingFrontierPayload where
+  prototype_diverges :=
+    criticalHyperbolicScaling_diverges_at_pc
+  lower_envelope_dominates :=
+    kappaStar_dominates_percolation_scaling_paper_Def
+  transfer_interface :=
+    gap_cognitive_threshold_part6
+  lower_envelope_divergence_obstruction :=
+    not_harrisKestenScalingFunction_diverges_at_pc_paper_Def
+  hyperbolic_domination_obstruction :=
+    not_criticalHyperbolicScaling_dominates_kappaStar_current
 
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:

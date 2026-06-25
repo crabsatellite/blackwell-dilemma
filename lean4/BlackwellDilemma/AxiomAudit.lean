@@ -733,6 +733,7 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part4
 #print axioms BlackwellDilemma.PaperSemanticGate.part4_lattice_p_monotonicity_frontier_payload
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part6
+#print axioms BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_frontier_payload
 #print axioms BlackwellDilemma.gap_kappaWelfare_cross_partial_link
 
 -- Wrongness.lean decomposition (current scalar interface route):

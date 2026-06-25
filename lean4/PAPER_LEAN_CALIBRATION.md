@@ -182,7 +182,9 @@ current unbounded lower-envelope carrier route false. R208 replaces that route
 with the parameterized `kappaStar_diverges_at_pc_via_scaling_carrier` transfer
 interface. R467 proves the divergence half for the explicit hyperbolic carrier
 `criticalHyperbolicScaling`, but R468 proves that this exact carrier cannot
-satisfy the current unbounded high-alpha domination target. The remaining
+satisfy the current unbounded high-alpha domination target.
+`part6_lattice_embedding_frontier_payload` now machine-gates this current
+transfer/obstruction frontier in `PaperSemanticGate.lean`. The remaining
 Harris-Kesten scaling work is therefore a paper-faithful carrier/domain repair,
 or a different replacement carrier with a valid domination theorem.
 `V_g` is now a well-founded concrete greedy traversal over the current
@@ -368,7 +370,10 @@ now a kernel-proved dead-end:
 unbounded lower-envelope carrier is zero on `p ≥ 0`. The cognitive Part 6 route
 therefore uses the parameterized R208 scaling-carrier interface instead of the
 failed lower-envelope proposition; the failed route is still not a global
-`_paper_Def` source axiom.
+`_paper_Def` source axiom. The open semantic-gate target is now calibrated by
+`part6_lattice_embedding_frontier_payload`, which checks the live transfer
+theorem, prototype divergence theorem, lower-envelope dominance theorem, and
+both obstruction theorems.
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
 `L_minimum_exists_in_regime_i_proof`. R238 also proves

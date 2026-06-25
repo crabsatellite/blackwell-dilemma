@@ -73,10 +73,12 @@ R467 instantiates the divergence half with the explicit hyperbolic carrier
 carrier cannot satisfy the current unbounded high-alpha domination target:
 `not_criticalHyperbolicScaling_dominates_kappaStar_current` gives the
 `alpha = 2`, `p = 0` counterexample, where the carrier is positive but
-`kappaStar 0 2 = 0`. The Part 6 repair is therefore a paper-faithful
-carrier/domain change, or another replacement carrier whose domination theorem
-avoids the empty-feasible-set high-alpha branch, before there can be a live Cat
-2 percolation-universality closure target. The thirty-five dead-end
+`kappaStar 0 2 = 0`. `part6_lattice_embedding_frontier_payload` now
+machine-gates this transfer/obstruction frontier. The Part 6 repair is
+therefore a paper-faithful carrier/domain change, or another replacement
+carrier whose domination theorem avoids the empty-feasible-set high-alpha
+branch, before there can be a live Cat 2 percolation-universality closure
+target. The thirty-five dead-end
 ledger markers are tracked as `notInput`, not as theorem targets. Main paper
 theorem `#print axioms` output must reduce to Lean/Mathlib kernel axioms plus
 explicit hypotheses.

@@ -501,9 +501,10 @@ cannot satisfy the current unbounded high-alpha domination target:
 `alpha = 2`, `p = 0` counterexample, where the hyperbolic carrier is positive
 but `kappaStar 0 2 = 0`. The remaining Part 6 repair is therefore a
 paper-faithful carrier/domain change, or another replacement carrier whose
-domination theorem avoids the empty-feasible-set high-alpha branch. That repair
-is the precondition for any Harris-Kesten/Cardy/SLE formalisation to become a
-valid closure target.
+domination theorem avoids the empty-feasible-set high-alpha branch. The
+current transfer and obstruction frontier is machine-gated by
+`part6_lattice_embedding_frontier_payload`. That repair is the precondition
+for any Harris-Kesten/Cardy/SLE formalisation to become a valid closure target.
 
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
