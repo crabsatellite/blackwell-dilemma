@@ -16317,6 +16317,25 @@ theorem not_random_supercritical_z2_topo_cluster_bridge_contract_current :
                       have h_lower := hgiant_lower L hL_giant
                       linarith
 
+/-- Current topo/phase frontier certificate for the random-supercritical
+`Z^2_L` bridge route.
+
+This certificate packages the honest current state of the open topo target:
+the old over-strong bridge contract is kernel-refuted, while the repaired
+bridge contract is nonempty and has the finite first-edge compatibility
+certificate showing why that current witness is useful but still not a
+paper-closing random finite-lattice giant-component carrier. -/
+def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
+  Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData) /\
+    Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData /\
+    FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate
+
+theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
+    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate := by
+  exact ⟨not_random_supercritical_z2_topo_cluster_bridge_contract_current,
+    exists_firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate⟩
+
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/
 theorem not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic :

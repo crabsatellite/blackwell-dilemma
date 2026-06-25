@@ -68,7 +68,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, strict non-endpoint p < 1 parameter domain, family-level unit-interval topological-loss range, flat-sequence, giant-restricted, and giant-event-mass lower-bound packages at that same parameter, a contract-level obstruction showing that old random-supercritical bridge contract is inconsistent with the pointwise giant-loss envelope, and a repaired random-supercritical bridge surface that keeps the compatible flat lower-bound, giant-event-mass, probability-domain, unit-interval, non-diagnostic-tail, explicit giant-event membership, same-L combined support, same-L non-diagnostic support with a giant-event member, and paper-support obligations while dropping the refuted uniform giant-restricted lower-bound field are gated and kernel-clean. A finite first-edge Bernoulli witness now proves the repaired contract is nonempty/nonvacuous; the selected event is calibrated to the boxed-torus base horizontal edge under the existing flattening map, implies reachability of that edge's target in the boxed-torus open-edge reachable set, is machine-calibrated to zero topological loss on its selected giant event, and cannot supply any positive uniform giant-restricted lower bound. These current compatibility and not-closing facts are also packaged as one gate certificate, but the full random supercritical Z2_L finite-lattice theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, strict non-endpoint p < 1 parameter domain, family-level unit-interval topological-loss range, flat-sequence, giant-restricted, and giant-event-mass lower-bound packages at that same parameter, a contract-level obstruction showing that old random-supercritical bridge contract is inconsistent with the pointwise giant-loss envelope, and a repaired random-supercritical bridge surface that keeps the compatible flat lower-bound, giant-event-mass, probability-domain, unit-interval, non-diagnostic-tail, explicit giant-event membership, same-L combined support, same-L non-diagnostic support with a giant-event member, and paper-support obligations while dropping the refuted uniform giant-restricted lower-bound field are gated and kernel-clean. A finite first-edge Bernoulli witness now proves the repaired contract is nonempty/nonvacuous; the selected event is calibrated to the boxed-torus base horizontal edge under the existing flattening map, implies reachability of that edge's target in the boxed-torus open-edge reachable set, is machine-calibrated to zero topological loss on its selected giant event, and cannot supply any positive uniform giant-restricted lower bound. The old-contract obstruction and repaired first-edge compatibility/not-closing facts are also packaged as one current-frontier gate certificate, but the full random supercritical Z2_L finite-lattice theorem remains open.",
       closeRoute :=
         "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterRepairedBridgeData with the genuine random finite Z2_L carrier, an explicit p_c < p < 1 parameter, family-level unit-interval range, valid flat/topo lower-bound theorem, giant-event-mass theorem, and non-diagnostic tail certificate; the first-edge cylinder witness is only a compatibility witness, and the older RandomSupercriticalZ2TopoClusterBridgeData remains in the gate only as a kernel-refuted over-strong contract." } ]
 
@@ -1548,6 +1548,8 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
               bridge.family L ≠ boxedTorusAllOpenPositiveTopoLossData L
   random_supercritical_z2_bridge_contract_current_obstruction :
     Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData)
+  random_supercritical_z2_current_frontier_certificate :
+    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate
   random_supercritical_z2_bridge_not_full_reach_diagnostic :
     ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∀ L : Nat, bridge.family L =
@@ -1879,6 +1881,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
   random_supercritical_z2_bridge_contract_current_obstruction :=
     not_random_supercritical_z2_topo_cluster_bridge_contract_current
+  random_supercritical_z2_current_frontier_certificate :=
+    random_supercritical_z2_topo_cluster_current_frontier_certificate
   random_supercritical_z2_bridge_not_full_reach_diagnostic :=
     not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic
   random_supercritical_z2_bridge_not_flat_only_diagnostic :=

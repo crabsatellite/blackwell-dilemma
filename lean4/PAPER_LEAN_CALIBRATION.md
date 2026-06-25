@@ -571,6 +571,10 @@ The gate now also includes
 `firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`.
 It further gates the combined certificate
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+The topo current frontier is also packaged as
+`random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
+the old over-strong bridge-contract obstruction with the repaired first-edge
+compatibility/not-closing witness.
 Thus its selected event is reachability-linked to the boxed-torus base
 horizontal edge, but its giant-restricted topological loss is exactly zero and
 admits no positive uniform lower-bound certificate, which is why it remains

@@ -420,6 +420,10 @@ so the current witness has zero topological loss on its selected giant event
 and cannot provide a positive uniform giant-restricted lower bound. The gate
 also packages this current compatibility and not-closing surface as
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+The combined
+`random_supercritical_z2_topo_cluster_current_frontier_certificate` now gates
+both the old over-strong bridge-contract obstruction and that repaired
+first-edge compatibility/not-closing witness in one theorem.
 This is a
 reachability and zero-loss calibration for the repaired interface, not the
 final paper theorem, because the witness remains a one-edge cylinder rather

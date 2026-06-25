@@ -659,6 +659,10 @@ so the current witness is explicitly zero on its selected giant-restricted
 topological loss and cannot provide a positive uniform giant-restricted lower
 bound. The gate packages these current compatibility and not-closing facts as
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+It also gates the combined
+`random_supercritical_z2_topo_cluster_current_frontier_certificate`, which
+keeps the old over-strong contract obstruction and the repaired first-edge
+compatibility witness in one current-frontier theorem.
 This proves the repaired contract is satisfiable and linked to the
 finite reachable-set semantics, but it is still deliberately a one-edge
 cylinder event rather than the paper's random finite `Z2_L` giant-component
