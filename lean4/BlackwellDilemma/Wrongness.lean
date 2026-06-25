@@ -14030,9 +14030,10 @@ supercritical `Z^2_L` topo-cluster bridge.
 
 Unlike `Z2TopoClusterBridgeData`, this is not meant to package the current
 full-reach, flat-only, or all-open-complement diagnostic carriers.  It records
-the finite boxed-torus indexing facts together with the family-level theorem
-core that a genuine random supercritical `Z^2_L` carrier must provide before
-the open topo semantic target can be closed. -/
+the finite boxed-torus indexing facts, a named supercritical probability
+parameter, and the family-level theorem core that a genuine random
+supercritical `Z^2_L` carrier must provide before the open topo semantic target
+can be closed. -/
 structure RandomSupercriticalZ2TopoClusterBridgeData where
   graph : SimpleGraph (Fin 2 -> Int)
   graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
@@ -14044,6 +14045,21 @@ structure RandomSupercriticalZ2TopoClusterBridgeData where
     forall L : Nat,
       Fintype.card (BoxedTorusEdgeIdx L) =
         2 * (boxedTorusFlatGraphN L + 1)
+  supercriticalProbability : Real
+  supercriticalProbability_above_pc :
+    harrisKestenCriticalProb < supercriticalProbability
+  supercriticalProbability_nonneg :
+    0 <= supercriticalProbability
+  supercriticalProbability_le_one :
+    supercriticalProbability <= 1
+  supercritical_flat_lower_bound :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnData (family L)
+                (boxedTorusFlatGraphN L) supercriticalProbability
   family_core : BoxedTorusFlatFamilyCoreConclusion family
   not_full_reach_diagnostic :
     Not (forall L : Nat,
@@ -14085,6 +14101,31 @@ theorem BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_rand
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
       bridge.family :=
   bridge.family_core.1
+
+/-- Projection of the named supercritical probability domain from the final
+random-supercritical `Z^2_L` bridge contract. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_supercriticalProbability_domain
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    harrisKestenCriticalProb < bridge.supercriticalProbability ∧
+      0 <= bridge.supercriticalProbability ∧
+        bridge.supercriticalProbability <= 1 := by
+  exact ⟨bridge.supercriticalProbability_above_pc,
+    bridge.supercriticalProbability_nonneg,
+    bridge.supercriticalProbability_le_one⟩
+
+/-- Projection of the named flat-sequence lower bound at the bridge's own
+supercritical probability.  This prevents a future final bridge from hiding
+the paper's `p > p_c` parameter only inside the abstract family-core package. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_supercritical_flat_lower_bound
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun c : Real =>
+      0 < c ∧ c <= 1 ∧
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnData (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+  bridge.supercritical_flat_lower_bound
 
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/

@@ -68,9 +68,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
       shortReason :=
-        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract, flat-sequence lower-bound package, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
+        "The current topo/phase payload, all-open/complement boxed-torus witnesses, full-reach Z2 bridge, explicit non-diagnostic random-supercritical bridge contract with named supercritical probability, flat-sequence lower-bound package, failure-mass support diagnostics, hybrid-diagnostic exclusion, and obstruction diagnostics are gated and kernel-clean, but the full random supercritical Z2_L giant-component theorem remains open.",
       closeRoute :=
-        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier and its topological-loss lower-bound theorem, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
+        "Current typed frontier: topo_cluster_random_supercritical_z2_frontier_payload. To close: instantiate RandomSupercriticalZ2TopoClusterBridgeData with the paper's random finite Z2_L supercritical carrier, an explicit p > p_c parameter, and its topological-loss lower-bound theorem at that same parameter, replacing the current full-reach/flat-only failure-complement support mechanism." } ]
 
 def openSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.open)
@@ -469,6 +469,18 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
         bridge.family
+  random_supercritical_z2_bridge_probability_domain :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      harrisKestenCriticalProb < bridge.supercriticalProbability ∧
+        0 ≤ bridge.supercriticalProbability ∧
+          bridge.supercriticalProbability ≤ 1
+  random_supercritical_z2_bridge_named_lower_bound :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
+      ∃ c : ℝ, 0 < c ∧ c ≤ 1 ∧
+        ∃ L0 : ℕ, ∀ L : ℕ, L0 ≤ L →
+          c ≤
+            expectedTopoLossOnData (bridge.family L)
+              (boxedTorusFlatGraphN L) bridge.supercriticalProbability
   random_supercritical_z2_bridge_not_full_reach_diagnostic :
     ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∀ L : Nat, bridge.family L =
@@ -622,9 +634,10 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
 /-- Build gate: the open topo/phase semantic target is calibrated against
 the current theorem surface.  The semantic target remains open until the
 explicit `RandomSupercriticalZ2TopoClusterBridgeData` contract is instantiated
-by a genuine random supercritical finite `Z2_L` theorem, rather than by the
-finite all-open/full-reach/flat-sequence diagnostic carriers or by the current
-full-reach failure-complement support mechanism. -/
+by a genuine random supercritical finite `Z2_L` theorem carrying a named
+`p > p_c` parameter and a lower-bound theorem at that same parameter, rather
+than by the finite all-open/full-reach/flat-sequence diagnostic carriers or by
+the current full-reach failure-complement support mechanism. -/
 noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     TopoClusterRandomSupercriticalZ2FrontierPayload where
   conditional_expectation_def :=
@@ -648,6 +661,10 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     BoxedTorusFlatFamilyCoreConclusion_from_random_supercritical_z2_topo_cluster_bridge
   random_supercritical_z2_bridge_lower_bound :=
     BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_random_supercritical_z2_topo_cluster_bridge
+  random_supercritical_z2_bridge_probability_domain :=
+    randomSupercriticalZ2TopoClusterBridgeData_supercriticalProbability_domain
+  random_supercritical_z2_bridge_named_lower_bound :=
+    randomSupercriticalZ2TopoClusterBridgeData_supercritical_flat_lower_bound
   random_supercritical_z2_bridge_not_full_reach_diagnostic :=
     not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic
   random_supercritical_z2_bridge_not_flat_only_diagnostic :=
