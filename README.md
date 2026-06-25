@@ -79,6 +79,14 @@ domain, a closed-unit existential paper-domain divergence witness projection,
 the explicit near-`p_c` zero branch for the current unbounded `alpha = 2`
 domain, the theorem that this zero branch blocks the current local bridge
 shape, and the current local-bridge impossibility theorem. It also checks the exact
+current unbounded output-witness obstruction:
+`mean_estimate_gap_lt_one_of_nonneg_p_of_pos_kappa`,
+`kappaStar_eq_zero_of_one_lt_alpha_of_nonneg_p`,
+`not_unbounded_part6_divergence_witness_current`, and
+`not_unbounded_part6_feasible_divergence_witness_current` prove that the current
+carrier cannot supply the unbounded Part 6 divergence or same-`alpha`
+feasible/divergence output witness while `alphaStar 0 p_c = 1`.
+It also checks the exact
 closed-unit domain criterion
 `(exists alpha, alpha*(0,p_c) < alpha <= 1) iff alpha*(0,p_c) < 1` and the current
 `alphaStar = 1` degeneracy, which makes the paper-bounded `α > α*`, `α <= 1`

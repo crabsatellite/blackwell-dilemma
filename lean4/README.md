@@ -670,7 +670,14 @@ the current local bridge shape is still uninhabitable: the unbounded `α` domain
 includes `α = 2`, while the new near-`p_c` zero-branch witness shows
 `kappaStar p 2 = 0` at non-negative left-neighbourhood points where any
 divergent scaling carrier is positive; the blocker theorem is now the proof
-spine for this obstruction. The same gate now
+spine for this obstruction. It also gates
+`mean_estimate_gap_lt_one_of_nonneg_p_of_pos_kappa`,
+`kappaStar_eq_zero_of_one_lt_alpha_of_nonneg_p`,
+`not_unbounded_part6_divergence_witness_current`, and
+`not_unbounded_part6_feasible_divergence_witness_current`, proving that the
+current carrier cannot even supply the unbounded divergence or same-`alpha`
+feasible/divergence output witness once `alpha > alphaStar 0 p_c = 1`.
+The same gate now
 checks `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, showing that a naive
 paper-bounded domain repair `α <= 1` would be empty on the current scalar

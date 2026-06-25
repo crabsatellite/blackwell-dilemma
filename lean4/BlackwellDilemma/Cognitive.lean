@@ -3721,6 +3721,29 @@ theorem not_z2_lattice_embedding_closed_unit_local_bridge_current :
     bridge.closed_unit_alphaStar_lt_one
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Guard theorem for the current unbounded Part 6 output shape: on the current
+    five-state Gaussian posterior carrier, the mean-estimate gap is strictly
+    below `1` whenever `p >= 0` and `κ > 0`.
+
+    Since `alphaWelfareShift α = α` on the current concrete carrier, every
+    `α > 1` has an empty feasible set in `kappaStar p α` at nonnegative `p`.
+    This exposes the output-witness obstruction for the current unbounded
+    high-`α` route, not merely the bridge-level obstruction. -/
+theorem mean_estimate_gap_lt_one_of_nonneg_p_of_pos_kappa
+    {p κ : ℝ} (hp : 0 ≤ p) (hκ : 0 < κ) :
+    mean_estimate_gap p κ < 1 := by
+  unfold mean_estimate_gap
+  unfold BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+  unfold BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState
+  unfold BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u1_fiveState
+  unfold BlackwellDilemma.Infrastructure.FiveState.r_G
+  unfold BlackwellDilemma.Infrastructure.FiveState.r_B
+  unfold BlackwellDilemma.Infrastructure.FiveState.r_A
+  have hden : κ + 1 ≠ 0 := by linarith
+  field_simp [hden]
+  nlinarith [hp, hκ]
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Guard theorem for the Harris-Kesten lower-envelope route: on the current
     five-state Gaussian posterior carrier, the mean-estimate gap is strictly
     below `2` whenever `p ≥ 0` and `κ > 0`.
@@ -3767,6 +3790,40 @@ theorem kappaStar_two_eq_zero_of_nonneg_p {p : ℝ} (hp : 0 ≤ p) :
         have hshift :
             BlackwellDilemma.Infrastructure.alphaWelfareShift 2 = 2 := rfl
         have hle : 2 ≤ mean_estimate_gap p κ := by
+          simpa [K, hshift] using hκset.right
+        linarith)
+      (fun hfalse => by cases hfalse)
+  change sInf K = 0
+  rw [h_empty]
+  change sInf (fun _ : ℝ => False) = 0
+  exact Real.sInf_empty
+
+omit [DiagnosticSignalHypothesisData] in
+/-- At the current concrete carrier, every unbounded-domain `α > 1` makes the
+    `kappaStar` feasible set empty for every `p >= 0`, hence
+    `kappaStar p α = 0`.
+
+    This strengthens the earlier `α = 2` obstruction into the exact current
+    output-domain obstruction: because `alphaStar 0 p_c = 1`, any paper witness
+    with `α > alphaStar 0 p_c` lands in this empty-feasible-set branch. -/
+theorem kappaStar_eq_zero_of_one_lt_alpha_of_nonneg_p
+    {p α : ℝ} (hp : 0 ≤ p) (halpha : 1 < α) :
+    kappaStar p α = 0 := by
+  rw [kappaStar_def p α]
+  let K : Set ℝ := fun κ =>
+    0 < κ ∧
+      BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+        mean_estimate_gap p κ
+  have h_empty : K = (fun _ => False) := by
+    funext κ
+    apply propext
+    exact Iff.intro
+      (fun hκset => by
+        have hlt : mean_estimate_gap p κ < 1 :=
+          mean_estimate_gap_lt_one_of_nonneg_p_of_pos_kappa hp hκset.left
+        have hshift :
+            BlackwellDilemma.Infrastructure.alphaWelfareShift α = α := rfl
+        have hle : α ≤ mean_estimate_gap p κ := by
           simpa [K, hshift] using hκset.right
         linarith)
       (fun hfalse => by cases hfalse)
@@ -3823,6 +3880,84 @@ theorem current_part6_unbounded_alpha_zero_branch_near_pc :
       nlinarith
     exact ⟨p, hp_left, hp_right, hp_nonneg,
       kappaStar_two_eq_zero_of_nonneg_p hp_nonneg⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the unbounded Part 6 paper-domain
+divergence witness.
+
+The current scalar carrier has `alphaStar 0 p_c = 1`.  Therefore any unbounded
+paper witness with `alpha > alphaStar 0 p_c` has `alpha > 1`, and the current
+`kappaStar p alpha` branch is identically zero on nonnegative points
+arbitrarily close to `p_c` from the left.  Hence the divergence output shape
+itself is impossible on the current carrier. -/
+theorem not_unbounded_part6_divergence_witness_current :
+    Not (Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha ∧
+        forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon ∧
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha) := by
+  rintro ⟨alpha, halpha, hdivergence⟩
+  have halpha_gt_one : 1 < alpha := by
+    rw [alphaStar_eq_one_current] at halpha
+    exact halpha
+  rcases hdivergence 0 with ⟨epsilon, hepsilon_pos, hnear⟩
+  let delta : Real := min epsilon (1 / 4)
+  let p : Real := harrisKestenCriticalProb - delta / 2
+  have hdelta_pos : 0 < delta := by
+    dsimp [delta]
+    exact lt_min hepsilon_pos (by norm_num)
+  have hdelta_le_epsilon : delta <= epsilon := by
+    dsimp [delta]
+    exact min_le_left epsilon (1 / 4)
+  have hp_left : harrisKestenCriticalProb - epsilon < p := by
+    dsimp [p]
+    have hdelta_half_lt_epsilon : delta / 2 < epsilon := by nlinarith
+    linarith
+  have hp_right : p < harrisKestenCriticalProb := by
+    dsimp [p]
+    nlinarith
+  have hp_nonneg : 0 <= p := by
+    have hdelta_le_quarter : delta <= (1 : Real) / 4 := by
+      dsimp [delta]
+      exact min_le_right epsilon (1 / 4)
+    dsimp [p]
+    unfold harrisKestenCriticalProb
+    nlinarith
+  have hpos : 0 < kappaStar p alpha :=
+    hnear p hp_left hp_right
+  have hzero : kappaStar p alpha = 0 :=
+    kappaStar_eq_zero_of_one_lt_alpha_of_nonneg_p hp_nonneg halpha_gt_one
+  rw [hzero] at hpos
+  linarith
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the unbounded same-`alpha`
+feasible/divergence witness.
+
+The feasible-set side cannot rescue the current unbounded route: the divergence
+field already contradicts the `alphaStar 0 p_c = 1` and
+`mean_estimate_gap < 1` output-domain obstruction. -/
+theorem not_unbounded_part6_feasible_divergence_witness_current :
+    Not (Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha ∧
+      (Exists fun delta : Real =>
+        0 < delta ∧
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa ∧
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) ∧
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon ∧
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)) := by
+  rintro ⟨alpha, halpha, _hfeasible, hdivergence⟩
+  exact not_unbounded_part6_divergence_witness_current
+    ⟨alpha, halpha, hdivergence⟩
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Generic bridge obstruction extracted from the current zero-branch witness.

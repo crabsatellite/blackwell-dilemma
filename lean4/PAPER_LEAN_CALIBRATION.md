@@ -273,7 +273,13 @@ left-neighbourhood of `p_c`; this exact zero-branch witness is now separately
 machine-gated by `current_part6_unbounded_alpha_zero_branch_near_pc`, and
 `current_part6_unbounded_alpha_zero_branch_blocks_local_bridge` turns that
 witness into the generic obstruction, so no divergent near-`p_c` scaling
-carrier can satisfy the present local bridge. The gate also proves
+carrier can satisfy the present local bridge. It also gates
+`mean_estimate_gap_lt_one_of_nonneg_p_of_pos_kappa`,
+`kappaStar_eq_zero_of_one_lt_alpha_of_nonneg_p`,
+`not_unbounded_part6_divergence_witness_current`, and
+`not_unbounded_part6_feasible_divergence_witness_current`, so the current
+carrier is machine-blocked at the unbounded output witness layer, not only at
+the local-bridge layer. The gate also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The
