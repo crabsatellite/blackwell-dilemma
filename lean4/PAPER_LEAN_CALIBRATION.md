@@ -311,7 +311,12 @@ and
 so the same-alpha projections remain independently auditable. The gate also checks
 `closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one`, so this closed-unit
 domain is nonempty exactly when the repaired carrier proves
-`alphaStar 0 p_c < 1`. The theorem
+`alphaStar 0 p_c < 1`. The gate also checks
+`alphaStar_lt_one_requires_sentimental_welfare_reversal_witness` and
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
+so this threshold repair must expose a genuine sentimental welfare reversal
+inside the closed unit alpha range, not merely a replacement scaling carrier.
+The theorem
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 threshold-certificate obstruction at the bridge-contract level. The remaining
 Harris-Kesten scaling work is therefore first to supply a nondegenerate

@@ -3778,14 +3778,19 @@ theorem gap_sentimental_immunity :
   exact alpha_star_existence_via_continuity κ p hκ δ hδ_pos hδ_le_one h_mono
 
 omit [DiagnosticSignalHypothesisData] in
-/-- Current-carrier calibration: the concrete sentimental reward kernel is
-constant in `β`, so the monotonicity set in the current `alphaStar` definition
-is the whole closed unit interval and the supremum is `1`.
+/-- If sentimental welfare is Blackwell-monotone for every `alpha` in the
+closed unit interval, then the paper's `alphaStar` supremum is forced to the
+endpoint `1`.
 
-This is a kernel-checked semantic diagnostic, not a paper theorem: it shows
-that merely restricting the Part 6 `α` domain to the paper's closed unit range
-would make the current `α > α*` regime empty. -/
-theorem alphaStar_eq_one_current (κ p : ℝ) :
+This isolates the semantic repair needed by the closed-unit Part 6 route: a
+future proof of `alphaStar 0 p_c < 1` cannot preserve full-unit sentimental
+welfare monotonicity. -/
+theorem alphaStar_eq_one_of_sentimental_welfare_monotone_on_unit
+    (κ p : ℝ)
+    (hmono : ∀ α : ℝ, 0 ≤ α → α ≤ 1 →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.sentimental β₁ κ α ≤
+          agentWelfare AgentType.sentimental β₂ κ α) :
     alphaStar κ p = 1 := by
   rw [alphaStar_def κ p]
   let S : Set ℝ := { α : ℝ | 0 ≤ α ∧ α ≤ 1 ∧
@@ -3796,11 +3801,7 @@ theorem alphaStar_eq_one_current (κ p : ℝ) :
   have h1mem : (1 : ℝ) ∈ S := by
     refine ⟨by norm_num, le_refl (1 : ℝ), ?_⟩
     intro β₁ β₂ hβ
-    exact agentWelfare_monotone_of_kernel_pointwise_monotone
-      AgentType.sentimental κ 1
-      (fun b₁ b₂ hb ω =>
-        agentRewardKernel_sentimental_pointwise_monotone κ 1 b₁ b₂ hb ω)
-      β₁ β₂ hβ
+    exact hmono 1 (by norm_num) (le_refl (1 : ℝ)) β₁ β₂ hβ
   have h_bdd : BddAbove S := by
     exact ⟨1, fun α hα => hα.2.1⟩
   have h_le : sSup S ≤ 1 := by
@@ -3808,6 +3809,73 @@ theorem alphaStar_eq_one_current (κ p : ℝ) :
   have h_ge : 1 ≤ sSup S :=
     le_csSup h_bdd h1mem
   exact le_antisymm h_le h_ge
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A non-endpoint `alphaStar` certificate forces a sentimental welfare
+reversal witness inside the closed unit `alpha` range.
+
+This is the contrapositive form needed by the closed-unit Part 6 repair: if a
+future carrier proves `alphaStar 0 p_c < 1`, it must also expose a concrete
+`alpha`, `β₁ ≤ β₂` where sentimental welfare decreases. -/
+theorem alphaStar_lt_one_requires_sentimental_welfare_reversal_witness
+    {κ p : ℝ} (h_alpha_lt : alphaStar κ p < 1) :
+    Exists fun α : ℝ =>
+      Exists fun β₁ : ℝ =>
+        Exists fun β₂ : ℝ =>
+          0 ≤ α ∧ α ≤ 1 ∧ β₁ ≤ β₂ ∧
+            agentWelfare AgentType.sentimental β₂ κ α <
+              agentWelfare AgentType.sentimental β₁ κ α := by
+  by_contra hno
+  have hmono : ∀ α : ℝ, 0 ≤ α → α ≤ 1 →
+      ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+        agentWelfare AgentType.sentimental β₁ κ α ≤
+          agentWelfare AgentType.sentimental β₂ κ α := by
+    intro α hα_nonneg hα_le_one β₁ β₂ hβ
+    by_contra hle
+    have hlt :
+        agentWelfare AgentType.sentimental β₂ κ α <
+          agentWelfare AgentType.sentimental β₁ κ α :=
+      lt_of_not_ge hle
+    exact hno ⟨α, β₁, β₂, hα_nonneg, hα_le_one, hβ, hlt⟩
+  have h_eq :
+      alphaStar κ p = 1 :=
+    alphaStar_eq_one_of_sentimental_welfare_monotone_on_unit κ p hmono
+  rw [h_eq] at h_alpha_lt
+  norm_num at h_alpha_lt
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Any paper-bounded closed-unit Part 6 bridge must expose the sentimental
+welfare reversal needed to make `alphaStar 0 p_c < 1` non-vacuous. -/
+theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    Exists fun α : ℝ =>
+      Exists fun β₁ : ℝ =>
+        Exists fun β₂ : ℝ =>
+          0 ≤ α ∧ α ≤ 1 ∧ β₁ ≤ β₂ ∧
+            agentWelfare AgentType.sentimental β₂ 0 α <
+              agentWelfare AgentType.sentimental β₁ 0 α :=
+  alphaStar_lt_one_requires_sentimental_welfare_reversal_witness
+    bridge.closed_unit_alphaStar_lt_one
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier calibration: the concrete sentimental reward kernel is
+constant in `β`, so the monotonicity set in the current `alphaStar` definition
+is the whole closed unit interval and the supremum is `1`.
+
+This is a kernel-checked semantic diagnostic, not a paper theorem: it shows
+that merely restricting the Part 6 `α` domain to the paper's closed unit range
+would make the current `α > α*` regime empty. -/
+theorem alphaStar_eq_one_current (κ p : ℝ) :
+    alphaStar κ p = 1 := by
+  exact
+    alphaStar_eq_one_of_sentimental_welfare_monotone_on_unit κ p
+      (fun α _hα_nonneg _hα_le_one β₁ β₂ hβ =>
+        agentWelfare_monotone_of_kernel_pointwise_monotone
+          AgentType.sentimental κ α
+          (fun b₁ b₂ hb ω =>
+            agentRewardKernel_sentimental_pointwise_monotone
+              κ α b₁ b₂ hb ω)
+          β₁ β₂ hβ)
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Exact nonempty-domain calibration for the paper-bounded closed-unit Part 6

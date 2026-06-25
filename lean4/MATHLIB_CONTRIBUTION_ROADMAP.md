@@ -196,7 +196,11 @@ and
 so the same-alpha projections remain independently auditable. The gate also checks
 `closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one`, reducing the
 closed-unit nonempty-domain repair to a positive `alphaStar 0 p_c < 1`
-threshold certificate.
+threshold certificate. It also gates
+`alphaStar_lt_one_requires_sentimental_welfare_reversal_witness` and
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
+so the closed-unit repair must provide a genuine sentimental welfare reversal
+inside the closed unit alpha range, not merely another scaling-carrier wrapper.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 threshold-certificate obstruction at the bridge-contract level. The Part 6
 repair is therefore first to supply a nondegenerate `α`/feasible-set domain

@@ -724,7 +724,12 @@ paper-bounded domain repair `α <= 1` would be empty on the current scalar
 carrier. It also gates
 `closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one`, so the closed-unit
 nonempty-domain repair is exactly the threshold certificate
-`alphaStar 0 p_c < 1`. The closed-unit local bridge contract now includes that
+`alphaStar 0 p_c < 1`. The gate also checks
+`alphaStar_lt_one_requires_sentimental_welfare_reversal_witness` and
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
+so a closed-unit repair must expose an actual sentimental welfare reversal in
+the closed unit alpha range rather than only replacing the scaling carrier. The
+closed-unit local bridge contract now includes that
 threshold certificate, derives the nonempty-domain witness from it, carries
 near-`p_c` feasible-set nonemptiness on the closed-unit paper domain, and the
 gate also checks the bounded transfer theorem

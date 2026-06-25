@@ -61,7 +61,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local nonempty alpha-domain projection, unbounded-local paper-support certificate with pointwise, existential, and full same-alpha domination/feasibility/divergence support, unbounded divergence, pointwise paper-domain certificate, feasible/divergence, and full-witness current obstructions, closed-unit local transfer, closed-unit feasible-set nonemptiness, existential witness projection, same-alpha closed-unit feasible/divergence certificates, full same-alpha closed-unit domination/feasibility/divergence witness, closed-unit output-witness and full-witness current obstructions, a unified closed-unit current-obstruction certificate, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, feasible-set nonemptiness, and same-alpha witness fields, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
+        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local nonempty alpha-domain projection, unbounded-local paper-support certificate with pointwise, existential, and full same-alpha domination/feasibility/divergence support, unbounded divergence, pointwise paper-domain certificate, feasible/divergence, and full-witness current obstructions, closed-unit local transfer, closed-unit feasible-set nonemptiness, existential witness projection, same-alpha closed-unit feasible/divergence certificates, full same-alpha closed-unit domination/feasibility/divergence witness, closed-unit output-witness and full-witness current obstructions, a unified closed-unit current-obstruction certificate, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, the requirement that any alphaStar < 1 closed-unit repair expose a sentimental welfare reversal witness, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, feasible-set nonemptiness, and same-alpha witness fields, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
       closeRoute :=
         "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1 by proving alphaStar 0 p_c < 1 for the repaired carrier, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem; the current unbounded-local and closed-unit bridge routes are jointly refuted by a typed route-obstruction certificate." },
     { id := "topo_cluster_random_supercritical_z2",
@@ -432,8 +432,23 @@ structure Part6LatticeEmbeddingFrontierPayload where
     Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)
   alphaStar_current_eq_one_at_pc :
     alphaStar 0 harrisKestenCriticalProb = 1
+  alphaStar_full_unit_sentimental_monotone_forces_endpoint :
+    ∀ κ p : ℝ,
+      (∀ α : ℝ, 0 ≤ α → α ≤ 1 →
+        ∀ β₁ β₂ : ℝ, β₁ ≤ β₂ →
+          agentWelfare AgentType.sentimental β₁ κ α ≤
+            agentWelfare AgentType.sentimental β₂ κ α) →
+        alphaStar κ p = 1
   closed_unit_alphaStar_lt_one_current_obstruction :
     ¬ alphaStar 0 harrisKestenCriticalProb < 1
+  closed_unit_alphaStar_lt_one_requires_sentimental_welfare_reversal :
+    alphaStar 0 harrisKestenCriticalProb < 1 →
+      Exists fun α : ℝ =>
+        Exists fun β₁ : ℝ =>
+          Exists fun β₂ : ℝ =>
+            0 ≤ α ∧ α ≤ 1 ∧ β₁ ≤ β₂ ∧
+              agentWelfare AgentType.sentimental β₂ 0 α <
+                agentWelfare AgentType.sentimental β₁ 0 α
   closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one :
     (Exists fun α : ℝ =>
       alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) ↔
@@ -674,6 +689,14 @@ structure Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_embedding_closed_unit_local_bridge_alphaStar_lt_one :
     ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
       alphaStar 0 harrisKestenCriticalProb < 1
+  z2_lattice_embedding_closed_unit_local_bridge_sentimental_welfare_reversal_required :
+    ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
+      Exists fun α : ℝ =>
+        Exists fun β₁ : ℝ =>
+          Exists fun β₂ : ℝ =>
+            0 ≤ α ∧ α ≤ 1 ∧ β₁ ≤ β₂ ∧
+              agentWelfare AgentType.sentimental β₂ 0 α <
+                agentWelfare AgentType.sentimental β₁ 0 α
   z2_lattice_embedding_closed_unit_local_bridge_nonempty_alpha_domain :
     ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
       ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
@@ -848,6 +871,7 @@ if the closed-unit
 route is repaired, the payload now also checks that it yields an
 actual paper-domain divergence witness rather than only a pointwise transfer
 surface, that the bridge explicitly carries `alphaStar 0 p_c < 1`, that the
+alphaStar certificate forces a sentimental welfare reversal witness, that the
 closed-unit domain witness is derived from that certificate, that the current
 carrier cannot satisfy the closed-unit divergence or same-alpha
 feasible/divergence output witnesses while that domain is empty, that
@@ -911,8 +935,12 @@ def part6_lattice_embedding_frontier_payload :
     not_z2_lattice_embedding_closed_unit_local_bridge_current
   alphaStar_current_eq_one_at_pc :=
     alphaStar_eq_one_current 0 harrisKestenCriticalProb
+  alphaStar_full_unit_sentimental_monotone_forces_endpoint :=
+    alphaStar_eq_one_of_sentimental_welfare_monotone_on_unit
   closed_unit_alphaStar_lt_one_current_obstruction :=
     not_closed_unit_alphaStar_lt_one_current
+  closed_unit_alphaStar_lt_one_requires_sentimental_welfare_reversal :=
+    alphaStar_lt_one_requires_sentimental_welfare_reversal_witness
   closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one :=
     closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one
   closed_unit_alpha_domain_empty_current :=
@@ -947,6 +975,8 @@ def part6_lattice_embedding_frontier_payload :
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
   z2_lattice_embedding_closed_unit_local_bridge_alphaStar_lt_one :=
     fun bridge => bridge.closed_unit_alphaStar_lt_one
+  z2_lattice_embedding_closed_unit_local_bridge_sentimental_welfare_reversal_required :=
+    z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required
   z2_lattice_embedding_closed_unit_local_bridge_nonempty_alpha_domain :=
     z2LatticeEmbeddingClosedUnitLocalBridgeData_nonempty_closed_unit_alpha_domain
   z2_lattice_embedding_closed_unit_local_bridge_near_pc_feasible_nonempty :=
