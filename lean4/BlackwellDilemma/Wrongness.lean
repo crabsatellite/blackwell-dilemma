@@ -1357,6 +1357,62 @@ theorem boxedTorusFlatGraphN_succ (L : Nat) :
   exact Nat.sub_add_cancel (Nat.succ_le_of_lt
     (Nat.mul_pos (Nat.succ_pos L) (Nat.succ_pos L)))
 
+/-- The reciprocal pointwise giant-loss envelope on flattened boxed-torus
+sizes eventually falls below any fixed positive constant.
+
+This is the elementary growth fact used by the random-supercritical bridge
+contract audit: `boxedTorusFlatGraphN L + 1 = (L + 1)^2` tends to infinity, so
+the pointwise `1 / (n + 1)` giant-loss bound cannot coexist with a uniform
+positive giant-restricted lower bound along all sufficiently large `L`. -/
+theorem boxedTorusFlatGraphN_reciprocal_eventually_lt
+    (c : Real) (hc : 0 < c) (L0 L1 : Nat) :
+    Exists fun L : Nat =>
+      L0 <= L /\ L1 <= L /\
+        1 / (((boxedTorusFlatGraphN L : Nat) : Real) + 1) < c := by
+  apply Exists.elim (exists_nat_gt (1 / c : Real))
+  intro N hN
+  let L := max L0 (max L1 N)
+  have hleft : L0 <= L := Nat.le_max_left L0 (max L1 N)
+  have hright : L1 <= L :=
+    le_trans (Nat.le_max_left L1 N) (Nat.le_max_right L0 (max L1 N))
+  have hineq :
+      1 / (((boxedTorusFlatGraphN L : Nat) : Real) + 1) < c := by
+    have hN_le_L : N <= L := by
+      exact le_trans (Nat.le_max_right L1 N)
+        (Nat.le_max_right L0 (max L1 N))
+    have hN_le_L_real : (N : Real) <= (L : Real) := by
+      exact_mod_cast hN_le_L
+    have h_inv_pos : 0 < 1 / c := by positivity
+    have h_inv_lt_L : 1 / c < (L : Real) :=
+      lt_of_lt_of_le hN hN_le_L_real
+    have h_inv_lt_L1 : 1 / c < (L : Real) + 1 := by
+      linarith
+    have hL1_ge_one : (1 : Real) <= (L : Real) + 1 := by
+      have hL_nonneg : 0 <= (L : Real) := Nat.cast_nonneg L
+      linarith
+    have hmul_ge :
+        (L : Real) + 1 <= ((L : Real) + 1) * ((L : Real) + 1) := by
+      nlinarith
+    have hden_eq :
+        (((boxedTorusFlatGraphN L : Nat) : Real) + 1) =
+          ((L : Real) + 1) * ((L : Real) + 1) := by
+      have h := congrArg (fun n : Nat => (n : Real))
+        (boxedTorusFlatGraphN_succ L)
+      norm_num [Nat.cast_add, Nat.cast_one, Nat.cast_mul] at h
+      exact h
+    have h_inv_lt_den :
+        1 / c < (((boxedTorusFlatGraphN L : Nat) : Real) + 1) := by
+      rw [hden_eq]
+      exact lt_of_lt_of_le h_inv_lt_L1 hmul_ge
+    have h_one_div_lt :
+        1 / (((boxedTorusFlatGraphN L : Nat) : Real) + 1) <
+          1 / (1 / c) :=
+      one_div_lt_one_div_of_lt h_inv_pos h_inv_lt_den
+    have h_inv_inv : 1 / (1 / c) = c := by
+      field_simp [ne_of_gt hc]
+    simpa [h_inv_inv] using h_one_div_lt
+  exact Exists.intro L (And.intro hleft (And.intro hright hineq))
+
 /-- Row-major flattening of a boxed-torus coordinate vertex. -/
 def boxedTorusFlattenVertex (L : Nat) (u : BoxedTorusVertex L) :
     Fin ((L + 1) * (L + 1)) :=
@@ -14940,6 +14996,58 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_paper_support_certificate
     exact hno_member ⟨L, hL, hnot_full, hnot_flat,
       hnot_all_open_complement, hnot_all_open_giant,
       hnot_all_open_positive⟩
+
+/-- Current-contract obstruction for the random-supercritical `Z^2_L`
+topological-cluster bridge.
+
+The present contract combines:
+
+* the family-core pointwise giant-event bound
+  `topoLoss <= 1 / (n + 1)`, and
+* a uniform positive lower bound for `expectedTopoLossOnGiantOn` along the
+  flattened boxed-torus sizes.
+
+Those two obligations are incompatible because
+`boxedTorusFlatGraphN L + 1 = (L + 1)^2` is unbounded.  Therefore the current
+typed contract is itself inconsistent; the topo paper-semantic target must
+repair the contract before an instance can honestly close the target. -/
+theorem not_random_supercritical_z2_topo_cluster_bridge_contract_current :
+    Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData) := by
+  intro hnonempty
+  cases hnonempty with
+  | intro bridge =>
+    cases bridge.supercritical_giant_lower_bound with
+    | intro c hcpack =>
+      cases hcpack with
+      | intro hc_pos hrest =>
+        cases hrest with
+        | intro _hc_le_one hrest2 =>
+          cases hrest2 with
+          | intro L0Giant hgiant_lower =>
+            cases bridge.family_core with
+            | intro _hflat hcorepack =>
+              cases hcorepack with
+              | intro L0Core hcore =>
+                cases
+                    boxedTorusFlatGraphN_reciprocal_eventually_lt
+                      c hc_pos L0Giant L0Core with
+                | intro L hLpack =>
+                  cases hLpack with
+                  | intro hL_giant hLrest =>
+                    cases hLrest with
+                    | intro hL_core htail_lt =>
+                      have hpointwise :
+                          TopoLossKernelPointwiseBoundOn
+                            (bridge.family L) :=
+                        (hcore L hL_core).2.2.1
+                      have h_upper :=
+                        expectedTopoLossOnGiantOn_le_one_over_n hpointwise
+                          bridge.supercriticalProbability
+                          bridge.supercriticalProbability_nonneg
+                          bridge.supercriticalProbability_le_one
+                          (boxedTorusFlatGraphN L)
+                      have h_lower := hgiant_lower L hL_giant
+                      linarith
 
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/
