@@ -88,15 +88,15 @@ existential witness theorem is ready for any repaired nonempty-domain instance.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
-paper-facing divergence transfer. It also gates same-`alpha` feasible/divergence
-certificates for the unbounded-local and closed-unit routes, so feasible-set
+paper-facing divergence transfer at the same `alpha`. The closed-unit route
+also gates same-`alpha` feasible/divergence certificates, so feasible-set
 nonemptiness and the Part 6 divergence witness cannot be checked at unrelated
 paper-domain parameters.
 The gate also checks the single closed-unit paper-support certificate
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`, tying
 the `Z²` graph identity, scaling divergence, threshold certificate, local
-domination field, near-`p_c` feasible-set nonemptiness, and paper-domain
-witness into one theorem.
+domination field, near-`p_c` feasible-set nonemptiness, paper-domain witness,
+and same-`alpha` feasible/divergence witness into one theorem.
 See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the

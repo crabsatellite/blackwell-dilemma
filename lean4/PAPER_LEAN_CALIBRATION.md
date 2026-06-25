@@ -290,14 +290,14 @@ divergence witness. The gate also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
 which ties the `Z^2` graph identity, scaling divergence, threshold
 certificate, local domination field, near-`p_c` feasible-set nonemptiness, and
-paper-domain witness into one machine-checked Part 6 certificate. The gate now
-also checks
+same-`alpha` paper-domain witness into one machine-checked Part 6 certificate.
+The unbounded-local paper-support certificate likewise now includes same-`alpha`
+feasible/divergence support. The gate also checks
 `z2LatticeEmbeddingLocalBridgeData_pointwise_paper_domain_certificate`,
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_pointwise_paper_domain_certificate`,
 and
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_feasible_divergence_witness`,
-which ensure feasible-set nonemptiness and the divergence witness are
-available at the same paper-domain `alpha`. The gate also checks
+so the same-alpha projections remain independently auditable. The gate also checks
 `closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one`, so this closed-unit
 domain is nonempty exactly when the repaired carrier proves
 `alphaStar 0 p_c < 1`. The theorem

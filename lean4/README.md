@@ -680,13 +680,12 @@ paper-domain divergence witness.  The gate also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
 which binds the `Z^2` graph identity, scaling divergence, threshold
 certificate, local domination field, near-`p_c` feasible-set nonemptiness, and
-witness projection into one paper-support theorem.  It now also checks
+same-`alpha` witness projection into one paper-support theorem.  It now also checks
 `z2LatticeEmbeddingLocalBridgeData_pointwise_paper_domain_certificate`,
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_pointwise_paper_domain_certificate`,
 and
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_feasible_divergence_witness`,
-which bind feasible-set nonemptiness and the divergence transfer to the same
-paper-domain `alpha`.
+with the first and third also folded into the single paper-support certificates.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` proves the current
 carrier cannot instantiate that bridge because its threshold certificate is
 impossible. The remaining Part 6 repair is therefore
