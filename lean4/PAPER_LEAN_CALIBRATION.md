@@ -453,12 +453,12 @@ certificate or change the topo/phase open semantic count. The current gate
 also adds the stronger `RandomSupercriticalZ2TopoClusterBridgeData` contract,
 including the finite boxed-torus vertex/edge indexing facts, a named
 supercritical probability, a flat lower-bound theorem at that same parameter,
-the derived positive flat-loss witness, and projections back to the current
-family-core and lower-bound interfaces. Its non-diagnostic fields and the
-corresponding gate theorems exclude the current full-reach, flat-only,
-all-open-complement, and pointwise-hybrid diagnostic families; this is the
-object a final random finite-lattice proof must instantiate. The topo payload
-now also
+the derived positive flat-loss witness, a pointwise positive-loss realisation
+witness, and projections back to the current family-core and lower-bound
+interfaces. Its non-diagnostic fields and the corresponding gate theorems
+exclude the current full-reach, flat-only, all-open-complement, and
+pointwise-hybrid diagnostic families; this is the object a final random
+finite-lattice proof must instantiate. The topo payload now also
 gates the current standard-`Z^2` boxed-torus witness
 `boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current`, its family/core/
 lower-bound projections, and

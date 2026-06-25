@@ -11336,6 +11336,31 @@ noncomputable def expectedTopoLossOnData
     (data : WrongnessPercolationData) (n : ℕ) (p : ℝ) : ℝ :=
   percExpectation (1 - p) (data.topoLossKernel n)
 
+/-- A positive carrier-local topological-loss expectation has a positive
+pointwise realisation.  This is the finite-sum converse to the standard
+positive-contribution theorem: if every pointwise loss were non-positive, the
+Bernoulli-weighted finite expectation would be non-positive. -/
+theorem expectedTopoLossOnData_pos_realisation_witness
+    (data : WrongnessPercolationData) (n : ℕ) {p : ℝ}
+    (hp_nonneg : 0 ≤ p) (hp_le_one : p ≤ 1)
+    (hpos : 0 < expectedTopoLossOnData data n p) :
+    ∃ ω : BondConfig (EdgeIdx n), 0 < data.topoLossKernel n ω := by
+  unfold expectedTopoLossOnData at hpos
+  by_contra h
+  have h_nonpos :
+      ∀ ω : BondConfig (EdgeIdx n), data.topoLossKernel n ω ≤ 0 := by
+    intro ω
+    exact le_of_not_gt (fun hω => h ⟨ω, hω⟩)
+  have h_expect_nonpos :
+      percExpectation (1 - p) (data.topoLossKernel n) ≤ 0 := by
+    unfold percExpectation
+    apply Finset.sum_nonpos
+    intro ω _hω
+    exact mul_nonpos_of_nonneg_of_nonpos
+      (bondConfigWeight_nonneg (1 - p) (by linarith) (by linarith) ω)
+      (h_nonpos ω)
+  linarith
+
 theorem boxedTorusAllOpenPositiveTopoLossData_expectedTopoLossOnData_flat_eq
     (L : Nat) (p : Real) :
     expectedTopoLossOnData
@@ -14139,6 +14164,24 @@ theorem randomSupercriticalZ2TopoClusterBridgeData_positive_flat_loss_witness
   rcases bridge.supercritical_flat_lower_bound with
     ⟨c, hc_pos, _hc_le_one, L0, hlower⟩
   exact ⟨L0, lt_of_lt_of_le hc_pos (hlower L0 le_rfl)⟩
+
+/-- Pointwise non-vacuity projection from the final random-supercritical
+bridge: at the named supercritical probability, some flat boxed-torus member
+and bond configuration has strictly positive topological-loss kernel value. -/
+theorem randomSupercriticalZ2TopoClusterBridgeData_positive_loss_realisation_witness
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Exists fun L : Nat =>
+      Exists fun ω : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+        0 <
+          (bridge.family L).topoLossKernel (boxedTorusFlatGraphN L) ω := by
+  rcases randomSupercriticalZ2TopoClusterBridgeData_positive_flat_loss_witness
+      bridge with ⟨L, hpos⟩
+  rcases expectedTopoLossOnData_pos_realisation_witness
+      (bridge.family L) (boxedTorusFlatGraphN L)
+      bridge.supercriticalProbability_nonneg
+      bridge.supercriticalProbability_le_one hpos with
+    ⟨ω, hω⟩
+  exact ⟨L, ω, hω⟩
 
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/

@@ -47,8 +47,9 @@ the full-reach `Z²` boxed-torus bridge with its fixed-`L` all-`n` lower-bound
 interface, the explicit non-diagnostic
 `RandomSupercriticalZ2TopoClusterBridgeData` contract with a named
 supercritical probability and a lower-bound theorem at that same parameter,
-its derived positive flat-loss witness, and the flat-sequence lower-bound
-package. It also gates the current flat-only full-reach support
+its derived positive flat-loss and pointwise positive-loss realisation
+witnesses, and the flat-sequence lower-bound package. It also gates the
+current flat-only full-reach support
 mechanism: giant-restricted loss is zero, while the flat lower-bound loss is
 exactly half of the full-reach failure-event mass. The random-supercritical
 semantic target remains open until that contract is instantiated by the real
