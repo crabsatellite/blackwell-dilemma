@@ -16598,6 +16598,20 @@ theorem not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quart
   have h := hlower L hL
   simpa [hfamily L, hprob] using h
 
+/-- The projected giant-loss output of a topo paper-closing route cannot be
+supplied by any first-edge cylinder repaired bridge at `p = 3/4`. -/
+theorem not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_giant_loss_output :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      (forall L : Nat,
+        bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+      bridge.supercriticalProbability = ((3 : Real) / 4) /\
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge) := by
+  rintro ⟨bridge, hfamily, hprob, hclosing⟩
+  exact
+    not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_giant_loss_paper_closing
+      bridge hfamily hprob hclosing
+
 /-- Any repaired bridge that uses the first-edge cylinder family at `p = 3/4`
 cannot provide the full paper-closing support surface. -/
 theorem not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_full_paper_closing_support
@@ -16703,6 +16717,12 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
       (forall L : Nat,
         bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
       bridge.supercriticalProbability = ((3 : Real) / 4) /\
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge) /\
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      (forall L : Nat,
+        bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+      bridge.supercriticalProbability = ((3 : Real) / 4) /\
       RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
         bridge)
 
@@ -16713,6 +16733,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_giant_loss_output,
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_witness⟩
 
 /-- The final random-supercritical bridge contract cannot be discharged by the

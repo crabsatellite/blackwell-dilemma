@@ -458,6 +458,7 @@ refutes it for the current first-edge witness.
 The gate now generalizes this obstruction to every repaired bridge whose family
 is `firstEdgeOpenGiantClosedTopoLossFamily` at `p = 3/4`, via
 `not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_giant_loss_paper_closing`,
+`not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_giant_loss_output`,
 `not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_full_paper_closing_support`,
 and
 `not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_witness`.
