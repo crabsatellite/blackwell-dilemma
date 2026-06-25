@@ -3904,6 +3904,43 @@ theorem not_closed_unit_part6_feasible_divergence_witness_current :
     ⟨alpha, halpha, halpha_le_one⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the closed-unit full same-`alpha`
+domination/feasibility/divergence witness.
+
+The strengthened closed-unit witness still begins with a real point in the
+closed paper domain `alphaStar 0 p_c < alpha <= 1`.  That domain is empty for
+the current scalar carrier, so the stronger witness is impossible before even
+using its domination, feasibility, or divergence fields. -/
+theorem not_closed_unit_part6_full_paper_domain_witness_current :
+    forall scalingCarrier : Real -> Real,
+      Not (Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha ∧
+        alpha <= 1 ∧
+        (Exists fun delta : Real =>
+          0 < delta ∧
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                scalingCarrier p <= kappaStar p alpha) ∧
+        (Exists fun delta : Real =>
+          0 < delta ∧
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa ∧
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) ∧
+        (forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon ∧
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha)) := by
+  intro scalingCarrier
+  rintro ⟨alpha, halpha, halpha_le_one, _hdomination, _hfeasible,
+    _hdivergence⟩
+  exact not_closed_unit_alpha_above_alphaStar_current
+    ⟨alpha, halpha, halpha_le_one⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the closed-unit local Part 6 bridge.
 
 The closed-unit local bridge carries an explicit `alphaStar 0 p_c < 1`
@@ -4154,6 +4191,41 @@ theorem not_unbounded_part6_feasible_divergence_witness_current :
             p < harrisKestenCriticalProb ->
               M < kappaStar p alpha)) := by
   rintro ⟨alpha, halpha, _hfeasible, hdivergence⟩
+  exact not_unbounded_part6_divergence_witness_current
+    ⟨alpha, halpha, hdivergence⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the unbounded full same-`alpha`
+domination/feasibility/divergence witness.
+
+The strengthened unbounded witness includes the older divergence output field
+at the same selected `alpha`.  The current carrier already refutes that
+divergence field once `alpha > alphaStar 0 p_c`, so adding domination and
+feasibility cannot repair the current route. -/
+theorem not_unbounded_part6_full_paper_domain_witness_current :
+    forall scalingCarrier : Real -> Real,
+      Not (Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha ∧
+        (Exists fun delta : Real =>
+          0 < delta ∧
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                scalingCarrier p <= kappaStar p alpha) ∧
+        (Exists fun delta : Real =>
+          0 < delta ∧
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa ∧
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) ∧
+        (forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon ∧
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha)) := by
+  intro scalingCarrier
+  rintro ⟨alpha, halpha, _hdomination, _hfeasible, hdivergence⟩
   exact not_unbounded_part6_divergence_witness_current
     ⟨alpha, halpha, hdivergence⟩
 
