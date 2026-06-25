@@ -183,6 +183,15 @@ structure Part4LatticePMonotonicityFrontierPayload where
         kappaStar p1 alpha <= kappaStar p2 alpha
   standard_z2_ranged_bridge_current :
     RangedLatticePMonotonicityBridgeData
+  ranged_lattice_prior_mean_from_observable :
+    forall _bridge : RangedLatticePMonotonicityBridgeData,
+      forall p1 p2 : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
+        BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p2 <=
+          BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p1
+  ranged_lattice_mean_gap_from_observable :
+    forall _bridge : RangedLatticePMonotonicityBridgeData,
+      forall p1 p2 kappa : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
+        0 < kappa -> mean_estimate_gap p2 kappa <= mean_estimate_gap p1 kappa
   standard_z2_ranged_bridge_transfer :
     forall alpha p1 p2 : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
       (Exists (fun kappa : Real =>
@@ -249,6 +258,10 @@ noncomputable def part4_lattice_p_monotonicity_frontier_payload :
     gap_cognitive_threshold_part4_from_ranged_lattice_bridge
   standard_z2_ranged_bridge_current :=
     standardZ2RangedLatticePMonotonicityBridge_current
+  ranged_lattice_prior_mean_from_observable :=
+    priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable
+  ranged_lattice_mean_gap_from_observable :=
+    mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable
   standard_z2_ranged_bridge_transfer :=
     gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current
   constructive_five_state_bounded_monotone :=

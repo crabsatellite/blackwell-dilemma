@@ -98,8 +98,12 @@ derivation. The current ranged bridge
 `standardZ2RangedLatticePMonotonicityBridge_current` and
 `gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current`
 packages the same standard graph/coupling data with the explicit one-edge
-`BondConfig` observable and finite-percolation proof of mean-gap antitonicity
-under `0 <= p_1 <= p_2 <= 1`. This is the strongest current finite/local
+`BondConfig` observable, its monotonicity, and its `percExpectation (1 - p)`
+prior-mean equality. The Part 4 payload now gates
+`priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable` and
+`mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable`, so the
+ranged mean-gap antitonicity is derived from those observable fields rather
+than stored as bridge data. This is the strongest current finite/local
 carrier calibration; the semantic target remains open because no full
 lattice/percolation certificate deriving the mean-gap antitonicity from that
 domain/coupling carrier has been instantiated.

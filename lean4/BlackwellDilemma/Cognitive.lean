@@ -1274,9 +1274,6 @@ structure RangedLatticePMonotonicityBridgeData where
       BlackwellDilemma.percExpectation (E := localEdge) (1 - p)
           local_observable =
         BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p
-  mean_gap_antitone_on_lattice_domain :
-    forall p1 p2 kappa : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
-      0 < kappa -> mean_estimate_gap p2 kappa <= mean_estimate_gap p1 kappa
 
 /-- Current standard `Z2` bridge skeleton for Part 4.
 
@@ -1324,10 +1321,63 @@ noncomputable def standardZ2RangedLatticePMonotonicityBridge_current :
   local_observable_eq_prior_mean := by
     intro p
     exact BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable_expectation_eq_priorMean_u2 p
-  mean_gap_antitone_on_lattice_domain := by
-    intro p1 p2 kappa hp1_nonneg hp_mono hp2_le_one hkappa
-    exact mean_estimate_gap_antitone_in_p_from_percExpectation
-      hp1_nonneg hp_mono hp2_le_one hkappa
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Prior-mean antitonicity derived from a ranged lattice/local-observable
+bridge.
+
+The bridge no longer carries mean-gap antitonicity as data: it only supplies a
+finite local observable, its coordinatewise monotonicity, and the equality
+identifying its `percExpectation (1 - p)` with the paper's bridge-neighbour
+prior mean. -/
+theorem priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable
+    (bridge : RangedLatticePMonotonicityBridgeData)
+    {p1 p2 : Real} (hp1_nonneg : 0 <= p1) (hp_mono : p1 <= p2)
+    (hp2_le_one : p2 <= 1) :
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p2 <=
+      BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p1 := by
+  letI : Fintype bridge.localEdge := bridge.localEdge_fintype
+  letI : DecidableEq bridge.localEdge := bridge.localEdge_decidableEq
+  rw [<- bridge.local_observable_eq_prior_mean p2,
+    <- bridge.local_observable_eq_prior_mean p1]
+  exact BlackwellDilemma.percExpectation_mono_in_p_of_BoolConfigMonotone
+    (E := bridge.localEdge)
+    (p_low := 1 - p2) (p_high := 1 - p1)
+    (by linarith) (by linarith) (by linarith)
+    bridge.local_observable bridge.local_observable_mono
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Mean-gap antitonicity derived from a ranged lattice/local-observable
+bridge.
+
+This is the load-bearing Part 4 local-finite bridge theorem: finite
+bond-percolation monotonicity gives prior-mean antitonicity, and Gaussian
+posterior monotonicity lifts it to the full mean-estimate gap. -/
+theorem mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable
+    (bridge : RangedLatticePMonotonicityBridgeData)
+    {p1 p2 kappa : Real} (hp1_nonneg : 0 <= p1) (hp_mono : p1 <= p2)
+    (hp2_le_one : p2 <= 1) (hkappa : 0 < kappa) :
+    mean_estimate_gap p2 kappa <= mean_estimate_gap p1 kappa := by
+  unfold mean_estimate_gap
+  have hprior :
+      BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p2 <=
+        BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p1 :=
+    priorMean_u2_fiveState_antitone_in_p_from_ranged_lattice_observable
+      bridge hp1_nonneg hp_mono hp2_le_one
+  have hu2 :
+      BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p2)
+          1 (BlackwellDilemma.Infrastructure.FiveState.r_G : Real) kappa 1 <=
+        BlackwellDilemma.Infrastructure.gaussianPosteriorMean
+          (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p1)
+          1 (BlackwellDilemma.Infrastructure.FiveState.r_G : Real) kappa 1 :=
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.gaussianPosteriorMean_antitone_in_mu0_arg
+      1 (BlackwellDilemma.Infrastructure.FiveState.r_G : Real) kappa 1
+      (by norm_num) hkappa (by norm_num)
+      (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p1)
+      (BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p2)
+      hprior
+  linarith
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 4 transfer from an explicit lattice/domain bridge.  This theorem is
@@ -1376,8 +1426,8 @@ theorem gap_cognitive_threshold_part4_from_ranged_lattice_bridge
     intro kappa hkappa
     refine ⟨hkappa.1, ?_⟩
     have h_anti : mean_estimate_gap p2 kappa <= mean_estimate_gap p1 kappa :=
-      bridge.mean_gap_antitone_on_lattice_domain
-        p1 p2 kappa hp1_nonneg hp_mono hp2_le_one hkappa.1
+      mean_estimate_gap_antitone_in_p_from_ranged_lattice_observable
+        bridge hp1_nonneg hp_mono hp2_le_one hkappa.1
     linarith [hkappa.2]
   exact csInf_le_csInf h_bdd h_ne h_sub
 
