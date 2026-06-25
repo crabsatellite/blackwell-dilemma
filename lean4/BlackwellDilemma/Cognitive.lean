@@ -2156,6 +2156,25 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_loca
   linarith
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Existential closed-unit Part 6 witness from a paper-bounded local `Z²`
+lattice-embedding bridge.  This packages the bridge's explicit nonempty
+`α*(0,p_c) < α ≤ 1` certificate together with the bounded local transfer, so a
+future repaired bridge cannot satisfy the transfer surface only vacuously. -/
+theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
+      α ≤ 1 ∧
+        ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+            p < harrisKestenCriticalProb →
+              M < kappaStar p α := by
+  rcases bridge.nonempty_closed_unit_alpha_domain with ⟨α, hα, hα_le_one⟩
+  refine ⟨α, hα, hα_le_one, ?_⟩
+  exact
+    gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
+      bridge α hα hα_le_one
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 (full statement, conjunction). Combines all six paper-
     stated parts (Parts 1, 2, 3, 4, 5, 6). Part 4 is bundled here as
     the paper-faithful bounded form on the abstract `kappaStar` carrier

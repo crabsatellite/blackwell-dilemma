@@ -271,7 +271,10 @@ closed-unit local bridge contract now carries an explicit nonempty-domain
 witness, and the bounded transfer theorem
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge`
 now states the paper-facing divergence conclusion for any future instance on
-`alphaStar 0 p_c < α <= 1`. The theorem
+`alphaStar 0 p_c < α <= 1`. The companion theorem
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`
+packages the required nonempty-domain certificate into an actual paper-domain
+divergence witness. The theorem
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 obstruction at the bridge-contract level. The remaining Harris-Kesten scaling
 work is therefore first to supply a nondegenerate `α`/feasible-set domain
@@ -516,7 +519,8 @@ theorem, prototype divergence theorem, lower-envelope dominance theorem, and
 the named plus generic obstruction theorems, including the current
 local-bridge impossibility theorem and current `alphaStar = 1` bounded-domain
 degeneracy, including the closed-unit local bridge contract with an explicit
-nonempty-domain witness and its bounded transfer theorem.
+nonempty-domain witness, its bounded transfer theorem, and its existential
+paper-domain divergence witness projection.
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
 `L_minimum_exists_in_regime_i_proof`. R238 also proves

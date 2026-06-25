@@ -153,7 +153,10 @@ closed-unit local bridge contract now makes the nonempty-domain requirement
 explicit, and
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge`
 now provides the bounded transfer theorem for any future instance on
-`alphaStar 0 p_c < α <= 1`.
+`alphaStar 0 p_c < α <= 1`, and
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`
+turns the bridge's nonempty-domain field into an explicit paper-domain
+divergence witness.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
 obstruction at the bridge-contract level. The Part 6 repair is therefore first
 to supply a nondegenerate `α`/feasible-set domain certificate, then instantiate
