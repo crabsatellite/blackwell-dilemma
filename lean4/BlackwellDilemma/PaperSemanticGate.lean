@@ -149,6 +149,12 @@ structure Part4LatticePMonotonicityFrontierPayload where
   mean_gap_antitone_from_percExpectation :
     ∀ p₁ p₂ κ : ℝ, 0 ≤ p₁ -> p₁ ≤ p₂ -> p₂ ≤ 1 -> 0 < κ ->
       mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ
+  kappaStar_monotone_from_percExpectation :
+    ∀ α p₁ p₂ : ℝ, 0 ≤ p₁ -> p₁ ≤ p₂ -> p₂ ≤ 1 ->
+      (∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α
   standard_z2_lattice_monotone_coupling :
     BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
       2
@@ -209,6 +215,10 @@ def part4_lattice_p_monotonicity_frontier_payload :
     intro p₁ p₂ κ hp₁_nonneg hp_mono hp₂_le_one hκ
     exact mean_estimate_gap_antitone_in_p_from_percExpectation
       hp₁_nonneg hp_mono hp₂_le_one hκ
+  kappaStar_monotone_from_percExpectation := by
+    intro α p₁ p₂ hp₁_nonneg hp_mono hp₂_le_one h_nonempty
+    exact gap_cognitive_threshold_part4_from_percExpectation
+      α p₁ p₂ hp₁_nonneg hp_mono hp₂_le_one h_nonempty
   standard_z2_lattice_monotone_coupling :=
     BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData
       2

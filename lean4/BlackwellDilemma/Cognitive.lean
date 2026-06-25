@@ -1155,6 +1155,46 @@ theorem mean_estimate_gap_antitone_in_p_from_percExpectation
   linarith
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Ranged finite-percolation transfer from the one-edge bridge route to
+bounded `kappaStar` p-monotonicity.
+
+This is the Part 4 threshold-level consequence of
+`mean_estimate_gap_antitone_in_p_from_percExpectation`: within the paper's
+blocking-probability domain `0 <= p₁ <= p₂ <= 1`, the finite
+bond-percolation reconstruction of the mean-gap antitonicity gives the same
+`sInf` feasible-set inclusion used by the abstract Part 4 proof.  The theorem
+still carries the intended-domain non-emptiness premise for the `p₂`
+threshold set. -/
+theorem gap_cognitive_threshold_part4_from_percExpectation
+    (α p₁ p₂ : ℝ) (hp₁_nonneg : 0 ≤ p₁) (hp_mono : p₁ ≤ p₂)
+    (hp₂_le_one : p₂ ≤ 1)
+    (h_nonempty_p₂ :
+      ∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) :
+    kappaStar p₁ α ≤ kappaStar p₂ α := by
+  rw [kappaStar_def p₁ α, kappaStar_def p₂ α]
+  set S₁ : Set ℝ := { κ : ℝ | 0 < κ ∧
+    BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+      mean_estimate_gap p₁ κ } with hS₁
+  set S₂ : Set ℝ := { κ : ℝ | 0 < κ ∧
+    BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+      mean_estimate_gap p₂ κ } with hS₂
+  have h_bdd : BddBelow S₁ := by
+    refine ⟨0, ?_⟩
+    intro κ hκ
+    exact le_of_lt hκ.1
+  have h_ne : S₂.Nonempty := h_nonempty_p₂
+  have h_sub : S₂ ⊆ S₁ := by
+    intro κ hκ
+    refine ⟨hκ.1, ?_⟩
+    have h_anti : mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ :=
+      mean_estimate_gap_antitone_in_p_from_percExpectation
+        hp₁_nonneg hp_mono hp₂_le_one hκ.1
+    linarith [hκ.2]
+  exact csInf_le_csInf h_bdd h_ne h_sub
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Generic Part 4 transfer theorem.  Any future domain-specific carrier
 that proves the mean-estimate-gap antitonicity in `p` can plug that theorem
 into this `sInf` transfer and obtain the bounded `kappaStar`

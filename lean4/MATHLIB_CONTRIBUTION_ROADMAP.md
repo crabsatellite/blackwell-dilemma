@@ -82,7 +82,9 @@ blocking-probability antitonicity from finite-product monotonicity on
 `0 <= p_1 <= p_2 <= 1`. The theorem
 `mean_estimate_gap_antitone_in_p_from_percExpectation` now lifts that
 one-edge route through Gaussian posterior monotonicity to the full ranged
-mean-estimate-gap antitonicity. R517 adds
+mean-estimate-gap antitonicity, and
+`gap_cognitive_threshold_part4_from_percExpectation` transfers it through the
+`sInf` threshold definition to bounded `kappaStar` p-monotonicity. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
 carry that per-edge plus finite-product monotone-coupling/expectation interface before proving the
