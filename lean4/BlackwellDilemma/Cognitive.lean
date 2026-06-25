@@ -2054,7 +2054,9 @@ structure Z2LatticeEmbeddingBridgeData where
 lattice-embedding bridge.  This is the preferred future certificate: it keeps
 the standard integer-lattice graph and scaling divergence fields, but requires
 domination only near `p_c`, which is exactly the domain consumed by the
-one-sided divergence proof. -/
+one-sided divergence proof.  It also carries explicit near-`p_c` nonemptiness
+of the `kappaStar` feasible set, preventing a future bridge from routing the
+paper proof through the empty-set `sInf` branch. -/
 structure Z2LatticeEmbeddingLocalBridgeData where
   graph : SimpleGraph (Fin 2 → ℤ)
   graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
@@ -2068,6 +2070,16 @@ structure Z2LatticeEmbeddingLocalBridgeData where
         ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
           p < harrisKestenCriticalProb →
             scalingCarrier p ≤ kappaStar p α
+  near_pc_feasible_nonempty :
+    forall alpha : Real, alphaStar 0 harrisKestenCriticalProb <= alpha ->
+      Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa
 
 /-- Paper-bounded closed-unit variant of the local Part 6 `Z²`
 lattice-embedding bridge.  The explicit `alphaStar 0 p_c < 1` certificate is
@@ -2089,6 +2101,25 @@ structure Z2LatticeEmbeddingClosedUnitLocalBridgeData where
         ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
           p < harrisKestenCriticalProb →
             scalingCarrier p ≤ kappaStar p α
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Near-`p_c` feasible-set nonemptiness projected from the repaired local
+Part 6 bridge contract.
+
+This is the machine-checkable guard against proving the local domination
+surface through the empty `kappaStar` feasible set. -/
+theorem z2LatticeEmbeddingLocalBridgeData_near_pc_feasible_nonempty
+    (bridge : Z2LatticeEmbeddingLocalBridgeData) :
+    forall alpha : Real, alphaStar 0 harrisKestenCriticalProb <= alpha ->
+      Exists fun delta : Real =>
+        0 < delta /\
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa /\
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa :=
+  bridge.near_pc_feasible_nonempty
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Nonempty closed-unit paper domain derived from the bridge's explicit
@@ -2134,6 +2165,46 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
     bridge.scalingCarrier
     bridge.scaling_diverges
     bridge.scaling_dominates_kappa_near_pc
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Single paper-support certificate extracted from the repaired unbounded
+local Part 6 bridge contract.
+
+This binds the standard `Z²` graph identity, the scaling divergence carrier,
+near-`p_c` local domination, explicit near-`p_c` feasible-set nonemptiness, and
+the resulting paper-facing divergence transfer into one gateable theorem. -/
+theorem z2LatticeEmbeddingLocalBridgeData_paper_support_certificate
+    (bridge : Z2LatticeEmbeddingLocalBridgeData) :
+    bridge.graph = SimpleGraph.Z2LatticeGraph ∧
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        bridge.scalingCarrier harrisKestenCriticalProb ∧
+      (forall alpha : Real, alphaStar 0 harrisKestenCriticalProb <= alpha ->
+        Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                bridge.scalingCarrier p <= kappaStar p alpha) ∧
+      (forall alpha : Real, alphaStar 0 harrisKestenCriticalProb <= alpha ->
+        Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa /\
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa) ∧
+      forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+        forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon /\
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha := by
+  exact ⟨bridge.graph_is_z2_lattice,
+    bridge.scaling_diverges,
+    bridge.scaling_dominates_kappa_near_pc,
+    bridge.near_pc_feasible_nonempty,
+    gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
+      bridge⟩
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 6 transfer from a paper-bounded closed-unit local `Z²`

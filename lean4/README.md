@@ -645,6 +645,11 @@ neither retired/current candidate can instantiate `Z2LatticeEmbeddingBridgeData`
 The Part 6 gate now also checks the repaired local-domination transfer
 `gap_cognitive_threshold_part6_local` and the local bridge entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`.
+The local bridge contract now carries
+`z2LatticeEmbeddingLocalBridgeData_near_pc_feasible_nonempty` and the gate
+checks `z2LatticeEmbeddingLocalBridgeData_paper_support_certificate`, so an
+unbounded repaired route must also prove near-`p_c` nonemptiness of the
+`kappaStar` feasible set rather than relying on an empty `sInf` branch.
 It also checks `not_z2_lattice_embedding_local_bridge_current`, which proves
 the current local bridge shape is still uninhabitable: the unbounded `α` domain
 includes `α = 2`, while the new near-`p_c` zero-branch witness shows

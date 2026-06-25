@@ -260,6 +260,12 @@ scaling carrier with both one-sided divergence and high-α domination. R521
 adds the repaired local-domination transfer
 `gap_cognitive_threshold_part6_local` and the local bridge entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`. The
+local bridge contract now also gates
+`z2LatticeEmbeddingLocalBridgeData_near_pc_feasible_nonempty` and
+`z2LatticeEmbeddingLocalBridgeData_paper_support_certificate`, requiring any
+unbounded repaired route to supply near-`p_c` nonemptiness of the `kappaStar`
+feasible set together with graph identity, scaling divergence, local
+domination, and the paper-facing divergence transfer. The
 current gate also proves `not_z2_lattice_embedding_local_bridge_current`: the
 unbounded `α` domain still includes `α = 2`, where the current concrete
 `kappaStar p 2` branch is zero at non-negative points in every deleted

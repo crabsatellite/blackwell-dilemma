@@ -148,6 +148,12 @@ that witness into the generic obstruction to the current local bridge shape.
 R521 adds the repaired local-domination
 transfer `gap_cognitive_threshold_part6_local` and the local bridge transfer
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`; the
+local bridge contract now also gates
+`z2LatticeEmbeddingLocalBridgeData_near_pc_feasible_nonempty` and
+`z2LatticeEmbeddingLocalBridgeData_paper_support_certificate`, so an unbounded
+repair must prove near-`p_c` nonemptiness of the `kappaStar` feasible set
+together with graph identity, scaling divergence, local domination, and the
+paper-facing divergence transfer; the
 current gate now also proves `not_z2_lattice_embedding_local_bridge_current`.
 Thus the local transfer is usable, but the present local bridge contract is
 still uninhabitable because its unbounded `α` domain includes `α = 2`, where
