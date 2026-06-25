@@ -2069,6 +2069,26 @@ structure Z2LatticeEmbeddingLocalBridgeData where
           p < harrisKestenCriticalProb →
             scalingCarrier p ≤ kappaStar p α
 
+/-- Paper-bounded closed-unit variant of the local Part 6 `Z²`
+lattice-embedding bridge.  The explicit nonempty-domain witness prevents the
+closed-unit repair from being satisfied vacuously on a carrier where
+`alphaStar 0 p_c = 1`. -/
+structure Z2LatticeEmbeddingClosedUnitLocalBridgeData where
+  graph : SimpleGraph (Fin 2 → ℤ)
+  graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
+  scalingCarrier : ℝ → ℝ
+  scaling_diverges :
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      scalingCarrier harrisKestenCriticalProb
+  nonempty_closed_unit_alpha_domain :
+    ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
+  scaling_dominates_kappa_near_pc :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α → α ≤ 1 →
+      ∃ δ : ℝ, 0 < δ ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+          p < harrisKestenCriticalProb →
+            scalingCarrier p ≤ kappaStar p α
+
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 6 transfer from an explicit `Z²` lattice-embedding bridge.  This is
 the build-checked entrypoint for the future paper-faithful lattice carrier;
@@ -3261,6 +3281,20 @@ theorem not_closed_unit_alpha_above_alphaStar_current :
   rcases h with ⟨α, hα_gt, hα_le⟩
   rw [alphaStar_eq_one_current] at hα_gt
   linarith
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the closed-unit local Part 6 bridge.
+
+The closed-unit local bridge carries an explicit nonempty-domain witness for
+`α > alphaStar 0 p_c` and `α ≤ 1`.  Since the current scalar carrier has
+`alphaStar 0 p_c = 1`, that witness is impossible; hence this bridge contract
+cannot be instantiated without first replacing the degenerate threshold
+carrier/domain certificate. -/
+theorem not_z2_lattice_embedding_closed_unit_local_bridge_current :
+    Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) := by
+  rintro ⟨bridge⟩
+  exact not_closed_unit_alpha_above_alphaStar_current
+    bridge.nonempty_closed_unit_alpha_domain
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Guard theorem for the Harris-Kesten lower-envelope route: on the current

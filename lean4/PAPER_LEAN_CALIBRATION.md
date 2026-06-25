@@ -266,10 +266,13 @@ unbounded `α` domain still includes `α = 2`, where the current concrete
 scaling carrier can satisfy the present local bridge. The gate also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
-domain by `α <= 1` would make the current `α > α*` regime empty. The remaining
-Harris-Kesten scaling work is therefore first to supply a nondegenerate
-`α`/feasible-set domain certificate, then instantiate that repaired bridge with
-a paper-faithful carrier and valid near-`p_c` domination theorem.
+domain by `α <= 1` would make the current `α > α*` regime empty. The
+closed-unit local bridge contract now carries an explicit nonempty-domain
+witness, and `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates
+that obstruction at the bridge-contract level. The remaining Harris-Kesten
+scaling work is therefore first to supply a nondegenerate `α`/feasible-set
+domain certificate, then instantiate that repaired bridge with a paper-faithful
+carrier and valid near-`p_c` domination theorem.
 `V_g` is now a well-founded concrete greedy traversal over the current
 canonical finite vertex carrier (`Vertex = Fin 5`), and the paper recursion
 laws `V_g_def_terminal` and `V_g_def_step` are current theorems.
@@ -506,7 +509,8 @@ failed lower-envelope proposition; the failed route is still not a global
 theorem, prototype divergence theorem, lower-envelope dominance theorem, and
 the named plus generic obstruction theorems, including the current
 local-bridge impossibility theorem and current `alphaStar = 1` bounded-domain
-degeneracy.
+degeneracy, including the closed-unit local bridge contract with an explicit
+nonempty-domain witness.
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
 `L_minimum_exists_in_regime_i_proof`. R238 also proves

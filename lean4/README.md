@@ -622,10 +622,13 @@ region where any divergent scaling carrier is positive. The same gate now
 checks `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, showing that a naive
 paper-bounded domain repair `α <= 1` would be empty on the current scalar
-carrier. The remaining Part 6 repair is therefore no longer the transfer-domain
-theorem itself; it is to supply a nondegenerate `α`/feasible-set domain
-certificate, then instantiate the repaired bridge with a paper-faithful scaling
-carrier whose domination theorem holds near `p_c`.
+carrier. The closed-unit local bridge contract now includes that nonempty-domain
+witness explicitly, and `not_z2_lattice_embedding_closed_unit_local_bridge_current`
+proves the current carrier cannot instantiate it. The remaining Part 6 repair is
+therefore no longer the transfer-domain theorem itself; it is to supply a
+nondegenerate `α`/feasible-set domain certificate, then instantiate the repaired
+bridge with a paper-faithful scaling carrier whose domination theorem holds near
+`p_c`.
 The current transfer and obstruction frontier is machine-gated by
 `part6_lattice_embedding_frontier_payload`. That repaired bridge instance is
 the precondition for any Harris-Kesten/Cardy/SLE formalisation to become a

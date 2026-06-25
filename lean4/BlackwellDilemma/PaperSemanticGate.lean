@@ -356,6 +356,8 @@ structure Part6LatticeEmbeddingFrontierPayload where
         bridge.scalingCarrier = s
   local_bridge_current_obstruction :
     Not (Nonempty Z2LatticeEmbeddingLocalBridgeData)
+  closed_unit_local_bridge_current_obstruction :
+    Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)
   alphaStar_current_eq_one_at_pc :
     alphaStar 0 harrisKestenCriticalProb = 1
   closed_unit_alpha_domain_empty_current :
@@ -378,8 +380,8 @@ structure Part6LatticeEmbeddingFrontierPayload where
 /-- Build gate: the open Part 6 lattice-embedding target is calibrated
 against the current transfer layer, local-domination transfer layer, and
 current-carrier obstructions.  The semantic target remains open until the
-local bridge's unbounded-`α` domain and the current `alphaStar = 1`
-closed-unit degeneracy are repaired with a paper-faithful nonempty
+local bridge's unbounded-`α` domain and the closed-unit bridge's explicit
+nonempty-domain obstruction are repaired with a paper-faithful
 `α`/feasibility certificate and then instantiated by a genuine
 lattice/percolation carrier with divergence and near-`p_c` domination. -/
 def part6_lattice_embedding_frontier_payload :
@@ -409,6 +411,8 @@ def part6_lattice_embedding_frontier_payload :
     not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier
   local_bridge_current_obstruction :=
     not_z2_lattice_embedding_local_bridge_current
+  closed_unit_local_bridge_current_obstruction :=
+    not_z2_lattice_embedding_closed_unit_local_bridge_current
   alphaStar_current_eq_one_at_pc :=
     alphaStar_eq_one_current 0 harrisKestenCriticalProb
   closed_unit_alpha_domain_empty_current :=
