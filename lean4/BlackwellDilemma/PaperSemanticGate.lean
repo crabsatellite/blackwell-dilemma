@@ -393,6 +393,9 @@ structure Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_embedding_closed_unit_local_bridge_alphaStar_lt_one :
     ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
       alphaStar 0 harrisKestenCriticalProb < 1
+  z2_lattice_embedding_closed_unit_local_bridge_nonempty_alpha_domain :
+    ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
+      ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
   z2_lattice_embedding_closed_unit_local_bridge_witness :
     ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
       ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
@@ -411,8 +414,9 @@ nonempty-domain obstruction is repaired with a paper-faithful
 lattice/percolation carrier with divergence and near-`p_c` domination; if the
 closed-unit route is repaired, the payload now also checks that it yields an
 actual paper-domain divergence witness rather than only a pointwise transfer
-surface, that the bridge explicitly carries `alphaStar 0 p_c < 1`, and that
-closed-unit domain nonemptiness is exactly that same certificate. -/
+surface, that the bridge explicitly carries `alphaStar 0 p_c < 1`, that the
+closed-unit domain witness is derived from that certificate, and that
+nonemptiness is exactly the same certificate. -/
 def part6_lattice_embedding_frontier_payload :
     Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_graph_standard := rfl
@@ -458,6 +462,8 @@ def part6_lattice_embedding_frontier_payload :
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
   z2_lattice_embedding_closed_unit_local_bridge_alphaStar_lt_one :=
     fun bridge => bridge.closed_unit_alphaStar_lt_one
+  z2_lattice_embedding_closed_unit_local_bridge_nonempty_alpha_domain :=
+    z2LatticeEmbeddingClosedUnitLocalBridgeData_nonempty_closed_unit_alpha_domain
   z2_lattice_embedding_closed_unit_local_bridge_witness :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness
 

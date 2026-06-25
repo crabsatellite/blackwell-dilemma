@@ -2070,9 +2070,10 @@ structure Z2LatticeEmbeddingLocalBridgeData where
             scalingCarrier p ≤ kappaStar p α
 
 /-- Paper-bounded closed-unit variant of the local Part 6 `Z²`
-lattice-embedding bridge.  The explicit `alphaStar 0 p_c < 1` certificate and
-nonempty-domain witness prevent the closed-unit repair from being satisfied
-vacuously on a carrier where `alphaStar 0 p_c = 1`. -/
+lattice-embedding bridge.  The explicit `alphaStar 0 p_c < 1` certificate is
+the non-vacuity guard: it implies the closed-unit paper domain
+`alphaStar 0 p_c < alpha <= 1` is nonempty, so a repaired bridge cannot satisfy
+the transfer surface only over an empty domain. -/
 structure Z2LatticeEmbeddingClosedUnitLocalBridgeData where
   graph : SimpleGraph (Fin 2 → ℤ)
   graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
@@ -2082,14 +2083,23 @@ structure Z2LatticeEmbeddingClosedUnitLocalBridgeData where
       scalingCarrier harrisKestenCriticalProb
   closed_unit_alphaStar_lt_one :
     alphaStar 0 harrisKestenCriticalProb < 1
-  nonempty_closed_unit_alpha_domain :
-    ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
   scaling_dominates_kappa_near_pc :
     ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α → α ≤ 1 →
       ∃ δ : ℝ, 0 < δ ∧
         ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
           p < harrisKestenCriticalProb →
             scalingCarrier p ≤ kappaStar p α
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Nonempty closed-unit paper domain derived from the bridge's explicit
+threshold certificate.  This keeps the bridge contract from carrying a
+separate redundant existential assumption. -/
+theorem z2LatticeEmbeddingClosedUnitLocalBridgeData_nonempty_closed_unit_alpha_domain
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1 := by
+  refine ⟨(alphaStar 0 harrisKestenCriticalProb + 1) / 2, ?_, ?_⟩
+  · linarith [bridge.closed_unit_alphaStar_lt_one]
+  · linarith [bridge.closed_unit_alphaStar_lt_one]
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 6 transfer from an explicit `Z²` lattice-embedding bridge.  This is
@@ -2170,7 +2180,8 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_loca
           ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
             p < harrisKestenCriticalProb →
               M < kappaStar p α := by
-  rcases bridge.nonempty_closed_unit_alpha_domain with ⟨α, hα, hα_le_one⟩
+  rcases z2LatticeEmbeddingClosedUnitLocalBridgeData_nonempty_closed_unit_alpha_domain
+      bridge with ⟨α, hα, hα_le_one⟩
   refine ⟨α, hα, hα_le_one, ?_⟩
   exact
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge
