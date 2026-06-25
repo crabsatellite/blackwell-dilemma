@@ -44,8 +44,10 @@ one-edge high-κ oracle-routing carrier
 refutation remains as diagnostic evidence for the retired route. The topo gate
 now also machine-checks all-open/complement boxed-torus giant-event witnesses,
 the full-reach `Z²` boxed-torus bridge with its fixed-`L` all-`n` lower-bound
-interface, and the flat-sequence lower-bound package, but the
-random-supercritical semantic target remains open. The Part 6 gate now also
+interface, the explicit `RandomSupercriticalZ2TopoClusterBridgeData` contract,
+and the flat-sequence lower-bound package, but the random-supercritical
+semantic target remains open until that contract is instantiated by the real
+finite-lattice carrier. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
 domination interface and a repaired local near-`p_c` domination transfer, so
 the remaining repair is to instantiate the local `Z²` bridge with a real

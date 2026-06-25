@@ -559,7 +559,11 @@ and its current-bridge form, showing that each fixed flat-only member cannot be 
 above-threshold lower-bound carrier.  The
 semantic target remains open because these are finite all-open, complement,
 and flat-sequence carriers rather than a random finite `Z^2_L`
-giant-component/lower-bound theorem.
+giant-component/lower-bound theorem.  The gate now records the stronger
+`RandomSupercriticalZ2TopoClusterBridgeData` contract and its projection
+theorems, so the next semantic closure step is to instantiate that contract
+with the paper's stochastic finite-lattice family rather than to add another
+wrapper around the current full-reach diagnostics.
 
 The concrete scalar `agentRewardKernel` now also proves its general
 unit-interval range, Bayesian/Sentimental pointwise monotonicity, κ-agent

@@ -12649,6 +12649,53 @@ structure Z2TopoClusterBridgeData where
   family : Nat -> WrongnessPercolationData
   family_core : BoxedTorusFlatFamilyCoreConclusion family
 
+/-- Stronger machine-readable shape of the final paper-semantic random
+supercritical `Z^2_L` topo-cluster bridge.
+
+Unlike `Z2TopoClusterBridgeData`, this is not meant to package the current
+full-reach or flat-only diagnostic carriers.  It records the finite boxed-torus
+indexing facts together with the family-level theorem core that a genuine
+random supercritical `Z^2_L` carrier must provide before the open topo semantic
+target can be closed. -/
+structure RandomSupercriticalZ2TopoClusterBridgeData where
+  graph : SimpleGraph (Fin 2 -> Int)
+  graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
+  family : Nat -> WrongnessPercolationData
+  flat_vertex_count :
+    forall L : Nat,
+      boxedTorusFlatGraphN L + 1 = Fintype.card (BoxedTorusVertex L)
+  flat_edge_count :
+    forall L : Nat,
+      Fintype.card (BoxedTorusEdgeIdx L) =
+        2 * (boxedTorusFlatGraphN L + 1)
+  family_core : BoxedTorusFlatFamilyCoreConclusion family
+
+/-- Any final random-supercritical `Z^2_L` bridge can be viewed as the weaker
+standard `Z^2` topo-cluster bridge consumed by the existing graph-local theorem
+core. -/
+def Z2TopoClusterBridgeData_from_random_supercritical_z2_topo_cluster_bridge
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    Z2TopoClusterBridgeData where
+  graph := bridge.graph
+  graph_is_z2_lattice := bridge.graph_is_z2_lattice
+  family := bridge.family
+  family_core := bridge.family_core
+
+/-- Projection from the final random-supercritical `Z^2_L` bridge to the
+family-core conclusion needed by the public graph-local theorem core. -/
+theorem BoxedTorusFlatFamilyCoreConclusion_from_random_supercritical_z2_topo_cluster_bridge
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    BoxedTorusFlatFamilyCoreConclusion bridge.family :=
+  bridge.family_core
+
+/-- Projection from the final random-supercritical `Z^2_L` bridge to the flat
+above-threshold lower-bound conclusion. -/
+theorem BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_random_supercritical_z2_topo_cluster_bridge
+    (bridge : RandomSupercriticalZ2TopoClusterBridgeData) :
+    BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+      bridge.family :=
+  bridge.family_core.1
+
 /-- Projection from an explicit `Z^2` topo-cluster bridge to the family-core
 conclusion needed by the public graph-local theorem core. -/
 theorem BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge
