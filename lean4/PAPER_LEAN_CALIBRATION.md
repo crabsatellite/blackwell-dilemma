@@ -50,7 +50,7 @@
 | Paper label | Line | Lean theorem(s) | File |
 |---|---|---|---|
 | `prop:info-decay` | 271 | finite-per-`n` current theorem `gap_info_decay_finite` plus compatibility name `gap_info_decay`; uniform-in-`n` strengthening remains a separate percolation target | Wrongness.lean:8809,8820 |
-| `prop:topo-cluster` | 280 | Current standard-only theorem surfaces `expectedTopoLoss_conditional_def`, `gap_topo_cluster_relation`, and `gap_topo_loss_below_threshold`; Part 2 old Mills route dead-end: `not_mills_inverse_above_threshold_route_with_unit_bound`; current public theorem-core lower-bound route: `BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current` plus `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion`; the flat-only diagnostic is kernel-gated by `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`; the open semantic frontier is machine-gated by `topo_cluster_random_supercritical_z2_frontier_payload`; random supercritical `Z^2_L` strengthening remains separate | Wrongness.lean; PaperSemanticGate.lean |
+| `prop:topo-cluster` | 280 | Current standard-only theorem surfaces `expectedTopoLoss_conditional_def`, `gap_topo_cluster_relation`, and `gap_topo_loss_below_threshold`; Part 2 old Mills route dead-end: `not_mills_inverse_above_threshold_route_with_unit_bound`; current public theorem-core lower-bound route: `BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current` plus `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion`; the flat-only diagnostic is kernel-gated by `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`; the fixed-`L` all-`n` obstruction is kernel-gated by `not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`; the open semantic frontier is machine-gated by `topo_cluster_random_supercritical_z2_frontier_payload`; random supercritical `Z^2_L` strengthening remains separate | Wrongness.lean; PaperSemanticGate.lean |
 | `prop:physical` | 304 | `gap_physical_irreducibility` + `gap_W_info_nonpos` + `gap_oracle_W_info_zero` + `gap_welfare_le_W_topo` + `gap_oracle_welfare_eq_W_topo` | PhysicalIrreducibility.lean:46,58,74,91,105 |
 | `prop:trap-prevalence` | 454 | Current standard-only theorem surfaces `gap_trap_prevalence_zero` and `gap_trap_prevalence_above_threshold` | Phase.lean:569,970 |
 | `prop:threshold-alpha` | 528 | `gap_threshold_alpha_monotone` | Cognitive.lean:2610 |
@@ -419,7 +419,10 @@ certificate or change the open semantic count. The topo payload now also
 gates `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
-every index.
+every index. It also gates
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
+which proves each fixed flat-only member fails the old all-`n`
+above-threshold lower-bound interface.
 The concrete scalar `agentRewardKernel` now proves its general range,
 Bayesian/Sentimental pointwise monotonicity, κ-agent pointwise continuity, and
 κ-agent increasing-differences facts directly as theorems.

@@ -248,8 +248,12 @@ obligation rather than a prose-only roadmap item. The topo payload now also
 gates `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
 which proves the current flat-only family has zero total expected topo loss
 off the flattened boxed-torus index and zero giant-restricted topo loss at
-every index; this is the kernel-checked reason the current family remains a
-diagnostic frontier rather than the final random-supercritical carrier.
+every index. The same payload also gates
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
+showing that each fixed flat-only member cannot satisfy the all-`n`
+above-threshold lower-bound interface; this is the kernel-checked reason the
+current family remains a diagnostic frontier rather than the final
+random-supercritical carrier.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,

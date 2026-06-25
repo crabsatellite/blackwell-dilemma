@@ -351,6 +351,10 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     (∀ L n : ℕ, ∀ p : ℝ,
       expectedTopoLossOnGiantOn
         (boxedTorusFullReachFlatOnlyComplementTopoLossData L) n p = 0)
+  boxed_torus_flat_only_not_all_n_lower_bound :
+    ∀ L : ℕ,
+      ¬ UnitCompatibleAboveThresholdLowerBoundConclusion
+        (boxedTorusFullReachFlatOnlyComplementTopoLossData L)
   current_mills_identifier_obstruction :
     ¬
       ((∀ p : ℝ, harrisKestenCriticalProb < p →
@@ -407,6 +411,8 @@ def topo_cluster_random_supercritical_z2_frontier_payload :
     boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion
   boxed_torus_flat_only_diagnostic_current :=
     boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic
+  boxed_torus_flat_only_not_all_n_lower_bound :=
+    not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly
   current_mills_identifier_obstruction :=
     not_expectedTopoLossAboveLowerConst_eq_mills_inverse_current
   mills_inverse_unit_bound_route_obstruction :=

@@ -57,7 +57,9 @@ projections
 `BoxedTorusFlatFamilyCoreConclusion_from_z2_topo_cluster_bridge` and
 `BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_z2_topo_cluster_bridge`,
 and the flat-only diagnostic
-`boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
+`boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`, plus the
+fixed-`L` all-`n` obstruction
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
 without closing the still-missing random finite-lattice carrier theorem.  The
 threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
@@ -517,6 +519,10 @@ flat lower-bound conclusions, plus
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`: the
 current flat-only family has zero total expected topo loss off the flattened
 boxed-torus index and zero giant-restricted topo loss at every index.  The
+payload also gates
+`not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly`,
+showing that each fixed flat-only member cannot be repackaged as an all-`n`
+above-threshold lower-bound carrier.  The
 semantic target remains open because that payload still rests on diagnostic/flat carriers rather than a random finite
 `Z^2_L` giant-component/lower-bound theorem.
 

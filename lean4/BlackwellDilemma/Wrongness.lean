@@ -13377,6 +13377,34 @@ theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic :
     exact boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnGiantOn_eq_zero
       L n p
 
+/-- Fixed-`L` flat-only obstruction for the old all-`n` above-threshold
+    lower-bound interface.
+
+    The public flat-only full-reach carrier is valid for the flattened
+    boxed-torus sequence, but each fixed member has zero total expected topo
+    loss at every sufficiently large off-flat index.  It therefore cannot
+    instantiate `UnitCompatibleAboveThresholdLowerBoundConclusion`; the future
+    random supercritical `Z^2_L` theorem must replace the carrier rather than
+    repackage it as an all-`n` lower-bound result. -/
+theorem not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnly
+    (L : Nat) :
+    ¬ UnitCompatibleAboveThresholdLowerBoundConclusion
+      (boxedTorusFullReachFlatOnlyComplementTopoLossData L) := by
+  intro h
+  rcases h with ⟨p, c, _hpc, _hp0, _hp1, hc_pos, _hc_le_one, N, hN⟩
+  let n := max N (boxedTorusFlatGraphN L + 1)
+  have hNn : N ≤ n := Nat.le_max_left N (boxedTorusFlatGraphN L + 1)
+  have hn_gt : boxedTorusFlatGraphN L < n := by
+    exact (Nat.lt_succ_self (boxedTorusFlatGraphN L)).trans_le
+      (Nat.le_max_right N (boxedTorusFlatGraphN L + 1))
+  have hn_ne : n ≠ boxedTorusFlatGraphN L := by
+    exact ne_of_gt hn_gt
+  have h_lower : c ≤ expectedTopoLossOnData
+      (boxedTorusFullReachFlatOnlyComplementTopoLossData L) n p := hN n hNn
+  rw [boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_eq_of_ne
+    L n p hn_ne] at h_lower
+  exact (not_lt_of_ge h_lower) hc_pos
+
 theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_giantEventFullClusterConclusion
     (L : Nat) :
     GiantComponentEventFullClusterConclusion
