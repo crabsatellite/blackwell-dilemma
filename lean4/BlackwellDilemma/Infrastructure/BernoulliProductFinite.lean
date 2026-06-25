@@ -26,6 +26,9 @@ infrastructure does not yet exist in Mathlib for finite products on
 * `bernoulliWeight_le_one_term` — each Bernoulli factor is in `[0, 1]`.
 * `bernoulliWeight_pos_at_all_open` — strictly positive when
   every edge is open and `p > 0`.
+* `standardBernoulliMonotoneCouplingData` — the one-edge Strassen monotone
+  coupling table for `0 <= p_low <= p_high <= 1`, including both Bernoulli
+  marginals and zero mass on the forbidden open-to-closed atom.
 
 ## Bridge to paper carrier `BondConfig` / `percExpectation`
 
@@ -82,6 +85,97 @@ theorem bernoulliFactor_pos
   · simp [hb]; exact h_p_pos
   · simp [hb]; linarith
 
+/-! ### One-edge monotone Bernoulli coupling -/
+
+/-- One-edge monotone coupling factor between Bernoulli(`p_low`) and
+Bernoulli(`p_high`) for `p_low <= p_high`.
+
+The only forbidden lower/upper pair is `(true, false)`.  The remaining masses
+are the standard Strassen coupling on a two-point chain:
+`P(true,true)=p_low`, `P(false,true)=p_high-p_low`, and
+`P(false,false)=1-p_high`. -/
+def bernoulliMonotoneCouplingFactor
+    (p_low p_high : ℝ) (lower upper : Bool) : ℝ :=
+  match lower, upper with
+  | true, true => p_low
+  | true, false => 0
+  | false, true => p_high - p_low
+  | false, false => 1 - p_high
+
+/-- Data package for a one-edge monotone coupling between two Bernoulli
+parameters.  This is intentionally finite and measure-free: it records the
+joint mass table, both Bernoulli marginals, non-negativity, total mass one,
+and the monotone support condition. -/
+structure BernoulliMonotoneCouplingData (p_low p_high : ℝ) where
+  factor : Bool -> Bool -> ℝ
+  nonneg : ∀ lower upper : Bool, 0 ≤ factor lower upper
+  total_mass : (∑ lower : Bool, ∑ upper : Bool, factor lower upper) = 1
+  lower_marginal :
+    ∀ lower : Bool, (∑ upper : Bool, factor lower upper) =
+      bernoulliFactor p_low lower
+  upper_marginal :
+    ∀ upper : Bool, (∑ lower : Bool, factor lower upper) =
+      bernoulliFactor p_high upper
+  no_lower_open_upper_closed : factor true false = 0
+
+/-- Non-negativity of the standard one-edge monotone Bernoulli coupling. -/
+theorem bernoulliMonotoneCouplingFactor_nonneg
+    {p_low p_high : ℝ} (h_low_nonneg : 0 ≤ p_low)
+    (h_mono : p_low ≤ p_high) (h_high_le_one : p_high ≤ 1)
+    (lower upper : Bool) :
+    0 ≤ bernoulliMonotoneCouplingFactor p_low p_high lower upper := by
+  cases lower <;> cases upper <;>
+    simp [bernoulliMonotoneCouplingFactor] <;> linarith
+
+/-- The standard one-edge monotone Bernoulli coupling has total mass one. -/
+theorem bernoulliMonotoneCouplingFactor_total_mass
+    (p_low p_high : ℝ) :
+    (∑ lower : Bool, ∑ upper : Bool,
+      bernoulliMonotoneCouplingFactor p_low p_high lower upper) = 1 := by
+  simp [bernoulliMonotoneCouplingFactor]
+
+/-- The lower marginal of the standard monotone coupling is
+Bernoulli(`p_low`). -/
+theorem bernoulliMonotoneCouplingFactor_lower_marginal
+    (p_low p_high : ℝ) (lower : Bool) :
+    (∑ upper : Bool,
+      bernoulliMonotoneCouplingFactor p_low p_high lower upper) =
+        bernoulliFactor p_low lower := by
+  cases lower <;> simp [bernoulliMonotoneCouplingFactor, bernoulliFactor]
+
+/-- The upper marginal of the standard monotone coupling is
+Bernoulli(`p_high`). -/
+theorem bernoulliMonotoneCouplingFactor_upper_marginal
+    (p_low p_high : ℝ) (upper : Bool) :
+    (∑ lower : Bool,
+      bernoulliMonotoneCouplingFactor p_low p_high lower upper) =
+        bernoulliFactor p_high upper := by
+  cases upper <;> simp [bernoulliMonotoneCouplingFactor, bernoulliFactor]
+
+/-- The forbidden monotonicity-violating atom has zero mass. -/
+theorem bernoulliMonotoneCouplingFactor_no_lower_open_upper_closed
+    (p_low p_high : ℝ) :
+    bernoulliMonotoneCouplingFactor p_low p_high true false = 0 := rfl
+
+/-- Standard one-edge monotone Bernoulli coupling data for
+`0 <= p_low <= p_high <= 1`. -/
+def standardBernoulliMonotoneCouplingData
+    (p_low p_high : ℝ) (h_low_nonneg : 0 ≤ p_low)
+    (h_mono : p_low ≤ p_high) (h_high_le_one : p_high ≤ 1) :
+    BernoulliMonotoneCouplingData p_low p_high where
+  factor := bernoulliMonotoneCouplingFactor p_low p_high
+  nonneg :=
+    bernoulliMonotoneCouplingFactor_nonneg
+      h_low_nonneg h_mono h_high_le_one
+  total_mass :=
+    bernoulliMonotoneCouplingFactor_total_mass p_low p_high
+  lower_marginal :=
+    bernoulliMonotoneCouplingFactor_lower_marginal p_low p_high
+  upper_marginal :=
+    bernoulliMonotoneCouplingFactor_upper_marginal p_low p_high
+  no_lower_open_upper_closed :=
+    bernoulliMonotoneCouplingFactor_no_lower_open_upper_closed p_low p_high
+
 /-! ### Finite product Bernoulli weight -/
 
 /-- **Bernoulli product weight** over a finite edge set with outcome
@@ -130,5 +224,8 @@ theorem bernoulliWeight_pos
 
 #print axioms bernoulliWeight_nonneg
 #print axioms bernoulliWeight_pos
+#print axioms bernoulliMonotoneCouplingFactor_lower_marginal
+#print axioms bernoulliMonotoneCouplingFactor_upper_marginal
+#print axioms standardBernoulliMonotoneCouplingData
 
 end BlackwellDilemma.Infrastructure

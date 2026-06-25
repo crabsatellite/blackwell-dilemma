@@ -109,6 +109,13 @@ structure Part4LatticePMonotonicityFrontierPayload where
         BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
           mean_estimate_gap p₂ κ) →
       kappaStar p₁ α ≤ kappaStar p₂ α
+  standard_bernoulli_edge_coupling :
+    ∀ p_low p_high : ℝ, 0 ≤ p_low -> p_low ≤ p_high -> p_high ≤ 1 ->
+      BlackwellDilemma.Infrastructure.BernoulliMonotoneCouplingData
+        p_low p_high
+  standard_z2_lattice_monotone_coupling :
+    BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
+      2
   lattice_bridge_transfer :
     ∀ _bridge : LatticePMonotonicityBridgeData,
       ∀ α p₁ p₂ : ℝ, p₁ ≤ p₂ →
@@ -132,6 +139,11 @@ def part4_lattice_p_monotonicity_frontier_payload :
     kappaStar_p_monotone_of_mean_gap_antitone
   abstract_bounded_kappaStar_monotone :=
     gap_cognitive_threshold_part4
+  standard_bernoulli_edge_coupling :=
+    BlackwellDilemma.Infrastructure.standardBernoulliMonotoneCouplingData
+  standard_z2_lattice_monotone_coupling :=
+    BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData
+      2
   lattice_bridge_transfer :=
     gap_cognitive_threshold_part4_from_lattice_bridge
   constructive_five_state_bounded_monotone :=

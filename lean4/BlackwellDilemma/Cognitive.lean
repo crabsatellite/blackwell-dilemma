@@ -21,6 +21,7 @@ import BlackwellDilemma.Infrastructure.TopkisCrossPartial
 import BlackwellDilemma.Infrastructure.KappaStarConcrete
 import BlackwellDilemma.Infrastructure.HarrisKestenCriticalDivergence
 import BlackwellDilemma.Infrastructure.IntegerLattice
+import BlackwellDilemma.Infrastructure.BondPercolationLattice
 import BlackwellDilemma.Infrastructure.CognitivePercolationDominance
 import BlackwellDilemma.Infrastructure.GaussianPosterior
 import BlackwellDilemma.Infrastructure.GaussianPosteriorAsymptotic
@@ -1071,6 +1072,9 @@ structure LatticePMonotonicityBridgeData where
   positive_dimension : 0 < dimension
   graph : SimpleGraph (Fin dimension → ℤ)
   graph_is_integer_lattice : graph = SimpleGraph.integerLatticeGraph dimension
+  lattice_monotone_coupling :
+    BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
+      dimension
   mean_gap_antitone_on_lattice :
     ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
       ∀ κ : ℝ, 0 < κ →

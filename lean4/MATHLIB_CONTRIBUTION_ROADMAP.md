@@ -58,12 +58,17 @@ machine-gates the closed bounded theorem surface
 `kappaStar_p_monotone_of_mean_gap_antitone`,
 `gap_cognitive_threshold_part4_from_lattice_bridge`,
 `gap_cognitive_threshold_part4`, and
-`FiveState.gap_p_monotonicity_bounded`). R517 adds
+`FiveState.gap_p_monotonicity_bounded`). R520 adds the kernel-pure
+one-edge Bernoulli monotone-coupling table
+`standardBernoulliMonotoneCouplingData` and the standard per-edge lattice
+data package `standardLatticeMonotoneCouplingData`, and gates them in the
+Part 4 payload. R517 adds
 `LatticePMonotonicityBridgeData`, which fixes the shape of the missing
 lattice/domain certificate: it must name a standard integer-lattice graph and
-prove the domain-derived antitonicity of `mean_estimate_gap` in `p`. The
-semantic target remains open because that lattice/percolation
-monotone-coupling certificate has not been instantiated.
+carry that per-edge monotone-coupling interface before proving the
+domain-derived antitonicity of `mean_estimate_gap` in `p`. The semantic target
+remains open because no full lattice/percolation certificate deriving the
+mean-gap antitonicity from that domain/coupling carrier has been instantiated.
 
 Current iteration result: the high-κ five-state oracle-routing target is now
 closed, not merely diagnosed. `FiveState.fiveStateOracleWelfare` formalises

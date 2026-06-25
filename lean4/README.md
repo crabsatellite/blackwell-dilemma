@@ -21,7 +21,11 @@ the current kernel theorem surface while keeping the lattice/domain and random
 finite-lattice carrier repairs open.  The Part 4 payload now also checks the
 generic `sInf` transfer
 `kappaStar_p_monotone_of_mean_gap_antitone` and the future lattice certificate
-entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  The Part 6
+entrypoint `gap_cognitive_threshold_part4_from_lattice_bridge`.  It now also
+checks the kernel-pure one-edge Bernoulli monotone-coupling table and the
+standard `Z^2` per-edge lattice-coupling interface; the still-open Part 4 work
+is deriving the lattice mean-gap antitonicity from that domain/coupling
+carrier.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the
 future embedding-certificate entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`.  The topo
