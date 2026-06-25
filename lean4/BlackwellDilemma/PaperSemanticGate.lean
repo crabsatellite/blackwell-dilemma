@@ -40,7 +40,7 @@ def semanticTargets : List SemanticTarget :=
       shortReason :=
         "Paper R10 relabeling is now represented by gap_two_regime_* aliases.",
       closeRoute :=
-        "Canonical.lean paper-facing aliases over the closed theorem payload." },
+        "Typed gate payload r10_two_regime_label_recalibration_payload over the Canonical.lean paper-facing aliases." },
     { id := "theorem_4_1_part4_lattice_p_monotonicity",
       paperLabel := "thm:cognitive-threshold Part 4",
       status := SemanticStatus.open,
@@ -81,6 +81,79 @@ def paperSemanticOpenCount : Nat :=
 
 def paperSemanticClosedCount : Nat :=
   closedSemanticTargets.length
+
+/-- Typed payload required by the closed R10 two-regime relabeling target.
+This is intentionally a record of theorem surfaces, not a string reference:
+`PaperSemanticGate.lean` only builds if the public `gap_two_regime_*` aliases
+exist with the expected paper-facing statements. -/
+structure TwoRegimeRelabelingPayload where
+  reversal_existence :
+    ∀ p : ℝ, 0 ≤ p → p < FiveState.p_1 →
+      ∃ β_star_p, 0 < β_star_p ∧ FiveState.L β_star_p p < 4 / 10
+  reversal_uniqueness :
+    ∀ p : ℝ, 0 ≤ p → p < FiveState.p_1 →
+      ∃ β_star_p,
+        0 < β_star_p ∧
+          ∀ β' : ℝ,
+            0 < β' → FiveState.L β' p ≤ FiveState.L β_star_p p →
+              β' = β_star_p
+  reversal_nonmonotone :
+    ∀ p : ℝ, 0 ≤ p → p < FiveState.p_1 →
+      (∃ β_low β_high,
+        0 < β_low ∧ β_low < β_high ∧
+          FiveState.L β_high p < FiveState.L β_low p) ∧
+        ∃ β_a β_b,
+          0 < β_a ∧ β_a < β_b ∧
+            FiveState.L β_a p < FiveState.L β_b p
+  reversal_overshoot_decreasing :
+    ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < FiveState.p_1 →
+      ∃ β_star₁ β_star₂,
+        0 < β_star₁ ∧ 0 < β_star₂ ∧
+          FiveState.L β_star₁ p₁ < FiveState.L β_star₂ p₂
+  reversal_overshoot_continuous :
+    ContinuousOn FiveState.overshootRegimeI (Set.Ico 0 FiveState.p_1)
+  reversal_overshoot_vanishes_at_p1 :
+    Filter.Tendsto FiveState.overshootRegimeI
+      (nhdsWithin FiveState.p_1 (Set.Iio FiveState.p_1)) (nhds 0)
+  cognitive_augmentation_arithmetic_part :
+    ∀ p : ℝ, FiveState.p_1 ≤ p → p ≤ FiveState.p_2 →
+      4 / 10 * (1 - p) ≤ 4 / 10 - FiveState.W_topo_p p
+  cognitive_augmentation_monotonicity :
+    ∀ p : ℝ, FiveState.p_1 ≤ p → p ≤ FiveState.p_2 →
+      ∀ β₁ β₂ : ℝ, 0 < β₁ → β₁ ≤ β₂ →
+        FiveState.L β₂ p ≤ FiveState.L β₁ p
+  sufficient_cognition :
+    ∀ p : ℝ, FiveState.p_2 < p → p < 1 →
+      ∀ β₁ β₂ : ℝ, 0 < β₁ → β₁ ≤ β₂ →
+        FiveState.L β₂ p ≤ FiveState.L β₁ p
+  sufficient_cognition_kappaStar_pos :
+    ∀ p : ℝ, FiveState.p_2 < p → p < 1 →
+      0 < FiveState.kappaStar_fiveState p
+
+/-- Build gate: the closed R10 relabeling target is backed by all public
+paper-facing `gap_two_regime_*` aliases with their expected theorem types. -/
+def r10_two_regime_label_recalibration_payload :
+    TwoRegimeRelabelingPayload where
+  reversal_existence :=
+    FiveState.gap_two_regime_reversal_existence
+  reversal_uniqueness :=
+    FiveState.gap_two_regime_reversal_uniqueness
+  reversal_nonmonotone :=
+    FiveState.gap_two_regime_reversal_nonmonotone
+  reversal_overshoot_decreasing :=
+    FiveState.gap_two_regime_reversal_overshoot_decreasing
+  reversal_overshoot_continuous :=
+    FiveState.gap_two_regime_reversal_overshoot_continuous
+  reversal_overshoot_vanishes_at_p1 :=
+    FiveState.gap_two_regime_reversal_overshoot_vanishes_at_p1
+  cognitive_augmentation_arithmetic_part :=
+    FiveState.gap_two_regime_cognitive_augmentation_arithmetic_part
+  cognitive_augmentation_monotonicity :=
+    FiveState.gap_two_regime_cognitive_augmentation_monotonicity
+  sufficient_cognition :=
+    FiveState.gap_two_regime_sufficient_cognition
+  sufficient_cognition_kappaStar_pos :=
+    FiveState.gap_two_regime_sufficient_cognition_kappaStar_pos
 
 /-- Build gate: current paper-semantic closure has exactly the listed open
 targets.  If a target is closed or added, this theorem must be updated with the
