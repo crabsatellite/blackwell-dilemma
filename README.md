@@ -60,12 +60,13 @@ mechanism: giant-restricted loss is zero, while the flat lower-bound loss is
 exactly half of the full-reach failure-event mass. The random-supercritical
 semantic target remains open until that contract is instantiated by the real
 finite-lattice carrier. The
-contract now machine-excludes the current full-reach, flat-only, and
-all-open-complement diagnostic families, including pointwise hybrids assembled
-only from those diagnostics, and derives an explicit finite member that is
-simultaneously not any of those three diagnostic carriers. It also rules out
-eventually diagnostic tails and derives arbitrarily large non-diagnostic
-members above every finite threshold. The Part 6 gate now also
+contract now machine-excludes the current full-reach, flat-only,
+all-open-complement, deterministic all-open giant, and deterministic all-open
+positive diagnostic families, including pointwise hybrids assembled from those
+diagnostics. It derives an explicit finite member outside the first three
+diagnostic carriers, and now also rules out extended eventual diagnostic tails
+by deriving arbitrarily large members outside all five deterministic
+diagnostic carriers. The Part 6 gate now also
 machine-checks a generic positive-at-zero obstruction for the old global
 domination interface, a repaired local near-`p_c` domination transfer, a
 closed-unit local transfer on the explicit `alpha*(0,p_c) < alpha <= 1`

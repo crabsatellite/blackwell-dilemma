@@ -320,14 +320,18 @@ positive flat-loss witness, an eventual positive giant-restricted loss witness,
 eventual unrestricted and in-giant pointwise positive-loss realisation
 witnesses, the same family-core theorem package, and
 non-diagnostic guards excluding the
-current full-reach, flat-only, all-open-complement, and pointwise-hybrid
-diagnostic families, plus
+current full-reach, flat-only, all-open-complement, deterministic all-open
+giant, deterministic all-open positive, pointwise-hybrid, and extended
+eventual-tail diagnostic families, plus
 `randomSupercriticalZ2TopoClusterBridgeData_exists_non_diagnostic_member`,
 which derives a finite member outside all three current diagnostic carriers,
 and
 `randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_non_diagnostic_member`,
 which rules out eventual diagnostic tails by producing such a member above
-every finite threshold;
+every finite threshold, plus
+`randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_extended_non_diagnostic_member`,
+which produces arbitrarily large members outside all five deterministic
+diagnostic carriers;
 `PaperSemanticGate.lean` gates its projections and
 exclusions so the eventual closure target is now a concrete Lean structure,
 not a prose instruction. The topo payload now also

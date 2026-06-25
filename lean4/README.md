@@ -558,7 +558,12 @@ family member is not the full-reach, flat-only, or all-open-complement
 diagnostic carrier, and
 `randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_non_diagnostic_member`,
 which rules out eventual diagnostic tails by producing such a member above
-every finite threshold.
+every finite threshold.  The same gate now also checks the deterministic
+all-open giant and deterministic all-open positive exclusions, the extended
+eventual five-family tail exclusion, and
+`randomSupercriticalZ2TopoClusterBridgeData_arbitrarily_large_extended_non_diagnostic_member`,
+which produces arbitrarily large members outside all five deterministic
+diagnostic families.
 The
 payload also gates the flat-size support identity
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass`,
@@ -589,8 +594,9 @@ and flat-sequence carriers rather than a random finite `Z^2_L`
 giant-component/lower-bound theorem.  The gate now records the stronger
 `RandomSupercriticalZ2TopoClusterBridgeData` contract and its projection
 theorems, plus non-diagnostic guards excluding the current full-reach,
-flat-only, and all-open-complement families, including pointwise hybrids
-assembled only from those diagnostics.  The next semantic closure step is
+flat-only, all-open-complement, deterministic all-open giant, and deterministic
+all-open positive families, including extended eventual tails assembled from
+those diagnostics.  The next semantic closure step is
 therefore to instantiate that contract with the paper's stochastic
 finite-lattice family rather than to add another wrapper around the current
 diagnostics.
