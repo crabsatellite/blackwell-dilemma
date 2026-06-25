@@ -287,6 +287,10 @@ now states the paper-facing divergence conclusion for any future instance on
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`
 packages the required nonempty-domain certificate into an actual paper-domain
 divergence witness. The gate also checks
+`not_closed_unit_part6_divergence_witness_current` and
+`not_closed_unit_part6_feasible_divergence_witness_current`, so the current
+carrier is machine-blocked not only at the bridge-contract level but also at the
+closed-unit output witness level. It also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
 which ties the `Z^2` graph identity, scaling divergence, threshold
 certificate, local domination field, near-`p_c` feasible-set nonemptiness, and
@@ -302,8 +306,9 @@ so the same-alpha projections remain independently auditable. The gate also chec
 domain is nonempty exactly when the repaired carrier proves
 `alphaStar 0 p_c < 1`. The theorem
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
-threshold-certificate obstruction at the bridge-contract level. The remaining Harris-Kesten scaling
-work is therefore first to supply a nondegenerate `α`/feasible-set domain
+threshold-certificate obstruction at the bridge-contract level. The remaining
+Harris-Kesten scaling work is therefore first to supply a nondegenerate
+`α`/feasible-set domain
 certificate, including `alphaStar 0 p_c < 1` for the closed-unit route, then
 instantiate that repaired bridge with a paper-faithful carrier
 and valid near-`p_c` domination theorem.

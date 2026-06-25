@@ -3656,6 +3656,56 @@ theorem not_closed_unit_alphaStar_lt_one_current :
   norm_num
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the closed-unit Part 6 paper-domain
+divergence witness.
+
+The closed-unit route's output witness must choose an actual
+`alphaStar 0 p_c < alpha <= 1` point before it can attach the Part 6 divergence
+transfer.  On the current scalar carrier this domain is empty, so the witness
+itself is impossible independently of the bridge wrapper. -/
+theorem not_closed_unit_part6_divergence_witness_current :
+    Not (Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha ∧
+      alpha <= 1 ∧
+        forall M : Real, Exists fun epsilon : Real =>
+          0 < epsilon ∧
+            forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+              p < harrisKestenCriticalProb ->
+                M < kappaStar p alpha) := by
+  rintro ⟨alpha, halpha, halpha_le_one, _hdivergence⟩
+  exact not_closed_unit_alpha_above_alphaStar_current
+    ⟨alpha, halpha, halpha_le_one⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the closed-unit same-`alpha`
+feasible/divergence witness.
+
+This is the exact output shape required by the repaired closed-unit
+paper-support certificate.  It cannot be witnessed on the current carrier
+because its first two fields already require a nonempty closed-unit paper
+domain. -/
+theorem not_closed_unit_part6_feasible_divergence_witness_current :
+    Not (Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha ∧
+      alpha <= 1 ∧
+      (Exists fun delta : Real =>
+        0 < delta ∧
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa ∧
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) ∧
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon ∧
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)) := by
+  rintro ⟨alpha, halpha, halpha_le_one, _hfeasible, _hdivergence⟩
+  exact not_closed_unit_alpha_above_alphaStar_current
+    ⟨alpha, halpha, halpha_le_one⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the closed-unit local Part 6 bridge.
 
 The closed-unit local bridge carries an explicit `alphaStar 0 p_c < 1`

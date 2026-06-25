@@ -685,7 +685,11 @@ gate also checks the bounded transfer theorem
 for any future instance on `alphaStar 0 p_c < α <= 1`, plus
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`,
 which packages the derived nonempty-domain certificate into an actual
-paper-domain divergence witness.  The gate also checks
+paper-domain divergence witness. It also gates
+`not_closed_unit_part6_divergence_witness_current` and
+`not_closed_unit_part6_feasible_divergence_witness_current`, proving that the
+current carrier cannot even supply those closed-unit output witness shapes while
+`alphaStar 0 p_c = 1` makes the domain empty. The gate also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
 which binds the `Z^2` graph identity, scaling divergence, threshold
 certificate, local domination field, near-`p_c` feasible-set nonemptiness, and

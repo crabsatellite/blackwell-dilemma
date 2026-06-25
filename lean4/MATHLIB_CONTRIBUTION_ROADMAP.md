@@ -172,6 +172,10 @@ now provides the bounded transfer theorem for any future instance on
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`
 turns the bridge's derived nonempty-domain certificate into an explicit paper-domain
 divergence witness. The gate also checks
+`not_closed_unit_part6_divergence_witness_current` and
+`not_closed_unit_part6_feasible_divergence_witness_current`, so the current
+carrier is ruled out at the closed-unit output witness layer as well as at the
+bridge-contract layer. It also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
 which binds the `Z^2` graph identity, scaling divergence, threshold
 certificate, local domination field, near-`p_c` feasible-set nonemptiness, and
@@ -187,8 +191,9 @@ so the same-alpha projections remain independently auditable. The gate also chec
 closed-unit nonempty-domain repair to a positive `alphaStar 0 p_c < 1`
 threshold certificate.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` gates the current
-threshold-certificate obstruction at the bridge-contract level. The Part 6 repair is therefore first
-to supply a nondegenerate `α`/feasible-set domain certificate, including
+threshold-certificate obstruction at the bridge-contract level. The Part 6
+repair is therefore first to supply a nondegenerate `α`/feasible-set domain
+certificate, including
 `alphaStar 0 p_c < 1` for the closed-unit route, then instantiate that repaired
 bridge with a paper-faithful carrier whose domination theorem
 holds near `p_c`, before there can be a live Cat 2 percolation-universality

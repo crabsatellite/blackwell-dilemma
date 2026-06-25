@@ -90,6 +90,10 @@ closed-unit local bridge contract now carries that threshold certificate and
 derives the nonempty-domain witness from it, the gate proves the current carrier
 cannot satisfy the threshold certificate, and the closed-unit transfer plus
 existential witness theorem is ready for any repaired nonempty-domain instance.
+It also proves that the current carrier cannot satisfy the closed-unit
+paper-domain divergence witness or the stronger same-`alpha`
+feasible/divergence witness, so the output shape itself is not vacuously
+available while the domain is empty.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
