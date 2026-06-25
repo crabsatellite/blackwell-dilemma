@@ -176,7 +176,11 @@ names `UnboundedPart6FullPaperClosingSupport`,
 `Part6FullPaperClosingSupport`, then proves
 `not_part6_full_paper_closing_support_current`; the current formalized surface
 therefore rules out both existing routes as complete paper-closing supports.
-The same gate now
+It also gates `Part6FullPaperClosingBridgeRoute`,
+`part6_full_paper_closing_support_of_bridge_route`, and
+`not_part6_full_paper_closing_bridge_route_current`, pinning the future
+upstream obligation to an actually inhabited repaired bridge route rather than
+a prose description of nondegenerate support. The same gate now
 proves `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so a naive closed-unit
 paper-domain repair is also empty on the current scalar carrier. The

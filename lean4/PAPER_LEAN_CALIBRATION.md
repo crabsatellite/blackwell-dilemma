@@ -290,8 +290,12 @@ certificate. The gate also names the full current paper-closing surfaces
 `ClosedUnitPart6FullPaperClosingSupport`, and
 `Part6FullPaperClosingSupport`, and proves
 `not_part6_full_paper_closing_support_current`; thus the remaining Part 6 gap
-cannot be closed by merely selecting either existing current route. The gate
-also proves
+cannot be closed by merely selecting either existing current route. It also
+gates `Part6FullPaperClosingBridgeRoute`,
+`part6_full_paper_closing_support_of_bridge_route`, and
+`not_part6_full_paper_closing_bridge_route_current`, so a future inhabited
+repaired bridge route is formally sufficient for the named support surface,
+while the current bridge routes are formally ruled out. The gate also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The

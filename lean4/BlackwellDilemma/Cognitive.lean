@@ -4871,6 +4871,53 @@ def Part6FullPaperClosingSupport : Prop :=
     ClosedUnitPart6FullPaperClosingSupport scalingCarrier)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Bridge-route surface that can close the current Part 6 paper support
+target: either the repaired unbounded local bridge or the repaired closed-unit
+local bridge is actually inhabited. -/
+def Part6FullPaperClosingBridgeRoute : Prop :=
+  Nonempty Z2LatticeEmbeddingLocalBridgeData \/
+    Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Any repaired unbounded local bridge supplies the named full Part 6
+paper-closing support surface. -/
+theorem part6_full_paper_closing_support_of_z2_lattice_embedding_local_bridge
+    (bridge : Z2LatticeEmbeddingLocalBridgeData) :
+    Part6FullPaperClosingSupport := by
+  exact Or.inl
+    ⟨bridge.scalingCarrier,
+      z2LatticeEmbeddingLocalBridgeData_full_paper_domain_witness bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Any repaired closed-unit local bridge supplies the named full Part 6
+paper-closing support surface. -/
+theorem part6_full_paper_closing_support_of_z2_lattice_embedding_closed_unit_local_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData) :
+    Part6FullPaperClosingSupport := by
+  exact Or.inr
+    ⟨bridge.scalingCarrier,
+      z2LatticeEmbeddingClosedUnitLocalBridgeData_full_paper_domain_witness
+        bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A nonempty repaired bridge route is sufficient for the named full Part 6
+paper-closing support surface. -/
+theorem part6_full_paper_closing_support_of_bridge_route :
+    Part6FullPaperClosingBridgeRoute -> Part6FullPaperClosingSupport := by
+  intro hroute
+  cases hroute with
+  | inl hlocal =>
+      rcases hlocal with ⟨bridge⟩
+      exact
+        part6_full_paper_closing_support_of_z2_lattice_embedding_local_bridge
+          bridge
+  | inr hclosed =>
+      rcases hclosed with ⟨bridge⟩
+      exact
+        part6_full_paper_closing_support_of_z2_lattice_embedding_closed_unit_local_bridge
+          bridge
+
+omit [DiagnosticSignalHypothesisData] in
 theorem not_unbounded_part6_full_paper_closing_support_current :
     Not (Exists fun scalingCarrier : Real -> Real =>
       UnboundedPart6FullPaperClosingSupport scalingCarrier) := by
@@ -4898,6 +4945,18 @@ theorem not_part6_full_paper_closing_support_current :
       exact not_unbounded_part6_full_paper_closing_support_current hunbounded
   | inr hclosed =>
       exact not_closed_unit_part6_full_paper_closing_support_current hclosed
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The currently available Part 6 bridge routes cannot supply the named
+paper-closing bridge-route surface. -/
+theorem not_part6_full_paper_closing_bridge_route_current :
+    Not Part6FullPaperClosingBridgeRoute := by
+  intro hroute
+  cases hroute with
+  | inl hlocal =>
+      exact not_z2_lattice_embedding_local_bridge_current hlocal
+  | inr hclosed =>
+      exact not_z2_lattice_embedding_closed_unit_local_bridge_current hclosed
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Paired current-route obstruction certificate for the open Part 6

@@ -802,6 +802,11 @@ The gate now also names the full paper-closing surfaces as
 `not_part6_full_paper_closing_support_current`; this makes the current
 unbounded/closed-unit non-closure a direct Lean theorem about the paper support
 surface rather than only a collection of bridge-level failures.
+It also gates `Part6FullPaperClosingBridgeRoute` and
+`part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
+local or closed-unit bridge is now machine-checked to imply that full support
+surface, while `not_part6_full_paper_closing_bridge_route_current` records that
+the current bridge routes are still uninhabited.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` proves the current
 carrier cannot instantiate that bridge because its threshold certificate is
 impossible. The remaining Part 6 repair is therefore
