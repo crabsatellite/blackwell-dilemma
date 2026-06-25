@@ -46,10 +46,11 @@ now also machine-checks all-open/complement boxed-torus giant-event witnesses,
 the full-reach `Z²` boxed-torus bridge with its fixed-`L` all-`n` lower-bound
 interface, and the flat-sequence lower-bound package, but the
 random-supercritical semantic target remains open. The Part 6 gate now also
-machine-checks a generic
-positive-at-zero scaling-carrier obstruction, so the remaining repair is a
-carrier/domain change rather than a missing proof for the current domination
-interface. See
+machine-checks a generic positive-at-zero obstruction for the old global
+domination interface and a repaired local near-`p_c` domination transfer, so
+the remaining repair is to instantiate the local `Z²` bridge with a real
+percolation scaling carrier rather than to prove the transfer theorem itself.
+See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the
 paper-label mapping and remaining semantic calibration notes.

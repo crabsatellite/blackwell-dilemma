@@ -1776,6 +1776,44 @@ theorem kappaStar_diverges_at_pc_via_scaling_carrier
   exact h_s_le_kappa α hα p hp
 
 omit [DiagnosticSignalHypothesisData] in
+/-- **Cat 1 repaired local-domination interface**.
+    The one-sided divergence proof only needs domination in a deleted
+    neighbourhood below `p_c`, not on every `p < p_c`.
+
+    This is the kernel-safe domain repair for the Part 6 scaling-carrier
+    transfer. It avoids the low-`p` empty-feasible-set obstruction that
+    invalidates the current global domination target, while preserving the
+    exact conclusion consumed by the paper-facing Part 6 divergence theorem. -/
+theorem kappaStar_diverges_at_pc_via_local_scaling_carrier
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa_near_pc :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              s p ≤ kappaStar p α) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        (fun p => kappaStar p α) harrisKestenCriticalProb := by
+  intro α hα M
+  rcases h_s_diverges M with ⟨εs, hεs_pos, hs_near⟩
+  rcases h_s_le_kappa_near_pc α hα with ⟨δ, hδ_pos, hdom_near⟩
+  refine ⟨min εs δ, lt_min hεs_pos hδ_pos, ?_⟩
+  intro p hp_left hp_right
+  have hp_left_s : harrisKestenCriticalProb - εs < p := by
+    have hmin_le : min εs δ ≤ εs := min_le_left εs δ
+    linarith
+  have hp_left_δ : harrisKestenCriticalProb - δ < p := by
+    have hmin_le : min εs δ ≤ δ := min_le_right εs δ
+    linarith
+  have hs_lt : M < s p := hs_near p hp_left_s hp_right
+  have hs_le : s p ≤ kappaStar p α := hdom_near p hp_left_δ hp_right
+  linarith
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Paper-facing pointwise Part 6 interface, now parameterised by a
     replacement scaling carrier rather than the R205 lower-envelope
     carrier. -/
@@ -1792,6 +1830,29 @@ theorem kappaStar_diverges_at_pc_paper_Def_pointwise
       BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
         (fun p => kappaStar p α) harrisKestenCriticalProb :=
   kappaStar_diverges_at_pc_via_scaling_carrier s h_s_diverges h_s_le_kappa
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Local-domination version of the paper-facing pointwise Part 6 interface.
+
+    It has the same conclusion as `kappaStar_diverges_at_pc_paper_Def_pointwise`
+    but replaces global domination on all `p < p_c` by domination in a
+    left-neighbourhood of `p_c`, which is all the divergence argument uses. -/
+theorem kappaStar_diverges_at_pc_paper_Def_pointwise_local
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa_near_pc :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              s p ≤ kappaStar p α) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        (fun p => kappaStar p α) harrisKestenCriticalProb :=
+  kappaStar_diverges_at_pc_via_local_scaling_carrier
+    s h_s_diverges h_s_le_kappa_near_pc
 
 omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Direct application of
@@ -1826,6 +1887,29 @@ theorem kappaStar_diverges_at_pc_paper_Def
     s h_s_diverges h_s_le_kappa α (le_of_lt h_alphaStar_lt)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Local-domination version of `kappaStar_diverges_at_pc_paper_Def`.
+    This is the preferred closure entrypoint for future Part 6 carrier work:
+    a candidate scaling theorem only has to dominate `kappaStar` sufficiently
+    close to the Harris-Kesten critical point. -/
+theorem kappaStar_diverges_at_pc_paper_Def_local
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa_near_pc :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              s p ≤ kappaStar p α) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        (fun p => kappaStar p α) harrisKestenCriticalProb := by
+  intro α h_alphaStar_lt
+  exact kappaStar_diverges_at_pc_paper_Def_pointwise_local
+    s h_s_diverges h_s_le_kappa_near_pc α (le_of_lt h_alphaStar_lt)
+
+omit [DiagnosticSignalHypothesisData] in
 /-- **Cat 1 derived theorem**. Direct re-export
     of the paper-Def-stipulated structural equation atom
     `kappaStar_diverges_at_pc_paper_Def`. -/
@@ -1840,6 +1924,22 @@ theorem kappaStar_diverges_at_pc_from_scaling_carrier :
       BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
         (fun p => kappaStar p α) harrisKestenCriticalProb :=
   kappaStar_diverges_at_pc_paper_Def
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Local-domination re-export of the Part 6 divergence transfer. -/
+theorem kappaStar_diverges_at_pc_from_local_scaling_carrier :
+    (s : ℝ → ℝ) →
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      s harrisKestenCriticalProb →
+    (∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      ∃ δ : ℝ, 0 < δ ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+          p < harrisKestenCriticalProb →
+            s p ≤ kappaStar p α) →
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        (fun p => kappaStar p α) harrisKestenCriticalProb :=
+  kappaStar_diverges_at_pc_paper_Def_local
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Derived theorem via the paper-stipulated divergence atom. -/
@@ -1860,6 +1960,27 @@ theorem kappaStar_diverges_at_pc
   -- Unfold the Infrastructure DivergesAtBelowAtTop predicate
   exact kappaStar_diverges_at_pc_from_scaling_carrier
     s h_s_diverges h_s_le_kappa α hα M
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Derived Part 6 divergence theorem from a local domination certificate. -/
+theorem kappaStar_diverges_at_pc_local
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa_near_pc :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              s p ≤ kappaStar p α) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - ε < p → p < harrisKestenCriticalProb →
+          M < kappaStar p α := by
+  intro α hα M
+  exact kappaStar_diverges_at_pc_from_local_scaling_carrier
+    s h_s_diverges h_s_le_kappa_near_pc α hα M
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 Part 6: Divergence at `p_c`. On `Z²` with `α > α*`,
@@ -1887,6 +2008,30 @@ theorem gap_cognitive_threshold_part6
           M < kappaStar p α :=
   kappaStar_diverges_at_pc s h_s_diverges h_s_le_kappa
 
+omit [DiagnosticSignalHypothesisData] in
+/-- Local-domination entrypoint for Theorem 4.1 Part 6.  This is the
+    repaired closure surface for future lattice/percolation work: the
+    domination theorem may be restricted to a left-neighbourhood of `p_c`,
+    matching the one-sided divergence conclusion. -/
+theorem gap_cognitive_threshold_part6_local
+    (s : ℝ → ℝ)
+    (h_s_diverges :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb)
+    (h_s_le_kappa_near_pc :
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              s p ≤ kappaStar p α) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+          p < harrisKestenCriticalProb →
+            M < kappaStar p α :=
+  kappaStar_diverges_at_pc_local
+    s h_s_diverges h_s_le_kappa_near_pc
+
 /-! ### Theorem 4.1 Part 6 lattice-embedding bridge interface -/
 
 /-- Machine-readable shape of the missing Part 6 `Z²` lattice-embedding
@@ -1905,6 +2050,25 @@ structure Z2LatticeEmbeddingBridgeData where
       ∀ p : ℝ, p < harrisKestenCriticalProb →
         scalingCarrier p ≤ kappaStar p α
 
+/-- Repaired local-domination shape of the missing Part 6 `Z²`
+lattice-embedding bridge.  This is the preferred future certificate: it keeps
+the standard integer-lattice graph and scaling divergence fields, but requires
+domination only near `p_c`, which is exactly the domain consumed by the
+one-sided divergence proof. -/
+structure Z2LatticeEmbeddingLocalBridgeData where
+  graph : SimpleGraph (Fin 2 → ℤ)
+  graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
+  scalingCarrier : ℝ → ℝ
+  scaling_diverges :
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      scalingCarrier harrisKestenCriticalProb
+  scaling_dominates_kappa_near_pc :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+      ∃ δ : ℝ, 0 < δ ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+          p < harrisKestenCriticalProb →
+            scalingCarrier p ≤ kappaStar p α
+
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 6 transfer from an explicit `Z²` lattice-embedding bridge.  This is
 the build-checked entrypoint for the future paper-faithful lattice carrier;
@@ -1921,6 +2085,23 @@ theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
     bridge.scalingCarrier
     bridge.scaling_diverges
     bridge.scaling_dominates_kappa
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Part 6 transfer from a repaired local-domination `Z²` lattice-embedding
+bridge.  This entrypoint removes the old global low-`p` obstruction from the
+certificate shape while preserving the same paper-facing divergence
+conclusion. -/
+theorem gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
+    (bridge : Z2LatticeEmbeddingLocalBridgeData) :
+    ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+      ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+        ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+          p < harrisKestenCriticalProb →
+            M < kappaStar p α :=
+  gap_cognitive_threshold_part6_local
+    bridge.scalingCarrier
+    bridge.scaling_diverges
+    bridge.scaling_dominates_kappa_near_pc
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Theorem 4.1 (full statement, conjunction). Combines all six paper-

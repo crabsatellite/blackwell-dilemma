@@ -61,9 +61,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current scaling-transfer payload, two named candidate obstructions, and the generic positive-at-zero scaling-carrier obstruction are gated, but the full lattice embedding route remains a semantic carrier repair.",
+        "The current global scaling-transfer payload, repaired local-domination transfer, named candidate obstructions, and generic positive-at-zero global-carrier obstruction are gated, but the full lattice embedding route remains a semantic carrier repair.",
       closeRoute :=
-        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded high-alpha domination interface, or connect trap-tree embeddings to a finite/infinite Z2 lattice percolation carrier whose scaling theorem avoids the low-p empty-feasible-set branch." },
+        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: instantiate Z2LatticeEmbeddingLocalBridgeData with a finite/infinite Z2 lattice percolation carrier whose near-p_c domination theorem avoids the low-p empty-feasible-set branch." },
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
@@ -316,6 +316,20 @@ structure Part6LatticeEmbeddingFrontierPayload where
           ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
             p < harrisKestenCriticalProb →
               M < kappaStar p α
+  local_transfer_interface :
+    ∀ s : ℝ → ℝ,
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        s harrisKestenCriticalProb →
+      (∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - δ < p →
+            p < harrisKestenCriticalProb →
+              s p ≤ kappaStar p α) →
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+        ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+            p < harrisKestenCriticalProb →
+              M < kappaStar p α
   lower_envelope_divergence_obstruction :
     ¬ BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
       harrisKestenScalingFunction harrisKestenCriticalProb
@@ -347,13 +361,19 @@ structure Part6LatticeEmbeddingFrontierPayload where
           ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
             p < harrisKestenCriticalProb →
               M < kappaStar p α
+  z2_lattice_embedding_local_bridge_transfer :
+    ∀ _bridge : Z2LatticeEmbeddingLocalBridgeData,
+      ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
+        ∀ M : ℝ, ∃ ε : ℝ, 0 < ε ∧
+          ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
+            p < harrisKestenCriticalProb →
+              M < kappaStar p α
 
 /-- Build gate: the open Part 6 lattice-embedding target is calibrated
-against the current transfer layer and current-carrier obstructions.  The
-semantic target remains open until a genuine lattice/percolation carrier
-supplies both divergence and domination without the documented obstructions,
-or until the domination domain is repaired to avoid the current low-`p`
-empty-feasible-set branch. -/
+against the current transfer layer, repaired local-domination transfer layer,
+and current-carrier obstructions.  The semantic target remains open until a
+genuine lattice/percolation carrier instantiates the local bridge with
+divergence and near-`p_c` domination. -/
 def part6_lattice_embedding_frontier_payload :
     Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_graph_standard := rfl
@@ -363,6 +383,8 @@ def part6_lattice_embedding_frontier_payload :
     kappaStar_dominates_percolation_scaling_paper_Def
   transfer_interface :=
     gap_cognitive_threshold_part6
+  local_transfer_interface :=
+    gap_cognitive_threshold_part6_local
   lower_envelope_divergence_obstruction :=
     not_harrisKestenScalingFunction_diverges_at_pc_paper_Def
   hyperbolic_domination_obstruction :=
@@ -379,6 +401,8 @@ def part6_lattice_embedding_frontier_payload :
     not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier
   z2_lattice_embedding_bridge_transfer :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
+  z2_lattice_embedding_local_bridge_transfer :=
+    gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
 
 /-- Typed frontier for the open random supercritical `Z2_L`
 topological-cluster/phase target.  This does not close the semantic target:

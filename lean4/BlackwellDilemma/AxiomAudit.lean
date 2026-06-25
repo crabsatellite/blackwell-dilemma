@@ -146,6 +146,9 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_core
 #print axioms BlackwellDilemma.boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current_lower_bound
 #print axioms BlackwellDilemma.not_UnitCompatibleAboveThresholdLowerBoundConclusion_boxedTorusFullReachFlatOnlyZ2TopoClusterBridge_current
+#print axioms BlackwellDilemma.boxedTorusFullReachZ2TopoClusterBridge_current
+#print axioms BlackwellDilemma.boxedTorusFullReachZ2TopoClusterBridge_current_unit_compatible
+#print axioms BlackwellDilemma.not_boxedTorusFullReachComplementTopoLossData_flatOnlyDiagnostic
 #print axioms BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_frontier_payload
 #print axioms BlackwellDilemma.gap_trap_prevalence_above_threshold
 
@@ -770,7 +773,9 @@ namespace BlackwellDilemma.AxiomAudit
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part4
 #print axioms BlackwellDilemma.PaperSemanticGate.part4_lattice_p_monotonicity_frontier_payload
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part6
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part6_local
 #print axioms BlackwellDilemma.gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
+#print axioms BlackwellDilemma.gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge
 #print axioms BlackwellDilemma.not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction
 #print axioms BlackwellDilemma.not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling
 #print axioms BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_frontier_payload
@@ -2942,21 +2947,24 @@ for paper/external mathematical obligations. -/
 -- Harris-Kesten target: `not_harrisKestenScalingFunction_diverges_at_pc_paper_Def`
 -- shows it is identically zero on `p ≥ 0` because the unbounded high-α
 -- domain contains `α = 2`, whose `kappaStar` feasible set is empty.
--- The live Part 6 kernel layer is now the generic theorem
--- `kappaStar_diverges_at_pc_via_scaling_carrier`, which takes an explicit
--- replacement scaling carrier `s`, a proof that `s` diverges at `p_c`,
--- and a proof that `s p ≤ kappaStar p α` in the high-α regime. R467 supplies
--- a concrete hyperbolic replacement carrier and proves its divergence at
--- `p_c`; the remaining mathematical frontier is the domination theorem
--- relating that carrier to `kappaStar` in the paper's high-α regime. The old
--- lower-envelope scaling carrier remains only as a dead-end audit witness;
--- the false divergence claim is no longer kept as a separate Prop interface.
+-- The live Part 6 kernel layer keeps the old global-domination transfer
+-- `kappaStar_diverges_at_pc_via_scaling_carrier`, but R521 adds the repaired
+-- local-domination transfer `kappaStar_diverges_at_pc_via_local_scaling_carrier`:
+-- the divergence proof only needs `s p ≤ kappaStar p α` sufficiently close to
+-- `p_c`. R467 supplies a concrete hyperbolic replacement carrier and proves
+-- its divergence at `p_c`; the remaining mathematical frontier is the local
+-- near-`p_c` domination theorem for a paper-faithful lattice/percolation
+-- carrier. The old lower-envelope scaling carrier remains only as a dead-end
+-- audit witness; the false divergence claim is no longer kept as a separate
+-- Prop interface.
 #print axioms BlackwellDilemma.Infrastructure.hyperbolicBelowScaling_diverges_at
 #print axioms BlackwellDilemma.criticalHyperbolicScaling
 #print axioms BlackwellDilemma.criticalHyperbolicScaling_diverges_at_pc
 #print axioms BlackwellDilemma.not_criticalHyperbolicScaling_dominates_kappaStar_current
 #print axioms BlackwellDilemma.kappaStar_diverges_at_pc_via_scaling_carrier
+#print axioms BlackwellDilemma.kappaStar_diverges_at_pc_via_local_scaling_carrier
 #print axioms BlackwellDilemma.kappaStar_diverges_at_pc_paper_Def_pointwise
+#print axioms BlackwellDilemma.kappaStar_diverges_at_pc_paper_Def_pointwise_local
 #print axioms BlackwellDilemma.kappaStar_dominates_percolation_scaling_paper_Def
 #print axioms BlackwellDilemma.harrisKestenScalingFunction
 #print axioms BlackwellDilemma.not_harrisKestenScalingFunction_diverges_at_pc_paper_Def

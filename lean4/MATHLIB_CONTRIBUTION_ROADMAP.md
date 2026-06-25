@@ -139,15 +139,19 @@ that to the bridge level. The bridge-level obstructions
 `not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now prove that
 neither candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
 `part6_lattice_embedding_frontier_payload` machine-gates this
-transfer/obstruction frontier. The Part 6 repair is therefore a paper-faithful
-carrier/domain change, or another replacement carrier whose domination theorem
-avoids the low-`p` empty-feasible-set high-alpha branch, before there can be a live
-Cat 2 percolation-universality closure target. R518 adds
+transfer/obstruction frontier. R521 adds the repaired local-domination
+transfer `gap_cognitive_threshold_part6_local` and the local bridge transfer
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`; the
+Part 6 repair is therefore to instantiate that local bridge with a
+paper-faithful carrier whose domination theorem holds near `p_c`, before
+there can be a live Cat 2 percolation-universality closure target. R518 adds
 `Z2LatticeEmbeddingBridgeData`, making that future
 certificate shape explicit in Lean: it must name `SimpleGraph.Z2LatticeGraph`
 and provide a replacement scaling carrier with both the `DivergesAtBelowAtTop`
 proof and the high-α domination theorem consumed by
-`gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`. The
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`; R521's
+`Z2LatticeEmbeddingLocalBridgeData` is the preferred repaired certificate
+shape because the divergence proof only consumes near-`p_c` domination. The
 thirty-five dead-end
 ledger markers are tracked as `notInput`, not as theorem targets. Main paper
 theorem `#print axioms` output must reduce to Lean/Mathlib kernel axioms plus

@@ -256,10 +256,13 @@ current transfer/obstruction frontier in `PaperSemanticGate.lean`. R518 adds
 `Z2LatticeEmbeddingBridgeData` and
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`: a future
 certificate must name the standard `Z²` lattice graph and supply a replacement
-scaling carrier with both one-sided divergence and high-α domination. The
-remaining Harris-Kesten scaling work is therefore a paper-faithful
-carrier/domain repair, or a different replacement carrier with a valid
-domination theorem.
+scaling carrier with both one-sided divergence and high-α domination. R521
+adds the repaired local-domination transfer
+`gap_cognitive_threshold_part6_local` and the local bridge entrypoint
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`, so the
+remaining Harris-Kesten scaling work is to instantiate
+`Z2LatticeEmbeddingLocalBridgeData` with a paper-faithful carrier and a valid
+near-`p_c` domination theorem.
 `V_g` is now a well-founded concrete greedy traversal over the current
 canonical finite vertex carrier (`Vertex = Fin 5`), and the paper recursion
 laws `V_g_def_terminal` and `V_g_def_step` are current theorems.

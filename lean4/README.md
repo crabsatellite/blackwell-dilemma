@@ -601,11 +601,16 @@ unbounded high-alpha domination interface. The bridge-level exclusions
 `not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
 `not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now show that
 neither retired/current candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
-The remaining Part 6 repair is therefore a paper-faithful carrier/domain
-change, or another replacement carrier whose domination theorem avoids the
-low-`p` empty-feasible-set high-alpha branch. The current transfer and obstruction frontier is machine-gated by
-`part6_lattice_embedding_frontier_payload`. That repair is the precondition
-for any Harris-Kesten/Cardy/SLE formalisation to become a valid closure target.
+The Part 6 gate now also checks the repaired local-domination transfer
+`gap_cognitive_threshold_part6_local` and the local bridge entrypoint
+`gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`.
+The remaining Part 6 repair is therefore no longer the transfer-domain theorem
+itself; it is to instantiate `Z2LatticeEmbeddingLocalBridgeData` with a
+paper-faithful scaling carrier whose domination theorem holds near `p_c`.
+The current transfer and obstruction frontier is machine-gated by
+`part6_lattice_embedding_frontier_payload`. That local bridge instance is the
+precondition for any Harris-Kesten/Cardy/SLE formalisation to become a valid
+closure target.
 
 The five-state loss-shape existence bridge
 `L_interior_minimizer_exists_paper_Def` is now a theorem from the concrete
