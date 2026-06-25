@@ -663,7 +663,9 @@ carrier. It also gates
 `closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one`, so the closed-unit
 nonempty-domain repair is exactly the threshold certificate
 `alphaStar 0 p_c < 1`. The closed-unit local bridge contract now includes that
-threshold certificate, derives the nonempty-domain witness from it, and the gate also checks the bounded transfer theorem
+threshold certificate, derives the nonempty-domain witness from it, carries
+near-`p_c` feasible-set nonemptiness on the closed-unit paper domain, and the
+gate also checks the bounded transfer theorem
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge`
 for any future instance on `alphaStar 0 p_c < α <= 1`, plus
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness`,
@@ -671,8 +673,8 @@ which packages the derived nonempty-domain certificate into an actual
 paper-domain divergence witness.  The gate also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`,
 which binds the `Z^2` graph identity, scaling divergence, threshold
-certificate, local domination field, and witness projection into one
-paper-support theorem.
+certificate, local domination field, near-`p_c` feasible-set nonemptiness, and
+witness projection into one paper-support theorem.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` proves the current
 carrier cannot instantiate that bridge because its threshold certificate is
 impossible. The remaining Part 6 repair is therefore

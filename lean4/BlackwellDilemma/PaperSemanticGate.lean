@@ -61,7 +61,7 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local paper-support certificate, closed-unit local transfer and existential witness projection, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, and witness fields, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
+        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local paper-support certificate, closed-unit local transfer, closed-unit feasible-set nonemptiness, and existential witness projection, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, feasible-set nonemptiness, and witness fields, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
       closeRoute :=
         "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1 by proving alphaStar 0 p_c < 1 for the repaired carrier, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem." },
     { id := "topo_cluster_random_supercritical_z2",
@@ -450,6 +450,18 @@ structure Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_embedding_closed_unit_local_bridge_nonempty_alpha_domain :
     ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
       ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
+  z2_lattice_embedding_closed_unit_local_bridge_near_pc_feasible_nonempty :
+    forall _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
+      forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+        alpha <= 1 ->
+          Exists fun delta : Real =>
+            0 < delta /\
+              forall p : Real, harrisKestenCriticalProb - delta < p ->
+                p < harrisKestenCriticalProb ->
+                  Exists fun kappa : Real =>
+                    0 < kappa /\
+                      BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                        mean_estimate_gap p kappa
   z2_lattice_embedding_closed_unit_local_bridge_witness :
     ∀ _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
       ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
@@ -471,6 +483,16 @@ structure Part6LatticeEmbeddingFrontierPayload where
               forall p : Real, harrisKestenCriticalProb - delta < p ->
                 p < harrisKestenCriticalProb ->
                   bridge.scalingCarrier p <= kappaStar p alpha) /\
+      (forall alpha : Real,
+        alphaStar 0 harrisKestenCriticalProb < alpha -> alpha <= 1 ->
+          Exists fun delta : Real =>
+            0 < delta /\
+              forall p : Real, harrisKestenCriticalProb - delta < p ->
+                p < harrisKestenCriticalProb ->
+                  Exists fun kappa : Real =>
+                    0 < kappa /\
+                      BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                        mean_estimate_gap p kappa) /\
       Exists fun alpha : Real =>
         alphaStar 0 harrisKestenCriticalProb < alpha /\
         alpha <= 1 /\
@@ -495,9 +517,11 @@ paper-support certificate; if the closed-unit
 route is repaired, the payload now also checks that it yields an
 actual paper-domain divergence witness rather than only a pointwise transfer
 surface, that the bridge explicitly carries `alphaStar 0 p_c < 1`, that the
-closed-unit domain witness is derived from that certificate, that all
-closed-unit bridge fields are tied by one paper-support certificate, and that
-nonemptiness is exactly the same certificate. -/
+closed-unit domain witness is derived from that certificate, that near-`p_c`
+feasible-set nonemptiness is explicit inside the closed-unit paper domain,
+that all closed-unit bridge fields are tied by one paper-support certificate,
+and that alpha-domain nonemptiness is exactly the same threshold
+certificate. -/
 def part6_lattice_embedding_frontier_payload :
     Part6LatticeEmbeddingFrontierPayload where
   z2_lattice_graph_standard := rfl
@@ -553,6 +577,8 @@ def part6_lattice_embedding_frontier_payload :
     fun bridge => bridge.closed_unit_alphaStar_lt_one
   z2_lattice_embedding_closed_unit_local_bridge_nonempty_alpha_domain :=
     z2LatticeEmbeddingClosedUnitLocalBridgeData_nonempty_closed_unit_alpha_domain
+  z2_lattice_embedding_closed_unit_local_bridge_near_pc_feasible_nonempty :=
+    z2LatticeEmbeddingClosedUnitLocalBridgeData_near_pc_feasible_nonempty
   z2_lattice_embedding_closed_unit_local_bridge_witness :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_closed_unit_local_bridge_witness
   z2_lattice_embedding_closed_unit_local_bridge_paper_support_certificate :=

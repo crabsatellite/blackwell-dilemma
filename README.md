@@ -91,7 +91,8 @@ paper-facing divergence transfer.
 The gate also checks the single closed-unit paper-support certificate
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_certificate`, tying
 the `Z²` graph identity, scaling divergence, threshold certificate, local
-domination field, and paper-domain witness into one theorem.
+domination field, near-`p_c` feasible-set nonemptiness, and paper-domain
+witness into one theorem.
 See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the
