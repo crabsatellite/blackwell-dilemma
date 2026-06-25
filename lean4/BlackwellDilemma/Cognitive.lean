@@ -3446,6 +3446,55 @@ theorem kappaStar_two_eq_zero_of_nonneg_p {p : ℝ} (hp : 0 ≤ p) :
   exact Real.sInf_empty
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Near-`p_c` witness for the current unbounded Part 6 alpha-domain
+obstruction.
+
+The current high-alpha domination target quantifies over every
+`alpha >= alphaStar 0 p_c`.  The concrete point `alpha = 2` is in that domain,
+and every deleted left-neighbourhood of `p_c = 1/2` contains a non-negative
+`p` where the current `kappaStar p 2` branch is the empty-feasible-set value
+`0`.  This is the precise local obstruction that a repaired paper-faithful
+alpha/feasible-set domain must remove. -/
+theorem current_part6_unbounded_alpha_zero_branch_near_pc :
+    Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb <= alpha ∧
+        forall ε : Real, 0 < ε ->
+          Exists fun p : Real =>
+            harrisKestenCriticalProb - ε < p ∧
+            p < harrisKestenCriticalProb ∧
+            0 <= p ∧
+            kappaStar p alpha = 0 := by
+  refine ⟨2, ?_, ?_⟩
+  · have h_alpha_le_one : alphaStar 0 harrisKestenCriticalProb <= 1 :=
+      (gap_sentimental_immunity 0 harrisKestenCriticalProb (le_refl 0)).right.left
+    linarith
+  · intro ε hε
+    let δ : Real := min ε (1 / 4)
+    let p : Real := harrisKestenCriticalProb - δ / 2
+    have hδ_pos : 0 < δ := by
+      dsimp [δ]
+      exact lt_min hε (by norm_num)
+    have hδ_le_ε : δ <= ε := by
+      dsimp [δ]
+      exact min_le_left ε (1 / 4)
+    have hδ_le_quarter : δ <= (1 : Real) / 4 := by
+      dsimp [δ]
+      exact min_le_right ε (1 / 4)
+    have hp_left : harrisKestenCriticalProb - ε < p := by
+      dsimp [p]
+      have hδ_half_lt_ε : δ / 2 < ε := by nlinarith
+      linarith
+    have hp_right : p < harrisKestenCriticalProb := by
+      dsimp [p]
+      nlinarith
+    have hp_nonneg : 0 <= p := by
+      dsimp [p]
+      unfold harrisKestenCriticalProb
+      nlinarith
+    exact ⟨p, hp_left, hp_right, hp_nonneg,
+      kappaStar_two_eq_zero_of_nonneg_p hp_nonneg⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- The current Harris-Kesten scaling carrier is identically zero on `p ≥ 0`.
 
     Reason: the lower envelope ranges over all `α ≥ α*(0, p_c)`. Since
