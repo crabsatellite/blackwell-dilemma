@@ -564,6 +564,8 @@ and by
 `firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero`.
 The gate now also includes
 `firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`.
+It further gates the combined certificate
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
 Thus its selected event is reachability-linked to the boxed-torus base
 horizontal edge, but its giant-restricted topological loss is exactly zero and
 admits no positive uniform lower-bound certificate, which is why it remains

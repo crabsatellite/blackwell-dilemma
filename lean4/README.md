@@ -657,7 +657,9 @@ plus
 `firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`,
 so the current witness is explicitly zero on its selected giant-restricted
 topological loss and cannot provide a positive uniform giant-restricted lower
-bound. This proves the repaired contract is satisfiable and linked to the
+bound. The gate packages these current compatibility and not-closing facts as
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+This proves the repaired contract is satisfiable and linked to the
 finite reachable-set semantics, but it is still deliberately a one-edge
 cylinder event rather than the paper's random finite `Z2_L` giant-component
 carrier, so the paper semantic gate remains `closed=3 open=2`.

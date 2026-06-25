@@ -412,7 +412,10 @@ reachable set on the selected event. The same calibration now proves
 then turns that into
 `firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`,
 so the current witness has zero topological loss on its selected giant event
-and cannot provide a positive uniform giant-restricted lower bound. This is a
+and cannot provide a positive uniform giant-restricted lower bound. The gate
+also packages this current compatibility and not-closing surface as
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+This is a
 reachability and zero-loss calibration for the repaired interface, not the
 final paper theorem, because the witness remains a one-edge cylinder rather
 than the genuine random finite `Z^2_L` giant-component carrier.

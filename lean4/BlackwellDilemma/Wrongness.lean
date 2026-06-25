@@ -16176,6 +16176,95 @@ theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_paper_support :
   randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current
 
+/-- Combined calibration certificate for the finite first-edge repaired
+compatibility witness.
+
+This theorem packages the facts that make the witness useful but not
+paper-closing: it has the repaired bridge paper-support surface at `p = 3/4`,
+its selected event is the boxed-torus base horizontal edge cylinder, that event
+reaches the corresponding target, the selected giant-restricted topological
+loss is identically zero, and the same witness cannot supply a positive
+uniform giant-restricted lower bound.  It also records the compatible flat
+lower-bound and giant-event-mass certificates. -/
+def FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate :
+    Prop :=
+  firstEdgeOpenGiantClosedTopoLossRepairedBridge_current.family =
+      firstEdgeOpenGiantClosedTopoLossFamily /\
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current.supercriticalProbability =
+      ((3 : Real) / 4) /\
+    RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current /\
+    (forall L : Nat,
+      boxedTorusFlattenEdgeIdx L (boxedTorusBaseHorizontalEdge L) =
+        firstEdgeIdx (boxedTorusFlatGraphN L)) /\
+    (forall L : Nat,
+      forall omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)),
+        omega ∈
+            (firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+              (boxedTorusFlatGraphN L) ↔
+          omega (boxedTorusFlattenEdgeIdx L
+            (boxedTorusBaseHorizontalEdge L)) = true) /\
+    (forall L : Nat,
+      forall omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)),
+        omega ∈
+            (firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+              (boxedTorusFlatGraphN L) ->
+          Membership.mem
+            (oracleFiniteBondGraphReachableSet
+              (boxedTorusOracleFiniteBondGraphData L)
+              (boxedTorusFlatGraphN L) omega)
+            (boxedTorusFlattenMainVertex L (boxedTorusBaseHorizontalTarget L))) /\
+    (forall L : Nat,
+      forall omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)),
+        omega ∈
+            (firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+              (boxedTorusFlatGraphN L) ->
+          (firstEdgeOpenGiantClosedTopoLossFamily L).topoLossKernel
+            (boxedTorusFlatGraphN L) omega = 0) /\
+    (forall L : Nat,
+      expectedTopoLossOnGiantOn
+        (firstEdgeOpenGiantClosedTopoLossFamily L)
+        (boxedTorusFlatGraphN L) ((3 : Real) / 4) = 0) /\
+    Not (Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnGiantOn
+                (firstEdgeOpenGiantClosedTopoLossFamily L)
+                (boxedTorusFlatGraphN L) ((3 : Real) / 4)) /\
+    (Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              expectedTopoLossOnData (firstEdgeOpenGiantClosedTopoLossFamily L)
+                (boxedTorusFlatGraphN L) ((3 : Real) / 4)) /\
+    Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        Exists fun L0 : Nat =>
+          forall L : Nat, L0 <= L ->
+            c <=
+              percRestrictedExpectation (1 - ((3 : Real) / 4))
+                ((firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+                  (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real))
+
+theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate :
+    FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate := by
+  exact ⟨rfl,
+    rfl,
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_paper_support,
+    boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx,
+    firstEdgeOpenGiantClosedTopoLossFamily_giant_event_boxedTorusBaseHorizontal_mem_iff,
+    firstEdgeOpenGiantClosedTopoLossFamily_giant_event_baseHorizontalTarget_reachable,
+    firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant,
+    firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero,
+    firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters,
+    firstEdgeOpenGiantClosedTopoLossFamily_flat_lower_bound_at_three_quarters,
+    firstEdgeOpenGiantClosedTopoLossFamily_giant_event_mass_lower_bound_at_three_quarters⟩
+
 /-- Current-contract obstruction for the random-supercritical `Z^2_L`
 topological-cluster bridge.
 
