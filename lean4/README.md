@@ -13,8 +13,11 @@ mapping). Complete paper-semantic closure is tracked separately by
 [`BlackwellDilemma/PaperSemanticGate.lean`](BlackwellDilemma/PaperSemanticGate.lean):
 the current open semantic targets are the lattice-specific Theorem 4.1 Part 4
 statement, the lattice-IDP embedding route for Part 6, and the random
-supercritical `Z2_L` topological cluster/phase carrier.  The
-threshold-five-state oracle-routing target is now closed by
+supercritical `Z2_L` topological cluster/phase carrier.  The Part 4 bounded
+kernel frontier is machine-gated by
+`part4_lattice_p_monotonicity_frontier_payload`, but the lattice/domain carrier
+bridge remains open.  The threshold-five-state oracle-routing target is now
+closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation
 `FiveState.not_current_kappaAgent_highKappa_oracle_at_p0` remains as diagnostic

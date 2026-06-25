@@ -46,6 +46,14 @@ embedding, and the random supercritical `Z2_L` topological cluster/phase
 carrier. These are not hidden source axioms or proof escapes; they are the
 remaining manuscript-semantics-to-kernel correspondence work.
 
+Current Part 4 frontier: `part4_lattice_p_monotonicity_frontier_payload`
+machine-gates the closed bounded theorem surface
+(`mean_estimate_gap_antitone_in_p_paper_Def`,
+`gap_cognitive_threshold_part4`, and
+`FiveState.gap_p_monotonicity_bounded`).  The semantic target remains open
+because the paper-facing lattice/domain carrier and monotone-coupling bridge
+are not yet a theorem.
+
 Current iteration result: the high-κ five-state oracle-routing target is now
 closed, not merely diagnosed. `FiveState.fiveStateOracleWelfare` formalises
 the R10 value `1 - 0.4p`, and

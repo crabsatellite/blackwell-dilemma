@@ -61,7 +61,7 @@
 | `prop:interior-optimum` (5.2) | 769 | `gap_interior_optimum` | Canonical.lean:1430 |
 | `prop:two-regime-five-state` (paper R10 rewrite of former `prop:three-regime-five-state`) | 817 | Current standard-only theorem surfaces for the six reversal clauses plus cognitive augmentation and sufficient cognition; paper-facing `gap_two_regime_*` aliases cover the R10 relabeling and are now checked by the typed gate payload `r10_two_regime_label_recalibration_payload`, with historical `gap_three_regime_*` names retained for traceability | Canonical.lean:2692,2798,2869,2934,3218,3385,3401,3431,3455,3534; PaperSemanticGate.lean:135 |
 | `prop:threshold-five-state` (paper R10 rewrite to "Cognitive Sufficiency on the 5-State Instance") | 866 | Current standard-only theorem surfaces `gap_threshold_fiveState_greedy_has_interior_optimum`, `gap_threshold_fiveState_kappa_above_kstar`, and `gap_threshold_fiveState_smooth_transition`; paper R10 high-κ oracle-routing clause is now closed by the one-edge signal-conditional carrier `highKappaOracleRoutingWelfare_eq_oracle`; the current neutral κ-agent refutation `not_current_kappaAgent_highKappa_oracle_at_p0` remains as diagnostic evidence for the retired route | Canonical.lean:3736,3853,4019,4058,4095 |
-| `prop:p-monotonicity-five-state` | 884 | `gap_p_monotonicity_bounded` + `gap_kappaStar_at_two_thirds` (latter is mathematically true but its `kappaStar_fiveState` referent is SUPERSEDED in paper R10; see Canonical.lean line ~2105 deprecation block) | Canonical.lean:3553,3637 |
+| `prop:p-monotonicity-five-state` | 884 | `gap_p_monotonicity_bounded` + `gap_kappaStar_at_two_thirds` (latter is mathematically true but its `kappaStar_fiveState` referent is SUPERSEDED in paper R10; see Canonical.lean line ~2105 deprecation block) | Canonical.lean:3639,3723 |
 | `prop:complementarity` | 933 | `gap_information_knowledge_complementarity` | Bayesian.lean:90 |
 | `prop:bayesian-naive-five-state` | 951 | Parts (i)/(ii)/(iii): `gap_bayesian_naive_routing_threshold` + `gap_bayesian_naive_reversal_absent` + `gap_bayesian_naive_reversal_present`; current kernel witness: `agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness_current` | Canonical.lean:4113,4220,4293,4268 |
 | `prop:error-compounding` | 1037 | `gap_error_compounding_part1` + `gap_error_compounding_part2` | GeneralGraphs.lean:1939,2138 |
@@ -153,29 +153,20 @@ feeds the public `gap_bayesian_naive_reversal_present` theorem.
 and on lattices, the threshold κ* is non-decreasing in p."
 
 **Lean encoding**:
-- `gap_cognitive_threshold_part4_DEAD_END_by_junk_value` (Cognitive.lean:642)
-  — `def : Prop` (DEAD-END marker, NOT an axiom) — the universal-form claim
-  `∀ p₁ ≤ p₂, kappaStar p₁ ≤ kappaStar p₂` is mathematically false without
-  a `Set.Nonempty` premise on the feasible set.
-- `gap_p_monotonicity_bounded` (Canonical.lean:3553) — **covers the
+- `gap_cognitive_threshold_part4` (Cognitive.lean:1059) — strict
+  kernel-pure bounded theorem on the abstract `kappaStar` carrier, with the
+  paper's implicit threshold-existence premise made explicit.
+- `gap_p_monotonicity_bounded` (Canonical.lean:3639) — **covers the
   constructive-instance form** for the 5-state IDP (paper's sub-claim 4a).
-- ⚠️ **Lattice sub-claim (4b)** is NOT directly covered by a Lean theorem
-  (paper's "on lattices, κ* is non-decreasing in p" remains unencoded).
-
-**R148 Action TAKEN**: Added `gap_cognitive_threshold_part4_lattice_DEAD_END_by_unencoded_lattice`
-(Cognitive.lean:642) as a `def : Prop` (DEAD-END marker, NOT axiom — zero
-kernel impact) encoding the paper-restricted lattice form with explicit
-`Set.Nonempty` premise. The marker provides:
-* Cross-reference target for paper line 494 lattice sub-claim
-* Explicit `Set.Nonempty` premise (matching the constructive-instance
-  pattern in `gap_p_monotonicity_bounded`)
-* Future closure path documented (via Phase 6 lattice infrastructure)
-
-Both `gap_cognitive_threshold_part4_DEAD_END_by_junk_value` (universal
-form, false) and `gap_cognitive_threshold_part4_lattice_DEAD_END_by_unencoded_lattice`
-(lattice-restricted, paper-faithful) coexist as DEAD-END markers,
-documenting both the over-strong universal claim's failure and the
-paper's actual restricted-scope claim's pending Lean encoding.
+- `part4_lattice_p_monotonicity_frontier_payload`
+  (PaperSemanticGate.lean:110) now machine-gates the current closed frontier:
+  `mean_estimate_gap_antitone_in_p_paper_Def`,
+  `gap_cognitive_threshold_part4`, and `gap_p_monotonicity_bounded`.
+- ⚠️ **Lattice sub-claim (4b)** is still not directly covered by a
+  lattice/domain-carrier theorem.  The remaining work is to refine the
+  abstract bounded route into an explicit lattice/percolation
+  monotone-coupling carrier theorem, not to repair a source axiom or proof
+  escape.
 
 ## Calibration Conclusions
 

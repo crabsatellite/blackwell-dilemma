@@ -12,6 +12,7 @@
   calibration matrix to overclaim complete paper-semantic closure.
 -/
 
+import BlackwellDilemma.Cognitive
 import BlackwellDilemma.Canonical
 
 namespace BlackwellDilemma
@@ -45,9 +46,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 4",
       status := SemanticStatus.open,
       shortReason :=
-        "The lattice-specific p-monotonicity statement is still not a closed paper-faithful theorem.",
+        "The bounded abstract and constructive-instance p-monotonicity payload is gated, but the lattice/domain carrier bridge is still not a closed paper-faithful theorem.",
       closeRoute :=
-        "Build a lattice/domain carrier where kappaStar monotonicity follows from a proved graph/percolation monotone-coupling theorem." },
+        "Current typed frontier: part4_lattice_p_monotonicity_frontier_payload. To close: replace the abstract bounded route with an explicit lattice/domain carrier where kappaStar monotonicity follows from a proved graph/percolation monotone-coupling theorem." },
     { id := "r10_threshold_five_state_high_kappa_routing",
       paperLabel := "prop:threshold-five-state clause iii",
       status := SemanticStatus.closed,
@@ -81,6 +82,39 @@ def paperSemanticOpenCount : Nat :=
 
 def paperSemanticClosedCount : Nat :=
   closedSemanticTargets.length
+
+/-- Typed frontier for the open Theorem 4.1 Part 4 lattice p-monotonicity
+target.  This does not close the lattice semantic target: it machine-checks
+the already closed kernel payload that the final lattice carrier must refine.
+The remaining gap is the lattice/domain carrier bridge, not the bounded
+`kappaStar` monotonicity calculus. -/
+structure Part4LatticePMonotonicityFrontierPayload where
+  mean_gap_antitone :
+    ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      ∀ κ : ℝ, 0 < κ →
+        mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ
+  abstract_bounded_kappaStar_monotone :
+    ∀ α p₁ p₂ : ℝ, p₁ ≤ p₂ →
+      (∃ κ : ℝ, 0 < κ ∧
+        BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
+          mean_estimate_gap p₂ κ) →
+      kappaStar p₁ α ≤ kappaStar p₂ α
+  constructive_five_state_bounded_monotone :
+    ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → p₂ < 1 →
+      FiveState.kappaStar_fiveState p₁ ≤
+        FiveState.kappaStar_fiveState p₂
+
+/-- Build gate: the open Part 4 lattice target is calibrated against the
+current closed kernel payload.  The semantic target remains open until this
+frontier is refined to a genuine lattice/domain carrier theorem. -/
+def part4_lattice_p_monotonicity_frontier_payload :
+    Part4LatticePMonotonicityFrontierPayload where
+  mean_gap_antitone :=
+    mean_estimate_gap_antitone_in_p_paper_Def
+  abstract_bounded_kappaStar_monotone :=
+    gap_cognitive_threshold_part4
+  constructive_five_state_bounded_monotone :=
+    FiveState.gap_p_monotonicity_bounded
 
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
