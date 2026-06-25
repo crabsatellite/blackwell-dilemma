@@ -205,8 +205,12 @@ with the parameterized `kappaStar_diverges_at_pc_via_scaling_carrier` transfer
 interface. R467 proves the divergence half for the explicit hyperbolic carrier
 `criticalHyperbolicScaling`, but R468 proves that this exact carrier cannot
 satisfy the current unbounded high-alpha domination target.
-`part6_lattice_embedding_frontier_payload` now machine-gates this current
-transfer/obstruction frontier in `PaperSemanticGate.lean`. R518 adds
+The bridge-level theorems
+`not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
+`not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now prove
+that neither candidate can instantiate the current `Z2LatticeEmbeddingBridgeData`
+interface. `part6_lattice_embedding_frontier_payload` machine-gates this
+current transfer/obstruction frontier in `PaperSemanticGate.lean`. R518 adds
 `Z2LatticeEmbeddingBridgeData` and
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`: a future
 certificate must name the standard `Z²` lattice graph and supply a replacement

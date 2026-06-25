@@ -100,12 +100,16 @@ R467 instantiates the divergence half with the explicit hyperbolic carrier
 carrier cannot satisfy the current unbounded high-alpha domination target:
 `not_criticalHyperbolicScaling_dominates_kappaStar_current` gives the
 `alpha = 2`, `p = 0` counterexample, where the carrier is positive but
-`kappaStar 0 2 = 0`. `part6_lattice_embedding_frontier_payload` now
-machine-gates this transfer/obstruction frontier. The Part 6 repair is
-therefore a paper-faithful carrier/domain change, or another replacement
-carrier whose domination theorem avoids the empty-feasible-set high-alpha
-branch, before there can be a live Cat 2 percolation-universality closure
-target. R518 adds `Z2LatticeEmbeddingBridgeData`, making that future
+`kappaStar 0 2 = 0`. The bridge-level obstructions
+`not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
+`not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now prove that
+neither candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
+`part6_lattice_embedding_frontier_payload` machine-gates this
+transfer/obstruction frontier. The Part 6 repair is therefore a paper-faithful
+carrier/domain change, or another replacement carrier whose domination theorem
+avoids the empty-feasible-set high-alpha branch, before there can be a live
+Cat 2 percolation-universality closure target. R518 adds
+`Z2LatticeEmbeddingBridgeData`, making that future
 certificate shape explicit in Lean: it must name `SimpleGraph.Z2LatticeGraph`
 and provide a replacement scaling carrier with both the `DivergesAtBelowAtTop`
 proof and the high-α domination theorem consumed by

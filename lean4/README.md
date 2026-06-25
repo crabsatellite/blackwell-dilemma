@@ -528,10 +528,13 @@ supplies an explicit hyperbolic replacement carrier
 cannot satisfy the current unbounded high-alpha domination target:
 `not_criticalHyperbolicScaling_dominates_kappaStar_current` uses the
 `alpha = 2`, `p = 0` counterexample, where the hyperbolic carrier is positive
-but `kappaStar 0 2 = 0`. The remaining Part 6 repair is therefore a
-paper-faithful carrier/domain change, or another replacement carrier whose
-domination theorem avoids the empty-feasible-set high-alpha branch. The
-current transfer and obstruction frontier is machine-gated by
+but `kappaStar 0 2 = 0`. The bridge-level exclusions
+`not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
+`not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now show that
+neither retired/current candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
+The remaining Part 6 repair is therefore a paper-faithful carrier/domain
+change, or another replacement carrier whose domination theorem avoids the
+empty-feasible-set high-alpha branch. The current transfer and obstruction frontier is machine-gated by
 `part6_lattice_embedding_frontier_payload`. That repair is the precondition
 for any Harris-Kesten/Cardy/SLE formalisation to become a valid closure target.
 

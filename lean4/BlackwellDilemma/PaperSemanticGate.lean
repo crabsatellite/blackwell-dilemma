@@ -215,6 +215,12 @@ structure Part6LatticeEmbeddingFrontierPayload where
     ¬ ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb ≤ α →
       ∀ p : ℝ, p < harrisKestenCriticalProb →
         criticalHyperbolicScaling p ≤ kappaStar p α
+  lower_envelope_bridge_obstruction :
+    ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+      bridge.scalingCarrier = harrisKestenScalingFunction
+  hyperbolic_bridge_obstruction :
+    ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+      bridge.scalingCarrier = criticalHyperbolicScaling
   z2_lattice_embedding_bridge_transfer :
     ∀ _bridge : Z2LatticeEmbeddingBridgeData,
       ∀ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α →
@@ -240,6 +246,10 @@ def part6_lattice_embedding_frontier_payload :
     not_harrisKestenScalingFunction_diverges_at_pc_paper_Def
   hyperbolic_domination_obstruction :=
     not_criticalHyperbolicScaling_dominates_kappaStar_current
+  lower_envelope_bridge_obstruction :=
+    not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction
+  hyperbolic_bridge_obstruction :=
+    not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling
   z2_lattice_embedding_bridge_transfer :=
     gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge
 

@@ -2790,6 +2790,34 @@ theorem not_criticalHyperbolicScaling_dominates_kappaStar_current :
   rw [hk_zero] at hle
   linarith
 
+omit [DiagnosticSignalHypothesisData] in
+/-- Bridge-level obstruction: the retired lower-envelope
+    `harrisKestenScalingFunction` cannot instantiate the Part 6 `Z²`
+    lattice-embedding bridge, because the bridge requires a scaling carrier
+    that actually diverges at `p_c`. -/
+theorem not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction :
+    ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+        bridge.scalingCarrier = harrisKestenScalingFunction := by
+  rintro ⟨bridge, hscaling⟩
+  have hdiv :
+      BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+        harrisKestenScalingFunction harrisKestenCriticalProb := by
+    simpa [hscaling] using bridge.scaling_diverges
+  exact not_harrisKestenScalingFunction_diverges_at_pc_paper_Def hdiv
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Bridge-level obstruction: the explicit hyperbolic prototype cannot
+    instantiate the Part 6 `Z²` lattice-embedding bridge, because the bridge
+    requires high-`α` domination of `kappaStar`, and that domination is
+    kernel-refuted for the current public carrier. -/
+theorem not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling :
+    ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+        bridge.scalingCarrier = criticalHyperbolicScaling := by
+  rintro ⟨bridge, hscaling⟩
+  apply not_criticalHyperbolicScaling_dominates_kappaStar_current
+  intro α hα p hp
+  simpa [hscaling] using bridge.scaling_dominates_kappa α hα p hp
+
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality
 
