@@ -3495,6 +3495,53 @@ theorem current_part6_unbounded_alpha_zero_branch_near_pc :
       kappaStar_two_eq_zero_of_nonneg_p hp_nonneg⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Generic bridge obstruction extracted from the current zero-branch witness.
+
+Any unbounded local Part 6 bridge whose domination field ranges over every
+`alpha >= alphaStar 0 p_c` is incompatible with a near-`p_c` zero branch:
+the bridge's divergence field makes its scaling carrier positive near `p_c`,
+while the local domination field would force it below a zero `kappaStar`
+branch at one of those near-critical points. -/
+theorem current_part6_unbounded_alpha_zero_branch_blocks_local_bridge
+    (hzero : Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb <= alpha ∧
+        forall ε : Real, 0 < ε ->
+          Exists fun p : Real =>
+            harrisKestenCriticalProb - ε < p ∧
+            p < harrisKestenCriticalProb ∧
+            0 <= p ∧
+            kappaStar p alpha = 0) :
+    Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) := by
+  rintro ⟨bridge⟩
+  rcases hzero with ⟨alpha, halpha, hzero_near⟩
+  rcases bridge.scaling_diverges 0 with
+    ⟨εs, hεs_pos, hs_near⟩
+  rcases bridge.scaling_dominates_kappa_near_pc alpha halpha with
+    ⟨εd, hεd_pos, hdom_near⟩
+  let ε : Real := min εs εd
+  have hε_pos : 0 < ε := by
+    dsimp [ε]
+    exact lt_min hεs_pos hεd_pos
+  rcases hzero_near ε hε_pos with
+    ⟨p, hp_left, hp_right, _hp_nonneg, hkappa_zero⟩
+  have hp_left_s : harrisKestenCriticalProb - εs < p := by
+    have hε_le_s : ε <= εs := by
+      dsimp [ε]
+      exact min_le_left εs εd
+    linarith
+  have hp_left_d : harrisKestenCriticalProb - εd < p := by
+    have hε_le_d : ε <= εd := by
+      dsimp [ε]
+      exact min_le_right εs εd
+    linarith
+  have hscale_pos : 0 < bridge.scalingCarrier p :=
+    hs_near p hp_left_s hp_right
+  have hscale_le : bridge.scalingCarrier p <= kappaStar p alpha :=
+    hdom_near p hp_left_d hp_right
+  rw [hkappa_zero] at hscale_le
+  linarith
+
+omit [DiagnosticSignalHypothesisData] in
 /-- The current Harris-Kesten scaling carrier is identically zero on `p ≥ 0`.
 
     Reason: the lower envelope ranges over all `α ≥ α*(0, p_c)`. Since
@@ -3688,57 +3735,8 @@ bridge: the bridge statement itself needs the paper-faithful `α` domain or an
 explicit feasible-set/nonempty-domain premise. -/
 theorem not_z2_lattice_embedding_local_bridge_current :
     Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) := by
-  rintro ⟨bridge⟩
-  have h_alpha_le_one :
-      alphaStar 0 harrisKestenCriticalProb <= 1 :=
-    (gap_sentimental_immunity 0 harrisKestenCriticalProb (le_refl 0)).right.left
-  have h_alpha_le_two :
-      alphaStar 0 harrisKestenCriticalProb <= 2 := by
-    linarith
-  rcases bridge.scaling_diverges 0 with
-    ⟨ε, hε_pos, hε_near⟩
-  rcases bridge.scaling_dominates_kappa_near_pc
-      2 h_alpha_le_two with
-    ⟨δ, hδ_pos, hδ_near⟩
-  let ρ : Real := min (min ε δ) (1 / 4)
-  let p : Real := harrisKestenCriticalProb - ρ / 2
-  have hρ_pos : 0 < ρ := by
-    dsimp [ρ]
-    exact lt_min (lt_min hε_pos hδ_pos) (by norm_num)
-  have hρ_le_ε : ρ <= ε := by
-    dsimp [ρ]
-    exact le_trans (min_le_left (min ε δ) (1 / 4))
-      (min_le_left ε δ)
-  have hρ_le_δ : ρ <= δ := by
-    dsimp [ρ]
-    exact le_trans (min_le_left (min ε δ) (1 / 4))
-      (min_le_right ε δ)
-  have hρ_le_quarter : ρ <= (1 : Real) / 4 := by
-    dsimp [ρ]
-    exact min_le_right (min ε δ) (1 / 4)
-  have hp_left_ε : harrisKestenCriticalProb - ε < p := by
-    dsimp [p]
-    have hρ_half_lt_ε : ρ / 2 < ε := by nlinarith
-    linarith
-  have hp_left_δ : harrisKestenCriticalProb - δ < p := by
-    dsimp [p]
-    have hρ_half_lt_δ : ρ / 2 < δ := by nlinarith
-    linarith
-  have hp_right : p < harrisKestenCriticalProb := by
-    dsimp [p]
-    nlinarith
-  have hp_nonneg : 0 <= p := by
-    dsimp [p]
-    unfold harrisKestenCriticalProb
-    nlinarith
-  have hscale_pos : 0 < bridge.scalingCarrier p :=
-    hε_near p hp_left_ε hp_right
-  have hscale_le : bridge.scalingCarrier p <= kappaStar p 2 :=
-    hδ_near p hp_left_δ hp_right
-  have hkappa_zero : kappaStar p 2 = 0 :=
-    kappaStar_two_eq_zero_of_nonneg_p hp_nonneg
-  rw [hkappa_zero] at hscale_le
-  linarith
+  exact current_part6_unbounded_alpha_zero_branch_blocks_local_bridge
+    current_part6_unbounded_alpha_zero_branch_near_pc
 
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality

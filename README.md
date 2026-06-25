@@ -66,7 +66,8 @@ domination interface, a repaired local near-`p_c` domination transfer, a
 closed-unit local transfer on the explicit `alpha*(0,p_c) < alpha <= 1`
 domain, a closed-unit existential paper-domain divergence witness projection,
 the explicit near-`p_c` zero branch for the current unbounded `alpha = 2`
-domain, and the current local-bridge impossibility theorem. It also checks the exact
+domain, the theorem that this zero branch blocks the current local bridge
+shape, and the current local-bridge impossibility theorem. It also checks the exact
 closed-unit domain criterion
 `(exists alpha, alpha*(0,p_c) < alpha <= 1) iff alpha*(0,p_c) < 1` and the current
 `alphaStar = 1` degeneracy, which makes the paper-bounded `α > α*`, `α <= 1`

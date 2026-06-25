@@ -623,7 +623,10 @@ unbounded high-alpha domination interface. It also gates
 `current_part6_unbounded_alpha_zero_branch_near_pc`, which packages the
 near-`p_c` form of the obstruction: `alpha = 2` is in the current unbounded
 domain, and every deleted left-neighbourhood of `p_c` contains a non-negative
-`p` with `kappaStar p 2 = 0`. The bridge-level exclusions
+`p` with `kappaStar p 2 = 0`. The gate also checks
+`current_part6_unbounded_alpha_zero_branch_blocks_local_bridge`, which turns
+that witness into a generic obstruction to the current unbounded local bridge
+shape. The bridge-level exclusions
 `not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
 `not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now show that
 neither retired/current candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
@@ -634,7 +637,8 @@ It also checks `not_z2_lattice_embedding_local_bridge_current`, which proves
 the current local bridge shape is still uninhabitable: the unbounded `α` domain
 includes `α = 2`, while the new near-`p_c` zero-branch witness shows
 `kappaStar p 2 = 0` at non-negative left-neighbourhood points where any
-divergent scaling carrier is positive. The same gate now
+divergent scaling carrier is positive; the blocker theorem is now the proof
+spine for this obstruction. The same gate now
 checks `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, showing that a naive
 paper-bounded domain repair `α <= 1` would be empty on the current scalar

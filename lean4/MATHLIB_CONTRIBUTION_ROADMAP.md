@@ -142,14 +142,18 @@ neither candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
 transfer/obstruction frontier, including
 `current_part6_unbounded_alpha_zero_branch_near_pc`: `alpha = 2` lies in the
 current unbounded domain and every deleted left-neighbourhood of `p_c`
-contains a non-negative `p` with `kappaStar p 2 = 0`. R521 adds the repaired local-domination
+contains a non-negative `p` with `kappaStar p 2 = 0`, plus
+`current_part6_unbounded_alpha_zero_branch_blocks_local_bridge`, which turns
+that witness into the generic obstruction to the current local bridge shape.
+R521 adds the repaired local-domination
 transfer `gap_cognitive_threshold_part6_local` and the local bridge transfer
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`; the
 current gate now also proves `not_z2_lattice_embedding_local_bridge_current`.
 Thus the local transfer is usable, but the present local bridge contract is
 still uninhabitable because its unbounded `α` domain includes `α = 2`, where
 the concrete `kappaStar p 2` branch is zero at near-`p_c` non-negative
-left-neighbourhood points. The same gate now
+left-neighbourhood points; the blocker theorem is now the proof spine for
+this obstruction. The same gate now
 proves `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so a naive closed-unit
 paper-domain repair is also empty on the current scalar carrier. The

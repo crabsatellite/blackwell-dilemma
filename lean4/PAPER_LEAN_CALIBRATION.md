@@ -264,8 +264,10 @@ current gate also proves `not_z2_lattice_embedding_local_bridge_current`: the
 unbounded `α` domain still includes `α = 2`, where the current concrete
 `kappaStar p 2` branch is zero at non-negative points in every deleted
 left-neighbourhood of `p_c`; this exact zero-branch witness is now separately
-machine-gated by `current_part6_unbounded_alpha_zero_branch_near_pc`, so no
-divergent near-`p_c` scaling carrier can satisfy the present local bridge. The gate also proves
+machine-gated by `current_part6_unbounded_alpha_zero_branch_near_pc`, and
+`current_part6_unbounded_alpha_zero_branch_blocks_local_bridge` turns that
+witness into the generic obstruction, so no divergent near-`p_c` scaling
+carrier can satisfy the present local bridge. The gate also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The
