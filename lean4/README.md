@@ -807,6 +807,12 @@ The gate now also names the full paper-closing surfaces as
 `not_part6_full_paper_closing_support_current`; this makes the current
 unbounded/closed-unit non-closure a direct Lean theorem about the paper support
 surface rather than only a collection of bridge-level failures.
+It also gates `Part6FullPaperClosingDivergenceWitness`,
+`part6_full_paper_closing_support_divergence_witness`,
+`not_part6_full_paper_closing_divergence_witness_current`, and
+`not_part6_full_paper_closing_support_current_via_divergence_witness`, so full
+support must expose the same-`alpha` divergence output required by the paper
+and the current carrier is refuted at that projected output layer.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support

@@ -291,6 +291,12 @@ certificate. The gate also names the full current paper-closing surfaces
 `Part6FullPaperClosingSupport`, and proves
 `not_part6_full_paper_closing_support_current`; thus the remaining Part 6 gap
 cannot be closed by merely selecting either existing current route. It also
+gates `Part6FullPaperClosingDivergenceWitness`,
+`part6_full_paper_closing_support_divergence_witness`,
+`not_part6_full_paper_closing_divergence_witness_current`, and
+`not_part6_full_paper_closing_support_current_via_divergence_witness`, so any
+full paper-closing support must project to the actual same-`alpha` divergence
+output and the current carrier is machine-refuted at that output layer. It also
 gates `Part6FullPaperClosingBridgeRoute`,
 `part6_full_paper_closing_support_of_bridge_route`, and
 `not_part6_full_paper_closing_bridge_route_current`, so a future inhabited

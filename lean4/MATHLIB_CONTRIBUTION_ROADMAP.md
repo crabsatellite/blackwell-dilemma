@@ -176,6 +176,12 @@ names `UnboundedPart6FullPaperClosingSupport`,
 `Part6FullPaperClosingSupport`, then proves
 `not_part6_full_paper_closing_support_current`; the current formalized surface
 therefore rules out both existing routes as complete paper-closing supports.
+It also gates `Part6FullPaperClosingDivergenceWitness`,
+`part6_full_paper_closing_support_divergence_witness`,
+`not_part6_full_paper_closing_divergence_witness_current`, and
+`not_part6_full_paper_closing_support_current_via_divergence_witness`, so the
+future support theorem has to project to a real same-`alpha` divergence output
+and the current carrier is refuted at that projected output layer.
 It also gates `Part6FullPaperClosingBridgeRoute`,
 `part6_full_paper_closing_support_of_bridge_route`, and
 `not_part6_full_paper_closing_bridge_route_current`, pinning the future
