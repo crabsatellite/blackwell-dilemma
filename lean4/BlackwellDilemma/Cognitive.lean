@@ -4510,6 +4510,20 @@ theorem not_z2_lattice_embedding_local_bridge_current :
   exact current_part6_unbounded_alpha_zero_branch_blocks_local_bridge
     current_part6_unbounded_alpha_zero_branch_near_pc
 
+omit [DiagnosticSignalHypothesisData] in
+/-- Paired current-route obstruction certificate for the open Part 6
+lattice-embedding frontier.
+
+The public carrier currently rules out both short-term bridge shapes tracked by
+the paper-semantic gate: the unbounded local bridge and the paper-bounded
+closed-unit bridge. Closing Part 6 therefore requires a repaired carrier or a
+repaired paper-domain contract, not merely choosing the other existing route. -/
+theorem part6_current_bridge_routes_obstruction_certificate :
+    Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
+      Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) := by
+  exact And.intro not_z2_lattice_embedding_local_bridge_current
+    not_z2_lattice_embedding_closed_unit_local_bridge_current
+
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality
 
