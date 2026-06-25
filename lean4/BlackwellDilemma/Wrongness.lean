@@ -15822,6 +15822,38 @@ theorem firstEdgeOpenGiantClosedTopoLossFamily_giant_event_baseHorizontalTarget_
       L omega).mp homega
   exact boxedTorusReachableSet_horizontal_mem_of_open L omega hopen
 
+theorem firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant
+    (L : Nat)
+    (omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)))
+    (homega : omega ∈
+      (firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+        (boxedTorusFlatGraphN L)) :
+    (firstEdgeOpenGiantClosedTopoLossFamily L).topoLossKernel
+      (boxedTorusFlatGraphN L) omega = 0 := by
+  have hdata :
+      omega ∈ firstEdgeOpenGiantClosedTopoLossData.giantComponentEvent
+        (boxedTorusFlatGraphN L) := by
+    simpa [firstEdgeOpenGiantClosedTopoLossFamily] using homega
+  simpa [firstEdgeOpenGiantClosedTopoLossFamily] using
+    firstEdgeOpenGiantClosedTopoLossData_topoLossKernel_zero_on_giant
+      (boxedTorusFlatGraphN L) omega hdata
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_eq_zero
+    (L n : Nat) (p : Real) :
+    expectedTopoLossOnGiantOn
+        (firstEdgeOpenGiantClosedTopoLossFamily L) n p = 0 := by
+  simpa [firstEdgeOpenGiantClosedTopoLossFamily] using
+    firstEdgeOpenGiantClosedTopoLossData_expectedTopoLossOnGiantOn_eq_zero n p
+
+theorem firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_boxedTorus_eq_zero
+    (L : Nat) :
+    expectedTopoLossOnGiantOn
+        (firstEdgeOpenGiantClosedTopoLossFamily L)
+        (boxedTorusFlatGraphN L) ((3 : Real) / 4) = 0 := by
+  simpa using
+    firstEdgeOpenGiantClosedTopoLossFamily_expectedTopoLossOnGiantOn_eq_zero
+      L (boxedTorusFlatGraphN L) ((3 : Real) / 4)
+
 theorem firstEdgeOpenGiantClosedTopoLossFamily_not_full_reach_diagnostic :
     Not (forall L : Nat,
       firstEdgeOpenGiantClosedTopoLossFamily L =
