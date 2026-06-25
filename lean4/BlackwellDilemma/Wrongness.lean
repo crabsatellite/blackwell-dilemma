@@ -13357,6 +13357,26 @@ theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData
   simp [expectedTopoLossOnData,
     boxedTorusFullReachFlatOnlyComplementTopoLossData, hn, percExpectation_const]
 
+/-- Diagnostic package for the current flat-only boxed-torus carrier.
+    Off the flattened boxed-torus index its total expected topo loss is zero,
+    and its giant-restricted expected topo loss is zero at every index.  This
+    is the kernel-checked reason the current carrier remains a diagnostic
+    frontier rather than the final random supercritical `Z^2_L` theorem. -/
+theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic :
+    (∀ L n : Nat, ∀ p : Real, n ≠ boxedTorusFlatGraphN L →
+      expectedTopoLossOnData
+        (boxedTorusFullReachFlatOnlyComplementTopoLossData L) n p = 0) ∧
+    (∀ L n : Nat, ∀ p : Real,
+      expectedTopoLossOnGiantOn
+        (boxedTorusFullReachFlatOnlyComplementTopoLossData L) n p = 0) := by
+  constructor
+  · intro L n p hn
+    exact boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_eq_of_ne
+      L n p hn
+  · intro L n p
+    exact boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnGiantOn_eq_zero
+      L n p
+
 theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_giantEventFullClusterConclusion
     (L : Nat) :
     GiantComponentEventFullClusterConclusion

@@ -227,7 +227,12 @@ boxed-torus flat-family lower-bound package, and Mills-route obstructions.
 R519 adds the `Z2TopoClusterBridgeData` certificate interface and gates its
 family-core/lower-bound projections in `PaperSemanticGate.lean`; this keeps the
 future random-supercritical `Z^2_L` bridge as an explicit machine-checked
-obligation rather than a prose-only roadmap item.
+obligation rather than a prose-only roadmap item. The topo payload now also
+gates `boxedTorusFullReachFlatOnlyComplementTopoLossData_flatOnlyDiagnostic`,
+which proves the current flat-only family has zero total expected topo loss
+off the flattened boxed-torus index and zero giant-restricted topo loss at
+every index; this is the kernel-checked reason the current family remains a
+diagnostic frontier rather than the final random-supercritical carrier.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,
