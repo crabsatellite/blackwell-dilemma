@@ -173,6 +173,23 @@ structure Part4LatticePMonotonicityFrontierPayload where
         BlackwellDilemma.Infrastructure.alphaWelfareShift α ≤
           mean_estimate_gap p₂ κ) →
       kappaStar p₁ α ≤ kappaStar p₂ α
+  ranged_lattice_bridge_transfer :
+    forall _bridge : RangedLatticePMonotonicityBridgeData,
+      forall alpha p1 p2 : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
+        (Exists (fun kappa : Real =>
+          0 < kappa /\
+            BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+              mean_estimate_gap p2 kappa)) ->
+        kappaStar p1 alpha <= kappaStar p2 alpha
+  standard_z2_ranged_bridge_current :
+    RangedLatticePMonotonicityBridgeData
+  standard_z2_ranged_bridge_transfer :
+    forall alpha p1 p2 : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
+      (Exists (fun kappa : Real =>
+        0 < kappa /\
+          BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+            mean_estimate_gap p2 kappa)) ->
+      kappaStar p1 alpha <= kappaStar p2 alpha
   constructive_five_state_bounded_monotone :
     ∀ p₁ p₂ : ℝ, p₁ ≤ p₂ → p₂ < 1 →
       FiveState.kappaStar_fiveState p₁ ≤
@@ -181,7 +198,7 @@ structure Part4LatticePMonotonicityFrontierPayload where
 /-- Build gate: the open Part 4 lattice target is calibrated against the
 current closed kernel payload.  The semantic target remains open until this
 frontier is refined to a genuine lattice/domain carrier theorem. -/
-def part4_lattice_p_monotonicity_frontier_payload :
+noncomputable def part4_lattice_p_monotonicity_frontier_payload :
     Part4LatticePMonotonicityFrontierPayload where
   mean_gap_antitone :=
     mean_estimate_gap_antitone_in_p_paper_Def
@@ -228,6 +245,12 @@ def part4_lattice_p_monotonicity_frontier_payload :
     standardZ2LatticePMonotonicityBridgeSkeleton_current
   standard_z2_bridge_skeleton_transfer :=
     gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current
+  ranged_lattice_bridge_transfer :=
+    gap_cognitive_threshold_part4_from_ranged_lattice_bridge
+  standard_z2_ranged_bridge_current :=
+    standardZ2RangedLatticePMonotonicityBridge_current
+  standard_z2_ranged_bridge_transfer :=
+    gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current
   constructive_five_state_bounded_monotone :=
     FiveState.gap_p_monotonicity_bounded
 

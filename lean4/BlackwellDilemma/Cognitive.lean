@@ -1247,6 +1247,37 @@ structure LatticePMonotonicityBridgeData where
       ∀ κ : ℝ, 0 < κ →
         mean_estimate_gap p₂ κ ≤ mean_estimate_gap p₁ κ
 
+/-- Ranged machine-readable Part 4 lattice/domain bridge.
+
+This refines `LatticePMonotonicityBridgeData` with the paper's probability
+domain and with a finite local observable that realizes the bridge-neighbour
+prior mean as a bond-percolation expectation.  It is still a local/finite
+bridge, not the final infinite-lattice paper theorem. -/
+structure RangedLatticePMonotonicityBridgeData where
+  dimension : Nat
+  positive_dimension : 0 < dimension
+  graph : SimpleGraph (Fin dimension -> Int)
+  graph_is_integer_lattice : graph = SimpleGraph.integerLatticeGraph dimension
+  lattice_monotone_coupling :
+    BlackwellDilemma.Infrastructure.BondPercolationLattice.LatticeMonotoneCouplingData
+      dimension
+  localEdge : Type
+  localEdge_fintype : Fintype localEdge
+  localEdge_decidableEq : DecidableEq localEdge
+  local_observable : BondConfig localEdge -> Real
+  local_observable_mono :
+    BlackwellDilemma.Infrastructure.BoolConfigMonotone local_observable
+  local_observable_eq_prior_mean :
+    letI : Fintype localEdge := localEdge_fintype
+    letI : DecidableEq localEdge := localEdge_decidableEq
+    forall p : Real,
+      BlackwellDilemma.percExpectation (E := localEdge) (1 - p)
+          local_observable =
+        BlackwellDilemma.Infrastructure.MeanEstimateGap.priorMean_u2_fiveState p
+  mean_gap_antitone_on_lattice_domain :
+    forall p1 p2 kappa : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
+      0 < kappa -> mean_estimate_gap p2 kappa <= mean_estimate_gap p1 kappa
+
 /-- Current standard `Z2` bridge skeleton for Part 4.
 
 This is a calibration witness, not a paper-semantic closure certificate: the
@@ -1267,6 +1298,37 @@ def standardZ2LatticePMonotonicityBridgeSkeleton_current :
   mean_gap_antitone_on_lattice :=
     mean_estimate_gap_antitone_in_p_paper_Def
 
+/-- Current standard `Z2` ranged bridge for Part 4.
+
+This packages the standard `Z2` graph/coupling data together with the
+one-edge finite-percolation bridge from the local bridge observable to the
+paper's prior-mean carrier.  It is a stronger calibration witness than
+`standardZ2LatticePMonotonicityBridgeSkeleton_current`, but still does not
+claim the full infinite-lattice semantic theorem. -/
+noncomputable def standardZ2RangedLatticePMonotonicityBridge_current :
+    RangedLatticePMonotonicityBridgeData where
+  dimension := 2
+  positive_dimension := by norm_num
+  graph := SimpleGraph.Z2LatticeGraph
+  graph_is_integer_lattice := rfl
+  lattice_monotone_coupling :=
+    BlackwellDilemma.Infrastructure.BondPercolationLattice.standardLatticeMonotoneCouplingData
+      2
+  localEdge := Fin 1
+  localEdge_fintype := inferInstance
+  localEdge_decidableEq := inferInstance
+  local_observable :=
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable
+  local_observable_mono :=
+    BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable_mono
+  local_observable_eq_prior_mean := by
+    intro p
+    exact BlackwellDilemma.Infrastructure.MeanEstimateGap.bridgePriorRewardObservable_expectation_eq_priorMean_u2 p
+  mean_gap_antitone_on_lattice_domain := by
+    intro p1 p2 kappa hp1_nonneg hp_mono hp2_le_one hkappa
+    exact mean_estimate_gap_antitone_in_p_from_percExpectation
+      hp1_nonneg hp_mono hp2_le_one hkappa
+
 omit [DiagnosticSignalHypothesisData] in
 /-- Part 4 transfer from an explicit lattice/domain bridge.  This theorem is
 not a witness for the missing bridge; it is the build-checked interface that
@@ -1280,6 +1342,44 @@ theorem gap_cognitive_threshold_part4_from_lattice_bridge
       kappaStar p₁ α ≤ kappaStar p₂ α :=
   kappaStar_p_monotone_of_mean_gap_antitone
     bridge.mean_gap_antitone_on_lattice
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Ranged Part 4 transfer from a lattice/local-finite bridge.
+
+This is the threshold-level consequence of a bridge that derives
+mean-gap antitonicity on the paper's blocking-probability domain
+`0 <= p1 <= p2 <= 1`. -/
+theorem gap_cognitive_threshold_part4_from_ranged_lattice_bridge
+    (bridge : RangedLatticePMonotonicityBridgeData) :
+    forall alpha p1 p2 : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
+      (Exists (fun kappa : Real =>
+        0 < kappa /\
+          BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+            mean_estimate_gap p2 kappa)) ->
+      kappaStar p1 alpha <= kappaStar p2 alpha := by
+  intro alpha p1 p2 hp1_nonneg hp_mono hp2_le_one h_nonempty_p2
+  rw [kappaStar_def p1 alpha, kappaStar_def p2 alpha]
+  set S1 : Set Real := { kappa : Real |
+    0 < kappa /\
+      BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+        mean_estimate_gap p1 kappa } with hS1
+  set S2 : Set Real := { kappa : Real |
+    0 < kappa /\
+      BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+        mean_estimate_gap p2 kappa } with hS2
+  have h_bdd : BddBelow S1 := by
+    refine ⟨0, ?_⟩
+    intro kappa hkappa
+    exact le_of_lt hkappa.1
+  have h_ne : S2.Nonempty := h_nonempty_p2
+  have h_sub : S2 ⊆ S1 := by
+    intro kappa hkappa
+    refine ⟨hkappa.1, ?_⟩
+    have h_anti : mean_estimate_gap p2 kappa <= mean_estimate_gap p1 kappa :=
+      bridge.mean_gap_antitone_on_lattice_domain
+        p1 p2 kappa hp1_nonneg hp_mono hp2_le_one hkappa.1
+    linarith [hkappa.2]
+  exact csInf_le_csInf h_bdd h_ne h_sub
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Current Part 4 `Z2` bridge-skeleton transfer.
@@ -1296,6 +1396,21 @@ theorem gap_cognitive_threshold_part4_from_standard_z2_bridge_skeleton_current :
       kappaStar p₁ α ≤ kappaStar p₂ α :=
   gap_cognitive_threshold_part4_from_lattice_bridge
     standardZ2LatticePMonotonicityBridgeSkeleton_current
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 4 ranged `Z2` bridge transfer.
+
+This gates the finite/local percolation reconstruction through the standard
+`Z2` data package, while leaving the full lattice semantic theorem open. -/
+theorem gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current :
+    forall alpha p1 p2 : Real, 0 <= p1 -> p1 <= p2 -> p2 <= 1 ->
+      (Exists (fun kappa : Real =>
+        0 < kappa /\
+          BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+            mean_estimate_gap p2 kappa)) ->
+      kappaStar p1 alpha <= kappaStar p2 alpha :=
+  gap_cognitive_threshold_part4_from_ranged_lattice_bridge
+    standardZ2RangedLatticePMonotonicityBridge_current
 
 omit [DiagnosticSignalHypothesisData] in
 /-- **Theorem 4.1 Part 4: Monotonicity in `p`** (paper-faithful bounded

@@ -47,6 +47,13 @@ finite-box expectation layers and
 which deliberately remain diagnostic: the current bridge shape can be filled
 with standard `Z^2` graph/coupling data, but its load-bearing mean-gap
 antitonicity still comes from the already proved abstract/canonical theorem.
+The payload now also checks
+`standardZ2RangedLatticePMonotonicityBridge_current` and
+`gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current`, which
+package the standard `Z^2` graph/coupling data with the explicit one-edge
+`BondConfig` observable and the ranged finite-percolation proof of
+mean-gap antitonicity on `0 <= p_1 <= p_2 <= 1`.  This is a local/finite
+bridge calibration, not the full infinite-lattice theorem.
 The still-open Part 4 work is deriving the lattice mean-gap antitonicity from
 the domain/coupling carrier itself.  The Part 6
 payload now likewise checks the standard `Z²` lattice graph identity and the

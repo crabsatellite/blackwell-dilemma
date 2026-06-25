@@ -210,6 +210,14 @@ and on lattices, the threshold κ* is non-decreasing in p."
   load-bearing antitonicity field is still the abstract/canonical
   `mean_estimate_gap_antitone_in_p_paper_Def` theorem rather than a theorem
   derived from a lattice observable.
+  The ranged standard-`Z^2` bridge
+  `standardZ2RangedLatticePMonotonicityBridge_current` and
+  `gap_cognitive_threshold_part4_from_standard_z2_ranged_bridge_current`
+  now package the standard graph/coupling data with the explicit one-edge
+  `BondConfig` observable and the finite-percolation proof of mean-gap
+  antitonicity on `0 <= p_1 <= p_2 <= 1`.  This improves the build-checked
+  carrier calibration, but it remains a finite/local bridge rather than the
+  full lattice/domain theorem.
 
 ## Calibration Conclusions
 
