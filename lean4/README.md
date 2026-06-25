@@ -698,10 +698,12 @@ divergent scaling carrier is positive; the blocker theorem is now the proof
 spine for this obstruction. It also gates
 `mean_estimate_gap_lt_one_of_nonneg_p_of_pos_kappa`,
 `kappaStar_eq_zero_of_one_lt_alpha_of_nonneg_p`,
-`not_unbounded_part6_divergence_witness_current`, and
+`not_unbounded_part6_divergence_witness_current`,
+`not_unbounded_part6_pointwise_paper_domain_certificate_current`, and
 `not_unbounded_part6_feasible_divergence_witness_current`, proving that the
-current carrier cannot even supply the unbounded divergence or same-`alpha`
-feasible/divergence output witness once `alpha > alphaStar 0 p_c = 1`.
+current carrier cannot even supply the unbounded divergence, pointwise
+paper-domain certificate, or same-`alpha` feasible/divergence output witness
+once `alpha > alphaStar 0 p_c = 1`.
 The same gate now
 checks `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, showing that a naive

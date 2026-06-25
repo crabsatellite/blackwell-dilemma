@@ -4205,6 +4205,39 @@ theorem not_unbounded_part6_divergence_witness_current :
   linarith
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the unbounded pointwise paper-domain
+certificate.
+
+The repaired unbounded bridge's pointwise certificate must supply, for every
+paper-domain `alpha`, both near-`p_c` feasible-set nonemptiness and the Part 6
+divergence transfer at that same `alpha`. On the current carrier this is
+already impossible at the divergence field: choosing any
+`alpha > alphaStar 0 p_c` lands in the empty-feasible-set zero branch. -/
+theorem not_unbounded_part6_pointwise_paper_domain_certificate_current :
+    Not (forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+      (Exists fun delta : Real =>
+        0 < delta ∧
+          forall p : Real, harrisKestenCriticalProb - delta < p ->
+            p < harrisKestenCriticalProb ->
+              Exists fun kappa : Real =>
+                0 < kappa ∧
+                  BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                    mean_estimate_gap p kappa) ∧
+      (forall M : Real, Exists fun epsilon : Real =>
+        0 < epsilon ∧
+          forall p : Real, harrisKestenCriticalProb - epsilon < p ->
+            p < harrisKestenCriticalProb ->
+              M < kappaStar p alpha)) := by
+  intro hpointwise
+  let alpha : Real := alphaStar 0 harrisKestenCriticalProb + 1
+  have halpha : alphaStar 0 harrisKestenCriticalProb < alpha := by
+    dsimp [alpha]
+    linarith
+  rcases hpointwise alpha halpha with ⟨_hfeasible, hdivergence⟩
+  exact not_unbounded_part6_divergence_witness_current
+    ⟨alpha, halpha, hdivergence⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the unbounded same-`alpha`
 feasible/divergence witness.
 
