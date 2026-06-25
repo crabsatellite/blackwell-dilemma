@@ -1,22 +1,27 @@
-# Mathlib Contribution Roadmap — BlackwellDilemma → Cat 1 only
+# Mathlib Contribution Roadmap — BlackwellDilemma → paper-semantic closure
 
 **Date opened**: 2026-05-16 (R152)
-**Strategic goal**: reduce all paper-novel Cat 3 entries to derivations from Cat 1 (Mathlib + Lean kernel) inputs only, by upstreaming the missing infrastructure to Mathlib4. Each upstream PR is broadly reusable beyond this paper.
+**Strategic goal**: keep the checked theorem surface Cat 1 / kernel-clean while
+closing the remaining paper-semantic targets tracked by
+`BlackwellDilemma/PaperSemanticGate.lean`. Mathlib-oriented work is still the
+right long-run route where the missing theorem is broadly reusable, but the
+short-term public claim must follow the build-checked semantic gate rather than
+the older Cat 3 ledger reduction target.
 
 ## Current state (live counts)
 
-Current 2026-06-23 audited state:
+Current 2026-06-25 audited state (`lake build BlackwellDilemma`):
 
 ```
 Total ledger entries: 498
-- gapClosed:       341
+- gapClosed:       353
 - gapDefinitional: 86
 - gapOpen:         0
 - gapPartial:      0
-- gapDeadEnd:      71
+- gapDeadEnd:      59
 - gapBlocked:      0
-Input classes:      cat1Mathlib=329 cat2External=0 cat3PaperNovel=94 mixed=0 notInput=75
-Cat 3 sub-type:     carrier=50 hypothesisPredicate=8 structuralEquation=0 workingAssumption=0 derivedTheorem=317 notCat3=123
+Input classes:      cat1Mathlib=435 cat2External=0 cat3PaperNovel=0 mixed=0 notInput=63
+Cat 3 sub-type:     carrier=0 hypothesisPredicate=0 structuralEquation=0 workingAssumption=0 conditionalHypothesis=0 phenomenologicalConjecture=0 derivedTheorem=329 notCat3=169
 Source axioms:      total=0 OPEN=0 paper_Def=0 workingAssumption=0 paper_witness=0
 Proof escapes:      sorry=0 admit=0 unsafe=0 native_decide=0
 Conditional audit:  prop_interfaces=0 closed_true_prop_interfaces=0
@@ -30,10 +35,20 @@ Conditional audit:  prop_interfaces=0 closed_true_prop_interfaces=0
                     conditional_signatures_using_unresolved_prop_def_interfaces=0
                     conditional_signatures_using_unresolved_structure_interfaces=0
                     conditional_signatures_using_unresolved_class_interfaces=0
+Paper semantic gate: closed=1 open=4
 ```
 
-The source-level axiom surface is now zero, but the complete kernel-only target
-is stricter than this live state: the R207 theorem
+The source-level axiom surface and live Cat 3 input surface are now zero, but
+complete paper-semantic kernel-only closure is stricter than this live theorem
+surface. `PaperSemanticGate.lean` currently lists four open semantic targets:
+Theorem 4.1 Part 4 lattice p-monotonicity, paper R10
+`prop:threshold-five-state` clause (iii) high-κ signal-conditional routing,
+Theorem 4.1 Part 6 lattice embedding, and the random supercritical `Z2_L`
+topological cluster/phase carrier. These are not hidden source axioms or proof
+escapes; they are the remaining manuscript-semantics-to-kernel correspondence
+work.
+
+The R207 theorem
 `not_harrisKestenScalingFunction_diverges_at_pc_paper_Def` proves the current
 unbounded lower-envelope carrier route false, so the cognitive Part 6 route now
 uses the parameterized `kappaStar_diverges_at_pc_via_scaling_carrier` interface.

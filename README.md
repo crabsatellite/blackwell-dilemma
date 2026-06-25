@@ -27,12 +27,17 @@ lake build BlackwellDilemma
 lake build BlackwellDilemma.AxiomAudit
 python scripts/audit_kernel_surface.py
 python scripts/audit_conditional_surface.py
+python scripts/audit_paper_semantic_gate.py
 ```
 
-The current public Lean package is maintained as a complete kernel-only audit
-target: no project-level source axioms, no proof escapes, no unresolved
+The current public Lean package keeps the checked theorem surface
+kernel-clean: no project-level source axioms, no proof escapes, no unresolved
 conditional theorem interfaces, and no Cat 3 paper-novel input assumptions in
-the live ledger. See [`lean4/README.md`](lean4/README.md) and
+the live ledger. Complete paper-semantic closure is separately gated in
+`BlackwellDilemma/PaperSemanticGate.lean`; while that gate reports open
+threshold, lattice, and percolation semantic targets, the project does not
+claim the stronger full-manuscript semantic closure status. See
+[`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the
 paper-label mapping and remaining semantic calibration notes.
 

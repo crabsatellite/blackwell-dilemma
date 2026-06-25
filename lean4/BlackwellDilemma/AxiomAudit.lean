@@ -10,29 +10,22 @@
 
   Expected axioms:
    * Lean 4 / Mathlib kernel: `propext`, `Classical.choice`, `Quot.sound`.
-   * Paper-citation axioms (named `gap_<name>_OPEN`) — these state
-     paper claims whose Lean derivation depends on external sources
-     (Cat 2) or paper-stipulated structure (Cat 3).
-   * Opaque types and carriers declared in `Types.lean`,
-     `ClassicalResults.lean`, etc. (`vertexData`, `isEdgeData`, `Phi`, `phi`,
-     `agentWelfare`, `kappaStar`, etc.).
+   * Some declarations may report no axioms.
+   * The source-level audit must report 0 project-level `axiom`, `opaque`,
+     `_OPEN`, `_paper_Def`, `_workingAssumption`, and `_paper_witness`
+     declarations.
 
-  Any axiom outside the union of these three categories is a RED FLAG.
+  Any printed project-level paper axiom or opaque source declaration is a RED
+  FLAG.  Paper primitives must be structures, definitions, or explicit theorem
+  parameters, not global bridge axioms.
 
-  Note on BLOCKED/DEAD-END status:
-  Per the 6-tier discipline
-  (OPEN / PARTIAL / BLOCKED / DEAD-END / CLOSED / DEFINITIONAL),
-  BLOCKED is reserved for genuine no-acceptance-possible cases
-  (folkloric, conjectural-unproven, or no-source-at-all). External
-  published Cat 2 theorems with Mathlib gap are encoded as plain
-  Cat 2 OPEN axioms (`axiom gap_X_OPEN : <stmt>` with paper-cited
-  docstring), NOT as BLOCKED-defs.
-
-  Cat 2 dependency surfacing: for downstream THEOREMS, the Cat 2
-  axiom is composed in the proof body and surfaces in `#print
-  axioms` automatically. For downstream AXIOMS (which have no body),
-  the Cat 2 axiom MUST be threaded as an EXPLICIT ANTECEDENT for the
-  dependency to surface in `#print axioms`.
+  Note on external or semantic dependencies:
+  the current public kernel-clean surface does not allow live Cat 2/Cat 3
+  `_OPEN` source axioms.  External mathematical input must be either already
+  formalised in Lean/Mathlib, carried as an explicit theorem parameter, or
+  listed as an open paper-semantic target in `PaperSemanticGate.lean`.
+  DEAD-END markers document refuted or retired routes; they are not accepted
+  proof payload.
 
   Usage:  `lake env lean BlackwellDilemma/AxiomAudit.lean`
 -/

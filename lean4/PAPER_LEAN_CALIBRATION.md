@@ -13,7 +13,7 @@
 | Propositions | 16 | 16 (most split into parts) | ✅ |
 | Lemmas | 2 | 2 | ✅ |
 | Corollaries | 5 | 5 | ✅ |
-| **TOTAL** | **41** | **41** | **✅ FULL CORRESPONDENCE (with explicit DEAD-END markers)** |
+| **TOTAL** | **41** | **41** | Label coverage plus build-checked semantic-gate tracking |
 
 ## Detailed Mapping
 
@@ -59,7 +59,7 @@
 | `prop:principal-optimum` | 622 | Current public carrier closed: Part 1 `principal_interior_maximum_exists`, `W_bar_exceeds_zero_at_positive_beta`, `W_bar_witness_pair_strict_dominance`; Part 2 `aggregateWelfareWith_principal_part2_package` over public finite FOSD-ramp `aggregateWelfareWith` / stable `aggregateOptimalBeta`; Part 3 `W_bar_valley_triple_witness`; legacy scalar sample diagnostics: `not_PrincipalSampleBothCombinedDominanceWitnessPair`, `not_PrincipalSampleBothExceedsZeroWitness`, `not_PrincipalSampleBothValleyTripleWitness` | Principal.lean:1389,1247,1255,1783,1267,1878,1896,1922 |
 | `prop:canonical` (5.1) | 709 | Current standard-only theorem surfaces `FourState.W_open`, `gap_W_open_limit_infty`, and `gap_W_open_limit_zero` | Canonical.lean:63,74,159 |
 | `prop:interior-optimum` (5.2) | 769 | `gap_interior_optimum` | Canonical.lean:1430 |
-| `prop:two-regime-five-state` (paper R10 rewrite of former `prop:three-regime-five-state`) | 817 | Current standard-only theorem surfaces for the six reversal clauses plus cognitive augmentation and sufficient cognition; Section 5/R10 relabeling remains a calibration target | Canonical.lean:2692,2798,2869,2934,3218,3385,3401,3431,3455,3534 |
+| `prop:two-regime-five-state` (paper R10 rewrite of former `prop:three-regime-five-state`) | 817 | Current standard-only theorem surfaces for the six reversal clauses plus cognitive augmentation and sufficient cognition; paper-facing `gap_two_regime_*` aliases now cover the R10 relabeling, with historical `gap_three_regime_*` names retained for traceability | Canonical.lean:2692,2798,2869,2934,3218,3385,3401,3431,3455,3534 |
 | `prop:threshold-five-state` (paper R10 rewrite to "Cognitive Sufficiency on the 5-State Instance") | 866 | Current standard-only theorem surfaces `gap_threshold_fiveState_greedy_has_interior_optimum`, `gap_threshold_fiveState_kappa_above_kstar`, and `gap_threshold_fiveState_smooth_transition`; paper R10 high-κ routing clause remains a dedicated recalibration target | Canonical.lean:3673,3790,3956 |
 | `prop:p-monotonicity-five-state` | 884 | `gap_p_monotonicity_bounded` + `gap_kappaStar_at_two_thirds` (latter is mathematically true but its `kappaStar_fiveState` referent is SUPERSEDED in paper R10; see Canonical.lean line ~2105 deprecation block) | Canonical.lean:3553,3637 |
 | `prop:complementarity` | 933 | `gap_information_knowledge_complementarity` | Bayesian.lean:90 |
@@ -179,10 +179,12 @@ paper's actual restricted-scope claim's pending Lean encoding.
 
 ## Calibration Conclusions
 
-Current 2026-06-22 correction: the project builds and has zero proof escapes,
-but it is not yet a complete kernel-only proof. The live source audit reports
-0 project-level `axiom` declarations, including 0 `_OPEN`, 0 `_paper_Def`,
-and 0 `_workingAssumption` declarations.
+Current 2026-06-25 correction: the project builds and the checked theorem
+surface has zero proof escapes. Complete paper-semantic kernel-only closure is
+not claimable while `PaperSemanticGate.lean` reports open threshold, lattice,
+and percolation semantic targets. The live source audit reports 0 project-level `axiom`
+declarations, including 0 `_OPEN`, 0 `_paper_Def`, and 0 `_workingAssumption`
+declarations.
 The live ledger has no `gapOpen` entries, but the cognitive Part 6 route is not
 complete: `not_harrisKestenScalingFunction_diverges_at_pc_paper_Def` proves the
 current unbounded lower-envelope carrier route false. R208 replaces that route
@@ -505,12 +507,13 @@ lives on the graph-parametric fin5Trap/terminal-neighbour route.
 ## Remaining work (post-publication)
 
 For full kernel-pure cover (v2.0 future iteration):
-- Keep the source-level axiom count at 0 while replacing the dead-ended
-  Principal/disclosure strict-witness routes with a non-constant Principal
-  kernel, closing remaining explicit theorem interfaces, and converting paper
-  primitives into transparent structures/parameters where mathematically
-  appropriate.
-- Lean v2.0 recalibration of §5: rename `gap_three_regime_*` → `gap_two_regime_*` to match paper R10 labels; remove SUPERSEDED `kappaStar_fiveState` closed-form; add a dedicated theorem for paper R10 `prop:threshold-five-state` clause (iii) (high-κ signal-conditional routing in Regime II achieving oracle `1 - 0.4p`)
+- Keep the source-level axiom count at 0 while replacing the semantic targets
+  listed in `PaperSemanticGate.lean` with paper-faithful kernel theorems, or
+  revising the manuscript claims to match the already closed theorem payload.
+- The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
+  recalibration is now closed by aliases in `Canonical.lean`; the remaining
+  §5 semantic target is the paper R10 `prop:threshold-five-state` clause (iii)
+  high-κ signal-conditional routing theorem achieving oracle `1 - 0.4p`.
 - Upstream/polish the R256-closed Gaussian ratio interfaces:
   `L_lowerGaussianHazard_antitoneOn_pos` and
   `L_upperGaussianMills_antitoneOn_pos`; the former

@@ -3552,6 +3552,69 @@ theorem gap_three_regime_sufficient_cognition_kappaStar_pos
   have h_half_pos : (0 : ℝ) < 1/2 := by norm_num
   exact mul_pos h_half_pos h_div_pos
 
+/-! ### Paper R10 two-regime compatibility names
+
+The manuscript's R10 rewrite changed the paper-facing label from the old
+three-regime presentation to the two-regime five-state statement.  The closed
+mathematics above is still the proof payload; these aliases provide stable
+paper-facing names so the calibration matrix no longer treats the relabeling as
+future work.  The old names remain available for historical traceability. -/
+
+theorem gap_two_regime_reversal_existence :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∃ β_star_p : ℝ, 0 < β_star_p ∧
+        L β_star_p p < (4/10 : ℝ) :=
+  gap_three_regime_reversal_existence
+
+theorem gap_two_regime_reversal_uniqueness :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      ∃ β_star_p : ℝ, 0 < β_star_p ∧
+        ∀ β' : ℝ, 0 < β' → L β' p ≤ L β_star_p p → β' = β_star_p :=
+  gap_three_regime_reversal_uniqueness
+
+theorem gap_two_regime_reversal_nonmonotone :
+    ∀ p : ℝ, 0 ≤ p → p < p_1 →
+      (∃ β_low β_high : ℝ, 0 < β_low ∧ β_low < β_high ∧
+        L β_high p < L β_low p) ∧
+      (∃ β_a β_b : ℝ, 0 < β_a ∧ β_a < β_b ∧
+        L β_a p < L β_b p) :=
+  gap_three_regime_reversal_nonmonotone
+
+theorem gap_two_regime_reversal_overshoot_decreasing :
+    ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
+      ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
+        L β_star₁ p₁ < L β_star₂ p₂ :=
+  gap_three_regime_reversal_overshoot_decreasing
+
+theorem gap_two_regime_reversal_overshoot_continuous :
+    ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=
+  gap_three_regime_reversal_overshoot_continuous
+
+theorem gap_two_regime_reversal_overshoot_vanishes_at_p1 :
+    Filter.Tendsto overshootRegimeI
+      (nhdsWithin p_1 (Set.Iio p_1)) (nhds 0) :=
+  gap_three_regime_reversal_overshoot_vanishes_at_p1
+
+theorem gap_two_regime_cognitive_augmentation_arithmetic_part :
+    ∀ p : ℝ, p_1 ≤ p → p ≤ p_2 →
+      (4/10 : ℝ) * (1 - p) ≤ (4/10 : ℝ) - W_topo_p p :=
+  gap_three_regime_cognitive_augmentation_arithmetic_part
+
+theorem gap_two_regime_cognitive_augmentation_monotonicity :
+    ∀ p : ℝ, p_1 ≤ p → p ≤ p_2 →
+      ∀ β₁ β₂ : ℝ, 0 < β₁ → β₁ ≤ β₂ → L β₂ p ≤ L β₁ p :=
+  gap_three_regime_cognitive_augmentation_monotonicity
+
+theorem gap_two_regime_sufficient_cognition :
+    ∀ p : ℝ, p_2 < p → p < 1 →
+      ∀ β₁ β₂ : ℝ, 0 < β₁ → β₁ ≤ β₂ → L β₂ p ≤ L β₁ p :=
+  gap_three_regime_sufficient_cognition
+
+theorem gap_two_regime_sufficient_cognition_kappaStar_pos
+    (p : ℝ) (hp_gt : p_2 < p) (hp_lt : p < 1) :
+    0 < kappaStar_fiveState p :=
+  gap_three_regime_sufficient_cognition_kappaStar_pos p hp_gt hp_lt
+
 /-- **Proposition `prop:p-monotonicity-five-state`** — `κ*(p)` is
     non-decreasing in `p` on the paper's intended domain `p ∈ [0, 1)`,
     with strict increase on `(2/3, 1)`.

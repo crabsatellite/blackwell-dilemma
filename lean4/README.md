@@ -9,10 +9,12 @@ The formalisation establishes a **label-level correspondence between every
 labeled paper item and a Lean theorem** (12 definitions, 6 theorems,
 16 propositions, 2 lemmas, 5 corollaries; see
 [`PAPER_LEAN_CALIBRATION.md`](PAPER_LEAN_CALIBRATION.md) for the explicit
-mapping), with two explicitly disclosed lattice-restricted sub-clause
-gaps (the lattice variant of Theorem 4.1 Part 4 and the lattice-IDP
-embedding-and-reduction proof of Part 6), both awaiting formalised
-lattice and percolation-correlation-length infrastructure in Mathlib.
+mapping). Complete paper-semantic closure is tracked separately by
+[`BlackwellDilemma/PaperSemanticGate.lean`](BlackwellDilemma/PaperSemanticGate.lean):
+the current open semantic targets are the lattice-specific Theorem 4.1 Part 4
+statement, the paper R10 high-kappa `threshold-five-state` routing clause,
+the lattice-IDP embedding route for Part 6, and the random supercritical
+`Z2_L` topological cluster/phase carrier.
 
 Every claim is exposed as a Lean declaration with its formalisation status
 tracked in [`BlackwellDilemma/Ledger.lean`](BlackwellDilemma/Ledger.lean).
@@ -38,12 +40,14 @@ Expected output:
 
 * **Lean kernel axioms** for every CLOSED entry: `propext`,
   `Classical.choice`, `Quot.sound`.
-* **Paper-citation axioms** (named `<theorem-name>_paper_axiom`) for
-  AXIOM-CITED and CLOSED-VIA-AXIOM-CITED entries.
-* **Opaque types** declared in `Types.lean` (`Vertex`, `IsEdge`,
-  `PercolationOutcome`, `IsOpen`, `reward`, `Phi`, `phi`, ...).
+* Some declarations may report no axioms.
+* The source-level audit must report 0 project-level `axiom`, `opaque`,
+  `_OPEN`, `_paper_Def`, `_workingAssumption`, and `_paper_witness`
+  declarations.
 
-Any axiom outside these three categories is a RED FLAG.
+Any printed project-level paper axiom or opaque source declaration is a RED
+FLAG; paper primitives must be represented as structures, definitions, or
+explicit theorem parameters, not global bridge axioms.
 
 ## Module map
 
@@ -60,7 +64,7 @@ The formalisation follows the paper's section structure.
 | `Phase.lean` | §3.3 Theorem 3.3 `phase`, Prop `trap-prevalence`, Cor `er-phase`, Cor `power-law` |
 | `Cognitive.lean` | §4 Theorem 4.1 `cognitive-threshold`, Prop `supermodular`, Cor `policy-complementarity`, Prop `sentimental`, Prop `threshold-alpha` |
 | `Principal.lean` | §4.6 Def `principal`, Prop `principal-optimum`, Cor `disclosure` |
-| `Canonical.lean` | §5 Prop `canonical` (4-state), Prop `interior-optimum` (5-state), Prop `three-regime`, Prop `p-monotonicity`, Prop `threshold-five-state`, Prop `bayesian-naive-five-state`, Cor `five-state-policy` |
+| `Canonical.lean` | §5 Prop `canonical` (4-state), Prop `interior-optimum` (5-state), Prop `two-regime-five-state` (with historical `three-regime` aliases retained), Prop `p-monotonicity`, Prop `threshold-five-state`, Prop `bayesian-naive-five-state`, Cor `five-state-policy` |
 | `Bayesian.lean` | §6 Theorem 5.1 `bayesian-immunity`, Prop `complementarity`, Rem `robustness-misspec` |
 | `GeneralGraphs.lean` | §7 Def `greedy-path`, Theorem 6.1 `general-tree`, Ex `cyclic-trap`, Def `trap-tree`, Prop `error-compounding` |
 | `Ledger.lean` | Status of every paper claim formalised here |
@@ -77,14 +81,16 @@ lake build BlackwellDilemma
 lake env lean BlackwellDilemma/AxiomAudit.lean
 python scripts/audit_kernel_surface.py
 python scripts/audit_conditional_surface.py
+python scripts/audit_paper_semantic_gate.py
 ```
 
 Current results:
 
-| Surface | Current value | Complete kernel-only target |
+| Surface | Current value | Gate target |
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=1, open=4 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -110,13 +116,12 @@ Current results:
 | ledger input classes | cat1Mathlib=435, cat2External=0, cat3PaperNovel=0, mixed=0, notInput=63 | all live theorem dependencies reduced to Cat 1 or explicit theorem assumptions; dead-end routes require replacement |
 | ledger Cat 3 subtype | carrier=0, hypothesisPredicate=0, structuralEquation=0, workingAssumption=0, derivedTheorem=329, notCat3=169 | paper primitives represented transparently; no hidden proof-carrying global axioms |
 
-Complete kernel-only means stronger than "gapOpen = 0": main paper theorem
-`#print axioms` output should contain only Lean/Mathlib kernel axioms, and
-`audit_conditional_surface.py` should expose any remaining explicit bridge,
-witness, or carrier-interface hypotheses. Paper primitives should be
-structures, definitions, or theorem parameters, not global bridge axioms; a
-fully instantiated proof also needs replacement carriers for interfaces that
-the current neutral/scalar carriers refute.
+The current theorem surface is kernel-clean in the source-level sense:
+`#print axioms` output contains only Lean/Mathlib kernel axioms, and
+`audit_conditional_surface.py` exposes no unresolved explicit bridge, witness,
+or carrier-interface hypotheses. Complete paper-semantic closure is the
+stronger target tracked by `PaperSemanticGate.lean`; that claim is not made
+until the semantic gate reaches open=0.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

@@ -50,6 +50,7 @@
 
     Ledger.lean                 status of every paper claim formalised
                                   here (CLOSED / PARTIAL / AXIOM-CITED)
+    PaperSemanticGate.lean      build-checked paper-semantic closure gate
     AxiomAudit.lean             #print axioms for every theorem;
                                   expected output: only kernel axioms
                                   for CLOSED items, paper-citation axioms
@@ -70,6 +71,7 @@ import BlackwellDilemma.Canonical
 import BlackwellDilemma.Bayesian
 import BlackwellDilemma.GeneralGraphs
 import BlackwellDilemma.Ledger
+import BlackwellDilemma.PaperSemanticGate
 
 -- Cat 1 Infrastructure (Mathlib-PR-ready, kernel-pure)
 import BlackwellDilemma.Infrastructure.Roadmap
