@@ -741,6 +741,11 @@ The route outputs are now also collected into
 gated in `topo_cluster_random_supercritical_z2_frontier_payload`, so the
 frontier checks the route-output surface through one Lean certificate as well
 as through the individual projection theorems.
+It also gates
+`RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate`, which
+calibrates any future full route to expose the finite boxed-torus indexing,
+standard `Z^2` graph, strict `p_c < p < 1` parameter, and unit-interval loss
+range in the same repaired-bridge witness.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
 now packages this route-output certificate, the route-level paper-support
 output, and bundled obstruction together with the finite positive-regression

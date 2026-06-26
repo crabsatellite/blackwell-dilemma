@@ -16190,6 +16190,67 @@ theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise
       (randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route
         bridge hroute)
 
+/-- Boxed-torus finite-`Z2_L` form of the full random-supercritical topo
+paper-closing route.
+
+This does not close the semantic target by itself.  It is a gate-facing
+calibration layer: any future full route must expose the standard `Z^2` graph,
+the finite boxed-torus vertex/edge indexing equalities, a strict
+`p_c < p < 1` parameter, and the family-level unit-interval loss range in the
+same witness as the full repaired support. -/
+def RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute : Prop :=
+  Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+      bridge /\
+      bridge.graph = SimpleGraph.Z2LatticeGraph /\
+      (forall L : Nat,
+        boxedTorusFlatGraphN L + 1 = Fintype.card (BoxedTorusVertex L)) /\
+      (forall L : Nat,
+        Fintype.card (BoxedTorusEdgeIdx L) =
+          2 * (boxedTorusFlatGraphN L + 1)) /\
+      harrisKestenCriticalProb < bridge.supercriticalProbability /\
+      bridge.supercriticalProbability < 1 /\
+      (forall L : Nat,
+        forall n : Nat,
+          forall omega : BondConfig (EdgeIdx n),
+            0 <= (bridge.family L).topoLossKernel n omega /\
+              (bridge.family L).topoLossKernel n omega <= 1)
+
+/-- The named full topo paper-closing route exposes the boxed-torus finite
+`Z2_L` carrier data needed by the paper-facing semantic target. -/
+theorem randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_full_paper_closing_route :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  rintro ⟨bridge, hsupport⟩
+  exact ⟨bridge, hsupport, bridge.graph_is_z2_lattice,
+    bridge.flat_vertex_count, bridge.flat_edge_count,
+    bridge.supercriticalProbability_above_pc,
+    bridge.supercriticalProbability_lt_one,
+    bridge.family_topoLossKernel_mem_unitInterval⟩
+
+/-- The boxed-torus finite-`Z2_L` route is still a full topo paper-closing route:
+the extra fields are semantic calibration data, not a separate theorem target. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_boxed_torus_finite_z2L_route :
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  rintro ⟨bridge, hsupport, _hgraph, _hvertex_count, _hedge_count,
+    _hprob_above_pc, _hprob_lt_one, _hrange⟩
+  exact ⟨bridge, hsupport⟩
+
+/-- Compact certificate for the boxed-torus finite-`Z2_L` calibration layer. -/
+def RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate :
+    Prop :=
+  (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute)
+
+theorem random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate :
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate := by
+  exact ⟨
+    randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_full_paper_closing_route,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_boxed_torus_finite_z2L_route⟩
+
 /-- The named full paper-closing route always contains an actual repaired
 random-supercritical bridge. -/
 theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_repaired_bridge_nonempty :
@@ -18276,6 +18337,7 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
     FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
     RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate /\
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate /\
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
@@ -18532,6 +18594,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
     random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate,
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
+    random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
