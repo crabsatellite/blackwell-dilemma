@@ -5385,6 +5385,87 @@ theorem part6_full_paper_closing_bridge_route_full_output_bundle :
     (part6_full_paper_closing_support_of_bridge_route hroute)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- A bridge-level closed-unit tail-reversal witness exposes every output needed
+by the repaired Part 6 closed-unit route.
+
+This is the positive counterpart to the current obstruction: any future
+inhabitant of `Z2LatticeEmbeddingClosedUnitTailReversalBridgeData` forces a
+nondegenerate closed-unit `alpha` domain, constructs the standard closed-unit
+local bridge, and then projects through the named Part 6 route/support/full
+output surfaces. -/
+def Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate :
+    Prop :=
+  (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+    alphaStar 0 harrisKestenCriticalProb < 1) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha /\ alpha <= 1) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingBridgeRoute) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingSupport) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingFullOutputBundle) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_alphaStar_lt_one
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    alphaStar 0 harrisKestenCriticalProb < 1 :=
+  alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route
+    (κ := 0) (p := harrisKestenCriticalProb) (by norm_num)
+    bridge.closed_unit_tail_reversal_route
+
+omit [DiagnosticSignalHypothesisData] in
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_alpha_domain_nonempty
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha /\ alpha <= 1 :=
+  closed_unit_alpha_domain_nonempty_of_tail_reversal_repair_route
+    bridge.closed_unit_tail_reversal_route
+
+omit [DiagnosticSignalHypothesisData] in
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_closed_unit_bridge_nonempty
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData :=
+  ⟨z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+    bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
+theorem part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Part6FullPaperClosingFullOutputBundle :=
+  part6_full_paper_closing_support_full_output_bundle
+    (part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
+      bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingFullOutputBundle := by
+  rintro ⟨bridge⟩
+  exact
+    part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge
+      bridge
+
+omit [DiagnosticSignalHypothesisData] in
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate :
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate := by
+  exact ⟨
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_alphaStar_lt_one,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_alpha_domain_nonempty,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_closed_unit_bridge_nonempty,
+    part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge_nonempty,
+    not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- The current carrier cannot supply the divergence witness exposed by any
 complete Part 6 paper-closing support. -/
 theorem not_part6_full_paper_closing_divergence_witness_current :
@@ -5667,6 +5748,7 @@ def Part6CurrentFrontierCertificate : Prop :=
     Part6FullPaperClosingOutputLayerCertificate /\
     (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
     Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) /\
     (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
       Part6FullPaperClosingBridgeRoute) /\
@@ -5700,6 +5782,7 @@ theorem part6_current_frontier_certificate :
     part6_bridge_route_support_certificate,
     part6_full_paper_closing_output_layer_certificate,
     part6_current_bridge_routes_obstruction_certificate,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty,
     part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty,

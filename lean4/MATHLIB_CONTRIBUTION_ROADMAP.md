@@ -269,6 +269,10 @@ The gate lifts that route to the bridge level through
 and
 `part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty`,
 while
+`z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate`
+now projects `alphaStar 0 p_c < 1`, closed-unit alpha-domain nonemptiness,
+closed-unit bridge nonemptiness, Part 6 route/support, and the full output
+bundle from any future tail-reversal bridge, and
 `not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current` records the
 current obstruction at that exact bridge-level surface.
 The gate also checks

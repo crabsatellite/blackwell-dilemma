@@ -930,6 +930,11 @@ gate lifts this sufficient route to the bridge level through
 `part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty`,
 and
 `part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty`.
+The companion
+`z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate`
+now also projects `alphaStar 0 p_c < 1`, closed-unit alpha-domain nonemptiness,
+closed-unit bridge nonemptiness, Part 6 route/support, and the full output
+bundle from any future tail-reversal bridge.
 It also gates
 `not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current`, so the
 current carrier is refuted at the exact bridge-level route that would otherwise
