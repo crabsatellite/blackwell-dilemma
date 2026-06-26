@@ -113,8 +113,13 @@ certificate
 `random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`
 also gates the repaired-bridge, paper-support, and same-tail
 flat/mass/member/positive-loss non-diagnostic outputs of any inhabitant.  The
-full paper-closing route is now also gated to project back through this repaired
-support-surface route/output via
+nonclosure certificate
+`random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate`
+now packages this repaired route/output together with the current first-edge
+inhabitant and the kernel refutations of the full paper-closing and boxed-torus
+finite `Z2_L` routes, so the repair layer cannot be mistaken for theorem
+closure.  The full paper-closing route is now also gated to project back
+through this repaired support-surface route/output via
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route`
 and
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate`.
@@ -805,9 +810,12 @@ route, and
 the current repaired first-edge bridge as an inhabitant.  The companion
 `random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`
 projects repaired bridge nonemptiness, repaired paper support, and the
-same-tail non-diagnostic support output from the repaired route.  This makes
-the next paper-semantic task a genuine random finite `Z2_L` instantiation of
-that repaired route, not another search inside the refuted full-support surface.
+same-tail non-diagnostic support output from the repaired route.  The explicit
+`random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate`
+then binds that inhabited repair layer to the full-route and boxed-torus-route
+obstructions.  This makes the next paper-semantic task a genuine random finite
+`Z2_L` instantiation of that repaired route, not another search inside the
+refuted full-support surface.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and

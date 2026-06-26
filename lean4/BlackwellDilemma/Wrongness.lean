@@ -18596,6 +18596,37 @@ theorem random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_c
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
     not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute⟩
 
+/-- Gate certificate that the repaired topo support surface is inhabited but
+does not close the current random-supercritical `Z2_L` paper route.
+
+This is the explicit semantic boundary for the current repair layer: the
+support-surface route and its output certificate are available, the current
+first-edge bridge inhabits the repaired surface, and the named full paper route
+and boxed-torus finite `Z2_L` route remain kernel-refuted. -/
+def RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate :
+    Prop :=
+  RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+    RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate /\
+    RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current /\
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current) /\
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+theorem random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate := by
+  exact ⟨
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
+    random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate,
+    random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate,
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_support_surface_repair,
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute⟩
+
 /-- The repaired random-supercritical bridge cannot be discharged by the current
 full-reach complement diagnostic family. -/
 theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_full_reach_diagnostic :
@@ -18751,6 +18782,7 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairCertificate /\
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
     RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate /\
     FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
     FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate /\
@@ -19021,6 +19053,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     random_supercritical_z2_topo_cluster_support_surface_repair_certificate,
     randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
     random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate,
+    random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
     random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate,
     firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
     firstEdgeGiantStochasticTopoLossData_not_random_supercritical_z2_bridge_certificate,

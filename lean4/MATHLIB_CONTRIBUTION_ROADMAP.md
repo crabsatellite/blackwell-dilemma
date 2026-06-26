@@ -606,9 +606,13 @@ companion
 `random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`
 now also projects repaired bridge nonemptiness, repaired paper support, and the
 same-tail non-diagnostic support output from any route inhabitant.  The
-near-term work item is therefore to instantiate that repaired support route with
-a genuine random finite `Z2_L` carrier before the topo target can count as
-paper-semantic closure.
+explicit
+`random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate`
+then packages the inhabited repair route with the current first-edge repaired
+surface and the full-route/boxed-torus-route kernel obstructions.  The near-term
+work item is therefore to instantiate that repaired support route with a genuine
+random finite `Z2_L` carrier before the topo target can count as paper-semantic
+closure.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and

@@ -780,9 +780,14 @@ the current repaired first-edge bridge inhabiting that route.  Its output layer
 is also gated by
 `random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`,
 which projects repaired bridge nonemptiness, repaired paper support, and the
-same-tail flat/mass/member/positive-loss non-diagnostic support output.  What
-remains is a genuine random finite `Z2_L` carrier instantiation of this repaired
-support route, not another inhabitant search inside the refuted current surface.
+same-tail flat/mass/member/positive-loss non-diagnostic support output.  The
+separate
+`random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate`
+now packages that inhabited repair route with the current first-edge repaired
+surface and the kernel refutations of the full paper-closing and boxed-torus
+finite `Z2_L` routes.  What remains is a genuine random finite `Z2_L` carrier
+instantiation of this repaired support route, not another inhabitant search
+inside the refuted current surface.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
