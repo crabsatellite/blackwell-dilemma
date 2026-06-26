@@ -689,6 +689,10 @@ and
 `not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_output_bundle`,
 so all three numeric topo route output layers and the repaired paper-support
 surface are checked together.
+It now also gates
+`not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_full_output_bundle`,
+which refutes the current first-edge witness at the exact
+paper-support-inclusive full output-bundle surface.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
 now packages the route-level paper-support output and bundled obstruction as
 well.

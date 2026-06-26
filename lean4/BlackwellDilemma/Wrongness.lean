@@ -17674,6 +17674,104 @@ theorem not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_thre
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_giant_loss_output
       hbundle.1
 
+/-- The first-edge cylinder witness at `p = 3/4` cannot supply the full route
+output bundle once the repaired paper-support surface is included explicitly.
+
+The obstruction is still the missing giant-loss output: the first-edge witness
+does satisfy the repaired paper-support surface, but it cannot satisfy the
+positive giant-restricted loss field required by full paper closure. -/
+theorem not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_full_output_bundle :
+    Not (
+      let PaperSupportOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge);
+      let GiantLossOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+            bridge);
+      let CombinedSupportOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          Exists fun c : Real =>
+            0 < c /\ c <= 1 /\
+              Exists fun L0 : Nat =>
+                forall L : Nat, L0 <= L ->
+                  c <=
+                    expectedTopoLossOnData (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    expectedTopoLossOnGiantOn (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L))
+                      (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                        (1 : Real)) /\
+                  Exists fun omega :
+                      BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                    Membership.mem
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L)) omega /\
+                    0 <
+                      (bridge.family L).topoLossKernel
+                        (boxedTorusFlatGraphN L) omega);
+      let SupportedNonDiagnosticOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          Exists fun c : Real =>
+            0 < c /\ c <= 1 /\
+              forall L0 : Nat,
+                Exists fun L : Nat =>
+                  L0 <= L /\
+                  c <=
+                    expectedTopoLossOnData (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    expectedTopoLossOnGiantOn (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L))
+                      (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                        (1 : Real)) /\
+                  (Exists fun omega :
+                      BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                    Membership.mem
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L)) omega /\
+                    0 <
+                      (bridge.family L).topoLossKernel
+                        (boxedTorusFlatGraphN L) omega) /\
+                  Not (bridge.family L =
+                    boxedTorusFullReachComplementTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusAllOpenComplementTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusAllOpenGiantTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusAllOpenPositiveTopoLossData L));
+      PaperSupportOutput /\ GiantLossOutput /\ CombinedSupportOutput /\
+        SupportedNonDiagnosticOutput) := by
+  dsimp
+  intro hbundle
+  exact
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_giant_loss_output
+      hbundle.2.1
+
 /-- Any repaired bridge that uses the first-edge cylinder family at `p = 3/4`
 cannot provide the full paper-closing support surface. -/
 theorem not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_full_paper_closing_support
@@ -17924,6 +18022,91 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
                     boxedTorusAllOpenPositiveTopoLossData L));
       GiantLossOutput /\ CombinedSupportOutput /\
         SupportedNonDiagnosticOutput) /\
+    Not (
+      let PaperSupportOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge);
+      let GiantLossOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+            bridge);
+      let CombinedSupportOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          Exists fun c : Real =>
+            0 < c /\ c <= 1 /\
+              Exists fun L0 : Nat =>
+                forall L : Nat, L0 <= L ->
+                  c <=
+                    expectedTopoLossOnData (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    expectedTopoLossOnGiantOn (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L))
+                      (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                        (1 : Real)) /\
+                  Exists fun omega :
+                      BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                    Membership.mem
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L)) omega /\
+                    0 <
+                      (bridge.family L).topoLossKernel
+                        (boxedTorusFlatGraphN L) omega);
+      let SupportedNonDiagnosticOutput : Prop :=
+        (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          (forall L : Nat,
+            bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
+          bridge.supercriticalProbability = ((3 : Real) / 4) /\
+          Exists fun c : Real =>
+            0 < c /\ c <= 1 /\
+              forall L0 : Nat,
+                Exists fun L : Nat =>
+                  L0 <= L /\
+                  c <=
+                    expectedTopoLossOnData (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    expectedTopoLossOnGiantOn (bridge.family L)
+                      (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+                  c <=
+                    percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L))
+                      (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                        (1 : Real)) /\
+                  (Exists fun omega :
+                      BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                    Membership.mem
+                      ((bridge.family L).giantComponentEvent
+                        (boxedTorusFlatGraphN L)) omega /\
+                    0 <
+                      (bridge.family L).topoLossKernel
+                        (boxedTorusFlatGraphN L) omega) /\
+                  Not (bridge.family L =
+                    boxedTorusFullReachComplementTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusAllOpenComplementTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusAllOpenGiantTopoLossData L) /\
+                  Not (bridge.family L =
+                    boxedTorusAllOpenPositiveTopoLossData L));
+      PaperSupportOutput /\ GiantLossOutput /\ CombinedSupportOutput /\
+        SupportedNonDiagnosticOutput) /\
     Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
       (forall L : Nat,
         bridge.family L = firstEdgeOpenGiantClosedTopoLossFamily L) /\
@@ -17943,6 +18126,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_combined_support_output,
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_supported_extended_non_diagnostic_output,
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_output_bundle,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_full_output_bundle,
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_witness⟩
 
 /-- The final random-supercritical bridge contract cannot be discharged by the
