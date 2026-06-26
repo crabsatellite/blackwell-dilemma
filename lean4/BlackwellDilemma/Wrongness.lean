@@ -17997,14 +17997,16 @@ theorem random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruct
 This certificate packages the honest current state of the open topo target:
 the old over-strong bridge contract is kernel-refuted, while the repaired
 bridge contract is nonempty, rules out deterministic diagnostic repairs, and
-has the finite first-edge compatibility certificate showing why that current
-witness is useful but still not a paper-closing random finite-lattice
-giant-component carrier. -/
+has both the finite first-edge compatibility certificate and the separate
+finite positive-regression certificate showing why those current witnesses are
+useful but still not a paper-closing random finite-lattice giant-component
+carrier. -/
 def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
   Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData) /\
     Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData /\
     FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate /\
     RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate /\
+    FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
@@ -18258,6 +18260,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     exists_firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate,
     random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate,
+    firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
