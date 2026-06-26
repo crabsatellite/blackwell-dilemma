@@ -113,6 +113,12 @@ certificate
 `random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`
 also gates the repaired-bridge, paper-support, and same-tail
 flat/mass/member/positive-loss non-diagnostic outputs of any inhabitant.  The
+full paper-closing route is now also gated to project back through this repaired
+support-surface route/output via
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route`
+and
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate`.
+The
 remaining topo closure task is therefore to instantiate this repaired support
 route with a genuine random finite `Z2_L` carrier.  The
 full-reach flat-only lower-bound route is also packaged by
@@ -731,10 +737,14 @@ actual repaired bridge and full-support witness, and that the old over-strong
 contract would project to it.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate`,
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output` and
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
-so a future route must expose the repaired paper-support surface, the missing
-giant-loss closing field, and the same-tail flat/giant/mass/positive-realisation
+so a future route must expose the repaired paper-support surface, factor back
+through the repaired support-surface route/output, expose the missing giant-loss
+closing field, and carry the same-tail flat/giant/mass/positive-realisation
 output rather than merely an existential wrapper.
 It now also gates direct old-contract-to-output projections for the giant-loss,
 paper-support, combined-support, and supported-nondiagnostic route outputs, so

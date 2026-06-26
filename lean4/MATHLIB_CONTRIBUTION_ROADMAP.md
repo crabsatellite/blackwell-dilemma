@@ -532,10 +532,14 @@ bridge and full-support witness, and that the old over-strong contract would
 project to it.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate`,
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output` and
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
-so the future route must project to the repaired paper-support surface, the
-missing giant-loss field, and the same-tail flat/giant/mass/positive-realisation
+so the future route must project to the repaired paper-support surface, factor
+back through the repaired support-surface route/output, expose the missing
+giant-loss field, and carry the same-tail flat/giant/mass/positive-realisation
 package before the remaining Mathlib/percolation work can count as
 paper-semantic closure.
 It now also gates direct old-contract-to-output projections for the giant-loss,

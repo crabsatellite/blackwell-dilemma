@@ -16478,6 +16478,39 @@ theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_outp
   rintro ⟨bridge, hsupport⟩
   exact ⟨bridge, hsupport.1⟩
 
+/-- The full topo paper-closing route also exposes the repaired support-surface
+repair on the same repaired bridge. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+          bridge := by
+  rintro ⟨bridge, _hsupport⟩
+  exact ⟨bridge,
+    randomSupercriticalZ2TopoClusterRepairedBridge_support_surface_repair
+      bridge⟩
+
+/-- The full topo paper-closing route factors through the repaired
+support-surface route rather than bypassing that non-contradictory surface. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute := by
+  intro hroute
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output
+      hroute
+
+/-- Any full topo paper-closing route carries the same support-surface output
+as the repaired support-surface route. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput := by
+  intro hroute
+  exact
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_support_output
+      (randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route
+        hroute)
+
 /-- The full topo paper-closing route exposes the repaired giant-loss closing
 field, not only an inhabited repaired bridge. -/
 theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output :
@@ -16798,10 +16831,11 @@ topo paper-closing route.
 
 This is a gate-facing package: it records that any future witness of the route
 must expose a repaired bridge, the full-support witness, repaired paper
-support, giant-loss closing, the same-tail combined flat/giant/mass/positive
-support, and arbitrarily large supported non-diagnostic finite members.  The
-final two fields package the numeric output bundle and the paper-support
-inclusive full output bundle as explicit conjunctions. -/
+support, the repaired support-surface repair route/output, giant-loss closing,
+the same-tail combined flat/giant/mass/positive support, and arbitrarily large
+supported non-diagnostic finite members.  The final two fields package the
+numeric output bundle and the paper-support inclusive full output bundle as
+explicit conjunctions. -/
 def RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate :
     Prop :=
   (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
@@ -16813,6 +16847,14 @@ def RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate :
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
+    (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+          bridge) /\
+    (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
+    (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput) /\
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
@@ -17001,6 +17043,9 @@ theorem random_supercritical_z2_topo_cluster_full_paper_closing_route_output_cer
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_repaired_bridge_nonempty,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_witness,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output,
@@ -18716,6 +18761,14 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
+    (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+          bridge) /\
+    (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
+    (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput) /\
     Not
       (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
         firstEdgeOpenGiantClosedTopoLossRepairedBridge_current) /\
@@ -18976,6 +19029,9 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
     random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_giant_loss_output,

@@ -706,10 +706,14 @@ nonemptiness and the full-support witness, and that the old over-strong bridge
 contract would project to this route.
 It also proves
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate`,
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output` and
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
-so the route must project to the repaired paper-support surface, the missing
-giant-loss closing field, and one same-tail flat/giant/mass/positive-realisation
+so the route must project to the repaired paper-support surface, factor back
+through the repaired support-surface route/output, expose the missing giant-loss
+closing field, and carry one same-tail flat/giant/mass/positive-realisation
 output package.
 It now also gates direct old-contract-to-output projections for the giant-loss,
 paper-support, combined-support, and supported-nondiagnostic route outputs, so
