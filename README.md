@@ -103,8 +103,9 @@ cannot satisfy the threshold certificate, and the closed-unit transfer plus
 existential witness theorem is ready for any repaired nonempty-domain instance.
 The bridge-level tail-reversal output certificate now also projects
 `alphaStar 0 p_c < 1`, closed-unit domain nonemptiness, closed-unit bridge
-nonemptiness, same-bridge paper-support plus sentimental-reversal, Part 6
-route/support, and the full output bundle from any future tail-reversal bridge.
+nonemptiness, same-carrier closed-unit full paper-domain support, same-bridge
+paper-support plus sentimental-reversal, Part 6 route/support, and the full
+output bundle from any future tail-reversal bridge.
 It also proves that the current carrier cannot satisfy the closed-unit
 paper-domain divergence witness or the stronger same-`alpha`
 feasible/divergence witness, so the output shape itself is not vacuously

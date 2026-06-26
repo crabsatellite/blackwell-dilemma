@@ -5243,15 +5243,40 @@ theorem part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridg
       bridge
 
 omit [DiagnosticSignalHypothesisData] in
+/-- A closed-unit tail-reversal bridge carries the full closed-unit Part 6
+paper-domain support for its own scaling carrier. -/
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_domain_witness
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    ClosedUnitPart6FullPaperClosingSupport bridge.scalingCarrier := by
+  simpa [z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge]
+    using
+      z2LatticeEmbeddingClosedUnitLocalBridgeData_full_paper_domain_witness
+        (z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+          bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Nonempty tail-reversal bridge data directly supplies the closed-unit branch
+of the full Part 6 paper-closing support surface. -/
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_closing_support_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Exists fun scalingCarrier : Real -> Real =>
+        ClosedUnitPart6FullPaperClosingSupport scalingCarrier := by
+  rintro ⟨bridge⟩
+  exact
+    ⟨bridge.scalingCarrier,
+      z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_domain_witness
+        bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- A closed-unit tail-reversal bridge is sufficient for the Part 6 full
 paper-closing support surface. -/
 theorem part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
     (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
     Part6FullPaperClosingSupport := by
-  exact
-    part6_full_paper_closing_support_of_z2_lattice_embedding_closed_unit_local_bridge
-      (z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
-        bridge)
+  exact Or.inr
+    ⟨bridge.scalingCarrier,
+      z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_domain_witness
+        bridge⟩
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Nonempty bridge-level tail-reversal data is sufficient for the Part 6 full
@@ -5402,6 +5427,11 @@ def Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate :
         alphaStar 0 harrisKestenCriticalProb < alpha /\ alpha <= 1) /\
     (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
       Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) /\
+    (forall bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      ClosedUnitPart6FullPaperClosingSupport bridge.scalingCarrier) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Exists fun scalingCarrier : Real -> Real =>
+        ClosedUnitPart6FullPaperClosingSupport scalingCarrier) /\
     (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
       Part6FullPaperClosingBridgeRoute) /\
     (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
@@ -5491,6 +5521,8 @@ theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_alphaStar_lt_one,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_alpha_domain_nonempty,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_closed_unit_bridge_nonempty,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_domain_witness,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_closing_support_nonempty,
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge,
     part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge,
     part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge,
@@ -5784,6 +5816,11 @@ def Part6CurrentFrontierCertificate : Prop :=
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
     Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
     Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) /\
+    (forall bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      ClosedUnitPart6FullPaperClosingSupport bridge.scalingCarrier) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Exists fun scalingCarrier : Real -> Real =>
+        ClosedUnitPart6FullPaperClosingSupport scalingCarrier) /\
     (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
       Part6FullPaperClosingBridgeRoute) /\
     (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
@@ -5818,6 +5855,8 @@ theorem part6_current_frontier_certificate :
     part6_current_bridge_routes_obstruction_certificate,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_domain_witness,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_closing_support_nonempty,
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty,
     part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty,
     part6_full_paper_closing_support_of_bridge_route,
