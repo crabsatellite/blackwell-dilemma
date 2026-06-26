@@ -545,6 +545,11 @@ The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
 now packages the route-level paper-support output and bundled obstruction as
 well, together with the finite positive-regression certificate
 `firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`.
+It also packages
+`random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate`,
+which proves that a pointwise-on-giant repaired route would close the
+giant-loss field, the full repaired support surface, and the named full route,
+while the current first-edge witness cannot satisfy that route.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
@@ -560,7 +565,8 @@ The combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate` now gates
 both the old over-strong bridge-contract obstruction and that repaired
 first-edge compatibility/not-closing witness, diagnostic obstruction
-certificate, and finite positive-regression certificate in one theorem.
+certificate, and finite positive-regression and pointwise-route certificates
+in one theorem.
 This is a
 reachability and zero-loss calibration for the repaired interface, not the
 final paper theorem, because the witness remains a one-edge cylinder rather

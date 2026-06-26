@@ -709,6 +709,11 @@ The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
 now packages the route-level paper-support output and bundled obstruction as
 well, together with the finite positive-regression certificate
 `firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`.
+It also packages
+`random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate`,
+which proves that a pointwise-on-giant repaired route would close the
+giant-loss field, the full repaired support surface, and the named full route,
+while the current first-edge witness cannot satisfy that route.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
@@ -725,7 +730,7 @@ The topo current frontier is also packaged as
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
 the old over-strong bridge-contract obstruction with the repaired first-edge
 compatibility/not-closing witness, diagnostic obstruction certificate, and
-finite positive-regression certificate.
+finite positive-regression and pointwise-route certificates.
 Thus its selected event is reachability-linked to the boxed-torus base
 horizontal edge, but its giant-restricted topological loss is exactly zero and
 admits no positive uniform lower-bound certificate, which is why it remains

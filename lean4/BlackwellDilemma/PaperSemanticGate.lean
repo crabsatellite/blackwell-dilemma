@@ -1713,6 +1713,8 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     Not
       (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
         firstEdgeOpenGiantClosedTopoLossRepairedBridge_current)
+  random_supercritical_z2_giant_pointwise_loss_route_certificate :
+    RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate
   random_supercritical_z2_full_paper_closing_route_first_edge_three_quarters_witness_obstruction :
     Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
       (∀ L : ℕ,
@@ -2796,6 +2798,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route
   random_supercritical_z2_repaired_bridge_current_not_giant_pointwise_loss_route :=
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route
+  random_supercritical_z2_giant_pointwise_loss_route_certificate :=
+    random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate
   random_supercritical_z2_full_paper_closing_route_first_edge_three_quarters_witness_obstruction :=
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_witness
   random_supercritical_z2_full_paper_closing_route_of_repaired_bridge :=

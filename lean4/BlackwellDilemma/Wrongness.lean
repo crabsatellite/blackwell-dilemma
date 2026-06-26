@@ -17458,6 +17458,41 @@ theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwi
   rw [hzero] at hpoint
   exact (not_lt_of_ge hpoint) heps_pos
 
+/-- Compact certificate for the sufficient pointwise-on-giant repair route.
+
+This route is the current theorem-level replacement obligation for the missing
+giant-restricted lower-bound field: any repaired bridge satisfying it closes
+the giant-loss field, the full repaired support surface, and the named full
+topo paper-closing route.  The finite first-edge compatibility witness is also
+kernel-refuted at exactly this route surface. -/
+def RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate :
+    Prop :=
+  (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+    RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+      bridge ->
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge) /\
+    (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge ->
+        RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+          bridge) /\
+    (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge ->
+        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current)
+
+theorem random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate :
+    RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate := by
+  exact ⟨
+    randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route,
+    randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route,
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route⟩
+
 /-- Any repaired bridge that uses the first-edge cylinder family at `p = 3/4`
 cannot supply the missing giant-restricted paper-closing field.
 
@@ -17996,17 +18031,19 @@ theorem random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruct
 
 This certificate packages the honest current state of the open topo target:
 the old over-strong bridge contract is kernel-refuted, while the repaired
-bridge contract is nonempty, rules out deterministic diagnostic repairs, and
-has both the finite first-edge compatibility certificate and the separate
-finite positive-regression certificate showing why those current witnesses are
-useful but still not a paper-closing random finite-lattice giant-component
-carrier. -/
+bridge contract is nonempty, rules out deterministic diagnostic repairs, has
+both the finite first-edge compatibility certificate and the separate finite
+positive-regression certificate, and packages the pointwise-on-giant route
+certificate showing what sufficient repair would close the missing
+giant-restricted field while refuting the current first-edge witness at that
+route surface. -/
 def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
   Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData) /\
     Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData /\
     FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate /\
     RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate /\
     FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
+    RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate /\
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
@@ -18261,6 +18298,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate,
     random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate,
     firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
+    random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
