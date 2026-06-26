@@ -539,6 +539,13 @@ paper-support-inclusive full output-bundle surface.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
 now packages the route-level paper-support output and bundled obstruction as
 well.
+It now also includes
+`RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
+and
+`random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate`,
+so the repaired bridge surface itself excludes the current full-reach,
+flat-only, all-open-complement, deterministic all-open giant, deterministic
+all-open positive, pointwise-hybrid, and eventual diagnostic-tail families.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
 so any final route must expose arbitrarily large non-diagnostic finite members

@@ -17855,18 +17855,156 @@ theorem not_random_supercritical_z2_topo_cluster_bridge_contract_current :
                       have h_lower := hgiant_lower L hL_giant
                       linarith
 
+/-- The repaired random-supercritical bridge cannot be discharged by the current
+full-reach complement diagnostic family. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_full_reach_diagnostic :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat,
+        bridge.family L = boxedTorusFullReachComplementTopoLossData L) := by
+  rintro ⟨bridge, hfamily⟩
+  exact bridge.not_full_reach_diagnostic hfamily
+
+/-- The repaired random-supercritical bridge cannot be discharged by the current
+flat-only diagnostic family. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_flat_only_diagnostic :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat,
+        bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L) := by
+  rintro ⟨bridge, hfamily⟩
+  exact bridge.not_flat_only_diagnostic hfamily
+
+/-- The repaired random-supercritical bridge cannot be discharged by the current
+all-open complement diagnostic family. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_all_open_complement_diagnostic :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat,
+        bridge.family L = boxedTorusAllOpenComplementTopoLossData L) := by
+  rintro ⟨bridge, hfamily⟩
+  exact bridge.not_all_open_complement_diagnostic hfamily
+
+/-- The repaired random-supercritical bridge cannot be discharged by the
+deterministic all-open giant-event diagnostic family. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_all_open_giant_diagnostic :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat,
+        bridge.family L = boxedTorusAllOpenGiantTopoLossData L) := by
+  rintro ⟨bridge, hfamily⟩
+  exact bridge.not_all_open_giant_diagnostic hfamily
+
+/-- The repaired random-supercritical bridge cannot be discharged by the
+deterministic all-open positive-loss diagnostic family. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_all_open_positive_diagnostic :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat,
+        bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) := by
+  rintro ⟨bridge, hfamily⟩
+  exact bridge.not_all_open_positive_diagnostic hfamily
+
+/-- The repaired bridge cannot be a pointwise hybrid assembled only from the
+three older deterministic diagnostic families. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_pointwise_diagnostic_combo :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat,
+        bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+          bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+          bridge.family L = boxedTorusAllOpenComplementTopoLossData L) := by
+  rintro ⟨bridge, hfamily⟩
+  exact bridge.not_pointwise_diagnostic_combo hfamily
+
+/-- The repaired bridge cannot become diagnostic after finitely many exceptional
+boxed-torus sizes. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_eventual_pointwise_diagnostic_combo :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      Exists fun L0 : Nat =>
+        forall L : Nat, L0 <= L ->
+          bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+            bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenComplementTopoLossData L) := by
+  rintro ⟨bridge, htail⟩
+  exact bridge.not_eventually_pointwise_diagnostic_combo htail
+
+/-- The repaired bridge cannot have an eventual tail assembled from any of the
+current deterministic diagnostic families, including the all-open positive-loss
+candidate. -/
+theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_eventual_pointwise_extended_diagnostic_combo :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      Exists fun L0 : Nat =>
+        forall L : Nat, L0 <= L ->
+          bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+            bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenComplementTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenGiantTopoLossData L \/
+            bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) := by
+  rintro ⟨bridge, htail⟩
+  exact bridge.not_eventually_pointwise_extended_diagnostic_combo htail
+
+/-- Compact repaired-bridge diagnostic obstruction certificate for the current
+topo frontier.  This is stronger than checking only the old, over-strong bridge
+contract: the repaired bridge surface itself rules out deterministic diagnostic
+families and eventual diagnostic tails. -/
+def RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate :
+    Prop :=
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    forall L : Nat,
+      bridge.family L = boxedTorusFullReachComplementTopoLossData L) /\
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    forall L : Nat,
+      bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    forall L : Nat,
+      bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    forall L : Nat,
+      bridge.family L = boxedTorusAllOpenGiantTopoLossData L) /\
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    forall L : Nat,
+      bridge.family L = boxedTorusAllOpenPositiveTopoLossData L) /\
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    forall L : Nat,
+      bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+        bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+        bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+          bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+          bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+  Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    Exists fun L0 : Nat =>
+      forall L : Nat, L0 <= L ->
+        bridge.family L = boxedTorusFullReachComplementTopoLossData L \/
+          bridge.family L = boxedTorusFullReachFlatOnlyComplementTopoLossData L \/
+          bridge.family L = boxedTorusAllOpenComplementTopoLossData L \/
+          bridge.family L = boxedTorusAllOpenGiantTopoLossData L \/
+          bridge.family L = boxedTorusAllOpenPositiveTopoLossData L)
+
+theorem random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate :
+    RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate := by
+  exact ⟨
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_full_reach_diagnostic,
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_flat_only_diagnostic,
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_all_open_complement_diagnostic,
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_all_open_giant_diagnostic,
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_all_open_positive_diagnostic,
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_pointwise_diagnostic_combo,
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_eventual_pointwise_diagnostic_combo,
+    not_random_supercritical_z2_topo_cluster_repaired_bridge_eventual_pointwise_extended_diagnostic_combo⟩
+
 /-- Current topo/phase frontier certificate for the random-supercritical
 `Z^2_L` bridge route.
 
 This certificate packages the honest current state of the open topo target:
 the old over-strong bridge contract is kernel-refuted, while the repaired
-bridge contract is nonempty and has the finite first-edge compatibility
-certificate showing why that current witness is useful but still not a
-paper-closing random finite-lattice giant-component carrier. -/
+bridge contract is nonempty, rules out deterministic diagnostic repairs, and
+has the finite first-edge compatibility certificate showing why that current
+witness is useful but still not a paper-closing random finite-lattice
+giant-component carrier. -/
 def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
   Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData) /\
     Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData /\
     FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate /\
+    RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate /\
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
@@ -18119,6 +18257,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
   exact ⟨not_random_supercritical_z2_topo_cluster_bridge_contract_current,
     exists_firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate,
+    random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
