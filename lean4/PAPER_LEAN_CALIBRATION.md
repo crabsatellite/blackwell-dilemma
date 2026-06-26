@@ -400,7 +400,9 @@ with
 now projecting `alphaStar 0 p_c < 1`, closed-unit alpha-domain nonemptiness,
 closed-unit bridge nonemptiness, same-carrier closed-unit full paper-domain
 support, same-bridge paper-support plus sentimental-reversal, Part 6
-route/support, and the full output bundle from any future tail-reversal bridge,
+route/support, the same-alpha divergence/feasible-divergence output pair
+(`part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge`),
+and the full output bundle from any future tail-reversal bridge,
 and with
 `not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current` recording
 the exact current obstruction to that bridge-level route.

@@ -5437,6 +5437,16 @@ def Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate :
     (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
       Part6FullPaperClosingSupport) /\
     (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingDivergenceWitness) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
       Part6FullPaperClosingFullOutputBundle) /\
     (forall bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
       Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
@@ -5506,6 +5516,49 @@ theorem part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal
       bridge)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- A closed-unit tail-reversal bridge exposes the same-`alpha` Part 6
+divergence witness, not only the full support wrapper. -/
+theorem part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Part6FullPaperClosingDivergenceWitness :=
+  part6_full_paper_closing_support_divergence_witness
+    (part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
+      bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A closed-unit tail-reversal bridge exposes the same-`alpha`
+feasible/divergence witness required by the paper route. -/
+theorem part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Part6FullPaperClosingFeasibleDivergenceWitness :=
+  part6_full_paper_closing_support_feasible_divergence_witness
+    (part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
+      bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A closed-unit tail-reversal bridge exposes the paired Part 6 output layer
+directly. -/
+theorem part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness :=
+  part6_full_paper_closing_support_output_pair
+    (part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
+      bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Nonempty closed-unit tail-reversal bridge data exposes the paired Part 6
+output layer. -/
+theorem part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  rintro ⟨bridge⟩
+  exact
+    part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge
+      bridge
+
+omit [DiagnosticSignalHypothesisData] in
 theorem part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge_nonempty :
     Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
       Part6FullPaperClosingFullOutputBundle := by
@@ -5525,6 +5578,10 @@ theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_closing_support_nonempty,
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge,
     part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge_nonempty,
     part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal_nonempty,
@@ -5825,6 +5882,16 @@ def Part6CurrentFrontierCertificate : Prop :=
       Part6FullPaperClosingBridgeRoute) /\
     (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
       Part6FullPaperClosingSupport) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingDivergenceWitness) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
     (Part6FullPaperClosingBridgeRoute -> Part6FullPaperClosingSupport) /\
     (Part6FullPaperClosingSupport ->
       Part6FullPaperClosingDivergenceWitness /\
@@ -5859,6 +5926,10 @@ theorem part6_current_frontier_certificate :
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_closing_support_nonempty,
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty,
     part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty,
+    part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge,
+    part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge_nonempty,
     part6_full_paper_closing_support_of_bridge_route,
     part6_full_paper_closing_support_output_pair,
     part6_full_paper_closing_bridge_route_output_pair,
