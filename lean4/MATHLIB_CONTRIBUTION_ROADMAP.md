@@ -575,6 +575,10 @@ For Part 6, the new `closed_unit_alpha_domain_repair_certificate` packages the
 closed-unit `alphaStar 0 p_c = 1` degeneracy, the exact nonempty-domain iff,
 the forced sentimental-reversal witness, the sufficient tail-reversal route,
 and the current route obstruction as one gate theorem.
+The `part6_bridge_route_support_certificate` now also packages both
+local/closed-unit bridge-to-support projections, the total bridge-route
+support projection, and the current branch/route obstructions as one audited
+Part 6 route-surface theorem.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,

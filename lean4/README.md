@@ -945,12 +945,16 @@ The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
 and closed-unit current-obstruction certificate together with the paired/full
 output-bundle obstructions, support obstruction, bridge-level tail-reversal
-route obstruction, and bridge-route obstruction.
+route obstruction, bridge-route obstruction, and the unified
+`part6_bridge_route_support_certificate`.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support
 surface, while `not_part6_full_paper_closing_bridge_route_current` records that
 the current bridge routes are still uninhabited.
+The `part6_bridge_route_support_certificate` also keeps the two individual
+local/closed-unit bridge-to-support projections and the paired current
+branch-route obstruction in one audited proposition.
 `not_z2_lattice_embedding_closed_unit_local_bridge_current` proves the current
 carrier cannot instantiate that bridge because its threshold certificate is
 impossible. The remaining Part 6 repair is therefore

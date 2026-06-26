@@ -322,14 +322,19 @@ future Part 6 closure must expose support, divergence, and same-`alpha`
 feasible/divergence witnesses as one machine-checked package.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
-and closed-unit current-obstruction certificate together with the paired/full
-output-bundle obstructions, support obstruction, and bridge-route obstruction.
+and closed-unit current-obstruction certificate together with the
+`part6_bridge_route_support_certificate`, paired/full output-bundle
+obstructions, support obstruction, and bridge-route obstruction.
 It also
 gates `Part6FullPaperClosingBridgeRoute`,
 `part6_full_paper_closing_support_of_bridge_route`, and
 `not_part6_full_paper_closing_bridge_route_current`, so a future inhabited
 repaired bridge route is formally sufficient for the named support surface,
-while the current bridge routes are formally ruled out. The gate also proves
+while the current bridge routes are formally ruled out. The unified
+`part6_bridge_route_support_certificate` also packages both individual
+local/closed-unit bridge-to-support projections with the paired branch-route
+obstruction.
+The gate also proves
 `alphaStar_eq_one_current` and
 `not_closed_unit_alpha_above_alphaStar_current`, so simply bounding the paper
 domain by `α <= 1` would make the current `α > α*` regime empty. The

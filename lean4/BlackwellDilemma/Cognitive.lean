@@ -5565,19 +5565,47 @@ theorem part6_current_bridge_routes_obstruction_certificate :
     not_z2_lattice_embedding_closed_unit_local_bridge_current
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Unified support certificate for the Part 6 bridge-route surface.
+
+The two bridge branches are both sufficient for the full Part 6 support
+surface, the disjunctive bridge route projects to that same support surface,
+and the current carrier refutes both branches as well as the total route. -/
+def Part6BridgeRouteSupportCertificate : Prop :=
+  (forall _bridge : Z2LatticeEmbeddingLocalBridgeData,
+    Part6FullPaperClosingSupport) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData,
+      Part6FullPaperClosingSupport) /\
+    (Part6FullPaperClosingBridgeRoute -> Part6FullPaperClosingSupport) /\
+    (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
+      Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
+    Not Part6FullPaperClosingBridgeRoute
+
+omit [DiagnosticSignalHypothesisData] in
+theorem part6_bridge_route_support_certificate :
+    Part6BridgeRouteSupportCertificate := by
+  exact ⟨
+    part6_full_paper_closing_support_of_z2_lattice_embedding_local_bridge,
+    part6_full_paper_closing_support_of_z2_lattice_embedding_closed_unit_local_bridge,
+    part6_full_paper_closing_support_of_bridge_route,
+    part6_current_bridge_routes_obstruction_certificate,
+    not_part6_full_paper_closing_bridge_route_current⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Unified current-frontier certificate for the open Part 6 lattice-embedding
 semantic target.
 
 This packages the unbounded-route obstruction certificate, the closed-unit
-obstruction certificate, the two current bridge-route refutations, the bridge
-route-to-support projection, the paired output projections, and the current
-output/support/route obstructions.  It is intentionally a non-closure
+obstruction certificate, the unified bridge-route support certificate, the
+two current bridge-route refutations, the bridge route-to-support projection,
+the paired output projections, and the current output/support/route
+obstructions.  It is intentionally a non-closure
 certificate: closing Part 6 still requires a repaired, nondegenerate
 `alpha`/feasible-set domain and a genuine `Z^2` lattice/percolation carrier. -/
 def Part6CurrentFrontierCertificate : Prop :=
   UnboundedPart6CurrentObstructionCertificate /\
     Part6ScalingCandidateCurrentObstructionCertificate /\
     ClosedUnitPart6CurrentObstructionCertificate /\
+    Part6BridgeRouteSupportCertificate /\
     (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
     Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) /\
@@ -5610,6 +5638,7 @@ theorem part6_current_frontier_certificate :
   exact ⟨unbounded_part6_current_obstruction_certificate,
     part6_scaling_candidate_current_obstruction_certificate,
     closed_unit_part6_current_obstruction_certificate,
+    part6_bridge_route_support_certificate,
     part6_current_bridge_routes_obstruction_certificate,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty,
