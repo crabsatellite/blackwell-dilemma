@@ -236,6 +236,13 @@ threshold certificate. It also gates
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
 so the closed-unit repair must provide a genuine sentimental welfare reversal
 inside the closed unit alpha range, not merely another scaling-carrier wrapper.
+It also checks `ClosedUnitAlphaStarTailReversalRepairRoute`,
+`alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route`,
+`closed_unit_alpha_domain_nonempty_of_tail_reversal_repair_route`, and
+`not_closed_unit_alphaStar_tail_reversal_repair_route_current`, so one
+kernel-checked sufficient route is now explicit: prove a uniform tail
+sentimental welfare reversal above some `a < 1`; the current carrier is blocked
+because it remains beta-monotone on the whole closed unit interval.
 The gate also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 which combines that reversal requirement with the closed-unit paper-support

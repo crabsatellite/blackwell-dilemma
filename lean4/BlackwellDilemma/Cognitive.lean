@@ -3991,6 +3991,100 @@ theorem closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one :
     · linarith
     · linarith
 
+/-- Sufficient repair route for the closed-unit Part 6 `alphaStar` domain.
+
+The route is stronger than a single sentimental reversal witness: it requires
+a proper threshold `a < 1` such that every closed-unit `alpha` above `a`
+exhibits a Blackwell-monotonicity reversal.  This is the kernel-checkable
+shape that would force the supremum defining `alphaStar` below the endpoint. -/
+def ClosedUnitAlphaStarTailReversalRepairRoute (κ _p : Real) : Prop :=
+  Exists fun a : Real =>
+    0 <= a /\ a < 1 /\
+      forall alpha : Real, a < alpha -> alpha <= 1 ->
+        Exists fun beta1 : Real =>
+          Exists fun beta2 : Real =>
+            beta1 <= beta2 /\
+              agentWelfare AgentType.sentimental beta2 κ alpha <
+                agentWelfare AgentType.sentimental beta1 κ alpha
+
+omit [DiagnosticSignalHypothesisData] in
+theorem alphaStar_le_of_closed_unit_tail_reversal_repair_route
+    {κ p : Real} (hκ : 0 <= κ)
+    (hroute : ClosedUnitAlphaStarTailReversalRepairRoute κ p) :
+    Exists fun a : Real =>
+      0 <= a /\ a < 1 /\ alphaStar κ p <= a := by
+  rcases hroute with ⟨a, ha_nonneg, ha_lt_one, htail⟩
+  refine ⟨a, ha_nonneg, ha_lt_one, ?_⟩
+  rw [alphaStar_def κ p]
+  let S : Set Real := { alpha : Real | 0 <= alpha /\ alpha <= 1 /\
+    forall beta1 beta2 : Real, beta1 <= beta2 ->
+      agentWelfare AgentType.sentimental beta1 κ alpha <=
+        agentWelfare AgentType.sentimental beta2 κ alpha }
+  change sSup S <= a
+  have h0mem : (0 : Real) ∈ S := by
+    refine ⟨by norm_num, by norm_num, ?_⟩
+    intro beta1 beta2 hbeta
+    exact signal_independent_at_alpha_zero κ p hκ beta1 beta2 hbeta
+  exact csSup_le ⟨0, h0mem⟩ (fun alpha halpha => by
+    by_contra hnot_le
+    have hgt : a < alpha := lt_of_not_ge hnot_le
+    rcases htail alpha hgt halpha.2.1 with
+      ⟨beta1, beta2, hbeta, hrev⟩
+    have hmono :
+        agentWelfare AgentType.sentimental beta1 κ alpha <=
+          agentWelfare AgentType.sentimental beta2 κ alpha :=
+      halpha.2.2 beta1 beta2 hbeta
+    linarith)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route
+    {κ p : Real} (hκ : 0 <= κ)
+    (hroute : ClosedUnitAlphaStarTailReversalRepairRoute κ p) :
+    alphaStar κ p < 1 := by
+  rcases alphaStar_le_of_closed_unit_tail_reversal_repair_route
+      hκ hroute with ⟨a, _ha_nonneg, ha_lt_one, halpha_le⟩
+  exact lt_of_le_of_lt halpha_le ha_lt_one
+
+omit [DiagnosticSignalHypothesisData] in
+theorem closed_unit_alpha_domain_nonempty_of_tail_reversal_repair_route
+    (hroute :
+      ClosedUnitAlphaStarTailReversalRepairRoute
+        0 harrisKestenCriticalProb) :
+    Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha ∧ alpha <= 1 := by
+  exact closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one.mpr
+    (alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route
+      (κ := 0) (p := harrisKestenCriticalProb) (by norm_num) hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the tail-reversal repair route.
+
+The current sentimental kernel is monotone in `β` throughout the closed unit
+`alpha` interval.  Therefore no tail interval above any `a < 1` can carry the
+uniform reversal needed to force `alphaStar 0 p_c < 1`. -/
+theorem not_closed_unit_alphaStar_tail_reversal_repair_route_current :
+    Not (ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb) := by
+  rintro ⟨a, _ha_nonneg, ha_lt_one, htail⟩
+  let alpha : Real := (a + 1) / 2
+  have hgt : a < alpha := by
+    dsimp [alpha]
+    linarith
+  have hle_one : alpha <= 1 := by
+    dsimp [alpha]
+    linarith
+  rcases htail alpha hgt hle_one with ⟨beta1, beta2, hbeta, hrev⟩
+  have hmono :
+      agentWelfare AgentType.sentimental beta1 0 alpha <=
+        agentWelfare AgentType.sentimental beta2 0 alpha := by
+    exact agentWelfare_monotone_of_kernel_pointwise_monotone
+      AgentType.sentimental 0 alpha
+      (fun b1 b2 hb omega =>
+        agentRewardKernel_sentimental_pointwise_monotone
+          0 alpha b1 b2 hb omega)
+      beta1 beta2 hbeta
+  linarith
+
 omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the paper-bounded Part 6 `α` regime.
 

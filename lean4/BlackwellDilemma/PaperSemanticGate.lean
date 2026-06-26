@@ -61,9 +61,9 @@ def semanticTargets : List SemanticTarget :=
       paperLabel := "thm:cognitive-threshold Part 6",
       status := SemanticStatus.open,
       shortReason :=
-        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local nonempty alpha-domain projection, unbounded-local paper-support certificate with pointwise, existential, and full same-alpha domination/feasibility/divergence support, unbounded divergence, pointwise paper-domain certificate, feasible/divergence, full-witness, and full paper-closing support current obstructions, a unified unbounded current-obstruction certificate, closed-unit local transfer, closed-unit feasible-set nonemptiness, existential witness projection, same-alpha closed-unit feasible/divergence certificates, full same-alpha closed-unit domination/feasibility/divergence witness, closed-unit output-witness, full-witness, and full paper-closing support current obstructions, a combined Part 6 full paper-closing support obstruction, full-support-to-divergence-witness, bridge-route-to-divergence-witness, full-support-to-feasible/divergence-witness, bridge-route-to-feasible/divergence-witness, and paired output-layer projections plus the current output-layer and output-pair obstructions, repaired bridge-route-to-full-support projection theorems plus the current bridge-route obstruction, a unified closed-unit current-obstruction certificate, and a unified Part 6 current-frontier certificate packaging both route certificates, the paired output obstructions, the support obstruction, and the bridge-route obstruction, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, the requirement that any alphaStar < 1 closed-unit repair expose a sentimental welfare reversal witness, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, feasible-set nonemptiness, and same-alpha witness fields, a combined closed-unit paper-support plus sentimental-reversal bridge contract and exact current obstruction to that combined contract, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
+        "The current global scaling-transfer payload, local-domination transfer, local feasible-set nonemptiness contract, unbounded-local nonempty alpha-domain projection, unbounded-local paper-support certificate with pointwise, existential, and full same-alpha domination/feasibility/divergence support, unbounded divergence, pointwise paper-domain certificate, feasible/divergence, full-witness, and full paper-closing support current obstructions, a unified unbounded current-obstruction certificate, closed-unit local transfer, closed-unit feasible-set nonemptiness, existential witness projection, same-alpha closed-unit feasible/divergence certificates, full same-alpha closed-unit domination/feasibility/divergence witness, closed-unit output-witness, full-witness, and full paper-closing support current obstructions, a combined Part 6 full paper-closing support obstruction, full-support-to-divergence-witness, bridge-route-to-divergence-witness, full-support-to-feasible/divergence-witness, bridge-route-to-feasible/divergence-witness, and paired output-layer projections plus the current output-layer and output-pair obstructions, repaired bridge-route-to-full-support projection theorems plus the current bridge-route obstruction, a unified closed-unit current-obstruction certificate, and a unified Part 6 current-frontier certificate packaging both route certificates, the paired output obstructions, the support obstruction, and the bridge-route obstruction, named candidate obstructions, generic positive-at-zero global-carrier obstruction, explicit near-p_c unbounded-alpha zero-branch witness and blocker theorem, current local-bridge impossibility theorem, explicit closed-unit alphaStar-threshold bridge certificate, the requirement that any alphaStar < 1 closed-unit repair expose a sentimental welfare reversal witness, a sufficient tail-reversal repair route that would force alphaStar < 1 and nonempty closed-unit alpha-domain plus its current-carrier obstruction, a single closed-unit Part 6 paper-support certificate tying the Z2 graph, scaling divergence, nonempty alpha-domain, local domination, feasible-set nonemptiness, and same-alpha witness fields, a combined closed-unit paper-support plus sentimental-reversal bridge contract and exact current obstruction to that combined contract, exact closed-unit alpha-domain iff certificate, and alpha-domain degeneracy are gated, but the full lattice embedding route still needs a nondegenerate alpha-domain/feasible-set repair.",
       closeRoute :=
-        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1 by proving alphaStar 0 p_c < 1 for the repaired carrier, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem; the current unbounded-local and closed-unit bridge routes, output projections, support obstruction, and bridge-route obstruction are jointly packaged by one typed current-frontier certificate." },
+        "Current typed frontier: part6_lattice_embedding_frontier_payload. To close: replace the current unbounded-alpha local bridge with a paper-faithful, nonempty alpha-domain or explicit feasible-set/nonempty-domain certificate, repair the current alphaStar=1 degeneracy if the paper domain is alpha<=1 by proving alphaStar 0 p_c < 1 for the repaired carrier, for example via the gated closed-unit tail-reversal route, then instantiate it with a finite/infinite Z2 lattice percolation carrier and near-p_c domination theorem; the current unbounded-local and closed-unit bridge routes, output projections, support obstruction, and bridge-route obstruction are jointly packaged by one typed current-frontier certificate." },
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       status := SemanticStatus.open,
@@ -462,6 +462,17 @@ structure Part6LatticeEmbeddingFrontierPayload where
     (Exists fun α : ℝ =>
       alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) ↔
       alphaStar 0 harrisKestenCriticalProb < 1
+  closed_unit_tail_reversal_repair_route_alphaStar_lt_one :
+    ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb ->
+        alphaStar 0 harrisKestenCriticalProb < 1
+  closed_unit_tail_reversal_repair_route_alpha_domain_nonempty :
+    ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb ->
+        ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
+  closed_unit_tail_reversal_repair_route_current_obstruction :
+    Not (ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb)
   closed_unit_alpha_domain_empty_current :
     ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1
   closed_unit_divergence_witness_current_obstruction :
@@ -1018,6 +1029,14 @@ def part6_lattice_embedding_frontier_payload :
     alphaStar_lt_one_requires_sentimental_welfare_reversal_witness
   closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one :=
     closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one
+  closed_unit_tail_reversal_repair_route_alphaStar_lt_one :=
+    fun hroute =>
+      alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route
+        (κ := 0) (p := harrisKestenCriticalProb) (by norm_num) hroute
+  closed_unit_tail_reversal_repair_route_alpha_domain_nonempty :=
+    closed_unit_alpha_domain_nonempty_of_tail_reversal_repair_route
+  closed_unit_tail_reversal_repair_route_current_obstruction :=
+    not_closed_unit_alphaStar_tail_reversal_repair_route_current
   closed_unit_alpha_domain_empty_current :=
     not_closed_unit_alpha_above_alphaStar_current
   closed_unit_divergence_witness_current_obstruction :=

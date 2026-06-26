@@ -814,6 +814,14 @@ nonempty-domain repair is exactly the threshold certificate
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
 so a closed-unit repair must expose an actual sentimental welfare reversal in
 the closed unit alpha range rather than only replacing the scaling carrier. The
+gate now also checks `ClosedUnitAlphaStarTailReversalRepairRoute`,
+`alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route`,
+`closed_unit_alpha_domain_nonempty_of_tail_reversal_repair_route`, and
+`not_closed_unit_alphaStar_tail_reversal_repair_route_current`: a future
+repaired carrier can close the closed-unit alpha-domain by proving a uniform
+tail welfare reversal above some `a < 1`, while the current carrier is ruled
+out because its sentimental kernel remains beta-monotone on the whole closed
+unit interval. The
 closed-unit local bridge contract now includes that
 threshold certificate, derives the nonempty-domain witness from it, carries
 near-`p_c` feasible-set nonemptiness on the closed-unit paper domain, and the

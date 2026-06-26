@@ -353,6 +353,14 @@ domain is nonempty exactly when the repaired carrier proves
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_sentimental_welfare_reversal_required`,
 so this threshold repair must expose a genuine sentimental welfare reversal
 inside the closed unit alpha range, not merely a replacement scaling carrier.
+It also checks `ClosedUnitAlphaStarTailReversalRepairRoute`,
+`alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route`,
+`closed_unit_alpha_domain_nonempty_of_tail_reversal_repair_route`, and
+`not_closed_unit_alphaStar_tail_reversal_repair_route_current`, making the
+sufficient repair route explicit: a repaired carrier may prove a uniform tail
+sentimental welfare reversal above some `a < 1`, while the current carrier is
+blocked because the sentimental kernel is beta-monotone throughout the closed
+unit interval.
 It also gates
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 which ties that reversal requirement to the closed-unit Part 6 paper-support
