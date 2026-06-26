@@ -585,6 +585,10 @@ every index. It also gates
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_eq_failureMass`,
 making explicit that the current flat lower-bound evidence is supported by the
 full-reach failure complement.
+The route is now also bundled for the semantic gate by
+`boxedTorusFullReachFlatOnlyLowerBound_cutset_route_certificate`, which
+packages the separator, edge-cutset, coordinate-boundary, pointwise `p^B / 2`,
+and family-level lower-bound implications for the full-reach flat-only carrier.
 The repaired first-edge compatibility witness is now also calibrated by
 `randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_giant_event_member`,
 which turns the repaired bridge's positive giant-event mass into an actual

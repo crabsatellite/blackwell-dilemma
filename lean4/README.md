@@ -97,6 +97,10 @@ then packages that as
 so this witness has zero topological loss on its selected giant event, cannot
 support a positive uniform giant-restricted loss lower bound, and remains
 separate from the genuine random `Z2_L` giant-component theorem.  The
+full-reach flat-only lower-bound route is also packaged by
+`boxedTorusFullReachFlatOnlyLowerBound_cutset_route_certificate`, which gates
+the reusable separator/cutset/boundary implication from pointwise `p^B / 2`
+loss lower bounds to the family-level lower-bound package.  The
 threshold-five-state oracle-routing target is now closed by
 `FiveState.highKappaOracleRoutingWelfare_eq_oracle`; the current neutral
 kappa-agent carrier refutation
@@ -490,6 +494,10 @@ R436 exposes the omega-free cutset route one layer lower:
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedCutset_pow_div_two_of_card_le`
 is the pointwise `p^B / 2` theorem for bounded edge cutsets, and the
 bounded-cutset package now consumes it directly.
+The gate-level
+`boxedTorusFullReachFlatOnlyLowerBound_cutset_route_certificate` packages the
+separator, cutset, boundary, and family-level lower-bound variants into one
+frontier certificate for the topo semantic gate.
 R437 folds the legacy base-incident pointwise theorem into the same cutset
 path: `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedIncident`
 now instantiates `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedCutset`

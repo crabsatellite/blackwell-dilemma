@@ -684,6 +684,10 @@ R436 exposes the omega-free cutset route at the pointwise loss layer:
 `boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedCutset_pow_div_two_of_card_le`
 is the direct `p^B / 2` theorem for bounded edge cutsets, and the
 bounded-cutset package now consumes it directly.
+The semantic gate packages this reusable route as
+`boxedTorusFullReachFlatOnlyLowerBound_cutset_route_certificate`, so future
+nonlocal `Z^2_L` cutset/crossing work has a single machine-checked lower-bound
+interface to instantiate.
 R437 rewires the historical base-incident pointwise theorem through the same
 cutset layer: the current local witness is now a cutset instance, not a
 separate expected-loss calculation.

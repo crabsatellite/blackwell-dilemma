@@ -14162,6 +14162,116 @@ theorem BoxedTorusFullReachFlatOnlyLowerBoundConclusion_current :
         intro L _hL
         exact boxedTorusCoordEdgeBoundarySet_baseSingleton_card_le_four L)
 
+/-- Unified cutset/boundary lower-bound route for the current full-reach
+flat-only carrier.
+
+The certificate exposes the reusable route that a future nonlocal `Z^2_L`
+proof should target: a uniformly bounded separator, edge cutset, or coordinate
+boundary family gives the explicit `p^B / 2` flat expected-loss lower bound and
+therefore the family-level above-threshold lower-bound package. -/
+def BoxedTorusFullReachFlatOnlyLowerBoundCutsetRouteCertificate : Prop :=
+  (forall L : Nat,
+    forall A : Finset (BoxedTorusEdgeIdx L),
+      forall B : Nat,
+        BoxedTorusBaseTargetSeparator L A ->
+          forall p : Real, 0 <= p -> p <= 1 -> A.card <= B ->
+            p ^ B / 2 <=
+              expectedTopoLossOnData
+                (boxedTorusFullReachFlatOnlyComplementTopoLossData L)
+                (boxedTorusFlatGraphN L) p) /\
+  (forall L : Nat,
+    forall A : Finset (BoxedTorusEdgeIdx L),
+      forall B : Nat,
+        BoxedTorusBaseTargetEdgeCutset L A ->
+          forall p : Real, 0 <= p -> p <= 1 -> A.card <= B ->
+            p ^ B / 2 <=
+              expectedTopoLossOnData
+                (boxedTorusFullReachFlatOnlyComplementTopoLossData L)
+                (boxedTorusFlatGraphN L) p) /\
+  (forall L : Nat,
+    forall S : Finset (BoxedTorusVertex L),
+      forall B : Nat,
+        Membership.mem S (boxedTorusBaseVertex L) ->
+          Not (Membership.mem S (boxedTorusBaseHorizontalTarget L)) ->
+            forall p : Real, 0 <= p -> p <= 1 ->
+              (boxedTorusCoordEdgeBoundarySet L S).card <= B ->
+                p ^ B / 2 <=
+                  expectedTopoLossOnData
+                    (boxedTorusFullReachFlatOnlyComplementTopoLossData L)
+                    (boxedTorusFlatGraphN L) p) /\
+  (forall p : Real,
+    forall B L0 : Nat,
+      harrisKestenCriticalProb < p -> p <= 1 ->
+        forall A : (L : Nat) -> Finset (BoxedTorusEdgeIdx L),
+          (forall L : Nat, L0 <= L ->
+            BoxedTorusBaseTargetSeparator L (A L)) ->
+          (forall L : Nat, L0 <= L -> (A L).card <= B) ->
+            BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+              boxedTorusFullReachFlatOnlyComplementTopoLossData) /\
+  (forall p : Real,
+    forall B L0 : Nat,
+      harrisKestenCriticalProb < p -> p <= 1 ->
+        forall A : (L : Nat) -> Finset (BoxedTorusEdgeIdx L),
+          (forall L : Nat, L0 <= L ->
+            BoxedTorusBaseTargetEdgeCutset L (A L)) ->
+          (forall L : Nat, L0 <= L -> (A L).card <= B) ->
+            BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+              boxedTorusFullReachFlatOnlyComplementTopoLossData) /\
+  (forall p : Real,
+    forall B L0 : Nat,
+      harrisKestenCriticalProb < p -> p <= 1 ->
+        forall S : (L : Nat) -> Finset (BoxedTorusVertex L),
+          (forall L : Nat, L0 <= L ->
+            Membership.mem (S L) (boxedTorusBaseVertex L)) ->
+          (forall L : Nat, L0 <= L ->
+            Not (Membership.mem (S L) (boxedTorusBaseHorizontalTarget L))) ->
+          (forall L : Nat, L0 <= L ->
+            (boxedTorusCoordEdgeBoundarySet L (S L)).card <= B) ->
+            BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+              boxedTorusFullReachFlatOnlyComplementTopoLossData) /\
+  (forall B L0 : Nat,
+    forall S : (L : Nat) -> Finset (BoxedTorusVertex L),
+      (forall L : Nat, L0 <= L ->
+        Membership.mem (S L) (boxedTorusBaseVertex L)) ->
+      (forall L : Nat, L0 <= L ->
+        Not (Membership.mem (S L) (boxedTorusBaseHorizontalTarget L))) ->
+      (forall L : Nat, L0 <= L ->
+        (boxedTorusCoordEdgeBoundarySet L (S L)).card <= B) ->
+        BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+          boxedTorusFullReachFlatOnlyComplementTopoLossData)
+
+theorem boxedTorusFullReachFlatOnlyLowerBound_cutset_route_certificate :
+    BoxedTorusFullReachFlatOnlyLowerBoundCutsetRouteCertificate := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro L A B hsep p hp0 hp1 hcard
+    exact
+      boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedSeparator_pow_div_two_of_card_le
+        L A B hsep p hp0 hp1 hcard
+  · intro L A B hcut p hp0 hp1 hcard
+    exact
+      boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedCutset_pow_div_two_of_card_le
+        L A B hcut p hp0 hp1 hcard
+  · intro L S B hbase htarget p hp0 hp1 hcard
+    exact
+      boxedTorusFullReachFlatOnlyComplementTopoLossData_expectedTopoLossOnData_flat_ge_closedBoundary_pow_div_two_of_card_le
+        L S B hbase htarget p hp0 hp1 hcard
+  · intro p B L0 hpcrit hp1 A hsep hcard
+    exact
+      BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedSeparator_at
+        p B L0 hpcrit hp1 A hsep hcard
+  · intro p B L0 hpcrit hp1 A hcut hcard
+    exact
+      BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedCutset_at
+        p B L0 hpcrit hp1 A hcut hcard
+  · intro p B L0 hpcrit hp1 S hbase htarget hcard
+    exact
+      BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedBoundary_at
+        p B L0 hpcrit hp1 S hbase htarget hcard
+  · intro B L0 S hbase htarget hcard
+    exact
+      BoxedTorusFullReachFlatOnlyLowerBoundConclusion_of_eventually_boundedBoundary
+        B L0 S hbase htarget hcard
+
 theorem boxedTorusFullReachFlatOnlyComplementTopoLossData_flatFamilyCoreConclusion :
     BoxedTorusFlatFamilyCoreConclusion
       boxedTorusFullReachFlatOnlyComplementTopoLossData := by
