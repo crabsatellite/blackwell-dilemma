@@ -616,7 +616,12 @@ same-tail non-diagnostic support output from any route inhabitant.  The
 explicit
 `random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate`
 then packages the inhabited repair route with the current first-edge repaired
-surface and the full-route/boxed-torus-route kernel obstructions.  The near-term
+surface and the full-route/boxed-torus-route kernel obstructions.  The stronger
+`random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate`
+now gates the repaired closing spine itself: full paper-closing support and the
+support-surface closing route are equivalent, the pointwise-on-giant route
+projects into it, and any inhabitant exposes both the named full route and the
+boxed-torus finite `Z2_L` route.  The near-term
 work item is therefore to instantiate that repaired support route with a genuine
 random finite `Z2_L` carrier before the topo target can count as paper-semantic
 closure.

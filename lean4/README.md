@@ -813,9 +813,14 @@ projects repaired bridge nonemptiness, repaired paper support, and the
 same-tail non-diagnostic support output from the repaired route.  The explicit
 `random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate`
 then binds that inhabited repair layer to the full-route and boxed-torus-route
-obstructions.  This makes the next paper-semantic task a genuine random finite
-`Z2_L` instantiation of that repaired route, not another search inside the
-refuted full-support surface.
+obstructions.  The stronger
+`random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate`
+now gates the repaired closing spine itself: full paper-closing support and the
+support-surface closing route are equivalent, the pointwise-on-giant route
+projects into it, and any inhabitant exposes both the named full route and the
+boxed-torus finite `Z2_L` route.  This makes the next paper-semantic task a
+genuine random finite `Z2_L` instantiation of that repaired route, not another
+search inside the refuted full-support surface.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and

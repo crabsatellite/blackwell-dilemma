@@ -792,9 +792,14 @@ separate
 `random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate`
 now packages that inhabited repair route with the current first-edge repaired
 surface and the kernel refutations of the full paper-closing and boxed-torus
-finite `Z2_L` routes.  What remains is a genuine random finite `Z2_L` carrier
-instantiation of this repaired support route, not another inhabitant search
-inside the refuted current surface.
+finite `Z2_L` routes.  The stronger
+`random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate`
+now gates the repaired closing spine itself: full paper-closing support and the
+support-surface closing route are equivalent, the pointwise-on-giant route
+projects into it, and any inhabitant exposes both the named full route and the
+boxed-torus finite `Z2_L` route.  What remains is a genuine random finite
+`Z2_L` carrier instantiation of this repaired support route, not another
+inhabitant search inside the refuted current surface.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
