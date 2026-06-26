@@ -671,21 +671,27 @@ full-support repaired bridges inhabit it, that it exposes both repaired-bridge
 nonemptiness and the full-support witness, and that the old over-strong bridge
 contract would project to this route.
 It also proves
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output`,
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output` and
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_combined_support_output`,
-so the route must project to the missing giant-loss closing field and to one
-same-tail flat/giant/mass/positive-realisation output package.
+so the route must project to the repaired paper-support surface, the missing
+giant-loss closing field, and one same-tail flat/giant/mass/positive-realisation
+output package.
 It now also gates direct old-contract-to-output projections for the giant-loss,
-combined-support, and supported-nondiagnostic route outputs, so the refuted old
-contract's paper-closing obligations are machine-calibrated at each output
-layer.
+paper-support, combined-support, and supported-nondiagnostic route outputs, so
+the refuted old contract's paper-closing obligations are machine-calibrated at
+each output layer.
 It also gates `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_output_bundle`,
 `randomSupercriticalZ2TopoClusterBridgeData_full_paper_closing_route_output_bundle`,
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_full_output_bundle`,
+`randomSupercriticalZ2TopoClusterBridgeData_full_paper_closing_route_full_output_bundle`,
 and
 `not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_output_bundle`,
-so all three topo route output layers are checked together.
+so all three numeric topo route output layers and the repaired paper-support
+surface are checked together.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
-now packages that bundled obstruction as well.
+now packages the route-level paper-support output and bundled obstruction as
+well.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
 so the route must expose arbitrarily large non-diagnostic finite members
