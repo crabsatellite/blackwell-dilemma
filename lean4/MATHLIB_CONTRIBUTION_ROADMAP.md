@@ -212,6 +212,11 @@ These projections and refutations are now also collected in
 `part6_lattice_embedding_frontier_payload`, so the two counted Part 6 output
 witness interfaces and their full bundle are checked through one Lean
 certificate.
+The new `part6_nondegenerate_feasible_repair_route_certificate` names the exact
+remaining alpha/feasible-set repair route: it is equivalent to full Part 6
+support, every repaired bridge route factors through it, the closed-unit
+tail-reversal sufficient route projects into it, and any inhabitant exposes the
+paired and full output bundles; the current carrier still refutes that route.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
 and closed-unit current-obstruction certificate together with the output-layer

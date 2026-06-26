@@ -5895,6 +5895,155 @@ theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certifi
     not_part6_full_paper_closing_full_output_bundle_current⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Named minimal repair route for the open Part 6 lattice-embedding target.
+
+This is deliberately not a new assumption and not a closure claim: it is the
+same same-`alpha` domination/feasibility/divergence support surface as
+`Part6FullPaperClosingSupport`, renamed to expose the actual semantic repair
+still missing from the paper target.  Any inhabitant must provide a
+nondegenerate alpha above `alphaStar`, a near-`p_c` feasible-set witness, and
+the blow-up/divergence witness on one shared alpha, either on the unbounded
+route or on the closed-unit route. -/
+def Part6NondegenerateFeasibleRepairRoute : Prop :=
+  (Exists fun scalingCarrier : Real -> Real =>
+    UnboundedPart6FullPaperClosingSupport scalingCarrier) \/
+  (Exists fun scalingCarrier : Real -> Real =>
+    ClosedUnitPart6FullPaperClosingSupport scalingCarrier)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Full paper-closing support is exactly the named nondegenerate
+alpha/feasible-set repair route. -/
+theorem part6_nondegenerate_feasible_repair_route_of_full_paper_closing_support :
+    Part6FullPaperClosingSupport ->
+      Part6NondegenerateFeasibleRepairRoute := by
+  intro hsupport
+  exact hsupport
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The named nondegenerate alpha/feasible-set repair route is sufficient for
+the full Part 6 paper-closing support surface. -/
+theorem part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route :
+    Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingSupport := by
+  intro hroute
+  exact hroute
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Any repaired Part 6 bridge route factors through the named nondegenerate
+alpha/feasible-set repair route. -/
+theorem part6_nondegenerate_feasible_repair_route_of_bridge_route :
+    Part6FullPaperClosingBridgeRoute ->
+      Part6NondegenerateFeasibleRepairRoute := by
+  intro hroute
+  exact
+    part6_nondegenerate_feasible_repair_route_of_full_paper_closing_support
+      (part6_full_paper_closing_support_of_bridge_route hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A bridge-level closed-unit tail-reversal witness inhabits the named
+nondegenerate alpha/feasible-set repair route. -/
+theorem part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Part6NondegenerateFeasibleRepairRoute := by
+  exact
+    part6_nondegenerate_feasible_repair_route_of_full_paper_closing_support
+      (part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
+        bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Nonempty closed-unit tail-reversal bridge data inhabits the named
+nondegenerate alpha/feasible-set repair route. -/
+theorem part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6NondegenerateFeasibleRepairRoute := by
+  rintro ⟨bridge⟩
+  exact
+    part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge
+      bridge
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The named nondegenerate alpha/feasible-set repair route exposes the paired
+Part 6 output layer. -/
+theorem part6_nondegenerate_feasible_repair_route_output_pair :
+    Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hroute
+  exact
+    part6_full_paper_closing_support_output_pair
+      (part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route
+        hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The named nondegenerate alpha/feasible-set repair route exposes the full
+Part 6 output bundle. -/
+theorem part6_nondegenerate_feasible_repair_route_full_output_bundle :
+    Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingFullOutputBundle := by
+  intro hroute
+  exact
+    part6_full_paper_closing_support_full_output_bundle
+      (part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route
+        hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The current carrier does not inhabit the named nondegenerate
+alpha/feasible-set repair route. -/
+theorem not_part6_nondegenerate_feasible_repair_route_current :
+    Not Part6NondegenerateFeasibleRepairRoute := by
+  intro hroute
+  exact
+    not_part6_full_paper_closing_support_current
+      (part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route
+        hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Gate-facing certificate for the exact Part 6 alpha/feasible-set repair
+surface that remains open.
+
+It ties the named repair route to full support, bridge routes, the
+closed-unit tail-reversal sufficient route, the paired/full output layers, and
+the current obstruction.  This is a calibration certificate, not a closure:
+the final semantic target still needs an inhabitant of this route from a
+paper-faithful lattice/percolation carrier. -/
+def Part6NondegenerateFeasibleRepairRouteCertificate : Prop :=
+  (Part6FullPaperClosingSupport ->
+    Part6NondegenerateFeasibleRepairRoute) /\
+    (Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingSupport) /\
+    (Part6FullPaperClosingBridgeRoute ->
+      Part6NondegenerateFeasibleRepairRoute) /\
+    (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6NondegenerateFeasibleRepairRoute) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6NondegenerateFeasibleRepairRoute) /\
+    (Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    Not Part6NondegenerateFeasibleRepairRoute /\
+    Part6FullPaperClosingOutputLayerCertificate /\
+    Part6BridgeRouteSupportCertificate /\
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate
+
+omit [DiagnosticSignalHypothesisData] in
+theorem part6_nondegenerate_feasible_repair_route_certificate :
+    Part6NondegenerateFeasibleRepairRouteCertificate := by
+  exact ⟨
+    part6_nondegenerate_feasible_repair_route_of_full_paper_closing_support,
+    part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route,
+    part6_nondegenerate_feasible_repair_route_of_bridge_route,
+    part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge,
+    part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge_nonempty,
+    part6_nondegenerate_feasible_repair_route_output_pair,
+    part6_nondegenerate_feasible_repair_route_full_output_bundle,
+    not_part6_nondegenerate_feasible_repair_route_current,
+    part6_full_paper_closing_output_layer_certificate,
+    part6_bridge_route_support_certificate,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Unified current-frontier certificate for the open Part 6 lattice-embedding
 semantic target.
 
@@ -5902,7 +6051,8 @@ This packages the unbounded-route obstruction certificate, the closed-unit
 obstruction certificate, the unified bridge-route support certificate, the
 two current bridge-route refutations, the bridge route-to-support projection,
 the paired output projections, and the current output/support/route
-obstructions.  It is intentionally a non-closure
+obstructions, plus the named nondegenerate alpha/feasible-set repair route
+that remains uninhabited for the current carrier.  It is intentionally a non-closure
 certificate: closing Part 6 still requires a repaired, nondegenerate
 `alpha`/feasible-set domain and a genuine `Z^2` lattice/percolation carrier. -/
 def Part6CurrentFrontierCertificate : Prop :=
@@ -5912,6 +6062,7 @@ def Part6CurrentFrontierCertificate : Prop :=
     Part6BridgeRouteSupportCertificate /\
     Part6FullPaperClosingOutputLayerCertificate /\
     Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+    Part6NondegenerateFeasibleRepairRouteCertificate /\
     (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
     Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
@@ -5963,6 +6114,7 @@ theorem part6_current_frontier_certificate :
     part6_bridge_route_support_certificate,
     part6_full_paper_closing_output_layer_certificate,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate,
+    part6_nondegenerate_feasible_repair_route_certificate,
     part6_current_bridge_routes_obstruction_certificate,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,
