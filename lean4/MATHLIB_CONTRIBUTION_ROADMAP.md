@@ -571,6 +571,10 @@ This is a
 reachability and zero-loss calibration for the repaired interface, not the
 final paper theorem, because the witness remains a one-edge cylinder rather
 than the genuine random finite `Z^2_L` giant-component carrier.
+For Part 6, the new `closed_unit_alpha_domain_repair_certificate` packages the
+closed-unit `alphaStar 0 p_c = 1` degeneracy, the exact nonempty-domain iff,
+the forced sentimental-reversal witness, the sufficient tail-reversal route,
+and the current route obstruction as one gate theorem.
 R321 removes the positive Mills wrappers and the
 R200/R201 Prop interfaces from the live conditional theorem surface.
 R407 adds that corrected interface shape,

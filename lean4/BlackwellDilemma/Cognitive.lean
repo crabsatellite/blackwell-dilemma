@@ -4173,6 +4173,53 @@ theorem not_closed_unit_alphaStar_lt_one_current :
   norm_num
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Unified repair certificate for the paper-bounded closed-unit `alpha`
+domain in Part 6.
+
+The certificate records the exact current degeneracy (`alphaStar 0 p_c = 1`),
+the equivalent nonempty-domain repair condition, the sentimental reversal
+witness forced by any strict endpoint improvement, the sufficient tail-reversal
+route that would provide such an improvement, and the current carrier's
+obstruction to that route. -/
+def ClosedUnitAlphaDomainRepairCertificate : Prop :=
+  alphaStar 0 harrisKestenCriticalProb = 1 ∧
+    Not (alphaStar 0 harrisKestenCriticalProb < 1) ∧
+    ((Exists fun alpha : Real =>
+      alphaStar 0 harrisKestenCriticalProb < alpha ∧ alpha <= 1) ↔
+        alphaStar 0 harrisKestenCriticalProb < 1) ∧
+    (alphaStar 0 harrisKestenCriticalProb < 1 ->
+      Exists fun α : ℝ =>
+        Exists fun β₁ : ℝ =>
+          Exists fun β₂ : ℝ =>
+            0 ≤ α ∧ α ≤ 1 ∧ β₁ ≤ β₂ ∧
+              agentWelfare AgentType.sentimental β₂ 0 α <
+                agentWelfare AgentType.sentimental β₁ 0 α) ∧
+    (ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb ->
+        alphaStar 0 harrisKestenCriticalProb < 1) ∧
+    (ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb ->
+        Exists fun alpha : Real =>
+          alphaStar 0 harrisKestenCriticalProb < alpha ∧ alpha <= 1) ∧
+    Not (ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem closed_unit_alpha_domain_repair_certificate :
+    ClosedUnitAlphaDomainRepairCertificate := by
+  exact ⟨
+    alphaStar_eq_one_current 0 harrisKestenCriticalProb,
+    not_closed_unit_alphaStar_lt_one_current,
+    closed_unit_alpha_domain_nonempty_iff_alphaStar_lt_one,
+    fun h =>
+      alphaStar_lt_one_requires_sentimental_welfare_reversal_witness h,
+    fun hroute =>
+      alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route
+        (κ := 0) (p := harrisKestenCriticalProb) (by norm_num) hroute,
+    closed_unit_alpha_domain_nonempty_of_tail_reversal_repair_route,
+    not_closed_unit_alphaStar_tail_reversal_repair_route_current⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the closed-unit Part 6 paper-domain
 divergence witness.
 
@@ -4294,14 +4341,16 @@ omit [DiagnosticSignalHypothesisData] in
 closed-unit Part 6 route.
 
 This certificate ties the degenerate threshold value, the failed strict
-threshold requirement, the empty closed-unit `α` domain, the impossible
-same-`α` full paper-domain witness, and the non-instantiability of the
-closed-unit local bridge into one audited certificate proposition. -/
+threshold requirement, the empty closed-unit `α` domain, the unified
+alpha-domain repair certificate, the impossible same-`α` full paper-domain
+witness, and the non-instantiability of the closed-unit local bridge into one
+audited certificate proposition. -/
 def ClosedUnitPart6CurrentObstructionCertificate : Prop :=
     alphaStar 0 harrisKestenCriticalProb = 1 ∧
       ¬ alphaStar 0 harrisKestenCriticalProb < 1 ∧
       (¬ ∃ α : ℝ,
         alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) ∧
+      ClosedUnitAlphaDomainRepairCertificate ∧
       (∀ scalingCarrier : ℝ → ℝ,
         ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧
           α ≤ 1 ∧
@@ -4327,6 +4376,7 @@ theorem closed_unit_part6_current_obstruction_certificate :
   exact ⟨alphaStar_eq_one_current 0 harrisKestenCriticalProb,
     not_closed_unit_alphaStar_lt_one_current,
     not_closed_unit_alpha_above_alphaStar_current,
+    closed_unit_alpha_domain_repair_certificate,
     not_closed_unit_part6_full_paper_domain_witness_current,
     not_z2_lattice_embedding_closed_unit_local_bridge_current⟩
 

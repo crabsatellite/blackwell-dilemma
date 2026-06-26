@@ -373,6 +373,10 @@ sufficient repair route explicit: a repaired carrier may prove a uniform tail
 sentimental welfare reversal above some `a < 1`, while the current carrier is
 blocked because the sentimental kernel is beta-monotone throughout the closed
 unit interval.
+The new `closed_unit_alpha_domain_repair_certificate` packages the exact
+`alphaStar 0 p_c = 1` degeneracy, the nonempty-domain iff, the forced
+sentimental-reversal witness, the sufficient tail-reversal route, and the
+current route obstruction in one Part 6 gate theorem.
 The gate now lifts that sufficient route to bridge-level data through
 `Z2LatticeEmbeddingClosedUnitTailReversalBridgeData`,
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge`,

@@ -864,6 +864,11 @@ repaired carrier can close the closed-unit alpha-domain by proving a uniform
 tail welfare reversal above some `a < 1`, while the current carrier is ruled
 out because its sentimental kernel remains beta-monotone on the whole closed
 unit interval. The
+new `closed_unit_alpha_domain_repair_certificate` packages the exact
+`alphaStar 0 p_c = 1` degeneracy, the nonempty-domain iff, the forced
+sentimental-reversal witness, the sufficient tail-reversal route, and the
+current route obstruction in one Part 6 gate theorem.
+The
 gate lifts this sufficient route to the bridge level through
 `Z2LatticeEmbeddingClosedUnitTailReversalBridgeData`,
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge`,
