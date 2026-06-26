@@ -59,7 +59,11 @@ now itself kernel-gated by
 `RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair`,
 `RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute`, and
 `random_supercritical_z2_topo_cluster_support_surface_repair_certificate`; it
-is a formally inhabited route, not just prose calibration.  The
+is a formally inhabited route, not just prose calibration.  Its route-output
+certificate,
+`random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`,
+also projects repaired-bridge nonemptiness, repaired paper support, and the
+same-tail flat/mass/member/positive-loss non-diagnostic support output.  The
 random-supercritical semantic target remains open until this repaired support
 route is instantiated by the real finite-lattice carrier. The
 separately named projections machine-exclude the current full-reach, flat-only,

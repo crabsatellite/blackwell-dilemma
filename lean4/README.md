@@ -108,9 +108,13 @@ sizes.  The support-surface repair is now kernel-gated by
 `RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair`,
 `RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute`, and
 `random_supercritical_z2_topo_cluster_support_surface_repair_certificate`, and
-the current repaired first-edge bridge inhabits that route.  The remaining topo
-closure task is therefore to instantiate this repaired support route with a
-genuine random finite `Z2_L` carrier.  The
+the current repaired first-edge bridge inhabits that route.  The route-output
+certificate
+`random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`
+also gates the repaired-bridge, paper-support, and same-tail
+flat/mass/member/positive-loss non-diagnostic outputs of any inhabitant.  The
+remaining topo closure task is therefore to instantiate this repaired support
+route with a genuine random finite `Z2_L` carrier.  The
 full-reach flat-only lower-bound route is also packaged by
 `boxedTorusFullReachFlatOnlyLowerBound_cutset_route_certificate`, which gates
 the reusable separator/cutset/boundary implication from pointwise `p^B / 2`
@@ -788,9 +792,12 @@ surface is now explicitly build-gated by
 `RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair`, its named
 route, and
 `random_supercritical_z2_topo_cluster_support_surface_repair_certificate`, with
-the current repaired first-edge bridge as an inhabitant.  This makes the next
-paper-semantic task a genuine random finite `Z2_L` instantiation of that
-repaired route, not another search inside the refuted full-support surface.
+the current repaired first-edge bridge as an inhabitant.  The companion
+`random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate`
+projects repaired bridge nonemptiness, repaired paper support, and the
+same-tail non-diagnostic support output from the repaired route.  This makes
+the next paper-semantic task a genuine random finite `Z2_L` instantiation of
+that repaired route, not another search inside the refuted full-support surface.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
