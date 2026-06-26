@@ -5102,6 +5102,14 @@ def Part6FullPaperClosingFeasibleDivergenceWitness : Prop :=
               M < kappaStar p alpha))
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Full Part 6 paper-closing output bundle: support plus both paper-facing
+output witnesses that must be exposed by any complete repair. -/
+def Part6FullPaperClosingFullOutputBundle : Prop :=
+  Part6FullPaperClosingSupport /\
+    Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Any repaired unbounded local bridge supplies the named full Part 6
 paper-closing support surface. -/
 theorem part6_full_paper_closing_support_of_z2_lattice_embedding_local_bridge
@@ -5266,6 +5274,26 @@ theorem part6_full_paper_closing_bridge_route_output_pair :
     (part6_full_paper_closing_bridge_route_feasible_divergence_witness hroute)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Full Part 6 paper-closing support exposes the full named output bundle:
+support itself, the divergence witness, and the same-`alpha`
+feasible/divergence witness. -/
+theorem part6_full_paper_closing_support_full_output_bundle :
+    Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingFullOutputBundle := by
+  intro hsupport
+  exact ⟨hsupport, part6_full_paper_closing_support_output_pair hsupport⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A repaired Part 6 bridge route exposes the full named output bundle through
+the support projection. -/
+theorem part6_full_paper_closing_bridge_route_full_output_bundle :
+    Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingFullOutputBundle := by
+  intro hroute
+  exact part6_full_paper_closing_support_full_output_bundle
+    (part6_full_paper_closing_support_of_bridge_route hroute)
+
+omit [DiagnosticSignalHypothesisData] in
 /-- The current carrier cannot supply the divergence witness exposed by any
 complete Part 6 paper-closing support. -/
 theorem not_part6_full_paper_closing_divergence_witness_current :
@@ -5310,6 +5338,13 @@ theorem not_part6_full_paper_closing_output_pair_current :
       Part6FullPaperClosingFeasibleDivergenceWitness) := by
   intro hpair
   exact not_part6_full_paper_closing_divergence_witness_current hpair.1
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The current carrier cannot supply the full Part 6 output bundle. -/
+theorem not_part6_full_paper_closing_full_output_bundle_current :
+    Not Part6FullPaperClosingFullOutputBundle := by
+  intro hbundle
+  exact not_part6_full_paper_closing_output_pair_current hbundle.2
 
 omit [DiagnosticSignalHypothesisData] in
 /-- Current Part 6 non-closure rederived through the exposed divergence
@@ -5364,6 +5399,24 @@ theorem not_part6_full_paper_closing_bridge_route_current_via_output_pair :
   intro hroute
   exact not_part6_full_paper_closing_output_pair_current
     (part6_full_paper_closing_bridge_route_output_pair hroute)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 support non-closure rederived through the full output
+bundle, tying the support layer to both paper-facing output witnesses. -/
+theorem not_part6_full_paper_closing_support_current_via_full_output_bundle :
+    Not Part6FullPaperClosingSupport := by
+  intro hsupport
+  exact not_part6_full_paper_closing_full_output_bundle_current
+    (part6_full_paper_closing_support_full_output_bundle hsupport)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current Part 6 bridge-route non-closure rederived through the full output
+bundle. -/
+theorem not_part6_full_paper_closing_bridge_route_current_via_full_output_bundle :
+    Not Part6FullPaperClosingBridgeRoute := by
+  intro hroute
+  exact not_part6_full_paper_closing_full_output_bundle_current
+    (part6_full_paper_closing_bridge_route_full_output_bundle hroute)
 
 omit [DiagnosticSignalHypothesisData] in
 theorem not_unbounded_part6_full_paper_closing_support_current :
@@ -5447,10 +5500,15 @@ def Part6CurrentFrontierCertificate : Prop :=
     (Part6FullPaperClosingBridgeRoute ->
       Part6FullPaperClosingDivergenceWitness /\
         Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    (Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingFullOutputBundle) /\
     Not Part6FullPaperClosingDivergenceWitness /\
     Not Part6FullPaperClosingFeasibleDivergenceWitness /\
     Not (Part6FullPaperClosingDivergenceWitness /\
       Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6FullPaperClosingFullOutputBundle /\
     Not Part6FullPaperClosingSupport /\
     Not Part6FullPaperClosingBridgeRoute
 
@@ -5466,9 +5524,12 @@ theorem part6_current_frontier_certificate :
     part6_full_paper_closing_support_of_bridge_route,
     part6_full_paper_closing_support_output_pair,
     part6_full_paper_closing_bridge_route_output_pair,
+    part6_full_paper_closing_support_full_output_bundle,
+    part6_full_paper_closing_bridge_route_full_output_bundle,
     not_part6_full_paper_closing_divergence_witness_current,
     not_part6_full_paper_closing_feasible_divergence_witness_current,
     not_part6_full_paper_closing_output_pair_current,
+    not_part6_full_paper_closing_full_output_bundle_current,
     not_part6_full_paper_closing_support_current,
     not_part6_full_paper_closing_bridge_route_current⟩
 

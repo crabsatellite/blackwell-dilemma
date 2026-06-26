@@ -309,9 +309,16 @@ It also gates the paired output projections
 `part6_full_paper_closing_support_output_pair` and
 `part6_full_paper_closing_bridge_route_output_pair`, plus the output-pair
 current obstructions, so both Part 6 output layers are checked together.
+It now also names `Part6FullPaperClosingFullOutputBundle` and gates
+`part6_full_paper_closing_support_full_output_bundle`,
+`part6_full_paper_closing_bridge_route_full_output_bundle`,
+`not_part6_full_paper_closing_full_output_bundle_current`, and the corresponding
+support/bridge-route current obstructions through that full bundle. Thus any
+future Part 6 closure must expose support, divergence, and same-`alpha`
+feasible/divergence witnesses as one machine-checked package.
 The unified `part6_current_frontier_certificate` now packages the unbounded
-and closed-unit current-obstruction certificates together with the paired
-output obstructions, support obstruction, and bridge-route obstruction.
+and closed-unit current-obstruction certificates together with the paired/full
+output-bundle obstructions, support obstruction, and bridge-route obstruction.
 It also
 gates `Part6FullPaperClosingBridgeRoute`,
 `part6_full_paper_closing_support_of_bridge_route`, and
