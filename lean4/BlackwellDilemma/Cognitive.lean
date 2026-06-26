@@ -5853,6 +5853,48 @@ theorem part6_bridge_route_support_certificate :
     not_part6_full_paper_closing_bridge_route_current⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Dedicated non-closure certificate for the closed-unit tail-reversal repair
+surface.
+
+The bridge-level tail-reversal surface is a precise sufficient repair route:
+any inhabitant forces a nonempty closed-unit `alpha` domain, a standard
+closed-unit local bridge, the full Part 6 route/support surface, and the full
+output bundle.  This certificate also records that the current carrier does not
+inhabit that repair surface and still refutes the Part 6 route, support, and
+full-output bundle. -/
+def Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate :
+    Prop :=
+  Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+    ClosedUnitAlphaDomainRepairCertificate /\
+    Not (ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb) /\
+    Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingBridgeRoute) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingSupport) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    Not Part6FullPaperClosingBridgeRoute /\
+    Not Part6FullPaperClosingSupport /\
+    Not Part6FullPaperClosingFullOutputBundle
+
+omit [DiagnosticSignalHypothesisData] in
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate :
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate := by
+  exact ⟨
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,
+    closed_unit_alpha_domain_repair_certificate,
+    not_closed_unit_alphaStar_tail_reversal_repair_route_current,
+    not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,
+    part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty,
+    part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty,
+    part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge_nonempty,
+    not_part6_full_paper_closing_bridge_route_current,
+    not_part6_full_paper_closing_support_current,
+    not_part6_full_paper_closing_full_output_bundle_current⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Unified current-frontier certificate for the open Part 6 lattice-embedding
 semantic target.
 
@@ -5869,6 +5911,7 @@ def Part6CurrentFrontierCertificate : Prop :=
     ClosedUnitPart6CurrentObstructionCertificate /\
     Part6BridgeRouteSupportCertificate /\
     Part6FullPaperClosingOutputLayerCertificate /\
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
     (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
     Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
@@ -5919,6 +5962,7 @@ theorem part6_current_frontier_certificate :
     closed_unit_part6_current_obstruction_certificate,
     part6_bridge_route_support_certificate,
     part6_full_paper_closing_output_layer_certificate,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate,
     part6_current_bridge_routes_obstruction_certificate,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,

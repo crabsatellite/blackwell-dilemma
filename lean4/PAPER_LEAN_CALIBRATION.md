@@ -406,6 +406,13 @@ and the full output bundle from any future tail-reversal bridge,
 and with
 `not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current` recording
 the exact current obstruction to that bridge-level route.
+The standalone
+`z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate`
+now packages the output certificate with the alpha-domain repair obstruction,
+the bridge-level nonempty obstruction, and the current Part 6
+bridge-route/support/full-output-bundle refutations.  Thus the tail-reversal
+surface is a machine-checked sufficient repair route, but also explicitly
+machine-gated as non-closure for the current carrier.
 It also gates
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 which ties that reversal requirement to the closed-unit Part 6 paper-support

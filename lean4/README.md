@@ -960,6 +960,12 @@ It also gates
 `not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current`, so the
 current carrier is refuted at the exact bridge-level route that would otherwise
 enter the Part 6 paper-support surface.
+The dedicated
+`z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate`
+now packages that output certificate with the alpha-domain repair obstruction,
+the current tail-reversal bridge nonempty obstruction, and the current
+Part 6 bridge-route/support/full-output-bundle refutations, so this repair
+surface is build-gated as sufficient but not yet a theorem closure.
 The
 closed-unit local bridge contract now includes that
 threshold certificate, derives the nonempty-domain witness from it, carries
@@ -1030,8 +1036,9 @@ certificate.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
 and closed-unit current-obstruction certificate together with the output-layer
-certificate, support obstruction, bridge-level tail-reversal route obstruction,
-bridge-route obstruction, and the unified `part6_bridge_route_support_certificate`.
+certificate, the tail-reversal bridge nonclosure certificate, support
+obstruction, bridge-level tail-reversal route obstruction, bridge-route
+obstruction, and the unified `part6_bridge_route_support_certificate`.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support
