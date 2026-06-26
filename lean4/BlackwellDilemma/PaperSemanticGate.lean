@@ -78,6 +78,15 @@ def openSemanticTargets : List SemanticTarget :=
 def closedSemanticTargets : List SemanticTarget :=
   semanticTargets.filter (fun t => t.status == SemanticStatus.closed)
 
+def semanticTargetIds (targets : List SemanticTarget) : List String :=
+  targets.map (fun t => t.id)
+
+def openSemanticTargetIds : List String :=
+  semanticTargetIds openSemanticTargets
+
+def closedSemanticTargetIds : List String :=
+  semanticTargetIds closedSemanticTargets
+
 def paperSemanticOpenCount : Nat :=
   openSemanticTargets.length
 
@@ -3063,6 +3072,22 @@ theorem paperSemanticOpenCount_current : paperSemanticOpenCount = 2 := rfl
 /-- Build gate: the R10 relabeling, Part 4 lattice p-monotonicity, and high-κ
 oracle-routing calibrations are now closed. -/
 theorem paperSemanticClosedCount_current : paperSemanticClosedCount = 3 := rfl
+
+/-- Build gate: the open semantic-frontier identities are fixed, not merely the
+count.  Closing or adding a target must update this theorem in the same patch as
+the semantic ledger. -/
+theorem openSemanticTargetIds_current :
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] := rfl
+
+/-- Build gate: the closed semantic-frontier identities are fixed, not merely
+the count. -/
+theorem closedSemanticTargetIds_current :
+    closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"] := rfl
 
 /-- Build gate: the closed R10 high-κ semantic target is backed by the
 paper-facing one-edge signal-conditional routing theorem. -/

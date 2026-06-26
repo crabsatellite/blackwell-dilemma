@@ -14,7 +14,9 @@ mapping). Complete paper-semantic closure is tracked separately by
 the current open semantic targets are the lattice-IDP embedding route for Part
 6 and the random supercritical `Z2_L` topological cluster/phase carrier.  These
 open frontiers are machine-gated by `part6_lattice_embedding_frontier_payload`
-and `topo_cluster_random_supercritical_z2_frontier_payload`.  The Part 4
+and `topo_cluster_random_supercritical_z2_frontier_payload`, and the gate now
+also checks the exact open/closed semantic target identifiers, not just their
+counts.  The Part 4
 lattice p-monotonicity semantic target is now closed by
 `part4_lattice_p_monotonicity_frontier_payload`, which checks the
 generic `sInf` transfer

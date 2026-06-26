@@ -44,7 +44,9 @@ surface. `PaperSemanticGate.lean` currently lists two open semantic targets:
 Theorem 4.1 Part 6 lattice embedding and the random supercritical `Z2_L`
 topological cluster/phase carrier. These are not hidden source axioms or proof
 escapes; they are the remaining manuscript-semantics-to-kernel correspondence
-work.
+work. The Lean gate fixes both the `closed=3 open=2` counts and the exact
+open/closed semantic target identifiers, so a target cannot silently swap
+status while leaving only the count unchanged.
 
 The current open-frontier theorem surfaces are themselves build-gated:
 `part6_lattice_embedding_frontier_payload` and
