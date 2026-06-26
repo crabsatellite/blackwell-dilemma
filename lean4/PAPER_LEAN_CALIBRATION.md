@@ -635,6 +635,11 @@ It now also gates direct old-contract-to-output projections for the giant-loss,
 combined-support, and supported-nondiagnostic route outputs, so the refuted old
 contract's paper-closing obligations are machine-calibrated at each output
 layer.
+It also gates `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_output_bundle`,
+`randomSupercriticalZ2TopoClusterBridgeData_full_paper_closing_route_output_bundle`,
+and
+`not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_output_bundle`,
+so all three topo route output layers are checked together.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
 so the route must expose arbitrarily large non-diagnostic finite members
