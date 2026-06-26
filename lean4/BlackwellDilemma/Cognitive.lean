@@ -4864,6 +4864,47 @@ theorem not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling :
     criticalHyperbolicScaling criticalHyperbolicScaling_pos_at_zero
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Unified current-candidate obstruction certificate for the Part 6 scaling
+carrier surface.
+
+This packages the retired lower-envelope failure, the generic positive-at-zero
+domination obstruction, the explicit hyperbolic candidate obstruction, and the
+corresponding bridge-level exclusions. It keeps the semantic gate from treating
+any of these current candidate carriers as a paper-faithful repair of the open
+lattice-embedding target. -/
+def Part6ScalingCandidateCurrentObstructionCertificate : Prop :=
+  ¬ BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+    harrisKestenScalingFunction harrisKestenCriticalProb ∧
+  (∀ s : Real → Real, 0 < s 0 →
+    ¬ ∀ alpha : Real,
+      alphaStar 0 harrisKestenCriticalProb ≤ alpha →
+      ∀ p : Real, p < harrisKestenCriticalProb →
+        s p ≤ kappaStar p alpha) ∧
+  0 < criticalHyperbolicScaling 0 ∧
+  (¬ ∀ alpha : Real,
+    alphaStar 0 harrisKestenCriticalProb ≤ alpha →
+    ∀ p : Real, p < harrisKestenCriticalProb →
+      criticalHyperbolicScaling p ≤ kappaStar p alpha) ∧
+  (¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+    bridge.scalingCarrier = harrisKestenScalingFunction) ∧
+  (∀ s : Real → Real, 0 < s 0 →
+    ¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+      bridge.scalingCarrier = s) ∧
+  (¬ ∃ bridge : Z2LatticeEmbeddingBridgeData,
+    bridge.scalingCarrier = criticalHyperbolicScaling)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem part6_scaling_candidate_current_obstruction_certificate :
+    Part6ScalingCandidateCurrentObstructionCertificate := by
+  exact ⟨not_harrisKestenScalingFunction_diverges_at_pc_paper_Def,
+    not_positive_at_zero_scaling_dominates_kappaStar_current,
+    criticalHyperbolicScaling_pos_at_zero,
+    not_criticalHyperbolicScaling_dominates_kappaStar_current,
+    not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction,
+    not_z2_lattice_embedding_bridge_with_positive_at_zero_scalingCarrier,
+    not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the repaired local Part 6 bridge.
 
 The local bridge no longer requires domination at `p = 0`, but its current
@@ -5485,6 +5526,7 @@ certificate: closing Part 6 still requires a repaired, nondegenerate
 `alpha`/feasible-set domain and a genuine `Z^2` lattice/percolation carrier. -/
 def Part6CurrentFrontierCertificate : Prop :=
   UnboundedPart6CurrentObstructionCertificate /\
+    Part6ScalingCandidateCurrentObstructionCertificate /\
     ClosedUnitPart6CurrentObstructionCertificate /\
     (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
@@ -5516,6 +5558,7 @@ omit [DiagnosticSignalHypothesisData] in
 theorem part6_current_frontier_certificate :
     Part6CurrentFrontierCertificate := by
   exact ⟨unbounded_part6_current_obstruction_certificate,
+    part6_scaling_candidate_current_obstruction_certificate,
     closed_unit_part6_current_obstruction_certificate,
     part6_current_bridge_routes_obstruction_certificate,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,

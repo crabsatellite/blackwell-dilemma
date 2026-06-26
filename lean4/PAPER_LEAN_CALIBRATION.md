@@ -252,7 +252,11 @@ The bridge-level theorems
 `not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now prove
 that neither candidate can instantiate the current `Z2LatticeEmbeddingBridgeData`
 interface. `part6_lattice_embedding_frontier_payload` machine-gates this
-current transfer/obstruction frontier in `PaperSemanticGate.lean`. R518 adds
+current transfer/obstruction frontier in `PaperSemanticGate.lean`. The same
+candidate layer is now bundled by
+`part6_scaling_candidate_current_obstruction_certificate`, which packages the
+lower-envelope, generic positive-at-zero, hyperbolic, and bridge-level carrier
+exclusions as one audited Part 6 certificate. R518 adds
 `Z2LatticeEmbeddingBridgeData` and
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_bridge`: a future
 certificate must name the standard `Z²` lattice graph and supply a replacement
@@ -317,7 +321,8 @@ support/bridge-route current obstructions through that full bundle. Thus any
 future Part 6 closure must expose support, divergence, and same-`alpha`
 feasible/divergence witnesses as one machine-checked package.
 The unified `part6_current_frontier_certificate` now packages the unbounded
-and closed-unit current-obstruction certificates together with the paired/full
+current-obstruction certificate, scaling-candidate obstruction certificate,
+and closed-unit current-obstruction certificate together with the paired/full
 output-bundle obstructions, support obstruction, and bridge-route obstruction.
 It also
 gates `Part6FullPaperClosingBridgeRoute`,

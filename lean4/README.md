@@ -805,6 +805,10 @@ shape. The bridge-level exclusions
 `not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
 `not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now show that
 neither retired/current candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
+The same candidate layer is now bundled as
+`part6_scaling_candidate_current_obstruction_certificate`, so the lower-envelope,
+generic positive-at-zero, hyperbolic, and bridge-level carrier exclusions are
+available as one audited Part 6 certificate.
 The Part 6 gate now also checks the repaired local-domination transfer
 `gap_cognitive_threshold_part6_local` and the local bridge entrypoint
 `gap_cognitive_threshold_part6_from_z2_lattice_embedding_local_bridge`.
@@ -925,7 +929,8 @@ support/bridge-route current obstructions through that full bundle. Thus a
 future Part 6 closure must machine-expose support, divergence, and same-`alpha`
 feasible/divergence witnesses as one checked package.
 The unified `part6_current_frontier_certificate` now packages the unbounded
-and closed-unit current-obstruction certificates together with the paired/full
+current-obstruction certificate, scaling-candidate obstruction certificate,
+and closed-unit current-obstruction certificate together with the paired/full
 output-bundle obstructions, support obstruction, bridge-level tail-reversal
 route obstruction, and bridge-route obstruction.
 It also gates `Part6FullPaperClosingBridgeRoute` and

@@ -138,6 +138,10 @@ that to the bridge level. The bridge-level obstructions
 `not_z2_lattice_embedding_bridge_with_harrisKestenScalingFunction` and
 `not_z2_lattice_embedding_bridge_with_criticalHyperbolicScaling` now prove that
 neither candidate can instantiate `Z2LatticeEmbeddingBridgeData`.
+The same candidate layer is now bundled by
+`part6_scaling_candidate_current_obstruction_certificate`, which packages the
+lower-envelope, generic positive-at-zero, hyperbolic, and bridge-level carrier
+exclusions as one audited Part 6 certificate.
 `part6_lattice_embedding_frontier_payload` machine-gates this
 transfer/obstruction frontier, including
 `current_part6_unbounded_alpha_zero_branch_near_pc`: `alpha = 2` lies in the
@@ -202,7 +206,8 @@ support/bridge-route current obstructions through that full bundle. This pins a
 future Part 6 closure to one machine-checked package containing support,
 divergence, and same-`alpha` feasible/divergence witnesses.
 The unified `part6_current_frontier_certificate` now packages the unbounded
-and closed-unit current-obstruction certificates together with the paired/full
+current-obstruction certificate, scaling-candidate obstruction certificate,
+and closed-unit current-obstruction certificate together with the paired/full
 output-bundle obstructions, support obstruction, and bridge-route obstruction.
 It also gates `Part6FullPaperClosingBridgeRoute`,
 `part6_full_paper_closing_support_of_bridge_route`, and
