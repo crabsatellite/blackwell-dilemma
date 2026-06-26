@@ -747,6 +747,21 @@ It also packages
 which proves that a pointwise-on-giant repaired route would close the
 giant-loss field, the full repaired support surface, and the named full route,
 while the current first-edge witness cannot satisfy that route.
+The current support surface is now also globally calibrated by
+`random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate`
+and the individual obstructions
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_loss_paper_closing`,
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_full_paper_closing_support`,
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_pointwise_loss_route`,
+`not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute`, and
+`not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute`.
+These prove that the present giant-loss/full-support/pointwise-on-giant
+route surface is uninhabitable for every repaired bridge because its uniform
+giant-restricted lower bound contradicts the theorem-core pointwise envelope
+along growing flattened boxed-torus sizes.  The remaining topo closure task is
+therefore a semantic support-surface repair followed by a genuine random
+finite `Z2_L` carrier instantiation, not just another inhabitant search inside
+the current surface.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
@@ -763,7 +778,8 @@ The topo current frontier is also packaged as
 `random_supercritical_z2_topo_cluster_current_frontier_certificate`, combining
 the old over-strong bridge-contract obstruction with the repaired first-edge
 compatibility/not-closing witness, diagnostic obstruction certificate, and
-finite positive-regression and pointwise-route certificates.
+finite positive-regression, pointwise-route, and full-support envelope
+obstruction certificates.
 Thus its selected event is reachability-linked to the boxed-torus base
 horizontal edge, but its giant-restricted topological loss is exactly zero and
 admits no positive uniform lower-bound certificate, which is why it remains

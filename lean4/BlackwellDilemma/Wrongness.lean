@@ -18247,6 +18247,115 @@ theorem not_random_supercritical_z2_topo_cluster_bridge_contract_current :
                       have h_lower := hgiant_lower L hL_giant
                       linarith
 
+/-- General repaired-surface obstruction for the missing giant-loss field.
+
+The repaired bridge still carries the theorem-core pointwise giant-event
+envelope through `family_core`.  Reintroducing a uniform positive
+giant-restricted lower bound therefore contradicts the growth of the flattened
+boxed-torus sizes.  Closing the topo target must repair the paper-facing
+support surface, not merely find a different inhabitant of the present
+repaired bridge record. -/
+theorem not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_loss_paper_closing
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) :
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge) := by
+  intro hclosing
+  rcases hclosing with ⟨c, hc_pos, _hc_le_one, L0Giant, hgiant_lower⟩
+  rcases bridge.family_core with ⟨_hflat, L0Core, hcore⟩
+  rcases
+    boxedTorusFlatGraphN_reciprocal_eventually_lt
+      c hc_pos L0Giant L0Core with
+    ⟨L, hLpack⟩
+  rcases hLpack with ⟨hL_giant, hL_core, htail_lt⟩
+  have hpointwise :
+      TopoLossKernelPointwiseBoundOn (bridge.family L) :=
+    (hcore L hL_core).2.2.1
+  have h_upper :=
+    expectedTopoLossOnGiantOn_le_one_over_n hpointwise
+      bridge.supercriticalProbability
+      bridge.supercriticalProbability_nonneg
+      bridge.supercriticalProbability_le_one
+      (boxedTorusFlatGraphN L)
+  have h_lower := hgiant_lower L hL_giant
+  linarith
+
+/-- The present repaired full-support surface is generally uninhabitable:
+its giant-loss field contradicts the same pointwise envelope that comes from
+the bridge's theorem-core package. -/
+theorem not_randomSupercriticalZ2TopoClusterRepairedBridge_full_paper_closing_support
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) :
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+        bridge) := by
+  intro hsupport
+  exact
+    not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_loss_paper_closing
+      bridge hsupport.2.1
+
+/-- The sufficient pointwise-on-giant route is also impossible under the
+current repaired bridge surface, because it would imply the refuted uniform
+giant-loss closing field. -/
+theorem not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_pointwise_loss_route
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) :
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge) := by
+  intro hroute
+  exact
+    not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_loss_paper_closing
+      bridge
+      (randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route
+        bridge hroute)
+
+/-- The named full topo paper-closing route is impossible for the current
+full-support surface.  This is a semantic-contract obstruction, not a proof
+that the paper theorem is false: the support surface must be repaired before
+the semantic target can be closed. -/
+theorem not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  rintro ⟨bridge, hsupport⟩
+  exact
+    not_randomSupercriticalZ2TopoClusterRepairedBridge_full_paper_closing_support
+      bridge hsupport
+
+/-- The boxed-torus finite-`Z2_L` calibrated route inherits the same
+full-support obstruction. -/
+theorem not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute :
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  intro hroute
+  exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+    (randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_boxed_torus_finite_z2L_route
+      hroute)
+
+/-- Compact gate certificate for the repaired full-support envelope
+obstruction. -/
+def RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate :
+    Prop :=
+  (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge)) /\
+    (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+          bridge)) /\
+    (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+          bridge)) /\
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+theorem random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate :
+    RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate := by
+  exact ⟨
+    not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_loss_paper_closing,
+    not_randomSupercriticalZ2TopoClusterRepairedBridge_full_paper_closing_support,
+    not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_pointwise_loss_route,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute⟩
+
 /-- The repaired random-supercritical bridge cannot be discharged by the current
 full-reach complement diagnostic family. -/
 theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_full_reach_diagnostic :
@@ -18405,6 +18514,7 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
     RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate /\
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
     RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate /\
+    RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate /\
     (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
@@ -18663,6 +18773,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate,
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
     random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
+    random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,

@@ -574,6 +574,19 @@ It also packages
 which proves that a pointwise-on-giant repaired route would close the
 giant-loss field, the full repaired support surface, and the named full route,
 while the current first-edge witness cannot satisfy that route.
+The same frontier now gates
+`random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate`
+and its component obstructions
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_loss_paper_closing`,
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_full_paper_closing_support`,
+`not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_pointwise_loss_route`,
+`not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute`, and
+`not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute`.
+This proves that the present full-support envelope is not just missing an
+instance: it is generally uninhabitable under the theorem-core pointwise
+giant-loss envelope.  The near-term work item is therefore to repair or replace
+the semantic support surface before a genuine random finite `Z2_L` carrier can
+count as paper-semantic closure.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
@@ -589,7 +602,8 @@ The combined
 `random_supercritical_z2_topo_cluster_current_frontier_certificate` now gates
 both the old over-strong bridge-contract obstruction and that repaired
 first-edge compatibility/not-closing witness, diagnostic obstruction
-certificate, and finite positive-regression and pointwise-route certificates
+certificate, finite positive-regression and pointwise-route certificates, and
+the full-support envelope obstruction certificate
 in one theorem.
 This is a
 reachability and zero-loss calibration for the repaired interface, not the
