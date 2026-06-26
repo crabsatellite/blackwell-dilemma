@@ -12007,6 +12007,22 @@ theorem firstEdgeGiantStochasticTopoLossData_positive_regression_certificate :
     have hq : 1 - ((3 : Real) / 4) = (1 : Real) / 4 := by norm_num
     simpa [firstEdgeGiantStochasticTopoLossData, hq] using hmass
 
+/-- The finite first-edge positive-regression witness cannot be promoted to
+the graph-local theorem core: on its selected giant event the loss is `1/2`,
+which violates the `1/(n+1)` pointwise envelope already at `n = 2`. -/
+theorem not_TopoLossKernelPointwiseBoundOn_firstEdgeGiantStochasticTopoLossData :
+    Not (TopoLossKernelPointwiseBoundOn
+      firstEdgeGiantStochasticTopoLossData) := by
+  intro hbound
+  let omega : BondConfig (EdgeIdx 2) := fun _ => true
+  have homega :
+      Membership.mem
+        (firstEdgeGiantStochasticTopoLossData.giantComponentEvent 2)
+        omega := by
+    simp [firstEdgeGiantStochasticTopoLossData, firstEdgeOpenEvent, omega]
+  have hbad := hbound 2 omega homega
+  norm_num [firstEdgeGiantStochasticTopoLossData, omega] at hbad
+
 /-- Boxed-torus oracle/cluster carrier with an all-large first-edge
     topological-loss tail.
 
@@ -17785,6 +17801,55 @@ theorem random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certific
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route⟩
 
+/-- A family that is constantly the finite first-edge stochastic regression
+witness cannot satisfy the boxed-torus theorem-core family contract.  The
+obstruction is not probability arithmetic but the missing pointwise
+`1/(n+1)` giant-event envelope. -/
+theorem not_BoxedTorusFlatFamilyCoreConclusion_firstEdgeGiantStochastic_family
+    (family : Nat -> WrongnessPercolationData)
+    (hfamily :
+      forall L : Nat, family L = firstEdgeGiantStochasticTopoLossData) :
+    Not (BoxedTorusFlatFamilyCoreConclusion family) := by
+  rintro ⟨_hlower, L0, hmembers⟩
+  have hcore := hmembers L0 le_rfl
+  have hpointwise :
+      TopoLossKernelPointwiseBoundOn firstEdgeGiantStochasticTopoLossData := by
+    simpa [hfamily L0] using hcore.2.2.1
+  exact
+    not_TopoLossKernelPointwiseBoundOn_firstEdgeGiantStochasticTopoLossData
+      hpointwise
+
+/-- Consequently the finite first-edge stochastic positive-regression witness
+cannot be a repaired random-supercritical `Z2_L` bridge by constant-family
+lifting. -/
+theorem not_randomSupercriticalZ2TopoClusterRepairedBridgeData_firstEdgeGiantStochastic_family :
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat, bridge.family L =
+        firstEdgeGiantStochasticTopoLossData) := by
+  rintro ⟨bridge, hfamily⟩
+  exact
+    not_BoxedTorusFlatFamilyCoreConclusion_firstEdgeGiantStochastic_family
+      bridge.family hfamily bridge.family_core
+
+/-- Gate certificate for the finite first-edge stochastic regression witness:
+it is a real finite Bernoulli positive-regression check, but the kernel also
+proves it is not liftable to the repaired random-supercritical `Z2_L` bridge
+surface. -/
+def FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate :
+    Prop :=
+  FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
+    Not (TopoLossKernelPointwiseBoundOn
+      firstEdgeGiantStochasticTopoLossData) /\
+    Not (Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      forall L : Nat, bridge.family L =
+        firstEdgeGiantStochasticTopoLossData)
+
+theorem firstEdgeGiantStochasticTopoLossData_not_random_supercritical_z2_bridge_certificate :
+    FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate := by
+  exact ⟨firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
+    not_TopoLossKernelPointwiseBoundOn_firstEdgeGiantStochasticTopoLossData,
+    not_randomSupercriticalZ2TopoClusterRepairedBridgeData_firstEdgeGiantStochastic_family⟩
+
 /-- Any repaired bridge that uses the first-edge cylinder family at `p = 3/4`
 cannot supply the missing giant-restricted paper-closing field.
 
@@ -18325,16 +18390,18 @@ This certificate packages the honest current state of the open topo target:
 the old over-strong bridge contract is kernel-refuted, while the repaired
 bridge contract is nonempty, rules out deterministic diagnostic repairs, has
 both the finite first-edge compatibility certificate and the separate finite
-positive-regression certificate, and packages the pointwise-on-giant route
-certificate showing what sufficient repair would close the missing
-giant-restricted field while refuting the current first-edge witness at that
-route surface. -/
+positive-regression certificate, machine-refutes constant-family lifting of
+that finite regression witness to the random-supercritical bridge surface, and
+packages the pointwise-on-giant route certificate showing what sufficient
+repair would close the missing giant-restricted field while refuting the
+current first-edge witness at that route surface. -/
 def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
   Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData) /\
     Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData /\
     FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate /\
     RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate /\
     FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
+    FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate /\
     RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate /\
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
     RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate /\
@@ -18592,6 +18659,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate,
     random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate,
     firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
+    firstEdgeGiantStochasticTopoLossData_not_random_supercritical_z2_bridge_certificate,
     random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate,
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
     random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,

@@ -564,6 +564,12 @@ output, and bundled obstruction together with the finite positive-regression
 certificate
 `firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`.
 It also packages
+`firstEdgeGiantStochasticTopoLossData_not_random_supercritical_z2_bridge_certificate`,
+which proves that the finite first-edge stochastic regression witness is not
+liftable to the repaired random-supercritical `Z2_L` bridge surface: its
+selected giant-event loss violates the theorem-core pointwise `1/(n+1)`
+envelope already at `n = 2`.
+It also packages
 `random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate`,
 which proves that a pointwise-on-giant repaired route would close the
 giant-loss field, the full repaired support surface, and the named full route,
