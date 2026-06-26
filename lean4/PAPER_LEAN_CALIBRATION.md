@@ -226,14 +226,16 @@ and on lattices, the threshold κ* is non-decreasing in p."
 
 ## Calibration Conclusions
 
-Current 2026-06-25 correction: the project builds and the checked theorem
+Current 2026-06-26 correction: the project builds and the checked theorem
 surface has zero proof escapes. Complete paper-semantic kernel-only closure is
 not claimable while `PaperSemanticGate.lean` reports the open Part 6
 lattice-embedding and random-supercritical percolation semantic targets. The
 Part 4 lattice p-monotonicity target is closed by the standard `Z^2` ranged
 local-lattice bridge. The live source audit reports 0 project-level `axiom`
 declarations, including 0 `_OPEN`, 0 `_paper_Def`, and 0 `_workingAssumption`
-declarations.
+declarations. The conditional-surface audit reports 2 counted Prop interfaces,
+both current-refuted, 0 conditional theorem signatures, and 0 unresolved
+interfaces.
 The live ledger has no `gapOpen` entries, but the cognitive Part 6 route is not
 complete: `not_harrisKestenScalingFunction_diverges_at_pc_paper_Def` proves the
 current unbounded lower-envelope carrier route false. R208 replaces that route
@@ -714,9 +716,15 @@ It now also gates
 `not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_full_output_bundle`,
 which refutes the current first-edge witness at the exact
 paper-support-inclusive full output-bundle surface.
+The route outputs are now also collected into
+`RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate` and
+gated in `topo_cluster_random_supercritical_z2_frontier_payload`, so the
+frontier checks the route-output surface through one Lean certificate as well
+as through the individual projection theorems.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
-now packages the route-level paper-support output and bundled obstruction as
-well, together with the finite positive-regression certificate
+now packages this route-output certificate, the route-level paper-support
+output, and bundled obstruction together with the finite positive-regression
+certificate
 `firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`.
 It also packages
 `random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate`,

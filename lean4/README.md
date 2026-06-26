@@ -163,7 +163,7 @@ The formalisation follows the paper's section structure.
 
 ## Status summary
 
-Current kernel-only audit target (2026-06-25):
+Current kernel-only audit target (2026-06-26):
 
 Commands:
 
@@ -189,11 +189,11 @@ Current results:
 | source-level `_workingAssumption` axioms | 0 | 0 |
 | source-level `_paper_witness` axioms | 0 | 0 |
 | source-level `_OPEN` theorem declarations | 0 | 0 |
-| conditional proof interfaces (`audit_conditional_surface.py`) | 0 | no remaining counted proof/carrier interface containers |
+| conditional proof interfaces (`audit_conditional_surface.py`) | 2 | all counted proof/carrier interface containers must be current-refuted or current-closed; unresolved=0 |
 | closed `True` compatibility interfaces (`audit_conditional_surface.py`) | 0 | no remaining `True` compatibility aliases in the Prop-interface audit |
 | conditional theorem signatures (`audit_conditional_surface.py`) | 0 | R454 demotes the last generic family-core promotion bridge to a proof-valued `def`; no theorem/lemma signature now takes an interface premise |
-| interfaces with current/no-premise closure | 0 | no counted interface remains in the conditional-surface audit |
-| interfaces with current-carrier refutation | 1 | the corrected unit-compatible above-threshold package is refuted for the current all-open boxed-torus carrier |
+| interfaces with current/no-premise closure | 0 | no counted interface is currently closed without premise; remaining counted interfaces are refuted |
+| interfaces with current-carrier refutation | 2 | the remaining Part 6 divergence and feasible-divergence witness interfaces are current-refuted |
 | unresolved proof/carrier interfaces | 0 | every remaining conditional interface has a current closure or current-carrier refutation |
 | unresolved Prop bridge interfaces | 0 | no remaining unresolved theorem-interface obligations under the syntactic audit |
 | unresolved structure carrier interfaces | 0 | explicit carrier packages now have concrete current models |
@@ -734,9 +734,15 @@ It now also names
 `not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_full_output_bundle`,
 so the current first-edge witness is refuted at the exact
 paper-support-inclusive full output-bundle surface.
+The route outputs are now also collected into
+`RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate` and
+gated in `topo_cluster_random_supercritical_z2_frontier_payload`, so the
+frontier checks the route-output surface through one Lean certificate as well
+as through the individual projection theorems.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
-now packages the route-level paper-support output and bundled obstruction as
-well, together with the finite positive-regression certificate
+now packages this route-output certificate, the route-level paper-support
+output, and bundled obstruction together with the finite positive-regression
+certificate
 `firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`.
 It also packages
 `random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate`,

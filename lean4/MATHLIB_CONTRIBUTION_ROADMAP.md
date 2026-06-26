@@ -10,7 +10,7 @@ the older Cat 3 ledger reduction target.
 
 ## Current state (live counts)
 
-Current 2026-06-25 audited state (`lake build BlackwellDilemma`):
+Current 2026-06-26 audited state (`lake build BlackwellDilemma`):
 
 ```
 Total ledger entries: 498
@@ -24,9 +24,9 @@ Input classes:      cat1Mathlib=435 cat2External=0 cat3PaperNovel=0 mixed=0 notI
 Cat 3 sub-type:     carrier=0 hypothesisPredicate=0 structuralEquation=0 workingAssumption=0 conditionalHypothesis=0 phenomenologicalConjecture=0 derivedTheorem=329 notCat3=169
 Source axioms:      total=0 OPEN=0 paper_Def=0 workingAssumption=0 paper_witness=0
 Proof escapes:      sorry=0 admit=0 unsafe=0 native_decide=0
-Conditional audit:  prop_interfaces=0 closed_true_prop_interfaces=0
+Conditional audit:  prop_interfaces=2 closed_true_prop_interfaces=0
                     conditional_theorem_signatures=0
-                    current_refuted_interfaces=0 current_closed_interfaces=0
+                    current_refuted_interfaces=2 current_closed_interfaces=0
                     unresolved_interfaces=0
                     unresolved_prop_def_interfaces=0
                     unresolved_structure_interfaces=0
@@ -541,9 +541,15 @@ It now also gates
 `not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_full_output_bundle`,
 so the current first-edge witness is refuted at the exact
 paper-support-inclusive full output-bundle surface.
+The route outputs are now also collected into
+`RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate` and
+gated in `topo_cluster_random_supercritical_z2_frontier_payload`, so the
+frontier checks the route-output surface through one Lean certificate as well
+as through the individual projection theorems.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
-now packages the route-level paper-support output and bundled obstruction as
-well, together with the finite positive-regression certificate
+now packages this route-output certificate, the route-level paper-support
+output, and bundled obstruction together with the finite positive-regression
+certificate
 `firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`.
 It also packages
 `random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate`,
