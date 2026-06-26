@@ -4085,6 +4085,70 @@ theorem not_closed_unit_alphaStar_tail_reversal_repair_route_current :
       beta1 beta2 hbeta
   linarith
 
+/-- Closed-unit Part 6 bridge variant that replaces a bare
+`alphaStar 0 p_c < 1` certificate with the stronger, checkable tail-reversal
+repair route.
+
+This is the bridge-level form of the previous `alphaStar` repair: the graph,
+scaling-divergence, local domination, and feasible-set fields stay identical
+to `Z2LatticeEmbeddingClosedUnitLocalBridgeData`, while the threshold
+certificate is obtained by proving a uniform sentimental welfare reversal tail. -/
+structure Z2LatticeEmbeddingClosedUnitTailReversalBridgeData where
+  graph : SimpleGraph (Fin 2 -> Int)
+  graph_is_z2_lattice : graph = SimpleGraph.Z2LatticeGraph
+  scalingCarrier : Real -> Real
+  scaling_diverges :
+    BlackwellDilemma.Infrastructure.DivergesAtBelowAtTop
+      scalingCarrier harrisKestenCriticalProb
+  closed_unit_tail_reversal_route :
+    ClosedUnitAlphaStarTailReversalRepairRoute
+      0 harrisKestenCriticalProb
+  scaling_dominates_kappa_near_pc :
+    forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+      alpha <= 1 ->
+        Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                scalingCarrier p <= kappaStar p alpha
+  near_pc_feasible_nonempty :
+    forall alpha : Real, alphaStar 0 harrisKestenCriticalProb < alpha ->
+      alpha <= 1 ->
+        Exists fun delta : Real =>
+          0 < delta /\
+            forall p : Real, harrisKestenCriticalProb - delta < p ->
+              p < harrisKestenCriticalProb ->
+                Exists fun kappa : Real =>
+                  0 < kappa /\
+                    BlackwellDilemma.Infrastructure.alphaWelfareShift alpha <=
+                      mean_estimate_gap p kappa
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The tail-reversal bridge variant constructs the standard closed-unit
+local bridge by deriving `alphaStar 0 p_c < 1` from its tail-reversal route. -/
+def z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Z2LatticeEmbeddingClosedUnitLocalBridgeData where
+  graph := bridge.graph
+  graph_is_z2_lattice := bridge.graph_is_z2_lattice
+  scalingCarrier := bridge.scalingCarrier
+  scaling_diverges := bridge.scaling_diverges
+  closed_unit_alphaStar_lt_one :=
+    alphaStar_lt_one_of_closed_unit_tail_reversal_repair_route
+      (κ := 0) (p := harrisKestenCriticalProb) (by norm_num)
+      bridge.closed_unit_tail_reversal_route
+  scaling_dominates_kappa_near_pc :=
+    bridge.scaling_dominates_kappa_near_pc
+  near_pc_feasible_nonempty := bridge.near_pc_feasible_nonempty
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Current-carrier obstruction for the bridge-level tail-reversal route. -/
+theorem not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current :
+    Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) := by
+  rintro ⟨bridge⟩
+  exact not_closed_unit_alphaStar_tail_reversal_repair_route_current
+    bridge.closed_unit_tail_reversal_route
+
 omit [DiagnosticSignalHypothesisData] in
 /-- Current-carrier obstruction for the paper-bounded Part 6 `α` regime.
 
@@ -5059,6 +5123,49 @@ theorem part6_full_paper_closing_support_of_z2_lattice_embedding_closed_unit_loc
         bridge⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- A closed-unit tail-reversal bridge inhabits the named Part 6 bridge-route
+surface after converting it to the standard closed-unit local bridge. -/
+theorem part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Part6FullPaperClosingBridgeRoute := by
+  exact Or.inr
+    ⟨z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+      bridge⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Nonempty bridge-level tail-reversal data is sufficient for the named
+Part 6 bridge-route surface. -/
+theorem part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingBridgeRoute := by
+  rintro ⟨bridge⟩
+  exact
+    part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge
+      bridge
+
+omit [DiagnosticSignalHypothesisData] in
+/-- A closed-unit tail-reversal bridge is sufficient for the Part 6 full
+paper-closing support surface. -/
+theorem part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Part6FullPaperClosingSupport := by
+  exact
+    part6_full_paper_closing_support_of_z2_lattice_embedding_closed_unit_local_bridge
+      (z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+        bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Nonempty bridge-level tail-reversal data is sufficient for the Part 6 full
+paper-closing support surface. -/
+theorem part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingSupport := by
+  rintro ⟨bridge⟩
+  exact
+    part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge
+      bridge
+
+omit [DiagnosticSignalHypothesisData] in
 /-- A nonempty repaired bridge route is sufficient for the named full Part 6
 paper-closing support surface. -/
 theorem part6_full_paper_closing_support_of_bridge_route :
@@ -5328,6 +5435,11 @@ def Part6CurrentFrontierCertificate : Prop :=
     ClosedUnitPart6CurrentObstructionCertificate /\
     (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
+    Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingBridgeRoute) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingSupport) /\
     (Part6FullPaperClosingBridgeRoute -> Part6FullPaperClosingSupport) /\
     (Part6FullPaperClosingSupport ->
       Part6FullPaperClosingDivergenceWitness /\
@@ -5348,6 +5460,9 @@ theorem part6_current_frontier_certificate :
   exact ⟨unbounded_part6_current_obstruction_certificate,
     closed_unit_part6_current_obstruction_certificate,
     part6_current_bridge_routes_obstruction_certificate,
+    not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,
+    part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty,
+    part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty,
     part6_full_paper_closing_support_of_bridge_route,
     part6_full_paper_closing_support_output_pair,
     part6_full_paper_closing_bridge_route_output_pair,

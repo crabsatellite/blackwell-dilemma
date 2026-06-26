@@ -243,6 +243,15 @@ It also checks `ClosedUnitAlphaStarTailReversalRepairRoute`,
 kernel-checked sufficient route is now explicit: prove a uniform tail
 sentimental welfare reversal above some `a < 1`; the current carrier is blocked
 because it remains beta-monotone on the whole closed unit interval.
+The gate lifts that route to the bridge level through
+`Z2LatticeEmbeddingClosedUnitTailReversalBridgeData`,
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge`,
+`part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty`,
+and
+`part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty`,
+while
+`not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current` records the
+current obstruction at that exact bridge-level surface.
 The gate also checks
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 which combines that reversal requirement with the closed-unit paper-support

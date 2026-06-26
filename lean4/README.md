@@ -835,6 +835,17 @@ repaired carrier can close the closed-unit alpha-domain by proving a uniform
 tail welfare reversal above some `a < 1`, while the current carrier is ruled
 out because its sentimental kernel remains beta-monotone on the whole closed
 unit interval. The
+gate lifts this sufficient route to the bridge level through
+`Z2LatticeEmbeddingClosedUnitTailReversalBridgeData`,
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge`,
+`part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty`,
+and
+`part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty`.
+It also gates
+`not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current`, so the
+current carrier is refuted at the exact bridge-level route that would otherwise
+enter the Part 6 paper-support surface.
+The
 closed-unit local bridge contract now includes that
 threshold certificate, derives the nonempty-domain witness from it, carries
 near-`p_c` feasible-set nonemptiness on the closed-unit paper domain, and the
@@ -891,7 +902,8 @@ It also gates the paired output projections
 current obstructions, so both Part 6 output layers are checked together.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 and closed-unit current-obstruction certificates together with the paired
-output obstructions, support obstruction, and bridge-route obstruction.
+output obstructions, support obstruction, bridge-level tail-reversal route
+obstruction, and bridge-route obstruction.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support

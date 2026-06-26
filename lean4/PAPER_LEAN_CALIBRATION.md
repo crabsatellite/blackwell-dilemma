@@ -361,6 +361,15 @@ sufficient repair route explicit: a repaired carrier may prove a uniform tail
 sentimental welfare reversal above some `a < 1`, while the current carrier is
 blocked because the sentimental kernel is beta-monotone throughout the closed
 unit interval.
+The gate now lifts that sufficient route to bridge-level data through
+`Z2LatticeEmbeddingClosedUnitTailReversalBridgeData`,
+`z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge`,
+`part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty`,
+and
+`part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge_nonempty`,
+with
+`not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current` recording
+the exact current obstruction to that bridge-level route.
 It also gates
 `z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal`,
 which ties that reversal requirement to the closed-unit Part 6 paper-support
