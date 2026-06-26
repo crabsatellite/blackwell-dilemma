@@ -933,8 +933,9 @@ and
 The companion
 `z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate`
 now also projects `alphaStar 0 p_c < 1`, closed-unit alpha-domain nonemptiness,
-closed-unit bridge nonemptiness, Part 6 route/support, and the full output
-bundle from any future tail-reversal bridge.
+closed-unit bridge nonemptiness, same-bridge paper-support plus
+sentimental-reversal, Part 6 route/support, and the full output bundle from any
+future tail-reversal bridge.
 It also gates
 `not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current`, so the
 current carrier is refuted at the exact bridge-level route that would otherwise

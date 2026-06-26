@@ -5408,6 +5408,14 @@ def Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate :
       Part6FullPaperClosingSupport) /\
     (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
       Part6FullPaperClosingFullOutputBundle) /\
+    (forall bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+        (z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+          bridge)) /\
+    (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Exists fun bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData =>
+        Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+          bridge) /\
     (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
       Part6FullPaperClosingFullOutputBundle) /\
     Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData)
@@ -5436,6 +5444,30 @@ theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_closed_unit_bridge
     bridge⟩
 
 omit [DiagnosticSignalHypothesisData] in
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal
+    (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
+    Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+      (z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+        bridge) :=
+  z2LatticeEmbeddingClosedUnitLocalBridgeData_paper_support_with_sentimental_reversal
+    (z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+      bridge)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Exists fun bridge : Z2LatticeEmbeddingClosedUnitLocalBridgeData =>
+        Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+          bridge := by
+  rintro ⟨bridge⟩
+  refine
+    ⟨z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+      bridge, ?_⟩
+  exact
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal
+      bridge
+
+omit [DiagnosticSignalHypothesisData] in
 theorem part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge
     (bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) :
     Part6FullPaperClosingFullOutputBundle :=
@@ -5462,6 +5494,8 @@ theorem z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge,
     part6_full_paper_closing_support_of_closed_unit_tail_reversal_bridge,
     part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal_nonempty,
     part6_full_paper_closing_full_output_bundle_of_closed_unit_tail_reversal_bridge_nonempty,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current⟩
 
