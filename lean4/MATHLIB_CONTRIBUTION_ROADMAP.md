@@ -584,9 +584,15 @@ and its component obstructions
 `not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute`.
 This proves that the present full-support envelope is not just missing an
 instance: it is generally uninhabitable under the theorem-core pointwise
-giant-loss envelope.  The near-term work item is therefore to repair or replace
-the semantic support surface before a genuine random finite `Z2_L` carrier can
-count as paper-semantic closure.
+giant-loss envelope.  The repaired semantic support surface is now already a
+kernel-checked replacement:
+`RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair`,
+`RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute`, and
+`random_supercritical_z2_topo_cluster_support_surface_repair_certificate` gate
+the route, and the current repaired first-edge bridge inhabits it.  The
+near-term work item is therefore to instantiate that repaired support route with
+a genuine random finite `Z2_L` carrier before the topo target can count as
+paper-semantic closure.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and

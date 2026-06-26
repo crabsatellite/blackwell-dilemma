@@ -15954,6 +15954,99 @@ theorem randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support
     hnot_all_open_complement, hnot_all_open_giant,
     hnot_all_open_positive⟩
 
+/-- Repaired topo support surface after removing the inconsistent
+giant-restricted uniform loss lower-bound field.
+
+This surface is deliberately weaker than
+`RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport`: it
+keeps the paper-support package, a same-tail flat expected-loss lower bound,
+giant-event mass lower bound, explicit giant-event membership, unrestricted
+positive topological-loss realisation, and non-diagnostic finite members.  It
+does not assert a positive lower bound for `expectedTopoLossOnGiantOn`, because
+that assertion is kernel-refuted for the present theorem-core envelope. -/
+def RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) : Prop :=
+  RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge /\
+    Exists fun c : Real =>
+      0 < c /\ c <= 1 /\
+        forall L0 : Nat,
+          Exists fun L : Nat =>
+            L0 <= L /\
+            c <=
+              expectedTopoLossOnData (bridge.family L)
+                (boxedTorusFlatGraphN L) bridge.supercriticalProbability /\
+            c <=
+              percRestrictedExpectation (1 - bridge.supercriticalProbability)
+                ((bridge.family L).giantComponentEvent
+                  (boxedTorusFlatGraphN L))
+                (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                  (1 : Real)) /\
+            (Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+              Membership.mem
+                ((bridge.family L).giantComponentEvent
+                  (boxedTorusFlatGraphN L)) omega) /\
+            (Exists fun omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+              0 <
+                (bridge.family L).topoLossKernel
+                  (boxedTorusFlatGraphN L) omega) /\
+            Not (bridge.family L = boxedTorusFullReachComplementTopoLossData L) /\
+            Not (bridge.family L =
+              boxedTorusFullReachFlatOnlyComplementTopoLossData L) /\
+            Not (bridge.family L = boxedTorusAllOpenComplementTopoLossData L) /\
+            Not (bridge.family L = boxedTorusAllOpenGiantTopoLossData L) /\
+            Not (bridge.family L = boxedTorusAllOpenPositiveTopoLossData L)
+
+/-- Every repaired bridge supplies the non-contradictory support-surface repair.
+
+This is the support-surface repair promised by the current semantic gate.  It
+does not close the random-supercritical `Z2_L` target by itself, because a
+generic repaired bridge may still be a finite compatibility witness rather than
+the genuine random finite-lattice carrier. -/
+theorem randomSupercriticalZ2TopoClusterRepairedBridge_support_surface_repair
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) :
+    RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+      bridge := by
+  exact ⟨
+    randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support bridge,
+    randomSupercriticalZ2TopoClusterRepairedBridgeData_eventually_uniform_supported_extended_non_diagnostic_member_with_giant_member
+      bridge⟩
+
+/-- Existential route surface for the repaired topo support contract. -/
+def RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute : Prop :=
+  Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair bridge
+
+theorem randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_of_repaired_bridge
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute := by
+  exact ⟨bridge,
+    randomSupercriticalZ2TopoClusterRepairedBridge_support_surface_repair
+      bridge⟩
+
+/-- Compact certificate that the repaired topo support surface is
+kernel-inhabited and no longer contains the refuted giant-loss lower-bound
+field. -/
+def RandomSupercriticalZ2TopoClusterSupportSurfaceRepairCertificate :
+    Prop :=
+  (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+    RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+      bridge) /\
+    (RandomSupercriticalZ2TopoClusterRepairedBridgeData ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
+    (Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute)
+
+theorem random_supercritical_z2_topo_cluster_support_surface_repair_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairCertificate := by
+  exact ⟨
+    randomSupercriticalZ2TopoClusterRepairedBridge_support_surface_repair,
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_of_repaired_bridge,
+    (fun hnonempty =>
+      match hnonempty with
+      | ⟨bridge⟩ =>
+          randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_of_repaired_bridge
+            bridge)⟩
+
 /-- The extra giant-restricted lower-bound field that separates a merely
 repaired random-supercritical bridge from a paper-closing random finite-lattice
 carrier.
@@ -17601,6 +17694,17 @@ theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_paper_support :
   randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current
 
+theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_support_surface_repair :
+    RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current :=
+  randomSupercriticalZ2TopoClusterRepairedBridge_support_surface_repair
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current
+
+theorem randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute :=
+  randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_of_repaired_bridge
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current
+
 /-- Combined calibration certificate for the finite first-edge repaired
 compatibility witness.
 
@@ -18508,6 +18612,8 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
   Not (Nonempty RandomSupercriticalZ2TopoClusterBridgeData) /\
     Nonempty RandomSupercriticalZ2TopoClusterRepairedBridgeData /\
     FirstEdgeOpenGiantClosedTopoLossRepairedBridgeCurrentCompatibilityCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
     RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate /\
     FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
     FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate /\
@@ -18767,6 +18873,8 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
   exact ⟨not_random_supercritical_z2_topo_cluster_bridge_contract_current,
     exists_firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate,
+    random_supercritical_z2_topo_cluster_support_surface_repair_certificate,
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
     random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate,
     firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
     firstEdgeGiantStochasticTopoLossData_not_random_supercritical_z2_bridge_certificate,

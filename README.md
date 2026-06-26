@@ -54,9 +54,14 @@ standard `Z^2` graph identity, boxed-torus size facts, strict `p_c < p < 1`
 parameter, unit-interval loss range, flat expected-loss lower bound,
 giant-event mass lower bound, unrestricted positive-loss realisation, and
 non-diagnostic tail certificate, while dropping the refuted uniform
-giant-restricted loss lower-bound obligation. The random-supercritical
-semantic target remains open until this repaired contract is instantiated by
-the real finite-lattice carrier. The
+giant-restricted loss lower-bound obligation.  The repaired support surface is
+now itself kernel-gated by
+`RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair`,
+`RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute`, and
+`random_supercritical_z2_topo_cluster_support_surface_repair_certificate`; it
+is a formally inhabited route, not just prose calibration.  The
+random-supercritical semantic target remains open until this repaired support
+route is instantiated by the real finite-lattice carrier. The
 separately named projections machine-exclude the current full-reach, flat-only,
 all-open-complement, deterministic all-open giant, and deterministic all-open
 positive diagnostic families, including pointwise hybrids assembled from those

@@ -759,9 +759,14 @@ These prove that the present giant-loss/full-support/pointwise-on-giant
 route surface is uninhabitable for every repaired bridge because its uniform
 giant-restricted lower bound contradicts the theorem-core pointwise envelope
 along growing flattened boxed-torus sizes.  The remaining topo closure task is
-therefore a semantic support-surface repair followed by a genuine random
-finite `Z2_L` carrier instantiation, not just another inhabitant search inside
-the current surface.
+therefore no longer an informal support-surface repair: the repaired replacement
+is now build-gated by
+`RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair`,
+`RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute`, and
+`random_supercritical_z2_topo_cluster_support_surface_repair_certificate`, with
+the current repaired first-edge bridge inhabiting that route.  What remains is a
+genuine random finite `Z2_L` carrier instantiation of this repaired support
+route, not another inhabitant search inside the refuted current surface.
 It now also includes
 `RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate`
 and
