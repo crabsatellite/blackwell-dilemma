@@ -684,6 +684,19 @@ giant-restricted loss, giant-event mass, and an in-giant positive-loss
 realisation; the old final contract projects to this full surface, and
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support`
 refutes it for the current witness.
+The gate now also exposes a sufficient route:
+`RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute`
+requires a uniform positive pointwise loss floor on the repaired bridge's
+giant event; by
+`expectedTopoLossOnGiantOn_ge_mul_mass_of_pointwise_ge`,
+`randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route`,
+`randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route`,
+and
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route`,
+that floor plus the existing giant-event mass lower bound is enough for full
+topo paper-closing support. The current first-edge witness is blocked from
+that route by
+`firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route`.
 The gate now generalizes this obstruction to every repaired bridge whose family
 is `firstEdgeOpenGiantClosedTopoLossFamily` at `p = 3/4`, via
 `not_randomSupercriticalZ2TopoClusterRepairedBridge_firstEdge_three_quarters_giant_loss_paper_closing`,

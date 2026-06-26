@@ -11446,6 +11446,61 @@ theorem expectedTopoLossOnGiantOn_pos_realisation_witness
       (h_nonpos_on ω hω)
   linarith
 
+/-- A pointwise lower bound on the giant event, combined with a lower bound on
+the same event's Bernoulli mass, gives a carrier-local lower bound for the
+giant-restricted topological-loss expectation.
+
+This is the finite-measure step needed by the topo paper-closing route: it
+turns a genuine on-giant loss floor into the missing uniform
+`expectedTopoLossOnGiantOn` field. -/
+theorem expectedTopoLossOnGiantOn_ge_mul_mass_of_pointwise_ge
+    (data : WrongnessPercolationData) (n : Nat) {p eps mass : Real}
+    (hp_nonneg : 0 <= p) (hp_le_one : p <= 1)
+    (heps_nonneg : 0 <= eps)
+    (hmass :
+      mass <=
+        percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+          (fun _ : BondConfig (EdgeIdx n) => (1 : Real)))
+    (hpoint :
+      forall omega : BondConfig (EdgeIdx n),
+        Membership.mem (data.giantComponentEvent n) omega ->
+          eps <= data.topoLossKernel n omega) :
+    eps * mass <= expectedTopoLossOnGiantOn data n p := by
+  unfold expectedTopoLossOnGiantOn
+  have hp_open_nonneg : 0 <= 1 - p := by
+    linarith
+  have hp_open_le_one : 1 - p <= 1 := by
+    linarith
+  have hconst_le :
+      percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+          (fun _ : BondConfig (EdgeIdx n) => eps) <=
+        percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+          (data.topoLossKernel n) := by
+    exact
+      percRestrictedExpectation_ge_of_pointwise_ge_on
+        (1 - p) hp_open_nonneg hp_open_le_one
+        (data.giantComponentEvent n) (data.topoLossKernel n) eps hpoint
+  have hconst_eq :
+      percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+          (fun _ : BondConfig (EdgeIdx n) => eps) =
+        eps *
+          percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+            (fun _ : BondConfig (EdgeIdx n) => (1 : Real)) := by
+    simpa using
+      (percRestrictedExpectation_smul
+        (1 - p) (data.giantComponentEvent n) eps
+        (fun _ : BondConfig (EdgeIdx n) => (1 : Real)))
+  calc
+    eps * mass
+        <= eps *
+          percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+            (fun _ : BondConfig (EdgeIdx n) => (1 : Real)) :=
+          mul_le_mul_of_nonneg_left hmass heps_nonneg
+    _ = percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+          (fun _ : BondConfig (EdgeIdx n) => eps) := hconst_eq.symm
+    _ <= percRestrictedExpectation (1 - p) (data.giantComponentEvent n)
+          (data.topoLossKernel n) := hconst_le
+
 theorem boxedTorusAllOpenPositiveTopoLossData_expectedTopoLossOnData_flat_eq
     (L : Nat) (p : Real) :
     expectedTopoLossOnData
@@ -15901,6 +15956,57 @@ def RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
             expectedTopoLossOnGiantOn (bridge.family L)
               (boxedTorusFlatGraphN L) bridge.supercriticalProbability
 
+/-- Sufficient repaired-bridge route for the missing topo giant-loss field.
+
+The route asks for a uniform positive pointwise loss floor on the bridge's
+giant-component event, along all sufficiently large boxed-torus sizes.  Paired
+with the repaired bridge's existing giant-event mass lower bound, this is
+enough to derive the missing `expectedTopoLossOnGiantOn` lower bound by finite
+restricted-expectation monotonicity. -/
+def RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData) : Prop :=
+  Exists fun eps : Real =>
+    0 < eps /\ eps <= 1 /\
+      Exists fun L0 : Nat =>
+        forall L : Nat, L0 <= L ->
+          forall omega : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)),
+            Membership.mem
+              ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+              omega ->
+              eps <=
+                (bridge.family L).topoLossKernel
+                  (boxedTorusFlatGraphN L) omega
+
+/-- A repaired bridge with a uniform pointwise loss floor on its giant event
+supplies the missing giant-restricted lower-bound field. -/
+theorem randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData)
+    (hroute :
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge) :
+    RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+      bridge := by
+  rcases hroute with ⟨eps, heps_pos, heps_le_one, Lloss, hloss⟩
+  rcases bridge.supercritical_giant_event_mass_lower_bound with
+    ⟨mass, hmass_pos, hmass_le_one, Lmass, hmass⟩
+  refine ⟨eps * mass, ?_, ?_, max Lloss Lmass, ?_⟩
+  · nlinarith [heps_pos, hmass_pos]
+  · nlinarith [le_of_lt heps_pos, heps_le_one,
+      le_of_lt hmass_pos, hmass_le_one]
+  · intro L hL
+    have hLloss : Lloss <= L := by
+      exact le_trans (Nat.le_max_left Lloss Lmass) hL
+    have hLmass : Lmass <= L := by
+      exact le_trans (Nat.le_max_right Lloss Lmass) hL
+    exact
+      expectedTopoLossOnGiantOn_ge_mul_mass_of_pointwise_ge
+        (bridge.family L) (boxedTorusFlatGraphN L)
+        bridge.supercriticalProbability_nonneg
+        bridge.supercriticalProbability_le_one
+        (le_of_lt heps_pos)
+        (hmass L hLmass)
+        (hloss L hLloss)
+
 /-- The old final bridge contract would supply the repaired bridge together
 with the missing giant-restricted paper-closing field.  This is a calibration
 projection: the old contract itself is kernel-refuted, so this theorem records
@@ -15951,6 +16057,104 @@ def RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
                 (bridge.family L).topoLossKernel
                   (boxedTorusFlatGraphN L) omega
 
+/-- The pointwise-on-giant repaired route is strong enough for the full topo
+paper-closing support surface.
+
+It supplies the missing giant-restricted lower-bound field and aligns it with
+the repaired bridge's flat-loss and giant-event-mass lower bounds on one common
+eventual tail.  The same positive mass lower bound produces an in-giant member,
+and the route's pointwise floor makes that member carry positive loss. -/
+theorem randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData)
+    (hroute :
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge) :
+    RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+      bridge := by
+  rcases hroute with ⟨eps, heps_pos, heps_le_one, Lloss, hloss⟩
+  rcases bridge.supercritical_flat_lower_bound with
+    ⟨flat, hflat_pos, hflat_le_one, Lflat, hflat⟩
+  rcases bridge.supercritical_giant_event_mass_lower_bound with
+    ⟨mass, hmass_pos, _hmass_le_one, Lmass, hmass⟩
+  let c : Real := min flat (eps * mass)
+  have hroute' :
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge := ⟨eps, heps_pos, heps_le_one, Lloss, hloss⟩
+  have hgiant_closing :
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge :=
+    randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route
+      bridge hroute'
+  have hc_pos : 0 < c := by
+    dsimp [c]
+    exact lt_min hflat_pos (by nlinarith [heps_pos, hmass_pos])
+  have hc_le_one : c <= 1 := by
+    exact le_trans (by dsimp [c]; exact min_le_left flat (eps * mass))
+      hflat_le_one
+  refine ⟨
+    randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support bridge,
+    hgiant_closing,
+    c, hc_pos, hc_le_one,
+    max Lflat (max Lloss Lmass), ?_⟩
+  intro L hL
+  have hLflat : Lflat <= L := by
+    exact le_trans (Nat.le_max_left Lflat (max Lloss Lmass)) hL
+  have hLloss : Lloss <= L := by
+    exact le_trans
+      (le_trans (Nat.le_max_left Lloss Lmass)
+        (Nat.le_max_right Lflat (max Lloss Lmass))) hL
+  have hLmass : Lmass <= L := by
+    exact le_trans
+      (le_trans (Nat.le_max_right Lloss Lmass)
+        (Nat.le_max_right Lflat (max Lloss Lmass))) hL
+  have hc_le_flat : c <= flat := by
+    dsimp [c]
+    exact min_le_left flat (eps * mass)
+  have hc_le_eps_mass : c <= eps * mass := by
+    dsimp [c]
+    exact min_le_right flat (eps * mass)
+  have heps_nonneg : 0 <= eps := le_of_lt heps_pos
+  have hc_le_mass : c <= mass := by
+    have hmul_le : eps * mass <= mass := by
+      nlinarith [heps_nonneg, heps_le_one, le_of_lt hmass_pos]
+    exact le_trans hc_le_eps_mass hmul_le
+  have hgiant_lower :
+      eps * mass <=
+        expectedTopoLossOnGiantOn (bridge.family L)
+          (boxedTorusFlatGraphN L) bridge.supercriticalProbability :=
+    expectedTopoLossOnGiantOn_ge_mul_mass_of_pointwise_ge
+      (bridge.family L) (boxedTorusFlatGraphN L)
+      bridge.supercriticalProbability_nonneg
+      bridge.supercriticalProbability_le_one
+      heps_nonneg
+      (hmass L hLmass)
+      (hloss L hLloss)
+  have hmass_L :
+      mass <=
+        percRestrictedExpectation (1 - bridge.supercriticalProbability)
+          ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+            (1 : Real)) :=
+    hmass L hLmass
+  have hmass_pos_L :
+      0 <
+        percRestrictedExpectation (1 - bridge.supercriticalProbability)
+          ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+            (1 : Real)) :=
+    lt_of_lt_of_le hmass_pos hmass_L
+  rcases
+    percRestrictedExpectation_const_one_pos_event_nonempty
+      (1 - bridge.supercriticalProbability)
+      ((bridge.family L).giantComponentEvent (boxedTorusFlatGraphN L))
+      hmass_pos_L with
+    ⟨omega, homega⟩
+  refine ⟨?_, ?_, ?_, omega, homega, ?_⟩
+  · exact le_trans hc_le_flat (hflat L hLflat)
+  · exact le_trans hc_le_eps_mass hgiant_lower
+  · exact le_trans hc_le_mass hmass_L
+  · exact lt_of_lt_of_le heps_pos (hloss L hLloss omega homega)
+
 /-- Existential route for the full random-supercritical `Z^2_L` topo paper
 closing target.
 
@@ -15971,6 +16175,20 @@ theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_repaired_bridge
         bridge) :
     RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
   exact ⟨bridge, hsupport⟩
+
+/-- A pointwise-on-giant repaired bridge route inhabits the named full topo
+paper-closing route. -/
+theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData)
+    (hroute :
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge) :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_repaired_bridge
+      bridge
+      (randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route
+        bridge hroute)
 
 /-- The named full paper-closing route always contains an actual repaired
 random-supercritical bridge. -/
@@ -16987,6 +17205,58 @@ theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_cl
   intro hsupport
   exact firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing
     hsupport.2.1
+
+/-- The current first-edge repaired bridge also fails the stronger sufficient
+pointwise-on-giant loss route: on its selected giant event the topological loss
+kernel is identically zero. -/
+theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route :
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current) := by
+  rintro ⟨eps, heps_pos, _heps_le_one, Lloss, hloss⟩
+  rcases
+    firstEdgeOpenGiantClosedTopoLossFamily_giant_event_mass_lower_bound_at_three_quarters
+    with ⟨mass, hmass_pos, _hmass_le_one, Lmass, hmass⟩
+  let L : Nat := max Lloss Lmass
+  have hLloss : Lloss <= L := Nat.le_max_left Lloss Lmass
+  have hLmass : Lmass <= L := Nat.le_max_right Lloss Lmass
+  have hmass_L :
+      mass <=
+        percRestrictedExpectation (1 - ((3 : Real) / 4))
+          ((firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+            (boxedTorusFlatGraphN L))
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+            (1 : Real)) :=
+    hmass L hLmass
+  have hmass_pos_L :
+      0 <
+        percRestrictedExpectation (1 - ((3 : Real) / 4))
+          ((firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+            (boxedTorusFlatGraphN L))
+          (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+            (1 : Real)) :=
+    lt_of_lt_of_le hmass_pos hmass_L
+  rcases
+    percRestrictedExpectation_const_one_pos_event_nonempty
+      (1 - ((3 : Real) / 4))
+      ((firstEdgeOpenGiantClosedTopoLossFamily L).giantComponentEvent
+        (boxedTorusFlatGraphN L))
+      hmass_pos_L with
+    ⟨omega, homega⟩
+  have homega_current :
+      Membership.mem
+        (((firstEdgeOpenGiantClosedTopoLossRepairedBridge_current.family L).giantComponentEvent
+          (boxedTorusFlatGraphN L))) omega := by
+    simpa [firstEdgeOpenGiantClosedTopoLossRepairedBridge_current] using homega
+  have hpoint := hloss L hLloss omega homega_current
+  have hzero :
+      (firstEdgeOpenGiantClosedTopoLossRepairedBridge_current.family L).topoLossKernel
+        (boxedTorusFlatGraphN L) omega = 0 := by
+    simpa [firstEdgeOpenGiantClosedTopoLossRepairedBridge_current] using
+      firstEdgeOpenGiantClosedTopoLossFamily_topoLossKernel_zero_on_giant
+        L omega homega
+  rw [hzero] at hpoint
+  exact (not_lt_of_ge hpoint) heps_pos
 
 /-- Any repaired bridge that uses the first-edge cylinder family at `p = 3/4`
 cannot supply the missing giant-restricted paper-closing field.
