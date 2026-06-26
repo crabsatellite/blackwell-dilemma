@@ -560,6 +560,8 @@ structure Part6LatticeEmbeddingFrontierPayload where
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)
   part6_bridge_route_support_certificate :
     Part6BridgeRouteSupportCertificate
+  part6_full_paper_closing_output_layer_certificate :
+    Part6FullPaperClosingOutputLayerCertificate
   part6_current_frontier_certificate :
     Part6CurrentFrontierCertificate
   part6_full_paper_closing_support_current_obstruction :
@@ -1097,6 +1099,8 @@ def part6_lattice_embedding_frontier_payload :
     part6_current_bridge_routes_obstruction_certificate
   part6_bridge_route_support_certificate :=
     part6_bridge_route_support_certificate
+  part6_full_paper_closing_output_layer_certificate :=
+    part6_full_paper_closing_output_layer_certificate
   part6_current_frontier_certificate :=
     part6_current_frontier_certificate
   part6_full_paper_closing_support_current_obstruction :=

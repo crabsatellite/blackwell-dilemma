@@ -5438,6 +5438,64 @@ theorem not_part6_full_paper_closing_full_output_bundle_current :
   exact not_part6_full_paper_closing_output_pair_current hbundle.2
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Compact certificate for the Part 6 output layer exposed by any full
+paper-closing support or repaired bridge route.
+
+This packages the two counted output witnesses, their paired output layer, the
+full output bundle, and the current refutations of those outputs.  It is a
+gate-facing certificate for the current obstruction surface, not a closure of
+the open Part 6 semantic target. -/
+def Part6FullPaperClosingOutputLayerCertificate : Prop :=
+  (Part6FullPaperClosingSupport ->
+    Part6FullPaperClosingDivergenceWitness) /\
+    (Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingDivergenceWitness) /\
+    (Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    (Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    Not Part6FullPaperClosingDivergenceWitness /\
+    Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+    Not (Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6FullPaperClosingFullOutputBundle /\
+    Not Part6FullPaperClosingSupport /\
+    Not Part6FullPaperClosingBridgeRoute
+
+omit [DiagnosticSignalHypothesisData] in
+theorem part6_full_paper_closing_output_layer_certificate :
+    Part6FullPaperClosingOutputLayerCertificate := by
+  exact ⟨
+    part6_full_paper_closing_support_divergence_witness,
+    part6_full_paper_closing_bridge_route_divergence_witness,
+    part6_full_paper_closing_support_feasible_divergence_witness,
+    part6_full_paper_closing_bridge_route_feasible_divergence_witness,
+    part6_full_paper_closing_support_output_pair,
+    part6_full_paper_closing_bridge_route_output_pair,
+    part6_full_paper_closing_support_full_output_bundle,
+    part6_full_paper_closing_bridge_route_full_output_bundle,
+    not_part6_full_paper_closing_divergence_witness_current,
+    not_part6_full_paper_closing_feasible_divergence_witness_current,
+    not_part6_full_paper_closing_output_pair_current,
+    not_part6_full_paper_closing_full_output_bundle_current,
+    (fun hsupport =>
+      not_part6_full_paper_closing_full_output_bundle_current
+        (part6_full_paper_closing_support_full_output_bundle hsupport)),
+    (fun hroute =>
+      not_part6_full_paper_closing_full_output_bundle_current
+        (part6_full_paper_closing_bridge_route_full_output_bundle hroute))⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current Part 6 non-closure rederived through the exposed divergence
 witness, not only by destructing the full support wrapper. -/
 theorem not_part6_full_paper_closing_support_current_via_divergence_witness :
@@ -5606,6 +5664,7 @@ def Part6CurrentFrontierCertificate : Prop :=
     Part6ScalingCandidateCurrentObstructionCertificate /\
     ClosedUnitPart6CurrentObstructionCertificate /\
     Part6BridgeRouteSupportCertificate /\
+    Part6FullPaperClosingOutputLayerCertificate /\
     (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
     Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) /\
@@ -5639,6 +5698,7 @@ theorem part6_current_frontier_certificate :
     part6_scaling_candidate_current_obstruction_certificate,
     closed_unit_part6_current_obstruction_certificate,
     part6_bridge_route_support_certificate,
+    part6_full_paper_closing_output_layer_certificate,
     part6_current_bridge_routes_obstruction_certificate,
     not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current,
     part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty,

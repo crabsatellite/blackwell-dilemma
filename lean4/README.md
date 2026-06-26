@@ -947,12 +947,16 @@ It now also names `Part6FullPaperClosingFullOutputBundle` and gates
 support/bridge-route current obstructions through that full bundle. Thus a
 future Part 6 closure must machine-expose support, divergence, and same-`alpha`
 feasible/divergence witnesses as one checked package.
+These projections and refutations are now also collected in
+`Part6FullPaperClosingOutputLayerCertificate` and gated in
+`part6_lattice_embedding_frontier_payload`, so the two counted Part 6 output
+witness interfaces and their full bundle are checked through one Lean
+certificate.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
-and closed-unit current-obstruction certificate together with the paired/full
-output-bundle obstructions, support obstruction, bridge-level tail-reversal
-route obstruction, bridge-route obstruction, and the unified
-`part6_bridge_route_support_certificate`.
+and closed-unit current-obstruction certificate together with the output-layer
+certificate, support obstruction, bridge-level tail-reversal route obstruction,
+bridge-route obstruction, and the unified `part6_bridge_route_support_certificate`.
 It also gates `Part6FullPaperClosingBridgeRoute` and
 `part6_full_paper_closing_support_of_bridge_route`, so an inhabited repaired
 local or closed-unit bridge is now machine-checked to imply that full support
