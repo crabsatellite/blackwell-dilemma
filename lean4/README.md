@@ -700,6 +700,8 @@ It also gates `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_output_bund
 and
 `not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute_firstEdge_three_quarters_output_bundle`,
 so all three topo route output layers are checked together.
+The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
+now packages that bundled obstruction as well.
 It also gates
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_supported_extended_non_diagnostic_output`,
 so that same route must expose arbitrarily large non-diagnostic finite members
