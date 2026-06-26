@@ -603,6 +603,13 @@ The gate now also includes
 `firstEdgeOpenGiantClosedTopoLossFamily_not_positive_giant_loss_lower_bound_at_three_quarters`.
 It further gates the combined certificate
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_compatibility_certificate`.
+A separate finite positive-regression certificate,
+`firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`,
+packages the first-edge stochastic carrier's unit-interval loss, positive-mass
+full-cluster giant event, unit-compatible lower bound, exact
+`p = 3/4` giant-restricted expected-loss value `1/8`, and strict positivity.
+This is a non-vacuity regression for the repaired support shape, not a
+replacement for the missing random finite `Z^2_L` giant-component family.
 The missing paper-closing giant-loss field is now named as
 `RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing`; it is
 projected from the old final bridge contract and refuted for the current

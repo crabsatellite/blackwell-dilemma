@@ -11902,6 +11902,56 @@ theorem firstEdgeGiantStochasticTopoLossData_positiveGiant_and_unitCompatible :
   exact ⟨firstEdgeGiantStochasticTopoLossData_giantEventFullClusterConclusion,
     firstEdgeGiantStochasticTopoLossData_unitCompatibleAboveThresholdLowerBoundConclusion⟩
 
+/-- Finite first-edge positive-regression certificate for the topo route.
+
+This is deliberately not the random-supercritical boxed-torus bridge.  It
+records, in one kernel-checked object, that the finite Bernoulli first-edge
+carrier has a unit-interval loss kernel, a positive-mass full-cluster giant
+event, a corrected unit-compatible lower-bound package, and strictly positive
+giant-restricted expected topological loss at the explicit supercritical test
+parameter `p = 3/4`. -/
+def FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate : Prop :=
+  TopoLossKernelMemUnitIntervalOn firstEdgeGiantStochasticTopoLossData /\
+    GiantComponentEventFullClusterConclusion
+      firstEdgeGiantStochasticTopoLossData /\
+    UnitCompatibleAboveThresholdLowerBoundConclusion
+      firstEdgeGiantStochasticTopoLossData /\
+    (forall n : Nat,
+      expectedTopoLossOnGiantOn firstEdgeGiantStochasticTopoLossData n
+          ((3 : Real) / 4) =
+        (1 : Real) / 8) /\
+    (forall n : Nat,
+      0 <
+        expectedTopoLossOnGiantOn firstEdgeGiantStochasticTopoLossData n
+          ((3 : Real) / 4)) /\
+    Exists fun n : Nat =>
+      0 <
+        percRestrictedExpectation (1 - ((3 : Real) / 4))
+          (firstEdgeGiantStochasticTopoLossData.giantComponentEvent n)
+          (fun _ : BondConfig (EdgeIdx n) => (1 : Real))
+
+theorem firstEdgeGiantStochasticTopoLossData_positive_regression_certificate :
+    FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate := by
+  refine ⟨firstEdgeGiantStochasticTopoLossData_topoLossKernel_mem_unitInterval,
+    firstEdgeGiantStochasticTopoLossData_giantEventFullClusterConclusion,
+    firstEdgeGiantStochasticTopoLossData_unitCompatibleAboveThresholdLowerBoundConclusion,
+    ?_, ?_, ?_⟩
+  · intro n
+    rw [firstEdgeGiantStochasticTopoLossData_expectedTopoLossOnGiantOn_eq]
+    norm_num
+  · intro n
+    rw [firstEdgeGiantStochasticTopoLossData_expectedTopoLossOnGiantOn_eq]
+    norm_num
+  · refine ⟨0, ?_⟩
+    have hmass :
+        0 <
+          percRestrictedExpectation ((1 : Real) / 4)
+            (firstEdgeOpenEvent 0)
+            (fun _ : BondConfig (EdgeIdx 0) => (1 : Real)) :=
+      firstEdgeOpenEvent_mass_pos 0 (q := (1 : Real) / 4) (by norm_num)
+    have hq : 1 - ((3 : Real) / 4) = (1 : Real) / 4 := by norm_num
+    simpa [firstEdgeGiantStochasticTopoLossData, hq] using hmass
+
 /-- Boxed-torus oracle/cluster carrier with an all-large first-edge
     topological-loss tail.
 

@@ -79,7 +79,12 @@ its family/core/lower-bound projections, its fixed-`L`
 without closing the still-missing random finite-lattice carrier theorem.  It
 also gates `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current`, a finite
 first-edge Bernoulli compatibility witness proving that the repaired
-random-supercritical bridge contract is nonempty and kernel-clean.  The witness
+random-supercritical bridge contract is nonempty and kernel-clean.  A separate
+finite positive-regression gate,
+`firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`,
+packages the first-edge stochastic witness's unit-interval loss, positive-mass
+full-cluster giant event, unit-compatible lower bound, and strictly positive
+giant-restricted expected loss at `p = 3/4`.  The witness
 event is now also calibrated to the boxed-torus base horizontal edge via
 `boxedTorusFlattenBaseHorizontalEdge_eq_firstEdgeIdx`, and
 `firstEdgeOpenGiantClosedTopoLossFamily_giant_event_baseHorizontalTarget_reachable`
@@ -1203,6 +1208,11 @@ R410 additionally proves
 `firstEdgeGiantStochasticTopoLossData_positiveGiant_and_unitCompatible`: the
 same stochastic lower-bound carrier is supported on a positive-mass
 first-edge-open event and has restricted topo-loss expectation `(1-p)/2`.
+The gate-level certificate
+`firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`
+bundles that carrier's range, giant-event, unit-compatible lower-bound, and
+strictly positive `p = 3/4` giant-restricted loss facts as a finite regression
+witness, without identifying it with the random finite `Z^2_L` carrier.
 R411 adds `boxedTorusAllOpenPositiveTopoLossData`, the first positive
 topo-loss regression carrier supported on the finite boxed-torus all-open
 coordinate-edge event. It also proves

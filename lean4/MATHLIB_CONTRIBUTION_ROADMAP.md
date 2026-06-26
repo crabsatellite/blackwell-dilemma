@@ -526,6 +526,11 @@ same first-edge-open condition the explicit giant event:
 topological loss `expectedTopoLossOnGiantOn = (1-p)/2`, positive/full-cluster
 giant-event conclusions, and the corrected lower-bound interface. The real
 `Z^2_L` giant-component/reward-loss carrier remains the target.
+The gate now also packages this as
+`firstEdgeGiantStochasticTopoLossData_positive_regression_certificate`, adding
+the explicit `p = 3/4` positive giant-restricted regression check to the public
+frontier without promoting the finite first-edge carrier to a random
+finite-lattice theorem.
 R411 moves the positive topo-loss regression onto the boxed-torus all-open
 coordinate-edge event: `boxedTorusAllOpenPositiveTopoLossData` proves
 all-open event-indicator mass, positive restricted/full topo-loss expectation
