@@ -4138,8 +4138,8 @@ closed-unit Part 6 route.
 This certificate ties the degenerate threshold value, the failed strict
 threshold requirement, the empty closed-unit `α` domain, the impossible
 same-`α` full paper-domain witness, and the non-instantiability of the
-closed-unit local bridge into one audited theorem. -/
-theorem closed_unit_part6_current_obstruction_certificate :
+closed-unit local bridge into one audited certificate proposition. -/
+def ClosedUnitPart6CurrentObstructionCertificate : Prop :=
     alphaStar 0 harrisKestenCriticalProb = 1 ∧
       ¬ alphaStar 0 harrisKestenCriticalProb < 1 ∧
       (¬ ∃ α : ℝ,
@@ -4161,7 +4161,11 @@ theorem closed_unit_part6_current_obstruction_certificate :
             ∀ p : ℝ, harrisKestenCriticalProb - ε < p →
               p < harrisKestenCriticalProb →
                 M < kappaStar p α)) ∧
-      Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) := by
+      Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)
+
+omit [DiagnosticSignalHypothesisData] in
+theorem closed_unit_part6_current_obstruction_certificate :
+    ClosedUnitPart6CurrentObstructionCertificate := by
   exact ⟨alphaStar_eq_one_current 0 harrisKestenCriticalProb,
     not_closed_unit_alphaStar_lt_one_current,
     not_closed_unit_alpha_above_alphaStar_current,
@@ -5214,6 +5218,50 @@ theorem part6_current_bridge_routes_obstruction_certificate :
       Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData) := by
   exact And.intro not_z2_lattice_embedding_local_bridge_current
     not_z2_lattice_embedding_closed_unit_local_bridge_current
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Unified current-frontier certificate for the open Part 6 lattice-embedding
+semantic target.
+
+This packages the unbounded-route obstruction certificate, the closed-unit
+obstruction certificate, the two current bridge-route refutations, the bridge
+route-to-support projection, the paired output projections, and the current
+output/support/route obstructions.  It is intentionally a non-closure
+certificate: closing Part 6 still requires a repaired, nondegenerate
+`alpha`/feasible-set domain and a genuine `Z^2` lattice/percolation carrier. -/
+def Part6CurrentFrontierCertificate : Prop :=
+  UnboundedPart6CurrentObstructionCertificate /\
+    ClosedUnitPart6CurrentObstructionCertificate /\
+    (Not (Nonempty Z2LatticeEmbeddingLocalBridgeData) /\
+      Not (Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData)) /\
+    (Part6FullPaperClosingBridgeRoute -> Part6FullPaperClosingSupport) /\
+    (Part6FullPaperClosingSupport ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingBridgeRoute ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6FullPaperClosingDivergenceWitness /\
+    Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+    Not (Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6FullPaperClosingSupport /\
+    Not Part6FullPaperClosingBridgeRoute
+
+omit [DiagnosticSignalHypothesisData] in
+theorem part6_current_frontier_certificate :
+    Part6CurrentFrontierCertificate := by
+  exact ⟨unbounded_part6_current_obstruction_certificate,
+    closed_unit_part6_current_obstruction_certificate,
+    part6_current_bridge_routes_obstruction_certificate,
+    part6_full_paper_closing_support_of_bridge_route,
+    part6_full_paper_closing_support_output_pair,
+    part6_full_paper_closing_bridge_route_output_pair,
+    not_part6_full_paper_closing_divergence_witness_current,
+    not_part6_full_paper_closing_feasible_divergence_witness_current,
+    not_part6_full_paper_closing_output_pair_current,
+    not_part6_full_paper_closing_support_current,
+    not_part6_full_paper_closing_bridge_route_current⟩
 
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality
