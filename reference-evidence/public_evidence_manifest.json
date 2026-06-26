@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "scope": "Public Blackwell Dilemma repository evidence gate for reference, formula, numeric-result, and paper-semantic target claims.",
+  "source_cards": [
+    {
+      "id": "blackwell1953",
+      "kind": "external_reference",
+      "role": "Classical comparison-of-experiments theorem used as the baseline result.",
+      "status": "source_backed_not_reproved_here",
+      "source_url": "https://doi.org/10.1214/aoms/1177729091",
+      "bibliographic_note": "David Blackwell, Equivalent Comparisons of Experiments, Annals of Mathematical Statistics 24(2), 1953."
+    },
+    {
+      "id": "harris_kesten_pc_half",
+      "kind": "external_formula",
+      "role": "Critical probability p_c(Z2 bond percolation)=1/2 used as the percolation threshold reference.",
+      "status": "external_classical_result_partially_represented_in_lean_gate",
+      "source_url": "https://doi.org/10.1007/BF01231563",
+      "bibliographic_note": "Kesten 1980 completes p_c(Z2)=1/2; Harris 1960 supplies the complementary classical half."
+    },
+    {
+      "id": "sarle_bimodality_5_over_9",
+      "kind": "external_formula",
+      "role": "Bimodality coefficient threshold 5/9 used in the computational appendix diagnostics.",
+      "status": "source_backed_diagnostic_not_lean_theorem",
+      "bibliographic_note": "Sarle's bimodality coefficient threshold is used only as a simulation diagnostic."
+    },
+    {
+      "id": "two_dimensional_percolation_nu_four_thirds",
+      "kind": "external_formula",
+      "role": "2D percolation finite-size-scaling exponent nu=4/3 used for empirical data-collapse diagnostics.",
+      "status": "source_backed_diagnostic_not_lean_theorem",
+      "bibliographic_note": "The public text treats nu=4/3 as a finite-size-scaling diagnostic; it is not a closed Lean input for the remaining theorem targets."
+    },
+    {
+      "id": "uniform_order_statistic_gap",
+      "kind": "external_formula_plus_local_derivation",
+      "role": "Uniform[0,1] order-statistic gap formula used by the analytic conditional topological-loss check.",
+      "status": "formula_machine_checked_against_committed_json",
+      "local_file": "results/prop5_verification_results.json",
+      "bibliographic_note": "The manifest verifies committed analytic entries against (N-k)/((N+1)(k+1))."
+    },
+    {
+      "id": "lean_paper_semantic_gate",
+      "kind": "machine_gate",
+      "role": "Lean gate separating checked theorem surface from complete paper-semantic closure.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/PaperSemanticGate.lean"
+    },
+    {
+      "id": "committed_simulation_results",
+      "kind": "machine_result_data",
+      "role": "Committed JSON outputs backing public computational appendix numbers.",
+      "status": "repo_tracked_result_data",
+      "local_file": "results/"
+    }
+  ],
+  "claims": [
+    {
+      "id": "readme_blackwell_baseline",
+      "category": "external_reference",
+      "source_cards": ["blackwell1953"],
+      "locations": [
+        {
+          "id": "root_readme",
+          "path": "README.md",
+          "contains": [
+            "Blackwell's theorem (1953) states that more informative signals lead to weakly better decisions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harris_kesten_threshold_pc_half",
+      "category": "external_formula",
+      "source_cards": ["harris_kesten_pc_half"],
+      "locations": [
+        {
+          "id": "root_readme",
+          "path": "README.md",
+          "contains": ["percolation threshold $p_c = 1/2$"]
+        },
+        {
+          "id": "computational_appendix_tex",
+          "path": "docs/computational_appendix.tex",
+          "contains": ["Harris--Kesten threshold $p_c = 1/2$"]
+        },
+        {
+          "id": "lean_classical_results",
+          "path": "lean4/BlackwellDilemma/ClassicalResults.lean",
+          "contains": ["Harris 1960 / Kesten 1980 (`p_c = 1/2` on `Z"]
+        }
+      ]
+    },
+    {
+      "id": "sarle_bimodality_threshold",
+      "category": "external_formula",
+      "source_cards": ["sarle_bimodality_5_over_9"],
+      "locations": [
+        {
+          "id": "computational_appendix_tex",
+          "path": "docs/computational_appendix.tex",
+          "contains": ["Sarle's $b$) crosses the $5/9$ threshold"]
+        },
+        {
+          "id": "analyze_hmda_script",
+          "path": "simulation/analyze_hmda.py",
+          "contains": ["threshold=0.556"]
+        }
+      ]
+    },
+    {
+      "id": "finite_size_scaling_nu_four_thirds",
+      "category": "external_formula_diagnostic",
+      "source_cards": ["two_dimensional_percolation_nu_four_thirds", "committed_simulation_results"],
+      "locations": [
+        {
+          "id": "root_readme_replication",
+          "path": "README.md",
+          "contains": ["FSS with critical exponent nu = 4/3"]
+        },
+        {
+          "id": "computational_appendix_tex",
+          "path": "docs/computational_appendix.tex",
+          "contains": ["Data collapse using $\\nu = 4/3$"]
+        }
+      ],
+      "checks": [
+        {
+          "id": "n20_reachable_near_pc",
+          "type": "json_numeric",
+          "path": "results/fss_enhanced_results.json",
+          "json_path": ["20", "mean_reachable", 19],
+          "round": 3,
+          "expected": 0.608
+        },
+        {
+          "id": "n100_reachable_near_pc",
+          "type": "json_numeric",
+          "path": "results/fss_enhanced_results.json",
+          "json_path": ["100", "mean_reachable", 19],
+          "round": 3,
+          "expected": 0.491
+        },
+        {
+          "id": "n100_loss_p75",
+          "type": "json_numeric",
+          "path": "results/fss_enhanced_results.json",
+          "json_path": ["100", "mean_loss", 39],
+          "round": 2,
+          "expected": 0.29
+        }
+      ]
+    },
+    {
+      "id": "phase_transition_appendix_numbers",
+      "category": "result_backed_public_number",
+      "source_cards": ["committed_simulation_results", "harris_kesten_pc_half"],
+      "locations": [
+        {
+          "id": "computational_appendix_tex",
+          "path": "docs/computational_appendix.tex",
+          "contains": [
+            "mean welfare loss increases from 0.32 at $p = 0$ to 0.47 at $p = 0.95$"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "loss_at_p0_rounds_to_0_32",
+          "type": "json_numeric",
+          "path": "results/simulation_results.json",
+          "json_path": ["exp1_p_sweep", "mean_loss", 0],
+          "round": 2,
+          "expected": 0.32
+        },
+        {
+          "id": "loss_at_p095_rounds_to_0_47",
+          "type": "json_numeric",
+          "path": "results/simulation_results.json",
+          "json_path": ["exp1_p_sweep", "mean_loss", 39],
+          "round": 2,
+          "expected": 0.47
+        },
+        {
+          "id": "reachable_start_above_0_99",
+          "type": "json_numeric",
+          "path": "results/simulation_results.json",
+          "json_path": ["exp1_p_sweep", "reachable_frac", 0],
+          "min": 0.99
+        },
+        {
+          "id": "reachable_after_pc_below_0_08",
+          "type": "json_numeric",
+          "path": "results/simulation_results.json",
+          "json_path": ["exp1_p_sweep", "reachable_frac", 23],
+          "max": 0.08
+        }
+      ]
+    },
+    {
+      "id": "counterfactual_table_numbers",
+      "category": "result_backed_public_number",
+      "source_cards": ["committed_simulation_results"],
+      "locations": [
+        {
+          "id": "computational_appendix_tex",
+          "path": "docs/computational_appendix.tex",
+          "contains": [
+            "0.70 (original) & 0.370 & 0.002",
+            "$\\approx 0.29$ (partial repair) & 0.192 & 0.99",
+            "$\\approx 0.00$ (full repair) & 0.146 & 1.00"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "original_loss",
+          "type": "json_numeric",
+          "path": "results/counterfactual_results.json",
+          "json_path": ["mean_loss", 0],
+          "round": 3,
+          "expected": 0.37
+        },
+        {
+          "id": "partial_repair_loss",
+          "type": "json_numeric",
+          "path": "results/counterfactual_results.json",
+          "json_path": ["mean_loss", 14],
+          "round": 3,
+          "expected": 0.192
+        },
+        {
+          "id": "full_repair_loss",
+          "type": "json_numeric",
+          "path": "results/counterfactual_results.json",
+          "json_path": ["mean_loss", 24],
+          "round": 3,
+          "expected": 0.146
+        },
+        {
+          "id": "full_repair_reachable",
+          "type": "json_numeric",
+          "path": "results/counterfactual_results.json",
+          "json_path": ["mean_reachable", 24],
+          "round": 2,
+          "expected": 1.0
+        }
+      ]
+    },
+    {
+      "id": "uniform_topological_loss_formula",
+      "category": "formula_machine_check",
+      "source_cards": ["uniform_order_statistic_gap", "committed_simulation_results"],
+      "locations": [
+        {
+          "id": "computational_appendix_tex",
+          "path": "docs/computational_appendix.tex",
+          "contains": [
+            "$\\E[|\\Wtopo| \\mid |R| = k] = (n-k)/((n+1)(k+1))$"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "n20_total400_k386",
+          "type": "uniform_topo_loss_formula",
+          "path": "results/prop5_verification_results.json",
+          "json_path": ["20", "0.3", "386", "analytic"],
+          "total_vertices": 400,
+          "cluster_size": 386,
+          "tolerance": 1e-12
+        },
+        {
+          "id": "n40_total1600_k10",
+          "type": "uniform_topo_loss_formula",
+          "path": "results/prop5_verification_results.json",
+          "json_path": ["40", "0.7", "10", "analytic"],
+          "total_vertices": 1600,
+          "cluster_size": 10,
+          "tolerance": 1e-12
+        }
+      ]
+    },
+    {
+      "id": "paper_semantic_open_targets",
+      "category": "paper_semantic_gate",
+      "source_cards": ["lean_paper_semantic_gate"],
+      "locations": [
+        {
+          "id": "paper_semantic_gate",
+          "path": "lean4/BlackwellDilemma/PaperSemanticGate.lean",
+          "contains": [
+            "theorem_4_1_part6_lattice_embedding",
+            "topo_cluster_random_supercritical_z2"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "part6_remains_open",
+          "type": "semantic_gate_status",
+          "path": "lean4/BlackwellDilemma/PaperSemanticGate.lean",
+          "target_id": "theorem_4_1_part6_lattice_embedding",
+          "status": "open"
+        },
+        {
+          "id": "topo_remains_open",
+          "type": "semantic_gate_status",
+          "path": "lean4/BlackwellDilemma/PaperSemanticGate.lean",
+          "target_id": "topo_cluster_random_supercritical_z2",
+          "status": "open"
+        }
+      ]
+    }
+  ],
+  "paper_semantic_target_triage": [
+    {
+      "target_id": "theorem_4_1_part6_lattice_embedding",
+      "gate_status": "open",
+      "repairability": "repairable only by a new project-local carrier/domain proof, not by merely citing Harris-Kesten",
+      "external_support_role": "Classical percolation can support the Z2 threshold/scaling side, but the missing nondegenerate alpha-domain plus feasible-set bridge is the paper's own semantic interface.",
+      "short_term_kernel_work": "Continue shrinking the Part6NondegenerateFeasibleRepairRoute into explicit carrier fields and prove refutations/projections; do not claim closure until an inhabitant is built."
+    },
+    {
+      "target_id": "topo_cluster_random_supercritical_z2",
+      "gate_status": "open",
+      "repairability": "partly external-support-backed and partly project-local",
+      "external_support_role": "Random-supercritical Z2 finite-lattice facts and giant-component asymptotics are external percolation infrastructure; the exact repaired support surface and loss fields are paper-specific and must be instantiated in Lean.",
+      "short_term_kernel_work": "Keep the repaired support surface explicit, then either instantiate a finite Z2_L carrier or further split the remaining giant-loss/support obligations."
+    }
+  ]
+}

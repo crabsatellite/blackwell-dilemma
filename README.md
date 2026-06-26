@@ -28,6 +28,8 @@ lake build BlackwellDilemma.AxiomAudit
 python scripts/audit_kernel_surface.py
 python scripts/audit_conditional_surface.py
 python scripts/audit_paper_semantic_gate.py
+cd ..
+python tools/verify_public_evidence.py
 ```
 
 The current public Lean package keeps the checked theorem surface
@@ -126,6 +128,10 @@ See
 [`lean4/README.md`](lean4/README.md) and
 [`lean4/PAPER_LEAN_CALIBRATION.md`](lean4/PAPER_LEAN_CALIBRATION.md) for the
 paper-label mapping and remaining semantic calibration notes.
+Public reference/formula/numeric claims are also gated by
+[`reference-evidence/public_evidence_manifest.json`](reference-evidence/public_evidence_manifest.json):
+the verifier checks source cards for external formulas, committed JSON evidence
+for public appendix numbers, and the two still-open paper-semantic Lean targets.
 
 ## Installation
 
