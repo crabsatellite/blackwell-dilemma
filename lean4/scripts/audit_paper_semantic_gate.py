@@ -581,6 +581,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralPackageObstructionStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
@@ -2085,6 +2089,18 @@ def main() -> int:
     print(
         "semantic_target_bilateral_package_obstruction_certificate_proof="
         "remaining_open_semantic_targets_bilateral_package_obstruction_certificate"
+    )
+    print(
+        "semantic_target_bilateral_package_obstruction_statement_roster_proof="
+        "remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current"
+    )
+    print(
+        "semantic_target_bilateral_package_obstruction_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_bilateral_package_obstruction_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate"
     )
     print(
         "semantic_target_kernel_surface_route_obstruction_certificate="

@@ -183,6 +183,9 @@ obstruction formula in one build-gated statement list.
 checks that the joint target, exact-input, output-bundle, target-route, and
 closure-route packages can each be refuted from either the Part 6 obstruction
 or the topo obstruction.
+`remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate`
+pins every single-side package-obstruction projection and every current joint
+package obstruction formula in one build-gated statement list.
 `open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate`
 lifts those route obstructions back to the machine-facing open-target roster:
 for every roster surface, `Not target`, `Not targetRoute`, and
@@ -297,8 +300,9 @@ exact-input/output bundle equivalence, output-equivalence target/output bundles,
 bidirectional output projections, output iff proofs, output obstructions,
 target/exact/output obstruction-equivalence proofs, joint closure-reduction
 packages and package obstructions, joint route-obstruction packages, statement
-rosters, and package obstructions, Part 6 conditional witness interface projections and
-obstructions, Part 6 route-obstruction projections, topo
+rosters, and package obstructions, bilateral package obstruction statement
+rosters, Part 6 conditional witness interface projections and obstructions,
+Part 6 route-obstruction projections, topo
 exact-output projections and route nonclosure boundary, topo route-obstruction
 projections, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and

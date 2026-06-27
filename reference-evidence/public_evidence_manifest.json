@@ -504,6 +504,9 @@
             "semantic_target_joint_route_statement_roster_certificate_proof=remaining_open_semantic_targets_joint_route_statement_roster_certificate",
             "semantic_target_bilateral_package_obstruction_certificate=RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
             "semantic_target_bilateral_package_obstruction_certificate_proof=remaining_open_semantic_targets_bilateral_package_obstruction_certificate",
+            "semantic_target_bilateral_package_obstruction_statement_roster_proof=remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current",
+            "semantic_target_bilateral_package_obstruction_statement_roster_certificate=RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
+            "semantic_target_bilateral_package_obstruction_statement_roster_certificate_proof=remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate",
             "semantic_target_kernel_surface_route_obstruction_certificate=OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
             "semantic_target_kernel_surface_route_obstruction_certificate_proof=open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate",
             "semantic_target_frontier_payload_route_obstruction_certificate=OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
@@ -549,7 +552,7 @@
             "semantic_target_closure_input_field_not_iff_proof=openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input",
             "semantic_target_closure_input_field_roster_certificate=OpenSemanticTargetClosureInputFieldRosterCertificate",
             "semantic_target_closure_input_field_roster_certificate_proof=open_semantic_target_closure_input_field_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=525"
+            "semantic_target_axiom_audit_prints_required=529"
           ]
         },
         {

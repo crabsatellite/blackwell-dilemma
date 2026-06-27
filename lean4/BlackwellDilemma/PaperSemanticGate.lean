@@ -8879,6 +8879,147 @@ theorem
   · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
   exact remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
 
+/-- Package-level statement roster for bilateral joint package obstructions. -/
+def remainingOpenSemanticTargetsBilateralPackageObstructionStatements :
+    List Prop :=
+  [(Not Part6LatticeEmbeddingSemanticKernelTarget ->
+    Not RemainingOpenSemanticTargetsSatisfied),
+   (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+    Not RemainingOpenSemanticTargetsSatisfied),
+   (Not Part6LatticeEmbeddingExactClosureInput ->
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied),
+   (Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied),
+   (Not Part6FullPaperClosingFullOutputBundle ->
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied),
+   (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied),
+   (Not Part6NondegenerateFeasibleRepairRoute ->
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied),
+   (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied),
+   (Not Part6FullPaperClosingSupport ->
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied),
+   (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied),
+   Not RemainingOpenSemanticTargetsSatisfied,
+   Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+   Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+   Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+   Not RemainingOpenSemanticTargetsClosureRoutesSatisfied]
+
+/-- Build gate: the bilateral package obstruction statement roster names every
+single-side obstruction projection and current package obstruction. -/
+theorem
+    remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current :
+    remainingOpenSemanticTargetsBilateralPackageObstructionStatements =
+      [(Not Part6LatticeEmbeddingSemanticKernelTarget ->
+        Not RemainingOpenSemanticTargetsSatisfied),
+       (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+        Not RemainingOpenSemanticTargetsSatisfied),
+       (Not Part6LatticeEmbeddingExactClosureInput ->
+        Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied),
+       (Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+        Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied),
+       (Not Part6FullPaperClosingFullOutputBundle ->
+        Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied),
+       (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+        Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied),
+       (Not Part6NondegenerateFeasibleRepairRoute ->
+        Not RemainingOpenSemanticTargetsTargetRoutesSatisfied),
+       (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+        Not RemainingOpenSemanticTargetsTargetRoutesSatisfied),
+       (Not Part6FullPaperClosingSupport ->
+        Not RemainingOpenSemanticTargetsClosureRoutesSatisfied),
+       (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+        Not RemainingOpenSemanticTargetsClosureRoutesSatisfied),
+       Not RemainingOpenSemanticTargetsSatisfied,
+       Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+       Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+       Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] := rfl
+
+/-- Build-gated statement roster for bilateral joint package obstructions. -/
+def
+    RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsBilateralPackageObstructionStatements =
+    [(Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not RemainingOpenSemanticTargetsSatisfied),
+     (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not RemainingOpenSemanticTargetsSatisfied),
+     (Not Part6LatticeEmbeddingExactClosureInput ->
+      Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied),
+     (Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied),
+     (Not Part6FullPaperClosingFullOutputBundle ->
+      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied),
+     (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied),
+     (Not Part6NondegenerateFeasibleRepairRoute ->
+      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied),
+     (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied),
+     (Not Part6FullPaperClosingSupport ->
+      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied),
+     (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied),
+     Not RemainingOpenSemanticTargetsSatisfied,
+     Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+     Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+     Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+     Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] /\
+    (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not RemainingOpenSemanticTargetsSatisfied) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not RemainingOpenSemanticTargetsSatisfied) /\
+    (Not Part6LatticeEmbeddingExactClosureInput ->
+      Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (Not Part6FullPaperClosingFullOutputBundle ->
+      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (Not Part6NondegenerateFeasibleRepairRoute ->
+      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (Not Part6FullPaperClosingSupport ->
+      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    Not RemainingOpenSemanticTargetsSatisfied /\
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied /\
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied /\
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied /\
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied /\
+    RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate
+
+/-- The bilateral package obstruction statement roster is pinned to named
+single-side obstruction projections and current-obstruction theorems. -/
+theorem
+    remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate :
+    RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate := by
+  exact ⟨
+    remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current,
+    remaining_open_semantic_targets_satisfied_not_of_part6_target_not,
+    remaining_open_semantic_targets_satisfied_not_of_topo_target_not,
+    remaining_open_semantic_targets_exact_inputs_not_of_part6_exact_input_not,
+    remaining_open_semantic_targets_exact_inputs_not_of_topo_exact_input_not,
+    remaining_open_semantic_targets_full_outputs_not_of_part6_output_not,
+    remaining_open_semantic_targets_full_outputs_not_of_topo_output_not,
+    remaining_open_semantic_targets_target_routes_not_of_part6_route_not,
+    remaining_open_semantic_targets_target_routes_not_of_topo_route_not,
+    remaining_open_semantic_targets_closure_routes_not_of_part6_closure_not,
+    remaining_open_semantic_targets_closure_routes_not_of_topo_closure_not,
+    remaining_open_semantic_targets_satisfied_notYet,
+    remaining_open_semantic_targets_exact_inputs_notYet,
+    remaining_open_semantic_targets_full_outputs_notYet,
+    remaining_open_semantic_targets_target_routes_notYet,
+    remaining_open_semantic_targets_closure_routes_notYet,
+    remaining_open_semantic_targets_bilateral_package_obstruction_certificate⟩
+
 /-- Roster-level route-obstruction certificate for the open semantic targets.
 It states that every machine-facing open-target surface has equivalent
 target-, target-route-, and closure-route refutations, and that those
@@ -9928,6 +10069,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
     RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
+    RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetNamedRouteObstructionRosterCertificate /\
@@ -9996,6 +10138,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       remaining_open_semantic_targets_bilateral_package_obstruction_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate
   constructor
   · exact
       open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
