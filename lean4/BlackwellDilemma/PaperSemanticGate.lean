@@ -12021,6 +12021,24 @@ theorem
        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
         TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the field-to-target statement roster has one formula for each
+remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements.length = 2 := rfl
+
+/-- Build gate: the field-to-exact-input statement roster has one formula for
+each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements.length = 2 := rfl
+
+/-- Build gate: the field-to-output statement roster has one formula for each
+remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements.length = 2 := rfl
+
 /-- Every field-output surface carries field-payload-to-target projection. -/
 theorem openSemanticTargetClosureInputFieldOutputSurface_field_to_target
     (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
@@ -12215,6 +12233,12 @@ def OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate :
         Part6FullPaperClosingFullOutputBundle,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
         TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements.length =
+      2 /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.target) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
@@ -12237,6 +12261,15 @@ theorem
   constructor
   · exact
       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_length_current
   constructor
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_target
