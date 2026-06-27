@@ -5909,6 +5909,117 @@ theorem remaining_open_semantic_targets_joint_closure_reduction_certificate :
   · exact remaining_open_semantic_targets_full_outputs_notYet
   exact remaining_open_semantic_targets_obstruction_equivalence_certificate
 
+/-- The exact Part 6 closure input exposes the paper-facing divergence
+witness. -/
+theorem part6_lattice_embedding_divergence_witness_of_exact_closure_input :
+    Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingDivergenceWitness := by
+  exact part6_full_paper_closing_support_divergence_witness
+
+/-- The exact Part 6 closure input exposes the paper-facing feasible/divergence
+witness. -/
+theorem part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input :
+    Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingFeasibleDivergenceWitness := by
+  exact part6_full_paper_closing_support_feasible_divergence_witness
+
+/-- The exact Part 6 closure input exposes the paired paper-facing output
+witnesses. -/
+theorem part6_lattice_embedding_output_pair_of_exact_closure_input :
+    Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  exact part6_full_paper_closing_support_output_pair
+
+/-- The Part 6 full output bundle carries the paper-facing divergence
+witness. -/
+theorem part6_lattice_embedding_divergence_witness_of_full_output_bundle :
+    Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness := by
+  intro hbundle
+  exact hbundle.2.1
+
+/-- The Part 6 full output bundle carries the paper-facing feasible/divergence
+witness. -/
+theorem part6_lattice_embedding_feasible_divergence_witness_of_full_output_bundle :
+    Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hbundle
+  exact hbundle.2.2
+
+/-- The Part 6 full output bundle carries the paired paper-facing output
+witnesses. -/
+theorem part6_lattice_embedding_output_pair_of_full_output_bundle :
+    Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hbundle
+  exact hbundle.2
+
+/-- Dedicated Part 6 interface certificate for the two paper-facing conditional
+witness propositions: both the exact closure input and the full output bundle
+project to the counted witness interfaces, and the current carrier is refuted
+at those interfaces. -/
+def Part6RemainingConditionalProjectionCertificate : Prop :=
+  (Part6LatticeEmbeddingExactClosureInput ->
+    Part6FullPaperClosingDivergenceWitness) /\
+    (Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness) /\
+    (Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6FullPaperClosingDivergenceWitness /\
+    Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+    Not (Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6LatticeEmbeddingExactClosureInput /\
+    Not Part6FullPaperClosingFullOutputBundle /\
+    Part6FullPaperClosingOutputLayerCertificate /\
+    Part6LatticeEmbeddingClosureInputOutputCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate
+
+/-- The Part 6 conditional witness interfaces are kernel-gated from the exact
+input/full-output layers and are currently obstructed. -/
+theorem part6_remaining_conditional_projection_certificate :
+    Part6RemainingConditionalProjectionCertificate := by
+  constructor
+  · exact part6_lattice_embedding_divergence_witness_of_exact_closure_input
+  constructor
+  · exact part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input
+  constructor
+  · exact part6_lattice_embedding_output_pair_of_exact_closure_input
+  constructor
+  · exact part6_lattice_embedding_divergence_witness_of_full_output_bundle
+  constructor
+  · exact part6_lattice_embedding_feasible_divergence_witness_of_full_output_bundle
+  constructor
+  · exact part6_lattice_embedding_output_pair_of_full_output_bundle
+  constructor
+  · exact not_part6_full_paper_closing_divergence_witness_current
+  constructor
+  · exact not_part6_full_paper_closing_feasible_divergence_witness_current
+  constructor
+  · exact not_part6_full_paper_closing_output_pair_current
+  constructor
+  · exact part6_lattice_embedding_exact_closure_input_notYet
+  constructor
+  · exact not_part6_full_paper_closing_full_output_bundle_current
+  constructor
+  · exact part6_full_paper_closing_output_layer_certificate
+  constructor
+  · exact part6_lattice_embedding_closure_input_output_certificate
+  constructor
+  · exact remaining_open_semantic_targets_exact_closure_input_output_certificate
+  exact remaining_open_semantic_targets_joint_closure_reduction_certificate
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -6450,6 +6561,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
+    Part6RemainingConditionalProjectionCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate
 
@@ -6474,6 +6586,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_obstruction_equivalence_certificate
   constructor
   · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
+  constructor
+  · exact part6_remaining_conditional_projection_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate

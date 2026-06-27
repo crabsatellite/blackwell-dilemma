@@ -345,6 +345,11 @@ The paper-semantic gate now also proves
 Part 6 full output bundle is not merely a consequence of the target; it is a
 reversible target-output surface, still refuted by
 `not_part6_full_paper_closing_full_output_bundle_current`.
+It also gates
+`part6_remaining_conditional_projection_certificate`, which projects
+both the exact Part 6 closure input and the full output bundle to the named
+divergence and feasible/divergence witness interfaces, while recording the
+current refutations of the two individual interfaces and their paired output.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
 and closed-unit current-obstruction certificate together with the

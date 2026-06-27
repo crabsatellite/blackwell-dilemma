@@ -141,6 +141,10 @@ The exact inputs are also tied directly to the reversible output layer by
 equates its exact closure input with `Part6FullPaperClosingFullOutputBundle`,
 and topo equates its support-surface exact input with
 `TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle`.
+`part6_remaining_conditional_projection_certificate` additionally gates
+the Part 6 conditional witness interfaces from both the exact closure input and
+the full output bundle, while preserving the current refutations of the
+divergence, feasible/divergence, and paired-output interfaces.
 `remaining_open_semantic_targets_obstruction_equivalence_certificate` further
 proves that, for each open target, the target obstruction, exact-input
 obstruction, and output-bundle obstruction are equivalent kernel consequences.
@@ -205,7 +209,8 @@ exact closure-input equivalence, sufficient-to-exact projections,
 exact-input/output bundle equivalence, output-equivalence target/output bundles,
 bidirectional output projections, output iff proofs, output obstructions,
 target/exact/output obstruction-equivalence proofs, joint closure-reduction
-packages and package obstructions, field-roster id,
+packages and package obstructions, Part 6 conditional witness interface
+projections and obstructions, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency,
 surface-roster consistency, and AxiomAudit coverage. The public

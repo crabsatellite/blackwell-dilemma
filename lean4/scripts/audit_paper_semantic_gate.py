@@ -409,6 +409,14 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_full_outputs_notYet",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureReductionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_reduction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.Part6RemainingConditionalProjectionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_remaining_conditional_projection_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_closure_input",
@@ -1527,6 +1535,32 @@ def main() -> int:
     print(
         "semantic_target_joint_closure_reduction_certificate_proof="
         "remaining_open_semantic_targets_joint_closure_reduction_certificate"
+    )
+    print(
+        "semantic_target_part6_conditional_witness_exact_input_proofs="
+        "part6_lattice_embedding_divergence_witness_of_exact_closure_input,"
+        "part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input,"
+        "part6_lattice_embedding_output_pair_of_exact_closure_input"
+    )
+    print(
+        "semantic_target_part6_conditional_witness_output_bundle_proofs="
+        "part6_lattice_embedding_divergence_witness_of_full_output_bundle,"
+        "part6_lattice_embedding_feasible_divergence_witness_of_full_output_bundle,"
+        "part6_lattice_embedding_output_pair_of_full_output_bundle"
+    )
+    print(
+        "semantic_target_part6_conditional_witness_obstructions="
+        "not_part6_full_paper_closing_divergence_witness_current,"
+        "not_part6_full_paper_closing_feasible_divergence_witness_current,"
+        "not_part6_full_paper_closing_output_pair_current"
+    )
+    print(
+        "semantic_target_part6_conditional_witness_certificate="
+        "Part6RemainingConditionalProjectionCertificate"
+    )
+    print(
+        "semantic_target_part6_conditional_witness_certificate_proof="
+        "part6_remaining_conditional_projection_certificate"
     )
     print(
         "semantic_target_closure_input_field_payloads="
