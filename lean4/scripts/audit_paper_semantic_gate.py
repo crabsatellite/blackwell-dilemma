@@ -863,6 +863,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceOutputBundles_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargets_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceOutputBundles_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetToOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_named_current",
@@ -2383,6 +2387,14 @@ def main() -> int:
         "openSemanticTargetOutputEquivalenceSurfaceOutputBundles_named_current,"
         "openSemanticTargetOutputEquivalenceSurfaceTargetObstructions_named_current,"
         "openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_named_current"
+    )
+    print("semantic_target_output_equivalence_named_roster_terms_checked=8")
+    print(
+        "semantic_target_output_equivalence_named_roster_length_proofs="
+        "openSemanticTargetOutputEquivalenceSurfaceTargets_length_current,"
+        "openSemanticTargetOutputEquivalenceSurfaceOutputBundles_length_current,"
+        "openSemanticTargetOutputEquivalenceSurfaceTargetObstructions_length_current,"
+        "openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_length_current"
     )
     print(
         "semantic_target_output_equivalence_not_iff_proof="

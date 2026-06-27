@@ -305,8 +305,8 @@ pins the exact-input/output, target/exact-input, target/output, and all three
 obstruction-equivalence formulas to the named Part 6/topo statements, with 16
 formula terms checked against `paperSemanticOpenCount`.
 `open_semantic_target_output_equivalence_named_roster_certificate` separately
-pins the reversible target/output roster and its target-output obstruction
-equivalence.
+pins the reversible target/output roster as four 2-term Lean lists and its
+target-output obstruction equivalence.
 `open_semantic_target_output_equivalence_statement_roster_certificate` pins the
 target-to-output, output-to-target, target/output equivalence, and
 target/output obstruction-equivalence formulas to the named Part 6/topo

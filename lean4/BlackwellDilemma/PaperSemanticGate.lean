@@ -6418,6 +6418,29 @@ theorem openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_named_curre
       [Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the output-equivalence target roster has one entry for each
+remaining open semantic target. -/
+theorem openSemanticTargetOutputEquivalenceSurfaceTargets_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceTargets.length = 2 := rfl
+
+/-- Build gate: the output-equivalence output-bundle roster has one entry for
+each remaining open semantic target. -/
+theorem openSemanticTargetOutputEquivalenceSurfaceOutputBundles_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceOutputBundles.length = 2 := rfl
+
+/-- Build gate: the output-equivalence target-obstruction roster has one entry
+for each remaining open semantic target. -/
+theorem
+    openSemanticTargetOutputEquivalenceSurfaceTargetObstructions_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceTargetObstructions.length = 2 := rfl
+
+/-- Build gate: the output-equivalence output-obstruction roster has one entry
+for each remaining open semantic target. -/
+theorem
+    openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceOutputObstructions.length =
+      2 := rfl
+
 /-- Build gate: the output-equivalence roster names target-to-output
 statements. -/
 theorem
@@ -6579,6 +6602,11 @@ def OpenSemanticTargetOutputEquivalenceNamedRosterCertificate : Prop :=
     openSemanticTargetOutputEquivalenceSurfaceOutputObstructions =
       [Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetOutputEquivalenceSurfaceTargets.length = 2 /\
+    openSemanticTargetOutputEquivalenceSurfaceOutputBundles.length = 2 /\
+    openSemanticTargetOutputEquivalenceSurfaceTargetObstructions.length = 2 /\
+    openSemanticTargetOutputEquivalenceSurfaceOutputObstructions.length =
+      2 /\
     (∀ surface ∈ openSemanticTargetOutputEquivalenceSurfaces,
       surface.target ↔ surface.outputBundle) /\
     (∀ surface ∈ openSemanticTargetOutputEquivalenceSurfaces,
@@ -6604,6 +6632,16 @@ theorem open_semantic_target_output_equivalence_named_roster_certificate :
   · exact openSemanticTargetOutputEquivalenceSurfaceTargetObstructions_named_current
   constructor
   · exact openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_named_current
+  constructor
+  · exact openSemanticTargetOutputEquivalenceSurfaceTargets_length_current
+  constructor
+  · exact openSemanticTargetOutputEquivalenceSurfaceOutputBundles_length_current
+  constructor
+  · exact
+      openSemanticTargetOutputEquivalenceSurfaceTargetObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetOutputEquivalenceSurfaceOutputObstructions_length_current
   constructor
   · intro surface _
     exact openSemanticTargetOutputEquivalenceSurface_target_iff_output surface
