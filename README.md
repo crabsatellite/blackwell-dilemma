@@ -225,6 +225,9 @@ exact-input obstruction for each remaining open semantic target.
 `open_semantic_target_exact_closure_input_output_named_roster_certificate`
 pins the exact-input/output-bundle roster and proves target, exact-input, and
 output-bundle obstructions pairwise equivalent on each surface.
+`open_semantic_target_output_equivalence_named_roster_certificate` separately
+pins the reversible target/output roster and its target-output obstruction
+equivalence.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
