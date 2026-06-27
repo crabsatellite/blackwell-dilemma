@@ -5587,6 +5587,34 @@ theorem
       [Not Part6LatticeEmbeddingExactClosureInput,
        Not TopoClusterRandomSupercriticalZ2ExactClosureInput] := rfl
 
+/-- Build gate: the exact-input target roster has one entry for each remaining
+open semantic target. -/
+theorem openSemanticTargetExactClosureInputSurfaceTargets_length_current :
+    openSemanticTargetExactClosureInputSurfaceTargets.length = 2 := rfl
+
+/-- Build gate: the exact-input roster has one entry for each remaining open
+semantic target. -/
+theorem openSemanticTargetExactClosureInputSurfaceExactInputs_length_current :
+    openSemanticTargetExactClosureInputSurfaceExactInputs.length = 2 := rfl
+
+/-- Build gate: the sufficient-input view for exact inputs has one entry for
+each remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceSufficientInputs_length_current :
+    openSemanticTargetExactClosureInputSurfaceSufficientInputs.length = 2 := rfl
+
+/-- Build gate: the exact-input target-obstruction roster has one entry for
+each remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceTargetObstructions_length_current :
+    openSemanticTargetExactClosureInputSurfaceTargetObstructions.length = 2 := rfl
+
+/-- Build gate: the exact-input obstruction roster has one entry for each
+remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceExactInputObstructions_length_current :
+    openSemanticTargetExactClosureInputSurfaceExactInputObstructions.length = 2 := rfl
+
 /-- Build gate: the exact closure-input roster names the target-to-exact-input
 statements. -/
 theorem
@@ -5779,6 +5807,12 @@ def OpenSemanticTargetExactClosureInputNamedRosterCertificate : Prop :=
     openSemanticTargetExactClosureInputSurfaceExactInputObstructions =
       [Not Part6LatticeEmbeddingExactClosureInput,
        Not TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+    openSemanticTargetExactClosureInputSurfaceTargets.length = 2 /\
+    openSemanticTargetExactClosureInputSurfaceExactInputs.length = 2 /\
+    openSemanticTargetExactClosureInputSurfaceSufficientInputs.length = 2 /\
+    openSemanticTargetExactClosureInputSurfaceTargetObstructions.length = 2 /\
+    openSemanticTargetExactClosureInputSurfaceExactInputObstructions.length =
+      2 /\
     (∀ surface ∈ openSemanticTargetExactClosureInputSurfaces,
       surface.target ↔ surface.exactClosureInput) /\
     (∀ surface ∈ openSemanticTargetExactClosureInputSurfaces,
@@ -5811,6 +5845,19 @@ theorem open_semantic_target_exact_closure_input_named_roster_certificate :
   constructor
   · exact
       openSemanticTargetExactClosureInputSurfaceExactInputObstructions_named_current
+  constructor
+  · exact openSemanticTargetExactClosureInputSurfaceTargets_length_current
+  constructor
+  · exact openSemanticTargetExactClosureInputSurfaceExactInputs_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputSurfaceSufficientInputs_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputSurfaceTargetObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputSurfaceExactInputObstructions_length_current
   constructor
   · intro surface _
     exact openSemanticTargetExactClosureInputSurface_target_iff_exact_input

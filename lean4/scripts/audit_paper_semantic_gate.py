@@ -565,6 +565,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceSufficientInputs_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceTargetObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceExactInputObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceTargets_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceExactInputs_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceSufficientInputs_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceTargetObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceExactInputObstructions_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceTargetToExactInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceExactInputToTargetStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements_named_current",
@@ -2269,6 +2274,15 @@ def main() -> int:
         "openSemanticTargetExactClosureInputSurfaceSufficientInputs_named_current,"
         "openSemanticTargetExactClosureInputSurfaceTargetObstructions_named_current,"
         "openSemanticTargetExactClosureInputSurfaceExactInputObstructions_named_current"
+    )
+    print("semantic_target_exact_closure_named_roster_terms_checked=10")
+    print(
+        "semantic_target_exact_closure_named_roster_length_proofs="
+        "openSemanticTargetExactClosureInputSurfaceTargets_length_current,"
+        "openSemanticTargetExactClosureInputSurfaceExactInputs_length_current,"
+        "openSemanticTargetExactClosureInputSurfaceSufficientInputs_length_current,"
+        "openSemanticTargetExactClosureInputSurfaceTargetObstructions_length_current,"
+        "openSemanticTargetExactClosureInputSurfaceExactInputObstructions_length_current"
     )
     print(
         "semantic_target_exact_closure_target_not_iff_exact_proof="

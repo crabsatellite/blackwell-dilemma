@@ -289,8 +289,9 @@ pins the sufficient-input-to-target and target-obstruction-to-sufficient-input
 formulas to the named Part 6/topo statements, with 4 formula terms checked
 against `paperSemanticOpenCount`.
 `open_semantic_target_exact_closure_input_named_roster_certificate` similarly
-pins the exact closure-input roster and proves target obstruction equivalent to
-exact-input obstruction for each remaining open semantic target.
+pins the exact closure-input roster as five 2-term Lean lists and proves target
+obstruction equivalent to exact-input obstruction for each remaining open
+semantic target.
 `open_semantic_target_exact_closure_input_statement_roster_certificate` pins the
 target-to-exact, exact-to-target, target-iff-exact, sufficient-to-exact, and
 target-obstruction/exact-obstruction formulas to the named Part 6/topo
