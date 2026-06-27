@@ -293,6 +293,15 @@ CORE_OUTPUT_EQUIVALENCE_DECLS = {
     "not_part6_full_paper_closing_full_output_bundle_current",
 }
 
+EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
+    "paperSemanticClosedCount = 3",
+    "closedSemanticTargetIds =",
+    "Nonempty TwoRegimeRelabelingPayload",
+    "Nonempty Part4LatticePMonotonicityFrontierPayload",
+    "FiveState.highKappaOracleRoutingWelfare",
+    "FiveState.fiveStateOracleWelfare",
+)
+
 EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnly ↔ False",
     "paperSemanticClosedCount = 3",
@@ -1637,6 +1646,23 @@ def top_level_current_obstruction_missing_conjuncts(text: str) -> list[str]:
     ]
 
 
+def closed_frontier_certificate_missing_conjuncts(text: str) -> list[str]:
+    match = re.search(
+        r"def\s+ClosedSemanticTargetsFrontierCertificate\s*:\s*"
+        r"Prop\s*:=\s*(.*?)\n\s*/--\s+The closed semantic frontier",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing ClosedSemanticTargetsFrontierCertificate body")
+    body = match.group(1)
+    return [
+        conjunct
+        for conjunct in EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS
+        if not top_level_term_is_present(body, conjunct)
+    ]
+
+
 def top_level_statement_roster_missing_terms(text: str) -> list[str]:
     match = re.search(
         r"def\s+completePaperSemanticKernelOnlyCurrentObstructionStatements\s*:\s*"
@@ -1881,6 +1907,9 @@ def main() -> int:
     missing_top_level_statement_roster_terms = (
         top_level_statement_roster_missing_terms(text)
     )
+    closed_frontier_missing_conjuncts = (
+        closed_frontier_certificate_missing_conjuncts(text)
+    )
     (
         named_current_roster_count,
         missing_named_current_roster_length_proofs,
@@ -1933,6 +1962,18 @@ def main() -> int:
         "r10_two_regime_label_recalibration_payload,"
         "part4_lattice_p_monotonicity_frontier_payload,"
         "r10_threshold_five_state_high_kappa_routing_payload"
+    )
+    print(
+        "semantic_target_closed_frontier_conjuncts_checked="
+        f"{len(EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS)}"
+    )
+    print(
+        "semantic_target_closed_frontier_conjuncts_missing="
+        f"{len(closed_frontier_missing_conjuncts)}"
+    )
+    print(
+        "semantic_target_closed_frontier_conjuncts_missing_terms="
+        + ",".join(closed_frontier_missing_conjuncts)
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate="
@@ -3962,6 +4003,14 @@ def main() -> int:
             "r10_threshold_five_state_high_kappa_routing_payload"
         ),
         (
+            "semantic_target_closed_frontier_conjuncts_checked="
+            f"{len(EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS)}"
+        ),
+        (
+            "semantic_target_closed_frontier_conjuncts_missing="
+            f"{len(closed_frontier_missing_conjuncts)}"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -4091,6 +4140,11 @@ def main() -> int:
         failures.append(
             "top-level current obstruction statement roster missing terms: "
             + ",".join(missing_top_level_statement_roster_terms)
+        )
+    if closed_frontier_missing_conjuncts:
+        failures.append(
+            "closed semantic frontier certificate missing conjuncts: "
+            + ",".join(closed_frontier_missing_conjuncts)
         )
     if missing_named_current_roster_length_proofs:
         failures.append(
