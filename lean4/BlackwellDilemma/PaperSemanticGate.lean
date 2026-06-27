@@ -10680,7 +10680,8 @@ theorem completePaperSemanticKernelOnly_notYet :
 
 /-- Top-level current obstruction certificate for the paper-semantic
 kernel-only claim.  It binds the not-yet-complete status to the exact remaining
-open ids and to the current frontier/field obstruction certificates. -/
+open ids and to the current frontier, surface-roster, payload-route-map, and
+field obstruction certificates. -/
 def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
   Not CompletePaperSemanticKernelOnly /\
     paperSemanticOpenCount = 2 /\
@@ -10688,6 +10689,8 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
       ["theorem_4_1_part6_lattice_embedding",
        "topo_cluster_random_supercritical_z2"] /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
+    OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsExactClosureInputCertificate /\
@@ -10738,6 +10741,10 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact openSemanticTargetIds_current
   constructor
   · exact remaining_open_semantic_targets_frontier_certificate
+  constructor
+  · exact open_semantic_target_surface_roster_consistency_certificate
+  constructor
+  · exact remaining_open_semantic_targets_payload_route_map_certificate
   constructor
   · exact open_semantic_target_closure_input_named_roster_certificate
   constructor

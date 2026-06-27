@@ -1262,6 +1262,11 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof="
         "completePaperSemanticKernelOnly_current_obstruction_certificate"
     )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_surface_payload_certificates="
+        "OpenSemanticTargetSurfaceRosterConsistencyCertificate,"
+        "RemainingOpenSemanticTargetsPayloadRouteMapCertificate"
+    )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
     print(f"semantic_target_closure_input_surface_ids={','.join(closure_input_surface_ids)}")

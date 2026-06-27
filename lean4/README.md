@@ -248,8 +248,8 @@ The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
 `paperSemanticOpenCount = 0`, and
 `completePaperSemanticKernelOnly_notYet` proves its current negation.
 `completePaperSemanticKernelOnly_current_obstruction_certificate` now ties that
-negation to `open=2`, the exact remaining ids, and the remaining-open frontier
-and field-obstruction certificates.
+negation to `open=2`, the exact remaining ids, and the remaining-open frontier,
+surface-roster, payload-route-map, and field-obstruction certificates.
 `open_semantic_target_closure_input_named_roster_certificate` also pins the
 sufficient closure-input roster to named target/input/current-obstruction and
 certificate propositions, including the generic projection from target

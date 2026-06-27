@@ -251,7 +251,8 @@ to the named Part 6/topo statement lists.
 The top-level
 `completePaperSemanticKernelOnly_current_obstruction_certificate` also gates
 the current non-complete claim against `open=2`, the exact remaining target ids,
-and the frontier/exact-input/output/field-obstruction certificates.
+and the frontier/surface-roster/payload-route-map/exact-input/output/
+field-obstruction certificates.
 `open_semantic_target_closure_input_named_roster_certificate` now pins the
 named sufficient closure-input roster itself, including target/input/current
 obstruction/certificate propositions and the target-obstruction to
