@@ -6555,6 +6555,42 @@ def openSemanticTargetObstructionEquivalenceSurfaceIds : List String :=
   openSemanticTargetObstructionEquivalenceSurfaces.map
     (fun surface => surface.id)
 
+/-- Named target propositions for the obstruction-equivalence roster. -/
+def openSemanticTargetObstructionEquivalenceSurfaceTargets : List Prop :=
+  openSemanticTargetObstructionEquivalenceSurfaces.map
+    (fun surface => surface.target)
+
+/-- Named exact-input propositions for the obstruction-equivalence roster. -/
+def openSemanticTargetObstructionEquivalenceSurfaceExactInputs : List Prop :=
+  openSemanticTargetObstructionEquivalenceSurfaces.map
+    (fun surface => surface.exactClosureInput)
+
+/-- Named output-bundle propositions for the obstruction-equivalence roster. -/
+def openSemanticTargetObstructionEquivalenceSurfaceOutputBundles : List Prop :=
+  openSemanticTargetObstructionEquivalenceSurfaces.map
+    (fun surface => surface.outputBundle)
+
+/-- Named target-obstruction propositions for the obstruction-equivalence
+roster. -/
+def openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions :
+    List Prop :=
+  openSemanticTargetObstructionEquivalenceSurfaces.map
+    (fun surface => Not surface.target)
+
+/-- Named exact-input-obstruction propositions for the
+obstruction-equivalence roster. -/
+def openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions :
+    List Prop :=
+  openSemanticTargetObstructionEquivalenceSurfaces.map
+    (fun surface => Not surface.exactClosureInput)
+
+/-- Named output-obstruction propositions for the obstruction-equivalence
+roster. -/
+def openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions :
+    List Prop :=
+  openSemanticTargetObstructionEquivalenceSurfaces.map
+    (fun surface => Not surface.outputBundle)
+
 /-- Build gate: the obstruction-equivalence roster has the same ids as the
 semantic ledger's open target list. -/
 theorem openSemanticTargetObstructionEquivalenceSurfaceIds_current :
@@ -6566,6 +6602,51 @@ the semantic ledger's open target count. -/
 theorem openSemanticTargetObstructionEquivalenceSurfaceCount_current :
     openSemanticTargetObstructionEquivalenceSurfaces.length =
       paperSemanticOpenCount := rfl
+
+/-- Build gate: the obstruction-equivalence roster names the exact target
+propositions. -/
+theorem openSemanticTargetObstructionEquivalenceSurfaceTargets_named_current :
+    openSemanticTargetObstructionEquivalenceSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the obstruction-equivalence roster names the exact closure
+inputs. -/
+theorem openSemanticTargetObstructionEquivalenceSurfaceExactInputs_named_current :
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputs =
+      [Part6LatticeEmbeddingExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ExactClosureInput] := rfl
+
+/-- Build gate: the obstruction-equivalence roster names the reversible output
+bundles. -/
+theorem openSemanticTargetObstructionEquivalenceSurfaceOutputBundles_named_current :
+    openSemanticTargetObstructionEquivalenceSurfaceOutputBundles =
+      [Part6FullPaperClosingFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
+
+/-- Build gate: the obstruction-equivalence roster names the target obstruction
+propositions. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_named_current :
+    openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the obstruction-equivalence roster names the exact-input
+obstruction propositions. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_named_current :
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions =
+      [Not Part6LatticeEmbeddingExactClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput] := rfl
+
+/-- Build gate: the obstruction-equivalence roster names the output-bundle
+obstruction propositions. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_named_current :
+    openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions =
+      [Not Part6FullPaperClosingFullOutputBundle,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
 /-- Every obstruction-equivalence surface carries the current target
 obstruction. -/
@@ -6670,6 +6751,97 @@ theorem remaining_open_semantic_targets_obstruction_equivalence_certificate :
       openSemanticTargetObstructionEquivalenceSurface_exact_not_iff_output
         surface
   exact remaining_open_semantic_targets_exact_closure_input_output_certificate
+
+/-- Build-gated named obstruction-equivalence roster for the two remaining open
+semantic targets. This pins target/exact-input/output-bundle obstruction
+propositions to named Part 6/topo propositions. -/
+def OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate : Prop :=
+  openSemanticTargetObstructionEquivalenceSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetObstructionEquivalenceSurfaces.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetObstructionEquivalenceSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputs =
+      [Part6LatticeEmbeddingExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+    openSemanticTargetObstructionEquivalenceSurfaceOutputBundles =
+      [Part6FullPaperClosingFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions =
+      [Not Part6LatticeEmbeddingExactClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+    openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions =
+      [Not Part6FullPaperClosingFullOutputBundle,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
+      Not surface.target) /\
+    (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
+      Not surface.exactClosureInput) /\
+    (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
+      Not surface.outputBundle) /\
+    (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
+      Not surface.target ↔ Not surface.exactClosureInput) /\
+    (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
+      Not surface.target ↔ Not surface.outputBundle) /\
+    (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
+      Not surface.exactClosureInput ↔ Not surface.outputBundle) /\
+    RemainingOpenSemanticTargetsObstructionEquivalenceCertificate
+
+/-- The obstruction-equivalence roster is pinned to named Part 6/topo
+propositions, and target/exact-input/output-bundle obstructions are pairwise
+kernel-equivalent on each surface. -/
+theorem open_semantic_target_obstruction_equivalence_named_roster_certificate :
+    OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate := by
+  constructor
+  · exact openSemanticTargetObstructionEquivalenceSurfaceIds_current
+  constructor
+  · exact openSemanticTargetObstructionEquivalenceSurfaceCount_current
+  constructor
+  · exact openSemanticTargetObstructionEquivalenceSurfaceTargets_named_current
+  constructor
+  · exact openSemanticTargetObstructionEquivalenceSurfaceExactInputs_named_current
+  constructor
+  · exact openSemanticTargetObstructionEquivalenceSurfaceOutputBundles_named_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_named_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_named_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_named_current
+  constructor
+  · intro surface _
+    exact openSemanticTargetObstructionEquivalenceSurface_target_current_obstruction
+      surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetObstructionEquivalenceSurface_exact_input_current_obstruction
+        surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetObstructionEquivalenceSurface_output_current_obstruction
+        surface
+  constructor
+  · intro surface _
+    exact openSemanticTargetObstructionEquivalenceSurface_target_not_iff_exact
+      surface
+  constructor
+  · intro surface _
+    exact openSemanticTargetObstructionEquivalenceSurface_target_not_iff_output
+      surface
+  constructor
+  · intro surface _
+    exact openSemanticTargetObstructionEquivalenceSurface_exact_not_iff_output
+      surface
+  exact remaining_open_semantic_targets_obstruction_equivalence_certificate
 
 /-- Joint target package for the two remaining open semantic targets. -/
 def RemainingOpenSemanticTargetsSatisfied : Prop :=
@@ -8429,6 +8601,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate /\
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
+    OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
@@ -8470,6 +8643,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
       open_semantic_target_exact_closure_input_output_named_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_obstruction_equivalence_certificate
+  constructor
+  · exact
+      open_semantic_target_obstruction_equivalence_named_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
   constructor

@@ -162,6 +162,9 @@ refutations are equivalent to the topo target obstruction.
 `remaining_open_semantic_targets_obstruction_equivalence_certificate` further
 proves that, for each open target, the target obstruction, exact-input
 obstruction, and output-bundle obstruction are equivalent kernel consequences.
+`open_semantic_target_obstruction_equivalence_named_roster_certificate` pins
+that negative surface to the named Part 6/topo target, exact-input,
+output-bundle, and obstruction rosters.
 `remaining_open_semantic_targets_joint_closure_reduction_certificate` packages
 the two remaining open targets as a joint closure problem, proving equivalence
 between joint target satisfaction, joint exact-input satisfaction, and joint
@@ -228,6 +231,10 @@ output-bundle obstructions pairwise equivalent on each surface.
 `open_semantic_target_output_equivalence_named_roster_certificate` separately
 pins the reversible target/output roster and its target-output obstruction
 equivalence.
+`open_semantic_target_obstruction_equivalence_named_roster_certificate` also
+pins the target/exact-input/output-bundle obstruction-equivalence roster, so
+the negative surface is checked against named Part 6/topo propositions instead
+of only anonymous surface fields.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
