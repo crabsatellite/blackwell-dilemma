@@ -4569,6 +4569,191 @@ theorem remaining_open_semantic_targets_closure_input_certificate :
   · exact topo_cluster_random_supercritical_z2_closure_input_notYet
   exact topo_cluster_random_supercritical_z2_closure_input_certificate
 
+/-- A Part 6 closure input exposes the paper-facing divergence witness. -/
+theorem part6_lattice_embedding_divergence_witness_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingDivergenceWitness := by
+  intro hinput
+  exact
+    part6_nondegenerate_feasible_repair_route_divergence_witness
+      (part6_lattice_embedding_repair_route_of_closure_input hinput)
+
+/-- A Part 6 closure input exposes the same-`alpha` feasible/divergence
+witness. -/
+theorem part6_lattice_embedding_feasible_divergence_witness_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hinput
+  exact
+    part6_nondegenerate_feasible_repair_route_feasible_divergence_witness
+      (part6_lattice_embedding_repair_route_of_closure_input hinput)
+
+/-- A Part 6 closure input exposes the paired paper-facing output layer. -/
+theorem part6_lattice_embedding_output_pair_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hinput
+  exact
+    part6_nondegenerate_feasible_repair_route_output_pair
+      (part6_lattice_embedding_repair_route_of_closure_input hinput)
+
+/-- A Part 6 closure input exposes the full output bundle. -/
+theorem part6_lattice_embedding_full_output_bundle_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingFullOutputBundle := by
+  intro hinput
+  exact
+    part6_nondegenerate_feasible_repair_route_full_output_bundle
+      (part6_lattice_embedding_repair_route_of_closure_input hinput)
+
+/-- Output-layer certificate for the sufficient Part 6 closure input. -/
+def Part6LatticeEmbeddingClosureInputOutputCertificate : Prop :=
+  (Part6LatticeEmbeddingClosureInput ->
+    Part6LatticeEmbeddingSemanticKernelTarget) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    Not Part6LatticeEmbeddingClosureInput /\
+    Not Part6FullPaperClosingDivergenceWitness /\
+    Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+    Not Part6FullPaperClosingFullOutputBundle
+
+/-- The sufficient Part 6 closure input has a fully gated output layer, and the
+current carrier is refuted at each corresponding output surface. -/
+theorem part6_lattice_embedding_closure_input_output_certificate :
+    Part6LatticeEmbeddingClosureInputOutputCertificate := by
+  constructor
+  · exact part6_lattice_embedding_semantic_kernel_target_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_divergence_witness_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_feasible_divergence_witness_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_output_pair_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_full_output_bundle_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_closure_input_notYet
+  constructor
+  · exact not_part6_full_paper_closing_divergence_witness_current
+  constructor
+  · exact not_part6_full_paper_closing_feasible_divergence_witness_current
+  exact not_part6_full_paper_closing_full_output_bundle_current
+
+/-- A topo closure input exposes the repaired support-surface route. -/
+theorem topo_cluster_random_supercritical_z2_support_surface_repair_route_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute := by
+  intro hinput
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route
+      (topo_cluster_random_supercritical_z2_full_route_of_closure_input hinput)
+
+/-- A topo closure input exposes the repaired support-surface output. -/
+theorem topo_cluster_random_supercritical_z2_support_surface_repair_output_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput := by
+  intro hinput
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate
+      (topo_cluster_random_supercritical_z2_full_route_of_closure_input hinput)
+
+/-- A topo closure input exposes repaired paper support. -/
+theorem topo_cluster_random_supercritical_z2_paper_support_output_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge := by
+  intro hinput
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_paper_support_output
+      (topo_cluster_random_supercritical_z2_full_route_of_closure_input hinput)
+
+/-- A topo closure input exposes the repaired giant-loss output. -/
+theorem topo_cluster_random_supercritical_z2_giant_loss_output_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge := by
+  intro hinput
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_giant_loss_output
+      (topo_cluster_random_supercritical_z2_full_route_of_closure_input hinput)
+
+/-- Output-layer certificate for the sufficient topo closure input. -/
+def TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate : Prop :=
+  (TopoClusterRandomSupercriticalZ2ClosureInput ->
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge) /\
+    Not TopoClusterRandomSupercriticalZ2ClosureInput /\
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+/-- The sufficient topo closure input has a fully gated output layer, and the
+current repaired support surface is still refuted at the full and boxed route
+surfaces. -/
+theorem topo_cluster_random_supercritical_z2_closure_input_output_certificate :
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate := by
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_full_route_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_boxed_route_of_closure_input
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_support_surface_repair_route_of_closure_input
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_support_surface_repair_output_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_paper_support_output_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_giant_loss_output_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_notYet
+  constructor
+  · exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+  exact not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+/-- Single build-gated output certificate for the sufficient closure inputs of
+the two remaining open paper-semantic targets. -/
+def RemainingOpenSemanticTargetsClosureInputOutputCertificate : Prop :=
+  Part6LatticeEmbeddingClosureInputOutputCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
+    RemainingOpenSemanticTargetsClosureInputCertificate
+
+/-- The sufficient closure inputs project to the expected output layers for both
+remaining open targets. -/
+theorem remaining_open_semantic_targets_closure_input_output_certificate :
+    RemainingOpenSemanticTargetsClosureInputOutputCertificate := by
+  constructor
+  · exact part6_lattice_embedding_closure_input_output_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
+  exact remaining_open_semantic_targets_closure_input_certificate
+
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
 `PaperSemanticGate.lean` only builds if the public `gap_two_regime_*` aliases

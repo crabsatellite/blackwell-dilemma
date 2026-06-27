@@ -217,6 +217,20 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_input_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_certificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_full_output_bundle_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputOutputCertificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_output_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_paper_support_output_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputOutputCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_output_certificate",
 }
 
 
@@ -738,6 +752,24 @@ def main() -> int:
     print(
         "semantic_target_closure_input_certificate_proof="
         "remaining_open_semantic_targets_closure_input_certificate"
+    )
+    print(
+        "semantic_target_closure_input_output_certificates="
+        "Part6LatticeEmbeddingClosureInputOutputCertificate,"
+        "TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate"
+    )
+    print(
+        "semantic_target_closure_input_output_certificate_proofs="
+        "part6_lattice_embedding_closure_input_output_certificate,"
+        "topo_cluster_random_supercritical_z2_closure_input_output_certificate"
+    )
+    print(
+        "semantic_target_closure_input_output_certificate="
+        "RemainingOpenSemanticTargetsClosureInputOutputCertificate"
+    )
+    print(
+        "semantic_target_closure_input_output_certificate_proof="
+        "remaining_open_semantic_targets_closure_input_output_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (

@@ -120,6 +120,12 @@ tail-reversal bridge route, and
 through a repaired bridge with a pointwise-on-giant positive loss floor. Both
 inputs are current-refuted and are packaged by
 `remaining_open_semantic_targets_closure_input_certificate`.
+Their output projections are also gated by
+`remaining_open_semantic_targets_closure_input_output_certificate`: Part 6
+reaches the divergence, same-`alpha` feasible/divergence, paired-output, and
+full-output-bundle surfaces, while the topo input reaches the support-surface
+route/output, repaired paper-support output, giant-loss output, full route, and
+boxed route.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
@@ -147,7 +153,7 @@ progress/nonclosure certificates, full typed frontier payload certificates,
 payload-derived progress/nonclosure/frontier projections, cross-surface
 target/route-map/closure/frontier equality, payload-derived route-map and
 route/closure certificate-obstruction projections, the payload route-map
-certificate, closure-input sufficient-route certificates and obstructions,
+certificate, closure-input sufficient-route/output certificates and obstructions,
 surface-roster consistency, and AxiomAudit coverage. The public
 verification command set includes the same Lean build, PaperSemanticGate build,
 AxiomAudit build, and source-level audit scripts listed above.

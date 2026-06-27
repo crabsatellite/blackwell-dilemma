@@ -1080,6 +1080,12 @@ For full kernel-pure cover (v2.0 future iteration):
   `remaining_open_semantic_targets_closure_input_certificate` packages the
   input-to-target proofs, input obstructions, target obstructions, and input
   certificates into one Lean theorem checked by the semantic audit.
+  `remaining_open_semantic_targets_closure_input_output_certificate` also
+  packages the output projections from those inputs: Part 6 reaches the
+  divergence, same-alpha feasible/divergence, paired-output, and
+  full-output-bundle surfaces, while the topo input reaches the support-surface
+  route/output, repaired paper-support output, giant-loss output, full route,
+  and boxed route.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,
