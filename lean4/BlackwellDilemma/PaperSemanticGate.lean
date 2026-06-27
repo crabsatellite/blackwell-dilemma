@@ -161,6 +161,8 @@ structure OpenSemanticTargetKernelSurface where
   targetRouteCertificateProof : targetRouteCertificate
   closureRoute : Prop
   closureRouteProof : target ↔ closureRoute
+  closureRouteCertificate : Prop
+  closureRouteCertificateProof : closureRouteCertificate
   currentObstruction : Not target
   frontierCertificate : Prop
   frontierCertificateProof : frontierCertificate
@@ -181,6 +183,9 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
       closureRoute := Part6FullPaperClosingSupport,
       closureRouteProof :=
         part6_lattice_embedding_semantic_kernel_target_iff_full_support,
+      closureRouteCertificate := Part6FullPaperClosingOutputLayerCertificate,
+      closureRouteCertificateProof :=
+        part6_full_paper_closing_output_layer_certificate,
       currentObstruction :=
         part6_lattice_embedding_semantic_kernel_target_notYet,
       frontierCertificate := Part6CurrentFrontierCertificate,
@@ -199,6 +204,10 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
       closureRouteProof :=
         topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
+      closureRouteCertificate :=
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+      closureRouteCertificateProof :=
+        random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
       currentObstruction :=
         topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
       frontierCertificate :=
@@ -256,6 +265,13 @@ theorem openSemanticTargetKernelSurface_closure_route_current_obstruction
   intro hroute
   exact surface.currentObstruction (surface.closureRouteProof.mpr hroute)
 
+/-- Every machine-facing roster entry carries the exact current certificate for
+its paper-facing closure route. -/
+theorem openSemanticTargetKernelSurface_closure_route_certificate
+    (surface : OpenSemanticTargetKernelSurface) :
+    surface.closureRouteCertificate :=
+  surface.closureRouteCertificateProof
+
 /-- Every machine-facing roster entry carries its current kernel obstruction. -/
 theorem openSemanticTargetKernelSurface_current_obstruction
     (surface : OpenSemanticTargetKernelSurface) :
@@ -285,6 +301,7 @@ def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
     Not Part6NondegenerateFeasibleRepairRoute /\
     Part6NondegenerateFeasibleRepairRouteCertificate /\
     Not Part6FullPaperClosingSupport /\
+    Part6FullPaperClosingOutputLayerCertificate /\
     Part6CurrentFrontierCertificate /\
     (TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
@@ -294,6 +311,7 @@ def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
     Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
     Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate /\
     RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate
 
 /-- The current two-target paper-semantic frontier is completely accounted for
@@ -309,6 +327,7 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     not_part6_nondegenerate_feasible_repair_route_current,
     part6_nondegenerate_feasible_repair_route_certificate,
     not_part6_full_paper_closing_support_current,
+    part6_full_paper_closing_output_layer_certificate,
     part6_current_frontier_certificate,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
@@ -316,6 +335,7 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
     not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
     random_supercritical_z2_topo_cluster_current_frontier_certificate⟩
 
 /-- Typed payload for the closed Theorem 4.1 Part 4 lattice p-monotonicity
