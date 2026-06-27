@@ -309,12 +309,19 @@ EXPECTED_SEMANTIC_TARGET_COUNT_CERTIFICATE_CONJUNCTS = (
     "semanticTargets.length = paperSemanticOpenCount + paperSemanticClosedCount",
 )
 
+EXPECTED_SEMANTIC_TARGET_STATUS_PARTITION_CONJUNCTS = (
+    "semanticTargets = closedSemanticTargets ++ openSemanticTargets",
+    "closedSemanticTargets.map",
+    "openSemanticTargets.map",
+)
+
 EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnly ↔ False",
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
     "ClosedSemanticTargetsFrontierCertificate",
     "SemanticTargetCountCertificate",
+    "SemanticTargetStatusPartitionCertificate",
     "SemanticTargetsPartitionCertificate",
     "RemainingOpenSemanticTargetsFrontierCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
@@ -1705,6 +1712,40 @@ def semantic_target_count_certificate_missing_conjuncts(text: str) -> list[str]:
     ]
 
 
+def semantic_target_status_partition_missing_conjuncts(text: str) -> list[str]:
+    match = re.search(
+        r"def\s+SemanticTargetStatusPartitionCertificate\s*:\s*"
+        r"Prop\s*:=\s*(.*?)\n\s*/--\s+The current semantic ledger objects",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing SemanticTargetStatusPartitionCertificate body")
+    body = match.group(1)
+    patterns = {
+        "semanticTargets = closedSemanticTargets ++ openSemanticTargets": (
+            r"\bsemanticTargets\s*=\s*closedSemanticTargets\s*\+\+\s*"
+            r"openSemanticTargets\b"
+        ),
+        "closedSemanticTargets.map": (
+            r"\bclosedSemanticTargets\.map\s*"
+            r"\(fun\s+target\s*=>\s*target\.status\)\s*=\s*"
+            r"\[SemanticStatus\.closed,\s*SemanticStatus\.closed,\s*"
+            r"SemanticStatus\.closed\]"
+        ),
+        "openSemanticTargets.map": (
+            r"\bopenSemanticTargets\.map\s*"
+            r"\(fun\s+target\s*=>\s*target\.status\)\s*=\s*"
+            r"\[SemanticStatus\.open,\s*SemanticStatus\.open\]"
+        ),
+    }
+    return [
+        conjunct
+        for conjunct in EXPECTED_SEMANTIC_TARGET_STATUS_PARTITION_CONJUNCTS
+        if re.search(patterns[conjunct], body) is None
+    ]
+
+
 def top_level_statement_roster_missing_terms(text: str) -> list[str]:
     match = re.search(
         r"def\s+completePaperSemanticKernelOnlyCurrentObstructionStatements\s*:\s*"
@@ -1955,6 +1996,9 @@ def main() -> int:
     semantic_target_count_missing_conjuncts = (
         semantic_target_count_certificate_missing_conjuncts(text)
     )
+    semantic_target_status_partition_missing_terms = (
+        semantic_target_status_partition_missing_conjuncts(text)
+    )
     (
         named_current_roster_count,
         missing_named_current_roster_length_proofs,
@@ -2036,6 +2080,26 @@ def main() -> int:
     print(
         "semantic_target_count_certificate_conjuncts_missing_terms="
         + ",".join(semantic_target_count_missing_conjuncts)
+    )
+    print(
+        "semantic_target_status_partition_certificate="
+        "SemanticTargetStatusPartitionCertificate"
+    )
+    print(
+        "semantic_target_status_partition_certificate_proof="
+        "semantic_target_status_partition_certificate"
+    )
+    print(
+        "semantic_target_status_partition_conjuncts_checked="
+        f"{len(EXPECTED_SEMANTIC_TARGET_STATUS_PARTITION_CONJUNCTS)}"
+    )
+    print(
+        "semantic_target_status_partition_conjuncts_missing="
+        f"{len(semantic_target_status_partition_missing_terms)}"
+    )
+    print(
+        "semantic_target_status_partition_conjuncts_missing_terms="
+        + ",".join(semantic_target_status_partition_missing_terms)
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate="
@@ -4086,6 +4150,22 @@ def main() -> int:
             f"{len(semantic_target_count_missing_conjuncts)}"
         ),
         (
+            "semantic_target_status_partition_certificate="
+            "SemanticTargetStatusPartitionCertificate"
+        ),
+        (
+            "semantic_target_status_partition_certificate_proof="
+            "semantic_target_status_partition_certificate"
+        ),
+        (
+            "semantic_target_status_partition_conjuncts_checked="
+            f"{len(EXPECTED_SEMANTIC_TARGET_STATUS_PARTITION_CONJUNCTS)}"
+        ),
+        (
+            "semantic_target_status_partition_conjuncts_missing="
+            f"{len(semantic_target_status_partition_missing_terms)}"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -4225,6 +4305,11 @@ def main() -> int:
         failures.append(
             "semantic target count certificate missing conjuncts: "
             + ",".join(semantic_target_count_missing_conjuncts)
+        )
+    if semantic_target_status_partition_missing_terms:
+        failures.append(
+            "semantic target status partition missing conjuncts: "
+            + ",".join(semantic_target_status_partition_missing_terms)
         )
     if missing_named_current_roster_length_proofs:
         failures.append(
