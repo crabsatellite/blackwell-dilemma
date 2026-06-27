@@ -149,21 +149,28 @@ theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet :
   exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
 
 /-- Machine-facing roster entry tying an open semantic ledger id to its exact
-Lean target proposition and its current kernel obstruction. -/
+Lean target proposition, paper-facing closure route, and current kernel
+obstruction. -/
 structure OpenSemanticTargetKernelSurface where
   id : String
   paperLabel : String
   target : Prop
+  closureRoute : Prop
+  closureRouteProof : target ↔ closureRoute
   currentObstruction : Not target
   frontierCertificate : Prop
   frontierCertificateProof : frontierCertificate
 
 /-- The two current open semantic targets with their exact Lean propositions
-their current refutations, and their complete current frontier certificates. -/
+their paper-facing closure routes, their current refutations, and their complete
+current frontier certificates. -/
 def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
   [ { id := "theorem_4_1_part6_lattice_embedding",
       paperLabel := "thm:cognitive-threshold Part 6",
       target := Part6LatticeEmbeddingSemanticKernelTarget,
+      closureRoute := Part6FullPaperClosingSupport,
+      closureRouteProof :=
+        part6_lattice_embedding_semantic_kernel_target_iff_full_support,
       currentObstruction :=
         part6_lattice_embedding_semantic_kernel_target_notYet,
       frontierCertificate := Part6CurrentFrontierCertificate,
@@ -171,6 +178,10 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       target := TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+      closureRoute :=
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+      closureRouteProof :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
       currentObstruction :=
         topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
       frontierCertificate :=
@@ -190,6 +201,13 @@ theorem openSemanticTargetKernelSurfaceIds_current :
 as the semantic ledger's open target count. -/
 theorem openSemanticTargetKernelSurfaceCount_current :
     openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount := rfl
+
+/-- Every machine-facing roster entry carries the exact paper-facing closure
+route that would close its semantic target. -/
+theorem openSemanticTargetKernelSurface_closure_route
+    (surface : OpenSemanticTargetKernelSurface) :
+    surface.target ↔ surface.closureRoute :=
+  surface.closureRouteProof
 
 /-- Every machine-facing roster entry carries its current kernel obstruction. -/
 theorem openSemanticTargetKernelSurface_current_obstruction

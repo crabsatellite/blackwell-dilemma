@@ -26,12 +26,16 @@ AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
 EXPECTED_OPEN_KERNEL_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
         "Part6LatticeEmbeddingSemanticKernelTarget",
+        "Part6FullPaperClosingSupport",
+        "part6_lattice_embedding_semantic_kernel_target_iff_full_support",
         "part6_lattice_embedding_semantic_kernel_target_notYet",
         "Part6CurrentFrontierCertificate",
         "part6_current_frontier_certificate",
     ),
     "topo_cluster_random_supercritical_z2": (
         "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
+        "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet",
         "RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate",
         "random_supercritical_z2_topo_cluster_current_frontier_certificate",
@@ -101,7 +105,7 @@ def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
     return open_ids, closed_ids
 
 
-def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str]]:
+def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str, str, str]]:
     match = re.search(
         r"def\s+openSemanticTargetKernelSurfaces\s*:\s*"
         r"List\s+OpenSemanticTargetKernelSurface\s*:=\s*"
@@ -115,6 +119,8 @@ def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str]]:
     surfaces = re.findall(
         r'id\s*:=\s*"([^"]+)".*?'
         r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"closureRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"closureRouteProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"currentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"frontierCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"frontierCertificateProof\s*:=\s*([A-Za-z0-9_'.]+)",
@@ -147,7 +153,15 @@ def main() -> int:
     kernel_surfaces = open_kernel_surfaces(text)
     kernel_surface_ids = [
         target_id
-        for target_id, _target, _obstruction, _frontier, _frontier_proof in kernel_surfaces
+        for (
+            target_id,
+            _target,
+            _closure_route,
+            _closure_route_proof,
+            _obstruction,
+            _frontier,
+            _frontier_proof,
+        ) in kernel_surfaces
     ]
 
     print(f"semantic_targets_open={open_count}")
@@ -161,33 +175,105 @@ def main() -> int:
         "semantic_target_kernel_surface_targets="
         + ",".join(
             target
-            for _target_id, target, _obstruction, _frontier, _frontier_proof in kernel_surfaces
+            for (
+                _target_id,
+                target,
+                _closure_route,
+                _closure_route_proof,
+                _obstruction,
+                _frontier,
+                _frontier_proof,
+            ) in kernel_surfaces
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_closure_routes="
+        + ",".join(
+            closure_route
+            for (
+                _target_id,
+                _target,
+                closure_route,
+                _closure_route_proof,
+                _obstruction,
+                _frontier,
+                _frontier_proof,
+            ) in kernel_surfaces
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_closure_route_proofs="
+        + ",".join(
+            closure_route_proof
+            for (
+                _target_id,
+                _target,
+                _closure_route,
+                closure_route_proof,
+                _obstruction,
+                _frontier,
+                _frontier_proof,
+            ) in kernel_surfaces
         )
     )
     print(
         "semantic_target_kernel_surface_obstructions="
         + ",".join(
             obstruction
-            for _target_id, _target, obstruction, _frontier, _frontier_proof in kernel_surfaces
+            for (
+                _target_id,
+                _target,
+                _closure_route,
+                _closure_route_proof,
+                obstruction,
+                _frontier,
+                _frontier_proof,
+            ) in kernel_surfaces
         )
     )
     print(
         "semantic_target_kernel_surface_frontier_certificates="
         + ",".join(
             frontier
-            for _target_id, _target, _obstruction, frontier, _frontier_proof in kernel_surfaces
+            for (
+                _target_id,
+                _target,
+                _closure_route,
+                _closure_route_proof,
+                _obstruction,
+                frontier,
+                _frontier_proof,
+            ) in kernel_surfaces
         )
     )
     print(
         "semantic_target_kernel_surface_frontier_proofs="
         + ",".join(
             frontier_proof
-            for _target_id, _target, _obstruction, _frontier, frontier_proof in kernel_surfaces
+            for (
+                _target_id,
+                _target,
+                _closure_route,
+                _closure_route_proof,
+                _obstruction,
+                _frontier,
+                frontier_proof,
+            ) in kernel_surfaces
         )
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
-    for _target_id, target_prop, obstruction, frontier, frontier_proof in kernel_surfaces:
+    for (
+        _target_id,
+        target_prop,
+        closure_route,
+        closure_route_proof,
+        obstruction,
+        frontier,
+        frontier_proof,
+    ) in kernel_surfaces:
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_prop}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{closure_route_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{obstruction}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_proof}")
@@ -206,17 +292,40 @@ def main() -> int:
         failures.append(
             f"kernel-surface ids {kernel_surface_ids!r} != open semantic target ids {open_ids!r}"
         )
-    for target_id, target_prop, obstruction, frontier, frontier_proof in kernel_surfaces:
+    for (
+        target_id,
+        target_prop,
+        closure_route,
+        closure_route_proof,
+        obstruction,
+        frontier,
+        frontier_proof,
+    ) in kernel_surfaces:
         expected_surface = EXPECTED_OPEN_KERNEL_SURFACES.get(target_id)
         if expected_surface is None:
             failures.append(f"unexpected kernel-surface id: {target_id}")
             continue
-        expected_target, expected_obstruction, expected_frontier, expected_frontier_proof = (
+        (
+            expected_target,
+            expected_closure_route,
+            expected_closure_route_proof,
+            expected_obstruction,
+            expected_frontier,
+            expected_frontier_proof,
+        ) = (
             expected_surface
         )
         if target_prop != expected_target:
             failures.append(
                 f"{target_id} target prop {target_prop!r} != expected {expected_target!r}"
+            )
+        if closure_route != expected_closure_route:
+            failures.append(
+                f"{target_id} closure route {closure_route!r} != expected {expected_closure_route!r}"
+            )
+        if closure_route_proof != expected_closure_route_proof:
+            failures.append(
+                f"{target_id} closure route proof {closure_route_proof!r} != expected {expected_closure_route_proof!r}"
             )
         if obstruction != expected_obstruction:
             failures.append(
