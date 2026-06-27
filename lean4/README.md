@@ -145,6 +145,7 @@ tracked in [`BlackwellDilemma/Ledger.lean`](BlackwellDilemma/Ledger.lean).
 cd lean4
 lake exe cache get
 lake build BlackwellDilemma
+lake build BlackwellDilemma.PaperSemanticGate
 ```
 
 This downloads the Mathlib build cache (`lake exe cache get`); never
@@ -198,6 +199,7 @@ Commands:
 
 ```bash
 lake build BlackwellDilemma
+lake build BlackwellDilemma.PaperSemanticGate
 lake env lean BlackwellDilemma/AxiomAudit.lean
 python scripts/audit_kernel_surface.py
 python scripts/audit_conditional_surface.py

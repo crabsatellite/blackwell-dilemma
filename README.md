@@ -24,6 +24,7 @@ and source-level kernel-surface audits.
 ```bash
 cd lean4
 lake build BlackwellDilemma
+lake build BlackwellDilemma.PaperSemanticGate
 lake build BlackwellDilemma.AxiomAudit
 python scripts/audit_kernel_surface.py
 python scripts/audit_conditional_surface.py
@@ -132,6 +133,8 @@ Public reference/formula/numeric claims are also gated by
 [`reference-evidence/public_evidence_manifest.json`](reference-evidence/public_evidence_manifest.json):
 the verifier checks source cards for external formulas, committed JSON evidence
 for public appendix numbers, and the two still-open paper-semantic Lean targets.
+The public Lean CI runs the same Lean build, PaperSemanticGate build, AxiomAudit
+build, and source-level audit scripts listed above.
 
 ## Installation
 

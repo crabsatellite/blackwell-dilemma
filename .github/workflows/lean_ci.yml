@@ -21,6 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install elan
         run: |
           curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
@@ -38,6 +43,9 @@ jobs:
 
       - name: Build BlackwellDilemma
         run: lake build BlackwellDilemma
+
+      - name: Build PaperSemanticGate
+        run: lake build BlackwellDilemma.PaperSemanticGate
 
       - name: Verify no proof-position sorry in source
         run: |
@@ -71,3 +79,12 @@ jobs:
 
       - name: Build AxiomAudit (kernel-purity surface)
         run: lake build BlackwellDilemma.AxiomAudit
+
+      - name: Audit source-level kernel surface
+        run: python scripts/audit_kernel_surface.py
+
+      - name: Audit conditional proof surface
+        run: python scripts/audit_conditional_surface.py
+
+      - name: Audit paper-semantic gate
+        run: python scripts/audit_paper_semantic_gate.py
