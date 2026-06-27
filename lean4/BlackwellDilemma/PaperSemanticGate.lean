@@ -3598,6 +3598,61 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
   mills_inverse_unit_bound_route_obstruction :=
     not_mills_inverse_above_threshold_route_with_unit_bound
 
+/-- Certificate that the complete typed Part 6 frontier payload is inhabited. -/
+def Part6LatticeEmbeddingFrontierPayloadCertificate : Prop :=
+  Nonempty Part6LatticeEmbeddingFrontierPayload
+
+/-- The complete typed Part 6 frontier payload is machine-built. -/
+theorem part6_lattice_embedding_frontier_payload_certificate :
+    Part6LatticeEmbeddingFrontierPayloadCertificate :=
+  ⟨part6_lattice_embedding_frontier_payload⟩
+
+/-- Certificate that the complete typed random-supercritical topo frontier
+payload is inhabited. -/
+def TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate : Prop :=
+  Nonempty TopoClusterRandomSupercriticalZ2FrontierPayload
+
+/-- The complete typed random-supercritical topo frontier payload is
+machine-built. -/
+theorem topo_cluster_random_supercritical_z2_frontier_payload_certificate :
+    TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate :=
+  ⟨topo_cluster_random_supercritical_z2_frontier_payload⟩
+
+/-- Machine-facing roster that ties each open semantic ledger id to its full
+typed frontier payload. -/
+structure OpenSemanticTargetFrontierPayloadSurface where
+  id : String
+  payloadCertificate : Prop
+  payloadCertificateProof : payloadCertificate
+
+/-- The two current open semantic targets with their full typed frontier
+payload certificates. -/
+def openSemanticTargetFrontierPayloadSurfaces :
+    List OpenSemanticTargetFrontierPayloadSurface :=
+  [ { id := "theorem_4_1_part6_lattice_embedding",
+      payloadCertificate := Part6LatticeEmbeddingFrontierPayloadCertificate,
+      payloadCertificateProof :=
+        part6_lattice_embedding_frontier_payload_certificate },
+    { id := "topo_cluster_random_supercritical_z2",
+      payloadCertificate :=
+        TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+      payloadCertificateProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_certificate } ]
+
+def openSemanticTargetFrontierPayloadSurfaceIds : List String :=
+  openSemanticTargetFrontierPayloadSurfaces.map (fun surface => surface.id)
+
+/-- Build gate: the typed-frontier-payload roster has exactly the same ids as
+the semantic ledger's open target roster. -/
+theorem openSemanticTargetFrontierPayloadSurfaceIds_current :
+    openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds := rfl
+
+/-- Every typed-frontier-payload roster entry carries its payload certificate. -/
+theorem openSemanticTargetFrontierPayloadSurface_certificate
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.payloadCertificate :=
+  surface.payloadCertificateProof
+
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
 `PaperSemanticGate.lean` only builds if the public `gap_two_regime_*` aliases

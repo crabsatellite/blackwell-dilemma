@@ -68,6 +68,19 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
     ),
 }
 
+EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES = {
+    "theorem_4_1_part6_lattice_embedding": (
+        "part6_lattice_embedding_frontier_payload",
+        "Part6LatticeEmbeddingFrontierPayloadCertificate",
+        "part6_lattice_embedding_frontier_payload_certificate",
+    ),
+    "topo_cluster_random_supercritical_z2": (
+        "topo_cluster_random_supercritical_z2_frontier_payload",
+        "TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate",
+        "topo_cluster_random_supercritical_z2_frontier_payload_certificate",
+    ),
+}
+
 FORBIDDEN_WHEN_OPEN = {
     REPO_ROOT / "README.md": [
         "complete kernel-only audit target",
@@ -99,6 +112,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_frontier_progress_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_frontier_nonclosure_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceIds_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
 }
@@ -203,6 +218,29 @@ def open_kernel_surfaces(text: str) -> list[
     return surfaces
 
 
+def open_frontier_payload_surfaces(text: str) -> list[tuple[str, str, str]]:
+    match = re.search(
+        r"def\s+openSemanticTargetFrontierPayloadSurfaces\s*:\s*"
+        r"List\s+OpenSemanticTargetFrontierPayloadSurface\s*:=\s*"
+        r"(\[.*?\])\s*\n\s*def\s+openSemanticTargetFrontierPayloadSurfaceIds",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing open semantic target frontier-payload roster")
+
+    surfaces = re.findall(
+        r'id\s*:=\s*"([^"]+)".*?'
+        r"payloadCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"payloadCertificateProof\s*:=\s*([A-Za-z0-9_'.]+)",
+        match.group(1),
+        flags=re.DOTALL,
+    )
+    if not surfaces:
+        raise SystemExit("no open semantic target frontier-payload entries found")
+    return surfaces
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -223,6 +261,8 @@ def main() -> int:
     expected_closed_ids = theorem_id_list(text, "closedSemanticTargetIds_current")
     kernel_surfaces = open_kernel_surfaces(text)
     kernel_surface_ids = [surface[0] for surface in kernel_surfaces]
+    payload_surfaces = open_frontier_payload_surfaces(text)
+    payload_surface_ids = [surface[0] for surface in payload_surfaces]
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -231,6 +271,7 @@ def main() -> int:
     print(f"semantic_target_open_ids={','.join(open_ids)}")
     print(f"semantic_target_closed_ids={','.join(closed_ids)}")
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
+    print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
     print(
         "semantic_target_kernel_surface_targets="
         + ",".join(surface[1] for surface in kernel_surfaces)
@@ -307,6 +348,22 @@ def main() -> int:
         "semantic_target_kernel_surface_frontier_proofs="
         + ",".join(surface[19] for surface in kernel_surfaces)
     )
+    print(
+        "semantic_target_frontier_payload_terms="
+        + ",".join(
+            EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES[surface_id][0]
+            for surface_id in payload_surface_ids
+            if surface_id in EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES
+        )
+    )
+    print(
+        "semantic_target_frontier_payload_certificates="
+        + ",".join(surface[1] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_certificate_proofs="
+        + ",".join(surface[2] for surface in payload_surfaces)
+    )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
         _target_id,
@@ -349,6 +406,22 @@ def main() -> int:
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{obstruction}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_proof}")
+    for target_id, payload_certificate, payload_certificate_proof in payload_surfaces:
+        expected_payload_surface = EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES.get(target_id)
+        if expected_payload_surface is None:
+            continue
+        payload_term, _expected_payload_certificate, _expected_payload_certificate_proof = (
+            expected_payload_surface
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{payload_term}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{payload_certificate}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{payload_certificate_proof}"
+        )
     print(f"semantic_target_axiom_audit_prints_required={len(required_axiom_audit_decls)}")
 
     failures: list[str] = []
@@ -363,6 +436,10 @@ def main() -> int:
     if kernel_surface_ids != open_ids:
         failures.append(
             f"kernel-surface ids {kernel_surface_ids!r} != open semantic target ids {open_ids!r}"
+        )
+    if payload_surface_ids != open_ids:
+        failures.append(
+            f"frontier-payload surface ids {payload_surface_ids!r} != open semantic target ids {open_ids!r}"
         )
     for (
         target_id,
@@ -492,6 +569,29 @@ def main() -> int:
     missing_surface_ids = sorted(set(EXPECTED_OPEN_KERNEL_SURFACES) - set(kernel_surface_ids))
     for target_id in missing_surface_ids:
         failures.append(f"missing kernel-surface id: {target_id}")
+    for target_id, payload_certificate, payload_certificate_proof in payload_surfaces:
+        expected_payload_surface = EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES.get(target_id)
+        if expected_payload_surface is None:
+            failures.append(f"unexpected frontier-payload surface id: {target_id}")
+            continue
+        (
+            _expected_payload_term,
+            expected_payload_certificate,
+            expected_payload_certificate_proof,
+        ) = expected_payload_surface
+        if payload_certificate != expected_payload_certificate:
+            failures.append(
+                f"{target_id} payload certificate {payload_certificate!r} != expected {expected_payload_certificate!r}"
+            )
+        if payload_certificate_proof != expected_payload_certificate_proof:
+            failures.append(
+                f"{target_id} payload certificate proof {payload_certificate_proof!r} != expected {expected_payload_certificate_proof!r}"
+            )
+    missing_payload_surface_ids = sorted(
+        set(EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES) - set(payload_surface_ids)
+    )
+    for target_id in missing_payload_surface_ids:
+        failures.append(f"missing frontier-payload surface id: {target_id}")
     for decl in sorted(required_axiom_audit_decls):
         if not has_axiom_audit_print(axiom_audit_text, decl):
             failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")

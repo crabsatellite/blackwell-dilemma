@@ -322,6 +322,7 @@
             "semantic_target_kernel_surface_target_route_certificates=Part6NondegenerateFeasibleRepairRouteCertificate,RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate",
             "semantic_target_kernel_surface_target_route_certificate_proofs=part6_nondegenerate_feasible_repair_route_certificate,random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate",
             "semantic_target_kernel_surface_target_route_obstructions=not_part6_nondegenerate_feasible_repair_route_current,not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute",
+            "semantic_target_frontier_payload_surface_ids=theorem_4_1_part6_lattice_embedding,topo_cluster_random_supercritical_z2",
             "semantic_target_kernel_surface_closure_routes=Part6FullPaperClosingSupport,RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
             "semantic_target_kernel_surface_closure_route_proofs=part6_lattice_embedding_semantic_kernel_target_iff_full_support,topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route",
             "semantic_target_kernel_surface_route_equivalence_proofs=part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support,randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route",
@@ -332,7 +333,10 @@
             "semantic_target_kernel_surface_frontier_progress_certificate_proofs=z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate",
             "semantic_target_kernel_surface_frontier_nonclosure_certificates=Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate",
             "semantic_target_kernel_surface_frontier_nonclosure_certificate_proofs=z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate,random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate",
-            "semantic_target_axiom_audit_prints_required=49"
+            "semantic_target_frontier_payload_terms=part6_lattice_embedding_frontier_payload,topo_cluster_random_supercritical_z2_frontier_payload",
+            "semantic_target_frontier_payload_certificates=Part6LatticeEmbeddingFrontierPayloadCertificate,TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate",
+            "semantic_target_frontier_payload_certificate_proofs=part6_lattice_embedding_frontier_payload_certificate,topo_cluster_random_supercritical_z2_frontier_payload_certificate",
+            "semantic_target_axiom_audit_prints_required=57"
           ]
         }
       ]

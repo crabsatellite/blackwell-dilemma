@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/frontier certificates synced; AxiomAudit prints required=49 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/frontier certificates synced; AxiomAudit prints required=57 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -265,6 +265,10 @@ closure-route proof, route-equivalence proof, closure-route certificate,
 closure-route certificate proof, closure-route obstruction, frontier progress
 certificate/proof, frontier nonclosure certificate/proof, obstruction,
 frontier certificate, frontier proof, and AxiomAudit print names.
+`openSemanticTargetFrontierPayloadSurfaces` separately ties the same two open
+ids to `Nonempty` certificates for their full typed frontier payload terms,
+and the semantic audit requires the payload terms, payload certificates, and
+payload-certificate proofs to appear in `AxiomAudit.lean`.
 `remaining_open_semantic_targets_frontier_certificate`
 collects these gates into one Lean theorem, including current refutations of
 the exact target routes, their route certificates, route-equivalence proofs,

@@ -1046,6 +1046,10 @@ For full kernel-pure cover (v2.0 future iteration):
   certificate proof, closure-route obstruction, frontier progress
   certificate/proof, frontier nonclosure certificate/proof, obstruction,
   certificate, proof, and AxiomAudit print names.
+  `openSemanticTargetFrontierPayloadSurfaces` separately ties the same two open
+  ids to `Nonempty` certificates for their full typed frontier payload terms,
+  and the semantic audit requires the payload terms, payload certificates, and
+  payload-certificate proofs to appear in `AxiomAudit.lean`.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,

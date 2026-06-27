@@ -136,7 +136,8 @@ for public appendix numbers, the two still-open paper-semantic Lean targets,
 and the companion paper-semantic audit output for the target routes, target-route
 certificates, route obstructions, direct route-to-closure equivalence proofs,
 closure routes, closure-route certificates, closure obstructions, frontier
-progress/nonclosure certificates, and AxiomAudit coverage. The public verification command set includes the same Lean
+progress/nonclosure certificates, full typed frontier payload certificates, and
+AxiomAudit coverage. The public verification command set includes the same Lean
 build, PaperSemanticGate build, AxiomAudit build, and source-level audit scripts
 listed above.
 
