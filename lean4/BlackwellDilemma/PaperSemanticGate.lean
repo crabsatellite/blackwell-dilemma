@@ -6447,6 +6447,13 @@ def openSemanticTargetOutputEquivalenceSurfaceIds : List String :=
   openSemanticTargetOutputEquivalenceSurfaces.map
     (fun surface => surface.id)
 
+/-- Output-equivalence surface ids paired with the paper-facing open ledger
+labels. -/
+def openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetOutputEquivalenceSurfaceIds
+    (openSemanticTargets.map (fun target => target.paperLabel))
+
 def openSemanticTargetOutputEquivalenceSurfaceTargets : List Prop :=
   openSemanticTargetOutputEquivalenceSurfaces.map
     (fun surface => surface.target)
@@ -6495,6 +6502,20 @@ semantic frontier. -/
 theorem openSemanticTargetOutputEquivalenceSurfaceIds_current :
     openSemanticTargetOutputEquivalenceSurfaceIds =
       openSemanticTargetIds := rfl
+
+/-- Build gate: output-equivalence surfaces keep the same `(id, paperLabel)`
+projection as the open semantic ledger. -/
+theorem openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels_current :
+    openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
+
+/-- Build gate: kernel-surface and output-equivalence rosters are synchronized on
+target ids paired with paper-facing labels. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_outputEquivalenceSurfaceIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels := rfl
 
 /-- Build gate: there is one reversible output-bundle surface per open target. -/
 theorem openSemanticTargetOutputEquivalenceSurfaceCount_current :
@@ -6699,6 +6720,10 @@ semantic targets.  This pins target/output/current-obstruction rosters to named
 Part 6/topo propositions. -/
 def OpenSemanticTargetOutputEquivalenceNamedRosterCertificate : Prop :=
   openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels /\
     openSemanticTargetOutputEquivalenceSurfaces.length =
       paperSemanticOpenCount /\
     openSemanticTargetOutputEquivalenceSurfaceTargets =
@@ -6733,6 +6758,11 @@ theorem open_semantic_target_output_equivalence_named_roster_certificate :
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate := by
   constructor
   · exact openSemanticTargetOutputEquivalenceSurfaceIds_current
+  constructor
+  · exact openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels_current
+  constructor
+  · exact
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_outputEquivalenceSurfaceIdPaperLabels
   constructor
   · exact openSemanticTargetOutputEquivalenceSurfaceCount_current
   constructor

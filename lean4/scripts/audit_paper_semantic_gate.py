@@ -2137,6 +2137,11 @@ def main() -> int:
     output_equivalence_surface_ids = [
         surface[0] for surface in output_equivalence_surfaces
     ]
+    output_equivalence_surface_id_label_pairs = [
+        (surface_id, EXPECTED_OPEN_TARGET_LABELS[surface_id])
+        for surface_id in output_equivalence_surface_ids
+        if surface_id in EXPECTED_OPEN_TARGET_LABELS
+    ]
     exact_closure_input_output_surfaces = (
         open_exact_closure_input_output_surfaces(text)
     )
@@ -2658,6 +2663,25 @@ def main() -> int:
     print(
         "semantic_target_output_equivalence_surface_ids="
         + ",".join(output_equivalence_surface_ids)
+    )
+    print(
+        "semantic_target_output_equivalence_surface_id_paper_labels="
+        + ";".join(
+            f"{surface_id}:{label}"
+            for surface_id, label in output_equivalence_surface_id_label_pairs
+        )
+    )
+    print(
+        "semantic_target_kernel_output_equivalence_id_paper_labels_match="
+        f"{int(kernel_surface_id_label_pairs == output_equivalence_surface_id_label_pairs)}"
+    )
+    print(
+        "semantic_target_output_equivalence_surface_id_paper_label_projection="
+        "openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels_current"
+    )
+    print(
+        "semantic_target_kernel_output_equivalence_id_paper_label_projection="
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_outputEquivalenceSurfaceIdPaperLabels"
     )
     print_id_drift(
         "semantic_target_kernel_surface_ids",
@@ -4657,6 +4681,18 @@ def main() -> int:
             "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldSurfaceIdPaperLabels"
         ),
         (
+            "semantic_target_kernel_output_equivalence_id_paper_labels_match="
+            f"{int(kernel_surface_id_label_pairs == output_equivalence_surface_id_label_pairs)}"
+        ),
+        (
+            "semantic_target_output_equivalence_surface_id_paper_label_projection="
+            "openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels_current"
+        ),
+        (
+            "semantic_target_kernel_output_equivalence_id_paper_label_projection="
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_outputEquivalenceSurfaceIdPaperLabels"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -4965,6 +5001,12 @@ def main() -> int:
         failures.append(
             "closure-input field surface id/paper-label pairs "
             f"{closure_input_field_surface_id_label_pairs!r} != kernel-surface pairs "
+            f"{kernel_surface_id_label_pairs!r}"
+        )
+    if output_equivalence_surface_id_label_pairs != kernel_surface_id_label_pairs:
+        failures.append(
+            "output-equivalence surface id/paper-label pairs "
+            f"{output_equivalence_surface_id_label_pairs!r} != kernel-surface pairs "
             f"{kernel_surface_id_label_pairs!r}"
         )
     for (
