@@ -10565,6 +10565,15 @@ theorem part6_lattice_embedding_semantic_kernel_target_of_field_payload :
     part6_lattice_embedding_semantic_kernel_target_of_closure_input
       (part6_lattice_embedding_closure_input_of_field_payload hpayload)
 
+/-- The Part 6 field payload projects directly to the exact closure input. -/
+theorem part6_lattice_embedding_exact_closure_input_of_field_payload :
+    Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingExactClosureInput := by
+  intro hpayload
+  exact
+    part6_lattice_embedding_exact_closure_input_of_closure_input
+      (part6_lattice_embedding_closure_input_of_field_payload hpayload)
+
 /-- The Part 6 field payload projects directly to the repair-route target. -/
 theorem part6_lattice_embedding_repair_route_of_field_payload :
     Part6LatticeEmbeddingClosureInputFieldPayload ->
@@ -10601,6 +10610,8 @@ def Part6LatticeEmbeddingClosureInputFieldOutputCertificate : Prop :=
   (Part6LatticeEmbeddingClosureInputFieldPayload ->
     Part6LatticeEmbeddingSemanticKernelTarget) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingExactClosureInput) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6NondegenerateFeasibleRepairRoute) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6FullPaperClosingFullOutputBundle) /\
@@ -10618,6 +10629,8 @@ theorem part6_lattice_embedding_closure_input_field_output_certificate :
     Part6LatticeEmbeddingClosureInputFieldOutputCertificate := by
   constructor
   · exact part6_lattice_embedding_semantic_kernel_target_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_exact_closure_input_of_field_payload
   constructor
   · exact part6_lattice_embedding_repair_route_of_field_payload
   constructor
@@ -10639,6 +10652,16 @@ theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_pay
   intro hpayload
   exact
     topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+      (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
+        hpayload)
+
+/-- The topo field payload projects directly to the exact closure input. -/
+theorem topo_cluster_random_supercritical_z2_exact_closure_input_of_field_payload :
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2ExactClosureInput := by
+  intro hpayload
+  exact
+    topo_cluster_random_supercritical_z2_exact_closure_input_of_closure_input
       (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
         hpayload)
 
@@ -10737,6 +10760,8 @@ def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate : Prop :=
   (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
     TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
@@ -10767,6 +10792,9 @@ theorem topo_cluster_random_supercritical_z2_closure_input_field_output_certific
     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate := by
   constructor
   · exact topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_exact_closure_input_of_field_payload
   constructor
   · exact topo_cluster_random_supercritical_z2_full_route_of_field_payload
   constructor
