@@ -56,7 +56,8 @@ spine with its own field-output formula roster; both rosters are also packaged
 as an id/count-gated remaining-open-target detailed field-output roster whose
 id/count equalities, together with the field-output surface ids/count
 equalities and the all-surface ids/count synchronization certificate, are
-top-level current-obstruction terms with a fixed 20-statement all-surface roster.
+top-level current-obstruction terms with a fixed 54-term top-level roster and a
+fixed 20-statement all-surface roster.
 The project does not claim the stronger
 full-manuscript semantic closure
 status. The Part 4 lattice p-monotonicity target is now closed by the standard
@@ -272,9 +273,10 @@ field-obstruction certificates.
 `completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate`
 pins those top-level obstruction statements as a Lean `List Prop`.
 `audit_paper_semantic_gate.py` now parses that top-level certificate body and
-fails unless all 46 expected certificate conjuncts are present.
-The same audit parses the top-level statement roster and checks all 48 expected
-base/certificate terms.
+fails unless all 52 expected certificate conjuncts are present.
+The same audit parses the top-level statement roster and checks all 54 expected
+base/certificate terms, backed by
+`completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current`.
 `open_semantic_target_closure_input_named_roster_certificate` now pins the
 named sufficient closure-input roster itself, including target/input/current
 obstruction/certificate propositions and the target-obstruction to
@@ -352,7 +354,8 @@ topo route-obstruction
 projections and statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency, field statement roster,
-surface-roster consistency, top-level statement roster, and AxiomAudit coverage.
+surface-roster consistency, top-level statement roster length, and AxiomAudit
+coverage.
 The companion audit now publishes both required AxiomAudit print count and
 missing print count.
 The public

@@ -12072,6 +12072,11 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] := rfl
 
+/-- Build gate: the top-level current-obstruction statement roster has exactly
+the 54 named obstruction and subordinate-certificate statements listed above. -/
+theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 54 := rfl
+
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
 conjunct directly, then the top-level obstruction certificate can include this
@@ -12139,6 +12144,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
        paperSemanticOpenCount,
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 54 /\
     Not CompletePaperSemanticKernelOnly /\
     paperSemanticOpenCount = 2 /\
     openSemanticTargetIds =
@@ -12207,6 +12213,7 @@ theorem
     CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate := by
   exact ⟨
     completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current,
     completePaperSemanticKernelOnly_notYet,
     paperSemanticOpenCount_current,
     openSemanticTargetIds_current,

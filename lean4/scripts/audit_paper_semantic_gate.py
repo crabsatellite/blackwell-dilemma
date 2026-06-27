@@ -458,6 +458,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_all_surface_ids_count_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
@@ -1647,6 +1648,10 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_checked="
         f"{len(EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_STATEMENT_TERMS)}"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_missing="
