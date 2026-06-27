@@ -81,6 +81,24 @@ def semantic_target_chunk(text: str, target_id: str) -> str:
     return text[start:next_target]
 
 
+def semantic_target_statuses(text: str) -> dict[str, str]:
+    start = text.find("def semanticTargets")
+    if start == -1:
+        return {}
+    end = text.find("def paperSemanticOpenCount", start)
+    if end == -1:
+        end = len(text)
+    ledger = text[start:end]
+    return {
+        target_id: status
+        for target_id, status in re.findall(
+            r'id := "([^"]+)".*?status := SemanticStatus\.([A-Za-z]+)',
+            ledger,
+            flags=re.DOTALL,
+        )
+    }
+
+
 def check_unique_ids(items: list[dict[str, Any]], kind: str, owner_id: str) -> tuple[int, list[Failure]]:
     failures: list[Failure] = []
     seen: dict[str, int] = {}
@@ -304,6 +322,120 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
                 failures.append(Failure(claim_id, check_id, f"script timed out: {exc}"))
             except (KeyError, ValueError, TypeError) as exc:
                 failures.append(Failure(claim_id, check_id, f"check error: {exc}"))
+
+    triage_items = manifest.get("paper_semantic_target_triage")
+    check_count += 1
+    if not isinstance(triage_items, list) or not triage_items:
+        failures.append(
+            Failure(
+                "paper_semantic_target_triage",
+                "triage_present",
+                "missing non-empty paper-semantic target triage list",
+            )
+        )
+        triage_items = []
+
+    semantic_gate_path = repo_path(repo_root, "lean4/BlackwellDilemma/PaperSemanticGate.lean")
+    semantic_statuses = semantic_target_statuses(semantic_gate_path.read_text(encoding="utf-8"))
+    check_count += 1
+    if not semantic_statuses:
+        failures.append(
+            Failure(
+                "paper_semantic_target_triage",
+                "semantic_target_ledger_present",
+                "could not parse semanticTargets ledger",
+            )
+        )
+    open_target_ids = {
+        target_id for target_id, status in semantic_statuses.items() if status == "open"
+    }
+    triage_target_ids: list[str] = []
+    seen_triage_target_ids: dict[str, int] = {}
+    required_triage_fields = (
+        "target_id",
+        "gate_status",
+        "repairability",
+        "external_support_role",
+        "short_term_kernel_work",
+    )
+    for index, item in enumerate(triage_items):
+        if not isinstance(item, dict):
+            check_count += 1
+            failures.append(
+                Failure(
+                    "paper_semantic_target_triage",
+                    "triage_item_object",
+                    f"triage item at index {index} is not an object",
+                )
+            )
+            continue
+        for field in required_triage_fields:
+            check_count += 1
+            if not item.get(field):
+                failures.append(
+                    Failure(
+                        "paper_semantic_target_triage",
+                        f"triage_{field}_present",
+                        f"missing triage field {field!r} at index {index}",
+                    )
+                )
+        target_id = item.get("target_id")
+        if not target_id:
+            continue
+        triage_target_ids.append(str(target_id))
+        check_count += 1
+        if target_id in seen_triage_target_ids:
+            failures.append(
+                Failure(
+                    "paper_semantic_target_triage",
+                    "triage_target_id_unique",
+                    f"duplicate triage target_id {target_id!r} at index {index}; "
+                    f"first index {seen_triage_target_ids[target_id]}",
+                )
+            )
+        else:
+            seen_triage_target_ids[str(target_id)] = index
+        check_count += 1
+        if target_id not in semantic_statuses:
+            failures.append(
+                Failure(
+                    "paper_semantic_target_triage",
+                    "triage_target_exists_in_lean",
+                    f"triage target missing from semanticTargets ledger: {target_id}",
+                )
+            )
+            continue
+        expected_status = semantic_statuses[str(target_id)]
+        check_count += 1
+        if item.get("gate_status") != expected_status:
+            failures.append(
+                Failure(
+                    "paper_semantic_target_triage",
+                    "triage_gate_status_matches_lean",
+                    f"{target_id} triage gate_status {item.get('gate_status')!r} "
+                    f"!= Lean status {expected_status!r}",
+                )
+            )
+        check_count += 1
+        if target_id not in open_target_ids:
+            failures.append(
+                Failure(
+                    "paper_semantic_target_triage",
+                    "triage_only_open_targets",
+                    f"triage target is not currently open in Lean: {target_id}",
+                )
+            )
+
+    check_count += 1
+    if set(triage_target_ids) != open_target_ids:
+        failures.append(
+            Failure(
+                "paper_semantic_target_triage",
+                "triage_covers_open_targets",
+                f"triage targets {sorted(triage_target_ids)!r} "
+                f"!= Lean open targets {sorted(open_target_ids)!r}",
+            )
+        )
 
     for card_id in source_cards:
         check_count += 1
