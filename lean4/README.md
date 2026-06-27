@@ -348,6 +348,10 @@ all three joint packages are current-refuted.
 packages the two remaining targets at the route layer as well: joint target
 satisfaction, joint target-route satisfaction, and joint closure-route
 satisfaction are equivalent, and all three route packages are current-refuted.
+`open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate`
+then lifts the same negative route layer to every machine-facing open-target
+surface: `Not target`, `Not targetRoute`, and `Not closureRoute` are equivalent
+for the roster entries and remain synchronized with the typed payload roster.
 `remaining_open_semantic_targets_closure_input_field_certificate` gates the
 field-level payloads beneath those inputs: Part 6 exposes the closed-unit
 tail-reversal bridge, nonempty closed-unit alpha domain, bridge route, and

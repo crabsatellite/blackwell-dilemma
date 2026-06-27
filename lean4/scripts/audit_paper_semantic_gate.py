@@ -289,6 +289,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_route_equivalence",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_not_iff_target_route",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_not_iff_closure_route",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route_not_iff_closure_route",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_frontier_progress_certificate",
@@ -424,6 +427,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_notYet",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_exact_closure_input",
@@ -1093,6 +1098,12 @@ def main() -> int:
         + ",".join(surface[9] for surface in kernel_surfaces)
     )
     print(
+        "semantic_target_kernel_surface_route_obstruction_not_iff_proofs="
+        "openSemanticTargetKernelSurface_target_not_iff_target_route,"
+        "openSemanticTargetKernelSurface_target_not_iff_closure_route,"
+        "openSemanticTargetKernelSurface_target_route_not_iff_closure_route"
+    )
+    print(
         "semantic_target_kernel_surface_closure_route_certificates="
         + ",".join(surface[10] for surface in kernel_surfaces)
     )
@@ -1615,6 +1626,14 @@ def main() -> int:
     print(
         "semantic_target_joint_route_reduction_certificate_proof="
         "remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate"
+    )
+    print(
+        "semantic_target_kernel_surface_route_obstruction_certificate="
+        "OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate"
+    )
+    print(
+        "semantic_target_kernel_surface_route_obstruction_certificate_proof="
+        "open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate"
     )
     print(
         "semantic_target_part6_conditional_witness_exact_input_proofs="

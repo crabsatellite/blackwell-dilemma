@@ -170,6 +170,11 @@ full-output-bundle satisfaction, with all three joint packages current-refuted.
 also packages the same two targets as joint route obligations: joint target
 satisfaction, joint target-route satisfaction, and joint closure-route
 satisfaction are equivalent, and all three route packages are current-refuted.
+`open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate`
+lifts those route obstructions back to the machine-facing open-target roster:
+for every roster surface, `Not target`, `Not targetRoute`, and
+`Not closureRoute` are equivalent and synchronized with the typed payload
+surface.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,
