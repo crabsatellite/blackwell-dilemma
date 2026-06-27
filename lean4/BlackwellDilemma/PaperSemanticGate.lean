@@ -11891,6 +11891,11 @@ theorem openSemanticTargetAllSurfaceIdsCountStatements_named_current :
        openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
          paperSemanticOpenCount] := rfl
 
+/-- Build gate: the all-surface ids/count statement roster has exactly one
+ids statement and one count statement for each of the ten synchronized rosters. -/
+theorem openSemanticTargetAllSurfaceIdsCountStatements_length_current :
+    openSemanticTargetAllSurfaceIdsCountStatements.length = 20 := rfl
+
 /-- Statement-roster certificate for all open-target surface ids/count gates. -/
 def OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate : Prop :=
   openSemanticTargetAllSurfaceIdsCountStatements =
@@ -11925,6 +11930,7 @@ def OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate : Prop :=
          openSemanticTargetIds,
        openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
          paperSemanticOpenCount] /\
+    openSemanticTargetAllSurfaceIdsCountStatements.length = 20 /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate
 
 /-- The all-surface ids/count package has a fixed statement roster. -/
@@ -11932,6 +11938,7 @@ theorem open_semantic_target_all_surface_ids_count_statement_roster_certificate 
     OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate := by
   exact ⟨
     openSemanticTargetAllSurfaceIdsCountStatements_named_current,
+    openSemanticTargetAllSurfaceIdsCountStatements_length_current,
     open_semantic_target_all_surface_ids_count_certificate⟩
 
 /-- Statement roster for the top-level current obstruction to complete
