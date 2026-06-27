@@ -254,7 +254,10 @@ theorems gate the current kernel refutations while the target count remains
 open=2.
 `openSemanticTargetKernelSurfaces` ties the two open ledger ids to those Lean
 propositions and their current obstruction proofs, with id/count theorems
-checking that the roster matches `openSemanticTargetIds`.
+checking that the roster matches `openSemanticTargetIds`. Each roster entry
+also carries the full current frontier certificate for that target, and
+`audit_paper_semantic_gate.py` checks the target, obstruction, certificate, and
+proof names.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

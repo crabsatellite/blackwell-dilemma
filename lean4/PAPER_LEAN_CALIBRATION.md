@@ -1034,7 +1034,9 @@ For full kernel-pure cover (v2.0 future iteration):
   `*_notYet` theorem.
   The `openSemanticTargetKernelSurfaces` roster now ties these two ledger ids
   to the exact Lean propositions and obstruction proofs, and its id/count
-  gates match `openSemanticTargetIds`.
+  gates match `openSemanticTargetIds`. Each roster entry also carries the
+  target's full current frontier certificate, and the Python semantic audit
+  checks the target, obstruction, certificate, and proof names.
 - The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
   recalibration is closed by aliases in `Canonical.lean`; the paper R10
   `prop:threshold-five-state` clause (iii) high-κ signal-conditional routing

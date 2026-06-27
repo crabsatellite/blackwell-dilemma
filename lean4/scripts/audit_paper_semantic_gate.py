@@ -26,10 +26,14 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
         "Part6LatticeEmbeddingSemanticKernelTarget",
         "part6_lattice_embedding_semantic_kernel_target_notYet",
+        "Part6CurrentFrontierCertificate",
+        "part6_current_frontier_certificate",
     ),
     "topo_cluster_random_supercritical_z2": (
         "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet",
+        "RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate",
+        "random_supercritical_z2_topo_cluster_current_frontier_certificate",
     ),
 }
 
@@ -91,7 +95,7 @@ def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
     return open_ids, closed_ids
 
 
-def open_kernel_surfaces(text: str) -> list[tuple[str, str, str]]:
+def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str]]:
     match = re.search(
         r"def\s+openSemanticTargetKernelSurfaces\s*:\s*"
         r"List\s+OpenSemanticTargetKernelSurface\s*:=\s*"
@@ -105,7 +109,9 @@ def open_kernel_surfaces(text: str) -> list[tuple[str, str, str]]:
     surfaces = re.findall(
         r'id\s*:=\s*"([^"]+)".*?'
         r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
-        r"currentObstruction\s*:=\s*([A-Za-z0-9_'.]+)",
+        r"currentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"frontierCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"frontierCertificateProof\s*:=\s*([A-Za-z0-9_'.]+)",
         match.group(1),
         flags=re.DOTALL,
     )
@@ -125,7 +131,10 @@ def main() -> int:
     expected_open_ids = theorem_id_list(text, "openSemanticTargetIds_current")
     expected_closed_ids = theorem_id_list(text, "closedSemanticTargetIds_current")
     kernel_surfaces = open_kernel_surfaces(text)
-    kernel_surface_ids = [target_id for target_id, _target, _obstruction in kernel_surfaces]
+    kernel_surface_ids = [
+        target_id
+        for target_id, _target, _obstruction, _frontier, _frontier_proof in kernel_surfaces
+    ]
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -136,11 +145,31 @@ def main() -> int:
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(
         "semantic_target_kernel_surface_targets="
-        + ",".join(target for _target_id, target, _obstruction in kernel_surfaces)
+        + ",".join(
+            target
+            for _target_id, target, _obstruction, _frontier, _frontier_proof in kernel_surfaces
+        )
     )
     print(
         "semantic_target_kernel_surface_obstructions="
-        + ",".join(obstruction for _target_id, _target, obstruction in kernel_surfaces)
+        + ",".join(
+            obstruction
+            for _target_id, _target, obstruction, _frontier, _frontier_proof in kernel_surfaces
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_frontier_certificates="
+        + ",".join(
+            frontier
+            for _target_id, _target, _obstruction, frontier, _frontier_proof in kernel_surfaces
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_frontier_proofs="
+        + ",".join(
+            frontier_proof
+            for _target_id, _target, _obstruction, _frontier, frontier_proof in kernel_surfaces
+        )
     )
 
     failures: list[str] = []
@@ -156,12 +185,14 @@ def main() -> int:
         failures.append(
             f"kernel-surface ids {kernel_surface_ids!r} != open semantic target ids {open_ids!r}"
         )
-    for target_id, target_prop, obstruction in kernel_surfaces:
+    for target_id, target_prop, obstruction, frontier, frontier_proof in kernel_surfaces:
         expected_surface = EXPECTED_OPEN_KERNEL_SURFACES.get(target_id)
         if expected_surface is None:
             failures.append(f"unexpected kernel-surface id: {target_id}")
             continue
-        expected_target, expected_obstruction = expected_surface
+        expected_target, expected_obstruction, expected_frontier, expected_frontier_proof = (
+            expected_surface
+        )
         if target_prop != expected_target:
             failures.append(
                 f"{target_id} target prop {target_prop!r} != expected {expected_target!r}"
@@ -169,6 +200,14 @@ def main() -> int:
         if obstruction != expected_obstruction:
             failures.append(
                 f"{target_id} obstruction {obstruction!r} != expected {expected_obstruction!r}"
+            )
+        if frontier != expected_frontier:
+            failures.append(
+                f"{target_id} frontier certificate {frontier!r} != expected {expected_frontier!r}"
+            )
+        if frontier_proof != expected_frontier_proof:
+            failures.append(
+                f"{target_id} frontier proof {frontier_proof!r} != expected {expected_frontier_proof!r}"
             )
     missing_surface_ids = sorted(set(EXPECTED_OPEN_KERNEL_SURFACES) - set(kernel_surface_ids))
     for target_id in missing_surface_ids:

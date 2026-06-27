@@ -155,20 +155,28 @@ structure OpenSemanticTargetKernelSurface where
   paperLabel : String
   target : Prop
   currentObstruction : Not target
+  frontierCertificate : Prop
+  frontierCertificateProof : frontierCertificate
 
 /-- The two current open semantic targets with their exact Lean propositions
-and current refutations. -/
+their current refutations, and their complete current frontier certificates. -/
 def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
   [ { id := "theorem_4_1_part6_lattice_embedding",
       paperLabel := "thm:cognitive-threshold Part 6",
       target := Part6LatticeEmbeddingSemanticKernelTarget,
       currentObstruction :=
-        part6_lattice_embedding_semantic_kernel_target_notYet },
+        part6_lattice_embedding_semantic_kernel_target_notYet,
+      frontierCertificate := Part6CurrentFrontierCertificate,
+      frontierCertificateProof := part6_current_frontier_certificate },
     { id := "topo_cluster_random_supercritical_z2",
       paperLabel := "prop:topo-cluster and thm:phase",
       target := TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
       currentObstruction :=
-        topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet } ]
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+      frontierCertificate :=
+        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+      frontierCertificateProof :=
+        random_supercritical_z2_topo_cluster_current_frontier_certificate } ]
 
 def openSemanticTargetKernelSurfaceIds : List String :=
   openSemanticTargetKernelSurfaces.map (fun surface => surface.id)
@@ -188,6 +196,13 @@ theorem openSemanticTargetKernelSurface_current_obstruction
     (surface : OpenSemanticTargetKernelSurface) :
     Not surface.target :=
   surface.currentObstruction
+
+/-- Every machine-facing roster entry carries its complete current frontier
+certificate. -/
+theorem openSemanticTargetKernelSurface_frontier_certificate
+    (surface : OpenSemanticTargetKernelSurface) :
+    surface.frontierCertificate :=
+  surface.frontierCertificateProof
 
 /-- Typed payload for the closed Theorem 4.1 Part 4 lattice p-monotonicity
 target.  This machine-checks the bounded kernel theorem, the constructive
