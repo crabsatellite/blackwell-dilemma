@@ -1052,7 +1052,8 @@ For full kernel-pure cover (v2.0 future iteration):
   payload-certificate proofs to appear in `AxiomAudit.lean`. The same surface
   now also carries payload-derived projections for each target's active
   frontier progress certificate, matching nonclosure certificate, and current
-  frontier certificate.
+  frontier certificate. The kernel-surface and payload-surface views of those
+  three certificate lists are also definitionally checked equal.
   `open_semantic_target_surface_roster_consistency_certificate` then proves
   that the semantic ledger ids, kernel-surface ids, typed frontier-payload ids,
   and both roster counts are synchronized.

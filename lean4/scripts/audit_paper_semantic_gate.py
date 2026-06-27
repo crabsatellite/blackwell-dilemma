@@ -131,6 +131,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_progress_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_nonclosure_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceFrontierProgressCertificates_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceFrontierNonclosureCertificates_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceCurrentFrontierCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_surface_roster_consistency_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
@@ -414,6 +417,18 @@ def main() -> int:
     print(
         "semantic_target_frontier_payload_frontier_certificate_proofs="
         + ",".join(surface[8] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_surface_frontier_progress_consistency="
+        "openSemanticTargetSurfaceFrontierProgressCertificates_current"
+    )
+    print(
+        "semantic_target_surface_frontier_nonclosure_consistency="
+        "openSemanticTargetSurfaceFrontierNonclosureCertificates_current"
+    )
+    print(
+        "semantic_target_surface_current_frontier_consistency="
+        "openSemanticTargetSurfaceCurrentFrontierCertificates_current"
     )
     print(
         "semantic_target_surface_roster_consistency_certificate="

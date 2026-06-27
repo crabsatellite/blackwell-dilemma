@@ -3753,6 +3753,55 @@ theorem openSemanticTargetFrontierPayloadSurface_frontier_certificate
     surface.frontierCertificate :=
   surface.frontierCertificateProof
 
+/-- Kernel-surface view of the active frontier progress certificates. -/
+def openSemanticTargetKernelSurfaceFrontierProgressCertificates : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => surface.frontierProgressCertificate)
+
+/-- Payload-surface view of the active frontier progress certificates. -/
+def openSemanticTargetFrontierPayloadSurfaceProgressCertificates : List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.frontierProgressCertificate)
+
+/-- Build gate: the kernel and payload surfaces agree on active frontier
+progress certificates. -/
+theorem openSemanticTargetSurfaceFrontierProgressCertificates_current :
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates =
+      openSemanticTargetFrontierPayloadSurfaceProgressCertificates := rfl
+
+/-- Kernel-surface view of the active frontier non-closure certificates. -/
+def openSemanticTargetKernelSurfaceFrontierNonclosureCertificates : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => surface.frontierNonclosureCertificate)
+
+/-- Payload-surface view of the active frontier non-closure certificates. -/
+def openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates : List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.frontierNonclosureCertificate)
+
+/-- Build gate: the kernel and payload surfaces agree on active frontier
+non-closure certificates. -/
+theorem openSemanticTargetSurfaceFrontierNonclosureCertificates_current :
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+      openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates := rfl
+
+/-- Kernel-surface view of the current frontier certificates. -/
+def openSemanticTargetKernelSurfaceCurrentFrontierCertificates : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => surface.frontierCertificate)
+
+/-- Payload-surface view of the current frontier certificates. -/
+def openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates :
+    List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.frontierCertificate)
+
+/-- Build gate: the kernel and payload surfaces agree on current frontier
+certificates. -/
+theorem openSemanticTargetSurfaceCurrentFrontierCertificates_current :
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+      openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates := rfl
+
 /-- One certificate tying the semantic ledger, kernel surface roster, and full
 typed frontier-payload roster to the same remaining open targets. -/
 def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
@@ -3761,7 +3810,13 @@ def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
     openSemanticTargetKernelSurfaceIds =
       openSemanticTargetFrontierPayloadSurfaceIds /\
     openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
-    openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount
+    openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates =
+      openSemanticTargetFrontierPayloadSurfaceProgressCertificates /\
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+      openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates /\
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+      openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates
 
 /-- The current semantic open-target ledger, kernel surface roster, and full
 typed frontier-payload roster are machine-checked to be synchronized. -/
@@ -3772,7 +3827,10 @@ theorem open_semantic_target_surface_roster_consistency_certificate :
     openSemanticTargetFrontierPayloadSurfaceIds_current,
     openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds,
     openSemanticTargetKernelSurfaceCount_current,
-    openSemanticTargetFrontierPayloadSurfaceCount_current⟩
+    openSemanticTargetFrontierPayloadSurfaceCount_current,
+    openSemanticTargetSurfaceFrontierProgressCertificates_current,
+    openSemanticTargetSurfaceFrontierNonclosureCertificates_current,
+    openSemanticTargetSurfaceCurrentFrontierCertificates_current⟩
 
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
