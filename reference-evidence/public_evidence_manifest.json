@@ -467,6 +467,8 @@
             "semantic_target_exact_closure_named_roster_certificate=OpenSemanticTargetExactClosureInputNamedRosterCertificate",
             "semantic_target_exact_closure_named_roster_certificate_proof=open_semantic_target_exact_closure_input_named_roster_certificate",
             "semantic_target_exact_closure_input_statement_roster_proofs=openSemanticTargetExactClosureInputSurfaceTargetToExactInputStatements_named_current,openSemanticTargetExactClosureInputSurfaceExactInputToTargetStatements_named_current,openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements_named_current,openSemanticTargetExactClosureInputSurfaceSufficientToExactInputStatements_named_current,openSemanticTargetExactClosureInputSurfaceTargetNotIffExactInputStatements_named_current",
+            "semantic_target_exact_closure_input_statement_roster_terms_checked=10",
+            "semantic_target_exact_closure_input_statement_roster_length_proofs=openSemanticTargetExactClosureInputSurfaceTargetToExactInputStatements_length_current,openSemanticTargetExactClosureInputSurfaceExactInputToTargetStatements_length_current,openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements_length_current,openSemanticTargetExactClosureInputSurfaceSufficientToExactInputStatements_length_current,openSemanticTargetExactClosureInputSurfaceTargetNotIffExactInputStatements_length_current",
             "semantic_target_exact_closure_input_statement_roster_certificate=OpenSemanticTargetExactClosureInputStatementRosterCertificate",
             "semantic_target_exact_closure_input_statement_roster_certificate_proof=open_semantic_target_exact_closure_input_statement_roster_certificate",
             "semantic_target_closure_input_output_certificates=Part6LatticeEmbeddingClosureInputOutputCertificate,TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate",
@@ -656,9 +658,9 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=670",
+            "semantic_target_axiom_audit_prints_required=675",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=670",
+            "semantic_target_readme_axiom_audit_prints_required=675",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },

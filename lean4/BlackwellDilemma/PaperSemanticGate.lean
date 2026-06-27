@@ -5597,6 +5597,41 @@ theorem
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
         Not TopoClusterRandomSupercriticalZ2ExactClosureInput] := rfl
 
+/-- Build gate: the target-to-exact-input statement roster has one entry for
+each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceTargetToExactInputStatements_length_current :
+    openSemanticTargetExactClosureInputSurfaceTargetToExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the exact-input-to-target statement roster has one entry for
+each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceExactInputToTargetStatements_length_current :
+    openSemanticTargetExactClosureInputSurfaceExactInputToTargetStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/exact-input equivalence statement roster has one
+entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements_length_current :
+    openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the sufficient-input-to-exact-input statement roster has one
+entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceSufficientToExactInputStatements_length_current :
+    openSemanticTargetExactClosureInputSurfaceSufficientToExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target-obstruction/exact-input-obstruction statement roster
+has one entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputSurfaceTargetNotIffExactInputStatements_length_current :
+    openSemanticTargetExactClosureInputSurfaceTargetNotIffExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
 /-- Every exact closure-input surface carries the target-to-input projection. -/
 theorem openSemanticTargetExactClosureInputSurface_target_to_exact_input
     (surface : OpenSemanticTargetExactClosureInputSurface) :
@@ -5785,6 +5820,16 @@ def OpenSemanticTargetExactClosureInputStatementRosterCertificate : Prop :=
         Not Part6LatticeEmbeddingExactClosureInput,
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
         Not TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+    openSemanticTargetExactClosureInputSurfaceTargetToExactInputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputSurfaceExactInputToTargetStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputSurfaceSufficientToExactInputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputSurfaceTargetNotIffExactInputStatements.length =
+      paperSemanticOpenCount /\
     (∀ surface ∈ openSemanticTargetExactClosureInputSurfaces,
       surface.target -> surface.exactClosureInput) /\
     (∀ surface ∈ openSemanticTargetExactClosureInputSurfaces,
@@ -5807,6 +5852,11 @@ theorem open_semantic_target_exact_closure_input_statement_roster_certificate :
     openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements_named_current,
     openSemanticTargetExactClosureInputSurfaceSufficientToExactInputStatements_named_current,
     openSemanticTargetExactClosureInputSurfaceTargetNotIffExactInputStatements_named_current,
+    openSemanticTargetExactClosureInputSurfaceTargetToExactInputStatements_length_current,
+    openSemanticTargetExactClosureInputSurfaceExactInputToTargetStatements_length_current,
+    openSemanticTargetExactClosureInputSurfaceTargetIffExactInputStatements_length_current,
+    openSemanticTargetExactClosureInputSurfaceSufficientToExactInputStatements_length_current,
+    openSemanticTargetExactClosureInputSurfaceTargetNotIffExactInputStatements_length_current,
     (by
       intro surface _
       exact openSemanticTargetExactClosureInputSurface_target_to_exact_input
