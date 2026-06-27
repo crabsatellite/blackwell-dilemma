@@ -245,7 +245,8 @@ checks that every such roster-current theorem has an `AxiomAudit.lean`
 `#print axioms` entry, and that every theorem in the paper semantic gate,
 plus every paper-semantic gate `def`, is covered by the same audit. The same
 coverage rule applies to every paper-semantic gate `structure` and `inductive`
-declaration.
+declaration. The paper-semantic `#print axioms` subset is also checked for
+duplicate entries.
 
 The current theorem surface is kernel-clean in the source-level sense:
 `#print axioms` output contains only Lean/Mathlib kernel axioms, and

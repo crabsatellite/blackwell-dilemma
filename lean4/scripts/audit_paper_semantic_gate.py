@@ -13,6 +13,7 @@ This script is a companion documentation guard:
 
 from __future__ import annotations
 
+import collections
 import pathlib
 import re
 import sys
@@ -1771,6 +1772,24 @@ def paper_semantic_type_axiom_audit_missing_prints(
     return len(type_names), missing
 
 
+def paper_semantic_axiom_audit_duplicate_prints(
+    axiom_audit_text: str,
+) -> tuple[int, list[str]]:
+    printed_decls = re.findall(
+        r"^\s*#print\s+axioms\s+([A-Za-z0-9_.'α-ωΑ-Ω]+)\s*$",
+        axiom_audit_text,
+        flags=re.MULTILINE,
+    )
+    paper_semantic_decls = [
+        decl
+        for decl in printed_decls
+        if decl.startswith("BlackwellDilemma.PaperSemanticGate.")
+    ]
+    counts = collections.Counter(paper_semantic_decls)
+    duplicates = sorted(decl for decl, count in counts.items() if count > 1)
+    return len(paper_semantic_decls), duplicates
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -1856,6 +1875,10 @@ def main() -> int:
         paper_semantic_type_axiom_audit_count,
         missing_paper_semantic_type_axiom_audit_prints,
     ) = paper_semantic_type_axiom_audit_missing_prints(text, axiom_audit_text)
+    (
+        paper_semantic_axiom_audit_print_count,
+        duplicate_paper_semantic_axiom_audit_prints,
+    ) = paper_semantic_axiom_audit_duplicate_prints(axiom_audit_text)
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -2016,6 +2039,18 @@ def main() -> int:
     print(
         "semantic_target_type_axiom_audit_prints_missing_decls="
         + ",".join(missing_paper_semantic_type_axiom_audit_prints)
+    )
+    print(
+        "semantic_target_paper_semantic_axiom_audit_prints="
+        f"{paper_semantic_axiom_audit_print_count}"
+    )
+    print(
+        "semantic_target_paper_semantic_axiom_audit_duplicate_prints="
+        f"{len(duplicate_paper_semantic_axiom_audit_prints)}"
+    )
+    print(
+        "semantic_target_paper_semantic_axiom_audit_duplicate_decls="
+        + ",".join(duplicate_paper_semantic_axiom_audit_prints)
     )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
@@ -3906,6 +3941,11 @@ def main() -> int:
         failures.append(
             "PaperSemanticGate types missing AxiomAudit prints: "
             + ",".join(missing_paper_semantic_type_axiom_audit_prints)
+        )
+    if duplicate_paper_semantic_axiom_audit_prints:
+        failures.append(
+            "PaperSemanticGate duplicate AxiomAudit prints: "
+            + ",".join(duplicate_paper_semantic_axiom_audit_prints)
         )
     if kernel_surface_ids != open_ids:
         failures.append(
