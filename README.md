@@ -136,7 +136,8 @@ lower bounds, unit-interval loss range, and boxed-torus family lower-bound
 surface.
 Those field payloads are now also listed in the typed
 `openSemanticTargetClosureInputFieldSurfaces` roster, with the same ids as the
-open semantic targets and with parser-checked payload/certificate proofs.
+open semantic targets and with parser-checked payload proofs, current
+payload obstructions, and certificate proofs.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
@@ -165,7 +166,7 @@ payload-derived progress/nonclosure/frontier projections, cross-surface
 target/route-map/closure/frontier equality, payload-derived route-map and
 route/closure certificate-obstruction projections, the payload route-map
 certificate, closure-input sufficient-route/output/field certificates and obstructions,
-field-roster id and payload/certificate consistency,
+field-roster id, payload-obstruction, and payload/certificate consistency,
 surface-roster consistency, and AxiomAudit coverage. The public
 verification command set includes the same Lean build, PaperSemanticGate build,
 AxiomAudit build, and source-level audit scripts listed above.
