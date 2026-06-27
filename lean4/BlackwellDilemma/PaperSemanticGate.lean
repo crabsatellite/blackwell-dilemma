@@ -6212,6 +6212,147 @@ theorem topo_cluster_random_supercritical_z2_exact_output_projection_certificate
     remaining_open_semantic_targets_exact_closure_input_output_certificate,
     remaining_open_semantic_targets_joint_closure_reduction_certificate⟩
 
+/-- A refutation of the full topo route refutes the exact topo input. -/
+theorem
+    topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput := by
+  intro hroute hinput
+  exact hroute
+    (topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input
+      hinput)
+
+/-- A refutation of the boxed topo route refutes the exact topo input. -/
+theorem
+    topo_cluster_random_supercritical_z2_exact_closure_input_not_of_boxed_route_not :
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput := by
+  intro hroute hinput
+  exact hroute
+    (topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input
+      hinput)
+
+/-- A refutation of the full topo route refutes the same-witness output
+bundle. -/
+theorem
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle := by
+  intro hroute hbundle
+  exact hroute
+    (topo_cluster_random_supercritical_z2_full_route_of_same_bridge_full_output_bundle
+      hbundle)
+
+/-- A refutation of the boxed topo route refutes the same-witness output
+bundle. -/
+theorem
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_boxed_route_not :
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle := by
+  intro hroute hbundle
+  exact hroute
+    (topo_cluster_random_supercritical_z2_boxed_route_of_same_bridge_full_output_bundle
+      hbundle)
+
+/-- The topo semantic-target obstruction is definitionally the full-route
+obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  constructor
+  · intro htarget hroute
+    exact htarget
+      ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
+        hroute)
+  · intro hroute htarget
+    exact hroute
+      ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mp
+        htarget)
+
+/-- The topo semantic-target obstruction is equivalent to the boxed-route
+obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  constructor
+  · intro htarget hroute
+    exact htarget
+      ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mpr
+        hroute)
+  · intro hroute htarget
+    exact hroute
+      ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mp
+        htarget)
+
+/-- The full-route and boxed-route refutations are equivalent because the two
+routes are equivalent. -/
+theorem
+    topo_cluster_random_supercritical_z2_full_route_not_iff_boxed_route_not :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  constructor
+  · intro hfull hboxed
+    exact hfull
+      (randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_boxed_torus_finite_z2L_route
+        hboxed)
+  · intro hboxed hfull
+    exact hboxed
+      (randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_full_paper_closing_route
+        hfull)
+
+/-- Dedicated route-obstruction projection certificate for the topo target.
+It records that refuting either named route is enough to refute the exact
+semantic input and same-witness output bundle, with the route refutations
+themselves equivalent to the target obstruction. -/
+def TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate :
+    Prop :=
+  (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+    (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+    (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle) /\
+    (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+    Not TopoClusterRandomSupercriticalZ2ExactClosureInput /\
+    Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle /\
+    TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+    RemainingOpenSemanticTargetsObstructionEquivalenceCertificate
+
+/-- The current topo route obstruction projects down to every exact-output
+payload used by the remaining open semantic target. -/
+theorem
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate :
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate := by
+  exact ⟨
+    topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not,
+    topo_cluster_random_supercritical_z2_exact_closure_input_not_of_boxed_route_not,
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not,
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_boxed_route_not,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route,
+    topo_cluster_random_supercritical_z2_full_route_not_iff_boxed_route_not,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not
+      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not
+      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    topo_cluster_random_supercritical_z2_exact_output_projection_certificate,
+    remaining_open_semantic_targets_obstruction_equivalence_certificate⟩
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -6755,6 +6896,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate
 
@@ -6783,6 +6925,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact part6_remaining_conditional_projection_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_exact_output_projection_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate

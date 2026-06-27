@@ -150,6 +150,10 @@ similarly projects the topo exact input and same-bridge output bundle to the
 full route, boxed finite-lattice route, support-surface repair route/output,
 paper-support output, and giant-loss output, while recording that the inhabited
 support-surface repair layer still does not close the full or boxed route.
+`topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate`
+then gates the negative direction: refuting either the full route or boxed route
+refutes both the topo exact input and same-bridge output bundle, and those route
+refutations are equivalent to the topo target obstruction.
 `remaining_open_semantic_targets_obstruction_equivalence_certificate` further
 proves that, for each open target, the target obstruction, exact-input
 obstruction, and output-bundle obstruction are equivalent kernel consequences.

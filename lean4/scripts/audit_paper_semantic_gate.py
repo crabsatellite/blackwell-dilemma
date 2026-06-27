@@ -430,6 +430,15 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_output_projection_certificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_closure_input_not_of_boxed_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_boxed_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_not_iff_boxed_route_not",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_closure_input",
@@ -1606,6 +1615,32 @@ def main() -> int:
     print(
         "semantic_target_topo_exact_output_projection_certificate_proof="
         "topo_cluster_random_supercritical_z2_exact_output_projection_certificate"
+    )
+    print(
+        "semantic_target_topo_route_obstruction_projection_proofs="
+        "topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not,"
+        "topo_cluster_random_supercritical_z2_exact_closure_input_not_of_boxed_route_not,"
+        "topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not,"
+        "topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_boxed_route_not,"
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route,"
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route,"
+        "topo_cluster_random_supercritical_z2_full_route_not_iff_boxed_route_not"
+    )
+    print(
+        "semantic_target_topo_route_obstruction_projection_current="
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,"
+        "not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,"
+        "not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,"
+        "topo_cluster_random_supercritical_z2_exact_closure_input_notYet,"
+        "topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet"
+    )
+    print(
+        "semantic_target_topo_route_obstruction_projection_certificate="
+        "TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate"
+    )
+    print(
+        "semantic_target_topo_route_obstruction_projection_certificate_proof="
+        "topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate"
     )
     print(
         "semantic_target_closure_input_field_payloads="

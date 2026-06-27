@@ -329,6 +329,10 @@ route, boxed finite-lattice route, support-surface repair route/output,
 paper-support output, and giant-loss output; it also records that the inhabited
 support-surface repair layer remains a nonclosure boundary for the full and
 boxed routes.
+`topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate`
+gates the route-level negative direction: full-route and boxed-route
+refutations each refute the topo exact input and same-bridge output bundle, and
+the route refutations are equivalent to the topo target obstruction.
 `remaining_open_semantic_targets_obstruction_equivalence_certificate` also gates
 the corresponding negative statements: for each open target, `Not target`,
 `Not exactClosureInput`, and `Not outputBundle` are pairwise equivalent.
