@@ -11176,6 +11176,42 @@ theorem
   exact
     topo_cluster_random_supercritical_z2_closure_input_field_output_certificate
 
+/-- Detailed field-output statement roster certificates for the remaining open
+semantic targets. -/
+def openSemanticTargetClosureInputFieldOutputDetailedStatementRosters :
+    List Prop :=
+  [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate]
+
+/-- Build gate: the detailed field-output statement roster certificates are
+exactly the Part 6 and topo certificates. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] :=
+  rfl
+
+/-- Single package binding the target-specific detailed field-output statement
+rosters for the remaining open targets. -/
+def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+    Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate
+
+/-- The detailed field-output statement rosters are machine-checked as a
+remaining-open-target package. -/
+theorem
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate :
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate := by
+  exact ⟨
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,
+    part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate⟩
+
 /-- Machine-facing field-output surface for each open semantic target. -/
 structure OpenSemanticTargetClosureInputFieldOutputSurface where
   id : String
@@ -11754,6 +11790,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
    RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
    OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
    OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11808,6 +11845,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
        RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
        OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
        OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11865,6 +11903,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
      TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+     RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
      RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
      OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
      OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11914,6 +11953,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
@@ -11969,6 +12009,7 @@ theorem
     topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate,
     topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate,
     remaining_open_semantic_targets_output_equivalence_certificate,
     open_semantic_target_output_equivalence_named_roster_certificate,
     open_semantic_target_output_equivalence_statement_roster_certificate,
@@ -12024,6 +12065,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
@@ -12133,6 +12175,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   constructor
