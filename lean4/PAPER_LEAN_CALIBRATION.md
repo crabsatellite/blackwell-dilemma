@@ -1024,6 +1024,9 @@ For full kernel-pure cover (v2.0 future iteration):
 - Keep the source-level axiom count at 0 while replacing the semantic targets
   listed in `PaperSemanticGate.lean` with paper-faithful kernel theorems, or
   revising the manuscript claims to match the already closed theorem payload.
+  The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
+  `paperSemanticOpenCount = 0`, and
+  `completePaperSemanticKernelOnly_notYet` proves its current negation.
 - The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
   recalibration is closed by aliases in `Canonical.lean`; the paper R10
   `prop:threshold-five-state` clause (iii) high-κ signal-conditional routing

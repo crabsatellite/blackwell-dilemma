@@ -244,6 +244,9 @@ The current theorem surface is kernel-clean in the source-level sense:
 or carrier-interface hypotheses. Complete paper-semantic closure is the
 stronger target tracked by `PaperSemanticGate.lean`; that claim is not made
 until the semantic gate reaches open=0.
+The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
+`paperSemanticOpenCount = 0`, and
+`completePaperSemanticKernelOnly_notYet` proves its current negation.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

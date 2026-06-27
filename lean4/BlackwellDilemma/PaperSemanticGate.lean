@@ -3362,11 +3362,22 @@ theorem r10_threshold_five_state_high_kappa_routing_payload (p : ℝ) :
       FiveState.fiveStateOracleWelfare p :=
   FiveState.highKappaOracleRoutingWelfare_eq_oracle p
 
+/-- Named target proposition for the full paper-semantic kernel-only gate. -/
+def CompletePaperSemanticKernelOnly : Prop :=
+  paperSemanticOpenCount = 0
+
+/-- The named full paper-semantic kernel-only gate is definitionally the
+absence of open semantic targets. -/
+theorem completePaperSemanticKernelOnly_iff_no_open_targets :
+    CompletePaperSemanticKernelOnly ↔ paperSemanticOpenCount = 0 :=
+  Iff.rfl
+
 /-- Complete paper-semantic kernel-only status is not yet claimable while the
 open semantic target count is nonzero. -/
 theorem completePaperSemanticKernelOnly_notYet :
-    paperSemanticOpenCount ≠ 0 := by
-  decide
+    Not CompletePaperSemanticKernelOnly := by
+  intro hcomplete
+  exact (by decide : paperSemanticOpenCount ≠ 0) hcomplete
 
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
