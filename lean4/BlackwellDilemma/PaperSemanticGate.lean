@@ -7982,6 +7982,45 @@ theorem
       [Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the obstruction-equivalence target roster has one entry for
+each remaining open semantic target. -/
+theorem openSemanticTargetObstructionEquivalenceSurfaceTargets_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceTargets.length = 2 := rfl
+
+/-- Build gate: the obstruction-equivalence exact-input roster has one entry
+for each remaining open semantic target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputs_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputs.length = 2 := rfl
+
+/-- Build gate: the obstruction-equivalence output-bundle roster has one entry
+for each remaining open semantic target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceOutputBundles_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceOutputBundles.length =
+      2 := rfl
+
+/-- Build gate: the obstruction-equivalence target-obstruction roster has one
+entry for each remaining open semantic target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions.length =
+      2 := rfl
+
+/-- Build gate: the obstruction-equivalence exact-input-obstruction roster has
+one entry for each remaining open semantic target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions.length =
+      2 := rfl
+
+/-- Build gate: the obstruction-equivalence output-obstruction roster has one
+entry for each remaining open semantic target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions.length =
+      2 := rfl
+
 /-- Build gate: the obstruction-equivalence roster names target/exact-input
 obstruction equivalence statements. -/
 theorem
@@ -8162,6 +8201,16 @@ def OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate : Prop :=
     openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions =
       [Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetObstructionEquivalenceSurfaceTargets.length = 2 /\
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputs.length = 2 /\
+    openSemanticTargetObstructionEquivalenceSurfaceOutputBundles.length =
+      2 /\
+    openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions.length =
+      2 /\
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions.length =
+      2 /\
+    openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions.length =
+      2 /\
     (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
       Not surface.target) /\
     (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
@@ -8200,6 +8249,23 @@ theorem open_semantic_target_obstruction_equivalence_named_roster_certificate :
   constructor
   · exact
       openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_named_current
+  constructor
+  · exact openSemanticTargetObstructionEquivalenceSurfaceTargets_length_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceExactInputs_length_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceOutputBundles_length_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_length_current
   constructor
   · intro surface _
     exact openSemanticTargetObstructionEquivalenceSurface_target_current_obstruction

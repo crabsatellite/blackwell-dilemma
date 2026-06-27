@@ -675,6 +675,12 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargets_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputs_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceOutputBundles_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_named_current",
@@ -2587,6 +2593,16 @@ def main() -> int:
         "openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_named_current,"
         "openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_named_current,"
         "openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_named_current"
+    )
+    print("semantic_target_obstruction_equivalence_named_roster_terms_checked=12")
+    print(
+        "semantic_target_obstruction_equivalence_named_roster_length_proofs="
+        "openSemanticTargetObstructionEquivalenceSurfaceTargets_length_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceExactInputs_length_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceOutputBundles_length_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_length_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_length_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_length_current"
     )
     print(
         "semantic_target_obstruction_equivalence_certificate="

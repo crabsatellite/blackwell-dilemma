@@ -312,9 +312,9 @@ target-to-output, output-to-target, target/output equivalence, and
 target/output obstruction-equivalence formulas to the named Part 6/topo
 statements, with 8 formula terms checked against `paperSemanticOpenCount`.
 `open_semantic_target_obstruction_equivalence_named_roster_certificate` also
-pins the target/exact-input/output-bundle obstruction-equivalence roster, so
-the negative surface is checked against named Part 6/topo propositions instead
-of only anonymous surface fields.
+pins the target/exact-input/output-bundle obstruction-equivalence roster as six
+2-term Lean lists, so the negative surface is checked against named Part 6/topo
+propositions instead of only anonymous surface fields.
 `open_semantic_target_obstruction_equivalence_statement_roster_certificate`
 pins the three pairwise obstruction-equivalence formulas to named Part 6/topo
 statements, with 6 formula terms checked against `paperSemanticOpenCount`.
