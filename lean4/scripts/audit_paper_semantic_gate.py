@@ -328,6 +328,18 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceFrontierProgressCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceFrontierNonclosureCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceCurrentFrontierCertificates_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargets_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargets_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargetObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargetObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargetRoutes_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargetRoutes_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargetRouteObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceClosureRoutes_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRoutes_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceClosureRouteObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_surface_roster_consistency_certificate",
     "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
@@ -434,6 +446,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetNamedRouteObstructionRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_named_route_obstruction_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_exact_closure_input",
@@ -1303,6 +1317,21 @@ def main() -> int:
         "openSemanticTargetSurfaceCurrentFrontierCertificates_current"
     )
     print(
+        "semantic_target_named_route_obstruction_roster_proofs="
+        "openSemanticTargetKernelSurfaceTargets_named_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargets_named_current,"
+        "openSemanticTargetKernelSurfaceTargetObstructions_named_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargetObstructions_named_current,"
+        "openSemanticTargetKernelSurfaceTargetRoutes_named_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargetRoutes_named_current,"
+        "openSemanticTargetKernelSurfaceTargetRouteObstructions_named_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_named_current,"
+        "openSemanticTargetKernelSurfaceClosureRoutes_named_current,"
+        "openSemanticTargetFrontierPayloadSurfaceClosureRoutes_named_current,"
+        "openSemanticTargetKernelSurfaceClosureRouteObstructions_named_current,"
+        "openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_named_current"
+    )
+    print(
         "semantic_target_surface_roster_consistency_certificate="
         "OpenSemanticTargetSurfaceRosterConsistencyCertificate"
     )
@@ -1653,6 +1682,14 @@ def main() -> int:
     print(
         "semantic_target_frontier_payload_route_obstruction_certificate_proof="
         "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate"
+    )
+    print(
+        "semantic_target_named_route_obstruction_roster_certificate="
+        "OpenSemanticTargetNamedRouteObstructionRosterCertificate"
+    )
+    print(
+        "semantic_target_named_route_obstruction_roster_certificate_proof="
+        "open_semantic_target_named_route_obstruction_roster_certificate"
     )
     print(
         "semantic_target_part6_conditional_witness_exact_input_proofs="

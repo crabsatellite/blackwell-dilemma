@@ -178,6 +178,10 @@ surface.
 `open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate`
 repeats the same negative equivalences on the typed frontier-payload roster
 itself, anchored back to the kernel roster certificate.
+`open_semantic_target_named_route_obstruction_roster_certificate` further pins
+the kernel and payload target/route/closure obstruction lists to the named
+Part 6 and topo propositions, rather than only checking that the two lists
+match each other.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,

@@ -355,6 +355,10 @@ for the roster entries and remain synchronized with the typed payload roster.
 `open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate`
 checks the same negative equivalences directly on the typed frontier-payload
 roster, anchored back to the kernel roster certificate.
+`open_semantic_target_named_route_obstruction_roster_certificate` also pins the
+kernel and payload target/route/closure obstruction lists to the named Part 6
+and topo propositions, so the route-obstruction gate is not merely an
+anonymous list-consistency check.
 `remaining_open_semantic_targets_closure_input_field_certificate` gates the
 field-level payloads beneath those inputs: Part 6 exposes the closed-unit
 tail-reversal bridge, nonempty closed-unit alpha domain, bridge route, and

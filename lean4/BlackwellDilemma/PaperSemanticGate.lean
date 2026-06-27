@@ -4239,6 +4239,94 @@ theorem openSemanticTargetSurfaceCurrentFrontierCertificates_current :
     openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
       openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates := rfl
 
+/-- Build gate: the kernel-surface target proposition roster is exactly the
+two named open semantic targets. -/
+theorem openSemanticTargetKernelSurfaceTargets_named_current :
+    openSemanticTargetKernelSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the payload-surface target proposition roster is exactly the
+two named open semantic targets. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargets_named_current :
+    openSemanticTargetFrontierPayloadSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the kernel-surface target obstruction roster is exactly the
+named current target-obstruction propositions. -/
+theorem openSemanticTargetKernelSurfaceTargetObstructions_named_current :
+    openSemanticTargetKernelSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the payload-surface target obstruction roster is exactly the
+named current target-obstruction propositions. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargetObstructions_named_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the kernel-surface target-route roster is exactly the named
+open route propositions. -/
+theorem openSemanticTargetKernelSurfaceTargetRoutes_named_current :
+    openSemanticTargetKernelSurfaceTargetRoutes =
+      [Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] := rfl
+
+/-- Build gate: the payload-surface target-route roster is exactly the named
+open route propositions. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargetRoutes_named_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetRoutes =
+      [Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] := rfl
+
+/-- Build gate: the kernel-surface target-route obstruction roster is exactly
+the named current route-obstruction propositions. -/
+theorem openSemanticTargetKernelSurfaceTargetRouteObstructions_named_current :
+    openSemanticTargetKernelSurfaceTargetRouteObstructions =
+      [Not Part6NondegenerateFeasibleRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] := rfl
+
+/-- Build gate: the payload-surface target-route obstruction roster is exactly
+the named current route-obstruction propositions. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_named_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions =
+      [Not Part6NondegenerateFeasibleRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] := rfl
+
+/-- Build gate: the kernel-surface closure-route roster is exactly the named
+paper-facing closure route propositions. -/
+theorem openSemanticTargetKernelSurfaceClosureRoutes_named_current :
+    openSemanticTargetKernelSurfaceClosureRoutes =
+      [Part6FullPaperClosingSupport,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] := rfl
+
+/-- Build gate: the payload-surface closure-route roster is exactly the named
+paper-facing closure route propositions. -/
+theorem openSemanticTargetFrontierPayloadSurfaceClosureRoutes_named_current :
+    openSemanticTargetFrontierPayloadSurfaceClosureRoutes =
+      [Part6FullPaperClosingSupport,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] := rfl
+
+/-- Build gate: the kernel-surface closure-route obstruction roster is exactly
+the named current closure-route obstruction propositions. -/
+theorem openSemanticTargetKernelSurfaceClosureRouteObstructions_named_current :
+    openSemanticTargetKernelSurfaceClosureRouteObstructions =
+      [Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] :=
+  rfl
+
+/-- Build gate: the payload-surface closure-route obstruction roster is exactly
+the named current closure-route obstruction propositions. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_named_current :
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions =
+      [Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] :=
+  rfl
+
 /-- One certificate tying the semantic ledger, kernel surface roster, and full
 typed frontier-payload roster to the same remaining open targets. -/
 def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
@@ -6821,6 +6909,84 @@ theorem
   · exact open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
   exact remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
 
+/-- Build-gated named route-obstruction roster for the two remaining open
+semantic targets.  This pins the kernel and typed-payload surface lists to the
+actual Part 6/topo target, target-route, closure-route, and obstruction
+propositions, not just to each other. -/
+def OpenSemanticTargetNamedRouteObstructionRosterCertificate : Prop :=
+  openSemanticTargetKernelSurfaceTargets =
+    [Part6LatticeEmbeddingSemanticKernelTarget,
+     TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetFrontierPayloadSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetKernelSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetFrontierPayloadSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetKernelSurfaceTargetRoutes =
+      [Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] /\
+    openSemanticTargetFrontierPayloadSurfaceTargetRoutes =
+      [Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] /\
+    openSemanticTargetKernelSurfaceTargetRouteObstructions =
+      [Not Part6NondegenerateFeasibleRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] /\
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions =
+      [Not Part6NondegenerateFeasibleRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] /\
+    openSemanticTargetKernelSurfaceClosureRoutes =
+      [Part6FullPaperClosingSupport,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    openSemanticTargetFrontierPayloadSurfaceClosureRoutes =
+      [Part6FullPaperClosingSupport,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    openSemanticTargetKernelSurfaceClosureRouteObstructions =
+      [Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions =
+      [Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
+    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate
+
+/-- The route-obstruction rosters are pinned to the named Part 6/topo
+propositions on both the kernel surface and typed payload surface. -/
+theorem open_semantic_target_named_route_obstruction_roster_certificate :
+    OpenSemanticTargetNamedRouteObstructionRosterCertificate := by
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargets_named_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceTargets_named_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargetObstructions_named_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceTargetObstructions_named_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargetRoutes_named_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceTargetRoutes_named_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargetRouteObstructions_named_current
+  constructor
+  · exact
+      openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_named_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceClosureRoutes_named_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceClosureRoutes_named_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceClosureRouteObstructions_named_current
+  constructor
+  · exact
+      openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_named_current
+  constructor
+  · exact open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
+  exact open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -7365,6 +7531,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
+    OpenSemanticTargetNamedRouteObstructionRosterCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
@@ -7402,6 +7569,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
+  constructor
+  · exact open_semantic_target_named_route_obstruction_roster_certificate
   constructor
   · exact part6_remaining_conditional_projection_certificate
   constructor
