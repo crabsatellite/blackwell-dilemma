@@ -7025,6 +7025,62 @@ theorem
        Not TopoClusterRandomSupercriticalZ2ExactClosureInput ↔
         Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the exact-input-to-output statement roster has one entry for
+each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the output-to-exact-input statement roster has one entry for
+each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the exact-input/output equivalence statement roster has one
+entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/exact-input equivalence statement roster has one
+entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/output equivalence statement roster has one entry
+for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/exact-input obstruction-equivalence statement roster
+has one entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/output obstruction-equivalence statement roster has
+one entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the exact-input/output obstruction-equivalence statement roster
+has one entry for each currently open target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
 /-- Every exact-input/output-bundle surface carries a kernel proof from exact
 input to output bundle. -/
 theorem openSemanticTargetExactClosureInputOutputSurface_exact_input_to_output
@@ -7335,6 +7391,22 @@ def OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate : Prop :
         Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2ExactClosureInput ↔
         Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements.length =
+      paperSemanticOpenCount /\
     (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
       surface.exactClosureInput -> surface.outputBundle) /\
     (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
@@ -7368,6 +7440,14 @@ theorem
     openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_named_current,
     openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_named_current,
     openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_named_current,
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements_length_current,
+    openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements_length_current,
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements_length_current,
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements_length_current,
+    openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements_length_current,
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_length_current,
+    openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_length_current,
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_length_current,
     (by
       intro surface _
       exact

@@ -615,6 +615,14 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurface_exact_input_to_output",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurface_output_to_exact_input",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurface_exact_input_iff_output",
@@ -2417,6 +2425,18 @@ def main() -> int:
         "openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_named_current,"
         "openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_named_current,"
         "openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_named_current"
+    )
+    print("semantic_target_exact_closure_input_output_statement_roster_terms_checked=16")
+    print(
+        "semantic_target_exact_closure_input_output_statement_roster_length_proofs="
+        "openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements_length_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements_length_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements_length_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements_length_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements_length_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_length_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_length_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_length_current"
     )
     print(
         "semantic_target_exact_closure_input_output_statement_roster_certificate="
