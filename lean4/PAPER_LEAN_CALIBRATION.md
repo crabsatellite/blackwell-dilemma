@@ -1094,6 +1094,9 @@ For full kernel-pure cover (v2.0 future iteration):
   supercritical probability domain, flat and giant-event mass lower bounds,
   unit-interval topological-loss range, and boxed-torus family lower-bound
   surface.
+  `openSemanticTargetClosureInputFieldSurfaces` lists the same field payloads
+  and field certificates with ids checked against the open semantic-target
+  roster by both Lean theorems and the semantic audit script.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,

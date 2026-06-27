@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/closure-input sufficient-route, output, and field certificates/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=148 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/closure-input sufficient-route, output, and field certificates/field-roster id and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=155 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -313,6 +313,9 @@ paper support with sentimental reversal; topo exposes the repaired bridge,
 pointwise-on-giant route, paper/support-surface repair fields, strict
 supercritical domain, flat and giant-event mass lower bounds, unit-interval
 loss range, and boxed-torus family lower-bound surface.
+The same field payloads and field certificates are listed in
+`openSemanticTargetClosureInputFieldSurfaces`, whose ids are checked against
+the open semantic-target roster by Lean and by `audit_paper_semantic_gate.py`.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

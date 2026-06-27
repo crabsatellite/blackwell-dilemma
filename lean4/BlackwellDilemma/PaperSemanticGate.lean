@@ -4934,10 +4934,77 @@ theorem topo_cluster_random_supercritical_z2_closure_input_field_certificate :
   · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
   exact topo_cluster_random_supercritical_z2_closure_input_notYet
 
+/-- Machine-facing field-level sufficient-input surface for each open semantic
+target. -/
+structure OpenSemanticTargetClosureInputFieldSurface where
+  id : String
+  closureInput : Prop
+  fieldPayload : Prop
+  fieldPayloadProof : closureInput -> fieldPayload
+  fieldCertificate : Prop
+  fieldCertificateProof : fieldCertificate
+
+/-- The two remaining open targets with their field-level sufficient-input
+payloads and certificates. -/
+def openSemanticTargetClosureInputFieldSurfaces :
+    List OpenSemanticTargetClosureInputFieldSurface :=
+  [ { id := "theorem_4_1_part6_lattice_embedding",
+      closureInput := Part6LatticeEmbeddingClosureInput,
+      fieldPayload := Part6LatticeEmbeddingClosureInputFieldPayload,
+      fieldPayloadProof :=
+        part6_lattice_embedding_field_payload_of_closure_input,
+      fieldCertificate := Part6LatticeEmbeddingClosureInputFieldCertificate,
+      fieldCertificateProof :=
+        part6_lattice_embedding_closure_input_field_certificate },
+    { id := "topo_cluster_random_supercritical_z2",
+      closureInput := TopoClusterRandomSupercriticalZ2ClosureInput,
+      fieldPayload :=
+        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+      fieldPayloadProof :=
+        topo_cluster_random_supercritical_z2_field_payload_of_closure_input,
+      fieldCertificate :=
+        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
+      fieldCertificateProof :=
+        topo_cluster_random_supercritical_z2_closure_input_field_certificate } ]
+
+def openSemanticTargetClosureInputFieldSurfaceIds : List String :=
+  openSemanticTargetClosureInputFieldSurfaces.map
+    (fun surface => surface.id)
+
+/-- Build gate: the field-level sufficient-input roster has the same ids as the
+semantic ledger's open target list. -/
+theorem openSemanticTargetClosureInputFieldSurfaceIds_current :
+    openSemanticTargetClosureInputFieldSurfaceIds =
+      openSemanticTargetIds := rfl
+
+/-- Build gate: the field-level sufficient-input roster has the same cardinality
+as the semantic ledger's open target count. -/
+theorem openSemanticTargetClosureInputFieldSurfaceCount_current :
+    openSemanticTargetClosureInputFieldSurfaces.length =
+      paperSemanticOpenCount := rfl
+
+/-- Every field-level sufficient-input surface carries a kernel proof from its
+input to the field payload. -/
+theorem openSemanticTargetClosureInputFieldSurface_field_payload
+    (surface : OpenSemanticTargetClosureInputFieldSurface) :
+    surface.closureInput -> surface.fieldPayload :=
+  surface.fieldPayloadProof
+
+/-- Every field-level sufficient-input surface carries its detailed field
+certificate. -/
+theorem openSemanticTargetClosureInputFieldSurface_field_certificate
+    (surface : OpenSemanticTargetClosureInputFieldSurface) :
+    surface.fieldCertificate :=
+  surface.fieldCertificateProof
+
 /-- Single build-gated field certificate for the sufficient closure inputs of
 the two remaining open paper-semantic targets. -/
 def RemainingOpenSemanticTargetsClosureInputFieldCertificate : Prop :=
-  Part6LatticeEmbeddingClosureInputFieldCertificate /\
+  openSemanticTargetClosureInputFieldSurfaceIds =
+    openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldSurfaces.length =
+      paperSemanticOpenCount /\
+    Part6LatticeEmbeddingClosureInputFieldCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate /\
     RemainingOpenSemanticTargetsClosureInputOutputCertificate
 
@@ -4945,6 +5012,10 @@ def RemainingOpenSemanticTargetsClosureInputFieldCertificate : Prop :=
 remaining open targets. -/
 theorem remaining_open_semantic_targets_closure_input_field_certificate :
     RemainingOpenSemanticTargetsClosureInputFieldCertificate := by
+  constructor
+  · exact openSemanticTargetClosureInputFieldSurfaceIds_current
+  constructor
+  · exact openSemanticTargetClosureInputFieldSurfaceCount_current
   constructor
   · exact part6_lattice_embedding_closure_input_field_certificate
   constructor
