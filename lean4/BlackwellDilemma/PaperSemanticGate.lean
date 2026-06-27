@@ -12860,6 +12860,38 @@ theorem semantic_target_paper_label_certificate :
     SemanticTargetPaperLabelCertificate := by
   exact ⟨rfl, rfl, rfl⟩
 
+/-- Current paper-label/id alignment: every paper-facing label is fixed to the
+semantic target id that carries it, for the closed frontier, the open frontier,
+and the full ledger. -/
+def SemanticTargetPaperLabelIdCertificate : Prop :=
+  closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii")] /\
+    openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")] /\
+    semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii"),
+       ("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")]
+
+/-- The current semantic ledger's paper labels are paired with exactly the
+target ids exposed by the paper-semantic gate. -/
+theorem semantic_target_paper_label_id_certificate :
+    SemanticTargetPaperLabelIdCertificate := by
+  exact ⟨rfl, rfl, rfl⟩
+
 /-- Named target proposition for the full paper-semantic kernel-only gate. -/
 def CompletePaperSemanticKernelOnly : Prop :=
   paperSemanticOpenCount = 0
@@ -13077,6 +13109,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    SemanticTargetCountCertificate,
    SemanticTargetStatusPartitionCertificate,
    SemanticTargetPaperLabelCertificate,
+   SemanticTargetPaperLabelIdCertificate,
    SemanticTargetsPartitionCertificate,
    RemainingOpenSemanticTargetsFrontierCertificate,
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
@@ -13153,6 +13186,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        SemanticTargetCountCertificate,
        SemanticTargetStatusPartitionCertificate,
        SemanticTargetPaperLabelCertificate,
+       SemanticTargetPaperLabelIdCertificate,
        SemanticTargetsPartitionCertificate,
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
@@ -13211,9 +13245,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 62 named obstruction and subordinate-certificate statements listed above. -/
+the 63 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 62 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 63 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -13237,6 +13271,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      SemanticTargetCountCertificate,
      SemanticTargetStatusPartitionCertificate,
      SemanticTargetPaperLabelCertificate,
+     SemanticTargetPaperLabelIdCertificate,
      SemanticTargetsPartitionCertificate,
      RemainingOpenSemanticTargetsFrontierCertificate,
      OpenSemanticTargetSurfaceRosterConsistencyCertificate,
@@ -13293,7 +13328,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
        paperSemanticOpenCount,
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 62 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 63 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -13309,6 +13344,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     SemanticTargetCountCertificate /\
     SemanticTargetStatusPartitionCertificate /\
     SemanticTargetPaperLabelCertificate /\
+    SemanticTargetPaperLabelIdCertificate /\
     SemanticTargetsPartitionCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
@@ -13384,6 +13420,7 @@ theorem
     semantic_target_count_certificate,
     semantic_target_status_partition_certificate,
     semantic_target_paper_label_certificate,
+    semantic_target_paper_label_id_certificate,
     semantic_targets_partition_certificate,
     remaining_open_semantic_targets_frontier_certificate,
     open_semantic_target_surface_roster_consistency_certificate,
@@ -13457,6 +13494,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     SemanticTargetCountCertificate /\
     SemanticTargetStatusPartitionCertificate /\
     SemanticTargetPaperLabelCertificate /\
+    SemanticTargetPaperLabelIdCertificate /\
     SemanticTargetsPartitionCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
@@ -13540,6 +13578,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact semantic_target_status_partition_certificate
   constructor
   · exact semantic_target_paper_label_certificate
+  constructor
+  · exact semantic_target_paper_label_id_certificate
   constructor
   · exact semantic_targets_partition_certificate
   constructor
