@@ -902,6 +902,13 @@ def read(path: pathlib.Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
+def readme_axiom_audit_required_count(text: str) -> int | None:
+    match = re.search(r"AxiomAudit prints required=(\d+)", text)
+    if not match:
+        return None
+    return int(match.group(1))
+
+
 def theorem_count(text: str, name: str) -> int:
     match = re.search(rf"theorem\s+{re.escape(name)}\s*:\s*[^=]+=\s*(\d+)", text)
     if not match:
@@ -1464,6 +1471,7 @@ def has_axiom_audit_print(text: str, decl: str) -> bool:
 def main() -> int:
     text = read(GATE)
     axiom_audit_text = read(AXIOM_AUDIT)
+    lean_readme_text = read(ROOT / "README.md")
     open_ids, closed_ids = semantic_target_ids_by_status(text)
     open_count = len(open_ids)
     closed_count = len(closed_ids)
@@ -3101,8 +3109,22 @@ def main() -> int:
         for decl in sorted(required_axiom_audit_decls)
         if not has_axiom_audit_print(axiom_audit_text, decl)
     ]
-    print(f"semantic_target_axiom_audit_prints_required={len(required_axiom_audit_decls)}")
+    required_axiom_audit_count = len(required_axiom_audit_decls)
+    readme_axiom_audit_count = readme_axiom_audit_required_count(lean_readme_text)
+    print(f"semantic_target_axiom_audit_prints_required={required_axiom_audit_count}")
     print(f"semantic_target_axiom_audit_prints_missing={len(missing_axiom_audit_prints)}")
+    print(
+        "semantic_target_readme_axiom_audit_prints_required="
+        + (
+            str(readme_axiom_audit_count)
+            if readme_axiom_audit_count is not None
+            else "missing"
+        )
+    )
+    print(
+        "semantic_target_readme_axiom_audit_prints_required_matches="
+        + ("1" if readme_axiom_audit_count == required_axiom_audit_count else "0")
+    )
 
     failures: list[str] = []
     if open_count != expected_open:
@@ -3936,6 +3958,13 @@ def main() -> int:
         )
     for decl in missing_axiom_audit_prints:
         failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")
+    if readme_axiom_audit_count is None:
+        failures.append("lean4/README.md missing AxiomAudit required print count")
+    elif readme_axiom_audit_count != required_axiom_audit_count:
+        failures.append(
+            "lean4/README.md AxiomAudit required count "
+            f"{readme_axiom_audit_count} != audit count {required_axiom_audit_count}"
+        )
 
     if open_count:
         for path, phrases in FORBIDDEN_WHEN_OPEN.items():
