@@ -164,7 +164,7 @@ the full output bundle, while preserving the current refutations of the
 divergence, feasible/divergence, and paired-output interfaces.
 `part6_remaining_conditional_projection_statement_roster_certificate` pins
 those witness projections and current witness/input/output obstructions in one
-build-gated statement list.
+build-gated 11-term statement list.
 `part6_lattice_embedding_route_obstruction_projection_certificate` then gates
 the Part 6 route-level negative direction: refuting either the nondegenerate
 feasible repair route or full paper-closing support refutes both the exact input
@@ -350,8 +350,8 @@ bidirectional output projections, output iff proofs, output obstructions,
 target/exact/output obstruction-equivalence proofs, joint closure-reduction
 packages and package obstructions, joint route-obstruction packages, statement
 rosters, and package obstructions, bilateral package obstruction statement
-rosters, Part 6 conditional witness interface projections, statement roster,
-and obstructions, Part 6 route-obstruction projections and statement roster,
+rosters, Part 6 conditional witness interface projections, 11-term statement
+roster, and obstructions, Part 6 route-obstruction projections and statement roster,
 Part 6 field-output statement roster, topo
 exact-output projections, statement roster, route nonclosure boundary, and
 field-output statement roster, combined detailed field-output roster package,

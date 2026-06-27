@@ -8544,6 +8544,12 @@ theorem part6RemainingConditionalProjectionStatements_named_current :
        Not Part6LatticeEmbeddingExactClosureInput,
        Not Part6FullPaperClosingFullOutputBundle] := rfl
 
+/-- Build gate: the Part 6 conditional witness statement roster has exactly the
+11 exact-input/output-bundle projection and current-obstruction formulas listed
+above. -/
+theorem part6RemainingConditionalProjectionStatements_length_current :
+    part6RemainingConditionalProjectionStatements.length = 11 := rfl
+
 /-- Build-gated statement roster for the Part 6 conditional witness interface. -/
 def Part6RemainingConditionalProjectionStatementRosterCertificate : Prop :=
   part6RemainingConditionalProjectionStatements =
@@ -8567,6 +8573,7 @@ def Part6RemainingConditionalProjectionStatementRosterCertificate : Prop :=
       Part6FullPaperClosingFeasibleDivergenceWitness),
      Not Part6LatticeEmbeddingExactClosureInput,
      Not Part6FullPaperClosingFullOutputBundle] /\
+    part6RemainingConditionalProjectionStatements.length = 11 /\
     (Part6LatticeEmbeddingExactClosureInput ->
       Part6FullPaperClosingDivergenceWitness) /\
     (Part6LatticeEmbeddingExactClosureInput ->
@@ -8595,6 +8602,7 @@ theorem part6_remaining_conditional_projection_statement_roster_certificate :
     Part6RemainingConditionalProjectionStatementRosterCertificate := by
   exact ⟨
     part6RemainingConditionalProjectionStatements_named_current,
+    part6RemainingConditionalProjectionStatements_length_current,
     part6_lattice_embedding_divergence_witness_of_exact_closure_input,
     part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input,
     part6_lattice_embedding_output_pair_of_exact_closure_input,

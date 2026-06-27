@@ -756,6 +756,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_remaining_conditional_projection_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6RemainingConditionalProjectionStatements",
     "BlackwellDilemma.PaperSemanticGate.part6RemainingConditionalProjectionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.part6RemainingConditionalProjectionStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.Part6RemainingConditionalProjectionStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_remaining_conditional_projection_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_exact_closure_input_not_of_repair_route_not",
@@ -2789,6 +2790,11 @@ def main() -> int:
     print(
         "semantic_target_part6_conditional_witness_statement_roster_proof="
         "part6RemainingConditionalProjectionStatements_named_current"
+    )
+    print("semantic_target_part6_conditional_witness_statement_roster_terms_checked=11")
+    print(
+        "semantic_target_part6_conditional_witness_statement_roster_length_proof="
+        "part6RemainingConditionalProjectionStatements_length_current"
     )
     print(
         "semantic_target_part6_conditional_witness_statement_roster_certificate="
