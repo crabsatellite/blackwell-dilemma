@@ -295,6 +295,8 @@ CORE_OUTPUT_EQUIVALENCE_DECLS = {
 
 EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnly ↔ False",
+    "paperSemanticClosedCount = 3",
+    "closedSemanticTargetIds =",
     "RemainingOpenSemanticTargetsFrontierCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountCertificate",
@@ -1590,6 +1592,10 @@ def top_level_term_is_present(body: str, term: str) -> bool:
         pattern = r"\bpaperSemanticOpenCount\s*=\s*2\b"
     elif term == "openSemanticTargetIds =":
         pattern = r"\bopenSemanticTargetIds\s*="
+    elif term == "paperSemanticClosedCount = 3":
+        pattern = r"\bpaperSemanticClosedCount\s*=\s*3\b"
+    elif term == "closedSemanticTargetIds =":
+        pattern = r"\bclosedSemanticTargetIds\s*="
     elif term == "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =":
         pattern = (
             r"\bopenSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds\s*="
