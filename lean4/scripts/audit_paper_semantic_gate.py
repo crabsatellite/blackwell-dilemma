@@ -1921,6 +1921,20 @@ def main() -> int:
     print_id_drift("semantic_target_open_ids", expected_open_ids, open_ids)
     print_id_drift("semantic_target_closed_ids", expected_closed_ids, closed_ids)
     print(
+        "semantic_target_closed_frontier_certificate="
+        "ClosedSemanticTargetsFrontierCertificate"
+    )
+    print(
+        "semantic_target_closed_frontier_certificate_proof="
+        "closed_semantic_targets_frontier_certificate"
+    )
+    print(
+        "semantic_target_closed_frontier_payloads="
+        "r10_two_regime_label_recalibration_payload,"
+        "part4_lattice_p_monotonicity_frontier_payload,"
+        "r10_threshold_five_state_high_kappa_routing_payload"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate="
         "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
     )
@@ -3933,6 +3947,20 @@ def main() -> int:
         f"semantic_target_closed_ids={','.join(closed_ids)}",
         *id_drift_lines("semantic_target_open_ids", expected_open_ids, open_ids),
         *id_drift_lines("semantic_target_closed_ids", expected_closed_ids, closed_ids),
+        (
+            "semantic_target_closed_frontier_certificate="
+            "ClosedSemanticTargetsFrontierCertificate"
+        ),
+        (
+            "semantic_target_closed_frontier_certificate_proof="
+            "closed_semantic_targets_frontier_certificate"
+        ),
+        (
+            "semantic_target_closed_frontier_payloads="
+            "r10_two_regime_label_recalibration_payload,"
+            "part4_lattice_p_monotonicity_frontier_payload,"
+            "r10_threshold_five_state_high_kappa_routing_payload"
+        ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
