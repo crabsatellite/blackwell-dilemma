@@ -163,6 +163,30 @@ EXPECTED_OPEN_CLOSURE_INPUT_FIELD_SURFACES = {
     ),
 }
 
+EXPECTED_OPEN_OUTPUT_EQUIVALENCE_SURFACES = {
+    "theorem_4_1_part6_lattice_embedding": (
+        "Part6LatticeEmbeddingSemanticKernelTarget",
+        "Part6FullPaperClosingFullOutputBundle",
+        "part6_lattice_embedding_full_output_bundle_of_semantic_kernel_target",
+        "part6_lattice_embedding_semantic_kernel_target_of_full_output_bundle",
+        "part6_lattice_embedding_semantic_kernel_target_iff_full_output_bundle",
+        "not_part6_full_paper_closing_full_output_bundle_current",
+    ),
+    "topo_cluster_random_supercritical_z2": (
+        "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
+        "TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle",
+        "topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_semantic_kernel_target",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_of_same_bridge_full_output_bundle",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_same_bridge_full_output_bundle",
+        "topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet",
+    ),
+}
+
+CORE_OUTPUT_EQUIVALENCE_DECLS = {
+    "Part6FullPaperClosingFullOutputBundle",
+    "not_part6_full_paper_closing_full_output_bundle_current",
+}
+
 FORBIDDEN_WHEN_OPEN = {
     REPO_ROOT / "README.md": [
         "complete kernel-only audit target",
@@ -246,16 +270,38 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_full_output_bundle_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_semantic_kernel_target_of_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_full_output_bundle_of_semantic_kernel_target",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_semantic_kernel_target_iff_full_output_bundle",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_output_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_paper_support_output_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_full_route",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_of_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_semantic_kernel_target",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_of_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetOutputEquivalenceSurface",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaces",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceIds",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceIds_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceCount_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurface_target_to_output",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurface_output_to_target",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurface_target_iff_output",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurface_output_current_obstruction",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsOutputEquivalenceCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_output_equivalence_certificate",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldPayload",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_of_field_payload",
@@ -543,6 +589,46 @@ def open_closure_input_field_surfaces(
     return surfaces
 
 
+def open_output_equivalence_surfaces(
+    text: str,
+) -> list[
+    tuple[
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+    ]
+]:
+    match = re.search(
+        r"def\s+openSemanticTargetOutputEquivalenceSurfaces\s*:\s*"
+        r"List\s+OpenSemanticTargetOutputEquivalenceSurface\s*:=\s*"
+        r"(\[.*?\])\s*(?:/\--.*?-/\s*)?"
+        r"def\s+openSemanticTargetOutputEquivalenceSurfaceIds",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing open semantic target output-equivalence roster")
+
+    surfaces = re.findall(
+        r'id\s*:=\s*"([^"]+)".*?'
+        r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"outputBundle\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetToOutputBundle\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"outputBundleToTarget\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetIffOutputBundle\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"outputBundleCurrentObstruction\s*:=\s*([A-Za-z0-9_'.]+)",
+        match.group(1),
+        flags=re.DOTALL,
+    )
+    if not surfaces:
+        raise SystemExit("no open semantic target output-equivalence entries found")
+    return surfaces
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -571,6 +657,10 @@ def main() -> int:
     closure_input_field_surface_ids = [
         surface[0] for surface in closure_input_field_surfaces
     ]
+    output_equivalence_surfaces = open_output_equivalence_surfaces(text)
+    output_equivalence_surface_ids = [
+        surface[0] for surface in output_equivalence_surfaces
+    ]
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -592,6 +682,10 @@ def main() -> int:
     print(
         "semantic_target_closure_input_field_surface_ids="
         + ",".join(closure_input_field_surface_ids)
+    )
+    print(
+        "semantic_target_output_equivalence_surface_ids="
+        + ",".join(output_equivalence_surface_ids)
     )
     print(
         "semantic_target_kernel_surface_targets="
@@ -888,6 +982,38 @@ def main() -> int:
         "remaining_open_semantic_targets_closure_input_output_certificate"
     )
     print(
+        "semantic_target_output_equivalence_targets="
+        + ",".join(surface[1] for surface in output_equivalence_surfaces)
+    )
+    print(
+        "semantic_target_output_equivalence_bundles="
+        + ",".join(surface[2] for surface in output_equivalence_surfaces)
+    )
+    print(
+        "semantic_target_output_equivalence_target_to_output_proofs="
+        + ",".join(surface[3] for surface in output_equivalence_surfaces)
+    )
+    print(
+        "semantic_target_output_equivalence_output_to_target_proofs="
+        + ",".join(surface[4] for surface in output_equivalence_surfaces)
+    )
+    print(
+        "semantic_target_output_equivalence_iff_proofs="
+        + ",".join(surface[5] for surface in output_equivalence_surfaces)
+    )
+    print(
+        "semantic_target_output_equivalence_obstructions="
+        + ",".join(surface[6] for surface in output_equivalence_surfaces)
+    )
+    print(
+        "semantic_target_output_equivalence_certificate="
+        "RemainingOpenSemanticTargetsOutputEquivalenceCertificate"
+    )
+    print(
+        "semantic_target_output_equivalence_certificate_proof="
+        "remaining_open_semantic_targets_output_equivalence_certificate"
+    )
+    print(
         "semantic_target_closure_input_field_payloads="
         + ",".join(surface[2] for surface in closure_input_field_surfaces)
     )
@@ -1078,6 +1204,29 @@ def main() -> int:
         required_axiom_audit_decls.add(
             f"BlackwellDilemma.PaperSemanticGate.{input_certificate_proof}"
         )
+    for (
+        _target_id,
+        target_prop,
+        output_bundle,
+        target_to_output_bundle,
+        output_bundle_to_target,
+        target_iff_output_bundle,
+        output_bundle_obstruction,
+    ) in output_equivalence_surfaces:
+        def output_decl(decl: str) -> str:
+            prefix = (
+                "BlackwellDilemma"
+                if decl in CORE_OUTPUT_EQUIVALENCE_DECLS
+                else "BlackwellDilemma.PaperSemanticGate"
+            )
+            return f"{prefix}.{decl}"
+
+        required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_prop}")
+        required_axiom_audit_decls.add(output_decl(output_bundle))
+        required_axiom_audit_decls.add(output_decl(target_to_output_bundle))
+        required_axiom_audit_decls.add(output_decl(output_bundle_to_target))
+        required_axiom_audit_decls.add(output_decl(target_iff_output_bundle))
+        required_axiom_audit_decls.add(output_decl(output_bundle_obstruction))
     print(f"semantic_target_axiom_audit_prints_required={len(required_axiom_audit_decls)}")
 
     failures: list[str] = []
@@ -1113,9 +1262,17 @@ def main() -> int:
         failures.append(
             f"closure-input field surface ids {closure_input_field_surface_ids!r} != open semantic target ids {open_ids!r}"
         )
+    if output_equivalence_surface_ids != open_ids:
+        failures.append(
+            f"output-equivalence surface ids {output_equivalence_surface_ids!r} != open semantic target ids {open_ids!r}"
+        )
     if closure_input_surface_ids != closure_input_field_surface_ids:
         failures.append(
             f"closure-input surface ids {closure_input_surface_ids!r} != field surface ids {closure_input_field_surface_ids!r}"
+        )
+    if output_equivalence_surface_ids != closure_input_surface_ids:
+        failures.append(
+            f"output-equivalence surface ids {output_equivalence_surface_ids!r} != closure-input surface ids {closure_input_surface_ids!r}"
         )
     for (
         target_id,
@@ -1507,6 +1664,59 @@ def main() -> int:
     )
     for target_id in missing_closure_input_field_surface_ids:
         failures.append(f"missing closure-input field surface id: {target_id}")
+    for (
+        target_id,
+        target_prop,
+        output_bundle,
+        target_to_output_bundle,
+        output_bundle_to_target,
+        target_iff_output_bundle,
+        output_bundle_obstruction,
+    ) in output_equivalence_surfaces:
+        expected_output_surface = EXPECTED_OPEN_OUTPUT_EQUIVALENCE_SURFACES.get(
+            target_id
+        )
+        if expected_output_surface is None:
+            failures.append(f"unexpected output-equivalence surface id: {target_id}")
+            continue
+        (
+            expected_target_prop,
+            expected_output_bundle,
+            expected_target_to_output_bundle,
+            expected_output_bundle_to_target,
+            expected_target_iff_output_bundle,
+            expected_output_bundle_obstruction,
+        ) = expected_output_surface
+        if target_prop != expected_target_prop:
+            failures.append(
+                f"{target_id} output target prop {target_prop!r} != expected {expected_target_prop!r}"
+            )
+        if output_bundle != expected_output_bundle:
+            failures.append(
+                f"{target_id} output bundle {output_bundle!r} != expected {expected_output_bundle!r}"
+            )
+        if target_to_output_bundle != expected_target_to_output_bundle:
+            failures.append(
+                f"{target_id} target-to-output proof {target_to_output_bundle!r} != expected {expected_target_to_output_bundle!r}"
+            )
+        if output_bundle_to_target != expected_output_bundle_to_target:
+            failures.append(
+                f"{target_id} output-to-target proof {output_bundle_to_target!r} != expected {expected_output_bundle_to_target!r}"
+            )
+        if target_iff_output_bundle != expected_target_iff_output_bundle:
+            failures.append(
+                f"{target_id} target iff output proof {target_iff_output_bundle!r} != expected {expected_target_iff_output_bundle!r}"
+            )
+        if output_bundle_obstruction != expected_output_bundle_obstruction:
+            failures.append(
+                f"{target_id} output obstruction {output_bundle_obstruction!r} != expected {expected_output_bundle_obstruction!r}"
+            )
+    missing_output_equivalence_surface_ids = sorted(
+        set(EXPECTED_OPEN_OUTPUT_EQUIVALENCE_SURFACES)
+        - set(output_equivalence_surface_ids)
+    )
+    for target_id in missing_output_equivalence_surface_ids:
+        failures.append(f"missing output-equivalence surface id: {target_id}")
     for decl in sorted(required_axiom_audit_decls):
         if not has_axiom_audit_print(axiom_audit_text, decl):
             failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")

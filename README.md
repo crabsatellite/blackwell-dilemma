@@ -134,6 +134,13 @@ the repaired bridge, pointwise-on-giant route, paper/support-surface repair
 fields, strict supercritical probability domain, flat and giant-event mass
 lower bounds, unit-interval loss range, and boxed-torus family lower-bound
 surface.
+The output layer is now reversible where that is semantically valid:
+`remaining_open_semantic_targets_output_equivalence_certificate` proves the
+Part 6 semantic target equivalent to `Part6FullPaperClosingFullOutputBundle`,
+and proves the topo semantic target equivalent to the same-witness bundle
+`TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle`. The older topo
+separated-existential output bundle remains only a forward projection, because
+its separate witnesses cannot reconstruct one repaired bridge.
 Those field payloads are now also listed in the typed
 `openSemanticTargetClosureInputFieldSurfaces` roster, with the same ids as the
 open semantic targets and with parser-checked payload proofs, reverse
@@ -172,7 +179,9 @@ payload-derived progress/nonclosure/frontier projections, cross-surface
 target/route-map/closure/frontier equality, payload-derived route-map and
 route/closure certificate-obstruction projections, the payload route-map
 certificate, closure-input sufficient-route/output/field certificates and obstructions,
-field-roster id, payload-to-input/iff consistency, payload-obstruction, and
+output-equivalence target/output bundles, bidirectional output projections,
+output iff proofs, output obstructions, field-roster id,
+payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency,
 surface-roster consistency, and AxiomAudit coverage. The public
 verification command set includes the same Lean build, PaperSemanticGate build,

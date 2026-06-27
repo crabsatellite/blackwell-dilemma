@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/top-level complete-obstruction certificate/closure-input sufficient-route, output, field, and field-obstruction certificates/field-roster id, payload-to-input/iff consistency, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=168 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/top-level complete-obstruction certificate/closure-input sufficient-route, output, field, field-obstruction, and output-equivalence certificates/output-equivalence roster id, target/output, bidirectional projection, iff, and obstruction consistency/field-roster id, payload-to-input/iff consistency, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=192 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -316,6 +316,13 @@ paper support with sentimental reversal; topo exposes the repaired bridge,
 pointwise-on-giant route, paper/support-surface repair fields, strict
 supercritical domain, flat and giant-event mass lower bounds, unit-interval
 loss range, and boxed-torus family lower-bound surface.
+`remaining_open_semantic_targets_output_equivalence_certificate` also gates the
+reversible output layer: Part 6 is equivalent to
+`Part6FullPaperClosingFullOutputBundle`, while topo is equivalent to the
+same-witness bundle
+`TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle`. The older topo
+full-output bundle with separated existential witnesses remains only a forward
+projection, since it cannot reconstruct one repaired bridge in Lean.
 The same field payloads and field certificates are listed in
 `openSemanticTargetClosureInputFieldSurfaces`, whose ids are checked against
 the open semantic-target roster by Lean and by `audit_paper_semantic_gate.py`;

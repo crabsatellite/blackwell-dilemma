@@ -338,6 +338,11 @@ the paired output layer, and the full output bundle; the current carrier still
 refutes that route directly and again through each output-level obstruction,
 including the paired output obstruction
 `not_part6_nondegenerate_feasible_repair_route_current_via_output_pair`.
+The paper-semantic gate now also proves
+`part6_lattice_embedding_semantic_kernel_target_iff_full_output_bundle`, so the
+Part 6 full output bundle is not merely a consequence of the target; it is a
+reversible target-output surface, still refuted by
+`not_part6_full_paper_closing_full_output_bundle_current`.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
 and closed-unit current-obstruction certificate together with the
@@ -1097,6 +1102,13 @@ For full kernel-pure cover (v2.0 future iteration):
   supercritical probability domain, flat and giant-event mass lower bounds,
   unit-interval topological-loss range, and boxed-torus family lower-bound
   surface.
+  `remaining_open_semantic_targets_output_equivalence_certificate` gates the
+  reversible output layer for the open targets: Part 6 is equivalent to
+  `Part6FullPaperClosingFullOutputBundle`, while topo is equivalent to
+  `TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle`. The older topo
+  full-output bundle with separated existential witnesses remains a forward
+  projection only; it is deliberately not used to reconstruct one repaired
+  bridge.
   `openSemanticTargetClosureInputFieldSurfaces` lists the same field payloads
   and field certificates with ids checked against the open semantic-target
   roster by both Lean theorems and the semantic audit script, and carries
