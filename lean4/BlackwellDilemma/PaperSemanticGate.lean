@@ -6140,6 +6140,143 @@ theorem part6_remaining_conditional_projection_certificate :
   · exact remaining_open_semantic_targets_exact_closure_input_output_certificate
   exact remaining_open_semantic_targets_joint_closure_reduction_certificate
 
+/-- A refutation of the Part 6 repair route refutes the exact Part 6 input. -/
+theorem part6_lattice_embedding_exact_closure_input_not_of_repair_route_not :
+    Not Part6NondegenerateFeasibleRepairRoute ->
+      Not Part6LatticeEmbeddingExactClosureInput := by
+  intro hroute hinput
+  exact hroute
+    ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mp
+      (part6_lattice_embedding_semantic_kernel_target_of_exact_closure_input
+        hinput))
+
+/-- A refutation of full Part 6 paper support refutes the exact Part 6
+input. -/
+theorem part6_lattice_embedding_exact_closure_input_not_of_full_support_not :
+    Not Part6FullPaperClosingSupport ->
+      Not Part6LatticeEmbeddingExactClosureInput := by
+  intro hsupport hinput
+  exact hsupport
+    ((part6_lattice_embedding_semantic_kernel_target_iff_full_support).mp
+      (part6_lattice_embedding_semantic_kernel_target_of_exact_closure_input
+        hinput))
+
+/-- A refutation of the Part 6 repair route refutes the full output
+bundle. -/
+theorem part6_lattice_embedding_full_output_bundle_not_of_repair_route_not :
+    Not Part6NondegenerateFeasibleRepairRoute ->
+      Not Part6FullPaperClosingFullOutputBundle := by
+  intro hroute hbundle
+  exact hroute
+    ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mp
+      (part6_lattice_embedding_semantic_kernel_target_of_full_output_bundle
+        hbundle))
+
+/-- A refutation of full Part 6 paper support refutes the full output
+bundle. -/
+theorem part6_lattice_embedding_full_output_bundle_not_of_full_support_not :
+    Not Part6FullPaperClosingSupport ->
+      Not Part6FullPaperClosingFullOutputBundle := by
+  intro hsupport hbundle
+  exact hsupport
+    ((part6_lattice_embedding_semantic_kernel_target_iff_full_support).mp
+      (part6_lattice_embedding_semantic_kernel_target_of_full_output_bundle
+        hbundle))
+
+/-- The Part 6 target obstruction is definitionally the repair-route
+obstruction. -/
+theorem part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route :
+    Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6NondegenerateFeasibleRepairRoute := by
+  constructor
+  · intro htarget hroute
+    exact htarget
+      ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mpr
+        hroute)
+  · intro hroute htarget
+    exact hroute
+      ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mp
+        htarget)
+
+/-- The Part 6 target obstruction is equivalent to the full-support
+obstruction. -/
+theorem part6_lattice_embedding_semantic_kernel_target_not_iff_full_support :
+    Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6FullPaperClosingSupport := by
+  constructor
+  · intro htarget hsupport
+    exact htarget
+      ((part6_lattice_embedding_semantic_kernel_target_iff_full_support).mpr
+        hsupport)
+  · intro hsupport htarget
+    exact hsupport
+      ((part6_lattice_embedding_semantic_kernel_target_iff_full_support).mp
+        htarget)
+
+/-- The Part 6 repair-route and full-support refutations are equivalent because
+the two route surfaces are equivalent. -/
+theorem part6_lattice_embedding_repair_route_not_iff_full_support_not :
+    Not Part6NondegenerateFeasibleRepairRoute ↔
+      Not Part6FullPaperClosingSupport := by
+  constructor
+  · intro hroute hsupport
+    exact hroute
+      ((part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support).mpr
+        hsupport)
+  · intro hsupport hroute
+    exact hsupport
+      ((part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support).mp
+        hroute)
+
+/-- Dedicated route-obstruction projection certificate for the Part 6 target.
+It records that refuting either named Part 6 route surface is enough to refute
+the exact semantic input and full output bundle, with the route refutations
+themselves equivalent to the target obstruction. -/
+def Part6LatticeEmbeddingRouteObstructionProjectionCertificate : Prop :=
+  (Not Part6NondegenerateFeasibleRepairRoute ->
+    Not Part6LatticeEmbeddingExactClosureInput) /\
+    (Not Part6FullPaperClosingSupport ->
+      Not Part6LatticeEmbeddingExactClosureInput) /\
+    (Not Part6NondegenerateFeasibleRepairRoute ->
+      Not Part6FullPaperClosingFullOutputBundle) /\
+    (Not Part6FullPaperClosingSupport ->
+      Not Part6FullPaperClosingFullOutputBundle) /\
+    (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6NondegenerateFeasibleRepairRoute) /\
+    (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6FullPaperClosingSupport) /\
+    (Not Part6NondegenerateFeasibleRepairRoute ↔
+      Not Part6FullPaperClosingSupport) /\
+    Not Part6LatticeEmbeddingSemanticKernelTarget /\
+    Not Part6NondegenerateFeasibleRepairRoute /\
+    Not Part6FullPaperClosingSupport /\
+    Not Part6LatticeEmbeddingExactClosureInput /\
+    Not Part6FullPaperClosingFullOutputBundle /\
+    Part6RemainingConditionalProjectionCertificate /\
+    RemainingOpenSemanticTargetsObstructionEquivalenceCertificate
+
+/-- The current Part 6 route obstruction projects down to every exact-output
+payload used by the remaining open semantic target. -/
+theorem part6_lattice_embedding_route_obstruction_projection_certificate :
+    Part6LatticeEmbeddingRouteObstructionProjectionCertificate := by
+  exact ⟨
+    part6_lattice_embedding_exact_closure_input_not_of_repair_route_not,
+    part6_lattice_embedding_exact_closure_input_not_of_full_support_not,
+    part6_lattice_embedding_full_output_bundle_not_of_repair_route_not,
+    part6_lattice_embedding_full_output_bundle_not_of_full_support_not,
+    part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route,
+    part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,
+    part6_lattice_embedding_repair_route_not_iff_full_support_not,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    not_part6_nondegenerate_feasible_repair_route_current,
+    not_part6_full_paper_closing_support_current,
+    part6_lattice_embedding_exact_closure_input_not_of_repair_route_not
+      not_part6_nondegenerate_feasible_repair_route_current,
+    part6_lattice_embedding_full_output_bundle_not_of_repair_route_not
+      not_part6_nondegenerate_feasible_repair_route_current,
+    part6_remaining_conditional_projection_certificate,
+    remaining_open_semantic_targets_obstruction_equivalence_certificate⟩
+
 /-- Dedicated topo projection certificate from the exact input and
 same-witness bundle down to the named route/output layers.  It also records
 that the currently inhabited support-surface repair layer is still not enough
@@ -6895,6 +7032,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
+    Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
@@ -6923,6 +7061,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
   constructor
   · exact part6_remaining_conditional_projection_certificate
+  constructor
+  · exact part6_lattice_embedding_route_obstruction_projection_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_exact_output_projection_certificate
   constructor

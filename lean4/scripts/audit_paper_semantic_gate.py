@@ -417,6 +417,15 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_full_output_bundle",
     "BlackwellDilemma.PaperSemanticGate.Part6RemainingConditionalProjectionCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_remaining_conditional_projection_certificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_exact_closure_input_not_of_repair_route_not",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_exact_closure_input_not_of_full_support_not",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_full_output_bundle_not_of_repair_route_not",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_full_output_bundle_not_of_full_support_not",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_semantic_kernel_target_not_iff_full_support",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_repair_route_not_iff_full_support_not",
+    "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingRouteObstructionProjectionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_route_obstruction_projection_certificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input",
@@ -1583,6 +1592,32 @@ def main() -> int:
     print(
         "semantic_target_part6_conditional_witness_certificate_proof="
         "part6_remaining_conditional_projection_certificate"
+    )
+    print(
+        "semantic_target_part6_route_obstruction_projection_proofs="
+        "part6_lattice_embedding_exact_closure_input_not_of_repair_route_not,"
+        "part6_lattice_embedding_exact_closure_input_not_of_full_support_not,"
+        "part6_lattice_embedding_full_output_bundle_not_of_repair_route_not,"
+        "part6_lattice_embedding_full_output_bundle_not_of_full_support_not,"
+        "part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route,"
+        "part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,"
+        "part6_lattice_embedding_repair_route_not_iff_full_support_not"
+    )
+    print(
+        "semantic_target_part6_route_obstruction_projection_current="
+        "part6_lattice_embedding_semantic_kernel_target_notYet,"
+        "not_part6_nondegenerate_feasible_repair_route_current,"
+        "not_part6_full_paper_closing_support_current,"
+        "part6_lattice_embedding_exact_closure_input_notYet,"
+        "not_part6_full_paper_closing_full_output_bundle_current"
+    )
+    print(
+        "semantic_target_part6_route_obstruction_projection_certificate="
+        "Part6LatticeEmbeddingRouteObstructionProjectionCertificate"
+    )
+    print(
+        "semantic_target_part6_route_obstruction_projection_certificate_proof="
+        "part6_lattice_embedding_route_obstruction_projection_certificate"
     )
     print(
         "semantic_target_topo_exact_output_projection_exact_input_proofs="
