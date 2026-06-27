@@ -151,6 +151,12 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_progress_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_nonclosure_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceTargetRoutes_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceTargetRouteCertificates_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceTargetRouteObstructions_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceClosureRoutes_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceClosureRouteCertificates_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceClosureRouteObstructions_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceFrontierProgressCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceFrontierNonclosureCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceCurrentFrontierCertificates_current",
@@ -479,6 +485,30 @@ def main() -> int:
     print(
         "semantic_target_frontier_payload_frontier_certificate_proofs="
         + ",".join(surface[16] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_surface_target_route_consistency="
+        "openSemanticTargetSurfaceTargetRoutes_current"
+    )
+    print(
+        "semantic_target_surface_target_route_certificate_consistency="
+        "openSemanticTargetSurfaceTargetRouteCertificates_current"
+    )
+    print(
+        "semantic_target_surface_target_route_obstruction_consistency="
+        "openSemanticTargetSurfaceTargetRouteObstructions_current"
+    )
+    print(
+        "semantic_target_surface_closure_route_consistency="
+        "openSemanticTargetSurfaceClosureRoutes_current"
+    )
+    print(
+        "semantic_target_surface_closure_route_certificate_consistency="
+        "openSemanticTargetSurfaceClosureRouteCertificates_current"
+    )
+    print(
+        "semantic_target_surface_closure_route_obstruction_consistency="
+        "openSemanticTargetSurfaceClosureRouteObstructions_current"
     )
     print(
         "semantic_target_surface_frontier_progress_consistency="

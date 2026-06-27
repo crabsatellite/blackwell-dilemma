@@ -350,12 +350,18 @@
             "semantic_target_frontier_payload_nonclosure_certificate_proofs=part6_lattice_embedding_frontier_payload_frontier_nonclosure_certificate,topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate",
             "semantic_target_frontier_payload_frontier_certificates=Part6CurrentFrontierCertificate,RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate",
             "semantic_target_frontier_payload_frontier_certificate_proofs=part6_lattice_embedding_frontier_payload_current_frontier_certificate,topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate",
+            "semantic_target_surface_target_route_consistency=openSemanticTargetSurfaceTargetRoutes_current",
+            "semantic_target_surface_target_route_certificate_consistency=openSemanticTargetSurfaceTargetRouteCertificates_current",
+            "semantic_target_surface_target_route_obstruction_consistency=openSemanticTargetSurfaceTargetRouteObstructions_current",
+            "semantic_target_surface_closure_route_consistency=openSemanticTargetSurfaceClosureRoutes_current",
+            "semantic_target_surface_closure_route_certificate_consistency=openSemanticTargetSurfaceClosureRouteCertificates_current",
+            "semantic_target_surface_closure_route_obstruction_consistency=openSemanticTargetSurfaceClosureRouteObstructions_current",
             "semantic_target_surface_frontier_progress_consistency=openSemanticTargetSurfaceFrontierProgressCertificates_current",
             "semantic_target_surface_frontier_nonclosure_consistency=openSemanticTargetSurfaceFrontierNonclosureCertificates_current",
             "semantic_target_surface_current_frontier_consistency=openSemanticTargetSurfaceCurrentFrontierCertificates_current",
             "semantic_target_surface_roster_consistency_certificate=OpenSemanticTargetSurfaceRosterConsistencyCertificate",
             "semantic_target_surface_roster_consistency_certificate_proof=open_semantic_target_surface_roster_consistency_certificate",
-            "semantic_target_axiom_audit_prints_required=85"
+            "semantic_target_axiom_audit_prints_required=91"
           ]
         }
       ]
