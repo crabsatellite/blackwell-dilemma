@@ -238,6 +238,10 @@ Current results:
 | ledger input classes | cat1Mathlib=435, cat2External=0, cat3PaperNovel=0, mixed=0, notInput=63 | all live theorem dependencies reduced to Cat 1 or explicit theorem assumptions; dead-end routes require replacement |
 | ledger Cat 3 subtype | carrier=0, hypothesisPredicate=0, structuralEquation=0, workingAssumption=0, derivedTheorem=329, notCat3=169 | paper primitives represented transparently; no hidden proof-carrying global axioms |
 
+The paper semantic audit also checks that every `*_named_current` theorem has
+the matching `*_length_current` theorem in `PaperSemanticGate.lean`, so roster
+membership and roster length evidence cannot drift apart silently.
+
 The current theorem surface is kernel-clean in the source-level sense:
 `#print axioms` output contains only Lean/Mathlib kernel axioms, and
 `audit_conditional_surface.py` exposes no unresolved explicit bridge, witness,

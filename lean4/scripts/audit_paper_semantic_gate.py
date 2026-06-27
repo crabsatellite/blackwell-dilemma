@@ -1619,6 +1619,31 @@ def top_level_statement_roster_missing_terms(text: str) -> list[str]:
     ]
 
 
+def named_current_roster_missing_length_proofs(text: str) -> tuple[int, list[str]]:
+    roster_names = sorted(
+        set(
+            re.findall(
+                r"\btheorem\s+([A-Za-z0-9_]+_named_current)\s*:",
+                text,
+                flags=re.DOTALL,
+            )
+        )
+    )
+    missing: list[str] = []
+    for roster_name in roster_names:
+        length_name = roster_name.removesuffix("_named_current") + "_length_current"
+        if (
+            re.search(
+                rf"\btheorem\s+{re.escape(length_name)}\s*:",
+                text,
+                flags=re.DOTALL,
+            )
+            is None
+        ):
+            missing.append(f"{roster_name}->{length_name}")
+    return len(roster_names), missing
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -1678,6 +1703,10 @@ def main() -> int:
     missing_top_level_statement_roster_terms = (
         top_level_statement_roster_missing_terms(text)
     )
+    (
+        named_current_roster_count,
+        missing_named_current_roster_length_proofs,
+    ) = named_current_roster_missing_length_proofs(text)
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -1762,6 +1791,18 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_missing="
         f"{len(missing_top_level_statement_roster_terms)}"
+    )
+    print(
+        "semantic_target_named_current_roster_length_pairs_checked="
+        f"{named_current_roster_count}"
+    )
+    print(
+        "semantic_target_named_current_roster_missing_length_proofs_count="
+        f"{len(missing_named_current_roster_length_proofs)}"
+    )
+    print(
+        "semantic_target_named_current_roster_missing_length_proofs="
+        + ",".join(missing_named_current_roster_length_proofs)
     )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
@@ -3610,6 +3651,11 @@ def main() -> int:
         failures.append(
             "top-level current obstruction statement roster missing terms: "
             + ",".join(missing_top_level_statement_roster_terms)
+        )
+    if missing_named_current_roster_length_proofs:
+        failures.append(
+            "named-current rosters missing length proofs: "
+            + ",".join(missing_named_current_roster_length_proofs)
         )
     if kernel_surface_ids != open_ids:
         failures.append(
