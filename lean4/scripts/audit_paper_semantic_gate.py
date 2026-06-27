@@ -326,6 +326,8 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate",
     "TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate",
     "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
+    "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =",
+    "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =",
     "RemainingOpenSemanticTargetsOutputEquivalenceCertificate",
     "OpenSemanticTargetOutputEquivalenceNamedRosterCertificate",
     "OpenSemanticTargetOutputEquivalenceStatementRosterCertificate",
@@ -1432,6 +1434,27 @@ def open_obstruction_equivalence_surfaces(
     return surfaces
 
 
+def top_level_term_is_present(body: str, term: str) -> bool:
+    if term == "Not CompletePaperSemanticKernelOnly":
+        pattern = r"\bNot\s+CompletePaperSemanticKernelOnly\b"
+    elif term == "paperSemanticOpenCount = 2":
+        pattern = r"\bpaperSemanticOpenCount\s*=\s*2\b"
+    elif term == "openSemanticTargetIds =":
+        pattern = r"\bopenSemanticTargetIds\s*="
+    elif term == "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =":
+        pattern = (
+            r"\bopenSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds\s*="
+        )
+    elif term == "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =":
+        pattern = (
+            r"\bopenSemanticTargetClosureInputFieldOutputDetailedStatementRosters"
+            r"\.length\s*="
+        )
+    else:
+        pattern = rf"\b{re.escape(term)}\b"
+    return re.search(pattern, body) is not None
+
+
 def top_level_current_obstruction_missing_conjuncts(text: str) -> list[str]:
     match = re.search(
         r"def\s+CompletePaperSemanticKernelOnlyCurrentObstructionCertificate\s*:\s*"
@@ -1447,7 +1470,7 @@ def top_level_current_obstruction_missing_conjuncts(text: str) -> list[str]:
     return [
         conjunct
         for conjunct in EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS
-        if re.search(rf"\b{re.escape(conjunct)}\b", body) is None
+        if not top_level_term_is_present(body, conjunct)
     ]
 
 
@@ -1464,21 +1487,10 @@ def top_level_statement_roster_missing_terms(text: str) -> list[str]:
         )
     body = match.group(1)
 
-    def term_is_present(term: str) -> bool:
-        if term == "Not CompletePaperSemanticKernelOnly":
-            pattern = r"\bNot\s+CompletePaperSemanticKernelOnly\b"
-        elif term == "paperSemanticOpenCount = 2":
-            pattern = r"\bpaperSemanticOpenCount\s*=\s*2\b"
-        elif term == "openSemanticTargetIds =":
-            pattern = r"\bopenSemanticTargetIds\s*="
-        else:
-            pattern = rf"\b{re.escape(term)}\b"
-        return re.search(pattern, body) is not None
-
     return [
         term
         for term in EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_STATEMENT_TERMS
-        if not term_is_present(term)
+        if not top_level_term_is_present(body, term)
     ]
 
 

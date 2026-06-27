@@ -11817,6 +11817,10 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+     openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+     paperSemanticOpenCount,
    RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
    OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
    OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11872,6 +11876,10 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
        RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+         openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+         paperSemanticOpenCount,
        RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
        OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
        OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11930,6 +11938,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
      RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+       openSemanticTargetIds,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+       paperSemanticOpenCount,
      RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
      OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
      OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11980,6 +11992,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
@@ -12036,6 +12052,8 @@ theorem
     topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate,
     remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
     remaining_open_semantic_targets_output_equivalence_certificate,
     open_semantic_target_output_equivalence_named_roster_certificate,
     open_semantic_target_output_equivalence_statement_roster_certificate,
@@ -12092,6 +12110,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
@@ -12204,6 +12226,12 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   constructor
