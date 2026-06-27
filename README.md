@@ -40,7 +40,8 @@ the live ledger. The two remaining counted conditional Prop interfaces are
 identity-pinned to the Part 6 divergence and feasible-divergence witness
 surfaces, with named current refutation and closure pairs; the conditional
 surface audit also publishes expected/missing/unexpected drift counts for
-those pinned identities. Complete
+those pinned identities. The public evidence manifest now also checks the
+kernel-surface zero escape lines and the conditional zero-drift lines. Complete
 paper-semantic closure is separately gated in
 `BlackwellDilemma/PaperSemanticGate.lean`; while that gate reports open
 Part 6 lattice-embedding and random-supercritical percolation semantic targets,

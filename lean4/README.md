@@ -253,7 +253,9 @@ The current theorem surface is kernel-clean in the source-level sense:
 `audit_conditional_surface.py` exposes no unresolved explicit bridge, witness,
 or carrier-interface hypotheses. The same audit now publishes
 expected/missing/unexpected drift counts for the pinned conditional interface,
-current-refutation, and current-closure identities. Complete paper-semantic
+current-refutation, and current-closure identities; the public evidence
+manifest also pins those zero-drift lines and the zero source-level escape
+surface from `audit_kernel_surface.py`. Complete paper-semantic
 closure is the stronger target tracked by `PaperSemanticGate.lean`; that claim
 is not made until the semantic gate reaches open=0.
 The named Lean target `CompletePaperSemanticKernelOnly` is definitionally

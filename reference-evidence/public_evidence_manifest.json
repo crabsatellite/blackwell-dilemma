@@ -731,6 +731,29 @@
           ]
         },
         {
+          "id": "kernel_surface_zero_escape_audit",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "cwd": "lean4",
+          "stdout_contains": [
+            "project_lean_files=75",
+            "axiom=0",
+            "constant=0",
+            "opaque=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0",
+            "axiom_OPEN=0",
+            "axiom_paper_Def=0",
+            "axiom_workingAssumption=0",
+            "axiom_paper_witness=0",
+            "decl_workingAssumption=0",
+            "def_OPEN=0",
+            "theorem_OPEN=0"
+          ]
+        },
+        {
           "id": "conditional_surface_identity_audit",
           "type": "python_script",
           "path": "lean4/scripts/audit_conditional_surface.py",
@@ -740,21 +763,33 @@
             "prop_interface_names=Part6FullPaperClosingDivergenceWitness,Part6FullPaperClosingFeasibleDivergenceWitness",
             "expected_prop_interface_names=Part6FullPaperClosingDivergenceWitness,Part6FullPaperClosingFeasibleDivergenceWitness",
             "missing_expected_prop_interface_names_count=0",
+            "missing_expected_prop_interface_names=",
             "unexpected_prop_interface_names_count=0",
+            "unexpected_prop_interface_names=",
             "conditional_theorem_signatures=0",
             "interfaces_with_current_refutation=2",
             "current_refutation_pairs=not_Part6FullPaperClosingDivergenceWitness_current->Part6FullPaperClosingDivergenceWitness,not_Part6FullPaperClosingFeasibleDivergenceWitness_current->Part6FullPaperClosingFeasibleDivergenceWitness",
             "expected_current_refutation_pairs=not_Part6FullPaperClosingDivergenceWitness_current->Part6FullPaperClosingDivergenceWitness,not_Part6FullPaperClosingFeasibleDivergenceWitness_current->Part6FullPaperClosingFeasibleDivergenceWitness",
             "missing_expected_current_refutation_pairs_count=0",
+            "missing_expected_current_refutation_pairs=",
             "unexpected_current_refutation_pairs_count=0",
+            "unexpected_current_refutation_pairs=",
             "interfaces_with_current_closure=2",
             "current_closure_pairs=part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness,part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingFeasibleDivergenceWitness,part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness",
             "expected_current_closure_pairs=part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness,part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingFeasibleDivergenceWitness,part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness",
             "missing_expected_current_closure_pairs_count=0",
+            "missing_expected_current_closure_pairs=",
             "unexpected_current_closure_pairs_count=0",
+            "unexpected_current_closure_pairs=",
             "unresolved_prop_interfaces=0",
             "unresolved_interface_names=",
-            "conditional_signatures_using_unresolved_interfaces=0"
+            "unresolved_prop_def_interfaces=0",
+            "unresolved_structure_interfaces=0",
+            "unresolved_class_interfaces=0",
+            "conditional_signatures_using_unresolved_interfaces=0",
+            "conditional_signatures_using_unresolved_prop_def_interfaces=0",
+            "conditional_signatures_using_unresolved_structure_interfaces=0",
+            "conditional_signatures_using_unresolved_class_interfaces=0"
           ]
         }
       ]
