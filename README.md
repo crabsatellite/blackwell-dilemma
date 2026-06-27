@@ -207,6 +207,10 @@ open semantic targets and with parser-checked payload proofs, reverse
 payload-to-input projections, payload/input iff proofs, current payload
 obstructions, certificate proofs, and a cross-target field-obstruction
 certificate.
+`open_semantic_target_closure_input_field_roster_certificate` additionally
+pins the named Part 6/topo closure-input, field-payload, payload-obstruction,
+and field-certificate rosters, and proves field-payload obstruction equivalent
+to sufficient-input obstruction for each field surface.
 The top-level
 `completePaperSemanticKernelOnly_current_obstruction_certificate` also gates
 the current non-complete claim against `open=2`, the exact remaining target ids,
