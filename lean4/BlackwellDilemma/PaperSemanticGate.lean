@@ -12333,12 +12333,34 @@ def openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds :
   ["theorem_4_1_part6_lattice_embedding",
    "topo_cluster_random_supercritical_z2"]
 
+/-- Detailed field-output statement roster ids paired with the paper-facing
+open ledger labels. -/
+def openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds
+    (openSemanticTargets.map (fun target => target.paperLabel))
+
 /-- Build gate: the detailed field-output statement roster ids are exactly the
 remaining open semantic target ids. -/
 theorem
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current :
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
       openSemanticTargetIds := rfl
+
+/-- Build gate: the detailed field-output statement roster keeps the same
+`(id, paperLabel)` projection as the open semantic ledger. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
+
+/-- Build gate: kernel-surface and detailed field-output statement rosters are
+synchronized on target ids paired with paper-facing labels. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels := rfl
 
 /-- Build gate: the detailed field-output statement roster count is exactly the
 current open semantic target count. -/
@@ -12369,6 +12391,10 @@ def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCe
     Prop :=
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
       openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
       paperSemanticOpenCount /\
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
@@ -12386,6 +12412,8 @@ theorem
     RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate := by
   exact ⟨
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,

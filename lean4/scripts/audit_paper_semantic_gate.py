@@ -1124,6 +1124,17 @@ def theorem_id_list(text: str, name: str) -> list[str]:
     return re.findall(r'"([^"]+)"', match.group(1))
 
 
+def string_list_def(text: str, name: str) -> list[str]:
+    match = re.search(
+        rf"def\s+{re.escape(name)}\s*:\s*List\s+String\s*:=\s*(\[[^\]]*\])",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit(f"missing string-list def: {name}")
+    return re.findall(r'"([^"]+)"', match.group(1))
+
+
 def missing_expected(expected: list[str], actual: list[str]) -> list[str]:
     return sorted(set(expected) - set(actual))
 
@@ -2084,6 +2095,14 @@ def main() -> int:
     expected_closed = theorem_count(text, "paperSemanticClosedCount_current")
     expected_open_ids = theorem_id_list(text, "openSemanticTargetIds_current")
     expected_closed_ids = theorem_id_list(text, "closedSemanticTargetIds_current")
+    detailed_statement_roster_ids = string_list_def(
+        text, "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds"
+    )
+    detailed_statement_roster_id_label_pairs = [
+        (target_id, EXPECTED_OPEN_TARGET_LABELS[target_id])
+        for target_id in detailed_statement_roster_ids
+        if target_id in EXPECTED_OPEN_TARGET_LABELS
+    ]
     kernel_surfaces = open_kernel_surfaces(text)
     kernel_surface_ids = [surface[0] for surface in kernel_surfaces]
     kernel_surface_id_label_pairs = open_kernel_surface_id_label_pairs(text)
@@ -4185,11 +4204,30 @@ def main() -> int:
     )
     print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_ids="
-        + ",".join(open_ids)
+        + ",".join(detailed_statement_roster_ids)
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_id_paper_labels="
+        + ";".join(
+            f"{target_id}:{label}"
+            for target_id, label in detailed_statement_roster_id_label_pairs
+        )
+    )
+    print(
+        "semantic_target_kernel_closure_input_field_output_detailed_statement_roster_id_paper_labels_match="
+        f"{int(kernel_surface_id_label_pairs == detailed_statement_roster_id_label_pairs)}"
     )
     print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_ids_proof="
         "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_id_paper_label_projection="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current"
+    )
+    print(
+        "semantic_target_kernel_closure_input_field_output_detailed_statement_roster_id_paper_label_projection="
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels"
     )
     print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_count_proof="
@@ -4729,6 +4767,18 @@ def main() -> int:
             "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputSurfaceIdPaperLabels"
         ),
         (
+            "semantic_target_kernel_closure_input_field_output_detailed_statement_roster_id_paper_labels_match="
+            f"{int(kernel_surface_id_label_pairs == detailed_statement_roster_id_label_pairs)}"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_id_paper_label_projection="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current"
+        ),
+        (
+            "semantic_target_kernel_closure_input_field_output_detailed_statement_roster_id_paper_label_projection="
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -4979,6 +5029,11 @@ def main() -> int:
         failures.append(
             f"closure-input field-output surface ids {closure_input_field_output_surface_ids!r} != open semantic target ids {open_ids!r}"
         )
+    if detailed_statement_roster_ids != open_ids:
+        failures.append(
+            "closure-input field-output detailed statement roster ids "
+            f"{detailed_statement_roster_ids!r} != open semantic target ids {open_ids!r}"
+        )
     if exact_closure_input_output_surface_ids != open_ids:
         failures.append(
             f"exact closure-input/output surface ids {exact_closure_input_output_surface_ids!r} != open semantic target ids {open_ids!r}"
@@ -5052,6 +5107,12 @@ def main() -> int:
         failures.append(
             "closure-input field-output surface id/paper-label pairs "
             f"{closure_input_field_output_surface_id_label_pairs!r} != kernel-surface pairs "
+            f"{kernel_surface_id_label_pairs!r}"
+        )
+    if detailed_statement_roster_id_label_pairs != kernel_surface_id_label_pairs:
+        failures.append(
+            "closure-input field-output detailed statement roster id/paper-label pairs "
+            f"{detailed_statement_roster_id_label_pairs!r} != kernel-surface pairs "
             f"{kernel_surface_id_label_pairs!r}"
         )
     for (
