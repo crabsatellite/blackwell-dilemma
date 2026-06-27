@@ -302,11 +302,19 @@ EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "FiveState.fiveStateOracleWelfare",
 )
 
+EXPECTED_SEMANTIC_TARGET_COUNT_CERTIFICATE_CONJUNCTS = (
+    "openSemanticTargetIds.length =",
+    "closedSemanticTargetIds.length =",
+    "(semanticTargetIds semanticTargets).length =",
+    "semanticTargets.length = paperSemanticOpenCount + paperSemanticClosedCount",
+)
+
 EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnly ↔ False",
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
     "ClosedSemanticTargetsFrontierCertificate",
+    "SemanticTargetCountCertificate",
     "SemanticTargetsPartitionCertificate",
     "RemainingOpenSemanticTargetsFrontierCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
@@ -1664,6 +1672,39 @@ def closed_frontier_certificate_missing_conjuncts(text: str) -> list[str]:
     ]
 
 
+def semantic_target_count_certificate_missing_conjuncts(text: str) -> list[str]:
+    match = re.search(
+        r"def\s+SemanticTargetCountCertificate\s*:\s*"
+        r"Prop\s*:=\s*(.*?)\n\s*/--\s+The current semantic ledger count",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing SemanticTargetCountCertificate body")
+    body = match.group(1)
+    patterns = {
+        "openSemanticTargetIds.length =": (
+            r"\bopenSemanticTargetIds\.length\s*=\s*paperSemanticOpenCount\b"
+        ),
+        "closedSemanticTargetIds.length =": (
+            r"\bclosedSemanticTargetIds\.length\s*=\s*paperSemanticClosedCount\b"
+        ),
+        "(semanticTargetIds semanticTargets).length =": (
+            r"\(semanticTargetIds\s+semanticTargets\)\.length\s*="
+            r"\s*semanticTargets\.length"
+        ),
+        "semanticTargets.length = paperSemanticOpenCount + paperSemanticClosedCount": (
+            r"\bsemanticTargets\.length\s*=\s*paperSemanticOpenCount\s*\+\s*"
+            r"paperSemanticClosedCount\b"
+        ),
+    }
+    return [
+        conjunct
+        for conjunct in EXPECTED_SEMANTIC_TARGET_COUNT_CERTIFICATE_CONJUNCTS
+        if re.search(patterns[conjunct], body) is None
+    ]
+
+
 def top_level_statement_roster_missing_terms(text: str) -> list[str]:
     match = re.search(
         r"def\s+completePaperSemanticKernelOnlyCurrentObstructionStatements\s*:\s*"
@@ -1911,6 +1952,9 @@ def main() -> int:
     closed_frontier_missing_conjuncts = (
         closed_frontier_certificate_missing_conjuncts(text)
     )
+    semantic_target_count_missing_conjuncts = (
+        semantic_target_count_certificate_missing_conjuncts(text)
+    )
     (
         named_current_roster_count,
         missing_named_current_roster_length_proofs,
@@ -1975,6 +2019,23 @@ def main() -> int:
     print(
         "semantic_target_closed_frontier_conjuncts_missing_terms="
         + ",".join(closed_frontier_missing_conjuncts)
+    )
+    print("semantic_target_count_certificate=SemanticTargetCountCertificate")
+    print(
+        "semantic_target_count_certificate_proof="
+        "semantic_target_count_certificate"
+    )
+    print(
+        "semantic_target_count_certificate_conjuncts_checked="
+        f"{len(EXPECTED_SEMANTIC_TARGET_COUNT_CERTIFICATE_CONJUNCTS)}"
+    )
+    print(
+        "semantic_target_count_certificate_conjuncts_missing="
+        f"{len(semantic_target_count_missing_conjuncts)}"
+    )
+    print(
+        "semantic_target_count_certificate_conjuncts_missing_terms="
+        + ",".join(semantic_target_count_missing_conjuncts)
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate="
@@ -4011,6 +4072,19 @@ def main() -> int:
             "semantic_target_closed_frontier_conjuncts_missing="
             f"{len(closed_frontier_missing_conjuncts)}"
         ),
+        "semantic_target_count_certificate=SemanticTargetCountCertificate",
+        (
+            "semantic_target_count_certificate_proof="
+            "semantic_target_count_certificate"
+        ),
+        (
+            "semantic_target_count_certificate_conjuncts_checked="
+            f"{len(EXPECTED_SEMANTIC_TARGET_COUNT_CERTIFICATE_CONJUNCTS)}"
+        ),
+        (
+            "semantic_target_count_certificate_conjuncts_missing="
+            f"{len(semantic_target_count_missing_conjuncts)}"
+        ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
@@ -4146,6 +4220,11 @@ def main() -> int:
         failures.append(
             "closed semantic frontier certificate missing conjuncts: "
             + ",".join(closed_frontier_missing_conjuncts)
+        )
+    if semantic_target_count_missing_conjuncts:
+        failures.append(
+            "semantic target count certificate missing conjuncts: "
+            + ",".join(semantic_target_count_missing_conjuncts)
         )
     if missing_named_current_roster_length_proofs:
         failures.append(

@@ -12806,6 +12806,21 @@ theorem semantic_targets_partition_certificate :
     SemanticTargetsPartitionCertificate := by
   exact ⟨rfl, rfl⟩
 
+/-- Current semantic-target count package: the paper-semantic gate counts are
+the lengths of the corresponding id frontiers, and the full semantic ledger
+has exactly the sum of open and closed targets. -/
+def SemanticTargetCountCertificate : Prop :=
+  openSemanticTargetIds.length = paperSemanticOpenCount /\
+    closedSemanticTargetIds.length = paperSemanticClosedCount /\
+    (semanticTargetIds semanticTargets).length = semanticTargets.length /\
+    semanticTargets.length = paperSemanticOpenCount + paperSemanticClosedCount
+
+/-- The current semantic ledger count is exactly accounted for by the open and
+closed semantic target frontiers. -/
+theorem semantic_target_count_certificate :
+    SemanticTargetCountCertificate := by
+  exact ⟨rfl, rfl, rfl, rfl⟩
+
 /-- Named target proposition for the full paper-semantic kernel-only gate. -/
 def CompletePaperSemanticKernelOnly : Prop :=
   paperSemanticOpenCount = 0
@@ -13020,6 +13035,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
        "theorem_4_1_part4_lattice_p_monotonicity",
        "r10_threshold_five_state_high_kappa_routing"],
    ClosedSemanticTargetsFrontierCertificate,
+   SemanticTargetCountCertificate,
    SemanticTargetsPartitionCertificate,
    RemainingOpenSemanticTargetsFrontierCertificate,
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
@@ -13093,6 +13109,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
            "theorem_4_1_part4_lattice_p_monotonicity",
            "r10_threshold_five_state_high_kappa_routing"],
        ClosedSemanticTargetsFrontierCertificate,
+       SemanticTargetCountCertificate,
        SemanticTargetsPartitionCertificate,
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
@@ -13151,9 +13168,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 59 named obstruction and subordinate-certificate statements listed above. -/
+the 60 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 59 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 60 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -13174,6 +13191,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
          "theorem_4_1_part4_lattice_p_monotonicity",
          "r10_threshold_five_state_high_kappa_routing"],
      ClosedSemanticTargetsFrontierCertificate,
+     SemanticTargetCountCertificate,
      SemanticTargetsPartitionCertificate,
      RemainingOpenSemanticTargetsFrontierCertificate,
      OpenSemanticTargetSurfaceRosterConsistencyCertificate,
@@ -13230,7 +13248,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
        paperSemanticOpenCount,
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 59 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 60 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -13243,6 +13261,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
        "theorem_4_1_part4_lattice_p_monotonicity",
        "r10_threshold_five_state_high_kappa_routing"] /\
     ClosedSemanticTargetsFrontierCertificate /\
+    SemanticTargetCountCertificate /\
     SemanticTargetsPartitionCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
@@ -13315,6 +13334,7 @@ theorem
     paperSemanticClosedCount_current,
     closedSemanticTargetIds_current,
     closed_semantic_targets_frontier_certificate,
+    semantic_target_count_certificate,
     semantic_targets_partition_certificate,
     remaining_open_semantic_targets_frontier_certificate,
     open_semantic_target_surface_roster_consistency_certificate,
@@ -13385,6 +13405,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
        "theorem_4_1_part4_lattice_p_monotonicity",
        "r10_threshold_five_state_high_kappa_routing"] /\
     ClosedSemanticTargetsFrontierCertificate /\
+    SemanticTargetCountCertificate /\
     SemanticTargetsPartitionCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
@@ -13462,6 +13483,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact closedSemanticTargetIds_current
   constructor
   · exact closed_semantic_targets_frontier_certificate
+  constructor
+  · exact semantic_target_count_certificate
   constructor
   · exact semantic_targets_partition_certificate
   constructor
