@@ -64,6 +64,8 @@ FORBIDDEN_WHEN_OPEN = {
 }
 
 REQUIRED_AXIOM_AUDIT_DECLS = {
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
 }
