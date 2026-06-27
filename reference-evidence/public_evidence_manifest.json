@@ -759,6 +759,7 @@
           "path": "lean4/scripts/audit_conditional_surface.py",
           "cwd": "lean4",
           "stdout_contains": [
+            "project_lean_files=74",
             "prop_interfaces=2",
             "prop_interface_names=Part6FullPaperClosingDivergenceWitness,Part6FullPaperClosingFeasibleDivergenceWitness",
             "expected_prop_interface_names=Part6FullPaperClosingDivergenceWitness,Part6FullPaperClosingFeasibleDivergenceWitness",
@@ -766,6 +767,7 @@
             "missing_expected_prop_interface_names=",
             "unexpected_prop_interface_names_count=0",
             "unexpected_prop_interface_names=",
+            "closed_true_prop_interfaces=0",
             "conditional_theorem_signatures=0",
             "interfaces_with_current_refutation=2",
             "current_refutation_pairs=not_Part6FullPaperClosingDivergenceWitness_current->Part6FullPaperClosingDivergenceWitness,not_Part6FullPaperClosingFeasibleDivergenceWitness_current->Part6FullPaperClosingFeasibleDivergenceWitness",

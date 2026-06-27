@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import json
 import pathlib
 import re
 import sys
@@ -22,6 +23,12 @@ import sys
 ROOT_FILES = [pathlib.Path("BlackwellDilemma.lean")]
 ROOT_DIR = pathlib.Path("BlackwellDilemma")
 EXCLUDED_FILES = {pathlib.Path("BlackwellDilemma/Ledger.lean")}
+PUBLIC_EVIDENCE_MANIFEST = (
+    pathlib.Path(__file__).resolve().parents[2]
+    / "reference-evidence"
+    / "public_evidence_manifest.json"
+)
+PUBLIC_EVIDENCE_CHECK_ID = "conditional_surface_identity_audit"
 
 INTERFACE_NAME_RE = re.compile(
     r"("
@@ -132,6 +139,20 @@ def source_files() -> list[pathlib.Path]:
     return [p for p in files if p not in EXCLUDED_FILES]
 
 
+def public_manifest_stdout_contains(check_id: str) -> set[str]:
+    manifest = json.loads(PUBLIC_EVIDENCE_MANIFEST.read_text(encoding="utf-8"))
+    for claim in manifest.get("claims", []):
+        for check in claim.get("checks", []):
+            if check.get("id") == check_id:
+                return set(check.get("stdout_contains", []))
+    raise RuntimeError(f"public evidence check id not found: {check_id}")
+
+
+def public_manifest_missing_stdout_lines(check_id: str, lines: list[str]) -> list[str]:
+    manifest_lines = public_manifest_stdout_contains(check_id)
+    return [line for line in lines if line not in manifest_lines]
+
+
 def line_no_at(text: str, offset: int) -> int:
     return text.count("\n", 0, offset) + 1
 
@@ -219,8 +240,9 @@ def main() -> int:
 
     clean_by_path: dict[pathlib.Path, str] = {}
     decls_by_path: dict[pathlib.Path, list[tuple[str, str, int, str]]] = {}
+    files = source_files()
 
-    for path in source_files():
+    for path in files:
         clean = strip_comments_and_strings(path.read_text(encoding="utf-8"))
         clean_by_path[path] = clean
         decls: list[tuple[str, str, int, str]] = []
@@ -323,47 +345,63 @@ def main() -> int:
         EXPECTED_CURRENT_CLOSURE_PAIRS, current_closure_pairs
     )
 
-    print(f"project_lean_files={len(source_files())}")
-    print(f"prop_interfaces={len(prop_interfaces)}")
-    print(f"prop_interface_names={','.join(prop_interface_names)}")
-    print(f"expected_prop_interface_names={','.join(EXPECTED_PROP_INTERFACE_NAMES)}")
-    print(f"missing_expected_prop_interface_names_count={len(missing_prop_interface_names)}")
-    print(f"missing_expected_prop_interface_names={','.join(missing_prop_interface_names)}")
-    print(f"unexpected_prop_interface_names_count={len(unexpected_prop_interface_names)}")
-    print(f"unexpected_prop_interface_names={','.join(unexpected_prop_interface_names)}")
-    print(f"closed_true_prop_interfaces={len(closed_true_prop_interfaces)}")
-    print(f"conditional_theorem_signatures={len(theorem_hits)}")
-    print(f"interfaces_with_current_refutation={len(refuted_interfaces)}")
-    print(f"current_refutation_pairs={','.join(current_refutation_pairs)}")
-    print(f"expected_current_refutation_pairs={','.join(EXPECTED_CURRENT_REFUTATION_PAIRS)}")
-    print(f"missing_expected_current_refutation_pairs_count={len(missing_current_refutation_pairs)}")
-    print(f"missing_expected_current_refutation_pairs={','.join(missing_current_refutation_pairs)}")
-    print(f"unexpected_current_refutation_pairs_count={len(unexpected_current_refutation_pairs)}")
-    print(f"unexpected_current_refutation_pairs={','.join(unexpected_current_refutation_pairs)}")
-    print(f"interfaces_with_current_closure={len(closed_interfaces)}")
-    print(f"current_closure_pairs={','.join(current_closure_pairs)}")
-    print(f"expected_current_closure_pairs={','.join(EXPECTED_CURRENT_CLOSURE_PAIRS)}")
-    print(f"missing_expected_current_closure_pairs_count={len(missing_current_closure_pairs)}")
-    print(f"missing_expected_current_closure_pairs={','.join(missing_current_closure_pairs)}")
-    print(f"unexpected_current_closure_pairs_count={len(unexpected_current_closure_pairs)}")
-    print(f"unexpected_current_closure_pairs={','.join(unexpected_current_closure_pairs)}")
-    print(f"unresolved_prop_interfaces={len(unresolved_interfaces)}")
-    print(f"unresolved_interface_names={','.join(unresolved_interface_names)}")
-    print(f"unresolved_prop_def_interfaces={len(unresolved_by_kind['prop_def'])}")
-    print(f"unresolved_structure_interfaces={len(unresolved_by_kind['structure'])}")
-    print(f"unresolved_class_interfaces={len(unresolved_by_kind['class'])}")
-    print(f"conditional_signatures_using_unresolved_interfaces={len(conditional_hits_with_unresolved)}")
-    print(
-        "conditional_signatures_using_unresolved_prop_def_interfaces="
-        f"{len(conditional_hits_with_unresolved_by_kind['prop_def'])}"
+    output_lines = [
+        f"project_lean_files={len(files)}",
+        f"prop_interfaces={len(prop_interfaces)}",
+        f"prop_interface_names={','.join(prop_interface_names)}",
+        f"expected_prop_interface_names={','.join(EXPECTED_PROP_INTERFACE_NAMES)}",
+        f"missing_expected_prop_interface_names_count={len(missing_prop_interface_names)}",
+        f"missing_expected_prop_interface_names={','.join(missing_prop_interface_names)}",
+        f"unexpected_prop_interface_names_count={len(unexpected_prop_interface_names)}",
+        f"unexpected_prop_interface_names={','.join(unexpected_prop_interface_names)}",
+        f"closed_true_prop_interfaces={len(closed_true_prop_interfaces)}",
+        f"conditional_theorem_signatures={len(theorem_hits)}",
+        f"interfaces_with_current_refutation={len(refuted_interfaces)}",
+        f"current_refutation_pairs={','.join(current_refutation_pairs)}",
+        f"expected_current_refutation_pairs={','.join(EXPECTED_CURRENT_REFUTATION_PAIRS)}",
+        f"missing_expected_current_refutation_pairs_count={len(missing_current_refutation_pairs)}",
+        f"missing_expected_current_refutation_pairs={','.join(missing_current_refutation_pairs)}",
+        f"unexpected_current_refutation_pairs_count={len(unexpected_current_refutation_pairs)}",
+        f"unexpected_current_refutation_pairs={','.join(unexpected_current_refutation_pairs)}",
+        f"interfaces_with_current_closure={len(closed_interfaces)}",
+        f"current_closure_pairs={','.join(current_closure_pairs)}",
+        f"expected_current_closure_pairs={','.join(EXPECTED_CURRENT_CLOSURE_PAIRS)}",
+        f"missing_expected_current_closure_pairs_count={len(missing_current_closure_pairs)}",
+        f"missing_expected_current_closure_pairs={','.join(missing_current_closure_pairs)}",
+        f"unexpected_current_closure_pairs_count={len(unexpected_current_closure_pairs)}",
+        f"unexpected_current_closure_pairs={','.join(unexpected_current_closure_pairs)}",
+        f"unresolved_prop_interfaces={len(unresolved_interfaces)}",
+        f"unresolved_interface_names={','.join(unresolved_interface_names)}",
+        f"unresolved_prop_def_interfaces={len(unresolved_by_kind['prop_def'])}",
+        f"unresolved_structure_interfaces={len(unresolved_by_kind['structure'])}",
+        f"unresolved_class_interfaces={len(unresolved_by_kind['class'])}",
+        (
+            "conditional_signatures_using_unresolved_interfaces="
+            f"{len(conditional_hits_with_unresolved)}"
+        ),
+        (
+            "conditional_signatures_using_unresolved_prop_def_interfaces="
+            f"{len(conditional_hits_with_unresolved_by_kind['prop_def'])}"
+        ),
+        (
+            "conditional_signatures_using_unresolved_structure_interfaces="
+            f"{len(conditional_hits_with_unresolved_by_kind['structure'])}"
+        ),
+        (
+            "conditional_signatures_using_unresolved_class_interfaces="
+            f"{len(conditional_hits_with_unresolved_by_kind['class'])}"
+        ),
+    ]
+    for line in output_lines:
+        print(line)
+
+    manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(
+        PUBLIC_EVIDENCE_CHECK_ID,
+        output_lines,
     )
     print(
-        "conditional_signatures_using_unresolved_structure_interfaces="
-        f"{len(conditional_hits_with_unresolved_by_kind['structure'])}"
-    )
-    print(
-        "conditional_signatures_using_unresolved_class_interfaces="
-        f"{len(conditional_hits_with_unresolved_by_kind['class'])}"
+        "public_manifest_conditional_stdout_contains_missing="
+        f"{len(manifest_missing_stdout_lines)}"
     )
 
     if args.list:
@@ -432,6 +470,11 @@ def main() -> int:
         failures.append(
             "current closure pairs "
             f"{current_closure_pairs!r} != expected {EXPECTED_CURRENT_CLOSURE_PAIRS!r}"
+        )
+    if manifest_missing_stdout_lines:
+        failures.append(
+            "public evidence manifest missing conditional stdout lines: "
+            + ",".join(manifest_missing_stdout_lines)
         )
 
     if failures:

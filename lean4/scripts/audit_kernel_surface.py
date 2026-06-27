@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import json
 import pathlib
 import re
 import sys
@@ -20,6 +21,12 @@ import sys
 
 ROOT_FILES = [pathlib.Path("BlackwellDilemma.lean")]
 ROOT_DIR = pathlib.Path("BlackwellDilemma")
+PUBLIC_EVIDENCE_MANIFEST = (
+    pathlib.Path(__file__).resolve().parents[2]
+    / "reference-evidence"
+    / "public_evidence_manifest.json"
+)
+PUBLIC_EVIDENCE_CHECK_ID = "kernel_surface_zero_escape_audit"
 
 
 def strip_comments_and_strings(text: str) -> str:
@@ -85,14 +92,29 @@ def source_files() -> list[pathlib.Path]:
     return files
 
 
+def public_manifest_stdout_contains(check_id: str) -> set[str]:
+    manifest = json.loads(PUBLIC_EVIDENCE_MANIFEST.read_text(encoding="utf-8"))
+    for claim in manifest.get("claims", []):
+        for check in claim.get("checks", []):
+            if check.get("id") == check_id:
+                return set(check.get("stdout_contains", []))
+    raise RuntimeError(f"public evidence check id not found: {check_id}")
+
+
+def public_manifest_missing_stdout_lines(check_id: str, lines: list[str]) -> list[str]:
+    manifest_lines = public_manifest_stdout_contains(check_id)
+    return [line for line in lines if line not in manifest_lines]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--list", action="store_true", help="list matching declarations")
     args = parser.parse_args()
 
     hits: dict[str, list[tuple[pathlib.Path, int, str]]] = collections.defaultdict(list)
+    files = source_files()
 
-    for path in source_files():
+    for path in files:
         clean = strip_comments_and_strings(path.read_text(encoding="utf-8"))
         for line_no, line in enumerate(clean.splitlines(), 1):
             if m := re.match(r"\s*axiom\s+([^\s:(]+)", line):
@@ -117,18 +139,35 @@ def main() -> int:
                 if decl_kind in ("theorem", "lemma") and name.endswith("_OPEN"):
                     hits["theorem_OPEN"].append((path, line_no, name))
 
-    print(f"project_lean_files={len(source_files())}")
-    for key in ("axiom", "constant", "opaque", "sorry", "admit", "unsafe", "native_decide"):
-        print(f"{key}={len(hits[key])}")
-
     axiom_names = [name for _, _, name in hits["axiom"]]
-    print(f"axiom_OPEN={sum(name.endswith('_OPEN') for name in axiom_names)}")
-    print(f"axiom_paper_Def={sum(name.endswith('_paper_Def') for name in axiom_names)}")
-    print(f"axiom_workingAssumption={sum('workingAssumption' in name for name in axiom_names)}")
-    print(f"axiom_paper_witness={sum('paper_witness' in name for name in axiom_names)}")
-    print(f"decl_workingAssumption={len(hits['decl_workingAssumption'])}")
-    print(f"def_OPEN={len(hits['def_OPEN'])}")
-    print(f"theorem_OPEN={len(hits['theorem_OPEN'])}")
+    output_lines = [
+        f"project_lean_files={len(files)}",
+        f"axiom={len(hits['axiom'])}",
+        f"constant={len(hits['constant'])}",
+        f"opaque={len(hits['opaque'])}",
+        f"sorry={len(hits['sorry'])}",
+        f"admit={len(hits['admit'])}",
+        f"unsafe={len(hits['unsafe'])}",
+        f"native_decide={len(hits['native_decide'])}",
+        f"axiom_OPEN={sum(name.endswith('_OPEN') for name in axiom_names)}",
+        f"axiom_paper_Def={sum(name.endswith('_paper_Def') for name in axiom_names)}",
+        f"axiom_workingAssumption={sum('workingAssumption' in name for name in axiom_names)}",
+        f"axiom_paper_witness={sum('paper_witness' in name for name in axiom_names)}",
+        f"decl_workingAssumption={len(hits['decl_workingAssumption'])}",
+        f"def_OPEN={len(hits['def_OPEN'])}",
+        f"theorem_OPEN={len(hits['theorem_OPEN'])}",
+    ]
+    for line in output_lines:
+        print(line)
+
+    manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(
+        PUBLIC_EVIDENCE_CHECK_ID,
+        output_lines,
+    )
+    print(
+        "public_manifest_kernel_stdout_contains_missing="
+        f"{len(manifest_missing_stdout_lines)}"
+    )
 
     if args.list:
         print()
@@ -152,7 +191,13 @@ def main() -> int:
 
     bad_proof_escape = any(hits[key] for key in ("sorry", "admit", "unsafe", "native_decide"))
     bad_decl_surface = any(hits[key] for key in ("decl_workingAssumption",))
-    return 1 if bad_proof_escape or bad_decl_surface else 0
+    if manifest_missing_stdout_lines:
+        print()
+        print("public-manifest kernel stdout missing:")
+        for line in manifest_missing_stdout_lines:
+            print(f"- {line}")
+    bad_public_manifest = bool(manifest_missing_stdout_lines)
+    return 1 if bad_proof_escape or bad_decl_surface or bad_public_manifest else 0
 
 
 if __name__ == "__main__":

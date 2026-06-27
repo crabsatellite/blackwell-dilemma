@@ -255,7 +255,9 @@ or carrier-interface hypotheses. The same audit now publishes
 expected/missing/unexpected drift counts for the pinned conditional interface,
 current-refutation, and current-closure identities; the public evidence
 manifest also pins those zero-drift lines and the zero source-level escape
-surface from `audit_kernel_surface.py`. Complete paper-semantic
+surface from `audit_kernel_surface.py`. The kernel and conditional audit
+scripts fail if the public manifest drops any of their current required stdout
+lines, so Lean-side CI also guards the public evidence calibration. Complete paper-semantic
 closure is the stronger target tracked by `PaperSemanticGate.lean`; that claim
 is not made until the semantic gate reaches open=0.
 The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
