@@ -192,6 +192,9 @@ match each other.
 `open_semantic_target_named_frontier_certificate_roster_certificate` likewise
 pins the payload, route, closure, progress, nonclosure, and current-frontier
 certificate rosters to the named Part 6/topo certificates on both surfaces.
+`open_semantic_target_named_route_statement_roster_certificate` pins the
+target-route, target-closure, and route-closure equivalence formulas themselves
+to the named Part 6/topo statements on both surfaces.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,

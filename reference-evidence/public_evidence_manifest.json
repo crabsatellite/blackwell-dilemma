@@ -364,6 +364,7 @@
             "semantic_target_surface_target_route_statement_consistency=openSemanticTargetSurfaceTargetRouteStatements_current",
             "semantic_target_surface_closure_route_statement_consistency=openSemanticTargetSurfaceClosureRouteStatements_current",
             "semantic_target_surface_route_equivalence_statement_consistency=openSemanticTargetSurfaceRouteEquivalenceStatements_current",
+            "semantic_target_named_route_statement_roster_proofs=openSemanticTargetKernelSurfaceTargetRouteStatements_named_current,openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_named_current,openSemanticTargetKernelSurfaceClosureRouteStatements_named_current,openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_named_current,openSemanticTargetKernelSurfaceRouteEquivalenceStatements_named_current,openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_named_current",
             "semantic_target_surface_target_route_consistency=openSemanticTargetSurfaceTargetRoutes_current",
             "semantic_target_surface_target_route_certificate_consistency=openSemanticTargetSurfaceTargetRouteCertificates_current",
             "semantic_target_surface_target_route_obstruction_consistency=openSemanticTargetSurfaceTargetRouteObstructions_current",
@@ -490,6 +491,8 @@
             "semantic_target_named_route_obstruction_roster_certificate_proof=open_semantic_target_named_route_obstruction_roster_certificate",
             "semantic_target_named_frontier_certificate_roster_certificate=OpenSemanticTargetNamedFrontierCertificateRosterCertificate",
             "semantic_target_named_frontier_certificate_roster_certificate_proof=open_semantic_target_named_frontier_certificate_roster_certificate",
+            "semantic_target_named_route_statement_roster_certificate=OpenSemanticTargetNamedRouteStatementRosterCertificate",
+            "semantic_target_named_route_statement_roster_certificate_proof=open_semantic_target_named_route_statement_roster_certificate",
             "semantic_target_part6_conditional_witness_exact_input_proofs=part6_lattice_embedding_divergence_witness_of_exact_closure_input,part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input,part6_lattice_embedding_output_pair_of_exact_closure_input",
             "semantic_target_part6_conditional_witness_output_bundle_proofs=part6_lattice_embedding_divergence_witness_of_full_output_bundle,part6_lattice_embedding_feasible_divergence_witness_of_full_output_bundle,part6_lattice_embedding_output_pair_of_full_output_bundle",
             "semantic_target_part6_conditional_witness_obstructions=not_part6_full_paper_closing_divergence_witness_current,not_part6_full_paper_closing_feasible_divergence_witness_current,not_part6_full_paper_closing_output_pair_current",
@@ -525,7 +528,7 @@
             "semantic_target_closure_input_field_not_iff_proof=openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input",
             "semantic_target_closure_input_field_roster_certificate=OpenSemanticTargetClosureInputFieldRosterCertificate",
             "semantic_target_closure_input_field_roster_certificate_proof=open_semantic_target_closure_input_field_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=455"
+            "semantic_target_axiom_audit_prints_required=463"
           ]
         },
         {
