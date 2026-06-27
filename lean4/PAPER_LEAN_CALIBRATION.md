@@ -1105,6 +1105,10 @@ For full kernel-pure cover (v2.0 future iteration):
   input is equivalent to `Part6FullPaperClosingFullOutputBundle`, and the topo
   exact input is equivalent to
   `TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle`.
+  `remaining_open_semantic_targets_obstruction_equivalence_certificate` further
+  gates the current negative statements: for each open target, the target
+  obstruction, exact-input obstruction, and output-bundle obstruction are
+  pairwise equivalent.
   `remaining_open_semantic_targets_closure_input_field_certificate` further
   packages field-level payloads: Part 6 exposes the closed-unit tail-reversal
   bridge, nonempty closed-unit alpha domain, bridge route, and paper support

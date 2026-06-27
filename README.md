@@ -138,6 +138,9 @@ The exact inputs are also tied directly to the reversible output layer by
 equates its exact closure input with `Part6FullPaperClosingFullOutputBundle`,
 and topo equates its support-surface exact input with
 `TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle`.
+`remaining_open_semantic_targets_obstruction_equivalence_certificate` further
+proves that, for each open target, the target obstruction, exact-input
+obstruction, and output-bundle obstruction are equivalent kernel consequences.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,
@@ -193,7 +196,8 @@ route/closure certificate-obstruction projections, the payload route-map
 certificate, closure-input sufficient-route/output/field certificates and obstructions,
 exact closure-input equivalence, sufficient-to-exact projections,
 exact-input/output bundle equivalence, output-equivalence target/output bundles,
-bidirectional output projections, output iff proofs, output obstructions, field-roster id,
+bidirectional output projections, output iff proofs, output obstructions,
+target/exact/output obstruction-equivalence proofs, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency,
 surface-roster consistency, and AxiomAudit coverage. The public
