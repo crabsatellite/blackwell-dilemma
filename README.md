@@ -297,8 +297,9 @@ target-to-exact, exact-to-target, target-iff-exact, sufficient-to-exact, and
 target-obstruction/exact-obstruction formulas to the named Part 6/topo
 statements, with 10 formula terms checked against `paperSemanticOpenCount`.
 `open_semantic_target_exact_closure_input_output_named_roster_certificate`
-pins the exact-input/output-bundle roster and proves target, exact-input, and
-output-bundle obstructions pairwise equivalent on each surface.
+pins the exact-input/output-bundle roster as six 2-term Lean lists and proves
+target, exact-input, and output-bundle obstructions pairwise equivalent on each
+surface.
 `open_semantic_target_exact_closure_input_output_statement_roster_certificate`
 pins the exact-input/output, target/exact-input, target/output, and all three
 obstruction-equivalence formulas to the named Part 6/topo statements, with 16

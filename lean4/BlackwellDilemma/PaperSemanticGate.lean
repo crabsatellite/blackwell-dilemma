@@ -7069,6 +7069,44 @@ theorem
       [Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the exact-input/output target roster has one entry for each
+remaining open semantic target. -/
+theorem openSemanticTargetExactClosureInputOutputSurfaceTargets_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceTargets.length = 2 := rfl
+
+/-- Build gate: the exact-input/output exact-input roster has one entry for
+each remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputs_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputs.length = 2 := rfl
+
+/-- Build gate: the exact-input/output output-bundle roster has one entry for
+each remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceOutputBundles_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceOutputBundles.length = 2 := rfl
+
+/-- Build gate: the exact-input/output target-obstruction roster has one entry
+for each remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceTargetObstructions_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceTargetObstructions.length =
+      2 := rfl
+
+/-- Build gate: the exact-input/output exact-input-obstruction roster has one
+entry for each remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputObstructions_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputObstructions.length =
+      2 := rfl
+
+/-- Build gate: the exact-input/output output-obstruction roster has one entry
+for each remaining open semantic target. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions_length_current :
+    openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions.length =
+      2 := rfl
+
 /-- Build gate: the exact-input/output roster names exact-input-to-output
 statements. -/
 theorem
@@ -7385,6 +7423,15 @@ def OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate : Prop :=
     openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions =
       [Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetExactClosureInputOutputSurfaceTargets.length = 2 /\
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputs.length = 2 /\
+    openSemanticTargetExactClosureInputOutputSurfaceOutputBundles.length = 2 /\
+    openSemanticTargetExactClosureInputOutputSurfaceTargetObstructions.length =
+      2 /\
+    openSemanticTargetExactClosureInputOutputSurfaceExactInputObstructions.length =
+      2 /\
+    openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions.length =
+      2 /\
     (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
       surface.exactClosureInput ↔ surface.outputBundle) /\
     (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
@@ -7430,6 +7477,23 @@ theorem
   constructor
   · exact
       openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions_named_current
+  constructor
+  · exact openSemanticTargetExactClosureInputOutputSurfaceTargets_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputOutputSurfaceExactInputs_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputOutputSurfaceOutputBundles_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputOutputSurfaceTargetObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputOutputSurfaceExactInputObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions_length_current
   constructor
   · intro surface _
     exact
