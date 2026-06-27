@@ -11625,6 +11625,12 @@ field-payload projection, certificate, and obstruction formulas listed above. -/
 theorem part6LatticeEmbeddingClosureInputFieldOutputStatements_length_current :
     part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 13 := rfl
 
+/-- Build gate: snake-case alias for the Part 6 field-output statement roster
+length, matching the named-current theorem stem. -/
+theorem
+    part6_lattice_embedding_closure_input_field_output_statements_length_current :
+    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 13 := rfl
+
 /-- Build-gated formula roster for the Part 6 field-output certificate. -/
 def Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate :
     Prop :=
@@ -11686,7 +11692,8 @@ theorem
   · exact
       part6_lattice_embedding_closure_input_field_output_statements_named_current
   constructor
-  · exact part6LatticeEmbeddingClosureInputFieldOutputStatements_length_current
+  · exact
+      part6_lattice_embedding_closure_input_field_output_statements_length_current
   constructor
   · exact part6_lattice_embedding_semantic_kernel_target_of_field_payload
   constructor
@@ -11963,6 +11970,12 @@ theorem
     topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements_length_current :
     topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 14 := rfl
 
+/-- Build gate: snake-case alias for the topo field-output statement roster
+length, matching the named-current theorem stem. -/
+theorem
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statements_length_current :
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 14 := rfl
+
 /-- Build-gated formula roster for the topo field-output certificate. -/
 def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate :
     Prop :=
@@ -12037,7 +12050,7 @@ theorem
       topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current
   constructor
   · exact
-      topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements_length_current
+      topo_cluster_random_supercritical_z2_closure_input_field_output_statements_length_current
   constructor
   · exact topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload
   constructor
