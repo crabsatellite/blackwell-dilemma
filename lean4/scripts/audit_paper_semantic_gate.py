@@ -2103,6 +2103,14 @@ def main() -> int:
         for target_id in detailed_statement_roster_ids
         if target_id in EXPECTED_OPEN_TARGET_LABELS
     ]
+    named_route_obstruction_roster_ids = string_list_def(
+        text, "openSemanticTargetNamedRouteObstructionRosterIds"
+    )
+    named_route_obstruction_roster_id_label_pairs = [
+        (target_id, EXPECTED_OPEN_TARGET_LABELS[target_id])
+        for target_id in named_route_obstruction_roster_ids
+        if target_id in EXPECTED_OPEN_TARGET_LABELS
+    ]
     kernel_surfaces = open_kernel_surfaces(text)
     kernel_surface_ids = [surface[0] for surface in kernel_surfaces]
     kernel_surface_id_label_pairs = open_kernel_surface_id_label_pairs(text)
@@ -3779,6 +3787,33 @@ def main() -> int:
         "OpenSemanticTargetNamedRouteObstructionRosterCertificate"
     )
     print(
+        "semantic_target_named_route_obstruction_roster_ids="
+        + ",".join(named_route_obstruction_roster_ids)
+    )
+    print(
+        "semantic_target_named_route_obstruction_roster_id_paper_labels="
+        + ";".join(
+            f"{target_id}:{label}"
+            for target_id, label in named_route_obstruction_roster_id_label_pairs
+        )
+    )
+    print(
+        "semantic_target_kernel_named_route_obstruction_roster_id_paper_labels_match="
+        f"{int(kernel_surface_id_label_pairs == named_route_obstruction_roster_id_label_pairs)}"
+    )
+    print(
+        "semantic_target_named_route_obstruction_roster_ids_proof="
+        "openSemanticTargetNamedRouteObstructionRosterIds_current"
+    )
+    print(
+        "semantic_target_named_route_obstruction_roster_id_paper_label_projection="
+        "openSemanticTargetNamedRouteObstructionRosterIdPaperLabels_current"
+    )
+    print(
+        "semantic_target_kernel_named_route_obstruction_roster_id_paper_label_projection="
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteObstructionRosterIdPaperLabels"
+    )
+    print(
         "semantic_target_named_route_obstruction_roster_certificate_proof="
         "open_semantic_target_named_route_obstruction_roster_certificate"
     )
@@ -4779,6 +4814,18 @@ def main() -> int:
             "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels"
         ),
         (
+            "semantic_target_kernel_named_route_obstruction_roster_id_paper_labels_match="
+            f"{int(kernel_surface_id_label_pairs == named_route_obstruction_roster_id_label_pairs)}"
+        ),
+        (
+            "semantic_target_named_route_obstruction_roster_id_paper_label_projection="
+            "openSemanticTargetNamedRouteObstructionRosterIdPaperLabels_current"
+        ),
+        (
+            "semantic_target_kernel_named_route_obstruction_roster_id_paper_label_projection="
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteObstructionRosterIdPaperLabels"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -5034,6 +5081,11 @@ def main() -> int:
             "closure-input field-output detailed statement roster ids "
             f"{detailed_statement_roster_ids!r} != open semantic target ids {open_ids!r}"
         )
+    if named_route_obstruction_roster_ids != open_ids:
+        failures.append(
+            "named route-obstruction roster ids "
+            f"{named_route_obstruction_roster_ids!r} != open semantic target ids {open_ids!r}"
+        )
     if exact_closure_input_output_surface_ids != open_ids:
         failures.append(
             f"exact closure-input/output surface ids {exact_closure_input_output_surface_ids!r} != open semantic target ids {open_ids!r}"
@@ -5113,6 +5165,12 @@ def main() -> int:
         failures.append(
             "closure-input field-output detailed statement roster id/paper-label pairs "
             f"{detailed_statement_roster_id_label_pairs!r} != kernel-surface pairs "
+            f"{kernel_surface_id_label_pairs!r}"
+        )
+    if named_route_obstruction_roster_id_label_pairs != kernel_surface_id_label_pairs:
+        failures.append(
+            "named route-obstruction roster id/paper-label pairs "
+            f"{named_route_obstruction_roster_id_label_pairs!r} != kernel-surface pairs "
             f"{kernel_surface_id_label_pairs!r}"
         )
     for (
