@@ -315,7 +315,7 @@ the negative surface is checked against named Part 6/topo propositions instead
 of only anonymous surface fields.
 `open_semantic_target_obstruction_equivalence_statement_roster_certificate`
 pins the three pairwise obstruction-equivalence formulas to named Part 6/topo
-statements.
+statements, with 6 formula terms checked against `paperSemanticOpenCount`.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and

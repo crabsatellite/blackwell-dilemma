@@ -662,6 +662,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_target_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_exact_input_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_output_current_obstruction",
@@ -2524,6 +2527,13 @@ def main() -> int:
         "openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_named_current,"
         "openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_named_current,"
         "openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_named_current"
+    )
+    print("semantic_target_obstruction_equivalence_statement_roster_terms_checked=6")
+    print(
+        "semantic_target_obstruction_equivalence_statement_roster_length_proofs="
+        "openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_length_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_length_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_length_current"
     )
     print(
         "semantic_target_obstruction_equivalence_statement_roster_certificate="

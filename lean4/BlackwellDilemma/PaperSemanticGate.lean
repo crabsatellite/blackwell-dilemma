@@ -7823,6 +7823,27 @@ theorem
        Not TopoClusterRandomSupercriticalZ2ExactClosureInput ↔
         Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the target/exact-input obstruction-equivalence statement roster
+has one entry for each currently open target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/output obstruction-equivalence statement roster has
+one entry for each currently open target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the exact-input/output obstruction-equivalence statement roster
+has one entry for each currently open target. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_length_current :
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
 /-- Every obstruction-equivalence surface carries the current target
 obstruction. -/
 theorem openSemanticTargetObstructionEquivalenceSurface_target_current_obstruction
@@ -8037,6 +8058,12 @@ def OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate : Prop :=
         Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2ExactClosureInput ↔
         Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements.length =
+      paperSemanticOpenCount /\
     (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
       Not surface.target ↔ Not surface.exactClosureInput) /\
     (∀ surface ∈ openSemanticTargetObstructionEquivalenceSurfaces,
@@ -8054,6 +8081,9 @@ theorem
     openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_named_current,
     openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_named_current,
     openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_named_current,
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_length_current,
+    openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_length_current,
+    openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_length_current,
     (by
       intro surface _
       exact
