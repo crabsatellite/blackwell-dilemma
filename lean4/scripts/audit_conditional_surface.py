@@ -117,6 +117,14 @@ def strip_comments_and_strings(text: str) -> str:
     return "".join(out)
 
 
+def missing_expected(expected: list[str], actual: list[str]) -> list[str]:
+    return sorted(set(expected) - set(actual))
+
+
+def unexpected_actual(expected: list[str], actual: list[str]) -> list[str]:
+    return sorted(set(actual) - set(expected))
+
+
 def source_files() -> list[pathlib.Path]:
     files = [p for p in ROOT_FILES if p.exists()]
     if ROOT_DIR.exists():
@@ -296,16 +304,49 @@ def main() -> int:
         f"{name}->{iface}" for _path, _line_no, name, iface in current_closures
     )
     unresolved_interface_names = sorted(unresolved_interfaces)
+    missing_prop_interface_names = missing_expected(
+        EXPECTED_PROP_INTERFACE_NAMES, prop_interface_names
+    )
+    unexpected_prop_interface_names = unexpected_actual(
+        EXPECTED_PROP_INTERFACE_NAMES, prop_interface_names
+    )
+    missing_current_refutation_pairs = missing_expected(
+        EXPECTED_CURRENT_REFUTATION_PAIRS, current_refutation_pairs
+    )
+    unexpected_current_refutation_pairs = unexpected_actual(
+        EXPECTED_CURRENT_REFUTATION_PAIRS, current_refutation_pairs
+    )
+    missing_current_closure_pairs = missing_expected(
+        EXPECTED_CURRENT_CLOSURE_PAIRS, current_closure_pairs
+    )
+    unexpected_current_closure_pairs = unexpected_actual(
+        EXPECTED_CURRENT_CLOSURE_PAIRS, current_closure_pairs
+    )
 
     print(f"project_lean_files={len(source_files())}")
     print(f"prop_interfaces={len(prop_interfaces)}")
     print(f"prop_interface_names={','.join(prop_interface_names)}")
+    print(f"expected_prop_interface_names={','.join(EXPECTED_PROP_INTERFACE_NAMES)}")
+    print(f"missing_expected_prop_interface_names_count={len(missing_prop_interface_names)}")
+    print(f"missing_expected_prop_interface_names={','.join(missing_prop_interface_names)}")
+    print(f"unexpected_prop_interface_names_count={len(unexpected_prop_interface_names)}")
+    print(f"unexpected_prop_interface_names={','.join(unexpected_prop_interface_names)}")
     print(f"closed_true_prop_interfaces={len(closed_true_prop_interfaces)}")
     print(f"conditional_theorem_signatures={len(theorem_hits)}")
     print(f"interfaces_with_current_refutation={len(refuted_interfaces)}")
     print(f"current_refutation_pairs={','.join(current_refutation_pairs)}")
+    print(f"expected_current_refutation_pairs={','.join(EXPECTED_CURRENT_REFUTATION_PAIRS)}")
+    print(f"missing_expected_current_refutation_pairs_count={len(missing_current_refutation_pairs)}")
+    print(f"missing_expected_current_refutation_pairs={','.join(missing_current_refutation_pairs)}")
+    print(f"unexpected_current_refutation_pairs_count={len(unexpected_current_refutation_pairs)}")
+    print(f"unexpected_current_refutation_pairs={','.join(unexpected_current_refutation_pairs)}")
     print(f"interfaces_with_current_closure={len(closed_interfaces)}")
     print(f"current_closure_pairs={','.join(current_closure_pairs)}")
+    print(f"expected_current_closure_pairs={','.join(EXPECTED_CURRENT_CLOSURE_PAIRS)}")
+    print(f"missing_expected_current_closure_pairs_count={len(missing_current_closure_pairs)}")
+    print(f"missing_expected_current_closure_pairs={','.join(missing_current_closure_pairs)}")
+    print(f"unexpected_current_closure_pairs_count={len(unexpected_current_closure_pairs)}")
+    print(f"unexpected_current_closure_pairs={','.join(unexpected_current_closure_pairs)}")
     print(f"unresolved_prop_interfaces={len(unresolved_interfaces)}")
     print(f"unresolved_interface_names={','.join(unresolved_interface_names)}")
     print(f"unresolved_prop_def_interfaces={len(unresolved_by_kind['prop_def'])}")

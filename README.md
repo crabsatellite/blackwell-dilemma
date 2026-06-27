@@ -38,7 +38,9 @@ kernel-clean: no project-level source axioms, no proof escapes, no unresolved
 conditional theorem interfaces, and no Cat 3 paper-novel input assumptions in
 the live ledger. The two remaining counted conditional Prop interfaces are
 identity-pinned to the Part 6 divergence and feasible-divergence witness
-surfaces, with named current refutation and closure pairs. Complete
+surfaces, with named current refutation and closure pairs; the conditional
+surface audit also publishes expected/missing/unexpected drift counts for
+those pinned identities. Complete
 paper-semantic closure is separately gated in
 `BlackwellDilemma/PaperSemanticGate.lean`; while that gate reports open
 Part 6 lattice-embedding and random-supercritical percolation semantic targets,

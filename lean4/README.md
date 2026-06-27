@@ -241,9 +241,11 @@ Current results:
 The current theorem surface is kernel-clean in the source-level sense:
 `#print axioms` output contains only Lean/Mathlib kernel axioms, and
 `audit_conditional_surface.py` exposes no unresolved explicit bridge, witness,
-or carrier-interface hypotheses. Complete paper-semantic closure is the
-stronger target tracked by `PaperSemanticGate.lean`; that claim is not made
-until the semantic gate reaches open=0.
+or carrier-interface hypotheses. The same audit now publishes
+expected/missing/unexpected drift counts for the pinned conditional interface,
+current-refutation, and current-closure identities. Complete paper-semantic
+closure is the stronger target tracked by `PaperSemanticGate.lean`; that claim
+is not made until the semantic gate reaches open=0.
 The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
 `paperSemanticOpenCount = 0`, and
 `completePaperSemanticKernelOnly_notYet` proves its current negation.
