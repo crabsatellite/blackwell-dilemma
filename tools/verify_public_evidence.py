@@ -11,7 +11,7 @@ artifacts declared in ``reference-evidence/public_evidence_manifest.json``:
 * paper-semantic open targets remain explicitly gated instead of drifting into
   README-only claims; and
 * manifest source-card, claim, location, and check identifiers are present and
-  unique in their local scope.
+  unique in their local scope, with duplicate evidence snippets rejected.
 """
 
 from __future__ import annotations
@@ -104,6 +104,30 @@ def check_unique_ids(items: list[dict[str, Any]], kind: str, owner_id: str) -> t
     return check_count, failures
 
 
+def check_unique_values(
+    values: list[Any],
+    owner_id: str,
+    check_id: str,
+    label: str,
+) -> tuple[int, list[Failure]]:
+    failures: list[Failure] = []
+    seen: dict[Any, int] = {}
+    check_count = 0
+    for index, value in enumerate(values):
+        check_count += 1
+        if value in seen:
+            failures.append(
+                Failure(
+                    owner_id,
+                    f"{check_id}:{label}_unique",
+                    f"duplicate {label} at index {index}; first index {seen[value]}: {value!r}",
+                )
+            )
+        else:
+            seen[value] = index
+    return check_count, failures
+
+
 def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
     manifest_path = manifest_path.resolve()
     repo_root = manifest_path.parent.parent.resolve()
@@ -138,7 +162,17 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
     for claim in claim_items:
         claim_id = claim.get("id", "<missing-id>")
 
-        for card_id in claim.get("source_cards", []):
+        claim_source_cards = claim.get("source_cards", [])
+        count, value_failures = check_unique_values(
+            claim_source_cards,
+            claim_id,
+            "source_cards",
+            "source_card",
+        )
+        check_count += count
+        failures.extend(value_failures)
+
+        for card_id in claim_source_cards:
             check_count += 1
             referenced_cards.add(card_id)
             if card_id not in source_cards:
@@ -157,7 +191,16 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
                 failures.append(Failure(claim_id, f"{loc_id}:exists", f"missing file: {loc['path']}"))
                 continue
             text = path.read_text(encoding="utf-8")
-            for snippet in loc.get("contains", []):
+            contains_snippets = loc.get("contains", [])
+            count, value_failures = check_unique_values(
+                contains_snippets,
+                claim_id,
+                f"{loc_id}:contains",
+                "snippet",
+            )
+            check_count += count
+            failures.extend(value_failures)
+            for snippet in contains_snippets:
                 check_count += 1
                 if snippet not in text:
                     failures.append(
@@ -239,7 +282,16 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
                                 f"script exited {result.returncode}: {result.stdout}{result.stderr}",
                             )
                         )
-                    for snippet in check.get("stdout_contains", []):
+                    stdout_snippets = check.get("stdout_contains", [])
+                    count, value_failures = check_unique_values(
+                        stdout_snippets,
+                        claim_id,
+                        f"{check_id}:stdout_contains",
+                        "snippet",
+                    )
+                    check_count += count
+                    failures.extend(value_failures)
+                    for snippet in stdout_snippets:
                         check_count += 1
                         if snippet not in result.stdout:
                             failures.append(
