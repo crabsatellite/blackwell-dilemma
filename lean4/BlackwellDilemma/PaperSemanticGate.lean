@@ -11197,6 +11197,13 @@ def openSemanticTargetClosureInputFieldSurfaceIds : List String :=
   openSemanticTargetClosureInputFieldSurfaces.map
     (fun surface => surface.id)
 
+/-- Field-level closure-input surface ids paired with the paper-facing open
+ledger labels. -/
+def openSemanticTargetClosureInputFieldSurfaceIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetClosureInputFieldSurfaceIds
+    (openSemanticTargets.map (fun target => target.paperLabel))
+
 def openSemanticTargetClosureInputFieldSurfaceClosureInputs : List Prop :=
   openSemanticTargetClosureInputFieldSurfaces.map
     (fun surface => surface.closureInput)
@@ -11239,6 +11246,20 @@ semantic ledger's open target list. -/
 theorem openSemanticTargetClosureInputFieldSurfaceIds_current :
     openSemanticTargetClosureInputFieldSurfaceIds =
       openSemanticTargetIds := rfl
+
+/-- Build gate: field-level closure-input surfaces keep the same `(id,
+paperLabel)` projection as the open semantic ledger. -/
+theorem openSemanticTargetClosureInputFieldSurfaceIdPaperLabels_current :
+    openSemanticTargetClosureInputFieldSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
+
+/-- Build gate: kernel-surface and field-level closure-input rosters are
+synchronized on target ids paired with paper-facing labels. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldSurfaceIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldSurfaceIdPaperLabels := rfl
 
 /-- Build gate: the field-level sufficient-input roster has the same cardinality
 as the semantic ledger's open target count. -/
@@ -11464,6 +11485,10 @@ obstruction, and field-certificate surfaces to the actual Part 6/topo
 propositions, not just to parser output. -/
 def OpenSemanticTargetClosureInputFieldRosterCertificate : Prop :=
   openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldSurfaceIdPaperLabels /\
     openSemanticTargetClosureInputFieldSurfaces.length =
       paperSemanticOpenCount /\
     openSemanticTargetClosureInputFieldSurfaceClosureInputs =
@@ -11496,6 +11521,11 @@ theorem open_semantic_target_closure_input_field_roster_certificate :
     OpenSemanticTargetClosureInputFieldRosterCertificate := by
   constructor
   · exact openSemanticTargetClosureInputFieldSurfaceIds_current
+  constructor
+  · exact openSemanticTargetClosureInputFieldSurfaceIdPaperLabels_current
+  constructor
+  · exact
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldSurfaceIdPaperLabels
   constructor
   · exact openSemanticTargetClosureInputFieldSurfaceCount_current
   constructor
