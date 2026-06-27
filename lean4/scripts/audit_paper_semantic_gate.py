@@ -1175,6 +1175,10 @@ def id_drift_lines(label: str, expected: list[str], actual: list[str]) -> list[s
     ]
 
 
+def id_label_lines(pairs: list[tuple[str, str]]) -> str:
+    return ";".join(f"{target_id}:{label}" for target_id, label in pairs)
+
+
 def public_manifest_stdout_contains(check_id: str) -> set[str]:
     manifest = json.loads(PUBLIC_EVIDENCE_MANIFEST.read_text(encoding="utf-8"))
     for claim in manifest.get("claims", []):
@@ -5154,6 +5158,136 @@ def main() -> int:
             + ("1" if readme_axiom_audit_count == required_axiom_audit_count else "0")
         ),
     ]
+    public_manifest_complete_stdout_lines = [
+        (
+            "semantic_target_closed_frontier_conjuncts_missing_terms="
+            + ",".join(closed_frontier_missing_conjuncts)
+        ),
+        (
+            "semantic_target_count_certificate_conjuncts_missing_terms="
+            + ",".join(semantic_target_count_missing_conjuncts)
+        ),
+        (
+            "semantic_target_status_partition_conjuncts_missing_terms="
+            + ",".join(semantic_target_status_partition_missing_terms)
+        ),
+        (
+            "semantic_target_paper_label_conjuncts_missing_terms="
+            + ",".join(semantic_target_paper_label_missing_terms)
+        ),
+        (
+            "semantic_target_paper_label_id_conjuncts_missing_terms="
+            + ",".join(semantic_target_paper_label_id_missing_terms)
+        ),
+        f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}",
+        (
+            "semantic_target_kernel_surface_paper_labels="
+            + ",".join(kernel_surface_labels)
+        ),
+        (
+            "semantic_target_kernel_surface_paper_labels_expected="
+            + ",".join(expected_kernel_surface_labels)
+        ),
+        (
+            "semantic_target_kernel_surface_id_paper_labels="
+            + id_label_lines(kernel_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_kernel_surface_id_paper_labels_expected="
+            + id_label_lines(expected_kernel_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_frontier_payload_surface_id_paper_labels="
+            + id_label_lines(payload_surface_id_label_pairs)
+        ),
+        f"semantic_target_closure_input_surface_ids={','.join(closure_input_surface_ids)}",
+        (
+            "semantic_target_closure_input_surface_id_paper_labels="
+            + id_label_lines(closure_input_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_exact_closure_input_surface_id_paper_labels="
+            + id_label_lines(exact_closure_input_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_exact_closure_input_output_surface_id_paper_labels="
+            + id_label_lines(exact_closure_input_output_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_obstruction_equivalence_surface_id_paper_labels="
+            + id_label_lines(obstruction_equivalence_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_closure_input_field_surface_id_paper_labels="
+            + id_label_lines(closure_input_field_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_output_equivalence_surface_id_paper_labels="
+            + id_label_lines(output_equivalence_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_closure_input_field_output_surface_id_paper_labels="
+            + id_label_lines(closure_input_field_output_surface_id_label_pairs)
+        ),
+        (
+            "semantic_target_kernel_surface_targets="
+            + ",".join(surface[1] for surface in kernel_surfaces)
+        ),
+        (
+            "semantic_target_kernel_surface_obstructions="
+            + ",".join(surface[17] for surface in kernel_surfaces)
+        ),
+        (
+            "semantic_target_kernel_surface_frontier_certificates="
+            + ",".join(surface[18] for surface in kernel_surfaces)
+        ),
+        (
+            "semantic_target_kernel_surface_frontier_proofs="
+            + ",".join(surface[19] for surface in kernel_surfaces)
+        ),
+        (
+            "semantic_target_named_route_obstruction_roster_ids="
+            + ",".join(named_route_obstruction_roster_ids)
+        ),
+        (
+            "semantic_target_named_route_obstruction_roster_id_paper_labels="
+            + id_label_lines(named_route_obstruction_roster_id_label_pairs)
+        ),
+        (
+            "semantic_target_named_route_obstruction_roster_ids_proof="
+            "openSemanticTargetNamedRouteObstructionRosterIds_current"
+        ),
+        (
+            "semantic_target_named_frontier_certificate_roster_ids="
+            + ",".join(named_frontier_certificate_roster_ids)
+        ),
+        (
+            "semantic_target_named_frontier_certificate_roster_id_paper_labels="
+            + id_label_lines(named_frontier_certificate_roster_id_label_pairs)
+        ),
+        (
+            "semantic_target_named_frontier_certificate_roster_ids_proof="
+            "openSemanticTargetNamedFrontierCertificateRosterIds_current"
+        ),
+        (
+            "semantic_target_named_route_statement_roster_ids="
+            + ",".join(named_route_statement_roster_ids)
+        ),
+        (
+            "semantic_target_named_route_statement_roster_id_paper_labels="
+            + id_label_lines(named_route_statement_roster_id_label_pairs)
+        ),
+        (
+            "semantic_target_named_route_statement_roster_ids_proof="
+            "openSemanticTargetNamedRouteStatementRosterIds_current"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_id_paper_labels="
+            + id_label_lines(detailed_statement_roster_id_label_pairs)
+        ),
+        "public_manifest_paper_semantic_stdout_contains_missing=0",
+    ]
+    public_manifest_required_lines.extend(public_manifest_complete_stdout_lines)
     manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(
         PUBLIC_EVIDENCE_CHECK_ID,
         public_manifest_required_lines,
