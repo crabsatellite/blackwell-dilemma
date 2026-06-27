@@ -220,7 +220,7 @@ Current results:
 | source-level `_workingAssumption` axioms | 0 | 0 |
 | source-level `_paper_witness` axioms | 0 | 0 |
 | source-level `_OPEN` theorem declarations | 0 | 0 |
-| conditional proof interfaces (`audit_conditional_surface.py`) | 2 | all counted proof/carrier interface containers must be current-refuted or current-closed; unresolved=0 |
+| conditional proof interfaces (`audit_conditional_surface.py`) | 2 (`Part6FullPaperClosingDivergenceWitness`, `Part6FullPaperClosingFeasibleDivergenceWitness`) | exact interface identities, current refutation pairs, and current closure pairs are pinned; all counted proof/carrier interface containers must be current-refuted or current-closed; unresolved=0 |
 | closed `True` compatibility interfaces (`audit_conditional_surface.py`) | 0 | no remaining `True` compatibility aliases in the Prop-interface audit |
 | conditional theorem signatures (`audit_conditional_surface.py`) | 0 | R454 demotes the last generic family-core promotion bridge to a proof-valued `def`; no theorem/lemma signature now takes an interface premise |
 | interfaces with current/no-premise closure | 0 | no counted interface is currently closed without premise; remaining counted interfaces are refuted |

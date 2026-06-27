@@ -36,7 +36,10 @@ python tools/verify_public_evidence.py
 The current public Lean package keeps the checked theorem surface
 kernel-clean: no project-level source axioms, no proof escapes, no unresolved
 conditional theorem interfaces, and no Cat 3 paper-novel input assumptions in
-the live ledger. Complete paper-semantic closure is separately gated in
+the live ledger. The two remaining counted conditional Prop interfaces are
+identity-pinned to the Part 6 divergence and feasible-divergence witness
+surfaces, with named current refutation and closure pairs. Complete
+paper-semantic closure is separately gated in
 `BlackwellDilemma/PaperSemanticGate.lean`; while that gate reports open
 Part 6 lattice-embedding and random-supercritical percolation semantic targets,
 the project does not claim the stronger full-manuscript semantic closure

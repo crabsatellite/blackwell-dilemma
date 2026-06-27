@@ -233,9 +233,11 @@ lattice-embedding and random-supercritical percolation semantic targets. The
 Part 4 lattice p-monotonicity target is closed by the standard `Z^2` ranged
 local-lattice bridge. The live source audit reports 0 project-level `axiom`
 declarations, including 0 `_OPEN`, 0 `_paper_Def`, and 0 `_workingAssumption`
-declarations. The conditional-surface audit reports 2 counted Prop interfaces,
-both current-refuted, 0 conditional theorem signatures, and 0 unresolved
-interfaces.
+declarations. The conditional-surface audit reports exactly the two counted
+Prop interfaces `Part6FullPaperClosingDivergenceWitness` and
+`Part6FullPaperClosingFeasibleDivergenceWitness`; their current refutation pairs
+and current closure pairs are identity-pinned, with 0 conditional theorem
+signatures and 0 unresolved interfaces.
 The live ledger has no `gapOpen` entries, but the cognitive Part 6 route is not
 complete: `not_harrisKestenScalingFunction_diverges_at_pc_paper_Def` proves the
 current unbounded lower-envelope carrier route false. R208 replaces that route

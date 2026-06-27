@@ -38,6 +38,22 @@ INTERFACE_NAME_RE = re.compile(
     r")"
 )
 
+EXPECTED_PROP_INTERFACE_NAMES = [
+    "Part6FullPaperClosingDivergenceWitness",
+    "Part6FullPaperClosingFeasibleDivergenceWitness",
+]
+
+EXPECTED_CURRENT_REFUTATION_PAIRS = [
+    "not_Part6FullPaperClosingDivergenceWitness_current->Part6FullPaperClosingDivergenceWitness",
+    "not_Part6FullPaperClosingFeasibleDivergenceWitness_current->Part6FullPaperClosingFeasibleDivergenceWitness",
+]
+
+EXPECTED_CURRENT_CLOSURE_PAIRS = [
+    "part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness",
+    "part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingFeasibleDivergenceWitness",
+    "part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness",
+]
+
 DECL_START_RE = re.compile(
     r"(?m)^\s*(?:@\[[^\n]*\]\s*)*"
     r"(?:private\s+|protected\s+|noncomputable\s+)*"
@@ -272,13 +288,26 @@ def main() -> int:
         for kind in ("prop_def", "structure", "class")
     }
 
+    prop_interface_names = sorted(name for _path, _line_no, name in prop_interfaces)
+    current_refutation_pairs = sorted(
+        f"{name}->{iface}" for _path, _line_no, name, iface in current_refutations
+    )
+    current_closure_pairs = sorted(
+        f"{name}->{iface}" for _path, _line_no, name, iface in current_closures
+    )
+    unresolved_interface_names = sorted(unresolved_interfaces)
+
     print(f"project_lean_files={len(source_files())}")
     print(f"prop_interfaces={len(prop_interfaces)}")
+    print(f"prop_interface_names={','.join(prop_interface_names)}")
     print(f"closed_true_prop_interfaces={len(closed_true_prop_interfaces)}")
     print(f"conditional_theorem_signatures={len(theorem_hits)}")
     print(f"interfaces_with_current_refutation={len(refuted_interfaces)}")
+    print(f"current_refutation_pairs={','.join(current_refutation_pairs)}")
     print(f"interfaces_with_current_closure={len(closed_interfaces)}")
+    print(f"current_closure_pairs={','.join(current_closure_pairs)}")
     print(f"unresolved_prop_interfaces={len(unresolved_interfaces)}")
+    print(f"unresolved_interface_names={','.join(unresolved_interface_names)}")
     print(f"unresolved_prop_def_interfaces={len(unresolved_by_kind['prop_def'])}")
     print(f"unresolved_structure_interfaces={len(unresolved_by_kind['structure'])}")
     print(f"unresolved_class_interfaces={len(unresolved_by_kind['class'])}")
@@ -346,6 +375,30 @@ def main() -> int:
                             f"{path.as_posix()}:{line_no}: {name} <- "
                             f"{', '.join(unresolved_used)}"
                         )
+
+    failures: list[str] = []
+    if prop_interface_names != EXPECTED_PROP_INTERFACE_NAMES:
+        failures.append(
+            "prop interface names "
+            f"{prop_interface_names!r} != expected {EXPECTED_PROP_INTERFACE_NAMES!r}"
+        )
+    if current_refutation_pairs != EXPECTED_CURRENT_REFUTATION_PAIRS:
+        failures.append(
+            "current refutation pairs "
+            f"{current_refutation_pairs!r} != expected {EXPECTED_CURRENT_REFUTATION_PAIRS!r}"
+        )
+    if current_closure_pairs != EXPECTED_CURRENT_CLOSURE_PAIRS:
+        failures.append(
+            "current closure pairs "
+            f"{current_closure_pairs!r} != expected {EXPECTED_CURRENT_CLOSURE_PAIRS!r}"
+        )
+
+    if failures:
+        print()
+        print("conditional-surface identity failures:")
+        for failure in failures:
+            print(f"- {failure}")
+        return 1
 
     return 1 if args.fail_on_conditional and theorem_hits else 0
 

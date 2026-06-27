@@ -464,6 +464,24 @@
             "semantic_target_closure_input_field_obstruction_certificate_proof=remaining_open_semantic_targets_closure_input_field_obstruction_certificate",
             "semantic_target_axiom_audit_prints_required=272"
           ]
+        },
+        {
+          "id": "conditional_surface_identity_audit",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_conditional_surface.py",
+          "cwd": "lean4",
+          "stdout_contains": [
+            "prop_interfaces=2",
+            "prop_interface_names=Part6FullPaperClosingDivergenceWitness,Part6FullPaperClosingFeasibleDivergenceWitness",
+            "conditional_theorem_signatures=0",
+            "interfaces_with_current_refutation=2",
+            "current_refutation_pairs=not_Part6FullPaperClosingDivergenceWitness_current->Part6FullPaperClosingDivergenceWitness,not_Part6FullPaperClosingFeasibleDivergenceWitness_current->Part6FullPaperClosingFeasibleDivergenceWitness",
+            "interfaces_with_current_closure=2",
+            "current_closure_pairs=part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness,part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingFeasibleDivergenceWitness,part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge->Part6FullPaperClosingDivergenceWitness",
+            "unresolved_prop_interfaces=0",
+            "unresolved_interface_names=",
+            "conditional_signatures_using_unresolved_interfaces=0"
+          ]
         }
       ]
     }
