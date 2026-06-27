@@ -168,9 +168,20 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
             check_count += 1
             if not card.get(field):
                 failures.append(Failure(card_id, f"source_card_{field}", "missing source-card field"))
-        if not (card.get("source_url") or card.get("local_file") or card.get("bibliographic_note")):
+        source_url = card.get("source_url")
+        local_file = card.get("local_file")
+        check_count += 1
+        if not (source_url or local_file):
+            failures.append(Failure(card_id, "source_card_locator", "missing source URL/local file"))
+        if source_url:
             check_count += 1
-            failures.append(Failure(card_id, "source_card_locator", "missing source URL/local file/note"))
+            if not re.match(r"^https://", str(source_url)):
+                failures.append(Failure(card_id, "source_card_source_url", "source_url must start with https://"))
+        if local_file:
+            check_count += 1
+            local_path = repo_path(repo_root, str(local_file))
+            if not local_path.exists():
+                failures.append(Failure(card_id, "source_card_local_file", f"missing local_file: {local_file}"))
 
     claim_items = manifest.get("claims", [])
     count, id_failures = check_unique_ids(claim_items, "claim", "manifest")

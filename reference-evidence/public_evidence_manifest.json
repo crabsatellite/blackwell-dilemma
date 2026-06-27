@@ -23,6 +23,7 @@
       "kind": "external_formula",
       "role": "Bimodality coefficient threshold 5/9 used in the computational appendix diagnostics.",
       "status": "source_backed_diagnostic_not_lean_theorem",
+      "source_url": "https://doi.org/10.3389/fpsyg.2013.00700",
       "bibliographic_note": "Sarle's bimodality coefficient threshold is used only as a simulation diagnostic."
     },
     {
@@ -30,6 +31,7 @@
       "kind": "external_formula",
       "role": "2D percolation finite-size-scaling exponent nu=4/3 used for empirical data-collapse diagnostics.",
       "status": "source_backed_diagnostic_not_lean_theorem",
+      "source_url": "https://doi.org/10.1103/PhysRevB.23.422",
       "bibliographic_note": "The public text treats nu=4/3 as a finite-size-scaling diagnostic; it is not a closed Lean input for the remaining theorem targets."
     },
     {
