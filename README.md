@@ -219,6 +219,9 @@ and the frontier/exact-input/output/field-obstruction certificates.
 named sufficient closure-input roster itself, including target/input/current
 obstruction/certificate propositions and the target-obstruction to
 sufficient-input-obstruction projection.
+`open_semantic_target_exact_closure_input_named_roster_certificate` similarly
+pins the exact closure-input roster and proves target obstruction equivalent to
+exact-input obstruction for each remaining open semantic target.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
