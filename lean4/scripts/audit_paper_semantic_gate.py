@@ -980,6 +980,12 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargets_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceExactInputs_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current",
@@ -3080,6 +3086,16 @@ def main() -> int:
     print(
         "semantic_target_closure_input_field_output_certificate_proofs="
         + ",".join(surface[10] for surface in closure_input_field_output_surfaces)
+    )
+    print("semantic_target_closure_input_field_output_roster_terms_checked=12")
+    print(
+        "semantic_target_closure_input_field_output_roster_length_proofs="
+        "openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceTargets_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceExactInputs_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates_length_current"
     )
     print(
         "semantic_target_closure_input_field_output_certificate="

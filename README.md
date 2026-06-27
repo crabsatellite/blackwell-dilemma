@@ -358,7 +358,7 @@ combined detailed field-output roster package, topo route-obstruction
 projections and 12-term statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency, field statement roster length,
-field-output statement roster length,
+field-output surface roster length, field-output statement roster length,
 surface-roster consistency, top-level statement roster length, and AxiomAudit
 coverage.
 The companion audit now publishes both required AxiomAudit print count and
