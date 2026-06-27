@@ -160,9 +160,13 @@ def main() -> int:
     for line in output_lines:
         print(line)
 
+    required_manifest_lines = [
+        *output_lines,
+        "public_manifest_kernel_stdout_contains_missing=0",
+    ]
     manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(
         PUBLIC_EVIDENCE_CHECK_ID,
-        output_lines,
+        required_manifest_lines,
     )
     print(
         "public_manifest_kernel_stdout_contains_missing="

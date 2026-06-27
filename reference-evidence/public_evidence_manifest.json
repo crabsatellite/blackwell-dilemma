@@ -866,7 +866,8 @@
             "axiom_paper_witness=0",
             "decl_workingAssumption=0",
             "def_OPEN=0",
-            "theorem_OPEN=0"
+            "theorem_OPEN=0",
+            "public_manifest_kernel_stdout_contains_missing=0"
           ]
         },
         {
@@ -907,7 +908,8 @@
             "conditional_signatures_using_unresolved_interfaces=0",
             "conditional_signatures_using_unresolved_prop_def_interfaces=0",
             "conditional_signatures_using_unresolved_structure_interfaces=0",
-            "conditional_signatures_using_unresolved_class_interfaces=0"
+            "conditional_signatures_using_unresolved_class_interfaces=0",
+            "public_manifest_conditional_stdout_contains_missing=0"
           ]
         }
       ]
