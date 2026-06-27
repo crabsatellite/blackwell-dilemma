@@ -454,6 +454,14 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetObstructions",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputObstructions",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceIds_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceCount_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargets_named_current",
@@ -462,6 +470,14 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceOutputObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurface_exact_input_to_output",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurface_output_to_exact_input",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputOutputSurface_exact_input_iff_output",
@@ -476,6 +492,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_closure_input_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_exact_closure_input_output_named_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_exact_closure_input_output_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetObstructionEquivalenceSurface",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaces",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceIds",
@@ -1785,6 +1803,25 @@ def main() -> int:
     print(
         "semantic_target_exact_closure_input_output_named_roster_certificate_proof="
         "open_semantic_target_exact_closure_input_output_named_roster_certificate"
+    )
+    print(
+        "semantic_target_exact_closure_input_output_statement_roster_proofs="
+        "openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements_named_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements_named_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements_named_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements_named_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements_named_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_named_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_named_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_named_current"
+    )
+    print(
+        "semantic_target_exact_closure_input_output_statement_roster_certificate="
+        "OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_exact_closure_input_output_statement_roster_certificate_proof="
+        "open_semantic_target_exact_closure_input_output_statement_roster_certificate"
     )
     print(
         "semantic_target_obstruction_equivalence_targets="

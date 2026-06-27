@@ -241,6 +241,9 @@ statements.
 `open_semantic_target_exact_closure_input_output_named_roster_certificate`
 pins the exact-input/output-bundle roster and proves target, exact-input, and
 output-bundle obstructions pairwise equivalent on each surface.
+`open_semantic_target_exact_closure_input_output_statement_roster_certificate`
+pins the exact-input/output, target/exact-input, target/output, and all three
+obstruction-equivalence formulas to the named Part 6/topo statements.
 `open_semantic_target_output_equivalence_named_roster_certificate` separately
 pins the reversible target/output roster and its target-output obstruction
 equivalence.
