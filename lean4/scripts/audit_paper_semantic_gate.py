@@ -633,6 +633,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_output_projection_certificate",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_closure_input_not_of_boxed_route_not",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not",
@@ -2257,6 +2261,18 @@ def main() -> int:
     print(
         "semantic_target_topo_exact_output_projection_certificate_proof="
         "topo_cluster_random_supercritical_z2_exact_output_projection_certificate"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_statement_roster_proof="
+        "topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements_named_current"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate"
     )
     print(
         "semantic_target_topo_route_obstruction_projection_proofs="
