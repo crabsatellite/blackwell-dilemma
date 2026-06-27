@@ -2830,7 +2830,13 @@ def main() -> int:
         required_axiom_audit_decls.add(
             f"BlackwellDilemma.PaperSemanticGate.{exact_not_iff_output}"
         )
+    missing_axiom_audit_prints = [
+        decl
+        for decl in sorted(required_axiom_audit_decls)
+        if not has_axiom_audit_print(axiom_audit_text, decl)
+    ]
     print(f"semantic_target_axiom_audit_prints_required={len(required_axiom_audit_decls)}")
+    print(f"semantic_target_axiom_audit_prints_missing={len(missing_axiom_audit_prints)}")
 
     failures: list[str] = []
     if open_count != expected_open:
@@ -3579,9 +3585,8 @@ def main() -> int:
         failures.append(
             f"missing obstruction-equivalence surface id: {target_id}"
         )
-    for decl in sorted(required_axiom_audit_decls):
-        if not has_axiom_audit_print(axiom_audit_text, decl):
-            failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")
+    for decl in missing_axiom_audit_prints:
+        failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")
 
     if open_count:
         for path, phrases in FORBIDDEN_WHEN_OPEN.items():

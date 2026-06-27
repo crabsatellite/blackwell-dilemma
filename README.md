@@ -334,6 +334,8 @@ projections and statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency, field statement roster,
 surface-roster consistency, top-level statement roster, and AxiomAudit coverage.
+The companion audit now publishes both required AxiomAudit print count and
+missing print count.
 The public
 verification command set includes the same Lean build, PaperSemanticGate build,
 AxiomAudit build, and source-level audit scripts listed above.
