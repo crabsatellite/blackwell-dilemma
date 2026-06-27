@@ -18,6 +18,7 @@ import argparse
 import json
 import math
 import re
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -176,8 +177,35 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
                     if count != int(check["expected_count"]):
                         failures.append(Failure(claim_id, check_id, f"count {count} != {check['expected_count']}"))
 
+                elif ctype == "python_script":
+                    script = repo_path(repo_root, check["path"])
+                    cwd = repo_path(repo_root, check.get("cwd", "."))
+                    result = subprocess.run(
+                        [sys.executable, str(script)],
+                        cwd=cwd,
+                        text=True,
+                        capture_output=True,
+                        timeout=int(check.get("timeout_seconds", 120)),
+                    )
+                    if result.returncode != 0:
+                        failures.append(
+                            Failure(
+                                claim_id,
+                                check_id,
+                                f"script exited {result.returncode}: {result.stdout}{result.stderr}",
+                            )
+                        )
+                    for snippet in check.get("stdout_contains", []):
+                        check_count += 1
+                        if snippet not in result.stdout:
+                            failures.append(
+                                Failure(claim_id, check_id, f"script stdout missing: {snippet}")
+                            )
+
                 else:
                     failures.append(Failure(claim_id, check_id, f"unknown check type: {ctype}"))
+            except subprocess.TimeoutExpired as exc:
+                failures.append(Failure(claim_id, check_id, f"script timed out: {exc}"))
             except (KeyError, ValueError, TypeError) as exc:
                 failures.append(Failure(claim_id, check_id, f"check error: {exc}"))
 
