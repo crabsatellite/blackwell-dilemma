@@ -252,6 +252,9 @@ The two remaining open semantic targets are also named as Lean propositions:
 `TopoClusterRandomSupercriticalZ2SemanticKernelTarget`. Their `*_notYet`
 theorems gate the current kernel refutations while the target count remains
 open=2.
+`openSemanticTargetKernelSurfaces` ties the two open ledger ids to those Lean
+propositions and their current obstruction proofs, with id/count theorems
+checking that the roster matches `openSemanticTargetIds`.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

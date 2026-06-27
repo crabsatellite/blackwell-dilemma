@@ -148,6 +148,47 @@ theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet :
     Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
   exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
 
+/-- Machine-facing roster entry tying an open semantic ledger id to its exact
+Lean target proposition and its current kernel obstruction. -/
+structure OpenSemanticTargetKernelSurface where
+  id : String
+  paperLabel : String
+  target : Prop
+  currentObstruction : Not target
+
+/-- The two current open semantic targets with their exact Lean propositions
+and current refutations. -/
+def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
+  [ { id := "theorem_4_1_part6_lattice_embedding",
+      paperLabel := "thm:cognitive-threshold Part 6",
+      target := Part6LatticeEmbeddingSemanticKernelTarget,
+      currentObstruction :=
+        part6_lattice_embedding_semantic_kernel_target_notYet },
+    { id := "topo_cluster_random_supercritical_z2",
+      paperLabel := "prop:topo-cluster and thm:phase",
+      target := TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+      currentObstruction :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet } ]
+
+def openSemanticTargetKernelSurfaceIds : List String :=
+  openSemanticTargetKernelSurfaces.map (fun surface => surface.id)
+
+/-- Build gate: the machine-facing open target roster has exactly the same ids
+as the semantic ledger. -/
+theorem openSemanticTargetKernelSurfaceIds_current :
+    openSemanticTargetKernelSurfaceIds = openSemanticTargetIds := rfl
+
+/-- Build gate: the machine-facing open target roster has the same cardinality
+as the semantic ledger's open target count. -/
+theorem openSemanticTargetKernelSurfaceCount_current :
+    openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount := rfl
+
+/-- Every machine-facing roster entry carries its current kernel obstruction. -/
+theorem openSemanticTargetKernelSurface_current_obstruction
+    (surface : OpenSemanticTargetKernelSurface) :
+    Not surface.target :=
+  surface.currentObstruction
+
 /-- Typed payload for the closed Theorem 4.1 Part 4 lattice p-monotonicity
 target.  This machine-checks the bounded kernel theorem, the constructive
 five-state instance, and the standard `Z2` ranged local-lattice bridge that

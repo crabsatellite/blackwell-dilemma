@@ -1032,6 +1032,9 @@ For full kernel-pure cover (v2.0 future iteration):
   `TopoClusterRandomSupercriticalZ2SemanticKernelTarget`, each tied to its
   current full route by an iff theorem and to its current obstruction by a
   `*_notYet` theorem.
+  The `openSemanticTargetKernelSurfaces` roster now ties these two ledger ids
+  to the exact Lean propositions and obstruction proofs, and its id/count
+  gates match `openSemanticTargetIds`.
 - The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
   recalibration is closed by aliases in `Canonical.lean`; the paper R10
   `prop:threshold-five-state` clause (iii) high-κ signal-conditional routing
