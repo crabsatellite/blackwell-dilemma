@@ -1049,7 +1049,10 @@ For full kernel-pure cover (v2.0 future iteration):
   `openSemanticTargetFrontierPayloadSurfaces` separately ties the same two open
   ids to `Nonempty` certificates for their full typed frontier payload terms,
   and the semantic audit requires the payload terms, payload certificates, and
-  payload-certificate proofs to appear in `AxiomAudit.lean`.
+  payload-certificate proofs to appear in `AxiomAudit.lean`. The same surface
+  now also carries payload-derived projections for each target's active
+  frontier progress certificate, matching nonclosure certificate, and current
+  frontier certificate.
   `open_semantic_target_surface_roster_consistency_certificate` then proves
   that the semantic ledger ids, kernel-surface ids, typed frontier-payload ids,
   and both roster counts are synchronized.

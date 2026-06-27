@@ -3618,12 +3618,57 @@ theorem topo_cluster_random_supercritical_z2_frontier_payload_certificate :
     TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate :=
   ⟨topo_cluster_random_supercritical_z2_frontier_payload⟩
 
+/-- The complete typed Part 6 frontier payload projects the active progress
+certificate used by the open-target kernel surface. -/
+theorem part6_lattice_embedding_frontier_payload_frontier_progress_certificate :
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate :=
+  (part6_lattice_embedding_frontier_payload).closed_unit_tail_reversal_bridge_output_certificate
+
+/-- The complete typed Part 6 frontier payload projects the matching
+non-closure certificate for the active progress layer. -/
+theorem part6_lattice_embedding_frontier_payload_frontier_nonclosure_certificate :
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate :=
+  (part6_lattice_embedding_frontier_payload).closed_unit_tail_reversal_bridge_nonclosure_certificate
+
+/-- The complete typed Part 6 frontier payload projects the current frontier
+certificate for the open target. -/
+theorem part6_lattice_embedding_frontier_payload_current_frontier_certificate :
+    Part6CurrentFrontierCertificate :=
+  (part6_lattice_embedding_frontier_payload).part6_current_frontier_certificate
+
+/-- The complete typed random-supercritical topo frontier payload projects the
+active support-surface progress certificate. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_frontier_progress_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_support_surface_repair_route_output_certificate
+
+/-- The complete typed random-supercritical topo frontier payload projects the
+matching non-closure certificate for the active support-surface layer. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_support_surface_repair_nonclosure_certificate
+
+/-- The complete typed random-supercritical topo frontier payload projects the
+current frontier certificate for the open target. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate :
+    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_certificate
+
 /-- Machine-facing roster that ties each open semantic ledger id to its full
 typed frontier payload. -/
 structure OpenSemanticTargetFrontierPayloadSurface where
   id : String
   payloadCertificate : Prop
   payloadCertificateProof : payloadCertificate
+  frontierProgressCertificate : Prop
+  frontierProgressCertificateProof : frontierProgressCertificate
+  frontierNonclosureCertificate : Prop
+  frontierNonclosureCertificateProof : frontierNonclosureCertificate
+  frontierCertificate : Prop
+  frontierCertificateProof : frontierCertificate
 
 /-- The two current open semantic targets with their full typed frontier
 payload certificates. -/
@@ -3632,12 +3677,35 @@ def openSemanticTargetFrontierPayloadSurfaces :
   [ { id := "theorem_4_1_part6_lattice_embedding",
       payloadCertificate := Part6LatticeEmbeddingFrontierPayloadCertificate,
       payloadCertificateProof :=
-        part6_lattice_embedding_frontier_payload_certificate },
+        part6_lattice_embedding_frontier_payload_certificate,
+      frontierProgressCertificate :=
+        Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+      frontierProgressCertificateProof :=
+        part6_lattice_embedding_frontier_payload_frontier_progress_certificate,
+      frontierNonclosureCertificate :=
+        Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+      frontierNonclosureCertificateProof :=
+        part6_lattice_embedding_frontier_payload_frontier_nonclosure_certificate,
+      frontierCertificate := Part6CurrentFrontierCertificate,
+      frontierCertificateProof :=
+        part6_lattice_embedding_frontier_payload_current_frontier_certificate },
     { id := "topo_cluster_random_supercritical_z2",
       payloadCertificate :=
         TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
       payloadCertificateProof :=
-        topo_cluster_random_supercritical_z2_frontier_payload_certificate } ]
+        topo_cluster_random_supercritical_z2_frontier_payload_certificate,
+      frontierProgressCertificate :=
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+      frontierProgressCertificateProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_frontier_progress_certificate,
+      frontierNonclosureCertificate :=
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+      frontierNonclosureCertificateProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate,
+      frontierCertificate :=
+        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+      frontierCertificateProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate } ]
 
 def openSemanticTargetFrontierPayloadSurfaceIds : List String :=
   openSemanticTargetFrontierPayloadSurfaces.map (fun surface => surface.id)
@@ -3663,6 +3731,27 @@ theorem openSemanticTargetFrontierPayloadSurface_certificate
     (surface : OpenSemanticTargetFrontierPayloadSurface) :
     surface.payloadCertificate :=
   surface.payloadCertificateProof
+
+/-- Every typed-frontier-payload roster entry projects the active frontier
+progress certificate from its full payload. -/
+theorem openSemanticTargetFrontierPayloadSurface_frontier_progress_certificate
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.frontierProgressCertificate :=
+  surface.frontierProgressCertificateProof
+
+/-- Every typed-frontier-payload roster entry projects the active non-closure
+certificate from its full payload. -/
+theorem openSemanticTargetFrontierPayloadSurface_frontier_nonclosure_certificate
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.frontierNonclosureCertificate :=
+  surface.frontierNonclosureCertificateProof
+
+/-- Every typed-frontier-payload roster entry projects the current frontier
+certificate from its full payload. -/
+theorem openSemanticTargetFrontierPayloadSurface_frontier_certificate
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.frontierCertificate :=
+  surface.frontierCertificateProof
 
 /-- One certificate tying the semantic ledger, kernel surface roster, and full
 typed frontier-payload roster to the same remaining open targets. -/
