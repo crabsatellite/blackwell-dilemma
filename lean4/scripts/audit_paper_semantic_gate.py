@@ -315,6 +315,12 @@ EXPECTED_SEMANTIC_TARGET_STATUS_PARTITION_CONJUNCTS = (
     "openSemanticTargets.map",
 )
 
+EXPECTED_SEMANTIC_TARGET_PAPER_LABEL_CONJUNCTS = (
+    "closedSemanticTargets.paperLabel",
+    "openSemanticTargets.paperLabel",
+    "semanticTargets.paperLabel",
+)
+
 EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnly ↔ False",
     "paperSemanticClosedCount = 3",
@@ -322,6 +328,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "ClosedSemanticTargetsFrontierCertificate",
     "SemanticTargetCountCertificate",
     "SemanticTargetStatusPartitionCertificate",
+    "SemanticTargetPaperLabelCertificate",
     "SemanticTargetsPartitionCertificate",
     "RemainingOpenSemanticTargetsFrontierCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
@@ -1746,6 +1753,47 @@ def semantic_target_status_partition_missing_conjuncts(text: str) -> list[str]:
     ]
 
 
+def semantic_target_paper_label_missing_conjuncts(text: str) -> list[str]:
+    match = re.search(
+        r"def\s+SemanticTargetPaperLabelCertificate\s*:\s*"
+        r"Prop\s*:=\s*(.*?)\n\s*/--\s+The current semantic ledger's paper labels",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing SemanticTargetPaperLabelCertificate body")
+    body = match.group(1)
+    patterns = {
+        "closedSemanticTargets.paperLabel": (
+            r"\bclosedSemanticTargets\.map\s*"
+            r"\(fun\s+target\s*=>\s*target\.paperLabel\)\s*=\s*"
+            r"\[\"prop:two-regime-five-state\",\s*"
+            r"\"thm:cognitive-threshold Part 4\",\s*"
+            r"\"prop:threshold-five-state clause iii\"\]"
+        ),
+        "openSemanticTargets.paperLabel": (
+            r"\bopenSemanticTargets\.map\s*"
+            r"\(fun\s+target\s*=>\s*target\.paperLabel\)\s*=\s*"
+            r"\[\"thm:cognitive-threshold Part 6\",\s*"
+            r"\"prop:topo-cluster and thm:phase\"\]"
+        ),
+        "semanticTargets.paperLabel": (
+            r"\bsemanticTargets\.map\s*"
+            r"\(fun\s+target\s*=>\s*target\.paperLabel\)\s*=\s*"
+            r"\[\"prop:two-regime-five-state\",\s*"
+            r"\"thm:cognitive-threshold Part 4\",\s*"
+            r"\"prop:threshold-five-state clause iii\",\s*"
+            r"\"thm:cognitive-threshold Part 6\",\s*"
+            r"\"prop:topo-cluster and thm:phase\"\]"
+        ),
+    }
+    return [
+        conjunct
+        for conjunct in EXPECTED_SEMANTIC_TARGET_PAPER_LABEL_CONJUNCTS
+        if re.search(patterns[conjunct], body) is None
+    ]
+
+
 def top_level_statement_roster_missing_terms(text: str) -> list[str]:
     match = re.search(
         r"def\s+completePaperSemanticKernelOnlyCurrentObstructionStatements\s*:\s*"
@@ -1999,6 +2047,9 @@ def main() -> int:
     semantic_target_status_partition_missing_terms = (
         semantic_target_status_partition_missing_conjuncts(text)
     )
+    semantic_target_paper_label_missing_terms = (
+        semantic_target_paper_label_missing_conjuncts(text)
+    )
     (
         named_current_roster_count,
         missing_named_current_roster_length_proofs,
@@ -2100,6 +2151,26 @@ def main() -> int:
     print(
         "semantic_target_status_partition_conjuncts_missing_terms="
         + ",".join(semantic_target_status_partition_missing_terms)
+    )
+    print(
+        "semantic_target_paper_label_certificate="
+        "SemanticTargetPaperLabelCertificate"
+    )
+    print(
+        "semantic_target_paper_label_certificate_proof="
+        "semantic_target_paper_label_certificate"
+    )
+    print(
+        "semantic_target_paper_label_conjuncts_checked="
+        f"{len(EXPECTED_SEMANTIC_TARGET_PAPER_LABEL_CONJUNCTS)}"
+    )
+    print(
+        "semantic_target_paper_label_conjuncts_missing="
+        f"{len(semantic_target_paper_label_missing_terms)}"
+    )
+    print(
+        "semantic_target_paper_label_conjuncts_missing_terms="
+        + ",".join(semantic_target_paper_label_missing_terms)
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate="
@@ -4166,6 +4237,22 @@ def main() -> int:
             f"{len(semantic_target_status_partition_missing_terms)}"
         ),
         (
+            "semantic_target_paper_label_certificate="
+            "SemanticTargetPaperLabelCertificate"
+        ),
+        (
+            "semantic_target_paper_label_certificate_proof="
+            "semantic_target_paper_label_certificate"
+        ),
+        (
+            "semantic_target_paper_label_conjuncts_checked="
+            f"{len(EXPECTED_SEMANTIC_TARGET_PAPER_LABEL_CONJUNCTS)}"
+        ),
+        (
+            "semantic_target_paper_label_conjuncts_missing="
+            f"{len(semantic_target_paper_label_missing_terms)}"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -4310,6 +4397,11 @@ def main() -> int:
         failures.append(
             "semantic target status partition missing conjuncts: "
             + ",".join(semantic_target_status_partition_missing_terms)
+        )
+    if semantic_target_paper_label_missing_terms:
+        failures.append(
+            "semantic target paper label certificate missing conjuncts: "
+            + ",".join(semantic_target_paper_label_missing_terms)
         )
     if missing_named_current_roster_length_proofs:
         failures.append(
