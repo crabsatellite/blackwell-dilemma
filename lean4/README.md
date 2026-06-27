@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/top-level complete-obstruction certificate/closure-input sufficient-route, output, field, field-obstruction, and output-equivalence certificates/output-equivalence roster id, target/output, bidirectional projection, iff, and obstruction consistency/field-roster id, payload-to-input/iff consistency, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=192 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/top-level complete-obstruction certificate/closure-input sufficient-route, exact-input, output, field, field-obstruction, and output-equivalence certificates/exact-input roster id, target/input, bidirectional projection, iff, sufficient-to-exact, and obstruction consistency/output-equivalence roster id, target/output, bidirectional projection, iff, and obstruction consistency/field-roster id, payload-to-input/iff consistency, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=216 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -309,6 +309,12 @@ the output projections from those inputs: Part 6 reaches the divergence,
 same-alpha feasible/divergence, paired-output, and full-output-bundle surfaces,
 while the topo input reaches the support-surface route/output, repaired
 paper-support output, giant-loss output, full route, and boxed route.
+`remaining_open_semantic_targets_exact_closure_input_certificate` separates
+exact target-equivalent closure inputs from those stronger sufficient inputs:
+Part 6 is equivalent to `Part6LatticeEmbeddingExactClosureInput`, topo is
+equivalent to `TopoClusterRandomSupercriticalZ2ExactClosureInput`, and each
+sufficient input projects into its exact input. Both exact inputs remain
+current-refuted.
 `remaining_open_semantic_targets_closure_input_field_certificate` gates the
 field-level payloads beneath those inputs: Part 6 exposes the closed-unit
 tail-reversal bridge, nonempty closed-unit alpha domain, bridge route, and

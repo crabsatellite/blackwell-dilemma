@@ -1094,6 +1094,12 @@ For full kernel-pure cover (v2.0 future iteration):
   full-output-bundle surfaces, while the topo input reaches the support-surface
   route/output, repaired paper-support output, giant-loss output, full route,
   and boxed route.
+  `remaining_open_semantic_targets_exact_closure_input_certificate` separates
+  exact target-equivalent closure inputs from these stronger sufficient inputs:
+  Part 6 is equivalent to `Part6LatticeEmbeddingExactClosureInput`, topo is
+  equivalent to `TopoClusterRandomSupercriticalZ2ExactClosureInput`, and each
+  sufficient input projects into its exact input. Both exact inputs remain
+  current-refuted.
   `remaining_open_semantic_targets_closure_input_field_certificate` further
   packages field-level payloads: Part 6 exposes the closed-unit tail-reversal
   bridge, nonempty closed-unit alpha domain, bridge route, and paper support

@@ -126,6 +126,13 @@ reaches the divergence, same-`alpha` feasible/divergence, paired-output, and
 full-output-bundle surfaces, while the topo input reaches the support-surface
 route/output, repaired paper-support output, giant-loss output, full route, and
 boxed route.
+The semantic gate also separates exact closure inputs from those stronger
+sufficient inputs:
+`remaining_open_semantic_targets_exact_closure_input_certificate` proves the
+Part 6 target equivalent to `Part6LatticeEmbeddingExactClosureInput` and the
+topo target equivalent to `TopoClusterRandomSupercriticalZ2ExactClosureInput`;
+each sufficient input is checked to project into its exact input, and both exact
+inputs remain current-refuted.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,
@@ -179,6 +186,7 @@ payload-derived progress/nonclosure/frontier projections, cross-surface
 target/route-map/closure/frontier equality, payload-derived route-map and
 route/closure certificate-obstruction projections, the payload route-map
 certificate, closure-input sufficient-route/output/field certificates and obstructions,
+exact closure-input equivalence, sufficient-to-exact projections,
 output-equivalence target/output bundles, bidirectional output projections,
 output iff proofs, output obstructions, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
