@@ -9021,6 +9021,12 @@ theorem
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute] := rfl
 
+/-- Build gate: the topo exact-output projection statement roster has exactly
+the 16 exact-input, output-bundle, and current-boundary formulas listed above. -/
+theorem
+    topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements_length_current :
+    topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements.length = 16 := rfl
+
 /-- Build-gated statement roster for the topo exact-output projection. -/
 def TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate :
     Prop :=
@@ -9058,6 +9064,7 @@ def TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertific
      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute] /\
+    topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements.length = 16 /\
     (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
     (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
@@ -9100,6 +9107,7 @@ theorem
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate := by
   exact ⟨
     topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements_named_current,
+    topoClusterRandomSupercriticalZ2ExactOutputProjectionStatements_length_current,
     topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input,
     topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input,
     topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input,

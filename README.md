@@ -182,7 +182,7 @@ support-surface repair layer still does not close the full or boxed route.
 `topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate`
 pins those topo exact-output projections, current route/output obstructions,
 and the inhabited support-surface repair route boundary in one build-gated
-statement list.
+16-term statement list.
 `topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate`
 then gates the negative direction: refuting either the full route or boxed route
 refutes both the topo exact input and same-bridge output bundle, and those route
@@ -352,9 +352,9 @@ packages and package obstructions, joint route-obstruction packages, statement
 rosters, and package obstructions, bilateral package obstruction statement
 rosters, Part 6 conditional witness interface projections, 11-term statement
 roster, and obstructions, Part 6 route-obstruction projections and 12-term statement roster,
-Part 6 field-output statement roster, topo
-exact-output projections, statement roster, route nonclosure boundary, and
-field-output statement roster, combined detailed field-output roster package,
+Part 6 field-output statement roster, topo exact-output projections, 16-term
+statement roster, route nonclosure boundary, and field-output statement roster,
+combined detailed field-output roster package,
 topo route-obstruction
 projections and statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
