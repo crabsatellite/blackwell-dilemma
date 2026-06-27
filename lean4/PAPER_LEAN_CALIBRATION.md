@@ -1071,6 +1071,15 @@ For full kernel-pure cover (v2.0 future iteration):
   current target obstructions, route equivalence proofs, payload-derived
   route/closure certificates, route/closure obstructions, and frontier
   certificates.
+  `openSemanticTargetClosureInputSurfaces` separately names sufficient closure
+  inputs for both open targets. `Part6LatticeEmbeddingClosureInput` would close
+  the Part 6 target through the closed-unit tail-reversal bridge route, while
+  `TopoClusterRandomSupercriticalZ2ClosureInput` would close the topo target
+  through a repaired bridge carrying a pointwise-on-giant positive loss floor.
+  Both inputs are current-refuted, and
+  `remaining_open_semantic_targets_closure_input_certificate` packages the
+  input-to-target proofs, input obstructions, target obstructions, and input
+  certificates into one Lean theorem checked by the semantic audit.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,

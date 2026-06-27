@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=102 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/closure-input sufficient-route certificate/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=123 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -293,6 +293,14 @@ collects these gates into one Lean theorem, including current refutations of
 the exact target routes, their route certificates, route-equivalence proofs,
 closure routes, closure-route certificates, and the current progress/nonclosure
 certificates.
+`openSemanticTargetClosureInputSurfaces` separately names sufficient closure
+inputs for the two open targets: `Part6LatticeEmbeddingClosureInput` would close
+the Part 6 target through the closed-unit tail-reversal bridge route, and
+`TopoClusterRandomSupercriticalZ2ClosureInput` would close the topo target
+through a repaired bridge with pointwise-on-giant positive loss. The semantic
+audit checks the input propositions, input-to-target proofs, input
+obstructions, target obstructions, input certificates, certificate proofs, and
+`remaining_open_semantic_targets_closure_input_certificate`.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

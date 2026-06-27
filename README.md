@@ -113,6 +113,13 @@ It also proves that the current carrier cannot satisfy the closed-unit
 paper-domain divergence witness or the stronger same-`alpha`
 feasible/divergence witness, so the output shape itself is not vacuously
 available while the domain is empty.
+The semantic gate now also names the sufficient closure inputs explicitly:
+`Part6LatticeEmbeddingClosureInput` would close the Part 6 target through the
+tail-reversal bridge route, and
+`TopoClusterRandomSupercriticalZ2ClosureInput` would close the topo target
+through a repaired bridge with a pointwise-on-giant positive loss floor. Both
+inputs are current-refuted and are packaged by
+`remaining_open_semantic_targets_closure_input_certificate`.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
@@ -140,7 +147,8 @@ progress/nonclosure certificates, full typed frontier payload certificates,
 payload-derived progress/nonclosure/frontier projections, cross-surface
 target/route-map/closure/frontier equality, payload-derived route-map and
 route/closure certificate-obstruction projections, the payload route-map
-certificate, surface-roster consistency, and AxiomAudit coverage. The public
+certificate, closure-input sufficient-route certificates and obstructions,
+surface-roster consistency, and AxiomAudit coverage. The public
 verification command set includes the same Lean build, PaperSemanticGate build,
 AxiomAudit build, and source-level audit scripts listed above.
 

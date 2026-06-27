@@ -119,6 +119,27 @@ EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES = {
     ),
 }
 
+EXPECTED_OPEN_CLOSURE_INPUT_SURFACES = {
+    "theorem_4_1_part6_lattice_embedding": (
+        "Part6LatticeEmbeddingSemanticKernelTarget",
+        "Part6LatticeEmbeddingClosureInput",
+        "part6_lattice_embedding_semantic_kernel_target_of_closure_input",
+        "part6_lattice_embedding_closure_input_notYet",
+        "part6_lattice_embedding_semantic_kernel_target_notYet",
+        "Part6LatticeEmbeddingClosureInputCertificate",
+        "part6_lattice_embedding_closure_input_certificate",
+    ),
+    "topo_cluster_random_supercritical_z2": (
+        "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
+        "TopoClusterRandomSupercriticalZ2ClosureInput",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input",
+        "topo_cluster_random_supercritical_z2_closure_input_notYet",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet",
+        "TopoClusterRandomSupercriticalZ2ClosureInputCertificate",
+        "topo_cluster_random_supercritical_z2_closure_input_certificate",
+    ),
+}
+
 FORBIDDEN_WHEN_OPEN = {
     REPO_ROOT / "README.md": [
         "complete kernel-only audit target",
@@ -185,6 +206,17 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_payload_route_map_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputSurface",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaces",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceIds",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceIds_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceCount_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_input_to_target",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_input_current_obstruction",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_target_current_obstruction",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_input_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_certificate",
 }
 
 
@@ -356,6 +388,47 @@ def open_frontier_payload_surfaces(
     return surfaces
 
 
+def open_closure_input_surfaces(
+    text: str,
+) -> list[
+    tuple[
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+    ]
+]:
+    match = re.search(
+        r"def\s+openSemanticTargetClosureInputSurfaces\s*:\s*"
+        r"List\s+OpenSemanticTargetClosureInputSurface\s*:=\s*"
+        r"(\[.*?\])\s*\n\s*def\s+openSemanticTargetClosureInputSurfaceIds",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing open semantic target closure-input roster")
+
+    surfaces = re.findall(
+        r'id\s*:=\s*"([^"]+)".*?'
+        r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"closureInput\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"inputToTarget\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"inputCurrentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetCurrentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"inputCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"inputCertificateProof\s*:=\s*([A-Za-z0-9_'.]+)",
+        match.group(1),
+        flags=re.DOTALL,
+    )
+    if not surfaces:
+        raise SystemExit("no open semantic target closure-input entries found")
+    return surfaces
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -378,6 +451,8 @@ def main() -> int:
     kernel_surface_ids = [surface[0] for surface in kernel_surfaces]
     payload_surfaces = open_frontier_payload_surfaces(text)
     payload_surface_ids = [surface[0] for surface in payload_surfaces]
+    closure_input_surfaces = open_closure_input_surfaces(text)
+    closure_input_surface_ids = [surface[0] for surface in closure_input_surfaces]
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -387,6 +462,7 @@ def main() -> int:
     print(f"semantic_target_closed_ids={','.join(closed_ids)}")
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
+    print(f"semantic_target_closure_input_surface_ids={','.join(closure_input_surface_ids)}")
     print(
         "semantic_target_kernel_surface_targets="
         + ",".join(surface[1] for surface in kernel_surfaces)
@@ -627,6 +703,42 @@ def main() -> int:
         "semantic_target_payload_route_map_certificate_proof="
         "remaining_open_semantic_targets_payload_route_map_certificate"
     )
+    print(
+        "semantic_target_closure_input_targets="
+        + ",".join(surface[1] for surface in closure_input_surfaces)
+    )
+    print(
+        "semantic_target_closure_inputs="
+        + ",".join(surface[2] for surface in closure_input_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_to_target_proofs="
+        + ",".join(surface[3] for surface in closure_input_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_obstructions="
+        + ",".join(surface[4] for surface in closure_input_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_target_obstructions="
+        + ",".join(surface[5] for surface in closure_input_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_certificates="
+        + ",".join(surface[6] for surface in closure_input_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_certificate_proofs="
+        + ",".join(surface[7] for surface in closure_input_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_certificate="
+        "RemainingOpenSemanticTargetsClosureInputCertificate"
+    )
+    print(
+        "semantic_target_closure_input_certificate_proof="
+        "remaining_open_semantic_targets_closure_input_certificate"
+    )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
         _target_id,
@@ -745,6 +857,35 @@ def main() -> int:
         required_axiom_audit_decls.add(
             f"BlackwellDilemma.PaperSemanticGate.{frontier_certificate_proof}"
         )
+    for (
+        _target_id,
+        target_prop,
+        closure_input,
+        input_to_target,
+        input_obstruction,
+        target_obstruction,
+        input_certificate,
+        input_certificate_proof,
+    ) in closure_input_surfaces:
+        required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_prop}")
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{closure_input}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{input_to_target}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{input_obstruction}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{target_obstruction}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{input_certificate}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{input_certificate_proof}"
+        )
     print(f"semantic_target_axiom_audit_prints_required={len(required_axiom_audit_decls)}")
 
     failures: list[str] = []
@@ -764,9 +905,17 @@ def main() -> int:
         failures.append(
             f"frontier-payload surface ids {payload_surface_ids!r} != open semantic target ids {open_ids!r}"
         )
+    if closure_input_surface_ids != open_ids:
+        failures.append(
+            f"closure-input surface ids {closure_input_surface_ids!r} != open semantic target ids {open_ids!r}"
+        )
     if kernel_surface_ids != payload_surface_ids:
         failures.append(
             f"kernel-surface ids {kernel_surface_ids!r} != frontier-payload surface ids {payload_surface_ids!r}"
+        )
+    if kernel_surface_ids != closure_input_surface_ids:
+        failures.append(
+            f"kernel-surface ids {kernel_surface_ids!r} != closure-input surface ids {closure_input_surface_ids!r}"
         )
     for (
         target_id,
@@ -1037,6 +1186,62 @@ def main() -> int:
     )
     for target_id in missing_payload_surface_ids:
         failures.append(f"missing frontier-payload surface id: {target_id}")
+    for (
+        target_id,
+        target_prop,
+        closure_input,
+        input_to_target,
+        input_obstruction,
+        target_obstruction,
+        input_certificate,
+        input_certificate_proof,
+    ) in closure_input_surfaces:
+        expected_input_surface = EXPECTED_OPEN_CLOSURE_INPUT_SURFACES.get(target_id)
+        if expected_input_surface is None:
+            failures.append(f"unexpected closure-input surface id: {target_id}")
+            continue
+        (
+            expected_target_prop,
+            expected_closure_input,
+            expected_input_to_target,
+            expected_input_obstruction,
+            expected_target_obstruction,
+            expected_input_certificate,
+            expected_input_certificate_proof,
+        ) = expected_input_surface
+        if target_prop != expected_target_prop:
+            failures.append(
+                f"{target_id} closure-input target prop {target_prop!r} != expected {expected_target_prop!r}"
+            )
+        if closure_input != expected_closure_input:
+            failures.append(
+                f"{target_id} closure input {closure_input!r} != expected {expected_closure_input!r}"
+            )
+        if input_to_target != expected_input_to_target:
+            failures.append(
+                f"{target_id} closure input proof {input_to_target!r} != expected {expected_input_to_target!r}"
+            )
+        if input_obstruction != expected_input_obstruction:
+            failures.append(
+                f"{target_id} closure input obstruction {input_obstruction!r} != expected {expected_input_obstruction!r}"
+            )
+        if target_obstruction != expected_target_obstruction:
+            failures.append(
+                f"{target_id} closure-input target obstruction {target_obstruction!r} != expected {expected_target_obstruction!r}"
+            )
+        if input_certificate != expected_input_certificate:
+            failures.append(
+                f"{target_id} closure-input certificate {input_certificate!r} != expected {expected_input_certificate!r}"
+            )
+        if input_certificate_proof != expected_input_certificate_proof:
+            failures.append(
+                f"{target_id} closure-input certificate proof {input_certificate_proof!r} != expected {expected_input_certificate_proof!r}"
+            )
+    missing_closure_input_surface_ids = sorted(
+        set(EXPECTED_OPEN_CLOSURE_INPUT_SURFACES) - set(closure_input_surface_ids)
+    )
+    for target_id in missing_closure_input_surface_ids:
+        failures.append(f"missing closure-input surface id: {target_id}")
     for decl in sorted(required_axiom_audit_decls):
         if not has_axiom_audit_print(axiom_audit_text, decl):
             failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")

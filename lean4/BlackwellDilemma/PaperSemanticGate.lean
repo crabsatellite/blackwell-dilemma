@@ -4287,6 +4287,288 @@ theorem remaining_open_semantic_targets_payload_route_map_certificate :
     topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate⟩
 
+/-- Sufficient closure input for the open Part 6 lattice-embedding semantic
+target.  This is the bridge-level closed-unit tail-reversal datum already
+projected by the frontier certificate; it is still current-refuted. -/
+def Part6LatticeEmbeddingClosureInput : Prop :=
+  Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData
+
+/-- A closed-unit tail-reversal bridge input closes the named Part 6 semantic
+target. -/
+theorem part6_lattice_embedding_semantic_kernel_target_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6LatticeEmbeddingSemanticKernelTarget := by
+  intro hinput
+  exact
+    part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge_nonempty
+      hinput
+
+/-- The same closure input inhabits the exact Part 6 repair route. -/
+theorem part6_lattice_embedding_repair_route_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6NondegenerateFeasibleRepairRoute := by
+  exact part6_lattice_embedding_semantic_kernel_target_of_closure_input
+
+/-- The same closure input inhabits full Part 6 paper-closing support. -/
+theorem part6_lattice_embedding_full_support_of_closure_input :
+    Part6LatticeEmbeddingClosureInput -> Part6FullPaperClosingSupport := by
+  intro hinput
+  exact
+    part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route
+      (part6_lattice_embedding_repair_route_of_closure_input hinput)
+
+/-- The current carrier still lacks the Part 6 closure input. -/
+theorem part6_lattice_embedding_closure_input_notYet :
+    Not Part6LatticeEmbeddingClosureInput := by
+  exact not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current
+
+/-- Build-gated Part 6 closure-input certificate: the sufficient input closes
+the target, the repair route, and full support, while the current carrier is
+still refuted at that input surface. -/
+def Part6LatticeEmbeddingClosureInputCertificate : Prop :=
+  (Part6LatticeEmbeddingClosureInput ->
+    Part6LatticeEmbeddingSemanticKernelTarget) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6NondegenerateFeasibleRepairRoute) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingSupport) /\
+    Not Part6LatticeEmbeddingClosureInput /\
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate
+
+/-- The Part 6 closure-input certificate is kernel-built from existing
+frontier projections and obstructions. -/
+theorem part6_lattice_embedding_closure_input_certificate :
+    Part6LatticeEmbeddingClosureInputCertificate := by
+  constructor
+  · exact part6_lattice_embedding_semantic_kernel_target_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_repair_route_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_full_support_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_closure_input_notYet
+  constructor
+  · exact z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate
+  exact z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate
+
+/-- Sufficient closure input for the open random-supercritical topo target.  It
+asks for a repaired bridge with a uniform positive pointwise loss floor on its
+giant event; that input would feed the repaired support-surface closing spine
+and then the full paper-closing route. -/
+def TopoClusterRandomSupercriticalZ2ClosureInput : Prop :=
+  Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+      bridge
+
+/-- The topo closure input closes the named semantic target. -/
+theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  intro hinput
+  cases hinput with
+  | intro bridge hroute =>
+      exact
+        randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route
+          bridge hroute
+
+/-- The topo closure input inhabits the named full paper-closing route. -/
+theorem topo_cluster_random_supercritical_z2_full_route_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+
+/-- The topo closure input also exposes the boxed-torus finite-`Z2_L`
+calibration route. -/
+theorem topo_cluster_random_supercritical_z2_boxed_route_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  intro hinput
+  cases hinput with
+  | intro bridge hroute =>
+      exact
+        randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_giant_pointwise_loss_route
+          bridge hroute
+
+/-- The topo closure input reaches the repaired support-surface closing spine
+before the full route projection. -/
+theorem topo_cluster_random_supercritical_z2_support_surface_closing_route_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge := by
+  intro hinput
+  cases hinput with
+  | intro bridge hroute =>
+      exact
+        Exists.intro bridge
+          (randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_of_giant_pointwise_loss_route
+            bridge hroute)
+
+/-- The current repaired bridge surface still refutes the topo closure input. -/
+theorem topo_cluster_random_supercritical_z2_closure_input_notYet :
+    Not TopoClusterRandomSupercriticalZ2ClosureInput := by
+  intro hinput
+  cases hinput with
+  | intro bridge hroute =>
+      exact
+        not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_pointwise_loss_route
+          bridge hroute
+
+/-- Build-gated topo closure-input certificate: the pointwise-on-giant input
+would close the semantic target, full route, boxed route, and support-surface
+closing spine, but the current repaired bridge surface refutes that input. -/
+def TopoClusterRandomSupercriticalZ2ClosureInputCertificate : Prop :=
+  (TopoClusterRandomSupercriticalZ2ClosureInput ->
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge) /\
+    Not TopoClusterRandomSupercriticalZ2ClosureInput /\
+    RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate /\
+    RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate
+
+/-- The topo closure-input certificate is kernel-built from the current
+pointwise-on-giant route, support-surface closing spine, and envelope
+obstruction. -/
+theorem topo_cluster_random_supercritical_z2_closure_input_certificate :
+    TopoClusterRandomSupercriticalZ2ClosureInputCertificate := by
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_full_route_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_boxed_route_of_closure_input
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_support_surface_closing_route_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_notYet
+  constructor
+  · exact random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate
+  constructor
+  · exact random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate
+  exact random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate
+
+/-- Machine-facing sufficient-input surface for each open semantic target. -/
+structure OpenSemanticTargetClosureInputSurface where
+  id : String
+  target : Prop
+  closureInput : Prop
+  inputToTarget : closureInput -> target
+  inputCurrentObstruction : Not closureInput
+  targetCurrentObstruction : Not target
+  inputCertificate : Prop
+  inputCertificateProof : inputCertificate
+
+/-- The two remaining open targets with their sufficient closure inputs. -/
+def openSemanticTargetClosureInputSurfaces :
+    List OpenSemanticTargetClosureInputSurface :=
+  [ { id := "theorem_4_1_part6_lattice_embedding",
+      target := Part6LatticeEmbeddingSemanticKernelTarget,
+      closureInput := Part6LatticeEmbeddingClosureInput,
+      inputToTarget :=
+        part6_lattice_embedding_semantic_kernel_target_of_closure_input,
+      inputCurrentObstruction := part6_lattice_embedding_closure_input_notYet,
+      targetCurrentObstruction :=
+        part6_lattice_embedding_semantic_kernel_target_notYet,
+      inputCertificate := Part6LatticeEmbeddingClosureInputCertificate,
+      inputCertificateProof :=
+        part6_lattice_embedding_closure_input_certificate },
+    { id := "topo_cluster_random_supercritical_z2",
+      target := TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+      closureInput := TopoClusterRandomSupercriticalZ2ClosureInput,
+      inputToTarget :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input,
+      inputCurrentObstruction :=
+        topo_cluster_random_supercritical_z2_closure_input_notYet,
+      targetCurrentObstruction :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+      inputCertificate :=
+        TopoClusterRandomSupercriticalZ2ClosureInputCertificate,
+      inputCertificateProof :=
+        topo_cluster_random_supercritical_z2_closure_input_certificate } ]
+
+def openSemanticTargetClosureInputSurfaceIds : List String :=
+  openSemanticTargetClosureInputSurfaces.map (fun surface => surface.id)
+
+/-- Build gate: the sufficient-input roster has the same ids as the semantic
+ledger's open target list. -/
+theorem openSemanticTargetClosureInputSurfaceIds_current :
+    openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds := rfl
+
+/-- Build gate: the sufficient-input roster has the same cardinality as the
+semantic ledger's open target count. -/
+theorem openSemanticTargetClosureInputSurfaceCount_current :
+    openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount := rfl
+
+/-- Every sufficient-input surface carries a kernel proof from input to target. -/
+theorem openSemanticTargetClosureInputSurface_input_to_target
+    (surface : OpenSemanticTargetClosureInputSurface) :
+    surface.closureInput -> surface.target :=
+  surface.inputToTarget
+
+/-- Every sufficient-input surface also records the current input obstruction. -/
+theorem openSemanticTargetClosureInputSurface_input_current_obstruction
+    (surface : OpenSemanticTargetClosureInputSurface) :
+    Not surface.closureInput :=
+  surface.inputCurrentObstruction
+
+/-- Every sufficient-input surface retains the current target obstruction. -/
+theorem openSemanticTargetClosureInputSurface_target_current_obstruction
+    (surface : OpenSemanticTargetClosureInputSurface) :
+    Not surface.target :=
+  surface.targetCurrentObstruction
+
+/-- Every sufficient-input surface carries its detailed input certificate. -/
+theorem openSemanticTargetClosureInputSurface_input_certificate
+    (surface : OpenSemanticTargetClosureInputSurface) :
+    surface.inputCertificate :=
+  surface.inputCertificateProof
+
+/-- Single build-gated certificate for the sufficient closure inputs of the two
+remaining open paper-semantic targets. -/
+def RemainingOpenSemanticTargetsClosureInputCertificate : Prop :=
+  openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6LatticeEmbeddingSemanticKernelTarget) /\
+    Not Part6LatticeEmbeddingClosureInput /\
+    Part6LatticeEmbeddingClosureInputCertificate /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+    Not TopoClusterRandomSupercriticalZ2ClosureInput /\
+    TopoClusterRandomSupercriticalZ2ClosureInputCertificate
+
+/-- The sufficient closure inputs for the remaining open targets are completely
+accounted for by named Lean propositions, forward theorems, current
+obstructions, and detailed input certificates. -/
+theorem remaining_open_semantic_targets_closure_input_certificate :
+    RemainingOpenSemanticTargetsClosureInputCertificate := by
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceIds_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceCount_current
+  constructor
+  · exact part6_lattice_embedding_semantic_kernel_target_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_closure_input_notYet
+  constructor
+  · exact part6_lattice_embedding_closure_input_certificate
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_notYet
+  exact topo_cluster_random_supercritical_z2_closure_input_certificate
+
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
 `PaperSemanticGate.lean` only builds if the public `gap_two_regime_*` aliases
