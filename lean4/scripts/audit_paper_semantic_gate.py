@@ -33,6 +33,7 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "not_part6_nondegenerate_feasible_repair_route_current",
         "Part6FullPaperClosingSupport",
         "part6_lattice_embedding_semantic_kernel_target_iff_full_support",
+        "part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support",
         "Part6FullPaperClosingOutputLayerCertificate",
         "part6_full_paper_closing_output_layer_certificate",
         "not_part6_full_paper_closing_support_current",
@@ -49,6 +50,7 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute",
         "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route",
+        "randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route",
         "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate",
         "random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate",
         "not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
@@ -84,6 +86,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_route_equivalence",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
@@ -144,6 +147,7 @@ def open_kernel_surfaces(text: str) -> list[
         str,
         str,
         str,
+        str,
     ]
 ]:
     match = re.search(
@@ -166,6 +170,7 @@ def open_kernel_surfaces(text: str) -> list[
         r"targetRouteObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"routeEquivalenceProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
@@ -241,28 +246,32 @@ def main() -> int:
         + ",".join(surface[8] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_closure_route_certificates="
+        "semantic_target_kernel_surface_route_equivalence_proofs="
         + ",".join(surface[9] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_closure_route_certificate_proofs="
+        "semantic_target_kernel_surface_closure_route_certificates="
         + ",".join(surface[10] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_closure_route_obstructions="
+        "semantic_target_kernel_surface_closure_route_certificate_proofs="
         + ",".join(surface[11] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_obstructions="
+        "semantic_target_kernel_surface_closure_route_obstructions="
         + ",".join(surface[12] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_frontier_certificates="
+        "semantic_target_kernel_surface_obstructions="
         + ",".join(surface[13] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_frontier_proofs="
+        "semantic_target_kernel_surface_frontier_certificates="
         + ",".join(surface[14] for surface in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_frontier_proofs="
+        + ",".join(surface[15] for surface in kernel_surfaces)
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
@@ -275,6 +284,7 @@ def main() -> int:
         target_route_obstruction,
         closure_route,
         closure_route_proof,
+        route_equivalence_proof,
         closure_route_certificate,
         closure_route_certificate_proof,
         closure_route_obstruction,
@@ -290,6 +300,7 @@ def main() -> int:
         required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route_obstruction}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{closure_route_proof}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{route_equivalence_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_certificate}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_certificate_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_obstruction}")
@@ -321,6 +332,7 @@ def main() -> int:
         target_route_obstruction,
         closure_route,
         closure_route_proof,
+        route_equivalence_proof,
         closure_route_certificate,
         closure_route_certificate_proof,
         closure_route_obstruction,
@@ -341,6 +353,7 @@ def main() -> int:
             expected_target_route_obstruction,
             expected_closure_route,
             expected_closure_route_proof,
+            expected_route_equivalence_proof,
             expected_closure_route_certificate,
             expected_closure_route_certificate_proof,
             expected_closure_route_obstruction,
@@ -381,6 +394,10 @@ def main() -> int:
         if closure_route_proof != expected_closure_route_proof:
             failures.append(
                 f"{target_id} closure route proof {closure_route_proof!r} != expected {expected_closure_route_proof!r}"
+            )
+        if route_equivalence_proof != expected_route_equivalence_proof:
+            failures.append(
+                f"{target_id} route equivalence proof {route_equivalence_proof!r} != expected {expected_route_equivalence_proof!r}"
             )
         if closure_route_certificate != expected_closure_route_certificate:
             failures.append(

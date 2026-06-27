@@ -162,6 +162,7 @@ structure OpenSemanticTargetKernelSurface where
   targetRouteObstruction : Not targetRoute
   closureRoute : Prop
   closureRouteProof : target ↔ closureRoute
+  routeEquivalenceProof : targetRoute ↔ closureRoute
   closureRouteCertificate : Prop
   closureRouteCertificateProof : closureRouteCertificate
   closureRouteObstruction : Not closureRoute
@@ -187,6 +188,8 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
       closureRoute := Part6FullPaperClosingSupport,
       closureRouteProof :=
         part6_lattice_embedding_semantic_kernel_target_iff_full_support,
+      routeEquivalenceProof :=
+        part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support,
       closureRouteCertificate := Part6FullPaperClosingOutputLayerCertificate,
       closureRouteCertificateProof :=
         part6_full_paper_closing_output_layer_certificate,
@@ -212,6 +215,8 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
       closureRouteProof :=
         topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
+      routeEquivalenceProof :=
+        randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route,
       closureRouteCertificate :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
       closureRouteCertificateProof :=
@@ -266,6 +271,13 @@ theorem openSemanticTargetKernelSurface_closure_route
     surface.target ↔ surface.closureRoute :=
   surface.closureRouteProof
 
+/-- Every machine-facing roster entry carries the exact equivalence between
+its target route and paper-facing closure route. -/
+theorem openSemanticTargetKernelSurface_route_equivalence
+    (surface : OpenSemanticTargetKernelSurface) :
+    surface.targetRoute ↔ surface.closureRoute :=
+  surface.routeEquivalenceProof
+
 /-- Every machine-facing roster entry carries enough data to refute its exact
 paper-facing closure route in the current frontier. -/
 theorem openSemanticTargetKernelSurface_closure_route_current_obstruction
@@ -305,6 +317,8 @@ def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
       Part6NondegenerateFeasibleRepairRoute) /\
     (Part6LatticeEmbeddingSemanticKernelTarget ↔
       Part6FullPaperClosingSupport) /\
+    (Part6NondegenerateFeasibleRepairRoute ↔
+      Part6FullPaperClosingSupport) /\
     Not Part6LatticeEmbeddingSemanticKernelTarget /\
     Not Part6NondegenerateFeasibleRepairRoute /\
     Part6NondegenerateFeasibleRepairRouteCertificate /\
@@ -314,6 +328,8 @@ def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
     (TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
     (TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
     Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
     Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
@@ -331,6 +347,7 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     openSemanticTargetKernelSurfaceCount_current,
     part6_lattice_embedding_semantic_kernel_target_iff_repair_route,
     part6_lattice_embedding_semantic_kernel_target_iff_full_support,
+    part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support,
     part6_lattice_embedding_semantic_kernel_target_notYet,
     not_part6_nondegenerate_feasible_repair_route_current,
     part6_nondegenerate_feasible_repair_route_certificate,
@@ -339,6 +356,7 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     part6_current_frontier_certificate,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
     not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,

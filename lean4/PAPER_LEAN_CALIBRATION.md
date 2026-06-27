@@ -1035,19 +1035,20 @@ For full kernel-pure cover (v2.0 future iteration):
   The `openSemanticTargetKernelSurfaces` roster now ties these two ledger ids
   to the exact Lean propositions, exact target routes, target-route proofs,
   target-route certificates, target-route obstructions, paper-facing closure
-  routes, closure-route proofs, closure-route certificates, closure-route
-  obstructions, and obstruction proofs, and its id/count gates match
+  routes, closure-route proofs, direct route-equivalence proofs,
+  closure-route certificates, closure-route obstructions, and obstruction proofs,
+  and its id/count gates match
   `openSemanticTargetIds`. Each roster entry also carries the target's full
   current frontier certificate, and the Python semantic audit checks the target,
   target route, target-route proof, target-route certificate, target-route
   certificate proof, target-route obstruction, closure route, closure-route
-  proof, closure-route certificate, closure-route certificate proof,
-  closure-route obstruction, obstruction, certificate, proof, and AxiomAudit
-  print names.
+  proof, route-equivalence proof, closure-route certificate, closure-route
+  certificate proof, closure-route obstruction, obstruction, certificate, proof,
+  and AxiomAudit print names.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
-  closure-route obstruction, closure-route certificate, and frontier-certificate
-  gates into one Lean theorem.
+  route-equivalence proof, closure-route obstruction, closure-route certificate,
+  and frontier-certificate gates into one Lean theorem.
 - The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
   recalibration is closed by aliases in `Canonical.lean`; the paper R10
   `prop:threshold-five-state` clause (iii) high-κ signal-conditional routing
