@@ -186,6 +186,33 @@ EXPECTED_OPEN_CLOSURE_INPUT_FIELD_SURFACES = {
     ),
 }
 
+EXPECTED_OPEN_CLOSURE_INPUT_FIELD_OUTPUT_SURFACES = {
+    "theorem_4_1_part6_lattice_embedding": (
+        "Part6LatticeEmbeddingClosureInputFieldPayload",
+        "Part6LatticeEmbeddingSemanticKernelTarget",
+        "Part6LatticeEmbeddingExactClosureInput",
+        "Part6FullPaperClosingFullOutputBundle",
+        "part6_lattice_embedding_semantic_kernel_target_of_field_payload",
+        "part6_lattice_embedding_exact_closure_input_of_field_payload",
+        "part6_lattice_embedding_full_output_bundle_of_field_payload",
+        "part6_lattice_embedding_field_payload_notYet",
+        "Part6LatticeEmbeddingClosureInputFieldOutputCertificate",
+        "part6_lattice_embedding_closure_input_field_output_certificate",
+    ),
+    "topo_cluster_random_supercritical_z2": (
+        "TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload",
+        "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
+        "TopoClusterRandomSupercriticalZ2ExactClosureInput",
+        "TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload",
+        "topo_cluster_random_supercritical_z2_exact_closure_input_of_field_payload",
+        "topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_field_payload",
+        "topo_cluster_random_supercritical_z2_field_payload_notYet",
+        "TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate",
+        "topo_cluster_random_supercritical_z2_closure_input_field_output_certificate",
+    ),
+}
+
 EXPECTED_OPEN_OUTPUT_EQUIVALENCE_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
         "Part6LatticeEmbeddingSemanticKernelTarget",
@@ -839,21 +866,26 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceIds",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargets",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceExactInputs",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceIds_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceCount_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargets_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceExactInputs_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_target",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_exact_input",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_output",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_output_certificate",
@@ -1179,6 +1211,57 @@ def open_closure_input_field_surfaces(
     return surfaces
 
 
+def open_closure_input_field_output_surfaces(
+    text: str,
+) -> list[
+    tuple[
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+        str,
+    ]
+]:
+    match = re.search(
+        r"def\s+openSemanticTargetClosureInputFieldOutputSurfaces\s*:\s*"
+        r"List\s+OpenSemanticTargetClosureInputFieldOutputSurface\s*:=\s*"
+        r"(\[.*?\])\s*\n\s*def\s+openSemanticTargetClosureInputFieldOutputSurfaceIds",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit(
+            "missing open semantic target closure-input field-output roster"
+        )
+
+    surfaces = re.findall(
+        r'id\s*:=\s*"([^"]+)".*?'
+        r"fieldPayload\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"exactClosureInput\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"outputBundle\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldPayloadToTarget\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldPayloadToExactClosureInput\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldPayloadToOutputBundle\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldPayloadCurrentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldOutputCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldOutputCertificateProof\s*:=\s*([A-Za-z0-9_'.]+)",
+        match.group(1),
+        flags=re.DOTALL,
+    )
+    if not surfaces:
+        raise SystemExit(
+            "no open semantic target closure-input field-output entries found"
+        )
+    return surfaces
+
+
 def open_output_equivalence_surfaces(
     text: str,
 ) -> list[
@@ -1403,6 +1486,12 @@ def main() -> int:
     closure_input_field_surface_ids = [
         surface[0] for surface in closure_input_field_surfaces
     ]
+    closure_input_field_output_surfaces = open_closure_input_field_output_surfaces(
+        text
+    )
+    closure_input_field_output_surface_ids = [
+        surface[0] for surface in closure_input_field_output_surfaces
+    ]
     output_equivalence_surfaces = open_output_equivalence_surfaces(text)
     output_equivalence_surface_ids = [
         surface[0] for surface in output_equivalence_surfaces
@@ -1530,6 +1619,11 @@ def main() -> int:
         "semantic_target_closure_input_field_surface_ids",
         list(EXPECTED_OPEN_CLOSURE_INPUT_FIELD_SURFACES),
         closure_input_field_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_closure_input_field_output_surface_ids",
+        list(EXPECTED_OPEN_CLOSURE_INPUT_FIELD_OUTPUT_SURFACES),
+        closure_input_field_output_surface_ids,
     )
     print_id_drift(
         "semantic_target_output_equivalence_surface_ids",
@@ -2660,6 +2754,46 @@ def main() -> int:
         "open_semantic_target_closure_input_field_statement_roster_certificate"
     )
     print(
+        "semantic_target_closure_input_field_output_payloads="
+        + ",".join(surface[1] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_targets="
+        + ",".join(surface[2] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_exact_inputs="
+        + ",".join(surface[3] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_bundles="
+        + ",".join(surface[4] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_target_proofs="
+        + ",".join(surface[5] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_exact_input_proofs="
+        + ",".join(surface[6] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_bundle_proofs="
+        + ",".join(surface[7] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_payload_obstructions="
+        + ",".join(surface[8] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_certificates="
+        + ",".join(surface[9] for surface in closure_input_field_output_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_output_certificate_proofs="
+        + ",".join(surface[10] for surface in closure_input_field_output_surfaces)
+    )
+    print(
         "semantic_target_closure_input_field_output_certificate="
         "RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate"
     )
@@ -3004,6 +3138,10 @@ def main() -> int:
     if exact_closure_input_surface_ids != open_ids:
         failures.append(
             f"exact closure-input surface ids {exact_closure_input_surface_ids!r} != open semantic target ids {open_ids!r}"
+        )
+    if closure_input_field_output_surface_ids != open_ids:
+        failures.append(
+            f"closure-input field-output surface ids {closure_input_field_output_surface_ids!r} != open semantic target ids {open_ids!r}"
         )
     if exact_closure_input_output_surface_ids != open_ids:
         failures.append(
@@ -3508,6 +3646,85 @@ def main() -> int:
     )
     for target_id in missing_closure_input_field_surface_ids:
         failures.append(f"missing closure-input field surface id: {target_id}")
+    for (
+        target_id,
+        field_payload,
+        target_prop,
+        exact_closure_input,
+        output_bundle,
+        field_payload_to_target,
+        field_payload_to_exact_input,
+        field_payload_to_output,
+        field_payload_obstruction,
+        field_output_certificate,
+        field_output_certificate_proof,
+    ) in closure_input_field_output_surfaces:
+        expected_field_output_surface = (
+            EXPECTED_OPEN_CLOSURE_INPUT_FIELD_OUTPUT_SURFACES.get(target_id)
+        )
+        if expected_field_output_surface is None:
+            failures.append(
+                f"unexpected closure-input field-output surface id: {target_id}"
+            )
+            continue
+        (
+            expected_field_payload,
+            expected_target_prop,
+            expected_exact_closure_input,
+            expected_output_bundle,
+            expected_field_payload_to_target,
+            expected_field_payload_to_exact_input,
+            expected_field_payload_to_output,
+            expected_field_payload_obstruction,
+            expected_field_output_certificate,
+            expected_field_output_certificate_proof,
+        ) = expected_field_output_surface
+        if field_payload != expected_field_payload:
+            failures.append(
+                f"{target_id} field-output payload {field_payload!r} != expected {expected_field_payload!r}"
+            )
+        if target_prop != expected_target_prop:
+            failures.append(
+                f"{target_id} field-output target {target_prop!r} != expected {expected_target_prop!r}"
+            )
+        if exact_closure_input != expected_exact_closure_input:
+            failures.append(
+                f"{target_id} field-output exact input {exact_closure_input!r} != expected {expected_exact_closure_input!r}"
+            )
+        if output_bundle != expected_output_bundle:
+            failures.append(
+                f"{target_id} field-output bundle {output_bundle!r} != expected {expected_output_bundle!r}"
+            )
+        if field_payload_to_target != expected_field_payload_to_target:
+            failures.append(
+                f"{target_id} field-output target proof {field_payload_to_target!r} != expected {expected_field_payload_to_target!r}"
+            )
+        if field_payload_to_exact_input != expected_field_payload_to_exact_input:
+            failures.append(
+                f"{target_id} field-output exact proof {field_payload_to_exact_input!r} != expected {expected_field_payload_to_exact_input!r}"
+            )
+        if field_payload_to_output != expected_field_payload_to_output:
+            failures.append(
+                f"{target_id} field-output bundle proof {field_payload_to_output!r} != expected {expected_field_payload_to_output!r}"
+            )
+        if field_payload_obstruction != expected_field_payload_obstruction:
+            failures.append(
+                f"{target_id} field-output obstruction {field_payload_obstruction!r} != expected {expected_field_payload_obstruction!r}"
+            )
+        if field_output_certificate != expected_field_output_certificate:
+            failures.append(
+                f"{target_id} field-output certificate {field_output_certificate!r} != expected {expected_field_output_certificate!r}"
+            )
+        if field_output_certificate_proof != expected_field_output_certificate_proof:
+            failures.append(
+                f"{target_id} field-output certificate proof {field_output_certificate_proof!r} != expected {expected_field_output_certificate_proof!r}"
+            )
+    missing_closure_input_field_output_surface_ids = sorted(
+        set(EXPECTED_OPEN_CLOSURE_INPUT_FIELD_OUTPUT_SURFACES)
+        - set(closure_input_field_output_surface_ids)
+    )
+    for target_id in missing_closure_input_field_output_surface_ids:
+        failures.append(f"missing closure-input field-output surface id: {target_id}")
     for (
         target_id,
         target_prop,

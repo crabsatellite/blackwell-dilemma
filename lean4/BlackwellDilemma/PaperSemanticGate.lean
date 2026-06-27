@@ -10826,8 +10826,10 @@ structure OpenSemanticTargetClosureInputFieldOutputSurface where
   id : String
   fieldPayload : Prop
   target : Prop
+  exactClosureInput : Prop
   outputBundle : Prop
   fieldPayloadToTarget : fieldPayload -> target
+  fieldPayloadToExactClosureInput : fieldPayload -> exactClosureInput
   fieldPayloadToOutputBundle : fieldPayload -> outputBundle
   fieldPayloadCurrentObstruction : Not fieldPayload
   fieldOutputCertificate : Prop
@@ -10840,9 +10842,12 @@ def openSemanticTargetClosureInputFieldOutputSurfaces :
   [ { id := "theorem_4_1_part6_lattice_embedding",
       fieldPayload := Part6LatticeEmbeddingClosureInputFieldPayload,
       target := Part6LatticeEmbeddingSemanticKernelTarget,
+      exactClosureInput := Part6LatticeEmbeddingExactClosureInput,
       outputBundle := Part6FullPaperClosingFullOutputBundle,
       fieldPayloadToTarget :=
         part6_lattice_embedding_semantic_kernel_target_of_field_payload,
+      fieldPayloadToExactClosureInput :=
+        part6_lattice_embedding_exact_closure_input_of_field_payload,
       fieldPayloadToOutputBundle :=
         part6_lattice_embedding_full_output_bundle_of_field_payload,
       fieldPayloadCurrentObstruction :=
@@ -10855,10 +10860,13 @@ def openSemanticTargetClosureInputFieldOutputSurfaces :
       fieldPayload :=
         TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
       target := TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+      exactClosureInput := TopoClusterRandomSupercriticalZ2ExactClosureInput,
       outputBundle :=
         TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
       fieldPayloadToTarget :=
         topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload,
+      fieldPayloadToExactClosureInput :=
+        topo_cluster_random_supercritical_z2_exact_closure_input_of_field_payload,
       fieldPayloadToOutputBundle :=
         topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_field_payload,
       fieldPayloadCurrentObstruction :=
@@ -10880,6 +10888,11 @@ def openSemanticTargetClosureInputFieldOutputSurfaceTargets : List Prop :=
   openSemanticTargetClosureInputFieldOutputSurfaces.map
     (fun surface => surface.target)
 
+/-- Field-output surface view of the exact closure inputs. -/
+def openSemanticTargetClosureInputFieldOutputSurfaceExactInputs : List Prop :=
+  openSemanticTargetClosureInputFieldOutputSurfaces.map
+    (fun surface => surface.exactClosureInput)
+
 def openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles : List Prop :=
   openSemanticTargetClosureInputFieldOutputSurfaces.map
     (fun surface => surface.outputBundle)
@@ -10898,6 +10911,12 @@ def openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements :
     List Prop :=
   openSemanticTargetClosureInputFieldOutputSurfaces.map
     (fun surface => surface.fieldPayload -> surface.target)
+
+/-- Field-output surface view of field-payload-to-exact-input statements. -/
+def openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldOutputSurfaces.map
+    (fun surface => surface.fieldPayload -> surface.exactClosureInput)
 
 def openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements :
     List Prop :=
@@ -10926,6 +10945,12 @@ theorem openSemanticTargetClosureInputFieldOutputSurfaceTargets_named_current :
     openSemanticTargetClosureInputFieldOutputSurfaceTargets =
       [Part6LatticeEmbeddingSemanticKernelTarget,
        TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the field-output roster names the exact closure inputs. -/
+theorem openSemanticTargetClosureInputFieldOutputSurfaceExactInputs_named_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceExactInputs =
+      [Part6LatticeEmbeddingExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ExactClosureInput] := rfl
 
 /-- Build gate: the field-output roster names the exact output bundles. -/
 theorem openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_named_current :
@@ -10958,6 +10983,15 @@ theorem
        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
         TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
 
+/-- Build gate: field-to-exact-input statements are pinned to named formulas. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_named_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2ExactClosureInput] := rfl
+
 /-- Build gate: field-to-output statements are pinned to named formulas. -/
 theorem
     openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current :
@@ -10972,6 +11006,13 @@ theorem openSemanticTargetClosureInputFieldOutputSurface_field_to_target
     (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
     surface.fieldPayload -> surface.target :=
   surface.fieldPayloadToTarget
+
+/-- Every field-output surface carries field-payload-to-exact-input
+projection. -/
+theorem openSemanticTargetClosureInputFieldOutputSurface_field_to_exact_input
+    (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
+    surface.fieldPayload -> surface.exactClosureInput :=
+  surface.fieldPayloadToExactClosureInput
 
 /-- Every field-output surface carries field-payload-to-output projection. -/
 theorem openSemanticTargetClosureInputFieldOutputSurface_field_to_output
@@ -11004,10 +11045,13 @@ def RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate : Prop :=
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.target) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      surface.fieldPayload -> surface.exactClosureInput) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.outputBundle) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       Not surface.fieldPayload) /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate
 
 /-- Field payloads now project directly to target/output bundles, not only
@@ -11029,6 +11073,11 @@ theorem remaining_open_semantic_targets_closure_input_field_output_certificate :
       surface
   constructor
   · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_field_to_exact_input
+        surface
+  constructor
+  · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_output
       surface
   constructor
@@ -11038,6 +11087,8 @@ theorem remaining_open_semantic_targets_closure_input_field_output_certificate :
         surface
   constructor
   · exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate
+  constructor
+  · exact remaining_open_semantic_targets_exact_closure_input_certificate
   exact remaining_open_semantic_targets_output_equivalence_certificate
 
 /-- Build-gated named roster for the field-output surface. -/
@@ -11052,6 +11103,9 @@ def OpenSemanticTargetClosureInputFieldOutputRosterCertificate : Prop :=
     openSemanticTargetClosureInputFieldOutputSurfaceTargets =
       [Part6LatticeEmbeddingSemanticKernelTarget,
        TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetClosureInputFieldOutputSurfaceExactInputs =
+      [Part6LatticeEmbeddingExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
     openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
       [Part6FullPaperClosingFullOutputBundle,
        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
@@ -11063,6 +11117,8 @@ def OpenSemanticTargetClosureInputFieldOutputRosterCertificate : Prop :=
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.target) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      surface.fieldPayload -> surface.exactClosureInput) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.outputBundle) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
@@ -11086,6 +11142,9 @@ theorem open_semantic_target_closure_input_field_output_roster_certificate :
   · exact openSemanticTargetClosureInputFieldOutputSurfaceTargets_named_current
   constructor
   · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceExactInputs_named_current
+  constructor
+  · exact
       openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_named_current
   constructor
   · exact
@@ -11097,6 +11156,11 @@ theorem open_semantic_target_closure_input_field_output_roster_certificate :
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_target
       surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_field_to_exact_input
+        surface
   constructor
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_output
@@ -11121,6 +11185,11 @@ def OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate :
       Part6LatticeEmbeddingSemanticKernelTarget,
      TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
     openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
       [Part6LatticeEmbeddingClosureInputFieldPayload ->
         Part6FullPaperClosingFullOutputBundle,
@@ -11128,6 +11197,8 @@ def OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate :
         TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.target) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      surface.fieldPayload -> surface.exactClosureInput) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.outputBundle) /\
     OpenSemanticTargetClosureInputFieldOutputRosterCertificate
@@ -11142,11 +11213,19 @@ theorem
       openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_named_current
   constructor
   · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_named_current
+  constructor
+  · exact
       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current
   constructor
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_target
       surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_field_to_exact_input
+        surface
   constructor
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_output
