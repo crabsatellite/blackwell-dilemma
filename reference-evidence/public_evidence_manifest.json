@@ -317,6 +317,8 @@
           "path": "lean4/scripts/audit_paper_semantic_gate.py",
           "cwd": "lean4",
           "stdout_contains": [
+            "complete_paper_semantic_kernel_only_current_obstruction_certificate=CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
+            "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof=completePaperSemanticKernelOnly_current_obstruction_certificate",
             "semantic_target_kernel_surface_target_routes=Part6NondegenerateFeasibleRepairRoute,RandomSupercriticalZ2TopoClusterFullPaperClosingRoute",
             "semantic_target_kernel_surface_target_route_proofs=part6_lattice_embedding_semantic_kernel_target_iff_repair_route,topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route",
             "semantic_target_kernel_surface_target_route_certificates=Part6NondegenerateFeasibleRepairRouteCertificate,RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate",
@@ -396,7 +398,7 @@
             "semantic_target_closure_input_field_certificate_proof=remaining_open_semantic_targets_closure_input_field_certificate",
             "semantic_target_closure_input_field_obstruction_certificate=RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate",
             "semantic_target_closure_input_field_obstruction_certificate_proof=remaining_open_semantic_targets_closure_input_field_obstruction_certificate",
-            "semantic_target_axiom_audit_prints_required=160"
+            "semantic_target_axiom_audit_prints_required=162"
           ]
         }
       ]

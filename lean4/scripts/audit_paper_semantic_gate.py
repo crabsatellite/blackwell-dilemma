@@ -221,6 +221,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceCurrentFrontierCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_surface_roster_consistency_certificate",
+    "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_obstruction_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsPayloadRouteMapCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_payload_route_map_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
@@ -559,6 +561,14 @@ def main() -> int:
     print(f"theorem_gate_closed={expected_closed}")
     print(f"semantic_target_open_ids={','.join(open_ids)}")
     print(f"semantic_target_closed_ids={','.join(closed_ids)}")
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_certificate"
+    )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
     print(f"semantic_target_closure_input_surface_ids={','.join(closure_input_surface_ids)}")

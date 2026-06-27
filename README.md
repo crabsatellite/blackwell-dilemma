@@ -139,6 +139,10 @@ Those field payloads are now also listed in the typed
 open semantic targets and with parser-checked payload proofs, current
 payload obstructions, certificate proofs, and a cross-target field-obstruction
 certificate.
+The top-level
+`completePaperSemanticKernelOnly_current_obstruction_certificate` also gates
+the current non-complete claim against `open=2`, the exact remaining target ids,
+and the frontier/field-obstruction certificates.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and

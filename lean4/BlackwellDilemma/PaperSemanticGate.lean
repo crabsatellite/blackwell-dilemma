@@ -5204,6 +5204,33 @@ theorem completePaperSemanticKernelOnly_notYet :
   intro hcomplete
   exact (by decide : paperSemanticOpenCount ≠ 0) hcomplete
 
+/-- Top-level current obstruction certificate for the paper-semantic
+kernel-only claim.  It binds the not-yet-complete status to the exact remaining
+open ids and to the current frontier/field obstruction certificates. -/
+def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
+  Not CompletePaperSemanticKernelOnly /\
+    paperSemanticOpenCount = 2 /\
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+    RemainingOpenSemanticTargetsFrontierCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate
+
+/-- The current paper-semantic kernel-only obstruction is machine checked all
+the way down to the remaining open target frontier and field-obstruction
+certificates. -/
+theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionCertificate := by
+  constructor
+  · exact completePaperSemanticKernelOnly_notYet
+  constructor
+  · exact paperSemanticOpenCount_current
+  constructor
+  · exact openSemanticTargetIds_current
+  constructor
+  · exact remaining_open_semantic_targets_frontier_certificate
+  exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

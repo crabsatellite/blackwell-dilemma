@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/closure-input sufficient-route, output, field, and field-obstruction certificates/field-roster id, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=160 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/top-level complete-obstruction certificate/closure-input sufficient-route, output, field, and field-obstruction certificates/field-roster id, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=162 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -247,6 +247,9 @@ until the semantic gate reaches open=0.
 The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
 `paperSemanticOpenCount = 0`, and
 `completePaperSemanticKernelOnly_notYet` proves its current negation.
+`completePaperSemanticKernelOnly_current_obstruction_certificate` now ties that
+negation to `open=2`, the exact remaining ids, and the remaining-open frontier
+and field-obstruction certificates.
 The two remaining open semantic targets are also named as Lean propositions:
 `Part6LatticeEmbeddingSemanticKernelTarget` and
 `TopoClusterRandomSupercriticalZ2SemanticKernelTarget`. Their `*_notYet`

@@ -1027,6 +1027,9 @@ For full kernel-pure cover (v2.0 future iteration):
   The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
   `paperSemanticOpenCount = 0`, and
   `completePaperSemanticKernelOnly_notYet` proves its current negation.
+  `completePaperSemanticKernelOnly_current_obstruction_certificate` gates that
+  current negation together with `open=2`, the exact remaining ids, and the
+  remaining-open frontier and field-obstruction certificates.
   The two open items have target propositions
   `Part6LatticeEmbeddingSemanticKernelTarget` and
   `TopoClusterRandomSupercriticalZ2SemanticKernelTarget`, each tied to its
