@@ -1086,6 +1086,14 @@ For full kernel-pure cover (v2.0 future iteration):
   full-output-bundle surfaces, while the topo input reaches the support-surface
   route/output, repaired paper-support output, giant-loss output, full route,
   and boxed route.
+  `remaining_open_semantic_targets_closure_input_field_certificate` further
+  packages field-level payloads: Part 6 exposes the closed-unit tail-reversal
+  bridge, nonempty closed-unit alpha domain, bridge route, and paper support
+  with sentimental reversal; the topo input exposes the repaired bridge,
+  pointwise-on-giant route, paper/support-surface repair fields, strict
+  supercritical probability domain, flat and giant-event mass lower bounds,
+  unit-interval topological-loss range, and boxed-torus family lower-bound
+  surface.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,

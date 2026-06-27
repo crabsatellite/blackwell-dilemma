@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/closure-input sufficient-route and output certificates/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=137 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/closure-input sufficient-route, output, and field certificates/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=148 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -306,6 +306,13 @@ the output projections from those inputs: Part 6 reaches the divergence,
 same-alpha feasible/divergence, paired-output, and full-output-bundle surfaces,
 while the topo input reaches the support-surface route/output, repaired
 paper-support output, giant-loss output, full route, and boxed route.
+`remaining_open_semantic_targets_closure_input_field_certificate` gates the
+field-level payloads beneath those inputs: Part 6 exposes the closed-unit
+tail-reversal bridge, nonempty closed-unit alpha domain, bridge route, and
+paper support with sentimental reversal; topo exposes the repaired bridge,
+pointwise-on-giant route, paper/support-surface repair fields, strict
+supercritical domain, flat and giant-event mass lower bounds, unit-interval
+loss range, and boxed-torus family lower-bound surface.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

@@ -4754,6 +4754,203 @@ theorem remaining_open_semantic_targets_closure_input_output_certificate :
   · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
   exact remaining_open_semantic_targets_closure_input_certificate
 
+/-- Field-level payload exposed by the sufficient Part 6 closure input.  This
+records the bridge inhabitant and the exact closed-unit/tail-reversal fields
+that make the paper-facing route non-vacuous. -/
+def Part6LatticeEmbeddingClosureInputFieldPayload : Prop :=
+  Exists fun bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData =>
+    alphaStar 0 harrisKestenCriticalProb < 1 /\
+      (Exists fun alpha : Real =>
+        alphaStar 0 harrisKestenCriticalProb < alpha /\ alpha <= 1) /\
+      Nonempty Z2LatticeEmbeddingClosedUnitLocalBridgeData /\
+      ClosedUnitPart6FullPaperClosingSupport bridge.scalingCarrier /\
+      Z2LatticeEmbeddingClosedUnitLocalBridgePaperSupportWithSentimentalReversal
+        (z2LatticeEmbeddingClosedUnitLocalBridgeData_of_tail_reversal_bridge
+          bridge)
+
+/-- A sufficient Part 6 closure input exposes the bridge-level closed-unit
+fields, not only the coarse semantic target. -/
+theorem part6_lattice_embedding_field_payload_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6LatticeEmbeddingClosureInputFieldPayload := by
+  intro hinput
+  cases hinput with
+  | intro bridge =>
+      exact
+        Exists.intro bridge
+          ⟨z2_lattice_embedding_closed_unit_tail_reversal_bridge_alphaStar_lt_one
+              bridge,
+            z2_lattice_embedding_closed_unit_tail_reversal_bridge_alpha_domain_nonempty
+              bridge,
+            z2_lattice_embedding_closed_unit_tail_reversal_bridge_closed_unit_bridge_nonempty
+              bridge,
+            z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_domain_witness
+              bridge,
+            z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal
+              bridge⟩
+
+/-- A sufficient Part 6 closure input also projects to the explicit
+bridge-route surface. -/
+theorem part6_lattice_embedding_bridge_route_of_closure_input :
+    Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingBridgeRoute := by
+  exact part6_full_paper_closing_bridge_route_of_closed_unit_tail_reversal_bridge_nonempty
+
+/-- Field-level certificate for the sufficient Part 6 closure input. -/
+def Part6LatticeEmbeddingClosureInputFieldCertificate : Prop :=
+  (Part6LatticeEmbeddingClosureInput ->
+    Part6LatticeEmbeddingClosureInputFieldPayload) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Exists fun scalingCarrier : Real -> Real =>
+        ClosedUnitPart6FullPaperClosingSupport scalingCarrier) /\
+    (Part6LatticeEmbeddingClosureInput ->
+      Part6FullPaperClosingBridgeRoute) /\
+    Part6LatticeEmbeddingClosureInputCertificate /\
+    Part6LatticeEmbeddingClosureInputOutputCertificate /\
+    Not Part6LatticeEmbeddingClosureInput
+
+/-- The Part 6 closure input is field-calibrated down to its closed-unit
+tail-reversal bridge witness. -/
+theorem part6_lattice_embedding_closure_input_field_certificate :
+    Part6LatticeEmbeddingClosureInputFieldCertificate := by
+  constructor
+  · exact part6_lattice_embedding_field_payload_of_closure_input
+  constructor
+  · exact
+      z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_closing_support_nonempty
+  constructor
+  · exact part6_lattice_embedding_bridge_route_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_closure_input_certificate
+  constructor
+  · exact part6_lattice_embedding_closure_input_output_certificate
+  exact part6_lattice_embedding_closure_input_notYet
+
+/-- Field-level payload exposed by the sufficient topo closure input.  The
+payload keeps the repaired bridge, the pointwise-on-giant route, the paper
+support and support-surface repair fields, the full-support projections, and
+the explicit strict supercritical probability domain. -/
+def TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload : Prop :=
+  Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+    RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+      bridge /\
+      RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge /\
+      RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+        bridge /\
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge /\
+      RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+        bridge /\
+      RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        bridge /\
+      harrisKestenCriticalProb < bridge.supercriticalProbability /\
+      0 <= bridge.supercriticalProbability /\
+      bridge.supercriticalProbability < 1 /\
+      (Exists fun c : Real =>
+        0 < c /\ c <= 1 /\
+          Exists fun L0 : Nat =>
+            forall L : Nat, L0 <= L ->
+              c <=
+                expectedTopoLossOnData (bridge.family L)
+                  (boxedTorusFlatGraphN L)
+                  bridge.supercriticalProbability) /\
+      (Exists fun c : Real =>
+        0 < c /\ c <= 1 /\
+          Exists fun L0 : Nat =>
+            forall L : Nat, L0 <= L ->
+              c <=
+                percRestrictedExpectation
+                  (1 - bridge.supercriticalProbability)
+                  ((bridge.family L).giantComponentEvent
+                    (boxedTorusFlatGraphN L))
+                  (fun _ : BondConfig (EdgeIdx (boxedTorusFlatGraphN L)) =>
+                    (1 : Real))) /\
+      (forall L : Nat,
+        forall n : Nat,
+          forall omega : BondConfig (EdgeIdx n),
+            0 <= (bridge.family L).topoLossKernel n omega /\
+              (bridge.family L).topoLossKernel n omega <= 1) /\
+      BoxedTorusFlatFamilyCoreConclusion bridge.family /\
+      BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion
+        bridge.family
+
+/-- A sufficient topo closure input exposes the repaired bridge and its
+field-level paper-support, support-repair, route, and probability-domain
+obligations. -/
+theorem topo_cluster_random_supercritical_z2_field_payload_of_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInput ->
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload := by
+  intro hinput
+  cases hinput with
+  | intro bridge hroute =>
+      exact
+        Exists.intro bridge
+          ⟨hroute,
+            randomSupercriticalZ2TopoClusterRepairedBridgeData_paper_support
+              bridge,
+            randomSupercriticalZ2TopoClusterRepairedBridge_support_surface_repair
+              bridge,
+            randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route
+              bridge hroute,
+            randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route
+              bridge hroute,
+            randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_of_giant_pointwise_loss_route
+              bridge hroute,
+            bridge.supercriticalProbability_above_pc,
+            bridge.supercriticalProbability_nonneg,
+            bridge.supercriticalProbability_lt_one,
+            bridge.supercritical_flat_lower_bound,
+            bridge.supercritical_giant_event_mass_lower_bound,
+            bridge.family_topoLossKernel_mem_unitInterval,
+            bridge.family_core,
+            BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_random_supercritical_z2_topo_cluster_repaired_bridge
+              bridge⟩
+
+/-- Field-level certificate for the sufficient topo closure input. -/
+def TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate : Prop :=
+  (TopoClusterRandomSupercriticalZ2ClosureInput ->
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInput ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    TopoClusterRandomSupercriticalZ2ClosureInputCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
+    Not TopoClusterRandomSupercriticalZ2ClosureInput
+
+/-- The topo closure input is field-calibrated down to the repaired bridge,
+its pointwise-on-giant route, and its strict supercritical domain fields. -/
+theorem topo_cluster_random_supercritical_z2_closure_input_field_certificate :
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate := by
+  constructor
+  · exact topo_cluster_random_supercritical_z2_field_payload_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_full_route_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_boxed_route_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
+  exact topo_cluster_random_supercritical_z2_closure_input_notYet
+
+/-- Single build-gated field certificate for the sufficient closure inputs of
+the two remaining open paper-semantic targets. -/
+def RemainingOpenSemanticTargetsClosureInputFieldCertificate : Prop :=
+  Part6LatticeEmbeddingClosureInputFieldCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate /\
+    RemainingOpenSemanticTargetsClosureInputOutputCertificate
+
+/-- The sufficient closure inputs now expose field-level payloads for both
+remaining open targets. -/
+theorem remaining_open_semantic_targets_closure_input_field_certificate :
+    RemainingOpenSemanticTargetsClosureInputFieldCertificate := by
+  constructor
+  · exact part6_lattice_embedding_closure_input_field_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_field_certificate
+  exact remaining_open_semantic_targets_closure_input_output_certificate
+
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
 `PaperSemanticGate.lean` only builds if the public `gap_two_regime_*` aliases
