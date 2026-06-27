@@ -10687,6 +10687,146 @@ theorem part6_lattice_embedding_closure_input_field_output_certificate :
   · exact part6_lattice_embedding_closure_input_output_certificate
   exact part6_lattice_embedding_field_payload_notYet
 
+/-- Statement roster for the Part 6 field-output certificate. -/
+def part6LatticeEmbeddingClosureInputFieldOutputStatements : List Prop :=
+  [Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6LatticeEmbeddingSemanticKernelTarget,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6LatticeEmbeddingExactClosureInput,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6FullPaperClosingDivergenceWitness,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6NondegenerateFeasibleRepairRoute,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6FullPaperClosingFullOutputBundle,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6FullPaperClosingSupport,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6FullPaperClosingBridgeRoute,
+   Part6LatticeEmbeddingClosureInputFieldCertificate,
+   Part6LatticeEmbeddingClosureInputOutputCertificate,
+   Not Part6LatticeEmbeddingClosureInputFieldPayload,
+   Part6LatticeEmbeddingClosureInputFieldOutputCertificate]
+
+/-- Build gate: the Part 6 field-output statement roster is fixed to the
+current direct field-payload projection formulas. -/
+theorem
+    part6_lattice_embedding_closure_input_field_output_statements_named_current :
+    part6LatticeEmbeddingClosureInputFieldOutputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingExactClosureInput,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6FullPaperClosingDivergenceWitness,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6FullPaperClosingDivergenceWitness /\
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6FullPaperClosingFullOutputBundle,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6FullPaperClosingSupport,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6FullPaperClosingBridgeRoute,
+       Part6LatticeEmbeddingClosureInputFieldCertificate,
+       Part6LatticeEmbeddingClosureInputOutputCertificate,
+       Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Part6LatticeEmbeddingClosureInputFieldOutputCertificate] := rfl
+
+/-- Build-gated formula roster for the Part 6 field-output certificate. -/
+def Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingClosureInputFieldOutputStatements =
+    [Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingSemanticKernelTarget,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingExactClosureInput,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6NondegenerateFeasibleRepairRoute,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingFullOutputBundle,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingSupport,
+     Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingBridgeRoute,
+     Part6LatticeEmbeddingClosureInputFieldCertificate,
+     Part6LatticeEmbeddingClosureInputOutputCertificate,
+     Not Part6LatticeEmbeddingClosureInputFieldPayload,
+     Part6LatticeEmbeddingClosureInputFieldOutputCertificate] /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingSemanticKernelTarget) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingExactClosureInput) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6NondegenerateFeasibleRepairRoute) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingFullOutputBundle) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingSupport) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingBridgeRoute) /\
+    Part6LatticeEmbeddingClosureInputFieldCertificate /\
+    Part6LatticeEmbeddingClosureInputOutputCertificate /\
+    Not Part6LatticeEmbeddingClosureInputFieldPayload /\
+    Part6LatticeEmbeddingClosureInputFieldOutputCertificate
+
+/-- The Part 6 field-output statement roster is kernel-checked against the
+direct projection theorems used by the field-output certificate. -/
+theorem
+    part6_lattice_embedding_closure_input_field_output_statement_roster_certificate :
+    Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate := by
+  constructor
+  · exact
+      part6_lattice_embedding_closure_input_field_output_statements_named_current
+  constructor
+  · exact part6_lattice_embedding_semantic_kernel_target_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_exact_closure_input_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_divergence_witness_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_feasible_divergence_witness_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_output_pair_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_repair_route_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_full_output_bundle_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_full_support_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_bridge_route_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_closure_input_field_certificate
+  constructor
+  · exact part6_lattice_embedding_closure_input_output_certificate
+  constructor
+  · exact part6_lattice_embedding_field_payload_notYet
+  exact part6_lattice_embedding_closure_input_field_output_certificate
+
 /-- The topo field payload projects directly to the semantic target. -/
 theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload :
     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
@@ -11435,6 +11575,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    Part6RemainingConditionalProjectionStatementRosterCertificate,
    Part6LatticeEmbeddingRouteObstructionProjectionCertificate,
    Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate,
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
    TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
@@ -11487,6 +11628,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        Part6RemainingConditionalProjectionStatementRosterCertificate,
        Part6LatticeEmbeddingRouteObstructionProjectionCertificate,
        Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
        TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
@@ -11542,6 +11684,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      Part6RemainingConditionalProjectionStatementRosterCertificate,
      Part6LatticeEmbeddingRouteObstructionProjectionCertificate,
      Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate,
+     Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
      TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
      TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
      TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
@@ -11589,6 +11732,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     Part6RemainingConditionalProjectionStatementRosterCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate /\
+    Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
@@ -11642,6 +11786,7 @@ theorem
     part6_remaining_conditional_projection_statement_roster_certificate,
     part6_lattice_embedding_route_obstruction_projection_certificate,
     part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate,
+    part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_exact_output_projection_certificate,
     topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate,
@@ -11695,6 +11840,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     Part6RemainingConditionalProjectionStatementRosterCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate /\
+    Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
@@ -11792,6 +11938,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate
+  constructor
+  · exact
+      part6_lattice_embedding_closure_input_field_output_statement_roster_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_exact_output_projection_certificate
   constructor

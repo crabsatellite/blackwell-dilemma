@@ -319,6 +319,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "Part6RemainingConditionalProjectionStatementRosterCertificate",
     "Part6LatticeEmbeddingRouteObstructionProjectionCertificate",
     "Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate",
+    "Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate",
     "TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate",
     "TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate",
     "TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate",
@@ -852,6 +853,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_bridge_route_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.part6LatticeEmbeddingClosureInputFieldOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_statements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_closure_input_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_of_field_payload",
@@ -2827,6 +2832,22 @@ def main() -> int:
     print(
         "semantic_target_closure_input_field_output_statement_roster_certificate_proof="
         "open_semantic_target_closure_input_field_output_statement_roster_certificate"
+    )
+    print(
+        "semantic_target_part6_field_output_statement_roster="
+        "part6LatticeEmbeddingClosureInputFieldOutputStatements"
+    )
+    print(
+        "semantic_target_part6_field_output_statement_roster_proof="
+        "part6_lattice_embedding_closure_input_field_output_statements_named_current"
+    )
+    print(
+        "semantic_target_part6_field_output_statement_roster_certificate="
+        "Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_part6_field_output_statement_roster_certificate_proof="
+        "part6_lattice_embedding_closure_input_field_output_statement_roster_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (

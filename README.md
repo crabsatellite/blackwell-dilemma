@@ -50,8 +50,9 @@ also directly projects each remaining field payload to its target, exact closure
 input, and output bundle before recording the current obstruction. The Part 6
 field payload
 also projects directly to the divergence/feasible witness output, repair route,
-and full-support route, and the topo field payload projects directly to the
-support-surface closing spine. The project does not claim the stronger
+and full-support route, with a dedicated statement roster for those formulas,
+and the topo field payload projects directly to the support-surface closing
+spine. The project does not claim the stronger
 full-manuscript semantic closure
 status. The Part 4 lattice p-monotonicity target is now closed by the standard
 `Z²` ranged local-lattice bridge; the former threshold target is closed by the
@@ -266,8 +267,8 @@ field-obstruction certificates.
 `completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate`
 pins those top-level obstruction statements as a Lean `List Prop`.
 `audit_paper_semantic_gate.py` now parses that top-level certificate body and
-fails unless all 40 expected certificate conjuncts are present.
-The same audit parses the top-level statement roster and checks all 42 expected
+fails unless all 44 expected certificate conjuncts are present.
+The same audit parses the top-level statement roster and checks all 46 expected
 base/certificate terms.
 `open_semantic_target_closure_input_named_roster_certificate` now pins the
 named sufficient closure-input roster itself, including target/input/current
@@ -338,7 +339,8 @@ target/exact/output obstruction-equivalence proofs, joint closure-reduction
 packages and package obstructions, joint route-obstruction packages, statement
 rosters, and package obstructions, bilateral package obstruction statement
 rosters, Part 6 conditional witness interface projections, statement roster,
-and obstructions, Part 6 route-obstruction projections and statement roster, topo
+and obstructions, Part 6 route-obstruction projections and statement roster,
+Part 6 field-output statement roster, topo
 exact-output projections, statement roster, and route nonclosure boundary, topo route-obstruction
 projections and statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
