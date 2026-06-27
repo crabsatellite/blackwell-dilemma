@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=100 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=102 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -284,6 +284,10 @@ three frontier certificate lists are all definitionally checked equal.
 `open_semantic_target_surface_roster_consistency_certificate` then proves that
 the semantic ledger ids, kernel-surface ids, typed frontier-payload ids, and
 both roster counts plus those cross-surface lists are synchronized.
+`remaining_open_semantic_targets_payload_route_map_certificate` packages the
+same full typed payload route map into one Lean theorem, including the current
+target obstructions, route equivalence proofs, payload-derived route/closure
+certificates, route/closure obstructions, and frontier certificates.
 `remaining_open_semantic_targets_frontier_certificate`
 collects these gates into one Lean theorem, including current refutations of
 the exact target routes, their route certificates, route-equivalence proofs,

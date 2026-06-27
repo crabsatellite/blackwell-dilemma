@@ -1066,6 +1066,11 @@ For full kernel-pure cover (v2.0 future iteration):
   `open_semantic_target_surface_roster_consistency_certificate` then proves
   that the semantic ledger ids, kernel-surface ids, typed frontier-payload ids,
   both roster counts, and those cross-surface lists are synchronized.
+  `remaining_open_semantic_targets_payload_route_map_certificate` packages the
+  same full typed payload route map into one Lean theorem, including the
+  current target obstructions, route equivalence proofs, payload-derived
+  route/closure certificates, route/closure obstructions, and frontier
+  certificates.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,

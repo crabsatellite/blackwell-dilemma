@@ -371,7 +371,9 @@
             "semantic_target_surface_current_frontier_consistency=openSemanticTargetSurfaceCurrentFrontierCertificates_current",
             "semantic_target_surface_roster_consistency_certificate=OpenSemanticTargetSurfaceRosterConsistencyCertificate",
             "semantic_target_surface_roster_consistency_certificate_proof=open_semantic_target_surface_roster_consistency_certificate",
-            "semantic_target_axiom_audit_prints_required=100"
+            "semantic_target_payload_route_map_certificate=RemainingOpenSemanticTargetsPayloadRouteMapCertificate",
+            "semantic_target_payload_route_map_certificate_proof=remaining_open_semantic_targets_payload_route_map_certificate",
+            "semantic_target_axiom_audit_prints_required=102"
           ]
         }
       ]

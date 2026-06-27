@@ -139,10 +139,10 @@ closure routes, closure-route certificates, closure obstructions, frontier
 progress/nonclosure certificates, full typed frontier payload certificates,
 payload-derived progress/nonclosure/frontier projections, cross-surface
 target/route-map/closure/frontier equality, payload-derived route-map and
-route/closure certificate-obstruction projections, surface-roster consistency,
-and AxiomAudit coverage. The public verification command set includes the same
-Lean build, PaperSemanticGate build, AxiomAudit build, and source-level audit
-scripts listed above.
+route/closure certificate-obstruction projections, the payload route-map
+certificate, surface-roster consistency, and AxiomAudit coverage. The public
+verification command set includes the same Lean build, PaperSemanticGate build,
+AxiomAudit build, and source-level audit scripts listed above.
 
 ## Installation
 

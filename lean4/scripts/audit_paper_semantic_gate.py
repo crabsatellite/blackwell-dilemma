@@ -181,6 +181,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceCurrentFrontierCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_surface_roster_consistency_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsPayloadRouteMapCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_payload_route_map_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
 }
@@ -616,6 +618,14 @@ def main() -> int:
     print(
         "semantic_target_surface_roster_consistency_certificate_proof="
         "open_semantic_target_surface_roster_consistency_certificate"
+    )
+    print(
+        "semantic_target_payload_route_map_certificate="
+        "RemainingOpenSemanticTargetsPayloadRouteMapCertificate"
+    )
+    print(
+        "semantic_target_payload_route_map_certificate_proof="
+        "remaining_open_semantic_targets_payload_route_map_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
