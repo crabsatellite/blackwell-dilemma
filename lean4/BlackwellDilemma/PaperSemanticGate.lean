@@ -8846,6 +8846,121 @@ theorem
     topo_cluster_random_supercritical_z2_exact_output_projection_certificate,
     remaining_open_semantic_targets_obstruction_equivalence_certificate⟩
 
+/-- Statement roster for the topo route-obstruction projection surface. -/
+def topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements :
+    List Prop :=
+  [(Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2ExactClosureInput),
+   (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2ExactClosureInput),
+   (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle),
+   (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle),
+   (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+   (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+   (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
+   Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle]
+
+/-- Build gate: the topo route-obstruction projection statement roster names
+the route refutation projections, route-obstruction equivalences, and current
+obstructions. -/
+theorem
+    topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_named_current :
+    topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements =
+      [(Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle),
+       (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle),
+       (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+       (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
+        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
+
+/-- Build-gated statement roster for the topo route-obstruction projection. -/
+def
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements =
+    [(Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput),
+     (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput),
+     (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle),
+     (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle),
+     (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+     (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+     (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+     Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+     Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+     Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+     Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
+     Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+    (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+    (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle) /\
+    (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+    Not TopoClusterRandomSupercriticalZ2ExactClosureInput /\
+    Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate
+
+/-- The topo route-obstruction projection statement roster is pinned to named
+route-refutation projection, equivalence, and current-obstruction theorems. -/
+theorem
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate := by
+  exact ⟨
+    topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_named_current,
+    topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not,
+    topo_cluster_random_supercritical_z2_exact_closure_input_not_of_boxed_route_not,
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not,
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_boxed_route_not,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route,
+    topo_cluster_random_supercritical_z2_full_route_not_iff_boxed_route_not,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    topo_cluster_random_supercritical_z2_exact_closure_input_notYet,
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet,
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate⟩
+
 /-- Joint target-route package for the two remaining open semantic targets. -/
 def RemainingOpenSemanticTargetsTargetRoutesSatisfied : Prop :=
   Part6NondegenerateFeasibleRepairRoute /\
@@ -10479,6 +10594,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
@@ -10570,6 +10686,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
       topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   constructor
