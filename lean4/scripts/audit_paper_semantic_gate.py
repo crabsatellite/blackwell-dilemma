@@ -824,6 +824,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_boxed_route_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_closing_route_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_output_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_field_payload",

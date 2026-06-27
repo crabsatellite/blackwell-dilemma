@@ -10663,6 +10663,19 @@ theorem topo_cluster_random_supercritical_z2_boxed_route_of_field_payload :
       (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
         hpayload)
 
+/-- The topo field payload projects directly to the support-surface closing
+spine. -/
+theorem topo_cluster_random_supercritical_z2_support_surface_closing_route_of_field_payload :
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge := by
+  intro hpayload
+  exact
+    topo_cluster_random_supercritical_z2_support_surface_closing_route_of_closure_input
+      (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
+        hpayload)
+
 /-- The topo field payload projects directly to the repaired support-surface
 route. -/
 theorem topo_cluster_random_supercritical_z2_support_surface_repair_route_of_field_payload :
@@ -10728,6 +10741,10 @@ def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate : Prop :=
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput) /\
@@ -10754,6 +10771,9 @@ theorem topo_cluster_random_supercritical_z2_closure_input_field_output_certific
   · exact topo_cluster_random_supercritical_z2_full_route_of_field_payload
   constructor
   · exact topo_cluster_random_supercritical_z2_boxed_route_of_field_payload
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_support_surface_closing_route_of_field_payload
   constructor
   · exact
       topo_cluster_random_supercritical_z2_support_surface_repair_route_of_field_payload
