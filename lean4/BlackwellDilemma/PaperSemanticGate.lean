@@ -10565,6 +10565,12 @@ theorem part6_lattice_embedding_semantic_kernel_target_of_field_payload :
     part6_lattice_embedding_semantic_kernel_target_of_closure_input
       (part6_lattice_embedding_closure_input_of_field_payload hpayload)
 
+/-- The Part 6 field payload projects directly to the repair-route target. -/
+theorem part6_lattice_embedding_repair_route_of_field_payload :
+    Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6NondegenerateFeasibleRepairRoute := by
+  exact part6_lattice_embedding_semantic_kernel_target_of_field_payload
+
 /-- The Part 6 field payload projects directly to the full output bundle. -/
 theorem part6_lattice_embedding_full_output_bundle_of_field_payload :
     Part6LatticeEmbeddingClosureInputFieldPayload ->
@@ -10573,6 +10579,13 @@ theorem part6_lattice_embedding_full_output_bundle_of_field_payload :
   exact
     part6_lattice_embedding_full_output_bundle_of_closure_input
       (part6_lattice_embedding_closure_input_of_field_payload hpayload)
+
+/-- The Part 6 field payload projects directly to the full support route. -/
+theorem part6_lattice_embedding_full_support_of_field_payload :
+    Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingSupport := by
+  intro hpayload
+  exact (part6_lattice_embedding_full_output_bundle_of_field_payload hpayload).1
 
 /-- The Part 6 field payload projects directly to the bridge route. -/
 theorem part6_lattice_embedding_bridge_route_of_field_payload :
@@ -10588,7 +10601,11 @@ def Part6LatticeEmbeddingClosureInputFieldOutputCertificate : Prop :=
   (Part6LatticeEmbeddingClosureInputFieldPayload ->
     Part6LatticeEmbeddingSemanticKernelTarget) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6NondegenerateFeasibleRepairRoute) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6FullPaperClosingFullOutputBundle) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingSupport) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6FullPaperClosingBridgeRoute) /\
     Part6LatticeEmbeddingClosureInputFieldCertificate /\
@@ -10602,7 +10619,11 @@ theorem part6_lattice_embedding_closure_input_field_output_certificate :
   constructor
   · exact part6_lattice_embedding_semantic_kernel_target_of_field_payload
   constructor
+  · exact part6_lattice_embedding_repair_route_of_field_payload
+  constructor
   · exact part6_lattice_embedding_full_output_bundle_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_full_support_of_field_payload
   constructor
   · exact part6_lattice_embedding_bridge_route_of_field_payload
   constructor

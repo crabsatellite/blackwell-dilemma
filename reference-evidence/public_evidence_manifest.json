@@ -611,7 +611,7 @@
             "semantic_target_closure_input_field_output_roster_certificate_proof=open_semantic_target_closure_input_field_output_roster_certificate",
             "semantic_target_closure_input_field_output_statement_roster_certificate=OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
             "semantic_target_closure_input_field_output_statement_roster_certificate_proof=open_semantic_target_closure_input_field_output_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=603",
+            "semantic_target_axiom_audit_prints_required=605",
             "semantic_target_axiom_audit_prints_missing=0"
           ]
         },

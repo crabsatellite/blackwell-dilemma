@@ -265,6 +265,8 @@ target ids and each open-target surface roster.
 `remaining_open_semantic_targets_closure_input_field_output_certificate` now
 gates direct projections from each remaining field payload to its target and
 output bundle before recording the current field-payload obstruction.
+For Part 6, the same certificate also records direct field-payload projections
+to the repair route and full-support route.
 `open_semantic_target_closure_input_named_roster_certificate` also pins the
 sufficient closure-input roster to named target/input/current-obstruction and
 certificate propositions, including the generic projection from target
