@@ -262,6 +262,48 @@ CORE_OUTPUT_EQUIVALENCE_DECLS = {
     "not_part6_full_paper_closing_full_output_bundle_current",
 }
 
+EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
+    "RemainingOpenSemanticTargetsFrontierCertificate",
+    "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
+    "RemainingOpenSemanticTargetsPayloadRouteMapCertificate",
+    "OpenSemanticTargetClosureInputNamedRosterCertificate",
+    "OpenSemanticTargetClosureInputStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsExactClosureInputCertificate",
+    "OpenSemanticTargetExactClosureInputNamedRosterCertificate",
+    "OpenSemanticTargetExactClosureInputStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsExactClosureInputOutputCertificate",
+    "OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate",
+    "OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsObstructionEquivalenceCertificate",
+    "OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate",
+    "OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsJointClosureReductionCertificate",
+    "RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
+    "RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
+    "RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
+    "OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
+    "OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
+    "OpenSemanticTargetNamedRouteObstructionRosterCertificate",
+    "OpenSemanticTargetNamedFrontierCertificateRosterCertificate",
+    "OpenSemanticTargetNamedRouteStatementRosterCertificate",
+    "Part6RemainingConditionalProjectionCertificate",
+    "Part6RemainingConditionalProjectionStatementRosterCertificate",
+    "Part6LatticeEmbeddingRouteObstructionProjectionCertificate",
+    "Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate",
+    "TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate",
+    "TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate",
+    "TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate",
+    "TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsOutputEquivalenceCertificate",
+    "OpenSemanticTargetOutputEquivalenceNamedRosterCertificate",
+    "OpenSemanticTargetOutputEquivalenceStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate",
+    "OpenSemanticTargetClosureInputFieldRosterCertificate",
+    "OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
+)
+
 FORBIDDEN_WHEN_OPEN = {
     REPO_ROOT / "README.md": [
         "complete kernel-only audit target",
@@ -1201,6 +1243,25 @@ def open_obstruction_equivalence_surfaces(
     return surfaces
 
 
+def top_level_current_obstruction_missing_conjuncts(text: str) -> list[str]:
+    match = re.search(
+        r"def\s+CompletePaperSemanticKernelOnlyCurrentObstructionCertificate\s*:\s*"
+        r"Prop\s*:=\s*(.*?)\n\s*/--\s+The current paper-semantic",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit(
+            "missing CompletePaperSemanticKernelOnlyCurrentObstructionCertificate body"
+        )
+    body = match.group(1)
+    return [
+        conjunct
+        for conjunct in EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS
+        if re.search(rf"\b{re.escape(conjunct)}\b", body) is None
+    ]
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -1247,6 +1308,9 @@ def main() -> int:
     obstruction_equivalence_surface_ids = [
         surface[0] for surface in obstruction_equivalence_surfaces
     ]
+    top_level_missing_conjuncts = (
+        top_level_current_obstruction_missing_conjuncts(text)
+    )
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -1266,6 +1330,14 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_obstruction_surface_payload_certificates="
         "OpenSemanticTargetSurfaceRosterConsistencyCertificate,"
         "RemainingOpenSemanticTargetsPayloadRouteMapCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="
+        f"{len(EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS)}"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_missing="
+        f"{len(top_level_missing_conjuncts)}"
     )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
@@ -2703,6 +2775,11 @@ def main() -> int:
         failures.append(f"open target ids {open_ids!r} != theorem gate {expected_open_ids!r}")
     if closed_ids != expected_closed_ids:
         failures.append(f"closed target ids {closed_ids!r} != theorem gate {expected_closed_ids!r}")
+    if top_level_missing_conjuncts:
+        failures.append(
+            "top-level current obstruction certificate missing conjuncts: "
+            + ",".join(top_level_missing_conjuncts)
+        )
     if kernel_surface_ids != open_ids:
         failures.append(
             f"kernel-surface ids {kernel_surface_ids!r} != open semantic target ids {open_ids!r}"

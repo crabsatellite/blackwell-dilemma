@@ -253,6 +253,8 @@ The top-level
 the current non-complete claim against `open=2`, the exact remaining target ids,
 and the frontier/surface-roster/payload-route-map/exact-input/output/
 field-obstruction certificates.
+`audit_paper_semantic_gate.py` now parses that top-level certificate body and
+fails unless all 39 expected certificate conjuncts are present.
 `open_semantic_target_closure_input_named_roster_certificate` now pins the
 named sufficient closure-input roster itself, including target/input/current
 obstruction/certificate propositions and the target-obstruction to
