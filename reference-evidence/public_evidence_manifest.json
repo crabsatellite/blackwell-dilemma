@@ -529,6 +529,9 @@
             "semantic_target_part6_route_obstruction_projection_current=part6_lattice_embedding_semantic_kernel_target_notYet,not_part6_nondegenerate_feasible_repair_route_current,not_part6_full_paper_closing_support_current,part6_lattice_embedding_exact_closure_input_notYet,not_part6_full_paper_closing_full_output_bundle_current",
             "semantic_target_part6_route_obstruction_projection_certificate=Part6LatticeEmbeddingRouteObstructionProjectionCertificate",
             "semantic_target_part6_route_obstruction_projection_certificate_proof=part6_lattice_embedding_route_obstruction_projection_certificate",
+            "semantic_target_part6_route_obstruction_projection_statement_roster_proof=part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current",
+            "semantic_target_part6_route_obstruction_projection_statement_roster_certificate=Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate",
+            "semantic_target_part6_route_obstruction_projection_statement_roster_certificate_proof=part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate",
             "semantic_target_topo_exact_output_projection_exact_input_proofs=topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input,topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input,topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input,topo_cluster_random_supercritical_z2_support_surface_repair_output_of_exact_closure_input,topo_cluster_random_supercritical_z2_paper_support_output_of_exact_closure_input,topo_cluster_random_supercritical_z2_giant_loss_output_of_exact_closure_input",
             "semantic_target_topo_exact_output_projection_same_bridge_bundle_proofs=topo_cluster_random_supercritical_z2_boxed_route_of_same_bridge_full_output_bundle,topo_cluster_random_supercritical_z2_support_surface_repair_route_of_same_bridge_full_output_bundle,topo_cluster_random_supercritical_z2_support_surface_repair_output_of_same_bridge_full_output_bundle,topo_cluster_random_supercritical_z2_paper_support_output_of_same_bridge_full_output_bundle,topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle",
             "semantic_target_topo_exact_output_projection_boundary=randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
@@ -555,7 +558,7 @@
             "semantic_target_closure_input_field_not_iff_proof=openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input",
             "semantic_target_closure_input_field_roster_certificate=OpenSemanticTargetClosureInputFieldRosterCertificate",
             "semantic_target_closure_input_field_roster_certificate_proof=open_semantic_target_closure_input_field_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=533"
+            "semantic_target_axiom_audit_prints_required=537"
           ]
         },
         {

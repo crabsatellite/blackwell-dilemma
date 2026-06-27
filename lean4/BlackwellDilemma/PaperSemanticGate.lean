@@ -8348,6 +8348,118 @@ theorem part6_lattice_embedding_route_obstruction_projection_certificate :
     part6_remaining_conditional_projection_certificate,
     remaining_open_semantic_targets_obstruction_equivalence_certificate⟩
 
+/-- Statement roster for the Part 6 route-obstruction projection surface. -/
+def part6LatticeEmbeddingRouteObstructionProjectionStatements : List Prop :=
+  [(Not Part6NondegenerateFeasibleRepairRoute ->
+    Not Part6LatticeEmbeddingExactClosureInput),
+   (Not Part6FullPaperClosingSupport ->
+    Not Part6LatticeEmbeddingExactClosureInput),
+   (Not Part6NondegenerateFeasibleRepairRoute ->
+    Not Part6FullPaperClosingFullOutputBundle),
+   (Not Part6FullPaperClosingSupport ->
+    Not Part6FullPaperClosingFullOutputBundle),
+   (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+    Not Part6NondegenerateFeasibleRepairRoute),
+   (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+    Not Part6FullPaperClosingSupport),
+   (Not Part6NondegenerateFeasibleRepairRoute ↔
+    Not Part6FullPaperClosingSupport),
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not Part6LatticeEmbeddingExactClosureInput,
+   Not Part6FullPaperClosingFullOutputBundle]
+
+/-- Build gate: the Part 6 route-obstruction projection statement roster names
+the route refutation projections, route-obstruction equivalences, and current
+obstructions. -/
+theorem part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current :
+    part6LatticeEmbeddingRouteObstructionProjectionStatements =
+      [(Not Part6NondegenerateFeasibleRepairRoute ->
+        Not Part6LatticeEmbeddingExactClosureInput),
+       (Not Part6FullPaperClosingSupport ->
+        Not Part6LatticeEmbeddingExactClosureInput),
+       (Not Part6NondegenerateFeasibleRepairRoute ->
+        Not Part6FullPaperClosingFullOutputBundle),
+       (Not Part6FullPaperClosingSupport ->
+        Not Part6FullPaperClosingFullOutputBundle),
+       (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+        Not Part6NondegenerateFeasibleRepairRoute),
+       (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+        Not Part6FullPaperClosingSupport),
+       (Not Part6NondegenerateFeasibleRepairRoute ↔
+        Not Part6FullPaperClosingSupport),
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingExactClosureInput,
+       Not Part6FullPaperClosingFullOutputBundle] := rfl
+
+/-- Build-gated statement roster for the Part 6 route-obstruction projection. -/
+def Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingRouteObstructionProjectionStatements =
+    [(Not Part6NondegenerateFeasibleRepairRoute ->
+      Not Part6LatticeEmbeddingExactClosureInput),
+     (Not Part6FullPaperClosingSupport ->
+      Not Part6LatticeEmbeddingExactClosureInput),
+     (Not Part6NondegenerateFeasibleRepairRoute ->
+      Not Part6FullPaperClosingFullOutputBundle),
+     (Not Part6FullPaperClosingSupport ->
+      Not Part6FullPaperClosingFullOutputBundle),
+     (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6NondegenerateFeasibleRepairRoute),
+     (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6FullPaperClosingSupport),
+     (Not Part6NondegenerateFeasibleRepairRoute ↔
+      Not Part6FullPaperClosingSupport),
+     Not Part6LatticeEmbeddingSemanticKernelTarget,
+     Not Part6NondegenerateFeasibleRepairRoute,
+     Not Part6FullPaperClosingSupport,
+     Not Part6LatticeEmbeddingExactClosureInput,
+     Not Part6FullPaperClosingFullOutputBundle] /\
+    (Not Part6NondegenerateFeasibleRepairRoute ->
+      Not Part6LatticeEmbeddingExactClosureInput) /\
+    (Not Part6FullPaperClosingSupport ->
+      Not Part6LatticeEmbeddingExactClosureInput) /\
+    (Not Part6NondegenerateFeasibleRepairRoute ->
+      Not Part6FullPaperClosingFullOutputBundle) /\
+    (Not Part6FullPaperClosingSupport ->
+      Not Part6FullPaperClosingFullOutputBundle) /\
+    (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6NondegenerateFeasibleRepairRoute) /\
+    (Not Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Not Part6FullPaperClosingSupport) /\
+    (Not Part6NondegenerateFeasibleRepairRoute ↔
+      Not Part6FullPaperClosingSupport) /\
+    Not Part6LatticeEmbeddingSemanticKernelTarget /\
+    Not Part6NondegenerateFeasibleRepairRoute /\
+    Not Part6FullPaperClosingSupport /\
+    Not Part6LatticeEmbeddingExactClosureInput /\
+    Not Part6FullPaperClosingFullOutputBundle /\
+    Part6LatticeEmbeddingRouteObstructionProjectionCertificate
+
+/-- The Part 6 route-obstruction projection statement roster is pinned to named
+route-refutation projection, equivalence, and current-obstruction theorems. -/
+theorem
+    part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate :
+    Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate := by
+  exact ⟨
+    part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current,
+    part6_lattice_embedding_exact_closure_input_not_of_repair_route_not,
+    part6_lattice_embedding_exact_closure_input_not_of_full_support_not,
+    part6_lattice_embedding_full_output_bundle_not_of_repair_route_not,
+    part6_lattice_embedding_full_output_bundle_not_of_full_support_not,
+    part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route,
+    part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,
+    part6_lattice_embedding_repair_route_not_iff_full_support_not,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    not_part6_nondegenerate_feasible_repair_route_current,
+    not_part6_full_paper_closing_support_current,
+    part6_lattice_embedding_exact_closure_input_notYet,
+    not_part6_full_paper_closing_full_output_bundle_current,
+    part6_lattice_embedding_route_obstruction_projection_certificate⟩
+
 /-- Dedicated topo projection certificate from the exact input and
 same-witness bundle down to the named route/output layers.  It also records
 that the currently inhabited support-surface repair layer is still not enough
@@ -10190,6 +10302,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     Part6RemainingConditionalProjectionCertificate /\
     Part6RemainingConditionalProjectionStatementRosterCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
+    Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
@@ -10273,6 +10386,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact part6_remaining_conditional_projection_statement_roster_certificate
   constructor
   · exact part6_lattice_embedding_route_obstruction_projection_certificate
+  constructor
+  · exact
+      part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_exact_output_projection_certificate
   constructor

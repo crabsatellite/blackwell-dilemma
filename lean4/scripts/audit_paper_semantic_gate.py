@@ -616,6 +616,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_repair_route_not_iff_full_support_not",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingRouteObstructionProjectionCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_route_obstruction_projection_certificate",
+    "BlackwellDilemma.PaperSemanticGate.part6LatticeEmbeddingRouteObstructionProjectionStatements",
+    "BlackwellDilemma.PaperSemanticGate.part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input",
@@ -2209,6 +2213,18 @@ def main() -> int:
     print(
         "semantic_target_part6_route_obstruction_projection_certificate_proof="
         "part6_lattice_embedding_route_obstruction_projection_certificate"
+    )
+    print(
+        "semantic_target_part6_route_obstruction_projection_statement_roster_proof="
+        "part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current"
+    )
+    print(
+        "semantic_target_part6_route_obstruction_projection_statement_roster_certificate="
+        "Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_part6_route_obstruction_projection_statement_roster_certificate_proof="
+        "part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate"
     )
     print(
         "semantic_target_topo_exact_output_projection_exact_input_proofs="

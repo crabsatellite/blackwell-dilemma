@@ -153,6 +153,10 @@ the Part 6 route-level negative direction: refuting either the nondegenerate
 feasible repair route or full paper-closing support refutes both the exact input
 and full output bundle, and those route refutations are equivalent to the Part 6
 target obstruction.
+`part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate`
+pins those route refutation projections, route-obstruction equivalences, and
+current Part 6 route/input/output obstructions in one build-gated statement
+list.
 `topo_cluster_random_supercritical_z2_exact_output_projection_certificate`
 similarly projects the topo exact input and same-bridge output bundle to the
 full route, boxed finite-lattice route, support-surface repair route/output,
@@ -305,7 +309,7 @@ target/exact/output obstruction-equivalence proofs, joint closure-reduction
 packages and package obstructions, joint route-obstruction packages, statement
 rosters, and package obstructions, bilateral package obstruction statement
 rosters, Part 6 conditional witness interface projections, statement roster,
-and obstructions, Part 6 route-obstruction projections, topo
+and obstructions, Part 6 route-obstruction projections and statement roster, topo
 exact-output projections and route nonclosure boundary, topo route-obstruction
 projections, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
