@@ -253,10 +253,32 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
 def openSemanticTargetKernelSurfaceIds : List String :=
   openSemanticTargetKernelSurfaces.map (fun surface => surface.id)
 
+/-- Paper-facing labels carried by the machine-facing open target surface. -/
+def openSemanticTargetKernelSurfacePaperLabels : List String :=
+  openSemanticTargetKernelSurfaces.map (fun surface => surface.paperLabel)
+
+/-- Machine-facing open target surface projected to `(id, paperLabel)` pairs. -/
+def openSemanticTargetKernelSurfaceIdPaperLabels : List (String × String) :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => (surface.id, surface.paperLabel))
+
 /-- Build gate: the machine-facing open target roster has exactly the same ids
 as the semantic ledger. -/
 theorem openSemanticTargetKernelSurfaceIds_current :
     openSemanticTargetKernelSurfaceIds = openSemanticTargetIds := rfl
+
+/-- Build gate: the machine-facing open target roster has exactly the same
+paper-facing labels as the semantic ledger's open target entries. -/
+theorem openSemanticTargetKernelSurfacePaperLabels_current :
+    openSemanticTargetKernelSurfacePaperLabels =
+      openSemanticTargets.map (fun target => target.paperLabel) := rfl
+
+/-- Build gate: the machine-facing open target roster keeps each paper-facing
+label paired with the same semantic target id as the open ledger entries. -/
+theorem openSemanticTargetKernelSurfaceIdPaperLabels_current :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
 
 /-- Build gate: the machine-facing open target roster has the same cardinality
 as the semantic ledger's open target count. -/
@@ -387,6 +409,10 @@ equivalences, current refutations, and full frontier certificates for both
 remaining open semantic targets. -/
 def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
   openSemanticTargetKernelSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetKernelSurfacePaperLabels =
+      openSemanticTargets.map (fun target => target.paperLabel) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
     openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
     (Part6LatticeEmbeddingSemanticKernelTarget ↔
       Part6NondegenerateFeasibleRepairRoute) /\
@@ -423,6 +449,8 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     RemainingOpenSemanticTargetsFrontierCertificate := by
   exact ⟨
     openSemanticTargetKernelSurfaceIds_current,
+    openSemanticTargetKernelSurfacePaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_current,
     openSemanticTargetKernelSurfaceCount_current,
     part6_lattice_embedding_semantic_kernel_target_iff_repair_route,
     part6_lattice_embedding_semantic_kernel_target_iff_full_support,

@@ -72,6 +72,11 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
     ),
 }
 
+EXPECTED_OPEN_TARGET_LABELS = {
+    "theorem_4_1_part6_lattice_embedding": "thm:cognitive-threshold Part 6",
+    "topo_cluster_random_supercritical_z2": "prop:topo-cluster and thm:phase",
+}
+
 EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
         "part6_lattice_embedding_frontier_payload",
@@ -1235,6 +1240,26 @@ def open_kernel_surfaces(text: str) -> list[
     return surfaces
 
 
+def open_kernel_surface_id_label_pairs(text: str) -> list[tuple[str, str]]:
+    match = re.search(
+        r"def\s+openSemanticTargetKernelSurfaces\s*:\s*"
+        r"List\s+OpenSemanticTargetKernelSurface\s*:=\s*"
+        r"(\[.*?\])\s*\n\s*def\s+openSemanticTargetKernelSurfaceIds",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing open semantic target kernel-surface roster")
+    pairs = re.findall(
+        r'id\s*:=\s*"([^"]+)".*?paperLabel\s*:=\s*"([^"]+)"',
+        match.group(1),
+        flags=re.DOTALL,
+    )
+    if not pairs:
+        raise SystemExit("no open semantic target kernel-surface labels found")
+    return pairs
+
+
 def open_frontier_payload_surfaces(
     text: str,
 ) -> list[
@@ -2061,6 +2086,15 @@ def main() -> int:
     expected_closed_ids = theorem_id_list(text, "closedSemanticTargetIds_current")
     kernel_surfaces = open_kernel_surfaces(text)
     kernel_surface_ids = [surface[0] for surface in kernel_surfaces]
+    kernel_surface_id_label_pairs = open_kernel_surface_id_label_pairs(text)
+    kernel_surface_labels = [label for _surface_id, label in kernel_surface_id_label_pairs]
+    expected_kernel_surface_id_label_pairs = [
+        (surface_id, EXPECTED_OPEN_TARGET_LABELS[surface_id])
+        for surface_id in EXPECTED_OPEN_KERNEL_SURFACES
+    ]
+    expected_kernel_surface_labels = [
+        label for _surface_id, label in expected_kernel_surface_id_label_pairs
+    ]
     payload_surfaces = open_frontier_payload_surfaces(text)
     payload_surface_ids = [surface[0] for surface in payload_surfaces]
     closure_input_surfaces = open_closure_input_surfaces(text)
@@ -2421,6 +2455,44 @@ def main() -> int:
         + ",".join(duplicate_paper_semantic_axiom_audit_prints)
     )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
+    print(
+        "semantic_target_kernel_surface_paper_labels="
+        + ",".join(kernel_surface_labels)
+    )
+    print(
+        "semantic_target_kernel_surface_paper_labels_expected="
+        + ",".join(expected_kernel_surface_labels)
+    )
+    print(
+        "semantic_target_kernel_surface_paper_labels_match="
+        f"{int(kernel_surface_labels == expected_kernel_surface_labels)}"
+    )
+    print(
+        "semantic_target_kernel_surface_id_paper_labels="
+        + ";".join(
+            f"{surface_id}:{label}"
+            for surface_id, label in kernel_surface_id_label_pairs
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_id_paper_labels_expected="
+        + ";".join(
+            f"{surface_id}:{label}"
+            for surface_id, label in expected_kernel_surface_id_label_pairs
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_id_paper_labels_match="
+        f"{int(kernel_surface_id_label_pairs == expected_kernel_surface_id_label_pairs)}"
+    )
+    print(
+        "semantic_target_kernel_surface_paper_label_projection="
+        "openSemanticTargetKernelSurfacePaperLabels_current"
+    )
+    print(
+        "semantic_target_kernel_surface_id_paper_label_projection="
+        "openSemanticTargetKernelSurfaceIdPaperLabels_current"
+    )
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
     print(f"semantic_target_closure_input_surface_ids={','.join(closure_input_surface_ids)}")
     print(
@@ -4353,6 +4425,22 @@ def main() -> int:
             f"{len(semantic_target_paper_label_id_missing_terms)}"
         ),
         (
+            "semantic_target_kernel_surface_paper_labels_match="
+            f"{int(kernel_surface_labels == expected_kernel_surface_labels)}"
+        ),
+        (
+            "semantic_target_kernel_surface_id_paper_labels_match="
+            f"{int(kernel_surface_id_label_pairs == expected_kernel_surface_id_label_pairs)}"
+        ),
+        (
+            "semantic_target_kernel_surface_paper_label_projection="
+            "openSemanticTargetKernelSurfacePaperLabels_current"
+        ),
+        (
+            "semantic_target_kernel_surface_id_paper_label_projection="
+            "openSemanticTargetKernelSurfaceIdPaperLabels_current"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -4551,6 +4639,17 @@ def main() -> int:
     if kernel_surface_ids != open_ids:
         failures.append(
             f"kernel-surface ids {kernel_surface_ids!r} != open semantic target ids {open_ids!r}"
+        )
+    if kernel_surface_labels != expected_kernel_surface_labels:
+        failures.append(
+            "kernel-surface paper labels "
+            f"{kernel_surface_labels!r} != expected {expected_kernel_surface_labels!r}"
+        )
+    if kernel_surface_id_label_pairs != expected_kernel_surface_id_label_pairs:
+        failures.append(
+            "kernel-surface id/paper-label pairs "
+            f"{kernel_surface_id_label_pairs!r} != expected "
+            f"{expected_kernel_surface_id_label_pairs!r}"
         )
     if payload_surface_ids != open_ids:
         failures.append(
