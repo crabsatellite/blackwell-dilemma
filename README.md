@@ -357,7 +357,8 @@ statement roster, route nonclosure boundary, and 14-term field-output statement 
 combined detailed field-output roster package, topo route-obstruction
 projections and 12-term statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
-payload/certificate consistency, field statement roster length,
+payload/certificate consistency, field surface roster length,
+field statement roster length,
 field-output surface roster length, field-output statement roster length,
 surface-roster consistency, top-level statement roster length, and AxiomAudit
 coverage.

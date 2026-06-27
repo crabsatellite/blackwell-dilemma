@@ -10845,6 +10845,27 @@ theorem openSemanticTargetClosureInputFieldSurfaceFieldCertificates_named_curren
       [Part6LatticeEmbeddingClosureInputFieldCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate] := rfl
 
+/-- Build gate: the field-level closure-input roster has one entry for each
+remaining open semantic target. -/
+theorem openSemanticTargetClosureInputFieldSurfaceClosureInputs_length_current :
+    openSemanticTargetClosureInputFieldSurfaceClosureInputs.length = 2 := rfl
+
+/-- Build gate: the field-level payload roster has one entry for each remaining
+open semantic target. -/
+theorem openSemanticTargetClosureInputFieldSurfaceFieldPayloads_length_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloads.length = 2 := rfl
+
+/-- Build gate: the field-level payload-obstruction roster has one entry for
+each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions_length_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions.length = 2 := rfl
+
+/-- Build gate: the field-level certificate roster has one entry for each
+remaining open semantic target. -/
+theorem openSemanticTargetClosureInputFieldSurfaceFieldCertificates_length_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldCertificates.length = 2 := rfl
+
 /-- Build gate: the field-level roster names the exact closure-input to
 field-payload statements for the two remaining semantic targets. -/
 theorem
@@ -11027,6 +11048,11 @@ def OpenSemanticTargetClosureInputFieldRosterCertificate : Prop :=
     openSemanticTargetClosureInputFieldSurfaceFieldCertificates =
       [Part6LatticeEmbeddingClosureInputFieldCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate] /\
+    openSemanticTargetClosureInputFieldSurfaceClosureInputs.length = 2 /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloads.length = 2 /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions.length =
+      2 /\
+    openSemanticTargetClosureInputFieldSurfaceFieldCertificates.length = 2 /\
     (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
       surface.fieldPayload ↔ surface.closureInput) /\
     (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
@@ -11054,6 +11080,18 @@ theorem open_semantic_target_closure_input_field_roster_certificate :
   constructor
   · exact
       openSemanticTargetClosureInputFieldSurfaceFieldCertificates_named_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldSurfaceClosureInputs_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldSurfaceFieldPayloads_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldSurfaceFieldCertificates_length_current
   constructor
   · intro surface _
     exact

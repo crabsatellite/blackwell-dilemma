@@ -894,6 +894,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloads_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldCertificates_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceClosureInputs_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloads_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldCertificates_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_payload",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_payload_to_closure_input",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_payload_iff_closure_input",
@@ -3011,6 +3015,14 @@ def main() -> int:
         "openSemanticTargetClosureInputFieldSurfaceFieldPayloads_named_current,"
         "openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions_named_current,"
         "openSemanticTargetClosureInputFieldSurfaceFieldCertificates_named_current"
+    )
+    print("semantic_target_closure_input_field_roster_terms_checked=8")
+    print(
+        "semantic_target_closure_input_field_roster_length_proofs="
+        "openSemanticTargetClosureInputFieldSurfaceClosureInputs_length_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloads_length_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloadObstructions_length_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldCertificates_length_current"
     )
     print(
         "semantic_target_closure_input_field_not_iff_proof="
