@@ -22,6 +22,17 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPO_ROOT = ROOT.parent
 GATE = ROOT / "BlackwellDilemma" / "PaperSemanticGate.lean"
 
+EXPECTED_OPEN_KERNEL_SURFACES = {
+    "theorem_4_1_part6_lattice_embedding": (
+        "Part6LatticeEmbeddingSemanticKernelTarget",
+        "part6_lattice_embedding_semantic_kernel_target_notYet",
+    ),
+    "topo_cluster_random_supercritical_z2": (
+        "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet",
+    ),
+}
+
 FORBIDDEN_WHEN_OPEN = {
     REPO_ROOT / "README.md": [
         "complete kernel-only audit target",
@@ -80,6 +91,29 @@ def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
     return open_ids, closed_ids
 
 
+def open_kernel_surfaces(text: str) -> list[tuple[str, str, str]]:
+    match = re.search(
+        r"def\s+openSemanticTargetKernelSurfaces\s*:\s*"
+        r"List\s+OpenSemanticTargetKernelSurface\s*:=\s*"
+        r"(\[.*?\])\s*\n\s*def\s+openSemanticTargetKernelSurfaceIds",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit("missing open semantic target kernel-surface roster")
+
+    surfaces = re.findall(
+        r'id\s*:=\s*"([^"]+)".*?'
+        r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"currentObstruction\s*:=\s*([A-Za-z0-9_'.]+)",
+        match.group(1),
+        flags=re.DOTALL,
+    )
+    if not surfaces:
+        raise SystemExit("no open semantic target kernel-surface entries found")
+    return surfaces
+
+
 def main() -> int:
     text = read(GATE)
     open_ids, closed_ids = semantic_target_ids_by_status(text)
@@ -90,6 +124,8 @@ def main() -> int:
     expected_closed = theorem_count(text, "paperSemanticClosedCount_current")
     expected_open_ids = theorem_id_list(text, "openSemanticTargetIds_current")
     expected_closed_ids = theorem_id_list(text, "closedSemanticTargetIds_current")
+    kernel_surfaces = open_kernel_surfaces(text)
+    kernel_surface_ids = [target_id for target_id, _target, _obstruction in kernel_surfaces]
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -97,6 +133,15 @@ def main() -> int:
     print(f"theorem_gate_closed={expected_closed}")
     print(f"semantic_target_open_ids={','.join(open_ids)}")
     print(f"semantic_target_closed_ids={','.join(closed_ids)}")
+    print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
+    print(
+        "semantic_target_kernel_surface_targets="
+        + ",".join(target for _target_id, target, _obstruction in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_obstructions="
+        + ",".join(obstruction for _target_id, _target, obstruction in kernel_surfaces)
+    )
 
     failures: list[str] = []
     if open_count != expected_open:
@@ -107,6 +152,27 @@ def main() -> int:
         failures.append(f"open target ids {open_ids!r} != theorem gate {expected_open_ids!r}")
     if closed_ids != expected_closed_ids:
         failures.append(f"closed target ids {closed_ids!r} != theorem gate {expected_closed_ids!r}")
+    if kernel_surface_ids != open_ids:
+        failures.append(
+            f"kernel-surface ids {kernel_surface_ids!r} != open semantic target ids {open_ids!r}"
+        )
+    for target_id, target_prop, obstruction in kernel_surfaces:
+        expected_surface = EXPECTED_OPEN_KERNEL_SURFACES.get(target_id)
+        if expected_surface is None:
+            failures.append(f"unexpected kernel-surface id: {target_id}")
+            continue
+        expected_target, expected_obstruction = expected_surface
+        if target_prop != expected_target:
+            failures.append(
+                f"{target_id} target prop {target_prop!r} != expected {expected_target!r}"
+            )
+        if obstruction != expected_obstruction:
+            failures.append(
+                f"{target_id} obstruction {obstruction!r} != expected {expected_obstruction!r}"
+            )
+    missing_surface_ids = sorted(set(EXPECTED_OPEN_KERNEL_SURFACES) - set(kernel_surface_ids))
+    for target_id in missing_surface_ids:
+        failures.append(f"missing kernel-surface id: {target_id}")
 
     if open_count:
         for path, phrases in FORBIDDEN_WHEN_OPEN.items():
