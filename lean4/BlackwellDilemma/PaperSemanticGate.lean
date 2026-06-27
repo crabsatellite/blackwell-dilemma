@@ -10902,12 +10902,50 @@ theorem open_semantic_target_named_frontier_certificate_roster_certificate :
     remaining_open_semantic_targets_payload_route_map_certificate,
     open_semantic_target_named_route_obstruction_roster_certificate⟩
 
+/-- Target ids for the named route-statement roster. -/
+def openSemanticTargetNamedRouteStatementRosterIds : List String :=
+  ["theorem_4_1_part6_lattice_embedding",
+   "topo_cluster_random_supercritical_z2"]
+
+/-- Named route-statement roster ids paired with the paper-facing open ledger
+labels. -/
+def openSemanticTargetNamedRouteStatementRosterIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetNamedRouteStatementRosterIds
+    (openSemanticTargets.map (fun target => target.paperLabel))
+
+/-- Build gate: the named route-statement roster ids are exactly the remaining
+open semantic target ids. -/
+theorem openSemanticTargetNamedRouteStatementRosterIds_current :
+    openSemanticTargetNamedRouteStatementRosterIds =
+      openSemanticTargetIds := rfl
+
+/-- Build gate: the named route-statement roster keeps the same
+`(id, paperLabel)` projection as the open semantic ledger. -/
+theorem openSemanticTargetNamedRouteStatementRosterIdPaperLabels_current :
+    openSemanticTargetNamedRouteStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
+
+/-- Build gate: kernel-surface and named route-statement rosters are
+synchronized on target ids paired with paper-facing labels. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteStatementRosterIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedRouteStatementRosterIdPaperLabels := rfl
+
 /-- Build-gated named route-statement roster for the two remaining open
 semantic targets. This pins the target-route, target-closure, and
 route-closure equivalence statements to the named Part 6/topo formulas on both
 machine-facing surfaces. -/
 def OpenSemanticTargetNamedRouteStatementRosterCertificate : Prop :=
-  openSemanticTargetKernelSurfaceTargetRouteStatements =
+  openSemanticTargetNamedRouteStatementRosterIds =
+    openSemanticTargetIds /\
+    openSemanticTargetNamedRouteStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedRouteStatementRosterIdPaperLabels /\
+    openSemanticTargetKernelSurfaceTargetRouteStatements =
     [Part6LatticeEmbeddingSemanticKernelTarget ↔
       Part6NondegenerateFeasibleRepairRoute,
      TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
@@ -10970,6 +11008,9 @@ formulas on both the kernel surface and typed payload surface. -/
 theorem open_semantic_target_named_route_statement_roster_certificate :
     OpenSemanticTargetNamedRouteStatementRosterCertificate := by
   exact ⟨
+    openSemanticTargetNamedRouteStatementRosterIds_current,
+    openSemanticTargetNamedRouteStatementRosterIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteStatementRosterIdPaperLabels,
     openSemanticTargetKernelSurfaceTargetRouteStatements_named_current,
     openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_named_current,
     openSemanticTargetKernelSurfaceClosureRouteStatements_named_current,
