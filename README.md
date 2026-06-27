@@ -56,7 +56,7 @@ spine with its own 14-term field-output formula roster; both rosters are also pa
 as an id/count/length-gated remaining-open-target detailed field-output roster
 whose id/count/length equalities, together with the field-output surface ids/count
 equalities and the all-surface ids/count synchronization certificate, are
-top-level current-obstruction terms with a fixed 54-term top-level roster and a
+top-level current-obstruction terms with a fixed 55-term top-level roster and a
 fixed 20-statement all-surface roster.
 The project does not claim the stronger
 full-manuscript semantic closure
@@ -276,8 +276,8 @@ field-obstruction certificates.
 `completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate`
 pins those top-level obstruction statements as a Lean `List Prop`.
 `audit_paper_semantic_gate.py` now parses that top-level certificate body and
-fails unless all 52 expected certificate conjuncts are present.
-The same audit parses the top-level statement roster and checks all 54 expected
+fails unless all 53 expected certificate conjuncts are present.
+The same audit parses the top-level statement roster and checks all 55 expected
 base/certificate terms, backed by
 `completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current`.
 `open_semantic_target_closure_input_named_roster_certificate` now pins the

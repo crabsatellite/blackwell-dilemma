@@ -290,6 +290,7 @@ CORE_OUTPUT_EQUIVALENCE_DECLS = {
 }
 
 EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
+    "CompletePaperSemanticKernelOnly ↔ False",
     "RemainingOpenSemanticTargetsFrontierCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountCertificate",
@@ -1853,6 +1854,10 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_certificate_proof="
         "completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_iff_false_proof="
+        "completePaperSemanticKernelOnly_iff_false_current"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_surface_payload_certificates="

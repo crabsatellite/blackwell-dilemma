@@ -257,15 +257,16 @@ closure is the stronger target tracked by `PaperSemanticGate.lean`; that claim
 is not made until the semantic gate reaches open=0.
 The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
 `paperSemanticOpenCount = 0`, and
-`completePaperSemanticKernelOnly_notYet` proves its current negation.
+`completePaperSemanticKernelOnly_iff_false_current` sharpens its current
+negation to `CompletePaperSemanticKernelOnly ↔ False`.
 `completePaperSemanticKernelOnly_current_obstruction_certificate` now ties that
 negation to `open=2`, the exact remaining ids, and the remaining-open frontier,
 surface-roster, payload-route-map, and field-obstruction certificates.
 `completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate`
 pins those top-level obstruction statements as a Lean `List Prop`.
 `audit_paper_semantic_gate.py` parses that top-level certificate body and fails
-unless all 52 expected certificate conjuncts are present.
-The same audit parses the top-level statement roster and checks all 54 expected
+unless all 53 expected certificate conjuncts are present.
+The same audit parses the top-level statement roster and checks all 55 expected
 base/certificate terms, backed by
 `completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current`.
 It also publishes both the required AxiomAudit print count and missing print
@@ -305,7 +306,7 @@ field-output statement roster; its statement roster is fixed by
 has 20 checked statements.
 The top-level current-obstruction statement roster is likewise fixed by
 `completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current`
-with 54 checked statements.
+with 55 checked statements.
 `open_semantic_target_closure_input_named_roster_certificate` also pins the
 sufficient closure-input roster as five 2-term Lean lists, including named
 target/input/current-obstruction and certificate propositions plus the generic

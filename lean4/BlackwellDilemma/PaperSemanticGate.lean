@@ -12784,6 +12784,16 @@ theorem completePaperSemanticKernelOnly_notYet :
   intro hcomplete
   exact (by decide : paperSemanticOpenCount ≠ 0) hcomplete
 
+/-- In the current ledger, complete paper-semantic kernel-only status is
+equivalent to `False`, not merely unproved. -/
+theorem completePaperSemanticKernelOnly_iff_false_current :
+    CompletePaperSemanticKernelOnly ↔ False := by
+  constructor
+  · intro hcomplete
+    exact completePaperSemanticKernelOnly_notYet hcomplete
+  · intro hfalse
+    cases hfalse
+
 /-- Single build-gated package that every open-target surface roster uses the
 current open semantic target ids and count. -/
 def OpenSemanticTargetAllSurfaceIdsCountCertificate : Prop :=
@@ -12960,6 +12970,7 @@ open-target count/id gates, and subordinate certificate propositions that the
 top-level theorem must carry. -/
 def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
   [Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly ↔ False,
    paperSemanticOpenCount = 2,
    openSemanticTargetIds =
       ["theorem_4_1_part6_lattice_embedding",
@@ -13025,6 +13036,7 @@ exact current obstruction/certificate propositions. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current :
     completePaperSemanticKernelOnlyCurrentObstructionStatements =
       [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly ↔ False,
        paperSemanticOpenCount = 2,
        openSemanticTargetIds =
           ["theorem_4_1_part6_lattice_embedding",
@@ -13086,9 +13098,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 54 named obstruction and subordinate-certificate statements listed above. -/
+the 55 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 54 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 55 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -13098,6 +13110,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     Prop :=
   completePaperSemanticKernelOnlyCurrentObstructionStatements =
     [Not CompletePaperSemanticKernelOnly,
+     CompletePaperSemanticKernelOnly ↔ False,
      paperSemanticOpenCount = 2,
      openSemanticTargetIds =
         ["theorem_4_1_part6_lattice_embedding",
@@ -13157,8 +13170,9 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
        paperSemanticOpenCount,
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 54 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 55 /\
     Not CompletePaperSemanticKernelOnly /\
+    (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
     openSemanticTargetIds =
       ["theorem_4_1_part6_lattice_embedding",
@@ -13228,6 +13242,7 @@ theorem
     completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current,
     completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current,
     completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
     paperSemanticOpenCount_current,
     openSemanticTargetIds_current,
     remaining_open_semantic_targets_frontier_certificate,
@@ -13288,6 +13303,7 @@ open ids and to the current frontier, surface-roster, payload-route-map, and
 field obstruction certificates. -/
 def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
   Not CompletePaperSemanticKernelOnly /\
+    (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
     openSemanticTargetIds =
       ["theorem_4_1_part6_lattice_embedding",
@@ -13356,6 +13372,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
     CompletePaperSemanticKernelOnlyCurrentObstructionCertificate := by
   constructor
   · exact completePaperSemanticKernelOnly_notYet
+  constructor
+  · exact completePaperSemanticKernelOnly_iff_false_current
   constructor
   · exact paperSemanticOpenCount_current
   constructor
