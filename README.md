@@ -133,6 +133,11 @@ Part 6 target equivalent to `Part6LatticeEmbeddingExactClosureInput` and the
 topo target equivalent to `TopoClusterRandomSupercriticalZ2ExactClosureInput`;
 each sufficient input is checked to project into its exact input, and both exact
 inputs remain current-refuted.
+The exact inputs are also tied directly to the reversible output layer by
+`remaining_open_semantic_targets_exact_closure_input_output_certificate`: Part 6
+equates its exact closure input with `Part6FullPaperClosingFullOutputBundle`,
+and topo equates its support-surface exact input with
+`TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle`.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,
@@ -157,7 +162,7 @@ certificate.
 The top-level
 `completePaperSemanticKernelOnly_current_obstruction_certificate` also gates
 the current non-complete claim against `open=2`, the exact remaining target ids,
-and the frontier/field-obstruction certificates.
+and the frontier/exact-input/output/field-obstruction certificates.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
@@ -187,8 +192,8 @@ target/route-map/closure/frontier equality, payload-derived route-map and
 route/closure certificate-obstruction projections, the payload route-map
 certificate, closure-input sufficient-route/output/field certificates and obstructions,
 exact closure-input equivalence, sufficient-to-exact projections,
-output-equivalence target/output bundles, bidirectional output projections,
-output iff proofs, output obstructions, field-roster id,
+exact-input/output bundle equivalence, output-equivalence target/output bundles,
+bidirectional output projections, output iff proofs, output obstructions, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency,
 surface-roster consistency, and AxiomAudit coverage. The public

@@ -5244,6 +5244,245 @@ theorem remaining_open_semantic_targets_output_equivalence_certificate :
         surface
   exact remaining_open_semantic_targets_closure_input_output_certificate
 
+/-- The exact Part 6 closure input exposes the full paper-facing output
+bundle. -/
+theorem part6_lattice_embedding_full_output_bundle_of_exact_closure_input :
+    Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingFullOutputBundle := by
+  exact part6_full_paper_closing_support_full_output_bundle
+
+/-- The Part 6 full output bundle projects back to the exact closure input. -/
+theorem part6_lattice_embedding_exact_closure_input_of_full_output_bundle :
+    Part6FullPaperClosingFullOutputBundle ->
+      Part6LatticeEmbeddingExactClosureInput := by
+  intro hbundle
+  exact hbundle.1
+
+/-- The exact Part 6 closure input is equivalent to the full output bundle. -/
+theorem part6_lattice_embedding_exact_closure_input_iff_full_output_bundle :
+    Part6LatticeEmbeddingExactClosureInput ↔
+      Part6FullPaperClosingFullOutputBundle := by
+  constructor
+  · exact part6_lattice_embedding_full_output_bundle_of_exact_closure_input
+  exact part6_lattice_embedding_exact_closure_input_of_full_output_bundle
+
+/-- The exact topo closure input exposes the same-witness full output bundle. -/
+theorem
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_exact_closure_input :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle := by
+  rintro ⟨bridge, hroute⟩
+  let hsupport :=
+    randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_support_surface_closing_route
+      bridge hroute
+  exact ⟨bridge, hsupport.1, hsupport.2.1, hsupport⟩
+
+/-- The same-witness topo full output bundle projects back to the exact closure
+input. -/
+theorem
+    topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle :
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      TopoClusterRandomSupercriticalZ2ExactClosureInput := by
+  rintro ⟨bridge, _hpaper, _hgiant, hsupport⟩
+  exact
+    ⟨bridge,
+      randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_of_full_paper_closing_support
+        bridge hsupport⟩
+
+/-- The exact topo closure input is equivalent to the same-witness full output
+bundle. -/
+theorem
+    topo_cluster_random_supercritical_z2_exact_closure_input_iff_same_bridge_full_output_bundle :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ↔
+      TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle := by
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_exact_closure_input
+  exact
+    topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle
+
+/-- Machine-facing surface tying exact closure inputs to full output bundles for
+each remaining open semantic target. -/
+structure OpenSemanticTargetExactClosureInputOutputSurface where
+  id : String
+  target : Prop
+  exactClosureInput : Prop
+  outputBundle : Prop
+  exactClosureInputToOutputBundle : exactClosureInput -> outputBundle
+  outputBundleToExactClosureInput : outputBundle -> exactClosureInput
+  exactClosureInputIffOutputBundle : exactClosureInput ↔ outputBundle
+  targetIffExactClosureInput : target ↔ exactClosureInput
+  targetIffOutputBundle : target ↔ outputBundle
+  exactClosureInputCurrentObstruction : Not exactClosureInput
+  outputBundleCurrentObstruction : Not outputBundle
+
+/-- The two remaining open targets with exact closure inputs matched to full
+output bundles. -/
+def openSemanticTargetExactClosureInputOutputSurfaces :
+    List OpenSemanticTargetExactClosureInputOutputSurface :=
+  [ { id := "theorem_4_1_part6_lattice_embedding",
+      target := Part6LatticeEmbeddingSemanticKernelTarget,
+      exactClosureInput := Part6LatticeEmbeddingExactClosureInput,
+      outputBundle := Part6FullPaperClosingFullOutputBundle,
+      exactClosureInputToOutputBundle :=
+        part6_lattice_embedding_full_output_bundle_of_exact_closure_input,
+      outputBundleToExactClosureInput :=
+        part6_lattice_embedding_exact_closure_input_of_full_output_bundle,
+      exactClosureInputIffOutputBundle :=
+        part6_lattice_embedding_exact_closure_input_iff_full_output_bundle,
+      targetIffExactClosureInput :=
+        part6_lattice_embedding_semantic_kernel_target_iff_exact_closure_input,
+      targetIffOutputBundle :=
+        part6_lattice_embedding_semantic_kernel_target_iff_full_output_bundle,
+      exactClosureInputCurrentObstruction :=
+        part6_lattice_embedding_exact_closure_input_notYet,
+      outputBundleCurrentObstruction :=
+        not_part6_full_paper_closing_full_output_bundle_current },
+    { id := "topo_cluster_random_supercritical_z2",
+      target := TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+      exactClosureInput :=
+        TopoClusterRandomSupercriticalZ2ExactClosureInput,
+      outputBundle :=
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+      exactClosureInputToOutputBundle :=
+        topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_exact_closure_input,
+      outputBundleToExactClosureInput :=
+        topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle,
+      exactClosureInputIffOutputBundle :=
+        topo_cluster_random_supercritical_z2_exact_closure_input_iff_same_bridge_full_output_bundle,
+      targetIffExactClosureInput :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_exact_closure_input,
+      targetIffOutputBundle :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_same_bridge_full_output_bundle,
+      exactClosureInputCurrentObstruction :=
+        topo_cluster_random_supercritical_z2_exact_closure_input_notYet,
+      outputBundleCurrentObstruction :=
+        topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet } ]
+
+/-- Stable ids for the exact-input/output-bundle surface roster. -/
+def openSemanticTargetExactClosureInputOutputSurfaceIds : List String :=
+  openSemanticTargetExactClosureInputOutputSurfaces.map
+    (fun surface => surface.id)
+
+/-- Build gate: the exact-input/output-bundle roster has the same ids as the
+semantic ledger's open target list. -/
+theorem openSemanticTargetExactClosureInputOutputSurfaceIds_current :
+    openSemanticTargetExactClosureInputOutputSurfaceIds =
+      openSemanticTargetIds := rfl
+
+/-- Build gate: the exact-input/output-bundle roster has the same cardinality as
+the semantic ledger's open target count. -/
+theorem openSemanticTargetExactClosureInputOutputSurfaceCount_current :
+    openSemanticTargetExactClosureInputOutputSurfaces.length =
+      paperSemanticOpenCount := rfl
+
+/-- Every exact-input/output-bundle surface carries a kernel proof from exact
+input to output bundle. -/
+theorem openSemanticTargetExactClosureInputOutputSurface_exact_input_to_output
+    (surface : OpenSemanticTargetExactClosureInputOutputSurface) :
+    surface.exactClosureInput -> surface.outputBundle :=
+  surface.exactClosureInputToOutputBundle
+
+/-- Every exact-input/output-bundle surface carries a kernel proof from output
+bundle back to exact input. -/
+theorem openSemanticTargetExactClosureInputOutputSurface_output_to_exact_input
+    (surface : OpenSemanticTargetExactClosureInputOutputSurface) :
+    surface.outputBundle -> surface.exactClosureInput :=
+  surface.outputBundleToExactClosureInput
+
+/-- Every exact-input/output-bundle surface records equivalence between exact
+input and output bundle. -/
+theorem openSemanticTargetExactClosureInputOutputSurface_exact_input_iff_output
+    (surface : OpenSemanticTargetExactClosureInputOutputSurface) :
+    surface.exactClosureInput ↔ surface.outputBundle :=
+  surface.exactClosureInputIffOutputBundle
+
+/-- Every exact-input/output-bundle surface keeps target/exact-input
+equivalence. -/
+theorem openSemanticTargetExactClosureInputOutputSurface_target_iff_exact_input
+    (surface : OpenSemanticTargetExactClosureInputOutputSurface) :
+    surface.target ↔ surface.exactClosureInput :=
+  surface.targetIffExactClosureInput
+
+/-- Every exact-input/output-bundle surface keeps target/output-bundle
+equivalence. -/
+theorem openSemanticTargetExactClosureInputOutputSurface_target_iff_output
+    (surface : OpenSemanticTargetExactClosureInputOutputSurface) :
+    surface.target ↔ surface.outputBundle :=
+  surface.targetIffOutputBundle
+
+/-- Every exact-input/output-bundle surface records the current exact-input
+obstruction. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurface_exact_input_current_obstruction
+    (surface : OpenSemanticTargetExactClosureInputOutputSurface) :
+    Not surface.exactClosureInput :=
+  surface.exactClosureInputCurrentObstruction
+
+/-- Every exact-input/output-bundle surface records the current output-bundle
+obstruction. -/
+theorem
+    openSemanticTargetExactClosureInputOutputSurface_output_current_obstruction
+    (surface : OpenSemanticTargetExactClosureInputOutputSurface) :
+    Not surface.outputBundle :=
+  surface.outputBundleCurrentObstruction
+
+/-- Single build-gated certificate tying exact closure inputs to full output
+bundles for the two remaining open paper-semantic targets. -/
+def RemainingOpenSemanticTargetsExactClosureInputOutputCertificate : Prop :=
+  openSemanticTargetExactClosureInputOutputSurfaceIds =
+    openSemanticTargetIds /\
+    openSemanticTargetExactClosureInputOutputSurfaces.length =
+      paperSemanticOpenCount /\
+    (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
+      surface.exactClosureInput ↔ surface.outputBundle) /\
+    (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
+      surface.target ↔ surface.exactClosureInput) /\
+    (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
+      surface.target ↔ surface.outputBundle) /\
+    (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
+      Not surface.exactClosureInput) /\
+    (∀ surface ∈ openSemanticTargetExactClosureInputOutputSurfaces,
+      Not surface.outputBundle) /\
+    RemainingOpenSemanticTargetsExactClosureInputCertificate /\
+    RemainingOpenSemanticTargetsOutputEquivalenceCertificate
+
+/-- The remaining exact closure inputs and full output bundles are matched
+bidirectionally for both open semantic targets. -/
+theorem remaining_open_semantic_targets_exact_closure_input_output_certificate :
+    RemainingOpenSemanticTargetsExactClosureInputOutputCertificate := by
+  constructor
+  · exact openSemanticTargetExactClosureInputOutputSurfaceIds_current
+  constructor
+  · exact openSemanticTargetExactClosureInputOutputSurfaceCount_current
+  constructor
+  · intro surface _hsurface
+    exact openSemanticTargetExactClosureInputOutputSurface_exact_input_iff_output
+      surface
+  constructor
+  · intro surface _hsurface
+    exact
+      openSemanticTargetExactClosureInputOutputSurface_target_iff_exact_input
+        surface
+  constructor
+  · intro surface _hsurface
+    exact
+      openSemanticTargetExactClosureInputOutputSurface_target_iff_output
+        surface
+  constructor
+  · intro surface _hsurface
+    exact
+      openSemanticTargetExactClosureInputOutputSurface_exact_input_current_obstruction
+        surface
+  constructor
+  · intro surface _hsurface
+    exact
+      openSemanticTargetExactClosureInputOutputSurface_output_current_obstruction
+        surface
+  constructor
+  · exact remaining_open_semantic_targets_exact_closure_input_certificate
+  exact remaining_open_semantic_targets_output_equivalence_certificate
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -5782,6 +6021,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
        "topo_cluster_random_supercritical_z2"] /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     RemainingOpenSemanticTargetsExactClosureInputCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate
 
@@ -5800,6 +6040,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_frontier_certificate
   constructor
   · exact remaining_open_semantic_targets_exact_closure_input_certificate
+  constructor
+  · exact remaining_open_semantic_targets_exact_closure_input_output_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate
