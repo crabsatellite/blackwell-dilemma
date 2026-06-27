@@ -247,6 +247,10 @@ obstruction-equivalence formulas to the named Part 6/topo statements.
 `open_semantic_target_output_equivalence_named_roster_certificate` separately
 pins the reversible target/output roster and its target-output obstruction
 equivalence.
+`open_semantic_target_output_equivalence_statement_roster_certificate` pins the
+target-to-output, output-to-target, target/output equivalence, and
+target/output obstruction-equivalence formulas to the named Part 6/topo
+statements.
 `open_semantic_target_obstruction_equivalence_named_roster_certificate` also
 pins the target/exact-input/output-bundle obstruction-equivalence roster, so
 the negative surface is checked against named Part 6/topo propositions instead
