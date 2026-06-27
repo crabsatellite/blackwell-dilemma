@@ -1519,6 +1519,12 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate
   random_supercritical_z2_support_surface_closing_route_certificate :
     RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate
+  random_supercritical_z2_support_surface_closing_route_iff_full_support :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        bridge ↔
+        RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+          bridge
   random_supercritical_z2_repaired_bridge_diagnostic_obstruction_certificate :
     RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate
   first_edge_giant_stochastic_positive_regression :
@@ -1888,6 +1894,9 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate
   random_supercritical_z2_boxed_torus_finite_z2L_route_certificate :
     RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate
+  random_supercritical_z2_full_paper_closing_route_iff_boxed_torus_finite_z2L_route :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
   random_supercritical_z2_full_support_envelope_obstruction_certificate :
     RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate
   random_supercritical_z2_repaired_bridge_giant_loss_general_obstruction :
@@ -2698,6 +2707,12 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate
   random_supercritical_z2_current_frontier_support_surface_closing_route_certificate :
     RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate
+  random_supercritical_z2_current_frontier_support_surface_closing_route_iff_full_support :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        bridge ↔
+        RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+          bridge
   random_supercritical_z2_bridge_not_full_reach_diagnostic :
     ¬ (∃ bridge : RandomSupercriticalZ2TopoClusterBridgeData,
       ∀ L : Nat, bridge.family L =
@@ -2976,6 +2991,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate
   random_supercritical_z2_support_surface_closing_route_certificate :=
     random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate
+  random_supercritical_z2_support_surface_closing_route_iff_full_support :=
+    randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_iff_full_paper_closing_support
   random_supercritical_z2_repaired_bridge_diagnostic_obstruction_certificate :=
     random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate
   first_edge_giant_stochastic_positive_regression :=
@@ -3041,6 +3058,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate
   random_supercritical_z2_boxed_torus_finite_z2L_route_certificate :=
     random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate
+  random_supercritical_z2_full_paper_closing_route_iff_boxed_torus_finite_z2L_route :=
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route
   random_supercritical_z2_full_support_envelope_obstruction_certificate :=
     random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate
   random_supercritical_z2_repaired_bridge_giant_loss_general_obstruction :=
@@ -3157,6 +3176,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate
   random_supercritical_z2_current_frontier_support_surface_closing_route_certificate :=
     random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate
+  random_supercritical_z2_current_frontier_support_surface_closing_route_iff_full_support :=
+    randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_iff_full_paper_closing_support
   random_supercritical_z2_bridge_not_full_reach_diagnostic :=
     not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic
   random_supercritical_z2_bridge_not_flat_only_diagnostic :=

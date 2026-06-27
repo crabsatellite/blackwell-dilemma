@@ -782,7 +782,12 @@ It also gates
 `RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate`, which
 calibrates any future full route to expose the finite boxed-torus indexing,
 standard `Z^2` graph, strict `p_c < p < 1` parameter, and unit-interval loss
-range in the same repaired-bridge witness.
+range in the same repaired-bridge witness.  The same calibration is now named
+as the iff
+`randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route`;
+the repaired support-surface closing spine likewise has the named per-bridge
+iff
+`randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_iff_full_paper_closing_support`.
 The unified `random_supercritical_z2_topo_cluster_current_frontier_certificate`
 now packages this route-output certificate, the route-level paper-support
 output, and bundled obstruction together with the finite positive-regression
