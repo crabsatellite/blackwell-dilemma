@@ -553,6 +553,8 @@
             "semantic_target_joint_closure_reduction_certificate=RemainingOpenSemanticTargetsJointClosureReductionCertificate",
             "semantic_target_joint_closure_reduction_certificate_proof=remaining_open_semantic_targets_joint_closure_reduction_certificate",
             "semantic_target_joint_closure_statement_roster_proof=remainingOpenSemanticTargetsJointClosureStatements_named_current",
+            "semantic_target_joint_closure_statement_roster_terms_checked=12",
+            "semantic_target_joint_closure_statement_roster_length_proof=remainingOpenSemanticTargetsJointClosureStatements_length_current",
             "semantic_target_joint_closure_statement_roster_certificate=RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate",
             "semantic_target_joint_closure_statement_roster_certificate_proof=remaining_open_semantic_targets_joint_closure_statement_roster_certificate",
             "semantic_target_joint_route_targets=RemainingOpenSemanticTargetsTargetRoutesSatisfied",
@@ -664,9 +666,9 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=690",
+            "semantic_target_axiom_audit_prints_required=691",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=690",
+            "semantic_target_readme_axiom_audit_prints_required=691",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },

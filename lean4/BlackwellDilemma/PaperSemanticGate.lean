@@ -8308,6 +8308,12 @@ theorem remainingOpenSemanticTargetsJointClosureStatements_named_current :
        Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
        Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied] := rfl
 
+/-- Build gate: the joint closure reduction statement roster has exactly the 12
+package-level projection, equivalence, and current-obstruction formulas listed
+above. -/
+theorem remainingOpenSemanticTargetsJointClosureStatements_length_current :
+    remainingOpenSemanticTargetsJointClosureStatements.length = 12 := rfl
+
 /-- Build-gated statement roster for the joint closure reduction package. -/
 def RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate :
     Prop :=
@@ -8333,6 +8339,7 @@ def RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate :
      Not RemainingOpenSemanticTargetsSatisfied,
      Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied] /\
+    remainingOpenSemanticTargetsJointClosureStatements.length = 12 /\
     (RemainingOpenSemanticTargetsSatisfied ->
       RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
     (RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
@@ -8363,6 +8370,7 @@ theorem
     RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate := by
   exact ⟨
     remainingOpenSemanticTargetsJointClosureStatements_named_current,
+    remainingOpenSemanticTargetsJointClosureStatements_length_current,
     remaining_open_semantic_targets_exact_inputs_of_targets,
     remaining_open_semantic_targets_targets_of_exact_inputs,
     remaining_open_semantic_targets_satisfied_iff_exact_closure_inputs,
