@@ -260,6 +260,8 @@ The same audit parses the top-level statement roster and checks all 42 expected
 base/certificate terms.
 It also publishes both the required AxiomAudit print count and missing print
 count.
+It now publishes expected/missing/unexpected drift counts for the open/closed
+target ids and each open-target surface roster.
 `open_semantic_target_closure_input_named_roster_certificate` also pins the
 sufficient closure-input roster to named target/input/current-obstruction and
 certificate propositions, including the generic projection from target

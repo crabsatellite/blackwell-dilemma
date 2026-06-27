@@ -44,7 +44,9 @@ those pinned identities. Complete
 paper-semantic closure is separately gated in
 `BlackwellDilemma/PaperSemanticGate.lean`; while that gate reports open
 Part 6 lattice-embedding and random-supercritical percolation semantic targets,
-the project does not claim the stronger full-manuscript semantic closure
+the companion audit publishes expected/missing/unexpected drift counts for the
+open/closed target ids and every open-target surface roster. The project does
+not claim the stronger full-manuscript semantic closure
 status. The Part 4 lattice p-monotonicity target is now closed by the standard
 `Z²` ranged local-lattice bridge; the former threshold target is closed by the
 one-edge high-κ oracle-routing carrier

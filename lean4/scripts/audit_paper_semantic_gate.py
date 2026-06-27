@@ -836,6 +836,20 @@ def theorem_id_list(text: str, name: str) -> list[str]:
     return re.findall(r'"([^"]+)"', match.group(1))
 
 
+def missing_expected(expected: list[str], actual: list[str]) -> list[str]:
+    return sorted(set(expected) - set(actual))
+
+
+def unexpected_actual(expected: list[str], actual: list[str]) -> list[str]:
+    return sorted(set(actual) - set(expected))
+
+
+def print_id_drift(label: str, expected: list[str], actual: list[str]) -> None:
+    print(f"{label}_expected={','.join(expected)}")
+    print(f"{label}_missing_expected_count={len(missing_expected(expected, actual))}")
+    print(f"{label}_unexpected_count={len(unexpected_actual(expected, actual))}")
+
+
 def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
     targets = re.findall(
         r'id\s*:=\s*"([^"]+)"(?:(?!id\s*:=).)*?status\s*:=\s*SemanticStatus\.(open|closed)',
@@ -1364,6 +1378,8 @@ def main() -> int:
     print(f"theorem_gate_closed={expected_closed}")
     print(f"semantic_target_open_ids={','.join(open_ids)}")
     print(f"semantic_target_closed_ids={','.join(closed_ids)}")
+    print_id_drift("semantic_target_open_ids", expected_open_ids, open_ids)
+    print_id_drift("semantic_target_closed_ids", expected_closed_ids, closed_ids)
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate="
         "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
@@ -1427,6 +1443,46 @@ def main() -> int:
     print(
         "semantic_target_output_equivalence_surface_ids="
         + ",".join(output_equivalence_surface_ids)
+    )
+    print_id_drift(
+        "semantic_target_kernel_surface_ids",
+        list(EXPECTED_OPEN_KERNEL_SURFACES),
+        kernel_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_frontier_payload_surface_ids",
+        list(EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES),
+        payload_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_closure_input_surface_ids",
+        list(EXPECTED_OPEN_CLOSURE_INPUT_SURFACES),
+        closure_input_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_exact_closure_input_surface_ids",
+        list(EXPECTED_OPEN_EXACT_CLOSURE_INPUT_SURFACES),
+        exact_closure_input_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_exact_closure_input_output_surface_ids",
+        list(EXPECTED_OPEN_EXACT_CLOSURE_INPUT_OUTPUT_SURFACES),
+        exact_closure_input_output_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_obstruction_equivalence_surface_ids",
+        list(EXPECTED_OPEN_OBSTRUCTION_EQUIVALENCE_SURFACES),
+        obstruction_equivalence_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_closure_input_field_surface_ids",
+        list(EXPECTED_OPEN_CLOSURE_INPUT_FIELD_SURFACES),
+        closure_input_field_surface_ids,
+    )
+    print_id_drift(
+        "semantic_target_output_equivalence_surface_ids",
+        list(EXPECTED_OPEN_OUTPUT_EQUIVALENCE_SURFACES),
+        output_equivalence_surface_ids,
     )
     print(
         "semantic_target_kernel_surface_targets="
