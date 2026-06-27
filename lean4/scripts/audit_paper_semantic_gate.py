@@ -416,6 +416,12 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceRouteEquivalenceStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargetRouteStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceClosureRouteStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceRouteEquivalenceStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceTargetRoutes_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceTargetRouteCertificates_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetSurfaceTargetRouteObstructions_current",
@@ -1933,6 +1939,16 @@ def main() -> int:
         "openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_named_current,"
         "openSemanticTargetKernelSurfaceRouteEquivalenceStatements_named_current,"
         "openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_named_current"
+    )
+    print("semantic_target_named_route_statement_roster_terms_checked=12")
+    print(
+        "semantic_target_named_route_statement_roster_length_proofs="
+        "openSemanticTargetKernelSurfaceTargetRouteStatements_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_length_current,"
+        "openSemanticTargetKernelSurfaceClosureRouteStatements_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_length_current,"
+        "openSemanticTargetKernelSurfaceRouteEquivalenceStatements_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_length_current"
     )
     print(
         "semantic_target_surface_target_route_consistency="

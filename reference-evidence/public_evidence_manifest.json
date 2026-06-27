@@ -412,6 +412,8 @@
             "semantic_target_surface_closure_route_statement_consistency=openSemanticTargetSurfaceClosureRouteStatements_current",
             "semantic_target_surface_route_equivalence_statement_consistency=openSemanticTargetSurfaceRouteEquivalenceStatements_current",
             "semantic_target_named_route_statement_roster_proofs=openSemanticTargetKernelSurfaceTargetRouteStatements_named_current,openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_named_current,openSemanticTargetKernelSurfaceClosureRouteStatements_named_current,openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_named_current,openSemanticTargetKernelSurfaceRouteEquivalenceStatements_named_current,openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_named_current",
+            "semantic_target_named_route_statement_roster_terms_checked=12",
+            "semantic_target_named_route_statement_roster_length_proofs=openSemanticTargetKernelSurfaceTargetRouteStatements_length_current,openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_length_current,openSemanticTargetKernelSurfaceClosureRouteStatements_length_current,openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_length_current,openSemanticTargetKernelSurfaceRouteEquivalenceStatements_length_current,openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_length_current",
             "semantic_target_surface_target_route_consistency=openSemanticTargetSurfaceTargetRoutes_current",
             "semantic_target_surface_target_route_certificate_consistency=openSemanticTargetSurfaceTargetRouteCertificates_current",
             "semantic_target_surface_target_route_obstruction_consistency=openSemanticTargetSurfaceTargetRouteObstructions_current",
@@ -648,9 +650,9 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=639",
+            "semantic_target_axiom_audit_prints_required=645",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=639",
+            "semantic_target_readme_axiom_audit_prints_required=645",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },

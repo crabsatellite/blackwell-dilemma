@@ -4158,6 +4158,42 @@ theorem
        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] := rfl
 
+/-- Build gate: the kernel-surface target-route statement roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceTargetRouteStatements_length_current :
+    openSemanticTargetKernelSurfaceTargetRouteStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface target-route statement roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_length_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface closure-route statement roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceClosureRouteStatements_length_current :
+    openSemanticTargetKernelSurfaceClosureRouteStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface closure-route statement roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_length_current :
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface route-equivalence statement roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceRouteEquivalenceStatements_length_current :
+    openSemanticTargetKernelSurfaceRouteEquivalenceStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface route-equivalence statement roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_length_current :
+    openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements.length =
+      paperSemanticOpenCount := rfl
+
 /-- Kernel-surface view of the active target routes. -/
 def openSemanticTargetKernelSurfaceTargetRoutes : List Prop :=
   openSemanticTargetKernelSurfaces.map
@@ -9860,6 +9896,18 @@ def OpenSemanticTargetNamedRouteStatementRosterCertificate : Prop :=
         Part6FullPaperClosingSupport,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    openSemanticTargetKernelSurfaceTargetRouteStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceClosureRouteStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceRouteEquivalenceStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements.length =
+      paperSemanticOpenCount /\
     (∀ surface ∈ openSemanticTargetKernelSurfaces,
       surface.target ↔ surface.targetRoute) /\
     (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
@@ -9887,6 +9935,12 @@ theorem open_semantic_target_named_route_statement_roster_certificate :
     openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_named_current,
     openSemanticTargetKernelSurfaceRouteEquivalenceStatements_named_current,
     openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_named_current,
+    openSemanticTargetKernelSurfaceTargetRouteStatements_length_current,
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements_length_current,
+    openSemanticTargetKernelSurfaceClosureRouteStatements_length_current,
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements_length_current,
+    openSemanticTargetKernelSurfaceRouteEquivalenceStatements_length_current,
+    openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements_length_current,
     (by
       intro surface _
       exact openSemanticTargetKernelSurface_target_route surface),
