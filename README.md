@@ -222,6 +222,9 @@ sufficient-input-obstruction projection.
 `open_semantic_target_exact_closure_input_named_roster_certificate` similarly
 pins the exact closure-input roster and proves target obstruction equivalent to
 exact-input obstruction for each remaining open semantic target.
+`open_semantic_target_exact_closure_input_output_named_roster_certificate`
+pins the exact-input/output-bundle roster and proves target, exact-input, and
+output-bundle obstructions pairwise equivalent on each surface.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and
