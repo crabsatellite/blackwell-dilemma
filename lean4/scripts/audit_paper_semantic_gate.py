@@ -21,6 +21,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPO_ROOT = ROOT.parent
 GATE = ROOT / "BlackwellDilemma" / "PaperSemanticGate.lean"
+AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
 
 EXPECTED_OPEN_KERNEL_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
@@ -56,6 +57,11 @@ FORBIDDEN_WHEN_OPEN = {
         "gapClosed:       341",
         "complete kernel-only target",
     ],
+}
+
+REQUIRED_AXIOM_AUDIT_DECLS = {
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
 }
 
 
@@ -120,8 +126,16 @@ def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str]]:
     return surfaces
 
 
+def has_axiom_audit_print(text: str, decl: str) -> bool:
+    return (
+        re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
+        is not None
+    )
+
+
 def main() -> int:
     text = read(GATE)
+    axiom_audit_text = read(AXIOM_AUDIT)
     open_ids, closed_ids = semantic_target_ids_by_status(text)
     open_count = len(open_ids)
     closed_count = len(closed_ids)
@@ -171,6 +185,13 @@ def main() -> int:
             for _target_id, _target, _obstruction, _frontier, frontier_proof in kernel_surfaces
         )
     )
+    required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
+    for _target_id, target_prop, obstruction, frontier, frontier_proof in kernel_surfaces:
+        required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_prop}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{obstruction}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_proof}")
+    print(f"semantic_target_axiom_audit_prints_required={len(required_axiom_audit_decls)}")
 
     failures: list[str] = []
     if open_count != expected_open:
@@ -212,6 +233,9 @@ def main() -> int:
     missing_surface_ids = sorted(set(EXPECTED_OPEN_KERNEL_SURFACES) - set(kernel_surface_ids))
     for target_id in missing_surface_ids:
         failures.append(f"missing kernel-surface id: {target_id}")
+    for decl in sorted(required_axiom_audit_decls):
+        if not has_axiom_audit_print(axiom_audit_text, decl):
+            failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")
 
     if open_count:
         for path, phrases in FORBIDDEN_WHEN_OPEN.items():
