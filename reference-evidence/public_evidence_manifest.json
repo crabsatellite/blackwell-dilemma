@@ -841,6 +841,8 @@
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
             "semantic_target_axiom_audit_prints_required=881",
             "semantic_target_axiom_audit_prints_missing=0",
+            "semantic_target_readme_gate_counts=closed=3,open=2",
+            "semantic_target_readme_gate_counts_match=1",
             "semantic_target_readme_axiom_audit_prints_required=881",
             "semantic_target_readme_axiom_audit_prints_required_matches=1",
             "public_manifest_paper_semantic_stdout_contains_missing=0"

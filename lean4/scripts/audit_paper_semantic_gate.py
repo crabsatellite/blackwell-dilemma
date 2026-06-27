@@ -1124,6 +1124,16 @@ def readme_axiom_audit_required_count(text: str) -> int | None:
     return int(match.group(1))
 
 
+def readme_paper_semantic_counts(text: str) -> tuple[int, int] | None:
+    match = re.search(
+        r"paper semantic gate .*?\|\s*closed=(\d+),\s*open=(\d+);",
+        text,
+    )
+    if not match:
+        return None
+    return int(match.group(1)), int(match.group(2))
+
+
 def theorem_count(text: str, name: str) -> int:
     match = re.search(rf"theorem\s+{re.escape(name)}\s*:\s*[^=]+=\s*(\d+)", text)
     if not match:
@@ -4732,7 +4742,20 @@ def main() -> int:
         if not has_axiom_audit_print(axiom_audit_text, decl)
     ]
     required_axiom_audit_count = len(required_axiom_audit_decls)
+    readme_gate_counts = readme_paper_semantic_counts(lean_readme_text)
     readme_axiom_audit_count = readme_axiom_audit_required_count(lean_readme_text)
+    print(
+        "semantic_target_readme_gate_counts="
+        + (
+            f"closed={readme_gate_counts[0]},open={readme_gate_counts[1]}"
+            if readme_gate_counts is not None
+            else "missing"
+        )
+    )
+    print(
+        "semantic_target_readme_gate_counts_match="
+        + ("1" if readme_gate_counts == (closed_count, open_count) else "0")
+    )
     print(f"semantic_target_axiom_audit_prints_required={required_axiom_audit_count}")
     print(f"semantic_target_axiom_audit_prints_missing={len(missing_axiom_audit_prints)}")
     print(
@@ -5145,6 +5168,18 @@ def main() -> int:
         ),
         f"semantic_target_axiom_audit_prints_required={required_axiom_audit_count}",
         f"semantic_target_axiom_audit_prints_missing={len(missing_axiom_audit_prints)}",
+        (
+            "semantic_target_readme_gate_counts="
+            + (
+                f"closed={readme_gate_counts[0]},open={readme_gate_counts[1]}"
+                if readme_gate_counts is not None
+                else "missing"
+            )
+        ),
+        (
+            "semantic_target_readme_gate_counts_match="
+            + ("1" if readme_gate_counts == (closed_count, open_count) else "0")
+        ),
         (
             "semantic_target_readme_axiom_audit_prints_required="
             + (
@@ -6303,6 +6338,13 @@ def main() -> int:
         )
     for decl in missing_axiom_audit_prints:
         failures.append(f"AxiomAudit.lean is missing '#print axioms {decl}'")
+    if readme_gate_counts is None:
+        failures.append("lean4/README.md missing paper semantic closed/open counts")
+    elif readme_gate_counts != (closed_count, open_count):
+        failures.append(
+            "lean4/README.md paper semantic closed/open counts "
+            f"{readme_gate_counts} != audit counts {(closed_count, open_count)}"
+        )
     if readme_axiom_audit_count is None:
         failures.append("lean4/README.md missing AxiomAudit required print count")
     elif readme_axiom_audit_count != required_axiom_audit_count:
