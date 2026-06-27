@@ -9,7 +9,9 @@ artifacts declared in ``reference-evidence/public_evidence_manifest.json``:
 * result-backed public numbers still agree with committed JSON outputs;
 * simple local formulas used in the appendix agree with their committed data;
 * paper-semantic open targets remain explicitly gated instead of drifting into
-  README-only claims.
+  README-only claims; and
+* manifest source-card, claim, location, and check identifiers are present and
+  unique in their local scope.
 """
 
 from __future__ import annotations
@@ -79,6 +81,29 @@ def semantic_target_chunk(text: str, target_id: str) -> str:
     return text[start:next_target]
 
 
+def check_unique_ids(items: list[dict[str, Any]], kind: str, owner_id: str) -> tuple[int, list[Failure]]:
+    failures: list[Failure] = []
+    seen: dict[str, int] = {}
+    check_count = 0
+    for index, item in enumerate(items):
+        check_count += 1
+        item_id = item.get("id")
+        if not item_id:
+            failures.append(Failure(owner_id, f"{kind}_id_present", f"missing id at index {index}"))
+            continue
+        if item_id in seen:
+            failures.append(
+                Failure(
+                    owner_id,
+                    f"{kind}_id_unique",
+                    f"duplicate id {item_id!r} at index {index}; first index {seen[item_id]}",
+                )
+            )
+        else:
+            seen[item_id] = index
+    return check_count, failures
+
+
 def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
     manifest_path = manifest_path.resolve()
     repo_root = manifest_path.parent.parent.resolve()
@@ -87,8 +112,12 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
     failures: list[Failure] = []
     check_count = 0
 
+    source_card_items = manifest.get("source_cards", [])
+    count, id_failures = check_unique_ids(source_card_items, "source_card", "manifest")
+    check_count += count
+    failures.extend(id_failures)
     source_cards = {
-        card["id"]: card for card in manifest.get("source_cards", [])
+        card["id"]: card for card in source_card_items if card.get("id")
     }
     referenced_cards: set[str] = set()
 
@@ -101,7 +130,12 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
             check_count += 1
             failures.append(Failure(card_id, "source_card_locator", "missing source URL/local file/note"))
 
-    for claim in manifest.get("claims", []):
+    claim_items = manifest.get("claims", [])
+    count, id_failures = check_unique_ids(claim_items, "claim", "manifest")
+    check_count += count
+    failures.extend(id_failures)
+
+    for claim in claim_items:
         claim_id = claim.get("id", "<missing-id>")
 
         for card_id in claim.get("source_cards", []):
@@ -110,7 +144,12 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
             if card_id not in source_cards:
                 failures.append(Failure(claim_id, "source_card_exists", f"unknown source card: {card_id}"))
 
-        for loc in claim.get("locations", []):
+        locations = claim.get("locations", [])
+        count, id_failures = check_unique_ids(locations, "location", claim_id)
+        check_count += count
+        failures.extend(id_failures)
+
+        for loc in locations:
             loc_id = loc.get("id", loc.get("path", "<location>"))
             path = repo_path(repo_root, loc["path"])
             check_count += 1
@@ -125,7 +164,12 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
                         Failure(claim_id, f"{loc_id}:contains", f"snippet not found in {loc['path']}: {snippet}")
                     )
 
-        for check in claim.get("checks", []):
+        checks = claim.get("checks", [])
+        count, id_failures = check_unique_ids(checks, "check", claim_id)
+        check_count += count
+        failures.extend(id_failures)
+
+        for check in checks:
             check_id = check.get("id", check.get("type", "<check>"))
             ctype = check["type"]
             check_count += 1
