@@ -37,6 +37,10 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "Part6FullPaperClosingOutputLayerCertificate",
         "part6_full_paper_closing_output_layer_certificate",
         "not_part6_full_paper_closing_support_current",
+        "Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate",
+        "z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate",
+        "Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate",
+        "z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate",
         "part6_lattice_embedding_semantic_kernel_target_notYet",
         "Part6CurrentFrontierCertificate",
         "part6_current_frontier_certificate",
@@ -54,6 +58,10 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate",
         "random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate",
         "not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
+        "RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate",
+        "random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate",
+        "RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate",
+        "random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet",
         "RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate",
         "random_supercritical_z2_topo_cluster_current_frontier_certificate",
@@ -89,6 +97,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_route_equivalence",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_frontier_progress_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_frontier_nonclosure_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
 }
@@ -148,6 +158,10 @@ def open_kernel_surfaces(text: str) -> list[
         str,
         str,
         str,
+        str,
+        str,
+        str,
+        str,
     ]
 ]:
     match = re.search(
@@ -174,6 +188,10 @@ def open_kernel_surfaces(text: str) -> list[
         r"closureRouteCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"frontierProgressCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"frontierProgressCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"frontierNonclosureCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"frontierNonclosureCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"currentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"frontierCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"frontierCertificateProof\s*:=\s*([A-Za-z0-9_'.]+)",
@@ -262,16 +280,32 @@ def main() -> int:
         + ",".join(surface[12] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_obstructions="
+        "semantic_target_kernel_surface_frontier_progress_certificates="
         + ",".join(surface[13] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_frontier_certificates="
+        "semantic_target_kernel_surface_frontier_progress_certificate_proofs="
         + ",".join(surface[14] for surface in kernel_surfaces)
     )
     print(
-        "semantic_target_kernel_surface_frontier_proofs="
+        "semantic_target_kernel_surface_frontier_nonclosure_certificates="
         + ",".join(surface[15] for surface in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_frontier_nonclosure_certificate_proofs="
+        + ",".join(surface[16] for surface in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_obstructions="
+        + ",".join(surface[17] for surface in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_frontier_certificates="
+        + ",".join(surface[18] for surface in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_frontier_proofs="
+        + ",".join(surface[19] for surface in kernel_surfaces)
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
@@ -288,6 +322,10 @@ def main() -> int:
         closure_route_certificate,
         closure_route_certificate_proof,
         closure_route_obstruction,
+        frontier_progress_certificate,
+        frontier_progress_certificate_proof,
+        frontier_nonclosure_certificate,
+        frontier_nonclosure_certificate_proof,
         obstruction,
         frontier,
         frontier_proof,
@@ -304,6 +342,10 @@ def main() -> int:
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_certificate}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_certificate_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_obstruction}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_progress_certificate}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_progress_certificate_proof}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_nonclosure_certificate}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_nonclosure_certificate_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{obstruction}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_proof}")
@@ -336,6 +378,10 @@ def main() -> int:
         closure_route_certificate,
         closure_route_certificate_proof,
         closure_route_obstruction,
+        frontier_progress_certificate,
+        frontier_progress_certificate_proof,
+        frontier_nonclosure_certificate,
+        frontier_nonclosure_certificate_proof,
         obstruction,
         frontier,
         frontier_proof,
@@ -357,6 +403,10 @@ def main() -> int:
             expected_closure_route_certificate,
             expected_closure_route_certificate_proof,
             expected_closure_route_obstruction,
+            expected_frontier_progress_certificate,
+            expected_frontier_progress_certificate_proof,
+            expected_frontier_nonclosure_certificate,
+            expected_frontier_nonclosure_certificate_proof,
             expected_obstruction,
             expected_frontier,
             expected_frontier_proof,
@@ -410,6 +460,22 @@ def main() -> int:
         if closure_route_obstruction != expected_closure_route_obstruction:
             failures.append(
                 f"{target_id} closure route obstruction {closure_route_obstruction!r} != expected {expected_closure_route_obstruction!r}"
+            )
+        if frontier_progress_certificate != expected_frontier_progress_certificate:
+            failures.append(
+                f"{target_id} frontier progress certificate {frontier_progress_certificate!r} != expected {expected_frontier_progress_certificate!r}"
+            )
+        if frontier_progress_certificate_proof != expected_frontier_progress_certificate_proof:
+            failures.append(
+                f"{target_id} frontier progress certificate proof {frontier_progress_certificate_proof!r} != expected {expected_frontier_progress_certificate_proof!r}"
+            )
+        if frontier_nonclosure_certificate != expected_frontier_nonclosure_certificate:
+            failures.append(
+                f"{target_id} frontier nonclosure certificate {frontier_nonclosure_certificate!r} != expected {expected_frontier_nonclosure_certificate!r}"
+            )
+        if frontier_nonclosure_certificate_proof != expected_frontier_nonclosure_certificate_proof:
+            failures.append(
+                f"{target_id} frontier nonclosure certificate proof {frontier_nonclosure_certificate_proof!r} != expected {expected_frontier_nonclosure_certificate_proof!r}"
             )
         if obstruction != expected_obstruction:
             failures.append(
