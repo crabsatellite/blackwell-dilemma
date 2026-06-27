@@ -440,8 +440,20 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_iff_closure_routes",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_notYet",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_notYet",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_satisfied_not_of_part6_target_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_satisfied_not_of_topo_target_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_inputs_not_of_part6_exact_input_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_inputs_not_of_topo_exact_input_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_full_outputs_not_of_part6_output_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_full_outputs_not_of_topo_output_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_not_of_part6_route_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_not_of_topo_route_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_not_of_part6_closure_not",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_not_of_topo_closure_not",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
@@ -1660,12 +1672,33 @@ def main() -> int:
         "remaining_open_semantic_targets_closure_routes_notYet"
     )
     print(
+        "semantic_target_bilateral_package_obstruction_proofs="
+        "remaining_open_semantic_targets_satisfied_not_of_part6_target_not,"
+        "remaining_open_semantic_targets_satisfied_not_of_topo_target_not,"
+        "remaining_open_semantic_targets_exact_inputs_not_of_part6_exact_input_not,"
+        "remaining_open_semantic_targets_exact_inputs_not_of_topo_exact_input_not,"
+        "remaining_open_semantic_targets_full_outputs_not_of_part6_output_not,"
+        "remaining_open_semantic_targets_full_outputs_not_of_topo_output_not,"
+        "remaining_open_semantic_targets_target_routes_not_of_part6_route_not,"
+        "remaining_open_semantic_targets_target_routes_not_of_topo_route_not,"
+        "remaining_open_semantic_targets_closure_routes_not_of_part6_closure_not,"
+        "remaining_open_semantic_targets_closure_routes_not_of_topo_closure_not"
+    )
+    print(
         "semantic_target_joint_route_reduction_certificate="
         "RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate"
     )
     print(
         "semantic_target_joint_route_reduction_certificate_proof="
         "remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate"
+    )
+    print(
+        "semantic_target_bilateral_package_obstruction_certificate="
+        "RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate"
+    )
+    print(
+        "semantic_target_bilateral_package_obstruction_certificate_proof="
+        "remaining_open_semantic_targets_bilateral_package_obstruction_certificate"
     )
     print(
         "semantic_target_kernel_surface_route_obstruction_certificate="

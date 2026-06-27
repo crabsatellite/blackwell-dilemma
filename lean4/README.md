@@ -348,6 +348,9 @@ all three joint packages are current-refuted.
 packages the two remaining targets at the route layer as well: joint target
 satisfaction, joint target-route satisfaction, and joint closure-route
 satisfaction are equivalent, and all three route packages are current-refuted.
+`remaining_open_semantic_targets_bilateral_package_obstruction_certificate`
+also checks that every joint package refutation can be obtained from either
+side of the open pair: the Part 6 obstruction or the topo obstruction.
 `open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate`
 then lifts the same negative route layer to every machine-facing open-target
 surface: `Not target`, `Not targetRoute`, and `Not closureRoute` are equivalent

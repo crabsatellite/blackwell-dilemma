@@ -170,6 +170,10 @@ full-output-bundle satisfaction, with all three joint packages current-refuted.
 also packages the same two targets as joint route obligations: joint target
 satisfaction, joint target-route satisfaction, and joint closure-route
 satisfaction are equivalent, and all three route packages are current-refuted.
+`remaining_open_semantic_targets_bilateral_package_obstruction_certificate`
+checks that the joint target, exact-input, output-bundle, target-route, and
+closure-route packages can each be refuted from either the Part 6 obstruction
+or the topo obstruction.
 `open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate`
 lifts those route obstructions back to the machine-facing open-target roster:
 for every roster surface, `Not target`, `Not targetRoute`, and

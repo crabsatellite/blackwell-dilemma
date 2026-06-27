@@ -6779,6 +6779,88 @@ theorem remaining_open_semantic_targets_closure_routes_notYet :
   intro hroutes
   exact not_part6_full_paper_closing_support_current hroutes.1
 
+/-- Either side's target obstruction refutes joint target satisfaction: Part 6. -/
+theorem remaining_open_semantic_targets_satisfied_not_of_part6_target_not
+    (hpart6 : Not Part6LatticeEmbeddingSemanticKernelTarget) :
+    Not RemainingOpenSemanticTargetsSatisfied := by
+  intro htargets
+  exact hpart6 htargets.1
+
+/-- Either side's target obstruction refutes joint target satisfaction: topo. -/
+theorem remaining_open_semantic_targets_satisfied_not_of_topo_target_not
+    (htopo : Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget) :
+    Not RemainingOpenSemanticTargetsSatisfied := by
+  intro htargets
+  exact htopo htargets.2
+
+/-- Either side's exact-input obstruction refutes joint exact-input
+satisfaction: Part 6. -/
+theorem
+    remaining_open_semantic_targets_exact_inputs_not_of_part6_exact_input_not
+    (hpart6 : Not Part6LatticeEmbeddingExactClosureInput) :
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied := by
+  intro hinputs
+  exact hpart6 hinputs.1
+
+/-- Either side's exact-input obstruction refutes joint exact-input
+satisfaction: topo. -/
+theorem
+    remaining_open_semantic_targets_exact_inputs_not_of_topo_exact_input_not
+    (htopo : Not TopoClusterRandomSupercriticalZ2ExactClosureInput) :
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied := by
+  intro hinputs
+  exact htopo hinputs.2
+
+/-- Either side's output-bundle obstruction refutes joint full-output
+satisfaction: Part 6. -/
+theorem remaining_open_semantic_targets_full_outputs_not_of_part6_output_not
+    (hpart6 : Not Part6FullPaperClosingFullOutputBundle) :
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
+  intro houtputs
+  exact hpart6 houtputs.1
+
+/-- Either side's output-bundle obstruction refutes joint full-output
+satisfaction: topo. -/
+theorem remaining_open_semantic_targets_full_outputs_not_of_topo_output_not
+    (htopo : Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle) :
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
+  intro houtputs
+  exact htopo houtputs.2
+
+/-- Either side's target-route obstruction refutes joint target-route
+satisfaction: Part 6. -/
+theorem
+    remaining_open_semantic_targets_target_routes_not_of_part6_route_not
+    (hpart6 : Not Part6NondegenerateFeasibleRepairRoute) :
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied := by
+  intro hroutes
+  exact hpart6 hroutes.1
+
+/-- Either side's target-route obstruction refutes joint target-route
+satisfaction: topo. -/
+theorem remaining_open_semantic_targets_target_routes_not_of_topo_route_not
+    (htopo : Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) :
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied := by
+  intro hroutes
+  exact htopo hroutes.2
+
+/-- Either side's closure-route obstruction refutes joint closure-route
+satisfaction: Part 6. -/
+theorem
+    remaining_open_semantic_targets_closure_routes_not_of_part6_closure_not
+    (hpart6 : Not Part6FullPaperClosingSupport) :
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
+  intro hroutes
+  exact hpart6 hroutes.1
+
+/-- Either side's closure-route obstruction refutes joint closure-route
+satisfaction: topo. -/
+theorem remaining_open_semantic_targets_closure_routes_not_of_topo_closure_not
+    (htopo : Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) :
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
+  intro hroutes
+  exact htopo hroutes.2
+
 /-- Single build-gated certificate reducing the remaining two open targets to
 their joint target-route and closure-route packages. -/
 def RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate :
@@ -6819,6 +6901,79 @@ theorem
   constructor
   · exact topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate
   exact remaining_open_semantic_targets_joint_closure_reduction_certificate
+
+/-- Build-gated certificate that every joint package can be refuted from either
+the Part 6 side or the topo side. -/
+def RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate :
+    Prop :=
+  (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+    Not RemainingOpenSemanticTargetsSatisfied) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not RemainingOpenSemanticTargetsSatisfied) /\
+    (Not Part6LatticeEmbeddingExactClosureInput ->
+      Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (Not Part6FullPaperClosingFullOutputBundle ->
+      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (Not Part6NondegenerateFeasibleRepairRoute ->
+      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (Not Part6FullPaperClosingSupport ->
+      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    Not RemainingOpenSemanticTargetsSatisfied /\
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied /\
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied /\
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied /\
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied /\
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate
+
+/-- The current joint package obstructions are not artifacts of choosing one
+side of the pair: either named open target refutes each joint package. -/
+theorem
+    remaining_open_semantic_targets_bilateral_package_obstruction_certificate :
+    RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate := by
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_not_of_part6_target_not
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_not_of_topo_target_not
+  constructor
+  · exact
+      remaining_open_semantic_targets_exact_inputs_not_of_part6_exact_input_not
+  constructor
+  · exact
+      remaining_open_semantic_targets_exact_inputs_not_of_topo_exact_input_not
+  constructor
+  · exact remaining_open_semantic_targets_full_outputs_not_of_part6_output_not
+  constructor
+  · exact remaining_open_semantic_targets_full_outputs_not_of_topo_output_not
+  constructor
+  · exact remaining_open_semantic_targets_target_routes_not_of_part6_route_not
+  constructor
+  · exact remaining_open_semantic_targets_target_routes_not_of_topo_route_not
+  constructor
+  · exact remaining_open_semantic_targets_closure_routes_not_of_part6_closure_not
+  constructor
+  · exact remaining_open_semantic_targets_closure_routes_not_of_topo_closure_not
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_notYet
+  constructor
+  · exact remaining_open_semantic_targets_exact_inputs_notYet
+  constructor
+  · exact remaining_open_semantic_targets_full_outputs_notYet
+  constructor
+  · exact remaining_open_semantic_targets_target_routes_notYet
+  constructor
+  · exact remaining_open_semantic_targets_closure_routes_notYet
+  constructor
+  · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
+  exact remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
 
 /-- Roster-level route-obstruction certificate for the open semantic targets.
 It states that every machine-facing open-target surface has equivalent
@@ -7529,6 +7684,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
+    RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetNamedRouteObstructionRosterCertificate /\
@@ -7563,6 +7719,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_bilateral_package_obstruction_certificate
   constructor
   · exact
       open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
