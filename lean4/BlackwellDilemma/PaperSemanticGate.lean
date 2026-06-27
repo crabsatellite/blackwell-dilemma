@@ -3891,6 +3891,12 @@ def openSemanticTargetFrontierPayloadSurfaces :
 def openSemanticTargetFrontierPayloadSurfaceIds : List String :=
   openSemanticTargetFrontierPayloadSurfaces.map (fun surface => surface.id)
 
+/-- Frontier-payload surface ids paired with the paper-facing open ledger labels. -/
+def openSemanticTargetFrontierPayloadSurfaceIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetFrontierPayloadSurfaceIds
+    (openSemanticTargets.map (fun target => target.paperLabel))
+
 /-- Payload-surface view of the full typed frontier payload certificates. -/
 def openSemanticTargetFrontierPayloadSurfacePayloadCertificates : List Prop :=
   openSemanticTargetFrontierPayloadSurfaces.map
@@ -3900,6 +3906,13 @@ def openSemanticTargetFrontierPayloadSurfacePayloadCertificates : List Prop :=
 the semantic ledger's open target roster. -/
 theorem openSemanticTargetFrontierPayloadSurfaceIds_current :
     openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds := rfl
+
+/-- Build gate: the typed-frontier-payload roster keeps the same `(id,
+paperLabel)` projection as the open semantic ledger. -/
+theorem openSemanticTargetFrontierPayloadSurfaceIdPaperLabels_current :
+    openSemanticTargetFrontierPayloadSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
 
 /-- Build gate: the typed-frontier-payload roster has the same cardinality as
 the semantic ledger's open target count. -/
@@ -3919,6 +3932,13 @@ drift independently. -/
 theorem openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds :
     openSemanticTargetKernelSurfaceIds =
       openSemanticTargetFrontierPayloadSurfaceIds := rfl
+
+/-- Build gate: the kernel-surface and typed-frontier-payload rosters are
+synchronized on target ids paired with paper-facing labels. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_frontierPayloadSurfaceIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetFrontierPayloadSurfaceIdPaperLabels := rfl
 
 /-- Every typed-frontier-payload roster entry carries its payload certificate. -/
 theorem openSemanticTargetFrontierPayloadSurface_certificate
@@ -4693,6 +4713,8 @@ def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
     openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds /\
     openSemanticTargetKernelSurfaceIds =
       openSemanticTargetFrontierPayloadSurfaceIds /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetFrontierPayloadSurfaceIdPaperLabels /\
     openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
     openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount /\
     openSemanticTargetKernelSurfaceTargets =
@@ -4732,6 +4754,7 @@ theorem open_semantic_target_surface_roster_consistency_certificate :
     openSemanticTargetKernelSurfaceIds_current,
     openSemanticTargetFrontierPayloadSurfaceIds_current,
     openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_frontierPayloadSurfaceIdPaperLabels,
     openSemanticTargetKernelSurfaceCount_current,
     openSemanticTargetFrontierPayloadSurfaceCount_current,
     openSemanticTargetSurfaceTargets_current,

@@ -2097,6 +2097,11 @@ def main() -> int:
     ]
     payload_surfaces = open_frontier_payload_surfaces(text)
     payload_surface_ids = [surface[0] for surface in payload_surfaces]
+    payload_surface_id_label_pairs = [
+        (surface_id, EXPECTED_OPEN_TARGET_LABELS[surface_id])
+        for surface_id in payload_surface_ids
+        if surface_id in EXPECTED_OPEN_TARGET_LABELS
+    ]
     closure_input_surfaces = open_closure_input_surfaces(text)
     closure_input_surface_ids = [surface[0] for surface in closure_input_surfaces]
     exact_closure_input_surfaces = open_exact_closure_input_surfaces(text)
@@ -2492,6 +2497,25 @@ def main() -> int:
     print(
         "semantic_target_kernel_surface_id_paper_label_projection="
         "openSemanticTargetKernelSurfaceIdPaperLabels_current"
+    )
+    print(
+        "semantic_target_frontier_payload_surface_id_paper_labels="
+        + ";".join(
+            f"{surface_id}:{label}"
+            for surface_id, label in payload_surface_id_label_pairs
+        )
+    )
+    print(
+        "semantic_target_kernel_frontier_payload_id_paper_labels_match="
+        f"{int(kernel_surface_id_label_pairs == payload_surface_id_label_pairs)}"
+    )
+    print(
+        "semantic_target_frontier_payload_surface_id_paper_label_projection="
+        "openSemanticTargetFrontierPayloadSurfaceIdPaperLabels_current"
+    )
+    print(
+        "semantic_target_kernel_frontier_payload_id_paper_label_projection="
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_frontierPayloadSurfaceIdPaperLabels"
     )
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
     print(f"semantic_target_closure_input_surface_ids={','.join(closure_input_surface_ids)}")
@@ -4441,6 +4465,18 @@ def main() -> int:
             "openSemanticTargetKernelSurfaceIdPaperLabels_current"
         ),
         (
+            "semantic_target_kernel_frontier_payload_id_paper_labels_match="
+            f"{int(kernel_surface_id_label_pairs == payload_surface_id_label_pairs)}"
+        ),
+        (
+            "semantic_target_frontier_payload_surface_id_paper_label_projection="
+            "openSemanticTargetFrontierPayloadSurfaceIdPaperLabels_current"
+        ),
+        (
+            "semantic_target_kernel_frontier_payload_id_paper_label_projection="
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_frontierPayloadSurfaceIdPaperLabels"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
             "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
         ),
@@ -4650,6 +4686,12 @@ def main() -> int:
             "kernel-surface id/paper-label pairs "
             f"{kernel_surface_id_label_pairs!r} != expected "
             f"{expected_kernel_surface_id_label_pairs!r}"
+        )
+    if payload_surface_id_label_pairs != kernel_surface_id_label_pairs:
+        failures.append(
+            "frontier-payload surface id/paper-label pairs "
+            f"{payload_surface_id_label_pairs!r} != kernel-surface pairs "
+            f"{kernel_surface_id_label_pairs!r}"
         )
     if payload_surface_ids != open_ids:
         failures.append(
