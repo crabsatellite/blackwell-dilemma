@@ -4521,6 +4521,72 @@ theorem
       [Part6CurrentFrontierCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
 
+/-- Build gate: the payload-certificate roster has one entry for each currently
+open target. -/
+theorem openSemanticTargetFrontierPayloadSurfacePayloadCertificates_length_current :
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface target-route certificate roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceTargetRouteCertificates_length_current :
+    openSemanticTargetKernelSurfaceTargetRouteCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface target-route certificate roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates_length_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface closure-route certificate roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceClosureRouteCertificates_length_current :
+    openSemanticTargetKernelSurfaceClosureRouteCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface closure-route certificate roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates_length_current :
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface frontier-progress certificate roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceFrontierProgressCertificates_length_current :
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface frontier-progress certificate roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceProgressCertificates_length_current :
+    openSemanticTargetFrontierPayloadSurfaceProgressCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface frontier-nonclosure certificate roster has
+one entry for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceFrontierNonclosureCertificates_length_current :
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface frontier-nonclosure certificate roster has
+one entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_length_current :
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface current-frontier certificate roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceCurrentFrontierCertificates_length_current :
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface current-frontier certificate roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates_length_current :
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates.length =
+      paperSemanticOpenCount := rfl
+
 /-- One certificate tying the semantic ledger, kernel surface roster, and full
 typed frontier-payload roster to the same remaining open targets. -/
 def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
@@ -9772,6 +9838,28 @@ def OpenSemanticTargetNamedFrontierCertificateRosterCertificate : Prop :=
     openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates =
       [Part6CurrentFrontierCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceTargetRouteCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceClosureRouteCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceProgressCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates.length =
+      paperSemanticOpenCount /\
     (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
       surface.payloadCertificate) /\
     (∀ surface ∈ openSemanticTargetKernelSurfaces,
@@ -9815,6 +9903,17 @@ theorem open_semantic_target_named_frontier_certificate_roster_certificate :
     openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_named_current,
     openSemanticTargetKernelSurfaceCurrentFrontierCertificates_named_current,
     openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates_named_current,
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates_length_current,
+    openSemanticTargetKernelSurfaceTargetRouteCertificates_length_current,
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates_length_current,
+    openSemanticTargetKernelSurfaceClosureRouteCertificates_length_current,
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates_length_current,
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates_length_current,
+    openSemanticTargetFrontierPayloadSurfaceProgressCertificates_length_current,
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates_length_current,
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_length_current,
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates_length_current,
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates_length_current,
     (by
       intro surface _
       exact openSemanticTargetFrontierPayloadSurface_certificate surface),

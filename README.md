@@ -232,7 +232,8 @@ Part 6 and topo propositions, rather than only checking that the two lists
 match each other.
 `open_semantic_target_named_frontier_certificate_roster_certificate` likewise
 pins the payload, route, closure, progress, nonclosure, and current-frontier
-certificate rosters to the named Part 6/topo certificates on both surfaces.
+certificate rosters to the named Part 6/topo certificates on both surfaces,
+with 22 certificate terms checked against `paperSemanticOpenCount`.
 `open_semantic_target_named_route_statement_roster_certificate` pins the
 target-route, target-closure, and route-closure equivalence formulas themselves
 to the named Part 6/topo statements on both surfaces, with 12 route-statement
