@@ -28,6 +28,8 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "Part6LatticeEmbeddingSemanticKernelTarget",
         "Part6NondegenerateFeasibleRepairRoute",
         "part6_lattice_embedding_semantic_kernel_target_iff_repair_route",
+        "Part6NondegenerateFeasibleRepairRouteCertificate",
+        "part6_nondegenerate_feasible_repair_route_certificate",
         "Part6FullPaperClosingSupport",
         "part6_lattice_embedding_semantic_kernel_target_iff_full_support",
         "part6_lattice_embedding_semantic_kernel_target_notYet",
@@ -38,6 +40,8 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
         "RandomSupercriticalZ2TopoClusterFullPaperClosingRoute",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route",
+        "RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate",
+        "random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate",
         "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet",
@@ -70,6 +74,7 @@ FORBIDDEN_WHEN_OPEN = {
 REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route_current_obstruction",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
@@ -113,7 +118,7 @@ def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
     return open_ids, closed_ids
 
 
-def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str, str, str, str, str]]:
+def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str, str, str, str, str, str, str]]:
     match = re.search(
         r"def\s+openSemanticTargetKernelSurfaces\s*:\s*"
         r"List\s+OpenSemanticTargetKernelSurface\s*:=\s*"
@@ -129,6 +134,8 @@ def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str, str, 
         r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"targetRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"targetRouteProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRouteCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRouteCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"currentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
@@ -161,20 +168,7 @@ def main() -> int:
     expected_open_ids = theorem_id_list(text, "openSemanticTargetIds_current")
     expected_closed_ids = theorem_id_list(text, "closedSemanticTargetIds_current")
     kernel_surfaces = open_kernel_surfaces(text)
-    kernel_surface_ids = [
-        target_id
-        for (
-            target_id,
-            _target,
-            _target_route,
-            _target_route_proof,
-            _closure_route,
-            _closure_route_proof,
-            _obstruction,
-            _frontier,
-            _frontier_proof,
-        ) in kernel_surfaces
-    ]
+    kernel_surface_ids = [surface[0] for surface in kernel_surfaces]
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -185,139 +179,43 @@ def main() -> int:
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(
         "semantic_target_kernel_surface_targets="
-        + ",".join(
-            target
-            for (
-                _target_id,
-                target,
-                _target_route,
-                _target_route_proof,
-                _closure_route,
-                _closure_route_proof,
-                _obstruction,
-                _frontier,
-                _frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[1] for surface in kernel_surfaces)
     )
     print(
         "semantic_target_kernel_surface_target_routes="
-        + ",".join(
-            target_route
-            for (
-                _target_id,
-                _target,
-                target_route,
-                _target_route_proof,
-                _closure_route,
-                _closure_route_proof,
-                _obstruction,
-                _frontier,
-                _frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[2] for surface in kernel_surfaces)
     )
     print(
         "semantic_target_kernel_surface_target_route_proofs="
-        + ",".join(
-            target_route_proof
-            for (
-                _target_id,
-                _target,
-                _target_route,
-                target_route_proof,
-                _closure_route,
-                _closure_route_proof,
-                _obstruction,
-                _frontier,
-                _frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[3] for surface in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_target_route_certificates="
+        + ",".join(surface[4] for surface in kernel_surfaces)
+    )
+    print(
+        "semantic_target_kernel_surface_target_route_certificate_proofs="
+        + ",".join(surface[5] for surface in kernel_surfaces)
     )
     print(
         "semantic_target_kernel_surface_closure_routes="
-        + ",".join(
-            closure_route
-            for (
-                _target_id,
-                _target,
-                _target_route,
-                _target_route_proof,
-                closure_route,
-                _closure_route_proof,
-                _obstruction,
-                _frontier,
-                _frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[6] for surface in kernel_surfaces)
     )
     print(
         "semantic_target_kernel_surface_closure_route_proofs="
-        + ",".join(
-            closure_route_proof
-            for (
-                _target_id,
-                _target,
-                _target_route,
-                _target_route_proof,
-                _closure_route,
-                closure_route_proof,
-                _obstruction,
-                _frontier,
-                _frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[7] for surface in kernel_surfaces)
     )
     print(
         "semantic_target_kernel_surface_obstructions="
-        + ",".join(
-            obstruction
-            for (
-                _target_id,
-                _target,
-                _target_route,
-                _target_route_proof,
-                _closure_route,
-                _closure_route_proof,
-                obstruction,
-                _frontier,
-                _frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[8] for surface in kernel_surfaces)
     )
     print(
         "semantic_target_kernel_surface_frontier_certificates="
-        + ",".join(
-            frontier
-            for (
-                _target_id,
-                _target,
-                _target_route,
-                _target_route_proof,
-                _closure_route,
-                _closure_route_proof,
-                _obstruction,
-                frontier,
-                _frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[9] for surface in kernel_surfaces)
     )
     print(
         "semantic_target_kernel_surface_frontier_proofs="
-        + ",".join(
-            frontier_proof
-            for (
-                _target_id,
-                _target,
-                _target_route,
-                _target_route_proof,
-                _closure_route,
-                _closure_route_proof,
-                _obstruction,
-                _frontier,
-                frontier_proof,
-            ) in kernel_surfaces
-        )
+        + ",".join(surface[10] for surface in kernel_surfaces)
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
@@ -325,6 +223,8 @@ def main() -> int:
         target_prop,
         target_route,
         target_route_proof,
+        target_route_certificate,
+        target_route_certificate_proof,
         closure_route,
         closure_route_proof,
         obstruction,
@@ -334,6 +234,8 @@ def main() -> int:
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_prop}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_route_proof}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route_certificate}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route_certificate_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{closure_route_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{obstruction}")
@@ -359,6 +261,8 @@ def main() -> int:
         target_prop,
         target_route,
         target_route_proof,
+        target_route_certificate,
+        target_route_certificate_proof,
         closure_route,
         closure_route_proof,
         obstruction,
@@ -373,6 +277,8 @@ def main() -> int:
             expected_target,
             expected_target_route,
             expected_target_route_proof,
+            expected_target_route_certificate,
+            expected_target_route_certificate_proof,
             expected_closure_route,
             expected_closure_route_proof,
             expected_obstruction,
@@ -392,6 +298,14 @@ def main() -> int:
         if target_route_proof != expected_target_route_proof:
             failures.append(
                 f"{target_id} target route proof {target_route_proof!r} != expected {expected_target_route_proof!r}"
+            )
+        if target_route_certificate != expected_target_route_certificate:
+            failures.append(
+                f"{target_id} target route certificate {target_route_certificate!r} != expected {expected_target_route_certificate!r}"
+            )
+        if target_route_certificate_proof != expected_target_route_certificate_proof:
+            failures.append(
+                f"{target_id} target route certificate proof {target_route_certificate_proof!r} != expected {expected_target_route_certificate_proof!r}"
             )
         if closure_route != expected_closure_route:
             failures.append(
