@@ -392,6 +392,23 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_exact_not_iff_output",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsObstructionEquivalenceCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_obstruction_equivalence_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsSatisfied",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsExactClosureInputsSatisfied",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFullOutputBundlesSatisfied",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_inputs_of_targets",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_targets_of_exact_inputs",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_satisfied_iff_exact_closure_inputs",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_outputs_of_targets",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_targets_of_outputs",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_satisfied_iff_full_outputs",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_outputs_of_exact_inputs",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_inputs_of_outputs",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_inputs_iff_full_outputs",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_satisfied_notYet",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_inputs_notYet",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_full_outputs_notYet",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureReductionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_reduction_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_closure_input",
@@ -1442,6 +1459,74 @@ def main() -> int:
     print(
         "semantic_target_obstruction_equivalence_certificate_proof="
         "remaining_open_semantic_targets_obstruction_equivalence_certificate"
+    )
+    print(
+        "semantic_target_joint_closure_targets="
+        "RemainingOpenSemanticTargetsSatisfied"
+    )
+    print(
+        "semantic_target_joint_closure_exact_inputs="
+        "RemainingOpenSemanticTargetsExactClosureInputsSatisfied"
+    )
+    print(
+        "semantic_target_joint_closure_output_bundles="
+        "RemainingOpenSemanticTargetsFullOutputBundlesSatisfied"
+    )
+    print(
+        "semantic_target_joint_closure_targets_to_exact_inputs="
+        "remaining_open_semantic_targets_exact_inputs_of_targets"
+    )
+    print(
+        "semantic_target_joint_closure_exact_inputs_to_targets="
+        "remaining_open_semantic_targets_targets_of_exact_inputs"
+    )
+    print(
+        "semantic_target_joint_closure_targets_iff_exact_inputs="
+        "remaining_open_semantic_targets_satisfied_iff_exact_closure_inputs"
+    )
+    print(
+        "semantic_target_joint_closure_targets_to_outputs="
+        "remaining_open_semantic_targets_outputs_of_targets"
+    )
+    print(
+        "semantic_target_joint_closure_outputs_to_targets="
+        "remaining_open_semantic_targets_targets_of_outputs"
+    )
+    print(
+        "semantic_target_joint_closure_targets_iff_outputs="
+        "remaining_open_semantic_targets_satisfied_iff_full_outputs"
+    )
+    print(
+        "semantic_target_joint_closure_exact_inputs_to_outputs="
+        "remaining_open_semantic_targets_outputs_of_exact_inputs"
+    )
+    print(
+        "semantic_target_joint_closure_outputs_to_exact_inputs="
+        "remaining_open_semantic_targets_exact_inputs_of_outputs"
+    )
+    print(
+        "semantic_target_joint_closure_exact_inputs_iff_outputs="
+        "remaining_open_semantic_targets_exact_inputs_iff_full_outputs"
+    )
+    print(
+        "semantic_target_joint_closure_target_package_obstruction="
+        "remaining_open_semantic_targets_satisfied_notYet"
+    )
+    print(
+        "semantic_target_joint_closure_exact_input_package_obstruction="
+        "remaining_open_semantic_targets_exact_inputs_notYet"
+    )
+    print(
+        "semantic_target_joint_closure_output_package_obstruction="
+        "remaining_open_semantic_targets_full_outputs_notYet"
+    )
+    print(
+        "semantic_target_joint_closure_reduction_certificate="
+        "RemainingOpenSemanticTargetsJointClosureReductionCertificate"
+    )
+    print(
+        "semantic_target_joint_closure_reduction_certificate_proof="
+        "remaining_open_semantic_targets_joint_closure_reduction_certificate"
     )
     print(
         "semantic_target_closure_input_field_payloads="

@@ -5752,6 +5752,163 @@ theorem remaining_open_semantic_targets_obstruction_equivalence_certificate :
         surface
   exact remaining_open_semantic_targets_exact_closure_input_output_certificate
 
+/-- Joint target package for the two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsSatisfied : Prop :=
+  Part6LatticeEmbeddingSemanticKernelTarget /\
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+
+/-- Joint exact-input package for the two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsExactClosureInputsSatisfied : Prop :=
+  Part6LatticeEmbeddingExactClosureInput /\
+    TopoClusterRandomSupercriticalZ2ExactClosureInput
+
+/-- Joint full-output package for the two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsFullOutputBundlesSatisfied : Prop :=
+  Part6FullPaperClosingFullOutputBundle /\
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle
+
+/-- Joint target satisfaction projects to the joint exact-input package. -/
+theorem remaining_open_semantic_targets_exact_inputs_of_targets :
+    RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied := by
+  intro htargets
+  exact
+    ⟨part6_lattice_embedding_exact_closure_input_of_semantic_kernel_target
+        htargets.1,
+      topo_cluster_random_supercritical_z2_exact_closure_input_of_semantic_kernel_target
+        htargets.2⟩
+
+/-- The joint exact-input package projects back to joint target satisfaction. -/
+theorem remaining_open_semantic_targets_targets_of_exact_inputs :
+    RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied := by
+  intro hinputs
+  exact
+    ⟨part6_lattice_embedding_semantic_kernel_target_of_exact_closure_input
+        hinputs.1,
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_of_exact_closure_input
+        hinputs.2⟩
+
+/-- Joint target satisfaction is equivalent to joint exact-input satisfaction. -/
+theorem remaining_open_semantic_targets_satisfied_iff_exact_closure_inputs :
+    RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied := by
+  constructor
+  · exact remaining_open_semantic_targets_exact_inputs_of_targets
+  exact remaining_open_semantic_targets_targets_of_exact_inputs
+
+/-- Joint target satisfaction projects to the joint full-output package. -/
+theorem remaining_open_semantic_targets_outputs_of_targets :
+    RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
+  intro htargets
+  exact
+    ⟨part6_lattice_embedding_full_output_bundle_of_semantic_kernel_target
+        htargets.1,
+      topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_semantic_kernel_target
+        htargets.2⟩
+
+/-- The joint full-output package projects back to joint target satisfaction. -/
+theorem remaining_open_semantic_targets_targets_of_outputs :
+    RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied := by
+  intro houtputs
+  exact
+    ⟨part6_lattice_embedding_semantic_kernel_target_of_full_output_bundle
+        houtputs.1,
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_of_same_bridge_full_output_bundle
+        houtputs.2⟩
+
+/-- Joint target satisfaction is equivalent to joint full-output satisfaction. -/
+theorem remaining_open_semantic_targets_satisfied_iff_full_outputs :
+    RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
+  constructor
+  · exact remaining_open_semantic_targets_outputs_of_targets
+  exact remaining_open_semantic_targets_targets_of_outputs
+
+/-- The joint exact-input package projects to the joint full-output package. -/
+theorem remaining_open_semantic_targets_outputs_of_exact_inputs :
+    RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
+  intro hinputs
+  exact
+    ⟨part6_lattice_embedding_full_output_bundle_of_exact_closure_input
+        hinputs.1,
+      topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_exact_closure_input
+        hinputs.2⟩
+
+/-- The joint full-output package projects back to the joint exact-input
+package. -/
+theorem remaining_open_semantic_targets_exact_inputs_of_outputs :
+    RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied := by
+  intro houtputs
+  exact
+    ⟨part6_lattice_embedding_exact_closure_input_of_full_output_bundle
+        houtputs.1,
+      topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle
+        houtputs.2⟩
+
+/-- Joint exact-input satisfaction is equivalent to joint full-output
+satisfaction. -/
+theorem remaining_open_semantic_targets_exact_inputs_iff_full_outputs :
+    RemainingOpenSemanticTargetsExactClosureInputsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
+  constructor
+  · exact remaining_open_semantic_targets_outputs_of_exact_inputs
+  exact remaining_open_semantic_targets_exact_inputs_of_outputs
+
+/-- The current frontier refutes joint target satisfaction. -/
+theorem remaining_open_semantic_targets_satisfied_notYet :
+    Not RemainingOpenSemanticTargetsSatisfied := by
+  intro htargets
+  exact part6_lattice_embedding_semantic_kernel_target_notYet htargets.1
+
+/-- The current frontier refutes joint exact-input satisfaction. -/
+theorem remaining_open_semantic_targets_exact_inputs_notYet :
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied := by
+  intro hinputs
+  exact part6_lattice_embedding_exact_closure_input_notYet hinputs.1
+
+/-- The current frontier refutes joint full-output satisfaction. -/
+theorem remaining_open_semantic_targets_full_outputs_notYet :
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
+  intro houtputs
+  exact not_part6_full_paper_closing_full_output_bundle_current houtputs.1
+
+/-- Single build-gated certificate reducing the remaining two open targets to
+the joint exact-input package and the joint full-output package. -/
+def RemainingOpenSemanticTargetsJointClosureReductionCertificate : Prop :=
+  (RemainingOpenSemanticTargetsSatisfied ↔
+    RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (RemainingOpenSemanticTargetsExactClosureInputsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    Not RemainingOpenSemanticTargetsSatisfied /\
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied /\
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied /\
+    RemainingOpenSemanticTargetsObstructionEquivalenceCertificate
+
+/-- The remaining open targets are jointly reduced to the exact-input and
+full-output packages, with all three joint packages currently refuted. -/
+theorem remaining_open_semantic_targets_joint_closure_reduction_certificate :
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate := by
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_iff_exact_closure_inputs
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_iff_full_outputs
+  constructor
+  · exact remaining_open_semantic_targets_exact_inputs_iff_full_outputs
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_notYet
+  constructor
+  · exact remaining_open_semantic_targets_exact_inputs_notYet
+  constructor
+  · exact remaining_open_semantic_targets_full_outputs_notYet
+  exact remaining_open_semantic_targets_obstruction_equivalence_certificate
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -6292,6 +6449,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsExactClosureInputCertificate /\
     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate
 
@@ -6314,6 +6472,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_exact_closure_input_output_certificate
   constructor
   · exact remaining_open_semantic_targets_obstruction_equivalence_certificate
+  constructor
+  · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate

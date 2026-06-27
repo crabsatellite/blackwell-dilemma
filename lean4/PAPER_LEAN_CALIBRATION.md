@@ -1109,6 +1109,10 @@ For full kernel-pure cover (v2.0 future iteration):
   gates the current negative statements: for each open target, the target
   obstruction, exact-input obstruction, and output-bundle obstruction are
   pairwise equivalent.
+  `remaining_open_semantic_targets_joint_closure_reduction_certificate` packages
+  the remaining targets as a joint problem: the two target propositions, the two
+  exact inputs, and the two reversible output bundles are equivalent as joint
+  satisfaction packages, and each joint package is current-refuted.
   `remaining_open_semantic_targets_closure_input_field_certificate` further
   packages field-level payloads: Part 6 exposes the closed-unit tail-reversal
   bridge, nonempty closed-unit alpha domain, bridge route, and paper support
