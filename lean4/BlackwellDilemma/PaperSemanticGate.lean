@@ -5301,6 +5301,126 @@ theorem
   exact
     topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle
 
+/-- The exact topo closure input exposes the full paper-closing route. -/
+theorem topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  intro hinput
+  exact
+    topo_cluster_random_supercritical_z2_full_route_of_same_bridge_full_output_bundle
+      (topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_exact_closure_input
+        hinput)
+
+/-- The exact topo closure input exposes the boxed-torus finite-lattice closing
+route. -/
+theorem topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  rintro ⟨bridge, hroute⟩
+  exact
+    randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_support_surface_closing_route
+      bridge hroute
+
+/-- The exact topo closure input exposes the repaired support-surface route. -/
+theorem
+    topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute := by
+  intro hinput
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_route
+      (topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input
+        hinput)
+
+/-- The exact topo closure input exposes the repaired support-surface output. -/
+theorem
+    topo_cluster_random_supercritical_z2_support_surface_repair_output_of_exact_closure_input :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput := by
+  intro hinput
+  exact
+    randomSupercriticalZ2TopoClusterFullPaperClosingRoute_support_surface_repair_output_certificate
+      (topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input
+        hinput)
+
+/-- The same-witness topo full output bundle exposes repaired paper support. -/
+theorem
+    topo_cluster_random_supercritical_z2_paper_support_output_of_same_bridge_full_output_bundle :
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge := by
+  rintro ⟨bridge, hpaper, _hgiant, _hsupport⟩
+  exact ⟨bridge, hpaper⟩
+
+/-- The same-witness topo full output bundle exposes the giant-loss output. -/
+theorem
+    topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle :
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge := by
+  rintro ⟨bridge, _hpaper, hgiant, _hsupport⟩
+  exact ⟨bridge, hgiant⟩
+
+/-- The exact topo closure input exposes repaired paper support. -/
+theorem topo_cluster_random_supercritical_z2_paper_support_output_of_exact_closure_input :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge := by
+  intro hinput
+  exact
+    topo_cluster_random_supercritical_z2_paper_support_output_of_same_bridge_full_output_bundle
+      (topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_exact_closure_input
+        hinput)
+
+/-- The exact topo closure input exposes the giant-loss output. -/
+theorem topo_cluster_random_supercritical_z2_giant_loss_output_of_exact_closure_input :
+    TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge := by
+  intro hinput
+  exact
+    topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle
+      (topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_exact_closure_input
+        hinput)
+
+/-- The same-witness topo full output bundle exposes the boxed-torus
+finite-lattice closing route. -/
+theorem
+    topo_cluster_random_supercritical_z2_boxed_route_of_same_bridge_full_output_bundle :
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  intro hbundle
+  exact
+    topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input
+      (topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle
+        hbundle)
+
+/-- The same-witness topo full output bundle exposes the repaired
+support-surface route. -/
+theorem
+    topo_cluster_random_supercritical_z2_support_surface_repair_route_of_same_bridge_full_output_bundle :
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute := by
+  intro hbundle
+  exact
+    topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input
+      (topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle
+        hbundle)
+
+/-- The same-witness topo full output bundle exposes the repaired
+support-surface output. -/
+theorem
+    topo_cluster_random_supercritical_z2_support_surface_repair_output_of_same_bridge_full_output_bundle :
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput := by
+  intro hbundle
+  exact
+    topo_cluster_random_supercritical_z2_support_surface_repair_output_of_exact_closure_input
+      (topo_cluster_random_supercritical_z2_exact_closure_input_of_same_bridge_full_output_bundle
+        hbundle)
+
 /-- Machine-facing surface tying exact closure inputs to full output bundles for
 each remaining open semantic target. -/
 structure OpenSemanticTargetExactClosureInputOutputSurface where
@@ -6020,6 +6140,78 @@ theorem part6_remaining_conditional_projection_certificate :
   · exact remaining_open_semantic_targets_exact_closure_input_output_certificate
   exact remaining_open_semantic_targets_joint_closure_reduction_certificate
 
+/-- Dedicated topo projection certificate from the exact input and
+same-witness bundle down to the named route/output layers.  It also records
+that the currently inhabited support-surface repair layer is still not enough
+to close the full route or boxed finite-lattice route. -/
+def TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate : Prop :=
+  (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
+    (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput) /\
+    (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
+    (TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge) /\
+    (TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
+    (TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput) /\
+    (TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
+    (TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge) /\
+    Not TopoClusterRandomSupercriticalZ2ExactClosureInput /\
+    Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle /\
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate
+
+/-- The topo exact input and same-witness bundle project to the route/output
+layers required by the current frontier, while the full and boxed routes remain
+currently refuted. -/
+theorem topo_cluster_random_supercritical_z2_exact_output_projection_certificate :
+    TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate := by
+  exact ⟨
+    topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input,
+    topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input,
+    topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input,
+    topo_cluster_random_supercritical_z2_support_surface_repair_output_of_exact_closure_input,
+    topo_cluster_random_supercritical_z2_paper_support_output_of_exact_closure_input,
+    topo_cluster_random_supercritical_z2_giant_loss_output_of_exact_closure_input,
+    topo_cluster_random_supercritical_z2_boxed_route_of_same_bridge_full_output_bundle,
+    topo_cluster_random_supercritical_z2_support_surface_repair_route_of_same_bridge_full_output_bundle,
+    topo_cluster_random_supercritical_z2_support_surface_repair_output_of_same_bridge_full_output_bundle,
+    topo_cluster_random_supercritical_z2_paper_support_output_of_same_bridge_full_output_bundle,
+    topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle,
+    topo_cluster_random_supercritical_z2_exact_closure_input_notYet,
+    topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
+    random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
+    random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_output_certificate,
+    remaining_open_semantic_targets_exact_closure_input_output_certificate,
+    remaining_open_semantic_targets_joint_closure_reduction_certificate⟩
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -6562,6 +6754,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
+    TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate
 
@@ -6588,6 +6781,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
   constructor
   · exact part6_remaining_conditional_projection_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_exact_output_projection_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate

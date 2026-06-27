@@ -350,6 +350,12 @@ It also gates
 both the exact Part 6 closure input and the full output bundle to the named
 divergence and feasible/divergence witness interfaces, while recording the
 current refutations of the two individual interfaces and their paired output.
+The topo side now has the matching
+`topo_cluster_random_supercritical_z2_exact_output_projection_certificate`:
+the exact input and same-bridge output bundle project to the full route, boxed
+finite-lattice route, support-surface repair route/output, paper-support
+output, and giant-loss output, while the inhabited support-surface repair route
+is still paired with the full-route and boxed-route refutations.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
 and closed-unit current-obstruction certificate together with the

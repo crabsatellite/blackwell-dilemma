@@ -417,6 +417,19 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_full_output_bundle",
     "BlackwellDilemma.PaperSemanticGate.Part6RemainingConditionalProjectionCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_remaining_conditional_projection_certificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_output_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_paper_support_output_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_exact_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_boxed_route_of_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_output_of_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_paper_support_output_of_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_exact_output_projection_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_closure_input",
@@ -1561,6 +1574,38 @@ def main() -> int:
     print(
         "semantic_target_part6_conditional_witness_certificate_proof="
         "part6_remaining_conditional_projection_certificate"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_exact_input_proofs="
+        "topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input,"
+        "topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input,"
+        "topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input,"
+        "topo_cluster_random_supercritical_z2_support_surface_repair_output_of_exact_closure_input,"
+        "topo_cluster_random_supercritical_z2_paper_support_output_of_exact_closure_input,"
+        "topo_cluster_random_supercritical_z2_giant_loss_output_of_exact_closure_input"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_same_bridge_bundle_proofs="
+        "topo_cluster_random_supercritical_z2_boxed_route_of_same_bridge_full_output_bundle,"
+        "topo_cluster_random_supercritical_z2_support_surface_repair_route_of_same_bridge_full_output_bundle,"
+        "topo_cluster_random_supercritical_z2_support_surface_repair_output_of_same_bridge_full_output_bundle,"
+        "topo_cluster_random_supercritical_z2_paper_support_output_of_same_bridge_full_output_bundle,"
+        "topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_boundary="
+        "randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,"
+        "random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,"
+        "not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,"
+        "not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_certificate="
+        "TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate"
+    )
+    print(
+        "semantic_target_topo_exact_output_projection_certificate_proof="
+        "topo_cluster_random_supercritical_z2_exact_output_projection_certificate"
     )
     print(
         "semantic_target_closure_input_field_payloads="
