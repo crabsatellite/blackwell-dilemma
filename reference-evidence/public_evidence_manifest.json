@@ -642,6 +642,8 @@
             "semantic_target_closure_input_field_roster_certificate=OpenSemanticTargetClosureInputFieldRosterCertificate",
             "semantic_target_closure_input_field_roster_certificate_proof=open_semantic_target_closure_input_field_roster_certificate",
             "semantic_target_closure_input_field_statement_roster_proofs=openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_named_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current",
+            "semantic_target_closure_input_field_statement_roster_terms_checked=8",
+            "semantic_target_closure_input_field_statement_roster_length_proofs=openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_length_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_length_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_length_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_length_current",
             "semantic_target_closure_input_field_statement_roster_certificate=OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
             "semantic_target_closure_input_field_statement_roster_certificate_proof=open_semantic_target_closure_input_field_statement_roster_certificate",
             "semantic_target_closure_input_field_output_surface_ids_expected=theorem_4_1_part6_lattice_embedding,topo_cluster_random_supercritical_z2",
@@ -682,9 +684,9 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=699",
+            "semantic_target_axiom_audit_prints_required=703",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=699",
+            "semantic_target_readme_axiom_audit_prints_required=703",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },

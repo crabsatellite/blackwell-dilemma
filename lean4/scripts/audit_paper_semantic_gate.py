@@ -914,6 +914,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_semantic_kernel_target_of_field_payload",
@@ -3017,6 +3021,14 @@ def main() -> int:
         "openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current,"
         "openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current,"
         "openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current"
+    )
+    print("semantic_target_closure_input_field_statement_roster_terms_checked=8")
+    print(
+        "semantic_target_closure_input_field_statement_roster_length_proofs="
+        "openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_length_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_length_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_length_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_length_current"
     )
     print(
         "semantic_target_closure_input_field_statement_roster_certificate="

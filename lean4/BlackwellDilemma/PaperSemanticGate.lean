@@ -10885,6 +10885,30 @@ theorem
        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
         Not TopoClusterRandomSupercriticalZ2ClosureInput] := rfl
 
+/-- Build gate: the closure-input-to-field-payload statement roster has one
+formula for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_length_current :
+    openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements.length = 2 := rfl
+
+/-- Build gate: the field-payload-to-closure-input statement roster has one
+formula for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_length_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements.length = 2 := rfl
+
+/-- Build gate: the field-payload/input equivalence statement roster has one
+formula for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_length_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements.length = 2 := rfl
+
+/-- Build gate: the field-payload/input obstruction-equivalence statement
+roster has one formula for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_length_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements.length = 2 := rfl
+
 /-- Every field-level sufficient-input surface carries a kernel proof from its
 input to the field payload. -/
 theorem openSemanticTargetClosureInputFieldSurface_field_payload
@@ -11066,6 +11090,14 @@ def OpenSemanticTargetClosureInputFieldStatementRosterCertificate : Prop :=
         Not Part6LatticeEmbeddingClosureInput,
        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
         Not TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements.length =
+      2 /\
     (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
       surface.closureInput -> surface.fieldPayload) /\
     (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
@@ -11085,6 +11117,10 @@ theorem open_semantic_target_closure_input_field_statement_roster_certificate :
     openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current,
     openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current,
     openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current,
+    openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_length_current,
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_length_current,
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_length_current,
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_length_current,
     (by
       intro surface _
       exact openSemanticTargetClosureInputFieldSurface_field_payload surface),

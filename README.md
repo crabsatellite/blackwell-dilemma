@@ -267,7 +267,7 @@ to sufficient-input obstruction for each field surface.
 `open_semantic_target_closure_input_field_statement_roster_certificate` pins
 the closure-input-to-field-payload, field-payload-to-closure-input,
 payload/input equivalence, and payload/input obstruction-equivalence formulas
-to the named Part 6/topo statement lists.
+to four named 2-term Part 6/topo statement lists.
 The top-level
 `completePaperSemanticKernelOnly_current_obstruction_certificate` also gates
 the current non-complete claim against `open=2`, the exact remaining target ids,
@@ -357,7 +357,7 @@ statement roster, route nonclosure boundary, and 14-term field-output statement 
 combined detailed field-output roster package, topo route-obstruction
 projections and 12-term statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
-payload/certificate consistency, field statement roster,
+payload/certificate consistency, field statement roster length,
 surface-roster consistency, top-level statement roster length, and AxiomAudit
 coverage.
 The companion audit now publishes both required AxiomAudit print count and
