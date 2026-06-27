@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/top-level complete-obstruction certificate/closure-input sufficient-route, output, field, and field-obstruction certificates/field-roster id, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=162 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-map/route-closure-progress-nonclosure-frontier projections/cross-surface target/route-map/closure/frontier equality/payload route-map certificate/top-level complete-obstruction certificate/closure-input sufficient-route, output, field, and field-obstruction certificates/field-roster id, payload-to-input/iff consistency, payload-obstruction, and payload-certificate consistency/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=168 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -319,7 +319,8 @@ loss range, and boxed-torus family lower-bound surface.
 The same field payloads and field certificates are listed in
 `openSemanticTargetClosureInputFieldSurfaces`, whose ids are checked against
 the open semantic-target roster by Lean and by `audit_paper_semantic_gate.py`;
-the same roster now carries the current field-payload obstructions, and
+the same roster now carries reverse payload-to-input projections, payload/input
+iff proofs, and the current field-payload obstructions, and
 `remaining_open_semantic_targets_closure_input_field_obstruction_certificate`
 collects them into a cross-target gate.
 

@@ -145,6 +145,8 @@ EXPECTED_OPEN_CLOSURE_INPUT_FIELD_SURFACES = {
         "Part6LatticeEmbeddingClosureInput",
         "Part6LatticeEmbeddingClosureInputFieldPayload",
         "part6_lattice_embedding_field_payload_of_closure_input",
+        "part6_lattice_embedding_closure_input_of_field_payload",
+        "part6_lattice_embedding_field_payload_iff_closure_input",
         "part6_lattice_embedding_field_payload_notYet",
         "Part6LatticeEmbeddingClosureInputFieldCertificate",
         "part6_lattice_embedding_closure_input_field_certificate",
@@ -153,6 +155,8 @@ EXPECTED_OPEN_CLOSURE_INPUT_FIELD_SURFACES = {
         "TopoClusterRandomSupercriticalZ2ClosureInput",
         "TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload",
         "topo_cluster_random_supercritical_z2_field_payload_of_closure_input",
+        "topo_cluster_random_supercritical_z2_closure_input_of_field_payload",
+        "topo_cluster_random_supercritical_z2_field_payload_iff_closure_input",
         "topo_cluster_random_supercritical_z2_field_payload_notYet",
         "TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate",
         "topo_cluster_random_supercritical_z2_closure_input_field_certificate",
@@ -254,12 +258,16 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldPayload",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_iff_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_notYet",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_bridge_route_of_closure_input",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_certificate",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_of_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_iff_closure_input",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_notYet",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_certificate",
@@ -269,6 +277,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceIds_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceCount_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_payload_to_closure_input",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_payload_iff_closure_input",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_payload_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputFieldCertificate",
@@ -316,6 +326,8 @@ def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
 
 def open_kernel_surfaces(text: str) -> list[
     tuple[
+        str,
+        str,
         str,
         str,
         str,
@@ -498,6 +510,9 @@ def open_closure_input_field_surfaces(
         str,
         str,
         str,
+        str,
+        str,
+        str,
     ]
 ]:
     match = re.search(
@@ -515,6 +530,8 @@ def open_closure_input_field_surfaces(
         r"closureInput\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"fieldPayload\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"fieldPayloadProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldPayloadToClosureInput\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"fieldPayloadIffClosureInput\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"fieldPayloadCurrentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"fieldCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"fieldCertificateProof\s*:=\s*([A-Za-z0-9_'.]+)",
@@ -879,16 +896,24 @@ def main() -> int:
         + ",".join(surface[3] for surface in closure_input_field_surfaces)
     )
     print(
-        "semantic_target_closure_input_field_payload_obstructions="
+        "semantic_target_closure_input_field_payload_to_closure_input_proofs="
         + ",".join(surface[4] for surface in closure_input_field_surfaces)
     )
     print(
-        "semantic_target_closure_input_field_certificates="
+        "semantic_target_closure_input_field_payload_iff_closure_input_proofs="
         + ",".join(surface[5] for surface in closure_input_field_surfaces)
     )
     print(
-        "semantic_target_closure_input_field_certificate_proofs="
+        "semantic_target_closure_input_field_payload_obstructions="
         + ",".join(surface[6] for surface in closure_input_field_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_certificates="
+        + ",".join(surface[7] for surface in closure_input_field_surfaces)
+    )
+    print(
+        "semantic_target_closure_input_field_certificate_proofs="
+        + ",".join(surface[8] for surface in closure_input_field_surfaces)
     )
     print(
         "semantic_target_closure_input_field_certificate="
@@ -1422,6 +1447,8 @@ def main() -> int:
         closure_input,
         field_payload,
         field_payload_proof,
+        field_payload_to_closure_input,
+        field_payload_iff_closure_input,
         field_payload_obstruction,
         field_certificate,
         field_certificate_proof,
@@ -1436,6 +1463,8 @@ def main() -> int:
             expected_closure_input,
             expected_field_payload,
             expected_field_payload_proof,
+            expected_field_payload_to_closure_input,
+            expected_field_payload_iff_closure_input,
             expected_field_payload_obstruction,
             expected_field_certificate,
             expected_field_certificate_proof,
@@ -1451,6 +1480,14 @@ def main() -> int:
         if field_payload_proof != expected_field_payload_proof:
             failures.append(
                 f"{target_id} field payload proof {field_payload_proof!r} != expected {expected_field_payload_proof!r}"
+            )
+        if field_payload_to_closure_input != expected_field_payload_to_closure_input:
+            failures.append(
+                f"{target_id} field payload-to-closure proof {field_payload_to_closure_input!r} != expected {expected_field_payload_to_closure_input!r}"
+            )
+        if field_payload_iff_closure_input != expected_field_payload_iff_closure_input:
+            failures.append(
+                f"{target_id} field payload iff closure-input proof {field_payload_iff_closure_input!r} != expected {expected_field_payload_iff_closure_input!r}"
             )
         if field_payload_obstruction != expected_field_payload_obstruction:
             failures.append(

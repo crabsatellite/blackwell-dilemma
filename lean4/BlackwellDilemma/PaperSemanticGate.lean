@@ -4789,13 +4789,31 @@ theorem part6_lattice_embedding_field_payload_of_closure_input :
             z2_lattice_embedding_closed_unit_tail_reversal_bridge_paper_support_with_sentimental_reversal
               bridge⟩
 
+/-- The Part 6 field payload is not an independent weaker contract: it
+projects back to the sufficient closure input. -/
+theorem part6_lattice_embedding_closure_input_of_field_payload :
+    Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingClosureInput := by
+  intro hpayload
+  cases hpayload with
+  | intro bridge _ =>
+      exact ⟨bridge⟩
+
+/-- The Part 6 field payload and sufficient closure input are equivalent at
+the current gate surface. -/
+theorem part6_lattice_embedding_field_payload_iff_closure_input :
+    Part6LatticeEmbeddingClosureInputFieldPayload ↔
+      Part6LatticeEmbeddingClosureInput := by
+  constructor
+  · exact part6_lattice_embedding_closure_input_of_field_payload
+  exact part6_lattice_embedding_field_payload_of_closure_input
+
 /-- The current carrier also refutes the Part 6 field-level payload itself. -/
 theorem part6_lattice_embedding_field_payload_notYet :
     Not Part6LatticeEmbeddingClosureInputFieldPayload := by
   intro hpayload
-  cases hpayload with
-  | intro bridge _ =>
-      exact part6_lattice_embedding_closure_input_notYet ⟨bridge⟩
+  exact part6_lattice_embedding_closure_input_notYet
+    (part6_lattice_embedding_closure_input_of_field_payload hpayload)
 
 /-- A sufficient Part 6 closure input also projects to the explicit
 bridge-route surface. -/
@@ -4808,6 +4826,10 @@ theorem part6_lattice_embedding_bridge_route_of_closure_input :
 def Part6LatticeEmbeddingClosureInputFieldCertificate : Prop :=
   (Part6LatticeEmbeddingClosureInput ->
     Part6LatticeEmbeddingClosureInputFieldPayload) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingClosureInput) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ↔
+      Part6LatticeEmbeddingClosureInput) /\
     (Part6LatticeEmbeddingClosureInput ->
       Exists fun scalingCarrier : Real -> Real =>
         ClosedUnitPart6FullPaperClosingSupport scalingCarrier) /\
@@ -4824,6 +4846,10 @@ theorem part6_lattice_embedding_closure_input_field_certificate :
     Part6LatticeEmbeddingClosureInputFieldCertificate := by
   constructor
   · exact part6_lattice_embedding_field_payload_of_closure_input
+  constructor
+  · exact part6_lattice_embedding_closure_input_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_field_payload_iff_closure_input
   constructor
   · exact
       z2_lattice_embedding_closed_unit_tail_reversal_bridge_full_paper_closing_support_nonempty
@@ -4917,20 +4943,43 @@ theorem topo_cluster_random_supercritical_z2_field_payload_of_closure_input :
             BoxedTorusFlatUnitCompatibleAboveThresholdLowerBoundConclusion_from_random_supercritical_z2_topo_cluster_repaired_bridge
               bridge⟩
 
+/-- The topo field payload projects back to the sufficient closure input: the
+payload keeps the repaired bridge and the pointwise-on-giant route required by
+that input. -/
+theorem topo_cluster_random_supercritical_z2_closure_input_of_field_payload :
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2ClosureInput := by
+  intro hpayload
+  cases hpayload with
+  | intro bridge hfields =>
+      exact ⟨bridge, hfields.1⟩
+
+/-- The topo field payload and sufficient closure input are equivalent at the
+current gate surface. -/
+theorem topo_cluster_random_supercritical_z2_field_payload_iff_closure_input :
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
+      TopoClusterRandomSupercriticalZ2ClosureInput := by
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_of_field_payload
+  exact topo_cluster_random_supercritical_z2_field_payload_of_closure_input
+
 /-- The current repaired bridge surface also refutes the topo field-level
 payload itself. -/
 theorem topo_cluster_random_supercritical_z2_field_payload_notYet :
     Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload := by
   intro hpayload
-  cases hpayload with
-  | intro bridge hfields =>
-      exact topo_cluster_random_supercritical_z2_closure_input_notYet
-        ⟨bridge, hfields.1⟩
+  exact topo_cluster_random_supercritical_z2_closure_input_notYet
+    (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
+      hpayload)
 
 /-- Field-level certificate for the sufficient topo closure input. -/
 def TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate : Prop :=
   (TopoClusterRandomSupercriticalZ2ClosureInput ->
     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2ClosureInput) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
+      TopoClusterRandomSupercriticalZ2ClosureInput) /\
     (TopoClusterRandomSupercriticalZ2ClosureInput ->
       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
     (TopoClusterRandomSupercriticalZ2ClosureInput ->
@@ -4946,6 +4995,10 @@ theorem topo_cluster_random_supercritical_z2_closure_input_field_certificate :
     TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate := by
   constructor
   · exact topo_cluster_random_supercritical_z2_field_payload_of_closure_input
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_of_field_payload
+  constructor
+  · exact topo_cluster_random_supercritical_z2_field_payload_iff_closure_input
   constructor
   · exact topo_cluster_random_supercritical_z2_full_route_of_closure_input
   constructor
@@ -4965,6 +5018,8 @@ structure OpenSemanticTargetClosureInputFieldSurface where
   closureInput : Prop
   fieldPayload : Prop
   fieldPayloadProof : closureInput -> fieldPayload
+  fieldPayloadToClosureInput : fieldPayload -> closureInput
+  fieldPayloadIffClosureInput : fieldPayload ↔ closureInput
   fieldPayloadCurrentObstruction : Not fieldPayload
   fieldCertificate : Prop
   fieldCertificateProof : fieldCertificate
@@ -4978,6 +5033,10 @@ def openSemanticTargetClosureInputFieldSurfaces :
       fieldPayload := Part6LatticeEmbeddingClosureInputFieldPayload,
       fieldPayloadProof :=
         part6_lattice_embedding_field_payload_of_closure_input,
+      fieldPayloadToClosureInput :=
+        part6_lattice_embedding_closure_input_of_field_payload,
+      fieldPayloadIffClosureInput :=
+        part6_lattice_embedding_field_payload_iff_closure_input,
       fieldPayloadCurrentObstruction :=
         part6_lattice_embedding_field_payload_notYet,
       fieldCertificate := Part6LatticeEmbeddingClosureInputFieldCertificate,
@@ -4989,6 +5048,10 @@ def openSemanticTargetClosureInputFieldSurfaces :
         TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
       fieldPayloadProof :=
         topo_cluster_random_supercritical_z2_field_payload_of_closure_input,
+      fieldPayloadToClosureInput :=
+        topo_cluster_random_supercritical_z2_closure_input_of_field_payload,
+      fieldPayloadIffClosureInput :=
+        topo_cluster_random_supercritical_z2_field_payload_iff_closure_input,
       fieldPayloadCurrentObstruction :=
         topo_cluster_random_supercritical_z2_field_payload_notYet,
       fieldCertificate :=
@@ -5018,6 +5081,20 @@ theorem openSemanticTargetClosureInputFieldSurface_field_payload
     (surface : OpenSemanticTargetClosureInputFieldSurface) :
     surface.closureInput -> surface.fieldPayload :=
   surface.fieldPayloadProof
+
+/-- Every field-level sufficient-input surface carries a kernel proof from the
+field payload back to its closure input. -/
+theorem openSemanticTargetClosureInputFieldSurface_field_payload_to_closure_input
+    (surface : OpenSemanticTargetClosureInputFieldSurface) :
+    surface.fieldPayload -> surface.closureInput :=
+  surface.fieldPayloadToClosureInput
+
+/-- Every field-level sufficient-input surface records equivalence between its
+field payload and closure input. -/
+theorem openSemanticTargetClosureInputFieldSurface_field_payload_iff_closure_input
+    (surface : OpenSemanticTargetClosureInputFieldSurface) :
+    surface.fieldPayload ↔ surface.closureInput :=
+  surface.fieldPayloadIffClosureInput
 
 /-- Every field-level sufficient-input surface records the current field-payload
 obstruction. -/
