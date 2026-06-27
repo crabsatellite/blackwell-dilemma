@@ -53,8 +53,8 @@ also projects directly to the divergence/feasible witness output, repair route,
 and full-support route, with a dedicated 13-term statement roster for those formulas,
 and the topo field payload projects directly to the support-surface closing
 spine with its own 14-term field-output formula roster; both rosters are also packaged
-as an id/count-gated remaining-open-target detailed field-output roster whose
-id/count equalities, together with the field-output surface ids/count
+as an id/count/length-gated remaining-open-target detailed field-output roster
+whose id/count/length equalities, together with the field-output surface ids/count
 equalities and the all-surface ids/count synchronization certificate, are
 top-level current-obstruction terms with a fixed 54-term top-level roster and a
 fixed 20-statement all-surface roster.

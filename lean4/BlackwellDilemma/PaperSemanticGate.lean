@@ -12099,6 +12099,13 @@ theorem
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
       paperSemanticOpenCount := rfl
 
+/-- Build gate: the detailed field-output statement roster package has one
+entry for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      2 := rfl
+
 /-- Build gate: the detailed field-output statement roster certificates are
 exactly the Part 6 and topo certificates. -/
 theorem
@@ -12112,10 +12119,12 @@ theorem
 rosters for the remaining open targets. -/
 def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate :
     Prop :=
-  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
       openSemanticTargetIds /\
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
       paperSemanticOpenCount /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      2 /\
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
       [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
@@ -12130,6 +12139,7 @@ theorem
   exact ⟨
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,
     part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate⟩
