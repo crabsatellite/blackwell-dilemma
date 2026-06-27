@@ -210,7 +210,7 @@ satisfaction, joint target-route satisfaction, and joint closure-route
 satisfaction are equivalent, and all three route packages are current-refuted.
 `remaining_open_semantic_targets_joint_route_statement_roster_certificate`
 pins every joint route-package projection, equivalence, and current package
-obstruction formula in one build-gated statement list.
+obstruction formula in one build-gated 12-term statement list.
 `remaining_open_semantic_targets_bilateral_package_obstruction_certificate`
 checks that the joint target, exact-input, output-bundle, target-route, and
 closure-route packages can each be refuted from either the Part 6 obstruction

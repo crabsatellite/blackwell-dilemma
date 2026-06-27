@@ -9646,6 +9646,12 @@ theorem remainingOpenSemanticTargetsJointRouteStatements_named_current :
        Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
        Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] := rfl
 
+/-- Build gate: the joint route-obstruction statement roster has exactly the 12
+package-level route projection, equivalence, and current-obstruction formulas
+listed above. -/
+theorem remainingOpenSemanticTargetsJointRouteStatements_length_current :
+    remainingOpenSemanticTargetsJointRouteStatements.length = 12 := rfl
+
 /-- Build-gated statement roster for the joint route-obstruction reduction. -/
 def RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate :
     Prop :=
@@ -9671,6 +9677,7 @@ def RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate :
      Not RemainingOpenSemanticTargetsSatisfied,
      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] /\
+    remainingOpenSemanticTargetsJointRouteStatements.length = 12 /\
     (RemainingOpenSemanticTargetsSatisfied ->
       RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
     (RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
@@ -9701,6 +9708,7 @@ theorem
     RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate := by
   exact ⟨
     remainingOpenSemanticTargetsJointRouteStatements_named_current,
+    remainingOpenSemanticTargetsJointRouteStatements_length_current,
     remaining_open_semantic_targets_target_routes_of_targets,
     remaining_open_semantic_targets_targets_of_target_routes,
     remaining_open_semantic_targets_satisfied_iff_target_routes,

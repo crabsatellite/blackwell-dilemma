@@ -726,6 +726,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteStatements",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
@@ -2679,6 +2680,11 @@ def main() -> int:
     print(
         "semantic_target_joint_route_statement_roster_proof="
         "remainingOpenSemanticTargetsJointRouteStatements_named_current"
+    )
+    print("semantic_target_joint_route_statement_roster_terms_checked=12")
+    print(
+        "semantic_target_joint_route_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsJointRouteStatements_length_current"
     )
     print(
         "semantic_target_joint_route_statement_roster_certificate="
