@@ -280,6 +280,8 @@ packages the Part 6 and topo detailed field-output rosters together.
 The package also gates its ids and length against the current open semantic
 target ids/count, and those two equalities are now explicit top-level
 current-obstruction roster terms.
+The field-output surface roster ids/count are likewise explicit top-level
+current-obstruction roster terms.
 `open_semantic_target_closure_input_named_roster_certificate` also pins the
 sufficient closure-input roster to named target/input/current-obstruction and
 certificate propositions, including the generic projection from target

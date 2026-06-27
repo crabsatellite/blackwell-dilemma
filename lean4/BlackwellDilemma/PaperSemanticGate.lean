@@ -11828,6 +11828,10 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    OpenSemanticTargetClosureInputFieldRosterCertificate,
    OpenSemanticTargetClosureInputFieldStatementRosterCertificate,
    RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate,
+   openSemanticTargetClosureInputFieldOutputSurfaceIds =
+     openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputSurfaces.length =
+     paperSemanticOpenCount,
    OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
    OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate]
 
@@ -11887,6 +11891,10 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetClosureInputFieldRosterCertificate,
        OpenSemanticTargetClosureInputFieldStatementRosterCertificate,
        RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds =
+         openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+         paperSemanticOpenCount,
        OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] := rfl
 
@@ -11949,6 +11957,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      OpenSemanticTargetClosureInputFieldRosterCertificate,
      OpenSemanticTargetClosureInputFieldStatementRosterCertificate,
      RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate,
+     openSemanticTargetClosureInputFieldOutputSurfaceIds =
+       openSemanticTargetIds,
+     openSemanticTargetClosureInputFieldOutputSurfaces.length =
+       paperSemanticOpenCount,
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] /\
     Not CompletePaperSemanticKernelOnly /\
@@ -12003,6 +12015,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     OpenSemanticTargetClosureInputFieldRosterCertificate /\
     OpenSemanticTargetClosureInputFieldStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate /\
+    openSemanticTargetClosureInputFieldOutputSurfaceIds =
+      openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputSurfaces.length =
+      paperSemanticOpenCount /\
     OpenSemanticTargetClosureInputFieldOutputRosterCertificate /\
     OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate
 
@@ -12061,6 +12077,8 @@ theorem
     open_semantic_target_closure_input_field_roster_certificate,
     open_semantic_target_closure_input_field_statement_roster_certificate,
     remaining_open_semantic_targets_closure_input_field_output_certificate,
+    openSemanticTargetClosureInputFieldOutputSurfaceIds_current,
+    openSemanticTargetClosureInputFieldOutputSurfaceCount_current,
     open_semantic_target_closure_input_field_output_roster_certificate,
     open_semantic_target_closure_input_field_output_statement_roster_certificate⟩
 
@@ -12121,6 +12139,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetClosureInputFieldRosterCertificate /\
     OpenSemanticTargetClosureInputFieldStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate /\
+    openSemanticTargetClosureInputFieldOutputSurfaceIds =
+      openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputSurfaces.length =
+      paperSemanticOpenCount /\
     OpenSemanticTargetClosureInputFieldOutputRosterCertificate /\
     OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate
@@ -12246,6 +12268,10 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact open_semantic_target_closure_input_field_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_closure_input_field_output_certificate
+  constructor
+  · exact openSemanticTargetClosureInputFieldOutputSurfaceIds_current
+  constructor
+  · exact openSemanticTargetClosureInputFieldOutputSurfaceCount_current
   constructor
   · exact open_semantic_target_closure_input_field_output_roster_certificate
   constructor

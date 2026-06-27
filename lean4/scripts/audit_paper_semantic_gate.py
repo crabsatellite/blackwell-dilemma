@@ -335,6 +335,8 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "OpenSemanticTargetClosureInputFieldRosterCertificate",
     "OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
     "RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
+    "openSemanticTargetClosureInputFieldOutputSurfaceIds =",
+    "openSemanticTargetClosureInputFieldOutputSurfaces.length =",
     "OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
     "OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
     "CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
@@ -1448,6 +1450,13 @@ def top_level_term_is_present(body: str, term: str) -> bool:
     elif term == "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =":
         pattern = (
             r"\bopenSemanticTargetClosureInputFieldOutputDetailedStatementRosters"
+            r"\.length\s*="
+        )
+    elif term == "openSemanticTargetClosureInputFieldOutputSurfaceIds =":
+        pattern = r"\bopenSemanticTargetClosureInputFieldOutputSurfaceIds\s*="
+    elif term == "openSemanticTargetClosureInputFieldOutputSurfaces.length =":
+        pattern = (
+            r"\bopenSemanticTargetClosureInputFieldOutputSurfaces"
             r"\.length\s*="
         )
     else:
