@@ -317,6 +317,12 @@
           "path": "lean4/scripts/audit_paper_semantic_gate.py",
           "cwd": "lean4",
           "stdout_contains": [
+            "semantic_targets_open=2",
+            "semantic_targets_closed=3",
+            "theorem_gate_open=2",
+            "theorem_gate_closed=3",
+            "semantic_target_open_ids=theorem_4_1_part6_lattice_embedding,topo_cluster_random_supercritical_z2",
+            "semantic_target_closed_ids=r10_two_regime_label_recalibration,theorem_4_1_part4_lattice_p_monotonicity,r10_threshold_five_state_high_kappa_routing",
             "complete_paper_semantic_kernel_only_current_obstruction_certificate=CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
             "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof=completePaperSemanticKernelOnly_current_obstruction_certificate",
             "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_proof=completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current",

@@ -14,6 +14,7 @@ This script is a companion documentation guard:
 from __future__ import annotations
 
 import collections
+import json
 import pathlib
 import re
 import sys
@@ -23,6 +24,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPO_ROOT = ROOT.parent
 GATE = ROOT / "BlackwellDilemma" / "PaperSemanticGate.lean"
 AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
+PUBLIC_EVIDENCE_MANIFEST = REPO_ROOT / "reference-evidence" / "public_evidence_manifest.json"
+PUBLIC_EVIDENCE_CHECK_ID = "paper_semantic_companion_audit"
 
 EXPECTED_OPEN_KERNEL_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
@@ -1086,6 +1089,28 @@ def print_id_drift(label: str, expected: list[str], actual: list[str]) -> None:
     print(f"{label}_expected={','.join(expected)}")
     print(f"{label}_missing_expected_count={len(missing_expected(expected, actual))}")
     print(f"{label}_unexpected_count={len(unexpected_actual(expected, actual))}")
+
+
+def id_drift_lines(label: str, expected: list[str], actual: list[str]) -> list[str]:
+    return [
+        f"{label}_expected={','.join(expected)}",
+        f"{label}_missing_expected_count={len(missing_expected(expected, actual))}",
+        f"{label}_unexpected_count={len(unexpected_actual(expected, actual))}",
+    ]
+
+
+def public_manifest_stdout_contains(check_id: str) -> set[str]:
+    manifest = json.loads(PUBLIC_EVIDENCE_MANIFEST.read_text(encoding="utf-8"))
+    for claim in manifest.get("claims", []):
+        for check in claim.get("checks", []):
+            if check.get("id") == check_id:
+                return set(check.get("stdout_contains", []))
+    raise RuntimeError(f"public evidence check id not found: {check_id}")
+
+
+def public_manifest_missing_stdout_lines(check_id: str, lines: list[str]) -> list[str]:
+    manifest_lines = public_manifest_stdout_contains(check_id)
+    return [line for line in lines if line not in manifest_lines]
 
 
 def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
@@ -3892,6 +3917,126 @@ def main() -> int:
         "semantic_target_readme_axiom_audit_prints_required_matches="
         + ("1" if readme_axiom_audit_count == required_axiom_audit_count else "0")
     )
+    public_manifest_required_lines = [
+        f"semantic_targets_open={open_count}",
+        f"semantic_targets_closed={closed_count}",
+        f"theorem_gate_open={expected_open}",
+        f"theorem_gate_closed={expected_closed}",
+        f"semantic_target_open_ids={','.join(open_ids)}",
+        f"semantic_target_closed_ids={','.join(closed_ids)}",
+        *id_drift_lines("semantic_target_open_ids", expected_open_ids, open_ids),
+        *id_drift_lines("semantic_target_closed_ids", expected_closed_ids, closed_ids),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_proof="
+            "completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="
+            f"{len(EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS)}"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_missing="
+            f"{len(top_level_missing_conjuncts)}"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_checked="
+            f"{len(EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_STATEMENT_TERMS)}"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_missing="
+            f"{len(missing_top_level_statement_roster_terms)}"
+        ),
+        (
+            "semantic_target_named_current_roster_length_pairs_checked="
+            f"{named_current_roster_count}"
+        ),
+        (
+            "semantic_target_named_current_roster_missing_length_proofs_count="
+            f"{len(missing_named_current_roster_length_proofs)}"
+        ),
+        (
+            "semantic_target_current_roster_axiom_audit_prints_checked="
+            f"{current_roster_axiom_audit_count}"
+        ),
+        (
+            "semantic_target_current_roster_axiom_audit_prints_missing="
+            f"{len(missing_current_roster_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_current_theorem_axiom_audit_prints_checked="
+            f"{current_theorem_axiom_audit_count}"
+        ),
+        (
+            "semantic_target_current_theorem_axiom_audit_prints_missing="
+            f"{len(missing_current_theorem_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_theorem_axiom_audit_prints_checked="
+            f"{paper_semantic_theorem_axiom_audit_count}"
+        ),
+        (
+            "semantic_target_theorem_axiom_audit_prints_missing="
+            f"{len(missing_paper_semantic_theorem_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_def_axiom_audit_prints_checked="
+            f"{paper_semantic_def_axiom_audit_count}"
+        ),
+        (
+            "semantic_target_def_axiom_audit_prints_missing="
+            f"{len(missing_paper_semantic_def_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_type_axiom_audit_prints_checked="
+            f"{paper_semantic_type_axiom_audit_count}"
+        ),
+        (
+            "semantic_target_type_axiom_audit_prints_missing="
+            f"{len(missing_paper_semantic_type_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_paper_semantic_axiom_audit_prints="
+            f"{paper_semantic_axiom_audit_print_count}"
+        ),
+        (
+            "semantic_target_paper_semantic_axiom_audit_duplicate_prints="
+            f"{len(duplicate_paper_semantic_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_paper_semantic_axiom_audit_duplicate_decls="
+            + ",".join(duplicate_paper_semantic_axiom_audit_prints)
+        ),
+        f"semantic_target_axiom_audit_prints_required={required_axiom_audit_count}",
+        f"semantic_target_axiom_audit_prints_missing={len(missing_axiom_audit_prints)}",
+        (
+            "semantic_target_readme_axiom_audit_prints_required="
+            + (
+                str(readme_axiom_audit_count)
+                if readme_axiom_audit_count is not None
+                else "missing"
+            )
+        ),
+        (
+            "semantic_target_readme_axiom_audit_prints_required_matches="
+            + ("1" if readme_axiom_audit_count == required_axiom_audit_count else "0")
+        ),
+    ]
+    manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(
+        PUBLIC_EVIDENCE_CHECK_ID,
+        public_manifest_required_lines,
+    )
+    print(
+        "public_manifest_paper_semantic_stdout_contains_missing="
+        f"{len(manifest_missing_stdout_lines)}"
+    )
 
     failures: list[str] = []
     if open_count != expected_open:
@@ -3946,6 +4091,11 @@ def main() -> int:
         failures.append(
             "PaperSemanticGate duplicate AxiomAudit prints: "
             + ",".join(duplicate_paper_semantic_axiom_audit_prints)
+        )
+    if manifest_missing_stdout_lines:
+        failures.append(
+            "public evidence manifest missing paper semantic stdout lines: "
+            + ",".join(manifest_missing_stdout_lines)
         )
     if kernel_surface_ids != open_ids:
         failures.append(
