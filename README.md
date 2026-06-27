@@ -217,7 +217,7 @@ closure-route packages can each be refuted from either the Part 6 obstruction
 or the topo obstruction.
 `remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate`
 pins every single-side package-obstruction projection and every current joint
-package obstruction formula in one build-gated statement list.
+package obstruction formula in one build-gated 15-term statement list.
 `open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate`
 lifts those route obstructions back to the machine-facing open-target roster:
 for every roster surface, `Not target`, `Not targetRoute`, and

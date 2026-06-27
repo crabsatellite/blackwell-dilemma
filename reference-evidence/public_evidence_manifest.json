@@ -572,6 +572,8 @@
             "semantic_target_bilateral_package_obstruction_certificate=RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
             "semantic_target_bilateral_package_obstruction_certificate_proof=remaining_open_semantic_targets_bilateral_package_obstruction_certificate",
             "semantic_target_bilateral_package_obstruction_statement_roster_proof=remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current",
+            "semantic_target_bilateral_package_obstruction_statement_roster_terms_checked=15",
+            "semantic_target_bilateral_package_obstruction_statement_roster_length_proof=remainingOpenSemanticTargetsBilateralPackageObstructionStatements_length_current",
             "semantic_target_bilateral_package_obstruction_statement_roster_certificate=RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
             "semantic_target_bilateral_package_obstruction_statement_roster_certificate_proof=remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate",
             "semantic_target_kernel_surface_route_obstruction_certificate=OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
@@ -668,9 +670,9 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=692",
+            "semantic_target_axiom_audit_prints_required=693",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=692",
+            "semantic_target_readme_axiom_audit_prints_required=693",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },

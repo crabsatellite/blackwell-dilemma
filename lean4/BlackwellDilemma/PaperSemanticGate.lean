@@ -9856,6 +9856,14 @@ theorem
        Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
        Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] := rfl
 
+/-- Build gate: the bilateral package-obstruction statement roster has exactly
+the 15 single-side projection and current package-obstruction formulas listed
+above. -/
+theorem
+    remainingOpenSemanticTargetsBilateralPackageObstructionStatements_length_current :
+    remainingOpenSemanticTargetsBilateralPackageObstructionStatements.length =
+      15 := rfl
+
 /-- Build-gated statement roster for bilateral joint package obstructions. -/
 def
     RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate :
@@ -9886,6 +9894,8 @@ def
      Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
      Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
      Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] /\
+    remainingOpenSemanticTargetsBilateralPackageObstructionStatements.length =
+      15 /\
     (Not Part6LatticeEmbeddingSemanticKernelTarget ->
       Not RemainingOpenSemanticTargetsSatisfied) /\
     (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
@@ -9920,6 +9930,7 @@ theorem
     RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate := by
   exact ⟨
     remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current,
+    remainingOpenSemanticTargetsBilateralPackageObstructionStatements_length_current,
     remaining_open_semantic_targets_satisfied_not_of_part6_target_not,
     remaining_open_semantic_targets_satisfied_not_of_topo_target_not,
     remaining_open_semantic_targets_exact_inputs_not_of_part6_exact_input_not,

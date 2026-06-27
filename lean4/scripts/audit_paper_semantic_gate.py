@@ -733,6 +733,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_certificate",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralPackageObstructionStatements",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralPackageObstructionStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
@@ -2705,6 +2706,11 @@ def main() -> int:
     print(
         "semantic_target_bilateral_package_obstruction_statement_roster_proof="
         "remainingOpenSemanticTargetsBilateralPackageObstructionStatements_named_current"
+    )
+    print("semantic_target_bilateral_package_obstruction_statement_roster_terms_checked=15")
+    print(
+        "semantic_target_bilateral_package_obstruction_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsBilateralPackageObstructionStatements_length_current"
     )
     print(
         "semantic_target_bilateral_package_obstruction_statement_roster_certificate="
