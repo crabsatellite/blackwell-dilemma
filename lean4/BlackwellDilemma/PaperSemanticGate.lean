@@ -11183,6 +11183,26 @@ def openSemanticTargetClosureInputFieldOutputDetailedStatementRosters :
   [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate]
 
+/-- Target ids for the detailed field-output statement roster package. -/
+def openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds :
+    List String :=
+  ["theorem_4_1_part6_lattice_embedding",
+   "topo_cluster_random_supercritical_z2"]
+
+/-- Build gate: the detailed field-output statement roster ids are exactly the
+remaining open semantic target ids. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds := rfl
+
+/-- Build gate: the detailed field-output statement roster count is exactly the
+current open semantic target count. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount := rfl
+
 /-- Build gate: the detailed field-output statement roster certificates are
 exactly the Part 6 and topo certificates. -/
 theorem
@@ -11196,7 +11216,11 @@ theorem
 rosters for the remaining open targets. -/
 def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate :
     Prop :=
-  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
       [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
     Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
@@ -11208,6 +11232,8 @@ theorem
     remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate :
     RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate := by
   exact ⟨
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,
     part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate⟩

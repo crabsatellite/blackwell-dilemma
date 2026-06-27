@@ -53,7 +53,7 @@ also projects directly to the divergence/feasible witness output, repair route,
 and full-support route, with a dedicated statement roster for those formulas,
 and the topo field payload projects directly to the support-surface closing
 spine with its own field-output formula roster; both rosters are also packaged
-as a remaining-open-target detailed field-output roster. The project does not claim the stronger
+as an id/count-gated remaining-open-target detailed field-output roster. The project does not claim the stronger
 full-manuscript semantic closure
 status. The Part 4 lattice p-monotonicity target is now closed by the standard
 `Z²` ranged local-lattice bridge; the former threshold target is closed by the

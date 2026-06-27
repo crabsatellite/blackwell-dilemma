@@ -876,6 +876,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputDetailedStatementRosters",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
@@ -2879,6 +2882,18 @@ def main() -> int:
         "semantic_target_closure_input_field_output_detailed_statement_rosters="
         "Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,"
         "TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_ids="
+        + ",".join(open_ids)
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_ids_proof="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_count_proof="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current"
     )
     print(
         "semantic_target_closure_input_field_output_detailed_statement_rosters_proof="

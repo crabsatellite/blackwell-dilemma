@@ -633,12 +633,15 @@
             "semantic_target_topo_field_output_statement_roster_certificate=TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate",
             "semantic_target_topo_field_output_statement_roster_certificate_proof=topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate",
             "semantic_target_closure_input_field_output_detailed_statement_rosters=Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate",
+            "semantic_target_closure_input_field_output_detailed_statement_roster_ids=theorem_4_1_part6_lattice_embedding,topo_cluster_random_supercritical_z2",
+            "semantic_target_closure_input_field_output_detailed_statement_roster_ids_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current",
+            "semantic_target_closure_input_field_output_detailed_statement_roster_count_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current",
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=628",
+            "semantic_target_axiom_audit_prints_required=631",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=628",
+            "semantic_target_readme_axiom_audit_prints_required=631",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },
