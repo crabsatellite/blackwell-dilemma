@@ -228,6 +228,9 @@ and the frontier/exact-input/output/field-obstruction certificates.
 named sufficient closure-input roster itself, including target/input/current
 obstruction/certificate propositions and the target-obstruction to
 sufficient-input-obstruction projection.
+`open_semantic_target_closure_input_statement_roster_certificate` additionally
+pins the sufficient-input-to-target and target-obstruction-to-sufficient-input
+formulas to the named Part 6/topo statements.
 `open_semantic_target_exact_closure_input_named_roster_certificate` similarly
 pins the exact closure-input roster and proves target obstruction equivalent to
 exact-input obstruction for each remaining open semantic target.
