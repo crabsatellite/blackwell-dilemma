@@ -1644,6 +1644,28 @@ def named_current_roster_missing_length_proofs(text: str) -> tuple[int, list[str
     return len(roster_names), missing
 
 
+def current_roster_theorem_axiom_audit_missing_prints(
+    text: str, axiom_audit_text: str
+) -> tuple[int, list[str]]:
+    theorem_names = sorted(
+        set(
+            re.findall(
+                r"\btheorem\s+([A-Za-z0-9_]+_(?:named|length)_current)\s*:",
+                text,
+                flags=re.DOTALL,
+            )
+        )
+    )
+    missing = [
+        f"BlackwellDilemma.PaperSemanticGate.{name}"
+        for name in theorem_names
+        if not has_axiom_audit_print(
+            axiom_audit_text, f"BlackwellDilemma.PaperSemanticGate.{name}"
+        )
+    ]
+    return len(theorem_names), missing
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -1707,6 +1729,10 @@ def main() -> int:
         named_current_roster_count,
         missing_named_current_roster_length_proofs,
     ) = named_current_roster_missing_length_proofs(text)
+    (
+        current_roster_axiom_audit_count,
+        missing_current_roster_axiom_audit_prints,
+    ) = current_roster_theorem_axiom_audit_missing_prints(text, axiom_audit_text)
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -1803,6 +1829,18 @@ def main() -> int:
     print(
         "semantic_target_named_current_roster_missing_length_proofs="
         + ",".join(missing_named_current_roster_length_proofs)
+    )
+    print(
+        "semantic_target_current_roster_axiom_audit_prints_checked="
+        f"{current_roster_axiom_audit_count}"
+    )
+    print(
+        "semantic_target_current_roster_axiom_audit_prints_missing="
+        f"{len(missing_current_roster_axiom_audit_prints)}"
+    )
+    print(
+        "semantic_target_current_roster_axiom_audit_prints_missing_decls="
+        + ",".join(missing_current_roster_axiom_audit_prints)
     )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
@@ -3656,6 +3694,11 @@ def main() -> int:
         failures.append(
             "named-current rosters missing length proofs: "
             + ",".join(missing_named_current_roster_length_proofs)
+        )
+    if missing_current_roster_axiom_audit_prints:
+        failures.append(
+            "current roster theorems missing AxiomAudit prints: "
+            + ",".join(missing_current_roster_axiom_audit_prints)
         )
     if kernel_surface_ids != open_ids:
         failures.append(

@@ -240,7 +240,9 @@ Current results:
 
 The paper semantic audit also checks that every `*_named_current` theorem has
 the matching `*_length_current` theorem in `PaperSemanticGate.lean`, so roster
-membership and roster length evidence cannot drift apart silently.
+membership and roster length evidence cannot drift apart silently. It also
+checks that every such roster-current theorem has an `AxiomAudit.lean`
+`#print axioms` entry.
 
 The current theorem surface is kernel-clean in the source-level sense:
 `#print axioms` output contains only Lean/Mathlib kernel axioms, and
