@@ -302,6 +302,9 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate",
     "OpenSemanticTargetClosureInputFieldRosterCertificate",
     "OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
+    "OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
+    "OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
     "CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
 )
 
@@ -811,6 +814,50 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_statement_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_semantic_kernel_target_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_full_output_bundle_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_bridge_route_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldOutputCertificate",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_full_route_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_boxed_route_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_route_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_support_surface_repair_output_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_paper_support_output_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_field_payload",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputSurface",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaces",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceIds",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargets",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceIds_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceCount_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargets_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_target",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_output",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_current_obstruction",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_field_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_output_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_output_statement_roster_certificate",
 }
 
 
@@ -2606,6 +2653,30 @@ def main() -> int:
     print(
         "semantic_target_closure_input_field_statement_roster_certificate_proof="
         "open_semantic_target_closure_input_field_statement_roster_certificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_certificate="
+        "RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_certificate_proof="
+        "remaining_open_semantic_targets_closure_input_field_output_certificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_roster_certificate="
+        "OpenSemanticTargetClosureInputFieldOutputRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_roster_certificate_proof="
+        "open_semantic_target_closure_input_field_output_roster_certificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_statement_roster_certificate="
+        "OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_statement_roster_certificate_proof="
+        "open_semantic_target_closure_input_field_output_statement_roster_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
