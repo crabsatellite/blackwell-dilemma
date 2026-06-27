@@ -16553,6 +16553,21 @@ theorem randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_suppo
       (randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_support_surface_closing_route
         bridge hroute)
 
+/-- The pointwise-on-giant repaired route also reaches the boxed-torus
+finite-`Z2_L` calibration layer directly, through the repaired
+support-surface closing spine. -/
+theorem randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_giant_pointwise_loss_route
+    (bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData)
+    (hroute :
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge) :
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  exact
+    randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_support_surface_closing_route
+      bridge
+      (randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_of_giant_pointwise_loss_route
+        bridge hroute)
+
 /-- The named full paper-closing route always contains an actual repaired
 random-supercritical bridge. -/
 theorem randomSupercriticalZ2TopoClusterFullPaperClosingRoute_repaired_bridge_nonempty :
@@ -18161,9 +18176,10 @@ theorem firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwi
 
 This route is the current theorem-level replacement obligation for the missing
 giant-restricted lower-bound field: any repaired bridge satisfying it closes
-the giant-loss field, the full repaired support surface, and the named full
-topo paper-closing route.  The finite first-edge compatibility witness is also
-kernel-refuted at exactly this route surface. -/
+the giant-loss field, the full repaired support surface, the repaired
+support-surface closing spine, the named full topo paper-closing route, and the
+boxed-torus finite-`Z2_L` calibration route.  The finite first-edge
+compatibility witness is also kernel-refuted at exactly this route surface. -/
 def RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate :
     Prop :=
   (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
@@ -18179,7 +18195,16 @@ def RandomSupercriticalZ2TopoClusterGiantPointwiseLossRouteCertificate :
     (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
       RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
         bridge ->
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge) /\
+    (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge ->
         RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge ->
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
     Not
       (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
         firstEdgeOpenGiantClosedTopoLossRepairedBridge_current)
@@ -18189,7 +18214,9 @@ theorem random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certific
   exact ⟨
     randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route,
     randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route,
+    randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_of_giant_pointwise_loss_route,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route,
+    randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_giant_pointwise_loss_route,
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route⟩
 
 /-- A family that is constantly the finite first-edge stochastic regression

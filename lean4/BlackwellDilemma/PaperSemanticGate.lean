@@ -1806,11 +1806,22 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
         bridge ->
         RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
           bridge
+  random_supercritical_z2_repaired_bridge_support_surface_closing_route_of_giant_pointwise_loss_route :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge ->
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge
   random_supercritical_z2_full_paper_closing_route_of_giant_pointwise_loss_route :
     ∀ bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
       RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
         bridge ->
         RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+  random_supercritical_z2_boxed_torus_finite_z2L_route_of_giant_pointwise_loss_route :
+    ∀ bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
+        bridge ->
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
   random_supercritical_z2_repaired_bridge_current_not_giant_pointwise_loss_route :
     Not
       (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantPointwiseLossRoute
@@ -2960,8 +2971,12 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route
   random_supercritical_z2_repaired_bridge_giant_pointwise_loss_route_to_full_support :=
     randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route
+  random_supercritical_z2_repaired_bridge_support_surface_closing_route_of_giant_pointwise_loss_route :=
+    randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_of_giant_pointwise_loss_route
   random_supercritical_z2_full_paper_closing_route_of_giant_pointwise_loss_route :=
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route
+  random_supercritical_z2_boxed_torus_finite_z2L_route_of_giant_pointwise_loss_route :=
+    randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_giant_pointwise_loss_route
   random_supercritical_z2_repaired_bridge_current_not_giant_pointwise_loss_route :=
     firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route
   random_supercritical_z2_giant_pointwise_loss_route_certificate :=

@@ -698,11 +698,15 @@ giant event; by
 `expectedTopoLossOnGiantOn_ge_mul_mass_of_pointwise_ge`,
 `randomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing_of_giant_pointwise_loss_route`,
 `randomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport_of_giant_pointwise_loss_route`,
+`randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_of_giant_pointwise_loss_route`,
 and
 `randomSupercriticalZ2TopoClusterFullPaperClosingRoute_of_giant_pointwise_loss_route`,
+and
+`randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_giant_pointwise_loss_route`,
 that floor plus the existing giant-event mass lower bound is enough for full
-topo paper-closing support. The current first-edge witness is blocked from
-that route by
+topo paper-closing support, the repaired support-surface closing spine, the
+named full route, and the boxed-torus finite `Z2_L` route. The current
+first-edge witness is blocked from that route by
 `firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_pointwise_loss_route`.
 The gate now generalizes this obstruction to every repaired bridge whose family
 is `firstEdgeOpenGiantClosedTopoLossFamily` at `p = 3/4`, via
@@ -769,8 +773,10 @@ envelope already at `n = 2`.
 It also packages
 `random_supercritical_z2_topo_cluster_giant_pointwise_loss_route_certificate`,
 which proves that a pointwise-on-giant repaired route would close the
-giant-loss field, the full repaired support surface, and the named full route,
-while the current first-edge witness cannot satisfy that route.
+giant-loss field, the full repaired support surface, the repaired
+support-surface closing spine, the named full route, and the boxed-torus
+finite `Z2_L` route, while the current first-edge witness cannot satisfy that
+route.
 The current support surface is now also globally calibrated by
 `random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate`
 and the individual obstructions
