@@ -271,6 +271,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurface_field_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputFieldCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_field_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_field_obstruction_certificate",
 }
 
 
@@ -885,6 +887,14 @@ def main() -> int:
     print(
         "semantic_target_closure_input_field_certificate_proof="
         "remaining_open_semantic_targets_closure_input_field_certificate"
+    )
+    print(
+        "semantic_target_closure_input_field_obstruction_certificate="
+        "RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_obstruction_certificate_proof="
+        "remaining_open_semantic_targets_closure_input_field_obstruction_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (

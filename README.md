@@ -137,7 +137,8 @@ surface.
 Those field payloads are now also listed in the typed
 `openSemanticTargetClosureInputFieldSurfaces` roster, with the same ids as the
 open semantic targets and with parser-checked payload proofs, current
-payload obstructions, and certificate proofs.
+payload obstructions, certificate proofs, and a cross-target field-obstruction
+certificate.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and

@@ -1097,7 +1097,9 @@ For full kernel-pure cover (v2.0 future iteration):
   `openSemanticTargetClosureInputFieldSurfaces` lists the same field payloads
   and field certificates with ids checked against the open semantic-target
   roster by both Lean theorems and the semantic audit script, and carries the
-  current field-payload obstructions.
+  current field-payload obstructions. The cross-target
+  `remaining_open_semantic_targets_closure_input_field_obstruction_certificate`
+  gates those obstructions as a single remaining-open certificate.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,

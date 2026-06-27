@@ -5058,6 +5058,30 @@ theorem remaining_open_semantic_targets_closure_input_field_certificate :
   · exact topo_cluster_random_supercritical_z2_closure_input_field_certificate
   exact remaining_open_semantic_targets_closure_input_output_certificate
 
+/-- Single build-gated obstruction certificate for the field-level payloads of
+the two remaining open paper-semantic targets. -/
+def RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate : Prop :=
+  (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
+      Not surface.fieldPayload) /\
+    Not Part6LatticeEmbeddingClosureInputFieldPayload /\
+    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload /\
+    RemainingOpenSemanticTargetsClosureInputFieldCertificate
+
+/-- The remaining open field payloads are explicitly blocked by current
+kernel-checked obstructions, not by an informal external note. -/
+theorem remaining_open_semantic_targets_closure_input_field_obstruction_certificate :
+    RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate := by
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldSurface_field_payload_current_obstruction
+        surface
+  constructor
+  · exact part6_lattice_embedding_field_payload_notYet
+  constructor
+  · exact topo_cluster_random_supercritical_z2_field_payload_notYet
+  exact remaining_open_semantic_targets_closure_input_field_certificate
+
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
 `PaperSemanticGate.lean` only builds if the public `gap_two_regime_*` aliases
