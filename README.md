@@ -189,6 +189,9 @@ itself, anchored back to the kernel roster certificate.
 the kernel and payload target/route/closure obstruction lists to the named
 Part 6 and topo propositions, rather than only checking that the two lists
 match each other.
+`open_semantic_target_named_frontier_certificate_roster_certificate` likewise
+pins the payload, route, closure, progress, nonclosure, and current-frontier
+certificate rosters to the named Part 6/topo certificates on both surfaces.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,

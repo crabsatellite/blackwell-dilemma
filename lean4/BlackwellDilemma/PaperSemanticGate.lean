@@ -3863,6 +3863,11 @@ def openSemanticTargetFrontierPayloadSurfaces :
 def openSemanticTargetFrontierPayloadSurfaceIds : List String :=
   openSemanticTargetFrontierPayloadSurfaces.map (fun surface => surface.id)
 
+/-- Payload-surface view of the full typed frontier payload certificates. -/
+def openSemanticTargetFrontierPayloadSurfacePayloadCertificates : List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.payloadCertificate)
+
 /-- Build gate: the typed-frontier-payload roster has exactly the same ids as
 the semantic ledger's open target roster. -/
 theorem openSemanticTargetFrontierPayloadSurfaceIds_current :
@@ -3872,6 +3877,14 @@ theorem openSemanticTargetFrontierPayloadSurfaceIds_current :
 the semantic ledger's open target count. -/
 theorem openSemanticTargetFrontierPayloadSurfaceCount_current :
     openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload surface roster names the exact full typed frontier
+payload certificates for the two remaining semantic targets. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates_named_current :
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates =
+      [Part6LatticeEmbeddingFrontierPayloadCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate] := rfl
 
 /-- Build gate: the kernel-surface and typed-frontier-payload rosters cannot
 drift independently. -/
@@ -4281,6 +4294,24 @@ theorem openSemanticTargetFrontierPayloadSurfaceTargetRoutes_named_current :
       [Part6NondegenerateFeasibleRepairRoute,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] := rfl
 
+/-- Build gate: the kernel-surface target-route certificate roster is exactly
+the named route-certificate propositions. -/
+theorem
+    openSemanticTargetKernelSurfaceTargetRouteCertificates_named_current :
+    openSemanticTargetKernelSurfaceTargetRouteCertificates =
+      [Part6NondegenerateFeasibleRepairRouteCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate] :=
+  rfl
+
+/-- Build gate: the payload-surface target-route certificate roster is exactly
+the named route-certificate propositions. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates_named_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates =
+      [Part6NondegenerateFeasibleRepairRouteCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate] :=
+  rfl
+
 /-- Build gate: the kernel-surface target-route obstruction roster is exactly
 the named current route-obstruction propositions. -/
 theorem openSemanticTargetKernelSurfaceTargetRouteObstructions_named_current :
@@ -4310,6 +4341,24 @@ theorem openSemanticTargetFrontierPayloadSurfaceClosureRoutes_named_current :
       [Part6FullPaperClosingSupport,
        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] := rfl
 
+/-- Build gate: the kernel-surface closure-route certificate roster is exactly
+the named closure-certificate propositions. -/
+theorem
+    openSemanticTargetKernelSurfaceClosureRouteCertificates_named_current :
+    openSemanticTargetKernelSurfaceClosureRouteCertificates =
+      [Part6FullPaperClosingOutputLayerCertificate,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate] :=
+  rfl
+
+/-- Build gate: the payload-surface closure-route certificate roster is exactly
+the named closure-certificate propositions. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates_named_current :
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates =
+      [Part6FullPaperClosingOutputLayerCertificate,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate] :=
+  rfl
+
 /-- Build gate: the kernel-surface closure-route obstruction roster is exactly
 the named current closure-route obstruction propositions. -/
 theorem openSemanticTargetKernelSurfaceClosureRouteObstructions_named_current :
@@ -4326,6 +4375,58 @@ theorem
       [Not Part6FullPaperClosingSupport,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] :=
   rfl
+
+/-- Build gate: the kernel-surface frontier-progress certificate roster is
+exactly the named active progress certificates. -/
+theorem
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates_named_current :
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate] :=
+  rfl
+
+/-- Build gate: the payload-surface frontier-progress certificate roster is
+exactly the named active progress certificates. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfaceProgressCertificates_named_current :
+    openSemanticTargetFrontierPayloadSurfaceProgressCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate] :=
+  rfl
+
+/-- Build gate: the kernel-surface frontier-nonclosure certificate roster is
+exactly the named active nonclosure certificates. -/
+theorem
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates_named_current :
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate] :=
+  rfl
+
+/-- Build gate: the payload-surface frontier-nonclosure certificate roster is
+exactly the named active nonclosure certificates. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_named_current :
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate] :=
+  rfl
+
+/-- Build gate: the kernel-surface current-frontier certificate roster is
+exactly the named complete frontier certificates. -/
+theorem
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates_named_current :
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+      [Part6CurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
+
+/-- Build gate: the payload-surface current-frontier certificate roster is
+exactly the named complete frontier certificates. -/
+theorem
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates_named_current :
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates =
+      [Part6CurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
 
 /-- One certificate tying the semantic ledger, kernel surface roster, and full
 typed frontier-payload roster to the same remaining open targets. -/
@@ -7939,6 +8040,132 @@ theorem open_semantic_target_named_route_obstruction_roster_certificate :
   · exact open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
   exact open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
 
+/-- Build-gated named certificate roster for the two remaining open semantic
+targets. This pins the payload, route, closure, progress, nonclosure, and
+current-frontier certificate lists to the named Part 6/topo propositions. -/
+def OpenSemanticTargetNamedFrontierCertificateRosterCertificate : Prop :=
+  openSemanticTargetFrontierPayloadSurfacePayloadCertificates =
+    [Part6LatticeEmbeddingFrontierPayloadCertificate,
+     TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate] /\
+    openSemanticTargetKernelSurfaceTargetRouteCertificates =
+      [Part6NondegenerateFeasibleRepairRouteCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate] /\
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates =
+      [Part6NondegenerateFeasibleRepairRouteCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate] /\
+    openSemanticTargetKernelSurfaceClosureRouteCertificates =
+      [Part6FullPaperClosingOutputLayerCertificate,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate] /\
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates =
+      [Part6FullPaperClosingOutputLayerCertificate,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate] /\
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate] /\
+    openSemanticTargetFrontierPayloadSurfaceProgressCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate] /\
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate] /\
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate] /\
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+      [Part6CurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates =
+      [Part6CurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
+    (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
+      surface.payloadCertificate) /\
+    (∀ surface ∈ openSemanticTargetKernelSurfaces,
+      surface.targetRouteCertificate) /\
+    (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
+      surface.targetRouteCertificate) /\
+    (∀ surface ∈ openSemanticTargetKernelSurfaces,
+      surface.closureRouteCertificate) /\
+    (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
+      surface.closureRouteCertificate) /\
+    (∀ surface ∈ openSemanticTargetKernelSurfaces,
+      surface.frontierProgressCertificate) /\
+    (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
+      surface.frontierProgressCertificate) /\
+    (∀ surface ∈ openSemanticTargetKernelSurfaces,
+      surface.frontierNonclosureCertificate) /\
+    (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
+      surface.frontierNonclosureCertificate) /\
+    (∀ surface ∈ openSemanticTargetKernelSurfaces,
+      surface.frontierCertificate) /\
+    (∀ surface ∈ openSemanticTargetFrontierPayloadSurfaces,
+      surface.frontierCertificate) /\
+    RemainingOpenSemanticTargetsFrontierCertificate /\
+    OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
+    OpenSemanticTargetNamedRouteObstructionRosterCertificate
+
+/-- The frontier certificate rosters are pinned to the named Part 6/topo
+certificate propositions on both the kernel surface and typed payload surface. -/
+theorem open_semantic_target_named_frontier_certificate_roster_certificate :
+    OpenSemanticTargetNamedFrontierCertificateRosterCertificate := by
+  exact ⟨
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates_named_current,
+    openSemanticTargetKernelSurfaceTargetRouteCertificates_named_current,
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates_named_current,
+    openSemanticTargetKernelSurfaceClosureRouteCertificates_named_current,
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates_named_current,
+    openSemanticTargetKernelSurfaceFrontierProgressCertificates_named_current,
+    openSemanticTargetFrontierPayloadSurfaceProgressCertificates_named_current,
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates_named_current,
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_named_current,
+    openSemanticTargetKernelSurfaceCurrentFrontierCertificates_named_current,
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates_named_current,
+    (by
+      intro surface _
+      exact openSemanticTargetFrontierPayloadSurface_certificate surface),
+    (by
+      intro surface _
+      exact openSemanticTargetKernelSurface_target_route_certificate surface),
+    (by
+      intro surface _
+      exact openSemanticTargetFrontierPayloadSurface_target_route_certificate
+        surface),
+    (by
+      intro surface _
+      exact openSemanticTargetKernelSurface_closure_route_certificate surface),
+    (by
+      intro surface _
+      exact openSemanticTargetFrontierPayloadSurface_closure_route_certificate
+        surface),
+    (by
+      intro surface _
+      exact openSemanticTargetKernelSurface_frontier_progress_certificate
+        surface),
+    (by
+      intro surface _
+      exact openSemanticTargetFrontierPayloadSurface_frontier_progress_certificate
+        surface),
+    (by
+      intro surface _
+      exact openSemanticTargetKernelSurface_frontier_nonclosure_certificate
+        surface),
+    (by
+      intro surface _
+      exact
+        openSemanticTargetFrontierPayloadSurface_frontier_nonclosure_certificate
+          surface),
+    (by
+      intro surface _
+      exact openSemanticTargetKernelSurface_frontier_certificate surface),
+    (by
+      intro surface _
+      exact openSemanticTargetFrontierPayloadSurface_frontier_certificate
+        surface),
+    remaining_open_semantic_targets_frontier_certificate,
+    open_semantic_target_surface_roster_consistency_certificate,
+    remaining_open_semantic_targets_payload_route_map_certificate,
+    open_semantic_target_named_route_obstruction_roster_certificate⟩
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -8608,6 +8835,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetNamedRouteObstructionRosterCertificate /\
+    OpenSemanticTargetNamedFrontierCertificateRosterCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
@@ -8662,6 +8890,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
       open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
   constructor
   · exact open_semantic_target_named_route_obstruction_roster_certificate
+  constructor
+  · exact
+      open_semantic_target_named_frontier_certificate_roster_certificate
   constructor
   · exact part6_remaining_conditional_projection_certificate
   constructor
