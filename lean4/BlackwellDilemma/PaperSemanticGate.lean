@@ -8800,6 +8800,12 @@ theorem part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current 
        Not Part6LatticeEmbeddingExactClosureInput,
        Not Part6FullPaperClosingFullOutputBundle] := rfl
 
+/-- Build gate: the Part 6 route-obstruction projection statement roster has
+exactly the 12 projection, equivalence, and current-obstruction formulas listed
+above. -/
+theorem part6LatticeEmbeddingRouteObstructionProjectionStatements_length_current :
+    part6LatticeEmbeddingRouteObstructionProjectionStatements.length = 12 := rfl
+
 /-- Build-gated statement roster for the Part 6 route-obstruction projection. -/
 def Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate :
     Prop :=
@@ -8823,6 +8829,7 @@ def Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate :
      Not Part6FullPaperClosingSupport,
      Not Part6LatticeEmbeddingExactClosureInput,
      Not Part6FullPaperClosingFullOutputBundle] /\
+    part6LatticeEmbeddingRouteObstructionProjectionStatements.length = 12 /\
     (Not Part6NondegenerateFeasibleRepairRoute ->
       Not Part6LatticeEmbeddingExactClosureInput) /\
     (Not Part6FullPaperClosingSupport ->
@@ -8851,6 +8858,7 @@ theorem
     Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate := by
   exact ⟨
     part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current,
+    part6LatticeEmbeddingRouteObstructionProjectionStatements_length_current,
     part6_lattice_embedding_exact_closure_input_not_of_repair_route_not,
     part6_lattice_embedding_exact_closure_input_not_of_full_support_not,
     part6_lattice_embedding_full_output_bundle_not_of_repair_route_not,

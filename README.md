@@ -172,8 +172,8 @@ and full output bundle, and those route refutations are equivalent to the Part 6
 target obstruction.
 `part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate`
 pins those route refutation projections, route-obstruction equivalences, and
-current Part 6 route/input/output obstructions in one build-gated statement
-list.
+current Part 6 route/input/output obstructions in one build-gated 12-term
+statement list.
 `topo_cluster_random_supercritical_z2_exact_output_projection_certificate`
 similarly projects the topo exact input and same-bridge output bundle to the
 full route, boxed finite-lattice route, support-surface repair route/output,
@@ -351,7 +351,7 @@ target/exact/output obstruction-equivalence proofs, joint closure-reduction
 packages and package obstructions, joint route-obstruction packages, statement
 rosters, and package obstructions, bilateral package obstruction statement
 rosters, Part 6 conditional witness interface projections, 11-term statement
-roster, and obstructions, Part 6 route-obstruction projections and statement roster,
+roster, and obstructions, Part 6 route-obstruction projections and 12-term statement roster,
 Part 6 field-output statement roster, topo
 exact-output projections, statement roster, route nonclosure boundary, and
 field-output statement roster, combined detailed field-output roster package,

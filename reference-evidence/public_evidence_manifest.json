@@ -601,6 +601,8 @@
             "semantic_target_part6_route_obstruction_projection_certificate=Part6LatticeEmbeddingRouteObstructionProjectionCertificate",
             "semantic_target_part6_route_obstruction_projection_certificate_proof=part6_lattice_embedding_route_obstruction_projection_certificate",
             "semantic_target_part6_route_obstruction_projection_statement_roster_proof=part6LatticeEmbeddingRouteObstructionProjectionStatements_named_current",
+            "semantic_target_part6_route_obstruction_projection_statement_roster_terms_checked=12",
+            "semantic_target_part6_route_obstruction_projection_statement_roster_length_proof=part6LatticeEmbeddingRouteObstructionProjectionStatements_length_current",
             "semantic_target_part6_route_obstruction_projection_statement_roster_certificate=Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate",
             "semantic_target_part6_route_obstruction_projection_statement_roster_certificate_proof=part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate",
             "semantic_target_topo_exact_output_projection_exact_input_proofs=topo_cluster_random_supercritical_z2_full_route_of_exact_closure_input,topo_cluster_random_supercritical_z2_boxed_route_of_exact_closure_input,topo_cluster_random_supercritical_z2_support_surface_repair_route_of_exact_closure_input,topo_cluster_random_supercritical_z2_support_surface_repair_output_of_exact_closure_input,topo_cluster_random_supercritical_z2_paper_support_output_of_exact_closure_input,topo_cluster_random_supercritical_z2_giant_loss_output_of_exact_closure_input",
@@ -672,9 +674,9 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=694",
+            "semantic_target_axiom_audit_prints_required=695",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=694",
+            "semantic_target_readme_axiom_audit_prints_required=695",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },
