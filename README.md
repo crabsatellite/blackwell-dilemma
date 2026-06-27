@@ -215,6 +215,10 @@ The top-level
 `completePaperSemanticKernelOnly_current_obstruction_certificate` also gates
 the current non-complete claim against `open=2`, the exact remaining target ids,
 and the frontier/exact-input/output/field-obstruction certificates.
+`open_semantic_target_closure_input_named_roster_certificate` now pins the
+named sufficient closure-input roster itself, including target/input/current
+obstruction/certificate propositions and the target-obstruction to
+sufficient-input-obstruction projection.
 The unbounded local bridge contract now also requires near-`p_c` feasible-set
 nonemptiness and gates a single paper-support certificate tying that
 nonemptiness to the `Z²` graph, scaling divergence, local domination, and

@@ -4673,6 +4673,25 @@ def openSemanticTargetClosureInputSurfaces :
 def openSemanticTargetClosureInputSurfaceIds : List String :=
   openSemanticTargetClosureInputSurfaces.map (fun surface => surface.id)
 
+def openSemanticTargetClosureInputSurfaceTargets : List Prop :=
+  openSemanticTargetClosureInputSurfaces.map (fun surface => surface.target)
+
+def openSemanticTargetClosureInputSurfaceClosureInputs : List Prop :=
+  openSemanticTargetClosureInputSurfaces.map
+    (fun surface => surface.closureInput)
+
+def openSemanticTargetClosureInputSurfaceInputObstructions : List Prop :=
+  openSemanticTargetClosureInputSurfaces.map
+    (fun surface => Not surface.closureInput)
+
+def openSemanticTargetClosureInputSurfaceTargetObstructions : List Prop :=
+  openSemanticTargetClosureInputSurfaces.map
+    (fun surface => Not surface.target)
+
+def openSemanticTargetClosureInputSurfaceInputCertificates : List Prop :=
+  openSemanticTargetClosureInputSurfaces.map
+    (fun surface => surface.inputCertificate)
+
 /-- Build gate: the sufficient-input roster has the same ids as the semantic
 ledger's open target list. -/
 theorem openSemanticTargetClosureInputSurfaceIds_current :
@@ -4683,11 +4702,55 @@ semantic ledger's open target count. -/
 theorem openSemanticTargetClosureInputSurfaceCount_current :
     openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount := rfl
 
+/-- Build gate: the sufficient-input roster names the exact open target
+propositions. -/
+theorem openSemanticTargetClosureInputSurfaceTargets_named_current :
+    openSemanticTargetClosureInputSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the sufficient-input roster names the exact sufficient closure
+inputs for the two remaining open targets. -/
+theorem openSemanticTargetClosureInputSurfaceClosureInputs_named_current :
+    openSemanticTargetClosureInputSurfaceClosureInputs =
+      [Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput] := rfl
+
+/-- Build gate: the sufficient-input roster names the exact input obstruction
+propositions. -/
+theorem openSemanticTargetClosureInputSurfaceInputObstructions_named_current :
+    openSemanticTargetClosureInputSurfaceInputObstructions =
+      [Not Part6LatticeEmbeddingClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput] := rfl
+
+/-- Build gate: the sufficient-input roster names the exact target obstruction
+propositions. -/
+theorem openSemanticTargetClosureInputSurfaceTargetObstructions_named_current :
+    openSemanticTargetClosureInputSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the sufficient-input roster names the exact input
+certificates. -/
+theorem openSemanticTargetClosureInputSurfaceInputCertificates_named_current :
+    openSemanticTargetClosureInputSurfaceInputCertificates =
+      [Part6LatticeEmbeddingClosureInputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputCertificate] := rfl
+
 /-- Every sufficient-input surface carries a kernel proof from input to target. -/
 theorem openSemanticTargetClosureInputSurface_input_to_target
     (surface : OpenSemanticTargetClosureInputSurface) :
     surface.closureInput -> surface.target :=
   surface.inputToTarget
+
+/-- Target obstruction always refutes the sufficient closure input on the same
+surface. -/
+theorem openSemanticTargetClosureInputSurface_input_not_of_target_not
+    (surface : OpenSemanticTargetClosureInputSurface) :
+    Not surface.target -> Not surface.closureInput := by
+  intro htarget hinput
+  exact htarget
+    (openSemanticTargetClosureInputSurface_input_to_target surface hinput)
 
 /-- Every sufficient-input surface also records the current input obstruction. -/
 theorem openSemanticTargetClosureInputSurface_input_current_obstruction
@@ -4742,6 +4805,67 @@ theorem remaining_open_semantic_targets_closure_input_certificate :
   constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_notYet
   exact topo_cluster_random_supercritical_z2_closure_input_certificate
+
+/-- Build-gated named sufficient-input roster for the two remaining open
+semantic targets.  This pins each target, sufficient input, input obstruction,
+target obstruction, and input certificate to the named Part 6/topo
+propositions. -/
+def OpenSemanticTargetClosureInputNamedRosterCertificate : Prop :=
+  openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetClosureInputSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetClosureInputSurfaceClosureInputs =
+      [Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    openSemanticTargetClosureInputSurfaceInputObstructions =
+      [Not Part6LatticeEmbeddingClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    openSemanticTargetClosureInputSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    openSemanticTargetClosureInputSurfaceInputCertificates =
+      [Part6LatticeEmbeddingClosureInputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputCertificate] /\
+    (∀ surface ∈ openSemanticTargetClosureInputSurfaces,
+      surface.closureInput -> surface.target) /\
+    (∀ surface ∈ openSemanticTargetClosureInputSurfaces,
+      Not surface.target -> Not surface.closureInput) /\
+    (∀ surface ∈ openSemanticTargetClosureInputSurfaces,
+      Not surface.closureInput) /\
+    RemainingOpenSemanticTargetsClosureInputCertificate
+
+/-- The sufficient closure-input roster is pinned to named Part 6/topo
+propositions, and each target obstruction kernel-projects to the corresponding
+sufficient-input obstruction. -/
+theorem open_semantic_target_closure_input_named_roster_certificate :
+    OpenSemanticTargetClosureInputNamedRosterCertificate := by
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceIds_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceCount_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceTargets_named_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceClosureInputs_named_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceInputObstructions_named_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceTargetObstructions_named_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceInputCertificates_named_current
+  constructor
+  · intro surface _
+    exact openSemanticTargetClosureInputSurface_input_to_target surface
+  constructor
+  · intro surface _
+    exact openSemanticTargetClosureInputSurface_input_not_of_target_not surface
+  constructor
+  · intro surface _
+    exact openSemanticTargetClosureInputSurface_input_current_obstruction
+      surface
+  exact remaining_open_semantic_targets_closure_input_certificate
 
 /-- Exact closure input for the open Part 6 semantic target.  This is the
 minimal paper-facing full-support surface, not the stronger tail-reversal
@@ -7798,6 +7922,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
       ["theorem_4_1_part6_lattice_embedding",
        "topo_cluster_random_supercritical_z2"] /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
+    OpenSemanticTargetClosureInputNamedRosterCertificate /\
     RemainingOpenSemanticTargetsExactClosureInputCertificate /\
     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
@@ -7828,6 +7953,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact openSemanticTargetIds_current
   constructor
   · exact remaining_open_semantic_targets_frontier_certificate
+  constructor
+  · exact open_semantic_target_closure_input_named_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_exact_closure_input_certificate
   constructor
