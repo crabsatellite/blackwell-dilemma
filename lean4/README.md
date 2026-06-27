@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/obstructions synced | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/closure routes/obstructions/frontier certificates synced; AxiomAudit prints required=16 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -253,12 +253,14 @@ The two remaining open semantic targets are also named as Lean propositions:
 theorems gate the current kernel refutations while the target count remains
 open=2.
 `openSemanticTargetKernelSurfaces` ties the two open ledger ids to those Lean
-propositions and their current obstruction proofs, with id/count theorems
-checking that the roster matches `openSemanticTargetIds`. Each roster entry
-also carries the full current frontier certificate for that target, and
-`audit_paper_semantic_gate.py` checks the target, obstruction, certificate, and
-proof names. `remaining_open_semantic_targets_frontier_certificate` collects
-these gates into one Lean theorem.
+propositions, their paper-facing closure routes, and their current obstruction
+proofs, with id/count theorems checking that the roster matches
+`openSemanticTargetIds`. Each roster entry also carries the full current
+frontier certificate for that target, and `audit_paper_semantic_gate.py` checks
+the target, closure route, closure-route proof, obstruction, certificate, proof,
+and AxiomAudit print names. `remaining_open_semantic_targets_frontier_certificate`
+collects these gates into one Lean theorem, including current refutations of
+the exact closure routes.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and
