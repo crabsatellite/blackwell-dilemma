@@ -11771,6 +11771,62 @@ theorem completePaperSemanticKernelOnly_notYet :
   intro hcomplete
   exact (by decide : paperSemanticOpenCount ≠ 0) hcomplete
 
+/-- Single build-gated package that every open-target surface roster uses the
+current open semantic target ids and count. -/
+def OpenSemanticTargetAllSurfaceIdsCountCertificate : Prop :=
+  openSemanticTargetKernelSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetExactClosureInputSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetExactClosureInputOutputSurfaces.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetObstructionEquivalenceSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetObstructionEquivalenceSurfaces.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetOutputEquivalenceSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetClosureInputFieldOutputSurfaceIds =
+      openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputSurfaces.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount
+
+/-- Every open-target surface roster and detailed field-output statement roster
+is synchronized to the current open semantic target ids/count. -/
+theorem open_semantic_target_all_surface_ids_count_certificate :
+    OpenSemanticTargetAllSurfaceIdsCountCertificate := by
+  exact ⟨
+    openSemanticTargetKernelSurfaceIds_current,
+    openSemanticTargetKernelSurfaceCount_current,
+    openSemanticTargetFrontierPayloadSurfaceIds_current,
+    openSemanticTargetFrontierPayloadSurfaceCount_current,
+    openSemanticTargetClosureInputSurfaceIds_current,
+    openSemanticTargetClosureInputSurfaceCount_current,
+    openSemanticTargetExactClosureInputSurfaceIds_current,
+    openSemanticTargetExactClosureInputSurfaceCount_current,
+    openSemanticTargetExactClosureInputOutputSurfaceIds_current,
+    openSemanticTargetExactClosureInputOutputSurfaceCount_current,
+    openSemanticTargetObstructionEquivalenceSurfaceIds_current,
+    openSemanticTargetObstructionEquivalenceSurfaceCount_current,
+    openSemanticTargetOutputEquivalenceSurfaceIds_current,
+    openSemanticTargetOutputEquivalenceSurfaceCount_current,
+    openSemanticTargetClosureInputFieldSurfaceIds_current,
+    openSemanticTargetClosureInputFieldSurfaceCount_current,
+    openSemanticTargetClosureInputFieldOutputSurfaceIds_current,
+    openSemanticTargetClosureInputFieldOutputSurfaceCount_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current⟩
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open-target count/id gates, and subordinate certificate propositions that the
@@ -11783,6 +11839,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
        "topo_cluster_random_supercritical_z2"],
    RemainingOpenSemanticTargetsFrontierCertificate,
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+   OpenSemanticTargetAllSurfaceIdsCountCertificate,
    RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
    OpenSemanticTargetClosureInputNamedRosterCertificate,
    OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -11846,6 +11903,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
            "topo_cluster_random_supercritical_z2"],
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+       OpenSemanticTargetAllSurfaceIdsCountCertificate,
        RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
        OpenSemanticTargetClosureInputNamedRosterCertificate,
        OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -11912,6 +11970,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
          "topo_cluster_random_supercritical_z2"],
      RemainingOpenSemanticTargetsFrontierCertificate,
      OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+     OpenSemanticTargetAllSurfaceIdsCountCertificate,
      RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
      OpenSemanticTargetClosureInputNamedRosterCertificate,
      OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -11970,6 +12029,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
        "topo_cluster_random_supercritical_z2"] /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    OpenSemanticTargetAllSurfaceIdsCountCertificate /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
@@ -12034,6 +12094,7 @@ theorem
     openSemanticTargetIds_current,
     remaining_open_semantic_targets_frontier_certificate,
     open_semantic_target_surface_roster_consistency_certificate,
+    open_semantic_target_all_surface_ids_count_certificate,
     remaining_open_semantic_targets_payload_route_map_certificate,
     open_semantic_target_closure_input_named_roster_certificate,
     open_semantic_target_closure_input_statement_roster_certificate,
@@ -12094,6 +12155,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
        "topo_cluster_random_supercritical_z2"] /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    OpenSemanticTargetAllSurfaceIdsCountCertificate /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
@@ -12162,6 +12224,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_frontier_certificate
   constructor
   · exact open_semantic_target_surface_roster_consistency_certificate
+  constructor
+  · exact open_semantic_target_all_surface_ids_count_certificate
   constructor
   · exact remaining_open_semantic_targets_payload_route_map_certificate
   constructor
