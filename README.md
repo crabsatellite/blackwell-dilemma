@@ -244,6 +244,10 @@ certificate.
 pins the named Part 6/topo closure-input, field-payload, payload-obstruction,
 and field-certificate rosters, and proves field-payload obstruction equivalent
 to sufficient-input obstruction for each field surface.
+`open_semantic_target_closure_input_field_statement_roster_certificate` pins
+the closure-input-to-field-payload, field-payload-to-closure-input,
+payload/input equivalence, and payload/input obstruction-equivalence formulas
+to the named Part 6/topo statement lists.
 The top-level
 `completePaperSemanticKernelOnly_current_obstruction_certificate` also gates
 the current non-complete claim against `open=2`, the exact remaining target ids,
@@ -321,7 +325,7 @@ and obstructions, Part 6 route-obstruction projections and statement roster, top
 exact-output projections, statement roster, and route nonclosure boundary, topo route-obstruction
 projections and statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
-payload/certificate consistency,
+payload/certificate consistency, field statement roster,
 surface-roster consistency, and AxiomAudit coverage. The public
 verification command set includes the same Lean build, PaperSemanticGate build,
 AxiomAudit build, and source-level audit scripts listed above.

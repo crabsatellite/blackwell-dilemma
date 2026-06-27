@@ -747,6 +747,16 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_field_obstruction_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_statement_roster_certificate",
 }
 
 
@@ -2382,6 +2392,21 @@ def main() -> int:
     print(
         "semantic_target_closure_input_field_roster_certificate_proof="
         "open_semantic_target_closure_input_field_roster_certificate"
+    )
+    print(
+        "semantic_target_closure_input_field_statement_roster_proofs="
+        "openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_named_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current,"
+        "openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current"
+    )
+    print(
+        "semantic_target_closure_input_field_statement_roster_certificate="
+        "OpenSemanticTargetClosureInputFieldStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_statement_roster_certificate_proof="
+        "open_semantic_target_closure_input_field_statement_roster_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (

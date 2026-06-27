@@ -10235,6 +10235,26 @@ def openSemanticTargetClosureInputFieldSurfaceFieldCertificates : List Prop :=
   openSemanticTargetClosureInputFieldSurfaces.map
     (fun surface => surface.fieldCertificate)
 
+def openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldSurfaces.map
+    (fun surface => surface.closureInput -> surface.fieldPayload)
+
+def openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldSurfaces.map
+    (fun surface => surface.fieldPayload -> surface.closureInput)
+
+def openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldSurfaces.map
+    (fun surface => surface.fieldPayload ↔ surface.closureInput)
+
+def openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldSurfaces.map
+    (fun surface => Not surface.fieldPayload ↔ Not surface.closureInput)
+
 /-- Build gate: the field-level sufficient-input roster has the same ids as the
 semantic ledger's open target list. -/
 theorem openSemanticTargetClosureInputFieldSurfaceIds_current :
@@ -10275,6 +10295,46 @@ theorem openSemanticTargetClosureInputFieldSurfaceFieldCertificates_named_curren
     openSemanticTargetClosureInputFieldSurfaceFieldCertificates =
       [Part6LatticeEmbeddingClosureInputFieldCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate] := rfl
+
+/-- Build gate: the field-level roster names the exact closure-input to
+field-payload statements for the two remaining semantic targets. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_named_current :
+    openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements =
+      [Part6LatticeEmbeddingClosureInput ->
+        Part6LatticeEmbeddingClosureInputFieldPayload,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] := rfl
+
+/-- Build gate: the field-level roster names the exact field-payload to
+closure-input statements for the two remaining semantic targets. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2ClosureInput] := rfl
+
+/-- Build gate: the field-level roster names the exact payload/input equivalence
+statements for the two remaining semantic targets. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ↔
+        Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
+        TopoClusterRandomSupercriticalZ2ClosureInput] := rfl
+
+/-- Build gate: the field-level roster names the exact payload/input obstruction
+equivalence statements for the two remaining semantic targets. -/
+theorem
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current :
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements =
+      [Not Part6LatticeEmbeddingClosureInputFieldPayload ↔
+        Not Part6LatticeEmbeddingClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
+        Not TopoClusterRandomSupercriticalZ2ClosureInput] := rfl
 
 /-- Every field-level sufficient-input surface carries a kernel proof from its
 input to the field payload. -/
@@ -10432,6 +10492,69 @@ theorem open_semantic_target_closure_input_field_roster_certificate :
       openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input
         surface
   exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate
+
+/-- Build-gated statement roster for the field-level sufficient-input surface.
+This pins the field payload projections, payload/input equivalence, and
+payload/input obstruction equivalence to named Part 6/topo formulas. -/
+def OpenSemanticTargetClosureInputFieldStatementRosterCertificate : Prop :=
+  openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements =
+    [Part6LatticeEmbeddingClosureInput ->
+      Part6LatticeEmbeddingClosureInputFieldPayload,
+     TopoClusterRandomSupercriticalZ2ClosureInput ->
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ↔
+        Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
+        TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements =
+      [Not Part6LatticeEmbeddingClosureInputFieldPayload ↔
+        Not Part6LatticeEmbeddingClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ↔
+        Not TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
+      surface.closureInput -> surface.fieldPayload) /\
+    (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
+      surface.fieldPayload -> surface.closureInput) /\
+    (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
+      surface.fieldPayload ↔ surface.closureInput) /\
+    (∀ surface ∈ openSemanticTargetClosureInputFieldSurfaces,
+      Not surface.fieldPayload ↔ Not surface.closureInput) /\
+    OpenSemanticTargetClosureInputFieldRosterCertificate
+
+/-- The field-level statement roster is pinned to named Part 6/topo formulas,
+including payload/input equivalence and obstruction equivalence. -/
+theorem open_semantic_target_closure_input_field_statement_roster_certificate :
+    OpenSemanticTargetClosureInputFieldStatementRosterCertificate := by
+  exact ⟨
+    openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_named_current,
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current,
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current,
+    openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current,
+    (by
+      intro surface _
+      exact openSemanticTargetClosureInputFieldSurface_field_payload surface),
+    (by
+      intro surface _
+      exact
+        openSemanticTargetClosureInputFieldSurface_field_payload_to_closure_input
+          surface),
+    (by
+      intro surface _
+      exact
+        openSemanticTargetClosureInputFieldSurface_field_payload_iff_closure_input
+          surface),
+    (by
+      intro surface _
+      exact
+        openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input
+          surface),
+    open_semantic_target_closure_input_field_roster_certificate⟩
 
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
@@ -10599,7 +10722,8 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate /\
-    OpenSemanticTargetClosureInputFieldRosterCertificate
+    OpenSemanticTargetClosureInputFieldRosterCertificate /\
+    OpenSemanticTargetClosureInputFieldStatementRosterCertificate
 
 /-- The current paper-semantic kernel-only obstruction is machine checked all
 the way down to the remaining open target frontier and field-obstruction
@@ -10697,7 +10821,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact open_semantic_target_output_equivalence_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate
-  exact open_semantic_target_closure_input_field_roster_certificate
+  constructor
+  · exact open_semantic_target_closure_input_field_roster_certificate
+  exact open_semantic_target_closure_input_field_statement_roster_certificate
 
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 

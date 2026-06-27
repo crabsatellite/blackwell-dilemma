@@ -564,7 +564,10 @@
             "semantic_target_closure_input_field_not_iff_proof=openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input",
             "semantic_target_closure_input_field_roster_certificate=OpenSemanticTargetClosureInputFieldRosterCertificate",
             "semantic_target_closure_input_field_roster_certificate_proof=open_semantic_target_closure_input_field_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=545"
+            "semantic_target_closure_input_field_statement_roster_proofs=openSemanticTargetClosureInputFieldSurfaceClosureInputToFieldPayloadStatements_named_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadToClosureInputStatements_named_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadIffClosureInputStatements_named_current,openSemanticTargetClosureInputFieldSurfaceFieldPayloadNotIffClosureInputStatements_named_current",
+            "semantic_target_closure_input_field_statement_roster_certificate=OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
+            "semantic_target_closure_input_field_statement_roster_certificate_proof=open_semantic_target_closure_input_field_statement_roster_certificate",
+            "semantic_target_axiom_audit_prints_required=555"
           ]
         },
         {
