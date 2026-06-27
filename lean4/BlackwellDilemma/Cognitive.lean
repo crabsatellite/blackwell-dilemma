@@ -5929,6 +5929,16 @@ theorem part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route 
   exact hroute
 
 omit [DiagnosticSignalHypothesisData] in
+/-- The named nondegenerate alpha/feasible-set repair route is exactly the
+full Part 6 paper-closing support surface. -/
+theorem part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support :
+    Part6NondegenerateFeasibleRepairRoute ↔
+      Part6FullPaperClosingSupport := by
+  exact ⟨
+    part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route,
+    part6_nondegenerate_feasible_repair_route_of_full_paper_closing_support⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- The named nondegenerate alpha/feasible-set repair route exposes the
 paper-facing Part 6 divergence witness individually, not only as part of the
 paired output bundle. -/
@@ -6042,6 +6052,15 @@ theorem not_part6_nondegenerate_feasible_repair_route_current_via_feasible_diver
       hroute)
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Current nondegenerate Part 6 route refutation rederived through the paired
+output layer exposed by that route. -/
+theorem not_part6_nondegenerate_feasible_repair_route_current_via_output_pair :
+    Not Part6NondegenerateFeasibleRepairRoute := by
+  intro hroute
+  exact not_part6_full_paper_closing_output_pair_current
+    (part6_nondegenerate_feasible_repair_route_output_pair hroute)
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Current nondegenerate Part 6 route refutation rederived through the full
 output bundle, tying the route to both paper-facing output witnesses. -/
 theorem not_part6_nondegenerate_feasible_repair_route_current_via_full_output_bundle :
@@ -6063,6 +6082,8 @@ def Part6NondegenerateFeasibleRepairRouteCertificate : Prop :=
   (Part6FullPaperClosingSupport ->
     Part6NondegenerateFeasibleRepairRoute) /\
     (Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingSupport) /\
+    (Part6NondegenerateFeasibleRepairRoute ↔
       Part6FullPaperClosingSupport) /\
     (Part6NondegenerateFeasibleRepairRoute ->
       Part6FullPaperClosingDivergenceWitness) /\
@@ -6090,6 +6111,7 @@ theorem part6_nondegenerate_feasible_repair_route_certificate :
   exact ⟨
     part6_nondegenerate_feasible_repair_route_of_full_paper_closing_support,
     part6_full_paper_closing_support_of_nondegenerate_feasible_repair_route,
+    part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support,
     part6_nondegenerate_feasible_repair_route_divergence_witness,
     part6_nondegenerate_feasible_repair_route_feasible_divergence_witness,
     part6_nondegenerate_feasible_repair_route_of_bridge_route,

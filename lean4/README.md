@@ -1048,11 +1048,15 @@ witness interfaces and their full bundle are checked through one Lean
 certificate.
 The new `part6_nondegenerate_feasible_repair_route_certificate` names the exact
 remaining alpha/feasible-set repair route: it is equivalent to full Part 6
-support, every repaired bridge route factors through it, the closed-unit
+support by the named iff
+`part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support`,
+every repaired bridge route factors through it, the closed-unit
 tail-reversal sufficient route projects into it, and any inhabitant exposes the
 individual divergence witness, the same-`alpha` feasible/divergence witness,
 the paired output layer, and the full output bundle; the current carrier still
-refutes that route directly and again through each output-level obstruction.
+refutes that route directly and again through each output-level obstruction,
+including the paired output obstruction
+`not_part6_nondegenerate_feasible_repair_route_current_via_output_pair`.
 The unified `part6_current_frontier_certificate` now packages the unbounded
 current-obstruction certificate, scaling-candidate obstruction certificate,
 and closed-unit current-obstruction certificate together with the output-layer

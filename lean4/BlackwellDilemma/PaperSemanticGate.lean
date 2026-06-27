@@ -608,15 +608,35 @@ structure Part6LatticeEmbeddingFrontierPayload where
     Part6FullPaperClosingOutputLayerCertificate
   part6_nondegenerate_feasible_repair_route_certificate :
     Part6NondegenerateFeasibleRepairRouteCertificate
+  part6_nondegenerate_feasible_repair_route_iff_full_support :
+    Part6NondegenerateFeasibleRepairRoute ↔ Part6FullPaperClosingSupport
+  part6_nondegenerate_feasible_repair_route_of_bridge_route :
+    Part6FullPaperClosingBridgeRoute ->
+      Part6NondegenerateFeasibleRepairRoute
+  part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge :
+    forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6NondegenerateFeasibleRepairRoute
+  part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge_nonempty :
+    Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6NondegenerateFeasibleRepairRoute
   part6_nondegenerate_feasible_repair_route_divergence_witness :
     Part6NondegenerateFeasibleRepairRoute ->
       Part6FullPaperClosingDivergenceWitness
   part6_nondegenerate_feasible_repair_route_feasible_divergence_witness :
     Part6NondegenerateFeasibleRepairRoute ->
       Part6FullPaperClosingFeasibleDivergenceWitness
+  part6_nondegenerate_feasible_repair_route_output_pair :
+    Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness
+  part6_nondegenerate_feasible_repair_route_full_output_bundle :
+    Part6NondegenerateFeasibleRepairRoute ->
+      Part6FullPaperClosingFullOutputBundle
   part6_nondegenerate_feasible_repair_route_current_obstruction_via_divergence_witness :
     Not Part6NondegenerateFeasibleRepairRoute
   part6_nondegenerate_feasible_repair_route_current_obstruction_via_feasible_divergence_witness :
+    Not Part6NondegenerateFeasibleRepairRoute
+  part6_nondegenerate_feasible_repair_route_current_obstruction_via_output_pair :
     Not Part6NondegenerateFeasibleRepairRoute
   part6_nondegenerate_feasible_repair_route_current_obstruction_via_full_output_bundle :
     Not Part6NondegenerateFeasibleRepairRoute
@@ -1183,14 +1203,28 @@ def part6_lattice_embedding_frontier_payload :
     part6_full_paper_closing_output_layer_certificate
   part6_nondegenerate_feasible_repair_route_certificate :=
     part6_nondegenerate_feasible_repair_route_certificate
+  part6_nondegenerate_feasible_repair_route_iff_full_support :=
+    part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support
+  part6_nondegenerate_feasible_repair_route_of_bridge_route :=
+    part6_nondegenerate_feasible_repair_route_of_bridge_route
+  part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge :=
+    part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge
+  part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge_nonempty :=
+    part6_nondegenerate_feasible_repair_route_of_closed_unit_tail_reversal_bridge_nonempty
   part6_nondegenerate_feasible_repair_route_divergence_witness :=
     part6_nondegenerate_feasible_repair_route_divergence_witness
   part6_nondegenerate_feasible_repair_route_feasible_divergence_witness :=
     part6_nondegenerate_feasible_repair_route_feasible_divergence_witness
+  part6_nondegenerate_feasible_repair_route_output_pair :=
+    part6_nondegenerate_feasible_repair_route_output_pair
+  part6_nondegenerate_feasible_repair_route_full_output_bundle :=
+    part6_nondegenerate_feasible_repair_route_full_output_bundle
   part6_nondegenerate_feasible_repair_route_current_obstruction_via_divergence_witness :=
     not_part6_nondegenerate_feasible_repair_route_current_via_divergence_witness
   part6_nondegenerate_feasible_repair_route_current_obstruction_via_feasible_divergence_witness :=
     not_part6_nondegenerate_feasible_repair_route_current_via_feasible_divergence_witness
+  part6_nondegenerate_feasible_repair_route_current_obstruction_via_output_pair :=
+    not_part6_nondegenerate_feasible_repair_route_current_via_output_pair
   part6_nondegenerate_feasible_repair_route_current_obstruction_via_full_output_bundle :=
     not_part6_nondegenerate_feasible_repair_route_current_via_full_output_bundle
   part6_current_frontier_certificate :=
