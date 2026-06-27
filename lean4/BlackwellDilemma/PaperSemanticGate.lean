@@ -10678,6 +10678,251 @@ theorem completePaperSemanticKernelOnly_notYet :
   intro hcomplete
   exact (by decide : paperSemanticOpenCount ≠ 0) hcomplete
 
+/-- Statement roster for the top-level current obstruction to complete
+paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
+open-target count/id gates, and subordinate certificate propositions that the
+top-level theorem must carry. -/
+def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
+  [Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   RemainingOpenSemanticTargetsFrontierCertificate,
+   OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+   RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
+   OpenSemanticTargetClosureInputNamedRosterCertificate,
+   OpenSemanticTargetClosureInputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputCertificate,
+   OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+   OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
+   OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate,
+   OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsObstructionEquivalenceCertificate,
+   OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
+   OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
+   RemainingOpenSemanticTargetsJointClosureReductionCertificate,
+   RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate,
+   RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate,
+   RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate,
+   RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
+   RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
+   OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
+   OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
+   OpenSemanticTargetNamedRouteObstructionRosterCertificate,
+   OpenSemanticTargetNamedFrontierCertificateRosterCertificate,
+   OpenSemanticTargetNamedRouteStatementRosterCertificate,
+   Part6RemainingConditionalProjectionCertificate,
+   Part6RemainingConditionalProjectionStatementRosterCertificate,
+   Part6LatticeEmbeddingRouteObstructionProjectionCertificate,
+   Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
+   TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+   RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+   OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
+   OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate,
+   OpenSemanticTargetClosureInputFieldRosterCertificate,
+   OpenSemanticTargetClosureInputFieldStatementRosterCertificate]
+
+/-- Build gate: the top-level current-obstruction statement roster names the
+exact current obstruction/certificate propositions. -/
+theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentObstructionStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       RemainingOpenSemanticTargetsFrontierCertificate,
+       OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+       RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
+       OpenSemanticTargetClosureInputNamedRosterCertificate,
+       OpenSemanticTargetClosureInputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputCertificate,
+       OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+       OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
+       OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate,
+       OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsObstructionEquivalenceCertificate,
+       OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
+       OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsJointClosureReductionCertificate,
+       RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate,
+       RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate,
+       RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
+       OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
+       OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
+       OpenSemanticTargetNamedRouteObstructionRosterCertificate,
+       OpenSemanticTargetNamedFrontierCertificateRosterCertificate,
+       OpenSemanticTargetNamedRouteStatementRosterCertificate,
+       Part6RemainingConditionalProjectionCertificate,
+       Part6RemainingConditionalProjectionStatementRosterCertificate,
+       Part6LatticeEmbeddingRouteObstructionProjectionCertificate,
+       Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+       RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+       OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
+       OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate,
+       OpenSemanticTargetClosureInputFieldRosterCertificate,
+       OpenSemanticTargetClosureInputFieldStatementRosterCertificate] := rfl
+
+/-- Build-gated statement roster certificate for the top-level current
+obstruction.  This is nonrecursive: it proves the roster and every subordinate
+conjunct directly, then the top-level obstruction certificate can include this
+roster certificate as an additional check. -/
+def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentObstructionStatements =
+    [Not CompletePaperSemanticKernelOnly,
+     paperSemanticOpenCount = 2,
+     openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+     RemainingOpenSemanticTargetsFrontierCertificate,
+     OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+     RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
+     OpenSemanticTargetClosureInputNamedRosterCertificate,
+     OpenSemanticTargetClosureInputStatementRosterCertificate,
+     RemainingOpenSemanticTargetsExactClosureInputCertificate,
+     OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+     OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
+     OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate,
+     OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate,
+     OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
+     OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
+     RemainingOpenSemanticTargetsJointClosureReductionCertificate,
+     RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate,
+     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate,
+     RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate,
+     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
+     RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
+     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
+     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
+     OpenSemanticTargetNamedRouteObstructionRosterCertificate,
+     OpenSemanticTargetNamedFrontierCertificateRosterCertificate,
+     OpenSemanticTargetNamedRouteStatementRosterCertificate,
+     Part6RemainingConditionalProjectionCertificate,
+     Part6RemainingConditionalProjectionStatementRosterCertificate,
+     Part6LatticeEmbeddingRouteObstructionProjectionCertificate,
+     Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate,
+     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
+     TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
+     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
+     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+     RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
+     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
+     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate,
+     OpenSemanticTargetClosureInputFieldRosterCertificate,
+     OpenSemanticTargetClosureInputFieldStatementRosterCertificate] /\
+    Not CompletePaperSemanticKernelOnly /\
+    paperSemanticOpenCount = 2 /\
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+    RemainingOpenSemanticTargetsFrontierCertificate /\
+    OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
+    OpenSemanticTargetClosureInputNamedRosterCertificate /\
+    OpenSemanticTargetClosureInputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputCertificate /\
+    OpenSemanticTargetExactClosureInputNamedRosterCertificate /\
+    OpenSemanticTargetExactClosureInputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
+    OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate /\
+    OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
+    OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate /\
+    OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
+    RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
+    RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
+    RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate /\
+    OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
+    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
+    OpenSemanticTargetNamedRouteObstructionRosterCertificate /\
+    OpenSemanticTargetNamedFrontierCertificateRosterCertificate /\
+    OpenSemanticTargetNamedRouteStatementRosterCertificate /\
+    Part6RemainingConditionalProjectionCertificate /\
+    Part6RemainingConditionalProjectionStatementRosterCertificate /\
+    Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
+    Part6LatticeEmbeddingRouteObstructionProjectionStatementRosterCertificate /\
+    TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+    TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
+    OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
+    OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate /\
+    OpenSemanticTargetClosureInputFieldRosterCertificate /\
+    OpenSemanticTargetClosureInputFieldStatementRosterCertificate
+
+/-- The top-level current-obstruction statement roster is itself kernel-checked
+against the same named subordinate certificates used by the top-level theorem. -/
+theorem
+    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current,
+    completePaperSemanticKernelOnly_notYet,
+    paperSemanticOpenCount_current,
+    openSemanticTargetIds_current,
+    remaining_open_semantic_targets_frontier_certificate,
+    open_semantic_target_surface_roster_consistency_certificate,
+    remaining_open_semantic_targets_payload_route_map_certificate,
+    open_semantic_target_closure_input_named_roster_certificate,
+    open_semantic_target_closure_input_statement_roster_certificate,
+    remaining_open_semantic_targets_exact_closure_input_certificate,
+    open_semantic_target_exact_closure_input_named_roster_certificate,
+    open_semantic_target_exact_closure_input_statement_roster_certificate,
+    remaining_open_semantic_targets_exact_closure_input_output_certificate,
+    open_semantic_target_exact_closure_input_output_named_roster_certificate,
+    open_semantic_target_exact_closure_input_output_statement_roster_certificate,
+    remaining_open_semantic_targets_obstruction_equivalence_certificate,
+    open_semantic_target_obstruction_equivalence_named_roster_certificate,
+    open_semantic_target_obstruction_equivalence_statement_roster_certificate,
+    remaining_open_semantic_targets_joint_closure_reduction_certificate,
+    remaining_open_semantic_targets_joint_closure_statement_roster_certificate,
+    remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate,
+    remaining_open_semantic_targets_joint_route_statement_roster_certificate,
+    remaining_open_semantic_targets_bilateral_package_obstruction_certificate,
+    remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate,
+    open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate,
+    open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate,
+    open_semantic_target_named_route_obstruction_roster_certificate,
+    open_semantic_target_named_frontier_certificate_roster_certificate,
+    open_semantic_target_named_route_statement_roster_certificate,
+    part6_remaining_conditional_projection_certificate,
+    part6_remaining_conditional_projection_statement_roster_certificate,
+    part6_lattice_embedding_route_obstruction_projection_certificate,
+    part6_lattice_embedding_route_obstruction_projection_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_exact_output_projection_certificate,
+    topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate,
+    remaining_open_semantic_targets_output_equivalence_certificate,
+    open_semantic_target_output_equivalence_named_roster_certificate,
+    open_semantic_target_output_equivalence_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_obstruction_certificate,
+    open_semantic_target_closure_input_field_roster_certificate,
+    open_semantic_target_closure_input_field_statement_roster_certificate⟩
+
 /-- Top-level current obstruction certificate for the paper-semantic
 kernel-only claim.  It binds the not-yet-complete status to the exact remaining
 open ids and to the current frontier, surface-roster, payload-route-map, and
@@ -10726,7 +10971,8 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate /\
     OpenSemanticTargetClosureInputFieldRosterCertificate /\
-    OpenSemanticTargetClosureInputFieldStatementRosterCertificate
+    OpenSemanticTargetClosureInputFieldStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate
 
 /-- The current paper-semantic kernel-only obstruction is machine checked all
 the way down to the remaining open target frontier and field-obstruction
@@ -10830,7 +11076,10 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_closure_input_field_obstruction_certificate
   constructor
   · exact open_semantic_target_closure_input_field_roster_certificate
-  exact open_semantic_target_closure_input_field_statement_roster_certificate
+  constructor
+  · exact open_semantic_target_closure_input_field_statement_roster_certificate
+  exact
+    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
 
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 

@@ -253,8 +253,10 @@ The top-level
 the current non-complete claim against `open=2`, the exact remaining target ids,
 and the frontier/surface-roster/payload-route-map/exact-input/output/
 field-obstruction certificates.
+`completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate`
+pins those top-level obstruction statements as a Lean `List Prop`.
 `audit_paper_semantic_gate.py` now parses that top-level certificate body and
-fails unless all 39 expected certificate conjuncts are present.
+fails unless all 40 expected certificate conjuncts are present.
 `open_semantic_target_closure_input_named_roster_certificate` now pins the
 named sufficient closure-input roster itself, including target/input/current
 obstruction/certificate propositions and the target-obstruction to
@@ -329,7 +331,8 @@ exact-output projections, statement roster, and route nonclosure boundary, topo 
 projections and statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency, field statement roster,
-surface-roster consistency, and AxiomAudit coverage. The public
+surface-roster consistency, top-level statement roster, and AxiomAudit coverage.
+The public
 verification command set includes the same Lean build, PaperSemanticGate build,
 AxiomAudit build, and source-level audit scripts listed above.
 

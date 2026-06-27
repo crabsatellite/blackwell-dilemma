@@ -302,6 +302,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate",
     "OpenSemanticTargetClosureInputFieldRosterCertificate",
     "OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
+    "CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
 )
 
 FORBIDDEN_WHEN_OPEN = {
@@ -402,6 +403,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates_named_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_surface_roster_consistency_certificate",
+    "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements",
+    "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_obstruction_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsPayloadRouteMapCertificate",
@@ -1325,6 +1330,18 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof="
         "completePaperSemanticKernelOnly_current_obstruction_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_surface_payload_certificates="
