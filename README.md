@@ -286,7 +286,8 @@ obstruction/certificate propositions and the target-obstruction to
 sufficient-input-obstruction projection.
 `open_semantic_target_closure_input_statement_roster_certificate` additionally
 pins the sufficient-input-to-target and target-obstruction-to-sufficient-input
-formulas to the named Part 6/topo statements.
+formulas to the named Part 6/topo statements, with 4 formula terms checked
+against `paperSemanticOpenCount`.
 `open_semantic_target_exact_closure_input_named_roster_certificate` similarly
 pins the exact closure-input roster and proves target obstruction equivalent to
 exact-input obstruction for each remaining open semantic target.

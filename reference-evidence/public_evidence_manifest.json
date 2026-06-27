@@ -444,6 +444,8 @@
             "semantic_target_closure_input_certificate_proof=remaining_open_semantic_targets_closure_input_certificate",
             "semantic_target_closure_input_named_roster_proofs=openSemanticTargetClosureInputSurfaceTargets_named_current,openSemanticTargetClosureInputSurfaceClosureInputs_named_current,openSemanticTargetClosureInputSurfaceInputObstructions_named_current,openSemanticTargetClosureInputSurfaceTargetObstructions_named_current,openSemanticTargetClosureInputSurfaceInputCertificates_named_current",
             "semantic_target_closure_input_statement_roster_proofs=openSemanticTargetClosureInputSurfaceInputToTargetStatements_named_current,openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_named_current",
+            "semantic_target_closure_input_statement_roster_terms_checked=4",
+            "semantic_target_closure_input_statement_roster_length_proofs=openSemanticTargetClosureInputSurfaceInputToTargetStatements_length_current,openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_length_current",
             "semantic_target_closure_input_target_to_input_obstruction_projection=openSemanticTargetClosureInputSurface_input_not_of_target_not",
             "semantic_target_closure_input_named_roster_certificate=OpenSemanticTargetClosureInputNamedRosterCertificate",
             "semantic_target_closure_input_named_roster_certificate_proof=open_semantic_target_closure_input_named_roster_certificate",
@@ -654,9 +656,9 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=668",
+            "semantic_target_axiom_audit_prints_required=670",
             "semantic_target_axiom_audit_prints_missing=0",
-            "semantic_target_readme_axiom_audit_prints_required=668",
+            "semantic_target_readme_axiom_audit_prints_required=670",
             "semantic_target_readme_axiom_audit_prints_required_matches=1"
           ]
         },

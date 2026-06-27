@@ -5101,6 +5101,19 @@ theorem
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
         Not TopoClusterRandomSupercriticalZ2ClosureInput] := rfl
 
+/-- Build gate: the sufficient-input-to-target statement roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetClosureInputSurfaceInputToTargetStatements_length_current :
+    openSemanticTargetClosureInputSurfaceInputToTargetStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target-obstruction-to-sufficient-input-obstruction
+statement roster has one entry for each currently open target. -/
+theorem
+    openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_length_current :
+    openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements.length =
+      paperSemanticOpenCount := rfl
+
 /-- Every sufficient-input surface carries a kernel proof from input to target. -/
 theorem openSemanticTargetClosureInputSurface_input_to_target
     (surface : OpenSemanticTargetClosureInputSurface) :
@@ -5246,6 +5259,10 @@ def OpenSemanticTargetClosureInputStatementRosterCertificate : Prop :=
         Not Part6LatticeEmbeddingClosureInput,
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
         Not TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    openSemanticTargetClosureInputSurfaceInputToTargetStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements.length =
+      paperSemanticOpenCount /\
     (∀ surface ∈ openSemanticTargetClosureInputSurfaces,
       surface.closureInput -> surface.target) /\
     (∀ surface ∈ openSemanticTargetClosureInputSurfaces,
@@ -5260,6 +5277,8 @@ theorem open_semantic_target_closure_input_statement_roster_certificate :
   exact ⟨
     openSemanticTargetClosureInputSurfaceInputToTargetStatements_named_current,
     openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_named_current,
+    openSemanticTargetClosureInputSurfaceInputToTargetStatements_length_current,
+    openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_length_current,
     (by
       intro surface _
       exact openSemanticTargetClosureInputSurface_input_to_target surface),

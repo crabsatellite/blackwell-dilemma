@@ -515,6 +515,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputCertificates_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputToTargetStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputToTargetStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_input_to_target",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_input_not_of_target_not",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurface_input_current_obstruction",
@@ -2133,6 +2135,12 @@ def main() -> int:
         "semantic_target_closure_input_statement_roster_proofs="
         "openSemanticTargetClosureInputSurfaceInputToTargetStatements_named_current,"
         "openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_named_current"
+    )
+    print("semantic_target_closure_input_statement_roster_terms_checked=4")
+    print(
+        "semantic_target_closure_input_statement_roster_length_proofs="
+        "openSemanticTargetClosureInputSurfaceInputToTargetStatements_length_current,"
+        "openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_length_current"
     )
     print(
         "semantic_target_closure_input_target_to_input_obstruction_projection="
