@@ -6490,6 +6490,162 @@ theorem
     topo_cluster_random_supercritical_z2_exact_output_projection_certificate,
     remaining_open_semantic_targets_obstruction_equivalence_certificate⟩
 
+/-- Joint target-route package for the two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsTargetRoutesSatisfied : Prop :=
+  Part6NondegenerateFeasibleRepairRoute /\
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+
+/-- Joint closure-route package for the two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsClosureRoutesSatisfied : Prop :=
+  Part6FullPaperClosingSupport /\
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+/-- Joint target satisfaction projects to the joint target-route package. -/
+theorem remaining_open_semantic_targets_target_routes_of_targets :
+    RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied := by
+  intro htargets
+  exact ⟨
+    (part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mp
+      htargets.1,
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mp
+      htargets.2⟩
+
+/-- The joint target-route package projects back to joint target
+satisfaction. -/
+theorem remaining_open_semantic_targets_targets_of_target_routes :
+    RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied := by
+  intro hroutes
+  exact ⟨
+    (part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mpr
+      hroutes.1,
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
+      hroutes.2⟩
+
+/-- Joint target satisfaction is equivalent to joint target-route
+satisfaction. -/
+theorem remaining_open_semantic_targets_satisfied_iff_target_routes :
+    RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied := by
+  constructor
+  · exact remaining_open_semantic_targets_target_routes_of_targets
+  exact remaining_open_semantic_targets_targets_of_target_routes
+
+/-- Joint target satisfaction projects to the joint closure-route package. -/
+theorem remaining_open_semantic_targets_closure_routes_of_targets :
+    RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
+  intro htargets
+  exact ⟨
+    (part6_lattice_embedding_semantic_kernel_target_iff_full_support).mp
+      htargets.1,
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mp
+      htargets.2⟩
+
+/-- The joint closure-route package projects back to joint target
+satisfaction. -/
+theorem remaining_open_semantic_targets_targets_of_closure_routes :
+    RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied := by
+  intro hroutes
+  exact ⟨
+    (part6_lattice_embedding_semantic_kernel_target_iff_full_support).mpr
+      hroutes.1,
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mpr
+      hroutes.2⟩
+
+/-- Joint target satisfaction is equivalent to joint closure-route
+satisfaction. -/
+theorem remaining_open_semantic_targets_satisfied_iff_closure_routes :
+    RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
+  constructor
+  · exact remaining_open_semantic_targets_closure_routes_of_targets
+  exact remaining_open_semantic_targets_targets_of_closure_routes
+
+/-- The joint target-route package projects to the joint closure-route
+package. -/
+theorem remaining_open_semantic_targets_closure_routes_of_target_routes :
+    RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
+  intro hroutes
+  exact
+    remaining_open_semantic_targets_closure_routes_of_targets
+      (remaining_open_semantic_targets_targets_of_target_routes hroutes)
+
+/-- The joint closure-route package projects back to the joint target-route
+package. -/
+theorem remaining_open_semantic_targets_target_routes_of_closure_routes :
+    RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied := by
+  intro hroutes
+  exact
+    remaining_open_semantic_targets_target_routes_of_targets
+      (remaining_open_semantic_targets_targets_of_closure_routes hroutes)
+
+/-- Joint target-route satisfaction is equivalent to joint closure-route
+satisfaction. -/
+theorem remaining_open_semantic_targets_target_routes_iff_closure_routes :
+    RemainingOpenSemanticTargetsTargetRoutesSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
+  constructor
+  · exact remaining_open_semantic_targets_closure_routes_of_target_routes
+  exact remaining_open_semantic_targets_target_routes_of_closure_routes
+
+/-- The current frontier refutes joint target-route satisfaction. -/
+theorem remaining_open_semantic_targets_target_routes_notYet :
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied := by
+  intro hroutes
+  exact not_part6_nondegenerate_feasible_repair_route_current hroutes.1
+
+/-- The current frontier refutes joint closure-route satisfaction. -/
+theorem remaining_open_semantic_targets_closure_routes_notYet :
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
+  intro hroutes
+  exact not_part6_full_paper_closing_support_current hroutes.1
+
+/-- Single build-gated certificate reducing the remaining two open targets to
+their joint target-route and closure-route packages. -/
+def RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate :
+    Prop :=
+  (RemainingOpenSemanticTargetsSatisfied ↔
+    RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsTargetRoutesSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    Not RemainingOpenSemanticTargetsSatisfied /\
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied /\
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied /\
+    Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate
+
+/-- The remaining open targets are jointly reduced to target-route and
+closure-route packages, with all three joint route packages currently
+refuted. -/
+theorem
+    remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate :
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate := by
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_iff_target_routes
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_iff_closure_routes
+  constructor
+  · exact remaining_open_semantic_targets_target_routes_iff_closure_routes
+  constructor
+  · exact remaining_open_semantic_targets_satisfied_notYet
+  constructor
+  · exact remaining_open_semantic_targets_target_routes_notYet
+  constructor
+  · exact remaining_open_semantic_targets_closure_routes_notYet
+  constructor
+  · exact part6_lattice_embedding_route_obstruction_projection_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate
+  exact remaining_open_semantic_targets_joint_closure_reduction_certificate
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -7031,6 +7187,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
@@ -7059,6 +7216,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact remaining_open_semantic_targets_obstruction_equivalence_certificate
   constructor
   · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
   constructor
   · exact part6_remaining_conditional_projection_certificate
   constructor

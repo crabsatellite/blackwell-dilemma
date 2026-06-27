@@ -409,6 +409,21 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_full_outputs_notYet",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureReductionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_reduction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsTargetRoutesSatisfied",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureRoutesSatisfied",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_of_targets",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_targets_of_target_routes",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_satisfied_iff_target_routes",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_of_targets",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_targets_of_closure_routes",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_satisfied_iff_closure_routes",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_of_target_routes",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_of_closure_routes",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_iff_closure_routes",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_notYet",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_notYet",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_exact_closure_input",
@@ -1566,6 +1581,40 @@ def main() -> int:
     print(
         "semantic_target_joint_closure_reduction_certificate_proof="
         "remaining_open_semantic_targets_joint_closure_reduction_certificate"
+    )
+    print(
+        "semantic_target_joint_route_targets="
+        "RemainingOpenSemanticTargetsTargetRoutesSatisfied"
+    )
+    print(
+        "semantic_target_joint_route_closure_routes="
+        "RemainingOpenSemanticTargetsClosureRoutesSatisfied"
+    )
+    print(
+        "semantic_target_joint_route_reductions="
+        "remaining_open_semantic_targets_target_routes_of_targets,"
+        "remaining_open_semantic_targets_targets_of_target_routes,"
+        "remaining_open_semantic_targets_satisfied_iff_target_routes,"
+        "remaining_open_semantic_targets_closure_routes_of_targets,"
+        "remaining_open_semantic_targets_targets_of_closure_routes,"
+        "remaining_open_semantic_targets_satisfied_iff_closure_routes,"
+        "remaining_open_semantic_targets_closure_routes_of_target_routes,"
+        "remaining_open_semantic_targets_target_routes_of_closure_routes,"
+        "remaining_open_semantic_targets_target_routes_iff_closure_routes"
+    )
+    print(
+        "semantic_target_joint_route_package_obstructions="
+        "remaining_open_semantic_targets_satisfied_notYet,"
+        "remaining_open_semantic_targets_target_routes_notYet,"
+        "remaining_open_semantic_targets_closure_routes_notYet"
+    )
+    print(
+        "semantic_target_joint_route_reduction_certificate="
+        "RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate"
+    )
+    print(
+        "semantic_target_joint_route_reduction_certificate_proof="
+        "remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate"
     )
     print(
         "semantic_target_part6_conditional_witness_exact_input_proofs="

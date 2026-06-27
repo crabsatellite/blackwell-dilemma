@@ -166,6 +166,10 @@ obstruction, and output-bundle obstruction are equivalent kernel consequences.
 the two remaining open targets as a joint closure problem, proving equivalence
 between joint target satisfaction, joint exact-input satisfaction, and joint
 full-output-bundle satisfaction, with all three joint packages current-refuted.
+`remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate`
+also packages the same two targets as joint route obligations: joint target
+satisfaction, joint target-route satisfaction, and joint closure-route
+satisfaction are equivalent, and all three route packages are current-refuted.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,
@@ -223,8 +227,9 @@ exact closure-input equivalence, sufficient-to-exact projections,
 exact-input/output bundle equivalence, output-equivalence target/output bundles,
 bidirectional output projections, output iff proofs, output obstructions,
 target/exact/output obstruction-equivalence proofs, joint closure-reduction
-packages and package obstructions, Part 6 conditional witness interface
-projections and obstructions, Part 6 route-obstruction projections, topo
+packages and package obstructions, joint route-obstruction packages and package
+obstructions, Part 6 conditional witness interface projections and
+obstructions, Part 6 route-obstruction projections, topo
 exact-output projections and route nonclosure boundary, topo route-obstruction
 projections, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and

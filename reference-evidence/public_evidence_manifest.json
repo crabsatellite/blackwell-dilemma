@@ -450,6 +450,12 @@
             "semantic_target_joint_closure_output_package_obstruction=remaining_open_semantic_targets_full_outputs_notYet",
             "semantic_target_joint_closure_reduction_certificate=RemainingOpenSemanticTargetsJointClosureReductionCertificate",
             "semantic_target_joint_closure_reduction_certificate_proof=remaining_open_semantic_targets_joint_closure_reduction_certificate",
+            "semantic_target_joint_route_targets=RemainingOpenSemanticTargetsTargetRoutesSatisfied",
+            "semantic_target_joint_route_closure_routes=RemainingOpenSemanticTargetsClosureRoutesSatisfied",
+            "semantic_target_joint_route_reductions=remaining_open_semantic_targets_target_routes_of_targets,remaining_open_semantic_targets_targets_of_target_routes,remaining_open_semantic_targets_satisfied_iff_target_routes,remaining_open_semantic_targets_closure_routes_of_targets,remaining_open_semantic_targets_targets_of_closure_routes,remaining_open_semantic_targets_satisfied_iff_closure_routes,remaining_open_semantic_targets_closure_routes_of_target_routes,remaining_open_semantic_targets_target_routes_of_closure_routes,remaining_open_semantic_targets_target_routes_iff_closure_routes",
+            "semantic_target_joint_route_package_obstructions=remaining_open_semantic_targets_satisfied_notYet,remaining_open_semantic_targets_target_routes_notYet,remaining_open_semantic_targets_closure_routes_notYet",
+            "semantic_target_joint_route_reduction_certificate=RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
+            "semantic_target_joint_route_reduction_certificate_proof=remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate",
             "semantic_target_part6_conditional_witness_exact_input_proofs=part6_lattice_embedding_divergence_witness_of_exact_closure_input,part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input,part6_lattice_embedding_output_pair_of_exact_closure_input",
             "semantic_target_part6_conditional_witness_output_bundle_proofs=part6_lattice_embedding_divergence_witness_of_full_output_bundle,part6_lattice_embedding_feasible_divergence_witness_of_full_output_bundle,part6_lattice_embedding_output_pair_of_full_output_bundle",
             "semantic_target_part6_conditional_witness_obstructions=not_part6_full_paper_closing_divergence_witness_current,not_part6_full_paper_closing_feasible_divergence_witness_current,not_part6_full_paper_closing_output_pair_current",
@@ -480,7 +486,7 @@
             "semantic_target_closure_input_field_certificate_proof=remaining_open_semantic_targets_closure_input_field_certificate",
             "semantic_target_closure_input_field_obstruction_certificate=RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate",
             "semantic_target_closure_input_field_obstruction_certificate_proof=remaining_open_semantic_targets_closure_input_field_obstruction_certificate",
-            "semantic_target_axiom_audit_prints_required=311"
+            "semantic_target_axiom_audit_prints_required=326"
           ]
         },
         {
