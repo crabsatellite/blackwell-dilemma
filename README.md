@@ -234,6 +234,10 @@ formulas to the named Part 6/topo statements.
 `open_semantic_target_exact_closure_input_named_roster_certificate` similarly
 pins the exact closure-input roster and proves target obstruction equivalent to
 exact-input obstruction for each remaining open semantic target.
+`open_semantic_target_exact_closure_input_statement_roster_certificate` pins the
+target-to-exact, exact-to-target, target-iff-exact, sufficient-to-exact, and
+target-obstruction/exact-obstruction formulas to the named Part 6/topo
+statements.
 `open_semantic_target_exact_closure_input_output_named_roster_certificate`
 pins the exact-input/output-bundle roster and proves target, exact-input, and
 output-bundle obstructions pairwise equivalent on each surface.
