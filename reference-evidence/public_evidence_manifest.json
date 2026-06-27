@@ -522,6 +522,9 @@
             "semantic_target_part6_conditional_witness_obstructions=not_part6_full_paper_closing_divergence_witness_current,not_part6_full_paper_closing_feasible_divergence_witness_current,not_part6_full_paper_closing_output_pair_current",
             "semantic_target_part6_conditional_witness_certificate=Part6RemainingConditionalProjectionCertificate",
             "semantic_target_part6_conditional_witness_certificate_proof=part6_remaining_conditional_projection_certificate",
+            "semantic_target_part6_conditional_witness_statement_roster_proof=part6RemainingConditionalProjectionStatements_named_current",
+            "semantic_target_part6_conditional_witness_statement_roster_certificate=Part6RemainingConditionalProjectionStatementRosterCertificate",
+            "semantic_target_part6_conditional_witness_statement_roster_certificate_proof=part6_remaining_conditional_projection_statement_roster_certificate",
             "semantic_target_part6_route_obstruction_projection_proofs=part6_lattice_embedding_exact_closure_input_not_of_repair_route_not,part6_lattice_embedding_exact_closure_input_not_of_full_support_not,part6_lattice_embedding_full_output_bundle_not_of_repair_route_not,part6_lattice_embedding_full_output_bundle_not_of_full_support_not,part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route,part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,part6_lattice_embedding_repair_route_not_iff_full_support_not",
             "semantic_target_part6_route_obstruction_projection_current=part6_lattice_embedding_semantic_kernel_target_notYet,not_part6_nondegenerate_feasible_repair_route_current,not_part6_full_paper_closing_support_current,part6_lattice_embedding_exact_closure_input_notYet,not_part6_full_paper_closing_full_output_bundle_current",
             "semantic_target_part6_route_obstruction_projection_certificate=Part6LatticeEmbeddingRouteObstructionProjectionCertificate",
@@ -552,7 +555,7 @@
             "semantic_target_closure_input_field_not_iff_proof=openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input",
             "semantic_target_closure_input_field_roster_certificate=OpenSemanticTargetClosureInputFieldRosterCertificate",
             "semantic_target_closure_input_field_roster_certificate_proof=open_semantic_target_closure_input_field_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=529"
+            "semantic_target_axiom_audit_prints_required=533"
           ]
         },
         {

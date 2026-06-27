@@ -8099,6 +8099,118 @@ theorem part6_remaining_conditional_projection_certificate :
   · exact remaining_open_semantic_targets_exact_closure_input_output_certificate
   exact remaining_open_semantic_targets_joint_closure_reduction_certificate
 
+/-- Statement roster for the Part 6 conditional witness interface. -/
+def part6RemainingConditionalProjectionStatements : List Prop :=
+  [Part6LatticeEmbeddingExactClosureInput ->
+    Part6FullPaperClosingDivergenceWitness,
+   Part6LatticeEmbeddingExactClosureInput ->
+    Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6LatticeEmbeddingExactClosureInput ->
+    Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6FullPaperClosingFullOutputBundle ->
+    Part6FullPaperClosingDivergenceWitness,
+   Part6FullPaperClosingFullOutputBundle ->
+    Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6FullPaperClosingFullOutputBundle ->
+    Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+   Not Part6FullPaperClosingDivergenceWitness,
+   Not Part6FullPaperClosingFeasibleDivergenceWitness,
+   Not (Part6FullPaperClosingDivergenceWitness /\
+    Part6FullPaperClosingFeasibleDivergenceWitness),
+   Not Part6LatticeEmbeddingExactClosureInput,
+   Not Part6FullPaperClosingFullOutputBundle]
+
+/-- Build gate: the Part 6 conditional witness statement roster names every
+exact-input projection, output-bundle projection, and current obstruction. -/
+theorem part6RemainingConditionalProjectionStatements_named_current :
+    part6RemainingConditionalProjectionStatements =
+      [Part6LatticeEmbeddingExactClosureInput ->
+        Part6FullPaperClosingDivergenceWitness,
+       Part6LatticeEmbeddingExactClosureInput ->
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6LatticeEmbeddingExactClosureInput ->
+        Part6FullPaperClosingDivergenceWitness /\
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6FullPaperClosingFullOutputBundle ->
+        Part6FullPaperClosingDivergenceWitness,
+       Part6FullPaperClosingFullOutputBundle ->
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6FullPaperClosingFullOutputBundle ->
+        Part6FullPaperClosingDivergenceWitness /\
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not (Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness),
+       Not Part6LatticeEmbeddingExactClosureInput,
+       Not Part6FullPaperClosingFullOutputBundle] := rfl
+
+/-- Build-gated statement roster for the Part 6 conditional witness interface. -/
+def Part6RemainingConditionalProjectionStatementRosterCertificate : Prop :=
+  part6RemainingConditionalProjectionStatements =
+    [Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingDivergenceWitness,
+     Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+     Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+     Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness,
+     Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+     Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+     Not Part6FullPaperClosingDivergenceWitness,
+     Not Part6FullPaperClosingFeasibleDivergenceWitness,
+     Not (Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness),
+     Not Part6LatticeEmbeddingExactClosureInput,
+     Not Part6FullPaperClosingFullOutputBundle] /\
+    (Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingDivergenceWitness) /\
+    (Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingExactClosureInput ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness) /\
+    (Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6FullPaperClosingFullOutputBundle ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6FullPaperClosingDivergenceWitness /\
+    Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+    Not (Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    Not Part6LatticeEmbeddingExactClosureInput /\
+    Not Part6FullPaperClosingFullOutputBundle /\
+    Part6RemainingConditionalProjectionCertificate
+
+/-- The Part 6 conditional witness statement roster is pinned to named
+projection and current-obstruction theorems. -/
+theorem part6_remaining_conditional_projection_statement_roster_certificate :
+    Part6RemainingConditionalProjectionStatementRosterCertificate := by
+  exact ⟨
+    part6RemainingConditionalProjectionStatements_named_current,
+    part6_lattice_embedding_divergence_witness_of_exact_closure_input,
+    part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input,
+    part6_lattice_embedding_output_pair_of_exact_closure_input,
+    part6_lattice_embedding_divergence_witness_of_full_output_bundle,
+    part6_lattice_embedding_feasible_divergence_witness_of_full_output_bundle,
+    part6_lattice_embedding_output_pair_of_full_output_bundle,
+    not_part6_full_paper_closing_divergence_witness_current,
+    not_part6_full_paper_closing_feasible_divergence_witness_current,
+    not_part6_full_paper_closing_output_pair_current,
+    part6_lattice_embedding_exact_closure_input_notYet,
+    not_part6_full_paper_closing_full_output_bundle_current,
+    part6_remaining_conditional_projection_certificate⟩
+
 /-- A refutation of the Part 6 repair route refutes the exact Part 6 input. -/
 theorem part6_lattice_embedding_exact_closure_input_not_of_repair_route_not :
     Not Part6NondegenerateFeasibleRepairRoute ->
@@ -10076,6 +10188,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetNamedFrontierCertificateRosterCertificate /\
     OpenSemanticTargetNamedRouteStatementRosterCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
+    Part6RemainingConditionalProjectionStatementRosterCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
@@ -10156,6 +10269,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact open_semantic_target_named_route_statement_roster_certificate
   constructor
   · exact part6_remaining_conditional_projection_certificate
+  constructor
+  · exact part6_remaining_conditional_projection_statement_roster_certificate
   constructor
   · exact part6_lattice_embedding_route_obstruction_projection_certificate
   constructor

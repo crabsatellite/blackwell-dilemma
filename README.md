@@ -145,6 +145,9 @@ and topo equates its support-surface exact input with
 the Part 6 conditional witness interfaces from both the exact closure input and
 the full output bundle, while preserving the current refutations of the
 divergence, feasible/divergence, and paired-output interfaces.
+`part6_remaining_conditional_projection_statement_roster_certificate` pins
+those witness projections and current witness/input/output obstructions in one
+build-gated statement list.
 `part6_lattice_embedding_route_obstruction_projection_certificate` then gates
 the Part 6 route-level negative direction: refuting either the nondegenerate
 feasible repair route or full paper-closing support refutes both the exact input
@@ -301,8 +304,8 @@ bidirectional output projections, output iff proofs, output obstructions,
 target/exact/output obstruction-equivalence proofs, joint closure-reduction
 packages and package obstructions, joint route-obstruction packages, statement
 rosters, and package obstructions, bilateral package obstruction statement
-rosters, Part 6 conditional witness interface projections and obstructions,
-Part 6 route-obstruction projections, topo
+rosters, Part 6 conditional witness interface projections, statement roster,
+and obstructions, Part 6 route-obstruction projections, topo
 exact-output projections and route nonclosure boundary, topo route-obstruction
 projections, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
