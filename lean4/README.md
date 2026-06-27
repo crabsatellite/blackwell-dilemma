@@ -247,6 +247,11 @@ until the semantic gate reaches open=0.
 The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
 `paperSemanticOpenCount = 0`, and
 `completePaperSemanticKernelOnly_notYet` proves its current negation.
+The two remaining open semantic targets are also named as Lean propositions:
+`Part6LatticeEmbeddingSemanticKernelTarget` and
+`TopoClusterRandomSupercriticalZ2SemanticKernelTarget`. Their `*_notYet`
+theorems gate the current kernel refutations while the target count remains
+open=2.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and

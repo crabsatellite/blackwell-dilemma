@@ -1027,6 +1027,11 @@ For full kernel-pure cover (v2.0 future iteration):
   The named Lean target `CompletePaperSemanticKernelOnly` is definitionally
   `paperSemanticOpenCount = 0`, and
   `completePaperSemanticKernelOnly_notYet` proves its current negation.
+  The two open items have target propositions
+  `Part6LatticeEmbeddingSemanticKernelTarget` and
+  `TopoClusterRandomSupercriticalZ2SemanticKernelTarget`, each tied to its
+  current full route by an iff theorem and to its current obstruction by a
+  `*_notYet` theorem.
 - The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
   recalibration is closed by aliases in `Canonical.lean`; the paper R10
   `prop:threshold-five-state` clause (iii) high-κ signal-conditional routing

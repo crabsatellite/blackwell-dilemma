@@ -93,6 +93,61 @@ def paperSemanticOpenCount : Nat :=
 def paperSemanticClosedCount : Nat :=
   closedSemanticTargets.length
 
+/-- Named paper-semantic target proposition for Theorem 4.1 Part 6.
+
+This is the exact alpha/feasible-set repair route that the current gate treats
+as the remaining Part 6 closure obligation. -/
+def Part6LatticeEmbeddingSemanticKernelTarget : Prop :=
+  Part6NondegenerateFeasibleRepairRoute
+
+/-- The Part 6 semantic target is definitionally the nondegenerate
+alpha/feasible-set repair route. -/
+theorem part6_lattice_embedding_semantic_kernel_target_iff_repair_route :
+    Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Part6NondegenerateFeasibleRepairRoute :=
+  Iff.rfl
+
+/-- The Part 6 semantic target is equivalent to full Part 6 paper-closing
+support. -/
+theorem part6_lattice_embedding_semantic_kernel_target_iff_full_support :
+    Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Part6FullPaperClosingSupport := by
+  exact part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support
+
+/-- The current Part 6 semantic target is still refuted by the kernel-gated
+alpha/feasible-set obstruction. -/
+theorem part6_lattice_embedding_semantic_kernel_target_notYet :
+    Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  exact not_part6_nondegenerate_feasible_repair_route_current
+
+/-- Named paper-semantic target proposition for the random-supercritical
+`Z2_L` topo/phase claim.
+
+This is the exact full paper-closing route with the repaired support surface
+and the missing giant-restricted loss field. -/
+def TopoClusterRandomSupercriticalZ2SemanticKernelTarget : Prop :=
+  RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+
+/-- The topo semantic target is definitionally the named full paper-closing
+route. -/
+theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route :
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute :=
+  Iff.rfl
+
+/-- The topo semantic target is equivalent to the boxed-torus finite-`Z2_L`
+calibrated route. -/
+theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route :
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  exact randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route
+
+/-- The current topo semantic target is still refuted by the kernel-gated
+full-support envelope obstruction. -/
+theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+
 /-- Typed payload for the closed Theorem 4.1 Part 4 lattice p-monotonicity
 target.  This machine-checks the bounded kernel theorem, the constructive
 five-state instance, and the standard `Z2` ranged local-lattice bridge that
@@ -608,6 +663,14 @@ structure Part6LatticeEmbeddingFrontierPayload where
     Part6FullPaperClosingOutputLayerCertificate
   part6_nondegenerate_feasible_repair_route_certificate :
     Part6NondegenerateFeasibleRepairRouteCertificate
+  part6_lattice_embedding_semantic_kernel_target_iff_repair_route :
+    Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Part6NondegenerateFeasibleRepairRoute
+  part6_lattice_embedding_semantic_kernel_target_iff_full_support :
+    Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Part6FullPaperClosingSupport
+  part6_lattice_embedding_semantic_kernel_target_current_obstruction :
+    Not Part6LatticeEmbeddingSemanticKernelTarget
   part6_nondegenerate_feasible_repair_route_iff_full_support :
     Part6NondegenerateFeasibleRepairRoute ↔ Part6FullPaperClosingSupport
   part6_nondegenerate_feasible_repair_route_of_bridge_route :
@@ -1203,6 +1266,12 @@ def part6_lattice_embedding_frontier_payload :
     part6_full_paper_closing_output_layer_certificate
   part6_nondegenerate_feasible_repair_route_certificate :=
     part6_nondegenerate_feasible_repair_route_certificate
+  part6_lattice_embedding_semantic_kernel_target_iff_repair_route :=
+    part6_lattice_embedding_semantic_kernel_target_iff_repair_route
+  part6_lattice_embedding_semantic_kernel_target_iff_full_support :=
+    part6_lattice_embedding_semantic_kernel_target_iff_full_support
+  part6_lattice_embedding_semantic_kernel_target_current_obstruction :=
+    part6_lattice_embedding_semantic_kernel_target_notYet
   part6_nondegenerate_feasible_repair_route_iff_full_support :=
     part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support
   part6_nondegenerate_feasible_repair_route_of_bridge_route :=
@@ -1894,6 +1963,14 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate
   random_supercritical_z2_boxed_torus_finite_z2L_route_certificate :
     RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate
+  random_supercritical_z2_semantic_kernel_target_iff_full_route :
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+  random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route :
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+  random_supercritical_z2_semantic_kernel_target_current_obstruction :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget
   random_supercritical_z2_full_paper_closing_route_iff_boxed_torus_finite_z2L_route :
     RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ↔
       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
@@ -3058,6 +3135,12 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate
   random_supercritical_z2_boxed_torus_finite_z2L_route_certificate :=
     random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate
+  random_supercritical_z2_semantic_kernel_target_iff_full_route :=
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route
+  random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route :=
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route
+  random_supercritical_z2_semantic_kernel_target_current_obstruction :=
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
   random_supercritical_z2_full_paper_closing_route_iff_boxed_torus_finite_z2L_route :=
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route
   random_supercritical_z2_full_support_envelope_obstruction_certificate :=
