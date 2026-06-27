@@ -352,6 +352,9 @@ satisfaction are equivalent, and all three route packages are current-refuted.
 then lifts the same negative route layer to every machine-facing open-target
 surface: `Not target`, `Not targetRoute`, and `Not closureRoute` are equivalent
 for the roster entries and remain synchronized with the typed payload roster.
+`open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate`
+checks the same negative equivalences directly on the typed frontier-payload
+roster, anchored back to the kernel roster certificate.
 `remaining_open_semantic_targets_closure_input_field_certificate` gates the
 field-level payloads beneath those inputs: Part 6 exposes the closed-unit
 tail-reversal bridge, nonempty closed-unit alpha domain, bridge route, and

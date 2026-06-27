@@ -306,6 +306,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_target_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_closure_route",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_route_equivalence",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_target_not_iff_target_route",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_target_not_iff_closure_route",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_target_route_not_iff_closure_route",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_closure_route_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_progress_certificate",
@@ -429,6 +432,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_output_pair_of_exact_closure_input",
@@ -1200,6 +1205,12 @@ def main() -> int:
         + ",".join(surface[12] for surface in payload_surfaces)
     )
     print(
+        "semantic_target_frontier_payload_route_obstruction_not_iff_proofs="
+        "openSemanticTargetFrontierPayloadSurface_target_not_iff_target_route,"
+        "openSemanticTargetFrontierPayloadSurface_target_not_iff_closure_route,"
+        "openSemanticTargetFrontierPayloadSurface_target_route_not_iff_closure_route"
+    )
+    print(
         "semantic_target_frontier_payload_closure_route_certificates="
         + ",".join(surface[13] for surface in payload_surfaces)
     )
@@ -1634,6 +1645,14 @@ def main() -> int:
     print(
         "semantic_target_kernel_surface_route_obstruction_certificate_proof="
         "open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate"
+    )
+    print(
+        "semantic_target_frontier_payload_route_obstruction_certificate="
+        "OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate"
+    )
+    print(
+        "semantic_target_frontier_payload_route_obstruction_certificate_proof="
+        "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate"
     )
     print(
         "semantic_target_part6_conditional_witness_exact_input_proofs="

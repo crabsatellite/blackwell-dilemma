@@ -3927,6 +3927,51 @@ theorem openSemanticTargetFrontierPayloadSurface_route_equivalence
     surface.targetRoute ↔ surface.closureRoute :=
   surface.routeEquivalenceProof
 
+/-- Negating the payload target is equivalent to negating the active target
+route recorded on the typed frontier-payload surface. -/
+theorem openSemanticTargetFrontierPayloadSurface_target_not_iff_target_route
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    Not surface.target ↔ Not surface.targetRoute := by
+  constructor
+  · intro htarget hroute
+    exact htarget
+      ((openSemanticTargetFrontierPayloadSurface_target_route surface).mpr
+        hroute)
+  · intro hroute htarget
+    exact hroute
+      ((openSemanticTargetFrontierPayloadSurface_target_route surface).mp
+        htarget)
+
+/-- Negating the payload target is equivalent to negating its paper-facing
+closure route. -/
+theorem openSemanticTargetFrontierPayloadSurface_target_not_iff_closure_route
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    Not surface.target ↔ Not surface.closureRoute := by
+  constructor
+  · intro htarget hroute
+    exact htarget
+      ((openSemanticTargetFrontierPayloadSurface_closure_route surface).mpr
+        hroute)
+  · intro hroute htarget
+    exact hroute
+      ((openSemanticTargetFrontierPayloadSurface_closure_route surface).mp
+        htarget)
+
+/-- Negating the payload target route is equivalent to negating its paper-facing
+closure route. -/
+theorem openSemanticTargetFrontierPayloadSurface_target_route_not_iff_closure_route
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    Not surface.targetRoute ↔ Not surface.closureRoute := by
+  constructor
+  · intro htargetRoute hclosureRoute
+    exact htargetRoute
+      ((openSemanticTargetFrontierPayloadSurface_route_equivalence surface).mpr
+        hclosureRoute)
+  · intro hclosureRoute htargetRoute
+    exact hclosureRoute
+      ((openSemanticTargetFrontierPayloadSurface_route_equivalence surface).mp
+        htargetRoute)
+
 /-- Every typed-frontier-payload roster entry projects the paper-facing
 closure-route certificate from its full payload. -/
 theorem openSemanticTargetFrontierPayloadSurface_closure_route_certificate
@@ -6730,6 +6775,52 @@ theorem
   · exact open_semantic_target_surface_roster_consistency_certificate
   exact remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
 
+/-- Payload-level route-obstruction certificate for the typed frontier roster.
+It repeats the target/target-route/closure-route refutation equivalences on
+the payload surface itself, then anchors them to the kernel-surface route
+obstruction certificate. -/
+def OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate :
+    Prop :=
+  (forall surface : OpenSemanticTargetFrontierPayloadSurface,
+    Not surface.target ↔ Not surface.targetRoute) /\
+    (forall surface : OpenSemanticTargetFrontierPayloadSurface,
+      Not surface.target ↔ Not surface.closureRoute) /\
+    (forall surface : OpenSemanticTargetFrontierPayloadSurface,
+      Not surface.targetRoute ↔ Not surface.closureRoute) /\
+    openSemanticTargetKernelSurfaceTargetObstructions =
+      openSemanticTargetFrontierPayloadSurfaceTargetObstructions /\
+    openSemanticTargetKernelSurfaceTargetRouteObstructions =
+      openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions /\
+    openSemanticTargetKernelSurfaceClosureRouteObstructions =
+      openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions /\
+    OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate
+
+/-- The typed frontier-payload roster also kernel-checks that its route-level
+obstructions are equivalent and synchronized with the kernel roster. -/
+theorem
+    open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate :
+    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate := by
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurface_target_not_iff_target_route
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurface_target_not_iff_closure_route
+  constructor
+  · exact
+      openSemanticTargetFrontierPayloadSurface_target_route_not_iff_closure_route
+  constructor
+  · exact openSemanticTargetSurfaceTargetObstructions_current
+  constructor
+  · exact openSemanticTargetSurfaceTargetRouteObstructions_current
+  constructor
+  · exact openSemanticTargetSurfaceClosureRouteObstructions_current
+  constructor
+  · exact open_semantic_target_surface_roster_consistency_certificate
+  constructor
+  · exact open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
+  exact remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
@@ -7273,6 +7364,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
+    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
     Part6RemainingConditionalProjectionCertificate /\
     Part6LatticeEmbeddingRouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
@@ -7307,6 +7399,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
+  constructor
+  · exact
+      open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
   constructor
   · exact part6_remaining_conditional_projection_certificate
   constructor

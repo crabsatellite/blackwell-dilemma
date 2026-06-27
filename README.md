@@ -175,6 +175,9 @@ lifts those route obstructions back to the machine-facing open-target roster:
 for every roster surface, `Not target`, `Not targetRoute`, and
 `Not closureRoute` are equivalent and synchronized with the typed payload
 surface.
+`open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate`
+repeats the same negative equivalences on the typed frontier-payload roster
+itself, anchored back to the kernel roster certificate.
 The field-level payloads are additionally gated by
 `remaining_open_semantic_targets_closure_input_field_certificate`: Part 6
 exposes the closed-unit tail-reversal bridge, nonempty closed-unit domain,
