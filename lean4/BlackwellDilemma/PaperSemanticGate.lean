@@ -11628,6 +11628,12 @@ theorem
        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] := rfl
 
+/-- Build gate: the topo field-output statement roster has exactly the 14
+field-payload projection, certificate, and obstruction formulas listed above. -/
+theorem
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements_length_current :
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 14 := rfl
+
 /-- Build-gated formula roster for the topo field-output certificate. -/
 def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate :
     Prop :=
@@ -11661,6 +11667,7 @@ def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertif
      TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] /\
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 14 /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
@@ -11699,6 +11706,9 @@ theorem
   constructor
   · exact
       topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current
+  constructor
+  · exact
+      topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements_length_current
   constructor
   · exact topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload
   constructor

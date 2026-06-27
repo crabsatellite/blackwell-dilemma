@@ -946,6 +946,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputDetailedStatementRosters",
@@ -3117,6 +3118,11 @@ def main() -> int:
     print(
         "semantic_target_topo_field_output_statement_roster_proof="
         "topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current"
+    )
+    print("semantic_target_topo_field_output_statement_roster_terms_checked=14")
+    print(
+        "semantic_target_topo_field_output_statement_roster_length_proof="
+        "topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements_length_current"
     )
     print(
         "semantic_target_topo_field_output_statement_roster_certificate="

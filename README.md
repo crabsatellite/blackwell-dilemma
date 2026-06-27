@@ -52,7 +52,7 @@ field payload
 also projects directly to the divergence/feasible witness output, repair route,
 and full-support route, with a dedicated 13-term statement roster for those formulas,
 and the topo field payload projects directly to the support-surface closing
-spine with its own field-output formula roster; both rosters are also packaged
+spine with its own 14-term field-output formula roster; both rosters are also packaged
 as an id/count-gated remaining-open-target detailed field-output roster whose
 id/count equalities, together with the field-output surface ids/count
 equalities and the all-surface ids/count synchronization certificate, are
@@ -353,7 +353,7 @@ rosters, and package obstructions, bilateral package obstruction statement
 rosters, Part 6 conditional witness interface projections, 11-term statement
 roster, and obstructions, Part 6 route-obstruction projections and 12-term statement roster,
 Part 6 13-term field-output statement roster, topo exact-output projections, 16-term
-statement roster, route nonclosure boundary, and field-output statement roster,
+statement roster, route nonclosure boundary, and 14-term field-output statement roster,
 combined detailed field-output roster package, topo route-obstruction
 projections and 12-term statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
