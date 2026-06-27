@@ -503,6 +503,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceIds_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceCount_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargets_named_current",
@@ -511,6 +514,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceOutputObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_target_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_exact_input_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_output_current_obstruction",
@@ -521,6 +527,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_obstruction_equivalence_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_obstruction_equivalence_named_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_obstruction_equivalence_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsSatisfied",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsExactClosureInputsSatisfied",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFullOutputBundlesSatisfied",
@@ -1908,6 +1916,20 @@ def main() -> int:
     print(
         "semantic_target_obstruction_equivalence_named_roster_certificate_proof="
         "open_semantic_target_obstruction_equivalence_named_roster_certificate"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_statement_roster_proofs="
+        "openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffExactInputStatements_named_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceTargetNotIffOutputStatements_named_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceExactInputNotIffOutputStatements_named_current"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_statement_roster_certificate="
+        "OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_statement_roster_certificate_proof="
+        "open_semantic_target_obstruction_equivalence_statement_roster_certificate"
     )
     print(
         "semantic_target_joint_closure_targets="
