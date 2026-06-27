@@ -10702,11 +10702,49 @@ theorem open_semantic_target_named_route_obstruction_roster_certificate :
   · exact open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
   exact open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
 
+/-- Target ids for the named frontier-certificate roster. -/
+def openSemanticTargetNamedFrontierCertificateRosterIds : List String :=
+  ["theorem_4_1_part6_lattice_embedding",
+   "topo_cluster_random_supercritical_z2"]
+
+/-- Named frontier-certificate roster ids paired with the paper-facing open
+ledger labels. -/
+def openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetNamedFrontierCertificateRosterIds
+    (openSemanticTargets.map (fun target => target.paperLabel))
+
+/-- Build gate: the named frontier-certificate roster ids are exactly the
+remaining open semantic target ids. -/
+theorem openSemanticTargetNamedFrontierCertificateRosterIds_current :
+    openSemanticTargetNamedFrontierCertificateRosterIds =
+      openSemanticTargetIds := rfl
+
+/-- Build gate: the named frontier-certificate roster keeps the same
+`(id, paperLabel)` projection as the open semantic ledger. -/
+theorem openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels_current :
+    openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
+
+/-- Build gate: kernel-surface and named frontier-certificate rosters are
+synchronized on target ids paired with paper-facing labels. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedFrontierCertificateRosterIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels := rfl
+
 /-- Build-gated named certificate roster for the two remaining open semantic
 targets. This pins the payload, route, closure, progress, nonclosure, and
 current-frontier certificate lists to the named Part 6/topo propositions. -/
 def OpenSemanticTargetNamedFrontierCertificateRosterCertificate : Prop :=
-  openSemanticTargetFrontierPayloadSurfacePayloadCertificates =
+  openSemanticTargetNamedFrontierCertificateRosterIds =
+    openSemanticTargetIds /\
+    openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels /\
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates =
     [Part6LatticeEmbeddingFrontierPayloadCertificate,
      TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate] /\
     openSemanticTargetKernelSurfaceTargetRouteCertificates =
@@ -10793,6 +10831,9 @@ certificate propositions on both the kernel surface and typed payload surface. -
 theorem open_semantic_target_named_frontier_certificate_roster_certificate :
     OpenSemanticTargetNamedFrontierCertificateRosterCertificate := by
   exact ⟨
+    openSemanticTargetNamedFrontierCertificateRosterIds_current,
+    openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedFrontierCertificateRosterIdPaperLabels,
     openSemanticTargetFrontierPayloadSurfacePayloadCertificates_named_current,
     openSemanticTargetKernelSurfaceTargetRouteCertificates_named_current,
     openSemanticTargetFrontierPayloadSurfaceTargetRouteCertificates_named_current,
