@@ -305,6 +305,13 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
 )
 
+EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_STATEMENT_TERMS = (
+    "Not CompletePaperSemanticKernelOnly",
+    "paperSemanticOpenCount = 2",
+    "openSemanticTargetIds =",
+    *EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS[:-1],
+)
+
 FORBIDDEN_WHEN_OPEN = {
     REPO_ROOT / "README.md": [
         "complete kernel-only audit target",
@@ -1267,6 +1274,37 @@ def top_level_current_obstruction_missing_conjuncts(text: str) -> list[str]:
     ]
 
 
+def top_level_statement_roster_missing_terms(text: str) -> list[str]:
+    match = re.search(
+        r"def\s+completePaperSemanticKernelOnlyCurrentObstructionStatements\s*:\s*"
+        r"List\s+Prop\s*:=\s*(.*?)\n\s*/--\s+Build gate: the top-level",
+        text,
+        flags=re.DOTALL,
+    )
+    if not match:
+        raise SystemExit(
+            "missing completePaperSemanticKernelOnlyCurrentObstructionStatements body"
+        )
+    body = match.group(1)
+
+    def term_is_present(term: str) -> bool:
+        if term == "Not CompletePaperSemanticKernelOnly":
+            pattern = r"\bNot\s+CompletePaperSemanticKernelOnly\b"
+        elif term == "paperSemanticOpenCount = 2":
+            pattern = r"\bpaperSemanticOpenCount\s*=\s*2\b"
+        elif term == "openSemanticTargetIds =":
+            pattern = r"\bopenSemanticTargetIds\s*="
+        else:
+            pattern = rf"\b{re.escape(term)}\b"
+        return re.search(pattern, body) is not None
+
+    return [
+        term
+        for term in EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_STATEMENT_TERMS
+        if not term_is_present(term)
+    ]
+
+
 def has_axiom_audit_print(text: str, decl: str) -> bool:
     return (
         re.search(rf"^\s*#print\s+axioms\s+{re.escape(decl)}\s*$", text, flags=re.MULTILINE)
@@ -1316,6 +1354,9 @@ def main() -> int:
     top_level_missing_conjuncts = (
         top_level_current_obstruction_missing_conjuncts(text)
     )
+    missing_top_level_statement_roster_terms = (
+        top_level_statement_roster_missing_terms(text)
+    )
 
     print(f"semantic_targets_open={open_count}")
     print(f"semantic_targets_closed={closed_count}")
@@ -1355,6 +1396,14 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_missing="
         f"{len(top_level_missing_conjuncts)}"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_checked="
+        f"{len(EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_STATEMENT_TERMS)}"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_terms_missing="
+        f"{len(missing_top_level_statement_roster_terms)}"
     )
     print(f"semantic_target_kernel_surface_ids={','.join(kernel_surface_ids)}")
     print(f"semantic_target_frontier_payload_surface_ids={','.join(payload_surface_ids)}")
@@ -2796,6 +2845,11 @@ def main() -> int:
         failures.append(
             "top-level current obstruction certificate missing conjuncts: "
             + ",".join(top_level_missing_conjuncts)
+        )
+    if missing_top_level_statement_roster_terms:
+        failures.append(
+            "top-level current obstruction statement roster missing terms: "
+            + ",".join(missing_top_level_statement_roster_terms)
         )
     if kernel_surface_ids != open_ids:
         failures.append(

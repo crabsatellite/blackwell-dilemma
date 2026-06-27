@@ -257,6 +257,8 @@ field-obstruction certificates.
 pins those top-level obstruction statements as a Lean `List Prop`.
 `audit_paper_semantic_gate.py` now parses that top-level certificate body and
 fails unless all 40 expected certificate conjuncts are present.
+The same audit parses the top-level statement roster and checks all 42 expected
+base/certificate terms.
 `open_semantic_target_closure_input_named_roster_certificate` now pins the
 named sufficient closure-input roster itself, including target/input/current
 obstruction/certificate propositions and the target-obstruction to
