@@ -4469,6 +4469,77 @@ theorem
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] :=
   rfl
 
+/-- Build gate: the kernel-surface target proposition roster has one entry for
+each currently open target. -/
+theorem openSemanticTargetKernelSurfaceTargets_length_current :
+    openSemanticTargetKernelSurfaceTargets.length = paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface target proposition roster has one entry for
+each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargets_length_current :
+    openSemanticTargetFrontierPayloadSurfaceTargets.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface target-obstruction roster has one entry for
+each currently open target. -/
+theorem openSemanticTargetKernelSurfaceTargetObstructions_length_current :
+    openSemanticTargetKernelSurfaceTargetObstructions.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface target-obstruction roster has one entry for
+each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargetObstructions_length_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetObstructions.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface target-route roster has one entry for each
+currently open target. -/
+theorem openSemanticTargetKernelSurfaceTargetRoutes_length_current :
+    openSemanticTargetKernelSurfaceTargetRoutes.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface target-route roster has one entry for each
+currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargetRoutes_length_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetRoutes.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface target-route obstruction roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceTargetRouteObstructions_length_current :
+    openSemanticTargetKernelSurfaceTargetRouteObstructions.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface target-route obstruction roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_length_current :
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface closure-route roster has one entry for each
+currently open target. -/
+theorem openSemanticTargetKernelSurfaceClosureRoutes_length_current :
+    openSemanticTargetKernelSurfaceClosureRoutes.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface closure-route roster has one entry for each
+currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceClosureRoutes_length_current :
+    openSemanticTargetFrontierPayloadSurfaceClosureRoutes.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface closure-route obstruction roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetKernelSurfaceClosureRouteObstructions_length_current :
+    openSemanticTargetKernelSurfaceClosureRouteObstructions.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the payload-surface closure-route obstruction roster has one
+entry for each currently open target. -/
+theorem openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_length_current :
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions.length =
+      paperSemanticOpenCount := rfl
+
 /-- Build gate: the kernel-surface frontier-progress certificate roster is
 exactly the named active progress certificates. -/
 theorem
@@ -9764,6 +9835,29 @@ def OpenSemanticTargetNamedRouteObstructionRosterCertificate : Prop :=
     openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions =
       [Not Part6FullPaperClosingSupport,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    openSemanticTargetKernelSurfaceTargets.length = paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceTargets.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceTargetObstructions.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceTargetObstructions.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceTargetRoutes.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceTargetRoutes.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceTargetRouteObstructions.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceClosureRoutes.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceClosureRoutes.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceClosureRouteObstructions.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions.length =
+      paperSemanticOpenCount /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate
 
@@ -9797,6 +9891,32 @@ theorem open_semantic_target_named_route_obstruction_roster_certificate :
   constructor
   · exact
       openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_named_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargets_length_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceTargets_length_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargetObstructions_length_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceTargetObstructions_length_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargetRoutes_length_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceTargetRoutes_length_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceTargetRouteObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_length_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceClosureRoutes_length_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceClosureRoutes_length_current
+  constructor
+  · exact openSemanticTargetKernelSurfaceClosureRouteObstructions_length_current
+  constructor
+  · exact
+      openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_length_current
   constructor
   · exact open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate
   exact open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate

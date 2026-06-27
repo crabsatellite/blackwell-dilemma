@@ -229,7 +229,8 @@ itself, anchored back to the kernel roster certificate.
 `open_semantic_target_named_route_obstruction_roster_certificate` further pins
 the kernel and payload target/route/closure obstruction lists to the named
 Part 6 and topo propositions, rather than only checking that the two lists
-match each other.
+match each other, with 24 obstruction/route terms checked against
+`paperSemanticOpenCount`.
 `open_semantic_target_named_frontier_certificate_roster_certificate` likewise
 pins the payload, route, closure, progress, nonclosure, and current-frontier
 certificate rosters to the named Part 6/topo certificates on both surfaces,

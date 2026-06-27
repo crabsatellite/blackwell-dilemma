@@ -447,6 +447,18 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRouteCertificates_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceClosureRouteObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargets_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargets_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargetObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargetObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargetRoutes_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargetRoutes_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceTargetRouteObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceClosureRoutes_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRoutes_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceClosureRouteObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceFrontierProgressCertificates_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceProgressCertificates_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceFrontierNonclosureCertificates_named_current",
@@ -2011,6 +2023,22 @@ def main() -> int:
         "openSemanticTargetFrontierPayloadSurfaceClosureRoutes_named_current,"
         "openSemanticTargetKernelSurfaceClosureRouteObstructions_named_current,"
         "openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_named_current"
+    )
+    print("semantic_target_named_route_obstruction_roster_terms_checked=24")
+    print(
+        "semantic_target_named_route_obstruction_roster_length_proofs="
+        "openSemanticTargetKernelSurfaceTargets_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargets_length_current,"
+        "openSemanticTargetKernelSurfaceTargetObstructions_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargetObstructions_length_current,"
+        "openSemanticTargetKernelSurfaceTargetRoutes_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargetRoutes_length_current,"
+        "openSemanticTargetKernelSurfaceTargetRouteObstructions_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceTargetRouteObstructions_length_current,"
+        "openSemanticTargetKernelSurfaceClosureRoutes_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceClosureRoutes_length_current,"
+        "openSemanticTargetKernelSurfaceClosureRouteObstructions_length_current,"
+        "openSemanticTargetFrontierPayloadSurfaceClosureRouteObstructions_length_current"
     )
     print(
         "semantic_target_named_frontier_certificate_roster_proofs="
