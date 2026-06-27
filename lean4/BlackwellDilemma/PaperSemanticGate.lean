@@ -3715,11 +3715,16 @@ structure OpenSemanticTargetFrontierPayloadSurface where
   id : String
   payloadCertificate : Prop
   payloadCertificateProof : payloadCertificate
+  target : Prop
+  targetCurrentObstructionProof : Not target
   targetRoute : Prop
+  targetRouteProof : target ↔ targetRoute
   targetRouteCertificate : Prop
   targetRouteCertificateProof : targetRouteCertificate
   targetRouteObstructionProof : Not targetRoute
   closureRoute : Prop
+  closureRouteProof : target ↔ closureRoute
+  routeEquivalenceProof : targetRoute ↔ closureRoute
   closureRouteCertificate : Prop
   closureRouteCertificateProof : closureRouteCertificate
   closureRouteObstructionProof : Not closureRoute
@@ -3738,7 +3743,12 @@ def openSemanticTargetFrontierPayloadSurfaces :
       payloadCertificate := Part6LatticeEmbeddingFrontierPayloadCertificate,
       payloadCertificateProof :=
         part6_lattice_embedding_frontier_payload_certificate,
+      target := Part6LatticeEmbeddingSemanticKernelTarget,
+      targetCurrentObstructionProof :=
+        part6_lattice_embedding_semantic_kernel_target_notYet,
       targetRoute := Part6NondegenerateFeasibleRepairRoute,
+      targetRouteProof :=
+        part6_lattice_embedding_semantic_kernel_target_iff_repair_route,
       targetRouteCertificate :=
         Part6NondegenerateFeasibleRepairRouteCertificate,
       targetRouteCertificateProof :=
@@ -3746,6 +3756,10 @@ def openSemanticTargetFrontierPayloadSurfaces :
       targetRouteObstructionProof :=
         part6_lattice_embedding_frontier_payload_target_route_obstruction,
       closureRoute := Part6FullPaperClosingSupport,
+      closureRouteProof :=
+        part6_lattice_embedding_semantic_kernel_target_iff_full_support,
+      routeEquivalenceProof :=
+        part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support,
       closureRouteCertificate :=
         Part6FullPaperClosingOutputLayerCertificate,
       closureRouteCertificateProof :=
@@ -3768,7 +3782,12 @@ def openSemanticTargetFrontierPayloadSurfaces :
         TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
       payloadCertificateProof :=
         topo_cluster_random_supercritical_z2_frontier_payload_certificate,
+      target := TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+      targetCurrentObstructionProof :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
       targetRoute := RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+      targetRouteProof :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route,
       targetRouteCertificate :=
         RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
       targetRouteCertificateProof :=
@@ -3777,6 +3796,10 @@ def openSemanticTargetFrontierPayloadSurfaces :
         topo_cluster_random_supercritical_z2_frontier_payload_target_route_obstruction,
       closureRoute :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+      closureRouteProof :=
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
+      routeEquivalenceProof :=
+        randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route,
       closureRouteCertificate :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
       closureRouteCertificateProof :=
@@ -3821,6 +3844,20 @@ theorem openSemanticTargetFrontierPayloadSurface_certificate
     surface.payloadCertificate :=
   surface.payloadCertificateProof
 
+/-- Every typed-frontier-payload roster entry carries its exact semantic
+target proposition obstruction. -/
+theorem openSemanticTargetFrontierPayloadSurface_current_obstruction
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    Not surface.target :=
+  surface.targetCurrentObstructionProof
+
+/-- Every typed-frontier-payload roster entry carries the exact target route
+represented by its semantic target proposition. -/
+theorem openSemanticTargetFrontierPayloadSurface_target_route
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.target ↔ surface.targetRoute :=
+  surface.targetRouteProof
+
 /-- Every typed-frontier-payload roster entry projects the target-route
 certificate from its full payload. -/
 theorem openSemanticTargetFrontierPayloadSurface_target_route_certificate
@@ -3834,6 +3871,20 @@ theorem openSemanticTargetFrontierPayloadSurface_target_route_current_obstructio
     (surface : OpenSemanticTargetFrontierPayloadSurface) :
     Not surface.targetRoute :=
   surface.targetRouteObstructionProof
+
+/-- Every typed-frontier-payload roster entry carries the exact paper-facing
+closure route represented by its semantic target proposition. -/
+theorem openSemanticTargetFrontierPayloadSurface_closure_route
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.target ↔ surface.closureRoute :=
+  surface.closureRouteProof
+
+/-- Every typed-frontier-payload roster entry carries the exact equivalence
+between the target route and paper-facing closure route. -/
+theorem openSemanticTargetFrontierPayloadSurface_route_equivalence
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.targetRoute ↔ surface.closureRoute :=
+  surface.routeEquivalenceProof
 
 /-- Every typed-frontier-payload roster entry projects the paper-facing
 closure-route certificate from its full payload. -/
@@ -3869,6 +3920,87 @@ theorem openSemanticTargetFrontierPayloadSurface_frontier_certificate
     (surface : OpenSemanticTargetFrontierPayloadSurface) :
     surface.frontierCertificate :=
   surface.frontierCertificateProof
+
+/-- Kernel-surface view of the exact semantic target propositions. -/
+def openSemanticTargetKernelSurfaceTargets : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => surface.target)
+
+/-- Payload-surface view of the exact semantic target propositions. -/
+def openSemanticTargetFrontierPayloadSurfaceTargets : List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.target)
+
+/-- Build gate: the kernel and payload surfaces agree on exact semantic target
+propositions. -/
+theorem openSemanticTargetSurfaceTargets_current :
+    openSemanticTargetKernelSurfaceTargets =
+      openSemanticTargetFrontierPayloadSurfaceTargets := rfl
+
+/-- Kernel-surface view of the current target obstruction propositions. -/
+def openSemanticTargetKernelSurfaceTargetObstructions : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => Not surface.target)
+
+/-- Payload-surface view of the current target obstruction propositions. -/
+def openSemanticTargetFrontierPayloadSurfaceTargetObstructions : List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => Not surface.target)
+
+/-- Build gate: the kernel and payload surfaces agree on current target
+obstruction propositions. -/
+theorem openSemanticTargetSurfaceTargetObstructions_current :
+    openSemanticTargetKernelSurfaceTargetObstructions =
+      openSemanticTargetFrontierPayloadSurfaceTargetObstructions := rfl
+
+/-- Kernel-surface view of target-to-route equivalence statements. -/
+def openSemanticTargetKernelSurfaceTargetRouteStatements : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => surface.target ↔ surface.targetRoute)
+
+/-- Payload-surface view of target-to-route equivalence statements. -/
+def openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements : List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.target ↔ surface.targetRoute)
+
+/-- Build gate: the kernel and payload surfaces agree on target-to-route
+equivalence statements. -/
+theorem openSemanticTargetSurfaceTargetRouteStatements_current :
+    openSemanticTargetKernelSurfaceTargetRouteStatements =
+      openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements := rfl
+
+/-- Kernel-surface view of target-to-closure equivalence statements. -/
+def openSemanticTargetKernelSurfaceClosureRouteStatements : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => surface.target ↔ surface.closureRoute)
+
+/-- Payload-surface view of target-to-closure equivalence statements. -/
+def openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements : List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.target ↔ surface.closureRoute)
+
+/-- Build gate: the kernel and payload surfaces agree on target-to-closure
+equivalence statements. -/
+theorem openSemanticTargetSurfaceClosureRouteStatements_current :
+    openSemanticTargetKernelSurfaceClosureRouteStatements =
+      openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements := rfl
+
+/-- Kernel-surface view of target-route-to-closure equivalence statements. -/
+def openSemanticTargetKernelSurfaceRouteEquivalenceStatements : List Prop :=
+  openSemanticTargetKernelSurfaces.map
+    (fun surface => surface.targetRoute ↔ surface.closureRoute)
+
+/-- Payload-surface view of target-route-to-closure equivalence statements. -/
+def openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements :
+    List Prop :=
+  openSemanticTargetFrontierPayloadSurfaces.map
+    (fun surface => surface.targetRoute ↔ surface.closureRoute)
+
+/-- Build gate: the kernel and payload surfaces agree on target-route-to-closure
+equivalence statements. -/
+theorem openSemanticTargetSurfaceRouteEquivalenceStatements_current :
+    openSemanticTargetKernelSurfaceRouteEquivalenceStatements =
+      openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements := rfl
 
 /-- Kernel-surface view of the active target routes. -/
 def openSemanticTargetKernelSurfaceTargetRoutes : List Prop :=
@@ -4030,6 +4162,16 @@ def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
       openSemanticTargetFrontierPayloadSurfaceIds /\
     openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
     openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetKernelSurfaceTargets =
+      openSemanticTargetFrontierPayloadSurfaceTargets /\
+    openSemanticTargetKernelSurfaceTargetObstructions =
+      openSemanticTargetFrontierPayloadSurfaceTargetObstructions /\
+    openSemanticTargetKernelSurfaceTargetRouteStatements =
+      openSemanticTargetFrontierPayloadSurfaceTargetRouteStatements /\
+    openSemanticTargetKernelSurfaceClosureRouteStatements =
+      openSemanticTargetFrontierPayloadSurfaceClosureRouteStatements /\
+    openSemanticTargetKernelSurfaceRouteEquivalenceStatements =
+      openSemanticTargetFrontierPayloadSurfaceRouteEquivalenceStatements /\
     openSemanticTargetKernelSurfaceTargetRoutes =
       openSemanticTargetFrontierPayloadSurfaceTargetRoutes /\
     openSemanticTargetKernelSurfaceTargetRouteCertificates =
@@ -4059,6 +4201,11 @@ theorem open_semantic_target_surface_roster_consistency_certificate :
     openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds,
     openSemanticTargetKernelSurfaceCount_current,
     openSemanticTargetFrontierPayloadSurfaceCount_current,
+    openSemanticTargetSurfaceTargets_current,
+    openSemanticTargetSurfaceTargetObstructions_current,
+    openSemanticTargetSurfaceTargetRouteStatements_current,
+    openSemanticTargetSurfaceClosureRouteStatements_current,
+    openSemanticTargetSurfaceRouteEquivalenceStatements_current,
     openSemanticTargetSurfaceTargetRoutes_current,
     openSemanticTargetSurfaceTargetRouteCertificates_current,
     openSemanticTargetSurfaceTargetRouteObstructions_current,

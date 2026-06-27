@@ -1052,12 +1052,16 @@ For full kernel-pure cover (v2.0 future iteration):
   payload-certificate proofs to appear in `AxiomAudit.lean`. The same surface
   now also carries payload-derived projections for each target's active
   frontier progress certificate, matching nonclosure certificate, and current
-  frontier certificate. The payload surface also carries payload-derived
+  frontier certificate. The payload surface also carries each target
+  proposition, its current target obstruction, the target-to-route proof,
+  target-to-closure proof, route-equivalence proof, and payload-derived
   target-route and closure-route certificate and obstruction projections for
   both open targets. The kernel-surface and payload-surface views of the target
-  routes, target-route certificates, target-route obstruction propositions,
-  closure routes, closure-route certificates, closure-route obstruction
-  propositions, and the three frontier certificate lists are all
+  propositions, current target obstruction propositions, target-to-route
+  statements, target-to-closure statements, route-equivalence statements,
+  target routes, target-route certificates, target-route obstruction
+  propositions, closure routes, closure-route certificates, closure-route
+  obstruction propositions, and the three frontier certificate lists are all
   definitionally checked equal.
   `open_semantic_target_surface_roster_consistency_certificate` then proves
   that the semantic ledger ids, kernel-surface ids, typed frontier-payload ids,
