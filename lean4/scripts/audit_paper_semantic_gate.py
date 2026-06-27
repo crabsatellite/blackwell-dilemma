@@ -324,6 +324,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate",
     "TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate",
     "TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate",
+    "TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate",
     "RemainingOpenSemanticTargetsOutputEquivalenceCertificate",
     "OpenSemanticTargetOutputEquivalenceNamedRosterCertificate",
     "OpenSemanticTargetOutputEquivalenceStatementRosterCertificate",
@@ -869,6 +870,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_giant_loss_output_of_field_payload",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputSurface",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaces",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceIds",
@@ -2848,6 +2853,22 @@ def main() -> int:
     print(
         "semantic_target_part6_field_output_statement_roster_certificate_proof="
         "part6_lattice_embedding_closure_input_field_output_statement_roster_certificate"
+    )
+    print(
+        "semantic_target_topo_field_output_statement_roster="
+        "topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements"
+    )
+    print(
+        "semantic_target_topo_field_output_statement_roster_proof="
+        "topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current"
+    )
+    print(
+        "semantic_target_topo_field_output_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_topo_field_output_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (

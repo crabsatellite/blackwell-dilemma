@@ -11003,6 +11003,179 @@ theorem topo_cluster_random_supercritical_z2_closure_input_field_output_certific
   · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
   exact topo_cluster_random_supercritical_z2_field_payload_notYet
 
+/-- Statement roster for the topo field-output certificate. -/
+def topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements :
+    List Prop :=
+  [TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    TopoClusterRandomSupercriticalZ2ExactClosureInput,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        bridge,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+   Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate]
+
+/-- Build gate: the topo field-output statement roster is fixed to the current
+direct field-payload projection formulas. -/
+theorem
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current :
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements =
+      [TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+            bridge,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+            bridge,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] := rfl
+
+/-- Build-gated formula roster for the topo field-output certificate. -/
+def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements =
+    [TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2ExactClosureInput,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
+     TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+     Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+        RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          bridge) /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
+    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate
+
+/-- The topo field-output statement roster is kernel-checked against the direct
+projection theorems used by the field-output certificate. -/
+theorem
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate := by
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current
+  constructor
+  · exact topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_exact_closure_input_of_field_payload
+  constructor
+  · exact topo_cluster_random_supercritical_z2_full_route_of_field_payload
+  constructor
+  · exact topo_cluster_random_supercritical_z2_boxed_route_of_field_payload
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_support_surface_closing_route_of_field_payload
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_support_surface_repair_route_of_field_payload
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_support_surface_repair_output_of_field_payload
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_field_payload
+  constructor
+  · exact topo_cluster_random_supercritical_z2_paper_support_output_of_field_payload
+  constructor
+  · exact topo_cluster_random_supercritical_z2_giant_loss_output_of_field_payload
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_field_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
+  constructor
+  · exact topo_cluster_random_supercritical_z2_field_payload_notYet
+  exact
+    topo_cluster_random_supercritical_z2_closure_input_field_output_certificate
+
 /-- Machine-facing field-output surface for each open semantic target. -/
 structure OpenSemanticTargetClosureInputFieldOutputSurface where
   id : String
@@ -11580,6 +11753,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
    RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
    OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
    OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11633,6 +11807,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
        RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
        OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
        OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11689,6 +11864,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
      TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
      TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
      RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
      OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
      OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
@@ -11737,6 +11913,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
@@ -11791,6 +11968,7 @@ theorem
     topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate,
     topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate,
     remaining_open_semantic_targets_output_equivalence_certificate,
     open_semantic_target_output_equivalence_named_roster_certificate,
     open_semantic_target_output_equivalence_statement_roster_certificate,
@@ -11845,6 +12023,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
@@ -11951,6 +12130,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   constructor
