@@ -6371,6 +6371,31 @@ theorem
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
         Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the target-to-output statement roster has one entry for each
+currently open target. -/
+theorem openSemanticTargetOutputEquivalenceSurfaceTargetToOutputStatements_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceTargetToOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the output-to-target statement roster has one entry for each
+currently open target. -/
+theorem openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/output equivalence statement roster has one entry
+for each currently open target. -/
+theorem openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
+/-- Build gate: the target/output obstruction-equivalence statement roster has
+one entry for each currently open target. -/
+theorem
+    openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements_length_current :
+    openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements.length =
+      paperSemanticOpenCount := rfl
+
 /-- Every target/output surface carries the target-to-output projection. -/
 theorem openSemanticTargetOutputEquivalenceSurface_target_to_output
     (surface : OpenSemanticTargetOutputEquivalenceSurface) :
@@ -6529,6 +6554,14 @@ def OpenSemanticTargetOutputEquivalenceStatementRosterCertificate : Prop :=
         Not Part6FullPaperClosingFullOutputBundle,
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
         Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetOutputEquivalenceSurfaceTargetToOutputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements.length =
+      paperSemanticOpenCount /\
     (∀ surface ∈ openSemanticTargetOutputEquivalenceSurfaces,
       surface.target -> surface.outputBundle) /\
     (∀ surface ∈ openSemanticTargetOutputEquivalenceSurfaces,
@@ -6548,6 +6581,10 @@ theorem open_semantic_target_output_equivalence_statement_roster_certificate :
     openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_named_current,
     openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_named_current,
     openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements_named_current,
+    openSemanticTargetOutputEquivalenceSurfaceTargetToOutputStatements_length_current,
+    openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_length_current,
+    openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_length_current,
+    openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements_length_current,
     (by
       intro surface _
       exact openSemanticTargetOutputEquivalenceSurface_target_to_output

@@ -841,6 +841,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetToOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurface_target_to_output",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurface_output_to_target",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetOutputEquivalenceSurface_target_iff_output",
@@ -2335,6 +2339,14 @@ def main() -> int:
         "openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_named_current,"
         "openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_named_current,"
         "openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements_named_current"
+    )
+    print("semantic_target_output_equivalence_statement_roster_terms_checked=8")
+    print(
+        "semantic_target_output_equivalence_statement_roster_length_proofs="
+        "openSemanticTargetOutputEquivalenceSurfaceTargetToOutputStatements_length_current,"
+        "openSemanticTargetOutputEquivalenceSurfaceOutputToTargetStatements_length_current,"
+        "openSemanticTargetOutputEquivalenceSurfaceTargetIffOutputStatements_length_current,"
+        "openSemanticTargetOutputEquivalenceSurfaceTargetNotIffOutputStatements_length_current"
     )
     print(
         "semantic_target_output_equivalence_statement_roster_certificate="
