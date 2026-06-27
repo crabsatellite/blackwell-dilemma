@@ -3647,11 +3647,43 @@ the semantic ledger's open target roster. -/
 theorem openSemanticTargetFrontierPayloadSurfaceIds_current :
     openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds := rfl
 
+/-- Build gate: the typed-frontier-payload roster has the same cardinality as
+the semantic ledger's open target count. -/
+theorem openSemanticTargetFrontierPayloadSurfaceCount_current :
+    openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount := rfl
+
+/-- Build gate: the kernel-surface and typed-frontier-payload rosters cannot
+drift independently. -/
+theorem openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds :
+    openSemanticTargetKernelSurfaceIds =
+      openSemanticTargetFrontierPayloadSurfaceIds := rfl
+
 /-- Every typed-frontier-payload roster entry carries its payload certificate. -/
 theorem openSemanticTargetFrontierPayloadSurface_certificate
     (surface : OpenSemanticTargetFrontierPayloadSurface) :
     surface.payloadCertificate :=
   surface.payloadCertificateProof
+
+/-- One certificate tying the semantic ledger, kernel surface roster, and full
+typed frontier-payload roster to the same remaining open targets. -/
+def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
+  openSemanticTargetKernelSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetKernelSurfaceIds =
+      openSemanticTargetFrontierPayloadSurfaceIds /\
+    openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount
+
+/-- The current semantic open-target ledger, kernel surface roster, and full
+typed frontier-payload roster are machine-checked to be synchronized. -/
+theorem open_semantic_target_surface_roster_consistency_certificate :
+    OpenSemanticTargetSurfaceRosterConsistencyCertificate := by
+  exact ⟨
+    openSemanticTargetKernelSurfaceIds_current,
+    openSemanticTargetFrontierPayloadSurfaceIds_current,
+    openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds,
+    openSemanticTargetKernelSurfaceCount_current,
+    openSemanticTargetFrontierPayloadSurfaceCount_current⟩
 
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:

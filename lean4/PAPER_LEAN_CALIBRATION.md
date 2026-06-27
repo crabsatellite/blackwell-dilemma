@@ -1050,6 +1050,9 @@ For full kernel-pure cover (v2.0 future iteration):
   ids to `Nonempty` certificates for their full typed frontier payload terms,
   and the semantic audit requires the payload terms, payload certificates, and
   payload-certificate proofs to appear in `AxiomAudit.lean`.
+  `open_semantic_target_surface_roster_consistency_certificate` then proves
+  that the semantic ledger ids, kernel-surface ids, typed frontier-payload ids,
+  and both roster counts are synchronized.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
   iff, obstruction, target-route obstruction, target-route certificate,
   route-equivalence proof, closure-route obstruction, closure-route certificate,

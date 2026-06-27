@@ -113,7 +113,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_frontier_progress_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_frontier_nonclosure_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceIds_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceCount_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetSurfaceRosterConsistencyCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_surface_roster_consistency_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
 }
@@ -364,6 +368,14 @@ def main() -> int:
         "semantic_target_frontier_payload_certificate_proofs="
         + ",".join(surface[2] for surface in payload_surfaces)
     )
+    print(
+        "semantic_target_surface_roster_consistency_certificate="
+        "OpenSemanticTargetSurfaceRosterConsistencyCertificate"
+    )
+    print(
+        "semantic_target_surface_roster_consistency_certificate_proof="
+        "open_semantic_target_surface_roster_consistency_certificate"
+    )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     for (
         _target_id,
@@ -440,6 +452,10 @@ def main() -> int:
     if payload_surface_ids != open_ids:
         failures.append(
             f"frontier-payload surface ids {payload_surface_ids!r} != open semantic target ids {open_ids!r}"
+        )
+    if kernel_surface_ids != payload_surface_ids:
+        failures.append(
+            f"kernel-surface ids {kernel_surface_ids!r} != frontier-payload surface ids {payload_surface_ids!r}"
         )
     for (
         target_id,
