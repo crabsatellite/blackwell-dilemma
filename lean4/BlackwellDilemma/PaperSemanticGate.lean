@@ -8687,6 +8687,125 @@ theorem
   · exact topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate
   exact remaining_open_semantic_targets_joint_closure_reduction_certificate
 
+/-- Package-level statement roster for the joint route-obstruction reduction. -/
+def remainingOpenSemanticTargetsJointRouteStatements : List Prop :=
+  [RemainingOpenSemanticTargetsSatisfied ->
+    RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+   RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+    RemainingOpenSemanticTargetsSatisfied,
+   RemainingOpenSemanticTargetsSatisfied ↔
+    RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+   RemainingOpenSemanticTargetsSatisfied ->
+    RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+   RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+    RemainingOpenSemanticTargetsSatisfied,
+   RemainingOpenSemanticTargetsSatisfied ↔
+    RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+   RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+    RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+   RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+    RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+   RemainingOpenSemanticTargetsTargetRoutesSatisfied ↔
+    RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+   Not RemainingOpenSemanticTargetsSatisfied,
+   Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+   Not RemainingOpenSemanticTargetsClosureRoutesSatisfied]
+
+/-- Build gate: the joint route-obstruction statement roster names every
+package-level route projection, equivalence, and current obstruction. -/
+theorem remainingOpenSemanticTargetsJointRouteStatements_named_current :
+    remainingOpenSemanticTargetsJointRouteStatements =
+      [RemainingOpenSemanticTargetsSatisfied ->
+        RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+       RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       RemainingOpenSemanticTargetsSatisfied ↔
+        RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+       RemainingOpenSemanticTargetsSatisfied ->
+        RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+       RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       RemainingOpenSemanticTargetsSatisfied ↔
+        RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+       RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+        RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+       RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+        RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+       RemainingOpenSemanticTargetsTargetRoutesSatisfied ↔
+        RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+       Not RemainingOpenSemanticTargetsSatisfied,
+       Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+       Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] := rfl
+
+/-- Build-gated statement roster for the joint route-obstruction reduction. -/
+def RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsJointRouteStatements =
+    [RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+     RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied,
+     RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+     RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+     RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied,
+     RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+     RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+     RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+     RemainingOpenSemanticTargetsTargetRoutesSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied,
+     Not RemainingOpenSemanticTargetsSatisfied,
+     Not RemainingOpenSemanticTargetsTargetRoutesSatisfied,
+     Not RemainingOpenSemanticTargetsClosureRoutesSatisfied] /\
+    (RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsTargetRoutesSatisfied ->
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsClosureRoutesSatisfied ->
+      RemainingOpenSemanticTargetsTargetRoutesSatisfied) /\
+    (RemainingOpenSemanticTargetsTargetRoutesSatisfied ↔
+      RemainingOpenSemanticTargetsClosureRoutesSatisfied) /\
+    Not RemainingOpenSemanticTargetsSatisfied /\
+    Not RemainingOpenSemanticTargetsTargetRoutesSatisfied /\
+    Not RemainingOpenSemanticTargetsClosureRoutesSatisfied /\
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate
+
+/-- The joint route-obstruction statement roster is pinned to named projection,
+equivalence, and current-obstruction theorems. -/
+theorem
+    remaining_open_semantic_targets_joint_route_statement_roster_certificate :
+    RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate := by
+  exact ⟨
+    remainingOpenSemanticTargetsJointRouteStatements_named_current,
+    remaining_open_semantic_targets_target_routes_of_targets,
+    remaining_open_semantic_targets_targets_of_target_routes,
+    remaining_open_semantic_targets_satisfied_iff_target_routes,
+    remaining_open_semantic_targets_closure_routes_of_targets,
+    remaining_open_semantic_targets_targets_of_closure_routes,
+    remaining_open_semantic_targets_satisfied_iff_closure_routes,
+    remaining_open_semantic_targets_closure_routes_of_target_routes,
+    remaining_open_semantic_targets_target_routes_of_closure_routes,
+    remaining_open_semantic_targets_target_routes_iff_closure_routes,
+    remaining_open_semantic_targets_satisfied_notYet,
+    remaining_open_semantic_targets_target_routes_notYet,
+    remaining_open_semantic_targets_closure_routes_notYet,
+    remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate⟩
+
 /-- Build-gated certificate that every joint package can be refuted from either
 the Part 6 side or the topo side. -/
 def RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate :
@@ -9807,6 +9926,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
     RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
+    RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
@@ -9870,6 +9990,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_joint_route_statement_roster_certificate
   constructor
   · exact
       remaining_open_semantic_targets_bilateral_package_obstruction_certificate

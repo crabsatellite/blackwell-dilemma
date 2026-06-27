@@ -176,6 +176,9 @@ obstruction formula in one build-gated statement list.
 also packages the same two targets as joint route obligations: joint target
 satisfaction, joint target-route satisfaction, and joint closure-route
 satisfaction are equivalent, and all three route packages are current-refuted.
+`remaining_open_semantic_targets_joint_route_statement_roster_certificate`
+pins every joint route-package projection, equivalence, and current package
+obstruction formula in one build-gated statement list.
 `remaining_open_semantic_targets_bilateral_package_obstruction_certificate`
 checks that the joint target, exact-input, output-bundle, target-route, and
 closure-route packages can each be refuted from either the Part 6 obstruction
@@ -293,8 +296,8 @@ exact closure-input equivalence, sufficient-to-exact projections,
 exact-input/output bundle equivalence, output-equivalence target/output bundles,
 bidirectional output projections, output iff proofs, output obstructions,
 target/exact/output obstruction-equivalence proofs, joint closure-reduction
-packages and package obstructions, joint route-obstruction packages and package
-obstructions, Part 6 conditional witness interface projections and
+packages and package obstructions, joint route-obstruction packages, statement
+rosters, and package obstructions, Part 6 conditional witness interface projections and
 obstructions, Part 6 route-obstruction projections, topo
 exact-output projections and route nonclosure boundary, topo route-obstruction
 projections, field-roster id,
