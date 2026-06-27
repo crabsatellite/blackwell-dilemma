@@ -10574,6 +10574,35 @@ theorem part6_lattice_embedding_exact_closure_input_of_field_payload :
     part6_lattice_embedding_exact_closure_input_of_closure_input
       (part6_lattice_embedding_closure_input_of_field_payload hpayload)
 
+/-- The Part 6 field payload projects directly to the divergence witness. -/
+theorem part6_lattice_embedding_divergence_witness_of_field_payload :
+    Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness := by
+  intro hpayload
+  exact
+    part6_lattice_embedding_divergence_witness_of_exact_closure_input
+      (part6_lattice_embedding_exact_closure_input_of_field_payload hpayload)
+
+/-- The Part 6 field payload projects directly to the feasible/divergence
+witness. -/
+theorem part6_lattice_embedding_feasible_divergence_witness_of_field_payload :
+    Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hpayload
+  exact
+    part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input
+      (part6_lattice_embedding_exact_closure_input_of_field_payload hpayload)
+
+/-- The Part 6 field payload projects directly to the paired witness output. -/
+theorem part6_lattice_embedding_output_pair_of_field_payload :
+    Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness := by
+  intro hpayload
+  exact
+    part6_lattice_embedding_output_pair_of_exact_closure_input
+      (part6_lattice_embedding_exact_closure_input_of_field_payload hpayload)
+
 /-- The Part 6 field payload projects directly to the repair-route target. -/
 theorem part6_lattice_embedding_repair_route_of_field_payload :
     Part6LatticeEmbeddingClosureInputFieldPayload ->
@@ -10612,6 +10641,13 @@ def Part6LatticeEmbeddingClosureInputFieldOutputCertificate : Prop :=
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6LatticeEmbeddingExactClosureInput) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness) /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6NondegenerateFeasibleRepairRoute) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6FullPaperClosingFullOutputBundle) /\
@@ -10631,6 +10667,12 @@ theorem part6_lattice_embedding_closure_input_field_output_certificate :
   · exact part6_lattice_embedding_semantic_kernel_target_of_field_payload
   constructor
   · exact part6_lattice_embedding_exact_closure_input_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_divergence_witness_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_feasible_divergence_witness_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_output_pair_of_field_payload
   constructor
   · exact part6_lattice_embedding_repair_route_of_field_payload
   constructor

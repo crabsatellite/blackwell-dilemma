@@ -49,9 +49,10 @@ open/closed target ids and every open-target surface roster. The Lean gate now
 also directly projects each remaining field payload to its target, exact closure
 input, and output bundle before recording the current obstruction. The Part 6
 field payload
-also projects directly to the repair and full-support routes, and the topo field
-payload projects directly to the support-surface closing spine. The project does
-not claim the stronger full-manuscript semantic closure
+also projects directly to the divergence/feasible witness output, repair route,
+and full-support route, and the topo field payload projects directly to the
+support-surface closing spine. The project does not claim the stronger
+full-manuscript semantic closure
 status. The Part 4 lattice p-monotonicity target is now closed by the standard
 `Z²` ranged local-lattice bridge; the former threshold target is closed by the
 one-edge high-κ oracle-routing carrier
