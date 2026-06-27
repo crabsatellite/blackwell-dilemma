@@ -546,6 +546,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_full_outputs_notYet",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureReductionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_reduction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsTargetRoutesSatisfied",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureRoutesSatisfied",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_of_targets",
@@ -1998,6 +2002,18 @@ def main() -> int:
     print(
         "semantic_target_joint_closure_reduction_certificate_proof="
         "remaining_open_semantic_targets_joint_closure_reduction_certificate"
+    )
+    print(
+        "semantic_target_joint_closure_statement_roster_proof="
+        "remainingOpenSemanticTargetsJointClosureStatements_named_current"
+    )
+    print(
+        "semantic_target_joint_closure_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_joint_closure_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_joint_closure_statement_roster_certificate"
     )
     print(
         "semantic_target_joint_route_targets="

@@ -7869,6 +7869,125 @@ theorem remaining_open_semantic_targets_joint_closure_reduction_certificate :
   · exact remaining_open_semantic_targets_full_outputs_notYet
   exact remaining_open_semantic_targets_obstruction_equivalence_certificate
 
+/-- Package-level statement roster for the joint closure reduction. -/
+def remainingOpenSemanticTargetsJointClosureStatements : List Prop :=
+  [RemainingOpenSemanticTargetsSatisfied ->
+    RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+   RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+    RemainingOpenSemanticTargetsSatisfied,
+   RemainingOpenSemanticTargetsSatisfied ↔
+    RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+   RemainingOpenSemanticTargetsSatisfied ->
+    RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+   RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+    RemainingOpenSemanticTargetsSatisfied,
+   RemainingOpenSemanticTargetsSatisfied ↔
+    RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+   RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+    RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+   RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+    RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+   RemainingOpenSemanticTargetsExactClosureInputsSatisfied ↔
+    RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+   Not RemainingOpenSemanticTargetsSatisfied,
+   Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+   Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied]
+
+/-- Build gate: the joint closure reduction statement roster names every
+package-level projection, equivalence, and current obstruction. -/
+theorem remainingOpenSemanticTargetsJointClosureStatements_named_current :
+    remainingOpenSemanticTargetsJointClosureStatements =
+      [RemainingOpenSemanticTargetsSatisfied ->
+        RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+       RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       RemainingOpenSemanticTargetsSatisfied ↔
+        RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+       RemainingOpenSemanticTargetsSatisfied ->
+        RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       RemainingOpenSemanticTargetsSatisfied ↔
+        RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+        RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+       RemainingOpenSemanticTargetsExactClosureInputsSatisfied ↔
+        RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       Not RemainingOpenSemanticTargetsSatisfied,
+       Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+       Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied] := rfl
+
+/-- Build-gated statement roster for the joint closure reduction package. -/
+def RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsJointClosureStatements =
+    [RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+     RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied,
+     RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+     RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+     RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied,
+     RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+     RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+     RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+     RemainingOpenSemanticTargetsExactClosureInputsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+     Not RemainingOpenSemanticTargetsSatisfied,
+     Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+     Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied] /\
+    (RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ->
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+      RemainingOpenSemanticTargetsSatisfied) /\
+    (RemainingOpenSemanticTargetsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    (RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+      RemainingOpenSemanticTargetsExactClosureInputsSatisfied) /\
+    (RemainingOpenSemanticTargetsExactClosureInputsSatisfied ↔
+      RemainingOpenSemanticTargetsFullOutputBundlesSatisfied) /\
+    Not RemainingOpenSemanticTargetsSatisfied /\
+    Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied /\
+    Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied /\
+    RemainingOpenSemanticTargetsJointClosureReductionCertificate
+
+/-- The joint closure package statement roster is pinned to named projection,
+equivalence, and current-obstruction theorems. -/
+theorem
+    remaining_open_semantic_targets_joint_closure_statement_roster_certificate :
+    RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate := by
+  exact ⟨
+    remainingOpenSemanticTargetsJointClosureStatements_named_current,
+    remaining_open_semantic_targets_exact_inputs_of_targets,
+    remaining_open_semantic_targets_targets_of_exact_inputs,
+    remaining_open_semantic_targets_satisfied_iff_exact_closure_inputs,
+    remaining_open_semantic_targets_outputs_of_targets,
+    remaining_open_semantic_targets_targets_of_outputs,
+    remaining_open_semantic_targets_satisfied_iff_full_outputs,
+    remaining_open_semantic_targets_outputs_of_exact_inputs,
+    remaining_open_semantic_targets_exact_inputs_of_outputs,
+    remaining_open_semantic_targets_exact_inputs_iff_full_outputs,
+    remaining_open_semantic_targets_satisfied_notYet,
+    remaining_open_semantic_targets_exact_inputs_notYet,
+    remaining_open_semantic_targets_full_outputs_notYet,
+    remaining_open_semantic_targets_joint_closure_reduction_certificate⟩
+
 /-- The exact Part 6 closure input exposes the paper-facing divergence
 witness. -/
 theorem part6_lattice_embedding_divergence_witness_of_exact_closure_input :
@@ -9686,6 +9805,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
+    RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
@@ -9744,6 +9864,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
       open_semantic_target_obstruction_equivalence_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_joint_closure_reduction_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_joint_closure_statement_roster_certificate
   constructor
   · exact
       remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate

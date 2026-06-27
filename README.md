@@ -169,6 +169,9 @@ output-bundle, and obstruction rosters.
 the two remaining open targets as a joint closure problem, proving equivalence
 between joint target satisfaction, joint exact-input satisfaction, and joint
 full-output-bundle satisfaction, with all three joint packages current-refuted.
+`remaining_open_semantic_targets_joint_closure_statement_roster_certificate`
+pins every joint package projection, equivalence, and current package
+obstruction formula in one build-gated statement list.
 `remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate`
 also packages the same two targets as joint route obligations: joint target
 satisfaction, joint target-route satisfaction, and joint closure-route

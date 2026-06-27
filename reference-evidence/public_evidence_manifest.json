@@ -489,6 +489,9 @@
             "semantic_target_joint_closure_output_package_obstruction=remaining_open_semantic_targets_full_outputs_notYet",
             "semantic_target_joint_closure_reduction_certificate=RemainingOpenSemanticTargetsJointClosureReductionCertificate",
             "semantic_target_joint_closure_reduction_certificate_proof=remaining_open_semantic_targets_joint_closure_reduction_certificate",
+            "semantic_target_joint_closure_statement_roster_proof=remainingOpenSemanticTargetsJointClosureStatements_named_current",
+            "semantic_target_joint_closure_statement_roster_certificate=RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate",
+            "semantic_target_joint_closure_statement_roster_certificate_proof=remaining_open_semantic_targets_joint_closure_statement_roster_certificate",
             "semantic_target_joint_route_targets=RemainingOpenSemanticTargetsTargetRoutesSatisfied",
             "semantic_target_joint_route_closure_routes=RemainingOpenSemanticTargetsClosureRoutesSatisfied",
             "semantic_target_joint_route_reductions=remaining_open_semantic_targets_target_routes_of_targets,remaining_open_semantic_targets_targets_of_target_routes,remaining_open_semantic_targets_satisfied_iff_target_routes,remaining_open_semantic_targets_closure_routes_of_targets,remaining_open_semantic_targets_targets_of_closure_routes,remaining_open_semantic_targets_satisfied_iff_closure_routes,remaining_open_semantic_targets_closure_routes_of_target_routes,remaining_open_semantic_targets_target_routes_of_closure_routes,remaining_open_semantic_targets_target_routes_iff_closure_routes",
@@ -543,7 +546,7 @@
             "semantic_target_closure_input_field_not_iff_proof=openSemanticTargetClosureInputFieldSurface_field_payload_not_iff_closure_input",
             "semantic_target_closure_input_field_roster_certificate=OpenSemanticTargetClosureInputFieldRosterCertificate",
             "semantic_target_closure_input_field_roster_certificate_proof=open_semantic_target_closure_input_field_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=517"
+            "semantic_target_axiom_audit_prints_required=521"
           ]
         },
         {
