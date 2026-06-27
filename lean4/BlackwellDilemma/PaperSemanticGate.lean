@@ -8011,6 +8011,13 @@ def openSemanticTargetObstructionEquivalenceSurfaceIds : List String :=
   openSemanticTargetObstructionEquivalenceSurfaces.map
     (fun surface => surface.id)
 
+/-- Obstruction-equivalence surface ids paired with the paper-facing open ledger
+labels. -/
+def openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetObstructionEquivalenceSurfaceIds
+    (openSemanticTargets.map (fun target => target.paperLabel))
+
 /-- Named target propositions for the obstruction-equivalence roster. -/
 def openSemanticTargetObstructionEquivalenceSurfaceTargets : List Prop :=
   openSemanticTargetObstructionEquivalenceSurfaces.map
@@ -8073,6 +8080,21 @@ semantic ledger's open target list. -/
 theorem openSemanticTargetObstructionEquivalenceSurfaceIds_current :
     openSemanticTargetObstructionEquivalenceSurfaceIds =
       openSemanticTargetIds := rfl
+
+/-- Build gate: obstruction-equivalence surfaces keep the same `(id,
+paperLabel)` projection as the open semantic ledger. -/
+theorem
+    openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels_current :
+    openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
+
+/-- Build gate: kernel-surface and obstruction-equivalence rosters are
+synchronized on target ids paired with paper-facing labels. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_obstructionEquivalenceSurfaceIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels := rfl
 
 /-- Build gate: the obstruction-equivalence roster has the same cardinality as
 the semantic ledger's open target count. -/
@@ -8324,6 +8346,10 @@ semantic targets. This pins target/exact-input/output-bundle obstruction
 propositions to named Part 6/topo propositions. -/
 def OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate : Prop :=
   openSemanticTargetObstructionEquivalenceSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels /\
     openSemanticTargetObstructionEquivalenceSurfaces.length =
       paperSemanticOpenCount /\
     openSemanticTargetObstructionEquivalenceSurfaceTargets =
@@ -8375,6 +8401,12 @@ theorem open_semantic_target_obstruction_equivalence_named_roster_certificate :
     OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate := by
   constructor
   · exact openSemanticTargetObstructionEquivalenceSurfaceIds_current
+  constructor
+  · exact
+      openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels_current
+  constructor
+  · exact
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_obstructionEquivalenceSurfaceIdPaperLabels
   constructor
   · exact openSemanticTargetObstructionEquivalenceSurfaceCount_current
   constructor
