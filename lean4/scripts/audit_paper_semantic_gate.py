@@ -513,6 +513,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceTargetObstructions_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputCertificates_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceTargets_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceClosureInputs_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceTargetObstructions_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputCertificates_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputToTargetStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceTargetToInputObstructionStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceInputToTargetStatements_length_current",
@@ -2176,6 +2181,15 @@ def main() -> int:
         "openSemanticTargetClosureInputSurfaceInputObstructions_named_current,"
         "openSemanticTargetClosureInputSurfaceTargetObstructions_named_current,"
         "openSemanticTargetClosureInputSurfaceInputCertificates_named_current"
+    )
+    print("semantic_target_closure_input_named_roster_terms_checked=10")
+    print(
+        "semantic_target_closure_input_named_roster_length_proofs="
+        "openSemanticTargetClosureInputSurfaceTargets_length_current,"
+        "openSemanticTargetClosureInputSurfaceClosureInputs_length_current,"
+        "openSemanticTargetClosureInputSurfaceInputObstructions_length_current,"
+        "openSemanticTargetClosureInputSurfaceTargetObstructions_length_current,"
+        "openSemanticTargetClosureInputSurfaceInputCertificates_length_current"
     )
     print(
         "semantic_target_closure_input_statement_roster_proofs="
