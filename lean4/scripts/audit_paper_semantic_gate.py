@@ -346,6 +346,8 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate",
+    "OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate",
+    "OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate",
     "RemainingOpenSemanticTargetsPayloadRouteMapCertificate",
     "OpenSemanticTargetClosureInputNamedRosterCertificate",
     "OpenSemanticTargetClosureInputStatementRosterCertificate",
@@ -541,6 +543,13 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetAllSurfaceIdsCountStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_all_surface_ids_count_statement_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_all_surface_id_paper_labels_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetAllSurfaceIdPaperLabelStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetAllSurfaceIdPaperLabelStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetAllSurfaceIdPaperLabelStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_all_surface_id_paper_label_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current",
@@ -2432,6 +2441,37 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_all_surface_ids_count_statement_roster_certificate_proof="
         "open_semantic_target_all_surface_ids_count_statement_roster_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_certificate="
+        "OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_certificate_proof="
+        "open_semantic_target_all_surface_id_paper_labels_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster="
+        "openSemanticTargetAllSurfaceIdPaperLabelStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_proof="
+        "openSemanticTargetAllSurfaceIdPaperLabelStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_terms_checked=13"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_terms_proof="
+        "openSemanticTargetAllSurfaceIdPaperLabelStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_certificate="
+        "OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_certificate_proof="
+        "open_semantic_target_all_surface_id_paper_label_statement_roster_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="
@@ -4918,6 +4958,37 @@ def main() -> int:
         (
             "semantic_target_kernel_named_route_statement_roster_id_paper_label_projection="
             "openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteStatementRosterIdPaperLabels"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_certificate="
+            "OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_certificate_proof="
+            "open_semantic_target_all_surface_id_paper_labels_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster="
+            "openSemanticTargetAllSurfaceIdPaperLabelStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_proof="
+            "openSemanticTargetAllSurfaceIdPaperLabelStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_terms_checked=13"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_terms_proof="
+            "openSemanticTargetAllSurfaceIdPaperLabelStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_certificate="
+            "OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_certificate_proof="
+            "open_semantic_target_all_surface_id_paper_label_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="

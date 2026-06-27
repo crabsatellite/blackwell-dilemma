@@ -13396,6 +13396,163 @@ theorem open_semantic_target_all_surface_ids_count_certificate :
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current⟩
 
+/-- Single build-gated package that every open-target surface and named roster
+uses the current kernel-surface `(id, paperLabel)` pairs. -/
+def OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate : Prop :=
+  openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetFrontierPayloadSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetExactClosureInputSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedRouteObstructionRosterIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedRouteStatementRosterIdPaperLabels
+
+/-- Every open-target surface and named roster keeps the same paper-facing
+`(id, paperLabel)` projection as the kernel surface. -/
+theorem open_semantic_target_all_surface_id_paper_labels_certificate :
+    OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate := by
+  exact ⟨
+    openSemanticTargetKernelSurfaceIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_frontierPayloadSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputOutputSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_obstructionEquivalenceSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_outputEquivalenceSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputSurfaceIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteObstructionRosterIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedFrontierCertificateRosterIdPaperLabels,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteStatementRosterIdPaperLabels⟩
+
+/-- Statement roster for all open-target surface and named-roster
+`(id, paperLabel)` synchronization gates. -/
+def openSemanticTargetAllSurfaceIdPaperLabelStatements : List Prop :=
+  [openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetFrontierPayloadSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetClosureInputSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetExactClosureInputSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetClosureInputFieldSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetNamedRouteObstructionRosterIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargetNamedRouteStatementRosterIdPaperLabels]
+
+/-- Build gate: the all-surface `(id, paperLabel)` statement roster names the
+exact synchronization statements. -/
+theorem openSemanticTargetAllSurfaceIdPaperLabelStatements_named_current :
+    openSemanticTargetAllSurfaceIdPaperLabelStatements =
+      [openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetFrontierPayloadSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetExactClosureInputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputFieldSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetNamedRouteObstructionRosterIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetNamedRouteStatementRosterIdPaperLabels] := rfl
+
+/-- Build gate: the all-surface `(id, paperLabel)` statement roster has one
+statement for each synchronized surface or named roster. -/
+theorem openSemanticTargetAllSurfaceIdPaperLabelStatements_length_current :
+    openSemanticTargetAllSurfaceIdPaperLabelStatements.length = 13 := rfl
+
+/-- Statement-roster certificate for all open-target surface and named-roster
+paper-label gates. -/
+def OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate : Prop :=
+  openSemanticTargetAllSurfaceIdPaperLabelStatements =
+      [openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetFrontierPayloadSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetExactClosureInputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputFieldSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetNamedRouteObstructionRosterIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetNamedFrontierCertificateRosterIdPaperLabels,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargetNamedRouteStatementRosterIdPaperLabels] /\
+    openSemanticTargetAllSurfaceIdPaperLabelStatements.length = 13 /\
+    OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate
+
+/-- The all-surface paper-label package has a fixed statement roster. -/
+theorem
+    open_semantic_target_all_surface_id_paper_label_statement_roster_certificate :
+    OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate := by
+  exact ⟨
+    openSemanticTargetAllSurfaceIdPaperLabelStatements_named_current,
+    openSemanticTargetAllSurfaceIdPaperLabelStatements_length_current,
+    open_semantic_target_all_surface_id_paper_labels_certificate⟩
+
 /-- Statement roster for the all-surface ids/count synchronization package. -/
 def openSemanticTargetAllSurfaceIdsCountStatements : List Prop :=
   [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
@@ -13536,6 +13693,8 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
    OpenSemanticTargetAllSurfaceIdsCountCertificate,
    OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
+   OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
+   OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate,
    RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
    OpenSemanticTargetClosureInputNamedRosterCertificate,
    OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -13613,6 +13772,8 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
        OpenSemanticTargetAllSurfaceIdsCountCertificate,
        OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
+       OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
+       OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate,
        RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
        OpenSemanticTargetClosureInputNamedRosterCertificate,
        OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -13666,9 +13827,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 63 named obstruction and subordinate-certificate statements listed above. -/
+the 65 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 63 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 65 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -13698,6 +13859,8 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      OpenSemanticTargetSurfaceRosterConsistencyCertificate,
      OpenSemanticTargetAllSurfaceIdsCountCertificate,
      OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
+     OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
+     OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate,
      RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
      OpenSemanticTargetClosureInputNamedRosterCertificate,
      OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -13749,7 +13912,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
        paperSemanticOpenCount,
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 63 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 65 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -13771,6 +13934,8 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate /\
+    OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate /\
+    OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
@@ -13847,6 +14012,8 @@ theorem
     open_semantic_target_surface_roster_consistency_certificate,
     open_semantic_target_all_surface_ids_count_certificate,
     open_semantic_target_all_surface_ids_count_statement_roster_certificate,
+    open_semantic_target_all_surface_id_paper_labels_certificate,
+    open_semantic_target_all_surface_id_paper_label_statement_roster_certificate,
     remaining_open_semantic_targets_payload_route_map_certificate,
     open_semantic_target_closure_input_named_roster_certificate,
     open_semantic_target_closure_input_statement_roster_certificate,
@@ -13921,6 +14088,8 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate /\
+    OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate /\
+    OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
@@ -14012,6 +14181,11 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       open_semantic_target_all_surface_ids_count_statement_roster_certificate
+  constructor
+  · exact open_semantic_target_all_surface_id_paper_labels_certificate
+  constructor
+  · exact
+      open_semantic_target_all_surface_id_paper_label_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_payload_route_map_certificate
   constructor
