@@ -297,6 +297,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnly ↔ False",
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
+    "ClosedSemanticTargetsFrontierCertificate",
     "RemainingOpenSemanticTargetsFrontierCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountCertificate",
