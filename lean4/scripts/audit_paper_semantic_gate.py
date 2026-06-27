@@ -26,6 +26,8 @@ AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
 EXPECTED_OPEN_KERNEL_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
         "Part6LatticeEmbeddingSemanticKernelTarget",
+        "Part6NondegenerateFeasibleRepairRoute",
+        "part6_lattice_embedding_semantic_kernel_target_iff_repair_route",
         "Part6FullPaperClosingSupport",
         "part6_lattice_embedding_semantic_kernel_target_iff_full_support",
         "part6_lattice_embedding_semantic_kernel_target_notYet",
@@ -34,6 +36,8 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
     ),
     "topo_cluster_random_supercritical_z2": (
         "TopoClusterRandomSupercriticalZ2SemanticKernelTarget",
+        "RandomSupercriticalZ2TopoClusterFullPaperClosingRoute",
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route",
         "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet",
@@ -64,6 +68,8 @@ FORBIDDEN_WHEN_OPEN = {
 }
 
 REQUIRED_AXIOM_AUDIT_DECLS = {
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_target_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
@@ -107,7 +113,7 @@ def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
     return open_ids, closed_ids
 
 
-def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str, str, str]]:
+def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str, str, str, str, str]]:
     match = re.search(
         r"def\s+openSemanticTargetKernelSurfaces\s*:\s*"
         r"List\s+OpenSemanticTargetKernelSurface\s*:=\s*"
@@ -121,6 +127,8 @@ def open_kernel_surfaces(text: str) -> list[tuple[str, str, str, str, str, str, 
     surfaces = re.findall(
         r'id\s*:=\s*"([^"]+)".*?'
         r"target\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRouteProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"closureRouteProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"currentObstruction\s*:=\s*([A-Za-z0-9_'.]+).*?"
@@ -158,6 +166,8 @@ def main() -> int:
         for (
             target_id,
             _target,
+            _target_route,
+            _target_route_proof,
             _closure_route,
             _closure_route_proof,
             _obstruction,
@@ -180,6 +190,42 @@ def main() -> int:
             for (
                 _target_id,
                 target,
+                _target_route,
+                _target_route_proof,
+                _closure_route,
+                _closure_route_proof,
+                _obstruction,
+                _frontier,
+                _frontier_proof,
+            ) in kernel_surfaces
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_target_routes="
+        + ",".join(
+            target_route
+            for (
+                _target_id,
+                _target,
+                target_route,
+                _target_route_proof,
+                _closure_route,
+                _closure_route_proof,
+                _obstruction,
+                _frontier,
+                _frontier_proof,
+            ) in kernel_surfaces
+        )
+    )
+    print(
+        "semantic_target_kernel_surface_target_route_proofs="
+        + ",".join(
+            target_route_proof
+            for (
+                _target_id,
+                _target,
+                _target_route,
+                target_route_proof,
                 _closure_route,
                 _closure_route_proof,
                 _obstruction,
@@ -195,6 +241,8 @@ def main() -> int:
             for (
                 _target_id,
                 _target,
+                _target_route,
+                _target_route_proof,
                 closure_route,
                 _closure_route_proof,
                 _obstruction,
@@ -210,6 +258,8 @@ def main() -> int:
             for (
                 _target_id,
                 _target,
+                _target_route,
+                _target_route_proof,
                 _closure_route,
                 closure_route_proof,
                 _obstruction,
@@ -225,6 +275,8 @@ def main() -> int:
             for (
                 _target_id,
                 _target,
+                _target_route,
+                _target_route_proof,
                 _closure_route,
                 _closure_route_proof,
                 obstruction,
@@ -240,6 +292,8 @@ def main() -> int:
             for (
                 _target_id,
                 _target,
+                _target_route,
+                _target_route_proof,
                 _closure_route,
                 _closure_route_proof,
                 _obstruction,
@@ -255,6 +309,8 @@ def main() -> int:
             for (
                 _target_id,
                 _target,
+                _target_route,
+                _target_route_proof,
                 _closure_route,
                 _closure_route_proof,
                 _obstruction,
@@ -267,6 +323,8 @@ def main() -> int:
     for (
         _target_id,
         target_prop,
+        target_route,
+        target_route_proof,
         closure_route,
         closure_route_proof,
         obstruction,
@@ -274,6 +332,8 @@ def main() -> int:
         frontier_proof,
     ) in kernel_surfaces:
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_prop}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_route_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{closure_route_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{obstruction}")
@@ -297,6 +357,8 @@ def main() -> int:
     for (
         target_id,
         target_prop,
+        target_route,
+        target_route_proof,
         closure_route,
         closure_route_proof,
         obstruction,
@@ -309,6 +371,8 @@ def main() -> int:
             continue
         (
             expected_target,
+            expected_target_route,
+            expected_target_route_proof,
             expected_closure_route,
             expected_closure_route_proof,
             expected_obstruction,
@@ -320,6 +384,14 @@ def main() -> int:
         if target_prop != expected_target:
             failures.append(
                 f"{target_id} target prop {target_prop!r} != expected {expected_target!r}"
+            )
+        if target_route != expected_target_route:
+            failures.append(
+                f"{target_id} target route {target_route!r} != expected {expected_target_route!r}"
+            )
+        if target_route_proof != expected_target_route_proof:
+            failures.append(
+                f"{target_id} target route proof {target_route_proof!r} != expected {expected_target_route_proof!r}"
             )
         if closure_route != expected_closure_route:
             failures.append(

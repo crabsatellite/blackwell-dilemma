@@ -1033,15 +1033,16 @@ For full kernel-pure cover (v2.0 future iteration):
   current full route by an iff theorem and to its current obstruction by a
   `*_notYet` theorem.
   The `openSemanticTargetKernelSurfaces` roster now ties these two ledger ids
-  to the exact Lean propositions, paper-facing closure routes, closure-route
-  proofs, and obstruction proofs, and its id/count gates match
+  to the exact Lean propositions, exact target routes, target-route proofs,
+  paper-facing closure routes, closure-route proofs, and obstruction proofs,
+  and its id/count gates match
   `openSemanticTargetIds`. Each roster entry also carries the target's full
   current frontier certificate, and the Python semantic audit checks the target,
-  closure route, closure-route proof, obstruction, certificate, proof, and
-  AxiomAudit print names.
+  target route, target-route proof, closure route, closure-route proof,
+  obstruction, certificate, proof, and AxiomAudit print names.
   `remaining_open_semantic_targets_frontier_certificate` collects the id/count,
-  iff, obstruction, closure-route obstruction, and frontier-certificate gates
-  into one Lean theorem.
+  iff, obstruction, target-route obstruction, closure-route obstruction, and
+  frontier-certificate gates into one Lean theorem.
 - The paper R10 §5 `gap_three_regime_*` → `gap_two_regime_*` label
   recalibration is closed by aliases in `Canonical.lean`; the paper R10
   `prop:threshold-five-state` clause (iii) high-κ signal-conditional routing
