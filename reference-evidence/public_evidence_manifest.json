@@ -849,6 +849,24 @@
           ]
         },
         {
+          "id": "axiom_output_allowed_audit",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_axiom_output.py",
+          "cwd": "lean4",
+          "timeout_seconds": 240,
+          "stdout_contains": [
+            "axiom_output_command=lake env lean BlackwellDilemma/AxiomAudit.lean",
+            "axiom_output_returncode=0",
+            "axiom_output_dependency_lines=2648",
+            "axiom_output_no_axiom_lines=148",
+            "axiom_output_allowed_axioms=Classical.choice,Quot.sound,propext",
+            "axiom_output_observed_axioms=Classical.choice,Quot.sound,propext",
+            "axiom_output_unexpected_axioms=0",
+            "axiom_output_unexpected_axiom_names=",
+            "public_manifest_axiom_output_stdout_contains_missing=0"
+          ]
+        },
+        {
           "id": "kernel_surface_zero_escape_audit",
           "type": "python_script",
           "path": "lean4/scripts/audit_kernel_surface.py",
