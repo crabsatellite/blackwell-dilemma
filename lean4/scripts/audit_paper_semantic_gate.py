@@ -1693,6 +1693,32 @@ def paper_semantic_current_theorem_axiom_audit_missing_prints(
     return len(theorem_names), missing
 
 
+def paper_semantic_theorem_names(text: str) -> list[str]:
+    return sorted(
+        set(
+            re.findall(
+                r"\btheorem\s+([A-Za-z0-9_]+)\s*:",
+                text,
+                flags=re.DOTALL,
+            )
+        )
+    )
+
+
+def paper_semantic_theorem_axiom_audit_missing_prints(
+    text: str, axiom_audit_text: str
+) -> tuple[int, list[str]]:
+    theorem_names = paper_semantic_theorem_names(text)
+    missing = [
+        f"BlackwellDilemma.PaperSemanticGate.{name}"
+        for name in theorem_names
+        if not has_axiom_audit_print(
+            axiom_audit_text, f"BlackwellDilemma.PaperSemanticGate.{name}"
+        )
+    ]
+    return len(theorem_names), missing
+
+
 def paper_semantic_def_names(text: str) -> list[str]:
     return sorted(
         set(
@@ -1818,6 +1844,10 @@ def main() -> int:
     ) = paper_semantic_current_theorem_axiom_audit_missing_prints(
         text, axiom_audit_text
     )
+    (
+        paper_semantic_theorem_axiom_audit_count,
+        missing_paper_semantic_theorem_axiom_audit_prints,
+    ) = paper_semantic_theorem_axiom_audit_missing_prints(text, axiom_audit_text)
     (
         paper_semantic_def_axiom_audit_count,
         missing_paper_semantic_def_axiom_audit_prints,
@@ -1950,6 +1980,18 @@ def main() -> int:
     print(
         "semantic_target_current_theorem_axiom_audit_prints_missing_decls="
         + ",".join(missing_current_theorem_axiom_audit_prints)
+    )
+    print(
+        "semantic_target_theorem_axiom_audit_prints_checked="
+        f"{paper_semantic_theorem_axiom_audit_count}"
+    )
+    print(
+        "semantic_target_theorem_axiom_audit_prints_missing="
+        f"{len(missing_paper_semantic_theorem_axiom_audit_prints)}"
+    )
+    print(
+        "semantic_target_theorem_axiom_audit_prints_missing_decls="
+        + ",".join(missing_paper_semantic_theorem_axiom_audit_prints)
     )
     print(
         "semantic_target_def_axiom_audit_prints_checked="
@@ -3506,6 +3548,10 @@ def main() -> int:
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
+        for name in paper_semantic_theorem_names(text)
+    )
+    required_axiom_audit_decls.update(
+        f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_def_names(text)
     )
     required_axiom_audit_decls.update(
@@ -3845,6 +3891,11 @@ def main() -> int:
         failures.append(
             "PaperSemanticGate current theorems missing AxiomAudit prints: "
             + ",".join(missing_current_theorem_axiom_audit_prints)
+        )
+    if missing_paper_semantic_theorem_axiom_audit_prints:
+        failures.append(
+            "PaperSemanticGate theorems missing AxiomAudit prints: "
+            + ",".join(missing_paper_semantic_theorem_axiom_audit_prints)
         )
     if missing_paper_semantic_def_axiom_audit_prints:
         failures.append(
