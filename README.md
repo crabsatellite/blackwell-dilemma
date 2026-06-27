@@ -50,7 +50,7 @@ also directly projects each remaining field payload to its target, exact closure
 input, and output bundle before recording the current obstruction. The Part 6
 field payload
 also projects directly to the divergence/feasible witness output, repair route,
-and full-support route, with a dedicated statement roster for those formulas,
+and full-support route, with a dedicated 13-term statement roster for those formulas,
 and the topo field payload projects directly to the support-surface closing
 spine with its own field-output formula roster; both rosters are also packaged
 as an id/count-gated remaining-open-target detailed field-output roster whose
@@ -352,7 +352,7 @@ packages and package obstructions, joint route-obstruction packages, statement
 rosters, and package obstructions, bilateral package obstruction statement
 rosters, Part 6 conditional witness interface projections, 11-term statement
 roster, and obstructions, Part 6 route-obstruction projections and 12-term statement roster,
-Part 6 field-output statement roster, topo exact-output projections, 16-term
+Part 6 13-term field-output statement roster, topo exact-output projections, 16-term
 statement roster, route nonclosure boundary, and field-output statement roster,
 combined detailed field-output roster package, topo route-obstruction
 projections and 12-term statement roster, field-roster id,

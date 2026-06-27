@@ -929,6 +929,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6LatticeEmbeddingClosureInputFieldOutputStatements",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_statements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.part6LatticeEmbeddingClosureInputFieldOutputStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload",
@@ -3095,6 +3096,11 @@ def main() -> int:
     print(
         "semantic_target_part6_field_output_statement_roster_proof="
         "part6_lattice_embedding_closure_input_field_output_statements_named_current"
+    )
+    print("semantic_target_part6_field_output_statement_roster_terms_checked=13")
+    print(
+        "semantic_target_part6_field_output_statement_roster_length_proof="
+        "part6LatticeEmbeddingClosureInputFieldOutputStatements_length_current"
     )
     print(
         "semantic_target_part6_field_output_statement_roster_certificate="

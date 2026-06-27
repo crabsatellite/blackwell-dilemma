@@ -11291,6 +11291,11 @@ theorem
        Not Part6LatticeEmbeddingClosureInputFieldPayload,
        Part6LatticeEmbeddingClosureInputFieldOutputCertificate] := rfl
 
+/-- Build gate: the Part 6 field-output statement roster has exactly the 13
+field-payload projection, certificate, and obstruction formulas listed above. -/
+theorem part6LatticeEmbeddingClosureInputFieldOutputStatements_length_current :
+    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 13 := rfl
+
 /-- Build-gated formula roster for the Part 6 field-output certificate. -/
 def Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate :
     Prop :=
@@ -11318,6 +11323,7 @@ def Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate :
      Part6LatticeEmbeddingClosureInputOutputCertificate,
      Not Part6LatticeEmbeddingClosureInputFieldPayload,
      Part6LatticeEmbeddingClosureInputFieldOutputCertificate] /\
+    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 13 /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6LatticeEmbeddingSemanticKernelTarget) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
@@ -11350,6 +11356,8 @@ theorem
   constructor
   · exact
       part6_lattice_embedding_closure_input_field_output_statements_named_current
+  constructor
+  · exact part6LatticeEmbeddingClosureInputFieldOutputStatements_length_current
   constructor
   · exact part6_lattice_embedding_semantic_kernel_target_of_field_payload
   constructor
