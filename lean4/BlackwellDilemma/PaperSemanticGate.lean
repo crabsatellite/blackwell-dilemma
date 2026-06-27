@@ -204,6 +204,43 @@ theorem openSemanticTargetKernelSurface_frontier_certificate
     surface.frontierCertificate :=
   surface.frontierCertificateProof
 
+/-- Single build-gated certificate for the two remaining paper-semantic targets.
+
+This certificate collects the roster identity/count gates, the exact target
+equivalences, current refutations, and full frontier certificates for both
+remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
+  openSemanticTargetKernelSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
+    (Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Part6NondegenerateFeasibleRepairRoute) /\
+    (Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Part6FullPaperClosingSupport) /\
+    Not Part6LatticeEmbeddingSemanticKernelTarget /\
+    Part6CurrentFrontierCertificate /\
+    (TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+    (TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate
+
+/-- The current two-target paper-semantic frontier is completely accounted for
+by named target propositions, current obstructions, and frontier certificates. -/
+theorem remaining_open_semantic_targets_frontier_certificate :
+    RemainingOpenSemanticTargetsFrontierCertificate := by
+  exact ⟨
+    openSemanticTargetKernelSurfaceIds_current,
+    openSemanticTargetKernelSurfaceCount_current,
+    part6_lattice_embedding_semantic_kernel_target_iff_repair_route,
+    part6_lattice_embedding_semantic_kernel_target_iff_full_support,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    part6_current_frontier_certificate,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    random_supercritical_z2_topo_cluster_current_frontier_certificate⟩
+
 /-- Typed payload for the closed Theorem 4.1 Part 4 lattice p-monotonicity
 target.  This machine-checks the bounded kernel theorem, the constructive
 five-state instance, and the standard `Z2` ranged local-lattice bridge that

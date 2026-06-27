@@ -257,7 +257,8 @@ propositions and their current obstruction proofs, with id/count theorems
 checking that the roster matches `openSemanticTargetIds`. Each roster entry
 also carries the full current frontier certificate for that target, and
 `audit_paper_semantic_gate.py` checks the target, obstruction, certificate, and
-proof names.
+proof names. `remaining_open_semantic_targets_frontier_certificate` collects
+these gates into one Lean theorem.
 
 As of R510, the former Principal Part 2 bridge interfaces
 `AggregateWelfareWithDifferenceDominatesUnderFOSD` and
