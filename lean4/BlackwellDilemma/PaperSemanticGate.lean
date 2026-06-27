@@ -159,10 +159,12 @@ structure OpenSemanticTargetKernelSurface where
   targetRouteProof : target ↔ targetRoute
   targetRouteCertificate : Prop
   targetRouteCertificateProof : targetRouteCertificate
+  targetRouteObstruction : Not targetRoute
   closureRoute : Prop
   closureRouteProof : target ↔ closureRoute
   closureRouteCertificate : Prop
   closureRouteCertificateProof : closureRouteCertificate
+  closureRouteObstruction : Not closureRoute
   currentObstruction : Not target
   frontierCertificate : Prop
   frontierCertificateProof : frontierCertificate
@@ -180,12 +182,16 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
       targetRouteCertificate := Part6NondegenerateFeasibleRepairRouteCertificate,
       targetRouteCertificateProof :=
         part6_nondegenerate_feasible_repair_route_certificate,
+      targetRouteObstruction :=
+        not_part6_nondegenerate_feasible_repair_route_current,
       closureRoute := Part6FullPaperClosingSupport,
       closureRouteProof :=
         part6_lattice_embedding_semantic_kernel_target_iff_full_support,
       closureRouteCertificate := Part6FullPaperClosingOutputLayerCertificate,
       closureRouteCertificateProof :=
         part6_full_paper_closing_output_layer_certificate,
+      closureRouteObstruction :=
+        not_part6_full_paper_closing_support_current,
       currentObstruction :=
         part6_lattice_embedding_semantic_kernel_target_notYet,
       frontierCertificate := Part6CurrentFrontierCertificate,
@@ -200,6 +206,8 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
         RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
       targetRouteCertificateProof :=
         random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
+      targetRouteObstruction :=
+        not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
       closureRoute :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
       closureRouteProof :=
@@ -208,6 +216,8 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
       closureRouteCertificateProof :=
         random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
+      closureRouteObstruction :=
+        not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
       currentObstruction :=
         topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
       frontierCertificate :=
@@ -239,9 +249,8 @@ theorem openSemanticTargetKernelSurface_target_route
 route represented by its named semantic target proposition. -/
 theorem openSemanticTargetKernelSurface_target_route_current_obstruction
     (surface : OpenSemanticTargetKernelSurface) :
-    Not surface.targetRoute := by
-  intro hroute
-  exact surface.currentObstruction (surface.targetRouteProof.mpr hroute)
+    Not surface.targetRoute :=
+  surface.targetRouteObstruction
 
 /-- Every machine-facing roster entry carries the exact current certificate for
 the route represented by its named semantic target proposition. -/
@@ -261,9 +270,8 @@ theorem openSemanticTargetKernelSurface_closure_route
 paper-facing closure route in the current frontier. -/
 theorem openSemanticTargetKernelSurface_closure_route_current_obstruction
     (surface : OpenSemanticTargetKernelSurface) :
-    Not surface.closureRoute := by
-  intro hroute
-  exact surface.currentObstruction (surface.closureRouteProof.mpr hroute)
+    Not surface.closureRoute :=
+  surface.closureRouteObstruction
 
 /-- Every machine-facing roster entry carries the exact current certificate for
 its paper-facing closure route. -/

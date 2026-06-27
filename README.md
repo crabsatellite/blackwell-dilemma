@@ -134,7 +134,8 @@ Public reference/formula/numeric claims are also gated by
 the verifier checks source cards for external formulas, committed JSON evidence
 for public appendix numbers, the two still-open paper-semantic Lean targets,
 and the companion paper-semantic audit output for the target routes, target-route
-certificates, closure routes, closure-route certificates, and AxiomAudit coverage. The public verification command set includes the same Lean
+certificates, route obstructions, closure routes, closure-route certificates,
+closure obstructions, and AxiomAudit coverage. The public verification command set includes the same Lean
 build, PaperSemanticGate build, AxiomAudit build, and source-level audit scripts
 listed above.
 

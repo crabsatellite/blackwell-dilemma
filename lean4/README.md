@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/closure routes/closure-route certificates/obstructions/frontier certificates synced; AxiomAudit prints required=32 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/closure routes/closure-route certificates/closure-route obstructions/frontier certificates synced; AxiomAudit prints required=36 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -254,12 +254,14 @@ theorems gate the current kernel refutations while the target count remains
 open=2.
 `openSemanticTargetKernelSurfaces` ties the two open ledger ids to those Lean
 propositions, their exact target routes, target-route certificates, their
-paper-facing closure routes, closure-route certificates, and their current obstruction proofs, with id/count theorems checking that the roster matches
+target-route obstructions, paper-facing closure routes, closure-route
+certificates, closure-route obstructions, and their current obstruction proofs, with id/count theorems checking that the roster matches
 `openSemanticTargetIds`. Each roster entry also carries the full current
 frontier certificate for that target, and `audit_paper_semantic_gate.py` checks
 the target, target route, target-route proof, target-route certificate,
-target-route certificate proof, closure route, closure-route proof,
-closure-route certificate, closure-route certificate proof, obstruction,
+target-route certificate proof, target-route obstruction, closure route,
+closure-route proof, closure-route certificate, closure-route certificate proof,
+closure-route obstruction, obstruction,
 certificate, proof, and AxiomAudit print names.
 `remaining_open_semantic_targets_frontier_certificate`
 collects these gates into one Lean theorem, including current refutations of
