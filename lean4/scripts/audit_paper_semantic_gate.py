@@ -73,6 +73,14 @@ EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES = {
         "part6_lattice_embedding_frontier_payload",
         "Part6LatticeEmbeddingFrontierPayloadCertificate",
         "part6_lattice_embedding_frontier_payload_certificate",
+        "Part6NondegenerateFeasibleRepairRoute",
+        "Part6NondegenerateFeasibleRepairRouteCertificate",
+        "part6_lattice_embedding_frontier_payload_target_route_certificate",
+        "part6_lattice_embedding_frontier_payload_target_route_obstruction",
+        "Part6FullPaperClosingSupport",
+        "Part6FullPaperClosingOutputLayerCertificate",
+        "part6_lattice_embedding_frontier_payload_closure_route_certificate",
+        "part6_lattice_embedding_frontier_payload_closure_route_obstruction",
         "Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate",
         "part6_lattice_embedding_frontier_payload_frontier_progress_certificate",
         "Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate",
@@ -84,6 +92,14 @@ EXPECTED_OPEN_FRONTIER_PAYLOAD_SURFACES = {
         "topo_cluster_random_supercritical_z2_frontier_payload",
         "TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate",
         "topo_cluster_random_supercritical_z2_frontier_payload_certificate",
+        "RandomSupercriticalZ2TopoClusterFullPaperClosingRoute",
+        "RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate",
+        "topo_cluster_random_supercritical_z2_frontier_payload_target_route_certificate",
+        "topo_cluster_random_supercritical_z2_frontier_payload_target_route_obstruction",
+        "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
+        "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate",
+        "topo_cluster_random_supercritical_z2_frontier_payload_closure_route_certificate",
+        "topo_cluster_random_supercritical_z2_frontier_payload_closure_route_obstruction",
         "RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate",
         "topo_cluster_random_supercritical_z2_frontier_payload_frontier_progress_certificate",
         "RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate",
@@ -128,6 +144,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurfaceCount_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetKernelSurfaceIds_eq_frontierPayloadSurfaceIds",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_target_route_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_target_route_current_obstruction",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_closure_route_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_closure_route_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_progress_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_nonclosure_certificate",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadSurface_frontier_certificate",
@@ -242,7 +262,9 @@ def open_kernel_surfaces(text: str) -> list[
 
 def open_frontier_payload_surfaces(
     text: str,
-) -> list[tuple[str, str, str, str, str, str, str, str, str]]:
+) -> list[
+    tuple[str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str]
+]:
     match = re.search(
         r"def\s+openSemanticTargetFrontierPayloadSurfaces\s*:\s*"
         r"List\s+OpenSemanticTargetFrontierPayloadSurface\s*:=\s*"
@@ -257,6 +279,14 @@ def open_frontier_payload_surfaces(
         r'id\s*:=\s*"([^"]+)".*?'
         r"payloadCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"payloadCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRouteCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRouteCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"targetRouteObstructionProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"closureRoute\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"closureRouteCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"closureRouteCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
+        r"closureRouteObstructionProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"frontierProgressCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"frontierProgressCertificateProof\s*:=\s*([A-Za-z0-9_'.]+).*?"
         r"frontierNonclosureCertificate\s*:=\s*([A-Za-z0-9_'.]+).*?"
@@ -395,28 +425,60 @@ def main() -> int:
         + ",".join(surface[2] for surface in payload_surfaces)
     )
     print(
-        "semantic_target_frontier_payload_progress_certificates="
+        "semantic_target_frontier_payload_target_routes="
         + ",".join(surface[3] for surface in payload_surfaces)
     )
     print(
-        "semantic_target_frontier_payload_progress_certificate_proofs="
+        "semantic_target_frontier_payload_target_route_certificates="
         + ",".join(surface[4] for surface in payload_surfaces)
     )
     print(
-        "semantic_target_frontier_payload_nonclosure_certificates="
+        "semantic_target_frontier_payload_target_route_certificate_proofs="
         + ",".join(surface[5] for surface in payload_surfaces)
     )
     print(
-        "semantic_target_frontier_payload_nonclosure_certificate_proofs="
+        "semantic_target_frontier_payload_target_route_obstruction_proofs="
         + ",".join(surface[6] for surface in payload_surfaces)
     )
     print(
-        "semantic_target_frontier_payload_frontier_certificates="
+        "semantic_target_frontier_payload_closure_routes="
         + ",".join(surface[7] for surface in payload_surfaces)
     )
     print(
-        "semantic_target_frontier_payload_frontier_certificate_proofs="
+        "semantic_target_frontier_payload_closure_route_certificates="
         + ",".join(surface[8] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_closure_route_certificate_proofs="
+        + ",".join(surface[9] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_closure_route_obstruction_proofs="
+        + ",".join(surface[10] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_progress_certificates="
+        + ",".join(surface[11] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_progress_certificate_proofs="
+        + ",".join(surface[12] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_nonclosure_certificates="
+        + ",".join(surface[13] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_nonclosure_certificate_proofs="
+        + ",".join(surface[14] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_frontier_certificates="
+        + ",".join(surface[15] for surface in payload_surfaces)
+    )
+    print(
+        "semantic_target_frontier_payload_frontier_certificate_proofs="
+        + ",".join(surface[16] for surface in payload_surfaces)
     )
     print(
         "semantic_target_surface_frontier_progress_consistency="
@@ -484,6 +546,14 @@ def main() -> int:
         target_id,
         payload_certificate,
         payload_certificate_proof,
+        target_route,
+        target_route_certificate,
+        target_route_certificate_proof,
+        target_route_obstruction_proof,
+        closure_route,
+        closure_route_certificate,
+        closure_route_certificate_proof,
+        closure_route_obstruction_proof,
         frontier_progress_certificate,
         frontier_progress_certificate_proof,
         frontier_nonclosure_certificate,
@@ -503,6 +573,22 @@ def main() -> int:
         )
         required_axiom_audit_decls.add(
             f"BlackwellDilemma.PaperSemanticGate.{payload_certificate_proof}"
+        )
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route_certificate}")
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{target_route_certificate_proof}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{target_route_obstruction_proof}"
+        )
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route}")
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_certificate}")
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{closure_route_certificate_proof}"
+        )
+        required_axiom_audit_decls.add(
+            f"BlackwellDilemma.PaperSemanticGate.{closure_route_obstruction_proof}"
         )
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_progress_certificate}")
         required_axiom_audit_decls.add(
@@ -671,6 +757,14 @@ def main() -> int:
         target_id,
         payload_certificate,
         payload_certificate_proof,
+        target_route,
+        target_route_certificate,
+        target_route_certificate_proof,
+        target_route_obstruction_proof,
+        closure_route,
+        closure_route_certificate,
+        closure_route_certificate_proof,
+        closure_route_obstruction_proof,
         frontier_progress_certificate,
         frontier_progress_certificate_proof,
         frontier_nonclosure_certificate,
@@ -686,6 +780,14 @@ def main() -> int:
             _expected_payload_term,
             expected_payload_certificate,
             expected_payload_certificate_proof,
+            expected_target_route,
+            expected_target_route_certificate,
+            expected_target_route_certificate_proof,
+            expected_target_route_obstruction_proof,
+            expected_closure_route,
+            expected_closure_route_certificate,
+            expected_closure_route_certificate_proof,
+            expected_closure_route_obstruction_proof,
             expected_frontier_progress_certificate,
             expected_frontier_progress_certificate_proof,
             expected_frontier_nonclosure_certificate,
@@ -700,6 +802,38 @@ def main() -> int:
         if payload_certificate_proof != expected_payload_certificate_proof:
             failures.append(
                 f"{target_id} payload certificate proof {payload_certificate_proof!r} != expected {expected_payload_certificate_proof!r}"
+            )
+        if target_route != expected_target_route:
+            failures.append(
+                f"{target_id} payload target route {target_route!r} != expected {expected_target_route!r}"
+            )
+        if target_route_certificate != expected_target_route_certificate:
+            failures.append(
+                f"{target_id} payload target route certificate {target_route_certificate!r} != expected {expected_target_route_certificate!r}"
+            )
+        if target_route_certificate_proof != expected_target_route_certificate_proof:
+            failures.append(
+                f"{target_id} payload target route certificate proof {target_route_certificate_proof!r} != expected {expected_target_route_certificate_proof!r}"
+            )
+        if target_route_obstruction_proof != expected_target_route_obstruction_proof:
+            failures.append(
+                f"{target_id} payload target route obstruction proof {target_route_obstruction_proof!r} != expected {expected_target_route_obstruction_proof!r}"
+            )
+        if closure_route != expected_closure_route:
+            failures.append(
+                f"{target_id} payload closure route {closure_route!r} != expected {expected_closure_route!r}"
+            )
+        if closure_route_certificate != expected_closure_route_certificate:
+            failures.append(
+                f"{target_id} payload closure route certificate {closure_route_certificate!r} != expected {expected_closure_route_certificate!r}"
+            )
+        if closure_route_certificate_proof != expected_closure_route_certificate_proof:
+            failures.append(
+                f"{target_id} payload closure route certificate proof {closure_route_certificate_proof!r} != expected {expected_closure_route_certificate_proof!r}"
+            )
+        if closure_route_obstruction_proof != expected_closure_route_obstruction_proof:
+            failures.append(
+                f"{target_id} payload closure route obstruction proof {closure_route_obstruction_proof!r} != expected {expected_closure_route_obstruction_proof!r}"
             )
         if frontier_progress_certificate != expected_frontier_progress_certificate:
             failures.append(

@@ -212,7 +212,7 @@ Current results:
 | --- | ---: | --- |
 | `lake build BlackwellDilemma` | pass | pass |
 | `lake build BlackwellDilemma.AxiomAudit` | pass | pass |
-| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived progress-nonclosure-frontier projections/cross-surface frontier-certificate equality/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=73 | complete paper-semantic closure only after open=0 |
+| paper semantic gate (`audit_paper_semantic_gate.py`) | closed=3, open=2; roster ids/targets/target routes/target-route certificates/target-route obstructions/route-equivalence proofs/closure routes/closure-route certificates/closure-route obstructions/frontier progress certificates/frontier nonclosure certificates/full typed frontier payload certificates/payload-derived route-closure-progress-nonclosure-frontier projections/cross-surface frontier-certificate equality/surface-roster consistency/frontier certificates synced; AxiomAudit prints required=85 | complete paper-semantic closure only after open=0 |
 | proof escapes (`sorry`, `admit`, `unsafe`, `native_decide`) | 0 | 0 |
 | source-level project `axiom` declarations | 0 | 0 |
 | source-level `_OPEN` axioms | 0 | 0 |
@@ -272,7 +272,9 @@ payload-certificate proofs to appear in `AxiomAudit.lean`. The same surface now
 also carries payload-derived projections for each target's active frontier
 progress certificate, matching nonclosure certificate, and current frontier
 certificate. The kernel-surface and payload-surface views of those three
-certificate lists are also definitionally checked equal.
+certificate lists are also definitionally checked equal. The payload surface
+also carries payload-derived target-route and closure-route certificate and
+obstruction projections for both open targets.
 `open_semantic_target_surface_roster_consistency_certificate` then proves that
 the semantic ledger ids, kernel-surface ids, typed frontier-payload ids, and
 both roster counts are synchronized.

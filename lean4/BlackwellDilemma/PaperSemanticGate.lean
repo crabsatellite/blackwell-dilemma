@@ -3657,12 +3657,72 @@ theorem
     RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate :=
   (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_certificate
 
+/-- The complete typed Part 6 frontier payload projects the active target-route
+certificate. -/
+theorem part6_lattice_embedding_frontier_payload_target_route_certificate :
+    Part6NondegenerateFeasibleRepairRouteCertificate :=
+  (part6_lattice_embedding_frontier_payload).part6_nondegenerate_feasible_repair_route_certificate
+
+/-- The complete typed Part 6 frontier payload projects a current obstruction
+for the active target route. -/
+theorem part6_lattice_embedding_frontier_payload_target_route_obstruction :
+    Not Part6NondegenerateFeasibleRepairRoute :=
+  (part6_lattice_embedding_frontier_payload).part6_nondegenerate_feasible_repair_route_current_obstruction_via_divergence_witness
+
+/-- The complete typed Part 6 frontier payload projects the paper-facing
+closure-route certificate. -/
+theorem part6_lattice_embedding_frontier_payload_closure_route_certificate :
+    Part6FullPaperClosingOutputLayerCertificate :=
+  (part6_lattice_embedding_frontier_payload).part6_full_paper_closing_output_layer_certificate
+
+/-- The complete typed Part 6 frontier payload projects a current obstruction
+for the paper-facing closure route. -/
+theorem part6_lattice_embedding_frontier_payload_closure_route_obstruction :
+    Not Part6FullPaperClosingSupport :=
+  (part6_lattice_embedding_frontier_payload).part6_full_paper_closing_support_current_obstruction
+
+/-- The complete typed random-supercritical topo frontier payload projects the
+active target-route certificate. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_target_route_certificate :
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_full_paper_closing_route_output_certificate
+
+/-- The complete typed random-supercritical topo frontier payload projects a
+current obstruction for the active target route. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_target_route_obstruction :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_full_paper_closing_route_general_obstruction
+
+/-- The complete typed random-supercritical topo frontier payload projects the
+paper-facing closure-route certificate. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_closure_route_certificate :
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_boxed_torus_finite_z2L_route_certificate
+
+/-- The complete typed random-supercritical topo frontier payload projects a
+current obstruction for the paper-facing closure route. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_closure_route_obstruction :
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_boxed_torus_finite_z2L_route_general_obstruction
+
 /-- Machine-facing roster that ties each open semantic ledger id to its full
 typed frontier payload. -/
 structure OpenSemanticTargetFrontierPayloadSurface where
   id : String
   payloadCertificate : Prop
   payloadCertificateProof : payloadCertificate
+  targetRoute : Prop
+  targetRouteCertificate : Prop
+  targetRouteCertificateProof : targetRouteCertificate
+  targetRouteObstructionProof : Not targetRoute
+  closureRoute : Prop
+  closureRouteCertificate : Prop
+  closureRouteCertificateProof : closureRouteCertificate
+  closureRouteObstructionProof : Not closureRoute
   frontierProgressCertificate : Prop
   frontierProgressCertificateProof : frontierProgressCertificate
   frontierNonclosureCertificate : Prop
@@ -3678,6 +3738,20 @@ def openSemanticTargetFrontierPayloadSurfaces :
       payloadCertificate := Part6LatticeEmbeddingFrontierPayloadCertificate,
       payloadCertificateProof :=
         part6_lattice_embedding_frontier_payload_certificate,
+      targetRoute := Part6NondegenerateFeasibleRepairRoute,
+      targetRouteCertificate :=
+        Part6NondegenerateFeasibleRepairRouteCertificate,
+      targetRouteCertificateProof :=
+        part6_lattice_embedding_frontier_payload_target_route_certificate,
+      targetRouteObstructionProof :=
+        part6_lattice_embedding_frontier_payload_target_route_obstruction,
+      closureRoute := Part6FullPaperClosingSupport,
+      closureRouteCertificate :=
+        Part6FullPaperClosingOutputLayerCertificate,
+      closureRouteCertificateProof :=
+        part6_lattice_embedding_frontier_payload_closure_route_certificate,
+      closureRouteObstructionProof :=
+        part6_lattice_embedding_frontier_payload_closure_route_obstruction,
       frontierProgressCertificate :=
         Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
       frontierProgressCertificateProof :=
@@ -3694,6 +3768,21 @@ def openSemanticTargetFrontierPayloadSurfaces :
         TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
       payloadCertificateProof :=
         topo_cluster_random_supercritical_z2_frontier_payload_certificate,
+      targetRoute := RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+      targetRouteCertificate :=
+        RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+      targetRouteCertificateProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_target_route_certificate,
+      targetRouteObstructionProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_target_route_obstruction,
+      closureRoute :=
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+      closureRouteCertificate :=
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+      closureRouteCertificateProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_closure_route_certificate,
+      closureRouteObstructionProof :=
+        topo_cluster_random_supercritical_z2_frontier_payload_closure_route_obstruction,
       frontierProgressCertificate :=
         RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
       frontierProgressCertificateProof :=
@@ -3731,6 +3820,34 @@ theorem openSemanticTargetFrontierPayloadSurface_certificate
     (surface : OpenSemanticTargetFrontierPayloadSurface) :
     surface.payloadCertificate :=
   surface.payloadCertificateProof
+
+/-- Every typed-frontier-payload roster entry projects the target-route
+certificate from its full payload. -/
+theorem openSemanticTargetFrontierPayloadSurface_target_route_certificate
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.targetRouteCertificate :=
+  surface.targetRouteCertificateProof
+
+/-- Every typed-frontier-payload roster entry projects a current target-route
+obstruction from its full payload. -/
+theorem openSemanticTargetFrontierPayloadSurface_target_route_current_obstruction
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    Not surface.targetRoute :=
+  surface.targetRouteObstructionProof
+
+/-- Every typed-frontier-payload roster entry projects the paper-facing
+closure-route certificate from its full payload. -/
+theorem openSemanticTargetFrontierPayloadSurface_closure_route_certificate
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    surface.closureRouteCertificate :=
+  surface.closureRouteCertificateProof
+
+/-- Every typed-frontier-payload roster entry projects a current paper-facing
+closure-route obstruction from its full payload. -/
+theorem openSemanticTargetFrontierPayloadSurface_closure_route_current_obstruction
+    (surface : OpenSemanticTargetFrontierPayloadSurface) :
+    Not surface.closureRoute :=
+  surface.closureRouteObstructionProof
 
 /-- Every typed-frontier-payload roster entry projects the active frontier
 progress certificate from its full payload. -/
