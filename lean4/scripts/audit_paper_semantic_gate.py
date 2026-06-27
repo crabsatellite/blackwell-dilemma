@@ -802,6 +802,7 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate",
     "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements",
     "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_divergence_witness_of_closure_input",
@@ -2927,6 +2928,11 @@ def main() -> int:
     print(
         "semantic_target_topo_route_obstruction_projection_statement_roster_proof="
         "topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_named_current"
+    )
+    print("semantic_target_topo_route_obstruction_projection_statement_roster_terms_checked=12")
+    print(
+        "semantic_target_topo_route_obstruction_projection_statement_roster_length_proof="
+        "topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_length_current"
     )
     print(
         "semantic_target_topo_route_obstruction_projection_statement_roster_certificate="

@@ -9316,6 +9316,13 @@ theorem
        Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] := rfl
 
+/-- Build gate: the topo route-obstruction projection statement roster has
+exactly the 12 route-refutation, equivalence, and current-obstruction formulas
+listed above. -/
+theorem
+    topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_length_current :
+    topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements.length = 12 := rfl
+
 /-- Build-gated statement roster for the topo route-obstruction projection. -/
 def
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate :
@@ -9340,6 +9347,7 @@ def
      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
      Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements.length = 12 /\
     (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
       Not TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
     (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
@@ -9368,6 +9376,7 @@ theorem
     TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate := by
   exact ⟨
     topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_named_current,
+    topoClusterRandomSupercriticalZ2RouteObstructionProjectionStatements_length_current,
     topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not,
     topo_cluster_random_supercritical_z2_exact_closure_input_not_of_boxed_route_not,
     topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not,

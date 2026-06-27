@@ -189,8 +189,8 @@ refutes both the topo exact input and same-bridge output bundle, and those route
 refutations are equivalent to the topo target obstruction.
 `topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate`
 pins those topo route-refutation projections, route-obstruction equivalences,
-and current topo route/input/output obstructions in one build-gated statement
-list.
+and current topo route/input/output obstructions in one build-gated 12-term
+statement list.
 `remaining_open_semantic_targets_obstruction_equivalence_certificate` further
 proves that, for each open target, the target obstruction, exact-input
 obstruction, and output-bundle obstruction are equivalent kernel consequences.
@@ -354,9 +354,8 @@ rosters, Part 6 conditional witness interface projections, 11-term statement
 roster, and obstructions, Part 6 route-obstruction projections and 12-term statement roster,
 Part 6 field-output statement roster, topo exact-output projections, 16-term
 statement roster, route nonclosure boundary, and field-output statement roster,
-combined detailed field-output roster package,
-topo route-obstruction
-projections and statement roster, field-roster id,
+combined detailed field-output roster package, topo route-obstruction
+projections and 12-term statement roster, field-roster id,
 payload-to-input/iff consistency, payload-obstruction, and
 payload/certificate consistency, field statement roster,
 surface-roster consistency, top-level statement roster length, and AxiomAudit
