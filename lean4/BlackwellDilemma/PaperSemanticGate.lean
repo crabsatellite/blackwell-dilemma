@@ -11827,6 +11827,113 @@ theorem open_semantic_target_all_surface_ids_count_certificate :
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current⟩
 
+/-- Statement roster for the all-surface ids/count synchronization package. -/
+def openSemanticTargetAllSurfaceIdsCountStatements : List Prop :=
+  [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetExactClosureInputSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetExactClosureInputSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetExactClosureInputOutputSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetExactClosureInputOutputSurfaces.length =
+     paperSemanticOpenCount,
+   openSemanticTargetObstructionEquivalenceSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetObstructionEquivalenceSurfaces.length =
+     paperSemanticOpenCount,
+   openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetOutputEquivalenceSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputSurfaces.length =
+     paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+     openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+     paperSemanticOpenCount]
+
+/-- Build gate: the all-surface ids/count statement roster names the exact
+synchronization statements. -/
+theorem openSemanticTargetAllSurfaceIdsCountStatements_named_current :
+    openSemanticTargetAllSurfaceIdsCountStatements =
+      [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetExactClosureInputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetExactClosureInputSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetExactClosureInputOutputSurfaceIds =
+         openSemanticTargetIds,
+       openSemanticTargetExactClosureInputOutputSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetObstructionEquivalenceSurfaceIds =
+         openSemanticTargetIds,
+       openSemanticTargetObstructionEquivalenceSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetOutputEquivalenceSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds =
+         openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+         openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+         paperSemanticOpenCount] := rfl
+
+/-- Statement-roster certificate for all open-target surface ids/count gates. -/
+def OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate : Prop :=
+  openSemanticTargetAllSurfaceIdsCountStatements =
+      [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetExactClosureInputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetExactClosureInputSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetExactClosureInputOutputSurfaceIds =
+         openSemanticTargetIds,
+       openSemanticTargetExactClosureInputOutputSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetObstructionEquivalenceSurfaceIds =
+         openSemanticTargetIds,
+       openSemanticTargetObstructionEquivalenceSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetOutputEquivalenceSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds =
+         openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+         paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+         openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+         paperSemanticOpenCount] /\
+    OpenSemanticTargetAllSurfaceIdsCountCertificate
+
+/-- The all-surface ids/count package has a fixed statement roster. -/
+theorem open_semantic_target_all_surface_ids_count_statement_roster_certificate :
+    OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate := by
+  exact ⟨
+    openSemanticTargetAllSurfaceIdsCountStatements_named_current,
+    open_semantic_target_all_surface_ids_count_certificate⟩
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open-target count/id gates, and subordinate certificate propositions that the
@@ -11840,6 +11947,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    RemainingOpenSemanticTargetsFrontierCertificate,
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
    OpenSemanticTargetAllSurfaceIdsCountCertificate,
+   OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
    RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
    OpenSemanticTargetClosureInputNamedRosterCertificate,
    OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -11904,6 +12012,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
        OpenSemanticTargetAllSurfaceIdsCountCertificate,
+       OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
        RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
        OpenSemanticTargetClosureInputNamedRosterCertificate,
        OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -11971,6 +12080,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      RemainingOpenSemanticTargetsFrontierCertificate,
      OpenSemanticTargetSurfaceRosterConsistencyCertificate,
      OpenSemanticTargetAllSurfaceIdsCountCertificate,
+     OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
      RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
      OpenSemanticTargetClosureInputNamedRosterCertificate,
      OpenSemanticTargetClosureInputStatementRosterCertificate,
@@ -12030,6 +12140,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate /\
+    OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
@@ -12095,6 +12206,7 @@ theorem
     remaining_open_semantic_targets_frontier_certificate,
     open_semantic_target_surface_roster_consistency_certificate,
     open_semantic_target_all_surface_ids_count_certificate,
+    open_semantic_target_all_surface_ids_count_statement_roster_certificate,
     remaining_open_semantic_targets_payload_route_map_certificate,
     open_semantic_target_closure_input_named_roster_certificate,
     open_semantic_target_closure_input_statement_roster_certificate,
@@ -12156,6 +12268,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate /\
+    OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
@@ -12226,6 +12339,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   · exact open_semantic_target_surface_roster_consistency_certificate
   constructor
   · exact open_semantic_target_all_surface_ids_count_certificate
+  constructor
+  · exact
+      open_semantic_target_all_surface_ids_count_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_payload_route_map_certificate
   constructor

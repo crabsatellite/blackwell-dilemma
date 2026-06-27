@@ -293,6 +293,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsFrontierCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountCertificate",
+    "OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate",
     "RemainingOpenSemanticTargetsPayloadRouteMapCertificate",
     "OpenSemanticTargetClosureInputNamedRosterCertificate",
     "OpenSemanticTargetClosureInputStatementRosterCertificate",
@@ -450,6 +451,10 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_surface_roster_consistency_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetAllSurfaceIdsCountCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_all_surface_ids_count_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetAllSurfaceIdsCountStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetAllSurfaceIdsCountStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_all_surface_ids_count_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
@@ -1606,6 +1611,22 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_all_surface_ids_count_certificate_proof="
         "open_semantic_target_all_surface_ids_count_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_ids_count_statement_roster="
+        "openSemanticTargetAllSurfaceIdsCountStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_ids_count_statement_roster_proof="
+        "openSemanticTargetAllSurfaceIdsCountStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_ids_count_statement_roster_certificate="
+        "OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_ids_count_statement_roster_certificate_proof="
+        "open_semantic_target_all_surface_ids_count_statement_roster_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="

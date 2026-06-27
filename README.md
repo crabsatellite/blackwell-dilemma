@@ -56,7 +56,8 @@ spine with its own field-output formula roster; both rosters are also packaged
 as an id/count-gated remaining-open-target detailed field-output roster whose
 id/count equalities, together with the field-output surface ids/count
 equalities and the all-surface ids/count synchronization certificate, are
-top-level current-obstruction terms. The project does not claim the stronger
+top-level current-obstruction terms with a fixed all-surface statement roster.
+The project does not claim the stronger
 full-manuscript semantic closure
 status. The Part 4 lattice p-monotonicity target is now closed by the standard
 `Z²` ranged local-lattice bridge; the former threshold target is closed by the
