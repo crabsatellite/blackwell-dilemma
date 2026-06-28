@@ -27,6 +27,7 @@ AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
 PUBLIC_EVIDENCE_MANIFEST = REPO_ROOT / "reference-evidence" / "public_evidence_manifest.json"
 PUBLIC_EVIDENCE_CHECK_ID = "paper_semantic_companion_audit"
 CERTIFICATE_DEF_RE = re.compile(r"(?m)^def\s+([A-Z][A-Za-z0-9_]*Certificate)\s*:")
+CERTIFICATE_IDENTIFIER_RE = re.compile(r"\b([A-Z][A-Za-z0-9_]*Certificate)\b")
 CERTIFICATE_THEOREM_TARGET_RE = re.compile(
     r"(?ms)^theorem\s+[A-Za-z0-9_'.\s]+?\s*:\s*"
     r"([A-Z][A-Za-z0-9_]*Certificate)\s*:="
@@ -2408,6 +2409,15 @@ def has_axiom_audit_print(text: str, decl: str) -> bool:
     )
 
 
+def cross_module_certificate_references(
+    text: str,
+    certificate_defs: list[str],
+) -> list[str]:
+    paper_semantic_certificate_defs = set(certificate_defs)
+    certificate_identifiers = set(CERTIFICATE_IDENTIFIER_RE.findall(text))
+    return sorted(certificate_identifiers - paper_semantic_certificate_defs)
+
+
 def same_base_statement_roster_certificate(
     certificate_name: str,
 ) -> str:
@@ -2499,6 +2509,15 @@ def main() -> int:
             certificate_theorem_proofs,
         )
     )
+    cross_module_certificate_refs = cross_module_certificate_references(
+        text,
+        certificate_defs,
+    )
+    missing_cross_module_certificate_axiom_audit_prints = [
+        f"BlackwellDilemma.{decl}"
+        for decl in cross_module_certificate_refs
+        if not has_axiom_audit_print(axiom_audit_text, f"BlackwellDilemma.{decl}")
+    ]
 
     expected_open = theorem_count(text, "paperSemanticOpenCount_current")
     expected_closed = theorem_count(text, "paperSemanticClosedCount_current")
@@ -2729,6 +2748,18 @@ def main() -> int:
     print(
         "semantic_target_certificate_theorem_axiom_audit_prints_missing_decls="
         + ",".join(missing_certificate_theorem_axiom_audit_prints)
+    )
+    print(
+        "semantic_target_cross_module_certificate_refs_checked="
+        f"{len(cross_module_certificate_refs)}"
+    )
+    print(
+        "semantic_target_cross_module_certificate_refs_missing_axiom_audit_prints="
+        f"{len(missing_cross_module_certificate_axiom_audit_prints)}"
+    )
+    print(
+        "semantic_target_cross_module_certificate_refs_missing_axiom_audit_print_decls="
+        + ",".join(missing_cross_module_certificate_axiom_audit_prints)
     )
     print_id_drift("semantic_target_open_ids", expected_open_ids, open_ids)
     print_id_drift("semantic_target_closed_ids", expected_closed_ids, closed_ids)
@@ -6434,6 +6465,8 @@ def main() -> int:
         required_axiom_audit_decls.add(
             f"BlackwellDilemma.PaperSemanticGate.{exact_not_iff_output}"
         )
+    for certificate_ref in cross_module_certificate_refs:
+        required_axiom_audit_decls.add(f"BlackwellDilemma.{certificate_ref}")
     missing_axiom_audit_prints = [
         decl
         for decl in sorted(required_axiom_audit_decls)
@@ -6527,6 +6560,18 @@ def main() -> int:
         (
             "semantic_target_certificate_theorem_axiom_audit_prints_missing_decls="
             + ",".join(missing_certificate_theorem_axiom_audit_prints)
+        ),
+        (
+            "semantic_target_cross_module_certificate_refs_checked="
+            f"{len(cross_module_certificate_refs)}"
+        ),
+        (
+            "semantic_target_cross_module_certificate_refs_missing_axiom_audit_prints="
+            f"{len(missing_cross_module_certificate_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_cross_module_certificate_refs_missing_axiom_audit_print_decls="
+            + ",".join(missing_cross_module_certificate_axiom_audit_prints)
         ),
         *id_drift_lines("semantic_target_open_ids", expected_open_ids, open_ids),
         *id_drift_lines("semantic_target_closed_ids", expected_closed_ids, closed_ids),
@@ -8125,6 +8170,11 @@ def main() -> int:
         failures.append(
             "certificate theorem proofs missing AxiomAudit prints: "
             + ",".join(missing_certificate_theorem_axiom_audit_prints)
+        )
+    if missing_cross_module_certificate_axiom_audit_prints:
+        failures.append(
+            "cross-module certificate references missing AxiomAudit prints: "
+            + ",".join(missing_cross_module_certificate_axiom_audit_prints)
         )
     if top_level_missing_conjuncts:
         failures.append(
