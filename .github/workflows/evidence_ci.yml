@@ -9,7 +9,7 @@ on:
       - 'results/**'
       - 'reference-evidence/**'
       - 'tools/verify_public_evidence.py'
-      - 'lean4/BlackwellDilemma/PaperSemanticGate.lean'
+      - 'lean4/**'
       - '.github/workflows/evidence_ci.yml'
   pull_request:
     paths:
@@ -18,7 +18,7 @@ on:
       - 'results/**'
       - 'reference-evidence/**'
       - 'tools/verify_public_evidence.py'
-      - 'lean4/BlackwellDilemma/PaperSemanticGate.lean'
+      - 'lean4/**'
       - '.github/workflows/evidence_ci.yml'
   workflow_dispatch:
 
@@ -32,6 +32,26 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Cache Mathlib
+        uses: actions/cache@v4
+        with:
+          path: lean4/.lake
+          key: lake-${{ runner.os }}-${{ hashFiles('lean4/lean-toolchain', 'lean4/lakefile.toml', 'lean4/lake-manifest.json') }}
+          restore-keys: lake-${{ runner.os }}-
+
+      - name: Get Mathlib cache
+        working-directory: lean4
+        run: lake exe cache get || true
+
+      - name: Build AxiomAudit dependency surface
+        working-directory: lean4
+        run: lake build BlackwellDilemma.AxiomAudit
 
       - name: Verify public evidence manifest
         run: python tools/verify_public_evidence.py
