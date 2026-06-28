@@ -2881,6 +2881,14 @@ def main() -> int:
         "open_semantic_target_all_surface_id_paper_label_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_statement_roster_certificate="
+        "OpenSemanticTargetAllSurfaceIdPaperLabelsStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_statement_roster_certificate_proof="
+        "open_semantic_target_all_surface_id_paper_labels_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="
         f"{len(EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS)}"
     )
@@ -6616,6 +6624,14 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_certificate_proof="
             "open_semantic_target_all_surface_id_paper_label_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_statement_roster_certificate="
+            "OpenSemanticTargetAllSurfaceIdPaperLabelsStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_labels_statement_roster_certificate_proof="
+            "open_semantic_target_all_surface_id_paper_labels_statement_roster_certificate"
         ),
         (
             "semantic_target_joint_closure_reduction_statement_roster_proof="

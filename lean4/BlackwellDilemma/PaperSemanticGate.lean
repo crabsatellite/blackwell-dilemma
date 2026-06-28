@@ -18006,6 +18006,24 @@ theorem
     openSemanticTargetAllSurfaceIdPaperLabelStatements_length_current,
     open_semantic_target_all_surface_id_paper_labels_certificate⟩
 
+/-- Same-base statement-roster certificate for the plural all-surface
+`(id, paperLabel)` package.  The underlying statement roster is the existing
+singular `PaperLabel` roster; this wrapper keeps the certificate name aligned
+with `OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate`. -/
+def OpenSemanticTargetAllSurfaceIdPaperLabelsStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate /\
+    OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate
+
+/-- The plural all-surface paper-label package is covered by the existing
+statement roster certificate. -/
+theorem
+    open_semantic_target_all_surface_id_paper_labels_statement_roster_certificate :
+    OpenSemanticTargetAllSurfaceIdPaperLabelsStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_all_surface_id_paper_label_statement_roster_certificate,
+    open_semantic_target_all_surface_id_paper_labels_certificate⟩
+
 /-- Statement roster for the all-surface ids/count synchronization package. -/
 def openSemanticTargetAllSurfaceIdsCountStatements : List Prop :=
   [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
