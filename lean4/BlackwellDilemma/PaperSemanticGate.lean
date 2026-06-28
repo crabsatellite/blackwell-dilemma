@@ -8985,6 +8985,24 @@ theorem
           surface),
     open_semantic_target_exact_closure_input_output_named_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the exact closure-input/output
+named roster.  The underlying statement roster is the existing exact-input/output
+statement roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate`. -/
+def OpenSemanticTargetExactClosureInputOutputNamedRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate /\
+    OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate
+
+/-- The exact closure-input/output named roster package is covered by the
+existing exact-input/output statement roster certificate. -/
+theorem
+    open_semantic_target_exact_closure_input_output_named_roster_statement_roster_certificate :
+    OpenSemanticTargetExactClosureInputOutputNamedRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_exact_closure_input_output_statement_roster_certificate,
+    open_semantic_target_exact_closure_input_output_named_roster_certificate⟩
+
 /-- The Part 6 target obstruction is equivalent to the exact-input
 obstruction. -/
 theorem part6_lattice_embedding_semantic_kernel_target_not_iff_exact_closure_input :

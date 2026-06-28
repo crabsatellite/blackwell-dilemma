@@ -4197,6 +4197,14 @@ def main() -> int:
         "open_semantic_target_exact_closure_input_output_named_roster_certificate"
     )
     print(
+        "semantic_target_exact_closure_input_output_named_roster_statement_roster_certificate="
+        "OpenSemanticTargetExactClosureInputOutputNamedRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_exact_closure_input_output_named_roster_statement_roster_certificate_proof="
+        "open_semantic_target_exact_closure_input_output_named_roster_statement_roster_certificate"
+    )
+    print(
         "semantic_target_exact_closure_input_output_statement_roster_proofs="
         "openSemanticTargetExactClosureInputOutputSurfaceExactInputToOutputStatements_named_current,"
         "openSemanticTargetExactClosureInputOutputSurfaceOutputToExactInputStatements_named_current,"
