@@ -475,6 +475,139 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
     random_supercritical_z2_topo_cluster_current_frontier_certificate⟩
 
+/-- Statement roster for the current frontier certificate of the two remaining
+open semantic targets. -/
+def remainingOpenSemanticTargetsFrontierStatements : List Prop :=
+  [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetKernelSurfacePaperLabels =
+      openSemanticTargets.map (fun target => target.paperLabel),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+   Part6LatticeEmbeddingSemanticKernelTarget →
+      Part6NondegenerateFeasibleRepairRoute,
+   Part6LatticeEmbeddingSemanticKernelTarget →
+      Part6FullPaperClosingSupport,
+   Part6NondegenerateFeasibleRepairRoute →
+      Part6FullPaperClosingSupport,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Part6NondegenerateFeasibleRepairRouteCertificate,
+   Not Part6FullPaperClosingSupport,
+   Part6FullPaperClosingOutputLayerCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+   Part6CurrentFrontierCertificate,
+   TopoClusterRandomSupercriticalZ2SemanticKernelTarget →
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   TopoClusterRandomSupercriticalZ2SemanticKernelTarget →
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   RandomSupercriticalZ2TopoClusterFullPaperClosingRoute →
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate]
+
+/-- Build gate: the remaining-open frontier statement roster names exactly the
+current frontier components. -/
+theorem remainingOpenSemanticTargetsFrontierStatements_named_current :
+    remainingOpenSemanticTargetsFrontierStatements =
+      [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfacePaperLabels =
+          openSemanticTargets.map (fun target => target.paperLabel),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+       Part6LatticeEmbeddingSemanticKernelTarget →
+          Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingSemanticKernelTarget →
+          Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute →
+          Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Not Part6FullPaperClosingSupport,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget →
+          RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget →
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute →
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
+
+/-- Build gate: the remaining-open frontier statement roster has exactly the
+twenty-six current frontier components. -/
+theorem remainingOpenSemanticTargetsFrontierStatements_length_current :
+    remainingOpenSemanticTargetsFrontierStatements.length = 26 := rfl
+
+/-- Build-gated statement roster certificate for the current frontier of the
+two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsFrontierStatementRosterCertificate : Prop :=
+  remainingOpenSemanticTargetsFrontierStatements =
+      [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfacePaperLabels =
+          openSemanticTargets.map (fun target => target.paperLabel),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+       Part6LatticeEmbeddingSemanticKernelTarget →
+          Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingSemanticKernelTarget →
+          Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute →
+          Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Not Part6FullPaperClosingSupport,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget →
+          RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget →
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute →
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
+    remainingOpenSemanticTargetsFrontierStatements.length = 26 /\
+    RemainingOpenSemanticTargetsFrontierCertificate
+
+/-- The current frontier certificate for the two remaining open semantic
+targets has a fixed statement roster. -/
+theorem remaining_open_semantic_targets_frontier_statement_roster_certificate :
+    RemainingOpenSemanticTargetsFrontierStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsFrontierStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsFrontierStatements_length_current
+      remaining_open_semantic_targets_frontier_certificate)
+
 /-- Typed payload for the closed Theorem 4.1 Part 4 lattice p-monotonicity
 target.  This machine-checks the bounded kernel theorem, the constructive
 five-state instance, and the standard `Z2` ranged local-lattice bridge that
@@ -17565,6 +17698,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
    RemainingOpenSemanticTargetsFrontierCertificate,
+   RemainingOpenSemanticTargetsFrontierStatementRosterCertificate,
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
    OpenSemanticTargetAllSurfaceIdsCountCertificate,
    OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
@@ -17680,6 +17814,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
    CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
    RemainingOpenSemanticTargetsFrontierCertificate,
+   RemainingOpenSemanticTargetsFrontierStatementRosterCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
        OpenSemanticTargetAllSurfaceIdsCountCertificate,
        OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
@@ -17772,9 +17907,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 101 named obstruction and subordinate-certificate statements listed above. -/
+the 102 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 101 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 102 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -17803,6 +17938,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
      CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
      RemainingOpenSemanticTargetsFrontierCertificate,
+     RemainingOpenSemanticTargetsFrontierStatementRosterCertificate,
      OpenSemanticTargetSurfaceRosterConsistencyCertificate,
      OpenSemanticTargetAllSurfaceIdsCountCertificate,
      OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
@@ -17893,7 +18029,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 101 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 102 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -17914,6 +18050,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
+    RemainingOpenSemanticTargetsFrontierStatementRosterCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate /\
@@ -18028,6 +18165,7 @@ theorem
     completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_certificate,
     completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate,
     remaining_open_semantic_targets_frontier_certificate,
+    remaining_open_semantic_targets_frontier_statement_roster_certificate,
     open_semantic_target_surface_roster_consistency_certificate,
     open_semantic_target_all_surface_ids_count_certificate,
     open_semantic_target_all_surface_ids_count_statement_roster_certificate,
@@ -18140,6 +18278,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
+    RemainingOpenSemanticTargetsFrontierStatementRosterCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate /\
@@ -18269,6 +18408,8 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
       completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate
   constructor
   · exact remaining_open_semantic_targets_frontier_certificate
+  constructor
+  · exact remaining_open_semantic_targets_frontier_statement_roster_certificate
   constructor
   · exact open_semantic_target_surface_roster_consistency_certificate
   constructor

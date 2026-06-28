@@ -345,6 +345,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate",
     "CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate",
     "RemainingOpenSemanticTargetsFrontierCertificate",
+    "RemainingOpenSemanticTargetsFrontierStatementRosterCertificate",
     "OpenSemanticTargetSurfaceRosterConsistencyCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountCertificate",
     "OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate",
@@ -597,6 +598,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_payload_route_map_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsFrontierStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsFrontierStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsFrontierStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFrontierStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_frontier_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputSurface",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaces",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputSurfaceIds",
@@ -3144,6 +3150,24 @@ def main() -> int:
     print(
         "semantic_target_kernel_surface_frontier_proofs="
         + ",".join(surface[19] for surface in kernel_surfaces)
+    )
+    print("semantic_target_frontier_statement_roster=remainingOpenSemanticTargetsFrontierStatements")
+    print(
+        "semantic_target_frontier_statement_roster_proof="
+        "remainingOpenSemanticTargetsFrontierStatements_named_current"
+    )
+    print("semantic_target_frontier_statement_roster_terms_checked=26")
+    print(
+        "semantic_target_frontier_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsFrontierStatements_length_current"
+    )
+    print(
+        "semantic_target_frontier_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsFrontierStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_frontier_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_frontier_statement_roster_certificate"
     )
     print(
         "semantic_target_frontier_payload_terms="
@@ -6737,6 +6761,24 @@ def main() -> int:
         (
             "semantic_target_kernel_surface_frontier_proofs="
             + ",".join(surface[19] for surface in kernel_surfaces)
+        ),
+        "semantic_target_frontier_statement_roster=remainingOpenSemanticTargetsFrontierStatements",
+        (
+            "semantic_target_frontier_statement_roster_proof="
+            "remainingOpenSemanticTargetsFrontierStatements_named_current"
+        ),
+        "semantic_target_frontier_statement_roster_terms_checked=26",
+        (
+            "semantic_target_frontier_statement_roster_length_proof="
+            "remainingOpenSemanticTargetsFrontierStatements_length_current"
+        ),
+        (
+            "semantic_target_frontier_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsFrontierStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_frontier_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_frontier_statement_roster_certificate"
         ),
         (
             "semantic_target_named_route_obstruction_roster_ids="
