@@ -329,6 +329,7 @@
             "semantic_target_certificate_same_base_statement_roster_non_roster_defs_checked=69",
             "semantic_target_certificate_same_base_statement_roster_missing=0",
             "semantic_target_certificate_same_base_statement_roster_missing_decls=",
+            "semantic_target_certificate_same_base_statement_roster_def_backed=1",
             "complete_paper_semantic_kernel_only_current_obstruction_certificate=CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
             "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof=completePaperSemanticKernelOnly_current_obstruction_certificate",
             "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_proof=completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current",

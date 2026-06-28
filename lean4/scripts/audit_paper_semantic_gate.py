@@ -27,7 +27,6 @@ AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
 PUBLIC_EVIDENCE_MANIFEST = REPO_ROOT / "reference-evidence" / "public_evidence_manifest.json"
 PUBLIC_EVIDENCE_CHECK_ID = "paper_semantic_companion_audit"
 CERTIFICATE_DEF_RE = re.compile(r"(?m)^def\s+([A-Z][A-Za-z0-9_]*Certificate)\s*:")
-CERTIFICATE_REF_RE = re.compile(r"\b([A-Z][A-Za-z0-9_]*Certificate)\b")
 CERTIFICATE_SUFFIX = "Certificate"
 STATEMENT_ROSTER_CERTIFICATE_SUFFIX = "StatementRosterCertificate"
 
@@ -2414,7 +2413,7 @@ def same_base_statement_roster_certificate_gap(
     text: str,
 ) -> tuple[list[str], list[str], list[str]]:
     certificate_defs = sorted(set(CERTIFICATE_DEF_RE.findall(text)))
-    certificate_refs = set(CERTIFICATE_REF_RE.findall(text))
+    certificate_def_set = set(certificate_defs)
     non_statement_roster_defs = [
         name
         for name in certificate_defs
@@ -2423,7 +2422,7 @@ def same_base_statement_roster_certificate_gap(
     missing_same_base_rosters = [
         name
         for name in non_statement_roster_defs
-        if same_base_statement_roster_certificate(name) not in certificate_refs
+        if same_base_statement_roster_certificate(name) not in certificate_def_set
     ]
     return certificate_defs, non_statement_roster_defs, missing_same_base_rosters
 
@@ -2630,6 +2629,10 @@ def main() -> int:
     print(
         "semantic_target_certificate_same_base_statement_roster_missing_decls="
         + ",".join(missing_same_base_statement_roster_defs)
+    )
+    print(
+        "semantic_target_certificate_same_base_statement_roster_def_backed="
+        + ("1" if not missing_same_base_statement_roster_defs else "0")
     )
     print_id_drift("semantic_target_open_ids", expected_open_ids, open_ids)
     print_id_drift("semantic_target_closed_ids", expected_closed_ids, closed_ids)
@@ -6388,6 +6391,10 @@ def main() -> int:
         (
             "semantic_target_certificate_same_base_statement_roster_missing_decls="
             + ",".join(missing_same_base_statement_roster_defs)
+        ),
+        (
+            "semantic_target_certificate_same_base_statement_roster_def_backed="
+            + ("1" if not missing_same_base_statement_roster_defs else "0")
         ),
         *id_drift_lines("semantic_target_open_ids", expected_open_ids, open_ids),
         *id_drift_lines("semantic_target_closed_ids", expected_closed_ids, closed_ids),
