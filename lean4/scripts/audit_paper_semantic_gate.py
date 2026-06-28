@@ -397,6 +397,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
     "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate",
     "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate",
     "openSemanticTargetClosureInputFieldOutputSurfaceIds =",
     "openSemanticTargetClosureInputFieldOutputSurfaces.length =",
     "OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
@@ -1152,6 +1153,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_field_output_current_obstruction_source_statement_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_field_output_current_obstruction_source_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_output_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
@@ -4426,6 +4429,20 @@ def main() -> int:
     print(
         "semantic_target_field_output_current_obstruction_source_statement_roster_certificate_proof="
         "remaining_open_semantic_targets_field_output_current_obstruction_source_statement_roster_certificate"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_alignment_certificate="
+        "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_alignment_certificate_proof="
+        "remaining_open_semantic_targets_field_output_current_obstruction_source_alignment_certificate"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_alignment_id_label_proofs="
+        "openSemanticTargetClosureInputFieldOutputSurfaceIds_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputSurfaceIdPaperLabels"
     )
     print(
         "semantic_target_closure_input_field_output_roster_certificate="
