@@ -5948,6 +5948,24 @@ theorem open_semantic_target_closure_input_statement_roster_certificate :
         surface),
     open_semantic_target_closure_input_named_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the closure-input named roster.
+The underlying statement roster is the existing sufficient-input statement
+roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetClosureInputNamedRosterCertificate`. -/
+def OpenSemanticTargetClosureInputNamedRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetClosureInputStatementRosterCertificate /\
+    OpenSemanticTargetClosureInputNamedRosterCertificate
+
+/-- The closure-input named roster package is covered by the existing
+sufficient-input statement roster certificate. -/
+theorem
+    open_semantic_target_closure_input_named_roster_statement_roster_certificate :
+    OpenSemanticTargetClosureInputNamedRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_closure_input_statement_roster_certificate,
+    open_semantic_target_closure_input_named_roster_certificate⟩
+
 /-- Exact closure input for the open Part 6 semantic target.  This is the
 minimal paper-facing full-support surface, not the stronger tail-reversal
 sufficient input. -/
