@@ -362,6 +362,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate",
     "RemainingOpenSemanticTargetsJointClosureReductionCertificate",
     "RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate",
     "RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
     "RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate",
     "RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
@@ -796,6 +797,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_statement_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_reduction_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsTargetRoutesSatisfied",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureRoutesSatisfied",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_target_routes_of_targets",
@@ -3815,6 +3818,25 @@ def main() -> int:
         "remaining_open_semantic_targets_joint_closure_statement_roster_certificate"
     )
     print(
+        "semantic_target_joint_closure_alignment_certificate="
+        "RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate"
+    )
+    print(
+        "semantic_target_joint_closure_alignment_certificate_proof="
+        "remaining_open_semantic_targets_joint_closure_reduction_alignment_certificate"
+    )
+    print(
+        "semantic_target_joint_closure_alignment_id_label_proofs="
+        "openSemanticTargetKernelSurfaceIds_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_current,"
+        "openSemanticTargetExactClosureInputSurfaceIds_current,"
+        "openSemanticTargetExactClosureInputSurfaceIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputSurfaceIdPaperLabels,"
+        "openSemanticTargetExactClosureInputOutputSurfaceIds_current,"
+        "openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputOutputSurfaceIdPaperLabels"
+    )
+    print(
         "semantic_target_joint_route_targets="
         "RemainingOpenSemanticTargetsTargetRoutesSatisfied"
     )
@@ -5255,6 +5277,25 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_certificate_proof="
             "open_semantic_target_all_surface_id_paper_label_statement_roster_certificate"
+        ),
+        (
+            "semantic_target_joint_closure_alignment_certificate="
+            "RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate"
+        ),
+        (
+            "semantic_target_joint_closure_alignment_certificate_proof="
+            "remaining_open_semantic_targets_joint_closure_reduction_alignment_certificate"
+        ),
+        (
+            "semantic_target_joint_closure_alignment_id_label_proofs="
+            "openSemanticTargetKernelSurfaceIds_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_current,"
+            "openSemanticTargetExactClosureInputSurfaceIds_current,"
+            "openSemanticTargetExactClosureInputSurfaceIdPaperLabels_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputSurfaceIdPaperLabels,"
+            "openSemanticTargetExactClosureInputOutputSurfaceIds_current,"
+            "openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputOutputSurfaceIdPaperLabels"
         ),
         (
             "semantic_target_bilateral_package_obstruction_alignment_certificate="
