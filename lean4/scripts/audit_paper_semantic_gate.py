@@ -393,6 +393,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsOutputEquivalenceCertificate",
     "OpenSemanticTargetOutputEquivalenceNamedRosterCertificate",
     "OpenSemanticTargetOutputEquivalenceStatementRosterCertificate",
+    "CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate",
     "RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate",
     "RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate",
     "RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate",
@@ -1179,6 +1180,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_certificate",
+    "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate",
+    "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_output_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
@@ -4621,6 +4624,33 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_component_proofs="
+        "openSemanticTargetOutputEquivalenceSurfaceIds_current,"
+        "openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_outputEquivalenceSurfaceIdPaperLabels,"
+        "openSemanticTargetOutputEquivalenceSurfaceCount_current,"
+        "remaining_open_semantic_targets_output_equivalence_certificate,"
+        "open_semantic_target_output_equivalence_named_roster_certificate,"
+        "open_semantic_target_output_equivalence_statement_roster_certificate,"
+        "openSemanticTargetObstructionEquivalenceSurfaceIds_current,"
+        "openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_obstructionEquivalenceSurfaceIdPaperLabels,"
+        "openSemanticTargetObstructionEquivalenceSurfaceCount_current,"
+        "remaining_open_semantic_targets_obstruction_equivalence_certificate,"
+        "open_semantic_target_obstruction_equivalence_named_roster_certificate,"
+        "open_semantic_target_obstruction_equivalence_statement_roster_certificate,"
+        "open_semantic_target_all_surface_id_paper_labels_certificate,"
+        "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
+    )
+    print(
         "semantic_target_closure_input_field_output_roster_certificate="
         "OpenSemanticTargetClosureInputFieldOutputRosterCertificate"
     )
@@ -5538,6 +5568,33 @@ def main() -> int:
             "remaining_open_semantic_targets_field_output_current_obstruction_source_certificate,"
             "remaining_open_semantic_targets_field_output_current_obstruction_source_statement_roster_certificate,"
             "remaining_open_semantic_targets_field_output_current_obstruction_source_alignment_certificate,"
+            "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_component_proofs="
+            "openSemanticTargetOutputEquivalenceSurfaceIds_current,"
+            "openSemanticTargetOutputEquivalenceSurfaceIdPaperLabels_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_outputEquivalenceSurfaceIdPaperLabels,"
+            "openSemanticTargetOutputEquivalenceSurfaceCount_current,"
+            "remaining_open_semantic_targets_output_equivalence_certificate,"
+            "open_semantic_target_output_equivalence_named_roster_certificate,"
+            "open_semantic_target_output_equivalence_statement_roster_certificate,"
+            "openSemanticTargetObstructionEquivalenceSurfaceIds_current,"
+            "openSemanticTargetObstructionEquivalenceSurfaceIdPaperLabels_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_obstructionEquivalenceSurfaceIdPaperLabels,"
+            "openSemanticTargetObstructionEquivalenceSurfaceCount_current,"
+            "remaining_open_semantic_targets_obstruction_equivalence_certificate,"
+            "open_semantic_target_obstruction_equivalence_named_roster_certificate,"
+            "open_semantic_target_obstruction_equivalence_statement_roster_certificate,"
+            "open_semantic_target_all_surface_id_paper_labels_certificate,"
             "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
         ),
         (
