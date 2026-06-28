@@ -6888,12 +6888,136 @@ theorem topo_cluster_random_supercritical_z2_closure_input_output_certificate :
   · exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
   exact not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
 
+/-- Statement roster for the topo closure-input output certificate. -/
+def topoClusterRandomSupercriticalZ2ClosureInputOutputStatements :
+    List Prop :=
+  [TopoClusterRandomSupercriticalZ2ClosureInput ->
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+   TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+   Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+    TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+      RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        bridge,
+   Not TopoClusterRandomSupercriticalZ2ClosureInput,
+   Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute]
+
+/-- Build gate: the topo closure-input output roster names exactly the output
+certificate conjuncts. -/
+theorem topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_named_current :
+    topoClusterRandomSupercriticalZ2ClosureInputOutputStatements =
+      [TopoClusterRandomSupercriticalZ2ClosureInput ->
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        Exists fun bridge :
+            RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        Exists fun bridge :
+            RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+            bridge,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] :=
+  rfl
+
+/-- Build gate: the topo closure-input output roster has exactly fifteen
+certificate conjuncts. -/
+theorem topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_length_current :
+    topoClusterRandomSupercriticalZ2ClosureInputOutputStatements.length = 15 := rfl
+
+/-- Build-gated statement roster for the topo closure-input output certificate. -/
+def TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2ClosureInputOutputStatements =
+      [TopoClusterRandomSupercriticalZ2ClosureInput ->
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairOutput,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        Exists fun bridge :
+            RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          RandomSupercriticalZ2TopoClusterRepairedBridgePaperSupport bridge,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        Exists fun bridge :
+            RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
+          RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+            bridge,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    topoClusterRandomSupercriticalZ2ClosureInputOutputStatements.length = 15 /\
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate
+
+/-- The topo closure-input output certificate has a fixed statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_closure_input_output_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_length_current
+      topo_cluster_random_supercritical_z2_closure_input_output_certificate)
+
 /-- Single build-gated output certificate for the sufficient closure inputs of
 the two remaining open paper-semantic targets. -/
 def RemainingOpenSemanticTargetsClosureInputOutputCertificate : Prop :=
   Part6LatticeEmbeddingClosureInputOutputCertificate /\
     Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputCertificate
 
 /-- The sufficient closure inputs project to the expected output layers for both
@@ -6906,6 +7030,9 @@ theorem remaining_open_semantic_targets_closure_input_output_certificate :
   · exact part6_lattice_embedding_closure_input_output_statement_roster_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_closure_input_output_statement_roster_certificate
   exact remaining_open_semantic_targets_closure_input_certificate
 
 /-- Direct statement roster for the closure-input/output package. -/
@@ -6913,6 +7040,7 @@ def remainingOpenSemanticTargetsClosureInputOutputStatements : List Prop :=
   [Part6LatticeEmbeddingClosureInputOutputCertificate,
    Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate,
    RemainingOpenSemanticTargetsClosureInputCertificate]
 
 /-- Build gate: the closure-input/output package roster names exactly the
@@ -6922,12 +7050,13 @@ theorem remainingOpenSemanticTargetsClosureInputOutputStatements_named_current :
       [Part6LatticeEmbeddingClosureInputOutputCertificate,
        Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate,
        RemainingOpenSemanticTargetsClosureInputCertificate] := rfl
 
-/-- Build gate: the closure-input/output package roster has exactly the four
+/-- Build gate: the closure-input/output package roster has exactly the five
 certificate conjuncts. -/
 theorem remainingOpenSemanticTargetsClosureInputOutputStatements_length_current :
-    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 4 := rfl
+    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 5 := rfl
 
 /-- Build-gated direct statement roster for the closure-input/output package. -/
 def RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate :
@@ -6936,8 +7065,9 @@ def RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate :
       [Part6LatticeEmbeddingClosureInputOutputCertificate,
        Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate,
        RemainingOpenSemanticTargetsClosureInputCertificate] /\
-    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 4 /\
+    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 5 /\
     RemainingOpenSemanticTargetsClosureInputOutputCertificate
 
 /-- The closure-input/output certificate has a fixed direct statement roster. -/

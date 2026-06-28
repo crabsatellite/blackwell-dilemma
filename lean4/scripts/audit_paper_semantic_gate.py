@@ -1038,6 +1038,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ClosureInputOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_output_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsClosureInputOutputStatements",
@@ -3766,6 +3771,23 @@ def main() -> int:
         "part6_lattice_embedding_closure_input_output_statement_roster_certificate"
     )
     print(
+        "semantic_target_topo_closure_input_output_statement_roster_proof="
+        "topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_named_current"
+    )
+    print("semantic_target_topo_closure_input_output_statement_roster_terms_checked=15")
+    print(
+        "semantic_target_topo_closure_input_output_statement_roster_length_proof="
+        "topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_length_current"
+    )
+    print(
+        "semantic_target_topo_closure_input_output_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_topo_closure_input_output_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_closure_input_output_statement_roster_certificate"
+    )
+    print(
         "semantic_target_closure_input_output_certificate="
         "RemainingOpenSemanticTargetsClosureInputOutputCertificate"
     )
@@ -3777,7 +3799,7 @@ def main() -> int:
         "semantic_target_closure_input_output_statement_roster_proof="
         "remainingOpenSemanticTargetsClosureInputOutputStatements_named_current"
     )
-    print("semantic_target_closure_input_output_statement_roster_terms_checked=4")
+    print("semantic_target_closure_input_output_statement_roster_terms_checked=5")
     print(
         "semantic_target_closure_input_output_statement_roster_length_proof="
         "remainingOpenSemanticTargetsClosureInputOutputStatements_length_current"
@@ -7331,7 +7353,24 @@ def main() -> int:
             "semantic_target_part6_closure_input_output_statement_roster_certificate_proof="
             "part6_lattice_embedding_closure_input_output_statement_roster_certificate"
         ),
-        "semantic_target_closure_input_output_statement_roster_terms_checked=4",
+        (
+            "semantic_target_topo_closure_input_output_statement_roster_proof="
+            "topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_named_current"
+        ),
+        "semantic_target_topo_closure_input_output_statement_roster_terms_checked=15",
+        (
+            "semantic_target_topo_closure_input_output_statement_roster_length_proof="
+            "topoClusterRandomSupercriticalZ2ClosureInputOutputStatements_length_current"
+        ),
+        (
+            "semantic_target_topo_closure_input_output_statement_roster_certificate="
+            "TopoClusterRandomSupercriticalZ2ClosureInputOutputStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_topo_closure_input_output_statement_roster_certificate_proof="
+            "topo_cluster_random_supercritical_z2_closure_input_output_statement_roster_certificate"
+        ),
+        "semantic_target_closure_input_output_statement_roster_terms_checked=5",
         (
             "semantic_target_closure_input_output_statement_roster_length_proof="
             "remainingOpenSemanticTargetsClosureInputOutputStatements_length_current"
