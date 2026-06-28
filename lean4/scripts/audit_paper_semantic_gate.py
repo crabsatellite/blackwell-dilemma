@@ -369,9 +369,11 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate",
     "OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate",
     "RemainingOpenSemanticTargetsJointClosureReductionCertificate",
+    "RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate",
     "RemainingOpenSemanticTargetsJointClosureStatementRosterCertificate",
     "RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate",
     "RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
+    "RemainingOpenSemanticTargetsJointRouteObstructionReductionStatementRosterCertificate",
     "RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate",
     "RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate",
     "CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate",
@@ -847,6 +849,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_full_outputs_notYet",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureReductionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_reduction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureReductionStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureReductionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureReductionStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_closure_reduction_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureStatements",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointClosureStatements_length_current",
@@ -884,6 +891,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_routes_not_of_topo_closure_not",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteObstructionReductionStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteObstructionReductionStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteObstructionReductionStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteObstructionReductionStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteStatements",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteStatements_length_current",
@@ -4107,6 +4119,25 @@ def main() -> int:
         "remaining_open_semantic_targets_joint_closure_reduction_certificate"
     )
     print(
+        "semantic_target_joint_closure_reduction_statement_roster_proof="
+        "remainingOpenSemanticTargetsJointClosureReductionStatements_named_current"
+    )
+    print(
+        "semantic_target_joint_closure_reduction_statement_roster_terms_checked=7"
+    )
+    print(
+        "semantic_target_joint_closure_reduction_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsJointClosureReductionStatements_length_current"
+    )
+    print(
+        "semantic_target_joint_closure_reduction_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_joint_closure_reduction_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_joint_closure_reduction_statement_roster_certificate"
+    )
+    print(
         "semantic_target_joint_closure_statement_roster_proof="
         "remainingOpenSemanticTargetsJointClosureStatements_named_current"
     )
@@ -4150,7 +4181,7 @@ def main() -> int:
         "semantic_target_joint_closure_alignment_statement_roster_certificate_proof="
         "remaining_open_semantic_targets_joint_closure_reduction_alignment_statement_roster_certificate"
     )
-    print("semantic_target_joint_closure_alignment_statement_roster_terms_checked=13")
+    print("semantic_target_joint_closure_alignment_statement_roster_terms_checked=14")
     print(
         "semantic_target_joint_route_targets="
         "RemainingOpenSemanticTargetsTargetRoutesSatisfied"
@@ -4199,6 +4230,23 @@ def main() -> int:
         "remaining_open_semantic_targets_joint_route_obstruction_reduction_certificate"
     )
     print(
+        "semantic_target_joint_route_reduction_statement_roster_proof="
+        "remainingOpenSemanticTargetsJointRouteObstructionReductionStatements_named_current"
+    )
+    print("semantic_target_joint_route_reduction_statement_roster_terms_checked=9")
+    print(
+        "semantic_target_joint_route_reduction_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsJointRouteObstructionReductionStatements_length_current"
+    )
+    print(
+        "semantic_target_joint_route_reduction_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsJointRouteObstructionReductionStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_joint_route_reduction_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_joint_route_obstruction_reduction_statement_roster_certificate"
+    )
+    print(
         "semantic_target_joint_route_statement_roster_proof="
         "remainingOpenSemanticTargetsJointRouteStatements_named_current"
     )
@@ -4239,7 +4287,7 @@ def main() -> int:
         "semantic_target_joint_route_alignment_statement_roster_certificate_proof="
         "remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_statement_roster_certificate"
     )
-    print("semantic_target_joint_route_alignment_statement_roster_terms_checked=13")
+    print("semantic_target_joint_route_alignment_statement_roster_terms_checked=14")
     print(
         "semantic_target_bilateral_package_obstruction_certificate="
         "RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate"
@@ -6110,6 +6158,23 @@ def main() -> int:
             "open_semantic_target_all_surface_id_paper_label_statement_roster_certificate"
         ),
         (
+            "semantic_target_joint_closure_reduction_statement_roster_proof="
+            "remainingOpenSemanticTargetsJointClosureReductionStatements_named_current"
+        ),
+        "semantic_target_joint_closure_reduction_statement_roster_terms_checked=7",
+        (
+            "semantic_target_joint_closure_reduction_statement_roster_length_proof="
+            "remainingOpenSemanticTargetsJointClosureReductionStatements_length_current"
+        ),
+        (
+            "semantic_target_joint_closure_reduction_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_joint_closure_reduction_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_joint_closure_reduction_statement_roster_certificate"
+        ),
+        (
             "semantic_target_joint_closure_alignment_certificate="
             "RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate"
         ),
@@ -6136,7 +6201,24 @@ def main() -> int:
             "semantic_target_joint_closure_alignment_statement_roster_certificate_proof="
             "remaining_open_semantic_targets_joint_closure_reduction_alignment_statement_roster_certificate"
         ),
-        "semantic_target_joint_closure_alignment_statement_roster_terms_checked=13",
+        "semantic_target_joint_closure_alignment_statement_roster_terms_checked=14",
+        (
+            "semantic_target_joint_route_reduction_statement_roster_proof="
+            "remainingOpenSemanticTargetsJointRouteObstructionReductionStatements_named_current"
+        ),
+        "semantic_target_joint_route_reduction_statement_roster_terms_checked=9",
+        (
+            "semantic_target_joint_route_reduction_statement_roster_length_proof="
+            "remainingOpenSemanticTargetsJointRouteObstructionReductionStatements_length_current"
+        ),
+        (
+            "semantic_target_joint_route_reduction_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsJointRouteObstructionReductionStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_joint_route_reduction_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_joint_route_obstruction_reduction_statement_roster_certificate"
+        ),
         (
             "semantic_target_joint_route_alignment_certificate="
             "RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate"
@@ -6161,7 +6243,7 @@ def main() -> int:
             "semantic_target_joint_route_alignment_statement_roster_certificate_proof="
             "remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_statement_roster_certificate"
         ),
-        "semantic_target_joint_route_alignment_statement_roster_terms_checked=13",
+        "semantic_target_joint_route_alignment_statement_roster_terms_checked=14",
         (
             "semantic_target_bilateral_package_obstruction_alignment_certificate="
             "RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate"
