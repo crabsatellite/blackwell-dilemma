@@ -3524,6 +3524,23 @@ def main() -> int:
         "remaining_open_semantic_targets_payload_route_map_certificate"
     )
     print(
+        "semantic_target_payload_route_map_statement_roster_proof="
+        "remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current"
+    )
+    print("semantic_target_payload_route_map_statement_roster_terms_checked=28")
+    print(
+        "semantic_target_payload_route_map_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsPayloadRouteMapStatements_length_current"
+    )
+    print(
+        "semantic_target_payload_route_map_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsPayloadRouteMapStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_payload_route_map_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_payload_route_map_statement_roster_certificate"
+    )
+    print(
         "semantic_target_closure_input_targets="
         + ",".join(surface[1] for surface in closure_input_surfaces)
     )

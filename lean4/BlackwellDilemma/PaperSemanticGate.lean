@@ -5046,6 +5046,140 @@ theorem remaining_open_semantic_targets_payload_route_map_certificate :
     topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate⟩
 
+/-- Statement roster for the payload route-map certificate of the two remaining
+paper-semantic targets. -/
+def remainingOpenSemanticTargetsPayloadRouteMapStatements : List Prop :=
+  [openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount,
+   Part6LatticeEmbeddingFrontierPayloadCertificate,
+   Part6LatticeEmbeddingFrontierPayloadStatementRosterCertificate,
+   Iff Part6LatticeEmbeddingSemanticKernelTarget
+      Part6NondegenerateFeasibleRepairRoute,
+   Iff Part6LatticeEmbeddingSemanticKernelTarget
+      Part6FullPaperClosingSupport,
+   Iff Part6NondegenerateFeasibleRepairRoute
+      Part6FullPaperClosingSupport,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Part6NondegenerateFeasibleRepairRouteCertificate,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Part6FullPaperClosingOutputLayerCertificate,
+   Not Part6FullPaperClosingSupport,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+   Part6CurrentFrontierCertificate,
+   TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+   TopoClusterRandomSupercriticalZ2FrontierPayloadStatementRosterCertificate,
+   Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+      RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Iff RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate]
+
+/-- Build gate: the payload route-map statement roster names exactly the
+current route-map components. -/
+theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current :
+    remainingOpenSemanticTargetsPayloadRouteMapStatements =
+      [openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount,
+       Part6LatticeEmbeddingFrontierPayloadCertificate,
+       Part6LatticeEmbeddingFrontierPayloadStatementRosterCertificate,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6NondegenerateFeasibleRepairRoute,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6FullPaperClosingSupport,
+       Iff Part6NondegenerateFeasibleRepairRoute
+          Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Not Part6FullPaperClosingSupport,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadStatementRosterCertificate,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Iff RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
+
+/-- Build gate: the payload route-map statement roster has exactly the
+twenty-eight current route-map components. -/
+theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_length_current :
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 28 := rfl
+
+/-- Build-gated statement roster certificate for the payload route-map package
+of the two remaining paper-semantic targets. -/
+def RemainingOpenSemanticTargetsPayloadRouteMapStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsPayloadRouteMapStatements =
+      [openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount,
+       Part6LatticeEmbeddingFrontierPayloadCertificate,
+       Part6LatticeEmbeddingFrontierPayloadStatementRosterCertificate,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6NondegenerateFeasibleRepairRoute,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6FullPaperClosingSupport,
+       Iff Part6NondegenerateFeasibleRepairRoute
+          Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Not Part6FullPaperClosingSupport,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadStatementRosterCertificate,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Iff RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 28 /\
+    RemainingOpenSemanticTargetsPayloadRouteMapCertificate
+
+/-- The payload route-map certificate has a fixed statement roster. -/
+theorem
+    remaining_open_semantic_targets_payload_route_map_statement_roster_certificate :
+    RemainingOpenSemanticTargetsPayloadRouteMapStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsPayloadRouteMapStatements_length_current
+      remaining_open_semantic_targets_payload_route_map_certificate)
+
 /-- Sufficient closure input for the open Part 6 lattice-embedding semantic
 target.  This is the bridge-level closed-unit tail-reversal datum already
 projected by the frontier certificate; it is still current-refuted. -/
