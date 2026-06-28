@@ -5041,6 +5041,59 @@ theorem part6_lattice_embedding_closure_input_certificate :
   · exact z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate
   exact z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate
 
+/-- Statement roster for the Part 6 closure-input certificate. -/
+def part6LatticeEmbeddingClosureInputStatements : List Prop :=
+  [Part6LatticeEmbeddingClosureInput ->
+    Part6LatticeEmbeddingSemanticKernelTarget,
+   Part6LatticeEmbeddingClosureInput ->
+    Part6NondegenerateFeasibleRepairRoute,
+   Part6LatticeEmbeddingClosureInput -> Part6FullPaperClosingSupport,
+   Not Part6LatticeEmbeddingClosureInput,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate]
+
+/-- Build gate: the Part 6 closure-input statement roster names exactly the
+certificate conjuncts. -/
+theorem part6LatticeEmbeddingClosureInputStatements_named_current :
+    part6LatticeEmbeddingClosureInputStatements =
+      [Part6LatticeEmbeddingClosureInput ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingClosureInput -> Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingClosureInput,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate] :=
+  rfl
+
+/-- Build gate: the Part 6 closure-input statement roster has exactly six
+certificate conjuncts. -/
+theorem part6LatticeEmbeddingClosureInputStatements_length_current :
+    part6LatticeEmbeddingClosureInputStatements.length = 6 := rfl
+
+/-- Build-gated statement roster for the Part 6 closure-input certificate. -/
+def Part6LatticeEmbeddingClosureInputStatementRosterCertificate : Prop :=
+  part6LatticeEmbeddingClosureInputStatements =
+      [Part6LatticeEmbeddingClosureInput ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingClosureInput -> Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingClosureInput,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate] /\
+    part6LatticeEmbeddingClosureInputStatements.length = 6 /\
+    Part6LatticeEmbeddingClosureInputCertificate
+
+/-- The Part 6 closure-input certificate has a fixed statement roster. -/
+theorem part6_lattice_embedding_closure_input_statement_roster_certificate :
+    Part6LatticeEmbeddingClosureInputStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingClosureInputStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingClosureInputStatements_length_current
+      part6_lattice_embedding_closure_input_certificate)
+
 /-- Sufficient closure input for the open random-supercritical topo target.  It
 asks for a repaired bridge with a uniform positive pointwise loss floor on its
 giant event; that input would feed the repaired support-surface closing spine
@@ -5386,6 +5439,7 @@ def RemainingOpenSemanticTargetsClosureInputCertificate : Prop :=
       Part6LatticeEmbeddingSemanticKernelTarget) /\
     Not Part6LatticeEmbeddingClosureInput /\
     Part6LatticeEmbeddingClosureInputCertificate /\
+    Part6LatticeEmbeddingClosureInputStatementRosterCertificate /\
     (TopoClusterRandomSupercriticalZ2ClosureInput ->
       TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
     Not TopoClusterRandomSupercriticalZ2ClosureInput /\
@@ -5407,6 +5461,8 @@ theorem remaining_open_semantic_targets_closure_input_certificate :
   constructor
   · exact part6_lattice_embedding_closure_input_certificate
   constructor
+  · exact part6_lattice_embedding_closure_input_statement_roster_certificate
+  constructor
   · exact
       topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
   constructor
@@ -5422,6 +5478,7 @@ def remainingOpenSemanticTargetsClosureInputStatements : List Prop :=
       Part6LatticeEmbeddingSemanticKernelTarget,
    Not Part6LatticeEmbeddingClosureInput,
    Part6LatticeEmbeddingClosureInputCertificate,
+   Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInput ->
       TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
    Not TopoClusterRandomSupercriticalZ2ClosureInput,
@@ -5437,15 +5494,16 @@ theorem remainingOpenSemanticTargetsClosureInputStatements_named_current :
           Part6LatticeEmbeddingSemanticKernelTarget,
        Not Part6LatticeEmbeddingClosureInput,
        Part6LatticeEmbeddingClosureInputCertificate,
+       Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInput ->
           TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        Not TopoClusterRandomSupercriticalZ2ClosureInput,
        TopoClusterRandomSupercriticalZ2ClosureInputCertificate] := rfl
 
 /-- Build gate: the remaining-open closure-input statement roster has exactly
-the eight current sufficient-input components. -/
+the nine current sufficient-input components. -/
 theorem remainingOpenSemanticTargetsClosureInputStatements_length_current :
-    remainingOpenSemanticTargetsClosureInputStatements.length = 8 := rfl
+    remainingOpenSemanticTargetsClosureInputStatements.length = 9 := rfl
 
 /-- Build-gated statement roster certificate for the sufficient closure inputs
 of the two remaining open semantic targets. -/
@@ -5457,11 +5515,12 @@ def RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate : Prop :=
           Part6LatticeEmbeddingSemanticKernelTarget,
        Not Part6LatticeEmbeddingClosureInput,
        Part6LatticeEmbeddingClosureInputCertificate,
+       Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInput ->
           TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        Not TopoClusterRandomSupercriticalZ2ClosureInput,
        TopoClusterRandomSupercriticalZ2ClosureInputCertificate] /\
-    remainingOpenSemanticTargetsClosureInputStatements.length = 8 /\
+    remainingOpenSemanticTargetsClosureInputStatements.length = 9 /\
     RemainingOpenSemanticTargetsClosureInputCertificate
 
 /-- The sufficient closure-input certificate for the two remaining open

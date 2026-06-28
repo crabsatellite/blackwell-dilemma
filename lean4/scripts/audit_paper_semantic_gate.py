@@ -3508,6 +3508,23 @@ def main() -> int:
         + ",".join(surface[7] for surface in closure_input_surfaces)
     )
     print(
+        "semantic_target_part6_closure_input_statement_roster_proof="
+        "part6LatticeEmbeddingClosureInputStatements_named_current"
+    )
+    print("semantic_target_part6_closure_input_statement_roster_terms_checked=6")
+    print(
+        "semantic_target_part6_closure_input_statement_roster_length_proof="
+        "part6LatticeEmbeddingClosureInputStatements_length_current"
+    )
+    print(
+        "semantic_target_part6_closure_input_statement_roster_certificate="
+        "Part6LatticeEmbeddingClosureInputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_part6_closure_input_statement_roster_certificate_proof="
+        "part6_lattice_embedding_closure_input_statement_roster_certificate"
+    )
+    print(
         "semantic_target_closure_input_certificate="
         "RemainingOpenSemanticTargetsClosureInputCertificate"
     )
@@ -3523,7 +3540,7 @@ def main() -> int:
         "semantic_target_closure_input_summary_statement_roster_proof="
         "remainingOpenSemanticTargetsClosureInputStatements_named_current"
     )
-    print("semantic_target_closure_input_summary_statement_roster_terms_checked=8")
+    print("semantic_target_closure_input_summary_statement_roster_terms_checked=9")
     print(
         "semantic_target_closure_input_summary_statement_roster_length_proof="
         "remainingOpenSemanticTargetsClosureInputStatements_length_current"
@@ -7128,10 +7145,27 @@ def main() -> int:
             "remainingOpenSemanticTargetsClosureInputStatements"
         ),
         (
+            "semantic_target_part6_closure_input_statement_roster_proof="
+            "part6LatticeEmbeddingClosureInputStatements_named_current"
+        ),
+        "semantic_target_part6_closure_input_statement_roster_terms_checked=6",
+        (
+            "semantic_target_part6_closure_input_statement_roster_length_proof="
+            "part6LatticeEmbeddingClosureInputStatements_length_current"
+        ),
+        (
+            "semantic_target_part6_closure_input_statement_roster_certificate="
+            "Part6LatticeEmbeddingClosureInputStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_part6_closure_input_statement_roster_certificate_proof="
+            "part6_lattice_embedding_closure_input_statement_roster_certificate"
+        ),
+        (
             "semantic_target_closure_input_summary_statement_roster_proof="
             "remainingOpenSemanticTargetsClosureInputStatements_named_current"
         ),
-        "semantic_target_closure_input_summary_statement_roster_terms_checked=8",
+        "semantic_target_closure_input_summary_statement_roster_terms_checked=9",
         (
             "semantic_target_closure_input_summary_statement_roster_length_proof="
             "remainingOpenSemanticTargetsClosureInputStatements_length_current"
