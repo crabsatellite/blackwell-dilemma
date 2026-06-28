@@ -26,6 +26,10 @@ GATE = ROOT / "BlackwellDilemma" / "PaperSemanticGate.lean"
 AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
 PUBLIC_EVIDENCE_MANIFEST = REPO_ROOT / "reference-evidence" / "public_evidence_manifest.json"
 PUBLIC_EVIDENCE_CHECK_ID = "paper_semantic_companion_audit"
+CERTIFICATE_DEF_RE = re.compile(r"(?m)^def\s+([A-Z][A-Za-z0-9_]*Certificate)\s*:")
+CERTIFICATE_REF_RE = re.compile(r"\b([A-Z][A-Za-z0-9_]*Certificate)\b")
+CERTIFICATE_SUFFIX = "Certificate"
+STATEMENT_ROSTER_CERTIFICATE_SUFFIX = "StatementRosterCertificate"
 
 EXPECTED_OPEN_KERNEL_SURFACES = {
     "theorem_4_1_part6_lattice_embedding": (
@@ -2397,6 +2401,33 @@ def has_axiom_audit_print(text: str, decl: str) -> bool:
     )
 
 
+def same_base_statement_roster_certificate(
+    certificate_name: str,
+) -> str:
+    return (
+        certificate_name[: -len(CERTIFICATE_SUFFIX)]
+        + STATEMENT_ROSTER_CERTIFICATE_SUFFIX
+    )
+
+
+def same_base_statement_roster_certificate_gap(
+    text: str,
+) -> tuple[list[str], list[str], list[str]]:
+    certificate_defs = sorted(set(CERTIFICATE_DEF_RE.findall(text)))
+    certificate_refs = set(CERTIFICATE_REF_RE.findall(text))
+    non_statement_roster_defs = [
+        name
+        for name in certificate_defs
+        if not name.endswith(STATEMENT_ROSTER_CERTIFICATE_SUFFIX)
+    ]
+    missing_same_base_rosters = [
+        name
+        for name in non_statement_roster_defs
+        if same_base_statement_roster_certificate(name) not in certificate_refs
+    ]
+    return certificate_defs, non_statement_roster_defs, missing_same_base_rosters
+
+
 def main() -> int:
     text = read(GATE)
     axiom_audit_text = read(AXIOM_AUDIT)
@@ -2404,6 +2435,11 @@ def main() -> int:
     open_ids, closed_ids = semantic_target_ids_by_status(text)
     open_count = len(open_ids)
     closed_count = len(closed_ids)
+    (
+        certificate_defs,
+        non_statement_roster_certificate_defs,
+        missing_same_base_statement_roster_defs,
+    ) = same_base_statement_roster_certificate_gap(text)
 
     expected_open = theorem_count(text, "paperSemanticOpenCount_current")
     expected_closed = theorem_count(text, "paperSemanticClosedCount_current")
@@ -2582,6 +2618,19 @@ def main() -> int:
     print(f"theorem_gate_closed={expected_closed}")
     print(f"semantic_target_open_ids={','.join(open_ids)}")
     print(f"semantic_target_closed_ids={','.join(closed_ids)}")
+    print(f"semantic_target_certificate_defs_checked={len(certificate_defs)}")
+    print(
+        "semantic_target_certificate_same_base_statement_roster_non_roster_defs_checked="
+        f"{len(non_statement_roster_certificate_defs)}"
+    )
+    print(
+        "semantic_target_certificate_same_base_statement_roster_missing="
+        f"{len(missing_same_base_statement_roster_defs)}"
+    )
+    print(
+        "semantic_target_certificate_same_base_statement_roster_missing_decls="
+        + ",".join(missing_same_base_statement_roster_defs)
+    )
     print_id_drift("semantic_target_open_ids", expected_open_ids, open_ids)
     print_id_drift("semantic_target_closed_ids", expected_closed_ids, closed_ids)
     print(
@@ -6327,6 +6376,19 @@ def main() -> int:
         f"theorem_gate_closed={expected_closed}",
         f"semantic_target_open_ids={','.join(open_ids)}",
         f"semantic_target_closed_ids={','.join(closed_ids)}",
+        f"semantic_target_certificate_defs_checked={len(certificate_defs)}",
+        (
+            "semantic_target_certificate_same_base_statement_roster_non_roster_defs_checked="
+            f"{len(non_statement_roster_certificate_defs)}"
+        ),
+        (
+            "semantic_target_certificate_same_base_statement_roster_missing="
+            f"{len(missing_same_base_statement_roster_defs)}"
+        ),
+        (
+            "semantic_target_certificate_same_base_statement_roster_missing_decls="
+            + ",".join(missing_same_base_statement_roster_defs)
+        ),
         *id_drift_lines("semantic_target_open_ids", expected_open_ids, open_ids),
         *id_drift_lines("semantic_target_closed_ids", expected_closed_ids, closed_ids),
         (
@@ -7905,6 +7967,11 @@ def main() -> int:
         failures.append(f"open target ids {open_ids!r} != theorem gate {expected_open_ids!r}")
     if closed_ids != expected_closed_ids:
         failures.append(f"closed target ids {closed_ids!r} != theorem gate {expected_closed_ids!r}")
+    if missing_same_base_statement_roster_defs:
+        failures.append(
+            "certificate defs missing same-base statement roster certificates: "
+            + ",".join(missing_same_base_statement_roster_defs)
+        )
     if top_level_missing_conjuncts:
         failures.append(
             "top-level current obstruction certificate missing conjuncts: "
