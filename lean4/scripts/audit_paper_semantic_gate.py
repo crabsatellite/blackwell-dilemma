@@ -4093,6 +4093,14 @@ def main() -> int:
         "open_semantic_target_output_equivalence_statement_roster_certificate"
     )
     print(
+        "semantic_target_output_equivalence_named_roster_statement_roster_certificate="
+        "OpenSemanticTargetOutputEquivalenceNamedRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_output_equivalence_named_roster_statement_roster_certificate_proof="
+        "open_semantic_target_output_equivalence_named_roster_statement_roster_certificate"
+    )
+    print(
         "semantic_target_exact_closure_input_output_targets="
         + ",".join(surface[1] for surface in exact_closure_input_output_surfaces)
     )

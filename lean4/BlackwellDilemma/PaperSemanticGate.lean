@@ -7863,6 +7863,24 @@ theorem open_semantic_target_output_equivalence_statement_roster_certificate :
         surface),
     open_semantic_target_output_equivalence_named_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the output-equivalence named
+roster.  The underlying statement roster is the existing output-equivalence
+statement roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetOutputEquivalenceNamedRosterCertificate`. -/
+def OpenSemanticTargetOutputEquivalenceNamedRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
+    OpenSemanticTargetOutputEquivalenceNamedRosterCertificate
+
+/-- The output-equivalence named roster package is covered by the existing
+output-equivalence statement roster certificate. -/
+theorem
+    open_semantic_target_output_equivalence_named_roster_statement_roster_certificate :
+    OpenSemanticTargetOutputEquivalenceNamedRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_output_equivalence_statement_roster_certificate,
+    open_semantic_target_output_equivalence_named_roster_certificate⟩
+
 /-- The exact Part 6 closure input exposes the full paper-facing output
 bundle. -/
 theorem part6_lattice_embedding_full_output_bundle_of_exact_closure_input :
