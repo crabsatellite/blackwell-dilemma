@@ -2665,6 +2665,23 @@ def main() -> int:
         + ",".join(semantic_target_status_partition_missing_terms)
     )
     print(
+        "semantic_target_status_partition_statement_roster_proof="
+        "semanticTargetStatusPartitionStatements_named_current"
+    )
+    print("semantic_target_status_partition_statement_roster_terms_checked=3")
+    print(
+        "semantic_target_status_partition_statement_roster_length_proof="
+        "semanticTargetStatusPartitionStatements_length_current"
+    )
+    print(
+        "semantic_target_status_partition_statement_roster_certificate="
+        "SemanticTargetStatusPartitionStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_status_partition_statement_roster_certificate_proof="
+        "semantic_target_status_partition_statement_roster_certificate"
+    )
+    print(
         "semantic_target_paper_label_certificate="
         "SemanticTargetPaperLabelCertificate"
     )
@@ -6223,6 +6240,23 @@ def main() -> int:
         (
             "semantic_target_status_partition_conjuncts_missing="
             f"{len(semantic_target_status_partition_missing_terms)}"
+        ),
+        (
+            "semantic_target_status_partition_statement_roster_proof="
+            "semanticTargetStatusPartitionStatements_named_current"
+        ),
+        "semantic_target_status_partition_statement_roster_terms_checked=3",
+        (
+            "semantic_target_status_partition_statement_roster_length_proof="
+            "semanticTargetStatusPartitionStatements_length_current"
+        ),
+        (
+            "semantic_target_status_partition_statement_roster_certificate="
+            "SemanticTargetStatusPartitionStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_status_partition_statement_roster_certificate_proof="
+            "semantic_target_status_partition_statement_roster_certificate"
         ),
         (
             "semantic_target_paper_label_certificate="

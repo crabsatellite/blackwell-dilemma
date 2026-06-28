@@ -17258,6 +17258,51 @@ theorem semantic_target_status_partition_certificate :
     SemanticTargetStatusPartitionCertificate := by
   exact ⟨rfl, rfl, rfl⟩
 
+/-- Statement roster for the current semantic-target status partition package. -/
+def semanticTargetStatusPartitionStatements : List Prop :=
+  [semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+   closedSemanticTargets.map (fun target => target.status) =
+      [SemanticStatus.closed, SemanticStatus.closed, SemanticStatus.closed],
+   openSemanticTargets.map (fun target => target.status) =
+      [SemanticStatus.open, SemanticStatus.open]]
+
+/-- Build gate: the semantic-target status partition roster names exactly the
+current object and status partition components. -/
+theorem semanticTargetStatusPartitionStatements_named_current :
+    semanticTargetStatusPartitionStatements =
+      [semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+       closedSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.closed, SemanticStatus.closed, SemanticStatus.closed],
+       openSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.open, SemanticStatus.open]] := rfl
+
+/-- Build gate: the semantic-target status partition roster has exactly three
+current partition components. -/
+theorem semanticTargetStatusPartitionStatements_length_current :
+    semanticTargetStatusPartitionStatements.length = 3 := rfl
+
+/-- Build-gated statement roster certificate for the semantic-target status
+partition package. -/
+def SemanticTargetStatusPartitionStatementRosterCertificate : Prop :=
+  semanticTargetStatusPartitionStatements =
+      [semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+       closedSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.closed, SemanticStatus.closed, SemanticStatus.closed],
+       openSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.open, SemanticStatus.open]] /\
+    semanticTargetStatusPartitionStatements.length = 3 /\
+    SemanticTargetStatusPartitionCertificate
+
+/-- The semantic-target status partition certificate has a fixed statement
+roster. -/
+theorem semantic_target_status_partition_statement_roster_certificate :
+    SemanticTargetStatusPartitionStatementRosterCertificate := by
+  exact And.intro
+    semanticTargetStatusPartitionStatements_named_current
+    (And.intro
+      semanticTargetStatusPartitionStatements_length_current
+      semantic_target_status_partition_certificate)
+
 /-- Current paper-label package: the semantic ledger's paper-facing labels are
 fixed for the closed frontier, the open frontier, and the full ledger. -/
 def SemanticTargetPaperLabelCertificate : Prop :=
