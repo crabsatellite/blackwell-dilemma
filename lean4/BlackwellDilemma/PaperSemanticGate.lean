@@ -15116,6 +15116,71 @@ theorem
   exact
     completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
 
+/-- Build-gated top-level alignment package tying the current frontier-payload
+surface to the same open ids, paper labels, current frontier certificates,
+route-obstruction alignment, and surface obstruction package used by the
+top-level non-complete paper-semantic gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate :
+    Prop :=
+  openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetFrontierPayloadSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetFrontierPayloadSurfaceIdPaperLabels /\
+    openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfacePayloadCertificates =
+      [Part6LatticeEmbeddingFrontierPayloadCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate] /\
+    openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates =
+      [Part6CurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
+    OpenSemanticTargetNamedFrontierCertificateRosterCertificate /\
+    RemainingOpenSemanticTargetsFrontierCertificate /\
+    OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
+    RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate
+
+/-- The typed frontier-payload surface is aligned with the same current open
+target ids, paper labels, frontier certificates, route map, and top-level
+current obstruction package. -/
+theorem
+    completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate := by
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceIds_current
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceIdPaperLabels_current
+  constructor
+  · exact
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_frontierPayloadSurfaceIdPaperLabels
+  constructor
+  · exact openSemanticTargetFrontierPayloadSurfaceCount_current
+  constructor
+  · exact
+      openSemanticTargetFrontierPayloadSurfacePayloadCertificates_named_current
+  constructor
+  · exact
+      openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates_named_current
+  constructor
+  · exact open_semantic_target_named_frontier_certificate_roster_certificate
+  constructor
+  · exact remaining_open_semantic_targets_frontier_certificate
+  constructor
+  · exact open_semantic_target_surface_roster_consistency_certificate
+  constructor
+  · exact
+      open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
+  constructor
+  · exact remaining_open_semantic_targets_payload_route_map_certificate
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_route_obstruction_alignment_certificate
+  exact
+    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open/closed target count/id gates, and subordinate certificate propositions
@@ -15163,6 +15228,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate,
    RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
    RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
    RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
    RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate,
@@ -15259,6 +15325,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate,
        RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
        RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
        RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
        RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate,
@@ -15310,9 +15377,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 80 named obstruction and subordinate-certificate statements listed above. -/
+the 81 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 82 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 83 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -15363,6 +15430,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate,
      RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
      CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+     CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
      RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
      RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
      RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate,
@@ -15412,7 +15480,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
      CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 82 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 83 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -15455,6 +15523,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate /\
@@ -15550,6 +15619,7 @@ theorem
     remaining_open_semantic_targets_joint_route_statement_roster_certificate,
     remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_certificate,
     completePaperSemanticKernelOnly_current_route_obstruction_alignment_certificate,
+    completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate,
     remaining_open_semantic_targets_bilateral_package_obstruction_certificate,
     remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate,
     remaining_open_semantic_targets_bilateral_package_obstruction_alignment_certificate,
@@ -15643,6 +15713,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate /\
@@ -15785,6 +15856,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       completePaperSemanticKernelOnly_current_route_obstruction_alignment_certificate
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate
   constructor
   · exact
       remaining_open_semantic_targets_bilateral_package_obstruction_certificate
