@@ -6671,6 +6671,45 @@ theorem remaining_open_semantic_targets_closure_input_output_certificate :
   · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
   exact remaining_open_semantic_targets_closure_input_certificate
 
+/-- Direct statement roster for the closure-input/output package. -/
+def remainingOpenSemanticTargetsClosureInputOutputStatements : List Prop :=
+  [Part6LatticeEmbeddingClosureInputOutputCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+   RemainingOpenSemanticTargetsClosureInputCertificate]
+
+/-- Build gate: the closure-input/output package roster names exactly the
+certificate conjuncts. -/
+theorem remainingOpenSemanticTargetsClosureInputOutputStatements_named_current :
+    remainingOpenSemanticTargetsClosureInputOutputStatements =
+      [Part6LatticeEmbeddingClosureInputOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       RemainingOpenSemanticTargetsClosureInputCertificate] := rfl
+
+/-- Build gate: the closure-input/output package roster has exactly the three
+certificate conjuncts. -/
+theorem remainingOpenSemanticTargetsClosureInputOutputStatements_length_current :
+    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 3 := rfl
+
+/-- Build-gated direct statement roster for the closure-input/output package. -/
+def RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsClosureInputOutputStatements =
+      [Part6LatticeEmbeddingClosureInputOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       RemainingOpenSemanticTargetsClosureInputCertificate] /\
+    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 3 /\
+    RemainingOpenSemanticTargetsClosureInputOutputCertificate
+
+/-- The closure-input/output certificate has a fixed direct statement roster. -/
+theorem
+    remaining_open_semantic_targets_closure_input_output_statement_roster_certificate :
+    RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsClosureInputOutputStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsClosureInputOutputStatements_length_current
+      remaining_open_semantic_targets_closure_input_output_certificate)
+
 /-- Machine-facing target/output equivalence surface for each open semantic
 target.  The output bundle must be strong enough to project back to the target;
 for the topo target this intentionally uses the same-witness output bundle, not
@@ -6959,7 +6998,8 @@ def RemainingOpenSemanticTargetsOutputEquivalenceCertificate : Prop :=
       surface.target ↔ surface.outputBundle) /\
     (∀ surface ∈ openSemanticTargetOutputEquivalenceSurfaces,
       Not surface.outputBundle) /\
-    RemainingOpenSemanticTargetsClosureInputOutputCertificate
+    RemainingOpenSemanticTargetsClosureInputOutputCertificate /\
+    RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate
 
 /-- The reversible output layer is kernel-checked for both remaining open
 targets and still blocked by the current output-bundle obstructions. -/
@@ -6982,7 +7022,10 @@ theorem remaining_open_semantic_targets_output_equivalence_certificate :
     exact
       openSemanticTargetOutputEquivalenceSurface_output_current_obstruction
         surface
-  exact remaining_open_semantic_targets_closure_input_output_certificate
+  constructor
+  · exact remaining_open_semantic_targets_closure_input_output_certificate
+  exact
+    remaining_open_semantic_targets_closure_input_output_statement_roster_certificate
 
 /-- Statement roster for the reversible output-equivalence certificate of the
 two remaining open semantic targets. -/
@@ -6998,7 +7041,8 @@ def remainingOpenSemanticTargetsOutputEquivalenceStatements : List Prop :=
    Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
    Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
-   RemainingOpenSemanticTargetsClosureInputOutputCertificate]
+   RemainingOpenSemanticTargetsClosureInputOutputCertificate,
+   RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate]
 
 /-- Build gate: the remaining-open output-equivalence statement roster names
 exactly the current output-equivalence components. -/
@@ -7012,15 +7056,16 @@ theorem remainingOpenSemanticTargetsOutputEquivalenceStatements_named_current :
        Iff Part6LatticeEmbeddingSemanticKernelTarget
           Part6FullPaperClosingFullOutputBundle,
        Not Part6FullPaperClosingFullOutputBundle,
-       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
-          TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
-       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
-       RemainingOpenSemanticTargetsClosureInputOutputCertificate] := rfl
+        Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+        RemainingOpenSemanticTargetsClosureInputOutputCertificate,
+        RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate] := rfl
 
 /-- Build gate: the remaining-open output-equivalence statement roster has
-exactly the nine current output-equivalence components. -/
+exactly the ten current output-equivalence components. -/
 theorem remainingOpenSemanticTargetsOutputEquivalenceStatements_length_current :
-    remainingOpenSemanticTargetsOutputEquivalenceStatements.length = 9 := rfl
+    remainingOpenSemanticTargetsOutputEquivalenceStatements.length = 10 := rfl
 
 /-- Build-gated statement roster certificate for the reversible output layer of
 the two remaining open semantic targets. -/
@@ -7035,11 +7080,12 @@ def RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate :
        Iff Part6LatticeEmbeddingSemanticKernelTarget
           Part6FullPaperClosingFullOutputBundle,
        Not Part6FullPaperClosingFullOutputBundle,
-       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
-          TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
-       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
-       RemainingOpenSemanticTargetsClosureInputOutputCertificate] /\
-    remainingOpenSemanticTargetsOutputEquivalenceStatements.length = 9 /\
+        Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+        Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+        RemainingOpenSemanticTargetsClosureInputOutputCertificate,
+        RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate] /\
+    remainingOpenSemanticTargetsOutputEquivalenceStatements.length = 10 /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate
 
 /-- The reversible output-equivalence certificate for the two remaining open
