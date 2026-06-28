@@ -365,6 +365,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate",
     "CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate",
     "RemainingOpenSemanticTargetsObstructionEquivalenceCertificate",
+    "RemainingOpenSemanticTargetsObstructionEquivalenceStatementRosterCertificate",
     "OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate",
     "OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate",
     "RemainingOpenSemanticTargetsJointClosureReductionCertificate",
@@ -820,6 +821,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetObstructionEquivalenceSurface_exact_not_iff_output",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsObstructionEquivalenceCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_obstruction_equivalence_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsObstructionEquivalenceStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsObstructionEquivalenceStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsObstructionEquivalenceStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsObstructionEquivalenceStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_obstruction_equivalence_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_obstruction_equivalence_named_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate",
@@ -3981,6 +3987,29 @@ def main() -> int:
         "remaining_open_semantic_targets_obstruction_equivalence_certificate"
     )
     print(
+        "semantic_target_obstruction_equivalence_summary_statement_roster="
+        "remainingOpenSemanticTargetsObstructionEquivalenceStatements"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_summary_statement_roster_proof="
+        "remainingOpenSemanticTargetsObstructionEquivalenceStatements_named_current"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_summary_statement_roster_terms_checked=15"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_summary_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsObstructionEquivalenceStatements_length_current"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_summary_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsObstructionEquivalenceStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_summary_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_obstruction_equivalence_statement_roster_certificate"
+    )
+    print(
         "semantic_target_obstruction_equivalence_named_roster_certificate="
         "OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate"
     )
@@ -5107,6 +5136,7 @@ def main() -> int:
         "openSemanticTargetKernelSurfaceIdPaperLabels_eq_obstructionEquivalenceSurfaceIdPaperLabels,"
         "openSemanticTargetObstructionEquivalenceSurfaceCount_current,"
         "remaining_open_semantic_targets_obstruction_equivalence_certificate,"
+        "remaining_open_semantic_targets_obstruction_equivalence_statement_roster_certificate,"
         "open_semantic_target_obstruction_equivalence_named_roster_certificate,"
         "open_semantic_target_obstruction_equivalence_statement_roster_certificate,"
         "open_semantic_target_all_surface_id_paper_labels_certificate,"
@@ -5121,7 +5151,7 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_statement_roster_certificate"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_statement_roster_terms_checked=17"
+        "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_statement_roster_terms_checked=18"
     )
     print(
         "complete_paper_semantic_kernel_only_current_route_obstruction_alignment_certificate="
@@ -6462,6 +6492,7 @@ def main() -> int:
             "openSemanticTargetKernelSurfaceIdPaperLabels_eq_obstructionEquivalenceSurfaceIdPaperLabels,"
             "openSemanticTargetObstructionEquivalenceSurfaceCount_current,"
             "remaining_open_semantic_targets_obstruction_equivalence_certificate,"
+            "remaining_open_semantic_targets_obstruction_equivalence_statement_roster_certificate,"
             "open_semantic_target_obstruction_equivalence_named_roster_certificate,"
             "open_semantic_target_obstruction_equivalence_statement_roster_certificate,"
             "open_semantic_target_all_surface_id_paper_labels_certificate,"
@@ -6476,7 +6507,7 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_statement_roster_certificate"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_statement_roster_terms_checked=17"
+            "complete_paper_semantic_kernel_only_current_obstruction_equivalence_alignment_statement_roster_terms_checked=18"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_obstruction_alignment_certificate="
@@ -6980,6 +7011,27 @@ def main() -> int:
         (
             "semantic_target_output_equivalence_summary_statement_roster_certificate_proof="
             "remaining_open_semantic_targets_output_equivalence_statement_roster_certificate"
+        ),
+        (
+            "semantic_target_obstruction_equivalence_summary_statement_roster="
+            "remainingOpenSemanticTargetsObstructionEquivalenceStatements"
+        ),
+        (
+            "semantic_target_obstruction_equivalence_summary_statement_roster_proof="
+            "remainingOpenSemanticTargetsObstructionEquivalenceStatements_named_current"
+        ),
+        "semantic_target_obstruction_equivalence_summary_statement_roster_terms_checked=15",
+        (
+            "semantic_target_obstruction_equivalence_summary_statement_roster_length_proof="
+            "remainingOpenSemanticTargetsObstructionEquivalenceStatements_length_current"
+        ),
+        (
+            "semantic_target_obstruction_equivalence_summary_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsObstructionEquivalenceStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_obstruction_equivalence_summary_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_obstruction_equivalence_statement_roster_certificate"
         ),
         (
             "semantic_target_named_route_obstruction_roster_ids="
