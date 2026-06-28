@@ -6711,6 +6711,24 @@ theorem open_semantic_target_exact_closure_input_statement_roster_certificate :
           surface),
     open_semantic_target_exact_closure_input_named_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the exact closure-input named
+roster.  The underlying statement roster is the existing exact-input statement
+roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetExactClosureInputNamedRosterCertificate`. -/
+def OpenSemanticTargetExactClosureInputNamedRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetExactClosureInputStatementRosterCertificate /\
+    OpenSemanticTargetExactClosureInputNamedRosterCertificate
+
+/-- The exact closure-input named roster package is covered by the existing
+exact-input statement roster certificate. -/
+theorem
+    open_semantic_target_exact_closure_input_named_roster_statement_roster_certificate :
+    OpenSemanticTargetExactClosureInputNamedRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_exact_closure_input_statement_roster_certificate,
+    open_semantic_target_exact_closure_input_named_roster_certificate⟩
+
 /-- A Part 6 closure input exposes the paper-facing divergence witness. -/
 theorem part6_lattice_embedding_divergence_witness_of_closure_input :
     Part6LatticeEmbeddingClosureInput ->

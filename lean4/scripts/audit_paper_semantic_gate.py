@@ -3913,6 +3913,14 @@ def main() -> int:
         "open_semantic_target_exact_closure_input_statement_roster_certificate"
     )
     print(
+        "semantic_target_exact_closure_input_named_roster_statement_roster_certificate="
+        "OpenSemanticTargetExactClosureInputNamedRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_exact_closure_input_named_roster_statement_roster_certificate_proof="
+        "open_semantic_target_exact_closure_input_named_roster_statement_roster_certificate"
+    )
+    print(
         "semantic_target_closure_input_output_certificates="
         "Part6LatticeEmbeddingClosureInputOutputCertificate,"
         "TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate"
