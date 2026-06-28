@@ -403,6 +403,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate",
     "OpenSemanticTargetClosureInputFieldRosterCertificate",
     "OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
+    "CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate",
     "RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
     "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate",
     "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate",
@@ -1194,6 +1195,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate",
     "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_closure_input_alignment_certificate",
+    "BlackwellDilemma.PaperSemanticGate.CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate",
+    "BlackwellDilemma.PaperSemanticGate.completePaperSemanticKernelOnly_current_field_payload_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_output_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
@@ -4780,6 +4783,31 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_field_payload_alignment_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_field_payload_alignment_certificate_proof="
+        "completePaperSemanticKernelOnly_current_field_payload_alignment_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_field_payload_alignment_component_proofs="
+        "openSemanticTargetClosureInputFieldSurfaceIds_current,"
+        "openSemanticTargetClosureInputFieldSurfaceIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldSurfaceIdPaperLabels,"
+        "openSemanticTargetClosureInputFieldSurfaceCount_current,"
+        "remaining_open_semantic_targets_closure_input_field_certificate,"
+        "remaining_open_semantic_targets_closure_input_field_obstruction_certificate,"
+        "remaining_open_semantic_targets_field_payload_current_obstruction_source_certificate,"
+        "remaining_open_semantic_targets_field_payload_current_obstruction_source_statement_roster_certificate,"
+        "remaining_open_semantic_targets_field_payload_current_obstruction_source_alignment_certificate,"
+        "open_semantic_target_closure_input_field_roster_certificate,"
+        "open_semantic_target_closure_input_field_statement_roster_certificate,"
+        "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
+        "completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,"
+        "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
+    )
+    print(
         "semantic_target_closure_input_field_output_roster_certificate="
         "OpenSemanticTargetClosureInputFieldOutputRosterCertificate"
     )
@@ -5841,6 +5869,31 @@ def main() -> int:
             "open_semantic_target_exact_closure_input_output_statement_roster_certificate,"
             "remaining_open_semantic_targets_joint_closure_reduction_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate,"
+            "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_field_payload_alignment_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_field_payload_alignment_certificate_proof="
+            "completePaperSemanticKernelOnly_current_field_payload_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_field_payload_alignment_component_proofs="
+            "openSemanticTargetClosureInputFieldSurfaceIds_current,"
+            "openSemanticTargetClosureInputFieldSurfaceIdPaperLabels_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldSurfaceIdPaperLabels,"
+            "openSemanticTargetClosureInputFieldSurfaceCount_current,"
+            "remaining_open_semantic_targets_closure_input_field_certificate,"
+            "remaining_open_semantic_targets_closure_input_field_obstruction_certificate,"
+            "remaining_open_semantic_targets_field_payload_current_obstruction_source_certificate,"
+            "remaining_open_semantic_targets_field_payload_current_obstruction_source_statement_roster_certificate,"
+            "remaining_open_semantic_targets_field_payload_current_obstruction_source_alignment_certificate,"
+            "open_semantic_target_closure_input_field_roster_certificate,"
+            "open_semantic_target_closure_input_field_statement_roster_certificate,"
+            "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
+            "completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
         ),
         (
