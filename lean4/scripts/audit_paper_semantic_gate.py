@@ -355,6 +355,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "OpenSemanticTargetClosureInputNamedRosterCertificate",
     "OpenSemanticTargetClosureInputStatementRosterCertificate",
     "RemainingOpenSemanticTargetsExactClosureInputCertificate",
+    "RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate",
     "OpenSemanticTargetExactClosureInputNamedRosterCertificate",
     "OpenSemanticTargetExactClosureInputStatementRosterCertificate",
     "RemainingOpenSemanticTargetsExactClosureInputOutputCertificate",
@@ -700,6 +701,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetExactClosureInputSurface_exact_input_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsExactClosureInputCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_closure_input_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsExactClosureInputStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsExactClosureInputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsExactClosureInputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_exact_closure_input_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetExactClosureInputNamedRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_exact_closure_input_named_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetExactClosureInputStatementRosterCertificate",
@@ -3569,6 +3575,27 @@ def main() -> int:
         "remaining_open_semantic_targets_exact_closure_input_certificate"
     )
     print(
+        "semantic_target_exact_closure_summary_statement_roster="
+        "remainingOpenSemanticTargetsExactClosureInputStatements"
+    )
+    print(
+        "semantic_target_exact_closure_summary_statement_roster_proof="
+        "remainingOpenSemanticTargetsExactClosureInputStatements_named_current"
+    )
+    print("semantic_target_exact_closure_summary_statement_roster_terms_checked=9")
+    print(
+        "semantic_target_exact_closure_summary_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsExactClosureInputStatements_length_current"
+    )
+    print(
+        "semantic_target_exact_closure_summary_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_exact_closure_summary_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_exact_closure_input_statement_roster_certificate"
+    )
+    print(
         "semantic_target_exact_closure_named_roster_proofs="
         "openSemanticTargetExactClosureInputSurfaceTargets_named_current,"
         "openSemanticTargetExactClosureInputSurfaceExactInputs_named_current,"
@@ -5141,6 +5168,7 @@ def main() -> int:
         "open_semantic_target_closure_input_named_roster_certificate,"
         "open_semantic_target_closure_input_statement_roster_certificate,"
         "remaining_open_semantic_targets_exact_closure_input_certificate,"
+        "remaining_open_semantic_targets_exact_closure_input_statement_roster_certificate,"
         "open_semantic_target_exact_closure_input_named_roster_certificate,"
         "open_semantic_target_exact_closure_input_statement_roster_certificate,"
         "remaining_open_semantic_targets_exact_closure_input_output_certificate,"
@@ -5160,7 +5188,7 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_closure_input_alignment_statement_roster_terms_checked=26"
+        "complete_paper_semantic_kernel_only_current_closure_input_alignment_statement_roster_terms_checked=27"
     )
     print(
         "complete_paper_semantic_kernel_only_current_field_payload_alignment_certificate="
@@ -6487,12 +6515,13 @@ def main() -> int:
             "openSemanticTargetExactClosureInputOutputSurfaceIds_current,"
             "openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels_current,"
         "openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputOutputSurfaceIdPaperLabels,"
-        "openSemanticTargetExactClosureInputOutputSurfaceCount_current,"
-        "remaining_open_semantic_targets_closure_input_certificate,"
-        "remaining_open_semantic_targets_closure_input_statement_roster_certificate,"
-        "open_semantic_target_closure_input_named_roster_certificate,"
-        "open_semantic_target_closure_input_statement_roster_certificate,"
+            "openSemanticTargetExactClosureInputOutputSurfaceCount_current,"
+            "remaining_open_semantic_targets_closure_input_certificate,"
+            "remaining_open_semantic_targets_closure_input_statement_roster_certificate,"
+            "open_semantic_target_closure_input_named_roster_certificate,"
+            "open_semantic_target_closure_input_statement_roster_certificate,"
             "remaining_open_semantic_targets_exact_closure_input_certificate,"
+            "remaining_open_semantic_targets_exact_closure_input_statement_roster_certificate,"
             "open_semantic_target_exact_closure_input_named_roster_certificate,"
             "open_semantic_target_exact_closure_input_statement_roster_certificate,"
             "remaining_open_semantic_targets_exact_closure_input_output_certificate,"
@@ -6512,7 +6541,7 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_closure_input_alignment_statement_roster_terms_checked=26"
+            "complete_paper_semantic_kernel_only_current_closure_input_alignment_statement_roster_terms_checked=27"
         ),
         (
             "complete_paper_semantic_kernel_only_current_field_payload_alignment_certificate="
@@ -6828,6 +6857,27 @@ def main() -> int:
         (
             "semantic_target_closure_input_summary_statement_roster_certificate_proof="
             "remaining_open_semantic_targets_closure_input_statement_roster_certificate"
+        ),
+        (
+            "semantic_target_exact_closure_summary_statement_roster="
+            "remainingOpenSemanticTargetsExactClosureInputStatements"
+        ),
+        (
+            "semantic_target_exact_closure_summary_statement_roster_proof="
+            "remainingOpenSemanticTargetsExactClosureInputStatements_named_current"
+        ),
+        "semantic_target_exact_closure_summary_statement_roster_terms_checked=9",
+        (
+            "semantic_target_exact_closure_summary_statement_roster_length_proof="
+            "remainingOpenSemanticTargetsExactClosureInputStatements_length_current"
+        ),
+        (
+            "semantic_target_exact_closure_summary_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_exact_closure_summary_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_exact_closure_input_statement_roster_certificate"
         ),
         (
             "semantic_target_named_route_obstruction_roster_ids="
