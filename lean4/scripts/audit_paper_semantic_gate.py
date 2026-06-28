@@ -3257,6 +3257,23 @@ def main() -> int:
         + ",".join(surface[2] for surface in payload_surfaces)
     )
     print(
+        "semantic_target_part6_frontier_payload_statement_roster_proof="
+        "part6LatticeEmbeddingFrontierPayloadStatements_named_current"
+    )
+    print("semantic_target_part6_frontier_payload_statement_roster_terms_checked=1")
+    print(
+        "semantic_target_part6_frontier_payload_statement_roster_length_proof="
+        "part6LatticeEmbeddingFrontierPayloadStatements_length_current"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_statement_roster_certificate="
+        "Part6LatticeEmbeddingFrontierPayloadStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_statement_roster_certificate_proof="
+        "part6_lattice_embedding_frontier_payload_statement_roster_certificate"
+    )
+    print(
         "semantic_target_topo_frontier_payload_statement_roster_proof="
         "topoClusterRandomSupercriticalZ2FrontierPayloadStatements_named_current"
     )

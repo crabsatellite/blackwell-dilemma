@@ -3809,6 +3809,38 @@ theorem part6_lattice_embedding_frontier_payload_certificate :
     Part6LatticeEmbeddingFrontierPayloadCertificate :=
   ⟨part6_lattice_embedding_frontier_payload⟩
 
+/-- Statement roster for the Part 6 frontier payload certificate. -/
+def part6LatticeEmbeddingFrontierPayloadStatements : List Prop :=
+  [Nonempty Part6LatticeEmbeddingFrontierPayload]
+
+/-- Build gate: the Part 6 frontier payload roster names exactly the payload
+inhabitance statement. -/
+theorem part6LatticeEmbeddingFrontierPayloadStatements_named_current :
+    part6LatticeEmbeddingFrontierPayloadStatements =
+      [Nonempty Part6LatticeEmbeddingFrontierPayload] :=
+  rfl
+
+/-- Build gate: the Part 6 frontier payload roster has exactly one certificate
+statement. -/
+theorem part6LatticeEmbeddingFrontierPayloadStatements_length_current :
+    part6LatticeEmbeddingFrontierPayloadStatements.length = 1 := rfl
+
+/-- Build-gated statement roster for the Part 6 frontier payload certificate. -/
+def Part6LatticeEmbeddingFrontierPayloadStatementRosterCertificate : Prop :=
+  part6LatticeEmbeddingFrontierPayloadStatements =
+      [Nonempty Part6LatticeEmbeddingFrontierPayload] /\
+    part6LatticeEmbeddingFrontierPayloadStatements.length = 1 /\
+    Part6LatticeEmbeddingFrontierPayloadCertificate
+
+/-- The Part 6 frontier payload certificate has a fixed statement roster. -/
+theorem part6_lattice_embedding_frontier_payload_statement_roster_certificate :
+    Part6LatticeEmbeddingFrontierPayloadStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingFrontierPayloadStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingFrontierPayloadStatements_length_current
+      part6_lattice_embedding_frontier_payload_certificate)
+
 /-- Certificate that the complete typed random-supercritical topo frontier
 payload is inhabited. -/
 def TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate : Prop :=
@@ -4945,9 +4977,10 @@ paper-semantic targets.
 This packages the full typed payload surface, target-to-route map, current
 obstructions, and active frontier certificates for the same two open targets. -/
 def RemainingOpenSemanticTargetsPayloadRouteMapCertificate : Prop :=
-  openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetFrontierPayloadSurfaceIds = openSemanticTargetIds /\
     openSemanticTargetFrontierPayloadSurfaces.length = paperSemanticOpenCount /\
     Part6LatticeEmbeddingFrontierPayloadCertificate /\
+    Part6LatticeEmbeddingFrontierPayloadStatementRosterCertificate /\
     (Part6LatticeEmbeddingSemanticKernelTarget ↔
       Part6NondegenerateFeasibleRepairRoute) /\
     (Part6LatticeEmbeddingSemanticKernelTarget ↔
@@ -4987,6 +5020,7 @@ theorem remaining_open_semantic_targets_payload_route_map_certificate :
     openSemanticTargetFrontierPayloadSurfaceIds_current,
     openSemanticTargetFrontierPayloadSurfaceCount_current,
     part6_lattice_embedding_frontier_payload_certificate,
+    part6_lattice_embedding_frontier_payload_statement_roster_certificate,
     part6_lattice_embedding_semantic_kernel_target_iff_repair_route,
     part6_lattice_embedding_semantic_kernel_target_iff_full_support,
     part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support,
