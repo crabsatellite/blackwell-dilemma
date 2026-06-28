@@ -13198,6 +13198,80 @@ theorem topo_cluster_random_supercritical_z2_closure_input_field_certificate :
   · exact topo_cluster_random_supercritical_z2_field_payload_notYet
   exact topo_cluster_random_supercritical_z2_closure_input_notYet
 
+/-- Statement roster for the topo closure-input field certificate. -/
+def topoClusterRandomSupercriticalZ2ClosureInputFieldStatements :
+    List Prop :=
+  [TopoClusterRandomSupercriticalZ2ClosureInput ->
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    TopoClusterRandomSupercriticalZ2ClosureInput,
+   Iff TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload
+    TopoClusterRandomSupercriticalZ2ClosureInput,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   TopoClusterRandomSupercriticalZ2ClosureInputCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+   Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+   Not TopoClusterRandomSupercriticalZ2ClosureInput]
+
+/-- Build gate: the topo closure-input field roster names exactly the field
+certificate conjuncts. -/
+theorem topoClusterRandomSupercriticalZ2ClosureInputFieldStatements_named_current :
+    topoClusterRandomSupercriticalZ2ClosureInputFieldStatements =
+      [TopoClusterRandomSupercriticalZ2ClosureInput ->
+        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2ClosureInput,
+       Iff TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload
+        TopoClusterRandomSupercriticalZ2ClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput] :=
+  rfl
+
+/-- Build gate: the topo closure-input field roster has exactly nine
+certificate conjuncts. -/
+theorem topoClusterRandomSupercriticalZ2ClosureInputFieldStatements_length_current :
+    topoClusterRandomSupercriticalZ2ClosureInputFieldStatements.length = 9 := rfl
+
+/-- Build-gated statement roster for the topo closure-input field certificate. -/
+def TopoClusterRandomSupercriticalZ2ClosureInputFieldStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2ClosureInputFieldStatements =
+      [TopoClusterRandomSupercriticalZ2ClosureInput ->
+        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2ClosureInput,
+       Iff TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload
+        TopoClusterRandomSupercriticalZ2ClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2ClosureInputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput] /\
+    topoClusterRandomSupercriticalZ2ClosureInputFieldStatements.length = 9 /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate
+
+/-- The topo closure-input field certificate has a fixed statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_closure_input_field_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2ClosureInputFieldStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2ClosureInputFieldStatements_length_current
+      topo_cluster_random_supercritical_z2_closure_input_field_certificate)
+
 /-- Machine-facing field-level sufficient-input surface for each open semantic
 target. -/
 structure OpenSemanticTargetClosureInputFieldSurface where
@@ -13493,6 +13567,7 @@ def RemainingOpenSemanticTargetsClosureInputFieldCertificate : Prop :=
     Part6LatticeEmbeddingClosureInputFieldCertificate /\
     Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate /\
+    TopoClusterRandomSupercriticalZ2ClosureInputFieldStatementRosterCertificate /\
     RemainingOpenSemanticTargetsClosureInputOutputCertificate
 
 /-- The sufficient closure inputs now expose field-level payloads for both
@@ -13509,6 +13584,9 @@ theorem remaining_open_semantic_targets_closure_input_field_certificate :
   · exact part6_lattice_embedding_closure_input_field_statement_roster_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_field_certificate
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_closure_input_field_statement_roster_certificate
   exact remaining_open_semantic_targets_closure_input_output_certificate
 
 /-- Statement roster for the remaining closure-input field certificate. -/
@@ -13516,6 +13594,7 @@ def remainingOpenSemanticTargetsClosureInputFieldStatements : List Prop :=
   [Part6LatticeEmbeddingClosureInputFieldCertificate,
    Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldStatementRosterCertificate,
    RemainingOpenSemanticTargetsClosureInputOutputCertificate]
 
 /-- Build gate: the remaining closure-input field roster names both field
@@ -13525,13 +13604,14 @@ theorem remainingOpenSemanticTargetsClosureInputFieldStatements_named_current :
       [Part6LatticeEmbeddingClosureInputFieldCertificate,
        Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldStatementRosterCertificate,
        RemainingOpenSemanticTargetsClosureInputOutputCertificate] := rfl
 
 /-- Build gate: the remaining closure-input field roster has exactly the two
-field certificates, the Part 6 direct roster, and the shared
-closure-input/output dependency. -/
+field certificates, both direct rosters, and the shared closure-input/output
+dependency. -/
 theorem remainingOpenSemanticTargetsClosureInputFieldStatements_length_current :
-    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 4 := rfl
+    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 5 := rfl
 
 /-- Build-gated statement roster for the remaining closure-input field
 certificate. -/
@@ -13541,8 +13621,9 @@ def RemainingOpenSemanticTargetsClosureInputFieldStatementRosterCertificate :
       [Part6LatticeEmbeddingClosureInputFieldCertificate,
        Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldStatementRosterCertificate,
        RemainingOpenSemanticTargetsClosureInputOutputCertificate] /\
-    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 4 /\
+    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 5 /\
     RemainingOpenSemanticTargetsClosureInputFieldCertificate
 
 /-- The remaining closure-input field certificate has a fixed statement
