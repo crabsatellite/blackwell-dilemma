@@ -1036,6 +1036,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_not_of_target_not",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_not_of_exact_input_not",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_not_of_full_output_bundle_not",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_not_of_repair_route_not",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_not_of_full_support_not",
+    "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_field_payload_not_of_bridge_route_not",
     "BlackwellDilemma.PaperSemanticGate.Part6LatticeEmbeddingClosureInputFieldOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.part6_lattice_embedding_closure_input_field_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.part6LatticeEmbeddingClosureInputFieldOutputStatements",
@@ -1057,6 +1060,13 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_target_not",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_exact_input_not",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_same_bridge_full_output_bundle_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_full_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_boxed_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_support_surface_closing_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_support_surface_repair_route_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_support_surface_repair_output_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_paper_support_output_not",
+    "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_field_payload_not_of_giant_loss_output_not",
     "BlackwellDilemma.PaperSemanticGate.TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.topo_cluster_random_supercritical_z2_closure_input_field_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements",
@@ -4385,7 +4395,7 @@ def main() -> int:
         "semantic_target_part6_field_output_statement_roster_proof="
         "part6_lattice_embedding_closure_input_field_output_statements_named_current"
     )
-    print("semantic_target_part6_field_output_statement_roster_terms_checked=16")
+    print("semantic_target_part6_field_output_statement_roster_terms_checked=19")
     print(
         "semantic_target_part6_field_output_statement_roster_length_proof="
         "part6_lattice_embedding_closure_input_field_output_statements_length_current"
@@ -4394,7 +4404,10 @@ def main() -> int:
         "semantic_target_part6_field_output_obstruction_to_field_proofs="
         "part6_lattice_embedding_field_payload_not_of_target_not,"
         "part6_lattice_embedding_field_payload_not_of_exact_input_not,"
-        "part6_lattice_embedding_field_payload_not_of_full_output_bundle_not"
+        "part6_lattice_embedding_field_payload_not_of_full_output_bundle_not,"
+        "part6_lattice_embedding_field_payload_not_of_repair_route_not,"
+        "part6_lattice_embedding_field_payload_not_of_full_support_not,"
+        "part6_lattice_embedding_field_payload_not_of_bridge_route_not"
     )
     print(
         "semantic_target_part6_field_output_statement_roster_certificate="
@@ -4412,7 +4425,7 @@ def main() -> int:
         "semantic_target_topo_field_output_statement_roster_proof="
         "topo_cluster_random_supercritical_z2_closure_input_field_output_statements_named_current"
     )
-    print("semantic_target_topo_field_output_statement_roster_terms_checked=17")
+    print("semantic_target_topo_field_output_statement_roster_terms_checked=24")
     print(
         "semantic_target_topo_field_output_statement_roster_length_proof="
         "topo_cluster_random_supercritical_z2_closure_input_field_output_statements_length_current"
@@ -4421,7 +4434,14 @@ def main() -> int:
         "semantic_target_topo_field_output_obstruction_to_field_proofs="
         "topo_cluster_random_supercritical_z2_field_payload_not_of_target_not,"
         "topo_cluster_random_supercritical_z2_field_payload_not_of_exact_input_not,"
-        "topo_cluster_random_supercritical_z2_field_payload_not_of_same_bridge_full_output_bundle_not"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_same_bridge_full_output_bundle_not,"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_full_route_not,"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_boxed_route_not,"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_support_surface_closing_route_not,"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_support_surface_repair_route_not,"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_support_surface_repair_output_not,"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_paper_support_output_not,"
+        "topo_cluster_random_supercritical_z2_field_payload_not_of_giant_loss_output_not"
     )
     print(
         "semantic_target_topo_field_output_statement_roster_certificate="
