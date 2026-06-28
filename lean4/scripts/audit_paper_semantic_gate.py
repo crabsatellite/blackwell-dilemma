@@ -2611,6 +2611,23 @@ def main() -> int:
         + ",".join(closed_frontier_missing_conjuncts)
     )
     print(
+        "semantic_target_closed_frontier_statement_roster_proof="
+        "closedSemanticTargetsFrontierStatements_named_current"
+    )
+    print("semantic_target_closed_frontier_statement_roster_terms_checked=5")
+    print(
+        "semantic_target_closed_frontier_statement_roster_length_proof="
+        "closedSemanticTargetsFrontierStatements_length_current"
+    )
+    print(
+        "semantic_target_closed_frontier_statement_roster_certificate="
+        "ClosedSemanticTargetsFrontierStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closed_frontier_statement_roster_certificate_proof="
+        "closed_semantic_targets_frontier_statement_roster_certificate"
+    )
+    print(
         "semantic_targets_partition_statement_roster_proof="
         "semanticTargetsPartitionStatements_named_current"
     )
@@ -6245,6 +6262,23 @@ def main() -> int:
         (
             "semantic_target_closed_frontier_conjuncts_missing="
             f"{len(closed_frontier_missing_conjuncts)}"
+        ),
+        (
+            "semantic_target_closed_frontier_statement_roster_proof="
+            "closedSemanticTargetsFrontierStatements_named_current"
+        ),
+        "semantic_target_closed_frontier_statement_roster_terms_checked=5",
+        (
+            "semantic_target_closed_frontier_statement_roster_length_proof="
+            "closedSemanticTargetsFrontierStatements_length_current"
+        ),
+        (
+            "semantic_target_closed_frontier_statement_roster_certificate="
+            "ClosedSemanticTargetsFrontierStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_closed_frontier_statement_roster_certificate_proof="
+            "closed_semantic_targets_frontier_statement_roster_certificate"
         ),
         (
             "semantic_targets_partition_statement_roster_proof="

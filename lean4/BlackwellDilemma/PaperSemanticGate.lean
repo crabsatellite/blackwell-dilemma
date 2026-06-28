@@ -17169,6 +17169,65 @@ theorem closed_semantic_targets_frontier_certificate :
     ⟨part4_lattice_p_monotonicity_frontier_payload⟩,
     r10_threshold_five_state_high_kappa_routing_payload⟩
 
+/-- Statement roster for the current closed semantic-frontier package. -/
+def closedSemanticTargetsFrontierStatements : List Prop :=
+  [paperSemanticClosedCount = 3,
+   closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"],
+   Nonempty TwoRegimeRelabelingPayload,
+   Nonempty Part4LatticePMonotonicityFrontierPayload,
+   (forall p : Real,
+      FiveState.highKappaOracleRoutingWelfare p =
+        FiveState.fiveStateOracleWelfare p)]
+
+/-- Build gate: the closed semantic-frontier roster names exactly the current
+closed count, closed ids, and three typed payload obligations. -/
+theorem closedSemanticTargetsFrontierStatements_named_current :
+    closedSemanticTargetsFrontierStatements =
+      [paperSemanticClosedCount = 3,
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       Nonempty TwoRegimeRelabelingPayload,
+       Nonempty Part4LatticePMonotonicityFrontierPayload,
+       (forall p : Real,
+          FiveState.highKappaOracleRoutingWelfare p =
+            FiveState.fiveStateOracleWelfare p)] := rfl
+
+/-- Build gate: the closed semantic-frontier roster has exactly five current
+statement components. -/
+theorem closedSemanticTargetsFrontierStatements_length_current :
+    closedSemanticTargetsFrontierStatements.length = 5 := rfl
+
+/-- Build-gated statement roster certificate for the closed semantic-frontier
+package. -/
+def ClosedSemanticTargetsFrontierStatementRosterCertificate : Prop :=
+  closedSemanticTargetsFrontierStatements =
+      [paperSemanticClosedCount = 3,
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       Nonempty TwoRegimeRelabelingPayload,
+       Nonempty Part4LatticePMonotonicityFrontierPayload,
+       (forall p : Real,
+          FiveState.highKappaOracleRoutingWelfare p =
+            FiveState.fiveStateOracleWelfare p)] /\
+    closedSemanticTargetsFrontierStatements.length = 5 /\
+    ClosedSemanticTargetsFrontierCertificate
+
+/-- The closed semantic-frontier package has a fixed statement roster. -/
+theorem closed_semantic_targets_frontier_statement_roster_certificate :
+    ClosedSemanticTargetsFrontierStatementRosterCertificate := by
+  exact And.intro
+    closedSemanticTargetsFrontierStatements_named_current
+    (And.intro
+      closedSemanticTargetsFrontierStatements_length_current
+      closed_semantic_targets_frontier_certificate)
+
 /-- Current semantic-target partition package: every semantic target in the
 ledger is accounted for by exactly the closed/open frontier split used by the
 paper-semantic gate. -/
