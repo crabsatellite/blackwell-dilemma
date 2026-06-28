@@ -12760,6 +12760,21 @@ def openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements :
   openSemanticTargetClosureInputFieldOutputSurfaces.map
     (fun surface => surface.fieldPayload -> surface.outputBundle)
 
+def openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldOutputSurfaces.map
+    (fun surface => Not surface.target -> Not surface.fieldPayload)
+
+def openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldOutputSurfaces.map
+    (fun surface => Not surface.exactClosureInput -> Not surface.fieldPayload)
+
+def openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements :
+    List Prop :=
+  openSemanticTargetClosureInputFieldOutputSurfaces.map
+    (fun surface => Not surface.outputBundle -> Not surface.fieldPayload)
+
 /-- Build gate: the field-output surface has the same ids as the semantic
 frontier. -/
 theorem openSemanticTargetClosureInputFieldOutputSurfaceIds_current :
@@ -12907,6 +12922,57 @@ theorem
     openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_length_current :
     openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements.length = 2 := rfl
 
+/-- Build gate: target-obstruction-to-field-obstruction statements are pinned
+to named formulas. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_named_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] := rfl
+
+/-- Build gate: exact-input-obstruction-to-field-obstruction statements are
+pinned to named formulas. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_named_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements =
+      [Not Part6LatticeEmbeddingExactClosureInput ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] := rfl
+
+/-- Build gate: output-obstruction-to-field-obstruction statements are pinned
+to named formulas. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_named_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+      [Not Part6FullPaperClosingFullOutputBundle ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] := rfl
+
+/-- Build gate: the target-obstruction-to-field statement roster has one
+formula for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements.length =
+      2 := rfl
+
+/-- Build gate: the exact-obstruction-to-field statement roster has one
+formula for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements.length =
+      2 := rfl
+
+/-- Build gate: the output-obstruction-to-field statement roster has one
+formula for each remaining open semantic target. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements.length =
+      2 := rfl
+
 /-- Every field-output surface carries field-payload-to-target projection. -/
 theorem openSemanticTargetClosureInputFieldOutputSurface_field_to_target
     (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
@@ -12925,6 +12991,39 @@ theorem openSemanticTargetClosureInputFieldOutputSurface_field_to_output
     (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
     surface.fieldPayload -> surface.outputBundle :=
   surface.fieldPayloadToOutputBundle
+
+/-- Every field-output surface pushes target obstruction down to the field
+payload. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurface_target_obstruction_to_field
+    (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
+    Not surface.target -> Not surface.fieldPayload := by
+  intro htarget hfield
+  exact htarget
+    (openSemanticTargetClosureInputFieldOutputSurface_field_to_target
+      surface hfield)
+
+/-- Every field-output surface pushes exact-input obstruction down to the
+field payload. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurface_exact_obstruction_to_field
+    (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
+    Not surface.exactClosureInput -> Not surface.fieldPayload := by
+  intro hexact hfield
+  exact hexact
+    (openSemanticTargetClosureInputFieldOutputSurface_field_to_exact_input
+      surface hfield)
+
+/-- Every field-output surface pushes output-bundle obstruction down to the
+field payload. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputSurface_output_obstruction_to_field
+    (surface : OpenSemanticTargetClosureInputFieldOutputSurface) :
+    Not surface.outputBundle -> Not surface.fieldPayload := by
+  intro houtput hfield
+  exact houtput
+    (openSemanticTargetClosureInputFieldOutputSurface_field_to_output
+      surface hfield)
 
 /-- Every field-output surface records the current field-payload
 obstruction. -/
@@ -12954,6 +13053,12 @@ def RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate : Prop :=
       surface.fieldPayload -> surface.exactClosureInput) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.outputBundle) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.target -> Not surface.fieldPayload) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.exactClosureInput -> Not surface.fieldPayload) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.outputBundle -> Not surface.fieldPayload) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       Not surface.fieldPayload) /\
     RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate /\
@@ -12986,6 +13091,21 @@ theorem remaining_open_semantic_targets_closure_input_field_output_certificate :
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_output
       surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_target_obstruction_to_field
+        surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_exact_obstruction_to_field
+        surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_output_obstruction_to_field
+        surface
   constructor
   · intro surface _
     exact
@@ -13039,6 +13159,12 @@ def OpenSemanticTargetClosureInputFieldOutputRosterCertificate : Prop :=
       surface.fieldPayload -> surface.exactClosureInput) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.outputBundle) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.target -> Not surface.fieldPayload) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.exactClosureInput -> Not surface.fieldPayload) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.outputBundle -> Not surface.fieldPayload) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       Not surface.fieldPayload) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
@@ -13109,6 +13235,21 @@ theorem open_semantic_target_closure_input_field_output_roster_certificate :
   constructor
   · intro surface _
     exact
+      openSemanticTargetClosureInputFieldOutputSurface_target_obstruction_to_field
+        surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_exact_obstruction_to_field
+        surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_output_obstruction_to_field
+        surface
+  constructor
+  · intro surface _
+    exact
       openSemanticTargetClosureInputFieldOutputSurface_field_current_obstruction
         surface
   constructor
@@ -13136,11 +13277,32 @@ def OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate :
         Part6FullPaperClosingFullOutputBundle,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
         TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+    openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+    openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements =
+      [Not Part6LatticeEmbeddingExactClosureInput ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+    openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+      [Not Part6FullPaperClosingFullOutputBundle ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
     openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements.length =
       2 /\
     openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements.length =
       2 /\
     openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements.length =
+      2 /\
+    openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements.length =
       2 /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.target) /\
@@ -13148,6 +13310,12 @@ def OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate :
       surface.fieldPayload -> surface.exactClosureInput) /\
     (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
       surface.fieldPayload -> surface.outputBundle) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.target -> Not surface.fieldPayload) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.exactClosureInput -> Not surface.fieldPayload) /\
+    (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.outputBundle -> Not surface.fieldPayload) /\
     OpenSemanticTargetClosureInputFieldOutputRosterCertificate
 
 /-- The field-output statement roster pins the direct field-to-target and
@@ -13166,6 +13334,15 @@ theorem
       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current
   constructor
   · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_named_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_named_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_named_current
+  constructor
+  · exact
       openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_length_current
   constructor
   · exact
@@ -13173,6 +13350,15 @@ theorem
   constructor
   · exact
       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_length_current
+  constructor
+  · exact
+      openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_length_current
   constructor
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_target
@@ -13186,6 +13372,21 @@ theorem
   · intro surface _
     exact openSemanticTargetClosureInputFieldOutputSurface_field_to_output
       surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_target_obstruction_to_field
+        surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_exact_obstruction_to_field
+        surface
+  constructor
+  · intro surface _
+    exact
+      openSemanticTargetClosureInputFieldOutputSurface_output_obstruction_to_field
+        surface
   exact open_semantic_target_closure_input_field_output_roster_certificate
 
 /-- Typed payload required by the closed R10 two-regime relabeling target.

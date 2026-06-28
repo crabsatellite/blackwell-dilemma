@@ -1079,6 +1079,9 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceIds_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceCount_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads_named_current",
@@ -1096,12 +1099,21 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_named_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_target",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_exact_input",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_to_output",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_target_obstruction_to_field",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_exact_obstruction_to_field",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_output_obstruction_to_field",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_current_obstruction",
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
@@ -4343,12 +4355,21 @@ def main() -> int:
         "semantic_target_closure_input_field_output_statement_roster_certificate_proof="
         "open_semantic_target_closure_input_field_output_statement_roster_certificate"
     )
-    print("semantic_target_closure_input_field_output_statement_roster_terms_checked=6")
+    print("semantic_target_closure_input_field_output_statement_roster_terms_checked=12")
     print(
         "semantic_target_closure_input_field_output_statement_roster_length_proofs="
         "openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_length_current,"
         "openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_length_current,"
-        "openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_length_current"
+        "openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_length_current,"
+        "openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_length_current"
+    )
+    print(
+        "semantic_target_closure_input_field_output_obstruction_to_field_proofs="
+        "openSemanticTargetClosureInputFieldOutputSurface_target_obstruction_to_field,"
+        "openSemanticTargetClosureInputFieldOutputSurface_exact_obstruction_to_field,"
+        "openSemanticTargetClosureInputFieldOutputSurface_output_obstruction_to_field"
     )
     print(
         "semantic_target_part6_field_output_statement_roster="
