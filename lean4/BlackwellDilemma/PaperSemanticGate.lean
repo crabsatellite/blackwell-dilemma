@@ -15327,6 +15327,117 @@ theorem
   exact
     completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
 
+/-- Statement roster for the current field-output obstruction alignment
+package.  This fixes the fifteen component statements tying field-output
+surfaces, detailed statement rosters, current obstruction sources, and surface
+obstruction alignment to the current open ids and paper labels. -/
+def
+    completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements :
+    List Prop :=
+  [openSemanticTargetClosureInputFieldOutputSurfaceIds =
+      openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+    openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+    openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputSurfaces.length =
+    paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+    openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+    openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+    paperSemanticOpenCount,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
+   OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
+   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate]
+
+/-- Build gate: the current field-output obstruction alignment statement roster
+names exactly the component statements used by the alignment certificate. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements =
+      [openSemanticTargetClosureInputFieldOutputSurfaceIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+        paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] := rfl
+
+/-- Build gate: the current field-output obstruction alignment statement roster
+has exactly the fifteen component statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements.length =
+      15 := rfl
+
+/-- Build-gated statement roster certificate for the current field-output
+obstruction alignment package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements =
+      [openSemanticTargetClosureInputFieldOutputSurfaceIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+        paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] /\
+    completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements.length =
+      15 /\
+    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate
+
+/-- The current field-output obstruction alignment package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements_length_current
+      completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_certificate)
+
 /-- Build-gated top-level alignment package tying the current non-complete
 paper-semantic status to the output-equivalence and target/exact/output
 obstruction-equivalence rosters for the two remaining open targets. -/
@@ -16039,9 +16150,10 @@ theorem
 
 /-- Build-gated umbrella package tying the current top-level paper-semantic
 alignment layers together: semantic-target ledger, obstruction source,
-surface obstruction, field-output, obstruction-equivalence, route, frontier,
-frontier statement roster, closure-input, closure-input statement roster,
-field-payload alignment, and field-payload statement roster. -/
+surface obstruction, field-output, field-output statement roster,
+obstruction-equivalence, route, frontier, frontier statement roster,
+closure-input, closure-input statement roster, field-payload alignment, and
+field-payload statement roster. -/
 def
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate :
     Prop :=
@@ -16049,6 +16161,7 @@ def
     CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate /\
@@ -16077,6 +16190,9 @@ theorem
       completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_certificate
   constructor
   · exact
+      completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_statement_roster_certificate
+  constructor
+  · exact
       completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate
   constructor
   · exact
@@ -16100,7 +16216,7 @@ theorem
     completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate
 
 /-- Statement roster for the top-level current-alignment umbrella.  This fixes
-the twelve component alignment certificates that the umbrella certificate must
+the thirteen component alignment certificates that the umbrella certificate must
 carry. -/
 def completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements :
     List Prop :=
@@ -16108,6 +16224,7 @@ def completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements :
    CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
@@ -16126,6 +16243,7 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
@@ -16136,11 +16254,11 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-alignment statement roster has exactly
-the twelve current umbrella components. -/
+the thirteen current umbrella components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-      12 := rfl
+      13 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 alignment umbrella. -/
@@ -16152,6 +16270,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
@@ -16161,7 +16280,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-      12 /\
+      13 /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate
 
 /-- The top-level current-alignment umbrella has a fixed statement roster. -/
@@ -16280,6 +16399,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
    OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate]
 
@@ -16388,13 +16508,14 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 92 named obstruction and subordinate-certificate statements listed above. -/
+the 93 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 94 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 95 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -16504,9 +16625,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
      CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+     CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 94 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 95 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -16608,6 +16730,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     OpenSemanticTargetClosureInputFieldOutputRosterCertificate /\
     OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate
 
@@ -16711,6 +16834,7 @@ theorem
     open_semantic_target_closure_input_field_output_roster_certificate,
     open_semantic_target_closure_input_field_output_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
     completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate⟩
 
@@ -16820,6 +16944,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     OpenSemanticTargetClosureInputFieldOutputRosterCertificate /\
     OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate
@@ -17063,6 +17188,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_certificate
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_statement_roster_certificate
   constructor
   · exact
       completePaperSemanticKernelOnly_current_top_level_alignment_certificate
