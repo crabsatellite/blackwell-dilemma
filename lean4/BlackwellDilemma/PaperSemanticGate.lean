@@ -13113,6 +13113,24 @@ theorem open_semantic_target_named_frontier_certificate_roster_certificate :
     remaining_open_semantic_targets_payload_route_map_certificate,
     open_semantic_target_named_route_obstruction_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the named frontier-certificate
+roster package.  The underlying statement roster is the existing frontier
+statement roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetNamedFrontierCertificateRosterCertificate`. -/
+def OpenSemanticTargetNamedFrontierCertificateRosterStatementRosterCertificate :
+    Prop :=
+  RemainingOpenSemanticTargetsFrontierStatementRosterCertificate /\
+    OpenSemanticTargetNamedFrontierCertificateRosterCertificate
+
+/-- The named frontier-certificate roster package is covered by the existing
+frontier statement roster certificate. -/
+theorem
+    open_semantic_target_named_frontier_certificate_roster_statement_roster_certificate :
+    OpenSemanticTargetNamedFrontierCertificateRosterStatementRosterCertificate := by
+  exact ⟨
+    remaining_open_semantic_targets_frontier_statement_roster_certificate,
+    open_semantic_target_named_frontier_certificate_roster_certificate⟩
+
 /-- Target ids for the named route-statement roster. -/
 def openSemanticTargetNamedRouteStatementRosterIds : List String :=
   ["theorem_4_1_part6_lattice_embedding",

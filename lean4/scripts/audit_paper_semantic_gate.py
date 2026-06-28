@@ -4799,6 +4799,14 @@ def main() -> int:
         "open_semantic_target_named_frontier_certificate_roster_certificate"
     )
     print(
+        "semantic_target_named_frontier_certificate_roster_statement_roster_certificate="
+        "OpenSemanticTargetNamedFrontierCertificateRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_named_frontier_certificate_roster_statement_roster_certificate_proof="
+        "open_semantic_target_named_frontier_certificate_roster_statement_roster_certificate"
+    )
+    print(
         "semantic_target_named_route_statement_roster_certificate="
         "OpenSemanticTargetNamedRouteStatementRosterCertificate"
     )
