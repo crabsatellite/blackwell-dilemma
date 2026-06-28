@@ -4842,6 +4842,14 @@ def main() -> int:
         "open_semantic_target_named_route_statement_roster_certificate"
     )
     print(
+        "semantic_target_named_route_obstruction_roster_statement_roster_certificate="
+        "OpenSemanticTargetNamedRouteObstructionRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_named_route_obstruction_roster_statement_roster_certificate_proof="
+        "open_semantic_target_named_route_obstruction_roster_statement_roster_certificate"
+    )
+    print(
         "semantic_target_part6_conditional_witness_exact_input_proofs="
         "part6_lattice_embedding_divergence_witness_of_exact_closure_input,"
         "part6_lattice_embedding_feasible_divergence_witness_of_exact_closure_input,"

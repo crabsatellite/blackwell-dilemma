@@ -13274,6 +13274,24 @@ theorem open_semantic_target_named_route_statement_roster_certificate :
     open_semantic_target_named_route_obstruction_roster_certificate,
     open_semantic_target_named_frontier_certificate_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the named route-obstruction
+roster package.  The underlying statement roster is the existing named-route
+statement roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetNamedRouteObstructionRosterCertificate`. -/
+def OpenSemanticTargetNamedRouteObstructionRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetNamedRouteStatementRosterCertificate /\
+    OpenSemanticTargetNamedRouteObstructionRosterCertificate
+
+/-- The named route-obstruction roster package is covered by the existing
+named-route statement roster certificate. -/
+theorem
+    open_semantic_target_named_route_obstruction_roster_statement_roster_certificate :
+    OpenSemanticTargetNamedRouteObstructionRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_named_route_statement_roster_certificate,
+    open_semantic_target_named_route_obstruction_roster_certificate⟩
+
 /-- Field-level payload exposed by the sufficient Part 6 closure input.  This
 records the bridge inhabitant and the exact closed-unit/tail-reversal fields
 that make the paper-facing route non-vacuous. -/
