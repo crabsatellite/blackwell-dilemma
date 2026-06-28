@@ -17326,6 +17326,74 @@ theorem semantic_target_paper_label_certificate :
     SemanticTargetPaperLabelCertificate := by
   exact ⟨rfl, rfl, rfl⟩
 
+/-- Statement roster for the current semantic-target paper-label package. -/
+def semanticTargetPaperLabelStatements : List Prop :=
+  [closedSemanticTargets.map (fun target => target.paperLabel) =
+      ["prop:two-regime-five-state",
+       "thm:cognitive-threshold Part 4",
+       "prop:threshold-five-state clause iii"],
+   openSemanticTargets.map (fun target => target.paperLabel) =
+      ["thm:cognitive-threshold Part 6",
+       "prop:topo-cluster and thm:phase"],
+   semanticTargets.map (fun target => target.paperLabel) =
+      ["prop:two-regime-five-state",
+       "thm:cognitive-threshold Part 4",
+       "prop:threshold-five-state clause iii",
+       "thm:cognitive-threshold Part 6",
+       "prop:topo-cluster and thm:phase"]]
+
+/-- Build gate: the semantic-target paper-label roster names exactly the
+current closed/open/full ledger label components. -/
+theorem semanticTargetPaperLabelStatements_named_current :
+    semanticTargetPaperLabelStatements =
+      [closedSemanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+          ["thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"],
+       semanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii",
+           "thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"]] := rfl
+
+/-- Build gate: the semantic-target paper-label roster has exactly three
+current label components. -/
+theorem semanticTargetPaperLabelStatements_length_current :
+    semanticTargetPaperLabelStatements.length = 3 := rfl
+
+/-- Build-gated statement roster certificate for the semantic-target
+paper-label package. -/
+def SemanticTargetPaperLabelStatementRosterCertificate : Prop :=
+  semanticTargetPaperLabelStatements =
+      [closedSemanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+          ["thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"],
+       semanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii",
+           "thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"]] /\
+    semanticTargetPaperLabelStatements.length = 3 /\
+    SemanticTargetPaperLabelCertificate
+
+/-- The semantic-target paper-label certificate has a fixed statement roster. -/
+theorem semantic_target_paper_label_statement_roster_certificate :
+    SemanticTargetPaperLabelStatementRosterCertificate := by
+  exact And.intro
+    semanticTargetPaperLabelStatements_named_current
+    (And.intro
+      semanticTargetPaperLabelStatements_length_current
+      semantic_target_paper_label_certificate)
+
 /-- Current paper-label/id alignment: every paper-facing label is fixed to the
 semantic target id that carries it, for the closed frontier, the open frontier,
 and the full ledger. -/
