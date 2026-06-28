@@ -3626,6 +3626,14 @@ def main() -> int:
         "open_semantic_target_surface_roster_consistency_certificate"
     )
     print(
+        "semantic_target_surface_roster_consistency_statement_roster_certificate="
+        "OpenSemanticTargetSurfaceRosterConsistencyStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_surface_roster_consistency_statement_roster_certificate_proof="
+        "open_semantic_target_surface_roster_consistency_statement_roster_certificate"
+    )
+    print(
         "semantic_target_payload_route_map_certificate="
         "RemainingOpenSemanticTargetsPayloadRouteMapCertificate"
     )

@@ -18475,6 +18475,24 @@ theorem
       completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements_length_current
       completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate)
 
+/-- Same-base statement-roster certificate for the surface-roster consistency
+package.  The underlying statement roster is the current surface-obstruction
+alignment roster, whose component list explicitly includes the surface-roster
+consistency certificate. -/
+def OpenSemanticTargetSurfaceRosterConsistencyStatementRosterCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate /\
+    OpenSemanticTargetSurfaceRosterConsistencyCertificate
+
+/-- The surface-roster consistency package is covered by the current
+surface-obstruction alignment statement roster certificate. -/
+theorem
+    open_semantic_target_surface_roster_consistency_statement_roster_certificate :
+    OpenSemanticTargetSurfaceRosterConsistencyStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_statement_roster_certificate,
+    open_semantic_target_surface_roster_consistency_certificate⟩
+
 /-- Build-gated top-level alignment package tying the current non-complete
 paper-semantic status to the field-output roster, target-specific detailed
 statement rosters, and field-output current-obstruction source layer. -/
