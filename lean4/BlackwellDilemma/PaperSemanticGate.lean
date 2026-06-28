@@ -6984,6 +6984,75 @@ theorem remaining_open_semantic_targets_output_equivalence_certificate :
         surface
   exact remaining_open_semantic_targets_closure_input_output_certificate
 
+/-- Statement roster for the reversible output-equivalence certificate of the
+two remaining open semantic targets. -/
+def remainingOpenSemanticTargetsOutputEquivalenceStatements : List Prop :=
+  [openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetOutputEquivalenceSurfaces.length =
+      paperSemanticOpenCount,
+   Part6LatticeEmbeddingClosureInputOutputCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+   Iff Part6LatticeEmbeddingSemanticKernelTarget
+      Part6FullPaperClosingFullOutputBundle,
+   Not Part6FullPaperClosingFullOutputBundle,
+   Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+      TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+   Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+   RemainingOpenSemanticTargetsClosureInputOutputCertificate]
+
+/-- Build gate: the remaining-open output-equivalence statement roster names
+exactly the current output-equivalence components. -/
+theorem remainingOpenSemanticTargetsOutputEquivalenceStatements_named_current :
+    remainingOpenSemanticTargetsOutputEquivalenceStatements =
+      [openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetOutputEquivalenceSurfaces.length =
+          paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInputOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6FullPaperClosingFullOutputBundle,
+       Not Part6FullPaperClosingFullOutputBundle,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       RemainingOpenSemanticTargetsClosureInputOutputCertificate] := rfl
+
+/-- Build gate: the remaining-open output-equivalence statement roster has
+exactly the nine current output-equivalence components. -/
+theorem remainingOpenSemanticTargetsOutputEquivalenceStatements_length_current :
+    remainingOpenSemanticTargetsOutputEquivalenceStatements.length = 9 := rfl
+
+/-- Build-gated statement roster certificate for the reversible output layer of
+the two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsOutputEquivalenceStatements =
+      [openSemanticTargetOutputEquivalenceSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetOutputEquivalenceSurfaces.length =
+          paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInputOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6FullPaperClosingFullOutputBundle,
+       Not Part6FullPaperClosingFullOutputBundle,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle,
+       RemainingOpenSemanticTargetsClosureInputOutputCertificate] /\
+    remainingOpenSemanticTargetsOutputEquivalenceStatements.length = 9 /\
+    RemainingOpenSemanticTargetsOutputEquivalenceCertificate
+
+/-- The reversible output-equivalence certificate for the two remaining open
+semantic targets has a fixed statement roster. -/
+theorem
+    remaining_open_semantic_targets_output_equivalence_statement_roster_certificate :
+    RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsOutputEquivalenceStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsOutputEquivalenceStatements_length_current
+      remaining_open_semantic_targets_output_equivalence_certificate)
+
 /-- Build-gated named output-equivalence roster for the two remaining open
 semantic targets.  This pins target/output/current-obstruction rosters to named
 Part 6/topo propositions. -/
@@ -16803,6 +16872,7 @@ def
     openSemanticTargetOutputEquivalenceSurfaces.length =
       paperSemanticOpenCount /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
+    RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
     openSemanticTargetObstructionEquivalenceSurfaceIds =
@@ -16837,6 +16907,9 @@ theorem
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
   constructor
+  · exact
+      remaining_open_semantic_targets_output_equivalence_statement_roster_certificate
+  constructor
   · exact open_semantic_target_output_equivalence_named_roster_certificate
   constructor
   · exact open_semantic_target_output_equivalence_statement_roster_certificate
@@ -16863,7 +16936,7 @@ theorem
     completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
 
 /-- Statement roster for the current obstruction-equivalence alignment
-package.  This fixes the sixteen component statements tying output-equivalence
+package.  This fixes the seventeen component statements tying output-equivalence
 and obstruction-equivalence surfaces to the current open ids, paper labels, and
 surface-obstruction package. -/
 def
@@ -16878,6 +16951,7 @@ def
    openSemanticTargetOutputEquivalenceSurfaces.length =
     paperSemanticOpenCount,
    RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+   RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate,
    OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
    OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
    openSemanticTargetObstructionEquivalenceSurfaceIds =
@@ -16908,6 +16982,7 @@ theorem
        openSemanticTargetOutputEquivalenceSurfaces.length =
         paperSemanticOpenCount,
        RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+       RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate,
        OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
        OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
        openSemanticTargetObstructionEquivalenceSurfaceIds =
@@ -16925,11 +17000,11 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] := rfl
 
 /-- Build gate: the current obstruction-equivalence alignment statement roster
-has exactly the sixteen component statements. -/
+has exactly the seventeen component statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatements.length =
-      16 := rfl
+      17 := rfl
 
 /-- Build-gated statement roster certificate for the current
 obstruction-equivalence alignment package. -/
@@ -16946,6 +17021,7 @@ def
        openSemanticTargetOutputEquivalenceSurfaces.length =
         paperSemanticOpenCount,
        RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+       RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate,
        OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
        OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
        openSemanticTargetObstructionEquivalenceSurfaceIds =
@@ -16962,7 +17038,7 @@ def
        OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatements.length =
-      16 /\
+      17 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate
 
 /-- The current obstruction-equivalence alignment package has a fixed
@@ -18019,6 +18095,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
      paperSemanticOpenCount,
    RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+   RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate,
    OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
    OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
@@ -18137,6 +18214,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
          paperSemanticOpenCount,
        RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+       RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate,
        OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
        OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
@@ -18171,9 +18249,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 104 named obstruction and subordinate-certificate statements listed above. -/
+the 105 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 104 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 105 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -18260,9 +18338,10 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
        openSemanticTargetIds,
-     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
-       paperSemanticOpenCount,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount,
      RemainingOpenSemanticTargetsOutputEquivalenceCertificate,
+     RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate,
      OpenSemanticTargetOutputEquivalenceNamedRosterCertificate,
      OpenSemanticTargetOutputEquivalenceStatementRosterCertificate,
      CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
@@ -18295,7 +18374,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 104 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 105 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -18377,6 +18456,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
       paperSemanticOpenCount /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
+    RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate /\
@@ -18492,6 +18572,7 @@ theorem
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
     remaining_open_semantic_targets_output_equivalence_certificate,
+    remaining_open_semantic_targets_output_equivalence_statement_roster_certificate,
     open_semantic_target_output_equivalence_named_roster_certificate,
     open_semantic_target_output_equivalence_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate,
@@ -18609,6 +18690,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
       paperSemanticOpenCount /\
     RemainingOpenSemanticTargetsOutputEquivalenceCertificate /\
+    RemainingOpenSemanticTargetsOutputEquivalenceStatementRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetOutputEquivalenceStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate /\
@@ -18836,6 +18918,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current
   constructor
   · exact remaining_open_semantic_targets_output_equivalence_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_output_equivalence_statement_roster_certificate
   constructor
   · exact open_semantic_target_output_equivalence_named_roster_certificate
   constructor
