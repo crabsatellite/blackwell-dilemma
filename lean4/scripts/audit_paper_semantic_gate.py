@@ -378,6 +378,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
     "OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceStatementRosterCertificate",
     "OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
+    "OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate",
     "OpenSemanticTargetNamedRouteObstructionRosterCertificate",
     "RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate",
     "OpenSemanticTargetNamedFrontierCertificateRosterCertificate",
@@ -871,6 +872,11 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_kernel_surface_route_obstruction_equivalence_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatements",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.openSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetNamedRouteObstructionRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_named_route_obstruction_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetNamedFrontierCertificateRosterCertificate",
@@ -4068,6 +4074,15 @@ def main() -> int:
         "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate"
     )
     print(
+        "semantic_target_frontier_payload_route_obstruction_statement_roster_certificate="
+        "OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_frontier_payload_route_obstruction_statement_roster_certificate_proof="
+        "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate"
+    )
+    print("semantic_target_frontier_payload_route_obstruction_statement_roster_terms_checked=9")
+    print(
         "semantic_target_named_route_obstruction_roster_certificate="
         "OpenSemanticTargetNamedRouteObstructionRosterCertificate"
     )
@@ -4766,6 +4781,7 @@ def main() -> int:
         "open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate,"
         "open_semantic_target_kernel_surface_route_obstruction_equivalence_statement_roster_certificate,"
         "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate,"
+        "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate,"
         "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
     )
@@ -4789,6 +4805,7 @@ def main() -> int:
         "remaining_open_semantic_targets_frontier_certificate,"
         "open_semantic_target_surface_roster_consistency_certificate,"
         "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate,"
+        "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate,"
         "remaining_open_semantic_targets_payload_route_map_certificate,"
         "completePaperSemanticKernelOnly_current_route_obstruction_alignment_certificate,"
         "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
@@ -5732,6 +5749,23 @@ def main() -> int:
         ),
         "semantic_target_kernel_surface_route_obstruction_statement_roster_terms_checked=8",
         (
+            "semantic_target_frontier_payload_route_obstruction_certificate="
+            "OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate"
+        ),
+        (
+            "semantic_target_frontier_payload_route_obstruction_certificate_proof="
+            "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate"
+        ),
+        (
+            "semantic_target_frontier_payload_route_obstruction_statement_roster_certificate="
+            "OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_frontier_payload_route_obstruction_statement_roster_certificate_proof="
+            "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate"
+        ),
+        "semantic_target_frontier_payload_route_obstruction_statement_roster_terms_checked=9",
+        (
             "semantic_target_all_current_obstruction_source_alignment_certificate="
             "RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate"
         ),
@@ -5909,6 +5943,7 @@ def main() -> int:
             "open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate,"
             "open_semantic_target_kernel_surface_route_obstruction_equivalence_statement_roster_certificate,"
             "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate,"
+            "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
         ),
@@ -5932,6 +5967,7 @@ def main() -> int:
             "remaining_open_semantic_targets_frontier_certificate,"
             "open_semantic_target_surface_roster_consistency_certificate,"
             "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate,"
+            "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate,"
             "remaining_open_semantic_targets_payload_route_map_certificate,"
             "completePaperSemanticKernelOnly_current_route_obstruction_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate"
