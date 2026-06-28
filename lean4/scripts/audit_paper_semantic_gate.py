@@ -2610,6 +2610,23 @@ def main() -> int:
         "semantic_target_closed_frontier_conjuncts_missing_terms="
         + ",".join(closed_frontier_missing_conjuncts)
     )
+    print(
+        "semantic_targets_partition_statement_roster_proof="
+        "semanticTargetsPartitionStatements_named_current"
+    )
+    print("semantic_targets_partition_statement_roster_terms_checked=2")
+    print(
+        "semantic_targets_partition_statement_roster_length_proof="
+        "semanticTargetsPartitionStatements_length_current"
+    )
+    print(
+        "semantic_targets_partition_statement_roster_certificate="
+        "SemanticTargetsPartitionStatementRosterCertificate"
+    )
+    print(
+        "semantic_targets_partition_statement_roster_certificate_proof="
+        "semantic_targets_partition_statement_roster_certificate"
+    )
     print("semantic_target_count_certificate=SemanticTargetCountCertificate")
     print(
         "semantic_target_count_certificate_proof="
@@ -6228,6 +6245,23 @@ def main() -> int:
         (
             "semantic_target_closed_frontier_conjuncts_missing="
             f"{len(closed_frontier_missing_conjuncts)}"
+        ),
+        (
+            "semantic_targets_partition_statement_roster_proof="
+            "semanticTargetsPartitionStatements_named_current"
+        ),
+        "semantic_targets_partition_statement_roster_terms_checked=2",
+        (
+            "semantic_targets_partition_statement_roster_length_proof="
+            "semanticTargetsPartitionStatements_length_current"
+        ),
+        (
+            "semantic_targets_partition_statement_roster_certificate="
+            "SemanticTargetsPartitionStatementRosterCertificate"
+        ),
+        (
+            "semantic_targets_partition_statement_roster_certificate_proof="
+            "semantic_targets_partition_statement_roster_certificate"
         ),
         "semantic_target_count_certificate=SemanticTargetCountCertificate",
         (

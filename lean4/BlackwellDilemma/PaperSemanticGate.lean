@@ -17184,6 +17184,47 @@ theorem semantic_targets_partition_certificate :
     SemanticTargetsPartitionCertificate := by
   exact ⟨rfl, rfl⟩
 
+/-- Statement roster for the current semantic-target partition package. -/
+def semanticTargetsPartitionStatements : List Prop :=
+  [semanticTargets.length =
+      paperSemanticClosedCount + paperSemanticOpenCount,
+   semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds]
+
+/-- Build gate: the semantic-target partition roster names exactly the current
+ledger length and closed/open id split components. -/
+theorem semanticTargetsPartitionStatements_named_current :
+    semanticTargetsPartitionStatements =
+      [semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds] := rfl
+
+/-- Build gate: the semantic-target partition roster has exactly two current
+partition components. -/
+theorem semanticTargetsPartitionStatements_length_current :
+    semanticTargetsPartitionStatements.length = 2 := rfl
+
+/-- Build-gated statement roster certificate for the semantic-target
+partition package. -/
+def SemanticTargetsPartitionStatementRosterCertificate : Prop :=
+  semanticTargetsPartitionStatements =
+      [semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds] /\
+    semanticTargetsPartitionStatements.length = 2 /\
+    SemanticTargetsPartitionCertificate
+
+/-- The semantic-target partition certificate has a fixed statement roster. -/
+theorem semantic_targets_partition_statement_roster_certificate :
+    SemanticTargetsPartitionStatementRosterCertificate := by
+  exact And.intro
+    semanticTargetsPartitionStatements_named_current
+    (And.intro
+      semanticTargetsPartitionStatements_length_current
+      semantic_targets_partition_certificate)
+
 /-- Current semantic-target count package: the paper-semantic gate counts are
 the lengths of the corresponding id frontiers, and the full semantic ledger
 has exactly the sum of open and closed targets. -/
