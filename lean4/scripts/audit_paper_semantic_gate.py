@@ -31,6 +31,10 @@ CERTIFICATE_THEOREM_TARGET_RE = re.compile(
     r"(?ms)^theorem\s+[A-Za-z0-9_'.\s]+?\s*:\s*"
     r"([A-Z][A-Za-z0-9_]*Certificate)\s*:="
 )
+CERTIFICATE_THEOREM_RE = re.compile(
+    r"(?ms)^theorem\s+([A-Za-z0-9_'.\s]+?)\s*:\s*"
+    r"([A-Z][A-Za-z0-9_]*Certificate)\s*:="
+)
 CERTIFICATE_SUFFIX = "Certificate"
 STATEMENT_ROSTER_CERTIFICATE_SUFFIX = "StatementRosterCertificate"
 
@@ -2439,6 +2443,33 @@ def certificate_defs_missing_theorem_targets(
     return [name for name in certificate_defs if name not in theorem_targets]
 
 
+def certificate_theorem_proof_names(
+    text: str,
+    certificate_defs: list[str],
+) -> list[str]:
+    certificate_def_set = set(certificate_defs)
+    proof_names = {
+        "".join(match.group(1).split())
+        for match in CERTIFICATE_THEOREM_RE.finditer(text)
+        if match.group(2) in certificate_def_set
+    }
+    return sorted(proof_names)
+
+
+def missing_paper_semantic_axiom_audit_prints(
+    axiom_audit_text: str,
+    decls: list[str],
+) -> list[str]:
+    return [
+        decl
+        for decl in decls
+        if not has_axiom_audit_print(
+            axiom_audit_text,
+            f"BlackwellDilemma.PaperSemanticGate.{decl}",
+        )
+    ]
+
+
 def main() -> int:
     text = read(GATE)
     axiom_audit_text = read(AXIOM_AUDIT)
@@ -2454,6 +2485,19 @@ def main() -> int:
     missing_certificate_theorem_targets = certificate_defs_missing_theorem_targets(
         text,
         certificate_defs,
+    )
+    certificate_theorem_proofs = certificate_theorem_proof_names(
+        text,
+        certificate_defs,
+    )
+    missing_certificate_def_axiom_audit_prints = (
+        missing_paper_semantic_axiom_audit_prints(axiom_audit_text, certificate_defs)
+    )
+    missing_certificate_theorem_axiom_audit_prints = (
+        missing_paper_semantic_axiom_audit_prints(
+            axiom_audit_text,
+            certificate_theorem_proofs,
+        )
     )
 
     expected_open = theorem_count(text, "paperSemanticOpenCount_current")
@@ -2661,6 +2705,30 @@ def main() -> int:
     print(
         "semantic_target_certificate_defs_missing_theorem_target_decls="
         + ",".join(missing_certificate_theorem_targets)
+    )
+    print(
+        "semantic_target_certificate_def_axiom_audit_prints_checked="
+        f"{len(certificate_defs)}"
+    )
+    print(
+        "semantic_target_certificate_def_axiom_audit_prints_missing="
+        f"{len(missing_certificate_def_axiom_audit_prints)}"
+    )
+    print(
+        "semantic_target_certificate_def_axiom_audit_prints_missing_decls="
+        + ",".join(missing_certificate_def_axiom_audit_prints)
+    )
+    print(
+        "semantic_target_certificate_theorem_axiom_audit_prints_checked="
+        f"{len(certificate_theorem_proofs)}"
+    )
+    print(
+        "semantic_target_certificate_theorem_axiom_audit_prints_missing="
+        f"{len(missing_certificate_theorem_axiom_audit_prints)}"
+    )
+    print(
+        "semantic_target_certificate_theorem_axiom_audit_prints_missing_decls="
+        + ",".join(missing_certificate_theorem_axiom_audit_prints)
     )
     print_id_drift("semantic_target_open_ids", expected_open_ids, open_ids)
     print_id_drift("semantic_target_closed_ids", expected_closed_ids, closed_ids)
@@ -6436,6 +6504,30 @@ def main() -> int:
             "semantic_target_certificate_defs_missing_theorem_target_decls="
             + ",".join(missing_certificate_theorem_targets)
         ),
+        (
+            "semantic_target_certificate_def_axiom_audit_prints_checked="
+            f"{len(certificate_defs)}"
+        ),
+        (
+            "semantic_target_certificate_def_axiom_audit_prints_missing="
+            f"{len(missing_certificate_def_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_certificate_def_axiom_audit_prints_missing_decls="
+            + ",".join(missing_certificate_def_axiom_audit_prints)
+        ),
+        (
+            "semantic_target_certificate_theorem_axiom_audit_prints_checked="
+            f"{len(certificate_theorem_proofs)}"
+        ),
+        (
+            "semantic_target_certificate_theorem_axiom_audit_prints_missing="
+            f"{len(missing_certificate_theorem_axiom_audit_prints)}"
+        ),
+        (
+            "semantic_target_certificate_theorem_axiom_audit_prints_missing_decls="
+            + ",".join(missing_certificate_theorem_axiom_audit_prints)
+        ),
         *id_drift_lines("semantic_target_open_ids", expected_open_ids, open_ids),
         *id_drift_lines("semantic_target_closed_ids", expected_closed_ids, closed_ids),
         (
@@ -8023,6 +8115,16 @@ def main() -> int:
         failures.append(
             "certificate defs missing theorem targets: "
             + ",".join(missing_certificate_theorem_targets)
+        )
+    if missing_certificate_def_axiom_audit_prints:
+        failures.append(
+            "certificate defs missing AxiomAudit prints: "
+            + ",".join(missing_certificate_def_axiom_audit_prints)
+        )
+    if missing_certificate_theorem_axiom_audit_prints:
+        failures.append(
+            "certificate theorem proofs missing AxiomAudit prints: "
+            + ",".join(missing_certificate_theorem_axiom_audit_prints)
         )
     if top_level_missing_conjuncts:
         failures.append(
