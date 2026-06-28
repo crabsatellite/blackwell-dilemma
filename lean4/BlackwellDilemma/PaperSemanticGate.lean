@@ -9801,6 +9801,25 @@ theorem
           surface),
     open_semantic_target_obstruction_equivalence_named_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the obstruction-equivalence
+named roster.  The underlying statement roster is the existing
+obstruction-equivalence statement roster; this wrapper keeps the certificate
+name aligned with
+`OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate`. -/
+def OpenSemanticTargetObstructionEquivalenceNamedRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate /\
+    OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate
+
+/-- The obstruction-equivalence named roster package is covered by the existing
+obstruction-equivalence statement roster certificate. -/
+theorem
+    open_semantic_target_obstruction_equivalence_named_roster_statement_roster_certificate :
+    OpenSemanticTargetObstructionEquivalenceNamedRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_obstruction_equivalence_statement_roster_certificate,
+    open_semantic_target_obstruction_equivalence_named_roster_certificate⟩
+
 /-- Joint target package for the two remaining open semantic targets. -/
 def RemainingOpenSemanticTargetsSatisfied : Prop :=
   Part6LatticeEmbeddingSemanticKernelTarget /\

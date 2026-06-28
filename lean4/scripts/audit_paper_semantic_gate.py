@@ -4359,6 +4359,14 @@ def main() -> int:
         "open_semantic_target_obstruction_equivalence_statement_roster_certificate"
     )
     print(
+        "semantic_target_obstruction_equivalence_named_roster_statement_roster_certificate="
+        "OpenSemanticTargetObstructionEquivalenceNamedRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_obstruction_equivalence_named_roster_statement_roster_certificate_proof="
+        "open_semantic_target_obstruction_equivalence_named_roster_statement_roster_certificate"
+    )
+    print(
         "semantic_target_joint_closure_targets="
         "RemainingOpenSemanticTargetsSatisfied"
     )
