@@ -365,6 +365,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate",
     "RemainingOpenSemanticTargetsJointRouteObstructionReductionCertificate",
     "RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate",
     "RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
     "RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
     "RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate",
@@ -829,6 +830,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsJointRouteStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_statement_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_certificate",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralPackageObstructionStatements",
@@ -3901,6 +3904,22 @@ def main() -> int:
         "remaining_open_semantic_targets_joint_route_statement_roster_certificate"
     )
     print(
+        "semantic_target_joint_route_alignment_certificate="
+        "RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate"
+    )
+    print(
+        "semantic_target_joint_route_alignment_certificate_proof="
+        "remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_certificate"
+    )
+    print(
+        "semantic_target_joint_route_alignment_id_label_proofs="
+        "openSemanticTargetKernelSurfaceIds_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_current,"
+        "openSemanticTargetNamedRouteObstructionRosterIds_current,"
+        "openSemanticTargetNamedRouteObstructionRosterIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteObstructionRosterIdPaperLabels"
+    )
+    print(
         "semantic_target_bilateral_package_obstruction_certificate="
         "RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate"
     )
@@ -5296,6 +5315,22 @@ def main() -> int:
             "openSemanticTargetExactClosureInputOutputSurfaceIds_current,"
             "openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels_current,"
             "openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputOutputSurfaceIdPaperLabels"
+        ),
+        (
+            "semantic_target_joint_route_alignment_certificate="
+            "RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate"
+        ),
+        (
+            "semantic_target_joint_route_alignment_certificate_proof="
+            "remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_certificate"
+        ),
+        (
+            "semantic_target_joint_route_alignment_id_label_proofs="
+            "openSemanticTargetKernelSurfaceIds_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_current,"
+            "openSemanticTargetNamedRouteObstructionRosterIds_current,"
+            "openSemanticTargetNamedRouteObstructionRosterIdPaperLabels_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteObstructionRosterIdPaperLabels"
         ),
         (
             "semantic_target_bilateral_package_obstruction_alignment_certificate="
