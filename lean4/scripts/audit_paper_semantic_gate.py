@@ -5208,6 +5208,14 @@ def main() -> int:
         "open_semantic_target_closure_input_field_statement_roster_certificate"
     )
     print(
+        "semantic_target_closure_input_field_roster_statement_roster_certificate="
+        "OpenSemanticTargetClosureInputFieldRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_roster_statement_roster_certificate_proof="
+        "open_semantic_target_closure_input_field_roster_statement_roster_certificate"
+    )
+    print(
         "semantic_target_closure_input_field_output_payloads="
         + ",".join(surface[1] for surface in closure_input_field_output_surfaces)
     )

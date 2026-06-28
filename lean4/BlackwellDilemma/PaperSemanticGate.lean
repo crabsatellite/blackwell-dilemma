@@ -14379,6 +14379,24 @@ theorem open_semantic_target_closure_input_field_statement_roster_certificate :
           surface),
     open_semantic_target_closure_input_field_roster_certificate⟩
 
+/-- Same-base statement-roster certificate for the closure-input-field roster
+package.  The underlying statement roster is the existing field-level
+statement roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetClosureInputFieldRosterCertificate`. -/
+def OpenSemanticTargetClosureInputFieldRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetClosureInputFieldStatementRosterCertificate /\
+    OpenSemanticTargetClosureInputFieldRosterCertificate
+
+/-- The closure-input-field roster package is covered by the existing
+field-level statement roster certificate. -/
+theorem
+    open_semantic_target_closure_input_field_roster_statement_roster_certificate :
+    OpenSemanticTargetClosureInputFieldRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_closure_input_field_statement_roster_certificate,
+    open_semantic_target_closure_input_field_roster_certificate⟩
+
 /-- The Part 6 field payload projects directly to the semantic target. -/
 theorem part6_lattice_embedding_semantic_kernel_target_of_field_payload :
     Part6LatticeEmbeddingClosureInputFieldPayload ->
