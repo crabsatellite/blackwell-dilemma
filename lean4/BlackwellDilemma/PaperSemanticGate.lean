@@ -15181,6 +15181,107 @@ theorem
   exact
     completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
 
+/-- Build-gated top-level alignment package tying the sufficient closure-input,
+exact-input, and input-output surfaces to the same current open ids, paper
+labels, joint closure reduction, frontier payload layer, and surface
+obstruction package used by the current non-complete paper-semantic gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate :
+    Prop :=
+  openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetClosureInputSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputSurfaceIdPaperLabels /\
+    openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetExactClosureInputSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetExactClosureInputSurfaceIdPaperLabels /\
+    openSemanticTargetExactClosureInputSurfaces.length = paperSemanticOpenCount /\
+    openSemanticTargetExactClosureInputOutputSurfaceIds = openSemanticTargetIds /\
+    openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels /\
+    openSemanticTargetExactClosureInputOutputSurfaces.length =
+      paperSemanticOpenCount /\
+    RemainingOpenSemanticTargetsClosureInputCertificate /\
+    OpenSemanticTargetClosureInputNamedRosterCertificate /\
+    OpenSemanticTargetClosureInputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputCertificate /\
+    OpenSemanticTargetExactClosureInputNamedRosterCertificate /\
+    OpenSemanticTargetExactClosureInputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
+    OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate /\
+    OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate
+
+/-- The closure-input layer is aligned with the exact current open target ids,
+paper labels, exact/input-output surfaces, joint closure reduction, frontier
+payload alignment, and top-level surface obstruction package. -/
+theorem
+    completePaperSemanticKernelOnly_current_closure_input_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate := by
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceIds_current
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceIdPaperLabels_current
+  constructor
+  · exact
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputSurfaceIdPaperLabels
+  constructor
+  · exact openSemanticTargetClosureInputSurfaceCount_current
+  constructor
+  · exact openSemanticTargetExactClosureInputSurfaceIds_current
+  constructor
+  · exact openSemanticTargetExactClosureInputSurfaceIdPaperLabels_current
+  constructor
+  · exact
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputSurfaceIdPaperLabels
+  constructor
+  · exact openSemanticTargetExactClosureInputSurfaceCount_current
+  constructor
+  · exact openSemanticTargetExactClosureInputOutputSurfaceIds_current
+  constructor
+  · exact openSemanticTargetExactClosureInputOutputSurfaceIdPaperLabels_current
+  constructor
+  · exact
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_exactClosureInputOutputSurfaceIdPaperLabels
+  constructor
+  · exact openSemanticTargetExactClosureInputOutputSurfaceCount_current
+  constructor
+  · exact remaining_open_semantic_targets_closure_input_certificate
+  constructor
+  · exact open_semantic_target_closure_input_named_roster_certificate
+  constructor
+  · exact open_semantic_target_closure_input_statement_roster_certificate
+  constructor
+  · exact remaining_open_semantic_targets_exact_closure_input_certificate
+  constructor
+  · exact open_semantic_target_exact_closure_input_named_roster_certificate
+  constructor
+  · exact open_semantic_target_exact_closure_input_statement_roster_certificate
+  constructor
+  · exact remaining_open_semantic_targets_exact_closure_input_output_certificate
+  constructor
+  · exact
+      open_semantic_target_exact_closure_input_output_named_roster_certificate
+  constructor
+  · exact
+      open_semantic_target_exact_closure_input_output_statement_roster_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_joint_closure_reduction_alignment_certificate
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate
+  exact
+    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open/closed target count/id gates, and subordinate certificate propositions
@@ -15218,6 +15319,7 @@ def completePaperSemanticKernelOnlyCurrentObstructionStatements : List Prop :=
    RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
    OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate,
    OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
    RemainingOpenSemanticTargetsObstructionEquivalenceCertificate,
    OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
    OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
@@ -15315,6 +15417,7 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
        OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate,
        OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
        RemainingOpenSemanticTargetsObstructionEquivalenceCertificate,
        OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
        OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
@@ -15377,9 +15480,9 @@ theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_named_curren
        CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate] := rfl
 
 /-- Build gate: the top-level current-obstruction statement roster has exactly
-the 81 named obstruction and subordinate-certificate statements listed above. -/
+the 82 named obstruction and subordinate-certificate statements listed above. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current :
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 83 := rfl
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 84 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 obstruction.  This is nonrecursive: it proves the roster and every subordinate
@@ -15420,6 +15523,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
      OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate,
      OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+     CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
      RemainingOpenSemanticTargetsObstructionEquivalenceCertificate,
      OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
      OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
@@ -15480,7 +15584,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
      OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
      CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate] /\
-    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 83 /\
+    completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 84 /\
     Not CompletePaperSemanticKernelOnly /\
     (CompletePaperSemanticKernelOnly ↔ False) /\
     paperSemanticOpenCount = 2 /\
@@ -15513,6 +15617,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate 
     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate /\
     OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate /\
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
     OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate /\
@@ -15609,6 +15714,7 @@ theorem
     remaining_open_semantic_targets_exact_closure_input_output_certificate,
     open_semantic_target_exact_closure_input_output_named_roster_certificate,
     open_semantic_target_exact_closure_input_output_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,
     remaining_open_semantic_targets_obstruction_equivalence_certificate,
     open_semantic_target_obstruction_equivalence_named_roster_certificate,
     open_semantic_target_obstruction_equivalence_statement_roster_certificate,
@@ -15703,6 +15809,7 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
     OpenSemanticTargetExactClosureInputOutputNamedRosterCertificate /\
     OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate /\
     RemainingOpenSemanticTargetsObstructionEquivalenceCertificate /\
     OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate /\
@@ -15828,6 +15935,9 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       open_semantic_target_exact_closure_input_output_statement_roster_certificate
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_closure_input_alignment_certificate
   constructor
   · exact remaining_open_semantic_targets_obstruction_equivalence_certificate
   constructor
