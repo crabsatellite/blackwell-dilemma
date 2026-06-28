@@ -2628,6 +2628,23 @@ def main() -> int:
         + ",".join(semantic_target_count_missing_conjuncts)
     )
     print(
+        "semantic_target_count_statement_roster_proof="
+        "semanticTargetCountStatements_named_current"
+    )
+    print("semantic_target_count_statement_roster_terms_checked=4")
+    print(
+        "semantic_target_count_statement_roster_length_proof="
+        "semanticTargetCountStatements_length_current"
+    )
+    print(
+        "semantic_target_count_statement_roster_certificate="
+        "SemanticTargetCountStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_count_statement_roster_certificate_proof="
+        "semantic_target_count_statement_roster_certificate"
+    )
+    print(
         "semantic_target_status_partition_certificate="
         "SemanticTargetStatusPartitionCertificate"
     )
@@ -6173,6 +6190,23 @@ def main() -> int:
         (
             "semantic_target_count_certificate_conjuncts_missing="
             f"{len(semantic_target_count_missing_conjuncts)}"
+        ),
+        (
+            "semantic_target_count_statement_roster_proof="
+            "semanticTargetCountStatements_named_current"
+        ),
+        "semantic_target_count_statement_roster_terms_checked=4",
+        (
+            "semantic_target_count_statement_roster_length_proof="
+            "semanticTargetCountStatements_length_current"
+        ),
+        (
+            "semantic_target_count_statement_roster_certificate="
+            "SemanticTargetCountStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_count_statement_roster_certificate_proof="
+            "semantic_target_count_statement_roster_certificate"
         ),
         (
             "semantic_target_status_partition_certificate="

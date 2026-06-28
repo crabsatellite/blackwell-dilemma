@@ -17199,6 +17199,49 @@ theorem semantic_target_count_certificate :
     SemanticTargetCountCertificate := by
   exact ⟨rfl, rfl, rfl, rfl⟩
 
+/-- Statement roster for the current semantic-target count package. -/
+def semanticTargetCountStatements : List Prop :=
+  [openSemanticTargetIds.length = paperSemanticOpenCount,
+   closedSemanticTargetIds.length = paperSemanticClosedCount,
+   (semanticTargetIds semanticTargets).length = semanticTargets.length,
+   semanticTargets.length = paperSemanticOpenCount + paperSemanticClosedCount]
+
+/-- Build gate: the semantic-target count roster names exactly the current
+count components. -/
+theorem semanticTargetCountStatements_named_current :
+    semanticTargetCountStatements =
+      [openSemanticTargetIds.length = paperSemanticOpenCount,
+       closedSemanticTargetIds.length = paperSemanticClosedCount,
+       (semanticTargetIds semanticTargets).length = semanticTargets.length,
+       semanticTargets.length =
+          paperSemanticOpenCount + paperSemanticClosedCount] := rfl
+
+/-- Build gate: the semantic-target count roster has exactly four current
+count components. -/
+theorem semanticTargetCountStatements_length_current :
+    semanticTargetCountStatements.length = 4 := rfl
+
+/-- Build-gated statement roster certificate for the semantic-target count
+package. -/
+def SemanticTargetCountStatementRosterCertificate : Prop :=
+  semanticTargetCountStatements =
+      [openSemanticTargetIds.length = paperSemanticOpenCount,
+       closedSemanticTargetIds.length = paperSemanticClosedCount,
+       (semanticTargetIds semanticTargets).length = semanticTargets.length,
+       semanticTargets.length =
+          paperSemanticOpenCount + paperSemanticClosedCount] /\
+    semanticTargetCountStatements.length = 4 /\
+    SemanticTargetCountCertificate
+
+/-- The semantic-target count certificate has a fixed statement roster. -/
+theorem semantic_target_count_statement_roster_certificate :
+    SemanticTargetCountStatementRosterCertificate := by
+  exact And.intro
+    semanticTargetCountStatements_named_current
+    (And.intro
+      semanticTargetCountStatements_length_current
+      semantic_target_count_certificate)
+
 /-- Current semantic-target status partition package: the target objects
 themselves are partitioned by the closed/open status split, not just their ids
 or counts. -/
