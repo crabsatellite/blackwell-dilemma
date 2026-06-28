@@ -6524,6 +6524,99 @@ theorem part6_lattice_embedding_closure_input_output_certificate :
   · exact not_part6_full_paper_closing_feasible_divergence_witness_current
   exact not_part6_full_paper_closing_full_output_bundle_current
 
+/-- Statement roster for the Part 6 closure-input output certificate. -/
+def part6LatticeEmbeddingClosureInputOutputStatements : List Prop :=
+  [Part6LatticeEmbeddingClosureInput ->
+    Part6LatticeEmbeddingSemanticKernelTarget,
+   Part6LatticeEmbeddingClosureInput ->
+    Part6FullPaperClosingDivergenceWitness,
+   Part6LatticeEmbeddingClosureInput ->
+    Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6LatticeEmbeddingClosureInput ->
+    Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6LatticeEmbeddingClosureInput ->
+    Part6FullPaperClosingFullOutputBundle,
+   Part6FullPaperClosingFullOutputBundle ->
+    Part6LatticeEmbeddingSemanticKernelTarget,
+   Part6LatticeEmbeddingSemanticKernelTarget ->
+    Part6FullPaperClosingFullOutputBundle,
+   Part6LatticeEmbeddingSemanticKernelTarget ↔
+    Part6FullPaperClosingFullOutputBundle,
+   Not Part6LatticeEmbeddingClosureInput,
+   Not Part6FullPaperClosingDivergenceWitness,
+   Not Part6FullPaperClosingFeasibleDivergenceWitness,
+   Not Part6FullPaperClosingFullOutputBundle]
+
+/-- Build gate: the Part 6 closure-input output statement roster names exactly
+the certificate conjuncts. -/
+theorem part6LatticeEmbeddingClosureInputOutputStatements_named_current :
+    part6LatticeEmbeddingClosureInputOutputStatements =
+      [Part6LatticeEmbeddingClosureInput ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingDivergenceWitness,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingDivergenceWitness /\
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingFullOutputBundle,
+       Part6FullPaperClosingFullOutputBundle ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6LatticeEmbeddingSemanticKernelTarget ->
+        Part6FullPaperClosingFullOutputBundle,
+       Part6LatticeEmbeddingSemanticKernelTarget ↔
+        Part6FullPaperClosingFullOutputBundle,
+       Not Part6LatticeEmbeddingClosureInput,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not Part6FullPaperClosingFullOutputBundle] :=
+  rfl
+
+/-- Build gate: the Part 6 closure-input output statement roster has exactly
+twelve certificate conjuncts. -/
+theorem part6LatticeEmbeddingClosureInputOutputStatements_length_current :
+    part6LatticeEmbeddingClosureInputOutputStatements.length = 12 := rfl
+
+/-- Build-gated statement roster for the Part 6 closure-input output
+certificate. -/
+def Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate : Prop :=
+  part6LatticeEmbeddingClosureInputOutputStatements =
+      [Part6LatticeEmbeddingClosureInput ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingDivergenceWitness,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingDivergenceWitness /\
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6LatticeEmbeddingClosureInput ->
+        Part6FullPaperClosingFullOutputBundle,
+       Part6FullPaperClosingFullOutputBundle ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       Part6LatticeEmbeddingSemanticKernelTarget ->
+        Part6FullPaperClosingFullOutputBundle,
+       Part6LatticeEmbeddingSemanticKernelTarget ↔
+        Part6FullPaperClosingFullOutputBundle,
+       Not Part6LatticeEmbeddingClosureInput,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not Part6FullPaperClosingFullOutputBundle] /\
+    part6LatticeEmbeddingClosureInputOutputStatements.length = 12 /\
+    Part6LatticeEmbeddingClosureInputOutputCertificate
+
+/-- The Part 6 closure-input output certificate has a fixed statement roster. -/
+theorem part6_lattice_embedding_closure_input_output_statement_roster_certificate :
+    Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingClosureInputOutputStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingClosureInputOutputStatements_length_current
+      part6_lattice_embedding_closure_input_output_certificate)
+
 /-- A topo closure input exposes the repaired support-surface route. -/
 theorem topo_cluster_random_supercritical_z2_support_surface_repair_route_of_closure_input :
     TopoClusterRandomSupercriticalZ2ClosureInput ->
@@ -6717,6 +6810,7 @@ theorem topo_cluster_random_supercritical_z2_closure_input_output_certificate :
 the two remaining open paper-semantic targets. -/
 def RemainingOpenSemanticTargetsClosureInputOutputCertificate : Prop :=
   Part6LatticeEmbeddingClosureInputOutputCertificate /\
+    Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
     RemainingOpenSemanticTargetsClosureInputCertificate
 
@@ -6727,12 +6821,15 @@ theorem remaining_open_semantic_targets_closure_input_output_certificate :
   constructor
   · exact part6_lattice_embedding_closure_input_output_certificate
   constructor
+  · exact part6_lattice_embedding_closure_input_output_statement_roster_certificate
+  constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
   exact remaining_open_semantic_targets_closure_input_certificate
 
 /-- Direct statement roster for the closure-input/output package. -/
 def remainingOpenSemanticTargetsClosureInputOutputStatements : List Prop :=
   [Part6LatticeEmbeddingClosureInputOutputCertificate,
+   Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
    RemainingOpenSemanticTargetsClosureInputCertificate]
 
@@ -6741,22 +6838,24 @@ certificate conjuncts. -/
 theorem remainingOpenSemanticTargetsClosureInputOutputStatements_named_current :
     remainingOpenSemanticTargetsClosureInputOutputStatements =
       [Part6LatticeEmbeddingClosureInputOutputCertificate,
+       Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
        RemainingOpenSemanticTargetsClosureInputCertificate] := rfl
 
-/-- Build gate: the closure-input/output package roster has exactly the three
+/-- Build gate: the closure-input/output package roster has exactly the four
 certificate conjuncts. -/
 theorem remainingOpenSemanticTargetsClosureInputOutputStatements_length_current :
-    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 3 := rfl
+    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 4 := rfl
 
 /-- Build-gated direct statement roster for the closure-input/output package. -/
 def RemainingOpenSemanticTargetsClosureInputOutputStatementRosterCertificate :
     Prop :=
   remainingOpenSemanticTargetsClosureInputOutputStatements =
       [Part6LatticeEmbeddingClosureInputOutputCertificate,
+       Part6LatticeEmbeddingClosureInputOutputStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
        RemainingOpenSemanticTargetsClosureInputCertificate] /\
-    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 3 /\
+    remainingOpenSemanticTargetsClosureInputOutputStatements.length = 4 /\
     RemainingOpenSemanticTargetsClosureInputOutputCertificate
 
 /-- The closure-input/output certificate has a fixed direct statement roster. -/
