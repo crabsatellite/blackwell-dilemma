@@ -15282,13 +15282,119 @@ theorem remaining_open_semantic_targets_closure_input_field_output_certificate :
   · exact remaining_open_semantic_targets_exact_closure_input_certificate
   exact remaining_open_semantic_targets_output_equivalence_certificate
 
+/-- Statement roster for the remaining closure-input field-output
+certificate. -/
+def remainingOpenSemanticTargetsClosureInputFieldOutputStatements : List Prop :=
+  [openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputSurfaces.length =
+      paperSemanticOpenCount,
+   Part6LatticeEmbeddingClosureInputFieldOutputCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate,
+   (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      surface.fieldPayload -> surface.target),
+   (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      surface.fieldPayload -> surface.exactClosureInput),
+   (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      surface.fieldPayload -> surface.outputBundle),
+   (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.target -> Not surface.fieldPayload),
+   (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.exactClosureInput -> Not surface.fieldPayload),
+   (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.outputBundle -> Not surface.fieldPayload),
+   (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+      Not surface.fieldPayload),
+   RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputCertificate,
+   RemainingOpenSemanticTargetsOutputEquivalenceCertificate]
+
+/-- Build gate: the remaining closure-input field-output roster names exactly
+the direct field-to-target/exact/output statements and their obstruction
+dependencies. -/
+theorem
+    remainingOpenSemanticTargetsClosureInputFieldOutputStatements_named_current :
+    remainingOpenSemanticTargetsClosureInputFieldOutputStatements =
+      [openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+          paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInputFieldOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate,
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          surface.fieldPayload -> surface.target),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          surface.fieldPayload -> surface.exactClosureInput),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          surface.fieldPayload -> surface.outputBundle),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.target -> Not surface.fieldPayload),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.exactClosureInput -> Not surface.fieldPayload),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.outputBundle -> Not surface.fieldPayload),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.fieldPayload),
+       RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputCertificate,
+       RemainingOpenSemanticTargetsOutputEquivalenceCertificate] := rfl
+
+/-- Build gate: the remaining closure-input field-output roster has exactly
+the fourteen component statements of its certificate. -/
+theorem
+    remainingOpenSemanticTargetsClosureInputFieldOutputStatements_length_current :
+    remainingOpenSemanticTargetsClosureInputFieldOutputStatements.length =
+      14 := rfl
+
+/-- Build-gated statement roster for the remaining closure-input field-output
+certificate. -/
+def
+    RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsClosureInputFieldOutputStatements =
+      [openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+          paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInputFieldOutputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate,
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          surface.fieldPayload -> surface.target),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          surface.fieldPayload -> surface.exactClosureInput),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          surface.fieldPayload -> surface.outputBundle),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.target -> Not surface.fieldPayload),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.exactClosureInput -> Not surface.fieldPayload),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.outputBundle -> Not surface.fieldPayload),
+       (forall surface, surface ∈ openSemanticTargetClosureInputFieldOutputSurfaces ->
+          Not surface.fieldPayload),
+       RemainingOpenSemanticTargetsClosureInputFieldObstructionCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputCertificate,
+       RemainingOpenSemanticTargetsOutputEquivalenceCertificate] /\
+    remainingOpenSemanticTargetsClosureInputFieldOutputStatements.length =
+      14 /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate
+
+/-- The remaining closure-input field-output certificate has a fixed direct
+statement roster. -/
+theorem
+    remaining_open_semantic_targets_closure_input_field_output_statement_roster_certificate :
+    RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsClosureInputFieldOutputStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsClosureInputFieldOutputStatements_length_current
+      remaining_open_semantic_targets_closure_input_field_output_certificate)
+
 /-- Build-gated current-obstruction source certificate for the field-output
 surface layer of both remaining open semantic targets. -/
 def RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate :
     Prop :=
   Not Part6LatticeEmbeddingClosureInputFieldPayload /\
     Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload /\
-    RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate
+    RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate
 
 /-- Both remaining field-output surfaces expose explicit current field-payload
 obstruction sources. -/
@@ -15299,14 +15405,18 @@ theorem
   · exact part6_lattice_embedding_field_payload_notYet
   constructor
   · exact topo_cluster_random_supercritical_z2_field_payload_notYet
-  exact remaining_open_semantic_targets_closure_input_field_output_certificate
+  constructor
+  · exact remaining_open_semantic_targets_closure_input_field_output_certificate
+  exact
+    remaining_open_semantic_targets_closure_input_field_output_statement_roster_certificate
 
 /-- Statement roster for field-output current obstruction sources. -/
 def remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements :
     List Prop :=
   [Not Part6LatticeEmbeddingClosureInputFieldPayload,
    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
-   RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate]
+   RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate]
 
 /-- Build gate: the field-output current-obstruction source roster names both
 remaining open field-payload obstructions at the field-output layer. -/
@@ -15315,14 +15425,16 @@ theorem
     remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements =
       [Not Part6LatticeEmbeddingClosureInputFieldPayload,
        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
-       RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate] := rfl
+       RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate] := rfl
 
 /-- Build gate: the field-output current-obstruction source roster has exactly
-both field-payload obstructions plus the field-output certificate. -/
+both field-payload obstructions plus the field-output certificate and its
+statement roster. -/
 theorem
     remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements_length_current :
     remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements.length =
-      3 := rfl
+      4 := rfl
 
 /-- Build-gated statement roster for field-output current obstruction sources. -/
 def
@@ -15331,9 +15443,10 @@ def
   remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements =
       [Not Part6LatticeEmbeddingClosureInputFieldPayload,
        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
-       RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate] /\
+       RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate] /\
     remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements.length =
-      3 /\
+      4 /\
     RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate
 
 /-- The field-output current-obstruction source statement roster is pinned to
@@ -17122,6 +17235,7 @@ def
     RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
     OpenSemanticTargetClosureInputFieldOutputRosterCertificate /\
     OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate /\
     RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate /\
     RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate /\
@@ -17160,6 +17274,9 @@ theorem
   · exact open_semantic_target_closure_input_field_output_statement_roster_certificate
   constructor
   · exact
+      remaining_open_semantic_targets_closure_input_field_output_statement_roster_certificate
+  constructor
+  · exact
       remaining_open_semantic_targets_field_output_current_obstruction_source_certificate
   constructor
   · exact
@@ -17171,7 +17288,7 @@ theorem
     completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
 
 /-- Statement roster for the current field-output obstruction alignment
-package.  This fixes the fifteen component statements tying field-output
+package.  This fixes the sixteen component statements tying field-output
 surfaces, detailed statement rosters, current obstruction sources, and surface
 obstruction alignment to the current open ids and paper labels. -/
 def
@@ -17196,6 +17313,7 @@ def
    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
    OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
    OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate,
    RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
    RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
    RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
@@ -17225,17 +17343,18 @@ theorem
        RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
        OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] := rfl
 
 /-- Build gate: the current field-output obstruction alignment statement roster
-has exactly the fifteen component statements. -/
+has exactly the sixteen component statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements.length =
-      15 := rfl
+      16 := rfl
 
 /-- Build-gated statement roster certificate for the current field-output
 obstruction alignment package. -/
@@ -17262,12 +17381,13 @@ def
        RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
        OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
        OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] /\
     completePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatements.length =
-      15 /\
+      16 /\
     CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate
 
 /-- The current field-output obstruction alignment package has a fixed
