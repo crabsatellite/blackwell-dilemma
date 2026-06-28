@@ -395,6 +395,8 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "OpenSemanticTargetClosureInputFieldRosterCertificate",
     "OpenSemanticTargetClosureInputFieldStatementRosterCertificate",
     "RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
+    "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate",
+    "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate",
     "openSemanticTargetClosureInputFieldOutputSurfaceIds =",
     "openSemanticTargetClosureInputFieldOutputSurfaces.length =",
     "OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
@@ -1143,6 +1145,13 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.openSemanticTargetClosureInputFieldOutputSurface_field_output_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsClosureInputFieldOutputCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_closure_input_field_output_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_field_output_current_obstruction_source_certificate",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements_named_current",
+    "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements_length_current",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_field_output_current_obstruction_source_statement_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.open_semantic_target_closure_input_field_output_roster_certificate",
     "BlackwellDilemma.PaperSemanticGate.OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate",
@@ -4390,6 +4399,33 @@ def main() -> int:
     print(
         "semantic_target_closure_input_field_output_certificate_proof="
         "remaining_open_semantic_targets_closure_input_field_output_certificate"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_certificate="
+        "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_certificate_proof="
+        "remaining_open_semantic_targets_field_output_current_obstruction_source_certificate"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_statement_roster_proof="
+        "remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements_named_current"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_statement_roster_terms_checked=3"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_statement_roster_length_proof="
+        "remainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatements_length_current"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_field_output_current_obstruction_source_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_field_output_current_obstruction_source_statement_roster_certificate"
     )
     print(
         "semantic_target_closure_input_field_output_roster_certificate="
