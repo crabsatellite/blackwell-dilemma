@@ -342,6 +342,9 @@
             "semantic_target_cross_module_certificate_refs_checked=23",
             "semantic_target_cross_module_certificate_refs_missing_axiom_audit_prints=0",
             "semantic_target_cross_module_certificate_refs_missing_axiom_audit_print_decls=",
+            "semantic_target_cross_module_certificate_theorem_proofs_checked=33",
+            "semantic_target_cross_module_certificate_theorem_proofs_missing_axiom_audit_prints=0",
+            "semantic_target_cross_module_certificate_theorem_proofs_missing_axiom_audit_print_decls=",
             "complete_paper_semantic_kernel_only_current_obstruction_certificate=CompletePaperSemanticKernelOnlyCurrentObstructionCertificate",
             "complete_paper_semantic_kernel_only_current_obstruction_certificate_proof=completePaperSemanticKernelOnly_current_obstruction_certificate",
             "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_proof=completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current",
@@ -1146,11 +1149,11 @@
             "semantic_target_closure_input_field_output_detailed_statement_rosters_proof=openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate=RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate",
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof=remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate",
-            "semantic_target_axiom_audit_prints_required=1222",
+            "semantic_target_axiom_audit_prints_required=1235",
             "semantic_target_axiom_audit_prints_missing=0",
             "semantic_target_readme_gate_counts=closed=3,open=2",
             "semantic_target_readme_gate_counts_match=1",
-            "semantic_target_readme_axiom_audit_prints_required=1222",
+            "semantic_target_readme_axiom_audit_prints_required=1235",
             "semantic_target_readme_axiom_audit_prints_required_matches=1",
             "public_manifest_paper_semantic_stdout_contains_missing=0"
           ]
@@ -1164,7 +1167,7 @@
           "stdout_contains": [
             "axiom_output_command=lake env lean BlackwellDilemma/AxiomAudit.lean",
             "axiom_output_returncode=0",
-            "axiom_output_dependency_lines=2955",
+            "axiom_output_dependency_lines=2958",
             "axiom_output_no_axiom_lines=176",
             "axiom_output_allowed_axioms=Classical.choice,Quot.sound,propext",
             "axiom_output_observed_axioms=Classical.choice,Quot.sound,propext",
