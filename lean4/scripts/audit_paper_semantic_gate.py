@@ -366,6 +366,7 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "RemainingOpenSemanticTargetsJointRouteStatementRosterCertificate",
     "RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate",
     "RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
+    "RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate",
     "RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate",
     "RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate",
     "OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate",
@@ -832,6 +833,8 @@ REQUIRED_AXIOM_AUDIT_DECLS = {
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralPackageObstructionStatements_length_current",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate",
+    "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate",
+    "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_package_obstruction_alignment_certificate",
     "BlackwellDilemma.PaperSemanticGate.RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate",
     "BlackwellDilemma.PaperSemanticGate.remaining_open_semantic_targets_bilateral_current_obstruction_source_certificate",
     "BlackwellDilemma.PaperSemanticGate.remainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatements",
@@ -3901,6 +3904,22 @@ def main() -> int:
         "remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate"
     )
     print(
+        "semantic_target_bilateral_package_obstruction_alignment_certificate="
+        "RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate"
+    )
+    print(
+        "semantic_target_bilateral_package_obstruction_alignment_certificate_proof="
+        "remaining_open_semantic_targets_bilateral_package_obstruction_alignment_certificate"
+    )
+    print(
+        "semantic_target_bilateral_package_obstruction_alignment_id_label_proofs="
+        "openSemanticTargetKernelSurfaceIds_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_current,"
+        "openSemanticTargetNamedRouteObstructionRosterIds_current,"
+        "openSemanticTargetNamedRouteObstructionRosterIdPaperLabels_current,"
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteObstructionRosterIdPaperLabels"
+    )
+    print(
         "semantic_target_bilateral_current_obstruction_source_certificate="
         "RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate"
     )
@@ -5236,6 +5255,22 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_obstruction_all_surface_id_paper_label_statement_roster_certificate_proof="
             "open_semantic_target_all_surface_id_paper_label_statement_roster_certificate"
+        ),
+        (
+            "semantic_target_bilateral_package_obstruction_alignment_certificate="
+            "RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate"
+        ),
+        (
+            "semantic_target_bilateral_package_obstruction_alignment_certificate_proof="
+            "remaining_open_semantic_targets_bilateral_package_obstruction_alignment_certificate"
+        ),
+        (
+            "semantic_target_bilateral_package_obstruction_alignment_id_label_proofs="
+            "openSemanticTargetKernelSurfaceIds_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_current,"
+            "openSemanticTargetNamedRouteObstructionRosterIds_current,"
+            "openSemanticTargetNamedRouteObstructionRosterIdPaperLabels_current,"
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_namedRouteObstructionRosterIdPaperLabels"
         ),
         (
             "semantic_target_bilateral_current_obstruction_source_certificate="
