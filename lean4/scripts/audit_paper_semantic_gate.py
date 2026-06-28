@@ -5782,6 +5782,14 @@ def main() -> int:
         "semantic_target_closure_input_field_output_statement_roster_certificate_proof="
         "open_semantic_target_closure_input_field_output_statement_roster_certificate"
     )
+    print(
+        "semantic_target_closure_input_field_output_roster_statement_roster_certificate="
+        "OpenSemanticTargetClosureInputFieldOutputRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_roster_statement_roster_certificate_proof="
+        "open_semantic_target_closure_input_field_output_roster_statement_roster_certificate"
+    )
     print("semantic_target_closure_input_field_output_statement_roster_terms_checked=12")
     print(
         "semantic_target_closure_input_field_output_statement_roster_length_proofs="

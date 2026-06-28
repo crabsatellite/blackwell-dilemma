@@ -17040,6 +17040,24 @@ theorem
         surface
   exact open_semantic_target_closure_input_field_output_roster_certificate
 
+/-- Same-base statement-roster certificate for the closure-input-field/output
+roster package.  The underlying statement roster is the existing field/output
+statement roster; this wrapper keeps the certificate name aligned with
+`OpenSemanticTargetClosureInputFieldOutputRosterCertificate`. -/
+def OpenSemanticTargetClosureInputFieldOutputRosterStatementRosterCertificate :
+    Prop :=
+  OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate /\
+    OpenSemanticTargetClosureInputFieldOutputRosterCertificate
+
+/-- The closure-input-field/output roster package is covered by the existing
+statement roster certificate. -/
+theorem
+    open_semantic_target_closure_input_field_output_roster_statement_roster_certificate :
+    OpenSemanticTargetClosureInputFieldOutputRosterStatementRosterCertificate := by
+  exact ⟨
+    open_semantic_target_closure_input_field_output_statement_roster_certificate,
+    open_semantic_target_closure_input_field_output_roster_certificate⟩
+
 /-- Typed payload required by the closed R10 two-regime relabeling target.
 This is intentionally a record of theorem surfaces, not a string reference:
 `PaperSemanticGate.lean` only builds if the public `gap_two_regime_*` aliases
