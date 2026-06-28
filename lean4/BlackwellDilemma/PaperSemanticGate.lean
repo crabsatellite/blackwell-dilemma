@@ -12796,6 +12796,79 @@ theorem part6_lattice_embedding_closure_input_field_certificate :
   · exact part6_lattice_embedding_field_payload_notYet
   exact part6_lattice_embedding_closure_input_notYet
 
+/-- Statement roster for the Part 6 field-level closure-input certificate. -/
+def part6LatticeEmbeddingClosureInputFieldStatements : List Prop :=
+  [Part6LatticeEmbeddingClosureInput ->
+    Part6LatticeEmbeddingClosureInputFieldPayload,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6LatticeEmbeddingClosureInput,
+   Part6LatticeEmbeddingClosureInputFieldPayload ↔
+    Part6LatticeEmbeddingClosureInput,
+   Part6LatticeEmbeddingClosureInput ->
+    Exists fun scalingCarrier : Real -> Real =>
+      ClosedUnitPart6FullPaperClosingSupport scalingCarrier,
+   Part6LatticeEmbeddingClosureInput -> Part6FullPaperClosingBridgeRoute,
+   Part6LatticeEmbeddingClosureInputCertificate,
+   Part6LatticeEmbeddingClosureInputOutputCertificate,
+   Not Part6LatticeEmbeddingClosureInputFieldPayload,
+   Not Part6LatticeEmbeddingClosureInput]
+
+/-- Build gate: the Part 6 field-level closure-input statement roster names
+exactly the certificate conjuncts. -/
+theorem part6LatticeEmbeddingClosureInputFieldStatements_named_current :
+    part6LatticeEmbeddingClosureInputFieldStatements =
+      [Part6LatticeEmbeddingClosureInput ->
+        Part6LatticeEmbeddingClosureInputFieldPayload,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingClosureInput,
+       Part6LatticeEmbeddingClosureInputFieldPayload ↔
+        Part6LatticeEmbeddingClosureInput,
+       Part6LatticeEmbeddingClosureInput ->
+        Exists fun scalingCarrier : Real -> Real =>
+          ClosedUnitPart6FullPaperClosingSupport scalingCarrier,
+       Part6LatticeEmbeddingClosureInput -> Part6FullPaperClosingBridgeRoute,
+       Part6LatticeEmbeddingClosureInputCertificate,
+       Part6LatticeEmbeddingClosureInputOutputCertificate,
+       Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not Part6LatticeEmbeddingClosureInput] :=
+  rfl
+
+/-- Build gate: the Part 6 field-level closure-input statement roster has
+exactly nine certificate conjuncts. -/
+theorem part6LatticeEmbeddingClosureInputFieldStatements_length_current :
+    part6LatticeEmbeddingClosureInputFieldStatements.length = 9 := rfl
+
+/-- Build-gated statement roster for the Part 6 field-level closure-input
+certificate. -/
+def Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate : Prop :=
+  part6LatticeEmbeddingClosureInputFieldStatements =
+      [Part6LatticeEmbeddingClosureInput ->
+        Part6LatticeEmbeddingClosureInputFieldPayload,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingClosureInput,
+       Part6LatticeEmbeddingClosureInputFieldPayload ↔
+        Part6LatticeEmbeddingClosureInput,
+       Part6LatticeEmbeddingClosureInput ->
+        Exists fun scalingCarrier : Real -> Real =>
+          ClosedUnitPart6FullPaperClosingSupport scalingCarrier,
+       Part6LatticeEmbeddingClosureInput -> Part6FullPaperClosingBridgeRoute,
+       Part6LatticeEmbeddingClosureInputCertificate,
+       Part6LatticeEmbeddingClosureInputOutputCertificate,
+       Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not Part6LatticeEmbeddingClosureInput] /\
+    part6LatticeEmbeddingClosureInputFieldStatements.length = 9 /\
+    Part6LatticeEmbeddingClosureInputFieldCertificate
+
+/-- The Part 6 field-level closure-input certificate has a fixed statement
+roster. -/
+theorem part6_lattice_embedding_closure_input_field_statement_roster_certificate :
+    Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingClosureInputFieldStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingClosureInputFieldStatements_length_current
+      part6_lattice_embedding_closure_input_field_certificate)
+
 /-- Field-level payload exposed by the sufficient topo closure input.  The
 payload keeps the repaired bridge, the pointwise-on-giant route, the paper
 support and support-surface repair fields, the full-support projections, and
@@ -13237,6 +13310,7 @@ def RemainingOpenSemanticTargetsClosureInputFieldCertificate : Prop :=
     openSemanticTargetClosureInputFieldSurfaces.length =
       paperSemanticOpenCount /\
     Part6LatticeEmbeddingClosureInputFieldCertificate /\
+    Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate /\
     RemainingOpenSemanticTargetsClosureInputOutputCertificate
 
@@ -13251,12 +13325,15 @@ theorem remaining_open_semantic_targets_closure_input_field_certificate :
   constructor
   · exact part6_lattice_embedding_closure_input_field_certificate
   constructor
+  · exact part6_lattice_embedding_closure_input_field_statement_roster_certificate
+  constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_field_certificate
   exact remaining_open_semantic_targets_closure_input_output_certificate
 
 /-- Statement roster for the remaining closure-input field certificate. -/
 def remainingOpenSemanticTargetsClosureInputFieldStatements : List Prop :=
   [Part6LatticeEmbeddingClosureInputFieldCertificate,
+   Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
    RemainingOpenSemanticTargetsClosureInputOutputCertificate]
 
@@ -13265,13 +13342,15 @@ certificates and their shared closure-input/output dependency. -/
 theorem remainingOpenSemanticTargetsClosureInputFieldStatements_named_current :
     remainingOpenSemanticTargetsClosureInputFieldStatements =
       [Part6LatticeEmbeddingClosureInputFieldCertificate,
+       Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
        RemainingOpenSemanticTargetsClosureInputOutputCertificate] := rfl
 
 /-- Build gate: the remaining closure-input field roster has exactly the two
-field certificates plus the shared closure-input/output dependency. -/
+field certificates, the Part 6 direct roster, and the shared
+closure-input/output dependency. -/
 theorem remainingOpenSemanticTargetsClosureInputFieldStatements_length_current :
-    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 3 := rfl
+    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 4 := rfl
 
 /-- Build-gated statement roster for the remaining closure-input field
 certificate. -/
@@ -13279,9 +13358,10 @@ def RemainingOpenSemanticTargetsClosureInputFieldStatementRosterCertificate :
     Prop :=
   remainingOpenSemanticTargetsClosureInputFieldStatements =
       [Part6LatticeEmbeddingClosureInputFieldCertificate,
+       Part6LatticeEmbeddingClosureInputFieldStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
        RemainingOpenSemanticTargetsClosureInputOutputCertificate] /\
-    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 3 /\
+    remainingOpenSemanticTargetsClosureInputFieldStatements.length = 4 /\
     RemainingOpenSemanticTargetsClosureInputFieldCertificate
 
 /-- The remaining closure-input field certificate has a fixed statement
