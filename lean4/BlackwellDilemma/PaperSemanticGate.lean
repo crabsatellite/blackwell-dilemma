@@ -17426,6 +17426,99 @@ theorem semantic_target_paper_label_id_certificate :
     SemanticTargetPaperLabelIdCertificate := by
   exact ⟨rfl, rfl, rfl⟩
 
+/-- Statement roster for the current semantic-target paper-label/id package. -/
+def semanticTargetPaperLabelIdStatements : List Prop :=
+  [closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii")],
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")],
+   semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii"),
+       ("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")]]
+
+/-- Build gate: the semantic-target paper-label/id roster names exactly the
+current closed/open/full ledger id-label components. -/
+theorem semanticTargetPaperLabelIdStatements_named_current :
+    semanticTargetPaperLabelIdStatements =
+      [closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii")],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii"),
+           ("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")]] := rfl
+
+/-- Build gate: the semantic-target paper-label/id roster has exactly three
+current id-label components. -/
+theorem semanticTargetPaperLabelIdStatements_length_current :
+    semanticTargetPaperLabelIdStatements.length = 3 := rfl
+
+/-- Build-gated statement roster certificate for the semantic-target
+paper-label/id package. -/
+def SemanticTargetPaperLabelIdStatementRosterCertificate : Prop :=
+  semanticTargetPaperLabelIdStatements =
+      [closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii")],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii"),
+           ("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")]] /\
+    semanticTargetPaperLabelIdStatements.length = 3 /\
+    SemanticTargetPaperLabelIdCertificate
+
+/-- The semantic-target paper-label/id certificate has a fixed statement
+roster. -/
+theorem semantic_target_paper_label_id_statement_roster_certificate :
+    SemanticTargetPaperLabelIdStatementRosterCertificate := by
+  exact And.intro
+    semanticTargetPaperLabelIdStatements_named_current
+    (And.intro
+      semanticTargetPaperLabelIdStatements_length_current
+      semantic_target_paper_label_id_certificate)
+
 /-- Named target proposition for the full paper-semantic kernel-only gate. -/
 def CompletePaperSemanticKernelOnly : Prop :=
   paperSemanticOpenCount = 0

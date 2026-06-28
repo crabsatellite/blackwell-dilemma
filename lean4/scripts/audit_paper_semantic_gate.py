@@ -2739,6 +2739,23 @@ def main() -> int:
         + ",".join(semantic_target_paper_label_id_missing_terms)
     )
     print(
+        "semantic_target_paper_label_id_statement_roster_proof="
+        "semanticTargetPaperLabelIdStatements_named_current"
+    )
+    print("semantic_target_paper_label_id_statement_roster_terms_checked=3")
+    print(
+        "semantic_target_paper_label_id_statement_roster_length_proof="
+        "semanticTargetPaperLabelIdStatements_length_current"
+    )
+    print(
+        "semantic_target_paper_label_id_statement_roster_certificate="
+        "SemanticTargetPaperLabelIdStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_paper_label_id_statement_roster_certificate_proof="
+        "semantic_target_paper_label_id_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_obstruction_certificate="
         "CompletePaperSemanticKernelOnlyCurrentObstructionCertificate"
     )
@@ -6323,6 +6340,23 @@ def main() -> int:
         (
             "semantic_target_paper_label_id_conjuncts_missing="
             f"{len(semantic_target_paper_label_id_missing_terms)}"
+        ),
+        (
+            "semantic_target_paper_label_id_statement_roster_proof="
+            "semanticTargetPaperLabelIdStatements_named_current"
+        ),
+        "semantic_target_paper_label_id_statement_roster_terms_checked=3",
+        (
+            "semantic_target_paper_label_id_statement_roster_length_proof="
+            "semanticTargetPaperLabelIdStatements_length_current"
+        ),
+        (
+            "semantic_target_paper_label_id_statement_roster_certificate="
+            "SemanticTargetPaperLabelIdStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_paper_label_id_statement_roster_certificate_proof="
+            "semantic_target_paper_label_id_statement_roster_certificate"
         ),
         (
             "semantic_target_kernel_surface_paper_labels_match="
