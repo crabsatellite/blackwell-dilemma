@@ -5413,6 +5413,67 @@ theorem remaining_open_semantic_targets_closure_input_certificate :
   · exact topo_cluster_random_supercritical_z2_closure_input_notYet
   exact topo_cluster_random_supercritical_z2_closure_input_certificate
 
+/-- Statement roster for the sufficient closure-input certificate of the two
+remaining open semantic targets. -/
+def remainingOpenSemanticTargetsClosureInputStatements : List Prop :=
+  [openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+   Part6LatticeEmbeddingClosureInput ->
+      Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6LatticeEmbeddingClosureInput,
+   Part6LatticeEmbeddingClosureInputCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2ClosureInput,
+   TopoClusterRandomSupercriticalZ2ClosureInputCertificate]
+
+/-- Build gate: the remaining-open closure-input statement roster names exactly
+the current sufficient-input components. -/
+theorem remainingOpenSemanticTargetsClosureInputStatements_named_current :
+    remainingOpenSemanticTargetsClosureInputStatements =
+      [openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInput ->
+          Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6LatticeEmbeddingClosureInput,
+       Part6LatticeEmbeddingClosureInputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputCertificate] := rfl
+
+/-- Build gate: the remaining-open closure-input statement roster has exactly
+the eight current sufficient-input components. -/
+theorem remainingOpenSemanticTargetsClosureInputStatements_length_current :
+    remainingOpenSemanticTargetsClosureInputStatements.length = 8 := rfl
+
+/-- Build-gated statement roster certificate for the sufficient closure inputs
+of the two remaining open semantic targets. -/
+def RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate : Prop :=
+  remainingOpenSemanticTargetsClosureInputStatements =
+      [openSemanticTargetClosureInputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInput ->
+          Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6LatticeEmbeddingClosureInput,
+       Part6LatticeEmbeddingClosureInputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInputCertificate] /\
+    remainingOpenSemanticTargetsClosureInputStatements.length = 8 /\
+    RemainingOpenSemanticTargetsClosureInputCertificate
+
+/-- The sufficient closure-input certificate for the two remaining open
+semantic targets has a fixed statement roster. -/
+theorem remaining_open_semantic_targets_closure_input_statement_roster_certificate :
+    RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsClosureInputStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsClosureInputStatements_length_current
+      remaining_open_semantic_targets_closure_input_certificate)
+
 /-- Build-gated named sufficient-input roster for the two remaining open
 semantic targets.  This pins each target, sufficient input, input obstruction,
 target obstruction, and input certificate to the named Part 6/topo
@@ -17115,6 +17176,7 @@ def
     openSemanticTargetExactClosureInputOutputSurfaces.length =
       paperSemanticOpenCount /\
     RemainingOpenSemanticTargetsClosureInputCertificate /\
+    RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate /\
     OpenSemanticTargetClosureInputNamedRosterCertificate /\
     OpenSemanticTargetClosureInputStatementRosterCertificate /\
     RemainingOpenSemanticTargetsExactClosureInputCertificate /\
@@ -17163,6 +17225,9 @@ theorem
   · exact openSemanticTargetExactClosureInputOutputSurfaceCount_current
   constructor
   · exact remaining_open_semantic_targets_closure_input_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_closure_input_statement_roster_certificate
   constructor
   · exact open_semantic_target_closure_input_named_roster_certificate
   constructor
@@ -17219,6 +17284,7 @@ def completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements :
    openSemanticTargetExactClosureInputOutputSurfaces.length =
     paperSemanticOpenCount,
    RemainingOpenSemanticTargetsClosureInputCertificate,
+   RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate,
    OpenSemanticTargetClosureInputNamedRosterCertificate,
    OpenSemanticTargetClosureInputStatementRosterCertificate,
    RemainingOpenSemanticTargetsExactClosureInputCertificate,
@@ -17259,6 +17325,7 @@ theorem
        openSemanticTargetExactClosureInputOutputSurfaces.length =
         paperSemanticOpenCount,
        RemainingOpenSemanticTargetsClosureInputCertificate,
+       RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate,
        OpenSemanticTargetClosureInputNamedRosterCertificate,
        OpenSemanticTargetClosureInputStatementRosterCertificate,
        RemainingOpenSemanticTargetsExactClosureInputCertificate,
@@ -17274,11 +17341,11 @@ theorem
   rfl
 
 /-- Build gate: the current closure-input alignment statement roster has
-exactly the twenty-five component statements. -/
+exactly the twenty-six component statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements.length =
-      25 := rfl
+      26 := rfl
 
 /-- Build-gated statement roster certificate for the current closure-input
 alignment package. -/
@@ -17308,6 +17375,7 @@ def
        openSemanticTargetExactClosureInputOutputSurfaces.length =
         paperSemanticOpenCount,
        RemainingOpenSemanticTargetsClosureInputCertificate,
+       RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate,
        OpenSemanticTargetClosureInputNamedRosterCertificate,
        OpenSemanticTargetClosureInputStatementRosterCertificate,
        RemainingOpenSemanticTargetsExactClosureInputCertificate,
@@ -17321,7 +17389,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] /\
     completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements.length =
-      25 /\
+      26 /\
     CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate
 
 /-- The current closure-input alignment package has a fixed statement roster. -/
