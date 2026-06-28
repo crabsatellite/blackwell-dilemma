@@ -3820,6 +3820,40 @@ theorem topo_cluster_random_supercritical_z2_frontier_payload_certificate :
     TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate :=
   ⟨topo_cluster_random_supercritical_z2_frontier_payload⟩
 
+/-- Statement roster for the topo frontier payload certificate. -/
+def topoClusterRandomSupercriticalZ2FrontierPayloadStatements : List Prop :=
+  [Nonempty TopoClusterRandomSupercriticalZ2FrontierPayload]
+
+/-- Build gate: the topo frontier payload roster names exactly the payload
+inhabitance statement. -/
+theorem topoClusterRandomSupercriticalZ2FrontierPayloadStatements_named_current :
+    topoClusterRandomSupercriticalZ2FrontierPayloadStatements =
+      [Nonempty TopoClusterRandomSupercriticalZ2FrontierPayload] :=
+  rfl
+
+/-- Build gate: the topo frontier payload roster has exactly one certificate
+statement. -/
+theorem topoClusterRandomSupercriticalZ2FrontierPayloadStatements_length_current :
+    topoClusterRandomSupercriticalZ2FrontierPayloadStatements.length = 1 := rfl
+
+/-- Build-gated statement roster for the topo frontier payload certificate. -/
+def TopoClusterRandomSupercriticalZ2FrontierPayloadStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2FrontierPayloadStatements =
+      [Nonempty TopoClusterRandomSupercriticalZ2FrontierPayload] /\
+    topoClusterRandomSupercriticalZ2FrontierPayloadStatements.length = 1 /\
+    TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate
+
+/-- The topo frontier payload certificate has a fixed statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2FrontierPayloadStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2FrontierPayloadStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2FrontierPayloadStatements_length_current
+      topo_cluster_random_supercritical_z2_frontier_payload_certificate)
+
 /-- The complete typed Part 6 frontier payload projects the active progress
 certificate used by the open-target kernel surface. -/
 theorem part6_lattice_embedding_frontier_payload_frontier_progress_certificate :
@@ -4929,6 +4963,7 @@ def RemainingOpenSemanticTargetsPayloadRouteMapCertificate : Prop :=
     Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
     Part6CurrentFrontierCertificate /\
     TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+    TopoClusterRandomSupercriticalZ2FrontierPayloadStatementRosterCertificate /\
     (TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
       RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
     (TopoClusterRandomSupercriticalZ2SemanticKernelTarget ↔
@@ -4964,6 +4999,7 @@ theorem remaining_open_semantic_targets_payload_route_map_certificate :
     part6_lattice_embedding_frontier_payload_frontier_nonclosure_certificate,
     part6_lattice_embedding_frontier_payload_current_frontier_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_certificate,
+    topo_cluster_random_supercritical_z2_frontier_payload_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route,

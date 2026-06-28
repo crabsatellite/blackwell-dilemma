@@ -3257,6 +3257,23 @@ def main() -> int:
         + ",".join(surface[2] for surface in payload_surfaces)
     )
     print(
+        "semantic_target_topo_frontier_payload_statement_roster_proof="
+        "topoClusterRandomSupercriticalZ2FrontierPayloadStatements_named_current"
+    )
+    print("semantic_target_topo_frontier_payload_statement_roster_terms_checked=1")
+    print(
+        "semantic_target_topo_frontier_payload_statement_roster_length_proof="
+        "topoClusterRandomSupercriticalZ2FrontierPayloadStatements_length_current"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2FrontierPayloadStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_frontier_payload_statement_roster_certificate"
+    )
+    print(
         "semantic_target_frontier_payload_targets="
         + ",".join(surface[3] for surface in payload_surfaces)
     )
