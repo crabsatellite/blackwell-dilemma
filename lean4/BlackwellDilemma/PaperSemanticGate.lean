@@ -11141,6 +11141,83 @@ theorem
       remaining_open_semantic_targets_bilateral_package_obstruction_statement_roster_certificate
   exact open_semantic_target_named_route_obstruction_roster_certificate
 
+/-- Statement roster for the bilateral package-obstruction alignment package. -/
+def remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements :
+    List Prop :=
+  [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetNamedRouteObstructionRosterIds =
+      openSemanticTargetIds,
+   openSemanticTargetNamedRouteObstructionRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetNamedRouteObstructionRosterIdPaperLabels,
+   RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
+   RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
+   RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
+   OpenSemanticTargetNamedRouteObstructionRosterCertificate]
+
+/-- Build gate: the bilateral package-obstruction alignment roster names
+exactly the current alignment components. -/
+theorem
+    remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements_named_current :
+    remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements =
+      [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetNamedRouteObstructionRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetNamedRouteObstructionRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetNamedRouteObstructionRosterIdPaperLabels,
+       RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
+       OpenSemanticTargetNamedRouteObstructionRosterCertificate] := rfl
+
+/-- Build gate: the bilateral package-obstruction alignment roster has exactly
+the nine current alignment components. -/
+theorem
+    remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements_length_current :
+    remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements.length =
+      9 := rfl
+
+/-- Build-gated statement roster certificate for the bilateral
+package-obstruction alignment package. -/
+def
+    RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements =
+      [openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetNamedRouteObstructionRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetNamedRouteObstructionRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetNamedRouteObstructionRosterIdPaperLabels,
+       RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionStatementRosterCertificate,
+       OpenSemanticTargetNamedRouteObstructionRosterCertificate] /\
+    remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements.length =
+      9 /\
+    RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate
+
+/-- The bilateral package-obstruction alignment package has a fixed statement
+roster. -/
+theorem
+    remaining_open_semantic_targets_bilateral_package_obstruction_alignment_statement_roster_certificate :
+    RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatements_length_current
+      remaining_open_semantic_targets_bilateral_package_obstruction_alignment_certificate)
+
 /-- Build-gated alignment certificate tying the bilateral current-obstruction
 source layer to the current open semantic target ids and paper labels. -/
 def RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate :
@@ -16330,6 +16407,7 @@ def
     RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate /\
+    RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatementRosterCertificate /\
     RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate /\
     OpenSemanticTargetNamedRouteObstructionRosterCertificate /\
     OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
@@ -16363,6 +16441,9 @@ theorem
       remaining_open_semantic_targets_bilateral_package_obstruction_alignment_certificate
   constructor
   · exact
+      remaining_open_semantic_targets_bilateral_package_obstruction_alignment_statement_roster_certificate
+  constructor
+  · exact
       remaining_open_semantic_targets_bilateral_current_obstruction_source_alignment_certificate
   constructor
   · exact open_semantic_target_named_route_obstruction_roster_certificate
@@ -16385,7 +16466,7 @@ theorem
     completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
 
 /-- Statement roster for the current route-obstruction alignment package.
-This fixes the fourteen component propositions used by the route alignment
+This fixes the fifteen component propositions used by the route alignment
 certificate. -/
 def completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements :
     List Prop :=
@@ -16398,6 +16479,7 @@ def completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements :
    RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate,
    RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
    RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate,
+   RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatementRosterCertificate,
    RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
    OpenSemanticTargetNamedRouteObstructionRosterCertificate,
    OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
@@ -16421,6 +16503,7 @@ theorem
        RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate,
        RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
        RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
        OpenSemanticTargetNamedRouteObstructionRosterCertificate,
        OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
@@ -16431,11 +16514,11 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] := rfl
 
 /-- Build gate: the route-obstruction alignment statement roster has exactly
-the fourteen current route-alignment components. -/
+the fifteen current route-alignment components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements.length =
-      14 := rfl
+      15 := rfl
 
 /-- Build-gated statement roster certificate for the current route-obstruction
 alignment package. -/
@@ -16452,6 +16535,7 @@ def
        RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate,
        RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
        RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentCertificate,
+       RemainingOpenSemanticTargetsBilateralPackageObstructionAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
        OpenSemanticTargetNamedRouteObstructionRosterCertificate,
        OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
@@ -16461,7 +16545,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] /\
     completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements.length =
-      14 /\
+      15 /\
     CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate
 
 /-- The current route-obstruction alignment package has a fixed statement
