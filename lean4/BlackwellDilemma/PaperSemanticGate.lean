@@ -11979,6 +11979,30 @@ theorem part6_lattice_embedding_bridge_route_of_field_payload :
     part6_lattice_embedding_bridge_route_of_closure_input
       (part6_lattice_embedding_closure_input_of_field_payload hpayload)
 
+/-- Part 6 target obstruction pushes down to the field payload. -/
+theorem part6_lattice_embedding_field_payload_not_of_target_not :
+    Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload := by
+  intro htarget hpayload
+  exact htarget
+    (part6_lattice_embedding_semantic_kernel_target_of_field_payload hpayload)
+
+/-- Part 6 exact-input obstruction pushes down to the field payload. -/
+theorem part6_lattice_embedding_field_payload_not_of_exact_input_not :
+    Not Part6LatticeEmbeddingExactClosureInput ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload := by
+  intro hexact hpayload
+  exact hexact
+    (part6_lattice_embedding_exact_closure_input_of_field_payload hpayload)
+
+/-- Part 6 full-output obstruction pushes down to the field payload. -/
+theorem part6_lattice_embedding_field_payload_not_of_full_output_bundle_not :
+    Not Part6FullPaperClosingFullOutputBundle ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload := by
+  intro houtput hpayload
+  exact houtput
+    (part6_lattice_embedding_full_output_bundle_of_field_payload hpayload)
+
 /-- Field-output certificate for the Part 6 sufficient-input payload. -/
 def Part6LatticeEmbeddingClosureInputFieldOutputCertificate : Prop :=
   (Part6LatticeEmbeddingClosureInputFieldPayload ->
@@ -12000,6 +12024,12 @@ def Part6LatticeEmbeddingClosureInputFieldOutputCertificate : Prop :=
       Part6FullPaperClosingSupport) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6FullPaperClosingBridgeRoute) /\
+    (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload) /\
+    (Not Part6LatticeEmbeddingExactClosureInput ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload) /\
+    (Not Part6FullPaperClosingFullOutputBundle ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload) /\
     Part6LatticeEmbeddingClosureInputFieldCertificate /\
     Part6LatticeEmbeddingClosureInputOutputCertificate /\
     Not Part6LatticeEmbeddingClosureInputFieldPayload
@@ -12027,6 +12057,12 @@ theorem part6_lattice_embedding_closure_input_field_output_certificate :
   constructor
   · exact part6_lattice_embedding_bridge_route_of_field_payload
   constructor
+  · exact part6_lattice_embedding_field_payload_not_of_target_not
+  constructor
+  · exact part6_lattice_embedding_field_payload_not_of_exact_input_not
+  constructor
+  · exact part6_lattice_embedding_field_payload_not_of_full_output_bundle_not
+  constructor
   · exact part6_lattice_embedding_closure_input_field_certificate
   constructor
   · exact part6_lattice_embedding_closure_input_output_certificate
@@ -12053,6 +12089,12 @@ def part6LatticeEmbeddingClosureInputFieldOutputStatements : List Prop :=
     Part6FullPaperClosingSupport,
    Part6LatticeEmbeddingClosureInputFieldPayload ->
     Part6FullPaperClosingBridgeRoute,
+   Not Part6LatticeEmbeddingSemanticKernelTarget ->
+    Not Part6LatticeEmbeddingClosureInputFieldPayload,
+   Not Part6LatticeEmbeddingExactClosureInput ->
+    Not Part6LatticeEmbeddingClosureInputFieldPayload,
+   Not Part6FullPaperClosingFullOutputBundle ->
+    Not Part6LatticeEmbeddingClosureInputFieldPayload,
    Part6LatticeEmbeddingClosureInputFieldCertificate,
    Part6LatticeEmbeddingClosureInputOutputCertificate,
    Not Part6LatticeEmbeddingClosureInputFieldPayload,
@@ -12079,24 +12121,30 @@ theorem
        Part6LatticeEmbeddingClosureInputFieldPayload ->
         Part6FullPaperClosingFullOutputBundle,
        Part6LatticeEmbeddingClosureInputFieldPayload ->
-        Part6FullPaperClosingSupport,
+       Part6FullPaperClosingSupport,
        Part6LatticeEmbeddingClosureInputFieldPayload ->
         Part6FullPaperClosingBridgeRoute,
+       Not Part6LatticeEmbeddingSemanticKernelTarget ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not Part6LatticeEmbeddingExactClosureInput ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not Part6FullPaperClosingFullOutputBundle ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
        Part6LatticeEmbeddingClosureInputFieldCertificate,
        Part6LatticeEmbeddingClosureInputOutputCertificate,
        Not Part6LatticeEmbeddingClosureInputFieldPayload,
        Part6LatticeEmbeddingClosureInputFieldOutputCertificate] := rfl
 
-/-- Build gate: the Part 6 field-output statement roster has exactly the 13
+/-- Build gate: the Part 6 field-output statement roster has exactly the 16
 field-payload projection, certificate, and obstruction formulas listed above. -/
 theorem part6LatticeEmbeddingClosureInputFieldOutputStatements_length_current :
-    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 13 := rfl
+    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 16 := rfl
 
 /-- Build gate: snake-case alias for the Part 6 field-output statement roster
 length, matching the named-current theorem stem. -/
 theorem
     part6_lattice_embedding_closure_input_field_output_statements_length_current :
-    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 13 := rfl
+    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 16 := rfl
 
 /-- Build-gated formula roster for the Part 6 field-output certificate. -/
 def Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate :
@@ -12121,11 +12169,17 @@ def Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate :
       Part6FullPaperClosingSupport,
      Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6FullPaperClosingBridgeRoute,
+     Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload,
+     Not Part6LatticeEmbeddingExactClosureInput ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload,
+     Not Part6FullPaperClosingFullOutputBundle ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload,
      Part6LatticeEmbeddingClosureInputFieldCertificate,
      Part6LatticeEmbeddingClosureInputOutputCertificate,
      Not Part6LatticeEmbeddingClosureInputFieldPayload,
      Part6LatticeEmbeddingClosureInputFieldOutputCertificate] /\
-    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 13 /\
+    part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 16 /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6LatticeEmbeddingSemanticKernelTarget) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
@@ -12145,6 +12199,12 @@ def Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate :
       Part6FullPaperClosingSupport) /\
     (Part6LatticeEmbeddingClosureInputFieldPayload ->
       Part6FullPaperClosingBridgeRoute) /\
+    (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload) /\
+    (Not Part6LatticeEmbeddingExactClosureInput ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload) /\
+    (Not Part6FullPaperClosingFullOutputBundle ->
+      Not Part6LatticeEmbeddingClosureInputFieldPayload) /\
     Part6LatticeEmbeddingClosureInputFieldCertificate /\
     Part6LatticeEmbeddingClosureInputOutputCertificate /\
     Not Part6LatticeEmbeddingClosureInputFieldPayload /\
@@ -12179,6 +12239,12 @@ theorem
   · exact part6_lattice_embedding_full_support_of_field_payload
   constructor
   · exact part6_lattice_embedding_bridge_route_of_field_payload
+  constructor
+  · exact part6_lattice_embedding_field_payload_not_of_target_not
+  constructor
+  · exact part6_lattice_embedding_field_payload_not_of_exact_input_not
+  constructor
+  · exact part6_lattice_embedding_field_payload_not_of_full_output_bundle_not
   constructor
   · exact part6_lattice_embedding_closure_input_field_certificate
   constructor
@@ -12297,6 +12363,35 @@ theorem topo_cluster_random_supercritical_z2_giant_loss_output_of_field_payload 
       (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
         hpayload)
 
+/-- Topo target obstruction pushes down to the field payload. -/
+theorem topo_cluster_random_supercritical_z2_field_payload_not_of_target_not :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload := by
+  intro htarget hpayload
+  exact htarget
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_field_payload
+      hpayload)
+
+/-- Topo exact-input obstruction pushes down to the field payload. -/
+theorem
+    topo_cluster_random_supercritical_z2_field_payload_not_of_exact_input_not :
+    Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload := by
+  intro hexact hpayload
+  exact hexact
+    (topo_cluster_random_supercritical_z2_exact_closure_input_of_field_payload
+      hpayload)
+
+/-- Topo same-bridge-output obstruction pushes down to the field payload. -/
+theorem
+    topo_cluster_random_supercritical_z2_field_payload_not_of_same_bridge_full_output_bundle_not :
+    Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload := by
+  intro houtput hpayload
+  exact houtput
+    (topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_of_field_payload
+      hpayload)
+
 /-- Field-output certificate for the topo sufficient-input payload. -/
 def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate : Prop :=
   (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
@@ -12324,6 +12419,12 @@ def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate : Prop :=
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
           bridge) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
+    (Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
+    (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
     Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload
@@ -12358,6 +12459,14 @@ theorem topo_cluster_random_supercritical_z2_closure_input_field_output_certific
   constructor
   · exact topo_cluster_random_supercritical_z2_giant_loss_output_of_field_payload
   constructor
+  · exact topo_cluster_random_supercritical_z2_field_payload_not_of_target_not
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_field_payload_not_of_exact_input_not
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_field_payload_not_of_same_bridge_full_output_bundle_not
+  constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_field_certificate
   constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_output_certificate
@@ -12391,6 +12500,12 @@ def topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements :
     Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
       RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
         bridge,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+   Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+   Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
    TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
    TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
@@ -12426,22 +12541,28 @@ theorem
         Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
           RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
             bridge,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
        TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] := rfl
 
-/-- Build gate: the topo field-output statement roster has exactly the 14
+/-- Build gate: the topo field-output statement roster has exactly the 17
 field-payload projection, certificate, and obstruction formulas listed above. -/
 theorem
     topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements_length_current :
-    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 14 := rfl
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 17 := rfl
 
 /-- Build gate: snake-case alias for the topo field-output statement roster
 length, matching the named-current theorem stem. -/
 theorem
     topo_cluster_random_supercritical_z2_closure_input_field_output_statements_length_current :
-    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 14 := rfl
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 17 := rfl
 
 /-- Build-gated formula roster for the topo field-output certificate. -/
 def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate :
@@ -12472,11 +12593,17 @@ def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertif
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
           bridge,
+     Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+     Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+     Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
      TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate,
      TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate,
      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] /\
-    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 14 /\
+    topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length = 17 /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
       TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
     (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
@@ -12502,6 +12629,12 @@ def TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertif
       Exists fun bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData =>
         RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
           bridge) /\
+    (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
+    (Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
+    (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload) /\
     TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate /\
     TopoClusterRandomSupercriticalZ2ClosureInputOutputCertificate /\
     Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload /\
@@ -12543,6 +12676,14 @@ theorem
   · exact topo_cluster_random_supercritical_z2_paper_support_output_of_field_payload
   constructor
   · exact topo_cluster_random_supercritical_z2_giant_loss_output_of_field_payload
+  constructor
+  · exact topo_cluster_random_supercritical_z2_field_payload_not_of_target_not
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_field_payload_not_of_exact_input_not
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_field_payload_not_of_same_bridge_full_output_bundle_not
   constructor
   · exact topo_cluster_random_supercritical_z2_closure_input_field_certificate
   constructor
