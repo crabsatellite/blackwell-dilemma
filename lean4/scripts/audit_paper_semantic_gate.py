@@ -27,6 +27,10 @@ AXIOM_AUDIT = ROOT / "BlackwellDilemma" / "AxiomAudit.lean"
 PUBLIC_EVIDENCE_MANIFEST = REPO_ROOT / "reference-evidence" / "public_evidence_manifest.json"
 PUBLIC_EVIDENCE_CHECK_ID = "paper_semantic_companion_audit"
 CERTIFICATE_DEF_RE = re.compile(r"(?m)^def\s+([A-Z][A-Za-z0-9_]*Certificate)\s*:")
+CERTIFICATE_THEOREM_TARGET_RE = re.compile(
+    r"(?ms)^theorem\s+[A-Za-z0-9_'.\s]+?\s*:\s*"
+    r"([A-Z][A-Za-z0-9_]*Certificate)\s*:="
+)
 CERTIFICATE_SUFFIX = "Certificate"
 STATEMENT_ROSTER_CERTIFICATE_SUFFIX = "StatementRosterCertificate"
 
@@ -2427,6 +2431,14 @@ def same_base_statement_roster_certificate_gap(
     return certificate_defs, non_statement_roster_defs, missing_same_base_rosters
 
 
+def certificate_defs_missing_theorem_targets(
+    text: str,
+    certificate_defs: list[str],
+) -> list[str]:
+    theorem_targets = set(CERTIFICATE_THEOREM_TARGET_RE.findall(text))
+    return [name for name in certificate_defs if name not in theorem_targets]
+
+
 def main() -> int:
     text = read(GATE)
     axiom_audit_text = read(AXIOM_AUDIT)
@@ -2439,6 +2451,10 @@ def main() -> int:
         non_statement_roster_certificate_defs,
         missing_same_base_statement_roster_defs,
     ) = same_base_statement_roster_certificate_gap(text)
+    missing_certificate_theorem_targets = certificate_defs_missing_theorem_targets(
+        text,
+        certificate_defs,
+    )
 
     expected_open = theorem_count(text, "paperSemanticOpenCount_current")
     expected_closed = theorem_count(text, "paperSemanticClosedCount_current")
@@ -2633,6 +2649,18 @@ def main() -> int:
     print(
         "semantic_target_certificate_same_base_statement_roster_def_backed="
         + ("1" if not missing_same_base_statement_roster_defs else "0")
+    )
+    print(
+        "semantic_target_certificate_defs_with_theorem_targets="
+        f"{len(certificate_defs) - len(missing_certificate_theorem_targets)}"
+    )
+    print(
+        "semantic_target_certificate_defs_missing_theorem_targets="
+        f"{len(missing_certificate_theorem_targets)}"
+    )
+    print(
+        "semantic_target_certificate_defs_missing_theorem_target_decls="
+        + ",".join(missing_certificate_theorem_targets)
     )
     print_id_drift("semantic_target_open_ids", expected_open_ids, open_ids)
     print_id_drift("semantic_target_closed_ids", expected_closed_ids, closed_ids)
@@ -6396,6 +6424,18 @@ def main() -> int:
             "semantic_target_certificate_same_base_statement_roster_def_backed="
             + ("1" if not missing_same_base_statement_roster_defs else "0")
         ),
+        (
+            "semantic_target_certificate_defs_with_theorem_targets="
+            f"{len(certificate_defs) - len(missing_certificate_theorem_targets)}"
+        ),
+        (
+            "semantic_target_certificate_defs_missing_theorem_targets="
+            f"{len(missing_certificate_theorem_targets)}"
+        ),
+        (
+            "semantic_target_certificate_defs_missing_theorem_target_decls="
+            + ",".join(missing_certificate_theorem_targets)
+        ),
         *id_drift_lines("semantic_target_open_ids", expected_open_ids, open_ids),
         *id_drift_lines("semantic_target_closed_ids", expected_closed_ids, closed_ids),
         (
@@ -7978,6 +8018,11 @@ def main() -> int:
         failures.append(
             "certificate defs missing same-base statement roster certificates: "
             + ",".join(missing_same_base_statement_roster_defs)
+        )
+    if missing_certificate_theorem_targets:
+        failures.append(
+            "certificate defs missing theorem targets: "
+            + ",".join(missing_certificate_theorem_targets)
         )
     if top_level_missing_conjuncts:
         failures.append(
