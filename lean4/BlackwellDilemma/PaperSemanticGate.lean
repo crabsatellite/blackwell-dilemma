@@ -19068,7 +19068,8 @@ def
     OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate /\
     OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate /\
     OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate /\
-    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate
+    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate
 
 /-- The top-level current obstruction-equivalence layer is aligned with the
 same current open target ids, paper labels, rosters, and output-equivalence
@@ -19116,11 +19117,14 @@ theorem
       open_semantic_target_obstruction_equivalence_statement_roster_certificate
   constructor
   · exact open_semantic_target_all_surface_id_paper_labels_certificate
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
   exact
-    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
+    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_statement_roster_certificate
 
 /-- Statement roster for the current obstruction-equivalence alignment
-package.  This fixes the eighteen component statements tying output-equivalence
+package.  This fixes the nineteen component statements tying output-equivalence
 and obstruction-equivalence surfaces to the current open ids, paper labels, and
 surface-obstruction package. -/
 def
@@ -19151,7 +19155,8 @@ def
    OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
    OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
    OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
-   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate]
+   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate]
 
 /-- Build gate: the current obstruction-equivalence alignment statement roster
 names exactly the component statements used by the alignment certificate. -/
@@ -19183,14 +19188,15 @@ theorem
        OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
        OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
        OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
-       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the current obstruction-equivalence alignment statement roster
-has exactly the eighteen component statements. -/
+has exactly the nineteen component statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatements.length =
-      18 := rfl
+      19 := rfl
 
 /-- Build-gated statement roster certificate for the current
 obstruction-equivalence alignment package. -/
@@ -19223,9 +19229,10 @@ def
        OpenSemanticTargetObstructionEquivalenceNamedRosterCertificate,
        OpenSemanticTargetObstructionEquivalenceStatementRosterCertificate,
        OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
-       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatements.length =
-      18 /\
+      19 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate
 
 /-- The current obstruction-equivalence alignment package has a fixed
@@ -19264,7 +19271,9 @@ def
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate /\
-    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate
+    CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate
 
 /-- The top-level current route-obstruction layer is aligned with the same
 current open target ids, paper labels, joint reductions, and obstruction
@@ -19317,11 +19326,17 @@ theorem
   constructor
   · exact
       completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate
-  exact
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_statement_roster_certificate
+  constructor
+  · exact
     completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate
+  exact
+    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_statement_roster_certificate
 
 /-- Statement roster for the current route-obstruction alignment package.
-This fixes the seventeen component propositions used by the route alignment
+This fixes the nineteen component propositions used by the route alignment
 certificate. -/
 def completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements :
     List Prop :=
@@ -19344,7 +19359,9 @@ def completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements :
    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
-   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate]
+   CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate]
 
 /-- Build gate: the route-obstruction alignment roster names exactly the
 current route-alignment components. -/
@@ -19370,14 +19387,16 @@ theorem
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
-       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the route-obstruction alignment statement roster has exactly
-the seventeen current route-alignment components. -/
+the nineteen current route-alignment components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements.length =
-      17 := rfl
+      19 := rfl
 
 /-- Build-gated statement roster certificate for the current route-obstruction
 alignment package. -/
@@ -19404,9 +19423,11 @@ def
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
-       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatements.length =
-      17 /\
+      19 /\
     CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate
 
 /-- The current route-obstruction alignment package has a fixed statement
