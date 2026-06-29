@@ -26126,6 +26126,156 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate)
 
+/-- Terminal main-obstruction closure roster tying the final terminal alignment
+closure directly to the top-level current obstruction certificate and its
+116-statement roster. -/
+def completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 116,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   paperSemanticClosedCount = 3]
+
+/-- Build gate: the terminal main-obstruction closure roster names the current
+terminal alignment closure, the top-level obstruction certificate and roster,
+the final status package, and the exact current open/closed ledger facts. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 116,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticClosedCount = 3] := rfl
+
+/-- Build gate: the terminal main-obstruction closure roster has eighteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
+      18 := rfl
+
+/-- Build-gated terminal certificate closing the final terminal alignment over
+the top-level current obstruction certificate and roster. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
+  completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 116 /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  paperSemanticClosedCount = 3
+
+/-- The terminal main-obstruction closure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnlyCurrentObstructionStatements_length_current,
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    openSemanticTargetIds_current,
+    paperSemanticClosedCount_current⟩
+
+/-- Build-gated statement roster certificate for terminal main-obstruction
+closure. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentObstructionStatements.length = 116,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticClosedCount = 3] /\
+    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
+      18 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate
+
+/-- The terminal main-obstruction closure package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
