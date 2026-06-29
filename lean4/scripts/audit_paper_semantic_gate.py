@@ -3345,6 +3345,45 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statements="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_checked=4"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_certificate_proof="
+        "completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
+        "completePaperSemanticKernelOnly_not_of_open_count_two"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_iff_false_of_open_count_two_proof="
+        "completePaperSemanticKernelOnly_iff_false_of_open_count_two"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_iff_false_proof="
         "completePaperSemanticKernelOnly_iff_false_current"
     )
@@ -8564,6 +8603,45 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_open_target_route_derived_target_obstruction_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statements="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_checked=4"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_certificate_proof="
+            "completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
+            "completePaperSemanticKernelOnly_not_of_open_count_two"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_iff_false_of_open_count_two_proof="
+            "completePaperSemanticKernelOnly_iff_false_of_open_count_two"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="
