@@ -20424,6 +20424,26 @@ theorem completePaperSemanticKernelOnly_current_field_output_roster_ledger_align
         openSemanticTargetClosureInputFieldOutputSurfaceIds_current
         openSemanticTargetClosureInputFieldOutputSurfaceCount_current))
 
+/-- Build gate: the current field-output surface and detailed statement
+roster `(id, paperLabel)` ledgers are synchronized with the open semantic
+target ledger and the kernel-surface ledger. -/
+theorem completePaperSemanticKernelOnly_current_field_output_roster_label_ledger_alignment :
+    openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+      openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels /\
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+      openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels := by
+  exact And.intro
+    openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels_current
+    (And.intro
+      openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputSurfaceIdPaperLabels
+      (And.intro
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current
+        openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels))
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open/closed target count/id gates, and subordinate certificate propositions

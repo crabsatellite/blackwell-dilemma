@@ -6373,6 +6373,10 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_field_output_roster_ledger_alignment_proof="
         "completePaperSemanticKernelOnly_current_field_output_roster_ledger_alignment"
     )
+    print(
+        "complete_paper_semantic_kernel_only_current_field_output_roster_label_ledger_alignment_proof="
+        "completePaperSemanticKernelOnly_current_field_output_roster_label_ledger_alignment"
+    )
     print("semantic_target_closure_input_field_output_detailed_statement_roster_terms_checked=2")
     print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_length_proof="
@@ -7962,6 +7966,10 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_field_output_roster_ledger_alignment_proof="
             "completePaperSemanticKernelOnly_current_field_output_roster_ledger_alignment"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_field_output_roster_label_ledger_alignment_proof="
+            "completePaperSemanticKernelOnly_current_field_output_roster_label_ledger_alignment"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
