@@ -23846,7 +23846,9 @@ def completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements :
   [Not CompletePaperSemanticKernelOnly,
    CompletePaperSemanticKernelOnly <-> False,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
-   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the routed-exit final exit roster names exactly the
 non-complete gate and the routed-exit final-alignment certificate pair. -/
@@ -23856,13 +23858,15 @@ theorem
       [Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
-       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the routed-exit final exit roster has four statements. -/
+/-- Build gate: the routed-exit final exit roster has six statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements.length =
-      4 := rfl
+      6 := rfl
 
 /-- Build-gated certificate that the current non-complete paper-semantic gate
 is routed through the final routed-exit alignment package. -/
@@ -23871,7 +23875,9 @@ def CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate :
   Not CompletePaperSemanticKernelOnly /\
   (CompletePaperSemanticKernelOnly <-> False) /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The routed-exit final exit package is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate :
@@ -23882,7 +23888,11 @@ theorem completePaperSemanticKernelOnly_current_routed_exit_final_exit_certifica
       completePaperSemanticKernelOnly_iff_false_current
       (And.intro
         completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate
-        completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate))
+        (And.intro
+          completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate
+          (And.intro
+            part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
 
 /-- Build-gated statement roster certificate for the routed-exit final exit
 package. -/
@@ -23893,9 +23903,11 @@ def
       [Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
-       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements.length =
-      4 /\
+      6 /\
     CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate
 
 /-- The routed-exit final exit package has a fixed statement roster. -/
