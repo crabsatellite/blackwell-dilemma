@@ -445,6 +445,74 @@ theorem openSemanticTargetKernelSurface_frontier_certificate
     surface.frontierCertificate :=
   surface.frontierCertificateProof
 
+/-- The Part 6 nondegenerate repair route has four independently named current
+obstruction paths: divergence witness, same-`alpha` feasible/divergence
+witness, paired output, and full output bundle. -/
+def Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate :
+    Prop :=
+  Not Part6NondegenerateFeasibleRepairRoute /\
+    Not Part6NondegenerateFeasibleRepairRoute /\
+    Not Part6NondegenerateFeasibleRepairRoute /\
+    Not Part6NondegenerateFeasibleRepairRoute
+
+/-- The four current Part 6 repair-route obstruction paths are all
+machine-checked. -/
+theorem
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate :
+    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate :=
+  ⟨not_part6_nondegenerate_feasible_repair_route_current_via_divergence_witness,
+   not_part6_nondegenerate_feasible_repair_route_current_via_feasible_divergence_witness,
+   not_part6_nondegenerate_feasible_repair_route_current_via_output_pair,
+   not_part6_nondegenerate_feasible_repair_route_current_via_full_output_bundle⟩
+
+/-- Statement roster for the Part 6 repair-route obstruction multipath
+certificate. -/
+def part6LatticeEmbeddingRepairRouteObstructionMultipathStatements :
+    List Prop :=
+  [Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6NondegenerateFeasibleRepairRoute]
+
+/-- Build gate: the Part 6 repair-route obstruction multipath roster names the
+four current route-refutation paths. -/
+theorem
+    part6LatticeEmbeddingRepairRouteObstructionMultipathStatements_named_current :
+    part6LatticeEmbeddingRepairRouteObstructionMultipathStatements =
+      [Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6NondegenerateFeasibleRepairRoute] := rfl
+
+/-- Build gate: the Part 6 repair-route obstruction multipath roster has four
+statements. -/
+theorem
+    part6LatticeEmbeddingRepairRouteObstructionMultipathStatements_length_current :
+    part6LatticeEmbeddingRepairRouteObstructionMultipathStatements.length =
+      4 := rfl
+
+/-- Build-gated statement roster certificate for the Part 6 repair-route
+obstruction multipath package. -/
+def Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingRepairRouteObstructionMultipathStatements =
+      [Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6NondegenerateFeasibleRepairRoute] /\
+    part6LatticeEmbeddingRepairRouteObstructionMultipathStatements.length =
+      4 /\
+    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate
+
+/-- The Part 6 repair-route obstruction multipath package has a fixed statement
+roster. -/
+theorem
+    part6_lattice_embedding_repair_route_obstruction_multipath_statement_roster_certificate :
+    Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate :=
+  ⟨part6LatticeEmbeddingRepairRouteObstructionMultipathStatements_named_current,
+   part6LatticeEmbeddingRepairRouteObstructionMultipathStatements_length_current,
+   part6_lattice_embedding_repair_route_obstruction_multipath_certificate⟩
+
 /-- Single build-gated certificate for the two remaining paper-semantic targets.
 
 This certificate collects the roster identity/count gates, the exact target
@@ -465,6 +533,7 @@ def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
       Part6FullPaperClosingSupport) /\
     Not Part6LatticeEmbeddingSemanticKernelTarget /\
     Not Part6NondegenerateFeasibleRepairRoute /\
+    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
     Part6NondegenerateFeasibleRepairRouteCertificate /\
     Not Part6FullPaperClosingSupport /\
     Part6FullPaperClosingOutputLayerCertificate /\
@@ -503,6 +572,7 @@ theorem remaining_open_semantic_targets_frontier_certificate :
       part6_lattice_embedding_semantic_kernel_target_notYet
         ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mpr
           hroute)),
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
     part6_nondegenerate_feasible_repair_route_certificate,
     (fun hsupport =>
       part6_lattice_embedding_semantic_kernel_target_notYet
@@ -547,6 +617,7 @@ def remainingOpenSemanticTargetsFrontierStatements : List Prop :=
       Part6FullPaperClosingSupport,
    Not Part6LatticeEmbeddingSemanticKernelTarget,
    Not Part6NondegenerateFeasibleRepairRoute,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
    Part6NondegenerateFeasibleRepairRouteCertificate,
    Not Part6FullPaperClosingSupport,
    Part6FullPaperClosingOutputLayerCertificate,
@@ -586,6 +657,7 @@ theorem remainingOpenSemanticTargetsFrontierStatements_named_current :
           Part6FullPaperClosingSupport,
        Not Part6LatticeEmbeddingSemanticKernelTarget,
        Not Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        Part6NondegenerateFeasibleRepairRouteCertificate,
        Not Part6FullPaperClosingSupport,
        Part6FullPaperClosingOutputLayerCertificate,
@@ -608,9 +680,9 @@ theorem remainingOpenSemanticTargetsFrontierStatements_named_current :
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
 
 /-- Build gate: the remaining-open frontier statement roster has exactly the
-twenty-six current frontier components. -/
+twenty-seven current frontier components. -/
 theorem remainingOpenSemanticTargetsFrontierStatements_length_current :
-    remainingOpenSemanticTargetsFrontierStatements.length = 26 := rfl
+    remainingOpenSemanticTargetsFrontierStatements.length = 27 := rfl
 
 /-- Build-gated statement roster certificate for the current frontier of the
 two remaining open semantic targets. -/
@@ -630,6 +702,7 @@ def RemainingOpenSemanticTargetsFrontierStatementRosterCertificate : Prop :=
           Part6FullPaperClosingSupport,
        Not Part6LatticeEmbeddingSemanticKernelTarget,
        Not Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        Part6NondegenerateFeasibleRepairRouteCertificate,
        Not Part6FullPaperClosingSupport,
        Part6FullPaperClosingOutputLayerCertificate,
@@ -650,7 +723,7 @@ def RemainingOpenSemanticTargetsFrontierStatementRosterCertificate : Prop :=
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
-    remainingOpenSemanticTargetsFrontierStatements.length = 26 /\
+    remainingOpenSemanticTargetsFrontierStatements.length = 27 /\
     RemainingOpenSemanticTargetsFrontierCertificate
 
 /-- The current frontier certificate for the two remaining open semantic
@@ -5045,6 +5118,7 @@ def RemainingOpenSemanticTargetsPayloadRouteMapCertificate : Prop :=
     Not Part6LatticeEmbeddingSemanticKernelTarget /\
     Part6NondegenerateFeasibleRepairRouteCertificate /\
     Not Part6NondegenerateFeasibleRepairRoute /\
+    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
     Part6FullPaperClosingOutputLayerCertificate /\
     Not Part6FullPaperClosingSupport /\
     Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
@@ -5082,6 +5156,7 @@ theorem remaining_open_semantic_targets_payload_route_map_certificate :
     part6_lattice_embedding_semantic_kernel_target_notYet,
     part6_lattice_embedding_frontier_payload_target_route_certificate,
     part6_lattice_embedding_frontier_payload_target_route_obstruction,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
     part6_lattice_embedding_frontier_payload_closure_route_certificate,
     part6_lattice_embedding_frontier_payload_closure_route_obstruction,
     part6_lattice_embedding_frontier_payload_frontier_progress_certificate,
@@ -5117,6 +5192,7 @@ def remainingOpenSemanticTargetsPayloadRouteMapStatements : List Prop :=
    Not Part6LatticeEmbeddingSemanticKernelTarget,
    Part6NondegenerateFeasibleRepairRouteCertificate,
    Not Part6NondegenerateFeasibleRepairRoute,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
    Part6FullPaperClosingOutputLayerCertificate,
    Not Part6FullPaperClosingSupport,
    Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
@@ -5156,6 +5232,7 @@ theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current :
        Not Part6LatticeEmbeddingSemanticKernelTarget,
        Part6NondegenerateFeasibleRepairRouteCertificate,
        Not Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        Part6FullPaperClosingOutputLayerCertificate,
        Not Part6FullPaperClosingSupport,
        Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
@@ -5179,9 +5256,9 @@ theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current :
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
 
 /-- Build gate: the payload route-map statement roster has exactly the
-twenty-eight current route-map components. -/
+twenty-nine current route-map components. -/
 theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_length_current :
-    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 28 := rfl
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 29 := rfl
 
 /-- Build-gated statement roster certificate for the payload route-map package
 of the two remaining paper-semantic targets. -/
@@ -5201,6 +5278,7 @@ def RemainingOpenSemanticTargetsPayloadRouteMapStatementRosterCertificate :
        Not Part6LatticeEmbeddingSemanticKernelTarget,
        Part6NondegenerateFeasibleRepairRouteCertificate,
        Not Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        Part6FullPaperClosingOutputLayerCertificate,
        Not Part6FullPaperClosingSupport,
        Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
@@ -5222,7 +5300,7 @@ def RemainingOpenSemanticTargetsPayloadRouteMapStatementRosterCertificate :
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
-    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 28 /\
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 29 /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate
 
 /-- The payload route-map certificate has a fixed statement roster. -/

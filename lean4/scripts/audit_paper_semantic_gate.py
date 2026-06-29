@@ -4338,7 +4338,7 @@ def main() -> int:
         "semantic_target_frontier_statement_roster_proof="
         "remainingOpenSemanticTargetsFrontierStatements_named_current"
     )
-    print("semantic_target_frontier_statement_roster_terms_checked=26")
+    print("semantic_target_frontier_statement_roster_terms_checked=27")
     print(
         "semantic_target_frontier_statement_roster_length_proof="
         "remainingOpenSemanticTargetsFrontierStatements_length_current"
@@ -4646,7 +4646,7 @@ def main() -> int:
         "semantic_target_payload_route_map_statement_roster_proof="
         "remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current"
     )
-    print("semantic_target_payload_route_map_statement_roster_terms_checked=28")
+    print("semantic_target_payload_route_map_statement_roster_terms_checked=29")
     print(
         "semantic_target_payload_route_map_statement_roster_length_proof="
         "remainingOpenSemanticTargetsPayloadRouteMapStatements_length_current"
@@ -9718,7 +9718,7 @@ def main() -> int:
             "semantic_target_frontier_statement_roster_proof="
             "remainingOpenSemanticTargetsFrontierStatements_named_current"
         ),
-        "semantic_target_frontier_statement_roster_terms_checked=26",
+        "semantic_target_frontier_statement_roster_terms_checked=27",
         (
             "semantic_target_frontier_statement_roster_length_proof="
             "remainingOpenSemanticTargetsFrontierStatements_length_current"
