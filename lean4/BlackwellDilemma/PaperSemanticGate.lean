@@ -23537,6 +23537,127 @@ theorem
       completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_length_current
       completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_certificate)
 
+/-- Final routed-exit alignment roster tying the final obstruction ledger,
+per-target routed exits, routed-exit ledger alignment, and top-level alignment
+bridge into one post-obstruction package. -/
+def
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate]
+
+/-- Build gate: the final routed-exit alignment roster names exactly the
+current final-ledger pair and the routed-exit alignment certificate pairs. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate] := rfl
+
+/-- Build gate: the final routed-exit alignment roster has fourteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements.length =
+      14 := rfl
+
+/-- Build-gated certificate tying the final obstruction ledger to every current
+routed-exit alignment package. -/
+def CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate
+
+/-- The final routed-exit alignment package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate,
+    completePaperSemanticKernelOnly_current_open_target_final_ledger_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the final routed-exit
+alignment package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements.length =
+      14 /\
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate
+
+/-- The final routed-exit alignment package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_length_current
+      completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
