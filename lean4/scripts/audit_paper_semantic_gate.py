@@ -3586,6 +3586,37 @@ def main() -> int:
         "open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statements="
+        "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_checked=4"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_certificate_proof="
+        "completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -9080,6 +9111,37 @@ def main() -> int:
         (
             "semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate_proof="
             "open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statements="
+            "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_checked=4"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_certificate_proof="
+            "completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
