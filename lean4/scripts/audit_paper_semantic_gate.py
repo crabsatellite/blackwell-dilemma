@@ -4642,6 +4642,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_all_current_top_level_closure_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_terms_checked=13"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -11194,6 +11225,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_ledger_source_all_current_top_level_closure_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_all_current_top_level_closure_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_terms_checked=13"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
