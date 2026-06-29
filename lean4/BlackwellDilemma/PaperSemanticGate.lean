@@ -118,7 +118,10 @@ theorem part6_lattice_embedding_semantic_kernel_target_iff_full_support :
 alpha/feasible-set obstruction. -/
 theorem part6_lattice_embedding_semantic_kernel_target_notYet :
     Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  intro htarget
   exact not_part6_nondegenerate_feasible_repair_route_current
+    ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mp
+      htarget)
 
 /-- Named paper-semantic target proposition for the random-supercritical
 `Z2_L` topo/phase claim.
@@ -146,7 +149,10 @@ theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_to
 full-support envelope obstruction. -/
 theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet :
     Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  intro htarget
   exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+    ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mp
+      htarget)
 
 /-- Machine-facing roster entry tying an open semantic ledger id to its exact
 Lean target proposition, paper-facing closure route, and current kernel
