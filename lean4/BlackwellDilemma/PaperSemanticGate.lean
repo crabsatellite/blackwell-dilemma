@@ -23509,7 +23509,8 @@ theorem
       topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_length_current
       topo_cluster_random_supercritical_z2_current_routed_exit_certificate)
 
-/-- Aggregate per-target routed-exit roster for the two current open targets. -/
+/-- Aggregate per-target routed-exit roster for the two current open targets,
+with current multipath route-obstruction witnesses named directly. -/
 def completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements :
     List Prop :=
   [Part6LatticeEmbeddingCurrentRoutedExitCertificate,
@@ -23517,10 +23518,13 @@ def completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements :
    TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
    TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the aggregate per-target routed-exit roster is fixed to the two
-open-target routed-exit certificate pairs plus the top-level routed exit. -/
+open-target routed-exit certificate pairs, the top-level routed exit, and
+current multipath route-obstruction certificates. -/
 theorem
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements_named_current :
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements =
@@ -23529,16 +23533,19 @@ theorem
        TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
        TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the aggregate per-target routed-exit roster has six statements. -/
+/-- Build gate: the aggregate per-target routed-exit roster has eight statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated certificate that both current open targets have individual
-routed exits tied to the top-level routed obstruction exit. -/
+routed exits tied to the top-level routed obstruction exit and current
+multipath route-obstruction witnesses. -/
 def CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate :
     Prop :=
   Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
@@ -23546,7 +23553,9 @@ def CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate :
   TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
   TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The aggregate per-target routed-exit certificate is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate :
@@ -23561,7 +23570,11 @@ theorem completePaperSemanticKernelOnly_current_per_target_routed_exit_certifica
           topo_cluster_random_supercritical_z2_current_routed_exit_statement_roster_certificate
           (And.intro
             completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
-            completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate))))
+            (And.intro
+              completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate
+              (And.intro
+                part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+                topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))))
 
 /-- Build-gated statement roster certificate for the aggregate per-target
 routed-exit package. -/
@@ -23574,9 +23587,11 @@ def
        TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
        TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate
 
 /-- The aggregate per-target routed-exit package has a fixed statement roster. -/
