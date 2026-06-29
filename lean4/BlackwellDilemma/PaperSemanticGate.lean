@@ -22974,7 +22974,8 @@ theorem
 
 /-- Final target-derived route-obstruction roster: each current target
 obstruction is checked as a source of the corresponding route/support
-obstruction. -/
+obstruction, with current multipath route-obstruction witnesses named
+directly. -/
 def completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements :
     List Prop :=
   [(Not Part6LatticeEmbeddingSemanticKernelTarget ->
@@ -22992,11 +22993,14 @@ def completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructio
    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
-   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the target-derived route-obstruction roster is fixed to the
 four target-to-route obstruction maps, the current target/route obstructions,
-and the route-equivalence exit pair. -/
+the route-equivalence exit pair, and current multipath route-obstruction
+certificates. -/
 theorem
     completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_named_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements =
@@ -23015,18 +23019,21 @@ theorem
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the target-derived route-obstruction roster has twelve
+/-- Build gate: the target-derived route-obstruction roster has fourteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_length_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements.length =
-      12 := rfl
+      14 := rfl
 
 /-- Build-gated certificate tying every current target obstruction to the
 corresponding route/support obstruction through the route-obstruction
-equivalence layer. -/
+equivalence layer, with current multipath route-obstruction witnesses named
+directly. -/
 def CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate :
     Prop :=
   (Not Part6LatticeEmbeddingSemanticKernelTarget ->
@@ -23044,7 +23051,9 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructio
   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The current target-derived route-obstruction certificate is machine
 checked. -/
@@ -23076,8 +23085,13 @@ theorem
   constructor
   · exact
       completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate
+  constructor
   · exact
       completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_statement_roster_certificate
+  constructor
+  · exact part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+  · exact
+      topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
 
 /-- Build-gated statement roster certificate for the current target-derived
 route-obstruction package. -/
@@ -23100,9 +23114,11 @@ def
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements.length =
-      12 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate
 
 /-- The target-derived route-obstruction package has a fixed statement roster. -/
