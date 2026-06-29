@@ -24790,6 +24790,230 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_consistency_certificate)
 
+/-- Terminal ledger-label consistency roster tying the final machine status to
+the full closed/open/all paper-label and `(id, paperLabel)` ledgers. -/
+def completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+   SemanticTargetPaperLabelCertificate,
+   SemanticTargetPaperLabelStatementRosterCertificate,
+   SemanticTargetPaperLabelIdCertificate,
+   SemanticTargetPaperLabelIdStatementRosterCertificate,
+   closedSemanticTargets.map (fun target => target.paperLabel) =
+      ["prop:two-regime-five-state",
+       "thm:cognitive-threshold Part 4",
+       "prop:threshold-five-state clause iii"],
+   openSemanticTargets.map (fun target => target.paperLabel) =
+      ["thm:cognitive-threshold Part 6",
+       "prop:topo-cluster and thm:phase"],
+   semanticTargets.map (fun target => target.paperLabel) =
+      ["prop:two-regime-five-state",
+       "thm:cognitive-threshold Part 4",
+       "prop:threshold-five-state clause iii",
+       "thm:cognitive-threshold Part 6",
+       "prop:topo-cluster and thm:phase"],
+   closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii")],
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")],
+   semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii"),
+       ("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")]]
+
+/-- Build gate: the terminal ledger-label consistency roster names exactly the
+terminal consistency package, paper-label certificates, and closed/open/all
+label/id-label ledgers. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       SemanticTargetPaperLabelCertificate,
+       SemanticTargetPaperLabelStatementRosterCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate,
+       closedSemanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+          ["thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"],
+       semanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii",
+           "thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"],
+       closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii")],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration",
+            "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii"),
+           ("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")]] := rfl
+
+/-- Build gate: the terminal ledger-label consistency roster has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
+      12 := rfl
+
+/-- Build-gated terminal ledger-label consistency certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate /\
+  SemanticTargetPaperLabelCertificate /\
+  SemanticTargetPaperLabelStatementRosterCertificate /\
+  SemanticTargetPaperLabelIdCertificate /\
+  SemanticTargetPaperLabelIdStatementRosterCertificate /\
+  closedSemanticTargets.map (fun target => target.paperLabel) =
+      ["prop:two-regime-five-state",
+       "thm:cognitive-threshold Part 4",
+       "prop:threshold-five-state clause iii"] /\
+  openSemanticTargets.map (fun target => target.paperLabel) =
+      ["thm:cognitive-threshold Part 6",
+       "prop:topo-cluster and thm:phase"] /\
+  semanticTargets.map (fun target => target.paperLabel) =
+      ["prop:two-regime-five-state",
+       "thm:cognitive-threshold Part 4",
+       "prop:threshold-five-state clause iii",
+       "thm:cognitive-threshold Part 6",
+       "prop:topo-cluster and thm:phase"] /\
+  closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii")] /\
+  openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")] /\
+  semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+       ("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"),
+       ("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii"),
+       ("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")]
+
+/-- The terminal ledger-label consistency package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate,
+    semantic_target_paper_label_certificate,
+    semantic_target_paper_label_statement_roster_certificate,
+    semantic_target_paper_label_id_certificate,
+    semantic_target_paper_label_id_statement_roster_certificate,
+    semantic_target_paper_label_certificate.1,
+    semantic_target_paper_label_certificate.2.1,
+    semantic_target_paper_label_certificate.2.2,
+    semantic_target_paper_label_id_certificate.1,
+    semantic_target_paper_label_id_certificate.2.1,
+    semantic_target_paper_label_id_certificate.2.2⟩
+
+/-- Build-gated statement roster certificate for terminal ledger-label
+consistency. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       SemanticTargetPaperLabelCertificate,
+       SemanticTargetPaperLabelStatementRosterCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate,
+       closedSemanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+          ["thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"],
+       semanticTargets.map (fun target => target.paperLabel) =
+          ["prop:two-regime-five-state",
+           "thm:cognitive-threshold Part 4",
+           "prop:threshold-five-state clause iii",
+           "thm:cognitive-threshold Part 6",
+           "prop:topo-cluster and thm:phase"],
+       closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration", "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii")],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("r10_two_regime_label_recalibration",
+            "prop:two-regime-five-state"),
+           ("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"),
+           ("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii"),
+           ("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")]] /\
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate
+
+/-- The terminal ledger-label consistency package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
