@@ -23653,7 +23653,9 @@ def
   [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
-   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the obstruction/routed-exit top-level bridge roster names
 exactly the current obstruction pair and routed-exit top-level alignment pair.
@@ -23664,14 +23666,16 @@ theorem
       [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
-       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the obstruction/routed-exit top-level bridge roster has four
+/-- Build gate: the obstruction/routed-exit top-level bridge roster has six
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements.length =
-      4 := rfl
+      6 := rfl
 
 /-- Build-gated certificate that the current obstruction package explicitly
 carries the routed-exit top-level alignment package. -/
@@ -23681,7 +23685,9 @@ def
   CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The obstruction/routed-exit top-level bridge package is machine checked. -/
 theorem
@@ -23693,7 +23699,11 @@ theorem
       completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
       (And.intro
         completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate
-        completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate))
+        (And.intro
+          completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate
+          (And.intro
+            part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
 
 /-- Build-gated statement roster certificate for the obstruction/routed-exit
 top-level bridge package. -/
@@ -23704,9 +23714,11 @@ def
       [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
-       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements.length =
-      4 /\
+      6 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate
 
 /-- The obstruction/routed-exit top-level bridge package has a fixed statement
