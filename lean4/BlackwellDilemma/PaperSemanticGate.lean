@@ -21946,39 +21946,52 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
         completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate))
 
 /-- Final statement roster for the current paper-semantic obstruction exit:
-the top-level obstruction certificate and its statement-roster certificate. -/
+the top-level obstruction certificate, its statement-roster certificate, and
+the current multipath route-obstruction witnesses. -/
 def completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
-   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the current obstruction final ledger names exactly the final
-obstruction certificate and its statement-roster certificate. -/
+obstruction certificate, its statement-roster certificate, and the current
+multipath route-obstruction witnesses. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_named_current :
     completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements =
       [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the current obstruction final ledger has exactly the two final
-exit certificates. -/
+/-- Build gate: the current obstruction final ledger has exactly four final
+exit statements. -/
 theorem completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
-      2 := rfl
+      4 := rfl
 
 /-- Build-gated final ledger certificate for the current paper-semantic
 obstruction exit.  This is intentionally outside the top-level obstruction
-certificate to avoid a recursive certificate dependency. -/
+certificate to avoid a recursive certificate dependency while still naming the
+current multipath route-obstruction witnesses directly. -/
 def CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The current obstruction final ledger certificate is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate :
     CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate := by
   exact And.intro
     completePaperSemanticKernelOnly_current_obstruction_certificate
-    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
+      (And.intro
+        part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+        topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))
 
 /-- Build-gated statement roster certificate for the current obstruction final
 ledger. -/
@@ -21986,9 +21999,11 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterC
     Prop :=
   completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements =
       [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
-      2 /\
+      4 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate
 
 /-- The current obstruction final ledger package has a fixed statement roster. -/
