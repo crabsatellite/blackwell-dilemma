@@ -472,7 +472,7 @@
             "semantic_target_kernel_current_routed_exit_id_paper_label_projection=openSemanticTargetKernelSurfaceIdPaperLabels_eq_currentRoutedExitIdPaperLabels",
             "semantic_target_current_routed_exit_ledger_alignment_statements=openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements",
             "semantic_target_current_routed_exit_ledger_alignment_statements_proof=openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current",
-            "semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=5",
+            "semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=7",
             "semantic_target_current_routed_exit_ledger_alignment_statement_terms_proof=openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_length_current",
             "semantic_target_current_routed_exit_ledger_alignment_certificate=OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate",
             "semantic_target_current_routed_exit_ledger_alignment_certificate_proof=open_semantic_target_current_routed_exit_ledger_alignment_certificate",

@@ -3564,7 +3564,7 @@ def main() -> int:
         "semantic_target_current_routed_exit_ledger_alignment_statements_proof="
         "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current"
     )
-    print("semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=5")
+    print("semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=7")
     print(
         "semantic_target_current_routed_exit_ledger_alignment_statement_terms_proof="
         "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_length_current"
@@ -9280,7 +9280,7 @@ def main() -> int:
             "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current"
         ),
         (
-            "semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=5"
+            "semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=7"
         ),
         (
             "semantic_target_current_routed_exit_ledger_alignment_statement_terms_proof="
