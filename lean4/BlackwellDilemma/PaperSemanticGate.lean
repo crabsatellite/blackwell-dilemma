@@ -25178,6 +25178,138 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_certificate)
 
+/-- Terminal umbrella roster tying all terminal consistency layers to the
+final status package and the exact current ledger cardinalities. -/
+def completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount = 3,
+   semanticTargets.length = 5,
+   (semanticTargetIds semanticTargets).length = 5,
+   openSemanticTargetIds.length = 2,
+   closedSemanticTargetIds.length = 3]
+
+/-- Build gate: the terminal umbrella roster names exactly the terminal
+consistency layers, final status layers, and exact current ledger sizes. -/
+theorem completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       semanticTargets.length = 5,
+       (semanticTargetIds semanticTargets).length = 5,
+       openSemanticTargetIds.length = 2,
+       closedSemanticTargetIds.length = 3] := rfl
+
+/-- Build gate: the terminal umbrella roster has eighteen statements. -/
+theorem completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
+      18 := rfl
+
+/-- Build-gated terminal umbrella certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  paperSemanticClosedCount = 3 /\
+  semanticTargets.length = 5 /\
+  (semanticTargetIds semanticTargets).length = 5 /\
+  openSemanticTargetIds.length = 2 /\
+  closedSemanticTargetIds.length = 3
+
+/-- The terminal umbrella package is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_terminal_umbrella_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_status_certificate,
+    completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate,
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    paperSemanticClosedCount_current,
+    rfl,
+    rfl,
+    rfl,
+    rfl⟩
+
+/-- Build-gated statement roster certificate for the terminal umbrella
+package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       semanticTargets.length = 5,
+       (semanticTargetIds semanticTargets).length = 5,
+       openSemanticTargetIds.length = 2,
+       closedSemanticTargetIds.length = 3] /\
+    completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
+      18 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate
+
+/-- The terminal umbrella package has a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_terminal_umbrella_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_umbrella_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
