@@ -20405,6 +20405,25 @@ theorem
       completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current
       completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate)
 
+/-- Build gate: the current field-output and detailed statement rosters are
+both synchronized with the open semantic-target ledger by id and count. -/
+theorem completePaperSemanticKernelOnly_current_field_output_roster_ledger_alignment :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds /\
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount /\
+      openSemanticTargetClosureInputFieldOutputSurfaceIds =
+        openSemanticTargetIds /\
+      openSemanticTargetClosureInputFieldOutputSurfaces.length =
+        paperSemanticOpenCount := by
+  exact And.intro
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current
+    (And.intro
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current
+      (And.intro
+        openSemanticTargetClosureInputFieldOutputSurfaceIds_current
+        openSemanticTargetClosureInputFieldOutputSurfaceCount_current))
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open/closed target count/id gates, and subordinate certificate propositions

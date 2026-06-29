@@ -6369,6 +6369,10 @@ def main() -> int:
         "semantic_target_closure_input_field_output_detailed_statement_roster_count_proof="
         "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current"
     )
+    print(
+        "complete_paper_semantic_kernel_only_current_field_output_roster_ledger_alignment_proof="
+        "completePaperSemanticKernelOnly_current_field_output_roster_ledger_alignment"
+    )
     print("semantic_target_closure_input_field_output_detailed_statement_roster_terms_checked=2")
     print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_length_proof="
@@ -7954,6 +7958,10 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_field_output_roster_ledger_alignment_proof="
+            "completePaperSemanticKernelOnly_current_field_output_roster_ledger_alignment"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_certificate="
