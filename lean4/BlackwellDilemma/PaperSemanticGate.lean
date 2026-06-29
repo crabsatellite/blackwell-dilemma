@@ -31172,6 +31172,212 @@ theorem
       completePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatements_length_current
       completePaperSemanticKernelOnly_current_final_judgement_paper_label_obstruction_map_projection_certificate)
 
+/-- Paper-label projection of the ID-indexed obstruction map's `(id,
+paperLabel)` ledger. -/
+def openSemanticTargetIdObstructionMapPaperLabels : List String :=
+  openSemanticTargetIdObstructionMapIdPaperLabels.map (fun entry => entry.2)
+
+/-- Build gate: the ID-indexed obstruction map's paper labels match the kernel
+surface. -/
+theorem openSemanticTargetIdObstructionMapPaperLabels_current :
+    openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetKernelSurfacePaperLabels := rfl
+
+/-- Build gate: the ID-indexed obstruction map's paper-label projection matches
+the paper-label obstruction map. -/
+theorem
+    openSemanticTargetIdObstructionMapPaperLabels_eq_paper_label_obstruction_map_current :
+    openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetPaperLabelObstructionMapLabels := rfl
+
+/-- Build gate: the id/paper-label obstruction map's pair projection matches
+the ID-indexed obstruction map's pair projection. -/
+theorem
+    openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels_eq_id_obstruction_map_current :
+    openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+      openSemanticTargetIdObstructionMapIdPaperLabels := rfl
+
+/-- Build gate: the id/paper-label obstruction map's paper-label projection
+matches the ID-indexed obstruction map's paper-label projection. -/
+theorem
+    openSemanticTargetIdPaperLabelObstructionMapPaperLabels_eq_id_obstruction_map_current :
+    openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+      openSemanticTargetIdObstructionMapPaperLabels := rfl
+
+/-- Index-projection statement roster for the three obstruction-map views. -/
+def openSemanticTargetObstructionMapIndexProjectionStatements : List Prop :=
+  [openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargetKernelSurfaceIdPaperLabels,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+      openSemanticTargetIdObstructionMapIdPaperLabels,
+   openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetKernelSurfacePaperLabels,
+   openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetPaperLabelObstructionMapLabels,
+   openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+      openSemanticTargetIdObstructionMapPaperLabels,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate]
+
+/-- Build gate: the obstruction-map index-projection roster is fixed. -/
+theorem openSemanticTargetObstructionMapIndexProjectionStatements_named_current :
+    openSemanticTargetObstructionMapIndexProjectionStatements =
+      [openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+          openSemanticTargetIdObstructionMapIdPaperLabels,
+       openSemanticTargetIdObstructionMapPaperLabels =
+          openSemanticTargetKernelSurfacePaperLabels,
+       openSemanticTargetIdObstructionMapPaperLabels =
+          openSemanticTargetPaperLabelObstructionMapLabels,
+       openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+          openSemanticTargetIdObstructionMapPaperLabels,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate] := rfl
+
+/-- Build gate: the obstruction-map index-projection roster has eight
+statements. -/
+theorem openSemanticTargetObstructionMapIndexProjectionStatements_length_current :
+    openSemanticTargetObstructionMapIndexProjectionStatements.length =
+      8 := rfl
+
+/-- Build-gated index-projection certificate for all obstruction-map views. -/
+def OpenSemanticTargetObstructionMapIndexProjectionCertificate : Prop :=
+  openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargetKernelSurfaceIdPaperLabels /\
+  openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+      openSemanticTargetIdObstructionMapIdPaperLabels /\
+  openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetKernelSurfacePaperLabels /\
+  openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetPaperLabelObstructionMapLabels /\
+  openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+      openSemanticTargetIdObstructionMapPaperLabels /\
+  OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate
+
+/-- The ID-only, paper-label-only, and id/paper-label obstruction-map index
+views are projection-equivalent. -/
+theorem open_semantic_target_obstruction_map_index_projection_certificate :
+    OpenSemanticTargetObstructionMapIndexProjectionCertificate := by
+  exact ⟨
+    openSemanticTargetIdObstructionMapIdPaperLabels_current,
+    openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current,
+    openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels_eq_id_obstruction_map_current,
+    openSemanticTargetIdObstructionMapPaperLabels_current,
+    openSemanticTargetIdObstructionMapPaperLabels_eq_paper_label_obstruction_map_current,
+    openSemanticTargetIdPaperLabelObstructionMapPaperLabels_eq_id_obstruction_map_current,
+    open_semantic_target_id_obstruction_map_paper_label_alignment_certificate,
+    open_semantic_target_paper_label_obstruction_map_projection_certificate⟩
+
+/-- Build-gated statement-roster certificate for the obstruction-map index
+projection bridge. -/
+def OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetObstructionMapIndexProjectionStatements =
+      [openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+          openSemanticTargetIdObstructionMapIdPaperLabels,
+       openSemanticTargetIdObstructionMapPaperLabels =
+          openSemanticTargetKernelSurfacePaperLabels,
+       openSemanticTargetIdObstructionMapPaperLabels =
+          openSemanticTargetPaperLabelObstructionMapLabels,
+       openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+          openSemanticTargetIdObstructionMapPaperLabels,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate] /\
+    openSemanticTargetObstructionMapIndexProjectionStatements.length =
+      8 /\
+    OpenSemanticTargetObstructionMapIndexProjectionCertificate
+
+/-- The obstruction-map index projection bridge has a fixed statement roster. -/
+theorem
+    open_semantic_target_obstruction_map_index_projection_statement_roster_certificate :
+    OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetObstructionMapIndexProjectionStatements_named_current
+    (And.intro
+      openSemanticTargetObstructionMapIndexProjectionStatements_length_current
+      open_semantic_target_obstruction_map_index_projection_certificate)
+
+/-- Final judgement plus the all-view obstruction-map index projection bridge. -/
+def completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+   OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate]
+
+/-- Build gate: the final-judgement obstruction-map index projection roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate] := rfl
+
+/-- Build gate: the final-judgement obstruction-map index projection roster has
+four statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements.length =
+      4 := rfl
+
+/-- Build-gated terminal certificate tying the final judgement to the
+all-view obstruction-map index projection bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  OpenSemanticTargetObstructionMapIndexProjectionCertificate /\
+  OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate
+
+/-- The final paper-state judgement carries the all-view obstruction-map index
+projection bridge as a terminal kernel gate. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_index_projection_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_final_judgement_paper_label_obstruction_map_projection_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_paper_label_obstruction_map_projection_statement_roster_certificate,
+    open_semantic_target_obstruction_map_index_projection_certificate,
+    open_semantic_target_obstruction_map_index_projection_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the final-judgement all-view
+obstruction-map index projection bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionCertificate
+
+/-- The final-judgement all-view obstruction-map index projection bridge has a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_index_projection_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapIndexProjectionStatements_length_current
+      completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_index_projection_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
