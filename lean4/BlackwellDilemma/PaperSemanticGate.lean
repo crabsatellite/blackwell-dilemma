@@ -10923,8 +10923,14 @@ theorem topo_cluster_random_supercritical_z2_exact_output_projection_certificate
     topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle,
     topo_cluster_random_supercritical_z2_exact_closure_input_notYet,
     topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet,
-    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
-    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    (fun hroute =>
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+        ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
+          hroute)),
+    (fun hroute =>
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+        ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mpr
+          hroute)),
     randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
     random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate,
