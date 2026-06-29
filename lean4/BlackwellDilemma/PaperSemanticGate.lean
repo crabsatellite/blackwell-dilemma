@@ -21855,6 +21855,74 @@ theorem
       completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements_length_current
       completePaperSemanticKernelOnly_current_open_target_exit_certificate)
 
+/-- Final target-obstruction roster tying each current open target's direct
+`Not target` proof to the current open-target exit package. -/
+def completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements :
+    List Prop :=
+  [Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate]
+
+/-- Build gate: the current open-target obstruction exit roster names exactly
+the two direct target obstructions and the open-target exit certificate pair. -/
+theorem completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate] := rfl
+
+/-- Build gate: the current open-target obstruction exit roster has exactly the
+two direct target obstructions plus the open-target exit certificate pair. -/
+theorem completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements.length =
+      4 := rfl
+
+/-- Build-gated certificate for the current open targets' direct obstruction
+evidence and the final open-target exit package. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate :
+    Prop :=
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate
+
+/-- The current open-target obstruction exit certificate is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate := by
+  exact And.intro
+    part6_lattice_embedding_semantic_kernel_target_notYet
+    (And.intro
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+      (And.intro
+        completePaperSemanticKernelOnly_current_open_target_exit_certificate
+        completePaperSemanticKernelOnly_current_open_target_exit_statement_roster_certificate))
+
+/-- Build-gated statement roster certificate for the current open-target
+obstruction exit package. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate
+
+/-- The current open-target obstruction exit package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_obstruction_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_length_current
+      completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

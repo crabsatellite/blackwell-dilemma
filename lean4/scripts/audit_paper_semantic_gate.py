@@ -3179,6 +3179,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_open_target_exit_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statements="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_terms_checked=4"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_certificate_proof="
+        "completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_open_target_obstruction_exit_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_iff_false_proof="
         "completePaperSemanticKernelOnly_iff_false_current"
     )
@@ -8232,6 +8263,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_open_target_exit_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_open_target_exit_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statements="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_terms_checked=4"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_certificate_proof="
+            "completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_obstruction_exit_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_open_target_obstruction_exit_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="
