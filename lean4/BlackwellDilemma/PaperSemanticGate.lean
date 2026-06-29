@@ -5219,7 +5219,10 @@ theorem part6_lattice_embedding_full_support_of_closure_input :
 /-- The current carrier still lacks the Part 6 closure input. -/
 theorem part6_lattice_embedding_closure_input_notYet :
     Not Part6LatticeEmbeddingClosureInput := by
-  exact not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current
+  intro hinput
+  exact part6_lattice_embedding_semantic_kernel_target_notYet
+    (part6_lattice_embedding_semantic_kernel_target_of_closure_input
+      hinput)
 
 /-- Build-gated Part 6 closure-input certificate: the sufficient input closes
 the target, the repair route, and full support, while the current carrier is
@@ -5361,11 +5364,9 @@ theorem topo_cluster_random_supercritical_z2_support_surface_closing_route_of_cl
 theorem topo_cluster_random_supercritical_z2_closure_input_notYet :
     Not TopoClusterRandomSupercriticalZ2ClosureInput := by
   intro hinput
-  cases hinput with
-  | intro bridge hroute =>
-      exact
-        not_randomSupercriticalZ2TopoClusterRepairedBridge_giant_pointwise_loss_route
-          bridge hroute
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+      hinput)
 
 /-- Build-gated topo closure-input certificate: the pointwise-on-giant input
 would close the semantic target, full route, boxed route, and support-surface
@@ -6013,7 +6014,10 @@ theorem part6_lattice_embedding_exact_closure_input_of_closure_input :
 /-- The current carrier still lacks the exact Part 6 closure input. -/
 theorem part6_lattice_embedding_exact_closure_input_notYet :
     Not Part6LatticeEmbeddingExactClosureInput := by
-  exact not_part6_full_paper_closing_support_current
+  intro hinput
+  exact part6_lattice_embedding_semantic_kernel_target_notYet
+    (part6_lattice_embedding_semantic_kernel_target_of_exact_closure_input
+      hinput)
 
 /-- Exact closure input for the open random-supercritical topo target.  This is
 the repaired support-surface closing route, which is equivalent to full
@@ -6069,7 +6073,7 @@ input. -/
 theorem topo_cluster_random_supercritical_z2_exact_closure_input_notYet :
     Not TopoClusterRandomSupercriticalZ2ExactClosureInput := by
   intro hinput
-  exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
     (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_exact_closure_input
       hinput)
 
@@ -7056,8 +7060,8 @@ output bundle. -/
 theorem topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet :
     Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle := by
   intro hbundle
-  exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
-    (topo_cluster_random_supercritical_z2_full_route_of_same_bridge_full_output_bundle
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_same_bridge_full_output_bundle
       hbundle)
 
 /-- Output-layer certificate for the sufficient topo closure input. -/
