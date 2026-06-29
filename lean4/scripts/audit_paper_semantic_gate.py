@@ -4890,6 +4890,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statements="
+        "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_terms_checked=12"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_certificate_proof="
+        "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -11688,6 +11719,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statements="
+            "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_terms_checked=12"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_certificate_proof="
+            "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="

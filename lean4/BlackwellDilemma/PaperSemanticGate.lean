@@ -30130,6 +30130,120 @@ theorem
       completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatements_length_current
       completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_certificate)
 
+/-- Final judgement plus the full ID-indexed obstruction-map alignment chain.
+
+This terminal roster carries the base map, ledger alignment, paper-label
+alignment, obstruction projection, and the previous final-judgement projection
+gate in one kernel-checked package. -/
+def completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapCertificate,
+   OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+   OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate]
+
+/-- Build gate: the final-judgement obstruction-map full-alignment roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapCertificate,
+       OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate] :=
+  rfl
+
+/-- Build gate: the final-judgement obstruction-map full-alignment roster has
+twelve statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements.length =
+      12 := rfl
+
+/-- Build-gated terminal certificate tying the final judgement to the full
+ID-indexed obstruction-map alignment chain. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapCertificate /\
+  OpenSemanticTargetIdObstructionMapStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate /\
+  OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate /\
+  OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate /\
+  OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate
+
+/-- The final paper-state judgement carries the full ID-indexed obstruction-map
+alignment chain. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_certificate,
+    open_semantic_target_id_obstruction_map_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_ledger_alignment_certificate,
+    open_semantic_target_id_obstruction_map_ledger_alignment_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_paper_label_alignment_certificate,
+    open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_obstruction_projection_certificate,
+    open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the final-judgement
+obstruction-map full alignment. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapCertificate,
+       OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate
+
+/-- The final-judgement obstruction-map full-alignment package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_length_current
+      completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
