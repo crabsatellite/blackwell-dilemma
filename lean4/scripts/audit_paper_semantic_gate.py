@@ -4022,6 +4022,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_terms_checked=22"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -9954,6 +9985,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_per_target_routed_exit_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_terms_checked=22"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
