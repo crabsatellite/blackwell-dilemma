@@ -28265,6 +28265,166 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate)
 
+/-- Terminal paper-state/source-final gate-status obstruction closure roster tying
+the final alignment/status package to the top-level current obstruction package. -/
+def completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureStatementRosterCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount = 3,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   closedSemanticTargetIds =
+     ["r10_two_regime_label_recalibration",
+      "theorem_4_1_part4_lattice_p_monotonicity",
+      "r10_threshold_five_state_high_kappa_routing"]]
+
+/-- Build gate: the terminal paper-state/source-final gate-status obstruction
+closure roster names the final alignment/status and current-obstruction packages. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+         ["r10_two_regime_label_recalibration",
+          "theorem_4_1_part4_lattice_p_monotonicity",
+          "r10_threshold_five_state_high_kappa_routing"]] := rfl
+
+/-- Build gate: the terminal paper-state/source-final gate-status obstruction
+closure roster has eighteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements.length =
+      18 := rfl
+
+/-- Build-gated terminal paper-state/source-final gate-status obstruction
+closure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureStatementRosterCertificate /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  paperSemanticClosedCount = 3 /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"]
+
+/-- The terminal paper-state/source-final gate-status obstruction closure
+package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_obstruction_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_all_current_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_all_current_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    paperSemanticClosedCount_current,
+    openSemanticTargetIds_current,
+    closedSemanticTargetIds_current⟩
+
+/-- Build-gated statement roster certificate for terminal paper-state/source-final
+gate-status obstruction closure. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusClosureStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+         ["r10_two_regime_label_recalibration",
+          "theorem_4_1_part4_lattice_p_monotonicity",
+          "r10_threshold_five_state_high_kappa_routing"]] /\
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements.length =
+      18 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureCertificate
+
+/-- The terminal paper-state/source-final gate-status obstruction closure package
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_obstruction_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusObstructionClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_obstruction_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
