@@ -26469,6 +26469,210 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_certificate)
 
+/-- Terminal ledger/source closure roster tying the current open-target
+obstruction source package directly to the paper-facing open-target ledger. -/
+def completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+   openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetKernelSurfacePaperLabels =
+     openSemanticTargets.map (fun target => target.paperLabel),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   openSemanticTargets.map (fun target => target.paperLabel) =
+     ["thm:cognitive-threshold Part 6",
+      "prop:topo-cluster and thm:phase"],
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+     [("theorem_4_1_part6_lattice_embedding",
+       "thm:cognitive-threshold Part 6"),
+      ("topo_cluster_random_supercritical_z2",
+       "prop:topo-cluster and thm:phase")],
+   openSemanticTargets.map (fun target => target.status) =
+     [SemanticStatus.open, SemanticStatus.open],
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds.length = paperSemanticOpenCount,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False]
+
+/-- Build gate: the terminal ledger/source closure roster names the terminal
+source closure, the terminal ledger packages, routed-exit ledger alignment, the
+open-target id/label/status ledger, and the current top-level obstruction. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfacePaperLabels =
+         openSemanticTargets.map (fun target => target.paperLabel),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+         ["thm:cognitive-threshold Part 6",
+          "prop:topo-cluster and thm:phase"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("theorem_4_1_part6_lattice_embedding",
+           "thm:cognitive-threshold Part 6"),
+          ("topo_cluster_random_supercritical_z2",
+           "prop:topo-cluster and thm:phase")],
+       openSemanticTargets.map (fun target => target.status) =
+         [SemanticStatus.open, SemanticStatus.open],
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds.length = paperSemanticOpenCount,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False] := rfl
+
+/-- Build gate: the terminal ledger/source closure roster has twenty-two
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements.length =
+      22 := rfl
+
+/-- Build-gated terminal certificate tying current open-target obstruction
+sources to the exact paper-facing open-target ledger. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate /\
+  openSemanticTargetKernelSurfaceIds = openSemanticTargetIds /\
+  openSemanticTargetKernelSurfacePaperLabels =
+      openSemanticTargets.map (fun target => target.paperLabel) /\
+  openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  openSemanticTargets.map (fun target => target.paperLabel) =
+      ["thm:cognitive-threshold Part 6",
+       "prop:topo-cluster and thm:phase"] /\
+  openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")] /\
+  openSemanticTargets.map (fun target => target.status) =
+      [SemanticStatus.open, SemanticStatus.open] /\
+  paperSemanticOpenCount = 2 /\
+  openSemanticTargetIds.length = paperSemanticOpenCount /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False)
+
+/-- The terminal ledger/source closure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_ledger_source_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_statement_roster_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate,
+    openSemanticTargetKernelSurfaceIds_current,
+    openSemanticTargetKernelSurfacePaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceCount_current,
+    openSemanticTargetIds_current,
+    semantic_target_paper_label_certificate.2.1,
+    semantic_target_paper_label_id_certificate.2.1,
+    semantic_target_status_partition_certificate.2.2,
+    paperSemanticOpenCount_current,
+    semantic_target_count_certificate.1,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current⟩
+
+/-- Build-gated statement roster certificate for terminal ledger/source
+closure. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfacePaperLabels =
+         openSemanticTargets.map (fun target => target.paperLabel),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+         ["thm:cognitive-threshold Part 6",
+          "prop:topo-cluster and thm:phase"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("theorem_4_1_part6_lattice_embedding",
+           "thm:cognitive-threshold Part 6"),
+          ("topo_cluster_random_supercritical_z2",
+           "prop:topo-cluster and thm:phase")],
+       openSemanticTargets.map (fun target => target.status) =
+         [SemanticStatus.open, SemanticStatus.open],
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds.length = paperSemanticOpenCount,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False] /\
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements.length =
+      22 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate
+
+/-- The terminal ledger/source closure package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_ledger_source_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_ledger_source_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
