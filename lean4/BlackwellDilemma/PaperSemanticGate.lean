@@ -13390,6 +13390,16 @@ theorem part6_lattice_embedding_field_payload_notYet :
   exact part6_lattice_embedding_closure_input_notYet
     (part6_lattice_embedding_closure_input_of_field_payload hpayload)
 
+/-- The current Part 6 field-payload obstruction is re-derived from the current
+semantic-target obstruction and the field-payload-to-closure-input projection. -/
+theorem
+    part6_lattice_embedding_field_payload_not_from_target_current_obstruction :
+    Not Part6LatticeEmbeddingClosureInputFieldPayload := by
+  intro hpayload
+  exact part6_lattice_embedding_semantic_kernel_target_notYet
+    (part6_lattice_embedding_semantic_kernel_target_of_closure_input
+      (part6_lattice_embedding_closure_input_of_field_payload hpayload))
+
 /-- A sufficient Part 6 closure input also projects to the explicit
 bridge-route surface. -/
 theorem part6_lattice_embedding_bridge_route_of_closure_input :
@@ -13619,6 +13629,17 @@ theorem topo_cluster_random_supercritical_z2_field_payload_notYet :
   exact topo_cluster_random_supercritical_z2_closure_input_notYet
     (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
       hpayload)
+
+/-- The current topo field-payload obstruction is re-derived from the current
+semantic-target obstruction and the field-payload-to-closure-input projection. -/
+theorem
+    topo_cluster_random_supercritical_z2_field_payload_not_from_target_current_obstruction :
+    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload := by
+  intro hpayload
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+      (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
+        hpayload))
 
 /-- Field-level certificate for the sufficient topo closure input. -/
 def TopoClusterRandomSupercriticalZ2ClosureInputFieldCertificate : Prop :=
@@ -14256,6 +14277,121 @@ theorem
     remainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatements_length_current,
     remaining_open_semantic_targets_field_payload_current_obstruction_source_certificate⟩
 
+/-- Build-gated certificate showing that the field-payload obstructions can be
+re-derived from the current semantic-target obstructions.  This keeps the
+payload obstruction layer tied to the target-level non-closure proof rather
+than only to the stronger sufficient-input obstruction. -/
+def
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate :
+    Prop :=
+  Not Part6LatticeEmbeddingClosureInputFieldPayload /\
+    Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload /\
+    (Part6LatticeEmbeddingClosureInputFieldPayload ->
+      Part6LatticeEmbeddingSemanticKernelTarget) /\
+    (TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+    Not Part6LatticeEmbeddingSemanticKernelTarget /\
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+    RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate /\
+    RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate
+
+/-- Both field-payload current obstructions are derivable from the current
+target-level obstructions through the field-to-target projections. -/
+theorem
+    remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_certificate :
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate := by
+  constructor
+  · exact part6_lattice_embedding_field_payload_not_from_target_current_obstruction
+  constructor
+  · exact
+      topo_cluster_random_supercritical_z2_field_payload_not_from_target_current_obstruction
+  constructor
+  · intro hpayload
+    exact part6_lattice_embedding_semantic_kernel_target_of_closure_input
+      (part6_lattice_embedding_closure_input_of_field_payload hpayload)
+  constructor
+  · intro hpayload
+    exact topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+      (topo_cluster_random_supercritical_z2_closure_input_of_field_payload
+        hpayload)
+  constructor
+  · exact part6_lattice_embedding_semantic_kernel_target_notYet
+  constructor
+  · exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+  constructor
+  · exact
+      remaining_open_semantic_targets_field_payload_current_obstruction_source_certificate
+  exact remaining_open_semantic_targets_bilateral_current_obstruction_source_certificate
+
+/-- Statement roster for target-derived field-payload current obstruction
+sources. -/
+def remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements :
+    List Prop :=
+  [Not Part6LatticeEmbeddingClosureInputFieldPayload,
+   Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+   Part6LatticeEmbeddingClosureInputFieldPayload ->
+    Part6LatticeEmbeddingSemanticKernelTarget,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+    TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
+   RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate]
+
+/-- Build gate: the target-derived field-payload source roster names exactly the
+current target obstructions, projection rules, and source certificates. -/
+theorem
+    remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements_named_current :
+    remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements =
+      [Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate] := rfl
+
+/-- Build gate: the target-derived field-payload source roster has exactly the
+eight current source statements. -/
+theorem
+    remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements_length_current :
+    remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements.length =
+      8 := rfl
+
+/-- Build-gated statement roster for target-derived field-payload current
+obstruction sources. -/
+def
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate :
+    Prop :=
+  remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements =
+      [Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload,
+       Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate] /\
+    remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements.length =
+      8 /\
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate
+
+/-- The target-derived field-payload current-obstruction source package has a
+fixed statement roster. -/
+theorem
+    remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_statement_roster_certificate :
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate := by
+  exact And.intro
+    remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements_named_current
+    (And.intro
+      remainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatements_length_current
+      remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_certificate)
+
 /-- Build-gated alignment certificate tying the field-payload obstruction
 source layer to the current open semantic target ids and paper labels. -/
 def RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate :
@@ -14266,7 +14402,9 @@ def RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCer
     openSemanticTargetKernelSurfaceIdPaperLabels =
       openSemanticTargetClosureInputFieldSurfaceIdPaperLabels /\
     RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate /\
-    RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate
+    RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate /\
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate
 
 /-- The field-payload current-obstruction sources are aligned with exactly the
 two remaining open semantic targets and their paper labels. -/
@@ -14283,8 +14421,14 @@ theorem
   constructor
   · exact
       remaining_open_semantic_targets_field_payload_current_obstruction_source_certificate
-  exact
+  constructor
+  · exact
     remaining_open_semantic_targets_field_payload_current_obstruction_source_statement_roster_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_certificate
+  exact
+    remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_statement_roster_certificate
 
 /-- Statement roster for the field-payload current-obstruction source alignment
 package. -/
@@ -14296,7 +14440,9 @@ def remainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentSta
    openSemanticTargetKernelSurfaceIdPaperLabels =
       openSemanticTargetClosureInputFieldSurfaceIdPaperLabels,
    RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
-   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate]
+   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate]
 
 /-- Build gate: the field-payload current-obstruction source alignment roster
 names exactly the current alignment components. -/
@@ -14309,14 +14455,16 @@ theorem
        openSemanticTargetKernelSurfaceIdPaperLabels =
           openSemanticTargetClosureInputFieldSurfaceIdPaperLabels,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
-       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate] := rfl
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate] := rfl
 
 /-- Build gate: the field-payload current-obstruction source alignment roster has
-exactly the five current alignment components. -/
+exactly the seven current alignment components. -/
 theorem
     remainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentStatements_length_current :
     remainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentStatements.length =
-      5 := rfl
+      7 := rfl
 
 /-- Build-gated statement roster certificate for the field-payload
 current-obstruction source alignment package. -/
@@ -14330,9 +14478,11 @@ def
        openSemanticTargetKernelSurfaceIdPaperLabels =
           openSemanticTargetClosureInputFieldSurfaceIdPaperLabels,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
-       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate] /\
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate] /\
     remainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentStatements.length =
-      5 /\
+      7 /\
     RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate
 
 /-- The field-payload current-obstruction source alignment package has a fixed
