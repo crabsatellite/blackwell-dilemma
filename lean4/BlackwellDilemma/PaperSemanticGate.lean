@@ -25847,6 +25847,135 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_certificate)
 
+/-- Terminal final-obstruction status roster tying the final false status to the
+latest terminal route/target obstruction-equivalence package. -/
+def completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+   (paperSemanticOpenCount = 2 -> Not CompletePaperSemanticKernelOnly),
+   (paperSemanticOpenCount = 2 -> (CompletePaperSemanticKernelOnly <-> False)),
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget]
+
+/-- Build gate: the terminal final-obstruction status roster names the terminal
+umbrella, final-status package, route/target obstruction-equivalence package,
+and exact current open-count false/status facts. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+       (paperSemanticOpenCount = 2 -> Not CompletePaperSemanticKernelOnly),
+       (paperSemanticOpenCount = 2 -> (CompletePaperSemanticKernelOnly <-> False)),
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the terminal final-obstruction status roster has fourteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements.length =
+      14 := rfl
+
+/-- Build-gated terminal certificate linking final false status to the latest
+route/target obstruction-equivalence layer. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate /\
+  (paperSemanticOpenCount = 2 -> Not CompletePaperSemanticKernelOnly) /\
+  (paperSemanticOpenCount = 2 -> (CompletePaperSemanticKernelOnly <-> False)) /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+
+/-- The terminal final-obstruction status package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_umbrella_certificate,
+    completePaperSemanticKernelOnly_current_terminal_umbrella_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_status_certificate,
+    completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_certificate,
+    completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate,
+    completePaperSemanticKernelOnly_not_of_open_count_two,
+    completePaperSemanticKernelOnly_iff_false_of_open_count_two,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    openSemanticTargetIds_current,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet⟩
+
+/-- Build-gated statement roster certificate for terminal final-obstruction
+status. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+       (paperSemanticOpenCount = 2 -> Not CompletePaperSemanticKernelOnly),
+       (paperSemanticOpenCount = 2 -> (CompletePaperSemanticKernelOnly <-> False)),
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements.length =
+      14 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate
+
+/-- The terminal final-obstruction status package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
