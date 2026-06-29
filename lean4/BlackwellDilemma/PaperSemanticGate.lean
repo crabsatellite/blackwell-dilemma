@@ -23658,6 +23658,75 @@ theorem
       completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_length_current
       completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate)
 
+/-- Final routed-exit exit roster tying the current non-complete gate to the
+machine-checked routed-exit final-alignment package. -/
+def completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements :
+    List Prop :=
+  [Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate]
+
+/-- Build gate: the routed-exit final exit roster names exactly the
+non-complete gate and the routed-exit final-alignment certificate pair. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] := rfl
+
+/-- Build gate: the routed-exit final exit roster has four statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements.length =
+      4 := rfl
+
+/-- Build-gated certificate that the current non-complete paper-semantic gate
+is routed through the final routed-exit alignment package. -/
+def CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate :
+    Prop :=
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate
+
+/-- The routed-exit final exit package is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_notYet
+    (And.intro
+      completePaperSemanticKernelOnly_iff_false_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate
+        completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate))
+
+/-- Build-gated statement roster certificate for the routed-exit final exit
+package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate
+
+/-- The routed-exit final exit package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_length_current
+      completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

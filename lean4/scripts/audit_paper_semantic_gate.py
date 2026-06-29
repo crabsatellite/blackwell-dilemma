@@ -3679,6 +3679,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statements="
+        "completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_terms_checked=4"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_certificate_proof="
+        "completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -9266,6 +9297,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_routed_exit_final_alignment_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statements="
+            "completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_terms_checked=4"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_certificate_proof="
+            "completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_routed_exit_final_exit_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
