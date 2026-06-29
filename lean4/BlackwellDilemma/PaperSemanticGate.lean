@@ -462,9 +462,15 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     part6_lattice_embedding_semantic_kernel_target_iff_full_support,
     part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support,
     part6_lattice_embedding_semantic_kernel_target_notYet,
-    not_part6_nondegenerate_feasible_repair_route_current,
+    (fun hroute =>
+      part6_lattice_embedding_semantic_kernel_target_notYet
+        ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mpr
+          hroute)),
     part6_nondegenerate_feasible_repair_route_certificate,
-    not_part6_full_paper_closing_support_current,
+    (fun hsupport =>
+      part6_lattice_embedding_semantic_kernel_target_notYet
+        ((part6_lattice_embedding_semantic_kernel_target_iff_full_support).mpr
+          hsupport)),
     part6_full_paper_closing_output_layer_certificate,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate,
@@ -473,9 +479,15 @@ theorem remaining_open_semantic_targets_frontier_certificate :
     topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route,
     randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
-    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    (fun hroute =>
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+        ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
+          hroute)),
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
-    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    (fun hroute =>
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+        ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mpr
+          hroute)),
     random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
     random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate,
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
