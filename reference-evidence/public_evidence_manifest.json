@@ -1172,7 +1172,10 @@
             "semantic_target_readme_gate_counts_match=1",
             "semantic_target_readme_axiom_audit_prints_required=1251",
             "semantic_target_readme_axiom_audit_prints_required_matches=1",
-            "public_manifest_paper_semantic_stdout_contains_missing=0"
+            "public_manifest_paper_semantic_stdout_contains_missing=0",
+            "complete_paper_semantic_kernel_only_current_alignment_roster_pair_terms_checked=36",
+            "complete_paper_semantic_kernel_only_current_alignment_roster_pair_missing=0",
+            "complete_paper_semantic_kernel_only_current_alignment_roster_pair_missing_terms="
           ]
         },
         {

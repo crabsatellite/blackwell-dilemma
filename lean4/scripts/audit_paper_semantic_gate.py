@@ -1501,6 +1501,27 @@ def public_manifest_missing_stdout_lines(check_id: str, lines: list[str]) -> lis
     return [line for line in lines if line not in manifest_lines]
 
 
+def alignment_roster_pair_audit(lines: list[str]) -> tuple[int, list[str]]:
+    checked = 0
+    missing: list[str] = []
+    for line in lines:
+        if "_component_proofs=" not in line:
+            continue
+        key, values = line.split("=", 1)
+        terms = values.split(",") if values else []
+        term_set = set(terms)
+        for term in terms:
+            if not term.endswith("_alignment_certificate"):
+                continue
+            if term.endswith("_statement_roster_certificate"):
+                continue
+            checked += 1
+            expected = term[: -len("_certificate")] + "_statement_roster_certificate"
+            if expected not in term_set:
+                missing.append(f"{key}:{term}->{expected}")
+    return checked, missing
+
+
 def semantic_target_ids_by_status(text: str) -> tuple[list[str], list[str]]:
     targets = re.findall(
         r'id\s*:=\s*"([^"]+)"(?:(?!id\s*:=).)*?status\s*:=\s*SemanticStatus\.(open|closed)',
@@ -8384,6 +8405,27 @@ def main() -> int:
         ),
         "public_manifest_paper_semantic_stdout_contains_missing=0",
     ]
+    (
+        alignment_roster_pair_terms_checked,
+        alignment_roster_pair_missing_terms,
+    ) = alignment_roster_pair_audit(public_manifest_required_lines)
+    alignment_roster_pair_lines = [
+        (
+            "complete_paper_semantic_kernel_only_current_alignment_roster_pair_terms_checked="
+            f"{alignment_roster_pair_terms_checked}"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_alignment_roster_pair_missing="
+            f"{len(alignment_roster_pair_missing_terms)}"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_alignment_roster_pair_missing_terms="
+            + ";".join(alignment_roster_pair_missing_terms)
+        ),
+    ]
+    for line in alignment_roster_pair_lines:
+        print(line)
+    public_manifest_complete_stdout_lines.extend(alignment_roster_pair_lines)
     public_manifest_required_lines.extend(public_manifest_complete_stdout_lines)
     manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(
         PUBLIC_EVIDENCE_CHECK_ID,
@@ -8512,6 +8554,11 @@ def main() -> int:
         failures.append(
             "public evidence manifest missing paper semantic stdout lines: "
             + ",".join(manifest_missing_stdout_lines)
+        )
+    if alignment_roster_pair_missing_terms:
+        failures.append(
+            "alignment certificates missing statement roster pairs: "
+            + ",".join(alignment_roster_pair_missing_terms)
         )
     if kernel_surface_ids != open_ids:
         failures.append(
