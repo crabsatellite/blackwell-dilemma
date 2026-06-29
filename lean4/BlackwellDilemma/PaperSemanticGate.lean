@@ -23175,6 +23175,7 @@ route-derived target packages, and the top-level routed exit together. -/
 def part6LatticeEmbeddingCurrentRoutedExitStatements : List Prop :=
   [Not Part6LatticeEmbeddingSemanticKernelTarget,
    Not Part6NondegenerateFeasibleRepairRoute,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
    Not Part6FullPaperClosingSupport,
    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
@@ -23189,6 +23190,7 @@ theorem part6LatticeEmbeddingCurrentRoutedExitStatements_named_current :
     part6LatticeEmbeddingCurrentRoutedExitStatements =
       [Not Part6LatticeEmbeddingSemanticKernelTarget,
        Not Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        Not Part6FullPaperClosingSupport,
        Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
        Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
@@ -23197,14 +23199,15 @@ theorem part6LatticeEmbeddingCurrentRoutedExitStatements_named_current :
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] := rfl
 
-/-- Build gate: the Part 6 routed-exit roster has nine statements. -/
+/-- Build gate: the Part 6 routed-exit roster has ten statements. -/
 theorem part6LatticeEmbeddingCurrentRoutedExitStatements_length_current :
-    part6LatticeEmbeddingCurrentRoutedExitStatements.length = 9 := rfl
+    part6LatticeEmbeddingCurrentRoutedExitStatements.length = 10 := rfl
 
 /-- Build-gated certificate for the Part 6 current routed exit. -/
 def Part6LatticeEmbeddingCurrentRoutedExitCertificate : Prop :=
   Not Part6LatticeEmbeddingSemanticKernelTarget /\
   Not Part6NondegenerateFeasibleRepairRoute /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
   Not Part6FullPaperClosingSupport /\
   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate /\
   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate /\
@@ -23221,18 +23224,20 @@ theorem part6_lattice_embedding_current_routed_exit_certificate :
     (And.intro
       part6_lattice_embedding_target_route_obstruction_via_target_current
       (And.intro
-        part6_lattice_embedding_closure_route_obstruction_via_target_current
+        part6_lattice_embedding_repair_route_obstruction_multipath_certificate
         (And.intro
-          part6_lattice_embedding_repair_route_derived_target_obstruction_certificate
+          part6_lattice_embedding_closure_route_obstruction_via_target_current
           (And.intro
-            part6_lattice_embedding_repair_route_derived_target_obstruction_statement_roster_certificate
+            part6_lattice_embedding_repair_route_derived_target_obstruction_certificate
             (And.intro
-              part6_lattice_embedding_full_support_derived_target_obstruction_certificate
+              part6_lattice_embedding_repair_route_derived_target_obstruction_statement_roster_certificate
               (And.intro
-                part6_lattice_embedding_full_support_derived_target_obstruction_statement_roster_certificate
+                part6_lattice_embedding_full_support_derived_target_obstruction_certificate
                 (And.intro
-                  completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
-                  completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate)))))))
+                  part6_lattice_embedding_full_support_derived_target_obstruction_statement_roster_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
+                    completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate))))))))
 
 /-- Build-gated statement roster certificate for the Part 6 routed exit. -/
 def Part6LatticeEmbeddingCurrentRoutedExitStatementRosterCertificate :
@@ -23240,6 +23245,7 @@ def Part6LatticeEmbeddingCurrentRoutedExitStatementRosterCertificate :
   part6LatticeEmbeddingCurrentRoutedExitStatements =
       [Not Part6LatticeEmbeddingSemanticKernelTarget,
        Not Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        Not Part6FullPaperClosingSupport,
        Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
        Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
@@ -23247,7 +23253,7 @@ def Part6LatticeEmbeddingCurrentRoutedExitStatementRosterCertificate :
        Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] /\
-    part6LatticeEmbeddingCurrentRoutedExitStatements.length = 9 /\
+    part6LatticeEmbeddingCurrentRoutedExitStatements.length = 10 /\
     Part6LatticeEmbeddingCurrentRoutedExitCertificate
 
 /-- The Part 6 current routed-exit package has a fixed statement roster. -/

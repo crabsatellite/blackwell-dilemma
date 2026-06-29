@@ -3457,7 +3457,7 @@ def main() -> int:
         "part6_lattice_embedding_current_routed_exit_statements_proof="
         "part6LatticeEmbeddingCurrentRoutedExitStatements_named_current"
     )
-    print("part6_lattice_embedding_current_routed_exit_statement_terms_checked=9")
+    print("part6_lattice_embedding_current_routed_exit_statement_terms_checked=10")
     print(
         "part6_lattice_embedding_current_routed_exit_statement_terms_proof="
         "part6LatticeEmbeddingCurrentRoutedExitStatements_length_current"
@@ -9163,7 +9163,7 @@ def main() -> int:
             "part6LatticeEmbeddingCurrentRoutedExitStatements_named_current"
         ),
         (
-            "part6_lattice_embedding_current_routed_exit_statement_terms_checked=9"
+            "part6_lattice_embedding_current_routed_exit_statement_terms_checked=10"
         ),
         (
             "part6_lattice_embedding_current_routed_exit_statement_terms_proof="
