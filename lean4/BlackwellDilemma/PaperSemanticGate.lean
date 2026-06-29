@@ -18652,7 +18652,8 @@ def
     OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate /\
     RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate /\
     RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate /\
-    CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate
+    CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate
 
 /-- The top-level current-obstruction surface and source ledgers are aligned
 with the current open/closed semantic target partition. -/
@@ -18694,11 +18695,14 @@ theorem
   constructor
   · exact
       remaining_open_semantic_targets_all_current_obstruction_source_alignment_statement_roster_certificate
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate
   exact
-    completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate
 
 /-- Statement roster for the current surface-obstruction alignment package.
-This fixes the sixteen component propositions used by the surface alignment
+This fixes the seventeen component propositions used by the surface alignment
 certificate. -/
 def completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements :
     List Prop :=
@@ -18722,7 +18726,8 @@ def completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements 
    OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate,
    RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
    RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
-   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate]
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate]
 
 /-- Build gate: the surface-obstruction alignment roster names exactly the
 current surface-alignment components. -/
@@ -18749,14 +18754,15 @@ theorem
        OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate,
        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the surface-obstruction alignment statement roster has exactly
-the sixteen current surface-alignment components. -/
+the seventeen current surface-alignment components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements.length =
-      16 := rfl
+      17 := rfl
 
 /-- Build-gated statement roster certificate for the current surface-obstruction
 alignment package. -/
@@ -18784,9 +18790,10 @@ def
        OpenSemanticTargetAllSurfaceIdPaperLabelStatementRosterCertificate,
        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements.length =
-      16 /\
+      17 /\
     CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate
 
 /-- The current surface-obstruction alignment package has a fixed statement
