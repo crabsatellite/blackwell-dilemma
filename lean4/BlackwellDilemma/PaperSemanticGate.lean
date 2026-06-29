@@ -21788,6 +21788,73 @@ theorem
       completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_length_current
       completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate)
 
+/-- Final exit roster tying the current non-complete paper-semantic gate to the
+open-target final ledger. -/
+def completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements :
+    List Prop :=
+  [Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate]
+
+/-- Build gate: the current open-target exit roster names exactly the
+non-complete gate and the open-target final ledger certificate pair. -/
+theorem completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate] := rfl
+
+/-- Build gate: the current open-target exit roster has exactly the non-complete
+gate plus the open-target final ledger certificate pair. -/
+theorem completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements.length =
+      4 := rfl
+
+/-- Build-gated final exit certificate for the current open-target
+paper-semantic state. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate :
+    Prop :=
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate
+
+/-- The current open-target exit certificate is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_open_target_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_notYet
+    (And.intro
+      completePaperSemanticKernelOnly_iff_false_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+        completePaperSemanticKernelOnly_current_open_target_final_ledger_statement_roster_certificate))
+
+/-- Build-gated statement roster certificate for the current open-target exit
+package. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate
+
+/-- The current open-target exit package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements_length_current
+      completePaperSemanticKernelOnly_current_open_target_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
