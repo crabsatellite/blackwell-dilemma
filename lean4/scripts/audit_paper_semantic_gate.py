@@ -456,6 +456,8 @@ EXPECTED_TOP_LEVEL_CURRENT_OBSTRUCTION_CONJUNCTS = (
     "CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate",
     "CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate",
     "CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate",
+    "Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate",
+    "TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate",
     "CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate",
     "CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate",
     "CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate",
