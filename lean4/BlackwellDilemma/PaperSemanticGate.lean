@@ -16974,10 +16974,16 @@ def
     RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate /\
     RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate /\
     RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate /\
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate /\
     RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate /\
     RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate /\
+    RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate /\
     RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate /\
+    RemainingOpenSemanticTargetsJointClosureReductionAlignmentStatementRosterCertificate /\
     RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate /\
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentStatementRosterCertificate /\
     RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate /\
     RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate /\
     RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate /\
@@ -17029,16 +17035,34 @@ theorem
       remaining_open_semantic_targets_field_payload_current_obstruction_source_statement_roster_certificate
   constructor
   · exact
+      remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_statement_roster_certificate
+  constructor
+  · exact
       remaining_open_semantic_targets_field_output_current_obstruction_source_certificate
   constructor
   · exact
       remaining_open_semantic_targets_field_output_current_obstruction_source_statement_roster_certificate
   constructor
   · exact
+      remaining_open_semantic_targets_field_output_target_derived_current_obstruction_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_field_output_target_derived_current_obstruction_statement_roster_certificate
+  constructor
+  · exact
       remaining_open_semantic_targets_joint_closure_reduction_alignment_certificate
   constructor
   · exact
+      remaining_open_semantic_targets_joint_closure_reduction_alignment_statement_roster_certificate
+  constructor
+  · exact
       remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_certificate
+  constructor
+  · exact
+      remaining_open_semantic_targets_joint_route_obstruction_reduction_alignment_statement_roster_certificate
   constructor
   · exact
       remaining_open_semantic_targets_bilateral_current_obstruction_source_alignment_certificate
@@ -17055,7 +17079,7 @@ theorem
     remaining_open_semantic_targets_all_current_obstruction_source_alignment_statement_roster_certificate
 
 /-- Statement roster for the current obstruction-source alignment package.
-This fixes the twenty-four component propositions used by the obstruction
+This fixes the thirty component propositions used by the obstruction
 source alignment certificate. -/
 def completePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatements :
     List Prop :=
@@ -17081,14 +17105,20 @@ def completePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatements :
    openSemanticTargetKernelSurfaceIdPaperLabels =
       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
    RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate,
-   RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate,
-   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
-   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
-   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
-   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
-   RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate,
-   RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
-   RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
+    RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate,
+    RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
+    RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+    RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate,
+    RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
+    RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+    RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate,
+    RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate,
+    RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate,
+    RemainingOpenSemanticTargetsJointClosureReductionAlignmentStatementRosterCertificate,
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
+    RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentStatementRosterCertificate,
+    RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
    RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate,
    RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
    RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
@@ -17124,10 +17154,16 @@ theorem
        RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate,
        RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate,
+       RemainingOpenSemanticTargetsJointClosureReductionAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
+       RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
@@ -17135,11 +17171,11 @@ theorem
        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the obstruction-source alignment statement roster has exactly
-the twenty-four current obstruction-source alignment components. -/
+the thirty current obstruction-source alignment components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatements.length =
-      24 := rfl
+      30 := rfl
 
 /-- Build-gated statement roster certificate for the current obstruction-source
 alignment package. -/
@@ -17172,17 +17208,23 @@ def
        RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate,
        RemainingOpenSemanticTargetsJointClosureReductionAlignmentCertificate,
+       RemainingOpenSemanticTargetsJointClosureReductionAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentCertificate,
+       RemainingOpenSemanticTargetsJointRouteObstructionReductionAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatements.length =
-      24 /\
+      30 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate
 
 /-- The current obstruction-source alignment package has a fixed statement
