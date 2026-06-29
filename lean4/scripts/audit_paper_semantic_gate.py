@@ -46,13 +46,13 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "part6_lattice_embedding_semantic_kernel_target_iff_repair_route",
         "Part6NondegenerateFeasibleRepairRouteCertificate",
         "part6_nondegenerate_feasible_repair_route_certificate",
-        "not_part6_nondegenerate_feasible_repair_route_current",
+        "part6_lattice_embedding_target_route_obstruction_via_target_current",
         "Part6FullPaperClosingSupport",
         "part6_lattice_embedding_semantic_kernel_target_iff_full_support",
         "part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support",
         "Part6FullPaperClosingOutputLayerCertificate",
         "part6_full_paper_closing_output_layer_certificate",
-        "not_part6_full_paper_closing_support_current",
+        "part6_lattice_embedding_closure_route_obstruction_via_target_current",
         "Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate",
         "z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate",
         "Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate",
@@ -67,13 +67,13 @@ EXPECTED_OPEN_KERNEL_SURFACES = {
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route",
         "RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate",
         "random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate",
-        "not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute",
+        "topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current",
         "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
         "topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route",
         "randomSupercriticalZ2TopoClusterFullPaperClosingRoute_iff_boxed_torus_finite_z2L_route",
         "RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate",
         "random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate",
-        "not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute",
+        "topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current",
         "RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate",
         "random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate",
         "RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate",
@@ -6722,18 +6722,30 @@ def main() -> int:
         "remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
+    paper_semantic_theorems = set(paper_semantic_theorem_names(text))
+    paper_semantic_defs = set(paper_semantic_def_names(text))
+    paper_semantic_types = set(paper_semantic_type_names(text))
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
-        for name in paper_semantic_theorem_names(text)
+        for name in paper_semantic_theorems
     )
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
-        for name in paper_semantic_def_names(text)
+        for name in paper_semantic_defs
     )
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
-        for name in paper_semantic_type_names(text)
+        for name in paper_semantic_types
     )
+
+    def kernel_surface_obstruction_decl(decl: str) -> str:
+        prefix = (
+            "BlackwellDilemma.PaperSemanticGate"
+            if decl in paper_semantic_theorems
+            else "BlackwellDilemma"
+        )
+        return f"{prefix}.{decl}"
+
     for (
         _target_id,
         target_prop,
@@ -6761,13 +6773,17 @@ def main() -> int:
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{target_route_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route_certificate}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route_certificate_proof}")
-        required_axiom_audit_decls.add(f"BlackwellDilemma.{target_route_obstruction}")
+        required_axiom_audit_decls.add(
+            kernel_surface_obstruction_decl(target_route_obstruction)
+        )
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.PaperSemanticGate.{closure_route_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{route_equivalence_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_certificate}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_certificate_proof}")
-        required_axiom_audit_decls.add(f"BlackwellDilemma.{closure_route_obstruction}")
+        required_axiom_audit_decls.add(
+            kernel_surface_obstruction_decl(closure_route_obstruction)
+        )
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_progress_certificate}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_progress_certificate_proof}")
         required_axiom_audit_decls.add(f"BlackwellDilemma.{frontier_nonclosure_certificate}")

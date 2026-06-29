@@ -154,6 +154,43 @@ theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet :
     ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mp
       htarget)
 
+/-- The Part 6 target-route obstruction carried by the kernel-surface registry
+is derived from the target-level obstruction. -/
+theorem part6_lattice_embedding_target_route_obstruction_via_target_current :
+    Not Part6NondegenerateFeasibleRepairRoute := by
+  intro hroute
+  exact part6_lattice_embedding_semantic_kernel_target_notYet
+    ((part6_lattice_embedding_semantic_kernel_target_iff_repair_route).mpr
+      hroute)
+
+/-- The Part 6 closure-route obstruction carried by the kernel-surface registry
+is derived from the target-level obstruction. -/
+theorem part6_lattice_embedding_closure_route_obstruction_via_target_current :
+    Not Part6FullPaperClosingSupport := by
+  intro hroute
+  exact part6_lattice_embedding_semantic_kernel_target_notYet
+    ((part6_lattice_embedding_semantic_kernel_target_iff_full_support).mpr
+      hroute)
+
+/-- The topo target-route obstruction carried by the kernel-surface registry is
+derived from the target-level obstruction. -/
+theorem topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  intro hroute
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+    ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
+      hroute)
+
+/-- The topo closure-route obstruction carried by the kernel-surface registry is
+derived from the target-level obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current :
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  intro hroute
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+    ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mpr
+      hroute)
+
 /-- Machine-facing roster entry tying an open semantic ledger id to its exact
 Lean target proposition, paper-facing closure route, and current kernel
 obstruction. -/
@@ -194,7 +231,7 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
       targetRouteCertificateProof :=
         part6_nondegenerate_feasible_repair_route_certificate,
       targetRouteObstruction :=
-        not_part6_nondegenerate_feasible_repair_route_current,
+        part6_lattice_embedding_target_route_obstruction_via_target_current,
       closureRoute := Part6FullPaperClosingSupport,
       closureRouteProof :=
         part6_lattice_embedding_semantic_kernel_target_iff_full_support,
@@ -204,7 +241,7 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
       closureRouteCertificateProof :=
         part6_full_paper_closing_output_layer_certificate,
       closureRouteObstruction :=
-        not_part6_full_paper_closing_support_current,
+        part6_lattice_embedding_closure_route_obstruction_via_target_current,
       frontierProgressCertificate :=
         Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
       frontierProgressCertificateProof :=
@@ -228,7 +265,7 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
       targetRouteCertificateProof :=
         random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
       targetRouteObstruction :=
-        not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+        topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
       closureRoute :=
         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
       closureRouteProof :=
@@ -240,7 +277,7 @@ def openSemanticTargetKernelSurfaces : List OpenSemanticTargetKernelSurface :=
       closureRouteCertificateProof :=
         random_supercritical_z2_topo_cluster_boxed_torus_finite_z2L_route_certificate,
       closureRouteObstruction :=
-        not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+        topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current,
       frontierProgressCertificate :=
         RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
       frontierProgressCertificateProof :=
