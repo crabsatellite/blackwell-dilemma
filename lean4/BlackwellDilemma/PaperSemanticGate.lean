@@ -22071,26 +22071,28 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertific
 checked. -/
 theorem completePaperSemanticKernelOnly_current_open_target_route_obstruction_exit_certificate :
     CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate := by
+  let hpart6Target := part6_lattice_embedding_semantic_kernel_target_notYet
+  let htopoTarget := topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
   exact And.intro
     part6_lattice_embedding_semantic_kernel_target_iff_repair_route
     (And.intro
       part6_lattice_embedding_semantic_kernel_target_iff_full_support
       (And.intro
         (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route.mp
-          part6_lattice_embedding_semantic_kernel_target_notYet)
+          hpart6Target)
         (And.intro
           (part6_lattice_embedding_semantic_kernel_target_not_iff_full_support.mp
-            part6_lattice_embedding_semantic_kernel_target_notYet)
+            hpart6Target)
           (And.intro
             topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route
             (And.intro
               topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route
               (And.intro
                 (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route.mp
-                  topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet)
+                  htopoTarget)
                 (And.intro
                   (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route.mp
-                    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet)
+                    htopoTarget)
                   (And.intro
                     completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate
                     completePaperSemanticKernelOnly_current_open_target_obstruction_exit_statement_roster_certificate))))))))
