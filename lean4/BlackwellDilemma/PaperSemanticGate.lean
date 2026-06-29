@@ -10854,8 +10854,10 @@ theorem
     part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,
     part6_lattice_embedding_repair_route_not_iff_full_support_not,
     part6_lattice_embedding_semantic_kernel_target_notYet,
-    not_part6_nondegenerate_feasible_repair_route_current,
-    not_part6_full_paper_closing_support_current,
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route.mp
+      part6_lattice_embedding_semantic_kernel_target_notYet),
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_full_support.mp
+      part6_lattice_embedding_semantic_kernel_target_notYet),
     part6_lattice_embedding_exact_closure_input_notYet,
     not_part6_full_paper_closing_full_output_bundle_current,
     part6_lattice_embedding_route_obstruction_projection_certificate⟩
@@ -11114,8 +11116,14 @@ theorem
     topo_cluster_random_supercritical_z2_giant_loss_output_of_same_bridge_full_output_bundle,
     topo_cluster_random_supercritical_z2_exact_closure_input_notYet,
     topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet,
-    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
-    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    (fun hroute =>
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+        ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
+          hroute)),
+    (fun hroute =>
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+        ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mpr
+          hroute)),
     randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
     topo_cluster_random_supercritical_z2_exact_output_projection_certificate⟩
 
@@ -11382,8 +11390,10 @@ theorem
     topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route,
     topo_cluster_random_supercritical_z2_full_route_not_iff_boxed_route_not,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
-    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
-    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route.mp
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route.mp
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
     topo_cluster_random_supercritical_z2_exact_closure_input_notYet,
     topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet,
     topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate⟩
