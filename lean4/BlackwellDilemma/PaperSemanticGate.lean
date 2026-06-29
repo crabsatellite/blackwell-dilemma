@@ -21712,6 +21712,82 @@ theorem
       completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_length_current
       completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate)
 
+/-- Final statement roster for the two current open targets and the final
+obstruction exit ledger.  This keeps the remaining open-target identity tied to
+the last nonrecursive certificate package. -/
+def completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements :
+    List Prop :=
+  [paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate]
+
+/-- Build gate: the current open-target final ledger names exactly the open
+count/id facts and the final obstruction ledger certificate pair. -/
+theorem completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements =
+      [paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate] := rfl
+
+/-- Build gate: the current open-target final ledger has exactly the open
+count/id facts plus the final obstruction ledger certificate pair. -/
+theorem completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements.length =
+      4 := rfl
+
+/-- Build-gated certificate tying the two current open targets to the final
+obstruction exit ledger. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate :
+    Prop :=
+  paperSemanticOpenCount = 2 /\
+  openSemanticTargetIds =
+    ["theorem_4_1_part6_lattice_embedding",
+     "topo_cluster_random_supercritical_z2"] /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate
+
+/-- The current open-target final ledger certificate is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate := by
+  exact And.intro
+    paperSemanticOpenCount_current
+    (And.intro
+      openSemanticTargetIds_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate
+        completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate))
+
+/-- Build-gated statement roster certificate for the current open-target final
+ledger. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements =
+      [paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate
+
+/-- The current open-target final ledger package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_final_ledger_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_length_current
+      completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
