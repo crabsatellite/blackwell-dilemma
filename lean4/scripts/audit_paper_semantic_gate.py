@@ -4425,6 +4425,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_closure_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_terms_checked=34"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -10760,6 +10791,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_closure_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_closure_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_terms_checked=34"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_alignment_closure_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusAlignmentClosureStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_alignment_closure_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
