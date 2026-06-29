@@ -22003,7 +22003,8 @@ theorem
 
 /-- Final statement roster for the two current open targets and the final
 obstruction exit ledger.  This keeps the remaining open-target identity tied to
-the last nonrecursive certificate package. -/
+the last nonrecursive certificate package and its current route-obstruction
+multipath witnesses. -/
 def completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements :
     List Prop :=
   [paperSemanticOpenCount = 2,
@@ -22011,10 +22012,13 @@ def completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements :
      ["theorem_4_1_part6_lattice_embedding",
       "topo_cluster_random_supercritical_z2"],
    CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
-   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the current open-target final ledger names exactly the open
-count/id facts and the final obstruction ledger certificate pair. -/
+count/id facts, the final obstruction ledger certificate pair, and the current
+multipath route-obstruction certificates. -/
 theorem completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_named_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements =
       [paperSemanticOpenCount = 2,
@@ -22022,16 +22026,18 @@ theorem completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_na
          ["theorem_4_1_part6_lattice_embedding",
           "topo_cluster_random_supercritical_z2"],
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the current open-target final ledger has exactly the open
-count/id facts plus the final obstruction ledger certificate pair. -/
+/-- Build gate: the current open-target final ledger has exactly six
+statements. -/
 theorem completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_length_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements.length =
-      4 := rfl
+      6 := rfl
 
 /-- Build-gated certificate tying the two current open targets to the final
-obstruction exit ledger. -/
+obstruction exit ledger and current multipath obstruction evidence. -/
 def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate :
     Prop :=
   paperSemanticOpenCount = 2 /\
@@ -22039,7 +22045,9 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate :
     ["theorem_4_1_part6_lattice_embedding",
      "topo_cluster_random_supercritical_z2"] /\
   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The current open-target final ledger certificate is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate :
@@ -22050,7 +22058,11 @@ theorem completePaperSemanticKernelOnly_current_open_target_final_ledger_certifi
       openSemanticTargetIds_current
       (And.intro
         completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate
-        completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate))
+        (And.intro
+          completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate
+          (And.intro
+            part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
 
 /-- Build-gated statement roster certificate for the current open-target final
 ledger. -/
@@ -22062,9 +22074,11 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCe
          ["theorem_4_1_part6_lattice_embedding",
           "topo_cluster_random_supercritical_z2"],
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements.length =
-      4 /\
+      6 /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate
 
 /-- The current open-target final ledger package has a fixed statement roster. -/

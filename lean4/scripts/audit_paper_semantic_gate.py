@@ -3128,7 +3128,7 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_open_target_final_ledger_statements_proof="
         "completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_named_current"
     )
-    print("complete_paper_semantic_kernel_only_current_open_target_final_ledger_statement_terms_checked=4")
+    print("complete_paper_semantic_kernel_only_current_open_target_final_ledger_statement_terms_checked=6")
     print(
         "complete_paper_semantic_kernel_only_current_open_target_final_ledger_statement_terms_proof="
         "completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_length_current"
@@ -8832,7 +8832,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_open_target_final_ledger_statement_terms_checked=4"
+            "complete_paper_semantic_kernel_only_current_open_target_final_ledger_statement_terms_checked=6"
         ),
         (
             "complete_paper_semantic_kernel_only_current_open_target_final_ledger_statement_terms_proof="
