@@ -22937,6 +22937,79 @@ theorem
       completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_length_current
       completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate)
 
+/-- Final routed top-level obstruction roster: the top-level current
+obstruction certificate is paired with the routed open-target exit package. -/
+def completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate]
+
+/-- Build gate: the routed top-level obstruction roster names exactly the
+top-level current-obstruction pair and the routed open-target exit pair. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate] :=
+  rfl
+
+/-- Build gate: the routed top-level obstruction roster has exactly four
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements.length =
+      4 := rfl
+
+/-- Build-gated certificate that the main current-obstruction gate also reaches
+the final routed open-target exit package. -/
+def CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate
+
+/-- The routed top-level current-obstruction certificate is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_obstruction_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate
+        completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate))
+
+/-- Build-gated statement roster certificate for the routed top-level
+current-obstruction package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate
+
+/-- The routed top-level current-obstruction package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_length_current
+      completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
