@@ -24025,7 +24025,9 @@ def completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements :
        ("topo_cluster_random_supercritical_z2",
         "prop:topo-cluster and thm:phase")],
    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
-   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the current open-target gate-status roster names exactly the
 two remaining target refutations and their gate-status certificate pair. -/
@@ -24043,14 +24045,16 @@ theorem
            ("topo_cluster_random_supercritical_z2",
             "prop:topo-cluster and thm:phase")],
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
-       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the current open-target gate-status roster has six
+/-- Build gate: the current open-target gate-status roster has eight
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_length_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated certificate for the current open-target gate status. -/
 def CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate :
@@ -24066,7 +24070,9 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate :
        ("topo_cluster_random_supercritical_z2",
         "prop:topo-cluster and thm:phase")] /\
   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The current open-target gate status is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_open_target_gate_status_certificate :
@@ -24081,7 +24087,11 @@ theorem completePaperSemanticKernelOnly_current_open_target_gate_status_certific
           (semantic_target_paper_label_id_certificate.2.1)
           (And.intro
             completePaperSemanticKernelOnly_current_gate_status_certificate
-            completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate))))
+            (And.intro
+              completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate
+              (And.intro
+                part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+                topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))))
 
 /-- Build-gated statement roster certificate for the current open-target
 gate-status package. -/
@@ -24100,9 +24110,11 @@ def
            ("topo_cluster_random_supercritical_z2",
             "prop:topo-cluster and thm:phase")],
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
-       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate
 
 /-- The current open-target gate-status package has a fixed statement roster. -/
