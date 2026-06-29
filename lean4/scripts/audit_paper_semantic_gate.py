@@ -3617,6 +3617,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statements="
+        "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_checked=4"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -9142,6 +9173,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statements="
+            "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_checked=4"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="

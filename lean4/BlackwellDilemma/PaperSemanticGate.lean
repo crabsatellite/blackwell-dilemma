@@ -23462,6 +23462,81 @@ theorem
       completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_length_current
       completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate)
 
+/-- Statement roster tying the current obstruction certificate to the
+routed-exit top-level alignment package. -/
+def
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate]
+
+/-- Build gate: the obstruction/routed-exit top-level bridge roster names
+exactly the current obstruction pair and routed-exit top-level alignment pair.
+-/
+theorem
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate] := rfl
+
+/-- Build gate: the obstruction/routed-exit top-level bridge roster has four
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements.length =
+      4 := rfl
+
+/-- Build-gated certificate that the current obstruction package explicitly
+carries the routed-exit top-level alignment package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate
+
+/-- The obstruction/routed-exit top-level bridge package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_obstruction_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate
+        completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate))
+
+/-- Build-gated statement roster certificate for the obstruction/routed-exit
+top-level bridge package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate
+
+/-- The obstruction/routed-exit top-level bridge package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_length_current
+      completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
