@@ -3720,7 +3720,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentGateStatusStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_gate_status_statement_terms_checked=10"
+        "complete_paper_semantic_kernel_only_current_gate_status_statement_terms_checked=12"
     )
     print(
         "complete_paper_semantic_kernel_only_current_gate_status_statement_terms_proof="
@@ -9437,7 +9437,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentGateStatusStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_gate_status_statement_terms_checked=10"
+            "complete_paper_semantic_kernel_only_current_gate_status_statement_terms_checked=12"
         ),
         (
             "complete_paper_semantic_kernel_only_current_gate_status_statement_terms_proof="
