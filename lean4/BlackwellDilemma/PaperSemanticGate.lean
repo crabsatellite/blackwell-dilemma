@@ -23722,6 +23722,8 @@ def
    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
@@ -23742,6 +23744,8 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
@@ -23749,12 +23753,12 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate] := rfl
 
-/-- Build gate: the final routed-exit alignment roster has fourteen
+/-- Build gate: the final routed-exit alignment roster has sixteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements.length =
-      14 := rfl
+      16 := rfl
 
 /-- Build-gated certificate tying the final obstruction ledger to every current
 routed-exit alignment package. -/
@@ -23768,6 +23772,8 @@ def CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate :
   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate /\
   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate /\
@@ -23788,6 +23794,8 @@ theorem
     completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate,
     completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate,
     open_semantic_target_current_routed_exit_ledger_alignment_certificate,
     open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate,
@@ -23809,6 +23817,8 @@ def
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
@@ -23816,7 +23826,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements.length =
-      14 /\
+      16 /\
     CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate
 
 /-- The final routed-exit alignment package has a fixed statement roster. -/
