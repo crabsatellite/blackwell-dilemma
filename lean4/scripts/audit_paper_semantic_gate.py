@@ -6106,6 +6106,7 @@ def main() -> int:
         "open_semantic_target_closure_input_field_roster_certificate,"
         "open_semantic_target_closure_input_field_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
+        "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,"
         "completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate,"
@@ -6120,7 +6121,7 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_field_payload_alignment_statement_roster_terms_checked=20"
+        "complete_paper_semantic_kernel_only_current_field_payload_alignment_statement_roster_terms_checked=21"
     )
     print(
         "complete_paper_semantic_kernel_only_current_top_level_alignment_certificate="
@@ -7796,6 +7797,7 @@ def main() -> int:
             "open_semantic_target_closure_input_field_roster_certificate,"
             "open_semantic_target_closure_input_field_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
+            "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate,"
@@ -7810,7 +7812,7 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_field_payload_alignment_statement_roster_terms_checked=20"
+            "complete_paper_semantic_kernel_only_current_field_payload_alignment_statement_roster_terms_checked=21"
         ),
         (
             "complete_paper_semantic_kernel_only_current_top_level_alignment_certificate="
