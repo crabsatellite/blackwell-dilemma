@@ -24137,6 +24137,8 @@ def completePaperSemanticKernelOnlyCurrentFinalStatusStatements :
    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
    Not CompletePaperSemanticKernelOnly,
    CompletePaperSemanticKernelOnly <-> False]
 
@@ -24151,14 +24153,16 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False] := rfl
 
-/-- Build gate: the current final-status roster has eight statements. -/
+/-- Build gate: the current final-status roster has ten statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentFinalStatusStatements_length_current :
     completePaperSemanticKernelOnlyCurrentFinalStatusStatements.length =
-      8 := rfl
+      10 := rfl
 
 /-- Build-gated certificate for the current final machine status. -/
 def CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate : Prop :=
@@ -24168,6 +24172,8 @@ def CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate : Prop :=
   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
   Not CompletePaperSemanticKernelOnly /\
   (CompletePaperSemanticKernelOnly <-> False)
 
@@ -24187,8 +24193,12 @@ theorem completePaperSemanticKernelOnly_current_final_status_certificate :
             (And.intro
               completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate
               (And.intro
-                completePaperSemanticKernelOnly_notYet
-                completePaperSemanticKernelOnly_iff_false_current))))))
+                part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+                (And.intro
+                  topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_notYet
+                    completePaperSemanticKernelOnly_iff_false_current))))))))
 
 /-- Build-gated statement roster certificate for the current final status. -/
 def CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate :
@@ -24200,10 +24210,12 @@ def CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate 
        CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False] /\
     completePaperSemanticKernelOnlyCurrentFinalStatusStatements.length =
-      8 /\
+      10 /\
     CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate
 
 /-- The current final-status package has a fixed statement roster. -/
