@@ -26854,6 +26854,261 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_certificate)
 
+/-- Terminal all-current closure roster tying the final ledger/source package
+to every current alignment umbrella, the main terminal closure packages, and
+the final open/closed semantic target ledger. -/
+def completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount = 3,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   closedSemanticTargetIds =
+     ["r10_two_regime_label_recalibration",
+      "theorem_4_1_part4_lattice_p_monotonicity",
+      "r10_threshold_five_state_high_kappa_routing"]]
+
+/-- Build gate: the terminal all-current closure roster names the final
+ledger/source package, every current alignment layer, the terminal closure
+chain, and the final semantic target ledgers. -/
+theorem completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+         ["r10_two_regime_label_recalibration",
+          "theorem_4_1_part4_lattice_p_monotonicity",
+          "r10_threshold_five_state_high_kappa_routing"]] := rfl
+
+/-- Build gate: the terminal all-current closure roster has thirty-eight
+statements. -/
+theorem completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
+      38 := rfl
+
+/-- Build-gated terminal all-current certificate tying the final ledger/source
+closure to the full current alignment and terminal closure stack. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  paperSemanticClosedCount = 3 /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"]
+
+/-- The terminal all-current closure package is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_terminal_all_current_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_certificate,
+    completePaperSemanticKernelOnly_current_surface_obstruction_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_equivalence_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_route_obstruction_alignment_certificate,
+    completePaperSemanticKernelOnly_current_route_obstruction_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate,
+    completePaperSemanticKernelOnly_current_frontier_payload_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,
+    completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_payload_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_source_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_source_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    paperSemanticClosedCount_current,
+    openSemanticTargetIds_current,
+    closedSemanticTargetIds_current⟩
+
+/-- Build-gated statement roster certificate for terminal all-current closure. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+         ["r10_two_regime_label_recalibration",
+          "theorem_4_1_part4_lattice_p_monotonicity",
+          "r10_threshold_five_state_high_kappa_routing"]] /\
+    completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
+      38 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate
+
+/-- The terminal all-current closure package has a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_terminal_all_current_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_all_current_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
