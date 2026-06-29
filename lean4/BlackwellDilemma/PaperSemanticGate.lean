@@ -22042,17 +22042,21 @@ theorem completePaperSemanticKernelOnly_current_open_target_route_obstruction_ex
     (And.intro
       part6_lattice_embedding_semantic_kernel_target_iff_full_support
       (And.intro
-        not_part6_nondegenerate_feasible_repair_route_current
+        (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route.mp
+          part6_lattice_embedding_semantic_kernel_target_notYet)
         (And.intro
-          not_part6_full_paper_closing_support_current
+          (part6_lattice_embedding_semantic_kernel_target_not_iff_full_support.mp
+            part6_lattice_embedding_semantic_kernel_target_notYet)
           (And.intro
             topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route
             (And.intro
               topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route
               (And.intro
-                not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+                (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route.mp
+                  topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet)
                 (And.intro
-                  not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+                  (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route.mp
+                    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet)
                   (And.intro
                     completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate
                     completePaperSemanticKernelOnly_current_open_target_obstruction_exit_statement_roster_certificate))))))))
