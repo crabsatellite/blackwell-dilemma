@@ -28616,6 +28616,252 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_obstruction_closure_certificate)
 
+/-- Terminal paper-state/source-final gate-status ledger/source-obstruction
+closure roster tying the latest ledger-obstruction package directly to every
+current obstruction-source alignment layer. -/
+def completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
+   RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate,
+   RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate,
+   RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
+   RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate,
+   RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
+   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate,
+   RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
+   RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetNamedRouteObstructionRosterIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetNamedRouteObstructionRosterIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetClosureInputFieldSurfaceIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the terminal paper-state/source-final gate-status
+ledger/source-obstruction closure roster names the latest ledger-obstruction
+package and every current obstruction-source layer. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetNamedRouteObstructionRosterIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetNamedRouteObstructionRosterIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetClosureInputFieldSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the terminal paper-state/source-final gate-status
+ledger/source-obstruction closure roster has thirty-four statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements.length =
+      34 := rfl
+
+/-- Build-gated terminal paper-state/source-final gate-status
+ledger/source-obstruction closure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate /\
+  RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate /\
+  RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate /\
+  RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate /\
+  RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate /\
+  RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate /\
+  RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate /\
+  RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate /\
+  RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate /\
+  RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+  openSemanticTargetKernelSurfaceIds = openSemanticTargetIds /\
+  openSemanticTargetNamedRouteObstructionRosterIds = openSemanticTargetIds /\
+  openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds /\
+  openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds /\
+  openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetNamedRouteObstructionRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetClosureInputFieldSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]
+
+/-- The terminal paper-state/source-final gate-status ledger/source-obstruction
+closure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_obstruction_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_obstruction_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_obstruction_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_all_current_obstruction_source_alignment_certificate,
+    remaining_open_semantic_targets_all_current_obstruction_source_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_bilateral_current_obstruction_source_certificate,
+    remaining_open_semantic_targets_bilateral_current_obstruction_source_statement_roster_certificate,
+    remaining_open_semantic_targets_bilateral_current_obstruction_source_alignment_certificate,
+    remaining_open_semantic_targets_bilateral_current_obstruction_source_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_field_payload_current_obstruction_source_certificate,
+    remaining_open_semantic_targets_field_payload_current_obstruction_source_statement_roster_certificate,
+    remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_certificate,
+    remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_statement_roster_certificate,
+    remaining_open_semantic_targets_field_payload_current_obstruction_source_alignment_certificate,
+    remaining_open_semantic_targets_field_payload_current_obstruction_source_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_field_output_current_obstruction_source_certificate,
+    remaining_open_semantic_targets_field_output_current_obstruction_source_statement_roster_certificate,
+    remaining_open_semantic_targets_field_output_target_derived_current_obstruction_certificate,
+    remaining_open_semantic_targets_field_output_target_derived_current_obstruction_statement_roster_certificate,
+    remaining_open_semantic_targets_field_output_current_obstruction_source_alignment_certificate,
+    remaining_open_semantic_targets_field_output_current_obstruction_source_alignment_statement_roster_certificate,
+    openSemanticTargetKernelSurfaceIds_current,
+    openSemanticTargetNamedRouteObstructionRosterIds_current,
+    openSemanticTargetClosureInputFieldSurfaceIds_current,
+    openSemanticTargetClosureInputFieldOutputSurfaceIds_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_current,
+    openSemanticTargetNamedRouteObstructionRosterIdPaperLabels_current,
+    openSemanticTargetClosureInputFieldSurfaceIdPaperLabels_current,
+    openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels_current,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    openSemanticTargetIds_current⟩
+
+/-- Build-gated statement roster certificate for terminal paper-state/source-final
+gate-status ledger/source-obstruction closure. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsFieldPayloadCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate,
+       RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsFieldOutputCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       openSemanticTargetKernelSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetNamedRouteObstructionRosterIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds = openSemanticTargetIds,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetNamedRouteObstructionRosterIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetClosureInputFieldSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements.length =
+      34 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureCertificate
+
+/-- The terminal paper-state/source-final gate-status ledger/source-obstruction
+closure package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_obstruction_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceObstructionClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_obstruction_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
