@@ -6854,7 +6854,10 @@ theorem part6_lattice_embedding_closure_input_output_certificate :
   · exact not_part6_full_paper_closing_divergence_witness_current
   constructor
   · exact not_part6_full_paper_closing_feasible_divergence_witness_current
-  exact not_part6_full_paper_closing_full_output_bundle_current
+  intro hbundle
+  exact part6_lattice_embedding_semantic_kernel_target_notYet
+    (part6_lattice_embedding_semantic_kernel_target_of_full_output_bundle
+      hbundle)
 
 /-- Statement roster for the Part 6 closure-input output certificate. -/
 def part6LatticeEmbeddingClosureInputOutputStatements : List Prop :=
@@ -7135,8 +7138,14 @@ theorem topo_cluster_random_supercritical_z2_closure_input_output_certificate :
   constructor
   · exact topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet
   constructor
-  · exact not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
-  exact not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+  · intro hroute
+    exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+      ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
+        hroute)
+  intro hroute
+  exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+    ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_boxed_torus_finite_z2L_route).mpr
+      hroute)
 
 /-- Statement roster for the topo closure-input output certificate. -/
 def topoClusterRandomSupercriticalZ2ClosureInputOutputStatements :
@@ -9953,7 +9962,8 @@ theorem remaining_open_semantic_targets_exact_inputs_notYet :
 theorem remaining_open_semantic_targets_full_outputs_notYet :
     Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied := by
   intro houtputs
-  exact not_part6_full_paper_closing_full_output_bundle_current houtputs.1
+  exact remaining_open_semantic_targets_satisfied_notYet
+    (remaining_open_semantic_targets_targets_of_outputs houtputs)
 
 /-- Single build-gated certificate reducing the remaining two open targets to
 the joint exact-input package and the joint full-output package. -/
@@ -11459,13 +11469,15 @@ theorem remaining_open_semantic_targets_target_routes_iff_closure_routes :
 theorem remaining_open_semantic_targets_target_routes_notYet :
     Not RemainingOpenSemanticTargetsTargetRoutesSatisfied := by
   intro hroutes
-  exact not_part6_nondegenerate_feasible_repair_route_current hroutes.1
+  exact remaining_open_semantic_targets_satisfied_notYet
+    (remaining_open_semantic_targets_targets_of_target_routes hroutes)
 
 /-- The current frontier refutes joint closure-route satisfaction. -/
 theorem remaining_open_semantic_targets_closure_routes_notYet :
     Not RemainingOpenSemanticTargetsClosureRoutesSatisfied := by
   intro hroutes
-  exact not_part6_full_paper_closing_support_current hroutes.1
+  exact remaining_open_semantic_targets_satisfied_notYet
+    (remaining_open_semantic_targets_targets_of_closure_routes hroutes)
 
 /-- Either side's target obstruction refutes joint target satisfaction: Part 6. -/
 theorem remaining_open_semantic_targets_satisfied_not_of_part6_target_not
