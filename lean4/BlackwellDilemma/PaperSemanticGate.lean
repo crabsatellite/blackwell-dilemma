@@ -24521,6 +24521,107 @@ theorem
       completePaperSemanticKernelOnlyCurrentFinalStatusStatements_length_current
       completePaperSemanticKernelOnly_current_final_status_certificate)
 
+/-- Status-level direct routed-exit coverage roster tying the current gate,
+open-target gate, and final status packages to the final-exit and
+final-alignment certificate pairs. -/
+def completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate]
+
+/-- Build gate: the status-level direct routed-exit coverage roster names
+exactly the three status packages and the final-exit/final-alignment pairs. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements =
+      [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] := rfl
+
+/-- Build gate: the status-level direct routed-exit coverage roster has ten
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements.length =
+      10 := rfl
+
+/-- Build-gated certificate that every current status package directly carries
+the routed-exit final-exit and final-alignment pairs. -/
+def CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate
+
+/-- The status-level direct routed-exit coverage package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate :
+    CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_gate_status_certificate,
+    completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_gate_status_certificate,
+    completePaperSemanticKernelOnly_current_open_target_gate_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_status_certificate,
+    completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the status-level direct
+routed-exit coverage package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements =
+      [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate
+
+/-- The status-level direct routed-exit coverage package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_length_current
+      completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

@@ -3805,6 +3805,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statements="
+        "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_checked=10"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_certificate_proof="
+        "completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -9520,6 +9551,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_final_status_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statements="
+            "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_checked=10"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_certificate_proof="
+            "completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
