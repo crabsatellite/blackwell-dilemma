@@ -20336,6 +20336,75 @@ theorem
       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current
       completePaperSemanticKernelOnly_current_top_level_alignment_certificate)
 
+/-- Build gate: the current alignment roster-pair certificate is an explicit
+alias for the top-level current-alignment statement roster.  It packages the
+alignment certificate and its statement-roster certificate as a named item that
+the top-level obstruction must carry. -/
+def completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements :
+    List Prop :=
+  completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements
+
+/-- Build gate: the alignment roster-pair statement list is exactly the
+top-level current-alignment statement list. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements =
+      completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements := rfl
+
+/-- Build gate: the alignment roster-pair statement list has exactly the
+eighteen top-level current-alignment components. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
+      18 := by
+  simpa [completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements]
+    using
+      completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current
+
+/-- Build-gated certificate that the top-level current-alignment certificate and
+its statement-roster certificate are carried as the current roster-pair package.
+-/
+def CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements =
+      completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements /\
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
+      18 /\
+    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate
+
+/-- The current alignment roster-pair package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate :
+    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_top_level_alignment_certificate
+        completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate))
+
+/-- Build-gated statement roster certificate for the current alignment
+roster-pair package. -/
+def CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements =
+      completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements /\
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
+      18 /\
+    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate
+
+/-- The current alignment roster-pair package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current
+      completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate)
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open/closed target count/id gates, and subordinate certificate propositions
@@ -21092,6 +21161,8 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionCertificate : Prop :=
     CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate
 
 /-- The current paper-semantic kernel-only obstruction is machine checked all
@@ -21389,11 +21460,13 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
   constructor
   · exact
       completePaperSemanticKernelOnly_current_top_level_alignment_certificate
-  constructor
-  · exact
-      completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate
-  exact
-    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
+  exact And.intro
+    completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate
+        completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate))
 
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
