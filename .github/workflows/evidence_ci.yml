@@ -26,10 +26,10 @@ jobs:
   public-evidence:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -48,7 +48,7 @@ jobs:
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
       - name: Cache Mathlib
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: lean4/.lake
           key: lake-${{ runner.os }}-${{ hashFiles('lean4/lean-toolchain', 'lean4/lakefile.toml', 'lean4/lake-manifest.json') }}
