@@ -23817,6 +23817,111 @@ theorem
       completePaperSemanticKernelOnlyCurrentGateStatusStatements_length_current
       completePaperSemanticKernelOnly_current_gate_status_certificate)
 
+/-- Current open-target gate-status roster tying the two remaining open target
+propositions to the current gate-status certificate. -/
+def completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements :
+    List Prop :=
+  [Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")],
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate]
+
+/-- Build gate: the current open-target gate-status roster names exactly the
+two remaining target refutations and their gate-status certificate pair. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate] := rfl
+
+/-- Build gate: the current open-target gate-status roster has six
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements.length =
+      6 := rfl
+
+/-- Build-gated certificate for the current open-target gate status. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate :
+    Prop :=
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")] /\
+  CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate
+
+/-- The current open-target gate status is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_open_target_gate_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate := by
+  exact And.intro
+    part6_lattice_embedding_semantic_kernel_target_notYet
+    (And.intro
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+      (And.intro
+        openSemanticTargetIds_current
+        (And.intro
+          (semantic_target_paper_label_id_certificate.2.1)
+          (And.intro
+            completePaperSemanticKernelOnly_current_gate_status_certificate
+            completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate))))
+
+/-- Build-gated statement roster certificate for the current open-target
+gate-status package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements.length =
+      6 /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate
+
+/-- The current open-target gate-status package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_gate_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_open_target_gate_status_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
