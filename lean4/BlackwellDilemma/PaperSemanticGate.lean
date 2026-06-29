@@ -12084,8 +12084,10 @@ def RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate :
     Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
     RemainingOpenSemanticTargetsBilateralPackageObstructionCertificate
 
-/-- Both remaining open targets have explicit current obstruction sources at
-each package layer used by the joint reductions. -/
+/-- Both remaining open targets have current obstruction witnesses at each
+package layer used by the joint reductions.  The route and closure witnesses
+are routed through the target-obstruction equivalences; the direct route
+obstruction sources remain pinned by the source-specific certificates below. -/
 theorem remaining_open_semantic_targets_bilateral_current_obstruction_source_certificate :
     RemainingOpenSemanticTargetsBilateralCurrentObstructionSourceCertificate := by
   exact ⟨
@@ -12095,10 +12097,14 @@ theorem remaining_open_semantic_targets_bilateral_current_obstruction_source_cer
     topo_cluster_random_supercritical_z2_exact_closure_input_notYet,
     not_part6_full_paper_closing_full_output_bundle_current,
     topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet,
-    not_part6_nondegenerate_feasible_repair_route_current,
-    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
-    not_part6_full_paper_closing_support_current,
-    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route.mp
+      part6_lattice_embedding_semantic_kernel_target_notYet),
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route.mp
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_full_support.mp
+      part6_lattice_embedding_semantic_kernel_target_notYet),
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route.mp
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
     remaining_open_semantic_targets_bilateral_package_obstruction_certificate⟩
 
 /-- Statement roster for bilateral current obstruction sources. -/
