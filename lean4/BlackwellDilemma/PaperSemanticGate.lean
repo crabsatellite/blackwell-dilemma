@@ -27463,6 +27463,218 @@ theorem completePaperSemanticKernelOnly_current_terminal_paper_state_routed_exit
       completePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_paper_state_routed_exit_closure_certificate)
 
+/-- Terminal paper-state/source-routed-exit closure roster tying the public
+paper-state/routed-exit package to the terminal source, ledger, final-status,
+and route/source alignment packages. -/
+def completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+   openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+   openSemanticTargetCurrentRoutedExitIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   semanticTargets.length =
+      paperSemanticClosedCount + paperSemanticOpenCount,
+   semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds,
+   semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount = 3]
+
+/-- Build gate: the terminal paper-state/source-routed-exit closure roster
+names the paper-state/routed-exit package, source/ledger closure packages,
+status-routed exit coverage, route/source alignment, and exact public paper
+ledger facts. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+       openSemanticTargetCurrentRoutedExitIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3] := rfl
+
+/-- Build gate: the terminal paper-state/source-routed-exit closure roster has
+twenty-eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements.length =
+      28 := rfl
+
+/-- Build-gated terminal paper-state/source-routed-exit closure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate /\
+  openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds /\
+  openSemanticTargetCurrentRoutedExitIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  semanticTargets.length =
+      paperSemanticClosedCount + paperSemanticOpenCount /\
+  semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds /\
+  semanticTargets = closedSemanticTargets ++ openSemanticTargets /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  paperSemanticClosedCount = 3
+
+/-- The terminal paper-state/source-routed-exit closure package is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_routed_exit_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_paper_state_routed_exit_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_state_routed_exit_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_source_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_source_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate,
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_route_obstruction_alignment_certificate,
+    completePaperSemanticKernelOnly_current_route_obstruction_alignment_statement_roster_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate,
+    openSemanticTargetCurrentRoutedExitIds_current,
+    openSemanticTargetCurrentRoutedExitIdPaperLabels_current,
+    openSemanticTargetIds_current,
+    semantic_targets_partition_certificate.1,
+    semantic_targets_partition_certificate.2,
+    semantic_target_status_partition_certificate.1,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    paperSemanticClosedCount_current⟩
+
+/-- Build-gated statement roster certificate for terminal
+paper-state/source-routed-exit closure. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+       openSemanticTargetCurrentRoutedExitIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3] /\
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements.length =
+      28 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureCertificate
+
+/-- The terminal paper-state/source-routed-exit closure package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_state_source_routed_exit_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceRoutedExitClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_paper_state_source_routed_exit_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
