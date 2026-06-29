@@ -4746,6 +4746,49 @@ def main() -> int:
         "open_semantic_target_id_obstruction_map_ledger_alignment_statement_roster_certificate"
     )
     print(
+        "open_semantic_target_id_obstruction_map_id_paper_labels="
+        "openSemanticTargetIdObstructionMapIdPaperLabels"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_id_paper_labels_proof="
+        "openSemanticTargetIdObstructionMapIdPaperLabels_current"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_id_paper_labels_open_ledger_proof="
+        "openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_statements="
+        "openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_statements_proof="
+        "openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_named_current"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_terms_checked=3"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_terms_proof="
+        "openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_length_current"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_certificate="
+        "OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_certificate_proof="
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_certificate"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate="
+        "OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate_proof="
+        "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -11402,6 +11445,49 @@ def main() -> int:
         (
             "open_semantic_target_id_obstruction_map_ledger_alignment_statement_roster_certificate_proof="
             "open_semantic_target_id_obstruction_map_ledger_alignment_statement_roster_certificate"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_id_paper_labels="
+            "openSemanticTargetIdObstructionMapIdPaperLabels"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_id_paper_labels_proof="
+            "openSemanticTargetIdObstructionMapIdPaperLabels_current"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_id_paper_labels_open_ledger_proof="
+            "openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_statements="
+            "openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_statements_proof="
+            "openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_named_current"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_terms_checked=3"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_terms_proof="
+            "openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_length_current"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_certificate="
+            "OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_certificate_proof="
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_certificate"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate="
+            "OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate_proof="
+            "open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="

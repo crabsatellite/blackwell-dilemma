@@ -29786,6 +29786,99 @@ theorem
       openSemanticTargetIdObstructionMapLedgerAlignmentStatements_length_current
       open_semantic_target_id_obstruction_map_ledger_alignment_certificate)
 
+/-- The ID-indexed obstruction map projected to `(id, paperLabel)` pairs via
+the canonical kernel-surface paper labels. -/
+def openSemanticTargetIdObstructionMapIdPaperLabels :
+    List (String × String) :=
+  List.zip openSemanticTargetIdObstructionMapIds
+    openSemanticTargetKernelSurfacePaperLabels
+
+/-- Build gate: the ID-indexed obstruction map carries the same `(id,
+paperLabel)` pairs as the kernel-surface registry. -/
+theorem openSemanticTargetIdObstructionMapIdPaperLabels_current :
+    openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargetKernelSurfaceIdPaperLabels := rfl
+
+/-- Build gate: the ID-indexed obstruction map carries the same `(id,
+paperLabel)` pairs as the open semantic ledger. -/
+theorem openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current :
+    openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  rfl
+
+/-- Paper-label alignment statement roster for the ID-indexed obstruction
+map. -/
+def openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements :
+    List Prop :=
+  [openSemanticTargetIdObstructionMapIdPaperLabels =
+     openSemanticTargetKernelSurfaceIdPaperLabels,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate]
+
+/-- Build gate: the ID-indexed obstruction-map paper-label alignment roster is
+fixed. -/
+theorem
+    openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_named_current :
+    openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements =
+      [openSemanticTargetIdObstructionMapIdPaperLabels =
+         openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate] := rfl
+
+/-- Build gate: the ID-indexed obstruction-map paper-label alignment roster has
+three statements. -/
+theorem
+    openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_length_current :
+    openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements.length =
+      3 := rfl
+
+/-- Build-gated paper-label alignment certificate for the ID-indexed
+obstruction map. -/
+def OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate :
+    Prop :=
+  openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargetKernelSurfaceIdPaperLabels /\
+  openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate
+
+/-- The ID-indexed obstruction map is aligned with the paper-facing labels used
+by the kernel-surface registry and open semantic ledger. -/
+theorem
+    open_semantic_target_id_obstruction_map_paper_label_alignment_certificate :
+    OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate := by
+  exact ⟨
+    openSemanticTargetIdObstructionMapIdPaperLabels_current,
+    openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current,
+    open_semantic_target_id_obstruction_map_ledger_alignment_certificate⟩
+
+/-- Build-gated statement roster certificate for the ID-indexed obstruction-map
+paper-label alignment. -/
+def OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements =
+      [openSemanticTargetIdObstructionMapIdPaperLabels =
+         openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate] /\
+    openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements.length =
+      3 /\
+    OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate
+
+/-- The ID-indexed obstruction-map paper-label alignment has a fixed statement
+roster. -/
+theorem
+    open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate :
+    OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_named_current
+    (And.intro
+      openSemanticTargetIdObstructionMapPaperLabelAlignmentStatements_length_current
+      open_semantic_target_id_obstruction_map_paper_label_alignment_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
