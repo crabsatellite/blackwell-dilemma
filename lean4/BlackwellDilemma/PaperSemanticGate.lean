@@ -23103,7 +23103,9 @@ def completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements :
   [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
-   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the routed top-level obstruction roster names exactly the
 top-level current-obstruction pair and the routed open-target exit pair. -/
@@ -23113,15 +23115,17 @@ theorem
       [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate] :=
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] :=
   rfl
 
-/-- Build gate: the routed top-level obstruction roster has exactly four
+/-- Build gate: the routed top-level obstruction roster has exactly six
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements.length =
-      4 := rfl
+      6 := rfl
 
 /-- Build-gated certificate that the main current-obstruction gate also reaches
 the final routed open-target exit package. -/
@@ -23130,7 +23134,9 @@ def CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate :
   CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The routed top-level current-obstruction certificate is machine checked. -/
 theorem
@@ -23142,7 +23148,11 @@ theorem
       completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
       (And.intro
         completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate
-        completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate))
+        (And.intro
+          completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate
+          (And.intro
+            part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
 
 /-- Build-gated statement roster certificate for the routed top-level
 current-obstruction package. -/
@@ -23153,9 +23163,11 @@ def
       [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements.length =
-      4 /\
+      6 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate
 
 /-- The routed top-level current-obstruction package has a fixed statement

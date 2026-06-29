@@ -3428,7 +3428,7 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_statements_proof="
         "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_named_current"
     )
-    print("complete_paper_semantic_kernel_only_current_obstruction_routed_exit_statement_terms_checked=4")
+    print("complete_paper_semantic_kernel_only_current_obstruction_routed_exit_statement_terms_checked=6")
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_statement_terms_proof="
         "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_length_current"
@@ -9132,7 +9132,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_statement_terms_checked=4"
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_statement_terms_checked=6"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_statement_terms_proof="
