@@ -6908,7 +6908,9 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
         "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_field_payload_alignment_certificate,"
-        "completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate"
+        "completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate,"
+        "part6_lattice_embedding_repair_route_obstruction_multipath_certificate,"
+        "topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_certificate="
@@ -6918,7 +6920,7 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_certificate_proof="
         "completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate"
     )
-    print("complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=18")
+    print("complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=20")
     print(
         "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statements="
         "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements"
@@ -6928,7 +6930,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=18"
+        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=20"
     )
     print(
         "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_proof="
@@ -8693,7 +8695,9 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_field_payload_alignment_certificate,"
-            "completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate"
+            "completePaperSemanticKernelOnly_current_field_payload_alignment_statement_roster_certificate,"
+            "part6_lattice_embedding_repair_route_obstruction_multipath_certificate,"
+            "topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_certificate="
@@ -8703,7 +8707,7 @@ def main() -> int:
             "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate"
         ),
-        "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=18",
+        "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=20",
         (
             "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statements="
             "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements"
@@ -8712,7 +8716,7 @@ def main() -> int:
             "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statements_proof="
             "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_named_current"
         ),
-        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=18",
+        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=20",
         (
             "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_proof="
             "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current"
