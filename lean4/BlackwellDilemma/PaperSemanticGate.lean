@@ -10715,12 +10715,16 @@ theorem part6_lattice_embedding_route_obstruction_projection_certificate :
     part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,
     part6_lattice_embedding_repair_route_not_iff_full_support_not,
     part6_lattice_embedding_semantic_kernel_target_notYet,
-    not_part6_nondegenerate_feasible_repair_route_current,
-    not_part6_full_paper_closing_support_current,
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route.mp
+      part6_lattice_embedding_semantic_kernel_target_notYet),
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_full_support.mp
+      part6_lattice_embedding_semantic_kernel_target_notYet),
     part6_lattice_embedding_exact_closure_input_not_of_repair_route_not
-      not_part6_nondegenerate_feasible_repair_route_current,
+      (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route.mp
+        part6_lattice_embedding_semantic_kernel_target_notYet),
     part6_lattice_embedding_full_output_bundle_not_of_repair_route_not
-      not_part6_nondegenerate_feasible_repair_route_current,
+      (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route.mp
+        part6_lattice_embedding_semantic_kernel_target_notYet),
     part6_remaining_conditional_projection_certificate,
     remaining_open_semantic_targets_obstruction_equivalence_certificate⟩
 
@@ -11229,12 +11233,16 @@ theorem
     topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route,
     topo_cluster_random_supercritical_z2_full_route_not_iff_boxed_route_not,
     topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
-    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
-    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route.mp
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route.mp
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
     topo_cluster_random_supercritical_z2_exact_closure_input_not_of_full_route_not
-      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+      (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route.mp
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
     topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_not_of_full_route_not
-      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+      (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route.mp
+        topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet),
     topo_cluster_random_supercritical_z2_exact_output_projection_certificate,
     remaining_open_semantic_targets_obstruction_equivalence_certificate⟩
 
