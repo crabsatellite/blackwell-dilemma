@@ -25483,6 +25483,173 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_open_obstruction_certificate)
 
+/-- Terminal per-target routed-exit roster tying the terminal open-obstruction
+package to each remaining open target's routed-exit certificate and source
+obstruction packages. -/
+def completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+   Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+   Part6LatticeEmbeddingCurrentRoutedExitStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
+   TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+   openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+   openSemanticTargetCurrentRoutedExitIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+
+/-- Build gate: the terminal per-target routed-exit roster names exactly the
+terminal open-obstruction package, both per-target routed exits, their ledger
+alignment, and the four source-specific route-derived target obstruction
+packages. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+       openSemanticTargetCurrentRoutedExitIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] :=
+  rfl
+
+/-- Build gate: the terminal per-target routed-exit roster has twenty-two
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements.length =
+      22 := rfl
+
+/-- Build-gated terminal certificate for per-target routed exits of the two
+current open paper-semantic targets. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+  Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
+  Part6LatticeEmbeddingCurrentRoutedExitStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
+  TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate /\
+  OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate /\
+  openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds /\
+  openSemanticTargetCurrentRoutedExitIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate /\
+  Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate /\
+  Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate /\
+  Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate /\
+  TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate /\
+  TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+
+/-- The terminal per-target routed-exit package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_open_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate,
+    part6_lattice_embedding_current_routed_exit_certificate,
+    part6_lattice_embedding_current_routed_exit_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_current_routed_exit_certificate,
+    topo_cluster_random_supercritical_z2_current_routed_exit_statement_roster_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_certificate,
+    open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate,
+    openSemanticTargetCurrentRoutedExitIds_current,
+    openSemanticTargetCurrentRoutedExitIdPaperLabels_current,
+    part6_lattice_embedding_repair_route_derived_target_obstruction_certificate,
+    part6_lattice_embedding_repair_route_derived_target_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_full_support_derived_target_obstruction_certificate,
+    part6_lattice_embedding_full_support_derived_target_obstruction_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate,
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate,
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate⟩
+
+/-- Build-gated statement roster certificate for the terminal per-target
+routed-exit package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
+       OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
+       openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+       openSemanticTargetCurrentRoutedExitIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements.length =
+      22 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate
+
+/-- The terminal per-target routed-exit package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
