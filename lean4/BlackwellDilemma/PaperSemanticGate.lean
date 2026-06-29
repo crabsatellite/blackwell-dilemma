@@ -23922,6 +23922,95 @@ theorem
       completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_length_current
       completePaperSemanticKernelOnly_current_open_target_gate_status_certificate)
 
+/-- Current final status roster: the machine-facing final state ties the
+current non-closure theorem to routed final-exit and open-target gate status. -/
+def completePaperSemanticKernelOnlyCurrentFinalStatusStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False]
+
+/-- Build gate: the current final-status roster names the full current
+non-closure package and its routed final-exit/open-target status certificates. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentFinalStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False] := rfl
+
+/-- Build gate: the current final-status roster has eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentFinalStatusStatements.length =
+      8 := rfl
+
+/-- Build-gated certificate for the current final machine status. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate : Prop :=
+  CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False)
+
+/-- The current final machine status is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_final_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_gate_status_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_open_target_gate_status_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_open_target_gate_status_statement_roster_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_notYet
+                completePaperSemanticKernelOnly_iff_false_current))))))
+
+/-- Build-gated statement roster certificate for the current final status. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentFinalStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False] /\
+    completePaperSemanticKernelOnlyCurrentFinalStatusStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate
+
+/-- The current final-status package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentFinalStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentFinalStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_final_status_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
