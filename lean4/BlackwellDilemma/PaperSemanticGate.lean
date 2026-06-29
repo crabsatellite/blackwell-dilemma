@@ -23266,6 +23266,7 @@ def topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements :
     List Prop :=
   [Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
@@ -23281,6 +23282,7 @@ theorem
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements =
       [Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
        TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
@@ -23289,16 +23291,17 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] := rfl
 
-/-- Build gate: the topo routed-exit roster has nine statements. -/
+/-- Build gate: the topo routed-exit roster has ten statements. -/
 theorem
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_length_current :
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements.length =
-      9 := rfl
+      10 := rfl
 
 /-- Build-gated certificate for the topo current routed exit. -/
 def TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate : Prop :=
   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate /\
   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate /\
@@ -23315,18 +23318,20 @@ theorem topo_cluster_random_supercritical_z2_current_routed_exit_certificate :
     (And.intro
       topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current
       (And.intro
-        topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current
+        topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
         (And.intro
-          topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate
+          topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current
           (And.intro
-            topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_statement_roster_certificate
+            topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate
             (And.intro
-              topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate
+              topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_statement_roster_certificate
               (And.intro
-                topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate
+                topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate
                 (And.intro
-                  completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
-                  completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate)))))))
+                  topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
+                    completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate))))))))
 
 /-- Build-gated statement roster certificate for the topo routed exit. -/
 def TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate :
@@ -23334,6 +23339,7 @@ def TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate 
   topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements =
       [Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
        TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
@@ -23342,7 +23348,7 @@ def TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate 
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] /\
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements.length =
-      9 /\
+      10 /\
     TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate
 
 /-- The topo current routed-exit package has a fixed statement roster. -/

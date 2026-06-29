@@ -451,7 +451,7 @@
             "part6_lattice_embedding_current_routed_exit_statement_roster_certificate_proof=part6_lattice_embedding_current_routed_exit_statement_roster_certificate",
             "topo_cluster_random_supercritical_z2_current_routed_exit_statements=topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements",
             "topo_cluster_random_supercritical_z2_current_routed_exit_statements_proof=topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_named_current",
-            "topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_checked=9",
+            "topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_checked=10",
             "topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_proof=topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_length_current",
             "topo_cluster_random_supercritical_z2_current_routed_exit_certificate=TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate",
             "topo_cluster_random_supercritical_z2_current_routed_exit_certificate_proof=topo_cluster_random_supercritical_z2_current_routed_exit_certificate",
