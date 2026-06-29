@@ -23276,6 +23276,119 @@ theorem
       completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements_length_current
       completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate)
 
+/-- Open target ids covered by the current per-target routed-exit packages. -/
+def openSemanticTargetCurrentRoutedExitIds : List String :=
+  openSemanticTargetIds
+
+/-- Open target `(id, paperLabel)` pairs covered by the current per-target
+routed-exit packages. -/
+def openSemanticTargetCurrentRoutedExitIdPaperLabels :
+    List (String × String) :=
+  openSemanticTargetKernelSurfaceIdPaperLabels
+
+/-- Build gate: current routed-exit packages cover exactly the open semantic
+target ids. -/
+theorem openSemanticTargetCurrentRoutedExitIds_current :
+    openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds := rfl
+
+/-- Build gate: current routed-exit packages carry exactly the open semantic
+target `(id, paperLabel)` ledger. -/
+theorem openSemanticTargetCurrentRoutedExitIdPaperLabels_current :
+    openSemanticTargetCurrentRoutedExitIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) :=
+  openSemanticTargetKernelSurfaceIdPaperLabels_current
+
+/-- Build gate: the routed-exit `(id, paperLabel)` ledger agrees with the
+kernel-surface ledger. -/
+theorem
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_currentRoutedExitIdPaperLabels :
+    openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetCurrentRoutedExitIdPaperLabels := rfl
+
+/-- Statement roster for the open-target routed-exit ledger alignment. -/
+def openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements :
+    List Prop :=
+  [openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+   openSemanticTargetCurrentRoutedExitIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetCurrentRoutedExitIdPaperLabels,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate]
+
+/-- Build gate: the open-target routed-exit ledger-alignment roster is fixed to
+the current id ledger, paper-label ledger, and per-target routed-exit package. -/
+theorem
+    openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current :
+    openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements =
+      [openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+       openSemanticTargetCurrentRoutedExitIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetCurrentRoutedExitIdPaperLabels,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] := rfl
+
+/-- Build gate: the open-target routed-exit ledger-alignment roster has five
+statements. -/
+theorem
+    openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_length_current :
+    openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements.length =
+      5 := rfl
+
+/-- Build-gated certificate aligning current per-target routed exits with the
+open semantic target id and `(id, paperLabel)` ledgers. -/
+def OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate :
+    Prop :=
+  openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds /\
+  openSemanticTargetCurrentRoutedExitIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetCurrentRoutedExitIdPaperLabels /\
+  CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate
+
+/-- The open-target routed-exit ledger alignment is machine checked. -/
+theorem open_semantic_target_current_routed_exit_ledger_alignment_certificate :
+    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate := by
+  exact And.intro
+    openSemanticTargetCurrentRoutedExitIds_current
+    (And.intro
+      openSemanticTargetCurrentRoutedExitIdPaperLabels_current
+      (And.intro
+        openSemanticTargetKernelSurfaceIdPaperLabels_eq_currentRoutedExitIdPaperLabels
+        (And.intro
+          completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate
+          completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate)))
+
+/-- Build-gated statement roster certificate for the open-target routed-exit
+ledger alignment. -/
+def
+    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements =
+      [openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
+       openSemanticTargetCurrentRoutedExitIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetCurrentRoutedExitIdPaperLabels,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] /\
+    openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements.length =
+      5 /\
+    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate
+
+/-- The open-target routed-exit ledger-alignment package has a fixed statement
+roster. -/
+theorem
+    open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate :
+    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current
+    (And.intro
+      openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_length_current
+      open_semantic_target_current_routed_exit_ledger_alignment_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

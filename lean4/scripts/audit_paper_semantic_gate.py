@@ -3537,6 +3537,55 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate"
     )
     print(
+        "semantic_target_current_routed_exit_ids="
+        "openSemanticTargetCurrentRoutedExitIds"
+    )
+    print(
+        "semantic_target_current_routed_exit_ids_proof="
+        "openSemanticTargetCurrentRoutedExitIds_current"
+    )
+    print(
+        "semantic_target_current_routed_exit_id_paper_labels="
+        "openSemanticTargetCurrentRoutedExitIdPaperLabels"
+    )
+    print(
+        "semantic_target_current_routed_exit_id_paper_labels_proof="
+        "openSemanticTargetCurrentRoutedExitIdPaperLabels_current"
+    )
+    print(
+        "semantic_target_kernel_current_routed_exit_id_paper_label_projection="
+        "openSemanticTargetKernelSurfaceIdPaperLabels_eq_currentRoutedExitIdPaperLabels"
+    )
+    print(
+        "semantic_target_current_routed_exit_ledger_alignment_statements="
+        "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements"
+    )
+    print(
+        "semantic_target_current_routed_exit_ledger_alignment_statements_proof="
+        "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current"
+    )
+    print("semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=5")
+    print(
+        "semantic_target_current_routed_exit_ledger_alignment_statement_terms_proof="
+        "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_length_current"
+    )
+    print(
+        "semantic_target_current_routed_exit_ledger_alignment_certificate="
+        "OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate"
+    )
+    print(
+        "semantic_target_current_routed_exit_ledger_alignment_certificate_proof="
+        "open_semantic_target_current_routed_exit_ledger_alignment_certificate"
+    )
+    print(
+        "semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate="
+        "OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate_proof="
+        "open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -8980,6 +9029,57 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_per_target_routed_exit_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate"
+        ),
+        (
+            "semantic_target_current_routed_exit_ids="
+            "openSemanticTargetCurrentRoutedExitIds"
+        ),
+        (
+            "semantic_target_current_routed_exit_ids_proof="
+            "openSemanticTargetCurrentRoutedExitIds_current"
+        ),
+        (
+            "semantic_target_current_routed_exit_id_paper_labels="
+            "openSemanticTargetCurrentRoutedExitIdPaperLabels"
+        ),
+        (
+            "semantic_target_current_routed_exit_id_paper_labels_proof="
+            "openSemanticTargetCurrentRoutedExitIdPaperLabels_current"
+        ),
+        (
+            "semantic_target_kernel_current_routed_exit_id_paper_label_projection="
+            "openSemanticTargetKernelSurfaceIdPaperLabels_eq_currentRoutedExitIdPaperLabels"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_statements="
+            "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_statements_proof="
+            "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_statement_terms_checked=5"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_statement_terms_proof="
+            "openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_length_current"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_certificate="
+            "OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_certificate_proof="
+            "open_semantic_target_current_routed_exit_ledger_alignment_certificate"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate="
+            "OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate_proof="
+            "open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
