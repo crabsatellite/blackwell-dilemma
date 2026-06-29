@@ -22714,35 +22714,186 @@ theorem
       completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements_length_current
       completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate)
 
+/-- Final target-derived route-obstruction roster: each current target
+obstruction is checked as a source of the corresponding route/support
+obstruction. -/
+def completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements :
+    List Prop :=
+  [(Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not Part6NondegenerateFeasibleRepairRoute),
+   (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+      Not Part6FullPaperClosingSupport),
+   (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+   (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate]
+
+/-- Build gate: the target-derived route-obstruction roster is fixed to the
+four target-to-route obstruction maps, the current target/route obstructions,
+and the route-equivalence exit pair. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements =
+      [(Not Part6LatticeEmbeddingSemanticKernelTarget ->
+          Not Part6NondegenerateFeasibleRepairRoute),
+       (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+          Not Part6FullPaperClosingSupport),
+       (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+       (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate] := rfl
+
+/-- Build gate: the target-derived route-obstruction roster has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements.length =
+      12 := rfl
+
+/-- Build-gated certificate tying every current target obstruction to the
+corresponding route/support obstruction through the route-obstruction
+equivalence layer. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate :
+    Prop :=
+  (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+    Not Part6NondegenerateFeasibleRepairRoute) /\
+  (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+    Not Part6FullPaperClosingSupport) /\
+  (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+  (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+  Not Part6NondegenerateFeasibleRepairRoute /\
+  Not Part6FullPaperClosingSupport /\
+  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate
+
+/-- The current target-derived route-obstruction certificate is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate := by
+  constructor
+  · exact (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route).mp
+  constructor
+  · exact (part6_lattice_embedding_semantic_kernel_target_not_iff_full_support).mp
+  constructor
+  · exact
+      (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route).mp
+  constructor
+  · exact
+      (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route).mp
+  constructor
+  · exact part6_lattice_embedding_semantic_kernel_target_notYet
+  constructor
+  · exact topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+  constructor
+  · exact part6_lattice_embedding_target_route_obstruction_via_target_current
+  constructor
+  · exact part6_lattice_embedding_closure_route_obstruction_via_target_current
+  constructor
+  · exact topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current
+  constructor
+  · exact topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current
+  constructor
+  · exact
+      completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate
+  · exact
+      completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_statement_roster_certificate
+
+/-- Build-gated statement roster certificate for the current target-derived
+route-obstruction package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements =
+      [(Not Part6LatticeEmbeddingSemanticKernelTarget ->
+          Not Part6NondegenerateFeasibleRepairRoute),
+       (Not Part6LatticeEmbeddingSemanticKernelTarget ->
+          Not Part6FullPaperClosingSupport),
+       (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+       (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate
+
+/-- The target-derived route-obstruction package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_length_current
+      completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate)
+
 /-- Final routed-exit roster: the current non-complete exit is paired with the
-route-derived target-obstruction package. -/
+route-derived target-obstruction package and its reverse target-derived
+route-obstruction package. -/
 def completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate]
 
 /-- Build gate: the routed-exit roster is fixed to the route-derived
-target-obstruction certificate pair and the final open-target exit pair. -/
+target-obstruction certificate pair, the target-derived route-obstruction
+certificate pair, and the final open-target exit pair. -/
 theorem completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_named_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements =
       [CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate] := rfl
 
-/-- Build gate: the routed-exit roster has exactly four statements. -/
+/-- Build gate: the routed-exit roster has exactly six statements. -/
 theorem completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements.length =
-      4 := rfl
+      6 := rfl
 
 /-- Build-gated certificate that the final current open-target exit is covered
-by the route-derived target-obstruction package. -/
+by the bidirectional route/target obstruction packages. -/
 def CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate
 
@@ -22754,8 +22905,12 @@ theorem completePaperSemanticKernelOnly_current_open_target_routed_exit_certific
     (And.intro
       completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate
       (And.intro
-        completePaperSemanticKernelOnly_current_open_target_exit_certificate
-        completePaperSemanticKernelOnly_current_open_target_exit_statement_roster_certificate))
+        completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_open_target_exit_certificate
+            completePaperSemanticKernelOnly_current_open_target_exit_statement_roster_certificate))))
 
 /-- Build-gated statement roster certificate for the routed final open-target
 exit package. -/
@@ -22764,10 +22919,12 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCer
   completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements =
       [CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements.length =
-      4 /\
+      6 /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate
 
 /-- The routed final open-target exit package has a fixed statement roster. -/

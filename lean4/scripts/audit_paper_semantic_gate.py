@@ -3345,6 +3345,51 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_rules="
+        "part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route,"
+        "part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,"
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route,"
+        "topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_current_proofs="
+        "part6_lattice_embedding_target_route_obstruction_via_target_current,"
+        "part6_lattice_embedding_closure_route_obstruction_via_target_current,"
+        "topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,"
+        "topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statements="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_terms_checked=12"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_certificate_proof="
+        "completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statements="
         "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements"
     )
@@ -3353,7 +3398,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_checked=4"
+        "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_checked=6"
     )
     print(
         "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_proof="
@@ -8621,6 +8666,51 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate"
         ),
         (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_rules="
+            "part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route,"
+            "part6_lattice_embedding_semantic_kernel_target_not_iff_full_support,"
+            "topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route,"
+            "topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_current_proofs="
+            "part6_lattice_embedding_target_route_obstruction_via_target_current,"
+            "part6_lattice_embedding_closure_route_obstruction_via_target_current,"
+            "topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,"
+            "topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statements="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_terms_checked=12"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_certificate_proof="
+            "completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_open_target_target_derived_route_obstruction_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statements="
             "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements"
         ),
@@ -8629,7 +8719,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_checked=4"
+            "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_checked=6"
         ),
         (
             "complete_paper_semantic_kernel_only_current_open_target_routed_exit_statement_terms_proof="
