@@ -22144,6 +22144,445 @@ theorem
       completePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatements_length_current
       completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate)
 
+/-- Refuting the Part 6 repair-route interface refutes the Part 6 semantic
+kernel target. -/
+theorem part6_lattice_embedding_semantic_kernel_target_not_of_repair_route_not
+    (hroute : Not Part6NondegenerateFeasibleRepairRoute) :
+    Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  exact
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_repair_route).mpr
+      hroute
+
+/-- Refuting the Part 6 full-support interface refutes the Part 6 semantic
+kernel target. -/
+theorem part6_lattice_embedding_semantic_kernel_target_not_of_full_support_not
+    (hsupport : Not Part6FullPaperClosingSupport) :
+    Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  exact
+    (part6_lattice_embedding_semantic_kernel_target_not_iff_full_support).mpr
+      hsupport
+
+/-- Refuting the topo full-route interface refutes the topo semantic kernel
+target. -/
+theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_full_route_not
+    (hroute : Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  exact
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_full_route).mpr
+      hroute
+
+/-- Refuting the topo boxed-torus route interface refutes the topo semantic
+kernel target. -/
+theorem topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_boxed_route_not
+    (hroute : Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  exact
+    (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_iff_boxed_route).mpr
+      hroute
+
+/-- The current Part 6 repair-route obstruction derives the Part 6 target
+obstruction. -/
+theorem
+    part6_lattice_embedding_semantic_kernel_target_not_from_repair_route_obstruction :
+    Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  exact part6_lattice_embedding_semantic_kernel_target_not_of_repair_route_not
+    not_part6_nondegenerate_feasible_repair_route_current
+
+/-- The current Part 6 full-support obstruction derives the Part 6 target
+obstruction. -/
+theorem
+    part6_lattice_embedding_semantic_kernel_target_not_from_full_support_obstruction :
+    Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  exact part6_lattice_embedding_semantic_kernel_target_not_of_full_support_not
+    not_part6_full_paper_closing_support_current
+
+/-- The current topo full-route obstruction derives the topo target
+obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_from_full_route_obstruction :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  exact
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_full_route_not
+      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+
+/-- The current topo boxed-torus route obstruction derives the topo target
+obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_from_boxed_route_obstruction :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  exact
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_boxed_route_not
+      not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+/-- Source-specific certificate: the Part 6 repair-route obstruction is a
+machine-checked source of the Part 6 target obstruction. -/
+def Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate :
+    Prop :=
+  (Not Part6NondegenerateFeasibleRepairRoute ->
+    Not Part6LatticeEmbeddingSemanticKernelTarget) /\
+  Not Part6NondegenerateFeasibleRepairRoute /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget
+
+/-- The Part 6 repair-route obstruction derives the current target obstruction. -/
+theorem part6_lattice_embedding_repair_route_derived_target_obstruction_certificate :
+    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate := by
+  exact And.intro
+    part6_lattice_embedding_semantic_kernel_target_not_of_repair_route_not
+    (And.intro
+      not_part6_nondegenerate_feasible_repair_route_current
+      part6_lattice_embedding_semantic_kernel_target_not_from_repair_route_obstruction)
+
+/-- Statement roster for the Part 6 repair-route-derived target obstruction. -/
+def part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements :
+    List Prop :=
+  [(Not Part6NondegenerateFeasibleRepairRoute ->
+    Not Part6LatticeEmbeddingSemanticKernelTarget),
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6LatticeEmbeddingSemanticKernelTarget]
+
+/-- Build gate: the Part 6 repair-route-derived roster is fixed. -/
+theorem part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements_named_current :
+    part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements =
+      [(Not Part6NondegenerateFeasibleRepairRoute ->
+        Not Part6LatticeEmbeddingSemanticKernelTarget),
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6LatticeEmbeddingSemanticKernelTarget] := rfl
+
+/-- Build gate: the Part 6 repair-route-derived roster has three statements. -/
+theorem part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements_length_current :
+    part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the Part 6 repair-route-derived
+target obstruction. -/
+def Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements =
+      [(Not Part6NondegenerateFeasibleRepairRoute ->
+        Not Part6LatticeEmbeddingSemanticKernelTarget),
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6LatticeEmbeddingSemanticKernelTarget] /\
+    part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements.length =
+      3 /\
+    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate
+
+/-- The Part 6 repair-route-derived target-obstruction package has a fixed
+statement roster. -/
+theorem
+    part6_lattice_embedding_repair_route_derived_target_obstruction_statement_roster_certificate :
+    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements_length_current
+      part6_lattice_embedding_repair_route_derived_target_obstruction_certificate)
+
+/-- Source-specific certificate: the Part 6 full-support obstruction is a
+machine-checked source of the Part 6 target obstruction. -/
+def Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate :
+    Prop :=
+  (Not Part6FullPaperClosingSupport ->
+    Not Part6LatticeEmbeddingSemanticKernelTarget) /\
+  Not Part6FullPaperClosingSupport /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget
+
+/-- The Part 6 full-support obstruction derives the current target obstruction. -/
+theorem part6_lattice_embedding_full_support_derived_target_obstruction_certificate :
+    Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate := by
+  exact And.intro
+    part6_lattice_embedding_semantic_kernel_target_not_of_full_support_not
+    (And.intro
+      not_part6_full_paper_closing_support_current
+      part6_lattice_embedding_semantic_kernel_target_not_from_full_support_obstruction)
+
+/-- Statement roster for the Part 6 full-support-derived target obstruction. -/
+def part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements :
+    List Prop :=
+  [(Not Part6FullPaperClosingSupport ->
+    Not Part6LatticeEmbeddingSemanticKernelTarget),
+   Not Part6FullPaperClosingSupport,
+   Not Part6LatticeEmbeddingSemanticKernelTarget]
+
+/-- Build gate: the Part 6 full-support-derived roster is fixed. -/
+theorem part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements_named_current :
+    part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements =
+      [(Not Part6FullPaperClosingSupport ->
+        Not Part6LatticeEmbeddingSemanticKernelTarget),
+       Not Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingSemanticKernelTarget] := rfl
+
+/-- Build gate: the Part 6 full-support-derived roster has three statements. -/
+theorem part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements_length_current :
+    part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the Part 6 full-support-derived
+target obstruction. -/
+def Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements =
+      [(Not Part6FullPaperClosingSupport ->
+        Not Part6LatticeEmbeddingSemanticKernelTarget),
+       Not Part6FullPaperClosingSupport,
+       Not Part6LatticeEmbeddingSemanticKernelTarget] /\
+    part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements.length =
+      3 /\
+    Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate
+
+/-- The Part 6 full-support-derived target-obstruction package has a fixed
+statement roster. -/
+theorem
+    part6_lattice_embedding_full_support_derived_target_obstruction_statement_roster_certificate :
+    Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements_length_current
+      part6_lattice_embedding_full_support_derived_target_obstruction_certificate)
+
+/-- Source-specific certificate: the topo full-route obstruction is a
+machine-checked source of the topo target obstruction. -/
+def TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate :
+    Prop :=
+  (Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+
+/-- The topo full-route obstruction derives the current target obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate :
+    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate := by
+  exact And.intro
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_full_route_not
+    (And.intro
+      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_not_from_full_route_obstruction)
+
+/-- Statement roster for the topo full-route-derived target obstruction. -/
+def topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements :
+    List Prop :=
+  [(Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget]
+
+/-- Build gate: the topo full-route-derived roster is fixed. -/
+theorem
+    topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements_named_current :
+    topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements =
+      [(Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the topo full-route-derived roster has three statements. -/
+theorem
+    topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements_length_current :
+    topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the topo full-route-derived
+target obstruction. -/
+def
+    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements =
+      [(Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements.length =
+      3 /\
+    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate
+
+/-- The topo full-route-derived target-obstruction package has a fixed statement
+roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements_length_current
+      topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate)
+
+/-- Source-specific certificate: the topo boxed-torus route obstruction is a
+machine-checked source of the topo target obstruction. -/
+def TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate :
+    Prop :=
+  (Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+
+/-- The topo boxed-torus route obstruction derives the current target
+obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate :
+    TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate := by
+  exact And.intro
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_boxed_route_not
+    (And.intro
+      not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+      topo_cluster_random_supercritical_z2_semantic_kernel_target_not_from_boxed_route_obstruction)
+
+/-- Statement roster for the topo boxed-route-derived target obstruction. -/
+def topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements :
+    List Prop :=
+  [(Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget]
+
+/-- Build gate: the topo boxed-route-derived roster is fixed. -/
+theorem
+    topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements_named_current :
+    topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements =
+      [(Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] := rfl
+
+/-- Build gate: the topo boxed-route-derived roster has three statements. -/
+theorem
+    topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements_length_current :
+    topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the topo boxed-route-derived
+target obstruction. -/
+def
+    TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements =
+      [(Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute ->
+        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+    topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements.length =
+      3 /\
+    TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate
+
+/-- The topo boxed-route-derived target-obstruction package has a fixed
+statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements_length_current
+      topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate)
+
+/-- Final route-derived target-obstruction roster: each current route/support
+obstruction is checked as a source of the corresponding target obstruction. -/
+def completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements :
+    List Prop :=
+  [Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate]
+
+/-- Build gate: the route-derived target-obstruction roster is fixed to the
+four source-specific route certificate pairs plus the route-equivalence exit
+pair. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements =
+      [Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate] := rfl
+
+/-- Build gate: the route-derived target-obstruction roster has ten statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements.length =
+      10 := rfl
+
+/-- Build-gated certificate tying every current route/support obstruction to a
+target obstruction derived through the route-obstruction equivalence layer. -/
+def CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate :
+    Prop :=
+  Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate /\
+  Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate /\
+  Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate /\
+  Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate /\
+  TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate /\
+  TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate
+
+/-- The current route-derived target-obstruction certificate is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate := by
+  exact And.intro
+    part6_lattice_embedding_repair_route_derived_target_obstruction_certificate
+    (And.intro
+      part6_lattice_embedding_repair_route_derived_target_obstruction_statement_roster_certificate
+      (And.intro
+        part6_lattice_embedding_full_support_derived_target_obstruction_certificate
+        (And.intro
+          part6_lattice_embedding_full_support_derived_target_obstruction_statement_roster_certificate
+          (And.intro
+            topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate
+            (And.intro
+              topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_statement_roster_certificate
+              (And.intro
+                topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate
+                (And.intro
+                  topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate
+                    completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_statement_roster_certificate))))))))
+
+/-- Build-gated statement roster certificate for the current route-derived
+target-obstruction package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements =
+      [Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate
+
+/-- The route-derived target-obstruction package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatements_length_current
+      completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
