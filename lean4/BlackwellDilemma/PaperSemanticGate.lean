@@ -22310,11 +22310,13 @@ def Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate :
 /-- The Part 6 repair-route obstruction derives the current target obstruction. -/
 theorem part6_lattice_embedding_repair_route_derived_target_obstruction_certificate :
     Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate := by
+  let hroute := not_part6_nondegenerate_feasible_repair_route_current
   exact And.intro
     part6_lattice_embedding_semantic_kernel_target_not_of_repair_route_not
     (And.intro
-      not_part6_nondegenerate_feasible_repair_route_current
-      part6_lattice_embedding_semantic_kernel_target_not_from_repair_route_obstruction)
+      hroute
+      (part6_lattice_embedding_semantic_kernel_target_not_of_repair_route_not
+        hroute))
 
 /-- Statement roster for the Part 6 repair-route-derived target obstruction. -/
 def part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatements :
@@ -22373,11 +22375,13 @@ def Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate :
 /-- The Part 6 full-support obstruction derives the current target obstruction. -/
 theorem part6_lattice_embedding_full_support_derived_target_obstruction_certificate :
     Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate := by
+  let hroute := not_part6_full_paper_closing_support_current
   exact And.intro
     part6_lattice_embedding_semantic_kernel_target_not_of_full_support_not
     (And.intro
-      not_part6_full_paper_closing_support_current
-      part6_lattice_embedding_semantic_kernel_target_not_from_full_support_obstruction)
+      hroute
+      (part6_lattice_embedding_semantic_kernel_target_not_of_full_support_not
+        hroute))
 
 /-- Statement roster for the Part 6 full-support-derived target obstruction. -/
 def part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatements :
@@ -22437,11 +22441,13 @@ def TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate
 theorem
     topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate :
     TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate := by
+  let hroute := not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
   exact And.intro
     topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_full_route_not
     (And.intro
-      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
-      topo_cluster_random_supercritical_z2_semantic_kernel_target_not_from_full_route_obstruction)
+      hroute
+      (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_full_route_not
+        hroute))
 
 /-- Statement roster for the topo full-route-derived target obstruction. -/
 def topoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatements :
@@ -22505,11 +22511,13 @@ obstruction. -/
 theorem
     topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate :
     TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate := by
+  let hroute := not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
   exact And.intro
     topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_boxed_route_not
     (And.intro
-      not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
-      topo_cluster_random_supercritical_z2_semantic_kernel_target_not_from_boxed_route_obstruction)
+      hroute
+      (topo_cluster_random_supercritical_z2_semantic_kernel_target_not_of_boxed_route_not
+        hroute))
 
 /-- Statement roster for the topo boxed-route-derived target obstruction. -/
 def topoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatements :
