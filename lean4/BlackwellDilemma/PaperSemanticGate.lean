@@ -23727,6 +23727,96 @@ theorem
       completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_length_current
       completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate)
 
+/-- Current gate-status roster tying the open/closed semantic ledger counts to
+the final routed-exit certificate. -/
+def completePaperSemanticKernelOnlyCurrentGateStatusStatements :
+    List Prop :=
+  [Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount = 3,
+   CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate]
+
+/-- Build gate: the current gate-status roster names exactly the ledger counts,
+semantic-ledger alignment, and final routed-exit certificate pair. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentGateStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentGateStatusStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate] := rfl
+
+/-- Build gate: the current gate-status roster has eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentGateStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentGateStatusStatements.length =
+      8 := rfl
+
+/-- Build-gated certificate for the current paper-semantic gate status. -/
+def CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate : Prop :=
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  paperSemanticClosedCount = 3 /\
+  CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate
+
+/-- The current paper-semantic gate status is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_gate_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_notYet
+    (And.intro
+      completePaperSemanticKernelOnly_iff_false_current
+      (And.intro
+        paperSemanticOpenCount_current
+        (And.intro
+          paperSemanticClosedCount_current
+          (And.intro
+            completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate
+                completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate))))))
+
+/-- Build-gated statement roster certificate for the current gate-status
+package. -/
+def CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentGateStatusStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentGateStatusStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate
+
+/-- The current gate-status package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentGateStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentGateStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_gate_status_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
