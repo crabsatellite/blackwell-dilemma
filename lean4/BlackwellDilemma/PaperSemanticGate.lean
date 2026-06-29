@@ -20444,6 +20444,30 @@ theorem completePaperSemanticKernelOnly_current_field_output_roster_label_ledger
         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current
         openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels))
 
+/-- Build gate: the current field-output surface and detailed statement
+rosters have full id, count, and `(id, paperLabel)` alignment with the open
+semantic-target ledger and kernel-surface ledger. -/
+theorem completePaperSemanticKernelOnly_current_field_output_roster_full_ledger_alignment :
+    (openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds /\
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount /\
+      openSemanticTargetClosureInputFieldOutputSurfaceIds =
+        openSemanticTargetIds /\
+      openSemanticTargetClosureInputFieldOutputSurfaces.length =
+        paperSemanticOpenCount) /\
+    (openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+      openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels /\
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+      openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels) := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_field_output_roster_ledger_alignment
+    completePaperSemanticKernelOnly_current_field_output_roster_label_ledger_alignment
+
 /-- Statement roster for the top-level current obstruction to complete
 paper-semantic kernel-only closure.  This fixes the exact non-complete claim,
 open/closed target count/id gates, and subordinate certificate propositions
