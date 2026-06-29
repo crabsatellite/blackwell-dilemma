@@ -4363,6 +4363,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_paper_state_source_routed_exit_closure_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_terms_checked=24"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_closure_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_closure_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -10636,6 +10667,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_routed_exit_closure_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_paper_state_source_routed_exit_closure_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_terms_checked=24"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_closure_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalClosureStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_closure_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_closure_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
