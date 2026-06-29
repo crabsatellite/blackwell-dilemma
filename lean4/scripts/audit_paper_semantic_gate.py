@@ -3092,6 +3092,35 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statements="
+        "completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_named_current"
+    )
+    print("complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_terms_checked=2")
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_iff_false_proof="
         "completePaperSemanticKernelOnly_iff_false_current"
     )
@@ -8052,6 +8081,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_obstruction_statement_roster_proof="
             "completePaperSemanticKernelOnlyCurrentObstructionStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statements="
+            "completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_terms_checked=2"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_final_ledger_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_conjuncts_checked="

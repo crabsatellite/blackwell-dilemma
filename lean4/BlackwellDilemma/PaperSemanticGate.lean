@@ -21656,6 +21656,62 @@ theorem completePaperSemanticKernelOnly_current_obstruction_certificate :
         completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate
         completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate))
 
+/-- Final statement roster for the current paper-semantic obstruction exit:
+the top-level obstruction certificate and its statement-roster certificate. -/
+def completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate]
+
+/-- Build gate: the current obstruction final ledger names exactly the final
+obstruction certificate and its statement-roster certificate. -/
+theorem completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements =
+      [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate] := rfl
+
+/-- Build gate: the current obstruction final ledger has exactly the two final
+exit certificates. -/
+theorem completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
+      2 := rfl
+
+/-- Build-gated final ledger certificate for the current paper-semantic
+obstruction exit.  This is intentionally outside the top-level obstruction
+certificate to avoid a recursive certificate dependency. -/
+def CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate
+
+/-- The current obstruction final ledger certificate is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_obstruction_certificate
+    completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate
+
+/-- Build-gated statement roster certificate for the current obstruction final
+ledger. -/
+def CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements =
+      [CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate
+
+/-- The current obstruction final ledger package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_length_current
+      completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

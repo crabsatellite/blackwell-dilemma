@@ -278,6 +278,8 @@ and the frontier/surface-roster/payload-route-map/exact-input/output/
 field-obstruction certificates.
 `completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate`
 pins those top-level obstruction statements as a Lean `List Prop`.
+`completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate`
+then pins the two final exit certificates as a nonrecursive 2-term ledger.
 `audit_paper_semantic_gate.py` now parses that top-level certificate body and
 fails unless all 114 expected certificate conjuncts are present.
 The same audit parses the top-level statement roster and checks all 114 expected
