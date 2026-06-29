@@ -26276,6 +26276,199 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate)
 
+/-- Terminal open-target source closure roster tying the terminal main
+obstruction closure directly to the route-derived and target-derived
+obstruction source packages for both current open targets. -/
+def completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+
+/-- Build gate: the terminal open-target source closure roster names the main
+terminal obstruction closure, the terminal open/per-target/route-target
+packages, every source route-derived target obstruction package, and the
+current target/route obstruction facts. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+
+/-- Build gate: the terminal open-target source closure roster has twenty-eight
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
+      28 := rfl
+
+/-- Build-gated terminal certificate for the current open-target witness
+closure over all route-derived and target-derived obstruction packages. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate /\
+  Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate /\
+  Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate /\
+  Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate /\
+  TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate /\
+  TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+  Not Part6NondegenerateFeasibleRepairRoute /\
+  Not Part6FullPaperClosingSupport /\
+  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+
+/-- The terminal open-target source closure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_certificate,
+    completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_repair_route_derived_target_obstruction_certificate,
+    part6_lattice_embedding_repair_route_derived_target_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_full_support_derived_target_obstruction_certificate,
+    part6_lattice_embedding_full_support_derived_target_obstruction_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate,
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate,
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    part6_lattice_embedding_target_route_obstruction_via_target_current,
+    part6_lattice_embedding_closure_route_obstruction_via_target_current,
+    topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
+    topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate⟩
+
+/-- Build-gated statement roster certificate for terminal open-target source
+closure. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
+      28 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate
+
+/-- The terminal open-target source closure package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_open_target_source_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
