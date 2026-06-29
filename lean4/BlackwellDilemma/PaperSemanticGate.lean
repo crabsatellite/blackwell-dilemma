@@ -25976,6 +25976,156 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate)
 
+/-- Terminal alignment-closure roster tying the final obstruction status back to
+the full top-level alignment, field-output ledger alignment, and routed-exit
+top-level alignment packages. -/
+def completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False]
+
+/-- Build gate: the terminal alignment-closure roster names the terminal final
+status together with the top-level/current-alignment, field-output ledger,
+routed-exit alignment, open-obstruction, per-target routed-exit, and
+route/target-equivalence packages. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False] := rfl
+
+/-- Build gate: the terminal alignment-closure roster has twenty statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
+      20 := rfl
+
+/-- Build-gated terminal certificate closing the final status over the
+top-level/current-alignment and routed-exit alignment packages. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False)
+
+/-- The terminal alignment-closure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_routed_exit_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_terminal_open_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_certificate,
+    completePaperSemanticKernelOnly_current_terminal_route_target_obstruction_equivalence_statement_roster_certificate,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current⟩
+
+/-- Build-gated statement roster certificate for terminal alignment closure. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False] /\
+    completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
+      20 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate
+
+/-- The terminal alignment-closure package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_alignment_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

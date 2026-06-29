@@ -4084,6 +4084,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_terms_checked=20"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_alignment_closure_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -10078,6 +10109,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_final_obstruction_status_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_terms_checked=20"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_alignment_closure_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_alignment_closure_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_alignment_closure_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
