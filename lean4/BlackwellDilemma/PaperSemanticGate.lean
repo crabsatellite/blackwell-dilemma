@@ -25014,6 +25014,170 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate)
 
+/-- Terminal partition/status consistency roster tying the final machine state
+to the semantic-target object partition, id partition, and count partition. -/
+def completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+   SemanticTargetStatusPartitionCertificate,
+   SemanticTargetStatusPartitionStatementRosterCertificate,
+   SemanticTargetsPartitionCertificate,
+   SemanticTargetsPartitionStatementRosterCertificate,
+   SemanticTargetCountCertificate,
+   SemanticTargetCountStatementRosterCertificate,
+   semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+   closedSemanticTargets.map (fun target => target.status) =
+      [SemanticStatus.closed, SemanticStatus.closed, SemanticStatus.closed],
+   openSemanticTargets.map (fun target => target.status) =
+      [SemanticStatus.open, SemanticStatus.open],
+   semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds,
+   semanticTargets.length =
+      paperSemanticClosedCount + paperSemanticOpenCount,
+   semanticTargets.length =
+      paperSemanticOpenCount + paperSemanticClosedCount,
+   (semanticTargetIds semanticTargets).length = semanticTargets.length,
+   openSemanticTargetIds.length = paperSemanticOpenCount,
+   closedSemanticTargetIds.length = paperSemanticClosedCount]
+
+/-- Build gate: the terminal partition/status consistency roster names exactly
+the terminal packages plus semantic-target object, id, and count partitions. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+       SemanticTargetStatusPartitionCertificate,
+       SemanticTargetStatusPartitionStatementRosterCertificate,
+       SemanticTargetsPartitionCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+       closedSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.closed, SemanticStatus.closed, SemanticStatus.closed],
+       openSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.open, SemanticStatus.open],
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargets.length =
+          paperSemanticOpenCount + paperSemanticClosedCount,
+       (semanticTargetIds semanticTargets).length = semanticTargets.length,
+       openSemanticTargetIds.length = paperSemanticOpenCount,
+       closedSemanticTargetIds.length = paperSemanticClosedCount] := rfl
+
+/-- Build gate: the terminal partition/status consistency roster has nineteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
+      19 := rfl
+
+/-- Build-gated terminal partition/status consistency certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate /\
+  SemanticTargetStatusPartitionCertificate /\
+  SemanticTargetStatusPartitionStatementRosterCertificate /\
+  SemanticTargetsPartitionCertificate /\
+  SemanticTargetsPartitionStatementRosterCertificate /\
+  SemanticTargetCountCertificate /\
+  SemanticTargetCountStatementRosterCertificate /\
+  semanticTargets = closedSemanticTargets ++ openSemanticTargets /\
+  closedSemanticTargets.map (fun target => target.status) =
+      [SemanticStatus.closed, SemanticStatus.closed, SemanticStatus.closed] /\
+  openSemanticTargets.map (fun target => target.status) =
+      [SemanticStatus.open, SemanticStatus.open] /\
+  semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds /\
+  semanticTargets.length =
+      paperSemanticClosedCount + paperSemanticOpenCount /\
+  semanticTargets.length =
+      paperSemanticOpenCount + paperSemanticClosedCount /\
+  (semanticTargetIds semanticTargets).length = semanticTargets.length /\
+  openSemanticTargetIds.length = paperSemanticOpenCount /\
+  closedSemanticTargetIds.length = paperSemanticClosedCount
+
+/-- The terminal partition/status consistency package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_statement_roster_certificate,
+    semantic_target_status_partition_certificate,
+    semantic_target_status_partition_statement_roster_certificate,
+    semantic_targets_partition_certificate,
+    semantic_targets_partition_statement_roster_certificate,
+    semantic_target_count_certificate,
+    semantic_target_count_statement_roster_certificate,
+    semantic_target_status_partition_certificate.1,
+    semantic_target_status_partition_certificate.2.1,
+    semantic_target_status_partition_certificate.2.2,
+    semantic_targets_partition_certificate.2,
+    semantic_targets_partition_certificate.1,
+    semantic_target_count_certificate.2.2.2,
+    semantic_target_count_certificate.2.2.1,
+    semantic_target_count_certificate.1,
+    semantic_target_count_certificate.2.1⟩
+
+/-- Build-gated statement roster certificate for terminal partition/status
+consistency. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+       SemanticTargetStatusPartitionCertificate,
+       SemanticTargetStatusPartitionStatementRosterCertificate,
+       SemanticTargetsPartitionCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       semanticTargets = closedSemanticTargets ++ openSemanticTargets,
+       closedSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.closed, SemanticStatus.closed, SemanticStatus.closed],
+       openSemanticTargets.map (fun target => target.status) =
+          [SemanticStatus.open, SemanticStatus.open],
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargets.length =
+          paperSemanticOpenCount + paperSemanticClosedCount,
+       (semanticTargetIds semanticTargets).length = semanticTargets.length,
+       openSemanticTargetIds.length = paperSemanticOpenCount,
+       closedSemanticTargetIds.length = paperSemanticClosedCount] /\
+    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
+      19 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate
+
+/-- The terminal partition/status consistency package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
