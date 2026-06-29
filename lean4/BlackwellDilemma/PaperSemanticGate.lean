@@ -25310,6 +25310,179 @@ theorem completePaperSemanticKernelOnly_current_terminal_umbrella_statement_rost
       completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_umbrella_certificate)
 
+/-- Terminal open-obstruction roster tying the terminal umbrella directly to the
+bidirectional route/target obstruction packages for the two still-open paper
+semantic targets. -/
+def completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")],
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+
+/-- Build gate: the terminal open-obstruction roster names exactly the terminal
+umbrella, open-target gate, routed-exit, bidirectional obstruction packages,
+exact open-target ledger, and current route/target refutations. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] :=
+  rfl
+
+/-- Build gate: the terminal open-obstruction roster has twenty statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
+      20 := rfl
+
+/-- Build-gated terminal open-obstruction certificate for the two current open
+paper-semantic targets. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")] /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+  Not Part6NondegenerateFeasibleRepairRoute /\
+  Not Part6FullPaperClosingSupport /\
+  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+
+/-- The terminal open-obstruction package is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_terminal_open_obstruction_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_umbrella_certificate,
+    completePaperSemanticKernelOnly_current_terminal_umbrella_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_gate_status_certificate,
+    completePaperSemanticKernelOnly_current_open_target_gate_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate,
+    openSemanticTargetIds_current,
+    semantic_target_paper_label_id_certificate.2.1,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    part6_lattice_embedding_target_route_obstruction_via_target_current,
+    part6_lattice_embedding_closure_route_obstruction_via_target_current,
+    topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
+    topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate⟩
+
+/-- Build-gated statement roster certificate for the terminal open-obstruction
+package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
+      20 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate
+
+/-- The terminal open-obstruction package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_open_obstruction_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_open_obstruction_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
