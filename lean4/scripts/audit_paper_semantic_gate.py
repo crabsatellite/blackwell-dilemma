@@ -4859,6 +4859,37 @@ def main() -> int:
         "open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statements="
+        "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_terms_checked=4"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_certificate_proof="
+        "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -11626,6 +11657,37 @@ def main() -> int:
         (
             "open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate_proof="
             "open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statements="
+            "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_terms_checked=4"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_certificate_proof="
+            "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_projection_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_projection_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
