@@ -29641,6 +29641,26 @@ theorem openSemanticTargetIdObstructionMap_named_current :
 theorem openSemanticTargetIdObstructionMap_length_current :
     openSemanticTargetIdObstructionMap.length = 2 := rfl
 
+/-- ID projection of the ID-indexed obstruction map. -/
+def openSemanticTargetIdObstructionMapIds : List String :=
+  openSemanticTargetIdObstructionMap.map (fun entry => entry.1)
+
+/-- Build gate: the ID-indexed obstruction map keys are exactly the canonical
+open semantic target ids. -/
+theorem openSemanticTargetIdObstructionMapIds_current :
+    openSemanticTargetIdObstructionMapIds = openSemanticTargetIds := rfl
+
+/-- Build gate: the ID-indexed obstruction map keys are exactly the
+machine-facing kernel-surface ids. -/
+theorem openSemanticTargetIdObstructionMapIds_eq_kernel_surface_current :
+    openSemanticTargetIdObstructionMapIds =
+      openSemanticTargetKernelSurfaceIds := rfl
+
+/-- Build gate: the ID-indexed obstruction map cardinality is exactly the
+current open semantic target count. -/
+theorem openSemanticTargetIdObstructionMap_length_eq_open_count_current :
+    openSemanticTargetIdObstructionMap.length = paperSemanticOpenCount := rfl
+
 /-- Build-gated ID-indexed obstruction-map certificate for the two remaining
 open semantic targets. -/
 def OpenSemanticTargetIdObstructionMapCertificate : Prop :=
@@ -29698,6 +29718,73 @@ theorem open_semantic_target_id_obstruction_map_statement_roster_certificate :
     (And.intro
       openSemanticTargetIdObstructionMap_length_current
       open_semantic_target_id_obstruction_map_certificate)
+
+/-- Ledger-alignment statement roster for the ID-indexed obstruction map. -/
+def openSemanticTargetIdObstructionMapLedgerAlignmentStatements :
+    List Prop :=
+  [openSemanticTargetIdObstructionMapIds = openSemanticTargetIds,
+   openSemanticTargetIdObstructionMapIds = openSemanticTargetKernelSurfaceIds,
+   openSemanticTargetIdObstructionMap.length = paperSemanticOpenCount,
+   OpenSemanticTargetIdObstructionMapCertificate]
+
+/-- Build gate: the ID-indexed obstruction-map ledger-alignment roster is
+fixed. -/
+theorem openSemanticTargetIdObstructionMapLedgerAlignmentStatements_named_current :
+    openSemanticTargetIdObstructionMapLedgerAlignmentStatements =
+      [openSemanticTargetIdObstructionMapIds = openSemanticTargetIds,
+       openSemanticTargetIdObstructionMapIds =
+         openSemanticTargetKernelSurfaceIds,
+       openSemanticTargetIdObstructionMap.length = paperSemanticOpenCount,
+       OpenSemanticTargetIdObstructionMapCertificate] := rfl
+
+/-- Build gate: the ID-indexed obstruction-map ledger-alignment roster has four
+statements. -/
+theorem openSemanticTargetIdObstructionMapLedgerAlignmentStatements_length_current :
+    openSemanticTargetIdObstructionMapLedgerAlignmentStatements.length =
+      4 := rfl
+
+/-- Build-gated ledger alignment certificate for the ID-indexed obstruction
+map. -/
+def OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate : Prop :=
+  openSemanticTargetIdObstructionMapIds = openSemanticTargetIds /\
+  openSemanticTargetIdObstructionMapIds = openSemanticTargetKernelSurfaceIds /\
+  openSemanticTargetIdObstructionMap.length = paperSemanticOpenCount /\
+  OpenSemanticTargetIdObstructionMapCertificate
+
+/-- The ID-indexed obstruction map is aligned with the canonical open-target
+ledger and the kernel-surface registry. -/
+theorem open_semantic_target_id_obstruction_map_ledger_alignment_certificate :
+    OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate := by
+  exact ⟨
+    openSemanticTargetIdObstructionMapIds_current,
+    openSemanticTargetIdObstructionMapIds_eq_kernel_surface_current,
+    openSemanticTargetIdObstructionMap_length_eq_open_count_current,
+    open_semantic_target_id_obstruction_map_certificate⟩
+
+/-- Build-gated statement roster certificate for the ID-indexed obstruction-map
+ledger alignment. -/
+def OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetIdObstructionMapLedgerAlignmentStatements =
+      [openSemanticTargetIdObstructionMapIds = openSemanticTargetIds,
+       openSemanticTargetIdObstructionMapIds =
+         openSemanticTargetKernelSurfaceIds,
+       openSemanticTargetIdObstructionMap.length = paperSemanticOpenCount,
+       OpenSemanticTargetIdObstructionMapCertificate] /\
+    openSemanticTargetIdObstructionMapLedgerAlignmentStatements.length =
+      4 /\
+    OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate
+
+/-- The ID-indexed obstruction-map ledger alignment has a fixed statement
+roster. -/
+theorem
+    open_semantic_target_id_obstruction_map_ledger_alignment_statement_roster_certificate :
+    OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetIdObstructionMapLedgerAlignmentStatements_named_current
+    (And.intro
+      openSemanticTargetIdObstructionMapLedgerAlignmentStatements_length_current
+      open_semantic_target_id_obstruction_map_ledger_alignment_certificate)
 
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
