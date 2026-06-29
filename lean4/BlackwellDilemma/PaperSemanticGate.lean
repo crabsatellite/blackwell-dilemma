@@ -24622,6 +24622,174 @@ theorem
       completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_length_current
       completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate)
 
+/-- Terminal consistency roster for the current paper-semantic machine state:
+the exact open/closed ledger facts are tied directly to the final status and
+status-level routed-exit coverage packages. -/
+def completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements :
+    List Prop :=
+  [Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount = 3,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"],
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")],
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+
+/-- Build gate: the terminal consistency roster names exactly the current
+non-complete status, exact semantic ledger facts, final status package, and
+status-level routed-exit coverage package. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+
+/-- Build gate: the terminal consistency roster has seventeen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
+      17 := rfl
+
+/-- Build-gated terminal consistency certificate for the current
+paper-semantic machine state. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate :
+    Prop :=
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  paperSemanticOpenCount = 2 /\
+  paperSemanticClosedCount = 3 /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"] /\
+  openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")] /\
+  CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate /\
+  Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+
+/-- The terminal consistency package is machine checked. -/
+theorem completePaperSemanticKernelOnly_current_terminal_consistency_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    paperSemanticClosedCount_current,
+    openSemanticTargetIds_current,
+    closedSemanticTargetIds_current,
+    semantic_target_paper_label_id_certificate.2.1,
+    completePaperSemanticKernelOnly_current_gate_status_certificate,
+    completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_gate_status_certificate,
+    completePaperSemanticKernelOnly_current_open_target_gate_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_status_certificate,
+    completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate,
+    completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate⟩
+
+/-- Build-gated statement roster certificate for terminal consistency. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements =
+      [Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
+       CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
+      17 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate
+
+/-- The terminal consistency package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_consistency_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

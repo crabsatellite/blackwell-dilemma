@@ -3836,6 +3836,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_checked=17"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_consistency_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -9582,6 +9613,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_checked=17"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_consistency_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
