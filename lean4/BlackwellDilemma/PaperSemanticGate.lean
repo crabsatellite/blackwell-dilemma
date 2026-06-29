@@ -513,6 +513,77 @@ theorem
    part6LatticeEmbeddingRepairRouteObstructionMultipathStatements_length_current,
    part6_lattice_embedding_repair_route_obstruction_multipath_certificate⟩
 
+/-- The topo route and boxed-route obstructions are available both through the
+target-current refutation and through the full-support envelope obstruction. -/
+def TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate :
+    Prop :=
+  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+    RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate
+
+/-- The current topo route obstructions have fixed target-current and
+envelope-obstruction paths. -/
+theorem
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate :
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate :=
+  ⟨topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
+   not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current,
+   not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate⟩
+
+/-- Statement roster for the topo route-obstruction multipath certificate. -/
+def topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements :
+    List Prop :=
+  [Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate]
+
+/-- Build gate: the topo route-obstruction multipath roster is fixed. -/
+theorem
+    topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements_named_current :
+    topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements =
+      [Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate] :=
+  rfl
+
+/-- Build gate: the topo route-obstruction multipath roster has five
+statements. -/
+theorem
+    topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements_length_current :
+    topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements.length =
+      5 := rfl
+
+/-- Build-gated statement roster certificate for the topo route-obstruction
+multipath package. -/
+def
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements =
+      [Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate] /\
+    topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements.length =
+      5 /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+
+/-- The topo route-obstruction multipath package has a fixed statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate :=
+  ⟨topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements_named_current,
+   topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements_length_current,
+   topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate⟩
+
 /-- Single build-gated certificate for the two remaining paper-semantic targets.
 
 This certificate collects the roster identity/count gates, the exact target
@@ -548,6 +619,7 @@ def RemainingOpenSemanticTargetsFrontierCertificate : Prop :=
       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
     Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
     Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
     Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
     RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate /\
@@ -590,6 +662,7 @@ theorem remaining_open_semantic_targets_frontier_certificate :
       topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
         ((topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_full_route).mpr
           hroute)),
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate,
     random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
     (fun hroute =>
       topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
@@ -632,6 +705,7 @@ def remainingOpenSemanticTargetsFrontierStatements : List Prop :=
       RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
    RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
@@ -672,6 +746,7 @@ theorem remainingOpenSemanticTargetsFrontierStatements_named_current :
           RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
@@ -680,9 +755,9 @@ theorem remainingOpenSemanticTargetsFrontierStatements_named_current :
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
 
 /-- Build gate: the remaining-open frontier statement roster has exactly the
-twenty-seven current frontier components. -/
+twenty-eight current frontier components. -/
 theorem remainingOpenSemanticTargetsFrontierStatements_length_current :
-    remainingOpenSemanticTargetsFrontierStatements.length = 27 := rfl
+    remainingOpenSemanticTargetsFrontierStatements.length = 28 := rfl
 
 /-- Build-gated statement roster certificate for the current frontier of the
 two remaining open semantic targets. -/
@@ -717,13 +792,14 @@ def RemainingOpenSemanticTargetsFrontierStatementRosterCertificate : Prop :=
           RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
-    remainingOpenSemanticTargetsFrontierStatements.length = 27 /\
+    remainingOpenSemanticTargetsFrontierStatements.length = 28 /\
     RemainingOpenSemanticTargetsFrontierCertificate
 
 /-- The current frontier certificate for the two remaining open semantic
@@ -5135,6 +5211,7 @@ def RemainingOpenSemanticTargetsPayloadRouteMapCertificate : Prop :=
     Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
     RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
     Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
     RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate /\
     Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
@@ -5170,6 +5247,7 @@ theorem remaining_open_semantic_targets_payload_route_map_certificate :
     topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
     topo_cluster_random_supercritical_z2_frontier_payload_target_route_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_target_route_obstruction,
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_closure_route_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_closure_route_obstruction,
     topo_cluster_random_supercritical_z2_frontier_payload_frontier_progress_certificate,
@@ -5209,6 +5287,7 @@ def remainingOpenSemanticTargetsPayloadRouteMapStatements : List Prop :=
    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
    RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
    RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
@@ -5249,6 +5328,7 @@ theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current :
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
@@ -5256,9 +5336,9 @@ theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current :
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
 
 /-- Build gate: the payload route-map statement roster has exactly the
-twenty-nine current route-map components. -/
+thirty current route-map components. -/
 theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_length_current :
-    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 29 := rfl
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 30 := rfl
 
 /-- Build-gated statement roster certificate for the payload route-map package
 of the two remaining paper-semantic targets. -/
@@ -5295,12 +5375,13 @@ def RemainingOpenSemanticTargetsPayloadRouteMapStatementRosterCertificate :
        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LRouteCertificate,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
-    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 29 /\
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 30 /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate
 
 /-- The payload route-map certificate has a fixed statement roster. -/
