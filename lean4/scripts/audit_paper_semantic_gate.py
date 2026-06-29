@@ -4672,6 +4672,32 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate_proof="
         "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate"
     )
+    print("open_semantic_target_id_obstruction_map=openSemanticTargetIdObstructionMap")
+    print(
+        "open_semantic_target_id_obstruction_map_proof="
+        "openSemanticTargetIdObstructionMap_named_current"
+    )
+    print("open_semantic_target_id_obstruction_map_terms_checked=2")
+    print(
+        "open_semantic_target_id_obstruction_map_terms_proof="
+        "openSemanticTargetIdObstructionMap_length_current"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_certificate="
+        "OpenSemanticTargetIdObstructionMapCertificate"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_certificate_proof="
+        "open_semantic_target_id_obstruction_map_certificate"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_statement_roster_certificate="
+        "OpenSemanticTargetIdObstructionMapStatementRosterCertificate"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_statement_roster_certificate_proof="
+        "open_semantic_target_id_obstruction_map_statement_roster_certificate"
+    )
     print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
@@ -11256,6 +11282,32 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate"
+        ),
+        "open_semantic_target_id_obstruction_map=openSemanticTargetIdObstructionMap",
+        (
+            "open_semantic_target_id_obstruction_map_proof="
+            "openSemanticTargetIdObstructionMap_named_current"
+        ),
+        "open_semantic_target_id_obstruction_map_terms_checked=2",
+        (
+            "open_semantic_target_id_obstruction_map_terms_proof="
+            "openSemanticTargetIdObstructionMap_length_current"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_certificate="
+            "OpenSemanticTargetIdObstructionMapCertificate"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_certificate_proof="
+            "open_semantic_target_id_obstruction_map_certificate"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_statement_roster_certificate="
+            "OpenSemanticTargetIdObstructionMapStatementRosterCertificate"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_statement_roster_certificate_proof="
+            "open_semantic_target_id_obstruction_map_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="

@@ -29613,6 +29613,92 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_certificate)
 
+/-- ID-indexed obstruction map for the two remaining open semantic targets. -/
+def openSemanticTargetIdObstructionMap : List (String × Prop) :=
+  [("theorem_4_1_part6_lattice_embedding",
+    Not Part6LatticeEmbeddingSemanticKernelTarget /\
+      Not Part6NondegenerateFeasibleRepairRoute /\
+      Not Part6FullPaperClosingSupport),
+   ("topo_cluster_random_supercritical_z2",
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)]
+
+/-- Build gate: the ID-indexed obstruction map names exactly the two current
+open target IDs and their target/route/closure obstructions. -/
+theorem openSemanticTargetIdObstructionMap_named_current :
+    openSemanticTargetIdObstructionMap =
+      [("theorem_4_1_part6_lattice_embedding",
+        Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport),
+       ("topo_cluster_random_supercritical_z2",
+        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)] := rfl
+
+/-- Build gate: the ID-indexed obstruction map has two entries. -/
+theorem openSemanticTargetIdObstructionMap_length_current :
+    openSemanticTargetIdObstructionMap.length = 2 := rfl
+
+/-- Build-gated ID-indexed obstruction-map certificate for the two remaining
+open semantic targets. -/
+def OpenSemanticTargetIdObstructionMapCertificate : Prop :=
+  openSemanticTargetIdObstructionMap =
+      [("theorem_4_1_part6_lattice_embedding",
+        Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport),
+       ("topo_cluster_random_supercritical_z2",
+        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)] /\
+  openSemanticTargetIdObstructionMap.length = 2 /\
+  Not Part6LatticeEmbeddingSemanticKernelTarget /\
+  Not Part6NondegenerateFeasibleRepairRoute /\
+  Not Part6FullPaperClosingSupport /\
+  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+/-- The ID-indexed obstruction map is machine checked for the two remaining
+open semantic targets. -/
+theorem open_semantic_target_id_obstruction_map_certificate :
+    OpenSemanticTargetIdObstructionMapCertificate := by
+  exact ⟨
+    openSemanticTargetIdObstructionMap_named_current,
+    openSemanticTargetIdObstructionMap_length_current,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    part6_lattice_embedding_target_route_obstruction_via_target_current,
+    part6_lattice_embedding_closure_route_obstruction_via_target_current,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
+    topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current⟩
+
+/-- Build-gated statement roster certificate for the ID-indexed obstruction
+map. -/
+def OpenSemanticTargetIdObstructionMapStatementRosterCertificate : Prop :=
+  openSemanticTargetIdObstructionMap =
+      [("theorem_4_1_part6_lattice_embedding",
+        Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport),
+       ("topo_cluster_random_supercritical_z2",
+        Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)] /\
+    openSemanticTargetIdObstructionMap.length = 2 /\
+    OpenSemanticTargetIdObstructionMapCertificate
+
+/-- The ID-indexed obstruction map has a fixed statement roster. -/
+theorem open_semantic_target_id_obstruction_map_statement_roster_certificate :
+    OpenSemanticTargetIdObstructionMapStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetIdObstructionMap_named_current
+    (And.intro
+      openSemanticTargetIdObstructionMap_length_current
+      open_semantic_target_id_obstruction_map_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
