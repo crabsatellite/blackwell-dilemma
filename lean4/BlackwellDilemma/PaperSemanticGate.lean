@@ -34018,6 +34018,17 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
     completePaperSemanticKernelOnly_current_gate_status_certificate
 
+/-- Supplemental gate: pair the terminal kernel-only nonclosure capstone with
+the open-target final-ledger certificate without expanding the already large
+terminal certificate conjunction. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+    completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
