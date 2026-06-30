@@ -34114,6 +34114,29 @@ theorem
           completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate
           completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate)))
 
+/-- Supplemental gate: terminal capstone plus the final-status nonclosure
+judgement.  This keeps the published final `iff False` and `Not` statements
+next to the terminal kernel-only certificate. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_bundle :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate /\
+            (CompletePaperSemanticKernelOnly <-> False) /\
+              Not CompletePaperSemanticKernelOnly := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_final_status_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_iff_false_current
+            completePaperSemanticKernelOnly_notYet))))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
