@@ -3875,7 +3875,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_ledger_label_consistency_statement_terms_checked=12"
+        "complete_paper_semantic_kernel_only_current_terminal_ledger_label_consistency_statement_terms_checked=14"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_ledger_label_consistency_statement_terms_proof="
@@ -11418,7 +11418,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_ledger_label_consistency_statement_terms_checked=12"
+            "complete_paper_semantic_kernel_only_current_terminal_ledger_label_consistency_statement_terms_checked=14"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_ledger_label_consistency_statement_terms_proof="

@@ -26120,12 +26120,15 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_consistency_certificate)
 
-/-- Terminal ledger-label consistency roster tying the final machine status to
-the full closed/open/all paper-label and `(id, paperLabel)` ledgers. -/
+/-- Terminal ledger-label consistency roster tying the final machine status and
+repair frontier pair to the full closed/open/all paper-label and
+`(id, paperLabel)` ledgers. -/
 def completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    SemanticTargetPaperLabelCertificate,
    SemanticTargetPaperLabelStatementRosterCertificate,
    SemanticTargetPaperLabelIdCertificate,
@@ -26166,13 +26169,15 @@ def completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatemen
         "prop:topo-cluster and thm:phase")]]
 
 /-- Build gate: the terminal ledger-label consistency roster names exactly the
-terminal consistency package, paper-label certificates, and closed/open/all
-label/id-label ledgers. -/
+terminal consistency package, repair frontier pair, paper-label certificates,
+and closed/open/all label/id-label ledgers. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        SemanticTargetPaperLabelCertificate,
        SemanticTargetPaperLabelStatementRosterCertificate,
        SemanticTargetPaperLabelIdCertificate,
@@ -26213,18 +26218,20 @@ theorem
            ("topo_cluster_random_supercritical_z2",
             "prop:topo-cluster and thm:phase")]] := rfl
 
-/-- Build gate: the terminal ledger-label consistency roster has twelve
+/-- Build gate: the terminal ledger-label consistency roster has fourteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
-      12 := rfl
+      14 := rfl
 
 /-- Build-gated terminal ledger-label consistency certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   SemanticTargetPaperLabelCertificate /\
   SemanticTargetPaperLabelStatementRosterCertificate /\
   SemanticTargetPaperLabelIdCertificate /\
@@ -26271,6 +26278,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_consistency_certificate,
     completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     semantic_target_paper_label_certificate,
     semantic_target_paper_label_statement_roster_certificate,
     semantic_target_paper_label_id_certificate,
@@ -26290,6 +26299,8 @@ def
   completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        SemanticTargetPaperLabelCertificate,
        SemanticTargetPaperLabelStatementRosterCertificate,
        SemanticTargetPaperLabelIdCertificate,
@@ -26330,7 +26341,7 @@ def
            ("topo_cluster_random_supercritical_z2",
             "prop:topo-cluster and thm:phase")]] /\
     completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
-      12 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate
 
 /-- The terminal ledger-label consistency package has a fixed statement
@@ -34511,7 +34522,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
       19,
    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
-      12,
+      14,
    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
       19,
    completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
@@ -34683,7 +34694,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
           19,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
-          12,
+          14,
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
           19,
        completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
@@ -34860,7 +34871,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
       19 /\
   completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
-      12 /\
+      14 /\
   completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
       19 /\
   completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
@@ -35164,7 +35175,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
           19,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
-          12,
+          14,
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
           19,
        completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
