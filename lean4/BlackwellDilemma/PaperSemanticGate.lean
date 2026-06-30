@@ -24015,6 +24015,41 @@ theorem
     completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate,
     completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate⟩
 
+/-- Build gate: the bidirectional route/target obstruction packages are
+checked with the current obstruction-source alignment and both per-target
+routed exits. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle :
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+                    RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate /\
+                      RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+                            Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
+                              TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_open_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_open_target_routed_exit_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_all_current_obstruction_source_alignment_certificate,
+    remaining_open_semantic_targets_all_current_obstruction_source_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate,
+    part6_lattice_embedding_current_routed_exit_certificate,
+    topo_cluster_random_supercritical_z2_current_routed_exit_certificate⟩
+
 /-- Open target ids covered by the current per-target routed-exit packages. -/
 def openSemanticTargetCurrentRoutedExitIds : List String :=
   openSemanticTargetIds
