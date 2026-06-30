@@ -49,6 +49,8 @@ jobs:
 
       - name: Cache Mathlib
         uses: actions/cache@v6
+        timeout-minutes: 10
+        continue-on-error: true
         with:
           path: lean4/.lake
           key: lake-${{ runner.os }}-${{ hashFiles('lean4/lean-toolchain', 'lean4/lakefile.toml', 'lean4/lake-manifest.json') }}
