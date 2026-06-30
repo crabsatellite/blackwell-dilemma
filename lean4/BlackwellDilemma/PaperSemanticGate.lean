@@ -22660,7 +22660,9 @@ def completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements :
    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the current open-target exit roster names exactly the
 non-complete gate, the open-target final ledger certificate pair, and the
@@ -22672,16 +22674,19 @@ theorem completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements_named_cur
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the current open-target exit roster has exactly six
+/-- Build gate: the current open-target exit roster has exactly eight
 statements. -/
 theorem completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated final exit certificate for the current open-target
-paper-semantic state and current multipath obstruction evidence. -/
+paper-semantic state, current multipath obstruction evidence, and the paired
+repair frontier. -/
 def CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate :
     Prop :=
   Not CompletePaperSemanticKernelOnly /\
@@ -22689,7 +22694,9 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate :
   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The current open-target exit certificate is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_open_target_exit_certificate :
@@ -22704,7 +22711,11 @@ theorem completePaperSemanticKernelOnly_current_open_target_exit_certificate :
           completePaperSemanticKernelOnly_current_open_target_final_ledger_statement_roster_certificate
           (And.intro
             part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
+            (And.intro
+              topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+              (And.intro
+                open_target_repair_frontier_pair_certificate
+                open_target_repair_frontier_pair_statement_roster_certificate))))))
 
 /-- Build-gated statement roster certificate for the current open-target exit
 package. -/
@@ -22716,9 +22727,11 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetExitStatementRosterCertifica
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentOpenTargetExitStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate
 
 /-- The current open-target exit package has a fixed statement roster. -/
