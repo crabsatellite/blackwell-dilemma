@@ -3906,7 +3906,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_partition_status_consistency_statement_terms_checked=19"
+        "complete_paper_semantic_kernel_only_current_terminal_partition_status_consistency_statement_terms_checked=21"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_partition_status_consistency_statement_terms_proof="
@@ -11449,7 +11449,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_partition_status_consistency_statement_terms_checked=19"
+            "complete_paper_semantic_kernel_only_current_terminal_partition_status_consistency_statement_terms_checked=21"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_partition_status_consistency_statement_terms_proof="

@@ -26356,13 +26356,16 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate)
 
 /-- Terminal partition/status consistency roster tying the final machine state
-to the semantic-target object partition, id partition, and count partition. -/
+and repair-frontier pair to the semantic-target object partition, id partition,
+and count partition. -/
 def completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    SemanticTargetStatusPartitionCertificate,
    SemanticTargetStatusPartitionStatementRosterCertificate,
    SemanticTargetsPartitionCertificate,
@@ -26389,13 +26392,15 @@ the terminal packages plus semantic-target object, id, and count partitions. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements =
-      [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
-       SemanticTargetStatusPartitionCertificate,
-       SemanticTargetStatusPartitionStatementRosterCertificate,
-       SemanticTargetsPartitionCertificate,
+     [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
+      CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
+      CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
+      CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+      OpenTargetRepairFrontierPairCertificate,
+      OpenTargetRepairFrontierPairStatementRosterCertificate,
+      SemanticTargetStatusPartitionCertificate,
+      SemanticTargetStatusPartitionStatementRosterCertificate,
+      SemanticTargetsPartitionCertificate,
        SemanticTargetsPartitionStatementRosterCertificate,
        SemanticTargetCountCertificate,
        SemanticTargetCountStatementRosterCertificate,
@@ -26414,12 +26419,12 @@ theorem
        openSemanticTargetIds.length = paperSemanticOpenCount,
        closedSemanticTargetIds.length = paperSemanticClosedCount] := rfl
 
-/-- Build gate: the terminal partition/status consistency roster has nineteen
+/-- Build gate: the terminal partition/status consistency roster has twenty-one
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
-      19 := rfl
+      21 := rfl
 
 /-- Build-gated terminal partition/status consistency certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate :
@@ -26428,6 +26433,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCert
   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   SemanticTargetStatusPartitionCertificate /\
   SemanticTargetStatusPartitionStatementRosterCertificate /\
   SemanticTargetsPartitionCertificate /\
@@ -26458,6 +26465,8 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate,
     completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     semantic_target_status_partition_certificate,
     semantic_target_status_partition_statement_roster_certificate,
     semantic_targets_partition_certificate,
@@ -26484,6 +26493,8 @@ def
        CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        SemanticTargetStatusPartitionCertificate,
        SemanticTargetStatusPartitionStatementRosterCertificate,
        SemanticTargetsPartitionCertificate,
@@ -26505,7 +26516,7 @@ def
        openSemanticTargetIds.length = paperSemanticOpenCount,
        closedSemanticTargetIds.length = paperSemanticClosedCount] /\
     completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
-      19 /\
+      21 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate
 
 /-- The terminal partition/status consistency package has a fixed statement
@@ -34524,7 +34535,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
       14,
    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
-      19,
+      21,
    completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
       18,
    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
@@ -34696,7 +34707,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
           14,
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
-          19,
+          21,
        completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
           18,
        completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
@@ -34873,7 +34884,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
       14 /\
   completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
-      19 /\
+      21 /\
   completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
       18 /\
   completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
@@ -35177,7 +35188,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
           14,
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
-          19,
+          21,
        completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
           18,
        completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
