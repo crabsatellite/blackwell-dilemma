@@ -32550,6 +32550,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStat
    openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
       openSemanticTargetIdObstructionMapIdPaperLabels,
    OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+   OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate,
    CompletePaperSemanticKernelOnly <-> False,
    Not CompletePaperSemanticKernelOnly]
 
@@ -32573,15 +32574,16 @@ theorem
        openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
           openSemanticTargetIdObstructionMapIdPaperLabels,
        OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the terminal field-output label nonclosure roster has twelve
+/-- Build gate: the terminal field-output label nonclosure roster has thirteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
-      12 := rfl
+      13 := rfl
 
 /-- Build-gated terminal field-output label nonclosure certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate :
@@ -32600,6 +32602,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCert
   openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
       openSemanticTargetIdObstructionMapIdPaperLabels /\
   OpenSemanticTargetObstructionMapIndexProjectionCertificate /\
+  OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate /\
   (CompletePaperSemanticKernelOnly <-> False) /\
   Not CompletePaperSemanticKernelOnly
 
@@ -32618,6 +32621,7 @@ theorem
     openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current,
     openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels_eq_id_obstruction_map_current,
     open_semantic_target_obstruction_map_index_projection_certificate,
+    open_semantic_target_obstruction_map_index_projection_statement_roster_certificate,
     completePaperSemanticKernelOnly_iff_false_current,
     completePaperSemanticKernelOnly_notYet⟩
 
@@ -32640,10 +32644,11 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStat
        openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
           openSemanticTargetIdObstructionMapIdPaperLabels,
        OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
-      12 /\
+      13 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate
 
 /-- The terminal field-output label nonclosure package has a fixed statement
