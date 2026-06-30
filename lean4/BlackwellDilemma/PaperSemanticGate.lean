@@ -32897,6 +32897,114 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate)
 
+/-- Terminal all-view nonclosure roster tying the current terminal
+obstruction-bundle view back to the final-status and raw/open all-view
+obstruction-map bridge. -/
+def completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+   OpenSemanticTargetObstructionMapAllViewCertificate,
+   OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal all-view nonclosure roster names the latest
+terminal nonclosure package and the final/raw/open all-view bridge. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapAllViewCertificate,
+       OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal all-view nonclosure roster has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
+      12 := rfl
+
+/-- Build-gated terminal all-view nonclosure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate /\
+  OpenSemanticTargetObstructionMapAllViewCertificate /\
+  OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal all-view nonclosure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate,
+    completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_statement_roster_certificate,
+    open_semantic_target_obstruction_map_all_view_certificate,
+    open_semantic_target_obstruction_map_all_view_statement_roster_certificate,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Build-gated statement roster certificate for the terminal all-view
+nonclosure package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapAllViewCertificate,
+       OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate
+
+/-- The terminal all-view nonclosure package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
