@@ -4123,7 +4123,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_main_obstruction_closure_statement_terms_checked=18"
+        "complete_paper_semantic_kernel_only_current_terminal_main_obstruction_closure_statement_terms_checked=20"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_main_obstruction_closure_statement_terms_proof="
@@ -11666,7 +11666,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_main_obstruction_closure_statement_terms_checked=18"
+            "complete_paper_semantic_kernel_only_current_terminal_main_obstruction_closure_statement_terms_checked=20"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_main_obstruction_closure_statement_terms_proof="
