@@ -4247,7 +4247,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_all_current_closure_statement_terms_checked=38"
+        "complete_paper_semantic_kernel_only_current_terminal_all_current_closure_statement_terms_checked=40"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_all_current_closure_statement_terms_proof="
@@ -11790,7 +11790,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_all_current_closure_statement_terms_checked=38"
+            "complete_paper_semantic_kernel_only_current_terminal_all_current_closure_statement_terms_checked=40"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_all_current_closure_statement_terms_proof="

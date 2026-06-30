@@ -28321,12 +28321,14 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_certificate)
 
 /-- Terminal all-current closure roster tying the final ledger/source package
-to every current alignment umbrella, the main terminal closure packages, and
-the final open/closed semantic target ledger. -/
+and repair-frontier pair to every current alignment umbrella, the main terminal
+closure packages, and the final open/closed semantic target ledger. -/
 def completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
@@ -28370,12 +28372,14 @@ def completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements :
       "r10_threshold_five_state_high_kappa_routing"]]
 
 /-- Build gate: the terminal all-current closure roster names the final
-ledger/source package, every current alignment layer, the terminal closure
-chain, and the final semantic target ledgers. -/
+ledger/source package, repair-frontier pair, every current alignment layer, the
+terminal closure chain, and the final semantic target ledgers. -/
 theorem completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
@@ -28418,18 +28422,21 @@ theorem completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatement
           "theorem_4_1_part4_lattice_p_monotonicity",
           "r10_threshold_five_state_high_kappa_routing"]] := rfl
 
-/-- Build gate: the terminal all-current closure roster has thirty-eight
+/-- Build gate: the terminal all-current closure roster has forty
 statements. -/
 theorem completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
-      38 := rfl
+      40 := rfl
 
 /-- Build-gated terminal all-current certificate tying the final ledger/source
-closure to the full current alignment and terminal closure stack. -/
+closure and repair-frontier pair to the full current alignment and terminal
+closure stack. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
@@ -28478,6 +28485,8 @@ theorem completePaperSemanticKernelOnly_current_terminal_all_current_closure_cer
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_certificate,
     completePaperSemanticKernelOnly_current_terminal_final_ledger_source_closure_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
     completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
@@ -28521,6 +28530,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRost
   completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
@@ -28563,7 +28574,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatementRost
           "theorem_4_1_part4_lattice_p_monotonicity",
           "r10_threshold_five_state_high_kappa_routing"]] /\
     completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
-      38 /\
+      40 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureCertificate
 
 /-- The terminal all-current closure package has a fixed statement roster. -/
@@ -34669,7 +34680,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
       24,
    completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
-      38,
+      40,
    completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
       10,
    completePaperSemanticKernelOnlyCurrentObstructionStatements.length =
@@ -34841,7 +34852,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
           24,
        completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
-          38,
+          40,
        completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
           10,
        completePaperSemanticKernelOnlyCurrentObstructionStatements.length =
@@ -35018,7 +35029,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
       24 /\
   completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
-      38 /\
+      40 /\
   completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
       10 /\
   completePaperSemanticKernelOnlyCurrentObstructionStatements.length =
@@ -35322,7 +35333,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
           24,
        completePaperSemanticKernelOnlyCurrentTerminalAllCurrentClosureStatements.length =
-          38,
+          40,
        completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
           10,
        completePaperSemanticKernelOnlyCurrentObstructionStatements.length =
