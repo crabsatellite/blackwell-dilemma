@@ -34355,12 +34355,14 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate)
 
 /-- Terminal obstruction-bundle view nonclosure roster tying the latest
-obstruction-projection package to the ID, id/paper-label, and paper-label
-obstruction-bundle views. -/
+obstruction-projection package and repair-frontier pair to the ID,
+id/paper-label, and paper-label obstruction-bundle views. -/
 def completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
    OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
@@ -34383,6 +34385,8 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
        OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
@@ -34399,17 +34403,19 @@ theorem
        Not CompletePaperSemanticKernelOnly] := rfl
 
 /-- Build gate: the terminal obstruction-bundle view nonclosure roster has
-thirteen statements. -/
+fifteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
-      13 := rfl
+      15 := rfl
 
 /-- Build-gated terminal obstruction-bundle view nonclosure certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate /\
   OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate /\
@@ -34432,6 +34438,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate,
     completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate,
     completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_statement_roster_certificate,
     open_semantic_target_id_paper_label_obstruction_map_projection_certificate,
@@ -34451,6 +34459,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosur
   completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
        OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
@@ -34466,7 +34476,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosur
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
-      13 /\
+      15 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate
 
 /-- The terminal obstruction-bundle view nonclosure package has a fixed
@@ -34694,7 +34704,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements.length =
       15,
    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
-      13,
+      15,
    completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
       20,
    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
@@ -34866,7 +34876,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements.length =
           15,
        completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
-          13,
+          15,
        completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
           20,
        completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
@@ -35043,7 +35053,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements.length =
       15 /\
   completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
-      13 /\
+      15 /\
   completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
       20 /\
   completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
@@ -35347,7 +35357,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements.length =
           15,
        completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
-          13,
+          15,
        completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
           20,
        completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
