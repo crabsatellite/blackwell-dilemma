@@ -5508,6 +5508,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_checked=10"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_obstruction_map_audit_statements="
         "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements"
     )
@@ -13080,6 +13111,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_checked=10"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_obstruction_map_audit_statements="
