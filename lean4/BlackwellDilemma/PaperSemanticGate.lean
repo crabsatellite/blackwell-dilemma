@@ -33168,8 +33168,9 @@ theorem
 certificate to the latest terminal consistency, all-view, field-output,
 ledger-state, paper-label, field-output label/id, obstruction-projection/view,
 top-level alignment, field-output full-ledger alignment, terminal
-obstruction/closure ladder, paper-state/source-final gate-status packages, and
-the final-status obstruction-map gate. -/
+obstruction/closure ladder, obstruction final-ledger alignment,
+paper-state/source-final gate-status packages, and the final-status
+obstruction-map gate. -/
 def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
@@ -33194,6 +33195,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureCertificate,
@@ -33274,6 +33277,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
       20,
    completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
       2,
+   completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
+      4,
    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
       25,
    completePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureStatements.length =
@@ -33362,6 +33367,8 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureCertificate,
@@ -33442,6 +33449,8 @@ theorem
           20,
        completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
           2,
+       completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
+          4,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
           25,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureStatements.length =
@@ -33504,11 +33513,11 @@ theorem
        Not CompletePaperSemanticKernelOnly] := rfl
 
 /-- Build gate: the terminal kernel-only nonclosure capstone has one hundred
-twenty-two statements. -/
+twenty-five statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      122 := rfl
+      125 := rfl
 
 /-- Build-gated terminal kernel-only nonclosure capstone certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate :
@@ -33535,6 +33544,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureCertificate /\
@@ -33615,6 +33626,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
       20 /\
   completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
       2 /\
+  completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
+      4 /\
   completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
       25 /\
   completePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureStatements.length =
@@ -33704,6 +33717,8 @@ theorem
     completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
     completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_all_current_top_level_closure_certificate,
     completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_all_current_top_level_closure_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_paper_state_closure_certificate,
@@ -33773,6 +33788,7 @@ theorem
     completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current,
     completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current,
     completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalPaperStateRoutedExitClosureStatements_length_current,
@@ -33832,6 +33848,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureCertificate,
@@ -33912,6 +33930,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
           20,
        completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
           2,
+       completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
+          4,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
           25,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateClosureStatements.length =
@@ -33973,7 +33993,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      122 /\
+      125 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate
 
 /-- The terminal kernel-only nonclosure capstone has a fixed statement
