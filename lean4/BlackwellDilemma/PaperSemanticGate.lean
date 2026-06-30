@@ -11594,6 +11594,115 @@ theorem
     topo_cluster_random_supercritical_z2_same_bridge_full_output_bundle_notYet,
     topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate⟩
 
+/-- Dedicated projection showing that the repaired support-surface closing spine
+is still nonclosed under the current boxed-torus route obstruction. -/
+def TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate :
+    Prop :=
+  (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+    RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        bridge ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+    (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+      Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          bridge)) /\
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate /\
+    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate
+
+/-- The current topo support-surface closing spine is machine-refuted by the
+boxed-torus finite-`Z2_L` route obstruction and kept aligned with the topo
+semantic target obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_support_surface_closing_route_nonclosure_projection_certificate :
+    TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate := by
+  exact ⟨
+    randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute_of_support_surface_closing_route,
+    not_randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute,
+    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate,
+    random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate⟩
+
+/-- Statement roster for the topo support-surface closing nonclosure projection. -/
+def topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements :
+    List Prop :=
+  [(forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+    RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        bridge ->
+      RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+   (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        bridge)),
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate]
+
+/-- Build gate: the topo support-surface closing nonclosure roster is fixed. -/
+theorem
+    topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements_named_current :
+    topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements =
+      [(forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+            bridge ->
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+        Not
+          (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+            bridge)),
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate] := rfl
+
+/-- Build gate: the topo support-surface closing nonclosure roster has seven
+statements. -/
+theorem
+    topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements_length_current :
+    topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster for the topo support-surface closing
+nonclosure projection. -/
+def
+    TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements =
+      [(forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+        RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+            bridge ->
+          RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       (forall bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
+        Not
+          (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+            bridge)),
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate] /\
+    topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements.length =
+      7 /\
+    TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate
+
+/-- The topo support-surface closing nonclosure projection has a fixed statement
+roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_support_surface_closing_route_nonclosure_projection_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatements_length_current
+      topo_cluster_random_supercritical_z2_support_surface_closing_route_nonclosure_projection_certificate)
+
 /-- Joint target-route package for the two remaining open semantic targets. -/
 def RemainingOpenSemanticTargetsTargetRoutesSatisfied : Prop :=
   Part6NondegenerateFeasibleRepairRoute /\
