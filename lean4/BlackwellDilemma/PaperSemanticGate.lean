@@ -34791,6 +34791,41 @@ theorem
               completePaperSemanticKernelOnly_iff_false_current
               completePaperSemanticKernelOnly_notYet)))))
 
+/-- Supplemental gate: route-source terminal bridge.  This keeps the named
+route-source/top-level bridge next to the terminal kernel-only nonclosure
+capstone and final public judgement. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                    (CompletePaperSemanticKernelOnly <-> False) /\
+                      Not CompletePaperSemanticKernelOnly := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_current_gate_status_certificate
+                (And.intro
+                  completePaperSemanticKernelOnly_current_final_status_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_iff_false_current
+                    completePaperSemanticKernelOnly_notYet))))))))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
