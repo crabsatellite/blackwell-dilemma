@@ -4198,6 +4198,50 @@ theorem part6_lattice_embedding_frontier_payload_closure_route_obstruction :
     Not Part6FullPaperClosingSupport :=
   (part6_lattice_embedding_frontier_payload).part6_full_paper_closing_support_current_obstruction
 
+/-- Part 6 open-target bundle: the typed frontier payload, the active
+target/closure route certificates, the closed-unit tail-reversal progress and
+nonclosure layer, and the current semantic/route/support obstructions are all
+kernel-checked together. -/
+theorem part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle :
+    Part6LatticeEmbeddingFrontierPayloadCertificate /\
+      (Part6LatticeEmbeddingSemanticKernelTarget ↔
+        Part6NondegenerateFeasibleRepairRoute) /\
+        (Part6LatticeEmbeddingSemanticKernelTarget ↔
+          Part6FullPaperClosingSupport) /\
+          (Part6NondegenerateFeasibleRepairRoute ↔
+            Part6FullPaperClosingSupport) /\
+            Part6NondegenerateFeasibleRepairRouteCertificate /\
+              Part6FullPaperClosingOutputLayerCertificate /\
+                Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+                  Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+                    Part6CurrentFrontierCertificate /\
+                      Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                        Not Part6NondegenerateFeasibleRepairRoute /\
+                          Not Part6FullPaperClosingSupport := by
+  exact And.intro
+    part6_lattice_embedding_frontier_payload_certificate
+    (And.intro
+      part6_lattice_embedding_semantic_kernel_target_iff_repair_route
+      (And.intro
+        part6_lattice_embedding_semantic_kernel_target_iff_full_support
+        (And.intro
+          part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support
+          (And.intro
+            part6_lattice_embedding_frontier_payload_target_route_certificate
+            (And.intro
+              part6_lattice_embedding_frontier_payload_closure_route_certificate
+              (And.intro
+                part6_lattice_embedding_frontier_payload_frontier_progress_certificate
+                (And.intro
+                  part6_lattice_embedding_frontier_payload_frontier_nonclosure_certificate
+                  (And.intro
+                    part6_lattice_embedding_frontier_payload_current_frontier_certificate
+                    (And.intro
+                      part6_lattice_embedding_semantic_kernel_target_notYet
+                      (And.intro
+                        part6_lattice_embedding_frontier_payload_target_route_obstruction
+                        part6_lattice_embedding_frontier_payload_closure_route_obstruction))))))))))
+
 /-- The complete typed random-supercritical topo frontier payload projects the
 active target-route certificate. -/
 theorem
