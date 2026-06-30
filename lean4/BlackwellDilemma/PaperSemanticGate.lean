@@ -32240,6 +32240,143 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_certificate)
 
+/-- Terminal paper-label projection nonclosure roster tying the latest terminal
+ledger-state package to the final/raw obstruction-map all-view ledgers, the
+index projection, and the paper-label obstruction-map projection. -/
+def completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+   OpenSemanticTargetObstructionMapAllViewCertificate,
+   OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate,
+   OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+   OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargetKernelSurfaceIdPaperLabels,
+   openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetPaperLabelObstructionMapLabels,
+   openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+      openSemanticTargetIdObstructionMapPaperLabels,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal paper-label projection nonclosure roster fixes the
+latest terminal nonclosure package against the all-view obstruction-map and
+paper-label projection ledgers. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapAllViewCertificate,
+       OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapPaperLabels =
+          openSemanticTargetPaperLabelObstructionMapLabels,
+       openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+          openSemanticTargetIdObstructionMapPaperLabels,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal paper-label projection nonclosure roster has
+fifteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
+      15 := rfl
+
+/-- Build-gated terminal paper-label projection nonclosure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate /\
+  OpenSemanticTargetObstructionMapAllViewCertificate /\
+  OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate /\
+  OpenSemanticTargetObstructionMapIndexProjectionCertificate /\
+  OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargetKernelSurfaceIdPaperLabels /\
+  openSemanticTargetIdObstructionMapPaperLabels =
+      openSemanticTargetPaperLabelObstructionMapLabels /\
+  openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+      openSemanticTargetIdObstructionMapPaperLabels /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal paper-label projection nonclosure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_statement_roster_certificate,
+    open_semantic_target_obstruction_map_all_view_certificate,
+    open_semantic_target_obstruction_map_all_view_statement_roster_certificate,
+    open_semantic_target_obstruction_map_index_projection_certificate,
+    open_semantic_target_obstruction_map_index_projection_statement_roster_certificate,
+    open_semantic_target_paper_label_obstruction_map_projection_certificate,
+    open_semantic_target_paper_label_obstruction_map_projection_statement_roster_certificate,
+    openSemanticTargetIdObstructionMapIdPaperLabels_current,
+    openSemanticTargetIdObstructionMapPaperLabels_eq_paper_label_obstruction_map_current,
+    openSemanticTargetIdPaperLabelObstructionMapPaperLabels_eq_id_obstruction_map_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Build-gated statement roster certificate for the terminal paper-label
+projection nonclosure package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapAllViewCertificate,
+       OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapPaperLabels =
+          openSemanticTargetPaperLabelObstructionMapLabels,
+       openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+          openSemanticTargetIdObstructionMapPaperLabels,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
+      15 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate
+
+/-- The terminal paper-label projection nonclosure package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
