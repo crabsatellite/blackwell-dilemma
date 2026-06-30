@@ -4403,6 +4403,59 @@ theorem
       topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements_length_current
       topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_certificate)
 
+/-- Pair the two open-target repair frontiers in one paper-semantic gate:
+Part 6 is blocked at the current closed-unit alpha-domain endpoint, while the
+topo route is blocked at the current Mills lower-constant carrier. -/
+def OpenTargetRepairFrontierPairCertificate : Prop :=
+  And
+    Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate
+    TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate
+
+/-- The paired open-target repair frontier is machine-built. -/
+theorem open_target_repair_frontier_pair_certificate :
+    OpenTargetRepairFrontierPairCertificate := by
+  exact And.intro
+    part6_lattice_embedding_alpha_domain_repair_frontier_certificate
+    topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_certificate
+
+/-- Statement roster for the paired open-target repair frontier. -/
+def openTargetRepairFrontierPairStatements : List Prop :=
+  [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+   TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate]
+
+/-- Build gate: the paired repair-frontier roster names exactly the two open
+target repair-frontier certificates. -/
+theorem openTargetRepairFrontierPairStatements_named_current :
+    openTargetRepairFrontierPairStatements =
+      [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate] :=
+  rfl
+
+/-- Build gate: the paired repair-frontier roster has exactly two statements. -/
+theorem openTargetRepairFrontierPairStatements_length_current :
+    openTargetRepairFrontierPairStatements.length = 2 := rfl
+
+/-- Build-gated statement roster for the paired open-target repair-frontier
+certificate. -/
+def OpenTargetRepairFrontierPairStatementRosterCertificate : Prop :=
+  And
+    (openTargetRepairFrontierPairStatements =
+      [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate])
+    (And
+      (openTargetRepairFrontierPairStatements.length = 2)
+      OpenTargetRepairFrontierPairCertificate)
+
+/-- The paired open-target repair-frontier certificate has a fixed statement
+roster. -/
+theorem open_target_repair_frontier_pair_statement_roster_certificate :
+    OpenTargetRepairFrontierPairStatementRosterCertificate := by
+  exact And.intro
+    openTargetRepairFrontierPairStatements_named_current
+    (And.intro
+      openTargetRepairFrontierPairStatements_length_current
+      open_target_repair_frontier_pair_certificate)
+
 /-- Topo open-target bundle: the typed frontier payload, the active repaired
 support-surface output, the matching repair/closing nonclosure certificates,
 and the current target/full-route/boxed-route obstructions are all

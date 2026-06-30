@@ -6201,6 +6201,35 @@ def main() -> int:
         "topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_statement_roster_certificate"
     )
     print(
+        "semantic_target_open_repair_frontier_pair_certificate="
+        "OpenTargetRepairFrontierPairCertificate"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_certificate_proof="
+        "open_target_repair_frontier_pair_certificate"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_statement_roster="
+        "openTargetRepairFrontierPairStatements"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_statement_roster_proof="
+        "openTargetRepairFrontierPairStatements_named_current"
+    )
+    print("semantic_target_open_repair_frontier_pair_statement_roster_terms_checked=2")
+    print(
+        "semantic_target_open_repair_frontier_pair_statement_roster_length_proof="
+        "openTargetRepairFrontierPairStatements_length_current"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_statement_roster_certificate="
+        "OpenTargetRepairFrontierPairStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_statement_roster_certificate_proof="
+        "open_target_repair_frontier_pair_statement_roster_certificate"
+    )
+    print(
         "semantic_target_frontier_payload_targets="
         + ",".join(surface[3] for surface in payload_surfaces)
     )
