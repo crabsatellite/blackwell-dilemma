@@ -31937,6 +31937,121 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate)
 
+/-- Terminal field-output nonclosure roster tying the final nonclosure package
+directly to the detailed field-output statement rosters for both open targets. -/
+def completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal field-output nonclosure roster names the final
+nonclosure package and the detailed field-output rosters for the two open
+targets. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal field-output nonclosure roster has eleven
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
+      11 := rfl
+
+/-- Build-gated terminal field-output nonclosure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+  Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal field-output nonclosure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate,
+    completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate,
+    part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Build-gated statement roster certificate for the terminal field-output
+nonclosure package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate
+
+/-- The terminal field-output nonclosure package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
