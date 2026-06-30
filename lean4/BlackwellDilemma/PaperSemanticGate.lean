@@ -31467,6 +31467,201 @@ theorem
       completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatements_length_current
       completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_certificate)
 
+/-- Raw/open obstruction-map all-view roster before it is attached to the final
+paper-state judgement. -/
+def openSemanticTargetObstructionMapAllViewStatements : List Prop :=
+  [OpenSemanticTargetIdObstructionMapCertificate,
+   OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+   OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+   OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate]
+
+/-- Build gate: the raw/open all-view obstruction-map roster is fixed. -/
+theorem openSemanticTargetObstructionMapAllViewStatements_named_current :
+    openSemanticTargetObstructionMapAllViewStatements =
+      [OpenSemanticTargetIdObstructionMapCertificate,
+       OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate] := rfl
+
+/-- Build gate: the raw/open all-view obstruction-map roster has eighteen
+statements. -/
+theorem openSemanticTargetObstructionMapAllViewStatements_length_current :
+    openSemanticTargetObstructionMapAllViewStatements.length = 18 := rfl
+
+/-- Build-gated raw/open certificate tying every obstruction-map view together
+before final-judgement packaging. -/
+def OpenSemanticTargetObstructionMapAllViewCertificate : Prop :=
+  OpenSemanticTargetIdObstructionMapCertificate /\
+  OpenSemanticTargetIdObstructionMapStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate /\
+  OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate /\
+  OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate /\
+  OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapStatementRosterCertificate /\
+  OpenSemanticTargetIdPaperLabelObstructionMapCertificate /\
+  OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate /\
+  OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate /\
+  OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  OpenSemanticTargetObstructionMapIndexProjectionCertificate /\
+  OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate
+
+/-- Every raw/open obstruction-map view is carried by one all-view kernel gate. -/
+theorem open_semantic_target_obstruction_map_all_view_certificate :
+    OpenSemanticTargetObstructionMapAllViewCertificate := by
+  exact ⟨
+    open_semantic_target_id_obstruction_map_certificate,
+    open_semantic_target_id_obstruction_map_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_ledger_alignment_certificate,
+    open_semantic_target_id_obstruction_map_ledger_alignment_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_paper_label_alignment_certificate,
+    open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_obstruction_projection_certificate,
+    open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate,
+    open_semantic_target_paper_label_obstruction_map_certificate,
+    open_semantic_target_paper_label_obstruction_map_statement_roster_certificate,
+    open_semantic_target_id_paper_label_obstruction_map_certificate,
+    open_semantic_target_id_paper_label_obstruction_map_statement_roster_certificate,
+    open_semantic_target_id_paper_label_obstruction_map_projection_certificate,
+    open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate,
+    open_semantic_target_paper_label_obstruction_map_projection_certificate,
+    open_semantic_target_paper_label_obstruction_map_projection_statement_roster_certificate,
+    open_semantic_target_obstruction_map_index_projection_certificate,
+    open_semantic_target_obstruction_map_index_projection_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the raw/open all-view
+obstruction-map package. -/
+def OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate : Prop :=
+  openSemanticTargetObstructionMapAllViewStatements =
+      [OpenSemanticTargetIdObstructionMapCertificate,
+       OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate] /\
+    openSemanticTargetObstructionMapAllViewStatements.length = 18 /\
+    OpenSemanticTargetObstructionMapAllViewCertificate
+
+/-- The raw/open all-view obstruction-map package has a fixed statement roster. -/
+theorem open_semantic_target_obstruction_map_all_view_statement_roster_certificate :
+    OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetObstructionMapAllViewStatements_named_current
+    (And.intro
+      openSemanticTargetObstructionMapAllViewStatements_length_current
+      open_semantic_target_obstruction_map_all_view_certificate)
+
+/-- Final judgement plus the raw/open all-view obstruction-map package. -/
+def completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+   OpenSemanticTargetObstructionMapAllViewCertificate,
+   OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate]
+
+/-- Build gate: the final/raw all-view obstruction-map bridge roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapAllViewCertificate,
+       OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate] := rfl
+
+/-- Build gate: the final/raw all-view obstruction-map bridge roster has four
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements.length =
+      4 := rfl
+
+/-- Build-gated bridge certifying that the final judgement carries the same
+raw/open all-view obstruction-map package. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate /\
+  OpenSemanticTargetObstructionMapAllViewCertificate /\
+  OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate
+
+/-- The final all-view obstruction-map package is bridged to the raw/open
+all-view obstruction-map package. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_statement_roster_certificate,
+    open_semantic_target_obstruction_map_all_view_certificate,
+    open_semantic_target_obstruction_map_all_view_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the final/raw all-view
+obstruction-map bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewStatementRosterCertificate,
+       OpenSemanticTargetObstructionMapAllViewCertificate,
+       OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements.length =
+      4 /\
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate
+
+/-- The final/raw all-view obstruction-map bridge has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements_length_current
+      completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
