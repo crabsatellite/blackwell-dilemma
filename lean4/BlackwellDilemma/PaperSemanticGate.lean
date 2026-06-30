@@ -31739,6 +31739,96 @@ theorem
       completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_length_current
       completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate)
 
+/-- Final status, closure-input alignment, exact-output alignment, and the
+obstruction-map bridge as one terminal gate. -/
+def completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputOutputStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate]
+
+/-- Build gate: the terminal final-status/closure-input/obstruction-map roster
+is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputOutputStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate] := rfl
+
+/-- Build gate: the terminal final-status/closure-input/obstruction-map roster
+has eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
+      8 := rfl
+
+/-- Build-gated terminal certificate tying the current final status to both
+the exact closure-input/output layer and the all-view obstruction map. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsExactClosureInputOutputCertificate /\
+  RemainingOpenSemanticTargetsExactClosureInputOutputStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate
+
+/-- The terminal current final-status gate carries the exact closure-input/output
+layer and the raw/final obstruction-map bridge together. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate,
+    completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,
+    completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_exact_closure_input_output_certificate,
+    remaining_open_semantic_targets_exact_closure_input_output_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the terminal final-status/
+closure-input/obstruction-map gate. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputOutputCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputOutputStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate
+
+/-- The terminal final-status/closure-input/obstruction-map gate has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements_length_current
+      completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
