@@ -5508,6 +5508,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_terms_checked=3"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_operational_statements="
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatements"
     )
@@ -13266,6 +13297,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_terms_checked=3"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_operational_statements="

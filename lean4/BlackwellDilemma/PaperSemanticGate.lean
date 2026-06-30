@@ -35489,6 +35489,67 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
     completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
 
+/-- Named certificate for the terminal kernel-only nonclosure/open-target final
+ledger bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate
+
+/-- The terminal kernel-only nonclosure/open-target final-ledger bridge is
+machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger
+
+/-- Statement roster for the terminal kernel-only nonclosure/open-target final
+ledger bridge. -/
+def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate]
+
+/-- Build gate: the terminal kernel-only nonclosure/open-target final-ledger
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate] := rfl
+
+/-- Build gate: the terminal kernel-only nonclosure/open-target final-ledger
+roster has three statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the terminal kernel-only
+nonclosure/open-target final-ledger bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements.length =
+      3 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate
+
+/-- The terminal kernel-only nonclosure/open-target final-ledger bridge has a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate)
+
 /-- Supplemental gate: pair the terminal kernel-only nonclosure capstone with
 the open-target gate-status certificate without expanding the already large
 terminal certificate conjunction. -/
