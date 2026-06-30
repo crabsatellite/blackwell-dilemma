@@ -25184,7 +25184,8 @@ theorem
 
 /-- Final routed-exit alignment roster tying the final obstruction ledger,
 per-target routed exits, routed-exit ledger alignment, and top-level alignment
-bridge into one post-obstruction package. -/
+bridge into one post-obstruction package, with the repair frontier pair named
+directly. -/
 def
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements :
     List Prop :=
@@ -25198,6 +25199,8 @@ def
    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
@@ -25206,7 +25209,8 @@ def
    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate]
 
 /-- Build gate: the final routed-exit alignment roster names exactly the
-current final-ledger pair and the routed-exit alignment certificate pairs. -/
+current final-ledger pair, repair frontier pair, and routed-exit alignment
+certificate pairs. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_named_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements =
@@ -25220,6 +25224,8 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
@@ -25227,12 +25233,12 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate] := rfl
 
-/-- Build gate: the final routed-exit alignment roster has sixteen
+/-- Build gate: the final routed-exit alignment roster has eighteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements.length =
-      16 := rfl
+      18 := rfl
 
 /-- Build-gated certificate tying the final obstruction ledger to every current
 routed-exit alignment package. -/
@@ -25248,6 +25254,8 @@ def CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate :
   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate /\
   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate /\
@@ -25270,6 +25278,8 @@ theorem
     completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate,
     part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
     topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     open_semantic_target_current_routed_exit_ledger_alignment_certificate,
     open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate,
@@ -25293,6 +25303,8 @@ def
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
@@ -25300,7 +25312,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatements.length =
-      16 /\
+      18 /\
     CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate
 
 /-- The final routed-exit alignment package has a fixed statement roster. -/
@@ -25314,7 +25326,7 @@ theorem
       completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate)
 
 /-- Final routed-exit exit roster tying the current non-complete gate to the
-machine-checked routed-exit final-alignment package. -/
+machine-checked routed-exit final-alignment package and repair frontier pair. -/
 def completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements :
     List Prop :=
   [Not CompletePaperSemanticKernelOnly,
@@ -25322,10 +25334,13 @@ def completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements :
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the routed-exit final exit roster names exactly the
-non-complete gate and the routed-exit final-alignment certificate pair. -/
+non-complete gate, routed-exit final-alignment certificate pair, and repair
+frontier pair. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_named_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements =
@@ -25334,16 +25349,19 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the routed-exit final exit roster has six statements. -/
+/-- Build gate: the routed-exit final exit roster has eight statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated certificate that the current non-complete paper-semantic gate
-is routed through the final routed-exit alignment package. -/
+is routed through the final routed-exit alignment package and repair frontier
+pair. -/
 def CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate :
     Prop :=
   Not CompletePaperSemanticKernelOnly /\
@@ -25351,7 +25369,9 @@ def CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate :
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The routed-exit final exit package is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate :
@@ -25366,7 +25386,11 @@ theorem completePaperSemanticKernelOnly_current_routed_exit_final_exit_certifica
           completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate
           (And.intro
             part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
+            (And.intro
+              topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+              (And.intro
+                open_target_repair_frontier_pair_certificate
+                open_target_repair_frontier_pair_statement_roster_certificate))))))
 
 /-- Build-gated statement roster certificate for the routed-exit final exit
 package. -/
@@ -25379,9 +25403,11 @@ def
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate
 
 /-- The routed-exit final exit package has a fixed statement roster. -/
