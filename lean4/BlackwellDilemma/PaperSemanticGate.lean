@@ -25944,7 +25944,7 @@ theorem
 
 /-- Terminal consistency roster for the current paper-semantic machine state:
 the exact open/closed ledger facts are tied directly to the final status and
-status-level routed-exit coverage packages. -/
+status-level routed-exit coverage packages, with repair frontier pair named. -/
 def completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements :
     List Prop :=
   [Not CompletePaperSemanticKernelOnly,
@@ -25972,11 +25972,13 @@ def completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements :
    CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
    CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the terminal consistency roster names exactly the current
 non-complete status, exact semantic ledger facts, final status package, and
-status-level routed-exit coverage package. -/
+status-level routed-exit coverage package plus repair frontier pair. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements =
@@ -26005,13 +26007,15 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
        CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the terminal consistency roster has seventeen statements. -/
+/-- Build gate: the terminal consistency roster has nineteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
-      17 := rfl
+      19 := rfl
 
 /-- Build-gated terminal consistency certificate for the current
 paper-semantic machine state. -/
@@ -26042,6 +26046,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate :
   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate /\
   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The terminal consistency package is machine checked. -/
@@ -26064,6 +26070,8 @@ theorem completePaperSemanticKernelOnly_current_terminal_consistency_certificate
     completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate,
     completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_statement_roster_certificate,
     part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate⟩
 
 /-- Build-gated statement roster certificate for terminal consistency. -/
@@ -26095,9 +26103,11 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCert
        CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
        CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
-      17 /\
+      19 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate
 
 /-- The terminal consistency package has a fixed statement roster. -/
@@ -34499,7 +34509,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
       8,
    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
-      17,
+      19,
    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
       12,
    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
@@ -34671,7 +34681,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
           8,
        completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
-          17,
+          19,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
           12,
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
@@ -34848,7 +34858,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
       8 /\
   completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
-      17 /\
+      19 /\
   completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
       12 /\
   completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
@@ -35152,7 +35162,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
           8,
        completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
-          17,
+          19,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
           12,
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =

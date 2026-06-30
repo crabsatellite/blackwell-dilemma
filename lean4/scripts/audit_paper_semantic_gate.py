@@ -3844,7 +3844,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_checked=17"
+        "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_checked=19"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_proof="
@@ -11387,7 +11387,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_checked=17"
+            "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_checked=19"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_consistency_statement_terms_proof="
