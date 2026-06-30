@@ -31965,6 +31965,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleSta
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate,
+   TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate,
    Not CompletePaperSemanticKernelOnly,
    CompletePaperSemanticKernelOnly <-> False,
    openSemanticTargetIdObstructionMapObstructionBundles =
@@ -31983,6 +31985,8 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate,
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False,
        openSemanticTargetIdObstructionMapObstructionBundles =
@@ -31995,12 +31999,12 @@ theorem
        openSemanticTargetIdObstructionMapObstructionBundles.length =
           paperSemanticOpenCount] := rfl
 
-/-- Build gate: the terminal nonclosure obstruction-bundle roster has six
+/-- Build gate: the terminal nonclosure obstruction-bundle roster has eight
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated terminal nonclosure certificate tying the current non-complete
 judgement to the exact ID-indexed obstruction bundles. -/
@@ -32008,6 +32012,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCer
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate /\
+  TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate /\
+  TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate /\
   Not CompletePaperSemanticKernelOnly /\
   (CompletePaperSemanticKernelOnly <-> False) /\
   openSemanticTargetIdObstructionMapObstructionBundles =
@@ -32028,6 +32034,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate,
     completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_support_surface_closing_route_nonclosure_projection_certificate,
+    topo_cluster_random_supercritical_z2_support_surface_closing_route_nonclosure_projection_statement_roster_certificate,
     completePaperSemanticKernelOnly_notYet,
     completePaperSemanticKernelOnly_iff_false_current,
     openSemanticTargetIdObstructionMapObstructionBundles_named_current,
@@ -32040,6 +32048,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleSta
   completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate,
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False,
        openSemanticTargetIdObstructionMapObstructionBundles =
@@ -32052,7 +32062,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleSta
        openSemanticTargetIdObstructionMapObstructionBundles.length =
           paperSemanticOpenCount] /\
     completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate
 
 /-- The terminal nonclosure obstruction-bundle package has a fixed statement
