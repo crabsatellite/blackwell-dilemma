@@ -34071,6 +34071,29 @@ theorem
           completePaperSemanticKernelOnly_current_open_target_gate_status_certificate
           completePaperSemanticKernelOnly_current_open_target_exit_certificate)))
 
+/-- Supplemental gate: compact terminal/route-obstruction exit bundle.  This
+keeps the terminal capstone factored while requiring the current obstruction
+and routed-exit closure path in one theorem. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_bundle :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_open_target_route_obstruction_exit_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
+            completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate))))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
