@@ -34094,6 +34094,26 @@ theorem
             completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
             completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate))))
 
+/-- Supplemental gate: terminal capstone plus final obstruction-map bridge.  The
+bundle makes the final judgement obstruction-map all-view path visible next to
+the terminal kernel-only nonclosure certificate. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_bundle :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_all_view_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate
+          completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate)))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
