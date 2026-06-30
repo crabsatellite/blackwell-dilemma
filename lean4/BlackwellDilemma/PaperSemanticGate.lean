@@ -33573,12 +33573,14 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate)
 
 /-- Terminal ledger-state nonclosure roster tying the latest field-output
-nonclosure package to the current open/closed counts, ids, obstruction-map ids,
-and detailed field-output roster ids. -/
+nonclosure package and repair-frontier pair to the current open/closed counts,
+ids, obstruction-map ids, and detailed field-output roster ids. -/
 def completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
    paperSemanticOpenCount = 2,
@@ -33611,13 +33613,15 @@ def completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatement
    Not CompletePaperSemanticKernelOnly]
 
 /-- Build gate: the terminal ledger-state nonclosure roster fixes the latest
-nonclosure package against the current counts, ids, obstruction map, and
-field-output roster ledgers. -/
+nonclosure package and repair-frontier pair against the current counts, ids,
+obstruction map, and field-output roster ledgers. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
        paperSemanticOpenCount = 2,
@@ -33649,18 +33653,20 @@ theorem
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the terminal ledger-state nonclosure roster has sixteen
+/-- Build gate: the terminal ledger-state nonclosure roster has eighteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
-      16 := rfl
+      18 := rfl
 
 /-- Build-gated terminal ledger-state nonclosure certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate /\
   paperSemanticOpenCount = 2 /\
@@ -33699,6 +33705,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate,
     completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate,
     completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_statement_roster_certificate,
     paperSemanticOpenCount_current,
@@ -33721,6 +33729,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatement
   completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
        paperSemanticOpenCount = 2,
@@ -33752,7 +33762,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatement
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
-      16 /\
+      18 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate
 
 /-- The terminal ledger-state nonclosure package has a fixed statement roster. -/
@@ -34631,7 +34641,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
       13,
    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
-      16,
+      18,
    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
       15,
    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
@@ -34803,7 +34813,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
           13,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
-          16,
+          18,
        completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
           15,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
@@ -34980,7 +34990,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
       13 /\
   completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
-      16 /\
+      18 /\
   completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
       15 /\
   completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
@@ -35284,7 +35294,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
           13,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
-          16,
+          18,
        completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
           15,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
