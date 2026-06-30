@@ -3999,7 +3999,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_per_target_routed_exit_statement_terms_checked=22"
+        "complete_paper_semantic_kernel_only_current_terminal_per_target_routed_exit_statement_terms_checked=24"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_per_target_routed_exit_statement_terms_proof="
@@ -11542,7 +11542,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_per_target_routed_exit_statement_terms_checked=22"
+            "complete_paper_semantic_kernel_only_current_terminal_per_target_routed_exit_statement_terms_checked=24"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_per_target_routed_exit_statement_terms_proof="
