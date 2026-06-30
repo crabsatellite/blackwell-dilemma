@@ -23811,6 +23811,47 @@ theorem completePaperSemanticKernelOnly_current_per_target_routed_exit_certifica
                 part6_lattice_embedding_repair_route_obstruction_multipath_certificate
                 topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))))
 
+/-- Build gate: the per-target routed exits are paired with the two
+open-target nonclosure bundles, so each remaining open target has both its
+frontier nonclosure package and routed-exit package checked in the same theorem. -/
+theorem
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_open_target_nonclosure_bundle :
+    (Part6LatticeEmbeddingFrontierPayloadCertificate /\
+      (Part6LatticeEmbeddingSemanticKernelTarget ↔
+        Part6NondegenerateFeasibleRepairRoute) /\
+        (Part6LatticeEmbeddingSemanticKernelTarget ↔
+          Part6FullPaperClosingSupport) /\
+          (Part6NondegenerateFeasibleRepairRoute ↔
+            Part6FullPaperClosingSupport) /\
+            Part6NondegenerateFeasibleRepairRouteCertificate /\
+              Part6FullPaperClosingOutputLayerCertificate /\
+                Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+                  Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+                    Part6CurrentFrontierCertificate /\
+                      Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                        Not Part6NondegenerateFeasibleRepairRoute /\
+                          Not Part6FullPaperClosingSupport) /\
+      (TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+              RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+        Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
+          TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate := by
+  exact And.intro
+    part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle
+    (And.intro
+      topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle
+      (And.intro
+        part6_lattice_embedding_current_routed_exit_certificate
+        (And.intro
+          topo_cluster_random_supercritical_z2_current_routed_exit_certificate
+          completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate)))
+
 /-- Build-gated statement roster certificate for the aggregate per-target
 routed-exit package. -/
 def
