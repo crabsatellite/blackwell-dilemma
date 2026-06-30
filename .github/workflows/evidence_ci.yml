@@ -56,7 +56,7 @@ jobs:
 
       - name: Get Mathlib cache
         working-directory: lean4
-        run: lake exe cache get || true
+        run: timeout 15m lake exe cache get || true
 
       - name: Build AxiomAudit dependency surface
         working-directory: lean4

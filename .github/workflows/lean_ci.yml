@@ -48,7 +48,7 @@ jobs:
           restore-keys: lake-${{ runner.os }}-
 
       - name: Get Mathlib cache
-        run: lake exe cache get || true
+        run: timeout 15m lake exe cache get || true
 
       - name: Build BlackwellDilemma
         run: lake build BlackwellDilemma
