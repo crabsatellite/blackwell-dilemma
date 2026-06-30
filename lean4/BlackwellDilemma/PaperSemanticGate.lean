@@ -35597,6 +35597,83 @@ theorem
             completePaperSemanticKernelOnly_iff_false_current
             completePaperSemanticKernelOnly_notYet))))
 
+/-- Named certificate for the terminal kernel-only nonclosure final-status
+bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate /\
+          (CompletePaperSemanticKernelOnly <-> False) /\
+            Not CompletePaperSemanticKernelOnly
+
+/-- The terminal kernel-only nonclosure final-status certificate is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_bundle
+
+/-- Statement roster for the terminal kernel-only nonclosure final-status
+bundle. -/
+def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal kernel-only nonclosure final-status roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal kernel-only nonclosure final-status roster has
+seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the terminal kernel-only
+nonclosure final-status bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusCertificate
+
+/-- The terminal kernel-only nonclosure final-status bundle has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_certificate)
+
 /-- Supplemental gate: terminal capstone audit bundle.  This is the compact
 paper-facing theorem pairing the terminal kernel-only certificate, its fixed
 statement roster, and the final nonclosure judgement. -/
