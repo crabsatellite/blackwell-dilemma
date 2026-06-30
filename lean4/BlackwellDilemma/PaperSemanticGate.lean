@@ -24873,7 +24873,8 @@ theorem
       openSemanticTargetCurrentRoutedExitIdPaperLabels := rfl
 
 /-- Statement roster for the open-target routed-exit ledger alignment, with
-current multipath route-obstruction witnesses named directly. -/
+current multipath route-obstruction witnesses and the repair frontier pair
+named directly. -/
 def openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements :
     List Prop :=
   [openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds,
@@ -24884,11 +24885,13 @@ def openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements :
    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the open-target routed-exit ledger-alignment roster is fixed to
 the current id ledger, paper-label ledger, per-target routed-exit package, and
-current multipath route-obstruction certificates. -/
+current multipath route-obstruction certificates plus the repair frontier pair. -/
 theorem
     openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_named_current :
     openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements =
@@ -24900,18 +24903,20 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the open-target routed-exit ledger-alignment roster has seven
+/-- Build gate: the open-target routed-exit ledger-alignment roster has nine
 statements. -/
 theorem
     openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements_length_current :
     openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements.length =
-      7 := rfl
+      9 := rfl
 
 /-- Build-gated certificate aligning current per-target routed exits with the
 open semantic target id and `(id, paperLabel)` ledgers, while naming current
-multipath route-obstruction witnesses directly. -/
+multipath route-obstruction witnesses and the repair frontier pair directly. -/
 def OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate :
     Prop :=
   openSemanticTargetCurrentRoutedExitIds = openSemanticTargetIds /\
@@ -24922,7 +24927,9 @@ def OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate :
   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The open-target routed-exit ledger alignment is machine checked. -/
 theorem open_semantic_target_current_routed_exit_ledger_alignment_certificate :
@@ -24939,7 +24946,11 @@ theorem open_semantic_target_current_routed_exit_ledger_alignment_certificate :
             completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate
             (And.intro
               part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-              topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate)))))
+              (And.intro
+                topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+                (And.intro
+                  open_target_repair_frontier_pair_certificate
+                  open_target_repair_frontier_pair_statement_roster_certificate)))))))
 
 /-- Build-gated statement roster certificate for the open-target routed-exit
 ledger alignment. -/
@@ -24955,9 +24966,11 @@ def
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     openSemanticTargetCurrentRoutedExitLedgerAlignmentStatements.length =
-      7 /\
+      9 /\
     OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate
 
 /-- The open-target routed-exit ledger-alignment package has a fixed statement
