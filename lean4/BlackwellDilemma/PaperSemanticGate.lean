@@ -34051,6 +34051,26 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
     completePaperSemanticKernelOnly_current_open_target_exit_certificate
 
+/-- Supplemental gate: compact terminal/open-target operational bundle.  This
+keeps the large terminal capstone factored while still requiring the key
+open-target gate-status, final-ledger, and exit certificates in one theorem. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_bundle :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_gate_status_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_open_target_gate_status_certificate
+          completePaperSemanticKernelOnly_current_open_target_exit_certificate)))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
