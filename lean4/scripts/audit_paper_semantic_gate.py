@@ -6107,6 +6107,53 @@ def main() -> int:
         "topo_cluster_random_supercritical_z2_frontier_payload_statement_roster_certificate"
     )
     print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_carrier_zero_proof="
+        "topo_cluster_random_supercritical_z2_frontier_payload_current_lower_constant_zero"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_mills_identifier_obstruction_proof="
+        "topo_cluster_random_supercritical_z2_frontier_payload_current_mills_identifier_obstruction"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_finite_positive_regression_proof="
+        "topo_cluster_random_supercritical_z2_frontier_payload_finite_positive_regression"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_finite_positive_regression_not_random_supercritical_z2_bridge_proof="
+        "topo_cluster_random_supercritical_z2_frontier_payload_finite_positive_regression_not_random_supercritical_z2_bridge"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_certificate="
+        "TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_certificate_proof="
+        "topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_certificate"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_statement_roster="
+        "topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_statement_roster_proof="
+        "topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements_named_current"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_statement_roster_terms_checked=7"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_statement_roster_length_proof="
+        "topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements_length_current"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_topo_mills_lower_constant_repair_frontier_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_statement_roster_certificate"
+    )
+    print(
         "semantic_target_frontier_payload_targets="
         + ",".join(surface[3] for surface in payload_surfaces)
     )

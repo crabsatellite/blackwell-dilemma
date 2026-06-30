@@ -4144,6 +4144,158 @@ theorem
     RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate :=
   (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_certificate
 
+/-- The complete typed random-supercritical topo frontier payload keeps the
+current lower-constant carrier honest: the present carrier is neutral and
+therefore not the Mills-tail lower-constant identification needed by the
+paper-closing route. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_current_lower_constant_zero :
+    (∀ p : ℝ, expectedTopoLossAboveLowerConst p = 0) :=
+  expectedTopoLossAboveLowerConst_eq_zero_current
+
+/-- The complete typed random-supercritical topo frontier payload projects the
+current Mills-tail lower-constant obstruction. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_current_mills_identifier_obstruction :
+    ¬
+      ((∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+        ∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))) :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).current_mills_identifier_obstruction
+
+/-- The finite first-edge stochastic check is retained as a positive
+regression witness for the topo route. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_finite_positive_regression :
+    FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).first_edge_giant_stochastic_positive_regression
+
+/-- The finite first-edge stochastic positive regression is also kernel-gated
+as not being a random-supercritical `Z2_L` bridge theorem. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_finite_positive_regression_not_random_supercritical_z2_bridge :
+    FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).first_edge_giant_stochastic_not_random_supercritical_z2_bridge
+
+/-- Topo Mills lower-constant repair frontier: the current route has a
+positive finite stochastic regression check, but the lower-constant carrier is
+still the neutral current carrier and the Mills-tail identification needed for
+the paper-closing lower bound is kernel-refuted. -/
+def TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate :
+    Prop :=
+  (∀ p : ℝ, expectedTopoLossAboveLowerConst p = 0) ∧
+    ¬
+      ((∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+        ∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))) ∧
+    FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate ∧
+    FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate ∧
+    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate ∧
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ∧
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute
+
+/-- The topo Mills lower-constant repair frontier is machine-built. -/
+theorem
+    topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_certificate :
+    TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate := by
+  exact And.intro
+    topo_cluster_random_supercritical_z2_frontier_payload_current_lower_constant_zero
+    (And.intro
+      topo_cluster_random_supercritical_z2_frontier_payload_current_mills_identifier_obstruction
+      (And.intro
+        topo_cluster_random_supercritical_z2_frontier_payload_finite_positive_regression
+        (And.intro
+          topo_cluster_random_supercritical_z2_frontier_payload_finite_positive_regression_not_random_supercritical_z2_bridge
+          (And.intro
+            topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate
+            (And.intro
+              topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+              topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current)))))
+
+/-- Statement roster for the topo Mills lower-constant repair frontier. -/
+def topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements :
+    List Prop :=
+  [(∀ p : ℝ, expectedTopoLossAboveLowerConst p = 0),
+   ¬
+      ((∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+        ∀ p : ℝ, harrisKestenCriticalProb < p →
+          ∃ c : ℝ, 0 < c ∧
+            expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))),
+   FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate,
+   FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate,
+   RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute]
+
+/-- Build gate: the topo Mills lower-constant repair frontier roster names
+exactly the current carrier, Mills obstruction, finite-regression, and open
+target obstruction statements. -/
+theorem
+    topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements_named_current :
+    topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements =
+      [(∀ p : ℝ, expectedTopoLossAboveLowerConst p = 0),
+       ¬
+          ((∀ p : ℝ, harrisKestenCriticalProb < p →
+              ∃ c : ℝ, 0 < c ∧
+                ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+            ∀ p : ℝ, harrisKestenCriticalProb < p →
+              ∃ c : ℝ, 0 < c ∧
+                expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))),
+       FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate,
+       FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] :=
+  rfl
+
+/-- Build gate: the topo Mills lower-constant repair frontier roster has
+exactly seven statements. -/
+theorem
+    topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements_length_current :
+    topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster for the topo Mills lower-constant repair
+frontier certificate. -/
+def TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements =
+      [(∀ p : ℝ, expectedTopoLossAboveLowerConst p = 0),
+       ¬
+          ((∀ p : ℝ, harrisKestenCriticalProb < p →
+              ∃ c : ℝ, 0 < c ∧
+                ∀ k : ℕ, clusterSizeTail p k ≤ Real.exp (-(c * (k : ℝ)))) →
+            ∀ p : ℝ, harrisKestenCriticalProb < p →
+              ∃ c : ℝ, 0 < c ∧
+                expectedTopoLossAboveLowerConst p = 1 / (1 - Real.exp (-c))),
+       FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate,
+       FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] ∧
+    topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements.length =
+      7 ∧
+    TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate
+
+/-- The topo Mills lower-constant repair frontier certificate has a fixed
+statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatements_length_current
+      topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_certificate)
+
 /-- Topo open-target bundle: the typed frontier payload, the active repaired
 support-surface output, the matching repair/closing nonclosure certificates,
 and the current target/full-route/boxed-route obstructions are all
