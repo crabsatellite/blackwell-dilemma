@@ -27706,12 +27706,14 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate)
 
 /-- Terminal open-target source closure roster tying the terminal main
-obstruction closure directly to the route-derived and target-derived
-obstruction source packages for both current open targets. -/
+obstruction closure and repair-frontier pair directly to the route-derived and
+target-derived obstruction source packages for both current open targets. -/
 def completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
@@ -27740,14 +27742,16 @@ def completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStateme
    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the terminal open-target source closure roster names the main
-terminal obstruction closure, the terminal open/per-target/route-target
-packages, every source route-derived target obstruction package, and the
-current target/route obstruction facts. -/
+terminal obstruction closure, repair-frontier pair, the terminal
+open/per-target/route-target packages, every source route-derived target
+obstruction package, and the current target/route obstruction facts. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
@@ -27775,19 +27779,22 @@ theorem
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
-/-- Build gate: the terminal open-target source closure roster has twenty-eight
+/-- Build gate: the terminal open-target source closure roster has thirty
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
-      28 := rfl
+      30 := rfl
 
 /-- Build-gated terminal certificate for the current open-target witness
-closure over all route-derived and target-derived obstruction packages. -/
+closure over the repair-frontier pair and all route-derived and target-derived
+obstruction packages. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
@@ -27822,6 +27829,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_certificate,
     completePaperSemanticKernelOnly_current_terminal_main_obstruction_closure_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_open_obstruction_certificate,
     completePaperSemanticKernelOnly_current_terminal_open_obstruction_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate,
@@ -27857,6 +27866,8 @@ def
   completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
@@ -27884,7 +27895,7 @@ def
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
-      28 /\
+      30 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureCertificate
 
 /-- The terminal open-target source closure package has a fixed statement
@@ -34626,7 +34637,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
       20,
    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
-      28,
+      30,
    completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements.length =
       22,
    completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
@@ -34798,7 +34809,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
           20,
        completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
-          28,
+          30,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements.length =
           22,
        completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
@@ -34975,7 +34986,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
       20 /\
   completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
-      28 /\
+      30 /\
   completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements.length =
       22 /\
   completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
@@ -35279,7 +35290,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
           20,
        completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
-          28,
+          30,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerSourceClosureStatements.length =
           22,
        completePaperSemanticKernelOnlyCurrentTerminalFinalLedgerSourceClosureStatements.length =
