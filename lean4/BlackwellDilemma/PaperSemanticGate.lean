@@ -26530,8 +26530,9 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_certificate)
 
-/-- Terminal umbrella roster tying all terminal consistency layers to the
-final status package and the exact current ledger cardinalities. -/
+/-- Terminal umbrella roster tying all terminal consistency layers and the
+repair-frontier pair to the final status package and the exact current ledger
+cardinalities. -/
 def completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
@@ -26540,6 +26541,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements :
    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
@@ -26554,7 +26557,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements :
    closedSemanticTargetIds.length = 3]
 
 /-- Build gate: the terminal umbrella roster names exactly the terminal
-consistency layers, final status layers, and exact current ledger sizes. -/
+consistency layers, repair-frontier pair, final status layers, and exact current
+ledger sizes. -/
 theorem completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
@@ -26563,6 +26567,8 @@ theorem completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_named_c
        CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
@@ -26576,10 +26582,10 @@ theorem completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_named_c
        openSemanticTargetIds.length = 2,
        closedSemanticTargetIds.length = 3] := rfl
 
-/-- Build gate: the terminal umbrella roster has eighteen statements. -/
+/-- Build gate: the terminal umbrella roster has twenty statements. -/
 theorem completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
-      18 := rfl
+      20 := rfl
 
 /-- Build-gated terminal umbrella certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate :
@@ -26590,6 +26596,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate :
   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate /\
@@ -26613,6 +26621,8 @@ theorem completePaperSemanticKernelOnly_current_terminal_umbrella_certificate :
     completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_certificate,
     completePaperSemanticKernelOnly_current_terminal_partition_status_consistency_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_final_status_certificate,
     completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_status_direct_routed_exit_coverage_certificate,
@@ -26637,6 +26647,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertifi
        CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate,
@@ -26650,7 +26662,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatementRosterCertifi
        openSemanticTargetIds.length = 2,
        closedSemanticTargetIds.length = 3] /\
     completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
-      18 /\
+      20 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalUmbrellaCertificate
 
 /-- The terminal umbrella package has a fixed statement roster. -/
@@ -34537,7 +34549,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
       21,
    completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
-      18,
+      20,
    completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
       20,
    completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements.length =
@@ -34709,7 +34721,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
           21,
        completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
-          18,
+          20,
        completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
           20,
        completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements.length =
@@ -34886,7 +34898,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
       21 /\
   completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
-      18 /\
+      20 /\
   completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
       20 /\
   completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements.length =
@@ -35190,7 +35202,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements.length =
           21,
        completePaperSemanticKernelOnlyCurrentTerminalUmbrellaStatements.length =
-          18,
+          20,
        completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements.length =
           20,
        completePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatements.length =
