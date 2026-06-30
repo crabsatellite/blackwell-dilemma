@@ -24050,6 +24050,46 @@ theorem
     part6_lattice_embedding_current_routed_exit_certificate,
     topo_cluster_random_supercritical_z2_current_routed_exit_certificate⟩
 
+/-- Part 6 target-specific route-source bundle: the repair-route and
+full-support derived target-obstruction certificates are checked with the
+conditional/nonclosure bundle and current routed exit. -/
+theorem
+    part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle :
+    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate /\
+      Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate /\
+        Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate /\
+          Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate /\
+            Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+              (Part6RemainingConditionalProjectionCertificate /\
+                Part6RemainingConditionalProjectionStatementRosterCertificate /\
+                  Part6LatticeEmbeddingFrontierPayloadCertificate /\
+                    Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+                      Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+                        Part6CurrentFrontierCertificate /\
+                          Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                            Not Part6NondegenerateFeasibleRepairRoute /\
+                              Not Part6FullPaperClosingSupport /\
+                                Not Part6FullPaperClosingDivergenceWitness /\
+                                  Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+                                    Not (Part6FullPaperClosingDivergenceWitness /\
+                                      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+                                      Not Part6LatticeEmbeddingExactClosureInput /\
+                                        Not Part6FullPaperClosingFullOutputBundle /\
+                                          Part6LatticeEmbeddingCurrentRoutedExitCertificate) /\
+                Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate := by
+  exact ⟨
+    part6_lattice_embedding_repair_route_derived_target_obstruction_certificate,
+    part6_lattice_embedding_repair_route_derived_target_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_full_support_derived_target_obstruction_certificate,
+    part6_lattice_embedding_full_support_derived_target_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle,
+    part6_lattice_embedding_current_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate⟩
+
 /-- Open target ids covered by the current per-target routed-exit packages. -/
 def openSemanticTargetCurrentRoutedExitIds : List String :=
   openSemanticTargetIds
