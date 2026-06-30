@@ -3488,7 +3488,7 @@ def main() -> int:
         "topo_cluster_random_supercritical_z2_current_routed_exit_statements_proof="
         "topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_named_current"
     )
-    print("topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_checked=10")
+    print("topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_checked=12")
     print(
         "topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_proof="
         "topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_length_current"
@@ -11026,7 +11026,7 @@ def main() -> int:
             "topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_named_current"
         ),
         (
-            "topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_checked=10"
+            "topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_checked=12"
         ),
         (
             "topo_cluster_random_supercritical_z2_current_routed_exit_statement_terms_proof="

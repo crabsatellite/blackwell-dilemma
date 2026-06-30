@@ -24123,7 +24123,7 @@ theorem part6_lattice_embedding_conditional_projection_open_target_nonclosure_bu
 
 /-- Per-target routed exit roster for the topo open target.  It keeps the
 current target obstruction, both route obstructions, their route-derived target
-packages, and the top-level routed exit together. -/
+packages, the top-level routed exit, and the repair frontier together. -/
 def topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements :
     List Prop :=
   [Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
@@ -24135,10 +24135,12 @@ def topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements :
    TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
    TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the topo routed-exit roster is fixed to its current target,
-route-obstruction package, and top-level routed exit. -/
+route-obstruction package, top-level routed exit, and repair frontier. -/
 theorem
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_named_current :
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements =
@@ -24151,13 +24153,15 @@ theorem
        TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
        TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the topo routed-exit roster has ten statements. -/
+/-- Build gate: the topo routed-exit roster has twelve statements. -/
 theorem
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_length_current :
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements.length =
-      10 := rfl
+      12 := rfl
 
 /-- Build-gated certificate for the topo current routed exit. -/
 def TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate : Prop :=
@@ -24170,7 +24174,9 @@ def TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate : Prop :=
   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate /\
   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate /\
-  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate
+  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The topo current routed-exit certificate is machine checked. -/
 theorem topo_cluster_random_supercritical_z2_current_routed_exit_certificate :
@@ -24193,7 +24199,11 @@ theorem topo_cluster_random_supercritical_z2_current_routed_exit_certificate :
                   topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate
                   (And.intro
                     completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
-                    completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate))))))))
+                    (And.intro
+                      completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate
+                      (And.intro
+                        open_target_repair_frontier_pair_certificate
+                        open_target_repair_frontier_pair_statement_roster_certificate))))))))))
 
 /-- Build-gated statement roster certificate for the topo routed exit. -/
 def TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate :
@@ -24208,9 +24218,11 @@ def TopoClusterRandomSupercriticalZ2CurrentRoutedExitStatementRosterCertificate 
        TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
        TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements.length =
-      10 /\
+      12 /\
     TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate
 
 /-- The topo current routed-exit package has a fixed statement roster. -/
