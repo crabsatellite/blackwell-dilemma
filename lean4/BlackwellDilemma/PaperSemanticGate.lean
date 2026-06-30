@@ -35044,6 +35044,33 @@ theorem
           completePaperSemanticKernelOnly_iff_false_current
           completePaperSemanticKernelOnly_notYet)))
 
+/-- Supplemental gate: route-source terminal capstone public-evidence bundle.
+This keeps the route-source terminal capstone, its fixed statement roster, gate
+status, open-target final ledger, final status, and final nonclosure judgement
+in one kernel-checked theorem. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_gate_status_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_final_status_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_iff_false_current
+              completePaperSemanticKernelOnly_notYet)))))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
