@@ -3596,7 +3596,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_checked=6"
+        "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_checked=8"
     )
     print(
         "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_proof="
@@ -3627,7 +3627,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_checked=6"
+        "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_checked=8"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_proof="
@@ -11139,7 +11139,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_checked=6"
+            "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_checked=8"
         ),
         (
             "complete_paper_semantic_kernel_only_current_routed_exit_top_level_alignment_statement_terms_proof="
@@ -11170,7 +11170,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_checked=6"
+            "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_checked=8"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_routed_exit_top_level_alignment_statement_terms_proof="

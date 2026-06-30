@@ -24985,7 +24985,7 @@ theorem
       open_semantic_target_current_routed_exit_ledger_alignment_certificate)
 
 /-- Statement roster tying the top-level current-alignment umbrella to the
-current routed-exit ledger alignment. -/
+current routed-exit ledger alignment and repair frontier pair. -/
 def
     completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements :
     List Prop :=
@@ -24994,11 +24994,13 @@ def
    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
    OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the routed-exit top-level alignment roster names exactly the
 top-level alignment pair, the current routed-exit ledger-alignment pair, and
-the current multipath route-obstruction certificates. -/
+the current multipath route-obstruction certificates plus repair frontier pair. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_named_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements =
@@ -25007,18 +25009,20 @@ theorem
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the routed-exit top-level alignment roster has six
+/-- Build gate: the routed-exit top-level alignment roster has eight
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated certificate that the top-level current-alignment umbrella
 explicitly carries the current routed-exit ledger alignment and multipath
-route obstructions. -/
+route obstructions plus the repair frontier pair. -/
 def
     CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate :
     Prop :=
@@ -25027,7 +25031,9 @@ def
   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate /\
   OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The routed-exit top-level alignment package is machine checked. -/
 theorem
@@ -25043,7 +25049,11 @@ theorem
           open_semantic_target_current_routed_exit_ledger_alignment_statement_roster_certificate
           (And.intro
             part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
+            (And.intro
+              topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+              (And.intro
+                open_target_repair_frontier_pair_certificate
+                open_target_repair_frontier_pair_statement_roster_certificate))))))
 
 /-- Build-gated statement roster certificate for the routed-exit top-level
 alignment package. -/
@@ -25056,9 +25066,11 @@ def
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentCertificate,
        OpenSemanticTargetCurrentRoutedExitLedgerAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate
 
 /-- The routed-exit top-level alignment package has a fixed statement roster. -/
@@ -25072,7 +25084,7 @@ theorem
       completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_certificate)
 
 /-- Statement roster tying the current obstruction certificate to the
-routed-exit top-level alignment package. -/
+routed-exit top-level alignment package and repair frontier pair. -/
 def
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements :
     List Prop :=
@@ -25081,11 +25093,13 @@ def
    CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the obstruction/routed-exit top-level bridge roster names
-exactly the current obstruction pair and routed-exit top-level alignment pair.
--/
+exactly the current obstruction pair, routed-exit top-level alignment pair, and
+repair frontier pair. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_named_current :
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements =
@@ -25094,17 +25108,19 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the obstruction/routed-exit top-level bridge roster has six
+/-- Build gate: the obstruction/routed-exit top-level bridge roster has eight
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated certificate that the current obstruction package explicitly
-carries the routed-exit top-level alignment package. -/
+carries the routed-exit top-level alignment package and repair frontier pair. -/
 def
     CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate :
     Prop :=
@@ -25113,7 +25129,9 @@ def
   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The obstruction/routed-exit top-level bridge package is machine checked. -/
 theorem
@@ -25129,7 +25147,11 @@ theorem
           completePaperSemanticKernelOnly_current_routed_exit_top_level_alignment_statement_roster_certificate
           (And.intro
             part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
+            (And.intro
+              topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+              (And.intro
+                open_target_repair_frontier_pair_certificate
+                open_target_repair_frontier_pair_statement_roster_certificate))))))
 
 /-- Build-gated statement roster certificate for the obstruction/routed-exit
 top-level bridge package. -/
@@ -25142,9 +25164,11 @@ def
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitTopLevelAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitTopLevelAlignmentCertificate
 
 /-- The obstruction/routed-exit top-level bridge package has a fixed statement
