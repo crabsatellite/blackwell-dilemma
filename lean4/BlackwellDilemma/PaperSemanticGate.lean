@@ -34915,6 +34915,33 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_certificate)
 
+/-- Supplemental gate: compact route-source terminal capstone.  This pairs the
+named route-source terminal certificate and roster with the terminal
+kernel-only capstone and final public nonclosure judgement. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
+          11 /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements_length_current
+        (And.intro
+          completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_final_status_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_iff_false_current
+              completePaperSemanticKernelOnly_notYet)))))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
