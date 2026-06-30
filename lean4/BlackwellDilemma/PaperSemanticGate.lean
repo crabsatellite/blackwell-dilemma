@@ -32377,6 +32377,132 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_certificate)
 
+/-- Terminal field-output label nonclosure roster tying the latest paper-label
+projection nonclosure package to the detailed field-output `(id, paperLabel)`
+ledger and the ID/id-paper-label obstruction-map projections. -/
+def completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+      openSemanticTargetIdObstructionMapIdPaperLabels,
+   OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal field-output label nonclosure roster fixes the
+detailed field-output label ledger against the open ledger and obstruction-map
+label projections. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+          openSemanticTargetIdObstructionMapIdPaperLabels,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal field-output label nonclosure roster has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
+      12 := rfl
+
+/-- Build-gated terminal field-output label nonclosure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
+  RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+  openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+  openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+      openSemanticTargetIdObstructionMapIdPaperLabels /\
+  OpenSemanticTargetObstructionMapIndexProjectionCertificate /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal field-output label nonclosure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_field_output_label_nonclosure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+    openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current,
+    openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels_eq_id_obstruction_map_current,
+    open_semantic_target_obstruction_map_index_projection_certificate,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Build-gated statement roster certificate for the terminal field-output label
+nonclosure package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+          openSemanticTargetIdObstructionMapIdPaperLabels,
+       OpenSemanticTargetObstructionMapIndexProjectionCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate
+
+/-- The terminal field-output label nonclosure package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_field_output_label_nonclosure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_field_output_label_nonclosure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
