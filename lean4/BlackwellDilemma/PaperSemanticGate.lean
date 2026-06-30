@@ -35024,6 +35024,26 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_certificate)
 
+/-- Supplemental gate: route-source terminal capstone audit bundle.  This keeps
+the route-source terminal capstone certificate, its fixed roster, the bridge
+roster, and the final nonclosure judgement in one compact theorem. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
+          (CompletePaperSemanticKernelOnly <-> False) /\
+            Not CompletePaperSemanticKernelOnly := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_statement_roster_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_iff_false_current
+          completePaperSemanticKernelOnly_notYet)))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
