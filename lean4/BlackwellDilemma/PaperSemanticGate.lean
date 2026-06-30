@@ -35561,6 +35561,67 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
     completePaperSemanticKernelOnly_current_open_target_gate_status_certificate
 
+/-- Named certificate for the terminal kernel-only nonclosure/open-target
+gate-status bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate
+
+/-- The terminal kernel-only nonclosure/open-target gate-status bridge is
+machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_gate_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_gate_status
+
+/-- Statement roster for the terminal kernel-only nonclosure/open-target
+gate-status bridge. -/
+def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate]
+
+/-- Build gate: the terminal kernel-only nonclosure/open-target gate-status
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate] := rfl
+
+/-- Build gate: the terminal kernel-only nonclosure/open-target gate-status
+roster has three statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the terminal kernel-only
+nonclosure/open-target gate-status bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements.length =
+      3 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate
+
+/-- The terminal kernel-only nonclosure/open-target gate-status bridge has a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_gate_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_gate_status_certificate)
+
 /-- Supplemental gate: pair the terminal kernel-only nonclosure capstone with
 the open-target exit certificate without expanding the already large terminal
 certificate conjunction. -/
