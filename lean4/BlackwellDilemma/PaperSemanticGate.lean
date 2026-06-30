@@ -31829,6 +31829,114 @@ theorem
       completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements_length_current
       completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate)
 
+/-- Terminal nonclosure roster: the final-status/closure-input/obstruction-map
+gate directly carries the current non-complete judgement and the exact
+ID-indexed obstruction bundles for the two remaining open targets. -/
+def completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly <-> False,
+   openSemanticTargetIdObstructionMapObstructionBundles =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   openSemanticTargetIdObstructionMapObstructionBundles.length =
+      paperSemanticOpenCount]
+
+/-- Build gate: the terminal nonclosure obstruction-bundle roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       openSemanticTargetIdObstructionMapObstructionBundles =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+              Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+              Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount] := rfl
+
+/-- Build gate: the terminal nonclosure obstruction-bundle roster has six
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
+      6 := rfl
+
+/-- Build-gated terminal nonclosure certificate tying the current non-complete
+judgement to the exact ID-indexed obstruction bundles. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate /\
+  Not CompletePaperSemanticKernelOnly /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  openSemanticTargetIdObstructionMapObstructionBundles =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+  openSemanticTargetIdObstructionMapObstructionBundles.length =
+      paperSemanticOpenCount
+
+/-- The terminal nonclosure gate carries the exact current obstruction bundles
+for the two remaining open targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate,
+    completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    openSemanticTargetIdObstructionMapObstructionBundles_named_current,
+    openSemanticTargetIdObstructionMapObstructionBundles_length_current⟩
+
+/-- Build-gated statement roster certificate for the terminal nonclosure
+obstruction-bundle package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly <-> False,
+       openSemanticTargetIdObstructionMapObstructionBundles =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+              Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+              Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount] /\
+    completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements.length =
+      6 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate
+
+/-- The terminal nonclosure obstruction-bundle package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
