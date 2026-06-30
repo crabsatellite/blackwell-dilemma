@@ -22561,7 +22561,9 @@ def completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements :
    CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the current open-target final ledger names exactly the open
 count/id facts, the final obstruction ledger certificate pair, and the current
@@ -22575,16 +22577,19 @@ theorem completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_na
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the current open-target final ledger has exactly six
+/-- Build gate: the current open-target final ledger has exactly eight
 statements. -/
 theorem completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements_length_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated certificate tying the two current open targets to the final
-obstruction exit ledger and current multipath obstruction evidence. -/
+obstruction exit ledger, current multipath obstruction evidence, and the
+paired repair frontier. -/
 def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate :
     Prop :=
   paperSemanticOpenCount = 2 /\
@@ -22594,7 +22599,9 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate :
   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate /\
   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The current open-target final ledger certificate is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate :
@@ -22609,7 +22616,11 @@ theorem completePaperSemanticKernelOnly_current_open_target_final_ledger_certifi
           completePaperSemanticKernelOnly_current_obstruction_final_ledger_statement_roster_certificate
           (And.intro
             part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-            topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))
+            (And.intro
+              topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+              (And.intro
+                open_target_repair_frontier_pair_certificate
+                open_target_repair_frontier_pair_statement_roster_certificate))))))
 
 /-- Build-gated statement roster certificate for the current open-target final
 ledger. -/
@@ -22623,9 +22634,11 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCe
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatements.length =
-      6 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate
 
 /-- The current open-target final ledger package has a fixed statement roster. -/
