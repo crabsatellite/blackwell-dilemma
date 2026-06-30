@@ -35574,6 +35574,79 @@ theorem
           completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate
           completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate)))
 
+/-- Named certificate for the terminal kernel-only nonclosure obstruction-map
+bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate
+
+/-- The terminal kernel-only nonclosure obstruction-map certificate is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_bundle
+
+/-- Statement roster for the terminal kernel-only nonclosure obstruction-map
+bundle. -/
+def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate]
+
+/-- Build gate: the terminal kernel-only nonclosure obstruction-map roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate] := rfl
+
+/-- Build gate: the terminal kernel-only nonclosure obstruction-map roster has
+six statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements.length =
+      6 := rfl
+
+/-- Build-gated statement roster certificate for the terminal kernel-only
+nonclosure obstruction-map bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapAllViewCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements.length =
+      6 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapCertificate
+
+/-- The terminal kernel-only nonclosure obstruction-map bundle has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_certificate)
+
 /-- Supplemental gate: terminal capstone plus the final-status nonclosure
 judgement.  This keeps the published final `iff False` and `Not` statements
 next to the terminal kernel-only certificate. -/
