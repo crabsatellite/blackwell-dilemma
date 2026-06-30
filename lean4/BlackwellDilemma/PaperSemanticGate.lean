@@ -24090,6 +24090,45 @@ theorem
     completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
     completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate⟩
 
+/-- Topo target-specific route-source bundle: the full and boxed route-derived
+target-obstruction certificates are checked with the support-surface
+nonclosure bundle and current routed exit. -/
+theorem
+    topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle :
+    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate /\
+      TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate /\
+        TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate /\
+          TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate /\
+            TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+              (TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+                TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
+                  TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+                    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+                      TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate /\
+                        TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate /\
+                          TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+                            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+                              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+                                RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+                                  RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                                    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                                      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                                        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                                          TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate) /\
+                TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate := by
+  exact ⟨
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_certificate,
+    topo_cluster_random_supercritical_z2_full_route_derived_target_obstruction_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_certificate,
+    topo_cluster_random_supercritical_z2_boxed_route_derived_target_obstruction_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate,
+    topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle,
+    topo_cluster_random_supercritical_z2_current_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate⟩
+
 /-- Open target ids covered by the current per-target routed-exit packages. -/
 def openSemanticTargetCurrentRoutedExitIds : List String :=
   openSemanticTargetIds
