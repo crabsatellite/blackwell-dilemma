@@ -35358,17 +35358,19 @@ theorem
 
 /-- Supplemental gate: route-source terminal capstone public-evidence bundle.
 This keeps the route-source terminal capstone, its fixed statement roster, gate
-status, open-target final ledger, final status, and final nonclosure judgement
-in one kernel-checked theorem. -/
+status, open-target final ledger, paired open-target repair frontier, final
+status, and final nonclosure judgement in one kernel-checked theorem. -/
 theorem
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle :
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate /\
       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
         CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
           CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
-              (CompletePaperSemanticKernelOnly <-> False) /\
-                Not CompletePaperSemanticKernelOnly := by
+            OpenTargetRepairFrontierPairCertificate /\
+              OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                  (CompletePaperSemanticKernelOnly <-> False) /\
+                    Not CompletePaperSemanticKernelOnly := by
   exact And.intro
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_certificate
     (And.intro
@@ -35378,10 +35380,14 @@ theorem
         (And.intro
           completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
           (And.intro
-            completePaperSemanticKernelOnly_current_final_status_certificate
+            open_target_repair_frontier_pair_certificate
             (And.intro
-              completePaperSemanticKernelOnly_iff_false_current
-              completePaperSemanticKernelOnly_notYet)))))
+              open_target_repair_frontier_pair_statement_roster_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_current_final_status_certificate
+                (And.intro
+                  completePaperSemanticKernelOnly_iff_false_current
+                  completePaperSemanticKernelOnly_notYet)))))))
 
 /-- Named certificate for the route-source terminal capstone public-evidence
 bundle. -/
@@ -35392,9 +35398,11 @@ def
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
         CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
-          CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
-            (CompletePaperSemanticKernelOnly <-> False) /\
-              Not CompletePaperSemanticKernelOnly
+          OpenTargetRepairFrontierPairCertificate /\
+            OpenTargetRepairFrontierPairStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                (CompletePaperSemanticKernelOnly <-> False) /\
+                  Not CompletePaperSemanticKernelOnly
 
 /-- The named route-source terminal capstone public-evidence certificate is
 machine checked. -/
@@ -35414,6 +35422,8 @@ def
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
    CompletePaperSemanticKernelOnly <-> False,
    Not CompletePaperSemanticKernelOnly]
@@ -35428,16 +35438,18 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
 /-- Build gate: the route-source terminal capstone public-evidence roster has
-eight statements. -/
+ten statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements.length =
-      8 := rfl
+      10 := rfl
 
 /-- Build-gated statement roster certificate for the route-source terminal
 capstone public-evidence bundle. -/
@@ -35450,11 +35462,13 @@ def
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements.length =
-      8 /\
+      10 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate
 
 /-- The route-source terminal capstone public-evidence bundle has a fixed
@@ -35476,10 +35490,12 @@ def
   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate /\
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements.length =
-        8 /\
-        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
-          (CompletePaperSemanticKernelOnly <-> False) /\
-            Not CompletePaperSemanticKernelOnly
+        10 /\
+        OpenTargetRepairFrontierPairCertificate /\
+          OpenTargetRepairFrontierPairStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly
 
 /-- The route-source terminal capstone public-evidence audit certificate is
 machine checked. -/
@@ -35493,10 +35509,14 @@ theorem
       (And.intro
         completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements_length_current
         (And.intro
-          completePaperSemanticKernelOnly_current_final_status_certificate
+          open_target_repair_frontier_pair_certificate
           (And.intro
-            completePaperSemanticKernelOnly_iff_false_current
-            completePaperSemanticKernelOnly_notYet))))
+            open_target_repair_frontier_pair_statement_roster_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_final_status_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_iff_false_current
+                completePaperSemanticKernelOnly_notYet))))))
 
 /-- Statement roster for the route-source terminal capstone public-evidence
 audit certificate. -/
@@ -35507,7 +35527,9 @@ def
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate,
    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements.length =
-      8,
+      10,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
    CompletePaperSemanticKernelOnly <-> False,
    Not CompletePaperSemanticKernelOnly]
@@ -35521,17 +35543,19 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements.length =
-          8,
+          10,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
 /-- Build gate: the route-source terminal capstone public-evidence audit roster
-has seven statements. -/
+has nine statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements.length =
-      7 := rfl
+      9 := rfl
 
 /-- Build-gated statement roster certificate for the route-source terminal
 capstone public-evidence audit certificate. -/
@@ -35543,12 +35567,14 @@ def
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements.length =
-          8,
+          10,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements.length =
-      7 /\
+      9 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate
 
 /-- The route-source terminal capstone public-evidence audit certificate has a
