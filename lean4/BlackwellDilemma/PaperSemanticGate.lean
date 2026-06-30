@@ -34826,6 +34826,95 @@ theorem
                     completePaperSemanticKernelOnly_iff_false_current
                     completePaperSemanticKernelOnly_notYet))))))))
 
+/-- Named certificate for the route-source terminal bridge. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                  (CompletePaperSemanticKernelOnly <-> False) /\
+                    Not CompletePaperSemanticKernelOnly
+
+/-- The named route-source terminal bridge certificate is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate := by
+  exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge
+
+/-- Statement roster for the named route-source terminal bridge package. -/
+def completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the route-source terminal bridge roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the route-source terminal bridge roster has eleven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the route-source terminal
+bridge package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate
+
+/-- The route-source terminal bridge package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
