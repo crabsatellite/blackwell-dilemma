@@ -33165,12 +33165,18 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_certificate)
 
 /-- Terminal kernel-only nonclosure capstone tying the top-level obstruction
-certificate to the latest all-view and field-output terminal nonclosure
-packages, plus the obstruction-projection/view terminal packages. -/
+certificate to the latest all-view, field-output, ledger-state, paper-label,
+field-output label/id, and obstruction-projection/view terminal packages. -/
 def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
@@ -33185,6 +33191,12 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
       12,
+   completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
+      11,
+   completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
+      16,
+   completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
+      15,
    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
       13,
    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatements.length =
@@ -33207,6 +33219,12 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
@@ -33221,6 +33239,12 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
           12,
+       completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
+          11,
+       completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
+          16,
+       completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
+          15,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
           13,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatements.length =
@@ -33236,18 +33260,24 @@ theorem
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the terminal kernel-only nonclosure capstone has twenty-three
+/-- Build gate: the terminal kernel-only nonclosure capstone has thirty-two
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      23 := rfl
+      32 := rfl
 
 /-- Build-gated terminal kernel-only nonclosure capstone certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate /\
@@ -33262,6 +33292,12 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
   completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
       12 /\
+  completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
+      11 /\
+  completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
+      16 /\
+  completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
+      15 /\
   completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
       13 /\
   completePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatements.length =
@@ -33285,6 +33321,12 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_certificate,
     completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_field_output_label_nonclosure_certificate,
     completePaperSemanticKernelOnly_current_terminal_field_output_label_nonclosure_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_field_output_id_nonclosure_certificate,
@@ -33298,6 +33340,9 @@ theorem
     completePaperSemanticKernelOnly_current_obstruction_certificate,
     completePaperSemanticKernelOnly_current_obstruction_statement_roster_certificate,
     completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements_length_current,
@@ -33314,6 +33359,12 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
@@ -33328,6 +33379,12 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
           12,
+       completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
+          11,
+       completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
+          16,
+       completePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatements.length =
+          15,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatements.length =
           13,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatements.length =
@@ -33343,7 +33400,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      23 /\
+      32 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate
 
 /-- The terminal kernel-only nonclosure capstone has a fixed statement
