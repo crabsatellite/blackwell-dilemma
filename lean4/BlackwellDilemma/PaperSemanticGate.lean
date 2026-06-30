@@ -35614,6 +35614,71 @@ theorem
         completePaperSemanticKernelOnly_iff_false_current
         completePaperSemanticKernelOnly_notYet))
 
+/-- Named certificate for the terminal kernel-only nonclosure audit bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+      (CompletePaperSemanticKernelOnly <-> False) /\
+        Not CompletePaperSemanticKernelOnly
+
+/-- The terminal kernel-only nonclosure audit certificate is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle
+
+/-- Statement roster for the terminal kernel-only nonclosure audit bundle. -/
+def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal kernel-only nonclosure audit roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal kernel-only nonclosure audit roster has five
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements.length =
+      5 := rfl
+
+/-- Build-gated statement roster certificate for the terminal kernel-only
+nonclosure audit bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements.length =
+      5 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate
+
+/-- The terminal kernel-only nonclosure audit bundle has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_certificate)
+
 /-- Supplemental gate: public-evidence terminal bundle.  This keeps the
 paper-facing terminal capstone, its fixed statement roster, gate status,
 open-target final ledger, paired repair frontier, final status, and final
