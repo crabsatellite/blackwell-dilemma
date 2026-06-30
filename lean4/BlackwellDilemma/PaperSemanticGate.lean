@@ -23955,6 +23955,66 @@ theorem
       completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements_length_current
       completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate)
 
+/-- Build gate: the current obstruction-source alignment layer, its
+target-derived field-payload/field-output obstruction sources, and both
+per-target routed-exit nonclosure bundles are checked together. -/
+theorem
+    completePaperSemanticKernelOnly_current_obstruction_source_routed_exit_open_target_nonclosure_bundle :
+    CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+        RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate /\
+          RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+            RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionCertificate /\
+              RemainingOpenSemanticTargetsFieldPayloadTargetDerivedCurrentObstructionStatementRosterCertificate /\
+                RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionCertificate /\
+                  RemainingOpenSemanticTargetsFieldOutputTargetDerivedCurrentObstructionStatementRosterCertificate /\
+                    (Part6RemainingConditionalProjectionCertificate /\
+                      Part6RemainingConditionalProjectionStatementRosterCertificate /\
+                        Part6LatticeEmbeddingFrontierPayloadCertificate /\
+                          Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+                            Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+                              Part6CurrentFrontierCertificate /\
+                                Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                                  Not Part6NondegenerateFeasibleRepairRoute /\
+                                    Not Part6FullPaperClosingSupport /\
+                                      Not Part6FullPaperClosingDivergenceWitness /\
+                                        Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+                                          Not (Part6FullPaperClosingDivergenceWitness /\
+                                            Part6FullPaperClosingFeasibleDivergenceWitness) /\
+                                            Not Part6LatticeEmbeddingExactClosureInput /\
+                                              Not Part6FullPaperClosingFullOutputBundle /\
+                                                Part6LatticeEmbeddingCurrentRoutedExitCertificate) /\
+                      (TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+                        TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
+                          TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+                            TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+                              TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate /\
+                                TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate /\
+                                  TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+                                    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+                                      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+                                        RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+                                          RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                                            Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                                              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                                                Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                                                  TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate) /\
+                        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,
+    completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_all_current_obstruction_source_alignment_certificate,
+    remaining_open_semantic_targets_all_current_obstruction_source_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_certificate,
+    remaining_open_semantic_targets_field_payload_target_derived_current_obstruction_statement_roster_certificate,
+    remaining_open_semantic_targets_field_output_target_derived_current_obstruction_certificate,
+    remaining_open_semantic_targets_field_output_target_derived_current_obstruction_statement_roster_certificate,
+    part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle,
+    topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate,
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate⟩
+
 /-- Open target ids covered by the current per-target routed-exit packages. -/
 def openSemanticTargetCurrentRoutedExitIds : List String :=
   openSemanticTargetIds
