@@ -4144,6 +4144,36 @@ theorem
     RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate :=
   (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_certificate
 
+/-- Topo open-target bundle: the typed frontier payload, the active repaired
+support-surface output, the matching repair/closing nonclosure certificates,
+and the current target/full-route/boxed-route obstructions are all
+kernel-checked together. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle :
+    TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+            RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+              Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  exact And.intro
+    topo_cluster_random_supercritical_z2_frontier_payload_certificate
+    (And.intro
+      topo_cluster_random_supercritical_z2_frontier_payload_frontier_progress_certificate
+      (And.intro
+        topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate
+        (And.intro
+          topo_cluster_random_supercritical_z2_frontier_payload_closing_route_nonclosure_certificate
+          (And.intro
+            topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate
+            (And.intro
+              topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+              (And.intro
+                topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current
+                topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current))))))
+
 /-- The complete typed Part 6 frontier payload projects the active target-route
 certificate. -/
 theorem part6_lattice_embedding_frontier_payload_target_route_certificate :
