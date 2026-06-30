@@ -2252,6 +2252,8 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate
   random_supercritical_z2_support_surface_closing_route_certificate :
     RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate
+  random_supercritical_z2_support_surface_closing_route_nonclosure_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate
   random_supercritical_z2_support_surface_closing_route_iff_full_support :
     ∀ bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
       RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
@@ -3448,6 +3450,8 @@ structure TopoClusterRandomSupercriticalZ2FrontierPayload where
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate
   random_supercritical_z2_current_frontier_support_surface_closing_route_certificate :
     RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate
+  random_supercritical_z2_current_frontier_support_surface_closing_route_nonclosure_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate
   random_supercritical_z2_current_frontier_support_surface_closing_route_iff_full_support :
     ∀ bridge : RandomSupercriticalZ2TopoClusterRepairedBridgeData,
       RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
@@ -3732,6 +3736,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate
   random_supercritical_z2_support_surface_closing_route_certificate :=
     random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate
+  random_supercritical_z2_support_surface_closing_route_nonclosure_certificate :=
+    random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate
   random_supercritical_z2_support_surface_closing_route_iff_full_support :=
     randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_iff_full_paper_closing_support
   random_supercritical_z2_repaired_bridge_diagnostic_obstruction_certificate :=
@@ -3923,6 +3929,8 @@ noncomputable def topo_cluster_random_supercritical_z2_frontier_payload :
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate
   random_supercritical_z2_current_frontier_support_surface_closing_route_certificate :=
     random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate
+  random_supercritical_z2_current_frontier_support_surface_closing_route_nonclosure_certificate :=
+    random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate
   random_supercritical_z2_current_frontier_support_surface_closing_route_iff_full_support :=
     randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute_iff_full_paper_closing_support
   random_supercritical_z2_bridge_not_full_reach_diagnostic :=
@@ -4121,6 +4129,13 @@ theorem
     topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate :
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate :=
   (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_support_surface_repair_nonclosure_certificate
+
+/-- The complete typed random-supercritical topo frontier payload directly
+projects the support-surface closing-spine nonclosure certificate. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_closing_route_nonclosure_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate :=
+  (topo_cluster_random_supercritical_z2_frontier_payload).random_supercritical_z2_current_frontier_support_surface_closing_route_nonclosure_certificate
 
 /-- The complete typed random-supercritical topo frontier payload projects the
 current frontier certificate for the open target. -/
@@ -5216,6 +5231,7 @@ def RemainingOpenSemanticTargetsPayloadRouteMapCertificate : Prop :=
     Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
     RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate
 
 /-- The full typed payload route-map for the two remaining paper-semantic
@@ -5252,6 +5268,7 @@ theorem remaining_open_semantic_targets_payload_route_map_certificate :
     topo_cluster_random_supercritical_z2_frontier_payload_closure_route_obstruction,
     topo_cluster_random_supercritical_z2_frontier_payload_frontier_progress_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate,
+    topo_cluster_random_supercritical_z2_frontier_payload_closing_route_nonclosure_certificate,
     topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate⟩
 
 /-- Statement roster for the payload route-map certificate of the two remaining
@@ -5292,6 +5309,7 @@ def remainingOpenSemanticTargetsPayloadRouteMapStatements : List Prop :=
    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate]
 
 /-- Build gate: the payload route-map statement roster names exactly the
@@ -5333,12 +5351,13 @@ theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_named_current :
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] := rfl
 
 /-- Build gate: the payload route-map statement roster has exactly the
-thirty current route-map components. -/
+thirty-one current route-map components. -/
 theorem remainingOpenSemanticTargetsPayloadRouteMapStatements_length_current :
-    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 30 := rfl
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 31 := rfl
 
 /-- Build-gated statement roster certificate for the payload route-map package
 of the two remaining paper-semantic targets. -/
@@ -5380,8 +5399,9 @@ def RemainingOpenSemanticTargetsPayloadRouteMapStatementRosterCertificate :
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
-    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 30 /\
+    remainingOpenSemanticTargetsPayloadRouteMapStatements.length = 31 /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate
 
 /-- The payload route-map certificate has a fixed statement roster. -/
