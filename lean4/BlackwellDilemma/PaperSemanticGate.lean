@@ -32771,6 +32771,132 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate)
 
+/-- Terminal obstruction-bundle view nonclosure roster tying the latest
+obstruction-projection package to the ID, id/paper-label, and paper-label
+obstruction-bundle views. -/
+def completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+      openSemanticTargetIdObstructionMapObstructionBundles,
+   openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+      openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+   openSemanticTargetIdObstructionMapObstructionBundles.length =
+      openSemanticTargets.length,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal obstruction-bundle view nonclosure roster fixes
+all obstruction-bundle projections back to the ID-indexed obstruction map. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+          openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+          openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          openSemanticTargets.length,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal obstruction-bundle view nonclosure roster has
+thirteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
+      13 := rfl
+
+/-- Build-gated terminal obstruction-bundle view nonclosure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate /\
+  OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate /\
+  OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+      openSemanticTargetIdObstructionMapObstructionBundles /\
+  openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+      openSemanticTargetIdPaperLabelObstructionMapObstructionBundles /\
+  openSemanticTargetIdObstructionMapObstructionBundles.length =
+      openSemanticTargets.length /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal obstruction-bundle view nonclosure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate,
+    completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_statement_roster_certificate,
+    open_semantic_target_id_paper_label_obstruction_map_projection_certificate,
+    open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate,
+    open_semantic_target_paper_label_obstruction_map_projection_certificate,
+    open_semantic_target_paper_label_obstruction_map_projection_statement_roster_certificate,
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_eq_id_obstruction_map_current,
+    openSemanticTargetPaperLabelObstructionMapObstructionBundles_eq_id_paper_label_obstruction_map_current,
+    openSemanticTargetIdObstructionMapObstructionBundles_length_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Build-gated statement roster certificate for the terminal obstruction-bundle
+view nonclosure package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+          openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+          openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          openSemanticTargets.length,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate
+
+/-- The terminal obstruction-bundle view nonclosure package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
