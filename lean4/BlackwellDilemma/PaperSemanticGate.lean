@@ -35114,10 +35114,12 @@ theorem
           CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
             CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
               CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
-                CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
-                  CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
-                    (CompletePaperSemanticKernelOnly <-> False) /\
-                      Not CompletePaperSemanticKernelOnly := by
+                OpenTargetRepairFrontierPairCertificate /\
+                  OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                        (CompletePaperSemanticKernelOnly <-> False) /\
+                          Not CompletePaperSemanticKernelOnly := by
   exact And.intro
     completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_certificate
     (And.intro
@@ -35131,12 +35133,16 @@ theorem
             (And.intro
               completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate
               (And.intro
-                completePaperSemanticKernelOnly_current_gate_status_certificate
+                open_target_repair_frontier_pair_certificate
                 (And.intro
-                  completePaperSemanticKernelOnly_current_final_status_certificate
+                  open_target_repair_frontier_pair_statement_roster_certificate
                   (And.intro
-                    completePaperSemanticKernelOnly_iff_false_current
-                    completePaperSemanticKernelOnly_notYet))))))))
+                    completePaperSemanticKernelOnly_current_gate_status_certificate
+                    (And.intro
+                      completePaperSemanticKernelOnly_current_final_status_certificate
+                      (And.intro
+                        completePaperSemanticKernelOnly_iff_false_current
+                        completePaperSemanticKernelOnly_notYet))))))))))
 
 /-- Named certificate for the route-source terminal bridge. -/
 def
@@ -35145,13 +35151,15 @@ def
   CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate /\
       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
-        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
-          CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
-              CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
-                CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
-                  (CompletePaperSemanticKernelOnly <-> False) /\
-                    Not CompletePaperSemanticKernelOnly
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
+                OpenTargetRepairFrontierPairCertificate /\
+                  OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                        (CompletePaperSemanticKernelOnly <-> False) /\
+                          Not CompletePaperSemanticKernelOnly
 
 /-- The named route-source terminal bridge certificate is machine checked. -/
 theorem
@@ -35169,6 +35177,8 @@ def completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosur
    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
    CompletePaperSemanticKernelOnly <-> False,
@@ -35185,16 +35195,18 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the route-source terminal bridge roster has eleven statements. -/
+/-- Build gate: the route-source terminal bridge roster has thirteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
-      11 := rfl
+      13 := rfl
 
 /-- Build-gated statement roster certificate for the route-source terminal
 bridge package. -/
@@ -35209,12 +35221,14 @@ def
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
-      11 /\
+      13 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate
 
 /-- The route-source terminal bridge package has a fixed statement roster. -/
@@ -35233,10 +35247,10 @@ kernel-only capstone and final public nonclosure judgement. -/
 theorem
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone :
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate /\
-    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
-      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
-        11 /\
-        OpenTargetRepairFrontierPairCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
+          13 /\
+          OpenTargetRepairFrontierPairCertificate /\
           OpenTargetRepairFrontierPairStatementRosterCertificate /\
             CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
               CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
@@ -35267,13 +35281,13 @@ def
   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
-      11 /\
-        OpenTargetRepairFrontierPairCertificate /\
-          OpenTargetRepairFrontierPairStatementRosterCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
-              CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
-                (CompletePaperSemanticKernelOnly <-> False) /\
-                  Not CompletePaperSemanticKernelOnly
+      13 /\
+      OpenTargetRepairFrontierPairCertificate /\
+        OpenTargetRepairFrontierPairStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly
 
 /-- The named route-source terminal capstone certificate is machine checked. -/
 theorem
@@ -35288,7 +35302,7 @@ def completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosur
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
-      11,
+      13,
    OpenTargetRepairFrontierPairCertificate,
    OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
@@ -35304,7 +35318,7 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
-          11,
+          13,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
@@ -35329,7 +35343,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatements.length =
-          11,
+          13,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
