@@ -3968,7 +3968,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_open_obstruction_statement_terms_checked=20"
+        "complete_paper_semantic_kernel_only_current_terminal_open_obstruction_statement_terms_checked=22"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_open_obstruction_statement_terms_proof="
@@ -11511,7 +11511,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalOpenObstructionStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_open_obstruction_statement_terms_checked=20"
+            "complete_paper_semantic_kernel_only_current_terminal_open_obstruction_statement_terms_checked=22"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_open_obstruction_statement_terms_proof="
