@@ -34137,6 +34137,23 @@ theorem
             completePaperSemanticKernelOnly_iff_false_current
             completePaperSemanticKernelOnly_notYet))))
 
+/-- Supplemental gate: terminal capstone audit bundle.  This is the compact
+paper-facing theorem pairing the terminal kernel-only certificate, its fixed
+statement roster, and the final nonclosure judgement. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+        (CompletePaperSemanticKernelOnly <-> False) /\
+          Not CompletePaperSemanticKernelOnly := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_iff_false_current
+        completePaperSemanticKernelOnly_notYet))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
