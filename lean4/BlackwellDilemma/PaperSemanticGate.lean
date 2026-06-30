@@ -35633,6 +35633,67 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
     completePaperSemanticKernelOnly_current_open_target_exit_certificate
 
+/-- Named certificate for the terminal kernel-only nonclosure/open-target exit
+bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate
+
+/-- The terminal kernel-only nonclosure/open-target exit bridge is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit
+
+/-- Statement roster for the terminal kernel-only nonclosure/open-target exit
+bridge. -/
+def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate]
+
+/-- Build gate: the terminal kernel-only nonclosure/open-target exit roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] := rfl
+
+/-- Build gate: the terminal kernel-only nonclosure/open-target exit roster has
+three statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the terminal kernel-only
+nonclosure/open-target exit bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements.length =
+      3 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate
+
+/-- The terminal kernel-only nonclosure/open-target exit bridge has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_certificate)
+
 /-- Supplemental gate: compact terminal/open-target operational bundle.  This
 keeps the large terminal capstone factored while still requiring the key
 open-target gate-status, final-ledger, and exit certificates in one theorem. -/
