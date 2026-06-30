@@ -32645,6 +32645,132 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_field_output_id_nonclosure_certificate)
 
+/-- Terminal obstruction-projection nonclosure roster tying the latest
+field-output id nonclosure package to the field-output obstruction alignment and
+the ID-indexed obstruction-map target/route/closure projection columns. -/
+def completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+   OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
+   OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceStatementRosterCertificate,
+   openSemanticTargetIdObstructionMapTargetObstructions =
+      openSemanticTargetKernelSurfaceTargetObstructions,
+   openSemanticTargetIdObstructionMapTargetRouteObstructions =
+      openSemanticTargetKernelSurfaceTargetRouteObstructions,
+   openSemanticTargetIdObstructionMapClosureRouteObstructions =
+      openSemanticTargetKernelSurfaceClosureRouteObstructions,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal obstruction-projection nonclosure roster fixes the
+ID-indexed obstruction-map projection columns against the kernel surface. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
+       OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+          openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+          openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+          openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal obstruction-projection nonclosure roster has
+thirteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements.length =
+      13 := rfl
+
+/-- Build-gated terminal obstruction-projection nonclosure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate /\
+  OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate /\
+  OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate /\
+  OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate /\
+  OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceStatementRosterCertificate /\
+  openSemanticTargetIdObstructionMapTargetObstructions =
+      openSemanticTargetKernelSurfaceTargetObstructions /\
+  openSemanticTargetIdObstructionMapTargetRouteObstructions =
+      openSemanticTargetKernelSurfaceTargetRouteObstructions /\
+  openSemanticTargetIdObstructionMapClosureRouteObstructions =
+      openSemanticTargetKernelSurfaceClosureRouteObstructions /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal obstruction-projection nonclosure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_field_output_id_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_id_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_obstruction_alignment_statement_roster_certificate,
+    open_semantic_target_id_obstruction_map_obstruction_projection_certificate,
+    open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate,
+    open_semantic_target_kernel_surface_route_obstruction_equivalence_certificate,
+    open_semantic_target_kernel_surface_route_obstruction_equivalence_statement_roster_certificate,
+    openSemanticTargetIdObstructionMapTargetObstructions_eq_kernel_surface_current,
+    openSemanticTargetIdObstructionMapTargetRouteObstructions_eq_kernel_surface_current,
+    openSemanticTargetIdObstructionMapClosureRouteObstructions_eq_kernel_surface_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Build-gated statement roster certificate for the terminal
+obstruction-projection nonclosure package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceCertificate,
+       OpenSemanticTargetKernelSurfaceRouteObstructionEquivalenceStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+          openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+          openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+          openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements.length =
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate
+
+/-- The terminal obstruction-projection nonclosure package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
