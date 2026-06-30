@@ -27036,12 +27036,14 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate)
 
 /-- Terminal route/target obstruction-equivalence roster tying the terminal
-per-target routed-exit package directly to both directions of the current
-route/target obstruction formulas. -/
+per-target routed-exit package and repair-frontier pair directly to both
+directions of the current route/target obstruction formulas. -/
 def completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
@@ -27072,14 +27074,17 @@ def completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivale
    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
 
 /-- Build gate: the terminal route/target obstruction-equivalence roster names
-the terminal per-target routed-exit package, the route-derived and
-target-derived obstruction packages, both formula directions, the current
-obstructions, and the current multipath route-obstruction witnesses. -/
+the terminal per-target routed-exit package, repair-frontier pair, the
+route-derived and target-derived obstruction packages, both formula directions,
+the current obstructions, and the current multipath route-obstruction
+witnesses. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
@@ -27110,11 +27115,11 @@ theorem
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
 /-- Build gate: the terminal route/target obstruction-equivalence roster has
-twenty-two statements. -/
+twenty-four statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements.length =
-      22 := rfl
+      24 := rfl
 
 /-- Build-gated terminal certificate for both directions of the current
 route/target obstruction equivalences. -/
@@ -27123,6 +27128,8 @@ def
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
@@ -27160,6 +27167,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_certificate,
     completePaperSemanticKernelOnly_current_terminal_per_target_routed_exit_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
     completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate,
@@ -27189,6 +27198,8 @@ def
   completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPerTargetRoutedExitStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
@@ -27218,7 +27229,7 @@ def
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceStatements.length =
-      22 /\
+      24 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalRouteTargetObstructionEquivalenceCertificate
 
 /-- The terminal route/target obstruction-equivalence package has a fixed
