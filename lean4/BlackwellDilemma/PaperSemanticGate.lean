@@ -33167,8 +33167,8 @@ theorem
 /-- Terminal kernel-only nonclosure capstone tying the top-level obstruction
 certificate to the latest terminal consistency, all-view, field-output,
 ledger-state, paper-label, field-output label/id, obstruction-projection/view,
-top-level alignment, terminal obstruction/closure ladder, and
-paper-state/source-final gate-status ladder packages. -/
+top-level alignment, terminal obstruction/closure ladder, paper-state/source-final
+gate-status packages, and the final-status obstruction-map gate. -/
 def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
@@ -33217,6 +33217,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentClosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
@@ -33293,6 +33295,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
       31,
    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements.length =
       13,
+   completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
+      8,
    completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
       17,
    completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
@@ -33377,6 +33381,8 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentClosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
@@ -33453,6 +33459,8 @@ theorem
           31,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements.length =
           13,
+       completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
+          8,
        completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
           17,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
@@ -33487,11 +33495,11 @@ theorem
        Not CompletePaperSemanticKernelOnly] := rfl
 
 /-- Build gate: the terminal kernel-only nonclosure capstone has one hundred
-sixteen statements. -/
+nineteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      116 := rfl
+      119 := rfl
 
 /-- Build-gated terminal kernel-only nonclosure capstone certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate :
@@ -33542,6 +33550,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentClosureStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate /\
@@ -33618,6 +33628,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
       31 /\
   completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements.length =
       13 /\
+  completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
+      8 /\
   completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
       17 /\
   completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
@@ -33703,6 +33715,8 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_status_ledger_source_all_current_closure_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_certificate,
     completePaperSemanticKernelOnly_current_terminal_paper_state_source_final_gate_judgement_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_certificate,
+    completePaperSemanticKernelOnly_current_final_status_closure_input_obstruction_map_gate_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_consistency_certificate,
     completePaperSemanticKernelOnly_current_terminal_consistency_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_terminal_ledger_label_consistency_certificate,
@@ -33756,6 +33770,7 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceFieldOutputClosureStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentClosureStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements_length_current,
     completePaperSemanticKernelOnlyCurrentTerminalPartitionStatusConsistencyStatements_length_current,
@@ -33825,6 +33840,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentClosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalConsistencyStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyCertificate,
@@ -33901,6 +33918,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
           31,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatements.length =
           13,
+       completePaperSemanticKernelOnlyCurrentFinalStatusClosureInputObstructionMapGateStatements.length =
+          8,
        completePaperSemanticKernelOnlyCurrentTerminalConsistencyStatements.length =
           17,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerLabelConsistencyStatements.length =
@@ -33934,7 +33953,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      116 /\
+      119 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate
 
 /-- The terminal kernel-only nonclosure capstone has a fixed statement
