@@ -27384,12 +27384,14 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate)
 
 /-- Terminal alignment-closure roster tying the final obstruction status back to
-the full top-level alignment, field-output ledger alignment, and routed-exit
-top-level alignment packages. -/
+the repair-frontier pair, full top-level alignment, field-output ledger
+alignment, and routed-exit top-level alignment packages. -/
 def completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
@@ -27410,14 +27412,16 @@ def completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements :
    CompletePaperSemanticKernelOnly <-> False]
 
 /-- Build gate: the terminal alignment-closure roster names the terminal final
-status together with the top-level/current-alignment, field-output ledger,
-routed-exit alignment, open-obstruction, per-target routed-exit, and
-route/target-equivalence packages. -/
+status together with the repair-frontier pair, top-level/current-alignment,
+field-output ledger, routed-exit alignment, open-obstruction, per-target
+routed-exit, and route/target-equivalence packages. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
@@ -27437,11 +27441,11 @@ theorem
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False] := rfl
 
-/-- Build gate: the terminal alignment-closure roster has twenty statements. -/
+/-- Build gate: the terminal alignment-closure roster has twenty-two statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
-      20 := rfl
+      22 := rfl
 
 /-- Build-gated terminal certificate closing the final status over the
 top-level/current-alignment and routed-exit alignment packages. -/
@@ -27449,6 +27453,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
@@ -27475,6 +27481,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate,
     completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
     completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
@@ -27501,6 +27509,8 @@ def
   completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
@@ -27520,7 +27530,7 @@ def
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False] /\
     completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
-      20 /\
+      22 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureCertificate
 
 /-- The terminal alignment-closure package has a fixed statement roster. -/
@@ -34600,7 +34610,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements.length =
       16,
    completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
-      20,
+      22,
    completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
       18,
    completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
@@ -34772,7 +34782,7 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements.length =
           16,
        completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
-          20,
+          22,
        completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
           18,
        completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
@@ -34949,7 +34959,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements.length =
       16 /\
   completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
-      20 /\
+      22 /\
   completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
       18 /\
   completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
@@ -35253,7 +35263,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatements.length =
           16,
        completePaperSemanticKernelOnlyCurrentTerminalAlignmentClosureStatements.length =
-          20,
+          22,
        completePaperSemanticKernelOnlyCurrentTerminalMainObstructionClosureStatements.length =
           18,
        completePaperSemanticKernelOnlyCurrentTerminalOpenTargetSourceClosureStatements.length =
