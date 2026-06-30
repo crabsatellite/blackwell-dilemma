@@ -32052,6 +32052,194 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate)
 
+/-- Terminal ledger-state nonclosure roster tying the latest field-output
+nonclosure package to the current open/closed counts, ids, obstruction-map ids,
+and detailed field-output roster ids. -/
+def completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount = 3,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"],
+   openSemanticTargetIdObstructionMapIds = openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds,
+   openSemanticTargetIdObstructionMapObstructionBundles.length =
+      paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount,
+   openSemanticTargetIdObstructionMapObstructionBundles =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal ledger-state nonclosure roster fixes the latest
+nonclosure package against the current counts, ids, obstruction map, and
+field-output roster ledgers. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargetIdObstructionMapIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetIdObstructionMapObstructionBundles =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+              Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+              Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal ledger-state nonclosure roster has fifteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
+      15 := rfl
+
+/-- Build-gated terminal ledger-state nonclosure certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate /\
+  paperSemanticOpenCount = 2 /\
+  paperSemanticClosedCount = 3 /\
+  openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+  closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"] /\
+  openSemanticTargetIdObstructionMapIds = openSemanticTargetIds /\
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds /\
+  openSemanticTargetIdObstructionMapObstructionBundles.length =
+      paperSemanticOpenCount /\
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount /\
+  openSemanticTargetIdObstructionMapObstructionBundles =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+  (CompletePaperSemanticKernelOnly <-> False) /\
+  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal ledger-state nonclosure package is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_nonclosure_obstruction_bundle_certificate,
+    paperSemanticOpenCount_current,
+    paperSemanticClosedCount_current,
+    openSemanticTargetIds_current,
+    closedSemanticTargetIds_current,
+    openSemanticTargetIdObstructionMapIds_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
+    openSemanticTargetIdObstructionMapObstructionBundles_length_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
+    openSemanticTargetIdObstructionMapObstructionBundles_named_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Build-gated statement roster certificate for the terminal ledger-state
+nonclosure package. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalNonclosureObstructionBundleCertificate,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount = 3,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargetIdObstructionMapIds = openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetIdObstructionMapObstructionBundles =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+              Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+              Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
+      15 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate
+
+/-- The terminal ledger-state nonclosure package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
