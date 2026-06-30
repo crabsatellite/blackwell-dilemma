@@ -4116,6 +4116,113 @@ theorem part6_lattice_embedding_frontier_payload_current_frontier_certificate :
     Part6CurrentFrontierCertificate :=
   (part6_lattice_embedding_frontier_payload).part6_current_frontier_certificate
 
+/-- The complete typed Part 6 frontier payload projects the current
+closed-unit endpoint degeneracy. -/
+theorem part6_lattice_embedding_frontier_payload_alphaStar_current_eq_one :
+    alphaStar 0 harrisKestenCriticalProb = 1 :=
+  (part6_lattice_embedding_frontier_payload).alphaStar_current_eq_one_at_pc
+
+/-- The complete typed Part 6 frontier payload projects the current
+closed-unit `alphaStar < 1` obstruction. -/
+theorem part6_lattice_embedding_frontier_payload_alphaStar_lt_one_obstruction :
+    ¬ alphaStar 0 harrisKestenCriticalProb < 1 :=
+  (part6_lattice_embedding_frontier_payload).closed_unit_alphaStar_lt_one_current_obstruction
+
+/-- The complete typed Part 6 frontier payload projects the current empty
+closed-unit alpha-domain statement. -/
+theorem part6_lattice_embedding_frontier_payload_closed_unit_alpha_domain_empty :
+    ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1 :=
+  (part6_lattice_embedding_frontier_payload).closed_unit_alpha_domain_empty_current
+
+/-- The complete typed Part 6 frontier payload projects the alpha-domain
+repair certificate used to describe the remaining Part 6 route. -/
+theorem part6_lattice_embedding_frontier_payload_closed_unit_alpha_domain_repair_certificate :
+    ClosedUnitAlphaDomainRepairCertificate :=
+  (part6_lattice_embedding_frontier_payload).closed_unit_alpha_domain_repair_certificate
+
+/-- Part 6 alpha-domain repair frontier: the current carrier is blocked by
+the endpoint equality `alphaStar 0 p_c = 1`, so the closed-unit paper domain
+is empty until a repaired carrier supplies `alphaStar 0 p_c < 1`. -/
+def Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate : Prop :=
+  alphaStar 0 harrisKestenCriticalProb = 1 ∧
+    ¬ alphaStar 0 harrisKestenCriticalProb < 1 ∧
+    (¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1) ∧
+    ClosedUnitAlphaDomainRepairCertificate ∧
+    Part6CurrentFrontierCertificate ∧
+    Not Part6LatticeEmbeddingSemanticKernelTarget ∧
+    Not Part6NondegenerateFeasibleRepairRoute
+
+/-- The Part 6 alpha-domain repair frontier is machine-built. -/
+theorem part6_lattice_embedding_alpha_domain_repair_frontier_certificate :
+    Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate := by
+  exact And.intro
+    part6_lattice_embedding_frontier_payload_alphaStar_current_eq_one
+    (And.intro
+      part6_lattice_embedding_frontier_payload_alphaStar_lt_one_obstruction
+      (And.intro
+        part6_lattice_embedding_frontier_payload_closed_unit_alpha_domain_empty
+        (And.intro
+          part6_lattice_embedding_frontier_payload_closed_unit_alpha_domain_repair_certificate
+          (And.intro
+            part6_lattice_embedding_frontier_payload_current_frontier_certificate
+            (And.intro
+              part6_lattice_embedding_semantic_kernel_target_notYet
+              (part6_lattice_embedding_frontier_payload).part6_nondegenerate_feasible_repair_route_current_obstruction_via_divergence_witness)))))
+
+/-- Statement roster for the Part 6 alpha-domain repair frontier. -/
+def part6LatticeEmbeddingAlphaDomainRepairFrontierStatements : List Prop :=
+  [alphaStar 0 harrisKestenCriticalProb = 1,
+   ¬ alphaStar 0 harrisKestenCriticalProb < 1,
+   ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1,
+   ClosedUnitAlphaDomainRepairCertificate,
+   Part6CurrentFrontierCertificate,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute]
+
+/-- Build gate: the Part 6 alpha-domain repair frontier roster names exactly
+the endpoint, domain-emptiness, repair-certificate, and open-target
+obstruction statements. -/
+theorem part6LatticeEmbeddingAlphaDomainRepairFrontierStatements_named_current :
+    part6LatticeEmbeddingAlphaDomainRepairFrontierStatements =
+      [alphaStar 0 harrisKestenCriticalProb = 1,
+       ¬ alphaStar 0 harrisKestenCriticalProb < 1,
+       ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1,
+       ClosedUnitAlphaDomainRepairCertificate,
+       Part6CurrentFrontierCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute] :=
+  rfl
+
+/-- Build gate: the Part 6 alpha-domain repair frontier roster has exactly
+seven statements. -/
+theorem part6LatticeEmbeddingAlphaDomainRepairFrontierStatements_length_current :
+    part6LatticeEmbeddingAlphaDomainRepairFrontierStatements.length = 7 := rfl
+
+/-- Build-gated statement roster for the Part 6 alpha-domain repair frontier
+certificate. -/
+def Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingAlphaDomainRepairFrontierStatements =
+      [alphaStar 0 harrisKestenCriticalProb = 1,
+       ¬ alphaStar 0 harrisKestenCriticalProb < 1,
+       ¬ ∃ α : ℝ, alphaStar 0 harrisKestenCriticalProb < α ∧ α ≤ 1,
+       ClosedUnitAlphaDomainRepairCertificate,
+       Part6CurrentFrontierCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute] ∧
+    part6LatticeEmbeddingAlphaDomainRepairFrontierStatements.length = 7 ∧
+    Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate
+
+/-- The Part 6 alpha-domain repair frontier certificate has a fixed statement
+roster. -/
+theorem part6_lattice_embedding_alpha_domain_repair_frontier_statement_roster_certificate :
+    Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingAlphaDomainRepairFrontierStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingAlphaDomainRepairFrontierStatements_length_current
+      part6_lattice_embedding_alpha_domain_repair_frontier_certificate)
+
 /-- The complete typed random-supercritical topo frontier payload projects the
 active support-surface progress certificate. -/
 theorem

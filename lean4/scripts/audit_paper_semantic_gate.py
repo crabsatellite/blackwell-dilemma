@@ -6090,6 +6090,53 @@ def main() -> int:
         "part6_lattice_embedding_frontier_payload_statement_roster_certificate"
     )
     print(
+        "semantic_target_part6_alpha_domain_repair_frontier_endpoint_eq_proof="
+        "part6_lattice_embedding_frontier_payload_alphaStar_current_eq_one"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_alpha_lt_one_obstruction_proof="
+        "part6_lattice_embedding_frontier_payload_alphaStar_lt_one_obstruction"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_closed_unit_domain_empty_proof="
+        "part6_lattice_embedding_frontier_payload_closed_unit_alpha_domain_empty"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_domain_repair_certificate_proof="
+        "part6_lattice_embedding_frontier_payload_closed_unit_alpha_domain_repair_certificate"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_certificate="
+        "Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_certificate_proof="
+        "part6_lattice_embedding_alpha_domain_repair_frontier_certificate"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_statement_roster="
+        "part6LatticeEmbeddingAlphaDomainRepairFrontierStatements"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_statement_roster_proof="
+        "part6LatticeEmbeddingAlphaDomainRepairFrontierStatements_named_current"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_statement_roster_terms_checked=7"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_statement_roster_length_proof="
+        "part6LatticeEmbeddingAlphaDomainRepairFrontierStatements_length_current"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_statement_roster_certificate="
+        "Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_part6_alpha_domain_repair_frontier_statement_roster_certificate_proof="
+        "part6_lattice_embedding_alpha_domain_repair_frontier_statement_roster_certificate"
+    )
+    print(
         "semantic_target_topo_frontier_payload_statement_roster_proof="
         "topoClusterRandomSupercriticalZ2FrontierPayloadStatements_named_current"
     )
