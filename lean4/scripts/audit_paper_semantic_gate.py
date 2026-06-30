@@ -3813,7 +3813,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_checked=10"
+        "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_checked=12"
     )
     print(
         "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_proof="
@@ -11356,7 +11356,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_checked=10"
+            "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_checked=12"
         ),
         (
             "complete_paper_semantic_kernel_only_current_status_direct_routed_exit_coverage_statement_terms_proof="

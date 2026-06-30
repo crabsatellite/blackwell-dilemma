@@ -25832,7 +25832,7 @@ theorem
 
 /-- Status-level direct routed-exit coverage roster tying the current gate,
 open-target gate, and final status packages to the final-exit and
-final-alignment certificate pairs. -/
+final-alignment certificate pairs and repair frontier pair. -/
 def completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
@@ -25844,10 +25844,13 @@ def completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatemen
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate]
 
 /-- Build gate: the status-level direct routed-exit coverage roster names
-exactly the three status packages and the final-exit/final-alignment pairs. -/
+exactly the three status packages, the final-exit/final-alignment pairs, and
+repair frontier pair. -/
 theorem
     completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_named_current :
     completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements =
@@ -25860,17 +25863,19 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] := rfl
 
-/-- Build gate: the status-level direct routed-exit coverage roster has ten
+/-- Build gate: the status-level direct routed-exit coverage roster has twelve
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements_length_current :
     completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements.length =
-      10 := rfl
+      12 := rfl
 
 /-- Build-gated certificate that every current status package directly carries
-the routed-exit final-exit and final-alignment pairs. -/
+the routed-exit final-exit/final-alignment pairs and repair frontier pair. -/
 def CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
@@ -25882,6 +25887,8 @@ def CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertific
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate
 
 /-- The status-level direct routed-exit coverage package is machine checked. -/
@@ -25898,6 +25905,8 @@ theorem
     completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate,
     completePaperSemanticKernelOnly_current_routed_exit_final_exit_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_routed_exit_final_alignment_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate⟩
 
 /-- Build-gated statement roster certificate for the status-level direct
@@ -25915,9 +25924,11 @@ def
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalExitStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageStatements.length =
-      10 /\
+      12 /\
     CompletePaperSemanticKernelOnlyCurrentStatusDirectRoutedExitCoverageCertificate
 
 /-- The status-level direct routed-exit coverage package has a fixed statement
