@@ -23642,6 +23642,43 @@ theorem part6_lattice_embedding_current_routed_exit_statement_roster_certificate
       part6LatticeEmbeddingCurrentRoutedExitStatements_length_current
       part6_lattice_embedding_current_routed_exit_certificate)
 
+/-- Part 6 semantic-interface bundle: the remaining conditional witness
+projection certificate, the frontier nonclosure layer, and the routed-exit
+certificate are checked together for the current open target. -/
+theorem part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle :
+    Part6RemainingConditionalProjectionCertificate /\
+      Part6RemainingConditionalProjectionStatementRosterCertificate /\
+        Part6LatticeEmbeddingFrontierPayloadCertificate /\
+          Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+            Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+              Part6CurrentFrontierCertificate /\
+                Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                  Not Part6NondegenerateFeasibleRepairRoute /\
+                    Not Part6FullPaperClosingSupport /\
+                      Not Part6FullPaperClosingDivergenceWitness /\
+                        Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+                          Not (Part6FullPaperClosingDivergenceWitness /\
+                            Part6FullPaperClosingFeasibleDivergenceWitness) /\
+                            Not Part6LatticeEmbeddingExactClosureInput /\
+                              Not Part6FullPaperClosingFullOutputBundle /\
+                                Part6LatticeEmbeddingCurrentRoutedExitCertificate := by
+  exact ⟨
+    part6_remaining_conditional_projection_certificate,
+    part6_remaining_conditional_projection_statement_roster_certificate,
+    part6_lattice_embedding_frontier_payload_certificate,
+    part6_lattice_embedding_frontier_payload_frontier_progress_certificate,
+    part6_lattice_embedding_frontier_payload_frontier_nonclosure_certificate,
+    part6_lattice_embedding_frontier_payload_current_frontier_certificate,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    part6_lattice_embedding_frontier_payload_target_route_obstruction,
+    part6_lattice_embedding_frontier_payload_closure_route_obstruction,
+    not_part6_full_paper_closing_divergence_witness_current,
+    not_part6_full_paper_closing_feasible_divergence_witness_current,
+    not_part6_full_paper_closing_output_pair_current,
+    part6_lattice_embedding_exact_closure_input_notYet,
+    not_part6_full_paper_closing_full_output_bundle_current,
+    part6_lattice_embedding_current_routed_exit_certificate⟩
+
 /-- Per-target routed exit roster for the topo open target.  It keeps the
 current target obstruction, both route obstructions, their route-derived target
 packages, and the top-level routed exit together. -/
