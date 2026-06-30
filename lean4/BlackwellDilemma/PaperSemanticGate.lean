@@ -25421,7 +25421,8 @@ theorem
       completePaperSemanticKernelOnly_current_routed_exit_final_exit_certificate)
 
 /-- Current gate-status roster tying the open/closed semantic ledger counts to
-the final routed-exit certificate and its final-alignment package. -/
+the final routed-exit certificate, final-alignment package, and repair
+frontier pair. -/
 def completePaperSemanticKernelOnlyCurrentGateStatusStatements :
     List Prop :=
   [Not CompletePaperSemanticKernelOnly,
@@ -25435,11 +25436,13 @@ def completePaperSemanticKernelOnlyCurrentGateStatusStatements :
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the current gate-status roster names exactly the ledger counts,
-semantic-ledger alignment, final routed-exit certificate pair, and final
-routed-exit alignment pair. -/
+semantic-ledger alignment, final routed-exit certificate pair, final routed-exit
+alignment pair, and repair frontier pair. -/
 theorem
     completePaperSemanticKernelOnlyCurrentGateStatusStatements_named_current :
     completePaperSemanticKernelOnlyCurrentGateStatusStatements =
@@ -25454,13 +25457,15 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the current gate-status roster has twelve statements. -/
+/-- Build gate: the current gate-status roster has fourteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentGateStatusStatements_length_current :
     completePaperSemanticKernelOnlyCurrentGateStatusStatements.length =
-      12 := rfl
+      14 := rfl
 
 /-- Build-gated certificate for the current paper-semantic gate status. -/
 def CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate : Prop :=
@@ -25475,7 +25480,9 @@ def CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate : Prop :=
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The current paper-semantic gate status is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_gate_status_certificate :
@@ -25502,7 +25509,11 @@ theorem completePaperSemanticKernelOnly_current_gate_status_certificate :
                       completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate
                       (And.intro
                         part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-                        topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))))))))
+                        (And.intro
+                          topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+                          (And.intro
+                            open_target_repair_frontier_pair_certificate
+                            open_target_repair_frontier_pair_statement_roster_certificate))))))))))))
 
 /-- Build-gated statement roster certificate for the current gate-status
 package. -/
@@ -25520,9 +25531,11 @@ def CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate :
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentGateStatusStatements.length =
-      12 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate
 
 /-- The current gate-status package has a fixed statement roster. -/
@@ -25537,7 +25550,7 @@ theorem
 
 /-- Current open-target gate-status roster tying the two remaining open target
 propositions to the current gate-status certificate, final-exit certificate,
-and final-alignment package. -/
+final-alignment package, and repair frontier pair. -/
 def completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements :
     List Prop :=
   [Not Part6LatticeEmbeddingSemanticKernelTarget,
@@ -25557,11 +25570,14 @@ def completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements :
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate]
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
 
 /-- Build gate: the current open-target gate-status roster names exactly the
 two remaining target refutations, their gate-status certificate pair, final
-routed-exit certificate pair, and final routed-exit alignment pair. -/
+routed-exit certificate pair, final routed-exit alignment pair, and repair
+frontier pair. -/
 theorem
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_named_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements =
@@ -25582,14 +25598,16 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
 
-/-- Build gate: the current open-target gate-status roster has twelve
+/-- Build gate: the current open-target gate-status roster has fourteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements_length_current :
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements.length =
-      12 := rfl
+      14 := rfl
 
 /-- Build-gated certificate for the current open-target gate status. -/
 def CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate :
@@ -25611,7 +25629,9 @@ def CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate :
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
-  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
+  TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate
 
 /-- The current open-target gate status is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_open_target_gate_status_certificate :
@@ -25638,7 +25658,11 @@ theorem completePaperSemanticKernelOnly_current_open_target_gate_status_certific
                       completePaperSemanticKernelOnly_current_routed_exit_final_alignment_statement_roster_certificate
                       (And.intro
                         part6_lattice_embedding_repair_route_obstruction_multipath_certificate
-                        topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate))))))))))
+                        (And.intro
+                          topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+                          (And.intro
+                            open_target_repair_frontier_pair_certificate
+                            open_target_repair_frontier_pair_statement_roster_certificate))))))))))))
 
 /-- Build-gated statement roster certificate for the current open-target
 gate-status package. -/
@@ -25663,9 +25687,11 @@ def
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
-       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentOpenTargetGateStatusStatements.length =
-      12 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate
 
 /-- The current open-target gate-status package has a fixed statement roster. -/
@@ -25679,7 +25705,8 @@ theorem
       completePaperSemanticKernelOnly_current_open_target_gate_status_certificate)
 
 /-- Current final status roster: the machine-facing final state ties the
-current non-closure theorem to routed final-exit and open-target gate status. -/
+current non-closure theorem to routed final-exit, open-target gate status, and
+repair frontier pair. -/
 def completePaperSemanticKernelOnlyCurrentFinalStatusStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
@@ -25692,6 +25719,8 @@ def completePaperSemanticKernelOnlyCurrentFinalStatusStatements :
    CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    Not CompletePaperSemanticKernelOnly,
    CompletePaperSemanticKernelOnly <-> False]
 
@@ -25710,14 +25739,16 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False] := rfl
 
-/-- Build gate: the current final-status roster has twelve statements. -/
+/-- Build gate: the current final-status roster has fourteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentFinalStatusStatements_length_current :
     completePaperSemanticKernelOnlyCurrentFinalStatusStatements.length =
-      12 := rfl
+      14 := rfl
 
 /-- Build-gated certificate for the current final machine status. -/
 def CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate : Prop :=
@@ -25731,6 +25762,8 @@ def CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate : Prop :=
   CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate /\
   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   Not CompletePaperSemanticKernelOnly /\
   (CompletePaperSemanticKernelOnly <-> False)
 
@@ -25758,8 +25791,12 @@ theorem completePaperSemanticKernelOnly_current_final_status_certificate :
                     (And.intro
                       topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
                       (And.intro
-                        completePaperSemanticKernelOnly_notYet
-                        completePaperSemanticKernelOnly_iff_false_current))))))))))
+                        open_target_repair_frontier_pair_certificate
+                        (And.intro
+                          open_target_repair_frontier_pair_statement_roster_certificate
+                          (And.intro
+                            completePaperSemanticKernelOnly_notYet
+                            completePaperSemanticKernelOnly_iff_false_current))))))))))))
 
 /-- Build-gated statement roster certificate for the current final status. -/
 def CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate :
@@ -25775,10 +25812,12 @@ def CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate 
        CompletePaperSemanticKernelOnlyCurrentRoutedExitFinalAlignmentStatementRosterCertificate,
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        Not CompletePaperSemanticKernelOnly,
        CompletePaperSemanticKernelOnly <-> False] /\
     completePaperSemanticKernelOnlyCurrentFinalStatusStatements.length =
-      12 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate
 
 /-- The current final-status package has a fixed statement roster. -/
