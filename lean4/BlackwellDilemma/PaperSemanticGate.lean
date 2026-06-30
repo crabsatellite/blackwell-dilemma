@@ -34491,12 +34491,14 @@ theorem
       completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate)
 
 /-- Terminal all-view nonclosure roster tying the current terminal
-obstruction-bundle view back to the final-status and raw/open all-view
-obstruction-map bridge. -/
+obstruction-bundle view and repair-frontier pair back to the final-status and
+raw/open all-view obstruction-map bridge. -/
 def completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
@@ -34515,6 +34517,8 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
@@ -34526,18 +34530,20 @@ theorem
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the terminal all-view nonclosure roster has twelve
+/-- Build gate: the terminal all-view nonclosure roster has fourteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
-      12 := rfl
+      14 := rfl
 
 /-- Build-gated terminal all-view nonclosure certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate /\
   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate /\
+  OpenTargetRepairFrontierPairCertificate /\
+  OpenTargetRepairFrontierPairStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate /\
@@ -34556,6 +34562,8 @@ theorem
   exact ⟨
     completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate,
     completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_statement_roster_certificate,
+    open_target_repair_frontier_pair_certificate,
+    open_target_repair_frontier_pair_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate,
     completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_certificate,
@@ -34574,6 +34582,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRost
   completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
@@ -34585,7 +34595,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRost
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
-      12 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate
 
 /-- The terminal all-view nonclosure package has a fixed statement roster. -/
@@ -34690,7 +34700,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
    completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
-      12,
+      14,
    completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
       13,
    completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
@@ -34862,7 +34872,7 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
-          12,
+          14,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
           13,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
@@ -35039,7 +35049,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   CompletePaperSemanticKernelOnlyCurrentObstructionCertificate /\
   CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate /\
   completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
-      12 /\
+      14 /\
   completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
       13 /\
   completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
@@ -35343,7 +35353,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnlyCurrentObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionStatementRosterCertificate,
        completePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatements.length =
-          12,
+          14,
        completePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatements.length =
           13,
        completePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatements.length =
