@@ -23781,6 +23781,44 @@ theorem
       topoClusterRandomSupercriticalZ2CurrentRoutedExitStatements_length_current
       topo_cluster_random_supercritical_z2_current_routed_exit_certificate)
 
+/-- Topo semantic-interface bundle: the exact-output and route-obstruction
+projection certificates, the support-surface nonclosure projection, the
+frontier nonclosure layer, and the routed-exit certificate are checked together
+for the current open target. -/
+theorem
+    topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle :
+    TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+      TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
+        TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+          TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+            TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate /\
+              TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate /\
+                TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+                  RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+                    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+                      RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+                        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                            Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                              Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                                TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate := by
+  exact ⟨
+    topo_cluster_random_supercritical_z2_exact_output_projection_certificate,
+    topo_cluster_random_supercritical_z2_exact_output_projection_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_certificate,
+    topo_cluster_random_supercritical_z2_route_obstruction_projection_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_support_surface_closing_route_nonclosure_projection_certificate,
+    topo_cluster_random_supercritical_z2_support_surface_closing_route_nonclosure_projection_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_frontier_payload_certificate,
+    topo_cluster_random_supercritical_z2_frontier_payload_frontier_progress_certificate,
+    topo_cluster_random_supercritical_z2_frontier_payload_frontier_nonclosure_certificate,
+    topo_cluster_random_supercritical_z2_frontier_payload_closing_route_nonclosure_certificate,
+    topo_cluster_random_supercritical_z2_frontier_payload_current_frontier_certificate,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_frontier_payload_target_route_obstruction,
+    topo_cluster_random_supercritical_z2_frontier_payload_closure_route_obstruction,
+    topo_cluster_random_supercritical_z2_current_routed_exit_certificate⟩
+
 /-- Aggregate per-target routed-exit roster for the two current open targets,
 with current multipath route-obstruction witnesses named directly. -/
 def completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements :
