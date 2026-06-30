@@ -35478,6 +35478,67 @@ theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
     completePaperSemanticKernelOnly_current_gate_status_certificate
 
+/-- Named certificate for the terminal kernel-only nonclosure/gate-status
+bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate
+
+/-- The terminal kernel-only nonclosure/gate-status bridge is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_gate_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_gate_status
+
+/-- Statement roster for the terminal kernel-only nonclosure/gate-status
+bridge. -/
+def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate]
+
+/-- Build gate: the terminal kernel-only nonclosure/gate-status roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate] := rfl
+
+/-- Build gate: the terminal kernel-only nonclosure/gate-status roster has
+three statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements.length =
+      3 := rfl
+
+/-- Build-gated statement roster certificate for the terminal kernel-only
+nonclosure/gate-status bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements.length =
+      3 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate
+
+/-- The terminal kernel-only nonclosure/gate-status bridge has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_gate_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_gate_status_certificate)
+
 /-- Supplemental gate: pair the terminal kernel-only nonclosure capstone with
 the open-target final-ledger certificate without expanding the already large
 terminal certificate conjunction. -/
