@@ -24253,6 +24253,128 @@ theorem
     completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate,
     completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate⟩
 
+/-- Named certificate for the route-source/top-level bridge: the per-target
+route-source nonclosure bundle is packaged with routed-exit and bidirectional
+route/target obstruction rosters. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate :
+    Prop :=
+  (Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate /\
+    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate /\
+      Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate /\
+        Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate /\
+          Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+            (Part6RemainingConditionalProjectionCertificate /\
+              Part6RemainingConditionalProjectionStatementRosterCertificate /\
+                Part6LatticeEmbeddingFrontierPayloadCertificate /\
+                  Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+                    Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+                      Part6CurrentFrontierCertificate /\
+                        Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                          Not Part6NondegenerateFeasibleRepairRoute /\
+                            Not Part6FullPaperClosingSupport /\
+                              Not Part6FullPaperClosingDivergenceWitness /\
+                                Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+                                  Not (Part6FullPaperClosingDivergenceWitness /\
+                                    Part6FullPaperClosingFeasibleDivergenceWitness) /\
+                                    Not Part6LatticeEmbeddingExactClosureInput /\
+                                      Not Part6FullPaperClosingFullOutputBundle /\
+                                        Part6LatticeEmbeddingCurrentRoutedExitCertificate) /\
+              Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate) /\
+    (TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate /\
+      TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate /\
+        TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate /\
+          TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate /\
+            TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+              (TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+                TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
+                  TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+                    TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+                      TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate /\
+                        TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate /\
+                          TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+                            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+                              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+                                RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+                                  RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                                    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                                      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                                        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                                          TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate) /\
+                TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate) /\
+      CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate
+
+/-- The named route-source/top-level bridge certificate is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate := by
+  exact completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge
+
+/-- Statement roster for the named route-source/top-level bridge package. -/
+def completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate]
+
+/-- Build gate: the route-source/top-level bridge roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate] := rfl
+
+/-- Build gate: the route-source/top-level bridge roster has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the route-source/top-level
+bridge package. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate
+
+/-- The route-source/top-level bridge package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_certificate)
+
 /-- Open target ids covered by the current per-target routed-exit packages. -/
 def openSemanticTargetCurrentRoutedExitIds : List String :=
   openSemanticTargetIds
