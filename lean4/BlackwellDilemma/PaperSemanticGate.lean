@@ -31662,6 +31662,83 @@ theorem
       completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatements_length_current
       completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_certificate)
 
+/-- Current final status plus the final/raw obstruction-map all-view bridge. -/
+def completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate]
+
+/-- Build gate: the final-status/obstruction-map bridge roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate] := rfl
+
+/-- Build gate: the final-status/obstruction-map bridge roster has six
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements.length =
+      6 := rfl
+
+/-- Build-gated bridge tying the current non-complete final status to the
+final/raw all-view obstruction-map package. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate /\
+  CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate
+
+/-- The current final status is kernel-bridged to the raw/final obstruction-map
+all-view package. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_final_status_certificate,
+    completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_certificate,
+    completePaperSemanticKernelOnly_current_terminal_final_obstruction_status_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_statement_roster_certificate⟩
+
+/-- Build-gated statement roster certificate for the final-status/
+obstruction-map bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFinalObstructionStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapRawAllViewBridgeStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements.length =
+      6 /\
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate
+
+/-- The final-status/obstruction-map bridge has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_length_current
+      completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

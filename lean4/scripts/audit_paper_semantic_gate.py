@@ -5446,6 +5446,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statements="
+        "completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_terms_checked=6"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_certificate_proof="
+        "completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -12802,6 +12833,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_final_judgement_obstruction_map_raw_all_view_bridge_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_raw_all_view_bridge_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statements="
+            "completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_terms_checked=6"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_certificate_proof="
+            "completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentFinalStatusObstructionMapBridgeStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_final_status_obstruction_map_bridge_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_final_status_obstruction_map_bridge_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
