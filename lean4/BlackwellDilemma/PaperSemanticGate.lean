@@ -42710,6 +42710,144 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_final_audit_certificate)
 
+/-- Exact theorem-name alias certificate for the route-source terminal
+capstone final field-output audit bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditCertificate
+
+/-- The theorem-name alias for the route-source terminal capstone final
+field-output audit bundle is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_final_audit_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_final_audit_certificate
+
+/-- Statement roster for the theorem-name route-source terminal capstone final
+field-output audit bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- The theorem-name route-source terminal capstone final field-output audit
+bundle alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- The theorem-name route-source terminal capstone final field-output audit
+bundle alias roster has thirteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements.length =
+      13 := rfl
+
+/-- Build-gated statement roster certificate for the theorem-name route-source
+terminal capstone final field-output audit bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements.length =
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditBundleStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
+                  RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+                    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate /\
+                      openSemanticTargetKernelSurfaceIdPaperLabels =
+                        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+                        openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                          2 /\
+                          (CompletePaperSemanticKernelOnly <-> False) /\
+                            Not CompletePaperSemanticKernelOnly
+
+/-- The theorem-name route-source terminal capstone final field-output audit
+bundle alias has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_final_audit_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputFinalAuditBundleStatements_length_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_final_audit_bundle_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_final_audit_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_final_audit_statement_roster_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_final_audit_bundle_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_final_audit_bundle_statement_roster_certificate
+                (And.intro
+                  completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate
+                    (And.intro
+                      remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate
+                      (And.intro
+                        remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_statement_roster_certificate
+                        (And.intro
+                          openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels
+                          (And.intro
+                            openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current
+                            (And.intro
+                              completePaperSemanticKernelOnly_iff_false_current
+                              completePaperSemanticKernelOnly_notYet)))))))))))))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
