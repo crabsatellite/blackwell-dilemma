@@ -26882,7 +26882,9 @@ theorem
             CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
               CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
                 CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
-                  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate := by
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate /\
+                      OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate := by
   exact ⟨
     completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle.1,
     completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle.2.1,
@@ -26891,7 +26893,9 @@ theorem
     completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
     completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate,
-    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate⟩
+    completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate,
+    open_target_route_source_open_target_nonclosure_bundle_row_statement_roster_certificate⟩
 
 /-- Named certificate for the route-source/top-level bridge: the per-target
 route-source nonclosure bundle is packaged with routed-exit and bidirectional
@@ -26951,7 +26955,9 @@ def
           CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
             CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
               CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
-                CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate /\
+                    OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate
 
 /-- The named route-source/top-level bridge certificate is machine checked. -/
 theorem
@@ -26968,7 +26974,9 @@ def completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevel
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
-   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate,
+   OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate]
 
 /-- Build gate: the route-source/top-level bridge roster is fixed. -/
 theorem
@@ -26980,13 +26988,15 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate] := rfl
 
-/-- Build gate: the route-source/top-level bridge roster has seven statements. -/
+/-- Build gate: the route-source/top-level bridge roster has nine statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
-      7 := rfl
+      9 := rfl
 
 /-- Build-gated statement roster certificate for the route-source/top-level
 bridge package. -/
@@ -27000,9 +27010,11 @@ def
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
-      7 /\
+      9 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeCertificate
 
 /-- The route-source/top-level bridge package has a fixed statement roster. -/
