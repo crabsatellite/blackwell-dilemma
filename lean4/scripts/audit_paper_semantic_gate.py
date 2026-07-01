@@ -10122,7 +10122,7 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statements_proof="
         "completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_named_current"
     )
-    print("complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statement_terms_checked=2")
+    print("complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statement_terms_checked=8")
     print(
         "complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statement_terms_proof="
         "completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_length_current"
@@ -11774,7 +11774,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statement_terms_checked=2"
+            "complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statement_terms_checked=8"
         ),
         (
             "complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statement_terms_proof="

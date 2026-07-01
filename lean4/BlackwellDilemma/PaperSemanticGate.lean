@@ -21621,98 +21621,103 @@ theorem completePaperSemanticKernelOnly_current_field_output_roster_full_ledger_
 /-- Statement roster for the full field-output ledger alignment package. -/
 def completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements :
     List Prop :=
-  [(openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
-        openSemanticTargetIds /\
-      openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
-        paperSemanticOpenCount /\
-      openSemanticTargetClosureInputFieldOutputSurfaceIds =
-        openSemanticTargetIds /\
-      openSemanticTargetClosureInputFieldOutputSurfaces.length =
-        paperSemanticOpenCount),
-   (openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
-        openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-      openSemanticTargetKernelSurfaceIdPaperLabels =
-        openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels /\
-      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
-        openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-      openSemanticTargetKernelSurfaceIdPaperLabels =
-        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels)]
+  [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputSurfaceIds =
+      openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputSurfaces.length =
+      paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels]
 
 /-- Build gate: the full field-output ledger alignment roster names exactly
-the id/count and `(id, paperLabel)` synchronization packages. -/
+the id/count and `(id, paperLabel)` synchronization equalities. -/
 theorem completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_named_current :
     completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements =
-      [(openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
-            openSemanticTargetIds /\
-          openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
-            paperSemanticOpenCount /\
-          openSemanticTargetClosureInputFieldOutputSurfaceIds =
-            openSemanticTargetIds /\
-          openSemanticTargetClosureInputFieldOutputSurfaces.length =
-            paperSemanticOpenCount),
-       (openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
-            openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-          openSemanticTargetKernelSurfaceIdPaperLabels =
-            openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels /\
-          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
-            openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-          openSemanticTargetKernelSurfaceIdPaperLabels =
-            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels)] := rfl
+      [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels] := rfl
 
 /-- Build gate: the full field-output ledger alignment roster has exactly the
-two synchronization packages. -/
+eight synchronization equalities. -/
 theorem completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
-      2 := rfl
+      8 := rfl
 
 /-- Build-gated certificate for the full field-output ledger alignment. -/
 def CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate :
     Prop :=
-  (openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
       openSemanticTargetIds /\
-    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
       paperSemanticOpenCount /\
-    openSemanticTargetClosureInputFieldOutputSurfaceIds =
+  openSemanticTargetClosureInputFieldOutputSurfaceIds =
       openSemanticTargetIds /\
-    openSemanticTargetClosureInputFieldOutputSurfaces.length =
-      paperSemanticOpenCount) /\
-  (openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+  openSemanticTargetClosureInputFieldOutputSurfaces.length =
+      paperSemanticOpenCount /\
+  openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-    openSemanticTargetKernelSurfaceIdPaperLabels =
+  openSemanticTargetKernelSurfaceIdPaperLabels =
       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels /\
-    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-    openSemanticTargetKernelSurfaceIdPaperLabels =
-      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels)
+  openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels
 
 /-- The full field-output ledger alignment certificate is machine checked. -/
 theorem completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate :
     CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate := by
-  exact completePaperSemanticKernelOnly_current_field_output_roster_full_ledger_alignment
+  rcases completePaperSemanticKernelOnly_current_field_output_roster_full_ledger_alignment with
+    ⟨⟨hRosterIds, hRosterCount, hSurfaceIds, hSurfaceCount⟩,
+      ⟨hSurfaceLabels, hKernelSurfaceLabels, hRosterLabels, hKernelRosterLabels⟩⟩
+  exact
+    ⟨hRosterIds, hRosterCount, hSurfaceIds, hSurfaceCount, hSurfaceLabels,
+      hKernelSurfaceLabels, hRosterLabels, hKernelRosterLabels⟩
 
 /-- Build-gated statement roster certificate for the full field-output ledger
 alignment package. -/
 def CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate :
     Prop :=
   completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements =
-      [(openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
-            openSemanticTargetIds /\
-          openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
-            paperSemanticOpenCount /\
-          openSemanticTargetClosureInputFieldOutputSurfaceIds =
-            openSemanticTargetIds /\
-          openSemanticTargetClosureInputFieldOutputSurfaces.length =
-            paperSemanticOpenCount),
-       (openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
-            openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-          openSemanticTargetKernelSurfaceIdPaperLabels =
-            openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels /\
-          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
-            openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
-          openSemanticTargetKernelSurfaceIdPaperLabels =
-            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels)] /\
+      [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels] /\
     completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
-      2 /\
+      8 /\
     CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate
 
 /-- The full field-output ledger alignment package has a fixed statement
@@ -36229,7 +36234,7 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
       22,
    completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
-      2,
+      8,
    completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
       4,
    completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
@@ -36404,8 +36409,8 @@ theorem
           22,
        completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
           22,
-       completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
-          2,
+        completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
+           8,
        completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
           4,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
@@ -36590,7 +36595,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
       22 /\
   completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
-      2 /\
+      8 /\
   completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
       4 /\
   completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
@@ -36901,8 +36906,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
           22,
        completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
           22,
-       completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
-          2,
+        completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
+           8,
        completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
           4,
        completePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateStatusLedgerSourceAllCurrentTopLevelClosureStatements.length =
