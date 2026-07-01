@@ -7271,6 +7271,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statements="
+        "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_terms_checked=21"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate_proof="
+        "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -16569,6 +16600,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statements="
+            "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_terms_checked=21"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate_proof="
+            "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="

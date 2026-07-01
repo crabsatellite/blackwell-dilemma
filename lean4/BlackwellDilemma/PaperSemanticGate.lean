@@ -44512,6 +44512,336 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_certificate⟩
 
+/-- Row-roster alignment capstone for the two-key paper-label boundary.  This
+binds the terminal paper-label capstone to the row-level detailed field-output
+statement rosters for the two open targets, including the concrete ids, paper
+labels, row list, component list, and target-specific statement-roster
+certificates. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatementRosterCertificate /\
+      RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+        RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate /\
+          RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements =
+              [openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+                  [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+                   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+                  ["theorem_4_1_part6_lattice_embedding",
+                   "topo_cluster_random_supercritical_z2"],
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+                  [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+                   ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+                  openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+               openSemanticTargetKernelSurfaceIdPaperLabels =
+                  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                  paperSemanticOpenCount,
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                  2,
+               Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+                  TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+               RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate] /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements.length =
+              9 /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements =
+              [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+                  openSemanticTargetIds,
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+                  openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+               openSemanticTargetKernelSurfaceIdPaperLabels =
+                  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                  paperSemanticOpenCount,
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                  2,
+               openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+                  [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+                   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+               Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+               TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
+              8 /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+              openSemanticTargetIds /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+              openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+            openSemanticTargetKernelSurfaceIdPaperLabels =
+              openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+              [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+               TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+              paperSemanticOpenCount /\
+            Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+            TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
+            paperSemanticOpenCount = 2 /\
+            Not (paperSemanticOpenCount = 0) /\
+            (CompletePaperSemanticKernelOnly <-> False) /\
+            Not CompletePaperSemanticKernelOnly
+
+/-- The row-level detailed field-output rosters use the same terminal
+paper-label and nonclosure boundary as the two-key capstone. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_named_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_length_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_named_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
+    part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate,
+    paperSemanticOpenCount_current,
+    (by
+      intro hzero
+      exact (by decide : (2 : Nat) ≠ 0)
+        (paperSemanticOpenCount_current.symm.trans hzero)),
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the two-key row-roster alignment capstone. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements =
+    [openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+        [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+         ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+     openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        2,
+     Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+     RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements.length =
+    9,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements =
+    [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+     openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        2,
+     openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+        [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+     Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
+    8,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+    openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+    openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+    [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+    paperSemanticOpenCount,
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+   paperSemanticOpenCount = 2,
+   Not (paperSemanticOpenCount = 0),
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the two-key row-roster alignment roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements =
+        [openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+            [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+            ["theorem_4_1_part6_lattice_embedding",
+             "topo_cluster_random_supercritical_z2"],
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+            [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+             ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+            openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+         openSemanticTargetKernelSurfaceIdPaperLabels =
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            paperSemanticOpenCount,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            2,
+         Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+            TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+         RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements.length =
+        9,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements =
+        [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+            openSemanticTargetIds,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+            openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+         openSemanticTargetKernelSurfaceIdPaperLabels =
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            paperSemanticOpenCount,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            2,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+            [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+         Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
+        8,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+        [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the two-key row-roster alignment roster has twenty-one
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements.length =
+      21 := rfl
+
+/-- Build-gated statement roster certificate for the two-key row-roster
+alignment capstone. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements =
+        [openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+            [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+            ["theorem_4_1_part6_lattice_embedding",
+             "topo_cluster_random_supercritical_z2"],
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+            [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+             ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+            openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+         openSemanticTargetKernelSurfaceIdPaperLabels =
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            paperSemanticOpenCount,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            2,
+         Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+            TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+         RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements.length =
+        9,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements =
+        [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+            openSemanticTargetIds,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+            openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+         openSemanticTargetKernelSurfaceIdPaperLabels =
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            paperSemanticOpenCount,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+            2,
+         openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+            [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+         Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
+        8,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+        [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements.length =
+      21 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentCertificate
+
+/-- The two-key row-roster alignment capstone has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyRowRosterAlignmentStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_row_roster_alignment_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
