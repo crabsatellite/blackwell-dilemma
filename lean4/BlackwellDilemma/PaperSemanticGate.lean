@@ -34717,13 +34717,158 @@ theorem
       openSemanticTargetPaperLabelObstructionMapProjectionStatements_length_current
       open_semantic_target_paper_label_obstruction_map_projection_certificate)
 
+/-- Component-level statement roster for the paper-label obstruction map. -/
+def openSemanticTargetPaperLabelObstructionMapComponentStatements :
+    List Prop :=
+  [openSemanticTargetPaperLabelObstructionMap =
+      [("thm:cognitive-threshold Part 6",
+          Not Part6LatticeEmbeddingSemanticKernelTarget /\
+            Not Part6NondegenerateFeasibleRepairRoute /\
+            Not Part6FullPaperClosingSupport),
+       ("prop:topo-cluster and thm:phase",
+          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+            Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+            Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)],
+   openSemanticTargetPaperLabelObstructionMapLabels =
+      openSemanticTargetKernelSurfacePaperLabels,
+   openSemanticTargetPaperLabelObstructionMap.length =
+      paperSemanticOpenCount,
+   openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+      openSemanticTargetPaperLabelObstructionMapLabels,
+   openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+          Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   openSemanticTargetPaperLabelObstructionMapObstructionBundles.length =
+      paperSemanticOpenCount,
+   openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+      openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+   openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+      6,
+   openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms]
+
+/-- Build gate: the paper-label obstruction-map component roster is fixed. -/
+theorem openSemanticTargetPaperLabelObstructionMapComponentStatements_named_current :
+    openSemanticTargetPaperLabelObstructionMapComponentStatements =
+      [openSemanticTargetPaperLabelObstructionMap =
+          [("thm:cognitive-threshold Part 6",
+              Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                Not Part6NondegenerateFeasibleRepairRoute /\
+                Not Part6FullPaperClosingSupport),
+           ("prop:topo-cluster and thm:phase",
+              Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)],
+       openSemanticTargetPaperLabelObstructionMapLabels =
+          openSemanticTargetKernelSurfacePaperLabels,
+       openSemanticTargetPaperLabelObstructionMap.length =
+          paperSemanticOpenCount,
+       openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+          openSemanticTargetPaperLabelObstructionMapLabels,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+              Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+              Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+          openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not Part6NondegenerateFeasibleRepairRoute,
+           Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+           Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms] := rfl
+
+/-- Build gate: the paper-label obstruction-map component roster has ten
+statements. -/
+theorem openSemanticTargetPaperLabelObstructionMapComponentStatements_length_current :
+    openSemanticTargetPaperLabelObstructionMapComponentStatements.length =
+      10 := rfl
+
+/-- Build-gated component statement-roster certificate for the paper-label
+obstruction map. -/
+def OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetPaperLabelObstructionMapComponentStatements =
+      [openSemanticTargetPaperLabelObstructionMap =
+          [("thm:cognitive-threshold Part 6",
+              Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                Not Part6NondegenerateFeasibleRepairRoute /\
+                Not Part6FullPaperClosingSupport),
+           ("prop:topo-cluster and thm:phase",
+              Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)],
+       openSemanticTargetPaperLabelObstructionMapLabels =
+          openSemanticTargetKernelSurfacePaperLabels,
+       openSemanticTargetPaperLabelObstructionMap.length =
+          paperSemanticOpenCount,
+       openSemanticTargetIdPaperLabelObstructionMapPaperLabels =
+          openSemanticTargetPaperLabelObstructionMapLabels,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+              Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+              Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+          openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not Part6NondegenerateFeasibleRepairRoute,
+           Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+           Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms] /\
+    openSemanticTargetPaperLabelObstructionMapComponentStatements.length =
+      10 /\
+    OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate
+
+/-- The paper-label obstruction map has a component-level statement roster tied
+to the projection certificate. -/
+theorem open_semantic_target_paper_label_obstruction_map_component_statement_roster_certificate :
+    OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetPaperLabelObstructionMapComponentStatements_named_current
+    (And.intro
+      openSemanticTargetPaperLabelObstructionMapComponentStatements_length_current
+      open_semantic_target_paper_label_obstruction_map_projection_certificate)
+
 /-- Final judgement plus the paper-label obstruction-map projection bridge. -/
 def completePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
    OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
-   OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate]
+   OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate]
 
 /-- Build gate: the final-judgement paper-label projection bridge roster is
 fixed. -/
@@ -34733,14 +34878,15 @@ theorem
       [CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
        OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
-       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate] := rfl
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate] := rfl
 
 /-- Build gate: the final-judgement paper-label projection bridge roster has
-four statements. -/
+five statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatements_length_current :
     completePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatements.length =
-      4 := rfl
+      5 := rfl
 
 /-- Build-gated terminal certificate tying the final judgement to the
 paper-label obstruction-map projection bridge. -/
@@ -34749,7 +34895,8 @@ def CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMap
   CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatementRosterCertificate /\
   OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate /\
-  OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate
+  OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate
 
 /-- The final paper-state judgement carries the paper-label projection bridge as
 a terminal kernel gate. -/
@@ -34760,7 +34907,8 @@ theorem
     completePaperSemanticKernelOnly_current_final_judgement_id_paper_label_obstruction_map_projection_certificate,
     completePaperSemanticKernelOnly_current_final_judgement_id_paper_label_obstruction_map_projection_statement_roster_certificate,
     open_semantic_target_paper_label_obstruction_map_projection_certificate,
-    open_semantic_target_paper_label_obstruction_map_projection_statement_roster_certificate⟩
+    open_semantic_target_paper_label_obstruction_map_projection_statement_roster_certificate,
+    open_semantic_target_paper_label_obstruction_map_component_statement_roster_certificate⟩
 
 /-- Build-gated statement roster certificate for the final-judgement paper-label
 obstruction-map projection bridge. -/
@@ -34770,9 +34918,10 @@ def CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMap
       [CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
        OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
-       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate] /\
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionStatements.length =
-      4 /\
+      5 /\
     CompletePaperSemanticKernelOnlyCurrentFinalJudgementPaperLabelObstructionMapProjectionCertificate
 
 /-- The final-judgement paper-label obstruction-map projection bridge has a
@@ -35100,6 +35249,7 @@ def openSemanticTargetObstructionMapAllViewStatements : List Prop :=
    OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
    OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
    OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate,
    OpenSemanticTargetObstructionMapIndexProjectionCertificate,
    OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate]
 
@@ -35122,13 +35272,14 @@ theorem openSemanticTargetObstructionMapAllViewStatements_named_current :
        OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
        OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
        OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate,
        OpenSemanticTargetObstructionMapIndexProjectionCertificate,
        OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate] := rfl
 
-/-- Build gate: the raw/open all-view obstruction-map roster has eighteen
+/-- Build gate: the raw/open all-view obstruction-map roster has nineteen
 statements. -/
 theorem openSemanticTargetObstructionMapAllViewStatements_length_current :
-    openSemanticTargetObstructionMapAllViewStatements.length = 18 := rfl
+    openSemanticTargetObstructionMapAllViewStatements.length = 19 := rfl
 
 /-- Build-gated raw/open certificate tying every obstruction-map view together
 before final-judgement packaging. -/
@@ -35149,6 +35300,7 @@ def OpenSemanticTargetObstructionMapAllViewCertificate : Prop :=
   OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate /\
   OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate /\
   OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+  OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate /\
   OpenSemanticTargetObstructionMapIndexProjectionCertificate /\
   OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate
 
@@ -35172,6 +35324,7 @@ theorem open_semantic_target_obstruction_map_all_view_certificate :
     open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate,
     open_semantic_target_paper_label_obstruction_map_projection_certificate,
     open_semantic_target_paper_label_obstruction_map_projection_statement_roster_certificate,
+    open_semantic_target_paper_label_obstruction_map_component_statement_roster_certificate,
     open_semantic_target_obstruction_map_index_projection_certificate,
     open_semantic_target_obstruction_map_index_projection_statement_roster_certificate⟩
 
@@ -35195,9 +35348,10 @@ def OpenSemanticTargetObstructionMapAllViewStatementRosterCertificate : Prop :=
        OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
        OpenSemanticTargetPaperLabelObstructionMapProjectionCertificate,
        OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate,
        OpenSemanticTargetObstructionMapIndexProjectionCertificate,
        OpenSemanticTargetObstructionMapIndexProjectionStatementRosterCertificate] /\
-    openSemanticTargetObstructionMapAllViewStatements.length = 18 /\
+    openSemanticTargetObstructionMapAllViewStatements.length = 19 /\
     OpenSemanticTargetObstructionMapAllViewCertificate
 
 /-- The raw/open all-view obstruction-map package has a fixed statement roster. -/
