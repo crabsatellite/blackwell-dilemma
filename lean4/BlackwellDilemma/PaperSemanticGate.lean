@@ -39881,7 +39881,17 @@ def
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate,
-   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
 
 /-- The theorem-name route-source terminal capstone public-evidence bundle alias
 roster is fixed. -/
@@ -39889,15 +39899,25 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_named_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := by
   rfl
 
 /-- The theorem-name route-source terminal capstone public-evidence bundle alias
-roster has the expected size. -/
+roster has twelve statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements.length =
-      2 := by
+      12 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name route-source
@@ -39907,21 +39927,64 @@ def
     Prop :=
   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements.length =
-      2 /\
-    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
+                  OpenTargetRepairFrontierPairCertificate /\
+                    OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                        (CompletePaperSemanticKernelOnly <-> False) /\
+                          Not CompletePaperSemanticKernelOnly
 
 /-- The theorem-name route-source terminal capstone public-evidence bundle alias
 has a fixed statement roster. -/
 theorem
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle_statement_roster_certificate :
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatementRosterCertificate := by
-  exact And.intro
-    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_named_current
-    (And.intro
-      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_length_current
-      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle_certificate)
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_named_current
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_length_current
+  constructor
+  · exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_gate_status_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+  constructor
+  · exact open_target_repair_frontier_pair_certificate
+  constructor
+  · exact open_target_repair_frontier_pair_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_final_status_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_iff_false_current
+  · exact completePaperSemanticKernelOnly_notYet
 
 /-- Named audit certificate for the route-source terminal capstone
 public-evidence bundle. -/
