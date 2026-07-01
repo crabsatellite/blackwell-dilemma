@@ -445,22 +445,27 @@ theorem openSemanticTargetKernelSurface_frontier_certificate
     surface.frontierCertificate :=
   surface.frontierCertificateProof
 
-/-- The Part 6 nondegenerate repair route has four independently named current
-obstruction paths: divergence witness, same-`alpha` feasible/divergence
-witness, paired output, and full output bundle. -/
+/-- The Part 6 nondegenerate repair route has a source-level obstruction
+certificate plus four independently named current obstruction paths: divergence
+witness, same-`alpha` feasible/divergence witness, paired output, and full
+output bundle. -/
 def Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate :
     Prop :=
-  Not Part6NondegenerateFeasibleRepairRoute /\
+  Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate /\
+    Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate /\
+    Not Part6NondegenerateFeasibleRepairRoute /\
     Not Part6NondegenerateFeasibleRepairRoute /\
     Not Part6NondegenerateFeasibleRepairRoute /\
     Not Part6NondegenerateFeasibleRepairRoute
 
-/-- The four current Part 6 repair-route obstruction paths are all
-machine-checked. -/
+/-- The source-level certificate and four current Part 6 repair-route
+obstruction paths are all machine-checked. -/
 theorem
     part6_lattice_embedding_repair_route_obstruction_multipath_certificate :
     Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate :=
-  ⟨not_part6_nondegenerate_feasible_repair_route_current_via_divergence_witness,
+  ⟨part6_nondegenerate_feasible_repair_route_obstruction_source_certificate,
+   part6_nondegenerate_feasible_repair_route_obstruction_source_statement_roster_certificate,
+   not_part6_nondegenerate_feasible_repair_route_current_via_divergence_witness,
    not_part6_nondegenerate_feasible_repair_route_current_via_feasible_divergence_witness,
    not_part6_nondegenerate_feasible_repair_route_current_via_output_pair,
    not_part6_nondegenerate_feasible_repair_route_current_via_full_output_bundle⟩
@@ -469,39 +474,45 @@ theorem
 certificate. -/
 def part6LatticeEmbeddingRepairRouteObstructionMultipathStatements :
     List Prop :=
-  [Not Part6NondegenerateFeasibleRepairRoute,
+  [Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+   Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+   Not Part6NondegenerateFeasibleRepairRoute,
    Not Part6NondegenerateFeasibleRepairRoute,
    Not Part6NondegenerateFeasibleRepairRoute,
    Not Part6NondegenerateFeasibleRepairRoute]
 
 /-- Build gate: the Part 6 repair-route obstruction multipath roster names the
-four current route-refutation paths. -/
+source certificate plus four current route-refutation paths. -/
 theorem
     part6LatticeEmbeddingRepairRouteObstructionMultipathStatements_named_current :
     part6LatticeEmbeddingRepairRouteObstructionMultipathStatements =
-      [Not Part6NondegenerateFeasibleRepairRoute,
+      [Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
        Not Part6NondegenerateFeasibleRepairRoute,
        Not Part6NondegenerateFeasibleRepairRoute,
        Not Part6NondegenerateFeasibleRepairRoute] := rfl
 
-/-- Build gate: the Part 6 repair-route obstruction multipath roster has four
+/-- Build gate: the Part 6 repair-route obstruction multipath roster has six
 statements. -/
 theorem
     part6LatticeEmbeddingRepairRouteObstructionMultipathStatements_length_current :
     part6LatticeEmbeddingRepairRouteObstructionMultipathStatements.length =
-      4 := rfl
+      6 := rfl
 
 /-- Build-gated statement roster certificate for the Part 6 repair-route
 obstruction multipath package. -/
 def Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate :
     Prop :=
   part6LatticeEmbeddingRepairRouteObstructionMultipathStatements =
-      [Not Part6NondegenerateFeasibleRepairRoute,
+      [Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
        Not Part6NondegenerateFeasibleRepairRoute,
        Not Part6NondegenerateFeasibleRepairRoute,
        Not Part6NondegenerateFeasibleRepairRoute] /\
     part6LatticeEmbeddingRepairRouteObstructionMultipathStatements.length =
-      4 /\
+      6 /\
     Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate
 
 /-- The Part 6 repair-route obstruction multipath package has a fixed statement
@@ -46304,10 +46315,12 @@ def
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate /\
       Part6NondegenerateFeasibleRepairRouteCertificate /\
         Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate /\
-          part6NondegenerateFeasibleRepairRouteStatements.length = 15 /\
-            Not Part6NondegenerateFeasibleRepairRoute /\
-              (CompletePaperSemanticKernelOnly <-> False) /\
-                Not CompletePaperSemanticKernelOnly
+          part6NondegenerateFeasibleRepairRouteStatements.length = 16 /\
+            Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate /\
+              Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate /\
+                Not Part6NondegenerateFeasibleRepairRoute /\
+                  (CompletePaperSemanticKernelOnly <-> False) /\
+                    Not CompletePaperSemanticKernelOnly
 
 /-- The terminal endpoint is sealed against the bottom-level Part 6
 repair-route roster. -/
@@ -46325,10 +46338,14 @@ theorem
           (And.intro
             part6NondegenerateFeasibleRepairRouteStatements_length_current
             (And.intro
-              not_part6_nondegenerate_feasible_repair_route_current
+              part6_nondegenerate_feasible_repair_route_obstruction_source_certificate
               (And.intro
-                completePaperSemanticKernelOnly_iff_false_current
-                completePaperSemanticKernelOnly_notYet))))))
+                part6_nondegenerate_feasible_repair_route_obstruction_source_statement_roster_certificate
+                (And.intro
+                  not_part6_nondegenerate_feasible_repair_route_current
+                  (And.intro
+                    completePaperSemanticKernelOnly_iff_false_current
+                    completePaperSemanticKernelOnly_notYet))))))))
 
 /-- Statement roster for the Part 6 repair-route roster terminal seal. -/
 def
@@ -46339,7 +46356,9 @@ def
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate,
    Part6NondegenerateFeasibleRepairRouteCertificate,
    Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
-   part6NondegenerateFeasibleRepairRouteStatements.length = 15,
+   part6NondegenerateFeasibleRepairRouteStatements.length = 16,
+   Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+   Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
    Not Part6NondegenerateFeasibleRepairRoute,
    CompletePaperSemanticKernelOnly <-> False,
    Not CompletePaperSemanticKernelOnly]
@@ -46353,17 +46372,19 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate,
        Part6NondegenerateFeasibleRepairRouteCertificate,
        Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
-       part6NondegenerateFeasibleRepairRouteStatements.length = 15,
+       part6NondegenerateFeasibleRepairRouteStatements.length = 16,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
        Not Part6NondegenerateFeasibleRepairRoute,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the Part 6 repair-route roster terminal seal has nine
+/-- Build gate: the Part 6 repair-route roster terminal seal has eleven
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements.length =
-      9 := rfl
+      11 := rfl
 
 /-- Build-gated statement roster certificate for the Part 6 repair-route roster
 terminal seal. -/
@@ -46376,12 +46397,14 @@ def
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate,
        Part6NondegenerateFeasibleRepairRouteCertificate,
        Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
-       part6NondegenerateFeasibleRepairRouteStatements.length = 15,
+       part6NondegenerateFeasibleRepairRouteStatements.length = 16,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
        Not Part6NondegenerateFeasibleRepairRoute,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements.length =
-      9 /\
+      11 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate
 
 /-- The Part 6 repair-route roster terminal seal has a fixed statement roster. -/
