@@ -4892,6 +4892,81 @@ theorem
       part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements_length_current
       part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_certificate)
 
+/-- Row-level statement roster for the two frontier-payload open-target
+nonclosure bundles. -/
+def openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements :
+    List Prop :=
+  [TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate,
+   TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+   topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements.length =
+     9,
+   Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate,
+   Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+   part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements.length =
+     13,
+   TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate /\
+     Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate]
+
+/-- Build gate: the frontier-payload open-target nonclosure row roster is
+fixed. -/
+theorem openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements_named_current :
+    openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements =
+      [TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+       topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements.length =
+         9,
+       Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+       part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements.length =
+         13,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate /\
+         Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] := rfl
+
+/-- Build gate: the frontier-payload open-target nonclosure row roster has
+eight statements. -/
+theorem openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements_length_current :
+    openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements.length =
+      8 := rfl
+
+/-- Build-gated row statement-roster certificate for the two
+frontier-payload open-target nonclosure bundles. -/
+def OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate :
+    Prop :=
+  openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements =
+      [TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+       topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements.length =
+         9,
+       Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+       part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements.length =
+         13,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate /\
+         Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate] /\
+    openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements.length =
+      8 /\
+    TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate /\
+    Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate /\
+    OpenTargetRepairFrontierPairStatementRosterCertificate
+
+/-- The two frontier-payload open-target nonclosure bundles have a fixed
+row-level statement roster. -/
+theorem
+    open_target_frontier_payload_open_target_nonclosure_bundle_row_statement_roster_certificate :
+    OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate := by
+  exact And.intro
+    openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements_named_current
+    (And.intro
+      openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements_length_current
+      (And.intro
+        topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate
+        (And.intro
+          part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate
+          open_target_repair_frontier_pair_statement_roster_certificate)))
+
 /-- The complete typed random-supercritical topo frontier payload projects the
 active target-route certificate. -/
 theorem
@@ -25379,12 +25454,13 @@ theorem
           RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
             RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
               RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
-                Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
-                  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
-                    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+              Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
         Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
           TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate := by
+            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+              OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate := by
   exact And.intro
     part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle
     (And.intro
@@ -25393,7 +25469,9 @@ theorem
         part6_lattice_embedding_current_routed_exit_certificate
         (And.intro
           topo_cluster_random_supercritical_z2_current_routed_exit_certificate
-          completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate)))
+          (And.intro
+            completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate
+            open_target_frontier_payload_open_target_nonclosure_bundle_row_statement_roster_certificate))))
 
 /-- Named certificate for the per-target routed-exit/open-target nonclosure
 bundle. -/
@@ -25421,11 +25499,12 @@ def
             RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
               RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
                 Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
-                  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
-                    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
         Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
           TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate
+            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+              OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate
 
 /-- The per-target routed-exit/open-target nonclosure bundle certificate is
 machine checked. -/
@@ -25466,7 +25545,8 @@ def
                   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
     Part6LatticeEmbeddingCurrentRoutedExitCertificate,
     TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
-    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate]
+    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+    OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate]
 
 /-- Build gate: the per-target routed-exit/open-target nonclosure roster is
 fixed. -/
@@ -25499,14 +25579,15 @@ theorem
                       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
         Part6LatticeEmbeddingCurrentRoutedExitCertificate,
         TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
-        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate] := rfl
+        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+        OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate] := rfl
 
 /-- Build gate: the per-target routed-exit/open-target nonclosure roster has
-six statements. -/
+seven statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatements.length =
-      6 := rfl
+      7 := rfl
 
 /-- Build-gated statement roster certificate for the per-target
 routed-exit/open-target nonclosure bundle. -/
@@ -25540,9 +25621,10 @@ def
                       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
         Part6LatticeEmbeddingCurrentRoutedExitCertificate,
         TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
-        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate] /\
+        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+        OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatements.length =
-      6 /\
+      7 /\
     CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleCertificate
 
 /-- The per-target routed-exit/open-target nonclosure bundle has a fixed

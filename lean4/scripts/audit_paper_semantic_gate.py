@@ -3568,7 +3568,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=6"
+        "complete_paper_semantic_kernel_only_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=7"
     )
     print(
         "complete_paper_semantic_kernel_only_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_terms_proof="
@@ -7621,6 +7621,29 @@ def main() -> int:
     print(
         "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate_proof="
         "part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
+        "semantic_target_open_frontier_payload_open_target_nonclosure_bundle_row_statements="
+        "openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements"
+    )
+    print(
+        "semantic_target_open_frontier_payload_open_target_nonclosure_bundle_row_statements_proof="
+        "openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements_named_current"
+    )
+    print(
+        "semantic_target_open_frontier_payload_open_target_nonclosure_bundle_row_statement_terms_checked=8"
+    )
+    print(
+        "semantic_target_open_frontier_payload_open_target_nonclosure_bundle_row_statement_terms_proof="
+        "openTargetFrontierPayloadOpenTargetNonclosureBundleRowStatements_length_current"
+    )
+    print(
+        "semantic_target_open_frontier_payload_open_target_nonclosure_bundle_row_statement_roster_certificate="
+        "OpenTargetFrontierPayloadOpenTargetNonclosureBundleRowStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_open_frontier_payload_open_target_nonclosure_bundle_row_statement_roster_certificate_proof="
+        "open_target_frontier_payload_open_target_nonclosure_bundle_row_statement_roster_certificate"
     )
     print(
         "semantic_target_frontier_payload_targets="
@@ -12591,7 +12614,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=6"
+            "complete_paper_semantic_kernel_only_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=7"
         ),
         (
             "complete_paper_semantic_kernel_only_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_terms_proof="
