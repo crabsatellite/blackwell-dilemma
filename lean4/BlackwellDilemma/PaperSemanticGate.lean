@@ -38909,7 +38909,12 @@ def
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate,
-   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
 
 /-- The theorem-name terminal kernel-only nonclosure audit bundle alias roster
 is fixed. -/
@@ -38917,15 +38922,20 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := by
   rfl
 
 /-- The theorem-name terminal kernel-only nonclosure audit bundle alias roster
-has the expected size. -/
+has seven statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements.length =
-      2 := by
+      7 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name terminal
@@ -38935,21 +38945,44 @@ def
     Prop :=
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements.length =
-      2 /\
-    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly
 
 /-- The theorem-name terminal kernel-only nonclosure audit bundle alias has a
 fixed statement roster. -/
 theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle_statement_roster_certificate :
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatementRosterCertificate := by
-  exact And.intro
-    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_named_current
-    (And.intro
-      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_length_current
-      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle_certificate)
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_named_current
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_length_current
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_iff_false_current
+  · exact completePaperSemanticKernelOnly_notYet
 
 /-- Supplemental gate: public-evidence terminal bundle.  This keeps the
 paper-facing terminal capstone, its fixed statement roster, gate status,
