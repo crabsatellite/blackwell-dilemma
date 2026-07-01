@@ -7927,6 +7927,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_obstruction_source_public_evidence_audit_seal_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statements="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_terms_checked=6"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -17727,6 +17758,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_obstruction_source_public_evidence_audit_seal_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_obstruction_source_public_evidence_audit_seal_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statements="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_terms_checked=6"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_statements="
