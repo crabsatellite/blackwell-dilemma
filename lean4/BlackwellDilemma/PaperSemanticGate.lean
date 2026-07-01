@@ -44141,6 +44141,184 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_closure_certificate⟩
 
+/-- Field-output alignment capstone for the two-key closure boundary.  This
+packages the latest two-key nonclosure certificate together with the detailed
+field-output rosters for the two remaining open targets and the current ledger
+count, so CI checks that the field/output surfaces feed into the same
+nonclosure explanation as `CompletePaperSemanticKernelOnly`. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate /\
+              RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+                OpenSemanticTargetClosureInputFieldOutputRosterCertificate /\
+                  OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate /\
+                    Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+                      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
+                        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+                          openSemanticTargetIds /\
+                        openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+                          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+                           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+                        openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                          paperSemanticOpenCount /\
+                        (RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+                          RemainingOpenSemanticTargetsSatisfied) /\
+                        Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied /\
+                        paperSemanticOpenCount = 2 /\
+                        Not (paperSemanticOpenCount = 0) /\
+                        (CompletePaperSemanticKernelOnly <-> False) /\
+                        Not CompletePaperSemanticKernelOnly
+
+/-- The detailed field-output rosters for the two open targets are aligned with
+the current two-key nonclosure boundary and ledger state. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_field_output_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_closure_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_closure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_ledger_state_nonclosure_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate,
+    open_semantic_target_closure_input_field_output_roster_certificate,
+    open_semantic_target_closure_input_field_output_statement_roster_certificate,
+    part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_count_current,
+    remaining_open_semantic_targets_targets_of_outputs,
+    remaining_open_semantic_targets_full_outputs_notYet,
+    paperSemanticOpenCount_current,
+    (by
+      intro hzero
+      exact (by decide : (2 : Nat) ≠ 0)
+        (paperSemanticOpenCount_current.symm.trans hzero)),
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the two-key field-output alignment capstone. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
+   OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+    openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+    [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+     TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+    paperSemanticOpenCount,
+   RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+    RemainingOpenSemanticTargetsSatisfied,
+   Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+   paperSemanticOpenCount = 2,
+   Not (paperSemanticOpenCount = 0),
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the two-key field-output alignment roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+        [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the two-key field-output alignment roster has twenty-one
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements.length =
+      21 := rfl
+
+/-- Build-gated statement roster certificate for the two-key field-output
+alignment capstone. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalLedgerStateNonclosureStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+        openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+        [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+         TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+        paperSemanticOpenCount,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements.length =
+      21 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate
+
+/-- The two-key field-output alignment capstone has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_field_output_alignment_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_field_output_alignment_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
