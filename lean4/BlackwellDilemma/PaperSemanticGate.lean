@@ -43992,6 +43992,155 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate⟩
 
+/-- Two-key closure capstone: the semantic exact/full-output packages can be
+reduced back to the remaining joint targets, but the top-level
+`CompletePaperSemanticKernelOnly` declaration still requires the ledger key
+`paperSemanticOpenCount = 0`.  The current route exposes both blockers:
+the exact/full-output packages are refuted, and the ledger still has two open
+targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate /\
+      RemainingOpenSemanticTargetsJointClosureReductionCertificate /\
+        RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate /\
+          (RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+            RemainingOpenSemanticTargetsSatisfied) /\
+          (RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+            RemainingOpenSemanticTargetsSatisfied) /\
+          (paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly) /\
+          (RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+            paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly) /\
+          (RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+            paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly) /\
+          Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied /\
+          Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied /\
+          Not (paperSemanticOpenCount = 0) /\
+          (CompletePaperSemanticKernelOnly <-> False) /\
+          paperSemanticOpenCount = 2 /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The current gate has both two-key closure blockers machine checked:
+semantic exact/full-output satisfaction is unavailable, and the ledger key
+`open=0` is unavailable. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_closure_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate,
+    remaining_open_semantic_targets_joint_closure_reduction_certificate,
+    remaining_open_semantic_targets_joint_closure_reduction_statement_roster_certificate,
+    remaining_open_semantic_targets_targets_of_exact_inputs,
+    remaining_open_semantic_targets_targets_of_outputs,
+    (fun hzero => (completePaperSemanticKernelOnly_iff_no_open_targets).mpr hzero),
+    (fun _ hzero => (completePaperSemanticKernelOnly_iff_no_open_targets).mpr hzero),
+    (fun _ hzero => (completePaperSemanticKernelOnly_iff_no_open_targets).mpr hzero),
+    remaining_open_semantic_targets_exact_inputs_notYet,
+    remaining_open_semantic_targets_full_outputs_notYet,
+    (by
+      intro hzero
+      exact (by decide : (2 : Nat) ≠ 0)
+        (paperSemanticOpenCount_current.symm.trans hzero)),
+    completePaperSemanticKernelOnly_iff_false_current,
+    paperSemanticOpenCount_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the two-key closure capstone. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate,
+   RemainingOpenSemanticTargetsJointClosureReductionCertificate,
+   RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+    RemainingOpenSemanticTargetsSatisfied,
+   RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+    RemainingOpenSemanticTargetsSatisfied,
+   paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+   RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+    paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+   RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+    paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+   Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+   Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+   Not (paperSemanticOpenCount = 0),
+   CompletePaperSemanticKernelOnly <-> False,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the two-key closure capstone roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate,
+       RemainingOpenSemanticTargetsJointClosureReductionCertificate,
+       RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+       Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the two-key closure capstone roster has sixteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements.length =
+      16 := rfl
+
+/-- Build-gated statement roster certificate for the two-key closure capstone. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate,
+       RemainingOpenSemanticTargetsJointClosureReductionCertificate,
+       RemainingOpenSemanticTargetsJointClosureReductionStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        RemainingOpenSemanticTargetsSatisfied,
+       paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       RemainingOpenSemanticTargetsExactClosureInputsSatisfied ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       RemainingOpenSemanticTargetsFullOutputBundlesSatisfied ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       Not RemainingOpenSemanticTargetsExactClosureInputsSatisfied,
+       Not RemainingOpenSemanticTargetsFullOutputBundlesSatisfied,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements.length =
+      16 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureCertificate
+
+/-- The two-key closure capstone has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_closure_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyClosureStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_closure_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
