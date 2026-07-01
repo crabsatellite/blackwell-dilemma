@@ -37715,7 +37715,12 @@ theorem
       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
         CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
           CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate := by
+            CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate /\
+              OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate := by
   exact And.intro
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
     (And.intro
@@ -37724,7 +37729,17 @@ theorem
         completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
         (And.intro
           completePaperSemanticKernelOnly_current_open_target_gate_status_certificate
-          completePaperSemanticKernelOnly_current_open_target_exit_certificate)))
+          (And.intro
+            completePaperSemanticKernelOnly_current_open_target_exit_certificate
+            (And.intro
+              open_semantic_target_surface_frontier_nonclosure_certificate
+              (And.intro
+                open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+                (And.intro
+                  completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_gate_status_statement_roster_certificate
+                    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate))))))))
 
 /-- Named certificate for the terminal kernel-only nonclosure open-target
 operational bundle. -/
@@ -37734,7 +37749,12 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
     CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
         CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
-          CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate /\
+            OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+              OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate
 
 /-- The terminal kernel-only nonclosure open-target operational certificate is
 machine checked. -/
@@ -37752,7 +37772,12 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
    CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
-   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate]
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate]
 
 /-- Build gate: the terminal kernel-only nonclosure open-target operational
 roster is fixed. -/
@@ -37764,14 +37789,19 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate] := rfl
 
 /-- Build gate: the terminal kernel-only nonclosure open-target operational
-roster has six statements. -/
+roster has eleven statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatements.length =
-      6 := rfl
+      11 := rfl
 
 /-- Build-gated statement roster certificate for the terminal kernel-only
 nonclosure open-target operational bundle. -/
@@ -37783,9 +37813,14 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
-       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatements.length =
-      6 /\
+      11 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalCertificate
 
 /-- The terminal kernel-only nonclosure open-target operational bundle has a
@@ -37819,7 +37854,18 @@ def
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate,
-   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate]
 
 /-- The theorem-name terminal kernel-only nonclosure open-target operational
 bundle alias roster is fixed. -/
@@ -37827,7 +37873,18 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate] := by
   rfl
 
 /-- The theorem-name terminal kernel-only nonclosure open-target operational
@@ -37835,7 +37892,7 @@ bundle alias roster has the expected size. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements.length =
-      2 := by
+      13 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name terminal
@@ -37845,10 +37902,33 @@ def
     Prop :=
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements.length =
-      2 /\
-    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate /\
+                    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                      OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatementRosterCertificate /\
+                            CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate
 
 /-- The theorem-name terminal kernel-only nonclosure open-target operational
 bundle alias has a fixed statement roster. -/
@@ -37859,7 +37939,31 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_named_current
     (And.intro
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_length_current
-      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_bundle_certificate)
+      (And.intro
+        completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_bundle_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_statement_roster_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_current_gate_status_certificate
+                (And.intro
+                  completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_current_open_target_gate_status_certificate
+                    (And.intro
+                      completePaperSemanticKernelOnly_current_open_target_exit_certificate
+                      (And.intro
+                        open_semantic_target_surface_frontier_nonclosure_certificate
+                        (And.intro
+                          open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+                          (And.intro
+                            completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_statement_roster_certificate
+                            (And.intro
+                              completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_gate_status_statement_roster_certificate
+                              completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate)))))))))))))
 
 /-- Supplemental gate: compact terminal/route-obstruction exit bundle.  This
 keeps the terminal capstone factored while requiring the current obstruction
