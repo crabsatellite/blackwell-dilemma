@@ -5045,11 +5045,26 @@ def main() -> int:
         "openSemanticTargetIdObstructionMapObstructionBundles_named_current"
     )
     print(
-        "open_semantic_target_id_obstruction_map_obstruction_bundle_terms_checked=2"
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_entries_checked=2"
     )
     print(
-        "open_semantic_target_id_obstruction_map_obstruction_bundle_terms_proof="
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_entries_proof="
         "openSemanticTargetIdObstructionMapObstructionBundles_length_current"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms="
+        "openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms_proof="
+        "openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_named_current"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms_checked=6"
+    )
+    print(
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms_count_proof="
+        "openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_length_current"
     )
     print(
         "open_semantic_target_id_obstruction_map_target_obstructions="
@@ -5084,7 +5099,7 @@ def main() -> int:
         "openSemanticTargetIdObstructionMapObstructionProjectionStatements_named_current"
     )
     print(
-        "open_semantic_target_id_obstruction_map_obstruction_projection_statement_terms_checked=6"
+        "open_semantic_target_id_obstruction_map_obstruction_projection_statement_terms_checked=8"
     )
     print(
         "open_semantic_target_id_obstruction_map_obstruction_projection_statement_terms_proof="
@@ -13651,10 +13666,23 @@ def main() -> int:
             "open_semantic_target_id_obstruction_map_obstruction_bundles_proof="
             "openSemanticTargetIdObstructionMapObstructionBundles_named_current"
         ),
-        "open_semantic_target_id_obstruction_map_obstruction_bundle_terms_checked=2",
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_entries_checked=2",
         (
-            "open_semantic_target_id_obstruction_map_obstruction_bundle_terms_proof="
+            "open_semantic_target_id_obstruction_map_obstruction_bundle_entries_proof="
             "openSemanticTargetIdObstructionMapObstructionBundles_length_current"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms="
+            "openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms"
+        ),
+        (
+            "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms_proof="
+            "openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_named_current"
+        ),
+        "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms_checked=6",
+        (
+            "open_semantic_target_id_obstruction_map_obstruction_bundle_atomic_terms_count_proof="
+            "openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_length_current"
         ),
         (
             "open_semantic_target_id_obstruction_map_target_obstructions="
@@ -13689,7 +13717,7 @@ def main() -> int:
             "openSemanticTargetIdObstructionMapObstructionProjectionStatements_named_current"
         ),
         (
-            "open_semantic_target_id_obstruction_map_obstruction_projection_statement_terms_checked=6"
+            "open_semantic_target_id_obstruction_map_obstruction_projection_statement_terms_checked=8"
         ),
         (
             "open_semantic_target_id_obstruction_map_obstruction_projection_statement_terms_proof="

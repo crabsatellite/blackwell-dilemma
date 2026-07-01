@@ -32887,6 +32887,36 @@ theorem openSemanticTargetIdObstructionMapObstructionBundles_length_current :
     openSemanticTargetIdObstructionMapObstructionBundles.length =
       paperSemanticOpenCount := rfl
 
+/-- The atomic obstruction terms carried by the ID-indexed obstruction-map
+bundle column. -/
+def openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms : List Prop :=
+  [Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute]
+
+/-- Build gate: the ID-indexed obstruction-map bundle column carries exactly
+the six atomic obstruction terms used by the two open-target bundles. -/
+theorem
+    openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_named_current :
+    openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] :=
+  rfl
+
+/-- Build gate: the ID-indexed obstruction-map bundle column contributes six
+atomic obstruction terms. -/
+theorem
+    openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_length_current :
+    openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+      6 := rfl
+
 /-- Target-obstruction projection represented by the ID-indexed obstruction
 map. -/
 def openSemanticTargetIdObstructionMapTargetObstructions : List Prop :=
@@ -32939,6 +32969,15 @@ def openSemanticTargetIdObstructionMapObstructionProjectionStatements :
           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
    openSemanticTargetIdObstructionMapObstructionBundles.length =
       paperSemanticOpenCount,
+   openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+      6,
    openSemanticTargetIdObstructionMapTargetObstructions =
       openSemanticTargetKernelSurfaceTargetObstructions,
    openSemanticTargetIdObstructionMapTargetRouteObstructions =
@@ -32960,6 +32999,15 @@ theorem
               Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
        openSemanticTargetIdObstructionMapObstructionBundles.length =
           paperSemanticOpenCount,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not Part6NondegenerateFeasibleRepairRoute,
+           Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+           Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+          6,
        openSemanticTargetIdObstructionMapTargetObstructions =
           openSemanticTargetKernelSurfaceTargetObstructions,
        openSemanticTargetIdObstructionMapTargetRouteObstructions =
@@ -32968,12 +33016,12 @@ theorem
           openSemanticTargetKernelSurfaceClosureRouteObstructions,
        OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate] := rfl
 
-/-- Build gate: the obstruction-projection statement roster has six
+/-- Build gate: the obstruction-projection statement roster has eight
 statements. -/
 theorem
     openSemanticTargetIdObstructionMapObstructionProjectionStatements_length_current :
     openSemanticTargetIdObstructionMapObstructionProjectionStatements.length =
-      6 := rfl
+      8 := rfl
 
 /-- Build-gated obstruction-projection certificate for the ID-indexed
 obstruction map. -/
@@ -32988,6 +33036,15 @@ def OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate :
           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
   openSemanticTargetIdObstructionMapObstructionBundles.length =
       paperSemanticOpenCount /\
+  openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+  openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+      6 /\
   openSemanticTargetIdObstructionMapTargetObstructions =
       openSemanticTargetKernelSurfaceTargetObstructions /\
   openSemanticTargetIdObstructionMapTargetRouteObstructions =
@@ -33003,6 +33060,8 @@ theorem open_semantic_target_id_obstruction_map_obstruction_projection_certifica
   exact ⟨
     openSemanticTargetIdObstructionMapObstructionBundles_named_current,
     openSemanticTargetIdObstructionMapObstructionBundles_length_current,
+    openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_named_current,
+    openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_length_current,
     openSemanticTargetIdObstructionMapTargetObstructions_eq_kernel_surface_current,
     openSemanticTargetIdObstructionMapTargetRouteObstructions_eq_kernel_surface_current,
     openSemanticTargetIdObstructionMapClosureRouteObstructions_eq_kernel_surface_current,
@@ -33012,7 +33071,7 @@ theorem open_semantic_target_id_obstruction_map_obstruction_projection_certifica
 alignment of the ID-indexed obstruction map. -/
 def OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate :
     Prop :=
-  openSemanticTargetIdObstructionMapObstructionProjectionStatements =
+    openSemanticTargetIdObstructionMapObstructionProjectionStatements =
       [openSemanticTargetIdObstructionMapObstructionBundles =
           [Not Part6LatticeEmbeddingSemanticKernelTarget /\
               Not Part6NondegenerateFeasibleRepairRoute /\
@@ -33022,6 +33081,15 @@ def OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertif
               Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
        openSemanticTargetIdObstructionMapObstructionBundles.length =
           paperSemanticOpenCount,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not Part6NondegenerateFeasibleRepairRoute,
+           Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+           Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+          6,
        openSemanticTargetIdObstructionMapTargetObstructions =
           openSemanticTargetKernelSurfaceTargetObstructions,
        openSemanticTargetIdObstructionMapTargetRouteObstructions =
@@ -33030,7 +33098,7 @@ def OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertif
           openSemanticTargetKernelSurfaceClosureRouteObstructions,
        OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate] /\
     openSemanticTargetIdObstructionMapObstructionProjectionStatements.length =
-      6 /\
+      8 /\
     OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate
 
 /-- The ID-indexed obstruction-map obstruction-projection alignment has a fixed
