@@ -46947,6 +46947,164 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_required_closure_input_seal_certificate)
 
+/-- Terminal seal: the topo open target has a concrete current repair witness,
+and the same first-edge witness is kernel-separated from support-surface
+closing. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate /\
+      FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate /\
+        FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatementRosterCertificate /\
+          RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+            firstEdgeOpenGiantClosedTopoLossRepairedBridge_current /\
+            Not
+              (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+                firstEdgeOpenGiantClosedTopoLossRepairedBridge_current) /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+                RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+                  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                      openSemanticTargetIds =
+                        ["theorem_4_1_part6_lattice_embedding",
+                         "topo_cluster_random_supercritical_z2"] /\
+                        paperSemanticOpenCount = 2 /\
+                          (CompletePaperSemanticKernelOnly <-> False) /\
+                            Not CompletePaperSemanticKernelOnly
+
+/-- The terminal first-edge repair/not-closing seal is inhabited by current
+kernel-only certificates. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_first_edge_repair_not_closing_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_required_closure_input_seal_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_required_closure_input_seal_statement_roster_certificate
+      (And.intro
+        firstEdge_repaired_bridge_support_surface_repair_not_closing_certificate
+        (And.intro
+          firstEdge_repaired_bridge_support_surface_repair_not_closing_statement_roster_certificate
+          (And.intro
+            firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_support_surface_repair
+            (And.intro
+              (not_randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+                firstEdgeOpenGiantClosedTopoLossRepairedBridge_current)
+              (And.intro
+                randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current
+                (And.intro
+                  random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate
+                  (And.intro
+                    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+                    (And.intro
+                      not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+                      (And.intro
+                        openSemanticTargetIds_current
+                        (And.intro
+                          paperSemanticOpenCount_current
+                          (And.intro
+                            completePaperSemanticKernelOnly_iff_false_current
+                            completePaperSemanticKernelOnly_notYet))))))))))))
+
+/-- Statement roster for the terminal first-edge repair/not-closing seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate,
+   FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+   FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatementRosterCertificate,
+   RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+   Not
+    (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal first-edge repair/not-closing seal roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate,
+       FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+       FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal first-edge repair/not-closing seal has fifteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements.length =
+      15 := rfl
+
+/-- Build-gated statement roster certificate for the terminal first-edge
+repair/not-closing seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate,
+       FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+       FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements.length =
+      15 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate
+
+/-- The terminal first-edge repair/not-closing seal has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_first_edge_repair_not_closing_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_first_edge_repair_not_closing_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

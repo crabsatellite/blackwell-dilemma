@@ -18878,6 +18878,113 @@ theorem random_supercritical_z2_topo_cluster_support_surface_closing_route_noncl
     random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate,
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate⟩
 
+/-- Concrete current-boundary certificate: the finite first-edge repaired
+bridge inhabits the repaired support surface, but the same bridge is not a
+support-surface closing witness. -/
+def FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate :
+    Prop :=
+  RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current /\
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current) /\
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current) /\
+    Not
+      (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current) /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate
+
+theorem firstEdge_repaired_bridge_support_surface_repair_not_closing_certificate :
+    FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate := by
+  exact ⟨
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_support_surface_repair,
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_giant_loss_paper_closing,
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current_not_full_paper_closing_support,
+    not_randomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
+    random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
+    random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate⟩
+
+/-- Statement roster for the first-edge repaired-bridge repair/not-closing
+boundary certificate. -/
+def firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements :
+    List Prop :=
+  [FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+   RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+    firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+   Not
+    (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+   Not
+    (RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+   Not
+    (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+      firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate]
+
+/-- Build gate: the first-edge repair/not-closing roster is fixed. -/
+theorem firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements_named_current :
+    firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements =
+      [FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+       RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate] := rfl
+
+/-- Build gate: the first-edge repair/not-closing roster has eight statements. -/
+theorem firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements_length_current :
+    firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements.length =
+      8 := rfl
+
+/-- Build-gated statement roster certificate for the first-edge
+repair/not-closing boundary. -/
+def FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatementRosterCertificate :
+    Prop :=
+  firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements =
+      [FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+       RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceRepair
+        firstEdgeOpenGiantClosedTopoLossRepairedBridge_current,
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeGiantLossPaperClosing
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeFullPaperClosingSupport
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       Not
+        (RandomSupercriticalZ2TopoClusterRepairedBridgeSupportSurfaceClosingRoute
+          firstEdgeOpenGiantClosedTopoLossRepairedBridge_current),
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate] /\
+    firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements.length =
+      8 /\
+    FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate
+
+theorem firstEdge_repaired_bridge_support_surface_repair_not_closing_statement_roster_certificate :
+    FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatementRosterCertificate := by
+  exact ⟨
+    firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements_named_current,
+    firstEdgeRepairedBridgeSupportSurfaceRepairNotClosingStatements_length_current,
+    firstEdge_repaired_bridge_support_surface_repair_not_closing_certificate⟩
+
 /-- The repaired random-supercritical bridge cannot be discharged by the current
 full-reach complement diagnostic family. -/
 theorem not_random_supercritical_z2_topo_cluster_repaired_bridge_full_reach_diagnostic :
@@ -19036,6 +19143,7 @@ def RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate : Prop :=
     RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
     RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate /\
     RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+    FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate /\
     RandomSupercriticalZ2TopoClusterRepairedBridgeDiagnosticObstructionCertificate /\
     FirstEdgeGiantStochasticTopoLossPositiveRegressionCertificate /\
     FirstEdgeGiantStochasticTopoLossNotRandomSupercriticalZ2BridgeCertificate /\
@@ -19309,6 +19417,7 @@ theorem random_supercritical_z2_topo_cluster_current_frontier_certificate :
     random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
     random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate,
     random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate,
+    firstEdge_repaired_bridge_support_surface_repair_not_closing_certificate,
     random_supercritical_z2_topo_cluster_repaired_bridge_diagnostic_obstruction_certificate,
     firstEdgeGiantStochasticTopoLossData_positive_regression_certificate,
     firstEdgeGiantStochasticTopoLossData_not_random_supercritical_z2_bridge_certificate,
