@@ -42200,14 +42200,18 @@ def
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate /\
-      OpenTargetRepairFrontierPairCertificate /\
-        OpenTargetRepairFrontierPairStatementRosterCertificate /\
-          CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate /\
-              OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate /\
-                OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate /\
-                  (CompletePaperSemanticKernelOnly <-> False) /\
-                    Not CompletePaperSemanticKernelOnly
+      CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9 /\
+          OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate /\
+            OpenTargetRepairFrontierPairCertificate /\
+              OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate /\
+                    OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate /\
+                      OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate /\
+                        (CompletePaperSemanticKernelOnly <-> False) /\
+                          Not CompletePaperSemanticKernelOnly
 
 /-- The route-source terminal capstone obstruction-map audit certificate is
 machine checked. -/
@@ -42219,20 +42223,26 @@ theorem
     (And.intro
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_audit_statement_roster_certificate
       (And.intro
-        open_target_repair_frontier_pair_certificate
+        completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_statement_roster_certificate
         (And.intro
-          open_target_repair_frontier_pair_statement_roster_certificate
+          completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_length_current
           (And.intro
-            completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate
+            open_target_route_source_open_target_nonclosure_bundle_row_statement_roster_certificate
             (And.intro
-              completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate
+              open_target_repair_frontier_pair_certificate
               (And.intro
-                open_semantic_target_id_obstruction_map_obstruction_projection_certificate
+                open_target_repair_frontier_pair_statement_roster_certificate
                 (And.intro
-                  open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate
+                  completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate
                   (And.intro
-                    completePaperSemanticKernelOnly_iff_false_current
-                    completePaperSemanticKernelOnly_notYet))))))))
+                    completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate
+                    (And.intro
+                      open_semantic_target_id_obstruction_map_obstruction_projection_certificate
+                      (And.intro
+                        open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate
+                        (And.intro
+                          completePaperSemanticKernelOnly_iff_false_current
+                          completePaperSemanticKernelOnly_notYet)))))))))))
 
 /-- Statement roster for the route-source terminal capstone obstruction-map
 audit certificate. -/
@@ -42242,11 +42252,16 @@ def
   [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+      9,
+   OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
    OpenTargetRepairFrontierPairCertificate,
    OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
    OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
    CompletePaperSemanticKernelOnly <-> False,
    Not CompletePaperSemanticKernelOnly]
 
@@ -42258,20 +42273,25 @@ theorem
       [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
        OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
 /-- Build gate: the route-source terminal capstone obstruction-map audit roster
-has ten statements. -/
+has fourteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements.length =
-      10 := rfl
+      14 := rfl
 
 /-- Build-gated statement roster certificate for the route-source terminal
 capstone obstruction-map audit certificate. -/
@@ -42282,15 +42302,20 @@ def
       [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
        OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements.length =
-      10 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate
 
 /-- The route-source terminal capstone obstruction-map audit certificate has a
