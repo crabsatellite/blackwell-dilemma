@@ -43574,6 +43574,259 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_transition_certificate)
 
+/-- Target-transition criterion for the closure-candidate package.  It separates
+three claims: sufficient inputs imply exact inputs, exact inputs imply both
+remaining semantic targets, and complete-paper status additionally requires the
+ledger transition to zero open targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatementRosterCertificate /\
+      ((Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+      ((Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+      ((Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+      ((Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        paperSemanticOpenCount = 0 ->
+          CompletePaperSemanticKernelOnly /\
+            Part6LatticeEmbeddingSemanticKernelTarget /\
+            TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+      ((Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        paperSemanticOpenCount = 0 ->
+          CompletePaperSemanticKernelOnly /\
+            Part6LatticeEmbeddingSemanticKernelTarget /\
+            TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+      Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+      Not (Part6LatticeEmbeddingExactClosureInput /\
+        TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+      Not (Part6LatticeEmbeddingClosureInput /\
+        TopoClusterRandomSupercriticalZ2ClosureInput) /\
+      Not CompletePaperSemanticKernelOnly
+
+/-- The target-transition criterion is machine checked from the existing
+sufficient/exact input projections and the current open-target obstructions. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_transition_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_transition_statement_roster_certificate
+      (And.intro
+        (by
+          intro hinputs
+          exact And.intro
+            (part6_lattice_embedding_semantic_kernel_target_of_closure_input
+              hinputs.left)
+            (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+              hinputs.right))
+        (And.intro
+          (by
+            intro hinputs
+            exact And.intro
+              (part6_lattice_embedding_exact_closure_input_of_closure_input
+                hinputs.left)
+              (topo_cluster_random_supercritical_z2_exact_closure_input_of_closure_input
+                hinputs.right))
+          (And.intro
+            (by
+              intro hinputs
+              exact And.intro
+                (part6_lattice_embedding_semantic_kernel_target_of_exact_closure_input
+                  hinputs.left)
+                (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_exact_closure_input
+                  hinputs.right))
+            (And.intro
+              (by
+                intro hinputs hzero
+                exact And.intro
+                  ((completePaperSemanticKernelOnly_iff_no_open_targets).mpr
+                    hzero)
+                  (And.intro
+                    (part6_lattice_embedding_semantic_kernel_target_of_exact_closure_input
+                      hinputs.left)
+                    (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_exact_closure_input
+                      hinputs.right)))
+              (And.intro
+                (by
+                  intro hinputs hzero
+                  exact And.intro
+                    ((completePaperSemanticKernelOnly_iff_no_open_targets).mpr
+                      hzero)
+                    (And.intro
+                      (part6_lattice_embedding_semantic_kernel_target_of_closure_input
+                        hinputs.left)
+                      (topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input
+                        hinputs.right)))
+                (And.intro
+                  (by
+                    intro htargets
+                    exact part6_lattice_embedding_semantic_kernel_target_notYet
+                      htargets.left)
+                  (And.intro
+                    (by
+                      intro hinputs
+                      exact part6_lattice_embedding_exact_closure_input_notYet
+                        hinputs.left)
+                    (And.intro
+                      (by
+                        intro hinputs
+                        exact part6_lattice_embedding_closure_input_notYet
+                          hinputs.left)
+                      completePaperSemanticKernelOnly_notYet)))))))))
+
+/-- Statement roster for the closure-candidate target-transition criterion. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatementRosterCertificate,
+   (Part6LatticeEmbeddingClosureInput /\
+      TopoClusterRandomSupercriticalZ2ClosureInput) ->
+    Part6LatticeEmbeddingSemanticKernelTarget /\
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   (Part6LatticeEmbeddingClosureInput /\
+      TopoClusterRandomSupercriticalZ2ClosureInput) ->
+    Part6LatticeEmbeddingExactClosureInput /\
+      TopoClusterRandomSupercriticalZ2ExactClosureInput,
+   (Part6LatticeEmbeddingExactClosureInput /\
+      TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+    Part6LatticeEmbeddingSemanticKernelTarget /\
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   (Part6LatticeEmbeddingExactClosureInput /\
+      TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+    paperSemanticOpenCount = 0 ->
+      CompletePaperSemanticKernelOnly /\
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   (Part6LatticeEmbeddingClosureInput /\
+      TopoClusterRandomSupercriticalZ2ClosureInput) ->
+    paperSemanticOpenCount = 0 ->
+      CompletePaperSemanticKernelOnly /\
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+        TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+     TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+   Not (Part6LatticeEmbeddingExactClosureInput /\
+     TopoClusterRandomSupercriticalZ2ExactClosureInput),
+   Not (Part6LatticeEmbeddingClosureInput /\
+     TopoClusterRandomSupercriticalZ2ClosureInput),
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the closure-candidate target-transition roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatementRosterCertificate,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       (Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       (Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        paperSemanticOpenCount = 0 ->
+          CompletePaperSemanticKernelOnly /\
+            Part6LatticeEmbeddingSemanticKernelTarget /\
+            TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        paperSemanticOpenCount = 0 ->
+          CompletePaperSemanticKernelOnly /\
+            Part6LatticeEmbeddingSemanticKernelTarget /\
+            TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+         TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       Not (Part6LatticeEmbeddingClosureInput /\
+         TopoClusterRandomSupercriticalZ2ClosureInput),
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the closure-candidate target-transition roster has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the closure-candidate
+target-transition criterion. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatementRosterCertificate,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       (Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        Part6LatticeEmbeddingSemanticKernelTarget /\
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       (Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        paperSemanticOpenCount = 0 ->
+          CompletePaperSemanticKernelOnly /\
+            Part6LatticeEmbeddingSemanticKernelTarget /\
+            TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        paperSemanticOpenCount = 0 ->
+          CompletePaperSemanticKernelOnly /\
+            Part6LatticeEmbeddingSemanticKernelTarget /\
+            TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+         TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       Not (Part6LatticeEmbeddingClosureInput /\
+         TopoClusterRandomSupercriticalZ2ClosureInput),
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate
+
+/-- The closure-candidate target-transition criterion has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
