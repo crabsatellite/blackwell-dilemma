@@ -44319,6 +44319,199 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_field_output_alignment_certificate⟩
 
+/-- Paper-label alignment capstone for the two-key closure boundary.  This
+connects the latest two-key field-output alignment to the terminal paper-label,
+id-paper-label, obstruction-projection, obstruction-bundle, and all-view
+nonclosure packages. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate /\
+                            CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate /\
+                              openSemanticTargetIdObstructionMapIdPaperLabels =
+                                openSemanticTargetKernelSurfaceIdPaperLabels /\
+                              openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+                                openSemanticTargets.map
+                                  (fun target => (target.id, target.paperLabel)) /\
+                              openSemanticTargetKernelSurfaceIdPaperLabels =
+                                openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+                              openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+                                openSemanticTargetIdObstructionMapObstructionBundles /\
+                              openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+                                openSemanticTargetIdPaperLabelObstructionMapObstructionBundles /\
+                              paperSemanticOpenCount = 2 /\
+                              Not (paperSemanticOpenCount = 0) /\
+                              (CompletePaperSemanticKernelOnly <-> False) /\
+                              Not CompletePaperSemanticKernelOnly
+
+/-- The paper-label and obstruction-map views are aligned with the same two-key
+nonclosure boundary as the field-output rosters. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_field_output_alignment_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_field_output_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_paper_label_projection_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_label_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_label_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_id_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_field_output_id_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_obstruction_projection_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_obstruction_bundle_view_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_all_view_nonclosure_statement_roster_certificate,
+    openSemanticTargetIdObstructionMapIdPaperLabels_current,
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current,
+    openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_eq_id_obstruction_map_current,
+    openSemanticTargetPaperLabelObstructionMapObstructionBundles_eq_id_paper_label_obstruction_map_current,
+    paperSemanticOpenCount_current,
+    (by
+      intro hzero
+      exact (by decide : (2 : Nat) ≠ 0)
+        (paperSemanticOpenCount_current.symm.trans hzero)),
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the two-key paper-label alignment capstone. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+    openSemanticTargetKernelSurfaceIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+    openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+    openSemanticTargetIdObstructionMapObstructionBundles,
+   openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+   paperSemanticOpenCount = 2,
+   Not (paperSemanticOpenCount = 0),
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the two-key paper-label alignment roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+        openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+        openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+        openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the two-key paper-label alignment roster has twenty-four
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements.length =
+      24 := rfl
+
+/-- Build-gated statement roster certificate for the two-key paper-label
+alignment capstone. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyFieldOutputAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperLabelProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputLabelNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalFieldOutputIdNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionProjectionNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalAllViewNonclosureStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+        openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+        openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+        openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements.length =
+      24 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentCertificate
+
+/-- The two-key paper-label alignment capstone has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyPaperLabelAlignmentStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_paper_label_alignment_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
