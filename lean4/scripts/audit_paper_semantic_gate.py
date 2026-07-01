@@ -5857,7 +5857,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger_statement_terms_checked=2"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger_statement_terms_checked=7"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger_statement_terms_proof="
