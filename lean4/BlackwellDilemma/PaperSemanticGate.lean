@@ -37350,16 +37350,24 @@ terminal certificate conjunction. -/
 theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_gate_status :
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+      OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
       CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate := by
   exact And.intro
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
-    completePaperSemanticKernelOnly_current_open_target_gate_status_certificate
+    (And.intro
+      open_semantic_target_surface_frontier_nonclosure_certificate
+      (And.intro
+        open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+        completePaperSemanticKernelOnly_current_open_target_gate_status_certificate))
 
 /-- Named certificate for the terminal kernel-only nonclosure/open-target
 gate-status bridge. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate
 
 /-- The terminal kernel-only nonclosure/open-target gate-status bridge is
@@ -37375,6 +37383,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate]
 
 /-- Build gate: the terminal kernel-only nonclosure/open-target gate-status
@@ -37384,14 +37394,16 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate] := rfl
 
 /-- Build gate: the terminal kernel-only nonclosure/open-target gate-status
-roster has three statements. -/
+roster has five statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements.length =
-      3 := rfl
+      5 := rfl
 
 /-- Build-gated statement roster certificate for the terminal kernel-only
 nonclosure/open-target gate-status bridge. -/
@@ -37400,9 +37412,11 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetGateStatusCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusStatements.length =
-      3 /\
+      5 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetGateStatusCertificate
 
 /-- The terminal kernel-only nonclosure/open-target gate-status bridge has a
