@@ -3632,6 +3632,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statements="
+        "completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_terms_checked=32"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_certificate_proof="
+        "completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
         "semantic_target_current_routed_exit_ids="
         "openSemanticTargetCurrentRoutedExitIds"
     )
@@ -11729,6 +11760,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_route_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statements="
+            "completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_terms_checked=32"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_certificate_proof="
+            "completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate"
         ),
         (
             "semantic_target_current_routed_exit_ids="
