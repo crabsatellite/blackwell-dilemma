@@ -38083,6 +38083,68 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_certificate)
 
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure audit bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure audit bundle
+is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only nonclosure audit
+bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure audit bundle alias roster
+is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure audit bundle alias roster
+has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure audit bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure audit bundle alias has a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureAuditBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_audit_bundle_certificate)
+
 /-- Supplemental gate: public-evidence terminal bundle.  This keeps the
 paper-facing terminal capstone, its fixed statement roster, gate status,
 open-target final ledger, paired repair frontier, final status, and final
@@ -38198,6 +38260,68 @@ theorem
     (And.intro
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_certificate)
+
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure public-evidence bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure
+public-evidence bundle is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only nonclosure
+public-evidence bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure public-evidence bundle
+alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure public-evidence bundle
+alias roster has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure public-evidence bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure public-evidence bundle
+alias has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_bundle_certificate)
 
 /-- Supplemental gate: route-source terminal bridge.  This keeps the named
 route-source/top-level bridge next to the terminal kernel-only nonclosure
@@ -38568,6 +38692,68 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_certificate)
 
+/-- Exact theorem-name alias certificate for the route-source terminal
+capstone audit bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditCertificate
+
+/-- The theorem-name alias for the route-source terminal capstone audit bundle
+is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_certificate
+
+/-- Statement roster for the theorem-name route-source terminal capstone audit
+bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatementRosterCertificate]
+
+/-- The theorem-name route-source terminal capstone audit bundle alias roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name route-source terminal capstone audit bundle alias roster
+has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name route-source
+terminal capstone audit bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleCertificate
+
+/-- The theorem-name route-source terminal capstone audit bundle alias has a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_certificate)
+
 /-- Supplemental gate: route-source terminal capstone public-evidence bundle.
 This keeps the route-source terminal capstone, its fixed statement roster, gate
 status, open-target final ledger, paired open-target repair frontier, final
@@ -38693,6 +38879,69 @@ theorem
     (And.intro
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_certificate)
+
+/-- Exact theorem-name alias certificate for the route-source terminal capstone
+public-evidence bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceCertificate
+
+/-- The theorem-name alias for the route-source terminal capstone
+public-evidence bundle is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_certificate
+
+/-- Statement roster for the theorem-name route-source terminal capstone
+public-evidence bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate]
+
+/-- The theorem-name route-source terminal capstone public-evidence bundle alias
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name route-source terminal capstone public-evidence bundle alias
+roster has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name route-source
+terminal capstone public-evidence bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleCertificate
+
+/-- The theorem-name route-source terminal capstone public-evidence bundle alias
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_bundle_certificate)
 
 /-- Named audit certificate for the route-source terminal capstone
 public-evidence bundle. -/
