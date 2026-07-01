@@ -46634,6 +46634,150 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_repair_route_roster_seal_certificate)
 
+/-- Current boundary-vector seal for the two remaining open targets.  This
+records the exact asymmetric state: the Part 6 repair route is kernel-refuted,
+while the topo support-surface repair route is inhabited but still does not
+close the named full/boxed topo routes. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealStatementRosterCertificate /\
+      openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"] /\
+        openSemanticTargetKernelSurfaceIdPaperLabels =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")] /\
+          paperSemanticOpenCount = 2 /\
+            Not Part6NondegenerateFeasibleRepairRoute /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                    (CompletePaperSemanticKernelOnly <-> False) /\
+                      Not CompletePaperSemanticKernelOnly
+
+/-- The terminal endpoint exposes the exact current boundary vector for both
+remaining open targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_current_boundary_vector_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_repair_route_roster_seal_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_repair_route_roster_seal_statement_roster_certificate
+      (And.intro
+        openSemanticTargetIds_current
+        (And.intro
+          openSemanticTargetKernelSurfaceIdPaperLabels_current
+          (And.intro
+            paperSemanticOpenCount_current
+            (And.intro
+              not_part6_nondegenerate_feasible_repair_route_current
+              (And.intro
+                randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current
+                (And.intro
+                  not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+                  (And.intro
+                    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+                    (And.intro
+                      completePaperSemanticKernelOnly_iff_false_current
+                      completePaperSemanticKernelOnly_notYet)))))))))
+
+/-- Statement roster for the dual open-target current-boundary vector seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealStatementRosterCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")],
+   paperSemanticOpenCount = 2,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the dual open-target current-boundary vector seal is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       paperSemanticOpenCount = 2,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the dual open-target current-boundary vector seal has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the dual open-target
+current-boundary vector seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRepairRouteRosterSealStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       paperSemanticOpenCount = 2,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate
+
+/-- The dual open-target current-boundary vector seal has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_current_boundary_vector_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_current_boundary_vector_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
