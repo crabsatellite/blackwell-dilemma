@@ -25668,6 +25668,81 @@ theorem
       completePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatements_length_current
       completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate)
 
+/-- Row-level statement roster for the Part 6 conditional-projection and topo
+support-surface projection open-target nonclosure bundles. -/
+def openTargetProjectionOpenTargetNonclosureBundleRowStatements : List Prop :=
+  [Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleCertificate,
+   Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+   part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatements.length =
+     16,
+   TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleCertificate,
+   TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+   topoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatements.length =
+     16,
+   Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate /\
+     TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate]
+
+/-- Build gate: the projection open-target nonclosure row roster is fixed. -/
+theorem openTargetProjectionOpenTargetNonclosureBundleRowStatements_named_current :
+    openTargetProjectionOpenTargetNonclosureBundleRowStatements =
+      [Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+       part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatements.length =
+         16,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+       topoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatements.length =
+         16,
+       Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate /\
+         TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate] :=
+  rfl
+
+/-- Build gate: the projection open-target nonclosure row roster has eight
+statements. -/
+theorem openTargetProjectionOpenTargetNonclosureBundleRowStatements_length_current :
+    openTargetProjectionOpenTargetNonclosureBundleRowStatements.length =
+      8 := rfl
+
+/-- Build-gated row statement-roster certificate for the Part 6
+conditional-projection and topo support-surface projection open-target
+nonclosure bundles. -/
+def OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate :
+    Prop :=
+  openTargetProjectionOpenTargetNonclosureBundleRowStatements =
+      [Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+       part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatements.length =
+         16,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+       topoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatements.length =
+         16,
+       Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate /\
+         TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate] /\
+    openTargetProjectionOpenTargetNonclosureBundleRowStatements.length =
+      8 /\
+    Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate /\
+    TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate
+
+/-- The Part 6 conditional-projection and topo support-surface projection
+open-target nonclosure bundles have a fixed row-level statement roster. -/
+theorem
+    open_target_projection_open_target_nonclosure_bundle_row_statement_roster_certificate :
+    OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate := by
+  exact And.intro
+    openTargetProjectionOpenTargetNonclosureBundleRowStatements_named_current
+    (And.intro
+      openTargetProjectionOpenTargetNonclosureBundleRowStatements_length_current
+      (And.intro
+        part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statement_roster_certificate
+        (And.intro
+          topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_roster_certificate
+          completePaperSemanticKernelOnly_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate)))
+
 /-- Build gate: the current obstruction-source alignment layer, its
 target-derived field-payload/field-output obstruction sources, and both
 per-target routed-exit nonclosure bundles are checked together. -/
@@ -25713,7 +25788,8 @@ theorem
                                                 Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
                                                   TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate) /\
                         CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
-                          CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate := by
+                          CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+                            OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate := by
   exact ⟨
     completePaperSemanticKernelOnly_current_obstruction_source_alignment_certificate,
     completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate,
@@ -25726,7 +25802,8 @@ theorem
     part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle,
     topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle,
     completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate,
-    completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate⟩
+    completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate,
+    open_target_projection_open_target_nonclosure_bundle_row_statement_roster_certificate⟩
 
 /-- Named certificate for the obstruction-source/routed-exit open-target
 nonclosure bundle. -/
@@ -25773,7 +25850,8 @@ def
                                               Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
                                                 TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate) /\
                       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
-                        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate
+                        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+                          OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate
 
 /-- The obstruction-source/routed-exit open-target nonclosure bundle is
 available as a named certificate. -/
@@ -25817,7 +25895,8 @@ def
    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
    TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
-   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+   OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate]
 
 /-- The obstruction-source/routed-exit open-target nonclosure statement roster
 names the current build-gated components. -/
@@ -25853,7 +25932,8 @@ theorem
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
        TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate] := by
   rfl
 
 /-- The obstruction-source/routed-exit open-target nonclosure statement roster
@@ -25861,7 +25941,7 @@ has the expected size. -/
 theorem
     completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements.length =
-      30 := by
+      31 := by
   rfl
 
 /-- Build-gated statement roster certificate for the obstruction-source/routed
@@ -25899,9 +25979,10 @@ def
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
        TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements.length =
-      30 /\
+      31 /\
     CompletePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleCertificate
 
 /-- The obstruction-source/routed-exit open-target nonclosure bundle has a

@@ -3599,7 +3599,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=30"
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=31"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_proof="
@@ -3775,6 +3775,27 @@ def main() -> int:
     print(
         "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_roster_certificate_proof="
         "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
+        "open_target_projection_open_target_nonclosure_bundle_row_statements="
+        "openTargetProjectionOpenTargetNonclosureBundleRowStatements"
+    )
+    print(
+        "open_target_projection_open_target_nonclosure_bundle_row_statements_proof="
+        "openTargetProjectionOpenTargetNonclosureBundleRowStatements_named_current"
+    )
+    print("open_target_projection_open_target_nonclosure_bundle_row_statement_terms_checked=8")
+    print(
+        "open_target_projection_open_target_nonclosure_bundle_row_statement_terms_proof="
+        "openTargetProjectionOpenTargetNonclosureBundleRowStatements_length_current"
+    )
+    print(
+        "open_target_projection_open_target_nonclosure_bundle_row_statement_roster_certificate="
+        "OpenTargetProjectionOpenTargetNonclosureBundleRowStatementRosterCertificate"
+    )
+    print(
+        "open_target_projection_open_target_nonclosure_bundle_row_statement_roster_certificate_proof="
+        "open_target_projection_open_target_nonclosure_bundle_row_statement_roster_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statements="
@@ -12645,7 +12666,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=30"
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=31"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_proof="
