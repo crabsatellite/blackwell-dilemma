@@ -46394,6 +46394,137 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_part6_repair_route_roster_seal_certificate)
 
+/-- Topo support-surface repair terminal seal for the terminal endpoint.  This
+ties the terminal nonclosure seal to the currently inhabited topo repair route
+and its route/output nonclosure certificates. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatementRosterCertificate /\
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+              RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
+                TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+                  RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                        (CompletePaperSemanticKernelOnly <-> False) /\
+                          Not CompletePaperSemanticKernelOnly
+
+/-- The terminal endpoint is sealed against the topo support-surface repair
+route and its current nonclosure certificates. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_part6_repair_route_roster_seal_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_part6_repair_route_roster_seal_statement_roster_certificate
+      (And.intro
+        randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current
+        (And.intro
+          random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate
+          (And.intro
+            random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate
+            (And.intro
+              random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate
+              (And.intro
+                random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate
+                (And.intro
+                  topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+                  (And.intro
+                    random_supercritical_z2_topo_cluster_current_frontier_certificate
+                    (And.intro
+                      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+                      (And.intro
+                        not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+                        (And.intro
+                          completePaperSemanticKernelOnly_iff_false_current
+                          completePaperSemanticKernelOnly_notYet)))))))))))
+
+/-- Statement roster for the topo support-surface repair terminal seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatementRosterCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the topo support-surface repair terminal seal is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the topo support-surface repair terminal seal has fourteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements.length =
+      14 := rfl
+
+/-- Build-gated statement roster certificate for the topo support-surface
+repair terminal seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements.length =
+      14 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealCertificate
+
+/-- The topo support-surface repair terminal seal has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
