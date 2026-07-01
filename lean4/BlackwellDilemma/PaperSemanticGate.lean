@@ -38965,24 +38965,42 @@ theorem
               OpenTargetRepairFrontierPairStatementRosterCertificate /\
                 CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
                   (CompletePaperSemanticKernelOnly <-> False) /\
-                    Not CompletePaperSemanticKernelOnly := by
-  exact And.intro
-    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
-    (And.intro
-      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate
-      (And.intro
-        completePaperSemanticKernelOnly_current_gate_status_certificate
-        (And.intro
-          completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
-          (And.intro
-            open_target_repair_frontier_pair_certificate
-            (And.intro
-              open_target_repair_frontier_pair_statement_roster_certificate
-              (And.intro
-                completePaperSemanticKernelOnly_current_final_status_certificate
-                (And.intro
-                  completePaperSemanticKernelOnly_iff_false_current
-                  completePaperSemanticKernelOnly_notYet)))))))
+                    Not CompletePaperSemanticKernelOnly /\
+                      OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                        OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate /\
+                            CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate /\
+                              CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+                                CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate := by
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_gate_status_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+  constructor
+  · exact open_target_repair_frontier_pair_certificate
+  constructor
+  · exact open_target_repair_frontier_pair_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_final_status_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_iff_false_current
+  constructor
+  · exact completePaperSemanticKernelOnly_notYet
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_certificate
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_final_ledger_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_roster_certificate
 
 /-- Named certificate for the terminal public-evidence bundle. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate :
@@ -38995,7 +39013,13 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvid
             OpenTargetRepairFrontierPairStatementRosterCertificate /\
               CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
                 (CompletePaperSemanticKernelOnly <-> False) /\
-                  Not CompletePaperSemanticKernelOnly
+                  Not CompletePaperSemanticKernelOnly /\
+                    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                      OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate /\
+                            CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+                              CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate
 
 /-- The terminal public-evidence bundle certificate is machine checked. -/
 theorem
@@ -39015,7 +39039,13 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvid
    OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
    CompletePaperSemanticKernelOnly <-> False,
-   Not CompletePaperSemanticKernelOnly]
+   Not CompletePaperSemanticKernelOnly,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate]
 
 /-- Build gate: the terminal public-evidence bundle roster is fixed. -/
 theorem
@@ -39030,13 +39060,19 @@ theorem
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
        CompletePaperSemanticKernelOnly <-> False,
-       Not CompletePaperSemanticKernelOnly] := rfl
+       Not CompletePaperSemanticKernelOnly,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate] := rfl
 
-/-- Build gate: the terminal public-evidence bundle roster has ten statements. -/
+/-- Build gate: the terminal public-evidence bundle roster has sixteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements.length =
-      10 := rfl
+      16 := rfl
 
 /-- Build-gated statement roster certificate for the terminal public-evidence
 bundle. -/
@@ -39048,13 +39084,19 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvid
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
-       OpenTargetRepairFrontierPairCertificate,
-       OpenTargetRepairFrontierPairStatementRosterCertificate,
-       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
-       CompletePaperSemanticKernelOnly <-> False,
-       Not CompletePaperSemanticKernelOnly] /\
+        OpenTargetRepairFrontierPairCertificate,
+        OpenTargetRepairFrontierPairStatementRosterCertificate,
+        CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+        CompletePaperSemanticKernelOnly <-> False,
+        Not CompletePaperSemanticKernelOnly,
+        OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+        OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+        CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+        CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements.length =
-      10 /\
+      16 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate
 
 /-- The terminal public-evidence bundle has a fixed statement roster. -/
@@ -39087,7 +39129,23 @@ def
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate,
-   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+   OpenTargetRepairFrontierPairCertificate,
+   OpenTargetRepairFrontierPairStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate]
 
 /-- The theorem-name terminal kernel-only nonclosure public-evidence bundle
 alias roster is fixed. -/
@@ -39095,15 +39153,31 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate] := by
   rfl
 
 /-- The theorem-name terminal kernel-only nonclosure public-evidence bundle
-alias roster has the expected size. -/
+alias roster has eighteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements.length =
-      2 := by
+      18 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name terminal
@@ -39113,21 +39187,88 @@ def
     Prop :=
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate,
+       OpenTargetRepairFrontierPairCertificate,
+       OpenTargetRepairFrontierPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements.length =
-      2 /\
-    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate
+      18 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate /\
+                  OpenTargetRepairFrontierPairCertificate /\
+                    OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                        (CompletePaperSemanticKernelOnly <-> False) /\
+                          Not CompletePaperSemanticKernelOnly /\
+                            OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                              OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                                CompletePaperSemanticKernelOnlyCurrentGateStatusStatementRosterCertificate /\
+                                  CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerStatementRosterCertificate /\
+                                    CompletePaperSemanticKernelOnlyCurrentFinalStatusStatementRosterCertificate /\
+                                      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate
 
 /-- The theorem-name terminal kernel-only nonclosure public-evidence bundle
 alias has a fixed statement roster. -/
 theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_roster_certificate :
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatementRosterCertificate := by
-  exact And.intro
-    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_named_current
-    (And.intro
-      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_length_current
-      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_bundle_certificate)
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_named_current
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_length_current
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_bundle_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_public_evidence_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_gate_status_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+  constructor
+  · exact open_target_repair_frontier_pair_certificate
+  constructor
+  · exact open_target_repair_frontier_pair_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_final_status_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_iff_false_current
+  constructor
+  · exact completePaperSemanticKernelOnly_notYet
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_certificate
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_gate_status_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_final_ledger_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_final_status_statement_roster_certificate
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_roster_certificate
 
 /-- Supplemental gate: route-source terminal bridge.  This keeps the named
 route-source/top-level bridge next to the terminal kernel-only nonclosure

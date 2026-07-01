@@ -6322,7 +6322,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_checked=10"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_checked=16"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_proof="
@@ -6353,7 +6353,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_terms_checked=2"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_terms_checked=18"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_terms_proof="
@@ -14867,7 +14867,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_checked=10"
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_checked=16"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_statement_terms_proof="
@@ -14898,7 +14898,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosurePublicEvidenceBundleStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_terms_checked=2"
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_terms_checked=18"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_public_evidence_bundle_statement_terms_proof="
