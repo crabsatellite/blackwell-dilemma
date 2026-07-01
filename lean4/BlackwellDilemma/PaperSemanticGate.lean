@@ -16929,6 +16929,89 @@ theorem
     part6_lattice_embedding_closure_input_field_output_statement_roster_certificate,
     topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate⟩
 
+/-- Component statement roster for the target-specific detailed field-output
+statement rosters. -/
+def openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements :
+    List Prop :=
+  [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      openSemanticTargetIds,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      2,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate]
+
+/-- Build gate: the detailed field-output statement roster component list is
+fixed. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_named_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements =
+      [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] := rfl
+
+/-- Build gate: the detailed field-output statement roster component list has
+eight statements. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
+      8 := rfl
+
+/-- Build-gated statement-roster certificate for the detailed field-output
+statement roster package. -/
+def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements =
+      [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
+      8 /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate
+
+/-- The detailed field-output statement roster package has a fixed component
+statement roster. -/
+theorem
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_statement_roster_certificate :
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_named_current
+    (And.intro
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current
+      remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate)
+
 /-- Machine-facing field-output surface for each open semantic target. -/
 structure OpenSemanticTargetClosureInputFieldOutputSurface where
   id : String

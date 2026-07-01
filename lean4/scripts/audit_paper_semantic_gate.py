@@ -10196,7 +10196,7 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_field_output_full_ledger_alignment_statement_roster_certificate_proof="
         "completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate"
     )
-    print("semantic_target_closure_input_field_output_detailed_statement_roster_terms_checked=2")
+    print("semantic_target_closure_input_field_output_detailed_statement_roster_entries_checked=2")
     print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_length_proof="
         "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current"
@@ -10206,12 +10206,35 @@ def main() -> int:
         "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current"
     )
     print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_component_statements="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_component_statements_proof="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_named_current"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_component_statement_terms_checked=8"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_component_statement_terms_proof="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current"
+    )
+    print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_certificate="
         "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate"
     )
     print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof="
         "remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_statement_roster_certificate"
     )
     required_axiom_audit_decls = set(REQUIRED_AXIOM_AUDIT_DECLS)
     paper_semantic_theorems = set(paper_semantic_theorem_names(text))
@@ -15754,6 +15777,44 @@ def main() -> int:
         (
             "semantic_target_closure_input_field_output_detailed_statement_roster_id_paper_labels="
             + id_label_lines(detailed_statement_roster_id_label_pairs)
+        ),
+        "semantic_target_closure_input_field_output_detailed_statement_roster_entries_checked=2",
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_length_proof="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_rosters_proof="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_component_statements="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_component_statements_proof="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_named_current"
+        ),
+        "semantic_target_closure_input_field_output_detailed_statement_roster_component_statement_terms_checked=8",
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_component_statement_terms_proof="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_statement_roster_certificate"
         ),
         "public_manifest_paper_semantic_stdout_contains_missing=0",
     ]
