@@ -1446,6 +1446,11 @@ def readme_paper_semantic_counts(text: str) -> tuple[int, int] | None:
     return int(match.group(1)), int(match.group(2))
 
 
+README_DUAL_OBSTRUCTION_SOURCE_PUBLIC_EVIDENCE_AUDIT_SEAL_PHRASE = (
+    "dual open-target obstruction-source public-evidence audit seal"
+)
+
+
 def theorem_count(text: str, name: str) -> int:
     match = re.search(rf"theorem\s+{re.escape(name)}\s*:\s*[^=]+=\s*(\d+)", text)
     if not match:
@@ -11922,6 +11927,10 @@ def main() -> int:
     required_axiom_audit_count = len(required_axiom_audit_decls)
     readme_gate_counts = readme_paper_semantic_counts(lean_readme_text)
     readme_axiom_audit_count = readme_axiom_audit_required_count(lean_readme_text)
+    readme_has_dual_obstruction_source_public_evidence_audit_seal = (
+        README_DUAL_OBSTRUCTION_SOURCE_PUBLIC_EVIDENCE_AUDIT_SEAL_PHRASE
+        in lean_readme_text
+    )
     print(
         "semantic_target_readme_gate_counts="
         + (
@@ -11947,6 +11956,14 @@ def main() -> int:
     print(
         "semantic_target_readme_axiom_audit_prints_required_matches="
         + ("1" if readme_axiom_audit_count == required_axiom_audit_count else "0")
+    )
+    print(
+        "semantic_target_readme_dual_open_target_obstruction_source_public_evidence_audit_seal_mentioned="
+        + (
+            "1"
+            if readme_has_dual_obstruction_source_public_evidence_audit_seal
+            else "0"
+        )
     )
     public_manifest_required_lines = [
         f"semantic_targets_open={open_count}",
@@ -17920,6 +17937,14 @@ def main() -> int:
             "semantic_target_readme_axiom_audit_prints_required_matches="
             + ("1" if readme_axiom_audit_count == required_axiom_audit_count else "0")
         ),
+        (
+            "semantic_target_readme_dual_open_target_obstruction_source_public_evidence_audit_seal_mentioned="
+            + (
+                "1"
+                if readme_has_dual_obstruction_source_public_evidence_audit_seal
+                else "0"
+            )
+        ),
     ]
     public_manifest_complete_stdout_lines = [
         (
@@ -19477,6 +19502,11 @@ def main() -> int:
         failures.append(
             "lean4/README.md AxiomAudit required count "
             f"{readme_axiom_audit_count} != audit count {required_axiom_audit_count}"
+        )
+    if not readme_has_dual_obstruction_source_public_evidence_audit_seal:
+        failures.append(
+            "lean4/README.md missing dual open-target obstruction-source "
+            "public-evidence audit seal summary"
         )
 
     if open_count:
