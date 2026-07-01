@@ -46293,6 +46293,107 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_route_obstruction_pair_public_evidence_audit_certificate⟩
 
+/-- Part 6 repair-route roster seal for the terminal endpoint.  This ties the
+public-evidence terminal seal back to the bottom-level Part 6
+alpha/feasible-set repair-route roster, so the final nonclosure explanation
+mentions the exact kernel-checked repair-route certificate it depends on. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate /\
+      Part6NondegenerateFeasibleRepairRouteCertificate /\
+        Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate /\
+          part6NondegenerateFeasibleRepairRouteStatements.length = 15 /\
+            Not Part6NondegenerateFeasibleRepairRoute /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly
+
+/-- The terminal endpoint is sealed against the bottom-level Part 6
+repair-route roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_part6_repair_route_roster_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_route_obstruction_pair_public_evidence_audit_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_route_obstruction_pair_public_evidence_audit_statement_roster_certificate
+      (And.intro
+        part6_nondegenerate_feasible_repair_route_certificate
+        (And.intro
+          part6_nondegenerate_feasible_repair_route_statement_roster_certificate
+          (And.intro
+            part6NondegenerateFeasibleRepairRouteStatements_length_current
+            (And.intro
+              not_part6_nondegenerate_feasible_repair_route_current
+              (And.intro
+                completePaperSemanticKernelOnly_iff_false_current
+                completePaperSemanticKernelOnly_notYet))))))
+
+/-- Statement roster for the Part 6 repair-route roster terminal seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRouteCertificate,
+   Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
+   part6NondegenerateFeasibleRepairRouteStatements.length = 15,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the Part 6 repair-route roster terminal seal is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
+       part6NondegenerateFeasibleRepairRouteStatements.length = 15,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the Part 6 repair-route roster terminal seal has nine
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements.length =
+      9 := rfl
+
+/-- Build-gated statement roster certificate for the Part 6 repair-route roster
+terminal seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairPublicEvidenceAuditStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
+       part6NondegenerateFeasibleRepairRouteStatements.length = 15,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements.length =
+      9 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealCertificate
+
+/-- The Part 6 repair-route roster terminal seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_part6_repair_route_roster_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPart6RepairRouteRosterSealStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_part6_repair_route_roster_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
