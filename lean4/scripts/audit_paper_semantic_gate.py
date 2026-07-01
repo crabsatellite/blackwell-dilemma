@@ -10394,6 +10394,29 @@ def main() -> int:
         "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current"
     )
     print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_row_statements="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_row_statements_proof="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_named_current"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_terms_checked=9"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_terms_proof="
+        "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_length_current"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate="
+        "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate_proof="
+        "remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate"
+    )
+    print(
         "semantic_target_closure_input_field_output_detailed_statement_roster_certificate="
         "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate"
     )
@@ -16128,6 +16151,29 @@ def main() -> int:
         (
             "semantic_target_closure_input_field_output_detailed_statement_roster_component_statement_terms_proof="
             "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_row_statements="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_row_statements_proof="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_named_current"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_terms_checked=9"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_terms_proof="
+            "openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_length_current"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate="
+            "RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate"
+        ),
+        (
+            "semantic_target_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate_proof="
+            "remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate"
         ),
         (
             "semantic_target_closure_input_field_output_detailed_statement_roster_certificate="

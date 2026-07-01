@@ -17036,6 +17036,103 @@ theorem
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
       8 := rfl
 
+/-- Row-level statement roster for the target-specific detailed field-output
+statement rosters. -/
+def openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements :
+    List Prop :=
+  [openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      2,
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate]
+
+/-- Build gate: the detailed field-output row roster is fixed. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_named_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements =
+      [openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate] :=
+  rfl
+
+/-- Build gate: the detailed field-output row roster has nine statements. -/
+theorem
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_length_current :
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements.length =
+      9 := rfl
+
+/-- Build-gated row statement-roster certificate for the target-specific
+detailed field-output statement rosters. -/
+def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements =
+      [openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate] /\
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements.length =
+      9 /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate
+
+/-- The target-specific detailed field-output rosters have a fixed row-level
+statement roster. -/
+theorem
+    remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate :
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_named_current
+    (And.intro
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterRowStatements_length_current
+      remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate)
+
 /-- Build-gated statement-roster certificate for the detailed field-output
 statement roster package. -/
 def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate :
@@ -17058,7 +17155,8 @@ def RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterSt
        TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements.length =
       8 /\
-    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate
 
 /-- The detailed field-output statement roster package has a fixed component
 statement roster. -/
@@ -17069,7 +17167,9 @@ theorem
     openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_named_current
     (And.intro
       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterComponentStatements_length_current
-      remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate)
+      (And.intro
+        remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate
+        remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate))
 
 /-- Machine-facing field-output surface for each open semantic target. -/
 structure OpenSemanticTargetClosureInputFieldOutputSurface where
