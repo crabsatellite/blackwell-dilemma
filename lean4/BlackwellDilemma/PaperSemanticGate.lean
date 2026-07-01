@@ -43432,6 +43432,148 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_update_required_certificate)
 
+/-- Ledger-transition criterion for the closure-candidate package.  Candidate
+inputs can justify the mathematical targets, but the named complete-paper gate
+still changes only when the semantic ledger's open-count field changes to zero;
+the current ledger proves the opposite. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredStatementRosterCertificate /\
+      (paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly) /\
+      (CompletePaperSemanticKernelOnly -> paperSemanticOpenCount = 0) /\
+      ((Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly) /\
+      ((Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly) /\
+      Not (paperSemanticOpenCount = 0) /\
+      paperSemanticOpenCount = 2 /\
+      (CompletePaperSemanticKernelOnly <-> False) /\
+        Not CompletePaperSemanticKernelOnly
+
+/-- The closure-candidate transition criterion is machine checked: the only
+complete-paper transition criterion encoded here is the ledger update
+`paperSemanticOpenCount = 0`, while the current ledger remains at two. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_transition_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_update_required_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_update_required_statement_roster_certificate
+      (And.intro
+        (by
+          intro hzero
+          exact (completePaperSemanticKernelOnly_iff_no_open_targets).mpr hzero)
+        (And.intro
+          (by
+            intro hcomplete
+            exact (completePaperSemanticKernelOnly_iff_no_open_targets).mp hcomplete)
+          (And.intro
+            (by
+              intro _ hzero
+              exact (completePaperSemanticKernelOnly_iff_no_open_targets).mpr hzero)
+            (And.intro
+              (by
+                intro _ hzero
+                exact (completePaperSemanticKernelOnly_iff_no_open_targets).mpr hzero)
+              (And.intro
+                (by
+                  intro hzero
+                  exact (by decide : Not ((2 : Nat) = 0))
+                    (paperSemanticOpenCount_current.symm.trans hzero))
+                (And.intro
+                  paperSemanticOpenCount_current
+                  (And.intro
+                    completePaperSemanticKernelOnly_iff_false_current
+                    completePaperSemanticKernelOnly_notYet))))))))
+
+/-- Statement roster for the closure-candidate ledger-transition criterion. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredStatementRosterCertificate,
+   paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly -> paperSemanticOpenCount = 0,
+   (Part6LatticeEmbeddingClosureInput /\
+      TopoClusterRandomSupercriticalZ2ClosureInput) ->
+    paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+   (Part6LatticeEmbeddingExactClosureInput /\
+      TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+    paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+   Not (paperSemanticOpenCount = 0),
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the closure-candidate ledger-transition roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredStatementRosterCertificate,
+       paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly -> paperSemanticOpenCount = 0,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       (Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       Not (paperSemanticOpenCount = 0),
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the closure-candidate ledger-transition roster has eleven
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the closure-candidate
+ledger-transition criterion. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerUpdateRequiredStatementRosterCertificate,
+       paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly -> paperSemanticOpenCount = 0,
+       (Part6LatticeEmbeddingClosureInput /\
+          TopoClusterRandomSupercriticalZ2ClosureInput) ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       (Part6LatticeEmbeddingExactClosureInput /\
+          TopoClusterRandomSupercriticalZ2ExactClosureInput) ->
+        paperSemanticOpenCount = 0 -> CompletePaperSemanticKernelOnly,
+       Not (paperSemanticOpenCount = 0),
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionCertificate
+
+/-- The closure-candidate ledger-transition criterion has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_transition_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateLedgerTransitionStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_ledger_transition_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
