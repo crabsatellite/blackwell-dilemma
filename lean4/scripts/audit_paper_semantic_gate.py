@@ -3663,6 +3663,37 @@ def main() -> int:
         "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statement_roster_certificate"
     )
     print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statements="
+        "part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statements_proof="
+        "part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statement_terms_checked=16"
+    )
+    print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statement_terms_proof="
+        "part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_certificate="
+        "Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_certificate_proof="
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statement_roster_certificate="
+        "Part6LatticeEmbeddingConditionalProjectionOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "part6_lattice_embedding_conditional_projection_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
         "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statements="
         "topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements"
     )
@@ -3692,6 +3723,37 @@ def main() -> int:
     print(
         "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_roster_certificate_proof="
         "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statements="
+        "topoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statements_proof="
+        "topoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_terms_checked=16"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_terms_proof="
+        "topoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_certificate="
+        "TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_certificate_proof="
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2SupportSurfaceProjectionOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_support_surface_projection_open_target_nonclosure_bundle_statement_roster_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statements="
