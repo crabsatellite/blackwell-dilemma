@@ -6881,6 +6881,68 @@ def main() -> int:
         "open_target_repair_frontier_pair_statement_roster_certificate"
     )
     print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_statements="
+        "topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_statements_proof="
+        "topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_statement_terms_checked=9"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_statement_terms_proof="
+        "topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_certificate="
+        "TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_certificate_proof="
+        "topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_topo_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_statements="
+        "part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_statements_proof="
+        "part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_statement_terms_checked=13"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_statement_terms_proof="
+        "part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_certificate="
+        "Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_certificate_proof="
+        "part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate="
+        "Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_part6_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
         "semantic_target_frontier_payload_targets="
         + ",".join(surface[3] for surface in payload_surfaces)
     )

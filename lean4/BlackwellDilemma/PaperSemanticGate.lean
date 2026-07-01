@@ -4486,6 +4486,96 @@ theorem
                 topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current
                 topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current))))))
 
+/-- Named certificate for the topo frontier-payload open-target nonclosure
+bundle. -/
+def
+    TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate :
+    Prop :=
+  TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+        RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+          RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+            Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+/-- The topo frontier-payload open-target nonclosure bundle is available as a
+named certificate. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle_certificate :
+    TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate := by
+  exact topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle
+
+/-- Statement roster for the topo frontier-payload open-target nonclosure
+certificate. -/
+def
+    topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements :
+    List Prop :=
+  [TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate,
+   TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute]
+
+/-- The topo frontier-payload open-target nonclosure statement roster names the
+current build-gated statements. -/
+theorem
+    topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements_named_current :
+    topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements =
+      [TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] := by
+  rfl
+
+/-- The topo frontier-payload open-target nonclosure statement roster has the
+expected size. -/
+theorem
+    topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements_length_current :
+    topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements.length =
+      9 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the topo frontier-payload
+open-target nonclosure bundle. -/
+def
+    TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements =
+      [TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements.length =
+      9 /\
+    TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleCertificate
+
+/-- The topo frontier-payload open-target nonclosure bundle has a fixed
+statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2FrontierPayloadOpenTargetNonclosureBundleStatements_length_current
+      topo_cluster_random_supercritical_z2_frontier_payload_open_target_nonclosure_bundle_certificate)
+
 /-- The complete typed Part 6 frontier payload projects the active target-route
 certificate. -/
 theorem part6_lattice_embedding_frontier_payload_target_route_certificate :
@@ -4553,6 +4643,121 @@ theorem part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle :
                       (And.intro
                         part6_lattice_embedding_frontier_payload_target_route_obstruction
                         part6_lattice_embedding_frontier_payload_closure_route_obstruction))))))))))
+
+/-- Named certificate for the Part 6 frontier-payload open-target nonclosure
+bundle. -/
+def Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate :
+    Prop :=
+  Part6LatticeEmbeddingFrontierPayloadCertificate /\
+    (Part6LatticeEmbeddingSemanticKernelTarget ↔
+      Part6NondegenerateFeasibleRepairRoute) /\
+      (Part6LatticeEmbeddingSemanticKernelTarget ↔
+        Part6FullPaperClosingSupport) /\
+        (Part6NondegenerateFeasibleRepairRoute ↔
+          Part6FullPaperClosingSupport) /\
+          Part6NondegenerateFeasibleRepairRouteCertificate /\
+            Part6FullPaperClosingOutputLayerCertificate /\
+              Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+                Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+                  Part6CurrentFrontierCertificate /\
+                    Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                      Not Part6NondegenerateFeasibleRepairRoute /\
+                        Not Part6FullPaperClosingSupport
+
+/-- The Part 6 frontier-payload open-target nonclosure bundle is available as a
+named certificate. -/
+theorem
+    part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_certificate :
+    Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate := by
+  exact part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle
+
+/-- Statement roster for the Part 6 frontier-payload open-target nonclosure
+certificate. -/
+def part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements :
+    List Prop :=
+  [Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate,
+   Part6LatticeEmbeddingFrontierPayloadCertificate,
+   Part6LatticeEmbeddingSemanticKernelTarget ↔
+     Part6NondegenerateFeasibleRepairRoute,
+   Part6LatticeEmbeddingSemanticKernelTarget ↔
+     Part6FullPaperClosingSupport,
+   Part6NondegenerateFeasibleRepairRoute ↔
+     Part6FullPaperClosingSupport,
+   Part6NondegenerateFeasibleRepairRouteCertificate,
+   Part6FullPaperClosingOutputLayerCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+   Part6CurrentFrontierCertificate,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport]
+
+/-- The Part 6 frontier-payload open-target nonclosure statement roster names
+the current build-gated statements. -/
+theorem
+    part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements_named_current :
+    part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements =
+      [Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingFrontierPayloadCertificate,
+       Part6LatticeEmbeddingSemanticKernelTarget ↔
+         Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingSemanticKernelTarget ↔
+         Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute ↔
+         Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport] := by
+  rfl
+
+/-- The Part 6 frontier-payload open-target nonclosure statement roster has the
+expected size. -/
+theorem
+    part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements_length_current :
+    part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements.length =
+      13 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the Part 6 frontier-payload
+open-target nonclosure bundle. -/
+def Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements =
+      [Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingFrontierPayloadCertificate,
+       Part6LatticeEmbeddingSemanticKernelTarget ↔
+         Part6NondegenerateFeasibleRepairRoute,
+       Part6LatticeEmbeddingSemanticKernelTarget ↔
+         Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute ↔
+         Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport] /\
+    part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements.length =
+      13 /\
+    Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleCertificate
+
+/-- The Part 6 frontier-payload open-target nonclosure bundle has a fixed
+statement roster. -/
+theorem
+    part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_statement_roster_certificate :
+    Part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingFrontierPayloadOpenTargetNonclosureBundleStatements_length_current
+      part6_lattice_embedding_frontier_payload_open_target_nonclosure_bundle_certificate)
 
 /-- The complete typed random-supercritical topo frontier payload projects the
 active target-route certificate. -/
