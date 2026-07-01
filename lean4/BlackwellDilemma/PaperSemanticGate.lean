@@ -46778,6 +46778,175 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_current_boundary_vector_seal_certificate)
 
+/-- Required closure-input seal for the two remaining open targets.  This
+pins the current terminal boundary to the exact missing repair inputs: Part 6
+must inhabit the nondegenerate feasible repair route/full support surface, and
+the topo target must inhabit the repaired support-surface closing route rather
+than merely the support-surface repair route. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatementRosterCertificate /\
+      Part6NondegenerateFeasibleRepairRouteCertificate /\
+        Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate /\
+          (Part6NondegenerateFeasibleRepairRoute ↔
+            Part6FullPaperClosingSupport) /\
+            Not Part6NondegenerateFeasibleRepairRoute /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+                RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate /\
+                  RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+                    RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
+                      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+                        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                            openSemanticTargetIds =
+                              ["theorem_4_1_part6_lattice_embedding",
+                               "topo_cluster_random_supercritical_z2"] /\
+                              paperSemanticOpenCount = 2 /\
+                                (CompletePaperSemanticKernelOnly <-> False) /\
+                                  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal endpoint exposes the exact required closure inputs for both
+remaining open targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_required_closure_input_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_current_boundary_vector_seal_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_current_boundary_vector_seal_statement_roster_certificate
+      (And.intro
+        part6_nondegenerate_feasible_repair_route_certificate
+        (And.intro
+          part6_nondegenerate_feasible_repair_route_statement_roster_certificate
+          (And.intro
+            part6_nondegenerate_feasible_repair_route_iff_full_paper_closing_support
+            (And.intro
+              not_part6_nondegenerate_feasible_repair_route_current
+              (And.intro
+                random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate
+                (And.intro
+                  random_supercritical_z2_topo_cluster_support_surface_closing_route_certificate
+                  (And.intro
+                    random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate
+                    (And.intro
+                      random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate
+                      (And.intro
+                        randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current
+                        (And.intro
+                          not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+                          (And.intro
+                            not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+                            (And.intro
+                              openSemanticTargetIds_current
+                              (And.intro
+                                paperSemanticOpenCount_current
+                                (And.intro
+                                  completePaperSemanticKernelOnly_iff_false_current
+                                  completePaperSemanticKernelOnly_notYet)))))))))))))))
+
+/-- Statement roster for the dual open-target required-closure-input seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRouteCertificate,
+   Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRoute ↔
+    Part6FullPaperClosingSupport,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the dual open-target required-closure-input seal is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRoute ↔
+        Part6FullPaperClosingSupport,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the dual open-target required-closure-input seal has eighteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements.length =
+      18 := rfl
+
+/-- Build-gated statement roster certificate for the dual open-target
+required-closure-input seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetCurrentBoundaryVectorSealStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRoute ↔
+        Part6FullPaperClosingSupport,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements.length =
+      18 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealCertificate
+
+/-- The dual open-target required-closure-input seal has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_required_closure_input_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_required_closure_input_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
