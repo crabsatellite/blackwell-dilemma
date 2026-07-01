@@ -42997,6 +42997,204 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_all_audit_bundle_certificate)
 
+/-- Candidate-input capstone for the two remaining open semantic targets.  It
+packages the final field-output all-audit bundle together with the exact and
+sufficient closure-input rosters for the Part 6 and topo targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleStatementRosterCertificate /\
+      OpenSemanticTargetClosureInputNamedRosterCertificate /\
+        OpenSemanticTargetClosureInputStatementRosterCertificate /\
+          OpenSemanticTargetExactClosureInputNamedRosterCertificate /\
+            OpenSemanticTargetExactClosureInputStatementRosterCertificate /\
+              openSemanticTargetClosureInputSurfaceTargets =
+                [Part6LatticeEmbeddingSemanticKernelTarget,
+                 TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+              openSemanticTargetClosureInputSurfaceClosureInputs =
+                [Part6LatticeEmbeddingClosureInput,
+                 TopoClusterRandomSupercriticalZ2ClosureInput] /\
+              openSemanticTargetExactClosureInputSurfaceExactInputs =
+                [Part6LatticeEmbeddingExactClosureInput,
+                 TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+              openSemanticTargetClosureInputSurfaceTargetObstructions =
+                [Not Part6LatticeEmbeddingSemanticKernelTarget,
+                 Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+              openSemanticTargetClosureInputSurfaceInputObstructions =
+                [Not Part6LatticeEmbeddingClosureInput,
+                 Not TopoClusterRandomSupercriticalZ2ClosureInput] /\
+              openSemanticTargetExactClosureInputSurfaceExactInputObstructions =
+                [Not Part6LatticeEmbeddingExactClosureInput,
+                 Not TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+              openSemanticTargetClosureInputSurfaces.length =
+                paperSemanticOpenCount /\
+              openSemanticTargetExactClosureInputSurfaces.length =
+                paperSemanticOpenCount /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly
+
+/-- The candidate-input capstone is machine checked against the current two
+open target rosters and current nonclosure facts. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_input_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_all_audit_bundle_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_field_output_all_audit_bundle_statement_roster_certificate
+      (And.intro
+        open_semantic_target_closure_input_named_roster_certificate
+        (And.intro
+          open_semantic_target_closure_input_statement_roster_certificate
+          (And.intro
+            open_semantic_target_exact_closure_input_named_roster_certificate
+            (And.intro
+              open_semantic_target_exact_closure_input_statement_roster_certificate
+              (And.intro
+                openSemanticTargetClosureInputSurfaceTargets_named_current
+                (And.intro
+                  openSemanticTargetClosureInputSurfaceClosureInputs_named_current
+                  (And.intro
+                    openSemanticTargetExactClosureInputSurfaceExactInputs_named_current
+                    (And.intro
+                      openSemanticTargetClosureInputSurfaceTargetObstructions_named_current
+                      (And.intro
+                        openSemanticTargetClosureInputSurfaceInputObstructions_named_current
+                        (And.intro
+                          openSemanticTargetExactClosureInputSurfaceExactInputObstructions_named_current
+                          (And.intro
+                            openSemanticTargetClosureInputSurfaceCount_current
+                            (And.intro
+                              openSemanticTargetExactClosureInputSurfaceCount_current
+                              (And.intro
+                                completePaperSemanticKernelOnly_iff_false_current
+                                completePaperSemanticKernelOnly_notYet))))))))))))))
+
+/-- Statement roster for the closure-candidate-input capstone. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleStatementRosterCertificate,
+   OpenSemanticTargetClosureInputNamedRosterCertificate,
+   OpenSemanticTargetClosureInputStatementRosterCertificate,
+   OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+   OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+   openSemanticTargetClosureInputSurfaceTargets =
+      [Part6LatticeEmbeddingSemanticKernelTarget,
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+   openSemanticTargetClosureInputSurfaceClosureInputs =
+      [Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput],
+   openSemanticTargetExactClosureInputSurfaceExactInputs =
+      [Part6LatticeEmbeddingExactClosureInput,
+       TopoClusterRandomSupercriticalZ2ExactClosureInput],
+   openSemanticTargetClosureInputSurfaceTargetObstructions =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+   openSemanticTargetClosureInputSurfaceInputObstructions =
+      [Not Part6LatticeEmbeddingClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput],
+   openSemanticTargetExactClosureInputSurfaceExactInputObstructions =
+      [Not Part6LatticeEmbeddingExactClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput],
+   openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+   openSemanticTargetExactClosureInputSurfaces.length = paperSemanticOpenCount,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the closure-candidate-input capstone roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleStatementRosterCertificate,
+       OpenSemanticTargetClosureInputNamedRosterCertificate,
+       OpenSemanticTargetClosureInputStatementRosterCertificate,
+       OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+       OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+       openSemanticTargetClosureInputSurfaceTargets =
+          [Part6LatticeEmbeddingSemanticKernelTarget,
+           TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputSurfaceClosureInputs =
+          [Part6LatticeEmbeddingClosureInput,
+           TopoClusterRandomSupercriticalZ2ClosureInput],
+       openSemanticTargetExactClosureInputSurfaceExactInputs =
+          [Part6LatticeEmbeddingExactClosureInput,
+           TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputSurfaceTargetObstructions =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputSurfaceInputObstructions =
+          [Not Part6LatticeEmbeddingClosureInput,
+           Not TopoClusterRandomSupercriticalZ2ClosureInput],
+       openSemanticTargetExactClosureInputSurfaceExactInputObstructions =
+          [Not Part6LatticeEmbeddingExactClosureInput,
+           Not TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetExactClosureInputSurfaces.length = paperSemanticOpenCount,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the closure-candidate-input capstone roster has seventeen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements.length =
+      17 := rfl
+
+/-- Build-gated statement roster certificate for the closure-candidate-input
+capstone. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFieldOutputAllAuditBundleStatementRosterCertificate,
+       OpenSemanticTargetClosureInputNamedRosterCertificate,
+       OpenSemanticTargetClosureInputStatementRosterCertificate,
+       OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+       OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+       openSemanticTargetClosureInputSurfaceTargets =
+          [Part6LatticeEmbeddingSemanticKernelTarget,
+           TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputSurfaceClosureInputs =
+          [Part6LatticeEmbeddingClosureInput,
+           TopoClusterRandomSupercriticalZ2ClosureInput],
+       openSemanticTargetExactClosureInputSurfaceExactInputs =
+          [Part6LatticeEmbeddingExactClosureInput,
+           TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputSurfaceTargetObstructions =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputSurfaceInputObstructions =
+          [Not Part6LatticeEmbeddingClosureInput,
+           Not TopoClusterRandomSupercriticalZ2ClosureInput],
+       openSemanticTargetExactClosureInputSurfaceExactInputObstructions =
+          [Not Part6LatticeEmbeddingExactClosureInput,
+           Not TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputSurfaces.length = paperSemanticOpenCount,
+       openSemanticTargetExactClosureInputSurfaces.length = paperSemanticOpenCount,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements.length =
+      17 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputCertificate
+
+/-- The closure-candidate-input capstone has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_input_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateInputStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_input_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
