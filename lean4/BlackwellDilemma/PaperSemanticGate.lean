@@ -33751,6 +33751,44 @@ theorem
     openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
       openSemanticTargetIdObstructionMapObstructionBundles := rfl
 
+/-- The atomic obstruction terms carried by the id/paper-label obstruction-map
+bundle column. -/
+def openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms :
+    List Prop :=
+  [Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute]
+
+/-- Build gate: the id/paper-label obstruction-map bundle column carries
+exactly the six atomic obstruction terms used by the two open-target bundles. -/
+theorem
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_named_current :
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] :=
+  rfl
+
+/-- Build gate: the id/paper-label obstruction-map bundle column contributes
+six atomic obstruction terms. -/
+theorem
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_length_current :
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+      6 := rfl
+
+/-- Build gate: the id/paper-label obstruction-map atomic bundle column matches
+the ID-indexed obstruction map's atomic bundle column. -/
+theorem
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_eq_id_obstruction_map_current :
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms := rfl
+
 /-- Target-obstruction projection represented by the id/paper-label obstruction
 map. -/
 def openSemanticTargetIdPaperLabelObstructionMapTargetObstructions : List Prop :=
@@ -33807,6 +33845,17 @@ def openSemanticTargetIdPaperLabelObstructionMapProjectionStatements :
       paperSemanticOpenCount,
    openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
       openSemanticTargetIdObstructionMapObstructionBundles,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+      6,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
    openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
       openSemanticTargetIdObstructionMapTargetObstructions,
    openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
@@ -33831,6 +33880,17 @@ theorem
           paperSemanticOpenCount,
        openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
           openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not Part6NondegenerateFeasibleRepairRoute,
+           Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+           Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
        openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
           openSemanticTargetIdObstructionMapTargetObstructions,
        openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
@@ -33840,12 +33900,12 @@ theorem
        OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
        OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate] := rfl
 
-/-- Build gate: the id/paper-label obstruction-map projection roster has eight
+/-- Build gate: the id/paper-label obstruction-map projection roster has eleven
 statements. -/
 theorem
     openSemanticTargetIdPaperLabelObstructionMapProjectionStatements_length_current :
     openSemanticTargetIdPaperLabelObstructionMapProjectionStatements.length =
-      8 := rfl
+      11 := rfl
 
 /-- Build-gated obstruction-projection certificate for the id/paper-label
 obstruction map. -/
@@ -33862,6 +33922,17 @@ def OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate :
       paperSemanticOpenCount /\
   openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
       openSemanticTargetIdObstructionMapObstructionBundles /\
+  openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      [Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+  openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+      6 /\
+  openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms /\
   openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
       openSemanticTargetIdObstructionMapTargetObstructions /\
   openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
@@ -33879,6 +33950,9 @@ theorem open_semantic_target_id_paper_label_obstruction_map_projection_certifica
     openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_named_current,
     openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_length_current,
     openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_eq_id_obstruction_map_current,
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_named_current,
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_length_current,
+    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_eq_id_obstruction_map_current,
     openSemanticTargetIdPaperLabelObstructionMapTargetObstructions_eq_id_obstruction_map_current,
     openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions_eq_id_obstruction_map_current,
     openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions_eq_id_obstruction_map_current,
@@ -33901,6 +33975,17 @@ def OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertifi
           paperSemanticOpenCount,
        openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
           openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          [Not Part6LatticeEmbeddingSemanticKernelTarget,
+           Not Part6NondegenerateFeasibleRepairRoute,
+           Not Part6FullPaperClosingSupport,
+           Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+           Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
        openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
           openSemanticTargetIdObstructionMapTargetObstructions,
        openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
@@ -33910,7 +33995,7 @@ def OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertifi
        OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
        OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate] /\
     openSemanticTargetIdPaperLabelObstructionMapProjectionStatements.length =
-      8 /\
+      11 /\
     OpenSemanticTargetIdPaperLabelObstructionMapProjectionCertificate
 
 /-- The id/paper-label obstruction-map projection alignment has a fixed

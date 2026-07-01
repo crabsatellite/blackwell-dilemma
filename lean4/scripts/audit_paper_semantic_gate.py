@@ -5346,15 +5346,34 @@ def main() -> int:
         "openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_named_current"
     )
     print(
-        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_rows_checked=2"
+        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_entries_checked=2"
     )
     print(
-        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_rows_proof="
+        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_entries_proof="
         "openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_length_current"
     )
     print(
         "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundles_match_id_map_proof="
         "openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_eq_id_obstruction_map_current"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms="
+        "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_proof="
+        "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_named_current"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_checked=6"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_count_proof="
+        "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_length_current"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_match_id_map_proof="
+        "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_eq_id_obstruction_map_current"
     )
     print(
         "open_semantic_target_id_paper_label_obstruction_map_target_obstructions="
@@ -5389,7 +5408,7 @@ def main() -> int:
         "openSemanticTargetIdPaperLabelObstructionMapProjectionStatements_named_current"
     )
     print(
-        "open_semantic_target_id_paper_label_obstruction_map_projection_statement_terms_checked=8"
+        "open_semantic_target_id_paper_label_obstruction_map_projection_statement_terms_checked=11"
     )
     print(
         "open_semantic_target_id_paper_label_obstruction_map_projection_statement_terms_proof="
@@ -13964,15 +13983,34 @@ def main() -> int:
             "openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_named_current"
         ),
         (
-            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_rows_checked=2"
+            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_entries_checked=2"
         ),
         (
-            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_rows_proof="
+            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_entries_proof="
             "openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_length_current"
         ),
         (
             "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundles_match_id_map_proof="
             "openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_eq_id_obstruction_map_current"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms="
+            "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_proof="
+            "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_named_current"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_checked=6"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_count_proof="
+            "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_length_current"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_obstruction_bundle_atomic_terms_match_id_map_proof="
+            "openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_eq_id_obstruction_map_current"
         ),
         (
             "open_semantic_target_id_paper_label_obstruction_map_target_obstructions="
@@ -14007,7 +14045,7 @@ def main() -> int:
             "openSemanticTargetIdPaperLabelObstructionMapProjectionStatements_named_current"
         ),
         (
-            "open_semantic_target_id_paper_label_obstruction_map_projection_statement_terms_checked=8"
+            "open_semantic_target_id_paper_label_obstruction_map_projection_statement_terms_checked=11"
         ),
         (
             "open_semantic_target_id_paper_label_obstruction_map_projection_statement_terms_proof="
