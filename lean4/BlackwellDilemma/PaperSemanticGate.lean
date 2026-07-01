@@ -37088,7 +37088,12 @@ def
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate,
-   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate]
 
 /-- The theorem-name terminal kernel-only nonclosure/gate-status alias roster is
 fixed. -/
@@ -37096,7 +37101,12 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate] := by
   rfl
 
 /-- The theorem-name terminal kernel-only nonclosure/gate-status alias roster
@@ -37104,7 +37114,7 @@ has the expected size. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements.length =
-      2 := by
+      7 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name terminal
@@ -37114,10 +37124,21 @@ def
     Prop :=
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements.length =
-      2 /\
-    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+              OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentGateStatusCertificate
 
 /-- The theorem-name terminal kernel-only nonclosure/gate-status alias has a
 fixed statement roster. -/
@@ -37128,7 +37149,19 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_named_current
     (And.intro
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_length_current
-      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_gate_status_certificate)
+      (And.intro
+        completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_gate_status_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_gate_status_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_gate_status_statement_roster_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+              (And.intro
+                open_semantic_target_surface_frontier_nonclosure_certificate
+                (And.intro
+                  open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+                  completePaperSemanticKernelOnly_current_gate_status_certificate)))))))
 
 /-- Supplemental gate: pair the terminal kernel-only nonclosure capstone with
 the open-target final-ledger certificate without expanding the already large
