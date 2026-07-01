@@ -45432,6 +45432,132 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_route_source_identity_certificate⟩
 
+/-- Current obstruction-vector seal for the two-key terminal endpoint.  This
+records the precise formulas currently refuting the two remaining open
+semantic targets; it is a nonclosure certificate, not a closure claim. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatementRosterCertificate /\
+      Not Part6LatticeEmbeddingSemanticKernelTarget /\
+      Not Part6NondegenerateFeasibleRepairRoute /\
+      Not Part6FullPaperClosingSupport /\
+      Not Part6FullPaperClosingDivergenceWitness /\
+      Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+      Not Part6FullPaperClosingFullOutputBundle /\
+      Not Part6LatticeEmbeddingExactClosureInput /\
+      Not Part6FullPaperClosingBridgeRoute /\
+      Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+      (CompletePaperSemanticKernelOnly <-> False) /\
+      Not CompletePaperSemanticKernelOnly
+
+/-- The terminal route-source identity seal carries the concrete current
+obstruction vector for both open targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_current_obstruction_vector_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate := by
+  exact ⟨completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_route_source_identity_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_route_source_identity_statement_roster_certificate,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    not_part6_nondegenerate_feasible_repair_route_current,
+    not_part6_full_paper_closing_support_current,
+    not_Part6FullPaperClosingDivergenceWitness_current,
+    not_Part6FullPaperClosingFeasibleDivergenceWitness_current,
+    not_part6_full_paper_closing_full_output_bundle_current,
+    part6_lattice_embedding_exact_closure_input_notYet,
+    not_part6_full_paper_closing_bridge_route_current,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
+    topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the current obstruction-vector terminal seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatementRosterCertificate,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not Part6FullPaperClosingDivergenceWitness,
+   Not Part6FullPaperClosingFeasibleDivergenceWitness,
+   Not Part6FullPaperClosingFullOutputBundle,
+   Not Part6LatticeEmbeddingExactClosureInput,
+   Not Part6FullPaperClosingBridgeRoute,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the current obstruction-vector terminal seal roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not Part6FullPaperClosingFullOutputBundle,
+       Not Part6LatticeEmbeddingExactClosureInput,
+       Not Part6FullPaperClosingBridgeRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the current obstruction-vector terminal seal roster has
+sixteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements.length =
+      16 := rfl
+
+/-- Build-gated statement roster certificate for the current obstruction-vector
+terminal seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not Part6FullPaperClosingFullOutputBundle,
+       Not Part6LatticeEmbeddingExactClosureInput,
+       Not Part6FullPaperClosingBridgeRoute,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements.length =
+      16 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate
+
+/-- The current obstruction-vector terminal seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_current_obstruction_vector_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatementRosterCertificate := by
+  exact ⟨completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_current_obstruction_vector_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
