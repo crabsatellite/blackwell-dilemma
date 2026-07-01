@@ -19,13 +19,13 @@ import re
 import sys
 
 
-ROOT_FILES = [pathlib.Path("BlackwellDilemma.lean")]
-ROOT_DIR = pathlib.Path("BlackwellDilemma")
-PUBLIC_EVIDENCE_MANIFEST = (
-    pathlib.Path(__file__).resolve().parents[2]
-    / "reference-evidence"
-    / "public_evidence_manifest.json"
-)
+SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
+LEAN_ROOT = SCRIPT_DIR.parent
+REPO_ROOT = LEAN_ROOT.parent
+
+ROOT_FILES = [LEAN_ROOT / "BlackwellDilemma.lean"]
+ROOT_DIR = LEAN_ROOT / "BlackwellDilemma"
+PUBLIC_EVIDENCE_MANIFEST = REPO_ROOT / "reference-evidence" / "public_evidence_manifest.json"
 PUBLIC_EVIDENCE_CHECK_ID = "kernel_surface_zero_escape_audit"
 
 
