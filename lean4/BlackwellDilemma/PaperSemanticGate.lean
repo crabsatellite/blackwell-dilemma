@@ -45558,6 +45558,172 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_current_obstruction_vector_certificate⟩
 
+/-- Completion-barrier seal for the current two-key terminal endpoint.  This
+links the current obstruction vector to the closure-candidate transition and
+roster-barrier certificates, making explicit that neither the target pair nor
+the candidate input pairs can currently close. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate /\
+            Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+              TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+            Not (Part6LatticeEmbeddingExactClosureInput /\
+              TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+            Not (Part6LatticeEmbeddingClosureInput /\
+              TopoClusterRandomSupercriticalZ2ClosureInput) /\
+            (CompletePaperSemanticKernelOnly <-> False) /\
+            Not CompletePaperSemanticKernelOnly /\
+            paperSemanticOpenCount = 2 /\
+            completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements.length =
+              15 /\
+            completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements.length =
+              16 /\
+            completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements.length =
+              12 /\
+            completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements.length =
+              13
+
+/-- The current terminal obstruction vector is aligned with the existing
+closure-candidate transition and roster-barrier certificates. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate := by
+  exact ⟨completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_current_obstruction_vector_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_current_obstruction_vector_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate,
+    (by
+      intro htargets
+      exact part6_lattice_embedding_semantic_kernel_target_notYet htargets.left),
+    (by
+      intro hinputs
+      exact part6_lattice_embedding_exact_closure_input_notYet hinputs.left),
+    (by
+      intro hinputs
+      exact part6_lattice_embedding_closure_input_notYet hinputs.left),
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet,
+    paperSemanticOpenCount_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements_length_current⟩
+
+/-- Statement roster for the completion-barrier terminal seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate,
+   Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+     TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+   Not (Part6LatticeEmbeddingExactClosureInput /\
+     TopoClusterRandomSupercriticalZ2ExactClosureInput),
+   Not (Part6LatticeEmbeddingClosureInput /\
+     TopoClusterRandomSupercriticalZ2ClosureInput),
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements.length =
+    15,
+   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements.length =
+    16,
+   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements.length =
+    12,
+   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements.length =
+    13]
+
+/-- Build gate: the completion-barrier terminal seal roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate,
+       Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+         TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       Not (Part6LatticeEmbeddingClosureInput /\
+         TopoClusterRandomSupercriticalZ2ClosureInput),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements.length =
+        15,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements.length =
+        16,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements.length =
+        12,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements.length =
+        13] := rfl
+
+/-- Build gate: the completion-barrier terminal seal roster has seventeen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements.length =
+      17 := rfl
+
+/-- Build-gated statement roster certificate for the completion-barrier
+terminal seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate,
+       Not (Part6LatticeEmbeddingSemanticKernelTarget /\
+         TopoClusterRandomSupercriticalZ2SemanticKernelTarget),
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       Not (Part6LatticeEmbeddingClosureInput /\
+         TopoClusterRandomSupercriticalZ2ClosureInput),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements.length =
+        15,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCurrentObstructionVectorStatements.length =
+        16,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateTargetTransitionStatements.length =
+        12,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements.length =
+        13] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements.length =
+      17 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate
+
+/-- The completion-barrier terminal seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate := by
+  exact ⟨completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
