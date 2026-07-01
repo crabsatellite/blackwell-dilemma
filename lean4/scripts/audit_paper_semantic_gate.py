@@ -7528,6 +7528,27 @@ def main() -> int:
         "open_target_repair_frontier_pair_component_statement_roster_certificate"
     )
     print(
+        "semantic_target_open_repair_frontier_pair_row_statements="
+        "openTargetRepairFrontierPairRowStatements"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_row_statements_proof="
+        "openTargetRepairFrontierPairRowStatements_named_current"
+    )
+    print("semantic_target_open_repair_frontier_pair_row_statement_terms_checked=6")
+    print(
+        "semantic_target_open_repair_frontier_pair_row_statement_terms_proof="
+        "openTargetRepairFrontierPairRowStatements_length_current"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_row_statement_roster_certificate="
+        "OpenTargetRepairFrontierPairRowStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_row_statement_roster_certificate_proof="
+        "open_target_repair_frontier_pair_row_statement_roster_certificate"
+    )
+    print(
         "semantic_target_open_repair_frontier_pair_statement_roster_length_proof="
         "openTargetRepairFrontierPairStatements_length_current"
     )

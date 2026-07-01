@@ -4490,6 +4490,76 @@ theorem
             topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_certificate
             topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_statement_roster_certificate))))
 
+/-- Row-level statement roster for the paired open-target repair frontier. -/
+def openTargetRepairFrontierPairRowStatements : List Prop :=
+  [openTargetRepairFrontierPairStatements =
+      [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate],
+   openTargetRepairFrontierPairStatements.length = 2,
+   Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate /\
+      Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate /\
+      TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate,
+   openTargetRepairFrontierPairComponentStatements =
+      [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+       Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate],
+   OpenTargetRepairFrontierPairComponentStatementRosterCertificate]
+
+/-- Build gate: the paired repair-frontier row roster is fixed. -/
+theorem openTargetRepairFrontierPairRowStatements_named_current :
+    openTargetRepairFrontierPairRowStatements =
+      [openTargetRepairFrontierPairStatements =
+          [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+           TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate],
+       openTargetRepairFrontierPairStatements.length = 2,
+       Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate /\
+          Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate /\
+          TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate,
+       openTargetRepairFrontierPairComponentStatements =
+          [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+           Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate,
+           TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate],
+       OpenTargetRepairFrontierPairComponentStatementRosterCertificate] := rfl
+
+/-- Build gate: the paired repair-frontier row roster has six statements. -/
+theorem openTargetRepairFrontierPairRowStatements_length_current :
+    openTargetRepairFrontierPairRowStatements.length = 6 := rfl
+
+/-- Build-gated row statement-roster certificate for the paired open-target
+repair frontier. -/
+def OpenTargetRepairFrontierPairRowStatementRosterCertificate : Prop :=
+  openTargetRepairFrontierPairRowStatements =
+      [openTargetRepairFrontierPairStatements =
+          [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+           TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate],
+       openTargetRepairFrontierPairStatements.length = 2,
+       Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate /\
+          Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate /\
+          TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate,
+       openTargetRepairFrontierPairComponentStatements =
+          [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+           Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate,
+           TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate],
+       OpenTargetRepairFrontierPairComponentStatementRosterCertificate] /\
+    openTargetRepairFrontierPairRowStatements.length = 6 /\
+    OpenTargetRepairFrontierPairComponentStatementRosterCertificate
+
+/-- The paired open-target repair frontier has a fixed row-level statement
+roster. -/
+theorem open_target_repair_frontier_pair_row_statement_roster_certificate :
+    OpenTargetRepairFrontierPairRowStatementRosterCertificate := by
+  exact And.intro
+    openTargetRepairFrontierPairRowStatements_named_current
+    (And.intro
+      openTargetRepairFrontierPairRowStatements_length_current
+      open_target_repair_frontier_pair_component_statement_roster_certificate)
+
 /-- Build-gated statement roster for the paired open-target repair-frontier
 certificate. -/
 def OpenTargetRepairFrontierPairStatementRosterCertificate : Prop :=
@@ -4501,7 +4571,9 @@ def OpenTargetRepairFrontierPairStatementRosterCertificate : Prop :=
       (openTargetRepairFrontierPairStatements.length = 2)
       (And
         OpenTargetRepairFrontierPairCertificate
-        OpenTargetRepairFrontierPairComponentStatementRosterCertificate))
+        (And
+          OpenTargetRepairFrontierPairComponentStatementRosterCertificate
+          OpenTargetRepairFrontierPairRowStatementRosterCertificate)))
 
 /-- The paired open-target repair-frontier certificate has a fixed statement
 roster. -/
@@ -4513,7 +4585,9 @@ theorem open_target_repair_frontier_pair_statement_roster_certificate :
       openTargetRepairFrontierPairStatements_length_current
       (And.intro
         open_target_repair_frontier_pair_certificate
-        open_target_repair_frontier_pair_component_statement_roster_certificate))
+        (And.intro
+          open_target_repair_frontier_pair_component_statement_roster_certificate
+          open_target_repair_frontier_pair_row_statement_roster_certificate)))
 
 /-- Topo open-target bundle: the typed frontier payload, the active repaired
 support-surface output, the matching repair/closing nonclosure certificates,
