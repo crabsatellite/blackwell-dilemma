@@ -47902,6 +47902,87 @@ theorem
   exact
     completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.2.2.2.2.2.2
 
+/-- Projection-only statement roster obtained by dropping the package
+certificate head from the public per-target obstruction boundary roster. -/
+def completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate]
+
+/-- Build gate: the public per-target obstruction projection roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate] := rfl
+
+/-- Build gate: the public per-target obstruction projection roster has eleven
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements.length =
+      11 := rfl
+
+/-- Build gate: the projection roster is exactly the tail of the full
+per-target obstruction statement roster. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_tail_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.tail := rfl
+
+/-- Build-gated statement roster certificate for the public per-target
+obstruction projection tail. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionTailStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.tail /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate
+
+/-- The public per-target obstruction projection tail has a fixed statement
+roster and remains tied to the full per-target obstruction certificate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_projection_tail_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionTailStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_tail_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_named_current
+      (And.intro
+        completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_length_current
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
