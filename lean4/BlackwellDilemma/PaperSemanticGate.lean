@@ -37460,6 +37460,68 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_certificate)
 
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure open-target operational bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure open-target
+operational bundle is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only nonclosure
+open-target operational bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure open-target operational
+bundle alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure open-target operational
+bundle alias roster has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure open-target operational bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure open-target operational
+bundle alias has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetOperationalBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_operational_bundle_certificate)
+
 /-- Supplemental gate: compact terminal/route-obstruction exit bundle.  This
 keeps the terminal capstone factored while requiring the current obstruction
 and routed-exit closure path in one theorem. -/
@@ -37559,6 +37621,68 @@ theorem
     (And.intro
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_certificate)
+
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure route-obstruction exit bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure
+route-obstruction exit bundle is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only nonclosure
+route-obstruction exit bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure route-obstruction exit
+bundle alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure route-obstruction exit
+bundle alias roster has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure route-obstruction exit bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure route-obstruction exit
+bundle alias has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_bundle_certificate)
 
 /-- Supplemental gate: terminal capstone plus final obstruction-map bridge.  The
 bundle makes the final judgement obstruction-map all-view path visible next to
