@@ -5473,6 +5473,27 @@ def main() -> int:
         "open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate"
     )
     print(
+        "open_semantic_target_id_paper_label_obstruction_map_component_statements="
+        "openSemanticTargetIdPaperLabelObstructionMapComponentStatements"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_component_statements_proof="
+        "openSemanticTargetIdPaperLabelObstructionMapComponentStatements_named_current"
+    )
+    print("open_semantic_target_id_paper_label_obstruction_map_component_statement_terms_checked=12")
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_component_statement_terms_proof="
+        "openSemanticTargetIdPaperLabelObstructionMapComponentStatements_length_current"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_component_statement_roster_certificate="
+        "OpenSemanticTargetIdPaperLabelObstructionMapComponentStatementRosterCertificate"
+    )
+    print(
+        "open_semantic_target_id_paper_label_obstruction_map_component_statement_roster_certificate_proof="
+        "open_semantic_target_id_paper_label_obstruction_map_component_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statements="
         "completePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatements"
     )
@@ -5481,7 +5502,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statement_terms_checked=4"
+        "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statement_terms_checked=5"
     )
     print(
         "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statement_terms_proof="
@@ -5757,7 +5778,7 @@ def main() -> int:
         "open_semantic_target_obstruction_map_all_view_statements_proof="
         "openSemanticTargetObstructionMapAllViewStatements_named_current"
     )
-    print("open_semantic_target_obstruction_map_all_view_statement_terms_checked=19")
+    print("open_semantic_target_obstruction_map_all_view_statement_terms_checked=20")
     print(
         "open_semantic_target_obstruction_map_all_view_statement_terms_proof="
         "openSemanticTargetObstructionMapAllViewStatements_length_current"
@@ -14240,6 +14261,29 @@ def main() -> int:
             "open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate"
         ),
         (
+            "open_semantic_target_id_paper_label_obstruction_map_component_statements="
+            "openSemanticTargetIdPaperLabelObstructionMapComponentStatements"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_component_statements_proof="
+            "openSemanticTargetIdPaperLabelObstructionMapComponentStatements_named_current"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_component_statement_terms_checked=12"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_component_statement_terms_proof="
+            "openSemanticTargetIdPaperLabelObstructionMapComponentStatements_length_current"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_component_statement_roster_certificate="
+            "OpenSemanticTargetIdPaperLabelObstructionMapComponentStatementRosterCertificate"
+        ),
+        (
+            "open_semantic_target_id_paper_label_obstruction_map_component_statement_roster_certificate_proof="
+            "open_semantic_target_id_paper_label_obstruction_map_component_statement_roster_certificate"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statements="
             "completePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatements"
         ),
@@ -14248,7 +14292,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentFinalJudgementIdPaperLabelObstructionMapProjectionStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statement_terms_checked=4"
+            "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statement_terms_checked=5"
         ),
         (
             "complete_paper_semantic_kernel_only_current_final_judgement_id_paper_label_obstruction_map_projection_statement_terms_proof="
@@ -14527,7 +14571,7 @@ def main() -> int:
             "openSemanticTargetObstructionMapAllViewStatements_named_current"
         ),
         (
-            "open_semantic_target_obstruction_map_all_view_statement_terms_checked=19"
+            "open_semantic_target_obstruction_map_all_view_statement_terms_checked=20"
         ),
         (
             "open_semantic_target_obstruction_map_all_view_statement_terms_proof="
