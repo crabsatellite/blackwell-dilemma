@@ -47591,6 +47591,87 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_obstruction_source_public_evidence_audit_seal_certificate)
 
+/-- Public-facing nonclosure boundary: the public-evidence audit seal is tied
+to the exact current open-target ids, the open count, and the current
+`CompletePaperSemanticKernelOnly` negation. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate /\
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+      paperSemanticOpenCount = 2 /\
+        (CompletePaperSemanticKernelOnly <-> False) /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The current public nonclosure boundary is kernel-checked. -/
+theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_obstruction_source_public_evidence_audit_seal_statement_roster_certificate
+    (And.intro
+      openSemanticTargetIds_current
+      (And.intro
+        paperSemanticOpenCount_current
+        (And.intro
+          completePaperSemanticKernelOnly_iff_false_current
+          completePaperSemanticKernelOnly_notYet)))
+
+/-- Statement roster for the public-facing nonclosure boundary. -/
+def completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-facing nonclosure boundary statement roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-facing nonclosure boundary has six statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements.length =
+      6 := rfl
+
+/-- Build-gated statement roster certificate for the public-facing nonclosure
+boundary. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements.length =
+      6 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryCertificate
+
+/-- The public-facing nonclosure boundary has a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
