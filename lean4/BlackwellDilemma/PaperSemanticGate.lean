@@ -47672,6 +47672,30 @@ theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_state
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate)
 
+/-- Projection from the public nonclosure boundary: the exact open ids. -/
+theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_open_ids :
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] := by
+  exact completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate.2.1
+
+/-- Projection from the public nonclosure boundary: the open count is two. -/
+theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_open_count :
+    paperSemanticOpenCount = 2 := by
+  exact completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate.2.2.1
+
+/-- Projection from the public nonclosure boundary: the complete target is
+currently equivalent to false. -/
+theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_iff_false :
+    CompletePaperSemanticKernelOnly <-> False := by
+  exact completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate.2.2.2.1
+
+/-- Projection from the public nonclosure boundary: the complete target is not
+currently proved. -/
+theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_not :
+    Not CompletePaperSemanticKernelOnly := by
+  exact completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate.2.2.2.2
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
