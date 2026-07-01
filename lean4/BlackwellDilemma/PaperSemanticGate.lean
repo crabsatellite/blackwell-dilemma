@@ -528,18 +528,22 @@ theorem
 target-current refutation and through the full-support envelope obstruction. -/
 def TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate :
     Prop :=
-  Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
-    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
-    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
-    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
-    RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate
+  RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate /\
+    RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate /\
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+        RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate
 
 /-- The current topo route obstructions have fixed target-current and
 envelope-obstruction paths. -/
 theorem
     topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate :
     TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate :=
-  ⟨topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
+  ⟨random_supercritical_z2_topo_cluster_route_obstruction_source_certificate,
+   random_supercritical_z2_topo_cluster_route_obstruction_source_statement_roster_certificate,
+   topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current,
    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
    topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current,
    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
@@ -548,7 +552,9 @@ theorem
 /-- Statement roster for the topo route-obstruction multipath certificate. -/
 def topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements :
     List Prop :=
-  [Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+  [RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+   RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
@@ -558,19 +564,21 @@ def topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements :
 theorem
     topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements_named_current :
     topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements =
-      [Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+      [RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate] :=
   rfl
 
-/-- Build gate: the topo route-obstruction multipath roster has five
+/-- Build gate: the topo route-obstruction multipath roster has seven
 statements. -/
 theorem
     topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements_length_current :
     topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements.length =
-      5 := rfl
+      7 := rfl
 
 /-- Build-gated statement roster certificate for the topo route-obstruction
 multipath package. -/
@@ -578,13 +586,15 @@ def
     TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate :
     Prop :=
   topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements =
-      [Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+      [RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
        RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate] /\
     topoClusterRandomSupercriticalZ2RouteObstructionMultipathStatements.length =
-      5 /\
+      7 /\
     TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate
 
 /-- The topo route-obstruction multipath package has a fixed statement roster. -/
@@ -46430,12 +46440,14 @@ def
           RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
             RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
               RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
-                TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
-                  RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
-                    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
-                      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
-                        (CompletePaperSemanticKernelOnly <-> False) /\
-                          Not CompletePaperSemanticKernelOnly
+                RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate /\
+                  RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate /\
+                    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+                      RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                            (CompletePaperSemanticKernelOnly <-> False) /\
+                              Not CompletePaperSemanticKernelOnly
 
 /-- The terminal endpoint is sealed against the topo support-surface repair
 route and its current nonclosure certificates. -/
@@ -46457,16 +46469,20 @@ theorem
               (And.intro
                 random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate
                 (And.intro
-                  topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+                  random_supercritical_z2_topo_cluster_route_obstruction_source_certificate
                   (And.intro
-                    random_supercritical_z2_topo_cluster_current_frontier_certificate
+                    random_supercritical_z2_topo_cluster_route_obstruction_source_statement_roster_certificate
                     (And.intro
-                      not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+                      topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
                       (And.intro
-                        not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+                        random_supercritical_z2_topo_cluster_current_frontier_certificate
                         (And.intro
-                          completePaperSemanticKernelOnly_iff_false_current
-                          completePaperSemanticKernelOnly_notYet)))))))))))
+                          not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute
+                          (And.intro
+                            not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+                            (And.intro
+                              completePaperSemanticKernelOnly_iff_false_current
+                              completePaperSemanticKernelOnly_notYet)))))))))))))
 
 /-- Statement roster for the topo support-surface repair terminal seal. -/
 def
@@ -46480,6 +46496,8 @@ def
    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
    RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
    RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+   RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
    RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
@@ -46499,6 +46517,8 @@ theorem
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
@@ -46506,12 +46526,12 @@ theorem
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the topo support-surface repair terminal seal has fourteen
+/-- Build gate: the topo support-surface repair terminal seal has sixteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements.length =
-      14 := rfl
+      16 := rfl
 
 /-- Build-gated statement roster certificate for the topo support-surface
 repair terminal seal. -/
@@ -46527,6 +46547,8 @@ def
        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
        RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
        RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
        Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
@@ -46534,7 +46556,7 @@ def
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealStatements.length =
-      14 /\
+      16 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealTopoSupportSurfaceRepairRouteRosterSealCertificate
 
 /-- The topo support-surface repair terminal seal has a fixed statement
