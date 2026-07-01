@@ -45287,6 +45287,151 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_open_target_identity_certificate⟩
 
+/-- Route-source identity seal for the current two-key terminal endpoint.
+This binds the exact two remaining open-target ids to their per-target
+route-source obstruction bundles and the terminal nonclosure judgement. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate /\
+          OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate /\
+            part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements.length =
+              15 /\
+            topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements.length =
+              20 /\
+            openTargetRouteSourceOpenTargetNonclosureBundleRowStatements.length =
+              9 /\
+            completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements.length =
+              33 /\
+            openSemanticTargetIds =
+              ["theorem_4_1_part6_lattice_embedding",
+               "topo_cluster_random_supercritical_z2"] /\
+            Not Part6LatticeEmbeddingSemanticKernelTarget /\
+            Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+            (CompletePaperSemanticKernelOnly <-> False) /\
+            Not CompletePaperSemanticKernelOnly
+
+/-- The terminal identity seal is also pinned to the route-source obstruction
+bundle for each remaining open target. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_route_source_identity_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate := by
+  exact ⟨completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_open_target_identity_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_open_target_identity_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle_certificate,
+    completePaperSemanticKernelOnly_current_per_target_route_source_open_target_nonclosure_bundle_statement_roster_certificate,
+    open_target_route_source_open_target_nonclosure_bundle_row_statement_roster_certificate,
+    part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements_length_current,
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements_length_current,
+    openTargetRouteSourceOpenTargetNonclosureBundleRowStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements_length_current,
+    openSemanticTargetIds_current,
+    part6_lattice_embedding_semantic_kernel_target_notYet,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the route-source identity terminal seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate,
+   OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
+   part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements.length =
+    15,
+   topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements.length =
+    20,
+   openTargetRouteSourceOpenTargetNonclosureBundleRowStatements.length =
+    9,
+   completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements.length =
+    33,
+   openSemanticTargetIds =
+    ["theorem_4_1_part6_lattice_embedding",
+     "topo_cluster_random_supercritical_z2"],
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the route-source identity terminal seal roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
+       part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements.length =
+        15,
+       topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements.length =
+        20,
+       openTargetRouteSourceOpenTargetNonclosureBundleRowStatements.length =
+        9,
+       completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements.length =
+        33,
+       openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the route-source identity terminal seal roster has fifteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements.length =
+      15 := rfl
+
+/-- Build-gated statement roster certificate for the route-source identity
+terminal seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatementRosterCertificate,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
+       part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements.length =
+        15,
+       topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements.length =
+        20,
+       openTargetRouteSourceOpenTargetNonclosureBundleRowStatements.length =
+        9,
+       completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements.length =
+        33,
+       openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements.length =
+      15 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityCertificate
+
+/-- The route-source identity terminal seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_route_source_identity_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatementRosterCertificate := by
+  exact ⟨completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealRouteSourceIdentityStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_route_source_identity_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
