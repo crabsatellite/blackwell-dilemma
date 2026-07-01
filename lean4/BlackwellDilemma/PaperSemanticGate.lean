@@ -41503,24 +41503,34 @@ theorem
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle :
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate /\
       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
-        OpenTargetRepairFrontierPairCertificate /\
-          OpenTargetRepairFrontierPairStatementRosterCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
-              (CompletePaperSemanticKernelOnly <-> False) /\
-                Not CompletePaperSemanticKernelOnly := by
+        CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate /\
+          completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+            9 /\
+            OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate /\
+              OpenTargetRepairFrontierPairCertificate /\
+                OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
+                    (CompletePaperSemanticKernelOnly <-> False) /\
+                      Not CompletePaperSemanticKernelOnly := by
   exact And.intro
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_certificate
     (And.intro
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_statement_roster_certificate
       (And.intro
-        open_target_repair_frontier_pair_certificate
+        completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_statement_roster_certificate
         (And.intro
-          open_target_repair_frontier_pair_statement_roster_certificate
+          completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_length_current
           (And.intro
-            completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_statement_roster_certificate
+            open_target_route_source_open_target_nonclosure_bundle_row_statement_roster_certificate
             (And.intro
-              completePaperSemanticKernelOnly_iff_false_current
-              completePaperSemanticKernelOnly_notYet)))))
+              open_target_repair_frontier_pair_certificate
+              (And.intro
+                open_target_repair_frontier_pair_statement_roster_certificate
+                (And.intro
+                  completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_bridge_statement_roster_certificate
+                  (And.intro
+                    completePaperSemanticKernelOnly_iff_false_current
+                    completePaperSemanticKernelOnly_notYet))))))))
 
 /-- Named certificate for the route-source terminal capstone audit bundle. -/
 def
@@ -41528,11 +41538,15 @@ def
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
-      OpenTargetRepairFrontierPairCertificate /\
-        OpenTargetRepairFrontierPairStatementRosterCertificate /\
-          CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
-            (CompletePaperSemanticKernelOnly <-> False) /\
-              Not CompletePaperSemanticKernelOnly
+      CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9 /\
+          OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate /\
+            OpenTargetRepairFrontierPairCertificate /\
+              OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
+                  (CompletePaperSemanticKernelOnly <-> False) /\
+                    Not CompletePaperSemanticKernelOnly
 
 /-- The route-source terminal capstone audit certificate is machine checked. -/
 theorem
@@ -41548,6 +41562,10 @@ def
   [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+      9,
+   OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
    OpenTargetRepairFrontierPairCertificate,
    OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
@@ -41561,18 +41579,22 @@ theorem
       [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] := rfl
 
-/-- Build gate: the route-source terminal capstone audit roster has eight
+/-- Build gate: the route-source terminal capstone audit roster has eleven
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatements.length =
-      8 := rfl
+      11 := rfl
 
 /-- Build-gated statement roster certificate for the route-source terminal
 capstone audit certificate. -/
@@ -41583,13 +41605,17 @@ def
       [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatements.length =
-      8 /\
+      11 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditCertificate
 
 /-- The route-source terminal capstone audit certificate has a fixed statement
