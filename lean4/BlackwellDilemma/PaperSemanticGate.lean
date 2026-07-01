@@ -5850,6 +5850,8 @@ def OpenSemanticTargetSurfaceRosterConsistencyCertificate : Prop :=
       openSemanticTargetFrontierPayloadSurfaceProgressCertificates /\
     openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
       openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates /\
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
     openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
       openSemanticTargetFrontierPayloadSurfaceCurrentFrontierCertificates
 
@@ -5877,6 +5879,8 @@ theorem open_semantic_target_surface_roster_consistency_certificate :
     openSemanticTargetSurfaceClosureRouteObstructions_current,
     openSemanticTargetSurfaceFrontierProgressCertificates_current,
     openSemanticTargetSurfaceFrontierNonclosureCertificates_current,
+    open_semantic_target_surface_frontier_nonclosure_certificate,
+    open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,
     openSemanticTargetSurfaceCurrentFrontierCertificates_current⟩
 
 /-- Single build-gated payload route-map certificate for the two remaining
