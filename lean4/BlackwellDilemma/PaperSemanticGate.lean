@@ -37975,18 +37975,39 @@ theorem
         CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate /\
           CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate /\
             CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate /\
-              CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate := by
-  exact And.intro
-    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
-    (And.intro
-      completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate
-      (And.intro
-        completePaperSemanticKernelOnly_current_open_target_route_obstruction_exit_certificate
-        (And.intro
-          completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate
-          (And.intro
-            completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
-            completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate))))
+              CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+                OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                  OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate /\
+                            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate := by
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_certificate
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_obstruction_exit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_exit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate
+  exact completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate
 
 /-- Named certificate for the terminal kernel-only nonclosure
 route-obstruction exit bundle. -/
@@ -37997,7 +38018,14 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstr
       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate /\
         CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate /\
           CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate /\
-            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate
+            CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+              OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate
 
 /-- The terminal kernel-only nonclosure route-obstruction exit certificate is
 machine checked. -/
@@ -38016,7 +38044,14 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstr
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate]
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate]
 
 /-- Build gate: the terminal kernel-only nonclosure route-obstruction exit
 roster is fixed. -/
@@ -38029,14 +38064,21 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate] := rfl
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] := rfl
 
 /-- Build gate: the terminal kernel-only nonclosure route-obstruction exit
-roster has seven statements. -/
+roster has fourteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatements.length =
-      7 := rfl
+      14 := rfl
 
 /-- Build-gated statement roster certificate for the terminal kernel-only
 nonclosure route-obstruction exit bundle. -/
@@ -38049,9 +38091,16 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstr
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatements.length =
-      7 /\
+      14 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitCertificate
 
 /-- The terminal kernel-only nonclosure route-obstruction exit bundle has a
@@ -38085,7 +38134,21 @@ def
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate,
-   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate]
 
 /-- The theorem-name terminal kernel-only nonclosure route-obstruction exit
 bundle alias roster is fixed. -/
@@ -38093,7 +38156,21 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] := by
   rfl
 
 /-- The theorem-name terminal kernel-only nonclosure route-obstruction exit
@@ -38101,7 +38178,7 @@ bundle alias roster has the expected size. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements.length =
-      2 := by
+      16 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name terminal
@@ -38111,21 +38188,80 @@ def
     Prop :=
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements.length =
-      2 /\
-    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate
+      16 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+                      OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+                        OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentOpenTargetObstructionExitStatementRosterCertificate /\
+                            CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionExitStatementRosterCertificate /\
+                              CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteObstructionEquivalenceExitStatementRosterCertificate /\
+                                CompletePaperSemanticKernelOnlyCurrentObstructionRoutedExitStatementRosterCertificate /\
+                                  CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate
 
 /-- The theorem-name terminal kernel-only nonclosure route-obstruction exit
 bundle alias has a fixed statement roster. -/
 theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_bundle_statement_roster_certificate :
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatementRosterCertificate := by
-  exact And.intro
-    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_named_current
-    (And.intro
-      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_length_current
-      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_bundle_certificate)
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_named_current
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureRouteObstructionExitBundleStatements_length_current
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_bundle_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_route_obstruction_exit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_obstruction_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_obstruction_routed_exit_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_per_target_routed_exit_certificate
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_certificate
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_obstruction_exit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_exit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_open_target_route_obstruction_equivalence_exit_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_obstruction_routed_exit_statement_roster_certificate
+  exact completePaperSemanticKernelOnly_current_per_target_routed_exit_statement_roster_certificate
 
 /-- Supplemental gate: terminal capstone plus final obstruction-map bridge.  The
 bundle makes the final judgement obstruction-map all-view path visible next to
