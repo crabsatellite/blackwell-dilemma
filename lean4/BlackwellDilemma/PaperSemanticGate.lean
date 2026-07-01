@@ -47814,6 +47814,94 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate)
 
+/-- Projection from the public per-target obstruction boundary: the public
+nonclosure boundary statement roster is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_boundary_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.1
+
+/-- Projection from the public per-target obstruction boundary: the Part 6
+target remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_target_not :
+    Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.1
+
+/-- Projection from the public per-target obstruction boundary: the Part 6
+nondegenerate feasible repair route remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_repair_route_not :
+    Not Part6NondegenerateFeasibleRepairRoute := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the Part 6 full
+paper-closing support remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_full_support_not :
+    Not Part6FullPaperClosingSupport := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the Part 6
+repair route multipath certificate is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_certificate :
+    Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the Part 6
+repair route multipath statement roster is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_statement_roster_certificate :
+    Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the topo target
+remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_target_not :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the topo full
+paper-closing route remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_full_route_not :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.2.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the topo boxed
+torus finite Z2_L route remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_boxed_route_not :
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.2.2.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the topo route
+obstruction multipath certificate is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_certificate :
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.2.2.2.2.2.1
+
+/-- Projection from the public per-target obstruction boundary: the topo route
+obstruction multipath statement roster is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate.2.2.2.2.2.2.2.2.2.2
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

@@ -8005,6 +8005,50 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_boundary_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_boundary_roster_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_target_not_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_target_not"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_repair_route_not_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_repair_route_not"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_full_support_not_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_full_support_not"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_statement_roster_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_target_not_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_target_not"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_full_route_not_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_full_route_not"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_boxed_route_not_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_boxed_route_not"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -17883,6 +17927,50 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_boundary_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_boundary_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_target_not_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_target_not"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_repair_route_not_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_repair_route_not"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_full_support_not_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_full_support_not"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_multipath_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_target_not_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_target_not"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_full_route_not_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_full_route_not"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_boxed_route_not_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_boxed_route_not"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_multipath_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_statements="
