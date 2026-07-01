@@ -6198,7 +6198,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_statement_terms_checked=7"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_statement_terms_checked=12"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_statement_terms_proof="
@@ -6229,7 +6229,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_terms_checked=2"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_terms_checked=14"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_terms_proof="
@@ -14743,7 +14743,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_statement_terms_checked=7"
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_statement_terms_checked=12"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_statement_terms_proof="
@@ -14774,7 +14774,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_terms_checked=2"
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_terms_checked=14"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_terms_proof="
