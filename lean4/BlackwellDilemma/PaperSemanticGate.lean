@@ -45006,6 +45006,157 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_bridge_alignment_certificate⟩
 
+/-- Current terminal seal for the two-key bridge.  This packages the terminal
+bridge, the top-level current-alignment roster pair, and the terminal
+kernel-only nonclosure certificate into one build-gated paper-semantic endpoint.
+It is a nonclosure certificate: the gate remains at two open semantic targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
+              completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+                22 /\
+              completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
+                22 /\
+              CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+                  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+                    129 /\
+                  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatements.length =
+                    18 /\
+                  paperSemanticOpenCount = 2 /\
+                  Not (paperSemanticOpenCount = 0) /\
+                  (CompletePaperSemanticKernelOnly <-> False) /\
+                  Not CompletePaperSemanticKernelOnly
+
+/-- The terminal seal is already implied by the current two-key bridge and the
+top-level current-alignment rosters; it preserves the current nonclosure state. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCertificate := by
+  exact ⟨completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_bridge_alignment_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_bridge_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate,
+    completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current,
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate,
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate,
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatements_length_current,
+    paperSemanticOpenCount_current,
+    (by
+      intro hzero
+      exact (by decide : (2 : Nat) ≠ 0)
+        (paperSemanticOpenCount_current.symm.trans hzero)),
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the current two-key terminal seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+    22,
+   completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
+    22,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+    129,
+   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatements.length =
+    18,
+   paperSemanticOpenCount = 2,
+   Not (paperSemanticOpenCount = 0),
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the current two-key terminal seal roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+        22,
+       completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
+        22,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+        129,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatements.length =
+        18,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the current two-key terminal seal roster has seventeen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements.length =
+      17 := rfl
+
+/-- Build-gated statement roster certificate for the current two-key terminal
+seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+        22,
+       completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
+        22,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+        129,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalBridgeAlignmentStatements.length =
+        18,
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements.length =
+      17 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCertificate
+
+/-- The current two-key terminal seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatementRosterCertificate := by
+  exact ⟨completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
