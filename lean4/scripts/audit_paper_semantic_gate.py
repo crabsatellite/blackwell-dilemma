@@ -3570,6 +3570,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statements="
+        "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=30"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_route_source_routed_exit_open_target_nonclosure_bundle_statements="
         "completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements"
     )
@@ -11636,6 +11667,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_per_target_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statements="
+            "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_checked=30"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentObstructionSourceRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_obstruction_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_routed_exit_open_target_nonclosure_bundle_statements="
