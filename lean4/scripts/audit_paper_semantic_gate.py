@@ -11931,6 +11931,19 @@ def main() -> int:
         README_DUAL_OBSTRUCTION_SOURCE_PUBLIC_EVIDENCE_AUDIT_SEAL_PHRASE
         in lean_readme_text
     )
+    forbidden_when_open_paths_present = [
+        path for path in FORBIDDEN_WHEN_OPEN if path.exists()
+    ]
+    forbidden_when_open_phrases_checked = sum(
+        len(FORBIDDEN_WHEN_OPEN[path]) for path in forbidden_when_open_paths_present
+    )
+    forbidden_when_open_violations: list[tuple[Path, str]] = []
+    if open_count:
+        for path in forbidden_when_open_paths_present:
+            doc = read(path)
+            for phrase in FORBIDDEN_WHEN_OPEN[path]:
+                if phrase in doc:
+                    forbidden_when_open_violations.append((path, phrase))
     print(
         "semantic_target_readme_gate_counts="
         + (
@@ -11964,6 +11977,18 @@ def main() -> int:
             if readme_has_dual_obstruction_source_public_evidence_audit_seal
             else "0"
         )
+    )
+    print(
+        "semantic_target_forbidden_when_open_paths_checked="
+        f"{len(forbidden_when_open_paths_present)}"
+    )
+    print(
+        "semantic_target_forbidden_when_open_phrases_checked="
+        f"{forbidden_when_open_phrases_checked}"
+    )
+    print(
+        "semantic_target_forbidden_when_open_violations="
+        f"{len(forbidden_when_open_violations)}"
     )
     public_manifest_required_lines = [
         f"semantic_targets_open={open_count}",
@@ -17945,6 +17970,18 @@ def main() -> int:
                 else "0"
             )
         ),
+        (
+            "semantic_target_forbidden_when_open_paths_checked="
+            f"{len(forbidden_when_open_paths_present)}"
+        ),
+        (
+            "semantic_target_forbidden_when_open_phrases_checked="
+            f"{forbidden_when_open_phrases_checked}"
+        ),
+        (
+            "semantic_target_forbidden_when_open_violations="
+            f"{len(forbidden_when_open_violations)}"
+        ),
     ]
     public_manifest_complete_stdout_lines = [
         (
@@ -19509,14 +19546,10 @@ def main() -> int:
             "public-evidence audit seal summary"
         )
 
-    if open_count:
-        for path, phrases in FORBIDDEN_WHEN_OPEN.items():
-            if not path.exists():
-                continue
-            doc = read(path)
-            for phrase in phrases:
-                if phrase in doc:
-                    failures.append(f"{path.relative_to(REPO_ROOT)} contains overclaim phrase: {phrase!r}")
+    for path, phrase in forbidden_when_open_violations:
+        failures.append(
+            f"{path.relative_to(REPO_ROOT)} contains overclaim phrase: {phrase!r}"
+        )
 
     if failures:
         print()
