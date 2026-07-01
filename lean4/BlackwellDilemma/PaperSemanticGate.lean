@@ -4435,6 +4435,61 @@ theorem openTargetRepairFrontierPairStatements_named_current :
 theorem openTargetRepairFrontierPairStatements_length_current :
     openTargetRepairFrontierPairStatements.length = 2 := rfl
 
+/-- Component statement roster for the paired open-target repair frontier:
+each target contributes both its repair-frontier certificate and the fixed
+statement roster backing that certificate. -/
+def openTargetRepairFrontierPairComponentStatements : List Prop :=
+  [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+   Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate,
+   TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate]
+
+/-- Build gate: the paired repair-frontier component roster names exactly the
+current per-target certificate/roster components. -/
+theorem openTargetRepairFrontierPairComponentStatements_named_current :
+    openTargetRepairFrontierPairComponentStatements =
+      [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+       Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate] :=
+  rfl
+
+/-- Build gate: the paired repair-frontier component roster has exactly four
+statements. -/
+theorem openTargetRepairFrontierPairComponentStatements_length_current :
+    openTargetRepairFrontierPairComponentStatements.length = 4 := rfl
+
+/-- Build-gated component roster for the paired open-target repair-frontier
+certificate. -/
+def OpenTargetRepairFrontierPairComponentStatementRosterCertificate : Prop :=
+  openTargetRepairFrontierPairComponentStatements =
+      [Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate,
+       Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate] /\
+    openTargetRepairFrontierPairComponentStatements.length = 4 /\
+    Part6LatticeEmbeddingAlphaDomainRepairFrontierCertificate /\
+    Part6LatticeEmbeddingAlphaDomainRepairFrontierStatementRosterCertificate /\
+    TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate /\
+    TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierStatementRosterCertificate
+
+/-- The paired repair-frontier components are each backed by fixed per-target
+statement rosters. -/
+theorem
+    open_target_repair_frontier_pair_component_statement_roster_certificate :
+    OpenTargetRepairFrontierPairComponentStatementRosterCertificate := by
+  exact And.intro
+    openTargetRepairFrontierPairComponentStatements_named_current
+    (And.intro
+      openTargetRepairFrontierPairComponentStatements_length_current
+      (And.intro
+        part6_lattice_embedding_alpha_domain_repair_frontier_certificate
+        (And.intro
+          part6_lattice_embedding_alpha_domain_repair_frontier_statement_roster_certificate
+          (And.intro
+            topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_certificate
+            topo_cluster_random_supercritical_z2_mills_lower_constant_repair_frontier_statement_roster_certificate))))
+
 /-- Build-gated statement roster for the paired open-target repair-frontier
 certificate. -/
 def OpenTargetRepairFrontierPairStatementRosterCertificate : Prop :=
@@ -4444,7 +4499,9 @@ def OpenTargetRepairFrontierPairStatementRosterCertificate : Prop :=
        TopoClusterRandomSupercriticalZ2MillsLowerConstantRepairFrontierCertificate])
     (And
       (openTargetRepairFrontierPairStatements.length = 2)
-      OpenTargetRepairFrontierPairCertificate)
+      (And
+        OpenTargetRepairFrontierPairCertificate
+        OpenTargetRepairFrontierPairComponentStatementRosterCertificate))
 
 /-- The paired open-target repair-frontier certificate has a fixed statement
 roster. -/
@@ -4454,7 +4511,9 @@ theorem open_target_repair_frontier_pair_statement_roster_certificate :
     openTargetRepairFrontierPairStatements_named_current
     (And.intro
       openTargetRepairFrontierPairStatements_length_current
-      open_target_repair_frontier_pair_certificate)
+      (And.intro
+        open_target_repair_frontier_pair_certificate
+        open_target_repair_frontier_pair_component_statement_roster_certificate))
 
 /-- Topo open-target bundle: the typed frontier payload, the active repaired
 support-surface output, the matching repair/closing nonclosure certificates,

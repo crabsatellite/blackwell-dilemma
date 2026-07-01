@@ -7356,6 +7356,29 @@ def main() -> int:
     )
     print("semantic_target_open_repair_frontier_pair_statement_roster_terms_checked=2")
     print(
+        "semantic_target_open_repair_frontier_pair_component_statements="
+        "openTargetRepairFrontierPairComponentStatements"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_component_statements_proof="
+        "openTargetRepairFrontierPairComponentStatements_named_current"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_component_statement_terms_checked=4"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_component_statement_terms_proof="
+        "openTargetRepairFrontierPairComponentStatements_length_current"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_component_statement_roster_certificate="
+        "OpenTargetRepairFrontierPairComponentStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_open_repair_frontier_pair_component_statement_roster_certificate_proof="
+        "open_target_repair_frontier_pair_component_statement_roster_certificate"
+    )
+    print(
         "semantic_target_open_repair_frontier_pair_statement_roster_length_proof="
         "openTargetRepairFrontierPairStatements_length_current"
     )
