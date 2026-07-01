@@ -5703,6 +5703,104 @@ theorem openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_length_cu
     openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates.length =
       paperSemanticOpenCount := rfl
 
+/-- Certificate tying the kernel-surface and frontier-payload nonclosure
+certificate rosters to the same two active nonclosure certificates. -/
+def OpenSemanticTargetSurfaceFrontierNonclosureCertificate : Prop :=
+  openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+      openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates /\
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate] /\
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates =
+      [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate] /\
+    openSemanticTargetKernelSurfaceFrontierNonclosureCertificates.length =
+      paperSemanticOpenCount /\
+    openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates.length =
+      paperSemanticOpenCount
+
+/-- The kernel-surface and frontier-payload nonclosure certificate rosters are
+machine checked against the same active certificates. -/
+theorem open_semantic_target_surface_frontier_nonclosure_certificate :
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate := by
+  exact And.intro
+    openSemanticTargetSurfaceFrontierNonclosureCertificates_current
+    (And.intro
+      openSemanticTargetKernelSurfaceFrontierNonclosureCertificates_named_current
+      (And.intro
+        openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_named_current
+        (And.intro
+          openSemanticTargetKernelSurfaceFrontierNonclosureCertificates_length_current
+          openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates_length_current)))
+
+/-- Statement roster for the surface frontier-nonclosure certificate. -/
+def openSemanticTargetSurfaceFrontierNonclosureStatements : List Prop :=
+  [OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+     openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates,
+   openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+     [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate],
+   openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates =
+     [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate],
+   openSemanticTargetKernelSurfaceFrontierNonclosureCertificates.length =
+     paperSemanticOpenCount,
+   openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates.length =
+     paperSemanticOpenCount]
+
+/-- Build gate: the surface frontier-nonclosure statement roster is fixed. -/
+theorem openSemanticTargetSurfaceFrontierNonclosureStatements_named_current :
+    openSemanticTargetSurfaceFrontierNonclosureStatements =
+      [OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+         openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates,
+       openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+         [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate],
+       openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates =
+         [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate],
+       openSemanticTargetKernelSurfaceFrontierNonclosureCertificates.length =
+         paperSemanticOpenCount,
+       openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates.length =
+         paperSemanticOpenCount] := rfl
+
+/-- Build gate: the surface frontier-nonclosure statement roster has six
+statements. -/
+theorem openSemanticTargetSurfaceFrontierNonclosureStatements_length_current :
+    openSemanticTargetSurfaceFrontierNonclosureStatements.length = 6 := rfl
+
+/-- Build-gated statement roster certificate for the surface
+frontier-nonclosure package. -/
+def OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate :
+    Prop :=
+  openSemanticTargetSurfaceFrontierNonclosureStatements =
+      [OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+         openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates,
+       openSemanticTargetKernelSurfaceFrontierNonclosureCertificates =
+         [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate],
+       openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates =
+         [Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate],
+       openSemanticTargetKernelSurfaceFrontierNonclosureCertificates.length =
+         paperSemanticOpenCount,
+       openSemanticTargetFrontierPayloadSurfaceNonclosureCertificates.length =
+         paperSemanticOpenCount] /\
+    openSemanticTargetSurfaceFrontierNonclosureStatements.length = 6 /\
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate
+
+/-- The surface frontier-nonclosure package has a fixed statement roster. -/
+theorem open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate :
+    OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate := by
+  exact And.intro
+    openSemanticTargetSurfaceFrontierNonclosureStatements_named_current
+    (And.intro
+      openSemanticTargetSurfaceFrontierNonclosureStatements_length_current
+      open_semantic_target_surface_frontier_nonclosure_certificate)
+
 /-- Build gate: the kernel-surface current-frontier certificate roster has one
 entry for each currently open target. -/
 theorem openSemanticTargetKernelSurfaceCurrentFrontierCertificates_length_current :

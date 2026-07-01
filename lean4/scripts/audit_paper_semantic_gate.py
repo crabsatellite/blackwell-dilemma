@@ -7530,6 +7530,35 @@ def main() -> int:
         "openSemanticTargetSurfaceFrontierNonclosureCertificates_current"
     )
     print(
+        "semantic_target_surface_frontier_nonclosure_certificate="
+        "OpenSemanticTargetSurfaceFrontierNonclosureCertificate"
+    )
+    print(
+        "semantic_target_surface_frontier_nonclosure_certificate_proof="
+        "open_semantic_target_surface_frontier_nonclosure_certificate"
+    )
+    print(
+        "semantic_target_surface_frontier_nonclosure_statement_roster="
+        "openSemanticTargetSurfaceFrontierNonclosureStatements"
+    )
+    print(
+        "semantic_target_surface_frontier_nonclosure_statement_roster_proof="
+        "openSemanticTargetSurfaceFrontierNonclosureStatements_named_current"
+    )
+    print("semantic_target_surface_frontier_nonclosure_statement_terms_checked=6")
+    print(
+        "semantic_target_surface_frontier_nonclosure_statement_terms_proof="
+        "openSemanticTargetSurfaceFrontierNonclosureStatements_length_current"
+    )
+    print(
+        "semantic_target_surface_frontier_nonclosure_statement_roster_certificate="
+        "OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate"
+    )
+    print(
+        "semantic_target_surface_frontier_nonclosure_statement_roster_certificate_proof="
+        "open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate"
+    )
+    print(
         "semantic_target_surface_current_frontier_consistency="
         "openSemanticTargetSurfaceCurrentFrontierCertificates_current"
     )
