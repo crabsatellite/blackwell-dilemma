@@ -42329,6 +42329,121 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_obstruction_map_audit_certificate)
 
+/-- Final audit certificate joining the route-source terminal capstone
+public-evidence and obstruction-map audits. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate /\
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements.length =
+        12 /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatementRosterCertificate /\
+            completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements.length =
+              14 /\
+              CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate /\
+                (CompletePaperSemanticKernelOnly <-> False) /\
+                  Not CompletePaperSemanticKernelOnly
+
+/-- The final route-source terminal capstone audit certificate is machine
+checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_final_audit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_audit_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_public_evidence_audit_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements_length_current
+        (And.intro
+          completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_obstruction_map_audit_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_obstruction_map_audit_statement_roster_certificate
+            (And.intro
+              completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements_length_current
+              (And.intro
+                completePaperSemanticKernelOnly_current_final_status_certificate
+                (And.intro
+                  completePaperSemanticKernelOnly_iff_false_current
+                  completePaperSemanticKernelOnly_notYet)))))))
+
+/-- Statement roster for the final route-source terminal capstone audit. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements.length =
+      12,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements.length =
+      14,
+   CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the final route-source terminal capstone audit roster is fixed.
+-/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements.length =
+          12,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements.length =
+          14,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the final route-source terminal capstone audit roster has ten
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the final route-source
+terminal capstone audit. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstonePublicEvidenceAuditStatements.length =
+          12,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneObstructionMapAuditStatements.length =
+          14,
+       CompletePaperSemanticKernelOnlyCurrentFinalStatusCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditCertificate
+
+/-- The final route-source terminal capstone audit has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_final_audit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneFinalAuditStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_final_audit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
