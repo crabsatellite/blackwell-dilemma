@@ -25019,6 +25019,128 @@ theorem
     completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
     completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate⟩
 
+/-- Named certificate for the Part 6 target-specific route-source open-target
+nonclosure bundle. -/
+def Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleCertificate :
+    Prop :=
+  Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate /\
+    Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate /\
+      Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate /\
+        Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate /\
+          Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+            (Part6RemainingConditionalProjectionCertificate /\
+              Part6RemainingConditionalProjectionStatementRosterCertificate /\
+                Part6LatticeEmbeddingFrontierPayloadCertificate /\
+                  Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+                    Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+                      Part6CurrentFrontierCertificate /\
+                        Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                          Not Part6NondegenerateFeasibleRepairRoute /\
+                            Not Part6FullPaperClosingSupport /\
+                              Not Part6FullPaperClosingDivergenceWitness /\
+                                Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+                                  Not (Part6FullPaperClosingDivergenceWitness /\
+                                    Part6FullPaperClosingFeasibleDivergenceWitness) /\
+                                    Not Part6LatticeEmbeddingExactClosureInput /\
+                                      Not Part6FullPaperClosingFullOutputBundle /\
+                                        Part6LatticeEmbeddingCurrentRoutedExitCertificate) /\
+              Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate
+
+/-- The Part 6 target-specific route-source open-target nonclosure bundle is
+available as a named certificate. -/
+theorem
+    part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_certificate :
+    Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleCertificate := by
+  exact part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle
+
+/-- Statement roster for the Part 6 target-specific route-source open-target
+nonclosure certificate. -/
+def part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements :
+    List Prop :=
+  [Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleCertificate,
+   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+   Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   Part6RemainingConditionalProjectionCertificate,
+   Part6RemainingConditionalProjectionStatementRosterCertificate,
+   Part6LatticeEmbeddingFrontierPayloadCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+   Part6CurrentFrontierCertificate,
+   Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate]
+
+/-- The Part 6 target-specific route-source open-target nonclosure statement
+roster names the current build-gated components. -/
+theorem
+    part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements_named_current :
+    part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements =
+      [Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6RemainingConditionalProjectionCertificate,
+       Part6RemainingConditionalProjectionStatementRosterCertificate,
+       Part6LatticeEmbeddingFrontierPayloadCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate] := by
+  rfl
+
+/-- The Part 6 target-specific route-source open-target nonclosure statement
+roster has the expected size. -/
+theorem
+    part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements_length_current :
+    part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements.length =
+      15 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the Part 6 target-specific
+route-source open-target nonclosure bundle. -/
+def
+    Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatementRosterCertificate :
+    Prop :=
+  part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements =
+      [Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingRepairRouteDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionCertificate,
+       Part6LatticeEmbeddingFullSupportDerivedTargetObstructionStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6RemainingConditionalProjectionCertificate,
+       Part6RemainingConditionalProjectionStatementRosterCertificate,
+       Part6LatticeEmbeddingFrontierPayloadCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Part6CurrentFrontierCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate] /\
+    part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements.length =
+      15 /\
+    Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleCertificate
+
+/-- The Part 6 target-specific route-source open-target nonclosure bundle has a
+fixed statement roster. -/
+theorem
+    part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statement_roster_certificate :
+    Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatementRosterCertificate := by
+  exact And.intro
+    part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements_named_current
+    (And.intro
+      part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements_length_current
+      part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_certificate)
+
 /-- Topo target-specific route-source bundle: the full and boxed route-derived
 target-obstruction certificates are checked with the support-surface
 nonclosure bundle and current routed exit. -/
@@ -25057,6 +25179,144 @@ theorem
     topo_cluster_random_supercritical_z2_current_routed_exit_certificate,
     completePaperSemanticKernelOnly_current_open_target_route_derived_target_obstruction_certificate,
     completePaperSemanticKernelOnly_current_open_target_target_derived_route_obstruction_certificate⟩
+
+/-- Named certificate for the topo target-specific route-source open-target
+nonclosure bundle. -/
+def
+    TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleCertificate :
+    Prop :=
+  TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate /\
+    TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate /\
+      TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate /\
+        TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate /\
+          TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+            (TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate /\
+              TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate /\
+                TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate /\
+                  TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate /\
+                    TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate /\
+                      TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate /\
+                        TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate /\
+                          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+                            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+                              RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+                                RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+                                  Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                                    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                                      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                                        TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate) /\
+              TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate
+
+/-- The topo target-specific route-source open-target nonclosure bundle is
+available as a named certificate. -/
+theorem
+    topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_certificate :
+    TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleCertificate := by
+  exact topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle
+
+/-- Statement roster for the topo target-specific route-source open-target
+nonclosure certificate. -/
+def
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements :
+    List Prop :=
+  [TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+   TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
+   TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate,
+   TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+   TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate]
+
+/-- The topo target-specific route-source open-target nonclosure statement
+roster names the current build-gated components. -/
+theorem
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements_named_current :
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements =
+      [TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate] := by
+  rfl
+
+/-- The topo target-specific route-source open-target nonclosure statement
+roster has the expected size. -/
+theorem
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements_length_current :
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements.length =
+      20 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the topo target-specific
+route-source open-target nonclosure bundle. -/
+def
+    TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatementRosterCertificate :
+    Prop :=
+  topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements =
+      [TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2FullRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionCertificate,
+       TopoClusterRandomSupercriticalZ2BoxedRouteDerivedTargetObstructionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2ExactOutputProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2ExactOutputProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionCertificate,
+       TopoClusterRandomSupercriticalZ2SupportSurfaceClosingRouteNonclosureProjectionStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2FrontierPayloadCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate] /\
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements.length =
+      20 /\
+    TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleCertificate
+
+/-- The topo target-specific route-source open-target nonclosure bundle has a
+fixed statement roster. -/
+theorem
+    topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_roster_certificate :
+    TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatementRosterCertificate := by
+  exact And.intro
+    topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements_named_current
+    (And.intro
+      topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements_length_current
+      topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_certificate)
 
 /-- Aggregate target-specific route-source bundle: both remaining open targets
 have their target-local route-source obstruction certificates checked together

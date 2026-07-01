@@ -3632,6 +3632,68 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate"
     )
     print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statements="
+        "part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statements_proof="
+        "part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statement_terms_checked=15"
+    )
+    print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statement_terms_proof="
+        "part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_certificate="
+        "Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_certificate_proof="
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statement_roster_certificate="
+        "Part6LatticeEmbeddingRouteSourceConditionalOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "part6_lattice_embedding_route_source_conditional_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statements="
+        "topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statements_proof="
+        "topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements_named_current"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_terms_checked=20"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_terms_proof="
+        "topoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatements_length_current"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_certificate="
+        "TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleCertificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_certificate_proof="
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_certificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_roster_certificate="
+        "TopoClusterRandomSupercriticalZ2RouteSourceSupportOpenTargetNonclosureBundleStatementRosterCertificate"
+    )
+    print(
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_roster_certificate_proof="
+        "topo_cluster_random_supercritical_z2_route_source_support_open_target_nonclosure_bundle_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_per_target_route_source_open_target_nonclosure_bundle_statements="
         "completePaperSemanticKernelOnlyCurrentPerTargetRouteSourceOpenTargetNonclosureBundleStatements"
     )
