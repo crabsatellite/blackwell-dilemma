@@ -41653,6 +41653,10 @@ def
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+      9,
+   OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
    OpenTargetRepairFrontierPairCertificate,
    OpenTargetRepairFrontierPairStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
@@ -41669,6 +41673,10 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
@@ -41677,11 +41685,11 @@ theorem
   rfl
 
 /-- The theorem-name route-source terminal capstone audit bundle alias roster
-has ten statements. -/
+has thirteen statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements_length_current :
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements.length =
-      10 := by
+      13 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name route-source
@@ -41695,23 +41703,31 @@ def
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+          9,
+       OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate,
        OpenTargetRepairFrontierPairCertificate,
        OpenTargetRepairFrontierPairStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate,
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements.length =
-      10 /\
+      13 /\
     CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleCertificate /\
       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditCertificate /\
         CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditStatementRosterCertificate /\
           CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneCertificate /\
             CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneStatementRosterCertificate /\
-              OpenTargetRepairFrontierPairCertificate /\
-                OpenTargetRepairFrontierPairStatementRosterCertificate /\
-                  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
-                    (CompletePaperSemanticKernelOnly <-> False) /\
-                      Not CompletePaperSemanticKernelOnly
+              CompletePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatementRosterCertificate /\
+                completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements.length =
+                  9 /\
+                  OpenTargetRouteSourceOpenTargetNonclosureBundleRowStatementRosterCertificate /\
+                    OpenTargetRepairFrontierPairCertificate /\
+                      OpenTargetRepairFrontierPairStatementRosterCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureBridgeStatementRosterCertificate /\
+                          (CompletePaperSemanticKernelOnly <-> False) /\
+                            Not CompletePaperSemanticKernelOnly
 
 /-- The theorem-name route-source terminal capstone audit bundle alias has a
 fixed statement roster. -/
@@ -41732,6 +41748,12 @@ theorem
   · exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_certificate
   constructor
   · exact completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnly_current_route_source_per_target_nonclosure_top_level_bridge_statement_roster_certificate
+  constructor
+  · exact completePaperSemanticKernelOnlyCurrentRouteSourcePerTargetNonclosureTopLevelBridgeStatements_length_current
+  constructor
+  · exact open_target_route_source_open_target_nonclosure_bundle_row_statement_roster_certificate
   constructor
   · exact open_target_repair_frontier_pair_certificate
   constructor

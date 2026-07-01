@@ -6783,7 +6783,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_statement_terms_checked=10"
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_statement_terms_checked=13"
     )
     print(
         "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_statement_terms_proof="
@@ -15649,7 +15649,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneAuditBundleStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_statement_terms_checked=10"
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_statement_terms_checked=13"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_audit_bundle_statement_terms_proof="
