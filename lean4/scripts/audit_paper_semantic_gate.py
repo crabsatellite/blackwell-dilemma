@@ -5911,6 +5911,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_gate_status_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_terms_checked=2"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statements="
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements"
     )
@@ -5940,6 +5971,37 @@ def main() -> int:
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate_proof="
         "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statements="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_checked=2"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_roster_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_operational_statements="
@@ -14105,6 +14167,37 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_gate_status_statement_roster_certificate"
         ),
         (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_terms_checked=2"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetGateStatusStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_gate_status_statement_roster_certificate"
+        ),
+        (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statements="
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements"
         ),
@@ -14134,6 +14227,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statements="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_checked=2"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_operational_statements="
