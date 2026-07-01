@@ -45724,6 +45724,161 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_certificate⟩
 
+/-- Paper-label completion barrier for the current terminal endpoint.  This
+keeps the completion barrier tied to the exact manuscript-facing labels of the
+two remaining open targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate /\
+          openSemanticTargetIds =
+            ["theorem_4_1_part6_lattice_embedding",
+             "topo_cluster_random_supercritical_z2"] /\
+          openSemanticTargetKernelSurfacePaperLabels =
+            ["thm:cognitive-threshold Part 6",
+             "prop:topo-cluster and thm:phase"] /\
+          openSemanticTargets.map (fun target => target.paperLabel) =
+            ["thm:cognitive-threshold Part 6",
+             "prop:topo-cluster and thm:phase"] /\
+          openSemanticTargetKernelSurfaceIdPaperLabels =
+            [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+             ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")] /\
+          openSemanticTargetKernelSurfaceIdPaperLabels =
+            openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+          paperSemanticOpenCount = 2 /\
+          Not (paperSemanticOpenCount = 0) /\
+          (CompletePaperSemanticKernelOnly <-> False) /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The terminal completion barrier is pinned to the manuscript-facing labels
+of the two remaining open targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_completion_barrier_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate := by
+  exact ⟨completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_open_target_identity_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_open_target_identity_statement_roster_certificate,
+    openSemanticTargetIds_current,
+    (by rfl),
+    (by rfl),
+    (by rfl),
+    openSemanticTargetKernelSurfaceIdPaperLabels_current,
+    paperSemanticOpenCount_current,
+    (by
+      intro hzero
+      exact (by decide : (2 : Nat) ≠ 0)
+        (paperSemanticOpenCount_current.symm.trans hzero)),
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the paper-label completion barrier. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate,
+   openSemanticTargetIds =
+    ["theorem_4_1_part6_lattice_embedding",
+     "topo_cluster_random_supercritical_z2"],
+   openSemanticTargetKernelSurfacePaperLabels =
+    ["thm:cognitive-threshold Part 6",
+     "prop:topo-cluster and thm:phase"],
+   openSemanticTargets.map (fun target => target.paperLabel) =
+    ["thm:cognitive-threshold Part 6",
+     "prop:topo-cluster and thm:phase"],
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+    [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+     ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+    openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   paperSemanticOpenCount = 2,
+   Not (paperSemanticOpenCount = 0),
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the paper-label completion-barrier roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate,
+       openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfacePaperLabels =
+        ["thm:cognitive-threshold Part 6",
+         "prop:topo-cluster and thm:phase"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+        ["thm:cognitive-threshold Part 6",
+         "prop:topo-cluster and thm:phase"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+         ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the paper-label completion-barrier roster has fourteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements.length =
+      14 := rfl
+
+/-- Build-gated statement roster certificate for the paper-label completion
+barrier. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealOpenTargetIdentityStatementRosterCertificate,
+       openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfacePaperLabels =
+        ["thm:cognitive-threshold Part 6",
+         "prop:topo-cluster and thm:phase"],
+       openSemanticTargets.map (fun target => target.paperLabel) =
+        ["thm:cognitive-threshold Part 6",
+         "prop:topo-cluster and thm:phase"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+         ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       paperSemanticOpenCount = 2,
+       Not (paperSemanticOpenCount = 0),
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements.length =
+      14 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate
+
+/-- The paper-label completion barrier has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_completion_barrier_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatementRosterCertificate := by
+  exact ⟨completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_completion_barrier_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
