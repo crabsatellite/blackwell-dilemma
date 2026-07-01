@@ -47128,6 +47128,147 @@ theorem
       completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatements_length_current
       completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_first_edge_repair_not_closing_seal_certificate)
 
+/-- Terminal seal: the Part 6 open target's repair-route obstruction is sourced
+at the bottom-level Part 6 output witnesses, and the terminal endpoint carries
+that source together with the previous first-edge topo repair/nonclosing seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatementRosterCertificate /\
+      Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate /\
+        Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate /\
+          Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+            Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+                Not Part6FullPaperClosingDivergenceWitness /\
+                  Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+                    Not (Part6FullPaperClosingDivergenceWitness /\
+                      Part6FullPaperClosingFeasibleDivergenceWitness) /\
+                      Not Part6FullPaperClosingFullOutputBundle /\
+                        openSemanticTargetIds =
+                          ["theorem_4_1_part6_lattice_embedding",
+                           "topo_cluster_random_supercritical_z2"] /\
+                          paperSemanticOpenCount = 2 /\
+                            (CompletePaperSemanticKernelOnly <-> False) /\
+                              Not CompletePaperSemanticKernelOnly
+
+/-- The terminal Part 6 obstruction-source seal is inhabited by current
+kernel-only certificates and current refutations. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_part6_obstruction_source_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_first_edge_repair_not_closing_seal_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_first_edge_repair_not_closing_seal_statement_roster_certificate,
+    part6_nondegenerate_feasible_repair_route_obstruction_source_certificate,
+    part6_nondegenerate_feasible_repair_route_obstruction_source_statement_roster_certificate,
+    part6_lattice_embedding_repair_route_obstruction_multipath_certificate,
+    part6_lattice_embedding_repair_route_obstruction_multipath_statement_roster_certificate,
+    not_part6_nondegenerate_feasible_repair_route_current,
+    not_part6_full_paper_closing_divergence_witness_current,
+    not_part6_full_paper_closing_feasible_divergence_witness_current,
+    not_part6_full_paper_closing_output_pair_current,
+    not_part6_full_paper_closing_full_output_bundle_current,
+    openSemanticTargetIds_current,
+    paperSemanticOpenCount_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the terminal Part 6 obstruction-source seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+   Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingDivergenceWitness,
+   Not Part6FullPaperClosingFeasibleDivergenceWitness,
+   Not (Part6FullPaperClosingDivergenceWitness /\
+    Part6FullPaperClosingFeasibleDivergenceWitness),
+   Not Part6FullPaperClosingFullOutputBundle,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal Part 6 obstruction-source seal roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not (Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness),
+       Not Part6FullPaperClosingFullOutputBundle,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal Part 6 obstruction-source seal has sixteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements.length =
+      16 := rfl
+
+/-- Build-gated statement roster certificate for the terminal Part 6
+obstruction-source seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetFirstEdgeRepairNotClosingSealStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not (Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness),
+       Not Part6FullPaperClosingFullOutputBundle,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements.length =
+      16 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealCertificate
+
+/-- The terminal Part 6 obstruction-source seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_part6_obstruction_source_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetPart6ObstructionSourceSealStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_part6_obstruction_source_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
