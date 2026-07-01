@@ -46001,6 +46001,164 @@ theorem
     completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairStatements_length_current,
     completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_obstruction_pair_certificate⟩
 
+/-- Route-level obstruction-pair seal for the paper-labelled terminal endpoint.
+This keeps the two manuscript-facing target refutations synchronized with the
+current route, closure-route, and closure-input pair obstructions. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate /\
+          Not (Part6NondegenerateFeasibleRepairRoute /\
+            RandomSupercriticalZ2TopoClusterFullPaperClosingRoute) /\
+          Not (Part6FullPaperClosingSupport /\
+            RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute) /\
+          Not (Part6LatticeEmbeddingExactClosureInput /\
+            TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+          Not (Part6LatticeEmbeddingClosureInput /\
+            TopoClusterRandomSupercriticalZ2ClosureInput) /\
+          openSemanticTargetIds =
+            ["theorem_4_1_part6_lattice_embedding",
+             "topo_cluster_random_supercritical_z2"] /\
+          openSemanticTargetKernelSurfaceIdPaperLabels =
+            [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+             ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")] /\
+          paperSemanticOpenCount = 2 /\
+          (CompletePaperSemanticKernelOnly <-> False) /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The paper-labelled obstruction pair is aligned with the current route and
+closure-input obstruction pairs. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_route_obstruction_pair_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairCertificate := by
+  exact ⟨completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_obstruction_pair_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_obstruction_pair_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_statement_roster_certificate,
+    (by
+      intro hroutes
+      exact part6_lattice_embedding_target_route_obstruction_via_target_current
+        hroutes.left),
+    (by
+      intro hroutes
+      exact part6_lattice_embedding_closure_route_obstruction_via_target_current
+        hroutes.left),
+    (by
+      intro hinputs
+      exact part6_lattice_embedding_exact_closure_input_notYet hinputs.left),
+    (by
+      intro hinputs
+      exact part6_lattice_embedding_closure_input_notYet hinputs.left),
+    openSemanticTargetIds_current,
+    (by rfl),
+    paperSemanticOpenCount_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the paper-label route obstruction-pair seal. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+   Not (Part6NondegenerateFeasibleRepairRoute /\
+     RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+   Not (Part6FullPaperClosingSupport /\
+     RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+   Not (Part6LatticeEmbeddingExactClosureInput /\
+     TopoClusterRandomSupercriticalZ2ExactClosureInput),
+   Not (Part6LatticeEmbeddingClosureInput /\
+     TopoClusterRandomSupercriticalZ2ClosureInput),
+   openSemanticTargetIds =
+    ["theorem_4_1_part6_lattice_embedding",
+     "topo_cluster_random_supercritical_z2"],
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+    [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+     ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the paper-label route obstruction-pair roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+       Not (Part6NondegenerateFeasibleRepairRoute /\
+         RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+       Not (Part6FullPaperClosingSupport /\
+         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       Not (Part6LatticeEmbeddingClosureInput /\
+         TopoClusterRandomSupercriticalZ2ClosureInput),
+       openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+         ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the paper-label route obstruction-pair roster has fourteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements.length =
+      14 := rfl
+
+/-- Build-gated statement roster certificate for the paper-label route
+obstruction pair. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelObstructionPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+       Not (Part6NondegenerateFeasibleRepairRoute /\
+         RandomSupercriticalZ2TopoClusterFullPaperClosingRoute),
+       Not (Part6FullPaperClosingSupport /\
+         RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute),
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       Not (Part6LatticeEmbeddingClosureInput /\
+         TopoClusterRandomSupercriticalZ2ClosureInput),
+       openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+        [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+         ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements.length =
+      14 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairCertificate
+
+/-- The paper-label route obstruction-pair seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_route_obstruction_pair_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatementRosterCertificate := by
+  exact ⟨completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelRouteObstructionPairStatements_length_current,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_route_obstruction_pair_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
