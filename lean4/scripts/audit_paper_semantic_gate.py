@@ -5733,7 +5733,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_terms_checked=127"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_terms_checked=129"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_terms_proof="
@@ -14340,7 +14340,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_terms_checked=127"
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_terms_checked=129"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_statement_terms_proof="

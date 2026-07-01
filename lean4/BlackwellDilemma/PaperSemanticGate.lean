@@ -36144,6 +36144,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
    CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
@@ -36318,6 +36320,8 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
@@ -36470,11 +36474,11 @@ section TerminalKernelOnlyNonclosureCapstoneDepth
 set_option maxRecDepth 4096
 
 /-- Build gate: the terminal kernel-only nonclosure capstone has one hundred
-twenty-seven statements. -/
+twenty-nine statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      127 := rfl
+      129 := rfl
 
 /-- Build-gated terminal kernel-only nonclosure capstone certificate. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate :
@@ -36501,6 +36505,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
+  OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+  OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
   CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate /\
@@ -36676,6 +36682,8 @@ theorem
     completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
     completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate,
+    open_semantic_target_surface_frontier_nonclosure_certificate,
+    open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
     completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate,
     completePaperSemanticKernelOnly_current_obstruction_final_ledger_certificate,
@@ -36809,6 +36817,8 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionFinalLedgerCertificate,
@@ -36956,7 +36966,7 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        CompletePaperSemanticKernelOnly <-> False,
        Not CompletePaperSemanticKernelOnly] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
-      127 /\
+      129 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate
 
 /-- The terminal kernel-only nonclosure capstone has a fixed statement
