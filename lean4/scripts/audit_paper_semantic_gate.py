@@ -9606,6 +9606,8 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate,"
         "remaining_open_semantic_targets_frontier_certificate,"
         "open_semantic_target_surface_roster_consistency_certificate,"
+        "open_semantic_target_surface_frontier_nonclosure_certificate,"
+        "open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,"
         "open_semantic_target_all_surface_ids_count_certificate,"
         "open_semantic_target_all_surface_ids_count_statement_roster_certificate,"
         "open_semantic_target_all_surface_id_paper_labels_certificate,"
@@ -9624,7 +9626,7 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_statement_roster_certificate"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_surface_obstruction_alignment_statement_roster_terms_checked=17"
+        "complete_paper_semantic_kernel_only_current_surface_obstruction_alignment_statement_roster_terms_checked=19"
     )
     print(
         "complete_paper_semantic_kernel_only_current_field_output_obstruction_alignment_certificate="
@@ -9770,6 +9772,8 @@ def main() -> int:
         "open_semantic_target_named_frontier_certificate_roster_certificate,"
         "remaining_open_semantic_targets_frontier_certificate,"
         "open_semantic_target_surface_roster_consistency_certificate,"
+        "open_semantic_target_surface_frontier_nonclosure_certificate,"
+        "open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,"
         "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate,"
         "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate,"
         "remaining_open_semantic_targets_payload_route_map_certificate,"
@@ -9787,7 +9791,7 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_frontier_payload_alignment_statement_roster_certificate"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_frontier_payload_alignment_statement_roster_terms_checked=16"
+        "complete_paper_semantic_kernel_only_current_frontier_payload_alignment_statement_roster_terms_checked=18"
     )
     print(
         "complete_paper_semantic_kernel_only_current_closure_input_alignment_certificate="
@@ -11393,6 +11397,8 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate,"
             "remaining_open_semantic_targets_frontier_certificate,"
             "open_semantic_target_surface_roster_consistency_certificate,"
+            "open_semantic_target_surface_frontier_nonclosure_certificate,"
+            "open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,"
             "open_semantic_target_all_surface_ids_count_certificate,"
             "open_semantic_target_all_surface_ids_count_statement_roster_certificate,"
             "open_semantic_target_all_surface_id_paper_labels_certificate,"
@@ -11411,7 +11417,7 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_surface_obstruction_alignment_statement_roster_certificate"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_surface_obstruction_alignment_statement_roster_terms_checked=17"
+            "complete_paper_semantic_kernel_only_current_surface_obstruction_alignment_statement_roster_terms_checked=19"
         ),
         (
             "complete_paper_semantic_kernel_only_current_field_output_obstruction_alignment_certificate="
@@ -11557,6 +11563,8 @@ def main() -> int:
             "open_semantic_target_named_frontier_certificate_roster_certificate,"
             "remaining_open_semantic_targets_frontier_certificate,"
             "open_semantic_target_surface_roster_consistency_certificate,"
+            "open_semantic_target_surface_frontier_nonclosure_certificate,"
+            "open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,"
             "open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate,"
             "open_semantic_target_frontier_payload_route_obstruction_equivalence_statement_roster_certificate,"
             "remaining_open_semantic_targets_payload_route_map_certificate,"
@@ -11574,7 +11582,7 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_frontier_payload_alignment_statement_roster_certificate"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_frontier_payload_alignment_statement_roster_terms_checked=16"
+            "complete_paper_semantic_kernel_only_current_frontier_payload_alignment_statement_roster_terms_checked=18"
         ),
         (
             "complete_paper_semantic_kernel_only_current_closure_input_alignment_certificate="

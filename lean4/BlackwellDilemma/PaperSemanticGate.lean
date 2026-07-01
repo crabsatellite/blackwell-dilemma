@@ -19765,6 +19765,8 @@ def
     CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountCertificate /\
     OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate /\
     OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate /\
@@ -19800,6 +19802,11 @@ theorem
   constructor
   · exact open_semantic_target_surface_roster_consistency_certificate
   constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_certificate
+  constructor
+  · exact
+      open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+  constructor
   · exact open_semantic_target_all_surface_ids_count_certificate
   constructor
   · exact open_semantic_target_all_surface_ids_count_statement_roster_certificate
@@ -19821,7 +19828,7 @@ theorem
     completePaperSemanticKernelOnly_current_obstruction_source_alignment_statement_roster_certificate
 
 /-- Statement roster for the current surface-obstruction alignment package.
-This fixes the seventeen component propositions used by the surface alignment
+This fixes the nineteen component propositions used by the surface alignment
 certificate. -/
 def completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements :
     List Prop :=
@@ -19839,6 +19846,8 @@ def completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements 
    CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
    RemainingOpenSemanticTargetsFrontierCertificate,
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
    OpenSemanticTargetAllSurfaceIdsCountCertificate,
    OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
    OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
@@ -19867,6 +19876,8 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        OpenSemanticTargetAllSurfaceIdsCountCertificate,
        OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
        OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
@@ -19877,11 +19888,11 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate] := rfl
 
 /-- Build gate: the surface-obstruction alignment statement roster has exactly
-the seventeen current surface-alignment components. -/
+the nineteen current surface-alignment components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements.length =
-      17 := rfl
+      19 := rfl
 
 /-- Build-gated statement roster certificate for the current surface-obstruction
 alignment package. -/
@@ -19903,6 +19914,8 @@ def
        CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        OpenSemanticTargetAllSurfaceIdsCountCertificate,
        OpenSemanticTargetAllSurfaceIdsCountStatementRosterCertificate,
        OpenSemanticTargetAllSurfaceIdPaperLabelsCertificate,
@@ -19912,7 +19925,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatements.length =
-      17 /\
+      19 /\
     CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate
 
 /-- The current surface-obstruction alignment package has a fixed statement
@@ -20596,6 +20609,8 @@ def
     OpenSemanticTargetNamedFrontierCertificateRosterCertificate /\
     RemainingOpenSemanticTargetsFrontierCertificate /\
     OpenSemanticTargetSurfaceRosterConsistencyCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate /\
     OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate /\
     RemainingOpenSemanticTargetsPayloadRouteMapCertificate /\
@@ -20631,6 +20646,11 @@ theorem
   · exact remaining_open_semantic_targets_frontier_certificate
   constructor
   · exact open_semantic_target_surface_roster_consistency_certificate
+  constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_certificate
+  constructor
+  · exact
+      open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
   constructor
   · exact
       open_semantic_target_frontier_payload_route_obstruction_equivalence_certificate
@@ -20671,6 +20691,8 @@ def completePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatements :
    OpenSemanticTargetNamedFrontierCertificateRosterCertificate,
    RemainingOpenSemanticTargetsFrontierCertificate,
    OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
    OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate,
    RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
@@ -20699,6 +20721,8 @@ theorem
        OpenSemanticTargetNamedFrontierCertificateRosterCertificate,
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate,
        RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
@@ -20709,11 +20733,11 @@ theorem
   rfl
 
 /-- Build gate: the current frontier-payload alignment statement roster has
-exactly the sixteen component statements. -/
+exactly the eighteen component statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatements.length =
-      16 := rfl
+      18 := rfl
 
 /-- Build-gated statement roster certificate for the current frontier-payload
 alignment package. -/
@@ -20736,6 +20760,8 @@ def
        OpenSemanticTargetNamedFrontierCertificateRosterCertificate,
        RemainingOpenSemanticTargetsFrontierCertificate,
        OpenSemanticTargetSurfaceRosterConsistencyCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceCertificate,
        OpenSemanticTargetFrontierPayloadRouteObstructionEquivalenceStatementRosterCertificate,
        RemainingOpenSemanticTargetsPayloadRouteMapCertificate,
@@ -20744,7 +20770,7 @@ def
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatements.length =
-      16 /\
+      18 /\
     CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate
 
 /-- The current frontier-payload alignment package has a fixed statement
