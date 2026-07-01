@@ -37777,6 +37777,68 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_certificate)
 
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure obstruction-map bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure
+obstruction-map bundle is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only nonclosure
+obstruction-map bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure obstruction-map bundle
+alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure obstruction-map bundle
+alias roster has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure obstruction-map bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure obstruction-map bundle
+alias has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureObstructionMapBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_obstruction_map_bundle_certificate)
+
 /-- Supplemental gate: terminal capstone plus the final-status nonclosure
 judgement.  This keeps the published final `iff False` and `Not` statements
 next to the terminal kernel-only certificate. -/
@@ -37876,6 +37938,68 @@ theorem
     (And.intro
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_certificate)
+
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure final-status bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure final-status
+bundle is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only nonclosure
+final-status bundle alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure final-status bundle alias
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure final-status bundle alias
+roster has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure final-status bundle alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure final-status bundle alias
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureFinalStatusBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_final_status_bundle_certificate)
 
 /-- Supplemental gate: terminal capstone audit bundle.  This is the compact
 paper-facing theorem pairing the terminal kernel-only certificate, its fixed
