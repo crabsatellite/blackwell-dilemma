@@ -24679,6 +24679,119 @@ theorem
     part6_lattice_embedding_current_routed_exit_certificate,
     topo_cluster_random_supercritical_z2_current_routed_exit_certificate⟩
 
+/-- Named certificate for the route-source/routed-exit open-target nonclosure
+bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+                  RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate /\
+                    RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate /\
+                          Part6LatticeEmbeddingCurrentRoutedExitCertificate /\
+                            TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate
+
+/-- The route-source/routed-exit open-target nonclosure bundle certificate is
+machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleCertificate := by
+  exact
+    completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle
+
+/-- Statement roster for the route-source/routed-exit open-target nonclosure
+bundle. -/
+def
+    completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
+   RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+   Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+   TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate]
+
+/-- Build gate: the route-source/routed-exit open-target nonclosure roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate] := rfl
+
+/-- Build gate: the route-source/routed-exit open-target nonclosure roster has
+fifteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements.length =
+      15 := rfl
+
+/-- Build-gated statement roster certificate for the route-source/routed-exit
+open-target nonclosure bundle. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRouteDerivedTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetTargetDerivedRouteObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetRoutedExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentCertificate,
+       RemainingOpenSemanticTargetsAllCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPerTargetRoutedExitStatementRosterCertificate,
+       Part6LatticeEmbeddingCurrentRoutedExitCertificate,
+       TopoClusterRandomSupercriticalZ2CurrentRoutedExitCertificate] /\
+    completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements.length =
+      15 /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleCertificate
+
+/-- The route-source/routed-exit open-target nonclosure bundle has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentRouteSourceRoutedExitOpenTargetNonclosureBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_route_source_routed_exit_open_target_nonclosure_bundle_certificate)
+
 /-- Part 6 target-specific route-source bundle: the repair-route and
 full-support derived target-obstruction certificates are checked with the
 conditional/nonclosure bundle and current routed exit. -/
