@@ -36903,6 +36903,68 @@ theorem
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_gate_status_certificate)
 
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure/gate-status bridge. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure/gate-status
+bridge is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_gate_status_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_gate_status_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only
+nonclosure/gate-status alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure/gate-status alias roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure/gate-status alias roster
+has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure/gate-status alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureGateStatusStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure/gate-status alias has a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_gate_status_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithGateStatusStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_gate_status_certificate)
+
 /-- Supplemental gate: pair the terminal kernel-only nonclosure capstone with
 the open-target final-ledger certificate without expanding the already large
 terminal certificate conjunction. -/
@@ -36974,6 +37036,68 @@ theorem
     (And.intro
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_length_current
       completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate)
+
+/-- Exact theorem-name alias certificate for the terminal kernel-only
+nonclosure/open-target final-ledger bridge. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate
+
+/-- The theorem-name alias for the terminal kernel-only nonclosure/open-target
+final-ledger bridge is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerCertificate := by
+  exact completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_final_ledger_certificate
+
+/-- Statement roster for the theorem-name terminal kernel-only
+nonclosure/open-target final-ledger alias. -/
+def
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate]
+
+/-- The theorem-name terminal kernel-only nonclosure/open-target final-ledger
+alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate] := by
+  rfl
+
+/-- The theorem-name terminal kernel-only nonclosure/open-target final-ledger
+alias roster has the expected size. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements.length =
+      2 := by
+  rfl
+
+/-- Build-gated statement roster certificate for the theorem-name terminal
+kernel-only nonclosure/open-target final-ledger alias. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements.length =
+      2 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerCertificate
+
+/-- The theorem-name terminal kernel-only nonclosure/open-target final-ledger
+alias has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetFinalLedgerStatements_length_current
+      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger_certificate)
 
 /-- Supplemental gate: pair the terminal kernel-only nonclosure capstone with
 the open-target gate-status certificate without expanding the already large
