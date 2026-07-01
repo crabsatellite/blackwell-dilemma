@@ -9913,6 +9913,8 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_route_obstruction_alignment_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate,"
         "completePaperSemanticKernelOnly_current_frontier_payload_alignment_statement_roster_certificate,"
+        "open_semantic_target_surface_frontier_nonclosure_certificate,"
+        "open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
         "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,"
         "completePaperSemanticKernelOnly_current_field_payload_alignment_certificate,"
@@ -9928,7 +9930,7 @@ def main() -> int:
         "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_certificate_proof="
         "completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate"
     )
-    print("complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=20")
+    print("complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=22")
     print(
         "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statements="
         "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements"
@@ -9938,7 +9940,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=20"
+        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=22"
     )
     print(
         "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_proof="
@@ -11704,6 +11706,8 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_route_obstruction_alignment_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_frontier_payload_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_frontier_payload_alignment_statement_roster_certificate,"
+            "open_semantic_target_surface_frontier_nonclosure_certificate,"
+            "open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,"
             "completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,"
             "completePaperSemanticKernelOnly_current_field_payload_alignment_certificate,"
@@ -11719,7 +11723,7 @@ def main() -> int:
             "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate"
         ),
-        "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=20",
+        "complete_paper_semantic_kernel_only_current_top_level_alignment_statement_roster_terms_checked=22",
         (
             "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statements="
             "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements"
@@ -11728,7 +11732,7 @@ def main() -> int:
             "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statements_proof="
             "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_named_current"
         ),
-        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=20",
+        "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_checked=22",
         (
             "complete_paper_semantic_kernel_only_current_alignment_roster_pair_statement_terms_proof="
             "completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current"

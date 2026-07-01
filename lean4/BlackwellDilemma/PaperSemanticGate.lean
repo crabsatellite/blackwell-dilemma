@@ -21304,6 +21304,8 @@ def
     CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate /\
@@ -21359,6 +21361,11 @@ theorem
   · exact
       completePaperSemanticKernelOnly_current_frontier_payload_alignment_statement_roster_certificate
   constructor
+  · exact open_semantic_target_surface_frontier_nonclosure_certificate
+  constructor
+  · exact
+      open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+  constructor
   · exact
       completePaperSemanticKernelOnly_current_closure_input_alignment_certificate
   constructor
@@ -21375,7 +21382,7 @@ theorem
   exact topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
 
 /-- Statement roster for the top-level current-alignment umbrella.  This fixes
-the twenty component certificates that the umbrella certificate must
+the twenty-two component certificates that the umbrella certificate must
 carry. -/
 def completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements :
     List Prop :=
@@ -21393,6 +21400,8 @@ def completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements :
    CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
    CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
@@ -21419,6 +21428,8 @@ theorem
        CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
@@ -21427,11 +21438,11 @@ theorem
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] := rfl
 
 /-- Build gate: the top-level current-alignment statement roster has exactly
-the twenty current umbrella components. -/
+the twenty-two current umbrella components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-      20 := rfl
+      22 := rfl
 
 /-- Build-gated statement roster certificate for the top-level current
 alignment umbrella. -/
@@ -21453,6 +21464,8 @@ def
        CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
        CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
@@ -21460,7 +21473,7 @@ def
        Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
        TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
     completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-      20 /\
+      22 /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate
 
 /-- The top-level current-alignment umbrella has a fixed statement roster. -/
@@ -21489,11 +21502,11 @@ theorem
       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements := rfl
 
 /-- Build gate: the alignment roster-pair statement list has exactly the
-twenty top-level current-alignment components. -/
+twenty-two top-level current-alignment components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements_length_current :
     completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
-      20 := by
+      22 := by
   simpa [completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements]
     using
       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current
@@ -21506,7 +21519,7 @@ def CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate :
   completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements =
       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements /\
     completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
-      20 /\
+      22 /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
     CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate
 
@@ -21529,7 +21542,7 @@ def CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCert
   completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements =
       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements /\
     completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
-      20 /\
+      22 /\
     CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate
 
 /-- The current alignment roster-pair package has a fixed statement roster. -/
@@ -36210,9 +36223,9 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements
    completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
       15,
    completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-      20,
+      22,
    completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
-      20,
+      22,
    completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
       2,
    completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
@@ -36384,9 +36397,9 @@ theorem
        completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
           15,
        completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-          20,
+          22,
        completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
-          20,
+          22,
        completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
           2,
        completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
@@ -36567,9 +36580,9 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificat
   completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
       15 /\
   completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-      20 /\
+      22 /\
   completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
-      20 /\
+      22 /\
   completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
       2 /\
   completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
@@ -36875,9 +36888,9 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementR
        completePaperSemanticKernelOnlyCurrentTerminalObstructionBundleViewNonclosureStatements.length =
           15,
        completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
-          20,
+          22,
        completePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatements.length =
-          20,
+          22,
        completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
           2,
        completePaperSemanticKernelOnlyCurrentObstructionFinalLedgerStatements.length =
