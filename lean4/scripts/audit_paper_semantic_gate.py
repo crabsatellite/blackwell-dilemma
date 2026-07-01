@@ -7147,6 +7147,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statements="
+        "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_terms_checked=13"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate_proof="
+        "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -16321,6 +16352,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_target_transition_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statements="
+            "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_terms_checked=13"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate_proof="
+            "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneClosureCandidateRosterBarrierStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_closure_candidate_roster_barrier_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
