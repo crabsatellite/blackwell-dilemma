@@ -37531,17 +37531,25 @@ certificate conjunction. -/
 theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit :
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
-      CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate := by
+      OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+        OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate := by
   exact And.intro
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
-    completePaperSemanticKernelOnly_current_open_target_exit_certificate
+    (And.intro
+      open_semantic_target_surface_frontier_nonclosure_certificate
+      (And.intro
+        open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+        completePaperSemanticKernelOnly_current_open_target_exit_certificate))
 
 /-- Named certificate for the terminal kernel-only nonclosure/open-target exit
 bridge. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
-    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+      OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate
 
 /-- The terminal kernel-only nonclosure/open-target exit bridge is machine
 checked. -/
@@ -37556,6 +37564,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate]
 
 /-- Build gate: the terminal kernel-only nonclosure/open-target exit roster is
@@ -37565,14 +37575,16 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] := rfl
 
 /-- Build gate: the terminal kernel-only nonclosure/open-target exit roster has
-three statements. -/
+five statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements.length =
-      3 := rfl
+      5 := rfl
 
 /-- Build-gated statement roster certificate for the terminal kernel-only
 nonclosure/open-target exit bridge. -/
@@ -37581,9 +37593,11 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements.length =
-      3 /\
+      5 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate
 
 /-- The terminal kernel-only nonclosure/open-target exit bridge has a fixed
@@ -37617,7 +37631,12 @@ def
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements :
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitCertificate,
-   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate]
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate]
 
 /-- The theorem-name terminal kernel-only nonclosure/open-target exit alias
 roster is fixed. -/
@@ -37625,7 +37644,12 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_named_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate] := by
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] := by
   rfl
 
 /-- The theorem-name terminal kernel-only nonclosure/open-target exit alias
@@ -37633,7 +37657,7 @@ roster has the expected size. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements.length =
-      2 := by
+      7 := by
   rfl
 
 /-- Build-gated statement roster certificate for the theorem-name terminal
@@ -37643,10 +37667,21 @@ def
     Prop :=
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitCertificate,
-       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate] /\
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements.length =
-      2 /\
-    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitCertificate
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+              OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentOpenTargetExitCertificate
 
 /-- The theorem-name terminal kernel-only nonclosure/open-target exit alias has
 a fixed statement roster. -/
@@ -37657,7 +37692,19 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_named_current
     (And.intro
       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_length_current
-      completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate)
+      (And.intro
+        completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_exit_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_open_target_exit_statement_roster_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+              (And.intro
+                open_semantic_target_surface_frontier_nonclosure_certificate
+                (And.intro
+                  open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+                  completePaperSemanticKernelOnly_current_open_target_exit_certificate)))))))
 
 /-- Supplemental gate: compact terminal/open-target operational bundle.  This
 keeps the large terminal capstone factored while still requiring the key

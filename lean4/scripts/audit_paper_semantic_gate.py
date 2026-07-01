@@ -5950,7 +5950,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_terms_checked=3"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_terms_checked=5"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_terms_proof="
@@ -5981,7 +5981,7 @@ def main() -> int:
         "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_named_current"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_checked=2"
+        "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_checked=7"
     )
     print(
         "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_proof="
@@ -14495,7 +14495,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetExitStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_terms_checked=3"
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_terms_checked=5"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_open_target_exit_statement_terms_proof="
@@ -14526,7 +14526,7 @@ def main() -> int:
             "completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureWithOpenTargetExitStatements_named_current"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_checked=2"
+            "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_checked=7"
         ),
         (
             "complete_paper_semantic_kernel_only_current_terminal_kernel_only_nonclosure_with_open_target_exit_statement_terms_proof="
