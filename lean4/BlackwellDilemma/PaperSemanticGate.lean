@@ -37169,16 +37169,24 @@ terminal certificate conjunction. -/
 theorem
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_with_open_target_final_ledger :
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+      OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+      OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
       CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate := by
   exact And.intro
     completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
-    completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate
+    (And.intro
+      open_semantic_target_surface_frontier_nonclosure_certificate
+      (And.intro
+        open_semantic_target_surface_frontier_nonclosure_statement_roster_certificate
+        completePaperSemanticKernelOnly_current_open_target_final_ledger_certificate))
 
 /-- Named certificate for the terminal kernel-only nonclosure/open-target final
 ledger bridge. -/
 def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate :
     Prop :=
   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureCertificate /\
+    OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate /\
     CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate
 
 /-- The terminal kernel-only nonclosure/open-target final-ledger bridge is
@@ -37194,6 +37202,8 @@ def completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
     List Prop :=
   [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate,
    CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+   OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
    CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate]
 
 /-- Build gate: the terminal kernel-only nonclosure/open-target final-ledger
@@ -37203,14 +37213,16 @@ theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate] := rfl
 
 /-- Build gate: the terminal kernel-only nonclosure/open-target final-ledger
-roster has three statements. -/
+roster has five statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements_length_current :
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements.length =
-      3 := rfl
+      5 := rfl
 
 /-- Build-gated statement roster certificate for the terminal kernel-only
 nonclosure/open-target final-ledger bridge. -/
@@ -37219,9 +37231,11 @@ def CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTarget
   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements =
       [CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate,
        CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
        CompletePaperSemanticKernelOnlyCurrentOpenTargetFinalLedgerCertificate] /\
     completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerStatements.length =
-      3 /\
+      5 /\
     CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureOpenTargetFinalLedgerCertificate
 
 /-- The terminal kernel-only nonclosure/open-target final-ledger bridge has a
