@@ -6125,6 +6125,118 @@ theorem part6_nondegenerate_feasible_repair_route_certificate :
     z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate⟩
 
 omit [DiagnosticSignalHypothesisData] in
+/-- Statement roster for the exact Part 6 alpha/feasible-set repair route
+certificate.  This keeps the bottom-level repair-route certificate pinned
+independently of the higher-level paper-semantic gate. -/
+def part6NondegenerateFeasibleRepairRouteStatements : List Prop :=
+  [Part6NondegenerateFeasibleRepairRouteCertificate,
+   Part6FullPaperClosingSupport ->
+    Part6NondegenerateFeasibleRepairRoute,
+   Part6NondegenerateFeasibleRepairRoute ->
+    Part6FullPaperClosingSupport,
+   Part6NondegenerateFeasibleRepairRoute ↔
+    Part6FullPaperClosingSupport,
+   Part6NondegenerateFeasibleRepairRoute ->
+    Part6FullPaperClosingDivergenceWitness,
+   Part6NondegenerateFeasibleRepairRoute ->
+    Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6FullPaperClosingBridgeRoute ->
+    Part6NondegenerateFeasibleRepairRoute,
+   forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+    Part6NondegenerateFeasibleRepairRoute,
+   Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+    Part6NondegenerateFeasibleRepairRoute,
+   Part6NondegenerateFeasibleRepairRoute ->
+    Part6FullPaperClosingDivergenceWitness /\
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+   Part6NondegenerateFeasibleRepairRoute ->
+    Part6FullPaperClosingFullOutputBundle,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Part6FullPaperClosingOutputLayerCertificate,
+   Part6BridgeRouteSupportCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate]
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Build gate: the Part 6 nondegenerate repair-route roster is fixed. -/
+def part6NondegenerateFeasibleRepairRouteStatements_named_current :
+    part6NondegenerateFeasibleRepairRouteStatements =
+      [Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6FullPaperClosingSupport ->
+        Part6NondegenerateFeasibleRepairRoute,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute ↔
+        Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingDivergenceWitness,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6FullPaperClosingBridgeRoute ->
+        Part6NondegenerateFeasibleRepairRoute,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+        Part6NondegenerateFeasibleRepairRoute,
+       Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+        Part6NondegenerateFeasibleRepairRoute,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingDivergenceWitness /\
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingFullOutputBundle,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Part6BridgeRouteSupportCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate] := rfl
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Build gate: the Part 6 nondegenerate repair-route roster has fifteen
+statements. -/
+theorem part6NondegenerateFeasibleRepairRouteStatements_length_current :
+    part6NondegenerateFeasibleRepairRouteStatements.length = 15 := rfl
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Build-gated statement roster certificate for the exact Part 6
+alpha/feasible-set repair route. -/
+def Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate : Prop :=
+  part6NondegenerateFeasibleRepairRouteStatements =
+      [Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6FullPaperClosingSupport ->
+        Part6NondegenerateFeasibleRepairRoute,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute ↔
+        Part6FullPaperClosingSupport,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingDivergenceWitness,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6FullPaperClosingBridgeRoute ->
+        Part6NondegenerateFeasibleRepairRoute,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+        Part6NondegenerateFeasibleRepairRoute,
+       Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+        Part6NondegenerateFeasibleRepairRoute,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingDivergenceWitness /\
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       Part6NondegenerateFeasibleRepairRoute ->
+        Part6FullPaperClosingFullOutputBundle,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Part6FullPaperClosingOutputLayerCertificate,
+       Part6BridgeRouteSupportCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate] /\
+    part6NondegenerateFeasibleRepairRouteStatements.length = 15 /\
+    Part6NondegenerateFeasibleRepairRouteCertificate
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The Part 6 nondegenerate repair-route certificate has a fixed statement
+roster. -/
+theorem part6_nondegenerate_feasible_repair_route_statement_roster_certificate :
+    Part6NondegenerateFeasibleRepairRouteStatementRosterCertificate := by
+  exact ⟨part6NondegenerateFeasibleRepairRouteStatements_named_current,
+    part6NondegenerateFeasibleRepairRouteStatements_length_current,
+    part6_nondegenerate_feasible_repair_route_certificate⟩
+
+omit [DiagnosticSignalHypothesisData] in
 /-- Unified current-frontier certificate for the open Part 6 lattice-embedding
 semantic target.
 

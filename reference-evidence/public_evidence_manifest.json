@@ -2464,7 +2464,7 @@
           "stdout_contains": [
             "axiom_output_command=lake env lean BlackwellDilemma/AxiomAudit.lean",
             "axiom_output_returncode=0",
-            "axiom_output_dependency_lines=4252",
+            "axiom_output_dependency_lines=4257",
             "axiom_output_no_axiom_lines=185",
             "axiom_output_allowed_axioms=Classical.choice,Quot.sound,propext",
             "axiom_output_observed_axioms=Classical.choice,Quot.sound,propext",
