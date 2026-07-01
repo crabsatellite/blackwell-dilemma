@@ -19352,6 +19352,96 @@ theorem semantic_target_paper_label_id_statement_roster_certificate :
       semanticTargetPaperLabelIdStatements_length_current
       semantic_target_paper_label_id_certificate)
 
+/-- Component statement roster for the semantic-target partition ledger:
+partition, count, status, paper-label, and paper-label/id packages are all
+present together with their fixed statement-roster certificates. -/
+def semanticTargetsPartitionLedgerComponentStatements : List Prop :=
+  [SemanticTargetsPartitionCertificate,
+   SemanticTargetsPartitionStatementRosterCertificate,
+   SemanticTargetCountCertificate,
+   SemanticTargetCountStatementRosterCertificate,
+   SemanticTargetStatusPartitionCertificate,
+   SemanticTargetStatusPartitionStatementRosterCertificate,
+   SemanticTargetPaperLabelCertificate,
+   SemanticTargetPaperLabelStatementRosterCertificate,
+   SemanticTargetPaperLabelIdCertificate,
+   SemanticTargetPaperLabelIdStatementRosterCertificate]
+
+/-- Build gate: the semantic-target partition ledger component roster names
+exactly the current partition/count/status/label/id certificates and rosters. -/
+theorem semanticTargetsPartitionLedgerComponentStatements_named_current :
+    semanticTargetsPartitionLedgerComponentStatements =
+      [SemanticTargetsPartitionCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       SemanticTargetStatusPartitionCertificate,
+       SemanticTargetStatusPartitionStatementRosterCertificate,
+       SemanticTargetPaperLabelCertificate,
+       SemanticTargetPaperLabelStatementRosterCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate] := rfl
+
+/-- Build gate: the semantic-target partition ledger component roster has
+exactly ten current components. -/
+theorem semanticTargetsPartitionLedgerComponentStatements_length_current :
+    semanticTargetsPartitionLedgerComponentStatements.length = 10 := rfl
+
+/-- Build-gated component roster for the semantic-target partition ledger. -/
+def SemanticTargetsPartitionLedgerComponentStatementRosterCertificate :
+    Prop :=
+  semanticTargetsPartitionLedgerComponentStatements =
+      [SemanticTargetsPartitionCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       SemanticTargetStatusPartitionCertificate,
+       SemanticTargetStatusPartitionStatementRosterCertificate,
+       SemanticTargetPaperLabelCertificate,
+       SemanticTargetPaperLabelStatementRosterCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate] /\
+    semanticTargetsPartitionLedgerComponentStatements.length = 10 /\
+    SemanticTargetsPartitionCertificate /\
+    SemanticTargetsPartitionStatementRosterCertificate /\
+    SemanticTargetCountCertificate /\
+    SemanticTargetCountStatementRosterCertificate /\
+    SemanticTargetStatusPartitionCertificate /\
+    SemanticTargetStatusPartitionStatementRosterCertificate /\
+    SemanticTargetPaperLabelCertificate /\
+    SemanticTargetPaperLabelStatementRosterCertificate /\
+    SemanticTargetPaperLabelIdCertificate /\
+    SemanticTargetPaperLabelIdStatementRosterCertificate
+
+/-- The semantic-target partition ledger components are all present with fixed
+statement rosters. -/
+theorem
+    semantic_targets_partition_ledger_component_statement_roster_certificate :
+    SemanticTargetsPartitionLedgerComponentStatementRosterCertificate := by
+  exact And.intro
+    semanticTargetsPartitionLedgerComponentStatements_named_current
+    (And.intro
+      semanticTargetsPartitionLedgerComponentStatements_length_current
+      (And.intro
+        semantic_targets_partition_certificate
+        (And.intro
+          semantic_targets_partition_statement_roster_certificate
+          (And.intro
+            semantic_target_count_certificate
+            (And.intro
+              semantic_target_count_statement_roster_certificate
+              (And.intro
+                semantic_target_status_partition_certificate
+                (And.intro
+                  semantic_target_status_partition_statement_roster_certificate
+                  (And.intro
+                    semantic_target_paper_label_certificate
+                    (And.intro
+                      semantic_target_paper_label_statement_roster_certificate
+                      (And.intro
+                        semantic_target_paper_label_id_certificate
+                        semantic_target_paper_label_id_statement_roster_certificate))))))))))
+
 /-- Named target proposition for the full paper-semantic kernel-only gate. -/
 def CompletePaperSemanticKernelOnly : Prop :=
   paperSemanticOpenCount = 0
@@ -19417,7 +19507,8 @@ def
     SemanticTargetStatusPartitionCertificate /\
     SemanticTargetPaperLabelCertificate /\
     SemanticTargetPaperLabelIdCertificate /\
-    SemanticTargetsPartitionCertificate
+    SemanticTargetsPartitionCertificate /\
+    SemanticTargetsPartitionLedgerComponentStatementRosterCertificate
 
 /-- The semantic-target ledger used by the current obstruction gate is aligned
 with the exact current open/closed ids, closed payload frontier, status
@@ -19447,7 +19538,9 @@ theorem
   · exact semantic_target_paper_label_certificate
   constructor
   · exact semantic_target_paper_label_id_certificate
-  exact semantic_targets_partition_certificate
+  exact And.intro
+    semantic_targets_partition_certificate
+    semantic_targets_partition_ledger_component_statement_roster_certificate
 
 /-- Statement roster for the current semantic-target ledger alignment package.
 This fixes the exact non-complete claim, current open/closed counts and ids,
@@ -19472,7 +19565,8 @@ def
    SemanticTargetStatusPartitionCertificate,
    SemanticTargetPaperLabelCertificate,
    SemanticTargetPaperLabelIdCertificate,
-   SemanticTargetsPartitionCertificate]
+   SemanticTargetsPartitionCertificate,
+   SemanticTargetsPartitionLedgerComponentStatementRosterCertificate]
 
 /-- Build gate: the current semantic-target ledger alignment roster names
 exactly the current ledger certificate components. -/
@@ -19495,14 +19589,15 @@ theorem
        SemanticTargetStatusPartitionCertificate,
        SemanticTargetPaperLabelCertificate,
        SemanticTargetPaperLabelIdCertificate,
-       SemanticTargetsPartitionCertificate] := rfl
+       SemanticTargetsPartitionCertificate,
+       SemanticTargetsPartitionLedgerComponentStatementRosterCertificate] := rfl
 
 /-- Build gate: the current semantic-target ledger alignment roster has exactly
-the twelve current ledger components. -/
+the thirteen current ledger components. -/
 theorem
     completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements_length_current :
     completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements.length =
-      12 := rfl
+      13 := rfl
 
 /-- Build-gated statement roster certificate for the current semantic-target
 ledger alignment package. -/
@@ -19526,9 +19621,10 @@ def
        SemanticTargetStatusPartitionCertificate,
        SemanticTargetPaperLabelCertificate,
        SemanticTargetPaperLabelIdCertificate,
-       SemanticTargetsPartitionCertificate] /\
+       SemanticTargetsPartitionCertificate,
+       SemanticTargetsPartitionLedgerComponentStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements.length =
-      12 /\
+      13 /\
     CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate
 
 /-- The current semantic-target ledger alignment package has a fixed statement

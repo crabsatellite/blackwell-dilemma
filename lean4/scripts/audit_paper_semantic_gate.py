@@ -2928,6 +2928,27 @@ def main() -> int:
         "semantic_targets_partition_statement_roster_certificate_proof="
         "semantic_targets_partition_statement_roster_certificate"
     )
+    print(
+        "semantic_targets_partition_ledger_component_statements="
+        "semanticTargetsPartitionLedgerComponentStatements"
+    )
+    print(
+        "semantic_targets_partition_ledger_component_statements_proof="
+        "semanticTargetsPartitionLedgerComponentStatements_named_current"
+    )
+    print("semantic_targets_partition_ledger_component_terms_checked=10")
+    print(
+        "semantic_targets_partition_ledger_component_terms_proof="
+        "semanticTargetsPartitionLedgerComponentStatements_length_current"
+    )
+    print(
+        "semantic_targets_partition_ledger_component_statement_roster_certificate="
+        "SemanticTargetsPartitionLedgerComponentStatementRosterCertificate"
+    )
+    print(
+        "semantic_targets_partition_ledger_component_statement_roster_certificate_proof="
+        "semantic_targets_partition_ledger_component_statement_roster_certificate"
+    )
     print("semantic_target_count_certificate=SemanticTargetCountCertificate")
     print(
         "semantic_target_count_certificate_proof="
@@ -9595,7 +9616,8 @@ def main() -> int:
         "semantic_target_status_partition_certificate,"
         "semantic_target_paper_label_certificate,"
         "semantic_target_paper_label_id_certificate,"
-        "semantic_targets_partition_certificate"
+        "semantic_targets_partition_certificate,"
+        "semantic_targets_partition_ledger_component_statement_roster_certificate"
     )
     print(
         "complete_paper_semantic_kernel_only_current_semantic_target_ledger_alignment_statement_roster_certificate="
@@ -9606,7 +9628,7 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate"
     )
     print(
-        "complete_paper_semantic_kernel_only_current_semantic_target_ledger_alignment_statement_roster_terms_checked=12"
+        "complete_paper_semantic_kernel_only_current_semantic_target_ledger_alignment_statement_roster_terms_checked=13"
     )
     print(
         "complete_paper_semantic_kernel_only_current_obstruction_source_alignment_certificate="
@@ -10758,6 +10780,27 @@ def main() -> int:
             "semantic_targets_partition_statement_roster_certificate_proof="
             "semantic_targets_partition_statement_roster_certificate"
         ),
+        (
+            "semantic_targets_partition_ledger_component_statements="
+            "semanticTargetsPartitionLedgerComponentStatements"
+        ),
+        (
+            "semantic_targets_partition_ledger_component_statements_proof="
+            "semanticTargetsPartitionLedgerComponentStatements_named_current"
+        ),
+        "semantic_targets_partition_ledger_component_terms_checked=10",
+        (
+            "semantic_targets_partition_ledger_component_terms_proof="
+            "semanticTargetsPartitionLedgerComponentStatements_length_current"
+        ),
+        (
+            "semantic_targets_partition_ledger_component_statement_roster_certificate="
+            "SemanticTargetsPartitionLedgerComponentStatementRosterCertificate"
+        ),
+        (
+            "semantic_targets_partition_ledger_component_statement_roster_certificate_proof="
+            "semantic_targets_partition_ledger_component_statement_roster_certificate"
+        ),
         "semantic_target_count_certificate=SemanticTargetCountCertificate",
         (
             "semantic_target_count_certificate_proof="
@@ -11411,7 +11454,8 @@ def main() -> int:
             "semantic_target_status_partition_certificate,"
             "semantic_target_paper_label_certificate,"
             "semantic_target_paper_label_id_certificate,"
-            "semantic_targets_partition_certificate"
+            "semantic_targets_partition_certificate,"
+            "semantic_targets_partition_ledger_component_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_semantic_target_ledger_alignment_statement_roster_certificate="
@@ -11422,7 +11466,7 @@ def main() -> int:
             "completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate"
         ),
         (
-            "complete_paper_semantic_kernel_only_current_semantic_target_ledger_alignment_statement_roster_terms_checked=12"
+            "complete_paper_semantic_kernel_only_current_semantic_target_ledger_alignment_statement_roster_terms_checked=13"
         ),
         (
             "complete_paper_semantic_kernel_only_current_obstruction_source_alignment_certificate="
