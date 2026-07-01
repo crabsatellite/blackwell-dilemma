@@ -47696,6 +47696,124 @@ theorem completePaperSemanticKernelOnly_current_public_nonclosure_boundary_not :
     Not CompletePaperSemanticKernelOnly := by
   exact completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate.2.2.2.2
 
+/-- Public-facing per-target obstruction boundary: the current public
+nonclosure boundary is tied to the exact Part 6 and topo target/route
+obstructions. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate /\
+    Not Part6LatticeEmbeddingSemanticKernelTarget /\
+      Not Part6NondegenerateFeasibleRepairRoute /\
+        Not Part6FullPaperClosingSupport /\
+          Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate /\
+            Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate /\
+              Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                  Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                    TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate /\
+                      TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate
+
+/-- The current public nonclosure boundary includes the exact per-target
+obstruction packages for both remaining open targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_statement_roster_certificate
+    (And.intro
+      part6_lattice_embedding_semantic_kernel_target_notYet
+      (And.intro
+        part6_lattice_embedding_target_route_obstruction_via_target_current
+        (And.intro
+          part6_lattice_embedding_closure_route_obstruction_via_target_current
+          (And.intro
+            part6_lattice_embedding_repair_route_obstruction_multipath_certificate
+            (And.intro
+              part6_lattice_embedding_repair_route_obstruction_multipath_statement_roster_certificate
+              (And.intro
+                topo_cluster_random_supercritical_z2_semantic_kernel_target_notYet
+                (And.intro
+                  topo_cluster_random_supercritical_z2_target_route_obstruction_via_target_current
+                  (And.intro
+                    topo_cluster_random_supercritical_z2_closure_route_obstruction_via_target_current
+                    (And.intro
+                      topo_cluster_random_supercritical_z2_route_obstruction_multipath_certificate
+                      topo_cluster_random_supercritical_z2_route_obstruction_multipath_statement_roster_certificate)))))))))
+
+/-- Statement roster for the public nonclosure boundary per-target obstruction
+certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+   Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+   TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate]
+
+/-- Build gate: the public nonclosure boundary per-target obstruction roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate] := rfl
+
+/-- Build gate: the public nonclosure boundary per-target obstruction roster has
+twelve statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the public nonclosure boundary
+per-target obstruction package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathStatementRosterCertificate,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathStatementRosterCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate
+
+/-- The public nonclosure boundary per-target obstruction package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
