@@ -47983,6 +47983,98 @@ theorem
         completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_length_current
         completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate))
 
+/-- Public nonclosure boundary audit: the public boundary roster, the per-target
+obstruction roster, and the projection-tail roster are all tied together. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionTailStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+          completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.tail /\
+          completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements.length =
+            11 /\
+            CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate
+
+/-- The public nonclosure boundary projection-tail audit is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_projection_tail_audit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_projection_tail_statement_roster_certificate
+        (And.intro
+          completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_tail_current
+          (And.intro
+            completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements_length_current
+            completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate))))
+
+/-- Statement roster for the public nonclosure boundary projection-tail audit. -/
+def completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionTailStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+     completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.tail,
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements.length =
+     11,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate]
+
+/-- Build gate: the public nonclosure boundary projection-tail audit roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionTailStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+         completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.tail,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements.length =
+         11,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] := rfl
+
+/-- Build gate: the public nonclosure boundary projection-tail audit roster has
+seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the public nonclosure boundary
+projection-tail audit. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionTailStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements =
+         completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatements.tail,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionProjectionStatements.length =
+         11,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditCertificate
+
+/-- The public nonclosure boundary projection-tail audit has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_projection_tail_audit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailAuditStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_projection_tail_audit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
