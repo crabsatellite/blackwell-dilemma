@@ -55254,6 +55254,217 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureInputOutputVectorAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_closure_input_output_vector_audit_gate_certificate)
 
+/-- Endpoint gate for the explicit exact-input/output equivalence vector: the
+current public endpoint carries the positive target/exact/output equivalences
+and their obstruction-level equivalences for both open paper targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureInputOutputVectorAuditGateStatementRosterCertificate /\
+    OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate /\
+      openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements =
+        [Iff Part6LatticeEmbeddingExactClosureInput
+          Part6FullPaperClosingFullOutputBundle,
+         Iff TopoClusterRandomSupercriticalZ2ExactClosureInput
+          TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+        openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements =
+          [Iff Part6LatticeEmbeddingSemanticKernelTarget
+            Part6LatticeEmbeddingExactClosureInput,
+           Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+            TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+          openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements =
+            [Iff Part6LatticeEmbeddingSemanticKernelTarget
+              Part6FullPaperClosingFullOutputBundle,
+             Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+              TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+            openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements =
+              [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+                (Not Part6LatticeEmbeddingExactClosureInput),
+               Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+                (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)] /\
+              openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements =
+                [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+                  (Not Part6FullPaperClosingFullOutputBundle),
+                 Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+                  (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)] /\
+                openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements =
+                  [Iff (Not Part6LatticeEmbeddingExactClosureInput)
+                    (Not Part6FullPaperClosingFullOutputBundle),
+                   Iff (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)
+                    (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)] /\
+                  paperSemanticOpenCount = 2 /\
+                  Not CompletePaperSemanticKernelOnly
+
+/-- The public release endpoint exports the exact-input/output equivalence
+vector behind the current paper-label nonclosure judgement. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_closure_equivalence_vector_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_closure_input_output_vector_audit_gate_statement_roster_certificate <|
+    And.intro
+      open_semantic_target_exact_closure_input_output_statement_roster_certificate <|
+      And.intro
+        openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements_named_current <|
+        And.intro
+          openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements_named_current <|
+          And.intro
+            openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements_named_current <|
+            And.intro
+              openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements_named_current <|
+              And.intro
+                openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements_named_current <|
+                And.intro
+                  openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements_named_current <|
+                  And.intro
+                    paperSemanticOpenCount_current
+                    completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the endpoint semantic-target paper-label explicit
+closure-equivalence vector audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureInputOutputVectorAuditGateStatementRosterCertificate,
+   OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+   openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements =
+     [Iff Part6LatticeEmbeddingExactClosureInput
+       Part6FullPaperClosingFullOutputBundle,
+      Iff TopoClusterRandomSupercriticalZ2ExactClosureInput
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+   openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements =
+     [Iff Part6LatticeEmbeddingSemanticKernelTarget
+       Part6LatticeEmbeddingExactClosureInput,
+      Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+       TopoClusterRandomSupercriticalZ2ExactClosureInput],
+   openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements =
+     [Iff Part6LatticeEmbeddingSemanticKernelTarget
+       Part6FullPaperClosingFullOutputBundle,
+      Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+   openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements =
+     [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+       (Not Part6LatticeEmbeddingExactClosureInput),
+      Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+       (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)],
+   openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements =
+     [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+       (Not Part6FullPaperClosingFullOutputBundle),
+      Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+       (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)],
+   openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements =
+     [Iff (Not Part6LatticeEmbeddingExactClosureInput)
+       (Not Part6FullPaperClosingFullOutputBundle),
+      Iff (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)
+       (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)],
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the endpoint semantic-target paper-label explicit
+closure-equivalence vector audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureInputOutputVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+       openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements =
+         [Iff Part6LatticeEmbeddingExactClosureInput
+           Part6FullPaperClosingFullOutputBundle,
+          Iff TopoClusterRandomSupercriticalZ2ExactClosureInput
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements =
+         [Iff Part6LatticeEmbeddingSemanticKernelTarget
+           Part6LatticeEmbeddingExactClosureInput,
+          Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+           TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements =
+         [Iff Part6LatticeEmbeddingSemanticKernelTarget
+           Part6FullPaperClosingFullOutputBundle,
+          Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements =
+         [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+           (Not Part6LatticeEmbeddingExactClosureInput),
+          Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+           (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements =
+         [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+           (Not Part6FullPaperClosingFullOutputBundle),
+          Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+           (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)],
+       openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements =
+         [Iff (Not Part6LatticeEmbeddingExactClosureInput)
+           (Not Part6FullPaperClosingFullOutputBundle),
+          Iff (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)
+           (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the endpoint semantic-target paper-label explicit
+closure-equivalence vector audit gate has eleven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+paper-label explicit closure-equivalence vector audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureInputOutputVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetExactClosureInputOutputStatementRosterCertificate,
+       openSemanticTargetExactClosureInputOutputSurfaceExactInputIffOutputStatements =
+         [Iff Part6LatticeEmbeddingExactClosureInput
+           Part6FullPaperClosingFullOutputBundle,
+          Iff TopoClusterRandomSupercriticalZ2ExactClosureInput
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetIffExactInputStatements =
+         [Iff Part6LatticeEmbeddingSemanticKernelTarget
+           Part6LatticeEmbeddingExactClosureInput,
+          Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+           TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetIffOutputStatements =
+         [Iff Part6LatticeEmbeddingSemanticKernelTarget
+           Part6FullPaperClosingFullOutputBundle,
+          Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffExactInputStatements =
+         [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+           (Not Part6LatticeEmbeddingExactClosureInput),
+          Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+           (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)],
+       openSemanticTargetExactClosureInputOutputSurfaceTargetNotIffOutputStatements =
+         [Iff (Not Part6LatticeEmbeddingSemanticKernelTarget)
+           (Not Part6FullPaperClosingFullOutputBundle),
+          Iff (Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget)
+           (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)],
+       openSemanticTargetExactClosureInputOutputSurfaceExactInputNotIffOutputStatements =
+         [Iff (Not Part6LatticeEmbeddingExactClosureInput)
+           (Not Part6FullPaperClosingFullOutputBundle),
+          Iff (Not TopoClusterRandomSupercriticalZ2ExactClosureInput)
+           (Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle)],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateCertificate
+
+/-- The endpoint semantic-target paper-label explicit closure-equivalence
+vector audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_closure_equivalence_vector_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_closure_equivalence_vector_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
