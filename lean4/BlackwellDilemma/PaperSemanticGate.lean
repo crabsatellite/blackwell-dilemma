@@ -54894,6 +54894,210 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_certificate)
 
+/-- Endpoint gate for the explicit paper-label obstruction vector: the public
+release endpoint carries the concrete id/paper-label rows and the target,
+target-route, closure-route, and atomic obstruction lists used by the current
+paper-facing nonclosure statement. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate /\
+    OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate /\
+      OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+        openSemanticTargetIdPaperLabelObstructionMap =
+          [(("theorem_4_1_part6_lattice_embedding",
+              "thm:cognitive-threshold Part 6"),
+              Not Part6LatticeEmbeddingSemanticKernelTarget /\
+                Not Part6NondegenerateFeasibleRepairRoute /\
+                Not Part6FullPaperClosingSupport),
+           (("topo_cluster_random_supercritical_z2",
+              "prop:topo-cluster and thm:phase"),
+              Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+                Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)] /\
+          openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+            [Not Part6LatticeEmbeddingSemanticKernelTarget,
+             Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+            openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+              [Not Part6NondegenerateFeasibleRepairRoute,
+               Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute] /\
+              openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+                [Not Part6FullPaperClosingSupport,
+                 Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+                openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+                  [Not Part6LatticeEmbeddingSemanticKernelTarget,
+                   Not Part6NondegenerateFeasibleRepairRoute,
+                   Not Part6FullPaperClosingSupport,
+                   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+                   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+                   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+                  paperSemanticOpenCount = 2 /\
+                  Not CompletePaperSemanticKernelOnly
+
+/-- The public release endpoint exports the explicit paper-label obstruction
+vector behind the current nonclosure judgement. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_obstruction_vector_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_statement_roster_certificate <|
+    And.intro
+      open_semantic_target_id_paper_label_obstruction_map_statement_roster_certificate <|
+      And.intro
+        open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate <|
+        And.intro
+          openSemanticTargetIdPaperLabelObstructionMap_named_current <|
+          And.intro
+            rfl <|
+            And.intro
+              rfl <|
+              And.intro
+                rfl <|
+                And.intro
+                  openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_named_current <|
+                  And.intro
+                    paperSemanticOpenCount_current
+                    completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the endpoint semantic-target paper-label explicit
+obstruction-vector audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   openSemanticTargetIdPaperLabelObstructionMap =
+     [(("theorem_4_1_part6_lattice_embedding",
+         "thm:cognitive-threshold Part 6"),
+         Not Part6LatticeEmbeddingSemanticKernelTarget /\
+           Not Part6NondegenerateFeasibleRepairRoute /\
+           Not Part6FullPaperClosingSupport),
+      (("topo_cluster_random_supercritical_z2",
+         "prop:topo-cluster and thm:phase"),
+         Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+           Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+           Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)],
+   openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+     [Not Part6LatticeEmbeddingSemanticKernelTarget,
+      Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+   openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+     [Not Part6NondegenerateFeasibleRepairRoute,
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute],
+   openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+     [Not Part6FullPaperClosingSupport,
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+     [Not Part6LatticeEmbeddingSemanticKernelTarget,
+      Not Part6NondegenerateFeasibleRepairRoute,
+      Not Part6FullPaperClosingSupport,
+      Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+      Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the endpoint semantic-target paper-label explicit
+obstruction-vector audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdPaperLabelObstructionMap =
+         [(("theorem_4_1_part6_lattice_embedding",
+             "thm:cognitive-threshold Part 6"),
+             Not Part6LatticeEmbeddingSemanticKernelTarget /\
+               Not Part6NondegenerateFeasibleRepairRoute /\
+               Not Part6FullPaperClosingSupport),
+          (("topo_cluster_random_supercritical_z2",
+             "prop:topo-cluster and thm:phase"),
+             Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+               Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+               Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)],
+       openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+         [Not Part6LatticeEmbeddingSemanticKernelTarget,
+          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+         [Not Part6NondegenerateFeasibleRepairRoute,
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute],
+       openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+         [Not Part6FullPaperClosingSupport,
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+         [Not Part6LatticeEmbeddingSemanticKernelTarget,
+          Not Part6NondegenerateFeasibleRepairRoute,
+          Not Part6FullPaperClosingSupport,
+          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the endpoint semantic-target paper-label explicit
+obstruction-vector audit gate has eleven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+paper-label explicit obstruction-vector audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdPaperLabelObstructionMap =
+         [(("theorem_4_1_part6_lattice_embedding",
+             "thm:cognitive-threshold Part 6"),
+             Not Part6LatticeEmbeddingSemanticKernelTarget /\
+               Not Part6NondegenerateFeasibleRepairRoute /\
+               Not Part6FullPaperClosingSupport),
+          (("topo_cluster_random_supercritical_z2",
+             "prop:topo-cluster and thm:phase"),
+             Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+               Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+               Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute)],
+       openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+         [Not Part6LatticeEmbeddingSemanticKernelTarget,
+          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+         [Not Part6NondegenerateFeasibleRepairRoute,
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute],
+       openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+         [Not Part6FullPaperClosingSupport,
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+         [Not Part6LatticeEmbeddingSemanticKernelTarget,
+          Not Part6NondegenerateFeasibleRepairRoute,
+          Not Part6FullPaperClosingSupport,
+          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+          Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+          Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate
+
+/-- The endpoint semantic-target paper-label explicit obstruction-vector audit
+gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_obstruction_vector_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_obstruction_vector_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
