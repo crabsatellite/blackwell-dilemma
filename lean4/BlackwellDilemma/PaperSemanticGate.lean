@@ -52799,6 +52799,113 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_certificate)
 
+/-- Endpoint gate for the remaining conditional-interface audit boundary: the
+two counted Part 6 witness interfaces remain explicitly current-refuted while
+the public release endpoint and final semantic-target public-evidence bundle are
+exported. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate /\
+      Part6RemainingConditionalProjectionStatementRosterCertificate /\
+        Part6RemainingConditionalProjectionCertificate /\
+          Not Part6FullPaperClosingDivergenceWitness /\
+            Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+              paperSemanticOpenCount = 2 /\
+                openSemanticTargetIds =
+                  ["theorem_4_1_part6_lattice_embedding",
+                   "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exports the remaining conditional-interface
+audit boundary with the current open-target boundary. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_statement_roster_certificate <|
+        And.intro
+          part6_remaining_conditional_projection_statement_roster_certificate <|
+          And.intro
+            part6_remaining_conditional_projection_certificate <|
+            And.intro
+              not_Part6FullPaperClosingDivergenceWitness_current <|
+              And.intro
+                not_Part6FullPaperClosingFeasibleDivergenceWitness_current <|
+                And.intro
+                  paperSemanticOpenCount_current
+                  openSemanticTargetIds_current
+
+/-- Statement roster for the endpoint conditional-interface audit gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate,
+   Part6RemainingConditionalProjectionStatementRosterCertificate,
+   Part6RemainingConditionalProjectionCertificate,
+   Not Part6FullPaperClosingDivergenceWitness,
+   Not Part6FullPaperClosingFeasibleDivergenceWitness,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint conditional-interface audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate,
+       Part6RemainingConditionalProjectionStatementRosterCertificate,
+       Part6RemainingConditionalProjectionCertificate,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint conditional-interface audit gate has nine
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements.length =
+      9 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint
+conditional-interface audit gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate,
+       Part6RemainingConditionalProjectionStatementRosterCertificate,
+       Part6RemainingConditionalProjectionCertificate,
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements.length =
+      9 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateCertificate
+
+/-- The endpoint conditional-interface audit gate has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
