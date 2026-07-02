@@ -53547,6 +53547,203 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointObstructionEquivalenceAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_obstruction_equivalence_audit_gate_certificate)
 
+/-- Endpoint gate for the public top-level alignment boundary: the latest
+public release endpoint now carries the obstruction-equivalence endpoint, the
+top-level current-alignment umbrella, its roster-pair package, and the fixed
+twenty-two component roster for the top-level alignment layer. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointObstructionEquivalenceAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate /\
+            completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements =
+              [CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+               OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+               OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+               CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
+               CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate,
+               Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+               TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate] /\
+              completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+                22 /\
+                paperSemanticOpenCount = 2 /\
+                  openSemanticTargetIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exports the top-level current-alignment
+umbrella and its fixed component roster as a kernel-checked audit boundary. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_top_level_alignment_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_obstruction_equivalence_audit_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_certificate,
+    completePaperSemanticKernelOnly_current_top_level_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_certificate,
+    completePaperSemanticKernelOnly_current_alignment_roster_pair_statement_roster_certificate,
+    completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements_length_current,
+    paperSemanticOpenCount_current,
+    openSemanticTargetIds_current⟩
+
+/-- Statement roster for the endpoint top-level alignment audit gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointObstructionEquivalenceAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+       OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate,
+       Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+       TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate],
+   completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+      22,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint top-level alignment audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointObstructionEquivalenceAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements =
+          [CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+           OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+           OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate,
+           Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+           TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate],
+       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+          22,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint top-level alignment audit gate has ten
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint top-level
+alignment audit gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointObstructionEquivalenceAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentAlignmentRosterPairStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements =
+          [CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionSourceAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentSurfaceObstructionAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldOutputObstructionAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentObstructionEquivalenceAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentRouteObstructionAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFrontierPayloadAlignmentStatementRosterCertificate,
+           OpenSemanticTargetSurfaceFrontierNonclosureCertificate,
+           OpenSemanticTargetSurfaceFrontierNonclosureStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFieldPayloadAlignmentStatementRosterCertificate,
+           Part6LatticeEmbeddingRepairRouteObstructionMultipathCertificate,
+           TopoClusterRandomSupercriticalZ2RouteObstructionMultipathCertificate],
+       completePaperSemanticKernelOnlyCurrentTopLevelAlignmentStatements.length =
+          22,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateCertificate
+
+/-- The endpoint top-level alignment audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_top_level_alignment_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_top_level_alignment_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
