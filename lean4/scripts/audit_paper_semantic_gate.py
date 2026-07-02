@@ -540,6 +540,16 @@ EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTR
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_alignment_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_PAPER_LABEL_ALIGNMENT_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12433,6 +12443,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_ALIGNMENT_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_PAPER_LABEL_ALIGNMENT_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -13103,6 +13118,20 @@ def main() -> int:
         "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_alignment_decls_missing_names="
         + ",".join(
             missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_alignment_decls
+        )
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_PAPER_LABEL_ALIGNMENT_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls_missing="
+        f"{len(missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls_missing_names="
+        + ",".join(
+            missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls
         )
     )
     print(
@@ -19877,6 +19906,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_PAPER_LABEL_ALIGNMENT_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls_missing="
+            f"{len(missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls_missing_names="
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -21596,6 +21639,13 @@ def main() -> int:
             "missing terminal endpoint semantic-target-paper-label-explicit-endpoint-registry-release-seal-public-evidence-alignment decls: "
             + ",".join(
                 missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_alignment_decls
+            )
+        )
+    if missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls:
+        failures.append(
+            "missing terminal endpoint semantic-target-paper-label-explicit-endpoint-registry-release-seal-public-evidence-paper-label-alignment decls: "
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_decls
             )
         )
 
