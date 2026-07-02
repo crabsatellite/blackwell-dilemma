@@ -51574,6 +51574,172 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_closed_target_membership_closure_dispatch_certificate)
 
+/-- Release endpoint total dispatch certificate: every paper semantic target id
+dispatches either to a closed-target closure payload or to an open-target
+terminal obstruction. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate /\
+      (forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+        (((id = "r10_two_regime_label_recalibration" /\
+          Nonempty TwoRegimeRelabelingPayload) \/
+          (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+            Nonempty Part4LatticePMonotonicityFrontierPayload) \/
+            (id = "r10_threshold_five_state_high_kappa_routing" /\
+              (forall p : Real,
+                FiveState.highKappaOracleRoutingWelfare p =
+                  FiveState.fiveStateOracleWelfare p))) \/
+          ((id = "theorem_4_1_part6_lattice_embedding" /\
+            Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) \/
+            (id = "topo_cluster_random_supercritical_z2" /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate)))) /\
+        semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds /\
+          paperSemanticClosedCount = 3 /\
+            paperSemanticOpenCount = 2
+
+/-- Every current release-endpoint semantic target id has a kernel-checked
+dispatch to exactly the payload/obstruction class used by the paper gate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_membership_total_dispatch_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchCertificate := by
+  let hClosedCert :=
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_closed_target_membership_closure_dispatch_certificate
+  let hClosedDispatch := hClosedCert.right.right.left
+  let hOpenCert :=
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_certificate
+  let hOpenDispatch := hOpenCert.right.right.left
+  have hDispatch :
+      forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+        (((id = "r10_two_regime_label_recalibration" /\
+          Nonempty TwoRegimeRelabelingPayload) \/
+          (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+            Nonempty Part4LatticePMonotonicityFrontierPayload) \/
+            (id = "r10_threshold_five_state_high_kappa_routing" /\
+              (forall p : Real,
+                FiveState.highKappaOracleRoutingWelfare p =
+                  FiveState.fiveStateOracleWelfare p))) \/
+          ((id = "theorem_4_1_part6_lattice_embedding" /\
+            Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) \/
+            (id = "topo_cluster_random_supercritical_z2" /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate))) := by
+    intro id hid
+    have hSplit : List.Mem id closedSemanticTargetIds \/ List.Mem id openSemanticTargetIds := by
+      have hidPartition := hid
+      rw [semantic_targets_partition_certificate.right] at hidPartition
+      exact List.mem_append.mp hidPartition
+    cases hSplit with
+    | inl hClosed =>
+        exact Or.inl (hClosedDispatch id hClosed)
+    | inr hOpen =>
+        exact Or.inr (hOpenDispatch id hOpen)
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_closed_target_membership_closure_dispatch_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_statement_roster_certificate <|
+          And.intro hDispatch <|
+            And.intro semantic_targets_partition_certificate.right <|
+              And.intro paperSemanticClosedCount_current paperSemanticOpenCount_current
+
+/-- Statement roster for the release endpoint total semantic-target
+membership dispatch certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+   forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+      (((id = "r10_two_regime_label_recalibration" /\
+        Nonempty TwoRegimeRelabelingPayload) \/
+        (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+          Nonempty Part4LatticePMonotonicityFrontierPayload) \/
+          (id = "r10_threshold_five_state_high_kappa_routing" /\
+            (forall p : Real,
+              FiveState.highKappaOracleRoutingWelfare p =
+                FiveState.fiveStateOracleWelfare p))) \/
+        ((id = "theorem_4_1_part6_lattice_embedding" /\
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) \/
+          (id = "topo_cluster_random_supercritical_z2" /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate))),
+   semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds,
+   paperSemanticClosedCount = 3,
+   paperSemanticOpenCount = 2]
+
+/-- Build gate: the release endpoint total semantic-target dispatch roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+          (((id = "r10_two_regime_label_recalibration" /\
+            Nonempty TwoRegimeRelabelingPayload) \/
+            (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+              Nonempty Part4LatticePMonotonicityFrontierPayload) \/
+              (id = "r10_threshold_five_state_high_kappa_routing" /\
+                (forall p : Real,
+                  FiveState.highKappaOracleRoutingWelfare p =
+                    FiveState.fiveStateOracleWelfare p))) \/
+            ((id = "theorem_4_1_part6_lattice_embedding" /\
+              Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) \/
+              (id = "topo_cluster_random_supercritical_z2" /\
+                RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate))),
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2] := rfl
+
+/-- Build gate: the release endpoint total semantic-target dispatch package
+has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint total
+semantic-target membership dispatch package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+          (((id = "r10_two_regime_label_recalibration" /\
+            Nonempty TwoRegimeRelabelingPayload) \/
+            (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+              Nonempty Part4LatticePMonotonicityFrontierPayload) \/
+              (id = "r10_threshold_five_state_high_kappa_routing" /\
+                (forall p : Real,
+                  FiveState.highKappaOracleRoutingWelfare p =
+                    FiveState.fiveStateOracleWelfare p))) \/
+            ((id = "theorem_4_1_part6_lattice_embedding" /\
+              Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) \/
+              (id = "topo_cluster_random_supercritical_z2" /\
+                RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate))),
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchCertificate
+
+/-- The release endpoint total semantic-target dispatch package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_membership_total_dispatch_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_membership_total_dispatch_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
