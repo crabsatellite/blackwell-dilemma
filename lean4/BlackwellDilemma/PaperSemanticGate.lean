@@ -49102,6 +49102,12 @@ theorem completePaperSemanticKernelOnly_current_public_release_gate_statement_ro
       completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_gate_certificate)
 
+/-- The public release gate directly entails the current nonclosure judgement. -/
+theorem completePaperSemanticKernelOnly_current_not_of_public_release_gate
+    (h : CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate) :
+    Not CompletePaperSemanticKernelOnly := by
+  exact h.2.2.2.2.2.2.2
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

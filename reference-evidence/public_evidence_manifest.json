@@ -980,7 +980,7 @@
             "semantic_target_type_axiom_audit_prints_checked=15",
             "semantic_target_type_axiom_audit_prints_missing=0",
             "semantic_target_type_axiom_audit_prints_missing_decls=",
-            "semantic_target_paper_semantic_axiom_audit_prints=2652",
+            "semantic_target_paper_semantic_axiom_audit_prints=2653",
             "semantic_target_paper_semantic_axiom_audit_duplicate_prints=0",
             "semantic_target_paper_semantic_axiom_audit_duplicate_decls=",
             "semantic_target_open_ids_expected=theorem_4_1_part6_lattice_embedding,topo_cluster_random_supercritical_z2",
@@ -2662,7 +2662,7 @@
           "stdout_contains": [
             "axiom_output_command=lake env lean BlackwellDilemma/AxiomAudit.lean",
             "axiom_output_returncode=0",
-            "axiom_output_dependency_lines=4450",
+            "axiom_output_dependency_lines=4451",
             "axiom_output_no_axiom_lines=185",
             "axiom_output_allowed_axioms=Classical.choice,Quot.sound,propext",
             "axiom_output_observed_axioms=Classical.choice,Quot.sound,propext",
