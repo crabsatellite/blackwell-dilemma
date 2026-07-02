@@ -50222,6 +50222,102 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate)
 
+/-- Exact theorem-name alias certificate for the public release open-target
+terminal completion gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate
+
+/-- The theorem-name alias for the public release open-target terminal
+completion gate is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_theorem_name_alias_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate := by
+  exact completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate
+
+/-- Statement roster for the theorem-name public release open-target terminal
+completion gate alias. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the theorem-name public release open-target terminal completion
+gate alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the theorem-name public release open-target terminal completion
+gate alias has eleven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the theorem-name public
+release open-target terminal completion gate alias. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate
+
+/-- The theorem-name public release open-target terminal completion gate alias
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_theorem_name_alias_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements_length_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_theorem_name_alias_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_statement_roster_certificate
+          completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate)))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
