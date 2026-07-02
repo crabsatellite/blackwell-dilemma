@@ -58678,6 +58678,227 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_bridge_audit_gate_certificate)
 
+/-- Public-evidence ledger bridge for the terminal-dispatch surface: the
+detailed endpoint-registry release-seal alignment terminal bridge is tied to
+the final semantic-target public-evidence bundle, theorem-name alias gate,
+ledger-row dispatch seal, ledger-row seal, and exact-index seal. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate /\
+                      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate /\
+                        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealCertificate /\
+                          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate /\
+                            CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate /\
+                              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatements.length =
+                                18 /\
+                              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements.length =
+                                12 /\
+                              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatements.length =
+                                5 /\
+                              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements.length =
+                                8 /\
+                              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements.length =
+                                9 /\
+                              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatements.length =
+                                8 /\
+                              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements.length =
+                                7 /\
+                              paperSemanticOpenCount = 2 /\
+                              Not CompletePaperSemanticKernelOnly
+
+/-- The terminal-dispatch bridge reaches the public-evidence ledger surface. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_public_evidence_ledger_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_bridge_audit_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_statement_roster_certificate <|
+            And.intro
+              completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_statement_roster_certificate <|
+                And.intro
+                  completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_certificate <|
+                  And.intro
+                    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_statement_roster_certificate <|
+                    And.intro
+                      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_seal_statement_roster_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_seal_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_total_dispatch_index_seal_statement_roster_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_total_dispatch_index_seal_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatements_length_current <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements_length_current <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatements_length_current <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_length_current <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements_length_current <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatements_length_current <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements_length_current <|
+                      And.intro
+                        paperSemanticOpenCount_current
+                        completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the terminal-dispatch public-evidence ledger bridge
+audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatements.length =
+      18,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements.length =
+      12,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatements.length =
+      5,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements.length =
+      8,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements.length =
+      9,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatements.length =
+      8,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements.length =
+      7,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal-dispatch public-evidence ledger bridge audit gate
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatements.length =
+          18,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements.length =
+          12,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatements.length =
+          5,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements.length =
+          8,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements.length =
+          9,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatements.length =
+          8,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements.length =
+          7,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal-dispatch public-evidence ledger bridge audit gate
+has twenty-four statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements.length =
+      24 := rfl
+
+/-- Build-gated statement roster certificate for the terminal-dispatch
+public-evidence ledger bridge audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchBridgeAuditGateStatements.length =
+          18,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements.length =
+          12,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatements.length =
+          5,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements.length =
+          8,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements.length =
+          9,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatements.length =
+          8,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements.length =
+          7,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements.length =
+      24 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateCertificate
+
+/-- The terminal-dispatch public-evidence ledger bridge audit gate has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_public_evidence_ledger_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapDetailedEndpointRegistryReleaseSealPublicEvidenceAlignmentTerminalDispatchPublicEvidenceLedgerBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_public_evidence_ledger_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
