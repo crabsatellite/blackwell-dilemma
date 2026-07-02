@@ -49990,6 +49990,124 @@ theorem
           completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_statement_roster_certificate
           completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_certificate)))
 
+/-- Public release theorem-name completion gate tying the theorem-name alias to
+the terminal-source completion barrier and the public release theorem package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly /\
+                  paperSemanticOpenCount = 2 /\
+                    openSemanticTargetIds =
+                      ["theorem_4_1_part6_lattice_embedding",
+                       "topo_cluster_random_supercritical_z2"]
+
+/-- The public release theorem-name completion gate is kernel checked from the
+current theorem-name alias and public release theorem package. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_theorem_name_alias_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_theorem_name_alias_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_statement_roster_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_certificate <|
+                  And.intro
+                    completePaperSemanticKernelOnly_current_public_release_theorem_statement_roster_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_public_release_gate_statement_roster_certificate <|
+                          And.intro
+                            completePaperSemanticKernelOnly_current_public_release_iff_false <|
+                              And.intro
+                                completePaperSemanticKernelOnly_notYet <|
+                                  And.intro
+                                    paperSemanticOpenCount_current
+                                    openSemanticTargetIds_current
+
+/-- Statement roster for the public release theorem-name completion gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release theorem-name completion gate roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release theorem-name completion gate has eleven
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the public release theorem-name
+completion gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate
+
+/-- The public release theorem-name completion gate has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
