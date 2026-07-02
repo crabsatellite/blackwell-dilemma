@@ -57656,6 +57656,180 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_certificate)
 
+/-- Obstruction-map bridge audit gate for the release-completion public-evidence
+paper-label bridge: the endpoint paper labels are tied to the ID-indexed
+obstruction map, its atomic obstruction terms, and its kernel-surface
+projections. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate /\
+      OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate /\
+        OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate /\
+          OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate /\
+            OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate /\
+              openSemanticTargetIdObstructionMapIdPaperLabels =
+                openSemanticTargetKernelSurfaceIdPaperLabels /\
+              openSemanticTargetIdObstructionMapIdPaperLabels =
+                openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+              openSemanticTargetIdObstructionMapObstructionBundles.length =
+                paperSemanticOpenCount /\
+              openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+                6 /\
+              openSemanticTargetIdObstructionMapTargetObstructions =
+                openSemanticTargetKernelSurfaceTargetObstructions /\
+              openSemanticTargetIdObstructionMapTargetRouteObstructions =
+                openSemanticTargetKernelSurfaceTargetRouteObstructions /\
+              openSemanticTargetIdObstructionMapClosureRouteObstructions =
+                openSemanticTargetKernelSurfaceClosureRouteObstructions /\
+              paperSemanticOpenCount = 2 /\
+              Not CompletePaperSemanticKernelOnly
+
+/-- The release-completion public-evidence paper-label bridge reaches the
+ID-indexed obstruction map and its kernel-surface obstruction projections. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_certificate <|
+      And.intro
+        open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate <|
+        And.intro
+          open_semantic_target_id_obstruction_map_paper_label_alignment_certificate <|
+          And.intro
+            open_semantic_target_id_obstruction_map_obstruction_projection_statement_roster_certificate <|
+            And.intro
+              open_semantic_target_id_obstruction_map_obstruction_projection_certificate <|
+              And.intro
+                openSemanticTargetIdObstructionMapIdPaperLabels_current <|
+                And.intro
+                  openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current <|
+                  And.intro
+                    openSemanticTargetIdObstructionMapObstructionBundles_length_current <|
+                    And.intro
+                      openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_length_current <|
+                      And.intro
+                        openSemanticTargetIdObstructionMapTargetObstructions_eq_kernel_surface_current <|
+                        And.intro
+                          openSemanticTargetIdObstructionMapTargetRouteObstructions_eq_kernel_surface_current <|
+                          And.intro
+                            openSemanticTargetIdObstructionMapClosureRouteObstructions_eq_kernel_surface_current <|
+                            And.intro
+                              paperSemanticOpenCount_current
+                              completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the release-completion public-evidence paper-label
+obstruction-map bridge audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargetKernelSurfaceIdPaperLabels,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetIdObstructionMapObstructionBundles.length =
+      paperSemanticOpenCount,
+   openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+      6,
+   openSemanticTargetIdObstructionMapTargetObstructions =
+      openSemanticTargetKernelSurfaceTargetObstructions,
+   openSemanticTargetIdObstructionMapTargetRouteObstructions =
+      openSemanticTargetKernelSurfaceTargetRouteObstructions,
+   openSemanticTargetIdObstructionMapClosureRouteObstructions =
+      openSemanticTargetKernelSurfaceClosureRouteObstructions,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the release-completion public-evidence paper-label
+obstruction-map bridge audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+          openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+          openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+          openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the release-completion public-evidence paper-label
+obstruction-map bridge audit gate has sixteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements.length =
+      16 := rfl
+
+/-- Build-gated statement roster certificate for the release-completion
+public-evidence paper-label obstruction-map bridge audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargetKernelSurfaceIdPaperLabels,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdObstructionMapObstructionBundles.length =
+          paperSemanticOpenCount,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+          openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+          openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+          openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements.length =
+      16 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate
+
+/-- The release-completion public-evidence paper-label obstruction-map bridge
+audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
