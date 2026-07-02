@@ -49122,6 +49122,88 @@ theorem completePaperSemanticKernelOnly_current_public_release_iff_false :
     (fun h => completePaperSemanticKernelOnly_current_public_release_nonclosure h)
     False.elim
 
+/-- Paper-facing theorem package for the current public release: the release gate
+exports the current nonclosure and iff-false conclusions together with the
+remaining open-target ids. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremCertificate : Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate /\
+      Not CompletePaperSemanticKernelOnly /\
+        (CompletePaperSemanticKernelOnly ↔ False) /\
+          paperSemanticOpenCount = 2 /\
+            openSemanticTargetIds =
+              ["theorem_4_1_part6_lattice_embedding",
+               "topo_cluster_random_supercritical_z2"]
+
+/-- The current public release theorem package is kernel-checked. -/
+theorem completePaperSemanticKernelOnly_current_public_release_theorem_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_gate_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_release_gate_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_release_nonclosure
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_release_iff_false
+          (And.intro
+            paperSemanticOpenCount_current
+            openSemanticTargetIds_current))))
+
+/-- Statement roster for the public release theorem package. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements : List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnly ↔ False,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release theorem-package statement roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly ↔ False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release theorem package has seven statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements.length = 7 := rfl
+
+/-- Build-gated statement roster certificate for the public release theorem package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnly ↔ False,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements.length = 7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremCertificate
+
+/-- The public release theorem package has a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_release_theorem_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_theorem_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
