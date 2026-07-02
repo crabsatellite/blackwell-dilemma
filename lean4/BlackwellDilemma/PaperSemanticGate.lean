@@ -48188,6 +48188,96 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailReconstructionStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_projection_tail_reconstruction_certificate)
 
+/-- Projection from the public nonclosure boundary: the terminal
+public-evidence audit statement roster is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_audit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate := by
+  exact completePaperSemanticKernelOnly_current_public_nonclosure_boundary_certificate.1
+
+/-- Build gate: the public boundary roster's second statement is the terminal
+public-evidence audit statement roster certificate. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_source_public_evidence_audit_tail_head_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements.tail.head? =
+      some CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate := rfl
+
+/-- Public nonclosure source-link audit: the public boundary reconstruction is
+tied back to the terminal public-evidence audit statement roster and the
+per-target obstruction package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailReconstructionStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate /\
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements.tail.head? =
+        some CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate
+
+/-- The public nonclosure source-link audit is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_projection_tail_reconstruction_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_audit_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_source_public_evidence_audit_tail_head_current
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate))
+
+/-- Statement roster for the public nonclosure source-link audit. -/
+def completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailReconstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements.tail.head? =
+      some CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate]
+
+/-- Build gate: the public nonclosure source-link audit roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailReconstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements.tail.head? =
+          some CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] := rfl
+
+/-- Build gate: the public nonclosure source-link audit roster has five
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements.length =
+      5 := rfl
+
+/-- Build-gated statement roster certificate for the public nonclosure
+source-link audit. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryProjectionTailReconstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements.tail.head? =
+          some CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetObstructionSourcePublicEvidenceAuditSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements.length =
+      5 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate
+
+/-- The public nonclosure source-link audit has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

@@ -8146,6 +8146,45 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_projection_tail_reconstruction_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_audit_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_audit_statement_roster_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_audit_tail_head_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_source_public_evidence_audit_tail_head_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statements="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_terms_checked=5"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -18165,6 +18204,45 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_projection_tail_reconstruction_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_projection_tail_reconstruction_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_audit_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_audit_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_audit_tail_head_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatements_source_public_evidence_audit_tail_head_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statements="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_terms_checked=5"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_statements="
