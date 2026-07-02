@@ -52301,6 +52301,111 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_certificate)
 
+/-- Final public-release endpoint seal for the semantic-target table: the
+exact index, id/label/status rows, row-level dispatch certificates, and
+closed/open counts are all tied together in one kernel-checked package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate /\
+          semanticTargets.length = 5 /\
+            (semanticTargetIds semanticTargets).length = 5 /\
+              paperSemanticClosedCount = 3 /\
+                paperSemanticOpenCount = 2 /\
+                  paperSemanticClosedCount + paperSemanticOpenCount =
+                    semanticTargets.length
+
+/-- The public-release endpoint semantic-target table is fully sealed by a
+single kernel-checked certificate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_seal_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_total_dispatch_index_seal_statement_roster_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_membership_total_dispatch_statement_roster_certificate <|
+            And.intro rfl <|
+              And.intro rfl <|
+                And.intro paperSemanticClosedCount_current <|
+                  And.intro paperSemanticOpenCount_current rfl
+
+/-- Statement roster for the final public-release endpoint semantic-target
+seal. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate,
+   semanticTargets.length = 5,
+   (semanticTargetIds semanticTargets).length = 5,
+   paperSemanticClosedCount = 3,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount + paperSemanticOpenCount =
+      semanticTargets.length]
+
+/-- Build gate: the final public-release endpoint semantic-target seal roster
+is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate,
+       semanticTargets.length = 5,
+       (semanticTargetIds semanticTargets).length = 5,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount + paperSemanticOpenCount =
+          semanticTargets.length] := rfl
+
+/-- Build gate: the final public-release endpoint semantic-target seal package
+has ten statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the final public-release
+endpoint semantic-target seal. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate,
+       semanticTargets.length = 5,
+       (semanticTargetIds semanticTargets).length = 5,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount + paperSemanticOpenCount =
+          semanticTargets.length] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate
+
+/-- The final public-release endpoint semantic-target seal has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
