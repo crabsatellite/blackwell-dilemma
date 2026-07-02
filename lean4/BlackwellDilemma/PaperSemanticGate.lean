@@ -48745,6 +48745,144 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate)
 
+/-- Public audit bridge: the final public audit, paper export, required closure
+input export, and closure-input/field-output export are exposed as one
+paper-facing chain. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate /\
+              openSemanticTargetIds =
+                ["theorem_4_1_part6_lattice_embedding",
+                 "topo_cluster_random_supercritical_z2"] /\
+                openSemanticTargetKernelSurfaceIdPaperLabels =
+                  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+                  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                    paperSemanticOpenCount /\
+                    paperSemanticOpenCount = 2 /\
+                      Not CompletePaperSemanticKernelOnly
+
+/-- The final public audit to closure-input/field-output paper-export bridge is
+machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_bridge_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_paper_export_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_statement_roster_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate
+              (And.intro
+                openSemanticTargetIds_current
+                (And.intro
+                  openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels
+                  (And.intro
+                    (openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current.trans
+                      paperSemanticOpenCount_current.symm)
+                    (And.intro
+                      paperSemanticOpenCount_current
+                      completePaperSemanticKernelOnly_notYet)))))))))
+
+/-- Statement roster for the final-public-audit to closure-input/field-output
+paper-export bridge. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      paperSemanticOpenCount,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the final-public-audit to closure-input/field-output
+paper-export bridge roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the final-public-audit to closure-input/field-output
+paper-export bridge roster has twelve statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the final-public-audit to
+closure-input/field-output paper-export bridge. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate
+
+/-- The final-public-audit to closure-input/field-output paper-export bridge has
+a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_bridge_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_bridge_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
