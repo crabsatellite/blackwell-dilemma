@@ -50957,6 +50957,126 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_exhaustive_membership_certificate)
 
+/-- Dispatch certificate from every release endpoint open-target id to its
+corresponding terminal obstruction certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate /\
+      (∀ id, id ∈ openSemanticTargetIds ->
+        (id = "theorem_4_1_part6_lattice_embedding" /\
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+          (id = "topo_cluster_random_supercritical_z2" /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate)) /\
+        openSemanticTargetIds.Nodup /\
+          paperSemanticOpenCount = openSemanticTargetIds.length /\
+            paperSemanticOpenCount = 2
+
+/-- Every current release-endpoint open target id dispatches to the terminal
+obstruction certificate for that target. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchCertificate := by
+  let hProjection :=
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_obstruction_projection_certificate
+  have hDispatch :
+      ∀ id, id ∈ openSemanticTargetIds ->
+        (id = "theorem_4_1_part6_lattice_embedding" /\
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+          (id = "topo_cluster_random_supercritical_z2" /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate) := by
+    intro id hid
+    rw [openSemanticTargetIds_current] at hid
+    simp at hid
+    cases hid with
+    | inl hPart6Id =>
+        exact Or.inl ⟨hPart6Id, hProjection.right.right.left⟩
+    | inr hTopoId =>
+        exact Or.inr ⟨hTopoId, hProjection.right.right.right.left⟩
+  have hNodup : openSemanticTargetIds.Nodup := by
+    rw [openSemanticTargetIds_current]
+    simp
+  have hCountLength : paperSemanticOpenCount = openSemanticTargetIds.length := by
+    rw [paperSemanticOpenCount_current, openSemanticTargetIds_current]
+    rfl
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_exhaustive_membership_statement_roster_certificate <|
+      And.intro hProjection <|
+        And.intro hDispatch <|
+          And.intro hNodup <|
+            And.intro hCountLength paperSemanticOpenCount_current
+
+/-- Statement roster for the release endpoint open-target membership-to-
+obstruction dispatch certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate,
+   ∀ id, id ∈ openSemanticTargetIds ->
+      (id = "theorem_4_1_part6_lattice_embedding" /\
+        Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+        (id = "topo_cluster_random_supercritical_z2" /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate),
+   openSemanticTargetIds.Nodup,
+   paperSemanticOpenCount = openSemanticTargetIds.length,
+   paperSemanticOpenCount = 2]
+
+/-- Build gate: the release endpoint open-target membership-to-obstruction
+dispatch roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate,
+       ∀ id, id ∈ openSemanticTargetIds ->
+          (id = "theorem_4_1_part6_lattice_embedding" /\
+            Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+            (id = "topo_cluster_random_supercritical_z2" /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate),
+       openSemanticTargetIds.Nodup,
+       paperSemanticOpenCount = openSemanticTargetIds.length,
+       paperSemanticOpenCount = 2] := rfl
+
+/-- Build gate: the release endpoint open-target membership-to-obstruction
+dispatch package has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint
+open-target membership-to-obstruction dispatch package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate,
+       ∀ id, id ∈ openSemanticTargetIds ->
+          (id = "theorem_4_1_part6_lattice_embedding" /\
+            Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+            (id = "topo_cluster_random_supercritical_z2" /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate),
+       openSemanticTargetIds.Nodup,
+       paperSemanticOpenCount = openSemanticTargetIds.length,
+       paperSemanticOpenCount = 2] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchCertificate
+
+/-- The release endpoint open-target membership-to-obstruction dispatch package
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
