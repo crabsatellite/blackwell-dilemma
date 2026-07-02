@@ -48278,6 +48278,102 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_certificate)
 
+/-- Final public audit: the source-linked public nonclosure boundary carries the
+exact open ids, open count, complete-target false equivalence, current negation,
+and per-target obstruction package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate /\
+      openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"] /\
+        paperSemanticOpenCount = 2 /\
+          (CompletePaperSemanticKernelOnly <-> False) /\
+            Not CompletePaperSemanticKernelOnly /\
+              CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate
+
+/-- The final public audit is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_source_public_evidence_link_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_statement_roster_certificate
+      (And.intro
+        openSemanticTargetIds_current
+        (And.intro
+          paperSemanticOpenCount_current
+          (And.intro
+            completePaperSemanticKernelOnly_iff_false_current
+            (And.intro
+              completePaperSemanticKernelOnly_notYet
+              completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_certificate)))))
+
+/-- Statement roster for the final public audit. -/
+def completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate]
+
+/-- Build gate: the final public audit roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] := rfl
+
+/-- Build gate: the final public audit roster has eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements.length =
+      8 := rfl
+
+/-- Build-gated statement roster certificate for the final public audit. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundarySourcePublicEvidenceLinkStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryStatementRosterCertificate,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditCertificate
+
+/-- The final public audit has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
