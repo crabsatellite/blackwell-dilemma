@@ -56009,6 +56009,107 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_audit_gate_certificate)
 
+/-- Release seal for the explicit endpoint registry: the public terminal
+endpoint gate and the explicit semantic-target paper-label endpoint registry
+are exported together. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateCertificate /\
+          completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatements.length =
+            8 /\
+            paperSemanticOpenCount = 2 /\
+            Not CompletePaperSemanticKernelOnly
+
+/-- The current public release carries the explicit endpoint registry as part
+of the terminal endpoint gate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_audit_gate_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_audit_gate_certificate <|
+          And.intro
+            completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatements_length_current <|
+            And.intro
+              paperSemanticOpenCount_current
+              completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the explicit endpoint registry release-seal audit
+gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatements.length =
+     8,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the explicit endpoint registry release-seal audit gate roster
+is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatements.length =
+         8,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the explicit endpoint registry release-seal audit gate has
+eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements.length =
+      8 := rfl
+
+/-- Build-gated statement roster certificate for the explicit endpoint
+registry release-seal audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryAuditGateStatements.length =
+         8,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateCertificate
+
+/-- The explicit endpoint registry release-seal audit gate has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
