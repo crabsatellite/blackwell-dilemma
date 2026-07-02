@@ -52697,6 +52697,108 @@ theorem
           completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_statement_roster_certificate
           completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_certificate)))
 
+/-- Endpoint gate for the theorem-name final semantic-target public-evidence
+bundle alias: the release endpoint and final public-evidence alias are exported
+together with the current open-target boundary. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate /\
+            paperSemanticOpenCount = 2 /\
+              openSemanticTargetIds =
+                ["theorem_4_1_part6_lattice_embedding",
+                 "topo_cluster_random_supercritical_z2"]
+
+/-- The release endpoint exports the theorem-name final semantic-target
+public-evidence bundle alias with the current open-target boundary. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_statement_roster_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_certificate <|
+            And.intro
+              completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_statement_roster_certificate <|
+              And.intro
+                paperSemanticOpenCount_current
+                openSemanticTargetIds_current
+
+/-- Statement roster for the endpoint gate of the theorem-name final
+semantic-target public-evidence bundle alias. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint final semantic-target public-evidence alias gate
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint final semantic-target public-evidence alias gate
+has eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements.length =
+      8 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint final
+semantic-target public-evidence alias gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate
+
+/-- The endpoint final semantic-target public-evidence alias gate has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
