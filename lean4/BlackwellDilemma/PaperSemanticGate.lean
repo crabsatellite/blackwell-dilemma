@@ -50526,6 +50526,117 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_obstruction_projection_certificate)
 
+/-- Public release terminal endpoint target-id obstruction pair certificate:
+each open target id is paired with its terminal obstruction certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate /\
+      openSemanticTargetIds =
+        ["theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"] /\
+        ("theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) /\
+          ("topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate) /\
+            paperSemanticOpenCount = 2
+
+/-- The public release terminal endpoint binds each remaining target id to its
+terminal obstruction certificate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate := by
+  let hProjection :=
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_obstruction_projection_certificate
+  have hPart6Id :
+      "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds := by
+    rw [openSemanticTargetIds_current]
+    simp
+  have hTopoId :
+      "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds := by
+    rw [openSemanticTargetIds_current]
+    simp
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_obstruction_projection_statement_roster_certificate <|
+      And.intro hProjection <|
+        And.intro openSemanticTargetIds_current <|
+          And.intro
+            (And.intro hPart6Id hProjection.right.right.left) <|
+              And.intro
+                (And.intro hTopoId hProjection.right.right.right.left)
+                hProjection.right.right.right.right.left
+
+/-- Statement roster for the public release terminal endpoint target-id
+obstruction-pair certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+      Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds /\
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+   paperSemanticOpenCount = 2]
+
+/-- Build gate: the public release terminal endpoint target-id obstruction-pair
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       paperSemanticOpenCount = 2] := rfl
+
+/-- Build gate: the public release terminal endpoint target-id obstruction-pair
+roster has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the public release terminal
+endpoint target-id obstruction pairs. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetObstructionProjectionCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       paperSemanticOpenCount = 2] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate
+
+/-- The public release terminal endpoint target-id obstruction pairs have a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
