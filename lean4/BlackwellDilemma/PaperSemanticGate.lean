@@ -51740,6 +51740,182 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_membership_total_dispatch_certificate)
 
+/-- Release endpoint exact-index seal for the total dispatch: the five paper
+semantic target ids are exactly the closed ids followed by the open ids, with
+no duplicate id and with the dispatch-count sum fixed at five. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate /\
+    semanticTargetIds semanticTargets =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing",
+       "theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+      (forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+        id = "r10_two_regime_label_recalibration" \/
+          id = "theorem_4_1_part4_lattice_p_monotonicity" \/
+            id = "r10_threshold_five_state_high_kappa_routing" \/
+              id = "theorem_4_1_part6_lattice_embedding" \/
+                id = "topo_cluster_random_supercritical_z2") /\
+        (semanticTargetIds semanticTargets).Nodup /\
+          (semanticTargetIds semanticTargets).length =
+            paperSemanticClosedCount + paperSemanticOpenCount /\
+            paperSemanticClosedCount + paperSemanticOpenCount = 5
+
+/-- The release endpoint total dispatch is pinned to the exact five target ids
+and the exact closed/open count sum. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_total_dispatch_index_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate := by
+  have hIds :
+      semanticTargetIds semanticTargets =
+        ["r10_two_regime_label_recalibration",
+         "theorem_4_1_part4_lattice_p_monotonicity",
+         "r10_threshold_five_state_high_kappa_routing",
+         "theorem_4_1_part6_lattice_embedding",
+         "topo_cluster_random_supercritical_z2"] := by
+    rw [semantic_targets_partition_certificate.right,
+      closedSemanticTargetIds_current, openSemanticTargetIds_current]
+    rfl
+  have hMembership :
+      forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+        id = "r10_two_regime_label_recalibration" \/
+          id = "theorem_4_1_part4_lattice_p_monotonicity" \/
+            id = "r10_threshold_five_state_high_kappa_routing" \/
+              id = "theorem_4_1_part6_lattice_embedding" \/
+                id = "topo_cluster_random_supercritical_z2" := by
+    intro id hid
+    rw [hIds] at hid
+    cases hid with
+    | head =>
+        exact Or.inl rfl
+    | tail _ hid =>
+        cases hid with
+        | head =>
+            exact Or.inr (Or.inl rfl)
+        | tail _ hid =>
+            cases hid with
+            | head =>
+                exact Or.inr (Or.inr (Or.inl rfl))
+            | tail _ hid =>
+                cases hid with
+                | head =>
+                    exact Or.inr (Or.inr (Or.inr (Or.inl rfl)))
+                | tail _ hid =>
+                    cases hid with
+                    | head =>
+                        exact Or.inr (Or.inr (Or.inr (Or.inr rfl)))
+                    | tail _ hid =>
+                        cases hid
+  have hNodup : (semanticTargetIds semanticTargets).Nodup := by
+    rw [hIds]
+    simp
+  have hLength :
+      (semanticTargetIds semanticTargets).length =
+        paperSemanticClosedCount + paperSemanticOpenCount := by
+    rw [hIds, paperSemanticClosedCount_current, paperSemanticOpenCount_current]
+    rfl
+  have hCountSum : paperSemanticClosedCount + paperSemanticOpenCount = 5 := by
+    rw [paperSemanticClosedCount_current, paperSemanticOpenCount_current]
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_membership_total_dispatch_statement_roster_certificate <|
+      And.intro hIds <|
+        And.intro hMembership <|
+          And.intro hNodup <|
+            And.intro hLength hCountSum
+
+/-- Statement roster for the release endpoint total-dispatch exact-index seal. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate,
+   semanticTargetIds semanticTargets =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing",
+       "theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+      id = "r10_two_regime_label_recalibration" \/
+        id = "theorem_4_1_part4_lattice_p_monotonicity" \/
+          id = "r10_threshold_five_state_high_kappa_routing" \/
+            id = "theorem_4_1_part6_lattice_embedding" \/
+              id = "topo_cluster_random_supercritical_z2",
+   (semanticTargetIds semanticTargets).Nodup,
+   (semanticTargetIds semanticTargets).length =
+      paperSemanticClosedCount + paperSemanticOpenCount,
+   paperSemanticClosedCount + paperSemanticOpenCount = 5]
+
+/-- Build gate: the release endpoint total-dispatch exact-index seal roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate,
+       semanticTargetIds semanticTargets =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing",
+           "theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+          id = "r10_two_regime_label_recalibration" \/
+            id = "theorem_4_1_part4_lattice_p_monotonicity" \/
+              id = "r10_threshold_five_state_high_kappa_routing" \/
+                id = "theorem_4_1_part6_lattice_embedding" \/
+                  id = "topo_cluster_random_supercritical_z2",
+       (semanticTargetIds semanticTargets).Nodup,
+       (semanticTargetIds semanticTargets).length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       paperSemanticClosedCount + paperSemanticOpenCount = 5] := rfl
+
+/-- Build gate: the release endpoint total-dispatch exact-index seal package
+has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint
+total-dispatch exact-index seal. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetMembershipTotalDispatchStatementRosterCertificate,
+       semanticTargetIds semanticTargets =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing",
+           "theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       forall id, List.Mem id (semanticTargetIds semanticTargets) ->
+          id = "r10_two_regime_label_recalibration" \/
+            id = "theorem_4_1_part4_lattice_p_monotonicity" \/
+              id = "r10_threshold_five_state_high_kappa_routing" \/
+                id = "theorem_4_1_part6_lattice_embedding" \/
+                  id = "topo_cluster_random_supercritical_z2",
+       (semanticTargetIds semanticTargets).Nodup,
+       (semanticTargetIds semanticTargets).length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       paperSemanticClosedCount + paperSemanticOpenCount = 5] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealCertificate
+
+/-- The release endpoint total-dispatch exact-index seal has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_total_dispatch_index_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetTotalDispatchIndexSealStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_total_dispatch_index_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
