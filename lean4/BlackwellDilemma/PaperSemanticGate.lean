@@ -50108,6 +50108,120 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_certificate)
 
+/-- Public release open-target terminal completion gate: the final theorem-name
+completion gate is tied directly to the two remaining terminal obstruction
+certificates. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate /\
+    Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate /\
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate /\
+        Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate /\
+            (CompletePaperSemanticKernelOnly <-> False) /\
+              Not CompletePaperSemanticKernelOnly /\
+                paperSemanticOpenCount = 2 /\
+                  openSemanticTargetIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"]
+
+/-- The public release open-target terminal completion gate is kernel checked
+from the final theorem-name gate and the two target terminal obstructions. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_statement_roster_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_statement_roster_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_certificate <|
+                  And.intro
+                    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_public_release_iff_false <|
+                          And.intro
+                            completePaperSemanticKernelOnly_notYet <|
+                              And.intro
+                                paperSemanticOpenCount_current
+                                openSemanticTargetIds_current
+
+/-- Statement roster for the public release open-target terminal completion
+gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release open-target terminal completion gate roster
+is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release open-target terminal completion gate has ten
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the public release open-target
+terminal completion gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate
+
+/-- The public release open-target terminal completion gate has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
