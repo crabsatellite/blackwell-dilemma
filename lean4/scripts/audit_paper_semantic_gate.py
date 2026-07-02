@@ -380,6 +380,16 @@ EXPECTED_TERMINAL_ENDPOINT_TOP_LEVEL_ALIGNMENT_DECLS = (
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_top_level_alignment_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_TERMINAL_ENDPOINT_FIELD_OUTPUT_FULL_LEDGER_ALIGNMENT_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_field_output_full_ledger_alignment_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_field_output_full_ledger_alignment_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12193,6 +12203,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_TOP_LEVEL_ALIGNMENT_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_terminal_endpoint_field_output_full_ledger_alignment_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_FIELD_OUTPUT_FULL_LEDGER_ALIGNMENT_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -12644,6 +12659,18 @@ def main() -> int:
     print(
         "semantic_target_terminal_endpoint_top_level_alignment_decls_missing_names="
         + ",".join(missing_terminal_endpoint_top_level_alignment_decls)
+    )
+    print(
+        "semantic_target_terminal_endpoint_field_output_full_ledger_alignment_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_FIELD_OUTPUT_FULL_LEDGER_ALIGNMENT_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_field_output_full_ledger_alignment_decls_missing="
+        f"{len(missing_terminal_endpoint_field_output_full_ledger_alignment_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_field_output_full_ledger_alignment_decls_missing_names="
+        + ",".join(missing_terminal_endpoint_field_output_full_ledger_alignment_decls)
     )
     print(
         "semantic_target_forbidden_when_open_paths_checked="
@@ -19197,6 +19224,18 @@ def main() -> int:
             + ",".join(missing_terminal_endpoint_top_level_alignment_decls)
         ),
         (
+            "semantic_target_terminal_endpoint_field_output_full_ledger_alignment_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_FIELD_OUTPUT_FULL_LEDGER_ALIGNMENT_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_field_output_full_ledger_alignment_decls_missing="
+            f"{len(missing_terminal_endpoint_field_output_full_ledger_alignment_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_field_output_full_ledger_alignment_decls_missing_names="
+            + ",".join(missing_terminal_endpoint_field_output_full_ledger_alignment_decls)
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -20807,6 +20846,13 @@ def main() -> int:
         failures.append(
             "missing terminal endpoint top-level-alignment decls: "
             + ",".join(missing_terminal_endpoint_top_level_alignment_decls)
+        )
+    if missing_terminal_endpoint_field_output_full_ledger_alignment_decls:
+        failures.append(
+            "missing terminal endpoint field-output-full-ledger-alignment decls: "
+            + ",".join(
+                missing_terminal_endpoint_field_output_full_ledger_alignment_decls
+            )
         )
 
     for path, phrase in forbidden_when_open_violations:

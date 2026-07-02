@@ -53744,6 +53744,172 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_top_level_alignment_audit_gate_certificate)
 
+/-- Endpoint gate for the public field-output full-ledger boundary: the public
+release endpoint now carries the top-level alignment endpoint and the full
+field-output ledger alignment roster that synchronizes open target ids, field
+output surfaces, detailed field-output rosters, and paper-label projections. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements =
+          [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+              openSemanticTargetIds,
+           openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+              paperSemanticOpenCount,
+           openSemanticTargetClosureInputFieldOutputSurfaceIds =
+              openSemanticTargetIds,
+           openSemanticTargetClosureInputFieldOutputSurfaces.length =
+              paperSemanticOpenCount,
+           openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+              openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+           openSemanticTargetKernelSurfaceIdPaperLabels =
+              openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+           openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+              openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+           openSemanticTargetKernelSurfaceIdPaperLabels =
+              openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels] /\
+          completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
+            8 /\
+            paperSemanticOpenCount = 2 /\
+              openSemanticTargetIds =
+                ["theorem_4_1_part6_lattice_embedding",
+                 "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exports the full field-output ledger alignment
+as a kernel-checked audit boundary. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_field_output_full_ledger_alignment_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_top_level_alignment_audit_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_certificate,
+    completePaperSemanticKernelOnly_current_field_output_full_ledger_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements_length_current,
+    paperSemanticOpenCount_current,
+    openSemanticTargetIds_current⟩
+
+/-- Statement roster for the endpoint field-output full-ledger alignment audit
+gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements =
+      [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIds =
+          openSemanticTargetIds,
+       openSemanticTargetClosureInputFieldOutputSurfaces.length =
+          paperSemanticOpenCount,
+       openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels],
+   completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
+      8,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint field-output full-ledger alignment audit gate
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements =
+          [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+              openSemanticTargetIds,
+           openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+              paperSemanticOpenCount,
+           openSemanticTargetClosureInputFieldOutputSurfaceIds =
+              openSemanticTargetIds,
+           openSemanticTargetClosureInputFieldOutputSurfaces.length =
+              paperSemanticOpenCount,
+           openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+              openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+           openSemanticTargetKernelSurfaceIdPaperLabels =
+              openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+           openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+              openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+           openSemanticTargetKernelSurfaceIdPaperLabels =
+              openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels],
+       completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
+          8,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint field-output full-ledger alignment audit gate has
+eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements.length =
+      8 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint field-output
+full-ledger alignment audit gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTopLevelAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements =
+          [openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+              openSemanticTargetIds,
+           openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+              paperSemanticOpenCount,
+           openSemanticTargetClosureInputFieldOutputSurfaceIds =
+              openSemanticTargetIds,
+           openSemanticTargetClosureInputFieldOutputSurfaces.length =
+              paperSemanticOpenCount,
+           openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels =
+              openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+           openSemanticTargetKernelSurfaceIdPaperLabels =
+              openSemanticTargetClosureInputFieldOutputSurfaceIdPaperLabels,
+           openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+              openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+           openSemanticTargetKernelSurfaceIdPaperLabels =
+              openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels],
+       completePaperSemanticKernelOnlyCurrentFieldOutputFullLedgerAlignmentStatements.length =
+          8,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateCertificate
+
+/-- The endpoint field-output full-ledger alignment audit gate has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_field_output_full_ledger_alignment_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_field_output_full_ledger_alignment_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
