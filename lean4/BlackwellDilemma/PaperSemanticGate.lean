@@ -54068,6 +54068,173 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_final_judgement_obstruction_map_full_alignment_audit_gate_certificate)
 
+/-- Endpoint gate for the public nonclosure-boundary paper-export
+terminal-length bridge: the release endpoint carries the final-judgement
+obstruction-map endpoint and the public paper-export terminal-length bridge,
+pinning the nine-statement bridge roster, public release gate, and current
+open-target boundary. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate /\
+        completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements =
+          [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+           CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+           completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+              129,
+           CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate,
+           completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+              12,
+           CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+           CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+           paperSemanticOpenCount = 2,
+           Not CompletePaperSemanticKernelOnly] /\
+          completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+            9 /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate /\
+                paperSemanticOpenCount = 2 /\
+                  openSemanticTargetIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exports the public nonclosure-boundary
+paper-export terminal-length bridge with the current open-target boundary. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_final_judgement_obstruction_map_full_alignment_audit_gate_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_certificate <|
+          And.intro
+            completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_named_current <|
+            And.intro
+              completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_length_current <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_gate_statement_roster_certificate <|
+                And.intro
+                  completePaperSemanticKernelOnly_current_public_release_gate_certificate <|
+                  And.intro
+                    paperSemanticOpenCount_current
+                    openSemanticTargetIds_current
+
+/-- Statement roster for the endpoint public nonclosure-boundary paper-export
+terminal-length bridge audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+          129,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+          12,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly],
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+      9,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint public nonclosure-boundary paper-export
+terminal-length bridge audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements =
+          [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+           CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+           completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+              129,
+           CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate,
+           completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+              12,
+           CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+           CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+           paperSemanticOpenCount = 2,
+           Not CompletePaperSemanticKernelOnly],
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+          9,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint public nonclosure-boundary paper-export
+terminal-length bridge audit gate has ten statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint public
+nonclosure-boundary paper-export terminal-length bridge audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements =
+          [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+           CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+           completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+              129,
+           CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate,
+           completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+              12,
+           CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+           CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+           paperSemanticOpenCount = 2,
+           Not CompletePaperSemanticKernelOnly],
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+          9,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateCertificate
+
+/-- The endpoint public nonclosure-boundary paper-export terminal-length bridge
+audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
