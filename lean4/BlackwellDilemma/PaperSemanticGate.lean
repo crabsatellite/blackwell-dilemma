@@ -52406,6 +52406,93 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_certificate)
 
+/-- Exact theorem-name alias certificate for the final public-release endpoint
+semantic-target seal. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate
+
+/-- The theorem-name alias for the final public-release endpoint
+semantic-target seal is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_theorem_name_alias_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate := by
+  exact completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_certificate
+
+/-- Statement roster for the theorem-name final public-release endpoint
+semantic-target seal alias. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+   semanticTargets.length = 5,
+   (semanticTargetIds semanticTargets).length = 5,
+   paperSemanticClosedCount = 3,
+   paperSemanticOpenCount = 2,
+   paperSemanticClosedCount + paperSemanticOpenCount =
+      semanticTargets.length]
+
+/-- Build gate: the theorem-name final public-release endpoint
+semantic-target seal alias roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       semanticTargets.length = 5,
+       (semanticTargetIds semanticTargets).length = 5,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount + paperSemanticOpenCount =
+          semanticTargets.length] := rfl
+
+/-- Build gate: the theorem-name final public-release endpoint
+semantic-target seal alias has nine statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements.length =
+      9 := rfl
+
+/-- Build-gated statement roster certificate for the theorem-name final
+public-release endpoint semantic-target seal alias. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       semanticTargets.length = 5,
+       (semanticTargetIds semanticTargets).length = 5,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       paperSemanticClosedCount + paperSemanticOpenCount =
+          semanticTargets.length] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements.length =
+      9 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate
+
+/-- The theorem-name final public-release endpoint semantic-target seal alias
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_theorem_name_alias_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatements_length_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_theorem_name_alias_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_statement_roster_certificate
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_certificate)))
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
