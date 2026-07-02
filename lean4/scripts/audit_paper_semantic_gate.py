@@ -310,6 +310,16 @@ CORE_OUTPUT_EQUIVALENCE_DECLS = {
     "not_part6_full_paper_closing_full_output_bundle_current",
 }
 
+EXPECTED_TERMINAL_ENDPOINT_FINAL_SEMANTIC_TARGET_PUBLIC_EVIDENCE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleTheoremNameAliasGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_theorem_name_alias_gate_statement_roster_certificate",
+)
+
 EXPECTED_TERMINAL_ENDPOINT_CONDITIONAL_INTERFACE_DECLS = (
     "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateCertificate",
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_audit_gate_certificate",
@@ -12108,6 +12118,11 @@ def main() -> int:
     paper_semantic_decls = (
         paper_semantic_theorems | paper_semantic_defs | paper_semantic_types
     )
+    missing_terminal_endpoint_final_semantic_target_public_evidence_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_FINAL_SEMANTIC_TARGET_PUBLIC_EVIDENCE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     missing_terminal_endpoint_conditional_interface_decls = [
         decl
         for decl in EXPECTED_TERMINAL_ENDPOINT_CONDITIONAL_INTERFACE_DECLS
@@ -12482,6 +12497,20 @@ def main() -> int:
             "1"
             if readme_has_dual_obstruction_source_public_evidence_audit_seal
             else "0"
+        )
+    )
+    print(
+        "semantic_target_terminal_endpoint_final_public_evidence_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_FINAL_SEMANTIC_TARGET_PUBLIC_EVIDENCE_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_final_public_evidence_decls_missing="
+        f"{len(missing_terminal_endpoint_final_semantic_target_public_evidence_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_final_public_evidence_decls_missing_names="
+        + ",".join(
+            missing_terminal_endpoint_final_semantic_target_public_evidence_decls
         )
     )
     print(
@@ -18974,6 +19003,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_terminal_endpoint_final_public_evidence_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_FINAL_SEMANTIC_TARGET_PUBLIC_EVIDENCE_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_final_public_evidence_decls_missing="
+            f"{len(missing_terminal_endpoint_final_semantic_target_public_evidence_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_final_public_evidence_decls_missing_names="
+            + ",".join(
+                missing_terminal_endpoint_final_semantic_target_public_evidence_decls
+            )
+        ),
+        (
             "semantic_target_terminal_endpoint_conditional_interface_decls_checked="
             f"{len(EXPECTED_TERMINAL_ENDPOINT_CONDITIONAL_INTERFACE_DECLS)}"
         ),
@@ -20571,6 +20614,13 @@ def main() -> int:
         failures.append(
             "lean4/README.md missing dual open-target obstruction-source "
             "public-evidence audit seal summary"
+        )
+    if missing_terminal_endpoint_final_semantic_target_public_evidence_decls:
+        failures.append(
+            "missing terminal endpoint final public-evidence decls: "
+            + ",".join(
+                missing_terminal_endpoint_final_semantic_target_public_evidence_decls
+            )
         )
     if missing_terminal_endpoint_conditional_interface_decls:
         failures.append(
