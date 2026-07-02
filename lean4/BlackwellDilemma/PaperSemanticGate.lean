@@ -49772,6 +49772,128 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_bundle_certificate)
 
+/-- Public release completion barrier tying the terminal-source audit bundle to
+the route-source and manuscript-label completion barriers. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate /\
+                (CompletePaperSemanticKernelOnly <-> False) /\
+                  Not CompletePaperSemanticKernelOnly /\
+                    paperSemanticOpenCount = 2 /\
+                      openSemanticTargetIds =
+                        ["theorem_4_1_part6_lattice_embedding",
+                         "topo_cluster_random_supercritical_z2"]
+
+/-- The public release completion barrier is kernel checked from the
+terminal-source audit bundle and the existing route-source barriers. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_bundle_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_source_seal_statement_roster_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_statement_roster_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_completion_barrier_statement_roster_certificate <|
+                  And.intro
+                    completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_bundle_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_completion_barrier_certificate <|
+                          And.intro
+                            completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_paper_label_completion_barrier_certificate <|
+                              And.intro
+                                completePaperSemanticKernelOnly_current_public_release_iff_false <|
+                                  And.intro
+                                    completePaperSemanticKernelOnly_notYet <|
+                                      And.intro
+                                        paperSemanticOpenCount_current
+                                        openSemanticTargetIds_current
+
+/-- Statement roster for the public release completion barrier. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release completion-barrier roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release completion-barrier bundle has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the public release
+completion barrier. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealPaperLabelCompletionBarrierCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate
+
+/-- The public release completion barrier has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
