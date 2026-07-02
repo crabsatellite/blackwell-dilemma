@@ -490,6 +490,16 @@ EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_FIELD_OUTPUT_VEC
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_DETAILED_FIELD_OUTPUT_ROSTER_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12358,6 +12368,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_FIELD_OUTPUT_VECTOR_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_DETAILED_FIELD_OUTPUT_ROSTER_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -12958,6 +12973,20 @@ def main() -> int:
         "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_decls_missing_names="
         + ",".join(
             missing_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_decls
+        )
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_DETAILED_FIELD_OUTPUT_ROSTER_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls_missing="
+        f"{len(missing_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls_missing_names="
+        + ",".join(
+            missing_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls
         )
     )
     print(
@@ -19662,6 +19691,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_DETAILED_FIELD_OUTPUT_ROSTER_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls_missing="
+            f"{len(missing_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls_missing_names="
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -21346,6 +21389,13 @@ def main() -> int:
             "missing terminal endpoint semantic-target-paper-label-explicit-field-output-vector decls: "
             + ",".join(
                 missing_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_decls
+            )
+        )
+    if missing_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls:
+        failures.append(
+            "missing terminal endpoint semantic-target-paper-label-explicit-detailed-field-output-roster decls: "
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_decls
             )
         )
 

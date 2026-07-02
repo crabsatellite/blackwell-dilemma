@@ -55773,6 +55773,145 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_certificate)
 
+/-- Endpoint gate for the target-specific detailed field-output roster vector:
+the public endpoint carries the Part 6 and topo field-output statement roster
+certificates, the aggregate detailed roster package, and their fixed lengths. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate /\
+    Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
+        RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+          RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+              [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+               TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+            openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+              2 /\
+            part6LatticeEmbeddingClosureInputFieldOutputStatements.length =
+              19 /\
+            topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length =
+              24 /\
+            paperSemanticOpenCount = 2 /\
+            Not CompletePaperSemanticKernelOnly
+
+/-- The public release endpoint exports the target-specific detailed
+field-output roster vector behind the current field-output and paper-label
+nonclosure judgement. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_statement_roster_certificate <|
+    And.intro
+      part6_lattice_embedding_closure_input_field_output_statement_roster_certificate <|
+      And.intro
+        topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate <|
+        And.intro
+          remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate <|
+          And.intro
+            remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_statement_roster_certificate <|
+            And.intro
+              openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current <|
+              And.intro
+                openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current <|
+                And.intro
+                  part6_lattice_embedding_closure_input_field_output_statements_length_current <|
+                  And.intro
+                    topo_cluster_random_supercritical_z2_closure_input_field_output_statements_length_current <|
+                    And.intro
+                      paperSemanticOpenCount_current
+                      completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the endpoint semantic-target paper-label explicit
+detailed field-output roster audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate,
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+     [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+     2,
+   part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 19,
+   topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length =
+     24,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the endpoint semantic-target paper-label explicit detailed
+field-output roster audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+         [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+         2,
+       part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 19,
+       topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length =
+         24,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the endpoint semantic-target paper-label explicit detailed
+field-output roster audit gate has twelve statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+paper-label explicit detailed field-output roster audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+         [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+         2,
+       part6LatticeEmbeddingClosureInputFieldOutputStatements.length = 19,
+       topoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatements.length =
+         24,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateCertificate
+
+/-- The endpoint semantic-target paper-label explicit detailed field-output
+roster audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitDetailedFieldOutputRosterAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_detailed_field_output_roster_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
