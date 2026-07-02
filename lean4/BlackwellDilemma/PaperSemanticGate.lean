@@ -54724,6 +54724,176 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_certificate)
 
+/-- Endpoint gate for the semantic-target paper-label atomic obstruction
+vector: the public release endpoint carries the paper-label obstruction-map
+status vector together with the target, target-route, and closure-route atomic
+obstruction projections used by the current nonclosure judgement. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate /\
+    OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+      openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+        openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms /\
+        openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+          6 /\
+          openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+            openSemanticTargetIdObstructionMapTargetObstructions /\
+            openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+              openSemanticTargetIdObstructionMapTargetRouteObstructions /\
+              openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+                openSemanticTargetIdObstructionMapClosureRouteObstructions /\
+                openSemanticTargetIdObstructionMapTargetObstructions =
+                  openSemanticTargetKernelSurfaceTargetObstructions /\
+                  openSemanticTargetIdObstructionMapTargetRouteObstructions =
+                    openSemanticTargetKernelSurfaceTargetRouteObstructions /\
+                    openSemanticTargetIdObstructionMapClosureRouteObstructions =
+                      openSemanticTargetKernelSurfaceClosureRouteObstructions /\
+                      openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+                        6 /\
+                        paperSemanticOpenCount = 2 /\
+                        Not CompletePaperSemanticKernelOnly
+
+/-- The public release endpoint exports the atomic obstruction vector behind
+the current paper-label obstruction-map nonclosure status. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_statement_roster_certificate <|
+    And.intro
+      open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate <|
+      And.intro
+        openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_eq_id_obstruction_map_current <|
+        And.intro
+          openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_length_current <|
+          And.intro
+            openSemanticTargetIdPaperLabelObstructionMapTargetObstructions_eq_id_obstruction_map_current <|
+            And.intro
+              openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions_eq_id_obstruction_map_current <|
+              And.intro
+                openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions_eq_id_obstruction_map_current <|
+                And.intro
+                  openSemanticTargetIdObstructionMapTargetObstructions_eq_kernel_surface_current <|
+                  And.intro
+                    openSemanticTargetIdObstructionMapTargetRouteObstructions_eq_kernel_surface_current <|
+                    And.intro
+                      openSemanticTargetIdObstructionMapClosureRouteObstructions_eq_kernel_surface_current <|
+                      And.intro
+                        openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_length_current <|
+                        And.intro
+                          paperSemanticOpenCount_current
+                          completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the endpoint semantic-target paper-label atomic
+obstruction-vector audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+     openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+     6,
+   openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+     openSemanticTargetIdObstructionMapTargetObstructions,
+   openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+     openSemanticTargetIdObstructionMapTargetRouteObstructions,
+   openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+     openSemanticTargetIdObstructionMapClosureRouteObstructions,
+   openSemanticTargetIdObstructionMapTargetObstructions =
+     openSemanticTargetKernelSurfaceTargetObstructions,
+   openSemanticTargetIdObstructionMapTargetRouteObstructions =
+     openSemanticTargetKernelSurfaceTargetRouteObstructions,
+   openSemanticTargetIdObstructionMapClosureRouteObstructions =
+     openSemanticTargetKernelSurfaceClosureRouteObstructions,
+   openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+     6,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the endpoint semantic-target paper-label atomic
+obstruction-vector audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+         openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+         6,
+       openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+         openSemanticTargetIdObstructionMapTargetObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+         openSemanticTargetIdObstructionMapTargetRouteObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+         openSemanticTargetIdObstructionMapClosureRouteObstructions,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+         openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+         openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+         openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+         6,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the endpoint semantic-target paper-label atomic
+obstruction-vector audit gate has fourteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements.length =
+      14 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+paper-label atomic obstruction-vector audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+         openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms.length =
+         6,
+       openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+         openSemanticTargetIdObstructionMapTargetObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+         openSemanticTargetIdObstructionMapTargetRouteObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+         openSemanticTargetIdObstructionMapClosureRouteObstructions,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+         openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+         openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+         openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+         6,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements.length =
+      14 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate
+
+/-- The endpoint semantic-target paper-label atomic obstruction-vector audit
+gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
