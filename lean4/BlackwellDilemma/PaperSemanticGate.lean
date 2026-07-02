@@ -51304,6 +51304,134 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_partition_exit_certificate)
 
+/-- Release endpoint semantic-target classification/obstruction exit
+certificate: every semantic target id is either already closed or dispatches to
+one of the two current terminal obstruction certificates. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate /\
+      (∀ id, id ∈ semanticTargetIds semanticTargets ->
+        id ∈ closedSemanticTargetIds ∨
+          ((id = "theorem_4_1_part6_lattice_embedding" /\
+            Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+            (id = "topo_cluster_random_supercritical_z2" /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate))) /\
+        semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds /\
+          paperSemanticClosedCount = 3 /\
+            paperSemanticOpenCount = 2
+
+/-- The release endpoint classifies every semantic target id as closed or as
+one of the two open targets with its corresponding terminal obstruction. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_classification_obstruction_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitCertificate := by
+  let hDispatchCert :=
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_certificate
+  let hDispatch := hDispatchCert.right.right.left
+  have hClassify :
+      ∀ id, id ∈ semanticTargetIds semanticTargets ->
+        id ∈ closedSemanticTargetIds ∨
+          ((id = "theorem_4_1_part6_lattice_embedding" /\
+            Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+            (id = "topo_cluster_random_supercritical_z2" /\
+              RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate)) := by
+    intro id hid
+    have hSplit : id ∈ closedSemanticTargetIds ∨ id ∈ openSemanticTargetIds := by
+      have hidPartition := hid
+      rw [semantic_targets_partition_certificate.right] at hidPartition
+      exact List.mem_append.mp hidPartition
+    cases hSplit with
+    | inl hClosed =>
+        exact Or.inl hClosed
+    | inr hOpen =>
+        exact Or.inr (hDispatch id hOpen)
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_partition_exit_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_statement_roster_certificate <|
+          And.intro hClassify <|
+            And.intro semantic_targets_partition_certificate.right <|
+              And.intro paperSemanticClosedCount_current paperSemanticOpenCount_current
+
+/-- Statement roster for the release endpoint semantic-target
+classification/obstruction exit certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+   ∀ id, id ∈ semanticTargetIds semanticTargets ->
+      id ∈ closedSemanticTargetIds ∨
+        ((id = "theorem_4_1_part6_lattice_embedding" /\
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+          (id = "topo_cluster_random_supercritical_z2" /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate)),
+   semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds,
+   paperSemanticClosedCount = 3,
+   paperSemanticOpenCount = 2]
+
+/-- Build gate: the release endpoint semantic-target
+classification/obstruction exit roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       ∀ id, id ∈ semanticTargetIds semanticTargets ->
+          id ∈ closedSemanticTargetIds ∨
+            ((id = "theorem_4_1_part6_lattice_embedding" /\
+              Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+              (id = "topo_cluster_random_supercritical_z2" /\
+                RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate)),
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2] := rfl
+
+/-- Build gate: the release endpoint semantic-target
+classification/obstruction exit package has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint semantic
+target classification/obstruction exit package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       ∀ id, id ∈ semanticTargetIds semanticTargets ->
+          id ∈ closedSemanticTargetIds ∨
+            ((id = "theorem_4_1_part6_lattice_embedding" /\
+              Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) ∨
+              (id = "topo_cluster_random_supercritical_z2" /\
+                RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate)),
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitCertificate
+
+/-- The release endpoint semantic-target classification/obstruction exit
+package has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_classification_obstruction_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_classification_obstruction_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
