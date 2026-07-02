@@ -6466,6 +6466,113 @@ theorem part6_current_frontier_certificate :
     not_part6_full_paper_closing_support_current,
     not_part6_full_paper_closing_bridge_route_current⟩
 
+omit [DiagnosticSignalHypothesisData] in
+/-- Terminal Part 6 repair-route obstruction package.
+
+This source-level package collects the current Part 6 frontier, the named
+nondegenerate alpha/feasible-set repair-route certificate, its obstruction
+source roster, and the closed-unit-tail output/nonclosure certificates, then
+projects the current route/support/bridge/output obstructions needed by the
+paper-semantic gate. -/
+def Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate :
+    Prop :=
+  Part6CurrentFrontierCertificate /\
+    Part6NondegenerateFeasibleRepairRouteCertificate /\
+      Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate /\
+        Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate /\
+          Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+            Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+              Not Part6NondegenerateFeasibleRepairRoute /\
+                Not Part6FullPaperClosingSupport /\
+                  Not Part6FullPaperClosingBridgeRoute /\
+                    Not Part6FullPaperClosingFullOutputBundle
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The terminal Part 6 repair-route obstruction package is kernel checked. -/
+theorem part6_nondegenerate_feasible_repair_route_terminal_obstruction_certificate :
+    Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate := by
+  exact ⟨part6_current_frontier_certificate,
+    part6_nondegenerate_feasible_repair_route_certificate,
+    part6_nondegenerate_feasible_repair_route_obstruction_source_certificate,
+    part6_nondegenerate_feasible_repair_route_obstruction_source_statement_roster_certificate,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate,
+    z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate,
+    not_part6_nondegenerate_feasible_repair_route_current,
+    not_part6_full_paper_closing_support_current,
+    not_part6_full_paper_closing_bridge_route_current,
+    not_part6_full_paper_closing_full_output_bundle_current⟩
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Statement roster for the terminal Part 6 repair-route obstruction package. -/
+def part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements :
+    List Prop :=
+  [Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   Part6CurrentFrontierCertificate,
+   Part6NondegenerateFeasibleRepairRouteCertificate,
+   Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+   Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not Part6FullPaperClosingBridgeRoute,
+   Not Part6FullPaperClosingFullOutputBundle]
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Build gate: the terminal Part 6 repair-route obstruction roster is fixed. -/
+theorem part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements_named_current :
+    part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements =
+      [Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6CurrentFrontierCertificate,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not Part6FullPaperClosingBridgeRoute,
+       Not Part6FullPaperClosingFullOutputBundle] := rfl
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Build gate: the terminal Part 6 repair-route obstruction package has eleven
+statements. -/
+theorem part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements_length_current :
+    part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements.length =
+      11 := rfl
+
+omit [DiagnosticSignalHypothesisData] in
+/-- Build-gated statement roster certificate for the terminal Part 6
+repair-route obstruction package. -/
+def Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate :
+    Prop :=
+  part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements =
+      [Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6CurrentFrontierCertificate,
+       Part6NondegenerateFeasibleRepairRouteCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceCertificate,
+       Part6NondegenerateFeasibleRepairRouteObstructionSourceStatementRosterCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not Part6FullPaperClosingBridgeRoute,
+       Not Part6FullPaperClosingFullOutputBundle] /\
+    part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements.length =
+      11 /\
+    Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate
+
+omit [DiagnosticSignalHypothesisData] in
+/-- The terminal Part 6 repair-route obstruction package has a fixed statement
+roster. -/
+theorem
+    part6_nondegenerate_feasible_repair_route_terminal_obstruction_statement_roster_certificate :
+    Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate := by
+  exact ⟨
+    part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements_named_current,
+    part6NondegenerateFeasibleRepairRouteTerminalObstructionStatements_length_current,
+    part6_nondegenerate_feasible_repair_route_terminal_obstruction_certificate⟩
+
 /-! ## 5. Proposition `prop:threshold-alpha` — Cognitive Threshold
    Increases with Instrumental Rationality
 
