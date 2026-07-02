@@ -50318,6 +50318,116 @@ theorem
           completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_statement_roster_certificate
           completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate)))
 
+/-- Public release terminal endpoint gate: the release-facing endpoint is tied
+to the theorem-name open-target terminal alias and the current nonclosure
+state. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate /\
+            (CompletePaperSemanticKernelOnly <-> False) /\
+              Not CompletePaperSemanticKernelOnly /\
+                paperSemanticOpenCount = 2 /\
+                  openSemanticTargetIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"]
+
+/-- The public release terminal endpoint gate is kernel checked from the
+theorem-name open-target terminal alias and current nonclosure state. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_theorem_name_alias_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_theorem_name_alias_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_statement_roster_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate <|
+                  And.intro
+                    completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_statement_roster_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnly_current_public_release_iff_false <|
+                          And.intro
+                            completePaperSemanticKernelOnly_notYet <|
+                              And.intro
+                                paperSemanticOpenCount_current
+                                openSemanticTargetIds_current
+
+/-- Statement roster for the public release terminal endpoint gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release terminal endpoint roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release terminal endpoint gate has ten statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the public release terminal
+endpoint gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateCertificate
+
+/-- The public release terminal endpoint gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
