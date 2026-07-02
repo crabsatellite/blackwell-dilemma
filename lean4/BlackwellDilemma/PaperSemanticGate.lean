@@ -52906,6 +52906,162 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_audit_gate_certificate)
 
+/-- Endpoint gate for the conditional-interface closure-pair audit boundary:
+the closed-unit tail-reversal bridge projects to both counted Part 6 witness
+interfaces while the current carrier refutes the bridge and those witnesses. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatementRosterCertificate /\
+    Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate /\
+      Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate /\
+        (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+          Part6FullPaperClosingDivergenceWitness) /\
+          (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+            Part6FullPaperClosingFeasibleDivergenceWitness) /\
+            (forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+              Part6FullPaperClosingDivergenceWitness /\
+                Part6FullPaperClosingFeasibleDivergenceWitness) /\
+              (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+                Part6FullPaperClosingDivergenceWitness /\
+                  Part6FullPaperClosingFeasibleDivergenceWitness) /\
+                Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData) /\
+                  Not Part6FullPaperClosingDivergenceWitness /\
+                    Not Part6FullPaperClosingFeasibleDivergenceWitness /\
+                      paperSemanticOpenCount = 2 /\
+                        openSemanticTargetIds =
+                          ["theorem_4_1_part6_lattice_embedding",
+                           "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exports the conditional-interface closure-pair
+audit boundary with the current bridge and witness refutations. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_audit_gate_statement_roster_certificate <|
+      And.intro
+        z2_lattice_embedding_closed_unit_tail_reversal_bridge_output_certificate <|
+        And.intro
+          z2_lattice_embedding_closed_unit_tail_reversal_bridge_nonclosure_certificate <|
+          And.intro
+            part6_full_paper_closing_divergence_witness_of_closed_unit_tail_reversal_bridge <|
+            And.intro
+              part6_full_paper_closing_feasible_divergence_witness_of_closed_unit_tail_reversal_bridge <|
+              And.intro
+                part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge <|
+                And.intro
+                  part6_full_paper_closing_output_pair_of_closed_unit_tail_reversal_bridge_nonempty <|
+                  And.intro
+                    not_z2_lattice_embedding_closed_unit_tail_reversal_bridge_current <|
+                    And.intro
+                      not_Part6FullPaperClosingDivergenceWitness_current <|
+                      And.intro
+                        not_Part6FullPaperClosingFeasibleDivergenceWitness_current <|
+                        And.intro
+                          paperSemanticOpenCount_current
+                          openSemanticTargetIds_current
+
+/-- Statement roster for the endpoint conditional-interface closure-pair audit
+gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatementRosterCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+   Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+   forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingDivergenceWitness,
+   forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingFeasibleDivergenceWitness,
+   forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+   Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+      Part6FullPaperClosingDivergenceWitness /\
+        Part6FullPaperClosingFeasibleDivergenceWitness,
+   Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData),
+   Not Part6FullPaperClosingDivergenceWitness,
+   Not Part6FullPaperClosingFeasibleDivergenceWitness,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint conditional-interface closure-pair audit gate
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatementRosterCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+          Part6FullPaperClosingDivergenceWitness,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+          Part6FullPaperClosingDivergenceWitness /\
+            Part6FullPaperClosingFeasibleDivergenceWitness,
+       Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+          Part6FullPaperClosingDivergenceWitness /\
+            Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData),
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint conditional-interface closure-pair audit gate has
+thirteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements.length =
+      13 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint
+conditional-interface closure-pair audit gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceAuditGateStatementRosterCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeOutputCertificate,
+       Z2LatticeEmbeddingClosedUnitTailReversalBridgeNonClosureCertificate,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+          Part6FullPaperClosingDivergenceWitness,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+          Part6FullPaperClosingFeasibleDivergenceWitness,
+       forall _bridge : Z2LatticeEmbeddingClosedUnitTailReversalBridgeData,
+          Part6FullPaperClosingDivergenceWitness /\
+            Part6FullPaperClosingFeasibleDivergenceWitness,
+       Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData ->
+          Part6FullPaperClosingDivergenceWitness /\
+            Part6FullPaperClosingFeasibleDivergenceWitness,
+       Not (Nonempty Z2LatticeEmbeddingClosedUnitTailReversalBridgeData),
+       Not Part6FullPaperClosingDivergenceWitness,
+       Not Part6FullPaperClosingFeasibleDivergenceWitness,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements.length =
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateCertificate
+
+/-- The endpoint conditional-interface closure-pair audit gate has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

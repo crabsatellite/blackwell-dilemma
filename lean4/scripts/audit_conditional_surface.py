@@ -179,17 +179,20 @@ def is_true_prop_alias(text: str, head: str, start: int) -> bool:
 
 
 def interface_names_as_premises_from_head(head: str, interface_names: set[str]) -> list[str]:
+    parameter_prefix, result_type = split_top_level_result_type(head)
+    result_type = mask_square_bracket_regions(result_type)
+    premise_surface = f"{parameter_prefix}\n{result_type}"
     found = []
     for name in sorted(interface_names, key=len, reverse=True):
         escaped = re.escape(name)
         explicit_binder = re.search(
             rf"[\(\{{\[][^)\}}\]]*:\s*[^)\}}\]]*(?<![\w'.]){escaped}(?![\w'.])",
-            head,
+            premise_surface,
             flags=re.S,
         )
         arrow_antecedent = re.search(
             rf"(?<![\w'.]){escaped}(?![\w'.])\s*(?:→|->)",
-            head,
+            result_type,
         )
         if explicit_binder or arrow_antecedent:
             found.append(name)
@@ -206,6 +209,42 @@ def top_level_result_type(head: str) -> str:
         elif ch == ":" and depth == 0:
             return head[i + 1 :].strip()
     return ""
+
+
+def split_top_level_result_type(head: str) -> tuple[str, str]:
+    depth = 0
+    for i, ch in enumerate(head):
+        if ch in "({[":
+            depth += 1
+        elif ch in ")}]" and depth > 0:
+            depth -= 1
+        elif ch == ":" and depth == 0:
+            return head[:i], head[i + 1 :]
+    return head, ""
+
+
+def mask_square_bracket_regions(text: str) -> str:
+    """Mask list-literal roster payloads in theorem result types.
+
+    The audit looks for theorem signatures that take explicit interface
+    premises.  Roster theorems often state equality to a `List Prop` literal
+    containing conditional statement formulas, but those formulas are audited
+    payload, not parameters of the theorem itself.
+    """
+    out: list[str] = []
+    depth = 0
+    for ch in text:
+        if ch == "[":
+            depth += 1
+            out.append(" ")
+        elif ch == "]" and depth > 0:
+            depth -= 1
+            out.append(" ")
+        elif depth > 0:
+            out.append("\n" if ch == "\n" else " ")
+        else:
+            out.append(ch)
+    return "".join(out)
 
 
 def interface_name_as_direct_conclusion(head: str, interface_names: set[str]) -> str | None:
