@@ -49219,7 +49219,11 @@ def CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCerti
                   paperSemanticOpenCount = 2 /\
                     openSemanticTargetIds =
                       ["theorem_4_1_part6_lattice_embedding",
-                       "topo_cluster_random_supercritical_z2"]
+                       "topo_cluster_random_supercritical_z2"] /\
+                      Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate /\
+                        Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate /\
+                          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate /\
+                            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate
 
 /-- The current public release per-target obstruction package is
 kernel-checked. -/
@@ -49244,7 +49248,15 @@ theorem
                   completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_boxed_route_not
                   (And.intro
                     paperSemanticOpenCount_current
-                    openSemanticTargetIds_current))))))))
+                    (And.intro
+                      openSemanticTargetIds_current
+                      (And.intro
+                        part6_nondegenerate_feasible_repair_route_terminal_obstruction_certificate
+                        (And.intro
+                          part6_nondegenerate_feasible_repair_route_terminal_obstruction_statement_roster_certificate
+                          (And.intro
+                            random_supercritical_z2_topo_cluster_support_surface_repair_terminal_obstruction_certificate
+                            random_supercritical_z2_topo_cluster_support_surface_repair_terminal_obstruction_statement_roster_certificate))))))))))))
 
 /-- Statement roster for the public release per-target obstruction package. -/
 def completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements :
@@ -49261,7 +49273,11 @@ def completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionState
    paperSemanticOpenCount = 2,
    openSemanticTargetIds =
       ["theorem_4_1_part6_lattice_embedding",
-       "topo_cluster_random_supercritical_z2"]]
+       "topo_cluster_random_supercritical_z2"],
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate]
 
 /-- Build gate: the public release per-target obstruction roster is fixed. -/
 theorem
@@ -49279,14 +49295,18 @@ theorem
        paperSemanticOpenCount = 2,
        openSemanticTargetIds =
           ["theorem_4_1_part6_lattice_embedding",
-           "topo_cluster_random_supercritical_z2"]] := rfl
+           "topo_cluster_random_supercritical_z2"],
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate] := rfl
 
-/-- Build gate: the public release per-target obstruction package has eleven
+/-- Build gate: the public release per-target obstruction package has fifteen
 statements. -/
 theorem
     completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements_length_current :
     completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements.length =
-      11 := rfl
+      15 := rfl
 
 /-- Build-gated statement roster certificate for the public release per-target
 obstruction package. -/
@@ -49305,9 +49325,13 @@ def CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionState
        paperSemanticOpenCount = 2,
        openSemanticTargetIds =
           ["theorem_4_1_part6_lattice_embedding",
-           "topo_cluster_random_supercritical_z2"]] /\
+           "topo_cluster_random_supercritical_z2"],
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate] /\
     completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements.length =
-      11 /\
+      15 /\
     CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCertificate
 
 /-- The public release per-target obstruction package has a fixed statement
@@ -49384,8 +49408,50 @@ theorem
     openSemanticTargetIds =
       ["theorem_4_1_part6_lattice_embedding",
        "topo_cluster_random_supercritical_z2"] := by
-  exact
-    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.2.2.2.2.2.2
+  rcases
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate with
+    ⟨_, _, _, _, _, _, _, _, _, hids, _, _, _, _⟩
+  exact hids
+
+/-- Projection from the public release per-target obstruction package: the Part
+6 source terminal obstruction certificate is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_certificate :
+    Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate := by
+  rcases
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate with
+    ⟨_, _, _, _, _, _, _, _, _, _, hpart6, _, _, _⟩
+  exact hpart6
+
+/-- Projection from the public release per-target obstruction package: the Part
+6 source terminal obstruction statement roster is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_statement_roster_certificate :
+    Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate := by
+  rcases
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate with
+    ⟨_, _, _, _, _, _, _, _, _, _, _, hpart6Roster, _, _⟩
+  exact hpart6Roster
+
+/-- Projection from the public release per-target obstruction package: the topo
+source terminal obstruction certificate is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate := by
+  rcases
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate with
+    ⟨_, _, _, _, _, _, _, _, _, _, _, _, htopo, _⟩
+  exact htopo
+
+/-- Projection from the public release per-target obstruction package: the topo
+source terminal obstruction statement roster is included. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_statement_roster_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate := by
+  rcases
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate with
+    ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, htopoRoster⟩
+  exact htopoRoster
 
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
