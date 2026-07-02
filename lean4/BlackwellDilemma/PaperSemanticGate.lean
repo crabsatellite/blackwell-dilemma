@@ -51077,6 +51077,137 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_certificate)
 
+/-- Release endpoint open/closed target-id disjointness certificate: no current
+open target id is already counted as closed, and no current closed target id is
+still counted as open. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate /\
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+      closedSemanticTargetIds =
+        ["r10_two_regime_label_recalibration",
+         "theorem_4_1_part4_lattice_p_monotonicity",
+         "r10_threshold_five_state_high_kappa_routing"] /\
+        (∀ id, id ∈ openSemanticTargetIds -> id ∉ closedSemanticTargetIds) /\
+          (∀ id, id ∈ closedSemanticTargetIds -> id ∉ openSemanticTargetIds) /\
+            paperSemanticOpenCount = 2 /\
+              paperSemanticClosedCount = 3
+
+/-- The current release endpoint has disjoint open and closed semantic target id
+rosters. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_closed_target_id_disjointness_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate := by
+  have hOpenNotClosed :
+      ∀ id, id ∈ openSemanticTargetIds -> id ∉ closedSemanticTargetIds := by
+    intro id hid hClosed
+    rw [openSemanticTargetIds_current] at hid
+    rw [closedSemanticTargetIds_current] at hClosed
+    simp at hid
+    simp at hClosed
+    rcases hid with hPart6 | hTopo
+    · subst id
+      simp at hClosed
+    · subst id
+      simp at hClosed
+  have hClosedNotOpen :
+      ∀ id, id ∈ closedSemanticTargetIds -> id ∉ openSemanticTargetIds := by
+    intro id hClosed hOpen
+    rw [closedSemanticTargetIds_current] at hClosed
+    rw [openSemanticTargetIds_current] at hOpen
+    simp at hClosed
+    simp at hOpen
+    rcases hClosed with hR10 | hPart4 | hHighKappa
+    · subst id
+      simp at hOpen
+    · subst id
+      simp at hOpen
+    · subst id
+      simp at hOpen
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_statement_roster_certificate <|
+      And.intro openSemanticTargetIds_current <|
+        And.intro closedSemanticTargetIds_current <|
+          And.intro hOpenNotClosed <|
+            And.intro hClosedNotOpen <|
+              And.intro paperSemanticOpenCount_current paperSemanticClosedCount_current
+
+/-- Statement roster for the release endpoint open/closed target-id
+disjointness certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"],
+   ∀ id, id ∈ openSemanticTargetIds -> id ∉ closedSemanticTargetIds,
+   ∀ id, id ∈ closedSemanticTargetIds -> id ∉ openSemanticTargetIds,
+   paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3]
+
+/-- Build gate: the release endpoint open/closed target-id disjointness roster
+is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       ∀ id, id ∈ openSemanticTargetIds -> id ∉ closedSemanticTargetIds,
+       ∀ id, id ∈ closedSemanticTargetIds -> id ∉ openSemanticTargetIds,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3] := rfl
+
+/-- Build gate: the release endpoint open/closed target-id disjointness package
+has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint
+open/closed target-id disjointness package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       ∀ id, id ∈ openSemanticTargetIds -> id ∉ closedSemanticTargetIds,
+       ∀ id, id ∈ closedSemanticTargetIds -> id ∉ openSemanticTargetIds,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate
+
+/-- The release endpoint open/closed target-id disjointness package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_closed_target_id_disjointness_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_closed_target_id_disjointness_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
