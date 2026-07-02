@@ -52493,6 +52493,132 @@ theorem
           completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_statement_roster_certificate
           completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_certificate)))
 
+/-- Public-evidence bundle for the final public-release endpoint
+semantic-target seal: the final table seal, theorem-name alias, row-dispatch
+seal, and the two remaining open-target terminal obstruction certificates are
+all exported together. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate /\
+            Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate /\
+              Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate /\
+                RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate /\
+                  RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate /\
+                    paperSemanticOpenCount = 2 /\
+                      openSemanticTargetIds =
+                        ["theorem_4_1_part6_lattice_embedding",
+                         "topo_cluster_random_supercritical_z2"]
+
+/-- The final public-release endpoint semantic-target seal is exported as a
+public-evidence bundle with both remaining open-target obstructions. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_theorem_name_alias_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_theorem_name_alias_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_statement_roster_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_certificate <|
+            And.intro
+              completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_statement_roster_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_certificate <|
+                And.intro
+                  completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_statement_roster_certificate <|
+                  And.intro
+                    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_certificate <|
+                    And.intro
+                      completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_statement_roster_certificate <|
+                      And.intro
+                        paperSemanticOpenCount_current
+                        openSemanticTargetIds_current
+
+/-- Statement roster for the final semantic-target public-evidence bundle. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the final semantic-target public-evidence bundle roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the final semantic-target public-evidence bundle has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the final semantic-target
+public-evidence bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleCertificate
+
+/-- The final semantic-target public-evidence bundle has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetFinalSealPublicEvidenceBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_final_seal_public_evidence_bundle_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
