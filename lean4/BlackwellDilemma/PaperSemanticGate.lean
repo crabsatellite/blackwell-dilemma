@@ -49108,6 +49108,20 @@ theorem completePaperSemanticKernelOnly_current_not_of_public_release_gate
     Not CompletePaperSemanticKernelOnly := by
   exact h.2.2.2.2.2.2.2
 
+/-- Paper-facing nonclosure theorem exported through the public release gate. -/
+theorem completePaperSemanticKernelOnly_current_public_release_nonclosure :
+    Not CompletePaperSemanticKernelOnly := by
+  exact completePaperSemanticKernelOnly_current_not_of_public_release_gate
+    completePaperSemanticKernelOnly_current_public_release_gate_certificate
+
+/-- Paper-facing current public release gate: complete kernel-only closure is
+equivalent to false until the two open semantic targets close. -/
+theorem completePaperSemanticKernelOnly_current_public_release_iff_false :
+    CompletePaperSemanticKernelOnly ↔ False := by
+  exact Iff.intro
+    (fun h => completePaperSemanticKernelOnly_current_public_release_nonclosure h)
+    False.elim
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
