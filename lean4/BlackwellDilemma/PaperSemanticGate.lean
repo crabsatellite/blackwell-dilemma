@@ -51432,6 +51432,148 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_classification_obstruction_exit_certificate)
 
+/-- Release endpoint closed-target dispatch certificate: every closed semantic
+target id is paired with the typed closure payload that closes that target. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatementRosterCertificate /\
+    ClosedSemanticTargetsFrontierStatementRosterCertificate /\
+      (∀ id, id ∈ closedSemanticTargetIds ->
+        (id = "r10_two_regime_label_recalibration" /\
+          Nonempty TwoRegimeRelabelingPayload) ∨
+          (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+            Nonempty Part4LatticePMonotonicityFrontierPayload) ∨
+            (id = "r10_threshold_five_state_high_kappa_routing" /\
+              (∀ p : Real,
+                FiveState.highKappaOracleRoutingWelfare p =
+                  FiveState.fiveStateOracleWelfare p))) /\
+        closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"] /\
+          paperSemanticClosedCount = 3
+
+/-- Every current closed target id dispatches to the typed payload that closes
+that semantic target. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_closed_target_membership_closure_dispatch_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchCertificate := by
+  let hClosed := closed_semantic_targets_frontier_certificate
+  have hDispatch :
+      ∀ id, id ∈ closedSemanticTargetIds ->
+        (id = "r10_two_regime_label_recalibration" /\
+          Nonempty TwoRegimeRelabelingPayload) ∨
+          (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+            Nonempty Part4LatticePMonotonicityFrontierPayload) ∨
+            (id = "r10_threshold_five_state_high_kappa_routing" /\
+              (∀ p : Real,
+                FiveState.highKappaOracleRoutingWelfare p =
+                  FiveState.fiveStateOracleWelfare p)) := by
+    intro id hid
+    rw [closedSemanticTargetIds_current] at hid
+    simp at hid
+    rcases hid with hR10 | hPart4 | hHighKappa
+    · exact Or.inl ⟨hR10, hClosed.right.right.left⟩
+    · exact Or.inr (Or.inl ⟨hPart4, hClosed.right.right.right.left⟩)
+    · exact Or.inr (Or.inr ⟨hHighKappa, hClosed.right.right.right.right⟩)
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_classification_obstruction_exit_statement_roster_certificate <|
+      And.intro closed_semantic_targets_frontier_statement_roster_certificate <|
+        And.intro hDispatch <|
+          And.intro closedSemanticTargetIds_current paperSemanticClosedCount_current
+
+/-- Statement roster for the release endpoint closed-target membership-to-
+closure dispatch certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatementRosterCertificate,
+   ClosedSemanticTargetsFrontierStatementRosterCertificate,
+   ∀ id, id ∈ closedSemanticTargetIds ->
+      (id = "r10_two_regime_label_recalibration" /\
+        Nonempty TwoRegimeRelabelingPayload) ∨
+        (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+          Nonempty Part4LatticePMonotonicityFrontierPayload) ∨
+          (id = "r10_threshold_five_state_high_kappa_routing" /\
+            (∀ p : Real,
+              FiveState.highKappaOracleRoutingWelfare p =
+                FiveState.fiveStateOracleWelfare p)),
+   closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"],
+   paperSemanticClosedCount = 3,
+   ClosedSemanticTargetsFrontierCertificate]
+
+/-- Build gate: the release endpoint closed-target membership-to-closure
+dispatch roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatementRosterCertificate,
+       ClosedSemanticTargetsFrontierStatementRosterCertificate,
+       ∀ id, id ∈ closedSemanticTargetIds ->
+          (id = "r10_two_regime_label_recalibration" /\
+            Nonempty TwoRegimeRelabelingPayload) ∨
+            (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+              Nonempty Part4LatticePMonotonicityFrontierPayload) ∨
+              (id = "r10_threshold_five_state_high_kappa_routing" /\
+                (∀ p : Real,
+                  FiveState.highKappaOracleRoutingWelfare p =
+                    FiveState.fiveStateOracleWelfare p)),
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       paperSemanticClosedCount = 3,
+       ClosedSemanticTargetsFrontierCertificate] := rfl
+
+/-- Build gate: the release endpoint closed-target membership-to-closure
+dispatch package has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint closed
+target membership-to-closure dispatch package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetClassificationObstructionExitStatementRosterCertificate,
+       ClosedSemanticTargetsFrontierStatementRosterCertificate,
+       ∀ id, id ∈ closedSemanticTargetIds ->
+          (id = "r10_two_regime_label_recalibration" /\
+            Nonempty TwoRegimeRelabelingPayload) ∨
+            (id = "theorem_4_1_part4_lattice_p_monotonicity" /\
+              Nonempty Part4LatticePMonotonicityFrontierPayload) ∨
+              (id = "r10_threshold_five_state_high_kappa_routing" /\
+                (∀ p : Real,
+                  FiveState.highKappaOracleRoutingWelfare p =
+                    FiveState.fiveStateOracleWelfare p)),
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       paperSemanticClosedCount = 3,
+       ClosedSemanticTargetsFrontierCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchCertificate
+
+/-- The release endpoint closed-target membership-to-closure dispatch package
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_closed_target_membership_closure_dispatch_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_closed_target_membership_closure_dispatch_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
