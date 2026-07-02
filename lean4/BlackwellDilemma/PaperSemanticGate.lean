@@ -49204,6 +49204,189 @@ theorem completePaperSemanticKernelOnly_current_public_release_theorem_statement
       completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_theorem_certificate)
 
+/-- Public release package tying the paper-facing theorem export to the two
+remaining per-target obstruction surfaces. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate /\
+      Not Part6LatticeEmbeddingSemanticKernelTarget /\
+        Not Part6NondegenerateFeasibleRepairRoute /\
+          Not Part6FullPaperClosingSupport /\
+            Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget /\
+              Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute /\
+                  paperSemanticOpenCount = 2 /\
+                    openSemanticTargetIds =
+                      ["theorem_4_1_part6_lattice_embedding",
+                       "topo_cluster_random_supercritical_z2"]
+
+/-- The current public release per-target obstruction package is
+kernel-checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_theorem_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_target_not
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_repair_route_not
+          (And.intro
+            completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_part6_full_support_not
+            (And.intro
+              completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_target_not
+              (And.intro
+                completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_full_route_not
+                (And.intro
+                  completePaperSemanticKernelOnly_current_public_nonclosure_boundary_per_target_obstruction_topo_boxed_route_not
+                  (And.intro
+                    paperSemanticOpenCount_current
+                    openSemanticTargetIds_current))))))))
+
+/-- Statement roster for the public release per-target obstruction package. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate,
+   Not Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6NondegenerateFeasibleRepairRoute,
+   Not Part6FullPaperClosingSupport,
+   Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release per-target obstruction roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release per-target obstruction package has eleven
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the public release per-target
+obstruction package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionStatementRosterCertificate,
+       Not Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6NondegenerateFeasibleRepairRoute,
+       Not Part6FullPaperClosingSupport,
+       Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionCertificate
+
+/-- The public release per-target obstruction package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate)
+
+/-- Projection from the public release per-target obstruction package: the Part
+6 target remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_target_not :
+    Not Part6LatticeEmbeddingSemanticKernelTarget := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.1
+
+/-- Projection from the public release per-target obstruction package: the Part
+6 repair route remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_repair_route_not :
+    Not Part6NondegenerateFeasibleRepairRoute := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.1
+
+/-- Projection from the public release per-target obstruction package: the Part
+6 full paper-closing support remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_full_support_not :
+    Not Part6FullPaperClosingSupport := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.2.1
+
+/-- Projection from the public release per-target obstruction package: the topo
+target remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_target_not :
+    Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.2.2.1
+
+/-- Projection from the public release per-target obstruction package: the topo
+full paper-closing route remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_full_route_not :
+    Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.2.2.2.1
+
+/-- Projection from the public release per-target obstruction package: the topo
+boxed torus finite Z2_L route remains currently obstructed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_boxed_route_not :
+    Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.2.2.2.2.1
+
+/-- Projection from the public release per-target obstruction package: the open
+target count remains two. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_open_count :
+    paperSemanticOpenCount = 2 := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.2.2.2.2.2.1
+
+/-- Projection from the public release per-target obstruction package: the two
+open target identifiers are fixed. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_open_ids :
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] := by
+  exact
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_certificate.2.2.2.2.2.2.2.2.2
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
