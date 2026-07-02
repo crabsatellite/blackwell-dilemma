@@ -55465,6 +55465,314 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_closure_equivalence_vector_audit_gate_certificate)
 
+/-- Endpoint gate for the explicit field-output vector: the public endpoint
+carries the field payload/output rosters and the direct field-to-target,
+field-to-exact-input, field-to-output, and obstruction-to-field projections for
+the two open paper targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatementRosterCertificate /\
+    OpenSemanticTargetClosureInputFieldStatementRosterCertificate /\
+      OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate /\
+        RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+          openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads =
+            [Part6LatticeEmbeddingClosureInputFieldPayload,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceTargets =
+            [Part6LatticeEmbeddingSemanticKernelTarget,
+             TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceExactInputs =
+            [Part6LatticeEmbeddingExactClosureInput,
+             TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+            [Part6FullPaperClosingFullOutputBundle,
+             TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions =
+            [Not Part6LatticeEmbeddingClosureInputFieldPayload,
+             Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates =
+            [Part6LatticeEmbeddingClosureInputFieldOutputCertificate,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements =
+            [Part6LatticeEmbeddingClosureInputFieldPayload ->
+              Part6LatticeEmbeddingSemanticKernelTarget,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+              TopoClusterRandomSupercriticalZ2SemanticKernelTarget] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements =
+            [Part6LatticeEmbeddingClosureInputFieldPayload ->
+              Part6LatticeEmbeddingExactClosureInput,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+              TopoClusterRandomSupercriticalZ2ExactClosureInput] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+            [Part6LatticeEmbeddingClosureInputFieldPayload ->
+              Part6FullPaperClosingFullOutputBundle,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+              TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements =
+            [Not Part6LatticeEmbeddingSemanticKernelTarget ->
+              Not Part6LatticeEmbeddingClosureInputFieldPayload,
+             Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+              Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements =
+            [Not Part6LatticeEmbeddingExactClosureInput ->
+              Not Part6LatticeEmbeddingClosureInputFieldPayload,
+             Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+              Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+            [Not Part6FullPaperClosingFullOutputBundle ->
+              Not Part6LatticeEmbeddingClosureInputFieldPayload,
+             Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+              Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+          paperSemanticOpenCount = 2 /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The public release endpoint exports the explicit field-output vector behind
+the current exact/output equivalence and paper-label nonclosure judgement. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_closure_equivalence_vector_audit_gate_statement_roster_certificate <|
+    And.intro
+      open_semantic_target_closure_input_field_statement_roster_certificate <|
+      And.intro
+        open_semantic_target_closure_input_field_output_statement_roster_certificate <|
+        And.intro
+          remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate <|
+          And.intro
+            openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads_named_current <|
+            And.intro
+              openSemanticTargetClosureInputFieldOutputSurfaceTargets_named_current <|
+              And.intro
+                openSemanticTargetClosureInputFieldOutputSurfaceExactInputs_named_current <|
+                And.intro
+                  openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_named_current <|
+                  And.intro
+                    openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions_named_current <|
+                    And.intro
+                      openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates_named_current <|
+                      And.intro
+                        openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements_named_current <|
+                        And.intro
+                          openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements_named_current <|
+                          And.intro
+                            openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current <|
+                            And.intro
+                              openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements_named_current <|
+                              And.intro
+                                openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements_named_current <|
+                                And.intro
+                                  openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_named_current <|
+                                  And.intro
+                                    paperSemanticOpenCount_current
+                                    completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the endpoint semantic-target paper-label explicit
+field-output vector audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatementRosterCertificate,
+   OpenSemanticTargetClosureInputFieldStatementRosterCertificate,
+   OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads =
+     [Part6LatticeEmbeddingClosureInputFieldPayload,
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+   openSemanticTargetClosureInputFieldOutputSurfaceTargets =
+     [Part6LatticeEmbeddingSemanticKernelTarget,
+      TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+   openSemanticTargetClosureInputFieldOutputSurfaceExactInputs =
+     [Part6LatticeEmbeddingExactClosureInput,
+      TopoClusterRandomSupercriticalZ2ExactClosureInput],
+   openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+     [Part6FullPaperClosingFullOutputBundle,
+      TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+   openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions =
+     [Not Part6LatticeEmbeddingClosureInputFieldPayload,
+      Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+   openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates =
+     [Part6LatticeEmbeddingClosureInputFieldOutputCertificate,
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate],
+   openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements =
+     [Part6LatticeEmbeddingClosureInputFieldPayload ->
+       Part6LatticeEmbeddingSemanticKernelTarget,
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+       TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+   openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements =
+     [Part6LatticeEmbeddingClosureInputFieldPayload ->
+       Part6LatticeEmbeddingExactClosureInput,
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+       TopoClusterRandomSupercriticalZ2ExactClosureInput],
+   openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+     [Part6LatticeEmbeddingClosureInputFieldPayload ->
+       Part6FullPaperClosingFullOutputBundle,
+      TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+   openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements =
+     [Not Part6LatticeEmbeddingSemanticKernelTarget ->
+       Not Part6LatticeEmbeddingClosureInputFieldPayload,
+      Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+   openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements =
+     [Not Part6LatticeEmbeddingExactClosureInput ->
+       Not Part6LatticeEmbeddingClosureInputFieldPayload,
+      Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+   openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+     [Not Part6FullPaperClosingFullOutputBundle ->
+       Not Part6LatticeEmbeddingClosureInputFieldPayload,
+      Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+       Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the endpoint semantic-target paper-label explicit field-output
+vector audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads =
+         [Part6LatticeEmbeddingClosureInputFieldPayload,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceTargets =
+         [Part6LatticeEmbeddingSemanticKernelTarget,
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputFieldOutputSurfaceExactInputs =
+         [Part6LatticeEmbeddingExactClosureInput,
+          TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+         [Part6FullPaperClosingFullOutputBundle,
+          TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions =
+         [Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates =
+         [Part6LatticeEmbeddingClosureInputFieldOutputCertificate,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements =
+         [Part6LatticeEmbeddingClosureInputFieldPayload ->
+           Part6LatticeEmbeddingSemanticKernelTarget,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+           TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements =
+         [Part6LatticeEmbeddingClosureInputFieldPayload ->
+           Part6LatticeEmbeddingExactClosureInput,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+           TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+         [Part6LatticeEmbeddingClosureInputFieldPayload ->
+           Part6FullPaperClosingFullOutputBundle,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements =
+         [Not Part6LatticeEmbeddingSemanticKernelTarget ->
+           Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+           Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements =
+         [Not Part6LatticeEmbeddingExactClosureInput ->
+           Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+           Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+         [Not Part6FullPaperClosingFullOutputBundle ->
+           Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+           Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the endpoint semantic-target paper-label explicit field-output
+vector audit gate has nineteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements.length =
+      19 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+paper-label explicit field-output vector audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitClosureEquivalenceVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldStatementRosterCertificate,
+       OpenSemanticTargetClosureInputFieldOutputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloads =
+         [Part6LatticeEmbeddingClosureInputFieldPayload,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceTargets =
+         [Part6LatticeEmbeddingSemanticKernelTarget,
+          TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputFieldOutputSurfaceExactInputs =
+         [Part6LatticeEmbeddingExactClosureInput,
+          TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+         [Part6FullPaperClosingFullOutputBundle,
+          TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldPayloadObstructions =
+         [Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldOutputCertificates =
+         [Part6LatticeEmbeddingClosureInputFieldOutputCertificate,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputCertificate],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToTargetStatements =
+         [Part6LatticeEmbeddingClosureInputFieldPayload ->
+           Part6LatticeEmbeddingSemanticKernelTarget,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+           TopoClusterRandomSupercriticalZ2SemanticKernelTarget],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToExactInputStatements =
+         [Part6LatticeEmbeddingClosureInputFieldPayload ->
+           Part6LatticeEmbeddingExactClosureInput,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+           TopoClusterRandomSupercriticalZ2ExactClosureInput],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+         [Part6LatticeEmbeddingClosureInputFieldPayload ->
+           Part6FullPaperClosingFullOutputBundle,
+          TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceTargetObstructionToFieldStatements =
+         [Not Part6LatticeEmbeddingSemanticKernelTarget ->
+           Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2SemanticKernelTarget ->
+           Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceExactObstructionToFieldStatements =
+         [Not Part6LatticeEmbeddingExactClosureInput ->
+           Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2ExactClosureInput ->
+           Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+         [Not Part6FullPaperClosingFullOutputBundle ->
+           Not Part6LatticeEmbeddingClosureInputFieldPayload,
+          Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+           Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements.length =
+      19 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate
+
+/-- The endpoint semantic-target paper-label explicit field-output vector audit
+gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
