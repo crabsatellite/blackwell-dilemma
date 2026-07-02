@@ -50833,6 +50833,130 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_integrity_certificate)
 
+/-- Exhaustive membership certificate for the release endpoint open-target id
+roster: every open id is one of the two explicitly listed remaining targets. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatementRosterCertificate /\
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+      (∀ id, id ∈ openSemanticTargetIds ->
+        id = "theorem_4_1_part6_lattice_embedding" ∨
+          id = "topo_cluster_random_supercritical_z2") /\
+        ("theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+          "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds) /\
+          openSemanticTargetIds.Nodup /\
+            paperSemanticOpenCount = openSemanticTargetIds.length
+
+/-- The release endpoint open-target roster is membership-exhaustive: no
+unlisted third open target can inhabit the current open id list. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_exhaustive_membership_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipCertificate := by
+  have hExhaustive :
+      ∀ id, id ∈ openSemanticTargetIds ->
+        id = "theorem_4_1_part6_lattice_embedding" ∨
+          id = "topo_cluster_random_supercritical_z2" := by
+    intro id hid
+    rw [openSemanticTargetIds_current] at hid
+    simpa using hid
+  have hPart6Id :
+      "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds := by
+    rw [openSemanticTargetIds_current]
+    simp
+  have hTopoId :
+      "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds := by
+    rw [openSemanticTargetIds_current]
+    simp
+  have hNodup : openSemanticTargetIds.Nodup := by
+    rw [openSemanticTargetIds_current]
+    simp
+  have hCountLength : paperSemanticOpenCount = openSemanticTargetIds.length := by
+    rw [paperSemanticOpenCount_current, openSemanticTargetIds_current]
+    rfl
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_integrity_statement_roster_certificate <|
+      And.intro openSemanticTargetIds_current <|
+        And.intro hExhaustive <|
+          And.intro
+            (And.intro hPart6Id hTopoId) <|
+              And.intro hNodup hCountLength
+
+/-- Statement roster for the release endpoint open-target exhaustive membership
+certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatementRosterCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   ∀ id, id ∈ openSemanticTargetIds ->
+      id = "theorem_4_1_part6_lattice_embedding" ∨
+        id = "topo_cluster_random_supercritical_z2",
+   "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+      "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds,
+   openSemanticTargetIds.Nodup,
+   paperSemanticOpenCount = openSemanticTargetIds.length]
+
+/-- Build gate: the release endpoint open-target exhaustive membership roster
+is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       ∀ id, id ∈ openSemanticTargetIds ->
+          id = "theorem_4_1_part6_lattice_embedding" ∨
+            id = "topo_cluster_random_supercritical_z2",
+       "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+          "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds,
+       openSemanticTargetIds.Nodup,
+       paperSemanticOpenCount = openSemanticTargetIds.length] := rfl
+
+/-- Build gate: the release endpoint open-target exhaustive membership package
+has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint
+open-target exhaustive membership package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       ∀ id, id ∈ openSemanticTargetIds ->
+          id = "theorem_4_1_part6_lattice_embedding" ∨
+            id = "topo_cluster_random_supercritical_z2",
+       "theorem_4_1_part6_lattice_embedding" ∈ openSemanticTargetIds /\
+          "topo_cluster_random_supercritical_z2" ∈ openSemanticTargetIds,
+       openSemanticTargetIds.Nodup,
+       paperSemanticOpenCount = openSemanticTargetIds.length] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipCertificate
+
+/-- The release endpoint open-target exhaustive membership package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_exhaustive_membership_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterExhaustiveMembershipStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_exhaustive_membership_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
