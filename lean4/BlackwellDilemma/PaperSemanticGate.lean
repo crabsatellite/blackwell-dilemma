@@ -50733,6 +50733,106 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_public_evidence_exit_certificate)
 
+/-- Integrity certificate for the release endpoint open-target id roster: the
+roster is exact, has length two, has no duplicate ids, and agrees with the open
+count. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatementRosterCertificate /\
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+      openSemanticTargetIds.length = 2 /\
+        openSemanticTargetIds.Nodup /\
+          paperSemanticOpenCount = openSemanticTargetIds.length /\
+            paperSemanticOpenCount = 2
+
+/-- The public release endpoint has an exact, duplicate-free open-target id
+roster whose length agrees with the open count. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_integrity_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityCertificate := by
+  have hLength : openSemanticTargetIds.length = 2 := by
+    rw [openSemanticTargetIds_current]
+    rfl
+  have hNodup : openSemanticTargetIds.Nodup := by
+    rw [openSemanticTargetIds_current]
+    simp
+  have hCountLength : paperSemanticOpenCount = openSemanticTargetIds.length := by
+    rw [paperSemanticOpenCount_current, openSemanticTargetIds_current]
+    rfl
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_public_evidence_exit_statement_roster_certificate <|
+      And.intro openSemanticTargetIds_current <|
+        And.intro hLength <|
+          And.intro hNodup <|
+            And.intro hCountLength paperSemanticOpenCount_current
+
+/-- Statement roster for the release endpoint open-target id roster integrity
+certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatementRosterCertificate,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   openSemanticTargetIds.length = 2,
+   openSemanticTargetIds.Nodup,
+   paperSemanticOpenCount = openSemanticTargetIds.length,
+   paperSemanticOpenCount = 2]
+
+/-- Build gate: the release endpoint open-target id roster integrity statement
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetIds.length = 2,
+       openSemanticTargetIds.Nodup,
+       paperSemanticOpenCount = openSemanticTargetIds.length,
+       paperSemanticOpenCount = 2] := rfl
+
+/-- Build gate: the release endpoint open-target id roster integrity package has
+seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint
+open-target id roster integrity package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatementRosterCertificate,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetIds.length = 2,
+       openSemanticTargetIds.Nodup,
+       paperSemanticOpenCount = openSemanticTargetIds.length,
+       paperSemanticOpenCount = 2] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityCertificate
+
+/-- The release endpoint open-target id roster integrity package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_integrity_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetIdRosterIntegrityStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_id_roster_integrity_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
