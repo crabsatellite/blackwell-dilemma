@@ -19562,6 +19562,118 @@ theorem random_supercritical_z2_topo_cluster_route_obstruction_source_statement_
     randomSupercriticalZ2TopoClusterRouteObstructionSourceStatements_length_current,
     random_supercritical_z2_topo_cluster_route_obstruction_source_certificate⟩
 
+/-- Terminal topo support-surface repair-route obstruction package.
+
+This source-level package collects the current topo frontier, the
+support-surface repair route/output/nonclosure certificates, the route-source
+obstruction roster, and the current full-route/boxed-route obstructions used by
+the paper-semantic gate. -/
+def RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate :
+    Prop :=
+  RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute /\
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate /\
+        RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate /\
+            RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate /\
+              RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate /\
+                FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate /\
+                  RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate /\
+                    RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate /\
+                      Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute /\
+                        Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute
+
+/-- The terminal topo support-surface repair-route obstruction package is
+kernel checked. -/
+theorem random_supercritical_z2_topo_cluster_support_surface_repair_terminal_obstruction_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate := by
+  exact ⟨
+    random_supercritical_z2_topo_cluster_current_frontier_certificate,
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute_current,
+    random_supercritical_z2_topo_cluster_support_surface_repair_route_output_certificate,
+    random_supercritical_z2_topo_cluster_support_surface_repair_nonclosure_certificate,
+    random_supercritical_z2_topo_cluster_support_surface_closing_route_nonclosure_certificate,
+    random_supercritical_z2_topo_cluster_full_paper_closing_route_output_certificate,
+    random_supercritical_z2_topo_cluster_full_support_envelope_obstruction_certificate,
+    firstEdge_repaired_bridge_support_surface_repair_not_closing_certificate,
+    random_supercritical_z2_topo_cluster_route_obstruction_source_certificate,
+    random_supercritical_z2_topo_cluster_route_obstruction_source_statement_roster_certificate,
+    not_randomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+    not_randomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute⟩
+
+/-- Statement roster for the terminal topo support-surface repair-route
+obstruction package. -/
+def randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements :
+    List Prop :=
+  [RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+   RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+   RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+   RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate,
+   FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+   RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+   RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
+   Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+   Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute]
+
+/-- Build gate: the terminal topo support-surface repair-route obstruction
+roster is fixed. -/
+theorem randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements_named_current :
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements =
+      [RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate,
+       FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] := rfl
+
+/-- Build gate: the terminal topo support-surface repair-route obstruction
+package has thirteen statements. -/
+theorem randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements_length_current :
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements.length =
+      13 := rfl
+
+/-- Build-gated statement roster certificate for the terminal topo
+support-surface repair-route obstruction package. -/
+def RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate :
+    Prop :=
+  randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements =
+      [RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRoute,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceClosingRouteNonClosureCertificate,
+       RandomSupercriticalZ2TopoClusterFullPaperClosingRouteOutputCertificate,
+       RandomSupercriticalZ2TopoClusterFullSupportEnvelopeObstructionCertificate,
+       FirstEdgeRepairedBridgeSupportSurfaceRepairNotClosingCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceCertificate,
+       RandomSupercriticalZ2TopoClusterRouteObstructionSourceStatementRosterCertificate,
+       Not RandomSupercriticalZ2TopoClusterFullPaperClosingRoute,
+       Not RandomSupercriticalZ2TopoClusterBoxedTorusFiniteZ2LClosingRoute] /\
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements.length =
+      13 /\
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate
+
+/-- The terminal topo support-surface repair-route obstruction package has a
+fixed statement roster. -/
+theorem random_supercritical_z2_topo_cluster_support_surface_repair_terminal_obstruction_statement_roster_certificate :
+    RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate := by
+  exact ⟨
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements_named_current,
+    randomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatements_length_current,
+    random_supercritical_z2_topo_cluster_support_surface_repair_terminal_obstruction_certificate⟩
+
 /-- The final random-supercritical bridge contract cannot be discharged by the
 current full-reach complement diagnostic family. -/
 theorem not_random_supercritical_z2_topo_cluster_bridge_full_reach_diagnostic :
