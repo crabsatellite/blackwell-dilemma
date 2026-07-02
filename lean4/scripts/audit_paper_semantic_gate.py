@@ -700,6 +700,16 @@ EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTR
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_public_evidence_ledger_completion_barrier_bridge_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_BRIDGE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineBridgeAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineBridgeAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineBridgeAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineBridgeAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineBridgeAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12673,6 +12683,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_DETAILED_FIELD_OUTPUT_ROW_ROSTER_PUBLIC_EXPORT_RELEASE_COMPLETION_PUBLIC_EVIDENCE_PAPER_LABEL_OBSTRUCTION_MAP_DETAILED_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_ALIGNMENT_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_BRIDGE_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls = [
+        decl
+        for decl in EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_BRIDGE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -13567,6 +13582,20 @@ def main() -> int:
         "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_public_evidence_ledger_completion_barrier_bridge_decls_missing_names="
         + ",".join(
             missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_public_evidence_ledger_completion_barrier_bridge_decls
+        )
+    )
+    print(
+        "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls_checked="
+        f"{len(EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_BRIDGE_DECLS)}"
+    )
+    print(
+        "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls_missing="
+        f"{len(missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls)}"
+    )
+    print(
+        "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls_missing_names="
+        + ",".join(
+            missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls
         )
     )
     print(
@@ -20565,6 +20594,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls_checked="
+            f"{len(EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_BRIDGE_DECLS)}"
+        ),
+        (
+            "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls_missing="
+            f"{len(missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls)}"
+        ),
+        (
+            "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls_missing_names="
+            + ",".join(
+                missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -22396,6 +22439,13 @@ def main() -> int:
             "missing terminal endpoint semantic-target-paper-label-explicit-endpoint-registry-release-seal-public-evidence-detailed-field-output-row-roster-public-export-release-completion-public-evidence-paper-label-obstruction-map-detailed-endpoint-registry-release-seal-public-evidence-alignment-terminal-dispatch-public-evidence-ledger-completion-barrier-bridge decls: "
             + ",".join(
                 missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_detailed_endpoint_registry_release_seal_public_evidence_alignment_terminal_dispatch_public_evidence_ledger_completion_barrier_bridge_decls
+            )
+        )
+    if missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls:
+        failures.append(
+            "missing public release terminal-dispatch public-evidence-ledger completion-barrier two-key seal-spine bridge decls: "
+            + ",".join(
+                missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_bridge_decls
             )
         )
 
