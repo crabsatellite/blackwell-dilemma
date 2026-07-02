@@ -48374,6 +48374,98 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate)
 
+/-- Paper-facing export certificate: the final public audit is projected to the
+exact public facts a paper or public repository should cite. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate /\
+    openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"] /\
+      paperSemanticOpenCount = 2 /\
+        (CompletePaperSemanticKernelOnly <-> False) /\
+          Not CompletePaperSemanticKernelOnly /\
+            CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate
+
+/-- The paper-facing public nonclosure export is machine checked from the final
+public audit. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_paper_export_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate.2.2.1
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate.2.2.2.1
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate.2.2.2.2.1
+          (And.intro
+            completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate.2.2.2.2.2.1
+            completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_certificate.2.2.2.2.2.2))))
+
+/-- Statement roster for the paper-facing public nonclosure export. -/
+def completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate]
+
+/-- Build gate: the paper-facing public nonclosure export roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] := rfl
+
+/-- Build gate: the paper-facing public nonclosure export roster has seven
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the paper-facing public
+nonclosure export. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditStatementRosterCertificate,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPerTargetObstructionCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportCertificate
+
+/-- The paper-facing public nonclosure export has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_paper_export_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_paper_export_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
