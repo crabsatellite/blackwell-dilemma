@@ -50637,6 +50637,102 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_certificate)
 
+/-- Public-evidence exit certificate for the release endpoint target-id
+obstruction pairs: the public release gate and the paired open-target
+obstructions are available through one terminal endpoint. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate /\
+          paperSemanticOpenCount = 2 /\
+            openSemanticTargetIds =
+              ["theorem_4_1_part6_lattice_embedding",
+               "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exposes the target-id obstruction-pair package
+as a public-evidence exit certificate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_public_evidence_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_gate_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_statement_roster_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_gate_certificate <|
+                  And.intro
+                    paperSemanticOpenCount_current
+                    openSemanticTargetIds_current
+
+/-- Statement roster for the public release endpoint target-id obstruction-pair
+public-evidence exit certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release endpoint target-id obstruction-pair
+public-evidence exit roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release endpoint target-id obstruction-pair
+public-evidence exit roster has seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the public release endpoint
+target-id obstruction-pair public-evidence exit. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitCertificate
+
+/-- The public release endpoint target-id obstruction-pair public-evidence exit
+has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_public_evidence_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointTargetIdObstructionPairPublicEvidenceExitStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_id_obstruction_pair_public_evidence_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
