@@ -48883,6 +48883,115 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_bridge_certificate)
 
+/-- Terminal-length bridge: the public field-output paper export is checked
+together with the terminal kernel-only nonclosure capstone roster length. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate /\
+    completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+      129 /\
+      CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+          12 /\
+          CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate /\
+              paperSemanticOpenCount = 2 /\
+                Not CompletePaperSemanticKernelOnly
+
+/-- The terminal-length bridge from the terminal capstone to the public
+field-output export bridge is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements_length_current
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_bridge_statement_roster_certificate
+        (And.intro
+          completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements_length_current
+          (And.intro
+            completePaperSemanticKernelOnly_current_terminal_kernel_only_nonclosure_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_bridge_certificate
+              (And.intro
+                paperSemanticOpenCount_current
+                completePaperSemanticKernelOnly_notYet))))))
+
+/-- Statement roster for the terminal-length public field-output export bridge. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+      129,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+      12,
+   CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the terminal-length public field-output export bridge roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+          129,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+          12,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the terminal-length public field-output export bridge roster has
+nine statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+      9 := rfl
+
+/-- Build-gated statement roster certificate for the terminal-length public
+field-output export bridge. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureStatements.length =
+          129,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeStatements.length =
+          12,
+       CompletePaperSemanticKernelOnlyCurrentTerminalKernelOnlyNonclosureCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportBridgeCertificate,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+      9 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate
+
+/-- The terminal-length public field-output export bridge has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
