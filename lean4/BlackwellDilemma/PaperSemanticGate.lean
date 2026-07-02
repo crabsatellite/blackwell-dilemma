@@ -54379,6 +54379,207 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_status_vector_audit_gate_certificate)
 
+/-- Endpoint gate for the semantic-target paper-label status vector: the public
+release endpoint carries the semantic-target status vector together with the
+paper-label and paper-label/id rosters used by the manuscript. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatementRosterCertificate /\
+    SemanticTargetPaperLabelStatementRosterCertificate /\
+      SemanticTargetPaperLabelIdStatementRosterCertificate /\
+        SemanticTargetPaperLabelCertificate /\
+          SemanticTargetPaperLabelIdCertificate /\
+            semanticTargetPaperLabelStatements.length = 3 /\
+              semanticTargetPaperLabelIdStatements.length = 3 /\
+                openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+                  [("theorem_4_1_part6_lattice_embedding",
+                    "thm:cognitive-threshold Part 6"),
+                   ("topo_cluster_random_supercritical_z2",
+                    "prop:topo-cluster and thm:phase")] /\
+                  closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+                    [("r10_two_regime_label_recalibration",
+                      "prop:two-regime-five-state"),
+                     ("theorem_4_1_part4_lattice_p_monotonicity",
+                      "thm:cognitive-threshold Part 4"),
+                     ("r10_threshold_five_state_high_kappa_routing",
+                      "prop:threshold-five-state clause iii")] /\
+                    semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+                      [("r10_two_regime_label_recalibration",
+                        "prop:two-regime-five-state"),
+                       ("theorem_4_1_part4_lattice_p_monotonicity",
+                        "thm:cognitive-threshold Part 4"),
+                       ("r10_threshold_five_state_high_kappa_routing",
+                        "prop:threshold-five-state clause iii"),
+                       ("theorem_4_1_part6_lattice_embedding",
+                        "thm:cognitive-threshold Part 6"),
+                       ("topo_cluster_random_supercritical_z2",
+                        "prop:topo-cluster and thm:phase")] /\
+                      paperSemanticOpenCount = 2
+
+/-- The public release endpoint exports the paper-label/id status vector used
+by the manuscript-facing semantic gate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_status_vector_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_status_vector_audit_gate_statement_roster_certificate <|
+    And.intro
+      semantic_target_paper_label_statement_roster_certificate <|
+      And.intro
+        semantic_target_paper_label_id_statement_roster_certificate <|
+        And.intro
+          semantic_target_paper_label_certificate <|
+          And.intro
+            semantic_target_paper_label_id_certificate <|
+            And.intro
+              semanticTargetPaperLabelStatements_length_current <|
+              And.intro
+                semanticTargetPaperLabelIdStatements_length_current <|
+                And.intro
+                  rfl <|
+                  And.intro
+                    rfl <|
+                    And.intro
+                      rfl
+                      paperSemanticOpenCount_current
+
+/-- Statement roster for the endpoint semantic-target paper-label status-vector
+audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatementRosterCertificate,
+   SemanticTargetPaperLabelStatementRosterCertificate,
+   SemanticTargetPaperLabelIdStatementRosterCertificate,
+   SemanticTargetPaperLabelCertificate,
+   SemanticTargetPaperLabelIdCertificate,
+   semanticTargetPaperLabelStatements.length = 3,
+   semanticTargetPaperLabelIdStatements.length = 3,
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+     [("theorem_4_1_part6_lattice_embedding",
+       "thm:cognitive-threshold Part 6"),
+      ("topo_cluster_random_supercritical_z2",
+       "prop:topo-cluster and thm:phase")],
+   closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+     [("r10_two_regime_label_recalibration",
+       "prop:two-regime-five-state"),
+      ("theorem_4_1_part4_lattice_p_monotonicity",
+       "thm:cognitive-threshold Part 4"),
+      ("r10_threshold_five_state_high_kappa_routing",
+       "prop:threshold-five-state clause iii")],
+   semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+     [("r10_two_regime_label_recalibration",
+       "prop:two-regime-five-state"),
+      ("theorem_4_1_part4_lattice_p_monotonicity",
+       "thm:cognitive-threshold Part 4"),
+      ("r10_threshold_five_state_high_kappa_routing",
+       "prop:threshold-five-state clause iii"),
+      ("theorem_4_1_part6_lattice_embedding",
+       "thm:cognitive-threshold Part 6"),
+      ("topo_cluster_random_supercritical_z2",
+       "prop:topo-cluster and thm:phase")],
+   paperSemanticOpenCount = 2]
+
+/-- Build gate: the endpoint semantic-target paper-label status-vector audit
+gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatementRosterCertificate,
+       SemanticTargetPaperLabelStatementRosterCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate,
+       SemanticTargetPaperLabelCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       semanticTargetPaperLabelStatements.length = 3,
+       semanticTargetPaperLabelIdStatements.length = 3,
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("theorem_4_1_part6_lattice_embedding",
+           "thm:cognitive-threshold Part 6"),
+          ("topo_cluster_random_supercritical_z2",
+           "prop:topo-cluster and thm:phase")],
+       closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("r10_two_regime_label_recalibration",
+           "prop:two-regime-five-state"),
+          ("theorem_4_1_part4_lattice_p_monotonicity",
+           "thm:cognitive-threshold Part 4"),
+          ("r10_threshold_five_state_high_kappa_routing",
+           "prop:threshold-five-state clause iii")],
+       semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("r10_two_regime_label_recalibration",
+           "prop:two-regime-five-state"),
+          ("theorem_4_1_part4_lattice_p_monotonicity",
+           "thm:cognitive-threshold Part 4"),
+          ("r10_threshold_five_state_high_kappa_routing",
+           "prop:threshold-five-state clause iii"),
+          ("theorem_4_1_part6_lattice_embedding",
+           "thm:cognitive-threshold Part 6"),
+          ("topo_cluster_random_supercritical_z2",
+           "prop:topo-cluster and thm:phase")],
+       paperSemanticOpenCount = 2] := rfl
+
+/-- Build gate: the endpoint semantic-target paper-label status-vector audit
+gate has twelve statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+paper-label status-vector audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatementRosterCertificate,
+       SemanticTargetPaperLabelStatementRosterCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate,
+       SemanticTargetPaperLabelCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       semanticTargetPaperLabelStatements.length = 3,
+       semanticTargetPaperLabelIdStatements.length = 3,
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("theorem_4_1_part6_lattice_embedding",
+           "thm:cognitive-threshold Part 6"),
+          ("topo_cluster_random_supercritical_z2",
+           "prop:topo-cluster and thm:phase")],
+       closedSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("r10_two_regime_label_recalibration",
+           "prop:two-regime-five-state"),
+          ("theorem_4_1_part4_lattice_p_monotonicity",
+           "thm:cognitive-threshold Part 4"),
+          ("r10_threshold_five_state_high_kappa_routing",
+           "prop:threshold-five-state clause iii")],
+       semanticTargets.map (fun target => (target.id, target.paperLabel)) =
+         [("r10_two_regime_label_recalibration",
+           "prop:two-regime-five-state"),
+          ("theorem_4_1_part4_lattice_p_monotonicity",
+           "thm:cognitive-threshold Part 4"),
+          ("r10_threshold_five_state_high_kappa_routing",
+           "prop:threshold-five-state clause iii"),
+          ("theorem_4_1_part6_lattice_embedding",
+           "thm:cognitive-threshold Part 6"),
+          ("topo_cluster_random_supercritical_z2",
+           "prop:topo-cluster and thm:phase")],
+       paperSemanticOpenCount = 2] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateCertificate
+
+/-- The endpoint semantic-target paper-label status-vector audit gate has a
+fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_status_vector_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_status_vector_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
