@@ -54235,6 +54235,150 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_audit_gate_certificate)
 
+/-- Endpoint gate for the semantic-target status vector: the public release
+endpoint carries the public nonclosure-boundary paper-export bridge together
+with the exact open/closed semantic-target partition, counts, and ids. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatementRosterCertificate /\
+    SemanticTargetsPartitionStatementRosterCertificate /\
+      SemanticTargetCountStatementRosterCertificate /\
+        SemanticTargetStatusPartitionStatementRosterCertificate /\
+          ClosedSemanticTargetsFrontierStatementRosterCertificate /\
+            paperSemanticClosedCount = 3 /\
+              paperSemanticOpenCount = 2 /\
+                closedSemanticTargetIds =
+                  ["r10_two_regime_label_recalibration",
+                   "theorem_4_1_part4_lattice_p_monotonicity",
+                   "r10_threshold_five_state_high_kappa_routing"] /\
+                  openSemanticTargetIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"] /\
+                    semanticTargets.length = 5 /\
+                      semanticTargetIds semanticTargets =
+                        closedSemanticTargetIds ++ openSemanticTargetIds
+
+/-- The public release endpoint exports the complete semantic-target status
+vector used by the paper-facing nonclosure boundary. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_status_vector_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      semantic_targets_partition_statement_roster_certificate <|
+      And.intro
+        semantic_target_count_statement_roster_certificate <|
+        And.intro
+          semantic_target_status_partition_statement_roster_certificate <|
+          And.intro
+            closed_semantic_targets_frontier_statement_roster_certificate <|
+            And.intro
+              paperSemanticClosedCount_current <|
+              And.intro
+                paperSemanticOpenCount_current <|
+                And.intro
+                  closedSemanticTargetIds_current <|
+                  And.intro
+                    openSemanticTargetIds_current <|
+                    And.intro
+                      rfl
+                      rfl
+
+/-- Statement roster for the endpoint semantic-target status-vector audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatementRosterCertificate,
+   SemanticTargetsPartitionStatementRosterCertificate,
+   SemanticTargetCountStatementRosterCertificate,
+   SemanticTargetStatusPartitionStatementRosterCertificate,
+   ClosedSemanticTargetsFrontierStatementRosterCertificate,
+   paperSemanticClosedCount = 3,
+   paperSemanticOpenCount = 2,
+   closedSemanticTargetIds =
+     ["r10_two_regime_label_recalibration",
+      "theorem_4_1_part4_lattice_p_monotonicity",
+      "r10_threshold_five_state_high_kappa_routing"],
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   semanticTargets.length = 5,
+   semanticTargetIds semanticTargets =
+     closedSemanticTargetIds ++ openSemanticTargetIds]
+
+/-- Build gate: the endpoint semantic-target status-vector audit gate roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatementRosterCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       SemanticTargetStatusPartitionStatementRosterCertificate,
+       ClosedSemanticTargetsFrontierStatementRosterCertificate,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       closedSemanticTargetIds =
+         ["r10_two_regime_label_recalibration",
+          "theorem_4_1_part4_lattice_p_monotonicity",
+          "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       semanticTargets.length = 5,
+       semanticTargetIds semanticTargets =
+         closedSemanticTargetIds ++ openSemanticTargetIds] := rfl
+
+/-- Build gate: the endpoint semantic-target status-vector audit gate has
+twelve statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+status-vector audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointPublicNonclosureBoundaryPaperExportTerminalLengthBridgeAuditGateStatementRosterCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       SemanticTargetStatusPartitionStatementRosterCertificate,
+       ClosedSemanticTargetsFrontierStatementRosterCertificate,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       closedSemanticTargetIds =
+         ["r10_two_regime_label_recalibration",
+          "theorem_4_1_part4_lattice_p_monotonicity",
+          "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       semanticTargets.length = 5,
+       semanticTargetIds semanticTargets =
+         closedSemanticTargetIds ++ openSemanticTargetIds] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateCertificate
+
+/-- The endpoint semantic-target status-vector audit gate has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_status_vector_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_status_vector_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

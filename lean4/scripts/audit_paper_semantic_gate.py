@@ -410,6 +410,16 @@ EXPECTED_TERMINAL_ENDPOINT_PUBLIC_NONCLOSURE_BOUNDARY_PAPER_EXPORT_TERMINAL_LENG
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_STATUS_VECTOR_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_status_vector_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetStatusVectorAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_status_vector_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12238,6 +12248,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_PUBLIC_NONCLOSURE_BOUNDARY_PAPER_EXPORT_TERMINAL_LENGTH_BRIDGE_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_terminal_endpoint_semantic_target_status_vector_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_STATUS_VECTOR_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -12729,6 +12744,18 @@ def main() -> int:
         + ",".join(
             missing_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_decls
         )
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_status_vector_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_STATUS_VECTOR_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_status_vector_decls_missing="
+        f"{len(missing_terminal_endpoint_semantic_target_status_vector_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_status_vector_decls_missing_names="
+        + ",".join(missing_terminal_endpoint_semantic_target_status_vector_decls)
     )
     print(
         "semantic_target_forbidden_when_open_paths_checked="
@@ -19322,6 +19349,18 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_terminal_endpoint_semantic_target_status_vector_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_STATUS_VECTOR_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_status_vector_decls_missing="
+            f"{len(missing_terminal_endpoint_semantic_target_status_vector_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_status_vector_decls_missing_names="
+            + ",".join(missing_terminal_endpoint_semantic_target_status_vector_decls)
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -20953,6 +20992,11 @@ def main() -> int:
             + ",".join(
                 missing_terminal_endpoint_public_nonclosure_boundary_paper_export_terminal_length_bridge_decls
             )
+        )
+    if missing_terminal_endpoint_semantic_target_status_vector_decls:
+        failures.append(
+            "missing terminal endpoint semantic-target-status-vector decls: "
+            + ",".join(missing_terminal_endpoint_semantic_target_status_vector_decls)
         )
 
     for path, phrase in forbidden_when_open_violations:
