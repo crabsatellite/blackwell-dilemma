@@ -49453,6 +49453,123 @@ theorem
     ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, htopoRoster⟩
   exact htopoRoster
 
+/-- Public release audit package tying the theorem export, per-target
+obstruction package, and the two source-level terminal obstruction packages
+into one kernel-checked terminal-source certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate /\
+      Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate /\
+        Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate /\
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate /\
+            RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate /\
+              (CompletePaperSemanticKernelOnly <-> False) /\
+                Not CompletePaperSemanticKernelOnly /\
+                  paperSemanticOpenCount = 2 /\
+                    openSemanticTargetIds =
+                      ["theorem_4_1_part6_lattice_embedding",
+                       "topo_cluster_random_supercritical_z2"]
+
+/-- The public release terminal-source audit package is kernel checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_release_theorem_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_part6_terminal_statement_roster_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_topo_terminal_statement_roster_certificate
+              (And.intro
+                completePaperSemanticKernelOnly_current_public_release_iff_false
+                (And.intro
+                  completePaperSemanticKernelOnly_notYet
+                  (And.intro
+                    paperSemanticOpenCount_current
+                    openSemanticTargetIds_current))))))))
+
+/-- Statement roster for the public release terminal-source audit package. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+   RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release terminal-source audit roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release terminal-source audit package has eleven
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements.length =
+      11 := rfl
+
+/-- Build-gated statement roster certificate for the public release
+terminal-source audit package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       Part6NondegenerateFeasibleRepairRouteTerminalObstructionStatementRosterCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate,
+       RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements.length =
+      11 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate
+
+/-- The public release terminal-source audit package has a fixed statement
+roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
