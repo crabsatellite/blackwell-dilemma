@@ -580,6 +580,16 @@ EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTR
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_full_alignment_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_DETAILED_FIELD_OUTPUT_ROW_ROSTER_PUBLIC_EXPORT_BRIDGE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportBridgeAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportBridgeAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportBridgeAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportBridgeAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportBridgeAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12493,6 +12503,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_DETAILED_FIELD_OUTPUT_ROW_ROSTER_FULL_ALIGNMENT_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_DETAILED_FIELD_OUTPUT_ROW_ROSTER_PUBLIC_EXPORT_BRIDGE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -13219,6 +13234,20 @@ def main() -> int:
         "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_full_alignment_decls_missing_names="
         + ",".join(
             missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_full_alignment_decls
+        )
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_DETAILED_FIELD_OUTPUT_ROW_ROSTER_PUBLIC_EXPORT_BRIDGE_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls_missing="
+        f"{len(missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls_missing_names="
+        + ",".join(
+            missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls
         )
     )
     print(
@@ -20049,6 +20078,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_EXPLICIT_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_DETAILED_FIELD_OUTPUT_ROW_ROSTER_PUBLIC_EXPORT_BRIDGE_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls_missing="
+            f"{len(missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls_missing_names="
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -21796,6 +21839,13 @@ def main() -> int:
             "missing terminal endpoint semantic-target-paper-label-explicit-endpoint-registry-release-seal-public-evidence-detailed-field-output-row-roster-full-alignment decls: "
             + ",".join(
                 missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_full_alignment_decls
+            )
+        )
+    if missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls:
+        failures.append(
+            "missing terminal endpoint semantic-target-paper-label-explicit-endpoint-registry-release-seal-public-evidence-detailed-field-output-row-roster-public-export-bridge decls: "
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_bridge_decls
             )
         )
 
