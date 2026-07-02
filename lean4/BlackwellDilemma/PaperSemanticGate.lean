@@ -51208,6 +51208,102 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_closed_target_id_disjointness_certificate)
 
+/-- Release endpoint semantic-target partition exit certificate: the complete
+semantic target id roster is exactly the closed/open id concatenation, and the
+total target count is the open/closed count sum. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate /\
+    SemanticTargetsPartitionStatementRosterCertificate /\
+      SemanticTargetCountStatementRosterCertificate /\
+        semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds /\
+          semanticTargets.length = paperSemanticClosedCount + paperSemanticOpenCount /\
+            semanticTargets.length = 5 /\
+              paperSemanticClosedCount + paperSemanticOpenCount = 5
+
+/-- The release endpoint exposes the full semantic target partition and count
+sum as a single kernel-checked exit certificate. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_partition_exit_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitCertificate := by
+  have hTargetLength : semanticTargets.length = 5 := rfl
+  have hCountSum : paperSemanticClosedCount + paperSemanticOpenCount = 5 := by
+    rw [paperSemanticClosedCount_current, paperSemanticOpenCount_current]
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_closed_target_id_disjointness_statement_roster_certificate <|
+      And.intro semantic_targets_partition_statement_roster_certificate <|
+        And.intro semantic_target_count_statement_roster_certificate <|
+          And.intro semantic_targets_partition_certificate.right <|
+            And.intro semantic_targets_partition_certificate.left <|
+              And.intro hTargetLength hCountSum
+
+/-- Statement roster for the release endpoint semantic-target partition exit
+certificate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate,
+   SemanticTargetsPartitionStatementRosterCertificate,
+   SemanticTargetCountStatementRosterCertificate,
+   semanticTargetIds semanticTargets =
+      closedSemanticTargetIds ++ openSemanticTargetIds,
+   semanticTargets.length = paperSemanticClosedCount + paperSemanticOpenCount,
+   semanticTargets.length = 5 /\ paperSemanticClosedCount + paperSemanticOpenCount = 5]
+
+/-- Build gate: the release endpoint semantic-target partition exit roster is
+fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargets.length = 5 /\
+          paperSemanticClosedCount + paperSemanticOpenCount = 5] := rfl
+
+/-- Build gate: the release endpoint semantic-target partition exit package has
+seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements.length =
+      7 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint semantic
+target partition exit package. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate,
+       SemanticTargetsPartitionStatementRosterCertificate,
+       SemanticTargetCountStatementRosterCertificate,
+       semanticTargetIds semanticTargets =
+          closedSemanticTargetIds ++ openSemanticTargetIds,
+       semanticTargets.length =
+          paperSemanticClosedCount + paperSemanticOpenCount,
+       semanticTargets.length = 5 /\
+          paperSemanticClosedCount + paperSemanticOpenCount = 5] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements.length =
+      7 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitCertificate
+
+/-- The release endpoint semantic-target partition exit package has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_partition_exit_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPartitionExitStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_partition_exit_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
