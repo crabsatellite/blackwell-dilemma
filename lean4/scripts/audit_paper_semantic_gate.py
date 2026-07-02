@@ -340,6 +340,16 @@ EXPECTED_TERMINAL_ENDPOINT_CLOSURE_PAIR_DECLS = (
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_TERMINAL_ENDPOINT_EXACT_CLOSURE_INPUT_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_exact_closure_input_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_exact_closure_input_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12133,6 +12143,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_CLOSURE_PAIR_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_terminal_endpoint_exact_closure_input_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_EXACT_CLOSURE_INPUT_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -12536,6 +12551,18 @@ def main() -> int:
     print(
         "semantic_target_terminal_endpoint_closure_pair_decls_missing_names="
         + ",".join(missing_terminal_endpoint_closure_pair_decls)
+    )
+    print(
+        "semantic_target_terminal_endpoint_exact_closure_input_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_EXACT_CLOSURE_INPUT_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_exact_closure_input_decls_missing="
+        f"{len(missing_terminal_endpoint_exact_closure_input_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_exact_closure_input_decls_missing_names="
+        + ",".join(missing_terminal_endpoint_exact_closure_input_decls)
     )
     print(
         "semantic_target_forbidden_when_open_paths_checked="
@@ -19041,6 +19068,18 @@ def main() -> int:
             + ",".join(missing_terminal_endpoint_closure_pair_decls)
         ),
         (
+            "semantic_target_terminal_endpoint_exact_closure_input_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_EXACT_CLOSURE_INPUT_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_exact_closure_input_decls_missing="
+            f"{len(missing_terminal_endpoint_exact_closure_input_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_exact_closure_input_decls_missing_names="
+            + ",".join(missing_terminal_endpoint_exact_closure_input_decls)
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -20631,6 +20670,11 @@ def main() -> int:
         failures.append(
             "missing terminal endpoint closure-pair decls: "
             + ",".join(missing_terminal_endpoint_closure_pair_decls)
+        )
+    if missing_terminal_endpoint_exact_closure_input_decls:
+        failures.append(
+            "missing terminal endpoint exact closure-input decls: "
+            + ",".join(missing_terminal_endpoint_exact_closure_input_decls)
         )
 
     for path, phrase in forbidden_when_open_violations:

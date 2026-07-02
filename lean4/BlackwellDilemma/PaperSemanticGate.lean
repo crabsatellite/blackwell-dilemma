@@ -53062,6 +53062,152 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_certificate)
 
+/-- Endpoint gate for the exact closure-input audit boundary: the public release
+exports that the two remaining open semantic targets are equivalent to their
+exact closure inputs, both exact inputs are currently refuted, and their joint
+exact-input package is still not available. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsExactClosureInputCertificate /\
+      RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate /\
+        OpenSemanticTargetExactClosureInputNamedRosterCertificate /\
+          OpenSemanticTargetExactClosureInputStatementRosterCertificate /\
+            Iff Part6LatticeEmbeddingSemanticKernelTarget
+              Part6LatticeEmbeddingExactClosureInput /\
+              Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+                TopoClusterRandomSupercriticalZ2ExactClosureInput /\
+                Not Part6LatticeEmbeddingExactClosureInput /\
+                  Not TopoClusterRandomSupercriticalZ2ExactClosureInput /\
+                    Not (Part6LatticeEmbeddingExactClosureInput /\
+                      TopoClusterRandomSupercriticalZ2ExactClosureInput) /\
+                      paperSemanticOpenCount = 2 /\
+                        openSemanticTargetIds =
+                          ["theorem_4_1_part6_lattice_embedding",
+                           "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exports the exact closure-input boundary for
+the two remaining open targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_exact_closure_input_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_statement_roster_certificate <|
+      And.intro
+        remaining_open_semantic_targets_exact_closure_input_certificate <|
+        And.intro
+          remaining_open_semantic_targets_exact_closure_input_statement_roster_certificate <|
+          And.intro
+            open_semantic_target_exact_closure_input_named_roster_certificate <|
+            And.intro
+              open_semantic_target_exact_closure_input_statement_roster_certificate <|
+              And.intro
+                part6_lattice_embedding_semantic_kernel_target_iff_exact_closure_input <|
+                And.intro
+                  topo_cluster_random_supercritical_z2_semantic_kernel_target_iff_exact_closure_input <|
+                  And.intro
+                    part6_lattice_embedding_exact_closure_input_notYet <|
+                    And.intro
+                      topo_cluster_random_supercritical_z2_exact_closure_input_notYet <|
+                      And.intro
+                        (by
+                          intro hinputs
+                          exact
+                            part6_lattice_embedding_exact_closure_input_notYet
+                              hinputs.left) <|
+                        And.intro
+                          paperSemanticOpenCount_current
+                          openSemanticTargetIds_current
+
+/-- Statement roster for the endpoint exact closure-input audit gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatementRosterCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputCertificate,
+   RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate,
+   OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+   OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+   Iff Part6LatticeEmbeddingSemanticKernelTarget
+      Part6LatticeEmbeddingExactClosureInput,
+   Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+      TopoClusterRandomSupercriticalZ2ExactClosureInput,
+   Not Part6LatticeEmbeddingExactClosureInput,
+   Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
+   Not (Part6LatticeEmbeddingExactClosureInput /\
+     TopoClusterRandomSupercriticalZ2ExactClosureInput),
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint exact closure-input audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate,
+       OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+       OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6LatticeEmbeddingExactClosureInput,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       Not Part6LatticeEmbeddingExactClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint exact closure-input audit gate has thirteen
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements.length =
+      13 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint exact
+closure-input audit gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatementRosterCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputCertificate,
+       RemainingOpenSemanticTargetsExactClosureInputStatementRosterCertificate,
+       OpenSemanticTargetExactClosureInputNamedRosterCertificate,
+       OpenSemanticTargetExactClosureInputStatementRosterCertificate,
+       Iff Part6LatticeEmbeddingSemanticKernelTarget
+          Part6LatticeEmbeddingExactClosureInput,
+       Iff TopoClusterRandomSupercriticalZ2SemanticKernelTarget
+          TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       Not Part6LatticeEmbeddingExactClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ExactClosureInput,
+       Not (Part6LatticeEmbeddingExactClosureInput /\
+         TopoClusterRandomSupercriticalZ2ExactClosureInput),
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements.length =
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateCertificate
+
+/-- The endpoint exact closure-input audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_exact_closure_input_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointExactClosureInputAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_exact_closure_input_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
