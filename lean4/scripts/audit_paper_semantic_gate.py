@@ -8278,6 +8278,37 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statements="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_named_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_terms_checked=13"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -18429,6 +18460,37 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_required_closure_input_paper_export_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statements="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_named_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_terms_checked=13"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_statements="

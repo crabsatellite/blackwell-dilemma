@@ -48590,6 +48590,161 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_certificate)
 
+/-- Paper-facing export certificate connecting the required closure-input public
+export to the detailed field-output rosters for the two remaining targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate /\
+    RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate /\
+      RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate /\
+        RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate /\
+          Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate /\
+            TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate /\
+              openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+                [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+                 TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate] /\
+                openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+                  2 /\
+                  openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"] /\
+                    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+                      [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+                       ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")] /\
+                      openSemanticTargetKernelSurfaceIdPaperLabels =
+                        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+                        Not CompletePaperSemanticKernelOnly
+
+/-- The closure-input/field-output public export is machine checked from the
+required closure-input export and the detailed field-output roster certificates. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_statement_roster_certificate
+    (And.intro
+      remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_certificate
+      (And.intro
+        remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_statement_roster_certificate
+        (And.intro
+          remaining_open_semantic_targets_closure_input_field_output_detailed_statement_roster_row_statement_roster_certificate
+          (And.intro
+            part6_lattice_embedding_closure_input_field_output_statement_roster_certificate
+            (And.intro
+              topo_cluster_random_supercritical_z2_closure_input_field_output_statement_roster_certificate
+              (And.intro
+                openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_named_current
+                (And.intro
+                  openSemanticTargetClosureInputFieldOutputDetailedStatementRosters_length_current
+                  (And.intro
+                    openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds_current
+                    (And.intro
+                      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels_current
+                      (And.intro
+                        openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels
+                        completePaperSemanticKernelOnly_notYet))))))))))
+
+/-- Statement roster for the paper-facing closure-input/field-output export. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate,
+   Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+      [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+      2,
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+      [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the closure-input/field-output public export roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the closure-input/field-output public export roster has
+thirteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements.length =
+      13 := rfl
+
+/-- Build-gated statement roster certificate for the paper-facing
+closure-input/field-output export. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputFieldOutputDetailedStatementRosterRowStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters =
+          [Part6LatticeEmbeddingClosureInputFieldOutputStatementRosterCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldOutputStatementRosterCertificate],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosters.length =
+          2,
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels =
+          [("theorem_4_1_part6_lattice_embedding", "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2", "prop:topo-cluster and thm:phase")],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements.length =
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportCertificate
+
+/-- The closure-input/field-output public export has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryClosureInputFieldOutputPaperExportStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_closure_input_field_output_paper_export_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
