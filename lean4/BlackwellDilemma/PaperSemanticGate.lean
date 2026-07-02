@@ -48992,6 +48992,116 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_certificate)
 
+/-- Public release gate: the terminal public field-output bridge is tied to the
+published semantic counts and target-id rosters. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate : Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate /\
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+        9 /\
+        paperSemanticClosedCount = 3 /\
+          paperSemanticOpenCount = 2 /\
+            closedSemanticTargetIds =
+              ["r10_two_regime_label_recalibration",
+               "theorem_4_1_part4_lattice_p_monotonicity",
+               "r10_threshold_five_state_high_kappa_routing"] /\
+              openSemanticTargetIds =
+                ["theorem_4_1_part6_lattice_embedding",
+                 "topo_cluster_random_supercritical_z2"] /\
+                Not CompletePaperSemanticKernelOnly
+
+/-- The public release gate is a kernel-checked restatement of the current paper
+semantic status. -/
+theorem completePaperSemanticKernelOnly_current_public_release_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_certificate
+      (And.intro
+        completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements_length_current
+        (And.intro
+          paperSemanticClosedCount_current
+          (And.intro
+            paperSemanticOpenCount_current
+            (And.intro
+              closedSemanticTargetIds_current
+              (And.intro
+                openSemanticTargetIds_current
+                completePaperSemanticKernelOnly_notYet))))))
+
+/-- Statement roster for the public release gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements : List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+      9,
+   paperSemanticClosedCount = 3,
+   paperSemanticOpenCount = 2,
+   closedSemanticTargetIds =
+      ["r10_two_regime_label_recalibration",
+       "theorem_4_1_part4_lattice_p_monotonicity",
+       "r10_threshold_five_state_high_kappa_routing"],
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public release gate statement roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+          9,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public release gate has nine statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements.length = 9 := rfl
+
+/-- Build-gated statement roster certificate for the public release gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryFinalPublicAuditClosureInputFieldOutputPaperExportTerminalLengthBridgeStatements.length =
+          9,
+       paperSemanticClosedCount = 3,
+       paperSemanticOpenCount = 2,
+       closedSemanticTargetIds =
+          ["r10_two_regime_label_recalibration",
+           "theorem_4_1_part4_lattice_p_monotonicity",
+           "r10_threshold_five_state_high_kappa_routing"],
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements.length = 9 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate
+
+/-- The public release gate has a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_release_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate

@@ -8371,6 +8371,35 @@ def main() -> int:
         "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_statement_roster_certificate"
     )
     print(
+        "complete_paper_semantic_kernel_only_current_public_release_gate_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_release_gate_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_release_gate_certificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_release_gate_statements="
+        "completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_release_gate_statements_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_named_current"
+    )
+    print("complete_paper_semantic_kernel_only_current_public_release_gate_statement_terms_checked=9")
+    print(
+        "complete_paper_semantic_kernel_only_current_public_release_gate_statement_terms_proof="
+        "completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_length_current"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_release_gate_statement_roster_certificate="
+        "CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate"
+    )
+    print(
+        "complete_paper_semantic_kernel_only_current_public_release_gate_statement_roster_certificate_proof="
+        "completePaperSemanticKernelOnly_current_public_release_gate_statement_roster_certificate"
+    )
+    print(
         "complete_paper_semantic_kernel_only_not_of_open_count_two_proof="
         "completePaperSemanticKernelOnly_not_of_open_count_two"
     )
@@ -18615,6 +18644,35 @@ def main() -> int:
         (
             "complete_paper_semantic_kernel_only_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_statement_roster_certificate_proof="
             "completePaperSemanticKernelOnly_current_public_nonclosure_boundary_final_public_audit_closure_input_field_output_paper_export_terminal_length_bridge_statement_roster_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_release_gate_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_release_gate_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_release_gate_certificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_release_gate_statements="
+            "completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_release_gate_statements_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_named_current"
+        ),
+        "complete_paper_semantic_kernel_only_current_public_release_gate_statement_terms_checked=9",
+        (
+            "complete_paper_semantic_kernel_only_current_public_release_gate_statement_terms_proof="
+            "completePaperSemanticKernelOnlyCurrentPublicReleaseGateStatements_length_current"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_release_gate_statement_roster_certificate="
+            "CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate"
+        ),
+        (
+            "complete_paper_semantic_kernel_only_current_public_release_gate_statement_roster_certificate_proof="
+            "completePaperSemanticKernelOnly_current_public_release_gate_statement_roster_certificate"
         ),
         (
             "complete_paper_semantic_kernel_only_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_topo_support_surface_repair_route_roster_seal_statements="
