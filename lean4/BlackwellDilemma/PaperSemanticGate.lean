@@ -52094,6 +52094,213 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_seal_certificate)
 
+/-- Release endpoint ledger-row dispatch seal: every fixed public
+`(id,label,status)` row is tied to the closed payload or open obstruction
+certificate that justifies its status. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate /\
+        (List.Mem
+          (("r10_two_regime_label_recalibration",
+            "prop:two-regime-five-state"), SemanticStatus.closed)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          Nonempty TwoRegimeRelabelingPayload) /\
+          (List.Mem
+            (("theorem_4_1_part4_lattice_p_monotonicity",
+              "thm:cognitive-threshold Part 4"), SemanticStatus.closed)
+            (semanticTargets.map
+              (fun target => ((target.id, target.paperLabel), target.status))) ->
+            Nonempty Part4LatticePMonotonicityFrontierPayload) /\
+            (List.Mem
+              (("r10_threshold_five_state_high_kappa_routing",
+                "prop:threshold-five-state clause iii"), SemanticStatus.closed)
+              (semanticTargets.map
+                (fun target => ((target.id, target.paperLabel), target.status))) ->
+              (forall p : Real,
+                FiveState.highKappaOracleRoutingWelfare p =
+                  FiveState.fiveStateOracleWelfare p)) /\
+              (List.Mem
+                (("theorem_4_1_part6_lattice_embedding",
+                  "thm:cognitive-threshold Part 6"), SemanticStatus.open)
+                (semanticTargets.map
+                  (fun target => ((target.id, target.paperLabel), target.status))) ->
+                Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate) /\
+                (List.Mem
+                  (("topo_cluster_random_supercritical_z2",
+                    "prop:topo-cluster and thm:phase"), SemanticStatus.open)
+                  (semanticTargets.map
+                    (fun target => ((target.id, target.paperLabel), target.status))) ->
+                  RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate)
+
+/-- Every fixed public semantic-target ledger row dispatches to the exact
+payload/obstruction certificate used by the release endpoint. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate := by
+  let hClosed := closed_semantic_targets_frontier_certificate
+  let hProjection :=
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_target_obstruction_projection_certificate
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_seal_statement_roster_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_closed_target_membership_closure_dispatch_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_target_membership_obstruction_dispatch_statement_roster_certificate <|
+          And.intro (fun _ => hClosed.right.right.left) <|
+            And.intro (fun _ => hClosed.right.right.right.left) <|
+              And.intro (fun _ => hClosed.right.right.right.right) <|
+                And.intro (fun _ => hProjection.right.right.left)
+                  (fun _ => hProjection.right.right.right.left)
+
+/-- Statement roster for the release endpoint semantic-target ledger-row
+dispatch seal. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+   List.Mem
+      (("r10_two_regime_label_recalibration",
+        "prop:two-regime-five-state"), SemanticStatus.closed)
+      (semanticTargets.map
+        (fun target => ((target.id, target.paperLabel), target.status))) ->
+      Nonempty TwoRegimeRelabelingPayload,
+   List.Mem
+      (("theorem_4_1_part4_lattice_p_monotonicity",
+        "thm:cognitive-threshold Part 4"), SemanticStatus.closed)
+      (semanticTargets.map
+        (fun target => ((target.id, target.paperLabel), target.status))) ->
+      Nonempty Part4LatticePMonotonicityFrontierPayload,
+   List.Mem
+      (("r10_threshold_five_state_high_kappa_routing",
+        "prop:threshold-five-state clause iii"), SemanticStatus.closed)
+      (semanticTargets.map
+        (fun target => ((target.id, target.paperLabel), target.status))) ->
+      (forall p : Real,
+        FiveState.highKappaOracleRoutingWelfare p =
+          FiveState.fiveStateOracleWelfare p),
+   List.Mem
+      (("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"), SemanticStatus.open)
+      (semanticTargets.map
+        (fun target => ((target.id, target.paperLabel), target.status))) ->
+      Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+   List.Mem
+      (("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase"), SemanticStatus.open)
+      (semanticTargets.map
+        (fun target => ((target.id, target.paperLabel), target.status))) ->
+      RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate]
+
+/-- Build gate: the release endpoint semantic-target ledger-row dispatch seal
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       List.Mem
+          (("r10_two_regime_label_recalibration",
+            "prop:two-regime-five-state"), SemanticStatus.closed)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          Nonempty TwoRegimeRelabelingPayload,
+       List.Mem
+          (("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"), SemanticStatus.closed)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          Nonempty Part4LatticePMonotonicityFrontierPayload,
+       List.Mem
+          (("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii"), SemanticStatus.closed)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          (forall p : Real,
+            FiveState.highKappaOracleRoutingWelfare p =
+              FiveState.fiveStateOracleWelfare p),
+       List.Mem
+          (("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"), SemanticStatus.open)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       List.Mem
+          (("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase"), SemanticStatus.open)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate] := rfl
+
+/-- Build gate: the release endpoint semantic-target ledger-row dispatch seal
+package has nine statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements.length =
+      9 := rfl
+
+/-- Build-gated statement roster certificate for the release endpoint
+semantic-target ledger-row dispatch seal. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointClosedTargetMembershipClosureDispatchStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenTargetMembershipObstructionDispatchStatementRosterCertificate,
+       List.Mem
+          (("r10_two_regime_label_recalibration",
+            "prop:two-regime-five-state"), SemanticStatus.closed)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          Nonempty TwoRegimeRelabelingPayload,
+       List.Mem
+          (("theorem_4_1_part4_lattice_p_monotonicity",
+            "thm:cognitive-threshold Part 4"), SemanticStatus.closed)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          Nonempty Part4LatticePMonotonicityFrontierPayload,
+       List.Mem
+          (("r10_threshold_five_state_high_kappa_routing",
+            "prop:threshold-five-state clause iii"), SemanticStatus.closed)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          (forall p : Real,
+            FiveState.highKappaOracleRoutingWelfare p =
+              FiveState.fiveStateOracleWelfare p),
+       List.Mem
+          (("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"), SemanticStatus.open)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          Part6NondegenerateFeasibleRepairRouteTerminalObstructionCertificate,
+       List.Mem
+          (("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase"), SemanticStatus.open)
+          (semanticTargets.map
+            (fun target => ((target.id, target.paperLabel), target.status))) ->
+          RandomSupercriticalZ2TopoClusterSupportSurfaceRepairTerminalObstructionCertificate] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements.length =
+      9 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealCertificate
+
+/-- The release endpoint semantic-target ledger-row dispatch seal has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetLedgerRowDispatchSealStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_ledger_row_dispatch_seal_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
