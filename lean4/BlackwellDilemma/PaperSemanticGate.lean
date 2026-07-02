@@ -48466,6 +48466,130 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatements_length_current
       completePaperSemanticKernelOnly_current_public_nonclosure_boundary_paper_export_certificate)
 
+/-- Paper-facing export certificate for the exact required closure inputs behind
+the two remaining public open targets. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate /\
+      Part6LatticeEmbeddingClosureInputStatementRosterCertificate /\
+        TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate /\
+          (Part6LatticeEmbeddingClosureInput ->
+            Part6LatticeEmbeddingSemanticKernelTarget) /\
+            Not Part6LatticeEmbeddingClosureInput /\
+              (TopoClusterRandomSupercriticalZ2ClosureInput ->
+                TopoClusterRandomSupercriticalZ2SemanticKernelTarget) /\
+                Not TopoClusterRandomSupercriticalZ2ClosureInput /\
+                  openSemanticTargetIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"] /\
+                    paperSemanticOpenCount = 2 /\
+                      Not CompletePaperSemanticKernelOnly
+
+/-- The required-closure-input public export is machine checked from the
+existing public export and dual-open-target closure-input seal. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_paper_export_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_route_source_terminal_kernel_only_nonclosure_capstone_two_key_terminal_seal_dual_open_target_required_closure_input_seal_statement_roster_certificate,
+    part6_lattice_embedding_closure_input_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_statement_roster_certificate,
+    part6_lattice_embedding_semantic_kernel_target_of_closure_input,
+    part6_lattice_embedding_closure_input_notYet,
+    topo_cluster_random_supercritical_z2_semantic_kernel_target_of_closure_input,
+    topo_cluster_random_supercritical_z2_closure_input_notYet,
+    openSemanticTargetIds_current,
+    paperSemanticOpenCount_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the paper-facing required-closure-input export. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate,
+   Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate,
+   Part6LatticeEmbeddingClosureInput ->
+     Part6LatticeEmbeddingSemanticKernelTarget,
+   Not Part6LatticeEmbeddingClosureInput,
+   TopoClusterRandomSupercriticalZ2ClosureInput ->
+     TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+   Not TopoClusterRandomSupercriticalZ2ClosureInput,
+   openSemanticTargetIds =
+     ["theorem_4_1_part6_lattice_embedding",
+      "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the required-closure-input public export roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInput ->
+         Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+         TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the required-closure-input public export roster has twelve
+statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the paper-facing
+required-closure-input export. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentRouteSourceTerminalKernelOnlyNonclosureCapstoneTwoKeyTerminalSealDualOpenTargetRequiredClosureInputSealStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate,
+       Part6LatticeEmbeddingClosureInput ->
+         Part6LatticeEmbeddingSemanticKernelTarget,
+       Not Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput ->
+         TopoClusterRandomSupercriticalZ2SemanticKernelTarget,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       openSemanticTargetIds =
+         ["theorem_4_1_part6_lattice_embedding",
+          "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate
+
+/-- The required-closure-input public export has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements_length_current
+      completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
