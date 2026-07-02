@@ -49570,6 +49570,208 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_certificate)
 
+/-- Public release terminal-source seal tying the release gate, theorem package,
+per-target obstruction package, and terminal-source audit package into one
+kernel-checked endpoint. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate /\
+            (CompletePaperSemanticKernelOnly <-> False) /\
+              Not CompletePaperSemanticKernelOnly /\
+                paperSemanticOpenCount = 2 /\
+                  openSemanticTargetIds =
+                    ["theorem_4_1_part6_lattice_embedding",
+                     "topo_cluster_random_supercritical_z2"]
+
+/-- The public release terminal-source seal is kernel checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_seal_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_gate_statement_roster_certificate
+    (And.intro
+      completePaperSemanticKernelOnly_current_public_release_theorem_statement_roster_certificate
+      (And.intro
+        completePaperSemanticKernelOnly_current_public_release_per_target_obstruction_statement_roster_certificate
+        (And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_statement_roster_certificate
+          (And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_certificate
+            (And.intro
+              completePaperSemanticKernelOnly_current_public_release_iff_false
+              (And.intro
+                completePaperSemanticKernelOnly_notYet
+                (And.intro
+                  paperSemanticOpenCount_current
+                  openSemanticTargetIds_current)))))))
+
+/-- Statement roster for the public release terminal-source seal. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the public release terminal-source seal roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the public release terminal-source seal has ten statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the public release
+terminal-source seal. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate
+
+/-- The public release terminal-source seal has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_seal_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_source_seal_certificate)
+
+/-- Exact theorem-name alias certificate for the public release terminal-source
+audit bundle. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate
+
+/-- The theorem-name alias for the public release terminal-source audit bundle
+is machine checked. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_bundle_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate := by
+  exact completePaperSemanticKernelOnly_current_public_release_terminal_source_seal_certificate
+
+/-- Statement roster for the theorem-name public release terminal-source audit
+bundle alias. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the theorem-name public release terminal-source audit bundle
+roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the theorem-name public release terminal-source audit bundle
+has twelve statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the theorem-name public
+release terminal-source audit bundle alias. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceSealCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleasePerTargetObstructionStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleCertificate
+
+/-- The theorem-name public release terminal-source audit bundle has a fixed
+statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_bundle_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceAuditBundleStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_source_audit_bundle_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
