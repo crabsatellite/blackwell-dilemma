@@ -310,6 +310,16 @@ CORE_OUTPUT_EQUIVALENCE_DECLS = {
     "not_part6_full_paper_closing_full_output_bundle_current",
 }
 
+EXPECTED_TERMINAL_ENDPOINT_CLOSURE_PAIR_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointConditionalInterfaceClosurePairAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_conditional_interface_closure_pair_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12085,6 +12095,14 @@ def main() -> int:
     paper_semantic_theorems = set(paper_semantic_theorem_names(text))
     paper_semantic_defs = set(paper_semantic_def_names(text))
     paper_semantic_types = set(paper_semantic_type_names(text))
+    paper_semantic_decls = (
+        paper_semantic_theorems | paper_semantic_defs | paper_semantic_types
+    )
+    missing_terminal_endpoint_closure_pair_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_CLOSURE_PAIR_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -12450,6 +12468,18 @@ def main() -> int:
             if readme_has_dual_obstruction_source_public_evidence_audit_seal
             else "0"
         )
+    )
+    print(
+        "semantic_target_terminal_endpoint_closure_pair_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_CLOSURE_PAIR_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_closure_pair_decls_missing="
+        f"{len(missing_terminal_endpoint_closure_pair_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_closure_pair_decls_missing_names="
+        + ",".join(missing_terminal_endpoint_closure_pair_decls)
     )
     print(
         "semantic_target_forbidden_when_open_paths_checked="
@@ -18917,6 +18947,18 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_terminal_endpoint_closure_pair_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_CLOSURE_PAIR_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_closure_pair_decls_missing="
+            f"{len(missing_terminal_endpoint_closure_pair_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_closure_pair_decls_missing_names="
+            + ",".join(missing_terminal_endpoint_closure_pair_decls)
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -20490,6 +20532,11 @@ def main() -> int:
         failures.append(
             "lean4/README.md missing dual open-target obstruction-source "
             "public-evidence audit seal summary"
+        )
+    if missing_terminal_endpoint_closure_pair_decls:
+        failures.append(
+            "missing terminal endpoint closure-pair decls: "
+            + ",".join(missing_terminal_endpoint_closure_pair_decls)
         )
 
     for path, phrase in forbidden_when_open_violations:
