@@ -57830,6 +57830,201 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_bridge_audit_gate_certificate)
 
+/-- Explicit-vector bridge audit gate for the public-evidence paper-label
+obstruction-map bridge: the ID-indexed obstruction map is tied to the endpoint
+status-vector, atomic obstruction-vector, and explicit obstruction-vector gates. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate /\
+                  openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+                    openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms /\
+                  openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+                    6 /\
+                  openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+                    openSemanticTargetIdObstructionMapTargetObstructions /\
+                  openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+                    openSemanticTargetIdObstructionMapTargetRouteObstructions /\
+                  openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+                    openSemanticTargetIdObstructionMapClosureRouteObstructions /\
+                  openSemanticTargetIdObstructionMapTargetObstructions =
+                    openSemanticTargetKernelSurfaceTargetObstructions /\
+                  openSemanticTargetIdObstructionMapTargetRouteObstructions =
+                    openSemanticTargetKernelSurfaceTargetRouteObstructions /\
+                  openSemanticTargetIdObstructionMapClosureRouteObstructions =
+                    openSemanticTargetKernelSurfaceClosureRouteObstructions /\
+                  paperSemanticOpenCount = 2 /\
+                  Not CompletePaperSemanticKernelOnly
+
+/-- The public-evidence paper-label obstruction-map bridge reaches the endpoint
+atomic and explicit obstruction vectors. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_explicit_vector_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_bridge_audit_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_statement_roster_certificate <|
+            And.intro
+              completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_obstruction_vector_audit_gate_statement_roster_certificate <|
+                And.intro
+                  completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_obstruction_vector_audit_gate_certificate <|
+                  And.intro
+                    openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms_eq_id_obstruction_map_current <|
+                    And.intro
+                      openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms_length_current <|
+                      And.intro
+                        openSemanticTargetIdPaperLabelObstructionMapTargetObstructions_eq_id_obstruction_map_current <|
+                        And.intro
+                          openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions_eq_id_obstruction_map_current <|
+                          And.intro
+                            openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions_eq_id_obstruction_map_current <|
+                            And.intro
+                              openSemanticTargetIdObstructionMapTargetObstructions_eq_kernel_surface_current <|
+                              And.intro
+                                openSemanticTargetIdObstructionMapTargetRouteObstructions_eq_kernel_surface_current <|
+                                And.intro
+                                  openSemanticTargetIdObstructionMapClosureRouteObstructions_eq_kernel_surface_current <|
+                                  And.intro
+                                    paperSemanticOpenCount_current
+                                    completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the public-evidence paper-label obstruction-map
+explicit-vector bridge audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+      openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
+   openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+      6,
+   openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+      openSemanticTargetIdObstructionMapTargetObstructions,
+   openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+      openSemanticTargetIdObstructionMapTargetRouteObstructions,
+   openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+      openSemanticTargetIdObstructionMapClosureRouteObstructions,
+   openSemanticTargetIdObstructionMapTargetObstructions =
+      openSemanticTargetKernelSurfaceTargetObstructions,
+   openSemanticTargetIdObstructionMapTargetRouteObstructions =
+      openSemanticTargetKernelSurfaceTargetRouteObstructions,
+   openSemanticTargetIdObstructionMapClosureRouteObstructions =
+      openSemanticTargetKernelSurfaceClosureRouteObstructions,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-evidence paper-label obstruction-map
+explicit-vector bridge audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+          openSemanticTargetIdObstructionMapTargetObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+          openSemanticTargetIdObstructionMapTargetRouteObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+          openSemanticTargetIdObstructionMapClosureRouteObstructions,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+          openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+          openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+          openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-evidence paper-label obstruction-map
+explicit-vector bridge audit gate has nineteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements.length =
+      19 := rfl
+
+/-- Build-gated statement roster certificate for the public-evidence
+paper-label obstruction-map explicit-vector bridge audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitObstructionVectorAuditGateCertificate,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundleAtomicTerms =
+          openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms,
+       openSemanticTargetIdObstructionMapObstructionBundleAtomicTerms.length =
+          6,
+       openSemanticTargetIdPaperLabelObstructionMapTargetObstructions =
+          openSemanticTargetIdObstructionMapTargetObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapTargetRouteObstructions =
+          openSemanticTargetIdObstructionMapTargetRouteObstructions,
+       openSemanticTargetIdPaperLabelObstructionMapClosureRouteObstructions =
+          openSemanticTargetIdObstructionMapClosureRouteObstructions,
+       openSemanticTargetIdObstructionMapTargetObstructions =
+          openSemanticTargetKernelSurfaceTargetObstructions,
+       openSemanticTargetIdObstructionMapTargetRouteObstructions =
+          openSemanticTargetKernelSurfaceTargetRouteObstructions,
+       openSemanticTargetIdObstructionMapClosureRouteObstructions =
+          openSemanticTargetKernelSurfaceClosureRouteObstructions,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements.length =
+      19 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateCertificate
+
+/-- The public-evidence paper-label obstruction-map explicit-vector bridge
+audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_explicit_vector_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelObstructionMapExplicitVectorBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_obstruction_map_explicit_vector_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
