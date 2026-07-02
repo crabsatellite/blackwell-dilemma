@@ -430,6 +430,16 @@ EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_STATUS_VECTOR_DECLS = (
     "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_status_vector_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_OBSTRUCTION_MAP_STATUS_VECTOR_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12268,6 +12278,11 @@ def main() -> int:
         for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_STATUS_VECTOR_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls = [
+        decl
+        for decl in EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_OBSTRUCTION_MAP_STATUS_VECTOR_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -12784,6 +12799,20 @@ def main() -> int:
         "semantic_target_terminal_endpoint_semantic_target_paper_label_status_vector_decls_missing_names="
         + ",".join(
             missing_terminal_endpoint_semantic_target_paper_label_status_vector_decls
+        )
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls_checked="
+        f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_OBSTRUCTION_MAP_STATUS_VECTOR_DECLS)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls_missing="
+        f"{len(missing_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls)}"
+    )
+    print(
+        "semantic_target_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls_missing_names="
+        + ",".join(
+            missing_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls
         )
     )
     print(
@@ -19404,6 +19433,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls_checked="
+            f"{len(EXPECTED_TERMINAL_ENDPOINT_SEMANTIC_TARGET_PAPER_LABEL_OBSTRUCTION_MAP_STATUS_VECTOR_DECLS)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls_missing="
+            f"{len(missing_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls)}"
+        ),
+        (
+            "semantic_target_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls_missing_names="
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -21046,6 +21089,13 @@ def main() -> int:
             "missing terminal endpoint semantic-target-paper-label-status-vector decls: "
             + ",".join(
                 missing_terminal_endpoint_semantic_target_paper_label_status_vector_decls
+            )
+        )
+    if missing_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls:
+        failures.append(
+            "missing terminal endpoint semantic-target-paper-label-obstruction-map-status-vector decls: "
+            + ",".join(
+                missing_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_decls
             )
         )
 

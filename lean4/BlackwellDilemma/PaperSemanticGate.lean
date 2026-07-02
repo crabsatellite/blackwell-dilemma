@@ -54580,6 +54580,150 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_status_vector_audit_gate_certificate)
 
+/-- Endpoint gate for the semantic-target paper-label obstruction-map status
+vector: the public release endpoint carries the paper-label status vector
+together with the id/paper-label obstruction-map projection used to justify the
+current nonclosure boundary. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatementRosterCertificate /\
+    OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate /\
+      OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+        OpenSemanticTargetIdPaperLabelObstructionMapComponentStatementRosterCertificate /\
+          OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate /\
+            OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate /\
+              openSemanticTargetIdObstructionMapIdPaperLabels =
+                openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+                openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+                  openSemanticTargetIdObstructionMapIdPaperLabels /\
+                  openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+                    openSemanticTargetIdObstructionMapObstructionBundles /\
+                    openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+                      openSemanticTargetIdPaperLabelObstructionMapObstructionBundles /\
+                      paperSemanticOpenCount = 2 /\
+                      Not CompletePaperSemanticKernelOnly
+
+/-- The public release endpoint exports the paper-label obstruction-map status
+vector for the two remaining open manuscript targets. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_status_vector_audit_gate_statement_roster_certificate <|
+    And.intro
+      open_semantic_target_id_obstruction_map_paper_label_alignment_statement_roster_certificate <|
+      And.intro
+        open_semantic_target_id_paper_label_obstruction_map_projection_statement_roster_certificate <|
+        And.intro
+          open_semantic_target_id_paper_label_obstruction_map_component_statement_roster_certificate <|
+          And.intro
+            open_semantic_target_paper_label_obstruction_map_projection_statement_roster_certificate <|
+            And.intro
+              open_semantic_target_paper_label_obstruction_map_component_statement_roster_certificate <|
+              And.intro
+                openSemanticTargetIdObstructionMapIdPaperLabels_eq_open_ledger_current <|
+                And.intro
+                  openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels_eq_id_obstruction_map_current <|
+                  And.intro
+                    openSemanticTargetIdPaperLabelObstructionMapObstructionBundles_eq_id_obstruction_map_current <|
+                    And.intro
+                      openSemanticTargetPaperLabelObstructionMapObstructionBundles_eq_id_paper_label_obstruction_map_current <|
+                      And.intro
+                        paperSemanticOpenCount_current
+                        completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the endpoint semantic-target paper-label
+obstruction-map status-vector audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatementRosterCertificate,
+   OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetIdPaperLabelObstructionMapComponentStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+   OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate,
+   openSemanticTargetIdObstructionMapIdPaperLabels =
+     openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+     openSemanticTargetIdObstructionMapIdPaperLabels,
+   openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+     openSemanticTargetIdObstructionMapObstructionBundles,
+   openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+     openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the endpoint semantic-target paper-label obstruction-map
+status-vector audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapComponentStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+         openSemanticTargetIdObstructionMapIdPaperLabels,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+         openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+         openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the endpoint semantic-target paper-label obstruction-map
+status-vector audit gate has thirteen statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements.length =
+      13 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint semantic-target
+paper-label obstruction-map status-vector audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelStatusVectorAuditGateStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetIdPaperLabelObstructionMapComponentStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapProjectionStatementRosterCertificate,
+       OpenSemanticTargetPaperLabelObstructionMapComponentStatementRosterCertificate,
+       openSemanticTargetIdObstructionMapIdPaperLabels =
+         openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargetIdPaperLabelObstructionMapIdPaperLabels =
+         openSemanticTargetIdObstructionMapIdPaperLabels,
+       openSemanticTargetIdPaperLabelObstructionMapObstructionBundles =
+         openSemanticTargetIdObstructionMapObstructionBundles,
+       openSemanticTargetPaperLabelObstructionMapObstructionBundles =
+         openSemanticTargetIdPaperLabelObstructionMapObstructionBundles,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements.length =
+      13 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate
+
+/-- The endpoint semantic-target paper-label obstruction-map status-vector
+audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
