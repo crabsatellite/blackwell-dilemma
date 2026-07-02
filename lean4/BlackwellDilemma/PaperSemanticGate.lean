@@ -53910,6 +53910,164 @@ theorem
       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_field_output_full_ledger_alignment_audit_gate_certificate)
 
+/-- Endpoint gate for the public final-judgement obstruction-map full alignment:
+the release endpoint carries the field-output full-ledger endpoint and the
+fourteen-item final-judgement obstruction-map alignment chain, fixing the map,
+ledger, paper-label, row/component, and projection rosters. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate /\
+        completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements =
+          [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+           CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapCertificate,
+           OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+           OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+           OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+           OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapRowStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapComponentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate] /\
+          completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements.length =
+            14 /\
+            paperSemanticOpenCount = 2 /\
+              openSemanticTargetIds =
+                ["theorem_4_1_part6_lattice_embedding",
+                 "topo_cluster_random_supercritical_z2"]
+
+/-- The public release endpoint exports the final-judgement obstruction-map
+full alignment as a kernel-checked audit boundary. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_final_judgement_obstruction_map_full_alignment_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_field_output_full_ledger_alignment_audit_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_certificate,
+    completePaperSemanticKernelOnly_current_final_judgement_obstruction_map_full_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements_length_current,
+    paperSemanticOpenCount_current,
+    openSemanticTargetIds_current⟩
+
+/-- Statement roster for the endpoint final-judgement obstruction-map
+full-alignment audit gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements =
+      [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+       CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapCertificate,
+       OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+       OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+       OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapRowStatementRosterCertificate,
+       OpenSemanticTargetIdObstructionMapComponentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate],
+   completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements.length =
+      14,
+   paperSemanticOpenCount = 2,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"]]
+
+/-- Build gate: the endpoint final-judgement obstruction-map full-alignment
+audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements =
+          [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+           CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapCertificate,
+           OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+           OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+           OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+           OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapRowStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapComponentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate],
+       completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements.length =
+          14,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] := rfl
+
+/-- Build gate: the endpoint final-judgement obstruction-map full-alignment
+audit gate has eight statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements.length =
+      8 := rfl
+
+/-- Build-gated statement roster certificate for the endpoint final-judgement
+obstruction-map full-alignment audit gate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFieldOutputFullLedgerAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements =
+          [CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementCertificate,
+           CompletePaperSemanticKernelOnlyCurrentTerminalPaperStateSourceFinalGateJudgementStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapCertificate,
+           OpenSemanticTargetIdObstructionMapStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapLedgerAlignmentCertificate,
+           OpenSemanticTargetIdObstructionMapLedgerAlignmentStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapPaperLabelAlignmentCertificate,
+           OpenSemanticTargetIdObstructionMapPaperLabelAlignmentStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapObstructionProjectionCertificate,
+           OpenSemanticTargetIdObstructionMapObstructionProjectionStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapRowStatementRosterCertificate,
+           OpenSemanticTargetIdObstructionMapComponentStatementRosterCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionCertificate,
+           CompletePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapProjectionStatementRosterCertificate],
+       completePaperSemanticKernelOnlyCurrentFinalJudgementObstructionMapFullAlignmentStatements.length =
+          14,
+       paperSemanticOpenCount = 2,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"]] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements.length =
+      8 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateCertificate
+
+/-- The endpoint final-judgement obstruction-map full-alignment audit gate has
+a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_final_judgement_obstruction_map_full_alignment_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointFinalJudgementObstructionMapFullAlignmentAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_final_judgement_obstruction_map_full_alignment_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
