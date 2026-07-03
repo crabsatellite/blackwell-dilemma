@@ -1070,6 +1070,16 @@ EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_VECTOR_BRIDGE_DECLS = (
     "completePaperSemanticKernelOnly_current_public_export_closure_equivalence_vector_bridge_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_FIELD_OUTPUT_VECTOR_BRIDGE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_closure_equivalence_field_output_vector_bridge_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_closure_equivalence_field_output_vector_bridge_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -13228,6 +13238,11 @@ def main() -> int:
         for decl in EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_VECTOR_BRIDGE_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_public_export_closure_equivalence_field_output_vector_bridge_decls = [
+        decl
+        for decl in EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_FIELD_OUTPUT_VECTOR_BRIDGE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -14631,6 +14646,20 @@ def main() -> int:
     print(
         "semantic_target_public_export_closure_equivalence_vector_bridge_decls_missing_names="
         + ",".join(missing_public_export_closure_equivalence_vector_bridge_decls)
+    )
+    print(
+        "semantic_target_public_export_closure_equivalence_field_output_vector_bridge_decls_checked="
+        f"{len(EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_FIELD_OUTPUT_VECTOR_BRIDGE_DECLS)}"
+    )
+    print(
+        "semantic_target_public_export_closure_equivalence_field_output_vector_bridge_decls_missing="
+        f"{len(missing_public_export_closure_equivalence_field_output_vector_bridge_decls)}"
+    )
+    print(
+        "semantic_target_public_export_closure_equivalence_field_output_vector_bridge_decls_missing_names="
+        + ",".join(
+            missing_public_export_closure_equivalence_field_output_vector_bridge_decls
+        )
     )
     print(
         "semantic_target_forbidden_when_open_paths_checked="
@@ -22136,6 +22165,20 @@ def main() -> int:
             + ",".join(missing_public_export_closure_equivalence_vector_bridge_decls)
         ),
         (
+            "semantic_target_public_export_closure_equivalence_field_output_vector_bridge_decls_checked="
+            f"{len(EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_FIELD_OUTPUT_VECTOR_BRIDGE_DECLS)}"
+        ),
+        (
+            "semantic_target_public_export_closure_equivalence_field_output_vector_bridge_decls_missing="
+            f"{len(missing_public_export_closure_equivalence_field_output_vector_bridge_decls)}"
+        ),
+        (
+            "semantic_target_public_export_closure_equivalence_field_output_vector_bridge_decls_missing_names="
+            + ",".join(
+                missing_public_export_closure_equivalence_field_output_vector_bridge_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -24219,6 +24262,13 @@ def main() -> int:
         failures.append(
             "missing public-export closure-equivalence vector bridge decls: "
             + ",".join(missing_public_export_closure_equivalence_vector_bridge_decls)
+        )
+    if missing_public_export_closure_equivalence_field_output_vector_bridge_decls:
+        failures.append(
+            "missing public-export closure-equivalence field-output vector bridge decls: "
+            + ",".join(
+                missing_public_export_closure_equivalence_field_output_vector_bridge_decls
+            )
         )
 
     for path, phrase in forbidden_when_open_violations:

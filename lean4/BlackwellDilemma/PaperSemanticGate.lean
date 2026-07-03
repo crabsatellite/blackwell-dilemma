@@ -64332,6 +64332,167 @@ theorem completePaperSemanticKernelOnly_current_public_export_closure_equivalenc
       completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_export_closure_equivalence_vector_bridge_audit_gate_certificate)
 
+/-- Public-export closure-equivalence bridge reaches the explicit field-output
+vector endpoint for both remaining open paper targets. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate /\
+          openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+            [Part6FullPaperClosingFullOutputBundle,
+             TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+            [Part6LatticeEmbeddingClosureInputFieldPayload ->
+              Part6FullPaperClosingFullOutputBundle,
+             TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+              TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle] /\
+          openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+            [Not Part6FullPaperClosingFullOutputBundle ->
+              Not Part6LatticeEmbeddingClosureInputFieldPayload,
+             Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+              Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload] /\
+          completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements.length =
+            10 /\
+          completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements.length =
+            19 /\
+          paperSemanticOpenCount = 2 /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The public-export closure-equivalence vector bridge reaches the endpoint
+field-output vector formulas for the two remaining open targets. -/
+theorem completePaperSemanticKernelOnly_current_public_export_closure_equivalence_field_output_vector_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_export_closure_equivalence_vector_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_export_closure_equivalence_vector_bridge_audit_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_field_output_vector_audit_gate_certificate <|
+          And.intro
+            openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles_named_current <|
+            And.intro
+              openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements_named_current <|
+              And.intro
+                openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements_named_current <|
+                And.intro
+                  completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements_length_current <|
+                  And.intro
+                    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements_length_current <|
+                    And.intro
+                      paperSemanticOpenCount_current
+                      completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the public-export closure-equivalence field-output
+vector bridge audit gate. -/
+def completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate,
+   openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+      [Part6FullPaperClosingFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+   openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+      [Part6LatticeEmbeddingClosureInputFieldPayload ->
+        Part6FullPaperClosingFullOutputBundle,
+       TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+        TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+   openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+      [Not Part6FullPaperClosingFullOutputBundle ->
+        Not Part6LatticeEmbeddingClosureInputFieldPayload,
+       Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+        Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+   completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements.length =
+      10,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements.length =
+      19,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-export closure-equivalence field-output vector
+bridge roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate,
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+          [Part6FullPaperClosingFullOutputBundle,
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+          [Part6LatticeEmbeddingClosureInputFieldPayload ->
+            Part6FullPaperClosingFullOutputBundle,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+            TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+          [Not Part6FullPaperClosingFullOutputBundle ->
+            Not Part6LatticeEmbeddingClosureInputFieldPayload,
+           Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+            Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements.length =
+          10,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements.length =
+          19,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-export closure-equivalence field-output vector
+bridge has twelve statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the public-export
+closure-equivalence field-output vector bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateCertificate,
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputBundles =
+          [Part6FullPaperClosingFullOutputBundle,
+           TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceFieldToOutputStatements =
+          [Part6LatticeEmbeddingClosureInputFieldPayload ->
+            Part6FullPaperClosingFullOutputBundle,
+           TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload ->
+            TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle],
+       openSemanticTargetClosureInputFieldOutputSurfaceOutputObstructionToFieldStatements =
+          [Not Part6FullPaperClosingFullOutputBundle ->
+            Not Part6LatticeEmbeddingClosureInputFieldPayload,
+           Not TopoClusterRandomSupercriticalZ2SameBridgeFullOutputBundle ->
+            Not TopoClusterRandomSupercriticalZ2ClosureInputFieldPayload],
+       completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements.length =
+          10,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitFieldOutputVectorAuditGateStatements.length =
+          19,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateCertificate
+
+/-- The public-export closure-equivalence field-output vector bridge has a
+fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_export_closure_equivalence_field_output_vector_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceFieldOutputVectorBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_export_closure_equivalence_field_output_vector_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
