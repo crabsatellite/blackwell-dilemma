@@ -65284,6 +65284,131 @@ theorem completePaperSemanticKernelOnly_current_public_export_field_output_compl
       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_bridge_audit_gate_certificate)
 
+/-- Public-export remaining-frontier status-vector bridge reaches the
+obstruction-map status-vector and atomic obstruction-vector gates. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate /\
+              completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatements.length =
+                12 /\
+              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements.length =
+                13 /\
+              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements.length =
+                14 /\
+              (paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3) /\
+              Not CompletePaperSemanticKernelOnly
+
+/-- The public-export remaining-frontier status-vector bridge reaches
+obstruction-map and atomic obstruction-vector gates without adding assumptions. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_bridge_audit_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_obstruction_map_status_vector_audit_gate_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_statement_roster_certificate <|
+            And.intro
+              completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_atomic_obstruction_vector_audit_gate_certificate <|
+              And.intro
+                completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatements_length_current <|
+                And.intro
+                  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements_length_current <|
+                  And.intro
+                    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements_length_current <|
+                    And.intro
+                      (And.intro paperSemanticOpenCount_current paperSemanticClosedCount_current)
+                      completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the public-export remaining-frontier status-vector
+obstruction-map bridge. -/
+def completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatements.length =
+      12,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements.length =
+      13,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements.length =
+      14,
+   paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-export remaining-frontier status-vector
+obstruction-map bridge roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatements.length =
+          12,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements.length =
+          13,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements.length =
+          14,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-export remaining-frontier status-vector
+obstruction-map bridge has twelve statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements.length =
+      12 := rfl
+
+/-- Build-gated statement roster certificate for the public-export
+remaining-frontier status-vector obstruction-map bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorBridgeAuditGateStatements.length =
+          12,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelObstructionMapStatusVectorAuditGateStatements.length =
+          13,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelAtomicObstructionVectorAuditGateStatements.length =
+          14,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements.length =
+      12 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateCertificate
+
+/-- The public-export remaining-frontier status-vector obstruction-map bridge
+has a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
