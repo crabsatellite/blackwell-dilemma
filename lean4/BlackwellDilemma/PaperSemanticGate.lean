@@ -64905,6 +64905,123 @@ theorem completePaperSemanticKernelOnly_current_public_export_field_output_compl
       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_bridge_audit_gate_certificate)
 
+/-- Public-export field-output terminal-length bridge reaches the actual
+remaining-open current-frontier certificate. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateCertificate /\
+      RemainingOpenSemanticTargetsFrontierStatementRosterCertificate /\
+        RemainingOpenSemanticTargetsFrontierCertificate /\
+          completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatements.length =
+            9 /\
+          remainingOpenSemanticTargetsFrontierStatements.length =
+            28 /\
+          openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+            [Part6CurrentFrontierCertificate,
+             RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate] /\
+          paperSemanticOpenCount = 2 /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The public-export field-output terminal-length bridge reaches the actual
+remaining-open current-frontier certificate without adding assumptions. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_bridge_audit_gate_certificate <|
+      And.intro
+        remaining_open_semantic_targets_frontier_statement_roster_certificate <|
+        And.intro
+          remaining_open_semantic_targets_frontier_certificate <|
+          And.intro
+            completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatements_length_current <|
+            And.intro
+              remainingOpenSemanticTargetsFrontierStatements_length_current <|
+              And.intro
+                openSemanticTargetKernelSurfaceCurrentFrontierCertificates_named_current <|
+                And.intro
+                  paperSemanticOpenCount_current
+                  completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the public-export field-output terminal-length
+remaining-frontier bridge. -/
+def completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateCertificate,
+   RemainingOpenSemanticTargetsFrontierStatementRosterCertificate,
+   RemainingOpenSemanticTargetsFrontierCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatements.length =
+      9,
+   remainingOpenSemanticTargetsFrontierStatements.length =
+      28,
+   openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+      [Part6CurrentFrontierCertificate,
+       RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate],
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-export field-output terminal-length remaining-frontier
+bridge roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateCertificate,
+       RemainingOpenSemanticTargetsFrontierStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFrontierCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatements.length =
+          9,
+       remainingOpenSemanticTargetsFrontierStatements.length =
+          28,
+       openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+          [Part6CurrentFrontierCertificate,
+           RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-export field-output terminal-length remaining-frontier
+bridge has ten statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements.length =
+      10 := rfl
+
+/-- Build-gated statement roster certificate for the public-export field-output
+terminal-length remaining-frontier bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateCertificate,
+       RemainingOpenSemanticTargetsFrontierStatementRosterCertificate,
+       RemainingOpenSemanticTargetsFrontierCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthBridgeAuditGateStatements.length =
+          9,
+       remainingOpenSemanticTargetsFrontierStatements.length =
+          28,
+       openSemanticTargetKernelSurfaceCurrentFrontierCertificates =
+          [Part6CurrentFrontierCertificate,
+           RandomSupercriticalZ2TopoClusterCurrentFrontierCertificate],
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements.length =
+      10 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate
+
+/-- The public-export field-output terminal-length remaining-frontier bridge has
+a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
