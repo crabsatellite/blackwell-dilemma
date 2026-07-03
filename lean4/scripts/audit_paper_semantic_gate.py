@@ -780,6 +780,16 @@ EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARR
     "completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_bridge_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_DUAL_OPEN_TARGET_CLOSURE_INPUT_FIELD_OUTPUT_DETAIL_OBSTRUCTION_MAP_ENDPOINT_COMPLETION_BARRIER_SEAL_THEOREM_NAME_COMPLETION_TERMINAL_ENDPOINT_BRIDGE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionTerminalEndpointBridgeAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionTerminalEndpointBridgeAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionTerminalEndpointBridgeAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionTerminalEndpointBridgeAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionTerminalEndpointBridgeAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -12793,6 +12803,11 @@ def main() -> int:
         for decl in EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_DUAL_OPEN_TARGET_CLOSURE_INPUT_FIELD_OUTPUT_DETAIL_OBSTRUCTION_MAP_ENDPOINT_COMPLETION_BARRIER_SEAL_THEOREM_NAME_COMPLETION_BRIDGE_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls = [
+        decl
+        for decl in EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_DUAL_OPEN_TARGET_CLOSURE_INPUT_FIELD_OUTPUT_DETAIL_OBSTRUCTION_MAP_ENDPOINT_COMPLETION_BARRIER_SEAL_THEOREM_NAME_COMPLETION_TERMINAL_ENDPOINT_BRIDGE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -13799,6 +13814,20 @@ def main() -> int:
         "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_bridge_decls_missing_names="
         + ",".join(
             missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_bridge_decls
+        )
+    )
+    print(
+        "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls_checked="
+        f"{len(EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_DUAL_OPEN_TARGET_CLOSURE_INPUT_FIELD_OUTPUT_DETAIL_OBSTRUCTION_MAP_ENDPOINT_COMPLETION_BARRIER_SEAL_THEOREM_NAME_COMPLETION_TERMINAL_ENDPOINT_BRIDGE_DECLS)}"
+    )
+    print(
+        "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls_missing="
+        f"{len(missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls)}"
+    )
+    print(
+        "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls_missing_names="
+        + ",".join(
+            missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls
         )
     )
     print(
@@ -20909,6 +20938,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls_checked="
+            f"{len(EXPECTED_PUBLIC_RELEASE_TERMINAL_DISPATCH_PUBLIC_EVIDENCE_LEDGER_COMPLETION_BARRIER_TWO_KEY_SEAL_SPINE_DUAL_OPEN_TARGET_CLOSURE_INPUT_FIELD_OUTPUT_DETAIL_OBSTRUCTION_MAP_ENDPOINT_COMPLETION_BARRIER_SEAL_THEOREM_NAME_COMPLETION_TERMINAL_ENDPOINT_BRIDGE_DECLS)}"
+        ),
+        (
+            "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls_missing="
+            f"{len(missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls)}"
+        ),
+        (
+            "semantic_target_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls_missing_names="
+            + ",".join(
+                missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -22796,6 +22839,13 @@ def main() -> int:
             "missing public release terminal-dispatch public-evidence-ledger completion-barrier two-key seal-spine dual-open-target closure-input field-output detail obstruction-map endpoint completion-barrier seal theorem-name completion bridge decls: "
             + ",".join(
                 missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_bridge_decls
+            )
+        )
+    if missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls:
+        failures.append(
+            "missing public release terminal-dispatch public-evidence-ledger completion-barrier two-key seal-spine dual-open-target closure-input field-output detail obstruction-map endpoint completion-barrier seal theorem-name completion terminal endpoint bridge decls: "
+            + ",".join(
+                missing_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_bridge_decls
             )
         )
 
