@@ -1190,6 +1190,16 @@ EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_COMPLETION_BARRIER_SEAL_TERMINAL_LENGTH_REMA
     "completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_bridge_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_COMPLETION_BARRIER_SEAL_TERMINAL_LENGTH_REMAINING_FRONTIER_LEDGER_DISJOINTNESS_STATUS_VECTOR_OBSTRUCTION_MAP_EXPLICIT_VECTOR_CLOSURE_FIELD_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_ALIGNMENT_BRIDGE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentBridgeAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentBridgeAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentBridgeAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentBridgeAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentBridgeAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -13408,6 +13418,11 @@ def main() -> int:
         for decl in EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_COMPLETION_BARRIER_SEAL_TERMINAL_LENGTH_REMAINING_FRONTIER_LEDGER_DISJOINTNESS_STATUS_VECTOR_OBSTRUCTION_MAP_EXPLICIT_VECTOR_CLOSURE_FIELD_ENDPOINT_REGISTRY_BRIDGE_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls = [
+        decl
+        for decl in EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_COMPLETION_BARRIER_SEAL_TERMINAL_LENGTH_REMAINING_FRONTIER_LEDGER_DISJOINTNESS_STATUS_VECTOR_OBSTRUCTION_MAP_EXPLICIT_VECTOR_CLOSURE_FIELD_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_ALIGNMENT_BRIDGE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -14978,6 +14993,20 @@ def main() -> int:
         "semantic_target_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_bridge_decls_missing_names="
         + ",".join(
             missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_bridge_decls
+        )
+    )
+    print(
+        "semantic_target_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls_checked="
+        f"{len(EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_COMPLETION_BARRIER_SEAL_TERMINAL_LENGTH_REMAINING_FRONTIER_LEDGER_DISJOINTNESS_STATUS_VECTOR_OBSTRUCTION_MAP_EXPLICIT_VECTOR_CLOSURE_FIELD_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_ALIGNMENT_BRIDGE_DECLS)}"
+    )
+    print(
+        "semantic_target_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls_missing="
+        f"{len(missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls)}"
+    )
+    print(
+        "semantic_target_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls_missing_names="
+        + ",".join(
+            missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls
         )
     )
     print(
@@ -22652,6 +22681,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls_checked="
+            f"{len(EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_COMPLETION_BARRIER_SEAL_TERMINAL_LENGTH_REMAINING_FRONTIER_LEDGER_DISJOINTNESS_STATUS_VECTOR_OBSTRUCTION_MAP_EXPLICIT_VECTOR_CLOSURE_FIELD_ENDPOINT_REGISTRY_RELEASE_SEAL_PUBLIC_EVIDENCE_ALIGNMENT_BRIDGE_DECLS)}"
+        ),
+        (
+            "semantic_target_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls_missing="
+            f"{len(missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls)}"
+        ),
+        (
+            "semantic_target_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls_missing_names="
+            + ",".join(
+                missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -24818,6 +24861,13 @@ def main() -> int:
             "missing public-export field-output completion-barrier seal terminal-length remaining-frontier ledger-disjointness status-vector obstruction-map explicit-vector closure-field endpoint-registry bridge decls: "
             + ",".join(
                 missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_bridge_decls
+            )
+        )
+    if missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls:
+        failures.append(
+            "missing public-export field-output completion-barrier seal terminal-length remaining-frontier ledger-disjointness status-vector obstruction-map explicit-vector closure-field endpoint-registry release-seal public-evidence alignment bridge decls: "
+            + ",".join(
+                missing_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_bridge_decls
             )
         )
 
