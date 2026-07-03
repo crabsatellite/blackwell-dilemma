@@ -65022,6 +65022,143 @@ theorem completePaperSemanticKernelOnly_current_public_export_field_output_compl
       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_bridge_audit_gate_certificate)
 
+/-- Public-export remaining-frontier bridge reaches the semantic-target ledger
+and open/closed target-id disjointness gates. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate /\
+          SemanticTargetCountCertificate /\
+          SemanticTargetStatusPartitionCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate /\
+                completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements.length =
+                  10 /\
+                completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements.length =
+                  13 /\
+                completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements.length =
+                  7 /\
+                (paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3) /\
+                Not CompletePaperSemanticKernelOnly
+
+/-- The public-export remaining-frontier bridge reaches ledger and disjointness
+classification gates without adding assumptions. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_bridge_audit_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_semantic_target_ledger_alignment_certificate <|
+          And.intro
+            semantic_target_count_certificate <|
+            And.intro
+              semantic_target_status_partition_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_closed_target_id_disjointness_statement_roster_certificate <|
+                And.intro
+                  completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_open_closed_target_id_disjointness_certificate <|
+                  And.intro
+                    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements_length_current <|
+                    And.intro
+                      completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements_length_current <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements_length_current <|
+                        And.intro
+                          (And.intro paperSemanticOpenCount_current paperSemanticClosedCount_current)
+                          completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the public-export remaining-frontier ledger/disjointness
+bridge. -/
+def completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+   SemanticTargetCountCertificate,
+   SemanticTargetStatusPartitionCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements.length =
+      10,
+   completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements.length =
+      13,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements.length =
+      7,
+   paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-export remaining-frontier ledger/disjointness bridge
+roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+       SemanticTargetCountCertificate,
+       SemanticTargetStatusPartitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements.length =
+          10,
+       completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements.length =
+          13,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements.length =
+          7,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-export remaining-frontier ledger/disjointness bridge
+has fourteen statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements.length =
+      14 := rfl
+
+/-- Build-gated statement roster certificate for the public-export
+remaining-frontier ledger/disjointness bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentCertificate,
+       SemanticTargetCountCertificate,
+       SemanticTargetStatusPartitionCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierBridgeAuditGateStatements.length =
+          10,
+       completePaperSemanticKernelOnlyCurrentSemanticTargetLedgerAlignmentStatements.length =
+          13,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointOpenClosedTargetIdDisjointnessStatements.length =
+          7,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements.length =
+      14 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateCertificate
+
+/-- The public-export remaining-frontier ledger/disjointness bridge has a fixed
+statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
