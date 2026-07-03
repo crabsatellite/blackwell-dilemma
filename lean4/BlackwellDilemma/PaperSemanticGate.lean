@@ -60482,6 +60482,185 @@ theorem
     completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements_length_current,
     completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_bridge_audit_gate_certificate⟩
 
+/-- Audit gate: the public-release obstruction-map endpoint completion-barrier
+seal bridge is aligned with the theorem-name/open-target completion gates. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate /\
+                  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate /\
+                    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+                        16 /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements.length =
+                        11 /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements.length =
+                        10 /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements.length =
+                        11 /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements.length =
+                        12 /\
+                      openSemanticTargetIds =
+                        ["theorem_4_1_part6_lattice_embedding",
+                         "topo_cluster_random_supercritical_z2"] /\
+                      paperSemanticOpenCount = 2 /\
+                      (CompletePaperSemanticKernelOnly <-> False) /\
+                      Not CompletePaperSemanticKernelOnly
+
+/-- The public-release obstruction-map endpoint completion-barrier seal bridge
+reaches the theorem-name/open-target completion gate surface. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_bridge_audit_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_bridge_audit_gate_certificate,
+    completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_public_release_theorem_name_completion_gate_certificate,
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_certificate,
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_theorem_name_alias_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_public_release_open_target_terminal_completion_gate_theorem_name_alias_certificate,
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_public_release_terminal_source_completion_barrier_certificate,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements_length_current,
+    openSemanticTargetIds_current,
+    paperSemanticOpenCount_current,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the public-release obstruction-map endpoint
+completion-barrier seal theorem-name completion bridge audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+      16,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements.length =
+      11,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements.length =
+      10,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements.length =
+      11,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements.length =
+      12,
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-release obstruction-map endpoint completion-barrier
+seal theorem-name completion bridge audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+          16,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements.length =
+          11,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements.length =
+          10,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements.length =
+          11,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements.length =
+          12,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-release obstruction-map endpoint completion-barrier
+seal theorem-name completion bridge audit gate has twenty statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements.length =
+      20 := rfl
+
+/-- Build-gated statement roster certificate for the public-release
+obstruction-map endpoint completion-barrier seal theorem-name completion bridge
+audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+          16,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTheoremNameCompletionGateStatements.length =
+          11,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateStatements.length =
+          10,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseOpenTargetTerminalCompletionGateTheoremNameAliasStatements.length =
+          11,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalSourceCompletionBarrierStatements.length =
+          12,
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements.length =
+      20 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateCertificate
+
+/-- The public-release obstruction-map endpoint completion-barrier seal
+theorem-name completion bridge audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealTheoremNameCompletionBridgeAuditGateStatements_length_current,
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_bridge_audit_gate_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
