@@ -1090,6 +1090,16 @@ EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_DETAILED_ENDPOINT_REGISTRY_BRIDGE_DECLS = (
     "completePaperSemanticKernelOnly_current_public_export_field_output_detailed_endpoint_registry_bridge_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_DUAL_OPEN_TARGET_ENDPOINT_BRIDGE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_field_output_dual_open_target_endpoint_bridge_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_field_output_dual_open_target_endpoint_bridge_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -13258,6 +13268,11 @@ def main() -> int:
         for decl in EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_DETAILED_ENDPOINT_REGISTRY_BRIDGE_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_public_export_field_output_dual_open_target_endpoint_bridge_decls = [
+        decl
+        for decl in EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_DUAL_OPEN_TARGET_ENDPOINT_BRIDGE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -14688,6 +14703,20 @@ def main() -> int:
         "semantic_target_public_export_field_output_detailed_endpoint_registry_bridge_decls_missing_names="
         + ",".join(
             missing_public_export_field_output_detailed_endpoint_registry_bridge_decls
+        )
+    )
+    print(
+        "semantic_target_public_export_field_output_dual_open_target_endpoint_bridge_decls_checked="
+        f"{len(EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_DUAL_OPEN_TARGET_ENDPOINT_BRIDGE_DECLS)}"
+    )
+    print(
+        "semantic_target_public_export_field_output_dual_open_target_endpoint_bridge_decls_missing="
+        f"{len(missing_public_export_field_output_dual_open_target_endpoint_bridge_decls)}"
+    )
+    print(
+        "semantic_target_public_export_field_output_dual_open_target_endpoint_bridge_decls_missing_names="
+        + ",".join(
+            missing_public_export_field_output_dual_open_target_endpoint_bridge_decls
         )
     )
     print(
@@ -22222,6 +22251,20 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_public_export_field_output_dual_open_target_endpoint_bridge_decls_checked="
+            f"{len(EXPECTED_PUBLIC_EXPORT_FIELD_OUTPUT_DUAL_OPEN_TARGET_ENDPOINT_BRIDGE_DECLS)}"
+        ),
+        (
+            "semantic_target_public_export_field_output_dual_open_target_endpoint_bridge_decls_missing="
+            f"{len(missing_public_export_field_output_dual_open_target_endpoint_bridge_decls)}"
+        ),
+        (
+            "semantic_target_public_export_field_output_dual_open_target_endpoint_bridge_decls_missing_names="
+            + ",".join(
+                missing_public_export_field_output_dual_open_target_endpoint_bridge_decls
+            )
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -24318,6 +24361,13 @@ def main() -> int:
             "missing public-export field-output detailed endpoint-registry bridge decls: "
             + ",".join(
                 missing_public_export_field_output_detailed_endpoint_registry_bridge_decls
+            )
+        )
+    if missing_public_export_field_output_dual_open_target_endpoint_bridge_decls:
+        failures.append(
+            "missing public-export field-output dual-open-target endpoint bridge decls: "
+            + ",".join(
+                missing_public_export_field_output_dual_open_target_endpoint_bridge_decls
             )
         )
 
