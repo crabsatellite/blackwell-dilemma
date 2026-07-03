@@ -64699,6 +64699,109 @@ theorem completePaperSemanticKernelOnly_current_public_export_field_output_dual_
       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_export_field_output_dual_open_target_endpoint_bridge_audit_gate_certificate)
 
+/-- Public-export field-output endpoint bridge reaches the completion-barrier
+seal bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate /\
+          completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements.length =
+            9 /\
+          completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+            16 /\
+          paperSemanticOpenCount = 2 /\
+          Not CompletePaperSemanticKernelOnly
+
+/-- The public-export field-output endpoint bridge reaches the completion-barrier
+seal bridge without adding assumptions. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_export_field_output_dual_open_target_endpoint_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_export_field_output_dual_open_target_endpoint_bridge_audit_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_bridge_audit_gate_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_bridge_audit_gate_certificate <|
+          And.intro
+            completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements_length_current <|
+            And.intro
+              completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements_length_current <|
+              And.intro
+                paperSemanticOpenCount_current
+                completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the public-export field-output completion-barrier seal
+bridge. -/
+def completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements.length =
+      9,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+      16,
+   paperSemanticOpenCount = 2,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-export field-output completion-barrier seal bridge
+roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements.length =
+          9,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+          16,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-export field-output completion-barrier seal bridge
+has nine statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements.length =
+      9 := rfl
+
+/-- Build-gated statement roster certificate for the public-export field-output
+completion-barrier seal bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputDualOpenTargetEndpointBridgeAuditGateStatements.length =
+          9,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputFieldOutputDetailObstructionMapEndpointCompletionBarrierSealBridgeAuditGateStatements.length =
+          16,
+       paperSemanticOpenCount = 2,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements.length =
+      9 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateCertificate
+
+/-- The public-export field-output completion-barrier seal bridge has a fixed
+statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
