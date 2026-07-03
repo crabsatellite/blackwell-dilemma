@@ -66971,6 +66971,213 @@ theorem completePaperSemanticKernelOnly_current_public_export_field_output_compl
       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements_length_current
       completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_paper_label_detailed_field_output_row_paper_label_row_roster_full_alignment_public_export_release_completion_public_evidence_bridge_audit_gate_certificate)
 
+/-- Paper-label bridge for the current public-export release-completion
+public-evidence bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate /\
+              CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatementRosterCertificate /\
+                CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateCertificate /\
+                  SemanticTargetPaperLabelIdStatementRosterCertificate /\
+                    SemanticTargetPaperLabelIdCertificate /\
+                      completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+                        18 /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements.length =
+                        14 /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+                        16 /\
+                      semanticTargetPaperLabelIdStatements.length = 3 /\
+                      completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements.length =
+                        12 /\
+                      openSemanticTargetKernelSurfaceIdPaperLabels =
+                        openSemanticTargets.map (fun target => (target.id, target.paperLabel)) /\
+                      openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+                        [("theorem_4_1_part6_lattice_embedding",
+                          "thm:cognitive-threshold Part 6"),
+                         ("topo_cluster_random_supercritical_z2",
+                          "prop:topo-cluster and thm:phase")] /\
+                      openSemanticTargetKernelSurfaceIdPaperLabels =
+                        openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels /\
+                      (paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3) /\
+                      Not CompletePaperSemanticKernelOnly
+
+/-- The current public-export release-completion public-evidence bridge reaches
+the terminal paper-label bridge. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_paper_label_detailed_field_output_row_paper_label_row_roster_full_alignment_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_paper_label_detailed_field_output_row_paper_label_row_roster_full_alignment_public_export_release_completion_public_evidence_bridge_audit_gate_statement_roster_certificate <|
+    And.intro
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_paper_label_detailed_field_output_row_paper_label_row_roster_full_alignment_public_export_release_completion_public_evidence_bridge_audit_gate_certificate <|
+      And.intro
+        completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_statement_roster_certificate <|
+        And.intro
+          completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_certificate <|
+          And.intro
+            completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_bridge_audit_gate_statement_roster_certificate <|
+            And.intro
+              completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_detailed_field_output_row_roster_public_export_release_completion_public_evidence_bridge_audit_gate_certificate <|
+              And.intro
+                completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_audit_gate_statement_roster_certificate <|
+                And.intro
+                  completePaperSemanticKernelOnly_current_public_release_terminal_endpoint_semantic_target_paper_label_explicit_endpoint_registry_release_seal_public_evidence_paper_label_alignment_audit_gate_certificate <|
+                  And.intro
+                    semantic_target_paper_label_id_statement_roster_certificate <|
+                    And.intro
+                      semantic_target_paper_label_id_certificate <|
+                      And.intro
+                        completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements_length_current <|
+                        And.intro
+                          completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements_length_current <|
+                          And.intro
+                            completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements_length_current <|
+                            And.intro
+                              semanticTargetPaperLabelIdStatements_length_current <|
+                              And.intro
+                                completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements_length_current <|
+                                And.intro
+                                  openSemanticTargetKernelSurfaceIdPaperLabels_current <|
+                                  And.intro
+                                    semantic_target_paper_label_id_certificate.2.1 <|
+                                    And.intro
+                                      openSemanticTargetKernelSurfaceIdPaperLabels_eq_closureInputFieldOutputDetailedStatementRosterIdPaperLabels <|
+                                      And.intro
+                                        (And.intro paperSemanticOpenCount_current paperSemanticClosedCount_current)
+                                        completePaperSemanticKernelOnly_notYet
+
+/-- Statement roster for the current public-export release-completion
+public-evidence paper-label bridge. -/
+def completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateCertificate,
+   SemanticTargetPaperLabelIdStatementRosterCertificate,
+   SemanticTargetPaperLabelIdCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+      18,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements.length =
+      14,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+      16,
+   semanticTargetPaperLabelIdStatements.length = 3,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements.length =
+      12,
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+   openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+      [("theorem_4_1_part6_lattice_embedding",
+        "thm:cognitive-threshold Part 6"),
+       ("topo_cluster_random_supercritical_z2",
+        "prop:topo-cluster and thm:phase")],
+   openSemanticTargetKernelSurfaceIdPaperLabels =
+      openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+   paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the current public-export release-completion public-evidence
+paper-label bridge roster is fixed. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+          18,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements.length =
+          14,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+          16,
+       semanticTargetPaperLabelIdStatements.length = 3,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements.length =
+          12,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the current public-export release-completion public-evidence
+paper-label bridge has twenty-one statements. -/
+theorem completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements.length =
+      21 := rfl
+
+/-- Build-gated statement roster certificate for the current public-export
+release-completion public-evidence paper-label bridge. -/
+def CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateCertificate,
+       SemanticTargetPaperLabelIdStatementRosterCertificate,
+       SemanticTargetPaperLabelIdCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+          18,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements.length =
+          14,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidenceDetailedFieldOutputRowRosterPublicExportReleaseCompletionPublicEvidenceBridgeAuditGateStatements.length =
+          16,
+       semanticTargetPaperLabelIdStatements.length = 3,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalEndpointSemanticTargetPaperLabelExplicitEndpointRegistryReleaseSealPublicEvidencePaperLabelAlignmentAuditGateStatements.length =
+          12,
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargets.map (fun target => (target.id, target.paperLabel)),
+       openSemanticTargets.map (fun target => (target.id, target.paperLabel)) =
+          [("theorem_4_1_part6_lattice_embedding",
+            "thm:cognitive-threshold Part 6"),
+           ("topo_cluster_random_supercritical_z2",
+            "prop:topo-cluster and thm:phase")],
+       openSemanticTargetKernelSurfaceIdPaperLabels =
+          openSemanticTargetClosureInputFieldOutputDetailedStatementRosterIdPaperLabels,
+       paperSemanticOpenCount = 2 /\ paperSemanticClosedCount = 3,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements.length =
+      21 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateCertificate
+
+/-- The current public-export release-completion public-evidence paper-label
+bridge has a fixed statement roster. -/
+theorem completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_paper_label_detailed_field_output_row_paper_label_row_roster_full_alignment_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatementRosterCertificate := by
+  exact And.intro
+    completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements_named_current
+    (And.intro
+      completePaperSemanticKernelOnlyCurrentPublicExportFieldOutputCompletionBarrierSealTerminalLengthRemainingFrontierLedgerDisjointnessStatusVectorObstructionMapExplicitVectorClosureFieldEndpointRegistryReleaseSealPublicEvidenceAlignmentPaperLabelDetailedFieldOutputRowPaperLabelRowRosterFullAlignmentPublicExportReleaseCompletionPublicEvidencePaperLabelBridgeAuditGateStatements_length_current
+      completePaperSemanticKernelOnly_current_public_export_field_output_completion_barrier_seal_terminal_length_remaining_frontier_ledger_disjointness_status_vector_obstruction_map_explicit_vector_closure_field_endpoint_registry_release_seal_public_evidence_alignment_paper_label_detailed_field_output_row_paper_label_row_roster_full_alignment_public_export_release_completion_public_evidence_paper_label_bridge_audit_gate_certificate)
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
