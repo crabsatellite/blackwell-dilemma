@@ -59672,6 +59672,230 @@ theorem
     completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatements_length_current,
     completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_bridge_audit_gate_certificate⟩
 
+/-- Public-release bridge from the dual-open-target closure-input boundary gate
+to the detailed closure-input alignment and paper-export rosters. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateCertificate :
+    Prop :=
+  CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatementRosterCertificate /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateCertificate /\
+      CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate /\
+        CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate /\
+          CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate /\
+            CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate /\
+              RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate /\
+                RemainingOpenSemanticTargetsClosureInputCertificate /\
+                  OpenSemanticTargetClosureInputNamedRosterStatementRosterCertificate /\
+                    OpenSemanticTargetClosureInputNamedRosterCertificate /\
+                      Part6LatticeEmbeddingClosureInputStatementRosterCertificate /\
+                        TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate /\
+                          completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatements.length =
+                            22 /\
+                          completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements.length =
+                            30 /\
+                          completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements.length =
+                            12 /\
+                          remainingOpenSemanticTargetsClosureInputStatements.length =
+                            10 /\
+                          part6LatticeEmbeddingClosureInputStatements.length =
+                            6 /\
+                          topoClusterRandomSupercriticalZ2ClosureInputStatements.length =
+                            8 /\
+                          openSemanticTargetClosureInputSurfaceClosureInputs =
+                            [Part6LatticeEmbeddingClosureInput,
+                             TopoClusterRandomSupercriticalZ2ClosureInput] /\
+                          openSemanticTargetClosureInputSurfaceInputCertificates =
+                            [Part6LatticeEmbeddingClosureInputCertificate,
+                             TopoClusterRandomSupercriticalZ2ClosureInputCertificate] /\
+                          openSemanticTargetIds =
+                            ["theorem_4_1_part6_lattice_embedding",
+                             "topo_cluster_random_supercritical_z2"] /\
+                          paperSemanticOpenCount = 2 /\
+                          Not Part6LatticeEmbeddingClosureInput /\
+                          Not TopoClusterRandomSupercriticalZ2ClosureInput /\
+                          (CompletePaperSemanticKernelOnly <-> False) /\
+                          Not CompletePaperSemanticKernelOnly
+
+/-- The public-release dual-open-target bridge is aligned with the detailed
+closure-input alignment and paper-export rosters. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_detail_bridge_audit_gate_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_bridge_audit_gate_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_bridge_audit_gate_certificate,
+    completePaperSemanticKernelOnly_current_closure_input_alignment_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_closure_input_alignment_certificate,
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_statement_roster_certificate,
+    completePaperSemanticKernelOnly_current_public_nonclosure_boundary_required_closure_input_paper_export_certificate,
+    remaining_open_semantic_targets_closure_input_statement_roster_certificate,
+    remaining_open_semantic_targets_closure_input_certificate,
+    open_semantic_target_closure_input_named_roster_statement_roster_certificate,
+    open_semantic_target_closure_input_named_roster_certificate,
+    part6_lattice_embedding_closure_input_statement_roster_certificate,
+    topo_cluster_random_supercritical_z2_closure_input_statement_roster_certificate,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements_length_current,
+    completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements_length_current,
+    remainingOpenSemanticTargetsClosureInputStatements_length_current,
+    part6LatticeEmbeddingClosureInputStatements_length_current,
+    topoClusterRandomSupercriticalZ2ClosureInputStatements_length_current,
+    openSemanticTargetClosureInputSurfaceClosureInputs_named_current,
+    openSemanticTargetClosureInputSurfaceInputCertificates_named_current,
+    openSemanticTargetIds_current,
+    paperSemanticOpenCount_current,
+    part6_lattice_embedding_closure_input_notYet,
+    topo_cluster_random_supercritical_z2_closure_input_notYet,
+    completePaperSemanticKernelOnly_iff_false_current,
+    completePaperSemanticKernelOnly_notYet⟩
+
+/-- Statement roster for the public-release two-key seal-spine dual-open-target
+closure-input detail bridge audit gate. -/
+def
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements :
+    List Prop :=
+  [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateCertificate,
+   CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+   CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate,
+   RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate,
+   RemainingOpenSemanticTargetsClosureInputCertificate,
+   OpenSemanticTargetClosureInputNamedRosterStatementRosterCertificate,
+   OpenSemanticTargetClosureInputNamedRosterCertificate,
+   Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
+   TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate,
+   completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatements.length =
+      22,
+   completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements.length =
+      30,
+   completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements.length =
+      12,
+   remainingOpenSemanticTargetsClosureInputStatements.length = 10,
+   part6LatticeEmbeddingClosureInputStatements.length = 6,
+   topoClusterRandomSupercriticalZ2ClosureInputStatements.length = 8,
+   openSemanticTargetClosureInputSurfaceClosureInputs =
+      [Part6LatticeEmbeddingClosureInput,
+       TopoClusterRandomSupercriticalZ2ClosureInput],
+   openSemanticTargetClosureInputSurfaceInputCertificates =
+      [Part6LatticeEmbeddingClosureInputCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputCertificate],
+   openSemanticTargetIds =
+      ["theorem_4_1_part6_lattice_embedding",
+       "topo_cluster_random_supercritical_z2"],
+   paperSemanticOpenCount = 2,
+   Not Part6LatticeEmbeddingClosureInput,
+   Not TopoClusterRandomSupercriticalZ2ClosureInput,
+   CompletePaperSemanticKernelOnly <-> False,
+   Not CompletePaperSemanticKernelOnly]
+
+/-- Build gate: the public-release two-key seal-spine dual-open-target
+closure-input detail bridge audit gate roster is fixed. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements_named_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate,
+       RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputCertificate,
+       OpenSemanticTargetClosureInputNamedRosterStatementRosterCertificate,
+       OpenSemanticTargetClosureInputNamedRosterCertificate,
+       Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatements.length =
+          22,
+       completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements.length =
+          30,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements.length =
+          12,
+       remainingOpenSemanticTargetsClosureInputStatements.length = 10,
+       part6LatticeEmbeddingClosureInputStatements.length = 6,
+       topoClusterRandomSupercriticalZ2ClosureInputStatements.length = 8,
+       openSemanticTargetClosureInputSurfaceClosureInputs =
+          [Part6LatticeEmbeddingClosureInput,
+           TopoClusterRandomSupercriticalZ2ClosureInput],
+       openSemanticTargetClosureInputSurfaceInputCertificates =
+          [Part6LatticeEmbeddingClosureInputCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputCertificate],
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       Not Part6LatticeEmbeddingClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] := rfl
+
+/-- Build gate: the public-release two-key seal-spine dual-open-target
+closure-input detail bridge audit gate has twenty-seven statements. -/
+theorem
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements_length_current :
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements.length =
+      27 := rfl
+
+/-- Build-gated statement roster certificate for the public-release two-key
+seal-spine dual-open-target closure-input detail bridge audit gate. -/
+def
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatementRosterCertificate :
+    Prop :=
+  completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements =
+      [CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentClosureInputAlignmentCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatementRosterCertificate,
+       CompletePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportCertificate,
+       RemainingOpenSemanticTargetsClosureInputStatementRosterCertificate,
+       RemainingOpenSemanticTargetsClosureInputCertificate,
+       OpenSemanticTargetClosureInputNamedRosterStatementRosterCertificate,
+       OpenSemanticTargetClosureInputNamedRosterCertificate,
+       Part6LatticeEmbeddingClosureInputStatementRosterCertificate,
+       TopoClusterRandomSupercriticalZ2ClosureInputStatementRosterCertificate,
+       completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputBridgeAuditGateStatements.length =
+          22,
+       completePaperSemanticKernelOnlyCurrentClosureInputAlignmentStatements.length =
+          30,
+       completePaperSemanticKernelOnlyCurrentPublicNonclosureBoundaryRequiredClosureInputPaperExportStatements.length =
+          12,
+       remainingOpenSemanticTargetsClosureInputStatements.length = 10,
+       part6LatticeEmbeddingClosureInputStatements.length = 6,
+       topoClusterRandomSupercriticalZ2ClosureInputStatements.length = 8,
+       openSemanticTargetClosureInputSurfaceClosureInputs =
+          [Part6LatticeEmbeddingClosureInput,
+           TopoClusterRandomSupercriticalZ2ClosureInput],
+       openSemanticTargetClosureInputSurfaceInputCertificates =
+          [Part6LatticeEmbeddingClosureInputCertificate,
+           TopoClusterRandomSupercriticalZ2ClosureInputCertificate],
+       openSemanticTargetIds =
+          ["theorem_4_1_part6_lattice_embedding",
+           "topo_cluster_random_supercritical_z2"],
+       paperSemanticOpenCount = 2,
+       Not Part6LatticeEmbeddingClosureInput,
+       Not TopoClusterRandomSupercriticalZ2ClosureInput,
+       CompletePaperSemanticKernelOnly <-> False,
+       Not CompletePaperSemanticKernelOnly] /\
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements.length =
+      27 /\
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateCertificate
+
+/-- The public-release two-key seal-spine dual-open-target closure-input
+detail bridge audit gate has a fixed statement roster. -/
+theorem
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_detail_bridge_audit_gate_statement_roster_certificate :
+    CompletePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatementRosterCertificate := by
+  exact ⟨
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements_named_current,
+    completePaperSemanticKernelOnlyCurrentPublicReleaseTerminalDispatchPublicEvidenceLedgerCompletionBarrierTwoKeySealSpineDualOpenTargetClosureInputDetailBridgeAuditGateStatements_length_current,
+    completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_detail_bridge_audit_gate_certificate⟩
+
 #eval s!"Blackwell-Dilemma paper-semantic gate: closed={paperSemanticClosedCount} open={paperSemanticOpenCount}"
 
 end PaperSemanticGate
