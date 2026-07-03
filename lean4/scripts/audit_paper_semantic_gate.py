@@ -1060,6 +1060,16 @@ EXPECTED_PUBLIC_RELEASE_FINAL_SEAL_THEOREM_NAME_ALIAS_PUBLIC_EVIDENCE_BUNDLE_THE
     "completePaperSemanticKernelOnly_current_public_release_terminal_dispatch_public_evidence_ledger_completion_barrier_two_key_seal_spine_dual_open_target_closure_input_field_output_detail_obstruction_map_endpoint_completion_barrier_seal_theorem_name_completion_terminal_endpoint_target_id_obstruction_pair_public_evidence_exit_open_target_id_roster_integrity_exhaustive_membership_open_target_membership_obstruction_dispatch_open_closed_target_id_disjointness_semantic_target_partition_exit_semantic_target_classification_obstruction_exit_closed_target_membership_closure_dispatch_semantic_target_membership_total_dispatch_semantic_target_total_dispatch_index_seal_semantic_target_ledger_row_seal_semantic_target_ledger_row_dispatch_seal_semantic_target_final_seal_theorem_name_alias_public_evidence_bundle_theorem_name_alias_gate_conditional_interface_closure_pair_exact_closure_input_output_obstruction_equivalence_top_level_alignment_field_output_full_ledger_alignment_final_judgement_obstruction_map_full_alignment_public_nonclosure_boundary_paper_export_terminal_length_bridge_audit_gate_statement_roster_certificate",
 )
 
+EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_VECTOR_BRIDGE_DECLS = (
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_closure_equivalence_vector_bridge_audit_gate_certificate",
+    "completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements",
+    "completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements_named_current",
+    "completePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatements_length_current",
+    "CompletePaperSemanticKernelOnlyCurrentPublicExportClosureEquivalenceVectorBridgeAuditGateStatementRosterCertificate",
+    "completePaperSemanticKernelOnly_current_public_export_closure_equivalence_vector_bridge_audit_gate_statement_roster_certificate",
+)
+
 EXPECTED_CLOSED_FRONTIER_CERTIFICATE_CONJUNCTS = (
     "paperSemanticClosedCount = 3",
     "closedSemanticTargetIds =",
@@ -13213,6 +13223,11 @@ def main() -> int:
         for decl in EXPECTED_PUBLIC_RELEASE_FINAL_SEAL_THEOREM_NAME_ALIAS_PUBLIC_EVIDENCE_BUNDLE_THEOREM_NAME_ALIAS_GATE_CONDITIONAL_INTERFACE_CLOSURE_PAIR_EXACT_CLOSURE_INPUT_OUTPUT_OBSTRUCTION_EQUIVALENCE_TOP_LEVEL_ALIGNMENT_FIELD_OUTPUT_FULL_LEDGER_ALIGNMENT_FINAL_JUDGEMENT_OBSTRUCTION_MAP_FULL_ALIGNMENT_PUBLIC_NONCLOSURE_BOUNDARY_PAPER_EXPORT_TERMINAL_LENGTH_BRIDGE_DECLS
         if decl not in paper_semantic_decls
     ]
+    missing_public_export_closure_equivalence_vector_bridge_decls = [
+        decl
+        for decl in EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_VECTOR_BRIDGE_DECLS
+        if decl not in paper_semantic_decls
+    ]
     required_axiom_audit_decls.update(
         f"BlackwellDilemma.PaperSemanticGate.{name}"
         for name in paper_semantic_theorems
@@ -14604,6 +14619,18 @@ def main() -> int:
         + ",".join(
             missing_public_release_final_seal_theorem_name_alias_public_evidence_bundle_theorem_name_alias_gate_conditional_interface_closure_pair_exact_closure_input_output_obstruction_equivalence_top_level_alignment_field_output_full_ledger_alignment_final_judgement_obstruction_map_full_alignment_public_nonclosure_boundary_paper_export_terminal_length_bridge_decls
         )
+    )
+    print(
+        "semantic_target_public_export_closure_equivalence_vector_bridge_decls_checked="
+        f"{len(EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_VECTOR_BRIDGE_DECLS)}"
+    )
+    print(
+        "semantic_target_public_export_closure_equivalence_vector_bridge_decls_missing="
+        f"{len(missing_public_export_closure_equivalence_vector_bridge_decls)}"
+    )
+    print(
+        "semantic_target_public_export_closure_equivalence_vector_bridge_decls_missing_names="
+        + ",".join(missing_public_export_closure_equivalence_vector_bridge_decls)
     )
     print(
         "semantic_target_forbidden_when_open_paths_checked="
@@ -22097,6 +22124,18 @@ def main() -> int:
             )
         ),
         (
+            "semantic_target_public_export_closure_equivalence_vector_bridge_decls_checked="
+            f"{len(EXPECTED_PUBLIC_EXPORT_CLOSURE_EQUIVALENCE_VECTOR_BRIDGE_DECLS)}"
+        ),
+        (
+            "semantic_target_public_export_closure_equivalence_vector_bridge_decls_missing="
+            f"{len(missing_public_export_closure_equivalence_vector_bridge_decls)}"
+        ),
+        (
+            "semantic_target_public_export_closure_equivalence_vector_bridge_decls_missing_names="
+            + ",".join(missing_public_export_closure_equivalence_vector_bridge_decls)
+        ),
+        (
             "semantic_target_forbidden_when_open_paths_checked="
             f"{len(forbidden_when_open_paths_present)}"
         ),
@@ -24174,6 +24213,12 @@ def main() -> int:
             + ",".join(
                 missing_public_release_final_seal_theorem_name_alias_public_evidence_bundle_theorem_name_alias_gate_conditional_interface_closure_pair_exact_closure_input_output_obstruction_equivalence_top_level_alignment_field_output_full_ledger_alignment_final_judgement_obstruction_map_full_alignment_public_nonclosure_boundary_paper_export_terminal_length_bridge_decls
             )
+        )
+
+    if missing_public_export_closure_equivalence_vector_bridge_decls:
+        failures.append(
+            "missing public-export closure-equivalence vector bridge decls: "
+            + ",".join(missing_public_export_closure_equivalence_vector_bridge_decls)
         )
 
     for path, phrase in forbidden_when_open_violations:
