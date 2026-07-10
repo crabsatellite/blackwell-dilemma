@@ -276,6 +276,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedSentimentalImmunity.lean"
     },
     {
+      "id": "unified_principal_optimum_kernel",
+      "kind": "machine_gate",
+      "role": "Finite heterogeneous aggregation with exact continuity and common-tail inheritance, a positive global argmax theorem, matched increasing-differences comparative statics, and a continuous two-type strict-valley witness.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedPrincipalOptimum.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -1509,6 +1516,81 @@
       ]
     },
     {
+      "id": "principal_optimum_semantic_repair_gate",
+      "category": "kernel_checked_finite_population_principal_problem",
+      "source_cards": [
+        "unified_principal_optimum_kernel",
+        "unified_supermodular_cognition_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "principal_optimum_module",
+          "path": "lean4/BlackwellDilemma/UnifiedPrincipalOptimum.lean",
+          "contains": [
+            "def aggregateWelfare",
+            "theorem aggregateWelfare_continuousOn",
+            "theorem aggregateWelfare_tail_dominated",
+            "theorem finitePopulation_positive_argmax_exists",
+            "theorem finitePopulation_optimalPrecision_mono",
+            "def twoTypeAggregateWelfare",
+            "theorem twoTypeAggregateWelfare_strictValley",
+            "theorem principalOptimumClaim_proved"
+          ]
+        },
+        {
+          "id": "principal_optimum_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.PrincipalOptimum.PrincipalOptimumClaim",
+            "BlackwellDilemma.PrincipalOptimum.principalOptimumClaim_proved"
+          ]
+        },
+        {
+          "id": "principal_optimum_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.PrincipalOptimum.aggregateWelfare_continuousOn",
+            "#print axioms BlackwellDilemma.PrincipalOptimum.finitePopulation_positive_argmax_exists",
+            "#print axioms BlackwellDilemma.PrincipalOptimum.finitePopulation_optimalPrecision_mono",
+            "#print axioms BlackwellDilemma.PrincipalOptimum.twoTypeAggregateWelfare_strictValley",
+            "#print axioms BlackwellDilemma.PrincipalOptimum.principalOptimumClaim_proved"
+          ]
+        },
+        {
+          "id": "principal_optimum_model_boundaries",
+          "path": "paper/model_assumptions.json",
+          "contains": [
+            "finite_population_regular_aggregation",
+            "matched_cognitive_increasing_differences",
+            "two_type_precision_valley_reduced_form"
+          ]
+        },
+        {
+          "id": "principal_optimum_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"label\": \"prop:principal-optimum\"",
+            "\"id\": \"exact_finite_population_principal_optimum\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "principal_optimum_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1588,8 +1670,8 @@
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=5",
             "claim_lineage_relation_split_core_and_frontier=6",
-            "claim_lineage_relation_strengthened_assumptions=12",
-            "claim_lineage_relation_unchanged=3",
+            "claim_lineage_relation_strengthened_assumptions=13",
+            "claim_lineage_relation_unchanged=2",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -1638,30 +1720,27 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=20",
-            "publication_publication_evidence_closed=23",
-            "publication_model_assumptions_total=19",
-            "publication_model_assumptions_admissible=19",
-            "publication_model_assumptions_theory_admissible=19",
+            "publication_strict_kernel_closed=21",
+            "publication_publication_evidence_closed=24",
+            "publication_model_assumptions_total=22",
+            "publication_model_assumptions_admissible=22",
+            "publication_model_assumptions_theory_admissible=22",
             "publication_manual_status_fields=0",
-            "publication_model_assumptions_theory_referenced=9",
-            "publication_model_assumptions_theory_reference_not_required=10",
+            "publication_model_assumptions_theory_referenced=10",
+            "publication_model_assumptions_theory_reference_not_required=12",
             "publication_model_assumptions_empirical_required=9",
             "publication_model_assumptions_empirically_anchored=0",
-            "publication_model_assumption_provenance_benchmark_definition=2",
-            "publication_model_assumption_provenance_paper_definition=6",
+            "publication_model_assumption_provenance_benchmark_definition=3",
+            "publication_model_assumption_provenance_paper_definition=8",
             "publication_model_assumption_provenance_paper_reduced_form=6",
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
-            "publication_obligations_total=70",
-            "publication_obligations_passed=66",
+            "publication_obligations_total=69",
+            "publication_obligations_passed=67",
             "publication_gap_lean_conditional=2",
-            "publication_gap_lean_exact=1",
-            "publication_gap_unresolved_semantics=1",
             "publication_mathematical_route_model_internal_exact=20",
             "publication_mathematical_route_reference_conditional=6",
-            "publication_semantic_resolution_hybrid_model_and_strategy_evidence=1",
             "publication_model_route_real_strategy_evidence_required=23"
           ]
         }
@@ -2192,11 +2271,11 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=20",
+            "paper_claims_closed=21",
             "paper_claims_partial=0",
             "paper_claims_conditional=3",
             "paper_claims_refuted_encoding=0",
-            "paper_claims_unformalized=3",
+            "paper_claims_unformalized=2",
             "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,prop:sentimental,prop:principal-optimum,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
             "paper_claim_manual_status_assignments=0",
             "paper_claim_legacy_semantic_targets=0",

@@ -27,7 +27,7 @@ pointwise sums.
 The chain `IsSupermodular ⇒ derivative-domination ⇒ argmax-monotone`
 (Phases 5/9/10) is built on these difference-quotient atoms. With the
 algebra below, more complex compositions can be built modularly
-(e.g., aggregateWelfareWith decomposed as integral of pointwise terms,
+(e.g., a finite aggregate decomposed into weighted pointwise terms,
 each with its own difference-dominance proof).
 
 ## Cat 1 status

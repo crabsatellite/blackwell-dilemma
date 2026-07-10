@@ -1,51 +1,48 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "b6f49d463a242343e1e8a659fe7261d884f65071414dd440de132076090bcfcf",
+  "manuscript_sha256": "6eecf1a9639c05ef4302bef9ebf69ffaa8baeab34f856f36982315ab216ca6f0",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 20,
-    "publication_evidence_closed": 23,
+    "strict_kernel_closed": 21,
+    "publication_evidence_closed": 24,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
-    "model_assumptions_total": 19,
-    "model_assumptions_admissible": 19,
-    "model_assumptions_theory_admissible": 19,
-    "model_assumptions_theory_referenced": 9,
-    "model_assumptions_theory_reference_not_required": 10,
+    "model_assumptions_total": 22,
+    "model_assumptions_admissible": 22,
+    "model_assumptions_theory_admissible": 22,
+    "model_assumptions_theory_referenced": 10,
+    "model_assumptions_theory_reference_not_required": 12,
     "model_assumptions_empirical_required": 9,
     "model_assumptions_empirically_anchored": 0,
     "model_assumptions_by_provenance": {
-      "benchmark_definition": 2,
-      "paper_definition": 6,
+      "benchmark_definition": 3,
+      "paper_definition": 8,
       "paper_reduced_form": 6,
       "published_model_adaptation": 1,
       "standard_theory": 3,
       "tractability_normalization": 1
     },
-    "obligations_total": 70,
-    "obligations_passed": 66,
+    "obligations_total": 69,
+    "obligations_passed": 67,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
       "lean_conditional": 6,
       "lean_exact": 20,
       "model_assumptions": 25,
-      "statement_hash": 6,
-      "unresolved_semantics": 1
+      "statement_hash": 6
     },
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
       "lean_conditional": 4,
-      "lean_exact": 19,
+      "lean_exact": 20,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 2,
-      "lean_exact": 1,
-      "unresolved_semantics": 1
+      "lean_conditional": 2
     },
     "mathematical_routes": {
       "model_internal_exact": 20,
@@ -56,9 +53,7 @@
       "none": 1,
       "real_strategy_evidence_required": 23
     },
-    "semantic_gaps_by_resolution_class": {
-      "hybrid_model_and_strategy_evidence": 1
-    }
+    "semantic_gaps_by_resolution_class": {}
   },
   "model_assumptions": [
     {
@@ -259,6 +254,44 @@
       "empirical_required": true,
       "empirically_anchored": false,
       "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "finite_population_regular_aggregation",
+      "kind": "regularity_condition",
+      "provenance": "paper_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "matched_cognitive_increasing_differences",
+      "kind": "regularity_condition",
+      "provenance": "paper_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "topkis1978"
+      ],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "two_type_precision_valley_reduced_form",
+      "kind": "structural_definition",
+      "provenance": "benchmark_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
       "empirical_reference_ids": [],
       "empirical_check_ids": []
     },
@@ -806,44 +839,37 @@
     },
     {
       "label": "prop:principal-optimum",
-      "statement_sha256": "3e3a34f3f3138674d24a324b4ef9e6c6eea837bb9c11fb637ef704bdd623bcd0",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "85b3ca3a66726607e1ca82b0aab0d32d953cb6ad280fe803deaa9e0575d0f1b1",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "cognitive_interpolation_kappa",
+        "finite_population_regular_aggregation",
         "heterogeneous_population_distribution",
-        "sentimental_weight_alpha"
+        "matched_cognitive_increasing_differences",
+        "two_type_precision_valley_reduced_form"
       ],
       "empirical_model_gaps": [
         "cognitive_interpolation_kappa",
-        "heterogeneous_population_distribution",
-        "sentimental_weight_alpha"
+        "heterogeneous_population_distribution"
       ],
-      "semantic_resolution_classes": [
-        "hybrid_model_and_strategy_evidence"
-      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "population_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=heterogeneous_population_distribution,cognitive_interpolation_kappa,sentimental_weight_alpha"
+          "detail": "theory-admissible assumption ids=heterogeneous_population_distribution,cognitive_interpolation_kappa,finite_population_regular_aggregation,matched_cognitive_increasing_differences,two_type_precision_valley_reduced_form"
         },
         {
-          "id": "aggregate_tail_and_continuity",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "The aggregate welfare objective needs exact continuity, tail, and distributional hypotheses."
-        },
-        {
-          "id": "exact_principal_optimum",
+          "id": "exact_finite_population_principal_optimum",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

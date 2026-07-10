@@ -7,10 +7,9 @@ import BlackwellDilemma.Infrastructure.EVTBoundedDecreasing
 /-!
 # Argmax existence atoms (Cat 1)
 
-This file extends `EVTBoundedDecreasing.lean` with **argmax existence
-atoms** for the paper's `aggregate_optimum_exists_per_G_OPEN` and
-`principal_interior_maximum_exists`-style claims (paper
-Proposition `prop:principal-optimum`).
+This file extends `EVTBoundedDecreasing.lean` with reusable argmax
+existence lemmas for nonnegative half-line objectives. The unified
+principal module applies them to an actual finite weighted aggregate.
 
 ## Main results
 
@@ -23,13 +22,12 @@ Proposition `prop:principal-optimum`).
 * `argmax_value_unique_iff` — uniqueness condition for argmax via
   strict-concavity-style assumption.
 
-## Bridge to paper carriers
+## Use in the paper proof
 
-The paper's `aggregateOptimalBeta G` and `principalOptimalBeta` are
-typically defined as `argmax_β` of welfare functions on `[0, ∞)`. The
-existence proof requires the `EVTBoundedDecreasing` EVT + paper's
-eventually-decreasing hypothesis. This module provides the operational
-atoms.
+`UnifiedPrincipalOptimum.lean` first proves continuity and common-tail
+dominance for a finite weighted aggregate, then applies the theorem below
+to obtain a global maximizer. A witnessed strict improvement over zero
+forces that maximizer to be positive.
 
 ## Cat 1 status
 
@@ -53,8 +51,7 @@ open Set
     by its value at some `N ≥ 0` attains its supremum.
 
     This is `exists_maxOn_of_continuous_eventually_decreasing` from
-    `EVTBoundedDecreasing.lean` re-stated in argmax-language for
-    operational paper-bridge consumption. -/
+    `EVTBoundedDecreasing.lean` re-stated in argmax language. -/
 theorem argmax_exists_of_continuous_eventually_decreasing
     (f : ℝ → ℝ) (N : ℝ) (hN : 0 ≤ N)
     (hf_cont : ContinuousOn f (Set.Ici 0))

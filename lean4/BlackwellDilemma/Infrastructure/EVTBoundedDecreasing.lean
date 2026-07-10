@@ -12,11 +12,10 @@ A continuous function `f : ℝ → ℝ` that is bounded on `[0, ∞)` and
 eventually decreasing (`∃ N, ∀ x ≥ N, f x ≤ f N`) attains its supremum
 on `[0, ∞)`.
 
-This is the missing piece for paper claims of the form
-`∃ β_max ≥ 0, ∀ β, f β ≤ f β_max` (e.g. Blackwell-Dilemma's
-`principal_interior_maximum_exists` and `aggregate_optimum_exists_per_G`)
-when `f` is paper-known to be continuous + bounded + eventually
-decreasing.
+This supplies the noncompact extreme-value step used by
+`UnifiedPrincipalOptimum.finitePopulation_positive_argmax_exists` once
+continuity and a common tail-dominance witness have been derived from the
+finite aggregate.
 
 ## Main result
 

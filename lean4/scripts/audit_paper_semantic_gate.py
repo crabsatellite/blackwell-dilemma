@@ -136,6 +136,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedThresholdAlpha",
     "BlackwellDilemma.UnifiedSupermodularCognition",
     "BlackwellDilemma.UnifiedSentimentalImmunity",
+    "BlackwellDilemma.UnifiedPrincipalOptimum",
 }
 model_only_imports = [
     module for module in ledger_imports if module not in allowed_ledger_imports

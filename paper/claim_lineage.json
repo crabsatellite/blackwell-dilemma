@@ -287,12 +287,18 @@
       "baseline_kind": "proposition",
       "baseline_title": "Interior Optimal Precision for Heterogeneous Populations",
       "baseline_statement_sha256": "3e3a34f3f3138674d24a324b4ef9e6c6eea837bb9c11fb637ef704bdd623bcd0",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:principal-optimum"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the principal's interior-optimum, cognitive-comparative-static, and bifurcation insights under exact finite-population conditions, while removing the invalid implications from reversal support, FOSD alone, and threshold mass alone.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:principal-optimum",
+          "id": "exact_finite_population_principal_optimum"
+        }
+      ]
     },
     {
       "baseline_label": "prop:canonical",

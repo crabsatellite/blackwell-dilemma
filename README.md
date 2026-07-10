@@ -13,20 +13,20 @@ The status below is evaluated from the 26-claim Lean ledger. Only a proof term
 of a claim's complete stored proposition closes that claim.
 
 ```text
-total=26 closed=20 partial=0 conditional=3 refuted-encoding=0 unformalized=3
+total=26 closed=21 partial=0 conditional=3 refuted-encoding=0 unformalized=2
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=23
-publication_obligations_passed=66/70
-model_assumptions_admissible=19/19
+publication_evidence_closed=24
+publication_obligations_passed=67/69
+model_assumptions_admissible=22/22
 research_claims_preserved=26/26
-claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:6,strengthened_assumptions:12,unchanged:3
-model_assumptions_theory_referenced=9/19
-model_assumption_provenance=benchmark_definition:2,paper_definition:6,paper_reduced_form:6,published_model_adaptation:1,standard_theory:3,tractability_normalization:1
+claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:6,strengthened_assumptions:13,unchanged:2
+model_assumptions_theory_referenced=10/22
+model_assumption_provenance=benchmark_definition:3,paper_definition:8,paper_reduced_form:6,published_model_adaptation:1,standard_theory:3,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=3/26
 mathematical_routes=model_internal_exact:20,reference_conditional:6
-semantic_gap_routes=hybrid_model_and_strategy_evidence:1
+semantic_gap_routes=
 ```
 
 See [`lean4/README.md`](lean4/README.md) for the generated claim roster and

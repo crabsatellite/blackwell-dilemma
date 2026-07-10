@@ -122,11 +122,10 @@
     },
     {
       "label": "prop:principal-optimum",
-      "statement_sha256": "3e3a34f3f3138674d24a324b4ef9e6c6eea837bb9c11fb637ef704bdd623bcd0",
+      "statement_sha256": "85b3ca3a66726607e1ca82b0aab0d32d953cb6ad280fe803deaa9e0575d0f1b1",
       "obligations": [
-        {"id": "population_model", "type": "model_assumptions", "ids": ["heterogeneous_population_distribution", "cognitive_interpolation_kappa", "sentimental_weight_alpha"]},
-        {"id": "aggregate_tail_and_continuity", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The aggregate welfare objective needs exact continuity, tail, and distributional hypotheses."},
-        {"id": "exact_principal_optimum", "type": "lean_exact"}
+        {"id": "population_model", "type": "model_assumptions", "ids": ["heterogeneous_population_distribution", "cognitive_interpolation_kappa", "finite_population_regular_aggregation", "matched_cognitive_increasing_differences", "two_type_precision_valley_reduced_form"]},
+        {"id": "exact_finite_population_principal_optimum", "type": "lean_exact"}
       ]
     },
     {

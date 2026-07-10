@@ -419,7 +419,7 @@ Princeton UP. — synthesis monograph, Theorem 2.6.2. -/
     Topkis 1998 §3.1 supplies the conceptual bridge from the
     mixed-partial criterion to the discrete-difference form; the
     concrete `kappaAgentWelfareSNR` instance is closed downstream
-    (Cognitive.lean / Principal.lean). -/
+    (Cognitive.lean and the unified theorem modules). -/
 theorem gap_topkis_supermodularity :
     ∀ (W : ℝ → ℝ → ℝ),
       (∀ x₁ x₂ y₁ y₂ : ℝ, x₁ ≤ x₂ → y₁ ≤ y₂ →

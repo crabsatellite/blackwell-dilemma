@@ -259,6 +259,51 @@
       "empirical_truth_claimed": false
     },
     {
+      "id": "finite_population_regular_aggregation",
+      "kind": "regularity_condition",
+      "statement": "The principal theorem uses a finite nonnegatively weighted population, continuous individual welfare, one common tail-dominance threshold, and one witnessed positive aggregate improvement over zero precision.",
+      "scope": "Part 1 of Proposition prop:principal-optimum only; reversal-regime membership by itself is not substituted for these conditions.",
+      "role": "States exactly the regularity and strict-improvement inputs needed for a positive global maximizer on the noncompact precision domain.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "For each proposed population, verify continuity, a common finite tail threshold, and an explicit positive-precision welfare improvement before invoking the interior-optimum conclusion."
+      },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "matched_cognitive_increasing_differences",
+      "kind": "regularity_condition",
+      "statement": "For matched low- and high-cognition populations, every agent's welfare increment from beta1 to beta2 is weakly larger in the high-cognition population whenever zero <= beta1 <= beta2, and the two aggregate maximizers are unique.",
+      "scope": "Part 2 of Proposition prop:principal-optimum only; no FOSD-only or approximate-noise claim is made.",
+      "role": "Provides the exact finite-increment single-crossing premise from which monotone optimal precision follows.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Check the four-value increment inequality over the policy interval and verify uniqueness or adopt an explicit extremal-maximizer selection rule."
+      },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "references", "reference_ids": ["topkis1978"]},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "two_type_precision_valley_reduced_form",
+      "kind": "structural_definition",
+      "statement": "The regime-bifurcation possibility result uses an equal-weight two-type reduced form with equipped welfare beta and reversal-prone welfare max(4 - 4 beta, 0).",
+      "scope": "Part 3 of Proposition prop:principal-optimum only; it is a constructive possibility witness, not an IDP-wide implication of threshold mass.",
+      "role": "Separates the exact existence of a strict aggregate precision valley from unsupported claims that every mixed-threshold population has one.",
+      "testability": {
+        "kind": "model_boundary",
+        "criterion": "The witness establishes possibility only; applications must replace both type-welfare schedules and recheck the three-point inequalities."
+      },
+      "provenance": "benchmark_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
       "id": "bayesian_observes_topology",
       "kind": "structural_definition",
       "statement": "The Bayesian benchmark observes the realized percolation state before optimizing a traversal strategy.",
