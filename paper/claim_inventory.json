@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "8554035c3999521fbb690fc9c58d5293e7a6c1d35b746d42ef4f6cf3daf91593",
+  "manuscript_sha256": "6bb8071a8a4f8382856c1cd53fe00aca41a75f670f03aaa42d3b7d2190551581",
   "claims": [
     {
       "line": 252,
@@ -134,7 +134,7 @@
       "kind": "proposition",
       "label": "prop:p-monotonicity-five-state",
       "title": "$p$-Monotonicity on the 5-State Instance",
-      "statement_sha256": "33797edc46b87ff62f3551ea4f787c10bf2b48b268b05768fb140a57bf50f4d2"
+      "statement_sha256": "e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c"
     },
     {
       "line": 911,

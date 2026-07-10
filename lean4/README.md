@@ -16,7 +16,7 @@ paper_claims_refuted_encoding=0
 paper_claims_unformalized=21
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 publication_evidence_closed=0
-publication_obligations_passed=38/74
+publication_obligations_passed=40/75
 model_assumptions_admissible=12/12
 ```
 

@@ -1,32 +1,32 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "8554035c3999521fbb690fc9c58d5293e7a6c1d35b746d42ef4f6cf3daf91593",
+  "manuscript_sha256": "6bb8071a8a4f8382856c1cd53fe00aca41a75f670f03aaa42d3b7d2190551581",
   "summary": {
     "claims_total": 26,
     "strict_kernel_closed": 0,
     "publication_evidence_closed": 0,
     "model_assumptions_total": 12,
     "model_assumptions_admissible": 12,
-    "obligations_total": 74,
-    "obligations_passed": 38,
+    "obligations_total": 75,
+    "obligations_passed": 40,
     "obligations_by_type": {
-      "external_references": 8,
-      "lean_conditional": 8,
-      "lean_exact": 18,
+      "external_references": 9,
+      "lean_conditional": 9,
+      "lean_exact": 17,
       "model_assumptions": 25,
-      "statement_hash": 5,
-      "unresolved_semantics": 10
+      "statement_hash": 6,
+      "unresolved_semantics": 9
     },
     "passed_by_type": {
-      "external_references": 8,
+      "external_references": 9,
       "model_assumptions": 25,
-      "statement_hash": 5
+      "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 8,
-      "lean_exact": 18,
-      "unresolved_semantics": 10
+      "lean_conditional": 9,
+      "lean_exact": 17,
+      "unresolved_semantics": 9
     }
   },
   "claims": [
@@ -500,7 +500,7 @@
     },
     {
       "label": "prop:p-monotonicity-five-state",
-      "statement_sha256": "33797edc46b87ff62f3551ea4f787c10bf2b48b268b05768fb140a57bf50f4d2",
+      "statement_sha256": "e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c",
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
@@ -512,16 +512,22 @@
           "detail": "admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,cognitive_interpolation_kappa"
         },
         {
-          "id": "probability_domain_scope",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "The theorem must state and prove the correct p-domain without junk-value extensions."
+          "id": "blackwell_within_branch_premise",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=blackwell1953"
         },
         {
-          "id": "exact_p_monotonicity",
-          "type": "lean_exact",
+          "id": "repaired_probability_domain_and_kappa_boundary",
+          "type": "statement_hash",
+          "passed": true,
+          "detail": "statement_sha256=e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c"
+        },
+        {
+          "id": "conditional_p_monotonicity",
+          "type": "lean_conditional",
           "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
         }
       ]
     },

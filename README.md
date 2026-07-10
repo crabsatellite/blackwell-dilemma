@@ -16,7 +16,7 @@ of a claim's complete stored proposition closes that claim.
 total=26 closed=0 partial=5 conditional=0 refuted-encoding=0 unformalized=21
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 publication_evidence_closed=0
-publication_obligations_passed=38/74
+publication_obligations_passed=40/75
 model_assumptions_admissible=12/12
 ```
 
