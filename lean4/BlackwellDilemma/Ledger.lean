@@ -16,6 +16,7 @@ import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
 import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
+import BlackwellDilemma.Infrastructure.StandardNormalBridgeProbability
 import BlackwellDilemma.Infrastructure.TrapTreeBernoulliWelfare
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
 import BlackwellDilemma.Infrastructure.VanishingGiantLoss
@@ -133,6 +134,15 @@ def TopoClusterPartialCore : Prop :=
 theorem topoClusterPartialCore_proved : TopoClusterPartialCore := by
   exact ⟨topologicalLossOrderStatisticsAlgebraCore_proved,
     BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved⟩
+
+def ErrorCompoundingPartialCore : Prop :=
+  BlackwellDilemma.Infrastructure.ErrorCompoundingKernelBundle /\
+    BlackwellDilemma.Infrastructure.GaussianBridgeProbabilityPrinciple
+
+theorem errorCompoundingPartialCore_proved : ErrorCompoundingPartialCore := by
+  exact
+    ⟨BlackwellDilemma.Infrastructure.errorCompoundingKernelBundle_proved,
+      BlackwellDilemma.Infrastructure.gaussianBridgeProbabilityPrinciple_proved⟩
 
 /-! ## Manuscript inventory
 
@@ -385,10 +395,10 @@ def claimErrorCompounding : PaperClaim :=
     kind := .proposition
     sourceLine := 1050
     route := .local
-    blocker := "The finite Bernoulli choice model proves Parts 1-4 and the displayed depth closed form is cofinal; still derive the Gaussian bridge probability and identify cStar from the actual posterior threshold equation."
+    blocker := "The finite Bernoulli model proves Parts 1-4, the displayed depth form is cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still identify that probability and cStar from the actual posterior/policy threshold equation."
     evidence := .partialProof
-      BlackwellDilemma.Infrastructure.ErrorCompoundingKernelBundle
-      BlackwellDilemma.Infrastructure.errorCompoundingKernelBundle_proved }
+      ErrorCompoundingPartialCore
+      errorCompoundingPartialCore_proved }
 
 def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"
