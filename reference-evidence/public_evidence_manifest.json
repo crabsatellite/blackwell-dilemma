@@ -124,6 +124,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedBayesianImmunity.lean"
     },
     {
+      "id": "unified_complementarity_kernel",
+      "kind": "machine_gate",
+      "role": "Concrete post-optimum greedy-welfare derivative sign and exact Bayesian-greedy population mixed derivative, conditional only on the cited Blackwell comparison and explicit Bayesian differentiability at the evaluated precision.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedComplementarity.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -417,6 +424,74 @@
       ]
     },
     {
+      "id": "information_knowledge_complementarity_gate",
+      "category": "reference_conditional_exact_population_calculus",
+      "source_cards": [
+        "blackwell1953",
+        "unified_interior_optimum_kernel",
+        "unified_bayesian_immunity_kernel",
+        "unified_complementarity_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "greedy_post_optimum_derivative",
+          "path": "lean4/BlackwellDilemma/UnifiedInterior.lean",
+          "contains": [
+            "def greedyWelfare",
+            "theorem greedyWelfare_hasDerivAt_negative_after_uniqueMinimum"
+          ]
+        },
+        {
+          "id": "complementarity_module",
+          "path": "lean4/BlackwellDilemma/UnifiedComplementarity.lean",
+          "contains": [
+            "def populationWelfare",
+            "theorem populationWelfare_hasDerivAt_beta",
+            "theorem populationWelfare_hasMixedDerivAt",
+            "theorem populationWelfare_mixedDerivative_positive",
+            "def ComplementarityBundle",
+            "theorem complementarityBundle_of_blackwell",
+            "def ComplementarityClaim",
+            "theorem complementarityClaim_from_blackwell"
+          ]
+        },
+        {
+          "id": "complementarity_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.Complementarity.ComplementarityClaim",
+            "BlackwellDilemma.Complementarity.complementarityClaim_from_blackwell"
+          ]
+        },
+        {
+          "id": "complementarity_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.FiveStateRouting.greedyWelfare_hasDerivAt_negative_after_uniqueMinimum",
+            "#print axioms BlackwellDilemma.Complementarity.populationWelfare_hasDerivAt_beta",
+            "#print axioms BlackwellDilemma.Complementarity.populationWelfare_hasMixedDerivAt",
+            "#print axioms BlackwellDilemma.Complementarity.populationWelfare_mixedDerivative_positive",
+            "#print axioms BlackwellDilemma.Complementarity.complementarityClaim_from_blackwell"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "complementarity_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -557,8 +632,8 @@
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=2",
             "publication_model_assumption_provenance_tractability_normalization=1",
-            "publication_mathematical_route_model_internal_exact=18",
-            "publication_mathematical_route_reference_conditional=8",
+            "publication_mathematical_route_model_internal_exact=17",
+            "publication_mathematical_route_reference_conditional=9",
             "publication_semantic_resolution_existing_theory_scope=2",
             "publication_semantic_resolution_hybrid_model_and_strategy_evidence=5",
             "publication_semantic_resolution_paper_model_encoding=2"

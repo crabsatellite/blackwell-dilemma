@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "6e18b99c2cbe374e327f78b87b9c305de0a08ecec7b77a0a4872b43eeb2ea531",
+  "manuscript_sha256": "ad82c399d255aec3732ad7a7eb30475a69a276b289e5bf49630d1389567bdfea",
   "claims": [
     {
       "line": 262,
@@ -148,38 +148,38 @@
       "kind": "proposition",
       "label": "prop:complementarity",
       "title": "Information-Knowledge Complementarity",
-      "statement_sha256": "1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6"
+      "statement_sha256": "7fd19df919e5015f6b3a129e7a4a56ff6c08c195566381518db56101ad44e647"
     },
     {
-      "line": 1022,
+      "line": 1027,
       "kind": "proposition",
       "label": "prop:bayesian-naive-five-state",
       "title": "Bayesian-Naive Threshold on the 5-State Instance",
       "statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43"
     },
     {
-      "line": 1061,
+      "line": 1066,
       "kind": "theorem",
       "label": "thm:general-tree",
       "title": "Non-Monotonicity on General Graphs",
       "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8"
     },
     {
-      "line": 1110,
+      "line": 1115,
       "kind": "proposition",
       "label": "prop:error-compounding",
       "title": "Error Compounding",
       "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52"
     },
     {
-      "line": 1147,
+      "line": 1152,
       "kind": "corollary",
       "label": "cor:er-phase",
       "title": "Phase Transition on Erdos--Renyi Graphs",
       "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b"
     },
     {
-      "line": 1161,
+      "line": 1166,
       "kind": "corollary",
       "label": "cor:power-law",
       "title": "Application: Power-Law Networks",

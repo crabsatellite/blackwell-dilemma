@@ -102,6 +102,63 @@ theorem uniqueInteriorMinimum :
     have : beta = betaUnique := hUnique beta hBeta (hEqual ▸ hL)
     exact this.trans hEqual.symm
 
+/-- Greedy welfare on the open five-state benchmark, normalized as the
+    negative of terminal welfare loss. -/
+noncomputable def greedyWelfare (beta : Real) : Real :=
+  -expectedLoss beta
+
+/-- The unique loss minimizer is followed by a strictly negative greedy-
+    welfare derivative at every larger precision. This supplies the actual
+    derivative sign used by the manuscript's complementarity proposition,
+    rather than inferring monotonicity from uniqueness alone. -/
+theorem greedyWelfare_hasDerivAt_negative_after_uniqueMinimum :
+    exists betaStar : Real,
+      0 < betaStar /\
+        forall beta : Real, betaStar < beta ->
+          exists dGreedy : Real,
+            HasDerivAt greedyWelfare dGreedy beta /\ dGreedy < 0 := by
+  rcases uniqueInteriorMinimum with ⟨betaStar, hBetaStar, hMinimum, _hUnique⟩
+  have hMinimumL : forall beta : Real, 0 < beta ->
+      L betaStar 0 <= L beta 0 := by
+    intro beta hBeta
+    simpa [expectedLoss_eq_L_zero_p, L_zero_p_eq_L_zero] using
+      hMinimum beta hBeta.le
+  refine ⟨betaStar, hBetaStar, ?_⟩
+  intro beta hAfter
+  have hBeta : 0 < beta := lt_trans hBetaStar hAfter
+  have hRightStar : L_rightBranch 0 betaStar := by
+    exact L_global_minimizer_not_left_branch 0 (by norm_num)
+      hBetaStar hMinimumL
+  have hPhi : Phi_B betaStar <= Phi_B beta :=
+    Phi_B_monotone hBetaStar hAfter.le
+  have hRightBeta : L_rightBranch 0 beta := by
+    dsimp [L_rightBranch] at hRightStar ⊢
+    nlinarith
+  have hResidualZero : L_balanceResidual 0 betaStar = 0 := by
+    have hBalance :=
+      L_global_minimizer_first_order_balance 0 hBetaStar hMinimumL
+    simpa [L_firstOrderBalance] using hBalance
+  have hResidualPositive : 0 < L_balanceResidual 0 beta :=
+    L_balanceResidual_singleCrossingOn_from_core
+      0 le_rfl (by norm_num [p_1]) betaStar beta hBetaStar hBeta
+      hRightStar hRightBeta hAfter hResidualZero
+  have hDominance :
+      (1 - P_trap beta) * (9/10 : Real) * (1 - 0) * Phi_BDerivValue beta <
+        P_trapDerivValue beta *
+          ((9/10 : Real) * (1 - 0) * Phi_B beta - (1/2 : Real)) := by
+    unfold L_balanceResidual at hResidualPositive
+    linarith
+  obtain ⟨dLoss, hLossDerivative, hLossPositive⟩ :=
+    L_hasDerivAt_positive_of_right_branch_dominance
+      0 hBeta hDominance
+  refine ⟨-dLoss, ?_, by linarith⟩
+  have hNegated := hLossDerivative.neg
+  have hWelfareCarrier : greedyWelfare = (fun b : Real => -L b 0) := by
+    funext b
+    rw [greedyWelfare, expectedLoss_eq_L_zero_p, L_zero_p_eq_L_zero]
+  rw [hWelfareCarrier]
+  exact hNegated
+
 /-- Exact machine target for the repaired manuscript Proposition
     `prop:interior-optimum`. Numerical localization is gated separately. -/
 def InteriorOptimumClaim : Prop :=
@@ -116,9 +173,15 @@ def InteriorOptimumClaim : Prop :=
     (forall beta : Real, 0 <= beta ->
       expectedLoss betaStar <= expectedLoss beta) /\
     (forall beta : Real, 0 < beta ->
-      expectedLoss beta <= expectedLoss betaStar -> beta = betaStar))
+      expectedLoss beta <= expectedLoss betaStar -> beta = betaStar)) /\
+  (exists betaStar : Real,
+    0 < betaStar /\
+      forall beta : Real, betaStar < beta ->
+        exists dGreedy : Real,
+          HasDerivAt greedyWelfare dGreedy beta /\ dGreedy < 0)
 
 theorem interiorOptimumClaim_proved : InteriorOptimumClaim := by
-  exact ⟨expectedLoss_formula, routeProbability_sum_one, uniqueInteriorMinimum⟩
+  exact ⟨expectedLoss_formula, routeProbability_sum_one, uniqueInteriorMinimum,
+    greedyWelfare_hasDerivAt_negative_after_uniqueMinimum⟩
 
 end BlackwellDilemma.FiveStateRouting

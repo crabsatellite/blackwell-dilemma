@@ -187,11 +187,12 @@
     },
     {
       "label": "prop:complementarity",
-      "statement_sha256": "1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6",
+      "statement_sha256": "7fd19df919e5015f6b3a129e7a4a56ff6c08c195566381518db56101ad44e647",
       "obligations": [
         {"id": "repaired_policy_scope", "type": "statement_hash"},
+        {"id": "blackwell_premise", "type": "external_references", "ids": ["blackwell1953"]},
         {"id": "mixture_model", "type": "model_assumptions", "ids": ["bayesian_observes_topology", "greedy_static_reward_policy"]},
-        {"id": "exact_cross_partial_from_agent_welfare", "type": "lean_exact"}
+        {"id": "conditional_cross_partial_from_agent_welfare", "type": "lean_conditional"}
       ]
     },
     {

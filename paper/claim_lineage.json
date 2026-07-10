@@ -347,12 +347,16 @@
       "publication_labels": [
         "prop:complementarity"
       ],
-      "research_target": "Preserve information-knowledge complementarity on the explicit policy mixture while requiring the actual welfare carrier to satisfy the stated increasing-differences premise.",
+      "research_target": "Preserve information-knowledge complementarity on the explicit Bayesian-greedy population mixture, with Bayesian differentiability stated and the concrete greedy post-optimum derivative sign machine derived.",
       "machine_witnesses": [
         {
           "type": "publication_obligation",
           "claim_label": "prop:complementarity",
-          "id": "exact_cross_partial_from_agent_welfare"
+          "id": "conditional_cross_partial_from_agent_welfare"
+        },
+        {
+          "type": "evidence_check",
+          "id": "complementarity_kernel_surface"
         }
       ]
     },

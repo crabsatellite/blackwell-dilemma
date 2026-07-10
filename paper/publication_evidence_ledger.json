@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "6e18b99c2cbe374e327f78b87b9c305de0a08ecec7b77a0a4872b43eeb2ea531",
+  "manuscript_sha256": "ad82c399d255aec3732ad7a7eb30475a69a276b289e5bf49630d1389567bdfea",
   "summary": {
     "claims_total": 26,
     "strict_kernel_closed": 7,
-    "publication_evidence_closed": 8,
+    "publication_evidence_closed": 9,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 13,
@@ -23,33 +23,33 @@
       "standard_theory": 2,
       "tractability_normalization": 1
     },
-    "obligations_total": 75,
-    "obligations_passed": 48,
+    "obligations_total": 76,
+    "obligations_passed": 50,
     "obligations_by_type": {
       "computational_certificate": 1,
-      "external_references": 8,
-      "lean_conditional": 8,
-      "lean_exact": 18,
+      "external_references": 9,
+      "lean_conditional": 9,
+      "lean_exact": 17,
       "model_assumptions": 25,
       "statement_hash": 6,
       "unresolved_semantics": 9
     },
     "passed_by_type": {
       "computational_certificate": 1,
-      "external_references": 8,
-      "lean_conditional": 1,
+      "external_references": 9,
+      "lean_conditional": 2,
       "lean_exact": 7,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 7,
-      "lean_exact": 11,
+      "lean_exact": 10,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
-      "model_internal_exact": 18,
-      "reference_conditional": 8
+      "model_internal_exact": 17,
+      "reference_conditional": 9
     },
     "model_routes": {
       "none": 1,
@@ -1041,12 +1041,12 @@
     },
     {
       "label": "prop:complementarity",
-      "statement_sha256": "1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6",
-      "lean_state": "unformalized",
+      "statement_sha256": "7fd19df919e5015f6b3a129e7a4a56ff6c08c195566381518db56101ad44e647",
+      "lean_state": "conditional",
       "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
-      "mathematical_route": "model_internal_exact",
+      "mathematical_route": "reference_conditional",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "bayesian_observes_topology",
@@ -1061,7 +1061,13 @@
           "id": "repaired_policy_scope",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6"
+          "detail": "statement_sha256=7fd19df919e5015f6b3a129e7a4a56ff6c08c195566381518db56101ad44e647"
+        },
+        {
+          "id": "blackwell_premise",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=blackwell1953"
         },
         {
           "id": "mixture_model",
@@ -1070,10 +1076,10 @@
           "detail": "theory-admissible assumption ids=bayesian_observes_topology,greedy_static_reward_policy"
         },
         {
-          "id": "exact_cross_partial_from_agent_welfare",
-          "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "id": "conditional_cross_partial_from_agent_welfare",
+          "type": "lean_conditional",
+          "passed": true,
+          "detail": "Lean state is conditional; publication closure requires a kernel-checked conditional or exact claim"
         }
       ]
     },
