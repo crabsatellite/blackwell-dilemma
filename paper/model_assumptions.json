@@ -232,7 +232,7 @@
       "id": "bayesian_observes_topology",
       "kind": "structural_definition",
       "statement": "The Bayesian benchmark observes the realized percolation state before optimizing a traversal strategy.",
-      "scope": "Bayesian-immunity and information-knowledge complementarity claims.",
+      "scope": "Conditional-reduction, Bayesian-immunity, and information-knowledge complementarity claims.",
       "role": "Defines the full-structural-knowledge benchmark.",
       "testability": {
         "kind": "model_boundary",

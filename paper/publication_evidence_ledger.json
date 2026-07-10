@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "0a07214176a4ec65237913cb41a4a2e28951ccf21cb98124943beae89d85ddaf",
+  "manuscript_sha256": "85d25b9df5253c256ffa9cc43bd1a25925096bce5efa6bab80d94888ed886cf4",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 12,
-    "publication_evidence_closed": 14,
-    "empirical_publication_closed": 1,
-    "claims_model_evidence_closed": 1,
+    "strict_kernel_closed": 13,
+    "publication_evidence_closed": 15,
+    "empirical_publication_closed": 2,
+    "claims_model_evidence_closed": 2,
     "model_assumptions_total": 17,
     "model_assumptions_admissible": 17,
     "model_assumptions_theory_admissible": 17,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 73,
-    "obligations_passed": 55,
+    "obligations_passed": 56,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
@@ -37,13 +37,13 @@
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
-      "lean_conditional": 2,
+      "lean_conditional": 3,
       "lean_exact": 12,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 7,
+      "lean_conditional": 6,
       "lean_exact": 5,
       "unresolved_semantics": 6
     },
@@ -52,8 +52,9 @@
       "reference_conditional": 9
     },
     "model_routes": {
+      "conditional_model_only": 1,
       "none": 1,
-      "real_strategy_evidence_required": 25
+      "real_strategy_evidence_required": 24
     },
     "semantic_gaps_by_resolution_class": {
       "existing_theory_scope": 2,
@@ -479,20 +480,17 @@
     },
     {
       "label": "lem:conditional-reduction",
-      "statement_sha256": "1947a34b744ae6d260d0f5b79e3ce86829f7c007e7bf172cba3524f79ae40a8f",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
-      "empirical_publication_closed": false,
+      "statement_sha256": "0e9c77e27821a1e5417583f3144965f68ea6a663d7cf55c533086912b64e2578",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
+      "empirical_publication_closed": true,
       "mathematical_route": "reference_conditional",
-      "model_route": "real_strategy_evidence_required",
+      "model_route": "conditional_model_only",
       "model_assumption_ids": [
-        "bayesian_observes_topology",
-        "irreversible_no_revisit"
+        "bayesian_observes_topology"
       ],
-      "empirical_model_gaps": [
-        "irreversible_no_revisit"
-      ],
+      "empirical_model_gaps": [],
       "semantic_resolution_classes": [],
       "obligations": [
         {
@@ -505,13 +503,13 @@
           "id": "idp_conditioning_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=irreversible_no_revisit,bayesian_observes_topology"
+          "detail": "theory-admissible assumption ids=bayesian_observes_topology"
         },
         {
           "id": "conditional_blackwell_specialization",
           "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+          "passed": true,
+          "detail": "Lean state is closed; publication closure requires a kernel-checked conditional or exact claim"
         }
       ]
     },

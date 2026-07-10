@@ -52,10 +52,10 @@
     },
     {
       "label": "lem:conditional-reduction",
-      "statement_sha256": "1947a34b744ae6d260d0f5b79e3ce86829f7c007e7bf172cba3524f79ae40a8f",
+      "statement_sha256": "0e9c77e27821a1e5417583f3144965f68ea6a663d7cf55c533086912b64e2578",
       "obligations": [
         {"id": "blackwell_fixed_problem_premise", "type": "external_references", "ids": ["blackwell1953"]},
-        {"id": "idp_conditioning_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "bayesian_observes_topology"]},
+        {"id": "idp_conditioning_model", "type": "model_assumptions", "ids": ["bayesian_observes_topology"]},
         {"id": "conditional_blackwell_specialization", "type": "lean_conditional"}
       ]
     },

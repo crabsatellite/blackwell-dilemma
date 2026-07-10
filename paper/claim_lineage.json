@@ -111,12 +111,22 @@
       "baseline_kind": "lemma",
       "baseline_title": "Conditional Reduction Under State Augmentation",
       "baseline_statement_sha256": "1947a34b744ae6d260d0f5b79e3ce86829f7c007e7bf172cba3524f79ae40a8f",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "lem:conditional-reduction"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve conditional Blackwell reduction on finite reachable action sets with bounded utility, explicit stochastic garbling, signal-independent topology, and a machine-derived topology-plus-information decomposition.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "lem:conditional-reduction",
+          "id": "conditional_blackwell_specialization"
+        },
+        {
+          "type": "evidence_check",
+          "id": "conditional_reduction_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "thm:dilemma",

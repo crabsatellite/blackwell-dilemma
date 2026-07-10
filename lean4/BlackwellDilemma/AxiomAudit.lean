@@ -83,6 +83,12 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.GreedyReversal.ForcedTwoRouteModel.exists_strict_reversal_pair
 #print axioms BlackwellDilemma.GreedyReversal.wrongnessClaim_proved
 #print axioms BlackwellDilemma.GreedyReversal.dilemmaClaim_proved
+#print axioms BlackwellDilemma.ConditionalReduction.FiniteKernel.comp_assoc
+#print axioms BlackwellDilemma.ConditionalReduction.expectedUtility_garbling_identity
+#print axioms BlackwellDilemma.ConditionalReduction.optimalValue_mono_under_garbling
+#print axioms BlackwellDilemma.ConditionalReduction.reachableExpectation_mono
+#print axioms BlackwellDilemma.ConditionalReduction.total_eq_topology_add_information
+#print axioms BlackwellDilemma.ConditionalReduction.conditionalReductionClaim_proved
 #print axioms BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved
 #print axioms PaperClaim.isClosed_eq_hasFullProof
 #print axioms paperClaims_count

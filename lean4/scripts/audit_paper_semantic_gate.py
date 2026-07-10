@@ -44,6 +44,11 @@ REMOVED_FALSE_CLOSURES = (
     "greedy_welfare_reversal_current_noDiagnosticAssumptions",
     "gap_dilemma_current_noDiagnosticAssumptions",
     "ParametricDilemmaCurrentBridge",
+    "conditionalWelfareOnR",
+    "conditional_subproblem_blackwell_applicable",
+    "gap_conditional_reduction_part_i_from_blackwell",
+    "gap_conditional_reduction_part_i",
+    "gap_conditional_reduction_part_ii",
 )
 
 
@@ -103,6 +108,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedGeneralTree",
     "BlackwellDilemma.UnifiedErrorCompounding",
     "BlackwellDilemma.UnifiedGreedyReversal",
+    "BlackwellDilemma.UnifiedConditionalReduction",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

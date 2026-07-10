@@ -23,6 +23,7 @@ import BlackwellDilemma.UnifiedBayesianNaiveFiveState
 import BlackwellDilemma.UnifiedGeneralTree
 import BlackwellDilemma.UnifiedErrorCompounding
 import BlackwellDilemma.UnifiedGreedyReversal
+import BlackwellDilemma.UnifiedConditionalReduction
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -252,8 +253,10 @@ def claimConditionalReduction : PaperClaim :=
     kind := .lemma
     sourceLine := 409
     route := .mixed
-    blocker := "Needs a genuine Blackwell experiment-ordering theorem on the conditional reachable action set."
-    evidence := .unformalized }
+    blocker := "Finite stochastic-kernel composition proves the fixed-reachable-set Blackwell value comparison; nonnegative averaging, topological invariance, and the topology-plus-information decomposition are machine derived."
+    evidence := .proved
+      BlackwellDilemma.ConditionalReduction.ConditionalReductionClaim
+      BlackwellDilemma.ConditionalReduction.conditionalReductionClaim_proved }
 
 def claimDilemma : PaperClaim :=
   { label := "thm:dilemma"

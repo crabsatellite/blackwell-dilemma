@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "0a07214176a4ec65237913cb41a4a2e28951ccf21cb98124943beae89d85ddaf",
+  "manuscript_sha256": "85d25b9df5253c256ffa9cc43bd1a25925096bce5efa6bab80d94888ed886cf4",
   "claims": [
     {
       "line": 262,
@@ -43,7 +43,7 @@
       "kind": "lemma",
       "label": "lem:conditional-reduction",
       "title": "Conditional Reduction Under State Augmentation",
-      "statement_sha256": "1947a34b744ae6d260d0f5b79e3ce86829f7c007e7bf172cba3524f79ae40a8f"
+      "statement_sha256": "0e9c77e27821a1e5417583f3144965f68ea6a663d7cf55c533086912b64e2578"
     },
     {
       "line": 424,
