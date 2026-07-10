@@ -2011,6 +2011,14 @@
           "contains": [
             "python tools/audit_citation_inventory.py"
           ]
+        },
+        {
+          "id": "citation_inventory_canonical_line_endings",
+          "path": ".gitattributes",
+          "contains": [
+            "paper/references.bib text eol=lf",
+            "paper/citation_inventory.json text eol=lf"
+          ]
         }
       ],
       "checks": [
