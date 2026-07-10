@@ -232,6 +232,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedPhase.lean"
     },
     {
+      "id": "unified_trap_prevalence_kernel",
+      "kind": "machine_gate",
+      "role": "Exact 13-edge square-grid cylinder with exhaustive local support, normalized nonnegative product weights, Uniform reward-window volumes, explicit p^10(1-p)^3/108 mass, and forced static/dynamic ranking reversal.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedTrapPrevalence.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -1135,6 +1142,72 @@
       ]
     },
     {
+      "id": "local_trap_prevalence_gate",
+      "category": "kernel_checked_local_cylinder_probability_and_dynamic_reversal",
+      "source_cards": [
+        "unified_trap_prevalence_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "local_trap_prevalence_module",
+          "path": "lean4/BlackwellDilemma/UnifiedTrapPrevalence.lean",
+          "contains": [
+            "theorem endpoints_injective",
+            "theorem supportNeighbors_at_localVertex",
+            "theorem supportedOpenAdjacent_iff_localOpenGraph",
+            "theorem rewardWindowSet_volume",
+            "theorem localOutcomeWeight_univ_total",
+            "theorem localOutcomeWeight_nonneg",
+            "theorem targetLocalOutcome_weight",
+            "theorem rewardWindows_force_static_dynamic_reversal",
+            "theorem trapPrevalenceClaim_proved"
+          ]
+        },
+        {
+          "id": "local_trap_prevalence_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.TrapPrevalence.TrapPrevalenceClaim",
+            "BlackwellDilemma.TrapPrevalence.trapPrevalenceClaim_proved"
+          ]
+        },
+        {
+          "id": "local_trap_prevalence_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.TrapPrevalence.rewardWindowSet_volume",
+            "#print axioms BlackwellDilemma.TrapPrevalence.localOutcomeWeight_univ_total",
+            "#print axioms BlackwellDilemma.TrapPrevalence.localOutcomeWeight_nonneg",
+            "#print axioms BlackwellDilemma.TrapPrevalence.targetLocalOutcome_weight",
+            "#print axioms BlackwellDilemma.TrapPrevalence.trapPrevalenceClaim_proved"
+          ]
+        },
+        {
+          "id": "local_trap_prevalence_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"label\": \"prop:trap-prevalence\"",
+            "\"id\": \"exact_z2_local_cylinder_probability_and_dynamic_reversal\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "local_trap_prevalence_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1264,8 +1337,8 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=15",
-            "publication_publication_evidence_closed=18",
+            "publication_strict_kernel_closed=16",
+            "publication_publication_evidence_closed=19",
             "publication_model_assumptions_total=19",
             "publication_model_assumptions_admissible=19",
             "publication_model_assumptions_theory_admissible=19",
@@ -1281,9 +1354,9 @@
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
             "publication_obligations_total=73",
-            "publication_obligations_passed=61",
+            "publication_obligations_passed=62",
             "publication_gap_lean_conditional=3",
-            "publication_gap_lean_exact=5",
+            "publication_gap_lean_exact=4",
             "publication_gap_unresolved_semantics=4",
             "publication_mathematical_route_model_internal_exact=19",
             "publication_mathematical_route_reference_conditional=7",
@@ -1818,8 +1891,8 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=15",
-            "paper_claims_partial=2",
+            "paper_claims_closed=16",
+            "paper_claims_partial=1",
             "paper_claims_conditional=3",
             "paper_claims_refuted_encoding=0",
             "paper_claims_unformalized=6",

@@ -9,15 +9,15 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=15
-paper_claims_partial=2
+paper_claims_closed=16
+paper_claims_partial=1
 paper_claims_conditional=3
 paper_claims_refuted_encoding=0
 paper_claims_unformalized=6
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=18
-publication_obligations_passed=61/73
+publication_evidence_closed=19
+publication_obligations_passed=62/73
 model_assumptions_admissible=19/19
 research_claims_preserved=26/26
 claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:5,strengthened_assumptions:9,unchanged:7
@@ -39,7 +39,7 @@ semantic_gap_routes=hybrid_model_and_strategy_evidence:3,paper_model_encoding:1
 | `lem:conditional-reduction` | lemma | closed | mixed | Conditional Reduction Under State Augmentation |
 | `thm:dilemma` | theorem | closed | semantic-repair | Welfare Non-Monotonicity Under Endogenous Feasibility |
 | `thm:phase` | theorem | conditional | mixed | Connectivity Phase and Conditional Welfare Regimes at $p_c$ |
-| `prop:trap-prevalence` | proposition | partial | local | Generic Trap Prevalence |
+| `prop:trap-prevalence` | proposition | closed | local | Generic Trap Prevalence |
 | `thm:cognitive-threshold` | theorem | partial | semantic-repair | Characterization of the Blackwell Regime |
 | `prop:threshold-alpha` | proposition | unformalized | local | Cognitive Threshold Increases with Instrumental Rationality |
 | `prop:supermodular` | proposition | unformalized | mixed | Supermodular Complementarity |

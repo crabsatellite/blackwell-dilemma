@@ -80,11 +80,11 @@
     },
     {
       "label": "prop:trap-prevalence",
-      "statement_sha256": "6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6",
+      "statement_sha256": "6abc5377f4b026b9d03fb94c44de417b9d0f0b544363ffb189bbcec9830121f2",
       "obligations": [
         {"id": "repaired_p_zero_and_local_scope", "type": "statement_hash"},
         {"id": "local_trap_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "independent_bond_blocking", "iid_uniform_rewards"]},
-        {"id": "exact_local_event_to_dynamic_reversal", "type": "lean_exact"}
+        {"id": "exact_z2_local_cylinder_probability_and_dynamic_reversal", "type": "lean_exact"}
       ]
     },
     {

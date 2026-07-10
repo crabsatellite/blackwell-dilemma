@@ -106,7 +106,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedInformationDecay",
     "BlackwellDilemma.UnifiedTopoCluster",
     "BlackwellDilemma.UnifiedPhase",
-    "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
+    "BlackwellDilemma.UnifiedTrapPrevalence",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",
     "BlackwellDilemma.Infrastructure.SeparatedBlockPlacements",

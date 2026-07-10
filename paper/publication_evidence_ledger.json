@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "09ddd877ee935f1a11d57b8dfbaee92628c1bcd1823e6a1faf8006ed80f47b7d",
+  "manuscript_sha256": "6a1a11b28ae29d5f40bc6df859f22a5a269191a737f66d7b00140e7de7073694",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 15,
-    "publication_evidence_closed": 18,
+    "strict_kernel_closed": 16,
+    "publication_evidence_closed": 19,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
     "model_assumptions_total": 19,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 73,
-    "obligations_passed": 61,
+    "obligations_passed": 62,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
@@ -38,13 +38,13 @@
       "computational_certificate": 1,
       "external_references": 11,
       "lean_conditional": 4,
-      "lean_exact": 14,
+      "lean_exact": 15,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 3,
-      "lean_exact": 5,
+      "lean_exact": 4,
       "unresolved_semantics": 4
     },
     "mathematical_routes": {
@@ -627,10 +627,10 @@
     },
     {
       "label": "prop:trap-prevalence",
-      "statement_sha256": "6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6",
-      "lean_state": "partial",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "6abc5377f4b026b9d03fb94c44de417b9d0f0b544363ffb189bbcec9830121f2",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
@@ -649,7 +649,7 @@
           "id": "repaired_p_zero_and_local_scope",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6"
+          "detail": "statement_sha256=6abc5377f4b026b9d03fb94c44de417b9d0f0b544363ffb189bbcec9830121f2"
         },
         {
           "id": "local_trap_model",
@@ -658,10 +658,10 @@
           "detail": "theory-admissible assumption ids=irreversible_no_revisit,independent_bond_blocking,iid_uniform_rewards"
         },
         {
-          "id": "exact_local_event_to_dynamic_reversal",
+          "id": "exact_z2_local_cylinder_probability_and_dynamic_reversal",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is partial; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

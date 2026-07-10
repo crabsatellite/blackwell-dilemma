@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "09ddd877ee935f1a11d57b8dfbaee92628c1bcd1823e6a1faf8006ed80f47b7d",
+  "manuscript_sha256": "6a1a11b28ae29d5f40bc6df859f22a5a269191a737f66d7b00140e7de7073694",
   "claims": [
     {
       "line": 262,
@@ -64,7 +64,7 @@
       "kind": "proposition",
       "label": "prop:trap-prevalence",
       "title": "Generic Trap Prevalence",
-      "statement_sha256": "6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6"
+      "statement_sha256": "6abc5377f4b026b9d03fb94c44de417b9d0f0b544363ffb189bbcec9830121f2"
     },
     {
       "line": 523,

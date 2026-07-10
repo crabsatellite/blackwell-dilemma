@@ -80,12 +80,12 @@ theorem trapTreeLocalPatternPositivePrinciple_proved :
     blockingProbability rewardWindowMass depth blockedEdgesPerDepth
     hBlockingPositive hBlockingLessThanOne hRewardPositive
 
-/-- An explicit bounded local subevent for trap prevalence: five prescribed
+/-- An explicit bounded local subevent for trap prevalence: ten prescribed
 blocked edges, three prescribed open edges, and three disjoint reward windows
 of lengths `1/6`, `1/3`, and `1/6`. -/
 noncomputable def immediateTrapLocalPatternLowerBound
     (blockingProbability : Real) : Real :=
-  blockingProbability ^ 5 * (1 - blockingProbability) ^ 3 *
+  blockingProbability ^ 10 * (1 - blockingProbability) ^ 3 *
     ((1 / 6 : Real) * (1 / 3 : Real) * (1 / 6 : Real))
 
 theorem immediateTrapLocalPatternLowerBound_pos

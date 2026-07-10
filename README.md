@@ -13,11 +13,11 @@ The status below is evaluated from the 26-claim Lean ledger. Only a proof term
 of a claim's complete stored proposition closes that claim.
 
 ```text
-total=26 closed=15 partial=2 conditional=3 refuted-encoding=0 unformalized=6
+total=26 closed=16 partial=1 conditional=3 refuted-encoding=0 unformalized=6
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=18
-publication_obligations_passed=61/73
+publication_evidence_closed=19
+publication_obligations_passed=62/73
 model_assumptions_admissible=19/19
 research_claims_preserved=26/26
 claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:5,strengthened_assumptions:9,unchanged:7

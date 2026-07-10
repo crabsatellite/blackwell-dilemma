@@ -27,7 +27,7 @@ import BlackwellDilemma.UnifiedConditionalReduction
 import BlackwellDilemma.UnifiedInformationDecay
 import BlackwellDilemma.UnifiedTopoCluster
 import BlackwellDilemma.UnifiedPhase
-import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
+import BlackwellDilemma.UnifiedTrapPrevalence
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
 import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
@@ -269,10 +269,10 @@ def claimTrapPrevalence : PaperClaim :=
     kind := .proposition
     sourceLine := 493
     route := .local
-    blocker := "The finite edge/reward product mass and ranking reversal are proved; still construct this event on Z2 and prove it is contained in the paper's dynamic-value reversal event."
-    evidence := .partialProof
-      BlackwellDilemma.Infrastructure.TrapPrevalenceLocalKernelBundle
-      BlackwellDilemma.Infrastructure.trapPrevalenceLocalKernelBundle_proved }
+    blocker := "Closed by an exhaustive 13-edge square-grid support, a normalized nonnegative finite product law, exact Uniform reward-window masses, exact p^10(1-p)^3/108 cylinder mass, and the induced static/dynamic ranking reversal."
+    evidence := .proved
+      BlackwellDilemma.TrapPrevalence.TrapPrevalenceClaim
+      BlackwellDilemma.TrapPrevalence.trapPrevalenceClaim_proved }
 
 def claimCognitiveThreshold : PaperClaim :=
   { label := "thm:cognitive-threshold"
