@@ -223,10 +223,10 @@ def claimCognitiveThreshold : PaperClaim :=
     kind := .theorem
     sourceLine := 509
     route := .semanticRepair
-    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 must use fixed p, L -> infinity, and sup over v0."
+    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 still needs a positive-probability local trap event and independent separated translates on the finite torus."
     evidence := .partialProof
-      BlackwellDilemma.Infrastructure.Part6LowerBoundTransferPrinciple
-      BlackwellDilemma.Infrastructure.part6LowerBoundTransferPrinciple_proved }
+      BlackwellDilemma.Infrastructure.Part6AnalyticKernelBundle
+      BlackwellDilemma.Infrastructure.part6AnalyticKernelBundle_proved }
 
 def claimThresholdAlpha : PaperClaim :=
   { label := "prop:threshold-alpha"
