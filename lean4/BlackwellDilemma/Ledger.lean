@@ -384,8 +384,10 @@ def claimPMonotonicityFiveState : PaperClaim :=
     kind := .proposition
     sourceLine := 953
     route := .semanticRepair
-    blocker := "The statement now shares the exact reveal-or-erasure semantics; bind its monotonicity and endpoint sub-bundle as a separate paper claim."
-    evidence := .unformalized }
+    blocker := "The positive-depth reward-precision monotonicity, exact restoring-depth set, right-hand prior limit, finite-precision topology endpoint, strict oracle gap, and iterated oracle limit are kernel proved on the shared reveal-or-erasure carrier."
+    evidence := .proved
+      BlackwellDilemma.FiveStateCognition.RewardPrecisionMonotonicityClaim
+      BlackwellDilemma.FiveStateCognition.rewardPrecisionMonotonicityClaim_proved }
 
 def claimBayesianImmunity : PaperClaim :=
   { label := "thm:bayesian-immunity"

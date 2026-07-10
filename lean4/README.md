@@ -9,15 +9,15 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=6
+paper_claims_closed=7
 paper_claims_partial=4
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=16
+paper_claims_unformalized=15
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=6
-publication_obligations_passed=46/75
+publication_evidence_closed=7
+publication_obligations_passed=47/75
 model_assumptions_admissible=13/13
 research_claims_preserved=26/26
 claim_lineage_relations=counterexample_delimited:4,split_core_and_frontier:4,strengthened_assumptions:3,unchanged:15
@@ -49,7 +49,7 @@ semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5
 | `prop:interior-optimum` | proposition | closed | semantic-repair | Interior Optimum |
 | `prop:two-regime-five-state` | proposition | closed | semantic-repair | Two-Regime Structure of the 5-State Instance |
 | `prop:threshold-five-state` | proposition | closed | semantic-repair | Cognitive Sufficiency on the 5-State Instance |
-| `prop:p-monotonicity-five-state` | proposition | unformalized | semantic-repair | Reward-Precision Monotonicity for Structurally Aware Five-State Agents |
+| `prop:p-monotonicity-five-state` | proposition | closed | semantic-repair | Reward-Precision Monotonicity for Structurally Aware Five-State Agents |
 | `thm:bayesian-immunity` | theorem | unformalized | external-library | Bayesian Immunity |
 | `prop:complementarity` | proposition | unformalized | mixed | Information-Knowledge Complementarity |
 | `prop:bayesian-naive-five-state` | proposition | unformalized | semantic-repair | Bayesian-Naive Threshold on the 5-State Instance |

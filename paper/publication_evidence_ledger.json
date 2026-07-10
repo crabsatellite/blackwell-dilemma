@@ -4,8 +4,8 @@
   "manuscript_sha256": "056c86e30daa3b06d0bdba4700f0a2229ba75067d5fbf73c7ca1ffcb77abd26a",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 6,
-    "publication_evidence_closed": 6,
+    "strict_kernel_closed": 7,
+    "publication_evidence_closed": 7,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 13,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 75,
-    "obligations_passed": 46,
+    "obligations_passed": 47,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 8,
@@ -37,13 +37,13 @@
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 8,
-      "lean_exact": 6,
+      "lean_exact": 7,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 8,
-      "lean_exact": 12,
+      "lean_exact": 11,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
@@ -962,9 +962,9 @@
     {
       "label": "prop:p-monotonicity-five-state",
       "statement_sha256": "1205caa9e04cb585b71efcca8c6590f6f6fff6f37751468905a23a1b9f946c15",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
@@ -995,8 +995,8 @@
         {
           "id": "exact_reward_precision_monotonicity",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

@@ -23,6 +23,10 @@ noncomputable def revealProbability (kappa : Real) : Real :=
 theorem revealProbability_zero : revealProbability 0 = 0 := by
   norm_num [revealProbability]
 
+theorem revealProbability_continuous : Continuous revealProbability := by
+  unfold revealProbability
+  exact continuous_const.sub (Real.continuous_const_rpow (by norm_num))
+
 theorem revealProbability_mem_unitInterval {kappa : Real} (hkappa : 0 <= kappa) :
     0 <= revealProbability kappa /\ revealProbability kappa <= 1 := by
   have hPowPos : 0 < (1 / 2 : Real) ^ kappa :=
@@ -143,6 +147,18 @@ theorem routeBridgeBlocked_mem_unitInterval {kappa p : Real}
   · nlinarith [mul_nonneg hRhoNonneg hPriorNonneg,
       mul_nonneg (sub_nonneg.mpr hRhoLe) (sub_nonneg.mpr hPriorLe)]
 
+theorem routeBridgeOpen_continuous (p : Real) :
+    Continuous (fun kappa => routeBridgeOpen kappa p) := by
+  have hOneMinus : Continuous (fun kappa : Real => 1 - revealProbability kappa) :=
+    continuous_const.sub revealProbability_continuous
+  exact revealProbability_continuous.add (hOneMinus.mul continuous_const)
+
+theorem routeBridgeBlocked_continuous (p : Real) :
+    Continuous (fun kappa => routeBridgeBlocked kappa p) := by
+  have hOneMinus : Continuous (fun kappa : Real => 1 - revealProbability kappa) :=
+    continuous_const.sub revealProbability_continuous
+  exact hOneMinus.mul continuous_const
+
 /-- Expected reward after taking an open bridge: choose between the goal and
     distractor using the Gaussian reward signal. -/
 noncomputable def openBridgeReward (beta : Real) : Real :=
@@ -176,6 +192,23 @@ noncomputable def cognitiveWelfare (beta kappa p : Real) : Real :=
       (routeBridgeBlocked kappa p * (1 / 10 : Real) +
         (1 - routeBridgeBlocked kappa p) * r_A)
 
+theorem cognitiveWelfare_continuous_in_kappa (beta p : Real) :
+    Continuous (fun kappa => cognitiveWelfare beta kappa p) := by
+  have hOpen := routeBridgeOpen_continuous p
+  have hBlocked := routeBridgeBlocked_continuous p
+  have hOpenBranch : Continuous (fun kappa : Real =>
+      routeBridgeOpen kappa p * openBridgeReward beta +
+        (1 - routeBridgeOpen kappa p) * r_A) :=
+    (hOpen.mul continuous_const).add
+      ((continuous_const.sub hOpen).mul continuous_const)
+  have hBlockedBranch : Continuous (fun kappa : Real =>
+      routeBridgeBlocked kappa p * (1 / 10 : Real) +
+        (1 - routeBridgeBlocked kappa p) * r_A) :=
+    (hBlocked.mul continuous_const).add
+      ((continuous_const.sub hBlocked).mul continuous_const)
+  exact (continuous_const.mul hOpenBranch).add
+    (continuous_const.mul hBlockedBranch)
+
 /-- For every structurally aware depth, reward precision weakly improves
     welfare because start-node routing is held fixed. -/
 theorem cognitiveWelfare_mono_in_beta {betaLow betaHigh kappa p : Real}
@@ -207,6 +240,18 @@ theorem cognitiveWelfare_zero (beta p : Real) :
   · simp [cognitiveWelfare, routeBridgeOpen, routeBridgeBlocked,
       revealProbability_zero, priorBridgeWeight, priorAwareWelfare, hp]
     ring
+
+theorem cognitiveWelfare_tendsto_priorAware (beta p : Real) :
+    Tendsto (fun kappa => cognitiveWelfare beta kappa p)
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds (priorAwareWelfare beta p)) := by
+  have hAtZero : Tendsto (fun kappa => cognitiveWelfare beta kappa p)
+      (nhds 0) (nhds (cognitiveWelfare beta 0 p)) :=
+    (cognitiveWelfare_continuous_in_kappa beta p).continuousAt
+  have hRight : Tendsto (fun kappa => cognitiveWelfare beta kappa p)
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds (cognitiveWelfare beta 0 p)) :=
+    hAtZero.mono_left inf_le_left
+  rw [cognitiveWelfare_zero beta p] at hRight
+  exact hRight
 
 /-- Perfect topology information still leaves the finite-precision reward
     decision on an open bridge. -/
@@ -332,6 +377,9 @@ theorem restoringDepths_sInf_zero {p : Real} (hPNonneg : 0 <= p)
   rw [restoringDepths_eq_Ioi hPNonneg hPLe]
   simp
 
+theorem zero_not_mem_restoringDepths (p : Real) : 0 ∉ RestoringDepths p := by
+  simp [RestoringDepths]
+
 structure CognitiveExperimentBundle (p : Real) : Prop where
   blockingProbability : 0 <= p /\ p < 1
   revealAtZero : revealProbability 0 = 0
@@ -355,6 +403,9 @@ structure CognitiveExperimentBundle (p : Real) : Prop where
       cognitiveWelfare betaLow kappa p <= cognitiveWelfare betaHigh kappa p
   priorEndpoint : forall beta : Real,
     cognitiveWelfare beta 0 p = priorAwareWelfare beta p
+  priorLimit : forall beta : Real,
+    Tendsto (fun kappa => cognitiveWelfare beta kappa p)
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds (priorAwareWelfare beta p))
   topologyEndpoint : forall beta : Real,
     Tendsto (fun kappa => cognitiveWelfare beta kappa p)
       atTop (nhds (perfectTopologyFiniteReward beta p))
@@ -378,6 +429,7 @@ theorem cognitiveExperimentBundle (p : Real) (hPNonneg : 0 <= p) (hPLt : p < 1) 
   betaMonotone := fun _ _ _ hBetaLow hBeta hKappa =>
     cognitiveWelfare_mono_in_beta hBetaLow hBeta hKappa hPNonneg hPLt.le
   priorEndpoint := fun beta => cognitiveWelfare_zero beta p
+  priorLimit := fun beta => cognitiveWelfare_tendsto_priorAware beta p
   topologyEndpoint := fun beta => cognitiveWelfare_tendsto_perfectTopology beta p
   oracleEndpoint := perfectTopologyFiniteReward_tendsto_oracle p
   finitePrecisionGap := fun beta => perfectTopologyFiniteReward_lt_oracle beta p hPLt
@@ -393,5 +445,47 @@ def CognitiveFiveStateClaim : Prop :=
 
 theorem cognitiveFiveStateClaim_proved : CognitiveFiveStateClaim :=
   ⟨twoRegimeClaim_proved, cognitiveExperimentBundle⟩
+
+/-- The exact sub-bundle stated separately as manuscript Proposition
+    `prop:p-monotonicity-five-state`. -/
+structure RewardPrecisionMonotonicityBundle (p : Real) : Prop where
+  blockingProbability : 0 <= p /\ p < 1
+  betaMonotone : forall betaLow betaHigh kappa : Real,
+    0 < betaLow -> betaLow <= betaHigh -> 0 < kappa ->
+      cognitiveWelfare betaLow kappa p <= cognitiveWelfare betaHigh kappa p
+  restoringSet : RestoringDepths p = Set.Ioi 0
+  restoringInfimum : sInf (RestoringDepths p) = 0
+  greedyExcluded : 0 ∉ RestoringDepths p
+  priorLimit : forall beta : Real,
+    Tendsto (fun kappa => cognitiveWelfare beta kappa p)
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds (priorAwareWelfare beta p))
+  topologyEndpoint : forall beta : Real,
+    Tendsto (fun kappa => cognitiveWelfare beta kappa p)
+      atTop (nhds (perfectTopologyFiniteReward beta p))
+  finitePrecisionGap : forall beta : Real,
+    perfectTopologyFiniteReward beta p < expectedPerfectTopologyReward p
+  oracleEndpoint : Tendsto (fun beta => perfectTopologyFiniteReward beta p)
+    atTop (nhds (expectedPerfectTopologyReward p))
+
+theorem rewardPrecisionMonotonicityBundle (p : Real)
+    (hPNonneg : 0 <= p) (hPLt : p < 1) :
+    RewardPrecisionMonotonicityBundle p where
+  blockingProbability := ⟨hPNonneg, hPLt⟩
+  betaMonotone := fun _ _ _ hBetaLow hBeta hKappa =>
+    cognitiveWelfare_mono_in_beta hBetaLow hBeta hKappa.le hPNonneg hPLt.le
+  restoringSet := restoringDepths_eq_Ioi hPNonneg hPLt.le
+  restoringInfimum := restoringDepths_sInf_zero hPNonneg hPLt.le
+  greedyExcluded := zero_not_mem_restoringDepths p
+  priorLimit := fun beta => cognitiveWelfare_tendsto_priorAware beta p
+  topologyEndpoint := fun beta => cognitiveWelfare_tendsto_perfectTopology beta p
+  finitePrecisionGap := fun beta => perfectTopologyFiniteReward_lt_oracle beta p hPLt
+  oracleEndpoint := perfectTopologyFiniteReward_tendsto_oracle p
+
+def RewardPrecisionMonotonicityClaim : Prop :=
+  forall p : Real, 0 <= p -> p < 1 -> RewardPrecisionMonotonicityBundle p
+
+theorem rewardPrecisionMonotonicityClaim_proved :
+    RewardPrecisionMonotonicityClaim :=
+  rewardPrecisionMonotonicityBundle
 
 end BlackwellDilemma.FiveStateCognition

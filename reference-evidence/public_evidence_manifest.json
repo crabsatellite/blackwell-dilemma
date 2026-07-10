@@ -290,12 +290,14 @@
             "theorem exists_reveal_garbling",
             "def cognitiveWelfare",
             "theorem cognitiveWelfare_mono_in_beta",
+            "theorem cognitiveWelfare_tendsto_priorAware",
             "theorem cognitiveWelfare_tendsto_perfectTopology",
             "theorem perfectTopologyFiniteReward_tendsto_oracle",
             "theorem perfectTopologyFiniteReward_lt_oracle",
             "theorem topologyRegime_cognition_can_lower_welfare",
             "theorem restoringDepths_sInf_zero",
-            "theorem cognitiveFiveStateClaim_proved"
+            "theorem cognitiveFiveStateClaim_proved",
+            "theorem rewardPrecisionMonotonicityClaim_proved"
           ]
         },
         {
@@ -303,7 +305,9 @@
           "path": "lean4/BlackwellDilemma/Ledger.lean",
           "contains": [
             "BlackwellDilemma.FiveStateCognition.CognitiveFiveStateClaim",
-            "BlackwellDilemma.FiveStateCognition.cognitiveFiveStateClaim_proved"
+            "BlackwellDilemma.FiveStateCognition.cognitiveFiveStateClaim_proved",
+            "BlackwellDilemma.FiveStateCognition.RewardPrecisionMonotonicityClaim",
+            "BlackwellDilemma.FiveStateCognition.rewardPrecisionMonotonicityClaim_proved"
           ]
         },
         {
@@ -312,12 +316,14 @@
           "contains": [
             "#print axioms BlackwellDilemma.FiveStateCognition.exists_reveal_garbling",
             "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveWelfare_mono_in_beta",
+            "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveWelfare_tendsto_priorAware",
             "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveWelfare_tendsto_perfectTopology",
             "#print axioms BlackwellDilemma.FiveStateCognition.perfectTopologyFiniteReward_tendsto_oracle",
             "#print axioms BlackwellDilemma.FiveStateCognition.perfectTopologyFiniteReward_lt_oracle",
             "#print axioms BlackwellDilemma.FiveStateCognition.topologyRegime_cognition_can_lower_welfare",
             "#print axioms BlackwellDilemma.FiveStateCognition.restoringDepths_sInf_zero",
-            "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveFiveStateClaim_proved"
+            "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveFiveStateClaim_proved",
+            "#print axioms BlackwellDilemma.FiveStateCognition.rewardPrecisionMonotonicityClaim_proved"
           ]
         }
       ],
