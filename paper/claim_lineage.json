@@ -365,12 +365,22 @@
       "baseline_kind": "proposition",
       "baseline_title": "Bayesian-Naive Threshold on the 5-State Instance",
       "baseline_statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:bayesian-naive-five-state"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the strict prior-only Bayesian-naive threshold result while separating the 4/9 tie boundary and removing the historical 2/3 reversal carrier.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:bayesian-naive-five-state",
+          "id": "exact_prior_threshold_and_welfare"
+        },
+        {
+          "type": "evidence_check",
+          "id": "bayesian_naive_five_state_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "thm:general-tree",

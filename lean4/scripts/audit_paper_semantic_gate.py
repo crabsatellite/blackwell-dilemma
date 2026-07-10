@@ -31,6 +31,9 @@ REMOVED_FALSE_CLOSURES = (
     "smoothTransitionBeta",
     "gap_threshold_fiveState_smooth_transition",
     "not_current_kappaAgent_highKappa_oracle_at_p0",
+    "gap_bayesian_naive_routing_threshold",
+    "agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness",
+    "gap_bayesian_naive_reversal_present",
 )
 
 
@@ -57,8 +60,11 @@ for token in FORBIDDEN:
 canonical_source = (LEAN_ROOT / "BlackwellDilemma" / "Canonical.lean").read_text(
     encoding="utf-8"
 )
+retired_bridge_source = canonical_source + (LEAN_ROOT / "BlackwellDilemma" / "Bayesian.lean").read_text(
+    encoding="utf-8"
+)
 for token in REMOVED_FALSE_CLOSURES:
-    if token in canonical_source:
+    if token in retired_bridge_source:
         fail(f"removed-false-closure-present:{token}")
 
 ledger_imports = re.findall(r"^import\s+([^\s]+)", LEDGER.read_text(encoding="utf-8"), re.MULTILINE)
@@ -72,6 +78,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedCognitiveFiveState",
     "BlackwellDilemma.UnifiedBayesianImmunity",
     "BlackwellDilemma.UnifiedComplementarity",
+    "BlackwellDilemma.UnifiedBayesianNaiveFiveState",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

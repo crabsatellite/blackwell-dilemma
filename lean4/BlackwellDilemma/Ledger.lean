@@ -19,6 +19,7 @@ import BlackwellDilemma.UnifiedTwoRegime
 import BlackwellDilemma.UnifiedCognitiveFiveState
 import BlackwellDilemma.UnifiedBayesianImmunity
 import BlackwellDilemma.UnifiedComplementarity
+import BlackwellDilemma.UnifiedBayesianNaiveFiveState
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -421,8 +422,10 @@ def claimBayesianNaiveFiveState : PaperClaim :=
     kind := .proposition
     sourceLine := 1027
     route := .semanticRepair
-    blocker := "Rebuild reversal and recovery from the stated Bayesian-naive routing rule."
-    evidence := .unformalized }
+    blocker := "The strict prior-only rule is derived on the concrete five-state carrier: threshold 4/9, monotone bridge regime, constant trap regime, explicit boundary tie-breaks, and oracle gap."
+    evidence := .proved
+      BlackwellDilemma.BayesianNaiveFiveState.BayesianNaiveFiveStateClaim
+      BlackwellDilemma.BayesianNaiveFiveState.bayesianNaiveFiveStateClaim_proved }
 
 def claimGeneralTree : PaperClaim :=
   { label := "thm:general-tree"

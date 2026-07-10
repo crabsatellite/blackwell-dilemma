@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "ad82c399d255aec3732ad7a7eb30475a69a276b289e5bf49630d1389567bdfea",
+  "manuscript_sha256": "cf059ec0db924137fb7c2e3bacf8b6e7cb2e72be6f2aa9cb4b4e0beee93565bd",
   "claims": [
     {
       "line": 262,
@@ -155,7 +155,7 @@
       "kind": "proposition",
       "label": "prop:bayesian-naive-five-state",
       "title": "Bayesian-Naive Threshold on the 5-State Instance",
-      "statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43"
+      "statement_sha256": "95420fe3e68a63789336dd05909676f40da5dd007f304ccff82f5b63bf5bbaa7"
     },
     {
       "line": 1066,

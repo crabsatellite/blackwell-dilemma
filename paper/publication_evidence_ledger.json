@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "ad82c399d255aec3732ad7a7eb30475a69a276b289e5bf49630d1389567bdfea",
+  "manuscript_sha256": "cf059ec0db924137fb7c2e3bacf8b6e7cb2e72be6f2aa9cb4b4e0beee93565bd",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 7,
-    "publication_evidence_closed": 9,
+    "strict_kernel_closed": 8,
+    "publication_evidence_closed": 10,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 13,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 76,
-    "obligations_passed": 50,
+    "obligations_passed": 51,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
@@ -38,13 +38,13 @@
       "computational_certificate": 1,
       "external_references": 9,
       "lean_conditional": 2,
-      "lean_exact": 7,
+      "lean_exact": 8,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 7,
-      "lean_exact": 10,
+      "lean_exact": 9,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
@@ -1085,10 +1085,10 @@
     },
     {
       "label": "prop:bayesian-naive-five-state",
-      "statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "95420fe3e68a63789336dd05909676f40da5dd007f304ccff82f5b63bf5bbaa7",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
@@ -1112,8 +1112,8 @@
         {
           "id": "exact_prior_threshold_and_welfare",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

@@ -102,29 +102,7 @@ forms whose key feature is **insensitivity to continuation value**:
 (i) Bayesian-naive (`p̂ ≠ p`); (ii) Myopic-`k`; (iii) Satisficing.
 The greedy agent (`κ = 0`) exhibits the strongest reversal. -/
 
-/-- **Remark `rem:robustness-misspec` (i): Bayesian-naive.**
-    On the 5-state instance, the Bayesian-naive threshold is `p̂* = 2/3`,
-    coinciding with the cognitive threshold. The quantitative content
-    is recorded as the routing-decision biconditional
-    `0.4 + 0.6·(1 − p̂) > 0.6 ↔ p̂ < 2/3`, which is the operative
-    paper statement for the Bayesian-naive routing rule and threshold
-    identification (paper `prop:bayesian-naive-five-state` (i)).
-
-    **CLOSED** Cat 1 — re-export of
-    `FiveState.gap_bayesian_naive_routing_threshold` (kernel-pure
-    `nlinarith` arithmetic closure). The substantive paper content of
-    the Remark is the threshold identification `p̂* = 2/3`, encoded
-    directly via the routing-decision biconditional. The β-monotonicity
-    sub-claim of `prop:bayesian-naive-five-state` (ii) is tracked
-    separately by `FiveState.gap_bayesian_naive_reversal_absent`
-    (derived theorem composing Cat 3 atom
-    `bayesian_naive_below_threshold_blackwell_recovery_atom`).
-
-    paper source: Remark `rem:robustness-misspec` (i), line 941;
-    quantitative content in Proposition `prop:bayesian-naive-five-state`. -/
-theorem gap_robustness_bayesian_naive :
-    ∀ p_hat : ℝ, 0.4 + 0.6 * (1 - p_hat) > 0.6 ↔ p_hat < (2 : ℝ) / 3 :=
-  FiveState.gap_bayesian_naive_routing_threshold
+/-! The obsolete 2/3 Bayesian-naive wrapper was retired with the historical Canonical carrier. The exact 4/9 prior-only model and tie boundary are in `UnifiedBayesianNaiveFiveState.lean`. -/
 
 /-- Paper-novel explicit carrier structure (component for `myopicKWelfare`):
     welfare of the `k`-step lookahead myopic agent at horizon `k < d`

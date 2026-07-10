@@ -131,6 +131,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedComplementarity.lean"
     },
     {
+      "id": "unified_bayesian_naive_five_state_kernel",
+      "kind": "machine_gate",
+      "role": "Exact strict-prior-only five-state Bayesian-naive model with the 4/9 routing threshold, explicit tie boundary, monotone bridge regime, constant trap regime, and oracle gap.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedBayesianNaiveFiveState.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -492,6 +499,77 @@
       ]
     },
     {
+      "id": "bayesian_naive_five_state_gate",
+      "category": "kernel_checked_constructive_instance",
+      "source_cards": [
+        "unified_interior_optimum_kernel",
+        "unified_bayesian_naive_five_state_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "bayesian_naive_five_state_module",
+          "path": "lean4/BlackwellDilemma/UnifiedBayesianNaiveFiveState.lean",
+          "contains": [
+            "inductive TieBreak",
+            "def priorBridgeValue",
+            "def routingThreshold",
+            "def RoutesBridge",
+            "def bridgeWelfare",
+            "def naiveWelfare",
+            "theorem priorBridgeValue_gt_trap_iff",
+            "theorem priorBridgeValue_eq_trap_iff",
+            "theorem bridgeWelfare_mono_in_beta",
+            "theorem naiveWelfare_mono_below_threshold",
+            "theorem naiveWelfare_constant_above_threshold",
+            "theorem oracleGap_above_threshold",
+            "theorem bayesianNaiveFiveStateClaim_proved"
+          ]
+        },
+        {
+          "id": "bayesian_naive_retired_false_carrier",
+          "path": "lean4/BlackwellDilemma/Canonical.lean",
+          "contains": [
+            "The historical Bayesian-naive bridge was removed because it used the wrong continuation value"
+          ]
+        },
+        {
+          "id": "bayesian_naive_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.BayesianNaiveFiveState.BayesianNaiveFiveStateClaim",
+            "BlackwellDilemma.BayesianNaiveFiveState.bayesianNaiveFiveStateClaim_proved"
+          ]
+        },
+        {
+          "id": "bayesian_naive_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.BayesianNaiveFiveState.priorBridgeValue_gt_trap_iff",
+            "#print axioms BlackwellDilemma.BayesianNaiveFiveState.bridgeWelfare_mono_in_beta",
+            "#print axioms BlackwellDilemma.BayesianNaiveFiveState.naiveWelfare_mono_below_threshold",
+            "#print axioms BlackwellDilemma.BayesianNaiveFiveState.naiveWelfare_constant_above_threshold",
+            "#print axioms BlackwellDilemma.BayesianNaiveFiveState.oracleGap_above_threshold",
+            "#print axioms BlackwellDilemma.BayesianNaiveFiveState.bayesianNaiveFiveStateClaim_proved"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "bayesian_naive_five_state_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -571,8 +649,8 @@
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=4",
             "claim_lineage_relation_split_core_and_frontier=4",
-            "claim_lineage_relation_strengthened_assumptions=4",
-            "claim_lineage_relation_unchanged=14",
+            "claim_lineage_relation_strengthened_assumptions=5",
+            "claim_lineage_relation_unchanged=13",
             "claim_lineage_manual_status_fields=0"
           ]
         }
