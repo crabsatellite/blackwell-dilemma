@@ -42,12 +42,22 @@
       "baseline_kind": "proposition",
       "baseline_title": "Informational Decay",
       "baseline_statement_sha256": "b36c959b7dcf2c2534fc1fb5414e648c5fc5ea23fc5feabcc1d993ec6aea323c",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:info-decay"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve uniform exponential decay of the within-reachable-set oracle residual under an explicit pairwise-Gaussian selection interface and finite-volume uniform first-moment condition, with the full finite regret and signal-rate calculation machine derived.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:info-decay",
+          "id": "exact_oracle_decay_derivation"
+        },
+        {
+          "type": "evidence_check",
+          "id": "information_decay_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "prop:topo-cluster",

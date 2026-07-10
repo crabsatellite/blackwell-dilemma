@@ -17,12 +17,12 @@
     },
     {
       "label": "prop:info-decay",
-      "statement_sha256": "b36c959b7dcf2c2534fc1fb5414e648c5fc5ea23fc5feabcc1d993ec6aea323c",
+      "statement_sha256": "a5baf4ff86037cdc7fe15e8842ed84884f293dbe338c3d200c10e63d78f52954",
       "obligations": [
-        {"id": "gaussian_and_topology_model", "type": "model_assumptions", "ids": ["topology_blind_gaussian_signals", "independent_bond_blocking"]},
+        {"id": "gaussian_and_topology_model", "type": "model_assumptions", "ids": ["independent_gaussian_reward_noise", "independent_bond_blocking", "subcritical_uniform_reachable_moment"]},
+        {"id": "gaussian_pairwise_interface", "type": "external_references", "ids": ["tong1990"]},
         {"id": "subcritical_cluster_control", "type": "external_references", "ids": ["aizenman_barsky1987", "grimmett1999"]},
-        {"id": "conditional_oracle_decay_derivation", "type": "lean_conditional"},
-        {"id": "uniform_in_n_oracle_bound", "type": "unresolved_semantics", "resolution_class": "existing_theory_scope", "reason": "The manuscript needs one paper-faithful oracle kernel and a proved n-uniform bound rather than a carrier-level asymptotic."}
+        {"id": "exact_oracle_decay_derivation", "type": "lean_exact"}
       ]
     },
     {

@@ -79,6 +79,25 @@
       ]
     },
     {
+      "id": "tong1990",
+      "doi": "10.1007/978-1-4613-9655-0",
+      "title": "The Multivariate Normal Distribution",
+      "authors": ["Y. L. Tong"],
+      "year": 1990,
+      "publisher": "Springer New York",
+      "container_title": "",
+      "record_type": "book",
+      "evidence_class": "theorem",
+      "canonical_url": "https://doi.org/10.1007/978-1-4613-9655-0",
+      "evidence_locator": "Chapters 2--3 on bivariate normal distributions and fundamental multivariate-normal properties.",
+      "supports": [
+        "A linear difference of independent normal errors is normal with variances added, yielding the pairwise Gaussian comparison probability used by noisy argmax."
+      ],
+      "limitations": [
+        "The source does not establish the paper's finite-action regret aggregation, reachable-set averaging, or uniform network bound."
+      ]
+    },
+    {
       "id": "pisztora1996",
       "doi": "10.1007/bf01198161",
       "title": "Surface order large deviations for Ising, Potts and percolation models",

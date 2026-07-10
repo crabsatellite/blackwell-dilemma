@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "85d25b9df5253c256ffa9cc43bd1a25925096bce5efa6bab80d94888ed886cf4",
+  "manuscript_sha256": "daaa6b0145f779596fef55f920ce01a7b4ce93458a9d777778a7f3149ef7f093",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 13,
-    "publication_evidence_closed": 15,
+    "strict_kernel_closed": 14,
+    "publication_evidence_closed": 16,
     "empirical_publication_closed": 2,
     "claims_model_evidence_closed": 2,
-    "model_assumptions_total": 17,
-    "model_assumptions_admissible": 17,
-    "model_assumptions_theory_admissible": 17,
-    "model_assumptions_theory_referenced": 8,
+    "model_assumptions_total": 18,
+    "model_assumptions_admissible": 18,
+    "model_assumptions_theory_admissible": 18,
+    "model_assumptions_theory_referenced": 9,
     "model_assumptions_theory_reference_not_required": 9,
     "model_assumptions_empirical_required": 9,
     "model_assumptions_empirically_anchored": 0,
@@ -20,36 +20,36 @@
       "paper_definition": 5,
       "paper_reduced_form": 6,
       "published_model_adaptation": 1,
-      "standard_theory": 2,
+      "standard_theory": 3,
       "tractability_normalization": 1
     },
     "obligations_total": 73,
-    "obligations_passed": 56,
+    "obligations_passed": 58,
     "obligations_by_type": {
       "computational_certificate": 1,
-      "external_references": 9,
-      "lean_conditional": 9,
-      "lean_exact": 17,
+      "external_references": 10,
+      "lean_conditional": 8,
+      "lean_exact": 18,
       "model_assumptions": 25,
       "statement_hash": 6,
-      "unresolved_semantics": 6
+      "unresolved_semantics": 5
     },
     "passed_by_type": {
       "computational_certificate": 1,
-      "external_references": 9,
+      "external_references": 10,
       "lean_conditional": 3,
-      "lean_exact": 12,
+      "lean_exact": 13,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 6,
+      "lean_conditional": 5,
       "lean_exact": 5,
-      "unresolved_semantics": 6
+      "unresolved_semantics": 5
     },
     "mathematical_routes": {
-      "model_internal_exact": 17,
-      "reference_conditional": 9
+      "model_internal_exact": 18,
+      "reference_conditional": 8
     },
     "model_routes": {
       "conditional_model_only": 1,
@@ -57,7 +57,7 @@
       "real_strategy_evidence_required": 24
     },
     "semantic_gaps_by_resolution_class": {
-      "existing_theory_scope": 2,
+      "existing_theory_scope": 1,
       "hybrid_model_and_strategy_evidence": 3,
       "paper_model_encoding": 1
     }
@@ -168,6 +168,21 @@
       "empirical_required": true,
       "empirically_anchored": false,
       "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "subcritical_uniform_reachable_moment",
+      "kind": "regularity_condition",
+      "provenance": "standard_theory",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "aizenman_barsky1987",
+        "grimmett1999"
+      ],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
       "empirical_reference_ids": [],
       "empirical_check_ids": []
     },
@@ -324,30 +339,34 @@
     },
     {
       "label": "prop:info-decay",
-      "statement_sha256": "b36c959b7dcf2c2534fc1fb5414e648c5fc5ea23fc5feabcc1d993ec6aea323c",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "a5baf4ff86037cdc7fe15e8842ed84884f293dbe338c3d200c10e63d78f52954",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
-      "mathematical_route": "reference_conditional",
+      "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "independent_bond_blocking",
-        "topology_blind_gaussian_signals"
+        "independent_gaussian_reward_noise",
+        "subcritical_uniform_reachable_moment"
       ],
       "empirical_model_gaps": [
-        "independent_bond_blocking",
-        "topology_blind_gaussian_signals"
+        "independent_bond_blocking"
       ],
-      "semantic_resolution_classes": [
-        "existing_theory_scope"
-      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "gaussian_and_topology_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=topology_blind_gaussian_signals,independent_bond_blocking"
+          "detail": "theory-admissible assumption ids=independent_gaussian_reward_noise,independent_bond_blocking,subcritical_uniform_reachable_moment"
+        },
+        {
+          "id": "gaussian_pairwise_interface",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=tong1990"
         },
         {
           "id": "subcritical_cluster_control",
@@ -356,16 +375,10 @@
           "detail": "pinned reference ids=aizenman_barsky1987,grimmett1999"
         },
         {
-          "id": "conditional_oracle_decay_derivation",
-          "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
-        },
-        {
-          "id": "uniform_in_n_oracle_bound",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "The manuscript needs one paper-faithful oracle kernel and a proved n-uniform bound rather than a carrier-level asymptotic."
+          "id": "exact_oracle_decay_derivation",
+          "type": "lean_exact",
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

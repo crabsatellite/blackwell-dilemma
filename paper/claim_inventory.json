@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "85d25b9df5253c256ffa9cc43bd1a25925096bce5efa6bab80d94888ed886cf4",
+  "manuscript_sha256": "daaa6b0145f779596fef55f920ce01a7b4ce93458a9d777778a7f3149ef7f093",
   "claims": [
     {
       "line": 262,
@@ -15,7 +15,7 @@
       "kind": "proposition",
       "label": "prop:info-decay",
       "title": "Informational Decay",
-      "statement_sha256": "b36c959b7dcf2c2534fc1fb5414e648c5fc5ea23fc5feabcc1d993ec6aea323c"
+      "statement_sha256": "a5baf4ff86037cdc7fe15e8842ed84884f293dbe338c3d200c10e63d78f52954"
     },
     {
       "line": 318,

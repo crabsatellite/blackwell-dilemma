@@ -24,6 +24,7 @@ import BlackwellDilemma.UnifiedGeneralTree
 import BlackwellDilemma.UnifiedErrorCompounding
 import BlackwellDilemma.UnifiedGreedyReversal
 import BlackwellDilemma.UnifiedConditionalReduction
+import BlackwellDilemma.UnifiedInformationDecay
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -213,8 +214,10 @@ def claimInfoDecay : PaperClaim :=
     kind := .proposition
     sourceLine := 309
     route := .mixed
-    blocker := "Requires a genuine oracle kernel plus an n-uniform cluster-size bound; constant-zero carriers are excluded."
-    evidence := .unformalized }
+    blocker := "The regret bound, Mills specialization, signal-noise rate, topology averaging, and uniform-in-network conclusion are machine derived under the explicit pairwise-Gaussian selection interface and uniform reachable-set first-moment condition."
+    evidence := .proved
+      BlackwellDilemma.InformationDecay.InformationDecayClaim
+      BlackwellDilemma.InformationDecay.informationDecayClaim_proved }
 
 def claimTopoCluster : PaperClaim :=
   { label := "prop:topo-cluster"
@@ -519,9 +522,9 @@ def CompletePaperKernelOnly : Prop :=
 
 theorem completePaperKernelOnly_notYet : Not CompletePaperKernelOnly := by
   intro hComplete
-  have hMember : claimInfoDecay ∈ paperClaims := by
+  have hMember : claimPhase ∈ paperClaims := by
     simp [paperClaims]
-  have hClosed := hComplete claimInfoDecay hMember
+  have hClosed := hComplete claimPhase hMember
   exact (by decide :
     Ne (ClaimState.unformalized == ClaimState.closed) true) hClosed
 

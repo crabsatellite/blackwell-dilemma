@@ -109,6 +109,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedErrorCompounding",
     "BlackwellDilemma.UnifiedGreedyReversal",
     "BlackwellDilemma.UnifiedConditionalReduction",
+    "BlackwellDilemma.UnifiedInformationDecay",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

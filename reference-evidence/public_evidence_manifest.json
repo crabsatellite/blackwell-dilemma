@@ -12,6 +12,33 @@
       "bibliographic_note": "David Blackwell, Equivalent Comparisons of Experiments, Annals of Mathematical Statistics 24(2), 1953."
     },
     {
+      "id": "aizenman_barsky1987",
+      "kind": "external_reference",
+      "role": "Sharpness and subcritical exponential-decay source motivating the explicit uniform reachable-set moment condition.",
+      "status": "source_backed_with_scope_condition",
+      "registry_id": "aizenman_barsky1987",
+      "source_url": "https://doi.org/10.1007/bf01212322",
+      "bibliographic_note": "Michael Aizenman and David J. Barsky, Sharpness of the Phase Transition in Percolation Models, Communications in Mathematical Physics 108, 1987."
+    },
+    {
+      "id": "grimmett1999",
+      "kind": "external_reference",
+      "role": "Standard subcritical percolation and exponential cluster-tail reference; finite-volume uniformity remains an explicit paper condition.",
+      "status": "source_backed_with_scope_condition",
+      "registry_id": "grimmett1999",
+      "source_url": "https://doi.org/10.1007/978-3-662-03981-6",
+      "bibliographic_note": "Geoffrey Grimmett, Percolation, second edition, Springer, 1999."
+    },
+    {
+      "id": "tong1990",
+      "kind": "external_reference",
+      "role": "Difference-of-independent-normals source for the explicit pairwise-Gaussian noisy-argmax interface.",
+      "status": "source_backed_model_interface",
+      "registry_id": "tong1990",
+      "source_url": "https://doi.org/10.1007/978-1-4613-9655-0",
+      "bibliographic_note": "Y. L. Tong, The Multivariate Normal Distribution, Springer, 1990, Chapters 2--3."
+    },
+    {
       "id": "harris_kesten_pc_half",
       "kind": "external_formula",
       "role": "Critical probability p_c(Z2 bond percolation)=1/2 used as the percolation threshold reference.",
@@ -164,6 +191,13 @@
       "role": "Finite stochastic-kernel proof of Blackwell value monotonicity under garbling, conditional-value aggregation over a signal-independent reachable-set law, topological invariance, and the exact topology-plus-information decomposition.",
       "status": "repo_build_gate",
       "local_file": "lean4/BlackwellDilemma/UnifiedConditionalReduction.lean"
+    },
+    {
+      "id": "unified_information_decay_kernel",
+      "kind": "machine_gate",
+      "role": "Finite pairwise-Gaussian oracle regret bound, Mills specialization, explicit signal-noise rate, and uniform-in-network aggregation under a reachable-set first-moment bound.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedInformationDecay.lean"
     },
     {
       "id": "five_state_approximation_audit",
@@ -848,6 +882,81 @@
       ]
     },
     {
+      "id": "uniform_information_decay_gate",
+      "category": "kernel_checked_reference_conditioned_asymptotic",
+      "source_cards": [
+        "aizenman_barsky1987",
+        "grimmett1999",
+        "tong1990",
+        "unified_information_decay_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "information_decay_module",
+          "path": "lean4/BlackwellDilemma/UnifiedInformationDecay.lean",
+          "contains": [
+            "structure FiniteOracleEnvironment",
+            "structure GaussianSelection",
+            "theorem gap_mul_Phi_neg_div_le_noise",
+            "theorem regret_le_card_mul_noise",
+            "theorem expectedRegret_le_expectedCard_mul_noise",
+            "theorem signalNoise_le_two_mul_rpow_neg",
+            "theorem uniform_information_decay",
+            "theorem informationDecayClaim_proved"
+          ]
+        },
+        {
+          "id": "information_decay_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.InformationDecay.InformationDecayClaim",
+            "BlackwellDilemma.InformationDecay.informationDecayClaim_proved"
+          ]
+        },
+        {
+          "id": "information_decay_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.InformationDecay.gap_mul_Phi_neg_div_le_noise",
+            "#print axioms BlackwellDilemma.InformationDecay.signalNoise_le_two_mul_rpow_neg",
+            "#print axioms BlackwellDilemma.InformationDecay.uniform_information_decay",
+            "#print axioms BlackwellDilemma.InformationDecay.informationDecayClaim_proved"
+          ]
+        },
+        {
+          "id": "information_decay_model_boundary",
+          "path": "paper/model_assumptions.json",
+          "contains": [
+            "\"id\": \"subcritical_uniform_reachable_moment\"",
+            "uniformly over the finite network sequence"
+          ]
+        },
+        {
+          "id": "information_decay_reference_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"id\": \"gaussian_pairwise_interface\"",
+            "\"ids\": [\"tong1990\"]"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "information_decay_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -927,8 +1036,8 @@
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=4",
             "claim_lineage_relation_split_core_and_frontier=5",
-            "claim_lineage_relation_strengthened_assumptions=8",
-            "claim_lineage_relation_unchanged=9",
+            "claim_lineage_relation_strengthened_assumptions=9",
+            "claim_lineage_relation_unchanged=8",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -977,13 +1086,13 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=13",
-            "publication_publication_evidence_closed=15",
-            "publication_model_assumptions_total=17",
-            "publication_model_assumptions_admissible=17",
-            "publication_model_assumptions_theory_admissible=17",
+            "publication_strict_kernel_closed=14",
+            "publication_publication_evidence_closed=16",
+            "publication_model_assumptions_total=18",
+            "publication_model_assumptions_admissible=18",
+            "publication_model_assumptions_theory_admissible=18",
             "publication_manual_status_fields=0",
-            "publication_model_assumptions_theory_referenced=8",
+            "publication_model_assumptions_theory_referenced=9",
             "publication_model_assumptions_theory_reference_not_required=9",
             "publication_model_assumptions_empirical_required=9",
             "publication_model_assumptions_empirically_anchored=0",
@@ -991,16 +1100,16 @@
             "publication_model_assumption_provenance_paper_definition=5",
             "publication_model_assumption_provenance_paper_reduced_form=6",
             "publication_model_assumption_provenance_published_model_adaptation=1",
-            "publication_model_assumption_provenance_standard_theory=2",
+            "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
             "publication_obligations_total=73",
-            "publication_obligations_passed=56",
-            "publication_gap_lean_conditional=6",
+            "publication_obligations_passed=58",
+            "publication_gap_lean_conditional=5",
             "publication_gap_lean_exact=5",
-            "publication_gap_unresolved_semantics=6",
-            "publication_mathematical_route_model_internal_exact=17",
-            "publication_mathematical_route_reference_conditional=9",
-            "publication_semantic_resolution_existing_theory_scope=2",
+            "publication_gap_unresolved_semantics=5",
+            "publication_mathematical_route_model_internal_exact=18",
+            "publication_mathematical_route_reference_conditional=8",
+            "publication_semantic_resolution_existing_theory_scope=1",
             "publication_semantic_resolution_hybrid_model_and_strategy_evidence=3",
             "publication_semantic_resolution_paper_model_encoding=1"
           ]
@@ -1098,7 +1207,8 @@
           "contains": [
             "\"limitations\"",
             "\"blackwell1953\"",
-            "\"molloy_reed1995\""
+            "\"molloy_reed1995\"",
+            "\"tong1990\""
           ]
         }
       ],
@@ -1108,8 +1218,9 @@
           "type": "python_script",
           "path": "tools/verify_reference_registry.py",
           "stdout_contains": [
-            "reference_records_total=17",
+            "reference_records_total=18",
             "reference_evidence_class_empirical_study=0",
+            "reference_evidence_class_theorem=10",
             "reference_manual_status_fields=0",
             "reference_metadata_offline_failures=0"
           ]
@@ -1529,11 +1640,11 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=13",
+            "paper_claims_closed=14",
             "paper_claims_partial=3",
             "paper_claims_conditional=2",
             "paper_claims_refuted_encoding=0",
-            "paper_claims_unformalized=8",
+            "paper_claims_unformalized=7",
             "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,prop:sentimental,prop:principal-optimum,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
             "paper_claim_manual_status_assignments=0",
             "paper_claim_legacy_semantic_targets=0",

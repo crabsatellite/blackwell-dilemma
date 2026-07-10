@@ -29,6 +29,7 @@ EXPECTED_IDS = (
     "kesten1980",
     "aizenman_barsky1987",
     "grimmett1999",
+    "tong1990",
     "pisztora1996",
     "topkis1978",
     "molloy_reed1995",

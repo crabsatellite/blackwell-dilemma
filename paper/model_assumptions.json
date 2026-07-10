@@ -97,7 +97,7 @@
       "id": "independent_gaussian_reward_noise",
       "kind": "distributional_assumption",
       "statement": "Reward-signal errors are independent across vertices and have the common Gaussian variance indexed by beta.",
-      "scope": "Closed-form Gaussian pairwise-routing probabilities, including the depth-d trap tree.",
+      "scope": "Closed-form Gaussian pairwise-routing probabilities, including the within-reachable-set oracle and depth-d trap tree.",
       "role": "Makes each trap-versus-bridge signal difference Gaussian with variance twice the individual signal variance and separates choices across distinct tree levels.",
       "testability": {
         "kind": "sensitivity",
@@ -151,6 +151,21 @@
       "provenance": "standard_theory",
       "theory_evidence": {"mode": "references", "reference_ids": ["kesten1980", "aizenman_barsky1987", "grimmett1999"]},
       "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "subcritical_uniform_reachable_moment",
+      "kind": "regularity_condition",
+      "statement": "For each fixed blocking probability p above the lattice threshold, the expected reachable-set size is bounded by a finite constant C_p uniformly over the finite network sequence.",
+      "scope": "The uniform-in-network form of the informational-decay proposition only.",
+      "role": "States the exact finite-volume first-moment input needed to aggregate the kernel-proved conditional Gaussian oracle regret bound.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Verify a uniform cluster-size first-moment bound for the chosen finite graph sequence; otherwise retain only the per-network conditional regret inequality."
+      },
+      "provenance": "standard_theory",
+      "theory_evidence": {"mode": "references", "reference_ids": ["aizenman_barsky1987", "grimmett1999"]},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
