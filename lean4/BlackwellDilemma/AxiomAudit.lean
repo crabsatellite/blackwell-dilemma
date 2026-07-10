@@ -78,6 +78,11 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.ErrorCompounding.welfare_gain_lt_half_power
 #print axioms BlackwellDilemma.ErrorCompounding.ThresholdEstimator.cognitiveThreshold_bounds
 #print axioms BlackwellDilemma.ErrorCompounding.errorCompoundingClaim_proved
+#print axioms BlackwellDilemma.GreedyReversal.ForcedTwoRouteModel.finite_precision_overshoot
+#print axioms BlackwellDilemma.GreedyReversal.ForcedTwoRouteModel.welfare_tendsto_perfectSignal
+#print axioms BlackwellDilemma.GreedyReversal.ForcedTwoRouteModel.exists_strict_reversal_pair
+#print axioms BlackwellDilemma.GreedyReversal.wrongnessClaim_proved
+#print axioms BlackwellDilemma.GreedyReversal.dilemmaClaim_proved
 #print axioms BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved
 #print axioms PaperClaim.isClosed_eq_hasFullProof
 #print axioms paperClaims_count

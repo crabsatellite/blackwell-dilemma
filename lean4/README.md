@@ -9,24 +9,24 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=10
+paper_claims_closed=12
 paper_claims_partial=3
 paper_claims_conditional=2
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=11
+paper_claims_unformalized=9
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=12
-publication_obligations_passed=53/75
-model_assumptions_admissible=16/16
+publication_evidence_closed=14
+publication_obligations_passed=55/73
+model_assumptions_admissible=17/17
 research_claims_preserved=26/26
-claim_lineage_relations=counterexample_delimited:4,split_core_and_frontier:4,strengthened_assumptions:6,unchanged:12
-model_assumptions_theory_referenced=8/16
-model_assumption_provenance=benchmark_definition:2,paper_definition:4,paper_reduced_form:6,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
+claim_lineage_relations=counterexample_delimited:4,split_core_and_frontier:5,strengthened_assumptions:7,unchanged:10
+model_assumptions_theory_referenced=8/17
+model_assumption_provenance=benchmark_definition:2,paper_definition:5,paper_reduced_form:6,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=1/26
 mathematical_routes=model_internal_exact:17,reference_conditional:9
-semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5,paper_model_encoding:1
+semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:3,paper_model_encoding:1
 ```
 
 | Label | Kind | State | Route | Title |
@@ -35,9 +35,9 @@ semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5
 | `prop:info-decay` | proposition | unformalized | mixed | Informational Decay |
 | `prop:topo-cluster` | proposition | partial | mixed | Topological Loss---Cluster Size Relation |
 | `prop:physical` | proposition | closed | local | Physical Irreducibility |
-| `lem:wrongness` | lemma | unformalized | semantic-repair | Wrongness of the Greedy Policy Under Topology-Blind Signals |
+| `lem:wrongness` | lemma | closed | semantic-repair | Wrongness of the Greedy Policy Under Topology-Blind Signals |
 | `lem:conditional-reduction` | lemma | unformalized | mixed | Conditional Reduction Under State Augmentation |
-| `thm:dilemma` | theorem | unformalized | semantic-repair | Welfare Non-Monotonicity Under Endogenous Feasibility |
+| `thm:dilemma` | theorem | closed | semantic-repair | Welfare Non-Monotonicity Under Endogenous Feasibility |
 | `thm:phase` | theorem | unformalized | external-library | Phase Transition at $p_c$ |
 | `prop:trap-prevalence` | proposition | partial | local | Generic Trap Prevalence |
 | `thm:cognitive-threshold` | theorem | partial | semantic-repair | Characterization of the Blackwell Regime |

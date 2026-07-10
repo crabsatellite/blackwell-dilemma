@@ -1180,48 +1180,6 @@ theorem fin5Trap_parametricDilemmaGraphScopeWitness :
     Infrastructure.fin5TrapAdj,
     Infrastructure.fin5Trap_terminalNeighbour_and_degreeTwoStartingVertexOn⟩
 
-def gap_dilemma_fin5Trap_parametricGraphScope_current :
-    (∃ beta : Real,
-      ∃ beta' : Real,
-        beta < beta' ∧
-          agentWelfare AgentType.greedy beta' 0 1 <
-            agentWelfare AgentType.greedy beta 0 1) ∧
-      (∃ data : WrongnessPercolationData,
-        WInfoOracleInterfacesOn data ∧
-          OracleInfoNonzeroWitnessOn data) :=
-  gap_dilemma_current_noDiagnosticAssumptions
-
-def ParametricDilemmaCurrentBridge : Prop :=
-  ParametricDilemmaGraphScopeWitness ∧
-    ParametricLocalC2primeFullWitness ∧
-    (∃ beta : Real,
-      ∃ beta' : Real,
-        beta < beta' ∧
-          agentWelfare AgentType.greedy beta' 0 1 <
-            agentWelfare AgentType.greedy beta 0 1) ∧
-      (∃ data : WrongnessPercolationData,
-        WInfoOracleInterfacesOn data ∧
-          OracleInfoNonzeroWitnessOn data)
-
-theorem fin5Trap_parametricDilemmaCurrentBridge :
-    ParametricDilemmaCurrentBridge := by
-  exact ⟨fin5Trap_parametricDilemmaGraphScopeWitness,
-    fin5Trap_parametricLocalC2primeFullWitness,
-    gap_dilemma_fin5Trap_parametricGraphScope_current⟩
-
-def fin5Trap_parametricDilemmaGraphScope_and_currentDilemma :
-    ParametricDilemmaGraphScopeWitness ∧
-      (∃ beta : Real,
-        ∃ beta' : Real,
-          beta < beta' ∧
-            agentWelfare AgentType.greedy beta' 0 1 <
-              agentWelfare AgentType.greedy beta 0 1) ∧
-        (∃ data : WrongnessPercolationData,
-          WInfoOracleInterfacesOn data ∧
-            OracleInfoNonzeroWitnessOn data) := by
-  exact ⟨fin5Trap_parametricDilemmaCurrentBridge.1,
-    fin5Trap_parametricDilemmaCurrentBridge.2.2⟩
-
 def ParametricGraphLocalGreedyDilemmaCore : Prop :=
   ParametricDilemmaGraphScopeWitness ∧
     ParametricGraphLocalGreedyWelfareReversal

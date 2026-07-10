@@ -44,10 +44,9 @@
     },
     {
       "label": "lem:wrongness",
-      "statement_sha256": "2f9e95556bafefb8077aebc42208793b2f8f11b191844447e74fb303d530da4e",
+      "statement_sha256": "e1cbce0dac59b0f89aefff3a5e6f5c48c4f3ae0c69e26f7ee4182571289f7c73",
       "obligations": [
-        {"id": "greedy_idp_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "topology_blind_gaussian_signals", "greedy_static_reward_policy"]},
-        {"id": "policy_derived_terminal_reward", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The current formal target must be rebuilt from graph, signals, policy, and terminal reward rather than a hand-coded scalar kernel."},
+        {"id": "greedy_idp_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "terminal_neighbor_topology", "forced_two_route_terminal_values", "topology_blind_gaussian_signals", "independent_gaussian_reward_noise", "greedy_static_reward_policy"]},
         {"id": "exact_wrongness_derivation", "type": "lean_exact"}
       ]
     },
@@ -62,10 +61,9 @@
     },
     {
       "label": "thm:dilemma",
-      "statement_sha256": "edffa4fb142af39bc62ea15abb5023c60306170c58f2c0fa6731a88644d1099b",
+      "statement_sha256": "c5cd275176173f1a473e0abb12066ea0de1eceb9904d221b9df73986a9b6af25",
       "obligations": [
-        {"id": "canonical_reversal_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "terminal_neighbor_topology", "topology_blind_gaussian_signals", "greedy_static_reward_policy"]},
-        {"id": "dependency_semantics", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The theorem depends on paper-faithful wrongness, conditional reduction, and information-decay statements that are not yet jointly encoded."},
+        {"id": "canonical_reversal_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "terminal_neighbor_topology", "forced_two_route_terminal_values", "topology_blind_gaussian_signals", "independent_gaussian_reward_noise", "greedy_static_reward_policy"]},
         {"id": "exact_dilemma_derivation", "type": "lean_exact"}
       ]
     },

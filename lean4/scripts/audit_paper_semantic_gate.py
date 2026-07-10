@@ -38,6 +38,12 @@ REMOVED_FALSE_CLOSURES = (
     "gap_general_tree_current",
     "gap_general_tree_from_reversal",
     "gap_cyclic_trap_from_reversal",
+    "GreedyWrongnessKernelReversalWitness",
+    "WrongnessGreedyInterfaces_current",
+    "wrongness_misalignment_reversal_atom",
+    "greedy_welfare_reversal_current_noDiagnosticAssumptions",
+    "gap_dilemma_current_noDiagnosticAssumptions",
+    "ParametricDilemmaCurrentBridge",
 )
 
 
@@ -73,6 +79,9 @@ retired_bridge_source = "\n".join(
         (LEAN_ROOT / "BlackwellDilemma" / "GeneralGraphs.lean").read_text(
             encoding="utf-8"
         ),
+        (LEAN_ROOT / "BlackwellDilemma" / "Wrongness.lean").read_text(
+            encoding="utf-8"
+        ),
     ]
 )
 for token in REMOVED_FALSE_CLOSURES:
@@ -93,6 +102,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedBayesianNaiveFiveState",
     "BlackwellDilemma.UnifiedGeneralTree",
     "BlackwellDilemma.UnifiedErrorCompounding",
+    "BlackwellDilemma.UnifiedGreedyReversal",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

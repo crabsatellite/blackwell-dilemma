@@ -89,12 +89,22 @@
       "baseline_kind": "lemma",
       "baseline_title": "Wrongness of the Greedy Policy Under Topology-Blind Signals",
       "baseline_statement_sha256": "2f9e95556bafefb8077aebc42208793b2f8f11b191844447e74fb303d530da4e",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "lem:wrongness"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the greedy wrongness result on the exact forced-continuation degree-two specialization while retaining deeper and branching continuations under the separately repaired general-tree theorem.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "lem:wrongness",
+          "id": "exact_wrongness_derivation"
+        },
+        {
+          "type": "evidence_check",
+          "id": "greedy_reversal_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "lem:conditional-reduction",
@@ -113,12 +123,22 @@
       "baseline_kind": "theorem",
       "baseline_title": "Welfare Non-Monotonicity Under Endogenous Feasibility",
       "baseline_statement_sha256": "edffa4fb142af39bc62ea15abb5023c60306170c58f2c0fa6731a88644d1099b",
-      "relation": "unchanged",
+      "relation": "split_core_and_frontier",
       "publication_labels": [
         "thm:dilemma"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the kernel-closed forced-two-route greedy reversal as the theorem core while retaining conditional oracle monotonicity and large-network percolation asymptotics as separately reference-gated frontier claims.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "thm:dilemma",
+          "id": "exact_dilemma_derivation"
+        },
+        {
+          "type": "evidence_check",
+          "id": "greedy_reversal_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "thm:phase",

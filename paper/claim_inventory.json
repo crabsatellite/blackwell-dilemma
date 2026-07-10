@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "1d801c41b51b46411cada316b10f46069a843711b0e75cf77923ae7fe541583d",
+  "manuscript_sha256": "0a07214176a4ec65237913cb41a4a2e28951ccf21cb98124943beae89d85ddaf",
   "claims": [
     {
       "line": 262,
@@ -36,150 +36,150 @@
       "kind": "lemma",
       "label": "lem:wrongness",
       "title": "Wrongness of the Greedy Policy Under Topology-Blind Signals",
-      "statement_sha256": "2f9e95556bafefb8077aebc42208793b2f8f11b191844447e74fb303d530da4e"
+      "statement_sha256": "e1cbce0dac59b0f89aefff3a5e6f5c48c4f3ae0c69e26f7ee4182571289f7c73"
     },
     {
-      "line": 417,
+      "line": 409,
       "kind": "lemma",
       "label": "lem:conditional-reduction",
       "title": "Conditional Reduction Under State Augmentation",
       "statement_sha256": "1947a34b744ae6d260d0f5b79e3ce86829f7c007e7bf172cba3524f79ae40a8f"
     },
     {
-      "line": 432,
+      "line": 424,
       "kind": "theorem",
       "label": "thm:dilemma",
       "title": "Welfare Non-Monotonicity Under Endogenous Feasibility",
-      "statement_sha256": "edffa4fb142af39bc62ea15abb5023c60306170c58f2c0fa6731a88644d1099b"
+      "statement_sha256": "c5cd275176173f1a473e0abb12066ea0de1eceb9904d221b9df73986a9b6af25"
     },
     {
-      "line": 446,
+      "line": 439,
       "kind": "theorem",
       "label": "thm:phase",
       "title": "Phase Transition at $p_c$",
       "statement_sha256": "08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1"
     },
     {
-      "line": 500,
+      "line": 493,
       "kind": "proposition",
       "label": "prop:trap-prevalence",
       "title": "Generic Trap Prevalence",
       "statement_sha256": "6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6"
     },
     {
-      "line": 530,
+      "line": 523,
       "kind": "theorem",
       "label": "thm:cognitive-threshold",
       "title": "Characterization of the Blackwell Regime",
       "statement_sha256": "dc66fba0ee2c87a333af19497ff4ecb94ac9568d6ada42899cdd89d4e8d72411"
     },
     {
-      "line": 577,
+      "line": 570,
       "kind": "proposition",
       "label": "prop:threshold-alpha",
       "title": "Cognitive Threshold Increases with Instrumental Rationality",
       "statement_sha256": "ff8a94ed72b3df7a481b133310b531721d947041ffe91a25640e365db58ad2bf"
     },
     {
-      "line": 602,
+      "line": 595,
       "kind": "proposition",
       "label": "prop:supermodular",
       "title": "Supermodular Complementarity",
       "statement_sha256": "1553ffd28737ac35718b9587d569e44d483c75599ef9a8f512f90166a1becf11"
     },
     {
-      "line": 642,
+      "line": 635,
       "kind": "proposition",
       "label": "prop:sentimental",
       "title": "Sentimental Immunity",
       "statement_sha256": "3d8bfb6bcd237e10c9e53db501a960867b30bfd855a0e8ebf97649e9ef722fdd"
     },
     {
-      "line": 669,
+      "line": 662,
       "kind": "proposition",
       "label": "prop:principal-optimum",
       "title": "Interior Optimal Precision for Heterogeneous Populations",
       "statement_sha256": "3e3a34f3f3138674d24a324b4ef9e6c6eea837bb9c11fb637ef704bdd623bcd0"
     },
     {
-      "line": 741,
+      "line": 734,
       "kind": "proposition",
       "label": "prop:canonical",
       "title": "Canonical Welfare",
       "statement_sha256": "80ed069803232ff7b26c232052e5697cac4cbd7a989a952d5d1052f499ec0c9d"
     },
     {
-      "line": 801,
+      "line": 794,
       "kind": "proposition",
       "label": "prop:interior-optimum",
       "title": "Interior Optimum",
       "statement_sha256": "195ba69bd955c2529a3c4c72499a3011af726019e587ddee760df0f787ad1684"
     },
     {
-      "line": 841,
+      "line": 834,
       "kind": "proposition",
       "label": "prop:two-regime-five-state",
       "title": "Two-Regime Structure of the 5-State Instance",
       "statement_sha256": "6c5a74fdd0e9181412cb5e179394afd64511a8bb943cc1b828238214eb65741b"
     },
     {
-      "line": 893,
+      "line": 886,
       "kind": "proposition",
       "label": "prop:threshold-five-state",
       "title": "Cognitive Sufficiency on the 5-State Instance",
       "statement_sha256": "549a8c35ec4b007955f7cd69caeeadfb6969404def6526a663ffec000badc781"
     },
     {
-      "line": 953,
+      "line": 946,
       "kind": "proposition",
       "label": "prop:p-monotonicity-five-state",
       "title": "Reward-Precision Monotonicity for Structurally Aware Five-State Agents",
       "statement_sha256": "1205caa9e04cb585b71efcca8c6590f6f6fff6f37751468905a23a1b9f946c15"
     },
     {
-      "line": 981,
+      "line": 974,
       "kind": "theorem",
       "label": "thm:bayesian-immunity",
       "title": "Bayesian Immunity",
       "statement_sha256": "5de133491320a527765e98d80b342870afd1e1aef72b5785aa0c7a6e1c11c994"
     },
     {
-      "line": 1004,
+      "line": 997,
       "kind": "proposition",
       "label": "prop:complementarity",
       "title": "Information-Knowledge Complementarity",
       "statement_sha256": "7fd19df919e5015f6b3a129e7a4a56ff6c08c195566381518db56101ad44e647"
     },
     {
-      "line": 1027,
+      "line": 1020,
       "kind": "proposition",
       "label": "prop:bayesian-naive-five-state",
       "title": "Bayesian-Naive Threshold on the 5-State Instance",
       "statement_sha256": "95420fe3e68a63789336dd05909676f40da5dd007f304ccff82f5b63bf5bbaa7"
     },
     {
-      "line": 1066,
+      "line": 1059,
       "kind": "theorem",
       "label": "thm:general-tree",
       "title": "Non-Monotonicity on General Graphs",
       "statement_sha256": "89402255473b15637db7a25e4ce29616c8f6412e9e3fbf9c5e60d068d155582d"
     },
     {
-      "line": 1111,
+      "line": 1104,
       "kind": "proposition",
       "label": "prop:error-compounding",
       "title": "Error Compounding",
       "statement_sha256": "ddc65ca9c2d4145fb55ab3f50c64db6ee32f54d7d3c05de00b9a4768f1860c91"
     },
     {
-      "line": 1148,
+      "line": 1141,
       "kind": "corollary",
       "label": "cor:er-phase",
       "title": "Phase Transition on Erdos--Renyi Graphs",
       "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b"
     },
     {
-      "line": 1162,
+      "line": 1155,
       "kind": "corollary",
       "label": "cor:power-law",
       "title": "Application: Power-Law Networks",

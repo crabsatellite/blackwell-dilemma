@@ -64,6 +64,21 @@
       "empirical_truth_claimed": false
     },
     {
+      "id": "forced_two_route_terminal_values",
+      "kind": "structural_definition",
+      "statement": "At the focal degree-two root, selecting either neighbor leads through a forced continuation to a beta-independent terminal payoff; the higher-immediate-reward route has the lower terminal payoff.",
+      "scope": "Publication forms of the greedy-wrongness lemma and central dilemma theorem; deeper or branching continuations use the separate general-tree theorem.",
+      "role": "Turns the graph and stopping process into an exact two-route terminal-reward model without a hand-coded welfare kernel.",
+      "testability": {
+        "kind": "model_boundary",
+        "criterion": "The specialization fails when either selected branch contains an additional signal-dependent routing decision or when the terminal payoff depends on beta."
+      },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
       "id": "topology_blind_gaussian_signals",
       "kind": "distributional_assumption",
       "statement": "Reward signals are Gaussian and reveal rewards but not the realized percolation topology.",
