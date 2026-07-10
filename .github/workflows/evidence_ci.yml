@@ -5,6 +5,9 @@ on:
     branches: [master]
     paths:
       - 'README.md'
+      - 'prediction_status.md'
+      - 'tracker.py'
+      - 'verification/**'
       - 'docs/**'
       - 'results/**'
       - 'reference-evidence/**'
@@ -14,6 +17,9 @@ on:
   pull_request:
     paths:
       - 'README.md'
+      - 'prediction_status.md'
+      - 'tracker.py'
+      - 'verification/**'
       - 'docs/**'
       - 'results/**'
       - 'reference-evidence/**'
@@ -66,3 +72,8 @@ jobs:
 
       - name: Verify public evidence manifest
         run: python tools/verify_public_evidence.py
+
+      - name: Verify generated research reports
+        run: |
+          python tracker.py --check-report
+          python verification/render_live_prediction_report.py --check
