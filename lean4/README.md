@@ -10,10 +10,10 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 ```text
 paper_claims_total=29
 paper_claims_closed=0
-paper_claims_partial=3
+paper_claims_partial=4
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=26
+paper_claims_unformalized=25
 ```
 
 | Label | Kind | State | Route | Title |
@@ -26,7 +26,7 @@ paper_claims_unformalized=26
 | `lem:conditional-reduction` | lemma | unformalized | mixed | Conditional Reduction Under State Augmentation |
 | `thm:dilemma` | theorem | unformalized | semantic-repair | Welfare Non-Monotonicity Under Endogenous Feasibility |
 | `thm:phase` | theorem | unformalized | external-library | Phase Transition at $p_c$ |
-| `prop:trap-prevalence` | proposition | unformalized | local | Generic Trap Prevalence |
+| `prop:trap-prevalence` | proposition | partial | local | Generic Trap Prevalence |
 | `thm:cognitive-threshold` | theorem | partial | semantic-repair | Characterization of the Blackwell Regime |
 | `prop:threshold-alpha` | proposition | unformalized | local | Cognitive Threshold Increases with Instrumental Rationality |
 | `prop:supermodular` | proposition | unformalized | mixed | Supermodular Complementarity |

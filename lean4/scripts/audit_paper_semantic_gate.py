@@ -50,6 +50,7 @@ ledger_imports = re.findall(r"^import\s+([^\s]+)", LEDGER.read_text(encoding="ut
 allowed_ledger_imports = {
     "BlackwellDilemma.Basic",
     "BlackwellDilemma.PhysicalIrreducibility",
+    "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.UnboundedInProbability",
     "BlackwellDilemma.Infrastructure.VanishingGiantLoss",
 }

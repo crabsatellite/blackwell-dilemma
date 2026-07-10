@@ -12,6 +12,7 @@
 
 import BlackwellDilemma.Basic
 import BlackwellDilemma.PhysicalIrreducibility
+import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
 import BlackwellDilemma.Infrastructure.VanishingGiantLoss
 
@@ -214,8 +215,10 @@ def claimTrapPrevalence : PaperClaim :=
     kind := .proposition
     sourceLine := 473
     route := .local
-    blocker := "Formalize the bounded local edge/reward event and its positive Bernoulli-product probability."
-    evidence := .unformalized }
+    blocker := "The finite edge/reward product mass and ranking reversal are proved; still construct this event on Z2 and prove it is contained in the paper's dynamic-value reversal event."
+    evidence := .partialProof
+      BlackwellDilemma.Infrastructure.TrapPrevalenceLocalKernelBundle
+      BlackwellDilemma.Infrastructure.trapPrevalenceLocalKernelBundle_proved }
 
 def claimCognitiveThreshold : PaperClaim :=
   { label := "thm:cognitive-threshold"
@@ -225,8 +228,8 @@ def claimCognitiveThreshold : PaperClaim :=
     route := .semanticRepair
     blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 still needs a positive-probability local trap event and independent separated translates on the finite torus."
     evidence := .partialProof
-      BlackwellDilemma.Infrastructure.Part6AnalyticKernelBundle
-      BlackwellDilemma.Infrastructure.part6AnalyticKernelBundle_proved }
+      BlackwellDilemma.Infrastructure.Part6LocalPatternKernelBundle
+      BlackwellDilemma.Infrastructure.part6LocalPatternKernelBundle_proved }
 
 def claimThresholdAlpha : PaperClaim :=
   { label := "prop:threshold-alpha"
