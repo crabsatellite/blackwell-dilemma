@@ -22,6 +22,8 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.Infrastructure.part6FiniteTorusSupportKernelBundle_proved
 #print axioms BlackwellDilemma.Infrastructure.kappaStarClosedFormDivergencePrinciple_proved
 #print axioms BlackwellDilemma.Infrastructure.part6DepthGrowthKernelBundle_proved
+#print axioms BlackwellDilemma.Infrastructure.trapTreeBernoulliWelfarePrinciple_proved
+#print axioms BlackwellDilemma.Infrastructure.errorCompoundingKernelBundle_proved
 #print axioms BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved
 #print axioms PaperClaim.isClosed_eq_hasFullProof
 #print axioms paperClaims_count

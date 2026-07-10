@@ -16,6 +16,7 @@ import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
 import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
+import BlackwellDilemma.Infrastructure.TrapTreeBernoulliWelfare
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
 import BlackwellDilemma.Infrastructure.VanishingGiantLoss
 
@@ -384,10 +385,10 @@ def claimErrorCompounding : PaperClaim :=
     kind := .proposition
     sourceLine := 1050
     route := .local
-    blocker := "The displayed depth closed form is proved cofinal for every cStar > 0; still derive the welfare recursion and identify cStar from the actual posterior threshold equation."
+    blocker := "The finite Bernoulli choice model proves Parts 1-4 and the displayed depth closed form is cofinal; still derive the Gaussian bridge probability and identify cStar from the actual posterior threshold equation."
     evidence := .partialProof
-      BlackwellDilemma.Infrastructure.KappaStarClosedFormDivergencePrinciple
-      BlackwellDilemma.Infrastructure.kappaStarClosedFormDivergencePrinciple_proved }
+      BlackwellDilemma.Infrastructure.ErrorCompoundingKernelBundle
+      BlackwellDilemma.Infrastructure.errorCompoundingKernelBundle_proved }
 
 def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"
