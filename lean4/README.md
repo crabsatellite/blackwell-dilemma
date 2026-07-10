@@ -14,6 +14,7 @@ paper_claims_partial=4
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
 paper_claims_unformalized=25
+formal_root_imports=BlackwellDilemma.PaperSemanticGate
 ```
 
 | Label | Kind | State | Route | Title |
@@ -60,6 +61,7 @@ python scripts/audit_axiom_output.py
 python scripts/render_paper_claim_readme.py --check
 ```
 
-The canonical label inventory is `../paper/claim_inventory.json`. The current
-kernel surface contains no project axiom or proof escape, but only exact
-full-statement proof witnesses count as paper closure.
+The canonical label inventory is `../paper/claim_inventory.json`. The formal
+root imports only the proof-derived gate. The current kernel surface contains
+no project axiom or proof escape, but only exact full-statement proof witnesses
+count as paper closure.

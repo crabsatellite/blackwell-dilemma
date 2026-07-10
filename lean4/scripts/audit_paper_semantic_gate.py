@@ -13,6 +13,7 @@ from pathlib import Path
 
 LEAN_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = LEAN_ROOT.parent
+ROOT_MODULE = LEAN_ROOT / "BlackwellDilemma.lean"
 LEDGER = LEAN_ROOT / "BlackwellDilemma" / "Ledger.lean"
 GATE = LEAN_ROOT / "BlackwellDilemma" / "PaperSemanticGate.lean"
 INVENTORY = REPO_ROOT / "paper" / "claim_inventory.json"
@@ -60,7 +61,19 @@ model_only_imports = [
 if model_only_imports:
     fail("model-only-imports:" + ",".join(model_only_imports))
 
-line_limits = {LEDGER: 800, GATE: 200, Path(__file__).resolve(): 300}
+root_imports = re.findall(
+    r"^import\s+([^\s]+)", ROOT_MODULE.read_text(encoding="utf-8"), re.MULTILINE
+)
+expected_root_imports = ["BlackwellDilemma.PaperSemanticGate"]
+if root_imports != expected_root_imports:
+    fail("formal-root-imports:" + ",".join(root_imports))
+
+line_limits = {
+    ROOT_MODULE: 20,
+    LEDGER: 800,
+    GATE: 200,
+    Path(__file__).resolve(): 300,
+}
 for path, limit in line_limits.items():
     count = len(path.read_text(encoding="utf-8").splitlines())
     if count > limit:
@@ -110,6 +123,8 @@ print("paper_claim_manual_status_assignments=0")
 print("paper_claim_legacy_semantic_targets=0")
 print("paper_claim_bridge_gate_tokens=0")
 print("paper_claim_model_only_imports=0")
+print("paper_claim_formal_root_imports=" + ",".join(root_imports))
+print("paper_claim_formal_root_model_only_imports=0")
 print("paper_claim_inventory_match=1")
 
 sys.exit(0)

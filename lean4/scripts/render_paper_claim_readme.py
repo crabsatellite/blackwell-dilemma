@@ -14,6 +14,7 @@ from pathlib import Path
 LEAN_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = LEAN_ROOT.parent
 INVENTORY = REPO_ROOT / "paper" / "claim_inventory.json"
+ROOT_MODULE = LEAN_ROOT / "BlackwellDilemma.lean"
 LEAN_README = LEAN_ROOT / "README.md"
 ROOT_README = REPO_ROOT / "README.md"
 
@@ -39,8 +40,18 @@ def evaluated_claims() -> list[tuple[str, str, str]]:
     )
 
 
+def formal_root_imports() -> list[str]:
+    return re.findall(
+        r"^import\s+([^\s]+)",
+        ROOT_MODULE.read_text(encoding="utf-8"),
+        re.MULTILINE,
+    )
+
+
 def render_lean_readme(
-    claims: list[tuple[str, str, str]], metadata: dict[str, dict[str, object]]
+    claims: list[tuple[str, str, str]],
+    metadata: dict[str, dict[str, object]],
+    root_imports: list[str],
 ) -> str:
     counts = Counter(state for _label, state, _route in claims)
     rows = []
@@ -66,6 +77,7 @@ paper_claims_partial={counts['partial']}
 paper_claims_conditional={counts['conditional']}
 paper_claims_refuted_encoding={counts['refuted-encoding']}
 paper_claims_unformalized={counts['unformalized']}
+formal_root_imports={','.join(root_imports)}
 ```
 
 | Label | Kind | State | Route | Title |
@@ -84,9 +96,10 @@ python scripts/audit_axiom_output.py
 python scripts/render_paper_claim_readme.py --check
 ```
 
-The canonical label inventory is `../paper/claim_inventory.json`. The current
-kernel surface contains no project axiom or proof escape, but only exact
-full-statement proof witnesses count as paper closure.
+The canonical label inventory is `../paper/claim_inventory.json`. The formal
+root imports only the proof-derived gate. The current kernel surface contains
+no project axiom or proof escape, but only exact full-statement proof witnesses
+count as paper closure.
 """
 
 
@@ -124,11 +137,12 @@ def main() -> int:
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
     metadata = {claim["label"]: claim for claim in inventory["claims"]}
     claims = evaluated_claims()
+    root_imports = formal_root_imports()
     labels = [label for label, _state, _route in claims]
     if labels != list(metadata):
         raise RuntimeError("Lean claim labels do not match claim_inventory.json")
 
-    lean_text = render_lean_readme(claims, metadata)
+    lean_text = render_lean_readme(claims, metadata, root_imports)
     root_text = root_with_generated_section(
         ROOT_README.read_text(encoding="utf-8"), render_root_section(claims)
     )

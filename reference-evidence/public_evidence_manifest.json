@@ -406,6 +406,8 @@
             "paper_claim_legacy_semantic_targets=0",
             "paper_claim_bridge_gate_tokens=0",
             "paper_claim_model_only_imports=0",
+            "paper_claim_formal_root_imports=BlackwellDilemma.PaperSemanticGate",
+            "paper_claim_formal_root_model_only_imports=0",
             "paper_claim_inventory_match=1"
           ]
         },
