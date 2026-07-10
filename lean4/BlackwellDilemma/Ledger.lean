@@ -13,6 +13,7 @@
 import BlackwellDilemma.Basic
 import BlackwellDilemma.PhysicalIrreducibility
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
+import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
 import BlackwellDilemma.Infrastructure.VanishingGiantLoss
@@ -227,10 +228,10 @@ def claimCognitiveThreshold : PaperClaim :=
     kind := .theorem
     sourceLine := 509
     route := .semanticRepair
-    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 now has disjoint block counts and amplification, but still needs the trap-tree support mapped to actual finite-torus edges/rewards and to kappaStar."
+    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 now has finite-torus edge/reward support indices, but still needs a concrete trap-tree embedding inside each support and a proof that the embedded IDP threshold grows unboundedly."
     evidence := .partialProof
-      BlackwellDilemma.Infrastructure.Part6SeparatedPlacementKernelBundle
-      BlackwellDilemma.Infrastructure.part6SeparatedPlacementKernelBundle_proved }
+      BlackwellDilemma.Infrastructure.Part6FiniteTorusSupportKernelBundle
+      BlackwellDilemma.Infrastructure.part6FiniteTorusSupportKernelBundle_proved }
 
 def claimThresholdAlpha : PaperClaim :=
   { label := "prop:threshold-alpha"

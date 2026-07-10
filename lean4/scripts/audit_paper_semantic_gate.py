@@ -52,6 +52,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.Basic",
     "BlackwellDilemma.PhysicalIrreducibility",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
+    "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.SeparatedBlockPlacements",
     "BlackwellDilemma.Infrastructure.UnboundedInProbability",
     "BlackwellDilemma.Infrastructure.VanishingGiantLoss",
