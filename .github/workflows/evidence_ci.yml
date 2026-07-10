@@ -77,3 +77,6 @@ jobs:
         run: |
           python tracker.py --check-report
           python verification/render_live_prediction_report.py --check
+
+      - name: Audit documentation surface
+        run: python tools/audit_documentation_surface.py

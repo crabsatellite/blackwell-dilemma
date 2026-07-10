@@ -105,3 +105,6 @@ jobs:
 
       - name: Verify generated README status
         run: python scripts/render_paper_claim_readme.py --check
+
+      - name: Audit documentation surface
+        run: python ../tools/audit_documentation_surface.py
