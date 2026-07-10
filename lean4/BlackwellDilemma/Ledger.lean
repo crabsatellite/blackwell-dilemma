@@ -395,7 +395,7 @@ def claimErrorCompounding : PaperClaim :=
     kind := .proposition
     sourceLine := 1050
     route := .local
-    blocker := "The finite Bernoulli model proves Parts 1-4, the displayed depth form is cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still identify that probability and cStar from the actual posterior/policy threshold equation."
+    blocker := "The finite Bernoulli model proves Parts 1-4, each generic depth-bound form is cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still derive the bridge probability from the actual signal policy and prove the posterior estimator's depth-independent threshold assumptions."
     evidence := .partialProof
       ErrorCompoundingPartialCore
       errorCompoundingPartialCore_proved }

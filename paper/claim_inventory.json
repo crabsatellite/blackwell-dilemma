@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "aa418c82664576d6e36a19df54c5d62087cfa4b659a27b6ea3bfecc0cb43d7f0",
+  "manuscript_sha256": "efdb49ff7dbefd3c1b601e90f595426fe672f764f16b558ad3b5eee3ba77ef1b",
   "claims": [
     {"line": 252, "kind": "theorem", "label": "thm:decomp", "title": "Canonical Welfare Decomposition"},
     {"line": 286, "kind": "proposition", "label": "prop:info-decay", "title": "Informational Decay"},
