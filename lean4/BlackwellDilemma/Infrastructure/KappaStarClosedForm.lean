@@ -51,6 +51,29 @@ theorem kappaStarClosedForm_cofinal
   exact ((kappaStarClosedForm_tendsto_atTop c hC).eventually
     (eventually_gt_atTop bound)).exists
 
+/-- Smaller admissible noise produces the larger closed-form depth bound. -/
+theorem kappaStarClosedForm_antitone_in_noise
+    {cTwo cOne : Real} (hTwo : 0 < cTwo) (hOrder : cTwo <= cOne)
+    (depth : Nat) :
+    kappaStarClosedForm cOne depth <=
+      kappaStarClosedForm cTwo depth := by
+  have hOne : 0 < cOne := lt_of_lt_of_le hTwo hOrder
+  have hSquare : 0 <= (depth : Real) ^ 2 := sq_nonneg _
+  have hDiv :
+      ((depth : Real) ^ 2) / cOne <= ((depth : Real) ^ 2) / cTwo := by
+    rw [div_le_div_iff₀ hOne hTwo]
+    exact mul_le_mul_of_nonneg_left hOrder hSquare
+  have hInner :
+      ((depth : Real) ^ 2) / cOne + 1 <=
+        ((depth : Real) ^ 2) / cTwo + 1 := by
+    linarith
+  have hInnerPos : 0 < ((depth : Real) ^ 2) / cOne + 1 := by
+    positivity
+  have hLog := Real.logb_le_logb_of_le
+    (by norm_num : (1 : Real) < 2) hInnerPos hInner
+  unfold kappaStarClosedForm
+  exact mul_le_mul_of_nonneg_left hLog (by norm_num)
+
 def KappaStarClosedFormDivergencePrinciple : Prop :=
   forall c : Real, 0 < c ->
     Tendsto (kappaStarClosedForm c) atTop atTop /\
@@ -64,14 +87,34 @@ theorem kappaStarClosedFormDivergencePrinciple_proved :
     (kappaStarClosedForm_tendsto_atTop c hC)
     (kappaStarClosedForm_cofinal c hC)
 
+def KappaStarClosedFormBoundsPrinciple : Prop :=
+  forall cTwo cOne : Real,
+    0 < cTwo -> cTwo <= cOne ->
+      (forall depth : Nat,
+        kappaStarClosedForm cOne depth <=
+          kappaStarClosedForm cTwo depth) /\
+      Tendsto (kappaStarClosedForm cOne) atTop atTop /\
+      Tendsto (kappaStarClosedForm cTwo) atTop atTop
+
+theorem kappaStarClosedFormBoundsPrinciple_proved :
+    KappaStarClosedFormBoundsPrinciple := by
+  intro cTwo cOne hTwo hOrder
+  have hOne : 0 < cOne := lt_of_lt_of_le hTwo hOrder
+  exact
+    ⟨kappaStarClosedForm_antitone_in_noise hTwo hOrder,
+      kappaStarClosedForm_tendsto_atTop cOne hOne,
+      kappaStarClosedForm_tendsto_atTop cTwo hTwo⟩
+
 def Part6DepthGrowthKernelBundle : Prop :=
   Part6FiniteTorusSupportKernelBundle /\
-    KappaStarClosedFormDivergencePrinciple
+    KappaStarClosedFormDivergencePrinciple /\
+    KappaStarClosedFormBoundsPrinciple
 
 theorem part6DepthGrowthKernelBundle_proved :
     Part6DepthGrowthKernelBundle := by
   exact And.intro
     part6FiniteTorusSupportKernelBundle_proved
-    kappaStarClosedFormDivergencePrinciple_proved
+    ⟨kappaStarClosedFormDivergencePrinciple_proved,
+      kappaStarClosedFormBoundsPrinciple_proved⟩
 
 end BlackwellDilemma.Infrastructure

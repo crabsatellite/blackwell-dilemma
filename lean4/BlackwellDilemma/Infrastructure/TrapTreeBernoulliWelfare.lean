@@ -194,12 +194,14 @@ theorem trapTreeBernoulliWelfarePrinciple_proved :
 
 def ErrorCompoundingKernelBundle : Prop :=
   TrapTreeBernoulliWelfarePrinciple /\
-    KappaStarClosedFormDivergencePrinciple
+    KappaStarClosedFormDivergencePrinciple /\
+    KappaStarClosedFormBoundsPrinciple
 
 theorem errorCompoundingKernelBundle_proved :
     ErrorCompoundingKernelBundle := by
   exact And.intro
     trapTreeBernoulliWelfarePrinciple_proved
-    kappaStarClosedFormDivergencePrinciple_proved
+    ⟨kappaStarClosedFormDivergencePrinciple_proved,
+      kappaStarClosedFormBoundsPrinciple_proved⟩
 
 end BlackwellDilemma.Infrastructure
