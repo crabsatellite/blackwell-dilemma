@@ -33,6 +33,12 @@ KNOWN_TYPES = {
 }
 DERIVATION_TYPES = {"lean_exact", "lean_conditional", "demote_to_discussion"}
 FORBIDDEN_MANUAL_KEYS = {"status", "closed", "reasonable", "verified"}
+RESOLUTION_CLASSES = {
+    "existing_theory_scope",
+    "paper_model_encoding",
+    "hybrid_model_and_strategy_evidence",
+}
+THEORY_EVIDENCE_CLASSES = {"theorem", "theoretical_model"}
 
 
 class AuditError(RuntimeError):
@@ -88,18 +94,25 @@ def run_lean_states() -> dict[str, str]:
     return dict(rows)
 
 
-def validate_model_assumptions(data: dict[str, Any]) -> dict[str, bool]:
+def validate_model_assumptions(
+    data: dict[str, Any],
+    references: dict[str, dict[str, Any]],
+    check_ids: set[str],
+) -> dict[str, dict[str, Any]]:
     if data.get("schema_version") != 1:
         raise AuditError("model assumptions schema_version must equal 1")
     policy = data.get("admissibility_policy", {})
     allowed_kinds = set(policy.get("allowed_kinds", []))
     allowed_testability = set(policy.get("allowed_testability_kinds", []))
+    allowed_provenance = set(policy.get("allowed_provenance", []))
+    allowed_theory_modes = set(policy.get("allowed_theory_evidence_modes", []))
+    allowed_empirical_modes = set(policy.get("allowed_empirical_evidence_modes", []))
     assumptions = data.get("assumptions", [])
     ids = [item.get("id") for item in assumptions]
     if not ids or len(ids) != len(set(ids)):
         raise AuditError("model assumption ids must be nonempty and unique")
 
-    admissible: dict[str, bool] = {}
+    evaluated: dict[str, dict[str, Any]] = {}
     for item in assumptions:
         assumption_id = item["id"]
         kind = item.get("kind")
@@ -116,10 +129,80 @@ def validate_model_assumptions(data: dict[str, Any]) -> dict[str, bool]:
             else testability_kind != "model_boundary"
         )
         truth_ok = item.get("empirical_truth_claimed") is False
-        admissible[assumption_id] = all(
-            (required_text, testability_ok, kind_ok, boundary_ok, truth_ok)
+        provenance = item.get("provenance")
+        provenance_ok = provenance in allowed_provenance
+
+        theory_evidence = item.get("theory_evidence", {})
+        theory_mode = theory_evidence.get("mode")
+        theory_reference_ids = theory_evidence.get("reference_ids", [])
+        theory_references_valid = all(
+            reference_id in references
+            and references[reference_id].get("evidence_class") in THEORY_EVIDENCE_CLASSES
+            for reference_id in theory_reference_ids
         )
-    return admissible
+        theory_mode_ok = theory_mode in allowed_theory_modes
+        theory_shape_ok = (
+            not theory_reference_ids
+            if theory_mode == "not_required_for_conditional_theorem"
+            else bool(theory_reference_ids)
+        )
+        theory_evidence_ok = all(
+            (theory_mode_ok, theory_shape_ok, theory_references_valid)
+        )
+
+        empirical_evidence = item.get("empirical_evidence", {})
+        empirical_mode = empirical_evidence.get("mode")
+        empirical_reference_ids = empirical_evidence.get("reference_ids", [])
+        empirical_check_ids = empirical_evidence.get("check_ids", [])
+        empirical_mode_ok = empirical_mode in allowed_empirical_modes
+        empirical_references_valid = all(
+            reference_id in references
+            and references[reference_id].get("evidence_class") == "empirical_study"
+            for reference_id in empirical_reference_ids
+        )
+        empirical_checks_valid = all(check_id in check_ids for check_id in empirical_check_ids)
+        empirical_required = empirical_mode == "required_for_real_world_application"
+        empirical_inputs_present = bool(empirical_reference_ids or empirical_check_ids)
+        empirically_anchored = all(
+            (
+                empirical_required,
+                bool(empirical_reference_ids),
+                bool(empirical_check_ids),
+                empirical_references_valid,
+                empirical_checks_valid,
+            )
+        )
+        empirical_shape_ok = (
+            not empirical_inputs_present
+            if empirical_mode == "not_claimed"
+            else empirical_references_valid and empirical_checks_valid
+        )
+
+        theory_admissible = all(
+            (
+                required_text,
+                testability_ok,
+                kind_ok,
+                boundary_ok,
+                truth_ok,
+                provenance_ok,
+                theory_evidence_ok,
+                empirical_mode_ok,
+                empirical_shape_ok,
+            )
+        )
+        evaluated[assumption_id] = {
+            "kind": kind,
+            "provenance": provenance,
+            "theory_admissible": theory_admissible,
+            "theory_reference_ids": theory_reference_ids,
+            "empirical_required": empirical_required,
+            "empirically_anchored": empirically_anchored,
+            "empirical_evidence_satisfied": not empirical_required or empirically_anchored,
+            "empirical_reference_ids": empirical_reference_ids,
+            "empirical_check_ids": empirical_check_ids,
+        }
+    return evaluated
 
 
 def manifest_check_ids(data: dict[str, Any]) -> set[str]:
@@ -158,13 +241,14 @@ def evaluate() -> dict[str, Any]:
     references = {
         record["id"]: record for record in references_data.get("records", [])
     }
-    assumptions = validate_model_assumptions(assumptions_data)
     check_ids = manifest_check_ids(public_manifest)
+    assumptions = validate_model_assumptions(assumptions_data, references, check_ids)
 
     derived_claims: list[dict[str, Any]] = []
     obligation_counts: Counter[str] = Counter()
     obligation_pass_counts: Counter[str] = Counter()
     gap_counts: Counter[str] = Counter()
+    semantic_resolution_counts: Counter[str] = Counter()
 
     for claim in obligation_claims:
         label = claim["label"]
@@ -183,6 +267,8 @@ def evaluate() -> dict[str, Any]:
             raise AuditError(f"{label}: no derivation or demotion obligation")
 
         results: list[dict[str, Any]] = []
+        claim_assumption_ids: set[str] = set()
+        semantic_resolution_classes: list[str] = []
         for obligation in obligations:
             obligation_id = obligation["id"]
             obligation_type = obligation["type"]
@@ -208,9 +294,21 @@ def evaluate() -> dict[str, Any]:
                     detail += "; missing=" + ",".join(missing)
             elif obligation_type == "model_assumptions":
                 requested = obligation.get("ids", [])
-                failed = [assumption_id for assumption_id in requested if not assumptions.get(assumption_id, False)]
+                unknown_assumptions = [
+                    assumption_id for assumption_id in requested if assumption_id not in assumptions
+                ]
+                if unknown_assumptions:
+                    raise AuditError(
+                        f"{label}/{obligation_id}: unknown model assumptions {unknown_assumptions}"
+                    )
+                claim_assumption_ids.update(requested)
+                failed = [
+                    assumption_id
+                    for assumption_id in requested
+                    if not assumptions[assumption_id]["theory_admissible"]
+                ]
                 passed = bool(requested) and not failed
-                detail = "admissible assumption ids=" + ",".join(requested)
+                detail = "theory-admissible assumption ids=" + ",".join(requested)
                 if failed:
                     detail += "; failed=" + ",".join(failed)
             elif obligation_type == "statement_hash":
@@ -227,6 +325,13 @@ def evaluate() -> dict[str, Any]:
                 detail = obligation.get("reason", "")
                 if not detail:
                     raise AuditError(f"{label}/{obligation_id}: unresolved gap lacks reason")
+                resolution_class = obligation.get("resolution_class")
+                if resolution_class not in RESOLUTION_CLASSES:
+                    raise AuditError(
+                        f"{label}/{obligation_id}: invalid resolution_class {resolution_class}"
+                    )
+                semantic_resolution_classes.append(resolution_class)
+                semantic_resolution_counts[resolution_class] += 1
             elif obligation_type == "demote_to_discussion":
                 detail = obligation.get("reason", "")
                 if not detail:
@@ -247,6 +352,26 @@ def evaluate() -> dict[str, Any]:
 
         strict_kernel = lean_states[label] == "closed"
         publication_evidence = all(result["passed"] for result in results)
+        empirical_model_gaps = sorted(
+            assumption_id
+            for assumption_id in claim_assumption_ids
+            if assumptions[assumption_id]["empirical_required"]
+            and not assumptions[assumption_id]["empirically_anchored"]
+        )
+        model_evidence_closed = not empirical_model_gaps
+        empirical_publication = publication_evidence and model_evidence_closed
+        if "lean_conditional" in types:
+            mathematical_route = "reference_conditional"
+        elif "lean_exact" in types:
+            mathematical_route = "model_internal_exact"
+        else:
+            mathematical_route = "discussion_demotion"
+        if empirical_model_gaps:
+            model_route = "real_strategy_evidence_required"
+        elif claim_assumption_ids:
+            model_route = "conditional_model_only"
+        else:
+            model_route = "none"
         derived_claims.append(
             {
                 "label": label,
@@ -254,6 +379,12 @@ def evaluate() -> dict[str, Any]:
                 "lean_state": lean_states[label],
                 "strict_kernel_closed": strict_kernel,
                 "publication_evidence_closed": publication_evidence,
+                "empirical_publication_closed": empirical_publication,
+                "mathematical_route": mathematical_route,
+                "model_route": model_route,
+                "model_assumption_ids": sorted(claim_assumption_ids),
+                "empirical_model_gaps": empirical_model_gaps,
+                "semantic_resolution_classes": semantic_resolution_classes,
                 "obligations": results,
             }
         )
@@ -264,19 +395,62 @@ def evaluate() -> dict[str, Any]:
         "publication_evidence_closed": sum(
             claim["publication_evidence_closed"] for claim in derived_claims
         ),
+        "empirical_publication_closed": sum(
+            claim["empirical_publication_closed"] for claim in derived_claims
+        ),
+        "claims_model_evidence_closed": sum(
+            not claim["empirical_model_gaps"] for claim in derived_claims
+        ),
         "model_assumptions_total": len(assumptions),
-        "model_assumptions_admissible": sum(assumptions.values()),
+        "model_assumptions_admissible": sum(
+            assumption["theory_admissible"] for assumption in assumptions.values()
+        ),
+        "model_assumptions_theory_admissible": sum(
+            assumption["theory_admissible"] for assumption in assumptions.values()
+        ),
+        "model_assumptions_theory_referenced": sum(
+            bool(assumption["theory_reference_ids"])
+            for assumption in assumptions.values()
+        ),
+        "model_assumptions_theory_reference_not_required": sum(
+            not assumption["theory_reference_ids"]
+            for assumption in assumptions.values()
+        ),
+        "model_assumptions_empirical_required": sum(
+            assumption["empirical_required"] for assumption in assumptions.values()
+        ),
+        "model_assumptions_empirically_anchored": sum(
+            assumption["empirically_anchored"] for assumption in assumptions.values()
+        ),
+        "model_assumptions_by_provenance": dict(
+            sorted(Counter(
+                assumption["provenance"] for assumption in assumptions.values()
+            ).items())
+        ),
         "obligations_total": sum(obligation_counts.values()),
         "obligations_passed": sum(obligation_pass_counts.values()),
         "obligations_by_type": dict(sorted(obligation_counts.items())),
         "passed_by_type": dict(sorted(obligation_pass_counts.items())),
         "gaps_by_type": dict(sorted(gap_counts.items())),
+        "mathematical_routes": dict(
+            sorted(Counter(claim["mathematical_route"] for claim in derived_claims).items())
+        ),
+        "model_routes": dict(
+            sorted(Counter(claim["model_route"] for claim in derived_claims).items())
+        ),
+        "semantic_gaps_by_resolution_class": dict(
+            sorted(semantic_resolution_counts.items())
+        ),
     }
     return {
         "schema_version": 1,
         "generated_by": "tools/audit_publication_obligations.py",
         "manuscript_sha256": inventory["manuscript_sha256"],
         "summary": summary,
+        "model_assumptions": [
+            {"id": assumption_id, **evaluation}
+            for assumption_id, evaluation in assumptions.items()
+        ],
         "claims": derived_claims,
     }
 
@@ -287,8 +461,15 @@ def print_report(ledger: dict[str, Any]) -> None:
         "claims_total",
         "strict_kernel_closed",
         "publication_evidence_closed",
+        "empirical_publication_closed",
+        "claims_model_evidence_closed",
         "model_assumptions_total",
         "model_assumptions_admissible",
+        "model_assumptions_theory_admissible",
+        "model_assumptions_theory_referenced",
+        "model_assumptions_theory_reference_not_required",
+        "model_assumptions_empirical_required",
+        "model_assumptions_empirically_anchored",
         "obligations_total",
         "obligations_passed",
     ):
@@ -296,6 +477,14 @@ def print_report(ledger: dict[str, Any]) -> None:
     print("publication_manual_status_fields=0")
     for gap_type, count in summary["gaps_by_type"].items():
         print(f"publication_gap_{gap_type}={count}")
+    for provenance, count in summary["model_assumptions_by_provenance"].items():
+        print(f"publication_model_assumption_provenance_{provenance}={count}")
+    for route, count in summary["mathematical_routes"].items():
+        print(f"publication_mathematical_route_{route}={count}")
+    for route, count in summary["model_routes"].items():
+        print(f"publication_model_route_{route}={count}")
+    for resolution_class, count in summary["semantic_gaps_by_resolution_class"].items():
+        print(f"publication_semantic_resolution_{resolution_class}={count}")
     for claim in ledger["claims"]:
         gaps = [
             f"{item['type']}:{item['id']}"
@@ -306,6 +495,10 @@ def print_report(ledger: dict[str, Any]) -> None:
             f"publication_claim={claim['label']}|"
             f"kernel:{int(claim['strict_kernel_closed'])}|"
             f"publication:{int(claim['publication_evidence_closed'])}|"
+            f"empirical:{int(claim['empirical_publication_closed'])}|"
+            f"math-route:{claim['mathematical_route']}|"
+            f"model-route:{claim['model_route']}|"
+            f"empirical-model-gaps:{','.join(claim['empirical_model_gaps'])}|"
             f"gaps:{','.join(gaps)}"
         )
 
@@ -315,6 +508,7 @@ def main() -> int:
     parser.add_argument("--write-ledger", action="store_true")
     parser.add_argument("--check-ledger", action="store_true")
     parser.add_argument("--require-publication-closed", action="store_true")
+    parser.add_argument("--require-empirical-closed", action="store_true")
     parser.add_argument("--require-kernel-closed", action="store_true")
     args = parser.parse_args()
     if args.write_ledger and args.check_ledger:
@@ -341,6 +535,8 @@ def main() -> int:
     print_report(ledger)
     summary = ledger["summary"]
     if args.require_publication_closed and summary["publication_evidence_closed"] != summary["claims_total"]:
+        return 1
+    if args.require_empirical_closed and summary["empirical_publication_closed"] != summary["claims_total"]:
         return 1
     if args.require_kernel_closed and summary["strict_kernel_closed"] != summary["claims_total"]:
         return 1

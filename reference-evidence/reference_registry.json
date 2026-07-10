@@ -11,6 +11,7 @@
       "publisher": "Institute of Mathematical Statistics",
       "container_title": "The Annals of Mathematical Statistics",
       "record_type": "journal-article",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1214/aoms/1177729032",
       "evidence_locator": "Article-level comparison-of-experiments theorem.",
       "supports": [
@@ -29,6 +30,7 @@
       "publisher": "Springer Science and Business Media LLC",
       "container_title": "Communications in Mathematical Physics",
       "record_type": "journal-article",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1007/bf01197577",
       "evidence_locator": "Main theorem.",
       "supports": [
@@ -47,6 +49,7 @@
       "publisher": "Springer Science and Business Media LLC",
       "container_title": "Communications in Mathematical Physics",
       "record_type": "journal-article",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1007/bf01212322",
       "evidence_locator": "Sharpness and subcritical exponential-decay results.",
       "supports": [
@@ -65,6 +68,7 @@
       "publisher": "Springer Berlin Heidelberg",
       "container_title": "Grundlehren der mathematischen Wissenschaften",
       "record_type": "book",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1007/978-3-662-03981-6",
       "evidence_locator": "Second edition; manuscript cites Theorem 6.75 and Sections 8.2-8.3.",
       "supports": [
@@ -83,6 +87,7 @@
       "publisher": "Springer Science and Business Media LLC",
       "container_title": "Probability Theory and Related Fields",
       "record_type": "journal-article",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1007/bf01198161",
       "evidence_locator": "Percolation large-deviation results in large finite regions.",
       "supports": [
@@ -101,6 +106,7 @@
       "publisher": "Institute for Operations Research and the Management Sciences (INFORMS)",
       "container_title": "Operations Research",
       "record_type": "journal-article",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1287/opre.26.2.305",
       "evidence_locator": "Lattice comparative-statics results under submodularity/supermodularity hypotheses.",
       "supports": [
@@ -119,6 +125,7 @@
       "publisher": "Wiley",
       "container_title": "Random Structures & Algorithms",
       "record_type": "journal-article",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1002/rsa.3240060204",
       "evidence_locator": "Critical-point criterion for random graphs with a prescribed degree sequence.",
       "supports": [
@@ -137,6 +144,7 @@
       "publisher": "American Physical Society (APS)",
       "container_title": "Physical Review Letters",
       "record_type": "journal-article",
+      "evidence_class": "theoretical_model",
       "canonical_url": "https://doi.org/10.1103/physrevlett.85.4626",
       "evidence_locator": "Random-failure threshold analysis for heavy-tailed networks.",
       "supports": [
@@ -155,6 +163,7 @@
       "publisher": "American Physical Society (APS)",
       "container_title": "Physical Review E",
       "record_type": "journal-article",
+      "evidence_class": "theoretical_model",
       "canonical_url": "https://doi.org/10.1103/physreve.64.026118",
       "evidence_locator": "Generating-function giant-component criterion.",
       "supports": [
@@ -173,6 +182,7 @@
       "publisher": "Cambridge University Press",
       "container_title": "",
       "record_type": "monograph",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1017/cbo9780511814068",
       "evidence_locator": "Second-edition Erdos-Renyi component-size and giant-component results.",
       "supports": [
@@ -180,6 +190,101 @@
       ],
       "limitations": [
         "The citation supplies random-graph premises, not the Blackwell Dilemma welfare mapping."
+      ]
+    },
+    {
+      "id": "gabaix2014",
+      "doi": "10.1093/qje/qju024",
+      "title": "A Sparsity-Based Model of Bounded Rationality *",
+      "authors": ["Xavier Gabaix"],
+      "year": 2014,
+      "publisher": "Oxford University Press (OUP)",
+      "container_title": "The Quarterly Journal of Economics",
+      "record_type": "journal-article",
+      "evidence_class": "theoretical_model",
+      "canonical_url": "https://doi.org/10.1093/qje/qju024",
+      "evidence_locator": "Sparse-max behavioral model and attention-to-variables framework.",
+      "supports": [
+        "Boundedly rational choice can be modeled by omitting or attenuating decision-relevant variables."
+      ],
+      "limitations": [
+        "Provides a published modeling foundation for sparse attention, not empirical proof of the paper's exact topology-blind greedy rule or kappa interpolation."
+      ]
+    },
+    {
+      "id": "jehiel2005",
+      "doi": "10.1016/j.jet.2003.12.003",
+      "title": "Analogy-based expectation equilibrium",
+      "authors": ["Philippe Jehiel"],
+      "year": 2005,
+      "publisher": "Elsevier BV",
+      "container_title": "Journal of Economic Theory",
+      "record_type": "journal-article",
+      "evidence_class": "theoretical_model",
+      "canonical_url": "https://doi.org/10.1016/j.jet.2003.12.003",
+      "evidence_locator": "Coarse state-space and analogy-class expectation model.",
+      "supports": [
+        "A published economic model permits agents to coarsen payoff-relevant states and optimize within the coarsened representation."
+      ],
+      "limitations": [
+        "Does not identify the paper's graph-topology omission rule or establish that real agents use it."
+      ]
+    },
+    {
+      "id": "esponda_pouzo2016",
+      "doi": "10.3982/ecta12609",
+      "title": "Berk-Nash Equilibrium: A Framework for Modeling Agents With Misspecified Models",
+      "authors": ["Ignacio Esponda", "Demian Pouzo"],
+      "year": 2016,
+      "publisher": "The Econometric Society",
+      "container_title": "Econometrica",
+      "record_type": "journal-article",
+      "evidence_class": "theoretical_model",
+      "canonical_url": "https://doi.org/10.3982/ecta12609",
+      "evidence_locator": "Misspecified-model equilibrium framework.",
+      "supports": [
+        "Systematic welfare effects can be studied when agents optimize using a misspecified model."
+      ],
+      "limitations": [
+        "The source studies misspecified models and beliefs; it does not prove the paper's exact objective-misspecification or routing policy."
+      ]
+    },
+    {
+      "id": "camerer_ho_chong2004",
+      "doi": "10.1162/0033553041502225",
+      "title": "A Cognitive Hierarchy Model of Games",
+      "authors": ["C. F. Camerer", "T.-H. Ho", "J.-K. Chong"],
+      "year": 2004,
+      "publisher": "Oxford University Press (OUP)",
+      "container_title": "The Quarterly Journal of Economics",
+      "record_type": "journal-article",
+      "evidence_class": "theoretical_model",
+      "canonical_url": "https://doi.org/10.1162/0033553041502225",
+      "evidence_locator": "Cognitive-level hierarchy model.",
+      "supports": [
+        "A published bounded-rationality model represents heterogeneous depth of reasoning with a scalar cognitive level."
+      ],
+      "limitations": [
+        "Its level hierarchy is not the paper's continuous topology-precision parameter kappa and does not empirically calibrate that parameter."
+      ]
+    },
+    {
+      "id": "fudenberg_iijima_strzalecki2015",
+      "doi": "10.3982/ecta12660",
+      "title": "Stochastic Choice and Revealed Perturbed Utility",
+      "authors": ["Drew Fudenberg", "Ryota Iijima", "Tomasz Strzalecki"],
+      "year": 2015,
+      "publisher": "The Econometric Society",
+      "container_title": "Econometrica",
+      "record_type": "journal-article",
+      "evidence_class": "theoretical_model",
+      "canonical_url": "https://doi.org/10.3982/ecta12660",
+      "evidence_locator": "Perturbed-utility representation of stochastic choice.",
+      "supports": [
+        "A published representation allows systematic utility perturbations to generate stochastic choice."
+      ],
+      "limitations": [
+        "Does not imply the paper's alpha-weighted independent sentimental component or provide its empirical calibration."
       ]
     },
     {
@@ -191,6 +296,7 @@
       "publisher": "Frontiers Media SA",
       "container_title": "Frontiers in Psychology",
       "record_type": "journal-article",
+      "evidence_class": "diagnostic_method",
       "canonical_url": "https://doi.org/10.3389/fpsyg.2013.00700",
       "evidence_locator": "Discussion of the 5/9 bimodality-coefficient benchmark.",
       "supports": [
@@ -209,6 +315,7 @@
       "publisher": "American Physical Society (APS)",
       "container_title": "Physical Review B",
       "record_type": "journal-article",
+      "evidence_class": "theorem",
       "canonical_url": "https://doi.org/10.1103/physrevb.23.422",
       "evidence_locator": "Two-dimensional percolation correlation-length exponent estimate.",
       "supports": [

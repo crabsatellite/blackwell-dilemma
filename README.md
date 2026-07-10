@@ -18,6 +18,12 @@ formal_root_imports=BlackwellDilemma.PaperSemanticGate
 publication_evidence_closed=0
 publication_obligations_passed=40/75
 model_assumptions_admissible=12/12
+model_assumptions_theory_referenced=8/12
+model_assumption_provenance=benchmark_definition:1,paper_definition:2,paper_reduced_form:5,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
+model_assumptions_empirically_anchored=0/9
+real_world_model_evidence_closed=1/26
+mathematical_routes=model_internal_exact:17,reference_conditional:9
+semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5,paper_model_encoding:2
 ```
 
 See [`lean4/README.md`](lean4/README.md) for the generated claim roster and

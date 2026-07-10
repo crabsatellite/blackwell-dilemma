@@ -35,6 +35,11 @@ EXPECTED_IDS = (
     "cohen2000",
     "newman_strogatz_watts2001",
     "bollobas2001",
+    "gabaix2014",
+    "jehiel2005",
+    "esponda_pouzo2016",
+    "camerer_ho_chong2004",
+    "fudenberg_iijima_strzalecki2015",
     "pfister2013",
     "eschbach_stauffer_herrmann1981",
 )
@@ -51,6 +56,7 @@ IDENTITY_FIELDS = (
 )
 SCOPE_FIELDS = ("evidence_locator", "supports", "limitations")
 FORBIDDEN_STATUS_KEYS = {"status", "closed", "verified", "reasonable"}
+EVIDENCE_CLASSES = {"theorem", "theoretical_model", "diagnostic_method", "empirical_study"}
 
 
 def normalize_text(value: Any) -> str:
@@ -102,6 +108,8 @@ def offline_failures(registry: dict[str, Any]) -> list[str]:
         for field in SCOPE_FIELDS:
             if not record.get(field):
                 failures.append(f"{record_id}: empty scope field {field}")
+        if record.get("evidence_class") not in EVIDENCE_CLASSES:
+            failures.append(f"{record_id}: invalid evidence_class {record.get('evidence_class')}")
         doi = str(record.get("doi", ""))
         if doi != doi.lower() or not re.fullmatch(r"10\.\d{4,9}/\S+", doi):
             failures.append(f"{record_id}: DOI is not normalized: {doi}")
@@ -153,6 +161,12 @@ def main() -> int:
     print(f"reference_records_total={len(records)}")
     print(f"reference_scope_support_entries={sum(len(r.get('supports', [])) for r in records)}")
     print(f"reference_scope_limitation_entries={sum(len(r.get('limitations', [])) for r in records)}")
+    evidence_counts = {
+        evidence_class: sum(r.get("evidence_class") == evidence_class for r in records)
+        for evidence_class in sorted(EVIDENCE_CLASSES)
+    }
+    for evidence_class, count in evidence_counts.items():
+        print(f"reference_evidence_class_{evidence_class}={count}")
     print("reference_manual_status_fields=0" if not any(
         FORBIDDEN_STATUS_KEYS.intersection(record) for record in records
     ) else "reference_manual_status_fields=1")

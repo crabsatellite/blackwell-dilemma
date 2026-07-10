@@ -6,8 +6,23 @@
     "claims_total": 26,
     "strict_kernel_closed": 0,
     "publication_evidence_closed": 0,
+    "empirical_publication_closed": 0,
+    "claims_model_evidence_closed": 1,
     "model_assumptions_total": 12,
     "model_assumptions_admissible": 12,
+    "model_assumptions_theory_admissible": 12,
+    "model_assumptions_theory_referenced": 8,
+    "model_assumptions_theory_reference_not_required": 4,
+    "model_assumptions_empirical_required": 9,
+    "model_assumptions_empirically_anchored": 0,
+    "model_assumptions_by_provenance": {
+      "benchmark_definition": 1,
+      "paper_definition": 2,
+      "paper_reduced_form": 5,
+      "published_model_adaptation": 1,
+      "standard_theory": 2,
+      "tractability_normalization": 1
+    },
     "obligations_total": 75,
     "obligations_passed": 40,
     "obligations_by_type": {
@@ -27,8 +42,193 @@
       "lean_conditional": 9,
       "lean_exact": 17,
       "unresolved_semantics": 9
+    },
+    "mathematical_routes": {
+      "model_internal_exact": 17,
+      "reference_conditional": 9
+    },
+    "model_routes": {
+      "none": 1,
+      "real_strategy_evidence_required": 25
+    },
+    "semantic_gaps_by_resolution_class": {
+      "existing_theory_scope": 2,
+      "hybrid_model_and_strategy_evidence": 5,
+      "paper_model_encoding": 2
     }
   },
+  "model_assumptions": [
+    {
+      "id": "irreversible_no_revisit",
+      "kind": "structural_definition",
+      "provenance": "paper_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "terminal_neighbor_topology",
+      "kind": "structural_definition",
+      "provenance": "paper_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "topology_blind_gaussian_signals",
+      "kind": "distributional_assumption",
+      "provenance": "paper_reduced_form",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "gabaix2014",
+        "jehiel2005",
+        "esponda_pouzo2016"
+      ],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "greedy_static_reward_policy",
+      "kind": "behavioral_postulate",
+      "provenance": "published_model_adaptation",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "gabaix2014",
+        "jehiel2005",
+        "esponda_pouzo2016"
+      ],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "iid_uniform_rewards",
+      "kind": "distributional_assumption",
+      "provenance": "tractability_normalization",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "independent_bond_blocking",
+      "kind": "distributional_assumption",
+      "provenance": "standard_theory",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "kesten1980",
+        "aizenman_barsky1987",
+        "grimmett1999"
+      ],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "cognitive_interpolation_kappa",
+      "kind": "behavioral_postulate",
+      "provenance": "paper_reduced_form",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "camerer_ho_chong2004",
+        "gabaix2014",
+        "jehiel2005"
+      ],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "sentimental_weight_alpha",
+      "kind": "behavioral_postulate",
+      "provenance": "paper_reduced_form",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "fudenberg_iijima_strzalecki2015"
+      ],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "heterogeneous_population_distribution",
+      "kind": "distributional_assumption",
+      "provenance": "paper_reduced_form",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "bayesian_observes_topology",
+      "kind": "structural_definition",
+      "provenance": "benchmark_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "blackwell1953"
+      ],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "bayesian_naive_prior_rule",
+      "kind": "behavioral_postulate",
+      "provenance": "paper_reduced_form",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "esponda_pouzo2016"
+      ],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "configuration_model_power_law",
+      "kind": "regularity_condition",
+      "provenance": "standard_theory",
+      "theory_admissible": true,
+      "theory_reference_ids": [
+        "molloy_reed1995",
+        "cohen2000",
+        "newman_strogatz_watts2001"
+      ],
+      "empirical_required": true,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    }
+  ],
   "claims": [
     {
       "label": "thm:decomp",
@@ -36,6 +236,12 @@
       "lean_state": "partial",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "none",
+      "model_assumption_ids": [],
+      "empirical_model_gaps": [],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "repaired_uniqueness_scope",
@@ -57,12 +263,26 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "independent_bond_blocking",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "independent_bond_blocking",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [
+        "existing_theory_scope"
+      ],
       "obligations": [
         {
           "id": "gaussian_and_topology_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=topology_blind_gaussian_signals,independent_bond_blocking"
+          "detail": "theory-admissible assumption ids=topology_blind_gaussian_signals,independent_bond_blocking"
         },
         {
           "id": "subcritical_cluster_control",
@@ -90,12 +310,23 @@
       "lean_state": "partial",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "iid_uniform_rewards",
+        "independent_bond_blocking"
+      ],
+      "empirical_model_gaps": [
+        "independent_bond_blocking"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "uniform_reward_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=iid_uniform_rewards,independent_bond_blocking"
+          "detail": "theory-admissible assumption ids=iid_uniform_rewards,independent_bond_blocking"
         },
         {
           "id": "percolation_component_regimes",
@@ -117,12 +348,24 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "independent_bond_blocking",
+        "irreversible_no_revisit"
+      ],
+      "empirical_model_gaps": [
+        "independent_bond_blocking",
+        "irreversible_no_revisit"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "irreversibility_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=irreversible_no_revisit,independent_bond_blocking"
+          "detail": "theory-admissible assumption ids=irreversible_no_revisit,independent_bond_blocking"
         },
         {
           "id": "exact_reachability_and_welfare_inequalities",
@@ -138,12 +381,28 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [
+        "hybrid_model_and_strategy_evidence"
+      ],
       "obligations": [
         {
           "id": "greedy_idp_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
           "id": "policy_derived_terminal_reward",
@@ -165,6 +424,17 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "bayesian_observes_topology",
+        "irreversible_no_revisit"
+      ],
+      "empirical_model_gaps": [
+        "irreversible_no_revisit"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "blackwell_fixed_problem_premise",
@@ -176,7 +446,7 @@
           "id": "idp_conditioning_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=irreversible_no_revisit,bayesian_observes_topology"
+          "detail": "theory-admissible assumption ids=irreversible_no_revisit,bayesian_observes_topology"
         },
         {
           "id": "conditional_blackwell_specialization",
@@ -192,12 +462,29 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "terminal_neighbor_topology",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [
+        "hybrid_model_and_strategy_evidence"
+      ],
       "obligations": [
         {
           "id": "canonical_reversal_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=irreversible_no_revisit,terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=irreversible_no_revisit,terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
           "id": "dependency_semantics",
@@ -219,6 +506,19 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "iid_uniform_rewards",
+        "independent_bond_blocking"
+      ],
+      "empirical_model_gaps": [
+        "independent_bond_blocking"
+      ],
+      "semantic_resolution_classes": [
+        "existing_theory_scope"
+      ],
       "obligations": [
         {
           "id": "repaired_giant_component_probability",
@@ -236,7 +536,7 @@
           "id": "lattice_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=independent_bond_blocking,iid_uniform_rewards"
+          "detail": "theory-admissible assumption ids=independent_bond_blocking,iid_uniform_rewards"
         },
         {
           "id": "finite_torus_scope_match",
@@ -258,6 +558,19 @@
       "lean_state": "partial",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "iid_uniform_rewards",
+        "independent_bond_blocking",
+        "irreversible_no_revisit"
+      ],
+      "empirical_model_gaps": [
+        "independent_bond_blocking",
+        "irreversible_no_revisit"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "repaired_p_zero_and_local_scope",
@@ -269,7 +582,7 @@
           "id": "local_trap_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=irreversible_no_revisit,independent_bond_blocking,iid_uniform_rewards"
+          "detail": "theory-admissible assumption ids=irreversible_no_revisit,independent_bond_blocking,iid_uniform_rewards"
         },
         {
           "id": "exact_local_event_to_dynamic_reversal",
@@ -285,12 +598,28 @@
       "lean_state": "partial",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "cognitive_interpolation_kappa",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "cognitive_interpolation_kappa",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [
+        "hybrid_model_and_strategy_evidence"
+      ],
       "obligations": [
         {
           "id": "cognitive_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=cognitive_interpolation_kappa,topology_blind_gaussian_signals,irreversible_no_revisit"
+          "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,topology_blind_gaussian_signals,irreversible_no_revisit"
         },
         {
           "id": "posterior_threshold_semantics",
@@ -312,12 +641,24 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "cognitive_interpolation_kappa",
+        "sentimental_weight_alpha"
+      ],
+      "empirical_model_gaps": [
+        "cognitive_interpolation_kappa",
+        "sentimental_weight_alpha"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "alpha_kappa_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
+          "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
         },
         {
           "id": "exact_implicit_threshold_derivative",
@@ -333,6 +674,20 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "cognitive_interpolation_kappa",
+        "sentimental_weight_alpha"
+      ],
+      "empirical_model_gaps": [
+        "cognitive_interpolation_kappa",
+        "sentimental_weight_alpha"
+      ],
+      "semantic_resolution_classes": [
+        "paper_model_encoding"
+      ],
       "obligations": [
         {
           "id": "topkis_premise",
@@ -344,7 +699,7 @@
           "id": "alpha_kappa_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
+          "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
         },
         {
           "id": "actual_welfare_increasing_differences",
@@ -366,12 +721,26 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "sentimental_weight_alpha"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "sentimental_weight_alpha"
+      ],
+      "semantic_resolution_classes": [
+        "hybrid_model_and_strategy_evidence"
+      ],
       "obligations": [
         {
           "id": "sentimental_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=sentimental_weight_alpha,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=sentimental_weight_alpha,greedy_static_reward_policy"
         },
         {
           "id": "policy_derived_alpha_threshold",
@@ -393,12 +762,28 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "cognitive_interpolation_kappa",
+        "heterogeneous_population_distribution",
+        "sentimental_weight_alpha"
+      ],
+      "empirical_model_gaps": [
+        "cognitive_interpolation_kappa",
+        "heterogeneous_population_distribution",
+        "sentimental_weight_alpha"
+      ],
+      "semantic_resolution_classes": [
+        "hybrid_model_and_strategy_evidence"
+      ],
       "obligations": [
         {
           "id": "population_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=heterogeneous_population_distribution,cognitive_interpolation_kappa,sentimental_weight_alpha"
+          "detail": "theory-admissible assumption ids=heterogeneous_population_distribution,cognitive_interpolation_kappa,sentimental_weight_alpha"
         },
         {
           "id": "aggregate_tail_and_continuity",
@@ -420,12 +805,25 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "terminal_neighbor_topology",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "canonical_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
           "id": "exact_signal_routing_expectation",
@@ -441,12 +839,25 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "terminal_neighbor_topology",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "five_state_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
           "id": "exact_minimizer_and_numeric_interval",
@@ -462,12 +873,25 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "terminal_neighbor_topology",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "five_state_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
           "id": "exact_two_regime_bundle",
@@ -483,12 +907,25 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "cognitive_interpolation_kappa",
+        "terminal_neighbor_topology",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "cognitive_interpolation_kappa",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "five_state_cognitive_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=terminal_neighbor_topology,cognitive_interpolation_kappa,topology_blind_gaussian_signals"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,cognitive_interpolation_kappa,topology_blind_gaussian_signals"
         },
         {
           "id": "exact_five_state_cognitive_agent",
@@ -504,12 +941,25 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "cognitive_interpolation_kappa",
+        "independent_bond_blocking",
+        "terminal_neighbor_topology"
+      ],
+      "empirical_model_gaps": [
+        "cognitive_interpolation_kappa",
+        "independent_bond_blocking"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "five_state_blocking_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,cognitive_interpolation_kappa"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,cognitive_interpolation_kappa"
         },
         {
           "id": "blackwell_within_branch_premise",
@@ -537,6 +987,17 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "bayesian_observes_topology",
+        "irreversible_no_revisit"
+      ],
+      "empirical_model_gaps": [
+        "irreversible_no_revisit"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "blackwell_premise",
@@ -548,7 +1009,7 @@
           "id": "bayesian_topology_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=bayesian_observes_topology,irreversible_no_revisit"
+          "detail": "theory-admissible assumption ids=bayesian_observes_topology,irreversible_no_revisit"
         },
         {
           "id": "conditional_bayesian_specialization",
@@ -564,6 +1025,17 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "bayesian_observes_topology",
+        "greedy_static_reward_policy"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "repaired_policy_scope",
@@ -575,7 +1047,7 @@
           "id": "mixture_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=bayesian_observes_topology,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=bayesian_observes_topology,greedy_static_reward_policy"
         },
         {
           "id": "exact_cross_partial_from_agent_welfare",
@@ -591,12 +1063,25 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "bayesian_naive_prior_rule",
+        "terminal_neighbor_topology",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "bayesian_naive_prior_rule",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "bayesian_naive_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=bayesian_naive_prior_rule,terminal_neighbor_topology,topology_blind_gaussian_signals"
+          "detail": "theory-admissible assumption ids=bayesian_naive_prior_rule,terminal_neighbor_topology,topology_blind_gaussian_signals"
         },
         {
           "id": "exact_prior_threshold_and_welfare",
@@ -612,12 +1097,28 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [
+        "paper_model_encoding"
+      ],
       "obligations": [
         {
           "id": "general_idp_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
           "id": "graph_policy_semantics",
@@ -639,12 +1140,26 @@
       "lean_state": "partial",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "empirical_model_gaps": [
+        "greedy_static_reward_policy",
+        "irreversible_no_revisit",
+        "topology_blind_gaussian_signals"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "depth_signal_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=topology_blind_gaussian_signals,greedy_static_reward_policy,irreversible_no_revisit"
+          "detail": "theory-admissible assumption ids=topology_blind_gaussian_signals,greedy_static_reward_policy,irreversible_no_revisit"
         },
         {
           "id": "exact_depth_probability_and_threshold_bundle",
@@ -660,6 +1175,17 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "iid_uniform_rewards",
+        "independent_bond_blocking"
+      ],
+      "empirical_model_gaps": [
+        "independent_bond_blocking"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "er_component_premises",
@@ -671,7 +1197,7 @@
           "id": "random_graph_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=independent_bond_blocking,iid_uniform_rewards"
+          "detail": "theory-admissible assumption ids=independent_bond_blocking,iid_uniform_rewards"
         },
         {
           "id": "conditional_er_to_welfare_derivation",
@@ -687,6 +1213,19 @@
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
+      "empirical_publication_closed": false,
+      "mathematical_route": "reference_conditional",
+      "model_route": "real_strategy_evidence_required",
+      "model_assumption_ids": [
+        "configuration_model_power_law",
+        "iid_uniform_rewards",
+        "independent_bond_blocking"
+      ],
+      "empirical_model_gaps": [
+        "configuration_model_power_law",
+        "independent_bond_blocking"
+      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "repaired_power_law_scope",
@@ -704,7 +1243,7 @@
           "id": "configuration_model_scope",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "admissible assumption ids=configuration_model_power_law,independent_bond_blocking,iid_uniform_rewards"
+          "detail": "theory-admissible assumption ids=configuration_model_power_law,independent_bond_blocking,iid_uniform_rewards"
         },
         {
           "id": "conditional_configuration_to_welfare_derivation",

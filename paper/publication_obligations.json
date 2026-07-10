@@ -22,7 +22,7 @@
         {"id": "gaussian_and_topology_model", "type": "model_assumptions", "ids": ["topology_blind_gaussian_signals", "independent_bond_blocking"]},
         {"id": "subcritical_cluster_control", "type": "external_references", "ids": ["aizenman_barsky1987", "grimmett1999"]},
         {"id": "conditional_oracle_decay_derivation", "type": "lean_conditional"},
-        {"id": "uniform_in_n_oracle_bound", "type": "unresolved_semantics", "reason": "The manuscript needs one paper-faithful oracle kernel and a proved n-uniform bound rather than a carrier-level asymptotic."}
+        {"id": "uniform_in_n_oracle_bound", "type": "unresolved_semantics", "resolution_class": "existing_theory_scope", "reason": "The manuscript needs one paper-faithful oracle kernel and a proved n-uniform bound rather than a carrier-level asymptotic."}
       ]
     },
     {
@@ -47,7 +47,7 @@
       "statement_sha256": "2f9e95556bafefb8077aebc42208793b2f8f11b191844447e74fb303d530da4e",
       "obligations": [
         {"id": "greedy_idp_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "topology_blind_gaussian_signals", "greedy_static_reward_policy"]},
-        {"id": "policy_derived_terminal_reward", "type": "unresolved_semantics", "reason": "The current formal target must be rebuilt from graph, signals, policy, and terminal reward rather than a hand-coded scalar kernel."},
+        {"id": "policy_derived_terminal_reward", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The current formal target must be rebuilt from graph, signals, policy, and terminal reward rather than a hand-coded scalar kernel."},
         {"id": "exact_wrongness_derivation", "type": "lean_exact"}
       ]
     },
@@ -65,7 +65,7 @@
       "statement_sha256": "edffa4fb142af39bc62ea15abb5023c60306170c58f2c0fa6731a88644d1099b",
       "obligations": [
         {"id": "canonical_reversal_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "terminal_neighbor_topology", "topology_blind_gaussian_signals", "greedy_static_reward_policy"]},
-        {"id": "dependency_semantics", "type": "unresolved_semantics", "reason": "The theorem depends on paper-faithful wrongness, conditional reduction, and information-decay statements that are not yet jointly encoded."},
+        {"id": "dependency_semantics", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The theorem depends on paper-faithful wrongness, conditional reduction, and information-decay statements that are not yet jointly encoded."},
         {"id": "exact_dilemma_derivation", "type": "lean_exact"}
       ]
     },
@@ -76,7 +76,7 @@
         {"id": "repaired_giant_component_probability", "type": "statement_hash"},
         {"id": "square_lattice_percolation_premises", "type": "external_references", "ids": ["kesten1980", "aizenman_barsky1987", "grimmett1999", "pisztora1996"]},
         {"id": "lattice_model", "type": "model_assumptions", "ids": ["independent_bond_blocking", "iid_uniform_rewards"]},
-        {"id": "finite_torus_scope_match", "type": "unresolved_semantics", "reason": "The all-supercritical-p finite-torus giant-component statement is not yet matched to one source theorem with the same topology and range."},
+        {"id": "finite_torus_scope_match", "type": "unresolved_semantics", "resolution_class": "existing_theory_scope", "reason": "The all-supercritical-p finite-torus giant-component statement is not yet matched to one source theorem with the same topology and range."},
         {"id": "conditional_phase_to_welfare_derivation", "type": "lean_conditional"}
       ]
     },
@@ -94,7 +94,7 @@
       "statement_sha256": "dc66fba0ee2c87a333af19497ff4ecb94ac9568d6ada42899cdd89d4e8d72411",
       "obligations": [
         {"id": "cognitive_model", "type": "model_assumptions", "ids": ["cognitive_interpolation_kappa", "topology_blind_gaussian_signals", "irreversible_no_revisit"]},
-        {"id": "posterior_threshold_semantics", "type": "unresolved_semantics", "reason": "Finite supports and a depth expression exist, but the actual posterior threshold has not been derived from the stated policy model."},
+        {"id": "posterior_threshold_semantics", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "Finite supports and a depth expression exist, but the actual posterior threshold has not been derived from the stated policy model."},
         {"id": "exact_threshold_bundle", "type": "lean_exact"}
       ]
     },
@@ -112,7 +112,7 @@
       "obligations": [
         {"id": "topkis_premise", "type": "external_references", "ids": ["topkis1978"]},
         {"id": "alpha_kappa_model", "type": "model_assumptions", "ids": ["cognitive_interpolation_kappa", "sentimental_weight_alpha"]},
-        {"id": "actual_welfare_increasing_differences", "type": "unresolved_semantics", "reason": "Topkis applies only after increasing differences are proved for the paper's posterior welfare function."},
+        {"id": "actual_welfare_increasing_differences", "type": "unresolved_semantics", "resolution_class": "paper_model_encoding", "reason": "Topkis applies only after increasing differences are proved for the paper's posterior welfare function."},
         {"id": "conditional_topkis_specialization", "type": "lean_conditional"}
       ]
     },
@@ -121,7 +121,7 @@
       "statement_sha256": "3d8bfb6bcd237e10c9e53db501a960867b30bfd855a0e8ebf97649e9ef722fdd",
       "obligations": [
         {"id": "sentimental_model", "type": "model_assumptions", "ids": ["sentimental_weight_alpha", "greedy_static_reward_policy"]},
-        {"id": "policy_derived_alpha_threshold", "type": "unresolved_semantics", "reason": "The alpha threshold must be rebuilt from the IDP policy rather than a hand-coded welfare carrier."},
+        {"id": "policy_derived_alpha_threshold", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The alpha threshold must be rebuilt from the IDP policy rather than a hand-coded welfare carrier."},
         {"id": "exact_sentimental_immunity", "type": "lean_exact"}
       ]
     },
@@ -130,7 +130,7 @@
       "statement_sha256": "3e3a34f3f3138674d24a324b4ef9e6c6eea837bb9c11fb637ef704bdd623bcd0",
       "obligations": [
         {"id": "population_model", "type": "model_assumptions", "ids": ["heterogeneous_population_distribution", "cognitive_interpolation_kappa", "sentimental_weight_alpha"]},
-        {"id": "aggregate_tail_and_continuity", "type": "unresolved_semantics", "reason": "The aggregate welfare objective needs exact continuity, tail, and distributional hypotheses."},
+        {"id": "aggregate_tail_and_continuity", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The aggregate welfare objective needs exact continuity, tail, and distributional hypotheses."},
         {"id": "exact_principal_optimum", "type": "lean_exact"}
       ]
     },
@@ -207,7 +207,7 @@
       "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8",
       "obligations": [
         {"id": "general_idp_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "topology_blind_gaussian_signals", "greedy_static_reward_policy"]},
-        {"id": "graph_policy_semantics", "type": "unresolved_semantics", "reason": "The reversal must be derived from reachability, dynamic value, and C2-prime rather than a manufactured witness."},
+        {"id": "graph_policy_semantics", "type": "unresolved_semantics", "resolution_class": "paper_model_encoding", "reason": "The reversal must be derived from reachability, dynamic value, and C2-prime rather than a manufactured witness."},
         {"id": "exact_general_tree_derivation", "type": "lean_exact"}
       ]
     },

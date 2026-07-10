@@ -119,7 +119,22 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_manual_status_fields=0"
+            "publication_manual_status_fields=0",
+            "publication_model_assumptions_theory_referenced=8",
+            "publication_model_assumptions_theory_reference_not_required=4",
+            "publication_model_assumptions_empirical_required=9",
+            "publication_model_assumptions_empirically_anchored=0",
+            "publication_model_assumption_provenance_benchmark_definition=1",
+            "publication_model_assumption_provenance_paper_definition=2",
+            "publication_model_assumption_provenance_paper_reduced_form=5",
+            "publication_model_assumption_provenance_published_model_adaptation=1",
+            "publication_model_assumption_provenance_standard_theory=2",
+            "publication_model_assumption_provenance_tractability_normalization=1",
+            "publication_mathematical_route_model_internal_exact=17",
+            "publication_mathematical_route_reference_conditional=9",
+            "publication_semantic_resolution_existing_theory_scope=2",
+            "publication_semantic_resolution_hybrid_model_and_strategy_evidence=5",
+            "publication_semantic_resolution_paper_model_encoding=2"
           ]
         }
       ]
@@ -147,7 +162,8 @@
           "type": "python_script",
           "path": "tools/verify_reference_registry.py",
           "stdout_contains": [
-            "reference_records_total=12",
+            "reference_records_total=17",
+            "reference_evidence_class_empirical_study=0",
             "reference_manual_status_fields=0",
             "reference_metadata_offline_failures=0"
           ]

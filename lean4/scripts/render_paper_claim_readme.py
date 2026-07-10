@@ -61,6 +61,10 @@ def formal_root_imports() -> list[str]:
     )
 
 
+def rendered_counts(counts: dict[str, object]) -> str:
+    return ",".join(f"{key}:{value}" for key, value in sorted(counts.items()))
+
+
 def render_lean_readme(
     claims: list[tuple[str, str, str]],
     metadata: dict[str, dict[str, object]],
@@ -95,6 +99,12 @@ formal_root_imports={','.join(root_imports)}
 publication_evidence_closed={publication_summary['publication_evidence_closed']}
 publication_obligations_passed={publication_summary['obligations_passed']}/{publication_summary['obligations_total']}
 model_assumptions_admissible={publication_summary['model_assumptions_admissible']}/{publication_summary['model_assumptions_total']}
+model_assumptions_theory_referenced={publication_summary['model_assumptions_theory_referenced']}/{publication_summary['model_assumptions_total']}
+model_assumption_provenance={rendered_counts(publication_summary['model_assumptions_by_provenance'])}
+model_assumptions_empirically_anchored={publication_summary['model_assumptions_empirically_anchored']}/{publication_summary['model_assumptions_empirical_required']}
+real_world_model_evidence_closed={publication_summary['claims_model_evidence_closed']}/{publication_summary['claims_total']}
+mathematical_routes={rendered_counts(publication_summary['mathematical_routes'])}
+semantic_gap_routes={rendered_counts(publication_summary['semantic_gaps_by_resolution_class'])}
 ```
 
 | Label | Kind | State | Route | Title |
@@ -148,6 +158,12 @@ formal_root_imports={','.join(root_imports)}
 publication_evidence_closed={publication_summary['publication_evidence_closed']}
 publication_obligations_passed={publication_summary['obligations_passed']}/{publication_summary['obligations_total']}
 model_assumptions_admissible={publication_summary['model_assumptions_admissible']}/{publication_summary['model_assumptions_total']}
+model_assumptions_theory_referenced={publication_summary['model_assumptions_theory_referenced']}/{publication_summary['model_assumptions_total']}
+model_assumption_provenance={rendered_counts(publication_summary['model_assumptions_by_provenance'])}
+model_assumptions_empirically_anchored={publication_summary['model_assumptions_empirically_anchored']}/{publication_summary['model_assumptions_empirical_required']}
+real_world_model_evidence_closed={publication_summary['claims_model_evidence_closed']}/{publication_summary['claims_total']}
+mathematical_routes={rendered_counts(publication_summary['mathematical_routes'])}
+semantic_gap_routes={rendered_counts(publication_summary['semantic_gaps_by_resolution_class'])}
 ```
 
 See [`lean4/README.md`](lean4/README.md) for the generated claim roster and

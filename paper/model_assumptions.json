@@ -2,6 +2,7 @@
   "schema_version": 1,
   "admissibility_policy": {
     "meaning": "admissible means explicit, scoped, and testable or constitutive; it does not mean empirically true",
+    "empirical_closure_rule": "a real-world application requires at least one empirical_study reference and at least one manifest-backed machine check",
     "allowed_kinds": [
       "structural_definition",
       "behavioral_postulate",
@@ -13,6 +14,22 @@
       "observable",
       "calibration",
       "sensitivity"
+    ],
+    "allowed_provenance": [
+      "paper_definition",
+      "benchmark_definition",
+      "standard_theory",
+      "published_model_adaptation",
+      "paper_reduced_form",
+      "tractability_normalization"
+    ],
+    "allowed_theory_evidence_modes": [
+      "not_required_for_conditional_theorem",
+      "references"
+    ],
+    "allowed_empirical_evidence_modes": [
+      "not_claimed",
+      "required_for_real_world_application"
     ]
   },
   "assumptions": [
@@ -26,6 +43,9 @@
         "kind": "model_boundary",
         "criterion": "An application is outside scope when reversals, recalls, or costless backtracking are feasible."
       },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -38,6 +58,9 @@
         "kind": "model_boundary",
         "criterion": "The assumption fails when the trap branch has further feasible continuation or the start has additional available neighbors."
       },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -50,6 +73,9 @@
         "kind": "sensitivity",
         "criterion": "Recompute the claim under non-Gaussian noise and under signals that include edge-state information."
       },
+      "provenance": "paper_reduced_form",
+      "theory_evidence": {"mode": "references", "reference_ids": ["gabaix2014", "jehiel2005", "esponda_pouzo2016"]},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -62,6 +88,9 @@
         "kind": "observable",
         "criterion": "Choice data can compare immediate-reward rankings with continuation-value rankings at otherwise matched decision nodes."
       },
+      "provenance": "published_model_adaptation",
+      "theory_evidence": {"mode": "references", "reference_ids": ["gabaix2014", "jehiel2005", "esponda_pouzo2016"]},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -74,6 +103,9 @@
         "kind": "sensitivity",
         "criterion": "Replace the reward law and recompute order statistics; no empirical universality is asserted."
       },
+      "provenance": "tractability_normalization",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -86,6 +118,9 @@
         "kind": "sensitivity",
         "criterion": "Correlated or targeted failures require a separate model and are outside the cited threshold formulas."
       },
+      "provenance": "standard_theory",
+      "theory_evidence": {"mode": "references", "reference_ids": ["kesten1980", "aizenman_barsky1987", "grimmett1999"]},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -98,6 +133,9 @@
         "kind": "calibration",
         "criterion": "Estimate kappa from repeated routing choices and report sensitivity to alternative interpolation rules."
       },
+      "provenance": "paper_reduced_form",
+      "theory_evidence": {"mode": "references", "reference_ids": ["camerer_ho_chong2004", "gabaix2014", "jehiel2005"]},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -110,6 +148,9 @@
         "kind": "calibration",
         "criterion": "Calibrate alpha from choices with independently varied monetary and sentimental attributes and test alternative dependence structures."
       },
+      "provenance": "paper_reduced_form",
+      "theory_evidence": {"mode": "references", "reference_ids": ["fudenberg_iijima_strzalecki2015"]},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -122,6 +163,9 @@
         "kind": "calibration",
         "criterion": "The parameter distribution must be estimated or supplied, and conclusions must be sensitivity-tested over alternative distributions."
       },
+      "provenance": "paper_reduced_form",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -134,6 +178,9 @@
         "kind": "model_boundary",
         "criterion": "The benchmark does not apply when the agent observes only a prior over topology."
       },
+      "provenance": "benchmark_definition",
+      "theory_evidence": {"mode": "references", "reference_ids": ["blackwell1953"]},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -146,6 +193,9 @@
         "kind": "observable",
         "criterion": "Routing choices must remain signal independent at the start node and identify the implied prior threshold."
       },
+      "provenance": "paper_reduced_form",
+      "theory_evidence": {"mode": "references", "reference_ids": ["esponda_pouzo2016"]},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {
@@ -158,6 +208,9 @@
         "kind": "observable",
         "criterion": "Check degree-law fit, degree correlations, finite-size cutoff, and removal mechanism before applying the threshold formula."
       },
+      "provenance": "standard_theory",
+      "theory_evidence": {"mode": "references", "reference_ids": ["molloy_reed1995", "cohen2000", "newman_strogatz_watts2001"]},
+      "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     }
   ]
