@@ -61,6 +61,13 @@
       "local_file": "paper/publication_obligations.json"
     },
     {
+      "id": "claim_lineage_gate",
+      "kind": "machine_gate",
+      "role": "Immutable checkpoint and machine-audited repair lineage for every manuscript claim.",
+      "status": "repo_build_gate",
+      "local_file": "paper/claim_lineage.json"
+    },
+    {
       "id": "lean_paper_semantic_gate",
       "kind": "machine_gate",
       "role": "Proof-derived Lean ledger for all labelled manuscript claims.",
@@ -76,6 +83,38 @@
     }
   ],
   "claims": [
+    {
+      "id": "claim_lineage_checkpoint_gate",
+      "category": "machine_checked_research_claim_preservation",
+      "source_cards": [
+        "claim_lineage_gate"
+      ],
+      "locations": [
+        {
+          "id": "claim_lineage",
+          "path": "paper/claim_lineage.json",
+          "contains": [
+            "\"baseline_public_commit\": \"6746bf3d8830d9771f15607f6c9edf168eab1594\"",
+            "\"parent_manuscript_checkpoint_commit\": \"f19371df76d74ac0b5f2d837910ee67f63b373af\"",
+            "\"relation\": \"unchanged\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "claim_lineage_audit",
+          "type": "python_script",
+          "path": "tools/audit_claim_lineage.py",
+          "stdout_contains": [
+            "claim_lineage_baseline_claims=26",
+            "claim_lineage_current_claims=26",
+            "claim_lineage_preserved_claims=26",
+            "claim_lineage_relation_unchanged=26",
+            "claim_lineage_manual_status_fields=0"
+          ]
+        }
+      ]
+    },
     {
       "id": "publication_obligation_ledger_gate",
       "category": "machine_derived_claim_closure",
