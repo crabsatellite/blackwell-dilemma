@@ -17,6 +17,12 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.FiveStateRouting.expectedLoss_formula
 #print axioms BlackwellDilemma.FiveStateRouting.uniqueInteriorMinimum
 #print axioms BlackwellDilemma.FiveStateRouting.interiorOptimumClaim_proved
+#print axioms BlackwellDilemma.FiveStateTwoRegime.outcomeProbability_sum_one
+#print axioms BlackwellDilemma.FiveStateTwoRegime.expectedLoss_eq_L
+#print axioms BlackwellDilemma.FiveStateTwoRegime.reversalBundle
+#print axioms BlackwellDilemma.FiveStateTwoRegime.overshootRegimeI_strictAnti
+#print axioms BlackwellDilemma.FiveStateTwoRegime.topologyRegimeBundle
+#print axioms BlackwellDilemma.FiveStateTwoRegime.twoRegimeClaim_proved
 #print axioms topologicalLossOrderStatisticsAlgebraCore_proved
 #print axioms topoClusterPartialCore_proved
 #print axioms BlackwellDilemma.Infrastructure.part6LowerBoundTransferPrinciple_proved

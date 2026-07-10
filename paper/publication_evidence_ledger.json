@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "6cbf31cba6ea3606d6118c4318f77d162ad3f855093f0eaa3f86674a0c551f95",
+  "manuscript_sha256": "3da2310d969bfedc4d19dc0badaefe5f3f2d8a1020976a72f731cdeab6780924",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 4,
-    "publication_evidence_closed": 4,
+    "strict_kernel_closed": 5,
+    "publication_evidence_closed": 5,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 12,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 76,
-    "obligations_passed": 45,
+    "obligations_passed": 46,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
@@ -37,13 +37,13 @@
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
-      "lean_exact": 4,
+      "lean_exact": 5,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 9,
-      "lean_exact": 13,
+      "lean_exact": 12,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
@@ -878,20 +878,22 @@
     },
     {
       "label": "prop:two-regime-five-state",
-      "statement_sha256": "a1cc1069ef503f33d1e5d5b79366fffa8a6338352f7b5a3831f19a1debb50579",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "a4779a9e17f169ad4615e242f9600ba4da2eb346da844b747c59ffc600d3dd9e",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "greedy_static_reward_policy",
+        "independent_bond_blocking",
         "terminal_neighbor_topology",
         "topology_blind_gaussian_signals"
       ],
       "empirical_model_gaps": [
         "greedy_static_reward_policy",
+        "independent_bond_blocking",
         "topology_blind_gaussian_signals"
       ],
       "semantic_resolution_classes": [],
@@ -900,13 +902,13 @@
           "id": "five_state_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
           "id": "exact_two_regime_bundle",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

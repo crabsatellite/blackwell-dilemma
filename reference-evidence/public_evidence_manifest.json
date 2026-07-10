@@ -103,6 +103,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedInterior.lean"
     },
     {
+      "id": "unified_two_regime_kernel",
+      "kind": "machine_gate",
+      "role": "Finite blocked-edge route distribution, exact greedy-loss regimes, strict optimal-value comparative statics, and perfect-topology benchmark for the five-state instance.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedTwoRegime.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -195,6 +202,71 @@
       ]
     },
     {
+      "id": "five_state_two_regime_gate",
+      "category": "kernel_checked_finite_regime_theorem",
+      "source_cards": [
+        "unified_two_regime_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "two_regime_module",
+          "path": "lean4/BlackwellDilemma/UnifiedTwoRegime.lean",
+          "contains": [
+            "def outcomeProbability",
+            "def expectedLoss",
+            "theorem outcomeProbability_sum_one",
+            "theorem expectedLoss_eq_L",
+            "theorem overshootRegimeI_strictAnti",
+            "theorem topologyRegimeBundle",
+            "theorem twoRegimeClaim_proved"
+          ]
+        },
+        {
+          "id": "two_regime_canonical_surface",
+          "path": "lean4/BlackwellDilemma/Canonical.lean",
+          "contains": [
+            "theorem L_tendsto_limit_atTop",
+            "theorem betaStarOfP_pos"
+          ]
+        },
+        {
+          "id": "two_regime_claim_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.FiveStateTwoRegime.TwoRegimeClaim",
+            "BlackwellDilemma.FiveStateTwoRegime.twoRegimeClaim_proved"
+          ]
+        },
+        {
+          "id": "two_regime_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.FiveStateTwoRegime.outcomeProbability_sum_one",
+            "#print axioms BlackwellDilemma.FiveStateTwoRegime.expectedLoss_eq_L",
+            "#print axioms BlackwellDilemma.FiveStateTwoRegime.reversalBundle",
+            "#print axioms BlackwellDilemma.FiveStateTwoRegime.overshootRegimeI_strictAnti",
+            "#print axioms BlackwellDilemma.FiveStateTwoRegime.topologyRegimeBundle",
+            "#print axioms BlackwellDilemma.FiveStateTwoRegime.twoRegimeClaim_proved"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "two_regime_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -272,8 +344,8 @@
             "claim_lineage_baseline_claims=26",
             "claim_lineage_current_claims=26",
             "claim_lineage_preserved_claims=26",
-            "claim_lineage_relation_split_core_and_frontier=3",
-            "claim_lineage_relation_unchanged=23",
+            "claim_lineage_relation_split_core_and_frontier=4",
+            "claim_lineage_relation_unchanged=22",
             "claim_lineage_manual_status_fields=0"
           ]
         }

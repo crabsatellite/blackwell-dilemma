@@ -635,7 +635,7 @@ private theorem Phi_B_tendsto_half_atZero :
     Pure algebraic identity on the concrete `L` definition,
     discharged by `ring`.
     paper source: Equation `eq:five-state-rearr`, line 823. -/
-private theorem L_rearrangement (β p : ℝ) :
+theorem L_rearrangement (β p : ℝ) :
     L β p - (4/10 : ℝ) =
       (1 - P_trap β) * ((1/2 : ℝ) - (9/10 : ℝ) * (1 - p) * Phi_B β) := by
   unfold L
@@ -646,7 +646,7 @@ private theorem L_rearrangement (β p : ℝ) :
     tends to `1·0.4 + 0·0.9·(1 − (1 − p)·1) = 0.4`.
     paper source: line 804 ("at `β → ∞`, `P_trap → 1` so
     `L(∞, p) = 0.4`"). -/
-private theorem L_tendsto_limit_atTop (p : ℝ) :
+theorem L_tendsto_limit_atTop (p : ℝ) :
     Filter.Tendsto (fun β : ℝ => L β p) Filter.atTop (nhds (4/10 : ℝ)) := by
   have h_Pt : Filter.Tendsto P_trap Filter.atTop (nhds 1) :=
     P_trap_tendsto_one_atTop
@@ -2874,69 +2874,6 @@ theorem gap_three_regime_reversal_nonmonotone :
         L β_a p < L β_b p) :=
   L_nonmonotone_witnesses
 
-/-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`.**
-    For `p₁ < p₂` both in `[0, p_1)`, the overshoot
-    `L(∞, p) − L(β*(p), p) = 0.4 − L(β*(p), p)` is strictly larger at
-    `p₁` than at `p₂`, equivalently the minimised loss `L(β*(p), p)`
-    is strictly smaller at `p₁` than at `p₂`. Encoded existentially
-    over the optima rather than via an opaque `betaStarOf` carrier
-    (the per-p uniqueness of `β*(p)` is the separate
-    `gap_three_regime_reversal_uniqueness_OPEN`). Paper proof:
-    envelope differentiation of the rearranged loss equation
-    `eq:five-state-rearr` at `β = β*(p)`. The companion continuity
-    sub-claim and vanishing-at-`p_1` sub-claim of paper line 814 are
-    encoded as `gap_three_regime_reversal_overshoot_continuous_OPEN`
-    and `gap_three_regime_reversal_overshoot_vanishes_at_p1_OPEN`
-    against the opaque `betaStarOfP` carrier introduced below
-    (an opaque-function carrier is required to host the
-    `ContinuousOn` / `Filter.Tendsto` predicates against a single
-    canonical `β*(p)` selection).
-
-    paper source: Proposition `prop:three-regime-five-state` Regime (i),
-    line 814 ("overshoot ... is continuous and strictly decreasing in
-    p on [0, p_1), vanishing at p_1"); proof at line 825 ("Continuity
-    and strict monotonicity of the overshoot in p follow from envelope
-    differentiation of (eq:five-state-rearr) at β = β*(p)").
-
-    Fully derived theorem from a paper-derived Cat 3 atom. Proves the
-    existential encoding by genuine real-analysis on the concrete `L`
-    carrier.
-    For `p₁`, the below-limit witness `β*₁` satisfies `L β*₁ p₁ < 0.4`
-    (`L_below_limit_at_some_beta_proof`, applicable since `p₁ < p₂ <
-    p_1`). For `p₂`, the loss limit `L(β, p₂) → 0.4` as `β → ∞`
-    (`L_tendsto_limit_atTop`) exceeds `L β*₁ p₁`, so some finite
-    `β*₂ > 0` has `L β*₂ p₂ > L β*₁ p₁`. The witnessed inequality
-    `L β*₁ p₁ < L β*₂ p₂` is the existential the paper's overshoot-
-    monotonicity claim reduces to. No `Classical.choose`, no opaque
-    carrier — fully derived. -/
-theorem envelope_derivative_sign_in_p :
-    ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
-      ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
-        L β_star₁ p₁ < L β_star₂ p₂ := by
-  intro p₁ p₂ hp₁_nonneg hp₁_lt_p₂ hp₂_lt_p1
-  -- `β*₁`: below-limit witness for `p₁` (valid since `p₁ < p₂ < p_1`).
-  have hp₁_lt_p1 : p₁ < p_1 := lt_trans hp₁_lt_p₂ hp₂_lt_p1
-  obtain ⟨β_star₁, hβ₁_pos, hβ₁_lt⟩ :=
-    L_below_limit_at_some_beta_proof p₁ hp₁_nonneg hp₁_lt_p1
-  -- `β*₂`: a finite `β` for `p₂` whose loss exceeds `L β*₁ p₁`,
-  -- available because `L(·, p₂) → 0.4 > L β*₁ p₁` as `β → ∞`.
-  have h_ev_L : ∀ᶠ β in Filter.atTop, L β_star₁ p₁ < L β p₂ :=
-    (L_tendsto_limit_atTop p₂).eventually (eventually_gt_nhds hβ₁_lt)
-  have h_ev_pos : ∀ᶠ β in Filter.atTop, (0 : ℝ) < β :=
-    Filter.eventually_gt_atTop (0 : ℝ)
-  obtain ⟨β_star₂, hβ₂_L, hβ₂_pos⟩ := ((h_ev_L.and h_ev_pos).exists)
-  exact ⟨β_star₁, β_star₂, hβ₁_pos, hβ₂_pos, hβ₂_L⟩
-
-/-- **Regime (i) sub-claim — overshoot strictly decreasing in `p`**
-    (derived theorem composing
-    `envelope_derivative_sign_in_p`).
-    paper source: Regime (i), line 814 + proof at line 825. -/
-theorem gap_three_regime_reversal_overshoot_decreasing :
-    ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
-      ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
-        L β_star₁ p₁ < L β_star₂ p₂ :=
-  envelope_derivative_sign_in_p
-
 /-- Closure-path-A smaller claim, fully derived theorem from a
     paper-derived atom: on Regime (i)'s domain `p ∈ [0, p_1)`, the
     loss function `L(·, p)` has an interior
@@ -3250,7 +3187,7 @@ plus the project lemmas `betaStarOfP_loss_below_limit`,
     at its `if_pos` branch (in-domain) to `Classical.choose` of the
     `L_minimum_exists_in_regime_i` existence witness, whose
     `Classical.choose_spec` first component is exactly `0 < β_min`. -/
-private theorem betaStarOfP_pos {p : ℝ} (h_p_nonneg : 0 ≤ p)
+theorem betaStarOfP_pos {p : ℝ} (h_p_nonneg : 0 ≤ p)
     (h_p_lt_p1 : p < p_1) : 0 < betaStarOfP p := by
   have h_dom : 0 ≤ p ∧ p < p_1 := ⟨h_p_nonneg, h_p_lt_p1⟩
   have h_unfold : betaStarOfP p =
@@ -3579,12 +3516,6 @@ theorem gap_two_regime_reversal_nonmonotone :
       (∃ β_a β_b : ℝ, 0 < β_a ∧ β_a < β_b ∧
         L β_a p < L β_b p) :=
   gap_three_regime_reversal_nonmonotone
-
-theorem gap_two_regime_reversal_overshoot_decreasing :
-    ∀ p₁ p₂ : ℝ, 0 ≤ p₁ → p₁ < p₂ → p₂ < p_1 →
-      ∃ β_star₁ β_star₂ : ℝ, 0 < β_star₁ ∧ 0 < β_star₂ ∧
-        L β_star₁ p₁ < L β_star₂ p₂ :=
-  gap_three_regime_reversal_overshoot_decreasing
 
 theorem gap_two_regime_reversal_overshoot_continuous :
     ContinuousOn overshootRegimeI (Set.Ico (0 : ℝ) p_1) :=

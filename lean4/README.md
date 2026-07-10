@@ -9,18 +9,18 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=4
+paper_claims_closed=5
 paper_claims_partial=4
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=18
+paper_claims_unformalized=17
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=4
-publication_obligations_passed=45/76
+publication_evidence_closed=5
+publication_obligations_passed=46/76
 model_assumptions_admissible=12/12
 research_claims_preserved=26/26
-claim_lineage_relations=split_core_and_frontier:3,unchanged:23
+claim_lineage_relations=split_core_and_frontier:4,unchanged:22
 model_assumptions_theory_referenced=8/12
 model_assumption_provenance=benchmark_definition:1,paper_definition:2,paper_reduced_form:5,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
@@ -47,7 +47,7 @@ semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5
 | `prop:principal-optimum` | proposition | unformalized | local | Interior Optimal Precision for Heterogeneous Populations |
 | `prop:canonical` | proposition | closed | semantic-repair | Canonical Welfare |
 | `prop:interior-optimum` | proposition | closed | semantic-repair | Interior Optimum |
-| `prop:two-regime-five-state` | proposition | unformalized | local | Two-Regime Structure of the 5-State Instance |
+| `prop:two-regime-five-state` | proposition | closed | semantic-repair | Two-Regime Structure of the 5-State Instance |
 | `prop:threshold-five-state` | proposition | unformalized | semantic-repair | Cognitive Sufficiency on the 5-State Instance |
 | `prop:p-monotonicity-five-state` | proposition | unformalized | local | $p$-Monotonicity on the 5-State Instance |
 | `thm:bayesian-immunity` | theorem | unformalized | external-library | Bayesian Immunity |

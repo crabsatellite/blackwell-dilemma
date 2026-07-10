@@ -11,7 +11,7 @@ Claims audited:
   1. beta* approx 1.5 bits (Prop interior-optimum, 5-state)
   2. L(beta*) approx 0.273 at p=0 (5-state welfare table)
   3. L(infty) = 0.400 at any p (greedy permanent ceiling)
-  4. 47% overshoot claim ("perfect signals increase loss by ~47%")
+  4. 46.5% overshoot claim ("perfect signals increase loss by ~46.5%")
   5. kappa*(0.8) approx 0.63 bits, c*(0.8) approx 0.721
   6. kappa*(0.9) approx 1.00 bits, c*(0.9) approx 0.332
   7. alpha* approx 0.41 (with >= 0.45 empirical-detection threshold)
@@ -125,10 +125,10 @@ def main():
         print(msg); results.append(s)
     print()
 
-    # Claim 4: "approximately 47% increase" (perfect signals vs optimal)
-    print("--- Claim 4: 47% overshoot ---")
+    # Claim 4: "approximately 46.5% increase" (perfect signals vs optimal)
+    print("--- Claim 4: 46.5% overshoot ---")
     overshoot_pct = (0.400 / best_L - 1.0) * 100
-    s, msg = check("(L(infty) / L(beta*) - 1) ~ 47%", 47.0, overshoot_pct, tol=1.0)
+    s, msg = check("(L(infty) / L(beta*) - 1) ~ 46.5%", 46.5, overshoot_pct, tol=0.1)
     print(msg); results.append(s)
     print()
 
