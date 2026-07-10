@@ -97,10 +97,10 @@
     },
     {
       "label": "prop:threshold-alpha",
-      "statement_sha256": "ff8a94ed72b3df7a481b133310b531721d947041ffe91a25640e365db58ad2bf",
+      "statement_sha256": "f68532492cf9183699c90d865ad18984d013a4ee04c1cdbe334729d563e99afe",
       "obligations": [
         {"id": "alpha_kappa_model", "type": "model_assumptions", "ids": ["cognitive_interpolation_kappa", "sentimental_weight_alpha"]},
-        {"id": "exact_implicit_threshold_derivative", "type": "lean_exact"}
+        {"id": "exact_alpha_loaded_threshold_comparative_statics", "type": "lean_exact"}
       ]
     },
     {

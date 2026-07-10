@@ -233,12 +233,18 @@
       "baseline_kind": "proposition",
       "baseline_title": "Cognitive Threshold Increases with Instrumental Rationality",
       "baseline_statement_sha256": "ff8a94ed72b3df7a481b133310b531721d947041ffe91a25640e365db58ad2bf",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:threshold-alpha"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the alpha comparative static under an explicit positive score loading and replace the unsupported universal derivative and endpoint IVT argument by strict threshold order and an exact alpha crossing.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:threshold-alpha",
+          "id": "exact_alpha_loaded_threshold_comparative_statics"
+        }
+      ]
     },
     {
       "baseline_label": "prop:supermodular",

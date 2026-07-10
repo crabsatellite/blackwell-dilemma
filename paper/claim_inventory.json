@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "44fb1c16c8e17fd5504f2ea39f0bac186748ef5fb7d00a0575a65690218fde0d",
+  "manuscript_sha256": "a4a5d7f089d0456f4347b7c7b9cdfd44c3d4de5adf02ed657534767127eebba2",
   "claims": [
     {
       "line": 262,
@@ -78,7 +78,7 @@
       "kind": "proposition",
       "label": "prop:threshold-alpha",
       "title": "Cognitive Threshold Increases with Instrumental Rationality",
-      "statement_sha256": "ff8a94ed72b3df7a481b133310b531721d947041ffe91a25640e365db58ad2bf"
+      "statement_sha256": "f68532492cf9183699c90d865ad18984d013a4ee04c1cdbe334729d563e99afe"
     },
     {
       "line": 595,

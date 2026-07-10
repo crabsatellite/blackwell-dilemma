@@ -29,6 +29,7 @@ import BlackwellDilemma.UnifiedTopoCluster
 import BlackwellDilemma.UnifiedPhase
 import BlackwellDilemma.UnifiedTrapPrevalence
 import BlackwellDilemma.UnifiedCognitiveThreshold
+import BlackwellDilemma.UnifiedThresholdAlpha
 
 namespace BlackwellDilemma.Ledger
 
@@ -288,8 +289,10 @@ def claimThresholdAlpha : PaperClaim :=
     kind := .proposition
     sourceLine := 570
     route := .local
-    blocker := "Requires differentiability and sign hypotheses for the actual welfare transition functional."
-    evidence := .unformalized }
+    blocker := "Closed in the explicit alpha-loaded cognitive crossing model: endpoint conditions give unique kappa thresholds, positive loading makes the threshold strictly increasing in alpha, and a fixed-kappa score inside (0, loading) gives a unique alpha crossing with exact welfare regimes."
+    evidence := .proved
+      BlackwellDilemma.ThresholdAlpha.ThresholdAlphaClaim
+      BlackwellDilemma.ThresholdAlpha.thresholdAlphaClaim_proved }
 
 def claimSupermodular : PaperClaim :=
   { label := "prop:supermodular"

@@ -246,6 +246,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedCognitiveThreshold.lean"
     },
     {
+      "id": "unified_threshold_alpha_kernel",
+      "kind": "machine_gate",
+      "role": "Explicit positive alpha loading with unique kappa thresholds, strict threshold ordering in alpha, and an exact fixed-kappa alpha crossing certificate.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedThresholdAlpha.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -1281,6 +1288,70 @@
       ]
     },
     {
+      "id": "threshold_alpha_semantic_repair_gate",
+      "category": "kernel_checked_alpha_loaded_threshold_comparative_statics",
+      "source_cards": [
+        "unified_threshold_alpha_kernel",
+        "unified_cognitive_threshold_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "threshold_alpha_module",
+          "path": "lean4/BlackwellDilemma/UnifiedThresholdAlpha.lean",
+          "contains": [
+            "def alphaAdjustedScore",
+            "theorem exists_unique_kappaThreshold_at_alpha",
+            "theorem alphaAdjustedScore_strictAnti",
+            "theorem kappaThreshold_strictMono_in_alpha",
+            "def alphaCrossing",
+            "theorem exists_unique_alphaCrossing",
+            "theorem thresholdAlphaClaim_proved"
+          ]
+        },
+        {
+          "id": "threshold_alpha_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.ThresholdAlpha.ThresholdAlphaClaim",
+            "BlackwellDilemma.ThresholdAlpha.thresholdAlphaClaim_proved"
+          ]
+        },
+        {
+          "id": "threshold_alpha_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.ThresholdAlpha.exists_unique_kappaThreshold_at_alpha",
+            "#print axioms BlackwellDilemma.ThresholdAlpha.kappaThreshold_strictMono_in_alpha",
+            "#print axioms BlackwellDilemma.ThresholdAlpha.exists_unique_alphaCrossing",
+            "#print axioms BlackwellDilemma.ThresholdAlpha.thresholdAlphaClaim_proved"
+          ]
+        },
+        {
+          "id": "threshold_alpha_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"label\": \"prop:threshold-alpha\"",
+            "\"id\": \"exact_alpha_loaded_threshold_comparative_statics\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "threshold_alpha_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1360,8 +1431,8 @@
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=5",
             "claim_lineage_relation_split_core_and_frontier=6",
-            "claim_lineage_relation_strengthened_assumptions=9",
-            "claim_lineage_relation_unchanged=6",
+            "claim_lineage_relation_strengthened_assumptions=10",
+            "claim_lineage_relation_unchanged=5",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -1410,8 +1481,8 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=17",
-            "publication_publication_evidence_closed=20",
+            "publication_strict_kernel_closed=18",
+            "publication_publication_evidence_closed=21",
             "publication_model_assumptions_total=19",
             "publication_model_assumptions_admissible=19",
             "publication_model_assumptions_theory_admissible=19",
@@ -1427,9 +1498,9 @@
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
             "publication_obligations_total=72",
-            "publication_obligations_passed=63",
+            "publication_obligations_passed=64",
             "publication_gap_lean_conditional=3",
-            "publication_gap_lean_exact=3",
+            "publication_gap_lean_exact=2",
             "publication_gap_unresolved_semantics=3",
             "publication_mathematical_route_model_internal_exact=19",
             "publication_mathematical_route_reference_conditional=7",
@@ -1964,11 +2035,11 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=17",
+            "paper_claims_closed=18",
             "paper_claims_partial=0",
             "paper_claims_conditional=3",
             "paper_claims_refuted_encoding=0",
-            "paper_claims_unformalized=6",
+            "paper_claims_unformalized=5",
             "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,prop:sentimental,prop:principal-optimum,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
             "paper_claim_manual_status_assignments=0",
             "paper_claim_legacy_semantic_targets=0",

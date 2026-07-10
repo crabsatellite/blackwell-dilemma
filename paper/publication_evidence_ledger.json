@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "44fb1c16c8e17fd5504f2ea39f0bac186748ef5fb7d00a0575a65690218fde0d",
+  "manuscript_sha256": "a4a5d7f089d0456f4347b7c7b9cdfd44c3d4de5adf02ed657534767127eebba2",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 17,
-    "publication_evidence_closed": 20,
+    "strict_kernel_closed": 18,
+    "publication_evidence_closed": 21,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
     "model_assumptions_total": 19,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 72,
-    "obligations_passed": 63,
+    "obligations_passed": 64,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
@@ -38,13 +38,13 @@
       "computational_certificate": 1,
       "external_references": 11,
       "lean_conditional": 4,
-      "lean_exact": 16,
+      "lean_exact": 17,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 3,
-      "lean_exact": 3,
+      "lean_exact": 2,
       "unresolved_semantics": 3
     },
     "mathematical_routes": {
@@ -702,10 +702,10 @@
     },
     {
       "label": "prop:threshold-alpha",
-      "statement_sha256": "ff8a94ed72b3df7a481b133310b531721d947041ffe91a25640e365db58ad2bf",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "f68532492cf9183699c90d865ad18984d013a4ee04c1cdbe334729d563e99afe",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
@@ -726,10 +726,10 @@
           "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
         },
         {
-          "id": "exact_implicit_threshold_derivative",
+          "id": "exact_alpha_loaded_threshold_comparative_statics",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },
