@@ -205,10 +205,9 @@
     },
     {
       "label": "thm:general-tree",
-      "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8",
+      "statement_sha256": "89402255473b15637db7a25e4ce29616c8f6412e9e3fbf9c5e60d068d155582d",
       "obligations": [
-        {"id": "general_idp_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "topology_blind_gaussian_signals", "greedy_static_reward_policy"]},
-        {"id": "graph_policy_semantics", "type": "unresolved_semantics", "resolution_class": "paper_model_encoding", "reason": "The reversal must be derived from reachability, dynamic value, and C2-prime rather than a manufactured witness."},
+        {"id": "general_idp_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "topology_blind_gaussian_signals", "greedy_static_reward_policy", "general_tree_tail_rate_separation"]},
         {"id": "exact_general_tree_derivation", "type": "lean_exact"}
       ]
     },

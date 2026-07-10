@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "cf059ec0db924137fb7c2e3bacf8b6e7cb2e72be6f2aa9cb4b4e0beee93565bd",
+  "manuscript_sha256": "641717d9f4476eb7c3c9fba6b9d5db6ce9e15b8bc2e1238a364f08b123fa9bff",
   "claims": [
     {
       "line": 262,
@@ -162,24 +162,24 @@
       "kind": "theorem",
       "label": "thm:general-tree",
       "title": "Non-Monotonicity on General Graphs",
-      "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8"
+      "statement_sha256": "89402255473b15637db7a25e4ce29616c8f6412e9e3fbf9c5e60d068d155582d"
     },
     {
-      "line": 1115,
+      "line": 1111,
       "kind": "proposition",
       "label": "prop:error-compounding",
       "title": "Error Compounding",
       "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52"
     },
     {
-      "line": 1152,
+      "line": 1148,
       "kind": "corollary",
       "label": "cor:er-phase",
       "title": "Phase Transition on Erdos--Renyi Graphs",
       "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b"
     },
     {
-      "line": 1166,
+      "line": 1162,
       "kind": "corollary",
       "label": "cor:power-law",
       "title": "Application: Power-Law Networks",

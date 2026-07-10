@@ -20,6 +20,7 @@ import BlackwellDilemma.UnifiedCognitiveFiveState
 import BlackwellDilemma.UnifiedBayesianImmunity
 import BlackwellDilemma.UnifiedComplementarity
 import BlackwellDilemma.UnifiedBayesianNaiveFiveState
+import BlackwellDilemma.UnifiedGeneralTree
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -433,14 +434,16 @@ def claimGeneralTree : PaperClaim :=
     kind := .theorem
     sourceLine := 1066
     route := .semanticRepair
-    blocker := "Current wrapper uses a manufactured kernel witness; derive the reversal from V_g, reachability, and C2-prime."
-    evidence := .unformalized }
+    blocker := "C2-prime supplies the positive greedy-path gap and the explicit C4 tail-rate certificate controls the remainder; C4 remains a graph-family model verification condition."
+    evidence := .proved
+      BlackwellDilemma.GeneralTreeTail.GeneralTreeReversalClaim
+      BlackwellDilemma.GeneralTreeTail.generalTreeReversalClaim_proved }
 
 def claimErrorCompounding : PaperClaim :=
   { label := "prop:error-compounding"
     title := "Error Compounding"
     kind := .proposition
-    sourceLine := 1115
+    sourceLine := 1111
     route := .local
     blocker := "The finite Bernoulli model proves Parts 1-4, the two generic depth-bound forms are ordered and cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still derive the bridge probability from the actual signal policy and prove the posterior estimator's depth-independent threshold assumptions."
     evidence := .partialProof
@@ -451,7 +454,7 @@ def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"
     title := "Phase Transition on Erdos-Renyi Graphs"
     kind := .corollary
-    sourceLine := 1152
+    sourceLine := 1148
     route := .externalLibrary
     blocker := "Requires formal random-graph component-size and survival-probability results."
     evidence := .unformalized }
@@ -460,7 +463,7 @@ def claimPowerLaw : PaperClaim :=
   { label := "cor:power-law"
     title := "Application: Power-Law Networks"
     kind := .corollary
-    sourceLine := 1166
+    sourceLine := 1162
     route := .externalLibrary
     blocker := "Requires a formal configuration-model percolation threshold theorem."
     evidence := .unformalized }

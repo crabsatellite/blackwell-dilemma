@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "cf059ec0db924137fb7c2e3bacf8b6e7cb2e72be6f2aa9cb4b4e0beee93565bd",
+  "manuscript_sha256": "641717d9f4476eb7c3c9fba6b9d5db6ce9e15b8bc2e1238a364f08b123fa9bff",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 8,
-    "publication_evidence_closed": 10,
+    "strict_kernel_closed": 9,
+    "publication_evidence_closed": 11,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
-    "model_assumptions_total": 13,
-    "model_assumptions_admissible": 13,
-    "model_assumptions_theory_admissible": 13,
+    "model_assumptions_total": 14,
+    "model_assumptions_admissible": 14,
+    "model_assumptions_theory_admissible": 14,
     "model_assumptions_theory_referenced": 8,
-    "model_assumptions_theory_reference_not_required": 5,
+    "model_assumptions_theory_reference_not_required": 6,
     "model_assumptions_empirical_required": 9,
     "model_assumptions_empirically_anchored": 0,
     "model_assumptions_by_provenance": {
       "benchmark_definition": 2,
-      "paper_definition": 2,
+      "paper_definition": 3,
       "paper_reduced_form": 5,
       "published_model_adaptation": 1,
       "standard_theory": 2,
       "tractability_normalization": 1
     },
-    "obligations_total": 76,
-    "obligations_passed": 51,
+    "obligations_total": 75,
+    "obligations_passed": 52,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
@@ -32,20 +32,20 @@
       "lean_exact": 17,
       "model_assumptions": 25,
       "statement_hash": 6,
-      "unresolved_semantics": 9
+      "unresolved_semantics": 8
     },
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
       "lean_conditional": 2,
-      "lean_exact": 8,
+      "lean_exact": 9,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 7,
-      "lean_exact": 9,
-      "unresolved_semantics": 9
+      "lean_exact": 8,
+      "unresolved_semantics": 8
     },
     "mathematical_routes": {
       "model_internal_exact": 17,
@@ -58,7 +58,7 @@
     "semantic_gaps_by_resolution_class": {
       "existing_theory_scope": 2,
       "hybrid_model_and_strategy_evidence": 5,
-      "paper_model_encoding": 2
+      "paper_model_encoding": 1
     }
   },
   "model_assumptions": [
@@ -225,6 +225,18 @@
       "empirical_required": true,
       "empirically_anchored": false,
       "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "general_tree_tail_rate_separation",
+      "kind": "regularity_condition",
+      "provenance": "paper_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
       "empirical_reference_ids": [],
       "empirical_check_ids": []
     },
@@ -1119,14 +1131,15 @@
     },
     {
       "label": "thm:general-tree",
-      "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "89402255473b15637db7a25e4ce29616c8f6412e9e3fbf9c5e60d068d155582d",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
+        "general_tree_tail_rate_separation",
         "greedy_static_reward_policy",
         "irreversible_no_revisit",
         "topology_blind_gaussian_signals"
@@ -1136,27 +1149,19 @@
         "irreversible_no_revisit",
         "topology_blind_gaussian_signals"
       ],
-      "semantic_resolution_classes": [
-        "paper_model_encoding"
-      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "general_idp_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy"
-        },
-        {
-          "id": "graph_policy_semantics",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "The reversal must be derived from reachability, dynamic value, and C2-prime rather than a manufactured witness."
+          "detail": "theory-admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy,general_tree_tail_rate_separation"
         },
         {
           "id": "exact_general_tree_derivation",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

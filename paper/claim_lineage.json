@@ -387,12 +387,22 @@
       "baseline_kind": "theorem",
       "baseline_title": "Non-Monotonicity on General Graphs",
       "baseline_statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "thm:general-tree"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve general-graph greedy reversal while making the missing relative tail-rate condition explicit; C2-prime supplies the positive limiting path-value gap and C4 controls all finite-precision remainder terms relative to the bridge probability.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "thm:general-tree",
+          "id": "exact_general_tree_derivation"
+        },
+        {
+          "type": "evidence_check",
+          "id": "general_tree_tail_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "prop:error-compounding",

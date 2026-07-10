@@ -34,6 +34,10 @@ REMOVED_FALSE_CLOSURES = (
     "gap_bayesian_naive_routing_threshold",
     "agentRewardKernel_bayesianNaive_aboveThreshold_kernel_reversal_witness",
     "gap_bayesian_naive_reversal_present",
+    "agentRewardKernel_greedy_C2prime_kernel_reversal_witness",
+    "gap_general_tree_current",
+    "gap_general_tree_from_reversal",
+    "gap_cyclic_trap_from_reversal",
 )
 
 
@@ -60,8 +64,16 @@ for token in FORBIDDEN:
 canonical_source = (LEAN_ROOT / "BlackwellDilemma" / "Canonical.lean").read_text(
     encoding="utf-8"
 )
-retired_bridge_source = canonical_source + (LEAN_ROOT / "BlackwellDilemma" / "Bayesian.lean").read_text(
-    encoding="utf-8"
+retired_bridge_source = "\n".join(
+    [
+        canonical_source,
+        (LEAN_ROOT / "BlackwellDilemma" / "Bayesian.lean").read_text(
+            encoding="utf-8"
+        ),
+        (LEAN_ROOT / "BlackwellDilemma" / "GeneralGraphs.lean").read_text(
+            encoding="utf-8"
+        ),
+    ]
 )
 for token in REMOVED_FALSE_CLOSURES:
     if token in retired_bridge_source:
@@ -79,6 +91,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedBayesianImmunity",
     "BlackwellDilemma.UnifiedComplementarity",
     "BlackwellDilemma.UnifiedBayesianNaiveFiveState",
+    "BlackwellDilemma.UnifiedGeneralTree",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

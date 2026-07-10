@@ -214,6 +214,21 @@
       "empirical_truth_claimed": false
     },
     {
+      "id": "general_tree_tail_rate_separation",
+      "kind": "regularity_condition",
+      "statement": "For the selected C2-prime trap/bridge pair, the bridge-selection probability is eventually positive and the exact welfare remainder after subtracting the bridge probability times the limiting greedy-path advantage is little-o of that probability.",
+      "scope": "General-tree reversal theorem only.",
+      "role": "Controls the relative tail rates of finite-precision continuation errors and competing root alternatives; bounded convergence alone is insufficient.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "For each proposed graph family, derive or numerically bracket the relevant choice-error exponents and verify the epsilon remainder bound before applying the theorem."
+      },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
       "id": "configuration_model_power_law",
       "kind": "regularity_condition",
       "statement": "The network sequence is an uncorrelated configuration model with a power-law degree law and the regularity conditions required by the cited threshold theorem.",
