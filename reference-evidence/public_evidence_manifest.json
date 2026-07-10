@@ -96,6 +96,20 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedCanonical.lean"
     },
     {
+      "id": "unified_interior_optimum_kernel",
+      "kind": "machine_gate",
+      "role": "Finite open-edge five-state route distribution, exact expected loss, and unique positive global minimizer.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedInterior.lean"
+    },
+    {
+      "id": "five_state_approximation_audit",
+      "kind": "machine_computation",
+      "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
+      "status": "repo_build_gate",
+      "local_file": "simulation/approximation_audit.py"
+    },
+    {
       "id": "committed_simulation_results",
       "kind": "machine_result_data",
       "role": "Committed JSON outputs backing public computational appendix numbers.",
@@ -104,6 +118,82 @@
     }
   ],
   "claims": [
+    {
+      "id": "five_state_interior_optimum_gate",
+      "category": "kernel_checked_constructive_instance_with_computational_calibration",
+      "source_cards": [
+        "unified_interior_optimum_kernel",
+        "five_state_approximation_audit",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "interior_optimum_module",
+          "path": "lean4/BlackwellDilemma/UnifiedInterior.lean",
+          "contains": [
+            "def routeProbability",
+            "def expectedLoss",
+            "theorem routeProbability_sum_one",
+            "theorem expectedLoss_formula",
+            "theorem uniqueInteriorMinimum",
+            "theorem interiorOptimumClaim_proved"
+          ]
+        },
+        {
+          "id": "interior_optimum_claim_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.FiveStateRouting.InteriorOptimumClaim",
+            "BlackwellDilemma.FiveStateRouting.interiorOptimumClaim_proved"
+          ]
+        },
+        {
+          "id": "interior_optimum_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.FiveStateRouting.routeProbability_sum_one",
+            "#print axioms BlackwellDilemma.FiveStateRouting.expectedLoss_formula",
+            "#print axioms BlackwellDilemma.FiveStateRouting.uniqueInteriorMinimum",
+            "#print axioms BlackwellDilemma.FiveStateRouting.interiorOptimumClaim_proved"
+          ]
+        },
+        {
+          "id": "interior_optimum_numeric_audit",
+          "path": "simulation/approximation_audit.py",
+          "contains": [
+            "def loss_derivative_p0",
+            "def bisect_unique_minimizer",
+            "beta* ~ 1.5 bits",
+            "L(beta*) ~ 0.273"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "interior_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        },
+        {
+          "id": "interior_optimum_numeric_calibration",
+          "type": "python_script",
+          "path": "simulation/approximation_audit.py",
+          "stdout_contains": [
+            "derivative sign bracket: PASS",
+            "[PASS] beta* ~ 1.5 bits",
+            "[PASS] L(beta*) ~ 0.273",
+            "Audit summary: 35 PASS, 0 FAIL"
+          ]
+        }
+      ]
+    },
     {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
@@ -182,8 +272,8 @@
             "claim_lineage_baseline_claims=26",
             "claim_lineage_current_claims=26",
             "claim_lineage_preserved_claims=26",
-            "claim_lineage_relation_split_core_and_frontier=2",
-            "claim_lineage_relation_unchanged=24",
+            "claim_lineage_relation_split_core_and_frontier=3",
+            "claim_lineage_relation_unchanged=23",
             "claim_lineage_manual_status_fields=0"
           ]
         }

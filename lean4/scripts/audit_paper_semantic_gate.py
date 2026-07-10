@@ -53,6 +53,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.PhysicalIrreducibility",
     "BlackwellDilemma.UnifiedWelfare",
     "BlackwellDilemma.UnifiedCanonical",
+    "BlackwellDilemma.UnifiedInterior",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

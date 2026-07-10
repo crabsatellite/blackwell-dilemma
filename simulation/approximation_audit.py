@@ -43,6 +43,44 @@ def loss_greedy(beta, p):
     return P_trap * 0.4 + (1.0 - P_trap) * 0.9 * (1.0 - (1.0 - p) * Phi_B)
 
 
+def loss_derivative_p0(beta):
+    """Analytic beta derivative of the open-edge five-state loss."""
+    if beta <= 0:
+        raise ValueError("loss_derivative_p0 requires beta > 0")
+    q = 2.0 ** (2.0 * beta)
+    scale = math.sqrt((q - 1.0) / 2.0)
+    scale_derivative = math.log(2.0) * q / (2.0 * scale)
+    z_trap = 0.2 * scale
+    z_goal = 0.9 * scale
+    phi = lambda z: math.exp(-(z * z) / 2.0) / math.sqrt(2.0 * math.pi)
+    p_trap = norm_cdf(z_trap)
+    p_goal = norm_cdf(z_goal)
+    p_trap_derivative = phi(z_trap) * 0.2 * scale_derivative
+    p_goal_derivative = phi(z_goal) * 0.9 * scale_derivative
+    return (
+        p_trap_derivative * (0.9 * p_goal - 0.5)
+        - 0.9 * (1.0 - p_trap) * p_goal_derivative
+    )
+
+
+def bisect_unique_minimizer(left=1.0, right=2.0, iterations=80):
+    """Locate the unique kernel-proved minimizer from a derivative sign bracket."""
+    left_derivative = loss_derivative_p0(left)
+    right_derivative = loss_derivative_p0(right)
+    if not (left_derivative < 0.0 < right_derivative):
+        raise AssertionError("initial derivative bracket does not straddle zero")
+    for _ in range(iterations):
+        midpoint = (left + right) / 2.0
+        midpoint_derivative = loss_derivative_p0(midpoint)
+        if midpoint_derivative <= 0.0:
+            left = midpoint
+        else:
+            right = midpoint
+    if not (loss_derivative_p0(left) <= 0.0 <= loss_derivative_p0(right)):
+        raise AssertionError("final derivative bracket does not straddle zero")
+    return left, right
+
+
 def check(label, claim_value, computed_value, tol=0.01):
     """Binary check with tolerance. Returns (passed, diagnostic_string)."""
     if abs(claim_value - computed_value) <= tol:
@@ -68,12 +106,11 @@ def main():
 
     # Claim 1 & 2: beta* ~ 1.5, L(beta*) ~ 0.273 on 5-state at p=0
     print("--- Claims 1 & 2: 5-state interior optimum at p=0 ---")
-    best_beta, best_L = 0.01, loss_greedy(0.01, 0.0)
-    for i in range(1, 5000):
-        b = 0.001 * i
-        L = loss_greedy(b, 0.0)
-        if L < best_L:
-            best_L = L; best_beta = b
+    beta_left, beta_right = bisect_unique_minimizer()
+    best_beta = (beta_left + beta_right) / 2.0
+    best_L = loss_greedy(best_beta, 0.0)
+    print("  derivative sign bracket: PASS")
+    print(f"  beta bracket width: {beta_right - beta_left:.3e}")
     s, msg = check("beta* ~ 1.5 bits", 1.5, best_beta, tol=0.05)
     print(msg); results.append(s)
     s, msg = check("L(beta*) ~ 0.273", 0.273, best_L, tol=0.001)

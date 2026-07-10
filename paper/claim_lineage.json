@@ -221,12 +221,22 @@
       "baseline_kind": "proposition",
       "baseline_title": "Interior Optimum",
       "baseline_statement_sha256": "b4fbb6796587cb02ea2dbafb7f03b7bd692483e72340544dff626d7a6c87ecee",
-      "relation": "unchanged",
+      "relation": "split_core_and_frontier",
       "publication_labels": [
         "prop:interior-optimum"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Kernel-close the exact open-edge five-state loss formula and uniqueness of its positive global minimizer; preserve the rounded beta-star and loss values as a separately reproducible computational calibration rather than a proof premise.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:interior-optimum",
+          "id": "exact_formula_and_unique_minimizer"
+        },
+        {
+          "type": "evidence_check",
+          "id": "interior_optimum_numeric_calibration"
+        }
+      ]
     },
     {
       "baseline_label": "prop:two-regime-five-state",

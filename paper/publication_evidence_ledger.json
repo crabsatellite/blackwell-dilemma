@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "b63d2059473682b664a31ebbb40645f72c80ef3553e1ef9df38156c186fc0b41",
+  "manuscript_sha256": "6cbf31cba6ea3606d6118c4318f77d162ad3f855093f0eaa3f86674a0c551f95",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 3,
-    "publication_evidence_closed": 3,
+    "strict_kernel_closed": 4,
+    "publication_evidence_closed": 4,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 12,
@@ -23,9 +23,10 @@
       "standard_theory": 2,
       "tractability_normalization": 1
     },
-    "obligations_total": 75,
-    "obligations_passed": 43,
+    "obligations_total": 76,
+    "obligations_passed": 45,
     "obligations_by_type": {
+      "computational_certificate": 1,
       "external_references": 9,
       "lean_conditional": 9,
       "lean_exact": 17,
@@ -34,14 +35,15 @@
       "unresolved_semantics": 9
     },
     "passed_by_type": {
+      "computational_certificate": 1,
       "external_references": 9,
-      "lean_exact": 3,
+      "lean_exact": 4,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 9,
-      "lean_exact": 14,
+      "lean_exact": 13,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
@@ -836,10 +838,10 @@
     },
     {
       "label": "prop:interior-optimum",
-      "statement_sha256": "b4fbb6796587cb02ea2dbafb7f03b7bd692483e72340544dff626d7a6c87ecee",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "8eadbe47875fa98ca2c63f892f91bf3d8b9333ab9a16b13745f5c3b575cdfb22",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
@@ -861,10 +863,16 @@
           "detail": "theory-admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
         },
         {
-          "id": "exact_minimizer_and_numeric_interval",
+          "id": "exact_formula_and_unique_minimizer",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
+        },
+        {
+          "id": "numeric_minimizer_calibration",
+          "type": "computational_certificate",
+          "passed": true,
+          "detail": "manifest check ids=interior_optimum_numeric_calibration"
         }
       ]
     },

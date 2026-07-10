@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "b63d2059473682b664a31ebbb40645f72c80ef3553e1ef9df38156c186fc0b41",
+  "manuscript_sha256": "6cbf31cba6ea3606d6118c4318f77d162ad3f855093f0eaa3f86674a0c551f95",
   "claims": [
     {
       "line": 262,
@@ -113,73 +113,73 @@
       "kind": "proposition",
       "label": "prop:interior-optimum",
       "title": "Interior Optimum",
-      "statement_sha256": "b4fbb6796587cb02ea2dbafb7f03b7bd692483e72340544dff626d7a6c87ecee"
+      "statement_sha256": "8eadbe47875fa98ca2c63f892f91bf3d8b9333ab9a16b13745f5c3b575cdfb22"
     },
     {
-      "line": 839,
+      "line": 841,
       "kind": "proposition",
       "label": "prop:two-regime-five-state",
       "title": "Two-Regime Structure of the 5-State Instance",
       "statement_sha256": "a1cc1069ef503f33d1e5d5b79366fffa8a6338352f7b5a3831f19a1debb50579"
     },
     {
-      "line": 887,
+      "line": 889,
       "kind": "proposition",
       "label": "prop:threshold-five-state",
       "title": "Cognitive Sufficiency on the 5-State Instance",
       "statement_sha256": "326f3d138327532879a44c785c13a67bb863238d5adf5880821da77789e4ef81"
     },
     {
-      "line": 903,
+      "line": 905,
       "kind": "proposition",
       "label": "prop:p-monotonicity-five-state",
       "title": "$p$-Monotonicity on the 5-State Instance",
       "statement_sha256": "e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c"
     },
     {
-      "line": 938,
+      "line": 940,
       "kind": "theorem",
       "label": "thm:bayesian-immunity",
       "title": "Bayesian Immunity",
       "statement_sha256": "0c5b0a686f61bee3a1e79f501b498af4464ec25114125fc7bf1447feb72ff116"
     },
     {
-      "line": 947,
+      "line": 949,
       "kind": "proposition",
       "label": "prop:complementarity",
       "title": "Information-Knowledge Complementarity",
       "statement_sha256": "47d42a4da7c21e09814724fd3f40f7a09e1072900b336472b98003930e0bfd70"
     },
     {
-      "line": 965,
+      "line": 967,
       "kind": "proposition",
       "label": "prop:bayesian-naive-five-state",
       "title": "Bayesian-Naive Threshold on the 5-State Instance",
       "statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43"
     },
     {
-      "line": 1004,
+      "line": 1006,
       "kind": "theorem",
       "label": "thm:general-tree",
       "title": "Non-Monotonicity on General Graphs",
       "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8"
     },
     {
-      "line": 1053,
+      "line": 1055,
       "kind": "proposition",
       "label": "prop:error-compounding",
       "title": "Error Compounding",
       "statement_sha256": "d6b42952d77b85323598f9e9197a0361f01f21cfed3a7bce960e3c5b96db9f42"
     },
     {
-      "line": 1090,
+      "line": 1092,
       "kind": "corollary",
       "label": "cor:er-phase",
       "title": "Phase Transition on Erdos--Renyi Graphs",
       "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b"
     },
     {
-      "line": 1104,
+      "line": 1106,
       "kind": "corollary",
       "label": "cor:power-law",
       "title": "Application: Power-Law Networks",

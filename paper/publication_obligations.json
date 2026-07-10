@@ -144,10 +144,11 @@
     },
     {
       "label": "prop:interior-optimum",
-      "statement_sha256": "b4fbb6796587cb02ea2dbafb7f03b7bd692483e72340544dff626d7a6c87ecee",
+      "statement_sha256": "8eadbe47875fa98ca2c63f892f91bf3d8b9333ab9a16b13745f5c3b575cdfb22",
       "obligations": [
         {"id": "five_state_model", "type": "model_assumptions", "ids": ["terminal_neighbor_topology", "topology_blind_gaussian_signals", "greedy_static_reward_policy"]},
-        {"id": "exact_minimizer_and_numeric_interval", "type": "lean_exact"}
+        {"id": "exact_formula_and_unique_minimizer", "type": "lean_exact"},
+        {"id": "numeric_minimizer_calibration", "type": "computational_certificate", "check_ids": ["interior_optimum_numeric_calibration"]}
       ]
     },
     {

@@ -14,6 +14,7 @@ import BlackwellDilemma.Basic
 import BlackwellDilemma.PhysicalIrreducibility
 import BlackwellDilemma.UnifiedWelfare
 import BlackwellDilemma.UnifiedCanonical
+import BlackwellDilemma.UnifiedInterior
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -347,15 +348,17 @@ def claimInteriorOptimum : PaperClaim :=
     title := "Interior Optimum"
     kind := .proposition
     sourceLine := 801
-    route := .local
-    blocker := "Formalize the paper loss function and prove the minimizer and numerical bound on that function."
-    evidence := .unformalized }
+    route := .semanticRepair
+    blocker := "The open-edge five-state route distribution, exact loss formula, and unique positive global minimizer are kernel proved; the reported numerical location is gated separately by deterministic computation."
+    evidence := .proved
+      BlackwellDilemma.FiveStateRouting.InteriorOptimumClaim
+      BlackwellDilemma.FiveStateRouting.interiorOptimumClaim_proved }
 
 def claimTwoRegimeFiveState : PaperClaim :=
   { label := "prop:two-regime-five-state"
     title := "Two-Regime Structure of the 5-State Instance"
     kind := .proposition
-    sourceLine := 839
+    sourceLine := 841
     route := .local
     blocker := "Bundle all clauses over the paper five-state model; theorem-name aliases do not count as closure."
     evidence := .unformalized }
@@ -364,7 +367,7 @@ def claimThresholdFiveState : PaperClaim :=
   { label := "prop:threshold-five-state"
     title := "Cognitive Sufficiency on the 5-State Instance"
     kind := .proposition
-    sourceLine := 887
+    sourceLine := 889
     route := .semanticRepair
     blocker := "Replace the one-edge routing witness with the stated five-state cognitive agent."
     evidence := .unformalized }
@@ -373,7 +376,7 @@ def claimPMonotonicityFiveState : PaperClaim :=
   { label := "prop:p-monotonicity-five-state"
     title := "p-Monotonicity on the 5-State Instance"
     kind := .proposition
-    sourceLine := 903
+    sourceLine := 905
     route := .local
     blocker := "State the correct p domain and prove monotonicity for the paper threshold, excluding junk-value extensions."
     evidence := .unformalized }
@@ -382,7 +385,7 @@ def claimBayesianImmunity : PaperClaim :=
   { label := "thm:bayesian-immunity"
     title := "Bayesian Immunity"
     kind := .theorem
-    sourceLine := 938
+    sourceLine := 940
     route := .externalLibrary
     blocker := "Requires a formal Blackwell comparison-of-experiments theorem and a genuine Bayesian IDP specialization."
     evidence := .unformalized }
@@ -391,7 +394,7 @@ def claimComplementarity : PaperClaim :=
   { label := "prop:complementarity"
     title := "Information-Knowledge Complementarity"
     kind := .proposition
-    sourceLine := 947
+    sourceLine := 949
     route := .mixed
     blocker := "The arithmetic mixture lemma is insufficient; derive the dominance premise from the paper agent model."
     evidence := .unformalized }
@@ -400,7 +403,7 @@ def claimBayesianNaiveFiveState : PaperClaim :=
   { label := "prop:bayesian-naive-five-state"
     title := "Bayesian-Naive Threshold on the 5-State Instance"
     kind := .proposition
-    sourceLine := 965
+    sourceLine := 967
     route := .semanticRepair
     blocker := "Rebuild reversal and recovery from the stated Bayesian-naive routing rule."
     evidence := .unformalized }
@@ -409,7 +412,7 @@ def claimGeneralTree : PaperClaim :=
   { label := "thm:general-tree"
     title := "Non-Monotonicity on General Graphs"
     kind := .theorem
-    sourceLine := 1004
+    sourceLine := 1006
     route := .semanticRepair
     blocker := "Current wrapper uses a manufactured kernel witness; derive the reversal from V_g, reachability, and C2-prime."
     evidence := .unformalized }
@@ -418,7 +421,7 @@ def claimErrorCompounding : PaperClaim :=
   { label := "prop:error-compounding"
     title := "Error Compounding"
     kind := .proposition
-    sourceLine := 1053
+    sourceLine := 1055
     route := .local
     blocker := "The finite Bernoulli model proves Parts 1-4, the two generic depth-bound forms are ordered and cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still derive the bridge probability from the actual signal policy and prove the posterior estimator's depth-independent threshold assumptions."
     evidence := .partialProof
@@ -429,7 +432,7 @@ def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"
     title := "Phase Transition on Erdos-Renyi Graphs"
     kind := .corollary
-    sourceLine := 1090
+    sourceLine := 1092
     route := .externalLibrary
     blocker := "Requires formal random-graph component-size and survival-probability results."
     evidence := .unformalized }
@@ -438,7 +441,7 @@ def claimPowerLaw : PaperClaim :=
   { label := "cor:power-law"
     title := "Application: Power-Law Networks"
     kind := .corollary
-    sourceLine := 1104
+    sourceLine := 1106
     route := .externalLibrary
     blocker := "Requires a formal configuration-model percolation threshold theorem."
     evidence := .unformalized }
