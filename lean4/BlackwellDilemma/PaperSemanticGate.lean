@@ -8,6 +8,7 @@
 -/
 
 import BlackwellDilemma.Ledger
+import BlackwellDilemma.UnifiedIDP
 
 namespace BlackwellDilemma.PaperSemanticGate
 

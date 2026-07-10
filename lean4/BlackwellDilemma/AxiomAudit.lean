@@ -36,5 +36,9 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms completePaperKernelOnly_iff_all_claims_have_proofs
 #print axioms completePaperKernelOnly_notYet_current
 #print axioms paperClaimMachineLedgerGate
+#print axioms BlackwellDilemma.IDPModel.no_revisit_persists_under_noBlocking
+#print axioms BlackwellDilemma.IDPModel.exists_stopping_reachable
+#print axioms BlackwellDilemma.IDPModel.stopping_welfare_le_oracle
+#print axioms BlackwellDilemma.IDPModel.oracle_value_attainable
 
 end BlackwellDilemma.AxiomAudit

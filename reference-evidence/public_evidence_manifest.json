@@ -75,6 +75,13 @@
       "local_file": "lean4/BlackwellDilemma/PaperSemanticGate.lean"
     },
     {
+      "id": "unified_idp_semantic_kernel",
+      "kind": "machine_gate",
+      "role": "Common finite no-revisit strategy space and attainable oracle benchmark for repaired manuscript claims.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedIDP.lean"
+    },
+    {
       "id": "committed_simulation_results",
       "kind": "machine_result_data",
       "role": "Committed JSON outputs backing public computational appendix numbers.",
@@ -174,6 +181,59 @@
             "publication_semantic_resolution_existing_theory_scope=2",
             "publication_semantic_resolution_hybrid_model_and_strategy_evidence=5",
             "publication_semantic_resolution_paper_model_encoding=2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unified_idp_strategy_oracle_gate",
+      "category": "kernel_checked_model_semantics",
+      "source_cards": [
+        "unified_idp_semantic_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "unified_idp_module",
+          "path": "lean4/BlackwellDilemma/UnifiedIDP.lean",
+          "contains": [
+            "structure IDPModel",
+            "def Step",
+            "theorem no_revisit_persists_under_noBlocking",
+            "theorem exists_stopping_reachable",
+            "theorem stopping_welfare_le_oracle",
+            "theorem oracle_value_attainable"
+          ]
+        },
+        {
+          "id": "unified_idp_root_import",
+          "path": "lean4/BlackwellDilemma/PaperSemanticGate.lean",
+          "contains": [
+            "import BlackwellDilemma.UnifiedIDP"
+          ]
+        },
+        {
+          "id": "unified_idp_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.IDPModel.no_revisit_persists_under_noBlocking",
+            "#print axioms BlackwellDilemma.IDPModel.exists_stopping_reachable",
+            "#print axioms BlackwellDilemma.IDPModel.stopping_welfare_le_oracle",
+            "#print axioms BlackwellDilemma.IDPModel.oracle_value_attainable"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "unified_idp_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
           ]
         }
       ]

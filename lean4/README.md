@@ -15,6 +15,7 @@ paper_claims_conditional=0
 paper_claims_refuted_encoding=0
 paper_claims_unformalized=21
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
+idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0
 publication_evidence_closed=0
 publication_obligations_passed=40/75
 model_assumptions_admissible=12/12

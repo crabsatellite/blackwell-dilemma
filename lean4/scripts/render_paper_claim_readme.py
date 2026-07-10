@@ -107,6 +107,7 @@ paper_claims_conditional={counts['conditional']}
 paper_claims_refuted_encoding={counts['refuted-encoding']}
 paper_claims_unformalized={counts['unformalized']}
 formal_root_imports={','.join(root_imports)}
+idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0
 publication_evidence_closed={publication_summary['publication_evidence_closed']}
 publication_obligations_passed={publication_summary['obligations_passed']}/{publication_summary['obligations_total']}
 model_assumptions_admissible={publication_summary['model_assumptions_admissible']}/{publication_summary['model_assumptions_total']}
@@ -169,6 +170,7 @@ of a claim's complete stored proposition closes that claim.
 ```text
 total={len(claims)} closed={counts['closed']} partial={counts['partial']} conditional={counts['conditional']} refuted-encoding={counts['refuted-encoding']} unformalized={counts['unformalized']}
 formal_root_imports={','.join(root_imports)}
+idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0
 publication_evidence_closed={publication_summary['publication_evidence_closed']}
 publication_obligations_passed={publication_summary['obligations_passed']}/{publication_summary['obligations_total']}
 model_assumptions_admissible={publication_summary['model_assumptions_admissible']}/{publication_summary['model_assumptions_total']}
