@@ -5,10 +5,12 @@ on:
     branches: [master]
     paths:
       - 'lean4/**'
+      - 'tools/audit_documentation_surface.py'
       - '.github/workflows/lean_ci.yml'
   pull_request:
     paths:
       - 'lean4/**'
+      - 'tools/audit_documentation_surface.py'
       - '.github/workflows/lean_ci.yml'
   workflow_dispatch:
 
