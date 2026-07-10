@@ -9,12 +9,15 @@ Blackwell's theorem (1953) states that more informative signals lead to weakly b
 
 ## Machine State
 
-The status below is evaluated from the 29-claim Lean ledger. Only a proof term
+The status below is evaluated from the 26-claim Lean ledger. Only a proof term
 of a claim's complete stored proposition closes that claim.
 
 ```text
-total=29 closed=0 partial=5 conditional=0 refuted-encoding=0 unformalized=24
+total=26 closed=0 partial=5 conditional=0 refuted-encoding=0 unformalized=21
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
+publication_evidence_closed=0
+publication_obligations_passed=38/74
+model_assumptions_admissible=12/12
 ```
 
 See [`lean4/README.md`](lean4/README.md) for the generated claim roster and
@@ -32,6 +35,8 @@ python scripts/audit_axiom_output.py
 python scripts/audit_kernel_surface.py
 python scripts/render_paper_claim_readme.py --check
 cd ..
+python tools/verify_reference_registry.py
+python tools/audit_publication_obligations.py --check-ledger
 python tools/verify_public_evidence.py
 python tracker.py --check-report
 python verification/render_live_prediction_report.py --check

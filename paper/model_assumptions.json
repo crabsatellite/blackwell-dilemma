@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "admissibility_policy": {
+    "meaning": "admissible means explicit, scoped, and testable or constitutive; it does not mean empirically true",
+    "allowed_kinds": [
+      "structural_definition",
+      "behavioral_postulate",
+      "distributional_assumption",
+      "regularity_condition"
+    ],
+    "allowed_testability_kinds": [
+      "model_boundary",
+      "observable",
+      "calibration",
+      "sensitivity"
+    ]
+  },
+  "assumptions": [
+    {
+      "id": "irreversible_no_revisit",
+      "kind": "structural_definition",
+      "statement": "Visited vertices cannot be revisited and the forward feasible set is history dependent.",
+      "scope": "All IDP traversal claims using condition C1.",
+      "role": "Defines endogenous feasibility rather than asserting an empirical frequency.",
+      "testability": {
+        "kind": "model_boundary",
+        "criterion": "An application is outside scope when reversals, recalls, or costless backtracking are feasible."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "terminal_neighbor_topology",
+      "kind": "structural_definition",
+      "statement": "The focal local theorem uses a degree-two start with a terminal trap neighbor.",
+      "scope": "Canonical and five-state local examples, not arbitrary graphs.",
+      "role": "Makes the routing mechanism finite and exactly enumerable.",
+      "testability": {
+        "kind": "model_boundary",
+        "criterion": "The assumption fails when the trap branch has further feasible continuation or the start has additional available neighbors."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "topology_blind_gaussian_signals",
+      "kind": "distributional_assumption",
+      "statement": "Reward signals are Gaussian and reveal rewards but not the realized percolation topology.",
+      "scope": "Precision-comparative-statics claims using beta.",
+      "role": "Separates reward information from structural knowledge.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Recompute the claim under non-Gaussian noise and under signals that include edge-state information."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "greedy_static_reward_policy",
+      "kind": "behavioral_postulate",
+      "statement": "The greedy agent ranks currently available neighbors by posterior immediate reward rather than continuation value.",
+      "scope": "Greedy-agent welfare reversal claims only.",
+      "role": "Defines the misspecified objective that can create the reversal.",
+      "testability": {
+        "kind": "observable",
+        "criterion": "Choice data can compare immediate-reward rankings with continuation-value rankings at otherwise matched decision nodes."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "iid_uniform_rewards",
+      "kind": "distributional_assumption",
+      "statement": "Vertex rewards are independent Uniform[0,1] draws where closed-form order statistics are used.",
+      "scope": "Cluster-size welfare formulas and local trap prevalence calculations.",
+      "role": "Provides exact order-statistic and ranking-reversal probabilities.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Replace the reward law and recompute order statistics; no empirical universality is asserted."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "independent_bond_blocking",
+      "kind": "distributional_assumption",
+      "statement": "Edges are blocked independently with common probability p.",
+      "scope": "Lattice, Erdos-Renyi thinning, and configuration-model percolation claims.",
+      "role": "Matches the independent bond-percolation theorems used as external premises.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Correlated or targeted failures require a separate model and are outside the cited threshold formulas."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "cognitive_interpolation_kappa",
+      "kind": "behavioral_postulate",
+      "statement": "A scalar kappa interpolates between immediate-reward and continuation-value objectives.",
+      "scope": "Cognitive-threshold and kappa comparative-statics claims.",
+      "role": "Defines a one-dimensional reduced-form cognition family.",
+      "testability": {
+        "kind": "calibration",
+        "criterion": "Estimate kappa from repeated routing choices and report sensitivity to alternative interpolation rules."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "sentimental_weight_alpha",
+      "kind": "behavioral_postulate",
+      "statement": "A scalar alpha weights instrumental reward relative to an independent sentimental component.",
+      "scope": "Alpha-threshold and sentimental-immunity claims.",
+      "role": "Defines the paper's non-instrumental preference perturbation.",
+      "testability": {
+        "kind": "calibration",
+        "criterion": "Calibrate alpha from choices with independently varied monetary and sentimental attributes and test alternative dependence structures."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "heterogeneous_population_distribution",
+      "kind": "distributional_assumption",
+      "statement": "Population welfare aggregates individual welfare over a specified distribution of cognitive parameters.",
+      "scope": "Principal and disclosure claims.",
+      "role": "Defines the planner's aggregation problem.",
+      "testability": {
+        "kind": "calibration",
+        "criterion": "The parameter distribution must be estimated or supplied, and conclusions must be sensitivity-tested over alternative distributions."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "bayesian_observes_topology",
+      "kind": "structural_definition",
+      "statement": "The Bayesian benchmark observes the realized percolation state before optimizing a traversal strategy.",
+      "scope": "Bayesian-immunity and information-knowledge complementarity claims.",
+      "role": "Defines the full-structural-knowledge benchmark.",
+      "testability": {
+        "kind": "model_boundary",
+        "criterion": "The benchmark does not apply when the agent observes only a prior over topology."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "bayesian_naive_prior_rule",
+      "kind": "behavioral_postulate",
+      "statement": "The Bayesian-naive five-state agent routes using a prior-only continuation estimate with perceived blocking probability hat-p.",
+      "scope": "Bayesian-naive five-state proposition only.",
+      "role": "Defines a distinct misspecification from topology omission.",
+      "testability": {
+        "kind": "observable",
+        "criterion": "Routing choices must remain signal independent at the start node and identify the implied prior threshold."
+      },
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "configuration_model_power_law",
+      "kind": "regularity_condition",
+      "statement": "The network sequence is an uncorrelated configuration model with a power-law degree law and the regularity conditions required by the cited threshold theorem.",
+      "scope": "Power-law application only; targeted removal and arbitrary empirical networks are excluded.",
+      "role": "States the model class on which moment-based percolation criteria are valid.",
+      "testability": {
+        "kind": "observable",
+        "criterion": "Check degree-law fit, degree correlations, finite-size cutoff, and removal mechanism before applying the threshold formula."
+      },
+      "empirical_truth_claimed": false
+    }
+  ]
+}

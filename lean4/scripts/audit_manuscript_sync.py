@@ -34,12 +34,21 @@ def normalized_title(title: str) -> str:
 def extract_claims(text: str) -> list[dict[str, object]]:
     claims: list[dict[str, object]] = []
     for match in CLAIM_PATTERN.finditer(text):
+        kind = match.group("kind")
+        end_token = rf"\end{{{kind}}}"
+        end_index = text.find(end_token, match.end())
+        if end_index < 0:
+            fail(f"unterminated-{kind}:{match.group('label')}")
+        claim_block = text[match.start() : end_index + len(end_token)]
         claims.append(
             {
                 "line": text.count("\n", 0, match.start()) + 1,
-                "kind": match.group("kind"),
+                "kind": kind,
                 "label": match.group("label"),
                 "title": normalized_title(match.group("title") or ""),
+                "statement_sha256": hashlib.sha256(
+                    claim_block.encode("utf-8")
+                ).hexdigest(),
             }
         )
     return claims
@@ -48,20 +57,44 @@ def extract_claims(text: str) -> list[dict[str, object]]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manuscript", required=True, type=Path)
+    parser.add_argument("--write-inventory", action="store_true")
     args = parser.parse_args()
 
     manuscript = args.manuscript.resolve()
     if not manuscript.is_file():
         fail(f"missing-manuscript:{manuscript}")
 
-    inventory = json.loads(INVENTORY_PATH.read_text(encoding="utf-8"))
     manuscript_bytes = manuscript.read_bytes()
     actual_hash = hashlib.sha256(manuscript_bytes).hexdigest()
+    actual_claims = extract_claims(manuscript_bytes.decode("utf-8"))
+
+    if args.write_inventory:
+        previous = json.loads(INVENTORY_PATH.read_text(encoding="utf-8"))
+        inventory = {
+            "schema_version": 2,
+            "manuscript": previous.get(
+                "manuscript",
+                "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
+            ),
+            "manuscript_sha256": actual_hash,
+            "claims": actual_claims,
+        }
+        INVENTORY_PATH.write_text(
+            json.dumps(inventory, indent=2, ensure_ascii=True) + "\n",
+            encoding="utf-8",
+        )
+        print(f"manuscript_sha256={actual_hash}")
+        print(f"manuscript_claims={len(actual_claims)}")
+        print("manuscript_inventory_written=1")
+        return
+
+    inventory = json.loads(INVENTORY_PATH.read_text(encoding="utf-8"))
+    if inventory.get("schema_version") != 2:
+        fail(f"inventory-schema:{inventory.get('schema_version')}")
     expected_hash = inventory.get("manuscript_sha256")
     if actual_hash != expected_hash:
         fail(f"sha256:expected={expected_hash}:actual={actual_hash}")
 
-    actual_claims = extract_claims(manuscript_bytes.decode("utf-8"))
     expected_claims = inventory.get("claims")
     if actual_claims != expected_claims:
         for index, (actual, expected) in enumerate(

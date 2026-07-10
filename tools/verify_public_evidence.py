@@ -130,6 +130,10 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
     source_cards = {
         card["id"]: card for card in source_card_items if card.get("id")
     }
+    registry = load_json(repo_path(repo_root, "reference-evidence/reference_registry.json"))
+    registry_records = {
+        record["id"]: record for record in registry.get("records", []) if record.get("id")
+    }
     referenced_cards: set[str] = set()
 
     for card_id, card in source_cards.items():
@@ -146,6 +150,15 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
             check_count += 1
             if not re.match(r"^https://", str(source_url)):
                 failures.append(Failure(card_id, "source_card_source_url", "source_url must start with https://"))
+        if str(card.get("kind", "")).startswith("external_"):
+            registry_id = card.get("registry_id")
+            check_count += 3
+            if not registry_id:
+                failures.append(Failure(card_id, "source_card_registry_id", "external source card lacks registry_id"))
+            elif registry_id not in registry_records:
+                failures.append(Failure(card_id, "source_card_registry_id", f"unknown registry record: {registry_id}"))
+            elif source_url != registry_records[registry_id].get("canonical_url"):
+                failures.append(Failure(card_id, "source_card_registry_url", "source_url differs from pinned registry canonical_url"))
         if local_file:
             check_count += 1
             local_path = repo_path(repo_root, str(local_file))
@@ -298,12 +311,12 @@ def verify_manifest(manifest_path: Path) -> tuple[int, list[Failure]]:
     inventory_claims = inventory.get("claims", [])
     inventory_labels = [claim.get("label") for claim in inventory_claims]
     check_count += 3
-    if len(inventory_labels) != 29:
+    if not inventory_labels:
         failures.append(
             Failure(
                 "paper_claim_inventory",
                 "claim_count",
-                f"expected 29 formal claims, found {len(inventory_labels)}",
+                "formal claim inventory is empty",
             )
         )
     if any(not label for label in inventory_labels):

@@ -8,13 +8,16 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 ## Machine state
 
 ```text
-paper_claims_total=29
+paper_claims_total=26
 paper_claims_closed=0
 paper_claims_partial=5
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=24
+paper_claims_unformalized=21
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
+publication_evidence_closed=0
+publication_obligations_passed=38/74
+model_assumptions_admissible=12/12
 ```
 
 | Label | Kind | State | Route | Title |
@@ -31,14 +34,11 @@ formal_root_imports=BlackwellDilemma.PaperSemanticGate
 | `thm:cognitive-threshold` | theorem | partial | semantic-repair | Characterization of the Blackwell Regime |
 | `prop:threshold-alpha` | proposition | unformalized | local | Cognitive Threshold Increases with Instrumental Rationality |
 | `prop:supermodular` | proposition | unformalized | mixed | Supermodular Complementarity |
-| `cor:policy-complementarity` | corollary | unformalized | local | Policy Complementarity |
 | `prop:sentimental` | proposition | unformalized | semantic-repair | Sentimental Immunity |
 | `prop:principal-optimum` | proposition | unformalized | local | Interior Optimal Precision for Heterogeneous Populations |
-| `cor:disclosure` | corollary | unformalized | local | Disclosure Policy Design |
 | `prop:canonical` | proposition | unformalized | semantic-repair | Canonical Welfare |
 | `prop:interior-optimum` | proposition | unformalized | local | Interior Optimum |
 | `prop:two-regime-five-state` | proposition | unformalized | local | Two-Regime Structure of the 5-State Instance |
-| `cor:five-state-policy` | corollary | unformalized | local | Policy Mapping on the 5-State Instance |
 | `prop:threshold-five-state` | proposition | unformalized | semantic-repair | Cognitive Sufficiency on the 5-State Instance |
 | `prop:p-monotonicity-five-state` | proposition | unformalized | local | $p$-Monotonicity on the 5-State Instance |
 | `thm:bayesian-immunity` | theorem | unformalized | external-library | Bayesian Immunity |
@@ -59,6 +59,8 @@ python scripts/audit_conditional_surface.py
 python scripts/audit_paper_semantic_gate.py
 python scripts/audit_axiom_output.py
 python scripts/render_paper_claim_readme.py --check
+python ../tools/verify_reference_registry.py
+python ../tools/audit_publication_obligations.py --check-ledger
 ```
 
 The canonical label inventory is `../paper/claim_inventory.json`. The formal

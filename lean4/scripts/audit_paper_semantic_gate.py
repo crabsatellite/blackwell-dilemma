@@ -35,8 +35,8 @@ def fail(message: str) -> None:
 inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
 claims = inventory.get("claims", [])
 expected_labels = [claim["label"] for claim in claims]
-if len(expected_labels) != 29:
-    fail(f"inventory-count:{len(expected_labels)}")
+if not expected_labels:
+    fail("empty-inventory")
 if len(set(expected_labels)) != len(expected_labels):
     fail("duplicate-inventory-label")
 
@@ -84,6 +84,20 @@ for path, limit in line_limits.items():
     if count > limit:
         fail(f"line-limit:{path.name}:{count}>{limit}")
 
+build = subprocess.run(
+    ["lake", "build", "BlackwellDilemma.PaperSemanticGate"],
+    cwd=LEAN_ROOT,
+    text=True,
+    encoding="utf-8",
+    errors="replace",
+    stdout=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
+    check=False,
+)
+if build.returncode != 0:
+    print(build.stdout)
+    fail(f"lake-build-returncode:{build.returncode}")
+
 run = subprocess.run(
     ["lake", "env", "lean", "BlackwellDilemma/PaperSemanticGate.lean"],
     cwd=LEAN_ROOT,
@@ -106,6 +120,19 @@ observed = re.findall(
 observed_labels = [label for label, _state, _route in observed]
 if observed_labels != expected_labels:
     fail("lean-label-roster-does-not-match-manuscript-inventory")
+
+observed_metadata = re.findall(
+    r"paper_claim_meta=([^|\s]+)\|"
+    r"(theorem|proposition|lemma|corollary)\|(\d+)",
+    run.stdout,
+)
+expected_metadata = [
+    (claim["label"], claim["kind"], str(claim["line"])) for claim in claims
+]
+if observed_metadata != expected_metadata:
+    fail("lean-metadata-does-not-match-manuscript-inventory")
+if any(not re.fullmatch(r"[0-9a-f]{64}", claim.get("statement_sha256", "")) for claim in claims):
+    fail("missing-or-invalid-statement-sha256")
 
 states = Counter(state for _label, state, _route in observed)
 expected_gate = (
@@ -131,5 +158,7 @@ print("paper_claim_model_only_imports=0")
 print("paper_claim_formal_root_imports=" + ",".join(root_imports))
 print("paper_claim_formal_root_model_only_imports=0")
 print("paper_claim_inventory_match=1")
+print("paper_claim_metadata_match=1")
+print(f"paper_claim_statement_hashes={len(claims)}")
 
 sys.exit(0)

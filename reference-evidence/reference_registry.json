@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "metadata_authority": "https://api.crossref.org/works/{doi}",
+  "records": [
+    {
+      "id": "blackwell1953",
+      "doi": "10.1214/aoms/1177729032",
+      "title": "Equivalent Comparisons of Experiments",
+      "authors": ["David Blackwell"],
+      "year": 1953,
+      "publisher": "Institute of Mathematical Statistics",
+      "container_title": "The Annals of Mathematical Statistics",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1214/aoms/1177729032",
+      "evidence_locator": "Article-level comparison-of-experiments theorem.",
+      "supports": [
+        "For a fixed decision problem, a Blackwell-more-informative experiment has weakly greater optimized expected value."
+      ],
+      "limitations": [
+        "Does not compare policies that optimize different objectives or decision problems whose feasible strategies change with the experiment."
+      ]
+    },
+    {
+      "id": "kesten1980",
+      "doi": "10.1007/bf01197577",
+      "title": "The critical probability of bond percolation on the square lattice equals 1/2",
+      "authors": ["Harry Kesten"],
+      "year": 1980,
+      "publisher": "Springer Science and Business Media LLC",
+      "container_title": "Communications in Mathematical Physics",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1007/bf01197577",
+      "evidence_locator": "Main theorem.",
+      "supports": [
+        "Independent bond percolation on the infinite square lattice has open-edge critical probability 1/2."
+      ],
+      "limitations": [
+        "Does not by itself prove finite-torus giant-component size, finite-size rates, or welfare consequences."
+      ]
+    },
+    {
+      "id": "aizenman_barsky1987",
+      "doi": "10.1007/bf01212322",
+      "title": "Sharpness of the phase transition in percolation models",
+      "authors": ["Michael Aizenman", "David J. Barsky"],
+      "year": 1987,
+      "publisher": "Springer Science and Business Media LLC",
+      "container_title": "Communications in Mathematical Physics",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1007/bf01212322",
+      "evidence_locator": "Sharpness and subcritical exponential-decay results.",
+      "supports": [
+        "Subcritical independent percolation has exponential decay in the sharpness regime covered by the paper."
+      ],
+      "limitations": [
+        "The exact cluster-size-tail form used by a manuscript claim must still match the cited theorem and model convention."
+      ]
+    },
+    {
+      "id": "grimmett1999",
+      "doi": "10.1007/978-3-662-03981-6",
+      "title": "Percolation",
+      "authors": ["Geoffrey Grimmett"],
+      "year": 1999,
+      "publisher": "Springer Berlin Heidelberg",
+      "container_title": "Grundlehren der mathematischen Wissenschaften",
+      "record_type": "book",
+      "canonical_url": "https://doi.org/10.1007/978-3-662-03981-6",
+      "evidence_locator": "Second edition; manuscript cites Theorem 6.75 and Sections 8.2-8.3.",
+      "supports": [
+        "Standard infinite-lattice subcritical and supercritical percolation results at the cited locations."
+      ],
+      "limitations": [
+        "A book citation does not automatically establish the manuscript's finite-torus asymptotics or its welfare translation."
+      ]
+    },
+    {
+      "id": "pisztora1996",
+      "doi": "10.1007/bf01198161",
+      "title": "Surface order large deviations for Ising, Potts and percolation models",
+      "authors": ["Agoston Pisztora"],
+      "year": 1996,
+      "publisher": "Springer Science and Business Media LLC",
+      "container_title": "Probability Theory and Related Fields",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1007/bf01198161",
+      "evidence_locator": "Percolation large-deviation results in large finite regions.",
+      "supports": [
+        "Finite-volume supercritical percolation admits surface-order large-deviation control under the paper's hypotheses."
+      ],
+      "limitations": [
+        "The citation is not treated as an automatic proof of the manuscript's all-p-above-critical square-torus statement."
+      ]
+    },
+    {
+      "id": "topkis1978",
+      "doi": "10.1287/opre.26.2.305",
+      "title": "Minimizing a Submodular Function on a Lattice",
+      "authors": ["Donald M. Topkis"],
+      "year": 1978,
+      "publisher": "Institute for Operations Research and the Management Sciences (INFORMS)",
+      "container_title": "Operations Research",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1287/opre.26.2.305",
+      "evidence_locator": "Lattice comparative-statics results under submodularity/supermodularity hypotheses.",
+      "supports": [
+        "Monotone comparative statics follows when the required lattice and increasing-differences hypotheses are established."
+      ],
+      "limitations": [
+        "Does not establish increasing differences for the Blackwell Dilemma welfare function; that premise is paper-specific."
+      ]
+    },
+    {
+      "id": "molloy_reed1995",
+      "doi": "10.1002/rsa.3240060204",
+      "title": "A critical point for random graphs with a given degree sequence",
+      "authors": ["Michael Molloy", "Bruce Reed"],
+      "year": 1995,
+      "publisher": "Wiley",
+      "container_title": "Random Structures & Algorithms",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1002/rsa.3240060204",
+      "evidence_locator": "Critical-point criterion for random graphs with a prescribed degree sequence.",
+      "supports": [
+        "Under the source's regularity hypotheses, the excess-degree criterion determines giant-component emergence."
+      ],
+      "limitations": [
+        "Requires checking degree-sequence regularity, finite-size cutoffs, and the translation from retention to blocking probability."
+      ]
+    },
+    {
+      "id": "cohen2000",
+      "doi": "10.1103/physrevlett.85.4626",
+      "title": "Resilience of the Internet to Random Breakdowns",
+      "authors": ["Reuven Cohen", "Keren Erez", "Daniel ben-Avraham", "Shlomo Havlin"],
+      "year": 2000,
+      "publisher": "American Physical Society (APS)",
+      "container_title": "Physical Review Letters",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1103/physrevlett.85.4626",
+      "evidence_locator": "Random-failure threshold analysis for heavy-tailed networks.",
+      "supports": [
+        "The asymptotic random-failure threshold approaches complete removal for an idealized infinite-variance degree law."
+      ],
+      "limitations": [
+        "Does not cover targeted removal and does not imply that every vertex lies in the giant component or has vanishing topological loss."
+      ]
+    },
+    {
+      "id": "newman_strogatz_watts2001",
+      "doi": "10.1103/physreve.64.026118",
+      "title": "Random graphs with arbitrary degree distributions and their applications",
+      "authors": ["M. E. J. Newman", "S. H. Strogatz", "D. J. Watts"],
+      "year": 2001,
+      "publisher": "American Physical Society (APS)",
+      "container_title": "Physical Review E",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1103/physreve.64.026118",
+      "evidence_locator": "Generating-function giant-component criterion.",
+      "supports": [
+        "For the covered random-graph model, the first two degree moments determine the giant-component threshold."
+      ],
+      "limitations": [
+        "Does not establish the paper's welfare conclusions without a separate component-size-to-welfare argument."
+      ]
+    },
+    {
+      "id": "bollobas2001",
+      "doi": "10.1017/cbo9780511814068",
+      "title": "Random Graphs",
+      "authors": ["Bela Bollobas"],
+      "year": 2001,
+      "publisher": "Cambridge University Press",
+      "container_title": "",
+      "record_type": "monograph",
+      "canonical_url": "https://doi.org/10.1017/cbo9780511814068",
+      "evidence_locator": "Second-edition Erdos-Renyi component-size and giant-component results.",
+      "supports": [
+        "For G(n,c/n), component-size behavior changes at c=1, with a linear giant component for c>1."
+      ],
+      "limitations": [
+        "The citation supplies random-graph premises, not the Blackwell Dilemma welfare mapping."
+      ]
+    },
+    {
+      "id": "pfister2013",
+      "doi": "10.3389/fpsyg.2013.00700",
+      "title": "Good things peak in pairs: a note on the bimodality coefficient",
+      "authors": ["Roland Pfister", "Katharina A. Schwarz", "Markus Janczyk", "Rick Dale", "Johnathan B. Freeman"],
+      "year": 2013,
+      "publisher": "Frontiers Media SA",
+      "container_title": "Frontiers in Psychology",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.3389/fpsyg.2013.00700",
+      "evidence_locator": "Discussion of the 5/9 bimodality-coefficient benchmark.",
+      "supports": [
+        "The 5/9 value is a diagnostic benchmark for the sample bimodality coefficient."
+      ],
+      "limitations": [
+        "The diagnostic does not prove multimodality or any theorem-level economic claim."
+      ]
+    },
+    {
+      "id": "eschbach_stauffer_herrmann1981",
+      "doi": "10.1103/physrevb.23.422",
+      "title": "Correlation-length exponent in two-dimensional percolation and Potts model",
+      "authors": ["P. D. Eschbach", "D. Stauffer", "H. J. Herrmann"],
+      "year": 1981,
+      "publisher": "American Physical Society (APS)",
+      "container_title": "Physical Review B",
+      "record_type": "journal-article",
+      "canonical_url": "https://doi.org/10.1103/physrevb.23.422",
+      "evidence_locator": "Two-dimensional percolation correlation-length exponent estimate.",
+      "supports": [
+        "The value nu=4/3 is used as a finite-size-scaling diagnostic for two-dimensional percolation."
+      ],
+      "limitations": [
+        "The exponent is diagnostic input here and is not a machine proof of finite-size collapse or manuscript theorem closure."
+      ]
+    }
+  ]
+}

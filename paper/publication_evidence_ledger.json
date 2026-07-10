@@ -1,0 +1,712 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/audit_publication_obligations.py",
+  "manuscript_sha256": "8554035c3999521fbb690fc9c58d5293e7a6c1d35b746d42ef4f6cf3daf91593",
+  "summary": {
+    "claims_total": 26,
+    "strict_kernel_closed": 0,
+    "publication_evidence_closed": 0,
+    "model_assumptions_total": 12,
+    "model_assumptions_admissible": 12,
+    "obligations_total": 74,
+    "obligations_passed": 38,
+    "obligations_by_type": {
+      "external_references": 8,
+      "lean_conditional": 8,
+      "lean_exact": 18,
+      "model_assumptions": 25,
+      "statement_hash": 5,
+      "unresolved_semantics": 10
+    },
+    "passed_by_type": {
+      "external_references": 8,
+      "model_assumptions": 25,
+      "statement_hash": 5
+    },
+    "gaps_by_type": {
+      "lean_conditional": 8,
+      "lean_exact": 18,
+      "unresolved_semantics": 10
+    }
+  },
+  "claims": [
+    {
+      "label": "thm:decomp",
+      "statement_sha256": "057ff5a1c211e30330d3981324c213997157383ccb9b935377d5e8a0a2c650f7",
+      "lean_state": "partial",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "repaired_uniqueness_scope",
+          "type": "statement_hash",
+          "passed": true,
+          "detail": "statement_sha256=057ff5a1c211e30330d3981324c213997157383ccb9b935377d5e8a0a2c650f7"
+        },
+        {
+          "id": "exact_decomposition_bundle",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is partial; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:info-decay",
+      "statement_sha256": "b36c959b7dcf2c2534fc1fb5414e648c5fc5ea23fc5feabcc1d993ec6aea323c",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "gaussian_and_topology_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=topology_blind_gaussian_signals,independent_bond_blocking"
+        },
+        {
+          "id": "subcritical_cluster_control",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=aizenman_barsky1987,grimmett1999"
+        },
+        {
+          "id": "conditional_oracle_decay_derivation",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+        },
+        {
+          "id": "uniform_in_n_oracle_bound",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The manuscript needs one paper-faithful oracle kernel and a proved n-uniform bound rather than a carrier-level asymptotic."
+        }
+      ]
+    },
+    {
+      "label": "prop:topo-cluster",
+      "statement_sha256": "01d4301313fb722fcbce021a835e2a7146f2201b53e9af78c4e3ec2a59b14d63",
+      "lean_state": "partial",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "uniform_reward_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=iid_uniform_rewards,independent_bond_blocking"
+        },
+        {
+          "id": "percolation_component_regimes",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=grimmett1999,pisztora1996"
+        },
+        {
+          "id": "conditional_cluster_to_welfare_derivation",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is partial; publication closure requires a kernel-checked conditional or exact claim"
+        }
+      ]
+    },
+    {
+      "label": "prop:physical",
+      "statement_sha256": "d342c7dfdd67bd0e8890d8aacbfe0e1090cfff71602e2af71fbde718f2bd5512",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "irreversibility_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=irreversible_no_revisit,independent_bond_blocking"
+        },
+        {
+          "id": "exact_reachability_and_welfare_inequalities",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "lem:wrongness",
+      "statement_sha256": "2f9e95556bafefb8077aebc42208793b2f8f11b191844447e74fb303d530da4e",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "greedy_idp_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy"
+        },
+        {
+          "id": "policy_derived_terminal_reward",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The current formal target must be rebuilt from graph, signals, policy, and terminal reward rather than a hand-coded scalar kernel."
+        },
+        {
+          "id": "exact_wrongness_derivation",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "lem:conditional-reduction",
+      "statement_sha256": "1947a34b744ae6d260d0f5b79e3ce86829f7c007e7bf172cba3524f79ae40a8f",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "blackwell_fixed_problem_premise",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=blackwell1953"
+        },
+        {
+          "id": "idp_conditioning_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=irreversible_no_revisit,bayesian_observes_topology"
+        },
+        {
+          "id": "conditional_blackwell_specialization",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+        }
+      ]
+    },
+    {
+      "label": "thm:dilemma",
+      "statement_sha256": "edffa4fb142af39bc62ea15abb5023c60306170c58f2c0fa6731a88644d1099b",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "canonical_reversal_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=irreversible_no_revisit,terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+        },
+        {
+          "id": "dependency_semantics",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The theorem depends on paper-faithful wrongness, conditional reduction, and information-decay statements that are not yet jointly encoded."
+        },
+        {
+          "id": "exact_dilemma_derivation",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "thm:phase",
+      "statement_sha256": "98e721e060d6a5fefb535419bc270c62b9e229a1d3a5409aaefaec460e29f8ab",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "repaired_giant_component_probability",
+          "type": "statement_hash",
+          "passed": true,
+          "detail": "statement_sha256=98e721e060d6a5fefb535419bc270c62b9e229a1d3a5409aaefaec460e29f8ab"
+        },
+        {
+          "id": "square_lattice_percolation_premises",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=kesten1980,aizenman_barsky1987,grimmett1999,pisztora1996"
+        },
+        {
+          "id": "lattice_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=independent_bond_blocking,iid_uniform_rewards"
+        },
+        {
+          "id": "finite_torus_scope_match",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The all-supercritical-p finite-torus giant-component statement is not yet matched to one source theorem with the same topology and range."
+        },
+        {
+          "id": "conditional_phase_to_welfare_derivation",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+        }
+      ]
+    },
+    {
+      "label": "prop:trap-prevalence",
+      "statement_sha256": "17b1a0cf893080abda93cab0bcb79ca45d03acd2996fb674d3267e11c1fe3406",
+      "lean_state": "partial",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "repaired_p_zero_and_local_scope",
+          "type": "statement_hash",
+          "passed": true,
+          "detail": "statement_sha256=17b1a0cf893080abda93cab0bcb79ca45d03acd2996fb674d3267e11c1fe3406"
+        },
+        {
+          "id": "local_trap_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=irreversible_no_revisit,independent_bond_blocking,iid_uniform_rewards"
+        },
+        {
+          "id": "exact_local_event_to_dynamic_reversal",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is partial; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "thm:cognitive-threshold",
+      "statement_sha256": "dc66fba0ee2c87a333af19497ff4ecb94ac9568d6ada42899cdd89d4e8d72411",
+      "lean_state": "partial",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "cognitive_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=cognitive_interpolation_kappa,topology_blind_gaussian_signals,irreversible_no_revisit"
+        },
+        {
+          "id": "posterior_threshold_semantics",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "Finite supports and a depth expression exist, but the actual posterior threshold has not been derived from the stated policy model."
+        },
+        {
+          "id": "exact_threshold_bundle",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is partial; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:threshold-alpha",
+      "statement_sha256": "ff8a94ed72b3df7a481b133310b531721d947041ffe91a25640e365db58ad2bf",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "alpha_kappa_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
+        },
+        {
+          "id": "exact_implicit_threshold_derivative",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:supermodular",
+      "statement_sha256": "1553ffd28737ac35718b9587d569e44d483c75599ef9a8f512f90166a1becf11",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "topkis_premise",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=topkis1978"
+        },
+        {
+          "id": "alpha_kappa_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
+        },
+        {
+          "id": "actual_welfare_increasing_differences",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "Topkis applies only after increasing differences are proved for the paper's posterior welfare function."
+        },
+        {
+          "id": "conditional_topkis_specialization",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+        }
+      ]
+    },
+    {
+      "label": "prop:sentimental",
+      "statement_sha256": "3d8bfb6bcd237e10c9e53db501a960867b30bfd855a0e8ebf97649e9ef722fdd",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "sentimental_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=sentimental_weight_alpha,greedy_static_reward_policy"
+        },
+        {
+          "id": "policy_derived_alpha_threshold",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The alpha threshold must be rebuilt from the IDP policy rather than a hand-coded welfare carrier."
+        },
+        {
+          "id": "exact_sentimental_immunity",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:principal-optimum",
+      "statement_sha256": "3e3a34f3f3138674d24a324b4ef9e6c6eea837bb9c11fb637ef704bdd623bcd0",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "population_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=heterogeneous_population_distribution,cognitive_interpolation_kappa,sentimental_weight_alpha"
+        },
+        {
+          "id": "aggregate_tail_and_continuity",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The aggregate welfare objective needs exact continuity, tail, and distributional hypotheses."
+        },
+        {
+          "id": "exact_principal_optimum",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:canonical",
+      "statement_sha256": "80ed069803232ff7b26c232052e5697cac4cbd7a989a952d5d1052f499ec0c9d",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "canonical_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+        },
+        {
+          "id": "exact_signal_routing_expectation",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:interior-optimum",
+      "statement_sha256": "b4fbb6796587cb02ea2dbafb7f03b7bd692483e72340544dff626d7a6c87ecee",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "five_state_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+        },
+        {
+          "id": "exact_minimizer_and_numeric_interval",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:two-regime-five-state",
+      "statement_sha256": "a1cc1069ef503f33d1e5d5b79366fffa8a6338352f7b5a3831f19a1debb50579",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "five_state_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=terminal_neighbor_topology,topology_blind_gaussian_signals,greedy_static_reward_policy"
+        },
+        {
+          "id": "exact_two_regime_bundle",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:threshold-five-state",
+      "statement_sha256": "326f3d138327532879a44c785c13a67bb863238d5adf5880821da77789e4ef81",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "five_state_cognitive_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=terminal_neighbor_topology,cognitive_interpolation_kappa,topology_blind_gaussian_signals"
+        },
+        {
+          "id": "exact_five_state_cognitive_agent",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:p-monotonicity-five-state",
+      "statement_sha256": "33797edc46b87ff62f3551ea4f787c10bf2b48b268b05768fb140a57bf50f4d2",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "five_state_blocking_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,cognitive_interpolation_kappa"
+        },
+        {
+          "id": "probability_domain_scope",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The theorem must state and prove the correct p-domain without junk-value extensions."
+        },
+        {
+          "id": "exact_p_monotonicity",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "thm:bayesian-immunity",
+      "statement_sha256": "0c5b0a686f61bee3a1e79f501b498af4464ec25114125fc7bf1447feb72ff116",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "blackwell_premise",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=blackwell1953"
+        },
+        {
+          "id": "bayesian_topology_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=bayesian_observes_topology,irreversible_no_revisit"
+        },
+        {
+          "id": "conditional_bayesian_specialization",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+        }
+      ]
+    },
+    {
+      "label": "prop:complementarity",
+      "statement_sha256": "47d42a4da7c21e09814724fd3f40f7a09e1072900b336472b98003930e0bfd70",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "repaired_policy_scope",
+          "type": "statement_hash",
+          "passed": true,
+          "detail": "statement_sha256=47d42a4da7c21e09814724fd3f40f7a09e1072900b336472b98003930e0bfd70"
+        },
+        {
+          "id": "mixture_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=bayesian_observes_topology,greedy_static_reward_policy"
+        },
+        {
+          "id": "exact_cross_partial_from_agent_welfare",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:bayesian-naive-five-state",
+      "statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "bayesian_naive_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=bayesian_naive_prior_rule,terminal_neighbor_topology,topology_blind_gaussian_signals"
+        },
+        {
+          "id": "exact_prior_threshold_and_welfare",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "thm:general-tree",
+      "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "general_idp_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=irreversible_no_revisit,topology_blind_gaussian_signals,greedy_static_reward_policy"
+        },
+        {
+          "id": "graph_policy_semantics",
+          "type": "unresolved_semantics",
+          "passed": false,
+          "detail": "The reversal must be derived from reachability, dynamic value, and C2-prime rather than a manufactured witness."
+        },
+        {
+          "id": "exact_general_tree_derivation",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is unformalized; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "prop:error-compounding",
+      "statement_sha256": "d6b42952d77b85323598f9e9197a0361f01f21cfed3a7bce960e3c5b96db9f42",
+      "lean_state": "partial",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "depth_signal_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=topology_blind_gaussian_signals,greedy_static_reward_policy,irreversible_no_revisit"
+        },
+        {
+          "id": "exact_depth_probability_and_threshold_bundle",
+          "type": "lean_exact",
+          "passed": false,
+          "detail": "Lean state is partial; exact closure requires closed"
+        }
+      ]
+    },
+    {
+      "label": "cor:er-phase",
+      "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "er_component_premises",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=bollobas2001,newman_strogatz_watts2001"
+        },
+        {
+          "id": "random_graph_model",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=independent_bond_blocking,iid_uniform_rewards"
+        },
+        {
+          "id": "conditional_er_to_welfare_derivation",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+        }
+      ]
+    },
+    {
+      "label": "cor:power-law",
+      "statement_sha256": "371f5176f2b64cc932d61dd8d55ee0982d6633f8c97aa32a89596e2d5189d100",
+      "lean_state": "unformalized",
+      "strict_kernel_closed": false,
+      "publication_evidence_closed": false,
+      "obligations": [
+        {
+          "id": "repaired_power_law_scope",
+          "type": "statement_hash",
+          "passed": true,
+          "detail": "statement_sha256=371f5176f2b64cc932d61dd8d55ee0982d6633f8c97aa32a89596e2d5189d100"
+        },
+        {
+          "id": "configuration_model_premises",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=molloy_reed1995,cohen2000,newman_strogatz_watts2001"
+        },
+        {
+          "id": "configuration_model_scope",
+          "type": "model_assumptions",
+          "passed": true,
+          "detail": "admissible assumption ids=configuration_model_power_law,independent_bond_blocking,iid_uniform_rewards"
+        },
+        {
+          "id": "conditional_configuration_to_welfare_derivation",
+          "type": "lean_conditional",
+          "passed": false,
+          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+        }
+      ]
+    }
+  ]
+}

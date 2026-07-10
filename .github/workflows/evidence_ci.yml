@@ -9,6 +9,7 @@ on:
       - 'tracker.py'
       - 'verification/**'
       - 'docs/**'
+      - 'paper/**'
       - 'results/**'
       - 'reference-evidence/**'
       - 'tools/**'
@@ -21,6 +22,7 @@ on:
       - 'tracker.py'
       - 'verification/**'
       - 'docs/**'
+      - 'paper/**'
       - 'results/**'
       - 'reference-evidence/**'
       - 'tools/**'
@@ -71,7 +73,10 @@ jobs:
         run: lake build BlackwellDilemma.AxiomAudit
 
       - name: Verify public evidence manifest
-        run: python tools/verify_public_evidence.py
+        run: |
+          python tools/verify_reference_registry.py
+          python tools/audit_publication_obligations.py --check-ledger
+          python tools/verify_public_evidence.py
 
       - name: Verify generated research reports
         run: |

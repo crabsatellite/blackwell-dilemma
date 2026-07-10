@@ -34,7 +34,7 @@ theorem completePaperKernelOnly_notYet_current :
   completePaperKernelOnly_notYet
 
 theorem paperClaimMachineLedgerGate :
-    paperClaims.length = 29 /\
+    paperClaims.length = 26 /\
       paperClaimLabels.Nodup /\
       Not CompletePaperKernelOnly := by
   exact ⟨paperClaims_count, paperClaimLabels_nodup,
@@ -46,5 +46,9 @@ theorem paperClaimMachineLedgerGate :
 #eval paperClaims.forM fun claim =>
   IO.println
     s!"paper_claim={claim.label}|{claimStateName claim.state}|{workClassName claim.route}"
+
+#eval paperClaims.forM fun claim =>
+  IO.println
+    s!"paper_claim_meta={claim.label}|{claimKindName claim.kind}|{claim.sourceLine}"
 
 end BlackwellDilemma.PaperSemanticGate

@@ -7,7 +7,8 @@
       "kind": "external_reference",
       "role": "Classical comparison-of-experiments theorem used as the baseline result.",
       "status": "source_backed_not_reproved_here",
-      "source_url": "https://doi.org/10.1214/aoms/1177729091",
+      "registry_id": "blackwell1953",
+      "source_url": "https://doi.org/10.1214/aoms/1177729032",
       "bibliographic_note": "David Blackwell, Equivalent Comparisons of Experiments, Annals of Mathematical Statistics 24(2), 1953."
     },
     {
@@ -15,7 +16,8 @@
       "kind": "external_formula",
       "role": "Critical probability p_c(Z2 bond percolation)=1/2 used as the percolation threshold reference.",
       "status": "external_classical_result_partially_represented_in_lean_gate",
-      "source_url": "https://doi.org/10.1007/BF01231563",
+      "registry_id": "kesten1980",
+      "source_url": "https://doi.org/10.1007/bf01197577",
       "bibliographic_note": "Kesten 1980 completes p_c(Z2)=1/2; Harris 1960 supplies the complementary classical half."
     },
     {
@@ -23,6 +25,7 @@
       "kind": "external_formula",
       "role": "Bimodality coefficient threshold 5/9 used in the computational appendix diagnostics.",
       "status": "source_backed_diagnostic_not_lean_theorem",
+      "registry_id": "pfister2013",
       "source_url": "https://doi.org/10.3389/fpsyg.2013.00700",
       "bibliographic_note": "Sarle's bimodality coefficient threshold is used only as a simulation diagnostic."
     },
@@ -31,16 +34,31 @@
       "kind": "external_formula",
       "role": "2D percolation finite-size-scaling exponent nu=4/3 used for empirical data-collapse diagnostics.",
       "status": "source_backed_diagnostic_not_lean_theorem",
-      "source_url": "https://doi.org/10.1103/PhysRevB.23.422",
+      "registry_id": "eschbach_stauffer_herrmann1981",
+      "source_url": "https://doi.org/10.1103/physrevb.23.422",
       "bibliographic_note": "The public text treats nu=4/3 as a finite-size-scaling diagnostic; it is not a closed Lean input for the remaining theorem targets."
     },
     {
       "id": "uniform_order_statistic_gap",
-      "kind": "external_formula_plus_local_derivation",
+      "kind": "local_formula_derivation",
       "role": "Uniform[0,1] order-statistic gap formula used by the analytic conditional topological-loss check.",
       "status": "formula_machine_checked_against_committed_json",
       "local_file": "results/prop5_verification_results.json",
       "bibliographic_note": "The manifest verifies committed analytic entries against (N-k)/((N+1)(k+1))."
+    },
+    {
+      "id": "reference_registry",
+      "kind": "machine_gate",
+      "role": "Pinned bibliographic identity, exact source scope, and explicit limitation registry.",
+      "status": "repo_build_gate",
+      "local_file": "reference-evidence/reference_registry.json"
+    },
+    {
+      "id": "publication_obligation_gate",
+      "kind": "machine_gate",
+      "role": "Derived two-standard claim ledger over proof, reference, computation, model, semantic, and demotion obligations.",
+      "status": "repo_build_gate",
+      "local_file": "paper/publication_obligations.json"
     },
     {
       "id": "lean_paper_semantic_gate",
@@ -58,6 +76,84 @@
     }
   ],
   "claims": [
+    {
+      "id": "publication_obligation_ledger_gate",
+      "category": "machine_derived_claim_closure",
+      "source_cards": [
+        "publication_obligation_gate"
+      ],
+      "locations": [
+        {
+          "id": "publication_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"publication_evidence\"",
+            "\"thm:decomp\"",
+            "\"cor:power-law\""
+          ]
+        },
+        {
+          "id": "model_assumptions",
+          "path": "paper/model_assumptions.json",
+          "contains": [
+            "admissible means explicit, scoped, and testable or constitutive; it does not mean empirically true"
+          ]
+        },
+        {
+          "id": "derived_publication_ledger",
+          "path": "paper/publication_evidence_ledger.json",
+          "contains": [
+            "\"generated_by\": \"tools/audit_publication_obligations.py\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "publication_obligation_ledger_freshness",
+          "type": "python_script",
+          "path": "tools/audit_publication_obligations.py",
+          "args": [
+            "--check-ledger"
+          ],
+          "timeout_seconds": 240,
+          "stdout_contains": [
+            "publication_ledger_stale=0",
+            "publication_claims_total=26",
+            "publication_manual_status_fields=0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reference_registry_gate",
+      "category": "machine_checked_reference_metadata",
+      "source_cards": [
+        "reference_registry"
+      ],
+      "locations": [
+        {
+          "id": "reference_registry",
+          "path": "reference-evidence/reference_registry.json",
+          "contains": [
+            "\"limitations\"",
+            "\"blackwell1953\"",
+            "\"molloy_reed1995\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "reference_registry_offline_audit",
+          "type": "python_script",
+          "path": "tools/verify_reference_registry.py",
+          "stdout_contains": [
+            "reference_records_total=12",
+            "reference_manual_status_fields=0",
+            "reference_metadata_offline_failures=0"
+          ]
+        }
+      ]
+    },
     {
       "id": "readme_blackwell_baseline",
       "category": "external_reference",
@@ -470,15 +566,17 @@
           "cwd": "lean4",
           "timeout_seconds": 240,
           "stdout_contains": [
-            "paper_claims_total=29",
-            "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,cor:policy-complementarity,prop:sentimental,prop:principal-optimum,cor:disclosure,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,cor:five-state-policy,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
+            "paper_claims_total=26",
+            "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,prop:sentimental,prop:principal-optimum,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
             "paper_claim_manual_status_assignments=0",
             "paper_claim_legacy_semantic_targets=0",
             "paper_claim_bridge_gate_tokens=0",
             "paper_claim_model_only_imports=0",
             "paper_claim_formal_root_imports=BlackwellDilemma.PaperSemanticGate",
             "paper_claim_formal_root_model_only_imports=0",
-            "paper_claim_inventory_match=1"
+            "paper_claim_inventory_match=1",
+            "paper_claim_metadata_match=1",
+            "paper_claim_statement_hashes=26"
           ]
         },
         {
