@@ -13,6 +13,7 @@
 import BlackwellDilemma.Basic
 import BlackwellDilemma.PhysicalIrreducibility
 import BlackwellDilemma.UnifiedWelfare
+import BlackwellDilemma.UnifiedCanonical
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -336,8 +337,10 @@ def claimCanonical : PaperClaim :=
     kind := .proposition
     sourceLine := 741
     route := .semanticRepair
-    blocker := "Replace branch-selected scalar formulas with the five-state signal and routing expectation."
-    evidence := .unformalized }
+    blocker := "The Gaussian trap law is explicit and the four-state route expectation and limits are kernel proved."
+    evidence := .proved
+      BlackwellDilemma.CanonicalGaussianRoute.CanonicalWelfareClaim
+      BlackwellDilemma.CanonicalGaussianRoute.canonicalWelfareClaim_proved }
 
 def claimInteriorOptimum : PaperClaim :=
   { label := "prop:interior-optimum"

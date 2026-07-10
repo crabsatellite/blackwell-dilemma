@@ -10,6 +10,9 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms decompositionIdentityCore_proved
 #print axioms decompositionClaim_proved
 #print axioms physicalIrreducibilityClaim_proved
+#print axioms BlackwellDilemma.CanonicalGaussianRoute.routeProbability_sum_one
+#print axioms BlackwellDilemma.CanonicalGaussianRoute.expectedReward_formula
+#print axioms BlackwellDilemma.CanonicalGaussianRoute.canonicalWelfareClaim_proved
 #print axioms topologicalLossOrderStatisticsAlgebraCore_proved
 #print axioms topoClusterPartialCore_proved
 #print axioms BlackwellDilemma.Infrastructure.part6LowerBoundTransferPrinciple_proved

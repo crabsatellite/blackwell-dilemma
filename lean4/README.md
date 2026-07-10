@@ -9,15 +9,15 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=2
+paper_claims_closed=3
 paper_claims_partial=4
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=20
+paper_claims_unformalized=19
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=2
-publication_obligations_passed=42/75
+publication_evidence_closed=3
+publication_obligations_passed=43/75
 model_assumptions_admissible=12/12
 research_claims_preserved=26/26
 claim_lineage_relations=split_core_and_frontier:2,unchanged:24
@@ -45,7 +45,7 @@ semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5
 | `prop:supermodular` | proposition | unformalized | mixed | Supermodular Complementarity |
 | `prop:sentimental` | proposition | unformalized | semantic-repair | Sentimental Immunity |
 | `prop:principal-optimum` | proposition | unformalized | local | Interior Optimal Precision for Heterogeneous Populations |
-| `prop:canonical` | proposition | unformalized | semantic-repair | Canonical Welfare |
+| `prop:canonical` | proposition | closed | semantic-repair | Canonical Welfare |
 | `prop:interior-optimum` | proposition | unformalized | local | Interior Optimum |
 | `prop:two-regime-five-state` | proposition | unformalized | local | Two-Regime Structure of the 5-State Instance |
 | `prop:threshold-five-state` | proposition | unformalized | semantic-repair | Cognitive Sufficiency on the 5-State Instance |

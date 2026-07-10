@@ -89,6 +89,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedWelfare.lean"
     },
     {
+      "id": "unified_canonical_routing_kernel",
+      "kind": "machine_gate",
+      "role": "Finite Gaussian route distribution, normalized outcome probabilities, exact expected reward, and perfect-signal limit for the four-state instance.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedCanonical.lean"
+    },
+    {
       "id": "committed_simulation_results",
       "kind": "machine_result_data",
       "role": "Committed JSON outputs backing public computational appendix numbers.",
@@ -97,6 +104,58 @@
     }
   ],
   "claims": [
+    {
+      "id": "canonical_gaussian_routing_gate",
+      "category": "kernel_checked_constructive_instance",
+      "source_cards": [
+        "unified_canonical_routing_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "unified_canonical_module",
+          "path": "lean4/BlackwellDilemma/UnifiedCanonical.lean",
+          "contains": [
+            "def routeProbability",
+            "def expectedReward",
+            "theorem routeProbability_sum_one",
+            "theorem expectedReward_formula",
+            "theorem canonicalWelfareClaim_proved"
+          ]
+        },
+        {
+          "id": "canonical_claim_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.CanonicalGaussianRoute.CanonicalWelfareClaim",
+            "BlackwellDilemma.CanonicalGaussianRoute.canonicalWelfareClaim_proved"
+          ]
+        },
+        {
+          "id": "canonical_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.CanonicalGaussianRoute.routeProbability_sum_one",
+            "#print axioms BlackwellDilemma.CanonicalGaussianRoute.expectedReward_formula",
+            "#print axioms BlackwellDilemma.CanonicalGaussianRoute.canonicalWelfareClaim_proved"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "canonical_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
     {
       "id": "claim_lineage_checkpoint_gate",
       "category": "machine_checked_research_claim_preservation",
