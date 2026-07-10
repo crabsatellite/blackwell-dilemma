@@ -70,6 +70,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedInterior",
     "BlackwellDilemma.UnifiedTwoRegime",
     "BlackwellDilemma.UnifiedCognitiveFiveState",
+    "BlackwellDilemma.UnifiedBayesianImmunity",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

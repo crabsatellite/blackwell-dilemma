@@ -178,7 +178,7 @@
     },
     {
       "label": "thm:bayesian-immunity",
-      "statement_sha256": "0c5b0a686f61bee3a1e79f501b498af4464ec25114125fc7bf1447feb72ff116",
+      "statement_sha256": "5de133491320a527765e98d80b342870afd1e1aef72b5785aa0c7a6e1c11c994",
       "obligations": [
         {"id": "blackwell_premise", "type": "external_references", "ids": ["blackwell1953"]},
         {"id": "bayesian_topology_model", "type": "model_assumptions", "ids": ["bayesian_observes_topology", "irreversible_no_revisit"]},

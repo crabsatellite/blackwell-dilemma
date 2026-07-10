@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "056c86e30daa3b06d0bdba4700f0a2229ba75067d5fbf73c7ca1ffcb77abd26a",
+  "manuscript_sha256": "6e18b99c2cbe374e327f78b87b9c305de0a08ecec7b77a0a4872b43eeb2ea531",
   "claims": [
     {
       "line": 262,
@@ -141,45 +141,45 @@
       "kind": "theorem",
       "label": "thm:bayesian-immunity",
       "title": "Bayesian Immunity",
-      "statement_sha256": "0c5b0a686f61bee3a1e79f501b498af4464ec25114125fc7bf1447feb72ff116"
+      "statement_sha256": "5de133491320a527765e98d80b342870afd1e1aef72b5785aa0c7a6e1c11c994"
     },
     {
-      "line": 990,
+      "line": 1004,
       "kind": "proposition",
       "label": "prop:complementarity",
       "title": "Information-Knowledge Complementarity",
       "statement_sha256": "1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6"
     },
     {
-      "line": 1008,
+      "line": 1022,
       "kind": "proposition",
       "label": "prop:bayesian-naive-five-state",
       "title": "Bayesian-Naive Threshold on the 5-State Instance",
       "statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43"
     },
     {
-      "line": 1047,
+      "line": 1061,
       "kind": "theorem",
       "label": "thm:general-tree",
       "title": "Non-Monotonicity on General Graphs",
       "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8"
     },
     {
-      "line": 1096,
+      "line": 1110,
       "kind": "proposition",
       "label": "prop:error-compounding",
       "title": "Error Compounding",
       "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52"
     },
     {
-      "line": 1133,
+      "line": 1147,
       "kind": "corollary",
       "label": "cor:er-phase",
       "title": "Phase Transition on Erdos--Renyi Graphs",
       "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b"
     },
     {
-      "line": 1147,
+      "line": 1161,
       "kind": "corollary",
       "label": "cor:power-law",
       "title": "Application: Power-Law Networks",

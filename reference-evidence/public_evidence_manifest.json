@@ -117,6 +117,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedCognitiveFiveState.lean"
     },
     {
+      "id": "unified_bayesian_immunity_kernel",
+      "kind": "machine_gate",
+      "role": "Strategy-aligned finite-IDP specialization of the cited Blackwell conditional monotonicity theorem, including fixed signal-contingent decision-rule sets, traversal implementation witnesses, an explicitly ordered experiment sequence, and finite percolation aggregation.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedBayesianImmunity.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -343,6 +350,73 @@
       ]
     },
     {
+      "id": "bayesian_immunity_gate",
+      "category": "reference_conditional_strategy_aligned_theorem",
+      "source_cards": [
+        "blackwell1953",
+        "unified_idp_semantic_kernel",
+        "unified_bayesian_immunity_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "bayesian_immunity_module",
+          "path": "lean4/BlackwellDilemma/UnifiedBayesianImmunity.lean",
+          "contains": [
+            "structure BayesianIDPFamily",
+            "def feasibleStopsAtPrecision",
+            "theorem feasibleStopsAtPrecision_nonempty",
+            "theorem feasibleStopsAtPrecision_independent",
+            "def feasibleDecisionRulesAtPrecision",
+            "theorem feasibleDecisionRulesAtPrecision_nonempty",
+            "theorem feasibleDecisionRulesAtPrecision_independent",
+            "theorem feasibleDecisionRule_implemented",
+            "blackwellMoreInformative : Experiment -> Experiment -> Prop",
+            "experiment_ordered : forall betaLow betaHigh",
+            "def BlackwellConditionalPremise",
+            "theorem aggregateWelfare_mono_of_blackwell",
+            "theorem bayesianImmunityClaim_from_blackwell"
+          ]
+        },
+        {
+          "id": "bayesian_immunity_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.BayesianImmunity.Blackwell1953FixedFeasiblePremise",
+            "BlackwellDilemma.BayesianImmunity.BayesianImmunityClaim",
+            "BlackwellDilemma.BayesianImmunity.bayesianImmunityClaim_from_blackwell"
+          ]
+        },
+        {
+          "id": "bayesian_immunity_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.BayesianImmunity.BayesianIDPFamily.feasibleStopsAtPrecision_nonempty",
+            "#print axioms BlackwellDilemma.BayesianImmunity.BayesianIDPFamily.feasibleStopsAtPrecision_independent",
+            "#print axioms BlackwellDilemma.BayesianImmunity.BayesianIDPFamily.feasibleDecisionRulesAtPrecision_nonempty",
+            "#print axioms BlackwellDilemma.BayesianImmunity.BayesianIDPFamily.feasibleDecisionRulesAtPrecision_independent",
+            "#print axioms BlackwellDilemma.BayesianImmunity.BayesianIDPFamily.feasibleDecisionRule_implemented",
+            "#print axioms BlackwellDilemma.BayesianImmunity.BayesianIDPFamily.aggregateWelfare_mono_of_blackwell",
+            "#print axioms BlackwellDilemma.BayesianImmunity.bayesianImmunityClaim_from_blackwell"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "bayesian_immunity_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -422,8 +496,8 @@
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=4",
             "claim_lineage_relation_split_core_and_frontier=4",
-            "claim_lineage_relation_strengthened_assumptions=3",
-            "claim_lineage_relation_unchanged=15",
+            "claim_lineage_relation_strengthened_assumptions=4",
+            "claim_lineage_relation_unchanged=14",
             "claim_lineage_manual_status_fields=0"
           ]
         }

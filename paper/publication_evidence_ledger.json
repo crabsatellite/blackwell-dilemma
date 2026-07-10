@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "056c86e30daa3b06d0bdba4700f0a2229ba75067d5fbf73c7ca1ffcb77abd26a",
+  "manuscript_sha256": "6e18b99c2cbe374e327f78b87b9c305de0a08ecec7b77a0a4872b43eeb2ea531",
   "summary": {
     "claims_total": 26,
     "strict_kernel_closed": 7,
-    "publication_evidence_closed": 7,
+    "publication_evidence_closed": 8,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 13,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 75,
-    "obligations_passed": 47,
+    "obligations_passed": 48,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 8,
@@ -37,12 +37,13 @@
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 8,
+      "lean_conditional": 1,
       "lean_exact": 7,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 8,
+      "lean_conditional": 7,
       "lean_exact": 11,
       "unresolved_semantics": 9
     },
@@ -1002,10 +1003,10 @@
     },
     {
       "label": "thm:bayesian-immunity",
-      "statement_sha256": "0c5b0a686f61bee3a1e79f501b498af4464ec25114125fc7bf1447feb72ff116",
-      "lean_state": "unformalized",
+      "statement_sha256": "5de133491320a527765e98d80b342870afd1e1aef72b5785aa0c7a6e1c11c994",
+      "lean_state": "conditional",
       "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "reference_conditional",
       "model_route": "real_strategy_evidence_required",
@@ -1033,8 +1034,8 @@
         {
           "id": "conditional_bayesian_specialization",
           "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+          "passed": true,
+          "detail": "Lean state is conditional; publication closure requires a kernel-checked conditional or exact claim"
         }
       ]
     },

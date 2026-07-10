@@ -321,12 +321,22 @@
       "baseline_kind": "theorem",
       "baseline_title": "Bayesian Immunity",
       "baseline_statement_sha256": "0c5b0a686f61bee3a1e79f501b498af4464ec25114125fc7bf1447feb72ff116",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "thm:bayesian-immunity"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve Bayesian immunity for a finite strategy-aligned IDP benchmark while making topology observation, fixed attainable feasibility, and Blackwell ordering explicit and leaving the cited comparison theorem as a reference premise.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "thm:bayesian-immunity",
+          "id": "conditional_bayesian_specialization"
+        },
+        {
+          "type": "evidence_check",
+          "id": "bayesian_immunity_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "prop:complementarity",
