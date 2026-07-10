@@ -16,6 +16,8 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.Infrastructure.part6AnalyticKernelBundle_proved
 #print axioms BlackwellDilemma.Infrastructure.trapPrevalenceLocalKernelBundle_proved
 #print axioms BlackwellDilemma.Infrastructure.part6LocalPatternKernelBundle_proved
+#print axioms BlackwellDilemma.Infrastructure.separatedBlockPlacementPrinciple_proved
+#print axioms BlackwellDilemma.Infrastructure.part6SeparatedPlacementKernelBundle_proved
 #print axioms BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved
 #print axioms PaperClaim.isClosed_eq_hasFullProof
 #print axioms paperClaims_count

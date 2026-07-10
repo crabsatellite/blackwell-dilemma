@@ -13,6 +13,7 @@
 import BlackwellDilemma.Basic
 import BlackwellDilemma.PhysicalIrreducibility
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
+import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
 import BlackwellDilemma.Infrastructure.VanishingGiantLoss
 
@@ -226,10 +227,10 @@ def claimCognitiveThreshold : PaperClaim :=
     kind := .theorem
     sourceLine := 509
     route := .semanticRepair
-    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 still needs a positive-probability local trap event and independent separated translates on the finite torus."
+    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 now has disjoint block counts and amplification, but still needs the trap-tree support mapped to actual finite-torus edges/rewards and to kappaStar."
     evidence := .partialProof
-      BlackwellDilemma.Infrastructure.Part6LocalPatternKernelBundle
-      BlackwellDilemma.Infrastructure.part6LocalPatternKernelBundle_proved }
+      BlackwellDilemma.Infrastructure.Part6SeparatedPlacementKernelBundle
+      BlackwellDilemma.Infrastructure.part6SeparatedPlacementKernelBundle_proved }
 
 def claimThresholdAlpha : PaperClaim :=
   { label := "prop:threshold-alpha"
