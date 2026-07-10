@@ -123,8 +123,8 @@
             "claim_lineage_baseline_claims=26",
             "claim_lineage_current_claims=26",
             "claim_lineage_preserved_claims=26",
-            "claim_lineage_relation_split_core_and_frontier=1",
-            "claim_lineage_relation_unchanged=25",
+            "claim_lineage_relation_split_core_and_frontier=2",
+            "claim_lineage_relation_unchanged=24",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -216,7 +216,8 @@
             "def globalValue",
             "theorem relaxedOracleValue_le_globalValue",
             "theorem oracleValue_le_relaxedOracleValue",
-            "theorem oracleValue_eq_relaxedOracleValue_of_attainable"
+            "theorem oracleValue_eq_relaxedOracleValue_of_attainable",
+            "theorem oracleValue_eq_relaxedOracleValue_iff_terminalComplete"
           ]
         },
         {
@@ -248,8 +249,10 @@
             "#print axioms BlackwellDilemma.IDPModel.relaxedOracleValue_le_globalValue",
             "#print axioms BlackwellDilemma.IDPModel.oracleValue_le_relaxedOracleValue",
             "#print axioms BlackwellDilemma.IDPModel.oracleValue_eq_relaxedOracleValue_of_attainable",
+            "#print axioms BlackwellDilemma.IDPModel.oracleValue_eq_relaxedOracleValue_iff_terminalComplete",
             "#print axioms BlackwellDilemma.UnifiedWelfareSetup.unifiedDecompositionBundle_proved",
-            "#print axioms decompositionClaim_proved"
+            "#print axioms decompositionClaim_proved",
+            "#print axioms physicalIrreducibilityClaim_proved"
           ]
         }
       ],

@@ -334,6 +334,18 @@ theorem oracleValue_eq_relaxedOracleValue_of_attainable
   rw [← hvalue]
   exact M.stopping_welfare_le_oracle hreach hstop
 
+theorem oracleValue_eq_relaxedOracleValue_iff_terminalComplete
+    (M : IDPModel V) (s : IDPState V) :
+    M.oracleValue s = M.relaxedOracleValue s ↔
+      exists t : IDPState V,
+        M.Reaches s t /\ M.IsStopping t /\
+          M.welfare t.current = M.relaxedOracleValue s := by
+  constructor
+  · intro hEqual
+    rcases M.oracle_value_attainable s with ⟨t, hreach, hstop, hvalue⟩
+    exact ⟨t, hreach, hstop, hvalue.trans hEqual⟩
+  · exact M.oracleValue_eq_relaxedOracleValue_of_attainable s
+
 end IDPModel
 
 end BlackwellDilemma

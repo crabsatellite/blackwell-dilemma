@@ -149,6 +149,14 @@ theorem welfare_le_dynamic_topology_component :
   s.toWelfareSetup.gap_welfare_le_W_topo
     (Filter.Eventually.of_forall s.terminalReward_le_oracleReward)
 
+theorem dynamic_topology_component_le_relaxed_topology_component :
+    s.toWelfareSetup.W_topo <= s.relaxedWelfareSetup.W_topo := by
+  change (∫ omega, s.oracleReward omega ∂s.mu) - s.rStar <=
+    (∫ omega, s.relaxedReward omega ∂s.mu) - s.rStar
+  apply sub_le_sub_right
+  apply integral_mono_ae s.hOracle_integrable s.hRelaxed_integrable
+  exact Filter.Eventually.of_forall s.oracleReward_le_relaxedReward
+
 /-- A feasible stopping state realizes the dynamic-oracle value in every
     random outcome. -/
 theorem oracle_reward_attainable (omega : Omega) :
@@ -172,6 +180,11 @@ theorem oracle_welfare_eq_dynamic_topology_component :
     s.oracleWelfareSetup.welfare = s.oracleWelfareSetup.W_topo := by
   apply s.oracleWelfareSetup.gap_oracle_welfare_eq_W_topo
   exact Filter.Eventually.of_forall fun _ => rfl
+
+theorem oracle_welfare_eq_agent_dynamic_topology_component :
+    s.oracleWelfareSetup.welfare = s.toWelfareSetup.W_topo := by
+  rw [s.oracle_welfare_eq_dynamic_topology_component]
+  rfl
 
 theorem oracle_eq_relaxed_of_terminal_complete (omega : Omega)
     (hterminalComplete : exists t : IDPState V,

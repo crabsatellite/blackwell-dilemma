@@ -9,6 +9,7 @@ open BlackwellDilemma.PaperSemanticGate
 
 #print axioms decompositionIdentityCore_proved
 #print axioms decompositionClaim_proved
+#print axioms physicalIrreducibilityClaim_proved
 #print axioms topologicalLossOrderStatisticsAlgebraCore_proved
 #print axioms topoClusterPartialCore_proved
 #print axioms BlackwellDilemma.Infrastructure.part6LowerBoundTransferPrinciple_proved
@@ -45,6 +46,7 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.IDPModel.relaxedOracleValue_le_globalValue
 #print axioms BlackwellDilemma.IDPModel.oracleValue_le_relaxedOracleValue
 #print axioms BlackwellDilemma.IDPModel.oracleValue_eq_relaxedOracleValue_of_attainable
+#print axioms BlackwellDilemma.IDPModel.oracleValue_eq_relaxedOracleValue_iff_terminalComplete
 #print axioms BlackwellDilemma.UnifiedWelfareSetup.unifiedDecompositionBundle_proved
 
 end BlackwellDilemma.AxiomAudit

@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "56efc8d726c071f358267f03e09f21727d45b410af7146f9bd9ecda529487462",
+  "manuscript_sha256": "b63d2059473682b664a31ebbb40645f72c80ef3553e1ef9df38156c186fc0b41",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 1,
-    "publication_evidence_closed": 1,
+    "strict_kernel_closed": 2,
+    "publication_evidence_closed": 2,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 12,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 75,
-    "obligations_passed": 41,
+    "obligations_passed": 42,
     "obligations_by_type": {
       "external_references": 9,
       "lean_conditional": 9,
@@ -35,13 +35,13 @@
     },
     "passed_by_type": {
       "external_references": 9,
-      "lean_exact": 1,
+      "lean_exact": 2,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 9,
-      "lean_exact": 16,
+      "lean_exact": 15,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
@@ -345,10 +345,10 @@
     },
     {
       "label": "prop:physical",
-      "statement_sha256": "d342c7dfdd67bd0e8890d8aacbfe0e1090cfff71602e2af71fbde718f2bd5512",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "409dd6a194d7a503aca5d9419ec3d8da8c4fa3d8ccbcef9caaddccb99f0bdcad",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
@@ -371,8 +371,8 @@
         {
           "id": "exact_reachability_and_welfare_inequalities",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

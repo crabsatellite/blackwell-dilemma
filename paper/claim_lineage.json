@@ -66,12 +66,23 @@
       "baseline_kind": "proposition",
       "baseline_title": "Physical Irreducibility",
       "baseline_statement_sha256": "d342c7dfdd67bd0e8890d8aacbfe0e1090cfff71602e2af71fbde718f2bd5512",
-      "relation": "unchanged",
+      "relation": "split_core_and_frontier",
       "publication_labels": [
         "prop:physical"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Close the finite-IDP irreducibility and tightness statement against the unified dynamic and relaxed oracles; preserve the lattice Theta(1) target under prop:topo-cluster, which owns the unresolved asymptotic premise.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:physical",
+          "id": "exact_reachability_and_welfare_inequalities"
+        },
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:topo-cluster",
+          "id": "conditional_cluster_to_welfare_derivation"
+        }
+      ]
     },
     {
       "baseline_label": "lem:wrongness",

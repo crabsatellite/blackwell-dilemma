@@ -36,7 +36,7 @@
     },
     {
       "label": "prop:physical",
-      "statement_sha256": "d342c7dfdd67bd0e8890d8aacbfe0e1090cfff71602e2af71fbde718f2bd5512",
+      "statement_sha256": "409dd6a194d7a503aca5d9419ec3d8da8c4fa3d8ccbcef9caaddccb99f0bdcad",
       "obligations": [
         {"id": "irreversibility_model", "type": "model_assumptions", "ids": ["irreversible_no_revisit", "independent_bond_blocking"]},
         {"id": "exact_reachability_and_welfare_inequalities", "type": "lean_exact"}
