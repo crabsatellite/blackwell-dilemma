@@ -33,6 +33,7 @@ import BlackwellDilemma.UnifiedThresholdAlpha
 import BlackwellDilemma.UnifiedSupermodularCognition
 import BlackwellDilemma.UnifiedSentimentalImmunity
 import BlackwellDilemma.UnifiedPrincipalOptimum
+import BlackwellDilemma.UnifiedRandomGraphPhase
 
 namespace BlackwellDilemma.Ledger
 
@@ -448,8 +449,11 @@ def claimErPhase : PaperClaim :=
     kind := .corollary
     sourceLine := 1147
     route := .externalLibrary
-    blocker := "Requires formal random-graph component-size and survival-probability results."
-    evidence := .unformalized }
+    blocker := "Conditional on the registry-gated Erdos-Renyi local-fragmentation and linear-giant profiles, the persistent-singleton constant-order welfare bound, giant-conditional vanishing loss, and blocking-threshold algebra are kernel derived. No synthetic random-graph carrier remains."
+    evidence := .conditionalProof
+      BlackwellDilemma.RandomGraphPhase.ERReferencePremise
+      BlackwellDilemma.RandomGraphPhase.ERPhaseClaim
+      BlackwellDilemma.RandomGraphPhase.erPhaseClaim_from_references }
 
 def claimPowerLaw : PaperClaim :=
   { label := "cor:power-law"
@@ -457,8 +461,11 @@ def claimPowerLaw : PaperClaim :=
     kind := .corollary
     sourceLine := 1161
     route := .externalLibrary
-    blocker := "Requires a formal configuration-model percolation threshold theorem."
-    evidence := .unformalized }
+    blocker := "Conditional on the registry-gated heavy-tail and finite-moment configuration-model giant profiles, the conditional welfare limit, exact finite-moment blocking threshold, and retained-moment criterion are kernel derived. The old criterion-as-definition carrier has been removed."
+    evidence := .conditionalProof
+      BlackwellDilemma.RandomGraphPhase.PowerLawReferencePremise
+      BlackwellDilemma.RandomGraphPhase.PowerLawPhaseClaim
+      BlackwellDilemma.RandomGraphPhase.powerLawPhaseClaim_from_references }
 
 def paperClaims : List PaperClaim :=
   [ claimDecomposition,

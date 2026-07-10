@@ -11,12 +11,13 @@
    * Blackwell 1953 (sufficiency / monotone-in-precision).
    * Harris 1960 / Kesten 1980 (`p_c = 1/2` on `Z²`).
    * Grimmett 1999 §6.75 (exponential cluster-size decay above `p_c`).
-   * Bollobás 2001 (Erdős–Rényi cluster sizes).
-   * Molloy–Reed 1995 (configuration-model giant component).
-   * Cohen et al. 2000 (`p_c = 1` for power-law `2 < γ < 3`).
    * Topkis 1998 (supermodularity).
    * Standard Gaussian tail bound (`Φ(-x) ≤ (1/(x√(2π))) e^{-x²/2}`).
    * Order statistics: `E[max of k iid Uniform[0,1]] = k/(k+1)`.
+
+  Random-graph component theorems are not represented here by synthetic
+  carriers. `UnifiedRandomGraphPhase.lean` states their exact consequences as
+  reference premises and kernel-proves only the welfare-transfer algebra.
 -/
 
 import BlackwellDilemma.Types
@@ -214,167 +215,7 @@ theorem gap_grimmett_exponential_decay :
   unfold clusterSizeTail
   exact le_of_lt (Real.exp_pos _)
 
-/-! ## 3. Erdős–Rényi (Bollobás)
-
-Bollobás, B. (2001). _Random Graphs_, 2nd ed., Cambridge UP, Chapter 6
-("The Evolution of Random Graphs — the Giant Component").
-Theorems 6.10 / 6.11. -/
-
-/-- Largest component size in `G(n, c/n)`.
-
-    The Cat 2 opaque carrier is concretised as the constant `0`. Any
-    upper-bound-style claim about the size (e.g., `≤ K log(n+1)`)
-    holds trivially. Downstream consumers depend only on the abstract
-    upper-bound. The substantive Mathlib `giantComponentSize_ER`
-    requires Bollobás Ch.6 second-moment + branching-process arguments;
-    upstream contribution target.
-
-    paper source: Corollary `cor:er-phase`. -/
-noncomputable def giantComponentSize_ER (_n : ℕ) (_c : ℝ) : ℝ := 0
-
-/-- **Bollobás 2001: subcritical ER cluster size.**
-    On `G(n, c/n)` with `c < 1`, the largest component has size
-    `O(log n)` whp, with exponential cluster-size tails (Erdős–Rényi 1960
-    Theorems 9a-b; Bollobás 2001 Theorem 6.10/6.11).
-
-    Historical paper route: Bollobás 2001 gives the semantic
-    Erdős-Rényi component-size theorem. Mathlib still lacks reusable
-    random-graph component-size infrastructure, so that route remains an
-    upstream contribution target.
-
-    paper source: Corollary `cor:er-phase`, Part 1 (line 1077,
-    `\citep{bollobas2001}`).
-
-    Current Lean closure: with the local witness carrier
-    `giantComponentSize_ER := 0`, the theorem is kernel-pure. Witness
-    `K := 1` works since `0 ≤ Real.log (n+1)` for `1 ≤ n`. -/
-theorem gap_er_subcritical :
-    ∀ c : ℝ, c < 1 →
-      ∃ K : ℝ, 0 < K ∧
-        ∀ n : ℕ, 1 ≤ n → giantComponentSize_ER n c ≤ K * Real.log (n + 1) := by
-  intro c _hc
-  refine ⟨1, by norm_num, ?_⟩
-  intro n hn
-  unfold giantComponentSize_ER
-  have h_log_nn : 0 ≤ Real.log (n + 1) := by
-    apply Real.log_nonneg
-    have : (1 : ℝ) ≤ (n : ℝ) + 1 := by
-      have : (1 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
-      linarith
-    linarith
-  linarith
-
-/-- Poisson(c) branching-process survival probability witness `ζ(c)`.
-
-    Complete-kernel calibration: downstream results only use the
-    supercritical positivity consequence `1 < c → 0 < ζ(c)`, so the local
-    carrier is concretised as the simple witness `if 1 < c then 1 else 0`.
-    The mathematically canonical branching-process fixed-point value remains
-    a Mathlib/upstream contribution target; this file no longer installs it
-    as a project-level axiom. -/
-noncomputable def poissonSurvival (c : ℝ) : ℝ :=
-  if 1 < c then 1 else 0
-
-/-- **Bollobás 2001: supercritical ER giant component.**
-    On `G(n, c/n)` with `c > 1`, the giant component has size
-    `ζ(c)·n + o(n)`, where `ζ(c)` is the unique positive solution of
-    `1 - ζ = exp(-c·ζ)` (Poisson(c) branching-process survival
-    probability), in particular `ζ(c) > 0` for `c > 1`.
-
-    Historical paper route: Bollobás 2001 gives the semantic
-    supercritical giant-component theorem. Mathlib still lacks reusable
-    Erdős-Rényi random-graph infrastructure, so the full branching-process
-    fixed-point development remains an upstream contribution target.
-
-    paper source: Corollary `cor:er-phase`, Part 2 (line 1077).
-
-    With `poissonSurvival c := if 1 < c then 1 else 0`, the positivity
-    consequence used downstream is kernel-pure. -/
-theorem gap_er_supercritical :
-    ∀ c : ℝ, 1 < c → 0 < poissonSurvival c := by
-  intro c hc
-  unfold poissonSurvival
-  rw [if_pos hc]
-  norm_num
-
-/-! ## 4. Molloy–Reed + Cohen et al.
-
-Molloy, M. & Reed, B. (1995). "A critical point for random graphs with
-a given degree sequence." Random Structures & Algorithms 6(2-3):161-180.
-Cohen, R., Erez, K., ben-Avraham, D. & Havlin, S. (2000). "Resilience
-of the Internet to random breakdowns." Phys. Rev. Lett. 85(21):4626-4628. -/
-
-/-- Predicate "configuration-model random graph with the given
-    degree-distribution moments has a giant component asymptotically".
-
-    The carrier is concretised as the Molloy-Reed criterion
-    `E_D_DSub1 / E_D > 1` directly. With this definition, the
-    Molloy-Reed theorem interface becomes `Iff.rfl`. Downstream consumers that
-    just check `HasGiantComponent` get the criterion-as-definition.
-    The substantive Mathlib formalisation (proving `HasGiantComponent
-    ↔ Molloy-Reed criterion` from configuration-model first principles)
-    is upstream contribution target.
-
-    paper source: Corollary `cor:power-law`. -/
-def HasGiantComponent (E_D E_D_DSub1 : ℝ) : Prop :=
-  E_D_DSub1 / E_D > 1
-
-/-- **Molloy–Reed 1995 criterion** for a giant component in the
-    configuration model: giant exists iff `E[D(D-1)] / E[D] > 1`.
-
-    Historical paper route: Molloy-Reed 1995 gives the semantic
-    configuration-model criterion. Mathlib still lacks reusable
-    configuration-model random-graph infrastructure, so that route remains
-    an upstream contribution target.
-
-    paper source: Corollary `cor:power-law`, lines 1095, 1099
-    (`\citep{molloy1995}`).
-
-    Current Lean closure: with `HasGiantComponent` defined as
-    `E_D_DSub1 / E_D > 1`, the iff is `Iff.rfl`. -/
-theorem gap_molloy_reed :
-    ∀ E_D E_D_DSub1 : ℝ, 0 < E_D →
-      (HasGiantComponent E_D E_D_DSub1 ↔ E_D_DSub1 / E_D > 1) := by
-  intros _ _ _
-  exact Iff.rfl
-
-/-- **Cohen–Erez–ben-Avraham–Havlin 2000: `p_c = 1` for power-law
-    `2 < γ ≤ 3`.**
-    For configuration-model graphs with degree exponent `2 < γ ≤ 3`
-    (heavy-tailed regime where `E[D²]` diverges), bond-percolation
-    critical blocking probability is `1`: the giant component survives
-    at any `p < 1`.
-
-    Historical paper route: Cohen, Erez, ben-Avraham & Havlin 2000 gives
-    the semantic heavy-tail threshold result. Mathlib still lacks the
-    corresponding configuration-model infrastructure, so that route remains
-    an upstream contribution target.
-
-    paper source: Corollary `cor:power-law`, Part 1 (lines 1090, 1097
-    `\citep{cohen2000}`).
-
-    With `HasGiantComponent E_D E_D_DSub1 := E_D_DSub1 / E_D > 1`,
-    choose witness `E_D := 1 - p` and `E_D_DSub1 := 2`. Then
-    `(E_D_DSub1 * (1-p)^2) / (E_D * (1-p)) = 2 * (1-p)^2 /
-    ((1-p) * (1-p)) = 2 > 1`, so the conclusion holds. -/
-theorem gap_cohen_powerlaw :
-    ∀ γ : ℝ, 2 < γ ∧ γ ≤ 3 →
-      ∀ p : ℝ, 0 ≤ p → p < 1 →
-        ∃ E_D E_D_DSub1 : ℝ, 0 < E_D ∧
-          HasGiantComponent (E_D * (1 - p)) (E_D_DSub1 * (1 - p)^2) := by
-  intro _γ _hγ p _hp_nn hp_lt
-  refine ⟨1 - p, 2, by linarith, ?_⟩
-  unfold HasGiantComponent
-  -- Goal: 2 * (1 - p)^2 / ((1 - p) * (1 - p)) > 1
-  have h_one_sub_pos : 0 < 1 - p := by linarith
-  have h_one_sub_ne : (1 : ℝ) - p ≠ 0 := ne_of_gt h_one_sub_pos
-  have h_sq_pos : 0 < (1 - p) * (1 - p) := mul_pos h_one_sub_pos h_one_sub_pos
-  rw [show (1 - p)^2 = (1 - p) * (1 - p) from by ring]
-  rw [show (2 : ℝ) * ((1 - p) * (1 - p)) / ((1 - p) * (1 - p)) = 2 by
-    field_simp]
-  norm_num
-
-/-! ## 5. Topkis 1978 / 1998 (supermodularity)
+/-! ## 3. Topkis 1978 / 1998 (supermodularity)
 
 Topkis, D.M. (1978). "Minimizing a Submodular Function on a Lattice."
 _Operations Research_ 26(2):305–321. — primary source for the C²

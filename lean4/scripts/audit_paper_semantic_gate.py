@@ -50,6 +50,13 @@ REMOVED_FALSE_CLOSURES = (
     "gap_conditional_reduction_part_i_from_blackwell",
     "gap_conditional_reduction_part_i",
     "gap_conditional_reduction_part_ii",
+    "giantComponentSize_ER",
+    "gap_er_subcritical",
+    "poissonSurvival",
+    "gap_er_supercritical",
+    "HasGiantComponent",
+    "gap_molloy_reed",
+    "gap_cohen_powerlaw",
 )
 
 
@@ -106,6 +113,9 @@ retired_bridge_source = "\n".join(
         (LEAN_ROOT / "BlackwellDilemma" / "Bayesian.lean").read_text(
             encoding="utf-8"
         ),
+        (LEAN_ROOT / "BlackwellDilemma" / "ClassicalResults.lean").read_text(
+            encoding="utf-8"
+        ),
     ]
 )
 for token in REMOVED_FALSE_CLOSURES:
@@ -137,6 +147,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedSupermodularCognition",
     "BlackwellDilemma.UnifiedSentimentalImmunity",
     "BlackwellDilemma.UnifiedPrincipalOptimum",
+    "BlackwellDilemma.UnifiedRandomGraphPhase",
 }
 model_only_imports = [
     module for module in ledger_imports if module not in allowed_ledger_imports

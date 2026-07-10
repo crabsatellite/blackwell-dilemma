@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "6eecf1a9639c05ef4302bef9ebf69ffaa8baeab34f856f36982315ab216ca6f0",
+  "manuscript_sha256": "863d018e61a50aad5597efffd4fb9bcca0802b6beb9ad61af887bcf3684bda19",
   "summary": {
     "claims_total": 26,
     "strict_kernel_closed": 21,
-    "publication_evidence_closed": 24,
+    "publication_evidence_closed": 26,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
     "model_assumptions_total": 22,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 69,
-    "obligations_passed": 67,
+    "obligations_passed": 69,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
@@ -36,14 +36,12 @@
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
-      "lean_conditional": 4,
+      "lean_conditional": 6,
       "lean_exact": 20,
       "model_assumptions": 25,
       "statement_hash": 6
     },
-    "gaps_by_type": {
-      "lean_conditional": 2
-    },
+    "gaps_by_type": {},
     "mathematical_routes": {
       "model_internal_exact": 20,
       "reference_conditional": 6
@@ -1251,9 +1249,9 @@
     {
       "label": "cor:er-phase",
       "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b",
-      "lean_state": "unformalized",
+      "lean_state": "conditional",
       "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "reference_conditional",
       "model_route": "real_strategy_evidence_required",
@@ -1281,17 +1279,17 @@
         {
           "id": "conditional_er_to_welfare_derivation",
           "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+          "passed": true,
+          "detail": "Lean state is conditional; publication closure requires a kernel-checked conditional or exact claim"
         }
       ]
     },
     {
       "label": "cor:power-law",
       "statement_sha256": "ab64a3a373ae8f530b0b3882152d15456af51e89a37ceda971f812d1caff1793",
-      "lean_state": "unformalized",
+      "lean_state": "conditional",
       "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "reference_conditional",
       "model_route": "real_strategy_evidence_required",
@@ -1327,8 +1325,8 @@
         {
           "id": "conditional_configuration_to_welfare_derivation",
           "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+          "passed": true,
+          "detail": "Lean state is conditional; publication closure requires a kernel-checked conditional or exact claim"
         }
       ]
     }

@@ -515,12 +515,18 @@
       "baseline_kind": "corollary",
       "baseline_title": "Phase Transition on Erdos--Renyi Graphs",
       "baseline_statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "cor:er-phase"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the Erdos--Renyi phase application with component profiles supplied by the cited random-graph theorems and machine-derive the persistent-fragmentation, giant-conditional welfare, and blocking-threshold consequences.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "cor:er-phase",
+          "id": "conditional_er_to_welfare_derivation"
+        }
+      ]
     },
     {
       "baseline_label": "cor:power-law",

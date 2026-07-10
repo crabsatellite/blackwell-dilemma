@@ -11,16 +11,16 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 paper_claims_total=26
 paper_claims_closed=21
 paper_claims_partial=0
-paper_claims_conditional=3
+paper_claims_conditional=5
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=2
+paper_claims_unformalized=0
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=24
-publication_obligations_passed=67/69
+publication_evidence_closed=26
+publication_obligations_passed=69/69
 model_assumptions_admissible=22/22
 research_claims_preserved=26/26
-claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:6,strengthened_assumptions:13,unchanged:2
+claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:6,strengthened_assumptions:14,unchanged:1
 model_assumptions_theory_referenced=10/22
 model_assumption_provenance=benchmark_definition:3,paper_definition:8,paper_reduced_form:6,published_model_adaptation:1,standard_theory:3,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
@@ -55,8 +55,8 @@ semantic_gap_routes=
 | `prop:bayesian-naive-five-state` | proposition | closed | semantic-repair | Bayesian-Naive Threshold on the 5-State Instance |
 | `thm:general-tree` | theorem | closed | semantic-repair | Non-Monotonicity on General Graphs |
 | `prop:error-compounding` | proposition | closed | local | Error Compounding |
-| `cor:er-phase` | corollary | unformalized | external-library | Phase Transition on Erdos--Renyi Graphs |
-| `cor:power-law` | corollary | unformalized | external-library | Application: Power-Law Networks |
+| `cor:er-phase` | corollary | conditional | external-library | Phase Transition on Erdos--Renyi Graphs |
+| `cor:power-law` | corollary | conditional | external-library | Application: Power-Law Networks |
 
 ## Verification
 
