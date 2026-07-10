@@ -107,10 +107,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedTopoCluster",
     "BlackwellDilemma.UnifiedPhase",
     "BlackwellDilemma.UnifiedTrapPrevalence",
-    "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
-    "BlackwellDilemma.Infrastructure.KappaStarClosedForm",
-    "BlackwellDilemma.Infrastructure.SeparatedBlockPlacements",
-    "BlackwellDilemma.Infrastructure.UnboundedInProbability",
+    "BlackwellDilemma.UnifiedCognitiveThreshold",
 }
 model_only_imports = [
     module for module in ledger_imports if module not in allowed_ledger_imports

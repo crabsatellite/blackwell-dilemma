@@ -9,24 +9,24 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=16
-paper_claims_partial=1
+paper_claims_closed=17
+paper_claims_partial=0
 paper_claims_conditional=3
 paper_claims_refuted_encoding=0
 paper_claims_unformalized=6
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=19
-publication_obligations_passed=62/73
+publication_evidence_closed=20
+publication_obligations_passed=63/72
 model_assumptions_admissible=19/19
 research_claims_preserved=26/26
-claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:5,strengthened_assumptions:9,unchanged:7
+claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:6,strengthened_assumptions:9,unchanged:6
 model_assumptions_theory_referenced=9/19
 model_assumption_provenance=benchmark_definition:2,paper_definition:6,paper_reduced_form:6,published_model_adaptation:1,standard_theory:3,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=3/26
 mathematical_routes=model_internal_exact:19,reference_conditional:7
-semantic_gap_routes=hybrid_model_and_strategy_evidence:3,paper_model_encoding:1
+semantic_gap_routes=hybrid_model_and_strategy_evidence:2,paper_model_encoding:1
 ```
 
 | Label | Kind | State | Route | Title |
@@ -40,7 +40,7 @@ semantic_gap_routes=hybrid_model_and_strategy_evidence:3,paper_model_encoding:1
 | `thm:dilemma` | theorem | closed | semantic-repair | Welfare Non-Monotonicity Under Endogenous Feasibility |
 | `thm:phase` | theorem | conditional | mixed | Connectivity Phase and Conditional Welfare Regimes at $p_c$ |
 | `prop:trap-prevalence` | proposition | closed | local | Generic Trap Prevalence |
-| `thm:cognitive-threshold` | theorem | partial | semantic-repair | Characterization of the Blackwell Regime |
+| `thm:cognitive-threshold` | theorem | closed | semantic-repair | Cognitive Crossing and Conditional Lattice Amplification |
 | `prop:threshold-alpha` | proposition | unformalized | local | Cognitive Threshold Increases with Instrumental Rationality |
 | `prop:supermodular` | proposition | unformalized | mixed | Supermodular Complementarity |
 | `prop:sentimental` | proposition | unformalized | semantic-repair | Sentimental Immunity |

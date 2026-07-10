@@ -28,10 +28,7 @@ import BlackwellDilemma.UnifiedInformationDecay
 import BlackwellDilemma.UnifiedTopoCluster
 import BlackwellDilemma.UnifiedPhase
 import BlackwellDilemma.UnifiedTrapPrevalence
-import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
-import BlackwellDilemma.Infrastructure.KappaStarClosedForm
-import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
-import BlackwellDilemma.Infrastructure.UnboundedInProbability
+import BlackwellDilemma.UnifiedCognitiveThreshold
 
 namespace BlackwellDilemma.Ledger
 
@@ -276,14 +273,14 @@ def claimTrapPrevalence : PaperClaim :=
 
 def claimCognitiveThreshold : PaperClaim :=
   { label := "thm:cognitive-threshold"
-    title := "Characterization of the Blackwell Regime"
+    title := "Cognitive Crossing and Conditional Lattice Amplification"
     kind := .theorem
     sourceLine := 523
     route := .semanticRepair
-    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 has finite-torus supports and a cofinal closed-form depth expression, but still needs a concrete trap-tree embedding and proof that the actual posterior threshold equals or dominates that expression."
-    evidence := .partialProof
-      BlackwellDilemma.Infrastructure.Part6DepthGrowthKernelBundle
-      BlackwellDilemma.Infrastructure.part6DepthGrowthKernelBundle_proved }
+    blocker := "Closed for the explicit reveal-or-erasure cognition experiment and Gaussian two-route welfare. The lattice conclusion is an exact conditional depth-witness transfer to unboundedness in probability; posterior-to-cutoff and cylinder-to-threshold identification remain stated model premises rather than hidden proof steps."
+    evidence := .proved
+      BlackwellDilemma.CognitiveThreshold.CognitiveThresholdClaim
+      BlackwellDilemma.CognitiveThreshold.cognitiveThresholdClaim_proved }
 
 def claimThresholdAlpha : PaperClaim :=
   { label := "prop:threshold-alpha"

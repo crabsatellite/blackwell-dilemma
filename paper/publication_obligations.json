@@ -89,11 +89,10 @@
     },
     {
       "label": "thm:cognitive-threshold",
-      "statement_sha256": "dc66fba0ee2c87a333af19497ff4ecb94ac9568d6ada42899cdd89d4e8d72411",
+      "statement_sha256": "6785e0ba85d275a21709d719b91c55579ecdb3618f5a33eac264eea3c232af5b",
       "obligations": [
-        {"id": "cognitive_model", "type": "model_assumptions", "ids": ["cognitive_interpolation_kappa", "topology_blind_gaussian_signals", "irreversible_no_revisit"]},
-        {"id": "posterior_threshold_semantics", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "Finite supports and a depth expression exist, but the actual posterior threshold has not been derived from the stated policy model."},
-        {"id": "exact_threshold_bundle", "type": "lean_exact"}
+        {"id": "cognitive_model", "type": "model_assumptions", "ids": ["cognitive_interpolation_kappa", "five_state_reveal_erasure_experiment", "topology_blind_gaussian_signals", "posterior_estimator_threshold_band"]},
+        {"id": "exact_cognitive_crossing_and_lattice_transfer", "type": "lean_exact"}
       ]
     },
     {

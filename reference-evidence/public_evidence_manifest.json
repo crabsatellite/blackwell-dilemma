@@ -239,6 +239,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedTrapPrevalence.lean"
     },
     {
+      "id": "unified_cognitive_threshold_kernel",
+      "kind": "machine_gate",
+      "role": "Explicit Blackwell-ordered reveal-or-erasure cognition experiment with a unique positive score crossing, Gaussian two-route welfare regimes, cofinal depth cutoff, separated finite-torus supports, and the correct unbounded-in-probability lattice transfer.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedCognitiveThreshold.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -1208,6 +1215,72 @@
       ]
     },
     {
+      "id": "cognitive_threshold_semantic_repair_gate",
+      "category": "kernel_checked_cognitive_crossing_and_conditional_lattice_amplification",
+      "source_cards": [
+        "unified_cognitive_threshold_kernel",
+        "unified_error_compounding_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "cognitive_threshold_module",
+          "path": "lean4/BlackwellDilemma/UnifiedCognitiveThreshold.lean",
+          "contains": [
+            "theorem revealProbability_strictMono",
+            "def interpolatedScore",
+            "theorem exists_unique_threshold",
+            "def correctRouteProbability",
+            "theorem threshold_welfare_regimes",
+            "theorem topologyNoiseAtDepth_kappaStarClosedForm",
+            "theorem latticeThreshold_unboundedInProbability_of_closedForm_witness",
+            "theorem cognitiveThresholdClaim_proved"
+          ]
+        },
+        {
+          "id": "cognitive_threshold_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.CognitiveThreshold.CognitiveThresholdClaim",
+            "BlackwellDilemma.CognitiveThreshold.cognitiveThresholdClaim_proved"
+          ]
+        },
+        {
+          "id": "cognitive_threshold_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.CognitiveThreshold.exists_unique_threshold",
+            "#print axioms BlackwellDilemma.CognitiveThreshold.threshold_welfare_regimes",
+            "#print axioms BlackwellDilemma.CognitiveThreshold.topologyNoiseAtDepth_kappaStarClosedForm",
+            "#print axioms BlackwellDilemma.CognitiveThreshold.latticeThreshold_unboundedInProbability_of_closedForm_witness",
+            "#print axioms BlackwellDilemma.CognitiveThreshold.cognitiveThresholdClaim_proved"
+          ]
+        },
+        {
+          "id": "cognitive_threshold_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"label\": \"thm:cognitive-threshold\"",
+            "\"id\": \"exact_cognitive_crossing_and_lattice_transfer\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "cognitive_threshold_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1286,9 +1359,9 @@
             "claim_lineage_current_claims=26",
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=5",
-            "claim_lineage_relation_split_core_and_frontier=5",
+            "claim_lineage_relation_split_core_and_frontier=6",
             "claim_lineage_relation_strengthened_assumptions=9",
-            "claim_lineage_relation_unchanged=7",
+            "claim_lineage_relation_unchanged=6",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -1337,8 +1410,8 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=16",
-            "publication_publication_evidence_closed=19",
+            "publication_strict_kernel_closed=17",
+            "publication_publication_evidence_closed=20",
             "publication_model_assumptions_total=19",
             "publication_model_assumptions_admissible=19",
             "publication_model_assumptions_theory_admissible=19",
@@ -1353,14 +1426,14 @@
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
-            "publication_obligations_total=73",
-            "publication_obligations_passed=62",
+            "publication_obligations_total=72",
+            "publication_obligations_passed=63",
             "publication_gap_lean_conditional=3",
-            "publication_gap_lean_exact=4",
-            "publication_gap_unresolved_semantics=4",
+            "publication_gap_lean_exact=3",
+            "publication_gap_unresolved_semantics=3",
             "publication_mathematical_route_model_internal_exact=19",
             "publication_mathematical_route_reference_conditional=7",
-            "publication_semantic_resolution_hybrid_model_and_strategy_evidence=3",
+            "publication_semantic_resolution_hybrid_model_and_strategy_evidence=2",
             "publication_semantic_resolution_paper_model_encoding=1"
           ]
         }
@@ -1891,8 +1964,8 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=16",
-            "paper_claims_partial=1",
+            "paper_claims_closed=17",
+            "paper_claims_partial=0",
             "paper_claims_conditional=3",
             "paper_claims_refuted_encoding=0",
             "paper_claims_unformalized=6",

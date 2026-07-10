@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "6a1a11b28ae29d5f40bc6df859f22a5a269191a737f66d7b00140e7de7073694",
+  "manuscript_sha256": "44fb1c16c8e17fd5504f2ea39f0bac186748ef5fb7d00a0575a65690218fde0d",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 16,
-    "publication_evidence_closed": 19,
+    "strict_kernel_closed": 17,
+    "publication_evidence_closed": 20,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
     "model_assumptions_total": 19,
@@ -23,8 +23,8 @@
       "standard_theory": 3,
       "tractability_normalization": 1
     },
-    "obligations_total": 73,
-    "obligations_passed": 62,
+    "obligations_total": 72,
+    "obligations_passed": 63,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
@@ -32,20 +32,20 @@
       "lean_exact": 19,
       "model_assumptions": 25,
       "statement_hash": 6,
-      "unresolved_semantics": 4
+      "unresolved_semantics": 3
     },
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
       "lean_conditional": 4,
-      "lean_exact": 15,
+      "lean_exact": 16,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 3,
-      "lean_exact": 4,
-      "unresolved_semantics": 4
+      "lean_exact": 3,
+      "unresolved_semantics": 3
     },
     "mathematical_routes": {
       "model_internal_exact": 19,
@@ -57,7 +57,7 @@
       "real_strategy_evidence_required": 23
     },
     "semantic_gaps_by_resolution_class": {
-      "hybrid_model_and_strategy_evidence": 3,
+      "hybrid_model_and_strategy_evidence": 2,
       "paper_model_encoding": 1
     }
   },
@@ -667,44 +667,36 @@
     },
     {
       "label": "thm:cognitive-threshold",
-      "statement_sha256": "dc66fba0ee2c87a333af19497ff4ecb94ac9568d6ada42899cdd89d4e8d72411",
-      "lean_state": "partial",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "6785e0ba85d275a21709d719b91c55579ecdb3618f5a33eac264eea3c232af5b",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "cognitive_interpolation_kappa",
-        "irreversible_no_revisit",
+        "five_state_reveal_erasure_experiment",
+        "posterior_estimator_threshold_band",
         "topology_blind_gaussian_signals"
       ],
       "empirical_model_gaps": [
         "cognitive_interpolation_kappa",
-        "irreversible_no_revisit",
         "topology_blind_gaussian_signals"
       ],
-      "semantic_resolution_classes": [
-        "hybrid_model_and_strategy_evidence"
-      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "cognitive_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,topology_blind_gaussian_signals,irreversible_no_revisit"
+          "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,five_state_reveal_erasure_experiment,topology_blind_gaussian_signals,posterior_estimator_threshold_band"
         },
         {
-          "id": "posterior_threshold_semantics",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "Finite supports and a depth expression exist, but the actual posterior threshold has not been derived from the stated policy model."
-        },
-        {
-          "id": "exact_threshold_bundle",
+          "id": "exact_cognitive_crossing_and_lattice_transfer",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is partial; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

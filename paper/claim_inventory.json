@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "6a1a11b28ae29d5f40bc6df859f22a5a269191a737f66d7b00140e7de7073694",
+  "manuscript_sha256": "44fb1c16c8e17fd5504f2ea39f0bac186748ef5fb7d00a0575a65690218fde0d",
   "claims": [
     {
       "line": 262,
@@ -70,8 +70,8 @@
       "line": 523,
       "kind": "theorem",
       "label": "thm:cognitive-threshold",
-      "title": "Characterization of the Blackwell Regime",
-      "statement_sha256": "dc66fba0ee2c87a333af19497ff4ecb94ac9568d6ada42899cdd89d4e8d72411"
+      "title": "Cognitive Crossing and Conditional Lattice Amplification",
+      "statement_sha256": "6785e0ba85d275a21709d719b91c55579ecdb3618f5a33eac264eea3c232af5b"
     },
     {
       "line": 570,

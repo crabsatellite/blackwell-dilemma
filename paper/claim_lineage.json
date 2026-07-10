@@ -215,12 +215,18 @@
       "baseline_kind": "theorem",
       "baseline_title": "Characterization of the Blackwell Regime",
       "baseline_statement_sha256": "dc66fba0ee2c87a333af19497ff4ecb94ac9568d6ada42899cdd89d4e8d72411",
-      "relation": "unchanged",
+      "relation": "split_core_and_frontier",
       "publication_labels": [
         "thm:cognitive-threshold"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the cognitive-crossing result in a fully specified Blackwell-ordered experiment, replace the impossible finite-torus infinity event by unboundedness in probability, and expose posterior-cutoff and local-cylinder identification as model premises.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "thm:cognitive-threshold",
+          "id": "exact_cognitive_crossing_and_lattice_transfer"
+        }
+      ]
     },
     {
       "baseline_label": "prop:threshold-alpha",
