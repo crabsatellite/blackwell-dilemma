@@ -8,6 +8,7 @@ import json
 import re
 import subprocess
 import sys
+import time
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -45,6 +46,30 @@ class AuditError(RuntimeError):
     pass
 
 
+def run_lean_command(command: list[str]) -> subprocess.CompletedProcess[str]:
+    """Retry only the Windows empty-output 0xFFFFFFFF process failure."""
+    for attempt in range(3):
+        result = subprocess.run(
+            command,
+            cwd=LEAN_ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+        transient = (
+            sys.platform == "win32"
+            and result.returncode in {-1, 0xFFFFFFFF}
+            and not result.stdout.strip()
+        )
+        if not transient or attempt == 2:
+            return result
+        time.sleep(0.5 * (attempt + 1))
+    raise AssertionError("unreachable")
+
+
 def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -62,27 +87,13 @@ def reject_manual_keys(value: Any, location: str) -> None:
 
 
 def run_lean_states() -> dict[str, str]:
-    build = subprocess.run(
-        ["lake", "build", "BlackwellDilemma.PaperSemanticGate"],
-        cwd=LEAN_ROOT,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
+    build = run_lean_command(
+        ["lake", "build", "BlackwellDilemma.PaperSemanticGate"]
     )
     if build.returncode != 0:
         raise AuditError(f"Lean semantic gate build exited {build.returncode}:\n{build.stdout}")
-    result = subprocess.run(
-        ["lake", "env", "lean", "BlackwellDilemma/PaperSemanticGate.lean"],
-        cwd=LEAN_ROOT,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
+    result = run_lean_command(
+        ["lake", "env", "lean", "BlackwellDilemma/PaperSemanticGate.lean"]
     )
     if result.returncode != 0:
         raise AuditError(f"Lean semantic gate exited {result.returncode}:\n{result.stdout}")

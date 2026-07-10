@@ -8,6 +8,7 @@ import json
 import re
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -16,6 +17,31 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 PUBLIC_EVIDENCE_MANIFEST = REPO_ROOT / "reference-evidence" / "public_evidence_manifest.json"
 PUBLIC_EVIDENCE_CHECK_ID = "axiom_output_allowed_audit"
 ALLOWED_AXIOMS = frozenset({"propext", "Classical.choice", "Quot.sound"})
+
+
+def run_lean_command(
+    command: list[str], timeout: int
+) -> subprocess.CompletedProcess[str]:
+    """Retry only the Windows empty-output 0xFFFFFFFF process failure."""
+    for attempt in range(3):
+        result = subprocess.run(
+            command,
+            cwd=LEAN_ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            timeout=timeout,
+        )
+        transient = (
+            sys.platform == "win32"
+            and result.returncode in {-1, 0xFFFFFFFF}
+            and not (result.stdout + result.stderr).strip()
+        )
+        if not transient or attempt == 2:
+            return result
+        time.sleep(0.5 * (attempt + 1))
+    raise AssertionError("unreachable")
 
 
 def public_manifest_stdout_contains(check_id: str) -> set[str]:
@@ -38,15 +64,7 @@ def main() -> int:
     args = parser.parse_args()
 
     command = ["lake", "env", "lean", "BlackwellDilemma/AxiomAudit.lean"]
-    result = subprocess.run(
-        command,
-        cwd=LEAN_ROOT,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        capture_output=True,
-        timeout=args.timeout,
-    )
+    result = run_lean_command(command, args.timeout)
     output = result.stdout + result.stderr
     dependency_lines = re.findall(r"depends on axioms:\s*\[([^\]]*)\]", output)
     no_axiom_lines = re.findall(r"does not depend on any axioms", output)

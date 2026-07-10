@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "a4a5d7f089d0456f4347b7c7b9cdfd44c3d4de5adf02ed657534767127eebba2",
+  "manuscript_sha256": "7484079d540066676a0508618b8f1c70c9a4a12763fd24be7f1258bd46e0f0a7",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 18,
-    "publication_evidence_closed": 21,
+    "strict_kernel_closed": 19,
+    "publication_evidence_closed": 22,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
     "model_assumptions_total": 19,
@@ -23,33 +23,33 @@
       "standard_theory": 3,
       "tractability_normalization": 1
     },
-    "obligations_total": 72,
-    "obligations_passed": 64,
+    "obligations_total": 71,
+    "obligations_passed": 65,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
-      "lean_conditional": 7,
-      "lean_exact": 19,
+      "lean_conditional": 6,
+      "lean_exact": 20,
       "model_assumptions": 25,
       "statement_hash": 6,
-      "unresolved_semantics": 3
+      "unresolved_semantics": 2
     },
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
       "lean_conditional": 4,
-      "lean_exact": 17,
+      "lean_exact": 18,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 3,
+      "lean_conditional": 2,
       "lean_exact": 2,
-      "unresolved_semantics": 3
+      "unresolved_semantics": 2
     },
     "mathematical_routes": {
-      "model_internal_exact": 19,
-      "reference_conditional": 7
+      "model_internal_exact": 20,
+      "reference_conditional": 6
     },
     "model_routes": {
       "conditional_model_only": 2,
@@ -57,8 +57,7 @@
       "real_strategy_evidence_required": 23
     },
     "semantic_gaps_by_resolution_class": {
-      "hybrid_model_and_strategy_evidence": 2,
-      "paper_model_encoding": 1
+      "hybrid_model_and_strategy_evidence": 2
     }
   },
   "model_assumptions": [
@@ -735,24 +734,22 @@
     },
     {
       "label": "prop:supermodular",
-      "statement_sha256": "1553ffd28737ac35718b9587d569e44d483c75599ef9a8f512f90166a1becf11",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "3ce88e2261a90fbfa27376df51d6925f4b79dc893c440bd6da36475beaf8ab33",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
-      "mathematical_route": "reference_conditional",
+      "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "cognitive_interpolation_kappa",
-        "sentimental_weight_alpha"
+        "topology_blind_gaussian_signals"
       ],
       "empirical_model_gaps": [
         "cognitive_interpolation_kappa",
-        "sentimental_weight_alpha"
+        "topology_blind_gaussian_signals"
       ],
-      "semantic_resolution_classes": [
-        "paper_model_encoding"
-      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "topkis_premise",
@@ -761,22 +758,16 @@
           "detail": "pinned reference ids=topkis1978"
         },
         {
-          "id": "alpha_kappa_model",
+          "id": "supermodular_two_route_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,sentimental_weight_alpha"
+          "detail": "theory-admissible assumption ids=cognitive_interpolation_kappa,topology_blind_gaussian_signals"
         },
         {
-          "id": "actual_welfare_increasing_differences",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "Topkis applies only after increasing differences are proved for the paper's posterior welfare function."
-        },
-        {
-          "id": "conditional_topkis_specialization",
-          "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+          "id": "exact_state_conditioned_gaussian_mixed_partial",
+          "type": "lean_exact",
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

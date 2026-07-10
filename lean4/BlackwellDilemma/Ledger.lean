@@ -30,6 +30,7 @@ import BlackwellDilemma.UnifiedPhase
 import BlackwellDilemma.UnifiedTrapPrevalence
 import BlackwellDilemma.UnifiedCognitiveThreshold
 import BlackwellDilemma.UnifiedThresholdAlpha
+import BlackwellDilemma.UnifiedSupermodularCognition
 
 namespace BlackwellDilemma.Ledger
 
@@ -296,12 +297,14 @@ def claimThresholdAlpha : PaperClaim :=
 
 def claimSupermodular : PaperClaim :=
   { label := "prop:supermodular"
-    title := "Supermodular Complementarity"
+    title := "Local Information--Cognition Complementarity"
     kind := .proposition
     sourceLine := 595
     route := .mixed
-    blocker := "Algebraic Topkis infrastructure exists; the actual posterior welfare cross-partial remains to be derived."
-    evidence := .unformalized }
+    blocker := "Closed for the explicit state-conditioned reveal-or-erasure score and the manuscript's exact Gaussian inverse-noise scale: both derivative identities and strict mixed-partial positivity on the moderate-SNR region are kernel proved; the regional increasing-differences interpretation is pinned to Topkis."
+    evidence := .proved
+      BlackwellDilemma.SupermodularCognition.SupermodularCognitionClaim
+      BlackwellDilemma.SupermodularCognition.supermodularCognitionClaim_proved }
 
 def claimSentimental : PaperClaim :=
   { label := "prop:sentimental"

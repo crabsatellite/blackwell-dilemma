@@ -7,6 +7,7 @@ import json
 import re
 import subprocess
 import sys
+import time
 from collections import Counter
 from pathlib import Path
 
@@ -55,6 +56,30 @@ REMOVED_FALSE_CLOSURES = (
 def fail(message: str) -> None:
     print(f"paper_claim_audit_error={message}")
     raise SystemExit(1)
+
+
+def run_lean_command(command: list[str]) -> subprocess.CompletedProcess[str]:
+    """Retry only the Windows empty-output 0xFFFFFFFF process failure."""
+    for attempt in range(3):
+        result = subprocess.run(
+            command,
+            cwd=LEAN_ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+        transient = (
+            sys.platform == "win32"
+            and result.returncode in {-1, 0xFFFFFFFF}
+            and not result.stdout.strip()
+        )
+        if not transient or attempt == 2:
+            return result
+        time.sleep(0.5 * (attempt + 1))
+    raise AssertionError("unreachable")
 
 
 inventory = json.loads(INVENTORY.read_text(encoding="utf-8"))
@@ -109,6 +134,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedTrapPrevalence",
     "BlackwellDilemma.UnifiedCognitiveThreshold",
     "BlackwellDilemma.UnifiedThresholdAlpha",
+    "BlackwellDilemma.UnifiedSupermodularCognition",
 }
 model_only_imports = [
     module for module in ledger_imports if module not in allowed_ledger_imports
@@ -134,29 +160,13 @@ for path, limit in line_limits.items():
     if count > limit:
         fail(f"line-limit:{path.name}:{count}>{limit}")
 
-build = subprocess.run(
-    ["lake", "build", "BlackwellDilemma.PaperSemanticGate"],
-    cwd=LEAN_ROOT,
-    text=True,
-    encoding="utf-8",
-    errors="replace",
-    stdout=subprocess.PIPE,
-    stderr=subprocess.STDOUT,
-    check=False,
-)
+build = run_lean_command(["lake", "build", "BlackwellDilemma.PaperSemanticGate"])
 if build.returncode != 0:
     print(build.stdout)
     fail(f"lake-build-returncode:{build.returncode}")
 
-run = subprocess.run(
-    ["lake", "env", "lean", "BlackwellDilemma/PaperSemanticGate.lean"],
-    cwd=LEAN_ROOT,
-    text=True,
-    encoding="utf-8",
-    errors="replace",
-    stdout=subprocess.PIPE,
-    stderr=subprocess.STDOUT,
-    check=False,
+run = run_lean_command(
+    ["lake", "env", "lean", "BlackwellDilemma/PaperSemanticGate.lean"]
 )
 if run.returncode != 0:
     print(run.stdout)

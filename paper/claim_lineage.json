@@ -251,12 +251,18 @@
       "baseline_kind": "proposition",
       "baseline_title": "Supermodular Complementarity",
       "baseline_statement_sha256": "1553ffd28737ac35718b9587d569e44d483c75599ef9a8f512f90166a1becf11",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:supermodular"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve local information-cognition complementarity by replacing the iterated-expectations-invariant posterior mean with the explicit state-conditioned cognition score, deriving the exact Gaussian mixed partial, and leaving only the published Topkis interpretation to reference evidence.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:supermodular",
+          "id": "exact_state_conditioned_gaussian_mixed_partial"
+        }
+      ]
     },
     {
       "baseline_label": "prop:sentimental",

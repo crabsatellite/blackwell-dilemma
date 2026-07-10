@@ -7,6 +7,8 @@ import argparse
 import json
 import re
 import subprocess
+import sys
+import time
 from collections import Counter
 from pathlib import Path
 
@@ -21,28 +23,36 @@ LEAN_README = LEAN_ROOT / "README.md"
 ROOT_README = REPO_ROOT / "README.md"
 
 
+def run_lean_command(command: list[str]) -> subprocess.CompletedProcess[str]:
+    """Retry only the Windows empty-output 0xFFFFFFFF process failure."""
+    for attempt in range(3):
+        result = subprocess.run(
+            command,
+            cwd=LEAN_ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+        transient = (
+            sys.platform == "win32"
+            and result.returncode in {-1, 0xFFFFFFFF}
+            and not result.stdout.strip()
+        )
+        if not transient or attempt == 2:
+            return result
+        time.sleep(0.5 * (attempt + 1))
+    raise AssertionError("unreachable")
+
+
 def evaluated_claims() -> list[tuple[str, str, str]]:
-    build = subprocess.run(
-        ["lake", "build", "BlackwellDilemma.PaperSemanticGate"],
-        cwd=LEAN_ROOT,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
-    )
+    build = run_lean_command(["lake", "build", "BlackwellDilemma.PaperSemanticGate"])
     if build.returncode != 0:
         raise RuntimeError(build.stdout)
-    result = subprocess.run(
-        ["lake", "env", "lean", "BlackwellDilemma/PaperSemanticGate.lean"],
-        cwd=LEAN_ROOT,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
+    result = run_lean_command(
+        ["lake", "env", "lean", "BlackwellDilemma/PaperSemanticGate.lean"]
     )
     if result.returncode != 0:
         raise RuntimeError(result.stdout)

@@ -105,12 +105,11 @@
     },
     {
       "label": "prop:supermodular",
-      "statement_sha256": "1553ffd28737ac35718b9587d569e44d483c75599ef9a8f512f90166a1becf11",
+      "statement_sha256": "3ce88e2261a90fbfa27376df51d6925f4b79dc893c440bd6da36475beaf8ab33",
       "obligations": [
         {"id": "topkis_premise", "type": "external_references", "ids": ["topkis1978"]},
-        {"id": "alpha_kappa_model", "type": "model_assumptions", "ids": ["cognitive_interpolation_kappa", "sentimental_weight_alpha"]},
-        {"id": "actual_welfare_increasing_differences", "type": "unresolved_semantics", "resolution_class": "paper_model_encoding", "reason": "Topkis applies only after increasing differences are proved for the paper's posterior welfare function."},
-        {"id": "conditional_topkis_specialization", "type": "lean_conditional"}
+        {"id": "supermodular_two_route_model", "type": "model_assumptions", "ids": ["cognitive_interpolation_kappa", "topology_blind_gaussian_signals"]},
+        {"id": "exact_state_conditioned_gaussian_mixed_partial", "type": "lean_exact"}
       ]
     },
     {

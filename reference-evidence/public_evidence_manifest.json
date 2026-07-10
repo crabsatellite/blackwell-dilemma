@@ -12,6 +12,15 @@
       "bibliographic_note": "David Blackwell, Equivalent Comparisons of Experiments, Annals of Mathematical Statistics 24(2), 1953."
     },
     {
+      "id": "topkis1978",
+      "kind": "external_reference",
+      "role": "Published lattice and increasing-differences criterion used only after the paper-specific welfare mixed partial has been kernel derived.",
+      "status": "source_backed_with_model_specific_premise_kernel_checked",
+      "registry_id": "topkis1978",
+      "source_url": "https://doi.org/10.1287/opre.26.2.305",
+      "bibliographic_note": "Donald M. Topkis, Minimizing a Submodular Function on a Lattice, Operations Research 26(2), 1978."
+    },
+    {
       "id": "aizenman_barsky1987",
       "kind": "external_reference",
       "role": "Sharpness and subcritical exponential-decay source motivating the explicit uniform reachable-set moment condition.",
@@ -251,6 +260,13 @@
       "role": "Explicit positive alpha loading with unique kappa thresholds, strict threshold ordering in alpha, and an exact fixed-kappa alpha crossing certificate.",
       "status": "repo_build_gate",
       "local_file": "lean4/BlackwellDilemma/UnifiedThresholdAlpha.lean"
+    },
+    {
+      "id": "unified_supermodular_cognition_kernel",
+      "kind": "machine_gate",
+      "role": "State-conditioned reveal-or-erasure score, exact inverse Gaussian noise scale, two successive HasDerivAt calculations for actual two-route welfare, and strict mixed-partial positivity in the moderate-SNR region.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedSupermodularCognition.lean"
     },
     {
       "id": "five_state_approximation_audit",
@@ -1352,6 +1368,74 @@
       ]
     },
     {
+      "id": "supermodular_cognition_semantic_repair_gate",
+      "category": "kernel_checked_state_conditioned_gaussian_mixed_partial_with_reference_gated_topkis_interpretation",
+      "source_cards": [
+        "unified_supermodular_cognition_kernel",
+        "unified_cognitive_threshold_kernel",
+        "topkis1978",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "supermodular_cognition_module",
+          "path": "lean4/BlackwellDilemma/UnifiedSupermodularCognition.lean",
+          "contains": [
+            "def signalScale",
+            "theorem signalScale_hasDerivAt",
+            "theorem interpolatedScore_hasDerivAt",
+            "def scaledTwoRouteWelfare",
+            "theorem scaledTwoRouteWelfare_hasDerivAt_kappa",
+            "theorem cognitionMarginal_hasDerivAt_beta",
+            "theorem mixedDerivativeValue_pos",
+            "theorem supermodularCognitionClaim_proved"
+          ]
+        },
+        {
+          "id": "supermodular_cognition_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.SupermodularCognition.SupermodularCognitionClaim",
+            "BlackwellDilemma.SupermodularCognition.supermodularCognitionClaim_proved"
+          ]
+        },
+        {
+          "id": "supermodular_cognition_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.SupermodularCognition.signalScale_hasDerivAt",
+            "#print axioms BlackwellDilemma.SupermodularCognition.scaledTwoRouteWelfare_hasDerivAt_kappa",
+            "#print axioms BlackwellDilemma.SupermodularCognition.cognitionMarginal_hasDerivAt_beta",
+            "#print axioms BlackwellDilemma.SupermodularCognition.mixedDerivativeValue_pos",
+            "#print axioms BlackwellDilemma.SupermodularCognition.supermodularCognitionClaim_proved"
+          ]
+        },
+        {
+          "id": "supermodular_cognition_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"label\": \"prop:supermodular\"",
+            "\"id\": \"topkis_premise\"",
+            "\"id\": \"exact_state_conditioned_gaussian_mixed_partial\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "supermodular_cognition_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1431,8 +1515,8 @@
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=5",
             "claim_lineage_relation_split_core_and_frontier=6",
-            "claim_lineage_relation_strengthened_assumptions=10",
-            "claim_lineage_relation_unchanged=5",
+            "claim_lineage_relation_strengthened_assumptions=11",
+            "claim_lineage_relation_unchanged=4",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -1481,8 +1565,8 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=18",
-            "publication_publication_evidence_closed=21",
+            "publication_strict_kernel_closed=19",
+            "publication_publication_evidence_closed=22",
             "publication_model_assumptions_total=19",
             "publication_model_assumptions_admissible=19",
             "publication_model_assumptions_theory_admissible=19",
@@ -1497,15 +1581,15 @@
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
-            "publication_obligations_total=72",
-            "publication_obligations_passed=64",
-            "publication_gap_lean_conditional=3",
+            "publication_obligations_total=71",
+            "publication_obligations_passed=65",
+            "publication_gap_lean_conditional=2",
             "publication_gap_lean_exact=2",
-            "publication_gap_unresolved_semantics=3",
-            "publication_mathematical_route_model_internal_exact=19",
-            "publication_mathematical_route_reference_conditional=7",
+            "publication_gap_unresolved_semantics=2",
+            "publication_mathematical_route_model_internal_exact=20",
+            "publication_mathematical_route_reference_conditional=6",
             "publication_semantic_resolution_hybrid_model_and_strategy_evidence=2",
-            "publication_semantic_resolution_paper_model_encoding=1"
+            "publication_model_route_real_strategy_evidence_required=23"
           ]
         }
       ]
@@ -2035,11 +2119,11 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=18",
+            "paper_claims_closed=19",
             "paper_claims_partial=0",
             "paper_claims_conditional=3",
             "paper_claims_refuted_encoding=0",
-            "paper_claims_unformalized=5",
+            "paper_claims_unformalized=4",
             "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,prop:sentimental,prop:principal-optimum,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
             "paper_claim_manual_status_assignments=0",
             "paper_claim_legacy_semantic_targets=0",
