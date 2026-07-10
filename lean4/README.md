@@ -10,10 +10,10 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 ```text
 paper_claims_total=29
 paper_claims_closed=0
-paper_claims_partial=4
+paper_claims_partial=5
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=25
+paper_claims_unformalized=24
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 ```
 
@@ -45,7 +45,7 @@ formal_root_imports=BlackwellDilemma.PaperSemanticGate
 | `prop:complementarity` | proposition | unformalized | mixed | Information-Knowledge Complementarity |
 | `prop:bayesian-naive-five-state` | proposition | unformalized | semantic-repair | Bayesian-Naive Threshold on the 5-State Instance |
 | `thm:general-tree` | theorem | unformalized | semantic-repair | Non-Monotonicity on General Graphs |
-| `prop:error-compounding` | proposition | unformalized | local | Error Compounding |
+| `prop:error-compounding` | proposition | partial | local | Error Compounding |
 | `cor:er-phase` | corollary | unformalized | external-library | Phase Transition on Erdos--Renyi Graphs |
 | `cor:power-law` | corollary | unformalized | external-library | Application: Power-Law Networks |
 

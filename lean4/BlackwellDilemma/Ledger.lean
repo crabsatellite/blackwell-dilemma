@@ -14,6 +14,7 @@ import BlackwellDilemma.Basic
 import BlackwellDilemma.PhysicalIrreducibility
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
+import BlackwellDilemma.Infrastructure.KappaStarClosedForm
 import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
 import BlackwellDilemma.Infrastructure.VanishingGiantLoss
@@ -228,10 +229,10 @@ def claimCognitiveThreshold : PaperClaim :=
     kind := .theorem
     sourceLine := 509
     route := .semanticRepair
-    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 now has finite-torus edge/reward support indices, but still needs a concrete trap-tree embedding inside each support and a proof that the embedded IDP threshold grows unboundedly."
+    blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 has finite-torus supports and a cofinal closed-form depth expression, but still needs a concrete trap-tree embedding and proof that the actual posterior threshold equals or dominates that expression."
     evidence := .partialProof
-      BlackwellDilemma.Infrastructure.Part6FiniteTorusSupportKernelBundle
-      BlackwellDilemma.Infrastructure.part6FiniteTorusSupportKernelBundle_proved }
+      BlackwellDilemma.Infrastructure.Part6DepthGrowthKernelBundle
+      BlackwellDilemma.Infrastructure.part6DepthGrowthKernelBundle_proved }
 
 def claimThresholdAlpha : PaperClaim :=
   { label := "prop:threshold-alpha"
@@ -383,8 +384,10 @@ def claimErrorCompounding : PaperClaim :=
     kind := .proposition
     sourceLine := 1050
     route := .local
-    blocker := "Audit all five clauses against the actual trap-tree recursion and asymptotic quantifiers."
-    evidence := .unformalized }
+    blocker := "The displayed depth closed form is proved cofinal for every cStar > 0; still derive the welfare recursion and identify cStar from the actual posterior threshold equation."
+    evidence := .partialProof
+      BlackwellDilemma.Infrastructure.KappaStarClosedFormDivergencePrinciple
+      BlackwellDilemma.Infrastructure.kappaStarClosedFormDivergencePrinciple_proved }
 
 def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"

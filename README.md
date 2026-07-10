@@ -13,7 +13,7 @@ The status below is evaluated from the 29-claim Lean ledger. Only a proof term
 of a claim's complete stored proposition closes that claim.
 
 ```text
-total=29 closed=0 partial=4 conditional=0 refuted-encoding=0 unformalized=25
+total=29 closed=0 partial=5 conditional=0 refuted-encoding=0 unformalized=24
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 ```
 
