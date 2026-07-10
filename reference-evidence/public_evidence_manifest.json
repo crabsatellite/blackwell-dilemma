@@ -108,6 +108,13 @@
       "local_file": "reference-evidence/reference_registry.json"
     },
     {
+      "id": "complete_citation_inventory",
+      "kind": "machine_gate",
+      "role": "Complete manuscript citation-key inventory, committed BibTeX snapshot, per-entry hashes, and critical formula/model reference bindings tied to the manuscript hash.",
+      "status": "repo_build_gate",
+      "local_file": "paper/citation_inventory.json"
+    },
+    {
       "id": "publication_obligation_gate",
       "kind": "machine_gate",
       "role": "Derived two-standard claim ledger over proof, reference, computation, model, semantic, and demotion obligations.",
@@ -1927,6 +1934,7 @@
           "path": "reference-evidence/reference_registry.json",
           "contains": [
             "\"limitations\"",
+            "\"bibtex_key\"",
             "\"blackwell1953\"",
             "\"molloy_reed1995\"",
             "\"tong1990\""
@@ -1942,8 +1950,80 @@
             "reference_records_total=20",
             "reference_evidence_class_empirical_study=0",
             "reference_evidence_class_theorem=12",
+            "reference_bibtex_bindings=18",
+            "reference_public_only_records=2",
             "reference_manual_status_fields=0",
             "reference_metadata_offline_failures=0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complete_citation_inventory_gate",
+      "category": "machine_checked_complete_bibliography_and_critical_reference_binding",
+      "source_cards": [
+        "complete_citation_inventory",
+        "reference_registry"
+      ],
+      "locations": [
+        {
+          "id": "citation_inventory",
+          "path": "paper/citation_inventory.json",
+          "contains": [
+            "\"generated_by\": \"tools/audit_citation_inventory.py\"",
+            "\"citation_keys\": 67",
+            "\"bibliography_entries\": 73",
+            "\"critical_reference_bindings\": 13"
+          ]
+        },
+        {
+          "id": "complete_bibliography_snapshot",
+          "path": "paper/references.bib",
+          "contains": [
+            "@article{blackwell1953",
+            "@article{molloy1995",
+            "@article{newman2001"
+          ]
+        },
+        {
+          "id": "citation_inventory_generator",
+          "path": "tools/audit_citation_inventory.py",
+          "contains": [
+            "def parse_citation_keys",
+            "def parse_bibtex_entries",
+            "def critical_reference_bindings",
+            "def verify_committed_inventory"
+          ]
+        },
+        {
+          "id": "generated_readme_citation_binding",
+          "path": "README.md",
+          "contains": [
+            "manuscript_citation_keys=67",
+            "bibliography_entries=73",
+            "critical_reference_bindings=13",
+            "python tools/audit_citation_inventory.py"
+          ]
+        },
+        {
+          "id": "citation_inventory_ci_binding",
+          "path": ".github/workflows/evidence_ci.yml",
+          "contains": [
+            "python tools/audit_citation_inventory.py"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "complete_citation_inventory_audit",
+          "type": "python_script",
+          "path": "tools/audit_citation_inventory.py",
+          "stdout_contains": [
+            "citation_inventory_stale=0",
+            "citation_citation_keys=67",
+            "citation_bibliography_entries=73",
+            "citation_uncited_bibliography_entries=6",
+            "citation_critical_reference_bindings=13"
           ]
         }
       ]

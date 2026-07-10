@@ -108,6 +108,12 @@ def offline_failures(registry: dict[str, Any]) -> list[str]:
         for field in IDENTITY_FIELDS:
             if field not in record:
                 failures.append(f"{record_id}: missing identity field {field}")
+        if "bibtex_key" not in record:
+            failures.append(f"{record_id}: missing bibtex_key field")
+        elif record["bibtex_key"] is not None and not re.fullmatch(
+            r"[A-Za-z0-9_:.+-]+", str(record["bibtex_key"])
+        ):
+            failures.append(f"{record_id}: invalid bibtex_key {record['bibtex_key']!r}")
         for field in SCOPE_FIELDS:
             if not record.get(field):
                 failures.append(f"{record_id}: empty scope field {field}")
@@ -170,6 +176,8 @@ def main() -> int:
     }
     for evidence_class, count in evidence_counts.items():
         print(f"reference_evidence_class_{evidence_class}={count}")
+    print(f"reference_bibtex_bindings={sum(r.get('bibtex_key') is not None for r in records)}")
+    print(f"reference_public_only_records={sum(r.get('bibtex_key') is None for r in records)}")
     print("reference_manual_status_fields=0" if not any(
         FORBIDDEN_STATUS_KEYS.intersection(record) for record in records
     ) else "reference_manual_status_fields=1")

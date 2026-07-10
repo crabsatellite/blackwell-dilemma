@@ -27,6 +27,9 @@ model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=3/26
 mathematical_routes=model_internal_exact:20,reference_conditional:6
 semantic_gap_routes=
+manuscript_citation_keys=67
+bibliography_entries=73
+critical_reference_bindings=13
 ```
 
 See [`lean4/README.md`](lean4/README.md) for the generated claim roster and
@@ -45,6 +48,7 @@ python scripts/audit_kernel_surface.py
 python scripts/render_paper_claim_readme.py --check
 cd ..
 python tools/verify_reference_registry.py
+python tools/audit_citation_inventory.py
 python tools/audit_publication_obligations.py --check-ledger
 python tools/verify_public_evidence.py
 python tracker.py --check-report
@@ -55,6 +59,8 @@ python verification/render_live_prediction_report.py --check
 
 - [`paper/prediction_note_public.pdf`](paper/prediction_note_public.pdf): public short paper.
 - [`paper/prediction_note.tex`](paper/prediction_note.tex): short-paper source.
+- [`paper/references.bib`](paper/references.bib): complete manuscript bibliography snapshot.
+- [`paper/citation_inventory.json`](paper/citation_inventory.json): generated manuscript, citation-key, BibTeX-entry, and critical-reference binding ledger.
 - [`prediction.md`](prediction.md): pre-registered prediction and falsification rule.
 - [`verification/live_prediction_verification_2026-05-21.json`](verification/live_prediction_verification_2026-05-21.json): machine-readable verification result.
 - [`verification/live_prediction_verification_2026-05-21.md`](verification/live_prediction_verification_2026-05-21.md): generated verification report.

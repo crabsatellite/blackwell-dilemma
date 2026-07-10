@@ -4,6 +4,7 @@
   "records": [
     {
       "id": "blackwell1953",
+      "bibtex_key": "blackwell1953",
       "doi": "10.1214/aoms/1177729032",
       "title": "Equivalent Comparisons of Experiments",
       "authors": ["David Blackwell"],
@@ -23,6 +24,7 @@
     },
     {
       "id": "kesten1980",
+      "bibtex_key": "kesten1980",
       "doi": "10.1007/bf01197577",
       "title": "The critical probability of bond percolation on the square lattice equals 1/2",
       "authors": ["Harry Kesten"],
@@ -42,6 +44,7 @@
     },
     {
       "id": "aizenman_barsky1987",
+      "bibtex_key": "aizenman_barsky1987",
       "doi": "10.1007/bf01212322",
       "title": "Sharpness of the phase transition in percolation models",
       "authors": ["Michael Aizenman", "David J. Barsky"],
@@ -61,6 +64,7 @@
     },
     {
       "id": "grimmett1999",
+      "bibtex_key": "grimmett1999",
       "doi": "10.1007/978-3-662-03981-6",
       "title": "Percolation",
       "authors": ["Geoffrey Grimmett"],
@@ -80,6 +84,7 @@
     },
     {
       "id": "tong1990",
+      "bibtex_key": "tong1990",
       "doi": "10.1007/978-1-4613-9655-0",
       "title": "The Multivariate Normal Distribution",
       "authors": ["Y. L. Tong"],
@@ -99,6 +104,7 @@
     },
     {
       "id": "david_nagaraja2003",
+      "bibtex_key": "david_nagaraja2003",
       "doi": "10.1002/0471722162",
       "title": "Order Statistics",
       "authors": ["H. A. David", "H. N. Nagaraja"],
@@ -118,6 +124,7 @@
     },
     {
       "id": "pisztora1996",
+      "bibtex_key": "pisztora1996",
       "doi": "10.1007/bf01198161",
       "title": "Surface order large deviations for Ising, Potts and percolation models",
       "authors": ["Agoston Pisztora"],
@@ -137,6 +144,7 @@
     },
     {
       "id": "peres_sousi_steif2020",
+      "bibtex_key": "peres_sousi_steif2020",
       "doi": "10.1007/s00440-019-00927-z",
       "title": "Mixing time for random walk on supercritical dynamical percolation",
       "authors": ["Yuval Peres", "Perla Sousi", "Jeffrey E. Steif"],
@@ -156,6 +164,7 @@
     },
     {
       "id": "topkis1978",
+      "bibtex_key": "topkis1978",
       "doi": "10.1287/opre.26.2.305",
       "title": "Minimizing a Submodular Function on a Lattice",
       "authors": ["Donald M. Topkis"],
@@ -175,6 +184,7 @@
     },
     {
       "id": "molloy_reed1995",
+      "bibtex_key": "molloy1995",
       "doi": "10.1002/rsa.3240060204",
       "title": "A critical point for random graphs with a given degree sequence",
       "authors": ["Michael Molloy", "Bruce Reed"],
@@ -194,6 +204,7 @@
     },
     {
       "id": "cohen2000",
+      "bibtex_key": "cohen2000",
       "doi": "10.1103/physrevlett.85.4626",
       "title": "Resilience of the Internet to Random Breakdowns",
       "authors": ["Reuven Cohen", "Keren Erez", "Daniel ben-Avraham", "Shlomo Havlin"],
@@ -213,6 +224,7 @@
     },
     {
       "id": "newman_strogatz_watts2001",
+      "bibtex_key": "newman2001",
       "doi": "10.1103/physreve.64.026118",
       "title": "Random graphs with arbitrary degree distributions and their applications",
       "authors": ["M. E. J. Newman", "S. H. Strogatz", "D. J. Watts"],
@@ -232,6 +244,7 @@
     },
     {
       "id": "bollobas2001",
+      "bibtex_key": "bollobas2001",
       "doi": "10.1017/cbo9780511814068",
       "title": "Random Graphs",
       "authors": ["Bela Bollobas"],
@@ -251,6 +264,7 @@
     },
     {
       "id": "gabaix2014",
+      "bibtex_key": "gabaix2014",
       "doi": "10.1093/qje/qju024",
       "title": "A Sparsity-Based Model of Bounded Rationality *",
       "authors": ["Xavier Gabaix"],
@@ -270,6 +284,7 @@
     },
     {
       "id": "jehiel2005",
+      "bibtex_key": "jehiel2005",
       "doi": "10.1016/j.jet.2003.12.003",
       "title": "Analogy-based expectation equilibrium",
       "authors": ["Philippe Jehiel"],
@@ -289,6 +304,7 @@
     },
     {
       "id": "esponda_pouzo2016",
+      "bibtex_key": "esponda2016",
       "doi": "10.3982/ecta12609",
       "title": "Berk-Nash Equilibrium: A Framework for Modeling Agents With Misspecified Models",
       "authors": ["Ignacio Esponda", "Demian Pouzo"],
@@ -308,6 +324,7 @@
     },
     {
       "id": "camerer_ho_chong2004",
+      "bibtex_key": "camerer2004",
       "doi": "10.1162/0033553041502225",
       "title": "A Cognitive Hierarchy Model of Games",
       "authors": ["C. F. Camerer", "T.-H. Ho", "J.-K. Chong"],
@@ -327,6 +344,7 @@
     },
     {
       "id": "fudenberg_iijima_strzalecki2015",
+      "bibtex_key": "fudenberg2015",
       "doi": "10.3982/ecta12660",
       "title": "Stochastic Choice and Revealed Perturbed Utility",
       "authors": ["Drew Fudenberg", "Ryota Iijima", "Tomasz Strzalecki"],
@@ -346,6 +364,7 @@
     },
     {
       "id": "pfister2013",
+      "bibtex_key": null,
       "doi": "10.3389/fpsyg.2013.00700",
       "title": "Good things peak in pairs: a note on the bimodality coefficient",
       "authors": ["Roland Pfister", "Katharina A. Schwarz", "Markus Janczyk", "Rick Dale", "Johnathan B. Freeman"],
@@ -365,6 +384,7 @@
     },
     {
       "id": "eschbach_stauffer_herrmann1981",
+      "bibtex_key": null,
       "doi": "10.1103/physrevb.23.422",
       "title": "Correlation-length exponent in two-dimensional percolation and Potts model",
       "authors": ["P. D. Eschbach", "D. Stauffer", "H. J. Herrmann"],

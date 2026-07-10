@@ -78,6 +78,7 @@ jobs:
         run: |
           python tools/audit_claim_lineage.py
           python tools/verify_reference_registry.py
+          python tools/audit_citation_inventory.py
           python tools/audit_publication_obligations.py --check-ledger
           python tools/verify_public_evidence.py
 

@@ -27,6 +27,9 @@ model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=3/26
 mathematical_routes=model_internal_exact:20,reference_conditional:6
 semantic_gap_routes=
+manuscript_citation_keys=67
+bibliography_entries=73
+critical_reference_bindings=13
 ```
 
 | Label | Kind | State | Route | Title |
@@ -69,6 +72,7 @@ python scripts/audit_paper_semantic_gate.py
 python scripts/audit_axiom_output.py
 python scripts/render_paper_claim_readme.py --check
 python ../tools/verify_reference_registry.py
+python ../tools/audit_citation_inventory.py
 python ../tools/audit_publication_obligations.py --check-ledger
 ```
 
