@@ -64,12 +64,22 @@
       "baseline_kind": "proposition",
       "baseline_title": "Topological Loss---Cluster Size Relation",
       "baseline_statement_sha256": "01d4301313fb722fcbce021a835e2a7146f2201b53e9af78c4e3ec2a59b14d63",
-      "relation": "unchanged",
+      "relation": "counterexample_delimited",
       "publication_labels": [
         "prop:topo-cluster"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the exact conditional order-statistics formula and the fixed-fraction giant-event limit, while delimiting the false unconditional threshold reading by the machine-proved persistent-singleton lower bound.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:topo-cluster",
+          "id": "exact_conditional_and_unconditional_bounds"
+        },
+        {
+          "type": "evidence_check",
+          "id": "topo_cluster_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "prop:physical",
@@ -80,7 +90,7 @@
       "publication_labels": [
         "prop:physical"
       ],
-      "research_target": "Close the finite-IDP irreducibility and tightness statement against the unified dynamic and relaxed oracles; preserve the lattice Theta(1) target under prop:topo-cluster, which owns the unresolved asymptotic premise.",
+      "research_target": "Close the finite-IDP irreducibility and tightness statement against the unified dynamic and relaxed oracles; route the asymptotic interpretation through prop:topo-cluster's exact conditional limit and persistent-fragmentation lower bound.",
       "machine_witnesses": [
         {
           "type": "publication_obligation",
@@ -90,7 +100,7 @@
         {
           "type": "publication_obligation",
           "claim_label": "prop:topo-cluster",
-          "id": "conditional_cluster_to_welfare_derivation"
+          "id": "exact_conditional_and_unconditional_bounds"
         }
       ]
     },

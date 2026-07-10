@@ -1,35 +1,35 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "daaa6b0145f779596fef55f920ce01a7b4ce93458a9d777778a7f3149ef7f093",
+  "manuscript_sha256": "d67c04707b2096a25b83d7603fb93fac7a3a2c869020835be8147d782a7ff352",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 14,
-    "publication_evidence_closed": 16,
-    "empirical_publication_closed": 2,
-    "claims_model_evidence_closed": 2,
-    "model_assumptions_total": 18,
-    "model_assumptions_admissible": 18,
-    "model_assumptions_theory_admissible": 18,
+    "strict_kernel_closed": 15,
+    "publication_evidence_closed": 17,
+    "empirical_publication_closed": 3,
+    "claims_model_evidence_closed": 3,
+    "model_assumptions_total": 19,
+    "model_assumptions_admissible": 19,
+    "model_assumptions_theory_admissible": 19,
     "model_assumptions_theory_referenced": 9,
-    "model_assumptions_theory_reference_not_required": 9,
+    "model_assumptions_theory_reference_not_required": 10,
     "model_assumptions_empirical_required": 9,
     "model_assumptions_empirically_anchored": 0,
     "model_assumptions_by_provenance": {
       "benchmark_definition": 2,
-      "paper_definition": 5,
+      "paper_definition": 6,
       "paper_reduced_form": 6,
       "published_model_adaptation": 1,
       "standard_theory": 3,
       "tractability_normalization": 1
     },
     "obligations_total": 73,
-    "obligations_passed": 58,
+    "obligations_passed": 59,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 10,
-      "lean_conditional": 8,
-      "lean_exact": 18,
+      "lean_conditional": 7,
+      "lean_exact": 19,
       "model_assumptions": 25,
       "statement_hash": 6,
       "unresolved_semantics": 5
@@ -38,23 +38,23 @@
       "computational_certificate": 1,
       "external_references": 10,
       "lean_conditional": 3,
-      "lean_exact": 13,
+      "lean_exact": 14,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 5,
+      "lean_conditional": 4,
       "lean_exact": 5,
       "unresolved_semantics": 5
     },
     "mathematical_routes": {
-      "model_internal_exact": 18,
-      "reference_conditional": 8
+      "model_internal_exact": 19,
+      "reference_conditional": 7
     },
     "model_routes": {
-      "conditional_model_only": 1,
+      "conditional_model_only": 2,
       "none": 1,
-      "real_strategy_evidence_required": 24
+      "real_strategy_evidence_required": 23
     },
     "semantic_gaps_by_resolution_class": {
       "existing_theory_scope": 1,
@@ -180,6 +180,18 @@
         "aizenman_barsky1987",
         "grimmett1999"
       ],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "persistent_singleton_cluster_mass",
+      "kind": "regularity_condition",
+      "provenance": "paper_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
       "empirical_required": false,
       "empirically_anchored": false,
       "empirical_evidence_satisfied": true,
@@ -384,39 +396,37 @@
     },
     {
       "label": "prop:topo-cluster",
-      "statement_sha256": "01d4301313fb722fcbce021a835e2a7146f2201b53e9af78c4e3ec2a59b14d63",
-      "lean_state": "partial",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
-      "empirical_publication_closed": false,
-      "mathematical_route": "reference_conditional",
-      "model_route": "real_strategy_evidence_required",
+      "statement_sha256": "d5ab03a6418420e04ec833d177ea4e7c6911a95de06ff05d0a4fff881a881439",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
+      "empirical_publication_closed": true,
+      "mathematical_route": "model_internal_exact",
+      "model_route": "conditional_model_only",
       "model_assumption_ids": [
         "iid_uniform_rewards",
-        "independent_bond_blocking"
+        "persistent_singleton_cluster_mass"
       ],
-      "empirical_model_gaps": [
-        "independent_bond_blocking"
-      ],
+      "empirical_model_gaps": [],
       "semantic_resolution_classes": [],
       "obligations": [
         {
-          "id": "uniform_reward_model",
+          "id": "uniform_reward_and_singleton_models",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=iid_uniform_rewards,independent_bond_blocking"
+          "detail": "theory-admissible assumption ids=iid_uniform_rewards,persistent_singleton_cluster_mass"
         },
         {
-          "id": "percolation_component_regimes",
+          "id": "uniform_order_statistics_identity",
           "type": "external_references",
           "passed": true,
-          "detail": "pinned reference ids=grimmett1999,pisztora1996"
+          "detail": "pinned reference ids=david_nagaraja2003"
         },
         {
-          "id": "conditional_cluster_to_welfare_derivation",
-          "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is partial; publication closure requires a kernel-checked conditional or exact claim"
+          "id": "exact_conditional_and_unconditional_bounds",
+          "type": "lean_exact",
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

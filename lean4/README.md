@@ -9,23 +9,23 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=14
-paper_claims_partial=3
+paper_claims_closed=15
+paper_claims_partial=2
 paper_claims_conditional=2
 paper_claims_refuted_encoding=0
 paper_claims_unformalized=7
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=16
-publication_obligations_passed=58/73
-model_assumptions_admissible=18/18
+publication_evidence_closed=17
+publication_obligations_passed=59/73
+model_assumptions_admissible=19/19
 research_claims_preserved=26/26
-claim_lineage_relations=counterexample_delimited:4,split_core_and_frontier:5,strengthened_assumptions:9,unchanged:8
-model_assumptions_theory_referenced=9/18
-model_assumption_provenance=benchmark_definition:2,paper_definition:5,paper_reduced_form:6,published_model_adaptation:1,standard_theory:3,tractability_normalization:1
+claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:5,strengthened_assumptions:9,unchanged:7
+model_assumptions_theory_referenced=9/19
+model_assumption_provenance=benchmark_definition:2,paper_definition:6,paper_reduced_form:6,published_model_adaptation:1,standard_theory:3,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
-real_world_model_evidence_closed=2/26
-mathematical_routes=model_internal_exact:18,reference_conditional:8
+real_world_model_evidence_closed=3/26
+mathematical_routes=model_internal_exact:19,reference_conditional:7
 semantic_gap_routes=existing_theory_scope:1,hybrid_model_and_strategy_evidence:3,paper_model_encoding:1
 ```
 
@@ -33,7 +33,7 @@ semantic_gap_routes=existing_theory_scope:1,hybrid_model_and_strategy_evidence:3
 |---|---|---|---|---|
 | `thm:decomp` | theorem | closed | local | Canonical Welfare Decomposition |
 | `prop:info-decay` | proposition | closed | mixed | Informational Decay |
-| `prop:topo-cluster` | proposition | partial | mixed | Topological Loss---Cluster Size Relation |
+| `prop:topo-cluster` | proposition | closed | mixed | Topological Loss---Cluster Size Relation |
 | `prop:physical` | proposition | closed | local | Physical Irreducibility |
 | `lem:wrongness` | lemma | closed | semantic-repair | Wrongness of the Greedy Policy Under Topology-Blind Signals |
 | `lem:conditional-reduction` | lemma | closed | mixed | Conditional Reduction Under State Augmentation |

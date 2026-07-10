@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "daaa6b0145f779596fef55f920ce01a7b4ce93458a9d777778a7f3149ef7f093",
+  "manuscript_sha256": "d67c04707b2096a25b83d7603fb93fac7a3a2c869020835be8147d782a7ff352",
   "claims": [
     {
       "line": 262,
@@ -22,7 +22,7 @@
       "kind": "proposition",
       "label": "prop:topo-cluster",
       "title": "Topological Loss---Cluster Size Relation",
-      "statement_sha256": "01d4301313fb722fcbce021a835e2a7146f2201b53e9af78c4e3ec2a59b14d63"
+      "statement_sha256": "d5ab03a6418420e04ec833d177ea4e7c6911a95de06ff05d0a4fff881a881439"
     },
     {
       "line": 345,

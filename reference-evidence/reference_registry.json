@@ -98,6 +98,25 @@
       ]
     },
     {
+      "id": "david_nagaraja2003",
+      "doi": "10.1002/0471722162",
+      "title": "Order Statistics",
+      "authors": ["H. A. David", "H. N. Nagaraja"],
+      "year": 2003,
+      "publisher": "Wiley",
+      "container_title": "",
+      "record_type": "monograph",
+      "evidence_class": "theorem",
+      "canonical_url": "https://doi.org/10.1002/0471722162",
+      "evidence_locator": "Third edition, Section 2.1 on uniform order statistics and the expected sample maximum.",
+      "supports": [
+        "The maximum of k independent Uniform[0,1] observations has expectation k/(k+1)."
+      ],
+      "limitations": [
+        "The source does not establish the paper's cluster-size law, giant-component interpretation, or unconditional topological-loss bounds."
+      ]
+    },
+    {
       "id": "pisztora1996",
       "doi": "10.1007/bf01198161",
       "title": "Surface order large deviations for Ising, Potts and percolation models",

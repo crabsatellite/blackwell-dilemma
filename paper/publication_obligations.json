@@ -27,11 +27,11 @@
     },
     {
       "label": "prop:topo-cluster",
-      "statement_sha256": "01d4301313fb722fcbce021a835e2a7146f2201b53e9af78c4e3ec2a59b14d63",
+      "statement_sha256": "d5ab03a6418420e04ec833d177ea4e7c6911a95de06ff05d0a4fff881a881439",
       "obligations": [
-        {"id": "uniform_reward_model", "type": "model_assumptions", "ids": ["iid_uniform_rewards", "independent_bond_blocking"]},
-        {"id": "percolation_component_regimes", "type": "external_references", "ids": ["grimmett1999", "pisztora1996"]},
-        {"id": "conditional_cluster_to_welfare_derivation", "type": "lean_conditional"}
+        {"id": "uniform_reward_and_singleton_models", "type": "model_assumptions", "ids": ["iid_uniform_rewards", "persistent_singleton_cluster_mass"]},
+        {"id": "uniform_order_statistics_identity", "type": "external_references", "ids": ["david_nagaraja2003"]},
+        {"id": "exact_conditional_and_unconditional_bounds", "type": "lean_exact"}
       ]
     },
     {

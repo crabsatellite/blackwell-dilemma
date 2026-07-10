@@ -169,6 +169,21 @@
       "empirical_truth_claimed": false
     },
     {
+      "id": "persistent_singleton_cluster_mass",
+      "kind": "regularity_condition",
+      "statement": "The reachable-set-size law assigns probability at least rho > 0 to singleton reachable sets uniformly along the finite network sequence.",
+      "scope": "The unconditional constant-order half of the repaired topological-loss proposition only.",
+      "role": "Separates persistent local fragmentation from giant-component membership and supplies the exact lower-bound input used by the finite-law aggregation theorem.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Compute or bound the singleton reachable-set probability for the specified graph and failure law; without a uniform positive bound retain only the conditional cluster-size formula."
+      },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
       "id": "cognitive_interpolation_kappa",
       "kind": "behavioral_postulate",
       "statement": "A scalar kappa interpolates between immediate-reward and continuation-value objectives.",

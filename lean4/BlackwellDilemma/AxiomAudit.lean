@@ -54,8 +54,11 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.BayesianNaiveFiveState.bayesianNaiveFiveStateClaim_proved
 #print axioms BlackwellDilemma.GeneralTreeTail.TailRateCertificate.eventual_strict_overshoot
 #print axioms BlackwellDilemma.GeneralTreeTail.generalTreeReversalClaim_proved
-#print axioms topologicalLossOrderStatisticsAlgebraCore_proved
-#print axioms topoClusterPartialCore_proved
+#print axioms BlackwellDilemma.TopoCluster.conditionalLoss_eq_ratio
+#print axioms BlackwellDilemma.TopoCluster.conditionalLoss_le_linear_envelope
+#print axioms BlackwellDilemma.TopoCluster.conditionalLoss_tendsto_zero_of_linear_size
+#print axioms BlackwellDilemma.TopoCluster.ClusterSizeLaw.expectedLoss_constant_order_of_singleton_mass
+#print axioms BlackwellDilemma.TopoCluster.topoClusterClaim_proved
 #print axioms BlackwellDilemma.Infrastructure.part6LowerBoundTransferPrinciple_proved
 #print axioms BlackwellDilemma.Infrastructure.independentTrialAmplificationPrinciple_proved
 #print axioms BlackwellDilemma.Infrastructure.part6DepthWitnessTransferPrinciple_proved
@@ -95,7 +98,6 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.InformationDecay.signalNoise_le_two_mul_rpow_neg
 #print axioms BlackwellDilemma.InformationDecay.uniform_information_decay
 #print axioms BlackwellDilemma.InformationDecay.informationDecayClaim_proved
-#print axioms BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved
 #print axioms PaperClaim.isClosed_eq_hasFullProof
 #print axioms paperClaims_count
 #print axioms paperClaimLabels_nodup

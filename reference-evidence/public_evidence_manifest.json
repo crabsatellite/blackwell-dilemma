@@ -39,6 +39,15 @@
       "bibliographic_note": "Y. L. Tong, The Multivariate Normal Distribution, Springer, 1990, Chapters 2--3."
     },
     {
+      "id": "david_nagaraja2003",
+      "kind": "external_reference",
+      "role": "Uniform order-statistics source for the conditional reachable-set maximum formula.",
+      "status": "source_backed_formula_interface",
+      "registry_id": "david_nagaraja2003",
+      "source_url": "https://doi.org/10.1002/0471722162",
+      "bibliographic_note": "H. A. David and H. N. Nagaraja, Order Statistics, third edition, Wiley, 2003, Section 2.1."
+    },
+    {
       "id": "harris_kesten_pc_half",
       "kind": "external_formula",
       "role": "Critical probability p_c(Z2 bond percolation)=1/2 used as the percolation threshold reference.",
@@ -198,6 +207,13 @@
       "role": "Finite pairwise-Gaussian oracle regret bound, Mills specialization, explicit signal-noise rate, and uniform-in-network aggregation under a reachable-set first-moment bound.",
       "status": "repo_build_gate",
       "local_file": "lean4/BlackwellDilemma/UnifiedInformationDecay.lean"
+    },
+    {
+      "id": "unified_topo_cluster_kernel",
+      "kind": "machine_gate",
+      "role": "Exact conditional topological-loss ratio, fixed-fraction cluster envelope and limit, and unconditional constant-order bound under persistent singleton mass.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedTopoCluster.lean"
     },
     {
       "id": "five_state_approximation_audit",
@@ -957,6 +973,78 @@
       ]
     },
     {
+      "id": "topo_cluster_semantic_repair_gate",
+      "category": "kernel_checked_reference_conditioned_counterexample_delimited_claim",
+      "source_cards": [
+        "david_nagaraja2003",
+        "unified_topo_cluster_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "topo_cluster_module",
+          "path": "lean4/BlackwellDilemma/UnifiedTopoCluster.lean",
+          "contains": [
+            "structure ClusterSizeLaw",
+            "theorem conditionalLoss_eq_ratio",
+            "theorem conditionalLoss_le_linear_envelope",
+            "theorem conditionalLoss_tendsto_zero_of_linear_size",
+            "theorem expectedLoss_constant_order_of_singleton_mass",
+            "theorem topoClusterClaim_proved"
+          ]
+        },
+        {
+          "id": "topo_cluster_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.TopoCluster.TopoClusterClaim",
+            "BlackwellDilemma.TopoCluster.topoClusterClaim_proved"
+          ]
+        },
+        {
+          "id": "topo_cluster_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.TopoCluster.conditionalLoss_eq_ratio",
+            "#print axioms BlackwellDilemma.TopoCluster.conditionalLoss_tendsto_zero_of_linear_size",
+            "#print axioms BlackwellDilemma.TopoCluster.ClusterSizeLaw.expectedLoss_constant_order_of_singleton_mass",
+            "#print axioms BlackwellDilemma.TopoCluster.topoClusterClaim_proved"
+          ]
+        },
+        {
+          "id": "topo_cluster_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"id\": \"uniform_order_statistics_identity\"",
+            "\"ids\": [\"david_nagaraja2003\"]",
+            "\"id\": \"exact_conditional_and_unconditional_bounds\""
+          ]
+        },
+        {
+          "id": "topo_cluster_model_boundary",
+          "path": "paper/model_assumptions.json",
+          "contains": [
+            "\"id\": \"persistent_singleton_cluster_mass\"",
+            "without a uniform positive bound retain only the conditional cluster-size formula"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "topo_cluster_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1034,10 +1122,10 @@
             "claim_lineage_baseline_claims=26",
             "claim_lineage_current_claims=26",
             "claim_lineage_preserved_claims=26",
-            "claim_lineage_relation_counterexample_delimited=4",
+            "claim_lineage_relation_counterexample_delimited=5",
             "claim_lineage_relation_split_core_and_frontier=5",
             "claim_lineage_relation_strengthened_assumptions=9",
-            "claim_lineage_relation_unchanged=8",
+            "claim_lineage_relation_unchanged=7",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -1086,29 +1174,29 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=14",
-            "publication_publication_evidence_closed=16",
-            "publication_model_assumptions_total=18",
-            "publication_model_assumptions_admissible=18",
-            "publication_model_assumptions_theory_admissible=18",
+            "publication_strict_kernel_closed=15",
+            "publication_publication_evidence_closed=17",
+            "publication_model_assumptions_total=19",
+            "publication_model_assumptions_admissible=19",
+            "publication_model_assumptions_theory_admissible=19",
             "publication_manual_status_fields=0",
             "publication_model_assumptions_theory_referenced=9",
-            "publication_model_assumptions_theory_reference_not_required=9",
+            "publication_model_assumptions_theory_reference_not_required=10",
             "publication_model_assumptions_empirical_required=9",
             "publication_model_assumptions_empirically_anchored=0",
             "publication_model_assumption_provenance_benchmark_definition=2",
-            "publication_model_assumption_provenance_paper_definition=5",
+            "publication_model_assumption_provenance_paper_definition=6",
             "publication_model_assumption_provenance_paper_reduced_form=6",
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
             "publication_obligations_total=73",
-            "publication_obligations_passed=58",
-            "publication_gap_lean_conditional=5",
+            "publication_obligations_passed=59",
+            "publication_gap_lean_conditional=4",
             "publication_gap_lean_exact=5",
             "publication_gap_unresolved_semantics=5",
-            "publication_mathematical_route_model_internal_exact=18",
-            "publication_mathematical_route_reference_conditional=8",
+            "publication_mathematical_route_model_internal_exact=19",
+            "publication_mathematical_route_reference_conditional=7",
             "publication_semantic_resolution_existing_theory_scope=1",
             "publication_semantic_resolution_hybrid_model_and_strategy_evidence=3",
             "publication_semantic_resolution_paper_model_encoding=1"
@@ -1218,9 +1306,9 @@
           "type": "python_script",
           "path": "tools/verify_reference_registry.py",
           "stdout_contains": [
-            "reference_records_total=18",
+            "reference_records_total=19",
             "reference_evidence_class_empirical_study=0",
-            "reference_evidence_class_theorem=10",
+            "reference_evidence_class_theorem=11",
             "reference_manual_status_fields=0",
             "reference_metadata_offline_failures=0"
           ]
@@ -1561,6 +1649,7 @@
       "id": "uniform_topological_loss_formula",
       "category": "formula_machine_check",
       "source_cards": [
+        "david_nagaraja2003",
         "uniform_order_statistic_gap",
         "committed_simulation_results"
       ],
@@ -1640,8 +1729,8 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=14",
-            "paper_claims_partial=3",
+            "paper_claims_closed=15",
+            "paper_claims_partial=2",
             "paper_claims_conditional=2",
             "paper_claims_refuted_encoding=0",
             "paper_claims_unformalized=7",

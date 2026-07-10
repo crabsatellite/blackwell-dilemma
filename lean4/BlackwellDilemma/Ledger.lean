@@ -25,12 +25,12 @@ import BlackwellDilemma.UnifiedErrorCompounding
 import BlackwellDilemma.UnifiedGreedyReversal
 import BlackwellDilemma.UnifiedConditionalReduction
 import BlackwellDilemma.UnifiedInformationDecay
+import BlackwellDilemma.UnifiedTopoCluster
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
 import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
-import BlackwellDilemma.Infrastructure.VanishingGiantLoss
 
 namespace BlackwellDilemma.Ledger
 
@@ -170,29 +170,6 @@ theorem physicalIrreducibilityClaim_proved : PhysicalIrreducibilityClaim := by
           (setup.model omega).oracleValue_eq_relaxedOracleValue_iff_terminalComplete
             (setup.start omega)⟩⟩
 
-def TopologicalLossOrderStatisticsAlgebraCore : Prop :=
-  forall n k : Nat, 1 <= k -> k <= n ->
-    (n : Real) / (n + 1) - (k : Real) / (k + 1) =
-      ((n : Real) - k) / ((n + 1) * (k + 1))
-
-theorem topologicalLossOrderStatisticsAlgebraCore_proved :
-    TopologicalLossOrderStatisticsAlgebraCore := by
-  intro n k _hkPos _hkLe
-  have hn : Ne ((n : Real) + 1) 0 := by
-    exact ne_of_gt (by positivity)
-  have hk : Ne ((k : Real) + 1) 0 := by
-    exact ne_of_gt (by positivity)
-  field_simp
-  ring
-
-def TopoClusterPartialCore : Prop :=
-  TopologicalLossOrderStatisticsAlgebraCore /\
-    BlackwellDilemma.Infrastructure.TopoGiantLossEnvelopePrinciple
-
-theorem topoClusterPartialCore_proved : TopoClusterPartialCore := by
-  exact ⟨topologicalLossOrderStatisticsAlgebraCore_proved,
-    BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved⟩
-
 /-! ## Manuscript inventory
 
 The source line is the `\\begin{...}` line in the current canonical manuscript.
@@ -225,9 +202,10 @@ def claimTopoCluster : PaperClaim :=
     kind := .proposition
     sourceLine := 318
     route := .mixed
-    blocker := "The algebraic ratio is proved; the conditional expectation and both asymptotic regimes remain."
-    evidence := .partialProof TopoClusterPartialCore
-      topoClusterPartialCore_proved }
+    blocker := "The order-statistics loss algebra, fixed-fraction conditional limit, and persistent-singleton unconditional constant-order bound are machine derived; the iid-Uniform expectation identity is reference-gated."
+    evidence := .proved
+      BlackwellDilemma.TopoCluster.TopoClusterClaim
+      BlackwellDilemma.TopoCluster.topoClusterClaim_proved }
 
 def claimPhysical : PaperClaim :=
   { label := "prop:physical"
